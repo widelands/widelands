@@ -62,10 +62,10 @@ function init_player()
 
    -- Build the roads
    local map = wl.Game().map
-   connected_road(plr,map:get_field(29,58).immovable,"br,r|r,r|r,tr")
-   connected_road(plr,map:get_field(38,62).immovable,"l,l|l,bl|tl,tl|tl,tl")
-   connected_road(plr,map:get_field(32,63).immovable,"tr,tr|")
-   connected_road(plr,map:get_field(25,2).immovable,"tr,tr|tr,tr|tr,tr|tr,tr")
+   connected_road("normal", plr,map:get_field(29,58).immovable,"br,r|r,r|r,tr")
+   connected_road("normal", plr,map:get_field(38,62).immovable,"l,l|l,bl|tl,tl|tl,tl")
+   connected_road("normal", plr,map:get_field(32,63).immovable,"tr,tr|")
+   connected_road("normal", plr,map:get_field(25,2).immovable,"tr,tr|tr,tr|tr,tr|tr,tr")
 end
 
 run(init_player)

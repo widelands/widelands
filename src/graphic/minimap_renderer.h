@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,7 @@ enum class MiniMapLayer {
 	Building = 16,
 	Zoom2 = 32,
 	ViewWindow = 64,
+	StartingPositions = 128,
 };
 
 // A bunch of operators that turn MiniMapLayer into a bitwise combinable flag class.

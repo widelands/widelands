@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_weaving_mill",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Weaving Mill"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -46,21 +46,15 @@ tribes:new_productionsite_type {
       { name = "spider_silk", amount = 8 },
       { name = "gold_thread", amount = 4 }
    },
-   outputs = {
-      "spidercloth",
-      "tabard",
-      "tabard_golden"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=produce_spidercloth",
             "call=produce_tabard",
             "call=produce_tabard_golden",
-            "return=no_stats"
          }
       },
       produce_spidercloth = {
@@ -70,9 +64,9 @@ tribes:new_productionsite_type {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs spidercloth",
             "consume=spider_silk",
-            "sleep=20000",
-            "playsound=sound/mill/weaving 120",
-            "animate=working 20000",
+            "sleep=duration:20s",
+            "playsound=sound/mill/weaving priority:90%",
+            "animate=working duration:20s",
             "produce=spidercloth"
          }
       },
@@ -83,9 +77,9 @@ tribes:new_productionsite_type {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard",
             "consume=spider_silk",
-            "sleep=20000",
-            "playsound=sound/mill/weaving 120",
-            "animate=working 20000",
+            "sleep=duration:20s",
+            "playsound=sound/mill/weaving priority:90%",
+            "animate=working duration:20s",
             "produce=tabard"
          }
       },
@@ -96,11 +90,13 @@ tribes:new_productionsite_type {
             -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard_golden",
             "consume=spider_silk gold_thread",
-            "sleep=20000",
-            "playsound=sound/mill/weaving 120",
-            "animate=working 20000",
+            "sleep=duration:20s",
+            "playsound=sound/mill/weaving priority:90%",
+            "animate=working duration:20s",
             "produce=tabard_golden"
          }
       },
    },
 }
+
+pop_textdomain()

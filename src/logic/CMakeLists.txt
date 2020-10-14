@@ -32,6 +32,7 @@ wl_library(logic_game_settings
   DEPENDS
     io_filesystem
     logic_constants
+    logic_exceptions
     logic_tribe_basic_info
     notifications
     scripting_lua_interface
@@ -57,6 +58,7 @@ wl_library(logic_game_controller
     replay_game_controller.cc
     single_player_game_controller.h
     single_player_game_controller.cc
+  USES_SDL2
   DEPENDS
     ai
     logic
@@ -138,6 +140,7 @@ wl_library(logic_map
     graphic_playercolor
     io_fileread
     io_filesystem
+    logic
     logic_constants
     logic_exceptions
     logic_filesystem_constants
@@ -228,6 +231,7 @@ wl_library(logic
     economy
     game_io
     graphic
+    graphic_image_cache
     graphic_color
     graphic_playercolor
     io_fileread
@@ -243,6 +247,7 @@ wl_library(logic
     logic_generic_save_handler
     logic_map
     logic_map_objects
+    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io
@@ -255,6 +260,7 @@ wl_library(logic
     sound
     sound_constants
     ui_basic
+    ui_basic_loading_message
     widelands_options
     wui # TODO(GunChleoc): Circular dependency
     wui_game_tips

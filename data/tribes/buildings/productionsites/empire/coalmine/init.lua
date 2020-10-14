@@ -1,14 +1,25 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_coalmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Coal Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "empire_coalmine_deep",
+
+   enhancement = {
+      name = "empire_coalmine_deep",
+      enhancement_cost = {
+         log = 4,
+         planks = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         planks = 1
+      }
+   },
 
    buildcost = {
       log = 4,
@@ -36,7 +47,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "coal",
+      mines = "resource_coal",
       mines_percent = 50,
       prohibited_till = 910
    },
@@ -45,38 +56,29 @@ tribes:new_productionsite_type {
       empire_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_coalmine = false,
-      empire_coalmine_deep = false,
-   },
-
    inputs = {
       { name = "ration", amount = 6 },
       { name = "beer", amount = 6 }
    },
-   outputs = {
-      "coal"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
             "return=skipped unless economy needs coal",
             "consume=beer ration",
-            "sleep=43000",
+            "sleep=duration:43s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {
          descname = _"mining coal",
          actions = {
-            "animate=working 14000",
-            "mine=coal 2 50 5 17",
+            "animate=working duration:14s",
+            "mine=resource_coal radius:2 yield:50% when_empty:5% experience_on_fail:17%",
             "produce=coal",
          }
       },
@@ -97,3 +99,5 @@ tribes:new_productionsite_type {
          pgettext("empire_building", "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

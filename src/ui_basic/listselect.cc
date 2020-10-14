@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,11 @@
 
 #include "ui_basic/listselect.h"
 
-#include "base/log.h"
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
+
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
@@ -78,22 +79,23 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     table_style_(g_gr->styles().table_style(style)),
+     table_style_(g_style_manager->table_style(style)),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
-                          g_gr->styles().dropdown_style(style) :
+                          g_style_manager->dropdown_style(style) :
                           nullptr),
      lineheight_(text_height(table_style_.enabled()) + kMargin),
      notify_on_delete_(nullptr) {
 	set_thinks(false);
 
-	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
+	scrollbar_.moved.connect([this](int32_t a) { set_scrollpos(a); });
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		check_pic_ = g_gr->images().get("images/ui_basic/list_selected.png");
+		check_pic_ = g_image_cache->get("images/ui_basic/list_selected.png");
 		max_pic_width_ = check_pic_->width();
 		int pic_h = check_pic_->height();
-		if (pic_h > lineheight_)
+		if (pic_h > lineheight_) {
 			lineheight_ = pic_h;
+		}
 	} else {
 		max_pic_width_ = 0;
 	}
@@ -148,19 +150,22 @@ void BaseListselect::add(const std::string& name,
 		int w = pic->width();
 		int h = pic->height();
 		entry_height = (h >= entry_height) ? h : entry_height;
-		if (max_pic_width_ < w)
+		if (max_pic_width_ < w) {
 			max_pic_width_ = w;
+		}
 	}
 
-	if (entry_height > lineheight_)
+	if (entry_height > lineheight_) {
 		lineheight_ = entry_height;
+	}
 
 	entry_records_.push_back(er);
 
 	layout();
 
-	if (sel)
+	if (sel) {
 		select(entry_records_.size() - 1);
+	}
 }
 
 /**
@@ -171,29 +176,33 @@ void BaseListselect::add(const std::string& name,
  * top of list and files at the bottom.
  */
 void BaseListselect::sort(const uint32_t Begin, uint32_t End) {
-	if (End > size())
+	if (End > size()) {
 		End = size();
-	for (uint32_t i = Begin; i < End; ++i)
+	}
+	for (uint32_t i = Begin; i < End; ++i) {
 		for (uint32_t j = i + 1; j < End; ++j) {
 			EntryRecord* const eri = entry_records_[i];
 			EntryRecord* const erj = entry_records_[j];
 			if (strcmp(eri->name.c_str(), erj->name.c_str()) > 0) {
-				if (selection_ == i)
+				if (selection_ == i) {
 					selection_ = j;
-				else if (selection_ == j)
+				} else if (selection_ == j) {
 					selection_ = i;
+				}
 				entry_records_[i] = erj;
 				entry_records_[j] = eri;
 			}
 		}
+	}
 }
 
 /**
  * Scroll to the given position, in pixels.
  */
 void BaseListselect::set_scrollpos(const int32_t i) {
-	if (scrollpos_ == uint32_t(i))
+	if (scrollpos_ == uint32_t(i)) {
 		return;
+	}
 
 	scrollpos_ = i;
 }
@@ -204,12 +213,14 @@ void BaseListselect::set_scrollpos(const int32_t i) {
  * Args: i  the entry to select
  */
 void BaseListselect::select(const uint32_t i) {
-	if (selection_ == i)
+	if (selection_ == i) {
 		return;
+	}
 
 	if (selection_mode_ == ListselectLayout::kShowCheck) {
-		if (selection_ != no_selection_index())
+		if (selection_ != no_selection_index()) {
 			entry_records_[selection_]->pic = nullptr;
+		}
 		entry_records_[i]->pic = check_pic_;
 	}
 	selection_ = i;
@@ -354,6 +365,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 		const int text_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
+
 		int lineheight = std::max(get_lineheight(), text_height);
 
 		// Don't draw over the bottom edge
@@ -444,6 +456,14 @@ void BaseListselect::draw(RenderTarget& dst) {
  * Handle mouse wheel events
  */
 bool BaseListselect::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	const uint32_t selected_idx = selection_index();
+	const uint32_t max = size() - 1;
+	if (y > 0 && selected_idx > 0) {
+		select(selected_idx - 1);
+	} else if (y < 0 && selected_idx < max) {
+		select(selected_idx + 1);
+	}
+
 	return scrollbar_.handle_mousewheel(which, x, y);
 }
 
@@ -464,16 +484,18 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 		last_click_time_ = time;
 
 		y = (y + scrollpos_) / get_lineheight();
-		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y)
+		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
 			return false;
+		}
 		play_click();
 		select(y);
 		clicked();
 
 		if  //  check if doubleclicked
 		   (time - real_last_click_time < DOUBLE_CLICK_INTERVAL && last_selection_ == selection_ &&
-		    selection_ != no_selection_index())
+		    selection_ != no_selection_index()) {
 			double_clicked(selection_);
+		}
 
 		return true;
 	}
@@ -496,30 +518,81 @@ bool BaseListselect::handle_mousemove(uint8_t, int32_t, int32_t y, int32_t, int3
 }
 
 bool BaseListselect::handle_key(bool const down, SDL_Keysym const code) {
-	if (down) {
-		uint32_t selected_idx;
-		switch (code.sym) {
-		case SDLK_DOWN:
-			selected_idx = selection_index() + 1;
-			if (selected_idx < size())
-				select(selected_idx);
-			if ((selection_index() + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
+	if (down && size() > 1) {
+		bool handle = true;
+		uint32_t selected_idx = selection_index();
+		const uint32_t max = size() - 1;
+		const uint32_t pagesize = std::max(1, get_h() / get_lineheight());
+
+		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
+		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
+			// Keys 1-9 directly address the 1st through 9th item in lists with less than 10 entries
+			if (max < 9) {
+				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
+					selected_idx = code.sym - SDLK_1;
+				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
+					selected_idx = code.sym - SDLK_KP_1;
+				} else {
+					// don't handle the '9' when there are less than 9 items
+					handle = false;
+				}
+			} else {
+				// 10 or more items – ignore number keys
+				handle = false;
+			}
+		} else {
+			// Up, Down, PageUp, PageDown, Home, End
+			switch (code.sym) {
+			case SDLK_KP_2:
+			case SDLK_DOWN:
+				if (!has_selection()) {
+					selected_idx = 0;
+				} else if (selected_idx < max) {
+					++selected_idx;
+				}
+				break;
+			case SDLK_KP_8:
+			case SDLK_UP:
+				if (!has_selection()) {
+					selected_idx = max;
+				} else if (selected_idx > 0) {
+					--selected_idx;
+				}
+				break;
+			case SDLK_KP_7:
+			case SDLK_HOME:
+				selected_idx = 0;
+				break;
+			case SDLK_KP_1:
+			case SDLK_END:
+				selected_idx = max;
+				break;
+			case SDLK_KP_3:
+			case SDLK_PAGEDOWN:
+				selected_idx = has_selection() ? std::min(max, selected_idx + pagesize) : 0;
+				break;
+			case SDLK_KP_9:
+			case SDLK_PAGEUP:
+				selected_idx =
+				   has_selection() ? selected_idx > pagesize ? selected_idx - pagesize : 0 : max;
+				break;
+			default:
+				handle = false;
+				break;  // not handled
+			}
+		}
+		assert((selected_idx <= max) ^ (selected_idx == no_selection_index()));
+		if (handle) {
+			select(selected_idx);
+			if (selection_index() * get_lineheight() < scrollpos_) {
+				scrollpos_ = selection_index() * get_lineheight();
+				scrollbar_.set_scrollpos(scrollpos_);
+			} else if ((selected_idx + 1) * get_lineheight() - get_inner_h() > scrollpos_) {
 				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
 				scrollpos_ = (scrollpos < 0) ? 0 : scrollpos;
 				scrollbar_.set_scrollpos(scrollpos_);
 			}
 			return true;
-		case SDLK_UP:
-			selected_idx = selection_index();
-			if (selected_idx > 0)
-				select(selected_idx - 1);
-			if (selection_index() * get_lineheight() < scrollpos_) {
-				scrollpos_ = selection_index() * get_lineheight();
-				scrollbar_.set_scrollpos(scrollpos_);
-			}
-			return true;
-		default:
-			break;  // not handled
 		}
 	}
 
@@ -534,10 +607,11 @@ void BaseListselect::remove(const uint32_t i) {
 
 	delete (entry_records_[i]);
 	entry_records_.erase(entry_records_.begin() + i);
-	if (selection_ == i)
+	if (selection_ == i) {
 		selected(selection_ = no_selection_index());
-	else if (i < selection_)
+	} else if (i < selection_) {
 		--selection_;
+	}
 }
 
 /**

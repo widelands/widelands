@@ -25,15 +25,17 @@
   <summary xml:lang="ja">リアルタイム発展型ストラテジーゲーム</summary>
   <summary xml:lang="ko">실시간 건설 전략 게임</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
+  <summary xml:lang="lt">Realaus laiko strateginis žaidimas</summary>
   <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
   <summary xml:lang="nds">Een taktisk Speel över 't Upbauen in Echt-Tied</summary>
-  <summary xml:lang="nl">Een realtime opbouwend strategiespel</summary>
+  <summary xml:lang="nl">Een realtime bouw strategiespel</summary>
   <summary xml:lang="pl">Strategia czasu rzeczywistego skupiona na rozbudowie</summary>
   <summary xml:lang="pt">Um jogo de construção estratégica em tempo real</summary>
   <summary xml:lang="pt_BR">Um jogo em tempo real de estratégia e evolução</summary>
   <summary xml:lang="ro">Un joc strategic de construire în timp real</summary>
   <summary xml:lang="ru">Стратегия развития в реальном времени</summary>
   <summary xml:lang="sk">Budovateľská stretegická hra v reálnom čase</summary>
+  <summary xml:lang="sl">Graditeljska strateška igra v realnem času</summary>
   <summary xml:lang="sr">Graditeljska strateška igra u realnom vremenu</summary>
   <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
   <summary xml:lang="tr">Gerçek zamanlı inşa strateji oyunu</summary>
@@ -102,7 +104,7 @@
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. Settling, However, really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
     </p>
     <p xml:lang="es">
-      Eres el regente de un pequeño clan. Tu tarea es construir un asentamiento cada vez mayor. Todos los miembros de tu clan va a hacer su parte para producir más recursos para promover este crecimiento.
+      Eres el regente de un pequeño clan. Tu tarea es construir un asentamiento cada vez mayor. Todos los miembros de tu clan van a hacer su parte para producir más recursos para promover este crecimiento.
     </p>
     <p xml:lang="es">
       Widelands ofrece un modo de un solo jugador con campañas que cuentan historias de las tribus y su lucha en el universo Widelands. Sin embargo, el asentamiento comienza realmente cuando te unes con amigos a través de Internet o LAN para construir nuevos imperios juntos - o para aplastarse entre sí en los polvos de guerra. Widelands también ofrece una inteligencia artificial para desafiarte.
@@ -142,6 +144,12 @@
     </p>
     <p xml:lang="hu">
       A Widelands tartalmaz egy egyjátékos módot, hadjáratokkal, amelyek a törzsekről és az ő viszontagságaikról mesélnek a Widelands univerzumában. Azonban a móka akkor kezdődik csak el igazán, mikor összejössz barátaiddal az Interneten vagy LAN-on keresztül, hogy közösen építsetek fel új birodalmakat – vagy háborúban porig romboljátok egymást. A Widelands mesterséges intelligencia formájában is kihívást kínál.
+    </p>
+    <p xml:lang="id">
+      Anda adalah bupati klan kecil. Tugas anda adalah membangun pemukiman yang terus berkembang. Setiap anggota klan, Anda akan melakukan bagiannya untuk memperkenalkan lebih banyak sumber daya untuk memajukan pertumbuhan ini.
+    </p>
+    <p xml:lang="id">
+      Widelands menawarkan mode pemain tunggal dengan kampanye yang menceritakan kisah suku-suku dan perjuangan mereka di alam semesta Widelands. Namun, penyelesaian benar-benar dimulai ketika anda bersatu dengan teman-teman melalui Internet dan LAN untuk membangun kerajaan baru bersama – atau untuk saling menghancurkan dalam debu perang. Widelands juga menawarkan kecerdasan buatan untuk menantang anda.
     </p>
     <p xml:lang="it">
       Sei il reggente di un piccolo clan. Il tuo compito è costruire un insediamento in continua crescita. Ogni componente del tuo clan farà la sua parte per produrre più risorse per favorire questa crescita.
@@ -186,10 +194,10 @@
       Widelands is för eenen Speler gadelk un hett Rutfödderungs-Riege, de de Histoorje vun de Völker un hör Leven in de Welt vun Widelands vertellen. Dat Spölen fangt aver eerst dann würrelk an, wenn du mit dienen Frünnen över 't Internett of LAN tosammen neje Rieken baust – of hör nanner in gewaltigen Slachten verneelt. Widelands hett ok eenen künstelk Speler, tegen hüm du antreden kannst.
     </p>
     <p xml:lang="nl">
-      Je bent de leider van een kleine stam.  Het is jouw taak een bloeiende nederzetting uit te bouwen.  Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
+      Je bent de leider van een kleine stam. Het is jouw taak een bloeiende nederzetting uit te bouwen. Elk stamlid zal daarbij haar of zijn steentje bijdragen door het produceren van meer grondstoffen.
     </p>
     <p xml:lang="nl">
-      Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun wedervaren in het Widelandsuniversum.  Maar je kunt je echt nederzetten, met je vrienden verbonden over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten.  Widelands biedt ook een artificiële intelligentie waarop je kan oefenen.
+      Widelands biedt een modus om alleen te spelen met campagnes die de verhalen vertellen van de stammen en hun worstelingen in het Widelandsuniversum.  Maar je kunt je pas echt vestigen door met je vrienden te verbinden, over internet of een lokaal netwerk, om samen een nieuw rijk op te bouwen – of elkaar in het stof van de oorlog te doen bijten.  Widelands biedt ook een artificiële intelligentie waarop je kan oefenen.
     </p>
     <p xml:lang="pl">
       Stoisz na czele małego plemiona. Twoim zadaniem jest zbudować prosperującą osadę. Każdy członek plemiona pomagać ci będzie w produkcji surowców niezbędnych do tego celu.
@@ -227,11 +235,17 @@
     <p xml:lang="sk">
       Widelands ponúka režim jedného hráča s kampaňami, ktoré rozprávajú príbehy o kmeňoch a ich boji vo svete Widelands. Skutočné usádzanie začne však až vtedy, keď sa spojíte s priateľmi po internete alebo lokálnej sieti a spoločne vybudujete nové ríše alebo, naopak, navzájom sa rozdrvíte v prachu vojny. Okrem toho Widelands poskytuje možnosť hry proti umelej inteligencii.
     </p>
+    <p xml:lang="sl">
+      Ste poveljnik majhnega klana. Vaša naloga je zgraditi rastočo naselbino. Vsak član klana bo opravil svoj del naloge pri pridobivanju surovin in njeni rasti.
+    </p>
+    <p xml:lang="sl">
+      Widelands ponuja enoigralski način s kampanijami, ki pripovedujejo o plemenih in njihovem trudu osvojiti prostor Widelands. Pravo naseljevanje pa se začne šele, ko se poenotite z vašimi prijatelji prek interneta ali lokalnega omrežja in zgradite nove imperije skupaj - ali pa premagate drug drugega v vojni. Widelands ponuja tudi boj z računalniškimi nasprotniki.
+    </p>
     <p xml:lang="sr">
       Namesnik si malog klana. Tvoj zadatak je da sagradiš stalno rastuće naselje. Svaki član tvog klana će učiniti svoj deo posla da proizvede više resursa da pomogne širenje.
     </p>
     <p xml:lang="sr">
-      Widelands (Širozemlje) nudi mod za jednog igrača sa kampanjama koje pričaju priče plemena i njihovih borbi u Widelands univerzumu. Ipak, naseljavanje zaista počinje kada se ujediniš sa prijateljima preko interneta ili LAN-a da sagradite svoja carstva zajedno - ili da se rušite medjusobno u pepelu rata. Widelands takođe u ponudi ima i AI da te izazove.
+      Widelands - Širozemlje - nudi mod za jednog igrača sa kampanjama koje pričaju priče plemena i njihovih borbi u Widelands univerzumu. Ipak, naseljavanje zaista počinje kada se ujediniš sa prijateljima preko interneta ili LAN-a da sagradite svoja carstva zajedno - ili da se rušite međusobno u pepelu rata. Widelands takođe u ponudi ima i AI da te izazove.
     </p>
     <p xml:lang="sv">
       Du är ledaren för en liten klan. Din uppgift är att bygga en växande bosättning. Varje medlem i din klan gör sin del i att producera mer resurser för ytterligare tillväxt.
@@ -257,6 +271,12 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     </p>
     <p xml:lang="zh_CN">
       Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+    </p>
+    <p xml:lang="zh_TW">
+      你是一個小部落的攝政者。你的任務是建立一個不斷壯大的殖民地。部落的每一個人都會各施其職，生產更多資源來幫忙你完成任務。
+    </p>
+    <p xml:lang="zh_TW">
+      Widelands的單人模式提供了不同的劇本，敘述遊戲裡各個部族的故事以及他們之間的鬥爭。可是，真正的樂趣是通過互聯網或LAN與朋友並肩作戰、攜手共建帝國，又或者互相攻訐、成就一方霸主。除此之外，玩家也可以接受人工智能對手的挑戰。
     </p>
   </description>
   <screenshots>
@@ -290,6 +310,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
   </provides>
   <launchable type="desktop-id">org.widelands.Widelands.desktop</launchable>
   <releases>
+    <release date="2020-07-18" version="Build 21"/>
     <release date="2019-05-02" version="Build 20"/>
     <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
@@ -313,9 +334,7 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <release date="2002-08-27" version="Build 1"/>
   </releases>
   <languages>
-    <lang>af_ZA</lang>
     <lang>ar</lang>
-    <lang>ast</lang>
     <lang>bg</lang>
     <lang>br</lang>
     <lang>ca</lang>
@@ -328,7 +347,6 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>en_US</lang>
     <lang>eo</lang>
     <lang>es</lang>
-    <lang>et</lang>
     <lang>eu</lang>
     <lang>fa</lang>
     <lang>fi</lang>
@@ -341,32 +359,25 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>hi</lang>
     <lang>hr</lang>
     <lang>hu</lang>
-    <lang>ia</lang>
     <lang>id</lang>
     <lang>ig</lang>
     <lang>it</lang>
     <lang>ja</lang>
-    <lang>jv</lang>
     <lang>ka</lang>
     <lang>ko</lang>
     <lang>krl</lang>
     <lang>la</lang>
     <lang>lt</lang>
-    <lang>mr</lang>
     <lang>ms</lang>
-    <lang>my</lang>
     <lang>nb</lang>
     <lang>nds</lang>
     <lang>nl</lang>
     <lang>nn</lang>
-    <lang>oc</lang>
     <lang>pl</lang>
     <lang>pt</lang>
     <lang>pt_BR</lang>
     <lang>ro</lang>
     <lang>ru</lang>
-    <lang>rw</lang>
-    <lang>si</lang>
     <lang>sk</lang>
     <lang>sl</lang>
     <lang>sr</lang>
@@ -374,7 +385,6 @@ Widelands ayrıca size yapay zeka ile meydan okur.
     <lang>sv</lang>
     <lang>tr</lang>
     <lang>uk</lang>
-    <lang>vi</lang>
     <lang>zh_CN</lang>
     <lang>zh_TW</lang>
   </languages>

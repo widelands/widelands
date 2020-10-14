@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,8 +86,9 @@ void Route::load(LoadData& data, FileRead& fr) {
 
 	totalcost_ = fr.signed_32();
 	uint32_t nsteps = fr.unsigned_16();
-	for (uint32_t step = 0; step < nsteps; ++step)
+	for (uint32_t step = 0; step < nsteps; ++step) {
 		data.flags.push_back(fr.unsigned_32());
+	}
 }
 
 /**
@@ -125,6 +126,6 @@ void Route::insert_as_first(RoutingNode* node) {
 	// we are sure that node is a Flag, since it is the only
 	// RoutingNode ever used in the path finder (outside tests)
 	// That's why we can make this cast
-	route_.insert(route_.begin(), static_cast<Flag*>(node));
+	route_.insert(route_.begin(), dynamic_cast<Flag*>(node));
 }
 }  // namespace Widelands

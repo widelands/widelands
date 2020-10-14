@@ -32,8 +32,10 @@ function speech(img, clr, title, text)
       title = h1(clr, title)
    end
 
-   -- Surround the text with translatable ","
-   text = (_'“%s”'):format(text)
+   -- Surround the text with translatable “quotes”
+   push_textdomain("widelands")
+   text = (_("“%s”")):format(text)
+   pop_textdomain()
 
    return title .. li_image(img, p(text))
 end
@@ -62,42 +64,4 @@ end
 
 function objective_text(heading, body)
    return h2(heading) .. p(body)
-end
-
-
--- RST
--- .. function:: new_objectives(...)
---
---    Append an objective text with a header to a dialog box in a nice fashion.
---    For displaying objectives with an extra title when an advisor is talking
---
---    Provides nice formatting for objective texts.
---    The following arguments will be parsed:
---
---       - number: the number of objectives described in the body
---       - body: the objective text, e.g. created with function objective_text(heading, body)
---
---    :returns: a rich text object that contains the formatted
---       objective text & title.
-
-function new_objectives(...)
-   local sum = 0
-   local text = ""
-   for idx,obj in ipairs{...} do
-      text = text .. obj.body
-      sum = sum + obj.number
-   end
-
-   local objectives_header = _"New Objective"
-   if (sum > 1) then
-      objectives_header = _"New Objectives"
-   end
-
-   return
-      div("width=100%",
-         vspace(18) ..
-         div("float=left padding_r=6", p(img("images/wui/menus/objectives.png"))) ..
-         p_font("", "size=18 bold=1 color=D1D1D1",  vspace(6) .. objectives_header) ..
-         vspace(1) .. text
-      )
 end

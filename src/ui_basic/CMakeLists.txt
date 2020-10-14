@@ -1,3 +1,12 @@
+wl_library(ui_basic_loading_message
+  SRCS
+    note_loading_message.cc
+    note_loading_message.h
+  DEPENDS
+    notifications
+)
+
+
 wl_library(ui_basic
   SRCS
     box.cc
@@ -63,6 +72,8 @@ wl_library(ui_basic
     graphic_align
     graphic_color
     graphic_fonthandler
+    graphic_image_cache
+    graphic_mouse_cursor
     graphic_styles
     graphic_surface
     graphic_text

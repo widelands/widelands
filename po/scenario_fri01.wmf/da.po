@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -20,19 +20,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. TRANSLATORS: Name of a backup autosave
-#: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:132
+#: ../../data/campaigns/fri01.wmf/scripting/mission_thread.lua:129
 msgid "The Great Stormflood (Backup Autosave)"
 msgstr "Den store oversvømmelse (backup autosave)"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:25
 msgid "Build a wood economy and a reed farm"
 msgstr "Byg en træøkonomi og et strålandbrug"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:29
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
 msgstr "Træøkonomi"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:30
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:28
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
@@ -40,15 +40,15 @@ msgstr ""
 "Byg mindst et skovhuggerhus og to skovfogedhuse for at starte produktionen "
 "af træstammer, og et strålandbrug til at begynde produktionen af strå."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
 msgstr "Start produktionen af mursten"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:37
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Brick Economy"
 msgstr "Murstensøkonomi"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:36
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
@@ -56,44 +56,44 @@ msgstr ""
 "Byg en murstensovn, en kulmine, en stenmine, en lergrube og en brønd for at "
 "starte produktionen af mursten."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
 msgstr "Indsaml byggematerialer"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Stockpile Building Materials"
 msgstr "Lager af byggematerialer"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
 msgstr "Saml nogle byggematerialer i dit hovedkvarter. Indsaml mindst:"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
 msgstr "30 × Træstamme"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
 msgstr "30 × Granit"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "10 × Clay"
 msgstr "10 × Ler"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "40 × Brick"
 msgstr "40 × Mursten"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "20 × Coal"
 msgstr "20 × Kul"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "30 × Reed"
 msgstr "30 × Strå"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
@@ -101,15 +101,15 @@ msgstr ""
 "Husk at du kan angive målmængder for de fleste af disse varer i dine "
 "økonomiindstillinger."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:56
 msgid "Produce food for the miners"
 msgstr "Fremstil mad for minearbejderne"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:60
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Food Economy"
 msgstr "Madøkonomi"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:61
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:59
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
@@ -117,15 +117,15 @@ msgstr ""
 "Byg et værtshus, et fiskerhus, et røgeri, et bærlandbrug og et "
 "frugtindsamlerhus."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:64
 msgid "Enhance your food economy"
 msgstr "Udvid din madøkonomi"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:68
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance Food Economy"
 msgstr "Udvid madøkonomi"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:69
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:67
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
@@ -133,59 +133,59 @@ msgstr ""
 "Byg mindst to landbrug, en biavlers hus (ved siden af bærlandbruget), et "
 "bageri, et bryggeri og endnu et værtshus."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
 msgid "Build an iron mine and a mining infrastructure"
 msgstr "Byg en jernmine og en mineinfrastruktur"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build Mines and Mining Infrastructure"
 msgstr "Byg miner og mininginfrastruktur"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:75
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr "Byg en jernmine, en ovn, en smedje og en lille rustningssmedje."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
 msgstr "Start rekruttering af soldater"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:84
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 msgid "Recruiting Soldiers"
 msgstr "Rekruttering af nye soldater"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:85
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:83
 msgid "Build a barracks, a reindeer farm and a sewing room."
 msgstr "Byg en barak, en rensdyrfarm og et syrum."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:88
 msgid "Discover more of the island"
 msgstr "Undersøg mere af øen"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Expand and Discover"
 msgstr "Udvid og undersøg"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:91
 msgid "Expand further and discover more of the island."
 msgstr "Udvid yderligere og undersøg mere af øen."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:96
 msgid "Train your soldiers"
 msgstr "Træn dine soldater"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:100
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:311
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:320
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:332
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:354
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:360
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:309
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:318
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:358
 msgid "Training Soldiers"
 msgstr "Træning af soldater"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:101
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:99
 msgid ""
 "Train a soldier to the highest possible level. Soldiers are trained in "
 "training camps and training arenas. We will need a gold mine, a tailor’s "
@@ -197,27 +197,27 @@ msgstr ""
 "skrædderbutik til at sy bedre beklædningsgenstande og en stor "
 "rustningssmedje for bedre våben og hjelme."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:104
 msgid "Defeat the enemy!"
 msgstr "Besejr fjenden!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:108
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the Enemy!"
 msgstr "Besejr fjenden!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:107
 msgid "Destroy the enemy tribe’s headquarters."
 msgstr "Ødelæg den fjendtlige stammes hovedkvarter."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:112
 msgid "Escape from the floods"
 msgstr "Undslip oversvømmelserne"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Flee from the Floods"
 msgstr "Flygt fra oversvømmelserne"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
@@ -225,7 +225,7 @@ msgstr ""
 "Byg en havn, et væveri og et skibsværft, start så en ekspedition for at "
 "flygte før stormfloden drukner øen."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
@@ -233,7 +233,7 @@ msgstr ""
 "Du kan bygge havnen enten på den østligste del af øen, eller på stedet for "
 "fjendes hovedkvarter stod."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
 "If you did not prepare well enough to master this challenge in time, you can"
 " reload the scenario from the backup savegame automatically created for you "
@@ -243,20 +243,20 @@ msgstr ""
 "kan du genindlæse scenariet fra sikkerhedskopien der automatisk blev "
 "oprettet for dig kort tid før du nåede fjendens hovedkvarterer."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:146
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:176
 msgid "Introduction"
 msgstr "Introduktion"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 msgid "Welcome!"
 msgstr "Velkommen!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:129
 msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
@@ -266,7 +266,7 @@ msgstr ""
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
 #. dukedoms
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:132
 msgid ""
 "My tribe and I have just arrived from the mainland. There were fights with "
 "the Danes in the North, the Schauenburgers and Holsteiners in the East and "
@@ -278,12 +278,12 @@ msgstr ""
 "besluttede at føre min stamme væk for at starte et stille, fredfyldt liv på "
 "denne uberørte ø."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
 msgid "A new home"
 msgstr "Et ny hjem"
 
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:138
 msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
@@ -292,7 +292,7 @@ msgstr ""
 "sikre en stabil forsyning af grundlæggende byggematerialer."
 
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
 "I have asked Hauke, one of my advisors, to oversee the construction of our "
 "settlement."
@@ -300,13 +300,13 @@ msgstr ""
 "Jeg har anmodt Hauke, en af mine rådgivere om at overse konstruktionen af "
 "vores bosættelse."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
 msgstr "De første bygninger"
 
 #. TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian
 #. greeting
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid ""
 "Peace, Chieftain Reebaud! I will start with the colonization of the island "
 "straight away."
@@ -315,7 +315,7 @@ msgstr ""
 " samme."
 
 #. TRANSLATORS: Hauke – Introduction 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:152
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
 msgid ""
 "Like all Frisians, we build our houses mainly with bricks. We improve them "
 "by adding some logs and granite. The roofs are thatched with reed, "
@@ -326,7 +326,7 @@ msgstr ""
 "naturligt. Intet bedre egnet til at holde regnen ude."
 
 #. TRANSLATORS: Hauke – Introduction 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
 msgid ""
 "We should start by taking care of our wood production. Trees don’t seem to "
 "grow well on this island; better build at least two houses for foresters and"
@@ -337,7 +337,7 @@ msgstr ""
 "shovhugger."
 
 #. TRANSLATORS: Hauke – Introduction 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:158
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
 msgid ""
 "Also, we had better build a reed farm soon. Even reed farms need reed to be "
 "built, so we must take care not to run short before we can grow our own. "
@@ -349,12 +349,12 @@ msgstr ""
 "egen. Strå kan nemt kultiveres, så strålandmanden skal ikke bruge andet for "
 "at tilplante stråmarker."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
 msgstr "Bygning af vores nye hjem"
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:163
 msgid ""
 "Our wood and reed supplies are ensured. Now, we must take care of our brick "
 "supply. Bricks are burned in a brick kiln out of granite and clay, so we "
@@ -369,7 +369,7 @@ msgstr ""
 "mine lidt granit."
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
 msgid ""
 "Clay is easy to make: A clay digger working at a clay pit will simply dig up"
 " some earth and mix it with water. Just make sure that he has plenty of "
@@ -382,7 +382,7 @@ msgstr ""
 "udvide."
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:171
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
 msgid ""
 "To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. "
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
@@ -394,7 +394,7 @@ msgstr ""
 "... kan du se problemet?"
 
 #. TRANSLATORS: Hauke – Introduction 4
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
 msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
@@ -402,12 +402,12 @@ msgstr ""
 "Byg også en brønd – ingen ønsker at drikke saltvand, og det kan ikke bruges "
 "til produktionen af ler."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
 msgstr "Vores første bosættelse"
 
 #. TRANSLATORS: Reebaud – Introduction 5
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:179
 msgid ""
 "You did well. Our entire building material production is working now. Let’s "
 "wait until we have gathered some more materials. We could expand our "
@@ -417,16 +417,16 @@ msgstr ""
 "Lad os vente til vi har samlet lidt mere materiale. Vi kunne udvide vores "
 "territorium lidt mere, for at se hvad der ellers er på denne ø."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
 msgstr "Mangel på strå"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Build another reed farm"
 msgstr "Byg endnu et strålandbrug"
 
 #. TRANSLATORS: Hauke – no reed
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:187
 msgid ""
 "I noticed we have been short of reed for a while now. Our buildings seem to "
 "need quite a lot of it. We should build another reed farm or two. Reed is "
@@ -438,7 +438,7 @@ msgstr ""
 "at lave fiskenet og andre værktøjer; derfor bør løsning af denne mangel "
 "prioriteres."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
@@ -446,16 +446,16 @@ msgstr ""
 "Du skal tildele det nye strålandbrug den højeste prioritet for strå i "
 "konstruktionssidevinduet."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:193
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
 msgstr "Mangel på ler"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
 msgstr "Byg endnu en lergrube"
 
 #. TRANSLATORS: Hauke – no clay
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
 msgid ""
 "Our brickmakers have been complaining about a shortage of clay for a while "
 "now. No clay means no bricks can be produced, so this shortage is slowing us"
@@ -468,7 +468,7 @@ msgstr ""
 "vandforsyningen for disse bygninger."
 
 #. TRANSLATORS: Hauke – no clay
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197
 msgid ""
 "Clay is also used in shipbuilding and to improve charcoal kilns. If we ever "
 "need to build a ship, or the mines cannot provide us with enough coal, we "
@@ -478,16 +478,16 @@ msgstr ""
 "Hvis vi skal bygge et skib, eller minerne ikke kan tilbyde os nok kul, så "
 "skal vi bruge mere ler, så manglen skal løses."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
 msgstr "Mangel på mursten"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Build another brick kiln"
 msgstr "Byg endnu en murstensovn"
 
 #. TRANSLATORS: Hauke – no bricks
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:203
 msgid ""
 "I noticed we are running out of bricks. This slows down construction of our "
 "buildings a lot, since we need so many bricks. We should really start to "
@@ -501,7 +501,7 @@ msgstr ""
 "prioritet for mursten i byggepladsvinduet så manglen kan blive løst så "
 "hurtigt som muligt."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
@@ -509,16 +509,16 @@ msgstr ""
 "Du bør tildele den nye murstensovn den højeste prioritet for mursten i "
 "byggepladsvinduet."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
 msgstr "Lagre"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Build a warehouse in the east"
 msgstr "Byg et lager i øst"
 
 #. TRANSLATORS: Hauke – build a warehouse
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:210
 msgid ""
 "We are expanding our territory further and further to the east, and wares "
 "need to be transported over longer distances. We should build warehouses "
@@ -532,16 +532,16 @@ msgstr ""
 " Vores hovedkvarter er for langt mod vest til at være nyttig til langtids "
 "lageropbevaring."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
 msgstr "Sultne minearbejdere"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "The miners are protesting…"
 msgstr "Minearbejderne protesterer ..."
 
 #. TRANSLATORS: Hauke – no rations left
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:217
 msgid ""
 "Chieftain Reebaud! I bring bad news. The miners are working so hard that "
 "they have no time to prepare their own food. They demand to be supplied with"
@@ -552,7 +552,7 @@ msgstr ""
 "bliver leveret."
 
 #. TRANSLATORS: Hauke – no rations left
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:222
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:220
 msgid ""
 "We need to build a tavern for preparing rations. To get the raw food, we "
 "have to build a fisher’s house, and as nobody likes raw fish, a smokery to "
@@ -565,7 +565,7 @@ msgstr ""
 "buskene bliver høstet."
 
 #. TRANSLATORS: Hauke – no rations left
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
 msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
@@ -573,22 +573,22 @@ msgstr ""
 "Vi bør udvide vores territorium hurtigt for at have nok plads til mange "
 "bærlandbrug, og en længere kystlinje til fiskeriet."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
 msgstr "Udvidelse af madøkonomien"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
 msgstr "Mad til soldaterne"
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
 msgstr ""
 "Godt arbejde. Minearbejderne er tilfredse og har startet arbejdet igen."
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:233
 msgid ""
 "But when the mines will have to be enhanced, rations won’t keep the miners "
 "happy. Better take precautions – build a second tavern, then consider "
@@ -599,7 +599,7 @@ msgstr ""
 "opgradere et af dem til en drikkehal."
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:236
 msgid ""
 "A drinking hall needs better food. Build a bakery, a brewery, and two or "
 "three farms to start growing barley. Keep in mind that barley grows very "
@@ -613,7 +613,7 @@ msgstr ""
 "fortsætte med at ekspandere for at få mere plads til landbrug."
 
 #. TRANSLATORS: Hauke – better food
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
 msgid ""
 "The bakery and brewery should be enhanced as soon as the workers have enough"
 " experience. They can then produce mead, and bread sweetened with honey. "
@@ -625,16 +625,16 @@ msgstr ""
 "siden af bærlandbruget for at fremstille honning, som vi så kan lagre indtil"
 " det skal bruges."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:246
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:244
 msgid "Build a Mining Economy"
 msgstr "Byg en mineøkonomi"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Mining economy"
 msgstr "Mineøkonomi"
 
 #. TRANSLATORS: Reebaud – mining economy
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:247
 msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
@@ -643,7 +643,7 @@ msgstr ""
 "mon i bakkerne? Vi bør undersøge det."
 
 #. TRANSLATORS: Reebaud – mining economy
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:252
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
 msgid ""
 "Build an iron mine and perhaps a gold mine. As they produce only ores, we "
 "will need a furnace to smelt them. Also build a blacksmithy to ensure we "
@@ -657,13 +657,13 @@ msgstr ""
 "hjelme samt sværd. Jeg håber ikke vi møder fjender her, men det er bedre at "
 "være forberedt."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:256
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:263
 msgid "Be Prepared"
 msgstr "Vær forbedret"
 
 #. TRANSLATORS: Reebaud – recruit 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:257
 msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
@@ -672,7 +672,7 @@ msgstr ""
 "bruge og også nogle våben."
 
 #. TRANSLATORS: Reebaud – recruit 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:260
 msgid ""
 "We could use these weapons to equip some new soldiers. I hope we won’t find "
 "enemies here, but it is always better to be prepared. New soldiers are "
@@ -685,7 +685,7 @@ msgstr ""
 "uniformen for alle ærværdige krigere."
 
 #. TRANSLATORS: Hauke – recruit 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
 msgid ""
 "We will need a barracks, of course; a reindeer farm to produce fur, and a "
 "sewing room to sew the fur into garments. The reindeer farm produces some "
@@ -698,7 +698,7 @@ msgstr ""
 "vores fragtmænd på de travle veje."
 
 #. TRANSLATORS: Hauke – recruit 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:269
 msgid ""
 "I advise to build all those buildings within a short distance of each other,"
 " and to construct two warehouses nearby: One should be set to store only "
@@ -709,7 +709,7 @@ msgstr ""
 "rustninger, malm, metal og kul; den andre skal opbevare byggematerialer."
 
 #. TRANSLATORS: Hauke – recruit 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:272
 msgid ""
 "We should also build other related buildings nearby, such as a furnace, and "
 "some wells and farms to supply the reindeer farm. This design will make our "
@@ -721,22 +721,22 @@ msgstr ""
 "økonomi mere effektiv, da det reducerer ventetiden for varer i "
 "produktionsbygningerne."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:278
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:276
 msgid "Explore the Island"
 msgstr "Udforsk øen"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
 msgstr "Udvidelse"
 
 #. TRANSLATORS: Reebaud – expand
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:281
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
 msgstr "Vores barakker er i gang, og vi rekrutterer nu nye soldater."
 
 #. TRANSLATORS: Reebaud – expand
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:282
 msgid ""
 "But we can’t be sure we’re safe here yet. It would be better to expand "
 "further to the east to find out whether we really are alone here."
@@ -745,7 +745,7 @@ msgstr ""
 "yderligere mod øst for at undersøge om vi virkelig er alene her."
 
 #. TRANSLATORS: Reebaud – expand
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:285
 msgid ""
 "Expanding would also provide more space for farming. We could use some extra"
 " barley to recruit more reindeer, as our roads are quite busy."
@@ -753,27 +753,27 @@ msgstr ""
 "Udvidelse vil også give mere plads til landbrug. Vi kan bruge lidt ekstra "
 "byg til at rekruttere flere rensdyr, da vores veje er travlt optaget."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:292
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:298
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:290
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:296
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:302
 msgid "Enemies!"
 msgstr "Fjender!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:299
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemy sighted!"
 msgstr "Fjender set!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:295
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
 msgstr "En anden stamme! På VORES ø! Hvad gør i her, angribere!"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
 #. northern gods
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:299
 msgid ""
 "This is MY island! YOU are the intruder here! I pray to the one and solely "
 "true God that we will kill you all, and your souls shall be tormented in "
@@ -784,7 +784,7 @@ msgstr ""
 "evigt!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:307
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:305
 msgid ""
 "Unbelievers! I pray to OUR gods that this faithless tribe shall be utterly "
 "shattered! War upon them!"
@@ -792,12 +792,12 @@ msgstr ""
 "Hedninge! Jeg beder til VORES guder om, at denne troløse stamme skal knuses!"
 " I krig!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
 msgid "Stronger in battle"
 msgstr "Stærkere i kamp"
 
 #. TRANSLATORS: Reebaud – train soldiers 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:314
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:312
 msgid ""
 "We are recruiting soldiers easily enough, but they are fairly weak. We must "
 "train our soldiers if they are to beat the enemy."
@@ -806,7 +806,7 @@ msgstr ""
 "soldater, hvis de skal besejre fjenden."
 
 #. TRANSLATORS: Reebaud – train soldiers 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
 msgid ""
 "Soldiers are trained in basic attack, health and defense by a training camp."
 " They can learn the finer points in a training arena."
@@ -814,12 +814,12 @@ msgstr ""
 "Soldater trænes i grundlæggende angreb, helbred og forsvar i en "
 "træningslejr. De kan lære de finere detaljer i en træningsarena."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
 msgstr "Frisisk kamp"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:323
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
 msgid ""
 "Soldiers are trained in two steps in defense and health. They get fur "
 "garments studded with iron and also gold to cushion blows; and helmets "
@@ -830,7 +830,7 @@ msgstr ""
 "deres liv på slagmarken."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:326
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
 msgid ""
 "They learn to attack with three different swords: The long sword, broadsword"
 " and double-edged sword. The latter two contain gold, and all of them iron. "
@@ -845,7 +845,7 @@ msgstr ""
 "udgør seks trin i angrebstræning."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
 msgid ""
 "We do not train soldiers to evade attacks; a true warrior can block his "
 "opponent’s blows with a skillful twist of the sword instead of jumping away "
@@ -855,12 +855,12 @@ msgstr ""
 " modstanders slag med en dygtig drejning af sværdet i stedet for at hoppe "
 "væk som en kujon."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
 msgstr "Planlægning af et træningscenter"
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:335
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
 msgid ""
 "We will need a tailor’s shop to sew more protective garments, and another "
 "sewing room to keep producing normal fur garments. Also, you should enhance "
@@ -876,7 +876,7 @@ msgstr ""
 " og rustninger bruger guld."
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
 msgid ""
 "We should build these buildings close to the barracks, since it is, as I "
 "already mentioned earlier, much more efficient to centralize all our "
@@ -891,7 +891,7 @@ msgstr ""
 " til træningen."
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:341
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:339
 msgid ""
 "When soldiers train to use new weapons, their old equipment is discarded. "
 "Take into account that the useless scraps will clutter up your roads until "
@@ -902,7 +902,7 @@ msgstr ""
 "placeret på et lager."
 
 #. TRANSLATORS: Hauke – train soldiers 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:344
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
 msgid ""
 "I recommend to train at least one soldier to the highest level in health, "
 "defense and attack. Until then, the enemy is just too strong for us."
@@ -910,21 +910,21 @@ msgstr ""
 "Jeg anbefaler at træne mindst en soldat til det højeste niveau i helbred, "
 "forsvar og angreb. Indtil da er fjenden bare for stærk for os."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:347
 msgid "Our soldiers are strong"
 msgstr "Vores soldater er stærke"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
 msgstr "Vi har endelig vores første fuldt trænet soldat. Lad os angribe!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
 msgstr "Er vores soldater stærke nok?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:357
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
 msgid ""
 "With respect, Chieftain, please be not so hasty! The enemies are very "
 "strong, and I’m still not convinced we can defeat them. I’d prefer not to "
@@ -937,12 +937,12 @@ msgstr ""
 "foretrækker at vente en smule mere indtil vi er mere sikre på, at vi kan "
 "besejre fjenden uden at miste soldater."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Our soldiers are strong enough"
 msgstr "Vores soldater er stærke nok"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:363
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:361
 msgid ""
 "Of course I also prefer to keep our soldiers alive, but we can’t save every "
 "life. Soldiers die in battle, that’s just the way things are. You may decide"
@@ -954,18 +954,18 @@ msgstr ""
 " beslutte hvor længde du ønsker at vente før angrebet sættes ind, men vent "
 "ikke for længe, for så vil fjenden udnytte vores svaghed."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:367
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:373
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:365
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:371
 msgid "Beware!"
 msgstr "Vær opmærksom!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
 msgstr "Ikke stærk nok"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:370
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
 msgid ""
 "Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I "
 "fear we are not strong enough yet to defend ourselves if he attacks first. "
@@ -976,7 +976,7 @@ msgstr ""
 "først. Du må bygge noget til at holde fjenden tilbage."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:376
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:374
 msgid ""
 "The scouts informed me that the enemy can’t build towers. We could build a "
 "fortress, which is the building that will push the border as far east as "
@@ -989,7 +989,7 @@ msgstr ""
 "på grænsen."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:379
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377
 msgid ""
 "We can prevent this, or at least make it harder to do, by ordering some "
 "foresters to plant trees at the border. The enemy will have to cut down many"
@@ -1001,18 +1001,18 @@ msgstr ""
 "dem for at skaffe plads, så vi er måske sikre indtil vi kan starte slaget på"
 " et tidspunkt valgt af os."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:382
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:388
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:380
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:386
 msgid "Enemy Defeated"
 msgstr "Fjende besejret"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:381
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy defeated!"
 msgstr "Fjende besejret!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:385
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:383
 msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
@@ -1021,7 +1021,7 @@ msgstr ""
 "hedningene!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:391
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
 msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
@@ -1029,18 +1029,18 @@ msgstr ""
 "Jeg beder til gud om at høre mine sidste ord. Lad ikke den falske djævel "
 "triumfere! Straf dem for deres uværdige bedrift!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:394
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:400
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
 msgstr "Stormflod"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
 msgstr "Øen bliver oversvømmet!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:397
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
 msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
@@ -1049,7 +1049,7 @@ msgstr ""
 "alle drukne!"
 
 #. TRANSLATORS: Hauke – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:403
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
 msgid ""
 "Despair not, I did espy some hope! The easternmost tip of the island, as "
 "well as the space where the fiends’ headquarters stood, seems well suited to"
@@ -1062,7 +1062,7 @@ msgstr ""
 " til en ny bosættelse, så kan vi måske undslippe."
 
 #. TRANSLATORS: Hauke – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:406
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:404
 msgid ""
 "The storm flood seems to be coming from the west. If we hurry, we will just "
 "make it! We only need to build a port and a shipyard – oh, and a weaving "
@@ -1085,28 +1085,42 @@ msgstr "Soldater til havnen!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#, lua-format
 msgid ""
-"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to ten soldiers on"
-" our ship, if they don’t mind being all crammed together. Let’s send some to"
-" the port when it’s completed, so they can embark when we set sail!"
-msgstr ""
-"Jeg glemte næsten i travlheden – uanset hvor vi går i land, så skal vi bruge"
-" soldater til at sikre og udvide vores nye koloni. Der er plads op til ti "
+"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to %d soldier on "
+"our ship, if nobody minds being all crammed together. Let’s send our best "
+"men to the port when it’s completed, to get ready to embark when we set "
+"sail!"
+msgid_plural ""
+"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to %d soldiers on "
+"our ship, if nobody minds being all crammed together. Let’s send our best "
+"men to the port when it’s completed, to get ready to embark when we set "
+"sail!"
+msgstr[0] ""
+"Jeg glemte næsten i virvaret – uanset hvor vi går i land, så skal vi bruge "
+"soldater til at sikre og udvide vores nye koloni. Der er plads op til %d "
+"soldater på vores skib, hvis vi kan leve med at være som sild i en tønde. "
+"Lad os sende nogle til havnen når de er klar, så de kan sejle med, når vi "
+"sætter sejl!"
+msgstr[1] ""
+"Jeg glemte næsten i virvaret – uanset hvor vi går i land, så skal vi bruge "
+"soldater til at sikre og udvide vores nye koloni. Der er plads op til %d "
 "soldater på vores skib, hvis vi kan leve med at være som sild i en tønde. "
 "Lad os sende nogle til havnen når de er klar, så de kan sejle med, når vi "
 "sætter sejl!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
 msgid "Victory"
 msgstr "Sejr"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:418
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
 msgid "We escaped!"
 msgstr "Vi slap væk!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
@@ -1116,28 +1130,15 @@ msgstr ""
 "sikker på, at vi vil kunne bygge et nyt hjem igen i et mere fredfyldt hjørne"
 " af denne verden!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
 msgid "Congratulations"
 msgstr "Tillykke"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
 "Du har fuldført denne mission. Du kan gå til næste scenarie nu for at hjælpe"
 " os med at bygge et nyt hjem, langt fra den falske guds rækkevidde ..."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "»%s«"
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr "Nyt mål"
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr "Nye mål"

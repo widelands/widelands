@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_CAMPAIGNS_H
 
 #include <memory>
+#include <unordered_set>
 
 #include "graphic/image.h"
 #include "wui/mapauthordata.h"
@@ -53,6 +54,8 @@ struct CampaignData {
 	std::set<std::string> prerequisites;
 	bool visible;
 	std::vector<std::unique_ptr<ScenarioData>> scenarios;
+	std::vector<std::string> difficulties;
+	uint32_t default_difficulty;
 
 	CampaignData() = default;
 };

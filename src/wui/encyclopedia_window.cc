@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
+#include "graphic/graphic.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -78,7 +80,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			                                                      contents_width, contents_height,
 			                                                      UI::PanelStyle::kWui))));
 			lists_.at(tab_name)->selected.connect(
-			   boost::bind(&EncyclopediaWindow::entry_selected, this, tab_name));
+			   [this, tab_name](unsigned) { entry_selected(tab_name); });
 
 			contents_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::MultilineTextarea>(
@@ -95,7 +97,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			if (tab_icon.empty()) {
 				tabs_.add("encyclopedia_" + tab_name, tab_title, wrapper_boxes_.at(tab_name).get());
 			} else if (g_fs->file_exists(tab_icon)) {
-				tabs_.add("encyclopedia_" + tab_name, g_gr->images().get(tab_icon),
+				tabs_.add("encyclopedia_" + tab_name, g_image_cache->get(tab_icon),
 				          wrapper_boxes_.at(tab_name).get(), tab_title);
 			} else {
 				throw wexception(
@@ -124,7 +126,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 				if (entry_icon.empty()) {
 					lists_.at(tab_name)->add(entry_title, entry);
 				} else if (g_fs->file_exists(entry_icon)) {
-					lists_.at(tab_name)->add(entry_title, entry, g_gr->images().get(entry_icon));
+					lists_.at(tab_name)->add(entry_title, entry, g_image_cache->get(entry_icon));
 				} else {
 					throw wexception("Icon path '%s' for tab entry '%s' does not exist!",
 					                 entry_icon.c_str(), entry_name.c_str());
@@ -132,7 +134,8 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			}
 		}
 	} catch (WException& err) {
-		log("Error loading script for encyclopedia:\n%s\n", err.what());
+		log_err_time(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
+		             err.what());
 		UI::WLMessageBox wmb(
 		   &parent, _("Error!"),
 		   (boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),

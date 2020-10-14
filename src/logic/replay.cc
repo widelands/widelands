@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,10 +59,11 @@ public:
 		const Md5Checksum myhash = game.get_sync_hash();
 
 		if (hash_ != myhash) {
-			log("REPLAY: Lost synchronization at time %u\n"
-			    "I have:     %s\n"
-			    "Replay has: %s\n",
-			    duetime(), myhash.str().c_str(), hash_.str().c_str());
+			log_err_time(game.get_gametime(),
+			             "REPLAY: Lost synchronization at time %u\n"
+			             "I have:     %s\n"
+			             "Replay has: %s\n",
+			             duetime(), myhash.str().c_str(), hash_.str().c_str());
 
 			// In case syncstream logging is on, save it for analysis
 			game.save_syncstream(true);
@@ -130,11 +131,13 @@ ReplayReader::~ReplayReader() {
  * or 0 if there are no remaining commands before the given time.
  */
 Command* ReplayReader::get_next_command(const uint32_t time) {
-	if (!cmdlog_)
+	if (!cmdlog_) {
 		return nullptr;
+	}
 
-	if (static_cast<int32_t>(replaytime_ - time) > 0)
+	if (static_cast<int32_t>(replaytime_ - time) > 0) {
 		return nullptr;
+	}
 
 	try {
 		uint8_t pkt = cmdlog_->unsigned_8();
@@ -162,7 +165,7 @@ Command* ReplayReader::get_next_command(const uint32_t time) {
 
 		case pkt_end: {
 			uint32_t endtime = cmdlog_->unsigned_32();
-			log("REPLAY: End of replay (gametime: %u)\n", endtime);
+			log_err_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime);
 			delete cmdlog_;
 			cmdlog_ = nullptr;
 			return nullptr;
@@ -172,7 +175,7 @@ Command* ReplayReader::get_next_command(const uint32_t time) {
 			throw wexception("Unknown packet %u", pkt);
 		}
 	} catch (const WException& e) {
-		log("REPLAY: Caught exception %s\n", e.what());
+		log_err_time(time, "REPLAY: Caught exception %s\n", e.what());
 		delete cmdlog_;
 		cmdlog_ = nullptr;
 	}
@@ -223,16 +226,17 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 	SaveHandler& save_handler = game_.save_handler();
 
 	std::string error;
-	if (!save_handler.save_game(game_, filename_ + kSavegameExtension, &error))
+	if (!save_handler.save_game(game_, filename_ + kSavegameExtension, &error)) {
 		throw wexception("Failed to save game for replay: %s", error.c_str());
+	}
 
-	log("Reloading the game from replay\n");
+	log_info("Reloading the game from replay\n");
 	game.cleanup_for_load();
 	{
 		GameLoader gl(filename_ + kSavegameExtension, game);
 		gl.load_game();
 	}
-	log("Done reloading the game from replay\n");
+	log_info("Done reloading the game from replay\n");
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
 

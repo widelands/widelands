@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_woodcutters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Woodcutter’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -33,22 +33,13 @@ tribes:new_productionsite_type {
       atlanteans_woodcutter = 1
    },
 
-   outputs = {
-      "log"
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_foresters_house = true,
-      atlanteans_woodcutters_house = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
             "callworker=harvest",
-            "sleep=20000"
+            "sleep=duration:20s"
          }
       },
    },
@@ -60,3 +51,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 60
    },
 }
+
+pop_textdomain()

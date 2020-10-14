@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2019 by the Widelands Development Team
+ * Copyright (C) 2018-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,7 +61,7 @@ private:
 };
 
 struct String : Value {
-	explicit String(std::string value);
+	explicit String(const std::string& value);
 	std::string as_string() const override;
 
 private:

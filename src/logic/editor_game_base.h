@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,10 +25,12 @@
 #include "base/macros.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
 #include "scripting/lua_interface.h"
+#include "ui_basic/note_loading_message.h"
 #include "wui/game_tips.h"
 
 namespace UI {
@@ -86,6 +88,10 @@ public:
 		return objects_;
 	}
 
+	virtual bool is_game() const {
+		return false;
+	}
+
 	// logic handler func
 	virtual void think();
 
@@ -101,9 +107,9 @@ public:
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff
+	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
-	void load_graphics();
 	virtual void cleanup_for_load();
 
 	/// Create a new loader UI and register which type of gametips to select from.
@@ -111,12 +117,8 @@ public:
 	/// Optionally sets a background image.
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     bool show_game_tips,
-	                                     const std::string& background = std::string());
-
-	/// If 'background' is not empty, change the background image for the loader UI.
-	/// If 'backgound' is empty, show game tips instead.
-	/// There must be a loader ui and no game tips.
-	void change_loader_ui_background(const std::string& background);
+	                                     const std::string& theme,
+	                                     const std::string& background);
 
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
@@ -143,11 +145,15 @@ public:
 	                                DescriptionIndex,
 	                                bool loading = false,
 	                                FormerBuildings former_buildings = FormerBuildings(),
-	                                const BuildingSettings* settings = nullptr);
+	                                const BuildingSettings* settings = nullptr,
+	                                const std::map<DescriptionIndex, Quantity>& preserved_wares =
+	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
-	                             FormerBuildings former_buildings = FormerBuildings());
+	                             FormerBuildings former_buildings = FormerBuildings(),
+	                             const std::map<DescriptionIndex, Quantity>& preserved_wares =
+	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
 	Immovable&
@@ -159,7 +165,7 @@ public:
 	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
-	Bob& create_ferry(const Coords&, Player* owner);
+	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
 	uint32_t get_gametime() const {
 		return gametime_;
@@ -204,13 +210,16 @@ public:
 	const World& world() const;
 
 	// Returns the world that can be modified. Prefer world() whenever possible.
-	World* mutable_world();
+	// Use render_only to speed up registering during world initialization
+	World* mutable_world(bool render_only = false);
 
 	// Returns the tribes.
 	const Tribes& tribes() const;
 
 	// Returns the mutable tribes. Prefer tribes() whenever possible.
 	Tribes* mutable_tribes();
+
+	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
 private:
 	/// Common function for create_critter and create_ship.
@@ -264,6 +273,7 @@ private:
 	std::unique_ptr<LuaInterface> lua_;
 	std::unique_ptr<PlayersManager> player_manager_;
 
+	std::unique_ptr<DescriptionManager> description_manager_;
 	std::unique_ptr<World> world_;
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
@@ -273,6 +283,7 @@ private:
 	std::unique_ptr<UI::ProgressWindow> loader_ui_;
 	std::unique_ptr<GameTips> game_tips_;
 	std::vector<std::string> registered_game_tips_;
+	std::unique_ptr<Notifications::Subscriber<UI::NoteLoadingMessage>> loading_message_subscriber_;
 
 	/// Even after a map is fully loaded, some static data (images, scripts)
 	/// will still be read from a filesystem whenever a map/game is saved.
@@ -281,7 +292,6 @@ private:
 	/// a temporary file (in a special dir) is created for such data.
 	std::unique_ptr<FileSystem> tmp_fs_;
 	void delete_tempfile();
-	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

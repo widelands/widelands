@@ -10,7 +10,7 @@ run(function()
 
    local field = map:get_field(25,22)
    local flag = p1:place_flag(field)
-   local road = p1:place_road(flag, "bl", "bl", "bl", "bl")
+   local road = p1:place_road("normal", flag, "bl", "bl", "bl", "bl")
    sleep(1000)
 
    local mv = wl.ui.MapView()

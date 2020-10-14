@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,9 @@ Box::Box(Panel* const parent,
      max_y_(max_y ? max_y : g_gr->get_yres()),
 
      scrolling_(false),
+     force_scrolling_(false),
      scrollbar_(nullptr),
+     scrollbar_style_(UI::PanelStyle::kFsMenu),
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
@@ -55,10 +57,28 @@ Box::Box(Panel* const parent,
  * only a vertical scrollbar may be added.
  */
 void Box::set_scrolling(bool scroll) {
-	if (scroll == scrolling_)
+	if (scroll == scrolling_) {
 		return;
+	}
 
 	scrolling_ = scroll;
+	update_desired_size();
+}
+
+/**
+ * If set to `true`, a scrollbar will always be used regardless of
+ * whether `scrolling_` is true and whether a scrollbar is needed.
+ */
+void Box::set_force_scrolling(bool f) {
+	if (force_scrolling_ == f) {
+		return;
+	}
+	force_scrolling_ = f;
+	update_desired_size();
+}
+
+void Box::set_scrollbar_style(UI::PanelStyle s) {
+	scrollbar_style_ = s;
 	update_desired_size();
 }
 
@@ -69,8 +89,9 @@ void Box::set_scrolling(bool scroll) {
  * its orientation.
  */
 void Box::set_min_desired_breadth(uint32_t min) {
-	if (min == mindesiredbreadth_)
+	if (min == mindesiredbreadth_) {
 		return;
+	}
 
 	mindesiredbreadth_ = min;
 	update_desired_size();
@@ -100,25 +121,27 @@ void Box::update_desired_size() {
 	int maxbreadth = mindesiredbreadth_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
-		int depth, breadth = 0;
+		int depth = 0, breadth = 0;
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
-		if (breadth > maxbreadth)
+		if (breadth > maxbreadth) {
 			maxbreadth = breadth;
+		}
 	}
 
-	if (!items_.empty())
+	if (!items_.empty()) {
 		totaldepth += (items_.size() - 1) * inner_spacing_;
+	}
 
 	if (orientation_ == Horizontal) {
-		if (totaldepth > max_x_ && scrolling_) {
+		if ((totaldepth > max_x_ && scrolling_) || force_scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size(std::min(totaldepth, max_x_),   // + get_lborder() + get_rborder(),
 		                 std::min(maxbreadth, max_y_));  // + get_tborder() + get_bborder());
 	} else {
-		if (totaldepth > max_y_ && scrolling_) {
+		if ((totaldepth > max_y_ && scrolling_) || force_scrolling_) {
 			maxbreadth += Scrollbar::kSize;
 		}
 		set_desired_size(std::min(maxbreadth, max_x_) + get_lborder() + get_rborder(),
@@ -133,14 +156,14 @@ void Box::update_desired_size() {
 
 bool Box::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	if (scrollbar_) {
-		assert(scrolling_);
+		assert(scrolling_ || force_scrolling_);
 		return scrollbar_->handle_mousewheel(which, x, y);
 	}
 	return Panel::handle_mousewheel(which, x, y);
 }
 bool Box::handle_key(bool down, SDL_Keysym code) {
 	if (scrollbar_) {
-		assert(scrolling_);
+		assert(scrolling_ || force_scrolling_);
 		return scrollbar_->handle_key(down, code);
 	}
 	return Panel::handle_key(down, code);
@@ -163,13 +186,13 @@ void Box::layout() {
 		totaldepth += (items_.size() - 1) * inner_spacing_;
 	}
 
-	bool needscrollbar = false;
-	if (orientation_ == Horizontal) {
-		if (totaldepth > max_x_ && scrolling_) {
-			needscrollbar = true;
-		}
-	} else {
-		if (totaldepth > max_y_ && scrolling_) {
+	bool needscrollbar = force_scrolling_;
+	if (!force_scrolling_ && scrolling_) {
+		if (orientation_ == Horizontal) {
+			if (totaldepth > max_x_) {
+				needscrollbar = true;
+			}
+		} else if (totaldepth > max_y_) {
 			needscrollbar = true;
 		}
 	}
@@ -191,10 +214,9 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			// TODO(GunChleoc): Implement styling if we ever use the scrollbar function.
 			scrollbar_.reset(new Scrollbar(
-			   this, sb_x, sb_y, sb_w, sb_h, UI::PanelStyle::kFsMenu, orientation_ == Horizontal));
-			scrollbar_->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
+			   this, sb_x, sb_y, sb_w, sb_h, scrollbar_style_, orientation_ == Horizontal));
+			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
 			scrollbar_->set_size(sb_w, sb_h);
@@ -208,22 +230,27 @@ void Box::layout() {
 
 	// Second pass: Count number of infinite spaces
 	int infspace_count = 0;
-	for (size_t idx = 0; idx < items_.size(); ++idx)
-		if (items_[idx].fillspace)
+	for (size_t idx = 0; idx < items_.size(); ++idx) {
+		if (items_[idx].fillspace) {
 			infspace_count++;
+		}
+	}
 
 	// Third pass: Distribute left over space to all infinite spaces. To
 	// avoid having some pixels left at the end due to rounding errors, we
 	// divide the remaining space by the number of remaining infinite
 	// spaces every time, and not just one.
 	int max_depths = orientation_ == Horizontal ? get_inner_w() : get_inner_h();
-	for (size_t idx = 0; idx < items_.size(); ++idx)
+	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		if (items_[idx].fillspace) {
 			assert(infspace_count > 0);
-			items_[idx].assigned_var_depth = std::max(0, (max_depths - totaldepth) / infspace_count);
+			// Avoid division by 0
+			items_[idx].assigned_var_depth =
+			   std::max(0, (max_depths - totaldepth) / std::max(1, infspace_count));
 			totaldepth += items_[idx].assigned_var_depth;
 			infspace_count--;
 		}
+	}
 
 	// Fourth pass: Update positions of all other items
 	update_positions();
@@ -244,6 +271,8 @@ void Box::update_positions() {
 
 		if (items_[idx].type == Item::ItemPanel) {
 			set_item_size(idx, depth, items_[idx].u.panel.fullsize ? totalbreadth : breadth);
+			// Update depth, in case item did self-layouting
+			get_item_size(idx, &depth, &breadth);
 			set_item_pos(idx, totaldepth - scrollpos);
 		}
 
@@ -285,6 +314,8 @@ void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
 	it.fillspace = resizing == Resizing::kFillSpace || resizing == Resizing::kExpandBoth;
 	it.assigned_var_depth = 0;
 
+	// Ensure that tab focus order follows layout
+	panel->move_to_top();
 	items_.push_back(it);
 
 	update_desired_size();
@@ -334,6 +365,11 @@ void Box::get_item_desired_size(uint32_t const idx, int* depth, int* breadth) {
 
 	switch (it.type) {
 	case Item::ItemPanel:
+		if (!it.u.panel.panel->is_visible()) {
+			*depth = 0;
+			*breadth = 0;
+			return;
+		}
 		if (orientation_ == Horizontal) {
 			it.u.panel.panel->get_desired_size(depth, breadth);
 		} else {
@@ -370,10 +406,11 @@ void Box::set_item_size(uint32_t idx, int depth, int breadth) {
 	const Item& it = items_[idx];
 
 	if (it.type == Item::ItemPanel) {
-		if (orientation_ == Horizontal)
+		if (orientation_ == Horizontal) {
 			it.u.panel.panel->set_size(depth, breadth);
-		else
+		} else {
 			it.u.panel.panel->set_size(breadth, depth);
+		}
 	}
 }
 
@@ -398,6 +435,9 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = it.u.panel.panel->get_inner_w();
 			maxbreadth = get_inner_w();
 		}
+		if (scrollbar_ && scrollbar_->is_enabled()) {
+			maxbreadth -= Scrollbar::kSize;
+		}
 		switch (it.u.panel.align) {
 		case UI::Align::kCenter:
 			breadth = (maxbreadth - breadth) / 2;
@@ -410,15 +450,25 @@ void Box::set_item_pos(uint32_t idx, int32_t pos) {
 			breadth = 0;
 		}
 
-		if (orientation_ == Horizontal)
+		if (orientation_ == Horizontal) {
 			it.u.panel.panel->set_pos(Vector2i(pos, breadth));
-		else
+		} else {
 			it.u.panel.panel->set_pos(Vector2i(breadth, pos));
+		}
 		break;
 	}
 
 	case Item::ItemSpace:
 		break;  //  no need to do anything
 	}
+}
+void Box::on_death(Panel* p) {
+	auto is_deleted_panel = [p](Box::Item i) { return p == i.u.panel.panel; };
+	items_.erase(std::remove_if(items_.begin(), items_.end(), is_deleted_panel), items_.end());
+
+	update_desired_size();
+}
+void Box::on_visibility_changed() {
+	update_desired_size();
 }
 }  // namespace UI

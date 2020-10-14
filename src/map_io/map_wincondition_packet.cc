@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@ namespace Widelands {
 
 constexpr uint8_t kCurrentPacketVersion = 1;
 
-void MapWinconditionPacket::read(FileSystem& fs, Map& map, MapObjectLoader&) {
+void MapWinconditionPacket::read(FileSystem& fs, Map& map) {
 	if (!fs.file_exists("binary/wincondition")) {
 		// This can be empty when win conditions don't need any special map data
 		return;
@@ -57,7 +57,7 @@ void MapWinconditionPacket::read(FileSystem& fs, Map& map, MapObjectLoader&) {
 	}
 }
 
-void MapWinconditionPacket::write(FileSystem& fs, Map& map, MapObjectSaver&) {
+void MapWinconditionPacket::write(FileSystem& fs, Map& map) {
 	// We only write this packet if we have something interesting to write to it.
 	std::set<FCoords>& fields = *map.mutable_valuable_fields();
 	if (!fields.empty()) {

@@ -1,6 +1,3 @@
-include "scripting/messages.lua"
-include "scripting/field_animations.lua"
-
 show_warning_early_attack = true
 show_warning_reed = true
 show_warning_clay = true
@@ -433,11 +430,11 @@ function mission_thread()
    campaign_message_box(rising_water_5)
 
    -- Wait until an expedition ship is ready
-   local expedition_ready = false
+   local expedition_ready = nil
    while not expedition_ready do
       for idx,ship in ipairs(p1:get_ships()) do
          if (ship.state:sub(1, 4) == "exp_") then
-            expedition_ready = true
+            expedition_ready = ship
             break
          end
       end
@@ -448,21 +445,56 @@ function mission_thread()
    local port = p1:get_buildings("frisians_port")[1]
    scroll_to_field(port.fields[1])
    sleep(1000)
-   local persist = {}
+
+   local persist = {
+      -- Items on the ship. These will be taken unconditionally
+      -- (metals, ores, picks, and miners will be lost on sea though)
+      wares = {},
+      workers = {},
+      ship_soldiers = {},
+      -- Additionally, up to 15/10/5 of the soldiers in the port
+      -- will be taken (depending on scenario difficulty)
+      port_soldiers = {}
+   }
    for descr,n in pairs(port:get_soldiers("all")) do
-      persist[descr[1] .. descr[2] .. descr[3]] = n
+      persist.port_soldiers[descr[1] .. descr[2] .. descr[3]] = n
    end
+   for i,ware in pairs(expedition_ready:get_wares("")) do
+      if persist.wares[ware] then
+         persist.wares[ware] = persist.wares[ware] + 1
+      else
+         persist.wares[ware] = 1
+      end
+   end
+   for i,worker in pairs(expedition_ready:get_workers("")) do
+      local n = worker.descr.name
+      if n == "frisians_soldier" then
+         n = worker.health_level .. worker.attack_level .. worker.defense_level
+         if persist.ship_soldiers[n] then
+            persist.ship_soldiers[n] = persist.ship_soldiers[n] + 1
+         else
+            persist.ship_soldiers[n] = 1
+         end
+      elseif persist.workers[n] then
+         persist.workers[n] = persist.workers[n] + 1
+      else
+         persist.workers[n] = 1
+      end
+   end
+
    -- We save a table of all soldiers we can take with us:
    -- {
-   --    "262" = 5,
-   --    "120" = 2,
-   --    ...
+   --    port_soldiers = {
+   --       "262" = 5,
+   --       "120" = 2,
+   --       ...
+   --    }
    -- }
    -- means 5 soldiers with training levels health-2/attack-6/defense-2 and
    -- 2 soldiers with health-1/attack-2/defense-0.
    wl.Game():save_campaign_data("frisians", "fri01", persist)
    campaign_message_box(victory_1)
-   p1:reveal_scenario("frisians01")
+   p1:mark_scenario_as_solved("fri01.wmf")
    -- END OF MISSION 1
 end
 

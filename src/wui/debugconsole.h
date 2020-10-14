@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define WL_WUI_DEBUGCONSOLE_H
 
 #include <functional>
+#include <string>
 #include <vector>
 
 struct ChatProvider;

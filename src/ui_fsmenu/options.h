@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,8 @@
 #include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 #include "wui/sound_options.h"
 
 class FullscreenMenuOptions;
@@ -43,9 +44,11 @@ public:
 		// Interface options
 		int32_t xres;
 		int32_t yres;
+		bool maximized;
 		bool fullscreen;
 		bool inputgrab;
 		uint32_t maxfps;
+		bool sdl_cursor;
 
 		// Windows options
 		bool snap_win_overlap_only;
@@ -66,6 +69,8 @@ public:
 		bool single_watchwin;
 		bool ctrl_zoom;
 		bool game_clock;
+		bool numpad_diagonalscrolling;
+		int32_t display_flags;
 
 		// Language options
 		std::string language;
@@ -74,13 +79,14 @@ public:
 		uint32_t active_tab;
 	};
 
-	explicit OptionsCtrl(Section&);
+	explicit OptionsCtrl(FullscreenMenuMain&, Section&);
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
 
 private:
 	Section& opt_section_;
+	FullscreenMenuMain& parent_;
 	std::unique_ptr<FullscreenMenuOptions> opt_dialog_;
 };
 
@@ -88,30 +94,25 @@ private:
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class FullscreenMenuOptions : public FullscreenMenuBase {
+class FullscreenMenuOptions : public UI::Window {
 public:
-	explicit FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt);
+	explicit FullscreenMenuOptions(FullscreenMenuMain&, OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
+
+	bool handle_key(bool, SDL_Keysym) override;
 
 private:
 	void layout() override;
 
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
-	void update_language_stats(bool include_system_lang);
+	void update_language_stats();
 
 	// Saves the options and reloads the active tab
 	void clicked_apply();
 	// Restores old options when canceled
 	void clicked_cancel();
 
-	const uint32_t padding_;
-	uint32_t butw_;
-	uint32_t buth_;
-	uint32_t hmargin_;
-	uint32_t tab_panel_y_;
-
-	UI::Textarea title_;
 	UI::Box button_box_;
 	UI::Button cancel_, apply_, ok_;
 
@@ -122,13 +123,14 @@ private:
 	UI::Box box_windows_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
-	UI::Box box_game_;
+	UI::Box box_newgame_;
+	UI::Box box_ingame_;
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
-	UI::Dropdown<uintptr_t> resolution_dropdown_;
-	UI::Checkbox fullscreen_;
+	UI::Dropdown<int> resolution_dropdown_;
 	UI::Checkbox inputgrab_;
+	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
 	UI::MultilineTextarea translation_info_;
 
@@ -148,12 +150,21 @@ private:
 	UI::Checkbox zip_;
 	UI::Checkbox write_syncstreams_;
 
-	// Game options
+	// New Game options
+	UI::Checkbox show_buildhelp_;
+	UI::Checkbox show_census_;
+	UI::Checkbox show_statistics_;
+	UI::Checkbox show_soldier_levels_;
+	UI::Checkbox show_buildings_;
+	UI::Checkbox show_workarea_overlap_;
+
+	// In-Game options
 	UI::Checkbox auto_roadbuild_mode_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
 	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
+	UI::Checkbox numpad_diagonalscrolling_;
 
 	OptionsCtrl::OptionsStruct os_;
 

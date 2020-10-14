@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,6 @@
 #include "editor/tools/noise_height_tool.h"
 #include "logic/widelands_geometry.h"
 #include "ui_basic/textarea.h"
-
-using Widelands::Field;
 
 EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
    EditorInteractive& parent,
@@ -81,12 +79,9 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	   /** TRANSLATORS: Editor set height access key. **/
 	   _("Ctrl + Click on the map to set terrain height"));
 
-	lower_.changed.connect(
-	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_lower, boost::ref(*this)));
-	upper_.changed.connect(
-	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_upper, boost::ref(*this)));
-	set_to_.changed.connect(
-	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
+	lower_.changed.connect([this]() { update_lower(); });
+	upper_.changed.connect([this]() { update_upper(); });
+	set_to_.changed.connect([this]() { update_set_to(); });
 
 	UI::Textarea* label =
 	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random height"), UI::Align::kCenter);

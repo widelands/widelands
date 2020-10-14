@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_reed_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Reed Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -50,27 +50,13 @@ tribes:new_productionsite_type {
       frisians_reed_farmer = 1
    },
 
-   outputs = {
-      "reed"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_beekeepers_house = true,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=plant_reed",
             "call=harvest_reed",
-            "return=no_stats"
          }
       },
       plant_reed = {
@@ -78,7 +64,7 @@ tribes:new_productionsite_type {
          descname = _"planting reed",
          actions = {
             "callworker=plantreed",
-            "sleep=18000"
+            "sleep=duration:18s"
          }
       },
       harvest_reed = {
@@ -86,7 +72,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting reed",
          actions = {
             "callworker=harvestreed",
-            "sleep=5000"
+            "sleep=duration:5s"
          }
       },
    },
@@ -98,3 +84,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 20
    },
 }
+
+pop_textdomain()

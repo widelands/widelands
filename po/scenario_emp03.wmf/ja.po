@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -19,242 +19,242 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:45
 msgid "Build your first outpost"
 msgstr "最初の前線基地の建設"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:49
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "First Outpost"
 msgstr "最初の前線基地"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:50
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:48
 msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr "仮の本拠地の東にある黄色のシンボルの場所に前線基地を建てましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
 msgid "Build a quarry"
 msgstr "採石場の建設"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:58
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:56
 msgid "Quarry"
 msgstr "採石場"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:59
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:57
 msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr "建物の用地確保と資源の獲得のため、岩の近くに採石場を１つ建てましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
 msgstr "木こり小屋、製材所、石工小屋を１つずつ建てましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:67
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Lumberjack, Sawmill and Stonemason"
 msgstr "木こり小屋、製材所、石工小屋"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:68
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:66
 msgid ""
 "Build a lumberjack’s house, a sawmill and a stonemason’s house as soon as "
 "there is enough space for them. This will complete the basic building "
 "material supply chain."
 msgstr "場所ができ次第、木こり小屋、製材所、石工小屋を１つずつ建てましょう。これらが揃えば、基本的な建築資材の供給体制が確立します。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
 msgstr "石柱の需要を４まで下げましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower Demand for Marble Columns"
 msgstr "石柱の需要を下げましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:75
 msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr "経済の石柱の需要を４まで下げましょう。こうすれば建築に使う分の大理石が枯渇する事態を避けやすくなります。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr "経済を設定するには、旗をクリックしてボタンを選択してください。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
 msgstr "小さな島内に港の候補地を見つけましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
 msgstr "港の候補地"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
 msgstr "海へのアクセスを取り戻すため、港の候補地を見つけましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
 msgstr "港と造船所を１つずつ島に作りましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Ship Industry"
 msgstr "造船業"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
 msgstr "島から出航するために港を１つ建設しましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
 msgstr "航海用の船を建造するため、造船所を建設しましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
 msgstr "小麦の生産"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:104
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
 msgstr "小麦の生産"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr "羊毛の製造を開始するために 50 の小麦を生産する"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
 msgstr "船の建造のため布を生産する"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
 msgstr "布の生産"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr "全ての小麦を羊毛の生産に使い、最低でも 50 の羊毛を生産しましょう。そして、船の建造するため、その羊毛を織って布を作りましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
 msgstr "離れた島々に港を２つ建設する"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:121
 msgid "Build two Expedition Ports"
 msgstr "探検して２つの港を建設しましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:124
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr "南の島を船で探検し、港をそこに建設しましょう。その後、鉱物資源を調査しましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr "船を北に送り、野蛮人の状況を偵察しましょう。そして、島に港を建設し、前哨地を整備していきましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
 msgstr "探検隊を送るため金を生産しましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
 msgstr "金の生産"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr "近辺に植民するため、最低でも６つの金を生産する。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
 msgstr "野蛮人を倒す"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Enemy"
 msgstr "敵の討伐"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
 msgstr "この世界の片隅から野蛮人の存在を抹消する。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
 msgstr "さらに探検を進め港を建設しましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
 msgstr "他の島々を探索し、港の候補地を探しましょう"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:152
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:150
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
 msgstr "近辺の島々を調べ、可能な限り多くの港を建設しましょう。"
 
 #. TRANSLATORS: Objective header
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:157
 msgid "Recover the shrine"
 msgstr "祭壇の復元"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:161
 msgid "Find the Holy Shrine"
 msgstr "聖なる祭壇を探せ"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:162
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
 msgstr "ネプチューンの聖なる祭壇の６つの断片を全て探し、確保する必要があります。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:170
 msgid "Build a training infrastructure"
 msgstr "訓練施設の建設"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:172
 msgid "Training Infrastructure"
 msgstr "訓練施設"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:175
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:173
 msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr "訓練場を１つ、兵舎をいくつか、そしてアリーナかコロシアムを１つ建設し、兵士を訓練しましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:184
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
 msgstr "故郷への旅路"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:197
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:209
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:650
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:195
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:387
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:619
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid "Diary of Lutius"
 msgstr "ルティウスの日記"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
 msgid ""
 "Finally, we were set towards Fremil again. I couldn’t await the chance to "
 "clear my records of this big defeat by the Barbarians."
 msgstr "ついに、我々は再びフレミルへと向かうこととなった。野蛮人に破れた屈辱を晴らす機会がやっと来たのだ！"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:188
 msgid "But the gods themselves didn’t want us to get home so quickly!"
 msgstr "しかし！どうやら神々は我々にそう速やかに故郷に帰って欲しくはないらしい！"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:194
 msgid "The Wrath of Neptune"
 msgstr "ネプチューンの怒り"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:197
 msgid ""
 "Neptune himself was against us and drove us into a dark, wild storm again. "
 "But this time it felt even worse than last time. The waves were twice the "
@@ -263,7 +263,7 @@ msgstr ""
 "ネプチューンはどうも我々が気に入らないらしく、我々はまた暴風雨に巻き込まれることとなった。しかも、今回は前回よりもひどかったように思う。我らの勇ましい船の二倍にも及ぶ高さの波が押し寄せ、吹き荒ぶ風は我々を危険な海へと誘っていた。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:200
 msgid ""
 "Our ship is heavily damaged. The mast has gone overboard and the hull is "
 "taking in more and more water. We would be glad to survive this black night "
@@ -271,17 +271,17 @@ msgid ""
 msgstr ""
 "船は甚大は被害を負った。マストはどこにも見当たらず、船体には大量の水が入ってしまった。あの辛く苦しい夜を辛くも生き延びられたことに我々は感謝するべきなのだと思う。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:206
 msgid "Shipwrecked Again"
 msgstr "またも座礁"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:209
 msgid "Finally, the wrath of the gods and the ocean seems to be over."
 msgstr "やっと、神々と海の怒りはおさまったようだ。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:212
 msgid ""
 "Again, we stranded on an unknown coast and slept in the shade under some "
 "palm trees until the sun was risen high up in the sky. I’m afraid that when "
@@ -291,36 +291,36 @@ msgstr ""
 "またもや我々は見知らぬ岸辺に流れ着き、太陽が高く登るまでヤシの木々の陰で眠っていたようだ。この見渡す限りの砂を見てしまうと、昼まで眠ってしまったことはもう誰も気にならなくなってしまったようだ……それと、我々のキャンプ周辺には驚くほどの量の岩もあった。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:215
 msgid ""
 "It really seems as if we have landed on a very small island with little "
 "space."
 msgstr "ほとんどスペースの無い、とても小さな島に上陸してしまったようだった。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:218
 msgid ""
 "To make matters even worse, all the land we can see is blocked by rocks and "
 "trees. I fear we won’t find the resources we need to build a new ship."
 msgstr "さらに悪いことに、見える範囲には木と岩しか見えなかった。これでは新しい船を作ることができないのではないかと不安になった。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:221
 msgid ""
 "I really don’t know if and how we will get back home. And the war is going "
 "on without us. I hope my fellow soldiers are defending our empire well."
 msgstr "果たして我々は故郷に戻れるのだろうか。戦争は我々抜きで進んでしまうのだろうか。今は仲間の兵士達が帝国を守り抜いていると信じるしかない。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:227
 msgid "No Sight"
 msgstr "視界不足"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:228
 msgid "Saledus looks around nervously…"
 msgstr "セールダスはそわそわと周囲を見回しています…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:230
 msgid ""
 "Sire, we do not know anything about the island. And I believe we are not "
 "safe either. It would probably be reasonable to build a tower to explore the"
@@ -328,16 +328,16 @@ msgid ""
 msgstr ""
 "ルティウス様、我々はこの島のことを何も知りません。安全とは限らないでしょう。視界を広げる意味でも、ある程度の軍事力を確保する上でも、監視塔を建設するのが得策かと思います。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:236
 msgid "Amalea Interrupts"
 msgstr "アマリアの割り込み"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:237
 msgid "Amalea raises her hand…"
 msgstr "アマリアが手を上げます…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:239
 msgid ""
 "As we don’t know how many resources we can get, we should be very "
 "restrictive in spending them. Even for military buildings, we should be very"
@@ -345,16 +345,16 @@ msgid ""
 msgstr "資源がどの程度手に入るのかわからないのだから、極力節約するべきでしょう。軍事施設を建設する時にもそれを忘れてはいけないと思うの。"
 
 #. TRANSLATORS: Message header - Saledus is advising to save resources
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:248
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:246
 msgid "Save Resources"
 msgstr "物資節約"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:247
 msgid "Saledus is nodding in agreement…"
 msgstr "セールダスは頷きます…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:249
 msgid ""
 "Sire, Amalea is right about the resources. Therefore I correct myself. We "
 "should only build an outpost as this is the most effective military "
@@ -362,23 +362,23 @@ msgid ""
 msgstr ""
 "ルティウス様、物資を節約すべきというアマリアの意見が正しいでしょう。ですから訂正いたします。我々は前線基地を１つ建てるべきでしょう。あれは軍事系の建物の中でも最も資源効率が良いですから。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:257
 msgid "Rocks, Nothing but Rocks"
 msgstr "岩、岩、岩"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:258
 msgid "Saledus speaks with a sigh of relief…"
 msgstr "セールダスはほっとした様子で喋ります…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:260
 msgid ""
 "Sire, I saw that the construction of the outpost was completed, so I have "
 "assigned some of my best soldiers to it to keep the watch."
 msgstr "ルティウス様、前線基地の建設が完了したようです。ですので、周囲の警戒のため優秀な兵士達に基地に詰めるように指示しました。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:263
 msgid ""
 "But although this is a good step forward, I can’t see much space for "
 "buildings. The whole island is littered with rocks. How can we ever build a "
@@ -387,82 +387,82 @@ msgid ""
 msgstr ""
 "これは良い一歩ではあるのですが、いかんせん建物を建てる場所がありません。島には岩がごろごろしています。この調子では、新しい船を作るどころか、生活を便利にする基本インフラすら整えられそうにありません。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:269
 msgid "Amalea’s Plan"
 msgstr "アマリアの計画"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:272
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:270
 msgid "Amalea smiles…"
 msgstr "アマリアは微笑みます…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:272
 msgid ""
 "Lutius, this may seem very tricky, but we can do it. First of all, we need "
 "patience as well as speed and a plan to succeed in this part of the world."
 msgstr "ルティウス、だいぶやりにくい状況だけど、私たちならやれるわ。とりあえずは、我慢とスピード、そしてこの場所で成功するための計画が必要ね。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:277
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:275
 msgid ""
 "I think we should try to reveal some building space by cutting up all the "
 "rocks in a quarry."
 msgstr "採石場で岩を掃除して、建築用地を用意したらどうかしら？"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:278
 msgid ""
 "Additionally, this would gain us some granite and some marble to build up "
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr "そして、建物を建てる場所ができたら、切り出した花崗岩や大理石を使って建物を建てるの。切り出した岩は以後の建設にも有効に使えるはず。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
 msgstr "アマリアの新たな指示"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:363
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:361
 msgid "Amalea recommends…"
 msgstr "アマリアは勧めます…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:289
 msgid ""
 "Good news from the people, Lutius. I got the message that our first quarry "
 "has started its work today."
 msgstr "良い知らせよ、ルティウス。今日、最初の採石場で作業が始まったみたい。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:294
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:292
 msgid ""
 "Perhaps it would be a good idea to wait until it has cleared some space and "
 "then build up a basic construction material industry."
 msgstr "とりあえずはある程度のスペースができるまで待ちましょう。それから、基本的な建築資材の供給体制を整えましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:300
 msgid "Amalea’s Recommendations"
 msgstr "アマリアの勧め"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:303
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:301
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:318
 msgid "Amalea comes in…"
 msgstr "アマリアが入ってきます…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:305
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:303
 msgid "I’ve got important things to talk about… First the good news:"
 msgstr "いくつか大事な用件があるの… はじめは良い知らせね。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:308
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:306
 msgid ""
 "I noticed that our stonemason has started his work, finally. He will cut the"
 " number of marble columns that we request in our basic economy settings."
 msgstr "やっと、石工が作業を始めたそうよ。彼は経済の設定で要求している分だけ、大理石を石柱に加工してくれるでしょう。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:311
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:309
 msgid ""
 "But here’s the rub, if we use up all of our marble for columns, we might run"
 " out. So, we should lower the settings for marble columns in the economy "
@@ -471,46 +471,46 @@ msgid ""
 msgstr ""
 "でも気をつけないといけない点があるの。もし、大理石を全部石柱にしちゃうと、大理石が枯渇するわ。だから、経済の設定で石柱の要求量を少なくする必要があるわ。とりあえず今は石柱の在庫は４もあれば十分だと思うわ。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:317
 msgid "Amalea Looks Happy"
 msgstr "アマリアは幸せそうに見えます"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:322
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:320
 msgid "I have excellent progress to report now."
 msgstr "素晴らしい報告があったわ。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:323
 msgid ""
 "I found out that the construction of the lumberjack’s house and the sawmill "
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr "木こり小屋と製材所の建設が完了したわ。これで丸太を集め、板材を生産することができるわ。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:328
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:326
 msgid ""
 "This is a great step forward in constructing advanced buildings. And we can "
 "think of using some planks to build new ships."
 msgstr "これはもっと高度な建物を建てる上で重大な一歩ね。それに、板材は新しい船を建造するのにも使えるから。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:334
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:332
 msgid "We Need a Port"
 msgstr "港の設置"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:335
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:333
 msgid "Saledus is thoughtful…"
 msgstr "セールダスは考え込んでいます…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:335
 msgid ""
 "Sire, I just pondered our way home. It is of utmost importance to build a "
 "port for loading our ships and starting an expedition."
 msgstr "ルティウス様、故郷へ帰る術を考えていました。船に物資を積んで探検を開始するため、港を建設することが最優先課題でしょう。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:340
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:338
 msgid ""
 "The problem is that a port is a building which needs a very special place to"
 " be built. So, while building our economy, we should nevertheless expand "
@@ -519,16 +519,16 @@ msgid ""
 msgstr ""
 "問題は、港を建設するには特別な場所が必要であるということです。とりあえずは島全体の探索を進めていくしかありません、経済の発展もそれに合わせて進めていけばいいでしょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:346
 msgid "A Step Closer to Getting Home"
 msgstr "帰郷へ向けて一歩前進"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:349
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:347
 msgid "Saledus looks excited…"
 msgstr "セールダスは興奮した様子です…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:349
 msgid ""
 "Sire, today we got a lot closer to finally returning home again. Our "
 "military has spotted a space to build a port on. We should start to build a "
@@ -536,25 +536,25 @@ msgid ""
 msgstr "ルティウス様、今日は帰郷に向けて大きな前進がありました。我が軍が港を建設できる場所を見つけたそうです。さあ、早く港を作ってしまいましょう。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:352
 msgid ""
 "Now we truly can look forward to building some ships. So, we should build a "
 "shipyard as well."
 msgstr "これでやっと造船に目を向ける準備も整いました。ですので、造船所も１つ建ててしまいましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:362
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:360
 msgid "Amalea’s Wisdom"
 msgstr "アマリアの知恵"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:365
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:363
 msgid ""
 "I understand the euphoria of Saledus, but we have some serious problems to "
 "solve first."
 msgstr "セールダスが浮かれるのもわかるけど、その前にどうにかしなくちゃならない深刻な問題があるのよ。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:368
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:366
 msgid ""
 "To send out an expeditionary ship, we first need a ship. Unfortunately, we "
 "have only five bales of cloth left, which we will need to build the port and"
@@ -562,7 +562,7 @@ msgid ""
 msgstr "探検船を送るには当然船が必要。でも、布がたっだ５つしか残ってないの。港や造船所を作るのにも必要だっていうのに。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:371
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:369
 msgid ""
 "So, we need more cloth to finally be able to build ships. But there is no "
 "space on the island for building a whole economy to produce cloth. "
@@ -571,7 +571,7 @@ msgstr ""
 "というわけで、船を作るにはまず布を用意しなくちゃ。でも、この狭い島じゃ布生産に関する体制を同時に全部動かすことはできないわ。だから、段階的に物資を生産するしかないの。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:374
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:372
 msgid ""
 "So, let’s think this over. To weave cloth we need some wool from a sheep "
 "farm. The sheepfarm itself needs wheat and water to work. So, let’s find a "
@@ -580,7 +580,7 @@ msgstr ""
 "その段階がそれぞれどうなっているか確認しましょう。布を織るには羊牧場から取れる羊毛が必要。羊牧場で羊を育てるには小麦と水が必要。だから、まずは大サイズの建物を建てられる場所を見つけて、農場を作りましょう。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:377
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:375
 msgid ""
 "After the production of enough wheat, we can dismantle the farm and build a "
 "sheep farm to produce wool. Later on, we could build a weaving mill in the "
@@ -590,39 +590,39 @@ msgstr ""
 "十分に小麦を生産したら、今度は農場を解体して羊牧場を建てましょう。それが終わったら今度は同じ場所に織物工房を建てて羊毛を布に仕立てるの。さあ、じゃあまずは農場を建てて十分な小麦を確保しましょう。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:380
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:378
 msgid ""
 "I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
 " we will have to adjust the target quantity for wheat to achieve this."
 msgstr ""
 "とりあえず小麦は 50 もあればなんとかなるでしょう。もしかしたら、小麦を貯めるには経済の設定で小麦の目標値を変えなきゃならないかもしれないわね。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:388
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
 msgid "Seafaring is Possible Again"
 msgstr "再び航海が可能に"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:391
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:389
 msgid "Praise the gods. We finally have a ship industry."
 msgstr "神よ感謝します。やっとまた海に出られるようになりました。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:397
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:395
 msgid "Amalea is Proud"
 msgstr "アマリアは誇らしげです。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:398
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:396
 msgid "Amalea cheers…"
 msgstr "アマリアは嬉しそうに言います…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:400
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:398
 msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr "いい感じね。小麦を十分に生産できたわ。じゃあ、農場を解体して、布の製造の次の段階を担当する建物を建てましょう。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:403
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:401
 msgid ""
 "Don’t forget to check the target quantity of wool and cloth in the economy "
 "settings. We need to turn all the wheat into wool and then the all the wool "
@@ -630,30 +630,30 @@ msgid ""
 msgstr "羊毛と布の目標数の設定を忘れないようにお願いね。私たちは全ての小麦を羊毛に、そして全ての羊毛を布にしなくちゃいけないんだから。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:406
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:404
 msgid ""
 "Perhaps it would be a good idea to stop the shipyard’s production until we "
 "have some cloth available in order to not waste any logs or planks."
 msgstr "丸太や板材を無駄にしないためにも、布がある程度できるまで造船所の活動を停止させておいた方がいいかもしれないわ。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:412
 msgid "We Should Explore the Islands"
 msgstr "島々の探索"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:415
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:458
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:456
 msgid "Saledus is excited…"
 msgstr "セールダスは興奮しています…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:417
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:415
 msgid ""
 "Now that we have all resources ready for building a ship, we should explore "
 "the surrounding islands."
 msgstr "これで船の建造に必要な物資は揃いました、そろそろ周囲の島々の探索を始めましょう。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:418
 msgid ""
 "First, we need to find some more resources to back up our growing economy. I"
 " have spotted an island with some mountains in the south. Perhaps we can "
@@ -662,12 +662,12 @@ msgstr ""
 "まずは、成長する我々の経済をバックアップできるような資源を発見する必要があります。南にある島には山があるようです。もしかしたら、鉄のような有用な資源を発見できるかもしれません。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:421
 msgid "But the following objective is even more important:"
 msgstr "しかし、もう一つの目的がより大事です。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:424
 msgid ""
 "I think I have heard the wind carrying some weird but well known sounds from"
 " the north. If I’m not totally wrong, I have heard some Barbarian war drums."
@@ -675,16 +675,16 @@ msgid ""
 msgstr ""
 "聞いたことのある奇妙な音が、北から風に乗って聞こえてくることがあります。まず間違いなく、私が聞いたものは野蛮人の戦太鼓でしょう。ですから、我々は北に向かい、状況を把握しておくべきでしょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:434
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:432
 msgid "Amalea Advises"
 msgstr "アマリアの助言"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:433
 msgid "Amalea looks thoughtful…"
 msgstr "アマリアは考え込んだ様子です…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
 "they have to use all our remaining gold for building the port. So, we won’t "
@@ -693,13 +693,13 @@ msgstr ""
 "ねぇルティウス、さっき建築者の皆と話したのだけど、港の建築には備蓄していた全ての金を使うしかないらしいの。港ができる頃には、金の在庫はなくなってしまうということね。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:438
 msgid ""
 "But the problem is that for sending out an expedition, we need some gold."
 msgstr "それで問題なんだけど、私たちが探検隊を派遣するにあたって、金がどうしても必要なの。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:443
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:441
 msgid ""
 "Fortunately, I spotted a mountain which looks very promising and seems to "
 "have some mining resources. Perhaps we should send some geologists to "
@@ -707,7 +707,7 @@ msgid ""
 msgstr "幸運なことに資源が眠っていそうな山があるから、そこに地質学者を派遣して調査をしたらどうかしら。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:446
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:444
 msgid ""
 "I strongly recommend building a production chain for mining and melting some"
 " gold. I think we need a vineyard, a winery, a tavern, a fisher’s house or a"
@@ -716,7 +716,7 @@ msgstr ""
 "鉱石の採掘から精錬までを行えるように建物を整備した方が良いと思うわ。ブドウ園、酒場、漁師小屋、狩人小屋、精錬所がそれぞれ１つずつ必要かしらね。もちろん、それに加えて鉱山そのものも必要ね。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:449
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:447
 msgid ""
 "If there are difficulties with building all the buildings needed, we should "
 "think about all we have learned so far. We can cut down all the rocks. We "
@@ -725,31 +725,31 @@ msgid ""
 msgstr ""
 "必要な建物を建設するにあたって何か問題があったら、これまで学んできた知識が助けになるわ。岩を切り出すとか、道を整理するとか、軍事系の建物を解体するとかして、経済に必要な建物の建築スペースをどうにか捻出するの。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:457
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:455
 msgid "We Should Conquer All the Islands"
 msgstr "全ての島々の征服"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:458
 msgid "Now it is time to conquer the islands."
 msgstr "そろそろ島々を征服する頃合いでしょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:462
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:460
 msgid ""
 "Let’s finish the Barbarians off and provide a nice colony to the caesar of "
 "our empire."
 msgstr "野蛮人を片付け、皇帝陛下に良い植民地を献上しましょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:468
 msgid "Amalea’s Luck"
 msgstr "アマリアの幸運"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:469
 msgid "Amalea is really proud of the achievements…"
 msgstr "アマリアは難問を解決し、非常に誇らしげな様子です…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:473
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid ""
 "Lutius, we have just solved another problem. We managed to melt enough gold "
 "to send out at least three expeditions. Perhaps we might even keep some gold"
@@ -758,22 +758,22 @@ msgstr ""
 "ルティウス、また一つ問題が解決したわ。最低でも３回の探検を行えるだけの金を確保することができたわ。もうちょっと金を貯めてちょっとした宝飾品でも作ったらどうかしらね？"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:476
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:474
 msgid ""
 "I’m just kidding. Of course we should spare as much gold as we can for "
 "building an arena and other buildings to train our soldiers."
 msgstr "もちろん冗談よ。それはともかく、兵士を訓練するアリーナのような建物を建てることを考えると、金はできるだけ確保しておく必要があるわ。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:482
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:480
 msgid "Amalea is Pleased"
 msgstr "アマリアは喜んでいます"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:481
 msgid "Amalea is content that we will manage all our challenges"
 msgstr "アマリアは我々ならば全ての試練を乗り越えられると感じています"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:485
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid ""
 "Well done so far. Now we will not produce more marble columns than needed. I"
 " really think we will need this economy feature quite often to adjust our "
@@ -783,23 +783,23 @@ msgstr ""
 "良い感じね。これで必要以上に石柱が作られることはなくなるでしょう。経済をコントロールする上でこの操作は頻繁に使うことになるでしょう。それぞれの物資について、設定した値に在庫が達したら生産活動を停止してくれることを忘れないようにしてね。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:486
 msgid ""
 "For example, it might be a good idea to produce a reasonable amount of a "
 "ware and afterwards dismantle the building to gain space for another "
 "building."
 msgstr "他にも、ある程度の物資を作ってもらった後、そこを解体して別の建物を建てるなんてのも良い考えね。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:494
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:492
 msgid "Amalea’s Reminder"
 msgstr "アマリアのリマインダー"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:495
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:493
 msgid "Amalea is shaking her head…"
 msgstr "アマリアは頭を振っています…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:495
 msgid ""
 "Lutius. I really appreciate that you and Saledus are so concerned about our "
 "security. But I think we could use the little space on this island better "
@@ -808,7 +808,7 @@ msgstr ""
 "ルティウス、あなたやセールダスが私たちの安全に気を配ってくれてることには感謝してるわ。でも、この島の狭い土地を有効に利用するためには、あまり軍事施設を建設すべきではないと思うの。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:500
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:498
 msgid ""
 "I strongly recommend dismantling most of them to be able to build industrial"
 " buildings. I don’t think there is much danger on this island, but if you "
@@ -818,62 +818,62 @@ msgstr ""
 "私は軍事系の建物の大半は解体して、生産施設に切り替えるべきだと思うわ。この島には危険らしい危険はなさそうだから。それでも警戒しておきたいなら、沿岸の兵屋や詰所だけを残すようにすれば良いと思うわ。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:501
 msgid "But be careful not to waste any bigger building spots."
 msgstr "でも、その場合でも大きめの建物を建てられる土地を無駄にしないようにね。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:507
 msgid "Amalea’s Excited"
 msgstr "アマリアの興奮"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:510
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:508
 msgid "Amalea is looking forward to the exploration…"
 msgstr "アマリアは探検を楽しみにしています…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:512
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:510
 msgid ""
 "Lutius. We have made so much progress so far. I am glad to hear that we have"
 " many ships now."
 msgstr "ルティウス、ここまで私たちは良くやってきたと思うわ。船もたくさんできたって聞いて、楽しい気分になってきた。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:515
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:513
 msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
 msgstr "私たちの船団も大きくなってきたから、この地域全域を探検しつくすべきよ。土地と、そしてさらなる資源を求めて探索を進めましょう。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:518
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:516
 msgid ""
 "It would be especially helpful to find more marble, either within fields of "
 "rock or in the mountains to mine it."
 msgstr "特に大理石が見つかると嬉しいわ。山から採掘するものでも、岩から切り出すものでもどちらでもいいから。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:524
 msgid "Amalea is Very Content"
 msgstr "アマリアは大満足です"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:525
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:534
 msgid "Amalea is clapping her hands…"
 msgstr "アマリアは手を叩いて喜んでいます…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 msgid ""
 "Lutius. Well done. Well done. We have discovered all possible port locations"
 " in the complete region. Now we can strengthen our economy and we will "
 "manage to sail home soon."
 msgstr "ルティウス、すごいわ。本当にすごいわ。この地域の全ての港候補地を発見したのよ。後は経済をさらに発展させて、故郷へ向けて出航するだけね。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:535
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:533
 msgid "Amalea’s Counsel"
 msgstr "アマリアの助言"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:538
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
 msgid ""
 "Salve Lutius. We just completed our weaving mill. Now we are very close to "
 "taking to the sea again. However, I thought it would be helpful to remind "
@@ -881,7 +881,7 @@ msgid ""
 msgstr ""
 "こんにちは、ルティウス。織物工房が完成したわ。これでもうすぐ海へ出られるようになるわね。でも、布を必要とするのは造船だけじゃないってことは忘れないでね。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:540
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:538
 msgid ""
 "We need some cloth as well for producing armor in our armor smithy. We need "
 "it to build some of the training buildings for our soldiers. And most "
@@ -889,7 +889,7 @@ msgid ""
 msgstr ""
 "防具工房で防具を作る時にも布は必要。兵士達の訓練施設を建てる時にも必要。そして今の私たちに一番差し迫った用途として、探検を行う時にも布は必要になるわ。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:542
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:540
 msgid ""
 "Therefore, I really recommend that we check our stock of cloth quite "
 "regularly to ensure that we keep enough cloth in reserve to send out some "
@@ -899,47 +899,47 @@ msgid ""
 msgstr ""
 "だから、最低でも何回か探検隊を送れるだけの布が在庫に確保しておくため、布の在庫状況は小まめにチェックした方が良いと思うわ。一回の探検あたり布が３つ必要だから、2-3回の探検分を残すとして、６もしくは９個の布が残っていれば十分だと思うわ。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:548
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:546
 msgid "Victory is Ours"
 msgstr "勝利は我らの手に"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:547
 msgid "Saledus is cheering…"
 msgstr "セールダスは大喜びです…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:551
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:549
 msgid ""
 "Sire, finally we have defeated the Barbarians in this region. And "
 "furthermore, we have built a nice colony for our empire."
 msgstr "ルティウス様、ついにこの地域の野蛮人を打ち破りました。さらに、我らが帝国としても良い植民地を設立できました。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:553
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:551
 msgid "The king will be very pleased with our victory."
 msgstr "陛下も我らの勝利を喜んでくださることでしょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:559
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:557
 msgid "Pleasing Neptune"
 msgstr "ネプチューンのご機嫌取り"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
 msgid "Saledus is Very Sad and Anxious…"
 msgstr "セールダスはとても悲しく不安そうな表情です…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:560
 msgid ""
 "Sire, we are making good progress towards getting home eventually. But there"
 " is one thing I need to talk about:"
 msgstr "ルティウス様、故郷へ戻るための準備は着々と進んでいます。しかし、考えなければならない問題が一つ残っています。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:564
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:562
 msgid ""
 "As we have seen on our journeys, it is of great importance to put the gods "
 "and especially Neptune in a good mood to safeguard our journey."
 msgstr "これまでの旅で我々がさんざん経験したことですが、神々、特にネプチューンの機嫌のよさは旅路の安全に非常に重要です。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:566
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:564
 msgid ""
 "Unfortunately, we lost our holy shrine of Neptune in the great storm, so we "
 "can’t worship him well. I think we should search the whole region to see if "
@@ -947,28 +947,28 @@ msgid ""
 msgstr ""
 "残念なことに、あの大嵐で我々はネプチューンの祭壇を失ってしまいました。ですので、我々は彼に祈りを届けることができません。私の意見としては、この地域をくまなく探索し、祭壇の６つのピースを全て集めて復元すべきだと思います。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:568
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:566
 msgid ""
 "To ease the search, I have crafted some models of the pieces as you can see."
 " You can give them to our soldiers and sailors to look for them."
 msgstr "発見を容易にするため、このような祭壇の欠片のモデルを私が作りました。兵士や船乗りにこれを見せてあげれば、発見も早まると思います。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:576
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:574
 msgid "Praise, Praise, Praise"
 msgstr "賛美、賛美、賛美"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:577
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:575
 msgid "Saledus is happily worshipping…"
 msgstr "セールダスは幸せそうに祈りを捧げています…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:579
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:577
 msgid ""
 "Sire, we recovered the holy shrine of Neptune. Now we can seek his "
 "protection for our journey."
 msgstr "ルティウス様、ネプチューンの聖なる祭壇を復元しました。それでは、我々の旅路に彼の加護を求めて祈りを捧げます。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:581
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:579
 msgid ""
 "Oh great Neptune, safeguard our journey! Oh great Neptune, let the winds be "
 "friendly to our course! Oh great Neptune, save us from the creatures of the "
@@ -976,16 +976,16 @@ msgid ""
 msgstr ""
 "おお、偉大なネプチューン、我らの旅路にご加護を！おお、偉大なネプチューン、どうか良き風を我らにもたらしたまえ！おお、偉大なネプチューン、海の怪物からどうか我らを守りたまえ！おお、偉大なネプチューン、……"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:587
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:585
 msgid "Unpleasant Discoveries"
 msgstr "嫌な発見"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:586
 msgid "Saledus looks very worried…"
 msgstr "セールダスはとても心配した様子です…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid ""
 "Sire, we found the ruins of a former Barbarian fortress and village. I’m "
 "somewhat worried that we will have to fight against them before we are ready"
@@ -993,38 +993,38 @@ msgid ""
 msgstr ""
 "ルティウス様、かつて野蛮人の要塞や村だったと思われる廃墟を見つけました。我々の準備が整わない内に彼らとの戦闘になってしまうのではないかと私は危惧しています。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:596
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:594
 msgid "Train Faster, Train Harder"
 msgstr "素早く訓練、厳しく訓練"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:595
 msgid "Saledus is demanding some discipline"
 msgstr "セールダスはさらなる統制を求めています"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:599
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid ""
 "Sire, we have all buildings available for training our soldiers, but we "
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr "ルティウス様、兵士の訓練に必要な建物は全て揃っています。しかし、多くの兵士を最高レベルまで鍛え上げるには、多大な努力が必要です。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:601
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:599
 msgid ""
 "We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
 " lots of challenges to cope with."
 msgstr "大量の食料、大量の鉄、大量の金が必要となります。そのためには、さまざまな課題をクリアしなければならないでしょう。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:607
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:605
 msgid "Training Infrastructure is Needed"
 msgstr "訓練施設の必要性"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:606
 msgid "Saledus has security concerns"
 msgstr "セールダスは安全面に憂慮しているようです"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:610
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid ""
 "Sire, we need to train some of our people to serve in your great army. It is"
 " important to increase the number of our soldiers as fast as we can. And we "
@@ -1032,7 +1032,7 @@ msgid ""
 msgstr ""
 "ルティウス様、人々を軍隊に入れるように訓練する必要があります。可能な限り速やかに兵士を増やすことが重要です。さらに、彼ら兵士の能力の向上にも取り組まねばなりません。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:612
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:610
 msgid ""
 "Therefore, we need to build a full training infrastructure despite the "
 "limited space available. We need some barracks, a training camp and an arena"
@@ -1040,12 +1040,12 @@ msgid ""
 msgstr ""
 "そのためには、限られた土地をなんとかやりくりして、訓練施設を揃えなければなりません。兵舎をいくつかと、訓練場を１つ、そしてアリーナかコロシアムを１つ建てる必要があります。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:620
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:618
 msgid "Time to get Home Again"
 msgstr "帰郷の時"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:623
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:621
 msgid ""
 "Yes my fellow soldiers, we have done it! We have met all the challenges that"
 " were put in front of us. But my heart is still with our home. We shall set "
@@ -1053,53 +1053,40 @@ msgid ""
 msgstr ""
 "我が友たる兵士達よ、我々はやり遂げた！我々を苦しめた様々な問題は全て跳ね除けた。しかし、私は未だに故郷のことが気がかりだ。だから我々は帝国を野蛮人の部族から守るため、可能な限り速やかに出航するつもりだ。"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:624
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:622
 msgid "Victory"
 msgstr ""
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:623
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "ミッションを完了しました。このまま続けてもいいですし、次のミッションにチャレンジすることもできます。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:635
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:633
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
 msgstr "ついに、祭壇の破片の一つを発見した。偉大なるネプチューンを讃えよ！"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:638
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
 msgstr "祭壇の破片の一つを発見した。偉大なるネプチューンに祈りを捧げよ！"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:643
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:641
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
 msgstr[0] "まだ %d つの祭壇の破片を見つけなければならない。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:646
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:644
 msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr "ついに祭壇の破片の最後の一つを発見した。これで祭壇を復元し、我らが神を讃えることができる。偉大なるネプチューンに祈りを！"
 
-#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:649
+#: ../../data/campaigns/emp03.wmf/scripting/texts.lua:647
 msgid "Artifact Found"
 msgstr "アーティファクト発見"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr ""

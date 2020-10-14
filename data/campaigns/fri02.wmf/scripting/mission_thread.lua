@@ -1,5 +1,3 @@
-include "scripting/field_animations.lua"
-
 local done_mining = false
 local done_fighting = false
 
@@ -218,7 +216,7 @@ function mining_issues()
    campaign_message_box(train_recycle_2)
    campaign_message_box(train_recycle_3)
    local o = add_campaign_objective(obj_train_recycle)
-   campaign_message_box(train_recycle_4)
+   if not has_gold then campaign_message_box(train_recycle_4) end
    p1:allow_buildings {"frisians_recycling_center", "frisians_training_camp", "frisians_training_arena"}
    local has_miner = false
    while not has_miner do
@@ -315,7 +313,7 @@ function victory()
    while not (done_mining and done_fighting) do sleep(4731) end
    sleep(10000)
    campaign_message_box(victory_1)
-   p1:reveal_scenario("frisians02")
+   p1:mark_scenario_as_solved("fri02.wmf")
    --END OF MISSION 2
 end
 

@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_aqua_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Aqua Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -53,24 +53,13 @@ tribes:new_productionsite_type {
       { name = "fruit", amount = 2 },
    },
 
-   outputs = {
-      "fish"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_aqua_farm = false,
-      frisians_charcoal_burners_house = false,
-      frisians_clay_pit = true,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=breed_fish",
             "call=fish_pond",
-            "return=no_stats",
          },
       },
       breed_fish = {
@@ -82,7 +71,7 @@ tribes:new_productionsite_type {
             "return=failed unless site has fruit",
             "callworker=breed_in_pond",
             "consume=fruit water:2",
-            "sleep=23000",
+            "sleep=duration:23s",
          },
       },
       fish_pond = {
@@ -90,7 +79,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "return=skipped unless economy needs fish",
-            "sleep=9000",
+            "sleep=duration:9s",
             "callworker=fish_in_pond",
          },
       },
@@ -104,3 +93,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 12
    },
 }
+
+pop_textdomain()

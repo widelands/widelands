@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,9 @@
 #ifndef WL_UI_BASIC_PANEL_H
 #define WL_UI_BASIC_PANEL_H
 
+#include <deque>
+#include <vector>
+
 #include <SDL_keyboard.h>
 #include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
@@ -31,7 +34,6 @@
 #include "sound/constants.h"
 
 class RenderTarget;
-class Image;
 
 namespace UI {
 
@@ -264,6 +266,9 @@ public:
 		return (get_can_focus() && parent_->focus_ == this);
 	}
 	virtual void focus(bool topcaller = true);
+	Panel* focused_child() const {
+		return focus_;
+	}
 
 	void set_top_on_click(bool const on) {
 		if (on)
@@ -324,8 +329,11 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
+	virtual Panel* get_open_dropdown();
+
+	virtual bool is_focus_toplevel() const;
+
+	virtual std::vector<Recti> focus_overlay_rects();
 
 private:
 	bool handles_mouse() const {
@@ -347,6 +355,8 @@ private:
 	}
 
 	void check_child_death();
+	virtual void on_death(Panel* p);
+	virtual void on_visibility_changed();
 
 	friend class Window;
 	void do_draw(RenderTarget&);
@@ -362,6 +372,9 @@ private:
 	bool do_key(bool down, SDL_Keysym code);
 	bool do_textinput(const std::string& text);
 	bool do_tooltip();
+
+	bool handle_tab_pressed(bool reverse);
+	std::deque<Panel*> gather_focusable_children();
 
 	static Panel* ui_trackmouse(int32_t& x, int32_t& y);
 	static bool ui_mousepress(const uint8_t button, int32_t x, int32_t y);

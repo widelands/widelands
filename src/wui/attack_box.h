@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,8 +63,10 @@ private:
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
 	                                                 char const* hint);
-	UI::Textarea&
-	add_text(UI::Box& parent, std::string str, UI::Align alignment, const UI::FontStyle style);
+	UI::Textarea& add_text(UI::Box& parent,
+	                       const std::string& str,
+	                       UI::Align alignment,
+	                       const UI::FontStyle style);
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,
 	                                       void (AttackBox::*fn)(),

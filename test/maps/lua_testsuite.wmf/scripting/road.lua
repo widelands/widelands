@@ -18,7 +18,7 @@ function road_tests:setup()
 
    self.start_flag = player1:place_flag(self.f)
 
-   self.r = player1:place_road(self.start_flag, "r", "r", "br", "br")
+   self.r = player1:place_road("busy", self.start_flag, "r", "r", "br", "br")
    self.end_flag = self.f.rn.rn.brn.brn.immovable
 end
 function road_tests:teardown()
@@ -39,7 +39,7 @@ function road_tests:test_field()
    assert_equal(self.f.rn.rn.brn, f[3])
 end
 function road_tests:test_roadtype()
-   assert_equal("normal", self.r.road_type)
+   assert_equal("busy", self.r.road_type)
 end
 function road_tests:test_type()
    assert_equal("road", self.r.descr.type_name)
@@ -73,6 +73,11 @@ function road_tests:test_carrier_creation()
    assert_equal(1, _cnt(self.r:get_workers("all")))
    assert_equal(1, self.r:get_workers("barbarians_carrier"))
 end
+function road_tests:test_carrier2_creation()
+   self.r:set_workers("barbarians_ox",1)
+   assert_equal(1, _cnt(self.r:get_workers("all")))
+   assert_equal(1, self.r:get_workers("barbarians_ox"))
+end
 function road_tests:test_carrier_creation_and_deletion()
    self.r:set_workers("barbarians_carrier",1)
    assert_equal(1, _cnt(self.r:get_workers("all")))
@@ -95,12 +100,19 @@ function road_tests:test_carrier_creation_illegal_name()
    end)
 end
 function road_tests:test_carrier_no_space()
-   self.r:set_workers{barbarians_carrier=1}
-   assert_error("No space!", function ()
+   -- Our default road is busy
+   assert_error("2 identical carriers!", function ()
       self.r:set_workers{barbarians_carrier=2}
+   end)
+   self.r:set_workers{barbarians_carrier=1, barbarians_ox=1}
+
+   -- Now test normal road
+   local normal_road = player1:place_road("normal", self.end_flag, "r", "r")
+   assert_error("No space!", function ()
+      normal_road:set_workers{barbarians_carrier=1, barbarians_ox=1}
    end)
 end
 function road_tests:test_valid_workers()
-   assert_equal(1, _cnt(self.r.valid_workers))
+   assert_equal(2, _cnt(self.r.valid_workers))
    assert_equal(1, self.r.valid_workers.barbarians_carrier)
 end

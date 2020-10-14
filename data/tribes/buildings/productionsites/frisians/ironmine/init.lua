@@ -1,14 +1,28 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_ironmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Iron Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "frisians_ironmine_deep",
+
+   enhancement = {
+      name = "frisians_ironmine_deep",
+      enhancement_cost = {
+         brick = 2,
+         granite = 1,
+         log = 1,
+         reed = 2
+      },
+      enhancement_return_on_dismantle = {
+         brick = 1,
+         log = 1,
+         reed = 1
+      }
+   },
 
    buildcost = {
       brick = 1,
@@ -59,13 +73,8 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_ironmine = false,
-      frisians_ironmine_deep = false,
-   },
-
    aihints = {
-      mines = "iron",
+      mines = "resource_iron",
       mines_percent = 50,
       prohibited_till = 1000
    },
@@ -77,20 +86,17 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "iron_ore"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=ration",
-            "sleep=45000",
-            "animate=working 20000",
-            "mine=iron 3 50 5 20",
+            "sleep=duration:45s",
+            "animate=working duration:20s",
+            "mine=resource_iron radius:3 yield:50% when_empty:5% experience_on_fail:20%",
             "produce=iron_ore"
          }
       },
@@ -103,3 +109,5 @@ tribes:new_productionsite_type {
          pgettext("frisians_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

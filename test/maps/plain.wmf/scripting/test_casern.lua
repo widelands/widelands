@@ -50,7 +50,7 @@ run(function()
    assert_equal(0, rv.barbarians_recruit)
 
    -- Connect road to hq, start training
-   connected_road(p1, fhq, "r,r,r|", true)
+   connected_road("normal", p1, fhq, "r,r,r|", true)
    br:set_inputs{barbarians_recruit=3}
    rv = br:get_inputs("all")
    assert_equal(3, rv.ax)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
@@ -49,7 +50,8 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		cr->resume();
 		init(parent, cr->pop_table());
 	} catch (LuaError& err) {
-		log("Error loading script for tribal encyclopedia:\n%s\n", err.what());
+		log_err_time(parent.egbase().get_gametime(),
+		             "Error loading script for tribal encyclopedia:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
 		   &parent, _("Error!"),
 		   (boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),

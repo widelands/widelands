@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,9 @@
 
 #include "graphic/text/rt_parse.h"
 
+#include <cstdlib>
 #include <memory>
 
-#include <SDL.h>
 #include <boost/algorithm/string/replace.hpp>
 
 #include "graphic/text/rt_errors_impl.h"
@@ -36,8 +36,11 @@ const std::string& Attr::name() const {
 	return name_;
 }
 
-long Attr::get_int() const {
-	long rv = strtol(value_.c_str(), nullptr, 10);
+int64_t Attr::get_int(int64_t max_value) const {
+	int64_t rv = strtol(value_.c_str(), nullptr, 10);
+	if (rv > max_value) {
+		throw NumberOutOfRange(value_);
+	}
 	return rv;
 }
 
@@ -46,14 +49,16 @@ std::string Attr::get_string() const {
 }
 
 bool Attr::get_bool() const {
-	if (value_ == "true" || value_ == "1" || value_ == "yes")
+	if (value_ == "true" || value_ == "1" || value_ == "yes") {
 		return true;
+	}
 	return false;
 }
 
 RGBColor Attr::get_color() const {
-	if (value_.size() != 6)
+	if (value_.size() != 6) {
 		throw InvalidColor((boost::format("Could not parse '%s' as a color.") % value_).str());
+	}
 
 	uint32_t clrn = strtol(value_.c_str(), nullptr, 16);
 	return RGBColor((clrn >> 16) & 0xff, (clrn >> 8) & 0xff, clrn & 0xff);
@@ -130,8 +135,9 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 	TagConstraint tc = tcs[name_];
 
 	for (;;) {
-		if (!tc.text_allowed)
+		if (!tc.text_allowed) {
 			ts.skip_ws();
+		}
 
 		size_t line = ts.line(), col = ts.col();
 		std::string text = ts.till_any("<");
@@ -143,18 +149,21 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 			children_.push_back(new Child(text));
 		}
 
-		if (ts.peek(2 + name_.size()) == ("</" + name_))
+		if (ts.peek(2 + name_.size()) == ("</" + name_)) {
 			break;
+		}
 
 		Tag* child = new Tag();
 		line = ts.line();
 		col = ts.col();
 		size_t cpos = ts.pos();
 		child->parse(ts, tcs, allowed_tags);
-		if (!tc.allowed_children.count(child->name()))
+		if (!tc.allowed_children.count(child->name())) {
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
-		if (!allowed_tags.empty() && !allowed_tags.count(child->name()))
+		}
+		if (!allowed_tags.empty() && !allowed_tags.count(child->name())) {
 			throw SyntaxErrorImpl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
+		}
 
 		children_.push_back(new Child(child));
 	}
@@ -517,8 +526,9 @@ Tag* Parser::parse(std::string text, const TagSet& allowed_tags) {
 	return rv;
 }
 std::string Parser::remaining_text() {
-	if (text_stream_ == nullptr)
+	if (text_stream_ == nullptr) {
 		return "";
+	}
 	return text_stream_->remaining_text();
 }
 }  // namespace RT

@@ -1,9 +1,11 @@
 #include "wui/savegametable.h"
 
 #include <boost/algorithm/string.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 
@@ -34,14 +36,14 @@ const std::string SavegameTable::map_filename(const std::string& filename,
 }
 
 const std::string SavegameTable::find_game_type(const SavegameData& savegame) const {
-	switch (savegame.gametype) {
-	case GameController::GameType::kSingleplayer:
+	if (savegame.is_singleplayer()) {
 		/** TRANSLATORS: "Single Player" entry in the Game Mode table column. */
 		/** TRANSLATORS: "Keep this to 6 letters maximum. */
 		/** TRANSLATORS: A tooltip will explain the abbreviation. */
 		/** TRANSLATORS: Make sure that this translation is consistent with the tooltip. */
 		return _("SP");
-	case GameController::GameType::kNetHost:
+	}
+	if (savegame.is_multiplayer_host()) {
 		/** TRANSLATORS: "Multiplayer Host" entry in the Game Mode table column. */
 		/** TRANSLATORS: "Keep this to 2 letters maximum. */
 		/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -49,7 +51,8 @@ const std::string SavegameTable::find_game_type(const SavegameData& savegame) co
 		        tooltip. */
 		/** TRANSLATORS: %1% is the number of players */
 		return (boost::format(_("H (%1%)")) % savegame.nrplayers).str();
-	case GameController::GameType::kNetClient:
+	}
+	if (savegame.is_multiplayer_client()) {
 		/** TRANSLATORS: "Multiplayer" entry in the Game Mode table column. */
 		/** TRANSLATORS: "Keep this to 2 letters maximum. */
 		/** TRANSLATORS: A tooltip will explain the abbreviation. */
@@ -57,10 +60,9 @@ const std::string SavegameTable::find_game_type(const SavegameData& savegame) co
 		        tooltip. */
 		/** TRANSLATORS: %1% is the number of players */
 		return (boost::format(_("MP (%1%)")) % savegame.nrplayers).str();
-	case GameController::GameType::kReplay:
+	}
+	if (savegame.is_replay()) {
 		return "";
-	case GameController::GameType::kUndefined:
-		NEVER_HERE();
 	}
 	NEVER_HERE();
 }
@@ -100,11 +102,11 @@ void SavegameTable::create_directory_entry(UI::Table<const uintptr_t>::EntryReco
 		te.set_string(col_index, "");
 	}
 	if (savegame.is_parent_directory()) {
-		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
+		te.set_picture(last_column_index, g_image_cache->get("images/ui_basic/ls_dir.png"),
 		               /** TRANSLATORS: Parent directory/folder */
 		               (boost::format("<%s>") % _("parent")).str());
 	} else if (savegame.is_sub_directory()) {
-		te.set_picture(last_column_index, g_gr->images().get("images/ui_basic/ls_dir.png"),
+		te.set_picture(last_column_index, g_image_cache->get("images/ui_basic/ls_dir.png"),
 		               FileSystem::filename_without_ext(savegame.filename.c_str()));
 	}
 }
@@ -137,7 +139,7 @@ void SavegameTableSinglePlayer::create_valid_entry(UI::Table<uintptr_t const>::E
 		create_directory_entry(te, savegame);
 	} else {
 		te.set_string(0, savegame.savedatestring);
-		te.set_picture(1, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		te.set_picture(1, g_image_cache->get("images/ui_basic/ls_wlmap.png"),
 		               map_filename(savegame.filename, savegame.mapname));
 	}
 }
@@ -154,7 +156,7 @@ void SavegameTableReplay::add_columns() {
 	std::string game_mode_tooltip = "";
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
-	g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
+	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
@@ -167,8 +169,7 @@ void SavegameTableReplay::add_columns() {
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
 
-	game_mode_tooltip += g_gr->styles()
-	                        .font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,
@@ -194,7 +195,7 @@ void SavegameTableReplay::create_valid_entry(UI::Table<uintptr_t const>::EntryRe
 		te.set_string(1, find_game_type(savegame));
 		const std::string map_basename =
 		   show_filenames_ ? map_filename(savegame.filename, savegame.mapname) : savegame.mapname;
-		te.set_picture(2, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		te.set_picture(2, g_image_cache->get("images/ui_basic/ls_wlmap.png"),
 		               (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) % map_basename %
 		                savegame.gametime)
 		                  .str());
@@ -219,7 +220,7 @@ void SavegameTableMultiplayer::add_columns() {
 	std::string game_mode_tooltip = "";
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
-	g_gr->styles().font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
+	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
@@ -228,8 +229,7 @@ void SavegameTableMultiplayer::add_columns() {
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
 	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
 
-	game_mode_tooltip += g_gr->styles()
-	                        .font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,
@@ -252,7 +252,7 @@ void SavegameTableMultiplayer::create_valid_entry(UI::Table<uintptr_t const>::En
 	} else {
 		te.set_string(0, savegame.savedatestring);
 		te.set_string(1, find_game_type(savegame));
-		te.set_picture(2, g_gr->images().get("images/ui_basic/ls_wlmap.png"),
+		te.set_picture(2, g_image_cache->get("images/ui_basic/ls_wlmap.png"),
 		               map_filename(savegame.filename, savegame.mapname));
 	}
 }

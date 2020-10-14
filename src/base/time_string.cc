@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -182,8 +182,9 @@ std::string gametimestring(uint32_t gametime, bool show_seconds) {
 
 	// remove leading 0s
 	int i = 0;
-	while (result.at(i) == '0')
+	while (result.at(i) == '0') {
 		++i;
+	}
 	if (result.at(i) == ':') {
 		if (show_seconds) {
 			++i;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,74 +46,66 @@ void GameSaver::save() {
 
 	// We might not have a loader UI during emergency saves, so we don't assert that we have one.
 	// We also don't want it for game objectives.
-	auto set_progress_message = [this](std::string text, int step) {
-		game_.step_loader_ui(
+	auto set_progress_message = [](std::string text, int step) {
+		Notifications::publish(UI::NoteLoadingMessage(
 		   step < 0 ? text :
-		              (boost::format(_("Saving game: %1$s (%2$d/%3$d)")) % text % step % 5).str());
+		              (boost::format(_("Saving game: %1$s (%2$d/%3$d)")) % text % step % 5).str()));
 	};
 	set_progress_message(_("Autosaving game…"), -1);
 
 	fs_.ensure_directory_exists("binary");
 
-	log("Game: Writing Preload Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Preload Data ... ");
 	set_progress_message(_("Elemental data"), 1);
 	{
 		GamePreloadPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Writing Game Class Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Game Class Data ... ");
 	{
 		GameClassPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Writing Player Info ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Player Info ... ");
 	{
 		GamePlayerInfoPacket p;
 		p.write(fs_, game_, nullptr);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Writing Map Data!\n");
+	log_info_time(game_.get_gametime(), "Game: Writing Map Data!\n");
 	GameMapPacket map_packet;
 	map_packet.write(fs_, game_, nullptr);
-	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
 	MapObjectSaver* const mos = map_packet.get_map_object_saver();
 
-	log("Game: Writing Player Economies Info ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Player Economies Info ... ");
 	set_progress_message(_("Economies"), 2);
 	{
 		GamePlayerEconomiesPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Writing ai persistent data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing ai persistent data ... ");
 	set_progress_message(_("AI"), 3);
 	{
 		GamePlayerAiPersistentPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Writing Command Queue Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Command Queue Data ... ");
 	set_progress_message(_("Command queue"), 4);
 	{
 		GameCmdQueuePacket p;
 		p.write(fs_, game_, mos);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Writing Interactive Player Data ... ");
+	log_info_time(game_.get_gametime(), "Game: Writing Interactive Player Data ... ");
 	set_progress_message(_("Interactive player"), 5);
 	{
 		GameInteractivePlayerPacket p;
 		p.write(fs_, game_, mos);
 	}
-	log("took %ums\n", timer.ms_since_last_query());
 }
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ public:
 	Attr(const std::string& gname, const std::string& value);
 
 	const std::string& name() const;
-	long get_int() const;
+	int64_t get_int(int64_t max_value) const;
 	bool get_bool() const;
 	std::string get_string() const;
 	RGBColor get_color() const;

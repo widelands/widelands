@@ -1,4 +1,4 @@
-set_textdomain("tribes")
+push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
@@ -10,17 +10,14 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_tiny",
    descname = _ "Blueberry Bush (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
-   attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 18000",
+      main = {
+         "animate=idle duration:18s",
          "grow=berry_bush_blueberry_small",
       },
    },
@@ -37,17 +34,14 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_small",
    descname = _ "Blueberry Bush (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 36000",
+      main = {
+         "animate=idle duration:36s",
          "grow=berry_bush_blueberry_medium",
       },
    },
@@ -64,17 +58,14 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_medium",
    descname = _ "Blueberry Bush (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
-   attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 24000",
+      main = {
+         "animate=idle duration:24s",
          "grow=berry_bush_blueberry_ripe",
       },
    },
@@ -91,17 +82,14 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_blueberry_ripe",
    descname = _ "Blueberry Bush (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
-   attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 600000",
+      main = {
+         "animate=idle duration:10m",
          "remove=",
       },
       harvest = {
@@ -119,3 +107,4 @@ tribes:new_immovable_type {
       }
    }
 }
+pop_textdomain()

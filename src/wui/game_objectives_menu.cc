@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,6 @@
 #include "logic/objective.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
-
-using namespace Widelands;
 
 #define BUTTON_HEIGHT 20
 #define OBJECTIVE_LIST 120
@@ -50,36 +48,40 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                    "",
                    UI::Align::kLeft,
                    UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
-	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
-	if (get_usedefaultpos())
+	list.selected.connect([this](uint32_t a) { selected(a); });
+	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
 }
 
 void GameObjectivesMenu::think() {
 	//  Adjust the list according to the game state.
 	for (const auto& pair : iplayer().game().map().objectives()) {
-		const Objective& obj = *(pair.second);
+		const Widelands::Objective& obj = *(pair.second);
 		bool should_show = obj.visible() && !obj.done();
 		uint32_t const list_size = list.size();
-		for (uint32_t j = 0;; ++j)
+		for (uint32_t j = 0;; ++j) {
 			if (j == list_size) {  //  the objective is not in our list
-				if (should_show)
+				if (should_show) {
 					list.add(obj.descname(), obj);
+				}
 				break;
 			} else if (&list[j] == &obj) {  //  the objective is in our list
-				if (!should_show)
+				if (!should_show) {
 					list.remove(j);
-				else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {
+				} else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {
 					// Update
 					list.remove(j);
 					list.add(obj.descname(), obj);
 				}
 				break;
 			}
+		}
 	}
 	list.sort();
-	if (list.size() && !list.has_selection())
+	if (list.size() && !list.has_selection()) {
 		list.select(0);
+	}
 }
 
 /**

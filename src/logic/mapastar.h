@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/pathfield.h"

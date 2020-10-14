@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_WIDELANDS_GEOMETRY_H
 #define WL_LOGIC_WIDELANDS_GEOMETRY_H
 
+#include <cstdint>
 #include <tuple>
 
 namespace Widelands {
@@ -55,7 +56,8 @@ struct Coords {
 		return std::forward_as_tuple(y, x) < std::forward_as_tuple(other.y, other.x);
 	}
 
-	operator bool() const;
+	// should be explicit to avoid accidental conversions to numbers
+	explicit operator bool() const;
 
 	// Move the coords to the 'new_origin'.
 	void reorigin(Coords new_origin, const Extent& extent);
@@ -109,7 +111,10 @@ struct FCoords : public Coords {
 	Field* field;
 };
 
-enum class TriangleIndex { D, R };
+enum class TriangleIndex {
+	D,  // Downward
+	R   // Right
+};
 
 // This uniquely indexes a single Triangle on the map. A Triangle is identified
 // by its owning node and the triangle index (down or right).

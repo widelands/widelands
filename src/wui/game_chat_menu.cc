@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,8 @@ GameChatMenu::GameChatMenu(UI::Panel* parent,
 	}
 	set_can_focus(true);
 
-	chat_.sent.connect(boost::bind(&GameChatMenu::acknowledge, this));
-	chat_.aborted.connect(boost::bind(&GameChatMenu::acknowledge, this));
+	chat_.sent.connect([this]() { acknowledge(); });
+	chat_.aborted.connect([this]() { acknowledge(); });
 
 	enter_chat_message(close_on_send_);
 }

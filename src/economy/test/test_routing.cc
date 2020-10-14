@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,28 +32,27 @@
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
-using namespace Widelands;
-
 /******************/
 /* Helper classes */
 /******************/
 /// Helper classes {{{
 class BadAccess : public std::exception {};
-class TestingRoutingNode : public RoutingNode {
+class TestingRoutingNode : public Widelands::RoutingNode {
 public:
-	explicit TestingRoutingNode(int32_t wcost = 0, Coords pos = Coords(0, 0))
+	explicit TestingRoutingNode(int32_t wcost = 0, Widelands::Coords pos = Widelands::Coords(0, 0))
 	   : waitcost_(wcost), position_(pos) {
 	}
 	void add_neighbour(TestingRoutingNode* nb) {
 		neighbours_.push_back(nb);
 	}
 	TestingRoutingNode* get_neighbour(uint8_t idx) const {
-		if (idx >= neighbours_.size())
+		if (idx >= neighbours_.size()) {
 			throw BadAccess();
+		}
 		return neighbours_[idx];
 	}
 
-	Flag& base_flag() override {
+	Widelands::Flag& base_flag() override {
 		return flag_;
 	}
 	void set_waitcost(int32_t const wc) {
@@ -62,11 +61,11 @@ public:
 	int32_t get_waitcost() const {
 		return waitcost_;
 	}
-	const Coords& get_position() const override {
+	const Widelands::Coords& get_position() const override {
 		return position_;
 	}
 
-	void get_neighbours(WareWorker type, RoutingNodeNeighbours&) override;
+	void get_neighbours(Widelands::WareWorker type, Widelands::RoutingNodeNeighbours&) override;
 
 	// test functionality
 	bool all_members_zeroed();
@@ -76,14 +75,16 @@ private:
 
 	Neigbours neighbours_;
 	int32_t waitcost_;
-	Coords position_;
-	Flag flag_;
+	Widelands::Coords position_;
+	Widelands::Flag flag_;
 };
-void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours& n) {
+void TestingRoutingNode::get_neighbours(Widelands::WareWorker type,
+                                        Widelands::RoutingNodeNeighbours& n) {
 	for (TestingRoutingNode* nb : neighbours_) {
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n.push_back(RoutingNodeNeighbour(nb, 1000 * ((type == wwWARE) ? 1 + waitcost_ : 1)));
+		n.push_back(Widelands::RoutingNodeNeighbour(
+		   nb, 1000 * ((type == Widelands::wwWARE) ? 1 + waitcost_ : 1)));
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() {
@@ -94,8 +95,9 @@ bool TestingRoutingNode::all_members_zeroed() {
 	return pointers_zero && integers_zero;
 }
 
-class TestingTransportCostCalculator : public ITransportCostCalculator {
-	int32_t calc_cost_estimate(const Coords& c1, const Coords& c2) const override {
+class TestingTransportCostCalculator : public Widelands::ITransportCostCalculator {
+	int32_t calc_cost_estimate(const Widelands::Coords& c1,
+	                           const Widelands::Coords& c2) const override {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
 		double xd = (c1.x - c2.x);
@@ -103,14 +105,14 @@ class TestingTransportCostCalculator : public ITransportCostCalculator {
 		return static_cast<int32_t>((xd * xd + yd * yd) * 1000);
 	}
 };
-class TestingRoute : public IRoute {
+class TestingRoute : public Widelands::IRoute {
 public:
-	using Nodes = std::vector<RoutingNode*>;
+	using Nodes = std::vector<Widelands::RoutingNode*>;
 
 	void init(int32_t) override {
 		nodes.clear();
 	}
-	void insert_as_first(RoutingNode* node) override {
+	void insert_as_first(Widelands::RoutingNode* node) override {
 		nodes.insert(nodes.begin(), node);
 	}
 
@@ -118,8 +120,8 @@ public:
 		return nodes.size();
 	}
 
-	bool has_node(RoutingNode* const n) {
-		for (RoutingNode* temp_node : nodes) {
+	bool has_node(Widelands::RoutingNode* const n) {
+		for (Widelands::RoutingNode* temp_node : nodes) {
 			if (temp_node == n) {
 				return true;
 			}
@@ -137,8 +139,9 @@ public:
 					chain_begin_found = true;
 					++j;
 				}
-				if (j == n.end())
+				if (j == n.end()) {
 					return true;
+				}
 			} else {
 				if (*i != *j) {
 					j = n.begin();
@@ -179,7 +182,7 @@ BOOST_AUTO_TEST_SUITE(Routing)
  */
 BOOST_AUTO_TEST_CASE(testingnode_creation) {
 	TestingRoutingNode d0;
-	TestingRoutingNode d1(0, Coords(15, 0));
+	TestingRoutingNode d1(0, Widelands::Coords(15, 0));
 
 	BOOST_CHECK_EQUAL(d0.get_position().y, d1.get_position().y);
 	BOOST_CHECK_EQUAL(d0.get_position().x, 0);
@@ -188,7 +191,7 @@ BOOST_AUTO_TEST_CASE(testingnode_creation) {
 struct TestingNodeDefaultNodesFixture {
 	TestingNodeDefaultNodesFixture() {
 		d0 = new TestingRoutingNode();
-		d1 = new TestingRoutingNode(1, Coords(15, 0));
+		d1 = new TestingRoutingNode(1, Widelands::Coords(15, 0));
 		nodes.push_back(d0);
 		nodes.push_back(d1);
 	}
@@ -222,15 +225,15 @@ BOOST_FIXTURE_TEST_CASE(testingnode_illegalneighbour_access, TestingNodeDefaultN
  * Now test the routing nodes functionality
  */
 BOOST_AUTO_TEST_CASE(RoutingNode_InitializeMemberVariables) {
-	TestingRoutingNode d0(0, Coords(15, 0));
+	TestingRoutingNode d0(0, Widelands::Coords(15, 0));
 
 	BOOST_CHECK(d0.all_members_zeroed());
 }
 
 struct SimpleRouterFixture {
-	SimpleRouterFixture() : r(boost::bind(&SimpleRouterFixture::reset, this)) {
+	SimpleRouterFixture() : r([this]() { reset(); }) {
 		d0 = new TestingRoutingNode();
-		d1 = new TestingRoutingNode(1, Coords(15, 0));
+		d1 = new TestingRoutingNode(1, Widelands::Coords(15, 0));
 		vec.push_back(d0);
 		vec.push_back(d1);
 	}
@@ -244,18 +247,18 @@ struct SimpleRouterFixture {
 	 */
 	void reset() {
 		if (d0) {
-			d0->reset_path_finding_cycle(wwWARE);
-			d0->reset_path_finding_cycle(wwWORKER);
+			d0->reset_path_finding_cycle(Widelands::wwWARE);
+			d0->reset_path_finding_cycle(Widelands::wwWORKER);
 		}
 		if (d1) {
-			d1->reset_path_finding_cycle(wwWARE);
-			d1->reset_path_finding_cycle(wwWORKER);
+			d1->reset_path_finding_cycle(Widelands::wwWARE);
+			d1->reset_path_finding_cycle(Widelands::wwWORKER);
 		}
 	}
 	TestingRoutingNode* d0;
 	TestingRoutingNode* d1;
-	std::vector<RoutingNode*> vec;
-	Router r;
+	std::vector<Widelands::RoutingNode*> vec;
+	Widelands::Router r;
 	TestingRoute route;
 	TestingTransportCostCalculator cc;
 };
@@ -283,7 +286,7 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_hasnode, SimpleRouterFixture) {
 	BOOST_CHECK_EQUAL(route.has_node(d1), true);
 }
 BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain, SimpleRouterFixture) {
-	std::vector<RoutingNode*> chain;
+	std::vector<Widelands::RoutingNode*> chain;
 
 	chain.push_back(d0);
 	route.insert_as_first(d0);
@@ -294,7 +297,7 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain, SimpleRouterFixture) {
 	BOOST_CHECK_EQUAL(route.has_chain(chain), true);
 }
 BOOST_FIXTURE_TEST_CASE(TestingRoute_chainisunidirectional, SimpleRouterFixture) {
-	std::vector<RoutingNode*> chain;
+	std::vector<Widelands::RoutingNode*> chain;
 	// Chains are unidirectional. Check that chain.clear();
 	chain.push_back(d0);
 	chain.push_back(d1);
@@ -305,7 +308,7 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_chainisunidirectional, SimpleRouterFixture)
 BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain, SimpleRouterFixture) {
 	// Do not get confused when a partial chain is found
 	TestingRoutingNode d;
-	std::vector<RoutingNode*> chain;
+	std::vector<Widelands::RoutingNode*> chain;
 
 	chain.push_back(&d);
 	chain.push_back(d0);
@@ -325,7 +328,7 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain, SimpleRouterFixture
 BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain_endisnotstart, SimpleRouterFixture) {
 	// Do not get confused when a partial chain is found
 	TestingRoutingNode d;
-	std::vector<RoutingNode*> chain;
+	std::vector<Widelands::RoutingNode*> chain;
 
 	chain.push_back(&d);
 	chain.push_back(d0);
@@ -365,7 +368,7 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_init, SimpleRouterFixture) {
 /* SIMPLE TESTS */
 /****************/
 BOOST_FIXTURE_TEST_CASE(router_findroute_seperatedNodes_exceptFail, SimpleRouterFixture) {
-	bool rval = r.find_route(*d0, *d1, &route, wwWORKER, -1, cc);
+	bool rval = r.find_route(*d0, *d1, &route, Widelands::wwWORKER, -1, cc);
 
 	BOOST_CHECK_EQUAL(rval, false);
 }
@@ -373,21 +376,21 @@ BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRou
 	d0->add_neighbour(d1);
 	d1->add_neighbour(d0);
 
-	bool rval = r.find_route(*d0, *d1, &route, wwWORKER, -1, cc);
+	bool rval = r.find_route(*d0, *d1, &route, Widelands::wwWORKER, -1, cc);
 
 	BOOST_CHECK_EQUAL(rval, true);
 }
 
 struct ComplexRouterFixture {
-	using Nodes = std::vector<RoutingNode*>;
+	using Nodes = std::vector<Widelands::RoutingNode*>;
 
-	ComplexRouterFixture() : r(boost::bind(&ComplexRouterFixture::reset, this)) {
+	ComplexRouterFixture() : r([this]() { reset(); }) {
 		d0 = new TestingRoutingNode();
 		nodes.push_back(d0);
 	}
 	~ComplexRouterFixture() {
 		while (!nodes.empty()) {
-			RoutingNode* n = nodes.back();
+			Widelands::RoutingNode* n = nodes.back();
 			delete n;
 			nodes.pop_back();
 		}
@@ -397,7 +400,7 @@ struct ComplexRouterFixture {
 	 * Convenience function
 	 */
 	TestingRoutingNode* new_node_w_neighbour(TestingRoutingNode* const d,
-	                                         const Coords& pos = Coords(0, 0),
+	                                         const Widelands::Coords& pos = Widelands::Coords(0, 0),
 	                                         int32_t = 1,
 	                                         int32_t const waitcost = 0) {
 		TestingRoutingNode* dnew = new TestingRoutingNode(waitcost, pos);
@@ -479,14 +482,14 @@ struct ComplexRouterFixture {
 	 * cycle wraps around.
 	 */
 	void reset() {
-		for (RoutingNode* node : nodes) {
-			node->reset_path_finding_cycle(wwWARE);
-			node->reset_path_finding_cycle(wwWORKER);
+		for (Widelands::RoutingNode* node : nodes) {
+			node->reset_path_finding_cycle(Widelands::wwWARE);
+			node->reset_path_finding_cycle(Widelands::wwWORKER);
 		}
 	}
 	TestingRoutingNode* d0;
 	Nodes nodes;
-	Router r;
+	Widelands::Router r;
 	TestingRoute route;
 	TestingTransportCostCalculator cc;
 };
@@ -504,20 +507,20 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 
 	new_node_w_neighbour(d0);
 
-	bool rval = r.find_route(*d0, *d5, &route, wwWORKER, -1, cc);
+	bool rval = r.find_route(*d0, *d5, &route, Widelands::wwWORKER, -1, cc);
 
 	BOOST_CHECK_EQUAL(rval, true);
 
-	add_dead_end(static_cast<TestingRoutingNode*>(chain[0]));
-	add_dead_end(static_cast<TestingRoutingNode*>(chain[3]));
-	add_dead_end(static_cast<TestingRoutingNode*>(chain[5]));
+	add_dead_end(dynamic_cast<TestingRoutingNode*>(chain[0]));
+	add_dead_end(dynamic_cast<TestingRoutingNode*>(chain[3]));
+	add_dead_end(dynamic_cast<TestingRoutingNode*>(chain[5]));
 
 	BOOST_CHECK(route.has_chain(chain));
 
 	// directly connect d0 -> d5
 	d0->add_neighbour(d5);
 
-	rval = r.find_route(*d0, *d5, &route, wwWORKER, -1, cc);
+	rval = r.find_route(*d0, *d5, &route, Widelands::wwWORKER, -1, cc);
 
 	BOOST_CHECK_EQUAL(rval, true);
 
@@ -536,14 +539,14 @@ struct DistanceRoutingFixture : public ComplexRouterFixture {
 		// node is connected through a long and a short path
 		// start d1 end
 		start = d0;
-		d1 = new_node_w_neighbour(start, Coords(1, 0));
-		end = new_node_w_neighbour(d1, Coords(2, 0));
+		d1 = new_node_w_neighbour(start, Widelands::Coords(1, 0));
+		end = new_node_w_neighbour(d1, Widelands::Coords(2, 0));
 
 		// start d2 d3 d4 d5 end
 		d2 = new_node_w_neighbour(start);
-		d3 = new_node_w_neighbour(d2, Coords(0, 1));
-		d4 = new_node_w_neighbour(d3, Coords(1, 2));
-		d5 = new_node_w_neighbour(d4, Coords(1, 1));
+		d3 = new_node_w_neighbour(d2, Widelands::Coords(0, 1));
+		d4 = new_node_w_neighbour(d3, Widelands::Coords(1, 2));
+		d5 = new_node_w_neighbour(d4, Widelands::Coords(1, 1));
 		end->add_neighbour(d5);
 		d5->add_neighbour(end);
 	}
@@ -558,7 +561,7 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	chain.push_back(d1);
 	chain.push_back(end);
 
-	bool rval = r.find_route(*start, *end, &route, wwWORKER, -1, cc);
+	bool rval = r.find_route(*start, *end, &route, Widelands::wwWORKER, -1, cc);
 
 	BOOST_CHECK(rval);
 	BOOST_CHECK(route.has_chain(chain));
@@ -567,12 +570,12 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	d1->set_waitcost(8);
 
 	// Same result without wait
-	rval = r.find_route(*start, *end, &route, wwWORKER, -1, cc);
+	rval = r.find_route(*start, *end, &route, Widelands::wwWORKER, -1, cc);
 	BOOST_CHECK(rval);
 	BOOST_CHECK(route.has_chain(chain));
 
 	// For wares, we now take the long route
-	rval = r.find_route(*start, *end, &route, wwWARE, -1, cc);
+	rval = r.find_route(*start, *end, &route, Widelands::wwWARE, -1, cc);
 
 	chain.clear();
 	chain.push_back(start);
@@ -589,9 +592,9 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 BOOST_FIXTURE_TEST_CASE(cutoff, DistanceRoutingFixture) {
 	Nodes chain;
 
-	RoutingNode* end_node = add_chain(4, d0, &chain);
+	Widelands::RoutingNode* end_node = add_chain(4, d0, &chain);
 
-	bool rval = r.find_route(*d0, *end_node, &route, wwWORKER, 1000, cc);
+	bool rval = r.find_route(*d0, *end_node, &route, Widelands::wwWORKER, 1000, cc);
 
 	BOOST_CHECK_EQUAL(rval, false);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,10 @@
 #endif
 #include <iostream>
 #include <memory>
+#include <vector>
 
-#include <SDL.h>
+#include <SDL_log.h>
+#include <SDL_timer.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -148,13 +150,65 @@ void set_logging_dir() {
 std::unique_ptr<Logger> logger(new Logger());
 #endif
 
-void log(const char* const fmt, ...) {
+static const char* to_string(const LogType& type) {
+	switch (type) {
+	case LogType::kInfo:
+		return "INFO";
+	case LogType::kDebug:
+		return "DEBUG";
+	case LogType::kWarning:
+		return "WARNING";
+	case LogType::kError:
+		return "ERROR";
+	default:
+		NEVER_HERE();
+	}
+}
+
+std::vector<std::string> split(const std::string& s) {
+	std::vector<std::string> result;
+	for (std::string::size_type pos = 0, endpos;
+	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
+		endpos = s.find('\n', pos);
+		result.push_back(s.substr(pos, endpos - pos));
+	}
+	return result;
+}
+
+void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
+	// message type and timestamp
+	char buffer_prefix[32];
+	{
+		const bool is_real_time = gametime == kNoTimestamp;
+		if (gametime == kNoTimestamp) {
+			gametime = SDL_GetTicks();
+		}
+		const uint32_t hours = gametime / (1000 * 60 * 60);
+		gametime -= hours * 1000 * 60 * 60;
+		const uint32_t minutes = gametime / (1000 * 60);
+		gametime -= minutes * 1000 * 60;
+		const uint32_t seconds = gametime / 1000;
+		gametime -= seconds * 1000;
+		snprintf(buffer_prefix, sizeof(buffer_prefix), "[%02u:%02u:%02u.%03u %s] %s: ", hours,
+		         minutes, seconds, gametime, is_real_time ? "real" : "game", to_string(type));
+	}
+
+	// actual log output
 	char buffer[2048];
 	va_list va;
 	va_start(va, fmt);
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
-	logger->log_cstring(buffer);
+
+	// split by '\n'
+	for (std::string str : split(buffer)) {
+		if (str.find_first_not_of(' ') == std::string::npos) {
+			continue;
+		}
+		logger->log_cstring(buffer_prefix);
+		str.push_back('\n');
+		logger->log_cstring(str.c_str());
+	}
 }

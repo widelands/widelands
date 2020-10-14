@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define WL_UI_FSMENU_SCENARIO_SELECT_H
 
 #include "ui_basic/box.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
@@ -36,6 +37,7 @@ public:
 	explicit FullscreenMenuScenarioSelect(CampaignData* camp = nullptr);
 
 	std::string get_map();
+	uint32_t get_difficulty() const;
 
 protected:
 	void clicked_ok() override;
@@ -56,6 +58,8 @@ private:
 	UI::Textarea title_;
 	UI::MultilineTextarea subtitle_;
 	ScenarioDetails scenario_details_;
+	UI::Textarea scenario_difficulty_header_;
+	UI::Dropdown<uint32_t> scenario_difficulty_;
 
 	CampaignData* campaign_;
 

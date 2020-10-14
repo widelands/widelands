@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,13 @@
 
 #include <memory>
 
-#include "game_io/game_preload_packet.h"
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/table.h"
 #include "wui/gamedetails.h"
+#include "wui/savegamedeleter.h"
+#include "wui/savegameloader.h"
 #include "wui/savegametable.h"
 
 /// Common functions for loading or saving a game or replay.
@@ -82,14 +83,8 @@ protected:
 	void change_directory_to(std::string& directory);
 
 private:
-	/// Returns the filename for the table entry at 'index'
-	const std::string get_filename(uint32_t index) const;
 	/// Returns the savegame for the table entry at 'index'
 	const SavegameData& get_savegame(uint32_t index) const;
-	/// Formats the current table selection as a list of filenames with savedate information.
-	const std::string filename_list_string() const;
-	/// Formats a given table selection as a list of filenames with savedate information.
-	const std::string filename_list_string(const std::set<uint32_t>& selections) const;
 
 	/// Reverse default sort order for save date column
 	bool compare_save_time(uint32_t, uint32_t) const;
@@ -98,6 +93,9 @@ private:
 	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
+
+	std::unique_ptr<SavegameDeleter> savegame_deleter_;
+	std::unique_ptr<SavegameLoader> savegame_loader_;
 
 	SavegameTable* table_;
 	std::vector<SavegameData> games_data_;
@@ -108,14 +106,11 @@ private:
 	std::string curdir_;
 
 	Widelands::Game& game_;
-	void load_gamefile(const std::string& gamefilename);
-	bool is_valid_gametype(const SavegameData& gamedata) const;
-	void add_time_info(SavegameData& gamedata, const Widelands::GamePreloadPacket& gpdp) const;
-	void add_general_information(SavegameData& gamedata,
-	                             const Widelands::GamePreloadPacket& gpdp) const;
-	void add_error_info(SavegameData& gamedata, std::string errormessage) const;
-	void add_sub_dir(const std::string& gamefilename);
+
 	bool selection_contains_directory() const;
+	const std::vector<SavegameData> get_selected_savegames() const;
+	void set_tooltips_of_buttons(size_t nr_of_selected_items) const;
+	void select_item_and_scroll_to_it(std::set<uint32_t>& selections);
 };
 
 #endif  // end of include guard: WL_WUI_LOAD_OR_SAVE_GAME_H

@@ -97,24 +97,12 @@ std::unique_ptr<BufferedConnection> BufferedConnection::connect(const NetAddress
 	return ptr;
 }
 
-#if BOOST_VERSION >= 106600
-std::unique_ptr<BufferedConnection>
-BufferedConnection::accept(boost::asio::ip::tcp::acceptor& acceptor) {
-	assert(acceptor.is_open());
-	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection(acceptor));
-	if (!ptr->is_connected()) {
-		ptr.reset();
-	}
-	return ptr;
-}
-#else
 std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>
 BufferedConnection::create_unconnected() {
 	std::unique_ptr<BufferedConnection> ptr(new BufferedConnection());
 	assert(!ptr->is_connected());
 	return std::make_pair(std::move(ptr), &(ptr->socket_));
 }
-#endif
 
 BufferedConnection::~BufferedConnection() {
 	close();
@@ -129,10 +117,10 @@ void BufferedConnection::close() {
 	boost::system::error_code ec;
 	boost::asio::ip::tcp::endpoint remote = socket_.remote_endpoint(ec);
 	if (!ec) {
-		log("[BufferedConnection] Closing network socket connected to %s:%i.\n",
-		    remote.address().to_string().c_str(), remote.port());
+		log_info("[BufferedConnection] Closing network socket connected to %s:%i.\n",
+		         remote.address().to_string().c_str(), remote.port());
 	} else {
-		log("[BufferedConnection] Closing network socket.\n");
+		log_info("[BufferedConnection] Closing network socket.\n");
 	}
 	// Stop the thread
 	io_service_.stop();
@@ -260,14 +248,14 @@ void BufferedConnection::start_sending() {
 			   start_sending();
 		   } else {
 			   if (socket_.is_open()) {
-				   log("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
-				       ec.value(), ec.message().c_str());
-				   log("[BufferedConnection] Closing socket\n");
+				   log_err("[BufferedConnection] Error when sending packet to host (error %i: %s)\n",
+				           ec.value(), ec.message().c_str());
+				   log_err("[BufferedConnection] Closing socket\n");
 				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
 		   }
-		});
+	   });
 }
 
 // This method is run within a thread
@@ -293,14 +281,14 @@ void BufferedConnection::start_receiving() {
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
-				   log("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
-				       ec.value(), ec.message().c_str());
-				   log("[BufferedConnection] Closing socket\n");
+				   log_err("[BufferedConnection] Error when receiving data from host (error %i: %s)\n",
+				           ec.value(), ec.message().c_str());
+				   log_err("[BufferedConnection] Closing socket\n");
 				   socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 				   socket_.close();
 			   }
 		   }
-		});
+	   });
 }
 
 void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket) {
@@ -316,7 +304,7 @@ void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket
 		// Ignore error. When it fails, chat messages will lag while transmitting files,
 		// but nothing really bad happens
 		if (ec) {
-			log("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
+			log_warn("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
 		}
 	}
 }
@@ -326,12 +314,12 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log("[BufferedConnection] Trying to connect to %s:%u ... ", host.ip.to_string().c_str(),
-	    host.port);
+	log_info("[BufferedConnection] Trying to connect to %s:%u ... ", host.ip.to_string().c_str(),
+	         host.port);
 	boost::system::error_code ec;
 	socket_.connect(destination, ec);
 	if (!ec && is_connected()) {
-		log("success.\n");
+		log_info("success.\n");
 
 		reduce_send_buffer(socket_);
 
@@ -340,47 +328,17 @@ BufferedConnection::BufferedConnection(const NetAddress& host)
 		start_receiving();
 		asio_thread_ = std::thread([this]() {
 			// The output might actually be messed up if it collides with the main thread...
-			log("[BufferedConnection] Starting networking thread\n");
+			log_info("[BufferedConnection] Starting networking thread\n");
 			io_service_.run();
-			log("[BufferedConnection] Stopping networking thread\n");
+			log_info("[BufferedConnection] Stopping networking thread\n");
 		});
 	} else {
-		log("failed.\n");
+		log_err("failed.\n");
 		socket_.close();
 		assert(!is_connected());
 	}
 }
 
-#if BOOST_VERSION >= 106600
-BufferedConnection::BufferedConnection(boost::asio::ip::tcp::acceptor& acceptor)
-   : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
-
-	boost::system::error_code ec;
-	acceptor.accept(socket_, ec);
-	assert(ec != boost::asio::error::would_block);
-	if (ec) {
-		// Some error
-		log("[BufferedConnection] Error when trying to accept connection: %s.\n",
-		    ec.message().c_str());
-		assert(!is_connected());
-		return;
-	}
-	assert(is_connected());
-
-	log("[BufferedConnection] Accepting connection from %s.\n",
-	    socket_.remote_endpoint().address().to_string().c_str());
-
-	reduce_send_buffer(socket_);
-
-	start_receiving();
-	asio_thread_ = std::thread([this]() {
-		// The output might actually be messed up if it collides with the main thread...
-		log("[BufferedConnection] Starting networking thread\n");
-		io_service_.run();
-		log("[BufferedConnection] Stopping networking thread\n");
-	});
-}
-#else
 BufferedConnection::BufferedConnection()
    : io_service_(), socket_(io_service_), receive_buffer_(), currently_sending_(false) {
 }
@@ -388,20 +346,19 @@ BufferedConnection::BufferedConnection()
 void BufferedConnection::notify_connected() {
 	assert(is_connected());
 
-	log("[BufferedConnection] Connection to %s.\n",
-	    socket_.remote_endpoint().address().to_string().c_str());
+	log_info("[BufferedConnection] Connection to %s.\n",
+	         socket_.remote_endpoint().address().to_string().c_str());
 
 	reduce_send_buffer(socket_);
 
 	start_receiving();
 	asio_thread_ = std::thread([this]() {
 		// The output might actually be messed up if it collides with the main thread...
-		log("[BufferedConnection] Starting networking thread\n");
+		log_info("[BufferedConnection] Starting networking thread\n");
 		io_service_.run();
-		log("[BufferedConnection] Stopping networking thread\n");
+		log_info("[BufferedConnection] Stopping networking thread\n");
 	});
 }
-#endif
 
 void BufferedConnection::ignore_rtt_response() {
 

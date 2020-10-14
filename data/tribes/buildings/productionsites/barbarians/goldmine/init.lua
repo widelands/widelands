@@ -1,14 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_goldmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Gold Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "barbarians_goldmine_deep",
 
    buildcost = {
       log = 4,
@@ -17,6 +16,18 @@ tribes:new_productionsite_type {
    return_on_dismantle = {
       log = 2,
       granite = 1
+   },
+
+   enhancement = {
+      name = "barbarians_goldmine_deep",
+      enhancement_cost = {
+         log = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         granite = 1
+      }
    },
 
    animations = {
@@ -39,7 +50,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "gold",
+      mines = "resource_gold",
       mines_percent = 30,
       prohibited_till = 1200
    },
@@ -48,29 +59,20 @@ tribes:new_productionsite_type {
       barbarians_miner = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_goldmine = false,
-      barbarians_goldmine_deep = false,
-      barbarians_goldmine_deeper = false,
-   },
-
    inputs = {
       { name = "ration", amount = 6 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=ration",
-            "sleep=45000",
-            "animate=working 20000",
-            "mine=gold 2 33 5 17",
+            "sleep=duration:45s",
+            "animate=working duration:20s",
+            "mine=resource_gold radius:2 yield:33.33% when_empty:5% experience_on_fail:17%",
             "produce=gold_ore"
          }
       },
@@ -83,3 +85,5 @@ tribes:new_productionsite_type {
          pgettext("barbarians_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Karl Vest, 2020
 # MiroslavR <miroslavr256@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
-"PO-Revision-Date: 2019-10-09 08:04+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-09-04 08:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Slovak (http://www.transifex.com/widelands/widelands/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +37,7 @@ msgstr "Pomoc"
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
@@ -100,7 +101,7 @@ msgstr "Nástroje"
 #: ../../data/scripting/editor/editor_controls.lua:41
 msgctxt "hotkey"
 msgid "0-9"
-msgstr ""
+msgstr "0-9"
 
 #: ../../data/scripting/editor/editor_controls.lua:41
 msgid "Change tool size"
@@ -152,14 +153,14 @@ msgid "General"
 msgstr "Všeobecné"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:11
+#: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Úvod"
 
 #: ../../data/scripting/editor/editor_help.lua:71
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Tipy"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
@@ -169,61 +170,70 @@ msgstr "Terény"
 msgid "Trees"
 msgstr "Stromy"
 
-#: ../../data/scripting/editor/editor_introduction.lua:9
+#: ../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
 msgstr "Editor hry Widelands"
 
-#: ../../data/scripting/editor/editor_introduction.lua:13
+#: ../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
 msgstr "Editor je určený pre hráčov, ktorí si chcú navrhnúť vlastnú mapu do hry."
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
 msgstr "Ako si môžete všimnúť, na editore sa stále vo veľkom pracuje a s jeho zdokonaľovaním sa tento text bude predlžovať a dopĺňať."
 
-#: ../../data/scripting/editor/editor_introduction.lua:17
+#: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "Na našej wiki je obsiahnutý krátky návod na tvorbu máp."
 
-#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../data/scripting/editor/terrain_help.lua:22
 msgid "Resources"
 msgstr "Zdroje"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
-#: ../../data/scripting/editor/terrain_help.lua:25
+#: ../../data/scripting/editor/terrain_help.lua:26
 msgid "Valid Resource:"
-msgstr ""
+msgstr "Platný zdroj:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
-#: ../../data/scripting/editor/terrain_help.lua:28
+#: ../../data/scripting/editor/terrain_help.lua:29
 msgid "Valid Resources:"
-msgstr ""
+msgstr "Platné zdroje:"
 
-#: ../../data/scripting/editor/terrain_help.lua:39
+#: ../../data/scripting/editor/terrain_help.lua:40
 msgid "Default:"
 msgstr "Predvolené:"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:41
+#: ../../data/scripting/editor/terrain_help.lua:42
 msgid "%1%x %2%"
 msgstr "%1%x %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:56
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr "Pravdepodobnosť rastu stromov"
 
-#: ../../data/scripting/editor/terrain_help.lua:77
+#: ../../data/scripting/editor/terrain_help.lua:61
+#: ../../data/scripting/editor/terrain_tooltip.lua:38
 msgid "No trees will grow here."
 msgstr "Nevyrastú tu žiadne stromy."
+
+#: ../../data/scripting/editor/terrain_tooltip.lua:26
+#: ../../data/scripting/editor/tree_tooltip.lua:23
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:19
+#: ../../data/scripting/editor/tree_tooltip.lua:32
 msgid "Preferred terrains"
 msgstr "Preferované terény"

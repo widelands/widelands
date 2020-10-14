@@ -1,3 +1,5 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {
@@ -8,17 +10,14 @@ terrain_affinity = {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_sea_buckthorn_tiny",
    descname = _ "Sea Buckthorn (tiny)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "tiny/menu.png",
-   attributes = { "seed_berrybush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 14000",
+      main = {
+         "animate=idle duration:14s",
          "grow=berry_bush_sea_buckthorn_small",
       },
    },
@@ -35,17 +34,14 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_sea_buckthorn_small",
    descname = _ "Sea Buckthorn (small)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "small/menu.png",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 18000",
+      main = {
+         "animate=idle duration:18s",
          "grow=berry_bush_sea_buckthorn_medium",
       },
    },
@@ -62,17 +58,14 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_sea_buckthorn_medium",
    descname = _ "Sea Buckthorn (medium)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "medium/menu.png",
-   attributes = { "flowering" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 26000",
+      main = {
+         "animate=idle duration:26s",
          "grow=berry_bush_sea_buckthorn_ripe",
       },
    },
@@ -89,17 +82,14 @@ tribes:new_immovable_type {
 }
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "berry_bush_sea_buckthorn_ripe",
    descname = _ "Sea Buckthorn (ripe)",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "ripe/menu.png",
-   attributes = { "ripe_bush" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 300000",
+      main = {
+         "animate=idle duration:5m",
          "remove=",
       },
       harvest = {
@@ -117,3 +107,5 @@ tribes:new_immovable_type {
       }
    }
 }
+
+pop_textdomain()

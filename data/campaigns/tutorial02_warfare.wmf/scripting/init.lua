@@ -5,14 +5,15 @@
 plr = wl.Game().players[1]
 map = wl.Game().map
 
-set_textdomain("scenario_tutorial02_warfare.wmf")
+push_textdomain("scenario_tutorial02_warfare.wmf")
 
 include "scripting/coroutine.lua"
+include "scripting/field_animations.lua"
 include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/table.lua"
+include "scripting/richtext_scenarios.lua"
 include "scripting/ui.lua"
-include "scripting/field_animations.lua"
 
 sf = map.player_slots[1].starting_field
 

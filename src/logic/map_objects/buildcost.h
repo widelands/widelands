@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,8 @@ class Tribes;
 
 struct Buildcost : std::map<DescriptionIndex, uint8_t> {
 
-	Buildcost();
-	Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes);
+	Buildcost() = default;
+	Buildcost(std::unique_ptr<LuaTable> table, Widelands::Tribes& tribes);
 
 	Quantity total() const;
 

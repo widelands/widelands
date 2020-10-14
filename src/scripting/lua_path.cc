@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,8 +64,9 @@ NumberGlob::NumberGlob(const std::string& file_template) : template_(file_templa
 }
 
 bool NumberGlob::next(std::string* s) {
-	if (current_ > max_)
+	if (current_ > max_) {
 		return false;
+	}
 
 	if (max_) {
 		*s = boost::replace_last_copy(

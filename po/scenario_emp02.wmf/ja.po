@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # tamanegi, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -17,171 +17,171 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
 msgstr "木材経済の構築"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:29
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
 msgstr "木材経済"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:30
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
 msgstr "木こり小屋を３つ、植樹番小屋を１つ、製材所を１つ建設する。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
 msgstr "採石場の建設"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
 msgstr "採石場"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:39
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
 msgstr "本拠地の南に採石場を１つ建設しましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
 msgstr "入植地の防衛"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect Your Colony"
 msgstr "入植地の防衛"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
 msgstr "兵屋や詰所を入植地の周辺にいくつか建設しましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
 msgstr "大理石の採掘を開始する"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:54
 msgid "Marble"
 msgstr "大理石"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "東に領土を拡張し、山から大理石の採掘を始めましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
 msgstr "石工小屋と鉱山関係施設を建設しましょう"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
 msgstr "石工小屋と鉱山開発体制"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
 msgstr "石工小屋を１つ建て、さらに鉱山に関する体制を整えましょう (炭鉱もしくは炭焼き小屋(両方でも可)、鉄鉱、道具工房、武器工房、防具工房、精錬所を建設)。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
 msgstr "鉱夫に食料を供給しましょう"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
 msgstr "鉱夫に食料を"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Build a tavern to produce some food to sustain our miners."
 msgstr "酒場を１つ建てて食料を供給し、鉱夫達が働けるようにしましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:74
 msgid ""
 "Of course this means you will need more resources for preparing this food – "
 "like fish, meat or bread."
 msgstr "当然のことですが、食料増産のためにはより多くの物資が必要です ── 魚か肉もしくはパンなどを。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
 msgstr "このような食材を供給するには、漁師小屋を１つ、狩人小屋を１つ、農場を１つ、製粉所を一つ、そしてパン工房を１つ建てれば良いでしょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "Build a brewery and a winery to supply the miners with some good and strong "
 "drinks."
 msgstr "醸造所とワイナリーを１つずつ建てて、良質で力がわいてくる飲み物を供給しましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
 msgstr "養豚場を１つ、さらにブドウ畑を１つ、そして井戸を何個かも作った方が良いでしょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
 msgstr "何を建設するのかはあなた次第です。しかし覚えておいてください ── 石炭や鉄鉱はビールを必要とし、大理石鉱と炭鉱はワインを、そして全ての鉱山でレーションが必要になります。レーションはパン「か」肉「か」魚から作られます。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:84
 msgid "Protect your eastern frontier"
 msgstr "領土東部の防御を固めましょう"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:88
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "Protect Your Eastern Frontier"
 msgstr "領土東部の防衛を固めましょう"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:87
 msgid ""
 "Build stronger military buildings, such as an outpost, a barrier or a tower,"
 " on the eastern frontier."
 msgstr "前線基地、防塞、監視塔のように強力な軍事建物を領土東部に建設しましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:88
 msgid "Build a tower to watch deep inside the enemy territory."
 msgstr "監視塔を建設し、敵領土の奥深くを観察してみましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "Destroy the Barbarian tribe"
 msgstr "野蛮人の部族を打倒する"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian Tribe"
 msgstr "野蛮人の部族を打倒する"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
 msgstr "兵舎を１つ建てて兵士の雇用を開始しましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "Attack and completely destroy the Barbarian buildings as soon as you have "
 "enough soldiers."
 msgstr "十分な数の兵士がそろったら、野蛮人の建物を攻撃し、完全に破壊しましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:101
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Build a fortress on the peninsula (near where the Barbarian headquarters "
 "stood before). Finally, this will avoid new settlements of other tribes in "
 "that region."
 msgstr "半島に要塞を１つ建設しましょう (かつて野蛮人の本拠地が建っていた場所の近くです)。これでこの領域に他の部族が入植するのを防げるでしょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
 msgstr "新たな島"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:137
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:149
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:157
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:237
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:255
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
 msgid "Diary of Lutius"
 msgstr "ルティウスの日記"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! This island appears to have been made for us, it is a gift from the"
 " Gods to my people and myself. Until now, we have only seen a small part of "
@@ -190,19 +190,19 @@ msgid ""
 msgstr "ついに！この島はまるで我々のために用意されていたかのごとく、その姿を現した。そう、まるで私と仲間達への神からの贈り物のように。まだ島のわずかな部分しか見ていないが、それだけでも十分に私の心は浮き立っている！こんな楽園のような島を見つけられるとは、まるで値段のつけようもない財宝を見つけたかのごとき心地良さだ！"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:116
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:114
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
 msgstr "この島で我々の新たな人生が始まる。まずは我々亡命者のための開拓基地を作ろう。それはいずれ我々全員の新しくも美しい故郷となるかもしれないな。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"
 msgstr "緑の森"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:124
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:122
 msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
@@ -210,7 +210,7 @@ msgid ""
 msgstr "この素晴らしい森をセールダスとともに北へと歩いていると、我々の未来がやってきているのが実感できた。この土地は快適で美しい。人生を終える時までここにいても良い、そう思えた。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:127
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:125
 msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
@@ -218,63 +218,63 @@ msgid ""
 msgstr "しかしそれまでまだまだ長い時間がある！だから今はやるべきことをやらねば。まずは、木こり小屋をいくつかと、製材所を１件建て、基本的な木材の供給体制を整えねば。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:130
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
 msgstr "しかし自然の恵みを保全することも忘れてはならない。この森には永遠に残ってもらわねばならないのだ。だから、植樹番小屋も１つ忘れずに建てるようにしなければ。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
 msgstr "岩"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:139
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
 msgstr "それから、私は南の岩の方に向かって歩き、採石場の建設場所を見繕っていた。大きな建物を建てるためには、花崗岩も必要だろうから。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
 msgstr "そこで、私は岩の中に大理石のような石があるのを発見し、また楽園にいるような気持ちになってしまった。フレミルにいたころ当たり前に住んでいたような、丈夫で優美な建物をすぐにでも建てられるんじゃないかと思ってしまった。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
 msgstr "植民地の木材"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:149
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
 msgstr "良い知らせだ！本日、木材供給体制が整った。以後の建築計画のために十分な木材も確保できるだろう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
 msgstr "植民地の岩"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
 msgstr "すばらしい！本日採石場の建設が完了した。大きな建物を作る際の資材となる花崗岩や大理石も十分に手に入るだろう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
 msgstr "危険な船の破片"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Saledus looks unhappy"
 msgstr "セールダスは浮かない表情です"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Sire, I don’t want to start a panic, but I found something which gives me a "
 "sinking feeling in my stomach and spreads waves of fear in my heart. As I "
@@ -284,29 +284,29 @@ msgid ""
 msgstr "ルティウス様、私がうろたえるのにもわけがあるのです。あれを見てしまったら、胃に痛みが走り、恐怖がさざ波のように私の心に押し寄せてきてしまったのです。南の海岸を歩いていると、見知らぬ船の残骸を見つけました。しかし、船のどの部分の残骸なのかはわかりませんでした。どちらにしろ、その破片は古いものには見えませんでした。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:171
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:169
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
 msgstr "おそらくは、その船の乗員は、我々をマラク-モールに上陸させたのと同じ嵐に遭遇し、ここに流されたのではないかと思います。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:172
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
 msgstr "ですから、警戒体制を整えるため、土地の端にいくつか兵屋や詰所を建ててもらうことはできないでしょうか？"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:179
 msgid "Marble on the Mountain"
 msgstr "山の大理石"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:180
 msgid "Saledus smiles"
 msgstr "セールダスは微笑みます、"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:184
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
 msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
@@ -314,7 +314,7 @@ msgid ""
 msgstr "ルティウス様、良い知らせです。東に歩いていると、大きな山を見つけました。確信をもっているわけではないので後で地質学者にきちんと調べてもらいたいですが、多分、おそらくですが、あの山から大理石を採掘できると思います。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
@@ -322,20 +322,20 @@ msgid ""
 msgstr "採石場から取れるささやかな量ではなく、もっと大量に大理石を供給できるようになるかもしれません。あなたがここを楽園のようだ、と評したことはおそらくは正しかったのでしょう。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Please, expand to that mountain and start mining marble."
 msgstr "どうか、あの山まで進出し、大理石の採掘を開始しましょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:195
 msgid "Further Mountains"
 msgstr "さらなる山々"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:198
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Saledus is excited"
 msgstr "セールダスは興奮しています"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:198
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
@@ -345,7 +345,7 @@ msgid ""
 msgstr "おお神よ！これは何という奇跡なのか！さらに二つの山がありました。一方には石炭、そしてもう一方には鉄鉱石が大量に眠っているようです。すぐに鉄鉱、炭鉱 (炭焼き小屋で代用できないこともないです)、精錬所、道具工房、防具工房、武器工房を建設しましょう。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:203
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
@@ -353,25 +353,25 @@ msgid ""
 msgstr "しかし、そのような大きな建物を建てるには、良質で優美な建築資材が必要でしょう。ですので、石工小屋を１つ建てましょう、大理石を石柱に加工してくれます。"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
 msgid "After everything, we can now begin to live like we did in Fremil."
 msgstr "これが全て終われば、フレミルにいたころと同じような生活ができるでしょう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:209
 msgid "Food for the Miners"
 msgstr "鉱夫の食料"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
 msgid "Amalea enters…"
 msgstr "アマリアが入って来ます…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:212
 msgid "Lutius, don’t you think you forgot something important?"
 msgstr "ルティウス、何か大切なことを忘れていると思わない？"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:215
 msgid ""
 "It’s nice, and of course a good idea, to build mines, which will give us a "
 "more comfortable life, but the people working in the mines are unhappy with "
@@ -380,40 +380,40 @@ msgid ""
 msgstr "鉱山を建てるのはいいことよ、とーっても良いことよ。快適な生活を送るには必要なことだしね。でもね、鉱山で働いている人にとっては今の状況はとっても良くないの。彼らは忙しく働き過ぎているから、自分のゴハンを作る時間も無いの。"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
 msgstr "彼らを助けてあげたいと思わない？こういう方針に私がでしゃばるべきじゃないかもしれないけど……私のオススメはこんな感じよ。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Our New Tavern"
 msgstr "新たな酒場"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:226
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
 msgid "Amalea smiles"
 msgstr "アマリアは微笑みます、"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:226
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
 msgstr "早速新しい酒場、「ヤシの木のほとり」に行ってみたわ。本当においしいビールだったわ。あなたも試してみるべきよ？"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:229
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
 msgstr "この島にもあんな感じに「ほっ」、と一息つける場所ができて、雰囲気がすごく良くなったと思う。ありがとう、ルティウス。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:233
 msgid "The Barbarians"
 msgstr "野蛮人"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:237
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
@@ -421,7 +421,7 @@ msgid ""
 msgstr "おお神よ！なんということだ。まるで試練の時が迫っているかのようだ ── そして、セールダスが船の残骸を発見した時に感じた不安は杞憂ではなかったようだ。残念ながら。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:240
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
@@ -429,7 +429,7 @@ msgid ""
 msgstr "今日、東の海岸を歩いていた時、私は衝撃を受けた。ここに来るまでに数々の問題を持ち込んでくれた、あの、憎き、邪悪な、野蛮人、を視界に捕らえてしまったのだ。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:245
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:243
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
@@ -438,68 +438,68 @@ msgid ""
 msgstr "初め、私は懲りもせず彼らが友好的ではないのかと期待してしまった。が、連中は私を見るやいなや、私に向かって突進し、持っていた投槍で攻撃してきたのだ。しかし、幸運にもなんとか逃げて隠れることに成功し、夜が訪れるのを待って、こちらに帰ってくることができた。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:248
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:246
 msgid "Anyway, we must build stronger military buildings as soon as possible."
 msgstr "なんにせよ、早急に強力な軍事建物を建て、防備を固めねばならない。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:251
 msgid "Command to Attack"
 msgstr "攻撃指令"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:255
 msgid ""
 "That’s good. The first big military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
 msgstr "良し。最初の大きな軍事施設が完成し、鉱石の採掘もどんどん好調になっている。そろそろ本格的に戦争の準備をしなければな。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:270
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid "Victory"
 msgstr "勝利"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
 msgstr "今日は誇らしい日だ。新たな故郷のために戦い、勝利したのだから。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:267
 msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
 msgstr "島には、まだ隠れている野蛮人もいるだろうが、時間の問題で見つかるだろう。我々に敵対しなかった者についてはまとめて船に乗せ連中の国に送り返すことになるだろう。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
-"You have established a working economy, trained new soldiers and driven the "
-"Barbarians from the island."
-msgstr "あなたは安定した経済を構築し、兵士を育て、野蛮人を島から追い出すことに成功しました。"
+"We have established a working economy, trained new soldiers and driven the "
+"Barbarians from the island. Now we can think about our next steps."
+msgstr ""
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
 msgstr "少しだけ時が流れ"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:278
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "7 days later…"
 msgstr "それから７日後…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid "A Message"
 msgstr "メッセージ"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:286
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "今日、島に鳩が上陸してきた。そいつはメッセージを携えており、それは私を暗い気持ちにし、さらにかつての恐怖を思い出させた。"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -507,21 +507,8 @@ msgid ""
 "must do…"
 msgstr "それは私宛てのメッセージだった。フレミルに戻ってきて欲しいと。帝国は今、野蛮人と戦争していると言う。帝国は北から来た部族に攻撃を受けたと言う。私が攻撃するのを禁じられた部族のことだろう。そう、これはもう明らかなことだった。これは余人に任せられない。これは、これだけは私の仕事だ。"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "このミッションを達成しました。このままプレイを続けることもできますが、終了して次のミッションに挑むこともできます。"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr ""

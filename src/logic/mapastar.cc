@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,9 @@ void MapAStarBase::pathto(Coords dest, Path& path) const {
 
 		assert(pf.cycle == pathfields->cycle);
 
-		if (pf.backlink == IDLE)
+		if (pf.backlink == IDLE) {
 			break;
+		}
 
 		path.path_.push_back(pf.backlink);
 

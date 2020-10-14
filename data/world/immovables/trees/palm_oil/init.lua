@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,17 +9,15 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_oil_desert_sapling",
    descname = _ "Oil Palm (Sapling)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 42000",
-         "remove=32",
+      main = {
+         "animate=idle duration:42s",
+         "remove=chance:12.5%",
          "grow=palm_oil_desert_pole",
       },
    },
@@ -34,17 +34,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_oil_desert_pole",
    descname = _ "Oil Palm (Pole)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 40000",
-         "remove=25",
+      main = {
+         "animate=idle duration:40s",
+         "remove=chance:9.76%",
          "grow=palm_oil_desert_mature",
       },
    },
@@ -61,20 +59,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_oil_desert_mature",
    descname = _ "Oil Palm (Mature)",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 25000",
-         "remove=10",
-         "seed=palm_oil_desert_sapling",
-         "animate=idle 30000",
-         "remove=10",
+      main = {
+         "animate=idle duration:25s",
+         "remove=chance:3.91%",
+         "seed=palm_oil_desert_sapling proximity:31.25%",
+         "animate=idle duration:30s",
+         "remove=chance:3.91%",
          "grow=palm_oil_desert_old",
 
       },
@@ -92,20 +88,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "palm_oil_desert_old",
    descname = _ "Oil Palm (Old)",
    species = _ "Oil Palm",
    icon = dirname .. "menu.png",
-   editor_category = "trees_palm",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 800000",
-         "transform=deadtree5 50",
-         "seed=palm_oil_desert_sapling",
+      main = {
+         "animate=idle duration:13m20s",
+         "transform=deadtree5 chance:19.53%",
+         "seed=palm_oil_desert_sapling proximity:31.25%",
       },
       fall = {
          "remove=",
@@ -122,7 +116,10 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/crickets2",
+            priority = 10
          },
       }
    },
 }
+
+pop_textdomain()

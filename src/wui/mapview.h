@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,16 +68,11 @@ public:
 		View() : View(Vector2f::zero(), 1.0f) {
 		}
 
-		bool zoom_near(float other_zoom) const {
-			constexpr float epsilon = 1e-5;
-			return std::abs(zoom - other_zoom) < epsilon;
-		}
+		bool zoom_near(float other_zoom) const;
 
-		bool view_near(const View& other) const {
-			constexpr float epsilon = 1e-5;
-			return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
-			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
-		}
+		bool view_near(const View& other) const;
+
+		bool view_roughly_near(const View& other) const;
 
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
@@ -113,6 +108,11 @@ public:
 
 	// Called whenever the view changed, also during automatic animations.
 	boost::signals2::signal<void()> changeview;
+
+	// Called whenever the view changed by a call to scroll_to_field or scroll_to_map_pixel, or by
+	// starting to drag the view.
+	// Note: This signal is called *before* the view actually starts to move.
+	boost::signals2::signal<void()> jump;
 
 	// Called when the user clicked on a field.
 	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> field_clicked;
@@ -176,7 +176,8 @@ public:
 	// be used to override contents of 'fields_to_draw' for player knowledge and
 	// visibility, and to correctly draw map objects, overlays and text.
 	FieldsToDraw* draw_terrain(const Widelands::EditorGameBase& egbase,
-	                           Workareas workarea,
+	                           const Widelands::Player*,
+	                           const Workareas& workarea,
 	                           bool grid,
 	                           RenderTarget* dst);
 

@@ -28,11 +28,38 @@ function test_descr:test_immovable_descr()
    end)
 end
 
+function test_descr:test_immovable_loading()
+   assert_equal("bush1", egbase:get_immovable_description("bush1").name)
+end
+
 function test_descr:test_immovable_species()
    assert_equal("", egbase:get_immovable_description("bush1").species)
    assert_equal("", egbase:get_immovable_description("cornfield_ripe").species)
    assert_equal("", egbase:get_immovable_description("alder_summer_sapling").species)
    assert_equal("Alder", egbase:get_immovable_description("alder_summer_old").species)
+end
+
+function test_descr:test_immovable_becomes()
+   -- Test multiple transform entries
+   local becomes = egbase:get_immovable_description("aspen_summer_old").becomes
+   assert_equal(2, #becomes)
+   assert_equal("deadtree2", becomes[1])
+   assert_equal("fallentree", becomes[2])
+   -- Test grow
+   becomes = egbase:get_immovable_description("aspen_summer_mature").becomes
+   assert_equal(1, #becomes)
+   assert_equal("aspen_summer_old", becomes[1])
+   -- Test none
+   becomes = egbase:get_immovable_description("fallentree").becomes
+   assert_equal(0, #becomes)
+   -- Test tribe immovable
+   becomes = egbase:get_immovable_description("wheatfield_ripe").becomes
+   assert_equal(1, #becomes)
+   assert_equal("wheatfield_harvested", becomes[1])
+   -- Test ship
+   becomes = egbase:get_immovable_description("atlanteans_shipconstruction").becomes
+   assert_equal(1, #becomes)
+   assert_equal("atlanteans_ship", becomes[1])
 end
 
 function test_descr:test_immovable_buildcost()
@@ -51,18 +78,6 @@ function test_descr:test_immovable_buildcost()
       return cost
    end
    assert_equal(16, total_cost(buildcost))
-end
-
-function test_descr:test_immovable_editor_category()
-   assert_equal("plants", egbase:get_immovable_description("bush1").editor_category.name)
-   assert_equal("Plants", egbase:get_immovable_description("bush1").editor_category.descname)
-   assert_equal(nil, egbase:get_immovable_description("cornfield_ripe").editor_category)
-   assert_equal("trees_deciduous", egbase:get_immovable_description(
-      "alder_summer_sapling").editor_category.name)
-   assert_equal("Deciduous Trees", egbase:get_immovable_description(
-      "alder_summer_sapling").editor_category.descname)
-   assert_equal("trees_deciduous", egbase:get_immovable_description(
-      "alder_summer_old").editor_category.name)
 end
 
 function test_descr:test_immovable_terrain_affinity()
@@ -148,7 +163,7 @@ function test_descr:test_building_descr()
 end
 
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_descname()
    assert_equal("Lumberjack’s Hut", egbase:get_building_description("barbarians_lumberjacks_hut").descname)
    assert_equal("Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
@@ -156,7 +171,7 @@ function test_descr:test_descname()
    assert_equal("Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_name()
    assert_equal("barbarians_lumberjacks_hut", egbase:get_building_description("barbarians_lumberjacks_hut").name)
    assert_equal("barbarians_battlearena", egbase:get_building_description("barbarians_battlearena").name)
@@ -230,7 +245,7 @@ function test_descr:test_isport()
    assert_equal(true, egbase:get_building_description("barbarians_port").is_port)
 end
 
-function test_descr:test_returned_wares()
+function test_descr:test_returns_on_dismantle()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -238,12 +253,12 @@ function test_descr:test_returned_wares()
       end
       return cost
    end
-   assert_equal(1, total_cost(egbase:get_building_description("barbarians_sentry").returned_wares))
-   assert_equal(9, total_cost(egbase:get_building_description("barbarians_fortress").returned_wares))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").returned_wares))
+   assert_equal(1, total_cost(egbase:get_building_description("barbarians_sentry").returns_on_dismantle))
+   assert_equal(9, total_cost(egbase:get_building_description("barbarians_fortress").returns_on_dismantle))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_citadel").returns_on_dismantle))
 end
 
-function test_descr:test_returned_wares_enhanced()
+function test_descr:test_enhancement_returns_on_dismantle()
    local total_cost = function(t)
       local cost = 0
       for name, count in pairs(t) do
@@ -251,9 +266,9 @@ function test_descr:test_returned_wares_enhanced()
       end
       return cost
    end
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_sentry").returned_wares_enhanced))
-   assert_equal(0, total_cost(egbase:get_building_description("barbarians_fortress").returned_wares_enhanced))
-   assert_equal(10, total_cost(egbase:get_building_description("barbarians_citadel").returned_wares_enhanced))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_sentry").enhancement_returns_on_dismantle))
+   assert_equal(0, total_cost(egbase:get_building_description("barbarians_fortress").enhancement_returns_on_dismantle))
+   assert_equal(10, total_cost(egbase:get_building_description("barbarians_citadel").enhancement_returns_on_dismantle))
 end
 
 function test_descr:test_size()
@@ -280,12 +295,12 @@ end
 --  ************** ProductionSiteDescription **************
 --  =======================================================
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_descname()
    assert_equal("Coal Mine", egbase:get_building_description("barbarians_coalmine").descname)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_name()
    assert_equal("barbarians_coalmine", egbase:get_building_description("barbarians_coalmine").name)
 end
@@ -326,17 +341,165 @@ function test_descr:test_working_positions()
    assert_equal("barbarians_innkeeper", building_description.working_positions[2].name)
 end
 
+function test_descr:test_critter_support()
+   -- Barbarian Gamekeeper supports Barbarian Hunter
+   local site = egbase:get_building_description("barbarians_gamekeepers_hut")
+   local site_support = site.supported_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_hunters_hut", site_support[1].name)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_bobs)
+   assert_equal(9, #site.created_bobs) -- Match critters placed by barbarians_gamekeeper
+
+   -- Barbarian Hunter is supported by Barbarian Gamekeeper
+   site = egbase:get_building_description("barbarians_hunters_hut")
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_gamekeepers_hut", site_support[1].name)
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(15, #site.collected_bobs) -- Eatable critters
+   assert_equal(0, #site.created_bobs)
+
+   -- Empire Hunter has no support
+   site = egbase:get_building_description("empire_hunters_house")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(15, #site.collected_bobs) -- Eatable critters
+   assert_equal(0, #site.created_bobs)
+end
+
+function test_descr:test_ship_and_ferry_support()
+   -- Barbarian Shipyard has no support and creates 1 bob - a ship
+   local site = egbase:get_building_description("barbarians_shipyard")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_bobs)
+   local bobs = site.created_bobs
+   assert_equal(1, #bobs)
+   assert_equal("barbarians_ship", bobs[1].name)
+
+   -- Barbarian Ferry Yard has no support and creates 1 bob - a ferry
+   site = egbase:get_building_description("barbarians_ferry_yard")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_bobs)
+   bobs = site.created_bobs
+   assert_equal(1, #bobs)
+   assert_equal("barbarians_ferry", bobs[1].name)
+end
+
+function test_descr:test_immovable_support()
+   -- Barbarian Ranger supports Barbarian Lumberjack
+   local site = egbase:get_building_description("barbarians_rangers_hut")
+   local site_support = site.supported_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_lumberjacks_hut", site_support[1].name)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_immovables)
+   assert_equal(22, #site.created_immovables) -- Trees in the world
+
+   -- Barbarian Lumberjack is supported by Barbarian Ranger
+   site = egbase:get_building_description("barbarians_lumberjacks_hut")
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("barbarians_rangers_hut", site_support[1].name)
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(22, #site.collected_immovables) -- Trees in the world
+   assert_equal(0, #site.created_immovables)
+
+   -- Barbarian Quarry has no support
+   site = egbase:get_building_description("barbarians_quarry")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(4*6, #site.collected_immovables) -- Rocks in the world
+   assert_equal(0, #site.created_immovables)
+
+   -- Barbarian Farm creates immovable, but has no dependencies
+   site = egbase:get_building_description("barbarians_farm")
+   site_support = site.supported_productionsites
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+
+   local immovables = site.created_immovables
+   assert_equal(1, #immovables)
+   assert_equal("wheatfield_ripe", immovables[1].name)
+   immovables = site.collected_immovables
+   assert_equal(1, #immovables)
+   assert_equal("wheatfield_ripe", immovables[1].name)
+
+   -- Sites with multiple dependencies
+   site = egbase:get_building_description("frisians_clay_pit")
+   site_support = site.supported_productionsites
+   assert_equal(2, #site_support)
+   assert_equal("frisians_aqua_farm", site_support[1].name)
+   assert_equal("frisians_charcoal_burners_house", site_support[2].name)
+   assert_equal(0, #site.supported_by_productionsites)
+
+   site = egbase:get_building_description("frisians_aqua_farm")
+   assert_equal(0, #site.supported_productionsites)
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("frisians_clay_pit", site_support[1].name)
+
+   site = egbase:get_building_description("frisians_charcoal_burners_house")
+   assert_equal(0, #site.supported_productionsites)
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("frisians_clay_pit", site_support[1].name)
+end
+
+
+function test_descr:test_resource_support()
+   -- Atlantean Fishbreeder supports Atlantean Fisher
+   local site = egbase:get_building_description("atlanteans_fishbreeders_house")
+   local site_support = site.supported_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("atlanteans_fishers_house", site_support[1].name)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(0, #site.collected_resources)
+   assert_equal(1, #site.created_resources)
+
+   -- Atlantean Fisher is supported by Atlantean Fishbreeder
+   site = egbase:get_building_description("atlanteans_fishers_house")
+   site_support = site.supported_by_productionsites
+   assert_equal(1, #site_support)
+   assert_equal("atlanteans_fishbreeders_house", site_support[1].name)
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+
+   -- Barbarian Fisher has no support
+   site = egbase:get_building_description("barbarians_fishers_hut")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+
+   -- Well
+   site = egbase:get_building_description("barbarians_well")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+
+   -- Mine
+   site = egbase:get_building_description("barbarians_goldmine_deeper")
+   assert_equal(0, #site.supported_productionsites)
+   assert_equal(0, #site.supported_by_productionsites)
+   assert_equal(1, #site.collected_resources)
+   assert_equal(0, #site.created_resources)
+end
 
 --  =======================================================
 --  *************** MilitarySiteDescription ***************
 --  =======================================================
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_descname()
    assert_equal("Sentry", egbase:get_building_description("barbarians_sentry").descname)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_name()
    assert_equal("barbarians_sentry", egbase:get_building_description("barbarians_sentry").name)
 end
@@ -360,12 +523,12 @@ end
 --  *************** TrainingSiteDescription ***************
 --  =======================================================
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_descname()
    assert_equal("Battle Arena", egbase:get_building_description("barbarians_battlearena").descname)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_name()
    assert_equal("battlearena", egbase:get_building_description("barbarians_battlearena").name)
 end
@@ -421,12 +584,12 @@ end
 --  **************** WarehouseDescription *****************
 --  =======================================================
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_descname()
    assert_equal("Warehouse", egbase:get_building_description("barbarians_warehouse").descname)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_name()
    assert_equal("barbarians_warehouse", egbase:get_building_description("barbarians_warehouse").name)
 end
@@ -450,12 +613,12 @@ function test_descr:test_ware_descr()
    assert_error("Wrong number of parameters: 2", function() egbase:get_ware_description("XXX","YYY") end)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_descname()
    assert_equal("Thatch Reed", egbase:get_ware_description("reed").descname)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_name()
    assert_equal("reed", egbase:get_ware_description("reed").name)
 end
@@ -544,12 +707,12 @@ function test_descr:test_worker_descr()
    assert_error("Wrong number of parameters: 2", function() egbase:get_worker_description("XXX","YYY") end)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_descname()
    assert_equal("Miner", egbase:get_worker_description("barbarians_miner").descname)
 end
 
--- This is actually a property of MapOjectDescription
+-- This is actually a property of MapObjectDescription
 function test_descr:test_name()
    assert_equal("barbarians_miner", egbase:get_worker_description("barbarians_miner").name)
 end
@@ -577,4 +740,28 @@ function test_descr:test_worker_buildable()
    assert_equal(true, egbase:get_worker_description("barbarians_carrier").buildable)
    assert_equal(true, egbase:get_worker_description("barbarians_miner").buildable)
    assert_equal(false, egbase:get_worker_description("barbarians_miner_chief").buildable)
+end
+
+
+--  =======================================================
+--  ****************** ShipDescription ******************
+--  =======================================================
+
+function test_descr:test_ship_descr()
+   assert_error("Unknown ship", function() egbase:get_ship_description("XXX") end)
+   assert_error("Wrong number of parameters: 2", function() egbase:get_ship_description("XXX","YYY") end)
+end
+
+-- This is actually a property of MapObjectDescription
+function test_descr:test_descname()
+   assert_equal("Ship", egbase:get_ship_description("atlanteans_ship").descname)
+end
+
+-- This is actually a property of MapObjectDescription
+function test_descr:test_name()
+   assert_equal("barbarians_ship", egbase:get_ship_description("barbarians_ship").name)
+end
+
+function test_descr:test_icon_name()
+   assert_equal("tribes/ships/empire/menu.png", egbase:get_ship_description("empire_ship").icon_name)
 end

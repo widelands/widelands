@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -90,7 +90,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                 width,
                 35,
                 UI::ButtonStyle::kWuiMenu,
-                g_gr->images().get("images/wui/menus/exit.png"),
+                g_image_cache->get("images/wui/menus/exit.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
 
@@ -103,21 +103,19 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	box_.set_size(width, text_.get_h() + vgap + box_h_.get_h() + exit_game_.get_h() + 3 * vspacing);
 	set_inner_size(get_inner_w(), box_.get_h() + 2 * margin);
 
-	continue_.sigclicked.connect(
-	   boost::bind(&GameClientDisconnected::clicked_continue, boost::ref(*this)));
-	exit_game_.sigclicked.connect(
-	   boost::bind(&GameClientDisconnected::clicked_exit_game, boost::ref(*this)));
+	continue_.sigclicked.connect([this]() { clicked_continue(); });
+	exit_game_.sigclicked.connect([this]() { clicked_exit_game(); });
 
 	// Add all AI types
-	for (const auto* impl : ComputerPlayer::get_implementations()) {
-		type_dropdown_.add(impl->descname, impl->name, g_gr->images().get(impl->icon_filename), false,
+	for (const auto* impl : AI::ComputerPlayer::get_implementations()) {
+		type_dropdown_.add(impl->descname, impl->name, g_image_cache->get(impl->icon_filename), false,
 		                   /** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
 		                      will be used as replacement for a disconnected player */
 		                   (boost::format(_("Replace player with %s")) % impl->descname).str());
 	}
 
 	// Set default mode to normal AI
-	type_dropdown_.select(DefaultAI::normal_impl.name.c_str());
+	type_dropdown_.select(AI::DefaultAI::normal_impl.name.c_str());
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
@@ -131,7 +129,7 @@ void GameClientDisconnected::die() {
 	}
 	if (is_visible()) {
 		// Dialog aborted, default to the old behavior and add a normal AI
-		set_ai(DefaultAI::normal_impl.name);
+		set_ai(AI::DefaultAI::normal_impl.name);
 	}
 	UI::UniqueWindow::die();
 }
@@ -154,8 +152,7 @@ void GameClientDisconnected::clicked_exit_game() {
 		igb_->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
 		GameExitConfirmBox* gecb = new GameExitConfirmBox(*get_parent(), *igb_);
-		gecb->cancel.connect(
-		   boost::bind(&GameClientDisconnected::exit_game_aborted, boost::ref(*this), gecb));
+		gecb->cancel.connect([this, gecb]() { exit_game_aborted(gecb); });
 
 		set_visible(false);
 	}
@@ -169,7 +166,7 @@ void GameClientDisconnected::exit_game_aborted(Panel* dialog) {
 }
 
 void GameClientDisconnected::set_ai(const std::string& ai) {
-	const std::string ai_descr = ComputerPlayer::get_implementation(ai)->descname;
+	const std::string ai_descr = AI::ComputerPlayer::get_implementation(ai)->descname;
 	for (size_t i = 0; i < host_->settings().players.size(); i++) {
 		if (host_->settings().players.at(i).state != PlayerSettings::State::kOpen ||
 		    !igb_->game().get_player(i + 1)->get_ai().empty()) {

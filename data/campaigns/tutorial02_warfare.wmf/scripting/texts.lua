@@ -2,12 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
--- =========================
--- Some formating functions
--- =========================
-
-include "scripting/richtext_scenarios.lua"
-
 -- We want the soldier here so we can get some actual stats.
 local tribe = wl.Game():get_tribe_description("barbarians")
 local soldier = wl.Game():get_worker_description(tribe.soldier)
@@ -72,11 +66,14 @@ battlearena1 = {
       p(_[[One of these training sites is the battle arena. It is a big and expensive building, and it trains soldiers in evade. Since soldiers get very hungry during their workout, this building needs a lot of food and strong beer. In a real game, you should have a good infrastructure before you build it.]]) ..
       li(_[[To see evade training in action, build a battle arena.]]) ..
       p(_[[While we’re waiting for the battle arena, you’ll probably notice some soldiers walking around. They are automatically exchanged from time to time. I’ll teach you about that later.]])
-   ),
-   h = 400,
-   obj_name = "build_battlearena",
-   obj_title = _"Build a battle arena",
-   obj_body = (
+   )
+}
+
+obj_battlearena = {
+   name = "build_battlearena",
+   title = _"Battle Arena",
+   number = 1,
+   body = objective_text(_"Build a battle arena",
       li(_[[Build a battle arena. It is a big building.]]) ..
       li_arrow(_[[Since the construction will take some time, you can change the game speed using Page Up and Page Down.]])
    )
@@ -105,11 +102,14 @@ trainingcamp1 = {
       h1(_"The Training Camp") ..
       p(_[[There is a second training site: the training camp. It is a big building too, and to complement the battle arena, it trains attack and health (remember, the Barbarian soldiers cannot be trained in defense).]]) ..
       li(_[[Build a training camp.]])
-   ),
-   h = 300,
-   obj_name = "build_trainingcamp",
-   obj_title = _"Build a training camp",
-   obj_body = (
+   )
+}
+
+obj_trainingcamp = {
+   name = "build_trainingcamp",
+   title = _"Training Camp",
+   number = 1,
+   body = objective_text(_"Build a training camp",
       p(_[[The battle arena only trains the soldiers in evade. To get the strongest possible soldier, you also need to build a training camp, which trains them in attack and health.]]) ..
       li(_[[Build a training camp.]])
    )
@@ -122,7 +122,7 @@ trainingcamp2 = {
       p(_[[Great, our training camp has now been finished, too. Now nothing will hinder us from getting the strongest warriors the world has ever seen.]]) ..
       p(_[[To train in the training camp, our soldiers need food like in the battle arena, but no strong beer. Instead, they need different axes for attack training and helmets for health training.]]) ..
       p(_[[This equipment is produced in smithies out of coal, iron, and sometimes gold. You will learn more about this in the second scenario of the Barbarian campaign.]]) ..
-      p(_[[You should also keep in mind that each of the three tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarian soldier at the same level only has a base attack of %2%.]]:bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
+      p(_[[You should also keep in mind that each of the tribes in Widelands has its own way of training, so the buildings and wares are different. Also, the ability levels cannot be compared: an Imperial soldier has a base attack of %1% at level 0, while a Barbarian soldier at the same level only has a base attack of %2%.]]:bformat(empire_soldier.base_min_attack, soldier.base_min_attack))
    )
 }
 
@@ -135,11 +135,14 @@ scouting1 = {
       p(_[[You can try your luck and expand randomly, but this is risky. A safer way is to use a scout to explore unseen parts of the map. What if he finds mountains overflowing with gold?]]) ..
       p(_[[We will need a scout’s hut to start exploring. It is a small building.]]) ..
       li_object("barbarians_scouts_hut", _[[Build a scout’s hut.]], plr.color)
-   ),
-   h = 300,
-   obj_name = "build_scouts_hut",
-   obj_title = _"Build a scout’s hut",
-   obj_body = (
+   )
+}
+
+obj_scouting1 = {
+   name = "build_scouts_hut",
+   title = _"Scout’s Hut",
+   number = 1,
+   body = objective_text(_"Build a scout’s hut",
       p(_[[It’s good to know your surroundings. A scout will explore unseen parts of the map for you.]]) ..
       li(_[[Build a Scout’s Hut.]])
    )
@@ -150,14 +153,17 @@ scouting2 = {
    title = _"Scout is ready",
    body = (
       h1(_"Ready to go!") ..
-      p(_[[Well done, your scout’s hut has been built. While our scout is moving in, let’s learn a little bit more about him.]]) ..
+      p(_[[Well done! Your scout’s hut has been built. While our scout is moving in, let’s learn a little bit more about him.]]) ..
       p(_[[First of all, he will need to take some food with him on his scouting trips. Fortunately, we have some rations in our warehouse.]]) ..
       li_object("barbarians_scout", _[[When provided with food, he will walk randomly around the area. You should follow his movement before fog of war hides what he saw.]], plr.color)
-   ),
-   h = 300,
-   obj_name = "explore_map",
-   obj_title = _"Explore the map",
-   obj_body = (
+   )
+}
+
+obj_scouting2 = {
+   name = "explore_map",
+   title = _"Scout",
+   number = 1,
+   body = objective_text(_"Explore the map",
       p(_[[Wait for the scout to explore unseen areas.]]) ..
       li(_[[Observe your scout.]])
    )
@@ -210,10 +216,15 @@ dismantle = {
       p(_[[Have you seen your sentry? Since it cannot contain many soldiers and is next to a stronger barrier, it is rather useless.]]) ..
       -- TRANSLATORS: 'it' refers to the Barbarian sentry
       li(_[[Dismantle it.]]) ..
-      p(_[[You can also use this opportunity to become familiar with the other options: the heroes/rookies preference and the capacity.]])),
-   obj_name = "dismantle_sentry",
-   obj_title = _"Dismantle your north-western sentry",
-   obj_body = (
+      p(_[[You can also use this opportunity to become familiar with the other options: the heroes/rookies preference and the capacity.]])
+   )
+}
+
+obj_dismantle = {
+   name = "dismantle_sentry",
+   title = _"Soldiers, dismissed!",
+   number = 1,
+   body = objective_text(_"Dismantle your north-western sentry",
       p(_[[You can control the number of soldiers stationed at a military site with the arrow buttons. If you want to get even your last soldier out, you will have to destroy it. However, it then will no longer protect your territory, which will make it vulnerable to hostile attacks.]]) ..
       li(_[[Dismantle your sentry in the north-west, next to the barrier.]])
    )
@@ -229,11 +240,14 @@ fortress_enhancement = {
       p(_[[Citadels can’t be built directly. Instead, you’ll have to construct a fortress first and then enhance it to a citadel. To do so, click on the fortress, then choose the ‘Enhance to Citadel’ button.]]) ..
       p(_[[Your soldiers will leave the fortress while the construction is going on. This means that your fortress will lose its military influence, as I described above.]]) ..
       li(_[[Enhance your fortress to a citadel now.]])
-   ),
-   obj_name = "enhance_fortress",
-   obj_title = _"Enhance your fortress to a citadel",
-   obj_body = (
-      h1(_"Enhance Your Fortress") ..
+   )
+}
+
+obj_fortress = {
+   name = "enhance_fortress",
+   title = _"Enhance Your Fortress",
+   number = 1,
+   body = objective_text(_"Enhance your fortress to a citadel",
       li(_[[Enhance your fortress to a mighty citadel.]]) ..
       li_arrow(_[[The citadel can house 12 soldiers, and it is the biggest military building the Barbarians can build. It also costs a lot of resources and takes a long time to build. It is most suited to guard strategically important points like constricted points or mountains.]])
    )
@@ -248,12 +262,14 @@ attack_enemy = {
       p(_[[Great work, the citadel is finished. But what’s that? A hostile tribe has settled next to us while the citadel was under construction! Do you see how they took away a part of our land? And our lumberjack has now lost his place of work. This is what I was talking about. Let’s take our land back and defeat the enemy!]]) ..
       p(_[[To attack a building, click on its doors, choose the number of soldiers that you wish to send and click on the ‘Attack’ button.]] .. " " .. _[[Your soldiers will come from all nearby military buildings. Likewise, the defenders will come from all nearby military buildings of the enemy and intercept your forces.]]) ..
       li(_[[Attack and conquer all military buildings of the enemy and destroy their headquarters.]])
-   ),
-   h = 350,
-   obj_name = "defeated_the_empire",
-   obj_title = _"Defeat the enemy tribe",
-   obj_body = (
-      h1(_"Defeat Your Enemy") ..
+   )
+}
+
+obj_attack = {
+   name = "defeat_the_enemy",
+   title = _"Defeat Your Enemy",
+   number = 1,
+   body = objective_text(_"Defeat the enemy tribe",
       li(_[[Defeat the nearby enemy.]]) ..
       li_arrow(_[[To attack a building, click on its doors, choose the number of soldiers that you wish to send and click on the ‘Attack’ button.]])
    )

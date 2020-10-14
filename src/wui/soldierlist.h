@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #ifndef WL_WUI_SOLDIERLIST_H
 #define WL_WUI_SOLDIERLIST_H
 
-class InteractiveGameBase;
+class InteractiveBase;
 
 namespace UI {
 class Panel;
@@ -30,7 +30,6 @@ namespace Widelands {
 class Building;
 }
 
-UI::Panel*
-create_soldier_list(UI::Panel& parent, InteractiveGameBase& igb, Widelands::Building& building);
+UI::Panel* create_soldier_list(UI::Panel& parent, InteractiveBase&, Widelands::Building& building);
 
 #endif  // end of include guard: WL_WUI_SOLDIERLIST_H

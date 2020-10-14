@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  */
 
 #include "ui_fsmenu/campaigndetails.h"
+
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "graphic/text_layout.h"
@@ -72,9 +74,6 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 		               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
 	}
-	description = (boost::format("%s%s") % description %
-	               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
-	                 .str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();
 	descr_.set_text(description);

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-21 18:02+0000\n"
-"PO-Revision-Date: 2020-01-21 18:25+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-11 07:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -49,6 +49,135 @@ msgid ""
 "and will introduce fighting."
 msgstr "Mìnichidh an t-oideachadh seo mar a làimhsicheas tu togalaichean an airm is ionadan-oideachaidh agus ionnsaichidh tu sabaid."
 
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:14
+msgid "Easy."
+msgstr "Furasta."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:20
+msgid "Medium."
+msgstr "Meadhanach."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:25
+msgid "Hard."
+msgstr "Doirbh."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:30
+msgid "Challenging."
+msgstr "Dùbhlanach."
+
+#. TRANSLATORS: The name of a Barbarian campaign
+#: ../../data/campaigns/campaigns.lua:43
+msgid "The Second Empire"
+msgstr "An dàrna ìmpireachd"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:49
+msgid "Introduces the Barbarians."
+msgstr "Bheir e eòlas air na Tùsanaich dhut."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:52
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr "’S e an ceannard-cogaidh a bh’ ann an Cat’Charud agus stiùirich e feachd a cheannsaicheadh gach nàmhaid a bhiodh deònach èirigh an aghaidh nan seann choilltean. Bha e ’na bhodach nuair a chaochail e ’s triùir mhac glòir-mhiannach treun aige. Ged a thagh Cat’Charud a mhac as sine Tron mar an ceannard-cogaidh ùr aig deireadh a rìoghachd glòrmhor, dh’fhàg an co-dhùnadh aige an dithis bhràithrean eile mì-shàsaichte. Mhothaich an seann tighearna dha. Mar a mhol athair ris, dh’fhàg Tron cathair-bhaile Al’tùnrain, dachaigh cathair nan craobh ’s chùlaich e fheachd dhan mhonadh far an do thìodhlaic e corp athar. Ghabh e bòid dha na diathan ’s dha dh’anam athar gun tilleadh e na cùisean gu mar a b’ àbhaist. Fhad ’s a tha a bhràithrean ri strì gu fiadhaich an aghaidh Throin ’s an fheachd bhig a dh’fhàg e gus crìochan Al’tùnrain a dhìon, tha an tighearna-cogaidh òg ag amas a bhràithrean glòir-mhiannach a rèiteachadh ach am biodh na cinnidhean air an ath-chruinneachadh fon aon bratach a-rithist."
+
+#. TRANSLATORS: The name of an Empire campaign
+#: ../../data/campaigns/campaigns.lua:70
+msgid "The Months of Exile"
+msgstr "Mìosan an fhògraidh"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:73
+msgid "Introduces the Empire."
+msgstr "Bheir e eòlas air an Impireachd dhut."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:75
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"Barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 Barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr "O chionn sia mìosan, chaidh Lutius – ceann-armailt òg na h-Impireachd – a chur còmhla ri 150 saighdear dha na crìochan taobh thall nan coilltean tuathach far an robh treubhan nan Tùsanach a’ briseadh a-steach do ranntair na h-Impireachd. B’ e a dhleastanas tìr na h-Impireachd a dhìon. An toiseach, bha a h-uile càil socair. Bhruidhinn e fiù ri clann nan Tùsanach agus bha beatha sìtheil fainear dha – ri taobh na muinntir àrsaidh ud. Thòisich e a’ faireachdainn sàbhailte agus cha dug am feachd aige aire air an t-sluagh a bhiodh nàimhdeil ma dh’fhaoidte tuilleadh. Seo na mhill iad. B’ e oidhche sa Mhàirt a bh’ ann nuair a thug 100 coisridh nan Tùsanach ionnsaigh air an fheachd aige nach robh ullamh ’s chaidh an sgaoileadh fada ’s farsaing. ’S gann gun do mhair Lutius fhèin is grunnan dhe na saighdearan aige beò."
+
+#. TRANSLATORS: The name of an Atlantean campaign
+#: ../../data/campaigns/campaigns.lua:93
+msgid "The Run for the Fire"
+msgstr "An toir air an teine"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:96
+msgid "Introduces the Atlanteans."
+msgstr "Bheir e eòlas air na h-Atlantaich dhut."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:98
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr "Nuair a chaill an dia earbsa sna h-Atlantaich is e air an t-eilean aca a bhàthadh, bhuannaich strì boireannaich airson ceartais ’s cothrom eile dha a muinntir cliù mòr. On a stiùirich i còrr nan Atlantach gu beatha ùr ann an tìr san aineolas, dh’fhàs Jundlina nas cumhachdaiche na neach sam bith eile ri a linn ach b’ e daor na phàigh i: a daonnachd ’s a h-anam."
+
+#. TRANSLATORS: The name of a Frisian campaign
+#: ../../data/campaigns/campaigns.lua:107
+msgid "From Water to Ice"
+msgstr "On uisge dhan deigh"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:110
+msgid "Introduces the Frisians."
+msgstr "Bheir e eòlas air na Frìoslannaich dhut."
+
+#. TRANSLATORS: A campaign difficulty (easiest of three options)
+#: ../../data/campaigns/campaigns.lua:115
+msgid "Sailor (Tricky)"
+msgstr "Seòladair (toinnte)"
+
+#. TRANSLATORS: A campaign difficulty (medium of three options)
+#: ../../data/campaigns/campaigns.lua:117
+msgid "Steersman (Very Hard)"
+msgstr "Neach-iùil (glè chruaidh)"
+
+#. TRANSLATORS: A campaign difficulty (hardest of three options)
+#: ../../data/campaigns/campaigns.lua:119
+msgid "Captain (Unreasonable)"
+msgstr "Sgiobair (gun chiall)"
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:124
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "’S e dùbhlan gun fhaochadh a th’ ann a bhith a’ faighinn beòshlaint on chuan agus tha sin fìor do shluagh oirthir Cuan Tuathach nam Frìoslannach gu h-àraidh. Nach e a bha san tuil-ruadh mu dheireadh, seo am fear as miosa ann an cuimhne nan daoine, ach dùbhlan àbhaisteach eile ro na Frìoslannaich – no an e samhla o na diathan a bh’ ann gun robh aig treubh a bha dìreach air a thuineachadh an-seo ri dachaigh gu tur ùr a shireadh?"
+
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Chan eil seo ann fhathast"
@@ -72,7 +201,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Às dèidh blàir chudromaich an aghaidh nan Tùsanach a dh’adhbharaich gun do chaill an Impireachd cnap mòr dhe a ranntair, dh’fhàg Lutius Fremil gus beatha ùr a thòiseachadh. Ach thàinig gailleann air an long aige ’s cha mhòr gun deach e fodha. B’ e fortan mòr a bh’ ann gun deach leis an long bhriste aige a chur air tìr air tràigh fàsach nach b’ aithne dhaibh ’s gun deach a mhuinntir a shàbhaladh. Ach a bheil iad sàbhailte dha-rìribh?"
+msgstr "Às dèidh blàir chudromaich an aghaidh nan Tùsanach a dh’adhbharaich gun do chaill an Ìmpireachd cnap mòr dhe a ranntair, dh’fhàg Lutius Fremil gus beatha ùr a thòiseachadh. Ach thàinig gailleann air an long aige ’s cha mhòr gun deach e fodha. B’ e fortan mòr a bh’ ann gun deach leis an long bhriste aige a chur air tìr air tràigh fàsach nach b’ aithne dhaibh ’s gun deach a mhuinntir a shàbhaladh. Ach a bheil iad sàbhailte dha-rìribh?"
 
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
@@ -86,11 +215,15 @@ msgid ""
 "they set out to explore this new living space."
 msgstr "Bha an long air a càradh mu dheireadh thall agus lean Lutius ’s a chuideachd orra a’ sireadh àite math far an tòisicheadh iad beatha ùr. Cha dug e ach beagan làithean gus an do ràinig iad eilean blàth uaine le coltas a’ phàrrais air. Thòisich iad air an àite-chòmhnaidh ùr aca a rùrachadh le deagh shunnd."
 
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Dìoghail Neaptuin"
+
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr "Le toil nan diathan, thàinig cnap-starra eile ann an rathad sgioba Lutius mus do thill iad dhachaigh gus an Impireachd a dhìon."
+msgstr "Le toil nan diathan, thàinig cnap-starra eile ann an rathad sgioba Lutius mus do thill iad dhachaigh gus an Ìmpireachd a dhìon."
 
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
@@ -101,7 +234,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr "Às dèid tilleadh dhachaigh, tha dùbhlan ro Lutius agus an sgioba aige on a tha an eaconamaidh gu tur briste. Feumaidh iad na tha cearr air an eaconamaidh a chàradh gu h-èiginneach mus coisinn an impireachd cliù ’s glòir a-rithist."
+msgstr "Às dèid tilleadh dhachaigh, tha dùbhlan ro Lutius agus an sgioba aige on a tha an eaconamaidh gu tur briste. Feumaidh iad na tha cearr air an eaconamaidh a chàradh gu h-èiginneach mus coisinn an Ìmpireachd cliù ’s glòir a-rithist."
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
@@ -149,8 +282,9 @@ msgstr "Cogadh"
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle."
-msgstr "San oideachadh seo, ionnsaichidh tu dòighean a’ chogaidh: mar a chruthaicheas tu saighdearan, mar a bheir thu oideachadh dhaibh ’s mar a stiùiricheas tu air a’ bhlàr iad."
+"soldiers, how to train them and how to lead them in battle. Scouting will be"
+" also covered."
+msgstr "San oideachadh seo, ionnsaichidh tu dòighean a’ chogaidh: mar a chruthaicheas tu saighdearan, mar a bheir thu oideachadh dhaibh ’s mar a stiùiricheas tu air a’ bhlàr iad. Ionnsaichidh tu mun rùrachadh le rabadairean cuideachd."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -160,7 +294,7 @@ msgstr "Seòladaireachd"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "San oideachadh seo, gheibh thu eòlas air an t-seòladaireachd, ’s e seo mar a làimhsicheas tu longan agus puirt, agus air bàtaichean is slighean aiseig."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -193,6 +327,18 @@ msgid ""
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Tha raointean togail mòra gann sna h-eileanan beaga seo. Thoir am prìomhachas air togalaichean mòra annta. Feumaidh tu togalach mòr an airm a thogail aig amannan mus ruig thu an t-ath-eilean. Cha dèid gu math leis an IF."
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+msgid "Astoria 2.R"
+msgstr "Astoria 2"
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Cluich eaconamach fhada air tìr àlainn. Feuch gach cluicheadair!"
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+msgid "pbuczny@gmail.com – edited by Nordfriese"
+msgstr "pbuczny@gmail.com – air a dheasachadh le Nordfriese"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -264,9 +410,17 @@ msgstr "Tha beartas de bheatha san t-sloc aimsir às dèidh dreag a’ tuiteam a
 msgid "Crossing the Horizon"
 msgstr "Thairis air an fhàire"
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+msgid "Kristin – edited by 3plus4i"
+msgstr "Kristin – air a dheasachadh le 3plus4i"
+
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Cruinnich sgioba is seòl dhan aineolach."
+
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr "Cha ghabh am mapa seo a bhuannachadh leis a’ chumha buaidhe “fèin-fhlaitheach”."
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
@@ -279,26 +433,27 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Tha ceithir treubhan ann an còmhstri leis an nàbaidh as fhaisge gus am beinn òir a ruigsinn ro chàch ’s an dùil air saoibhreas do-chreidsinneach. Ach an urrainn dhan dà dhiubh a dh’fhuiricheas na stòrasan a cho-roinneadh gu glic?"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:8
-msgid "Dolomites"
-msgstr "Na Dolaimitich"
+#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+msgid "Dolomites 3.0"
+msgstr "Na Dolaimitich 3.0"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:10
+#: ../../data/maps/Dolomites_v3.wmf/elemental:10
 msgid ""
-"The jewel of the Alps, the Dolomites mountain range has been declared a "
-"World Heritage Site for its pristine beauty. This map is an as-faithful-as-"
-"reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
+"The jewel of the alps, the dolomites mountain range has been declared a "
+"world heritage site for its pristine beauty. This map is an as-faithful-as-"
+"reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death against your enemies, it may as well be in a beautiful place."
-msgstr "’S e na Dolaimitich a th’ ann an seud nan Alpannan agus chaidh iad ainmeachadh mar Làrach Dualchas na Cruinne air sàilleabh am bòidhchead. Tha am mapa seo ag atharrais an sgìre eadar Cortina d’Ampezzo gu ear-thuath agus Canazei gu iar-dheas cho math ’s a ghabhas. Ma tha agad ri dian-strì an aghaidh do nàimhdean, nach b’ fheairrde thu seo a dhèanamh am badeigin àlainn?"
+" to the death with your enemies, it may as well be in a beautiful place."
+msgstr "’S e na Dolaimitich a th’ ann an seud nan Alpannan agus chaidh iad ainmeachadh mar Làrach Dualchas na Cruinne air sàilleabh am bòidhchead. Tha am mapa seo ag atharrais an sgìre eadar Cortina d’Ampezzo gu ear-thuath agus Canazei gu iar-dheas cho math ’s a ghabhas. Ma tha agad ri dian-strì an aghaidh do nàimhdean, nach b’ fheàirrde thu seo a dhèanamh am badeigin àlainn?"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:11
+#: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical. Use the little building space that you have wisely. A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage."
-msgstr "Tha torr talmhainn rèidhe air na beanntan. Gu mì-fhortanach, ’s ann inghearach a tha a’ mhòrchuid dheth. Cleachd na th’ agad a rum togail gu glic. Faodaidh dùn aig bun a’ bhealaich chumhaing a bhith ’na chnap-starra mòr dha dh’airm an nàmhad. Cleachd an cruth-tìre gus do chuideachadh."
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr "Tha tòrr talmhainn rèidhe air na beanntan. Gu mì-fhortanach, ’s ann inghearach a tha a’ mhòrchuid dheth – cleachd na th’ agad a rùm togail gu glic. Faodaidh dùn aig bun a’ bhealaich chumhaing a bhith ’na chnap-starra mòr dha dh’airm an nàmhad – cleachd an cruth-tìre gus do chuideachadh. Leag na craobhan uile far an urrainn dhut sin a dhèanamh – seo an t-aon dòigh air an lorg thu rùm dha na tuathanasan agad."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -309,6 +464,28 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
 msgstr "Tha fìor bhòidhchead na tìre uaine seo a’ tàladh iomadh treubh ach an gabhadh iad air an son fhèin i."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
+msgid "Escher_Goose_Fish"
+msgstr "Gèadh ⁊ iasg Escher"
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
+msgid "Equal starting conditions for three players."
+msgstr "Ionadan tòiseachaidh cothromach airson trì cluicheadairean."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
+msgid "v0.2"
+msgstr "(tionndadh 0.2)"
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:10
+msgid ""
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
+msgstr "Mapa glè mhòr na Roinn-eòrpa. Ghorm = An t-Suain, Dearg = An Eadailt, Buidhe = An Spàinnt, Uaine = An Tuirc, Dubh = An Ruis, Orains = Sasainn, Purpaidh = An Fhraing, Gheal = A’ Phòlainn"
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:8
+msgid "Europa 1.1"
+msgstr "An Roinn-Eòrpa 1.1"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -410,7 +587,7 @@ msgstr "Rubha an òir"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr "Tha a’ chabhag air dà impireachdan ach an tog iad an ulaidh o rubha seann-sgeulach…"
+msgstr "Tha a’ chabhag air dà ìmpireachdan ach an tog iad an ulaidh o rubha seann-sgeulach…"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
@@ -424,17 +601,6 @@ msgstr "Dh’fhalbh am foghar ’s thàinig an geamhradh. Cha cuid a nithean re�
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
 msgstr "Tha rian deiseil air na h-ionadan tòiseachaidh"
-
-#: ../../data/maps/Impact.wmf/elemental:8
-msgid "Impact"
-msgstr "Bualadh"
-
-#: ../../data/maps/Impact.wmf/elemental:10
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr "Às dèidh dreag a bhualadh is a’ gheamhraidh a lean air, chaidh trì eileanan a cheangal ri chèile le deigh is clachan ’s chuir sin crìoch air an t-sìth eadar trì treubhan."
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
@@ -504,6 +670,16 @@ msgid ""
 "all over the map."
 msgstr "Tha ceithir treubhan a’ strì ach an gabh iad làmh an uachdair air sgìre lom. Tha stòrasan sgapte air feadh a’ mhapa."
 
+#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+msgid ""
+">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
+"long, long way to conquere all the islands. Good luck!"
+msgstr "Tha rathad glè, glè fhada romhad mus ceannsaich thu na h-eileanan uile. Gura math a thèid leat!"
+
+#: ../../data/maps/Long, long v2.wmf/elemental:8 way
+msgid "Long, long way v2"
+msgstr "An rathad glè, glè fhada 2"
+
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Starraineachd nan eilean"
@@ -536,6 +712,19 @@ msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
 msgstr "Tha dà cheist mhòr ann: Cò chruthaich am mòr-chuartan do-chreidsinneach seo agus dè tha na bhroinn?"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+msgid "No metal challenge v2"
+msgstr "Dùbhlan gun mheatailt 2"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+msgid ""
+"This map is intended as a solo challenge for those very skilled players that"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr "Tha am mapa seo ag amas air modh aon-chluicheadair dhan fheadhainn a tha glè sgileil agus a nì a’ chùis an aghaidh air 6 IFan gun duilgheadas sam bith air mapa àbhaisteach. Chan eil meatailt aig a’ chluicheadair ghorm (ach beagan iarainn gus an eaconamaidh a stèidheachadh), mar sin bidh thu an eisimeil air an t-saothrachadh dhe 5% a nì mèinnean falamh. Agus bidh thu a’ cluich an aghaidh sianar fhathast (ged as urrainn dhut cluicheadair IF no dhà a thoirt air falbh airson cùisean a dhèanamh beagan nas fhasa). Gura math a thèid leat!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -673,7 +862,7 @@ msgstr "An Nìl"
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr "Sholaireadh an abhainn biadh ’s conaltradh a-riamh ach nì ceithir impireachdan a’ strì airson smachd air an tìr seo a-nis."
+msgstr "Sholaireadh an abhainn biadh ’s conaltradh a-riamh ach nì ceithir ìmpireachdan a’ strì airson smachd air an tìr seo a-nis."
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:11
 msgid ""
@@ -787,6 +976,12 @@ msgid ""
 "thousand waves, twinkling in the sun."
 msgstr "Tha iomadh eilean àlainn uaine a’ feitheamh air an fheadhainn a bhios dàna gu leòr gus tighinn thar drilean nam mìle tonn."
 
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr "Thoir an aire nach tog thu na longan agad sna lochan. Chan fhaigh iad seachad air na creagan dhan chuan far a bheil na puirt agad."
+
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
 msgstr "Dà chrìoch"
@@ -794,18 +989,6 @@ msgstr "Dà chrìoch"
 #: ../../data/maps/Two_Frontiers.wmf/elemental:10
 msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr "Mapa sabaid ioma-chluicheadair air eilean beag cruinn."
-
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:8
-msgid "Volcanic Winter"
-msgstr "Geamhradh na beinne-teine"
-
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:10
-msgid ""
-"In the middle of summer, a series of volcanic eruptions drew the winter in. "
-"Suddenly, the sun seemed to be gone and the only light and heat sources left"
-" were those that enforced this dramatic change. Continents, oceans and seas "
-"are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr "Thàinig an geamhradh tràth às dèidh sprèidheadh bheanntan-teine as t-samhradh. Chaidh a’ ghrian a-mach à sealladh is chan fhaigh sinn solas no blàths ach leis an tùs a dh’adhbharaich an t-atharrachadh èiginneach seo. Tha na mòr-thìrean sna cuantan a’ reòthadh agus chan urrainn dhuinn a bhith beò ach air eileanan nam beanntan-teine."
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"

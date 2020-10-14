@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_scouts_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Scout’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -40,17 +40,19 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start scouting because ...
          descname = _"scouting",
          actions = {
             "consume=smoked_fish",
-            "sleep=30000",
+            "sleep=duration:30s",
             "callworker=scout",
             "consume=atlanteans_bread",
-            "sleep=30000",
+            "sleep=duration:30s",
             "callworker=scout"
          }
       },
    },
 }
+
+pop_textdomain()

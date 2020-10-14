@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,17 +9,15 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_sapling",
    descname = _ "Birch (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 42000",
-         "remove=32",
+      main = {
+         "animate=idle duration:42s",
+         "remove=chance:12.5%",
          "grow=birch_summer_pole",
       },
    },
@@ -34,17 +34,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_pole",
    descname = _ "Birch (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 40000",
-         "remove=25",
+      main = {
+         "animate=idle duration:40s",
+         "remove=chance:9.76%",
          "grow=birch_summer_mature",
       },
    },
@@ -61,20 +59,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_mature",
    descname = _ "Birch (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 25000",
-         "remove=10",
-         "seed=birch_summer_sapling",
-         "animate=idle 30000",
-         "remove=10",
+      main = {
+         "animate=idle duration:25s",
+         "remove=chance:3.91%",
+         "seed=birch_summer_sapling proximity:78.12%",
+         "animate=idle duration:30s",
+         "remove=chance:3.91%",
          "grow=birch_summer_old",
       },
    },
@@ -91,20 +87,18 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "birch_summer_old",
    descname = _ "Birch (Old)",
    species = _ "Birch",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 800000",
-         "transform=deadtree2 27",
-         "seed=birch_summer_sapling",
+      main = {
+         "animate=idle duration:13m20s",
+         "transform=deadtree2 chance:10.55%",
+         "seed=birch_summer_sapling proximity:23.44%",
       },
       fall = {
          "remove=",
@@ -121,7 +115,10 @@ world:new_immovable_type{
          hotspot = { 24, 59 },
          sound_effect = {
             path = "sound/animals/bird5",
+            priority = 10
          },
       }
    },
 }
+
+pop_textdomain()

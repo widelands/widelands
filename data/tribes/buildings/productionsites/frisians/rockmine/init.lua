@@ -1,14 +1,28 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_rockmine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Rock Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "frisians_rockmine_deep",
+
+   enhancement = {
+      name = "frisians_rockmine_deep",
+      enhancement_cost = {
+         brick = 2,
+         granite = 1,
+         log = 1,
+         reed = 2
+      },
+      enhancement_return_on_dismantle = {
+         brick = 1,
+         log = 1,
+         reed = 1
+      }
+   },
 
    buildcost = {
       brick = 1,
@@ -59,13 +73,8 @@ tribes:new_productionsite_type {
       }
    },
 
-   indicate_workarea_overlaps = {
-      frisians_rockmine = false,
-      frisians_rockmine_deep = false,
-   },
-
    aihints = {
-      mines = "stones",
+      mines = "resource_stones",
       mines_percent = 50,
       prohibited_till = 630
    },
@@ -77,29 +86,25 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "ration", amount = 8 }
    },
-   outputs = {
-      "granite"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=5000",
+            "sleep=duration:5s",
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "sleep=38000",
+            "sleep=duration:38s",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {
          descname = _"mining granite",
          actions = {
-            "animate=working 21000",
-            "mine=stones 3 50 5 20",
+            "animate=working duration:21s",
+            "mine=resource_stones radius:3 yield:50% when_empty:5% experience_on_fail:20%",
             "produce=granite",
          }
       },
@@ -120,3 +125,5 @@ tribes:new_productionsite_type {
          pgettext("frisians_building", "This rock mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

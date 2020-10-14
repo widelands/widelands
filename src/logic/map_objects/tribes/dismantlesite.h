@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
+	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~DismantleSiteDescr() override {
 	}
 
@@ -71,7 +71,8 @@ public:
 	                       const Coords&,
 	                       Player*,
 	                       bool,
-	                       FormerBuildings& former_buildings);
+	                       FormerBuildings& former_buildings,
+	                       const std::map<DescriptionIndex, Quantity>& preserved_wares);
 
 	bool burn_on_destroy() override;
 	bool init(EditorGameBase&) override;
@@ -95,6 +96,10 @@ protected:
 	          const Widelands::Coords& coords,
 	          float scale,
 	          RenderTarget* dst) override;
+
+private:
+	std::map<DescriptionIndex, Quantity> preserved_wares_;
+	size_t next_dropout_index_;
 };
 }  // namespace Widelands
 

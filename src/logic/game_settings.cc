@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,17 @@
  */
 
 #include "logic/game_settings.h"
+
+#include "logic/game_data_error.h"
+
+Widelands::TribeBasicInfo GameSettings::get_tribeinfo(const std::string& tribename) const {
+	for (const Widelands::TribeBasicInfo& info : tribes) {
+		if (info.name == tribename) {
+			return info;
+		}
+	}
+	throw Widelands::GameDataError("The tribe '%s'' does not exist.", tribename.c_str());
+}
 
 Widelands::PlayerNumber GameSettings::find_shared(PlayerSlot slot) const {
 	Widelands::PlayerNumber result = 1;

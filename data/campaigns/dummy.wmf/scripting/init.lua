@@ -1,7 +1,7 @@
 -- =======================================================================
 --                           Dummy Mission Map
 -- =======================================================================
-set_textdomain("scenario_dummy.wmf")
+push_textdomain("scenario_dummy.wmf")
 
 include "scripting/messages.lua"
 include "scripting/richtext.lua"

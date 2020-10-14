@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,8 @@ namespace Widelands {
 
 /// The anything needed by win conditions
 struct MapWinconditionPacket {
-	void read(FileSystem&, Map& map, MapObjectLoader&);
-	void write(FileSystem&, Map& map, MapObjectSaver&);
+	void read(FileSystem&, Map& map);
+	void write(FileSystem&, Map& map);
 };
 }  // namespace Widelands
 

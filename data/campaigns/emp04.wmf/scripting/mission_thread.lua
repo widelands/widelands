@@ -1,7 +1,3 @@
-include "scripting/messages.lua"
-include "map:scripting/helper_functions.lua"
-include "scripting/field_animations.lua"
-
 -- Some objectives need to be waited for in separate threads
 local obj_find_monastery_done = false
 local julia_conquered = false
@@ -22,7 +18,7 @@ function dismantle()
    end
    sleep(2000)
    p1:allow_buildings("all")
-   p1:forbid_buildings{"empire_farm", "empire_farm2", "empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
+   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
    o.done = true
 
    campaign_message_box(amalea_3)
@@ -68,7 +64,7 @@ function farm_plans()
       end
 
       o.done = true
-      p1:allow_buildings{"empire_farm", "empire_farm2"}
+      p1:allow_buildings{"empire_farm"}
       run (wheat_chain)
    end
 end
@@ -444,7 +440,7 @@ function wheat_chain()
       o1.done = true
       julia_conquered = true
       p1:forbid_buildings{"empire_mill1", "empire_brewery1"}
-      p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
+      p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(saledus_2)
       campaign_message_box(julia_2)
       campaign_message_box(amalea_11)
@@ -458,7 +454,7 @@ function wheat_chain()
       hq[1]:set_wares("wheat", wheat)
       hq[1]:set_wares("wine", wine)
       p1:forbid_buildings{"empire_mill1", "empire_brewery1"}
-      p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
+      p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(julia_1)
 
       --remove all workers from p3 to avoid having them wandering around
@@ -481,10 +477,10 @@ function wheat_chain()
       place_building_in_region(p1, "empire_brewery", {field_brewery})
       place_building_in_region(p1, "empire_mill", {field_mill})
       place_building_in_region(p1, "empire_temple_of_vesta", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
-      connected_road(p1, field_warehouse.immovable.flag, "l, tl", true)
-      connected_road(p1, field_mill.immovable.flag, "tr, r", true)
-      connected_road(p1, field_mill.immovable.flag, "l, tl, tr", true)
-      connected_road(p1, field_mill.immovable.flag, "br, r", true)
+      connected_road("normal", p1, field_warehouse.immovable.flag, "l, tl", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "tr, r", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "l, tl, tr", true)
+      connected_road("normal", p1, field_mill.immovable.flag, "br, r", true)
 
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)
@@ -503,10 +499,8 @@ function karma()
             "empire_stonemasons_house",
             "empire_sawmill",
             "empire_mill",
-            "empire_mill2",
             "empire_bakery",
             "empire_brewery",
-            "empire_brewery2",
             "empire_vineyard",
             "empire_winery",
             "empire_tavern",

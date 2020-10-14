@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	/// is currently multiselecting messages.
 	void show_new_message(Widelands::MessageId, const Widelands::Message&);
 
-	enum Mode { Inbox, Archive };
+	enum class Mode { kInbox, kArchive };
 	void think() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 

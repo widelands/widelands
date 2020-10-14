@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,7 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
+#include "map_io/map_packet_versions.h"
 
 namespace Widelands {
 
@@ -57,9 +58,20 @@ void ExpeditionBootstrap::is_ready(Game& game) {
 
 // static
 void ExpeditionBootstrap::input_callback(
-   Game& game, InputQueue*, DescriptionIndex, Worker*, void* data) {
+   Game& game, InputQueue* queue, DescriptionIndex, Worker*, void* data) {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
 	eb->is_ready(game);
+	// If we ask for several additional items of the same type, it may happen that a
+	// specific item was originally requested by queue B but is put into queue A. This
+	// causes both queues to cancel their requests so that some transfers are
+	// accidentally cancelled. The solution is to iterate ALL queues of this type and
+	// check whether their count and transfers still match up.
+	for (std::pair<std::unique_ptr<InputQueue>, bool>& pair : eb->queues_) {
+		if (pair.first->get_type() == queue->get_type() &&
+		    pair.first->get_index() == queue->get_index()) {
+			pair.first->set_max_fill(pair.first->get_max_fill());  // calls update()
+		}
+	}
 }
 
 void ExpeditionBootstrap::start() {
@@ -222,8 +234,9 @@ size_t ExpeditionBootstrap::count_additional_queues() const {
 }
 
 void ExpeditionBootstrap::set_economy(Economy* new_economy, WareWorker type) {
-	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_))
+	if (new_economy == (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		return;
+	}
 
 	// Transfer the wares and workers.
 	for (auto& iq : queues_) {
@@ -300,20 +313,17 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
                                const TribesLegacyLookupTable& tribes_lookup_table,
                                uint16_t packet_version) {
 
-	// Keep this synchronized with kCurrentPacketVersionWarehouse in MapBuildingDataPacket!!
-	static const uint16_t kCurrentPacketVersion = 8;
 	assert(queues_.empty());
 	// Load worker queues
 	std::vector<WorkersQueue*> wqs;
 	std::vector<InputQueue*> additional_queues;
 	try {
-		// TODO(Nordfriese): Contains savegame compatibility code
-		if (packet_version >= 7 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersionWarehouseAndExpedition) {
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
 				wq->read(fr, game, mol, tribes_lookup_table);
-				bool removable = packet_version >= 8 ? fr.unsigned_8() : false;
+				const bool removable = fr.unsigned_8();
 				wq->set_callback(input_callback, this);
 
 				if (wq->get_index() == INVALID_INDEX) {
@@ -325,7 +335,8 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 				}
 			}
 		} else {
-			throw UnhandledVersionError("ExpeditionBootstrap", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError(
+			   "ExpeditionBootstrap", packet_version, kCurrentPacketVersionWarehouseAndExpedition);
 		}
 
 		// Load ware queues

@@ -4,16 +4,16 @@
 # Translators:
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2019
+# Jukka Pakarinen, 2016-2020
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2015
 # Sampo Harjula <sahtor.transifex@sahtor.net>, 2015
-# Teppo Mäenpää <teppo@runbox.com>, 2016
+# Teppo Mäenpää <teppo@runbox.com>, 2016,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 07:06+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -22,102 +22,106 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/txts/AUTHORS.lua:27
-msgid "Developers"
-msgstr "Kehittäjät"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Käyttöohje"
 
-#: ../../data/txts/AUTHORS.lua:29
-msgid "Widelands Development Team"
-msgstr "Widelands-kehittäjät"
-
-#: ../../data/txts/LICENSE.lua:6
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "Lisenssi"
 
-#: ../../data/txts/LICENSE.lua:8
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "Kehittäjät"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "Kääntäjät"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "Widelands-kehittäjät"
+
+#: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"
-msgstr "Widelands pelin lisenssi"
+msgstr "Widelands-pelin lisenssi"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:10
+#: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1% Widelands-kehittäjätiimi."
 
-#: ../../data/txts/LICENSE.lua:12
+#: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Tämä peli on vapaata ohjelmistoa (FOSS), lisenssinä GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Löydät lisätietoa vapaista FOSS ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Sieltä löydät linsenssitekstin sekä muuta tietoa vapaista ohjelmistoista."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "GPL-lisenssiteksti löytyy myös Widelands-paketista."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windows-käyttöjärjestelmässä lisenssi löytyy COPYING.txt -nimisestä tiedostosta. Asennushakemiston löydät Widelands Start -valikon avulla."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOS:n alla lisenssiteksti löytyy COPYING -nimisestä tiedostosta, joka löytyy veppisivulta lataamastasi asennuspaketista."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
 msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta."
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "Lisätietoa ja tukea voit etsiä ja saada osoitteesta %1% (Kotisivut, Wiki, Keskustelupalsta kysymyksille tai yleiselle tuelle), %2% (Bugiraportointijärjestelmä), ja %3% (Käännökset)."
 
-#: ../../data/txts/README.lua:6
-msgid "Readme"
-msgstr "Käyttöohje"
-
-#: ../../data/txts/README.lua:9
+#: ../../data/txts/README.lua:8
 msgid "an open source strategy game"
 msgstr "Avoimen lähdekoodin strategiapeli"
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:10
 msgid "Check out the Widelands project homepage:"
 msgstr "Widelands-projektin kotisivut:"
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:11
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "Widelands jaetaan GNU General Public License (GPL) -lisenssillä. Lisätietoa tiedostossa ‘COPYING’."
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:12
 msgid "Status"
 msgstr "Tila"
 
-#: ../../data/txts/README.lua:14
+#: ../../data/txts/README.lua:13
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -126,79 +130,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "Widelands on sangen toimiva peli, ja hauska erityisesti moninpelinä. Peliä voi kuitenkinkehittää edelleen. Jos haluat piirtää grafiikkaa, säveltää pelimusiikkia, tehdä uusia karttoja, ohjelmoida uusia ominaisuuksia tai parantaa käännöksiä -- tule kotisivullemme."
 
-#: ../../data/txts/README.lua:16
+#: ../../data/txts/README.lua:15
 msgid "Widelands Help"
 msgstr "Widelands-ohje"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:18
+#: ../../data/txts/README.lua:17
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "Saat apua pelaamiseen tai karttamuokkaimeen, kun napsautat \"help\" -painiketta tai painat %1%."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:20
+#: ../../data/txts/README.lua:19
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:22
 msgid "Reporting Bugs"
 msgstr "Vikaraportit"
 
-#: ../../data/txts/README.lua:24
+#: ../../data/txts/README.lua:23
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Jos törmäät bugiin, kerro siitä meidän bugiraportointijärjestelmällemme:"
 
-#: ../../data/txts/README.lua:26
+#: ../../data/txts/README.lua:25
 msgid "Please provide enough background information. Tell us:"
 msgstr "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen paikantamiseksi. Kerro meille:"
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:27
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt."
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:28
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "Mitä piti tapahtua ja mitä tapahtui."
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:29
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "Mitä Widelandsin versiota käytät? (joko julkaisun tai kehitysversion numero)"
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:30
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "Kerro, mitä käyttöjärjestelmää käytät; jotkin bugit ovat alustariippuvaisia."
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:31
 msgid "Which map you were playing when the bug occurred."
 msgstr "Mitä karttaa pelasit kun ongelma ilmeni."
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:32
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "Jos bugi koskee jotain virheellisesti piirtyvää, liitä kuvaruutukaappauksia jos voit."
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:33
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "Voit liittää pelitallenteen, jos sellainen helpottaa ongelman toistamista."
 
-#: ../../data/txts/TRANSLATORS.lua:24
-msgid "Translators"
-msgstr "Kääntäjät"
-
-#: ../../data/txts/TRANSLATORS.lua:26
+#: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "Kääntäjät"
 
@@ -342,11 +342,11 @@ msgid ""
 " wiki there."
 msgstr "Jos tarvitset lisäohjeita Widelandsin tai editorin kanssa, kotisivumme %s auttaa.\nWikisivuilta löytyy myös yksityiskohtaista tietoja eri heimoista."
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "Esittely"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -354,29 +354,29 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoita sekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä, mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr "Pelin alussa sinulla on pieni maa-alue sekä jonkin verran eri tarvikkeita.Niiden avulla voit laajentaa valtakuntaasi useiden tuhansien työntekijöiden kokoiseksi.Sinun pitää tehdä valtakuntaasi toimiva talous, ja selviytyä kohtaamisista kilpailevienheimojen kanssa."
+msgstr "Pelin alussa sinulla on pieni maa-alue sekä jonkin verran eri tarvikkeita. Niiden avulla voit laajentaa valtakuntaasi useiden tuhansien työntekijöiden kokoiseksi. Sinun pitää tehdä valtakuntaasi toimiva talous, ja selviytyä kohtaamisista kilpailevienheimojen kanssa."
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "Pelien toistot"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr "Widelands tallentaa pelien kulun kahteen tiedostoon. Toinen näistä on nimeltään.wrpl.wgf, ja sisältää alkutilanteen. Toisen tiedostonnimen pääte on .wrpl, ja se sisltääkaikki pelin aikana annetut komennot, kuten rakennus- ja hyökkäyskomennot.Tiedostonnimen alkuosana on pelin aloittamisaika."
+msgstr "Widelands tallentaa pelien kulun kahteen tiedostoon. Toinen näistä on nimeltään.wrpl.wgf, ja sisältää alkutilanteen. Toisen tiedostonnimen pääte on .wrpl, ja se sisltääkaikki pelin aikana annetut komennot, kuten rakennus- ja hyökkäyskomennot. Tiedostonnimen alkuosana on pelin aloittamisaika."
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -384,9 +384,9 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Voit katsoa pelin toiston päävalikon \"replay\" -toiminnolla.Huomaathan, että pienetkin muutokset peliohjelmassa voivat johtaa siihen, ettätallenteen seuraaminen keskeytyy synkroinointiongelmaan. Samoin verkkopelitvoivat epäonnistua, jos pelaajilla käytössään eri versiot pelistä."
+msgstr "Voit katsoa pelin toiston päävalikon \"replay\" -toiminnolla.Huomaathan, että pienetkin muutokset peliohjelmassa voivat johtaa siihen, ettätallenteen seuraaminen keskeytyy synkroinointiongelmaan. Samoin verkkopelit voivat epäonnistua, jos pelaajilla käytössään eri versiot pelistä."
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -396,7 +396,7 @@ msgid ""
 msgstr "Pelitallenteet ovat hyödyllisiä virheiden etsimisessä, joten ne kannattaa usein liittää bugiraportteihin. Tallenteet löytyvät \"%s\" -hakemistosta Linuxissa ja Mac OSX:ssa. Windowsissa ne ovat asennushakemiston \"replays\"-nimisessä alikansiossa."
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -404,29 +404,29 @@ msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "Välilyönti"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
-msgstr "Rakennusalueet päälle/pois"
+msgstr "Rakennuspaikat päälle/pois"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "Kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
-msgstr "Minikartta päälle/pois"
+msgstr "Pienkartta päälle/pois"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
@@ -594,7 +594,7 @@ msgstr "Numeronäppäimillä (0 - 9) voit suoraan asettaa valitun alueen koon hi
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennusalueet näkymän päälle tai pois."
+msgstr "Välilyönti toimii samoin kuin tavallisessa pelissä. Se kytkee rakennuspaikat näkymän päälle tai pois."
 
 #: ../../data/txts/tips/editor.lua:35
 msgid ""
@@ -702,8 +702,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -745,60 +745,66 @@ msgstr "Jotkin rakennukset, kuten maatila, toimivat vain pienellä lähialueella
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "Suurenna sisään/ulos hiiren rullalla tai %1%. Paina %2% resetoidaksesi suurennuksen."
 
 #: ../../data/txts/tips/general_game.lua:75
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
+msgstr "Pilkku ',' ja piste '.' -näppäimillä hypit vikkelästi viimeisten kohteidesi välillä."
+
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
+msgid "Ctrl + (Page Up/Page Down)"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Page Up/Page Down"
-msgstr ""
+msgstr "Page Up/Page Down"
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
+msgid "Shift + (Page Up/Page Down)"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
-msgstr ""
+msgstr "%1% vaihtaa pelin nopeutta. %2%askeltaa suuremmin, %3%pehmeämmin. "
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Nuolinäppäimet"
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgid ""
-"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
-msgstr ""
-
-#: ../../data/txts/tips/general_game.lua:79
-msgctxt "hotkey"
-msgid "Shift+Arrow keys"
+msgid "Ctrl + Arrow keys"
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:83
+msgid ""
+"Move map view using %1%. %2% will move the view faster, %3% moves slowly."
+msgstr "%1%siirtää karttanäkymää. %2%nopeuttaa siirtoa, %3% hidastaa sitä."
+
+#: ../../data/txts/tips/general_game.lua:83
+msgctxt "hotkey"
+msgid "Shift + Arrow keys"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

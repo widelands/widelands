@@ -1,15 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", { 60, 78 })
-add_animation(animations, "build", dirname, "build", { 60, 78 })
-
 tribes:new_warehouse_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_warehouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Warehouse"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -27,9 +23,19 @@ tribes:new_warehouse_type {
       grout = 1
    },
 
-   animations = animations,
+   animation_directory = dirname,
+   animations = {
+      idle = {
+         hotspot = { 60, 78 },
+      },
+      build = {
+         hotspot = { 60, 78 },
+      }
+   },
 
    aihints = {},
 
    heal_per_second = 170,
 }
+
+pop_textdomain()

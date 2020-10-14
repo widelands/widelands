@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -116,7 +116,7 @@ void set_config_string(const std::string& section,
 void set_config_directory(const std::string& userconfigdir) {
 	config_dir.reset(new RealFSImpl(userconfigdir));
 	config_dir->ensure_directory_exists(".");
-	log("Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
+	log_info("Set configuration file: %s/%s\n", userconfigdir.c_str(), kConfigFile.c_str());
 }
 
 void read_config() {
@@ -129,8 +129,8 @@ void write_config() {
 	try {  //  overwrite the old config file
 		g_options.write(kConfigFile.c_str(), true, *config_dir);
 	} catch (const std::exception& e) {
-		log("WARNING: could not save configuration: %s\n", e.what());
+		log_warn("could not save configuration: %s\n", e.what());
 	} catch (...) {
-		log("WARNING: could not save configuration");
+		log_warn("could not save configuration");
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ Icon::Icon(Panel* const parent,
            const int32_t w,
            const int32_t h,
            const Image* picture_id)
-   : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false) {
+   : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false), grey_out_(false) {
 	set_handle_mouse(false);
 	set_thinks(false);
 }
@@ -62,12 +62,19 @@ void Icon::draw(RenderTarget& dst) {
 		   std::min(1.f, std::min(static_cast<float>(available_width) / pic_->width(),
 		                          static_cast<float>(available_height) / pic_->height()));
 		// We need to be pixel perfect, so we use ints.
-		const int width = scale * available_width;
-		const int height = scale * available_height;
+		const int width = scale * pic_->width();
+		const int height = scale * pic_->height();
 		const int x = (available_width - width) / 2;
 		const int y = (available_height - height) / 2;
-		dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
-		                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1., BlendMode::UseAlpha);
+		if (grey_out_) {
+			dst.blitrect_scale_monochrome(
+			   Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height), pic_,
+			   Recti(0, 0, pic_->width(), pic_->height()), RGBAColor(191, 191, 191, 191));
+		} else {
+			dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
+			                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1.,
+			                   BlendMode::UseAlpha);
+		}
 		if (draw_frame_) {
 			dst.draw_rect(Recti(x, y, width + 2, height + 2), framecolor_);
 		}

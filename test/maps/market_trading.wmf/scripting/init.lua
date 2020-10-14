@@ -2,6 +2,7 @@ include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
 include "scripting/lunit.lua"
 include "scripting/ui.lua"
+include "test/scripting/stable_save.lua"
 
 game = wl.Game()
 map = game.map
@@ -25,11 +26,11 @@ end
 function place_markets()
    prefilled_buildings(p1, { "barbarians_market", 22, 27 })
    market_p1 = map:get_field(22, 27).immovable
-   connected_road(p1, market_p1.flag, "tr,tl|", true)
+   connected_road("normal", p1, market_p1.flag, "tr,tl|", true)
 
    prefilled_buildings(p2, { "barbarians_market", 31, 27 })
    market_p2 = map:get_field(31, 27).immovable
-   connected_road(p2, market_p2.flag, "tr,tl|", true)
+   connected_road("normal", p2, market_p2.flag, "tr,tl|", true)
 end
 
 full_headquarters(p1, 22, 25)

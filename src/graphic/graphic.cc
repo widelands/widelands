@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,23 +21,34 @@
 
 #include <memory>
 
+#include <SDL_messagebox.h>
+#include <SDL_video.h>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "graphic/animation/animation_manager.h"
 #include "graphic/build_texture_atlas.h"
+#include "graphic/default_resolution.h"
 #include "graphic/gl/initialize.h"
 #include "graphic/gl/system_headers.h"
 #include "graphic/image.h"
+#include "graphic/image_cache.h"
 #include "graphic/image_io.h"
+#include "graphic/note_graphic_resolution_changed.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
+#include "graphic/style_manager.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "notifications/notifications.h"
+
+#ifndef RESIZABLE_WINDOW
+#define SDL_SetWindowResizable(window, resizable)
+#endif
 
 Graphic* g_gr;
 
@@ -57,10 +68,9 @@ void set_icon(SDL_Window* sdl_window) {
 
 }  // namespace
 
-Graphic::Graphic()
-   : image_cache_(new ImageCache()),
-     animation_manager_(new AnimationManager()),
-     style_manager_(new StyleManager()) {
+Graphic::Graphic() {
+	g_image_cache = new ImageCache();
+	g_animation_manager = new AnimationManager();
 }
 
 /**
@@ -69,7 +79,8 @@ Graphic::Graphic()
 void Graphic::initialize(const TraceGl& trace_gl,
                          int window_mode_w,
                          int window_mode_h,
-                         bool init_fullscreen) {
+                         bool init_fullscreen,
+                         bool init_maximized) {
 	window_mode_width_ = window_mode_w;
 	window_mode_height_ = window_mode_h;
 
@@ -77,10 +88,15 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		throw wexception("SDL_GL_LoadLibrary failed: %s", SDL_GetError());
 	}
 
-	log("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	log_dbg("Graphics: Try to set Videomode %ux%u\n", window_mode_width_, window_mode_height_);
+	uint32_t window_flags = SDL_WINDOW_OPENGL;
+#ifdef RESIZABLE_WINDOW
+	window_flags |= SDL_WINDOW_RESIZABLE;
+#endif
 	sdl_window_ =
 	   SDL_CreateWindow("Widelands Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL);
+	                    window_mode_width_, window_mode_height_, window_flags);
+	SDL_SetWindowMinimumSize(sdl_window_, kMinimumResolutionW, kMinimumResolutionH);
 
 	GLint max;
 	// LeakSanitizer reports a memory leak which is triggered somewhere in this function call,
@@ -90,8 +106,11 @@ void Graphic::initialize(const TraceGl& trace_gl,
 
 	max_texture_size_ = static_cast<int>(max);
 
-	resolution_changed();
 	set_fullscreen(init_fullscreen);
+	if (init_maximized) {
+		set_maximized(true);
+	}
+	resolution_changed();
 
 	SDL_SetWindowTitle(sdl_window_, ("Widelands " + build_id() + '(' + build_type() + ')').c_str());
 	set_icon(sdl_window_);
@@ -99,42 +118,38 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	SDL_GL_SwapWindow(sdl_window_);
 
 	/* Information about the video capabilities. */
-	{
-		SDL_DisplayMode disp_mode;
-		SDL_GetWindowDisplayMode(sdl_window_, &disp_mode);
-		log("**** GRAPHICS REPORT ****\n"
+	const char* drv = SDL_GetCurrentVideoDriver();
+	log_dbg("**** GRAPHICS REPORT ****\n");
 #ifdef WL_USE_GLVND
-		    " VIDEO DRIVER GLVND %s\n"
+	log_dbg("VIDEO DRIVER GLVND %s\n", drv ? drv : "NONE");
 #else
-		    " VIDEO DRIVER %s\n"
+	log_dbg("VIDEO DRIVER %s\n", drv ? drv : "NONE");
 #endif
-		    " pixel fmt %u\n"
-		    " size %d %d\n"
-		    "**** END GRAPHICS REPORT ****\n",
-		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
-		const int bytes_per_pixel = SDL_BYTESPERPIXEL(disp_mode.format);
-		if (bytes_per_pixel != 4) {
-			const std::string error_message =
-			   (boost::format(
-			       "SDL should report 4 bytes per pixel, but %d were reported instead.\nPlease check "
-			       "that everything's OK with your graphics driver.") %
-			    bytes_per_pixel)
-			      .str();
-			log("ERROR: %s\n", error_message.c_str());
-			SDL_ShowSimpleMessageBox(
-			   SDL_MESSAGEBOX_ERROR, "Video Error", error_message.c_str(), nullptr);
-			exit(1);
+	SDL_DisplayMode disp_mode;
+	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+		if (SDL_GetCurrentDisplayMode(i, &disp_mode) == 0) {
+			log_dbg("Display #%d: %dx%d @ %dhz %s\n", i, disp_mode.w, disp_mode.h,
+			        disp_mode.refresh_rate, SDL_GetPixelFormatName(disp_mode.format));
+		} else {
+			log_warn("Couldn't get display mode for display #%d: %s\n", i, SDL_GetError());
 		}
 	}
+	log_dbg("**** END GRAPHICS REPORT ****\n");
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
-	image_cache_->fill_with_texture_atlases(
+	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
-	styles().init();
+	g_style_manager = new StyleManager();
 }
 
 Graphic::~Graphic() {
+	delete g_animation_manager;
+	g_animation_manager = nullptr;
+	delete g_image_cache;
+	g_image_cache = nullptr;
+	delete g_style_manager;
+	g_style_manager = nullptr;
 	if (sdl_window_) {
 		SDL_DestroyWindow(sdl_window_);
 		sdl_window_ = nullptr;
@@ -148,32 +163,60 @@ Graphic::~Graphic() {
 /**
  * Return the screen x resolution
  */
-int Graphic::get_xres() {
+int Graphic::get_xres() const {
 	return screen_->width();
 }
 
 /**
  * Return the screen x resolution
  */
-int Graphic::get_yres() {
+int Graphic::get_yres() const {
 	return screen_->height();
 }
 
-void Graphic::change_resolution(int w, int h) {
+int Graphic::get_window_mode_xres() const {
+	return window_mode_width_;
+}
+
+int Graphic::get_window_mode_yres() const {
+	return window_mode_height_;
+}
+
+void Graphic::change_resolution(int w, int h, bool resize_window) {
 	window_mode_width_ = w;
 	window_mode_height_ = h;
 
-	if (!fullscreen()) {
-		int old_w, old_h;
-		SDL_GetWindowSize(sdl_window_, &old_w, &old_h);
-		SDL_SetWindowSize(sdl_window_, w, h);
-		resolution_changed(old_w, old_h);
+	if (!fullscreen() && resize_window) {
+		set_window_size(w, h);
 	}
+
+	resolution_changed();
 }
 
-void Graphic::resolution_changed(int old_w, int old_h) {
+void Graphic::set_window_size(int w, int h) {
+	// Calling SDL_SetWindowSize() when the window is resizable or maximized can sometimes cause
+	// SDL (and consequently us) to lose track of the real window size, causing nasty glitches.
+	// To work around this we temporarily set the window as not resizable. It's set back to
+	// resizable later in refresh().
+	SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
+
+	if (maximized()) {
+		SDL_RestoreWindow(sdl_window_);
+	};
+
+	SDL_SetWindowSize(sdl_window_, w, h);
+}
+
+void Graphic::resolution_changed() {
+	int old_w = screen_ ? screen_->width() : 0;
+	int old_h = screen_ ? screen_->height() : 0;
+
 	int new_w, new_h;
 	SDL_GetWindowSize(sdl_window_, &new_w, &new_h);
+
+	if (old_w == new_w && old_h == new_h) {
+		return;
+	}
 
 	screen_.reset(new Screen(new_w, new_h));
 	render_target_.reset(new RenderTarget(screen_.get()));
@@ -198,7 +241,28 @@ int Graphic::max_texture_size_for_font_rendering() const {
 #endif
 }
 
-bool Graphic::fullscreen() {
+bool Graphic::maximized() const {
+	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
+	return flags & SDL_WINDOW_MAXIMIZED;
+}
+
+void Graphic::set_maximized(const bool to_maximize) {
+	window_mode_maximized_ = to_maximize;
+	if (fullscreen() || maximized() == to_maximize) {
+		return;
+	}
+	if (to_maximize) {
+		// Maximizing only works if the window is resizable.
+		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
+		SDL_MaximizeWindow(sdl_window_);
+	} else {
+		// Avoid glitches. See the comment in set_window_size().
+		SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
+		SDL_RestoreWindow(sdl_window_);
+	}
+}
+
+bool Graphic::fullscreen() const {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
@@ -208,27 +272,18 @@ void Graphic::set_fullscreen(const bool value) {
 		return;
 	}
 
-	int old_w, old_h;
-	SDL_GetWindowSize(sdl_window_, &old_w, &old_h);
+	// Avoid glitches. See the comment in set_window_size().
+	SDL_SetWindowResizable(sdl_window_, SDL_FALSE);
 
-	// Widelands is not resolution agnostic, so when we set fullscreen, we want
-	// it at the full resolution of the desktop and we want to know about the
-	// true resolution (SDL supports hiding the true resolution from the
-	// application). Since SDL ignores requests to change the size of the window
-	// whet fullscreen, we do it when in windowed mode.
+	// Use the desktop resolution in fullscreen mode.
+	// SDL will resize the window for us.
 	if (value) {
-		SDL_DisplayMode display_mode;
-		SDL_GetDesktopDisplayMode(SDL_GetWindowDisplayIndex(sdl_window_), &display_mode);
-		SDL_SetWindowSize(sdl_window_, display_mode.w, display_mode.h);
-
+		window_mode_maximized_ = maximized();
 		SDL_SetWindowFullscreen(sdl_window_, SDL_WINDOW_FULLSCREEN_DESKTOP);
 	} else {
 		SDL_SetWindowFullscreen(sdl_window_, 0);
-
-		// Next line does not work. See comment in refresh().
-		SDL_SetWindowSize(sdl_window_, window_mode_width_, window_mode_height_);
 	}
-	resolution_changed(old_w, old_h);
+	resolution_changed();
 }
 
 /**
@@ -237,22 +292,26 @@ void Graphic::set_fullscreen(const bool value) {
 void Graphic::refresh() {
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
-	// Setting the window size immediately after going out of fullscreen does
-	// not work properly. We work around this issue by resizing the window in
-	// refresh() when in window mode.
 	if (!fullscreen()) {
+		// Set the window to our preferred size if it goes out of sync.
+		// Not sure if this is still needed, leaving it just in case.
 		int true_width, true_height;
 		SDL_GetWindowSize(sdl_window_, &true_width, &true_height);
+
 		if (true_width != window_mode_width_ || true_height != window_mode_height_) {
-			SDL_SetWindowSize(sdl_window_, window_mode_width_, window_mode_height_);
+			set_window_size(window_mode_width_, window_mode_height_);
+			set_maximized(window_mode_maximized_);
+			resolution_changed();
 		}
+		// See the comment in set_window_size().
+		SDL_SetWindowResizable(sdl_window_, SDL_TRUE);
 	}
 
 	// The backbuffer now contains the current frame. If we want a screenshot,
 	// we should better take it now, before this is swapped out to the
 	// frontbuffer and becomes inaccessible to us.
 	if (!screenshot_filename_.empty()) {
-		log("Save screenshot to %s\n", screenshot_filename_.c_str());
+		log_info("Save screenshot to %s\n", screenshot_filename_.c_str());
 		std::unique_ptr<StreamWrite> sw(g_fs->open_stream_write(screenshot_filename_));
 		save_to_png(screen_->to_texture().get(), sw.get(), ColorType::RGB);
 		screenshot_filename_.clear();

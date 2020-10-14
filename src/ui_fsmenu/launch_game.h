@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,17 +22,15 @@
 
 #include <memory>
 
-#include "logic/game_settings.h"
-#include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 #include "wui/suggested_teams_ui.h"
+#include "ui_fsmenu/mapdetailsbox.h"
 
 class GameController;
-struct GameSettingsProvider;
 class LuaInterface;
 
 /**
@@ -45,9 +43,13 @@ public:
 	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchGame() override;
 
+	GameSettingsProvider& settings() const {
+		assert(settings_);
+		return *settings_;
+	}
+
 protected:
-	void clicked_ok() override;
-	void clicked_back() override;
+	virtual bool clicked_select_map() = 0;
 
 	LuaInterface* lua_;
 
@@ -58,6 +60,8 @@ protected:
 
 	/// Enables or disables the peaceful mode checkbox.
 	void update_peaceful_mode();
+	/// Enables or disables the custom_starting_positions checkbox.
+	void update_custom_starting_positions();
 
 	/// Loads all win conditions that can be played with the map into the selection dropdown.
 	/// Disables the dropdown if the map is a scenario.
@@ -72,25 +76,34 @@ protected:
 	/// parses the win condition and returns it as a std::unique_ptr<LuaTable>.
 	/// If this win condition can't be played with the map tags, returns a unique_ptr to nullptr.
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
-	                                                 std::set<std::string> tags) const;
+	                                                 const std::set<std::string>& tags) const;
 
 	void toggle_peaceful();
+	void toggle_custom_starting_positions();
+
 	void reset_teams(const Widelands::Map& map);
 	void select_teams();
 	void check_teams();
 	void update_team(PlayerSlot pos);
 
-	uint32_t butw_;
-	uint32_t buth_;
+	void layout() override;
 
-	int32_t const padding_;  // Common padding between panels
-	int32_t const label_height_;
-	int32_t const right_column_x_;
+	uint32_t standard_element_width_;
+	uint32_t standard_element_height_;
+	uint32_t padding_;
 
-	UI::Dropdown<std::string> win_condition_dropdown_;
-	UI::Checkbox peaceful_;
+	UI::Box main_box_;
+	UI::Box content_box_;
+	UI::Box individual_content_box;
+	UI::Box map_box_;
+
 	SuggestedTeamsDropdown suggested_teams_dropdown_;
 	const Widelands::SuggestedTeamLineup* selected_lineup_;
+
+	MapDetailsBox map_details;
+	UI::Textarea configure_game;
+	UI::Dropdown<std::string> win_condition_dropdown_;
+	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;
@@ -99,9 +112,9 @@ protected:
 
 	bool peaceful_mode_forbidden_;
 
-	Widelands::PlayerNumber nr_players_;
-
-	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
+private:
+	void add_all_widgets();
+	void add_behaviour_to_widgets();
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H

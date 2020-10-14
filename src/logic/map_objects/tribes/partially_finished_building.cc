@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,11 +56,16 @@ void PartiallyFinishedBuilding::cleanup(EditorGameBase& egbase) {
 		builder_request_ = nullptr;
 	}
 
-	for (WaresQueue* temp_ware : wares_) {
+	for (WaresQueue* temp_ware : consume_wares_) {
 		temp_ware->cleanup();
 		delete temp_ware;
 	}
-	wares_.clear();
+	for (WaresQueue* temp_ware : dropout_wares_) {
+		temp_ware->cleanup();
+		delete temp_ware;
+	}
+	dropout_wares_.clear();
+	consume_wares_.clear();
 
 	Building::cleanup(egbase);
 }
@@ -84,17 +89,24 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
 	if (type == wwWARE) {
 		if (Economy* const old = get_economy(type)) {
-			for (WaresQueue* temp_ware : wares_) {
+			for (WaresQueue* temp_ware : dropout_wares_) {
+				temp_ware->remove_from_economy(*old);
+			}
+			for (WaresQueue* temp_ware : consume_wares_) {
 				temp_ware->remove_from_economy(*old);
 			}
 		}
 	}
 	Building::set_economy(e, type);
-	if (builder_request_ && type == builder_request_->get_type())
+	if (builder_request_ && type == builder_request_->get_type()) {
 		builder_request_->set_economy(e);
+	}
 
 	if (e && type == wwWARE) {
-		for (WaresQueue* temp_ware : wares_) {
+		for (WaresQueue* temp_ware : dropout_wares_) {
+			temp_ware->add_to_economy(*e);
+		}
+		for (WaresQueue* temp_ware : consume_wares_) {
 			temp_ware->add_to_economy(*e);
 		}
 	}
@@ -130,7 +142,9 @@ bulldoze them.
 uint32_t PartiallyFinishedBuilding::get_playercaps() const {
 	uint32_t caps = Building::get_playercaps();
 
-	caps |= PCap_Bulldoze;
+	if (!is_destruction_blocked()) {
+		caps |= PCap_Bulldoze;
+	}
 	caps &= ~PCap_Dismantle;
 
 	return caps;
@@ -164,13 +178,15 @@ uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
 		// the construction worker in get_building_work(), and there can be
 		// a small delay between the worker completing his job and requesting
 		// new work.
-		if (thisstep > ts)
+		if (thisstep > ts) {
 			thisstep = ts;
+		}
 	}
 	thisstep = (thisstep << 16) / ts;
 	uint32_t total = (thisstep + (work_completed_ << 16));
-	if (work_steps_)
+	if (work_steps_) {
 		total /= work_steps_;
+	}
 
 	assert(total <= (1 << 16));
 

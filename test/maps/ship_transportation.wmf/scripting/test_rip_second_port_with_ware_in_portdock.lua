@@ -29,7 +29,7 @@ run(function()
    northern_port():remove()
    sleep(100)
 
-   stable_save(game, "ware_in_portdock")
+   stable_save(game, "ware_in_portdock", 10 * 1000)
 
    --ship has to get to the place of former upper port and then return back to the bottom port
    sleep(30000)

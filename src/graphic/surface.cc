@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 #include "graphic/surface.h"
 
-#include <SDL.h>
+#include <cstdlib>
 
 #include "base/rect.h"
 #include "base/vector.h"
@@ -119,7 +119,7 @@ void Surface::brighten_rect(const Rectf& rc, const int32_t factor) {
 	do_fill_rect(rect, color, blend_mode);
 }
 
-void Surface::draw_line_strip(std::vector<Vector2f> points,
+void Surface::draw_line_strip(const std::vector<Vector2f>& points,
                               const RGBColor& color,
                               float line_width) {
 	if (points.size() < 2) {

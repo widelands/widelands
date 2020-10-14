@@ -6,7 +6,7 @@ run(function()
    -- gives the builder enough time to walk over.
    port:start_expedition()
    sleep(50000)
-   stable_save(game, "cancel_in_port")
+   stable_save(game, "cancel_in_port", 10 * 1000)
    assert_equal(1, p1:get_workers("barbarians_builder"))
 
    port:cancel_expedition()

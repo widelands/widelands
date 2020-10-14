@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 by the Widelands Development Team
+ * Copyright (C) 2019-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ struct MapSizeBox : public UI::Box {
 	MapSizeBox(UI::Box& parent, const std::string& name, int spacing, int map_width, int map_height);
 
 	/// This function will be triggered when a new width or height is selected from the dropdowns
-	void set_selection_function(const std::function<void()> func);
+	void set_selection_function(const std::function<void()>& func);
 	/// The currently selected width
 	uint32_t selected_width() const;
 	/// The currently selected height

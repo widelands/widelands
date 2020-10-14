@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,10 @@
 #ifndef WL_EDITOR_EDITORINTERACTIVE_H
 #define WL_EDITOR_EDITORINTERACTIVE_H
 
+#include <map>
 #include <memory>
 
+#include "editor/editor_category.h"
 #include "editor/tools/history.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/increase_resources_tool.h"
@@ -34,6 +36,7 @@
 #include "editor/tools/set_port_space_tool.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "editor/tools/set_terrain_tool.h"
+#include "graphic/style_manager.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
@@ -41,6 +44,8 @@
 #include "wui/interactive_base.h"
 
 class EditorTool;
+
+const static std::string kEditorSplashImage = std::string(kTemplateDir) + "loadscreens/editor.jpg";
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
@@ -116,6 +121,10 @@ public:
 		return nullptr;
 	}
 
+	bool omnipotent() const override {
+		return true;
+	}
+
 	// action functions
 	void exit();
 
@@ -136,6 +145,10 @@ public:
 
 	// Access to the tools.
 	Tools* tools();
+
+	/// Access to the editor categories
+	const std::vector<std::unique_ptr<EditorCategory>>&
+	editor_categories(Widelands::MapObjectType type) const;
 
 private:
 	// For referencing the items in mainmenu_
@@ -191,6 +204,9 @@ private:
 	void toggle_bobs();
 	void toggle_grid();
 
+	/// Ensure all world units have been loaded and fill editor categories
+	void load_world_units();
+
 	//  state variables
 	bool need_save_;
 	uint32_t realtime_;
@@ -220,6 +236,9 @@ private:
 		UI::UniqueWindow::Registry players;
 		UI::UniqueWindow::Registry resizemap;
 	} tool_windows_;
+
+	std::map<Widelands::MapObjectType, std::vector<std::unique_ptr<EditorCategory>>>
+	   editor_categories_;
 
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;

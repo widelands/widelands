@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
-#include "logic/map_objects/map_object.h"
 
 namespace Widelands {
 
@@ -46,9 +45,11 @@ int32_t MapObjectLoader::get_nr_unloaded_objects() {
 	int32_t result = 0;
 	std::map<MapObject*, bool>::const_iterator const loaded_obj_end = loaded_objects_.end();
 	for (std::map<MapObject*, bool>::const_iterator it = loaded_objects_.begin();
-	     it != loaded_obj_end; ++it)
-		if (!it->second)
+	     it != loaded_obj_end; ++it) {
+		if (!it->second) {
 			++result;
+		}
+	}
 	return result;
 }
 
@@ -86,21 +87,6 @@ void MapObjectLoader::load_finish_game(Game& g) {
 		schedule_act_.back()->schedule_act(g, 1);
 		schedule_act_.pop_back();
 	}
-}
-
-constexpr Serial kEconomySavegameCompatibilityPrefix = std::numeric_limits<Serial>::max() / 2;
-Serial MapObjectLoader::get_economy_savegame_compatibility(Serial ware_economy) const {
-	if (ware_economy >= kEconomySavegameCompatibilityPrefix) {
-		throw GameDataError(
-		   "We are sorry, but this savegame is not compatible with the current Widelands "
-		   "version any more because it contains an economy with the unbelievably high serial %u",
-		   ware_economy);
-	}
-	const Serial worker_economy = kEconomySavegameCompatibilityPrefix + ware_economy;
-	log("Savegame compatibility: Splitting worker economy %u off from old-style economy %u\n",
-	    worker_economy, ware_economy);
-	assert(worker_economy > ware_economy);
-	return worker_economy;
 }
 
 }  // namespace Widelands

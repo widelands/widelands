@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_charcoal_burners_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Charcoal Burner’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -54,24 +54,13 @@ tribes:new_productionsite_type {
       { name = "log", amount = 6 },
    },
 
-   outputs = {
-      "coal"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_aqua_farm = false,
-      frisians_charcoal_burners_house = false,
-      frisians_clay_pit = true,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=erect_stack",
             "call=collect_coal",
-            "return=no_stats",
          },
       },
       erect_stack = {
@@ -82,14 +71,14 @@ tribes:new_productionsite_type {
             "callworker=find_pond",
             "consume=log:3",
             "callworker=make_stack",
-            "sleep=15000",
+            "sleep=duration:15s",
          },
       },
       collect_coal = {
          -- TRANSLATORS: Completed/Skipped/Did not start collecting coal because ...
          descname = _"collecting coal",
          actions = {
-            "sleep=15000",
+            "sleep=duration:15s",
             "callworker=collect_coal",
          },
       },
@@ -103,3 +92,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 12
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,20 +25,10 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
      workers_{},
      // Wares
      wares_{
-        {"thatch_reed", "reed"},
+        // {"old_name", "new_name"},
      },
      // Immovables
-     immovables_{
-        {"field_medium", "wheatfield_medium"},
-        {"field_small", "wheatfield_small"},
-        {"field_tiny", "wheatfield_tiny"},
-        {"field_ripe", "wheatfield_ripe"},
-        {"field_harvested", "wheatfield_harvested"},
-        {"reed_medium", "reedfield_medium"},
-        {"reed_small", "reedfield_small"},
-        {"reed_tiny", "reedfield_tiny"},
-        {"reed_ripe", "reedfield_ripe"},
-     },
+     immovables_{},
      // Buildings
      buildings_{},
      // Ships

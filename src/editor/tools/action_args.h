@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2019 by the Widelands Development Team
+ * Copyright (C) 2012-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,24 +53,18 @@ struct EditorActionArgs {
 	Widelands::Extent new_map_size;                        // resize tool
 
 	struct ResourceState {
-		Widelands::FCoords location;
+		Widelands::Coords location;
 		Widelands::DescriptionIndex idx;
 		Widelands::ResourceAmount amount;
 	};
-	struct ResizeHistory {
-		Widelands::Extent old_map_size = Widelands::Extent(0, 0);
-		std::map<Widelands::Coords, Widelands::FieldData> deleted_fields;
-		std::set<Widelands::Coords> port_spaces;
-		std::vector<Widelands::Coords> starting_positions;
-	};
 
-	std::list<ResourceState> original_resource;                         // resources set tool
-	std::list<const Widelands::BobDescr *> old_bob_type, new_bob_type;  // bob change tools
-	std::list<std::string> old_immovable_types;                         // immovable change tools
-	std::list<Widelands::DescriptionIndex> new_immovable_types;         // immovable change tools
-	Widelands::HeightInterval interval;                                 // noise height tool
+	std::list<ResourceState> original_resource;                        // resources set tool
+	std::list<const Widelands::BobDescr*> old_bob_type, new_bob_type;  // bob change tools
+	std::list<std::string> old_immovable_types;                        // immovable change tools
+	std::list<Widelands::DescriptionIndex> new_immovable_types;        // immovable change tools
+	Widelands::HeightInterval interval;                                // noise height tool
 	std::list<Widelands::DescriptionIndex> terrain_type, original_terrain_type;  // set terrain tool
-	ResizeHistory resized;                                                       // resize tool
+	Widelands::ResizeHistory resized;                                            // resize tool
 
 	std::list<EditorToolAction*> draw_actions;  // draw tool
 

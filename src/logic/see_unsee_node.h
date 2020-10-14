@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,11 @@
 #define WL_LOGIC_SEE_UNSEE_NODE_H
 
 namespace Widelands {
-enum class SeeUnseeNode { kUnsee, kUnexplore, kReveal };
-}
+// Do not change the order! It is stored in savegames.
+enum class SeeUnseeNode {
+	kUnexplored = 0,      // Never seen yet
+	kPreviouslySeen = 1,  // Previously seen
+	kVisible = 2          // Currently visible
+};
+}  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_SEE_UNSEE_NODE_H

@@ -1,31 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 14, 22 }
-   },
-   releasein = {
-      pictures = path.list_files(dirname .. "releasein_??.png"),
-      hotspot = { 15, 22 },
-      fps = 5
-   },
-   releaseout = {
-      pictures = path.list_files(dirname .. "releaseout_??.png"),
-      hotspot = { 15, 22 },
-      fps = 5
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {15, 22}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {15, 22})
-
-
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_gamekeeper",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Gamekeeper"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -37,12 +18,42 @@ tribes:new_worker_type {
       release = {
          "findspace=size:any radius:3",
          "walk=coords",
-         "animate=releasein 2000",
-         "createbob=bunny chamois deer elk reindeer sheep stag wildboar wisent",
-         "animate=releaseout 2000",
+         "animate=releasein duration:2s",
+         "createbob=bunny chamois deer moose reindeer sheep stag wildboar wisent",
+         "animate=releaseout duration:2s",
          "return"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 14, 22 }
+      },
+   },
+   spritesheets = {
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 15, 22 }
+      },
+      releasein = {
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 15, 22 }
+      },
+      releaseout = {
+         fps = 5,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 15, 22 }
+      }
+   }
 }
+
+pop_textdomain()

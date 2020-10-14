@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_weaponsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Weapon Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -47,16 +47,9 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "trident_light",
-      "trident_long",
-      "trident_steel",
-      "trident_double",
-      "trident_heavy_double"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -65,7 +58,6 @@ tribes:new_productionsite_type {
             "call=produce_trident_steel",
             "call=produce_trident_double",
             "call=produce_trident_heavy_double",
-            "return=no_stats"
          }
       },
       produce_trident_light = {
@@ -75,11 +67,11 @@ tribes:new_productionsite_type {
             -- time total: 50 + 3.6
             "return=skipped unless economy needs trident_light",
             "consume=iron planks",
-            "sleep=20000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 21000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:20s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:21s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_light"
          }
       },
@@ -90,11 +82,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_long",
             "consume=iron coal planks",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_long"
          }
       },
@@ -105,11 +97,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_steel",
             "consume=iron:2 coal planks",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_steel"
          }
       },
@@ -120,11 +112,11 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_double",
             "consume=iron coal:2 planks gold",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_double"
          }
       },
@@ -135,13 +127,15 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_heavy_double",
             "consume=iron:2 coal:2 planks gold",
-            "sleep=32000",
-            "playsound=sound/smiths/smith 192",
-            "animate=working 36000",
-            "playsound=sound/smiths/sharpening 120",
-            "sleep=9000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/smith priority:50% allow_multiple",
+            "animate=working duration:36s",
+            "playsound=sound/smiths/sharpening priority:90%",
+            "sleep=duration:9s",
             "produce=trident_heavy_double"
          }
       },
    },
 }
+
+pop_textdomain()

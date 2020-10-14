@@ -1,31 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { -4, 11 }
-   },
-   planting = {
-      pictures = path.list_files(dirname .. "plantreed_??.png"),
-      hotspot = { 10, 21 },
-      fps = 10
-   },
-   harvesting = {
-      pictures = path.list_files(dirname .. "harvest_??.png"),
-      hotspot = { 10, 22 },
-      fps = 5
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {8, 23}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {7, 23}, 10)
-
-
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_gardener",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Gardener"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -38,20 +19,58 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:1",
          "walk=coords",
-         "animate=planting 6500",
+         "animate=plant duration:6s500ms",
          "plant=attrib:seed_reed",
-         "animate=planting 6500",
+         "animate=plant duration:6s500ms",
          "return"
       },
       harvest = {
          "findobject=attrib:ripe_reed radius:1",
          "walk=object",
-         "animate=harvesting 14000",
+         "animate=harvest duration:14s",
          "callobject=harvest",
          "createware=reed",
          "return"
       },
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { -4, 11 }
+      }
+   },
+   spritesheets = {
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 8, 23 }
+      },
+      walkload = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 7, 23 }
+      },
+      plant = {
+         fps = 10,
+         frames = 15,
+         rows = 5,
+         columns = 3,
+         hotspot = { 10, 21 }
+      },
+      harvest = {
+         fps = 5,
+         frames = 20,
+         rows = 5,
+         columns = 4,
+         hotspot = { 10, 22 }
+      }
+   }
 }
+
+pop_textdomain()

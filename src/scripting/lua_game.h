@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,6 +76,8 @@ public:
 	int set_team(lua_State* L);
 	int get_see_all(lua_State* L);
 	int set_see_all(lua_State* L);
+	int get_allow_additional_expedition_items(lua_State* L);
+	int set_allow_additional_expedition_items(lua_State* L);
 
 	/*
 	 * Lua methods

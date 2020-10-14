@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2016
@@ -8,14 +8,16 @@
 # Juanjo Cb <jjcabrejas@gmail.com>, 2019
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2016
-# Gontzal M. Pujana <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Walter Benkel <tromaster@gmail.com>, 2020
+# Walter Benkel <tromaster@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-23 20:40+0000\n"
-"PO-Revision-Date: 2019-09-25 13:13+0000\n"
-"Last-Translator: Juanjo Cb <jjcabrejas@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,62 +25,62 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:29
 msgid "Ensure the supply of building wares"
-msgstr "Garantiza el suministro de artículos de construcción"
+msgstr "Asegura el suministro de materiales de construcción"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:31
 msgid "Supply Building Wares"
-msgstr "Suministro de artículos de construcción"
+msgstr "Suministro de Materiales de Construcción"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Supply basic building material for your economy:"
 msgstr "Suministro de material de construcción básico para tu economía:"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:33
 msgid "Build a quarry"
 msgstr "Construye una cantera"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Build two woodcutter’s houses"
 msgstr "Construye dos casas de leñadores"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr "Construye dos casas de guardabosques"
+msgstr "Construye dos casas de silvicultores"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
 msgstr "Construye un aserradero"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:42
 msgid "Expand your territory and explore"
 msgstr "Expande tu territorio y explora"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand and Explore"
 msgstr "Expandir y Explorar"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
 msgstr "La isla es enorme y siempre cuando no estemos seguros de que estamos solos aquí, no podemos relajarnos. Explora y conquístalo, es la única forma de protegernos de las amenazas de la isla y de los atlantes."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
 msgstr "Construye sitios militares para expandir tu territorio"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
 msgstr "Establece una solida producción de comida"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:54
 msgid "Food Production"
 msgstr "Producción de comida"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:55
 msgid ""
 "Food is very important for mines and military training areas. Establish a "
 "well working food environment by building at least one farm, one blackroot "
@@ -86,7 +88,7 @@ msgid ""
 " be baked into bread in a bakery, so build a bakery and a well, too."
 msgstr "La comida es muy importante para minas y zonas de entrenamiento militar. Establece un buen ambiente de producción de comida construyendo al menos una granja, una granja de raíz negra y un molino. Los dos tipos de harina junto con agua de un pozo serán horneados en pan en una panadería, así que construye una panadería y un pozo también."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
 "The other two important food wares are smoked fish and smoked meat. Raw meat"
 " is delivered from a hunter. A fisher gets the fish out of the sea while a "
@@ -96,49 +98,49 @@ msgid ""
 "you will need at least two of those."
 msgstr "Las otras dos mercancías alimenticias importantes son pescado ahumado y carne ahumada. La carne cruda es entregada por un cazador. Un pescador consigue pescado del mar mientras que un piscicultor se asegura que un banco de peces no se extinga criando más. Asegúrate de que siempre queden peces, de otra forma, el piscicultor no podrá criar nuevos. El ahumado ocurre en un ahumadero, necesitarás al menos dos de ellos."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
 msgstr "Construye una granja y una granja de raíz negra"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
 msgstr "Construye un molino para hacer harina de maíz y harina de raíz negra"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
 msgstr "Construye un pozo"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
 msgstr "Construye una panadería para hornear pan hecho de harina de maíz, harina de raíz negra y agua"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
 msgstr "Construye una casa de cazador para obtener la carne cruda"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a fisher’s house close to water to get raw fish"
 msgstr "Construye una casa de pescador con agua para obtener el pescado crudo."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:63
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
 msgstr "Construye una casa de piscicultor para el pescador para asegurarte de que el pescado no muere."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build two smokeries to smoke raw meat and fish"
 msgstr "Construye dos ahumadores para ahumar carne y pescado crudo."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:70
 msgid "Build a spider farm and a weaving mill"
 msgstr "Construye una granja de arañas y un telar"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:72
 msgid "Spidercloth Production"
 msgstr "Producción de tela de araña"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:73
 msgid ""
 "The weavers produce spidercloth and tabards in the weaving mill. Spidercloth"
 " is needed for the construction of some buildings and clothing, while "
@@ -147,27 +149,27 @@ msgid ""
 "while gold thread is produced by the gold spinning mill out of gold."
 msgstr "Los tejedores producen tela de araña y tabardos en el telar. La tela de araña es necesaria para la construcción de algunos edificios y la confección, mientras los tabardos son los uniformes de los soldados. El tela necesita hilo de oro y tela de araña como materia prima. El hilo de araña se produce en una granja de arañas, mientras que el hilo de oro se produce en el tejedor de hilo de oro a partir de oro."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
 msgstr "Construye un telar"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:75
 msgid "Build a spider farm"
 msgstr "Construye una granja de arañas"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a gold spinning mill"
 msgstr "Construye una hilandería de oro"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:84
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:82
 msgid "Build industry and mines"
 msgstr "Construye industrias y minas"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:84
 msgid "Industry and Mines"
 msgstr "Industria y minas"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:85
 msgid ""
 "Iron ore, gold ore and coal are mined in the respective mines. The crystal "
 "mine will dig for quartz and diamonds – all of them are precious materials "
@@ -175,41 +177,41 @@ msgid ""
 "them."
 msgstr "El mineral de hierro, mineral de oro y carbón son minados en sus respectivas minas. La mina de cristal excavará por cuarzo y diamantes - todos ellos son materiales preciosos y muy raros de encontrar. Se producirá mucha de piedra mientras se los busca."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:88
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
 msgstr "Los minerales tienen que ser forjados en una forja antes de ser usados. Los materiales refinados son usados por la armería, el taller de armaduras y el taller de herramientas."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
 msgstr "Construye una mina de cada tipo. Asegúrate de enviar primero a los geologistas a la montaña."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:88
 msgid "Build a smelting works"
 msgstr "Construye una forja"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid "Build an armor smithy and a weapon smithy"
 msgstr "Construye un taller de armaduras y una armería"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a toolsmithy"
 msgstr "Construye un taller de herramientas"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Build a barracks"
 msgstr "Construye un cuartel"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 msgid "Recruiting new soldiers"
 msgstr "Reclutando nuevos soldados"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:99
 msgid ""
 "Now that weapons are being forged, new soldiers can be recruited. For this, "
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
@@ -217,15 +219,15 @@ msgid ""
 "to become a soldier."
 msgstr "Ahora que hay armas siendo forjadas, puedes reclutar nuevos soldados. Para ésto, debes entregar tridentes ligeros y tabardos a los barracones. Los reclutas llegarán desde el almacén y recibirán entrenamiento básico para convertirse en soldados."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
 msgstr "Construye zona de entrenamiento para soldados"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Soldier Training Sites"
 msgstr "Zonas de entrenamiento para soldados"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:109
 msgid ""
 "Like all other tribes, the Atlanteans are also able to train soldiers: the "
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
@@ -233,19 +235,19 @@ msgid ""
 "industry are used to train better soldiers in the two training sites."
 msgstr "Como todas las otras tribus, los Atlantes son capaces de entrenar soldados: el calabozo entrena el ataque - el mayor atributo de los Atlantes - y el laberinto entre la evasión, vida y defensa. Los objetos producidos por la industria son usados para entrenar mejores soldados en las dos zonas de entrenamiento."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
 msgstr "Construye un calabozo y un laberinto"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:116
 msgid "Build a warehouse and a horse farm"
 msgstr "Construye un almacén y un establo"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Warehouse and Horse Farm"
 msgstr "Almacén y establo"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:121
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid ""
 "As your road network gets longer and more complicated, you should employ "
 "horses to help out your carriers. Horses are bred at horse farms using water"
@@ -253,43 +255,43 @@ msgid ""
 "system does not collapse."
 msgstr "Como tu red de caminos se hace más larga y complicada, debes emplear caballos para ayudar a tus transportistas. Los caballos son criados en el establo usando agua y trigo. Un almacén también te ayudará a asegurarte de que tu sistema de transporte no colapse."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
 msgstr "Construye un almacén"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:123
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
 msgstr "Construye un establo"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:129
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:127
 msgid "Build 3 ships to escape from the island"
 msgstr "Construye tres barcos para escapar de la isla"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:129
 msgid "Escape From the Island"
 msgstr "Escapa de la isla"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:132
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:130
 msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
 msgstr "Hay un lago en la parte superior de la isla. Construye tres barcos en esas aguas y deberías ser capas de rescatar tu gente antes de que la isla sea completamente tragada por el océano."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
 msgstr "Construye un astillero cerca del lago para empezar a construir barcos."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:142
 msgid "Proud to the Death"
 msgstr "Orgulloso de la Muerte"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:144
 msgid "Favored by the God"
 msgstr "Favorecido por el Dios"
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:146
 msgid ""
 "On the hidden and lost island of Atlantis, a proud tribe settled since the "
 "world was very young. Ruled by the bloodline of King Ajanthul – the first "
@@ -299,7 +301,7 @@ msgid ""
 msgstr "En la oculta y perdida isla de la Atlántida, una orgullosa tribu se asentó desde que el mundo era muy joven. Gobernados por el linaje del Rey Ajanthul - el primer humano en ser facultado por el dios del mar Lutas para respirar sobre el nivel del mar - y los sabios clérigos, quienes proporcionaron el vínculo a Lutas - prosperaron y se civilizaron."
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:148
 msgid ""
 "This story is taking place during the reign of King Askandor, the 43rd "
 "successor of King Ajanthul. He had been a good king, ruling Atlantis with "
@@ -309,16 +311,16 @@ msgid ""
 "seek for it was forbidden."
 msgstr "Esta historia toma lugar durante el reino del Rey Askandor, el 43vo sucesor del Rey Ajanthul. El fue un buen rey, gobernando la Atlántida con sabiduría y previsión. Pero con la edad, comenzó a temer su muerte y comenzó a buscar la cura de para la muerte aún cuando la mayoría de los clérigos le advirtieron sobre ello. Algunos dijeron que la vida eterna era solo para dioses y que buscarla estaba prohibido."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:154
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
 msgstr "Desgracia antes del Dios"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:156
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:154
 msgid "The God’s Punishment"
 msgstr "Castigo del Dios"
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:158
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:156
 msgid ""
 "But all seemed well. Only the horses seemed to feel something was wrong. "
 "During the nights, they went crazy and were full of fear. It was not long "
@@ -327,7 +329,7 @@ msgid ""
 msgstr "Pero todo parecía estar bien. Solo los caballos parecían sentir que algo estaba mal. Durante las noches, se volvieron locos y estaban llenos de miedo. No pasó mucho antes de que la criadora Xydra se diera cuenta de lo que estaba mal con ellos: el nivel del mar en frente de su establo estaba creciendo cada vez con mayor velocidad."
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:158
 msgid ""
 "The clerics retreated into meditation and the reason for the rising water "
 "was soon to be found: the god Lutas had lost faith in the Atlanteans because"
@@ -336,16 +338,16 @@ msgid ""
 " the sea again."
 msgstr "Los clérigos se retiraron a la meditación y la razón del crecimiento del agua fue pronto encontrada: el dios Lutas había perdido la fe en los Atlantes por el atrevimiento de su rey. Él decidió retirar los derechos que le concedió al Rey Ajanthul y sus hijos. Así, los llamó de nuevo bajo el mar."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Uproar and Confusion"
 msgstr "Alboroto y confusión"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:164
 msgid "Emerging Chaos…"
 msgstr "Caos Emergente..."
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:166
 msgid ""
 "Guilt-ridden, the king committed suicide. Without a monarch, the people "
 "turned to the clerics, but they had no substantial help to offer. Most "
@@ -354,7 +356,7 @@ msgid ""
 msgstr "Sintiendo culpa, el rey cometió suicido. Sin un monarca, la gente recurrió a los cléricos, pero no tuvieron ayuda que ofrecer. La mayoría aceptó su destino mientras que otros trataron de cambiar la mente del dios ofreciendo animales en su templo. Pero no fue posible…"
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:170
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:168
 msgid ""
 "Jundlina, the late king’s daughter and the highest priestess of the god was "
 "the most determined cleric. As countless offerings didn’t change the "
@@ -364,7 +366,7 @@ msgid ""
 msgstr "Jundlina, la hija del difunto rey y la más alta sacerdotisa del dios fue la más determinada clérigo.  Como incontables ofrendas no cambiaron la situación, ella se convenció de que para calmar al dios, una oferta de gran valor personal era necesaria. Entonces ella le ofreció su más querido: su esposo, el padre de su único hijo."
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:170
 msgid ""
 "But not even this changed the mind of the god. The water kept on rising. "
 "Nearly driven insane by guilt, pain and anger, Jundlina became a heretic: "
@@ -376,22 +378,22 @@ msgid ""
 msgstr "Pero ni siquiera esto cambió la mente del dios. El agua seguía creciendo. Casi enloquecida por la culpa, el dolor y la ira, Jundlina se convirtió en hereje: Secretamente, reunió personas de la gente normal que no estaban de acuerdo con la decisión de los clérigos de aceptar la voluntad de dios. Junto a ellos, incendió el tempo y robó un barco para huir de la influencia del dios sobre la Atlántida. Este pequeño grupo empezó a orar a Satul, el dios del fuego y el peor enemigo de Lutas."
 
 #. TRANSLATORS: Foreword
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
 msgid ""
 "Leaving the dying Atlantis and their past behind, they started on a quest to"
 " find a place sheltered by the fire and protected from the sea."
 msgstr "Dejando la Atlántida pereciendo y su pasado detrás, emprendió la misión de encontrar un lugar abrigado por el fuego y protegido del mar."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:179
 msgid "The Princess’ Memoir"
 msgstr "Memorias de la princesa"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:180
 msgid "Jundlina Writes Down Her Memories"
 msgstr "Jundlina anota sus memorias"
 
 #. TRANSLATORS: Jundlina - Diary
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:184
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:182
 msgid ""
 "We left Atlantis and sailed east. We entered the forbidden sea on the sixth "
 "day without noticing any pursuers from Atlantis and without Lutas having "
@@ -401,7 +403,7 @@ msgid ""
 msgstr "Salimos de la Atlántida y navegamos al este. Entramos en el mar prohibido al sexto día sin notar a los perseguidores de la Atlántida y sin Lutas destrozando nuestra nave. Ahora, estamos fuera de su alcance. Un día después, avistamos una isla que parece tener una de estas montañas que escupen fuego. Consideré esto una señal del dios del fuego y aterricé en su orilla."
 
 #. TRANSLATORS: Jundlina - Diary
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:185
 msgid ""
 "We spent the last week building two watchtowers on the mountains close to "
 "our landing area; and, of course, a hall for us all. We have very talented "
@@ -412,7 +414,7 @@ msgid ""
 msgstr "Invertimos la última semana construyendo dos torres de vigilancia en las montañas cerca de donde desembarcamos; y, por supuesto, un vestíbulo para nosotros. Tenemos constructores muy talentosos en el grupo - aún, los edificios no coincide con el arte que teníamos en la Atlántida. Espero que soporten la siguiente lluvia. Al menos, las torres nos advertirán si un barco de la Atlántida nos ha seguido y si la isla está habitada, veremos a los atacantes mucho tiempo antes de que lleguen."
 
 #. TRANSLATORS: Jundlina - Diary
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:188
 msgid ""
 "We have established ourselves on this island. The next step is now to make "
 "it a home. I reckon we need to establish a sustainable economy and to "
@@ -420,28 +422,28 @@ msgid ""
 "advice."
 msgstr "Nos hemos establecido en esta isla. El siguiente paso es hacerlo nuestro hogar. Creo que necesitamos establecer una economía sustentable y explorar nuestro alrededor. He llamado especialistas y seguiré sus consejos."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:193
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
 msgstr "Loftomor y Sidolus vuelven"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:194
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:229
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:291
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:367
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:427
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:192
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:227
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:273
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:315
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:325
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:356
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:365
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:425
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:437
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:457
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:470
 msgid "Jundlina"
 msgstr "Jundlina"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:196
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:194
 msgid ""
 "May Satul warm you both. Loftomor, you have been the island’s most renowned "
 "architect. Sidolus, you are a seasoned warrior and strategist. I have called"
@@ -449,12 +451,12 @@ msgid ""
 "new home?"
 msgstr "Que Satul los caliente a ambos. Loftomor, tu has sido el arquitecto más reconocido de la isla. Sidolus, tu eres un experimentado guerrero y estratega. Los he llamado ante mi por sus consejos: ¿qué se necesita para hacer de esto nuestro nuevo hogar?"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
 msgid "Loftomor Speaks"
 msgstr "Loftomor habla"
 
 #. TRANSLATORS: Loftomor
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:200
 msgid ""
 "May Satul warm you, Jundlina! The most important things for building a "
 "settlement are the building materials. There are some trees here, so we "
@@ -465,12 +467,12 @@ msgid ""
 " build a quarry, and my stonemasons will go to work promptly."
 msgstr "¡Que Satul te caliente, Judlina! Las cosas más importantes para construir un asentamiento son los materiales de construcción. Hay algunos árboles aquí, así que deberíamos construir casas para algunos taladores y por supuesto silvicultores, para evitar quedarnos sin árboles. Oh, y no debemos olvidar el aserradero, la mayoría de los edificios no pueden ser hechos solo con troncos. Los edificios más fuertes necesitan también granito, pero hay mucho al noreste de aquí; solo necesitamos construir una cantera, y mis mamposteros irán a trabajar inmediatamente."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
 msgstr "Sidolus habla"
 
 #. TRANSLATORS: Sidolus
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 msgid ""
 "May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a"
 " good supply of building materials for we have to expand our territory "
@@ -479,18 +481,18 @@ msgid ""
 "is available. We only need some housing to live in."
 msgstr "¡Que Satul te caliente, Judlina! Estoy de acuerdo con lo que porpone Loftomor. Necesitamos un buen suministro de materiales de construcción por lo que tenemos que expandir nuestro territorio con rapidez. No me sentiré seguro en esta isla mientras no hayamos visto todas sus costas. Me traje un montón de buenos hombres de la Atlántida. El poder militar está disponible. Solo necesitamos alguna vivienda para vivir."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:216
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:256
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:326
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina is Satisfied"
 msgstr "Jundlina está satisfecha"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:215
 msgid "Jundlina’s Memoirs"
 msgstr "Memorias de Jundlina"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:217
 msgid ""
 "Our building infrastructure is finished and I spent some days making sure "
 "that everybody is working well together. Now, there are other pressing "
@@ -498,28 +500,28 @@ msgid ""
 "with sorting some things out."
 msgstr "Nuestros edificios de infraestructura están terminados y he invertido algunos días asegurándome de que todos trabajan juntos. Ahora, hay otros asuntos urgentes. He llamado a Colionder, mi cocinero personal, delante de mí para conseguir su ayuda con la clasificación de algunas cosas."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:222
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
 msgstr "Colionder regresa"
 
 #. TRANSLATORS: Colionder
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:223
 msgid ""
 "May Satul warm you, Jundlina. Can I be of any service to you or the god?"
 msgstr "Que Satul the caliente, Jundlina. ¿Puedo servirte en algo a ti o a al dios?"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:228
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:274
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:290
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:306
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:347
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:438
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:458
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:226
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:272
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:288
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:345
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:456
 msgid "Jundlina Replies"
 msgstr "Jundlina responde"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:229
 msgid ""
 "May Satul warm you too, Colionder. Yes, I wondered if there is a way that we"
 " could centralize our food production. We lose a lot of productivity because"
@@ -528,12 +530,12 @@ msgid ""
 "on this."
 msgstr "Que Satul te caliente a ti también, Colionder. Si, me preguntaba si hay alguna forma de centralizar nuestra producción de comida. Perdemos mucha productividad porque nuestra gente están acostumbrados a hacer su propia comida. Creo que podemos dividir las responsabilidades, será mejor para todos. Quiero tu opinión sobre ello."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:234
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
 msgid "Colionder is in Thought"
 msgstr "Colionder está pensando"
 
 #. TRANSLATORS: Colionder
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:235
 msgid ""
 "Ahh, but I think this is impossible to change. The preparing and eating of "
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
@@ -542,7 +544,7 @@ msgid ""
 msgstr "Ahh, pero creo que es imposible de cambiar. La preparación y el consumo de comida es algo profundamente arraigado en nuestros Atlantes - es una ceremonia que necesitamos para nuestro bienestar. Así que supongo que no podemos apartar eso de los individuos por completo."
 
 #. TRANSLATORS: Colionder
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
 msgid ""
 "But we might find a compromise in between: for me, making bread is a "
 "troublesome task. Grinding the blackroots and corn to flour and then baking "
@@ -552,7 +554,7 @@ msgid ""
 msgstr "Pero podríamos encontrar un compromiso entre ellos: para mi, hacer pan es una tarea problemática. Moler la raíz negra y el trigo en harina y después hornear el pan es tedioso y aburrido; Creo que una aproximación más industrial puede ayudarnos. Me encantaría tener una entrega de pan fresco a mi casa cada día."
 
 #. TRANSLATORS: Colionder
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:243
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:241
 msgid ""
 "Oooh and even more important: the smoking of fish and meat to cleanse them "
 "and improve their taste is terrible. My house is full of smoke and stinks "
@@ -562,33 +564,33 @@ msgid ""
 "taking away the ritual."
 msgstr "Oooh y más importante aún: el ahumado de pescado y carne para mejorar su sabor es terrible. Mi casa está llena de humo y apesta durante semanas después. ¿No crees que esto puede ser hecho en un edificio especial donde los efectos secundarios no importan? Creo que esas dos cosas serán aceptadas por la gente y reducirá el tiempo para cocinar sin tener que quitar el ritual."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:246
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:244
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:245
 msgid "Jundlina Agrees"
 msgstr "Jundlina está de acuerdo"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:249
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
 msgid "Your words sound wise to me, Colionder. So be it then."
 msgstr "Tus palabras son sabias para mí, Colionder. Que así sea entonces."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Jundlina is Reviewing the Reports"
 msgstr "Jundlina está revisando los informes"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:257
 msgid ""
 "Seems like our food production is finished and everybody is working together"
 " nicely. It is really starting to feel like home here."
 msgstr "Parece que nuestra producción de alimentos ha terminado y todos están trabajando muy bien juntos. Realmente se empieza a sentir como en casa."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:263
 msgid "A Man Comes to Jundlina"
 msgstr "Un hombre va a Jundlina"
 
 #. TRANSLATORS: Opol
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:266
 msgid ""
 "May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver "
 "of the guild abandoning Atlantis and Lutas with you. I come with sad news "
@@ -599,7 +601,7 @@ msgid ""
 msgstr "Que Satul te caliente, Jundlina. Mi nombre es Opol, y soy el mayor tejedor del gremio que ha abandonado Atlántis y Lutas contigo. Vengo con malas noticias: no tenemos más tela de araña. Ni una sola pieza se puede encontrar en nuestro almacén. ¿Podrías ayudar al gremio de tejedores construyendo un telar y una granja de arañas? Las arañas generan la seda más fina y nosotros podremos producir la tela de araña más fina de ella."
 
 #. TRANSLATORS: Opol
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
 msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
@@ -607,7 +609,7 @@ msgid ""
 msgstr "Nosotros ofrecemos además producir los tabardos para jóvenes soldados y los tabardos dorados para oficiales como intercambio. Los necesitaras seguramente cuanto antes para reclutar nuevos soldados."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:277
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
 msgid ""
 "May Satul warm you too, Opol. I wanted to delay production of spidercloth, "
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
@@ -615,12 +617,12 @@ msgid ""
 "mill so that the golden tabards you make will not be golden by name alone."
 msgstr "Que Satul te caliente a ti también, Opol. Quería retrasar la producción de tela de araña, pero entiendo tu urgencia. Tu sugerencia suena justa para mi, construiré tu telar y la granja de arañas. Construiré además un tejedor de oro  para que los tabardos dorados que hagas no sean solo dorados por su nombre."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
 msgstr "Opol busca a Jundlina"
 
 #. TRANSLATORS: Opol
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:287
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:285
 msgid ""
 "May Satul warm you, Jundlina! The weaving mill, gold spinning mill and "
 "spider farm buildings are complete and are starting their work at this very "
@@ -629,18 +631,18 @@ msgid ""
 msgstr "¡Que Satul the caliente, Judlina! El telar, el tejedor de oro y la granja de arañas están completos y están empezando sus trabajos en este momento. El gremio de tejedores está agradecido por tu apoyo y mantendremos nuestra palabra de entregar el primer tabardo muy pronto."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:291
 msgid ""
 "This is good news indeed, Opol. Our economy is developing very well. Go back"
 " to your work now, Opol, and may Satul warm you and all your guild members!"
 msgstr "Esta es una buena noticia, Opol. Nuestra economía se está desarrollando muy bien. Vuelve a tu trabajo ahora, Opol, ¡y que Satul te caliente a ti y a todos los miembros del gremio!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:300
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:298
 msgid "Sidolus Seeks Out Jundlina"
 msgstr "Sidolus busca a Jundlina"
 
 #. TRANSLATORS: Sidolus
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:301
 msgid ""
 "May Satul warm you, Jundlina. Have you considered mining for resources in "
 "the mountains around us? We are running short of quartz and diamonds for our"
@@ -650,23 +652,23 @@ msgid ""
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
 msgstr "Que Satul te caliente, Jundlina. ¿Has considerado minar por recursos las montañas que nos rodean? Nos estamos quedando cortos de cuarzo y diamantes para nuestros edificios. Además, podríamos usar más hierro, oro y especialmente carbón. Si encontramos una fuente amplia de estas comodidades, podríamos empezar a producir armas y herramientas; esto nos ayudará enormemente. Por supuesto, necesitaremos forjadores, un armero, un fabricante de armaduras y un fabricante de herramientas. Y quizás más aún."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
 msgstr "Jundlina asiente"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:309
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:307
 msgid ""
 "I have considered this, Sidolus. I think it is about time. We will make this"
 " a priority for now. You shall get your industry soon!"
 msgstr "He considerado esto, Sidolus. Creo que ya es hora. Haremos de esto una prioridad por ahora. ¡Debes obtener tu industria pronto!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:316
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:314
 msgid "Jundlina Writes a Letter"
 msgstr "Jundlina escribe una carta"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:319
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
@@ -674,22 +676,22 @@ msgid ""
 msgstr "He recibido información de que nuestra industria minera ha empezado a funcionar. Ahora que estamos forjando armas, mandaré una carta a Sidolus informándole de que es momento de construir unos barracones y comenzar a reclutar soldados."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
 msgstr "Hoy he visto a los primeros reclutas reuniéndose delante de los nuevos barracones. Si todo va bien, deberían recibir su entrenamiento pronto."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:335
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina Summons Sidolus"
 msgstr "Jundlina cita a Sidolus"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is Angry"
 msgstr "Jundlina está enfadada"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
 msgid ""
 "What is this I hear, Sidolus? I received words about your soldiers "
 "misbehaving and bullying the common folk. What is this nonsense all about? "
@@ -697,12 +699,12 @@ msgid ""
 " is inexcusable! Explain this, if you will!"
 msgstr "¿Qué es lo que he escuchado, Sidolus? Recibí palabras acerca del mal comportamiento de tus soldados y la intimidación de la gente. ¿De que se trata esta tontería? Son sirvientes para el bien común y no deben abusar de sus poderes. ¡Esto es imperdonable! ¡Explica esto, si lo harás!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:341
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
 msgid "Sidolus Seems Contrite"
 msgstr "Sidolus parece arrepentido"
 
 #. TRANSLATORS: Sidolus
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:344
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:342
 msgid ""
 "I agree with you and I have punished the troublemakers severely. But it is "
 "very difficult to keep my men quiet: they are bored and have nothing to do. "
@@ -713,7 +715,7 @@ msgid ""
 msgstr "Estoy de acuerdo contigo y he castigado los alborotadores severamente. Pero es muy difícil de mantener mis hombres tranquilos: están muy aburridos y no tienen nada que hacer. Me gustaría incrementar  sus entrenamientos. Creo que más rutina en sus vidas los mantendrán ocupados y enfocados en sus deberes. Necesitaré un calabozo y un laberinto para ellos. Tengo los planos listos, pero me temo que no serán baratos."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:350
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
 msgid ""
 "I do not fear the cost and labor as long as it keeps your people at bay. You"
 " shall get your buildings. But note that I will not tolerate any rogue "
@@ -721,12 +723,12 @@ msgid ""
 "them. Dismissed."
 msgstr "No le temo al costo y el trabajo mientras mantenga a tu gente a raya. Debes obtener tus edificios. Pero no voy a tolerar ningún soldado pícaro; si algo similar vuelve a ocurrir, te haré responsable de ellos. Retírate."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:357
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:355
 msgid "Jundlina Received a Letter"
 msgstr "Jundlina recibe una carta"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:360
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
 msgid ""
 "I received an invitation from Sidolus. The first day of training in the "
 "newly finished labyrinth will be tomorrow. The dungeon is done as well and "
@@ -735,12 +737,12 @@ msgid ""
 "workload will keep them from bullying the civilian population."
 msgstr "He recibido una invitación de Sidolus. El primer día de entrenamiento en el recién terminado laberinto será mañana. El calabozo está terminado y comenzará su trabajo pronto. Estoy deseando que sea mañana; estoy muy interesada en como entrenan nuestros soldados, y me pregunto si la carga de trabajo adicional evitará que intimiden a la población civil."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:366
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
 msgid "Jundlina Considers the Economy"
 msgstr "Jundlina considera la Economía"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:369
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:367
 msgid ""
 "People are complaining about crowded streets and slow transportation. We "
 "need to help out our carriers on the roads. I have decided to build a horse "
@@ -748,24 +750,24 @@ msgid ""
 msgstr "Las personas se quejan de calles atestadas y transporte lento. Necesitamos ayudar a nuestros transportistas en los caminos. He decidido construir un establo de modo que ayuden con las mercancías pesadas."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:372
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:370
 msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
 msgstr "Otro camino para quitar carga a nuestros caminos es construir almacenes. Hemos reclamado la montaña ahora, parece ser una buena idea tener un almacén en la meseta para evitar tener que transportar todo arriba y abajo de las cuestas."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:384
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
 msgid "A Dangerous Discovery"
 msgstr "Un peligroso descubrimiento"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:383
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:411
 msgid "Jundlina is in Thought"
 msgstr "Judlina está pensando"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:387
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
 msgid ""
 "We found an old building, destroyed and burned by flames. I am very worried "
 "about this discovery. The building is not of any kind I’ve ever seen. It is "
@@ -776,7 +778,7 @@ msgid ""
 msgstr "Hemos encontrado un viejo edificio, destruido y quemado por las llamas. Estoy muy preocupada por este descubrimiento. El edificio no es de ningún tipo que haya visto. Ciertamente no está diseñado por ningún arquitecto Atlante del que haya escuchado. El edificio es tosco, el ensamblaje es descuidado. Pero los materiales son duraderos: la madera usada parece haber sido quemada de una forma rara antes de ser usada como material de construcción - es dura como piedra."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:390
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:388
 msgid ""
 "The implications frighten me. Are there others on this island? Where are "
 "they then? They work with fire, are they praying to Satul too? Are they "
@@ -785,23 +787,23 @@ msgid ""
 msgstr "Las implicaciones me asustan. ¿Hay otras personas en la isla? ¿Dónde están entonces? Trabajan con fuego, ¿oran a Satul también? ¿Son amigos o enemigos? ¿Y por qué el edificio fue incendiado? ¿Ha visto guerra esta isla? ¿Se está librando una guerra en ella ahora mismo?"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:393
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:391
 msgid ""
 "We must improve our military capabilities. If there are foes on the island, "
 "we have to be prepared when we meet them. We should also enforce the "
 "fortification of our borders."
 msgstr "Debemos mejorar nuestras capacidades militares. Si hay rivales en la isla, tenemos que estar preparados cuando los encontremos. Debemos fortificar nuestras fronteras."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:401
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Another Building"
 msgstr "Otro edificio"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
 msgid "Jundlina is Worried"
 msgstr "Jundlina está preocupada"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:404
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
 msgid ""
 "We found one more building of this strange making. We have yet to see any of"
 " its builders. But obviously there has been a community on this island "
@@ -810,12 +812,12 @@ msgid ""
 "us unprepared."
 msgstr "Hemos encontrado más edificios de esta extraña fabricación. Aún tenemos que ver alguno de sus constructores. Pero obviamente hubo una comunidad en esta isla antes y evidentemente estaba militarizada. Tengo que comprobar nuestro estado militar con mis generales. No permitiré que un enemigo potencial nos encuentre desprevenidos."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:412
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:410
 msgid "One More Building"
 msgstr "Un edificio más"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:415
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:413
 msgid ""
 "And yet another of these buildings. We know now that the tribe that built "
 "them once had complete control over the island. But I am no longer so scared"
@@ -825,12 +827,12 @@ msgid ""
 " without obvious dangers, I am feeling very much at home here already."
 msgstr "Y otro más de estos edificios. Ahora sabemos que la tribu que los construyó alguna vez tuvo completo control sobre la isla. Pero ya no estoy tan asustada de enemigos potenciales. Sabemos mucho de esta isla y no hay rastro de esta antigua economía que encontramos. Estoy empezando a relajarme, pero no dejaré nuestra guardia baja hasta que continuemos explorando esta hermosa isla. Pero con evidentes peligros, ya me siento como en casa aquí."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:426
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:424
 msgid "The Water is Rising!"
 msgstr "¡El Agua está aumentando!"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:429
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:427
 msgid ""
 "May Satul save us! Lutas is still trying to get to us. A scout informed me "
 "that the ocean is rising quickly. We have to reach higher ground and "
@@ -838,12 +840,12 @@ msgid ""
 "mountains. How can we escape?"
 msgstr "¡Que Satul nos salve! Lutas sigue intentando llegar a nosotros. Un explorador me informa que el océano está creciendo rápidamente. Tenemos que llegar a tierras más altas y evacuar a todos y todas las mercancías que podamos del cuartel general arriba de las montañas. ¿Como podemos escapar?"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:432
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:430
 msgid "A Young Man Approaches"
 msgstr "Un Jóven Hombre se Acerca"
 
 #. TRANSLATORS: Ostur
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:435
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:433
 msgid ""
 "May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have"
 " invented a new kind of ship: smaller than those we are used to, but much "
@@ -852,19 +854,19 @@ msgid ""
 msgstr "Que Satul te caliente, Judlina. Mi nombre es Ostur y construyo barcos. He inventado un nuevo tipo de barco: más pequeño que los que usamos, pero mucho más resistente. Si los construimos correctamente, confío en que podemos navegar distancias más largas con ellos y quizás escapar de la influencia de Lutas."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:441
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
 msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
 msgstr "Ostur, no tenemos tiempo. El agua está creciendo muy rápido, y si construimos los barcos en la costa se hundirán en el mar antes de que puedan flotar. ¡Me temo que estamos condenados!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:446
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:444
 msgid "Ostur Seems Confident"
 msgstr "Ostur parece confiar"
 
 #. TRANSLATORS: Ostur
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:455
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:453
 msgid ""
 "A friend of mine explored the island on his own and he told me of a big lake"
 " at the top of the mountain. I suggest we build the ships in this lake and "
@@ -873,14 +875,14 @@ msgid ""
 msgstr "Un amigo mio exploró la isla el mismo y me contó sobre un gran lago en lo alto de la montaña. Sugiero que construyamos los barcos en el lago y esperemos hasta que la isla se ahogue debajo de nosotros. Entonces podremos zarpar de aquí. Es un plan atrevido, pero creo que puede funcionar."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:461
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
 msgstr "Tu cabello rojo es una señal del dios del fuego. Confiaré en ti y apoyaré tu plan. Nuestra supervivencia está en tus manos ahora, Ostur."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:464
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:462
 msgid ""
 "Swift now, we need a house for Ostur next to the lake, and we need planks, "
 "logs and spidercloth for the construction there. Forget about everything "
@@ -888,12 +890,12 @@ msgid ""
 "all swallowed by the sea."
 msgstr "Rápido, necesitamos una casa para Ostur cerca del lago, y necesitamos tablas, troncos y tela de araña para su construcción. Olvídense de cualquier otra cosa, necesitamos esas mercancías en lo alto de la montaña antes de que nuestros almacenes queden bajo agua."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:471
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
 msgid "Jundlina is Relieved"
 msgstr "Jundlina está aliviada"
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:474
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:472
 msgid ""
 "Praise Satul! Ostur, the young ship builder did it. We have three ships – "
 "never have I seen sturdier ones – with enough room to carry all of us and "
@@ -903,17 +905,17 @@ msgid ""
 msgstr "¡Alabado Satul! Ostur, el joven constructor naval lo hizo. Tenemos tres barcos - nunca los había visto más robustos - con suficiente espacio para transportar a todos y algunas mercancías también. Y este rescate llega justo a tiempo: Lutas está a punto de engullir el resto de esta isla, el agua crece más rápido a medida que pasan las horas. Pero podemos hacer nuestro escape ahora y empezar de nuevo en algún país muy lejos..."
 
 #. TRANSLATORS: Jundlina
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
 msgstr "Me espero un largo viaje, pero encontraremos la tierra de Satul al final. Esto es lo que le prometí a mi gente. Y a mi misma."
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:478
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
 msgid "Congratulations"
 msgstr "Enhorabuena"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:479
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:477
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
@@ -921,24 +923,11 @@ msgstr "Has ganado esta misión. Continúa con la siguiente o sigue jugando el t
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:485
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "¡Edificio perdido!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgid "We lost a building to the ocean!"
 msgstr "¡Hemos perdido un edificio en el océano!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr "Nuevo objetivo"
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr "Nuevos objetivos"

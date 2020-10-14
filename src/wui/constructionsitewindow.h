@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
  * Status window for construction sites.
  */
 struct ConstructionSiteWindow : public BuildingWindow {
-	ConstructionSiteWindow(InteractiveGameBase& parent,
+	ConstructionSiteWindow(InteractiveBase& parent,
 	                       UI::UniqueWindow::Registry& reg,
 	                       Widelands::ConstructionSite&,
 	                       bool avoid_fastclick,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,12 @@
 
 #include <memory>
 
+#include <SDL_mouse.h>
+#include <SDL_timer.h>
+
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -48,7 +51,7 @@ Table<void*>::Table(Panel* const parent,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-     lineheight_(text_height(g_gr->styles().table_style(style).enabled())),
+     lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
      style_(style),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
@@ -71,7 +74,7 @@ Table<void*>::Table(Panel* const parent,
 	scrollbar_filler_button_->set_visible(false);
 	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
 	                           get_h() - headerheight_, style);
-	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
+	scrollbar_->moved.connect([this](int32_t a) { set_scrollpos(a); });
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
 	scrollbar_->set_pagesize(get_h() - lineheight_);
@@ -118,15 +121,16 @@ void Table<void*>::add_column(uint32_t const width,
 		// The title text can be empty.
 		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
 		                   tooltip_string);
-		c.btn->sigclicked.connect(
-		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
+		const size_t col_index = columns_.size();
+		c.btn->sigclicked.connect([this, col_index]() { header_button_clicked(col_index); });
 		c.width = width;
 		c.alignment = alignment;
-		c.compare = boost::bind(&Table<void*>::default_compare_string, this, columns_.size(), _1, _2);
+		c.compare = [this, col_index](
+		               uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
-			flexible_column_ = columns_.size() - 1;
+			flexible_column_ = col_index;
 		}
 	}
 }
@@ -190,8 +194,9 @@ void Table<void*>::clear() {
 	}
 	entry_records_.clear();
 
-	if (scrollbar_)
+	if (scrollbar_) {
 		scrollbar_->set_steps(1);
+	}
 	scrollpos_ = 0;
 	last_click_time_ = -10000;
 	clear_selections();
@@ -217,6 +222,32 @@ void Table<void*>::fit_height(uint32_t entries) {
 	set_desired_size(tablewidth, tableheight);
 }
 
+std::vector<Recti> Table<void*>::focus_overlay_rects() {
+	if (!has_selection()) {
+		return Panel::focus_overlay_rects();
+	}
+	const int f = g_style_manager->focus_border_thickness();
+	const int32_t w = get_eff_w();
+	const int32_t lineheight = get_lineheight();
+	int32_t y = headerheight_ + lineheight * selection_index() - scrollpos_;
+	int32_t h = lineheight;
+	if (y < static_cast<int>(headerheight_)) {
+		h -= (headerheight_ - y);
+		y = headerheight_;
+		if (h < f) {
+			return Panel::focus_overlay_rects();
+		}
+	}
+	if (y + h > get_h()) {
+		h -= (y + h - get_h());
+		if (h < f) {
+			return Panel::focus_overlay_rects();
+		}
+	}
+	return {Recti(0, y, w, f), Recti(0, y + h - f, w, f), Recti(0, y + f, f, h - 2 * f),
+	        Recti(w - f, y + f, f, h - 2 * f)};
+}
+
 /**
  * Redraw the table
  */
@@ -229,8 +260,9 @@ void Table<void*>::draw(RenderTarget& dst) {
 	dst.brighten_rect(Recti(0, 0, get_eff_w(), get_h()), ms_darken_value);
 
 	while (idx < entry_records_.size()) {
-		if (y >= static_cast<int32_t>(get_h()))
+		if (y >= static_cast<int32_t>(get_h())) {
 			return;
+		}
 
 		const EntryRecord& er = *entry_records_[idx];
 
@@ -305,10 +337,11 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 
-			const UI::FontStyleInfo& font_style =
-			   er.font_style() != nullptr ? *er.font_style() : er.is_disabled() ?
-			                                g_gr->styles().table_style(style_).disabled() :
-			                                g_gr->styles().table_style(style_).enabled();
+			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ?
+			                                         *er.font_style() :
+			                                         er.is_disabled() ?
+			                                         g_style_manager->table_style(style_).disabled() :
+			                                         g_style_manager->table_style(style_).enabled();
 			std::shared_ptr<const UI::RenderedText> rendered_text =
 			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
@@ -396,8 +429,9 @@ bool Table<void*>::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
  * Handle mouse presses: select the appropriate entry
  */
 bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y) {
-	if (get_can_focus())
+	if (get_can_focus()) {
 		focus();
+	}
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT: {
@@ -435,14 +469,16 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
  *        negative values up.
  */
 void Table<void*>::move_selection(const int32_t offset) {
-	if (!has_selection())
+	if (!has_selection()) {
 		return;
+	}
 	int32_t new_selection = (is_multiselect_ ? last_multiselect_ : selection_) + offset;
 
-	if (new_selection < 0)
+	if (new_selection < 0) {
 		new_selection = 0;
-	else if (static_cast<uint32_t>(new_selection) > entry_records_.size() - 1)
+	} else if (static_cast<uint32_t>(new_selection) > entry_records_.size() - 1) {
 		new_selection = entry_records_.size() - 1;
+	}
 
 	multiselect(new_selection);
 	// Scroll to newly selected entry
@@ -455,8 +491,9 @@ void Table<void*>::move_selection(const int32_t offset) {
  * Args: i  the entry to select
  */
 void Table<void*>::select(const uint32_t i) {
-	if (empty() || i == no_selection_index())
+	if (empty() || i == no_selection_index()) {
 		return;
+	}
 
 	selection_ = i;
 	if (is_multiselect_) {
@@ -616,7 +653,7 @@ bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 }
 
 void Table<void*>::layout() {
-	if (columns_.empty() || get_w() == 0) {
+	if (columns_.empty() || get_h() == 0 || get_w() == 0) {
 		return;
 	}
 
@@ -683,8 +720,9 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	assert(columns_.at(sort_column_).btn);
 	assert(sort_column_ < columns_.size());
 
-	if (upper_bound > size())
+	if (upper_bound > size()) {
 		upper_bound = size();
+	}
 
 	std::vector<uint32_t> indices;
 	std::vector<EntryRecord*> copy;
@@ -697,7 +735,7 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 	}
 
 	std::stable_sort(
-	   indices.begin(), indices.end(), boost::bind(&Table<void*>::sort_helper, this, _1, _2));
+	   indices.begin(), indices.end(), [this](uint32_t a, uint32_t b) { return sort_helper(a, b); });
 
 	uint32_t newselection = selection_;
 	std::set<uint32_t> new_multiselect;

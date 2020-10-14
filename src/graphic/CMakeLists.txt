@@ -12,7 +12,7 @@ wl_library(graphic_toolbar_imageset
     toolbar_imageset.cc
     toolbar_imageset.h
   DEPENDS
-    graphic
+    graphic_image_cache
     graphic_surface
     scripting_lua_table
 )
@@ -37,7 +37,6 @@ wl_library(graphic_playercolor
     playercolor.cc
     playercolor.h
   DEPENDS
-    graphic
     graphic_color
     graphic_image_cache
     graphic_surface
@@ -64,11 +63,9 @@ wl_library(graphic_image_io
     image_io.h
     image_io.cc
   USES_PNG
-  USES_SDL2
   USES_SDL2_IMAGE
   DEPENDS
     base_exceptions
-    base_log
     graphic_surface
     io_fileread
     io_filesystem
@@ -79,7 +76,6 @@ wl_library(graphic_image_cache
   SRCS
     image_cache.cc
     image_cache.h
-  USES_SDL2
   DEPENDS
     base_macros
     graphic_image_io
@@ -102,7 +98,6 @@ wl_library(graphic_gl_utils
     gl/system_headers.h
     gl/utils.cc
     gl/utils.h
-  USES_BOOST_REGEX
   USES_SDL2
   USES_OPENGL
   DEPENDS
@@ -129,7 +124,6 @@ wl_library(graphic_surface
   DEPENDS
     base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic_color
     graphic_draw_programs
@@ -163,7 +157,6 @@ wl_library(graphic_draw_programs
     base_macros
     base_geometry
     graphic_gl_utils
-    base_log
     graphic_color
 )
 
@@ -207,6 +200,7 @@ wl_library(graphic_minimap_renderer
     base_geometry
     base_macros
     economy
+    graphic_playercolor
     graphic_surface
     logic
     logic_map
@@ -220,6 +214,7 @@ wl_library(graphic_fields_to_draw
     gl/fields_to_draw.h
   DEPENDS
     base_geometry
+    base_log
     graphic
     graphic_gl_utils
     logic
@@ -243,7 +238,6 @@ wl_library(graphic_terrain_programs
   DEPENDS
     base_exceptions
     base_geometry
-    base_log
     base_macros
     graphic
     graphic_fields_to_draw
@@ -289,16 +283,30 @@ wl_library(graphic_wordwrap
     wordwrap.cc
     wordwrap.h
   USES_ICU
-  USES_SDL2_TTF
   DEPENDS
     base_geometry
-    base_log
     graphic
     graphic_align
     graphic_color
     graphic_fonthandler
     graphic_text
     graphic_text_layout
+)
+
+
+# Mouse cursor
+
+wl_library(graphic_mouse_cursor
+  SRCS
+    mouse_cursor.cc
+    mouse_cursor.h
+  USES_SDL2
+  DEPENDS
+    base_geometry
+    graphic
+    graphic_image_cache
+    graphic_image_io
+    io_filesystem
 )
 
 
@@ -309,6 +317,7 @@ wl_library(graphic
     default_resolution.h
     graphic.cc
     graphic.h
+    note_graphic_resolution_changed.h
     style_manager.cc
     style_manager.h
     rendertarget.cc

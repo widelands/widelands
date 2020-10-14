@@ -8,7 +8,7 @@ include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
 include "scripting/win_conditions/territorial_functions.lua"
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
 
@@ -25,7 +25,7 @@ local wc_desc = _ (
    "land than any other player could gain."
 )
 
-return {
+local r = {
    name = wc_name,
    description = wc_desc,
    peaceful_mode_allowed = true,
@@ -44,7 +44,7 @@ return {
       territory_points.remaining_time = time_to_keep_territory
 
       local function _send_state(show_popup)
-         set_textdomain("win_conditions")
+         push_textdomain("win_conditions")
 
          for idx, player in ipairs(plrs) do
             local msg = ""
@@ -60,6 +60,7 @@ return {
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
             send_message(player, game_status.title, msg, {popup = show_popup})
          end
+         pop_textdomain()
       end
 
       -- Install statistics hook
@@ -88,3 +89,5 @@ return {
       territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
    end
 }
+pop_textdomain()
+return r

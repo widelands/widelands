@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ struct Coords;
 
 class FerryDescr : public CarrierDescr {
 public:
-	FerryDescr(const std::string& init_descname, const LuaTable& table, const Tribes& tribes);
+	FerryDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes);
 	~FerryDescr() override {
 	}
 
@@ -69,7 +69,7 @@ struct Ferry : public Carrier {
 
 	void init_auto_task(Game& game) override;
 	void start_task_unemployed(Game&);
-	void start_task_row(Game&, Waterway*);
+	void start_task_row(Game&, const Waterway&);
 
 	bool unemployed();
 

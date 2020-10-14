@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,9 +35,12 @@ class FileViewPanel : public TabPanel {
 public:
 	FileViewPanel(Panel* parent, UI::PanelStyle scrollbar_style, UI::TabPanelStyle background_style);
 
-	/// Adds a tab with the contents of 'lua_script'.
-	/// 'lua_script' must return a table that contains 'title' and 'text' keys.
-	void add_tab(const std::string& lua_script);
+	/// Reads the text for the active tab from 'lua_script' if it hasn't been loaded yet.
+	void load_tab_contents();
+
+	/// Adds a tab and registers its 'lua_script' for loading its text contents.
+	/// 'lua_script' must return a table that contains 1 string.
+	void add_tab(const std::string& title, const std::string& lua_script);
 
 private:
 	void update_tab_size(size_t index);
@@ -50,6 +53,7 @@ private:
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;
 	std::vector<std::unique_ptr<MultilineTextarea>> textviews_;
+	std::vector<std::string> script_paths_;
 };
 
 }  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,24 +26,13 @@
 
 namespace Widelands {
 
-/// For each player, its view of each node, edge and triangle that he has seen
-/// but does not see currently. Information that he currently sees is not
-/// loaded but filled in from the game state.
-///
-/// Also the player's view of the resources that are hidden in the ground.
-///
-/// This information can not be loaded before the terrains, roads, immovables
-/// and players' vision maps are loaded. The vision maps are completely loaded
-/// after MapBobdataPacket has been loaded.
 class MapPlayersViewPacket {
 public:
 	void read(FileSystem&,
 	          EditorGameBase&,
-	          bool,
-	          MapObjectLoader&,
-	          const TribesLegacyLookupTable& tribes_lookup_table,
-	          const WorldLegacyLookupTable& world_lookup_table);
-	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
+	          const WorldLegacyLookupTable& world_lookup_table,
+	          const TribesLegacyLookupTable& tribes_lookup_table);
+	void write(FileSystem&, EditorGameBase&);
 };
 }  // namespace Widelands
 

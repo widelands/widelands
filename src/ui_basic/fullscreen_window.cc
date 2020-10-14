@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,12 @@
 
 #include <memory>
 
-#include "base/log.h"
+#include <boost/format.hpp>
+
+#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 
 /*
 ==============================================================================
@@ -35,12 +39,12 @@ namespace UI {
 
 FullscreenWindow::FullscreenWindow()
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     background_image_(kTemplateDir + "fsmenu/background.png") {
+     background_image_((boost::format("%1%fsmenu/background.png") % kTemplateDir).str()) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
 		   layout();
-		});
+	   });
 	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "fsmenu/top_left.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "fsmenu/top_right.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "fsmenu/bottom_left.png");
@@ -59,7 +63,7 @@ FullscreenWindow::~FullscreenWindow() {
 
 void FullscreenWindow::add_overlay_image(const std::string& filename, Alignment align) {
 	overlays_.push_back(
-	   std::unique_ptr<const Overlay>(new Overlay(g_gr->images().get(filename), align)));
+	   std::unique_ptr<const Overlay>(new Overlay(g_image_cache->get(filename), align)));
 }
 
 void FullscreenWindow::clear_overlays() {
@@ -67,7 +71,7 @@ void FullscreenWindow::clear_overlays() {
 }
 
 void FullscreenWindow::set_frame_image(FullscreenWindow::Frames id, const std::string& filename) {
-	frame_overlays_.insert(std::make_pair(id, g_gr->images().get(kTemplateDir + filename)));
+	frame_overlays_.insert(std::make_pair(id, g_image_cache->get(kTemplateDir + filename)));
 }
 
 const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) const {
@@ -83,7 +87,7 @@ const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) cons
  */
 void FullscreenWindow::draw(RenderTarget& dst) {
 	// Overall background
-	dst.tile(Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i::zero());
+	dst.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get(background_image_), Vector2i::zero());
 
 	// Center background
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kCenter),
@@ -94,6 +98,10 @@ void FullscreenWindow::draw(RenderTarget& dst) {
 		blit_image(dst, overlay->image, overlay->align);
 	}
 
+	draw_edge_decoration(dst);
+}
+
+void FullscreenWindow::draw_edge_decoration(RenderTarget& dst) {
 	// Frame edges
 	blit_image(dst, get_frame_image(FullscreenWindow::Frames::kEdgeLeftTile),
 	           Alignment(UI::Align::kLeft, UI::Align::kTop), Tiling::kVertical);

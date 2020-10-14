@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,10 @@
 
 #include <memory>
 
-#include <SDL_keycode.h>
+#include <SDL_clipboard.h>
+#include <SDL_mouse.h>
 
+#include "base/utf8.h"
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -39,6 +41,12 @@ namespace {
 
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
+bool inline copy_paste_modifier() {
+#ifdef __APPLE__
+	return SDL_GetModState() & KMOD_GUI;
+#endif
+	return SDL_GetModState() & KMOD_CTRL;
+}
 
 }  // namespace
 
@@ -73,6 +81,16 @@ struct EditBoxImpl {
 	/// Position of the caret.
 	uint32_t caret;
 
+	/// Position of the caret at text selection end.
+	uint32_t selection_end;
+
+	/// Initial position of text when selection was started
+	uint32_t selection_start;
+
+	enum class Mode { kNormal, kSelection };
+
+	Mode mode;
+
 	/// Current scrolling offset to the text anchor position, in pixels
 	int32_t scrolloffset;
 
@@ -85,9 +103,9 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
            x,
            y,
            w,
-           text_height(g_gr->styles().editbox_style(style).font()) +
-              2 * g_gr->styles().editbox_style(style).background().margin()),
-     m_(new EditBoxImpl(g_gr->styles().editbox_style(style))),
+           text_height(g_style_manager->editbox_style(style).font()) +
+              2 * g_style_manager->editbox_style(style).background().margin()),
+     m_(new EditBoxImpl(g_style_manager->editbox_style(style))),
      history_active_(false),
      history_position_(-1),
      password_(false),
@@ -97,6 +115,9 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	// Set alignment to the UI language's principal writing direction
 	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
+	m_->mode = EditBoxImpl::Mode::kNormal;
+	m_->selection_end = 0;
+	m_->selection_start = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
@@ -107,8 +128,9 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	set_handle_textinput();
 
 	// Initialize history as empty string
-	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i)
+	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i) {
 		history_[i] = "";
+	}
 }
 
 EditBox::~EditBox() {
@@ -129,16 +151,19 @@ const std::string& EditBox::text() const {
  * \ref set_max_length().
  */
 void EditBox::set_text(const std::string& t) {
-	if (t == m_->text)
+	if (t == m_->text) {
 		return;
+	}
 
 	bool caretatend = m_->caret == m_->text.size();
 
 	m_->text = t;
-	if (m_->text.size() > m_->maxLength)
+	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
-	if (caretatend || m_->caret > m_->text.size())
+	}
+	if (caretatend || m_->caret > m_->text.size()) {
 		m_->caret = m_->text.size();
+	}
 }
 
 /**
@@ -153,9 +178,9 @@ void EditBox::set_max_length(int const n) {
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
-		if (m_->caret > m_->text.size())
+		if (m_->caret > m_->text.size()) {
 			m_->caret = m_->text.size();
-
+		}
 		check_caret();
 	}
 }
@@ -182,6 +207,7 @@ void EditBox::set_font_style_and_margin(const UI::FontStyleInfo& style, int marg
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
+		clicked();
 		return true;
 	}
 
@@ -197,6 +223,36 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_v:
+			if (copy_paste_modifier() && SDL_HasClipboardText()) {
+				if (m_->mode == EditBoxImpl::Mode::kSelection) {
+					delete_selected_text();
+				}
+				handle_textinput(SDL_GetClipboardText());
+				return true;
+			}
+			return false;
+		case SDLK_c:
+			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
+				copy_selected_text();
+				return true;
+			}
+			return false;
+
+		case SDLK_a:
+			if (copy_paste_modifier()) {
+				m_->selection_start = 0;
+				m_->selection_end = m_->text.size();
+				m_->mode = EditBoxImpl::Mode::kSelection;
+				return true;
+			}
+			return false;
+		case SDLK_x:
+			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
+				copy_selected_text();
+				delete_selected_text();
+			}
+			return false;
 		case SDLK_ESCAPE:
 			cancel();
 			return true;
@@ -210,8 +266,9 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			// Save history if active and text is not empty
 			if (history_active_) {
 				if (!m_->text.empty()) {
-					for (uint8_t i = CHAT_HISTORY_SIZE - 1; i > 0; --i)
+					for (uint8_t i = CHAT_HISTORY_SIZE - 1; i > 0; --i) {
 						history_[i] = history_[i - 1];
+					}
 					history_[0] = m_->text;
 					history_position_ = -1;
 				}
@@ -225,6 +282,13 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_DELETE:
+			if (m_->mode == EditBoxImpl::Mode::kSelection) {
+				delete_selected_text();
+				check_caret();
+				changed();
+				return true;
+			}
+
 			if (m_->caret < m_->text.size()) {
 				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
 				}
@@ -234,54 +298,106 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			FALLS_THROUGH;
 		case SDLK_BACKSPACE:
+			if (m_->mode == EditBoxImpl::Mode::kSelection) {
+				delete_selected_text();
+				check_caret();
+				changed();
+				return true;
+			}
 			if (m_->caret > 0) {
-				while ((m_->text[--m_->caret] & 0xc0) == 0x80)
+				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
 					m_->text.erase(m_->text.begin() + m_->caret);
+				}
 				m_->text.erase(m_->text.begin() + m_->caret);
 				check_caret();
+				reset_selection();
 				changed();
 			}
 			return true;
 
 		case SDLK_LEFT:
 			if (m_->caret > 0) {
-				while ((m_->text[--m_->caret] & 0xc0) == 0x80) {
-				}
-				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-					for (uint32_t new_caret = m_->caret;; m_->caret = new_caret)
-						if (0 == new_caret || isspace(m_->text[--new_caret]))
-							break;
 
+				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+					uint32_t newpos = prev_char(m_->caret);
+					while (newpos > 0 && isspace(m_->text[newpos])) {
+						newpos = prev_char(newpos);
+					}
+					while (newpos > 0) {
+						uint32_t prev = prev_char(newpos);
+						if (isspace(m_->text[prev])) {
+							break;
+						}
+						newpos = prev;
+					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						reset_selection();
+					}
+					m_->caret = newpos;
+
+				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(prev_char(m_->caret));
+					} else {
+						reset_selection();
+					}
+					m_->caret = prev_char(m_->caret);
+				}
 				check_caret();
 			}
 			return true;
 
 		case SDLK_RIGHT:
 			if (m_->caret < m_->text.size()) {
-				while ((m_->text[++m_->caret] & 0xc0) == 0x80) {
-					// We're just advancing the caret
-				}
-				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-					for (uint32_t new_caret = m_->caret;; ++new_caret)
-						if (new_caret == m_->text.size() || isspace(m_->text[new_caret - 1])) {
-							m_->caret = new_caret;
-							break;
-						}
 
+				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+					uint32_t newpos = next_char(m_->caret);
+					while (newpos < m_->text.size() && isspace(m_->text[newpos])) {
+						newpos = next_char(newpos);
+					}
+					while (newpos < m_->text.size() && !isspace(m_->text[newpos])) {
+						newpos = next_char(newpos);
+					}
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(newpos);
+					} else {
+						reset_selection();
+					}
+					m_->caret = newpos;
+
+				} else {
+					if (SDL_GetModState() & KMOD_SHIFT) {
+						select_until(next_char(m_->caret));
+					} else {
+						reset_selection();
+					}
+					m_->caret = next_char(m_->caret);
+				}
 				check_caret();
 			}
 			return true;
 
 		case SDLK_HOME:
-			if (m_->caret != 0) {
+			if (m_->caret > 0) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					select_until(0);
+				} else {
+					reset_selection();
+				}
 				m_->caret = 0;
-
 				check_caret();
 			}
 			return true;
 
 		case SDLK_END:
 			if (m_->caret != m_->text.size()) {
+				if (SDL_GetModState() & KMOD_SHIFT) {
+					select_until(m_->text.size());
+				} else {
+					reset_selection();
+				}
 				m_->caret = m_->text.size();
 				check_caret();
 			}
@@ -290,12 +406,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (history_active_) {
-				if (history_position_ > CHAT_HISTORY_SIZE - 2)
+				if (history_position_ > CHAT_HISTORY_SIZE - 2) {
 					history_position_ = CHAT_HISTORY_SIZE - 2;
+				}
 				if (history_[++history_position_].size() > 0) {
 					m_->text = history_[history_position_];
 					m_->caret = m_->text.size();
 					check_caret();
+					reset_selection();
 				}
 			}
 			return true;
@@ -303,12 +421,14 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (history_active_) {
-				if (history_position_ < 1)
+				if (history_position_ < 1) {
 					history_position_ = 1;
+				}
 				if (history_[--history_position_] != m_->text) {
 					m_->text = history_[history_position_];
 					m_->caret = m_->text.size();
 					check_caret();
+					reset_selection();
 				}
 			}
 			return true;
@@ -320,15 +440,34 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 
 	return false;
 }
+void EditBox::copy_selected_text() {
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
+
+	auto nr_characters = end - start;
+	std::string selected_text = m_->text.substr(start, nr_characters);
+	SDL_SetClipboardText(selected_text.c_str());
+}
 
 bool EditBox::handle_textinput(const std::string& input_text) {
 	if ((m_->text.size() + input_text.length()) < m_->maxLength) {
 		m_->text.insert(m_->caret, input_text);
 		m_->caret += input_text.length();
 		check_caret();
+		reset_selection();
 		changed();
 	}
 	return true;
+}
+
+void EditBox::delete_selected_text() {
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
+	uint32_t nbytes = end - start;
+	m_->text.erase(start, nbytes);
+	m_->caret = start;
+	reset_selection();
+	changed();
 }
 
 void EditBox::draw(RenderTarget& dst) {
@@ -390,7 +529,7 @@ void EditBox::draw(RenderTarget& dst) {
 	UI::center_vertically(lineheight, &point);
 
 	// Crop to max_width while blitting
-	if (max_width < linewidth) {
+	if (max_width < linewidth || m_->scrolloffset != 0) {
 		// Fix positioning for BiDi languages.
 		if (UI::g_fh->fontset()->is_rtl()) {
 			point.x = 0.f;
@@ -427,18 +566,115 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const uint16_t fontheight = text_height(*m_->font_style, m_->font_scale);
 
-		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
+		const Image* caret_image = g_image_cache->get("images/ui_basic/caret.png");
 		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 		dst.blit(caretpt, caret_image);
+
+		if (m_->mode == EditBoxImpl::Mode::kSelection) {
+			highlight_selection(dst, point, fontheight);
+		}
 	}
+}
+
+void EditBox::highlight_selection(RenderTarget& dst,
+                                  const Vector2i& point,
+                                  const uint16_t fontheight) {
+
+	uint32_t start, end;
+	calculate_selection_boundaries(start, end);
+	auto nr_characters = end - start;
+
+	std::string selected_text = m_->text.substr(start, nr_characters);
+	std::string text_before_selection = m_->text.substr(0, start);
+
+	Vector2i selection_start = Vector2i(
+	   text_width(text_before_selection, *m_->font_style, m_->font_scale) + point.x, point.y);
+	Vector2i selection_end =
+	   Vector2i(text_width(selected_text, *m_->font_style, m_->font_scale), fontheight);
+	if (m_->scrolloffset != 0) {
+		selection_start.x += m_->scrolloffset;
+	}
+	dst.brighten_rect(
+	   Recti(selection_start, selection_end.x, selection_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
+}
+
+void EditBox::reset_selection() {
+	m_->mode = EditBoxImpl::Mode::kNormal;
+	m_->selection_start = m_->caret;
+	m_->selection_end = m_->caret;
+}
+
+/**
+ * Return the starting offset of the (multi-byte) character that @p cursor points to.
+ */
+uint32_t EditBox::snap_to_char(uint32_t cursor) {
+	while (cursor > 0 && Utf8::is_utf8_extended(m_->text[cursor])) {
+		--cursor;
+	}
+	return cursor;
+}
+
+/**
+ * Find the starting byte of the next character
+ */
+uint32_t EditBox::next_char(uint32_t cursor) const {
+	assert(cursor <= m_->text.size());
+
+	if (cursor >= m_->text.size()) {
+		return cursor;
+	}
+
+	do {
+		++cursor;
+	} while (cursor < m_->text.size() && Utf8::is_utf8_extended(m_->text[cursor]));
+
+	return cursor;
+}
+
+/**
+ * Find the starting byte of the previous character
+ */
+uint32_t EditBox::prev_char(uint32_t cursor) const {
+	assert(cursor <= m_->text.size());
+
+	if (cursor == 0) {
+		return cursor;
+	}
+
+	do {
+		--cursor;
+		// TODO(GunChleoc): See if we can go full ICU here.
+	} while (cursor > 0 && Utf8::is_utf8_extended(m_->text[cursor]));
+
+	return cursor;
+}
+
+/**
+ * Selects text from @p cursor until @p end
+ */
+void EditBox::select_until(uint32_t end) const {
+	if (m_->mode == EditBoxImpl::Mode::kNormal) {
+		m_->selection_start = m_->caret;
+		m_->mode = EditBoxImpl::Mode::kSelection;
+	}
+	m_->selection_end = end;
+}
+
+void EditBox::calculate_selection_boundaries(uint32_t& start, uint32_t& end) {
+	start = snap_to_char(std::min(m_->selection_start, m_->selection_end));
+	end = std::max(m_->selection_start, m_->selection_end);
+	end = Utf8::is_utf8_extended(m_->text[end]) ? next_char(end) : snap_to_char(end);
 }
 
 /**
  * Check the caret's position and scroll it into view if necessary.
  */
 void EditBox::check_caret() {
+	if (m_->caret > m_->text.size()) {
+		m_->caret = m_->text.size();
+	}
 	std::string leftstr(m_->text, 0, m_->caret);
 	std::string rightstr(m_->text, m_->caret, std::string::npos);
 	int32_t leftw = text_width(leftstr, *m_->font_style, m_->font_scale);
@@ -454,18 +690,20 @@ void EditBox::check_caret() {
 	case UI::Align::kLeft:
 		caretpos = kMarginX + m_->scrolloffset + leftw;
 	}
-
-	if (caretpos < kMarginX)
+	if (caretpos < kMarginX) {
 		m_->scrolloffset += kMarginX - caretpos + get_w() / 5;
-	else if (caretpos > get_w() - kMarginX)
+	} else if (caretpos > get_w() - kMarginX) {
 		m_->scrolloffset -= caretpos - get_w() + kMarginX + get_w() / 5;
+	}
 
 	if (m_->align == UI::Align::kLeft) {
-		if (m_->scrolloffset > 0)
+		if (m_->scrolloffset > 0) {
 			m_->scrolloffset = 0;
+		}
 	} else if (m_->align == UI::Align::kRight) {
-		if (m_->scrolloffset < 0)
+		if (m_->scrolloffset < 0) {
 			m_->scrolloffset = 0;
+		}
 	}
 }
 

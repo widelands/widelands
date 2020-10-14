@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
+ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
@@ -49,7 +49,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 		   if (is_dying_) {
 			   return;
 		   }
-		   Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+		   Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 		   if (production_site == nullptr) {
 			   return;
 		   }
@@ -62,12 +62,12 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 				   break;
 			   }
 		   }
-		});
+	   });
 	init(avoid_fastclick, workarea_preview_wanted);
 }
 
 void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	assert(production_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
@@ -80,10 +80,10 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *inputqueues[i]));
+			   new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *inputqueues[i]));
 		}
 
-		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
+		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));
 	}
 
 	// Add workers tab if applicable
@@ -111,21 +111,20 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		}
 		worker_table_->fit_height();
 
-		if (igbase()->can_act(production_site->owner().player_number())) {
+		if (ibase()->can_act(production_site->owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button =
 			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_gr->images().get("images/wui/buildings/menu_drop_soldier.png"),
+			                  g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
 			                  _("Terminate the employment of the selected worker"));
-			evict_button->sigclicked.connect(
-			   boost::bind(&ProductionSiteWindow::evict_worker, boost::ref(*this)));
+			evict_button->sigclicked.connect([this]() { evict_worker(); });
 			worker_caps_->add(evict_button);
 		}
 
 		worker_box->add(worker_table_, UI::Box::Resizing::kFullSize);
 		worker_box->add_space(4);
 		worker_box->add(worker_caps_, UI::Box::Resizing::kFullSize);
-		get_tabs()->add("workers", g_gr->images().get(pic_tab_workers), worker_box, workers_heading);
+		get_tabs()->add("workers", g_image_cache->get(pic_tab_workers), worker_box, workers_heading);
 		update_worker_table(production_site);
 	}
 	think();
@@ -136,7 +135,7 @@ void ProductionSiteWindow::think() {
 	// existance.
 	BuildingWindow::think();
 
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	if (production_site == nullptr) {
 		return;
 	}
@@ -202,7 +201,7 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 }
 
 void ProductionSiteWindow::evict_worker() {
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	if (production_site == nullptr) {
 		return;
 	}
@@ -211,7 +210,11 @@ void ProductionSiteWindow::evict_worker() {
 		Widelands::Worker* worker =
 		   production_site->working_positions()[worker_table_->get_selected()].worker;
 		if (worker) {
-			igbase()->game().send_player_evict_worker(*worker);
+			if (game_) {
+				game_->send_player_evict_worker(*worker);
+			} else {
+				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+			}
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 
 /**
  * Base class for all building windows.
@@ -45,21 +45,21 @@ struct BuildingWindow : public UI::UniqueWindow {
 protected:
 	// This constructor allows setting a building description for the help button independent of the
 	// base building
-	BuildingWindow(InteractiveGameBase& parent,
+	BuildingWindow(InteractiveBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
 	               const Widelands::BuildingDescr&,
 	               bool avoid_fastclick);
 
 public:
-	BuildingWindow(InteractiveGameBase& parent,
+	BuildingWindow(InteractiveBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
 	               bool avoid_fastclick);
 
 	~BuildingWindow() override;
 
-	InteractiveGameBase* igbase() const {
+	InteractiveBase* ibase() const {
 		return parent_;
 	}
 
@@ -85,11 +85,14 @@ protected:
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();
+	void act_mute(bool all);
 
 	void create_input_queue_panel(UI::Box*,
 	                              Widelands::Building&,
 	                              const Widelands::InputQueue&,
 	                              bool = false);
+
+	Widelands::Game* const game_;
 
 	bool is_dying_;
 
@@ -106,7 +109,7 @@ private:
 	// For ports only.
 	void update_expedition_button(bool expedition_was_canceled);
 
-	InteractiveGameBase* parent_;
+	InteractiveBase* parent_;
 
 	// The building that this window belongs to
 	Widelands::OPtr<Widelands::Building> building_;
@@ -135,6 +138,8 @@ private:
 	bool avoid_fastclick_;
 
 	UI::Button* expeditionbtn_;
+	UI::Button* mute_this_;
+	UI::Button* mute_all_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>
 	   expedition_canceled_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;

@@ -4,7 +4,7 @@ run(function()
 
    create_southern_port()
    local wh = p1:place_building("barbarians_warehouse", map:get_field(13, 16), false, false)
-   connected_road(p1, wh.flag, "r,r,r", true)
+   connected_road("normal", p1, wh.flag, "r,r,r", true)
    create_northern_port()
 
    start_building_farm()
@@ -19,12 +19,11 @@ run(function()
    assert_equal(p1:get_wares("blackwood"), 1)
    sleep(8000)
 
-
    southern_port():remove()
 
    sleep(100)
    assert_equal(p1:get_wares("blackwood"), 0)
-   stable_save(game, "port1_just_removed")
+   stable_save(game, "port1_just_removed", 10 * 1000)
 
    sleep(5000)
 

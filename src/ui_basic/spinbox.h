@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2019 by the Widelands Development Team
+ * Copyright (C) 2009-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,6 +75,8 @@ public:
 		return buttons_;
 	}
 	void set_unit_width(uint32_t width);
+
+	bool handle_key(bool, SDL_Keysym) override;
 
 private:
 	void layout() override;

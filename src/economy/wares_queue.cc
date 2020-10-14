@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,9 @@ WaresQueue::WaresQueue(PlayerImmovable& init_owner,
                        DescriptionIndex const init_ware,
                        uint8_t const init_max_size)
    : InputQueue(init_owner, init_ware, init_max_size, wwWARE), filled_(0) {
-	if (index_ != INVALID_INDEX)
+	if (index_ != INVALID_INDEX) {
 		update();
+	}
 }
 
 void WaresQueue::cleanup() {
@@ -63,7 +64,7 @@ void WaresQueue::entered(
 #else
    DescriptionIndex, Worker*
 #endif
-   ) {
+) {
 
 	assert(worker == nullptr);  // WaresQueue can't hold workers
 	assert(filled_ < max_size_);
@@ -76,29 +77,32 @@ void WaresQueue::entered(
 void WaresQueue::remove_from_economy(Economy& e) {
 	if (index_ != INVALID_INDEX) {
 		e.remove_wares_or_workers(index_, filled_);
-		if (request_)
+		if (request_) {
 			request_->set_economy(nullptr);
+		}
 	}
 }
 
 void WaresQueue::add_to_economy(Economy& e) {
 	if (index_ != INVALID_INDEX) {
 		e.add_wares_or_workers(index_, filled_);
-		if (request_)
+		if (request_) {
 			request_->set_economy(&e);
+		}
 	}
 }
 
 void WaresQueue::set_filled(Quantity filled) {
-
-	if (filled > max_size_)
+	if (filled > max_size_) {
 		filled = max_size_;
+	}
 
 	if (owner_.get_economy(wwWARE)) {
-		if (filled > filled_)
+		if (filled > filled_) {
 			owner_.get_economy(wwWARE)->add_wares_or_workers(index_, filled - filled_);
-		else if (filled < filled_)
+		} else if (filled < filled_) {
 			owner_.get_economy(wwWARE)->remove_wares_or_workers(index_, filled_ - filled);
+		}
 	}
 
 	filled_ = filled;

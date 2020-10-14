@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 07:06+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-07-23 07:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -18,102 +18,106 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/txts/AUTHORS.lua:27
-msgid "Developers"
-msgstr "開発者"
+#: ../../data/txts/ABOUT.lua:7
+msgid "Readme"
+msgstr "Readme"
 
-#: ../../data/txts/AUTHORS.lua:29
-msgid "Widelands Development Team"
-msgstr "Widelands 開発チーム"
-
-#: ../../data/txts/LICENSE.lua:6
+#: ../../data/txts/ABOUT.lua:11
 msgid "License"
 msgstr "ライセンス"
 
-#: ../../data/txts/LICENSE.lua:8
+#: ../../data/txts/ABOUT.lua:15
+msgid "Developers"
+msgstr "開発者"
+
+#: ../../data/txts/ABOUT.lua:19
+msgid "Translators"
+msgstr "翻訳者"
+
+#: ../../data/txts/AUTHORS.lua:28
+msgid "Widelands Development Team"
+msgstr "Widelands 開発チーム"
+
+#: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"
 msgstr "Widelandsのライセンス情報"
 
 #. TRANSLATORS: Placeholder is copyright end year
-#: ../../data/txts/LICENSE.lua:10
+#: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
 msgstr "Copyright 2002 - %1% Widelands 開発チーム"
 
-#: ../../data/txts/LICENSE.lua:12
+#: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "このゲームはフリーかつオープンソース（FOSS）であり、GNU一般公衆利用許諾契約書（GPL）V2.0の下でライセンスされています。"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "FOSSやGPLに関する詳しい情報は次のウェブページで確認することができます: %s"
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "そこではライセンスの全文はもちろんのこと、その理念や法的意味についての詳しい情報を見つけることもできます。"
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "わたしたちはWidelands本体にテキスト文書としてGPL文書も添付しています。"
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linuxでは、スタンドアローンのバイナリパッケージの最上位ディレクトリ、もしくはインストール先のディレクトリ（例えば %1%）にCOPYINGというファイルを見つけることができるでしょう。"
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windowsでは、インストールフォルダにCOPYING.txtという名前のファイルを見つけることができますし、スタートメニューのWidelandsの項目でもこのファイルへのリンクを提示しています。"
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOSでは、ウェブサイトからダウンロードしたアーカイブの中にCOPYINGという名前のファイルを見つけることができます。"
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
 msgstr "このゲームは現状のまま提供され、一切の保証を伴いません。"
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
 msgstr "さらなる情報やサポートを望まれるならば、%1% (質問や一般的なサポートのためのウェブサイト、Wiki、フォーラム)、%2% (バグトラッカー)、%3% (翻訳) をごらんください。\n(この日本語訳は参考訳です。ライセンスについての正確な情報は原文をご参照ください。)"
 
-#: ../../data/txts/README.lua:6
-msgid "Readme"
-msgstr "Readme"
-
-#: ../../data/txts/README.lua:9
+#: ../../data/txts/README.lua:8
 msgid "an open source strategy game"
 msgstr "オープンソースのストラテジーゲーム"
 
-#: ../../data/txts/README.lua:11
+#: ../../data/txts/README.lua:10
 msgid "Check out the Widelands project homepage:"
 msgstr "Widelandsプロジェクトのホームページを確認してください。"
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:11
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "WidelandsはGNU一般公衆利用許諾契約書（GPL）でライセンスされています。詳細については付属の「COPYING」ファイルをご覧ください。"
 
-#: ../../data/txts/README.lua:13
+#: ../../data/txts/README.lua:12
 msgid "Status"
 msgstr "開発状況"
 
-#: ../../data/txts/README.lua:14
+#: ../../data/txts/README.lua:13
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -122,79 +126,75 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "Widelandsの基本的機能についてはほぼ実装が完了しており (feature complete)、シングルプレイで楽しく遊ぶことはもちろんですが、多人数でのプレイも充分に楽しむことができます。それでもまだあらゆる面でやるべきことが残っています。もしあなたに開発に貢献する意志があるのなら、どうぞ我々のホームページを訪れてください。画像の作成、バグ修正、新たな機能の追加、あなたの知る言語への翻訳、新しいマップの作成、といった様々な面であなたの力が必要です。"
 
-#: ../../data/txts/README.lua:16
+#: ../../data/txts/README.lua:15
 msgid "Widelands Help"
 msgstr "Widelandsヘルプ"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:18
+#: ../../data/txts/README.lua:17
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "ゲームやエディタに関するヘルプは下部メニューのヘルプボタンか、キーボードの %1% を打つことで参照できます。"
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:20
+#: ../../data/txts/README.lua:19
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:22
 msgid "Reporting Bugs"
 msgstr "バグ報告"
 
-#: ../../data/txts/README.lua:24
+#: ../../data/txts/README.lua:23
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "バグが発生した場合は、バグトラッカーに報告してください。"
 
-#: ../../data/txts/README.lua:26
+#: ../../data/txts/README.lua:25
 msgid "Please provide enough background information. Tell us:"
 msgstr "報告の際には以下にあげるような情報の提供もお願いします。"
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:27
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "バグを再現するための手順の詳細説明 (可能であれば)"
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:28
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "その操作をしたときにあなたが予想した結果と、実際に起こったこと"
 
-#: ../../data/txts/README.lua:30
+#: ../../data/txts/README.lua:29
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "あなたが遊んでいたWidelandsのバージョン (ビルド番号、開発版の場合ならばリビジョン番号)"
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:30
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "OS特有のエラーである可能性もあるので、Widelandsを実行したOSについても記述をお願いします"
 
-#: ../../data/txts/README.lua:32
+#: ../../data/txts/README.lua:31
 msgid "Which map you were playing when the bug occurred."
 msgstr "バグが起こったときにプレイしていたマップの情報"
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:32
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "もし、何かが表示されるはずだったのに表示されなかった、あるいはデモを見せることが何らかの役にたちそうな場合は、一つ以上のスクリーンショットを含めてください"
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:33
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "もしゲームのセーブファイルや問題を含むリプレイがあるのなら、それも含めてください (例えばクラッシュしたものの、その原因が特定できないとき等)。この項に関する詳細な情報については下のリプレイセクションをご参照ください"
 
-#: ../../data/txts/TRANSLATORS.lua:24
-msgid "Translators"
-msgstr "翻訳者"
-
-#: ../../data/txts/TRANSLATORS.lua:26
+#: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
 msgstr "Widelands翻訳者"
 
@@ -338,11 +338,11 @@ msgid ""
 " wiki there."
 msgstr "WidelandsやWidelandsエディタに関するさらなる情報が必要ならば、我々のホームページ %s を見てください。そこにある我々のwikiにオンラインヘルプがあります。"
 
-#: ../../data/txts/help/common_helptexts.lua:17
+#: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
 msgstr "はじめに"
 
-#: ../../data/txts/help/common_helptexts.lua:18
+#: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
 "Widelands is a free, open source real-time strategy game with singleplayer "
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
@@ -350,7 +350,7 @@ msgid ""
 "started through playable tutorials."
 msgstr "Widelandsはフリーでオープンソースのリアルタイムストラテジーゲームで、一人プレイ用のキャンペーンと多人数でのマルチプレイモードで遊ぶことができます。このゲームは元々はSettlers IIに着想を得ていますが、現在ではそれよりもだいぶ深みの増したゲームに進化しました。一方で、チュートリアルシナリオを通じて、容易にゲームに入っていけるようにも設計されています。"
 
-#: ../../data/txts/help/common_helptexts.lua:19
+#: ../../data/txts/help/common_helptexts.lua:21
 msgid ""
 "In this game, you start out on a small piece of land with just a few "
 "resources. Using these, you’ll create an empire with many thousands of "
@@ -359,11 +359,11 @@ msgid ""
 "tribes."
 msgstr "ゲームは、狭い土地と限られた物資だけを持った状態で始まります。これらの土地や物資を使い、何千人もの住人を抱える大帝国を作り上げるのです。それを成し遂げるためには、経済インフラを整備し、周囲を探索して領土を増やし、そしてライバルとなる部族を打ち破らねばなりません。"
 
-#: ../../data/txts/help/common_helptexts.lua:25
+#: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
 msgstr "リプレイ"
 
-#: ../../data/txts/help/common_helptexts.lua:26
+#: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
 "Widelands records every game you play in two files. One of these files has a"
 " .wrpl.wgf extension and contains an initial savegame. The other file has a "
@@ -372,7 +372,7 @@ msgid ""
 "will tell you the time you started the game."
 msgstr "Widelandsはあなたのプレイする全てのゲームを二つのファイルに記録します。一つは .wrpl.wgf の拡張子を持つファイルで、こちらにはゲームの初期状態のセーブデータを含んでいます。もう一方は .wrpl という拡張子を持つファイルで、全てのプレイヤーの実行した全ての行動が記録されています。例えば、建物や道路の建設、敵への攻撃といったもの、こういったものが全て記録されます。ファイル名のその他の部分はあなたがゲームを開始した時間を示しています。"
 
-#: ../../data/txts/help/common_helptexts.lua:27
+#: ../../data/txts/help/common_helptexts.lua:31
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -382,7 +382,7 @@ msgid ""
 "players has a different version of the game."
 msgstr "メインニューから「リプレイ」を選択すれば、再構築された過去にプレイしたゲームを見ることができます。しかし注意すべきこととして、ゲームデータやWidelands実行ファイルに変更があった場合、途中で整合性がとれなくなってゲームを見ることができなくなる可能性があります。同様の問題はマルチプレイ時にバージョンの異なるWidelandsを使っているプレイヤーがいる場合にも発生します。"
 
-#: ../../data/txts/help/common_helptexts.lua:28
+#: ../../data/txts/help/common_helptexts.lua:32
 #, lua-format
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic, so they can "
@@ -392,7 +392,7 @@ msgid ""
 msgstr "リプレイはゲームの動作バグを発見する上で有用なツールです。バグ報告時に添付すると、状況説明がシンプルになるかもしれません。リプレイファイルは、LinuxやMac OS Xでは %s に、WindowsではWidelandsのインストールディレクトリの下にある replays ディレクトリに保存されます。"
 
 #. TRANSLATORS: The generic hotkey format
-#: ../../data/txts/help/common_helptexts.lua:35
+#: ../../data/txts/help/common_helptexts.lua:41
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
@@ -400,27 +400,27 @@ msgstr "%s: "
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
 msgstr "スペース"
 
-#: ../../data/txts/help/common_helptexts.lua:42
+#: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
 msgstr "建物用地の表示/非表示の切り替え"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
 msgstr ""
 
-#: ../../data/txts/help/common_helptexts.lua:49
+#: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
 msgstr "フルスクリーンモード切替 (OSが対応している場合)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
-#: ../../data/txts/help/common_helptexts.lua:56
+#: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
 msgstr "ミニマップ表示/非表示の切替"
 
@@ -698,8 +698,8 @@ msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
-msgid "Ctrl+(1-9)"
-msgstr "Ctrl+(1-9)"
+msgid "Ctrl + (1-9)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -741,60 +741,66 @@ msgstr "農場のような一部の建物は非常に狭い作業エリアしか
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+(+/-)"
-msgstr "Ctrl+(+/-)"
+msgid "Ctrl + (+/-)"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
-msgid "Ctrl+0"
-msgstr "Ctrl+0"
+msgid "Ctrl + 0"
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
 msgstr "マウスのホイール操作か %1% で拡大縮小ができます。%2% を押すと拡大縮小がリセットされます。"
 
 #: ../../data/txts/tips/general_game.lua:75
-msgctxt "hotkey"
-msgid "Ctrl+(Page Up/Page Down)"
+msgid ""
+"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently "
+"visited locations."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
+msgctxt "hotkey"
+msgid "Ctrl + (Page Up/Page Down)"
+msgstr ""
+
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Page Up/Page Down"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
-msgid "Shift+(Page Up/Page Down)"
+msgid "Shift + (Page Up/Page Down)"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:75
+#: ../../data/txts/tips/general_game.lua:79
 msgid ""
 "Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will "
 "adjust speed smoothly."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Ctrl+Arrow keys"
+msgid "Ctrl + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgid ""
 "Move map view using %1%. %2% will move the view faster, %3% moves slowly."
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:79
+#: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
-msgid "Shift+Arrow keys"
+msgid "Shift + Arrow keys"
 msgstr ""
 
-#: ../../data/txts/tips/general_game.lua:83
+#: ../../data/txts/tips/general_game.lua:87
 msgid ""
 "When a building is destroyed, its workers will start looking for a nearby "
 "flag from which they can move by road to a connected warehouse. If there are"

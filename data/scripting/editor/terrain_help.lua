@@ -6,10 +6,11 @@
 -- Pass the internal terrain name to the coroutine to select the terrain type.
 
 include "scripting/richtext.lua"
+include "scripting/help.lua"
 
 return {
    func = function(terrain_name)
-      set_textdomain("widelands_editor")
+      push_textdomain("widelands_editor")
       local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
 
@@ -43,24 +44,7 @@ return {
       end
 
       -- Trees
-      local tree_list = {}
-      for i, immovable in ipairs(world.immovable_descriptions) do
-         if (immovable:has_attribute("tree")) then
-            local probability = immovable:probability_to_grow(terrain)
-            if (probability > 0.01) then
-               -- sort the trees by percentage
-               i = 1
-               while (tree_list[i] and (tree_list[i].probability > probability)) do
-                  i = i + 1
-               end
-
-               for j = #tree_list, i, -1 do
-                  tree_list[j+1] = tree_list[j]
-               end
-               tree_list[i] = {tree = immovable, probability = probability}
-            end
-         end
-      end
+      local tree_list = tree_affinity_list(terrain)
 
       local tree_string = ""
       for k,v in ipairs(tree_list) do
@@ -77,6 +61,7 @@ return {
          result = result .. p(_"No trees will grow here.")
       end
 
+      pop_textdomain()
       return {
          title = terrain.descname,
          text = div("width=100%", result)

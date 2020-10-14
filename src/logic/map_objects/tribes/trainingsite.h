@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,10 +34,9 @@ class World;
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
-	                  const std::string& msgctxt,
 	                  const LuaTable& table,
-	                  const Tribes& tribes,
-	                  const World& world);
+	                  Tribes& tribes,
+	                  World& world);
 	~TrainingSiteDescr() override {
 	}
 
@@ -59,8 +58,8 @@ public:
 		return train_evade_;
 	}
 
-	int32_t get_min_level(TrainingAttribute) const;
-	int32_t get_max_level(TrainingAttribute) const;
+	unsigned get_min_level(TrainingAttribute) const;
+	unsigned get_max_level(TrainingAttribute) const;
 	int32_t get_max_stall() const;
 
 	const std::vector<std::vector<std::string>>& get_food_health() const {
@@ -95,6 +94,8 @@ private:
 	                         std::vector<std::vector<std::string>>* food,
 	                         std::vector<std::string>* weapons);
 
+	void update_level(TrainingAttribute attrib, unsigned level);
+
 	//  TODO(unknown): These variables should be per soldier type. They should be in a
 	//  struct and there should be a vector, indexed by Soldier_Index,
 	//  with that struct structs as element type.
@@ -112,22 +113,22 @@ private:
 	bool train_evade_;
 
 	/** Minimum health to which a soldier can drop at this site*/
-	int32_t min_health_;
+	unsigned min_health_;
 	/** Minimum attacks to which a soldier can drop at this site*/
-	int32_t min_attack_;
+	unsigned min_attack_;
 	/** Minimum defense to which a soldier can drop at this site*/
-	int32_t min_defense_;
+	unsigned min_defense_;
 	/** Minimum evasion to which a soldier can drop at this site*/
-	int32_t min_evade_;
+	unsigned min_evade_;
 
 	/** Maximum health a soldier can acquire at this site*/
-	int32_t max_health_;
+	unsigned max_health_;
 	/** Maximum attack a soldier can acquire at this site*/
-	int32_t max_attack_;
+	unsigned max_attack_;
 	/** Maximum defense a soldier can acquire at this site*/
-	int32_t max_defense_;
+	unsigned max_defense_;
 	/** Maximum evasion a soldier can acquire at this site*/
-	int32_t max_evade_;
+	unsigned max_evade_;
 
 	// For building help
 	std::vector<std::vector<std::string>> food_health_;
@@ -184,10 +185,7 @@ public:
 	void set_build_heroes(bool b_heroes) {
 		build_heroes_ = b_heroes;
 	}
-	void switch_heroes() {
-		build_heroes_ = !build_heroes_;
-		molog("BUILD_HEROES: %s", build_heroes_ ? "TRUE" : "FALSE");
-	}
+	void switch_heroes();
 
 	void set_economy(Economy* e, WareWorker type) override;
 
@@ -198,6 +196,7 @@ public:
 	void training_attempted(TrainingAttribute type, uint32_t level);
 	void training_successful(TrainingAttribute type, uint32_t level);
 	void training_done();
+	ProductionProgram::Action::TrainingParameters checked_soldier_training() const;
 
 	const BuildingSettings* create_building_settings() const override;
 
@@ -222,8 +221,7 @@ private:
 	private:
 		TrainingSite* const training_site_;
 	};
-
-	void update_soldier_request();
+	void update_soldier_request(bool);
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
@@ -232,6 +230,7 @@ private:
 	void add_upgrade(TrainingAttribute, const std::string& prefix);
 	void calc_upgrades();
 
+	int32_t get_max_unstall_level(TrainingAttribute, const TrainingSiteDescr&) const;
 	void drop_unupgradable_soldiers(Game&);
 	void drop_stalled_soldiers(Game&);
 	Upgrade* get_upgrade(TrainingAttribute);
@@ -262,13 +261,43 @@ private:
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier_;
 	// Unuque key to address each training level of each war art
+
 	using TypeAndLevel = std::pair<TrainingAttribute, uint16_t>;
 	// First entry is the "stallness", second is a bool
 	using FailAndPresence = std::pair<uint16_t, uint8_t>;  // first might wrap in a long play..
 	using TrainFailCount = std::map<TypeAndLevel, FailAndPresence>;
 	TrainFailCount training_failure_count_;
 	uint32_t max_stall_val_;
+	// These are for soldier import.
+	// If the training site can complete its job, or, in other words, soldiers leave
+	// because of they are unupgradeable, then the training site tries to grab already-trained
+	// folks in. If the site kicks soldiers off in the middle, it attempts to get poorly trained
+	// replacements.
+	//
+	// Since ALL training sites do this, there needs to be a way to avoid deadlocks.
+	// That makes this a bit messy. Sorry.
+	//
+	// If I was importing strong folks, and switch to weak ones, the switch only happens
+	// after ongoing request is (partially) fulfilled. The other direction happens immediately.
+	uint8_t highest_trainee_level_seen_;    // When requesting already-trained, start here.
+	uint8_t latest_trainee_kickout_level_;  // If I cannot train, request soldiers that have been
+	                                        // trainable
+	uint8_t trainee_general_lower_bound_;   // This is the acceptance threshold currently in use.
+	uint8_t repeated_layoff_ctr_;  // increases when soldier is prematurely releases, reset when
+	                               // training succeeds.
+	bool repeated_layoff_inc_;
+	bool latest_trainee_was_kickout_;  // If soldier was not dropped, requesting new soldier.
+	bool requesting_weak_trainees_;    // Value of the previous after incorporate.
+	bool recent_capacity_increase_;    // If used explicitly asks for more folks
+	const uint8_t kUpperBoundThreshold_ =
+	   3;  // Higher value makes it less likely to get weak soldiers in.
+	const uint32_t acceptance_threshold_timeout =
+	   5555;  // Lower the bar after this many milliseconds.
+	uint32_t
+	   request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
 	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
+
+	ProductionProgram::Action::TrainingParameters checked_soldier_training_;
 };
 
 /**

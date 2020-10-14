@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,32 +20,34 @@
 #ifndef WL_UI_FSMENU_ABOUT_H
 #define WL_UI_FSMENU_ABOUT_H
 
-#include "ui_basic/button.h"
+#include <memory>
+
 #include "ui_basic/fileview_panel.h"
-#include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 
 /**
  * "Fullscreen "About" information with tabs
  */
-class FullscreenMenuAbout : public FullscreenMenuBase {
+class FullscreenMenuAbout : public UI::Window {
 public:
-	FullscreenMenuAbout();
+	explicit FullscreenMenuAbout(FullscreenMenuMain&);
+	~FullscreenMenuAbout() override {
+	}
+
+	bool handle_key(bool, SDL_Keysym) override;
 
 private:
 	void layout() override;
 
-	uint32_t butw_;
-	uint32_t buth_;
-	uint32_t hmargin_;
-	uint32_t tab_panel_width_;
-	uint32_t tab_panel_y_;
+	FullscreenMenuMain& parent_;
 
-	UI::Textarea title_;
+	UI::Box box_;
 	UI::Button close_;
-
-	// Tab contents
 	UI::FileViewPanel tabs_;
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ABOUT_H

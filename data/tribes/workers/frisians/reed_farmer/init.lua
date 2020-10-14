@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_worker_type {
-   msgctxt = "frisians_worker",
    name = "frisians_reed_farmer",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Reed Farmer"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -18,17 +18,17 @@ tribes:new_worker_type {
       plantreed = {
          "findspace=size:any radius:1",
          "walk=coords",
-         "animate=dig 2000",
-         "animate=planting 1000",
+         "animate=dig duration:2s",
+         "animate=planting duration:1s",
          "plant=attrib:seed_reed",
          "return"
       },
       harvestreed = {
          "findobject=attrib:ripe_reed radius:1",
          "walk=object",
-         "animate=harvesting 12000",
+         "animate=harvesting duration:6s",
          "callobject=harvest",
-         "animate=harvesting 1",
+         "animate=harvesting duration:6s",
          "createware=reed",
          "return"
       },
@@ -93,3 +93,5 @@ tribes:new_worker_type {
       },
    },
 }
+
+pop_textdomain()

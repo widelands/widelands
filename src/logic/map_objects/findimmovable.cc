@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,8 +56,9 @@ bool FindImmovablePlayerImmovable::accept(const BaseImmovable& imm) const {
 }
 
 bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {
-	if (upcast(MilitarySite const, ms, &imm))
+	if (upcast(MilitarySite const, ms, &imm)) {
 		return &ms->owner() == &player;
+	}
 	return false;
 }
 
@@ -82,8 +83,9 @@ bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
 
 bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
 	if (upcast(const Immovable, imm, &baseimm)) {
-		if (&imm->descr() == &descr)
+		if (&imm->descr() == &descr) {
 			return true;
+		}
 	}
 	return false;
 }
@@ -91,8 +93,9 @@ bool FindImmovableByDescr::accept(const BaseImmovable& baseimm) const {
 bool FindFlagOf::accept(const BaseImmovable& baseimm) const {
 	if (upcast(const Flag, flag, &baseimm)) {
 		if (Building* building = flag->get_building()) {
-			if (finder.accept(*building))
+			if (finder.accept(*building)) {
 				return true;
+			}
 		}
 	}
 	return false;

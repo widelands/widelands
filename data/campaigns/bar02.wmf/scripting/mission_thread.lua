@@ -2,9 +2,6 @@
 --                          Various mission threads
 -- =======================================================================
 
-include "scripting/messages.lua"
-include "scripting/field_animations.lua"
-
 local game = wl.Game()
 -- Mountain and frontier fields
 local mountain = game.map:get_field(71,14)

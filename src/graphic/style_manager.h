@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,15 +34,13 @@
 #include "graphic/styles/ware_info_style.h"
 #include "scripting/lua_table.h"
 
-static const std::string kTemplateDir = "templates/default/";
+constexpr const char* const kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
-	StyleManager() = default;
+	// Only create after ImageCache has been initialized.
+	StyleManager();
 	~StyleManager() = default;
-
-	// Late initialization, because Graphics needs to load the image files first.
-	void init();
 
 	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
 	const UI::ButtonStyleInfo& button_style(UI::ButtonStyle) const;
@@ -60,6 +58,21 @@ public:
 	// Special elements
 	int minimum_font_size() const;
 	const RGBColor& minimap_icon_frame() const;
+	const RGBAColor& window_border_focused() const {
+		return window_border_focused_;
+	}
+	const RGBAColor& window_border_unfocused() const {
+		return window_border_unfocused_;
+	}
+	const RGBAColor& focused_color() const {
+		return focused_color_;
+	}
+	const RGBAColor& semi_focused_color() const {
+		return semi_focused_color_;
+	}
+	int focus_border_thickness() const {
+		return focus_border_thickness_;
+	}
 	static std::string color_tag(const std::string& text, const RGBColor& color);
 
 private:
@@ -83,8 +96,9 @@ private:
 	PanelStyleMap dropdownstyles_;
 	PanelStyleMap scrollbarstyles_;
 
-	int minimum_font_size_;
+	int minimum_font_size_, focus_border_thickness_;
 	RGBColor minimap_icon_frame_;
+	RGBAColor window_border_focused_, window_border_unfocused_, focused_color_, semi_focused_color_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
 	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
@@ -94,5 +108,7 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };
+
+extern StyleManager* g_style_manager;
 
 #endif  // end of include guard: WL_GRAPHIC_STYLE_MANAGER_H

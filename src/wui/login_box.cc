@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,22 +51,22 @@ LoginBox::LoginBox(Panel& parent)
 	    "\n\nhttps://widelands.org/accounts/register/\n\n")
 	      .str());
 
-	loginbtn =
-	   new UI::Button(this, "login", UI::g_fh->fontset()->is_rtl() ?
-	                                    (get_inner_w() / 2 - 200) / 2 :
-	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	                  get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
+	loginbtn = new UI::Button(
+	   this, "login",
+	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
+	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
+	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
 
-	cancelbtn =
-	   new UI::Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ?
-	                                     (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
-	                                     (get_inner_w() / 2 - 200) / 2,
-	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
+	cancelbtn = new UI::Button(
+	   this, "cancel",
+	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
+	                                   (get_inner_w() / 2 - 200) / 2,
+	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
 
-	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
-	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
-	eb_nickname->changed.connect(boost::bind(&LoginBox::change_playername, this));
-	cb_register->clickedto.connect(boost::bind(&LoginBox::clicked_register, this));
+	loginbtn->sigclicked.connect([this]() { clicked_ok(); });
+	cancelbtn->sigclicked.connect([this]() { clicked_back(); });
+	eb_nickname->changed.connect([this]() { change_playername(); });
+	cb_register->clickedto.connect([this](bool) { clicked_register(); });
 
 	eb_nickname->set_text(get_config_string("nickname", _("nobody")));
 	cb_register->set_state(get_config_bool("registered", false));
@@ -77,13 +77,13 @@ LoginBox::LoginBox(Panel& parent)
 		loginbtn->set_enabled(false);
 	} else {
 		eb_password->set_can_focus(false);
-		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kDisabled));
+		ta_password->set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
 	}
 
 	eb_nickname->focus();
 
-	eb_nickname->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
-	eb_password->cancel.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
+	eb_nickname->cancel.connect([this]() { clicked_back(); });
+	eb_password->cancel.connect([this]() { clicked_back(); });
 }
 
 /// think function of the UI (main loop)
@@ -140,11 +140,11 @@ bool LoginBox::handle_key(bool down, SDL_Keysym code) {
 
 void LoginBox::clicked_register() {
 	if (cb_register->get_state()) {
-		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kDisabled));
+		ta_password->set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
 		eb_password->set_can_focus(false);
 		eb_password->set_text("");
 	} else {
-		ta_password->set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
+		ta_password->set_style(g_style_manager->font_style(UI::FontStyle::kLabel));
 		eb_password->set_can_focus(true);
 		eb_password->focus();
 	}
@@ -185,7 +185,7 @@ void LoginBox::verify_input() {
 /// Check password against metaserver
 bool LoginBox::check_password() {
 	// Try to connect to the metaserver
-	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
+	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
 	std::string password = crypto::sha1(eb_password->text());
 

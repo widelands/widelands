@@ -4,15 +4,16 @@
 # Translators:
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2018
+# Jukka Pakarinen, 2016-2018,2020
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
+# Teppo Mäenpää <teppo@runbox.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-21 18:02+0000\n"
-"PO-Revision-Date: 2020-01-21 18:25+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-09-11 11:59+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -51,6 +52,135 @@ msgid ""
 "and will introduce fighting."
 msgstr "Tämä opetuspeli opettaa käsittelemään sota- ja harjoittelupaikkarakennuksia ja esittelee taistelemista."
 
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:14
+msgid "Easy."
+msgstr "Helppo."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:20
+msgid "Medium."
+msgstr "Keskivaikea."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:25
+msgid "Hard."
+msgstr "Vaikea."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:30
+msgid "Challenging."
+msgstr "Haastava."
+
+#. TRANSLATORS: The name of a Barbarian campaign
+#: ../../data/campaigns/campaigns.lua:43
+msgid "The Second Empire"
+msgstr "Toinen Keisarikunta"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:49
+msgid "Introduces the Barbarians."
+msgstr "Tutustuminen Barbaareihin."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:52
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr "Chat’Karuthin kuollessa hän oli jo vanha mies, kolmen vahvan ja kunnianhimoisen pojan isä sekä sotaherra armeijalle, joka voisi peitota minkä tahansa viholisen, joka haluaisi tulla muinaisiin metsiin. Vaikka hänen mahtavan valtakauden lopussa Chat’Karuth valitsi vanhimman poikansa, Thornin, seuraavaksi heimon sotaherraksi – päätös jätti hänen muut poikaansa pettyneiksi. Ja vanha sotaherra tiesi sen. Kuten hänen isänsä opasti häntä, Thorn jätti Al’thunran pääkaupungin, Thronen kodin metsän keskellä ja vetäyty joukkoineen kukkuloille, missä hän hautasi isänsä ruumiin. Siellä hän vannoi jumalan nimeen ja hänen isän henkeen, että hän tulisi palauttamaan järjestyksen. Sillä aikaa hänen veljensä ovat raivonneet sokeasti Thornia ja muutamia Al’thunran rajoja turvaamaan jätettyjä joukkoja vastaan, nuori sotaherra etsi tapaa koota jälleen hänen kunnianhimoiset veljensä ja pakottaa heimot marssimaan yhteisen lipun alla."
+
+#. TRANSLATORS: The name of an Empire campaign
+#: ../../data/campaigns/campaigns.lua:70
+msgid "The Months of Exile"
+msgstr "Maanpaon Kuukaudet"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:73
+msgid "Introduces the Empire."
+msgstr "Tutustuminen Keisarikuntaan."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:75
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"Barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 Barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr "Kuusi vuotta sitten, Lutius – nuori Keisarikunnan kenraali – lähetettiin etulinjaan pohjoisten metsien taakse 150 sotilaan kera, missä Barbaariheimot olivat ylittämässä Keisarikunnan maita. Hänen tehtävänä oli puolustaa Keisarikunnan maita. Aluksi kaikkialla oli rauhallista. Hän jopa jutteli muutamien Barbaarilasten kanssa ja ajatteli rauhallisesta elämästä – rintarinnan muinaisten ihmisen kanssa. Hän alkoi tuntea olonsa turvalliseksi ja hänen armeijan tarkkaavaisuus alkoi horjua, pois mahdollisesta vihollisesta. Se oli heidän virheensä. Eräänä maaliskuisena yönä, hänen valmistautumatonta armeijaansa vastaan hyökkää 100 Barbaarin vahvuinen jalkaväki, täysin hajaantuneesti. Vain hän ja kourallinen hänen sotilaistaan selviytyi."
+
+#. TRANSLATORS: The name of an Atlantean campaign
+#: ../../data/campaigns/campaigns.lua:93
+msgid "The Run for the Fire"
+msgstr "Pakeneminen Pelosta"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:96
+msgid "Introduces the Atlanteans."
+msgstr "Tutustuminen Atlanstislaisiin."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:98
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr "Kun heidän Jumalansa menetti uskonsa Atlantislaisiin ja upotti heidän saarensa, eräs nainen kamppaili oikeuden puolesta ja hänen kansan saamasta toisesta mahdollisuudesta, mistä tulisi legendojen aihe. Johtaen jäljelle pääneet Atlantislaiset uuteen tulevaisuuteen, maailman toiseen osaan, Jundlinasta tuli hänen aikansa kaikkein mahtavin ihminen, mutta kalliilla hinnalla: hänen inhimillisyydellä ja sielulla."
+
+#. TRANSLATORS: The name of a Frisian campaign
+#: ../../data/campaigns/campaigns.lua:107
+msgid "From Water to Ice"
+msgstr "Vedestä Jääksi"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:110
+msgid "Introduces the Frisians."
+msgstr "Tutustuminen Vapaamielisiin"
+
+#. TRANSLATORS: A campaign difficulty (easiest of three options)
+#: ../../data/campaigns/campaigns.lua:115
+msgid "Sailor (Tricky)"
+msgstr "Merimies (Hankala)"
+
+#. TRANSLATORS: A campaign difficulty (medium of three options)
+#: ../../data/campaigns/campaigns.lua:117
+msgid "Steersman (Very Hard)"
+msgstr "Perämies (Hyvin Vaikea)"
+
+#. TRANSLATORS: A campaign difficulty (hardest of three options)
+#: ../../data/campaigns/campaigns.lua:119
+msgid "Captain (Unreasonable)"
+msgstr "Kapteeni (Kohtuuton)"
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:124
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "Merestä eläminen on yhtä taistelua ja vielä enemmän se on sitä Pohjoisella Vapaamielenmeren rannikolla. Oliko viimeisin myrskytulva, yksi tuhoisimmista miesmuistiin, mitään muuta kuin taas yksi esimerkki vastoinkäymisistä, joita kaikkien Vapaamielisten täytyy kohdata – tai oliko se jumalten muistutus siitä, että heimo, joka vasta asettui tänne, täytyy etsiä kokonaan uusi koti?"
+
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Ei vielä toteutettu"
@@ -87,6 +217,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Lopulta laiva korjattiin, joten Lutius ja hänen kansansa palasivat etsimään hyvää paikkaa uuden elämän aloittamiselle. Vain muutama pävä myöhemmin he rantautuvat vihreälle, Välimeren saarelle, joka näyttää paratiisilta. Ikionnellisena he ryhtyivät tutkimaan tätä uutta asuinpaikkaa."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Neptunuksen Kosto"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -151,7 +285,8 @@ msgstr "Sodankäynti"
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle."
+"soldiers, how to train them and how to lead them in battle. Scouting will be"
+" also covered."
 msgstr "Tässä opetuspelissä sinulle opetaan sodankäynnin salaisuudet: kuinka luoda sotilaita, kouluttaa ja johtaa heitä taistelussa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
@@ -162,7 +297,7 @@ msgstr "Merenkäynti"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "Tässä opetuspelissä opit merenkäynnistä, mikä tarkoittaa kuinka käsitellä laivoja ja satamia sekä lauttoja ja lauttareittejä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -195,6 +330,18 @@ msgid ""
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Laajat maapalat ovat harvinaisia noilla pienillä saarilla. Priorisoi suurten rakennusten rakentaminen niille. Joskus tulet tarvitsemaan suuren sotarakennuksen laajentaaksesi seuraavalle saarelle asti. Tekoäly suoriutunee huonosti."
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+msgid "Astoria 2.R"
+msgstr "Astoria 2.R"
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr ""
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+msgid "pbuczny@gmail.com – edited by Nordfriese"
+msgstr "pbuczny@gmail.com – editoija Nordfriese"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -266,9 +413,17 @@ msgstr "Kauan sen jälkeen, kun meteori iskeytyi kahteen vuoreen, elämä kukois
 msgid "Crossing the Horizon"
 msgstr "Taivaanrannan ylittäminen"
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+msgid "Kristin – edited by 3plus4i"
+msgstr ""
+
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Miehitä laivasi ja purjehdi taivaanrantaan."
+
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr ""
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
@@ -281,26 +436,27 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Neljä heimoa kamppailevat heidän lähimmän naapurin kanssa saavuttaakseen ensimmäisenä kultavuoren, joka lupaa uskomattomia rikkauksia. Mutta voiko viimeiset kaksi jakaa resurssit viisaasti?"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:8
-msgid "Dolomites"
-msgstr "Dolomiitit"
+#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+msgid "Dolomites 3.0"
+msgstr "Dolomiitit 3.0"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:10
+#: ../../data/maps/Dolomites_v3.wmf/elemental:10
 msgid ""
-"The jewel of the Alps, the Dolomites mountain range has been declared a "
-"World Heritage Site for its pristine beauty. This map is an as-faithful-as-"
-"reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
+"The jewel of the alps, the dolomites mountain range has been declared a "
+"world heritage site for its pristine beauty. This map is an as-faithful-as-"
+"reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death against your enemies, it may as well be in a beautiful place."
+" to the death with your enemies, it may as well be in a beautiful place."
 msgstr "Alppien jalokivi, Dolomittien vuorijono on julistettu Maailmanperintökohteeksi sen koskemattoman luonnon vuoksi. Tämä kartta on rekonstruoitu alueesta niin-luotettavasti-kuin-mahdollista rajattuna Cortina d’Ampezzoon koillisessa ja Canazeihin lounaassa. Jos sinun täytyy ryhtyä kaksintaisteluun viholisesi kanssa kuolemaan asti, se on myös kaiken lisäksi kaunis paikka."
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:11
+#: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical. Use the little building space that you have wisely. A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage."
-msgstr "Vuorilla on paljon tasaista maata. Valitettavasti suurin osa siitä on pystysuuntainsta. Käytä vähäinen rakennusmaasi viisaasti. Linnoituksen ohittamienn kapean vuoren suulla voi olla hyvin pelottava este vihollisen armeijalle. Käytä maaston muodot eduksesi."
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr ""
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -311,6 +467,28 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
 msgstr "Nämä henkeä salpaavan kauniita smaragdisaaret ovat houkutelleet monia heimoja yrityksiin ottaa ne haltuunsa."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
+msgid "Escher_Goose_Fish"
+msgstr "Escher_Goose_Fish"
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
+msgid "Equal starting conditions for three players."
+msgstr "Yhtäläinen aloituspaikka kullakin kolmella pelaajalla."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
+msgid "v0.2"
+msgstr "v0.2"
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:10
+msgid ""
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
+msgstr ""
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:8
+msgid "Europa 1.1"
+msgstr "Europa 1.1"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -427,17 +605,6 @@ msgstr "Syksyä seuraa talvi. Jotkin asia jäätyvät, muttei sota."
 msgid "Start positions are clockwise"
 msgstr "Aloituspaikat ovat myötäpäivää"
 
-#: ../../data/maps/Impact.wmf/elemental:8
-msgid "Impact"
-msgstr "Törmäys"
-
-#: ../../data/maps/Impact.wmf/elemental:10
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr "Asteroidin törmäystä seuranneessa kovassa talvessa kolmea saarta yhdistää nyt jää ja kivi. Tämä tietää loppua kolmen heimon rauhanomaiselle yhteiselolle."
-
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
 msgstr "Saaret sodassa"
@@ -506,6 +673,16 @@ msgid ""
 "all over the map."
 msgstr "Neljä heimoa taistelee karun alueen hallinnasta. Resurssit ovat pirstoutuneet koko kartan alueelle."
 
+#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+msgid ""
+">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
+"long, long way to conquere all the islands. Good luck!"
+msgstr ">Missä dat? Kaukana täältä.< [Porgy and Bess] Sinun täytyy kulkea hyvin pitkä matka valloittaaksesi kaikki saaret. Onnea matkaan!"
+
+#: ../../data/maps/Long, long v2.wmf/elemental:8 way
+msgid "Long, long way v2"
+msgstr "Hyvin kaukana v2"
+
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
 msgstr "Saarivalloitus"
@@ -538,6 +715,19 @@ msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
 msgstr "Ilmassa on kaksi iso kysymystä: Kuka loi tämän uskomattoman suuren labyrintin ja mitä sen sisältä voikaan löytyä?"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+msgid "No metal challenge v2"
+msgstr "Metallipula-haastekartta (v.2)"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+msgid ""
+"This map is intended as a solo challenge for those very skilled players that"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr ""
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -789,6 +979,12 @@ msgid ""
 "thousand waves, twinkling in the sun."
 msgstr "Monta kaunista, vehreää saarta odottaa niitä, jotka ovat riittävän urheita ylittämään auringonpaisteessa kimaltelevat tuhannet aallot."
 
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr ""
+
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
 msgstr "Kaksi rintamaa"
@@ -796,18 +992,6 @@ msgstr "Kaksi rintamaa"
 #: ../../data/maps/Two_Frontiers.wmf/elemental:10
 msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr "Moninpeliin sopiva taistelukartta pienellä, ympyränmuotoisella saarella."
-
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:8
-msgid "Volcanic Winter"
-msgstr "Vulkaaninen Talvi"
-
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:10
-msgid ""
-"In the middle of summer, a series of volcanic eruptions drew the winter in. "
-"Suddenly, the sun seemed to be gone and the only light and heat sources left"
-" were those that enforced this dramatic change. Continents, oceans and seas "
-"are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr "Kesän puolivälissä vulkaanisten purkauksien sarja toi tänne talven. Yllättäin aurinko näytti olevan poissa ja ainoita valon- ja lämmönlähteitä näytti olevan nuo, jotka vahvistivat tätä dramaattista muutosta. Mantereet, valtameret ja meret ovat nyt jäätyneet, vain vulkaaniset saaret näyttäisivät jääneen ainoiksi asumiskelpoisiksi maiksi."
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"

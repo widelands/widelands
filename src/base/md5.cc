@@ -3,7 +3,7 @@
  *
  * Thanks to Ulrich Drepper for the md5sum example code
  *
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,8 +61,9 @@ void* md5_finish_ctx(Md5Ctx* const ctx, void* const resbuf) {
 
 	/* Now count remaining bytes.  */
 	ctx->total[0] += bytes;
-	if (ctx->total[0] < bytes)
+	if (ctx->total[0] < bytes) {
 		++ctx->total[1];
+	}
 
 	pad = bytes >= 56 ? 64 + 56 - bytes : 56 - bytes;
 	memcpy(&ctx->buffer[bytes], fillbuf, pad);
@@ -147,8 +148,9 @@ void md5_process_block(void const* const buffer, uint32_t const len, Md5Ctx* con
 	   length of the file up to 2^64 bits.  Here we only compute the
 	   number of bytes.  Do a double word increment.  */
 	ctx->total[0] += len;
-	if (ctx->total[0] < len)
+	if (ctx->total[0] < len) {
 		++ctx->total[1];
+	}
 
 	/* Process all bytes in the buffer with 64 bytes in each round of
 	   the loop.  */
@@ -159,12 +161,12 @@ void md5_process_block(void const* const buffer, uint32_t const len, Md5Ctx* con
 		uint32_t const C_save = C;
 		uint32_t const D_save = D;
 
-/* First round: using the given function, the context and a constant
-the next context is computed.  Because the algorithms processing
-unit is a 32-bit word and it is determined to work on words in
-little endian byte order we perhaps have to change the byte order
-before the computation.  To reduce the work for the next steps
-we store the swapped words in the array CORRECT_WORDS.  */
+		/* First round: using the given function, the context and a constant
+		the next context is computed.  Because the algorithms processing
+		unit is a 32-bit word and it is determined to work on words in
+		little endian byte order we perhaps have to change the byte order
+		before the computation.  To reduce the work for the next steps
+		we store the swapped words in the array CORRECT_WORDS.  */
 
 #define OP(a, b, c, d, s, T)                                                                       \
 	do {                                                                                            \
@@ -175,7 +177,7 @@ we store the swapped words in the array CORRECT_WORDS.  */
 	} while (false)
 
 /* It is unfortunate that C does not provide an operator for
-   cyclic rotation.  Hope the C compiler is smart enough.  */
+	cyclic rotation.  Hope the C compiler is smart enough.  */
 #define CYCLIC(w, s) (w = (w << s) | (w >> (32 - s)))
 
 		/* Before we start, one word to the strange constants.

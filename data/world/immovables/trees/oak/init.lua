@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,17 +9,15 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_sapling",
    descname = _ "Oak (Sapling)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 72500",
-         "remove=80",
+      main = {
+         "animate=idle duration:1m12s500ms",
+         "remove=chance:31.25%",
          "grow=oak_summer_pole",
       },
    },
@@ -34,17 +34,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_pole",
    descname = _ "Oak (Pole)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 72500",
-         "remove=70",
+      main = {
+         "animate=idle duration:1m12s500ms",
+         "remove=chance:27.34%",
          "grow=oak_summer_mature",
       },
    },
@@ -61,17 +59,15 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_mature",
    descname = _ "Oak (Mature)",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 75000",
-         "remove=40",
+      main = {
+         "animate=idle duration:1m15s",
+         "remove=chance:15.62%",
          "grow=oak_summer_old",
       },
    },
@@ -88,23 +84,21 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "oak_summer_old",
    descname = _ "Oak (Old)",
    species = _ "Oak",
    icon = dirname .. "menu.png",
-   editor_category = "trees_deciduous",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 2250000",
-         "transform=deadtree2 12",
-         "seed=oak_summer_sapling",
+      main = {
+         "animate=idle duration:37m30s",
+         "transform=deadtree2 chance:4.69%",
+         "seed=oak_summer_sapling proximity:39%",
       },
       fall = {
-         "animate=falling 1400",
+         "animate=falling duration:1s400ms",
          "transform=fallentree",
       },
    },
@@ -119,6 +113,7 @@ world:new_immovable_type{
          hotspot = { 25, 61 },
          sound_effect = {
             path = "sound/animals/bird2",
+            priority = 10
          },
       },
       falling = {
@@ -133,3 +128,5 @@ world:new_immovable_type{
       }
    },
 }
+
+pop_textdomain()

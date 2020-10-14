@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,12 +50,8 @@ void MapBobPacket::read_bob(FileRead& fr,
 
 	const std::string name = lookup_table.lookup_critter(read_name, packet_version);
 	try {
-		const World& world = egbase.world();
-		DescriptionIndex const idx = world.get_critter(name.c_str());
-		if (idx == INVALID_INDEX)
-			throw GameDataError("world does not define bob type \"%s\"", name.c_str());
-
-		const CritterDescr& descr = *world.get_critter_descr(idx);
+		World* world = egbase.mutable_world();
+		const CritterDescr& descr = *world->get_critter_descr(world->load_critter(name));
 		descr.create(egbase, nullptr, coords);
 		// We do not register this object as needing loading. This packet is only
 		// in fresh maps, that are just started. As soon as the game saves
@@ -80,15 +76,16 @@ void MapBobPacket::read(FileSystem& fs,
 	map->recalc_whole_map(egbase);  //  for movecaps checks in ReadBob
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersion)
+		if (packet_version == kCurrentPacketVersion) {
 			for (uint16_t y = 0; y < map->get_height(); ++y) {
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					uint32_t const nr_bobs = fr.unsigned_32();
-					for (uint32_t i = 0; i < nr_bobs; ++i)
+					for (uint32_t i = 0; i < nr_bobs; ++i) {
 						read_bob(fr, egbase, mol, Coords(x, y), lookup_table, packet_version);
+					}
 				}
 			}
-		else {
+		} else {
 			throw UnhandledVersionError("MapBobPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {

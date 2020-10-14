@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct Utf8 {
 	 */
 	static uint16_t utf8_to_unicode(const std::string& in, std::string::size_type& pos) {
 		assert(pos < in.size());
-		if (in[pos] & 0xc0) {
+		if (in[pos] & 0x80) {
 			if (is_utf8_extended(in[pos])) {
 				pos++;
 				return 0;

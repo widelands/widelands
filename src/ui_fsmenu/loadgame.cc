@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
             0,
             is_replay ? _("Choose a replay") : _("Choose a saved game"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      load_or_save_(&info_box_,
                    g,
@@ -53,6 +53,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                    true),
 
      is_replay_(is_replay),
+     update_game_details_(false),
      showing_filenames_(false) {
 
 	// Make sure that we have some space to work with.
@@ -80,7 +81,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	layout();
 
 	ok_.set_enabled(false);
-	set_thinks(false);
 
 	if (is_replay_) {
 		back_.set_tooltip(_("Return to the main menu"));
@@ -91,16 +91,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 		ok_.set_tooltip(_("Load this game"));
 	}
 
-	back_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
-	load_or_save_.table().selected.connect(
-	   boost::bind(&FullscreenMenuLoadGame::entry_selected, this));
-	load_or_save_.table().double_clicked.connect(
-	   boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
+	load_or_save_.table().double_clicked.connect([this](unsigned) { clicked_ok(); });
 
 	if (is_replay_) {
-		show_filenames_->changed.connect(
-		   boost::bind(&FullscreenMenuLoadGame::toggle_filenames, boost::ref(*this)));
+		show_filenames_->changed.connect([this]() { toggle_filenames(); });
 		show_filenames_->set_state(get_config_bool("display_replay_filenames", true));
 	}
 
@@ -109,8 +106,17 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 		load_or_save_.table().select(0);
 	}
 
-	load_or_save_.table().cancel.connect(
-	   boost::bind(&FullscreenMenuLoadGame::clicked_back, boost::ref(*this)));
+	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
+}
+
+void FullscreenMenuLoadGame::think() {
+	FullscreenMenuLoadMapOrGame::think();
+
+	if (update_game_details_) {
+		// Call performance heavy draw_minimap function only during think
+		update_game_details_ = false;
+		load_or_save_.entry_selected();
+	}
 }
 
 void FullscreenMenuLoadGame::layout() {
@@ -160,9 +166,11 @@ void FullscreenMenuLoadGame::clicked_ok() {
 
 void FullscreenMenuLoadGame::entry_selected() {
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
-	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
-		load_or_save_.entry_selected();
+		// Update during think() instead of every keypress
+		update_game_details_ = true;
+	} else {
+		load_or_save_.delete_button()->set_enabled(false);
 	}
 }
 
@@ -176,8 +184,9 @@ const std::string& FullscreenMenuLoadGame::filename() const {
 }
 
 bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
-	if (!down)
+	if (!down) {
 		return false;
+	}
 
 	switch (code.sym) {
 	case SDLK_KP_PERIOD:

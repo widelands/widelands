@@ -1,6 +1,6 @@
 include "scripting/richtext.lua"
 
-set_textdomain("texts")
+push_textdomain("texts")
 tips = {
    {
       text = _"The building process will only start after a road is built to the construction site.",
@@ -40,7 +40,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(pgettext("hotkey", "Ctrl+(1-9)"), pgettext("hotkey", "1-9")),
+      text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(pgettext("hotkey", "Ctrl + (1-9)"), pgettext("hotkey", "1-9")),
       seconds = 4
    },
    {
@@ -68,15 +68,19 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom.":bformat(pgettext("hotkey", "Ctrl+(+/-)"), pgettext("hotkey", "Ctrl+0")),
+      text = _"Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom.":bformat(pgettext("hotkey", "Ctrl + (+/-)"), pgettext("hotkey", "Ctrl + 0")),
       seconds = 3
    },
    {
-      text = _"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will adjust speed smoothly.":bformat(pgettext("hotkey", "Page Up/Page Down"), pgettext("hotkey", "Ctrl+(Page Up/Page Down)"), pgettext("hotkey", "Shift+(Page Up/Page Down)")),
+      text = _"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently visited locations.",
+      seconds = 3
+   },
+   {
+      text = _"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will adjust speed smoothly.":bformat(pgettext("hotkey", "Page Up/Page Down"), pgettext("hotkey", "Ctrl + (Page Up/Page Down)"), pgettext("hotkey", "Shift + (Page Up/Page Down)")),
       seconds = 7
    },
    {
-      text = _"Move map view using %1%. %2% will move the view faster, %3% moves slowly.":bformat(pgettext("hotkey", "Arrow keys"), pgettext("hotkey", "Ctrl+Arrow keys"), pgettext("hotkey", "Shift+Arrow keys")),
+      text = _"Move map view using %1%. %2% will move the view faster, %3% moves slowly.":bformat(pgettext("hotkey", "Arrow keys"), pgettext("hotkey", "Ctrl + Arrow keys"), pgettext("hotkey", "Shift + Arrow keys")),
       seconds = 4
    },
    {
@@ -85,4 +89,5 @@ tips = {
    },
 
 }
+pop_textdomain()
 return tips

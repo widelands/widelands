@@ -107,10 +107,10 @@ local b_table = prefilled_buildings(p3,
 )
 
 -- This player has no AI so we build some roads for him
-connected_road(p3, b_table[1].flag, "l, tl, tl" )
-connected_road(p3, b_table[2].flag, "r, r, r, r, r, tr")
-connected_road(p3, b_table[3].flag, "bl, bl, bl, bl" )
-connected_road(p3, b_table[5].flag, "br, br, bl, bl" )
+connected_road("normal", p3, b_table[1].flag, "l, tl, tl" )
+connected_road("normal", p3, b_table[2].flag, "r, r, r, r, r, tr")
+connected_road("normal", p3, b_table[3].flag, "bl, bl, bl, bl" )
+connected_road("normal", p3, b_table[5].flag, "br, br, bl, bl" )
 
 -- =======================================================================
 --                                 Player 4

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,24 +28,28 @@ namespace Widelands {
 
 Direction read_direction_8(StreamRead* fr) {
 	uint8_t const d = fr->unsigned_8();
-	if (d == 0)
+	if (d == 0) {
 		throw DirectionIsNull();
-	if (6 < d)
+	}
+	if (6 < d) {
 		throw DirectionInvalid(d);
+	}
 	return d;
 }
 
 Direction read_direction_8_allow_null(StreamRead* fr) {
 	uint8_t const d = fr->unsigned_8();
-	if (6 < d)
+	if (6 < d) {
 		throw DirectionInvalid(d);
+	}
 	return d;
 }
 
 MapIndex read_map_index_32(StreamRead* fr, const MapIndex max) {
 	uint32_t const i = fr->unsigned_32();
-	if (max <= i)
+	if (max <= i) {
 		throw ExceededMaxIndex(max, i);
+	}
 	return i;
 }
 
@@ -58,10 +62,12 @@ Coords read_coords_32(StreamRead* stream_read) {
 Coords read_coords_32(StreamRead* stream_read, const Extent& extent) {
 	uint16_t const x = stream_read->unsigned_16();
 	uint16_t const y = stream_read->unsigned_16();
-	if (extent.w <= x)
+	if (extent.w <= x) {
 		throw ExceededWidth(extent.w, x);
-	if (extent.h <= y)
+	}
+	if (extent.h <= y) {
 		throw ExceededHeight(extent.h, y);
+	}
 	return Coords(x, y);
 }
 
@@ -70,10 +76,12 @@ Coords read_coords_32_allow_null(StreamRead* fr, const Extent& extent) {
 	uint16_t const y = fr->unsigned_16();
 	const Coords result(x, y);
 	if (result) {
-		if (extent.w <= x)
+		if (extent.w <= x) {
 			throw ExceededWidth(extent.w, x);
-		if (extent.h <= y)
+		}
+		if (extent.h <= y) {
 			throw ExceededHeight(extent.h, y);
+		}
 	}
 	return result;
 }

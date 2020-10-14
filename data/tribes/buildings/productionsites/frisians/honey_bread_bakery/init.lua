@@ -1,26 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_honey_bread_bakery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Honey Bread Bakery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-
-   enhancement_cost = {
-      brick = 3,
-      log = 3,
-      granite = 1,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 2,
-      granite = 1,
-      log = 1,
-      reed = 2
-   },
 
    spritesheets = {
       idle = {
@@ -62,20 +49,15 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "honey", amount = 6 },
    },
-   outputs = {
-      "honey_bread",
-      "bread_frisians"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=bake_honey",
             "call=bake_normal",
             "call=bake_honey_2",
-            "return=no_stats"
          }
       },
       -- 2 identical programs for honey bread to prevent unnecessary skipping penalty
@@ -85,8 +67,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
-            "sleep=20000",
-            "animate=working 25000",
+            "sleep=duration:20s",
+            "animate=working duration:25s",
             "produce=honey_bread"
          }
       },
@@ -96,8 +78,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
             "consume=barley water honey",
-            "sleep=20000",
-            "animate=working 25000",
+            "sleep=duration:20s",
+            "animate=working duration:25s",
             "produce=honey_bread"
          }
       },
@@ -107,10 +89,12 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs bread_frisians",
             "consume=barley water",
-            "sleep=20000",
-            "animate=working 20000",
+            "sleep=duration:20s",
+            "animate=working duration:20s",
             "produce=bread_frisians"
          }
       },
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,10 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_PROGRAM_H
 
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/map_object_program.h"
 
 namespace Widelands {
+class Critter;
 
 struct CritterAction {
 	using CritterExecuteActionFn = bool (Critter::*)(Game&, Bob::State&, const CritterAction&);
@@ -40,15 +42,9 @@ struct CritterAction {
 	std::vector<std::string> sparamv;
 };
 
-struct CritterProgram : public BobProgramBase {
-	explicit CritterProgram(const std::string& name) : name_(name) {
-	}
-	~CritterProgram() override {
-	}
+struct CritterProgram : public MapObjectProgram {
+	explicit CritterProgram(const std::string& program_name, const LuaTable& actions_table);
 
-	std::string get_name() const override {
-		return name_;
-	}
 	int32_t get_size() const {
 		return actions_.size();
 	}
@@ -57,10 +53,7 @@ struct CritterProgram : public BobProgramBase {
 		return actions_[idx];
 	}
 
-	void parse(const std::vector<std::string>& lines);
-
 private:
-	std::string name_;
 	std::vector<CritterAction> actions_;
 };
 }  // namespace Widelands

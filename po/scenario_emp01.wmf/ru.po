@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
@@ -7,14 +7,14 @@
 # Viktor S <awsswa59@gmail.com>, 2019
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
-# Fede4ka, 2015
+# 66c17387c1d6640720971b8ab706da27_0feead1, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-09-06 07:24+0000\n"
-"PO-Revision-Date: 2019-09-11 09:50+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,91 +22,91 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:25
 msgid "Build a blockhouse"
 msgstr "Постройте блокгауз"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:29
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:27
 msgid "Blockhouse"
 msgstr "Блокгауз"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:30
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:28
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
 msgstr "Постройте блокгауз на значке красного дома с восточной стороны лесов, справа от Вашего временного штаба."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
 msgstr "Постройте домик дровосека"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Lumberjack’s House"
 msgstr "Домик дровосека"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:39
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:37
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
 msgstr "Постройте домик дровосека на значке красного дома, к югу от Вашего временного склада."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
 msgstr "Постройте 2 домика дровосека и лесопилку"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Two Lumberjack’s Houses and a Sawmill"
 msgstr "Два домика дровосека и лесопилка"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:46
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
 msgstr "Постройте ещё два домика дровосека и лесопилку, как только у вас появится для них место."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"
 msgstr "Постройте домик лесника"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
 msgstr "Домик лесника"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
 msgstr "Постройте домик лесника, чтобы сохранить древесные ресурсы этого острова."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:61
 msgid "Build a quarry"
 msgstr "Постройте каменоломню"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Quarry"
 msgstr "Каменоломня"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
 msgstr "Постройте каменоломню к югу и добудьте немного гранита и мрамора из скал."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:67
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
 msgstr "Эти ресурсы могут быть использованы для последующих зданий."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
 msgstr "Тёмная ночь"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:99
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:222
 msgid "Diary of Lutius"
 msgstr "Дневник Люциуса"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:78
 msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
@@ -114,7 +114,7 @@ msgid ""
 msgstr "Во что превратилась наша империя? Я серьёзно задаюсь вопросом - почему мой король запретил мне сражаться против этих мерзких племен варваров, которые поначалу притворялись мирными союзниками, а потом напали на мою армию во мгле ночи?"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:83
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
 msgid ""
 "With an army of 150 men, I was assigned to patrol on our northern frontier, "
 "which lies near the Galdin Mountains in a great, beautiful and ancient "
@@ -124,7 +124,7 @@ msgid ""
 msgstr "С армией в 150 человек, я получил приказ патрулировать нашу северную границу, пролегающую близ Галдинских гор в обширным, прекрасном и древнем лесу. Вскоре мы повстречали племя варваров, поначалу казалось мирным. Некоторые из моих людей даже торговали с ними товарами, а их дети прибегали в наш лагерь поглазеть на нашу чистую одежду и блестящее оружие."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
 "But during our fifth night in that region, they attacked us with no reason. "
 "I lost dozens of good men, and found myself imprisoned and brought to their "
@@ -135,7 +135,7 @@ msgid ""
 msgstr "Но на пятую ночь, они напали на нас без причины. Я потерял дюжины хороших мужчин, очнулся в заключенным в темницу и был доставлен к их вождю. Он плевал на меня, издевался надо мной и велел мне покинуть эту землю навсегда. Он не хотел новую землю и не хотел нашу землю, но сказал, что ЭТОТ лес – их земля – и так и будет, пока духи не заберут последнего человека его народа!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
 msgid ""
 "Three weeks later, I returned to Fremil to speak with our king. He was "
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
@@ -144,7 +144,7 @@ msgid ""
 msgstr "Три недели спустя я возвратился во Фремил, чтобы говорить с нашим королем. Он был разъярен, кода услышал о Варварах, но все же запретил любое нападение на эти племена. Он полагал, что наша армия была слишком слаба, чтобы выжить в войне против Варваров."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:90
 msgid ""
 "Still, I saw no way that I could erase my shame without fighting against "
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
@@ -152,12 +152,12 @@ msgid ""
 "Perl with my family, some of my friends and a few of my best warriors."
 msgstr "Однако, я не видел способа, как стереть свой позор, не борясь против этих Варваров. Так, я покинул Фремил на лодке, чтобы найти новый мир и новую жизнь для меня, где-нибудь на юге. Теперь я подхожу к Жемчужному заливу с моей семьей, друзьями и несколькими моими лучшими воинами."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:96
 msgid "The Rough Sea"
 msgstr "Бурное море"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:101
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:99
 msgid ""
 "It seems as if sailing on the Gulf of Perl was one of our biggest mistakes. "
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
@@ -166,23 +166,23 @@ msgid ""
 msgstr "Кажется, остановка в Жемчужном заливе была одной из наших самых больших ошибок. Природа против нас и ведет нас в темный, дикий шторм. Я не знаю, сколько часов прошло, с того момента, кода волны начали подниматься выше, чем наша лодка. В любом случае, выходить на палубу сейчас - чистое самоубийство!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:104
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
 msgstr "Наш корабль ужасно поврежден, и наполняется водой! Мы можем благодарить Богов, если переживем эту черную ночь."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:110
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:108
 msgid "Survivors"
 msgstr "Выжившие"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Finally, the Gods were with us!"
 msgstr "Все-таки, Боги услышали наши молитвы!"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:116
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:114
 msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
@@ -190,23 +190,23 @@ msgid ""
 msgstr "Мы высадились на неизвестном побережье и наконец смоли немного отдохнуть под пальмами, растущими на берегу. Но это только первое впечатление было таким хорошим, . На самом же деле, когда я проснулся этим утром, я увидел, что вокруг нет ничего, кроме песка."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
 msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
 msgstr "Похоже на то, что мы высадились под единственными пальмами, существующими в этой далекой песчаной пустыне. Я боюсь, что мы не найдем помощь, нам нужно отремонтировать наше судно как можно скорее."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:125
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "A Foreboding"
 msgstr "Предчуствие"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:124
 msgid "Saledus looks around nervously…"
 msgstr "Саледус нервно озирается..."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
 msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
@@ -214,7 +214,7 @@ msgid ""
 msgstr "Сир, я боюсь, что мы не в безопасности на этой чужбине. Кто знает, какие ужасные существа живут за этим лесом в той огромной пустыне? Что, если эти существа в лесу только и ждут времени, чтобы напасть на нас?"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:129
 msgid ""
 "Well, perhaps my fear is misguided, but it can’t be wrong to keep watch in "
 "the forests – so that we can be sure to see any potential enemies before "
@@ -222,71 +222,71 @@ msgid ""
 msgstr "Ну, может быть, мой страх ошибочный, но было бы неплохо разведать окрестности лесов - так, чтобы мы моли быть уверены, чтобы обнаружим любых потенциальных врагов раньше, чем они нас."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:132
 msgid ""
 "You really should build a blockhouse in the eastern portion of the forest. "
 "Then one of my men can keep watch in the darkness and keep us safe from "
 "these creatures."
 msgstr "Вам стоит построить блокгауз в восточной части леса. Тогда один из моих людей сможет наблюдать во тьму и держать нас в безопасности от этих существ."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:139
 msgid "Safe For Now"
 msgstr "На данный момент безопасно"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:140
 msgid "Saledus speaks with a sigh of relief…"
 msgstr "Саледус говорит со вздохом облегчения …"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid ""
 "Sire, I saw that the construction of the blockhouse was completed, so I have"
 " assigned one of my best soldiers to it to keep watch on the desert."
 msgstr "Сир, я видел, что строительство блокгауза закончено и поэтому я отправил одного из моих лучших солдат наблюдать за пустыней."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
 msgstr "Это хороший шаг вперед. Теперь мы можем чувствовать себя в большей безопасности в ожидании ремонта нашего судна."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:152
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:167
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Young Amalea"
 msgstr "Юная Амалия"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Amalea smiles…"
 msgstr "Амалия улыбается..."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 msgid "Greetings, Lutius! I just met Saledus outside."
 msgstr "Приветствую, Люциус! Я только что встретила Саледуса снаружи."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:158
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:156
 msgid ""
 "He told me about the blockhouse. Well, I don’t think we need more "
 "blockhouses – instead, we might concentrate on other things now."
 msgstr "Он поведал мне о блокгаузе. Что ж, я не думаю, что нам нужно больше блокгаузов. Вместо этого, нам сейчас нужно сконцентрироваться на других вещах."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:159
 msgid ""
 "It is absolutely clear that we need wood to repair our ship. So, I walked "
 "through the forest yesterday to look for a nice place for a lumberjack’s "
 "house and found one right south of our provisional headquarters."
 msgstr "Совершенно очевидно, что нам нужно дерево для ремонта нашего корабля. В общем, я шла через лес вчера, присматривая хорошее место для домика лесоруба и нашла его прямо к югу от нашего штаба."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:166
 msgid "Amalea recommends…"
 msgstr "Амалия рекомендует..."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:170
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
 msgid ""
 "I got the message that our first lumberjack has started his work today. "
 "Perhaps it would be a good idea to wait until he has cleared enough space "
@@ -295,7 +295,7 @@ msgid ""
 msgstr "Я получила сообщение, что наш первый дровосек сегодня начал свою работу. Возможно, было бы лучше подождать, пока он не освободит достаточно пространства для строительства еще двух домиков дровосека, чтобы мы могли получать бревна быстрее."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
 msgid ""
 "But unfortunately the logs are useless for repairing our ship – we need to "
 "turn them into planks, which are needed by every ship and every bigger "
@@ -303,31 +303,31 @@ msgid ""
 " for this."
 msgstr "К сожалению, сами бревна бесполезны для восстановления нашего судна – нам нужны доски. Они потребуются для строительства каждого большого здания и каждого корабля. Итак, мы должны построить лесопилку – как только для неё у нас будет достаточно пространства."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
 msgstr "Амалия входит..."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
 msgid "I’ve got two important things to talk about… First the good news:"
 msgstr "У меня есть две важных новости… Сначала хорошая:"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:185
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:183
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
 msgstr "Я заметила, что строительство лесопилки завершено, значит мы можем начать обрабатывать бревна, которые поставляют дровосеки, в доски."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
 msgstr "Плохая новость в том, что наши дровосеки вырубают деревья на невероятной скорости. На острове почти не осталось деревьев."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:189
 msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
@@ -335,42 +335,42 @@ msgid ""
 msgstr "Эти деревья - приют от песчаных бурь, которые приходят из пустыни и дают тень в жаркие дни. Кроме этоо, это дом для многих слабых животных. Мы не можем оставить этот остров полной пустыней."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:194
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192
 msgid "Lutius, please find someone who will take care of planting new trees."
 msgstr "Люциус, пожалуйста, найдите кого-то, кто позаботится о посадке новых деревьев."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:198
 msgid "Thinking About the Future"
 msgstr "В раздумьях о будущем"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:199
 msgid "Saledus notes…"
 msgstr "Саледус отмечает…"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:203
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid ""
 "Sire, I just thought about the rocks standing on the south shore of this "
 "land. Perhaps we could cut out some useful granite and beautiful marble."
 msgstr "Сир, я только что подумал о скалах, стоящих на южном берегу этой земли. Возможно, мы могли добыть в них какое-то количество полезного гранита и прекрасного мрамора."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:204
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
 msgstr "Ремонт нашего судна займет несколько недель. В любом случае, ресурсы, которые мы собираем сейчас, могли бы быть полезны для строительства прочных и больших зданий на другой земле."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:210
 msgid "A Step Forward"
 msgstr "Шаг вперед"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:211
 msgid "Saledus looks excited…"
 msgstr "Саледус выглядит взволнованным..."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:215
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
 msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
@@ -378,16 +378,16 @@ msgid ""
 msgstr "Сир, сегодня мы приблизились к строительству нашего первого замка. Каменоломня на юге сегодня начала свою работу, и, скоро, начнет снабжение гранитом и прекрасным мрамором."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:216
 msgid "Now we truly can look forward to settling down on another island."
 msgstr "Теперь мы можем надеяться поселиться на другом острове."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Mission Complete"
 msgstr "Миссия выполнена"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:226
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:224
 msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
@@ -395,51 +395,38 @@ msgid ""
 msgstr "Сегодня мне сообщили, что наше судно полностью отремонтировано. В данный момент мои люди загружают все запасы на него. Они надеятся, что оно послужит нам лучше, чем в прошлый раз."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:227
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
 msgstr "Сегодня будет наша последняя ночь на этом острове. Завтра утром мы уедем, ища новое место для нашего изгнания."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:230
 msgid "I still wonder if we will ever see Fremil again."
 msgstr "Я все еще задаюсь вопросом, сможем ли мы когда-либо вернуться во Фремил."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:233
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:231
 msgid "Victory"
 msgstr "Победа"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:234
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:232
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "Вы закончили эту миссию. Вы можете продолжить играть, если желаете, или перейти к следующей миссии."
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:237
 msgid "Safe Peninsula"
 msgstr "Безопасный полуостров"
 
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:240
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:238
 msgid "Saledus speaks:"
 msgstr "Саледус говорит:"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/emp01.wmf/scripting/texts.lua:240
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
 msgstr "Сир, Вы сделали этот полуостров очень безопасным местом. Теперь пора идти дальше!"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr "Новое задание"
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr "Новые задания"

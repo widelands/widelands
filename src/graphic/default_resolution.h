@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,11 @@
 #ifndef WL_GRAPHIC_DEFAULT_RESOLUTION_H
 #define WL_GRAPHIC_DEFAULT_RESOLUTION_H
 
-// Default X/Y resolution.
-#define DEFAULT_RESOLUTION_W 800
-#define DEFAULT_RESOLUTION_H 600
+// Default and minimum allowed X/Y resolution.
+constexpr int kMinimumResolutionW = 800;
+constexpr int kMinimumResolutionH = 600;
+
+constexpr int kDefaultResolutionW = kMinimumResolutionW;
+constexpr int kDefaultResolutionH = kMinimumResolutionH;
 
 #endif  // end of include guard: WL_GRAPHIC_DEFAULT_RESOLUTION_H

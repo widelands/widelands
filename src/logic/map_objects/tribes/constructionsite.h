@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,6 +41,7 @@ struct ConstructionsiteInformation {
 	void draw(const Vector2f& point_on_dst,
 	          const Coords& coords,
 	          float scale,
+	          bool visible,
 	          const RGBColor& player_color,
 	          RenderTarget* dst) const;
 
@@ -73,7 +74,7 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 class ConstructionSiteDescr : public BuildingDescr {
 public:
-	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
+	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
 	~ConstructionSiteDescr() override {
 	}
 
@@ -131,6 +132,8 @@ public:
 	void apply_settings(const BuildingSettings&);
 
 	void enhance(Game&);
+
+	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;

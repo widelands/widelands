@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2015
@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-02 08:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -18,15 +18,15 @@ msgstr ""
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:26
 msgid "Introduction"
 msgstr "Въведение"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid "Soldiers, Training and Warfare"
 msgstr "Войници, обучение и война"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:29
 msgid ""
 "In this scenario, I’m going to tell you about soldiers, their training and "
 "their profession: warfare. Although Widelands is about building up, not "
@@ -35,18 +35,18 @@ msgid ""
 "deserve explanation."
 msgstr "В този сценарий, ще Ви обясня за войниците, обучението им и тяхната професия: войната. Въпреки, че в Widelands целта е да се строи, а не да се руши, понякога трябва да победите някой враг. И все пак, войната се води чрез икономиката, а не чрез военни стратегии, и механиките ѝ се нуждаят от обяснение."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
 msgstr "Създадох малко селище, в което има най-важните сгради. Също така имате достатъчно стоки, така че да не трябва да се грижите за производството на оръжия. В истинска игра, няма да имате този късмет."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid "Soldiers’ abilities"
 msgstr "Умения на войниците"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid ""
 "New soldiers are created differently from normal workers: recruits will walk"
 " from a warehouse (or your headquarters) to the barracks where they will "
@@ -54,7 +54,7 @@ msgid ""
 " not use armor, they only need an ax."
 msgstr "Новите войници се създават по различен начин от обикновените работници: наборниците излизат от склада (или щаба) и отиват в казармата, където получават основна боева подготовка и се превръщат във войници. Основните войници на варварите нямат брони, те се нуждаят само от брадва."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
 "Take a look at the soldiers that are on their way to our military buildings."
 " They look different from normal workers: they have a health bar over their "
@@ -64,30 +64,30 @@ msgid ""
 msgstr "Погледнете войниците, които са на път към нашите военни сгради. Те изглеждат различно от обикновените работници: имат лента за здравето над главата си, която показва оставащото им здраве, както и имат четири символа, които показват отделните нива на войника за четирите различни категории умения: здраве, атака, защита и ловкост."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
 msgstr "Ако войник на варварите бъде максимално обучен, той ще има ниво на здраве %1%, ниво на атака %2%, ниво на защита %3% и ниво на ловкост %4%. Това би бил един страховит войник! Отделните умения имат следните значения:"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
 msgstr "Здраве:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:51
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
 msgstr "Точките живот на войника. Войниците на варварите започват с %1% точки здраве и получават по още %2% точки със всяко ниво на здравето."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:52
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Attack:"
 msgstr "Атака:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
 msgid ""
 "The amount of damage a soldier will inflict on the enemy when an attack is "
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
@@ -95,13 +95,13 @@ msgid ""
 "he gains %2% damage points."
 msgstr "Размерът на щетите, които войникът ще нанесе на врага при успешна атака. Войниците на варварите с ниво на атака 0 отнемат приблизително %1% точки от здравето на врага при успешно нанесен удар. С всяко ниво на атаката, войникът получава допълнителни %2% точки щети."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Defense:"
 msgstr "Защита:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid ""
 "The defense is the percentage that is subtracted from the attack value. The "
 "Barbarians cannot train in this skill and therefore have always defense "
@@ -110,35 +110,35 @@ msgid ""
 "Barbarian will lose 3500·%2%%% = %3% health."
 msgstr "Защитата е процентът, с който ще бъде намалена стойността на атаката. Варварите не могат да тренират това умение и затова винаги имат ниво на защита 0, което означава, че е щетите винаги се намаляват само с %1%%%. Ако нападател със стойност на атаката 3500 удари войник на варварите, варваринът ще загуби 3500·%2%%% = %3% здраве."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
 msgid "Evade:"
 msgstr "Ловкост:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
 msgstr "Ловкостта е шансът на войника да избегне атака. Варварин с ниво на ловкостта си 0 има %1%%% шанс да избегне атака и този шанс се увеличава с %2%%% на всяко ниво."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 msgid "The Battle Arena"
 msgstr "Бойната арена"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid "Now I have talked about training and levels. Let me elaborate on that."
 msgstr "Досега говорех за трениране и нива. Нека да ги развия повече подробности."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
 msgstr "Новосъздаден войник няма никакъв опит и не е много добър в боя. За да го направите по-силен, можете да построите тренировъчни сгради."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:66
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
@@ -146,96 +146,104 @@ msgid ""
 "a real game, you should have a good infrastructure before you build it."
 msgstr "Една от тези тренировъчни сгради е бойната арена. Тя е голяма и скъпа сграда, която тренира ловкостта на войниците. Тъй като войниците огладняват много по време на обучението, тази сграда се нуждае от много храна и силна бира. В една истинска игра, би трябвало да имате добра инфраструктура, преди да можете да я построите."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
 msgstr "За да видите тренирането на ловкостта в действие, постройте бойна арена."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
 msgstr "Докато чакаме бойната арена, може да забележите как няколко войници се разхождат наоколо. Те се сменят автоматично от време на време. Ще Ви обясня за това по-късно."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
+msgid "Battle Arena"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
 msgstr "Постройте бойна арена"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid "Build a battle arena. It is a big building."
 msgstr "Постройте бойна арена. Тя е голяма сграда."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:81
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using Page Up and Page Down."
 msgstr "Тъй като строежа ще отнеме известно време, можете да промените скоростта на играта чрез Page Up и Page Down."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
 msgstr "Бойната арена беше построена"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
 msgstr "Много добре. Нашата бойна арена е завършена и войниците вече отиват към нея."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
 msgstr "Нужните стоки също се доставят тук. За успешно обучение, Ви трябват питки и силна бира, както и риба или месо."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
 msgstr "За повече информация, можете да погледнете помощния прозорец на сградата, който е достъпен чрез въпросителния знак във всеки прозорец на сграда."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
 msgstr "За да разберете какъв е напредъкът на войниците Ви в обучението им, можете да погледнете иконките ми. В тях могат да се видят червени точки:"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
 msgstr "Ако няма червени точки, това значи, че войникът не е трениран, така че има ниво 0. Всички новобранци са така."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
 msgstr "С всяка успешна стъпка в обучението, войникът става по-силен. Това се показва чрез червена точка. Този войник е на ниво 1 от обучението си по ловкост."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
 msgstr "Когато войникът Ви достигне най-високото възможно ниво (в този случай 2), това се показва като цвета на фона стане бял."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid "The Training Camp"
 msgstr "Тренировъчният лагер"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
 msgstr "Това е втората тренировъчна сграда: тренировъчният лагер. Той също е голяма сграда и за да допълни бойната арена, той тренира атаката и здравето (както може би помните, войниците на варварите не могат да тренират защита)."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
 msgid "Build a training camp."
 msgstr "Постройте тренировъчен лагер."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
+msgid "Training Camp"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
 msgid "Build a training camp"
 msgstr "Постройте тренировъчен лагер"
 
@@ -268,24 +276,134 @@ msgstr "Тази екипировка се изработва в ковачни�
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
-"You should also keep in mind that each of the three tribes in Widelands has "
-"its own way of training, so the buildings and wares are different. Also, the"
-" ability levels cannot be compared: an Imperial soldier has a base attack of"
-" %1% at level 0, while a Barbarian soldier at the same level only has a base"
-" attack of %2%."
-msgstr "Трябва да знаете, че всяко от трите племена в играта има свой собствен начин на обучение, така че сградите и стоките са различни. Нивата на уменията също не са еднакви: имперски войник на ниво 0 има базова атака %1%, а варварски войник на същото ниво има базова атака само %2%."
+"You should also keep in mind that each of the tribes in Widelands has its "
+"own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier has a base attack of "
+"%1% at level 0, while a Barbarian soldier at the same level only has a base "
+"attack of %2%."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+msgid "Scout’s Hut"
+msgstr ""
+
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
+msgid "Explore Your Surroundings"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+msgid ""
+"Large parts of the map haven’t been explored yet. It might be a good idea to"
+" know which direction is best for expanding our empire."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+msgid ""
+"You can try your luck and expand randomly, but this is risky. A safer way is"
+" to use a scout to explore unseen parts of the map. What if he finds "
+"mountains overflowing with gold?"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
+msgid "We will need a scout’s hut to start exploring. It is a small building."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
+msgid "Build a scout’s hut."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+msgid "Build a scout’s hut"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+msgid ""
+"It’s good to know your surroundings. A scout will explore unseen parts of "
+"the map for you."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
+msgid "Build a Scout’s Hut."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
+msgid "Scout is ready"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
+msgid "Ready to go!"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
+msgid ""
+"Well done! Your scout’s hut has been built. While our scout is moving in, "
+"let’s learn a little bit more about him."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+msgid ""
+"First of all, he will need to take some food with him on his scouting trips."
+" Fortunately, we have some rations in our warehouse."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
+msgid ""
+"When provided with food, he will walk randomly around the area. You should "
+"follow his movement before fog of war hides what he saw."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
+msgid "Scout"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
+msgid "Explore the map"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+msgid "Wait for the scout to explore unseen areas."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
+msgid "Observe your scout."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
+msgid "Scout made progress"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
+msgid "New horizons?"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
+msgid ""
+"As you can see, scouts can go quite far. The good news is that there are no "
+"enemies around."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+msgid "You can use the minimap to see the exploration’s progress."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
+msgid ""
+"Don’t forget that scouting is hard work and as such cannot be done without "
+"provision of food."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
 msgid "Heroes and Rookies"
 msgstr "Герои и новобранци"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
 msgstr "Докато войниците ни се обучават, нека Ви кажа какво можем да правим с тях."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid ""
 "In every military building, you can set the preference for heroes (trained "
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
@@ -293,29 +411,29 @@ msgid ""
 "what you saw earlier."
 msgstr "Във всяка военна сграда може да настроите предпочитание за герои (обучени войници) или новобранци. От време на време, някой войник ще излезе от сградата и автоматично ще бъде заменен от по-силен/по-слаб такъв – това е, което видяхме по-рано."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
 msgstr "Първоначалната настройка зависи от вида на сградата. При варварите, караулната е единствената сграда, която по подразбиране предпочита новобранци. Можете да промените тази настройка според текущите си нужди."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
 msgstr "Когато разширявате територията си към необитаеми земи, може да накарате сградите си да предпочитат новобранци. Когато планирате да нападате, изпратете герои в района. Завладените сгради винаги предпочитат герои."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Soldier capacity"
 msgstr "Капацитет за войници"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid "Adjusting the number of soldiers"
 msgstr "Настройка на броя на войниците"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid ""
 "There is another way how you can control the strength of a military "
 "building: by the number of soldiers stationed there. Just click on the arrow"
@@ -324,48 +442,48 @@ msgid ""
 "example."
 msgstr "Има още един начин, по който можете да управлявате силата на една военна сграда: чрез броя на войниците, които са разположени в нея. Просто натиснете бутоните със стрелки, за да намалите или увеличите желания брой войници. Всяка сграда има максимален капацитет. За преградата, например, той е пет."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
 msgstr "Ако искате да отпратите конкретен войник, можете просто да щракнете върху него. Така той ще бъде заменен от друг."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
 msgstr "Нека също да Ви обясня какво означават числата в текста на статистиките. Този текст може да съдържа до три числа, например: „1 (+5) войник (+2)“."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
 msgstr "Първото число показва колко войници има в сградата в момента. В този пример, в сградата има само един останал войник (всяка военна сграда трябва да бъде пазена от поне един войник)."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
 msgstr "Второто число показва колко още войници са разпределени тази сграда, но в момента са навън. Петте войници може да нападат някой враг в момента. Те ще се върнат когато победят."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
 msgstr "Третото число показва липсващите войници. От осемте войници (1 + 5 + 2), които искате да имате тук, двама може би са умрели. Те ще бъдат заменени от нови войници от склада Ви, ако това е възможно."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
 msgstr "Демонтирайте караулната си"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid "Dismantling military buildings"
 msgstr "Демонтиране на военни сгради"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
@@ -373,7 +491,7 @@ msgid ""
 " building."
 msgstr "Можете да намалите броя на войниците до един. Последният войник в сградата няма никога да я напусне (освен ако тя не бъде нападната). Ако искате да преместите войника, ще трябва да демонтирате или изгорите сградата."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -384,28 +502,32 @@ msgid ""
 "enemies."
 msgstr "Но разрушаването на военна сграда води със себе си и риск: земята си остава Ваша, но вече не е защитена. Всеки враг, който построи свои собствени военни съоръжения, може да превземе територията без бой, подпалвайки Вашите постройки. Също така, някои части от земята вече ще може да бъдат скрити от мъглата. Затова трябва да демонтирате военни сгради само дълбоко във вътрешността на територията си, където сте в безопасност от врага."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
 msgstr "Поглеждали ли сте караулната си? Тъй като тя не може да поддържа много войници и е близо до по-силната преграда, тя е на практика безполезна."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 msgid "Dismantle it."
 msgstr "Демонтирайте я."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
 msgstr "Може да използвате тази възможност, за да се запознаете с другите възможности: предпочитанията за герои/новобранци и капацитета."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
+msgid "Soldiers, dismissed!"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
 msgstr "Демонтирайте най-северозападната си караулна"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
@@ -413,59 +535,59 @@ msgid ""
 "which will make it vulnerable to hostile attacks."
 msgstr "Можете да управлявате броя на войниците, позиционирани в едно военно съоръжение, чрез бутоните със стрелки. Ако искате да изтеглите и последния си войник, ще трябва да разрушите сградата. Обаче така тя няма да защитава територията Ви, което ще я направи податлива на вражески нападения."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantle your sentry in the north-west, next to the barrier."
 msgstr "Демонтирайте караулната си на северозапад, близо до преградата."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
 msgid "Enhance Your Fortress"
 msgstr "Надградете крепостта си"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
 msgid "Enhancing Buildings"
 msgstr "Надграждане на сградите"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
 msgstr "Добра работа! Сега вече знаете как да изтегляте войниците от местата, където те не са нужни. Време е да Ви покажа как да подсилите фронта си."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:239
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
 msgstr "Крепостта Ви вече е доста могъща и владее много място. Но има и по-голяма сграда: цитаделата."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
 msgstr "Цитаделите не могат да бъдат построени направо. Трябва първо да построите крепост и след това да я надградите до цитадела. За да направите това, щракнете върху крепостта и натиснете бутона „Надграждане до цитадела“."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
 msgstr "Войниците Ви ще напуснат крепостта, докато трае строежа. Това означава, че крепостта Ви ще загуби военното си влияние, както обясних по-рано."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
 msgid "Enhance your fortress to a citadel now."
 msgstr "Надградете крепостта си до цитадела сега."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:250
 msgid "Enhance your fortress to a citadel"
 msgstr "Надградете крепостта си до цитадела"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Надградете крепостта си до могъща цитадела."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:252
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
@@ -473,15 +595,15 @@ msgid ""
 "like constricted points or mountains."
 msgstr "В цитаделата могат да се съберат 12 войници. Тя е най-голямата военна сграда, която варварите могат да построят. Също така струва много ресурси и строежът ѝ отнема много време. Тя е най-подходяща за подсигуряване на важни позиции, като тесни места или планини."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
 msgid "Defeat your Enemy"
 msgstr "Победете врага си"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:261
 msgid "Defeat the Enemy"
 msgstr "Победете врага"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
@@ -490,44 +612,44 @@ msgid ""
 "defeat the enemy!"
 msgstr "Добра работа. Цитаделата е завършена. Но какво е това? Вражеско племе се е установило до нас, докато цитаделата беше в строеж! Виждате ли как са отнели част от земята ни? А дърварят ни е загубил работното си място. Ето за това говорех. Да си върнем земята и да победим врага!"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
 msgstr "За да нападнете дадена сграда, щракнете върху вратите ѝ, изберете броя на войниците, които искате да изпратите и натиснете бутона „Атака“."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
 msgstr "Войниците Ви ще излязат от всички близки военни сгради. Защитаващите се също ще излязат от всички близки военни сгради на врага и ще посрещнат войската Ви."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
 msgstr "Атакувайте и превземете всички вражески военни сгради и разрушете щаба им."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:206
-msgid "Defeat the enemy tribe"
-msgstr "Победете вражеското племе"
-
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:270
 msgid "Defeat Your Enemy"
 msgstr "Победете врага си"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:272
+msgid "Defeat the enemy tribe"
+msgstr "Победете вражеското племе"
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
 msgid "Defeat the nearby enemy."
 msgstr "Победете близкия враг."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:281
 msgid "Conclusion"
 msgstr "Заключение"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:282
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
@@ -535,29 +657,16 @@ msgid ""
 "Having trained soldiers is a huge advantage."
 msgstr "Благодаря Ви, че изиграхте това обучение. Надявам се, че сте се забавлявали, и че сте разбрали как да създавате и обучавате войници, как да ги управлявате и как да побеждавате враговете си. Видяхте ли колко лесно се справихте с врага? Голямо предимство е да имате добре обучени войници."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:283
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
 msgstr "Но войната е скъпа и не винаги е правилният път към целта. Когато започвате нова игра, можете да изберете условия за мирна победа. Изпробвайте ги, струва си."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:284
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Вече сте готови да играете кампаниите. Те ще Ви покажат разликите в икономиките на различните племена. Можете да изиграете и останалите обучения, но те се са задължителни и без тях също ще можете да се справите с кампаниите."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr ""

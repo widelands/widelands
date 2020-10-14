@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,6 +75,8 @@ public:
 	void set_min_value(int32_t);
 
 	void set_enabled(bool enabled);
+
+	bool handle_key(bool, SDL_Keysym) override;
 
 protected:
 	void layout() override;
@@ -225,7 +227,7 @@ struct DiscreteSlider : public Panel {
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true);
 
-	void set_labels(std::vector<std::string>);
+	void set_labels(const std::vector<std::string>&);
 
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void(int32_t)> changedto;

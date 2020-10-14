@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,13 +23,10 @@
 #include "economy/ferry_fleet.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
-#include "economy/road.h"
 #include "economy/ship_fleet.h"
 #include "economy/ware_instance.h"
-#include "economy/waterway.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/battle.h"
-#include "logic/map_objects/tribes/building.h"
 
 namespace Widelands {
 
@@ -55,20 +52,21 @@ MapObjectSaver::MapObjectSaver()
 MapObjectSaver::MapObjectRec& MapObjectSaver::get_object_record(const MapObject& obj) {
 	MapObjectRecordMap::iterator it = objects_.find(&obj);
 
-	if (it != objects_.end())
+	if (it != objects_.end()) {
 		return it->second;
+	}
 
 	MapObjectRec rec;
 #ifndef NDEBUG
 	rec.description = to_string(obj.descr().type());
 	rec.description += " (";
-	rec.description += obj.serial();
+	rec.description += std::to_string(obj.serial());
 	rec.description += ')';
 #endif
 	rec.fileserial = ++lastserial_;
 	rec.registered = false;
 	rec.saved = false;
-	return objects_.insert(std::pair<MapObject const*, MapObjectRec>(&obj, rec)).first->second;
+	return objects_.insert(std::make_pair(&obj, rec)).first->second;
 }
 
 /**
@@ -78,8 +76,9 @@ MapObjectSaver::MapObjectRec& MapObjectSaver::get_object_record(const MapObject&
 bool MapObjectSaver::is_object_known(const MapObject& obj) const {
 	MapObjectRecordMap::const_iterator it = objects_.find(&obj);
 
-	if (it == objects_.end())
+	if (it == objects_.end()) {
 		return false;
+	}
 
 	return it->second.registered;
 }
@@ -96,30 +95,43 @@ Serial MapObjectSaver::register_object(const MapObject& obj) {
 
 	assert(!rec.registered);
 
-	if (dynamic_cast<Flag const*>(&obj))
+	switch (obj.descr().type()) {
+	case MapObjectType::FLAG:
 		++nr_flags_;
-	else if (dynamic_cast<Road const*>(&obj))
+		break;
+	case MapObjectType::ROAD:
 		++nr_roads_;
-	else if (dynamic_cast<Waterway const*>(&obj))
+		break;
+	case MapObjectType::WATERWAY:
 		++nr_waterways_;
-	else if (dynamic_cast<Building const*>(&obj))
-		++nr_buildings_;
-	else if (dynamic_cast<Immovable const*>(&obj))
-		++nr_immovables_;
-	else if (dynamic_cast<WareInstance const*>(&obj))
-		++nr_wares_;
-	else if (dynamic_cast<Bob const*>(&obj))
-		++nr_bobs_;
-	else if (dynamic_cast<Battle const*>(&obj))
+		break;
+	case MapObjectType::BATTLE:
 		++nr_battles_;
-	else if (dynamic_cast<ShipFleet const*>(&obj))
+		break;
+	case MapObjectType::SHIP_FLEET:
 		++nr_ship_fleets_;
-	else if (dynamic_cast<FerryFleet const*>(&obj))
+		break;
+	case MapObjectType::FERRY_FLEET:
 		++nr_ferry_fleets_;
-	else if (dynamic_cast<PortDock const*>(&obj))
+		break;
+	case MapObjectType::PORTDOCK:
 		++nr_portdocks_;
-	else
-		throw wexception("MapObjectSaver: Unknown MapObject type");
+		break;
+	case MapObjectType::WARE:
+		++nr_wares_;
+		break;
+	default:
+		if (obj.descr().type() >= MapObjectType::BUILDING) {
+			++nr_buildings_;
+		} else if (obj.descr().type() >= MapObjectType::IMMOVABLE) {
+			++nr_immovables_;
+		} else if (obj.descr().type() >= MapObjectType::BOB) {
+			++nr_bobs_;
+		} else {
+			throw wexception("MapObjectSaver: Unknown MapObjectType %u", obj.descr().type());
+		}
+		break;
+	}
 
 	rec.registered = true;
 	return rec.fileserial;
@@ -137,8 +149,9 @@ uint32_t MapObjectSaver::get_object_file_index(const MapObject& obj) {
  * Returns the file index of the given object, or zero for null pointers.
  */
 uint32_t MapObjectSaver::get_object_file_index_or_zero(const MapObject* obj) {
-	if (obj)
+	if (obj) {
 		return get_object_file_index(*obj);
+	}
 	return 0;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,7 @@ DEF_ERR(AttributeNotFound)
 DEF_ERR(BadFont)
 DEF_ERR(EndOfText)
 DEF_ERR(InvalidColor)
+DEF_ERR(NumberOutOfRange)
 DEF_ERR(RenderError)
 DEF_ERR(SyntaxError)
 DEF_ERR(TextureTooBig)

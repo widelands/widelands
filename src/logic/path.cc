@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,8 +43,9 @@ void Path::reverse() {
 	std::swap(start_, end_);
 	std::reverse(path_.begin(), path_.end());
 
-	for (uint32_t i = 0; i < path_.size(); ++i)
+	for (uint32_t i = 0; i < path_.size(); ++i) {
 		path_[i] = get_reverse_dir(path_[i]);
+	}
 }
 
 /*
@@ -67,8 +68,9 @@ void Path::save(FileWrite& fw) const {
 	// Careful: steps are stored in the reverse order in path_
 	// However, we save them in the forward order, to make loading easier
 	fw.unsigned_32(path_.size());
-	for (uint32_t i = path_.size(); i > 0; --i)
+	for (uint32_t i = path_.size(); i > 0; --i) {
 		write_direction_8(&fw, path_[i - 1]);
+	}
 }
 
 /**
@@ -85,8 +87,9 @@ void Path::load(FileRead& fr, const Map& map) {
 			start_ = end_ = read_coords_32(&fr, map.extent());
 			path_.clear();
 			uint32_t steps = fr.unsigned_32();
-			while (steps--)
+			while (steps--) {
 				append(map, read_direction_8(&fr));
+			}
 		} else {
 			throw UnhandledVersionError("Path", packet_version, kCurrentPacketVersion);
 		}
@@ -121,9 +124,11 @@ CoordPath::CoordPath(const Map& map, const Path& path) {
 /// After which step does the node appear in this path?
 /// \return -1 if node is not part of this path.
 int32_t CoordPath::get_index(const Coords& c) const {
-	for (uint32_t i = 0; i < coords_.size(); ++i)
-		if (coords_[i] == c)
+	for (uint32_t i = 0; i < coords_.size(); ++i) {
+		if (coords_[i] == c) {
 			return i;
+		}
+	}
 
 	return -1;
 }
@@ -137,8 +142,9 @@ void CoordPath::reverse() {
 	std::reverse(path_.begin(), path_.end());
 	std::reverse(coords_.begin(), coords_.end());
 
-	for (uint32_t i = 0; i < path_.size(); ++i)
+	for (uint32_t i = 0; i < path_.size(); ++i) {
 		path_[i] = get_reverse_dir(path_[i]);
+	}
 }
 
 /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
@@ -47,7 +48,7 @@ inline EditorInteractive& MainMenuSaveMap::eia() {
 MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
                                  UI::UniqueWindow::Registry& registry,
                                  Registry& map_options_registry)
-   : MainMenuLoadOrSaveMap(parent, registry, "save_map_menu", _("Save Map"), "maps/My_Maps"),
+   : MainMenuLoadOrSaveMap(parent, registry, "save_map_menu", _("Save Map"), true, "maps/My_Maps"),
      map_options_registry_(map_options_registry),
      edit_options_(&map_details_box_,
                    "edit_options",
@@ -76,27 +77,26 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	table_footer_box_.add_space(0);
 	table_footer_box_.add(&make_directory_);
 
-	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
-	table_.double_clicked.connect(
-	   boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
-	table_.cancel.connect(boost::bind(&MainMenuSaveMap::die, this));
+	fill_table();
+
+	table_.selected.connect([this](unsigned) { clicked_item(); });
+	table_.double_clicked.connect([this](unsigned) { double_clicked_item(); });
+	table_.cancel.connect([this]() { die(); });
 	table_.set_can_focus(true);
 
 	editbox_.set_text(parent.egbase().map().get_name());
 
-	editbox_.changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
+	editbox_.changed.connect([this]() { edit_box_changed(); });
 	edit_box_changed();
-	editbox_.ok.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
-	editbox_.cancel.connect(boost::bind(
-	   &MainMenuSaveMap::reset_editbox_or_die, boost::ref(*this), parent.egbase().map().get_name()));
+	editbox_.ok.connect([this]() { clicked_ok(); });
+	editbox_.cancel.connect(
+	   [this, &parent]() { reset_editbox_or_die(parent.egbase().map().get_name()); });
 
-	ok_.sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
-	cancel_.sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	cancel_.sigclicked.connect([this]() { die(); });
 
-	make_directory_.sigclicked.connect(
-	   boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
-	edit_options_.sigclicked.connect(
-	   boost::bind(&MainMenuSaveMap::clicked_edit_options, boost::ref(*this)));
+	make_directory_.sigclicked.connect([this]() { clicked_make_directory(); });
+	edit_options_.sigclicked.connect([this]() { clicked_edit_options(); });
 
 	// We always want the current map's data here
 	const Widelands::Map& map = parent.egbase().map();
@@ -180,9 +180,9 @@ void MainMenuSaveMap::clicked_make_directory() {
 					//  Create directory.
 					g_fs->make_directory(fullname);
 				} catch (const FileError& e) {
-					log("directory creation failed in MainMenuSaveMap::"
-					    "clicked_make_directory: %s\n",
-					    e.what());
+					log_err("directory creation failed in MainMenuSaveMap::"
+					        "clicked_make_directory: %s\n",
+					        e.what());
 					const std::string s =
 					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
 					UI::WLMessageBox mbox(
@@ -337,15 +337,15 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "images/loadscreens/editor.jpg");
-	egbase.step_loader_ui("Saving the map…");
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
+	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.
 	GenericSaveHandler gsh(
 	   [&egbase](FileSystem& fs) {
 		   Widelands::MapSaver wms(fs, egbase);
 		   wms.save();
-		},
+	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
 

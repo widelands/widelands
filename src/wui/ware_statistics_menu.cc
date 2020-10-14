@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <functional>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -76,7 +75,8 @@ public:
 	                      const Widelands::TribeDescr& tribe,
 	                      std::function<void(Widelands::DescriptionIndex, bool)> callback_function,
 	                      std::vector<uint8_t>& color_map)
-	   : AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
+	   : AbstractWaresDisplay(
+	        parent, x, y, tribe, Widelands::wwWARE, true, std::move(callback_function)),
 	     color_map_(color_map) {
 		int w, h;
 		get_desired_size(&w, &h);
@@ -107,10 +107,11 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
      tab_panel_(nullptr),
      display_(nullptr),
      slider_(nullptr) {
-	uint8_t const nr_wares = parent.get_player()->egbase().tribes().nrwares();
+
+	const Widelands::TribeDescr& player_tribe = parent.get_player()->tribe();
 
 	// Init color sets
-	color_map_.resize(nr_wares);
+	color_map_.resize(player_tribe.get_nrwares());
 	std::fill(color_map_.begin(), color_map_.end(), kInactiveColorIndex);
 	active_colors_.resize(colors_length);
 	std::fill(active_colors_.begin(), active_colors_.end(), 0);
@@ -129,27 +130,27 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
-	   "production", g_gr->images().get(pic_tab_production), plot_production_, _("Production"));
+	   "production", g_image_cache->get(pic_tab_production), plot_production_, _("Production"));
 
 	plot_consumption_ =
 	   new WuiPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
-	   "consumption", g_gr->images().get(pic_tab_consumption), plot_consumption_, _("Consumption"));
+	   "consumption", g_image_cache->get(pic_tab_consumption), plot_consumption_, _("Consumption"));
 
 	plot_economy_ =
 	   new DifferentialPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                            Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tab_panel_->add(
-	   "economy_health", g_gr->images().get(pic_tab_economy), plot_economy_, _("Economy health"));
+	   "economy_health", g_image_cache->get(pic_tab_economy), plot_economy_, _("Economy health"));
 
 	plot_stock_ =
 	   new WuiPlotArea(tab_panel_, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
 	                   Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kAbsolute);
 
-	tab_panel_->add("stock", g_gr->images().get(pic_tab_stock), plot_stock_, _("Stock"));
+	tab_panel_->add("stock", g_image_cache->get(pic_tab_stock), plot_stock_, _("Stock"));
 
 	tab_panel_->activate(0);
 
@@ -157,7 +158,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	main_box_->add(tab_panel_, UI::Box::Resizing::kFullSize);
 
 	// Register statistics data
-	for (Widelands::DescriptionIndex cur_ware = 0; cur_ware < nr_wares; ++cur_ware) {
+	for (Widelands::DescriptionIndex cur_ware : player_tribe.wares()) {
 		plot_production_->register_plot_data(
 		   cur_ware,
 		   parent.get_player()->get_ware_production_statistics(Widelands::DescriptionIndex(cur_ware)),
@@ -177,9 +178,10 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 		   cur_ware, parent.get_player()->get_ware_consumption_statistics(
 		                Widelands::DescriptionIndex(cur_ware)));
 
-		plot_stock_->register_plot_data(cur_ware, parent.get_player()->get_ware_stock_statistics(
-		                                             Widelands::DescriptionIndex(cur_ware)),
-		                                colors[kInactiveColorIndex]);
+		plot_stock_->register_plot_data(
+		   cur_ware,
+		   parent.get_player()->get_ware_stock_statistics(Widelands::DescriptionIndex(cur_ware)),
+		   colors[kInactiveColorIndex]);
 	}
 
 	display_ = new StatisticWaresDisplay(

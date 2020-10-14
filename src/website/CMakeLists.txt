@@ -5,10 +5,10 @@ wl_library(website_common
   SRCS
     website_common.cc
     website_common.h
-  USES_SDL2
   DEPENDS
     base_exceptions
     base_i18n
+    base_log
     graphic
     io_filesystem
 )
@@ -53,7 +53,6 @@ wl_binary(wl_map_info
 wl_binary(wl_map_object_info
   SRCS
     map_object_info.cc
-  USES_SDL2
   DEPENDS
     base_log
     base_macros

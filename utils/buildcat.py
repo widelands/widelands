@@ -32,7 +32,7 @@ MAINPOTS = [
     ('maps/maps', [
         '../../data/maps/*/elemental',
         '../../data/maps/*/*/elemental',
-        '../../data/campaigns/*.conf',
+        '../../data/campaigns/*.lua',
         '../../data/campaigns/*/elemental'
     ]),
     ('texts/texts', ['../../data/txts/*.lua',
@@ -69,8 +69,8 @@ MAINPOTS = [
         '../../data/world/*/*/*/*/*/*.lua',
     ]),
     ('tribes/tribes', [
-        '../../data/tribes/scripting/starting_conditions/*/*.lua',
-        '../../data/tribes/*.lua',
+        '../../data/tribes/initialization/*/starting_conditions/*.lua',
+        '../../data/tribes/economy_profiles/*',
         '../../data/tribes/*/init.lua',
         '../../data/tribes/*/*/init.lua',
         '../../data/tribes/*/*/*/init.lua',
@@ -78,13 +78,8 @@ MAINPOTS = [
         '../../data/tribes/*/*/*/*/*/init.lua',
     ]),
     ('tribes_encyclopedia/tribes_encyclopedia', [
+        '../../data/tribes/initialization/*/units.lua',
         '../../data/tribes/scripting/help/*.lua',
-        '../../data/tribes/*/helptexts.lua',
-        '../../data/tribes/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/*/helptexts.lua',
-        '../../data/tribes/*/*/*/*/*/helptexts.lua',
-        '../../data/tribes/*/resi/helptexts/*.lua',
     ]),
     ('widelands_editor/widelands_editor', [
         '../../data/scripting/editor/*.lua',
@@ -110,7 +105,7 @@ ITERATIVEPOTS = [
      ['../../data/campaigns/%(name)s/extra_data',
       '../../data/campaigns/%(name)s/objective',
       '../../data/campaigns/%(name)s/scripting/*.lua',
-      '../../data/scripting/richtext_scenarios.lua'
+      '../../data/campaigns/%(name)s/scripting/*/*.lua',
       ]
      ),
     ('map_%(name)s/map_%(name)s', 'data/maps/',

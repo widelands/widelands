@@ -2,7 +2,7 @@
 --                             The Green Plateau
 -- =======================================================================
 
-set_textdomain("map_the_green_plateau.wmf")
+push_textdomain("map_the_green_plateau.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,5 +75,7 @@ private:
 	/// Maps map object names to the ID of the animations that contain their representative images
 	std::map<std::string, uint32_t> representative_animations_by_map_object_name_;
 };
+
+extern AnimationManager* g_animation_manager;
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_MANAGER_H

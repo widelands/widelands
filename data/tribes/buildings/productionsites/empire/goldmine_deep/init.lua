@@ -1,22 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_goldmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Deep Gold Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-
-   enhancement_cost = {
-      log = 4,
-      planks = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 2,
-      planks = 1
-   },
 
    animations = {
       idle = {
@@ -35,12 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "gold"
-   },
-
-   indicate_workarea_overlaps = {
-      empire_goldmine = false,
-      empire_goldmine_deep = false,
+      mines = "resource_gold"
    },
 
    working_positions = {
@@ -52,29 +38,25 @@ tribes:new_productionsite_type {
       { name = "meal", amount = 6 },
       { name = "wine", amount = 6 }
    },
-   outputs = {
-      "gold_ore"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
          descname = _"mining gold",
          actions = {
             "return=skipped unless economy needs gold_ore",
             "consume=meal wine",
-            "sleep=40000",
+            "sleep=duration:40s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {
          descname = _"mining gold",
          actions = {
-            "animate=working 13000",
-            "mine=gold 2 100 5 2",
+            "animate=working duration:13s",
+            "mine=resource_gold radius:2 yield:100% when_empty:5% experience_on_fail:2%",
             "produce=gold_ore",
          }
       },
@@ -95,3 +77,5 @@ tribes:new_productionsite_type {
          pgettext("empire_building", "This gold mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

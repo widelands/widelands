@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/road_segments.h"
 #include "logic/editor_game_base.h"
+#include "logic/see_unsee_node.h"
 #include "logic/widelands_geometry.h"
 
 // Helper struct that contains the data needed for drawing all fields.
@@ -53,7 +54,7 @@ public:
 		Widelands::RoadSegment road_sw;
 		Widelands::RoadSegment road_se;
 		bool is_border;
-		Widelands::Vision vision;
+		Widelands::SeeUnseeNode seeing;
 		Widelands::Player* owner;  // can be nullptr.
 
 		// Index of neighbors in this 'FieldsToDraw'. INVALID_INDEX if this

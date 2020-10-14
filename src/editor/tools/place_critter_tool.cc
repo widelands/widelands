@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,15 +56,17 @@ int32_t EditorPlaceCritterTool::handle_click_impl(const Widelands::NodeAndTriang
 		do {
 			const Widelands::BobDescr& descr = *(*i);
 			if (mr.location().field->nodecaps() & descr.movecaps()) {
-				if (Widelands::Bob* const bob = mr.location().field->get_first_bob())
+				if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 					bob->remove(egbase);  //  There is already a bob. Remove it.
+				}
 				descr.create(egbase, nullptr, mr.location());
 			}
 			++i;
 		} while (mr.advance(*map));
 		return mr.radius() + 2;
-	} else
+	} else {
 		return 0;
+	}
 }
 
 int32_t EditorPlaceCritterTool::handle_undo_impl(
@@ -82,8 +84,9 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 			if (*i) {
 				const Widelands::BobDescr& descr = *(*i);
 				if (mr.location().field->nodecaps() & descr.movecaps()) {
-					if (Widelands::Bob* const bob = mr.location().field->get_first_bob())
+					if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
 						bob->remove(egbase);  //  There is already a bob. Remove it.
+					}
 					descr.create(egbase, nullptr, mr.location());
 				}
 			} else if (Widelands::Bob* const bob = mr.location().field->get_first_bob()) {
@@ -92,8 +95,9 @@ int32_t EditorPlaceCritterTool::handle_undo_impl(
 			++i;
 		} while (mr.advance(*map));
 		return mr.radius() + 2;
-	} else
+	} else {
 		return 0;
+	}
 }
 
 EditorActionArgs EditorPlaceCritterTool::format_args_impl(EditorInteractive& parent) {

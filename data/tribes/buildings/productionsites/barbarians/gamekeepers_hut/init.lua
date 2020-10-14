@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_gamekeepers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Gamekeeper’s Hut"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -43,19 +43,16 @@ tribes:new_productionsite_type {
       barbarians_gamekeeper = 1
    },
 
-   indicate_workarea_overlaps = {
-      barbarians_hunters_hut = true,
-      barbarians_gamekeepers_hut = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "callworker=release",
-            "sleep=52500"
+            "sleep=duration:52s500ms"
          }
       },
    },
 }
+
+pop_textdomain()

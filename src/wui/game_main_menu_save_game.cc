@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,17 +99,17 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	ok_.set_enabled(false);
 
-	filename_editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
-	filename_editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
-	filename_editbox_.cancel.connect(boost::bind(&GameMainMenuSaveGame::reset_editbox_or_die, this,
-	                                             parent.game().save_handler().get_cur_filename()));
+	filename_editbox_.changed.connect([this]() { edit_box_changed(); });
+	filename_editbox_.ok.connect([this]() { ok(); });
+	filename_editbox_.cancel.connect(
+	   [this, &parent]() { reset_editbox_or_die(parent.game().save_handler().get_cur_filename()); });
 
-	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
-	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
+	ok_.sigclicked.connect([this]() { ok(); });
+	cancel_.sigclicked.connect([this]() { die(); });
 
-	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
-	load_or_save_.table().double_clicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
-	load_or_save_.table().cancel.connect(boost::bind(&GameMainMenuSaveGame::die, this));
+	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
+	load_or_save_.table().double_clicked.connect([this](unsigned) { ok(); });
+	load_or_save_.table().cancel.connect([this]() { die(); });
 
 	load_or_save_.fill_table();
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
@@ -244,13 +244,14 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	// Try saving the game.
 	Widelands::Game& game = igbase().game();
 
-	game.create_loader_ui({"general_game"}, true);
+	game.create_loader_ui(
+	   {"general_game"}, true, game.map().get_background_theme(), game.map().get_background());
 
 	GenericSaveHandler gsh(
 	   [&game](FileSystem& fs) {
 		   Widelands::GameSaver gs(fs, game);
 		   gs.save();
-		},
+	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	GenericSaveHandler::Error error = gsh.save();
 

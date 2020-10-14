@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "scripting/lua_table.h"
 
 /**
@@ -40,7 +39,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
             0,
             _("Choose a campaign"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Campaign description
      campaign_details_(this),
@@ -48,13 +47,10 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 
-	ok_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
-	table_.selected.connect(boost::bind(&FullscreenMenuCampaignSelect::entry_selected, this));
-	table_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuCampaignSelect::clicked_ok, boost::ref(*this)));
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	table_.selected.connect([this](unsigned) { entry_selected(); });
+	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 
 	/** TRANSLATORS: Campaign difficulty table header */
 	table_.add_column(45, _("Diff."), _("Difficulty"));
@@ -62,14 +58,13 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 	table_.add_column(
 	   0, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
-	   0, boost::bind(&FullscreenMenuCampaignSelect::compare_difficulty, this, _1, _2));
+	   0, [this](uint32_t a, uint32_t b) { return compare_difficulty(a, b); });
 	table_.set_sort_column(0);
 	table_.focus();
 	fill_table();
 	layout();
 
-	table_.cancel.connect(
-	   boost::bind(&FullscreenMenuCampaignSelect::clicked_back, boost::ref(*this)));
+	table_.cancel.connect([this]() { clicked_back(); });
 }
 
 void FullscreenMenuCampaignSelect::layout() {

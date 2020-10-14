@@ -1,0 +1,8 @@
+# Automatically created by Widelands r24475[3abcee7@HEAD] (Release)
+
+[global]
+packet_version="1"
+waterway_max_length="1"
+number_of_port_spaces="0"
+
+[port_spaces]

@@ -10,14 +10,15 @@
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015
 # nicolas jardin <niko472006@sfr.fr>, 2016
-# Renaud Bouchard, 2016,2018-2019
+# Renaud Bouchard, 2016,2018-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-03 09:07+0000\n"
-"PO-Revision-Date: 2020-03-03 09:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-07-23 08:45+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,12 +134,12 @@ msgid_plural "Total: %i points"
 msgstr[0] "Total : %i point"
 msgstr[1] "Total : %i points"
 
-#: ../../data/scripting/win_conditions/collectors.lua:169
+#: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Status for Team %d"
 msgstr "État de l'équipe %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:171
+#: ../../data/scripting/win_conditions/collectors.lua:172
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -199,12 +200,12 @@ msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Gardez la pendant %i minute de plus pour gagner la partie."
 msgstr[1] "Gardez la pendant %i minutes de plus pour gagner la partie."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:238
+#: ../../data/scripting/win_conditions/territorial_functions.lua:239
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s possède plus de la moitié de la carte."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:239
+#: ../../data/scripting/win_conditions/territorial_functions.lua:240
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -221,7 +222,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes. If the peaceful mode is selected, the game ends if one "
 "player has more land than any other player could gain."
-msgstr ""
+msgstr "Chaque joueur ou équipe doit essayer d'obtenir plus de la moitié du territoire de la carte. Le gagnant sera le joueur ou l'équipe qui gardera ce territoire au moins 20 minutes. Si le mode pacifique est activé, la partie prendra fin si un joueur a plus de terre qu'aucun autre joueur ne puisse gagner."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:58
 msgid "Currently no faction owns more than half of the map’s area."
@@ -236,14 +237,14 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
-"whichever comes first.If the peaceful mode is selected, the game ends if one"
-" player has more land than any other player could gain."
-msgstr ""
+"whichever comes first. If the peaceful mode is selected, the game ends if "
+"one player has more land than any other player could gain."
+msgstr "Chaque joueur ou équipe doit essayer d'obtenir plus de la moitié du territoire de la carte. Le gagnant sera le joueur ou l'équipe qui gardera ce territoire au moins 20 minutes ou celui avec le plus grand territoire au bout de 4 heures, selon ce qui arrive en premier. Si le mode pacifique est activé, la partie prendra fin si un joueur a plus de terre qu'aucun autre joueur ne puisse gagner."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:293
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:298
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:300
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:305
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -251,21 +252,21 @@ msgstr[0] "%i minute"
 msgstr[1] "%i minutes"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:295
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:302
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% heure et %2%"
 msgstr[1] "%1% heures et %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:301
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:308
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% heure"
 msgstr[1] "%1% heures"
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:304
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:311
 #, lua-format
 msgid "The game will end in %s."
 msgstr "La partie s'achèvera dans %s."

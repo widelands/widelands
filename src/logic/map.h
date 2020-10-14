@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,10 @@
 #ifndef WL_LOGIC_MAP_H
 #define WL_LOGIC_MAP_H
 
+#include <map>
 #include <memory>
+#include <set>
+#include <string>
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
@@ -40,6 +43,8 @@ struct S2MapLoader;
 
 namespace Widelands {
 
+class CritterDescr;
+class EditorGameBase;
 class MapLoader;
 struct MapGenerator;
 struct PathfieldManager;
@@ -95,6 +100,41 @@ struct FindBobAlwaysTrue : public FindBob {
 	}  // make gcc shut up
 };
 
+struct FindBobByName : public FindBob {
+	bool accept(Bob* b) const override;
+	explicit FindBobByName(const std::string& n) : name_(n) {
+	}
+	~FindBobByName() override {
+	}
+
+private:
+	std::string name_;
+};
+struct FindCritter : public FindBob {
+	bool accept(Bob* b) const override;
+	~FindCritter() override {
+	}
+};
+struct FindCarnivores : public FindBob {
+	bool accept(Bob* b) const override;
+	explicit FindCarnivores() {
+	}
+	~FindCarnivores() override {
+	}
+};
+struct FindCritterByClass : public FindBob {
+	enum class Class { Herbivore, Carnivore, Neither };
+	static Class classof(const CritterDescr&);
+	bool accept(Bob* b) const override;
+	explicit FindCritterByClass(const CritterDescr& b) : class_(classof(b)) {
+	}
+	~FindCritterByClass() override {
+	}
+
+private:
+	Class class_;
+};
+
 // Helper struct to save certain elemental data of a field without an actual instance of Field
 struct FieldData {
 	FieldData(const Field& f);
@@ -106,6 +146,19 @@ struct FieldData {
 	uint8_t resource_amount;
 	Field::Terrains terrains;
 };
+// used for undoing map resize
+struct ResizeHistory {
+	ResizeHistory() : size(0, 0) {
+	}
+
+	Extent size;
+	std::list<FieldData> fields;
+	std::set<Coords> port_spaces;
+	std::vector<Coords> starting_positions;
+};
+
+// Minimum distance between two starting positions
+constexpr uint16_t kMinSpaceAroundPlayers = 24;
 
 /** class Map
  *
@@ -132,6 +185,22 @@ public:
 	friend struct MapGenerator;
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
+
+	struct OldWorldInfo {
+		// What we call it now (used for the gameloading UI's themes
+		// and by the random map generator)
+		std::string name;
+
+		// What this is called in very old map files. Used ONLY to map
+		// the world names of old maps to the new theme definitions.
+		std::string old_name;
+
+		// Localized name
+		std::function<std::string()> descname;
+	};
+	static const std::vector<OldWorldInfo> kOldWorldNames;
+	static const OldWorldInfo& get_old_world_info_by_new_name(const std::string& old_name);
+	static const OldWorldInfo& get_old_world_info_by_old_name(const std::string& old_name);
 
 	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
@@ -216,6 +285,7 @@ public:
 	void set_description(const std::string& description);
 	void set_hint(const std::string& hint);
 	void set_background(const std::string& image_path);
+	void set_background_theme(const std::string&);
 	void add_tag(const std::string& tag);
 	void delete_tag(const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {
@@ -248,6 +318,9 @@ public:
 	const std::string& get_background() const {
 		return background_;
 	}
+	const std::string& get_background_theme() const {
+		return background_theme_;
+	}
 
 	using Tags = std::set<std::string>;
 	const Tags& get_tags() const {
@@ -261,6 +334,9 @@ public:
 	}
 
 	const std::vector<SuggestedTeamLineup>& get_suggested_teams() const {
+		return suggested_teams_;
+	}
+	std::vector<SuggestedTeamLineup>& get_suggested_teams() {
 		return suggested_teams_;
 	}
 
@@ -500,7 +576,7 @@ public:
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
-	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
+	std::vector<Coords> find_portdock(const Widelands::Coords& c, bool force) const;
 
 	/// Return true if there are at least 2 port spaces that can be reached from each other by water
 	bool allows_seafaring() const;
@@ -517,9 +593,15 @@ public:
 	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
 
-	// Change the map size
-	std::map<Coords, FieldData>
-	resize(EditorGameBase& egbase, const Coords coords, int32_t w, int32_t h);
+	// Change the map size. Must not be used outside the editor.
+	void resize(EditorGameBase&, Coords, int32_t w, int32_t h);
+	// Used only to undo a resize() operation.
+	// Force-resets the entire map's state to the given preserved state.
+	void set_to(EditorGameBase&, ResizeHistory);
+	// Creates a ResizeHistory that can be passed to set_to() later.
+	// This has to save the entire map's state because resize operations
+	// may affect all fields when resolving height differences etc.
+	ResizeHistory dump_state(const EditorGameBase&) const;
 
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
@@ -548,7 +630,7 @@ private:
 	                   bool* ismine = nullptr,
 	                   bool consider_mobs = true,
 	                   NodeCaps initcaps = CAPS_NONE) const;
-	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
+	bool is_cycle_connected(const FCoords& start, const std::vector<WalkingDir>&) const;
 	template <typename functorT>
 	void
 	find_reachable(const EditorGameBase&, const Area<FCoords>&, const CheckStep&, functorT&) const;
@@ -567,6 +649,7 @@ private:
 	std::string description_;
 	std::string hint_;
 	std::string background_;
+	std::string background_theme_;
 	Tags tags_;
 	std::vector<SuggestedTeamLineup> suggested_teams_;
 

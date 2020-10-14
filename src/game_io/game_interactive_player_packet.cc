@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,27 +55,30 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				// So now we try to create an InteractivePlayer object for another
 				// player instead.
 				const PlayerNumber max = game.map().get_nrplayers();
-				for (player_number = 1; player_number <= max; ++player_number)
-					if (game.get_player(player_number))
+				for (player_number = 1; player_number <= max; ++player_number) {
+					if (game.get_player(player_number)) {
 						break;
-				if (player_number > max)
+					}
+				}
+				if (player_number > max) {
 					throw GameDataError("The game has no players!");
+				}
 			}
 
 			Vector2f center_map_pixel = Vector2f::zero();
 			center_map_pixel.x = fr.float_32();
 			center_map_pixel.y = fr.float_32();
 
-			uint32_t const display_flags = fr.unsigned_32();
+			uint32_t display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
 				ibase->map_view()->scroll_to_map_pixel(center_map_pixel, MapView::Transition::Jump);
-
-				uint32_t const loaded_df =
-				   InteractiveBase::dfShowCensus | InteractiveBase::dfShowStatistics;
-				uint32_t const olddf = ibase->get_display_flags();
-				uint32_t const realdf = (olddf & ~loaded_df) | (display_flags & loaded_df);
-				ibase->set_display_flags(realdf);
+#ifndef NDEBUG
+				display_flags |= InteractiveBase::dfDebug;
+#else
+				display_flags &= ~InteractiveBase::dfDebug;
+#endif
+				ibase->set_display_flags(display_flags);
 			}
 			if (InteractivePlayer* const ipl = game.get_ipl()) {
 				ipl->set_player_number(player_number);
@@ -90,7 +93,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 					const float y = fr.float_32();
 					const float zoom = fr.float_32();
 					MapView::View view = {Vector2f(x, y), zoom};
-					if (set > 0) {
+					if (set > 0 && i < kQuicknavSlots) {
 						ibase->set_landmark(i, view);
 					}
 				}
@@ -101,8 +104,10 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 						uint32_t serial = fr.unsigned_32();
 						int16_t x = fr.signed_16();
 						int16_t y = fr.signed_16();
-						ibase->get_expedition_port_spaces().emplace(
-						   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
+						if (InteractivePlayer* const ipl = game.get_ipl()) {
+							ipl->get_expedition_port_spaces().emplace(
+							   &mol->get<Widelands::Ship>(serial), Widelands::Coords(x, y));
+						}
 					}
 				}
 			}
@@ -143,20 +148,24 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 
 	// Map landmarks
 	if (ibase != nullptr) {
-		const std::vector<QuickNavigation::Landmark>& landmarks = ibase->landmarks();
-		fw.unsigned_8(landmarks.size());
-		for (const QuickNavigation::Landmark& landmark : landmarks) {
-			fw.unsigned_8(landmark.set ? 1 : 0);
-			fw.float_32(landmark.view.viewpoint.x);
-			fw.float_32(landmark.view.viewpoint.y);
-			fw.float_32(landmark.view.zoom);
+		const QuickNavigation::Landmark* landmarks = ibase->landmarks();
+		fw.unsigned_8(kQuicknavSlots);
+		for (size_t i = 0; i < kQuicknavSlots; ++i) {
+			fw.unsigned_8(landmarks[i].set ? 1 : 0);
+			fw.float_32(landmarks[i].view.viewpoint.x);
+			fw.float_32(landmarks[i].view.viewpoint.y);
+			fw.float_32(landmarks[i].view.zoom);
 		}
 
-		fw.unsigned_32(ibase->get_expedition_port_spaces().size());
-		for (const auto& pair : ibase->get_expedition_port_spaces()) {
-			fw.unsigned_32(mos->get_object_file_index(*pair.first));
-			fw.signed_16(pair.second.x);
-			fw.signed_16(pair.second.y);
+		if (iplayer) {
+			fw.unsigned_32(iplayer->get_expedition_port_spaces().size());
+			for (const auto& pair : iplayer->get_expedition_port_spaces()) {
+				fw.unsigned_32(mos->get_object_file_index(*pair.first));
+				fw.signed_16(pair.second.x);
+				fw.signed_16(pair.second.y);
+			}
+		} else {
+			fw.unsigned_32(0);
 		}
 	}
 

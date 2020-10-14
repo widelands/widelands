@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,9 @@ public:
 	 * Lua methods
 	 */
 	int get_immovable_description(lua_State* L);
+	int tribe_immovable_exists(lua_State* L);
 	int get_building_description(lua_State* L);
+	int get_ship_description(lua_State* L);
 	int get_tribe_description(lua_State* L);
 	int get_ware_description(lua_State* L);
 	int get_worker_description(lua_State* L);

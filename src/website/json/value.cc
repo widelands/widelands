@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2019 by the Widelands Development Team
+ * Copyright (C) 2018-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ std::string Empty::as_string() const {
 	return "";
 }
 
-String::String(std::string value) : string_value(value) {
+String::String(const std::string& value) : string_value(value) {
 }
 std::string String::as_string() const {
 	return "\"" + string_value + "\"";

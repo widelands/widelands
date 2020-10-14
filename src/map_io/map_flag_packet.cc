@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,9 @@ void MapFlagPacket::read(FileSystem& fs,
                          EditorGameBase& egbase,
                          bool const skip,
                          MapObjectLoader& mol) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
 	try {
@@ -49,7 +50,7 @@ void MapFlagPacket::read(FileSystem& fs,
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 2) {
+		if (packet_version == kCurrentPacketVersion) {
 			const Map& map = egbase.map();
 			PlayerNumber const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
@@ -59,15 +60,14 @@ void MapFlagPacket::read(FileSystem& fs,
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
 				const Serial ware_economy_serial = fr.unsigned_32();
-				const Serial worker_economy_serial =
-				   packet_version >= 3 ? fr.unsigned_32() :
-				                         mol.get_economy_savegame_compatibility(ware_economy_serial);
+				const Serial worker_economy_serial = fr.unsigned_32();
 
 				Serial const serial = fr.unsigned_32();
 
 				try {
-					if (fc.field->get_owned_by() != owner)
+					if (fc.field->get_owned_by() != owner) {
 						throw GameDataError("the node is owned by player %u", fc.field->get_owned_by());
+					}
 
 					for (Direction dir = 6; dir; --dir) {
 						FCoords n;
@@ -78,15 +78,18 @@ void MapFlagPacket::read(FileSystem& fs,
 							//  that the flag is not on his border). We can not check
 							//  the border bit of the node because it has not been set
 							//  yet.
-							if (n.field->get_owned_by() != owner)
+							if (n.field->get_owned_by() != owner) {
 								throw GameDataError("is owned by player %u", n.field->get_owned_by());
+							}
 
 							//  Check that there is not already a flag on a neighbour
 							//  node. We read the map in order and only need to check
 							//  the nodes that we have already read.
-							if (n.field < fc.field)
-								if (upcast(Flag const, nf, n.field->get_immovable()))
+							if (n.field < fc.field) {
+								if (upcast(Flag const, nf, n.field->get_immovable())) {
 									throw GameDataError("has a flag (%u)", nf->serial());
+								}
+							}
 						} catch (const WException& e) {
 							throw GameDataError("neighbour node (%i, %i): %s", n.x, n.y, e.what());
 						}
@@ -136,7 +139,7 @@ void MapFlagPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 	//  it's data can be saved later.
 	const Map& map = egbase.map();
 	const Field& fields_end = map[map.max_index()];
-	for (Field const* field = &map[0]; field < &fields_end; ++field)
+	for (Field const* field = &map[0]; field < &fields_end; ++field) {
 		//  we only write flags, so the upcast is safe
 		if (upcast(Flag const, flag, field->get_immovable())) {
 			//  Flags can't life on multiply positions, therefore this flag
@@ -149,9 +152,10 @@ void MapFlagPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 			fw.unsigned_32(flag->economy(wwWARE).serial());
 			fw.unsigned_32(flag->economy(wwWORKER).serial());
 			fw.unsigned_32(mos.register_object(*flag));
-		} else  //  no existence, no owner
+		} else {  //  no existence, no owner
 			fw.unsigned_8(0);
-
+		}
+	}
 	fw.write(fs, "binary/flag");
 }
 }  // namespace Widelands

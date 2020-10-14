@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,13 +25,11 @@
 
 #include <memory>
 
-#include <SDL_ttf.h>
+#include <ui_basic/mouse_constants.h>
 #include <unicode/unistr.h>
 
-#include "base/log.h"
 #include "graphic/color.h"
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_io.h"
@@ -73,10 +71,11 @@ WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
 	wrapwidth_ = gwrapwidth;
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
-		if (wrapwidth_ < 2 * kLineMargin)
+		if (wrapwidth_ < 2 * kLineMargin) {
 			wrapwidth_ = 0;
-		else
+		} else {
 			wrapwidth_ -= 2 * kLineMargin;
+		}
 	}
 }
 
@@ -133,8 +132,9 @@ void WordWrap::compute_end_of_line(const std::string& text,
 	assert(text.empty() || wrapwidth_ > safety_margin);
 
 	std::string::size_type orig_end = text.find('\n', line_start);
-	if (orig_end == std::string::npos)
+	if (orig_end == std::string::npos) {
 		orig_end = text.size();
+	}
 
 	if (wrapwidth_ == std::numeric_limits<uint32_t>::max() ||
 	    orig_end - line_start <= minimum_chars) {
@@ -176,13 +176,15 @@ void WordWrap::compute_end_of_line(const std::string& text,
 	// Invariant: space points to a space character such that [line_start, space) fits
 	std::string::size_type space = end_lower;
 
-	while (space > line_start && text[space] != ' ')
+	while (space > line_start && text[space] != ' ') {
 		--space;
+	}
 
 	for (;;) {
 		std::string::size_type nextspace = text.find(' ', space + 1);
-		if (nextspace > end_upper)
+		if (nextspace > end_upper) {
 			break;  // we already know that this cannot possibly fit
+		}
 
 		// check whether the next word still fits
 		if (!line_fits(i18n::make_ligatures(text.substr(line_start, nextspace - line_start).c_str()),
@@ -264,8 +266,9 @@ uint32_t WordWrap::width() const {
 
 	for (uint32_t line = 0; line < lines_.size(); ++line) {
 		uint32_t linewidth = text_width(lines_[line].text, fontsize_);
-		if (linewidth > calculated_width)
+		if (linewidth > calculated_width) {
 			calculated_width = linewidth;
+		}
 	}
 
 	return calculated_width + 2 * kLineMargin;
@@ -292,10 +295,11 @@ void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) c
 	while (max > min) {
 		uint32_t mid = min + (max - min + 1) / 2;
 
-		if (caret >= lines_[mid].start)
+		if (caret >= lines_[mid].start) {
 			min = mid;
-		else
+		} else {
 			max = mid - 1;
+		}
 	}
 
 	assert(caret >= lines_[min].start);
@@ -316,13 +320,25 @@ uint32_t WordWrap::line_offset(uint32_t line) const {
  *
  * \note This also draws the caret, if any.
  */
-void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t caret) {
-	if (lines_.empty())
+void WordWrap::draw(RenderTarget& dst,
+                    Vector2i where,
+                    Align align,
+                    uint32_t caret,
+                    bool with_selection,
+                    uint32_t selection_start,
+                    uint32_t selection_end,
+                    uint32_t scrollbar_position) {
+	if (lines_.empty()) {
 		return;
+	}
 
 	uint32_t caretline, caretpos;
+	uint32_t selection_start_line, selection_start_x;
+	uint32_t selection_end_line, selection_end_x;
 
 	calc_wrapped_pos(caret, caretline, caretpos);
+	calc_wrapped_pos(selection_start, selection_start_line, selection_start_x);
+	calc_wrapped_pos(selection_end, selection_end_line, selection_end_x);
 
 	++where.y;
 
@@ -330,8 +346,9 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	const int fontheight = text_height(fontsize_);
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
-		if (where.y >= dst.height() || (where.y + fontheight) <= 0)
+		if (where.y >= dst.height() || (where.y + fontheight) <= 0) {
 			continue;
+		}
 
 		Vector2i point(where.x, where.y);
 
@@ -344,18 +361,61 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		rendered_text->draw(dst, point);
 
+		if (with_selection) {
+			highlight_selection(dst, scrollbar_position, selection_start_line, selection_start_x,
+			                    selection_end_line, selection_end_x, fontheight, line, point);
+		}
+
 		if (draw_caret_ && line == caretline) {
 			std::string line_to_caret = lines_[line].text.substr(0, caretpos);
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, fontsize_);
 
-			const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
+			const Image* caret_image = g_image_cache->get("images/ui_basic/caret.png");
 			Vector2i caretpt = Vector2i::zero();
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
 			dst.blit(caretpt, caret_image);
 		}
 	}
+}
+void WordWrap::highlight_selection(RenderTarget& dst,
+                                   uint32_t scrollbar_position,
+                                   uint32_t selection_start_line,
+                                   uint32_t selection_start_x,
+                                   uint32_t selection_end_line,
+                                   uint32_t selection_end_x,
+                                   const int fontheight,
+                                   uint32_t line,
+                                   const Vector2i& point) const {
+
+	Vector2i highlight_start = Vector2i::zero();
+	Vector2i highlight_end = Vector2i::zero();
+	if (line == selection_start_line) {
+		std::string text_before_selection = lines_[line].text.substr(0, selection_start_x);
+		highlight_start = Vector2i(text_width(text_before_selection, fontsize_) + point.x,
+		                           (line * fontheight) - scrollbar_position);
+
+		if (line == selection_end_line) {
+			size_t nr_characters = selection_end_x - selection_start_x;
+			std::string selected_text = lines_[line].text.substr(selection_start_x, nr_characters);
+			highlight_end = Vector2i(text_width(selected_text, fontsize_), fontheight);
+		} else {
+			std::string selected_text = lines_[line].text.substr(selection_start_x);
+			highlight_end = Vector2i(text_width(selected_text, fontsize_), fontheight);
+		}
+
+	} else if (line > selection_start_line && line < selection_end_line) {
+		highlight_start = Vector2i(point.x, (line * fontheight) - scrollbar_position);
+		highlight_end = Vector2i(text_width(lines_[line].text, fontsize_), fontheight);
+
+	} else if (line == selection_end_line) {
+		highlight_start = Vector2i(point.x, (line * fontheight) - scrollbar_position);
+		highlight_end =
+		   Vector2i(text_width(lines_[line].text.substr(0, selection_end_x), fontsize_), fontheight);
+	}
+	dst.brighten_rect(
+	   Recti(highlight_start, highlight_end.x, highlight_end.y), BUTTON_EDGE_BRIGHT_FACTOR);
 }
 
 /**

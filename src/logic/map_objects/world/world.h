@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,13 +24,13 @@
 
 #include "base/macros.h"
 #include "logic/map_objects/description_maintainer.h"
+#include "logic/map_objects/description_manager.h"
 
 class LuaTable;
 
 namespace Widelands {
 
-struct CritterDescr;
-class EditorCategory;
+class CritterDescr;
 class ImmovableDescr;
 class ResourceDescription;
 class TerrainDescription;
@@ -39,8 +39,11 @@ class TerrainDescription;
 /// terrains, immovables and resources.
 class World {
 public:
-	World();
-	~World();
+	World(DescriptionManager* description_manager, bool render_only = false);
+	~World() = default;
+
+	/// Add a world object type to the world.
+	void add_world_object_type(const LuaTable& table, MapObjectType type);
 
 	// TODO(sirver): Refactor these to only return the description_maintainer so that world
 	// becomes a pure container.
@@ -48,59 +51,43 @@ public:
 	TerrainDescription& terrain_descr(DescriptionIndex i) const;
 	const TerrainDescription* terrain_descr(const std::string& name) const;
 	DescriptionIndex get_terrain_index(const std::string& name) const;
+	DescriptionIndex safe_terrain_index(const std::string& name) const;
 	DescriptionIndex get_nr_terrains() const;
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
-	DescriptionIndex get_critter(char const* const l) const;
+	DescriptionIndex critter_index(const std::string& name) const;
+	DescriptionIndex safe_critter_index(const std::string& name) const;
 	CritterDescr const* get_critter_descr(DescriptionIndex index) const;
 	CritterDescr const* get_critter_descr(const std::string& name) const;
+	DescriptionIndex get_nr_critters() const;
 
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
 	DescriptionIndex get_immovable_index(const std::string& name) const;
+	DescriptionIndex safe_immovable_index(const std::string& name) const;
 	DescriptionIndex get_nr_immovables() const;
 	ImmovableDescr const* get_immovable_descr(DescriptionIndex index) const;
 
-	DescriptionIndex resource_index(const char* const name) const;
+	DescriptionIndex resource_index(const std::string& name) const;
+	DescriptionIndex safe_resource_index(const std::string& warename) const;
 	ResourceDescription const* get_resource(DescriptionIndex res) const;
 	DescriptionIndex get_nr_resources() const;
-	DescriptionIndex safe_resource_index(const char* const warename) const;
 
-	/// Add this new resource to the world description.
-	void add_resource_type(const LuaTable& table);
-
-	/// Add this new terrain to the world description.
-	void add_terrain_type(const LuaTable& table);
-
-	/// Add a new critter to the world description.
-	void add_critter_type(const LuaTable& table);
-
-	/// Add a new immovable to the world description.
-	void add_immovable_type(const LuaTable& table);
-
-	/// Add an editor categories for grouping items in the editor.
-	void add_editor_terrain_category(const LuaTable& table);
-	void add_editor_critter_category(const LuaTable& table);
-	void add_editor_immovable_category(const LuaTable& table);
-
-	/// Access to the editor categories.
-	const DescriptionMaintainer<EditorCategory>& editor_terrain_categories() const;
-	const DescriptionMaintainer<EditorCategory>& editor_critter_categories() const;
-	const DescriptionMaintainer<EditorCategory>& editor_immovable_categories() const;
-
-	// Load the graphics for the world. Animations are loaded on
-	// demand.
-	void load_graphics();
-	void postload();
+	/// Load a critter that has been registered previously with 'register_description'
+	DescriptionIndex load_critter(const std::string& crittername);
+	/// Load an immovable that has been registered previously with 'register_description'
+	DescriptionIndex load_immovable(const std::string& immovablename);
+	/// Load a resource that has been registered previously with 'register_description'
+	DescriptionIndex load_resource(const std::string& resourcename);
+	/// Load a terrain that has been registered previously with 'register_description'
+	DescriptionIndex load_terrain(const std::string& terrainname);
 
 private:
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
 	std::unique_ptr<DescriptionMaintainer<ResourceDescription>> resources_;
-	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_terrain_categories_;
-	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_critter_categories_;
-	std::unique_ptr<DescriptionMaintainer<EditorCategory>> editor_immovable_categories_;
 
+	DescriptionManager* description_manager_;  // Not owned
 	DISALLOW_COPY_AND_ASSIGN(World);
 };
 

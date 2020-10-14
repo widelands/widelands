@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,37 +20,95 @@
 #ifndef WL_UI_FSMENU_MAIN_H
 #define WL_UI_FSMENU_MAIN_H
 
+#include <memory>
+
 #include "ui_basic/button.h"
-#include "ui_basic/icon.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/main_menu.h"
+#include "ui_fsmenu/base.h"
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  */
-class FullscreenMenuMain : public FullscreenMenuMainMenu {
+class FullscreenMenuMain : public FullscreenMenuBase {
 public:
-	FullscreenMenuMain();
+	explicit FullscreenMenuMain(bool first_ever_init);
+
+	const std::string& get_filename_for_continue() const {
+		return filename_for_continue_;
+	}
+
+	// Internet login stuff
+	void show_internet_login();
+	void internet_login();
+	std::string get_nickname() const {
+		return nickname_;
+	}
+	std::string get_password() const {
+		return password_;
+	}
+	bool registered() const {
+		return register_;
+	}
+
+	void draw(RenderTarget&) override;
+	void draw_overlay(RenderTarget&) override;
+	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
+	bool handle_key(bool, SDL_Keysym) override;
+
+	// Set the labels for all buttons etc. This needs to be called after language switching.
+	void set_labels();
 
 protected:
-	void clicked_ok() override;
+	void clicked_ok() override {
+	}
 
 private:
 	void layout() override;
 
-	UI::Icon logo_icon_;
-	UI::Button playtutorial;
-	UI::Button singleplayer;
-	UI::Button multiplayer;
-	UI::Button replay;
-	UI::Button editor;
-	UI::Button options;
-	UI::Button about;
-	UI::Button exit;
-	UI::Textarea version;
-	UI::Textarea copyright;
-	UI::Textarea gpl;
+	Recti box_rect_;
+	uint32_t butw_, buth_;
+	uint32_t padding_;
+
+	UI::Box vbox1_, vbox2_;
+
+	UI::Dropdown<FullscreenMenuBase::MenuTarget> singleplayer_;
+	UI::Dropdown<FullscreenMenuBase::MenuTarget> multiplayer_;
+	UI::Button replay_;
+	UI::Button editor_;
+	UI::Button addons_;
+	UI::Button options_;
+	UI::Button about_;
+	UI::Button exit_;
+	UI::Textarea version_;
+	UI::Textarea copyright_;
+
+	std::string filename_for_continue_;
+
+	const Image& splashscreen_;
+	const Image& title_image_;
+
+	uint32_t init_time_;
+
+	std::vector<std::string> images_;
+	uint32_t last_image_exchange_time_;
+	size_t draw_image_, last_image_;
+	Rectf image_pos(const Image&);
+	Rectf title_pos();
+	float calc_opacity(uint32_t time);
+
+	bool visible_;
+	void set_button_visibility(bool);
+
+	// Values from internet login window
+	std::string nickname_;
+	std::string password_;
+	bool auto_log_;
+	bool register_;
 };
+
+int16_t calc_desired_window_width(const FullscreenMenuMain& parent);
+int16_t calc_desired_window_height(const FullscreenMenuMain& parent);
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

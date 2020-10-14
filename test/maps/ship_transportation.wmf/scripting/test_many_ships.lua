@@ -20,16 +20,16 @@ run(function()
 
         i = i + 1
         sleep(2000)
-        end
+   end
 
-  stable_save(game, "20_ships")
+   stable_save(game, "20_ships", 10 * 1000)
 
    i = 0
    while i < 10 do
         p1:place_ship(map:get_field(10, 10))
         i = i + 1
         sleep(2000)
-        end
+   end
 
    print("# All Tests passed.")
    wl.ui.MapView():close()

@@ -7,12 +7,28 @@ wl_library(logic_map_objects_description_maintainer
     logic_constants
 )
 
+wl_library(logic_map_objects_description_manager
+  SRCS
+    description_manager.cc
+    description_manager.h
+  DEPENDS
+    base_log
+    base_macros
+    io_filesystem
+    logic_exceptions
+    logic_map_object_type
+    scripting_lua_interface
+    scripting_lua_table
+)
+
+
 wl_library(logic_tribe_basic_info
   SRCS
     tribes/tribe_basic_info.cc
     tribes/tribe_basic_info.h
   DEPENDS
     base_i18n
+    io_filesystem
     logic_exceptions
     scripting_lua_table
     scripting_lua_interface
@@ -38,9 +54,12 @@ wl_library(logic_map_objects
     immovable.cc
     immovable.h
     immovable_program.h
+    immovable_program.cc
     info_to_draw.h
     map_object.cc
     map_object.h
+    map_object_program.cc
+    map_object_program.h
     terrain_affinity.cc
     terrain_affinity.h
     tribes/attack_target.h
@@ -105,8 +124,6 @@ wl_library(logic_map_objects
     world/critter.cc
     world/critter.h
     world/critter_program.h
-    world/editor_category.cc
-    world/editor_category.h
     world/map_gen.cc
     world/map_gen.h
     world/resource_description.cc
@@ -115,6 +132,7 @@ wl_library(logic_map_objects
     world/terrain_description.h
     world/world.cc
     world/world.h
+  USES_SDL2
   DEPENDS
     ai_hints
     base_exceptions
@@ -123,16 +141,17 @@ wl_library(logic_map_objects
     base_log
     base_macros
     base_math
+    base_scoped_timer
     economy
     graphic
     graphic_animation
     graphic_color
     graphic_fonthandler
+    graphic_image_cache
     graphic_image_io
     graphic_surface
     graphic_text_layout
     graphic_toolbar_imageset
-    helper
     io_fileread
     io_filesystem
     logic # TODO(GunChleoc): Circular dependency
@@ -141,7 +160,9 @@ wl_library(logic_map_objects
     logic_exceptions
     logic_game_controller
     logic_map # TODO(GunChleoc): Circular dependency
+    logic_map_object_type
     logic_map_objects_description_maintainer
+    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     logic_widelands_geometry_io
@@ -151,5 +172,15 @@ wl_library(logic_map_objects
     scripting_lua_table
     sound_constants
     sound
+    ui_basic_loading_message
     wui_mapview_pixelconstants
+)
+
+wl_library(logic_map_object_type
+  SRCS
+    map_object_type.cc
+    map_object_type.h
+  DEPENDS
+    base_exceptions
+    notifications
 )

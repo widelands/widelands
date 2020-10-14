@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_fishbreeders_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Fish Breeder’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -37,19 +37,14 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
             "callworker=breed",
-            "sleep=13500"
+            "sleep=duration:13s500ms"
          }
       },
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_fishers_house = true,
-      atlanteans_fishbreeders_house = false,
    },
 
    out_of_resource_notification = {
@@ -62,3 +57,5 @@ tribes:new_productionsite_type {
    -- Translators: Productivity tooltip for Atlantean fish breeders when all water fields are already full of fish
    resource_not_needed_message = _"The fishing grounds are full";
 }
+
+pop_textdomain()

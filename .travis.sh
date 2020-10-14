@@ -1,4 +1,17 @@
-set -ex
+set -x
+trap 'err_handler' ERR
+
+# Called if a command returns a non-zero value
+err_handler() {
+   result=$?
+   if [ $result -eq 2 ] ; then
+      # Catch instabilities with SDL in CI environment
+      echo "SDL initialization failed. TEST SKIPPED.";
+   else
+      # Exit with this error
+      exit $result
+   fi
+}
 
 # Create build folder.
 mkdir build
@@ -6,20 +19,25 @@ cd build
 
 case "$1" in
 build)
-   cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
+   if [ "$TRAVIS_OS_NAME" = linux ]; then
+      cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
+   else
+      # gettext requires special treatment on MacOS
+      cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF" -DCMAKE_EXE_LINKER_FLAGS="-L/usr/local/opt/gettext/lib -lintl" -DCMAKE_CXX_FLAGS="-I/usr/local/opt/gettext/include"
+   fi
    # Do the actual build.
    make -k -j3
 
    # Run the regression suite only if compiling didn't take too long (to avoid timeouts).
-   # On macOS it always fails with a broken GL installation message, so we ommit it.
+   # On macOS it always fails with a broken GL installation message, so we omit it.
    if [ "$TRAVIS_OS_NAME" = linux ]; then
       cd ..
-      ./regression_test.py -b build/src/widelands
       if [ "$BUILD_WEBSITE_TOOLS" = ON ]; then
          mkdir temp_web
          build/src/website/wl_map_object_info temp_web
          build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
       fi
+      ./regression_test.py -b build/src/widelands
    fi
    ;;
 codecheck)

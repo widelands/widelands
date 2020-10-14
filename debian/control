@@ -22,7 +22,7 @@ Build-Depends: debhelper (>= 9),
   libsdl2-image-dev,
   libsdl2-mixer-dev,
   libsdl2-ttf-dev,
-  python,
+  python3,
   zlib1g-dev
 Vcs-Git: https://anonscm.debian.org/git/pkg-games/widelands.git
 Vcs-Browser: https://anonscm.debian.org/git/pkg-games/widelands.git

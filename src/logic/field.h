@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,13 +81,8 @@ struct Field {
 	struct Resources {
 		DescriptionIndex d : 4, r : 4;
 	};
-#ifndef WIN32
-	static_assert(sizeof(Resources) == sizeof(DescriptionIndex) / 2,
-	              "assert(sizeof(Resources) == sizeof(DescriptionIndex) / 2) failed.");
-#else
-	static_assert(sizeof(Resources) == sizeof(DescriptionIndex),
-	              "assert(sizeof(Resources) == sizeof(DescriptionIndex)) failed.");
-#endif
+	static_assert(sizeof(Resources) <= sizeof(DescriptionIndex),
+	              "assert(sizeof(Resources) <= sizeof(DescriptionIndex)) failed.");
 	struct ResourceAmounts {
 		ResourceAmount d : 4, r : 4;
 	};
@@ -284,9 +279,8 @@ private:
 #pragma pack(pop)
 
 // Check that Field is tightly packed.
-static_assert(sizeof(Field) ==
-                 sizeof(void*) * 2 + sizeof(RoadSegment) * 3 + sizeof(DescriptionIndex) * 3 +
-                    sizeof(uint8_t) * 7,
+static_assert(sizeof(Field) == sizeof(void*) * 2 + sizeof(RoadSegment) * 3 +
+                                  sizeof(DescriptionIndex) * 3 + sizeof(uint8_t) * 7,
               "Field is not tightly packed.");
 }  // namespace Widelands
 

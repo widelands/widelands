@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ struct Waterway;
 class FerryFleetDescr : public MapObjectDescr {
 public:
 	FerryFleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FERRY_FLEET, init_name, init_descname, "") {
+	   : MapObjectDescr(MapObjectType::FERRY_FLEET, init_name, init_descname) {
 	}
 	~FerryFleetDescr() override {
 	}

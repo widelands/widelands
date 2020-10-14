@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_ferry_yard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Ferry Yard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    map_check = {"waterways"},
@@ -33,10 +33,6 @@ tribes:new_productionsite_type {
 
    aihints = {},
 
-   indicate_workarea_overlaps = {
-      atlanteans_ferry_yard = false,
-   },
-
    working_positions = {
       atlanteans_shipwright = 1
    },
@@ -47,11 +43,11 @@ tribes:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "sleep=20000",
+            "sleep=duration:20s",
             "callworker=buildferry_1",
             "consume=log:2 spidercloth",
             "callworker=buildferry_2"
@@ -59,3 +55,5 @@ tribes:new_productionsite_type {
       },
    },
 }
+
+pop_textdomain()

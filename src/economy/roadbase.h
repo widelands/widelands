@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ struct Carrier;
 class RoadBaseDescr : public MapObjectDescr {
 public:
 	RoadBaseDescr(char const* const init_name, char const* const init_descname, MapObjectType mot)
-	   : MapObjectDescr(mot, init_name, init_descname, "") {
+	   : MapObjectDescr(mot, init_name, init_descname) {
 	}
 	~RoadBaseDescr() override {
 	}

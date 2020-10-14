@@ -1,27 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 5, 23 },
-      fps = 10
-   },
-   hacking = {
-      pictures = path.list_files(dirname .. "hacking_??.png"),
-      hotspot = { 19, 17 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {10, 22}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {10, 21}, 10)
-
-
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_lumberjack",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Lumberjack"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -34,15 +19,48 @@ tribes:new_worker_type {
       harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
-         "playsound=sound/woodcutting/woodcutting 255",
-         "animate=hacking 15000",
-         "playsound=sound/woodcutting/tree_falling 130",
+         "playsound=sound/woodcutting/woodcutting priority:100% allow_multiple",
+         "animate=hack duration:15s",
+         "playsound=sound/woodcutting/tree_falling priority:100%",
          "callobject=fall",
-         "animate=idle 2000",
+         "animate=idle duration:2s",
          "createware=log",
          "return"
       }
    },
 
-   animations = animations,
+   spritesheets = {
+      idle = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 5, 21 }
+      },
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 20 }
+      },
+      walkload = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 10, 19 }
+      },
+      hack = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 19, 15 }
+      },
+   }
 }
+
+pop_textdomain()

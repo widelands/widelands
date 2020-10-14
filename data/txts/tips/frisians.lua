@@ -1,4 +1,4 @@
-set_textdomain("texts")
+push_textdomain("texts")
 tips = {
    {
       text = _"To produce bricks, you need granite; to produce granite, you need a quarry or rock mine; to build those, you need bricks. Take care not to get deadlocked!",
@@ -13,4 +13,5 @@ tips = {
       seconds = 7
    },
 }
+pop_textdomain()
 return tips

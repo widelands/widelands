@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,11 +50,21 @@ public:
 	bool init(EditorGameBase&) override;
 	void set_economy(Economy*, WareWorker) override;
 
-	uint32_t get_nrwaresqueues() {
-		return wares_.size();
+	uint32_t nr_consume_waresqueues() {
+		return consume_wares_.size();
 	}
-	WaresQueue* get_waresqueue(uint32_t const idx) {
-		return wares_[idx];
+	WaresQueue* get_consume_waresqueue(uint32_t const idx) {
+		return consume_wares_[idx];
+	}
+	uint32_t nr_dropout_waresqueues() {
+		return dropout_wares_.size();
+	}
+	WaresQueue* get_dropout_waresqueue(uint32_t const idx) {
+		return dropout_wares_[idx];
+	}
+
+	const BuildingDescr* get_building() const {
+		return building_;
 	}
 
 	uint32_t get_built_per64k() const;
@@ -76,7 +86,9 @@ protected:
 	OPtr<Worker> builder_;
 
 	using Wares = std::vector<WaresQueue*>;
-	Wares wares_;
+	Wares consume_wares_;  // wares to consume (constructionsites) or to painstakingly recover
+	                       // (dismantlesites)
+	Wares dropout_wares_;  // additional items to drop out immediately
 
 	bool working_;             // true if the builder is currently working
 	uint32_t work_steptime_;   // time when next step is completed

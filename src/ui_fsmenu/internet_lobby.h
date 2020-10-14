@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,17 +21,18 @@
 #define WL_UI_FSMENU_INTERNET_LOBBY_H
 
 #include "network/internet_gaming.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_fsmenu/load_map_or_game.h"
 #include "wui/game_chat_panel.h"
 
-class FullscreenMenuInternetLobby : public FullscreenMenuBase {
+class FullscreenMenuInternetLobby : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuInternetLobby(const char*, const char*, bool);
+	FullscreenMenuInternetLobby(std::string&, std::string&, bool);
 
 	void think() override;
 
@@ -40,25 +41,6 @@ protected:
 
 private:
 	void layout() override;
-
-	uint32_t butx_;
-	uint32_t butw_;
-	uint32_t buth_;
-	uint32_t lisw_;
-	uint32_t prev_clientlist_len_;
-	FxId new_client_fx_;
-	UI::Textarea title, clients_, opengames_;
-	UI::Textarea servername_;
-	UI::Button joingame_, hostgame_, back_;
-	UI::EditBox edit_servername_;
-	UI::Table<const InternetClient* const> clientsonline_list_;
-	UI::Listselect<InternetGame> opengames_list_;
-	GameChatPanel chat;
-
-	// Login information
-	const char* nickname_;
-	const char* password_;
-	bool is_registered_;
 
 	void fill_games_list(const std::vector<InternetGame>*);
 	void fill_client_list(const std::vector<InternetClient>*);
@@ -76,6 +58,31 @@ private:
 
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
+
+	UI::Textarea title_;
+
+	UI::Box left_column_, right_column_;
+
+	// Left Column
+	UI::Textarea label_clients_online_;
+	UI::Table<const InternetClient* const> clientsonline_table_;
+	GameChatPanel chat_;
+
+	// Right Column
+	UI::Textarea label_opengames_;
+	UI::Listselect<InternetGame> opengames_list_;
+	UI::Button joingame_;
+	UI::Textarea servername_label_;
+	UI::EditBox servername_;
+	UI::Button hostgame_;
+
+	uint32_t prev_clientlist_len_;
+	FxId new_client_fx_;
+
+	// Login information
+	const std::string nickname_;
+	const std::string password_;
+	bool is_registered_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

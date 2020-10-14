@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,6 @@ private:
 		kExpeditionWaiting,
 		kExpeditionScouting,
 		kExpeditionPortspaceFound,
-		kExpeditionColonizing,
 		kAll
 	};
 
@@ -131,7 +130,6 @@ private:
 	/// status.
 	bool satisfies_filter(const ShipInfo& info, ShipFilterStatus filter);
 
-	const Image* colony_icon_;
 	UI::Box main_box_;
 	// Buttons for ship states
 	UI::Box filter_box_;

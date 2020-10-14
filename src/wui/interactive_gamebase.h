@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,23 +31,16 @@
 
 struct ChatProvider;
 
-enum PlayerType { NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED };
-
 class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
 	                    Section& global_s,
-	                    PlayerType pt,
 	                    bool multiplayer,
 	                    ChatProvider* chat_provider);
 	~InteractiveGameBase() override {
 	}
-	Widelands::Game* get_game() const;
-	Widelands::Game& game() const;
-
-	virtual bool can_see(Widelands::PlayerNumber) const = 0;
-	virtual bool can_act(Widelands::PlayerNumber) const = 0;
-	virtual Widelands::PlayerNumber player_number() const = 0;
+	Widelands::Game* get_game() const override;
+	Widelands::Game& game() const override;
 
 	// Only the 'InteractiveGameBase' has all information of what should be
 	// drawn into a map_view (i.e. which overlays are available). The
@@ -58,22 +51,8 @@ public:
 	void set_sel_pos(Widelands::NodeAndTriangle<> const center) override;
 
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
-	const PlayerType& get_playertype() const {
-		return playertype_;
-	}
-	void set_playertype(const PlayerType& pt) {
-		playertype_ = pt;
-	}
 
-	void add_wanted_building_window(const Widelands::Coords& coords,
-	                                const Vector2i point,
-	                                bool was_minimal,
-	                                bool was_pinned);
-	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
-	                                       bool avoid_fastclick,
-	                                       bool workarea_preview_wanted);
 	bool try_show_ship_window();
-	void show_ship_window(Widelands::Ship* ship);
 	bool is_multiplayer() {
 		return multiplayer_;
 	}
@@ -93,7 +72,8 @@ protected:
 		kCensus,
 		kStatistics,
 		kSoldierLevels,
-		kWorkareaOverlap
+		kWorkareaOverlap,
+		kBuildings
 	};
 
 	// Adds the mapviewmenu_ to the toolbar
@@ -120,6 +100,7 @@ protected:
 		UI::UniqueWindow::Registry stats_wares;
 		UI::UniqueWindow::Registry stats_stock;
 		UI::UniqueWindow::Registry stats_buildings;
+		UI::UniqueWindow::Registry stats_soldiers;
 		UI::UniqueWindow::Registry stats_seafaring;
 
 		UI::UniqueWindow::Registry help;
@@ -128,7 +109,6 @@ protected:
 	ChatProvider* chat_provider_;
 	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
-	PlayerType playertype_;
 
 	// Show / Hide menu on the toolbar
 	UI::Dropdown<ShowHideEntry> showhidemenu_;
@@ -169,30 +149,10 @@ private:
 	// Resets the speed to 1x
 	void reset_gamespeed();
 
-	struct WantedBuildingWindow {
-		explicit WantedBuildingWindow(const Vector2i& pos,
-		                              bool was_minimized,
-		                              bool was_pinned,
-		                              bool was_showing_workarea)
-		   : window_position(pos),
-		     minimize(was_minimized),
-		     pin(was_pinned),
-		     show_workarea(was_showing_workarea) {
-		}
-		const Vector2i window_position;
-		const bool minimize;
-		const bool pin;
-		const bool show_workarea;
-	};
-
 	// Main menu on the toolbar
 	UI::Dropdown<MainMenuEntry> mainmenu_;
 	// Game speed menu on the toolbar
 	UI::Dropdown<GameSpeedEntry> gamespeedmenu_;
-
-	// Building coordinates, window position, whether the window was minimized
-	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_GAMEBASE_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,11 +19,9 @@
 
 #include "wui/dismantlesitewindow.h"
 
-#include "graphic/graphic.h"
-
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
-DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
+DismantleSiteWindow::DismantleSiteWindow(InteractiveBase& parent,
                                          UI::UniqueWindow::Registry& reg,
                                          Widelands::DismantleSite& ds,
                                          bool avoid_fastclick)
@@ -32,11 +30,12 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
 }
 
 void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
+	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(ibase()->egbase());
 	assert(dismantle_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
+	UI::Box& subbox = *new UI::Box(&box, 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
 	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
@@ -47,11 +46,21 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < dismantle_site->get_nrwaresqueues(); ++i)
+	for (uint32_t i = 0; i < dismantle_site->nr_dropout_waresqueues(); ++i) {
 		BuildingWindow::create_input_queue_panel(
-		   &box, *dismantle_site, *dismantle_site->get_waresqueue(i), true);
+		   &subbox, *dismantle_site, *dismantle_site->get_dropout_waresqueue(i), true);
+	}
+	for (uint32_t i = 0; i < dismantle_site->nr_consume_waresqueues(); ++i) {
+		BuildingWindow::create_input_queue_panel(
+		   &subbox, *dismantle_site, *dismantle_site->get_consume_waresqueue(i), true);
+	}
 
-	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
+	subbox.set_max_size(500, 400);
+	subbox.set_scrolling(true);
+	subbox.set_scrollbar_style(UI::PanelStyle::kWui);
+	box.add(&subbox, UI::Box::Resizing::kFullSize);
+
+	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
 	think();
 }
 
@@ -65,7 +74,7 @@ void DismantleSiteWindow::think() {
 	// existance.
 	BuildingWindow::think();
 
-	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
+	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(ibase()->egbase());
 	if (dismantle_site == nullptr) {
 		return;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 #include <memory>
 
-#include "graphic/graphic.h"
+#include "graphic/note_graphic_resolution_changed.h"
 
 namespace UI {
 /**
@@ -119,12 +119,16 @@ protected:
 
 	virtual void clicked_button_close();
 
+	bool is_focus_toplevel() const override {
+		return true;
+	}
+
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
-	bool dragging_, docked_left_, docked_right_, docked_bottom_;
+	bool dragging_;
 	int32_t drag_start_win_x_, drag_start_win_y_;
 	int32_t drag_start_mouse_x_, drag_start_mouse_y_;
 	bool pinned_;

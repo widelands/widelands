@@ -1,3 +1,5 @@
+push_textdomain("world")
+
 dirname = path.dirname(__file__)
 
 terrain_affinity = {
@@ -7,18 +9,16 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "liana_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Sapling)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree_sapling" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 60000",
-         "remove=40",
+      main = {
+         "animate=idle duration:1m",
+         "remove=chance:15.62%",
          "grow=liana_wasteland_pole",
       },
    },
@@ -35,18 +35,16 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "liana_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Pole)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 55000",
-         "remove=30",
+      main = {
+         "animate=idle duration:55s",
+         "remove=chance:11.72%",
          "grow=liana_wasteland_mature",
       },
    },
@@ -63,21 +61,19 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "liana_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Mature)",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = {},
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 55000",
-         "remove=10",
-         "seed=liana_wasteland_sapling",
-         "animate=idle 30000",
-         "remove=10",
+      main = {
+         "animate=idle duration:55s",
+         "remove=chance:3.91%",
+         "seed=liana_wasteland_sapling proximity:11.72%",
+         "animate=idle duration:30s",
+         "remove=chance:3.91%",
          "grow=liana_wasteland_old",
       },
    },
@@ -94,22 +90,20 @@ world:new_immovable_type{
    },
 }
 
-world:new_immovable_type{
+wl.World():new_immovable_type{
    name = "liana_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Old)",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    species = _ "Liana Tree",
    icon = dirname .. "menu.png",
-   editor_category = "trees_wasteland",
    size = "small",
-   attributes = { "tree" },
    terrain_affinity = terrain_affinity,
    programs = {
-      program = {
-         "animate=idle 1455000",
-         "transform=deadtree4 48",
-         "seed=liana_wasteland_sapling",
+      main = {
+         "animate=idle duration:24m15s",
+         "transform=deadtree4 chance:18.75%",
+         "seed=liana_wasteland_sapling proximity:39%",
       },
       fall = {
          "remove=",
@@ -127,3 +121,5 @@ world:new_immovable_type{
       }
    },
 }
+
+pop_textdomain()

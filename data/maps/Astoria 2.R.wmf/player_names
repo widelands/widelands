@@ -1,0 +1,34 @@
+# Automatically created by Widelands r24475[3abcee7@HEAD] (Release)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Human"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Human"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_3]
+name="Wood Elf"
+tribe="atlanteans"
+ai=
+closeable="false"
+
+[player_4]
+name="High Elf"
+tribe="empire"
+ai=
+closeable="false"
+
+[player_5]
+name="Skaven"
+tribe="barbarians"
+ai=
+closeable="false"

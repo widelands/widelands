@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,14 +85,16 @@ bool CheckStepDefault::allowed(
    const Map&, const FCoords& start, const FCoords& end, int32_t, CheckStep::StepId) const {
 	NodeCaps const endcaps = end.field->nodecaps();
 
-	if (endcaps & movecaps_)
+	if (endcaps & movecaps_) {
 		return true;
+	}
 
 	// Swimming bobs are allowed to move from a water field to a shore field
 	NodeCaps const startcaps = start.field->nodecaps();
 
-	if ((endcaps & MOVECAPS_WALK) && (startcaps & movecaps_ & MOVECAPS_SWIM))
+	if ((endcaps & MOVECAPS_WALK) && (startcaps & movecaps_ & MOVECAPS_SWIM)) {
 		return true;
+	}
 
 	return false;
 }
@@ -101,11 +103,12 @@ bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps_)) {
-		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK))) {
 			return false;
-
-		if (!map.can_reach_by_water(dest))
+		}
+		if (!map.can_reach_by_water(dest)) {
 			return false;
+		}
 	}
 
 	return true;
@@ -118,7 +121,12 @@ CheckStepFerry
 */
 bool CheckStepFerry::allowed(
    const Map& map, const FCoords& from, const FCoords& to, int32_t dir, CheckStep::StepId) const {
+	if (!(to.field->nodecaps() & MOVECAPS_WALK) && !(to.field->nodecaps() & MOVECAPS_SWIM)) {
+		// can't swim on lava
+		return false;
+	}
 	if (MOVECAPS_SWIM & (from.field->nodecaps() | to.field->nodecaps())) {
+		// open water
 		return true;
 	}
 	FCoords fd, fr;
@@ -152,6 +160,12 @@ bool CheckStepFerry::allowed(
 }
 
 bool CheckStepFerry::reachable_dest(const Map& map, const FCoords& dest) const {
+	if (dest.field->nodecaps() & MOVECAPS_SWIM) {
+		return true;
+	}
+	if (!(dest.field->nodecaps() & MOVECAPS_WALK)) {
+		return false;
+	}
 	for (int i = 1; i <= 6; ++i) {
 		if (allowed(map, dest, map.get_neighbour(dest, i), i, CheckStep::StepId::stepNormal)) {
 			return true;
@@ -175,20 +189,23 @@ bool CheckStepWalkOn::allowed(const Map&,
 
 	//  Make sure to not find paths where we walk onto an unwalkable node, then
 	//  then back onto a walkable node.
-	if (!onlyend_ && id != CheckStep::stepFirst && !(startcaps & movecaps_))
+	if (!onlyend_ && id != CheckStep::stepFirst && !(startcaps & movecaps_)) {
 		return false;
-
-	if (endcaps & movecaps_)
+	}
+	if (endcaps & movecaps_) {
 		return true;
+	}
 
 	//  We can't move onto the node using normal rules.
 	// If onlyend is true, exception rules only apply for the last step.
-	if (onlyend_ && id != CheckStep::stepLast)
+	if (onlyend_ && id != CheckStep::stepLast) {
 		return false;
+	}
 
 	// If the previous field was walkable, we can move onto this one
-	if (startcaps & movecaps_)
+	if (startcaps & movecaps_) {
 		return true;
+	}
 
 	return false;
 }
@@ -207,19 +224,21 @@ bool CheckStepRoad::allowed(const Map& map,
 
 	// Calculate cost and passability
 	if (!(endcaps & movecaps_) &&
-	    !((endcaps & MOVECAPS_WALK) && (player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM)))
+	    !((endcaps & MOVECAPS_WALK) && (player_.get_buildcaps(start) & movecaps_ & MOVECAPS_SWIM))) {
 		return false;
+	}
 
 	// Check for blocking immovables
-	if (BaseImmovable const* const imm = map.get_immovable(end))
+	if (BaseImmovable const* const imm = map.get_immovable(end)) {
 		if (imm->get_size() >= BaseImmovable::SMALL) {
-			if (id != CheckStep::stepLast)
+			if (id != CheckStep::stepLast) {
 				return false;
+			}
 
 			return dynamic_cast<Flag const*>(imm) ||
 			       (dynamic_cast<Road const*>(imm) && (endcaps & BUILDCAPS_FLAG));
 		}
-
+	}
 	return true;
 }
 
@@ -227,11 +246,12 @@ bool CheckStepRoad::reachable_dest(const Map& map, const FCoords& dest) const {
 	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps_)) {
-		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
+		if (!((movecaps_ & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK))) {
 			return false;
-
-		if (!map.can_reach_by_water(dest))
+		}
+		if (!map.can_reach_by_water(dest)) {
 			return false;
+		}
 	}
 
 	return true;

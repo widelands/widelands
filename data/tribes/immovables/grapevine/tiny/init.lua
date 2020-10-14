@@ -1,17 +1,16 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_immovable_type {
-   msgctxt = "immovable",
    name = "grapevine_tiny",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Grapevine (tiny)"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   attributes = { "field", "seed_grapes" },
    programs = {
-      program = {
-         "animate=idle 22000",
+      main = {
+         "animate=idle duration:22s",
          "transform=grapevine_small",
       }
    },
@@ -23,3 +22,5 @@ tribes:new_immovable_type {
       },
    }
 }
+
+pop_textdomain()

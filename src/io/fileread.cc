@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,8 +61,9 @@ bool FileRead::end_of_file() const {
 
 void FileRead::set_file_pos(const Pos& pos) {
 	assert(data_);
-	if (pos >= length_)
+	if (pos >= length_) {
 		throw FileBoundaryExceeded();
+	}
 	filepos_ = pos;
 }
 
@@ -86,8 +87,9 @@ char* FileRead::data(uint32_t const bytes, const Pos& pos) {
 		i = filepos_;
 		filepos_ += bytes;
 	}
-	if (length_ < i + bytes)
+	if (length_ < i + bytes) {
 		throw FileBoundaryExceeded();
+	}
 	return data_ + i;
 }
 
@@ -95,16 +97,19 @@ char* FileRead::c_string(const Pos& pos) {
 	assert(data_);
 
 	Pos i = pos.is_null() ? filepos_ : pos;
-	if (i >= length_)
+	if (i >= length_) {
 		throw FileBoundaryExceeded();
-	char* const result = data_ + i;
-	for (char *p = result; *p; ++p, ++i) {
 	}
-	++i;                    //  beyond the null
-	if (i > (length_ + 1))  // allow EOF as end marker for string
+	char* const result = data_ + i;
+	for (char* p = result; *p; ++p, ++i) {
+	}
+	++i;                      //  beyond the null
+	if (i > (length_ + 1)) {  // allow EOF as end marker for string
 		throw FileBoundaryExceeded();
-	if (pos.is_null())
+	}
+	if (pos.is_null()) {
 		filepos_ = i;
+	}
 	return result;
 }
 
@@ -113,18 +118,21 @@ char const* FileRead::c_string() {
 }
 
 char* FileRead::read_line() {
-	if (end_of_file())
+	if (end_of_file()) {
 		return nullptr;
+	}
 	char* result = data_ + filepos_;
-	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_)
+	for (; data_[filepos_] && data_[filepos_] != '\n'; ++filepos_) {
 		if (data_[filepos_] == '\r') {
 			data_[filepos_] = '\0';
 			++filepos_;
-			if (data_[filepos_] == '\n')
+			if (data_[filepos_] == '\n') {
 				break;
-			else
+			} else {
 				throw typename StreamRead::DataError("CR not immediately followed by LF");
+			}
 		}
+	}
 	data_[filepos_] = '\0';
 	++filepos_;
 	return result;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,12 +19,15 @@
 
 #include "logic/map_objects/world/terrain_description.h"
 
+#include <SDL_surface.h>
+
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/animation/animation.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
+#include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_table.h"
 
@@ -64,41 +67,40 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	case Is::kArable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("arable");
-		icon = g_gr->images().get("images/wui/editor/terrain_arable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_arable.png");
 		break;
 	case Is::kWalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("walkable");
-		icon = g_gr->images().get("images/wui/editor/terrain_walkable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_walkable.png");
 		break;
 	case Is::kWater:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("navigable");
-		icon = g_gr->images().get("images/wui/editor/terrain_water.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_water.png");
 		break;
 	case Is::kUnreachable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unreachable");
-		icon = g_gr->images().get("images/wui/editor/terrain_unreachable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_unreachable.png");
 		break;
 	case Is::kMineable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("mineable");
-		icon = g_gr->images().get("images/wui/editor/terrain_mineable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_mineable.png");
 		break;
 	case Is::kUnwalkable:
 		/** TRANSLATORS: This is a terrain type tooltip in the editor */
 		descname = _("unwalkable");
-		icon = g_gr->images().get("images/wui/editor/terrain_unwalkable.png");
+		icon = g_image_cache->get("images/wui/editor/terrain_unwalkable.png");
 		break;
 	}
 }
 
-TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::World& world)
+TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& world)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      is_(terrain_type_from_string(table.get_string("is"))),
-     default_resource_index_(world.resource_index(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
      temperature_(table.get_int("temperature")),
@@ -106,7 +108,16 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      humidity_(table.get_int("humidity")) {
 
 	if (table.has_key("tooltips")) {
-		custom_tooltips_ = table.get_table("tooltips")->array_entries<std::string>();
+		// TODO(GunChleoc): Compatibility, remove after v1.0
+		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
+	}
+
+	for (DescriptionIndex di = world.get_nr_terrains(); di; --di) {
+		const TerrainDescription& t = world.terrain_descr(di - 1);
+		if (t.dither_layer_ == dither_layer_) {
+			throw GameDataError("Terrain %s has the same dither layer %i as %s", name_.c_str(),
+			                    dither_layer_, t.name_.c_str());
+		}
 	}
 
 	if (table.has_key("enhancement")) {
@@ -114,7 +125,9 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 		if (enhancement_ == name_) {
 			throw GameDataError("%s: a terrain cannot be enhanced to itself", name_.c_str());
 		}
-		// Other invalid terrains will be detected in World::postload
+		// Ensure terrain exists and is loaded
+		Notifications::publish(
+		   NoteMapObjectDescription(enhancement_, NoteMapObjectDescription::LoadType::kObject));
 	} else {
 		enhancement_ = "";
 	}
@@ -128,6 +141,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 	if (temperature_ < 0) {
 		throw GameDataError("%s: temperature is not possible.", name_.c_str());
 	}
+
+	// Note: Terrain texures are loaded in "graphic/build_texture_atlas.h"
 
 	texture_paths_ = table.get_table("textures")->array_entries<std::string>();
 	frame_length_ = kFrameLength;
@@ -143,23 +158,30 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
-		valid_resources_.push_back(world.safe_resource_index(resource.c_str()));
+		valid_resources_.push_back(world.load_resource(resource));
 	}
+
+	const std::string default_resource(table.get_string("default_resource"));
+	default_resource_index_ =
+	   !default_resource.empty() ? world.load_resource(default_resource) : Widelands::INVALID_INDEX;
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
 		throw GameDataError("Default resource is not in valid resources.\n");
 	}
 
-	const DescriptionIndex editor_category_index =
-	   world.editor_terrain_categories().get_index(table.get_string("editor_category"));
-	if (editor_category_index == Widelands::INVALID_INDEX) {
-		throw GameDataError(
-		   "Unknown editor_category: %s\n", table.get_string("editor_category").c_str());
+	for (size_t j = 0; j < texture_paths().size(); ++j) {
+		// Set the minimap color on the first loaded image.
+		if (j == 0) {
+			SDL_Surface* sdl_surface = load_image_as_sdl_surface(texture_paths()[j]);
+			uint8_t top_left_pixel = static_cast<uint8_t*>(sdl_surface->pixels)[0];
+			const SDL_Color top_left_pixel_color =
+			   sdl_surface->format->palette->colors[top_left_pixel];
+			set_minimap_color(
+			   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
+			SDL_FreeSurface(sdl_surface);
+		}
+		add_texture(g_image_cache->get(texture_paths()[j]));
 	}
-	editor_category_ = world.editor_terrain_categories().get_mutable(editor_category_index);
-}
-
-TerrainDescription::~TerrainDescription() {
 }
 
 const Image& TerrainDescription::get_texture(uint32_t gametime) const {
@@ -211,10 +233,6 @@ const std::string& TerrainDescription::name() const {
 
 const std::string& TerrainDescription::descname() const {
 	return descname_;
-}
-
-const EditorCategory* TerrainDescription::editor_category() const {
-	return editor_category_;
 }
 
 DescriptionIndex TerrainDescription::get_valid_resource(DescriptionIndex index) const {

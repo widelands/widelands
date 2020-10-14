@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -42,24 +42,13 @@ tribes:new_productionsite_type {
       atlanteans_farmer = 1
    },
 
-   outputs = {
-      "corn"
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_blackroot_farm = false,
-      atlanteans_farm = false,
-      atlanteans_foresters_house = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=plant",
             "call=harvest",
-            "return=no_stats"
          }
       },
       plant = {
@@ -67,7 +56,7 @@ tribes:new_productionsite_type {
          descname = _"planting corn",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
       harvest = {
@@ -75,7 +64,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting corn",
          actions = {
             "callworker=harvest",
-            "sleep=4000"
+            "sleep=duration:4s"
          }
       },
    },
@@ -87,3 +76,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 30
    },
 }
+
+pop_textdomain()

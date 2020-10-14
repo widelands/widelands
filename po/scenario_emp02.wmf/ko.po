@@ -3,13 +3,15 @@
 # 
 # Translators:
 # ks k, 2020
+# ks k, 2020
+# TaeMin An, 2019
 # TaeMin An, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-26 18:51+0000\n"
-"PO-Revision-Date: 2020-03-01 04:56+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-08-25 12:28+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -18,171 +20,171 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:25
 msgid "Build up a wood economy"
 msgstr "목재 공급 경제를 구축하십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:29
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:27
 msgid "Wood Economy"
 msgstr "목재 공급 경제"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:30
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "나무꾼의 집 세 곳, 식목업자의 집, 그리고 제재소를 지으십시오."
+msgstr "벌목꾼의 집 3 곳, 숲꾼의 집, 제재소를 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Build a quarry"
 msgstr "채석장을 지으십시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:38
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Quarry"
 msgstr "채석장"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:39
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:37
 msgid "Build a quarry to the south of your headquarters."
 msgstr "채석장을 당신의 본부 남쪽에 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:43
 msgid "Protect your colony"
 msgstr "당신의 식민지를 보호하시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect Your Colony"
 msgstr "당신의 식민지를 보호하시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Build some blockhouses and sentries around the colony."
 msgstr "식민지 주변에 사각 요새와 초소 몇 개를 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
 msgstr "대리석 채굴을 시작하시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:54
 msgid "Marble"
 msgstr "대리석"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
 msgstr "산에서 대리석 채굴을 시작하기 우해, 동쪽으로 확장하십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:61
 msgid "Build a stonemason’s house and mining infrastructure"
 msgstr "석공의 집과 채굴 기반시설을 지으십시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:63
 msgid "Stonemason’s house and Mining Infrastructure"
 msgstr "석공의 집과 채굴 기반시설"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:64
 msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "석공의 집을 지으시고 채굴 및 생산 기반시설을 완료하십시오(탄광 혹은 숯가마, 철광, 도구 제작소, 무기 제작소, 갑옷 제작소와 제련소)"
+msgstr "석공의 집을 지으시고 채굴 및 생산 기반시설을 완료하십시오(탄광 혹은 숯가마, 철광, 도구 제작소, 무기 제작소, 갑옷 제작소, 제련소)"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:70
 msgid "Provide your miners with food"
 msgstr "광부들에게 음식을 제공하십시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Food For Your Miners"
 msgstr "당신의 광부들을 위한 음식"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:73
 msgid "Build a tavern to produce some food to sustain our miners."
 msgstr "광부들을 유지하기 위한 음식을 생산하기 위해 선술집을 지으시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:74
 msgid ""
 "Of course this means you will need more resources for preparing this food – "
 "like fish, meat or bread."
 msgstr "물론 당신이 생선, 고기 혹은 빵과 같은 – 음식을 준비하려면 더 많은 자원이 필요할 것입니다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
 msgstr "이런 먹을거리들을 공급하려면, 어부의 집, 사냥꾼의 집, 농장, 방앗간, 그리고 제과점을 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "Build a brewery and a winery to supply the miners with some good and strong "
 "drinks."
 msgstr "광부들에게 맛좋고 강한 음료를 공급하려면 양조장과 포도주 양조장을 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
 msgstr "아마 돼지 사육장, 포도원과 우물 몇 개도 필요할 겁니다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "It’s up to you what you want to build. But remember – coal and iron mines "
 "need beer, marble and gold mines need wine and all mines need at least "
 "rations, which are produced out of bread OR meat OR fish."
 msgstr "당신이 지어야 할 것은 이것으로 끝입니다. 하지만 기억하십시오 – 탄광과 철광은 맥주가 필요하고 금광은 포도주가 필요하고 모든 광산은 적어도 빵, 고기, 생선으로부터 만들어지는 야전식량 이상이 필요합니다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:84
 msgid "Protect your eastern frontier"
 msgstr "동부 전선을 방어하라"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:88
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "Protect Your Eastern Frontier"
 msgstr "동부 전선을 방어하라"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:87
 msgid ""
 "Build stronger military buildings, such as an outpost, a barrier or a tower,"
 " on the eastern frontier."
 msgstr "동부전선에 감시 초소, 장벽 혹은 탑과 같은 더 강한 군사 건물을 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:88
 msgid "Build a tower to watch deep inside the enemy territory."
 msgstr "적의 영토 깊숙이 볼 수 있도록 탑을 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "Destroy the Barbarian tribe"
 msgstr "야만인 부족을 파괴하시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian Tribe"
 msgstr "야만인 부족을 파괴하시오"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
 msgstr "군인을 양성하려면 병영을 지으십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
 "Attack and completely destroy the Barbarian buildings as soon as you have "
 "enough soldiers."
 msgstr "충분한 수의 군인을 보유하자마자 야만인 건물들을 공격해서 완전히 파괴하십시오."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:101
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:99
 msgid ""
 "Build a fortress on the peninsula (near where the Barbarian headquarters "
 "stood before). Finally, this will avoid new settlements of other tribes in "
 "that region."
 msgstr "요새를 반도(전에 야만인 본부가 건설된 곳 근처)에 지으십시오. 최종적으로, 이는 해당 지역에 있는 다른 부족들의 새로운 정착지를 피할 것입니다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:107
 msgid "A New Island"
 msgstr "새로운 섬"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:137
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:149
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:157
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:237
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:255
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
 msgid "Diary of Lutius"
 msgstr "루티우스의 일지"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:111
 msgid ""
 "Finally! This island appears to have been made for us, it is a gift from the"
 " Gods to my people and myself. Until now, we have only seen a small part of "
@@ -191,19 +193,19 @@ msgid ""
 msgstr "드디어! 이 섬은 신들께서 나와 내 백성들에게 주신 선물이군, 마치 우리를 위해 만들어진 것처럼 나타났어. 지금까지 우리는 이 섬의 일부분밖에 살피지 못했지만, 그것만으로도 이미 내 마음에 햇빛이 드는 것 같아. 마치 우리가 낙원과 같은 땅, 가치를 매길 수 없는 보물을 발견한 것처럼 느껴지는 군."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:116
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:114
 msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
 msgstr "이 섬에서, 우리는 새로운 삶을 시작할 거야. 우리는 아마 우리 모두에게 새롭고 아름다운 집이 될 해방의 감시 초소를 건설할 거야."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"
-msgstr "푸른 숲"
+msgstr "갈맷빛 숲"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:124
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:122
 msgid ""
 "As Saledus and I walked through these wonderful forests in the north, we "
 "felt that our future had just begun. This land is so peaceful, good and "
@@ -211,111 +213,111 @@ msgid ""
 msgstr "살레두스와 나는 우리의 미래가 막 시작했음을 느끼며, 북쪽에 있는 환상적인 숲을 거닐고 있었다. 이 땅은 너무도 평화롭고, 아름답고 좋으며, 내 삶이 끝날 때까지 여기서 지낼 수 있을 거라 믿었다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:127
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:125
 msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "하지만 그날까지는, 많은 해가 지나야겠지! 지금, 우리는 현재에 집중해야 하고, 기초적인 건설 자재들을 생산할 나무꾼의 집 몇 개와 제재소를 건설해야 한다."
+msgstr "하지만 그날까지는, 많은 해가 지나야겠지! 지금, 우리는 현재에 집중해야 하고, 기초적인 건축 자재들을 생산할 벌목꾼의 집 몇 곳와 제재소를 건설해야 한다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:130
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr "하지만 우리는 이 자연의 풍요로움을 보존하는 걸 잊지 말아야지. 이 숲이 영원히 지속되려면, 식목업자의 집도 반드시 지어야만 한다."
+msgstr "하지만 우리는 이 자연의 풍요로움을 보존하는 걸 잊지 말아야지. 이 숲이 영원히 지속되려면, 숲꾼의 집도 반드시 지어야만 한다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
 msgstr "바위들"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:139
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:137
 msgid ""
 "Later, I walked down to the rocks in the south and looked for a place where "
 "we could build a quarry to get some granite for our larger buildings."
 msgstr "후에, 나는 바위산을 찾아 남쪽으로 내려가서 큰 건물들에 들어갈 대리석을 얻을 채석장을 지을 만한 장소를 찾고 있었다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:140
 msgid ""
 "Again, I felt like I was in paradise when I noticed that some marble-like "
 "stones were among the rocks. It seems that we will soon be able to build "
 "strong, luxurious buildings, like those we were accustomed to in Fremil."
 msgstr "바위들 사이에서 대리석 같은 돌들을 찾았을 때, 나는 내가 낙원에 있음을 다시 한번 느꼈다. 우리는 곧 프레밀에서 익숙해져 있던 크고 사치스러운 건물들을 지을 수 있을 것 같다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:145
 msgid "Wood for the Colony"
 msgstr "식민지를 위한 목재"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:149
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
 msgstr "좋은 소식이다! 오늘 우리의 목재 공급 경제가 완성되었다. 이제 우리는 미래에 건설 프로젝트에 쓸 충분한 목재를 얻을 것을 확신한다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Stones for the Colony"
 msgstr "식민지를 위한 석재"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:157
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough granite and marble to construct larger buildings."
 msgstr "대단해! 오늘 채석장 건설이 완료되었다. 이제 우리는 더 큰 건물들에 쓸 충분한 화강암과 대리석을 얻는다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:163
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Dangerous Ship Parts"
 msgstr "위험한 배의 잔해들"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:164
 msgid "Saledus looks unhappy"
 msgstr "살레두스가 불행해 보인다"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
 msgid ""
 "Sire, I don’t want to start a panic, but I found something which gives me a "
 "sinking feeling in my stomach and spreads waves of fear in my heart. As I "
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr "전하, 저는 공황에 빠지고 싶지 않지만, 제가 발견한 것이 제 속의 기분을 가라앉게 만들고 공포의 물결이 심장으로 퍼지게 합니다. 남쪽 해안으로 걸어내려갔을 때, 저는 다른 배의 잔해를 발견했습니다. 저는 이 조각들이 그 배에서 모두 나온 것인지 아닌지는 모르겠습니다. 어쨌든, 이 조각들은 오래된 것 같지 않습니다."
+msgstr "폐하, 저는 공황에 빠지고 싶지 않지만, 제가 발견한 것이 제 속의 기분을 가라앉게 만들고 공포의 물결이 심장으로 퍼지게 합니다. 남쪽 해안으로 걸어내려갔을 때, 저는 다른 배의 잔해를 발견했습니다. 저는 이 조각들이 그 배에서 모두 나온 것인지 아닌지는 모르겠습니다. 어쨌든, 이 조각들은 오래된 것 같지 않습니다."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:171
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:169
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
 msgstr "아마도 그 배에 타고 있던 사람들은 우리를 말락'모어로 오게 한 같은 폭풍우에 갇혀서 – 이 섬으로 오게 되었을 것이다."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:172
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
 msgstr "조심하시게, 그리고 우리 식민지 주변에 사각 요새나 초소 몇 개를 짓게."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:179
 msgid "Marble on the Mountain"
 msgstr "산 위의 대리석"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:180
 msgid "Saledus smiles"
-msgstr "살레두스가 미소짓는다"
+msgstr "살레두스가 미소 지었다"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:184
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:182
 msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr "전하, 좋은 소식이 있습니다: 동쪽으로 갔을 때, 큰 산을 발견했습니다. 확신할 수는 없지만 – 지질학자가 제가 옳은지 확인하겠지만 – 저 산 어딘가에서 대리석을 채굴할 수 있을 것이라 믿습니다."
+msgstr "폐하, 좋은 소식이 있습니다: 동쪽으로 갔을 때, 큰 산을 발견했습니다. 확신할 수는 없지만 – 지질학자가 제가 옳은지 확인하겠지만 – 저 산 어딘가에서 대리석을 채굴할 수 있을 것이라 믿습니다."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:185
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
@@ -323,56 +325,56 @@ msgid ""
 msgstr "채석장에서 얻을 수 있는 빈약한 양을 훨씬 뛰어넘을, 품질높은 대리석을 공급할 좋은 곳이 될 것입니다. 아마도 전하께서 이 섬이 낙원같다고 말씀하셨던 것이 맞습니다."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:188
 msgid "Please, expand to that mountain and start mining marble."
 msgstr "저 산으로 확장에서 대리석을 채굴하는 것이 어떨까요."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:195
 msgid "Further Mountains"
 msgstr "더 먼 산들"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:198
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Saledus is excited"
-msgstr "살레두스가 흥분했다"
+msgstr "살레두스는 흥분되었다"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:198
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "신이시여, 믿을 수 없는 행운의 연속이군요! 두 개의 산이 더 있고, 하나는 석탄, 다른 하나는 철광석이 많이 매장되어 있어보입니다. 즉시 철광과 탄광(혹은 숯가마), 제련소, 도구 제작소, 갑옷과 무기 제작소들을 짓기를 조언드립니다."
+msgstr "신이시여, 믿을 수 없는 행운의 연속이군요! 두 개의 산이 더 있고, 하나는 석탄, 다른 하나는 철광석이 많이 매장되어 있어보입니다. 즉시 철광과 탄광(혹은 숯가마), 제련소, 도구 제작소들, 갑옷과 무기 제작소들을 짓기를 조언드립니다."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:203
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:201
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "하지만: 이런 큰 건물들을 지으려면, 더 좋고 품위있는 건설 자재들이 필요합니다. 대리석에서 기둥을 깎아낼 석공들을 위한 집을 지어야 합니다."
+msgstr "하지만: 이런 큰 건물들을 지으려면, 더 좋고 품위있는 건축 자재들이 필요합니다. 대리석에서 기둥을 깎아낼 석공들을 위한 집을 지어야 합니다."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:204
 msgid "After everything, we can now begin to live like we did in Fremil."
 msgstr "이 모든 것이 끝나면, 우리는 프레밀에서 그랬던 것처럼 살기 시작할 겁니다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:209
 msgid "Food for the Miners"
 msgstr "광부들을 위한 음식"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:212
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
 msgid "Amalea enters…"
-msgstr "아밀레아가 들어온다..."
+msgstr "아말리아가 들어왔다…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:212
 msgid "Lutius, don’t you think you forgot something important?"
 msgstr "루티우스, 뭔가 중요한 것을 잊지 않았나요?"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:215
 msgid ""
 "It’s nice, and of course a good idea, to build mines, which will give us a "
 "more comfortable life, but the people working in the mines are unhappy with "
@@ -381,40 +383,40 @@ msgid ""
 msgstr "그래, 물론 우리에게 더 편한 삶을 제공할 광산을 짓는 것은 중요하지만, 현재 상황으로는 광산에서 일하는 사람들은 불행할 거야. 그들은 힘든 일을 해야 하고 그들이 먹을 음식을 요리할 시간은 없지."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:218
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr "그들을 도울 수 있는 방법을 생각해볼까? 확실히 뭐가 필요할 지는 모르지만... 내 추천은 이거야:"
+msgstr "그들을 도울 수 있는 방법을 생각해볼까? 확실히 뭐가 필요할 지는 모르지만… 내 추천은 이거야:"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Our New Tavern"
 msgstr "새로운 선술집"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:226
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
 msgid "Amalea smiles"
-msgstr "아말레아가 미소짓는다"
+msgstr "아말리아가 미소지었다"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:226
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
 msgstr "우리의 새로운 선술집인 '손바닥에서'를 방문했었어. 그들이 제공하는 맥주가 참 맛있더라고. 너도 거기서 한잔 해봐야 해."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:231
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:229
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
 msgstr "우리의 섬이 더 따뜻하고 친숙한 환경이 되는 것이 좋네. 고마워, 루티우스."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:233
 msgid "The Barbarians"
 msgstr "야만인들"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:237
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
@@ -422,7 +424,7 @@ msgid ""
 msgstr "신이시여! 완전히 끔찍하군. 우리가 시험에 가까워진 것처럼 보이는 군 – 그리고 살레두스가 발견했던 배의 잔해에 대고 공포를 호소했던 것이 맞는 것 같군."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:240
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
@@ -430,7 +432,7 @@ msgid ""
 msgstr "오늘, 동부 해안으로 걸어내려갔을 때, 나는 충격에 빠졌다. 나는 예전에 많은 문제가 있었던 증오스럽고, 악한, 야만인 부족들 중 하나를 발견했다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:245
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:243
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
@@ -439,90 +441,77 @@ msgid ""
 msgstr "처음에, 나는 순진했고 그들이 평화롭기를 바랬지만, 그들 중 하나가 나를 보자마자, 그들은 나를 향해 돌진했고 투창으로 나를 공격하기 시작했다. 신께 감사하게도 나는 도망가서 숨을 수 있었고, 어둠이 내려앉은 속에 우리의 식민지로 후퇴할 수 있었다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:248
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:246
 msgid "Anyway, we must build stronger military buildings as soon as possible."
 msgstr "아무튼, 우리는 가능한 한 빨리 더 강력한 군사 건물들을 건설해야 한다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:251
 msgid "Command to Attack"
 msgstr "공격 명령"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:255
 msgid ""
 "That’s good. The first big military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
 msgstr "좋아. 첫번째 큰 군사 건물이 완성되었고 채굴 기반시설들이 점점 개선되고 있어. 이제 우리는 전투를 준비할 때가 되었다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:262
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:270
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid "Victory"
 msgstr "승리"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
 msgstr "오늘은 자랑스러운 날이다. 우리는 새로운 고향을 위해 싸웠고 승리를 쟁취했다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:267
 msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
 msgstr "섬 안에는 아직 몇몇의 야만인들이 남았지만, 우리는 곧 그들을 찾을 거라 확신한다. 우리를 공격하지 않은 모든 야만인들은 보트를 타고 그들의 나라로 되돌려 보내졌다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid ""
-"You have established a working economy, trained new soldiers and driven the "
-"Barbarians from the island."
-msgstr "당신은 작업 경제를 건설하고, 새로운 군인들을 양성해서 섬에서 야만인들을 쓸어냈습니다."
+"We have established a working economy, trained new soldiers and driven the "
+"Barbarians from the island. Now we can think about our next steps."
+msgstr "우리는 작업 경제를 건설하고, 신병들을 양성해서 섬에서 야만인들을 쓸어냈습니다.이제 다음 단계에 대해 생각해 볼 수 있습니다."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"
 msgstr "시간은 흐르고"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:278
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:276
 msgid "7 days later…"
-msgstr "7일 후..."
+msgstr "7일 후…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:280
 msgid "A Message"
 msgstr "소식"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:286
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:284
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "오늘 비둘기가 우리 섬에 내려앉았다. 가져온 소식에는 나를 어두운 생각으로  가득 채우고 공포를 불러일으킨 소식이 있었다."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:287
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr "그 소식은 프레밀로 돌아올 것을 독촉하기 위해 나에게 전달된 것이었다. 제국은 야만인들과의 전쟁에 돌입했고, 그 야만인들은 내가 공격하는 것을 금지당한 북쪽의 부족들로부터 온 것이었다. 내가 할 일이 무엇인지 확실하다..."
+msgstr "그 소식은 프레밀로 돌아올 것을 독촉하기 위해 나에게 전달된 것이었다. 제국은 야만인들과의 전쟁에 돌입했고, 그 야만인들은 내가 공격하는 것을 금지당한 북쪽의 부족들로부터 온 것이었다. 내가 할 일이 무엇인지 확실하다…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "이 미션을 완료하셨습니다. 원하신다면 더 플레이하시거나, 다음 미션으로 이동할 수 있습니다."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr "새로운 목표"
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr "새로운 목표들"
+msgstr "이 임무를 완수했습니다. 원한다면 계속 할 수 있고, 그렇지 않으면 다음 임무로 이동하십시오."

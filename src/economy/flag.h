@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,9 @@
 #ifndef WL_ECONOMY_FLAG_H
 #define WL_ECONOMY_FLAG_H
 
+#include <algorithm>
 #include <deque>
+#include <iterator>
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
@@ -38,7 +40,7 @@ class WareInstance;
 class FlagDescr : public MapObjectDescr {
 public:
 	FlagDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname, "") {
+	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
 	}
 	~FlagDescr() override {
 	}
@@ -113,7 +115,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void detach_building(EditorGameBase&);
 
 	bool has_roadbase() const {
-		return roads_[0] || roads_[1] || roads_[2] || roads_[3] || roads_[4] || roads_[5];
+		return std::any_of(std::begin(roads_), std::end(roads_),
+		                   [](const RoadBase* road) { return road != nullptr; });
 	}
 	bool has_waterway() const {
 		return nr_of_waterways() > 0;

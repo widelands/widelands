@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,11 +21,9 @@
 
 #include <memory>
 
-#include <SDL.h>
 #include <SDL_image.h>
 #include <png.h>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/texture.h"
 #include "io/fileread.h"
@@ -86,8 +84,9 @@ bool save_to_png(Texture* texture, StreamWrite* sw, ColorType color_type) {
 	png_structp png_ptr = png_create_write_struct(
 	   PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(nullptr), nullptr, nullptr);
 
-	if (!png_ptr)
+	if (!png_ptr) {
 		throw wexception("save_to_png: could not create png struct");
+	}
 
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 	if (!info_ptr) {

@@ -1,0 +1,13 @@
+# Automatically created by Widelands r24475[3abcee7@HEAD] (Release)
+
+[global]
+packet_version="1"
+map_w="240"
+map_h="224"
+nr_players="5"
+name=_"Astoria 2.R"
+author=_"pbuczny@gmail.com – edited by Nordfriese"
+descr=_"Long, economic play in beautiful land. Try every player!"
+hint=
+tags="ferries,ffa,official,seafaring,unbalanced"
+theme="summer"

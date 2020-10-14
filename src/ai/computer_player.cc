@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #include "ai/computer_player.h"
 
 #include "ai/defaultai.h"
+
+namespace AI {
 
 ComputerPlayer::ComputerPlayer(Widelands::Game& g, Widelands::PlayerNumber const pid)
    : game_(g), player_number_(pid) {
@@ -78,3 +80,4 @@ const ComputerPlayer::Implementation* ComputerPlayer::get_implementation(const s
 	}
 	return vec[0];
 }
+}  // namespace AI

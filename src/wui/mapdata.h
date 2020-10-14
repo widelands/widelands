@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,6 +74,8 @@ public:
 	MapAuthorData authors;
 	std::string description;
 	std::string hint;
+	std::string theme;
+	std::string background;
 	uint32_t nrplayers;
 	uint32_t width;
 	uint32_t height;

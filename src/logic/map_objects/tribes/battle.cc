@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -35,7 +34,7 @@ namespace Widelands {
 
 namespace {
 BattleDescr g_battle_descr("battle", "Battle");
-}
+}  // namespace
 
 const BattleDescr& Battle::descr() const {
 	return g_battle_descr;
@@ -116,17 +115,20 @@ void Battle::cancel(Game& game, Soldier& soldier) {
 	} else if (&soldier == second_) {
 		second_ = nullptr;
 		soldier.set_battle(game, nullptr);
-	} else
+	} else {
 		return;
+	}
 
 	schedule_destroy(game);
 }
 
 bool Battle::locked(Game& game) {
-	if (!first_ || !second_)
+	if (!first_ || !second_) {
 		return false;
-	if (game.get_gametime() - creationtime_ < 1000)
+	}
+	if (game.get_gametime() - creationtime_ < 1000) {
 		return true;  // don't change battles around willy-nilly
+	}
 	return first_->get_position() == second_->get_position();
 }
 
@@ -182,11 +184,11 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	}
 
 	if (soldier.get_current_health() < 1) {
-		molog("[battle] soldier %u lost the battle\n", soldier.serial());
+		molog(game.get_gametime(), "[battle] soldier %u lost the battle\n", soldier.serial());
 		soldier.get_owner()->count_casualty();
 		opponent(soldier)->get_owner()->count_kill();
 		soldier.start_task_die(game);
-		molog("[battle] waking up winner %d\n", opponent(soldier)->serial());
+		molog(game.get_gametime(), "[battle] waking up winner %d\n", opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
 		return schedule_destroy(game);
 	}
@@ -198,6 +200,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// Here is a timeout to prevent battle freezes
 	if (waitingForOpponent && (game.get_gametime() - creationtime_) > 90 * 1000) {
 		molog(
+		   game.get_gametime(),
 		   "[battle] soldier %u waiting for opponent %u too long (%5d sec), cancelling battle...\n",
 		   soldier.serial(), opponent(soldier)->serial(),
 		   (game.get_gametime() - creationtime_) / 1000);
@@ -253,8 +256,9 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// The function calculate_round inverts value of first_strikes_, so
 	// attacker will be the first_ when first_strikes_ = false and
 	// attacker will be second_ when first_strikes_ = true
-	molog("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n", soldier.serial(),
-	      opponent(soldier)->serial(), this_soldier_is, first_strikes_, last_attack_hits_);
+	molog(game.get_gametime(), "[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n",
+	      soldier.serial(), opponent(soldier)->serial(), this_soldier_is, first_strikes_,
+	      last_attack_hits_);
 
 	bool shorten_animation = false;
 	if (this_soldier_is == 1) {
@@ -291,7 +295,8 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	// If the soldier will die as soon as the animation is complete, don't
 	// show it for the full length to prevent overlooping (bug 1817664)
 	shorten_animation &= damage_ >= soldier.get_current_health();
-	molog("[battle] Starting animation %s for soldier %d\n", what_anim.c_str(), soldier.serial());
+	molog(game.get_gametime(), "[battle] Starting animation %s for soldier %d\n", what_anim.c_str(),
+	      soldier.serial());
 	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim, &soldier),
 	                        shorten_animation ? 850 : 1000);
 }
@@ -313,7 +318,7 @@ void Battle::calculate_round(Game& game) {
 	first_strikes_ = !first_strikes_;
 
 	uint32_t const hit = game.logic_rand() % 100;
-	if (hit > defender->get_evade()) {
+	if (hit >= defender->get_evade()) {
 		// Attacker hits!
 		last_attack_hits_ = true;
 
@@ -355,18 +360,20 @@ void Battle::Loader::load_pointers() {
 	Battle& battle = get<Battle>();
 	try {
 		MapObject::Loader::load_pointers();
-		if (first_)
+		if (first_) {
 			try {
 				battle.first_ = &mol().get<Soldier>(first_);
 			} catch (const WException& e) {
 				throw wexception("soldier 1 (%u): %s", first_, e.what());
 			}
-		if (second_)
+		}
+		if (second_) {
 			try {
 				battle.second_ = &mol().get<Soldier>(second_);
 			} catch (const WException& e) {
 				throw wexception("soldier 2 (%u): %s", second_, e.what());
 			}
+		}
 	} catch (const WException& e) {
 		throw wexception("battle: %s", e.what());
 	}

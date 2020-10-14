@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # Любомир Василев, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-10-09 07:57+0000\n"
-"PO-Revision-Date: 2019-10-09 08:04+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-09-04 08:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -152,7 +152,7 @@ msgid "General"
 msgstr "Общи"
 
 #: ../../data/scripting/editor/editor_help.lua:59
-#: ../../data/scripting/editor/editor_introduction.lua:11
+#: ../../data/scripting/editor/editor_introduction.lua:10
 msgid "Introduction"
 msgstr "Въведение"
 
@@ -169,61 +169,70 @@ msgstr "Терени"
 msgid "Trees"
 msgstr "Дървета"
 
-#: ../../data/scripting/editor/editor_introduction.lua:9
+#: ../../data/scripting/editor/editor_introduction.lua:8
 msgid "The Widelands Editor"
 msgstr "Редакторът на Widelands"
 
-#: ../../data/scripting/editor/editor_introduction.lua:13
+#: ../../data/scripting/editor/editor_introduction.lua:12
 msgid ""
 "This editor is intended for players who would like to design their own maps "
 "to use with Widelands."
 msgstr "Този редактор е предназначен за играчите, които биха искали да проектират свои собствени карти за Widelands."
 
-#: ../../data/scripting/editor/editor_introduction.lua:14
+#: ../../data/scripting/editor/editor_introduction.lua:13
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
 msgstr "Както виждате, редакторът е в процес на разработка и с развитието му този текст ще става все по-дълъг."
 
-#: ../../data/scripting/editor/editor_introduction.lua:17
+#: ../../data/scripting/editor/editor_introduction.lua:16
 msgid "The wiki also includes a short tutorial on how to build a map."
 msgstr "Уикито също включва кратко обучение за създаване на карти."
 
-#: ../../data/scripting/editor/terrain_help.lua:21
+#: ../../data/scripting/editor/terrain_help.lua:22
 msgid "Resources"
 msgstr "Ресурси"
 
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
-#: ../../data/scripting/editor/terrain_help.lua:25
+#: ../../data/scripting/editor/terrain_help.lua:26
 msgid "Valid Resource:"
 msgstr ""
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
-#: ../../data/scripting/editor/terrain_help.lua:28
+#: ../../data/scripting/editor/terrain_help.lua:29
 msgid "Valid Resources:"
 msgstr ""
 
-#: ../../data/scripting/editor/terrain_help.lua:39
+#: ../../data/scripting/editor/terrain_help.lua:40
 msgid "Default:"
 msgstr "По подразбиране:"
 
 #. TRANSLATORS: e.g. "5x Water"
-#: ../../data/scripting/editor/terrain_help.lua:41
+#: ../../data/scripting/editor/terrain_help.lua:42
 msgid "%1%x %2%"
 msgstr "%1%х %2%"
 
 #. TRANSLATORS: A header in the editor help
-#: ../../data/scripting/editor/terrain_help.lua:72
+#: ../../data/scripting/editor/terrain_help.lua:56
+#: ../../data/scripting/editor/terrain_tooltip.lua:36
 msgid "Probability of trees growing"
 msgstr "Шанс да растат дървета"
 
-#: ../../data/scripting/editor/terrain_help.lua:77
+#: ../../data/scripting/editor/terrain_help.lua:61
+#: ../../data/scripting/editor/terrain_tooltip.lua:38
 msgid "No trees will grow here."
 msgstr "Тук няма да растат дървета."
+
+#: ../../data/scripting/editor/terrain_tooltip.lua:26
+#: ../../data/scripting/editor/tree_tooltip.lua:23
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:19
+#: ../../data/scripting/editor/tree_tooltip.lua:32
 msgid "Preferred terrains"
 msgstr "Предпочитани видове терен"

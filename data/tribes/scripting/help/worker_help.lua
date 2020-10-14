@@ -157,10 +157,14 @@ end
 --    :returns: Help string for the worker
 --
 function worker_help_string(tribe, worker_description)
-   include(worker_description.helptext_script)
-
-   local result = h2(_"Purpose") ..
-      li_image(worker_description.icon_name, worker_helptext())
+   local helptexts = worker_description:helptexts(tribe.name)
+   local result = ""
+   if helptexts["purpose"] ~= nil then
+      result = h2(_"Purpose") ..
+         li_image(worker_description.icon_name, helptexts["purpose"])
+   else
+      result = img(worker_description.icon_name)
+   end
 
    if (worker_description.buildable) then
       -- Get the tools for the workers.
@@ -246,12 +250,14 @@ end
 
 return {
    func = function(tribename, workername)
-      set_textdomain("tribes_encyclopedia")
+      push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       local worker_description = wl.Game():get_worker_description(workername)
-      return {
+      local r = {
          title = worker_description.descname,
          text = worker_help_string(tribe, worker_description)
       }
+      pop_textdomain()
+      return r
    end
 }

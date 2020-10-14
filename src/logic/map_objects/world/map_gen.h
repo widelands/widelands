@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,29 +31,29 @@ struct MapGenInfo;
 /// Holds world and area specific information for the map generator.
 /// Areas are: Water, Land, Wasteland and Mountains.
 struct MapGenAreaInfo {
-	enum MapGenAreaType { atWater, atLand, atWasteland, atMountains };
+	enum class Area { kWater, kLand, kWasteland, kMountains };
 
-	enum MapGenTerrainType {
-		ttWaterOcean,
-		ttWaterShelf,
-		ttWaterShallow,
+	enum class Terrain {
+		kWaterOcean,
+		kWaterShelf,
+		kWaterShallow,
 
-		ttLandCoast,
-		ttLandLand,
-		ttLandUpper,
+		kLandCoast,
+		kLandLand,
+		kLandUpper,
 
-		ttWastelandInner,
-		ttWastelandOuter,
+		kWastelandInner,
+		kWastelandOuter,
 
-		ttMountainsFoot,
-		ttMountainsMountain,
-		ttMountainsSnow
+		kMountainsFoot,
+		kMountainsMountain,
+		kMountainsSnow
 	};
 
-	MapGenAreaInfo(const LuaTable& table, const World& world, MapGenAreaType area_type);
+	MapGenAreaInfo(const LuaTable& table, const World& world, Area area_type);
 
-	size_t get_num_terrains(MapGenTerrainType) const;
-	DescriptionIndex get_terrain(MapGenTerrainType terrain_type, uint32_t index) const;
+	size_t get_num_terrains(Terrain) const;
+	DescriptionIndex get_terrain(Terrain terrain_type, uint32_t index) const;
 	uint32_t get_weight() const {
 		return weight_;
 	}
@@ -94,7 +94,7 @@ struct MapGenLandResource {
 	uint32_t get_weight() const {
 		return weight_;
 	}
-	const MapGenBobCategory* get_bob_category(MapGenAreaInfo::MapGenTerrainType terrain_type) const;
+	const MapGenBobCategory* get_bob_category(MapGenAreaInfo::Terrain terrain_type) const;
 
 	uint8_t get_immovable_density() const {
 		return immovable_density_;
@@ -122,8 +122,8 @@ private:
 struct MapGenInfo {
 	MapGenInfo(const LuaTable& table, const World& world);
 
-	size_t get_num_areas(MapGenAreaInfo::MapGenAreaType area_type) const;
-	const MapGenAreaInfo& get_area(MapGenAreaInfo::MapGenAreaType area_type, uint32_t index) const;
+	size_t get_num_areas(MapGenAreaInfo::Area area_type) const;
+	const MapGenAreaInfo& get_area(MapGenAreaInfo::Area area_type, uint32_t index) const;
 	const MapGenBobCategory* get_bob_category(const std::string& bob_category) const;
 
 	uint8_t get_water_ocean_height() const {

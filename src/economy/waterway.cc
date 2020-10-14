@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ namespace Widelands {
 // dummy instance because MapObject needs a description
 namespace {
 const WaterwayDescr g_waterway_descr("waterway", "Waterway");
-}
+}  // namespace
 
 bool Waterway::is_waterway_descr(MapObjectDescr const* const descr) {
 	return descr == &g_waterway_descr;
@@ -72,7 +72,7 @@ void Waterway::link_into_flags(EditorGameBase& egbase, bool loading) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (!loading) {
-		if (is_a(Game, &egbase)) {
+		if (egbase.is_game()) {
 			request_ferry(egbase);
 		}
 	}
@@ -146,13 +146,13 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	path.truncate(index);
 	secondpath.trim_start(index);
 
-	molog("splitting waterway: first part:\n");
+	molog(game.get_gametime(), "splitting waterway: first part:\n");
 	for (const Coords& coords : path.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
-	molog("                    second part:\n");
+	molog(game.get_gametime(), "                    second part:\n");
 	for (const Coords& coords : secondpath.get_coords()) {
-		molog("* (%i, %i)\n", coords.x, coords.y);
+		molog(game.get_gametime(), "* (%i, %i)\n", coords.x, coords.y);
 	}
 
 	// change waterway size and reattach
@@ -191,11 +191,11 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 		}
 
 		if (other) {
-			molog("Assigning the ferry to the NEW waterway\n");
+			molog(game.get_gametime(), "Assigning the ferry to the NEW waterway\n");
 			ferry_->set_destination(game, &newww);
 			request_ferry(game);
 		} else {
-			molog("Assigning the ferry to the OLD waterway\n");
+			molog(game.get_gametime(), "Assigning the ferry to the OLD waterway\n");
 			ferry_->set_destination(game, this);
 			newww.request_ferry(game);
 		}
@@ -227,8 +227,8 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 void Waterway::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog("Ferry %u\n", ferry_ ? ferry_->serial() : 0);
-	molog("FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
+	molog(egbase.get_gametime(), "Ferry %u\n", ferry_ ? ferry_->serial() : 0);
+	molog(egbase.get_gametime(), "FerryFleet %u\n", fleet_ ? fleet_->serial() : 0);
 }
 
 }  // namespace Widelands

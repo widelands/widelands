@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,10 @@
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
+#include <SDL_events.h>
+
 #include "base/rect.h"
+#include "graphic/styles/progress_bar_style.h"
 #include "ui_basic/fullscreen_window.h"
 
 class RenderTarget;
@@ -42,7 +45,7 @@ struct IProgressVisualization {
 
 /// Manages a progress window on the screen.
 struct ProgressWindow : public UI::FullscreenWindow {
-	explicit ProgressWindow(const std::string& background = std::string());
+	explicit ProgressWindow(const std::string& theme, const std::string& background);
 	~ProgressWindow() override;
 
 	/// Register additional visualization (tips/hints, animation, etc)
@@ -61,8 +64,12 @@ private:
 	Vector2i label_center_;
 	Recti label_rectangle_;
 	VisualizationArray visualizations_;
+	std::string theme_;
 	std::string background_;
 	const UI::ProgressbarStyleInfo& style_;
+
+	static std::vector<SDL_Event> event_buffer_;
+	static bool ui_key(bool down, SDL_Keysym code);
 
 	void draw(RenderTarget&) override;
 	void update(bool repaint);

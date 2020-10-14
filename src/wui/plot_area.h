@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,10 +87,10 @@ struct WuiPlotArea : public UI::Panel {
 
 	uint32_t get_game_time_id();
 
-	void register_plot_data(uint32_t id, const std::vector<uint32_t>* data, RGBColor);
-	void show_plot(uint32_t id, bool t);
+	void register_plot_data(unsigned id, const std::vector<uint32_t>* data, RGBColor);
+	void show_plot(unsigned id, bool t);
 
-	void set_plotcolor(uint32_t id, RGBColor color);
+	void set_plotcolor(unsigned id, RGBColor color);
 
 	std::vector<std::string> get_labels() const;
 
@@ -118,7 +118,7 @@ protected:
 		bool showplot;
 		RGBColor plotcolor;
 	};
-	std::vector<PlotData> plotdata_;
+	std::map<unsigned, PlotData> plotdata_;
 
 	Plotmode plotmode_;
 	uint32_t sample_rate_;
@@ -196,7 +196,7 @@ public:
 
 	void draw(RenderTarget&) override;
 
-	void register_negative_plot_data(uint32_t id, const std::vector<uint32_t>* data);
+	void register_negative_plot_data(unsigned id, const std::vector<uint32_t>* data);
 
 protected:
 	/// Recalculates the data
@@ -212,7 +212,7 @@ private:
 	struct ReducedPlotData {
 		const std::vector<uint32_t>* absolute_data;
 	};
-	std::vector<ReducedPlotData> negative_plotdata_;
+	std::map<unsigned, ReducedPlotData> negative_plotdata_;
 };
 
 #endif  // end of include guard: WL_WUI_PLOT_AREA_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,13 +71,15 @@ void Field::set_brightness(int32_t const l,
 
 	float b = calc_brightness(l, r, tl, tr, bl, br) - flatbrightness;
 
-	if (b > 0)
+	if (b > 0) {
 		b *= 1.5;
+	}
 
-	if (b < -128)
+	if (b < -128) {
 		b = -128;
-	else if (b > 127)
+	} else if (b > 127) {
 		b = 127;
+	}
 	brightness = static_cast<int8_t>(b);
 }
 }  // namespace Widelands

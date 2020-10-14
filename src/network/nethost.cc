@@ -69,7 +69,7 @@ void NetHost::stop_listening() {
 	static const auto do_stop = [](boost::asio::ip::tcp::acceptor& acceptor) {
 		boost::system::error_code ec;
 		if (acceptor.is_open()) {
-			log("[NetHost] Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
+			log_info("[NetHost] Closing a listening IPv%d socket.\n", get_ip_version(acceptor));
 			acceptor.close(ec);
 		}
 		// Ignore errors
@@ -135,33 +135,6 @@ void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packe
 	}
 }
 
-#if BOOST_VERSION >= 106600
-// This method is run within a thread
-void NetHost::start_accepting(boost::asio::ip::tcp::acceptor& acceptor) {
-
-	if (!is_listening()) {
-		return;
-	}
-
-	// Do an asynchronous wait until something can be read on the acceptor.
-	// If we can read something, then there is a client that wants to connect to us
-	acceptor.async_wait(boost::asio::ip::tcp::acceptor::wait_read,
-	                    [this, &acceptor](const boost::system::error_code& ec) {
-		                    if (!ec) {
-			                    // No error occurred, so try to establish a connection
-			                    std::unique_ptr<BufferedConnection> conn =
-			                       BufferedConnection::accept(acceptor);
-			                    if (conn) {
-				                    assert(conn->is_connected());
-				                    std::lock_guard<std::mutex> lock(mutex_accept_);
-				                    accept_queue_.push(std::move(conn));
-			                    }
-		                    }
-		                    // Wait for the next client
-		                    start_accepting(acceptor);
-		                 });
-}
-#else
 // This method is run within a thread
 void NetHost::start_accepting(
    boost::asio::ip::tcp::acceptor& acceptor,
@@ -179,7 +152,8 @@ void NetHost::start_accepting(
 	acceptor.async_accept(
 	   *(pair.second), [this, &acceptor, &pair](const boost::system::error_code& ec) {
 		   if (!ec) {
-			   // No error occurred, so try to establish a connection
+			   // No error occurred, so we have establish a (TCP) connection.
+			   // We can't say whether it is valid Widelands client yet
 			   pair.first->notify_connected();
 			   assert(pair.first->is_connected());
 			   std::lock_guard<std::mutex> lock(mutex_accept_);
@@ -189,35 +163,29 @@ void NetHost::start_accepting(
 		   }
 		   // Wait for the next client
 		   start_accepting(acceptor, pair);
-		});
+	   });
 }
-#endif  // Boost version check
 
 NetHost::NetHost(const uint16_t port)
    : clients_(), next_id_(1), io_service_(), acceptor_v4_(io_service_), acceptor_v6_(io_service_) {
 
 	if (open_acceptor(
 	       &acceptor_v4_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))) {
-		log("[NetHost] Opening a listening IPv4 socket on TCP port %u\n", port);
+		log_info("[NetHost] Opening a listening IPv4 socket on TCP port %u\n", port);
 	}
 	if (open_acceptor(
 	       &acceptor_v6_, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v6(), port))) {
-		log("[NetHost] Opening a listening IPv6 socket on TCP port %u\n", port);
+		log_info("[NetHost] Opening a listening IPv6 socket on TCP port %u\n", port);
 	}
 
-#if BOOST_VERSION >= 106600
-	log("[NetHost] Using the new acceptors\n");
-	start_accepting(acceptor_v4_);
-	start_accepting(acceptor_v6_);
-#else
-	log("[NetHost] Using the old acceptors\n");
+	log_info("[NetHost] Starting to listen for network connections\n");
 	start_accepting(acceptor_v4_, accept_pair_v4_);
 	start_accepting(acceptor_v6_, accept_pair_v6_);
-#endif
+
 	asio_thread_ = std::thread([this]() {
-		log("[NetHost] Starting networking thread\n");
+		log_info("[NetHost] Starting networking thread\n");
 		io_service_.run();
-		log("[NetHost] Stopping networking thread\n");
+		log_info("[NetHost] Stopping networking thread\n");
 	});
 }
 

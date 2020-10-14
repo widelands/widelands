@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,11 +98,8 @@
 	void operator=(const TypeName&) = delete
 
 // Wrapper macro around a dynamic_cast.
+// Keep in mind that dynamic_casts are performance-hungry, so use this sparingly please.
 #define upcast(type, identifier, source) type* const identifier = dynamic_cast<type*>(source)
-
-// Useful when you want to know if [typeid(source) == typeof(type)*], without
-// the side-effect upcast has of creating a new identifier which won't be used.
-#define is_a(type, source) (dynamic_cast<const type*>(source) != nullptr)
 
 // consistency check for printf arguments
 #ifdef __GNUC__

@@ -1,24 +1,13 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_mead_brewery",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Mead Brewery"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-
-   enhancement_cost = {
-      brick = 3,
-      granite = 2,
-      log = 1,
-      reed = 1
-   },
-   return_on_dismantle_on_enhanced = {
-      brick = 2,
-      granite = 1
-   },
 
    spritesheets = {
       idle = {
@@ -60,20 +49,15 @@ tribes:new_productionsite_type {
       { name = "water", amount = 8 },
       { name = "honey", amount = 6 },
    },
-   outputs = {
-      "mead",
-      "beer"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=brew_mead",
             "call=brew_beer",
             "call=brew_mead_2",
-            "return=no_stats"
          }
       },
       -- 2 identical programs for mead to prevent unnecessary skipping penalty
@@ -83,8 +67,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
-            "sleep=30000",
-            "animate=working 35000",
+            "sleep=duration:30s",
+            "animate=working duration:35s",
             "produce=mead"
          }
       },
@@ -94,8 +78,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
             "consume=barley water honey",
-            "sleep=30000",
-            "animate=working 35000",
+            "sleep=duration:30s",
+            "animate=working duration:35s",
             "produce=mead"
          }
       },
@@ -105,10 +89,12 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs beer",
             "consume=barley water",
-            "sleep=30000",
-            "animate=working 30000",
+            "sleep=duration:30s",
+            "animate=working duration:30s",
             "produce=beer"
          }
       },
    },
 }
+
+pop_textdomain()

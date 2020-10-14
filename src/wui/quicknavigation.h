@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
 #ifndef WL_WUI_QUICKNAVIGATION_H
 #define WL_WUI_QUICKNAVIGATION_H
 
-#include <SDL_keyboard.h>
-
 #include "wui/mapview.h"
+
+constexpr uint16_t kQuicknavSlots = 9;
 
 /**
  * Provide quick navigation shortcuts.
@@ -45,7 +45,7 @@ struct QuickNavigation {
 	void set_landmark(size_t index, const MapView::View& view);
 
 	// Returns a pointer to the first element in the landmarks array
-	const std::vector<Landmark>& landmarks() const {
+	const Landmark* landmarks() const {
 		return landmarks_;
 	}
 
@@ -53,14 +53,22 @@ struct QuickNavigation {
 
 private:
 	void view_changed();
+	void jumped();
 
 	MapView* map_view_;
 
 	bool havefirst_;
 	MapView::View current_;
 
-	// Landmarks that were set explicitly by the player, mapped on the 0-9 keys.
-	std::vector<Landmark> landmarks_;
+	// Landmarks that were set explicitly by the player, mapped on the 1-9 keys.
+	Landmark landmarks_[kQuicknavSlots];
+
+	// navigation with ',' and '.'
+	std::list<MapView::View> previous_locations_;
+	std::list<MapView::View> next_locations_;
+	// Ignore the initial (0,0,1×) view
+	bool location_jumping_started_;
+	void insert_if_applicable(std::list<MapView::View>&);
 };
 
 #endif  // end of include guard: WL_WUI_QUICKNAVIGATION_H

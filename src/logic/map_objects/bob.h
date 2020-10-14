@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,22 +26,12 @@
 #include "graphic/animation/diranimations.h"
 #include "logic/map_objects/info_to_draw.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/path.h"
 #include "logic/widelands_geometry.h"
 
 namespace Widelands {
-
-/**
- * BobProgramBase is only used that
- * get_name always works
- */
-
-struct BobProgramBase {
-	virtual ~BobProgramBase() {
-	}
-	virtual std::string get_name() const = 0;
-};
 
 class Bob;
 
@@ -219,7 +209,7 @@ public:
 		DirAnimations diranims;
 		Path* path;
 		Route* route;
-		const BobProgramBase* program;  ///< pointer to current program
+		const MapObjectProgram* program;  ///< pointer to current program
 	};
 
 	MO_DESCR(BobDescr)
@@ -274,7 +264,7 @@ public:
 
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
-	void start_task_idle(Game&, uint32_t anim, int32_t timeout);
+	void start_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
 	bool is_idle();
 
 	/// This can fail (and return false). Therefore the caller must check the
@@ -415,7 +405,7 @@ protected:
 
 	protected:
 		virtual const Task* get_task(const std::string& name);
-		virtual const BobProgramBase* get_program(const std::string& name);
+		virtual const MapObjectProgram* get_program(const std::string& name);
 
 	private:
 		struct LoadState {

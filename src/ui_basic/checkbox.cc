@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,9 @@
 
 #include "ui_basic/checkbox.h"
 
+#include <SDL_mouse.h>
+
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
@@ -51,6 +52,7 @@ Statebox::Statebox(Panel* const parent,
 	set_desired_size(w, h);
 	set_size(w, h);
 	set_flags(Has_Custom_Picture, true);
+	set_can_focus(true);
 }
 
 Statebox::Statebox(Panel* const parent,
@@ -60,16 +62,17 @@ Statebox::Statebox(Panel* const parent,
                    int width)
    : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
-     pic_graphics_(g_gr->images().get("images/ui_basic/checkbox_light.png")),
+     pic_graphics_(g_image_cache->get("images/ui_basic/checkbox_light.png")),
      rendered_text_(nullptr),
      label_text_(label_text) {
 	set_flags(Has_Text, !label_text_.empty());
+	set_can_focus(true);
 	layout();
 }
 
 void Statebox::layout() {
-	// We only need to relayout if we have text
-	if (flags_ & Has_Text) {
+	// We only need to relayout if we have text and the available width changed
+	if ((flags_ & Has_Text)) {
 		int w = get_w();
 		int h = kStateboxSize;
 		int pic_width = kStateboxSize;
@@ -83,12 +86,11 @@ void Statebox::layout() {
 		      nullptr :
 		      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
 		                       text_width(get_w(), pic_width));
-		if (rendered_text_.get()) {
+		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
 		set_desired_size(w, h);
-		set_size(w, h);
 	}
 }
 
@@ -99,13 +101,15 @@ void Statebox::layout() {
  * Args: enabled  true if the checkbox should be enabled, false otherwise
  */
 void Statebox::set_enabled(bool const enabled) {
-	if (((flags_ & Is_Enabled) > 1) && enabled)
+	if (((flags_ & Is_Enabled) > 1) && enabled) {
 		return;
+	}
 
 	set_flags(Is_Enabled, enabled);
+	set_can_focus(enabled);
 
 	if (!(flags_ & Has_Custom_Picture)) {
-		pic_graphics_ = g_gr->images().get(enabled ? "images/ui_basic/checkbox_light.png" :
+		pic_graphics_ = g_image_cache->get(enabled ? "images/ui_basic/checkbox_light.png" :
 		                                             "images/ui_basic/checkbox.png");
 		set_flags(Is_Highlighted, (flags_ & Is_Highlighted) && (flags_ & Is_Enabled));
 	}
@@ -127,6 +131,17 @@ void Statebox::set_state(bool const on) {
 /**
  * Redraw the entire checkbox
  */
+void Statebox::draw_overlay(RenderTarget& dst) {
+	Panel::draw_overlay(dst);
+	if (flags_ & Has_Custom_Picture) {
+		// TODO(Nordfriese): Move colours to style manager
+		if (flags_ & Is_Checked) {
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(229, 116, 2));
+		} else if (flags_ & Is_Highlighted) {
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
+		}
+	}
+}
 void Statebox::draw(RenderTarget& dst) {
 	if (flags_ & Has_Custom_Picture) {
 		// center picture
@@ -134,19 +149,12 @@ void Statebox::draw(RenderTarget& dst) {
 		const uint16_t h = pic_graphics_->height();
 
 		dst.blit(Vector2i((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
-
-		if (flags_ & Is_Checked) {
-			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(229, 116, 2));
-		} else if (flags_ & Is_Highlighted) {
-			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
-		}
 	} else {
-		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
-		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
+		static_assert(0 <= kStateboxSize, "assert(0 <= kStateboxSize) failed.");
 		Vector2i image_anchor = Vector2i::zero();
 		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 
-		if (rendered_text_.get()) {
+		if (rendered_text_) {
 			if (UI::g_fh->fontset()->is_rtl()) {
 				text_anchor.x = 0;
 				image_anchor.x = rendered_text_->width() + kPadding;
@@ -155,13 +163,14 @@ void Statebox::draw(RenderTarget& dst) {
 			rendered_text_->draw(dst, text_anchor);
 		}
 
-		dst.blitrect(
-		   image_anchor, pic_graphics_, Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0),
-		                                      kStateboxSize, kStateboxSize));
+		dst.blitrect(image_anchor, pic_graphics_,
+		             Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0), kStateboxSize,
+		                   kStateboxSize));
 
-		if (flags_ & Is_Highlighted)
+		if (flags_ & Is_Highlighted) {
 			dst.draw_rect(
 			   Recti(image_anchor, kStateboxSize + 1, kStateboxSize + 1), RGBColor(100, 100, 80));
+		}
 	}
 }
 
@@ -185,6 +194,14 @@ bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 
 bool Statebox::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) {
 	return true;  // We handle this always by lighting up
+}
+
+bool Statebox::handle_key(bool down, SDL_Keysym code) {
+	if (down && code.sym == SDLK_SPACE) {
+		button_clicked();
+		return true;
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**

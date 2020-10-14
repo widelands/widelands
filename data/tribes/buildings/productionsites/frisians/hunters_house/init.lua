@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_hunters_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Hunter’s House"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -43,34 +43,25 @@ tribes:new_productionsite_type {
       prohibited_till = 480
    },
 
-   indicate_workarea_overlaps = {
-      frisians_hunters_house = false,
-   },
-
    working_positions = {
       frisians_hunter = 1
    },
 
-   outputs = {
-      "meat",
-      "fur"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "callworker=hunt",
-            "sleep=35000",
+            "sleep=duration:35s",
             "produce=fur"
          }
       },
@@ -85,3 +76,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 33
    },
 }
+
+pop_textdomain()

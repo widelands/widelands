@@ -27,7 +27,7 @@ run(function()
    map:recalculate_seafaring()
    assert_equal(true, map.allows_seafaring)
 
-   stable_save(game, "port_spaces")
+   stable_save(game, "port_spaces", 1000)
    assert_equal(3, map.number_of_port_spaces)
    assert_equal(true, map.allows_seafaring)
    map:recalculate_seafaring()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 by the Widelands Development Team
+ * Copyright (C) 2013-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,8 +41,9 @@ void MapVersionPacket::read(FileSystem& fs,
 }
 
 void MapVersionPacket::pre_read(FileSystem& fs, Map* map, bool skip, bool is_post_one_world) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	Profile prof;
 	try {

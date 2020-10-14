@@ -1,22 +1,24 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_ironmine_deep",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Deep Iron Mine"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "mine",
-   enhancement = "barbarians_ironmine_deeper",
 
-   enhancement_cost = {
-      log = 4,
-      granite = 2
-   },
-   return_on_dismantle_on_enhanced = {
-      log = 2,
-      granite = 1
+   enhancement = {
+      name = "barbarians_ironmine_deeper",
+      enhancement_cost = {
+         log = 4,
+         granite = 2
+      },
+      enhancement_return_on_dismantle = {
+         log = 2,
+         granite = 1
+      }
    },
 
    animations = {
@@ -39,7 +41,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "iron",
+      mines = "resource_iron",
       mines_percent = 60
    },
 
@@ -51,36 +53,26 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "snack", amount = 6 }
    },
-   outputs = {
-      "iron_ore"
-   },
-
-   indicate_workarea_overlaps = {
-      barbarians_ironmine = false,
-      barbarians_ironmine_deep = false,
-      barbarians_ironmine_deeper = false,
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
             "return=skipped unless economy needs iron_ore",
             "consume=snack",
-            "sleep=40000",
+            "sleep=duration:40s",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
-            "return=no_stats"
          }
       },
       mine_produce = {
          descname = _"mining iron",
          actions = {
-            "animate=working 9500",
-            "mine=iron 2 66 5 17",
+            "animate=working duration:9s500ms",
+            "mine=resource_iron radius:2 yield:66.66% when_empty:5% experience_on_fail:17%",
             "produce=iron_ore",
          }
       },
@@ -101,3 +93,5 @@ tribes:new_productionsite_type {
          pgettext("barbarians_building", "This iron mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."),
    },
 }
+
+pop_textdomain()

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,6 +78,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	virtual void set_map(const std::string& mapname,
 	                     const std::string& mapfilename,
+	                     const std::string&,
+	                     const std::string&,
 	                     uint32_t maxplayers,
 	                     bool savegame = false) override;
 	void set_player_state(uint8_t number, PlayerSettings::State state) override;
@@ -99,6 +101,9 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	void set_peaceful_mode(bool peace) override;
 	bool is_peaceful_mode() override;
+
+	void set_custom_starting_positions(bool) override;
+	bool get_custom_starting_positions() override;
 
 	// ChatProvider interface
 	void send(const std::string& msg) override;

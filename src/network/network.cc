@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 #include "network/network.h"
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/log.h"
 
@@ -38,19 +38,19 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		boost::asio::ip::tcp::resolver::iterator iter = resolver.resolve(query);
 		if (iter == boost::asio::ip::tcp::resolver::iterator()) {
 			// Resolution failed
-			log("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
-			    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
+			log_err("Could not resolve network name '%s:%u' to %s-address\n", hostname.c_str(), port,
+			        ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"));
 			return false;
 		}
 		addr->ip = iter->endpoint().address();
 		addr->port = port;
-		log("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
-		    addr->ip.to_string().c_str());
+		log_info("Resolved network name '%s:%u' to %s\n", hostname.c_str(), port,
+		         addr->ip.to_string().c_str());
 		return true;
 	} catch (const boost::system::system_error& ec) {
 		// Resolution failed
-		log("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
-		    ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
+		log_err("Could not resolve network name '%s:%u' to %s-address: %s\n", hostname.c_str(), port,
+		        ((protocol == boost::asio::ip::tcp::v4()) ? "IPv4" : "IPv6"), ec.what());
 		return false;
 	}
 }
@@ -67,8 +67,9 @@ bool NetAddress::resolve_to_v6(NetAddress* addr, const std::string& hostname, ui
 bool NetAddress::parse_ip(NetAddress* addr, const std::string& ip, uint16_t port) {
 	boost::system::error_code ec;
 	boost::asio::ip::address new_addr = boost::asio::ip::address::from_string(ip, ec);
-	if (ec)
+	if (ec) {
 		return false;
+	}
 	addr->ip = new_addr;
 	addr->port = port;
 	return true;
@@ -83,7 +84,7 @@ bool NetAddress::is_valid() const {
 }
 
 CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncReportCallback cb)
-   : Command(dt), callback_(cb) {
+   : Command(dt), callback_(std::move(cb)) {
 }
 
 void CmdNetCheckSync::execute(Widelands::Game&) {
@@ -112,10 +113,11 @@ void NetworkTime::think(uint32_t const speed) {
 
 	// in case weird things are happening with the system time
 	// (e.g. debugger, extremely slow simulation, ...)
-	if (delta < 0)
+	if (delta < 0) {
 		delta = 0;
-	else if (delta > 1000)
+	} else if (delta > 1000) {
 		delta = 1000;
+	}
 
 	delta = (delta * speed) / 1000;
 
@@ -123,20 +125,23 @@ void NetworkTime::think(uint32_t const speed) {
 
 	// Play catch up
 	uint32_t speedup = 0;
-	if (latency_ > static_cast<uint32_t>(10 * delta))
+	if (latency_ > static_cast<uint32_t>(10 * delta)) {
 		//  just try to kill as much of the latency as possible if we are that
 		//  far behind
 		speedup = latency_ / 3;
-	else if (latency_ > static_cast<uint32_t>(delta))
+	} else if (latency_ > static_cast<uint32_t>(delta)) {
 		speedup = delta / 8;  //  speed up by 12.5%
-	if (static_cast<int32_t>(delta + speedup) > behind)
+	}
+	if (static_cast<int32_t>(delta + speedup) > behind) {
 		speedup = behind - delta;
+	}
 
 	delta += speedup;
 	latency_ -= speedup;
 
-	if (delta > behind)
+	if (delta > behind) {
 		delta = behind;
+	}
 
 	time_ += delta;
 }
@@ -150,8 +155,9 @@ int32_t NetworkTime::networktime() const {
 }
 
 void NetworkTime::receive(int32_t const ntime) {
-	if (ntime < networktime_)
+	if (ntime < networktime_) {
 		throw wexception("NetworkTime: Time appears to be running backwards.");
+	}
 
 	uint32_t const behind = networktime_ - time_;
 
@@ -180,8 +186,9 @@ void SendPacket::data(const void* const packet_data, const size_t size) {
 		// So if they are removed the protocol has to be updated
 	}
 
-	for (size_t idx = 0; idx < size; ++idx)
+	for (size_t idx = 0; idx < size; ++idx) {
 		buffer.push_back(static_cast<const uint8_t*>(packet_data)[idx]);
+	}
 }
 
 void SendPacket::reset() {
@@ -207,11 +214,13 @@ uint8_t* SendPacket::get_data() const {
 
 /*** class RecvPacket ***/
 size_t RecvPacket::data(void* const packet_data, size_t const bufsize) {
-	if (index_ + bufsize > buffer.size())
+	if (index_ + bufsize > buffer.size()) {
 		throw wexception("Packet too short");
+	}
 
-	for (size_t read = 0; read < bufsize; ++read)
+	for (size_t read = 0; read < bufsize; ++read) {
 		static_cast<uint8_t*>(packet_data)[read] = buffer[index_++];
+	}
 
 	return bufsize;
 }

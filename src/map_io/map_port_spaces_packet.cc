@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "map_io/map_port_spaces_packet.h"
 
-#include "base/log.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -43,8 +42,9 @@ void MapPortSpacesPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, Map
 		if (packet_version == kCurrentPacketVersion) {
 			map->set_waterway_max_length(s1.get_natural("waterway_max_length", 0));
 			const uint16_t num = s1.get_int("number_of_port_spaces", 0);
-			if (!num)
+			if (!num) {
 				return;
+			}
 
 			Section& s2 = prof.get_safe_section("port_spaces");
 			for (uint16_t i = 0; i < num; ++i) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,6 +114,8 @@ public:
 	uint32_t get_lineheight() const;
 
 	uint32_t get_eff_w() const;
+
+	std::vector<Recti> focus_overlay_rects();
 
 	// Drawing and event handling
 	void draw(RenderTarget&);
@@ -283,6 +285,8 @@ public:
 	void scroll_to_top();
 
 	void layout() override;
+
+	std::vector<Recti> focus_overlay_rects() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;

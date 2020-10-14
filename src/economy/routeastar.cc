@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,8 +44,9 @@ void BaseRouteAStar::routeto(RoutingNode& to, IRoute& route) {
 
 	route.init(type_ == wwWARE ? to.mpf_realcost_ware : to.mpf_realcost_worker);
 	for (RoutingNode* node = &to; node;
-	     node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker))
+	     node = (type_ == wwWARE ? node->mpf_backlink_ware : node->mpf_backlink_worker)) {
 		route.insert_as_first(node);
+	}
 }
 
 }  // namespace Widelands

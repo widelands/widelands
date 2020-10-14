@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,6 @@
 #define WL_UI_BASIC_EDITBOX_H
 
 #include <memory>
-
-#include <SDL_keyboard.h>
 
 #include "graphic/styles/font_style.h"
 #include "ui_basic/panel.h"
@@ -87,6 +85,8 @@ private:
 	std::unique_ptr<EditBoxImpl> m_;
 
 	void check_caret();
+	void reset_selection();
+	void highlight_selection(RenderTarget& dst, const Vector2i& point, uint16_t fontheight);
 	std::string text_to_asterisk();
 
 	bool history_active_;
@@ -94,6 +94,13 @@ private:
 	std::string history_[CHAT_HISTORY_SIZE];
 	bool password_;
 	bool warning_;
+	uint32_t snap_to_char(uint32_t cursor);
+	void select_until(uint32_t end) const;
+	uint32_t next_char(uint32_t cursor) const;
+	uint32_t prev_char(uint32_t cursor) const;
+	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
+	void delete_selected_text();
+	void copy_selected_text();
 };
 }  // namespace UI
 

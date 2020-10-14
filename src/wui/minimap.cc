@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,9 @@
 
 #include <memory>
 
+#include <SDL_mouse.h>
+
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/minimap_renderer.h"
 #include "graphic/rendertarget.h"
 #include "graphic/texture.h"
@@ -39,7 +40,7 @@ MiniMap::View::View(UI::Panel& parent,
                     InteractiveBase& ibase)
    : UI::Panel(&parent, x, y, 10, 10),
      ibase_(ibase),
-     pic_map_spot_(g_gr->images().get("images/wui/overlays/map_spot.png")),
+     pic_map_spot_(g_image_cache->get("images/wui/overlays/map_spot.png")),
      minimap_layers_(flags),
      minimap_type_(type) {
 }
@@ -60,8 +61,9 @@ Left-press: warp the view point to the new position
 ===============
 */
 bool MiniMap::View::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT)
+	if (btn != SDL_BUTTON_LEFT) {
 		return false;
+	}
 
 	dynamic_cast<MiniMap&>(*get_parent())
 	   .warpview(minimap_pixel_to_mappixel(ibase_.egbase().map(), Vector2i(x, y), view_area_,
@@ -125,7 +127,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  g_gr->images().get("images/wui/minimap/button_terrn.png"),
+                  g_image_cache->get("images/wui/minimap/button_terrn.png"),
                   _("Terrain"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
@@ -136,7 +138,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  g_gr->images().get("images/wui/minimap/button_owner.png"),
+                  g_image_cache->get("images/wui/minimap/button_owner.png"),
                   _("Owner"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
@@ -147,7 +149,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  g_gr->images().get("images/wui/minimap/button_flags.png"),
+                  g_image_cache->get("images/wui/minimap/button_flags.png"),
                   _("Flags"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
@@ -158,7 +160,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  g_gr->images().get("images/wui/minimap/button_roads.png"),
+                  g_image_cache->get("images/wui/minimap/button_roads.png"),
                   _("Roads"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
@@ -169,7 +171,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                   but_w(),
                   but_h(),
                   UI::ButtonStyle::kWuiSecondary,
-                  g_gr->images().get("images/wui/minimap/button_bldns.png"),
+                  g_image_cache->get("images/wui/minimap/button_bldns.png"),
                   _("Buildings"),
                   UI::Button::VisualState::kRaised,
                   UI::Button::ImageMode::kUnscaled),
@@ -180,27 +182,22 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
                  but_w(),
                  but_h(),
                  UI::ButtonStyle::kWuiSecondary,
-                 g_gr->images().get("images/wui/minimap/button_zoom.png"),
+                 g_image_cache->get("images/wui/minimap/button_zoom.png"),
                  _("Zoom"),
                  UI::Button::VisualState::kRaised,
                  UI::Button::ImageMode::kUnscaled) {
-	button_terrn.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Terrain));
-	button_owner.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Owner));
-	button_flags.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Flag));
-	button_roads.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Road));
-	button_bldns.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Building));
-	button_zoom.sigclicked.connect(
-	   boost::bind(&MiniMap::toggle, boost::ref(*this), MiniMapLayer::Zoom2));
+	button_terrn.sigclicked.connect([this]() { toggle(MiniMapLayer::Terrain); });
+	button_owner.sigclicked.connect([this]() { toggle(MiniMapLayer::Owner); });
+	button_flags.sigclicked.connect([this]() { toggle(MiniMapLayer::Flag); });
+	button_roads.sigclicked.connect([this]() { toggle(MiniMapLayer::Road); });
+	button_bldns.sigclicked.connect([this]() { toggle(MiniMapLayer::Building); });
+	button_zoom.sigclicked.connect([this]() { toggle(MiniMapLayer::Zoom2); });
 
 	check_boundaries();
 
-	if (get_usedefaultpos())
+	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged&) { check_boundaries(); });
@@ -210,8 +207,9 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 
 void MiniMap::toggle(MiniMapLayer const button) {
 	*view_.minimap_layers_ = MiniMapLayer(*view_.minimap_layers_ ^ button);
-	if (button == MiniMapLayer::Zoom2)
+	if (button == MiniMapLayer::Zoom2) {
 		resize();
+	}
 	update_button_permpressed();
 }
 

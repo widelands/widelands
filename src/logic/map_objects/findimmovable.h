@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,13 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 #define WL_LOGIC_MAP_OBJECTS_FINDIMMOVABLE_H
 
-#include "logic/map_objects/map_object.h"
+#include "logic/map_objects/map_object_type.h"
 
 namespace Widelands {
 
 struct BaseImmovable;
 class ImmovableDescr;
+class Player;
 
 struct FindImmovable {
 private:

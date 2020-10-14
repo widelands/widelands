@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-10-02 08:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -22,15 +22,15 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:32
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:26
 msgid "Introduction"
 msgstr "Introdução"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:34
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:28
 msgid "Soldiers, Training and Warfare"
 msgstr "Soldados, Treino e Estratégia"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:29
 msgid ""
 "In this scenario, I’m going to tell you about soldiers, their training and "
 "their profession: warfare. Although Widelands is about building up, not "
@@ -39,18 +39,18 @@ msgid ""
 "deserve explanation."
 msgstr "Neste cenário, vamos falar sobre soldados, o seu treino e a sua profissão: a guerra. Apesar do Widelands ser construção e não destruição, pode surgir um inimigo que tens de destruir de vez em quando. Por isso fazer a guerra aqui é mais uma questão económica do que estratégia militar e o seu funcionamento merece uma explicação."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:30
 msgid ""
 "I’ve set up a small village that contains the most important buildings. You "
 "also have enough wares, so you do not have to take care of your weapons "
 "production. In a real game, you will not have this luxury."
 msgstr "Preparei uma pequena aldeia com os edifícios mais importantes. Também tem mercadorias que cheguem, portanto não precisas preocupar-te com a sua produção de armas. Num verdadeiro jogo, não terias este luxo."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:37
 msgid "Soldiers’ abilities"
 msgstr "Capacidades dos soldados"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:39
 msgid ""
 "New soldiers are created differently from normal workers: recruits will walk"
 " from a warehouse (or your headquarters) to the barracks where they will "
@@ -58,7 +58,7 @@ msgid ""
 " not use armor, they only need an ax."
 msgstr "Os novos soldados são criados de forma diferente dos trabalhadores normais: os recrutas vão dum armazém (ou do quartel-general) até à caserna onde vão receber um treino básico e se tornam soldados. Os soldados básicos dos Bárbaros não usam armadura, só precisam de um machado."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
 "Take a look at the soldiers that are on their way to our military buildings."
 " They look different from normal workers: they have a health bar over their "
@@ -68,30 +68,30 @@ msgid ""
 msgstr "Observa os soldados que circulam. Eles são diferentes dos trabalhadores normais: têm uma barra de saúde acima da cabeça que indica os pontos de vida restantes e quatro símbolos que indicam o nível individual do soldado em quatro categorias diferentes: saúde, ataque, defesa e evasão."
 
 #. TRANSLATORS: the current stats are: 3 health, 5 attack, 0 defense, 2 evade.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:42
 msgid ""
 "If a Barbarian soldier is fully trained, he has level %1% health, level %2% "
 "attack, level %3% defense and level %4% evade. This is one fearsome warrior "
 "then! The individual abilities have the following meaning:"
 msgstr "Se o soldado Bárbaro estiver completamente treinado, ele terá o nível %1% de saúde, o nível %2% de ataque, o nível %3% de defesa e o nível %4% de evasão. Um guerreiro temível! As estatísticas individuais têm o seguinte significado:"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:49
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:43
 msgid "Health:"
 msgstr "Saúde:"
 
 #. TRANSLATORS: the current stats are: 13000 health, 2800 health gain.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:51
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:45
 msgid ""
 "The total life of a soldier. A Barbarian soldier starts with %1% health, and"
 " he will gain %2% health with each health level."
 msgstr "A vida total de uma soldado. Um guerreiro Bárbaro começa com %1% saúde e ganha mais %2% saúde por cada nível de saúde."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:52
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:46
 msgid "Attack:"
 msgstr "Ataque:"
 
 #. TRANSLATORS: the current stats are: 1400 damage, gains 850 damage points.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:48
 msgid ""
 "The amount of damage a soldier will inflict on the enemy when an attack is "
 "successful. A Barbarian soldier with attack level 0 inflicts ~%1% points of "
@@ -99,13 +99,13 @@ msgid ""
 "he gains %2% damage points."
 msgstr "A quantidade de danos que um soldado vai infligir depois de uma ataque bem sucedido ao inimigo. Um guerreiro Bárbaro com um nível de ataque 0 inflige ~%1% pontos de danos à saúde ao inimigo quando ele é bem sucedido no ataque. E por cada nível de ataque, ele ganha %2% pontos de danos."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:50
 msgid "Defense:"
 msgstr "Defesa:"
 
 #. TRANSLATORS: the current stats are: 3%. The calculated health value is 3395
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:59
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:53
 msgid ""
 "The defense is the percentage that is subtracted from the attack value. The "
 "Barbarians cannot train in this skill and therefore have always defense "
@@ -114,35 +114,35 @@ msgid ""
 "Barbarian will lose 3500·%2%%% = %3% health."
 msgstr "A defesa é o valor que é subtraído ao valor do ataque. Os Bárbaros não podem ser treinados para obterem esta capacidade, por isso têm sempre a defesa no nível 0. Isto quer dizer que no caso delas é subtraído %1%%% aos danos infligidos. Se um atacante tiver um valor de ataque de 3500 pontos quando atacar um guerreiro Bárbaro, o Bárbaro perderá 3500·%2%%% = %3% de saúde."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:60
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:54
 msgid "Evade:"
 msgstr "Evasão:"
 
 #. TRANSLATORS: the current stats are: 25% evade, increases in steps of 15%.
 #. TRANSLATORS: The last two %% after the placeholder are the percent symbol.
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:57
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. A level 0 "
 "Barbarian has a %1%%% chance to evade an attack, and this increases in steps"
 " of %2%%% for each level."
 msgstr "Evasão é a hipótese que um soldado tem de evitar um ataque adversário. Um bárbaro no nível 0 tem %1%%% de hipótese e o valor aumenta %2%%% gradualmente por cada nível."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:62
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:84
 msgid "The Battle Arena"
 msgstr "A arena de combate"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:70
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:64
 msgid "Now I have talked about training and levels. Let me elaborate on that."
 msgstr "Agora eu falei de treino e níveis. Deixa-me explicar mais isto."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:71
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:65
 msgid ""
 "A newly created soldier has no experience and is not very good at fighting. "
 "To make him stronger, you can build training sites."
 msgstr "Um novo soldado não tem nenhuma experiência e não vale grande coisa no combate. Para o fortalecer, podes construir campos de treino."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:66
 msgid ""
 "One of these training sites is the battle arena. It is a big and expensive "
 "building, and it trains soldiers in evade. Since soldiers get very hungry "
@@ -150,96 +150,104 @@ msgid ""
 "a real game, you should have a good infrastructure before you build it."
 msgstr "Um destes campos de treino é a arena de combate. É um edifício grande e caro, que treina os soldados em evasão. Como os soldados ficam esfomeados no treino, este edifício precisa de muitos alimentos e de cerveja forte. Num verdadeiro jogo, deves ter uma boa economia antes de o construir."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:73
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:67
 msgid "To see evade training in action, build a battle arena."
 msgstr "Para ver os treinos de evasão, constrói uma arena de combate."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:68
 msgid ""
 "While we’re waiting for the battle arena, you’ll probably notice some "
 "soldiers walking around. They are automatically exchanged from time to time."
 " I’ll teach you about that later."
 msgstr "Enquanto esperamos pela arena de combate, deves ter notado alguns soldados que vão e vêm. Eles são trocados automaticamente de tempos a tempos. Falaremos disto mais tarde."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:74
+msgid "Battle Arena"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:76
 msgid "Build a battle arena"
 msgstr "Constrói uma arena de combate"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:77
 msgid "Build a battle arena. It is a big building."
 msgstr "Constrói uma arena de combate. É um edifício grande."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:81
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:78
 msgid ""
 "Since the construction will take some time, you can change the game speed "
 "using Page Up and Page Down."
 msgstr "Como a construção vai levar algum tempo, podes mudar a velocidade do jogo com as teclas Page Up e Page Down."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:86
 msgid "The Battle Arena Has Been Constructed"
 msgstr "A Arena de Combate Foi Terminada"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:87
 msgid ""
 "Very good. Our battle arena has been finished, and the soldiers are already "
 "walking towards it."
 msgstr "Muito bem. A nossa arena de combate está acabada e os soldados já estão a caminho dela."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:89
 msgid ""
 "The needed wares are also delivered there. For successful training, you need"
 " pitta bread and strong beer, as well as either fish or meat."
 msgstr "As mercadorias necessárias também já estão a caminho. Para um bom treino, é preciso pão pita e cerveja forte, assim como peixe ou carne."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:90
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
 msgstr "Para mais detalhes, podes dar uma olhada na janela de ajuda do edifício, acessível pelo ponto de interrogação de qualquer janela de edifício."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 msgid ""
 "To learn how far your soldiers have progressed in their training, you can "
 "have a look at their icons. They are modified by red dots:"
 msgstr "Para ver quanto os teus soldados progrediram no seu treino, podes observar os ícones. São alterados por pontos vermelhos:"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:95
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:92
 msgid ""
 "No red dots means that the soldier is not trained, so he has level 0. All "
 "your new recruits have this."
 msgstr "Sem pontos vermelhos significa que o soldado não treinou, por isso está no nível 0. Todos os novos recrutas estão nesse nível."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:93
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
 msgstr "Com cada treino bem sucedido, o soldado fica mais forte. É indicado por um ponto vermelho. Este soldado está no nível 1 do treino de evasão."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:94
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
 msgstr "Quando o teu soldado atingir o nível máximo (neste caso é 2), isso é indicado por um fundo branco."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:102
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:120
 msgid "The Training Camp"
 msgstr "O Campo de Treinos"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:106
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 msgid ""
 "There is a second training site: the training camp. It is a big building "
 "too, and to complement the battle arena, it trains attack and health "
 "(remember, the Barbarian soldiers cannot be trained in defense)."
 msgstr "Há outro edifício de treino: o campo de treinos. Também é grande e como complemento da arena de combate, treina o ataque e a defesa (lembra-te, os soldados Bárbaros não se podem treinar em defesa)."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:107
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:104
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:114
 msgid "Build a training camp."
 msgstr "Constrói um campo de treinos."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:110
+msgid "Training Camp"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:112
 msgid "Build a training camp"
 msgstr "Constrói um campo de treinos"
 
@@ -272,24 +280,134 @@ msgstr "Este equipamento é produzido em forjas com carvão, ferro e por vezes o
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
-"You should also keep in mind that each of the three tribes in Widelands has "
-"its own way of training, so the buildings and wares are different. Also, the"
-" ability levels cannot be compared: an Imperial soldier has a base attack of"
-" %1% at level 0, while a Barbarian soldier at the same level only has a base"
-" attack of %2%."
-msgstr "Também deves lembrar-te que as três tribos do Widelands têm costumes, edifícios e mercadorias diferentes. Portanto, os níveis de competência  não podem ser comparados: um soldado Imperial tem uma base de ataque de %1% no nível 0, enquanto um Bárbaro no mesmo nível só tem %2%."
+"You should also keep in mind that each of the tribes in Widelands has its "
+"own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier has a base attack of "
+"%1% at level 0, while a Barbarian soldier at the same level only has a base "
+"attack of %2%."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+msgid "Scout’s Hut"
+msgstr ""
+
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
+msgid "Explore Your Surroundings"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+msgid ""
+"Large parts of the map haven’t been explored yet. It might be a good idea to"
+" know which direction is best for expanding our empire."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+msgid ""
+"You can try your luck and expand randomly, but this is risky. A safer way is"
+" to use a scout to explore unseen parts of the map. What if he finds "
+"mountains overflowing with gold?"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
+msgid "We will need a scout’s hut to start exploring. It is a small building."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
+msgid "Build a scout’s hut."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+msgid "Build a scout’s hut"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+msgid ""
+"It’s good to know your surroundings. A scout will explore unseen parts of "
+"the map for you."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
+msgid "Build a Scout’s Hut."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:153
+msgid "Scout is ready"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:155
+msgid "Ready to go!"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:156
+msgid ""
+"Well done! Your scout’s hut has been built. While our scout is moving in, "
+"let’s learn a little bit more about him."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+msgid ""
+"First of all, he will need to take some food with him on his scouting trips."
+" Fortunately, we have some rations in our warehouse."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
+msgid ""
+"When provided with food, he will walk randomly around the area. You should "
+"follow his movement before fog of war hides what he saw."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
+msgid "Scout"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:166
+msgid "Explore the map"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+msgid "Wait for the scout to explore unseen areas."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:168
+msgid "Observe your scout."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:174
+msgid "Scout made progress"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
+msgid "New horizons?"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:177
+msgid ""
+"As you can see, scouts can go quite far. The good news is that there are no "
+"enemies around."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+msgid "You can use the minimap to see the exploration’s progress."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
+msgid ""
+"Don’t forget that scouting is hard work and as such cannot be done without "
+"provision of food."
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:185
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:187
 msgid "Heroes and Rookies"
 msgstr "Heróis e Recrutas"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
 msgid ""
 "While our soldiers are training, let me tell you what we can do with them."
 msgstr "Enquanto os nossos soldados treinam, deixa-me dizer-te o que podemos fazer com eles."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
 msgid ""
 "In every military building, you can set the preference for heroes (trained "
 "soldiers) or rookies. From time to time, a soldier will walk out of the "
@@ -297,29 +415,29 @@ msgid ""
 "what you saw earlier."
 msgstr "Em cada um dos edifícios militares, pode-se definir a preferência para heróis (soldados treinados) ou recrutas. De tempos a tempos, um soldado irá sair do edifício e ser substituído por um mais forte/fraco automaticamente – isso foi o que viste à pouco."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
 msgid ""
 "The initial setting depends on the type of the building. For the Barbarians,"
 " the sentry is the only building that prefers rookies by default. You should"
 " change this setting to fit your current needs."
 msgstr "As definições iniciais dependem do tipo de edifício. Para os Bárbaros, a sentinela é o único edifício que prefere recrutas por norma. Deves alterar esta definição de acordo com as tuas preferências."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:137
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:191
 msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
 msgstr "Quando estiveres a expandir para a terra de ninguém, podes fazer com que os teus edifícios prefiram recrutas. Quanto estiveres a planear atacar, envia heróis para essa região. Os edifícios conquistados preferem sempre heróis."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
 msgid "Soldier capacity"
 msgstr "Capacidade de soldados"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
 msgid "Adjusting the number of soldiers"
 msgstr "A ajustar o número de soldados"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
 msgid ""
 "There is another way how you can control the strength of a military "
 "building: by the number of soldiers stationed there. Just click on the arrow"
@@ -328,48 +446,48 @@ msgid ""
 "example."
 msgstr "Existe também outra forma de controlar a força de um edifício militar: com o número de soldados estacionados nele. Basta clicar nos botões das setas para diminuir ou aumentar o número desejado de soldados. Todos os edifícios têm uma capacidade máxima. No caso da barreira, são 5, por exemplo."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
 msgid ""
 "If you wish to send a certain soldier away, you can simply click on it. It "
 "will then be replaced by another soldier."
 msgstr "Se quiseres mandar um determinado soldado, clica simplesmente nele. Será então substituído por outro soldado."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
 msgid ""
 "Let me also describe what the numbers in the statistics string mean. This "
 "string can contain up to three numbers, e.g. ‘1 (+5) soldier (+2)’."
 msgstr "Deixa-me também descrever o que querem dizer os números na expressão de estatísticas. Esta expressão pode ter até três números, por exemplo ‘1 (+5) soldado (+2)’."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:203
 msgid ""
 "The first number describes how many soldiers are currently in this building."
 " In this example, only one soldier is left inside (each military building is"
 " always guarded by at least one soldier)."
 msgstr "O primeiro número indica quantos soldados estão atualmente neste edifício. Neste exemplo, apenas um soldado está lá dentro (cada um dos edifícios militares é guardado por pelo menos um soldado)."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:204
 msgid ""
 "The second number tells you how many additional soldiers reside in this "
 "building, but are currently outside. The five soldiers may be attacking an "
 "enemy. They will return when they have been successful."
 msgstr "O segundo número indica quantos soldados adicionais residem neste edifício, mas que estão atualmente fora dele. Os cinco soldados podem estar a atacar o inimigo. Eles irão regressar quando terminarem."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:151
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:205
 msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
 msgstr "O terceiro número indica os soldados desaparecidos. Dos oito soldados (1 + 5 + 2)  que gostavas de ter aqui, dois podem ter morrido. Eles serão substituídos por novos soldados do teu armazém, se possível."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:157
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
 msgstr "Desmantela a tua sentinela"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:213
 msgid "Dismantling military buildings"
 msgstr "Desmantelar os edifícios militares"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:214
 msgid ""
 "You can only reduce the number of soldiers to one. The last soldier of a "
 "building will never come out (unless this building is attacked). If you want"
@@ -377,7 +495,7 @@ msgid ""
 " building."
 msgstr "Apenas podes reduzir o número de soldados até um. O último soldado do edifício nunca sairá deste (a não ser que o edifício seja atacado). Se quiseres ter o soldado noutro sítio, terás de o desmantelar ou incendiar o edifício."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
 msgid ""
 "However, destroying a military building is always linked with a risk: the "
 "land is still yours, but it is no longer protected. Any enemy that builds "
@@ -388,28 +506,32 @@ msgid ""
 "enemies."
 msgstr "No entanto, destruir um edifício militar está sempre associado a  um risco: a terra continua a ser tua, mas deixa de estar protegida. Qualquer inimigo que construa uma estrutura militar pode tomar essa terra sem lutar, e os teus edifícios são incendiados. Para além disso, algumas partes da terra podem agora ficar escondidas pelo nevoeiro de guerra. Por estas razões deves desmantelar edifícios militares apenas no interior do teu território onde esteja seguro dos inimigos."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:216
 msgid ""
 "Have you seen your sentry? Since it cannot contain many soldiers and is next"
 " to a stronger barrier, it is rather useless."
 msgstr "Vista a tua sentinela? Uma vez que não pode conter muitos soldados e está próxima de uma barreira mais forte. A sentinela é inútil."
 
 #. TRANSLATORS: 'it' refers to the Barbarian sentry
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
 msgid "Dismantle it."
 msgstr "Desmantela-a"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
 msgid ""
 "You can also use this opportunity to become familiar with the other options:"
 " the heroes/rookies preference and the capacity."
 msgstr "Também podes usar esta oportunidade para te familiarizares com as outras opções: a preferência de heróis/recrutas e a capacidade."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:225
+msgid "Soldiers, dismissed!"
+msgstr ""
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:227
 msgid "Dismantle your north-western sentry"
 msgstr "Desmantela a tua sentinela a noroeste"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:169
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:228
 msgid ""
 "You can control the number of soldiers stationed at a military site with the"
 " arrow buttons. If you want to get even your last soldier out, you will have"
@@ -417,59 +539,59 @@ msgid ""
 "which will make it vulnerable to hostile attacks."
 msgstr "Podes controlar o número de soldados estacionados num edifício militar com os botões de setas. Se quiseres mesmo até o +ultimo soldado fora, tens de destruir o edifício. No entanto, não irá proteger mais o teu território, o que o tornará vulnerável a ataques hostis."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:170
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:229
 msgid "Dismantle your sentry in the north-west, next to the barrier."
 msgstr "Desmantela a tua sentinela a noroeste, perto da fronteira."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:176
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:248
 msgid "Enhance Your Fortress"
 msgstr "Melhora a tua fortaleza"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:237
 msgid "Enhancing Buildings"
 msgstr "Melhorar edifícios"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:238
 msgid ""
 "Well done. Now you know how to draw back your soldiers from the places where"
 " you don’t need them. It is time to tell you how to reinforce your front "
 "line."
 msgstr "Bem executado. Agora sabes como retirar os teus soldados de locais onde não precisas deles. Agora é altura para saberes como reforçar a tua linha da frente."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:239
 msgid ""
 "Your fortress is already quite strong and conquers a lot of space. But there"
 " is an even bigger building: the citadel."
 msgstr "A tuas fortaleza já está bastante reforçada e controla muito terreno. Mas existe um edifício ainda maior: a cidadela."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:240
 msgid ""
 "Citadels can’t be built directly. Instead, you’ll have to construct a "
 "fortress first and then enhance it to a citadel. To do so, click on the "
 "fortress, then choose the ‘Enhance to Citadel’ button."
 msgstr "As cidadelas não podem ser construídas diretamente. Em vez disso, tens de construir uma fortaleza primeiro e depois melhorá-la para o nível de cidadela. Para isso, clica na fortaleza e depois escolhe o botão «Melhorar para Cidadela»."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:241
 msgid ""
 "Your soldiers will leave the fortress while the construction is going on. "
 "This means that your fortress will lose its military influence, as I "
 "described above."
 msgstr "Os teus soldados irão sair da fortaleza enquanto a construção decorrer. Isto quer dizer que a tua fortaleza deixa de ter influência militar como já expliquei anteriormente."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:242
 msgid "Enhance your fortress to a citadel now."
 msgstr "Melhora a tua fortaleza para uma cidadela agora."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:250
 msgid "Enhance your fortress to a citadel"
 msgstr "Melhora a tua fortaleza para uma cidadela"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:251
 msgid "Enhance your fortress to a mighty citadel."
 msgstr "Melhora a tua fortaleza para uma poderosa cidadela."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:252
 msgid ""
 "The citadel can house 12 soldiers, and it is the biggest military building "
 "the Barbarians can build. It also costs a lot of resources and takes a long "
@@ -477,15 +599,15 @@ msgid ""
 "like constricted points or mountains."
 msgstr "A cidadela pode albergar 12 soldados e é o maior edifício militar que os bárbaros podem construir. Precisa de muitos materiais de construção e  demora muito tempo a ser construída. É especialmente indicada para guardar importantes locais estratégicos tais como locais de difícil acesso e montanhas."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:259
 msgid "Defeat your Enemy"
 msgstr "Derrota o teu inimigo"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:261
 msgid "Defeat the Enemy"
 msgstr "Derrotar o inimigo"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:262
 msgid ""
 "Great work, the citadel is finished. But what’s that? A hostile tribe has "
 "settled next to us while the citadel was under construction! Do you see how "
@@ -494,44 +616,44 @@ msgid ""
 "defeat the enemy!"
 msgstr "Bom trabalho. a cidadela já está terminada. Mas o que é isso? Uma tribo hostil instalou-se perto de nós enquanto a cidadela estava a ser construída! Reparaste como eles tomaram parte da nossa terra? E agora o nosso lenhador perdeu o seu local de trabalho. Era disto que estava a falar. Vamos recuperar a nossa terra e derrotar o inimigo! "
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:210
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:274
 msgid ""
 "To attack a building, click on its doors, choose the number of soldiers that"
 " you wish to send and click on the ‘Attack’ button."
 msgstr "Para atacar um edifício, clica nas portas dele para abrir a janela do ataque, escolhe a quantidade de soldados e clica no botão Atacar."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:263
 msgid ""
 "Your soldiers will come from all nearby military buildings. Likewise, the "
 "defenders will come from all nearby military buildings of the enemy and "
 "intercept your forces."
 msgstr "Os teus soldados irão sair de todos os edifícios das redondezas. Da mesma forma, também as defesas sairão dos aquartelamentos mais perto para intersetar as tuas forças."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:264
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy their "
 "headquarters."
 msgstr "Ataca e conquista todos os edifícios militares do inimigo e destrói o quartel-general dele."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:206
-msgid "Defeat the enemy tribe"
-msgstr "Derrotar a tribo inimiga"
-
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:270
 msgid "Defeat Your Enemy"
 msgstr "Derrota o teu inimigo"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:272
+msgid "Defeat the enemy tribe"
+msgstr "Derrotar a tribo inimiga"
+
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:273
 msgid "Defeat the nearby enemy."
 msgstr "Derrotar o inimigo mais próximo."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:215
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:217
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:279
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:281
 msgid "Conclusion"
 msgstr "Conclusão"
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:282
 msgid ""
 "Thank you for playing this tutorial. I hope you enjoyed it and you learned "
 "how to create and train soldiers, how to control where they go and how to "
@@ -539,29 +661,16 @@ msgid ""
 "Having trained soldiers is a huge advantage."
 msgstr "Obrigado por jogares este tutorial Espero que tenhas gostado e tenhas aprendido como criar e treinar soldados, como controlares para onde eles vão e como derrotar um inimigo. Viste como podes facilmente esmagar o teu inimigo? Treinar os soldados é uma grande vantagem."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:283
 msgid ""
 "But a war is expensive, and not always the path leading to the goal. When "
 "setting up a new game, you can also choose peaceful win conditions. You "
 "should definitely try them out, they’re worth it."
 msgstr "Mas uma guerra fica cara, e nem sempre é o caminho para um objetivo. Ao configurar um novo jogo, também podes optar por condições de vitória pacíficas. Deves sem dúvida experimentá-las, vale a pena."
 
-#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:284
 msgid ""
 "You are now ready to play the campaigns. They will teach you about the "
 "different economies of the tribes. You can also play the remaining "
 "tutorials, but they are not crucial for succeeding in the campaigns."
 msgstr "Agora está preparado para jogas as campanhas. Elas irão ensinar-te sobre as diferentes economias das tribos. Também podes jogar os tutoriais seguintes, mas eles não são cruciais para seres bem sucedido nas campanhas."
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr ""

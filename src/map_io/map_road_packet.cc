@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,8 +37,9 @@ void MapRoadPacket::read(FileSystem& fs,
                          EditorGameBase& egbase,
                          bool const skip,
                          MapObjectLoader& mol) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
 	try {
@@ -78,11 +79,14 @@ void MapRoadPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 	const Map& map = egbase.map();
 	Field* field = &map[0];
 	Field const* const fields_end = field + map.max_index();
-	for (; field < fields_end; ++field)
-		if (upcast(Road const, road, field->get_immovable()))  // only roads
+	for (; field < fields_end; ++field) {
+		if (upcast(Road const, road, field->get_immovable())) {  // only roads
 			//  Roads can life on multiple positions.
-			if (!mos.is_object_known(*road))
+			if (!mos.is_object_known(*road)) {
 				fw.unsigned_32(mos.register_object(*road));
+			}
+		}
+	}
 	fw.unsigned_32(0xffffffff);
 
 	fw.write(fs, "binary/road");

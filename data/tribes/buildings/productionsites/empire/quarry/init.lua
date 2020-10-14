@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Quarry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -32,48 +32,34 @@ tribes:new_productionsite_type {
       empire_stonemason = 1
    },
 
-   indicate_workarea_overlaps = {
-      empire_quarry = false,
-   },
-
-   outputs = {
-      "granite",
-      "marble"
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=mine_granite",
-            "call=mine_granite",
-            "call=mine_granite",
-            "call=mine_marble", -- This will find marble 2 out of 7 times
-            "call=mine_granite",
-            "call=mine_granite",
-            "call=mine_marble", -- This will find marble 2 out of 7 times
-            "return=no_stats"
+            "call=mine_granite on failure fail",
+            "call=mine_granite on failure fail",
+            "call=mine_granite on failure fail",
+            "call=mine_marble on failure fail", -- This will find marble 2 out of 7 times
+            "call=mine_granite on failure fail",
+            "call=mine_granite on failure fail",
+            "call=mine_marble on failure fail", -- This will find marble 2 out of 7 times
          }
       },
       mine_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _"quarrying granite",
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
             "callworker=cut_granite",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
       mine_marble = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
          descname = _"quarrying marble",
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
             "callworker=cut_marble",
-            "sleep=17500"
+            "sleep=duration:17s500ms"
          }
       },
    },
@@ -82,5 +68,8 @@ tribes:new_productionsite_type {
       title = _"No Rocks",
       heading = _"Out of Rocks",
       message = pgettext("empire_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
+      productivity_threshold = 75
    },
 }
+
+pop_textdomain()

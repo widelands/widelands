@@ -28,11 +28,14 @@ include "tribes/scripting/help/format_help.lua"
 --    :returns: Help string for the immovable
 --
 function immovable_help_string(tribe, immovable_description)
-   include(immovable_description.helptext_script)
-
-   -- TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.
-   local purpose_text = pgettext("sentence_separator", "%s %s"):bformat(immovable_helptext(), immovable_helptext(tribe.name))
-   local result = li_object(immovable_description.name, purpose_text)
+   local helptexts = immovable_description:helptexts(tribe.name)
+   local result = ""
+   if helptexts["purpose"] ~= nil then
+      result = h2(_"Purpose") ..
+         li_object(immovable_description.name, helptexts["purpose"])
+   else
+      result = img(immovable_description.icon_name)
+   end
 
    -- Build cost
    local buildcost = ""
@@ -52,6 +55,24 @@ function immovable_help_string(tribe, immovable_description)
       result = result .. space_required
    end
 
+   local becomes_list = immovable_description.becomes
+   if (#becomes_list > 0) then
+      result = result .. h2(_"Becomes")
+      for index, target in ipairs(becomes_list) do
+         local target_description = nil
+         if (wl.Game():tribe_immovable_exists(target)) then
+            -- We turn into another immovable
+            target_description = wl.Game():get_immovable_description(target)
+         else
+            -- Target must be a ship
+            target_description = wl.Game():get_ship_description(target)
+         end
+         if (target_description ~= nil) then
+            result = result .. li_image(target_description.icon_name, target_description.descname)
+         end
+      end
+   end
+
    -- Terrain affinity
    local affinity = immovable_description.terrain_affinity
    if (affinity ~= nil) then
@@ -66,12 +87,14 @@ end
 
 return {
    func = function(tribename, immovablename)
-      set_textdomain("tribes_encyclopedia")
+      push_textdomain("tribes_encyclopedia")
       local tribe = wl.Game():get_tribe_description(tribename)
       local immovable_description = wl.Game():get_immovable_description(immovablename)
-      return {
+      local r = {
          title = immovable_description.descname,
          text = immovable_help_string(tribe, immovable_description)
       }
+      pop_textdomain()
+      return r
    end
 }

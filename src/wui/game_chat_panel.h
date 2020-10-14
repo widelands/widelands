@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "chat/chat.h"
+#include "ui_basic/box.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 
@@ -57,11 +58,14 @@ struct GameChatPanel : public UI::Panel {
 	void unfocus_edit();
 
 private:
+	void layout() override;
 	void recalculate(bool has_new_message = false);
 	void key_enter();
 	void key_escape();
+	void draw(RenderTarget& dst) override;
 
 	ChatProvider& chat_;
+	UI::Box box_;
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
 	size_t chat_message_counter;

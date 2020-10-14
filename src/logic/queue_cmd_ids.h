@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,9 +61,9 @@ enum class QueueCommandTypes : uint8_t {
 
 	kSetWarePriority,
 	kSetWareTargetQuantity,
-	kResetWareTargetQuantity,
-	kSetWorkerTargetQuantity,
-	kResetWorkerTargetQuantity,  // 16
+	// 14 removed post Build 21
+	kSetWorkerTargetQuantity = 15,
+	// 16 removed post Build 21
 
 	// 17 was a command related to old events. removed
 
@@ -98,10 +98,13 @@ enum class QueueCommandTypes : uint8_t {
 	kLuaScript,
 	kLuaCoroutine,
 	kCalculateStatistics,
-	kExpeditionConfig,  // 134
+	kExpeditionConfig,
+	kPickCustomStartingPosition,  // 135
 	kCallEconomyBalance = 200,
 
-	kDeleteMessage,  // 201
+	kDeleteMessage,
+	kToggleMuteMessages,
+	kMarkMapObjectForRemoval,  // 203
 
 	kNetCheckSync = 250,
 	kReplaySyncWrite,

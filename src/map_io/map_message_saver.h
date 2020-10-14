@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ struct MapMessageSaver {
 	}
 	void add(const MessageId& id) {
 		assert(messages_.find(id) == messages_.end());
-		messages_.insert(std::pair<MessageId, MessageId>(id, ++counter_));
+		messages_.insert(std::make_pair(id, ++counter_));
 	}
 	MessageId operator[](const MessageId& id) const {
 		return messages_.find(id) != messages_.end() ? messages_.find(id)->second : MessageId::null();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,9 +49,13 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->set_hint(s.get_string("hint", ""));
 			map->set_background(s.get_string("background", ""));
 			old_world_name_ = s.get_string("world", "");
+			map->set_background_theme(s.get_string(
+			   "theme", old_world_name_.empty() ?
+			               "" :
+			               Map::get_old_world_info_by_old_name(old_world_name_).name.c_str()));
 
 			std::string t = s.get_string("tags", "");
-			if (t != "") {
+			if (!t.empty()) {
 				std::vector<std::string> tags;
 				boost::split(tags, t, boost::is_any_of(","));
 
@@ -84,7 +88,8 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					boost::split(players_string, team_string, boost::is_any_of(","));
 
 					for (const std::string& player : players_string) {
-						PlayerNumber player_number = static_cast<PlayerNumber>(atoi(player.c_str()));
+						PlayerNumber player_number =
+						   static_cast<PlayerNumber>(boost::lexical_cast<unsigned int>(player.c_str()));
 						assert(player_number < kMaxPlayers);
 						team.push_back(player_number);
 					}
@@ -103,9 +108,10 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				++team_section_id;
 				teamsection_key = (boost::format("teams%02i") % team_section_id).str().c_str();
 			}
-		} else
+		} else {
 			throw UnhandledVersionError(
 			   "MapElementalPacket", packet_version, kEightPlayersPacketVersion);
+		}
 	} catch (const WException& e) {
 		throw GameDataError("elemental data: %s", e.what());
 	}
@@ -135,8 +141,12 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_string("author", map.get_author());
 	global_section.set_string("descr", map.get_description());
 	global_section.set_string("hint", map.get_hint());
-	if (!map.get_background().empty())
+	if (!map.get_background().empty()) {
 		global_section.set_string("background", map.get_background());
+	}
+	if (!map.get_background_theme().empty()) {
+		global_section.set_string("theme", map.get_background_theme());
+	}
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	int counter = 0;

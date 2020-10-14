@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,11 @@
 
 #include "boost/format.hpp"
 
+#include <memory>
+
 #include "base/i18n.h"
+#include "editor/editor_category.h"
 #include "logic/map_objects/description_maintainer.h"
-#include "logic/map_objects/world/editor_category.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
@@ -42,7 +44,7 @@ public:
 	// not take ownership.
 	CategorizedItemSelectionMenu(
 	   UI::Panel* parent,
-	   const Widelands::DescriptionMaintainer<Widelands::EditorCategory>& categories,
+	   const std::vector<std::unique_ptr<EditorCategory>>& categories,
 	   const Widelands::DescriptionMaintainer<DescriptionType>& descriptions,
 	   std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)> create_checkbox,
 	   const std::function<void()> select_correct_tool,
@@ -67,7 +69,7 @@ private:
 template <typename DescriptionType, typename ToolType>
 CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectionMenu(
    UI::Panel* parent,
-   const Widelands::DescriptionMaintainer<Widelands::EditorCategory>& categories,
+   const std::vector<std::unique_ptr<EditorCategory>>& categories,
    const Widelands::DescriptionMaintainer<DescriptionType>& descriptions,
    const std::function<UI::Checkbox*(UI::Panel* parent, const DescriptionType& descr)>
       create_checkbox,
@@ -90,25 +92,15 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      tool_(tool) {
 	add(&tab_panel_);
 
-	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {
-		const Widelands::EditorCategory& category = categories.get(category_index);
-
-		std::vector<int> item_indices;
-		for (size_t j = 0; j < descriptions_.size(); ++j) {
-			if (descriptions_.get(j).editor_category()->name() != category.name()) {
-				continue;
-			}
-			item_indices.push_back(j);
-		}
-
+	for (const auto& category : categories) {
 		UI::Box* vertical = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);
 
 		int nitems_handled = 0;
 		UI::Box* horizontal = nullptr;
-		for (const int i : item_indices) {
-			if (nitems_handled % category.items_per_row() == 0) {
+		for (const int i : category->items()) {
+			if (nitems_handled % category->items_per_row() == 0) {
 				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
@@ -119,16 +111,16 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 
 			UI::Checkbox* cb = create_checkbox(horizontal, descriptions_.get(i));
 			cb->set_state(tool_->is_enabled(i));
-			cb->changedto.connect(boost::bind(&CategorizedItemSelectionMenu::selected, this, i, _1));
+			cb->changedto.connect([this, i](bool b) { selected(i, b); });
 			checkboxes_[i] = cb;
-			horizontal->add(cb);
+			horizontal->add(cb, UI::Box::Resizing::kAlign, UI::Align::kBottom);
 			horizontal->add_space(kSpacing);
 			++nitems_handled;
 		}
-		tab_panel_.add(category.name(), category.picture(), vertical, category.descname());
+		tab_panel_.add(category->name(), category->picture(), vertical, category->descname());
 	}
 	add(&current_selection_names_, UI::Box::Resizing::kFullSize);
-	tab_panel_.sigclicked.connect(boost::bind(&CategorizedItemSelectionMenu::update_label, this));
+	tab_panel_.sigclicked.connect([this]() { update_label(); });
 	update_label();
 }
 

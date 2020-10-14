@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,12 @@
 #include <vector>
 
 #include "third_party/gettext/gettext.h"  // For ngettext and pgettext.
+
+// prevent defining snprintf to libintl_snprintf in libintl.h
+// libintl.h is included by getext.h
+#ifdef snprintf
+#undef snprintf
+#endif
 
 #include "base/macros.h"
 #include "config.h"

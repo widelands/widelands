@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,8 +43,9 @@ void MapFlagdataPacket::read(FileSystem& fs,
                              bool const skip,
                              MapObjectLoader& mol,
                              const TribesLegacyLookupTable& tribes_lookup_table) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
 	try {
@@ -92,8 +93,9 @@ void MapFlagdataPacket::read(FileSystem& fs,
 									} catch (const WException& e) {
 										throw GameDataError("next step (%u): %s", nextstep_serial, e.what());
 									}
-								} else
+								} else {
 									flag.wares_[i].nextstep = nullptr;
+								}
 							} catch (const WException& e) {
 								throw GameDataError("ware #%u (%u): %s", i, ware_serial, e.what());
 							}
@@ -105,8 +107,9 @@ void MapFlagdataPacket::read(FileSystem& fs,
 							} catch (const WException& e) {
 								throw GameDataError("always_call (%u): %s", always_call_serial, e.what());
 							}
-						} else
+						} else {
 							flag.always_call_for_flag_ = nullptr;
+						}
 
 						//  workers waiting
 						uint16_t const nr_workers = fr.unsigned_16();
@@ -161,7 +164,7 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 
 	const Map& map = egbase.map();
 	const Field& fields_end = map[map.max_index()];
-	for (Field* field = &map[0]; field < &fields_end; ++field)
+	for (Field* field = &map[0]; field < &fields_end; ++field) {
 		if (upcast(Flag const, flag, field->get_immovable())) {
 			assert(mos.is_object_known(*flag));
 			assert(!mos.is_object_saved(*flag));
@@ -184,17 +187,19 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.signed_32(flag->wares_[i].priority);
 				assert(mos.is_object_known(*flag->wares_[i].ware));
 				fw.unsigned_32(mos.get_object_file_index(*flag->wares_[i].ware));
-				if (PlayerImmovable const* const nextstep = flag->wares_[i].nextstep.get(egbase))
+				if (PlayerImmovable const* const nextstep = flag->wares_[i].nextstep.get(egbase)) {
 					fw.unsigned_32(mos.get_object_file_index(*nextstep));
-				else
+				} else {
 					fw.unsigned_32(0);
+				}
 			}
 
 			if (Flag const* const always_call_for = flag->always_call_for_flag_) {
 				assert(mos.is_object_known(*always_call_for));
 				fw.unsigned_32(mos.get_object_file_index(*always_call_for));
-			} else
+			} else {
 				fw.unsigned_32(0);
+			}
 
 			//  worker waiting for capacity
 			const Flag::CapacityWaitQueue& capacity_wait = flag->capacity_wait_;
@@ -214,15 +219,16 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				if (temp_job.request) {
 					fw.unsigned_8(1);
 					temp_job.request->write(fw, dynamic_cast<Game&>(egbase), mos);
-				} else
+				} else {
 					fw.unsigned_8(0);
+				}
 
 				fw.string(temp_job.program);
 			}
 
 			mos.mark_object_as_saved(*flag);
 		}
-
+	}
 	fw.write(fs, "binary/flag_data");
 }
 }  // namespace Widelands

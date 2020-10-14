@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,8 @@ constexpr int32_t kPriorityLow = 2;
 constexpr int32_t kPriorityNormal = 4;
 constexpr int32_t kPriorityHigh = 8;
 
+constexpr float kBuildingSilhouetteOpacity = 0.3f;
+
 /* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
  * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
  * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
@@ -55,7 +57,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              const Tribes& tribes);
+	              Tribes& tribes);
 	~BuildingDescr() override {
 	}
 
@@ -82,22 +84,22 @@ public:
 	/**
 	 * Returned wares for dismantling
 	 */
-	const Buildcost& returned_wares() const {
-		return return_dismantle_;
+	const Buildcost& returns_on_dismantle() const {
+		return returns_on_dismantle_;
 	}
 
 	/**
 	 * The build cost for enhancing a previous building
 	 */
 	const Buildcost& enhancement_cost() const {
-		return enhance_cost_;
+		return enhancement_cost_;
 	}
 
 	/**
 	 * The returned wares for a enhaced building
 	 */
-	const Buildcost& returned_wares_enhanced() const {
-		return return_enhanced_;
+	const Buildcost& enhancement_returns_on_dismantle() const {
+		return enhancement_returns_on_dismantle_;
 	}
 
 	int32_t get_size() const {
@@ -158,7 +160,7 @@ public:
 	WorkareaInfo workarea_info_;
 
 	bool suitability(const Map&, const FCoords&) const;
-	const BuildingHints& hints() const;
+	const AI::BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
 	uint32_t get_unoccupied_animation() const;
@@ -172,15 +174,18 @@ protected:
 	Building& create_constructionsite() const;
 
 private:
+	void set_enhancement_cost(const Buildcost& enhance_cost, const Buildcost& return_enhanced);
+
 	const Tribes& tribes_;
-	const bool buildable_;          // the player can build this himself
-	const bool can_be_dismantled_;  // the player can dismantle this building
-	const bool destructible_;       // the player can destruct this himself
+	const bool buildable_;     // the player can build this himself
+	bool can_be_dismantled_;   // the player can dismantle this building
+	const bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
-	Buildcost return_dismantle_;  // Returned wares on dismantle
-	Buildcost enhance_cost_;      // cost for enhancing
-	Buildcost return_enhanced_;   // Returned ware for dismantling an enhanced building
-	int32_t size_;                // size of the building
+	Buildcost returns_on_dismantle_;  // Returned wares on dismantle
+	Buildcost enhancement_cost_;      // cost for enhancing
+	Buildcost
+	   enhancement_returns_on_dismantle_;  // Returned ware for dismantling an enhanced building
+	int32_t size_;                         // size of the building
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
@@ -188,9 +193,9 @@ private:
 	                        // enabled
 	DescriptionIndex enhancement_;
 	DescriptionIndex
-	   enhanced_from_;        // The building this building was enhanced from, or INVALID_INDEX
-	bool enhanced_building_;  // if it is one, it is bulldozable
-	BuildingHints hints_;     // hints (knowledge) for computer players
+	   enhanced_from_;         // The building this building was enhanced from, or INVALID_INDEX
+	bool enhanced_building_;   // if it is one, it is bulldozable
+	AI::BuildingHints hints_;  // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
 
@@ -258,6 +263,13 @@ public:
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
+
+	bool is_destruction_blocked() const {
+		return is_destruction_blocked_;
+	}
+	void set_destruction_blocked(bool b) {
+		is_destruction_blocked_ = b;
+	}
 
 	virtual bool fetch_from_flag(Game&);
 	virtual bool get_building_work(Game&, Worker&, bool success);
@@ -331,7 +343,18 @@ public:
 	                  uint32_t throttle_time = 0,
 	                  uint32_t throttle_radius = 0);
 
+	bool mute_messages() const {
+		return mute_messages_;
+	}
+	void set_mute_messages(bool m) {
+		mute_messages_ = m;
+	}
+
 	void start_animation(EditorGameBase&, uint32_t anim);
+
+	bool is_seeing() const {
+		return seeing_;
+	}
 
 protected:
 	// Updates 'statistics_string' with the string that should be displayed for
@@ -383,6 +406,9 @@ private:
 	std::string statistics_string_;
 	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
 	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
+
+	bool mute_messages_;
+	bool is_destruction_blocked_;
 };
 }  // namespace Widelands
 

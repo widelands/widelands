@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,11 +32,10 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
-
-class ResourceDescription;
 
 /*
  * Resource indicators:
@@ -60,9 +59,11 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-	TribeDescr(const LuaTable& table,
-	           const Widelands::TribeBasicInfo& info,
-	           const Tribes& init_tribes);
+	TribeDescr(const Widelands::TribeBasicInfo& info,
+	           Tribes& tribes,
+	           const World& world,
+	           const LuaTable& table,
+	           const LuaTable* scenario_table = nullptr);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -120,17 +121,6 @@ public:
 	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
 	uint32_t bridge_height() const;
 
-	// A vector of all texture images that can be used for drawing a
-	// (normal|busy) road or a waterway. The images are guaranteed to exist.
-	const std::vector<std::string>& normal_road_paths() const;
-	const std::vector<std::string>& busy_road_paths() const;
-	const std::vector<std::string>& waterway_paths() const;
-
-	// Add the corresponding texture for roads/waterways.
-	void add_normal_road_texture(const Image* texture);
-	void add_busy_road_texture(const Image* texture);
-	void add_waterway_texture(const Image* texture);
-
 	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
 
@@ -151,29 +141,28 @@ public:
 		return workers_order_;
 	}
 
-	const std::vector<std::string>& get_ship_names() const {
-		return ship_names_;
-	}
-
-	/// Registers a building with the tribe
-	void add_building(const std::string& buildingname);
-	/// Registers a worker with the tribe and adds it to the bottom of the last worker column
-	void add_worker(const std::string& workername);
-
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
 private:
-	/// Registers a worker with the tribe and adds it to the bottom of the given worker column
-	void add_worker(const std::string& workername,
-	                std::vector<DescriptionIndex>& workers_order_column);
+	// Helper functions for loading everything in the constructor
+	void load_frontiers_flags_roads(const LuaTable& table);
+	void load_ships(const LuaTable& table, Tribes& tribes);
+	void load_wares(const LuaTable& table, Tribes& tribes);
+	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
+	void load_workers(const LuaTable& table, Tribes& tribes);
+	void load_buildings(const LuaTable& table, Tribes& tribes);
 
 	// Helper function for adding a special worker type (carriers etc.)
-	DescriptionIndex add_special_worker(const std::string& workername);
+	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);
 	// Helper function for adding a special building type (port etc.)
-	DescriptionIndex add_special_building(const std::string& buildingname);
-	// Helper function to identify special wares across tribes (iron ore etc.)
-	DescriptionIndex add_special_ware(const std::string& warename);
+	DescriptionIndex add_special_building(const std::string& buildingname, Tribes& tribes);
+	// Make sure that everything is there and that dependencies are calculated
+	void finalize_loading(Tribes& tribes, const World& world);
+	// Helper function to calculate trainingsites proportions for the AI
+	void calculate_trainingsites_proportions(Tribes& tribes);
+
+	void process_productionsites(Tribes& tribes, const World& world);
 
 	const std::string name_;
 	const std::string descname_;
@@ -189,14 +178,13 @@ private:
 	BridgeAnimationIDs bridges_normal_;
 	BridgeAnimationIDs bridges_busy_;
 	uint32_t bridge_height_;
-	std::vector<std::string> normal_road_paths_;
-	std::vector<std::string> busy_road_paths_;
-	std::vector<std::string> waterway_paths_;
+
+	// A container of all texture images that can be used for drawing a
+	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;
 	std::set<DescriptionIndex> immovables_;  // The player immovables
-	std::vector<std::string> ship_names_;
 	std::set<DescriptionIndex> workers_;
 	std::set<DescriptionIndex> wares_;
 	ResourceIndicatorSet resource_indicators_;

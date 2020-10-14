@@ -1,14 +1,29 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_metal_workshop",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Metal Workshop"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "barbarians_ax_workshop",
+
+   enhancement = {
+      name = "barbarians_ax_workshop",
+      enhancement_cost = {
+         log = 1,
+         blackwood = 1,
+         granite = 2,
+         grout = 1,
+         reed = 1
+      },
+      enhancement_return_on_dismantle = {
+         blackwood = 1,
+         granite = 1,
+         grout = 1
+      }
+   },
 
    buildcost = {
       log = 1,
@@ -58,27 +73,16 @@ tribes:new_productionsite_type {
       { name = "log", amount = 8 },
       { name = "iron", amount = 8 }
    },
-   outputs = {
-      "bread_paddle",
-      "felling_ax",
-      "fire_tongs",
-      "fishing_rod",
-      "hammer",
-      "hunting_spear",
-      "kitchen_tools",
-      "pick",
-      "scythe",
-      "shovel"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=produce_bread_paddle",
-            "call=produce_felling_ax",
+            -- firetongs before felling ax to make poor hamlet work without dismantle
             "call=produce_fire_tongs",
+            "call=produce_felling_ax",
             "call=produce_fishing_rod",
             "call=produce_hammer",
             "call=produce_hunting_spear",
@@ -86,7 +90,6 @@ tribes:new_productionsite_type {
             "call=produce_pick",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=no_stats"
          }
       },
       produce_bread_paddle = {
@@ -95,9 +98,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs bread_paddle",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=bread_paddle"
          }
       },
@@ -107,9 +110,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=felling_ax"
          }
       },
@@ -119,9 +122,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=fire_tongs"
          }
       },
@@ -131,9 +134,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fishing_rod",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=fishing_rod"
          }
       },
@@ -143,9 +146,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=hammer"
          }
       },
@@ -155,9 +158,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs hunting_spear",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=hunting_spear"
          }
       },
@@ -167,9 +170,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=kitchen_tools"
          }
       },
@@ -179,9 +182,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs pick",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=pick"
          }
       },
@@ -191,9 +194,9 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs scythe",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=scythe"
          }
       },
@@ -203,11 +206,13 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=iron log",
-            "sleep=32000",
-            "playsound=sound/smiths/toolsmith 192",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
+            "animate=working duration:35s",
             "produce=shovel"
          }
       },
    },
 }
+
+pop_textdomain()

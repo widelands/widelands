@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
-#include "graphic/graphic.h"
 
 inline EditorInteractive& EditorToolsizeMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -42,7 +41,7 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                20,
                20,
                UI::ButtonStyle::kWuiSecondary,
-               g_gr->images().get("images/ui_basic/scrollbar_up.png")),
+               g_image_cache->get("images/ui_basic/scrollbar_up.png")),
      decrease_(this,
                "decr",
                get_inner_w() / 2 + 10,
@@ -50,12 +49,10 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                20,
                20,
                UI::ButtonStyle::kWuiSecondary,
-               g_gr->images().get("images/ui_basic/scrollbar_down.png")),
+               g_image_cache->get("images/ui_basic/scrollbar_down.png")),
      value_(0) {
-	increase_.sigclicked.connect(
-	   boost::bind(&EditorToolsizeMenu::increase_radius, boost::ref(*this)));
-	decrease_.sigclicked.connect(
-	   boost::bind(&EditorToolsizeMenu::decrease_radius, boost::ref(*this)));
+	increase_.sigclicked.connect([this]() { increase_radius(); });
+	decrease_.sigclicked.connect([this]() { decrease_radius(); });
 
 	increase_.set_repeating(true);
 	decrease_.set_repeating(true);
@@ -65,8 +62,9 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 		set_buttons_enabled(false);
 	}
 
-	if (get_usedefaultpos())
+	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
 }
 
 void EditorToolsizeMenu::update(uint32_t const val) {

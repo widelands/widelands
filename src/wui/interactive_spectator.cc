@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "base/macros.h"
 #include "chat/chat.h"
 #include "graphic/game_renderer.h"
+#include "graphic/mouse_cursor.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "ui_basic/textarea.h"
@@ -38,7 +39,7 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
                                            Section& global_s,
                                            bool const multiplayer,
                                            ChatProvider* chat_provider)
-   : InteractiveGameBase(g, global_s, OBSERVER, multiplayer, chat_provider) {
+   : InteractiveGameBase(g, global_s, multiplayer, chat_provider) {
 	add_main_menu();
 
 	add_toolbar_button("wui/menus/statistics_general", "general_stats", _("Statistics"),
@@ -69,19 +70,14 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 
 void InteractiveSpectator::draw(RenderTarget& dst) {
 	// This fixes a crash with displaying an error dialog during loading.
-	if (!game().is_loaded())
+	if (!game().is_loaded()) {
 		return;
+	}
 
 	draw_map_view(map_view(), &dst);
 }
 
 void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
-	// A spectator cannot build roads.
-	assert(road_building_overlays().steepness_indicators.empty());
-	assert(road_building_overlays().road_previews.empty());
-	assert(waterway_building_overlays().steepness_indicators.empty());
-	assert(waterway_building_overlays().road_previews.empty());
-
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
 	assert(!get_sel_triangles());
@@ -89,7 +85,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	const Widelands::Game& the_game = game();
 	const Widelands::Map& map = the_game.map();
 	auto* fields_to_draw =
-	   given_map_view->draw_terrain(the_game, get_workarea_overlays(map), false, dst);
+	   given_map_view->draw_terrain(the_game, nullptr, get_workarea_overlays(map), false, dst);
 	const float scale = 1.f / given_map_view->view().zoom;
 	const uint32_t gametime = the_game.get_gametime();
 
@@ -103,6 +99,13 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
 			imm->draw(gametime, info_to_draw, field.rendertarget_pixel, field.fcoords, scale, dst);
+			if (upcast(const Widelands::Immovable, i, imm)) {
+				if (!i->get_marked_for_removal().empty()) {
+					const Image* img = g_image_cache->get("images/wui/overlays/targeted.png");
+					blit_field_overlay(
+					   dst, field, img, Vector2i(img->width() / 2, img->height()), scale);
+				}
+			}
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
@@ -128,7 +131,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		}
 
 		// Blit the selection marker.
-		if (field.fcoords == get_sel_pos().node) {
+		if (g_mouse_cursor->is_visible() && field.fcoords == get_sel_pos().node) {
 			const Image* pic = get_sel_picture();
 			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
@@ -172,7 +175,8 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
  */
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
-	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
+	const Widelands::MapObject* mo = egbase().map().get_immovable(node_and_triangle.node);
+	if (mo && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}

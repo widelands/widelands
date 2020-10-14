@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,11 @@
 
 #include "scripting/lua_globals.h"
 
+#include <map>
 #include <memory>
+#include <vector>
 
-#include <SDL.h>
+#include <SDL_timer.h>
 
 #include "base/i18n.h"
 #include "build_info.h"
@@ -115,19 +117,47 @@ static int L_string_bformat(lua_State* L) {
 		report_error(L, "Error in bformat: %s", err.what());
 	}
 }
-/* RST
-   .. function:: set_textdomain(domain)
 
-      Sets the textdomain for all further calls to :func:`_`.
+static std::map<const lua_State*, std::vector<std::string>> textdomains;
+/* RST
+   .. function:: push_textdomain(domain)
+
+      Sets the textdomain for all further calls to :func:`_` until it is reset
+      to the previous value using :func:`pop_textdomain`.
 
       :arg domain: The textdomain
       :type domain: :class:`string`
       :returns: :const:`nil`
 */
-static int L_set_textdomain(lua_State* L) {
-	luaL_checkstring(L, -1);
-	lua_setglobal(L, "__TEXTDOMAIN");
+static int L_push_textdomain(lua_State* L) {
+	textdomains[L].push_back(luaL_checkstring(L, -1));
 	return 0;
+}
+/* RST
+   .. function:: pop_textdomain()
+
+      Resets the textdomain for calls to :func:`_` to the value it had
+      before the last call to :func:`push_textdomain`.
+
+      :returns: :const:`nil`
+*/
+static int L_pop_textdomain(lua_State* L) {
+	textdomains.at(L).pop_back();
+	return 0;
+}
+/* RST
+   .. function:: set_textdomain(domain)
+
+      DEPRECATED. Use `push_textdomain(domain)` instead.
+*/
+// TODO(Nordfriese): Delete after v1.0
+static int L_set_textdomain(lua_State* L) {
+	return L_push_textdomain(L);
+}
+
+static std::string current_textdomain(const lua_State* L) {
+	const auto it = textdomains.find(L);
+	return it == textdomains.end() || it->second.empty() ? "" : it->second.back();
 }
 
 /* RST
@@ -148,10 +178,10 @@ static int L_set_textdomain(lua_State* L) {
       :returns: The translated string.
 */
 static int L__(lua_State* L) {
-	lua_getglobal(L, "__TEXTDOMAIN");
+	const std::string td = current_textdomain(L);
 
-	if (!lua_isnil(L, -1)) {
-		i18n::Textdomain dom(luaL_checkstring(L, -1));
+	if (!td.empty()) {
+		i18n::Textdomain dom(td);
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	} else {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
@@ -183,9 +213,9 @@ static int L_ngettext(lua_State* L) {
 		report_error(L, "Call to ngettext with negative number %d", n);
 	}
 
-	lua_getglobal(L, "__TEXTDOMAIN");
-	if (!lua_isnil(L, -1)) {
-		lua_pushstring(L, dngettext(luaL_checkstring(L, -1), msgid, msgid_plural, n));
+	const std::string td = current_textdomain(L);
+	if (!td.empty()) {
+		lua_pushstring(L, dngettext(td.c_str(), msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
 	}
@@ -211,9 +241,9 @@ static int L_pgettext(lua_State* L) {
 	const char* msgctxt = luaL_checkstring(L, 1);
 	const char* msgid = luaL_checkstring(L, 2);
 
-	lua_getglobal(L, "__TEXTDOMAIN");
-	if (!lua_isnil(L, -1)) {
-		lua_pushstring(L, dpgettext_expr(luaL_checkstring(L, -1), msgctxt, msgid));
+	const std::string td = current_textdomain(L);
+	if (!td.empty()) {
+		lua_pushstring(L, dpgettext_expr(td.c_str(), msgctxt, msgid));
 	} else {
 		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
 	}
@@ -275,6 +305,8 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
                                           {"set_textdomain", &L_set_textdomain},
+                                          {"push_textdomain", &L_push_textdomain},
+                                          {"pop_textdomain", &L_pop_textdomain},
                                           {"ticks", &L_ticks},
                                           {nullptr, nullptr}};
 

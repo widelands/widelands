@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "graphic/gl/blit_program.h"
 
-#include "base/log.h"
 #include "graphic/blit_mode.h"
 #include "graphic/gl/blit_data.h"
 #include "graphic/gl/coordinate_conversion.h"

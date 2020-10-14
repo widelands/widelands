@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2019 by the Widelands Development Team
+ * Copyright (C) 2015-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ private:
 	bool paused_;
 	uint32_t player_cmdserial_;
 	Widelands::PlayerNumber local_;
-	std::vector<ComputerPlayer*> computerplayers_;
+	std::vector<AI::ComputerPlayer*> computerplayers_;
 };
 
 #endif  // end of include guard: WL_LOGIC_SINGLE_PLAYER_GAME_CONTROLLER_H

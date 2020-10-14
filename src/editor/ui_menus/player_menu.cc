@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
-#include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -81,9 +80,8 @@ public:
 		box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 		box_.add_space(kMargin);
 
-		ok_.sigclicked.connect(boost::bind(&EditorPlayerMenuWarningBox::ok, boost::ref(*this)));
-		cancel_.sigclicked.connect(
-		   boost::bind(&EditorPlayerMenuWarningBox::cancel, boost::ref(*this)));
+		ok_.sigclicked.connect([this]() { ok(); });
+		cancel_.sigclicked.connect([this]() { cancel(); });
 	}
 
 	void ok() {
@@ -156,8 +154,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 
 		no_of_players_.add(boost::lexical_cast<std::string>(static_cast<unsigned int>(p)), p, nullptr,
 		                   p == nr_players);
-		no_of_players_.selected.connect(
-		   boost::bind(&EditorPlayerMenu::no_of_players_clicked, boost::ref(*this)));
+		no_of_players_.selected.connect([this]() { no_of_players_clicked(); });
 
 		UI::Box* row = new UI::Box(&box_, 0, 0, UI::Box::Horizontal);
 
@@ -166,30 +163,28 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		if (map_has_player) {
 			plr_name->set_text(map.get_scenario_player_name(p));
 		}
-		plr_name->changed.connect(boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
+		plr_name->changed.connect([this, p]() { name_changed(p - 1); });
 
 		// Tribe
 		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(
 		   row, (boost::format("dropdown_tribe%d") % static_cast<unsigned int>(p)).str(), 0, 0, 50,
 		   16, plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
-		{
-			i18n::Textdomain td("tribes");
-			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-				plr_tribe->add(_(tribeinfo.descname), tribeinfo.name,
-				               g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
-			}
-			plr_tribe->add(pgettext("tribe", "Random"), "",
-			               g_gr->images().get("images/ui_fsmenu/random.png"), false,
-			               _("The tribe will be selected at random"));
+
+		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+			plr_tribe->add(_(tribeinfo.descname), tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+			               false, tribeinfo.tooltip);
 		}
 
-		plr_tribe->select(
-		   (p <= map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
-		      map.get_scenario_player_tribe(p) :
-		      "");
-		plr_tribe->selected.connect(
-		   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
+		plr_tribe->add(pgettext("tribe", "Random"), "",
+		               g_image_cache->get("images/ui_fsmenu/random.png"), false,
+		               _("The tribe will be selected at random"));
+
+		plr_tribe->select((p <= map.get_nrplayers() &&
+		                   eia().egbase().tribes().tribe_exists(map.get_scenario_player_tribe(p))) ?
+		                     map.get_scenario_player_tribe(p) :
+		                     "");
+		plr_tribe->selected.connect([this, p]() { player_tribe_clicked(p - 1); });
 
 		// Starting position
 		const Image* player_image =
@@ -201,8 +196,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   /** TRANSLATORS: Button tooltip in the editor for using a player's starting position tool
 		    */
 		   player_image, _("Set this player’s starting position"));
-		plr_position->sigclicked.connect(
-		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
+		plr_position->sigclicked.connect([this, p]() { set_starting_pos_clicked(p); });
 
 		// Add the elements to the row
 		row->add(plr_name, UI::Box::Resizing::kFillSpace);
@@ -230,6 +224,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 }
 
 void EditorPlayerMenu::layout() {
+	if (is_minimal()) {
+		return;
+	}
+	EditorToolOptionsMenu::layout();
 	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
 	box_.set_size(310, no_of_players_.get_h() + kMargin +
@@ -276,7 +274,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			rows_.at(pn - 1)->name->set_text(name);
 
 			const std::string& tribename = rows_.at(pn - 1)->tribe->get_selected();
-			assert(tribename.empty() || Widelands::tribe_exists(tribename));
+			assert(tribename.empty() || eia().egbase().tribes().tribe_exists(tribename));
 			map->set_scenario_player_tribe(pn, tribename);
 			rows_.at(pn - 1)->box->set_visible(true);
 		}
@@ -300,7 +298,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 
 void EditorPlayerMenu::player_tribe_clicked(size_t row) {
 	const std::string& tribename = rows_.at(row)->tribe->get_selected();
-	assert(tribename.empty() || Widelands::tribe_exists(tribename));
+	assert(tribename.empty() || eia().egbase().tribes().tribe_exists(tribename));
 	EditorInteractive& menu = eia();
 	menu.egbase().mutable_map()->set_scenario_player_tribe(row + 1, tribename);
 	menu.set_need_save(true);

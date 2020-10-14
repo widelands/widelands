@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct EditorSetTerrainTool : public EditorTool, public MultiSelect {
 	EditorActionArgs format_args_impl(EditorInteractive& parent) override;
 
 	const Image* get_sel_impl() const override {
-		return g_gr->images().get("images/ui_basic/fsel.png");
+		return g_image_cache->get("images/ui_basic/fsel.png");
 	}
 	bool operates_on_triangles() const override {
 		return true;

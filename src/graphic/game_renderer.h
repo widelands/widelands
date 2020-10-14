@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +28,9 @@ void draw_terrain(uint32_t gametime,
                   const Widelands::World& world,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
-                  Workareas workarea,
+                  const Workareas& workarea,
                   bool grid,
+                  const Widelands::Player*,
                   RenderTarget* dst);
 
 // Draw the border stones for 'field' if it is a border and 'visibility' is

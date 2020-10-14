@@ -2,8 +2,6 @@
 --                      Texts for the tutorial mission
 -- =======================================================================
 
-include "scripting/richtext_scenarios.lua"
-
 -- ================
 -- General messages
 -- ================
@@ -16,7 +14,7 @@ scold_player = {
       p(_[[I am sorry, but will I have to tear this down again. We might need the space here later on. If I am too slow for you, you might want to play a real game and just find everything out for yourself. Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
       )
    ),
-   h = 300,
+   h = 150,
    show_instantly = true
 }
 
@@ -75,7 +73,7 @@ initial_message_02 = {
    field = sf,
    body = (
       h1(_"Let’s dive right in!") ..
-      li_image("tribes/images/barbarians/icon.png",
+      li_image("tribes/initialization/barbarians/images/icon.png",
          _[[There are four different tribes in Widelands: the Barbarians, the Empire, the Atlanteans and the Frisians. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
       li_object("barbarians_headquarters", _[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]], plr.color) ..
       p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’.]]) ..
@@ -200,13 +198,12 @@ obj_lumberjack_progress = {
    title=_"Let’s see the progress",
    number = 1,
    body = objective_text(_"Let’s see the progress",
-      li(_[[Click on the construction site to have a look at it, then close its window again when you have seen enough.]]) ..
-      li_arrow(_[[To close the construction site’s window, simply right-click on it.]])
+      li(_[[Click on the construction site to have a look at it.]])
    ),
    h = 300,
    w = 350
 }
-lumberjack_message_07 = {
+lumberjack_message_07a = {
    title = _"The Construction Site",
    position = "topright",
    body = (
@@ -214,6 +211,19 @@ lumberjack_message_07 = {
       li_object("barbarians_builder", _[[If you click on the construction site, a window will open. You can see the wares that are still missing grayed out. You can also see the progress of this construction site.]], plr.color)
    ),
    h = 450,
+   w = 350
+}
+
+lumberjack_message_07b = {
+   title = _"The Construction Site",
+   position = "topright",
+   body = (
+      li_image("images/wui/buildings/toggle_workarea.png",
+         _[[This button toggles showing the building’s work area. When the lumberjack leaves the building to look for trees to fell, he will only look for them within this area. Let me show you how perfect this spot is.]]) ..
+      p(_[[Close the construction site window when you have seen enough.]]) ..
+      li(close_story_window_instructions)
+   ),
+   h = 250,
    w = 350
 }
 
@@ -416,9 +426,9 @@ talk_about_roadbuilding_02 = {
    title = _"Road Building",
    body = (
       li_image("images/wui/fieldaction/menu_tab_buildroad.png", _[[One more thing: around the field where your road would end, you can see different markers. They have the following meaning:]]) ..
-      li_image("images/wui/overlays/roadb_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
-      li_image("images/wui/overlays/roadb_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
-      li_image("images/wui/overlays/roadb_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
+      li_image("images/wui/overlays/road_building_green.png", _[[The terrain is flat here. Your carriers will be very swift on this terrain.]]) ..
+      li_image("images/wui/overlays/road_building_yellow.png", _[[There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.]]) ..
+      li_image("images/wui/overlays/road_building_red.png", _[[The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.]]) ..
       p(_[[Keep the slopes in mind while placing roads and use them to your advantage. Also, try to keep roads as short as possible and always remember to place as many flags as you can on road segments to share the load better.]])
    ),
    h = 450
@@ -491,7 +501,7 @@ census_and_statistics_01 = {
    body = (
       li_image("images/wui/menus/toggle_statistics.png",
          p(_[[Now, wouldn’t it be nice to check on our quarries’ progress without having to open their windows?]]) ..
-         p(_[[In addition to the buildings’ census, you can also activate statictics labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
+         p(_[[In addition to the buildings’ census, you can also activate statistics labels on them. This will display information about the productivity of buildings or the progress of construction sites.]]))
    ),
    position = "topright",
    h = 400,

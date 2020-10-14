@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,10 +47,11 @@ void StreamWrite::print_f(char const* const fmt, ...) {
 		char* heapbuf = nullptr;
 
 		do {
-			if (i < 0)
+			if (i < 0) {
 				size = 2 * size;  //  old vsnprintf
-			else
+			} else {
 				size = i + 1;  //  C99-compatible vsnprintf
+			}
 
 			delete[] heapbuf;
 			heapbuf = new char[size];

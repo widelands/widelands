@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "barbarians_building",
    name = "barbarians_wood_hardener",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Wood Hardener"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -65,22 +65,21 @@ tribes:new_productionsite_type {
    inputs = {
       { name = "log", amount = 8 }
    },
-   outputs = {
-      "blackwood"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
          descname = _"hardening wood",
          actions = {
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
-            "sleep=43000",
-            "playsound=sound/barbarians/blackwood 80",
-            "animate=working 24000",
+            "sleep=duration:43s",
+            "playsound=sound/barbarians/blackwood priority:60%",
+            "animate=working duration:24s",
             "produce=blackwood"
          }
       },
    },
 }
+
+pop_textdomain()

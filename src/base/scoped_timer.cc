@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,7 @@
 
 #include "base/scoped_timer.h"
 
-#include <SDL.h>
+#include <SDL_timer.h>
 #include <boost/format.hpp>
 
 #include "base/log.h"
@@ -32,7 +32,7 @@ ScopedTimer::ScopedTimer(const std::string& message) : message_(message) {
 ScopedTimer::~ScopedTimer() {
 	uint32_t ms_in_existance = SDL_GetTicks() - startime_;
 	const std::string logmessage = (boost::format(message_) % ms_in_existance).str();
-	log("%s\n", logmessage.c_str());
+	log_info("%s\n", logmessage.c_str());
 }
 
 uint32_t ScopedTimer::ms_since_last_query() {

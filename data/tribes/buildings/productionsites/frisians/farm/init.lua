@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_farm",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Farm"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -68,27 +68,13 @@ tribes:new_productionsite_type {
       frisians_farmer = 1
    },
 
-   outputs = {
-      "barley"
-   },
-
-   indicate_workarea_overlaps = {
-      frisians_clay_pit = false,
-      frisians_berry_farm = false,
-      frisians_reed_farm = false,
-      frisians_farm = false,
-      frisians_foresters_house = false,
-      frisians_beekeepers_house = true,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=plant_barley",
             "call=harvest_barley",
-            "return=no_stats"
          }
       },
       plant_barley = {
@@ -96,7 +82,7 @@ tribes:new_productionsite_type {
          descname = _"planting barley",
          actions = {
             "callworker=plant",
-            "sleep=10000"
+            "sleep=duration:10s"
          }
       },
       harvest_barley = {
@@ -104,8 +90,8 @@ tribes:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "callworker=harvest",
-            "animate=working 40000",
-            "sleep=4000",
+            "animate=working duration:40s",
+            "sleep=duration:4s",
             "produce=barley" --produces 2 barley per field
          }
       },
@@ -118,3 +104,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 30
    },
 }
+
+pop_textdomain()

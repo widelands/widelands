@@ -23,7 +23,10 @@ cpp_pairs = (
     ('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
     ('src/scripting/lua_path.cc', 'autogen_path.rst'),
+    ('src/logic/map_objects/map_object_program.cc', 'autogen_map_object_programs.rst'),
     ('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
+    ('src/logic/map_objects/immovable_program.cc', 'autogen_immovable_programs.rst'),
+    ('src/logic/map_objects/tribes/production_program.cc', 'autogen_tribes_productionsite_programs.rst'),
 )
 
 # These directories are scanned without knowing which file
@@ -35,7 +38,8 @@ lua_dirs = (
     ('data/scripting', '', 'auxiliary'),
     ('data/scripting/win_conditions', '', 'auxiliary'),
     ('data/scripting/editor', '', 'lua_world_other'),
-    ('data/tribes', '', 'lua_tribes_defining'),
+    ('data/tribes/initialization/atlanteans', '', 'lua_tribes_defining'),
+    ('data/campaigns/emp04.wmf/scripting/tribes', '', 'lua_tribes_defining'),
     ('data/tribes/scripting', '', 'lua_tribes_other'),
     ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
     ('data/tribes/scripting/help', '', 'lua_tribes_other'),
@@ -68,11 +72,11 @@ lua_dirs = (
      ('data/world', '', 'lua_world_defining'),
      ('data/world/critters/badger',
      'critters', 'lua_world_units'),
-     ('data/world/immovables/bush1',
+     ('data/world/immovables/artifacts/artifact00',
      'immovables', 'lua_world_units'),
      ('data/world/resources',
      'resources', 'lua_world_units'),
-     ('data/world/terrains',
+     ('data/world/terrains/desert/beach',
      'terrains', 'lua_world_units'),
 )
 

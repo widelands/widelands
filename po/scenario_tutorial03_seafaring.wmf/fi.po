@@ -3,14 +3,15 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
-# Jukka Pakarinen, 2016-2019
+# Jukka Pakarinen, 2016-2020
 # Markus Hällfors <markus@hallfors.com>, 2015
+# Teppo Mäenpää <teppo@runbox.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-01-21 18:02+0000\n"
-"PO-Revision-Date: 2020-01-21 18:26+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -19,64 +20,64 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:19
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:12
 msgid "Seafaring"
 msgstr "Merenkäynti"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:21
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:14
 msgid "Seafaring Tutorial"
 msgstr "Merenkäynti opetuspeli"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:15
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
 msgstr "Tervetuloa takaisin. Tässä opetuspelissä opit kaikkein tärkeimmät asiat merenkulusta, joka käsittää laivat, satamat ja tutkimusmatkan."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:16
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
 msgstr "Mutta ensin annan sinulle yleiskuvan sinun alueestasi: etelässä sinulla on kokonainen talous melkein kaikella mitä tarvitset."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:31
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
 msgstr "Pohjoinen osa"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:33
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
 msgstr "Pohjoisessa sinulla on ainoastaan kultakaivos ja varasto. Samaan aikaan, kun kaivosmiehille toimitetaan mukavasti ruokaa, ei ole tapaa kuljettaa kultamalmia eteläosan sulattamoon."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:34
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
 msgstr "Olemme yrittäneet rakentaa tien, mutta vuoristo on aivan liian leveä ja jyrkkä. Siksi meillä on vain yksi vaihtoehto: meidän täytyy perustaa merireitti näiden kahden osan vällille."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:28
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
 msgstr "En halua sinun kuitenkaan kiirehtivän: olet juuri saapunut tänne ja mahdollisesti halluat katsoa hieman tarkemmin leiriäsi. Pidän itsekin lyhyen tauon ja palaan pian takaisin."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:42
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:44
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
 msgid "Ports"
 msgstr "Satamat"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:38
 msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
 msgstr "Kaikelle mitä teet merten takana, sitä varten tarvitset rataman rannikolle. Satamat ovat päämajoja: niissä voi varastoida tuotteita, työntekijöitä ja sotilaita. Sisällä olevat sotilaat tulevat automaattisesti ulos, kun vihollinen hyökkää saamaan."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:39
 msgid ""
 "Additionally, ports offer the possibility of transporting wares via ships. "
 "When you click on the port you already have, you will notice two additional "
@@ -85,147 +86,136 @@ msgid ""
 "are none because we have not yet built a second port. So let’s change this!"
 msgstr "Vaihtoehtoisesti, satamat tarjoavat mahdollisuuden rahdata tuotteita laivoilla. Kun klikkaat satamaa, joka sinulla jo on, huomaat kaksi lisävälilehteä: ‘Laivausta odottavat tuotteet’ ja ‘venekuljetusta odottavat työntekijät.’ He odottavat laivan kuljettavan heidät toiseen satamaan. Tällä hetkellä toinen satamaa puuttuu, koska emme ole rakentaneet toista satamaa. Joten tehdään sellainen!"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
 msgstr "Satamien rakentaminen"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:49
 msgid "How to build a port"
 msgstr "Kuinka rakentaa satama"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:57
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:50
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
 msgstr "Satamat ovat isoja rakennuksia, mutta niitä voi rakentaa vain erityisiin paikkoihin: ne merkitään"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:58
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:51
 msgid "blue port space icon."
 msgstr "sinisellä satamapaikka kuvakkeella."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:52
 msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
 msgstr "Satama-alueet on määritellyt kartan suunnittelija, eli kartta joko sisältää niitä tai sitten ei. Ne voivat olla myös piilotettuina puiden alle tai ummessa ympärillä olevien rakennusten vuoksi."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:53
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
 msgstr "Saatat olla jo huomannut, että sinulla on sellainen kuvake linnasi vieressä."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
-msgid "Build a port in the northern part of your camp."
-msgstr "Rakenna satama leirisi pohjoiseen osaan."
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:66
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
 msgstr "Rakenna satama"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:67
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:61
+msgid "Build a port in the northern part of your camp"
+msgstr "Rakenna satama leirisi pohjoiseen osaan"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:62
 msgid "You always need a port when you want to transport wares with a ship."
 msgstr "Tarvitset aina sataman, kun haluat kuljettaa tuotteita laivalla."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
 msgstr "Rakenna satama linnasi viereen, sinisen satamapaikkakuvakkeen päälle."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:69
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
 msgstr "Satamat rakennetaan kuten normaalit rakennukset, mutta ne ovat vain saatavilla sinisillä satamapaikoilla. Klikkaat vain kuvaketta ja rakennusvalikko tarjoaa sinulle automaattisesti sataman rakentamista."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:65
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
 msgstr "Vaikka satamat toimivat kuten varastot, sinun ei tulisi rakentaa useampaa kuin on tarpeen: ne maksavat kvartsia, timantteja ja kultaa, mikä tekee niistä melko kalliita."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
 msgid "Constructing ships"
 msgstr "Laivojen rakentaminen"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:74
 msgid "Let’s build ships"
 msgstr "Rakennetaan laivoja"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:79
-msgid "Great. Your port has just been finished. Now we need some ships."
-msgstr "Hienoa. Satamasi on juuri valmistunut. Sitten tarvitsemme joitakin aluksia."
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:75
+msgid "Great. While your port is being constructed, let’s build some ships."
+msgstr "Hienoa. Sillä aikaa kun satamasi valmistuu, rakennetaanpa hieman laivoja."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 msgid ""
-"Ships are constructed in a shipyard by a shipwright. We have to build one "
-"somewhere close to the shore."
-msgstr "Alukset rakennetaan telakalla venesepän toimesta. Meidän täytyy rakentaa yksi johonkin lähelle rannikkoa."
+"Ships are constructed at the coastline near a shipyard by a shipwright. We "
+"have to build one somewhere close to the shore."
+msgstr "Laivoja rakennetaan rannikolla lähellä telakkaa venesepän toimesta.  Meidän täytyy rakentaa sellainen lähelle rantaa."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
-msgid "Build a shipyard close to the coast. It is a medium building."
-msgstr "Rakenna telakka lähelle rannikkoa. Se on keskikokoinen rakennus."
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:82
 msgid "Build a shipyard"
 msgstr "Rakenna telakka"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:88
-msgid "Ships are produced in a shipyard."
-msgstr "Laivat rakennetaan telakalla."
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:84
+msgid "Build a shipyard close to the coast"
+msgstr "Rakenna telakka lähelle rantaa"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
+msgid "Ships are produced by a shipyard. It is a medium building."
+msgstr "Laivat rakennetaan telakalla. Se on keskikokoinen rakennus."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
 msgstr "Rakenna telakka lähelle alueesi etelärannikkoa."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
 msgstr "Telakka on keskikokoinen rakennus. Vaikka se voidaankin rakentaa minne tahansa kartalle, veneseppä työskentelee vain, kun hän on lähellä vettä eikä siellä ole puita tai teitä rantaviivalla."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
 msgstr "Laivoja odotellessa"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:99
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
 msgstr "Oikein hyvä. Sinun telakka valmistuu ja veneseppäsi aloitti työt vällittömästi. Asuksien rakentamista varten hän tarvitsee kaadettuja puita, lautoja ja hämähänkinsilkkiä, jotka tullaan toimittamaan telakalle."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:100
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
 msgstr "Veneseppä tulee viemään tarvitsemansa tavarat vapaalle rantaviivan kohdalla ja rakentamaan aluksen sinne. Sitten kun ensimäinen alus on valmistunut, se lasketaan mereen ja veneseppä rakentaa vielä toisen."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:101
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "We should wait until we have two ships. That should be enough for now."
 msgstr "Odotetaan kunnes meillä on kaksi alusta. Sen pitäisi olla riittävästi tällä erää."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:102
-msgid ""
-"You need to stop your shipyard when you have enough ships. Otherwise, your "
-"shipwright will consume all your logs and spidercloth, producing dozens of "
-"ships."
-msgstr "Sinun täytyy pysäyttää telakkasi sitten, kun sinulla on riittävästi aluksia. Muussa tapauksessa veneseppäsi tulee käyttämään kaikki kaadetut puusi ja hämähäkinsilkkisi, tuottaen kymmeniä aluksia."
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:104
+msgid "Ships"
+msgstr "Laivoja"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:103
-msgid ""
-"This is the icon for stopping production. You will find it in the building "
-"window."
-msgstr "Tämä on kuvake tuotannon pysättämiseen. Löydät sen rakennusruudusta."
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:105
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:106
 msgid "Construct two ships"
 msgstr "Rakenna kaksi laivaa"
 
@@ -243,27 +233,53 @@ msgstr "Odota kunnes veneseppä on rakentanut kaksi laivaa."
 msgid "Do not forget to stop your shipyard when you have enough ships."
 msgstr "Älä unohda pysäyttää telakkaasi sitten, kun sinulla on riittävästi laivoja."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:115
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
+msgid "Shipyard production"
+msgstr "Telakkatuotanto"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
+msgid "We have enough ships"
+msgstr "Meillä on riittävästi laivoja"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
+msgid "Your second ship, \"%1%\", is ready now."
+msgstr "Toinen laivasi, \"%1%\", on nyt valmis. "
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:121
+msgid ""
+"You need to stop your shipyard when you have enough ships. Otherwise, your "
+"shipwright will consume all your logs and spidercloth, producing dozens of "
+"ships."
+msgstr "Sinun täytyy pysäyttää telakkasi sitten, kun sinulla on riittävästi aluksia. Muussa tapauksessa veneseppäsi tulee käyttämään kaikki kaadetut puusi ja hämähäkinsilkkisi, tuottaen kymmeniä aluksia."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:325
+msgid ""
+"This is the icon for stopping production. You will find it in the building "
+"window."
+msgstr "Tämä on kuvake tuotannon pysättämiseen. Löydät sen rakennusruudusta."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:132
 msgid "No Iron"
 msgstr "Ei rautaa"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid "We lack iron"
 msgstr "Meiltä puuttuu rautaa"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
 msgstr "Toinen laiva ei taida valmistua vielä, mutta meillä on kiireellinen ongelma."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
 msgstr "Kuten varmasti olet jo huomannut, läntisellä vuorella ei ole rautaa. Meillä on yllin kyllin hiiltä ja kultamalmia, mutta ilman rautamalmia emme voi tuottaa ainuttakaan työkalua."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
@@ -271,21 +287,21 @@ msgid ""
 msgstr "Vaikka se saattaa kestää kauan ja olla tyyristä ja vaarallista – kuka tietää millaisia hirviöitä meressä elääkään? – En näe muuta vaihtoehtoa: meidän täytyy aloittaa tutkimusmatka tuntemattomille merille."
 
 #. TRANSLATORS: This shall be the beginning of a poem
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
 msgid "A trip by the sea, what fun it can be"
 msgstr "Seikkailu merellä, kuinka hauskaa se voikaan olla"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:130
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:147
 msgid "Expeditions"
 msgstr "Tutkimusmatkat"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:131
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
 msgstr "Tutkimusmatkan aikana sinä lähetät laivan etsimään uusia saaria ja kenties löydät sieltä siirtomaan."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
 msgid ""
 "Expeditions can be started in every port. Then, all needed wares are "
 "transported to that port. The wares are exactly those your tribe needs to "
@@ -294,43 +310,47 @@ msgid ""
 "prepared, a ship will come and pick it up."
 msgstr "Tutkimusmatkoja voidaan aloittaa kakista samamista. Silloin kaikki tarvittavat tuotteet toimitetaan siihen satamaan. Tuotteet ovat täsmälleen ne mitä heimosi tarvitsee rakentaakseen sataman (sinun tavoitteena on rakentaa satama kauas kotoa, mikä ei ole yllättävää) ja toki tarvitset myös rakentajan. Kun kaikki valmistelut on tehty, laiva tulee hakemaan ne."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:151
 msgid ""
 "You can check out the needed wares in the fifth tab of your port (it will "
 "appear when you’ve started an expedition)."
 msgstr "Voit tarkistaa tarvittavat tuotteet satamasi viidenneltä välilehdeltä (se ilmestyy kun olet aloittanut tutkimusmatkan)."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
 msgid "Now try this out. I will tell you later what the next steps are."
 msgstr "Nyt kokeile sitä. Kerron sinulle myöhemmin, mitkä ovat seuraavat askeleet."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid "Start an expedition in any of your ports."
 msgstr "Aloita tutkimusmatka mistä tahansa satamastasi."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:139
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:159
+msgid "Expedition"
+msgstr "Tutkimusmatka"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:161
 msgid "Start an expedition"
 msgstr "Aloita tutkimusmatka"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
 msgid "Start an expedition."
 msgstr "Aloita tutkimusmatka."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:142
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:163
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
 msgstr "Tehdäksesi niin, klikkaa 'Aloita Tutkimusmatka' painiketta mistä tahansa satamassa. Tarvittavat tuotteet voit nähdä ilmestyvästä uudesta välilehdestä."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:169
 msgid "Off to greener pastures"
 msgstr "Vihreämmiltä laitumilta poistuminen"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:171
 msgid "Start your expedition"
 msgstr "Aloita tutkimusmatkasi"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:152
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid ""
 "Your expedition ship is ready. It is waiting for your orders in front of "
 "your port. It isn’t transporting wares anymore. Use its buttons to send your"
@@ -339,70 +359,72 @@ msgid ""
 "look for suitable places for landing."
 msgstr "Tutkimusmatka-aluksesi on valmis. Se odottaa käskyäsi satamasi edustalla. Se ei enää kuljeta tuotteita. Käytä sen painikkeita lähettääksesi laivasi mihin tahansa kuudesta Widelandsin kartan pääsuunnista. Kun se on saavuttanut rannikkoviivan, voit laittaa sen matkustamaan pitkin rannikkoa, josta se etsii sopivan paikan rantautumiseen."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:174
 msgid ""
 "Once a port space has been found, you can construct a new port with the "
 "button in the center of the ship’s control window."
 msgstr "Sitten kun satamapaikka on löytynyt, voit rakentaa uuden sataman painikkeella laivan hallintaruudun keskellä."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:154
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
 msgstr "Tuotteet tullaan silloin purkamaan ja laiva ottaa tehtäväkseen rahdata tuotteita taas uudeelle. Rakentaja aloittaa työnsä ja rakentaa sataman."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:155
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:176
 msgid ""
 "Search for an island with a mountain, and look for a port space there. "
 "Colonize the island."
 msgstr "Etsi saari, jossa on vuori ja etsi sieltä sataman paikka. Tee siirtokunta saarelle."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:158
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:182
+msgid "Explore"
+msgstr "Tutki"
+
+#. TRANSLATORS: "Found" as in "founding", NOT as in "finding"
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
 msgid "Found a settlement"
 msgstr "Etsi uudisasutus"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:160
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
 msgid "Navigate your ship to an island that could contain iron ore."
 msgstr "Navigoi laivasi saareen, joka voisi olla rautamalmia."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
 msgid ""
 "When you click on the expedition ship, a window opens where you can control "
 "your ship."
 msgstr "Kun klikkaat tutkimusmatka-alusta, avautuu ruutu, jolla voit hallita laivaasi."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
 msgid "When you have found a suitable port space, build a port there."
 msgstr "Kun olet löytänyt sopivan satamapaikan, rakenna sinne satama."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:169
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:245
-msgid "Conclusion"
-msgstr "Johtopäätös"
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:195
+msgid "New colony"
+msgstr "Uusi yhdyskunta"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:171
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:259
-msgid "Congratulations"
-msgstr "Onneksi olkoon"
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:197
+msgid "Your colony has been founded"
+msgstr "Yhdyskuntasi on löydetty"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:198
 msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
 msgstr "Olet johtanut tutkimusmatkan onnistuneesti päätökseen ja löytänyt uuden siirtokunnan. Olen lähettänyt joitakin geologeja – he ovat raportoineet, että he ovat löytäneet jonkin verran rautamalmia."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
 msgid ""
 "So far you have learned everything about seafaring: how to build ports and "
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr ""
+msgstr "Olet tähän mennessä oppinut kaiken merenkäynnistä: kuinka rakentaa satamia ja laivoja ja kuinka lähettää tutkimusmatkoja. Muistathan, että tutkimusmatkat ovat joskus nopein tapa saada tärkeimmät resurssit  – ja joskus se ainoa tapa."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:174
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid ""
 "But I want to speak a word of warning. Ports are like headquarters: they can"
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
@@ -410,184 +432,224 @@ msgid ""
 "next to an enemy."
 msgstr "Haluan antaa varoituksen sanan. Satamat ovat kuten päämajoja: niihin voi hyökätä vihollinen lähistöltä. Kun sinun päämajoissasi on sotilaita sitä vartioimassa, sinun vasta rakennetussa satamassa ei ol.e. Sinun tulisi siksi välttää asettua lähelle vihollista."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
 msgid ""
 "On this map, there is no enemy to fear. In other games, you should make "
 "building one or two military fortifications around your new colonies a "
 "priority."
-msgstr ""
+msgstr "Tällä kartalla ei ole vihollista pelättäväksi. Muissa peleissä sinun tulee rakentaa yksi tai kaksi sotilaallista linnoitusta uuden siirtokunnan ympärille ensisijassa."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:183
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:194
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:205
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:215
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:224
-msgid "There is more to it…"
-msgstr ""
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:208
+msgid "Our mission"
+msgstr "Meidän tehtävä"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:185
-msgid "Another gold mountain"
-msgstr ""
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:210
+msgid "Start mining"
+msgstr "Aloita louhiminen"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:211
 msgid ""
-"Now that you have learned all about ships, there is another way of water-"
-"based transport I would like to teach you."
-msgstr ""
+"It was a long and expensive job to get here. The island has not much to "
+"offer, but there is some iron ore inside its mountain. Our economy needs "
+"iron ore, so we have to build an iron mine."
+msgstr "Se oli pitkä ja kallis tie päästä tänne. Saarella ei ole paljonkaan tarjottavaa, mutta siellä on jonkin verran rautamalmia vuoren sisällä. Meidän taloutemme tarvitsee rautamalmia, joten meidän täytyy rakentaa rautakaivos."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:187
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:212
+msgid "Start mining iron ore in the mountain."
+msgstr "Aloita rautamalmin kaivaminen vuorilla."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
+msgid "Iron Mine"
+msgstr "Rautakaivos"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:220
+msgid "Build an iron mine on the island"
+msgstr "Rakenna rautakaivos saarelle"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:221
+msgid "Our economy lacks resources."
+msgstr "Taloudestamme puuttuu resursseja."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:222
+msgid "Start mining iron ore in mountains on the island."
+msgstr "Aloita rautamalmin kaivaminen saaren vuorilla."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:277
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:288
+msgid "There is more to it…"
+msgstr "Siellä on sitä lisää…"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:231
+msgid "Another gold mountain"
+msgstr "Toinen kultavuori"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:232
+msgid ""
+"It will take some time for your shipyard to build some ships. While we’re "
+"waiting for them, there is another way of water-based transport I would like"
+" to teach you."
+msgstr "Vie jonkin verran aikaa, että telakka saa rakennettua laivoja. Sillä aikaa kun odotamme niitä, haluaisin opetta sinulle toisesta vesitse tapahtuvasta liikenteestä. "
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid ""
 "Ships have the advantage that they can carry large quantities of wares and "
 "workers at a time, but unfortunately their destinations are limited to a "
 "handful of spaces suited for a port."
-msgstr ""
+msgstr "Laivoilla on etuna, että niillä voi kantaa suuria määriä tavaroita ja työläisiä hetkessä, mutta valitettavasti niiden käyttö on rajoittunut  muutamiin sopiviin satamapaikkoihin."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:234
 msgid ""
 "Look at this valley here in the far south. We have found a mountain with "
 "gold down here and would like to mine ores from it as well. But the streams "
-"seperating it from our main colony are too wide to build bridges and too "
+"separating it from our main colony are too wide to build bridges and too "
 "narrow for ships to pass them. Our roads would have to take long curves, "
 "which slows down ware transport a lot."
 msgstr ""
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:196
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:207
-msgid "Rowboats"
-msgstr ""
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:244
+msgid "Rowboats & Ferry Yards"
+msgstr "Lautat & veneveistämöt"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:246
 msgid ""
 "This is where ferries come in. Ferries are small rowboats that can carry "
 "only one ware at a time, and no workers (other than the one who rows it and "
-"who never leaves his boat). They can travel between any two flags located on"
-" the shore."
-msgstr ""
+"who never leaves his boat)."
+msgstr "Tässä vaiheessa kuvioihin tulevat lautat. Ne ovat hyvin pieniä, joka voivat kuljetta vain yhtä tuotetta kerrallaan, mutta ei työläisiä (paitsi se, joka operoi sitä eikä koskaan poistu siltä)."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:198
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
+msgid ""
+" Ferries are built in ferry yards, one rowboat costs two logs and one piece "
+"of cloth and is quickly constructed. A ferry yard is a medium-sized building"
+" that needs to be built close to the shore."
+msgstr "Lautat rakennetaan veneveistämöillä, yksi lautta maksaa kaksi tukkia ja yhden kankaan. Se rakentuu nopeasti. Veneveistämö on keskikokoinen rakennus, joka täytyy rakentaa lähelle rantaa."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
+msgid "Let’s build a ferry yard close to the shore before we will continue."
+msgstr "Rakennetaan veneveistämö lähelle rantaan, ennen kuin voidaan jatkaa."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:254
+msgid "Build a ferry yard"
+msgstr "Rakenna veneveistämö"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:256
+msgid "Build a ferry yard close to the shore"
+msgstr "Rakenna veneveistämö rannalle"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:257
+msgid "Ferries are constructed by a ferry yard."
+msgstr "Lautat rakennetaan veneveistämössä."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:258
+msgid ""
+"You need to build the ferry yard close to the shore, otherwise it won’t be "
+"able to build ferries there."
+msgstr "Veneveistämön täytyy olla rannikolla, muuten se ei toimi."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:279
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:298
+msgid "Waterways"
+msgstr "Lauttareitit"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:267
 msgid ""
 "Unlike ships which travel to any port where they’re needed, ferries have "
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr ""
+msgstr "Laivat seilaavat teillä tietämättömillä tarpeen mukaan, mutta lautturit kulkevat vain ennaltamäärättyjä reittejään pitkin. Lauttareitti tehdään samoin kuin tiekin, mutta veteen."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:268
 msgid ""
 "Waterways can be built on the open sea as well as close to the shore where "
 "the water is too shallow for big ships. The only rule is that the two "
 "triangles directly adjacent to each segment of the waterway have to be "
 "water, and the entire path needs to be within your territory."
-msgstr ""
+msgstr "Lauttareitin voi perustaa niin syvään veteen kuin matalikollekin, jossa laivat eivät kulje. Koko matkan pitää kuitenkin olla omilla aluevesilläsi."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:269
 msgid ""
 "Also note that waterways, unlike roads, may not be built quite as long as "
 "you want them to. Every map has a length restriction for waterways. On this "
 "map, this is 5 tiles."
-msgstr ""
+msgstr "Lauttareitti ei voi olla määräämättömän pitkä. Maksimipituus vaihtelee kartasta toiseen. Tällä kartalla maksimipituus on viisi askelta."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:270
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr ""
+msgstr "Pidäthän aina mielessä, että lautat eivät kuljeta työläisiä. Voit käyttää niitä tuotteiden kuljetuksen nopeuttamiseen, mutta ne eivät voi koskaan täysin korvaa teitä."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:217
-msgid "Waterways"
-msgstr ""
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:218
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:280
 msgid "Allow me to show you how to build a waterway…"
-msgstr ""
+msgstr "Sallithan minun näyttää, miten lauttareitti luodaan..."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:226
-msgid "Ferry Yards"
-msgstr ""
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:290
+msgid "Golden waves"
+msgstr "Kultaiset aallot"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:227
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:291
 msgid ""
-"Ferries are built in ferry yards. A ferry yard is a medium-sized building "
-"that needs to be built close to the shore. A ferry costs two logs and one "
-"piece of cloth and is quickly constructed. When you build a waterway, the "
-"closest idle ferry will assign itself to it."
-msgstr ""
+"As you can see, it is not that hard. When you build a waterway, the closest "
+"idle ferry will assign itself to it."
+msgstr "Helpostihan se kävi. Kun teet lauttareitin, lähin joutilas lautturi tarttuu toimeen."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:292
 msgid ""
 "Now it’s your turn: Build a gold mine on the mountain in the south and "
 "connect it to the main land by building waterways over the streams."
-msgstr ""
+msgstr "Nyt on sinun vuorosi: Tee kultakaivos eteläiseen vuoreen, ja yhdistä se valtakuntaan lauttareitillä uoman yli."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:232
-msgid "Build Waterways and Ferries"
-msgstr ""
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:300
+msgid "Build a gold mine and waterways"
+msgstr "Tee kultakaivos ja lauttareitti"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:234
-msgid "Build waterways"
-msgstr ""
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:301
 msgid ""
 "Build a gold mine on the mountain in the south, and connect it to the "
 "mainland by building waterways over the streams."
-msgstr ""
+msgstr "Tee kultakaivos eteläiseen vuoreen. Ylitä vesistö lauttareitillä."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:236
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:302
 msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr ""
+msgstr "Lauttareitti perustetaan kuten tiekin: Napsauta lippua, valitse \"tee lauttareitti\", ja jatka samoin sävelin kuin maallakin."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:303
 msgid ""
-"The only rule for waterway placement is that the two triangles directly "
-"adjacent to each segment of the waterway have to be water, and the entire "
-"path needs to be within your territory."
+"However, each segment of the waterway needs two water triangles next to it."
 msgstr ""
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:238
-msgid "Build a ferry yard"
-msgstr ""
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:309
+msgid "Conclusion"
+msgstr "Johtopäätös"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:239
-msgid "Ferries are constructed by a ferry yard."
-msgstr ""
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:240
-msgid ""
-"You need to build the ferry yard close to the shore, otherwise it won’t be "
-"able to build ferries there."
-msgstr ""
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:311
 msgid "About Ferries"
-msgstr ""
+msgstr "Lautoista"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:312
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr ""
+msgstr "Jäljellä on vain muutama asia lisää, mitkä toivon sinun pitävän mielessäsi aina silloin kun käytät lauttoja."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:249
-msgid ""
-"Do remember to stop your ferry yard when you don’t need any new ferries to "
-"be produced. As long as a ferry services a waterway, its lifetime is "
-"unlimited, but unemployed ferries will rot away and eventually sink."
-msgstr ""
-
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:250
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid ""
 "Never forget that these rowboats are too small to carry workers. You can use"
 " them as shortcuts for ware transport within parts of your territory, but "
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr ""
+msgstr "Lautturit kuljettavat vain tavaroita, eivät ihmisiä. Älä katkaise maayhteyttä lauttareittien päitten väliltä, paitsi jos olet varma ettei kenenkään enää koskaan tarvitse päästä toiselle rannalle."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:314
 msgid ""
 "And if your waterways present a significant shortcut between your road "
 "networks, your economy will tend to send many wares over the waterway. As a "
@@ -597,34 +659,41 @@ msgid ""
 "of waterways becoming severe bottlenecks in your economy. Try to build "
 "several of them in parallel to distribute the strain. If this is not "
 "possible, it is in some cases even more efficient not to use waterways."
-msgstr ""
+msgstr "Jos lauttareittisi lyhentää kulkumatkaa, paljon tavaraa lähetetään lautturin kyytiin. Koska kullakin reitillä on vain yksi lautturi, reitti voi ruuhkautua. Tämä voi olla ongelma, jos matka on pitkä. Suosi lyhyitä reittejä. Jos salmi on leveä, harkitse rinnakkaisia reittejä."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:321
+msgid "Ferry yard production"
+msgstr "Venetuotanto"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:323
+msgid "More ferries needed?"
+msgstr "Tarvitaanko lisää lauttoja?"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:324
+msgid ""
+"Do remember to stop your ferry yard when you don’t need any new ferries to "
+"be produced. As long as a ferry services a waterway, its lifetime is "
+"unlimited, but unemployed ferries will rot away and eventually sink."
+msgstr "Pysäytä veneveistämö, kun et tarvitse uusia lauttoja. Käytössä oleva lautta kestää ikuisuuden, mutta käyttämätön lahoaa aikain saatossa."
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:334
+msgid "Congratulations"
+msgstr "Onneksi olkoon"
+
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:335
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr ""
+msgstr "Olet oppinut kaiken mitä laivoista ja lautoista on opittavissa!"
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:261
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr ""
+msgstr "On olemassa myös toinen saari, jonne voit rakentaa sataman mikäli haluat aloittaa toisen tutkimusmatkan."
 
-#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:337
 msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr "“%s”"
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr "Uusi Tavoite"
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr "Uudet Tavoitteet"
+msgstr "Kuten aina, voit jatkaa pelaamista ja harjoitella hiukan lisää tällä kartalla. Voit myös lunastaa kapteenin lisenssisi ja kokeilla uusia taitojasi todellisessa pelissä…"

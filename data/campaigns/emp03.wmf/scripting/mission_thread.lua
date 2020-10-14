@@ -1,8 +1,3 @@
-include "scripting/messages.lua"
-include "map:scripting/helper_functions.lua"
-include "scripting/field_animations.lua"
-
-
 -- Some objectives need to be waited for in separate threads
 local obj_build_port_and_shipyard_done = false
 local obj_find_artifacts_done = false

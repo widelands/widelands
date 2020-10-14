@@ -4,7 +4,7 @@
 --
 -- This file contains common code for the "Territorial Lord" and "Territorial Time" win conditions.
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/richtext.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
@@ -13,6 +13,12 @@ include "scripting/win_conditions/win_condition_texts.lua"
 local team_str = _"Team %i"
 local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+
+local wc_stats = "Territory percentage"
+-- This needs to be exactly like wc_stats, but localized, because wc_stats
+-- will be used as the key to fetch the translation in C++
+-- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
+local wc_stats_i18n = _"Territory percentage"
 
 -- Used by calculate_territory_points keep track of when the winner changes
 local winning_players = {}
@@ -56,8 +62,7 @@ territory_points = {
 -- variables for the territorial winconditions statsistics hook
 fields = 0
 statistics = {
-      -- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
-      name = _"Territory percentage",
+      name = wc_stats,
       pic = "images/wui/stats/genstats_territorial_small.png",
       calculator = function(p)
          local pts = count_owned_valuable_fields_for_all_players(wl.Game().players)
@@ -138,7 +143,11 @@ function calculate_territory_points(fields, players)
       -- Still the same winner
       territory_points.remaining_time = territory_points.remaining_time - 1
    elseif winning_points == -1 then
-      -- No winner. This value is used to calculate whether to send a report to players.
+      -- No winner. We need to reset the information about last winner candidates
+      territory_points.last_winning_player = -1
+      territory_points.last_winning_player_name = -1
+      territory_points.last_winning_team = -1
+      -- This value is used to calculate whether to send a report to players.
       if territory_points.remaining_time == 1800 then
          territory_points.remaining_time = 1201
       elseif territory_points.remaining_time ~= 1201 then
@@ -205,7 +214,7 @@ end
 --    :returns: a richtext-formatted string with header information for a winning player
 --
 function winning_status_header()
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
    local remaining_minutes = math.max(0, math.floor(territory_points.remaining_time / 60))
 
    local message = p(_"You own more than half of the map’s area.")
@@ -213,6 +222,7 @@ function winning_status_header()
              "Keep it for %i more minutes to win the game.",
              remaining_minutes))
          :format(remaining_minutes)
+   pop_textdomain()
    return message
 end
 
@@ -226,7 +236,7 @@ end
 --    :returns: a richtext-formatted string with header information for a losing player
 --
 function losing_status_header(players)
-   set_textdomain("win_conditions")
+   push_textdomain("win_conditions")
    local winner_name = "Error"
    if territory_points.last_winning_team >= 0 then
       winner_name = team_str:format(territory_points.last_winning_team)
@@ -240,6 +250,7 @@ function losing_status_header(players)
              "You’ve still got %i minutes to prevent a victory.",
              remaining_minutes))
          :format(remaining_minutes)
+   pop_textdomain()
    return message
 end
 
@@ -270,3 +281,5 @@ function territory_game_over(fields, players, wc_descname, wc_version)
       end
    end
 end
+
+pop_textdomain()

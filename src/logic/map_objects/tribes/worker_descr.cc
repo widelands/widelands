@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,44 +36,34 @@ namespace Widelands {
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          MapObjectType init_type,
                          const LuaTable& table,
-                         const Tribes& tribes)
+                         Tribes& tribes)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
      ware_hotspot_(table.has_key("ware_hotspot") ?
                       table.get_vector<std::string, int>("ware_hotspot") :
                       Vector2i(0, 15)),
-     default_target_quantity_(table.has_key("default_target_quantity") ?
-                                 table.get_int("default_target_quantity") :
-                                 std::numeric_limits<uint32_t>::max()),
+     default_target_quantity_(kInvalidWare),
      buildable_(table.has_key("buildcost")),
      // Read what the worker can become and the needed experience. If one of the keys is there, the
      // other key must be there too. So, we cross the checks to trigger an exception if this is
      // violated.
-     becomes_(table.has_key("experience") ? tribes.safe_worker_index(table.get_string("becomes")) :
+     becomes_(table.has_key("experience") ? tribes.load_worker(table.get_string("becomes")) :
                                             INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
-     ai_hints_(table.has_key("aihints") ?
-                  new WorkerHints(table.get_string("name"), *table.get_table("aihints")) :
-                  nullptr),
+     ai_hints_(new AI::WareWorkerHints()),
      tribes_(tribes) {
-	if (helptext_script().empty()) {
-		throw GameDataError("Worker %s has no helptext script", name().c_str());
-	}
 	if (icon_filename().empty()) {
 		throw GameDataError("Worker %s has no menu icon", name().c_str());
 	}
-	i18n::Textdomain td("tribes");
+
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("buildcost")) {
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
-				if (!tribes.ware_exists(tribes.ware_index(key)) &&
-				    !tribes.worker_exists(tribes.worker_index(key))) {
-					throw GameDataError("\"%s\" has not been defined as a ware/worker type (wrong "
-					                    "declaration order?)",
-					                    key.c_str());
-				}
+				// Check if ware/worker exists already and if not, try to load it. Will throw a
+				// GameDataError on failure.
+				tribes.try_load_ware_or_worker(key);
 				const int32_t value = items_table->get_int(key);
 				if (value < 1) {
 					throw GameDataError("Buildcost: Ware/Worker count needs to be > 0 in "
@@ -85,7 +75,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					                    key.c_str(), value);
 				}
 
-				buildcost_.insert(std::pair<std::string, uint8_t>(key, value));
+				buildcost_.insert(std::make_pair(key, value));
 			} catch (const WException& e) {
 				throw GameDataError("[buildcost] \"%s\": %s", key.c_str(), e.what());
 			}
@@ -108,28 +98,42 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		std::unique_ptr<LuaTable> programs_table = table.get_table("programs");
 		for (std::string program_name : programs_table->keys<std::string>()) {
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
-
+			if (programs_.count(program_name)) {
+				throw GameDataError("Program '%s' has already been declared for worker '%s'",
+				                    program_name.c_str(), name().c_str());
+			}
 			try {
-				if (programs_.count(program_name))
+				if (programs_.count(program_name)) {
 					throw wexception("this program has already been declared");
+				}
 
-				programs_[program_name] =
-				   std::unique_ptr<WorkerProgram>(new WorkerProgram(program_name, *this, tribes_));
-				programs_[program_name]->parse(*programs_table->get_table(program_name));
+				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(
+				   program_name, *programs_table->get_table(program_name), *this, tribes));
 			} catch (const std::exception& e) {
-				throw wexception("program %s: %s", program_name.c_str(), e.what());
+				throw GameDataError("%s: Error in worker program %s: %s", name().c_str(),
+				                    program_name.c_str(), e.what());
 			}
 		}
 	}
 }
 
-WorkerDescr::WorkerDescr(const std::string& init_descname,
-                         const LuaTable& table,
-                         const Tribes& tribes)
+WorkerDescr::WorkerDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
    : WorkerDescr(init_descname, MapObjectType::WORKER, table, tribes) {
 }
 
 WorkerDescr::~WorkerDescr() {
+}
+
+void WorkerDescr::set_default_target_quantity(int quantity) {
+	if (quantity < 0) {
+		throw GameDataError(
+		   "default_target_quantity %d for worker '%s' must be >=0", quantity, name().c_str());
+	}
+	default_target_quantity_ = quantity;
+}
+
+void WorkerDescr::set_preciousness(const std::string& tribename, int preciousness) {
+	ai_hints_->set_preciousness(name(), tribename, preciousness);
 }
 
 /**
@@ -138,8 +142,9 @@ WorkerDescr::~WorkerDescr() {
 WorkerProgram const* WorkerDescr::get_program(const std::string& programname) const {
 	Programs::const_iterator it = programs_.find(programname);
 
-	if (it == programs_.end())
-		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
+	if (it == programs_.end()) {
+		throw GameDataError("%s has no program '%s'", name().c_str(), programname.c_str());
+	}
 
 	return it->second.get();
 }

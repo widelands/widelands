@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,27 +36,37 @@ FileViewPanel::FileViewPanel(Panel* parent,
      contents_height_(0),
      panel_style_(scrollbar_style) {
 	layout();
+
+	sigclicked.connect([this]() { load_tab_contents(); });
 }
 
-void FileViewPanel::add_tab(const std::string& lua_script) {
-	std::string content, title;
-	try {
-		LuaInterface lua;
-		std::unique_ptr<LuaTable> t(lua.run_script(lua_script));
-		content = t->get_string("text");
-		title = t->get_string("title");
-	} catch (LuaError& err) {
-		content = err.what();
-		title = "Lua error";
+void FileViewPanel::load_tab_contents() {
+	const unsigned index = active();
+	const std::string& lua_script = script_paths_.at(index);
+	std::string contents;
+	if (!lua_script.empty()) {
+		try {
+			LuaInterface lua;
+			std::unique_ptr<LuaTable> t(lua.run_script(lua_script));
+			contents = t->get_string(1);
+		} catch (LuaError& err) {
+			contents = err.what();
+		}
+		textviews_.at(index)->set_text(contents);
+		script_paths_.at(index) = "";
 	}
+}
+
+void FileViewPanel::add_tab(const std::string& title, const std::string& lua_script) {
+	script_paths_.push_back(lua_script);
 	boxes_.push_back(
 	   std::unique_ptr<UI::Box>(new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
 	size_t index = boxes_.size() - 1;
 
-	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
-	   boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_, content);
+	UI::MultilineTextarea* textarea =
+	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_);
 
-	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(std::move(textarea)));
+	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(textarea));
 	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");
 
 	assert(boxes_.size() == textviews_.size());
@@ -77,8 +87,7 @@ void FileViewPanel::layout() {
 	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
-	contents_width_ = std::max(
-	   0, panel_style_ == UI::PanelStyle::kFsMenu ? get_w() - padding_ : get_w() - 2 * padding_);
+	contents_width_ = std::max(0, get_w() - 2 * padding_);
 
 	contents_height_ = std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
 	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,9 @@ PathfieldManager::PathfieldManager() : nrfields_(0) {
 }
 
 void PathfieldManager::set_size(uint32_t const nrfields) {
-	if (nrfields_ != nrfields)
+	if (nrfields_ != nrfields) {
 		list_.clear();
+	}
 
 	nrfields_ = nrfields;
 }
@@ -49,8 +50,9 @@ std::shared_ptr<Pathfields> PathfieldManager::allocate() {
 		}
 	}
 
-	if (list_.size() >= 8)
+	if (list_.size() >= 8) {
 		throw wexception("PathfieldManager::allocate: unbounded nesting?");
+	}
 
 	std::shared_ptr<Pathfields> pf(new Pathfields(nrfields_));
 	clear(pf);
@@ -59,8 +61,9 @@ std::shared_ptr<Pathfields> PathfieldManager::allocate() {
 }
 
 void PathfieldManager::clear(const std::shared_ptr<Pathfields>& pf) {
-	for (uint32_t i = 0; i < nrfields_; ++i)
+	for (uint32_t i = 0; i < nrfields_; ++i) {
 		pf->fields[i].cycle = 0;
+	}
 	pf->cycle = 1;
 }
 }  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,16 +19,21 @@
 #include "wui/mapdetails.h"
 
 #include <algorithm>
+#include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/minimap_renderer.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "logic/game_settings.h"
+#include "map_io/map_loader.h"
 #include "ui_basic/box.h"
 #include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
+#include "wui/suggested_teams_ui.h"
 
 MapDetails::MapDetails(
    Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style)
@@ -37,6 +42,7 @@ MapDetails::MapDetails(
      style_(style),
      padding_(4),
      main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     descr_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_(""),
      name_label_(&main_box_,
                  0,
@@ -47,40 +53,74 @@ MapDetails::MapDetails(
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, "") {
+     descr_(&descr_box_,
+            0,
+            0,
+            UI::Scrollbar::kSize,
+            0,
+            style,
+            "",
+            UI::Align::kLeft,
+            UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     minimap_icon_(&descr_box_, 0, 0, 0, 0, nullptr),
+     last_map_(""),
+     egbase_(nullptr) {
 
-	main_box_.add(&name_label_);
+	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
+	descr_.set_handle_mouse(false);
+	descr_box_.set_force_scrolling(true);
+
+	descr_box_.add(&descr_, UI::Box::Resizing::kFullSize);
+	descr_box_.add_space(padding_);
+	descr_box_.add(&minimap_icon_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(padding_);
-	main_box_.add(&descr_);
+	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
+
+	// Fast initialize world now
+	egbase_.mutable_world(true);
+
 	layout();
 }
 
 void MapDetails::clear() {
 	name_label_.set_text("");
 	descr_.set_text("");
+	minimap_icon_.set_icon(nullptr);
+	minimap_icon_.set_visible(false);
+	minimap_icon_.set_size(0, 0);
 }
 
 void MapDetails::layout() {
-	name_label_.set_size(get_w() - padding_, text_height(style_ == UI::PanelStyle::kFsMenu ?
-	                                                        UI::FontStyle::kFsMenuInfoPanelHeading :
-	                                                        UI::FontStyle::kWuiInfoPanelHeading) +
-	                                            2);
-
-	// Adjust sizes for show / hide suggested teams
 	main_box_.set_size(get_w(), get_h());
-	descr_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
-	descr_.scroll_to_top();
+
+	if (minimap_icon_.icon() == nullptr) {
+		minimap_icon_.set_desired_size(0, 0);
+	} else {
+		// Fit minimap to width
+		const int width = std::min<int>(main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_,
+		                                minimap_cache_.at(last_map_)->width());
+		const float scale = static_cast<float>(width) / minimap_cache_.at(last_map_)->width();
+		const int height = scale * minimap_cache_.at(last_map_)->height();
+
+		minimap_icon_.set_desired_size(width, height);
+	}
+
+	descr_box_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 }
 
-void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
+bool MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
 	name_ = mapdata.name;
+	last_map_ = mapdata.filename;
+	bool loadable = true;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-		                      as_heading(_("Directory"), style_, true) %
-		                      as_content(mapdata.localized_name, style_))
-		                        .str());
+		name_label_.set_text(
+		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory"), style_, true) %
+		    as_content(mapdata.localized_name, style_))
+		      .str());
 		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information
@@ -156,7 +196,36 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			description += as_heading_with_content(_("Suggested Teams"), suggested_teams, style_, false, true);
 		}
 
+		// Render minimap
+		auto minimap = minimap_cache_.find(last_map_);
+		if (minimap != minimap_cache_.end()) {
+			minimap_icon_.set_icon(minimap->second.get());
+			minimap_icon_.set_visible(true);
+		} else {
+			egbase_.cleanup_for_load();
+			std::unique_ptr<Widelands::MapLoader> ml(
+			   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
+			try {
+				if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
+					minimap_cache_[last_map_] = draw_minimap(
+					   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+					   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
+					minimap_icon_.set_icon(minimap_cache_.at(last_map_).get());
+					minimap_icon_.set_visible(true);
+				}
+			} catch (const Widelands::GameDataError& e) {
+				// Put error message on top for better visibility
+				description =
+				   (boost::format("%s%s") % as_content(e.what(), style_) % description).str();
+				description =
+				   (boost::format("%s%s") % as_heading(_("Game data error"), style_) % description)
+				      .str();
+				loadable = false;
+			}
+		}
+
 		descr_.set_text(as_richtext(description));
 	}
 	layout();
+	return loadable;
 }

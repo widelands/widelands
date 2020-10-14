@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "frisians_building",
    name = "frisians_furnace",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("frisians_building", "Furnace"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -74,20 +74,15 @@ tribes:new_productionsite_type {
       { name = "iron_ore", amount = 8 },
       { name = "gold_ore", amount = 8 },
    },
-   outputs = {
-      "iron",
-      "gold"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
             "call=smelt_iron_2",
-            "return=no_stats",
          },
       },
       -- 2 identical programs for iron to prevent unnecessary skipping penalty
@@ -97,10 +92,10 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=25000",
-            "playsound=sound/metal/furnace 192",
-            "animate=working_iron 35000",
-            "playsound=sound/metal/ironping 80",
+            "sleep=duration:25s",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
+            "animate=working_iron duration:35s",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          },
       },
@@ -110,10 +105,10 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron",
             "consume=coal iron_ore",
-            "sleep=25000",
-            "playsound=sound/metal/furnace 192",
-            "animate=working_iron 35000",
-            "playsound=sound/metal/ironping 80",
+            "sleep=duration:25s",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
+            "animate=working_iron duration:35s",
+            "playsound=sound/metal/ironping priority:60%",
             "produce=iron"
          },
       },
@@ -123,12 +118,14 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs gold",
             "consume=coal gold_ore",
-            "sleep=27000",
-            "playsound=sound/metal/furnace 192",
-            "animate=working_gold 35000",
-            "playsound=sound/metal/goldping 80",
+            "sleep=duration:27s",
+            "playsound=sound/metal/furnace priority:50% allow_multiple",
+            "animate=working_gold duration:35s",
+            "playsound=sound/metal/goldping priority:60%",
             "produce=gold"
          },
       },
    },
 }
+
+pop_textdomain()

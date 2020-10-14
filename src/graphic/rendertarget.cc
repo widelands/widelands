@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include "graphic/align.h"
 #include "graphic/animation/animation.h"
 #include "graphic/animation/animation_manager.h"
-#include "graphic/graphic.h"
 #include "graphic/surface.h"
 
 /**
@@ -47,8 +46,9 @@ void RenderTarget::set_window(const Recti& rc, const Vector2i& ofs) {
 		rect_.x = 0;
 	}
 
-	if (rect_.x + rect_.w > surface_->width())
+	if (rect_.x + rect_.w > surface_->width()) {
 		rect_.w = std::max<int32_t>(surface_->width() - rect_.x, 0);
+	}
 
 	if (rect_.y < 0) {
 		offset_.y += rect_.y;
@@ -56,8 +56,9 @@ void RenderTarget::set_window(const Recti& rc, const Vector2i& ofs) {
 		rect_.y = 0;
 	}
 
-	if (rect_.y + rect_.h > surface_->height())
+	if (rect_.y + rect_.h > surface_->height()) {
 		rect_.h = std::max<int32_t>(surface_->height() - rect_.y, 0);
+	}
 }
 
 /**
@@ -72,10 +73,12 @@ void RenderTarget::set_window(const Recti& rc, const Vector2i& ofs) {
 bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prevofs) {
 	Rectf newrect_f = rc.cast<float>();
 	if (clip(newrect_f)) {
-		if (previous)
+		if (previous) {
 			*previous = rect_;
-		if (prevofs)
+		}
+		if (prevofs) {
 			*prevofs = offset_;
+		}
 
 		const Recti newrect = newrect_f.cast<int>();
 		// Apply the changes
@@ -83,8 +86,9 @@ bool RenderTarget::enter_window(const Recti& rc, Recti* previous, Vector2i* prev
 		rect_ = newrect;
 
 		return true;
-	} else
+	} else {
 		return false;
+	}
 }
 
 /**
@@ -127,14 +131,16 @@ void RenderTarget::draw_rect(const Recti& rect, const RGBColor& clr) {
 
 void RenderTarget::fill_rect(const Recti& rect, const RGBAColor& clr, BlendMode blend_mode) {
 	Rectf r(rect.cast<float>());
-	if (clip(r))
+	if (clip(r)) {
 		surface_->fill_rect(r, clr, blend_mode);
+	}
 }
 
 void RenderTarget::brighten_rect(const Recti& rect, int32_t factor) {
 	Rectf r(rect.cast<float>());
-	if (clip(r))
+	if (clip(r)) {
 		surface_->brighten_rect(r, factor);
+	}
 }
 
 /**
@@ -233,22 +239,26 @@ void RenderTarget::tile(const Recti& rect,
 	Rectf r = rect.cast<float>();
 	Vector2i ofs(gofs);
 	if (clip(r)) {
-		if (offset_.x < 0)
+		if (offset_.x < 0) {
 			ofs.x -= offset_.x;
+		}
 
-		if (offset_.y < 0)
+		if (offset_.y < 0) {
 			ofs.y -= offset_.y;
+		}
 
 		// Make sure the offset is within bounds
 		ofs.x = ofs.x % srcw;
 
-		if (ofs.x < 0)
+		if (ofs.x < 0) {
 			ofs.x += srcw;
+		}
 
 		ofs.y = ofs.y % srch;
 
-		if (ofs.y < 0)
+		if (ofs.y < 0) {
 			ofs.y += srch;
+		}
 
 		// Blit the image into the rectangle
 		int ty = 0;
@@ -261,15 +271,17 @@ void RenderTarget::tile(const Recti& rect,
 			srcrc.y = ofs.y;
 			srcrc.h = srch - ofs.y;
 
-			if (ty + srcrc.h > r.h)
+			if (ty + srcrc.h > r.h) {
 				srcrc.h = r.h - ty;
+			}
 
 			while (tx < r.w) {
 				srcrc.x = tofsx;
 				srcrc.w = srcw - tofsx;
 
-				if (tx + srcrc.w > r.w)
+				if (tx + srcrc.w > r.w) {
 					srcrc.w = r.w - tx;
+				}
 
 				const Rectf dst_rect(r.x + tx, r.y + ty, srcrc.w, srcrc.h);
 				surface_->blit(dst_rect, *image, srcrc, 1., blend_mode);
@@ -291,15 +303,16 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   uint32_t animation_id,
                                   uint32_t time,
                                   const RGBColor* player_color,
+                                  const float opacity,
                                   const int percent_from_bottom) {
-	const Animation& animation = g_gr->animations().get_animation(animation_id);
+	const Animation& animation = g_animation_manager->get_animation(animation_id);
 	assert(percent_from_bottom <= 100);
 	if (percent_from_bottom > 0) {
 		// Scaling for zoom and animation image size, then fit screen edges.
 		Rectf srcrc = animation.source_rectangle(percent_from_bottom, scale);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale);
+			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale, opacity);
 		}
 	}
 }
@@ -327,8 +340,9 @@ bool RenderTarget::clip(Rectf& r) const {
 	r.y += offset_.y;
 
 	if (r.x < 0) {
-		if (r.w <= -r.x)
+		if (r.w <= -r.x) {
 			return false;
+		}
 
 		r.w += r.x;
 
@@ -336,21 +350,24 @@ bool RenderTarget::clip(Rectf& r) const {
 	}
 
 	if (r.x + r.w > rect_.w) {
-		if (rect_.w <= r.x)
+		if (rect_.w <= r.x) {
 			return false;
+		}
 		r.w = rect_.w - r.x;
 	}
 
 	if (r.y < 0) {
-		if (r.h <= -r.y)
+		if (r.h <= -r.y) {
 			return false;
+		}
 		r.h += r.y;
 		r.y = 0;
 	}
 
 	if (r.y + r.h > rect_.h) {
-		if (rect_.h <= r.y)
+		if (rect_.h <= r.y) {
 			return false;
+		}
 		r.h = rect_.h - r.y;
 	}
 

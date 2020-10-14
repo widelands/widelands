@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "empire_building",
    name = "empire_vineyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Vineyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -40,24 +40,13 @@ tribes:new_productionsite_type {
       empire_vinefarmer = 1
    },
 
-   outputs = {
-      "grape"
-   },
-
-   indicate_workarea_overlaps = {
-      empire_vineyard = false,
-      empire_farm = false,
-      empire_foresters_house = false,
-   },
-
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=plant",
             "call=harvest",
-            "return=no_stats"
          }
       },
       plant = {
@@ -65,7 +54,7 @@ tribes:new_productionsite_type {
          descname = _"planting grapevines",
          actions = {
             "callworker=plant",
-            "sleep=5000"
+            "sleep=duration:5s"
          }
       },
       harvest = {
@@ -73,7 +62,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting grapes",
          actions = {
             "callworker=harvest",
-            "sleep=5000"
+            "sleep=duration:5s"
          }
       },
    },
@@ -85,3 +74,5 @@ tribes:new_productionsite_type {
       productivity_threshold = 30
    },
 }
+
+pop_textdomain()

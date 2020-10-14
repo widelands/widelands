@@ -12,11 +12,7 @@
 -- ``data/tribes/buildings/productionsites/<tribe_name>/<building_name>/init.lua``.
 -- The building will also need its help texts, which are defined in
 -- ``data/tribes/buildings/productionsites/<tribe_name>/<building_name>/helptexts.lua``
-
-
-dirname = path.dirname(__file__)
-
--- RST
+--
 -- .. function:: new_productionsite_type{table}
 --
 --    This function adds the definition of a production site building to the engine.
@@ -45,7 +41,7 @@ dirname = path.dirname(__file__)
 --            },
 --
 --    **outputs**
---        *Optional*. The wares/workers produced by this building, e.g.::
+--        *DEPRECATED*. The wares/workers produced by this building, e.g.::
 --
 --            outputs = { "shield_advanced", "shield_steel" },
 --
@@ -53,10 +49,10 @@ dirname = path.dirname(__file__)
 --        *Mandatory*. The production site programs that define what preconditions
 --        a building needs to fulfil in order to produce its wares and how it's
 --        done, including any animations and sounds played.
---        See :doc:`productionsite_program`.
+--        See :ref:`productionsite_programs`.
 --
 --    **indicate_workarea_overlaps**
---        *Optional*. The names of other productionsites whose workareas should be highlighted
+--        *DEPRECATED*. The names of other productionsites whose workareas should be highlighted
 --        if theirs overlap with this building’s workarea while the player is placing a
 --        building of this type. The overlaps can be shown either as desired (`true`), if the
 --        proximity of these buildings is favourable, or as negative (`false`), if they influence
@@ -99,12 +95,80 @@ dirname = path.dirname(__file__)
 --        to the player if all resources have been replenished by its worker in full.
 --        Look at the Atlantean Fish Breeder's House for an example.
 --
+-- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+--
+-- Example:
+--
+-- .. code-block:: lua
+--
+--    push_textdomain("tribes")
+--
+--    dirname = path.dirname(__file__)
+--
+--    tribes:new_productionsite_type {
+--       name = "atlanteans_well",
+--       descname = pgettext("atlanteans_building", "Well"),
+--       animation_directory = dirname,
+--       icon = dirname .. "menu.png",
+--       size = "small",
+--
+--       buildcost = {
+--          log = 2,
+--          granite = 1,
+--          planks = 1
+--       },
+--       return_on_dismantle = {
+--          log = 1,
+--          granite = 1
+--       },
+--
+--       animations = {
+--          idle = {
+--             hotspot = { 31, 32 },
+--          },
+--          working = {
+--             hotspot = { 31, 32 },
+--          },
+--       },
+--
+--       aihints = {
+--          basic_amount = 1,
+--          collects_ware_from_map = "water"
+--       },
+--
+--       working_positions = {
+--          atlanteans_carrier = 1
+--       },
+--
+--       programs = {
+--          main = {
+--             descname = _"working",
+--             actions = {
+--                "sleep=duration:20s",
+--                "animate=working duration:20s",
+--                "mine=resource_water radius:1 yield:100% when_empty:65%",
+--                "produce=water"
+--             }
+--          },
+--       },
+--       out_of_resource_notification = {
+--          title = _"No Water",
+--          heading = _"Out of Water",
+--          message = pgettext("atlanteans_building", "The carrier working at this well can’t find any water in his well."),
+--          productivity_threshold = 33
+--       },
+--    }
+--
+--    pop_textdomain()
+
+push_textdomain("tribes")
+
+dirname = path.dirname(__file__)
+
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_armorsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Armor Smithy"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -144,19 +208,14 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
       { name = "gold", amount = 8 }
    },
-   outputs = {
-      "shield_advanced",
-      "shield_steel"
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=produce_shield_steel",
             "call=produce_shield_advanced",
-            "return=no_stats"
          }
       },
       produce_shield_steel = {
@@ -166,8 +225,8 @@ tribes:new_productionsite_type {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs shield_steel",
             "consume=iron:2 coal:2",
-            "sleep=32000",
-            "animate=working 35000",
+            "sleep=duration:32s",
+            "animate=working duration:35s",
             "produce=shield_steel"
          }
       },
@@ -178,10 +237,12 @@ tribes:new_productionsite_type {
             -- time total: 77 + 3.6
             "return=skipped unless economy needs shield_advanced",
             "consume=iron:2 coal:2 gold",
-            "sleep=32000",
-            "animate=working 45000",
+            "sleep=duration:32s",
+            "animate=working duration:45s",
             "produce=shield_advanced"
          }
       },
    },
 }
+
+pop_textdomain()

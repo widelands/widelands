@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
             0,
             _("Choose a map"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
@@ -66,7 +66,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
-     unspecified_balancing_found_(false) {
+     unspecified_balancing_found_(false),
+     update_map_details_(false) {
 	curdir_ = basedir_;
 	if (settings_->settings().multiplayer) {
 		back_.set_tooltip(_("Return to the multiplayer game setup"));
@@ -74,16 +75,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 		back_.set_tooltip(_("Return to the single player menu"));
 	}
 
-	back_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	table_.selected.connect(boost::bind(&FullscreenMenuMapSelect::entry_selected, this));
-	table_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuMapSelect::clicked_ok, boost::ref(*this)));
-	table_.set_column_compare(
-	   0, boost::bind(&FullscreenMenuMapSelect::compare_players, this, _1, _2));
-	table_.set_column_compare(
-	   1, boost::bind(&FullscreenMenuMapSelect::compare_mapnames, this, _1, _2));
-	table_.set_column_compare(2, boost::bind(&FullscreenMenuMapSelect::compare_size, this, _1, _2));
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	table_.selected.connect([this](uint32_t) { entry_selected(); });
+	table_.double_clicked.connect([this](uint32_t) { clicked_ok(); });
+	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
+	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
+	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
 	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
@@ -157,12 +155,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	// We know this after the list is filled.
 	cb_dont_localize_mapnames_->set_visible(has_translated_mapname_);
 
-	cb_dont_localize_mapnames_->changedto.connect(
-	   boost::bind(&FullscreenMenuMapSelect::fill_table, boost::ref(*this)));
+	cb_dont_localize_mapnames_->changedto.connect([this](unsigned) { fill_table(); });
 
 	for (size_t i = 0; i < tags_checkboxes_.size(); ++i) {
-		tags_checkboxes_.at(i)->changedto.connect(
-		   boost::bind(&FullscreenMenuMapSelect::tagbox_changed, this, i, _1));
+		tags_checkboxes_.at(i)->changedto.connect([this, i](bool b) { tagbox_changed(i, b); });
 	}
 
 	balancing_tags_dropdown_->selected.connect([this] { fill_table(); });
@@ -187,8 +183,18 @@ void FullscreenMenuMapSelect::layout() {
 }
 
 void FullscreenMenuMapSelect::think() {
+	FullscreenMenuLoadMapOrGame::think();
+
 	if (ctrl_) {
 		ctrl_->think();
+	}
+
+	if (update_map_details_) {
+		// Call performance heavy draw_minimap function only during think
+		update_map_details_ = false;
+		bool loadable = map_details_.update(
+		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		ok_.set_enabled(loadable && maps_data_.at(table_.get_selected()).nrplayers > 0);
 	}
 }
 
@@ -220,6 +226,8 @@ void FullscreenMenuMapSelect::clicked_ok() {
 	if (!mapdata.width) {
 		curdir_ = mapdata.filename;
 		fill_table();
+	} else if (!ok_.enabled()) {
+		return;
 	} else {
 		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
 			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
@@ -231,9 +239,9 @@ void FullscreenMenuMapSelect::clicked_ok() {
 
 bool FullscreenMenuMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection && maps_data_.at(table_.get_selected()).nrplayers > 0);
 
 	if (!has_selection) {
+		ok_.set_enabled(false);
 		map_details_.clear();
 	}
 	return has_selection;
@@ -241,8 +249,8 @@ bool FullscreenMenuMapSelect::set_has_selection() {
 
 void FullscreenMenuMapSelect::entry_selected() {
 	if (set_has_selection()) {
-		map_details_.update(
-		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		// Update during think() instead of every keypress
+		update_map_details_ = true;
 	}
 }
 
@@ -346,9 +354,9 @@ void FullscreenMenuMapSelect::fill_table() {
 				if (!mapdata.tags.count("balanced") && !mapdata.tags.count("unbalanced")) {
 					unspecified_balancing_found = true;
 				} else if (mapdata.tags.count("balanced") && mapdata.tags.count("unbalanced")) {
-					log("WARNING: Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
-					    "packet\n",
-					    mapfilename.c_str());
+					log_warn("Map '%s' is both balanced and unbalanced - please fix the 'elemental' "
+					         "packet\n",
+					         mapfilename.c_str());
 				}
 
 				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end();
@@ -361,15 +369,17 @@ void FullscreenMenuMapSelect::fill_table() {
 				}
 				maps_data_.push_back(mapdata);
 			} catch (const std::exception& e) {
-				log("Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
+				log_warn(
+				   "Mapselect: Skip %s due to preload error: %s\n", mapfilename.c_str(), e.what());
 			} catch (...) {
-				log("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
+				log_warn("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 			}
-		} else if (g_fs->is_directory(mapfilename)) {
+		} else if (g_fs->is_directory(mapfilename) && g_fs->list_directory(mapfilename).size() > 0) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
-			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, ".."))
+			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {
 				continue;
+			}
 			maps_data_.push_back(MapData::create_directory(mapfilename));
 		}
 	}
@@ -379,7 +389,7 @@ void FullscreenMenuMapSelect::fill_table() {
 		table_.select(0);
 	}
 	set_has_selection();
-	table_.cancel.connect(boost::bind(&FullscreenMenuMapSelect::clicked_back, boost::ref(*this)));
+	table_.cancel.connect([this]() { clicked_back(); });
 
 	if (unspecified_balancing_found != unspecified_balancing_found_) {
 		unspecified_balancing_found_ = unspecified_balancing_found;
@@ -390,8 +400,9 @@ void FullscreenMenuMapSelect::fill_table() {
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox*
-FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box, std::string tag, std::string displ_name) {
+UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
+                                                        const std::string& tag,
+                                                        const std::string& displ_name) {
 	tags_ordered_.push_back(tag);
 
 	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);

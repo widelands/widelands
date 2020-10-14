@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,8 +46,9 @@ CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
  * Call economy functions to balance supply and request.
  */
 void CmdCallEconomyBalance::execute(Game& game) {
-	if (Flag* const flag = flag_.get(game))
+	if (Flag* const flag = flag_.get(game)) {
 		flag->get_economy(type_)->balance(timerid_);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersion = 4;
@@ -58,27 +59,14 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version <= kCurrentPacketVersion && packet_version >= 3) {
+		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
 			if (serial) {
 				flag_ = &mol.get<Flag>(serial);
 			}
 			timerid_ = fr.unsigned_32();
-			if (packet_version >= 4) {
-				type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
-			} else {
-				// TODO(Nordfriese): Savegame compatibility
-				type_ = wwWARE;
-				if (serial) {
-					if (upcast(Game, game, &egbase)) {
-						Economy* e = flag_.get(egbase)->get_economy(wwWORKER);
-						assert(e);
-						game->cmdqueue().enqueue(
-						   new CmdCallEconomyBalance(duetime(), e, e->request_timerid_));
-					}
-				}
-			}
+			type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);
@@ -92,10 +80,11 @@ void CmdCallEconomyBalance::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 
 	// Write Base Commands
 	GameLogicCommand::write(fw, egbase, mos);
-	if (Flag* const flag = flag_.get(egbase))
+	if (Flag* const flag = flag_.get(egbase)) {
 		fw.unsigned_32(mos.get_object_file_index(*flag));
-	else
+	} else {
 		fw.unsigned_32(0);
+	}
 	fw.unsigned_32(timerid_);
 	fw.unsigned_8(type_);
 }

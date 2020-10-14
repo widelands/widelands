@@ -9,14 +9,15 @@
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
 # Renaud Bouchard, 2015-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-03-16 06:59+0000\n"
-"PO-Revision-Date: 2020-03-16 11:37+0000\n"
-"Last-Translator: Renaud Bouchard\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-08-23 19:20+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,18 +63,28 @@ msgstr " --homedir=DIRNAME    Utilise le dossier spécifié pour la sauvegarde d
 msgid "                      Default is ~/.widelands"
 msgstr "Par défaut est ~/.widelands"
 
+#: ../../src/wlapplication_messages.cc:56
+msgid "                      Default is %USERPROFILE%\\.widelands"
+msgstr "Par défaut est %USERPROFILE%/.widelands"
+
+#: ../../src/wlapplication_messages.cc:58
+msgid ""
+" --localedir=DIRNAME  Use specified directory for the widelands\n"
+"                      locale files"
+msgstr " --localedir=DIRNAME    Utilise le dossier spécifié pour les traductions\nde Widelands."
+
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:60
+#: ../../src/wlapplication_messages.cc:65
 msgid ""
 " --coredump=[true|false]\n"
 "                      Generates a core dump on segfaults instead of\n"
 "                      using the SDL"
 msgstr " --coredump=[true|false]\n                      Génère un dump du noyau au\n                      lieu d'utiliser SDL."
 
-#: ../../src/wlapplication_messages.cc:64
+#: ../../src/wlapplication_messages.cc:69
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
@@ -88,57 +99,57 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      Locales à utiliser
 #. multiplayer
 #. * TRANSLATORS: games to make sure that there is no mismatch between the
 #. players.
-#: ../../src/wlapplication_messages.cc:73
+#: ../../src/wlapplication_messages.cc:78
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
 msgstr " --write_syncstreams=[true|false]\n                      Créé des fichiers journaux des flux de synchronisation pour aider à déboguer les parties en réseau."
 
-#: ../../src/wlapplication_messages.cc:76
+#: ../../src/wlapplication_messages.cc:81
 msgid " --autosave=[...]     Automatically save each n minutes"
 msgstr " --autosave=[...]      Sauvegarde automatique toutes les n minutes."
 
-#: ../../src/wlapplication_messages.cc:77
+#: ../../src/wlapplication_messages.cc:82
 msgid ""
 " --rolling_autosave=[...]\n"
 "                      Use this many files for rolling autosaves"
 msgstr " --rolling_autosave=[...]\n                      Utilise ce nombre de fichiers pour le roulement de sauvegardes automatiques."
 
-#: ../../src/wlapplication_messages.cc:80
+#: ../../src/wlapplication_messages.cc:85
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
 msgstr " --metaserver=[...]\n                      Se connecter à un metaserver différent pour le jeux internet."
 
-#: ../../src/wlapplication_messages.cc:83
+#: ../../src/wlapplication_messages.cc:88
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
 msgstr " --metaserverport=[...]\n                      Numéro de Port du metaserver pour le jeux internet."
 
-#: ../../src/wlapplication_messages.cc:87
+#: ../../src/wlapplication_messages.cc:92
 msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            Démarre le jeu avec le son désactivé."
 
-#: ../../src/wlapplication_messages.cc:89
+#: ../../src/wlapplication_messages.cc:94
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip              Ne pas sauver les fichiers en archives zip binaires."
 
-#: ../../src/wlapplication_messages.cc:91
+#: ../../src/wlapplication_messages.cc:96
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr " --editor              Démarre directement l'éditeur de Widelands.\n                        Vous pouvez ajouter =FILENAME pour charger directement\n                        la carte FILENAME dans l'éditeur."
 
-#: ../../src/wlapplication_messages.cc:95
+#: ../../src/wlapplication_messages.cc:100
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
 msgstr " --ai_training        Active le mode entrainement de l'IA. Voir\n                      https://www.widelands.org/wiki/Ai%20Training/\n                      pour une description complète de la logique d'apprentissage de l'IA."
 
-#: ../../src/wlapplication_messages.cc:99
+#: ../../src/wlapplication_messages.cc:104
 msgid ""
 " --auto_speed         In multiplayer games only, this will keep\n"
 "                      adjusting the game speed automatically,\n"
@@ -146,17 +157,17 @@ msgid ""
 "                      --ai_training."
 msgstr "--auto_speed           Dans les jeux multijoueurs seulement, ceci ajustera\nla vitesse du jeu automatiquement,\npar rapport au IPS. Utile en conjonction avec\n--ai_training."
 
-#: ../../src/wlapplication_messages.cc:104
+#: ../../src/wlapplication_messages.cc:109
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=FILENAME  Démarre directement la carte FILENAME comme carte de\nscénario."
 
-#: ../../src/wlapplication_messages.cc:107
+#: ../../src/wlapplication_messages.cc:112
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=FILENAME  Charge directement la sauvegarde FILENAME."
 
-#: ../../src/wlapplication_messages.cc:108
+#: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -166,7 +177,7 @@ msgstr " --script=FILENAME    Exécute le script LUA donné après l'initialisat
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:114
+#: ../../src/wlapplication_messages.cc:119
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -174,7 +185,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                      Pour passer en mode construction de route\n                      automatiquement après avoir placé un drapeau\n                      qui n'est pas connecté à une route."
 
-#: ../../src/wlapplication_messages.cc:120
+#: ../../src/wlapplication_messages.cc:125
 msgid "Graphic options:"
 msgstr "Options graphiques :"
 
@@ -182,22 +193,22 @@ msgstr "Options graphiques :"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:124
+#: ../../src/wlapplication_messages.cc:130
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      Pour utiliser tout l'écran pour l'écran de jeu."
 
-#: ../../src/wlapplication_messages.cc:128
+#: ../../src/wlapplication_messages.cc:134
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]          Largeur de la fenêtre en pixels."
 
-#: ../../src/wlapplication_messages.cc:129
+#: ../../src/wlapplication_messages.cc:135
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]          Hauteur de la fenêtre en pixels."
 
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:136
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]     Nombre d'images optique maximum du jeux."
 
@@ -205,17 +216,17 @@ msgstr " --maxfps=[5 ...]     Nombre d'images optique maximum du jeux."
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:141
 msgid "Options for the internal window manager:"
 msgstr "Options pour le gestionnaire de fenêtre interne :"
 
-#: ../../src/wlapplication_messages.cc:136
+#: ../../src/wlapplication_messages.cc:142
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr " --animate_map_panning=[yes|no]\n                      Doit activer automatiquement le déplacement de la carte."
 
-#: ../../src/wlapplication_messages.cc:139
+#: ../../src/wlapplication_messages.cc:145
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -227,7 +238,7 @@ msgstr " --border_snap_distance=[0 ...]\n                      Bouge une fenêtr
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:147
+#: ../../src/wlapplication_messages.cc:153
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -235,7 +246,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      Élimine le bord d'une fenêtre du coté du bord\n                      de l'écran lorsque le bord de la fenêtre\n                      est à coté du bord de l'écran."
 
-#: ../../src/wlapplication_messages.cc:152
+#: ../../src/wlapplication_messages.cc:158
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -243,7 +254,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      Bouge une fenêtre vers le bord du panneau quand\n                     le bord de la fenêtre entre dans cette distance\n                    du bord du panneau."
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:163
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -251,18 +262,18 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                       Bouge seulement la fenêtre vers le bord du\n                       panneau si la fenêtre est au dessus du\n                       panneau."
 
-#: ../../src/wlapplication_messages.cc:163
+#: ../../src/wlapplication_messages.cc:169
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Active les messages verbeux de debogage."
 
-#: ../../src/wlapplication_messages.cc:164
+#: ../../src/wlapplication_messages.cc:170
 msgid " --help               Show this help"
 msgstr " --help                Montre cette aide."
 
-#: ../../src/wlapplication_messages.cc:165
+#: ../../src/wlapplication_messages.cc:171
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Rapports de bogues ? Suggestions ? Visitez le site web du projet :\n         https://wl.widelands.org/\n\nNous espérons que vous appréciez ce jeu !"
+msgstr "Rapports de bogues ? Suggestions ? Visitez le site web du projet :\nhttps://www.widelands.org/\n\nNous espérons que vous appréciez ce jeu !"

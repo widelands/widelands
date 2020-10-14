@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2019 Widelands Development Team
+# Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-08-10 17:14+0000\n"
-"PO-Revision-Date: 2019-08-10 17:15+0000\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-08-01 01:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -18,52 +18,52 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:20
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:22
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid "Build two ranger’s huts"
 msgstr "植樹番の庵を２つ建てる"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:25
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:23
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
 msgstr "木こりの庵の隣に植樹番の庵を建てる。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:24
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
 msgstr "本来、木々は非常にゆっくりとしか成長しません。十分な丸太を確保するためには植樹番を建てる必要があります。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
 msgstr "北東に領土を拡大し、採石場を建てる"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east to the rocks"
 msgstr "岩を確保するため、北東に領土を広げましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:33
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
 msgstr "詰所や防塞のような軍事系の建物を建てて領土を拡大しましょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Get to the rocks north-east from you and build a quarry there."
 msgstr "今の領土の北東にある岩まで到達し、そこに採石場を建てましょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
 msgstr "山に鉱山を作りましょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
 msgstr "炭鉱と鉄鉱を建てましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
 msgstr "炭鉱と鉄鉱を１つずつ建てましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
 "To do so, place a flag up on the mountain’s flank to the east (on mountain "
 "terrain though, not mountain meadow). When you click on the new flag, you "
@@ -73,126 +73,127 @@ msgid ""
 "appropriate mine to be built:"
 msgstr "そのためには、まず東の山の斜面 (山裾の草地ではダメです) に旗を立てて道をつなぎましょう。次に山の斜面に立てた旗をクリックして、地質学者を派遣しましょう。山にある旗に地質学者を派遣した場合は鉱石を探してくれます。それ以外の場所ならば彼らは水を探します。後は彼らが見つけてくれた資源に合わせて炭鉱や鉄鉱を建設しましょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
-msgid "a bit of coal"
-msgstr "少量の石炭"
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
+msgid "some coal"
+msgstr ""
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
 msgstr "大量の石炭"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
-msgid "a bit of iron"
-msgstr "少量の鉄"
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
+msgid "some iron"
+msgstr ""
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
 msgstr "大量の鉄"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
-msgid "a bit of gold"
-msgstr "少量の金"
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
+msgid "some gold"
+msgstr ""
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
 msgstr "大量の金"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
-msgid "a bit of granite"
-msgstr "少量の花崗岩"
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
+msgid "some granite"
+msgstr ""
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:53
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
 msgstr "大量の花崗岩"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:54
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
 msgstr "水"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:55
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
 msgstr "何も見つからない"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:56
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:54
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
 msgstr "鉱山は山にしか建てられません。建設可能な場所はオレンジの鉱山マークで表示されます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:59
 msgid "Provide your miners with food"
 msgstr "鉱山に食料を供給しましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
 msgstr "狩人の庵、狩猟番の庵、そして酒場を１つずつ建てましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:62
 msgid "In order to work, your miners need food."
 msgstr "鉱夫達は食料が無いと働きません。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
 msgstr "狩人を野生動物を狩ります。一方で狩猟番は野生動物の絶滅を防ぎます。肉は酒場で加工されて鉱夫達の昼食になります。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:65
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
 msgstr "物資が実際に使われる前に別の建物での加工が必要になる、これはその最初の一例に過ぎません ── このようなケースはこれからどんどん出てきます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
 msgstr "パンを焼きましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:72
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
 msgstr "井戸、農場、そしてパン工房を１つずつ建てましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:73
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:71
 msgid ""
 "Other ways to produce food – different kinds of food – are fishers and "
 "farms. The wheat of the farms has to be processed with water in a bakery "
-"before it becomes edible. You can obtain water by building a well on a spot "
-"where your geologists have found a water source."
-msgstr "他に食料を生産する方法 ── 他の種類の食料を生産する方法があります。漁師や農場を使うのです。農場で生産された小麦を食べられるようにするには、パン工房で水と一緒に加工する必要があります。水は地質学者が発見した場所に井戸を建設すれば効率良く汲み上げることができます。なお、水だけは資源が無いところでも半分程度の効率ですが、汲み上げることができます。"
+"before it becomes edible. You can obtain water by building a well. For the "
+"best productivity, build it on a spot where your geologists have found a "
+"water source."
+msgstr ""
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"
 msgstr "採掘した鉱物を生成しましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:80
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Build a smelting works"
 msgstr "精錬所を建設しましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:81
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:79
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
 msgstr "鉱夫の採掘した鉄鉱石はそのままでは使えません ── 精錬して鉄にしなければいけません。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:84
 msgid "Enhance buildings and build a micro brewery"
 msgstr "建物の拡張とビール工房の建設をしましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance a mine and the tavern, and build a micro brewery."
 msgstr "鉱山と酒場をそれぞれ１つずつ拡張しましょう。また、ビール工房を１つ建てましょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:89
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:87
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
 msgstr "炭鉱か鉄鉱を１つ深鉱に拡張しましょう。そして、酒場を１つ食堂に拡張しましょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Also build a micro brewery."
 msgstr "それと、ビール工房を１つ建てましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
 "A normal mine can only dig up about one third of all the resources that lie "
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
@@ -200,7 +201,7 @@ msgid ""
 "appropriate button in the appearing window."
 msgstr "通常の鉱山では眠っている資源の１／３程度しか採掘できません。それを超えて採掘を行うには、深鉱に拡張しなければなりません。建物を拡張するには、建物をクリックして現れるウィンドウの中にあるボタンをクリックする必要があります。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid ""
 "Workers gain experience by successful work. With enough experience, they "
 "become more advanced workers, who are necessary to operate the enhanced "
@@ -208,7 +209,7 @@ msgid ""
 " to operate the advanced building!"
 msgstr "労働者は仕事を成功させると経験を得ます。経験を積んでレベルアップすると上級の労働者となります。拡張された建物で仕事をするには、このような上級の労働者が必要になる場合があります。労働者がレベルアップする前に建物を拡張してしまうと、せっかく拡張した建物が活動できない場合があるので注意しましょう！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:93
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
 "Such buildings usually have greater demands than the basic kind of that "
 "building – for instance, deep mines need snacks instead of rations. You will"
@@ -216,20 +217,20 @@ msgid ""
 "pitta bread AND a second kind of food (meat or fish) AND beer."
 msgstr "拡張された建物は、通常元の建物よりも要求する物資のグレードが上がります ── 例えば、深鉱はレーションの代わりに軽食を必要とします。軽食を作るには酒場を食堂に拡張した上で、材料としてピタパン「と」肉か魚「と」ビールが必要になります。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
 msgstr "もちろん、十分に労働者が揃っているなら、全ての鉱山を一気に拡張することもできます ── 拡張された鉱山は少し採掘が速く、小さな鉱山は安価な食料しか必要としません。どのような戦略を取るのかは全てあなたにかかっています。"
 
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:97
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 msgid "Build a wood hardener"
 msgstr "黒材工房を建設しましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:102
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
 "Bigger and better buildings – including all military ones – require better "
 "building materials. They cannot be built out of simple logs – the logs have "
@@ -238,69 +239,69 @@ msgid ""
 "cannot expand."
 msgstr "大きな建物や良い建物 (軍事系建物を含みます) はそれに見合う建築資材を必要とします。単なる丸太だけではそのような建物は建てられません。丸太を黒材工房で黒材に加工する必要があります。黒材が尽きる前に黒材工房を建てるのをいつも忘れないようにしましょう。さもなくば、領土の拡張が止まってしまうでしょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
 msgstr "石灰窯の建設と炭の供給確保"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
 msgstr "石灰窯を建設しましょう。井戸と、炭焼き小屋もしくは炭鉱から物資を供給する必要があります。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:109
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
 msgstr "良い建物は黒材以外にも優れた建築資材が必要になります。その一つがモルタルで、石焼職人が花崗岩、水、そして石炭から生産します。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
 msgstr "水は井戸で生産できます。水資源がある場所ならさらに効率的に生産できます。水資源の場所は地質学者が調べることができます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
 msgstr "地質学者に水を探してもらうには、近くの旗をクリックして、さらに「地質学者を派遣して資源を調査」とラベルされているボタンをクリックしましょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:114
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
 msgstr "石炭は炭焼き小屋か炭鉱を建てることで生産できます。ただし、炭焼き小屋で丸太を炭にするのには時間がかかります。石炭の鉱脈が無い時以外には建てない方が効率的でしょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
 msgstr "石灰窯と井戸を１つずつ建てましょう。それと、石炭の供給のために炭焼き小屋か炭鉱のどちらかを１つ建てましょう。"
 
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:124
 msgid "Build a reed yard"
 msgstr "カヤ園を建設しましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:121
 msgid ""
 "The third material necessary for improved buildings is reed, used to cover "
 "roofs. Reed fields are planted by a gardener around his building, the reed "
 "yard."
 msgstr ""
 
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:134
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid "Build a cattle farm"
 msgstr "牛牧場を建設しましょう"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:130
 msgid ""
 "When roads are under heavy load for a long time, one carrier is usually not "
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
@@ -308,50 +309,50 @@ msgid ""
 "wares. This doubles the transport capacity."
 msgstr "道を行く物資の量が定常的に多くなってしまうと、一人の運び手では効率的に輸送できなくなります。その結果として交通渋滞が発生します。そのような道には第二の運び手を割り当てる必要があります。それが牛達で、彼らも物資を輸送してくれます。彼らが加入することでその道の輸送量は二倍になります。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:133
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 msgid "Oxen are bred in cattle farms out of wheat and water."
 msgstr "牛は牛牧場で小麦と水で育てられます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:143
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:155
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:167
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:153
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:165
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:177
 msgid "The Story Begins"
 msgstr "物語の始まり"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:142
 msgid "Thron sighs…"
 msgstr "スロンはため息をつく……"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
 msgstr "あれから数ヶ月、我々はこの古く暗い森に隠れ続けている。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:149
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:147
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr "戦士達は昼は狩りに出て、夜は横になっても眠りにはつけない ── 太古の森を越えて聞こえてくる残虐な虐殺の声を聞いているのだ。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:158
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:156
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
 msgstr "アル-サンランを飲み込む猛火がここから、遠く離れたここからも見えてしまう。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:161
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:159
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr "闇に浮かぶ赤く瞬く光、そして戦太鼓の音に合わせてその光が踊る悪夢の光景は何度も夢に見てしまった。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:170
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:168
 msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
@@ -359,7 +360,7 @@ msgid ""
 msgstr "父がかつて血で血を洗う内戦を終わらせた地、そこに父の遺骨を埋葬した。しかし、父の成し遂げた平和は一世代しか保たなかった。その事実が私には辛い。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:171
 msgid ""
 "Boldreth, my loyal companion and friend is a source of peace and comfort to "
 "me in these dark times. He keeps my spirits high and those of my warriors "
@@ -368,31 +369,31 @@ msgid ""
 msgstr "忠実な家臣にして我が友でもあるボルドレス、彼の存在がこの陰鬱な時間の苦痛を和らげてくれた。私の心、そして戦士達の心が鈍らないように彼は気を配り、私と兄弟達の間の絆をずたずたにした強欲や絶望から守ってくれた。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:182
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:180
 msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
 msgstr "父が言ったように、戦うべき時もあれば黙って耐えるべき時もある、その時が来るまで諦めても死んでもいけない。だから私は静かにその時を待っている。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:188
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:201
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:199
 msgid "Thron is Contemplating the War"
 msgstr "スロンは戦争について熟考している"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:187
 msgid "Thron is shaking his head…"
 msgstr "スロンは首を振った……"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
 msgstr "戦争はまだ続いている。森の下、首都で起こっている残虐な戦争を嫌い、我々の兄弟姉妹が続々と逃げ出している。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:194
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:192
 msgid ""
 "The stories they tell about the deeds of our kin are sad to hear. I’ve spent"
 " nights lying awake, restless, more tired than I ever believed one could be."
@@ -402,7 +403,7 @@ msgid ""
 msgstr "彼らから聞いた我が一族の行いは聞くに堪えない話だった。横になっても寝付けず、じっとしてもいられず、想定した以上に疲れを溜めてしまった。それでも目を閉じると、父の建てた要塞が火に飲まれる様がいつも浮かんでくる。我らの一族の統一と平和の象徴であった「玉座の森」は今や我らの離散を促す楔となってしまった。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:202
 msgid ""
 "Today my hunters brought men, women and little children before me who had "
 "hidden out in the forests, trying to escape the war, hate and revenge that "
@@ -414,18 +415,18 @@ msgid ""
 msgstr "今日、狩人が私の前に男女に子供まで含む一団を連れてきた。かつて我が部族は本能のまま動く野生の獣のごとき存在だったと言う。まるでその頃のように部族内に巻き起こる戦争、憎悪、復讐を避けるため、彼らは森に隠れていたらしい。兄弟の誰もまだ玉座の森の支配を確立できていない。他を圧倒できるほどの力はどの勢力にも無いのだ。この混乱はいつまで続くのだろうか……もしや今がその時なのか？父が言ったように？"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:205
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
 msgstr "我らの存在を脅かす者は誰であっても、例えあなたの血と精神を受け継ぐものであっても立ち向かえ、そういうことなのか、父上？"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:213
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:211
 msgid "Thron is Considering the Future"
 msgstr "スロンは未来を考える"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:214
 msgid ""
 "Boldreth seems more and more torn as the days go by. The spirits of my "
 "fellows sink as the cold season approaches, and we are still living in no "
@@ -435,7 +436,7 @@ msgid ""
 msgstr "ボルドレスは日毎に憔悴している。仲間の住む場所は非常に簡素なもので、その心はまるで冬が来たかのように沈んできている。私はもう長い間外の荒野に出るのを避けてきた ── 兄弟たちがこんな無意味な戦争をこれほど長く続けるとは思っていなかったから。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:217
 msgid ""
 "Perhaps it’s time to make ourselves feel a little more at ease here. Perhaps"
 " it’s time to give those who still live and think united a new home, "
@@ -443,55 +444,55 @@ msgid ""
 "called our home…"
 msgstr "おそらく、我々はもう少しこの場所に馴染んでも良いのだろう。仲間たちに新たな故郷、我々が一度失ってしまったものの代わりとなるもの、それを作ってあげても良いのではないのだろうか？たとえそれがかつて我々が故郷と呼んでいた場所、そこに帰るまでの仮のものであっても……"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:224
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:222
 msgid "Somebody Comes up to You"
 msgstr "誰かが近づいて来ます"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:223
 msgid "An old man says…"
 msgstr "一人の老人が話し始めます……"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:227
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:225
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr "族長、私はカントルーク、長く年を重ねてきた者です。この陰鬱たる日々を何とかするため、私の助言を受けて入れてもらえないでしょうか？"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:230
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:228
 msgid ""
 "Only the gods know for how long we have to remain hidden here. The warriors "
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are short and cold…"
 msgstr "我々がいつまでここに留まれば良いのかは我らが神のみにしかわからぬでしょう。今すぐにでも戻れば、かつての栄光の日々を取り戻せると戦士達は考えているようですが、私はそんなことは不可能であると断じます。そして、日は徐々に短くなり、徐々に寒さも来ています……"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:236
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:309
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:333
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:361
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:380
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:401
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:426
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:459
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:470
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:234
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:307
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:323
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:331
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:359
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:378
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:399
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:424
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:457
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:468
 msgid "The Advisor"
 msgstr "相談役"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:237
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:235
 msgid "Khantrukh notes…"
 msgstr "カントルークは語ります……"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid ""
 "I see you have already built a quarry and two lumberjack’s huts. That is a "
 "good beginning if we want to stay here longer."
 msgstr "既に採石場が１つと木こりの庵が２つ建てられています。これは長くこの場所に留まる上で良い選択です。"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:240
 msgid ""
 "But never forget – these forests are our heritage, entrusted upon us by our "
 "ancestors. We must always respect and care for them. What we take, we must "
@@ -499,23 +500,23 @@ msgid ""
 msgstr "しかし、お忘れなきよう ── この森は我らの先祖より託された遺産なのです。森に敬意を払い、きちんと配慮しなければなりません。得た分はきちんと返さねばならないのです。"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:245
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:243
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
 msgstr "そこで、伐採した木々を補填するために植樹番の庵をいくつか建てるべきです。理想的には木こりの庵の隣が良いでしょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:249
 msgid "In the Night"
 msgstr "ある夜に"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:252
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:250
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:264
 msgid "Thron says…"
 msgstr "スロンは言った……"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:252
 msgid ""
 "During another sleepless night, I went up to the hill and gazed towards the "
 "north. The fires are still burning, satisfying their hunger upon my father’s"
@@ -523,18 +524,18 @@ msgid ""
 msgstr "ある眠れない夜、私は丘に登り、北を睨んだ。炎はいまだ激しく燃え上がり、父の遺産を喰らって飢えを満たしている。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:257
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:255
 msgid ""
 "They are a constant reminder of why we have to hide here… and why we must "
 "return in the end!"
 msgstr "あれを見るといつでも、我々がここに隠れなければならない理由を思い出せる……そして、最後には必ず戻らねばならないということも！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:263
 msgid "At the Tomb"
 msgstr "墓所にて"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:268
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
 msgid ""
 "Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
@@ -542,29 +543,29 @@ msgid ""
 msgstr "カル-マブラスの偉大な頂の麓にある聖なる林、父の墓所へと再び私は向かった。私はそこで時間も、暗い空から降りつける冷たい雨のことも気にせず、ただそこで立ち尽くしていた……"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:269
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me…"
 msgstr "どういうわけか、それはまるで別れのように感じた。そして、この先に何が待っているのか、初めてそれに興味を覚えた……"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:279
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:277
 msgid "The Other Day"
 msgstr "別の日"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:278
 msgid "Thron says thoughtfully…"
 msgstr "スロンは考え込んだ様子で言った……"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:280
 msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer"
 " to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr "少し前にボルドレスが来た。故郷に近い場所へ移動するべきだと ── 兄弟の軍勢を発見したときに先手を取って攻撃を仕掛けるために。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:285
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:283
 msgid ""
 "But when I look over the forests I can still see black smoke rising to the "
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
@@ -572,16 +573,16 @@ msgid ""
 " too fast would cause on both sides…"
 msgstr "しかし森を見ると、いまだに空に黒煙が昇る様が見える ── まだ時期尚早、すぐには彼の望みに応えてあげられそうにない。それでも、彼の言うことは基本的には正しいのだろう。しかし、早すぎる帰還によって余計な血が流れることを私は恐れている。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:290
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
 msgstr "誓い"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:289
 msgid "Thron looks furious…"
 msgstr "スロンは激怒した……"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:293
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:291
 msgid ""
 "Today, my warriors picked up an old man, wandering sick and wounded through "
 "the dark forest. We listened in horror as he told us of the atrocities "
@@ -589,28 +590,28 @@ msgid ""
 msgstr "今日、傷つきながらも闇の森をあてもなくさまよっていた一人の老人を戦士達が見つけた。そして、彼から今アル-サンランで起こっている残虐行為の現実を聞き、肝を冷やした。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:296
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:294
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
 msgstr "事ここに至り、私は誓いを改めることにした ── いかなる犠牲を払ってでもこの狂気を止めて見せると！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:301
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:340
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:351
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:369
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:391
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:418
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:437
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:448
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:299
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:314
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:338
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:349
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:367
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:389
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:435
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:446
 msgid "Your Loyal Companion"
 msgstr "忠実なる仲間"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:300
 msgid "Brave Boldreth steps to your side…"
 msgstr "勇敢なるボルドレスが歩み寄って来ました…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:302
 msgid ""
 "So you want to prepare us for a longer stay in these forests, Thron? Well, I"
 " see the wisdom in doing so, yet my heart is yearning for a glorious return "
@@ -618,24 +619,24 @@ msgid ""
 " battlefield, and our axes and swords have turned rusty over time."
 msgstr "それで、この森に長く留まるために準備しろと言うのだな、スロン？それが賢明な選択であることは理解できる、しかし我が心はアル-サンランへの栄光ある帰還を熱望している。我らの同胞が戦場で戦っている間、我らが長い間ここで待っていた結果、その時間で我らの斧や剣は錆びついてしまっているのもまた事実だ。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:310
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:308
 msgid "Khantrukh joins in…"
 msgstr "カントルークが加わります…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:312
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:310
 msgid ""
 "I beg your forgiveness, chieftain, but I have a grave concern to discuss "
 "with you. The rocks close to our camp are shrinking fast under our workers’ "
 "tools, and it is a matter of little time only before they are all gone."
 msgstr "口を差し挟んでしまい申し訳ありません、族長。しかし、どうしても緊急に議論すべき重大な懸念があるのです。我らのキャンプ近くの岩が様々な用途で使われた結果、急速にその量を減らしています。時間の問題で全て使い尽くしてしまうでしょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:318
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:316
 msgid "Boldreth jumps up…"
 msgstr "ボルドレスは急に立ち上がりました…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:320
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:318
 msgid ""
 "While it is certainly no worthy task for a warrior, at least it is something"
 " to do! Thron, what would you say about my taking a few of our most restless"
@@ -643,65 +644,65 @@ msgid ""
 " – maybe we will find some more big rocks to please the old man?"
 msgstr "一人の戦士としてはどうでも良い案件だが、捨て置くわけにはいかんな！スロン、やる気のある兵士を連れて偉大なるカル-マブラスの近くまで進出してはどうだ？あそこまでいけば、そこの老人が喜ぶような岩も十分に手に入るのではないか？"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:325
 msgid "Khantrukh grumbles…"
 msgstr "カントルークがぼやきます…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Old man? Disrespectful youth!"
 msgstr "老人だと？礼儀を知らない若造が！"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:335
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:333
 msgid "Khantrukh nods satisfied…"
 msgstr "カントルークは満足した表情で頷きました…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:334
 msgid "At last! These rocks should last for a while."
 msgstr "おお、ついに！これでしばらくは岩の在庫は保つでしょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:339
 msgid "Boldreth exclaims…"
 msgstr "ボルドレスは大声で言いました…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid ""
 "Just look at that! In the east is the great mountain of Kal’mavrath! I "
 "wonder what treasures nature might have hidden beneath its majestic flanks!"
 msgstr "あれを見ろ！東に偉大なるカル-マブラスが見えるぞ！あの雄大な山には一体どれだけの資源が眠っているのだろうな！"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:346
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:344
 msgid ""
 "Let’s expand to the east. There’s a chance for the elderly to become useful "
 "once in a while! Let us send out some of those who understand the stone’s "
 "tongue to unravel the mountain’s secrets!"
 msgstr "東に領土を拡張するのだ。老いぼれにもたまには役にたってもらわねばな！連中の中で、石を調べるのが得意な奴を送って、あの山の秘密を解き明かすのだ！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:352
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:350
 msgid "Boldreth laughs…"
 msgstr "ボルドレスは声をあげて笑いました…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid ""
 "By Chat’Karuth’s beard, this is amazing! Just imagine what we can use this "
 "coal and iron ore for!"
 msgstr "なんと、これはすごい！これだけの石炭と鉄鉱石があればどれだけのことができるか！"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:357
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:355
 msgid "It might even be enough to…"
 msgstr "これだけあれば…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:360
 msgid "Khantrukh interrupts…"
 msgstr "カントルークが口を挟みます…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:364
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
 msgid ""
 "While this is true, we should consider it later, for now other obstacles are"
 " at hand. The miners will definitely demand greater rations for working high"
@@ -709,78 +710,78 @@ msgid ""
 "not be easy."
 msgstr "その通りです、しかしそれを考えるのは後にしましょう。手近に迫った問題の解決を優先するべきです。あのように高い山のきつい寒さの中で働く鉱夫にはレーションが欠かせないでしょう。それを供給するのはそんなに簡単なことではありません。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:370
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
 msgstr "ボルドレスは頷きました…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:372
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:370
 msgid "I have to hand it to you: you are right here, old man."
 msgstr "まさにその通りだ。老人よ、お前の意見が正しい。"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:375
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:373
 msgid ""
 "There seem to be quite a lot of animals in the forests here – we might just "
 "hunt down more of them. And, of course, the people would cheer a new tavern "
 "– hey, we might call it ‘Thron’s Pride’ or so if you want!"
 msgstr "森には多くの動物がいるようだ ── それをもっと多めに獲れば良いだろう。それと、当然のことだが酒場を作れば皆喜ぶだろう ── そうだ、お前が望むなら、その酒場を「スロンの誇り」と呼んでもいいぞ！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:381
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:379
 msgid "The elder jumps into the air…"
 msgstr "老人は飛び上がります…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:383
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:381
 msgid "Wisdom commands to seek variety."
 msgstr "多様性を確保することが肝要です。"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:386
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:384
 msgid ""
 "North of the great mountain is a large plain – why don’t we use the space "
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change…"
 msgstr "偉大な山の北には大きな平原があります ── 我らが母なる自然が授けたこの恩寵を有効に使うため、農場を作ってはいかかでしょう？私もたまには焼きたてのピタパンを食べたいものです…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:392
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:390
 msgid "Boldreth cheers up…"
 msgstr "ボルドレスは活気づきます…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:394
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:392
 msgid "Our hunters are out in the forests, Thron."
 msgstr "スロン、狩人が森に出たそうだぞ。"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:397
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:395
 msgid ""
 "I promise you, before the sun sets today you will have a magnificent meal "
 "fit for the chieftain of all clans!"
 msgstr "約束しよう、日没までに我らを束ねる族長にふさわしい食事が用意されることだろう！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:402
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:400
 msgid "Khantrukh gazes over the plains…"
 msgstr "カントルークは平原をじっと見ています…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:404
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:402
 msgid ""
 "Isn’t it lovely, the view of golden fields, growing peacefully, dancing to "
 "the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!"
 msgstr "一面の黄金の畑、健やかに育ち、風に踊る、なかなか素敵な光景でしょう？そしてパン職人もここに向かっていることでしょう、族長のためだけに焼かれた特別においしいパンを持って！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:408
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"
 msgstr "とある素敵な朝"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:409
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:407
 msgid "Thron recognizes…"
 msgstr "スロンは気づきました…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:409
 msgid ""
 "A tavern opened for our people yesterday. While I am hardly in the mood for "
 "celebration, I noticed how much this tiny bit of home means to my people. "
@@ -789,17 +790,17 @@ msgid ""
 msgstr "昨日酒場が開店した。私自身は祝う気分にはなれないが、このちっぽけな故郷がどれだけ人々の心の拠り所になっているかを知ることができた。彼らの歌は夜更けまで絶えることは無く、朝になっても皆生き生きとしている。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:412
 msgid ""
 "Maybe we actually are slowly creating a place here which we can… call home."
 msgstr "我々はゆっくりと作り上げている途中なんだろう……故郷、と呼べるものを。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:419
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:417
 msgid "Boldreth remarks…"
 msgstr "ボルドレスは意見を述べた…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:421
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:419
 msgid ""
 "So now that we have both the mines and the food to sustain them, we should "
 "bring what our brave miners gain for us into a more useful state. The iron "
@@ -807,32 +808,32 @@ msgid ""
 "whatever we want. And we need the coal to keep the smelter’s ovens burning."
 msgstr "これで鉱山と食料の供給体制が整った。それでは、せっかく鉱夫達が採掘したものをもっと有用な形にせねばなるまい。鉄鉱石を鉄に精錬できれば、何でも作れるようになるだろう。それと、精錬所の窯の火を絶やさないためには石炭の供給が不可欠だ。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:427
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:478
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:425
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:476
 msgid "Khantrukh speaks…"
 msgstr "カントルークは言った…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:429
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:427
 msgid ""
 "Our miners are digging up less and less by the day! We have to go deeper, "
 "closer to the mountain’s core, if we want more of its treasures!"
 msgstr "鉱山の採掘量が日に日に落ちています！もっと掘り出すためには、もっと深く、山の芯に近づかねばなりません！"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:432
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:430
 msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
 msgstr "もちろん、そのような深みに入ればさらに暗く、寒くなります。自発的にそんなところに入る者はほとんどいないでしょう。ですので、そのような勇敢な者にはレーションより良いものを供給してあげるべきでしょう。それに１、２杯のビールをつけてあげればやる気も続くでしょう。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:438
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:436
 msgid "Boldreth seems concerned…"
 msgstr "ボルドレスには心配事があるようです…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:440
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:438
 msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
@@ -840,35 +841,35 @@ msgid ""
 msgstr "今気づいたのだが、黒材が尽きかけている！兵士を脆い庵に入れるわけにもいかないし、何か手を打たないと我らも危機に陥りかねない！"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:443
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:441
 msgid "We need a wood hardener, and we need one now!"
 msgstr "黒材工房が必要だ、それも可能な限り速やかに！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:449
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:447
 msgid "Boldreth smiles…"
 msgstr "ボルドレスは微笑んだ…"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:451
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:449
 msgid ""
 "Well, old friend, this should ensure that our fortifications do not break "
 "down with our foes’ first battle cry! Now we can expand safely!"
 msgstr "良し、これで敵の閧の声を聞いた瞬間に防衛ラインが崩壊するようなことはなくなったぞ、我が友よ！これで安全に領土を拡大できる！"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:454
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:452
 msgid ""
 "Still, it would not hurt to accumulate some grout for our further campaign; "
 "thus we could, in times of need, build a fortress such as the world has "
 "never seen before!"
 msgstr "それと、もう少しモルタルを作っておいても良いだろう。そうしておけば、急に必要になったときに要塞を速やかに建てることもできるだろう！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:460
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:458
 msgid "Khantrukh steps in…"
 msgstr "カントルークが口を挟みました…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:462
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:460
 msgid ""
 "Chieftain, this is a disgrace! It is well that we can produce grout for "
 "mighty fortifications and great buildings now – only this does not prevent "
@@ -878,27 +879,27 @@ msgid ""
 msgstr "族長、これは不名誉なことです！モルタルを作り、強力な要塞や大きな建物を建てられるようになったことはたしかに素晴らしい ── しかし、それだけでは屋根の雨漏りは防げないのです！もしかしたら、そこの若いのは夜に雨に濡れるのが好きなのかもしれませんが、私は雨粒が顔に滴るような状況では眠れません！"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:465
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:463
 msgid "Now this is a problem we should do something about!"
 msgstr "これこそが我々がなんとかしなければならない問題です！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:471
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:469
 msgid "Khantrukh seems relieved…"
 msgstr "カントルークはほっとした…"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:473
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:471
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
 msgstr "素晴らしい！これで屋根が雨漏りすることもありません、そして我々が必要とする全ての物資が揃いました！今ならどんな建物でも建てられますな！"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:477
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:475
 msgid "We Need Oxen!"
 msgstr "牛！"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:480
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:478
 msgid ""
 "As our realm is getting bigger and bigger, the traffic on the roads is "
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
@@ -907,32 +908,32 @@ msgid ""
 msgstr "我らの領土が大きくなるに連れ、輸送量を増えてきます。もはや運び手達だけでは必要な速度で物資を輸送できません。そこで、牛を育てて彼らの補助をさせることを提案します。"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:483
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:481
 msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
 msgstr "彼らは素晴らしい動物です。人間と同等の早さで動きつつも、ずっと力持ちでずっと質素な生活に耐えます。小麦と水を与えて育ててあげさえすれば、忠実かつ確実に道で物資の輸送をしてくれます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:486
 msgid "Mission Complete"
 msgstr "任務完了"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:487
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:502
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:525
 msgid "Thron speaks…"
 msgstr "スロンは言いました…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:491
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
 msgid ""
 "The other day Boldreth asked me to accompany him to the new inn. It would "
 "cheer me up, he said."
 msgstr "ある日、ボルドレスが一緒に新しい酒場に行こうと誘ってきた。そうすれば少しは気が晴れるだろう、と彼は言っていた。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:494
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:492
 msgid ""
 "When I looked around, I saw faithful faces, trusting that I could guide them"
 " through these dark days. Yet before I could speak any words of gratitude or"
@@ -941,33 +942,33 @@ msgid ""
 msgstr "周囲を見渡すと、信頼できる者達の顔があった。私がこの暗鬱たる日々を打破してくれると信じてくれているのだ。感謝や励ましの言葉を言おうとしようとしていると、一人の戦士が酒場に駆け込んできた。彼はしばらくの間遠くの森に行っていたはずだった、そして非常に疲れているように見えた。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:495
 msgid "The news he brought changed everything…"
 msgstr "彼の持ち込んだ知らせが全てを変えてしまった…"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "Victory"
 msgstr "勝利"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:499
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr "このミッションを達成しました。このままプレイを続けることもできますが、終了して次のミッションに挑むこともできます。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:501
 msgid "One Full Moon Night"
 msgstr "ある満月の夜"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:506
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
 msgstr "満月が鮮やかに輝くある夜、私はカル-マブラスの頂上まで登った。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:507
 msgid ""
 "When I gazed at the horizon, I still saw crimson lights flicker in the "
 "distance. It is incredible with how much passion my brethren fight this war."
@@ -975,16 +976,16 @@ msgid ""
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
 msgstr "地平線を睨むと、遠くに真紅の光が揺らめく様が見えた。兄弟達は一体どれだけこの戦争に熱をあげているのか。再びアル-サンランを見る時が怖くなっていた ── 我々が帰還する時には、あれだけ美しかった都もすべて灰燼に帰しているのではないだろうか？"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
 msgid "Another Cold Day"
 msgstr "ある寒い日"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Thron looks worried…"
 msgstr "スロンは心配している…"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:516
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
 msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
@@ -992,51 +993,38 @@ msgid ""
 msgstr "冬が近づいている。多くの者が寒さで苦しむだろうが、我々は耐えなければならない。我々が帰還する日はそう遠くはない ── もう遠くはないのだ。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:519
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:517
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
 msgstr "私はもう少し暖かくなるようにと祈った。そして、戦争が終わるようにと祈った。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:522
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:520
 msgid "So far, it seems that neither prayer was fulfilled."
 msgstr "今のところ、どちらの願いも叶えられていない。"
 
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:524
 msgid "A friendly village has joined us!"
 msgstr "友好的な村が仲間に加わりました！"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:529
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr "友好的で生産的な人々の住む村を発見しました、我々の豊かさ、技術、そして強さに感銘を受けています。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:532
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:530
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
 msgstr "彼らは簡素ながらも、狩りや畑仕事をしながら楽しく暮らしています。これまで戦に巻き込まれたことはないようで、戦闘への備えがありません。"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:535
+#: ../../data/campaigns/bar01.wmf/scripting/texts.lua:533
 msgid ""
 "But they fear that the war around Al’thunran will set an end to this life. "
 "Therefore, they have decided to join us, hoping that we can help each other."
 msgstr "今、彼らはアル-サンラン周辺に広がる戦争のため、今の暮らしができなくなるかもしれない、という不安を抱いています。そのため、彼らは我々の仲間に加わりました。互いに手を取り合うことができると信じて。"
-
-#: ../../data/scripting/richtext_scenarios.lua:36
-#, lua-format
-msgid "“%s”"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:91
-msgid "New Objective"
-msgstr ""
-
-#: ../../data/scripting/richtext_scenarios.lua:93
-msgid "New Objectives"
-msgstr ""

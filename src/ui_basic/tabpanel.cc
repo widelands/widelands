@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2019 by the Widelands Development Team
+ * Copyright (C) 2003-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,9 @@
 
 #include "ui_basic/tabpanel.h"
 
+#include <SDL_mouse.h>
+
 #include "graphic/font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -97,7 +98,83 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
      style_(style),
      active_(0),
      highlight_(kNotFound),
-     background_style_(g_gr->styles().tabpanel_style(style)) {
+     background_style_(g_style_manager->tabpanel_style(style)) {
+	set_can_focus(true);
+}
+
+std::vector<Recti> TabPanel::focus_overlay_rects() {
+	const int f = g_style_manager->focus_border_thickness();
+	const Tab* tab = active_ < tabs_.size() ? tabs_[active_] : nullptr;
+	const int16_t w = tab ? tab->get_w() : get_w();
+	const int16_t h = tab ? tab->get_h() : kTabPanelButtonHeight;
+	if (w < 2 * f || h < 2 * f) {
+		return {Recti(0, 0, get_w(), kTabPanelButtonHeight)};
+	}
+
+	const int16_t x = tab ? tab->get_x() : 0;
+	const int16_t y = tab ? tab->get_y() : 0;
+	return {Recti(x, y, w, f), Recti(x, y + f, f, h - f), Recti(x + w - f, y + f, f, h - f)};
+}
+
+bool TabPanel::handle_key(bool down, SDL_Keysym code) {
+	if (down && tabs_.size() > 1) {
+		bool handle = true;
+		uint32_t selected_idx = active();
+		const uint32_t max = tabs_.size() - 1;
+
+		if ((code.sym >= SDLK_1 && code.sym <= SDLK_9) ||
+		    (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && (code.mod & KMOD_NUM))) {
+			// Keys 1-9 directly address the 1st through 9th item in tabpanels with less than 10 tabs
+			if (max < 9) {
+				if (code.sym >= SDLK_1 && code.sym <= static_cast<int>(SDLK_1 + max)) {
+					selected_idx = code.sym - SDLK_1;
+				} else if (code.sym >= SDLK_KP_1 && code.sym <= static_cast<int>(SDLK_KP_1 + max)) {
+					selected_idx = code.sym - SDLK_KP_1;
+				} else {
+					// don't handle the '9' when there are less than 9 tabs
+					handle = false;
+				}
+			} else {
+				// 10 or more tabs – ignore number keys
+				handle = false;
+			}
+		} else {
+			switch (code.sym) {
+			case SDLK_KP_6:
+			case SDLK_RIGHT:
+				if (selected_idx < max) {
+					++selected_idx;
+				} else if (selected_idx > max) {
+					selected_idx = 0;
+				}
+				break;
+			case SDLK_KP_4:
+			case SDLK_LEFT:
+				if (selected_idx > max) {
+					selected_idx = max;
+				} else if (selected_idx > 0) {
+					--selected_idx;
+				}
+				break;
+			case SDLK_KP_7:
+			case SDLK_HOME:
+				selected_idx = 0;
+				break;
+			case SDLK_KP_1:
+			case SDLK_END:
+				selected_idx = max;
+				break;
+			default:
+				handle = false;
+				break;  // not handled
+			}
+		}
+		if (handle) {
+			activate(selected_idx);
+			return true;
+		}
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**
@@ -202,10 +279,12 @@ uint32_t TabPanel::add_tab(const std::string& name,
  * Make a different tab the currently active tab.
  */
 void TabPanel::activate(uint32_t idx) {
-	if (active_ < tabs_.size())
+	if (active_ < tabs_.size()) {
 		tabs_[active_]->panel->set_visible(false);
-	if (idx < tabs_.size())
+	}
+	if (idx < tabs_.size()) {
 		tabs_[idx]->panel->set_visible(true);
+	}
 
 	active_ = idx;
 
@@ -214,9 +293,11 @@ void TabPanel::activate(uint32_t idx) {
 }
 
 void TabPanel::activate(const std::string& name) {
-	for (uint32_t t = 0; t < tabs_.size(); ++t)
-		if (tabs_[t]->get_name() == name)
+	for (uint32_t t = 0; t < tabs_.size(); ++t) {
+		if (tabs_[t]->get_name() == name) {
 			activate(t);
+		}
+	}
 }
 
 /**
@@ -304,10 +385,10 @@ void TabPanel::draw(RenderTarget& dst) {
 		dst.fill_rect(Recti(x + tab_width - 1, 1, 1, kTabPanelButtonHeight - 3), black);
 
 		// Draw bottom part
-		if (active_ != idx)
+		if (active_ != idx) {
 			dst.brighten_rect(
 			   Recti(x, kTabPanelButtonHeight - 2, tab_width, 2), 2 * BUTTON_EDGE_BRIGHT_FACTOR);
-		else {
+		} else {
 			dst.brighten_rect(Recti(x, kTabPanelButtonHeight - 2, 2, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 
 			dst.brighten_rect(Recti(x + tab_width - 2, kTabPanelButtonHeight - 2, 2, 2),

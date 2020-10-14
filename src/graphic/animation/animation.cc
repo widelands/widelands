@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,22 +42,24 @@ Animation::Animation(const LuaTable& table)
      frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
      play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false),
      sound_effect_(kNoSoundEffect),
-     sound_priority_(kFxPriorityLowest) {
+     sound_priority_(kFxPriorityLowest),
+     sound_allow_multiple_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 			sound_effect_ =
 			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
+			sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
 
-			if (sound_effects->has_key<std::string>("priority")) {
-				sound_priority_ = sound_effects->get_int("priority");
+			if (sound_effects->has_key<std::string>("allow_multiple")) {
+				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
 			}
 
 			if (sound_priority_ < kFxPriorityLowest) {
 				throw Widelands::GameDataError(
-				   "Minmum priority for sounds is %d, but only %d was specified for %s",
-				   kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
+				   "Minimum priority for sounds is 0.01, but only %.2f was specified for %s",
+				   sound_effects->get_double("priority"), sound_effects->get_string("path").c_str());
 			}
 		}
 	} catch (const LuaError& e) {
@@ -145,8 +147,8 @@ void Animation::trigger_sound(uint32_t time, const Widelands::Coords& coords) co
 		return;
 	}
 	if (current_frame(time) == 0) {
-		Notifications::publish(
-		   NoteSound(SoundType::kAmbient, sound_effect_, coords, sound_priority_));
+		Notifications::publish(NoteSound(
+		   SoundType::kAmbient, sound_effect_, coords, sound_priority_, sound_allow_multiple_));
 	}
 }
 
@@ -166,9 +168,10 @@ void Animation::blit(uint32_t time,
                      const Rectf& destination_rect,
                      const RGBColor* clr,
                      Surface* target,
-                     float scale) const {
+                     float scale,
+                     float opacity) const {
 	mipmap_entry(find_best_scale(scale))
-	   .blit(current_frame(time), source_rect, destination_rect, clr, target);
+	   .blit(current_frame(time), source_rect, destination_rect, clr, target, opacity);
 	trigger_sound(time, coords);
 }
 
@@ -194,4 +197,9 @@ float Animation::find_best_scale(float scale) const {
 
 int Animation::representative_frame() const {
 	return representative_frame_;
+}
+
+std::vector<std::unique_ptr<const Texture>>
+Animation::frame_textures(float scale, bool return_playercolor_masks) const {
+	return mipmap_entry(scale).frame_textures(return_playercolor_masks);
 }

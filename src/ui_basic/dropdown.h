@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 by the Widelands Development Team
+ * Copyright (C) 2016-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,8 @@
 #include <deque>
 #include <memory>
 
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/note_graphic_resolution_changed.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "ui_basic/box.h"
@@ -45,7 +45,7 @@ struct NoteDropdown {
 
 /// The narrow textual dropdown omits the extra push button.
 /// Use kPictorialMenu if you want to trigger an action without changing the menu button.
-enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu };
+enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu, kTextualMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
 class BaseDropdown : public NamedPanel {
@@ -136,7 +136,7 @@ public:
 	/// If 'open', show the list and position the mouse on the button so that the dropdown won't
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
 	/// keyboard navigation. If not 'open', close the list.
-	void set_list_visibility(bool open);
+	void set_list_visibility(bool open, bool move_mouse = true);
 
 	void set_size(int nw, int nh) override;
 	void set_desired_size(int w, int h) override;
@@ -178,6 +178,8 @@ protected:
 	/// Automatically collapses the list if the mouse gets too far away from the dropdown, or if it
 	/// loses focus.
 	void think() override;
+
+	UI::Panel* get_open_dropdown() override;
 
 private:
 	static void layout_if_alive(int);

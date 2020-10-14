@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,9 +21,7 @@
 
 #include <memory>
 
-#include "graphic/graphic.h"
 #include "io/profile.h"
-#include "logic/editor_game_base.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
@@ -66,36 +64,45 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      save_profile_dialog_(nullptr) {
 	set_center_panel(&main_box_);
 
-	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
-	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
+	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
+	tabpanel_.add("workers", g_image_cache->get(pic_tab_workers), worker_panel_, _("Workers"));
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	UI::Button* b = new UI::Button(
-	   buttons, "decrease_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-	   g_gr->images().get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
+	   buttons, "decrease_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+	   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
 	b->sigclicked.connect([this] { change_target(-10); });
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
-	buttons->add_space(8);
-	b = new UI::Button(buttons, "decrease_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_down.png"),
+	buttons->add_space(6);
+	b = new UI::Button(buttons, "decrease_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+	                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 	                   _("Decrease target"));
 	b->sigclicked.connect([this] { change_target(-1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
-	buttons->add_space(24);
+	buttons->add_space(6);
 
-	b = new UI::Button(buttons, "increase_target", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
+	b = new UI::Button(buttons, "toggle_infinite", 0, 0, 32, 28, UI::ButtonStyle::kWuiSecondary,
+	                   g_image_cache->get("images/wui/menus/infinity.png"),
+	                   _("Toggle infinite target"));
+	b->sigclicked.connect([this] { toggle_infinite(); });
+	buttons->add(b);
+	b->set_repeating(false);
+	b->set_enabled(can_act);
+	buttons->add_space(6);
+
+	b = new UI::Button(buttons, "increase_target", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+	                   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase target"));
 	b->sigclicked.connect([this] { change_target(1); });
 	buttons->add(b);
 	b->set_repeating(true);
 	b->set_enabled(can_act);
-	buttons->add_space(8);
-	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 44, 28, UI::ButtonStyle::kWuiSecondary,
-	                   g_gr->images().get("images/ui_basic/scrollbar_up_fast.png"),
+	buttons->add_space(6);
+	b = new UI::Button(buttons, "increase_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
+	                   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"),
 	                   _("Increase target by 10"));
 	b->sigclicked.connect([this] { change_target(10); });
 	buttons->add(b);
@@ -112,7 +119,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	}
 
 	b = new UI::Button(&dropdown_box_, "save_targets", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-	                   g_gr->images().get("images/wui/menus/save_game.png"),
+	                   g_image_cache->get("images/wui/menus/save_game.png"),
 	                   _("Save target settings"));
 	b->sigclicked.connect([this] { create_target(); });
 	dropdown_box_.add_space(8);
@@ -138,7 +145,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 		   if (save_profile_dialog_) {
 			   save_profile_dialog_->update_table();
 		   }
-		});
+	   });
 
 	read_targets();
 }
@@ -153,6 +160,17 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	if (save_profile_dialog_) {
 		save_profile_dialog_->unset_parent();
 	}
+}
+
+std::string EconomyOptionsWindow::localize_profile_name(const std::string& name) {
+	// Translation for the default profile is sourced from the widelands textdomain, and for the
+	// other profiles from the tribes.
+	std::string localized_name = _(name);
+	{
+		i18n::Textdomain td("tribes");
+		localized_name = _(localized_name);
+	}
+	return localized_name;
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
@@ -233,7 +251,12 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 		die();
 		return *(new std::string());
 	}
-	return boost::lexical_cast<std::string>(economy->target_quantity(ware).permanent);
+	const Widelands::Quantity amount = economy->target_quantity(ware).permanent;
+	if (amount == Widelands::kEconomyTargetInfinity) {
+		/** TRANSLATORS: Infinite number of wares or workers */
+		return g_style_manager->font_style(UI::FontStyle::kLabel).as_font_tag(_("∞"));
+	}
+	return boost::lexical_cast<std::string>(amount);
 }
 
 /**
@@ -262,6 +285,14 @@ void EconomyOptionsWindow::EconomyOptionsPanel::set_economy(Widelands::Serial se
 	display_.set_economy(serial);
 }
 
+void EconomyOptionsWindow::toggle_infinite() {
+	if (tabpanel_.active() == 0) {
+		ware_panel_->toggle_infinite();
+	} else {
+		worker_panel_->toggle_infinite();
+	}
+}
+
 void EconomyOptionsWindow::change_target(int amount) {
 	if (tabpanel_.active() == 0) {
 		ware_panel_->change_target(amount);
@@ -281,14 +312,10 @@ void EconomyOptionsWindow::reset_target() {
 	}
 }
 
-void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
-	if (delta == 0) {
-		return;
-	}
+void EconomyOptionsWindow::EconomyOptionsPanel::toggle_infinite() {
 	Widelands::Economy* economy = player_->get_economy(serial_);
-	if (economy == nullptr) {
-		die();
-		return;
+	if (!economy) {
+		return die();
 	}
 	assert(economy->type() == type_);
 	Widelands::Game& game = dynamic_cast<Widelands::Game&>(player_->egbase());
@@ -297,9 +324,63 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index)) {
 			const Widelands::Economy::TargetQuantity& tq = economy->target_quantity(index);
+			Widelands::Quantity new_quantity;
+			if (tq.permanent == Widelands::kEconomyTargetInfinity) {
+				auto it = infinity_substitutes_.find(index);
+				if (it == infinity_substitutes_.end()) {
+					// The window was opended with the target set to infinite,
+					// so we just use the default value
+					new_quantity = is_wares ? economy_options_window_->get_predefined_targets()
+					                             .at(kDefaultEconomyProfile)
+					                             .wares.at(index) :
+					                          economy_options_window_->get_predefined_targets()
+					                             .at(kDefaultEconomyProfile)
+					                             .workers.at(index);
+				} else {
+					// Restore saved old value
+					new_quantity = it->second;
+					infinity_substitutes_.erase(it);
+				}
+			} else {
+				new_quantity = Widelands::kEconomyTargetInfinity;
+				// Save old target for when the infinity option is disabled again
+				infinity_substitutes_[index] = tq.permanent;
+			}
+			if (is_wares) {
+				game.send_player_command(new Widelands::CmdSetWareTargetQuantity(
+				   game.get_gametime(), player_->player_number(), serial_, index, new_quantity));
+			} else {
+				game.send_player_command(new Widelands::CmdSetWorkerTargetQuantity(
+				   game.get_gametime(), player_->player_number(), serial_, index, new_quantity));
+			}
+		}
+	}
+}
+
+void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int delta) {
+	if (delta == 0) {
+		return;
+	}
+	Widelands::Economy* economy = player_->get_economy(serial_);
+	if (!economy) {
+		return die();
+	}
+	assert(economy->type() == type_);
+	Widelands::Game& game = dynamic_cast<Widelands::Game&>(player_->egbase());
+	const bool is_wares = type_ == Widelands::wwWARE;
+	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
+	for (const Widelands::DescriptionIndex& index : items) {
+		if (display_.ware_selected(index)) {
+			const Widelands::Economy::TargetQuantity& tq = economy->target_quantity(index);
+			if (tq.permanent == Widelands::kEconomyTargetInfinity) {
+				// Infinity ± finite value = infinity
+				continue;
+			}
 			// Don't allow negative new amount
 			const int old_amount = static_cast<int>(tq.permanent);
 			const int new_amount = std::max(0, old_amount + delta);
+			assert(old_amount >= 0);
+			assert(new_amount >= 0);
 			if (new_amount == old_amount) {
 				continue;
 			}
@@ -411,7 +492,7 @@ void EconomyOptionsWindow::update_profiles_needed(const std::string& current_pro
 	dropdown_.clear();
 	last_added_to_dropdown_.clear();
 	for (const auto& pair : predefined_targets_) {
-		dropdown_.add(_(pair.first), pair.first);
+		dropdown_.add(EconomyOptionsWindow::localize_profile_name(pair.first), pair.first);
 		last_added_to_dropdown_.insert(pair.first);
 	}
 	if (current_profile.empty()) {
@@ -465,7 +546,7 @@ void EconomyOptionsWindow::SaveProfileWindow::table_selection_changed() {
 void EconomyOptionsWindow::SaveProfileWindow::update_table() {
 	table_.clear();
 	for (const auto& pair : economy_options_->get_predefined_targets()) {
-		table_.add(pair.first).set_string(0, _(pair.first));
+		table_.add(pair.first).set_string(0, EconomyOptionsWindow::localize_profile_name(pair.first));
 	}
 	layout();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,9 +38,10 @@ int32_t EditorIncreaseHeightTool::handle_click_impl(const Widelands::NodeAndTria
 		} while (mr.advance(*map));
 	}
 
-	return map->change_height(eia.egbase(), Widelands::Area<Widelands::FCoords>(
-	                                           map->get_fcoords(center.node), args->sel_radius),
-	                          args->change_by);
+	return map->change_height(
+	   eia.egbase(),
+	   Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius),
+	   args->change_by);
 }
 
 int32_t EditorIncreaseHeightTool::handle_undo_impl(const Widelands::NodeAndTriangle<>& center,

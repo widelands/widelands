@@ -38,10 +38,10 @@ run(function()
 
    sleep(100)
 
-   stable_save(game, "worker_in_portdock")
+   stable_save(game, "worker_in_portdock", 10 * 1000)
 
-   -- Wait till a ship unloads a worked at the souther port
-   while (ship:get_workers("builder") == 1) do
+   -- Wait until a ship unloads a worker at the southern port
+   while (ship:get_workers("barbarians_builder") == 1) do
        sleep(100)
    end
    sleep(2000)

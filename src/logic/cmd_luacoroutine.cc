@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,9 +48,15 @@ void CmdLuaCoroutine::execute(Game& game) {
 			cr_.reset();
 		}
 	} catch (LuaError& e) {
-		log("Error in Lua Coroutine\n");
-		log("%s\n", e.what());
-		log("Send message to all players and pause game\n");
+		log_err_time(game.get_gametime(), "Error in Lua Coroutine\n");
+		log_err_time(game.get_gametime(), "%s\n", e.what());
+
+		if (g_fail_on_lua_error) {
+			log_err_time(game.get_gametime(), "Terminating Widelands.");
+			abort();
+		}
+
+		log_err_time(game.get_gametime(), "Send message to all players and pause game\n");
 		const std::string error_message = richtext_escape(e.what());
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			// Send message only to open player slots

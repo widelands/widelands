@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-21 18:05+0000\n"
-"PO-Revision-Date: 2020-02-26 16:08+0000\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-09-29 19:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
 msgid "From Nemesis to Genesis"
-msgstr "Vun Nemesis tou Genesis"
+msgstr "Vun Nemesis na Genesis"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -50,6 +50,135 @@ msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr "Deese Inföhren verklaart Soldateree- un Övens-Boen un Slachten."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:14
+msgid "Easy."
+msgstr "Licht."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:20
+msgid "Medium."
+msgstr "Middel."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:25
+msgid "Hard."
+msgstr "Stuur."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:30
+msgid "Challenging."
+msgstr "Slimm."
+
+#. TRANSLATORS: The name of a Barbarian campaign
+#: ../../data/campaigns/campaigns.lua:43
+msgid "The Second Empire"
+msgstr "Dat tweede Riek"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:49
+msgid "Introduces the Barbarians."
+msgstr "Stellt de Willen Lüü vör."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:52
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, waar de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, waar he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eener gemeensamen Fahne marskeren."
+
+#. TRANSLATORS: The name of an Empire campaign
+#: ../../data/campaigns/campaigns.lua:70
+msgid "The Months of Exile"
+msgstr "De Maanten im Exil"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:73
+msgid "Introduces the Empire."
+msgstr "Stellt dat Latienske Riek vör."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:75
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"Barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 Barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr "Vör sess Maanten wurr Lutjus – een junger Offizeer vum Latiensken Riek – mit 150 Soldaten an de Grenz achtern de noordelken Walden schickt, waar de Willen Lüü ins Land vum Riek indrungen. Siene Upgaav weer, dat Land vum Riek to verdedigen. Eerst weer all friedelk. He snackde mit Willen Kinners un wullt in Freden leven – Sied an Sied mit de steenolle Volk. He meende, seker to wesen, un siene Soldaten achtden nich mehr up de mögelk Feinden. Dat weer een Fehler. In eener Määrtnacht wurren siene unrüsten Soldaten vun 100 Willen Stahfasten angrepen un heel un dall verjaggt. He un een paar vun sienen Soldaten överleevden mit nix as de blote Leven."
+
+#. TRANSLATORS: The name of an Atlantean campaign
+#: ../../data/campaigns/campaigns.lua:93
+msgid "The Run for the Fire"
+msgstr "Tum Füür rennen"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:96
+msgid "Introduces the Atlanteans."
+msgstr "Stellt de Atlantinger vör."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:98
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr "As ihr Gott sien Gloov in de Atlantinger verloor un ihre Insel överfloodde, wurr de Stried vun eener Froo na Gerechtigheid un eener annern Kans för hör Lüü de Stoff för Sagen. As se de övrigen Atlantinger to eener nejen Tokunft in eenem annern Part vun de Welt föhrt, word Jundlin' de machtigste Minsk in hör Tied, aver de Pries was düür: Hör Godigheid un hör Seel."
+
+#. TRANSLATORS: The name of a Frisian campaign
+#: ../../data/campaigns/campaigns.lua:107
+msgid "From Water to Ice"
+msgstr "Vum Water ins Ies"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:110
+msgid "Introduces the Frisians."
+msgstr "Stellt de Fresen vör."
+
+#. TRANSLATORS: A campaign difficulty (easiest of three options)
+#: ../../data/campaigns/campaigns.lua:115
+msgid "Sailor (Tricky)"
+msgstr "Matroos (stuur)"
+
+#. TRANSLATORS: A campaign difficulty (medium of three options)
+#: ../../data/campaigns/campaigns.lua:117
+msgid "Steersman (Very Hard)"
+msgstr "Maat (bannig slimm)"
+
+#. TRANSLATORS: A campaign difficulty (hardest of three options)
+#: ../../data/campaigns/campaigns.lua:119
+msgid "Captain (Unreasonable)"
+msgstr "Käpten (nich tum Tomoden)"
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:124
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Weer de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – of een Teken vun de Gotten, dat een Volk, wat sük even eerst hier daallaten hett, een kumpleet nejes Heimaatland utfinnen mutt?"
 
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
@@ -87,6 +216,10 @@ msgid ""
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr "Ennelk is de Schipp weer heel, un Lutjus un siene Lüü versöken wieder, eene gode Stee för eenen nejen Anfang to finnen. Blot een paar Dagen naher lannen se up eene gröne Insel in de Latienske See, de hör wie dat Paradies vörkummt. Överglückelk gahn se de neje Heimaat utförsken."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "Neptun in Wut"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -132,7 +265,7 @@ msgstr "Ieskolle Begrötens"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aver hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen …"
+msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aver hör Ankunft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -151,8 +284,9 @@ msgstr "Krieg"
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle."
-msgstr "In deese Inföhren lehrst du alls över Slachten: Wo dat Anhüren un Utbilden vun Soldaten gaht un wo man se in de Krieg föhrt."
+"soldiers, how to train them and how to lead them in battle. Scouting will be"
+" also covered."
+msgstr "In deese Inföhren lehrst du alls över Slachten: Wo dat Anhüren un Utbilden vun Soldaten gaht un wo man se in de Krieg föhrt. Ok dat Bespejen word verklaart."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -195,6 +329,18 @@ msgid ""
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Up deesen lütten Insels gifft 't kuum Rüümte för grote Husen. Daar sallst du daarher grote Husen bauen. Mitunner bruukst du grote Soldateree-Boen, um de anner Insel to faten to kriegen. Künstelk Spelers könen hier nich good spölen."
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+msgid "Astoria 2.R"
+msgstr "Astoria 2.R"
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Langes Wirtschaft-Speel in ewigsmojer Kuntrei. Probeer elkeen Speler ut!"
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+msgid "pbuczny@gmail.com – edited by Nordfriese"
+msgstr "pbuczny@gmail.com – vun Nordfriese bewarkt"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -266,9 +412,17 @@ msgstr "Lang nadeem een Steern in een paar Bargen fallen is, blöömt dat Leven 
 msgid "Crossing the Horizon"
 msgstr "Över de Kimm"
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+msgid "Kristin – edited by 3plus4i"
+msgstr "Kristin – vun 3plus4i bewarkt"
+
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Rüst dien Schipp ut un seil tum Kimm."
+
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr "Deese Kaart kann mit de Upgaav tum Winnen »Dwingelant« nich wunnen worden."
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
@@ -281,26 +435,27 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Veer Völker fechten mit hör anner Naber, um as eerster de Barg vull Gold to raken, wat Riekdoom tum nich Utmeten verspreckt. Aver könen de twee Överlevers de Mineraale klook delen?"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:8
-msgid "Dolomites"
-msgstr "Dolomiten"
+#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+msgid "Dolomites 3.0"
+msgstr "Dolomiten 3.0"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:10
+#: ../../data/maps/Dolomites_v3.wmf/elemental:10
 msgid ""
-"The jewel of the Alps, the Dolomites mountain range has been declared a "
-"World Heritage Site for its pristine beauty. This map is an as-faithful-as-"
-"reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
+"The jewel of the alps, the dolomites mountain range has been declared a "
+"world heritage site for its pristine beauty. This map is an as-faithful-as-"
+"reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+" to the death with your enemies, it may as well be in a beautiful place."
+msgstr "De Dolomiten, de Kroon vun de Alpen, sünd för hör unbannig Mooigheid eene Weltarve-Stee. Deese Kaart is so genau as mit Verstand mögelk na de Kuntrei baut, wat im Noordoost vun Cortina d’Ampezzo un im Südwest vun Canazei begrenzt word. Wenn du mit dienen Feinden bit tum Dood kämpen muttst, kannst du dat tominnst an eener ewigsmojen Stee doon."
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:11
+#: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical. Use the little building space that you have wisely. A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage."
-msgstr "'t gifft vööl flackes Land up deesen Bargen, aver dat meeste daarvun gaht leider stuuv na boven. Bruuk dat bietje Rüümte tum Bauen, wat du hest, klook. Eene Schanz in eenem knappen Bargpass is een bannig godes Hinner för feindelke Soldateree. Bruuk de Landskupp to dienem Vördeel."
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr "Dat gifft vööl flackes Land up deesen Bargen, aver dat meeste daarvun gaht leider stuuv na boven – bruuk dat bietje Rüümte tum Bauen, wat du hest, klook. Eene Schanz in eenem knappen Bargpass is een bannig godes Hinner för feindelke Soldateree – bruuk de Landskupp to dienem Vördeel. Kapp all Bomen of un vergroter dien Gewest waar du kannst – blot so kannst du de düren Steden för Buurdereen finnen."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -311,6 +466,28 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
 msgstr "De unbannige Mooigheid vun deesen smaragdgrönen Lannen hett mennig Völker versöken laten, se för sük sülvst intonehmen."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
+msgid "Escher_Goose_Fish"
+msgstr "Escher_Gans_Fiss"
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
+msgid "Equal starting conditions for three players."
+msgstr "Glieke Anfangs-Steden för all dree Spelers."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
+msgid "v0.2"
+msgstr "v0.2"
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:10
+msgid ""
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
+msgstr "Eene bannig grote Europa-Kaart. Blau = Sweden, Rood = Italien, Geel = Spaanjen, Gröön = Türkeei, Swart = Russland, Geelrood = Engelland, Lila = Frankriek, Witt = Polen"
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:8
+msgid "Europa 1.1"
+msgstr "Europa 1.1"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -375,7 +552,7 @@ msgstr "Veer Bargen"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr "Elkeen Volk is vun mveer machtigen Bargen umgeven. Well word se as Eerster innehmen un de Mineraale för sien eegen Volk winnen?"
+msgstr "Elkeen Volk is vun veer machtigen Bargen umgeven. Well word se as Eerster innehmen un de Mineraale för sien eegen Volk winnen?"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
@@ -426,17 +603,6 @@ msgstr "Harvst is Winter worden. Vööl is froren, de Krieg is 't nich."
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
 msgstr "Anfangs-Steden sünd rechtsrum"
-
-#: ../../data/maps/Impact.wmf/elemental:8
-msgid "Impact"
-msgstr "Inslag"
-
-#: ../../data/maps/Impact.wmf/elemental:10
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr "Nadeem een Steern daalknallt is un eenen harden Winter utlööst hett, sünd dree Insels mit Ies un Steen verbunnen. Dat freedsame Tosamenleven vun dree Völkers is nu to Enn."
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
@@ -490,7 +656,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "De Gotten hebben uns' Gebeden minnacht. Dat Sünnenlücht is mehr un mehr worden un hett de Eer dusend maal heter maakt un de Iesfelden smulten un de Lüü in de Deepten vun de See smeten. Aver nu – hoog in de machtigen Bargen, up de lesten Land-Steden – sünd twee Överlevers-Völker unnerkropen. De Gotten weren barmhartig un dat Weer is weer koller worden, aver dat Water word doch alltied hoger. Up de allerleste seker Stee – de hoogste Bargkopp, waar de Menge an Gold un de Rüümte tum Leven blot för een Volk langen – föhren blot twee Padden. Un vergeet nich, pass up … deese leste Rümte tum Leven is eene sware un lütte Stee tum Leven."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
@@ -505,6 +671,16 @@ msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
 msgstr "Veer Völker strieden um de Heerskupp in eener düllen Kuntrei. Mineraale sünd över de hele Kaart verstreit."
+
+#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+msgid ""
+">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
+"long, long way to conquere all the islands. Good luck!"
+msgstr ">Waar is dat? Dusend Mielen vun hier.< [Porgy un Bess] Du muttst wied, wied gahn, um all de Inseln intonehmen. Vööl Glück!"
+
+#: ../../data/maps/Long, long v2.wmf/elemental:8 way
+msgid "Long, long way v2"
+msgstr "Wieder, wieder Weg v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -538,6 +714,19 @@ msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
 msgstr "'t gifft hier twee grote Fragen: Well hett deesen unbannig groten Dwaalweg baut, un wat kann man daar drin finnen?"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+msgid "No metal challenge v2"
+msgstr "Rutfödderung sünner Metallen v2"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+msgid ""
+"This map is intended as a solo challenge for those very skilled players that"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr "Deese Kaart is as Enkelt-Speler-Rutfödderung dacht för so bannig gode Spelers, dat alleen tegen 6 künstelk Spelers to licht is. De blaue Speler hett keen Metall (as een bietje Iesen, um de Wirtschaft in Gang to kriegen) un mutt sük up de 5%-Kans verlaten, waar een leges Bargwark mit wat finnt. Un du spöölst 1 tegen 6 (du kannst aver ok een paar künstelk Spelers weglaten, um dat lichter to maken). Vööl Glück"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -643,7 +832,7 @@ msgid ""
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr ""
+msgstr "Eenige seggen, dat de unbetredtbaren Lannen wied im Noorden sülvst de modigsten Siedlers un de dappersten vun all dappern Kriegers ofschricken. Grote, olle Walden, vull vun groten wilden Deerten; daartüsken Broken un Höchten vull vun Geheemnissen. De minnen, well torügg komen sünd, hebben vun machtigen Husen vertellt, updaan mit Sniddjereen un Gold vun baldadigen Bargen in de Midde vun de Wildernis. Hunnerte Jahre daarna sünd vun deesen goden ollen Tieden nix as grusige Ruinen över, bedeckt vun Moss un Bomen. Hör Formen laten de Künst vun de ollen Baukeerls blot ahnen. Nüms weet, waarum se nich mehr daar sünd. Nüms weet dat. De Lüü seggen, dat nu nix mehr up de Straat tum Riekdoom liggt. Aver völe mutten vun Wulfen freten worden, vun Broken verslungen … vun feindelk Völkers umringt."
 
 #: ../../data/maps/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -746,7 +935,7 @@ msgid ""
 "exclusive trade alliance, forcing the other two to do the same. Suddenly, it"
 " seems only a matter of time before the first fights between the harbors "
 "will shatter the peaceful life that has lasted for so long…"
-msgstr ""
+msgstr "De feer machtigen Muden vun de Kraw-Insels hebben ewig lang hör Waren tüskeneenanner hannelt. Se bruken all Mineraale, wat se nich in hör eegen Gewest produzeren könen, un hebben daarför anner Mineraale liefert an de, well deese nich produzeren könen. Um deesen Hannel weren all de Muden un de Lüü up de Kraw-Insels fründelk miteenanner umgahn – bit vör körter Tied twee vun de Muden een Hannels-Ofmaken truffen hebben, wat de anner twee dwungen hett, dat ok to maken. Nu is dat up eenmaal nich mehr tum Ofwennen, dat de eersten Kriegen tüsken de Muden dat freedsame Leven verneelen, wat so lang anhollen hett …"
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
@@ -771,7 +960,7 @@ msgid ""
 "desperately searching for more resources to support their endlessly ongoing "
 "wars, would end up in this forgotten place at the same time and for the same"
 " well-known reason."
-msgstr ""
+msgstr "As de Wind tonohmen hett un de eersten Dünen in deesen verlaten Twennel-Meren bildt hett, daar hett sik nüms vörstellen könen, dat twee Völkers, wat vertwiefelt na mehr Mineralen söken, um hör ewig Krieg antodrieven, in deeser vergetten Stee to de glieken Tied ankomen – un woll för de glieken, good bekennten Grund."
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
 msgid ""
@@ -789,6 +978,12 @@ msgid ""
 "thousand waves, twinkling in the sun."
 msgstr "Völe moje, gröne Insels wachten up Lüde, wat modig genoog sünd, över de dusend Wellen to seilen, wat in de Sunn blinken."
 
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr "Pass up, diene Schippen nich in de Meren to bauen. Se könen nich dör de Riffen in de grote See komen, waar de Muden sünd."
+
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
 msgstr "Twee Swetten"
@@ -796,18 +991,6 @@ msgstr "Twee Swetten"
 #: ../../data/maps/Two_Frontiers.wmf/elemental:10
 msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr "Eene Kriegs-Kaart för mennig Spelers up eener lütten runden Insel."
-
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:8
-msgid "Volcanic Winter"
-msgstr "Winter um Vulkanen"
-
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:10
-msgid ""
-"In the middle of summer, a series of volcanic eruptions drew the winter in. "
-"Suddenly, the sun seemed to be gone and the only light and heat sources left"
-" were those that enforced this dramatic change. Continents, oceans and seas "
-"are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr "Midden im Summer hebben eenige Vulkaan-Utbrekens de Winter inhaalt. Up eenmaal weer de Sunn weg un de eenzige Quell vun Lücht un Warmt, wat 't noch gaff, weren deese, wat deeses heftige Ännern bewarkt hett. Kontinenten, Ozeanen un de See sünd nu froren, blot up de Vulkaaninsels kann man noch husen."
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"

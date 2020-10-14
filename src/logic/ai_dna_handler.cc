@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2017-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "logic/ai_dna_handler.h"
 
+#include "base/log.h"
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -91,7 +92,7 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 	                                  std::string("_ai_player_") +
 	                                  std::to_string(static_cast<int>(pn)) + kAiExtension;
 
-	log(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
+	log_dbg(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
 
 	Profile prof;
 

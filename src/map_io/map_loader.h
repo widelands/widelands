@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,6 @@
 
 namespace Widelands {
 
-class EditorGameBase;
-
 /// Loads a map from a file. It firsts only loads small chunks of information
 /// like size, nr of players for the map select dialog. For this loading
 /// function the same Map can be reused.  Then, when the player has a map
@@ -36,7 +34,7 @@ class MapLoader {
 public:
 	enum class LoadType { kGame, kScenario, kEditor };
 
-	MapLoader(const std::string& filename, Map& M) : map_(M), state_(STATE_INIT) {
+	MapLoader(const std::string& filename, Map& M) : map_(M), state_(State::kInit) {
 		map_.set_filename(filename);
 	}
 	virtual ~MapLoader() {
@@ -44,13 +42,17 @@ public:
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
 	virtual int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType) = 0;
+	virtual int32_t load_map_for_render(EditorGameBase&) {
+		// cannot load map for rendering only -> no map preview
+		return 1;
+	}
 
 	Map& map() {
 		return map_;
 	}
 
 protected:
-	enum State { STATE_INIT, STATE_PRELOADED, STATE_LOADED };
+	enum class State { kInit, kPreLoaded, kLoaded };
 	void set_state(State const s) {
 		state_ = s;
 	}

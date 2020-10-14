@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2019 by the Widelands Development Team
+ * Copyright (C) 2008-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ struct EconomyOptionsWindow : public UI::Window {
 	~EconomyOptionsWindow() override;
 
 	struct PredefinedTargets {
-		using Targets = std::map<Widelands::DescriptionIndex, uint32_t>;
+		using Targets = std::map<Widelands::DescriptionIndex, Widelands::Quantity>;
 		Targets wares;
 		Targets workers;
 		bool undeletable = false;
@@ -72,6 +72,7 @@ struct EconomyOptionsWindow : public UI::Window {
 	}
 
 	void change_target(int amount);
+	void toggle_infinite();
 	void reset_target();
 
 	void layout() override;
@@ -112,6 +113,7 @@ private:
 
 		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);
+		void toggle_infinite();
 		void reset_target();
 		void update_desired_size() override;
 
@@ -121,8 +123,13 @@ private:
 		Widelands::WareWorker type_;
 		TargetWaresDisplay display_;
 		EconomyOptionsWindow* economy_options_window_;
+
+		std::map<Widelands::DescriptionIndex, Widelands::Quantity> infinity_substitutes_;
 	};
 
+	/// Translation for the default profile is sourced from the widelands textdomain, and for the
+	/// other profiles from the tribes.
+	static std::string localize_profile_name(const std::string& name);
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 

@@ -34,6 +34,8 @@ wl_library(network
     network_player_settings_backend.h
     network_protocol.h
     relay_protocol.h
+  USES_BOOST_LIBRARIES
+  USES_SDL2
   DEPENDS
     ai
     base_exceptions

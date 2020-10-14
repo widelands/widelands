@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,21 +20,19 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 
-#include "base/macros.h"
-
-/*
- * Implementation is in immovable.cc
- */
+#include <memory>
 
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/map_object_program.h"
 
 namespace Widelands {
 
 /// Ordered sequence of actions (at least 1). Has a name.
-struct ImmovableProgram {
+struct ImmovableProgram : public MapObjectProgram {
 
 	/// Can be executed on an Immovable.
-	struct Action {
+	class Action {
+	public:
 		Action() = default;
 		virtual ~Action();
 		virtual void execute(Game&, Immovable&) const = 0;
@@ -58,70 +56,58 @@ struct ImmovableProgram {
 	/// to equal the length of the animation. It will loop around. The animation
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
-	struct ActAnimate : public Action {
-		ActAnimate(char* parameters, ImmovableDescr&);
+	class ActAnimate : public Action {
+	public:
+		ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
-		const std::string& animation() const {
-			return animation_name_;
+		uint32_t animation() const {
+			return parameters.animation;
 		}
 
 	private:
-		std::string animation_name_;
-		Duration duration_;
+		AnimationParameters parameters;
 	};
 
-	/// Transforms the immovable into another immovable or into a bob
-	///
-	/// Parameter syntax
-	///    parameters ::= {probability} {bob|immovable} world|tribe:name
-	/// Parameter semantics:
-	///    probability: (defaults to 0 -- i.e. always)
-	///       The probability (out of 255) for replacing the immovable with
-	///       a new one; if the probability is 0 (i.e. the default), then the
-	///       transformation always happens
-	///    bob|immovable: (defaults to immovable)
-	///       whether we'll be replaced by a bob or by an immovable
-	///    world|tribe:
-	///       whether the other object is taken from the world or from
-	///       the owner's tribe
-	///    name:
-	///       name of the replacement object
-	struct ActTransform : public Action {
-		ActTransform(char* parameters, ImmovableDescr&);
+	/// Transforms the immovable into another immovable or into a bob.
+	/// For parameters, see scripting documentation.
+	class ActTransform : public Action {
+	public:
+		ActTransform(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		bool bob;
-		bool tribe;
-		uint8_t probability;
+		std::string type_name_;
+		bool bob_;
+		unsigned probability_;
 	};
 
 	/// Like ActTransform but the probability is determined by the suitability.
-	struct ActGrow : public Action {
-		ActGrow(char* parameters, ImmovableDescr&);
+	class ActGrow : public Action {
+	public:
+		ActGrow(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		bool tribe;
+		std::string type_name_;
 	};
 
-	struct ActRemove : public Action {
-		ActRemove(char* parameters, ImmovableDescr&);
+	class ActRemove : public Action {
+	public:
+		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr& descr);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		uint8_t probability;
+		unsigned probability_;
 	};
 
-	struct ActSeed : public Action {
-		ActSeed(char* parameters, ImmovableDescr&);
+	class ActSeed : public Action {
+	public:
+		ActSeed(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string type_name;
-		uint8_t probability;
+		std::string type_name_;
+		unsigned probability_;
 	};
 
 	/// Plays a sound effect.
@@ -137,13 +123,13 @@ struct ImmovableProgram {
 	///
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
-	struct ActPlaySound : public Action {
-		ActPlaySound(char* parameters, const ImmovableDescr&);
+	class ActPlaySound : public Action {
+	public:
+		ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		FxId fx;
-		uint8_t priority;
+		PlaySoundParameters parameters;
 	};
 
 	/**
@@ -159,8 +145,9 @@ struct ImmovableProgram {
 	 *    decay-time:
 	 *       Time until construction decays one step if no progress has been made.
 	 */
-	struct ActConstruct : public Action {
-		ActConstruct(char* parameters, ImmovableDescr&);
+	class ActConstruct : public Action {
+	public:
+		ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 		Duration buildtime() const {
@@ -177,24 +164,16 @@ struct ImmovableProgram {
 	};
 
 	/// Create a program with a single action.
-	ImmovableProgram(char const* const init_name, Action* const action) : name_(init_name) {
-		actions_.push_back(action);
-	}
+	ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action);
 
-	// Create an immovable program from a number of lines.
+	/// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
-	                 ImmovableDescr* immovable);
+	                 ImmovableDescr& immovable);
 
 	~ImmovableProgram() {
-		for (Action* action : actions_) {
-			delete action;
-		}
 	}
 
-	const std::string& name() const {
-		return name_;
-	}
 	size_t size() const {
 		return actions_.size();
 	}
@@ -203,14 +182,10 @@ struct ImmovableProgram {
 		return *actions_[idx];
 	}
 
-	using Actions = std::vector<Action*>;
-	const Actions& actions() const {
-		return actions_;
-	}
+	static void postload_immovable_relations(const Tribes&, const World&);
 
 private:
-	std::string name_;
-	Actions actions_;
+	std::vector<std::unique_ptr<Action>> actions_;
 };
 
 struct ImmovableActionData {
@@ -220,9 +195,17 @@ struct ImmovableActionData {
 	}
 
 	virtual const char* name() const = 0;
-	virtual void save(FileWrite& fw, Immovable& imm) = 0;
+	virtual void save(FileWrite& fw, Immovable& imm) const = 0;
 
 	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
+};
+
+struct ActConstructData : ImmovableActionData {
+	const char* name() const override;
+	void save(FileWrite& fw, Immovable& imm) const override;
+	static ActConstructData* load(FileRead& fr, Immovable& imm);
+
+	Buildcost delivered;
 };
 }  // namespace Widelands
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ private:
 	void generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	                   const Coords&,
 	                   RNG&,
-	                   MapGenAreaInfo::MapGenTerrainType terrType);
+	                   MapGenAreaInfo::Terrain terrType);
 
 	void generate_resources(uint32_t const* const random1,
 	                        uint32_t const* const random2,
@@ -101,7 +101,7 @@ private:
 	                                    uint32_t const h2,
 	                                    uint32_t const h3,
 	                                    RNG& rng,
-	                                    MapGenAreaInfo::MapGenTerrainType& terrType);
+	                                    MapGenAreaInfo::Terrain& terrType);
 
 	std::unique_ptr<const MapGenInfo> map_gen_info_;
 	Map& map_;

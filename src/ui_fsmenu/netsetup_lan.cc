@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "ui_fsmenu/netsetup_lan.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
+#include "graphic/image_cache.h"
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/network.h"
@@ -36,7 +36,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
             0,
             _("Begin Network Game"),
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Boxes
      left_column_(this, 0, 0, UI::Box::Vertical),
@@ -60,7 +60,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                    hostname_.get_h(),
                    hostname_.get_h(),
                    UI::ButtonStyle::kFsMenuSecondary,
-                   g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
+                   g_image_cache->get("images/ui_fsmenu/menu_load_game.png"),
                    _("Load previous host")),
      // Buttons
      joingame_(&right_column_,
@@ -106,27 +106,22 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	host_box_.add_space(padding_);
 	host_box_.add(&loadlasthost_);
 
-	joingame_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_joingame, boost::ref(*this)));
-	hostgame_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_hostgame, boost::ref(*this)));
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_back, boost::ref(*this)));
-	loadlasthost_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuNetSetupLAN::clicked_lasthost, boost::ref(*this)));
+	joingame_.sigclicked.connect([this]() { clicked_joingame(); });
+	hostgame_.sigclicked.connect([this]() { clicked_hostgame(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	loadlasthost_.sigclicked.connect([this]() { clicked_lasthost(); });
 
 	playername_.set_font_scale(scale_factor());
 	hostname_.set_font_scale(scale_factor());
 
-	hostname_.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
+	hostname_.changed.connect([this]() { change_hostname(); });
 	playername_.set_text(get_config_string("nickname", (_("nobody"))));
-	playername_.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));
+	playername_.changed.connect([this]() { change_playername(); });
 	table_.add_column(190, _("Host"));
 	table_.add_column(0, _("Map"), "", UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.add_column(90, _("State"));
-	table_.selected.connect(boost::bind(&FullscreenMenuNetSetupLAN::game_selected, this, _1));
-	table_.double_clicked.connect(
-	   boost::bind(&FullscreenMenuNetSetupLAN::game_doubleclicked, this, _1));
+	table_.selected.connect([this](int32_t i) { game_selected(i); });
+	table_.double_clicked.connect([this](int32_t i) { game_doubleclicked(i); });
 	discovery_.set_callback(discovery_callback, this);
 
 	joingame_.set_enabled(false);
@@ -178,10 +173,12 @@ bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	}
 
 	// The user probably entered a hostname on his own. Try to resolve it
-	if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort))
+	if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort)) {
 		return true;
-	if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort))
+	}
+	if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort)) {
 		return true;
+	}
 	return false;
 }
 
@@ -244,8 +241,9 @@ void FullscreenMenuNetSetupLAN::game_closed(const NetOpenGame*) {
 }
 
 void FullscreenMenuNetSetupLAN::game_updated(const NetOpenGame* game) {
-	if (UI::Table<const NetOpenGame* const>::EntryRecord* const er = table_.find(game))
+	if (UI::Table<const NetOpenGame* const>::EntryRecord* const er = table_.find(game)) {
 		update_game_info(*er, game->info);
+	}
 }
 
 void FullscreenMenuNetSetupLAN::discovery_callback(int32_t const type,
@@ -307,7 +305,8 @@ void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section& s = get_config_safe_section();
 	std::string const host = s.get_string("lasthost", "");
 	hostname_.set_text(host);
-	if (host.size())
+	if (host.size()) {
 		joingame_.set_enabled(true);
+	}
 	table_.select(table_.no_selection_index());
 }

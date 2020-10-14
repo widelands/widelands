@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,10 @@ enum class NoteId : uint32_t {
 	Sound,
 	Dropdown,
 	GameSettings,
-	MapOptions
+	MapOptions,
+	MapObjectDescription,
+	LoadingMessage,
+	Panel
 };
 
 #endif  // end of include guard: WL_NOTIFICATIONS_NOTE_IDS_H

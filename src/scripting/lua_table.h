@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef WL_SCRIPTING_LUA_TABLE_H
 #define WL_SCRIPTING_LUA_TABLE_H
 
+#include <cstdlib>
 #include <memory>
 #include <set>
 
@@ -42,6 +43,8 @@ public:
 /// they return a Lua table with (string,value) pairs.
 class LuaTable {
 public:
+	enum class DataType { kError, kBoolean, kFunction, kNumber, kString, kTable };
+
 	explicit LuaTable(lua_State* L);
 
 	~LuaTable();
@@ -98,6 +101,29 @@ public:
 		} catch (LuaTableKeyError&) {
 			return false;
 		}
+	}
+
+	/// Returns the value's data type if the key is in the table. Returns DataType::kError otherwise.
+	template <typename KeyType> DataType get_datatype(const KeyType& key) const {
+		DataType result = DataType::kError;
+		try {
+			get_existing_table_value(key);
+			if (lua_isstring(L_, -1)) {
+				result = DataType::kString;
+			} else if (lua_istable(L_, -1)) {
+				result = DataType::kTable;
+			} else if (lua_isnumber(L_, -1)) {
+				result = DataType::kNumber;
+			} else if (lua_isboolean(L_, -1)) {
+				result = DataType::kBoolean;
+			} else if (lua_isfunction(L_, -1)) {
+				result = DataType::kFunction;
+			}
+			lua_pop(L_, 1);
+		} catch (LuaTableKeyError&) {
+			return result;
+		}
+		return result;
 	}
 
 	/// Returns the corresponding value with the given key.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 	for (Widelands::PlayerNumber p = 1, last = current_player_ - 1;; ++p) {
 		for (; p <= last; ++p) {
 			if (Widelands::Coords const sp = map.get_starting_pos(p)) {
-				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS) {
+				if (map.calc_distance(sp, c) < Widelands::kMinSpaceAroundPlayers) {
 					return Widelands::NodeCaps::CAPS_NONE;
 				}
 			}
@@ -46,9 +46,9 @@ Widelands::NodeCaps set_starting_pos_tool_nodecaps(const Widelands::FCoords& c,
 	}
 
 	Widelands::NodeCaps const caps = c.field->nodecaps();
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
 		return caps;
-
+	}
 	return Widelands::NodeCaps::CAPS_NONE;
 }
 

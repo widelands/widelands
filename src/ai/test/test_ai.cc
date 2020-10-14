@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2019 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,6 @@
 
 #include <boost/test/unit_test.hpp>
 
-#ifdef _WIN32
-#include "base/log.h"
-#endif
 #include "ai/ai_help_structs.h"
 #include "base/macros.h"
 
@@ -29,12 +26,10 @@
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
-using namespace Widelands;
-
 BOOST_AUTO_TEST_SUITE(warehouse_distance)
 
 BOOST_AUTO_TEST_CASE(flag_distance_soft_expiry) {
-	FlagWarehouseDistances fw;
+	AI::FlagWarehouseDistances fw;
 	uint32_t tmp_wh;
 	BOOST_CHECK_EQUAL(fw.get_distance(0, 0, &tmp_wh), 1000);
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
@@ -42,39 +37,39 @@ BOOST_AUTO_TEST_CASE(flag_distance_soft_expiry) {
 	BOOST_CHECK_EQUAL(tmp_wh, 3);
 
 	// setting longer distance below soft_expiry time
-	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, kFlagDistanceExpirationPeriod / 3, 4), false);
+	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, AI::kFlagDistanceExpirationPeriod / 3, 4), false);
 	// distance to 3 not updated
-	BOOST_CHECK_EQUAL(fw.get_distance(1, kFlagDistanceExpirationPeriod / 3, &tmp_wh), 2);
+	BOOST_CHECK_EQUAL(fw.get_distance(1, AI::kFlagDistanceExpirationPeriod / 3, &tmp_wh), 2);
 	BOOST_CHECK_EQUAL(tmp_wh, 3);
 
 	// now setting after soft expiry
 	BOOST_CHECK_EQUAL(
-	   fw.set_distance(1, 1, kFlagDistanceExpirationPeriod / 3, 6), true);  // distance set to 1
-	BOOST_CHECK_EQUAL(fw.get_distance(1, kFlagDistanceExpirationPeriod / 3, &tmp_wh), 1);
+	   fw.set_distance(1, 1, AI::kFlagDistanceExpirationPeriod / 3, 6), true);  // distance set to 1
+	BOOST_CHECK_EQUAL(fw.get_distance(1, AI::kFlagDistanceExpirationPeriod / 3, &tmp_wh), 1);
 	BOOST_CHECK_EQUAL(tmp_wh, 6);
 }
 BOOST_AUTO_TEST_CASE(flag_distance_below_expiry)
 /* Compare with void free_test_function() */
 {
-	FlagWarehouseDistances fw;
+	AI::FlagWarehouseDistances fw;
 	uint32_t tmp_wh;
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
 
 	// setting longer distance after soft but below expiry time
-	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, kFlagDistanceExpirationPeriod * 2 / 3, 5), true);
-	BOOST_CHECK_EQUAL(fw.get_distance(1, kFlagDistanceExpirationPeriod * 2 / 3, &tmp_wh), 3);
+	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, AI::kFlagDistanceExpirationPeriod * 2 / 3, 5), true);
+	BOOST_CHECK_EQUAL(fw.get_distance(1, AI::kFlagDistanceExpirationPeriod * 2 / 3, &tmp_wh), 3);
 	BOOST_CHECK_EQUAL(tmp_wh, 5);
 }
 
 BOOST_AUTO_TEST_CASE(flag_distance_after_expiry)
 /* Compare with void free_test_function() */
 {
-	FlagWarehouseDistances fw;
+	AI::FlagWarehouseDistances fw;
 	uint32_t tmp_wh;
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
 
 	// setting longer distance below expiry time
-	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, 2 * kFlagDistanceExpirationPeriod, 5), true);
+	BOOST_CHECK_EQUAL(fw.set_distance(1, 3, 2 * AI::kFlagDistanceExpirationPeriod, 5), true);
 	BOOST_CHECK_EQUAL(fw.get_distance(1, 3, &tmp_wh), 3);
 	BOOST_CHECK_EQUAL(tmp_wh, 5);
 }
@@ -82,28 +77,28 @@ BOOST_AUTO_TEST_CASE(flag_distance_after_expiry)
 BOOST_AUTO_TEST_CASE(flag_distance_expiration_extension)
 /* setting the same distance restart the expiry_period */
 {
-	FlagWarehouseDistances fw;
+	AI::FlagWarehouseDistances fw;
 	uint32_t tmp_wh;
 	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, 0, 3), true);
 	BOOST_CHECK_EQUAL(
 	   fw.set_distance(1, 2, 0, 3), false);  // cannot reset the same distance in the same time
 
 	// Now we are after expiration time
-	BOOST_CHECK_EQUAL(fw.get_distance(1, kFlagDistanceExpirationPeriod + 3, &tmp_wh), 1000);
+	BOOST_CHECK_EQUAL(fw.get_distance(1, AI::kFlagDistanceExpirationPeriod + 3, &tmp_wh), 1000);
 
 	// setting distance 2 time shortly one after another
-	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, kFlagDistanceExpirationPeriod + 3, 5), true);
-	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, kFlagDistanceExpirationPeriod + 10, 5), true);
-	// current expiry_time should be 2*kFlagDistanceExpirationPeriod + 10
-	BOOST_CHECK_EQUAL(fw.get_distance(1, 2 * kFlagDistanceExpirationPeriod, &tmp_wh), 2);
+	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, AI::kFlagDistanceExpirationPeriod + 3, 5), true);
+	BOOST_CHECK_EQUAL(fw.set_distance(1, 2, AI::kFlagDistanceExpirationPeriod + 10, 5), true);
+	// current expiry_time should be 2*AI::kFlagDistanceExpirationPeriod + 10
+	BOOST_CHECK_EQUAL(fw.get_distance(1, 2 * AI::kFlagDistanceExpirationPeriod, &tmp_wh), 2);
 	BOOST_CHECK_EQUAL(tmp_wh, 5);
-	BOOST_CHECK_EQUAL(fw.get_distance(1, 2 * kFlagDistanceExpirationPeriod + 15, &tmp_wh), 1000);
+	BOOST_CHECK_EQUAL(fw.get_distance(1, 2 * AI::kFlagDistanceExpirationPeriod + 15, &tmp_wh), 1000);
 }
 
 BOOST_AUTO_TEST_CASE(flag_distance_road_builtexpiration_extension)
 /* setting the same distance restart the expiry_period */
 {
-	FlagWarehouseDistances fw;
+	AI::FlagWarehouseDistances fw;
 	// No road built on fresh flag
 	BOOST_CHECK_EQUAL(fw.is_road_prohibited(1, 1), false);
 	// get_distance(const uint32_t flag_coords, uint32_t gametime, uint32_t* nw)
@@ -125,20 +120,21 @@ BOOST_AUTO_TEST_CASE(flag_distance_road_builtexpiration_extension)
 BOOST_AUTO_TEST_CASE(flag_distance_old_removal)
 /* setting the same distance restart the expiry_period */
 {
-	FlagWarehouseDistances fw;
+	AI::FlagWarehouseDistances fw;
 	fw.set_distance(1, 2, 0, 3);
 	BOOST_CHECK_EQUAL(fw.count(), 1);
-	BOOST_CHECK_EQUAL(fw.remove_old_flag(kOldFlagRemoveTime + kFlagDistanceExpirationPeriod), false);
+	BOOST_CHECK_EQUAL(
+	   fw.remove_old_flag(AI::kOldFlagRemoveTime + AI::kFlagDistanceExpirationPeriod), false);
 	BOOST_CHECK_EQUAL(fw.count(), 1);
 	BOOST_CHECK_EQUAL(
-	   fw.remove_old_flag(kOldFlagRemoveTime + kFlagDistanceExpirationPeriod + 2), true);
+	   fw.remove_old_flag(AI::kOldFlagRemoveTime + AI::kFlagDistanceExpirationPeriod + 2), true);
 	BOOST_CHECK_EQUAL(fw.count(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(new_flag_road_not_prohibited)
 /* setting the same distance restart the expiry_period */
 {
-	FlagWarehouseDistances fw;
+	AI::FlagWarehouseDistances fw;
 	// let fw knows about it
 	BOOST_CHECK_EQUAL(fw.count(), 0);
 	fw.set_distance(1, 2, 0, 3);
@@ -149,7 +145,7 @@ BOOST_AUTO_TEST_CASE(new_flag_road_not_prohibited)
 BOOST_AUTO_TEST_CASE(flag_candidate_init)
 /* setting the same distance restart the expiry_period */
 {
-	FlagCandidates fc = FlagCandidates(10);
+	AI::FlagCandidates fc = AI::FlagCandidates(10);
 	BOOST_CHECK_EQUAL(fc.count(), 0);
 }
 
@@ -162,7 +158,7 @@ BOOST_AUTO_TEST_CASE(flag_candidate_winner_score) {
 
 	const uint32_t kTestedCoords = 11;
 
-	FlagCandidates fc = FlagCandidates(kStartFlagToWh);
+	AI::FlagCandidates fc = AI::FlagCandidates(kStartFlagToWh);
 
 	// coord, different economy, distance to wh
 	fc.add_flag(kTestedCoords, false, kCurFlDistToWh, 1);
@@ -185,7 +181,7 @@ BOOST_AUTO_TEST_CASE(flag_candidate_winner_score) {
 	                  +(kStartFlagToWh - kCurFlDistToWh) + (kCurRoadDistFlToFl - 2 * kPosRoadDist));
 }
 BOOST_AUTO_TEST_CASE(flag_candidates_sorting) {
-	FlagCandidates fc = FlagCandidates(10);
+	AI::FlagCandidates fc = AI::FlagCandidates(10);
 
 	fc.add_flag(0, false, 10, 1);
 	fc.add_flag(1, false, 10, 1);
@@ -201,7 +197,7 @@ BOOST_AUTO_TEST_CASE(flag_candidates_sorting) {
 }
 
 BOOST_AUTO_TEST_CASE(flag_sort_by_air_distance) {
-	FlagCandidates fc = FlagCandidates(10);
+	AI::FlagCandidates fc = AI::FlagCandidates(10);
 
 	fc.add_flag(0, false, 10, 4);
 	fc.add_flag(1, false, 10, 1);
@@ -211,7 +207,7 @@ BOOST_AUTO_TEST_CASE(flag_sort_by_air_distance) {
 }
 
 BOOST_AUTO_TEST_CASE(flag_has_candidate) {
-	FlagCandidates fc = FlagCandidates(10);
+	AI::FlagCandidates fc = AI::FlagCandidates(10);
 
 	fc.add_flag(0, false, 10, 4);
 	fc.add_flag(1, false, 10, 1);

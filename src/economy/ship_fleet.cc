@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2019 by the Widelands Development Team
+ * Copyright (C) 2011-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -57,7 +58,8 @@ const ShipFleetDescr& ShipFleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The Fleet takes care of merging with existing fleets, if any.
  */
-ShipFleet::ShipFleet(Player* player) : MapObject(&g_ship_fleet_descr), act_pending_(false) {
+ShipFleet::ShipFleet(Player* player)
+   : MapObject(&g_ship_fleet_descr), act_pending_(false), schedule_(*this) {
 	owner_ = player;
 }
 
@@ -80,8 +82,9 @@ void ShipFleet::set_economy(Economy* e, WareWorker type) {
 			e = ports_[0]->get_economy(type);
 		}
 #ifndef NDEBUG
-		else
+		else {
 			assert(e == nullptr);
+		}
 #endif
 
 		if (upcast(Game, game, &get_owner()->egbase())) {
@@ -100,7 +103,7 @@ bool ShipFleet::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
 	if (empty()) {
-		molog("Empty fleet initialized; disband immediately\n");
+		molog(egbase.get_gametime(), "Empty fleet initialized; disband immediately\n");
 		remove(egbase);
 		return false;
 	}
@@ -160,8 +163,8 @@ bool ShipFleet::find_other_fleet(EditorGameBase& egbase) {
 				// here might be a problem so I (tiborb) put here
 				// this test, might be removed after some time
 				if (dock->get_fleet() == nullptr) {
-					log("The dock on %3dx%3d withouth a fleet!\n", dock->dockpoints_.front().x,
-					    dock->dockpoints_.front().y);
+					log_warn_time(egbase.get_gametime(), "The dock on %3dx%3d without a fleet!\n",
+					              dock->dockpoints_.front().x, dock->dockpoints_.front().y);
 				}
 				if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
 					return dock->get_fleet()->merge(egbase, this);
@@ -201,10 +204,17 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 		return true;
 	}
 
+	// TODO(Nordfriese): Currently fleets merge only directly after creation, so the fleet being
+	// merged has either no ports or no ships, and therefore should not yet have scheduled anything.
+	// Scripts could also enforce fleet merges by changing the terrain so that two previously
+	// separate oceans, both with a functional system of ships and ports, are now connected.
+	// (Would this even be detected? Not sure.) The schedule side of such a merge is not supported.
+	assert(other->get_schedule().empty());
+
 	while (!other->ships_.empty()) {
 		Ship* ship = other->ships_.back();
 		other->ships_.pop_back();
-		add_ship(ship);
+		add_ship(egbase, ship);
 	}
 
 	uint32_t old_nrports = ports_.size();
@@ -221,8 +231,9 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
 		ports_[idx]->set_fleet(this);
 	}
 
-	if (!ships_.empty() && !ports_.empty())
+	if (!ships_.empty() && !ports_.empty()) {
 		check_merge_economy();
+	}
 
 	other->ports_.clear();
 	other->portpaths_.clear();
@@ -236,8 +247,9 @@ bool ShipFleet::merge(EditorGameBase& egbase, ShipFleet* other) {
  * If we have ports and ships, ensure that all ports belong to the same economy.
  */
 void ShipFleet::check_merge_economy() {
-	if (ports_.empty() || ships_.empty())
+	if (ports_.empty() || ships_.empty()) {
 		return;
+	}
 
 	Flag& base = ports_[0]->base_flag();
 	for (uint32_t i = 1; i < ports_.size(); ++i) {
@@ -265,11 +277,7 @@ void ShipFleet::cleanup(EditorGameBase& egbase) {
 
 	while (!ships_.empty()) {
 		Ship* ship = ships_.back();
-		// Check if the ship still exists to avoid heap-use-after-free when ship has already been
-		// deleted while processing EditorGameBase::cleanup_objects()
-		if (egbase.objects().object_still_available(ship)) {
-			ship->set_fleet(nullptr);
-		}
+		ship->set_fleet(nullptr);
 		ships_.pop_back();
 	}
 
@@ -315,8 +323,9 @@ bool ShipFleet::get_path(const PortDock& start, const PortDock& end, Path& path)
 	uint32_t startidx = std::find(ports_.begin(), ports_.end(), &start) - ports_.begin();
 	uint32_t endidx = std::find(ports_.begin(), ports_.end(), &end) - ports_.begin();
 
-	if (startidx >= ports_.size() || endidx >= ports_.size())
+	if (startidx >= ports_.size() || endidx >= ports_.size()) {
 		return false;
+	}
 
 	bool reverse;
 	const PortPath& pp(portpath_bidir(startidx, endidx, reverse));
@@ -325,29 +334,20 @@ bool ShipFleet::get_path(const PortDock& start, const PortDock& end, Path& path)
 		connect_port(get_owner()->egbase(), startidx);
 	}
 
-	if (pp.cost < 0)
+	if (pp.cost < 0) {
 		return false;
+	}
 
 	path = *pp.path;
-	if (reverse)
+	if (reverse) {
 		path.reverse();
+	}
 
 	return true;
 }
 
 uint32_t ShipFleet::count_ships() const {
 	return ships_.size();
-}
-
-uint32_t ShipFleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const {
-	uint32_t ships_on_way = 0;
-	for (uint16_t s = 0; s < ships_.size(); ++s) {
-		if (ships_[s]->get_current_destination(egbase) == port) {
-			++ships_on_way;
-		}
-	}
-
-	return ships_on_way;
 }
 
 uint32_t ShipFleet::count_ports() const {
@@ -361,8 +361,9 @@ void ShipFleet::add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& 
 	uint32_t idx = std::find(ports_.begin(), ports_.end(), &pd) - ports_.begin();
 
 	for (uint32_t otheridx = 0; otheridx < ports_.size(); ++otheridx) {
-		if (idx == otheridx)
+		if (idx == otheridx) {
 			continue;
+		}
 
 		bool reverse;
 		PortPath& pp(portpath_bidir(idx, otheridx, reverse));
@@ -381,9 +382,12 @@ void ShipFleet::add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& 
 	}
 }
 
-void ShipFleet::add_ship(Ship* ship) {
+void ShipFleet::add_ship(EditorGameBase& egbase, Ship* ship) {
 	ships_.push_back(ship);
+	assert(std::count(ships_.begin(), ships_.end(), ship) == 1);
+
 	ship->set_fleet(this);
+
 	if (upcast(Game, game, &get_owner()->egbase())) {
 		if (ports_.empty()) {
 			ship->set_economy(*game, nullptr, wwWARE);
@@ -392,28 +396,34 @@ void ShipFleet::add_ship(Ship* ship) {
 			ship->set_economy(*game, ports_[0]->get_economy(wwWARE), wwWARE);
 			ship->set_economy(*game, ports_[0]->get_economy(wwWORKER), wwWORKER);
 		}
+		schedule_.ship_added(*game, *ship);
 	}
 
 	if (ships_.size() == 1) {
 		check_merge_economy();
 	}
+	update(egbase);
 }
 
 void ShipFleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 	std::vector<Ship*>::iterator it = std::find(ships_.begin(), ships_.end(), ship);
-	if (it != ships_.end()) {
+	while (it != ships_.end()) {
 		*it = ships_.back();
 		ships_.pop_back();
+		it = std::find(ships_.begin(), ships_.end(), ship);
+		if (it != ships_.end()) {
+			log_err_time(
+			   egbase.get_gametime(), "Multiple instances of the same ship were in the ship fleet\n");
+		}
 	}
+	assert(std::count(ships_.begin(), ships_.end(), ship) == 0);
+
 	ship->set_fleet(nullptr);
+
 	if (upcast(Game, game, &egbase)) {
 		ship->set_economy(*game, nullptr, wwWARE);
 		ship->set_economy(*game, nullptr, wwWORKER);
-	}
-
-	if (ship->get_current_destination(egbase)) {
-		ship->get_current_destination(egbase)->ship_coming(*ship, false);
-		update(egbase);
+		schedule_.ship_removed(*game, ship);
 	}
 
 	if (ships_.empty()) {
@@ -473,12 +483,14 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	StepEvalFindPorts se;
 
 	for (uint32_t i = 0; i < ports_.size(); ++i) {
-		if (i == idx)
+		if (i == idx) {
 			continue;
+		}
 
 		bool reverse;
-		if (portpath_bidir(i, idx, reverse).cost >= 0)
+		if (portpath_bidir(i, idx, reverse).cost >= 0) {
 			continue;
+		}
 
 		StepEvalFindPorts::Target tgt;
 		tgt.idx = i;
@@ -486,8 +498,9 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 		se.targets.push_back(tgt);
 	}
 
-	if (se.targets.empty())
+	if (se.targets.empty()) {
 		return;
+	}
 
 	MapAStar<StepEvalFindPorts> astar(*egbase.mutable_map(), se, wwWORKER);
 
@@ -500,33 +513,39 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	FCoords cur;
 	while (!se.targets.empty() && astar.step(cur, cost)) {
 		BaseImmovable* imm = cur.field->get_immovable();
-		if (!imm || imm->descr().type() != MapObjectType::PORTDOCK)
+		if (!imm || imm->descr().type() != MapObjectType::PORTDOCK) {
 			continue;
+		}
 
 		if (upcast(PortDock, pd, imm)) {
-			if (pd->get_owner() != get_owner())
+			if (pd->get_owner() != get_owner()) {
 				continue;
+			}
 
 			if (pd->get_fleet() && pd->get_fleet() != this) {
-				log("ShipFleet::connect_port: different fleets despite reachability\n");
+				log_err_time(egbase.get_gametime(),
+				             "ShipFleet::connect_port: different fleets despite reachability\n");
 				continue;
 			}
 
 			uint32_t otheridx = std::find(ports_.begin(), ports_.end(), pd) - ports_.begin();
-			if (idx == otheridx)
+			if (idx == otheridx) {
 				continue;
+			}
 
 			bool reverse;
 			PortPath& ppath(portpath_bidir(idx, otheridx, reverse));
 
-			if (ppath.cost >= 0)
+			if (ppath.cost >= 0) {
 				continue;
+			}
 
 			ppath.cost = cost;
 			ppath.path.reset(new Path);
 			astar.pathto(cur, *ppath.path);
-			if (reverse)
+			if (reverse) {
 				ppath.path->reverse();
+			}
 
 			for (StepEvalFindPorts::Target& temp_target : se.targets) {
 				if (temp_target.idx == otheridx) {
@@ -539,11 +558,11 @@ void ShipFleet::connect_port(EditorGameBase& egbase, uint32_t idx) {
 	}
 
 	if (!se.targets.empty()) {
-		log("ShipFleet::connect_port: Could not reach all ports!\n");
+		log_err_time(egbase.get_gametime(), "ShipFleet::connect_port: Could not reach all ports!\n");
 	}
 }
 
-void ShipFleet::add_port(EditorGameBase& /* egbase */, PortDock* port) {
+void ShipFleet::add_port(EditorGameBase& egbase, PortDock* port) {
 	ports_.push_back(port);
 	port->set_fleet(this);
 	if (ports_.size() == 1) {
@@ -559,6 +578,10 @@ void ShipFleet::add_port(EditorGameBase& /* egbase */, PortDock* port) {
 	}
 
 	portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
+	if (upcast(Game, g, &egbase)) {
+		schedule_.port_added(*g, *port);
+	}
+	update(egbase);
 }
 
 void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
@@ -570,13 +593,12 @@ void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 		}
 		for (uint32_t i = gap + 1; i < ports_.size() - 1; ++i) {
 			portpath(gap, i) = portpath(i, ports_.size() - 1);
-			if (portpath(gap, i).path)
+			if (portpath(gap, i).path) {
 				portpath(gap, i).path->reverse();
+			}
 		}
+		ports_.erase(it);
 		portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
-
-		*it = ports_.back();
-		ports_.pop_back();
 	}
 	port->set_fleet(nullptr);
 
@@ -594,10 +616,11 @@ void ShipFleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 
 	if (empty()) {
 		remove(egbase);
-	} else if (is_a(Game, &egbase)) {
+	} else if (upcast(Game, g, &egbase)) {
 		// Some ship perhaps lose their destination now, so new a destination must be appointed (if
 		// any)
-		molog("Port removed from fleet, triggering fleet update\n");
+		molog(egbase.get_gametime(), "Port removed from fleet, triggering fleet update\n");
+		schedule_.port_removed(*g, port);
 		update(egbase);
 	}
 }
@@ -613,8 +636,9 @@ bool ShipFleet::has_ports() const {
  */
 PortDock* ShipFleet::get_dock(Flag& flag) const {
 	for (PortDock* temp_port : ports_) {
-		if (&temp_port->base_flag() == &flag)
+		if (&temp_port->base_flag() == &flag) {
 			return temp_port;
+		}
 	}
 
 	return nullptr;
@@ -642,8 +666,9 @@ PortDock* ShipFleet::get_dock(EditorGameBase& egbase, Coords field_coords) const
  * @return an arbitrary dock of the fleet, or 0 if the fleet has no docks
  */
 PortDock* ShipFleet::get_arbitrary_dock() const {
-	if (ports_.empty())
+	if (ports_.empty()) {
 		return nullptr;
+	}
 	return ports_[0];
 }
 
@@ -651,7 +676,7 @@ PortDock* ShipFleet::get_arbitrary_dock() const {
  * Trigger an update of ship scheduling
  */
 void ShipFleet::update(EditorGameBase& egbase) {
-	if (act_pending_) {
+	if (act_pending_ || !serial()) {
 		return;
 	}
 
@@ -661,294 +686,43 @@ void ShipFleet::update(EditorGameBase& egbase) {
 	}
 }
 
-/*
- * Helper function for assigning ships to ports in need of a ship.
- * Penalizes the given ship if it is transporting wares.
- * A small detour to the given portdock is penalized very slightly, a longer detour drastically.
- * Returns false if the detour would be so long that this ship must not even be considered for
- * serving this port.
- */
-bool ShipFleet::penalize_route(Game& game, PortDock& p, const Ship& s, uint32_t* route_length) {
-	const uint32_t real_length = *route_length;
-	uint32_t malus = 1;
-	uint32_t index = 0;
-	PortDock* iterator = nullptr;
-	uint32_t shortest_detour = std::numeric_limits<uint32_t>::max();
-	uint32_t best_index = std::numeric_limits<uint32_t>::max();
-	for (const auto& pair : s.destinations_) {
-		PortDock* pd = pair.first.get(game);
-		Path path;
-		uint32_t detour;
-		if (iterator == &p) {
-			detour = 0;
-		} else if (iterator) {
-			get_path(*iterator, p, path);
-			detour = path.get_nsteps();
-		} else {
-			s.calculate_sea_route(game, p, &path);
-			detour = path.get_nsteps();
-		}
-		if (&p != pd) {
-			get_path(p, *pd, path);
-			detour += path.get_nsteps();
-		}
-		if (detour < shortest_detour) {
-			shortest_detour = detour;
-			best_index = index;
-		}
-		malus += pair.second;
-		iterator = pd;
-		++index;
-	}
-	*route_length += shortest_detour * best_index;
-	if (*route_length + shortest_detour > real_length * malus) {
-		// Unreasonably long detour
-		return false;
-	}
-	*route_length *= malus;
-	return true;
-}
-
 /**
  * Act callback updates ship scheduling of idle ships.
  *
  * @note Do not call this directly; instead, trigger it via @ref update
  */
-void ShipFleet::act(Game& game, uint32_t /* data */) {
+void ShipFleet::act(Game& game, uint32_t) {
+	assert(act_pending_);
 	act_pending_ = false;
 
 	if (empty()) {
-		molog("ShipFleet::act: remove empty fleet\n");
+		molog(game.get_gametime(), "ShipFleet::act: remove empty fleet\n");
 		remove(game);
 		return;
 	}
 
-	if (!active()) {
-		// If we are here, most likely act() was called by a port with waiting wares or
-		// with an expedition ready, although there are still no ships.
-		// We can't handle it now, so we reschedule the act()
-		schedule_act(game, kFleetInterval);  // retry in the next time
+	molog(game.get_gametime(), "ShipFleet::act\n");
+
+	// All the work is done by the schedule
+	const Duration next = schedule_.update(game);
+	if (next < endless()) {
+		schedule_act(game, next);
 		act_pending_ = true;
-		return;
-	}
-
-	molog("ShipFleet::act\n");
-
-	// For each waiting port, try to find idle ships and send to it the closest one.
-	uint16_t waiting_ports = ports_.size();
-	for (PortDock* p : ports_) {
-		if (p->get_need_ship() == 0) {
-			--waiting_ports;
-			continue;
-		}
-
-		Ship* closest_ship = nullptr;
-		uint32_t shortest_dist = kRouteNotCalculated;
-		bool waiting = true;
-
-		for (Ship* s : ships_) {
-			bool fallback = false;
-			if (s->get_current_destination(game)) {
-				if (s->has_destination(game, *p)) {
-					waiting = false;
-					--waiting_ports;
-					break;
-				}
-				fallback = true;  // The ship already has a destination
-			}
-			if (s->get_ship_state() != Ship::ShipStates::kTransport) {
-				continue;  // Ship is not available, e.g. in expedition
-			}
-
-			// Here we get distance ship->port
-			uint32_t route_length = kRouteNotCalculated;
-
-			// Get precalculated distance for ships available at ports
-			{
-				PortDock* cur_port = get_dock(game, s->get_position());
-				if (cur_port) {          // Ship is at a port
-					if (cur_port == p) {  // Same port
-						route_length = 0;
-					} else {  // Different port
-						Path precalculated_path;
-						if (get_path(*cur_port, *p, precalculated_path)) {
-							route_length = precalculated_path.get_nsteps();
-						}
-					}
-				}
-			}
-
-			// Get distance for ships available but not at a port (should not happen frequently)
-			if (route_length == kRouteNotCalculated) {
-				route_length = s->calculate_sea_route(game, *p);
-			}
-			if (fallback) {
-				if (!penalize_route(game, *p, *s, &route_length)) {
-					continue;
-				}
-			}
-
-			if (route_length < shortest_dist) {
-				shortest_dist = route_length;
-				closest_ship = s;
-			}
-		}
-
-		if (waiting && closest_ship) {
-			--waiting_ports;
-			closest_ship->push_destination(game, *p);
-			closest_ship->send_signal(game, "wakeup");
-		}
-	}
-
-	if (waiting_ports > 0) {
-		molog("... there are %u ports requesting ship(s) we cannot satisfy yet\n", waiting_ports);
-		schedule_act(game, kFleetInterval);  // retry next time
-		act_pending_ = true;
-	}
-
-	// Deal with edge-case of losing destination before reaching it
-	for (Ship* s : ships_) {
-		if (s->get_current_destination(game)) {
-			continue;  // The ship has a destination
-		}
-		if (s->get_ship_state() != Ship::ShipStates::kTransport) {
-			continue;  // Ship is not available, e.g. in expedition
-		}
-		if (s->items_.empty()) {
-			continue;  // No pending wares/workers
-		}
-
-		// Send ship to the closest port
-		PortDock* closest_port = nullptr;
-		uint32_t shortest_dist = kRouteNotCalculated;
-
-		for (PortDock* p : ports_) {
-			uint32_t route_length = s->calculate_sea_route(game, *p);
-			if (route_length < shortest_dist) {
-				shortest_dist = route_length;
-				closest_port = p;
-			}
-		}
-
-		if (closest_port) {
-			s->push_destination(game, *closest_port);
-			s->send_signal(game, "wakeup");
-		}
-	}
-}
-
-/**
- * Tell the given ship where to go next. May push any number of destinations.
- */
-
-void ShipFleet::push_next_destinations(Game& game, Ship& ship, const PortDock& from_port) {
-	std::vector<std::pair<PortDock*, uint32_t>>
-	   destinations;  // Destinations and the number of items waiting to go there
-	uint32_t total_items = ship.get_nritems();  // All waiting and shipping items
-	uint32_t waiting_items =
-	   0;  // Items that have a destination which this ship is not currently planning to visit
-	// Count how many items are waiting to go to each portdock
-	for (auto& it : from_port.waiting_) {
-		if (PortDock* pd = it.destination_dock_.get(game)) {
-			++total_items;
-			if (ship.has_destination(game, *pd)) {
-				continue;
-			}
-			++waiting_items;
-			bool found = false;
-			for (auto& pair : destinations) {
-				if (pair.first == pd) {
-					++pair.second;
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
-				destinations.push_back(std::make_pair(pd, 1));
-			}
-		}
-	}
-	assert(waiting_items <= total_items);
-	if (waiting_items == 0) {
-		// Nothing to do
-		return;
-	}
-	total_items -= waiting_items;
-	// For each destination, decide whether to tell the ship to visit it
-	// or whether it would be better to wait for another ship
-	for (const auto& destpair : destinations) {
-		check_push_destination(game, ship, from_port, *destpair.first, destpair.second * total_items);
-	}
-}
-
-/*
- * Helper function for push_next_destinations():
- * Send the given ship to the given portdock (with the given penalty factor)
- * if the detour this would mean for the ship is not too long
- */
-void ShipFleet::check_push_destination(Game& game,
-                                       Ship& ship,
-                                       const PortDock& from_port,
-                                       PortDock& destination,
-                                       uint32_t penalty_factor) {
-	assert(!ship.has_destination(game, destination));
-	Path path;
-	get_path(from_port, destination, path);
-	const uint32_t direct_route = path.get_nsteps();
-	assert(direct_route);
-	uint32_t malus = 1;
-	uint32_t shortest_detour = std::numeric_limits<uint32_t>::max();
-	uint32_t best_index = std::numeric_limits<uint32_t>::max();
-	if (ship.destinations_.empty()) {
-		// Idle ships are preferred
-		best_index = 0;
-		malus = 0;
-		shortest_detour = 0;
-	} else {
-		const PortDock* iterator = &from_port;
-		uint32_t index = 0;
-		// This ship is going somewhere else, penalize it's priority for this order by
-		// the detour, the number of items it's shipping and the number of items waiting here
-		for (const auto& pair : ship.destinations_) {
-			const PortDock* pd = pair.first.get(game);
-			uint32_t detour = 0;
-
-			assert(iterator != pd);
-			get_path(*iterator, *pd, path);
-			const uint32_t base_length = path.get_nsteps();
-
-			assert(iterator != &destination);
-			get_path(*iterator, destination, path);
-			detour += path.get_nsteps();
-
-			assert(pd != &destination);
-			get_path(destination, *pd, path);
-			detour += path.get_nsteps();
-
-			detour -= std::min(detour, base_length);
-			if (detour < shortest_detour) {
-				shortest_detour = detour;
-				best_index = index;
-			}
-			malus += pair.second;
-			iterator = pd;
-			++index;
-		}
-	}
-	if (shortest_detour * malus * best_index <= direct_route * penalty_factor) {
-		// Send this ship if the penalty is not too high
-		ship.push_destination(game, destination);
 	}
 }
 
 void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
-	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
+	molog(egbase.get_gametime(), "%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(),
+	      ports_.size());
+	molog(egbase.get_gametime(), "Schedule:\n");
+	schedule_.log_general_info(egbase);
+	molog(egbase.get_gametime(), "\n");
 }
 
-constexpr uint8_t kCurrentPacketVersion = 4;
+// Changelog of version 4 → 5: Added ShippingSchedule
+constexpr uint8_t kCurrentPacketVersion = 5;
 
 ShipFleet::Loader::Loader() {
 }
@@ -971,6 +745,7 @@ void ShipFleet::Loader::load(FileRead& fr) {
 	}
 
 	fleet.act_pending_ = fr.unsigned_8();
+	fleet.schedule_.load(fr);
 }
 
 void ShipFleet::Loader::load_pointers() {
@@ -982,18 +757,22 @@ void ShipFleet::Loader::load_pointers() {
 	// changes to the pending state.
 	bool save_act_pending = fleet.act_pending_;
 
+	MapObjectLoader& map_object_loader = mol();
+
 	for (const uint32_t& temp_ship : ships_) {
-		fleet.ships_.push_back(&mol().get<Ship>(temp_ship));
+		fleet.ships_.push_back(&map_object_loader.get<Ship>(temp_ship));
 		fleet.ships_.back()->set_fleet(&fleet);
 	}
 	for (const uint32_t& temp_port : ports_) {
-		fleet.ports_.push_back(&mol().get<PortDock>(temp_port));
+		fleet.ports_.push_back(&map_object_loader.get<PortDock>(temp_port));
 		fleet.ports_.back()->set_fleet(&fleet);
 	}
 
 	fleet.portpaths_.resize((fleet.ports_.size() * (fleet.ports_.size() - 1)) / 2);
 
 	fleet.act_pending_ = save_act_pending;
+
+	fleet.schedule_.load_pointers(map_object_loader);
 }
 
 void ShipFleet::Loader::load_finish() {
@@ -1016,17 +795,18 @@ MapObject::Loader* ShipFleet::load(EditorGameBase& egbase, MapObjectLoader& mol,
 
 	try {
 		// The header has been peeled away by the caller
-		uint8_t const packet_version = fr.unsigned_8();
+		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber owner_number = fr.unsigned_8();
-			if (!owner_number || owner_number > egbase.map().get_nrplayers())
+			if (!owner_number || owner_number > egbase.map().get_nrplayers()) {
 				throw GameDataError("owner number is %u but there are only %u players", owner_number,
 				                    egbase.map().get_nrplayers());
+			}
 
 			Player* owner = egbase.get_player(owner_number);
-			if (!owner)
+			if (!owner) {
 				throw GameDataError("owning player %u does not exist", owner_number);
-
+			}
 			loader->init(egbase, mol, *(new ShipFleet(owner)));
 			loader->load(fr);
 		} else {
@@ -1057,6 +837,8 @@ void ShipFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 
 	fw.unsigned_8(act_pending_);
+
+	schedule_.save(egbase, mos, fw);
 }
 
 }  // namespace Widelands

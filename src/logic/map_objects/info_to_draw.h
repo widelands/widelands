@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@ enum InfoToDraw {
 	kCensus = 1,
 	kStatistics = 2,
 	kSoldierLevels = 4,
+	kShowBuildings = 8,
 };
 
 inline InfoToDraw operator|(InfoToDraw a, InfoToDraw b) {

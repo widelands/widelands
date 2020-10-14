@@ -56,9 +56,9 @@ hq:set_soldiers({0,0,0,0}, 45)
 -- ============
 -- Build roads
 -- ============
-connected_road(plr, sf.brn.immovable, "r,r|br,r|r,r")
-connected_road(plr, sf.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
-connected_road(plr, map:get_field(13,14).immovable, "r,br|br,r")
+connected_road("normal", plr, sf.brn.immovable, "r,r|br,r|r,r")
+connected_road("normal", plr, sf.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
+connected_road("normal", plr, map:get_field(13,14).immovable, "r,br|br,r")
 
 -- Place some initial buildings
 prefilled_buildings(plr,

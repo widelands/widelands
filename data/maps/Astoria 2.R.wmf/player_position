@@ -1,0 +1,9 @@
+# Automatically created by Widelands r24475[3abcee7@HEAD] (Release)
+
+[global]
+packet_version="2"
+player_1="40 64"
+player_2="16 13"
+player_3="216 14"
+player_4="144 194"
+player_5="66 162"

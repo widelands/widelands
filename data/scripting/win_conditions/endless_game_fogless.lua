@@ -5,7 +5,7 @@
 include "scripting/coroutine.lua" -- for sleep
 include "scripting/win_conditions/win_condition_functions.lua"
 
-set_textdomain("win_conditions")
+push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
 
@@ -15,7 +15,7 @@ local wc_name = "Endless Game (no fog)"
 local wc_descname = _("Endless Game (no fog)")
 local wc_desc = _ "This is an endless game without rules. Fog of war is disabled."
 local wc_version = 1
-return {
+local r = {
    name = wc_name,
    description = wc_desc,
    peaceful_mode_allowed = true,
@@ -39,6 +39,7 @@ return {
       for idx, plr in ipairs(game.players) do
          plr:reveal_fields(fields)
       end
+      fields = nil
 
       -- Iterate all players, if one is defeated, remove him
       -- from the list, send him a defeated message and give him full vision
@@ -49,3 +50,5 @@ return {
 
    end
 }
+pop_textdomain()
+return r

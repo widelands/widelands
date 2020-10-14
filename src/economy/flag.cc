@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2019 by the Widelands Development Team
+ * Copyright (C) 2004-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,10 @@
 
 #include "economy/flag.h"
 
+#include <algorithm>
+#include <iterator>
+
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -30,7 +34,6 @@
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -56,9 +59,7 @@ Flag::Flag()
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i) {
-		roads_[i] = nullptr;
-	}
+	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 }
 
 /**
@@ -67,21 +68,21 @@ Flag::Flag()
  */
 Flag::~Flag() {
 	if (ware_filled_) {
-		log("Flag: ouch! wares left\n");
+		log_warn("Flag: ouch! wares left\n");
 	}
 	delete[] wares_;
 
 	if (building_) {
-		log("Flag: ouch! building left\n");
+		log_warn("Flag: ouch! building left\n");
 	}
 
 	if (flag_jobs_.size()) {
-		log("Flag: ouch! flagjobs left\n");
+		log_warn("Flag: ouch! flagjobs left\n");
 	}
 
-	for (int32_t i = 0; i < 6; ++i) {
-		if (roads_[i]) {
-			log("Flag: ouch! road left\n");
+	for (const RoadBase* const road : roads_) {
+		if (road) {
+			log_warn("Flag: ouch! road left\n");
 		}
 	}
 }
@@ -91,16 +92,16 @@ void Flag::load_finish(EditorGameBase& egbase) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
 		if (state == nullptr) {
-			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
-			    "does not have a waitforcapacity task! Removing from queue.\n",
-			    worker.serial(), serial());
+			log_warn("worker %u is in the capacity wait queue of flag %u but "
+			         "does not have a waitforcapacity task! Removing from queue.\n",
+			         worker.serial(), serial());
 			return true;
 		}
 		if (state->objvar1 != this) {
-			log("WARNING: worker %u is in the capacity wait queue of flag %u but "
-			    "its waitforcapacity task is for map object %u! Removing from "
-			    "queue.\n",
-			    worker.serial(), serial(), state->objvar1.serial());
+			log_warn("worker %u is in the capacity wait queue of flag %u but "
+			         "its waitforcapacity task is for map object %u! Removing from "
+			         "queue.\n",
+			         worker.serial(), serial(), state->objvar1.serial());  // NOLINT
 			return true;
 		}
 		return false;
@@ -125,9 +126,7 @@ Flag::Flag(EditorGameBase& egbase,
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i) {
-		roads_[i] = nullptr;
-	}
+	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 
 	set_owner(owning_player);
 
@@ -209,9 +208,9 @@ void Flag::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 
-	for (int8_t i = 0; i < 6; ++i) {
-		if (roads_[i]) {
-			roads_[i]->set_economy(e, type);
+	for (RoadBase* const road : roads_) {
+		if (road) {
+			road->set_economy(e, type);
 		}
 	}
 }
@@ -283,8 +282,7 @@ BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
  * \return neighbouring flags.
  */
 void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
-	for (int8_t i = 0; i < 6; ++i) {
-		RoadBase* const road = roads_[i];
+	for (RoadBase* const road : roads_) {
 		if (!road) {
 			continue;
 		}
@@ -312,7 +310,7 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 	}
 
 	if (building_ && building_->descr().get_isport()) {
-		Warehouse* wh = static_cast<Warehouse*>(building_);
+		Warehouse* wh = dynamic_cast<Warehouse*>(building_);
 		if (PortDock* pd = wh->get_portdock()) {
 			pd->add_neighbours(neighbours);
 		}
@@ -323,8 +321,8 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
  * \return the road that leads to the given flag.
  */
 RoadBase* Flag::get_roadbase(Flag& flag) {
-	for (int8_t i = 0; i < 6; ++i) {
-		if (RoadBase* const road = roads_[i]) {
+	for (RoadBase* const road : roads_) {
+		if (road) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
 			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
 				return road;
@@ -334,7 +332,7 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 	return nullptr;
 }
 Road* Flag::get_road(Flag& flag) {
-	for (int8_t i = 1; i <= 6; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		if (Road* const road = get_road(i)) {
 			if (&road->get_flag(RoadBase::FlagStart) == &flag ||
 			    &road->get_flag(RoadBase::FlagEnd) == &flag) {
@@ -361,7 +359,8 @@ Waterway* Flag::get_waterway(uint8_t const dir) const {
 /// \return the number of RoadBases connected to the flag
 uint8_t Flag::nr_of_roadbases() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -372,7 +371,8 @@ uint8_t Flag::nr_of_roadbases() const {
 /// \return the number of roads connected to the flag.
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_roadbase(road_id) != nullptr) {
 			++counter;
 		}
@@ -383,7 +383,8 @@ uint8_t Flag::nr_of_roads() const {
 /// \return the number of waterways connected to the flag.
 uint8_t Flag::nr_of_waterways() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (get_waterway(road_id) != nullptr) {
 			++counter;
 		}
@@ -396,13 +397,15 @@ bool Flag::is_dead_end() const {
 		return false;
 	}
 	Flag const* first_other_flag = nullptr;
-	for (uint8_t road_id = 6; road_id; --road_id) {
+	for (uint8_t road_id = WalkingDir::LAST_DIRECTION; road_id >= WalkingDir::FIRST_DIRECTION;
+	     --road_id) {
 		if (RoadBase* const road = get_roadbase(road_id)) {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
 			if (first_other_flag) {
-				if (&other != first_other_flag)
+				if (&other != first_other_flag) {
 					return false;
+				}
 			} else {
 				first_other_flag = &other;
 			}
@@ -434,8 +437,9 @@ void Flag::wait_for_capacity(Game&, Worker& bob) {
 void Flag::skip_wait_for_capacity(Game&, Worker& w) {
 	CapacityWaitQueue::iterator const it =
 	   std::find(capacity_wait_.begin(), capacity_wait_.end(), &w);
-	if (it != capacity_wait_.end())
+	if (it != capacity_wait_.end()) {
 		capacity_wait_.erase(it);
+	}
 }
 
 void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
@@ -631,7 +635,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 
 	// Calculate the sum of the involved wallets' adjusted value
 	int32_t sum = 0;
-	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
 		if (road && road != promoted_road) {
 			sum += kRoadMaxWallet + road->wallet() * road->wallet();
@@ -639,7 +643,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 	}
 
 	// Distribute propagation coins in a smart way
-	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+	for (int8_t i = WalkingDir::FIRST_DIRECTION; i <= WalkingDir::LAST_DIRECTION; ++i) {
 		Road* const road = get_road(i);
 		if (road && !road->is_busy()) {
 			road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) *
@@ -718,79 +722,80 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 
 	// Find the PendingWare entry
 	for (; i < ware_filled_; ++i) {
+		// Find pending ware
 		if (wares_[i].ware != &ware) {
 			continue;
 		}
 
+		// Found; handle it
 		pi = &wares_[i];
-		break;
-	}
 
-	assert(pi);
-
-	// Deal with the non-moving case quickly
-	if (!nextstep) {
-		pi->nextstep = nullptr;
-		pi->pending = true;
-		return;
-	}
-
-	// Find out whether we need to do anything
-	if (pi->nextstep == nextstep && pi->nextstep != always_call_for_flag_) {
-		return;  // no update needed
-	}
-
-	pi->nextstep = nextstep;
-	pi->pending = false;
-
-	// Deal with the building case
-	if (nextstep == get_building()) {
-		molog("Flag::call_carrier(%u): Tell building to fetch this ware\n", ware.serial());
-
-		if (!get_building()->fetch_from_flag(game)) {
-			pi->ware->cancel_moving();
-			pi->ware->update(game);
-		}
-
-		return;
-	}
-
-	// Deal with the normal (flag) case
-	const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
-
-	for (int32_t dir = 1; dir <= 6; ++dir) {
-		RoadBase* const road = get_roadbase(dir);
-		Flag* other;
-		RoadBase::FlagId flagid;
-
-		if (!road) {
-			continue;
-		}
-
-		if (&road->get_flag(RoadBase::FlagStart) == this) {
-			flagid = RoadBase::FlagStart;
-			other = &road->get_flag(RoadBase::FlagEnd);
-		} else {
-			flagid = RoadBase::FlagEnd;
-			other = &road->get_flag(RoadBase::FlagStart);
-		}
-
-		if (other != &nextflag) {
-			continue;
-		}
-
-		// Yes, this is the road we want; inform it
-		if (road->notify_ware(game, flagid)) {
+		// Deal with the non-moving case quickly
+		if (!nextstep) {
+			pi->nextstep = nullptr;
+			pi->pending = true;
 			return;
 		}
 
-		// If the road doesn't react to the ware immediately, we try other roads:
-		// They might lead to the same flag!
-	}
+		// Find out whether we need to do anything
+		if (pi->nextstep == nextstep && pi->nextstep != always_call_for_flag_) {
+			return;  // no update needed
+		}
 
-	// Nothing found, just let it be picked up by somebody
-	pi->pending = true;
-	return;
+		pi->nextstep = nextstep;
+		pi->pending = false;
+
+		// Deal with the building case
+		if (nextstep == get_building()) {
+			molog(game.get_gametime(), "Flag::call_carrier(%u): Tell building to fetch this ware\n",
+			      ware.serial());
+
+			if (!get_building()->fetch_from_flag(game)) {
+				pi->ware->cancel_moving();
+				pi->ware->update(game);
+			}
+
+			return;
+		}
+
+		// Deal with the normal (flag) case
+		const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
+
+		for (int32_t dir = WalkingDir::FIRST_DIRECTION; dir <= WalkingDir::LAST_DIRECTION; ++dir) {
+			RoadBase* const road = get_roadbase(dir);
+			Flag* other;
+			RoadBase::FlagId flagid;
+
+			if (!road) {
+				continue;
+			}
+
+			if (&road->get_flag(RoadBase::FlagStart) == this) {
+				flagid = RoadBase::FlagStart;
+				other = &road->get_flag(RoadBase::FlagEnd);
+			} else {
+				flagid = RoadBase::FlagEnd;
+				other = &road->get_flag(RoadBase::FlagStart);
+			}
+
+			if (other != &nextflag) {
+				continue;
+			}
+
+			// Yes, this is the road we want; inform it
+			if (road->notify_ware(game, flagid)) {
+				return;
+			}
+
+			// If the road doesn't react to the ware immediately, we try other roads:
+			// They might lead to the same flag!
+		}
+
+		// Nothing found, just let it be picked up by somebody
+		pi->pending = true;
+		return;
+	}
+	NEVER_HERE();
 }
 
 /**
@@ -843,7 +848,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		assert(!building_);
 	}
 
-	for (int8_t i = 0; i < 6; ++i) {
+	for (uint8_t i = 0; i < (sizeof(roads_) / sizeof(roads_[0])); ++i) {
 		if (roads_[i]) {
 			roads_[i]->remove(egbase);  //  immediate death
 			assert(!roads_[i]);
@@ -942,24 +947,24 @@ void Flag::flag_job_request_callback(
 		}
 	}
 
-	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
+	flag.molog(game.get_gametime(), "BUG: flag_job_request_callback: worker not found in list\n");
 }
 
 void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
-	molog("Flag at %i,%i\n", position_.x, position_.y);
+	molog(egbase.get_gametime(), "Flag at %i,%i\n", position_.x, position_.y);
 
 	Widelands::PlayerImmovable::log_general_info(egbase);
 
 	if (ware_filled_) {
-		molog("Wares at flag:\n");
+		molog(egbase.get_gametime(), "Wares at flag:\n");
 		for (int i = 0; i < ware_filled_; ++i) {
 			PendingWare& pi = wares_[i];
-			molog(" %i/%i: %s(%i), nextstep %i, %s\n", i + 1, ware_capacity_,
+			molog(egbase.get_gametime(), " %i/%i: %s(%i), nextstep %i, %s\n", i + 1, ware_capacity_,
 			      pi.ware->descr().name().c_str(), pi.ware->serial(), pi.nextstep.serial(),
 			      pi.pending ? "pending" : "acked by carrier");
 		}
 	} else {
-		molog("No wares at flag.\n");
+		molog(egbase.get_gametime(), "No wares at flag.\n");
 	}
 }
 }  // namespace Widelands

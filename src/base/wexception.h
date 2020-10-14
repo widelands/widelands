@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,6 +53,8 @@ protected:
 	}
 	std::string what_;
 };
+
+extern bool g_fail_on_lua_error;
 
 #define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)
 

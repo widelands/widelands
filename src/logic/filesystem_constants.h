@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <string>
 
 /// Stop writing screenshots or syncstreams if we have less disk space left than this
-constexpr unsigned long long kMinimumDiskSpace = 256 * 1024 * 1024;
+constexpr unsigned long long kMinimumDiskSpace = 256 * 1024 * 1024;  // NOLINT
 
 /// Filesystem names and timeouts for ai
 const std::string kAiDir = "ai";

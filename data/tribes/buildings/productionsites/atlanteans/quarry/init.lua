@@ -1,11 +1,11 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
    name = "atlanteans_quarry",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Quarry"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -32,33 +32,13 @@ tribes:new_productionsite_type {
       atlanteans_stonecutter = 1
    },
 
-   outputs = {
-      "granite"
-   },
-
-   indicate_workarea_overlaps = {
-      atlanteans_quarry = false,
-   },
-
    programs = {
-      work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
-         actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
-            "call=mine_stone",
-            "return=no_stats"
-         },
-      },
-      mine_stone = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _"quarrying granite",
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
             "callworker=cut_granite",
-            "sleep=18500"
+            "sleep=duration:18s500ms"
          }
       },
    },
@@ -67,5 +47,8 @@ tribes:new_productionsite_type {
       title = _"No Rocks",
       heading = _"Out of Rocks",
       message = pgettext("atlanteans_building", "The stonecutter working at this quarry can’t find any rocks in his work area."),
+      productivity_threshold = 75
    },
 }
+
+pop_textdomain()

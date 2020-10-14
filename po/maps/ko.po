@@ -5,13 +5,14 @@
 # ks k, 2017
 # ks k, 2017-2018,2020
 # TaeMin An, 2017
+# TaeMin An, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-02-26 18:51+0000\n"
-"PO-Revision-Date: 2020-03-01 12:23+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"PO-Revision-Date: 2020-09-11 11:59+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,6 +50,135 @@ msgid ""
 "and will introduce fighting."
 msgstr "이 자습서는 군사 건물과 훈련 건물을 다루는 법을 설명하고 전투를 소개할 것입니다."
 
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:14
+msgid "Easy."
+msgstr "쉬움."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:20
+msgid "Medium."
+msgstr "가운데."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:25
+msgid "Hard."
+msgstr "어려움."
+
+#. TRANSLATORS: The difficulty level of a campaign
+#: ../../data/campaigns/campaigns.lua:30
+msgid "Challenging."
+msgstr "도전적임."
+
+#. TRANSLATORS: The name of a Barbarian campaign
+#: ../../data/campaigns/campaigns.lua:43
+msgid "The Second Empire"
+msgstr "두번째 제국"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:49
+msgid "Introduces the Barbarians."
+msgstr "야만인들을 소개합니다."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:52
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to"
+" rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord"
+" knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr "찻'카루스가 죽었을 때, 그는 노인이었고, 강하고 야심찬 세 아들들의 아버지 였고, 고대의 숲에 대해 기꺼이 저항을 다짐한 어떤 적들과도 겨룰 수 있는 군대의 사령관이였습니다. 비록 그의 영광스러운 치세의 끝에, 찻'카루스는 그의 맏아들인, 쓰론을, 부족의 사령관을 이어받는 자리에 선택했습니다만 – 그의 두 동생들에게는 만족스럽지 못한 결정이었습니다. 늙은 사령관은 알고 있었습니다. 그의 아버지가 쓰론을 임명했을 때, 그는 나무들 사이의 왕좌의 고향으로 알려진, 알'툰란의 수도에 있었고, 그의 군대를 아버지의 시신을 묻었던 높은 언덕으로 물렸습니다. 거기서 그는 신들과 그의 아버지의 영혼에 대고 그가 질서를 재정립하기 위해 돌아올 것을 맹세했습니다. 그의 동생들이 쓰론과 그가 알'툰란의 경계를 지키기 위해 남긴 소수의 군대들에 대항하는 맹목적인 전쟁에 정신을 쏟을 동안, 젊은 사령관은 야망이 넘치는 동생들을 다시 결속하고 통일된 깃발 아래서 부족이 다시 한번 진군할 수 있게 하는 방법을 찾고 있습니다."
+
+#. TRANSLATORS: The name of an Empire campaign
+#: ../../data/campaigns/campaigns.lua:70
+msgid "The Months of Exile"
+msgstr "망명의 나날들"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:73
+msgid "Introduces the Empire."
+msgstr "제국 소개을 소개하십시오."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:75
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"Barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 Barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr "6개월 전에,  – 제국의 젊은 장군인 – 루티우스는 제국이 지배하는 땅으로 야만인 부족들이 가로질러 오고 있는 북부의 숲 지대 너머 국경으로 150명의 군대와 함께 파견되었습니다. 그의 임무는 제국의 땅을 방어하는 것이었습니다. 처음에는, 모든 것이 평화로웠습니다. 그는 심지어 몇몇 야만인 아이들과 이야기를 나누고 평화로운 삶을 생각했습니다 – 이 고풍스러운 사람들과 나란히말입니다. 그는 더욱 안전해질 거라 믿었고 그의 군대는 잠재적인 적에 대한 관심을 끄기 시작했습니다. 그것이 그들의 실패였습니다. 3월의 어느 밤 그의 준비되지 않은 군대는 100명의 야만인 보병들에게 공격받았고 완전히 전멸했습니다. 간신히 몸만 빠져나와서 그와 소수의 군인들만이 살아남았습니다."
+
+#. TRANSLATORS: The name of an Atlantean campaign
+#: ../../data/campaigns/campaigns.lua:93
+msgid "The Run for the Fire"
+msgstr "화염을 위한 질주"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:96
+msgid "Introduces the Atlanteans."
+msgstr "아틀란티스를 소개하십시오."
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:98
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become"
+" the stuff of legends. Leading the remaining Atlanteans into a new future in"
+" a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr "그들의 신이 아틀란티스인들에 대한 믿음을 버리고 섬을 가라앉혔을 때, 한 여자의 정의와 그녀의 사람들을 위한 두번째 기회에 대한 몸부림은 전설의 일부가 될 것입니다. 살아남은 아틀란티스인들을 새로운 세계의 일부에 있는 새로운 미래로 이끌면서, 준들리나는 그녀 시대의 가장 강력한 인간이 되었습니다만, 비싼 대가를 치뤘습니다: 그녀의 인간성과 영혼을."
+
+#. TRANSLATORS: The name of a Frisian campaign
+#: ../../data/campaigns/campaigns.lua:107
+msgid "From Water to Ice"
+msgstr "물에서 얼음으로"
+
+#. TRANSLATORS: A short description of a campaign
+#: ../../data/campaigns/campaigns.lua:110
+msgid "Introduces the Frisians."
+msgstr "프리지아인들을 소개합니다."
+
+#. TRANSLATORS: A campaign difficulty (easiest of three options)
+#: ../../data/campaigns/campaigns.lua:115
+msgid "Sailor (Tricky)"
+msgstr "선원 (다루기 힘듬)"
+
+#. TRANSLATORS: A campaign difficulty (medium of three options)
+#: ../../data/campaigns/campaigns.lua:117
+msgid "Steersman (Very Hard)"
+msgstr "선원 (매우 어려움)"
+
+#. TRANSLATORS: A campaign difficulty (hardest of three options)
+#: ../../data/campaigns/campaigns.lua:119
+msgid "Captain (Unreasonable)"
+msgstr "선장 (지나침)"
+
+#. TRANSLATORS: A long description of a campaign
+#: ../../data/campaigns/campaigns.lua:124
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "바다를 떠나 사는것은 끊임없는 고통입니다. 심지어 프리스티아 북쪽 해안 주민들에게는 더욱 그렇습니다. 사람들의 기억에서 가장 파괴적인 마지막으로 몰아친 매우 세차게 부는 비바람으로 인한 홍수가 그들이 직면해야 하는 어려움에 대한 잇다르는 본보기에 불과했던 걸까요? – 아니면 이제 막 이곳에 정착했던 부족이 완전히 새로운 고향을 찾으라는 신의 뜻이 일까요?"
+
 #: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "아직 구현되지 않았음"
@@ -84,7 +214,11 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr "마침내 배가 수리됐고, 루티우스와 그의 사람들은 새로운 시작을 위한 좋은 장소를 찾는 여정으로 돌아갔습니다. 며칠 뒤에, 그들은 낙원처럼 보이는, 푸른, 지중해성 기후의 섬에 상륙했습니다. 환희에 차서, 그들은 이 새로운 삶의 공간을 탐사하기 시작합니다."
+msgstr "마침내 배가 수리됐고, 루티우스와 그의 사람들은 새로운 시작을 위한 좋은 장소를 찾는 여정으로 돌아갔습니다. 불과 며칠 뒤, 그들은 낙원처럼 보이는 갈맷빛 지중해 섬에 착륙합니다. 환희에 차서, 그들은 이 새로운 삶의 공간을 탐사하기 시작합니다."
+
+#: ../../data/campaigns/emp03.wmf/elemental:8
+msgid "Neptune’s Revenge"
+msgstr "바다용왕의 앙값음"
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -140,7 +274,7 @@ msgstr "기본 조작"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr "이번 자습서에서, 당신은 어떻게 와이드랜드를 탐사하고 건물과 도로를 건설하는지 배울 것입니다."
+msgstr "이번 자습서에서, 당신은 어떻게 와이드랜드를 탐사하고 건물과 땅길을 건설하는지 배울 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"
@@ -149,8 +283,9 @@ msgstr "전투"
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:10
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
-"soldiers, how to train them and how to lead them in battle."
-msgstr "이번 자습서에서는 전투의 비밀에 대해 배울 것입니다: 어떻게 군인을 만들고, 훈련하고, 전투로 이끌지에 대해서."
+"soldiers, how to train them and how to lead them in battle. Scouting will be"
+" also covered."
+msgstr "이번 자습서에서는 당신은 전쟁의 비법에 대해 배울 것입니다: 어떻게 군인을 만들고, 어떻게 그들을 훈련시키고, 어떻게 그들을 전투로 이끌지에 대해서말입니다. 물론 정찰대도 포함됩니다."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
@@ -192,7 +327,19 @@ msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "이 작은 섬들에는 큰 건설 터가 부족합니다. 큰 건물을 먼저 지으십시오. 때때로 다른 섬으로 향하는 길을 확장할 대형 군사 건물들이 필요할 것입니다. AI는 거지같이 활약합니다."
+msgstr "이 작은 섬들에는 큰 건물 터가 부족합니다. 큰 건물을 먼저 지으십시오. 때때로 다른 섬으로 향하는 길을 확장할 대형 군사 건물들이 필요할 것입니다. AI는 거지같이 활약합니다."
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+msgid "Astoria 2.R"
+msgstr "아스토리아 2.R"
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "아름다운 땅에서 오랫동안 경제 놀이를 했습니다. 모든 선수를 시도해보십시오!"
+
+#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+msgid "pbuczny@gmail.com – edited by Nordfriese"
+msgstr "pbuczny@gmail.com – Nordfriese 에 의해 편집됨"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -264,9 +411,17 @@ msgstr "유성우가 한 쌍의 산맥에 떨어지고 오랜 후에, 삶이 분
 msgid "Crossing the Horizon"
 msgstr "지평선을 가로질러"
 
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+msgid "Kristin – edited by 3plus4i"
+msgstr "크리스틴 – 3plus4i 에의해 편집됨"
+
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "선박에 사람들을 태우고 지평선으로 항해하십시오."
+
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+msgid "This map is not winnable with the ‘Autocrat’ win condition."
+msgstr "이 지도는 ‘전제 군주’ 승리 조건으로는 이길 수 없습니다."
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
@@ -279,26 +434,27 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "4곳의 부족이 가장 가까운 이웃과 믿음을 초월한 재물을 약속할 금광산에 먼저 도착하기위해 고심합니다. 하지만 남은 두곳이 자원을 현명하게 공유 할 수 있겠습니까?"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:8
-msgid "Dolomites"
-msgstr "돌로미티(백운암)"
+#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+msgid "Dolomites 3.0"
+msgstr "돌로미티 3.0"
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:10
+#: ../../data/maps/Dolomites_v3.wmf/elemental:10
 msgid ""
-"The jewel of the Alps, the Dolomites mountain range has been declared a "
-"World Heritage Site for its pristine beauty. This map is an as-faithful-as-"
-"reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
+"The jewel of the alps, the dolomites mountain range has been declared a "
+"world heritage site for its pristine beauty. This map is an as-faithful-as-"
+"reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
-" to the death against your enemies, it may as well be in a beautiful place."
-msgstr "알프스의 보석인 돌로미티 산맥은 그 원래의 아름다움을 위해 2009년 유네스코 세계 유산으로 지정되었습니다. 이 지도는 북동쪽의 코르티나 담페초(Cortina d'Ampezzo)와 남서쪽의 카나제이(Canazei)로 구분된 지역을 충실하게 재현한 것입니다. 원수에 대한 죽음의 결투를 해야한다면, 그곳은 아름다운 장소에 있을 수도 있습니다."
+" to the death with your enemies, it may as well be in a beautiful place."
+msgstr "알프스의 보석인 돌로미티 산맥은 그 원래의 아름다움을 위해 2009년 유네스코 세계 유산으로 지정되었습니다. 이 지도는 북동쪽의 코르티나 담페초(Cortina d'Ampezzo)와 남서쪽의 카나제이(Canazei)로 구분된 지역을 충실하게 재현한 것입니다. 적들과의 죽음의 결투를 해야한다면, 아름다운 곳일 수도 있습니다."
 
-#: ../../data/maps/Dolomites_v2.wmf/elemental:11
+#: ../../data/maps/Dolomites_v3.wmf/elemental:11
 msgid ""
-"There is lot of flat ground on the mountains. Unfortunately, most of it is "
-"vertical. Use the little building space that you have wisely. A fortress at "
-"the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
-" army. Use the terrain to your advantage."
-msgstr "산에는 평지가 많이 있습니다. 불행히도 대부분은 수직벽입니다. 현명하게 가지고 있는 작은 건물 공간을 사용하십시오. 좁은 산길의 입구에있는 요새는 적군에게 막대한 장애물이 될 수 있습니다. 당신 진형의 지형에대한 잇점을 잘 활용하십시오."
+"The mountains have an abundance of flat ground. Unfortunately, most of it is"
+" vertical – use the little building space you have wisely. A fortress at the"
+" mouth of a narrow mountain pass can be a formidable obstacle to an enemy "
+"army – use the terrain to your advantage. Chop all trees and expand wherever"
+" you can – it's the only way to find all the precious farm spaces."
+msgstr ""
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
@@ -309,6 +465,28 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
 msgstr "숨 막힐듯 아름다운 이 에메랄드 땅은 여러 부족들이 그땅을 차지하기 위한 시도로 이끌고 있습니다."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:8
+msgid "Escher_Goose_Fish"
+msgstr "미끼_거위_물고기"
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:10
+msgid "Equal starting conditions for three players."
+msgstr "3 명의 선수가 출발 조건이 같습니다."
+
+#: ../../data/maps/Escher_Goose_Fish.wmf/elemental:11
+msgid "v0.2"
+msgstr "v0.2"
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:10
+msgid ""
+"A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
+"Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
+msgstr "거대한 유럽지도입니다. 파란색 = 스웨덴, 빨간색 = 이탈리아, 노란색 = 스페인, 녹색 = 터키, 검정색 = 러시아, 주황색 = 영국, 보라색 = 프랑스, 흰색 = 폴란드 입니다"
+
+#: ../../data/maps/Europa 1.1.wmf/elemental:8
+msgid "Europa 1.1"
+msgstr "유로파 1.1"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -425,17 +603,6 @@ msgstr "가을은 곳 겨울이 되었습니다. 어떤 것들은 꽁꽁 얼어 
 msgid "Start positions are clockwise"
 msgstr "시작 위치는 시계 방향입니다"
 
-#: ../../data/maps/Impact.wmf/elemental:8
-msgid "Impact"
-msgstr "충돌"
-
-#: ../../data/maps/Impact.wmf/elemental:10
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr "소행성 충돌과 혹독한 겨울 후 지나면 세 개의 섬이 얼음과 돌로 연결되어 세 종족이 평화롭게 공존하게됩니다."
-
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
 msgstr "섬들의 전쟁"
@@ -475,7 +642,7 @@ msgstr "최후의 요새"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr "또다른 야만족 - king_of_nowhere 가 편집 함"
+msgstr "또다른 야만인 - king_of_nowhere 가 편집 함"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -503,6 +670,16 @@ msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
 msgstr "삭막한 지역에서 지배를 위해 싸우고 있는 4개의 부족. 자원은 지도 전체에 흩어져 있습니다."
+
+#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+msgid ""
+">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
+"long, long way to conquere all the islands. Good luck!"
+msgstr ">어디 dat입니까? 여기서 천 마일 떨어진 곳이에요.< [포지와 베스] 당신은 모든 섬을 정복하려면 멀고 먼 길을 가야 합니다. 행운을 빕니다!"
+
+#: ../../data/maps/Long, long v2.wmf/elemental:8 way
+msgid "Long, long way v2"
+msgstr "멀고 먼 길 v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -536,6 +713,19 @@ msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
 msgstr "떠도는 소문에 두 가지 큰 의문이 있습니다: 도대체 누가 이 믿을 수 없을 만큼 큰 미로를 만들었던가? 그리고 그 안에는 무엇이 있는것인가?"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+msgid "No metal challenge v2"
+msgstr "금속 도전 없음 v2"
+
+#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+msgid ""
+"This map is intended as a solo challenge for those very skilled players that"
+" find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
+" of iron to kickstart your economy), so you have to rely on the 5% "
+"production of an empty mine. And you're still 1 vs 6 (though of course you "
+"can remove some AI players to make it a bit easier). Good luck!"
+msgstr "이 지도는 인공지능과의 1 대 6이 너무 쉽다고 생각하는 매우 숙련된 선수들을 위한 혼자 도전용으로 만들어졌습니다. 파랑색 선수는 금속이 없으므로 (경제를 시작하기 위해 약간의 철분 제외하고는) 당신은 빈 광산의 5% 생산량에 의존해야합니다. 그리고 여전히 1 대 6입니다 (물론 인공지능 선수를 제거하여 조금 더 쉽게 만들 수는 있지만). 행운을 빕니다!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
@@ -641,7 +831,7 @@ msgid ""
 "constructors. Nobody knows why they (have) disappeared. Nobody knows why. "
 "People say that now nothing is blocking the road to wealth. But many will "
 "die pulled apart by wolves, engulfed by swamp… encircled by hostile tribes."
-msgstr "어떤이들은 눈앞이 안 보일 정도의 먼 북쪽 땅은 가장 용감한 정착민들과 용사중의 용사들 조차도 쫓아버렸다고 말합니다. 습지와 언덕을 가로 지르는 크고 약탈적인 놀이로 가득 찬 크고 오래된 숲은 수수께끼에 싸여있었습니다. 가까스로 돌아올 수 있었던 사람들은 황무지의 어딘가에 있는 웅장한 산맥에서 나온 조각과 금으로 장식된 엄청난 건물을 언급했습니다. \n일부 부서지기 쉬운 폐허만이 이런 좋은 시절의 잔재를 남겨둔 수십년 후, 이곳은 이끼와 나무로 뒤덮였습니다. 그것들의 모양은 고대 건축가의 장인 정신에 대한 생각만을 줍니다.. \n그들이 왜 사라졌는지는 아무도 모른다. 아무도... 사람들은 이제 부자로 가는 길을 가로 막고 있는것은 아무것도 없다고 말합니다. 하지만 많은 사람들이 늪으로 둘러쌓인… 늑대에 의해 갈갈히 찣겨져 죽을것입니다. 적대적인 부족들에게 둘러 쌓인체. (번역확인??)"
+msgstr "어떤이들은 눈앞이 안 보일 정도의 먼 북쪽 땅은 가장 용감한 정착민들과 용사중의 용사들 조차도 쫓아버렸다고 말합니다. 습지와 언덕을 가로 지르는 크고 약탈적인 놀이로 가득 찬 크고 오래된 숲은 수수께끼에 싸여있었습니다. 가까스로 돌아올 수 있었던 사람들은 황무지의 어딘가에 있는 웅장한 산맥에서 나온 조각과 금으로 장식된 엄청난 건물을 언급했습니다. 일부 부서지기 쉬운 폐허만이 이런 좋은 시절의 잔재를 남겨둔 수십년 후, 이곳은 이끼와 나무로 뒤덮였습니다. 그것들의 모양은 고대 건축가의 장인 정신에 대한 생각만을 줍니다. 그들이 왜 사라졌는지는 아무도 모른다. 아무도… 사람들은 이제 부자로 가는 길을 가로 막고 있는것은 아무것도 없다고 말합니다. 하지만 많은 사람들이 늪으로 둘러쌓인… 늑대에 의해 갈갈히 찣겨져 죽을것입니다. 적대적인 부족들에게 둘러 쌓인체. (번역확인??)"
 
 #: ../../data/maps/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
@@ -713,7 +903,7 @@ msgid ""
 "and went to war. The only survivor will sacrifice his enemies’ treasures on "
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
-msgstr "또 다른 해빙이 시작되었습니다.  세 부족이 웅장한 산들 사이에서 혹독한 겨울을 피했습니다.  그들은 혼신(번역확인??)의 순간에 신탁을 듣고 전쟁에 나갔습니다. 유일한 생존자는 그의 적들의 보물을 고대 제단에 바치고, 화려한 성을 세우고, 선의의 호의를 얻고 신들에 대한 존경을 받을 것입니다."
+msgstr "또 다른 해빙이 시작되었습니다. 3 부족이 웅장한 산들 사이에서 혹독한 겨울을 피했습니다. 그들은 혼신(번역확인??)의 순간에 신탁을 듣고 전쟁에 나갔습니다. 유일한 생존자는 그의 적들의 보물을 고대 제단에 바치고, 화려한 성을 세우고, 선의의 호의를 얻고 신들에 대한 존경을 받을 것입니다."
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
@@ -787,6 +977,12 @@ msgid ""
 "thousand waves, twinkling in the sun."
 msgstr "많은 아름답고 초록의 섬은 햇빛에 반짝이며 수천개의 파도를 넘어 갈 만큼 충분히 용감한 자들을 기다리고 있습니다."
 
+#: ../../data/maps/Twinkling_Waves.wmf/elemental:11
+msgid ""
+"Take care not to build your ships in the lagoons. They cannot pass through "
+"the reefs to the main ocean, where your ports are located."
+msgstr ""
+
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
 msgstr "두 국경"
@@ -795,21 +991,9 @@ msgstr "두 국경"
 msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr "작은 원 모양의 섬에 있는 함께 놀기 전투 지도입니다."
 
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:8
-msgid "Volcanic Winter"
-msgstr "화산의 겨울"
-
-#: ../../data/maps/Volcanic_Winter.wmf/elemental:10
-msgid ""
-"In the middle of summer, a series of volcanic eruptions drew the winter in. "
-"Suddenly, the sun seemed to be gone and the only light and heat sources left"
-" were those that enforced this dramatic change. Continents, oceans and seas "
-"are frozen now, only the volcanic islands seem to be left as habitable land."
-msgstr "한여름에, 일련의 화산 폭발이 겨울을 끌어들였다. 갑자기, 태양이 사라지는 것처럼 보였고, 유일하게 남아있는 빛과 열원은 이 극적인 변화를 강요한 것이었다. 대륙, 바다, 바다는 현재 얼어 있고, 화산 섬만이 거주할 수 있는 땅으로 남아 있는 듯 합니다."
-
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr "넓은 세상"
+msgstr "넓은 세계"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2019 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,10 +45,15 @@ struct Icon : public Panel {
 
 	void draw(RenderTarget&) override;
 
+	void set_grey_out(bool g) {
+		grey_out_ = g;
+	}
+
 private:
 	const Image* pic_;
 	bool draw_frame_;
 	RGBColor framecolor_;
+	bool grey_out_;
 };
 }  // namespace UI
 

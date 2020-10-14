@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,12 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
-#include "logic/map_objects/map_object.h"
+#include "logic/game_settings.h"
 #include "map_io/map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -38,76 +39,145 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
    : FullscreenMenuBase(),
 
      // Values for alignment and size
-     butw_(get_w() / 4),
-     buth_(get_h() * 9 / 200),
-	 padding_(4),
-     label_height_(20),
-     right_column_x_(get_w() * 57 / 80),
+     standard_element_width_(get_w() / 3),
+     standard_element_height_(get_h() * 9 / 200),
+     padding_(4),
 
-     win_condition_dropdown_(this,
-							 "dropdown_wincondition",
-                             right_column_x_,
-                             get_h() * 4 / 10 + buth_,
-                             butw_,
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
+     map_box_(&content_box_, 0, 0, UI::Box::Vertical),
+     map_details(&map_box_, standard_element_width_, standard_element_height_, padding_),
+
+     configure_game(&map_box_,
+                    0,
+                    0,
+                    0,
+                    0,
+                    _("Configure this game"),
+                    UI::Align::kCenter,
+                    g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+     win_condition_dropdown_(&map_box_,
+                             "dropdown_wincondition",
+                             0,
+                             0,
+                             standard_element_width_,
                              10,  // max number of items
-                             buth_,
+                             standard_element_height_,
                              "",
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
-							 UI::ButtonStyle::kFsMenuMenu),
-     peaceful_(this, Vector2i(right_column_x_, get_h() * 19 / 40 + buth_), _("Peaceful mode")),
-	 suggested_teams_dropdown_(this,
-							   0,
-							   0,
-							   butw_,
-							   buth_),
-	 selected_lineup_(nullptr),
-     ok_(this, "ok", right_column_x_, get_h() * 9 / 10, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
-     back_(this, "back", right_column_x_, get_h() * 17 / 20, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
+                             UI::ButtonStyle::kFsMenuMenu),
+     peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
+     custom_starting_positions_(&map_box_, Vector2i::zero(), _("Custom starting positions")),
+     ok_(&map_box_,
+         "ok",
+         0,
+         0,
+         standard_element_width_,
+         standard_element_height_,
+         UI::ButtonStyle::kFsMenuPrimary,
+         _("Start game")),
+     back_(&map_box_,
+           "back",
+           0,
+           0,
+           standard_element_width_,
+           standard_element_height_,
+           UI::ButtonStyle::kFsMenuSecondary,
+           _("Back")),
      // Text labels
-     title_(this,
-            get_w() / 2,
-            get_h() / 25,
+     title_(&main_box_,
+            0,
+            0,
             0,
             0,
             "",
             UI::Align::kCenter,
-            g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle)),
+            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false),
-     nr_players_(0) {
+	suggested_teams_dropdown_(this,
+							  0,
+							  0,
+							  standard_element_width_,
+							  standard_element_height_),
+	selected_lineup_(nullptr) {
 
-	win_condition_dropdown_.selected.connect(
-	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
-	peaceful_.changed.connect(boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
+	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	suggested_teams_dropdown_.selected.connect([this] { select_teams(); });
-	back_.sigclicked.connect(
-	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
-	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
 	lua_ = new LuaInterface();
+	add_all_widgets();
+	add_behaviour_to_widgets();
 
-	title_.set_font_scale(scale_factor());
-
-
-	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
-		switch (note.action) {
-		case NoteGameSettings::Action::kUser:
-			update_team(note.position);
-			break;
-		case NoteGameSettings::Action::kPlayer:
-			check_teams();
-			break;
-		default:
-			break;
-		}
-	});
+	layout();
 }
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
+}
+
+void FullscreenMenuLaunchGame::add_all_widgets() {
+	main_box_.add_space(10 * padding_);
+	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add_space(2 * padding_);
+
+	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(10 * padding_);
+
+	content_box_.add_space(10 * padding_);
+	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
+	content_box_.add_space(10 * padding_);
+	content_box_.add(&map_box_, UI::Box::Resizing::kFullSize);
+	content_box_.add_space(10 * padding_);
+
+	map_box_.add(&map_details);
+	map_box_.add_space(5 * padding_);
+
+	map_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	map_box_.add_space(3 * padding_);
+	map_box_.add(&win_condition_dropdown_);
+	map_box_.add_space(3 * padding_);
+	map_box_.add(&peaceful_);
+	map_box_.add_space(3 * padding_);
+	map_box_.add(&custom_starting_positions_);
+
+	map_box_.add_inf_space();
+	map_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	map_box_.add_space(2 * padding_);
+	map_box_.add(&back_, UI::Box::Resizing::kFullSize);
+}
+
+void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
+	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
+	peaceful_.changed.connect([this]() { toggle_peaceful(); });
+
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
+	map_details.set_select_map_action([this]() { clicked_select_map(); });
+}
+void FullscreenMenuLaunchGame::layout() {
+	main_box_.set_size(get_w(), get_h());
+	standard_element_width_ = get_w() / 3;
+	standard_element_height_ = get_h() * 9 / 200;
+
+	ok_.set_desired_size(standard_element_width_, standard_element_height_);
+	back_.set_desired_size(standard_element_width_, standard_element_height_);
+	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
+	custom_starting_positions_.set_desired_size(standard_element_width_, standard_element_height_);
+
+	title_.set_font_scale(scale_factor());
+	map_details.force_new_dimensions(
+	   scale_factor(), standard_element_width_, standard_element_height_);
+
+	configure_game.set_font_scale(scale_factor());
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {
@@ -125,6 +195,22 @@ void FullscreenMenuLaunchGame::update_peaceful_mode() {
 		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
 	} else {
 		peaceful_.set_tooltip(_("Forbid fighting between players"));
+	}
+}
+
+void FullscreenMenuLaunchGame::update_custom_starting_positions() {
+	const bool forbidden = settings_->settings().scenario || settings_->settings().savegame;
+	custom_starting_positions_.set_enabled(!forbidden && settings_->can_change_map());
+	if (forbidden) {
+		custom_starting_positions_.set_state(false);
+	}
+	if (settings_->settings().scenario) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
+	} else if (settings_->settings().savegame) {
+		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
+	} else {
+		custom_starting_positions_.set_tooltip(_(
+		   "Allow the players to choose their own starting positions at the beginning of the game"));
 	}
 }
 
@@ -197,8 +283,8 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 					                            t->get_string("description"));
 				}
 			} catch (LuaTableKeyError& e) {
-				log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-				    e.what());
+				log_err("Launch Game: Error loading win condition: %s %s\n",
+				        win_condition_script.c_str(), e.what());
 			}
 		}
 	} catch (const std::exception& e) {
@@ -208,13 +294,13 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		    settings_->settings().mapfilename)
 		      .str();
 		win_condition_dropdown_.set_errored(error_message);
-		log("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
+		log_err("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
 	}
 }
 
 std::unique_ptr<LuaTable>
 FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_condition_script,
-                                                 std::set<std::string> tags) const {
+                                                 const std::set<std::string>& tags) const {
 	bool is_usable = true;
 	std::unique_ptr<LuaTable> t;
 	try {
@@ -231,8 +317,8 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 			}
 		}
 	} catch (LuaTableKeyError& e) {
-		log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
-		    e.what());
+		log_err("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+		        e.what());
 	}
 	if (!is_usable) {
 		t.reset(nullptr);
@@ -244,6 +330,9 @@ void FullscreenMenuLaunchGame::toggle_peaceful() {
 	settings_->set_peaceful_mode(peaceful_.get_state());
 }
 
+void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
+	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
+}
 
 void FullscreenMenuLaunchGame::reset_teams(const Widelands::Map& map) {
 	selected_lineup_ = nullptr;
@@ -267,6 +356,8 @@ void FullscreenMenuLaunchGame::reset_teams(const Widelands::Map& map) {
 		}
 	}
 }
+
+
 
 void FullscreenMenuLaunchGame::select_teams() {
 	const size_t sel = suggested_teams_dropdown_.get_selected();
@@ -315,15 +406,4 @@ void FullscreenMenuLaunchGame::update_team(PlayerSlot pos) {
 			}
 		}
 	}
-}
-
-
-// Implemented by subclasses
-void FullscreenMenuLaunchGame::clicked_ok() {
-	NEVER_HERE();
-}
-
-// Implemented by subclasses
-void FullscreenMenuLaunchGame::clicked_back() {
-	NEVER_HERE();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -194,7 +194,8 @@ void WorkareaProgram::draw(uint32_t texture_id,
 	}
 
 	auto emplace_triangle = [this, workarea, fields_to_draw](
-	   const FieldsToDraw::Field& field, Widelands::TriangleIndex triangle_index) {
+	                           const FieldsToDraw::Field& field,
+	                           Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
 		for (const WorkareasEntry& wa_map : workarea) {
 			for (const WorkareaPreviewData& data : wa_map.first) {

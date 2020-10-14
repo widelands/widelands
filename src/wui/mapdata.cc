@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,6 +18,8 @@
  */
 
 #include "wui/mapdata.h"
+
+#include <boost/format.hpp>
 
 #include "io/filesystem/filesystem.h"
 
@@ -54,6 +56,8 @@ MapData::MapData(const Widelands::Map& map,
 	}
 	description = map.get_description().empty() ? "" : _(map.get_description());
 	hint = map.get_hint().empty() ? "" : _(map.get_hint());
+	theme = map.get_background_theme();
+	background = map.get_background();
 	nrplayers = map.get_nrplayers();
 	width = map.get_width();
 	height = map.get_height();
@@ -160,6 +164,9 @@ MapData MapData::create_directory(const std::string& directory) {
 	} else if (boost::equals(directory, "maps/My_Maps")) {
 		/** TRANSLATORS: Directory name for user maps in map selection */
 		localized_name = _("My Maps");
+	} else if (boost::equals(directory, "maps/Downloaded")) {
+		/** TRANSLATORS: Directory name for downloaded maps in map selection */
+		localized_name = _("Downloaded Maps");
 	} else {
 		localized_name = FileSystem::fs_filename(directory.c_str());
 	}

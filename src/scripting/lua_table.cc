@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ LuaTable::~LuaTable() {
 
 		for (const std::string& unused_key : unused_keys) {
 			// We must not throw in destructors as this can shadow other errors.
-			log("ERROR: Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
+			log_warn("Unused key \"%s\" in LuaTable. Please report as a bug.\n", unused_key.c_str());
 		}
 	}
 

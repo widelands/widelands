@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,13 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
+#include <regex>
 
-#include <SDL.h>
+#include <SDL_messagebox.h>
 #include <boost/algorithm/string.hpp>
-#include <boost/regex.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/macros.h"
 #include "graphic/gl/utils.h"
 #include "graphic/text/bidi.h"
@@ -63,18 +64,18 @@ SDL_GLContext initialize(
 		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
 		   {"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
-			log("%s(", call.function->name());
+			log_dbg("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
-				log("%s", call.parameters[i]->asString().c_str());
+				log_dbg("%s", call.parameters[i]->asString().c_str());
 				if (i < call.parameters.size() - 1)
-					log(", ");
+					log_dbg(", ");
 			}
-			log(")");
+			log_dbg(")");
 			if (call.returnValue) {
-				log(" -> %s", call.returnValue->asString().c_str());
+				log_dbg(" -> %s", call.returnValue->asString().c_str());
 			}
 			const auto error = glGetError();
-			log(" [%s]\n", gl_error_to_string(error));
+			log_dbg(" [%s]\n", gl_error_to_string(error));
 			// The next few lines will terminate Widelands if there was any OpenGL
 			// error. This is useful for super aggressive debugging, but probably
 			// not for regular builds. Comment it in if you need to understand
@@ -99,22 +100,22 @@ SDL_GLContext initialize(
 		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
 		   {"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
-			log("%s(", call.function->name());
+			log_dbg("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
 				FORMAT_WARNINGS_OFF
-				log("%p", call.parameters[i].get());
+				log_dbg("%p", call.parameters[i].get());
 				FORMAT_WARNINGS_ON
 				if (i < call.parameters.size() - 1)
-					log(", ");
+					log_dbg(", ");
 			}
-			log(")");
+			log_dbg(")");
 			if (call.returnValue) {
 				FORMAT_WARNINGS_OFF
-				log(" -> %p", call.returnValue.get());
+				log_dbg(" -> %p", call.returnValue.get());
 				FORMAT_WARNINGS_ON
 			}
 			const auto error = glGetError();
-			log(" [%s]\n", gl_error_to_string(error));
+			log_dbg(" [%s]\n", gl_error_to_string(error));
 			// The next few lines will terminate Widelands if there was any OpenGL
 			// error. This is useful for super aggressive debugging, but probably
 			// not for regular builds. Comment it in if you need to understand
@@ -133,20 +134,20 @@ SDL_GLContext initialize(
 	// coming from the gaphics drivers
 
 	if (err != GLEW_OK) {
-		log("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
-		    glewGetErrorString(err));
+		log_err("glewInit returns %i\nYour OpenGL installation must be __very__ broken. %s\n", err,
+		        glewGetErrorString(err));
 		throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 	}
 #endif
 
-	log(
+	log_dbg(
 	   "Graphics: OpenGL: Version \"%s\"\n", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 
 #define LOG_SDL_GL_ATTRIBUTE(x)                                                                    \
 	{                                                                                               \
 		int value;                                                                                   \
 		SDL_GL_GetAttribute(x, &value);                                                              \
-		log("Graphics: %s is %d\n", #x, value);                                                      \
+		log_dbg("Graphics: %s is %d\n", #x, value);                                                  \
 	}
 
 	LOG_SDL_GL_ATTRIBUTE(SDL_GL_RED_SIZE)
@@ -175,19 +176,19 @@ SDL_GLContext initialize(
 
 	GLboolean glBool;
 	glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
-	log("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
+	log_dbg("Graphics: OpenGL: Double buffering %s\n", (glBool == GL_TRUE) ? "enabled" : "disabled");
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
-	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
+	log_dbg("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
 	const char* const shading_language_version_string =
 	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+	log_dbg("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
 
 	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support
 	// does not exist for all languages, we show both the original and a localized text.
-	auto show_opengl_error_and_exit = [](
-	   const std::string& message, const std::string& localized_message) {
+	auto show_opengl_error_and_exit = [](const std::string& message,
+	                                     const std::string& localized_message) {
 		std::string display_message = "";
 		if (message != localized_message) {
 			display_message =
@@ -200,7 +201,7 @@ SDL_GLContext initialize(
 		}
 
 		/** TRANSLATORS: Error message printed to console/command line/log file */
-		log(_("ERROR: %s\n"), display_message.c_str());
+		log_err("%s\n", display_message.c_str());
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), NULL);
 		exit(1);
 	};
@@ -224,20 +225,20 @@ SDL_GLContext initialize(
 	};
 
 	// glGetString returned an error for the shading language
-	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == 0) {
+	if (glGetString(GL_SHADING_LANGUAGE_VERSION) == nullptr) {
 		handle_unreadable_opengl_shading_language();
 	}
 
 	std::vector<std::string> shading_language_version_vector;
 	boost::split(
-	   shading_language_version_vector, shading_language_version_string, boost::is_any_of("."));
+	   shading_language_version_vector, shading_language_version_string, boost::is_any_of(". "));
 	if (shading_language_version_vector.size() >= 2) {
 		// The shading language version has been detected properly. Exit if the shading language
 		// version is too old.
 		const int major_shading_language_version =
-		   atoi(shading_language_version_vector.front().c_str());
+		   boost::lexical_cast<int>(shading_language_version_vector.front());
 		const int minor_shading_language_version =
-		   atoi(shading_language_version_vector.at(1).c_str());
+		   boost::lexical_cast<int>(shading_language_version_vector.at(1));
 		if (major_shading_language_version < 1 ||
 		    (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
 			show_opengl_error_and_exit(
@@ -255,9 +256,10 @@ SDL_GLContext initialize(
 	} else {
 		// We don't have a minor version. Ensure that the string to compare is a valid integer before
 		// conversion
-		boost::regex re("\\d+");
-		if (boost::regex_match(shading_language_version_string, re)) {
-			const int major_shading_language_version = atoi(shading_language_version_string);
+		std::regex re("\\d+");
+		if (std::regex_match(shading_language_version_string, re)) {
+			const int major_shading_language_version =
+			   boost::lexical_cast<int>(shading_language_version_string);
 			if (major_shading_language_version < 2) {
 				show_opengl_error_and_exit(
 				   "Widelands won’t work because your graphics driver is too old.\n"

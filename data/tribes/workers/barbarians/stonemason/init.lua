@@ -1,27 +1,12 @@
+push_textdomain("tribes")
+
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 8, 21 },
-      fps = 10
-   },
-   hacking = {
-      pictures = path.list_files(dirname .. "hacking_??.png"),
-      hotspot = { 8, 21 },
-      fps = 10
-   }
-}
-add_directional_animation(animations, "walk", dirname, "walk", {9, 24}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {7, 22}, 10)
-
-
 tribes:new_worker_type {
-   msgctxt = "barbarians_worker",
    name = "barbarians_stonemason",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Stonemason"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -34,13 +19,44 @@ tribes:new_worker_type {
       cut_granite = {
          "findobject=attrib:rocks radius:6",
          "walk=object",
-         "playsound=sound/stonecutting/stonecutter 192",
-         "animate=hacking 17500",
+         "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
+         "animate=hack duration:17s500ms",
          "callobject=shrink",
          "createware=granite",
          "return"
       }
    },
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 6, 16 },
+      }
+   },
+   spritesheets = {
+      walk = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 9, 17 }
+      },
+      walkload = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         directional = true,
+         hotspot = { 7, 19 }
+      },
+      hack = {
+         fps = 10,
+         frames = 10,
+         rows = 4,
+         columns = 3,
+         hotspot = { 6, 17 }
+      }
+   }
 }
+
+pop_textdomain()

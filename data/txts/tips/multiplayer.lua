@@ -1,4 +1,4 @@
-set_textdomain("texts")
+push_textdomain("texts")
 tips = {
    {
       text = _"You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed – the real speed is then democratically set.",
@@ -17,4 +17,5 @@ tips = {
       seconds = 7
    },
 }
+pop_textdomain()
 return tips

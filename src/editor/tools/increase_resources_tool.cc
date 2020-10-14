@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2019 by the Widelands Development Team
+ * Copyright (C) 2002-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,8 +26,6 @@
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
-using Widelands::TCoords;
-
 int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                        EditorInteractive& eia,
                                                        EditorActionArgs* args,
@@ -43,8 +41,9 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 		      0;
 
 		amount += args->change_by;
-		if (amount > max_amount)
+		if (amount > max_amount) {
 			amount = max_amount;
+		}
 
 		if ((mr.location().field->get_resources() == args->current_resource ||
 		     !mr.location().field->get_resources_amount()) &&

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2019 by the Widelands Development Team
+ * Copyright (C) 2006-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ NotificationsManager::NotificationsManager() : next_subscriber_id_(1), num_subsc
 
 NotificationsManager::~NotificationsManager() {
 	if (num_subscribers_ != 0) {
-		log("ERROR: NotificationsManager is destroyed, but there are still subscribers.\n");
+		log_err("NotificationsManager is destroyed, but there are still subscribers.\n");
 	}
 }
 
