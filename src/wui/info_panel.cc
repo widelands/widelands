@@ -295,9 +295,12 @@ void InfoPanel::update_time_speed_string() {
 
 	boost::format f;
 	switch (non_empty.size()) {
+	case 0:
+		text_time_speed_.set_text("");
+		return;
 	case 1:
-		f = boost::format("%s");
-		break;
+		text_time_speed_.set_text(*non_empty.back());
+		return;
 	case 2:
 		f = boost::format(_("%1$s · %2$s"));
 		break;
@@ -379,6 +382,9 @@ void InfoPanel::draw(RenderTarget& r) {
 	if (display_mode_ == DisplayMode::kMinimized) {
 		return;
 	}
+
 	const int h = display_mode_ == DisplayMode::kOnMouse_Hidden? kSpacing : MainToolbar::kButtonSize;
 	r.tile(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), g_image_cache->get(std::string(kTemplateDir) + "wui/background.png"), Vector2i(0, 0));
+
+	r.draw_rect(Recti(0, on_top_ ? h : get_h() - h - 1, get_w(), 1), RGBColor(0, 0, 0));
 }
