@@ -50,9 +50,9 @@ static const char pic_construct_port[] = "images/wui/ship/ship_construct_port_sp
 constexpr int kPadding = 5;
 }  // namespace
 
-ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Widelands::Ship* ship)
-   : UniqueWindow(&igb, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
-     igbase_(igb),
+ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelands::Ship* ship)
+   : UniqueWindow(&ib, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
+     ibase_(ib),
      ship_(ship),
      vbox_(this, 0, 0, UI::Box::Vertical),
      navigation_box_(&vbox_, 0, 0, UI::Box::Vertical) {
@@ -132,7 +132,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Wi
 
 	buttons->add_inf_space();
 
-	if (igbase_.get_display_flag(InteractiveBase::dfDebug)) {
+	if (ibase_.get_display_flag(InteractiveBase::dfDebug)) {
 		btn_debug_ = make_button(
 		   buttons, "debug", _("Show Debug Window"), pic_debug, [this]() { act_debug(); });
 		btn_debug_->set_enabled(true);
@@ -184,7 +184,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Wi
 }
 
 void ShipWindow::set_button_visibility() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
@@ -199,31 +199,29 @@ void ShipWindow::set_button_visibility() {
 }
 
 void ShipWindow::no_port_error_message() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	if (upcast(InteractiveGameBase, igamebase, ship->get_owner()->egbase().get_ibase())) {
-		if (igamebase->can_act(ship->owner().player_number())) {
-			UI::WLMessageBox messagebox(
-			   get_parent(), UI::WindowStyle::kWui,
-			   /** TRANSLATORS: Window label when an expedition can't be canceled */
-			   _("Cancel Expedition"),
-			   _("This expedition can’t be canceled, because the "
-			     "ship has no port to return to."),
-			   UI::WLMessageBox::MBoxType::kOk);
-			messagebox.run<UI::Panel::Returncodes>();
-		}
+	if (ibase_.can_act(ship->owner().player_number())) {
+		UI::WLMessageBox messagebox(
+		   get_parent(), UI::WindowStyle::kWui,
+		   /** TRANSLATORS: Window label when an expedition can't be canceled */
+		   _("Cancel Expedition"),
+		   _("This expedition can’t be canceled, because the "
+		     "ship has no port to return to."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		messagebox.run<UI::Panel::Returncodes>();
 	}
 }
 
 void ShipWindow::think() {
 	UI::Window::think();
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	bool can_act = igbase_.can_act(ship->owner().player_number());
+	const bool can_act = ibase_.can_act(ship->owner().player_number());
 
 	btn_destination_->set_enabled(ship->get_destination());
 	btn_sink_->set_enabled(can_act);
@@ -233,7 +231,7 @@ void ShipWindow::think() {
 		Widelands::ShippingItem item = ship->get_item(idx);
 		Widelands::WareInstance* ware;
 		Widelands::Worker* worker;
-		item.get(igbase_.egbase(), &ware, &worker);
+		item.get(ibase_.egbase(), &ware, &worker);
 
 		if (ware) {
 			display_->add(false, ware->descr_index());
@@ -293,63 +291,71 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 
 /// Move the main view towards the current ship location
 void ShipWindow::act_goto() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	igbase_.map_view()->scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
+	ibase_.map_view()->scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
 }
 
 /// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	if (Widelands::PortDock* destination = ship->get_destination()) {
-		igbase_.map_view()->scroll_to_field(
+		ibase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}
 }
 
 /// Sink the ship if confirmed
 void ShipWindow::act_sink() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		igbase_.game().send_player_sink_ship(*ship);
-	} else {
-		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(igbase_), *ship);
+		if (Widelands::Game* game = ibase_.get_game()) {
+			game->send_player_sink_ship(*ship);
+		} else {
+			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		}
+	} else if (upcast(InteractivePlayer, ipl, &ibase_)) {
+		show_ship_sink_confirm(*ipl, *ship);
 	}
 }
 
 /// Show debug info
 void ShipWindow::act_debug() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
-	show_mapobject_debug(igbase_, *ship);
+	show_mapobject_debug(ibase_, *ship);
 }
 
 /// Cancel expedition if confirmed
 void ShipWindow::act_cancel_expedition() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		igbase_.game().send_player_cancel_expedition_ship(*ship);
-	} else {
-		show_ship_cancel_expedition_confirm(dynamic_cast<InteractivePlayer&>(igbase_), *ship);
+		if (Widelands::Game* game = ibase_.get_game()) {
+			game->send_player_cancel_expedition_ship(*ship);
+		} else {
+			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		}
+	} else if (upcast(InteractivePlayer, ipl, &ibase_)) {
+		show_ship_cancel_expedition_confirm(*ipl, *ship);
 	}
 }
 
 /// Sends a player command to the ship to scout towards a specific direction
 void ShipWindow::act_scout_towards(Widelands::WalkingDir direction) {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
@@ -357,24 +363,32 @@ void ShipWindow::act_scout_towards(Widelands::WalkingDir direction) {
 	if (!ship->exp_dir_swimmable(static_cast<Widelands::Direction>(direction))) {
 		return;
 	}
-	igbase_.game().send_player_ship_scouting_direction(*ship, direction);
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_ship_scouting_direction(*ship, direction);
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
 }
 
 /// Constructs a port at the port build space in vision range
 void ShipWindow::act_construct_port() {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
 	if (ship->exp_port_spaces().empty()) {
 		return;
 	}
-	igbase_.game().send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
 }
 
 /// Explores the island cw or ccw
 void ShipWindow::act_explore_island(Widelands::IslandExploreDirection direction) {
-	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	Widelands::Ship* ship = ship_.get(ibase_.egbase());
 	if (ship == nullptr) {
 		return;
 	}
@@ -391,5 +405,9 @@ void ShipWindow::act_explore_island(Widelands::IslandExploreDirection direction)
 	if (!coast_nearby || !moveable) {
 		return;
 	}
-	igbase_.game().send_player_ship_explore_island(*ship, direction);
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_ship_explore_island(*ship, direction);
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
 }
