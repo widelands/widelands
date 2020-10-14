@@ -367,6 +367,7 @@ const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, open),
    METHOD(LuaDropdown, highlight_item),
    METHOD(LuaDropdown, select),
+   METHOD(LuaDropdown, get_no_of_items),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {

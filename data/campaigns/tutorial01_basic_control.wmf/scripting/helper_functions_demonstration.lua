@@ -84,6 +84,19 @@ function open_item_from_dropdown(name, item)
    wl.ui.MapView().dropdowns[name]:open(item)
 end
 
+function show_item_from_dropdown(name, item)
+   local blocker = UserInputDisabler:new()
+   local ind = wl.ui.MapView().dropdowns[name]:get_no_of_items()
+   wl.ui.MapView().dropdowns[name]:highlight_item(ind)
+   sleep(500)
+   while ind >= item do
+      wl.ui.MapView().dropdowns[name]:highlight_item(ind)
+      ind = ind - 1
+      sleep(300)
+   end
+   blocker:lift_blocks()
+end
+
 -- Make sure the user is in road building mode starting from the given flag
 function enter_road_building_mode(flag)
    local mv = wl.ui.MapView()
