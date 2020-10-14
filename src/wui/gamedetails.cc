@@ -94,6 +94,7 @@ void GameDetails::display(const std::vector<SavegameData>& gamedata) {
 }
 
 void GameDetails::show(const std::vector<SavegameData>& gamedata) {
+	clear();
 
 	size_t number_of_files = 0;
 	size_t number_of_directories = 0;
@@ -125,7 +126,6 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 	   as_richtext(as_heading_with_content("", name_list, style_, true, true));
 
 	descr_.set_text(combined_description);
-	minimap_icon_.set_visible(false);
 }
 
 void GameDetails::show(const SavegameData& gamedata) {

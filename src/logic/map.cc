@@ -52,6 +52,32 @@
 
 namespace Widelands {
 
+const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"summer", "greenland", []() { return _("Summer"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"winter", "winterland", []() { return _("Winter"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"wasteland", "blackland", []() { return _("Wasteland"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"desert", "desert", []() { return _("Desert"); }}};
+const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
+	for (const OldWorldInfo& owi : kOldWorldNames) {
+		if (owi.old_name == old_name) {
+			return owi;
+		}
+	}
+	NEVER_HERE();
+}
+const Map::OldWorldInfo& Map::get_old_world_info_by_new_name(const std::string& new_name) {
+	for (const OldWorldInfo& owi : kOldWorldNames) {
+		if (owi.name == new_name) {
+			return owi;
+		}
+	}
+	NEVER_HERE();
+}
+
 FieldData::FieldData(const Field& field)
    : height(field.get_height()),
      resources(field.get_resources()),
@@ -85,7 +111,7 @@ bool FindCarnivores::accept(Bob* b) const {
 	return false;
 }
 bool FindCritter::accept(Bob* b) const {
-	return is_a(Critter, b);
+	return b && b->descr().type() == MapObjectType::CRITTER;
 }
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
@@ -457,6 +483,7 @@ void Map::cleanup() {
 	tags_.clear();
 	hint_ = std::string();
 	background_ = std::string();
+	background_theme_ = std::string();
 
 	objectives_.clear();
 	port_spaces_.clear();
@@ -973,6 +1000,10 @@ void Map::set_background(const std::string& image_path) {
 	} else {
 		background_ = image_path;
 	}
+}
+
+void Map::set_background_theme(const std::string& bt) {
+	background_theme_ = bt;
 }
 
 void Map::add_tag(const std::string& tag) {

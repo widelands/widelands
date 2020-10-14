@@ -86,6 +86,10 @@ public:
 		return objects_;
 	}
 
+	virtual bool is_game() const {
+		return false;
+	}
+
 	// logic handler func
 	virtual void think();
 
@@ -111,12 +115,8 @@ public:
 	/// Optionally sets a background image.
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     bool show_game_tips,
-	                                     const std::string& background = std::string());
-
-	/// If 'background' is not empty, change the background image for the loader UI.
-	/// If 'backgound' is empty, show game tips instead.
-	/// There must be a loader ui and no game tips.
-	void change_loader_ui_background(const std::string& background);
+	                                     const std::string& theme,
+	                                     const std::string& background);
 
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;

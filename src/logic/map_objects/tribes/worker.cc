@@ -2005,7 +2005,7 @@ void Worker::return_update(Game& game, State& state) {
 				// Don't try to enter building if it is a dismantle site
 				// It is no problem for builders since they won't return before
 				// dismantling is complete.
-				if (is_a(DismantleSite, location)) {
+				if (location && location->descr().type() == MapObjectType::DISMANTLESITE) {
 					set_location(nullptr);
 					return pop_task(game);
 				} else {
@@ -2143,7 +2143,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 		}
 	}
 
-	if (dynamic_cast<Warehouse const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		delete supply_;
 		supply_ = nullptr;
 
@@ -2282,7 +2282,7 @@ void Worker::dropoff_update(Game& game, State&) {
 		throw wexception("MO(%u): [dropoff]: not on building on return", serial());
 	}
 
-	if (dynamic_cast<Warehouse const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		schedule_incorporate(game);
 		return;
 	}
@@ -2335,7 +2335,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 
 	// If we haven't got the ware yet, walk onto the flag
 	if (!get_carried_ware(game) && !state.ivar1) {
-		if (dynamic_cast<Building const*>(location)) {
+		if (location && location->descr().type() >= Widelands::MapObjectType::BUILDING) {
 			return start_task_leavebuilding(game, false);
 		}
 
@@ -2360,14 +2360,14 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 	}
 
 	// Go back into the building
-	if (dynamic_cast<Flag const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::FLAG) {
 		molog(game.get_gametime(), "[fetchfromflag]: return to building\n");
 
 		return start_task_move(
 		   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 	}
 
-	if (!dynamic_cast<Building const*>(location)) {
+	if (!location || location->descr().type() < Widelands::MapObjectType::BUILDING) {
 		// This can happen "naturally" if the building gets destroyed, but the
 		// flag is still there and the worker tries to enter from that flag.
 		// E.g. the player destroyed the building, it is destroyed, through an
@@ -2402,7 +2402,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 	}
 
 	// We're back!
-	if (dynamic_cast<Warehouse const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		schedule_incorporate(game);
 		return;
 	}
@@ -2624,7 +2624,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 	if (location && location->get_owner() == get_owner()) {
 		molog(game.get_gametime(), "[fugitive]: we are on location\n");
 
-		if (dynamic_cast<Warehouse const*>(location)) {
+		if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 			return schedule_incorporate(game);
 		}
 

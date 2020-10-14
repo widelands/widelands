@@ -186,6 +186,22 @@ public:
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
 
+	struct OldWorldInfo {
+		// What we call it now (used for the gameloading UI's themes
+		// and by the random map generator)
+		std::string name;
+
+		// What this is called in very old map files. Used ONLY to map
+		// the world names of old maps to the new theme definitions.
+		std::string old_name;
+
+		// Localized name
+		std::function<std::string()> descname;
+	};
+	static const std::vector<OldWorldInfo> kOldWorldNames;
+	static const OldWorldInfo& get_old_world_info_by_new_name(const std::string& old_name);
+	static const OldWorldInfo& get_old_world_info_by_old_name(const std::string& old_name);
+
 	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
 
@@ -269,6 +285,7 @@ public:
 	void set_description(const std::string& description);
 	void set_hint(const std::string& hint);
 	void set_background(const std::string& image_path);
+	void set_background_theme(const std::string&);
 	void add_tag(const std::string& tag);
 	void delete_tag(const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {
@@ -300,6 +317,9 @@ public:
 	}
 	const std::string& get_background() const {
 		return background_;
+	}
+	const std::string& get_background_theme() const {
+		return background_theme_;
 	}
 
 	using Tags = std::set<std::string>;
@@ -629,6 +649,7 @@ private:
 	std::string description_;
 	std::string hint_;
 	std::string background_;
+	std::string background_theme_;
 	Tags tags_;
 	std::vector<SuggestedTeamLineup> suggested_teams_;
 

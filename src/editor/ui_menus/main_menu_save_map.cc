@@ -77,6 +77,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	table_footer_box_.add_space(0);
 	table_footer_box_.add(&make_directory_);
 
+	fill_table();
+
 	table_.selected.connect([this](unsigned) { clicked_item(); });
 	table_.double_clicked.connect([this](unsigned) { double_clicked_item(); });
 	table_.cancel.connect([this]() { die(); });
@@ -99,7 +101,6 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
-	fill_table();
 	layout();
 
 	// We always want the current map's data here
@@ -325,7 +326,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.
