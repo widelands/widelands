@@ -353,7 +353,7 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 			if (i.descr().collected_by().count(descr.name())) {
 				upcast(const Widelands::Building, b, mo);
 				assert(b);
-				assert(descr.workarea_info().empty());
+				assert(!descr.workarea_info().empty());
 				if (b->owner().player_number() == p &&
 				    map.calc_distance(b->get_position(), i.get_position()) <=
 				       descr.workarea_info().rbegin()->first) {
