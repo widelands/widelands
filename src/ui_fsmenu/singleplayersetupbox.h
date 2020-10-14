@@ -80,12 +80,12 @@ private:
 	uint32_t standard_height;
 	UI::Box scrollable_playerbox;
 	UI::Textarea title_;
-	UI::Textarea title2_;
 	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 
 	SuggestedTeamsDropdown suggested_teams_dropdown_;
 	const Widelands::SuggestedTeamLineup* selected_lineup_;
+	bool suggested_team_selection_in_progress_;
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H

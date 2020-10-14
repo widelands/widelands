@@ -177,7 +177,6 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 	add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add(&map_description_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add_space(3 * padding);
-	// NOCOM we want the dropdown here? content_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
 MapDetailsBox::~MapDetailsBox() {
 }

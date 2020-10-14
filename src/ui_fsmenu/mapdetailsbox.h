@@ -54,7 +54,6 @@ private:
 	UI::Textarea map_name_;
 	UI::Button select_map_;
 	UI::MultilineTextarea map_description_;
-	// NOCOM UI::SuggestedTeamsBox suggested_teams_box_;
 
 	void show_map_description(Widelands::Map& map, GameSettingsProvider* settings);
 	void show_map_description_savegame(const GameSettings& game_settings);

@@ -224,7 +224,7 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 void SinglePlayerGameSettingsProvider::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	if (number < s.players.size()) {
 		s.players[number].team = team;
-		// NOCOM Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kTeam, number));
 	}
 }
 

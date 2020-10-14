@@ -60,14 +60,14 @@ void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamL
 	clear();
 	suggested_teams_ = suggested_teams;
 	if (!suggested_teams_.empty()) {
-		add(_("No Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
+		add(_("Suggested Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
 
 		for (size_t i = 0; i < suggested_teams_.size(); ++i) {
 			add(format_suggested_teams_lineup(suggested_teams_.at(i)), i);
 		}
 		set_enabled(can_change_map);
 	} else {
-		add(_("No Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
+		add(_("No Suggested Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
 	}
 	set_visible(true);
 }

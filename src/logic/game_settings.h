@@ -90,6 +90,7 @@ struct NoteGameSettings {
 	enum class Action {
 		kUser,    // A client has picked a different player slot / become an observer
 		kPlayer,  // A player slot has changed its status (type, tribe etc.)
+		kTeam,    // A player changed their team
 		kMap      // A new map/savegame was selected
 	};
 
