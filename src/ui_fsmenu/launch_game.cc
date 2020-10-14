@@ -70,6 +70,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::ButtonStyle::kFsMenuMenu),
      peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
      custom_starting_positions_(&map_box_, Vector2i::zero(), _("Custom starting positions")),
+
+
      ok_(&map_box_,
          "ok",
          0,
@@ -98,18 +100,12 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
-     peaceful_mode_forbidden_(false),
-	suggested_teams_dropdown_(this,
-							  0,
-							  0,
-							  standard_element_width_,
-							  standard_element_height_),
-	selected_lineup_(nullptr) {
+     peaceful_mode_forbidden_(false) {
 
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
-	suggested_teams_dropdown_.selected.connect([this] { select_teams(); });
+
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
@@ -148,6 +144,8 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	map_box_.add(&peaceful_);
 	map_box_.add_space(3 * padding_);
 	map_box_.add(&custom_starting_positions_);
+	map_box_.add_space(3 * padding_);
+
 
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kFullSize);
@@ -332,78 +330,4 @@ void FullscreenMenuLaunchGame::toggle_peaceful() {
 
 void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
 	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
-}
-
-void FullscreenMenuLaunchGame::reset_teams(const Widelands::Map& map) {
-	selected_lineup_ = nullptr;
-	suggested_teams_dropdown_.rebuild(map.get_suggested_teams());
-	suggested_teams_dropdown_.set_enabled(settings_->can_change_map());
-
-	if (settings_->can_change_map()) {
-		// Reset teams and slot state
-		for (size_t i = 0; i < settings_->settings().players.size(); ++i) {
-			settings_->set_player_team(i, 0);
-			if (settings_->settings().players.at(i).state == PlayerSettings::State::kClosed) {
-				settings_->set_player_state(i, PlayerSettings::State::kOpen);
-			}
-		}
-
-		// If it is a scenario, auto-set the teams if there is only 1
-		if (settings_->settings().scenario && map.get_suggested_teams().size() == 1) {
-			suggested_teams_dropdown_.select(0);
-			select_teams();
-			suggested_teams_dropdown_.set_enabled(false);
-		}
-	}
-}
-
-
-
-void FullscreenMenuLaunchGame::select_teams() {
-	const size_t sel = suggested_teams_dropdown_.get_selected();
-	selected_lineup_ = suggested_teams_dropdown_.get_lineup(sel);
-
-	std::vector<uint8_t> teams_to_set(settings_->settings().players.size(), 0);
-
-	if (selected_lineup_ != nullptr) {
-		for (size_t i = 0; i < selected_lineup_->size(); ++i) {
-			for (PlayerSlot pl : selected_lineup_->at(i)) {
-				teams_to_set.at(pl) = i + 1;
-			}
-		}
-	}
-
-	for (size_t i = 0; i < teams_to_set.size(); ++i) {
-		uint8_t new_team = teams_to_set.at(i);
-		// Set team if it has changed
-		if (new_team != settings_->settings().players.at(i).team) {
-			settings_->set_player_team(i, new_team);
-		}
-		// Automatically open/close slots according to selected teams
-		if (sel != Widelands::kNoSuggestedTeam && new_team == 0) {
-			settings_->set_player_state(i, PlayerSettings::State::kClosed);
-		} else if (settings_->settings().players.at(i).state == PlayerSettings::State::kClosed) {
-			settings_->set_player_state(i, PlayerSettings::State::kOpen);
-		}
-	}
-	// NOCOM in single player mode, bump player to nearest available slot
-}
-
-void FullscreenMenuLaunchGame::check_teams() {
- // NOCOM check whether selected_lineup_ is still valid:
- // NOCOM set selected to nullptr if a player changes their team
-}
-
-void FullscreenMenuLaunchGame::update_team(PlayerSlot pos) {
-	if (selected_lineup_ != nullptr && pos < settings_->settings().players.size()) {
-		assert(suggested_teams_dropdown_.is_visible());
-		for (size_t i = 0; i < selected_lineup_->size(); ++i) {
-			for (PlayerSlot pl : selected_lineup_->at(i)) {
-				if (pl == pos) {
-					settings_->set_player_team(pos, i + 1);
-					break;
-				}
-			}
-		}
-	}
 }

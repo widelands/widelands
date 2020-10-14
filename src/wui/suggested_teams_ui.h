@@ -37,7 +37,7 @@ public:
 									int32_t y,
 									uint32_t list_w,
 									int button_dimension);
-	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
+	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams, bool can_change_map);
 	const Widelands::SuggestedTeamLineup* get_lineup(size_t index) const;
 
 private:

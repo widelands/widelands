@@ -27,7 +27,6 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
-#include "wui/suggested_teams_ui.h"
 #include "ui_fsmenu/mapdetailsbox.h"
 
 class GameController;
@@ -81,10 +80,6 @@ protected:
 	void toggle_peaceful();
 	void toggle_custom_starting_positions();
 
-	void reset_teams(const Widelands::Map& map);
-	void select_teams();
-	void check_teams();
-	void update_team(PlayerSlot pos);
 
 	void layout() override;
 
@@ -97,13 +92,11 @@ protected:
 	UI::Box individual_content_box;
 	UI::Box map_box_;
 
-	SuggestedTeamsDropdown suggested_teams_dropdown_;
-	const Widelands::SuggestedTeamLineup* selected_lineup_;
-
 	MapDetailsBox map_details;
 	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
+
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;

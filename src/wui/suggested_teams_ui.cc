@@ -51,10 +51,12 @@ SuggestedTeamsDropdown::SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int
 	         UI::PanelStyle::kFsMenu,
 	         UI::ButtonStyle::kFsMenuMenu, true) {
 	set_visible(false);
+	set_enabled(false);
 }
 
-void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
+void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams, bool can_change_map) {
 	set_visible(false);
+	set_enabled(false);
 	clear();
 	suggested_teams_ = suggested_teams;
 	if (!suggested_teams_.empty()) {
@@ -63,8 +65,11 @@ void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamL
 		for (size_t i = 0; i < suggested_teams_.size(); ++i) {
 			add(format_suggested_teams_lineup(suggested_teams_.at(i)), i);
 		}
-		set_visible(true);
+		set_enabled(can_change_map);
+	} else {
+		add(_("No Teams"), Widelands::kNoSuggestedTeam, nullptr, true);
 	}
+	set_visible(true);
 }
 
 const Widelands::SuggestedTeamLineup* SuggestedTeamsDropdown::get_lineup(size_t index) const {

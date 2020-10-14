@@ -29,6 +29,11 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_fsmenu/singleplayerdropdown.h"
+#include "wui/suggested_teams_ui.h"
+
+namespace Widelands {
+class Map;
+}
 
 // horizontal group
 class SinglePlayerActivePlayerGroup : public UI::Box {
@@ -61,15 +66,26 @@ public:
 	                     uint32_t padding);
 
 	void force_new_dimensions(float scale, uint32_t standard_element_height);
+	void reset_teams(const Widelands::Map& map);
 
 private:
+	void update();
+	void reset();
+
+	void select_teams();
+	void check_teams();
+	void update_team(PlayerSlot pos);
+
 	GameSettingsProvider* const settings_;
 	uint32_t standard_height;
 	UI::Box scrollable_playerbox;
 	UI::Textarea title_;
+	UI::Textarea title2_;
 	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
-	void update();
-	void reset();
+
+
+	SuggestedTeamsDropdown suggested_teams_dropdown_;
+	const Widelands::SuggestedTeamLineup* selected_lineup_;
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H

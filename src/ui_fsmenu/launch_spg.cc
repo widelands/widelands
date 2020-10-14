@@ -121,7 +121,7 @@ void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& ma
 			settings_->set_player_tribe(i, playertribe);
 		}
 	}
-	reset_teams(map);
+	player_setup.reset_teams(map);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 }
 
