@@ -47,8 +47,10 @@ template <typename T, typename ID> struct IDButton;
  * things like size, world ....
  */
 struct MainMenuNewRandomMap : public UI::UniqueWindow {
-	explicit MainMenuNewRandomMap(
-	   UI::Panel& parent, UI::UniqueWindow::Registry&, uint32_t map_w, uint32_t map_h);
+	explicit MainMenuNewRandomMap(UI::Panel& parent,
+	                              UI::UniqueWindow::Registry&,
+	                              uint32_t map_w,
+	                              uint32_t map_h);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,

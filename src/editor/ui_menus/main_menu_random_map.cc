@@ -538,8 +538,9 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 			sp->set_custom_starting_positions(false);
 
 			for (unsigned p = 0; p < nr_players; ++p) {
-				sp->set_player_name(p, p == plnum ? _("Player") :
-				   (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
+				sp->set_player_name(
+				   p, p == plnum ? _("Player") :
+				                   (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
 				sp->set_player_tribe(p, "", true);
 				sp->set_player_team(p, p == plnum ? 0 : 1);
 				sp->set_player_init(p, 0);

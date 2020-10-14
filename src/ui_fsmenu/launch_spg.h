@@ -32,7 +32,9 @@ class Game;
 
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(Widelands::Game* preconfigured, GameSettingsProvider*, GameController* = nullptr);
+	FullscreenMenuLaunchSPG(Widelands::Game* preconfigured,
+	                        GameSettingsProvider*,
+	                        GameController* = nullptr);
 	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;
