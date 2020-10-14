@@ -153,7 +153,7 @@ function waterways_and_ferries()
    while pass < 3 do
       sleep(3000)
       ff = get_fields_with_ferry(swimmable_fields)
-      wwf = get_waterway_fields(ff) -- NOCOM crash
+      wwf = get_waterway_fields(ff)
       if #wwf >= 4 then
          pass = pass + 1
       else
