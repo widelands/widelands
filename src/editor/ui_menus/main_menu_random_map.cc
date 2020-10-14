@@ -45,8 +45,7 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                                            UI::UniqueWindow::Registry& registry,
                                            const uint32_t w,
-                                           const uint32_t h,
-                                           const bool game)
+                                           const uint32_t h)
    : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
      // UI elements
      margin_(4),
@@ -171,44 +170,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                   0,
                   box_width_ - 2 * margin_ - map_id_label_.get_w(),
                   UI::PanelStyle::kWui),
-
-     tribe_(game ? new UI::Dropdown<std::string>(&box_,
-                                                 "tribe",
-                                                 0,
-                                                 0,
-                                                 box_width_,
-                                                 8,
-                                                 label_height_,
-                                                 _("Tribe"),
-                                                 UI::DropdownType::kTextual,
-                                                 UI::PanelStyle::kWui,
-                                                 UI::ButtonStyle::kWuiSecondary) :
-                   nullptr),
-     starting_condition_player_(game ? new UI::Dropdown<uint8_t>(&box_,
-                                                                 "sc_player",
-                                                                 0,
-                                                                 0,
-                                                                 box_width_,
-                                                                 8,
-                                                                 label_height_,
-                                                                 _("Your Starting Condition"),
-                                                                 UI::DropdownType::kTextual,
-                                                                 UI::PanelStyle::kWui,
-                                                                 UI::ButtonStyle::kWuiSecondary) :
-                                       nullptr),
-     starting_condition_ai_(game ? new UI::Dropdown<uint8_t>(&box_,
-                                                             "sc_ai",
-                                                             0,
-                                                             0,
-                                                             box_width_,
-                                                             8,
-                                                             label_height_,
-                                                             _("Enemies’ Starting Conditions"),
-                                                             UI::DropdownType::kTextual,
-                                                             UI::PanelStyle::kWui,
-                                                             UI::ButtonStyle::kWuiSecondary) :
-                                   nullptr),
-     ai_teams_(game ? new UI::Checkbox(&box_, Vector2i::zero(), _("Team up AIs")) : nullptr),
 
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -343,45 +304,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	map_number_and_id_hbox_.add(&map_number_and_id_vbox_2_, UI::Box::Resizing::kExpandBoth);
 	box_.add(&map_number_and_id_hbox_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-
-	// ---------- Game-specific stuff ----------
-
-	if (game) {
-		tribe_->add(pgettext("tribe", "Random"), "",
-		            g_image_cache->get("images/ui_fsmenu/random.png"), true,
-		            _("The tribe will be selected at random"));
-
-		bool first_pass = true;
-		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-			tribe_->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon), false,
-			            tribeinfo.tooltip);
-
-			// I here assume that all tribes use equivalents of the same starting
-			// conditions, and that their order is the same for all tribes
-			if (first_pass) {
-				uint8_t i = 0;
-				for (const auto& init : tribeinfo.initializations) {
-					if (init.required_map_tags.empty()) {
-						starting_condition_player_->add(init.descname, i, nullptr, i == 0, init.tooltip);
-						starting_condition_ai_->add(init.descname, i, nullptr, i == 0, init.tooltip);
-					}
-					++i;
-				}
-				first_pass = false;
-			}
-		}
-
-		ai_teams_->set_state(true);
-
-		box_.add(tribe_, UI::Box::Resizing::kExpandBoth);
-		box_.add_space(margin_);
-		box_.add(starting_condition_player_, UI::Box::Resizing::kExpandBoth);
-		box_.add_space(margin_);
-		box_.add(starting_condition_ai_, UI::Box::Resizing::kExpandBoth);
-		box_.add_space(margin_);
-		box_.add(ai_teams_, UI::Box::Resizing::kExpandBoth);
-		box_.add_space(margin_);
-	}
 
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(
@@ -598,6 +520,8 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 		mbox.run<UI::Panel::Returncodes>();
 	} else {
 		if (result) {
+			// Initialize with some good default values
+
 			const unsigned nr_players = map->get_nrplayers();
 			const unsigned plnum = std::rand() % nr_players;  // NOLINT
 
@@ -610,24 +534,15 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 			sp->set_map("", "", map_info.world_name, "", nr_players, false);
 			sp->set_scenario(false);
 			sp->set_player_number(plnum);
-			sp->set_win_condition_script("scripting/win_conditions/defeat_all.lua");
 			sp->set_peaceful_mode(false);
 			sp->set_custom_starting_positions(false);
 
 			for (unsigned p = 0; p < nr_players; ++p) {
-				if (p == plnum) {
-					sp->set_player_name(p, _("Player"));
-					const std::string& tribe = tribe_->get_selected();
-					sp->set_player_tribe(p, tribe, tribe.empty());
-					sp->set_player_team(p, 0);
-					sp->set_player_init(p, starting_condition_player_->get_selected());
-				} else {
-					sp->set_player_name(
-					   p, (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
-					sp->set_player_tribe(p, "", true);
-					sp->set_player_team(p, ai_teams_->get_state() ? 1 : 0);
-					sp->set_player_init(p, starting_condition_ai_->get_selected());
-				}
+				sp->set_player_name(p, p == plnum ? _("Player") :
+				   (boost::format(_("Computer %u")) % (p > plnum ? p : p + 1)).str());
+				sp->set_player_tribe(p, "", true);
+				sp->set_player_team(p, p == plnum ? 0 : 1);
+				sp->set_player_init(p, 0);
 			}
 		} else {
 			ok_button_.set_enabled(true);

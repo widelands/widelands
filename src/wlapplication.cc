@@ -1260,40 +1260,9 @@ void WLApplication::mainmenu() {
 				}
 				break;
 			}
-			case FullscreenMenuBase::MenuTarget::kRandomGame: {
-				Widelands::Game game;
-				SinglePlayerGameSettingsProvider sp;
-				UI::UniqueWindow::Registry r;
-
-				game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
-				game.world();
-				game.tribes();
-				EditorInteractive::load_world_units(nullptr, game);
-
-				MainMenuNewRandomMap m(*mm, r, 64, 64, true);
-				for (;;) {
-					if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-						// user pressed Cancel
-						break;
-					}
-					if (m.do_generate_map(game, nullptr, &sp)) {
-						need_to_reset = new_game(game, sp, true);
-						break;
-					} else {
-						// no starting positions found
-						UI::WLMessageBox mbox(
-						   mm.get(), _("Map Generation Error"),
-						   _("The random map generator was unable to generate a suitable map. "
-						     "This happens occasionally because the generator is still in beta stage. "
-						     "Please try again with slightly different settings."),
-						   UI::WLMessageBox::MBoxType::kOkCancel);
-						if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-							break;
-						}
-					}
-				}
+			case FullscreenMenuBase::MenuTarget::kRandomGame:
+				need_to_reset = new_random_game(*mm);
 				break;
-			}
 			case FullscreenMenuBase::MenuTarget::kExit:
 			default:
 				return;
@@ -1418,6 +1387,53 @@ void WLApplication::mainmenu_multiplayer(const FullscreenMenuMain& mp, const boo
 	g_sh->change_music("menu", 1000);
 }
 
+bool WLApplication::new_random_game(FullscreenMenuMain& fsmm) {
+	Widelands::Game game;
+	SinglePlayerGameSettingsProvider sp;
+	UI::UniqueWindow::Registry r;
+
+	game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
+	game.world();
+	game.tribes();
+	EditorInteractive::load_world_units(nullptr, game);
+
+	MainMenuNewRandomMap m(fsmm, r, 64, 64);
+	bool need_new_loader = false;
+	for (;;) {
+		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+			// user pressed Cancel
+			return false;
+		}
+		if (need_new_loader) {
+			game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
+			need_new_loader = false;
+		}
+		if (m.do_generate_map(game, nullptr, &sp)) {
+			game.remove_loader_ui();
+			bool canceled = false;
+			const bool result = new_game(game, sp, true, &canceled);
+			if (result || !canceled) {
+				return true;
+			}
+			// User pressed Back – show the random map dialog again
+			need_new_loader = true;
+		} else {
+			// no starting positions found
+			UI::WLMessageBox mbox(
+			   &fsmm, _("Map Generation Error"),
+			   _("The random map generator was unable to generate a suitable map. "
+				 "This happens occasionally because the generator is still in beta stage. "
+				 "Please try again with slightly different settings."),
+			   UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return false;
+			}
+		}
+	}
+
+	NEVER_HERE();
+}
+
 /**
  * Handle the "New game" menu option: Configure a single player game and
  * run it.
@@ -1427,18 +1443,19 @@ void WLApplication::mainmenu_multiplayer(const FullscreenMenuMain& mp, const boo
  */
 bool WLApplication::new_game(Widelands::Game& game,
                              SinglePlayerGameSettingsProvider& sp,
-                             const bool preconfigured) {
+                             const bool preconfigured,
+                             bool* canceled) {
 	FullscreenMenuBase::MenuTarget code = FullscreenMenuBase::MenuTarget::kNormalGame;
-	std::string map_theme, map_bg;
-	if (!preconfigured) {
-		FullscreenMenuLaunchSPG lgm(&sp);
-		code = lgm.run<FullscreenMenuBase::MenuTarget>();
-		if (code == FullscreenMenuBase::MenuTarget::kBack) {
-			return false;
+	FullscreenMenuLaunchSPG lgm(preconfigured ? &game : nullptr, &sp);
+	code = lgm.run<FullscreenMenuBase::MenuTarget>();
+	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+		if (canceled) {
+			*canceled = true;
 		}
-		map_theme = lgm.settings().settings().map_theme;
-		map_bg = lgm.settings().settings().map_background;
+		return false;
 	}
+	const std::string map_theme = lgm.settings().settings().map_theme;
+	const std::string map_bg = lgm.settings().settings().map_background;
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 
@@ -1458,13 +1475,11 @@ bool WLApplication::new_game(Widelands::Game& game,
 			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
 
-			if (!preconfigured) {
-				std::vector<std::string> tipstexts{"general_game", "singleplayer"};
-				if (sp.has_players_tribe()) {
-					tipstexts.push_back(sp.get_players_tribe());
-				}
-				game.create_loader_ui(tipstexts, false, map_theme, map_bg);
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			if (sp.has_players_tribe()) {
+				tipstexts.push_back(sp.get_players_tribe());
 			}
+			game.create_loader_ui(tipstexts, false, map_theme, map_bg);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 

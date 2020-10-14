@@ -183,7 +183,8 @@ struct WLApplication {
 	void mainmenu_multiplayer(const FullscreenMenuMain&, bool internet);
 	void mainmenu_editor();
 
-	bool new_game(Widelands::Game&, SinglePlayerGameSettingsProvider&, bool preconfigured);
+	bool new_random_game(FullscreenMenuMain&);
+	bool new_game(Widelands::Game&, SinglePlayerGameSettingsProvider&, bool preconfigured, bool* canceled = nullptr);
 	bool load_game(std::string filename = "");
 	bool campaign_game();
 	void replay();
