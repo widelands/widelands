@@ -38,7 +38,10 @@ struct ChatProvider;
  */
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*, ChatProvider&, Widelands::EditorGameBase& egbase);
+	FullscreenMenuLaunchMPG(GameSettingsProvider*,
+	                        GameController*,
+	                        ChatProvider&,
+	                        Widelands::EditorGameBase& egbase);
 	~FullscreenMenuLaunchMPG() override;
 
 	void think() override;
@@ -66,7 +69,7 @@ private:
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
 	GameChatPanel chat_;
-	Widelands::EditorGameBase& egbase_; // Not owned
+	Widelands::EditorGameBase& egbase_;  // Not owned
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };

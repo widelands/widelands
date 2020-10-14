@@ -37,7 +37,8 @@
 using Widelands::WidelandsMapLoader;
 
 FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const settings,
-                                                 GameController* const ctrl, Widelands::EditorGameBase& egbase)
+                                                 GameController* const ctrl,
+                                                 Widelands::EditorGameBase& egbase)
    : FullscreenMenuLoadMapOrGame(),
      checkbox_space_(20),
      // Less padding for big fonts; space is tight.
@@ -59,7 +60,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  UI::PanelStyle::kFsMenu, egbase),
+                  UI::PanelStyle::kFsMenu,
+                  egbase),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),

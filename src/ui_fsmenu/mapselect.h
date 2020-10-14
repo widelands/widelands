@@ -37,7 +37,9 @@ struct GameSettingsProvider;
  */
 class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuMapSelect(GameSettingsProvider*, GameController*, Widelands::EditorGameBase& egbase);
+	FullscreenMenuMapSelect(GameSettingsProvider*,
+	                        GameController*,
+	                        Widelands::EditorGameBase& egbase);
 
 	MapData const* get_map() const;
 	void think() override;

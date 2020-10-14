@@ -33,7 +33,13 @@
 #include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
 
-MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style, Widelands::EditorGameBase& egbase)
+MapDetails::MapDetails(Panel* parent,
+                       int32_t x,
+                       int32_t y,
+                       int32_t w,
+                       int32_t h,
+                       UI::PanelStyle style,
+                       Widelands::EditorGameBase& egbase)
    : UI::Panel(parent, x, y, w, h),
 
      style_(style),
@@ -212,7 +218,7 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 					   (boost::format("%s%s") % as_content(e.what(), style_) % description).str();
 					description =
 					   (boost::format("%s%s") % as_heading(_("Game data error"), style_) % description)
-						  .str();
+					      .str();
 					loadable = false;
 				}
 			}
