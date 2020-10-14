@@ -91,6 +91,8 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 	          << _(" --nosound            Starts the game with sound disabled.") << endl
 	          << endl
+	          << _(" --fail-on-lua-error  Force Widelands to crash when a Lua error occurs.") << endl
+	          << endl
 	          << _(" --nozip              Do not save files as binary zip archives.") << endl
 	          << endl
 	          << _(" --editor             Directly starts the Widelands editor.\n"
