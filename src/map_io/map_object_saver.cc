@@ -128,7 +128,7 @@ Serial MapObjectSaver::register_object(const MapObject& obj) {
 		} else if (obj.descr().type() >= MapObjectType::BOB) {
 			++nr_bobs_;
 		} else {
-			throw wexception("MapObjectSaver: Unknown MapObjectType %u", obj.descr().type());
+			throw wexception("MapObjectSaver: Unknown MapObjectType %u", static_cast<unsigned>(obj.descr().type()));
 		}
 		break;
 	}
