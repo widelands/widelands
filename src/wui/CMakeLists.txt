@@ -285,6 +285,8 @@ wl_library(wui
     stock_menu.h
     story_message_box.cc
     story_message_box.h
+    toolbar.cc
+    toolbar.h
     trainingsitewindow.cc
     trainingsitewindow.h
     tribal_encyclopedia.cc

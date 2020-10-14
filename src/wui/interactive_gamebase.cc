@@ -41,6 +41,7 @@
 #include "wui/game_summary.h"
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
+#include "wui/toolbar.h"
 
 namespace {
 
@@ -67,9 +68,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   34U,
+                   MainToolbar::kButtonSize,
                    10,
-                   34U,
+                   MainToolbar::kButtonSize,
                    /** TRANSLATORS: Title for a menu button in the game. This menu will show/hide
                       building spaces, census, statistics */
                    _("Show / Hide"),
@@ -80,9 +81,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                "dropdown_menu_main",
                0,
                0,
-               34U,
+               MainToolbar::kButtonSize,
                10,
-               34U,
+               MainToolbar::kButtonSize,
                /** TRANSLATORS: Title for the main menu button in the game */
                as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
                UI::DropdownType::kPictorialMenu,
@@ -92,9 +93,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                     "dropdown_menu_gamespeed",
                     0,
                     0,
-                    34U,
+                    MainToolbar::kButtonSize,
                     10,
-                    34U,
+                    MainToolbar::kButtonSize,
                     /** TRANSLATORS: Title for a menu button in the game. This menu will show
                        options o increase/decrease the gamespeed, and to pause the game */
                     _("Game Speed"),

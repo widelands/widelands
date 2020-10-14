@@ -58,6 +58,7 @@
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/shipwindow.h"
+#include "wui/toolbar.h"
 #include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
 #include "wui/warehousewindow.h"
@@ -97,85 +98,20 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 }  // namespace
 
-MainToolbar::MainToolbar(InfoPanel& parent)
-   : UI::Panel(&parent, 0, 0, parent.get_inner_w(), parent.get_inner_h()),
-     box(this, 0, 0, UI::Box::Horizontal),
-     on_top(false),
-     repeat_(0) {
-     parent.set_toolbar(*this);
-}
-
-void MainToolbar::change_imageset(const ToolbarImageset& images) {
-	imageset_ = images;
-	finalize();
-}
-
-void MainToolbar::finalize() {
-	// Set box size and get minimum height
-	int box_width, height;
-	box.get_desired_size(&box_width, &height);
-	box.set_size(box_width, height);
-
-	// Calculate repetition and width
-	repeat_ = 1;
-	int width = imageset_.left->width() + imageset_.center->width() + imageset_.right->width();
-	while (width < box.get_w()) {
-		++repeat_;
-		width += imageset_.left->width() + imageset_.right->width();
-	}
-	width += imageset_.left_corner->width() + imageset_.right_corner->width();
-
-	// Find the highest image
-	height = std::max(height, imageset_.left_corner->height());
-	height = std::max(height, imageset_.left->height());
-	height = std::max(height, imageset_.center->height());
-	height = std::max(height, imageset_.right->height());
-	height = std::max(height, imageset_.right_corner->height());
-
-	// Set size and position
-	set_size(width, height);
-	get_parent()->layout();
-
-	// Notify dropdowns
-	box.position_changed();
-}
-
-void MainToolbar::draw(RenderTarget& dst) {
-	int x = 0;
-	// Left corner
-	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.left_corner->height()), imageset_.left_corner);
-	x += imageset_.left_corner->width();
-	// Repeat left
-	for (int i = 0; i < repeat_; ++i) {
-		dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.left->height()), imageset_.left);
-		x += imageset_.left->width();
-	}
-	// Center
-	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.center->height()), imageset_.center);
-	x += imageset_.center->width();
-	// Repeat right
-	for (int i = 0; i < repeat_; ++i) {
-		dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.right->height()), imageset_.right);
-		x += imageset_.right->width();
-	}
-	// Right corner
-	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.right_corner->height()), imageset_.right_corner);
-}
-
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoverlay before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-     toolbar_(info_panel_),
+     toolbar_(*new MainToolbar(info_panel_)),
      mapviewmenu_(toolbar(),
                   "dropdown_menu_mapview",
                   0,
                   0,
-                  34U,
+                  MainToolbar::kButtonSize,
                   10,
-                  34U,
+                  MainToolbar::kButtonSize,
                   /** TRANSLATORS: Title for the map view menu button in the game */
                   _("Map View"),
                   UI::DropdownType::kPictorialMenu,
@@ -293,6 +229,10 @@ InteractiveBase::~InteractiveBase() {
 	if (road_building_mode_) {
 		abort_build_road();
 	}
+}
+
+UI::Box* InteractiveBase::toolbar() {
+	return &toolbar_.box;
 }
 
 void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
@@ -472,7 +412,7 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_.box, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
+	   new UI::Button(&toolbar_.box, name, 0, 0, MainToolbar::kButtonSize, MainToolbar::kButtonSize, UI::ButtonStyle::kWuiPrimary,
 	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
 	if (window) {
@@ -779,15 +719,11 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 
 	// Node information
 	std::string node_text("");
-	if (game == nullptr) {
-		// Always blit node information in the editor
+	if (game == nullptr || get_display_flag(dfDebug)) {
+		// Blit node information in the editor, and in debug mode also for games
 		static boost::format node_format("(%i, %i, %i)");
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
-	} else if (get_display_flag(dfDebug)) {
-		// Blit node information for games in debug mode - we're not interested in the height
-		static boost::format node_format("(%i, %i)");
-		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
 	info_panel_.set_coords_string(node_text);
 
@@ -1213,8 +1149,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 
 // Repositions the chat overlay
 void InteractiveBase::resize_chat_overlay() {
-	// 34 is the button height of the bottom menu
-	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - 34);
+	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - MainToolbar::kButtonSize);
 	chat_overlay_->recompute();
 }
 

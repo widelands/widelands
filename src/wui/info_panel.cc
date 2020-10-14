@@ -30,10 +30,9 @@
 #include "logic/message_queue.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
+#include "wui/toolbar.h"
 
 constexpr int8_t kSpacing = 4;
-
-constexpr int16_t kHeightUnit = 24;
 
 constexpr uint8_t kMaxMessages = 4;
 
@@ -111,7 +110,7 @@ on_top_(get_config_bool("toolbar_pos_on_top", false)),
 display_mode_(DisplayMode::kPinned),
 last_mouse_pos_(Vector2i(-1, -1)),
 toolbar_(nullptr),
-toggle_mode_(this, "mode", 0, 0, kHeightUnit, 8, kHeightUnit, _("Info Panel Visibility"),
+toggle_mode_(this, "mode", 0, 0, MainToolbar::kButtonSize, 8, MainToolbar::kButtonSize, _("Info Panel Visibility"),
                   UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu),
 text_time_speed_(this, 0, 0, 0, 0, "", UI::Align::kLeft, font_),
 text_fps_(this, 0, 0, 0, 0, "", UI::Align::kLeft, font_),
@@ -131,6 +130,7 @@ void InfoPanel::set_toolbar(MainToolbar& t) {
 	assert(!toolbar_);
 	toolbar_ = &t;
 	toolbar_->on_top = on_top_;
+	toolbar_->draw_background = false;
 	layout();
 }
 
@@ -143,7 +143,7 @@ inline bool InfoPanel::is_mouse_over_panel() const {
 		h = kSpacing;
 		break;
 	default:
-		h = kHeightUnit;
+		h = MainToolbar::kButtonSize;
 		break;
 	}
 	return last_mouse_pos_.x >= 0 && last_mouse_pos_.x <= get_w() && (on_top_ ?
@@ -154,6 +154,9 @@ inline bool InfoPanel::is_mouse_over_panel() const {
 void InfoPanel::set_textareas_visibility(bool v) {
 	for (UI::Textarea* t : {&text_time_speed_, &text_fps_, &text_coords_}) {
 		t->set_visible(v);
+	}
+	if (toolbar_) {
+		toolbar_->draw_background = !v;
 	}
 }
 
@@ -350,15 +353,15 @@ void InfoPanel::layout() {
 	toolbar_->set_pos(Vector2i((w - toolbar_->get_w()) / 2, on_top_ ? 0 : h - toolbar_->get_h()));
 	toolbar_->box.set_pos(Vector2i((toolbar_->get_w() - toolbar_->box.get_w()) / 2, on_top_ ? 0 : toolbar_->get_h() - toolbar_->box.get_h()));
 
-	const int16_t offset_y = (kHeightUnit - font_.size()) / 3 + (on_top_ ? 0 : get_h() - kHeightUnit);
+	const int16_t offset_y = (MainToolbar::kButtonSize - font_.size()) / 4 + kSpacing + (on_top_ ? 0 : get_h() - MainToolbar::kButtonSize);
 
-	text_coords_.set_size(w / 3, kHeightUnit);
+	text_coords_.set_size(w / 3, MainToolbar::kButtonSize);
 	text_coords_.set_pos(Vector2i(w - text_coords_.get_w() - kSpacing, offset_y));
 
-	text_time_speed_.set_size(w / 3, kHeightUnit);
+	text_time_speed_.set_size(w / 3, MainToolbar::kButtonSize);
 	text_time_speed_.set_pos(Vector2i(toggle_mode_.get_x() + toggle_mode_.get_w() + kSpacing, offset_y));
 
-	text_fps_.set_size(w / 3, kHeightUnit);
+	text_fps_.set_size(w / 3, MainToolbar::kButtonSize);
 	text_fps_.set_pos(Vector2i(toolbar_->get_x() + toolbar_->get_w() + kSpacing, offset_y));
 
 	toolbar_->move_to_top();
@@ -366,7 +369,7 @@ void InfoPanel::layout() {
 	int16_t message_offset = on_top_ ? toolbar_->box.get_h() : 0;
 	for (MessagePreview* m : messages_) {
 		m->move_to_top();
-		m->set_size(w / 3, kHeightUnit);
+		m->set_size(w / 3, MainToolbar::kButtonSize);
 		m->set_pos(Vector2i(w / 3, message_offset));
 		message_offset += m->get_h();
 	}
@@ -376,11 +379,6 @@ void InfoPanel::draw(RenderTarget& r) {
 	if (display_mode_ == DisplayMode::kMinimized) {
 		return;
 	}
-	Recti rect;
-	if (display_mode_ == DisplayMode::kOnMouse_Hidden) {
-		rect = Recti(0, on_top_ ? 0 : get_h() - kSpacing, get_w(), kSpacing);
-	} else {
-		rect = Recti(0, on_top_ ? 0 : get_h() - kHeightUnit, get_w(), kHeightUnit);
-	}
-	r.tile(rect, g_image_cache->get(std::string(kTemplateDir) + "wui/background.png"), Vector2i(0, 0));
+	const int h = display_mode_ == DisplayMode::kOnMouse_Hidden? kSpacing : MainToolbar::kButtonSize;
+	r.tile(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), g_image_cache->get(std::string(kTemplateDir) + "wui/background.png"), Vector2i(0, 0));
 }
