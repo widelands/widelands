@@ -467,8 +467,7 @@ struct NamedPanel : public Panel {
 	           int const nw,
 	           int const nh,
 	           const std::string& tooltip_text = std::string())
-	   : Panel(nparent, nx, ny, nw, nh, tooltip_text),
-	     name_(name) {
+	   : Panel(nparent, nx, ny, nw, nh, tooltip_text), name_(name) {
 	}
 
 	const std::string& get_name() const {
