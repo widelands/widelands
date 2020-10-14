@@ -54,8 +54,7 @@ function starting_infos()
 
    -- Teach building spaces
    campaign_message_box(initial_message_02, 200)
-
-   open_item_from_dropdown("dropdown_menu_showhide", 1)
+   show_item_from_dropdown("dropdown_menu_showhide", 1)
    local o = campaign_message_with_objective(initial_message_03, obj_initial_toggle_building_spaces)
 
    -- Wait for buildhelp to come on
