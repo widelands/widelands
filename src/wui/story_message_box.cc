@@ -72,6 +72,8 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	}
 	move_inside_parent();
 	textarea_.focus();
+
+	initialization_complete();
 }
 
 void StoryMessageBox::clicked_ok() {

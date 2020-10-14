@@ -61,6 +61,9 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	box.add(&subbox, UI::Box::Resizing::kFullSize);
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
+
+	think();
+	initialization_complete();
 }
 
 /*

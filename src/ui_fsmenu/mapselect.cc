@@ -167,6 +167,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
 	layout();
+
+	initialization_complete();
 }
 
 void FullscreenMenuMapSelect::layout() {

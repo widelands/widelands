@@ -71,6 +71,7 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 	set_center_panel(&box_);
 
 	layout();
+	initialization_complete();
 	tabs_.load_tab_contents();
 }
 

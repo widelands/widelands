@@ -57,15 +57,14 @@ Panel::Panel(Panel* const nparent,
              const int ny,
              const int nw,
              const int nh,
-             const std::string& tooltip_text,
-             const bool initially_not_thinking,
-             const bool initially_invisible)
-   : parent_(nparent),
+             const std::string& tooltip_text)
+   : initialized_(false),
+     parent_(nparent),
      first_child_(nullptr),
      last_child_(nullptr),
      mousein_child_(nullptr),
      focus_(nullptr),
-     flags_(pf_handle_mouse | pf_handle_keypresses),
+     flags_(pf_handle_mouse | pf_thinks | pf_visible | pf_handle_keypresses),
      x_(nx),
      y_(ny),
      w_(nw),
@@ -94,19 +93,14 @@ Panel::Panel(Panel* const nparent,
 	} else {
 		prev_ = next_ = nullptr;
 	}
-
-	if (!initially_invisible) {
-		flags_ |= pf_visible;
-	}
-	if (!initially_not_thinking) {
-		flags_ |= pf_thinks;
-	}
 }
 
 /**
  * Unlink the panel from the parent's queue
  */
 Panel::~Panel() {
+	initialized_ = false;
+
 	// Release pointers to this object
 	if (mousegrab_ == this) {
 		mousegrab_ = nullptr;
@@ -138,6 +132,13 @@ Panel::~Panel() {
 			parent_->last_child_ = prev_;
 		}
 	}
+}
+
+void Panel::initialization_complete() {
+	for (Panel* child = first_child_; child; child = child->next_) {
+		child->initialization_complete();
+	}
+	initialized_ = true;
 }
 
 /**
@@ -214,6 +215,8 @@ void Panel::logic_thread() {
  * clicked the window's close button or similar).
  */
 int Panel::do_run() {
+	assert(initialized_);
+
 	logic_thread_locked_ =
 	   LogicThreadState::kEndingConfirmed;  // don't start the logic thread ere we're ready
 
@@ -227,6 +230,7 @@ int Panel::do_run() {
 	Panel* forefather = this;
 	while (forefather->parent_ != nullptr) {
 		forefather = forefather->parent_;
+		assert(forefather->initialized_);
 	}
 
 	// Loop
@@ -679,7 +683,7 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
-	if (flags_ & pf_die) {
+	if (!initialized_ || (flags_ & pf_die)) {
 		return;
 	}
 
@@ -962,6 +966,8 @@ void Panel::set_thinks(bool const yes) {
  * Do NOT use this to delete a hierarchy of panels that have been modal.
  */
 void Panel::die() {
+	initialized_ = false;
+
 	flags_ &= ~pf_visible;
 	flags_ |= pf_die;
 
@@ -1046,13 +1052,20 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * \param dst RenderTarget for the parent Panel
  */
 void Panel::do_draw(RenderTarget& dst) {
+#if 1  // NOCOM
+	if (!initialized_) {
+		dst.fill_rect(Recti(x_, y_, w_, h_), RGBAColor(100, 100, 200, 100), BlendMode::Default);
+		return;
+	}
+#endif
+
+	if (!initialized_ || !is_visible()) {
+		return;
+	}
+
 	// Make sure the panel's size is sane. If it's bigger than 10000 it's likely a bug.
 	assert(desired_w_ <= std::max(10000, g_gr->get_xres()));
 	assert(desired_h_ <= std::max(10000, g_gr->get_yres()));
-
-	if (!is_visible()) {
-		return;
-	}
 
 	Recti outerrc;
 	Vector2i outerofs = Vector2i::zero();
@@ -1106,6 +1119,10 @@ inline Panel* Panel::child_at_mouse_cursor(int32_t const x, int32_t const y, Pan
  * window)
  */
 void Panel::do_mousein(bool const inside) {
+	if (!initialized_) {
+		return;
+	}
+
 	if (!inside && mousein_child_) {
 		mousein_child_->do_mousein(false);
 		mousein_child_ = nullptr;
@@ -1119,6 +1136,10 @@ void Panel::do_mousein(bool const inside) {
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (get_can_focus()) {
 		focus();
 	}
@@ -1140,6 +1161,10 @@ bool Panel::do_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 }
 
 bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mouse_pos) {
+	if (!initialized_) {
+		return false;
+	}
+
 	// Check if a child-panel is beneath the mouse and processes the event
 	for (Panel* child = first_child_; child; child = child->next_) {
 		if (!child->handles_mouse() || !child->is_visible()) {
@@ -1162,6 +1187,10 @@ bool Panel::do_mousewheel(uint32_t which, int32_t x, int32_t y, Vector2i rel_mou
 }
 
 bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
+	if (!initialized_) {
+		return false;
+	}
+
 	x -= lborder_;
 	y -= tborder_;
 	if (mousegrab_ != this) {
@@ -1177,6 +1206,10 @@ bool Panel::do_mouserelease(const uint8_t btn, int32_t x, int32_t y) {
 
 bool Panel::do_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff) {
+	if (!initialized_) {
+		return false;
+	}
+
 	x -= lborder_;
 	y -= tborder_;
 	if (mousegrab_ != this) {
@@ -1195,6 +1228,10 @@ bool Panel::do_mousemove(
  * If it doesn't process the key, we'll see if we can use the event.
  */
 bool Panel::do_key(bool const down, SDL_Keysym const code) {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (focus_ && focus_->do_key(down, code)) {
 		return true;
 	}
@@ -1241,6 +1278,10 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 }
 
 bool Panel::do_textinput(const std::string& text) {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (focus_ && focus_->do_textinput(text)) {
 		return true;
 	}
@@ -1253,6 +1294,10 @@ bool Panel::do_textinput(const std::string& text) {
 }
 
 bool Panel::do_tooltip() {
+	if (!initialized_) {
+		return false;
+	}
+
 	if (mousein_child_ && mousein_child_->do_tooltip()) {
 		return true;
 	}

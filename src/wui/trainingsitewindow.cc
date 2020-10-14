@@ -44,4 +44,7 @@ void TrainingSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted
 	get_tabs()->add("soldiers", g_image_cache->get(pic_tab_military),
 	                create_soldier_list(*get_tabs(), *ibase(), *training_site),
 	                _("Soldiers in training"));
+
+	think();
+	initialization_complete();
 }

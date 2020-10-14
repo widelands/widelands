@@ -66,6 +66,8 @@ InteractiveSpectator::InteractiveSpectator(Widelands::Game& g,
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		node_action(node_and_triangle);
 	});
+
+	initialization_complete();
 }
 
 void InteractiveSpectator::draw(RenderTarget& dst) {

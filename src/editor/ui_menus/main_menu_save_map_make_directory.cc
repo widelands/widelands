@@ -75,6 +75,8 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	cancel_button_.sigclicked.connect(
 	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
 	center_to_parent();
+
+	initialization_complete();
 }
 
 void MainMenuSaveMapMakeDirectory::start() {

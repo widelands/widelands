@@ -54,6 +54,8 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 
 	// Preselect the wares_in_warehouses tab
 	tabs->activate(2);
+
+	initialization_complete();
 }
 
 /*

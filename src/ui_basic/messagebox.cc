@@ -103,6 +103,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	set_inner_size(width, button_y + ok_button_->get_h() + margin);
 	center_to_parent();
 	focus();
+
+	initialization_complete();
 }
 
 /**

@@ -92,10 +92,8 @@ UniqueWindow::UniqueWindow(Panel* const parent,
                            UniqueWindow::Registry* const reg,
                            int32_t const w,
                            int32_t const h,
-                           const std::string& title,
-                           const bool initially_invisible,
-                           const bool initially_not_thinking)
-   : Window(parent, name, 0, 0, w, h, title, true, true), registry_(reg), usedefaultpos_(true) {
+                           const std::string& title)
+   : Window(parent, name, 0, 0, w, h, title), registry_(reg), usedefaultpos_(true) {
 	if (registry_) {
 		// delete registry_->window;
 		if (registry_->window) {
@@ -109,13 +107,6 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 			usedefaultpos_ = false;
 		}
 		registry_->opened();
-	}
-
-	if (!initially_invisible) {
-		set_visible(true);
-	}
-	if (!initially_not_thinking) {
-		set_thinks(true);
 	}
 }
 

@@ -65,6 +65,8 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 	layout();
 
 	table_.cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 void FullscreenMenuCampaignSelect::layout() {

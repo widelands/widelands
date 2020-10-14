@@ -57,6 +57,8 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
 	} catch (LuaError& err) {
 		textarea_->set_text(err.what());
 	}
+
+	initialization_complete();
 }
 
 }  // namespace UI

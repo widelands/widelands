@@ -60,6 +60,8 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& pare
 	box_.add(&text_area_, UI::Box::Resizing::kFullSize);
 
 	set_center_panel(&box_);
+
+	initialization_complete();
 }
 
 void EditorToolResizeOptionsMenu::update_dimensions() {

@@ -65,6 +65,9 @@ Scrollbar::Scrollbar(Panel* const parent,
      button_style_(g_style_manager->scrollbar_style(style)) {
 	set_thinks(true);
 	layout();
+
+	// This is such a low-level UI element that we can safely mark it initialized immediately
+	initialization_complete();
 }
 
 /**

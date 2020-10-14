@@ -305,6 +305,8 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	        "images/wui/fieldaction/menu_tab_buildport.png", _("Ports"));
 
 	update();
+
+	initialization_complete();
 }
 
 bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& player,

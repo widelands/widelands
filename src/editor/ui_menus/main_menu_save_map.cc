@@ -117,6 +117,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
 	layout();
+
+	initialization_complete();
 }
 
 /**

@@ -121,6 +121,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	pause_game(true);
 	set_thinks(false);
 	layout();
+
+	initialization_complete();
 }
 
 void GameMainMenuSaveGame::layout() {

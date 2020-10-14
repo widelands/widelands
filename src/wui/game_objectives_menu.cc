@@ -52,6 +52,8 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+
+	initialization_complete();
 }
 
 void GameObjectivesMenu::think() {

@@ -389,6 +389,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	add_languages_to_list(opt.language);
 	update_language_stats();
 	layout();
+
+	initialization_complete();
 }
 
 void FullscreenMenuOptions::layout() {

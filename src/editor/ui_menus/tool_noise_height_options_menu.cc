@@ -100,6 +100,8 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	                                                2 * label->get_h() + 7 * vspacing());
 
 	set_inner_size(box_.get_w() + 2 * hmargin(), box_.get_h() + 2 * vspacing());
+
+	initialization_complete();
 }
 
 void EditorToolNoiseHeightOptionsMenu::update_lower() {

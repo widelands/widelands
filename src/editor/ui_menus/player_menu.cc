@@ -82,6 +82,8 @@ public:
 
 		ok_.sigclicked.connect([this]() { ok(); });
 		cancel_.sigclicked.connect([this]() { cancel(); });
+
+		initialization_complete();
 	}
 
 	void ok() {
@@ -221,6 +223,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 	// Init button states
 	set_starting_pos_clicked(1);
 	layout();
+
+	initialization_complete();
 }
 
 void EditorPlayerMenu::layout() {

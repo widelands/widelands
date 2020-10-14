@@ -107,6 +107,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	}
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 void FullscreenMenuLoadGame::think() {

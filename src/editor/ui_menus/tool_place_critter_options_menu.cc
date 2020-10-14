@@ -53,6 +53,8 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
+
+	initialization_complete();
 }
 
 EditorToolPlaceCritterOptionsMenu::~EditorToolPlaceCritterOptionsMenu() {

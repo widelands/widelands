@@ -171,6 +171,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 	layout();
 	// set focus to chat input
 	chat_.focus_edit();
+
+	initialization_complete();
 }
 
 void FullscreenMenuInternetLobby::layout() {

@@ -286,6 +286,8 @@ void InputQueueDisplay::update_priority_buttons() {
 		pos.y += PriorityButtonSize;
 		priority_radiogroup_->add_button(
 		   this, pos, g_image_cache->get(pic_priority_low), _("Lowest priority"));
+
+		initialization_complete();
 	}
 
 	int32_t priority = -1;
@@ -390,6 +392,9 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	increase_max_fill_->set_repeating(true);
 	decrease_max_fill_->set_repeating(true);
 	compute_max_fill_buttons_enabled_state();
+
+	// Initialize the new buttons
+	initialization_complete();
 }
 
 /**

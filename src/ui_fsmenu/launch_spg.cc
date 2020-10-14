@@ -36,6 +36,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	title_.set_text(_("Launch game"));
 	ok_.set_enabled(settings_->can_launch());
+
+	initialization_complete();
 }
 
 /**

@@ -112,6 +112,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	box_.set_size(box_.get_w(), box_.get_h() + vspacing() + cur_selection_.get_h());
 	set_inner_size(get_inner_w(), box_.get_h() + 1 * vmargin());
 	update();
+
+	initialization_complete();
 }
 
 void EditorToolChangeResourcesOptionsMenu::update_change_by() {

@@ -44,7 +44,7 @@ constexpr int kMessageBodyY = kButtonSize + 3 * kPadding + kTableHeight;
 
 GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(
-        &plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox"), true, true),
+        &plr, "messages", &registry, kWindowWidth, kWindowHeight, _("Messages: Inbox")),
      message_body(this,
                   kPadding,
                   kMessageBodyY,
@@ -149,8 +149,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	togglemodebtn_->sigclicked.connect([this]() { toggle_mode(); });
 	centerviewbtn_->sigclicked.connect([this]() { center_view(); });
 
-	set_visible(true);
-	set_thinks(true);
+	initialization_complete();
 }
 
 /**

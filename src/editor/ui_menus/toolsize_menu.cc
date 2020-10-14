@@ -65,6 +65,8 @@ EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+
+	initialization_complete();
 }
 
 void EditorToolsizeMenu::update(uint32_t const val) {

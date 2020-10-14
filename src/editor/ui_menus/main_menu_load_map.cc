@@ -41,6 +41,8 @@ MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent, UI::UniqueWindow::Re
 
 	fill_table();
 	layout();
+
+	initialization_complete();
 }
 
 void MainMenuLoadMap::clicked_ok() {

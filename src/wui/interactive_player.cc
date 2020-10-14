@@ -237,6 +237,8 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 			   expedition_port_spaces_.emplace(note.ship, note.ship->exp_port_spaces().front());
 		   }
 	   });
+
+	initialization_complete();
 }
 
 void InteractivePlayer::add_statistics_menu() {

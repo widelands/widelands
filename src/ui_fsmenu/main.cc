@@ -170,6 +170,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	focus();
 	set_labels();
 	layout();
+
+	initialization_complete();
 }
 
 void FullscreenMenuMain::set_labels() {

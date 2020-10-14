@@ -388,6 +388,9 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	}
 
 	set_title((boost::format("(%s)") % construction_site->building().descname()).str());
+
+	think();
+	initialization_complete();
 }
 
 void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::StockPolicy p) {

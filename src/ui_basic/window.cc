@@ -100,18 +100,14 @@ Window::Window(Panel* const parent,
                int32_t const y,
                uint32_t const w,
                uint32_t const h,
-               const std::string& title,
-               const bool initially_not_thinking,
-               const bool initially_invisible)
+               const std::string& title)
    : NamedPanel(parent,
                 name,
                 x,
                 y,
                 w + kVerticalBorderThickness * 2,
                 kTopBorderThickness + h + kBottomBorderThickness,
-                "",
-                true,
-                true),
+                ""),
      is_minimal_(false),
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
      dragging_(false),
@@ -184,13 +180,6 @@ Window::Window(Panel* const parent,
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& note) { on_resolution_changed_note(note); });
-
-	if (!initially_invisible) {
-		set_visible(true);
-	}
-	if (!initially_not_thinking) {
-		set_thinks(true);
-	}
 }
 
 void Window::update_toolbar_buttons() {

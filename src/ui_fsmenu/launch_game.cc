@@ -110,6 +110,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	add_behaviour_to_widgets();
 
 	layout();
+
+	initialization_complete();
 }
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {

@@ -194,6 +194,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 			   }
 		   }
 	   });
+
+	initialization_complete();
 }
 
 const std::string

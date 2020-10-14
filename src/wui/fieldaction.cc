@@ -327,6 +327,8 @@ void FieldActionWindow::init() {
 	// Will only do something if we explicitly set another fast click panel
 	// than the first button
 	warp_mouse_to_fastclick_panel();
+
+	initialization_complete();
 }
 
 static bool suited_for_targeting(Widelands::PlayerNumber p,

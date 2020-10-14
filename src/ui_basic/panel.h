@@ -86,9 +86,7 @@ public:
 	      int32_t const ny,
 	      int const nw,
 	      int const nh,
-	      const std::string& tooltip_text = std::string(),
-	      bool initially_not_thinking = false,
-	      bool initially_invisible = false);
+	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
 	boost::signals2::signal<void()> clicked;
@@ -310,6 +308,14 @@ public:
 
 	static void logic_thread();
 
+	/*
+	 * Every panel that is semantically a toplevel panel needs to call
+	 * this at least once, ideally near the end of the most derived class's
+	 * constructor. This will make this panel and all its children visible
+	 * and allow them to start thinking and handling user input.
+	 */
+	void initialization_complete();
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -349,6 +355,8 @@ protected:
 	virtual std::vector<Recti> focus_overlay_rects();
 
 private:
+	bool initialized_;
+
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
 	}
@@ -458,10 +466,8 @@ struct NamedPanel : public Panel {
 	           int32_t const ny,
 	           int const nw,
 	           int const nh,
-	           const std::string& tooltip_text = std::string(),
-	           bool initially_not_thinking = false,
-	           bool initially_invisible = false)
-	   : Panel(nparent, nx, ny, nw, nh, tooltip_text, initially_not_thinking, initially_invisible),
+	           const std::string& tooltip_text = std::string())
+	   : Panel(nparent, nx, ny, nw, nh, tooltip_text),
 	     name_(name) {
 	}
 

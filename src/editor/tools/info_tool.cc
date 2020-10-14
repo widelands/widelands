@@ -224,5 +224,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 
 	multiline_textarea->set_text(as_richtext(buf));
 
+	w->initialization_complete();
+
 	return 0;
 }

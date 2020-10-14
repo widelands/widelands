@@ -329,6 +329,8 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent,
 
 	nr_edit_box_changed();
 	center_to_parent();
+
+	initialization_complete();
 }
 
 // Helper function for setting the highest number of allowed players dependent on the map size

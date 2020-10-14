@@ -70,6 +70,8 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
 		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
 		btn->sigclicked.connect([this]() { pressedButton(FullscreenMenuBase::MenuTarget::kBack); });
+
+		initialization_complete();
 	}
 
 	void think() override {
@@ -133,6 +135,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 			settings_->set_player_number(0);
 		}
 	}
+
+	initialization_complete();
 }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() = default;

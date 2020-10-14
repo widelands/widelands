@@ -126,6 +126,8 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
 	joingame_.set_enabled(false);
 	layout();
+
+	initialization_complete();
 }
 
 void FullscreenMenuNetSetupLAN::layout() {

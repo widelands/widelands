@@ -157,6 +157,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		map_clicked(node_and_triangle, false);
 	});
+
+	initialization_complete();
 }
 
 void EditorInteractive::add_main_menu() {

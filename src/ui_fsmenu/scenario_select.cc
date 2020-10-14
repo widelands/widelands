@@ -148,6 +148,8 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 	layout();
 
 	table_.cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 void FullscreenMenuScenarioSelect::layout() {
