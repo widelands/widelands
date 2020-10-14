@@ -331,7 +331,11 @@ bool ShipFleet::get_path(const PortDock& start, const PortDock& end, Path& path)
 	const PortPath& pp(portpath_bidir(startidx, endidx, reverse));
 
 	if (pp.cost < 0) {
+		// try filling in pp's data
 		connect_port(get_owner()->egbase(), startidx);
+	}
+
+	if (pp.cost < 0) {
 		return false;
 	}
 
