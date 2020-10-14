@@ -248,8 +248,8 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 		ferries_.erase(it);
 		it = std::find(ferries_.begin(), ferries_.end(), ferry);
 		if (it != ferries_.end()) {
-			log_err_time(egbase.get_gametime(),
-			             "FerryFleet %u: Multiple instances of ferry %u were in the ferry fleet\n",
+			log_warn_time(egbase.get_gametime(),
+			             "FerryFleet %u: Multiple instances of ferry %u were in the ferry fleet",
 			             serial(), ferry->serial());
 		}
 	}
