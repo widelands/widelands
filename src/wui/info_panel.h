@@ -19,15 +19,18 @@
 #ifndef WL_WUI_INFO_PANEL_H
 #define WL_WUI_INFO_PANEL_H
 
+#include <list>
 #include <memory>
 
 #include "logic/message_id.h"
-#include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "wui/logmessage.h"
 
 class InfoPanel;
 class InteractiveBase;
+class MainToolbar;
+
 namespace Widelands {
 struct Message;
 struct MessageQueue;
@@ -69,33 +72,45 @@ public:
 	void think() override;
 	void layout() override;
 
+	void set_toolbar(MainToolbar&);
+
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_mouserelease(uint8_t, int32_t, int32_t) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
-	bool handle_mousewheel(uint32_t, int32_t, int32_t) override;
 
 private:
+	friend class MessagePreview;
+
 	InteractiveBase& ibase_;
 	const UI::FontStyleInfo& font_;
 
-	bool minimized_;
-	void toggle_minimized();
+	bool on_top_;
+
+	enum class DisplayMode { kPinned, kMinimized, kOnMouse_Visible, kOnMouse_Hidden };
+	DisplayMode display_mode_;
+	void toggle_mode();
+
+	Vector2i last_mouse_pos_;
+	bool is_mouse_over_panel() const;
+	void set_textareas_visibility(bool);
 
 	void update_time_speed_string();
 
-	UI::Button toggle_;
+	MainToolbar* toolbar_;
+
+	UI::Dropdown<DisplayMode> toggle_mode_;
 	UI::Textarea text_time_speed_, text_fps_, text_coords_;
 
-	friend class MessagePreview;
-	static constexpr uint8_t kMaxMessages = 4;
-	std::unique_ptr<MessagePreview> messages_[kMaxMessages];
+	std::list<MessagePreview*> messages_;
+	size_t index_of(const MessagePreview&) const;
 	void pop_message(MessagePreview&);
 	void push_message(MessagePreview&);
 	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 	const Widelands::MessageQueue* message_queue_;
 	std::unique_ptr<Widelands::MessageId> last_message_id_;
 
+	bool draw_real_time_;
 	std::string time_string_, speed_string_;
 };
 

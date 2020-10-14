@@ -91,69 +91,69 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 }  // namespace
 
-InteractiveBase::Toolbar::Toolbar(Panel* parent)
-   : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
+MainToolbar::MainToolbar(InfoPanel& parent)
+   : UI::Panel(&parent, 0, 0, parent.get_inner_w(), parent.get_inner_h()),
      box(this, 0, 0, UI::Box::Horizontal),
-     repeat(0) {
+     on_top(false),
+     repeat_(0) {
+     parent.set_toolbar(*this);
 }
 
-void InteractiveBase::Toolbar::change_imageset(const ToolbarImageset& images) {
-	imageset = images;
+void MainToolbar::change_imageset(const ToolbarImageset& images) {
+	imageset_ = images;
 	finalize();
 }
 
-void InteractiveBase::Toolbar::finalize() {
+void MainToolbar::finalize() {
 	// Set box size and get minimum height
 	int box_width, height;
 	box.get_desired_size(&box_width, &height);
 	box.set_size(box_width, height);
 
 	// Calculate repetition and width
-	repeat = 1;
-	int width = imageset.left->width() + imageset.center->width() + imageset.right->width();
+	repeat_ = 1;
+	int width = imageset_.left->width() + imageset_.center->width() + imageset_.right->width();
 	while (width < box.get_w()) {
-		++repeat;
-		width += imageset.left->width() + imageset.right->width();
+		++repeat_;
+		width += imageset_.left->width() + imageset_.right->width();
 	}
-	width += imageset.left_corner->width() + imageset.right_corner->width();
+	width += imageset_.left_corner->width() + imageset_.right_corner->width();
 
 	// Find the highest image
-	height = std::max(height, imageset.left_corner->height());
-	height = std::max(height, imageset.left->height());
-	height = std::max(height, imageset.center->height());
-	height = std::max(height, imageset.right->height());
-	height = std::max(height, imageset.right_corner->height());
+	height = std::max(height, imageset_.left_corner->height());
+	height = std::max(height, imageset_.left->height());
+	height = std::max(height, imageset_.center->height());
+	height = std::max(height, imageset_.right->height());
+	height = std::max(height, imageset_.right_corner->height());
 
 	// Set size and position
 	set_size(width, height);
-	set_pos(
-	   Vector2i((get_parent()->get_inner_w() - width) >> 1, get_parent()->get_inner_h() - height));
-	box.set_pos(Vector2i((get_w() - box.get_w()) / 2, get_h() - box.get_h()));
+	get_parent()->layout();
 
 	// Notify dropdowns
 	box.position_changed();
 }
 
-void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
+void MainToolbar::draw(RenderTarget& dst) {
 	int x = 0;
 	// Left corner
-	dst.blit(Vector2i(x, get_h() - imageset.left_corner->height()), imageset.left_corner);
-	x += imageset.left_corner->width();
+	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.left_corner->height()), imageset_.left_corner);
+	x += imageset_.left_corner->width();
 	// Repeat left
-	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - imageset.left->height()), imageset.left);
-		x += imageset.left->width();
+	for (int i = 0; i < repeat_; ++i) {
+		dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.left->height()), imageset_.left);
+		x += imageset_.left->width();
 	}
 	// Center
-	dst.blit(Vector2i(x, get_h() - imageset.center->height()), imageset.center);
-	x += imageset.center->width();
+	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.center->height()), imageset_.center);
+	x += imageset_.center->width();
 	// Repeat right
-	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - imageset.right->height()), imageset.right);
-		x += imageset.right->width();
+	for (int i = 0; i < repeat_; ++i) {
+		dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.right->height()), imageset_.right);
+		x += imageset_.right->width();
 	}
 	// Right corner
-	dst.blit(Vector2i(x, get_h() - imageset.right_corner->height()), imageset.right_corner);
+	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.right_corner->height()), imageset_.right_corner);
 }
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
@@ -162,7 +162,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoverlay before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-     toolbar_(this),
+     toolbar_(info_panel_),
      mapviewmenu_(toolbar(),
                   "dropdown_menu_mapview",
                   0,
@@ -760,7 +760,7 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	info_panel_.set_coords_string(node_text);
 
 	// In-game clock and FPS
-	info_panel_.set_time_string((game != nullptr) && get_config_bool("game_clock", true) ? gametimestring(egbase().get_gametime(), true) : "");
+	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime(), true) : "");
 	info_panel_.set_fps_string(get_display_flag(dfDebug) ? (boost::format("%5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps()).str() : "");
 }
 

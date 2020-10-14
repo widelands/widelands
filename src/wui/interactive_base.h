@@ -48,6 +48,27 @@ struct WorkareaPreview {
 
 enum class RoadBuildingType { kRoad, kWaterway };
 
+/// A horizontal menu bar embellished with background graphics
+class MainToolbar : public UI::Panel {
+public:
+	MainToolbar(InfoPanel&);
+
+	/// Sets the actual size and position of the toolbar
+	void finalize();
+	void draw(RenderTarget& dst) override;
+	void change_imageset(const ToolbarImageset& images);
+
+	/// A row of buttons and dropdown menus
+	UI::Box box;
+	bool on_top;
+
+private:
+	/// The set of background images
+	ToolbarImageset imageset_;
+	/// How often the left and right images get repeated, calculated from the width of the box
+	int repeat_;
+};
+
 /**
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.
@@ -325,23 +346,7 @@ private:
 	ChatOverlay* chat_overlay_;
 
 	/// A horizontal menu bar embellished with background graphics
-	struct Toolbar : UI::Panel {
-		Toolbar(UI::Panel* parent);
-
-		/// Sets the actual size and position of the toolbar
-		void finalize();
-		void draw(RenderTarget& dst) override;
-		void change_imageset(const ToolbarImageset& images);
-
-		/// A row of buttons and dropdown menus
-		UI::Box box;
-
-	private:
-		/// The set of background images
-		ToolbarImageset imageset;
-		/// How often the left and right images get repeated, calculated from the width of the box
-		int repeat;
-	} toolbar_;
+	MainToolbar toolbar_;
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;

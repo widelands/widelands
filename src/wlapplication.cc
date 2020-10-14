@@ -834,6 +834,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("single_watchwin", false);
 	get_config_bool("ctrl_zoom", false);
 	get_config_bool("game_clock", true);
+	get_config_bool("toolbar_pos_on_top", false);
 	get_config_bool("numpad_diagonalscrolling", false);
 	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);

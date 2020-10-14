@@ -228,7 +228,18 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      single_watchwin_(&box_ingame_, Vector2i::zero(), _("Use single watchwindow mode")),
      /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
      ctrl_zoom_(&box_ingame_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
-     game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
+     game_clock_(&box_ingame_, Vector2i::zero(), _("Display time in the in-game info panel")),
+     toolbar_pos_(&box_ingame_,
+                  "dropdown_toolbar_pos",
+                  0,
+                  0,
+                  100,
+                  50,
+                  24,
+                  _("Toolbar Position"),
+                  UI::DropdownType::kTextual,
+                  UI::PanelStyle::kWui,
+                  UI::ButtonStyle::kWuiMenu),
      numpad_diagonalscrolling_(
         &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
@@ -289,6 +300,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_newgame_.add(&show_workarea_overlap_, UI::Box::Resizing::kFullSize);
 
 	// In-Game
+	box_ingame_.add(&toolbar_pos_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&auto_roadbuild_mode_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&transparent_chat_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&single_watchwin_, UI::Box::Resizing::kFullSize);
@@ -357,6 +369,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 		   true);
 	}
 
+	toolbar_pos_.add(_("Top"), true);
+	toolbar_pos_.add(_("Bottom"), false);
+	toolbar_pos_.select(opt.toolbar_pos_on_top);
+
 	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
 
@@ -375,6 +391,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	single_watchwin_.set_state(opt.single_watchwin);
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
+	toolbar_pos_.select(opt.toolbar_pos_on_top);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 
 	// New Game options
@@ -628,6 +645,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.single_watchwin = single_watchwin_.get_state();
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
+	os_.toolbar_pos_on_top = toolbar_pos_.get_selected();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 
 	// New Game options
@@ -704,6 +722,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
+	opt.toolbar_pos_on_top = opt_section_.get_bool("toolbar_pos_on_top", false);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 
 	// New Game options
@@ -748,6 +767,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
+	opt_section_.set_bool("toolbar_pos_on_top", opt.toolbar_pos_on_top);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 
 	// New Game options

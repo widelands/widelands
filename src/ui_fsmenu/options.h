@@ -69,6 +69,7 @@ public:
 		bool single_watchwin;
 		bool ctrl_zoom;
 		bool game_clock;
+		bool toolbar_pos_on_top;
 		bool numpad_diagonalscrolling;
 		int32_t display_flags;
 
@@ -164,6 +165,7 @@ private:
 	UI::Checkbox single_watchwin_;
 	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
+	UI::Dropdown<bool> toolbar_pos_;
 	UI::Checkbox numpad_diagonalscrolling_;
 
 	OptionsCtrl::OptionsStruct os_;
