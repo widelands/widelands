@@ -15,7 +15,10 @@ local wc_name = "Artifacts"
 local wc_descname = _("Artifacts")
 local wc_version = 1
 local wc_desc = _ "Search for ancient artifacts. Once all of them are found, the team who owns most of them will win the game."
-local wc_artifacts = _"Artifacts owned"
+local wc_artifacts = "Artifacts owned"
+-- This needs to be exactly like wc_artifacts, but localized, because wc_artifacts
+-- will be used as the key to fetch the translation in C++
+local wc_artifacts_i18n = _"Artifacts owned"
 
 -- Table of all artifacts to conquer
 local artifact_fields = {}

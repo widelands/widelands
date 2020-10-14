@@ -54,6 +54,8 @@ protected:
 	std::string what_;
 };
 
+extern bool g_fail_on_lua_error;
+
 #define wexception(...) WException(__FILE__, __LINE__, __VA_ARGS__)
 
 // Throws a wexception for unreachable code.

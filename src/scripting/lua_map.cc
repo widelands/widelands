@@ -5233,7 +5233,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		const Widelands::PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()) {
@@ -6211,7 +6211,7 @@ int LuaShip::get_last_portdock(lua_State* L) {
 // UNTESTED sink states
 int LuaShip::get_state(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_ship_state()) {
 		case Widelands::Ship::ShipStates::kTransport:
 			lua_pushstring(L, "transport");
@@ -6241,7 +6241,7 @@ int LuaShip::get_state(lua_State* L) {
 
 int LuaShip::get_scouting_direction(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_scouting_direction()) {
 		case Widelands::WalkingDir::WALK_NE:
 			lua_pushstring(L, "ne");
@@ -6305,7 +6305,7 @@ int LuaShip::set_scouting_direction(lua_State* L) {
 */
 int LuaShip::get_island_explore_direction(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		switch (get(L, egbase)->get_island_explore_direction()) {
 		case Widelands::IslandExploreDirection::kCounterClockwise:
 			lua_pushstring(L, "ccw");
@@ -6979,7 +6979,7 @@ int LuaField::set_resource_amount(lua_State* L) {
 	}
 
 	auto* map = egbase.mutable_map();
-	if (is_a(Widelands::Game, &egbase)) {
+	if (egbase.is_game()) {
 		map->set_resources(c, amount);
 	} else {
 		// in editor, reset also initial amount

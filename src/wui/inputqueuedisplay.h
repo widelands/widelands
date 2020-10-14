@@ -26,7 +26,7 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
 
-class InteractiveGameBase;
+class InteractiveBase;
 
 namespace Widelands {
 class Building;
@@ -48,7 +48,7 @@ public:
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
-	                  InteractiveGameBase& igb,
+	                  InteractiveBase& igb,
 	                  Widelands::Building& building,
 	                  const Widelands::InputQueue& queue,
 	                  bool no_capacity_buttons = false,
@@ -57,7 +57,7 @@ public:
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
-	                  InteractiveGameBase&,
+	                  InteractiveBase&,
 	                  Widelands::ConstructionSite&,
 	                  Widelands::WareWorker,
 	                  Widelands::DescriptionIndex,
@@ -69,7 +69,7 @@ public:
 	void draw(RenderTarget&) override;
 
 private:
-	InteractiveGameBase& igb_;
+	InteractiveBase& interactive_base_;
 	Widelands::Building& building_;
 	const Widelands::InputQueue* queue_;
 	const Widelands::ProductionsiteSettings* settings_;
