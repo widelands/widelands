@@ -1,0 +1,42 @@
+From 13f4a2faf2d4dc41f2f41009432111ca9a81a20a Mon Sep 17 00:00:00 2001
+From: GunChleoc <fios@foramnagaidhlig.net>
+Date: Mon, 12 Oct 2020 09:33:47 +0100
+Subject: [PATCH] Zap luaopen_eris compiler warning
+
+---
+ src/third_party/eris/eris.h   | 3 +++
+ src/third_party/eris/lualib.h | 3 +++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/src/third_party/eris/eris.h b/src/third_party/eris/eris.h
+index 7faf5e4785..f664f8fd2d 100644
+--- a/src/third_party/eris/eris.h
++++ b/src/third_party/eris/eris.h
+@@ -147,6 +147,9 @@ LUA_API void eris_set_setting(lua_State *L, const char *name, int value);
+  *     persisted data returned by persist(). Returns the unpersisted value.
+  *     If only one value is given, the perms table is assumed to be empty.
+  */
++#ifndef luaopen_eris_declaration
++#define luaopen_eris_declaration
+ LUA_API int luaopen_eris(lua_State* L);
++#endif
+ 
+ #endif
+diff --git a/src/third_party/eris/lualib.h b/src/third_party/eris/lualib.h
+index 516161c59a..415d48e6c8 100644
+--- a/src/third_party/eris/lualib.h
++++ b/src/third_party/eris/lualib.h
+@@ -48,7 +48,10 @@ LUAMOD_API int (luaopen_debug) (lua_State *L);
+ LUAMOD_API int (luaopen_package) (lua_State *L);
+ 
+ #define LUA_ERISLIBNAME	"eris"
++#ifndef luaopen_eris_declaration
++#define luaopen_eris_declaration
+ LUAMOD_API int (luaopen_eris) (lua_State *L);
++#endif
+ 
+ /* open all previous libraries */
+ LUALIB_API void (luaL_openlibs) (lua_State *L);
+-- 
+2.17.1
+
