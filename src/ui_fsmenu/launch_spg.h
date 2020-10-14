@@ -28,7 +28,7 @@
 
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
+	FullscreenMenuLaunchSPG(GameSettingsProvider*, Widelands::EditorGameBase& egbase, GameController* = nullptr);
 	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;
@@ -47,6 +47,7 @@ private:
 
 	void update();
 	void enforce_player_names_and_tribes(Widelands::Map& map);
+	Widelands::EditorGameBase& egbase_; // Not owned
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

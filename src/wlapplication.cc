@@ -1364,14 +1364,13 @@ void WLApplication::mainmenu_multiplayer(const FullscreenMenuMain& mp, const boo
  */
 bool WLApplication::new_game() {
 	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLaunchSPG lgm(&sp);
+	Widelands::Game game;
+	FullscreenMenuLaunchSPG lgm(&sp, game);
 	const FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		return false;
 	}
-
-	Widelands::Game game;
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 

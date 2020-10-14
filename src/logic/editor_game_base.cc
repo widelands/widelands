@@ -78,6 +78,9 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      game_tips_(nullptr),
      tmp_fs_(nullptr) {
 
+	// Ensure descriptions are registered
+	descriptions();
+
 	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
 	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
 }
@@ -189,15 +192,14 @@ const Descriptions& EditorGameBase::descriptions() const {
 	return *const_cast<EditorGameBase*>(this)->mutable_descriptions();
 }
 
-Descriptions* EditorGameBase::mutable_descriptions(bool for_minimap) {
+Descriptions* EditorGameBase::mutable_descriptions() {
 	if (!descriptions_) {
 		// Lazy initialization of Descriptions. We need to create the pointer to the
 		// descriptions immediately though, because the lua scripts need to have access
 		// to descriptions through this method already.
 		ScopedTimer timer("Registering the descriptions took %ums");
-		Notifications::publish(UI::NoteLoadingMessage(_("Loading world and tribes…")));
 		assert(lua_);
-		descriptions_.reset(new Descriptions(lua_.get(), for_minimap));
+		descriptions_.reset(new Descriptions(lua_.get()));
 	}
 	return descriptions_.get();
 }

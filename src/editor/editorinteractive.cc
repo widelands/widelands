@@ -569,7 +569,6 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 	}
 
-	const Widelands::Descriptions& descriptions = ebase.descriptions();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (draw_immovables_) {
@@ -592,7 +591,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
 			const std::string& immname =
-			   descriptions.get_resource_descr(field.fcoords.field->get_resources())
+			   ebase.descriptions().get_resource_descr(field.fcoords.field->get_resources())
 			      ->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_image_cache->get(immname);

@@ -37,7 +37,7 @@ class GameDetails : public UI::Box {
 public:
 	enum class Mode { kSavegame, kReplay };
 
-	GameDetails(Panel* parent, UI::PanelStyle style, Mode mode);
+	GameDetails(Panel* parent, UI::PanelStyle style, Mode mode, Widelands::EditorGameBase& egbase);
 
 	/// Reset the data
 	void clear();
@@ -71,7 +71,7 @@ private:
 	// Used to render map preview
 	std::string last_game_;
 	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
-	Widelands::EditorGameBase egbase_;
+	Widelands::EditorGameBase& egbase_; // Not owned
 };
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H

@@ -29,9 +29,11 @@
 #include "ui_fsmenu/mapselect.h"
 
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
+												 Widelands::EditorGameBase& egbase,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
-     player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
+     player_setup(&individual_content_box, settings, standard_element_height_, padding_),
+egbase_(egbase) {
 
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	title_.set_text(_("Launch game"));
@@ -57,7 +59,7 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 		return false;
 	}
 
-	FullscreenMenuMapSelect msm(settings_, nullptr);
+	FullscreenMenuMapSelect msm(settings_, nullptr, egbase_);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
