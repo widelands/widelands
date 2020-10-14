@@ -120,7 +120,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->focus();
 	fill_data();
 
-	players_table_->set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_status(a, b); });
+	players_table_->set_column_compare(
+	   2, [this](uint32_t a, uint32_t b) { return compare_status(a, b); });
 	players_table_->set_sort_column(2);
 	players_table_->set_sort_descending(false);
 	players_table_->sort();
@@ -138,7 +139,8 @@ bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my) {
 }
 
 bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t index2) const {
-	const std::vector<Widelands::PlayerEndStatus>& all_statuses = game_.player_manager()->get_players_end_status();
+	const std::vector<Widelands::PlayerEndStatus>& all_statuses =
+	   game_.player_manager()->get_players_end_status();
 
 	const uintptr_t a = (*players_table_)[index1];
 	const uintptr_t b = (*players_table_)[index2];
