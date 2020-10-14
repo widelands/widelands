@@ -27,19 +27,6 @@
 
 namespace Widelands {
 
-int32_t for_sorting(PlayerEndResult p) {
-	switch (p) {
-	case PlayerEndResult::kWon:
-		return 1;
-	case PlayerEndResult::kLost:
-		return 2;
-	case PlayerEndResult::kResigned:
-		return 3;
-	default:
-		NEVER_HERE();
-	}
-}
-
 PlayersManager::PlayersManager(EditorGameBase& egbase) : egbase_(egbase), number_of_players_(0) {
 	memset(players_, 0, sizeof(players_));
 }

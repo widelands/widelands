@@ -120,6 +120,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->focus();
 	fill_data();
 
+	players_table_->set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_status(a, b); });
 	players_table_->set_sort_column(2);
 	players_table_->set_sort_descending(false);
 	players_table_->sort();
@@ -134,6 +135,36 @@ bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my) {
 	}
 
 	return UI::Window::handle_mousepress(btn, mx, my);
+}
+
+bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t index2) const {
+	const std::vector<Widelands::PlayerEndStatus>& all_statuses = game_.player_manager()->get_players_end_status();
+
+	const uintptr_t a = (*players_table_)[index1];
+	const uintptr_t b = (*players_table_)[index2];
+
+	assert(a < all_statuses.size());
+	assert(b < all_statuses.size());
+
+	const Widelands::PlayerEndStatus p1 = all_statuses[a];
+	const Widelands::PlayerEndStatus p2 = all_statuses[b];
+
+	if (p1.result == p2.result) {
+		// We want to use the time as tie-breaker: The first player to lose sorts last
+		return p1.time > p2.time;
+	} else if (p1.result == Widelands::PlayerEndResult::kWon) {
+		// Winners sort first
+		return true;
+	} else if (p1.result == Widelands::PlayerEndResult::kResigned) {
+		// Resigned players sort last
+		return false;
+	} else if (p2.result == Widelands::PlayerEndResult::kWon) {
+		return false;
+	} else if (p2.result == Widelands::PlayerEndResult::kResigned) {
+		return true;
+	}
+
+	NEVER_HERE();
 }
 
 void GameSummaryScreen::fill_data() {
@@ -195,7 +226,6 @@ void GameSummaryScreen::fill_data() {
 			break;
 		}
 		te.set_string(2, stat_str);
-		te.set_for_sorting(2, Widelands::for_sorting(pes.result));
 		// Time
 		te.set_string(3, gametimestring(pes.time));
 	}

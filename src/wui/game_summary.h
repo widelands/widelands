@@ -46,6 +46,7 @@ private:
 	void continue_clicked();
 	void player_selected(uint32_t idx);
 	std::string parse_player_info(std::string info);
+	bool compare_status(uint32_t, uint32_t) const;
 
 	Widelands::Game& game_;
 	uint32_t desired_speed_;

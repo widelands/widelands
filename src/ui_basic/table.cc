@@ -761,9 +761,7 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {
 	EntryRecord& ea = get_record(a);
 	EntryRecord& eb = get_record(b);
-	return (ea.get_for_sorting(column) == eb.get_for_sorting(column)) ?
-	          (ea.get_string(column) < eb.get_string(column)) :
-	          (ea.get_for_sorting(column) < eb.get_for_sorting(column));
+	return ea.get_string(column) < eb.get_string(column);
 }
 
 Table<void*>::EntryRecord::EntryRecord(void* const e)
@@ -783,14 +781,6 @@ void Table<void*>::EntryRecord::set_string(uint8_t const col, const std::string&
 
 	data_.at(col).d_picture = nullptr;
 	data_.at(col).d_string = str;
-}
-void Table<void*>::EntryRecord::set_for_sorting(uint8_t col, int32_t value) {
-	assert(col < data_.size());
-	data_.at(col).for_sorting = value;
-}
-int32_t Table<void*>::EntryRecord::get_for_sorting(uint8_t col) const {
-	assert(col < data_.size());
-	return data_.at(col).for_sorting;
 }
 const Image* Table<void*>::EntryRecord::get_picture(uint8_t const col) const {
 	assert(col < data_.size());
