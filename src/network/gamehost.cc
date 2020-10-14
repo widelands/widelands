@@ -830,10 +830,9 @@ void GameHost::send(ChatMessage msg) {
 	// Whether this is a public (0), personal (1), or team (2) message (see protocol definition)
 	int msg_type = 0;
 	// Figure out who to send the message to
-	if (msg.recipient.empty()) {
-		// No recipient, so it is a broadcast. Send to everyone
-		// Nothing to do here
-	} else {
+	// If there is no recipient, it is a broadcast. Send to everyone
+	if (!msg.recipient.empty()) {
+		// There is a recipient, find it
 		msg_type = 1;
 		// Add the sender to the recipients so it gets a copy of the message
 		if (msg.sender.empty()) {
@@ -858,7 +857,7 @@ void GameHost::send(ChatMessage msg) {
 				// an error message back to the sender
 				msg.sender.clear();
 				msg.playern = -2;
-				// TODO(Notabilis): Maybe make this a command so it can be localized on the client
+				// TODO(Notabilis): Make this a command so it can be localized on the client
 				msg.msg = "Failed to send message: Recipient \"";
 				msg.msg += msg.recipient + "\" could not be found!";
 			} else {
@@ -983,7 +982,7 @@ int32_t GameHost::check_client(const std::string& name) {
 	for (; i < d->settings.users.size(); ++i) {
 		const UserSettings& user = d->settings.users.at(i);
 		if (user.position == UserSettings::not_connected()) {
-			// Ignore users thats are not yet fully or not anymore connected
+			// Ignore users that are not fully connected yet or who lost/broke the connection
 			continue;
 		}
 		if (user.name == name) {
