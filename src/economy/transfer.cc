@@ -199,19 +199,20 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		if (ware_ && location == &curflag && route_.get_nrsteps() >= 2) {
 			Flag& nextnextflag(route_.get_flag(game_, 2));
 			if (nextflag.get_roadbase(nextnextflag) == nullptr) {
-				assert(is_a(Warehouse, nextflag.get_building()));
+				assert(nextflag.get_building());
+				assert(nextflag.get_building()->descr().type() == MapObjectType::WAREHOUSE);
 				return nextflag.get_building();
 			}
 		}
 	}
 
 	// Now decide where we want to go
-	if (dynamic_cast<Flag const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::FLAG) {
 		assert(&route_.get_flag(game_, 0) == location);
 
 		// special rule to get wares into buildings
 		if (ware_ && route_.get_nrsteps() == 1) {
-			if (dynamic_cast<Building const*>(destination)) {
+			if (destination && destination->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				assert(&route_.get_flag(game_, 1) == &destflag);
 
 				return destination;

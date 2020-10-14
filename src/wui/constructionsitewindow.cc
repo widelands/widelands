@@ -102,7 +102,7 @@ void ConstructionSiteWindow::FakeWaresDisplay::draw_ware(RenderTarget& dst,
 	dst.blit(ware_position(ware), pic);
 }
 
-ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
+ConstructionSiteWindow::ConstructionSiteWindow(InteractiveBase& parent,
                                                UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
                                                bool avoid_fastclick,
@@ -122,7 +122,7 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
 }
 
 void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
+	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
 	assert(construction_site != nullptr);
 	set_building_descr_for_help(&construction_site->building());
 
@@ -139,18 +139,18 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->nr_dropout_waresqueues(); ++i) {
-		box.add(new InputQueueDisplay(&box, 0, 0, *igbase(), *construction_site,
+		box.add(new InputQueueDisplay(&box, 0, 0, *ibase(), *construction_site,
 		                              *construction_site->get_dropout_waresqueue(i), true, true));
 	}
 	for (uint32_t i = 0; i < construction_site->nr_consume_waresqueues(); ++i) {
 		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_consume_waresqueue(i)));
+		   &box, 0, 0, *ibase(), *construction_site, *construction_site->get_consume_waresqueue(i)));
 	}
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
 
 	if (construction_site->get_settings()) {
-		const bool can_act = igbase()->can_act(construction_site->owner().player_number());
+		const bool can_act = ibase()->can_act(construction_site->owner().player_number());
 		// Create the settings. Since we don't access an actual building, we create
 		// a simplified faksimile of the later building window that contains only
 		// the relevant options.
@@ -166,14 +166,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			assert(ps->ware_queues.size() == prodsite->input_wares().size());
 			for (const auto& pair : prodsite->input_wares()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWARE, pair.first);
+				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWARE, pair.first);
 				settings_box.add(queue);
 				cs_ware_queues_.push_back(queue);
 			}
 			assert(ps->worker_queues.size() == prodsite->input_workers().size());
 			for (const auto& pair : prodsite->input_workers()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *igbase(), *construction_site, Widelands::wwWORKER, pair.first);
+				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWORKER, pair.first);
 				settings_box.add(queue);
 				cs_ware_queues_.push_back(queue);
 			}
@@ -195,14 +195,22 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
 				cs_soldier_capacity_increase_->set_enabled(can_act);
 				cs_soldier_capacity_decrease_->sigclicked.connect([this, ts]() {
-					igbase()->game().send_player_change_soldier_capacity(
-					   *construction_site_.get(igbase()->egbase()),
-					   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
+					if (game_) {
+						game_->send_player_change_soldier_capacity(
+						   *construction_site_.get(ibase()->egbase()),
+						   SDL_GetModState() & KMOD_CTRL ? 0 : ts->desired_capacity - 1);
+					} else {
+						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+					}
 				});
 				cs_soldier_capacity_increase_->sigclicked.connect([this, ts]() {
-					igbase()->game().send_player_change_soldier_capacity(
-					   *construction_site_.get(igbase()->egbase()),
-					   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
+					if (game_) {
+						game_->send_player_change_soldier_capacity(
+						   *construction_site_.get(ibase()->egbase()),
+						   SDL_GetModState() & KMOD_CTRL ? ts->max_capacity : ts->desired_capacity + 1);
+					} else {
+						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+					}
 				});
 				soldier_capacity_box.add(cs_soldier_capacity_decrease_);
 				soldier_capacity_box.add(
@@ -215,8 +223,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			                               _("Stop this building’s work after completion"));
 			cs_stopped_->clickedto.connect([this, ps](bool stop) {
 				if (stop != ps->stopped) {
-					igbase()->game().send_player_start_stop_building(
-					   *construction_site_.get(igbase()->egbase()));
+					if (game_) {
+						game_->send_player_start_stop_building(
+						   *construction_site_.get(ibase()->egbase()));
+					} else {
+						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+					}
 				}
 			});
 			settings_box.add(cs_stopped_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -242,14 +254,22 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
 			cs_soldier_capacity_increase_->set_enabled(can_act);
 			cs_soldier_capacity_decrease_->sigclicked.connect([this, ms]() {
-				igbase()->game().send_player_change_soldier_capacity(
-				   *construction_site_.get(igbase()->egbase()),
-				   SDL_GetModState() & KMOD_CTRL ? 1 : ms->desired_capacity - 1);
+				if (game_) {
+					game_->send_player_change_soldier_capacity(
+					   *construction_site_.get(ibase()->egbase()),
+					   SDL_GetModState() & KMOD_CTRL ? 1 : ms->desired_capacity - 1);
+				} else {
+					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+				}
 			});
 			cs_soldier_capacity_increase_->sigclicked.connect([this, ms]() {
-				igbase()->game().send_player_change_soldier_capacity(
-				   *construction_site_.get(igbase()->egbase()),
-				   SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
+				if (game_) {
+					game_->send_player_change_soldier_capacity(
+					   *construction_site_.get(ibase()->egbase()),
+					   SDL_GetModState() & KMOD_CTRL ? ms->max_capacity : ms->desired_capacity + 1);
+				} else {
+					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+				}
 			});
 			soldier_capacity_box.add(cs_soldier_capacity_decrease_);
 			soldier_capacity_box.add(
@@ -273,10 +293,14 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 			if (can_act) {
 				cs_prefer_heroes_rookies_->changedto.connect([this](int32_t state) {
-					igbase()->game().send_player_militarysite_set_soldier_preference(
-					   *construction_site_.get(igbase()->egbase()),
-					   state ? Widelands::SoldierPreference::kRookies :
-					           Widelands::SoldierPreference::kHeroes);
+					if (game_) {
+						game_->send_player_militarysite_set_soldier_preference(
+						   *construction_site_.get(ibase()->egbase()),
+						   state ? Widelands::SoldierPreference::kRookies :
+						           Widelands::SoldierPreference::kHeroes);
+					} else {
+						NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+					}
 				});
 			}
 			settings_box.add_space(8);
@@ -338,8 +362,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				                    _("Start an expedition from this port after completion"));
 				cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
 					if (launch != ws->launch_expedition) {
-						igbase()->game().send_player_start_or_cancel_expedition(
-						   *construction_site_.get(igbase()->egbase()));
+						if (game_) {
+							game_->send_player_start_or_cancel_expedition(
+							   *construction_site_.get(ibase()->egbase()));
+						} else {
+							NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+						}
 					}
 				});
 				settings_box.add(cs_launch_expedition_, UI::Box::Resizing::kFullSize);
@@ -363,22 +391,30 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 }
 
 void ConstructionSiteWindow::change_policy(Widelands::WareWorker ww, Widelands::StockPolicy p) {
-	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
+	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
 	assert(construction_site);
 	upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 	assert(ws);
 	if (ww == Widelands::wwWARE) {
 		for (const auto& pair : ws->ware_preferences) {
 			if (cs_warehouse_wares_->ware_selected(pair.first)) {
-				igbase()->game().send_player_set_stock_policy(
-				   *construction_site, Widelands::wwWARE, pair.first, p);
+				if (game_) {
+					game_->send_player_set_stock_policy(
+					   *construction_site, Widelands::wwWARE, pair.first, p);
+				} else {
+					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+				}
 			}
 		}
 	} else {
 		for (const auto& pair : ws->worker_preferences) {
 			if (cs_warehouse_workers_->ware_selected(pair.first)) {
-				igbase()->game().send_player_set_stock_policy(
-				   *construction_site, Widelands::wwWORKER, pair.first, p);
+				if (game_) {
+					game_->send_player_set_stock_policy(
+					   *construction_site, Widelands::wwWORKER, pair.first, p);
+				} else {
+					NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+				}
 			}
 		}
 	}
@@ -394,14 +430,14 @@ void ConstructionSiteWindow::think() {
 	// existance.
 	BuildingWindow::think();
 
-	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
+	Widelands::ConstructionSite* construction_site = construction_site_.get(ibase()->egbase());
 	if (construction_site == nullptr) {
 		return;
 	}
 
 	progress_->set_state(construction_site->get_built_per64k());
 
-	const bool can_act = igbase()->can_act(construction_site->owner().player_number());
+	const bool can_act = ibase()->can_act(construction_site->owner().player_number());
 	// InputQueueDisplay and FakeWaresDisplay update themselves – we need to refresh the other
 	// settings
 	if (upcast(Widelands::ProductionsiteSettings, ps, construction_site->get_settings())) {

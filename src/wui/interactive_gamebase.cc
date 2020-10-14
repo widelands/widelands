@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/multithreading.h"
 #include "graphic/font_handler.h"
@@ -35,8 +34,6 @@
 #include "logic/player.h"
 #include "network/gamehost.h"
 #include "wlapplication_options.h"
-#include "wui/constructionsitewindow.h"
-#include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_client_disconnected.h"
 #include "wui/game_exit_confirm_box.h"
@@ -44,12 +41,6 @@
 #include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
 #include "wui/interactive_player.h"
-#include "wui/militarysitewindow.h"
-#include "wui/productionsitewindow.h"
-#include "wui/shipwindow.h"
-#include "wui/trainingsitewindow.h"
-#include "wui/unique_window_handler.h"
-#include "wui/warehousewindow.h"
 
 namespace {
 
@@ -110,33 +101,6 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                     UI::DropdownType::kPictorialMenu,
                     UI::PanelStyle::kWui,
                     UI::ButtonStyle::kWuiPrimary) {
-	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
-	   [this](const Widelands::NoteBuilding& note) {
-		   switch (note.action) {
-		   case Widelands::NoteBuilding::Action::kFinishWarp: {
-			   if (upcast(
-			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
-				   const Widelands::Coords coords = building->get_position();
-				   // Check whether the window is wanted
-				   if (wanted_building_windows_.count(coords.hash()) == 1) {
-					   const WantedBuildingWindow& wanted_building_window =
-					      *wanted_building_windows_.at(coords.hash());
-					   UI::UniqueWindow* building_window =
-					      show_building_window(coords, true, wanted_building_window.show_workarea);
-					   building_window->set_pos(wanted_building_window.window_position);
-					   if (wanted_building_window.minimize) {
-						   building_window->minimize();
-					   }
-					   building_window->set_pinned(wanted_building_window.pin);
-					   wanted_building_windows_.erase(coords.hash());
-				   }
-			   }
-		   } break;
-		   default:
-			   break;
-		   }
-	   });
-
 	if (chat_provider_ != nullptr) {
 		chat_overlay()->set_chat_provider(*chat_provider_);
 	}
@@ -569,73 +533,6 @@ void InteractiveGameBase::toggle_mainmenu() {
 	mainmenu_.toggle();
 }
 
-void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
-                                                     const Vector2i point,
-                                                     bool was_minimal,
-                                                     bool was_pinned) {
-	wanted_building_windows_.insert(std::make_pair(
-	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
-	                     point, was_minimal, was_pinned, has_workarea_preview(coords)))));
-}
-
-UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
-                                                            bool avoid_fastclick,
-                                                            bool workarea_preview_wanted) {
-	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
-	upcast(Widelands::Building, building, immovable);
-	assert(building);
-	UI::UniqueWindow::Registry& registry =
-	   unique_windows().get_registry((boost::format("building_%d") % building->serial()).str());
-
-	switch (building->descr().type()) {
-	case Widelands::MapObjectType::CONSTRUCTIONSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
-			new ConstructionSiteWindow(*this, registry,
-			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
-			                           avoid_fastclick, workarea_preview_wanted);
-		};
-		break;
-	case Widelands::MapObjectType::DISMANTLESITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick] {
-			new DismantleSiteWindow(
-			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
-		};
-		break;
-	case Widelands::MapObjectType::MILITARYSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
-			new MilitarySiteWindow(*this, registry, *dynamic_cast<Widelands::MilitarySite*>(building),
-			                       avoid_fastclick, workarea_preview_wanted);
-		};
-		break;
-	case Widelands::MapObjectType::PRODUCTIONSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
-			new ProductionSiteWindow(*this, registry,
-			                         *dynamic_cast<Widelands::ProductionSite*>(building),
-			                         avoid_fastclick, workarea_preview_wanted);
-		};
-		break;
-	case Widelands::MapObjectType::TRAININGSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
-			new TrainingSiteWindow(*this, registry, *dynamic_cast<Widelands::TrainingSite*>(building),
-			                       avoid_fastclick, workarea_preview_wanted);
-		};
-		break;
-	case Widelands::MapObjectType::WAREHOUSE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
-			new WarehouseWindow(*this, registry, *dynamic_cast<Widelands::Warehouse*>(building),
-			                    avoid_fastclick, workarea_preview_wanted);
-		};
-		break;
-	// TODO(sirver,trading): Add UI for market.
-	default:
-		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
-		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());
-		NEVER_HERE();
-	}
-	NoteThreadSafeFunction::instantiate([&registry]() { registry.create(); }, true);
-	return registry.window;
-}
-
 /**
  * See if we can reasonably open a ship window at the current selection position.
  * If so, do it and return true; otherwise, return false.
@@ -662,13 +559,6 @@ bool InteractiveGameBase::try_show_ship_window() {
 	return false;
 }
 
-void InteractiveGameBase::show_ship_window(Widelands::Ship* ship) {
-	UI::UniqueWindow::Registry& registry =
-	   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
-	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
-	registry.create();
-}
-
 void InteractiveGameBase::show_game_summary() {
 	NoteThreadSafeFunction::instantiate(
 	   [this]() {
@@ -683,7 +573,7 @@ void InteractiveGameBase::show_game_summary() {
 }
 
 bool InteractiveGameBase::show_game_client_disconnected() {
-	assert(is_a(GameHost, get_game()->game_controller()));
+	assert(dynamic_cast<GameHost*>(get_game()->game_controller()) != nullptr);
 	if (!client_disconnected_.window) {
 		if (upcast(GameHost, host, get_game()->game_controller())) {
 			new GameClientDisconnected(this, client_disconnected_, host);

@@ -34,9 +34,9 @@
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
+#include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 #include "wui/soldiercapacitycontrol.h"
 
 using Widelands::Soldier;
@@ -365,7 +365,7 @@ bool SoldierPanel::handle_mousepress(uint8_t btn, int32_t x, int32_t y) {
  * List of soldiers \ref MilitarySiteWindow and \ref TrainingSiteWindow
  */
 struct SoldierList : UI::Box {
-	SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands::Building& building);
+	SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building);
 
 	const SoldierControl* soldiers() const;
 
@@ -375,7 +375,7 @@ private:
 	void set_soldier_preference(int32_t changed_to);
 	void think() override;
 
-	InteractiveGameBase& igbase_;
+	InteractiveBase& ibase_;
 	Widelands::Building& building_;
 	const UI::FontStyle font_style_;
 	SoldierPanel soldierpanel_;
@@ -383,13 +383,13 @@ private:
 	UI::Textarea infotext_;
 };
 
-SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands::Building& building)
+SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building)
    : UI::Box(&parent, 0, 0, UI::Box::Vertical),
 
-     igbase_(igb),
+     ibase_(ib),
      building_(building),
      font_style_(UI::FontStyle::kLabel),
-     soldierpanel_(*this, igb.egbase(), building),
+     soldierpanel_(*this, ib.egbase(), building),
      infotext_(this, _("Click soldier to send away")) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -418,7 +418,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 
-	bool can_act = igbase_.can_act(building_.owner().player_number());
+	bool can_act = ibase_.can_act(building_.owner().player_number());
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		soldier_preference_.add_button(buttons, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
@@ -443,7 +443,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 		}
 	}
 	buttons->add_inf_space();
-	buttons->add(create_soldier_capacity_control(*buttons, igb, building));
+	buttons->add(create_soldier_capacity_control(*buttons, ib, building));
 	add(buttons, UI::Box::Resizing::kFullSize);
 }
 
@@ -453,7 +453,7 @@ const SoldierControl* SoldierList::soldiers() const {
 
 void SoldierList::think() {
 	// Only update the soldiers pref radio if player is spectator
-	if (igbase_.can_act(building_.owner().player_number())) {
+	if (ibase_.can_act(building_.owner().player_number())) {
 		return;
 	}
 	if (upcast(Widelands::MilitarySite, ms, &building_)) {
@@ -485,25 +485,30 @@ void SoldierList::mouseover(const Soldier* soldier) {
 
 void SoldierList::eject(const Soldier* soldier) {
 	uint32_t const capacity_min = soldiers()->min_soldier_capacity();
-	bool can_act = igbase_.can_act(building_.owner().player_number());
+	bool can_act = ibase_.can_act(building_.owner().player_number());
 	bool over_min = capacity_min < soldiers()->present_soldiers().size();
 
 	if (can_act && over_min) {
-		igbase_.game().send_player_drop_soldier(building_, soldier->serial());
+		if (Widelands::Game* game = ibase_.get_game()) {
+			game->send_player_drop_soldier(building_, soldier->serial());
+		} else {
+			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		}
 	}
 }
 
 void SoldierList::set_soldier_preference(int32_t changed_to) {
-#ifndef NDEBUG
-	upcast(Widelands::MilitarySite, ms, &building_);
-	assert(ms);
-#endif
-	igbase_.game().send_player_militarysite_set_soldier_preference(
-	   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
-	                                Widelands::SoldierPreference::kHeroes);
+	assert(building_.descr().type() == Widelands::MapObjectType::MILITARYSITE);
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_militarysite_set_soldier_preference(
+		   building_, changed_to == 0 ? Widelands::SoldierPreference::kRookies :
+		                                Widelands::SoldierPreference::kHeroes);
+	} else {
+		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+	}
 }
 
 UI::Panel*
-create_soldier_list(UI::Panel& parent, InteractiveGameBase& igb, Widelands::Building& building) {
-	return new SoldierList(parent, igb, building);
+create_soldier_list(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building) {
+	return new SoldierList(parent, ib, building);
 }

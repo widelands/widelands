@@ -80,7 +80,7 @@ void MapSaver::save() {
 	timer_message += "' took %ums";
 	ScopedTimer timer(timer_message);
 
-	bool is_game = is_a(Game, &egbase_);
+	const bool is_game = egbase_.is_game();
 
 	auto set_progress_message = [](std::string text, int step) {
 		Notifications::publish(UI::NoteLoadingMessage(
