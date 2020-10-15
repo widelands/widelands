@@ -20,7 +20,10 @@ local wc_desc = _ (
    "You get points for precious wares in your warehouses. The player with " ..
    "the highest number of wares at the end of 4 hours wins the game."
 )
-local wc_points = _"Points"
+local wc_points = "Points"
+-- This needs to be exactly like wc_points, but localized, because wc_points
+-- will be used as the key to fetch the translation in C++
+local wc_points_i18n = _"Points"
 local r = {
    name = wc_name,
    description = wc_desc,
