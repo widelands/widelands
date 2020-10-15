@@ -87,11 +87,15 @@ void SinglePlayerGameSettingsProvider::set_custom_starting_positions(bool c) {
 
 void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
                                                const std::string& mapfilename,
+                                               const std::string& map_theme,
+                                               const std::string& map_bg,
                                                uint32_t const maxplayers,
                                                bool const savegame) {
 	s.mapname = mapname;
 	s.mapfilename = mapfilename;
 	s.savegame = savegame;
+	s.map_background = map_bg;
+	s.map_theme = map_theme;
 	s.players.resize(maxplayers);
 
 	set_player_number(0);
@@ -262,6 +266,7 @@ void SinglePlayerGameSettingsProvider::set_player_number(uint8_t const number) {
 		set_player_name(number, position.name);
 
 		set_player(settings().playernum, position);
+		set_player_name(settings().playernum, player.name);
 		s.playernum = number;
 	}
 }
