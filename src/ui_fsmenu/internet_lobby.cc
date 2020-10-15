@@ -54,29 +54,29 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
 
      // Left column content
      label_clients_online_(&left_column_, 0, 0, 0, 0, _("Clients online:")),
-     clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kWui),
-     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kWui),
+     clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
      // Right column content
      label_opengames_(&right_column_, 0, 0, 0, 0, _("Open Games:")),
-     opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kWui),
+     opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      joingame_(&right_column_,
                "join_game",
                0,
                0,
                0,
                0,
-               UI::ButtonStyle::kWuiSecondary,
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      servername_label_(&right_column_, 0, 0, 0, 0, _("Name of your server:")),
-     servername_(&right_column_, 0, 0, 0, UI::PanelStyle::kWui),
+     servername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      hostgame_(&right_column_,
                "host_game",
                0,
                0,
                0,
                0,
-               UI::ButtonStyle::kWuiSecondary,
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
      prev_clientlist_len_(1000),
      new_client_fx_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen")),
@@ -417,7 +417,7 @@ bool FullscreenMenuInternetLobby::wait_for_ip() {
 			   _("Widelands was unable to get the IP address of the server in time. "
 			     "There seems to be a network problem, either on your side or on the side "
 			     "of the server.\n"));
-			UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("Connection Timed Out"), warning,
+			UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, _("Connection Timed Out"), warning,
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 		}

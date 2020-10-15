@@ -37,7 +37,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                                    GameSettingsProvider* const settings,
                                                    GameController* const ctrl)
    : UI::Window(&fsmm,
-                UI::WindowStyle::kWui,
+                UI::WindowStyle::kFsMenu,
                 "launch_game",
                 fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
@@ -74,8 +74,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                              standard_element_height_,
                              "",
                              UI::DropdownType::kTextual,
-                             UI::PanelStyle::kWui,
-                             UI::ButtonStyle::kWuiMenu),
+                             UI::PanelStyle::kFsMenu,
+                             UI::ButtonStyle::kFsMenuMenu),
      peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
      custom_starting_positions_(&map_box_, Vector2i::zero(), _("Custom starting positions")),
      ok_(&map_box_,
@@ -84,7 +84,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
          0,
          standard_element_width_,
          standard_element_height_,
-         UI::ButtonStyle::kWuiPrimary,
+         UI::ButtonStyle::kFsMenuPrimary,
          _("Start game")),
      back_(&map_box_,
            "back",
@@ -92,7 +92,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
            0,
            standard_element_width_,
            standard_element_height_,
-           UI::ButtonStyle::kWuiSecondary,
+           UI::ButtonStyle::kFsMenuSecondary,
            _("Back")),
      // Variables and objects used in the menu
      settings_(settings),
@@ -103,8 +103,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
-
-	do_not_layout_on_resolution_change();
 
 	lua_ = new LuaInterface();
 	add_all_widgets();

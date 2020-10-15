@@ -40,8 +40,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                       LoadOrSaveGame::FileType::kReplay :
                       (gsp->settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
                                                      LoadOrSaveGame::FileType::kGameSinglePlayer),
-                   UI::PanelStyle::kWui,
-                   UI::WindowStyle::kWui,
+                   UI::PanelStyle::kFsMenu,
+                   UI::WindowStyle::kFsMenu,
                    true),
 
      is_replay_(is_replay),

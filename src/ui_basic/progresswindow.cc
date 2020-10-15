@@ -50,7 +50,7 @@ ProgressWindow::ProgressWindow(const std::string& theme, const std::string& back
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme),
-     style_(g_style_manager->progressbar_style(UI::PanelStyle::kWui)) {
+     style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {

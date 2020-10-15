@@ -31,11 +31,11 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
                  0,
                  UI::Scrollbar::kSize,
                  0,
-                 UI::PanelStyle::kWui,
+                 UI::PanelStyle::kFsMenu,
                  "",
                  UI::Align::kLeft,
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kWui) {
+     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
 
 	constexpr int kPadding = 4;
 	add(&name_label_, UI::Box::Resizing::kFullSize);
@@ -46,8 +46,8 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 void ScenarioDetails::update(const ScenarioData& scenariodata) {
 	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
 	                      as_heading(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"),
-	                                 UI::PanelStyle::kWui, true) %
-	                      as_content(scenariodata.descname, UI::PanelStyle::kWui))
+	                                 UI::PanelStyle::kFsMenu, true) %
+	                      as_content(scenariodata.descname, UI::PanelStyle::kFsMenu))
 	                        .str());
 
 	if (scenariodata.playable) {
@@ -59,15 +59,15 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 		         you need plural forms here, please let us know. */
 		      _("Authors");
 		std::string description =
-		   (boost::format("%s%s") % as_heading(authors_heading, UI::PanelStyle::kWui) %
-		    as_content(scenariodata.authors.get_names(), UI::PanelStyle::kWui))
+		   (boost::format("%s%s") % as_heading(authors_heading, UI::PanelStyle::kFsMenu) %
+		    as_content(scenariodata.authors.get_names(), UI::PanelStyle::kFsMenu))
 		      .str();
 
 		description = (boost::format("%s%s") % description %
-		               as_heading(_("Description"), UI::PanelStyle::kWui))
+		               as_heading(_("Description"), UI::PanelStyle::kFsMenu))
 		                 .str();
 		description = (boost::format("%s%s") % description %
-		               as_content(scenariodata.description, UI::PanelStyle::kWui))
+		               as_content(scenariodata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
 
 		description = (boost::format("<rt>%s</rt>") % description).str();

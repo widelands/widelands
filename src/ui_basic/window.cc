@@ -148,8 +148,12 @@ Window::Window(Panel* const parent,
 	layout();
 	focus();
 
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged& note) { on_resolution_changed_note(note); });
+	if (s != WindowStyle::kFsMenu) {
+		// FsMenus are resized and repositioned by the FullscreenMenuMain on
+		// resolution changes. All other windows need to do this themselves.
+		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+		   [this](const GraphicResolutionChanged& note) { on_resolution_changed_note(note); });
+	}
 }
 
 void Window::update_toolbar_buttons() {

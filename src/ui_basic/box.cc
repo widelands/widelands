@@ -42,7 +42,7 @@ Box::Box(Panel* const parent,
      scrolling_(false),
      force_scrolling_(false),
      scrollbar_(nullptr),
-     scrollbar_style_(UI::PanelStyle::kWui),
+     scrollbar_style_(UI::PanelStyle::kFsMenu),
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {

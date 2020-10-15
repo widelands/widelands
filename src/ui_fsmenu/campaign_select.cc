@@ -30,7 +30,7 @@
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& fsmm,
                                                            Campaigns* campvis)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Campaign")),
-     table_(this, 0, 0, 0, 0, UI::PanelStyle::kWui),
+     table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Campaign description
      campaign_details_(this),
