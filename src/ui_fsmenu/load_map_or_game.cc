@@ -29,7 +29,7 @@
 FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(FullscreenMenuMain& fsmm,
                                                          const std::string& title)
    : UI::Window(&fsmm,
-                UI::WindowStyle::kFsMenu,
+                UI::WindowStyle::kWui,
                 "load_map_or_game",
                 fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
@@ -37,8 +37,9 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(FullscreenMenuMain& fsm
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                 title),
      // Main buttons
-     back_(this, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
-     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
+     back_(this, "back", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Back")),
+     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")) {
+	do_not_layout_on_resolution_change();
 	layout();
 }
 

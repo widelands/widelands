@@ -51,8 +51,8 @@ SinglePlayerTribeDropdown::SinglePlayerTribeDropdown(UI::Panel* parent,
                                        button_dimension,
                                        _("Tribe"),
                                        UI::DropdownType::kPictorial,
-                                       UI::PanelStyle::kFsMenu,
-                                       UI::ButtonStyle::kFsMenuSecondary,
+                                       UI::PanelStyle::kWui,
+                                       UI::ButtonStyle::kWuiSecondary,
                                        settings,
                                        id) {
 }
@@ -151,8 +151,8 @@ SinglePlayerPlayerTypeDropdown::SinglePlayerPlayerTypeDropdown(UI::Panel* parent
                                        button_dimension,
                                        _("Type"),
                                        UI::DropdownType::kPictorial,
-                                       UI::PanelStyle::kFsMenu,
-                                       UI::ButtonStyle::kFsMenuSecondary,
+                                       UI::PanelStyle::kWui,
+                                       UI::ButtonStyle::kWuiSecondary,
                                        settings,
                                        id) {
 }
@@ -261,8 +261,8 @@ SinglePlayerStartTypeDropdown::SinglePlayerStartTypeDropdown(UI::Panel* parent,
                                      button_dimension,
                                      "",
                                      UI::DropdownType::kTextualNarrow,
-                                     UI::PanelStyle::kFsMenu,
-                                     UI::ButtonStyle::kFsMenuSecondary,
+                                     UI::PanelStyle::kWui,
+                                     UI::ButtonStyle::kWuiSecondary,
                                      settings,
                                      id) {
 }
@@ -345,8 +345,8 @@ SinglePlayerTeamDropdown::SinglePlayerTeamDropdown(UI::Panel* parent,
                                      button_dimension,
                                      _("Team"),
                                      UI::DropdownType::kPictorial,
-                                     UI::PanelStyle::kFsMenu,
-                                     UI::ButtonStyle::kFsMenuSecondary,
+                                     UI::PanelStyle::kWui,
+                                     UI::ButtonStyle::kWuiSecondary,
                                      settings,
                                      id) {
 }

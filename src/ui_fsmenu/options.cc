@@ -76,7 +76,7 @@ constexpr int16_t kPadding = 4;
 FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                              OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
-                UI::WindowStyle::kFsMenu,
+                UI::WindowStyle::kWui,
                 "options",
                 fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuOptions),
                 fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuOptions),
@@ -86,12 +86,12 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
-     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
-     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Apply")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      // Tabs
-     tabs_(this, UI::TabPanelStyle::kFsMenu),
+     tabs_(this, UI::TabPanelStyle::kWuiLight),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
      box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
@@ -111,8 +111,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu,
-                        UI::ButtonStyle::kFsMenuMenu),
+                        UI::PanelStyle::kWui,
+                        UI::ButtonStyle::kWuiMenu),
      resolution_dropdown_(&box_interface_left_,
                           "dropdown_resolution",
                           0,
@@ -122,8 +122,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu,
-                          UI::ButtonStyle::kFsMenuMenu),
+                          UI::PanelStyle::kWui,
+                          UI::ButtonStyle::kWuiMenu),
 
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
      sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
@@ -135,9 +135,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                 opt.maxfps,
                 0,
                 99,
-                UI::PanelStyle::kFsMenu,
+                UI::PanelStyle::kWui,
                 _("Maximum FPS:")),
-     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
+     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kWui),
 
      // Windows options
      snap_win_overlap_only_(
@@ -154,7 +154,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                    opt.panel_snap_distance,
                    0,
                    99,
-                   UI::PanelStyle::kFsMenu,
+                   UI::PanelStyle::kWui,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -166,12 +166,12 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                     opt.border_snap_distance,
                     0,
                     99,
-                    UI::PanelStyle::kFsMenu,
+                    UI::PanelStyle::kWui,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
+     sound_options_(box_sound_, UI::SliderStyle::kWuiLight),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -182,7 +182,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                   opt.autosave / 60,
                   0,
                   100,
-                  UI::PanelStyle::kFsMenu,
+                  UI::PanelStyle::kWui,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
                   UI::SpinBox::Type::kBig),
@@ -195,7 +195,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           opt.rolling_autosave,
                           1,
                           20,
-                          UI::PanelStyle::kFsMenu,
+                          UI::PanelStyle::kWui,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),
@@ -233,6 +233,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      numpad_diagonalscrolling_(
         &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
+
+	do_not_layout_on_resolution_change();
 
 	// Buttons
 	button_box_.add_inf_space();

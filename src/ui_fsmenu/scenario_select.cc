@@ -42,7 +42,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
                                                            CampaignData* camp)
    : FullscreenMenuLoadMapOrGame(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kWui),
      header_box_(this, 0, 0, UI::Box::Vertical),
 
      subtitle_(&header_box_,
@@ -50,7 +50,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
                0,
                UI::Scrollbar::kSize,
                0,
-               UI::PanelStyle::kFsMenu,
+               UI::PanelStyle::kWui,
                "",
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
@@ -73,8 +73,8 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
                           24,
                           "",
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kFsMenu,
-                          UI::ButtonStyle::kFsMenuSecondary),
+                          UI::PanelStyle::kWui,
+                          UI::ButtonStyle::kWuiSecondary),
      campaign_(camp) {
 
 	// Set subtitle of the page

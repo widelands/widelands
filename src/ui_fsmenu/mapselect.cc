@@ -44,13 +44,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
      // Less padding for big fonts; space is tight.
      checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kWui),
      map_details_(this,
                   right_column_x_,
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  UI::PanelStyle::kFsMenu),
+                  UI::PanelStyle::kWui),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
@@ -77,7 +77,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	show_all_maps_ = new UI::Button(
-	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
+	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Show all maps"));
 	cb_dont_localize_mapnames_ =
 	   new UI::Checkbox(hbox, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
@@ -94,7 +94,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
-	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
 	official_tags_dropdown_->set_autoexpand_display_button();
 	official_tags_dropdown_->add(_("Official & Unofficial"), "");
 	official_tags_dropdown_->add(localize_tag("official"), "official");
@@ -106,7 +106,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	team_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_team_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
-	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
 	team_tags_dropdown_->add(_("Any Teams"), "");
 	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
@@ -121,7 +121,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	balancing_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_balancing", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
-	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
+	   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
 	balancing_tags_dropdown_->set_autoexpand_display_button();
 	rebuild_balancing_dropdown();
 

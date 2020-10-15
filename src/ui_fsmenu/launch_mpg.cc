@@ -45,7 +45,7 @@
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow(UI::Panel* parent, GameController* gc, uint32_t w, uint32_t h)
 	   : Window(parent,
-	            UI::WindowStyle::kFsMenu,
+	            UI::WindowStyle::kWui,
 	            "selection_window",
 	            0,
 	            0,
@@ -62,19 +62,19 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t butw = get_inner_w() - 2 * space;
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
 		UI::Button* btn =
-		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
+		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kWuiSecondary,
 		                  _("Map"), _("Select a map"));
 		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kNormalGame); });
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
-		                     UI::ButtonStyle::kFsMenuSecondary,
+		                     UI::ButtonStyle::kWuiSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
 		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kScenarioGame); });
 
 		btn =
 		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
+		                  UI::ButtonStyle::kWuiSecondary, _("Cancel"), _("Cancel selection"));
 		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kBack); });
 	}
 
@@ -104,13 +104,13 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
                   0,
                   standard_element_height_,
                   standard_element_height_,
-                  UI::ButtonStyle::kFsMenuSecondary,
+                  UI::ButtonStyle::kWuiSecondary,
                   g_image_cache->get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
      help_(nullptr),
 
      mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_),
-     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu) {
+     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kWui) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
@@ -260,7 +260,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		if (g_fs->is_directory(filename)) {
 			// Send a warning
 			UI::WLMessageBox warning(
-			   this, UI::WindowStyle::kFsMenu, _("Saved Game is Directory"),
+			   this, UI::WindowStyle::kWui, _("Saved Game is Directory"),
 			   _("WARNING:\n"
 			     "The saved game you selected is a directory."
 			     " This happens if you set the option ‘nozip’ to "

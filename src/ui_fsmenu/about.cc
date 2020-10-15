@@ -30,7 +30,7 @@ constexpr int16_t kPadding = 4;
 
 FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
    : UI::Window(&fsmm,
-                UI::WindowStyle::kFsMenu,
+                UI::WindowStyle::kWui,
                 "about",
                 fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuAbout),
                 fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuAbout),
@@ -38,8 +38,8 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
                 _("About Widelands")),
      box_(this, 0, 0, UI::Box::Vertical),
-     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu),
-     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
+     tabs_(&box_, UI::PanelStyle::kWui, UI::TabPanelStyle::kWuiLight),
+     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Close")) {
 	try {
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> t(lua.run_script("txts/ABOUT.lua"));
@@ -55,6 +55,8 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 		tabs_.add_tab(_("Lua Error"), "");
 		log_err("%s", err.what());
 	}
+
+	do_not_layout_on_resolution_change();
 
 	close_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kBack); });
 

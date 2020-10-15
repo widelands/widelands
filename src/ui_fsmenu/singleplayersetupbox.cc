@@ -42,7 +42,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
              0,
              h,
              h,
-             UI::ButtonStyle::kFsMenuSecondary,
+             UI::ButtonStyle::kWuiSecondary,
              playercolor_image(id, "images/players/player_position_menu.png"),
              (boost::format(_("Player %u")) % static_cast<unsigned>(id_ + 1)).str(),
              UI::Button::VisualState::kFlat),

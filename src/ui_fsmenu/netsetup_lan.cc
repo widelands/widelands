@@ -34,22 +34,22 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
 
      // Left column content
      label_opengames_(&left_column_, 0, 0, 0, 0, _("List of games in your local network:")),
-     table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kWui),
 
      // Right column content
      label_playername_(&right_column_, 0, 0, 0, 0, _("Your nickname:")),
-     playername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     playername_(&right_column_, 0, 0, 0, UI::PanelStyle::kWui),
      label_hostname_(&right_column_, 0, 0, 0, 0, _("Host to connect:")),
 
      host_box_(&right_column_, 0, 0, UI::Box::Horizontal),
-     hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kWui),
      loadlasthost_(&host_box_,
                    "load_previous_host",
                    0,
                    0,
                    hostname_.get_h(),
                    hostname_.get_h(),
-                   UI::ButtonStyle::kFsMenuSecondary,
+                   UI::ButtonStyle::kWuiSecondary,
                    g_image_cache->get("images/ui_fsmenu/menu_load_game.png"),
                    _("Load previous host")),
      // Buttons
@@ -59,7 +59,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
                0,
                0,
                0,
-               UI::ButtonStyle::kFsMenuSecondary,
+               UI::ButtonStyle::kWuiSecondary,
                _("Join this game")),
      hostgame_(&right_column_,
                "host_game",
@@ -67,7 +67,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
                0,
                0,
                0,
-               UI::ButtonStyle::kFsMenuSecondary,
+               UI::ButtonStyle::kWuiSecondary,
                _("Host a new game")) {
 
 	ok_.set_visible(false);  // We have 2 starting buttons, so we need a different layout here.

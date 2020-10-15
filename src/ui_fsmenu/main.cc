@@ -94,8 +94,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                    buth_,
                    "",
                    UI::DropdownType::kTextualMenu,
-                   UI::PanelStyle::kFsMenu,
-                   UI::ButtonStyle::kFsMenuMenu),
+                   UI::PanelStyle::kWui,
+                   UI::ButtonStyle::kWuiMenu),
      multiplayer_(&vbox1_,
                   "multiplayer",
                   0,
@@ -105,14 +105,14 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                   buth_,
                   "",
                   UI::DropdownType::kTextualMenu,
-                  UI::PanelStyle::kFsMenu,
-                  UI::ButtonStyle::kFsMenuMenu),
-     replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     editor_(&vbox1_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     addons_(&vbox2_, "addons", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+                  UI::PanelStyle::kWui,
+                  UI::ButtonStyle::kWuiMenu),
+     replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kWuiMenu, ""),
+     editor_(&vbox1_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kWuiMenu, ""),
+     addons_(&vbox2_, "addons", 0, 0, butw_, buth_, UI::ButtonStyle::kWuiMenu, ""),
+     options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kWuiMenu, ""),
+     about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kWuiMenu, ""),
+     exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kWuiMenu, ""),
      version_(this,
               0,
               0,
@@ -600,7 +600,7 @@ void FullscreenMenuMain::internet_login() {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
 		UI::WLMessageBox wmb(
-		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		   this, UI::WindowStyle::kWui, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 
 		// Reset InternetGaming and passwort and show internet login again
