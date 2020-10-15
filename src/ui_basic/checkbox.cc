@@ -57,7 +57,8 @@ Statebox::Statebox(Panel* const parent,
 }
 
 static inline std::string get_checkbox_graphics(const PanelStyle& s) {
-	return s == PanelStyle::kWui ? "images/ui_basic/checkbox_light.png" : "images/ui_basic/checkbox_dark.png";
+	return s == PanelStyle::kWui ? "images/ui_basic/checkbox_light.png" :
+	                               "images/ui_basic/checkbox_dark.png";
 }
 
 Statebox::Statebox(Panel* const parent,

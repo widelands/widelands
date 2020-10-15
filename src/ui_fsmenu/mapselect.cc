@@ -78,8 +78,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
-	cb_dont_localize_mapnames_ =
-	   new UI::Checkbox(hbox, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show original map names"));
+	cb_dont_localize_mapnames_ = new UI::Checkbox(
+	   hbox, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 
 	hbox->add(show_all_maps_, UI::Box::Resizing::kFullSize);

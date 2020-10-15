@@ -41,8 +41,9 @@ LoginBox::LoginBox(Panel& parent)
 	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kFsMenu);
 	eb_password = new UI::EditBox(this, 150, 70, 330, UI::PanelStyle::kFsMenu);
 
-	cb_register = new UI::Checkbox(this, UI::PanelStyle::kFsMenu, Vector2i(margin, 40), _("Log in to a registered account."),
-	                               "", get_inner_w() - 2 * margin);
+	cb_register =
+	   new UI::Checkbox(this, UI::PanelStyle::kFsMenu, Vector2i(margin, 40),
+	                    _("Log in to a registered account."), "", get_inner_w() - 2 * margin);
 
 	register_account = new UI::MultilineTextarea(
 	   this, margin, 105, 470, 140, UI::PanelStyle::kFsMenu,

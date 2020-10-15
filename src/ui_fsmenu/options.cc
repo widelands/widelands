@@ -125,8 +125,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
 
-     inputgrab_(&box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
-     sdl_cursor_(&box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
+     inputgrab_(
+        &box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
+     sdl_cursor_(&box_interface_left_,
+                 UI::PanelStyle::kFsMenu,
+                 Vector2i::zero(),
+                 _("Use system mouse cursor"),
+                 "",
+                 0),
      sb_maxfps_(&box_interface_left_,
                 0,
                 0,
@@ -140,11 +146,24 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
-     snap_win_overlap_only_(
-        &box_windows_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Snap windows only when overlapping"), "", 0),
-     dock_windows_to_edges_(&box_windows_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Dock windows to edges"), "", 0),
-     animate_map_panning_(
-        &box_windows_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Animate automatic map movements"), "", 0),
+     snap_win_overlap_only_(&box_windows_,
+                            UI::PanelStyle::kFsMenu,
+                            Vector2i::zero(),
+                            _("Snap windows only when overlapping"),
+                            "",
+                            0),
+     dock_windows_to_edges_(&box_windows_,
+                            UI::PanelStyle::kFsMenu,
+                            Vector2i::zero(),
+                            _("Dock windows to edges"),
+                            "",
+                            0),
+     animate_map_panning_(&box_windows_,
+                          UI::PanelStyle::kFsMenu,
+                          Vector2i::zero(),
+                          _("Animate automatic map movements"),
+                          "",
+                          0),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -200,39 +219,61 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),
 
-     zip_(&box_saving_, UI::PanelStyle::kFsMenu,
+     zip_(&box_saving_,
+          UI::PanelStyle::kFsMenu,
           Vector2i::zero(),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
           0),
-     write_syncstreams_(&box_saving_, UI::PanelStyle::kFsMenu,
+     write_syncstreams_(&box_saving_,
+                        UI::PanelStyle::kFsMenu,
                         Vector2i::zero(),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         0),
      // New Game options
-     show_buildhelp_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Building Spaces")),
+     show_buildhelp_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Building Spaces")),
      show_census_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Census")),
-     show_statistics_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Statistics")),
-     show_soldier_levels_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Soldier Levels")),
+     show_statistics_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Statistics")),
+     show_soldier_levels_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Soldier Levels")),
      show_buildings_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Buildings")),
-     show_workarea_overlap_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Workarea Overlaps")),
+     show_workarea_overlap_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Workarea Overlaps")),
 
      // In-Game options
-     auto_roadbuild_mode_(
-        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Start building road after placing a flag")),
-     transparent_chat_(
-        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
+     auto_roadbuild_mode_(&box_ingame_,
+                          UI::PanelStyle::kFsMenu,
+                          Vector2i::zero(),
+                          _("Start building road after placing a flag")),
+     transparent_chat_(&box_ingame_,
+                       UI::PanelStyle::kFsMenu,
+                       Vector2i::zero(),
+                       _("Show in-game chat with transparent background"),
+                       "",
+                       0),
 
-     single_watchwin_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(),
-			 /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region, and it also lets you jump to it on the map. */
-     		_("Use single watchwindow mode")),
-     ctrl_zoom_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(),
-			 /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
-			 _("Zoom only when Ctrl is pressed")),
-     game_clock_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Display game time in the top left corner")),
-     numpad_diagonalscrolling_(
-        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+     single_watchwin_(&box_ingame_,
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i::zero(),
+                      /** TRANSLATORS: A watchwindow is a window where you keep watching an object
+                         or a map region, and it also lets you jump to it on the map. */
+                      _("Use single watchwindow mode")),
+     ctrl_zoom_(&box_ingame_,
+                UI::PanelStyle::kFsMenu,
+                Vector2i::zero(),
+                /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
+                _("Zoom only when Ctrl is pressed")),
+     game_clock_(&box_ingame_,
+                 UI::PanelStyle::kFsMenu,
+                 Vector2i::zero(),
+                 _("Display game time in the top left corner")),
+     numpad_diagonalscrolling_(&box_ingame_,
+                               UI::PanelStyle::kFsMenu,
+                               Vector2i::zero(),
+                               _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
 
 	do_not_layout_on_resolution_change();
