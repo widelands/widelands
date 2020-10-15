@@ -260,8 +260,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
-	// the old location.
-	const FormerBuildings& former_buildings = military_site_->old_buildings_;
+	// the old location. We need to take a copy.
+	const FormerBuildings former_buildings = military_site_->old_buildings_;
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
