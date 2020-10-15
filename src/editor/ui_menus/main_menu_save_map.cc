@@ -205,7 +205,8 @@ void MainMenuSaveMap::update_map_options() {
 
 	MapData mapdata(map, editbox_.text(), maptype, MapData::DisplayType::kMapnames);
 
-	// TODO(GunChleoc): Trying to render the minimap while saving results in endless loop - probably because we're trying to load the map again there.
+	// TODO(GunChleoc): Trying to render the minimap while saving results in endless loop - probably
+	// because we're trying to load the map again there.
 	map_details_.update(mapdata, false, false);
 	if (old_name == editbox_.text()) {
 		editbox_.set_text(map_details_.name());

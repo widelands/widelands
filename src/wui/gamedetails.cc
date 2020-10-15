@@ -35,7 +35,10 @@
 #include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
-GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode, Widelands::EditorGameBase& egbase)
+GameDetails::GameDetails(Panel* parent,
+                         UI::PanelStyle style,
+                         Mode mode,
+                         Widelands::EditorGameBase& egbase)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      style_(style),
      mode_(mode),

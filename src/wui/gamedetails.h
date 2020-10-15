@@ -71,7 +71,7 @@ private:
 	// Used to render map preview
 	std::string last_game_;
 	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
-	Widelands::EditorGameBase& egbase_; // Not owned
+	Widelands::EditorGameBase& egbase_;  // Not owned
 };
 
 #endif  // end of include guard: WL_WUI_GAMEDETAILS_H
