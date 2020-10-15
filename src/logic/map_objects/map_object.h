@@ -429,11 +429,13 @@ struct ObjectPointer {
 		serial_ = 0;
 	}
 	ObjectPointer(const MapObject* const obj) {
+		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj ? obj->serial_ : 0;
 	}
 	// can use standard copy constructor and assignment operator
 
 	ObjectPointer& operator=(const MapObject* const obj) {
+		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj ? obj->serial_ : 0;
 		return *this;
 	}
