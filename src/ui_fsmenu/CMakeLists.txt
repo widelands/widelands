@@ -93,6 +93,8 @@ wl_library(ui_fsmenu_gameloading
     mapdetailsbox.h
     multiplayersetupgroup.cc
     multiplayersetupgroup.h
+    playersetupbox.cc
+    playersetupbox.h
     singleplayerdropdown.cc
     singleplayerdropdown.h
     singleplayersetupbox.cc

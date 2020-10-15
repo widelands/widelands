@@ -20,16 +20,10 @@
 #ifndef WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
 #define WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
 
-#include <memory>
-#include <ui_basic/textarea.h>
 #include <vector>
 
-#include "logic/game_settings.h"
-#include "ui_basic/box.h"
-#include "ui_basic/button.h"
-#include "ui_basic/dropdown.h"
+#include "ui_fsmenu/playersetupbox.h"
 #include "ui_fsmenu/singleplayerdropdown.h"
-#include "wui/suggested_teams_ui.h"
 
 namespace Widelands {
 class Map;
@@ -57,7 +51,7 @@ private:
 	SinglePlayerTeamDropdown teams_;
 };
 
-class SinglePlayerSetupBox : public UI::Box {
+class SinglePlayerSetupBox : public PlayerSetupBox {
 
 public:
 	SinglePlayerSetupBox(UI::Panel* const parent,
@@ -66,26 +60,13 @@ public:
 	                     uint32_t padding);
 
 	void force_new_dimensions(float scale, uint32_t standard_element_height);
-	void reset_teams(const Widelands::Map& map);
+
+protected:
+	void update() override;
+	void reset() override;
+	void update_player_group(size_t index) override;
 
 private:
-	void update();
-	void reset();
-
-	void select_teams();
-	void check_teams();
-	void update_team(PlayerSlot pos);
-
-	GameSettingsProvider* const settings_;
-	uint32_t standard_height;
-	UI::Box scrollable_playerbox;
-	UI::Textarea title_;
 	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
-	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
-
-
-	SuggestedTeamsDropdown suggested_teams_dropdown_;
-	const Widelands::SuggestedTeamLineup* selected_lineup_;
-	bool suggested_team_selection_in_progress_;
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H
