@@ -584,7 +584,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
-
+// NOCOM fix setting team for unoccupied slots
+// NOCOM test with client
 MultiPlayerSetupPlayerBox::MultiPlayerSetupPlayerBox(UI::Panel* const parent,
 					 GameSettingsProvider* const settings, NetworkPlayerSettingsBackend* npsb,
 					 uint32_t standard_element_height,
@@ -597,12 +598,14 @@ MultiPlayerSetupPlayerBox::MultiPlayerSetupPlayerBox(UI::Panel* const parent,
 void MultiPlayerSetupPlayerBox::force_new_dimensions(float scale, uint32_t max_width,
 													 uint32_t max_height, uint32_t standard_element_height) {
 	standard_height_ = standard_element_height;
+	set_max_size(max_width, max_height);
 	title_.set_font_scale(scale);
 	for (auto& active_player_group : multi_player_player_groups_) {
 		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
-	suggested_teams_dropdown_.set_desired_size(get_w(), standard_element_height);
-	scrollable_playerbox_.set_max_size(max_width / 2, max_height - title_.get_h() - 4 * kPadding);
+
+	suggested_teams_dropdown_.set_desired_size(max_width, standard_element_height);
+	scrollable_playerbox_.set_max_size(max_width, max_height - title_.get_h() - suggested_teams_dropdown_.get_h() - 5 * kPadding);
 }
 
 void MultiPlayerSetupPlayerBox::update() {
@@ -627,26 +630,6 @@ void MultiPlayerSetupPlayerBox::reset() {
 }
 void MultiPlayerSetupPlayerBox::update_player_group(size_t index) {
 	multi_player_player_groups_.at(index)->update();
-}
-
-void MultiPlayerSetupPlayerBox::custom_draw(RenderTarget& dst) {
-	const int32_t total_box_height = scrollable_playerbox_.get_y() + scrollable_playerbox_.get_h();
-	for (MultiPlayerPlayerGroup* current_player : multi_player_player_groups_) {
-		if (current_player->get_y() < 0 && current_player->get_y() > -current_player->get_h()) {
-			dst.brighten_rect(
-			   Recti(get_x(), scrollable_playerbox_.get_y(), scrollable_playerbox_.get_w(),
-			         current_player->get_h() + current_player->get_y()),
-			   -MOUSE_OVER_BRIGHT_FACTOR);
-		} else if (current_player->get_y() >= 0) {
-			auto rect_height =
-			   std::min(total_box_height - (scrollable_playerbox_.get_y() + current_player->get_y()),
-			            current_player->get_h());
-			dst.brighten_rect(
-			   Recti(get_x(), scrollable_playerbox_.get_y() + current_player->get_y(),
-			         scrollable_playerbox_.get_w(), rect_height < 0 ? 0 : rect_height),
-			   -MOUSE_OVER_BRIGHT_FACTOR);
-		}
-	}
 }
 
 MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
@@ -696,6 +679,10 @@ void MultiPlayerSetupGroup::reset() {
 		c->die();
 	}
 	multi_player_client_groups.clear();
+
+}
+void MultiPlayerSetupGroup::reset_teams(const Widelands::Map& map) {
+	playerbox.reset_teams(map);
 }
 void MultiPlayerSetupGroup::update_players() {
 	playerbox.update();
@@ -716,11 +703,6 @@ void MultiPlayerSetupGroup::update_clients() {
 	}
 }
 
-void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
-	// NOCOM check whether this is really needed
-	playerbox.custom_draw(dst);
-}
-
 void MultiPlayerSetupGroup::force_new_dimensions(float scale,
                                                  uint32_t max_width,
                                                  uint32_t max_height,
@@ -729,8 +711,7 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	clients_.set_font_scale(scale);
 	clientbox.set_min_desired_breadth(max_width / 3);
 	clientbox.set_max_size(max_width / 3, max_height);
-	playerbox.set_max_size(max_width / 2, max_height);
-	playerbox.force_new_dimensions(scale, max_width, max_height, standard_element_height);
+	playerbox.force_new_dimensions(scale, max_width / 2, max_height, standard_element_height);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
 		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);

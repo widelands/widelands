@@ -31,7 +31,7 @@
 
 namespace Widelands {
 class Map;
-}
+} // namespace Widelands
 
 class PlayerSetupBox : public UI::Box {
 
@@ -50,7 +50,6 @@ protected:
 
 	void select_teams();
 	void check_teams();
-	void update_team(PlayerSlot pos);
 
 	uint32_t standard_height_;
 

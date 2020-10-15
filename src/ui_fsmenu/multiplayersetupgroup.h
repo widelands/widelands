@@ -32,6 +32,10 @@ struct GameSettingsProvider;
 struct MultiPlayerClientGroup;
 struct MultiPlayerPlayerGroup;
 
+namespace Widelands {
+class Map;
+} // namespace Widelands
+
 class MultiPlayerSetupPlayerBox : public PlayerSetupBox {
 
 public:
@@ -44,7 +48,6 @@ public:
 	                     uint32_t padding);
 
 	void force_new_dimensions(float scale, uint32_t max_width, uint32_t max_height, uint32_t standard_element_height);
-	void custom_draw(RenderTarget& dst);
 
 protected:
 	void update() override;
@@ -79,9 +82,10 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                          uint32_t max_height,
 	                          uint32_t standard_element_height);
 
+	void reset_teams(const Widelands::Map& map);
+
 private:
 	void reset();
-	void draw(RenderTarget& dst) override;
 
 	GameSettingsProvider* const settings_;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;

@@ -142,6 +142,7 @@ void SinglePlayerSetupBox::update() {
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
+	// NOCOM returning from Fullscreen is broken
 	standard_height_ = standard_element_height;
 	title_.set_font_scale(scale);
 	for (auto& active_player_group : active_player_groups_) {

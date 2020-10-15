@@ -29,7 +29,7 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
                                            uint32_t standard_element_height,
                                            uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0, padding),
 	 standard_height_(standard_element_height),
      settings_(settings),
      scrollable_playerbox_(this, 0, 0, UI::Box::Vertical),
@@ -49,8 +49,9 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
 		  selected_lineup_(nullptr),
 		  suggested_team_selection_in_progress_(false) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
+	add_space(padding);
 	add(&suggested_teams_dropdown_, UI::Box::Resizing::kFullSize);
-	add_space(3 * padding);
+	add_space(2 * padding);
 	add(&scrollable_playerbox_, Resizing::kExpandBoth);
 	scrollable_playerbox_.set_scrolling(true);
 
@@ -136,7 +137,6 @@ void PlayerSetupBox::select_teams() {
 }
 
 void PlayerSetupBox::check_teams() {
-	// NOCOM When player changes slot, they take their team with them. Keep or change this behavior?
 	if (suggested_team_selection_in_progress_ || selected_lineup_ == nullptr) {
 		return;
 	}
@@ -155,21 +155,6 @@ void PlayerSetupBox::check_teams() {
 			suggested_teams_dropdown_.select(Widelands::kNoSuggestedTeam);
 			selected_lineup_ = nullptr;
 			return;
-		}
-	}
-}
-
-// NOCOM needed?
-void PlayerSetupBox::update_team(PlayerSlot pos) {
-	if (selected_lineup_ != nullptr && pos < settings_->settings().players.size()) {
-		assert(suggested_teams_dropdown_.is_visible());
-		for (size_t i = 0; i < selected_lineup_->size(); ++i) {
-			for (PlayerSlot pl : selected_lineup_->at(i)) {
-				if (pl == pos) {
-					settings_->set_player_team(pos, i + 1);
-					break;
-				}
-			}
 		}
 	}
 }

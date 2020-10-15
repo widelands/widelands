@@ -467,7 +467,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 		ml->preload_map(true);
 	}
 
-	// NOCOM reset_teams(map);
+	mpsg_.reset_teams(map);
 	map_details.update(settings_, map);
 }
 

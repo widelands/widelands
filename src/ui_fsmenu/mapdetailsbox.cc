@@ -129,7 +129,7 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                              uint32_t,
                              uint32_t standard_element_height,
                              uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0, padding),
      title_(this,
             0,
             0,
@@ -168,15 +168,15 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                       UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
-	add_space(3 * padding);
-	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	add_space(padding);
+	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
-	add_space(3 * padding);
+	add_space(2 * padding);
 	add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add(&map_description_, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_space(3 * padding);
+	content_box_.add_space(padding);
 }
 MapDetailsBox::~MapDetailsBox() {
 }
