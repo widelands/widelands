@@ -168,7 +168,8 @@ void Panel::logic_thread() {
 	while (!app->should_die()) {
 		uint32_t time = SDL_GetTicks();
 
-		Panel* m = modal_;  // copy this because another panel may become modal during a lengthy logic frame
+		Panel* m =
+		   modal_;  // copy this because another panel may become modal during a lengthy logic frame
 
 		if (m && (m->flags_ & pf_logic_think)) {
 			switch (m->logic_thread_locked_) {
@@ -320,17 +321,16 @@ int Panel::do_run() {
 
 	notes_.clear();
 	handled_notes_.clear();
-	subscriber1_ =
-	   is_initializer ? Notifications::subscribe<NoteThreadSafeFunction>(
-	                       [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
-	                    nullptr;
-	subscriber2_ = is_initializer ?
-	                      Notifications::subscribe<NoteThreadSafeFunctionHandled>(
-	                         [this](const NoteThreadSafeFunctionHandled& note) {
-		                         assert(!handled_notes_.count(note.id));
-		                         handled_notes_.insert(note.id);
-	                         }) :
-	                      nullptr;
+	subscriber1_ = is_initializer ?
+	                  Notifications::subscribe<NoteThreadSafeFunction>(
+	                     [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
+	                  nullptr;
+	subscriber2_ = is_initializer ? Notifications::subscribe<NoteThreadSafeFunctionHandled>(
+	                                   [this](const NoteThreadSafeFunctionHandled& note) {
+		                                   assert(!handled_notes_.count(note.id));
+		                                   handled_notes_.insert(note.id);
+	                                   }) :
+	                                nullptr;
 
 	if (prevmodal) {
 		wait_for_current_logic_frame(prevmodal);
