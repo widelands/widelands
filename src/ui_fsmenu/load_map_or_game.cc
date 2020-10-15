@@ -39,6 +39,7 @@ FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame(FullscreenMenuMain& fsm
      // Main buttons
      back_(this, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
+	do_not_layout_on_resolution_change();
 	layout();
 }
 

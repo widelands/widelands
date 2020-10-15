@@ -54,7 +54,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 	main_box_.add_space(padding_);
 	main_box_.add_inf_space();
 	if (is_replay_) {
-		show_filenames_ = new UI::Checkbox(&main_box_, Vector2i::zero(), _("Show Filenames"));
+		show_filenames_ = new UI::Checkbox(&main_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
 		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
 	}
 	main_box_.add_inf_space();

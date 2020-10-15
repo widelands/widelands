@@ -63,6 +63,8 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 	box_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	box_.add_space(kPadding);
 
+	do_not_layout_on_resolution_change();
+
 	layout();
 	tabs_.load_tab_contents();
 }

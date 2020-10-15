@@ -158,7 +158,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
 	if (!checkbox.empty()) {
-		checkbox_ = new UI::Checkbox(main_box, Vector2i(0, 0), checkbox);
+		checkbox_ = new UI::Checkbox(main_box, UI::PanelStyle::kWui, Vector2i(0, 0), checkbox);
 		// tooltip and initial state will be set by the subclass constructor
 		main_box->add_space(padding);
 		main_box->add(checkbox_, UI::Box::Resizing::kFullSize);

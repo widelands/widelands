@@ -125,8 +125,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
 
-     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
-     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
+     inputgrab_(&box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
+     sdl_cursor_(&box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
      sb_maxfps_(&box_interface_left_,
                 0,
                 0,
@@ -141,10 +141,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
      // Windows options
      snap_win_overlap_only_(
-        &box_windows_, Vector2i::zero(), _("Snap windows only when overlapping"), "", 0),
-     dock_windows_to_edges_(&box_windows_, Vector2i::zero(), _("Dock windows to edges"), "", 0),
+        &box_windows_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Snap windows only when overlapping"), "", 0),
+     dock_windows_to_edges_(&box_windows_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Dock windows to edges"), "", 0),
      animate_map_panning_(
-        &box_windows_, Vector2i::zero(), _("Animate automatic map movements"), "", 0),
+        &box_windows_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Animate automatic map movements"), "", 0),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -200,39 +200,42 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),
 
-     zip_(&box_saving_,
+     zip_(&box_saving_, UI::PanelStyle::kFsMenu,
           Vector2i::zero(),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
           0),
-     write_syncstreams_(&box_saving_,
+     write_syncstreams_(&box_saving_, UI::PanelStyle::kFsMenu,
                         Vector2i::zero(),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         0),
      // New Game options
-     show_buildhelp_(&box_newgame_, Vector2i::zero(), _("Show Building Spaces")),
-     show_census_(&box_newgame_, Vector2i::zero(), _("Show Census")),
-     show_statistics_(&box_newgame_, Vector2i::zero(), _("Show Statistics")),
-     show_soldier_levels_(&box_newgame_, Vector2i::zero(), _("Show Soldier Levels")),
-     show_buildings_(&box_newgame_, Vector2i::zero(), _("Show Buildings")),
-     show_workarea_overlap_(&box_newgame_, Vector2i::zero(), _("Show Workarea Overlaps")),
+     show_buildhelp_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Building Spaces")),
+     show_census_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Census")),
+     show_statistics_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Statistics")),
+     show_soldier_levels_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Soldier Levels")),
+     show_buildings_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Buildings")),
+     show_workarea_overlap_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Workarea Overlaps")),
 
      // In-Game options
      auto_roadbuild_mode_(
-        &box_ingame_, Vector2i::zero(), _("Start building road after placing a flag")),
+        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Start building road after placing a flag")),
      transparent_chat_(
-        &box_ingame_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
+        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
-     /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
-     /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_ingame_, Vector2i::zero(), _("Use single watchwindow mode")),
-     /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
-     ctrl_zoom_(&box_ingame_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
-     game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
+     single_watchwin_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(),
+			 /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region, and it also lets you jump to it on the map. */
+     		_("Use single watchwindow mode")),
+     ctrl_zoom_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(),
+			 /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
+			 _("Zoom only when Ctrl is pressed")),
+     game_clock_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(
-        &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
      os_(opt) {
+
+	do_not_layout_on_resolution_change();
 
 	// Buttons
 	button_box_.add_inf_space();

@@ -137,6 +137,10 @@ protected:
 		return true;
 	}
 
+	void do_not_layout_on_resolution_change() {
+		graphic_resolution_changed_subscriber_.reset();
+	}
+
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 

@@ -76,8 +76,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
-     custom_starting_positions_(&map_box_, Vector2i::zero(), _("Custom starting positions")),
+     peaceful_(&map_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
+     custom_starting_positions_(&map_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Custom starting positions")),
      ok_(&map_box_,
          "ok",
          0,
@@ -103,6 +103,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
+
+	do_not_layout_on_resolution_change();
 
 	lua_ = new LuaInterface();
 	add_all_widgets();

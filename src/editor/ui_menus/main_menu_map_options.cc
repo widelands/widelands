@@ -515,7 +515,7 @@ void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
                                           const std::string& tag,
                                           const std::string& displ_name) {
 	UI::Box* box = new UI::Box(parent, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
-	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), displ_name);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);
 	parent->add(box);

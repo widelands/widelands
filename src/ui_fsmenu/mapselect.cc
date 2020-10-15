@@ -79,7 +79,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
 	cb_dont_localize_mapnames_ =
-	   new UI::Checkbox(hbox, Vector2i::zero(), _("Show original map names"));
+	   new UI::Checkbox(hbox, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 
 	hbox->add(show_all_maps_, UI::Box::Resizing::kFullSize);
@@ -394,7 +394,7 @@ UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
                                                         const std::string& displ_name) {
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), displ_name);
 
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);

@@ -39,6 +39,8 @@ constexpr int kMargin = 4;
 constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 }  // namespace
 
+// TODO(Nordfriese): Now that we support maps with any number of
+// players in the launch game UI, let's remove this warning?
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
@@ -66,9 +68,10 @@ public:
 	          "purposes. Are you sure that you want more than 8 players?"),
 	        UI::Align::kLeft,
 	        UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	     reminder_choice_(&box_, UI::PanelStyle::kWui, Vector2i::zero(),
 	     /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except for
 	        testing purposes. Are you sure that you want more than 8 players?' */
-	     reminder_choice_(&box_, Vector2i::zero(), _("Do not remind me again")),
+	     		_("Do not remind me again")),
 	     button_box_(&box_, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
 	     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 	     cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {

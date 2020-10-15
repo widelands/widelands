@@ -49,6 +49,7 @@ struct Statebox : public Panel {
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
 	Statebox(Panel* parent,
+	         PanelStyle,
 	         Vector2i,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
@@ -77,6 +78,8 @@ struct Statebox : public Panel {
 private:
 	void layout() override;
 	virtual void button_clicked() = 0;
+
+	PanelStyle style_;
 
 	enum Flags {
 		Is_Highlighted = 0x01,
@@ -126,11 +129,12 @@ struct Checkbox : public Statebox {
 	 * Text conventions: Sentence case both for the 'label_text' and the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
+	         PanelStyle s,
 	         Vector2i const p,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0)
-	   : Statebox(parent, p, label_text, tooltip_text, width) {
+	   : Statebox(parent, s, p, label_text, tooltip_text, width) {
 	}
 
 private:

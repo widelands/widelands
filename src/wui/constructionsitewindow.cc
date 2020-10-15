@@ -219,7 +219,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
 				settings_box.add_space(8);
 			}
-			cs_stopped_ = new UI::Checkbox(&settings_box, Vector2i::zero(), _("Stopped"),
+			cs_stopped_ = new UI::Checkbox(&settings_box, UI::PanelStyle::kWui, Vector2i::zero(), _("Stopped"),
 			                               _("Stop this building’s work after completion"));
 			cs_stopped_->clickedto.connect([this, ps](bool stop) {
 				if (stop != ps->stopped) {
@@ -358,7 +358,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			add_tab(Widelands::wwWORKER, &cs_warehouse_workers_);
 			if (construction_site->get_info().becomes->get_isport()) {
 				cs_launch_expedition_ =
-				   new UI::Checkbox(&settings_box, Vector2i::zero(), _("Start an expedition"),
+				   new UI::Checkbox(&settings_box, UI::PanelStyle::kWui, Vector2i::zero(), _("Start an expedition"),
 				                    _("Start an expedition from this port after completion"));
 				cs_launch_expedition_->clickedto.connect([this, ws](bool launch) {
 					if (launch != ws->launch_expedition) {
