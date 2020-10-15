@@ -25,6 +25,49 @@
 #include "base/i18n.h"
 #include "logic/map.h"
 
+SuggestedTeamsDropdown::SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, int button_dimension) :
+		UI::Dropdown<size_t>(parent, "suggested_teams_dropdown",
+				 x,
+				 y,
+				 list_w,
+				 10,
+				 button_dimension,
+				 "",
+				 UI::DropdownType::kTextual,
+				 UI::PanelStyle::kFsMenu,
+				 UI::ButtonStyle::kFsMenuMenu, true) {
+	set_visible(false);
+	set_enabled(false);
+}
+
+void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams, bool can_change_map) {
+	set_visible(false);
+	set_enabled(false);
+	clear();
+	suggested_teams_ = suggested_teams;
+	if (!suggested_teams_.empty()) {
+		add(_("Suggested Teams"), Widelands::SuggestedTeamLineup::none(), nullptr, true);
+
+		for (size_t i = 0; i < suggested_teams_.size(); ++i) {
+			add(suggested_teams_.at(i).as_richtext(), i);
+		}
+		set_enabled(can_change_map);
+	} else {
+		add(_("No Suggested Teams"), Widelands::SuggestedTeamLineup::none(), nullptr, true);
+	}
+	set_visible(true);
+}
+
+const Widelands::SuggestedTeamLineup* SuggestedTeamsDropdown::get_lineup(size_t index) const {
+	if (index == Widelands::SuggestedTeamLineup::none()) {
+		return nullptr;
+	} else {
+		assert(index < suggested_teams_.size());
+		return (&suggested_teams_.at(index));
+	}
+}
+
+
 PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
                                            uint32_t standard_element_height,
@@ -127,7 +170,7 @@ void PlayerSetupBox::select_teams() {
 			update_player_group(i);
 		}
 		// Automatically open/close slots according to selected teams
-		if (sel != Widelands::kNoSuggestedTeam && new_team == 0) {
+		if (sel != Widelands::SuggestedTeamLineup::none() && new_team == 0) {
 			settings_->set_player_state(i, PlayerSettings::State::kClosed);
 		} else if (settings_->settings().players.at(i).state == PlayerSettings::State::kClosed) {
 			settings_->set_player_state(i, PlayerSettings::State::kOpen);
@@ -152,7 +195,7 @@ void PlayerSetupBox::check_teams() {
 		uint8_t dropdown_team = dropdown_teams.at(i);
 		// Reset if team has changed
 		if (dropdown_team != settings_->settings().players.at(i).team) {
-			suggested_teams_dropdown_.select(Widelands::kNoSuggestedTeam);
+			suggested_teams_dropdown_.select(Widelands::SuggestedTeamLineup::none());
 			selected_lineup_ = nullptr;
 			return;
 		}

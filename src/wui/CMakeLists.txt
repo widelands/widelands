@@ -68,18 +68,6 @@ wl_library(wui_mapview_pixelfunctions
     wui_mapview_pixelconstants
 )
 
-wl_library(wui_common_suggested_teams
-  SRCS
-    suggested_teams_ui.cc
-    suggested_teams_ui.h
-  DEPENDS
-    base_i18n
-    graphic_image_cache
-    graphic_playercolor
-    logic_constants
-    ui_basic
-)
-
 wl_library(wui_common_gamedetails
   SRCS
     gamedetails.cc
@@ -128,6 +116,7 @@ wl_library(wui_common_mapdetails
   DEPENDS
     base_exceptions
     base_i18n
+    graphic
     graphic_image_cache
     graphic_minimap_renderer
     graphic_text_layout
@@ -138,7 +127,6 @@ wl_library(wui_common_mapdetails
     logic_map
     map_io_map_loader
     ui_basic
-    wui_common_suggested_teams
 )
 
 wl_library(wui_quicknavigation

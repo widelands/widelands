@@ -126,7 +126,6 @@ wl_library(ui_fsmenu_gameloading
     widelands_options
     wui_chat_ui
     wui_common_gamedetails
-    wui_common_suggested_teams
 )
 
 wl_library(ui_fsmenu_maploading

@@ -23,15 +23,27 @@
 #include <memory>
 
 #include "logic/game_settings.h"
+#include "logic/suggested_teams.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "wui/suggested_teams_ui.h"
+
 
 namespace Widelands {
 class Map;
 } // namespace Widelands
+
+/// Lists available team lineups for selection
+class SuggestedTeamsDropdown : public UI::Dropdown<size_t> {
+public:
+	explicit SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, int button_dimension);
+	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams, bool can_change_map);
+	const Widelands::SuggestedTeamLineup* get_lineup(size_t index) const;
+
+private:
+	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;
+};
 
 class PlayerSetupBox : public UI::Box {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,17 +17,31 @@
  *
  */
 
-#ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BILL_OF_MATERIALS_H
-#define WL_LOGIC_MAP_OBJECTS_TRIBES_BILL_OF_MATERIALS_H
+#include "logic/suggested_teams.h"
 
-#include <vector>
+#include <cassert>
 
-#include "logic/widelands.h"
+#include "graphic/playercolor.h"
 
 namespace Widelands {
-using WareAmount = std::pair<DescriptionIndex, Widelands::Quantity>;
-using BillOfMaterials = std::vector<WareAmount>;
+
+std::string SuggestedTeamLineup::as_richtext() const {
+	std::string result = "";
+	bool is_first = true;
+	for (const Widelands::SuggestedTeam& team : *this) {
+		if (!is_first) {
+			result += " x ";
+		}
+		is_first = false;
+
+		for (Widelands::PlayerNumber player : team) {
+			assert(player < kMaxPlayers);
+			result += "<img src=images/players/player_position_menu.png color=" + kPlayerColors[player].hex_value() + ">";
+		}
+	}
+	return result;
+}
+
 
 }  // namespace Widelands
 
-#endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BILL_OF_MATERIALS_H

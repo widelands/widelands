@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIERCONTROL_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIERCONTROL_H
 
+#include <vector>
+
 #include "logic/widelands.h"
 
 namespace Widelands {

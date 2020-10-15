@@ -22,7 +22,6 @@
 
 #include <cstdint>
 #include <limits>
-#include <vector>
 
 namespace Widelands {
 
@@ -97,12 +96,6 @@ struct SoldierStrength {
 		          (defense < other.defense || (defense == other.defense && evade < other.evade)))));
 	}
 };
-
-// For suggested teams info during map preload
-using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
-// Recommended teams to play against each other
-using SuggestedTeamLineup = std::vector<SuggestedTeam>;
-constexpr size_t kNoSuggestedTeam = std::numeric_limits<size_t>::max();
 
 }  // namespace Widelands
 

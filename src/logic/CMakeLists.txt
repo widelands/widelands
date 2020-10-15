@@ -128,6 +128,8 @@ wl_library(logic_map
     path.h
     pathfield.cc
     pathfield.h
+    suggested_teams.cc
+    suggested_teams.h
   DEPENDS
     base_exceptions
     base_i18n

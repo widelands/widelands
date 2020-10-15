@@ -33,7 +33,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
-#include "wui/suggested_teams_ui.h"
 
 MapDetails::MapDetails(
    Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style)
@@ -190,7 +189,7 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			// We need some more space below the heading to prevent icon overlap
 			std::string suggested_teams = "<p><vspace gap=4> </p>";
 			for (const auto& lineup : mapdata.suggested_teams) {
-				suggested_teams += "<p><vspace gap=2>" + format_suggested_teams_lineup(lineup) + "</p>";
+				suggested_teams += "<p><vspace gap=2>" + lineup.as_richtext() + "</p>";
 			}
 			/** TRANSLATORS: Map header when selecting a map. Contents are a list of possible team lineups. */
 			description += as_heading_with_content(_("Suggested Teams"), suggested_teams, style_, false, true);
