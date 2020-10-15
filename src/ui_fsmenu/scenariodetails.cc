@@ -63,9 +63,9 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 		    as_content(scenariodata.authors.get_names(), UI::PanelStyle::kWui))
 		      .str();
 
-		description = (boost::format("%s%s") % description %
-		               as_heading(_("Description"), UI::PanelStyle::kWui))
-		                 .str();
+		description =
+		   (boost::format("%s%s") % description % as_heading(_("Description"), UI::PanelStyle::kWui))
+		      .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(scenariodata.description, UI::PanelStyle::kWui))
 		                 .str();

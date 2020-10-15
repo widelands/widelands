@@ -61,9 +61,8 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t space = y;
 		uint32_t butw = get_inner_w() - 2 * space;
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
-		UI::Button* btn =
-		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kWuiSecondary,
-		                  _("Map"), _("Select a map"));
+		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
+		                                 UI::ButtonStyle::kWuiSecondary, _("Map"), _("Select a map"));
 		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kNormalGame); });
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
