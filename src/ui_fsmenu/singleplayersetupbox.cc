@@ -130,33 +130,33 @@ void SinglePlayerSetupBox::update() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
-	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
-		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
-		   &scrollable_playerbox, 0, standard_height, i, settings_));
-		scrollable_playerbox.add(active_player_groups.at(i), Resizing::kFullSize);
+	for (PlayerSlot i = active_player_groups_.size(); i < number_of_players; ++i) {
+		active_player_groups_.push_back(new SinglePlayerActivePlayerGroup(
+		   &scrollable_playerbox_, 0, standard_height_, i, settings_));
+		scrollable_playerbox_.add(active_player_groups_.at(i), Resizing::kFullSize);
 	}
 
-	for (auto& p : active_player_groups) {
+	for (auto& p : active_player_groups_) {
 		p->update();
 	}
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
-	standard_height = standard_element_height;
+	standard_height_ = standard_element_height;
 	title_.set_font_scale(scale);
-	for (auto& active_player_group : active_player_groups) {
+	for (auto& active_player_group : active_player_groups_) {
 		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
 	suggested_teams_dropdown_.set_desired_size(suggested_teams_dropdown_.get_w(), standard_element_height);
 }
 void SinglePlayerSetupBox::reset() {
-	for (auto& p : active_player_groups) {
+	for (auto& p : active_player_groups_) {
 		p->die();
 	}
-	active_player_groups.clear();
+	active_player_groups_.clear();
 	update();
 }
 
 void SinglePlayerSetupBox::update_player_group(size_t index) {
-	active_player_groups.at(index)->update();
+	active_player_groups_.at(index)->update();
 }

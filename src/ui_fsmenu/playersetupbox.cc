@@ -30,9 +30,9 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
                                            uint32_t standard_element_height,
                                            uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
+	 standard_height_(standard_element_height),
      settings_(settings),
-     standard_height(standard_element_height),
-     scrollable_playerbox(this, 0, 0, UI::Box::Vertical),
+     scrollable_playerbox_(this, 0, 0, UI::Box::Vertical),
      title_(this,
             0,
             0,
@@ -51,8 +51,8 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add(&suggested_teams_dropdown_, UI::Box::Resizing::kFullSize);
 	add_space(3 * padding);
-	add(&scrollable_playerbox, Resizing::kExpandBoth);
-	scrollable_playerbox.set_scrolling(true);
+	add(&scrollable_playerbox_, Resizing::kExpandBoth);
+	scrollable_playerbox_.set_scrolling(true);
 
 	suggested_teams_dropdown_.selected.connect([this] { select_teams(); });
 

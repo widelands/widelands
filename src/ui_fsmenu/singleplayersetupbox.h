@@ -67,6 +67,6 @@ protected:
 	void update_player_group(size_t index) override;
 
 private:
-	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
+	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups_;  // not owned
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H

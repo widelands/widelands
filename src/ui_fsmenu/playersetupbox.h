@@ -52,9 +52,11 @@ protected:
 	void check_teams();
 	void update_team(PlayerSlot pos);
 
+	uint32_t standard_height_;
+
 	GameSettingsProvider* const settings_;
-	uint32_t standard_height;
-	UI::Box scrollable_playerbox;
+
+	UI::Box scrollable_playerbox_;
 	UI::Textarea title_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 

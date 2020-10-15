@@ -26,10 +26,36 @@
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/playersetupbox.h"
 
 struct GameSettingsProvider;
 struct MultiPlayerClientGroup;
 struct MultiPlayerPlayerGroup;
+
+class MultiPlayerSetupPlayerBox : public PlayerSetupBox {
+
+public:
+	friend struct MultiPlayerSetupGroup;
+
+	MultiPlayerSetupPlayerBox(UI::Panel* const parent,
+	                     GameSettingsProvider* const settings,
+						 NetworkPlayerSettingsBackend* npsb,
+	                     uint32_t standard_element_height,
+	                     uint32_t padding);
+
+	void force_new_dimensions(float scale, uint32_t max_width, uint32_t max_height, uint32_t standard_element_height);
+	void custom_draw(RenderTarget& dst);
+
+protected:
+	void update() override;
+	void reset() override;
+	void update_player_group(size_t index) override;
+
+private:
+	NetworkPlayerSettingsBackend* npsb_; // not owned
+	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups_;  // not owned
+};
+
 
 /**
  * struct MultiPlayerSetupGroup
@@ -60,11 +86,11 @@ private:
 	GameSettingsProvider* const settings_;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
-	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
-	UI::Box clientbox, playerbox, scrollable_playerbox;
-	UI::Textarea clients_, players_;
+	UI::Box clientbox;
+	MultiPlayerSetupPlayerBox playerbox;
+	UI::Textarea clients_;
 	int32_t buth_;
 
 	std::map<std::string, const Image*> tribepics_;
