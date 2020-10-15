@@ -144,7 +144,7 @@ protected:
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
-	const WindowStyleInfo& style_;
+	WindowStyleInfo style_;
 
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height

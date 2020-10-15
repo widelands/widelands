@@ -95,6 +95,9 @@ struct WindowStyleInfo {
 	}
 
 private:
+	// TODO(Nordfriese): For easier testing of various image sets
+	friend class Window;
+
 	const RGBAColor window_border_focused_, window_border_unfocused_;
 	const Image* border_top_;
 	const Image* border_bottom_;
