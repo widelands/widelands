@@ -36,7 +36,7 @@
  * Status window for construction sites.
  */
 struct ConstructionSiteWindow : public BuildingWindow {
-	ConstructionSiteWindow(InteractiveGameBase& parent,
+	ConstructionSiteWindow(InteractiveBase& parent,
 	                       UI::UniqueWindow::Registry& reg,
 	                       Widelands::ConstructionSite&,
 	                       bool avoid_fastclick,
