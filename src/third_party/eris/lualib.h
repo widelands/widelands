@@ -48,7 +48,10 @@ LUAMOD_API int (luaopen_debug) (lua_State *L);
 LUAMOD_API int (luaopen_package) (lua_State *L);
 
 #define LUA_ERISLIBNAME	"eris"
+#ifndef luaopen_eris_declaration
+#define luaopen_eris_declaration
 LUAMOD_API int (luaopen_eris) (lua_State *L);
+#endif
 
 /* open all previous libraries */
 LUALIB_API void (luaL_openlibs) (lua_State *L);
