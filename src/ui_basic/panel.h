@@ -21,6 +21,9 @@
 #define WL_UI_BASIC_PANEL_H
 
 #include <deque>
+#include <list>
+#include <memory>
+#include <set>
 #include <vector>
 
 #include <SDL_keyboard.h>
@@ -28,6 +31,7 @@
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/styles/panel_styles.h"
@@ -354,6 +358,9 @@ protected:
 
 	virtual std::vector<Recti> focus_overlay_rects();
 
+	// Wait until the current logic frame has ended
+	void wait_for_current_logic_frame(Panel* = nullptr);
+
 private:
 	bool initialized_;
 
@@ -441,6 +448,13 @@ private:
 	enum class LogicThreadState { kFree, kLocked, kEndingRequested, kEndingConfirmed };
 	LogicThreadState logic_thread_locked_;
 	static bool logic_thread_running_;
+
+	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunction>> subscriber1_;
+	std::unique_ptr<Notifications::Subscriber<NoteThreadSafeFunctionHandled>> subscriber2_;
+	void handle_notes();
+	std::list<NoteThreadSafeFunction> notes_;
+	std::set<uint32_t> handled_notes_;
+	void do_update_graphics(Panel& forefather, const std::string&);
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

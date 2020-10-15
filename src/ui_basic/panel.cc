@@ -24,7 +24,6 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
-#include "base/multithreading.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/graphic_functions.h"
@@ -169,19 +168,21 @@ void Panel::logic_thread() {
 	while (!app->should_die()) {
 		uint32_t time = SDL_GetTicks();
 
-		if (modal_ && (modal_->flags_ & pf_logic_think)) {
-			switch (modal_->logic_thread_locked_) {
+		Panel* m = modal_;  // copy this because another panel may become modal during a lengthy logic frame
+
+		if (m && (m->flags_ & pf_logic_think)) {
+			switch (m->logic_thread_locked_) {
 			case LogicThreadState::kFree:
-				modal_->logic_thread_locked_ = LogicThreadState::kLocked;
+				m->logic_thread_locked_ = LogicThreadState::kLocked;
 
-				modal_->game_logic_think();  // actual game logic
+				m->game_logic_think();  // actual game logic
 
-				switch (modal_->logic_thread_locked_) {
+				switch (m->logic_thread_locked_) {
 				case LogicThreadState::kLocked:
-					modal_->logic_thread_locked_ = LogicThreadState::kFree;
+					m->logic_thread_locked_ = LogicThreadState::kFree;
 					break;
 				case LogicThreadState::kEndingRequested:
-					modal_->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
+					m->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
 					break;
 				default:
 					NEVER_HERE();
@@ -189,7 +190,7 @@ void Panel::logic_thread() {
 				break;
 
 			case LogicThreadState::kEndingRequested:
-				modal_->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
+				m->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
 				break;
 			case LogicThreadState::kEndingConfirmed:
 				break;
@@ -205,6 +206,85 @@ void Panel::logic_thread() {
 		}
 	}
 	logic_thread_running_ = false;
+}
+
+void Panel::handle_notes() {
+	while (!notes_.empty()) {
+		if (handled_notes_.count(notes_.front().id) == 0) {
+			// If there are multiple modal panels, ensure each note is handled only once
+			Notifications::publish(NoteThreadSafeFunctionHandled(notes_.front().id));
+
+			notes_.front().run();
+		} else {
+			handled_notes_.erase(notes_.front().id);
+		}
+		notes_.pop_front();
+	}
+}
+
+static Panel& get_forefather(Panel* p) {
+	while (p->get_parent()) {
+		p = p->get_parent();
+	}
+	return *p;
+}
+
+void Panel::do_update_graphics(Panel& forefather, const std::string& message) {
+	RenderTarget& rt = *g_gr->get_render_target();
+
+	{
+		MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
+		forefather.do_draw(rt);
+	}
+
+	if (!message.empty()) {
+		// After the user clicked on Quit, it may sometimes take many seconds
+		// until the logic frame has ended. During this time, we no longer
+		// handle input, and we gray out the user interface to indicate this.
+
+		rt.tile(Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()),
+		        g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"),
+		        Vector2i(0, 0));
+
+		draw_game_tip(message, true);
+	}
+
+	if (g_mouse_cursor->is_visible()) {
+		const WLApplication& app = *WLApplication::get();
+		g_mouse_cursor->change_cursor(app.is_mouse_pressed());
+		g_mouse_cursor->draw(rt, app.get_mouse_position());
+
+		if (message.empty()) {
+			if (is_modal()) {
+				do_tooltip();
+			} else {
+				forefather.do_tooltip();
+			}
+		}
+	}
+
+	g_gr->refresh();
+}
+
+void Panel::wait_for_current_logic_frame(Panel* assume_modal) {
+	assert(assume_modal || modal_);
+	if (!assume_modal && modal_ != this) {
+		assert(get_parent());
+		get_parent()->wait_for_current_logic_frame();
+		return;
+	}
+
+	const bool is_initializer = is_initializer_thread();
+	Panel& forefather = get_forefather(this);
+
+	Panel* wait = assume_modal ? assume_modal : modal_;
+	while (wait->logic_thread_locked_ == LogicThreadState::kLocked) {
+		handle_notes();
+		if (is_initializer) {
+			do_update_graphics(forefather, _("Please wait…"));
+		}
+		SDL_Delay(5);
+	}
 }
 
 /**
@@ -227,17 +307,7 @@ int Panel::do_run() {
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
 
-	Panel* forefather = this;
-	while (forefather->parent_ != nullptr) {
-		forefather = forefather->parent_;
-		assert(forefather->initialized_);
-	}
-
-	// Loop
-	running_ = true;
-
-	// Panel-specific startup code. This might call end_modal()!
-	start();
+	Panel& forefather = get_forefather(this);
 
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
@@ -247,68 +317,30 @@ int Panel::do_run() {
 	                                       Panel::ui_textinput,  Panel::ui_mousewheel};
 
 	const bool is_initializer = is_initializer_thread();
-	std::list<NoteThreadSafeFunction> notes;
-	std::set<uint32_t> handled_notes;
-	auto subscriber1 =
+
+	notes_.clear();
+	handled_notes_.clear();
+	subscriber1_ =
 	   is_initializer ? Notifications::subscribe<NoteThreadSafeFunction>(
-	                       [&notes](const NoteThreadSafeFunction& note) { notes.push_back(note); }) :
+	                       [this](const NoteThreadSafeFunction& note) { notes_.push_back(note); }) :
 	                    nullptr;
-	auto subscriber2 = is_initializer ?
+	subscriber2_ = is_initializer ?
 	                      Notifications::subscribe<NoteThreadSafeFunctionHandled>(
-	                         [&handled_notes](const NoteThreadSafeFunctionHandled& note) {
-		                         assert(!handled_notes.count(note.id));
-		                         handled_notes.insert(note.id);
+	                         [this](const NoteThreadSafeFunctionHandled& note) {
+		                         assert(!handled_notes_.count(note.id));
+		                         handled_notes_.insert(note.id);
 	                         }) :
 	                      nullptr;
 
-	auto handle_notes = [&notes, &handled_notes]() {
-		while (!notes.empty()) {
-			if (handled_notes.count(notes.front().id) == 0) {
-				// If there are multiple modal panels, ensure each note is handled only once
-				Notifications::publish(NoteThreadSafeFunctionHandled(notes.front().id));
+	if (prevmodal) {
+		wait_for_current_logic_frame(prevmodal);
+	}
 
-				notes.front().run();
-			} else {
-				handled_notes.erase(notes.front().id);
-			}
-			notes.pop_front();
-		};
-	};
-	auto do_update_graphics = [this, handle_notes, app, forefather](const bool ending) {
-		RenderTarget& rt = *g_gr->get_render_target();
+	// Loop
+	running_ = true;
 
-		{
-			MutexLock m(MutexLock::ID::kObjects, handle_notes);
-			forefather->do_draw(rt);
-		}
-
-		if (ending) {
-			// After the user clicked on Quit, it may sometimes take many seconds
-			// until the logic frame has ended. During this time, we no longer
-			// handle input, and we gray out the user interface to indicate this.
-
-			rt.tile(Recti(x_, y_, w_, h_),
-			        g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"),
-			        Vector2i(0, 0));
-
-			draw_game_tip(_("Game ending – please wait…"), true);
-		}
-
-		if (g_mouse_cursor->is_visible()) {
-			g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-			g_mouse_cursor->draw(rt, app->get_mouse_position());
-
-			if (!ending) {
-				if (is_modal()) {
-					do_tooltip();
-				} else {
-					forefather->do_tooltip();
-				}
-			}
-		}
-
-		g_gr->refresh();
-	};
+	// Panel-specific startup code. This might call end_modal()!
+	start();
 
 	logic_thread_locked_ = LogicThreadState::kFree;  // tell the logic thread we're ready
 
@@ -335,7 +367,7 @@ int Panel::do_run() {
 			check_child_death();
 
 			if (is_initializer) {
-				do_update_graphics(false);
+				do_update_graphics(forefather, "");
 			}
 
 			next_time = start_time + draw_delay;
@@ -359,7 +391,7 @@ int Panel::do_run() {
 			handle_notes();
 
 			if (is_initializer) {
-				do_update_graphics(true);
+				do_update_graphics(forefather, _("Game ending – please wait…"));
 			}
 
 			next_time = start_time + draw_delay;
@@ -371,8 +403,8 @@ int Panel::do_run() {
 	}
 
 	// Unsubscribe from notes, and eliminate old minimap rendering requests and other garbarge
-	subscriber2.reset();
-	subscriber1.reset();
+	subscriber2_.reset();
+	subscriber1_.reset();
 	handle_notes();
 
 	// Panel-specific post-running code

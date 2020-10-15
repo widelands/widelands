@@ -209,6 +209,9 @@ void GameMainMenuSaveGame::pause_game(bool paused) {
 		return;
 	}
 	igbase().game().game_controller()->set_paused(paused);
+	if (paused) {
+		wait_for_current_logic_frame();
+	}
 }
 
 /**
