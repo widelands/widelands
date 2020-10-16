@@ -76,7 +76,7 @@ UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 	                  kSuggestedTeamsUnitSize, UI::ButtonStyle::kWuiSecondary,
 	                  playercolor_image(p, "images/players/player_position_menu.png"),
 	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
-	b->sigclicked.connect([this, b, p]() {
+	b->sigclicked.connect([this, b]() {
 		auto teams_it = team_.begin();
 		for (std::vector<UI::Button*>& vector : buttons_) {
 			auto t = teams_it->begin();
