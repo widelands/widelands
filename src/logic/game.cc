@@ -342,6 +342,7 @@ void Game::init_newgame(const GameSettings& settings) {
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -422,6 +423,10 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		ctrl_ = nullptr;
 		throw;
 	}
+}
+
+void Game::mark_training_wheel_as_solved(const std::string& objective) {
+	training_wheels_->mark_as_solved(objective);
 }
 
 /**
@@ -560,6 +565,14 @@ bool Game::run(StartGameType const start_game_type,
 	state_ = gs_running;
 
 	remove_loader_ui();
+
+	// If this is a singleplayer map or non-scenario savegame, put on our training wheels
+	if (start_game_type == StartGameType::kMap || (script_to_run.empty() && start_game_type == StartGameType::kSaveGame)) {
+		InteractivePlayer* ipl = get_ipl();
+		if (ipl && !ipl->is_multiplayer()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+		}
+	}
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 

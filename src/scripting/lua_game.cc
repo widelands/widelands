@@ -89,6 +89,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
+   METHOD(LuaPlayer, mark_training_wheel_as_solved),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
    METHOD(LuaPlayer, get_suitability),
@@ -676,6 +677,23 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	campvis.pull_section("scenarios").set_bool(luaL_checkstring(L, 2), true);
 	campvis.write(kCampVisFile.c_str(), false);
 
+	return 0;
+}
+
+/* RST
+   .. method:: mark_training_wheel_as_solved(name)
+
+      Marks a global training wheel objective as solved.
+
+      :arg name: name of the training wheel to be marked as solved
+      :type name: :class:`string`
+*/
+int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "One argument is required for mark_training_wheel_as_solved(string)");
+	}
+
+	get_game(L).mark_training_wheel_as_solved(luaL_checkstring(L, 2));
 	return 0;
 }
 

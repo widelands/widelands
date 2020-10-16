@@ -216,6 +216,8 @@ wl_library(logic
     save_handler.h
     see_unsee_node.h
     trade_agreement.h
+    training_wheels.cc
+    training_wheels.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
