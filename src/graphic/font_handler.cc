@@ -93,21 +93,11 @@ public:
 			// Another way would be to instead encapsulate all high-level functions that render text.
 			// The second way would be much more performance-efficient, but this would clutter
 			// up the high-level UI code a lot with masses of NoteThreadSafeFunction.
-			if (currently_rendering_.count(hash)) {
-				// Another code path has already requested the same text to be rendered.
-				// Wait until it's ready, then we can use the result.
-				while (currently_rendering_.count(hash)) {
-					SDL_Delay(5);
-				}
-			} else {
-				currently_rendering_.insert(hash);
-				NoteThreadSafeFunction::instantiate(
-				   [this, &text, &hash, &w]() {
-					   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
-				   },
-				   true);
-				currently_rendering_.erase(hash);
-			}
+			NoteThreadSafeFunction::instantiate(
+			   [this, &text, &hash, &w]() {
+				   render_cache_->insert(hash, rt_renderer_->render(text, w, fontset()->is_rtl()));
+			   },
+			   true);
 			rendered_text = render_cache_->get(hash);
 			assert(rendered_text);
 		}
@@ -122,14 +112,12 @@ public:
 		fontset_ = fontsets_.get_fontset(locale);
 		texture_cache_->flush();
 		render_cache_->flush();
-		currently_rendering_.clear();
 		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
 	}
 
 private:
 	std::unique_ptr<TextureCache> texture_cache_;
 	std::unique_ptr<RenderCache> render_cache_;
-	std::set<std::string> currently_rendering_;
 	UI::FontSets fontsets_;       // All fontsets
 	UI::FontSet const* fontset_;  // The currently active FontSet
 	std::unique_ptr<RT::Renderer> rt_renderer_;
