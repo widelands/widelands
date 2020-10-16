@@ -748,7 +748,7 @@ void GameHost::run() {
 }
 
 void GameHost::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
 
 	if (d->game) {
 		uint32_t curtime = SDL_GetTicks();

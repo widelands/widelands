@@ -286,7 +286,7 @@ void GameClient::run() {
 }
 
 void GameClient::think() {
-	handle_network();
+	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
 
 	if (d->game) {
 		// TODO(Klaus Halfmann): what kind of time tricks are done here?
