@@ -190,8 +190,7 @@ void Panel::logic_thread() {
 				default:
 					NEVER_HERE();
 				}
-			}
-				break;
+			} break;
 
 			case LogicThreadState::kEndingRequested:
 				m->logic_thread_locked_ = LogicThreadState::kEndingConfirmed;
@@ -347,7 +346,7 @@ int Panel::do_run() {
 	// NOCOM this seems not to be needed. Remove these lines, and
 	// remove the parameter from `wait_for_current_logic_frame`.
 	/* if (prevmodal) {
-		wait_for_current_logic_frame(prevmodal);
+	   wait_for_current_logic_frame(prevmodal);
 	} */
 
 	// Loop
