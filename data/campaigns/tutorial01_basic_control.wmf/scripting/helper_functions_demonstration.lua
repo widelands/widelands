@@ -71,12 +71,8 @@ end
 
 function select_item_from_dropdown(name, item)
    local blocker = UserInputDisabler:new()
-
-   wl.ui.MapView().dropdowns[name]:highlight_item(item)
-   sleep(5000)
    wl.ui.MapView().dropdowns[name]:select()
    sleep(3000)
-
    blocker:lift_blocks()
 end
 
