@@ -194,7 +194,7 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
 			   break;
 
 		   case Widelands::NoteShip::Action::kWaitingForCommand:
-			   for (auto& observer : allships) {
+			   for (ShipObserver& observer : allships) {
 				   if (observer.ship == note.ship) {
 					   observer.waiting_for_command_ = true;
 					   break;
@@ -317,7 +317,7 @@ void DefaultAI::think() {
 	std::sort(current_task_queue.begin(), current_task_queue.end());
 
 	// Performing tasks from temporary queue one by one
-	for (const auto& task : current_task_queue) {
+	for (const SchedulerTask& task : current_task_queue) {
 
 		due_task = task.id;
 
@@ -1692,7 +1692,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	static std::set<uint32_t> unique_serials;
 	unique_serials.clear();
 
-	for (const auto& imm_found : immovables) {
+	for (const Widelands::ImmovableFound& imm_found : immovables) {
 		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
 		if (!unique_serials.insert(base_immovable.serial()).second) {
 			continue;  // serial was not inserted in the set, so this is a duplicate
@@ -1731,7 +1731,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	any_unconnected_imm = false;
 	unique_serials.clear();
 
-	for (const auto& imm_found : immovables) {
+	for (const Widelands::ImmovableFound& imm_found : immovables) {
 		const Widelands::BaseImmovable& base_immovable = *imm_found.object;
 
 		if (!unique_serials.insert(base_immovable.serial()).second) {
@@ -2130,7 +2130,7 @@ void DefaultAI::update_mineable_field(MineableField& field) {
 void DefaultAI::update_productionsite_stats() {
 
 	// Reset statistics for all buildings
-	for (auto& bo : buildings_) {
+	for (BuildingObserver& bo : buildings_) {
 		bo.current_stats = 0;
 		bo.unoccupied_count = 0;
 		bo.unconnected_count = 0;
@@ -2190,7 +2190,7 @@ void DefaultAI::update_productionsite_stats() {
 	}
 
 	// Scale statistics down
-	for (auto& bo : buildings_) {
+	for (BuildingObserver& bo : buildings_) {
 		if (bo.cnt_built - bo.unconnected_count > 0) {
 			bo.current_stats /= bo.cnt_built - bo.unconnected_count;
 		}
@@ -3181,7 +3181,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// +1 if any consumers_ are nearby
 					consumers_nearby_count = 0;
 
-					for (const auto& output : bo.ware_outputs) {
+					for (const Widelands::DescriptionIndex& output : bo.ware_outputs) {
 						consumers_nearby_count += bf->consumers_nearby.at(output);
 					}
 
@@ -6383,7 +6383,7 @@ void DefaultAI::out_of_resources_site(const Widelands::ProductionSite& site) {
 	const uint32_t gametime = game().get_gametime();
 
 	// we must identify which mine matches the productionsite a note refers to
-	for (auto& mine : mines_) {
+	for (ProductionSiteObserver& mine : mines_) {
 		if (mine.site == &site) {
 			if (mine.no_resources_since > gametime) {
 				mine.no_resources_since = gametime;

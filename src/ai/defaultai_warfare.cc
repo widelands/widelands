@@ -72,7 +72,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 		   game(), Widelands::Area<Widelands::FCoords>(f, (vision + 3 < 13) ? 13 : vision + 3),
 		   &immovables, Widelands::FindImmovableAttackTarget());
 
-		for (const auto& imm_found : immovables) {
+		for (const Widelands::ImmovableFound& imm_found : immovables) {
 			if (upcast(Widelands::MilitarySite const, bld, imm_found.object)) {
 				const Widelands::PlayerNumber opn = bld->owner().player_number();
 				if (player_statistics.get_is_enemy(opn)) {
@@ -281,7 +281,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				                    Widelands::Area<Widelands::FCoords>(
 				                       map.get_fcoords(Widelands::Coords::unhash(observer.first)), 10),
 				                    &immovables);
-				for (const auto& im_found : immovables) {
+				for (const Widelands::ImmovableFound& im_found : immovables) {
 					const Widelands::BaseImmovable& base_immovable = *im_found.object;
 
 					if (!unique_serials.insert(base_immovable.serial()).second) {
@@ -898,7 +898,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 	}
 
 	ts_without_trainers_ = 0;  // zeroing
-	for (const auto& observer : trainingsites) {
+	for (const TrainingSiteObserver& observer : trainingsites) {
 		if (!observer.site->can_start_working()) {
 			++ts_without_trainers_;
 		}

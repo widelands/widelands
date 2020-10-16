@@ -89,7 +89,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	int32_t const tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
 	uint16_t trees = 0;
 
-	for (const auto& imm_found : immovables) {
+	for (const Widelands::ImmovableFound& imm_found : immovables) {
 		if (imm_found.object->has_attribute(rocks_attr)) {
 			++rocks;
 		}
@@ -177,7 +177,7 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	}
 
 	// and now over ships
-	for (const auto& observer : allships) {
+	for (const ShipObserver& observer : allships) {
 		if (observer.ship->state_is_expedition()) {
 			++expeditions_in_progress;
 		}
@@ -343,7 +343,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 	while (!marine_task_queue.empty()) {
 		if (marine_task_queue.back() == kStopShipyard) {
 			// iterate over all production sites searching for shipyard
-			for (const auto& observer : productionsites) {
+			for (const ProductionSiteObserver& observer : productionsites) {
 				if (observer.bo->is(BuildingAttribute::kShipyard)) {
 					if (!observer.site->is_stopped()) {
 						game().send_player_start_stop_building(*observer.site);
@@ -353,7 +353,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		}
 
 		if (marine_task_queue.back() == kReprioritize) {
-			for (const auto& observer : productionsites) {
+			for (const ProductionSiteObserver& observer : productionsites) {
 				if (observer.bo->is(BuildingAttribute::kShipyard)) {
 					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
 						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
