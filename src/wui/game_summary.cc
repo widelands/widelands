@@ -29,15 +29,10 @@
 #include "logic/player.h"
 #include "logic/player_end_result.h"
 #include "logic/playersmanager.h"
-#include "ui_basic/box.h"
-#include "ui_basic/button.h"
-#include "ui_basic/table.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 
-#define PADDING 4
+constexpr uint8_t kPadding = 4;
 
 GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWindow::Registry* r)
    : UI::UniqueWindow(parent, "game_summary", r, 0, 0, _("Game over")),
@@ -45,39 +40,51 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
      desired_speed_(game_.game_controller()->desired_speed()) {
 	game_.game_controller()->set_desired_speed(0);
 	// Init boxes
-	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, PADDING);
+	UI::Box* vbox = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 	title_area_ = new UI::Textarea(
 	   vbox, "", UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle));
-	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	vbox->add_space(PADDING);
 
-	UI::Box* hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	vbox->add(title_area_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	vbox->add_space(kPadding);
+
+	UI::Box* hbox1 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0, UI::PanelStyle::kWui);
 	players_table_->fit_height(game_.player_manager()->get_players_end_status().size());
-	hbox1->add_space(PADDING);
-	hbox1->add(players_table_);
-	hbox1->add_space(PADDING);
 
-	UI::Box* info_box = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
-	info_area_label_ = new UI::Textarea(info_box, _("Player Info:"));
-	info_box->add(info_area_label_);
+	info_box_ = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
+	info_area_label_ = new UI::Textarea(info_box_, _("Player Info:"));
 	info_area_ = new UI::MultilineTextarea(
-	   info_box, 0, 0, 130,
-	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING),
+	   info_box_, 0, 0, 130,
+	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - kPadding),
 	   UI::PanelStyle::kWui, "");
-	info_box->add(info_area_, UI::Box::Resizing::kFullSize);
-	info_box->add_space(PADDING);
-	hbox1->add(info_box);
-	hbox1->add_space(PADDING);
+
+	widelands_icon_ = new UI::Icon(hbox1, 0, 0, info_area_->get_w(), info_area_->get_h(),
+	                               g_image_cache->get("images/logos/wl-ico-128.png"));
+
+	info_box_->add(info_area_label_);
+	info_box_->add(info_area_, UI::Box::Resizing::kFullSize);
+
+	hbox1->add_space(kPadding);
+
+	// At all times, only one of those is visible
+	info_box_->set_visible(false);
+	widelands_icon_->set_visible(false);
+	hbox1->add(info_box_);
+	hbox1->add(widelands_icon_);
+
+	hbox1->add_space(3 * kPadding);
+	hbox1->add(players_table_);
+	hbox1->add_space(kPadding);
+
 	vbox->add(hbox1);
 
-	UI::Box* bottom_box = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Box* bottom_box = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 
-	bottom_box->add_space(PADDING);
+	bottom_box->add_space(kPadding);
 
 	gametime_label_ = new UI::Textarea(bottom_box, _("Elapsed time:"));
 	bottom_box->add(gametime_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	bottom_box->add_space(PADDING);
+	bottom_box->add_space(kPadding);
 	gametime_value_ = new UI::Textarea(bottom_box, gametimestring(game_.get_gametime()));
 	bottom_box->add(gametime_value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -87,14 +94,14 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	   new UI::Button(bottom_box, "continue_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
 	                  g_image_cache->get("images/ui_basic/continue.png"), _("Continue playing"));
 	bottom_box->add(continue_button_);
-	bottom_box->add_space(PADDING);
+	bottom_box->add_space(kPadding);
 	stop_button_ = new UI::Button(bottom_box, "stop_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
 	                              g_image_cache->get("images/wui/menus/exit.png"), _("Exit Game"));
 	bottom_box->add(stop_button_);
-	bottom_box->add_space(PADDING);
+	bottom_box->add_space(kPadding);
 
 	vbox->add(bottom_box, UI::Box::Resizing::kFullSize);
-	vbox->add_space(PADDING);
+	vbox->add_space(kPadding);
 	set_center_panel(vbox);
 
 	// Prepare table
@@ -113,6 +120,12 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->focus();
 	fill_data();
 
+	players_table_->set_column_compare(
+	   2, [this](uint32_t a, uint32_t b) { return compare_status(a, b); });
+	players_table_->set_sort_column(2);
+	players_table_->set_sort_descending(false);
+	players_table_->sort();
+
 	set_thinks(false);
 }
 
@@ -123,6 +136,37 @@ bool GameSummaryScreen::handle_mousepress(uint8_t btn, int32_t mx, int32_t my) {
 	}
 
 	return UI::Window::handle_mousepress(btn, mx, my);
+}
+
+bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t index2) const {
+	const std::vector<Widelands::PlayerEndStatus>& all_statuses =
+	   game_.player_manager()->get_players_end_status();
+
+	const uintptr_t a = (*players_table_)[index1];
+	const uintptr_t b = (*players_table_)[index2];
+
+	assert(a < all_statuses.size());
+	assert(b < all_statuses.size());
+
+	const Widelands::PlayerEndStatus p1 = all_statuses[a];
+	const Widelands::PlayerEndStatus p2 = all_statuses[b];
+
+	if (p1.result == p2.result) {
+		// We want to use the time as tie-breaker: The first player to lose sorts last
+		return p1.time > p2.time;
+	} else if (p1.result == Widelands::PlayerEndResult::kWon) {
+		// Winners sort first
+		return true;
+	} else if (p1.result == Widelands::PlayerEndResult::kResigned) {
+		// Resigned players sort last
+		return false;
+	} else if (p2.result == Widelands::PlayerEndResult::kWon) {
+		return false;
+	} else if (p2.result == Widelands::PlayerEndResult::kResigned) {
+		return true;
+	}
+
+	NEVER_HERE();
 }
 
 void GameSummaryScreen::fill_data() {
@@ -224,6 +268,13 @@ void GameSummaryScreen::player_selected(uint32_t entry_index) {
 
 	std::string info_str = parse_player_info(player_status.info);
 	info_area_->set_text(info_str);
+	if (info_str.empty()) {
+		widelands_icon_->set_visible(true);
+		info_box_->set_visible(false);
+	} else {
+		widelands_icon_->set_visible(false);
+		info_box_->set_visible(true);
+	}
 	layout();
 }
 
