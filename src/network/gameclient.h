@@ -144,6 +144,9 @@ private:
 	                bool sendreason = true,
 	                bool showmsg = true);
 
+	std::list<Widelands::PlayerCommand*> pending_player_commands_;
+	void do_send_player_command(Widelands::PlayerCommand*);
+
 	GameClientImpl* d;
 };
 

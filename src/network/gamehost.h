@@ -182,6 +182,9 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
+	std::list<Widelands::PlayerCommand*> pending_player_commands_;
+	void do_send_player_command(Widelands::PlayerCommand*);
+
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;

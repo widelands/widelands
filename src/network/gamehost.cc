@@ -750,6 +750,12 @@ void GameHost::run() {
 void GameHost::think() {
 	NoteThreadSafeFunction::instantiate([this]() { handle_network(); }, true);
 
+	while (!pending_player_commands_.empty()) {
+		MutexLock m(MutexLock::ID::kCommands);
+		do_send_player_command(pending_player_commands_.front());
+		pending_player_commands_.pop_front();
+	}
+
 	if (d->game) {
 		uint32_t curtime = SDL_GetTicks();
 		int32_t delta = curtime - d->lastframe;
@@ -786,7 +792,11 @@ void GameHost::think() {
 }
 
 void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
-	pc->set_duetime(std::max(pc->duetime(), d->committed_networktime + 1u));
+	pending_player_commands_.push_back(pc);
+}
+
+void GameHost::do_send_player_command(Widelands::PlayerCommand* pc) {
+	pc->set_duetime(d->committed_networktime + 1);
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_PLAYERCOMMAND);
@@ -2248,7 +2258,7 @@ void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, 
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
-	send_player_command(plcmd);
+	do_send_player_command(plcmd);
 }
 
 void GameHost::handle_syncreport(uint32_t const client_num, Client& client, RecvPacket& r) {
