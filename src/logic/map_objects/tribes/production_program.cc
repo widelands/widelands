@@ -1982,9 +1982,9 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	const Buildcost& buildcost = descr.buildcost();
 	DescriptionIndex available_resource = INVALID_INDEX;
 
-	for (Buildcost::const_iterator it = buildcost.begin(); it != buildcost.end(); ++it) {
-		if (psite.inputqueue(it->first, wwWARE).get_filled() > 0) {
-			available_resource = it->first;
+	for (const auto& item : buildcost) {
+		if (psite.inputqueue(item.first, wwWARE).get_filled() > 0) {
+			available_resource = item.first;
 			break;
 		}
 	}

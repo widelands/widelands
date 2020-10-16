@@ -230,8 +230,8 @@ void Box::layout() {
 
 	// Second pass: Count number of infinite spaces
 	int infspace_count = 0;
-	for (size_t idx = 0; idx < items_.size(); ++idx) {
-		if (items_[idx].fillspace) {
+	for (const Item& item : items_) {
+		if (item.fillspace) {
 			infspace_count++;
 		}
 	}
@@ -241,13 +241,13 @@ void Box::layout() {
 	// divide the remaining space by the number of remaining infinite
 	// spaces every time, and not just one.
 	int max_depths = orientation_ == Horizontal ? get_inner_w() : get_inner_h();
-	for (size_t idx = 0; idx < items_.size(); ++idx) {
-		if (items_[idx].fillspace) {
+	for (Item& item : items_) {
+		if (item.fillspace) {
 			assert(infspace_count > 0);
 			// Avoid division by 0
-			items_[idx].assigned_var_depth =
+			item.assigned_var_depth =
 			   std::max(0, (max_depths - totaldepth) / std::max(1, infspace_count));
-			totaldepth += items_[idx].assigned_var_depth;
+			totaldepth += item.assigned_var_depth;
 			infspace_count--;
 		}
 	}

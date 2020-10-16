@@ -632,48 +632,45 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 	case ShipStates::kExpeditionColonizing: {
 		assert(!expedition_->seen_port_buildspaces.empty());
-		BaseImmovable* baim = map[expedition_->seen_port_buildspaces.front()].get_immovable();
-		if (baim) {
-			assert(!items_.empty());
-			const size_t nr_items = items_.size() - 1;
-			upcast(ConstructionSite, cs, baim);
-			WareInstance* ware;
-			Worker* worker;
-			items_.at(nr_items).get(game, &ware, &worker);
-			if (ware) {
-				// no, we don't transfer the wares, we create new ones out of
-				// air and remove the old ones ;)
-				WaresQueue* wq;
-				try {
-					wq = dynamic_cast<WaresQueue*>(&cs->inputqueue(ware->descr_index(), wwWARE));
-					assert(wq);
-				} catch (const WException&) {
-					// cs->inputqueue() may throw if this is an additional item
-					wq = nullptr;
-				}
-				if (!wq || wq->get_filled() >= wq->get_max_fill()) {
-					cs->add_additional_ware(ware->descr_index());
+		upcast(ConstructionSite, cs, map[expedition_->seen_port_buildspaces.front()].get_immovable());
+		// some safety checks that we have identified the correct csite
+		if (cs && cs->get_owner() == get_owner() && cs->get_built_per64k() == 0 &&
+		    owner().tribe().building_index(cs->building().name()) == owner().tribe().port()) {
+			for (ShippingItem& si : items_) {
+				WareInstance* ware;
+				Worker* worker;
+				si.get(game, &ware, &worker);
+				assert((worker == nullptr) ^ (ware == nullptr));
+				if (ware) {
+					WaresQueue* wq;
+					try {
+						wq = dynamic_cast<WaresQueue*>(&cs->inputqueue(ware->descr_index(), wwWARE));
+						assert(wq);
+					} catch (const WException&) {
+						// cs->inputqueue() may throw if this is an additional item
+						wq = nullptr;
+					}
+					if (!wq || wq->get_filled() >= wq->get_max_fill()) {
+						cs->add_additional_ware(ware->descr_index());
+					} else {
+						wq->set_filled(wq->get_filled() + 1);
+					}
 				} else {
-					wq->set_filled(wq->get_filled() + 1);
+					worker->set_economy(nullptr, wwWARE);
+					worker->set_economy(nullptr, wwWORKER);
+					worker->set_location(cs);
+					worker->set_position(game, cs->get_position());
+					worker->reset_tasks(game);
+					if (cs->get_builder_request() &&
+					    worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
+						PartiallyFinishedBuilding::request_builder_callback(
+						   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
+					} else {
+						cs->add_additional_worker(game, *worker);
+					}
 				}
-				items_.at(nr_items).remove(game);
-				items_.resize(nr_items);
-			} else {
-				assert(worker);
-				worker->set_economy(nullptr, wwWARE);
-				worker->set_economy(nullptr, wwWORKER);
-				worker->set_location(cs);
-				worker->set_position(game, cs->get_position());
-				worker->reset_tasks(game);
-				if (cs->get_builder_request() &&
-				    worker->descr().worker_index() == worker->get_owner()->tribe().builder()) {
-					PartiallyFinishedBuilding::request_builder_callback(
-					   game, *cs->get_builder_request(), worker->descr().worker_index(), worker, *cs);
-				} else {
-					cs->add_additional_worker(game, *worker);
-				}
-				items_.resize(nr_items);
 			}
+			items_.clear();
 		} else {  // it seems that port constructionsite has disappeared
 			// Send a message to the player, that a port constructionsite is gone
 			send_message(game, _("Port Lost!"), _("New port construction site is gone"),
@@ -682,28 +679,23 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			send_signal(game, "cancel_expedition");
 		}
 
-		if (items_.empty() || !baim) {  // we are done, either way
-			set_ship_state_and_notify(
-			   ShipStates::kTransport,
-			   NoteShip::Action::kDestinationChanged);  // That's it, expedition finished
+		set_ship_state_and_notify(ShipStates::kTransport, NoteShip::Action::kDestinationChanged);
 
-			// Bring us back into a fleet and a economy.
-			init_fleet(game);
+		init_fleet(game);
 
-			// for case that there are any workers left on board
-			// (applicable when port construction space is kLost)
-			Worker* worker;
-			for (ShippingItem& item : items_) {
-				item.get(game, nullptr, &worker);
-				if (worker) {
-					worker->reset_tasks(game);
-					worker->start_task_shipping(game, nullptr);
-				}
+		// for case that there are any workers left on board
+		// (applicable when port construction space is kLost)
+		Worker* worker;
+		for (ShippingItem& item : items_) {
+			item.get(game, nullptr, &worker);
+			if (worker) {
+				worker->reset_tasks(game);
+				worker->start_task_shipping(game, nullptr);
 			}
-
-			expedition_.reset(nullptr);
-			return start_task_idle(game, descr().main_animation(), kShipInterval);
 		}
+
+		expedition_.reset(nullptr);
+		return start_task_idle(game, descr().main_animation(), kShipInterval);
 	}
 		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:

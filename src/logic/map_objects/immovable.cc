@@ -870,8 +870,8 @@ void PlayerImmovable::set_economy(Economy* const e, WareWorker type) {
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 
-	for (uint32_t i = 0; i < workers_.size(); ++i) {
-		workers_[i]->set_economy(e, type);
+	for (Worker* worker : workers_) {
+		worker->set_economy(e, type);
 	}
 }
 

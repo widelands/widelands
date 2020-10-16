@@ -873,8 +873,8 @@ bool MilitarySite::military_presence_kept(Game& game) {
 	FCoords const fc = game.map().get_fcoords(get_position());
 	game.map().find_immovables(game, Area<FCoords>(fc, 3), &immovables);
 
-	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		if (upcast(MilitarySite const, militarysite, immovables[i].object)) {
+	for (const ImmovableFound& imm : immovables) {
+		if (upcast(MilitarySite const, militarysite, imm.object)) {
 			if (this != militarysite && &owner() == &militarysite->owner() &&
 			    get_size() <= militarysite->get_size() && militarysite->didconquer_) {
 				return true;

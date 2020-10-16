@@ -214,14 +214,13 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	last_request_time_.save(fw);
 
 	fw.unsigned_16(transfers_.size());  //  Write number of current transfers.
-	for (uint32_t i = 0; i < transfers_.size(); ++i) {
-		Transfer& trans = *transfers_[i];
-		if (trans.ware_) {  //  write ware/worker
-			assert(mos.is_object_known(*trans.ware_));
-			fw.unsigned_32(mos.get_object_file_index(*trans.ware_));
-		} else if (trans.worker_) {
-			assert(mos.is_object_known(*trans.worker_));
-			fw.unsigned_32(mos.get_object_file_index(*trans.worker_));
+	for (const Transfer* trans : transfers_) {
+		if (trans->ware_) {  //  write ware/worker
+			assert(mos.is_object_known(*trans->ware_));
+			fw.unsigned_32(mos.get_object_file_index(*trans->ware_));
+		} else if (trans->worker_) {
+			assert(mos.is_object_known(*trans->worker_));
+			fw.unsigned_32(mos.get_object_file_index(*trans->worker_));
 		}
 	}
 	requirements_.write(fw, game, mos);
