@@ -76,7 +76,7 @@ UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 	                  kSuggestedTeamsUnitSize, UI::ButtonStyle::kWuiSecondary,
 	                  playercolor_image(p, "images/players/player_position_menu.png"),
 	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
-	b->sigclicked.connect([this, b, p]() {
+	b->sigclicked.connect([this, b]() {
 		auto teams_it = team_.begin();
 		for (std::vector<UI::Button*>& vector : buttons_) {
 			auto t = teams_it->begin();
@@ -385,9 +385,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		suggested_teams_entries_.push_back(ste);
 	});
 
-	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kFullSize);
 	buttons_box_.add_space(4);
-	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kFullSize);
+
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
 	tab_box_.add_space(4);
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
