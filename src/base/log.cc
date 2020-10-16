@@ -121,6 +121,17 @@ void sdl_logging_func(void* userdata,
 	static_cast<Logger*>(userdata)->log_cstring(message);
 }
 #endif
+
+std::vector<std::string> split(const std::string& s) {
+	std::vector<std::string> result;
+	for (std::string::size_type pos = 0, endpos;
+	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
+		endpos = s.find('\n', pos);
+		result.push_back(s.substr(pos, endpos - pos));
+	}
+	return result;
+}
+
 }  // namespace
 
 // Default to stdout for logging.
@@ -160,19 +171,8 @@ static const char* to_string(const LogType& type) {
 		return "WARNING";
 	case LogType::kError:
 		return "ERROR";
-	default:
-		NEVER_HERE();
 	}
-}
-
-std::vector<std::string> split(const std::string& s) {
-	std::vector<std::string> result;
-	for (std::string::size_type pos = 0, endpos;
-	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
-		endpos = s.find('\n', pos);
-		result.push_back(s.substr(pos, endpos - pos));
-	}
-	return result;
+	NEVER_HERE();
 }
 
 void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt, ...) {

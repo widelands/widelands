@@ -361,9 +361,8 @@ void FullscreenMenuMapSelect::fill_table() {
 					         mapfilename.c_str());
 				}
 
-				for (std::set<uint32_t>::const_iterator it = req_tags_.begin(); it != req_tags_.end();
-				     ++it) {
-					has_all_tags &= mapdata.tags.count(tags_ordered_[*it]);
+				for (uint32_t tag : req_tags_) {
+					has_all_tags &= mapdata.tags.count(tags_ordered_[tag]);
 				}
 
 				if (!has_all_tags) {

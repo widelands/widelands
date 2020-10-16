@@ -441,9 +441,9 @@ void WuiPlotArea::update() {
 	if (plotmode_ == Plotmode::kAbsolute) {
 		for (const auto& plot : plotdata_) {
 			if (plot.second.showplot) {
-				for (uint32_t l = 0; l < plot.second.absolute_data->size(); ++l) {
-					if (highest_scale_ < (*plot.second.absolute_data)[l]) {
-						highest_scale_ = (*plot.second.absolute_data)[l];
+				for (const auto& absdata : *plot.second.absolute_data) {
+					if (highest_scale_ < absdata) {
+						highest_scale_ = absdata;
 					}
 				}
 			}

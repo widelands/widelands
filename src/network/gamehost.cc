@@ -578,8 +578,8 @@ int16_t GameHost::get_local_playerposition() {
 }
 
 void GameHost::clear_computer_players() {
-	for (uint32_t i = 0; i < d->computerplayers.size(); ++i) {
-		delete d->computerplayers.at(i);
+	for (AI::ComputerPlayer* ai : d->computerplayers) {
+		delete ai;
 	}
 	d->computerplayers.clear();
 }
@@ -1022,8 +1022,8 @@ bool GameHost::can_launch() {
 
 	const std::vector<UserSettings>& users = d->settings.users;
 
-	for (std::vector<Client>::iterator j = d->clients.begin(); j != d->clients.end(); ++j) {
-		const int usernum = j->usernum;
+	for (const Client& client : d->clients) {
+		const int usernum = client.usernum;
 		if (usernum == -1) {
 			return false;
 		}
