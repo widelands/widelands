@@ -1323,8 +1323,7 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 
 	// upgrades
 	fw.unsigned_8(trainingsite.upgrades_.size());
-	for (uint8_t i = 0; i < trainingsite.upgrades_.size(); ++i) {
-		const TrainingSite::Upgrade& upgrade = trainingsite.upgrades_[i];
+	for (const TrainingSite::Upgrade& upgrade : trainingsite.upgrades_) {
 		fw.unsigned_8(static_cast<uint8_t>(upgrade.attribute));
 		fw.unsigned_8(upgrade.prio);
 		fw.unsigned_8(upgrade.credit);

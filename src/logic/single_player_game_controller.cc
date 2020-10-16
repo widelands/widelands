@@ -42,8 +42,8 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
 }
 
 SinglePlayerGameController::~SinglePlayerGameController() {
-	for (uint32_t i = 0; i < computerplayers_.size(); ++i) {
-		delete computerplayers_[i];
+	for (AI::ComputerPlayer* ai : computerplayers_) {
+		delete ai;
 	}
 	computerplayers_.clear();
 }
