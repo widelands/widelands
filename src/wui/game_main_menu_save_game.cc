@@ -209,9 +209,6 @@ void GameMainMenuSaveGame::pause_game(bool paused) {
 		return;
 	}
 	igbase().game().game_controller()->set_paused(paused);
-	if (paused) {
-		wait_for_current_logic_frame();
-	}
 }
 
 /**
@@ -258,7 +255,11 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 		   gs.save();
 	   },
 	   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
-	GenericSaveHandler::Error error = gsh.save();
+	GenericSaveHandler::Error error;
+	{
+		MutexLock m(MutexLock::ID::kLogicFrame, [this]() { stay_responsive(); });
+		error = gsh.save();
+	}
 
 	game.remove_loader_ui();
 

@@ -68,7 +68,7 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 				done = true;
 			}));
 			while (!done) {
-				SDL_Delay(5);
+				SDL_Delay(2);
 			}
 
 			if (error) {
@@ -88,7 +88,7 @@ MutexLock::MutexLock(ID i) : id_(i) {
 MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
 	while (!g_mutex[id_].try_lock()) {
 		run_while_waiting();
-		SDL_Delay(5);
+		SDL_Delay(2);
 	}
 }
 MutexLock::~MutexLock() {

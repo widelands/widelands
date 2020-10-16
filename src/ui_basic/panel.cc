@@ -173,7 +173,9 @@ void Panel::logic_thread() {
 
 		if (m && (m->flags_ & pf_logic_think)) {
 			switch (m->logic_thread_locked_) {
-			case LogicThreadState::kFree:
+			case LogicThreadState::kFree: {
+				MutexLock lock(MutexLock::ID::kLogicFrame);
+
 				m->logic_thread_locked_ = LogicThreadState::kLocked;
 
 				m->game_logic_think();  // actual game logic
@@ -188,6 +190,7 @@ void Panel::logic_thread() {
 				default:
 					NEVER_HERE();
 				}
+			}
 				break;
 
 			case LogicThreadState::kEndingRequested:
@@ -202,9 +205,8 @@ void Panel::logic_thread() {
 
 		next_think_time = time + kGameLogicDelay;
 		time = SDL_GetTicks();
-		if (next_think_time > time) {
-			SDL_Delay(next_think_time - time);
-		}
+		// Always sleep a bit because another thread might want to lock our mutex
+		SDL_Delay(next_think_time < time + 5 ? 5 : next_think_time - time);
 	}
 	logic_thread_running_ = false;
 }
@@ -223,15 +225,17 @@ void Panel::handle_notes() {
 	}
 }
 
-static Panel& get_forefather(Panel* p) {
+Panel& Panel::get_forefather() {
+	Panel* p = this;
 	while (p->get_parent()) {
 		p = p->get_parent();
 	}
 	return *p;
 }
 
-void Panel::do_update_graphics(Panel& forefather, const std::string& message) {
+void Panel::do_update_graphics(const std::string& message) {
 	RenderTarget& rt = *g_gr->get_render_target();
+	Panel& forefather = get_forefather();
 
 	{
 		MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
@@ -267,6 +271,16 @@ void Panel::do_update_graphics(Panel& forefather, const std::string& message) {
 	g_gr->refresh();
 }
 
+void Panel::stay_responsive() {
+	assert(modal_);
+	if (modal_ != this) {
+		return modal_->stay_responsive();
+	}
+
+	handle_notes();
+	do_update_graphics(_("Please wait…"));
+}
+
 void Panel::wait_for_current_logic_frame(Panel* assume_modal) {
 	if (!is_initializer_thread()) {
 		// This is the logic thread, so there would be little
@@ -281,13 +295,10 @@ void Panel::wait_for_current_logic_frame(Panel* assume_modal) {
 		return;
 	}
 
-	Panel& forefather = get_forefather(this);
-
 	Panel* wait = assume_modal ? assume_modal : modal_;
 	while (wait->logic_thread_locked_ == LogicThreadState::kLocked) {
-		handle_notes();
-		do_update_graphics(forefather, _("Please wait…"));
-		SDL_Delay(5);
+		stay_responsive();
+		SDL_Delay(2);
 	}
 }
 
@@ -311,8 +322,6 @@ int Panel::do_run() {
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
 
-	Panel& forefather = get_forefather(this);
-
 	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay = 1000 / std::max(5, get_config_int("maxfps", 30));
 
@@ -335,9 +344,11 @@ int Panel::do_run() {
 	                                   }) :
 	                                nullptr;
 
-	if (prevmodal) {
+	// NOCOM this seems not to be needed. Remove these lines, and
+	// remove the parameter from `wait_for_current_logic_frame`.
+	/* if (prevmodal) {
 		wait_for_current_logic_frame(prevmodal);
-	}
+	} */
 
 	// Loop
 	running_ = true;
@@ -370,7 +381,7 @@ int Panel::do_run() {
 			check_child_death();
 
 			if (is_initializer) {
-				do_update_graphics(forefather, "");
+				do_update_graphics("");
 			}
 
 			next_time = start_time + draw_delay;
@@ -394,7 +405,7 @@ int Panel::do_run() {
 			handle_notes();
 
 			if (is_initializer) {
-				do_update_graphics(forefather, _("Game ending – please wait…"));
+				do_update_graphics(_("Game ending – please wait…"));
 			}
 
 			next_time = start_time + draw_delay;

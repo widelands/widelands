@@ -130,5 +130,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 		set_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
 		set_desired_size(get_w(), teamlist_offset + lineup_counter * (label_height_));
 	}
+
+	initialization_complete();
 }
 }  // namespace UI

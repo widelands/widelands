@@ -320,6 +320,8 @@ public:
 	 */
 	void initialization_complete();
 
+	Panel& get_forefather();
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -360,6 +362,10 @@ protected:
 
 	// Wait until the current logic frame has ended
 	void wait_for_current_logic_frame(Panel* = nullptr);
+	// Can be called during a lengthy wait to ensure that
+	// notes are still handled and the graphics refreshed.
+	// Does _not_ handle user input (this is on purpose!!)
+	void stay_responsive();
 
 private:
 	bool initialized_;
@@ -454,7 +460,7 @@ private:
 	void handle_notes();
 	std::list<NoteThreadSafeFunction> notes_;
 	std::set<uint32_t> handled_notes_;
-	void do_update_graphics(Panel& forefather, const std::string&);
+	void do_update_graphics(const std::string&);
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };
