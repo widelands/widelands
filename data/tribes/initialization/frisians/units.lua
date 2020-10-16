@@ -909,7 +909,7 @@ tribes:new_tribe {
          name = "berry_bush_blueberry_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -937,7 +937,7 @@ tribes:new_tribe {
          name = "berry_bush_currant_red_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -965,7 +965,7 @@ tribes:new_tribe {
          name = "berry_bush_juniper_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -993,7 +993,7 @@ tribes:new_tribe {
          name = "berry_bush_raspberry_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1021,7 +1021,7 @@ tribes:new_tribe {
          name = "berry_bush_currant_black_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1049,7 +1049,7 @@ tribes:new_tribe {
          name = "berry_bush_strawberry_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1077,7 +1077,7 @@ tribes:new_tribe {
          name = "berry_bush_stink_tree_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1105,7 +1105,7 @@ tribes:new_tribe {
          name = "berry_bush_desert_hackberry_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1133,7 +1133,7 @@ tribes:new_tribe {
          name = "berry_bush_sea_buckthorn_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
-            purpose = _("This berry bush is growing.")
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1161,7 +1161,7 @@ tribes:new_tribe {
          name = "barleyfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Barley Field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1231,7 +1231,7 @@ tribes:new_tribe {
          name = "reedfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Reed Field
-            purpose = _("This reed field is growing.")
+            purpose = _("This reed field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1356,28 +1356,28 @@ tribes:new_tribe {
          name = "wheatfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Wheat field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "cornfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Corn Field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "blackrootfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Blackroot Field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "grapevine_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Grapevine
-            purpose = _("This grapevine is growing.")
+            purpose = _("This grapevine is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       -- Used by the fruit collector
