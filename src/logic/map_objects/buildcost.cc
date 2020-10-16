@@ -53,16 +53,16 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
  */
 Widelands::Quantity Buildcost::total() const {
 	Widelands::Quantity sum = 0;
-	for (const_iterator it = begin(); it != end(); ++it) {
-		sum += it->second;
+	for (const auto& item : *this) {
+		sum += item.second;
 	}
 	return sum;
 }
 
 void Buildcost::save(FileWrite& fw, const Widelands::TribeDescr& tribe) const {
-	for (const_iterator it = begin(); it != end(); ++it) {
-		fw.c_string(tribe.get_ware_descr(it->first)->name());
-		fw.unsigned_8(it->second);
+	for (const auto& item : *this) {
+		fw.c_string(tribe.get_ware_descr(item.first)->name());
+		fw.unsigned_8(item.second);
 	}
 	fw.c_string("");
 }

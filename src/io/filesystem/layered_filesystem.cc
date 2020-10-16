@@ -65,16 +65,16 @@ FilenameSet LayeredFileSystem::list_directory(const std::string& path) const {
 	// Check home system first
 	if (home_) {
 		files = home_->list_directory(path);
-		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit) {
-			results.insert(*fnit);
+		for (const std::string& file : files) {
+			results.insert(file);
 		}
 	}
 
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		files = (*it)->list_directory(path);
 
-		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit) {
-			results.insert(*fnit);
+		for (const std::string& file : files) {
+			results.insert(file);
 		}
 	}
 	return results;

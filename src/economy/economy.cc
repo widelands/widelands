@@ -1017,8 +1017,7 @@ void Economy::handle_active_supplies(Game& game) {
 		// Stock of particular ware in preferred warehouse
 		uint32_t preferred_wh_stock = std::numeric_limits<uint32_t>::max();
 
-		for (uint32_t nwh = 0; nwh < warehouses_.size(); ++nwh) {
-			Warehouse* wh = warehouses_[nwh];
+		for (Warehouse* wh : warehouses_) {
 			StockPolicy policy = wh->get_stock_policy(type_, ware);
 			if (policy == StockPolicy::kPrefer) {
 				haveprefer = true;

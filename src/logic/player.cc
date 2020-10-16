@@ -1462,7 +1462,7 @@ bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
 void Player::update_vision(const FCoords& f, bool force_visible) {
 	SeersList team_seers_list;
 	if (!force_visible) {
-		team_seers_list = std::move(team_seers());
+		team_seers_list = team_seers();
 	}
 	update_vision(f, force_visible, team_seers_list);
 }
@@ -1492,7 +1492,7 @@ void Player::update_vision_whole_map() {
 	}
 	const MapIndex max = egbase().map().max_index();
 	Widelands::Field* f = &egbase().map()[0];
-	SeersList team_seers_list = std::move(team_seers());
+	SeersList team_seers_list = team_seers();
 	for (MapIndex i = 0; i < max; ++i, ++f) {
 		update_vision(egbase().map().get_fcoords(*f), false, team_seers_list);
 	}
@@ -1508,7 +1508,7 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	// When updating individual fields, only the objects from this list are evaluated.
 	SeersList nearby_objects;
 	if (!force_visible) {
-		nearby_objects = std::move(seers_for(area));
+		nearby_objects = seers_for(area);
 	}
 
 	for (const PlayerNumber& p : team_player_) {

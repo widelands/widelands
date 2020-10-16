@@ -28,7 +28,7 @@
 #include "logic/map_objects/walkingdir.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
-#include "wui/interactive_gamebase.h"
+#include "wui/interactive_base.h"
 #include "wui/itemwaresdisplay.h"
 
 /**
@@ -36,7 +36,7 @@
  */
 class ShipWindow : public UI::UniqueWindow {
 public:
-	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
+	ShipWindow(InteractiveBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
 
 private:
 	void think() override;
@@ -58,7 +58,7 @@ private:
 	void act_construct_port();
 	void act_explore_island(Widelands::IslandExploreDirection);
 
-	InteractiveGameBase& igbase_;
+	InteractiveBase& ibase_;
 	Widelands::OPtr<Widelands::Ship> ship_;
 
 	UI::Box vbox_;

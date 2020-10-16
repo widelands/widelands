@@ -427,7 +427,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Tribes& tribes, const Wo
 			throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
 		}
 		resource_indicators_[resource] = resis;
-	};
+	}
 
 	// Verify the resource indicators
 	for (DescriptionIndex resource_index = 0; resource_index < world.get_nr_resources();

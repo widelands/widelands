@@ -596,12 +596,12 @@ void Map::set_origin(const Coords& new_origin) {
 
 	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
-	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
+	for (const Coords& space : port_spaces_) {
 		Coords temp;
-		if (yisodd && ((it->y % 2) == 0)) {
-			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
+		if (yisodd && ((space.y % 2) == 0)) {
+			temp = Coords(space.x - new_origin.x - 1, space.y - new_origin.y);
 		} else {
-			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+			temp = Coords(space.x - new_origin.x, space.y - new_origin.y);
 		}
 		normalize_coords(temp);
 		new_port_spaces.insert(temp);
@@ -1717,15 +1717,14 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
-	for (uint32_t i = 0; i < 6; ++i) {
-		if (terrains[i] & TerrainDescription::Is::kWater ||
-		    terrains[i] & TerrainDescription::Is::kUnwalkable) {
+	for (const TerrainDescription::Is& is : terrains) {
+		if (is & TerrainDescription::Is::kWater || is & TerrainDescription::Is::kUnwalkable) {
 			return BaseImmovable::NONE;
 		}
-		if (terrains[i] & TerrainDescription::Is::kMineable) {
+		if (is & TerrainDescription::Is::kMineable) {
 			++cnt_mineable;
 		}
-		if (terrains[i] & TerrainDescription::Is::kWalkable) {
+		if (is & TerrainDescription::Is::kWalkable) {
 			++cnt_walkable;
 		}
 	}
@@ -1746,8 +1745,8 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		std::vector<ImmovableFound> objectlist;
 		find_immovables(egbase, Area<FCoords>(f, 1), &objectlist,
 		                FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-		for (uint32_t i = 0; i < objectlist.size(); ++i) {
-			const BaseImmovable* obj = objectlist[i].object;
+		for (const ImmovableFound& immfound : objectlist) {
+			const BaseImmovable* obj = immfound.object;
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE) {
 				continue;
