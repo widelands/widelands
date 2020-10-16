@@ -796,11 +796,11 @@ bool MapGenerator::create_random_map() {
 		// Take the nearest ones
 		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
-		for (uint16_t i = 0; i < coords.size(); ++i) {
-			uint32_t test = map_.calc_distance(coords[i], playerstart);
+		for (const Coords& c : coords) {
+			uint32_t test = map_.calc_distance(c, playerstart);
 			if (test < min_distance) {
 				min_distance = test;
-				coords2 = coords[i];
+				coords2 = c;
 			}
 		}
 
@@ -1136,8 +1136,8 @@ uint16_t Widelands::UniqueRandomMapInfo::generate_world_name_hash(const std::str
 	uint16_t hash = 0xa5a5;
 	int32_t posInHash = 0;
 
-	for (size_t idx = 0; idx < name.size(); idx++) {
-		hash ^= static_cast<uint8_t>(name[idx] & 0xff) << posInHash;
+	for (const char& ch : name) {
+		hash ^= static_cast<uint8_t>(ch & 0xff) << posInHash;
 		posInHash ^= 8;
 	}
 

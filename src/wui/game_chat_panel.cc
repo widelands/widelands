@@ -47,7 +47,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              "",
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLog),
-     editbox(this, 0, 0, w, style),
+     editbox(&box_, 0, 0, w, style),
      chat_message_counter(0),
      chat_sound(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 
