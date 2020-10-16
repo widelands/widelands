@@ -268,6 +268,12 @@ void Panel::do_update_graphics(Panel& forefather, const std::string& message) {
 }
 
 void Panel::wait_for_current_logic_frame(Panel* assume_modal) {
+	if (!is_initializer_thread()) {
+		// This is the logic thread, so there would be little
+		// point in waiting for ourself to do something
+		return;
+	}
+
 	assert(assume_modal || modal_);
 	if (!assume_modal && modal_ != this) {
 		assert(get_parent());
@@ -275,15 +281,12 @@ void Panel::wait_for_current_logic_frame(Panel* assume_modal) {
 		return;
 	}
 
-	const bool is_initializer = is_initializer_thread();
 	Panel& forefather = get_forefather(this);
 
 	Panel* wait = assume_modal ? assume_modal : modal_;
 	while (wait->logic_thread_locked_ == LogicThreadState::kLocked) {
 		handle_notes();
-		if (is_initializer) {
-			do_update_graphics(forefather, _("Please wait…"));
-		}
+		do_update_graphics(forefather, _("Please wait…"));
 		SDL_Delay(5);
 	}
 }
