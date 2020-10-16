@@ -245,8 +245,7 @@ void WatchWindow::do_follow() {
 		//  Find the bob closest to us
 		float closest_dist = 0;
 		Widelands::Bob* closest = nullptr;
-		for (uint32_t i = 0; i < bobs.size(); ++i) {
-			Widelands::Bob* const bob = bobs[i];
+		for (Widelands::Bob* const bob : bobs) {
 			const Vector2f field_position =
 			   MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 			const Vector2f p = bob->calc_drawpos(g, field_position, 1.f);

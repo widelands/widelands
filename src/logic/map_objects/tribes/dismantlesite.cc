@@ -229,20 +229,19 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
 		++work_completed_;
 
-		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
-			WaresQueue& wq = *consume_wares_[i];
-			if (!wq.get_filled()) {
+		for (WaresQueue* wq : consume_wares_) {
+			if (!wq->get_filled()) {
 				continue;
 			}
 
-			wq.set_filled(wq.get_filled() - 1);
-			wq.set_max_size(wq.get_max_size() - 1);
+			wq->set_filled(wq->get_filled() - 1);
+			wq->set_max_size(wq->get_max_size() - 1);
 
 			// Update statistics
-			get_owner()->ware_produced(wq.get_index());
+			get_owner()->ware_produced(wq->get_index());
 
-			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_index());
-			WareInstance& ware = *new WareInstance(wq.get_index(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(wq->get_index());
+			WareInstance& ware = *new WareInstance(wq->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 
