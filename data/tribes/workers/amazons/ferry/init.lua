@@ -31,4 +31,3 @@ tribes:new_ferry_type {
 }
 
 pop_textdomain()
-

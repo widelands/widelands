@@ -47,4 +47,3 @@ tribes:new_worker_type {
 }
 
 pop_textdomain()
-

@@ -184,4 +184,3 @@ tribes:new_soldier_type {
 }
 
 pop_textdomain()
-

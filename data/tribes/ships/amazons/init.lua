@@ -55,4 +55,3 @@ tribes:new_ship_type {
 }
 
 pop_textdomain()
-

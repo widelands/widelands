@@ -40,4 +40,3 @@ tribes:new_carrier_type {
 }
 
 pop_textdomain()
-
