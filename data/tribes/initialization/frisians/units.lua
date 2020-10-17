@@ -894,183 +894,253 @@ tribes:new_tribe {
       {
          name = "berry_bush_blueberry_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_blueberry_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_blueberry_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_blueberry_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_currant_red_tiny",
          helptexts = {
-
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_currant_red_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_currant_red_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_currant_red_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_juniper_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_juniper_small",
          helptexts = {
-
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_juniper_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_juniper_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_raspberry_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_raspberry_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_raspberry_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_raspberry_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_currant_black_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_currant_black_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_currant_black_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_currant_black_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_strawberry_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_strawberry_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_strawberry_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_strawberry_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_stink_tree_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_stink_tree_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_stink_tree_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_stink_tree_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_desert_hackberry_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_desert_hackberry_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_desert_hackberry_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_desert_hackberry_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
          name = "berry_bush_sea_buckthorn_tiny",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush has just been planted.")
          }
       },
       {
          name = "berry_bush_sea_buckthorn_small",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is growing.")
          }
       },
       {
          name = "berry_bush_sea_buckthorn_medium",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "berry_bush_sea_buckthorn_ripe",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
+            purpose = _("This berry bush is ready for harvesting.")
          }
       },
       {
@@ -1091,7 +1161,7 @@ tribes:new_tribe {
          name = "barleyfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Barley Field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1111,26 +1181,36 @@ tribes:new_tribe {
       {
          name = "pond_dry",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: Pond
+            purpose = _("When claydiggers dig up earth, they leave holes in the ground. These holes vanish after a while. Aqua farms can use them as ponds to grow fish in them, whereas charcoal burners erect their charcoal stacks in them.")
          }
       },
       {
          name = "pond_growing",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: Pond
+            purpose = _("Fish are maturing in this pond. A fisher working from an aqua farm will be able to catch them when they are bigger.")
          }
       },
       {
          name = "pond_mature",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: Pond
+            purpose = _("Fish are living in this pond. A fisher working from an aqua farm can catch them as food.")
          }
       },
       {
          name = "pond_burning",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: Pond
+            purpose = _("A charcoal stack is burning in this earthen hole. When it has burnt down, a charcoal burner will be able to gather coal from it.")
          }
       },
       {
          name = "pond_coal",
          helptexts = {
+            -- TRANSLATORS: Helptext for a frisian immovable: Pond
+            purpose = _("A charcoal stack, which had been erected in this earthen hole, is ready for a charcoal burner to gather coal from it.")
          }
       },
       {
@@ -1151,7 +1231,7 @@ tribes:new_tribe {
          name = "reedfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Reed Field
-            purpose = _("This reed field is growing.")
+            purpose = _("This reed field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
@@ -1276,28 +1356,28 @@ tribes:new_tribe {
          name = "wheatfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Wheat field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "cornfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Corn Field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "blackrootfield_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Blackroot Field
-            purpose = _("This field is growing.")
+            purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "grapevine_medium",
          helptexts = {
             -- TRANSLATORS: Helptext for a frisian immovable: Grapevine
-            purpose = _("This grapevine is growing.")
+            purpose = _("This grapevine is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       -- Used by the fruit collector
