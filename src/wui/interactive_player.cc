@@ -443,8 +443,9 @@ void InteractivePlayer::think() {
 
 	// Cleanup found port spaces if the ship sailed on or was destroyed
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
-		if (!egbase().objects().object_still_available(it->first) ||
-		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+		Widelands::Ship* ship = it->first.get(egbase());
+		if (!ship ||
+		    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 			expedition_port_spaces_.erase(it);
 			// If another port space also needs removing, we'll take care of it in the next frame
 			return;
