@@ -123,7 +123,7 @@ wl.World():new_immovable_type{
          frames = 7,
          rows = 4,
          columns = 2,
-         hotspot = { 11, 61 },
+         hotspot = { 10, 60 },
          play_once = true
       }
    },
