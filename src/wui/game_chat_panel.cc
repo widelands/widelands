@@ -273,22 +273,23 @@ void GameChatPanel::key_changed() {
 		return len;
 	};
 
-	std::string candidate = "";
-
 	// Helper function: Compare the given names and extract a common prefix (if existing)
-	static const auto compare_names = [&namepart, &candidate](const std::string& name) {
-		size_t n_equal_chars = count_equal_chars(namepart, name);
-		if (n_equal_chars == namepart.size()) {
+	// Note: Do *not* use the capture clause. Since the lambda is static, it will still refer
+	// to the old variables which might no longer be valid
+	static const auto compare_names = [](const std::string& my_namepart,
+											std::string& my_candidate, const std::string& my_name) {
+		size_t n_equal_chars = count_equal_chars(my_namepart, my_name);
+		if (n_equal_chars == my_namepart.size()) {
 			// We have a candidate!
 			// Check if we already have a candidate. If not, use this one
-			if (candidate.empty()) {
+			if (my_candidate.empty()) {
 				// Append a space so the user can continue typing after the completition
-				candidate = name + " ";
+				my_candidate = my_name + " ";
 			} else {
 				// We already have one. Create an new candidate that is the combination of the two
-				n_equal_chars = count_equal_chars(candidate, name);
+				n_equal_chars = count_equal_chars(my_candidate, my_name);
 				// No space appended here since the name is not complete yet
-				candidate = candidate.substr(0, n_equal_chars);
+				my_candidate = my_candidate.substr(0, n_equal_chars);
 			}
 		}
 	};
@@ -300,6 +301,7 @@ void GameChatPanel::key_changed() {
 	// but that is fixed on the next completition)
 	const int16_t n_humans = chat_.participants_->get_participant_counts()[0];
 	const std::string& local_name = chat_.participants_->get_local_playername();
+	std::string candidate = "";
 	for (int16_t i = 0; i < n_humans; ++i) {
 		assert(chat_.participants_->get_participant_type(i) != ParticipantList::ParticipantType::kAI);
 		const std::string& name = chat_.participants_->get_participant_name(i);
@@ -308,11 +310,11 @@ void GameChatPanel::key_changed() {
 			// Still do the autocomplete when in the middle of the message
 			continue;
 		}
-		compare_names(name);
+		compare_names(namepart, candidate, name);
 	}
 	// Also offer to complete to "@team" but only when at the beginning of the input
 	if (has_team_ && namepart_pos == 1 && str[0] == '@') {
-		compare_names("team");
+		compare_names(namepart, candidate, "team");
 	}
 
 	// If we have a candidate, set the new text for the input box
