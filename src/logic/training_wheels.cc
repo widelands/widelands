@@ -19,12 +19,14 @@
 
 #include "logic/training_wheels.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_table.h"
 
-// NOCOM Let experienced pleyers dismiss all training wheels
+// NOCOM Let experienced players dismiss all training wheels
 
 const std::string kTrainingWheelsFile = kSaveDir + g_fs->file_separator() + "training_wheels.conf";
 const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs->file_separator() +
@@ -36,17 +38,14 @@ namespace Widelands {
 TrainingWheels::TrainingWheels(LuaInterface& lua) : profile_(Profile::err_log), lua_(lua) {
 	g_fs->ensure_directory_exists(kSaveDir);
 	if (g_fs->file_exists(kTrainingWheelsFile)) {
-		log_dbg("READ");
 		profile_.read(kTrainingWheelsFile.c_str(), "global");
 	} else {
-		log_dbg("TODO");
 		write();
 	}
 	// Read init file and run
 	Section& section = profile_.pull_section("global");
 	std::unique_ptr<LuaTable> table(lua_.run_script("scripting/training_wheels/init.lua"));
 	std::unique_ptr<LuaTable> dependencies;
-	log_dbg("NOCOM getting sections");
 	for (const std::string& key : table->keys<std::string>()) {
 		dependencies = table->get_table(key);
 		const bool is_solved = section.get_bool(key.c_str());
@@ -61,10 +60,6 @@ TrainingWheels::TrainingWheels(LuaInterface& lua) : profile_(Profile::err_log), 
 	}
 	write();
 	run_objectives();
-}
-
-TrainingWheels::~TrainingWheels() {
-	log_dbg("DESTROY");
 }
 
 void TrainingWheels::run_objectives() {

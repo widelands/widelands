@@ -37,7 +37,6 @@ run(function()
    local objectives_message_objective = {
    name = "objectives_message_objective",
       title = _"Objectives",
-      position = "bottomright",
       number = 1,
       body = (
          objective_text(_"Open the Objectives window",

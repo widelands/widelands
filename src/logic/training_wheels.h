@@ -35,7 +35,7 @@ public:
 	 * Runs the training wheel scripts defined in data/scriting/training_wheels
 	 */
 	explicit TrainingWheels(LuaInterface& lua);
-	~TrainingWheels();
+	~TrainingWheels() = default;
 
 	void mark_as_solved(const std::string& objective);
 

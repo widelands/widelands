@@ -2,6 +2,6 @@
 
 return {
    objectives = {},
-   toolbar = { "objectives" },
-   lumberjack = { "objectives" , "toolbar" },
+   building_spaces = { "objectives" },
+   trees = { "objectives" , "building_spaces" },
 }
