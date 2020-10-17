@@ -77,6 +77,9 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 }
 
 void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const os) {
+	// If the player would send a command while we're saving the queue,
+	// this function would get trapped in an endless loop.
+	// So all new commands are put on hold until we're done here.
 	MutexLock m(MutexLock::ID::kCommands);
 
 	FileWrite fw;

@@ -139,12 +139,17 @@ end
 --    Searches through all open windows for a button named 'name' and, if
 --    found, clicks it.
 --
+--    This function is used only by the testsuite.
+--
 --    :arg name: Name of the button to click.
 --    :type name: :class:`string`.
 --
 --    :returns: :const:`true` if a button was clicked
 --
 function click_button(name)
+   -- Most buttons are not meant to be clicked by any thread other than the main thread.
+   -- If this button opens a window, its initialization may take several seconds.
+   -- Since only the testsuite uses this functionality, we can wait.
    sleep(5000)
 
    for button_name, button in pairs(wl.ui.MapView().buttons) do

@@ -68,6 +68,9 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 				done = true;
 			}));
 			while (!done) {
+				// Wait until the NoteThreadSafeFunction has been handled.
+				// Since `done` was passed by address, it will set to
+				// `true` when the function has been executed.
 				SDL_Delay(2);
 			}
 
@@ -80,6 +83,10 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 	}
 }
 
+// TODO(Nordfriese): All mutexes are global. If there is a bottleneck in the future where
+// a mutex needs to be locked only on one specific object really, then each object of
+// this class should be given a mutex on its own. Performance! Currently there are no
+// places where one mutex per object would be enough, so this is not implemented yet.
 static std::map<MutexLock::ID, std::recursive_mutex> g_mutex;
 
 MutexLock::MutexLock(ID i) : id_(i) {

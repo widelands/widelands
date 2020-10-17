@@ -186,10 +186,6 @@ void InputQueueDisplay::max_size_changed() {
  * Compare the current InputQueue state with the cached state; update if necessary.
  */
 void InputQueueDisplay::think() {
-	if (!interactive_base_.egbase().objects().object_still_available(&building_)) {
-		return;
-	}
-
 	if (static_cast<uint32_t>(check_max_size()) != cache_size_) {
 		max_size_changed();
 	}
@@ -205,10 +201,6 @@ void InputQueueDisplay::think() {
  * Render the current InputQueue state.
  */
 void InputQueueDisplay::draw(RenderTarget& dst) {
-	if (!cache_size_ || !interactive_base_.egbase().objects().object_still_available(&building_)) {
-		return;
-	}
-
 	cache_max_fill_ = check_max_fill();
 
 	uint32_t nr_inputs_to_draw =

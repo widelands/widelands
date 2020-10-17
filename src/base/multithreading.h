@@ -27,7 +27,10 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
+// Remember that the current thread is the thread that initialized the graphics system.
+// This function needs to be called exactly once when Widelands starts.
 void set_initializer_thread();
+// Whether the current thread is the same that called `set_initializer_thread()` on startup
 bool is_initializer_thread();
 
 /*
@@ -52,10 +55,12 @@ private:
 
 // Used only by Panel code
 struct NoteThreadSafeFunctionHandled {
+	CAN_BE_SENT_AS_NOTE(NoteId::ThreadSafeFunctionHandled)
+
 	const uint32_t id;
+
 	explicit NoteThreadSafeFunctionHandled(uint32_t i) : id(i) {
 	}
-	CAN_BE_SENT_AS_NOTE(NoteId::ThreadSafeFunctionHandled)
 };
 
 /* Ensures that critical pieces of code are executed by only one thread at a time.

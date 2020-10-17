@@ -224,6 +224,9 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 
 	multiline_textarea->set_text(as_richtext(buf));
 
+	// TODO(Nordfriese): `initialization_complete` should be a `protected` function of
+	// UI::Panel. This is the only place where it needs to be public. Refactor all this
+	// code here into a new `class FieldInfoWindow : public UI::UniqueWindow`.
 	w->initialization_complete();
 
 	return 0;

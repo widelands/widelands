@@ -739,6 +739,10 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 	}
 }
 
+// Called one per logic frame by the logic thread's main loop.
+// This is where the actual game logic (and from it, the game
+// controller's and the AI's `think()` functions) are called.
+// Also updates the stats about the logic FPS and real gamespeed.
 void InteractiveBase::game_logic_think() {
 	previous_frame_realtime_ = last_frame_realtime_;
 	previous_frame_gametime_ = last_frame_gametime_;
