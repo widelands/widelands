@@ -421,9 +421,10 @@ private:
 
 struct Client {
 	NetHostInterface::ConnectionId sock_id;
+	// TODO(Notabilis): This should probably be PlayerSlot or Widelands::PlayerNumber
 	uint8_t playernum;
 	// TODO(Notabilis): usernum is int16_t while UserSettings::position is uint8_t.
-	//                  Should this be the same data type?
+	//                  Unify this and replace with PlayerSlot or Widelands::PlayerNumber
 	int16_t usernum;
 	std::string build_id;
 	Md5Checksum syncreport;
@@ -827,13 +828,13 @@ void GameHost::send(ChatMessage msg) {
 	// The set containing all receivers of the message.
 	// Being a set ensures that each receiver only gets the message once
 	std::set<int32_t> recipients;
-	// Whether this is a public (0), personal (1), or team (2) message (see protocol definition)
-	int msg_type = 0;
+	// Whether this is a public, personal, or team message (see protocol definition)
+	uint8_t msg_type = CHATTYPE_PUBLIC;
 	// Figure out who to send the message to
 	// If there is no recipient, it is a broadcast. Send to everyone
 	if (!msg.recipient.empty()) {
 		// There is a recipient, find it
-		msg_type = 1;
+		msg_type = CHATTYPE_PERSONAL;
 		// Add the sender to the recipients so it gets a copy of the message
 		if (msg.sender.empty()) {
 			// Since there is no sender, it must be a system message
@@ -866,7 +867,7 @@ void GameHost::send(ChatMessage msg) {
 			}
 		} else {
 			// It is a team message
-			msg_type = 2;
+			msg_type = CHATTYPE_TEAM;
 			// Figure out who is in a team with the recipient and add them
 			// Figure out the team of the sender
 			if (msg.playern == UserSettings::none()) {

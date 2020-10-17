@@ -68,7 +68,7 @@ enum {
  * packets (see \ref Deserializer, \ref RecvPacket, \ref SendPacket).
  * Every packet starts with a single-byte command code.
  */
-enum {
+enum : uint8_t {
 	NETCMD_UNUSED = 0,
 
 	/**
@@ -321,7 +321,8 @@ enum {
 	 * \li signed_16:  playernumber - only used for colorization of messages.
 	 * \li string:     sender (may be empty to indicate system messages)
 	 * \li string:     the message
-	 * \li unsigned_8: whether this is a public (0), personal (1), or team (2) message
+	 * \li unsigned_8: whether this is a public (CHATTYPE_PUBLIC), personal (CHATTYPE_PERSONAL),
+	 *                 or team (CHATTYPE_TEAM) message
 	 * \li string:     the recipient (only filled as personal message)
 	 */
 	NETCMD_CHAT = 21,
@@ -448,6 +449,18 @@ enum {
 	 * Sent by the metaserver to a freshly opened game to check connectability
 	 */
 	NETCMD_METASERVER_PING = 64
+};
+
+/**
+ * The type of the chat message transmitted in an NETCMD_CHAT packet.
+ */
+enum : uint8_t {
+	/// A public message to all players
+	CHATTYPE_PUBLIC = 0,
+	/// A private message to a single player
+	CHATTYPE_PERSONAL = 1,
+	/// A message to the sender's team
+	CHATTYPE_TEAM = 2
 };
 
 #endif  // end of include guard: WL_NETWORK_NETWORK_PROTOCOL_H

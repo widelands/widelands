@@ -941,7 +941,7 @@ void GameClient::handle_chat(RecvPacket& packet) {
 	c.playern = packet.signed_16();
 	c.sender = packet.string();
 	c.msg = packet.string();
-	if (packet.unsigned_8()) {
+	if (packet.unsigned_8() != CHATTYPE_PUBLIC) {
 		c.recipient = packet.string();
 	}
 	d->chatmessages.push_back(c);
