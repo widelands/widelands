@@ -31,7 +31,6 @@ namespace Widelands {
 // Teach new players about Widelands, integrated into any singleplayer non-scenario game
 class TrainingWheels {
 public:
-
 	/*
 	 * Runs the training wheel scripts defined in data/scriting/training_wheels
 	 */
@@ -45,8 +44,9 @@ private:
 	void write();
 
 	struct TrainingWheel {
-		explicit TrainingWheel(const std::string& key, const std::vector<std::string>& init_dependencies)
-			: script(key + ".lua") {
+		explicit TrainingWheel(const std::string& key,
+		                       const std::vector<std::string>& init_dependencies)
+		   : script(key + ".lua") {
 			for (const std::string& dependency : init_dependencies) {
 				dependencies.insert(dependency);
 			}
@@ -62,7 +62,7 @@ private:
 	std::set<std::string> solved_objectives_;
 	Profile profile_;
 
-	LuaInterface& lua_; // Not owned
+	LuaInterface& lua_;  // Not owned
 };
 
 }  // namespace Widelands

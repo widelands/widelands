@@ -6773,7 +6773,8 @@ Field
 const char LuaField::className[] = "Field";
 const MethodType<LuaField> LuaField::Methods[] = {
    METHOD(LuaField, __eq),     METHOD(LuaField, __tostring),   METHOD(LuaField, region),
-   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), METHOD(LuaField, indicate), {nullptr, nullptr},
+   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), METHOD(LuaField, indicate),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, __hash),
@@ -7323,7 +7324,8 @@ int LuaField::indicate(lua_State* L) {
 	if (on) {
 		ipl->set_training_wheel_indicator_field(fcoords(L));
 	} else {
-		ipl->set_training_wheel_indicator_field(Widelands::FCoords(Widelands::FCoords::null(), nullptr));
+		ipl->set_training_wheel_indicator_field(
+		   Widelands::FCoords(Widelands::FCoords::null(), nullptr));
 	}
 	return 2;
 }

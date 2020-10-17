@@ -1,5 +1,3 @@
-
-
 -- NOCOM push_textdomain("scenario_tutorial01_basic_control.wmf")
 
 include "scripting/coroutine.lua"
