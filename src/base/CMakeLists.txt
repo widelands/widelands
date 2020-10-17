@@ -41,6 +41,7 @@ wl_library(base_multithreading
     multithreading.cc
   DEPENDS
     base_exceptions
+    base_log
     notifications
   USES_SDL2
 )
