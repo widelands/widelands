@@ -1334,9 +1334,7 @@ void Worker::cleanup(EditorGameBase& egbase) {
 	}
 
 	if (ware) {
-		if (egbase.objects().object_still_available(ware)) {
-			ware->destroy(egbase);
-		}
+		ware->destroy(egbase);
 	}
 
 	// We are destroyed, but we were maybe idling
