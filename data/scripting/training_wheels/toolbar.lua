@@ -11,7 +11,7 @@ plr = wl.Game().players[1]
 run(function()
    print("This is toolbar.lua")
 
-   -- NOCOM push_textdomain("scenario_tutorial01_basic_control.wmf")
+   push_textdomain("training_wheels")
 
    local initial_message_02 = {
       title = _"Building Spaces",
@@ -44,7 +44,7 @@ run(function()
       )
    }
 
-   -- NOCOM pop_textdomain()
+   pop_textdomain()
 
    -- Teach building spaces
    campaign_message_box(initial_message_02, 200)

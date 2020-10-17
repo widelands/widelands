@@ -1,7 +1,3 @@
-
-
--- NOCOM push_textdomain("scenario_tutorial01_basic_control.wmf")
-
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
@@ -11,6 +7,8 @@ include "scripting/ui.lua"
 
 
 run(function()
+
+   push_textdomain("training_wheels")
 
    print("This is lumberjack.lua")
 
@@ -28,6 +26,8 @@ run(function()
       h = 250,
       w = 350
    }
+
+   pop_textdomain()
 
    sleep(100)
    test_field:indicate(true)

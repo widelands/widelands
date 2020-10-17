@@ -6,7 +6,8 @@ include "scripting/ui.lua"
 
 run(function()
    sleep(2000)
-   -- NOCOM push_textdomain("scenario_tutorial01_basic_control.wmf")
+   push_textdomain("training_wheels")
+
    print("This is objectives.lua")
    local close_story_window_instructions = _[[Click on the ‘OK’ button or press the ‘Enter ⏎’ key on the keyboard to close this window.]]
 
@@ -44,7 +45,7 @@ run(function()
       )
    }
 
-   -- NOCOM pop_textdomain()
+   pop_textdomain()
 
    local objective_to_explain_objectives = add_campaign_objective(obj_initial_close_objectives_window)
    local o = campaign_message_with_objective(initial_message_01, obj_initial_close_story_window)
