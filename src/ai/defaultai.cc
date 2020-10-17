@@ -4392,7 +4392,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	// iterate over all working positions of the actual productionsite
 	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
 		// get the pointer to the worker assigned to the actual position
-		const Widelands::Worker* cw = site.site->working_positions()[i].worker;
+		const Widelands::Worker* cw = site.site->working_positions()[i].worker.get(game());
 		if (cw) {  // a worker is assigned to the position
 			// get the descritpion index of the worker assigned on this position
 			Widelands::DescriptionIndex current_worker = cw->descr().worker_index();
@@ -4402,7 +4402,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			if (current_worker != site.bo->positions.at(i) &&
 			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
 				// kick out the worker
-				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker.get(game()));
 				return true;
 			}
 		}
@@ -4932,12 +4932,12 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 
 	// First we check if we must release an experienced worker
 	for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
-		const Widelands::Worker* cw = site.site->working_positions()[i].worker;
+		const Widelands::Worker* cw = site.site->working_positions()[i].worker.get(game());
 		if (cw) {
 			Widelands::DescriptionIndex current_worker = cw->descr().worker_index();
 			if (current_worker != site.bo->positions.at(i) &&
 			    calculate_stocklevel(current_worker, WareWorker::kWorker) < 1) {
-				game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+				game().send_player_evict_worker(*site.site->working_positions()[i].worker.get(game()));
 				return true;
 			}
 		}
@@ -4970,9 +4970,10 @@ bool DefaultAI::check_mines_(const Time& gametime) {
 	if (site.built_time + Duration(15 * 60 * 1000) < gametime) {
 		if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
 			for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
-				const Widelands::Worker* cw = site.site->working_positions()[i].worker;
+				const Widelands::Worker* cw = site.site->working_positions()[i].worker.get(game());
 				if (cw) {
-					game().send_player_evict_worker(*site.site->working_positions()[i].worker);
+					game().send_player_evict_worker(
+					   *site.site->working_positions()[i].worker.get(game()));
 				}
 			}
 			return true;

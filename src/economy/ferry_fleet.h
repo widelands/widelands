@@ -60,6 +60,7 @@ struct FerryFleet : MapObject {
 	bool active() const;
 
 	bool init(EditorGameBase&) override;
+	bool init(EditorGameBase&, Waterway*);
 	void cleanup(EditorGameBase&) override;
 	void update(EditorGameBase&, const Duration& tdelta = Duration(100));
 

@@ -41,7 +41,7 @@ uint32_t FerryDescr::movecaps() const {
 }
 
 Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), destination_(nullptr), unemployed_since_(0) {
+   : Carrier(ferry_descr), fleet_(nullptr), destination_(nullptr), unemployed_since_(0) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -255,6 +255,7 @@ void Ferry::set_fleet(FerryFleet* fleet) {
 
 bool Ferry::init_fleet() {
 	assert(get_owner());
+	assert(fleet_ == nullptr);
 	EditorGameBase& egbase = get_owner()->egbase();
 	FerryFleet* fleet = new FerryFleet(get_owner());
 	fleet->add_ferry(this);

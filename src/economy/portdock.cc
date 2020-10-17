@@ -173,7 +173,7 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	Warehouse* wh = nullptr;
 
-	if (egbase.objects().object_still_available(warehouse_)) {
+	if (warehouse_) {
 
 		// We need to remember this for possible recreation of portdock
 		wh = warehouse_;
