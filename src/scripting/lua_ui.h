@@ -85,6 +85,7 @@ public:
 	 * Lua Methods
 	 */
 	int get_descendant_position(lua_State* L);
+	int indicate(lua_State* L);
 
 	/*
 	 * C Methods

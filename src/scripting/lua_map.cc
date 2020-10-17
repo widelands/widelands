@@ -45,6 +45,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
+#include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace LuaMaps {
@@ -6772,7 +6773,7 @@ Field
 const char LuaField::className[] = "Field";
 const MethodType<LuaField> LuaField::Methods[] = {
    METHOD(LuaField, __eq),     METHOD(LuaField, __tostring),   METHOD(LuaField, region),
-   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), {nullptr, nullptr},
+   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), METHOD(LuaField, indicate), {nullptr, nullptr},
 };
 const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, __hash),
@@ -7298,6 +7299,33 @@ int LuaField::has_max_caps(lua_State* L) {
 	lua_pushboolean(
 	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
+}
+
+/* RST
+   .. method:: indicate(on)
+
+      Show/Hide an arrow that points to this field.
+
+      :arg on: Whether to show or hide the arrow
+      :type on: :class:`boolean`
+*/
+int LuaField::indicate(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 boolean");
+	}
+
+	InteractivePlayer* ipl = dynamic_cast<InteractivePlayer*>(get_egbase(L).get_ibase());
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	const bool on = luaL_checkboolean(L, -1);
+	if (on) {
+		ipl->set_training_wheel_indicator_field(fcoords(L));
+	} else {
+		ipl->set_training_wheel_indicator_field(Widelands::FCoords(Widelands::FCoords::null(), nullptr));
+	}
+	return 2;
 }
 
 /*

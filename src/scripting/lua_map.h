@@ -1476,6 +1476,7 @@ public:
 	int region(lua_State* L);
 	int has_caps(lua_State*);
 	int has_max_caps(lua_State*);
+	int indicate(lua_State* L);
 
 	/*
 	 * C methods

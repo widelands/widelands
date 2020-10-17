@@ -82,6 +82,7 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
+   METHOD(LuaPanel, indicate),
    {nullptr, nullptr},
 };
 
@@ -281,6 +282,42 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 
 	lua_pushint32(L, cp.x);
 	lua_pushint32(L, cp.y);
+	return 2;
+}
+
+/* RST
+   .. method:: indicate(on)
+
+      Show/Hide an arrow that points to this panel.
+
+      :arg on: Whether to show or hide the arrow
+      :type on: :class:`boolean`
+*/
+int LuaPanel::indicate(lua_State* L) {
+	assert(panel_);
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 boolean");
+	}
+
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	const bool on = luaL_checkboolean(L, -1);
+	if (on) {
+		int x = panel_->get_x() + panel_->get_w();
+		int y = panel_->get_y();
+		UI::Panel* parent = panel_->get_parent();
+		while (parent != nullptr) {
+			x += parent->get_x();
+			y += parent->get_y();
+			parent = parent->get_parent();
+		}
+		ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
+	} else {
+		ipl->set_training_wheel_indicator_pos(Vector2i::invalid());
+	}
 	return 2;
 }
 

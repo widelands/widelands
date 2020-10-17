@@ -51,8 +51,15 @@ run(function()
    set_objective_done(o, 100)
 
    wl.ui.MapView().buttons.objectives:click()
+
+   sleep(5000)
+
+   wl.ui.MapView().buttons.objectives:indicate(true)
+
    while not wl.ui.MapView().windows.objectives do sleep(100) end
    while wl.ui.MapView().windows.objectives do sleep(100) end
+
+   wl.ui.MapView().buttons.objectives:indicate(false)
 
    set_objective_done(objective_to_explain_objectives)
 
