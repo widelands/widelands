@@ -282,17 +282,17 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 
 	load_roads("normal", &road_images);
 	for (const std::string& texture_path : road_images) {
-		road_textures_.add_normal_road_texture(g_image_cache->get(texture_path));
+		road_textures_.add_normal_road_texture(g_terrain_image_cache->get(texture_path));
 	}
 
 	load_roads("busy", &road_images);
 	for (const std::string& texture_path : road_images) {
-		road_textures_.add_busy_road_texture(g_image_cache->get(texture_path));
+		road_textures_.add_busy_road_texture(g_terrain_image_cache->get(texture_path));
 	}
 
 	load_roads("waterway", &road_images);
 	for (const std::string& texture_path : road_images) {
-		road_textures_.add_waterway_texture(g_image_cache->get(texture_path));
+		road_textures_.add_waterway_texture(g_terrain_image_cache->get(texture_path));
 	}
 
 	const auto load_bridge_if_present = [this](const LuaTable& animations_table,

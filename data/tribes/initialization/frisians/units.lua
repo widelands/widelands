@@ -1,6 +1,7 @@
 tribes = wl.Tribes()
 
 image_dirname = path.dirname(__file__) .. "images/"
+roads_dirname = path.dirname(__file__) .. "../../roads/frisians/"
 
 push_textdomain("tribes_encyclopedia")
 
@@ -34,14 +35,14 @@ tribes:new_tribe {
    -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
-         image_dirname .. "roadt_busy.png",
+         roads_dirname .. "busy.png",
       },
       normal = {
-         image_dirname .. "roadt_normal_00.png",
-         image_dirname .. "roadt_normal_01.png",
+         roads_dirname .. "normal_00.png",
+         roads_dirname .. "normal_01.png",
       },
       waterway = {
-         image_dirname .. "waterway_0.png",
+         roads_dirname .. "waterway.png",
       },
    },
 

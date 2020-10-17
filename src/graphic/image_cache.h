@@ -64,5 +64,6 @@ private:
 };
 
 extern ImageCache* g_image_cache;
+extern ImageCache* g_terrain_image_cache;
 
 #endif  // end of include guard: WL_GRAPHIC_IMAGE_CACHE_H

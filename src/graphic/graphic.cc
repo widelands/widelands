@@ -70,6 +70,8 @@ void set_icon(SDL_Window* sdl_window) {
 
 Graphic::Graphic() {
 	g_image_cache = new ImageCache();
+	// NOCOM pass this around instead?
+	g_terrain_image_cache = new ImageCache();
 	g_animation_manager = new AnimationManager();
 }
 
@@ -136,10 +138,21 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	}
 	log_dbg("**** END GRAPHICS REPORT ****\n");
 
-	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
-	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
-	g_image_cache->fill_with_texture_atlases(
-	   std::move(texture_atlases), std::move(textures_in_atlas));
+	{
+		std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
+		// NOCOM document in tribes/world
+		// For UI elements mostly, but we get more than we need really.
+		auto texture_atlases = build_texture_atlas(max_texture_size_, { "images" }, &textures_in_atlas);
+		g_image_cache->fill_with_texture_atlases(
+		   std::move(texture_atlases), std::move(textures_in_atlas));
+	}
+	{
+		std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
+		// For terrain textures, flags and roads.
+		auto texture_atlases = build_texture_atlas(max_texture_size_, { "world/terrains", "tribes/roads" }, &textures_in_atlas);
+		g_terrain_image_cache->fill_with_texture_atlases(
+		   std::move(texture_atlases), std::move(textures_in_atlas));
+	}
 	g_style_manager = new StyleManager();
 }
 
@@ -148,6 +161,8 @@ Graphic::~Graphic() {
 	g_animation_manager = nullptr;
 	delete g_image_cache;
 	g_image_cache = nullptr;
+	delete g_terrain_image_cache;
+	g_terrain_image_cache = nullptr;
 	delete g_style_manager;
 	g_style_manager = nullptr;
 	if (sdl_window_) {

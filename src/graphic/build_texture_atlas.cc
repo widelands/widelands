@@ -106,7 +106,7 @@ pack_images(const std::vector<std::string>& filenames,
 }  // namespace
 
 std::vector<std::unique_ptr<Texture>>
-build_texture_atlas(const int max_size,
+build_texture_atlas(const int max_size, const std::vector<std::string>& directories,
                     std::map<std::string, std::unique_ptr<Texture>>* textures_in_atlas) {
 	if (max_size < kMinimumSizeForTextures) {
 		throw wexception("The texture atlas must use at least %d as size (%d was given)",
@@ -115,12 +115,9 @@ build_texture_atlas(const int max_size,
 	std::vector<std::string> first_atlas_images;
 	std::unordered_set<std::string> all_images;
 
-	// For terrain textures.
-	find_images("world/terrains", &all_images, &first_atlas_images);
-	// For flags and roads.
-	find_images("tribes/initialization", &all_images, &first_atlas_images);
-	// For UI elements mostly, but we get more than we need really.
-	find_images("images", &all_images, &first_atlas_images);
+	for (const std::string& directory : directories) {
+		find_images(directory, &all_images, &first_atlas_images);
+	}
 
 	auto first_texture_atlas = pack_images(first_atlas_images, max_size, textures_in_atlas);
 	if (first_texture_atlas.size() != 1) {

@@ -27,6 +27,7 @@
 #include "graphic/texture.h"
 
 ImageCache* g_image_cache;
+ImageCache* g_terrain_image_cache;
 
 ImageCache::ImageCache() {
 }

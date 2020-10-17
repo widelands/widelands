@@ -180,7 +180,8 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 			   RGBColor(top_left_pixel_color.r, top_left_pixel_color.g, top_left_pixel_color.b));
 			SDL_FreeSurface(sdl_surface);
 		}
-		add_texture(g_image_cache->get(texture_paths()[j]));
+		// NOCOM here
+		add_texture(g_terrain_image_cache->get(texture_paths()[j]));
 	}
 }
 
