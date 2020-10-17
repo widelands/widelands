@@ -142,14 +142,15 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 		// NOCOM document in tribes/world
 		// For UI elements mostly, but we get more than we need really.
-		auto texture_atlases = build_texture_atlas(max_texture_size_, { "images" }, &textures_in_atlas);
+		auto texture_atlases = build_texture_atlas(max_texture_size_, {"images"}, &textures_in_atlas);
 		g_image_cache->fill_with_texture_atlases(
 		   std::move(texture_atlases), std::move(textures_in_atlas));
 	}
 	{
 		std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
 		// For terrain textures, flags and roads.
-		auto texture_atlases = build_texture_atlas(max_texture_size_, { "world/terrains", "tribes/roads" }, &textures_in_atlas);
+		auto texture_atlases = build_texture_atlas(
+		   max_texture_size_, {"world/terrains", "tribes/roads"}, &textures_in_atlas);
 		g_terrain_image_cache->fill_with_texture_atlases(
 		   std::move(texture_atlases), std::move(textures_in_atlas));
 	}
