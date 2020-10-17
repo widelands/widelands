@@ -7,14 +7,17 @@ include "scripting/ui.lua"
 
 
 run(function()
+   print("This is lumberjack.lua")
+
+   local interactive_player_slot = wl.ui.MapView().interactive_player
+
 
    push_textdomain("training_wheels")
 
-   print("This is lumberjack.lua")
 
    -- NOCOM get the actual interactive player
-   local plr = wl.Game().players[1]
-   local test_field = wl.Game().map.player_slots[1].starting_field
+   local plr = wl.Game().players[interactive_player_slot]
+   local interesting_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
 
    lumberjack_message_01 = {
       title = _"Lumberjack’s Spot",
@@ -30,7 +33,7 @@ run(function()
    pop_textdomain()
 
    sleep(100)
-   test_field:indicate(true)
+   interesting_field:indicate(true)
 
    campaign_message_box(lumberjack_message_01)
 
@@ -41,7 +44,7 @@ run(function()
 
    while #plr:get_buildings("barbarians_lumberjacks_hut") < 1 do sleep(300) end
 
-   test_field:indicate(false)
+   interesting_field:indicate(false)
 
    wl.Game().players[1]:mark_training_wheel_as_solved("lumberjack")
 end)
