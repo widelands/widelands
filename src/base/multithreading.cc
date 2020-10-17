@@ -127,7 +127,6 @@ MutexLock::MutexLock(ID i) : id_(i) {
 #ifdef MUTEX_LOCK_DEBUG
 	log_dbg("Locking mutex %s took %ums", to_string(id_).c_str(), SDL_GetTicks() - time);
 #endif
-
 }
 MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_(i) {
 
@@ -144,13 +143,12 @@ MutexLock::MutexLock(ID i, const std::function<void()>& run_while_waiting) : id_
 #ifdef MUTEX_LOCK_DEBUG
 		++counter;
 #endif
-
 	}
 
 #ifdef MUTEX_LOCK_DEBUG
-	log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(), SDL_GetTicks() - time, counter);
+	log_dbg("Locking mutex %s took %ums (%u function calls)", to_string(id_).c_str(),
+	        SDL_GetTicks() - time, counter);
 #endif
-
 }
 MutexLock::~MutexLock() {
 
