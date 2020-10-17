@@ -567,7 +567,8 @@ bool Game::run(StartGameType const start_game_type,
 	remove_loader_ui();
 
 	// If this is a singleplayer map or non-scenario savegame, put on our training wheels
-	if (start_game_type == StartGameType::kMap || (script_to_run.empty() && start_game_type == StartGameType::kSaveGame)) {
+	if (start_game_type == StartGameType::kMap ||
+	    (script_to_run.empty() && start_game_type == StartGameType::kSaveGame)) {
 		InteractivePlayer* ipl = get_ipl();
 		if (ipl && !ipl->is_multiplayer()) {
 			training_wheels_.reset(new TrainingWheels(lua()));

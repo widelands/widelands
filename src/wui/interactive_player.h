@@ -81,9 +81,11 @@ public:
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 
-	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the payer to a UI::Panel. Set to Vector2i::invalid() to switch it off.
+	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
+	// payer to a UI::Panel. Set to Vector2i::invalid() to switch it off.
 	void set_training_wheel_indicator_pos(const Vector2i& pos);
-	// Indicate the given field coordinates to the player by painting an arrow. Set to FCoords::null() to switch it off.
+	// Indicate the given field coordinates to the player by painting an arrow. Set to
+	// FCoords::null() to switch it off.
 	void set_training_wheel_indicator_field(const Widelands::FCoords& field);
 
 private:

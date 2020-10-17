@@ -27,7 +27,9 @@
 // NOCOM Let experienced pleyers dismiss all training wheels
 
 const std::string kTrainingWheelsFile = kSaveDir + g_fs->file_separator() + "training_wheels.conf";
-const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs->file_separator() + std::string("training_wheels") + g_fs->file_separator();
+const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs->file_separator() +
+                                                std::string("training_wheels") +
+                                                g_fs->file_separator();
 
 namespace Widelands {
 
@@ -53,7 +55,8 @@ TrainingWheels::TrainingWheels(LuaInterface& lua) : profile_(Profile::err_log), 
 			solved_objectives_.insert(key);
 			dependencies->do_not_warn_about_unaccessed_keys();
 		} else {
-			idle_objectives_.insert(std::make_pair(key, TrainingWheel(key, dependencies->array_entries<std::string>())));
+			idle_objectives_.insert(
+			   std::make_pair(key, TrainingWheel(key, dependencies->array_entries<std::string>())));
 		}
 	}
 	write();
