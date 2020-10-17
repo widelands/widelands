@@ -309,7 +309,7 @@ public:
 		   : worker_request(wr), worker(w) {
 		}
 		Request* worker_request;
-		Worker* worker;
+		OPtr<Worker> worker;
 	};
 
 	WorkingPosition const* working_positions() const {
