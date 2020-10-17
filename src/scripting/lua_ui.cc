@@ -642,7 +642,8 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, average_fps),  PROP_RO(LuaMapView, center_map_pixel),
    PROP_RW(LuaMapView, buildhelp),    PROP_RW(LuaMapView, census),
    PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road),
-   PROP_RO(LuaMapView, is_animating), PROP_RO(LuaMapView, interactive_player), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapView, is_animating), PROP_RO(LuaMapView, interactive_player),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
