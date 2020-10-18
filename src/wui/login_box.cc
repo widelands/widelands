@@ -84,6 +84,8 @@ LoginBox::LoginBox(Panel& parent)
 
 	eb_nickname->cancel.connect([this]() { clicked_back(); });
 	eb_password->cancel.connect([this]() { clicked_back(); });
+
+	initialization_complete();
 }
 
 /// think function of the UI (main loop)

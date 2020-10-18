@@ -361,7 +361,7 @@ protected:
 	virtual std::vector<Recti> focus_overlay_rects();
 
 	// Wait until the current logic frame has ended
-	void wait_for_current_logic_frame(Panel* = nullptr);
+	void wait_for_current_logic_frame();
 	// Can be called during a lengthy wait to ensure that
 	// notes are still handled and the graphics refreshed.
 	// Does _not_ handle user input (this is on purpose!!)

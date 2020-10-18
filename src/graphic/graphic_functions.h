@@ -22,6 +22,6 @@
 
 #include <string>
 
-void draw_game_tip(const std::string&, bool additional_opacity);
+void draw_game_tip(const std::string&, unsigned opacity = 1);
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_FUNCTIONS_H

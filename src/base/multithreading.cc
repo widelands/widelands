@@ -28,7 +28,8 @@
 #include "base/wexception.h"
 
 // Uncomment this to get masses of log output to debug hangs and deadlocks
-// #define MUTEX_LOCK_DEBUG
+// NOCOM comment this out again
+#define MUTEX_LOCK_DEBUG
 
 static std::unique_ptr<std::thread::id> initializer_thread;
 

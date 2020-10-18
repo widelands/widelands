@@ -250,7 +250,7 @@ void Panel::do_update_graphics(const std::string& message) {
 		        g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"),
 		        Vector2i(0, 0));
 
-		draw_game_tip(message, true);
+		draw_game_tip(message, 2);
 	}
 
 	if (g_mouse_cursor->is_visible()) {
@@ -280,22 +280,22 @@ void Panel::stay_responsive() {
 	do_update_graphics(_("Please wait…"));
 }
 
-void Panel::wait_for_current_logic_frame(Panel* assume_modal) {
+void Panel::wait_for_current_logic_frame() {
 	if (!is_initializer_thread()) {
 		// This is the logic thread, so there would be little
 		// point in waiting for ourself to do something
 		return;
 	}
 
-	assert(assume_modal || modal_);
-	if (!assume_modal && modal_ != this) {
+	assert(modal_);
+	if (modal_ != this) {
 		assert(get_parent());
 		get_parent()->wait_for_current_logic_frame();
 		return;
 	}
 
-	Panel* wait = assume_modal ? assume_modal : modal_;
-	while (wait->logic_thread_locked_ == LogicThreadState::kLocked) {
+	Panel& wait = *modal_;
+	while (wait.logic_thread_locked_ == LogicThreadState::kLocked) {
 		stay_responsive();
 		SDL_Delay(2);
 	}
@@ -342,12 +342,6 @@ int Panel::do_run() {
 		                                   handled_notes_.insert(note.id);
 	                                   }) :
 	                                nullptr;
-
-	// NOCOM this seems not to be needed. Remove these lines, and
-	// remove the parameter from `wait_for_current_logic_frame`.
-	/* if (prevmodal) {
-	   wait_for_current_logic_frame(prevmodal);
-	} */
 
 	// Loop
 	running_ = true;
