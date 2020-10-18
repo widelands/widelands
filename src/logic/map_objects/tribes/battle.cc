@@ -122,7 +122,7 @@ void Battle::cancel(Game& game, Soldier& soldier) {
 	schedule_destroy(game);
 }
 
-bool Battle::locked(Game& game) {
+bool Battle::locked(const Game& game) {
 	if (!first_ || !second_) {
 		return false;
 	}

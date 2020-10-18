@@ -421,8 +421,7 @@ void* ZipFilesystem::load(const std::string& fname, size_t& length) {
 		if (len < 0) {
 			unzCloseCurrentFile(zip_file_->read_handle());
 			const std::string errormessage = (boost::format("read error %i") % len).str();
-			throw ZipOperationError(
-			   "ZipFilesystem::load", fname, zip_file_->path(), errormessage.c_str());
+			throw ZipOperationError("ZipFilesystem::load", fname, zip_file_->path(), errormessage);
 		}
 
 		totallen += len;
@@ -447,7 +446,7 @@ void* ZipFilesystem::load(const std::string& fname, size_t& length) {
  * Write the given block of memory to the repository.
  * Throws an exception if it fails.
  */
-void ZipFilesystem::write(const std::string& fname, void const* const data, int32_t const length) {
+void ZipFilesystem::write(const std::string& fname, void const* const data, size_t const length) {
 	std::string filename = fname;
 	std::replace(filename.begin(), filename.end(), '\\', '/');
 

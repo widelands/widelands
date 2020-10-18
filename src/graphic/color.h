@@ -49,7 +49,7 @@ struct RGBColor {
 
 struct RGBAColor {
 	RGBAColor(uint8_t R, uint8_t G, uint8_t B, uint8_t A);
-	RGBAColor(uint32_t);
+	explicit RGBAColor(uint32_t);
 	RGBAColor(const RGBAColor& other) = default;
 
 	// Initializes the color to black.

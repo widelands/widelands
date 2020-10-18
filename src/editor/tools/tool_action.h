@@ -60,6 +60,8 @@ struct EditorToolAction {
 	   : tool(b.tool), i(b.i), map(b.map), center(b.center), parent(b.parent), args(b.args) {
 		args->refcount++;
 	}
+
+	EditorToolAction& operator=(const EditorToolAction& b) = delete;
 };
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_TOOL_ACTION_H

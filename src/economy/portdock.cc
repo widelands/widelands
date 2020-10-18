@@ -173,7 +173,7 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	Warehouse* wh = nullptr;
 
-	if (egbase.objects().object_still_available(warehouse_)) {
+	if (warehouse_) {
 
 		// We need to remember this for possible recreation of portdock
 		wh = warehouse_;
@@ -252,7 +252,7 @@ void PortDock::add_shippingitem(Game& game, WareInstance& ware) {
  * The given @p ware, which is assumed to be inside the dock, has updated
  * its route.
  */
-void PortDock::update_shippingitem(Game& game, WareInstance& ware) {
+void PortDock::update_shippingitem(Game& game, const WareInstance& ware) {
 	for (auto item_iter = waiting_.begin(); item_iter != waiting_.end(); ++item_iter) {
 
 		if (item_iter->object_.serial() == ware.serial()) {
@@ -276,7 +276,7 @@ void PortDock::add_shippingitem(Game& game, Worker& worker) {
  * The given @p worker, which is assumed to be inside the dock, has
  * updated its route.
  */
-void PortDock::update_shippingitem(Game& game, Worker& worker) {
+void PortDock::update_shippingitem(Game& game, const Worker& worker) {
 	for (auto item_iter = waiting_.begin(); item_iter != waiting_.end(); ++item_iter) {
 
 		if (item_iter->object_.serial() == worker.serial()) {

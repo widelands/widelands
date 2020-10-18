@@ -42,7 +42,7 @@ void EconomyDataPacket::read(FileRead& fr) {
 				   eco_->serial_, saved_serial);
 			}
 			Economy* other_eco = nullptr;
-			assert(Economy::last_economy_serial_ >= (other_eco ? other_eco->serial_ : eco_->serial_));
+			assert(Economy::last_economy_serial_ >= eco_->serial_);
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {

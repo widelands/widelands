@@ -72,7 +72,7 @@ void md5_process_block(void const* buffer, uint32_t len, Md5Ctx*);
  */
 template <typename Base> class MD5Checksum : public Base {
 public:
-	MD5Checksum() {
+	MD5Checksum() : sum({0}) {
 		reset();
 	}
 	explicit MD5Checksum(const MD5Checksum& other)
@@ -95,7 +95,7 @@ public:
 	///
 	/// \param newdata data to compute chksum for
 	/// \param size size of data
-	void data(const void* const newdata, const size_t size) {
+	void data(const void* const newdata, const size_t size) override {
 		assert(can_handle_data);
 		md5_process_bytes(newdata, size, &ctx);
 	}
@@ -123,7 +123,12 @@ private:
 	Md5Ctx ctx;
 };
 
-class _DummyMD5Base {};
-using SimpleMD5Checksum = MD5Checksum<_DummyMD5Base>;
+class DummyMD5Base {
+public:
+	virtual ~DummyMD5Base() {
+	}
+	virtual void data(const void* const, const size_t) = 0;
+};
+using SimpleMD5Checksum = MD5Checksum<DummyMD5Base>;
 
 #endif  // end of include guard: WL_BASE_MD5_H

@@ -91,6 +91,8 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 		CLANG_DIAG_ON("-Wunknown-pragmas")
 
 		if (text_surface->format->BitsPerPixel != 32) {
+			SDL_FreeSurface(tsurf);
+			SDL_FreeSurface(shadow);
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
 		}
 
