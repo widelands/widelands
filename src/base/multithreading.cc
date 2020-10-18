@@ -28,13 +28,12 @@
 #include "base/wexception.h"
 
 // Uncomment this to get masses of log output to debug hangs and deadlocks
-// NOCOM comment this out again
-#define MUTEX_LOCK_DEBUG
+// #define MUTEX_LOCK_DEBUG
 
 static std::unique_ptr<std::thread::id> initializer_thread;
 
 void set_initializer_thread() {
-	// log_info("Setting initializer thread.");
+	log_info("Setting initializer thread.");
 
 	if (initializer_thread) {
 		throw wexception("attempt to set initializer thread again");

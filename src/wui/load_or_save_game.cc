@@ -49,23 +49,29 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
+	log_dbg("NOCOM LoadOrSaveGame ctor AAA");
+
 	switch (filetype_) {
 	case FileType::kReplay:
+		log_dbg("NOCOM LoadOrSaveGame ctor BBB");
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
 		savegame_deleter_.reset(new ReplayDeleter(parent_));
 		savegame_loader_.reset(new ReplayLoader(g));
 		break;
 	case FileType::kGameSinglePlayer:
+		log_dbg("NOCOM LoadOrSaveGame ctor CCC");
 		table_ = new SavegameTableSinglePlayer(table_box_, style, localize_autosave);
 		savegame_deleter_.reset(new SavegameDeleter(parent_));
 		savegame_loader_.reset((new SinglePlayerLoader(g)));
 		break;
 	case FileType::kGameMultiPlayer:
+		log_dbg("NOCOM LoadOrSaveGame ctor DDD");
 		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);
 		savegame_deleter_.reset(new SavegameDeleter(parent_));
 		savegame_loader_.reset(new MultiPlayerLoader(g));
 		break;
 	case FileType::kShowAll:
+		log_dbg("NOCOM LoadOrSaveGame ctor EEE");
 		table_ = new SavegameTableMultiplayer(
 		   table_box_, style, localize_autosave);  // wrong? showAll = save window -> "accidental"
 		                                           // same table as multiplayer
@@ -73,6 +79,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;
 	}
+	log_dbg("NOCOM LoadOrSaveGame ctor FFF");
 
 	table_->set_column_compare(
 	   0, [this](uint32_t a, uint32_t b) { return compare_save_time(a, b); });
@@ -80,12 +87,17 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	table_->set_column_compare(table_->number_of_columns() - 1,
 	                           [this](uint32_t a, uint32_t b) { return compare_map_name(a, b); });
 
+	log_dbg("NOCOM LoadOrSaveGame ctor GGG");
 	table_box_->add(table_, UI::Box::Resizing::kExpandBoth);
+	log_dbg("NOCOM LoadOrSaveGame ctor HHH");
 	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	log_dbg("NOCOM LoadOrSaveGame ctor III");
 	delete_->set_enabled(false);
 	delete_->sigclicked.connect([this] { clicked_delete(); });
 
+	log_dbg("NOCOM LoadOrSaveGame ctor JJJ");
 	fill_table();
+	log_dbg("NOCOM LoadOrSaveGame ctor done.");
 }
 
 bool LoadOrSaveGame::selection_contains_directory() const {

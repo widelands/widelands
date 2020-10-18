@@ -62,6 +62,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
      button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)),
      last_game_(""),
      egbase_(nullptr) {
+	log_dbg("NOCOM GameDetails ctor AAA");
 
 	add(&name_label_, UI::Box::Resizing::kFullSize);
 	add_space(padding_);
@@ -71,11 +72,14 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 	add_space(padding_);
 	add(button_box_, UI::Box::Resizing::kFullSize);
 
+	log_dbg("NOCOM GameDetails ctor BBB");
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
 
+	log_dbg("NOCOM GameDetails ctor CCC");
 	// Fast initialize world now
 	egbase_.mutable_world(true);
+	log_dbg("NOCOM GameDetails ctor done.");
 }
 
 void GameDetails::clear() {
