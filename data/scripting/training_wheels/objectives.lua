@@ -1,6 +1,5 @@
 -- Welcome and teach objectives
 
--- NOCOM document
 include "scripting/coroutine.lua"
 include "scripting/messages.lua"
 include "scripting/richtext_scenarios.lua"
@@ -76,5 +75,7 @@ run(function()
    while mapview.windows.objectives do sleep(100) end
    set_objective_done(o2)
 
-   wl.Game().players[1]:mark_training_wheel_as_solved("objectives")
+   local interactive_player_slot = wl.ui.MapView().interactive_player
+   local player = wl.Game().players[interactive_player_slot]
+   player:mark_training_wheel_as_solved("objectives")
 end)

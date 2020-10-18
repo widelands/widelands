@@ -1,4 +1,96 @@
--- NOCOM document
+-- RST
+--
+-- .. _training_wheels:
+--
+-- Training Wheels
+-- ===============
+--
+-- Training Wheels are Lua coroutines that will teach new players about the game while they play.
+-- They will be triggered automatically in any non-scenario single player game,
+-- and are independent of the map or tribe being played.
+--
+-- Triggering a Training Weel
+-- --------------------------
+--
+-- The existing Training Wheels are listed in ``data/scripting/training_wheels/init.lua``.
+-- Their names need to be identical with their base file name (without the ``.lua`` file extension).
+-- For blocking the execution of a Training Wheel until the player has learned a prerequisite
+-- Training Wheel, list them in the Training Wheel's Lua table.
+-- The Training Wheel will trigger if any of its prerequisites has been completed.
+--
+-- Which Training Wheels have been completed previously by the player is stored in
+-- ``.widelands/save/training_wheels.conf``.
+--
+-- Designing a Training Wheel
+-- --------------------------
+--
+-- * **Scope:** Each Training Wheel should aim at teaching one concept only.
+--   This can be broadened a bit, e.g. when placing a building,
+--   the player will also need to connect a road to it.
+-- * **Flexibility:** Because Training Wheels should be designed to work with any tribe (even future ones),
+--   **do not** use any hard-coded building or worker names etc.
+--   Hard-coded ware names are OK if they are very basic, e.g. "log".
+--   Everything else should be handled by using generalized attributes.
+-- * **Robustness:** Expect the player not to follow the intsructions.
+--   This should not cause any crashes.
+-- * **Conciseness:** Keep the texts as short as possible, users don't like to read walls of text.
+--   Conciseness also helps with keeping the workload down for our translators.
+--
+-- Example Training Wheel
+-- ----------------------
+--
+-- A Training Wheel in a file ``data/scripting/training_wheels/example.lua`` could look like this:
+--
+-- .. code-block:: lua
+--
+--    include "scripting/coroutine.lua"
+--    include "scripting/messages.lua"
+--    include "scripting/richtext_scenarios.lua"
+--    include "scripting/ui.lua"
+--    include "scripting/training_wheels/utils/ui.lua"
+--
+--    run(function()
+--       sleep(100)
+--
+--       local interactive_player_slot = wl.ui.MapView().interactive_player
+--       local player = wl.Game().players[interactive_player_slot]
+--       local starting_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
+--
+--       -- All set. Define our messages now.
+--       push_textdomain("training_wheels")
+--
+--       local msg_example = {
+--          title = _"Example",
+--          position = "topright",
+--          body = (
+--             p("This is an example with a non-modal story message box, so we can let the player do things while we show this message.")
+--          ),
+--          h = 280,
+--          w = 260,
+--          modal = false
+--       }
+--
+--       pop_textdomain()
+--
+--       -- Point to the starting field and show the message
+--       starting_field:indicate(true)
+--       campaign_message_box(msg_example)
+--       scroll_to_field(target_field)
+--       -- Check here whether the player completed the task
+--       sleep(2000)
+--       close_story_messagebox()
+--       starting_field:indicate(false)
+--
+--       -- Teaching is done, so mark it as solved. Note that this matches the base filename.
+--       player:mark_training_wheel_as_solved("example")
+--    end)
+--
+-- And the corresponding entry in ``init.lua``:
+--
+-- .. code-block:: lua
+--
+--    example = { "objectives", "logs" },
+--
 
 return {
    objectives = {},

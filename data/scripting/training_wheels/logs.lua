@@ -56,7 +56,6 @@ run(function()
       size_description = _"Click on a big building space, then select the building from the big buildings tab."
    end
 
-   -- NOCOM tweak message window sizes
    local msg_logs = {
       title = _"Logs",
       position = "topright",
