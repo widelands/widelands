@@ -34,7 +34,7 @@
 static std::unique_ptr<std::thread::id> initializer_thread;
 
 void set_initializer_thread() {
-	log_info("Setting initializer thread.");
+	// log_info("Setting initializer thread.");
 
 	if (initializer_thread) {
 		throw wexception("attempt to set initializer thread again");
