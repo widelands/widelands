@@ -139,8 +139,8 @@ animate
 Runs an animation. See :ref:`map_object_programs_animate`.
 */
 ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
-                                         const ImmovableDescr& descr) {
-	parameters = MapObjectProgram::parse_act_animate(arguments, descr, true);
+                                         const ImmovableDescr& descr)
+   : parameters(MapObjectProgram::parse_act_animate(arguments, descr, true)) {
 }
 
 /// Use convolution to make the animation time a random variable with binomial
@@ -159,8 +159,8 @@ playsound
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
-                                             const ImmovableDescr& descr) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
+                                             const ImmovableDescr& descr)
+   : parameters(MapObjectProgram::parse_act_play_sound(arguments, descr)) {
 }
 
 /**
@@ -611,7 +611,7 @@ void ActConstructData::save(FileWrite& fw, Immovable& imm) const {
 	delivered.save(fw, imm.get_owner()->tribe());
 }
 
-ActConstructData* ActConstructData::load(FileRead& fr, Immovable& imm) {
+ActConstructData* ActConstructData::load(FileRead& fr, const Immovable& imm) {
 	ActConstructData* d = new ActConstructData;
 
 	try {
@@ -677,7 +677,7 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 }
 
 ImmovableActionData*
-ImmovableActionData::load(FileRead& fr, Immovable& imm, const std::string& name) {
+ImmovableActionData::load(FileRead& fr, const Immovable& imm, const std::string& name) {
 	if (name == "construct") {
 		return ActConstructData::load(fr, imm);
 	} else {

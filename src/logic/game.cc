@@ -849,27 +849,27 @@ void Game::send_player_enemyflagaction(const Flag& flag,
 	}
 }
 
-void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
+void Game::send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction) {
 	send_player_command(new CmdShipScoutDirection(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_ship_construct_port(Ship& ship, Coords coords) {
+void Game::send_player_ship_construct_port(const Ship& ship, Coords coords) {
 	send_player_command(new CmdShipConstructPort(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship& ship, IslandExploreDirection direction) {
+void Game::send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction) {
 	send_player_command(new CmdShipExploreIsland(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_sink_ship(Ship& ship) {
+void Game::send_player_sink_ship(const Ship& ship) {
 	send_player_command(
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_cancel_expedition_ship(Ship& ship) {
+void Game::send_player_cancel_expedition_ship(const Ship& ship) {
 	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }

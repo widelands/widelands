@@ -438,7 +438,7 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 /**
  * Update last_wallet_charge_ with the current gametime.
  */
-void Road::update_wallet_chargetime(Game& game) {
+void Road::update_wallet_chargetime(const Game& game) {
 	last_wallet_charge_ = game.get_gametime();
 }
 

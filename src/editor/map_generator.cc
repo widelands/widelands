@@ -40,7 +40,7 @@ constexpr uint32_t kMaxElevationHalf = 0x80000000;
 
 namespace Widelands {
 
-MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase)
+MapGenerator::MapGenerator(Map& map, UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase)
    : map_(map), map_info_(mapInfo), egbase_(egbase) {
 	std::unique_ptr<LuaTable> map_gen_config(egbase.lua().run_script("world/map_generation.lua"));
 	map_gen_config->do_not_warn_about_unaccessed_keys();
@@ -846,7 +846,7 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	} else if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') ||
 	           (ch == 'J') || (ch == 'j')) {
 		return 23;
-	} else if (ch >= 'A' && ch < 'O') {
+	} else if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
 		if (ch > 'I') {
 			--res;

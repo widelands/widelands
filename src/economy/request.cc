@@ -237,7 +237,7 @@ Flag& Request::target_flag() const {
  * Return the point in time at which we want the ware of the given number to
  * be delivered. nr is in the range [0..count_[
  */
-int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const nr) const {
+int32_t Request::get_base_required_time(const EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
 		if (!(count_ == 1 && nr == 1)) {
 			log_warn_time(egbase.get_gametime(),

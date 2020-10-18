@@ -439,7 +439,7 @@ uint32_t Building::get_playercaps() const {
 	return caps;
 }
 
-void Building::start_animation(EditorGameBase& egbase, uint32_t const anim) {
+void Building::start_animation(const EditorGameBase& egbase, uint32_t const anim) {
 	anim_ = anim;
 	animstart_ = egbase.get_gametime();
 }

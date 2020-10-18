@@ -182,13 +182,13 @@ void do_draw_minimap(Texture* texture,
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			move_r(mapwidth, f, i);
 
-			Widelands::SeeUnseeNode vision = Widelands::SeeUnseeNode::kUnexplored;
-			Widelands::PlayerNumber owner = 0;
+			Widelands::SeeUnseeNode vision;
+			Widelands::PlayerNumber owner;
 			if (player == nullptr || player->see_all()) {
 				// This player has omnivision - show the field like it is in reality.
 				vision = Widelands::SeeUnseeNode::kVisible;  // Seen right now.
 				owner = f.field->get_owned_by();
-			} else if (player != nullptr) {
+			} else {
 				// This player might be affected by fog of war - instead of the
 				// reality, we show her what she last saw on this field. If she has
 				// vision of this field, this will be the same as reality -

@@ -176,7 +176,7 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
 			while (it != objects_.end() && (moi) != it->second->descr_->type()) {
-				it++;
+				++it;
 			}
 			if (it == objects_.end()) {
 				break;
@@ -745,8 +745,8 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("%u: %s", serial, e.what());
 		}
 
-		MapObject& obj = *get_object();
 		if (packet_version >= 2) {
+			MapObject& obj = *get_object();
 			obj.reserved_by_worker_ = fr.unsigned_8();
 		}
 	} catch (const WException& e) {
@@ -778,7 +778,7 @@ void MapObject::Loader::load_pointers() {
  * We also preload some animation graphics here to prevent jitter at game start.
  */
 void MapObject::Loader::load_finish() {
-	MapObject& mo = get<MapObject>();
+	const MapObject& mo = get<MapObject>();
 	mo.descr().load_graphics();
 }
 

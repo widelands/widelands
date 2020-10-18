@@ -73,7 +73,7 @@ public:
 	     render_cache_(new RenderCache(kRenderCacheSize)),
 	     fontsets_(),
 	     fontset_(fontsets_.get_fontset(locale)),
-	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
+	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), &fontsets_)),
 	     image_cache_(image_cache) {
 		assert(image_cache);
 	}
@@ -112,7 +112,7 @@ public:
 		fontset_ = fontsets_.get_fontset(locale);
 		texture_cache_->flush();
 		render_cache_->flush();
-		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), fontsets_));
+		rt_renderer_.reset(new RT::Renderer(image_cache_, texture_cache_.get(), &fontsets_));
 	}
 
 private:

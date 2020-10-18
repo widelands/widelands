@@ -512,7 +512,7 @@ uint32_t ShippingSchedule::get_free_capacity_at(Game& game, Ship& ship, PortDock
 }
 
 void ShippingSchedule::get_free_capacity_between(Game& game,
-                                                 Ship& ship,
+                                                 const Ship& ship,
                                                  ShipPlan& plan,
                                                  PortDock& start,
                                                  PortDock& end,
