@@ -231,7 +231,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(
         &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
-	 training_wheels_(&box_ingame_, Vector2i::zero(), _("Teach me how to play")),
+     training_wheels_(&box_ingame_, Vector2i::zero(), _("Teach me how to play")),
      os_(opt) {
 
 	// Buttons

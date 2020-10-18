@@ -84,7 +84,7 @@ void TrainingWheels::load_objectives() {
 			scripts_to_run_.insert(it->second.script);
 			it = idle_objectives_.erase(it);
 		} else {
-			 ++it;
+			++it;
 		}
 	}
 
