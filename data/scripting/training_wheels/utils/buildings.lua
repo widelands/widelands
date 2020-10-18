@@ -1,5 +1,6 @@
--- NOCOM document
+-- TODO(GunChleoc): Document more fully
 
+-- Find tribe-dependent building type e.g. "trees" and "log" will give us a lumberjack
 function find_immovable_collector_for_ware(buildings, immovable_attribute, warename)
    for b_idx, building in ipairs(buildings) do
       if (building.type_name == "productionsite") then
@@ -26,7 +27,9 @@ function find_immovable_collector_for_ware(buildings, immovable_attribute, waren
    return nil
 end
 
-
+-- Search a radius for a buildplot with size "small" or "medium" etc.
+-- Tries to find it within min_radius first, then expands the radius by 1 until max_radius is reached
+-- Returns nil if nothing was found, a field otherwise.
 function find_buildable_field(center_field, size, min_radius, max_radius)
    if max_radius < min_radius then
       print("ERROR: max_radius < min_radius in find_buildable_field")
@@ -54,7 +57,7 @@ function find_buildable_field(center_field, size, min_radius, max_radius)
    return target_field
 end
 
-
+-- We can't list constructionsites directly, so we search a region for it
 function wait_for_constructionsite_field(buildingname, center_field, radius)
    local search_area = center_field:region(radius)
    local target_field = nil
