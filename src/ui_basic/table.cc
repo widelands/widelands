@@ -23,8 +23,6 @@
 
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
-#include <graphic/graphic.h>
-#include <wlapplication.h>
 
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
@@ -820,6 +818,7 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	return ea.get_string(column) < eb.get_string(column);
 }
 bool Table<void*>::handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) {
+	// needed to activate tooltip rendering without providing tooltiptext to parent (panel) class
 	return true;
 }
 
