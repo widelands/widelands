@@ -82,7 +82,7 @@ end
 
 function show_item_from_dropdown(name, item)
    local blocker = UserInputDisabler:new()
-   local ind = wl.ui.MapView().dropdowns[name]:get_no_of_items()
+   local ind = wl.ui.MapView().dropdowns[name].no_of_items
    wl.ui.MapView().dropdowns[name]:highlight_item(ind)
    sleep(500)
    while ind >= item do
