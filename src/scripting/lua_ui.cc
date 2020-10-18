@@ -311,8 +311,8 @@ int LuaPanel::indicate(lua_State* L) {
 		int y = panel_->get_y();
 		UI::Panel* parent = panel_->get_parent();
 		while (parent != nullptr) {
-			x += parent->get_x();
-			y += parent->get_y();
+			x += parent->get_x() + parent->get_lborder();
+			y += parent->get_y() + parent->get_tborder();
 			parent = parent->get_parent();
 		}
 		ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
