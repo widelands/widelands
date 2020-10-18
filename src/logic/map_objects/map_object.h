@@ -400,8 +400,6 @@ struct ObjectManager {
 	void insert(MapObject*);
 	void remove(MapObject&);
 
-	bool object_still_available(const MapObject* const) const;
-
 	/**
 	 * When saving the map object, ordere matters. Return a vector of all ids
 	 * that are currently available;
@@ -423,6 +421,7 @@ private:
 
 /**
  * Provides a safe pointer to a MapObject
+ * Make sure the MapObject is initialized (has a serial) before using it in ObjectPointer!
  */
 struct ObjectPointer {
 	// Provide default constructor to shut up cppcheck.
@@ -430,11 +429,13 @@ struct ObjectPointer {
 		serial_ = 0;
 	}
 	ObjectPointer(const MapObject* const obj) {
+		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj ? obj->serial_ : 0;
 	}
 	// can use standard copy constructor and assignment operator
 
 	ObjectPointer& operator=(const MapObject* const obj) {
+		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj ? obj->serial_ : 0;
 		return *this;
 	}

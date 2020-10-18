@@ -174,7 +174,7 @@ struct AStarEstimator {
 	   : calc_(calc), dest_(dest.get_position()) {
 	}
 
-	int32_t operator()(RoutingNode& current) const {
+	int32_t operator()(const RoutingNode& current) const {
 		return calc_.calc_cost_estimate(current.get_position(), dest_);
 	}
 
