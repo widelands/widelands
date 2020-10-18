@@ -72,7 +72,7 @@ struct Road : public RoadBase {
 
 	void postsplit(Game&, Flag&) override;
 
-	void update_wallet_chargetime(Game& game);
+	void update_wallet_chargetime(const Game& game);
 	void charge_wallet(Game& game);
 	int32_t wallet() const;
 	void add_to_wallet(int32_t sum);

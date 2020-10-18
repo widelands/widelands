@@ -124,7 +124,8 @@ const std::string& MapObjectProgram::name() const {
 std::vector<std::string> MapObjectProgram::split_string(const std::string& s,
                                                         const char* const separators) {
 	std::vector<std::string> result;
-	for (std::string::size_type pos = 0, endpos;
+	std::string::size_type endpos;
+	for (std::string::size_type pos = 0;
 	     (pos = s.find_first_not_of(separators, pos)) != std::string::npos; pos = endpos) {
 		endpos = s.find_first_of(separators, pos);
 		result.push_back(s.substr(pos, endpos - pos));

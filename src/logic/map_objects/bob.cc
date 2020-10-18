@@ -398,7 +398,7 @@ void Bob::idle_update(Game& game, State& state) {
 	state.ivar1 = 0;
 }
 
-bool Bob::is_idle() {
+bool Bob::is_idle() const {
 	return get_state(taskIdle);
 }
 
@@ -816,7 +816,7 @@ void Bob::draw(const EditorGameBase& egbase,
 /**
  * Set a looping animation, starting now.
  */
-void Bob::set_animation(EditorGameBase& egbase, uint32_t const anim) {
+void Bob::set_animation(const EditorGameBase& egbase, uint32_t const anim) {
 	anim_ = anim;
 	animstart_ = egbase.get_gametime();
 }

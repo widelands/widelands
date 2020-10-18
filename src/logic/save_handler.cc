@@ -38,6 +38,7 @@
 
 SaveHandler::SaveHandler()
    : next_save_realtime_(0),
+     last_save_realtime_(0),
      initialized_(false),
      allow_saving_(true),
      save_requested_(false),

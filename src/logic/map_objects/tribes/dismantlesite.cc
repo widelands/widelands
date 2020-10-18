@@ -64,7 +64,8 @@ IMPLEMENTATION
 ==============================
 */
 
-DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinishedBuilding(gdescr) {
+DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr)
+   : PartiallyFinishedBuilding(gdescr), next_dropout_index_(0) {
 }
 
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,

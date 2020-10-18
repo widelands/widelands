@@ -390,7 +390,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game& game) {
+void ConstructionSite::enhance(const Game& game) {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -739,7 +739,6 @@ void ConstructionSite::draw(const Time& gametime,
 	}
 
 	// Draw the partially finished building
-
 	info_.totaltime = kConstructionsiteStepTime * work_steps_;
 	info_.completedtime = kConstructionsiteStepTime * work_completed_;
 

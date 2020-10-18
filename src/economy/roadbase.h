@@ -92,7 +92,7 @@ protected:
 	draw(const Time&, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
-	void set_path(EditorGameBase&, const Path&);
+	void set_path(const EditorGameBase&, const Path&);
 
 	void mark_map(EditorGameBase&);
 	void unmark_map(EditorGameBase&);

@@ -512,7 +512,7 @@ const Bob::Task* Critter::Loader::get_task(const std::string& name) {
 }
 
 const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
-	Critter& critter = get<Critter>();
+	const Critter& critter = get<Critter>();
 	return critter.descr().get_program(name);
 }
 

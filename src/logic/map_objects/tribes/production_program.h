@@ -281,7 +281,7 @@ struct ProductionProgram : public MapObjectProgram {
 	///       * If handling_method is None the called program continues normal,
 	///         but no statistics are calculated
 	struct ActCall : public Action {
-		ActCall(const std::vector<std::string>& arguments);
+		explicit ActCall(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
 		const std::string& program_name() const {

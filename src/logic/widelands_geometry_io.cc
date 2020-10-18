@@ -45,14 +45,6 @@ Direction read_direction_8_allow_null(StreamRead* fr) {
 	return d;
 }
 
-MapIndex read_map_index_32(StreamRead* fr, const MapIndex max) {
-	uint32_t const i = fr->unsigned_32();
-	if (max <= i) {
-		throw ExceededMaxIndex(max, i);
-	}
-	return i;
-}
-
 Coords read_coords_32(StreamRead* stream_read) {
 	uint16_t const x = stream_read->unsigned_16();
 	uint16_t const y = stream_read->unsigned_16();

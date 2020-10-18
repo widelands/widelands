@@ -100,8 +100,8 @@ struct StepEvalFindFerryFleet {
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
 		return 0;
 	}
-	int32_t
-	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+	int32_t stepcost(
+	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		return checkstep_->allowed(map, from, to, dir, CheckStep::StepId::stepNormal) ? 1 : -1;
 	}
 
@@ -270,7 +270,7 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
  * in the next call to act(). When a ferry is found, its destination will be set to the waterway.
  * Multiple requests will be treated first come first served.
  */
-void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, const Time& gametime) {
+void FerryFleet::request_ferry(const EditorGameBase& egbase, Waterway* waterway, const Time& gametime) {
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == waterway) {
 			if (waterway->get_fleet() != this) {

@@ -129,7 +129,7 @@ public:
 	}
 
 private:
-	Time get_base_required_time(EditorGameBase&, uint32_t nr) const;
+	Time get_base_required_time(const EditorGameBase&, uint32_t nr) const;
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer&);
 

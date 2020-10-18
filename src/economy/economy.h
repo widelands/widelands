@@ -124,7 +124,7 @@ public:
 		return type_;
 	}
 
-	static void check_merge(Flag&, Flag&, WareWorker);
+	static void check_merge(const Flag&, const Flag&, WareWorker);
 	static void check_split(Flag&, Flag&, WareWorker);
 
 	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
@@ -236,7 +236,7 @@ private:
 	void create_requested_workers(Game&);
 	void create_requested_worker(Game&, DescriptionIndex);
 
-	bool has_request(Request&);
+	bool has_request(Request&) const;
 
 	/*************/
 	/* Variables */

@@ -31,7 +31,7 @@ class Texture : public Surface, public Image {
 public:
 	// Create a new surface from an SDL_Surface. If intensity is true, an GL_INTENSITY texture
 	// is created. Ownership is taken.
-	Texture(SDL_Surface* surface, bool intensity = false);
+	explicit Texture(SDL_Surface* surface, bool intensity = false);
 
 	// Create a new empty (that is randomly filled) Surface with the given
 	// dimensions.

@@ -217,8 +217,8 @@ class Immovable : public BaseImmovable {
 public:
 	/// If this immovable was created by a building, 'former_building_descr' can be set in order to
 	/// display information about it.
-	Immovable(const ImmovableDescr&,
-	          const Widelands::BuildingDescr* former_building_descr = nullptr);
+	explicit Immovable(const ImmovableDescr&,
+	                   const Widelands::BuildingDescr* former_building_descr = nullptr);
 	~Immovable() override;
 
 	Coords get_position() const {

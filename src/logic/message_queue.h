@@ -109,7 +109,7 @@ struct MessageQueue {
 			// So we assume here that the message was removed from an earlier delete cmd.
 			return;
 		}
-		Message& message = *it->second;
+		const Message& message = *it->second;
 		assert(static_cast<int>(message.status()) < 3);
 		assert(counts_[static_cast<int>(message.status())]);
 		--counts_[static_cast<int>(message.status())];

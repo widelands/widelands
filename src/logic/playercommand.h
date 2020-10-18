@@ -101,7 +101,7 @@ private:
 };
 
 struct CmdBuild : public PlayerCommand {
-	CmdBuild() : PlayerCommand() {
+	CmdBuild() : PlayerCommand(), bi(0) {
 	}  // For savegame loading
 	CmdBuild(const Time& init_duetime, const int32_t p, const Coords& c, const DescriptionIndex i)
 	   : PlayerCommand(init_duetime, p), coords(c), bi(i) {
@@ -270,7 +270,7 @@ private:
 	Widelands::SoldierPreference preference;
 };
 struct CmdStartOrCancelExpedition : public PlayerCommand {
-	CmdStartOrCancelExpedition() : PlayerCommand() {
+	CmdStartOrCancelExpedition() : PlayerCommand(), serial(kInvalidSerial) {
 	}  // For savegame loading
 	CmdStartOrCancelExpedition(const Time& t, PlayerNumber const p, Building& b)
 	   : PlayerCommand(t, p), serial(b.serial()) {
@@ -293,7 +293,8 @@ private:
 };
 
 struct CmdExpeditionConfig : public PlayerCommand {
-	CmdExpeditionConfig() : PlayerCommand() {
+	CmdExpeditionConfig()
+	   : PlayerCommand(), serial(kInvalidSerial), type(wwWARE), index(0), add(false) {
 	}  // For savegame loading
 	CmdExpeditionConfig(
 	   const Time& t, PlayerNumber const p, PortDock& pd, WareWorker ww, DescriptionIndex di, bool a)
@@ -320,7 +321,7 @@ private:
 };
 
 struct CmdEnhanceBuilding : public PlayerCommand {
-	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
+	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), bi_(0), keep_wares_(false) {
 	}  // For savegame loading
 	CmdEnhanceBuilding(
 	   const Time& init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
@@ -518,7 +519,13 @@ private:
 
 struct CmdSetWarePriority : public PlayerCommand {
 	// For savegame loading
-	CmdSetWarePriority() : PlayerCommand(), serial_(0), type_(0), index_(), priority_(0) {
+	CmdSetWarePriority()
+	   : PlayerCommand(),
+	     serial_(0),
+	     type_(0),
+	     index_(),
+	     priority_(0),
+	     is_constructionsite_setting_(false) {
 	}
 	CmdSetWarePriority(const Time& duetime,
 	                   PlayerNumber sender,
@@ -550,7 +557,13 @@ private:
 };
 
 struct CmdSetInputMaxFill : public PlayerCommand {
-	CmdSetInputMaxFill() : PlayerCommand(), serial_(0), index_(), type_(wwWARE), max_fill_(0) {
+	CmdSetInputMaxFill()
+	   : PlayerCommand(),
+	     serial_(0),
+	     index_(),
+	     type_(wwWARE),
+	     max_fill_(0),
+	     is_constructionsite_setting_(false) {
 	}  // For savegame loading
 	CmdSetInputMaxFill(const Time& duetime,
 	                   PlayerNumber,
@@ -831,7 +844,7 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 struct CmdSetStockPolicy : PlayerCommand {
 	CmdSetStockPolicy(const Time& time,
 	                  PlayerNumber p,
-	                  Building& wh,
+	                  const Building& wh,
 	                  bool isworker,
 	                  DescriptionIndex ware,
 	                  StockPolicy policy);
@@ -894,7 +907,7 @@ struct CmdToggleMuteMessages : PlayerCommand {
 	explicit CmdToggleMuteMessages(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdToggleMuteMessages() : PlayerCommand() {
+	CmdToggleMuteMessages() : PlayerCommand(), building_(kInvalidSerial), all_(false) {
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -918,7 +931,7 @@ struct CmdMarkMapObjectForRemoval : PlayerCommand {
 	explicit CmdMarkMapObjectForRemoval(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdMarkMapObjectForRemoval() : PlayerCommand() {
+	CmdMarkMapObjectForRemoval() : PlayerCommand(), object_(kInvalidSerial), mark_(false) {
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;

@@ -71,7 +71,7 @@ private:
 
 struct MapGenerator {
 
-	MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase);
+	MapGenerator(Map& map, UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase);
 
 	void create_random_map();
 

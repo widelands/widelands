@@ -263,7 +263,7 @@ bool Ferry::init_fleet() {
 	return fleet->init(egbase);
 }
 
-Waterway* Ferry::get_destination(Game& game) const {
+Waterway* Ferry::get_destination(const Game& game) const {
 	if (!destination_) {
 		return nullptr;
 	}
