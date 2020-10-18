@@ -13,7 +13,7 @@ include "scripting/ui.lua"
 -- RST
 -- .. function:: send_message(player, title, body, parameters)
 --
---    Sends a message to a player.
+--    Sends a message in a separate window to a player.
 --    If the popup parameter is true and the player is in building mode,
 --    the function waits until the player leaves the building mode
 --    before sending the message (only in singleplayer)
@@ -38,8 +38,8 @@ end
 -- RST
 -- .. function:: send_to_all(text[, heading])
 --
---    Sends a game status message to all players. This is mainly used for 
---    winconditions to show a summary of the wincondition result.
+--    Sends a game status message to all players in a separate window. This is
+--    mainly used for winconditions to show a summary.
 --
 --    :arg text: the localized body of the message. You can use rt functions here.
 --    :type text: :class:`string`
@@ -75,6 +75,7 @@ end
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
 --                     for :meth:`wl.game.Player.message_box`, e.g. { field = f }.
 --
+
 function message_box(player, title, body, parameters)
    wait_for_roadbuilding()
    -- In case the user input was forbidden for some reason, allow him to close the message box.
@@ -89,9 +90,9 @@ end
 -- .. function:: campaign_message_box({message, [sleeptime, options]})
 --
 --    Sets the width and height of the message box and calls
---    :meth:`message_box(player, title, body, parameters)` for player 1
+--    :meth:`message_box` for player 1
 --
---    :arg message: the message consist of the title and the body. Note that me body
+--    :arg message: the message consist of the `title` and the `body`. Note that the body
 --                  must be formatted using the :ref:`richtext functions <richtext.lua>`.
 --    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
@@ -110,18 +111,19 @@ end
 --    Example:
 -- .. code-block:: lua
 --
---    campaign_message_box({title = "The title", 
---                          body = p("The body"),
---                          200, 
---                          w = 200,
---                          h = 150,
+--    campaign_message_box({title = "The title",    -- part of message
+--                          body = p("The body"),   -- part of message
+--                          200,                    -- optional sleeptime
+--                          w = 200,                -- width (game.Player.message_box())
+--                          h = 150,                -- height (game.Player.message_box())
 --                          position = "topleft",
 --                          scroll_back = true
 --                         })
 --
--- In our campaigns the table of a campaign_message_box is defined in a separate file called
--- 'texts.lua'.
+-- In the campaigns of this game the table of a campaign_message_box is defined in
+-- a separate file called `texts.lua`.
 --
+
 function campaign_message_box(message, sleeptime)
    message.show_instantly = message.show_instantly or false
    message.scroll_back = message.scroll_back or false
@@ -176,7 +178,9 @@ end
 --
 --    Adds an objective to a campaign.
 --
---    :arg objective: The objective to be added. If the variable obj_name exists, obj_name, obj_title and obj_body are used. Otherwise, it needs to have a name, title, and body.
+--    :arg objective: The objective to be added. If the variable obj_name exists, 
+--                    obj_name, obj_title and obj_body are used. Otherwise, it 
+--                    needs to have a name, title, and body.
 --
 --    :returns: The new objective.
 --
