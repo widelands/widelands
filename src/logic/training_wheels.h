@@ -38,9 +38,11 @@ public:
 	~TrainingWheels() = default;
 
 	void mark_as_solved(const std::string& objective);
+	void run_objectives();
+	bool has_objectives() const;
 
 private:
-	void run_objectives();
+	void load_objectives();
 	void write();
 
 	struct TrainingWheel {
@@ -60,6 +62,7 @@ private:
 	std::map<std::string, TrainingWheel> idle_objectives_;
 	std::set<std::string> running_objectives_;
 	std::set<std::string> solved_objectives_;
+	std::set<std::string> scripts_to_run_;
 	Profile profile_;
 
 	LuaInterface& lua_;  // Not owned

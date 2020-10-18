@@ -31,7 +31,7 @@ const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs-
                                                 std::string("training_wheels") +
                                                 g_fs->file_separator();
 
-// NOCOM replays desync, just like with scenarios
+// NOCOM document
 
 namespace Widelands {
 
@@ -59,12 +59,12 @@ TrainingWheels::TrainingWheels(LuaInterface& lua) : profile_(Profile::err_log), 
 		}
 	}
 	write();
-	run_objectives();
+	load_objectives();
 }
 
-void TrainingWheels::run_objectives() {
+void TrainingWheels::load_objectives() {
 	// We collect the scripts before running them to prevent cocurrency issues
-	std::set<std::string> scripts_to_run;
+	scripts_to_run_.clear();
 	// Now run
 	for (auto it = idle_objectives_.begin(); it != idle_objectives_.end();) {
 		if (running_objectives_.count(it->first) == 1) {
@@ -81,15 +81,24 @@ void TrainingWheels::run_objectives() {
 		if (dependencies_met) {
 			log_info("Running training wheel '%s'", it->second.script.c_str());
 			running_objectives_.insert(it->first);
-			scripts_to_run.insert(it->second.script);
+			scripts_to_run_.insert(it->second.script);
 			it = idle_objectives_.erase(it);
 		} else {
 			 ++it;
 		}
 	}
-	for (const std::string& runme : scripts_to_run) {
+
+}
+
+void TrainingWheels::run_objectives() {
+	for (const std::string& runme : scripts_to_run_) {
 		lua_.run_script(kTrainingWheelsScriptingDir + runme);
 	}
+	scripts_to_run_.clear();
+}
+
+bool TrainingWheels::has_objectives() const {
+	return !scripts_to_run_.empty();
 }
 
 void TrainingWheels::mark_as_solved(const std::string& objective) {
@@ -98,6 +107,7 @@ void TrainingWheels::mark_as_solved(const std::string& objective) {
 	Section& section = profile_.pull_section("global");
 	section.set_bool(objective.c_str(), true);
 	write();
+	load_objectives();
 	run_objectives();
 }
 

@@ -425,7 +425,9 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 }
 
 void Game::mark_training_wheel_as_solved(const std::string& objective) {
-	training_wheels_->mark_as_solved(objective);
+	if (training_wheels_ != nullptr) {
+		training_wheels_->mark_as_solved(objective);
+	}
 }
 
 /**
@@ -531,6 +533,22 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
+	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the user switched off the option
+	if (get_config_bool("training_wheels", true) && (start_game_type == StartGameType::kMap ||
+	    (script_to_run.empty() && start_game_type == StartGameType::kSaveGame))) {
+		InteractivePlayer* ipl = get_ipl();
+		if (ipl && !ipl->is_multiplayer()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			// Just like with scenarios, replays will desync, so we switch them off.
+			if (training_wheels_->has_objectives()) {
+				writereplay_ = false;
+			} else {
+				// Nothing to do, so let's free the memory
+				training_wheels_.reset(nullptr);
+			}
+		}
+	}
+
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
 		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
@@ -565,13 +583,8 @@ bool Game::run(StartGameType const start_game_type,
 
 	remove_loader_ui();
 
-	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the user switched off the option
-	if (get_config_bool("training_wheels", true) && (start_game_type == StartGameType::kMap ||
-	    (script_to_run.empty() && start_game_type == StartGameType::kSaveGame))) {
-		InteractivePlayer* ipl = get_ipl();
-		if (ipl && !ipl->is_multiplayer()) {
-			training_wheels_.reset(new TrainingWheels(lua()));
-		}
+	if (training_wheels_ != nullptr) {
+		training_wheels_->run_objectives();
 	}
 
 	get_ibase()->run<UI::Panel::Returncodes>();
