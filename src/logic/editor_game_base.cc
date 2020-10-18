@@ -77,10 +77,9 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      ibase_(nullptr),
      loader_ui_(nullptr),
      game_tips_(nullptr),
+     loading_message_subscriber_(Notifications::subscribe<UI::NoteLoadingMessage>(
+        [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); })),
      tmp_fs_(nullptr) {
-
-	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
-	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
 }
 
 EditorGameBase::~EditorGameBase() {

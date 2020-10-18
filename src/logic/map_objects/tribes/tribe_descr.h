@@ -160,7 +160,7 @@ private:
 	// Make sure that everything is there and that dependencies are calculated
 	void finalize_loading(Tribes& tribes, const World& world);
 	// Helper function to calculate trainingsites proportions for the AI
-	void calculate_trainingsites_proportions(Tribes& tribes);
+	void calculate_trainingsites_proportions(const Tribes& tribes);
 
 	void process_productionsites(Tribes& tribes, const World& world);
 

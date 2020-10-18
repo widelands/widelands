@@ -65,8 +65,8 @@ struct StepEvalAStar {
 		return est;
 	}
 
-	int32_t
-	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+	int32_t stepcost(
+	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		if ((swim_ && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||
 		    (!swim_ && !(to.field->nodecaps() & MOVECAPS_WALK)))
 			return -1;

@@ -27,7 +27,7 @@ namespace Widelands {
 class Economy;
 
 struct CmdCallEconomyBalance : public GameLogicCommand {
-	CmdCallEconomyBalance() : GameLogicCommand(0), timerid_(0) {
+	CmdCallEconomyBalance() : GameLogicCommand(0), type_(wwWARE), timerid_(0) {
 	}  ///< for load and save
 
 	CmdCallEconomyBalance(uint32_t starttime, Economy*, uint32_t timerid);

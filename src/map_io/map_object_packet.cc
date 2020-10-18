@@ -139,9 +139,8 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 
 	fw.unsigned_8(kCurrentPacketVersionMapObject);
 
-	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
-	for (std::vector<Serial>::iterator cit = obj_serials.begin(); cit != obj_serials.end(); ++cit) {
-		MapObject* pobj = egbase.objects().get_object(*cit);
+	for (const Serial ser : egbase.objects().all_object_serials_ordered()) {
+		MapObject* pobj = egbase.objects().get_object(ser);
 		assert(pobj);
 		MapObject& obj = *pobj;
 

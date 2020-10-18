@@ -778,17 +778,17 @@ void TrainingSite::request_soldier_callback(Game& game,
 void TrainingSite::drop_unupgradable_soldiers(Game&) {
 	std::vector<Soldier*> droplist;
 
-	for (uint32_t i = 0; i < soldiers_.size(); ++i) {
+	for (Soldier* soldier : soldiers_) {
 		std::vector<Upgrade>::iterator it = upgrades_.begin();
 		for (; it != upgrades_.end(); ++it) {
-			int32_t level = soldiers_[i]->get_level(it->attribute);
+			int32_t level = soldier->get_level(it->attribute);
 			if (level >= it->min && level <= it->max) {
 				break;
 			}
 		}
 
 		if (it == upgrades_.end()) {
-			droplist.push_back(soldiers_[i]);
+			droplist.push_back(soldier);
 		}
 	}
 
@@ -819,8 +819,8 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	Soldier* soldier_to_drop = nullptr;
 	uint8_t highest_soldier_level_seen = 0;
 
-	for (uint32_t i = 0; i < soldiers_.size(); ++i) {
-		uint8_t this_soldier_level = soldiers_[i]->get_level(TrainingAttribute::kTotal);
+	for (Soldier* soldier : soldiers_) {
+		uint8_t this_soldier_level = soldier->get_level(TrainingAttribute::kTotal);
 
 		bool this_soldier_is_safe = false;
 		if (this_soldier_level <= highest_soldier_level_seen) {
@@ -834,7 +834,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 					//  - is below maximum, and
 					//  - is not in a stalled state
 					// Check done separately for each art.
-					int32_t level = soldiers_[i]->get_level(upgrade.attribute);
+					int32_t level = soldier->get_level(upgrade.attribute);
 
 					// Below maximum -check
 					if (level > upgrade.max) {
@@ -862,7 +862,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 		}
 		if (!this_soldier_is_safe) {
 			// Make this soldier a kick-out candidate
-			soldier_to_drop = soldiers_[i];
+			soldier_to_drop = soldier;
 			highest_soldier_level_seen = this_soldier_level;
 		}
 	}

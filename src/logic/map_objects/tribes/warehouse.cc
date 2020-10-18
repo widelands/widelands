@@ -52,9 +52,9 @@ constexpr int kFleeingUnitsCap = 500;
 
 // Goes through the list and removes all workers that are no longer in the
 // game.
-void remove_no_longer_existing_workers(Game& game, std::vector<Worker*>* workers) {
-	for (std::vector<Worker*>::iterator i = workers->begin(); i != workers->end(); ++i) {
-		if (!game.objects().object_still_available(*i)) {
+void remove_no_longer_existing_workers(Game& game, std::vector<OPtr<Worker>>* workers) {
+	for (std::vector<OPtr<Worker>>::iterator i = workers->begin(); i != workers->end(); ++i) {
+		if (!i->get(game)) {
 			workers->erase(i);
 			remove_no_longer_existing_workers(game, workers);
 			return;
@@ -347,8 +347,8 @@ std::vector<Soldier*> Warehouse::SoldierControl::present_soldiers() const {
 
 	if (sidx != warehouse_->incorporated_workers_.end()) {
 		const WorkerList& soldiers = sidx->second;
-		for (Worker* temp_soldier : soldiers) {
-			rv.push_back(dynamic_cast<Soldier*>(temp_soldier));
+		for (OPtr<Worker> temp_soldier : soldiers) {
+			rv.push_back(dynamic_cast<Soldier*>(temp_soldier.get(warehouse_->get_owner()->egbase())));
 		}
 	}
 	return rv;
@@ -718,13 +718,10 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 	// But portdock must know that it should not try to recreate itself
 	cleanup_in_progress_ = true;
 
-	if (egbase.objects().object_still_available(portdock_)) {
+	if (portdock_) {
 		portdock_->remove(egbase);
 	}
-
-	if (!egbase.objects().object_still_available(portdock_)) {
-		portdock_ = nullptr;
-	}
+	portdock_ = nullptr;
 
 	// This will launch all workers including incorporated ones up to kFleeingUnitsCap and then empty
 	// the stock.
@@ -814,7 +811,7 @@ void Warehouse::act(Game& game, uint32_t const data) {
 			for (WorkerList::iterator it = soldiers.begin(); it != soldiers.end(); ++it) {
 				// This is a safe cast: we know only soldiers can land in this
 				// slot in the incorporated array
-				Soldier* soldier = dynamic_cast<Soldier*>(*it);
+				Soldier* soldier = dynamic_cast<Soldier*>(it->get(game));
 
 				//  Soldier dead ...
 				if (!soldier || soldier->get_current_health() == 0) {
@@ -890,8 +887,8 @@ PlayerImmovable::Workers Warehouse::get_incorporated_workers() {
 	PlayerImmovable::Workers all_workers;
 
 	for (const auto& worker_pair : incorporated_workers_) {
-		for (Worker* worker : worker_pair.second) {
-			all_workers.push_back(worker);
+		for (OPtr<Worker> worker : worker_pair.second) {
+			all_workers.push_back(worker.get(get_owner()->egbase()));
 		}
 	}
 	return all_workers;
@@ -937,7 +934,7 @@ bool Warehouse::fetch_from_flag(Game& game) {
  * \return the number of workers that we can launch satisfying the given
  * requirements.
  */
-Quantity Warehouse::count_workers(const Game& /* game */,
+Quantity Warehouse::count_workers(const Game& game,
                                   DescriptionIndex worker_id,
                                   const Requirements& req,
                                   Match exact) {
@@ -948,8 +945,8 @@ Quantity Warehouse::count_workers(const Game& /* game */,
 
 		// NOTE: This code lies about the TrainingAttributes of non-instantiated workers.
 		if (incorporated_workers_.count(worker_id)) {
-			for (Worker* worker : incorporated_workers_[worker_id]) {
-				if (!req.check(*worker)) {
+			for (OPtr<Worker> worker : incorporated_workers_[worker_id]) {
+				if (!req.check(*worker.get(game))) {
 					//  This is one of the workers in our sum.
 					//  But he is too stupid for this job
 					--sum;
@@ -981,9 +978,9 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 				remove_no_longer_existing_workers(game, &incorporated_workers_[worker_id]);
 				WorkerList& incorporated_workers = incorporated_workers_[worker_id];
 
-				for (std::vector<Worker*>::iterator worker_iter = incorporated_workers.begin();
+				for (WorkerList::iterator worker_iter = incorporated_workers.begin();
 				     worker_iter != incorporated_workers.end(); ++worker_iter) {
-					Worker* worker = *worker_iter;
+					Worker* worker = worker_iter->get(game);
 					--unincorporated;
 
 					if (req.check(*worker)) {
@@ -1046,7 +1043,7 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 
 	// Incorporate the worker
 	if (!incorporated_workers_.count(worker_index)) {
-		incorporated_workers_[worker_index] = std::vector<Worker*>();
+		incorporated_workers_[worker_index] = WorkerList();
 	}
 	incorporated_workers_[worker_index].push_back(w);
 

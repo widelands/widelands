@@ -64,7 +64,7 @@ public:
 	void cancel(Game&, Soldier&);
 
 	// Returns true if the battle should not be interrupted.
-	bool locked(Game&);
+	bool locked(const Game&);
 
 	// The two soldiers involved in this fight.
 	Soldier* first() {

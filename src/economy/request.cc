@@ -214,14 +214,13 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	fw.unsigned_32(last_request_time_);
 
 	fw.unsigned_16(transfers_.size());  //  Write number of current transfers.
-	for (uint32_t i = 0; i < transfers_.size(); ++i) {
-		Transfer& trans = *transfers_[i];
-		if (trans.ware_) {  //  write ware/worker
-			assert(mos.is_object_known(*trans.ware_));
-			fw.unsigned_32(mos.get_object_file_index(*trans.ware_));
-		} else if (trans.worker_) {
-			assert(mos.is_object_known(*trans.worker_));
-			fw.unsigned_32(mos.get_object_file_index(*trans.worker_));
+	for (const Transfer* trans : transfers_) {
+		if (trans->ware_) {  //  write ware/worker
+			assert(mos.is_object_known(*trans->ware_));
+			fw.unsigned_32(mos.get_object_file_index(*trans->ware_));
+		} else if (trans->worker_) {
+			assert(mos.is_object_known(*trans->worker_));
+			fw.unsigned_32(mos.get_object_file_index(*trans->worker_));
 		}
 	}
 	requirements_.write(fw, game, mos);
@@ -238,7 +237,7 @@ Flag& Request::target_flag() const {
  * Return the point in time at which we want the ware of the given number to
  * be delivered. nr is in the range [0..count_[
  */
-int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const nr) const {
+int32_t Request::get_base_required_time(const EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
 		if (!(count_ == 1 && nr == 1)) {
 			log_warn_time(egbase.get_gametime(),

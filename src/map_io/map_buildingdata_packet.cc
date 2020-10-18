@@ -397,7 +397,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 						const DescriptionIndex& worker_index =
 						   tribe.worker_index(worker.descr().name().c_str());
 						if (!warehouse.incorporated_workers_.count(worker_index)) {
-							warehouse.incorporated_workers_[worker_index] = std::vector<Worker*>();
+							warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
 						}
 						warehouse.incorporated_workers_[worker_index].push_back(&worker);
 					} catch (const WException& e) {
@@ -670,7 +670,7 @@ void MapBuildingdataPacket::read_productionsite(
 					assert(count);
 
 					if (worker_descr.can_act_as(working_position.first)) {
-						while (wp->worker || wp->worker_request) {
+						while (wp->worker.get(game) || wp->worker_request) {
 							++wp;
 							if (!--count) {
 								goto end_working_position;
@@ -782,7 +782,7 @@ void MapBuildingdataPacket::read_productionsite(
 				int32_t i = 0;
 				// Determine main worker's index as this may change during saveloading (#3891)
 				for (const auto* wp = productionsite.working_positions();; ++wp) {
-					if (wp->worker == &worker) {
+					if (wp->worker.get(game) == &worker) {
 						productionsite.main_worker_ = i;
 						break;
 					}
@@ -1115,8 +1115,8 @@ void MapBuildingdataPacket::write_warehouse(const Warehouse& warehouse,
 	using TWorkerMap = std::map<uint32_t, const Worker*>;
 	TWorkerMap workermap;
 	for (const auto& cwt : warehouse.incorporated_workers_) {
-		for (Worker* temp_worker : cwt.second) {
-			const Worker& w = *temp_worker;
+		for (OPtr<Worker> temp_worker : cwt.second) {
+			const Worker& w = *temp_worker.get(game);
 			assert(mos.is_object_known(w));
 			workermap.insert(std::make_pair(mos.get_object_file_index(w), &w));
 		}
@@ -1215,7 +1215,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	const ProductionSite::WorkingPosition& end = (&begin)[nr_working_positions];
 	uint32_t nr_workers = 0;
 	for (ProductionSite::WorkingPosition const* i = &begin; i < &end; ++i) {
-		nr_workers += i->worker ? 1 : 0;
+		nr_workers += i->worker.get(game) ? 1 : 0;
 	}
 
 	//  worker requests
@@ -1229,7 +1229,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	//  workers
 	fw.unsigned_16(nr_workers);
 	for (ProductionSite::WorkingPosition const* i = &begin; i < &end; ++i) {
-		if (Worker const* const w = i->worker) {
+		if (Worker const* const w = i->worker.get(game)) {
 			assert(!i->worker_request);
 			assert(mos.is_object_known(*w));
 			fw.unsigned_32(mos.get_object_file_index(*w));
@@ -1294,7 +1294,7 @@ void MapBuildingdataPacket::write_productionsite(const ProductionSite& productio
 	} else {
 		fw.unsigned_8(1);
 		fw.unsigned_32(mos.get_object_file_index(
-		   *productionsite.working_positions_[productionsite.main_worker_].worker));
+		   *productionsite.working_positions_[productionsite.main_worker_].worker.get(game)));
 	}
 }
 
@@ -1323,8 +1323,7 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 
 	// upgrades
 	fw.unsigned_8(trainingsite.upgrades_.size());
-	for (uint8_t i = 0; i < trainingsite.upgrades_.size(); ++i) {
-		const TrainingSite::Upgrade& upgrade = trainingsite.upgrades_[i];
+	for (const TrainingSite::Upgrade& upgrade : trainingsite.upgrades_) {
 		fw.unsigned_8(static_cast<uint8_t>(upgrade.attribute));
 		fw.unsigned_8(upgrade.prio);
 		fw.unsigned_8(upgrade.credit);

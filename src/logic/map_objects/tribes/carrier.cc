@@ -250,7 +250,7 @@ void Carrier::deliver_to_building(Game& game, State& state) {
  * \param g Game the carrier lives on
  * \param s Flags sent to the task
  */
-void Carrier::pickup_from_flag(Game& game, State& state) {
+void Carrier::pickup_from_flag(Game& game, const State& state) {
 	int32_t const ivar1 = state.ivar1;
 	if (!start_task_walktoflag(game, ivar1)) {
 
@@ -351,7 +351,7 @@ void Carrier::enter_building(Game& game, State& state) {
  */
 bool Carrier::swap_or_wait(Game& game, State& state) {
 	// Road that employs us
-	RoadBase& road = dynamic_cast<RoadBase&>(*get_location(game));
+	const RoadBase& road = dynamic_cast<RoadBase&>(*get_location(game));
 	// Flag we are delivering to
 	Flag& flag = road.get_flag(static_cast<RoadBase::FlagId>(state.ivar1 ^ 1));
 	// The other flag of our road
@@ -382,7 +382,7 @@ bool Carrier::swap_or_wait(Game& game, State& state) {
  * \return true if the carrier is going to fetch it.
  */
 bool Carrier::notify_ware(Game& game, int32_t const flag) {
-	State& state = top_state();
+	const State& state = top_state();
 
 	// Check if we've already acked something
 	if (promised_pickup_to_ != NOONE) {
@@ -428,7 +428,7 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
  * accordingly.
  */
 void Carrier::find_pending_ware(Game& game) {
-	RoadBase& road = dynamic_cast<RoadBase&>(*get_location(game));
+	const RoadBase& road = dynamic_cast<RoadBase&>(*get_location(game));
 	uint32_t havewarebits = 0;
 
 	assert(promised_pickup_to_ == NOONE);
@@ -466,7 +466,7 @@ void Carrier::find_pending_ware(Game& game) {
 /**
  * Find the flag we are closest to (in walking time).
  */
-int32_t Carrier::find_closest_flag(Game& game) {
+int32_t Carrier::find_closest_flag(const Game& game) {
 	const Map& map = game.map();
 	CoordPath startpath(map, dynamic_cast<RoadBase&>(*get_location(game)).get_path());
 

@@ -474,7 +474,7 @@ public:
 	void start_stop_building(PlayerImmovable&);
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);
-	void start_or_cancel_expedition(Warehouse&);
+	void start_or_cancel_expedition(const Warehouse&);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 	void dismantle_building(Building*, bool keep_wares);
 
@@ -491,10 +491,11 @@ public:
 	void drop_soldier(PlayerImmovable&, Soldier&);
 	void change_training_options(TrainingSite&, TrainingAttribute attr, int32_t val);
 
-	uint32_t find_attack_soldiers(Flag&,
+	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
+	void
+	enemyflagaction(const Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
 
 	uint32_t casualties() const {
 		return casualties_;

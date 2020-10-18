@@ -141,7 +141,7 @@ void Market::try_launching_batch(Game* game) {
 	}
 }
 
-bool Market::is_ready_to_launch_batch(const int trade_id) {
+bool Market::is_ready_to_launch_batch(const int trade_id) const {
 	const auto it = trade_orders_.find(trade_id);
 	if (it == trade_orders_.end()) {
 		return false;

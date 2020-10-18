@@ -61,7 +61,7 @@ void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker**
 	}
 }
 
-void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
+void ShippingItem::set_economy(const Game& game, Economy* e, WareWorker type) {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
