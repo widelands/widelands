@@ -1732,6 +1732,7 @@ int LuaTribeDescription::get_builder(lua_State* L) {
 
          (RO) the :class:`string` internal name of the carrier type that this tribe uses
 */
+
 int LuaTribeDescription::get_carrier(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->carrier())->name());
 	return 1;

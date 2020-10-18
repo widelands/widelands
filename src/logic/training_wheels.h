@@ -32,7 +32,7 @@ namespace Widelands {
 class TrainingWheels {
 public:
 	/*
-	 * Runs the training wheel scripts defined in data/scriting/training_wheels
+	 * Runs the training wheel scripts defined in data/scripting/training_wheels
 	 */
 	explicit TrainingWheels(LuaInterface& lua);
 	~TrainingWheels() = default;

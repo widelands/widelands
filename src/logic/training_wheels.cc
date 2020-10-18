@@ -89,6 +89,7 @@ void TrainingWheels::run_objectives() {
 			scripts_to_run.insert(it->second.script);
 			if (idle_objectives_.size() == 1) {
 				// Final element won't erase properly, so we hack this. Bleh.
+				// NOCOM fix this
 				log_dbg("Final element %s", it->first.c_str());
 				idle_objectives_.clear();
 				break;

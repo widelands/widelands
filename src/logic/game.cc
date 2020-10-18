@@ -342,7 +342,6 @@ void Game::init_newgame(const GameSettings& settings) {
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
-
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
