@@ -24,6 +24,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"  // NOCOM
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "game_io/game_saver.h"
@@ -72,31 +73,38 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
      curdir_(kSaveDir),
      illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+	log_dbg("NOCOM GameMainMenuSaveGame ctor AAA");
 
 	layout();
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor BBB");
 	main_box_.add_space(padding_);
 	main_box_.set_inner_spacing(padding_);
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor CCC");
 	info_box_.set_inner_spacing(padding_);
 	info_box_.add_space(padding_);
 	info_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kFullSize);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor DDD");
 	load_or_save_.table_box()->add_space(padding_);
 	load_or_save_.table_box()->add(&filename_box_, UI::Box::Resizing::kFullSize);
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor EEE");
 	filename_box_.set_inner_spacing(padding_);
 	filename_box_.add(&filename_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	filename_box_.add(&filename_editbox_, UI::Box::Resizing::kFillSpace);
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor FFF");
 	load_or_save_.game_details()->button_box()->add_space(padding_);
 	load_or_save_.game_details()->button_box()->add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	buttons_box_.set_inner_spacing(padding_);
 	buttons_box_.add(&cancel_, UI::Box::Resizing::kFillSpace);
 	buttons_box_.add(&ok_, UI::Box::Resizing::kFillSpace);
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor GGG");
 	ok_.set_enabled(false);
 
 	filename_editbox_.changed.connect([this]() { edit_box_changed(); });
@@ -104,84 +112,112 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	filename_editbox_.cancel.connect(
 	   [this, &parent]() { reset_editbox_or_die(parent.game().save_handler().get_cur_filename()); });
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor HHH");
 	ok_.sigclicked.connect([this]() { ok(); });
 	cancel_.sigclicked.connect([this]() { die(); });
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor III");
 	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
 	load_or_save_.table().double_clicked.connect([this](unsigned) { ok(); });
 	load_or_save_.table().cancel.connect([this]() { die(); });
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor JJJ");
 	load_or_save_.fill_table();
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor KKK");
 	center_to_parent();
 	move_to_top();
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor LLL");
 	filename_editbox_.focus();
 	pause_game(true);
 	set_thinks(false);
 	layout();
 
+	log_dbg("NOCOM GameMainMenuSaveGame ctor MMM");
 	initialization_complete();
+	log_dbg("NOCOM GameMainMenuSaveGame ctor done.");
 }
 
 void GameMainMenuSaveGame::layout() {
+	log_dbg("NOCOM GameMainMenuSaveGame::layout start");
 	main_box_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 2 * padding_);
 	load_or_save_.table().set_desired_size(get_inner_w() * 7 / 12, load_or_save_.table().get_h());
 	load_or_save_.delete_button()->set_desired_size(ok_.get_w(), ok_.get_h());
+	log_dbg("NOCOM GameMainMenuSaveGame::layout done.");
 }
 
 void GameMainMenuSaveGame::entry_selected() {
+	log_dbg("NOCOM GameMainMenuSaveGame::entry_selected start");
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
+	log_dbg("NOCOM GameMainMenuSaveGame::entry_selected AAA");
 	if (load_or_save_.has_selection()) {
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 		if (!gamedata->is_directory()) {
 			filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
 		}
 	}
+	log_dbg("NOCOM GameMainMenuSaveGame::entry_selected done");
 }
 
 void GameMainMenuSaveGame::edit_box_changed() {
+	log_dbg("NOCOM GameMainMenuSaveGame::edit_box_changed start");
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
 	const bool is_legal_filename = FileSystem::is_legal_filename(filename_editbox_.text());
 	ok_.set_enabled(is_legal_filename);
 	filename_editbox_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 	load_or_save_.delete_button()->set_enabled(false);
 	load_or_save_.clear_selections();
+	log_dbg("NOCOM GameMainMenuSaveGame::edit_box_changed done");
 }
 
 void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filename) {
+	log_dbg("NOCOM GameMainMenuSaveGame::reset_editbox_or_die AAA");
 	if (filename_editbox_.text() == current_filename) {
+		log_dbg("NOCOM GameMainMenuSaveGame::reset_editbox_or_die BBB");
 		die();
 	} else {
+		log_dbg("NOCOM GameMainMenuSaveGame::reset_editbox_or_die CCC");
 		filename_editbox_.set_text(current_filename);
 		load_or_save_.select_by_name(current_filename);
 	}
+	log_dbg("NOCOM GameMainMenuSaveGame::reset_editbox_or_die done");
 }
 
 void GameMainMenuSaveGame::ok() {
+	log_dbg("NOCOM GameMainMenuSaveGame::ok start");
 	if (!ok_.enabled()) {
+		log_dbg("NOCOM GameMainMenuSaveGame::ok AAA");
 		return;
 	}
 	if (load_or_save_.has_selection() && load_or_save_.entry_selected()->is_directory()) {
+		log_dbg("NOCOM GameMainMenuSaveGame::ok BBB");
 		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 		load_or_save_.change_directory_to(gamedata->filename);
 		curdir_ = gamedata->filename;
 		filename_editbox_.focus();
 	} else {
+		log_dbg("NOCOM GameMainMenuSaveGame::ok CCC");
 		std::string filename = filename_editbox_.text();
 		if (save_game(filename, !get_config_bool("nozip", false))) {
+			log_dbg("NOCOM GameMainMenuSaveGame::ok DDD");
 			die();
 		} else {
+			log_dbg("NOCOM GameMainMenuSaveGame::ok EEE");
 			load_or_save_.table().focus();
 		}
 	}
+	log_dbg("NOCOM GameMainMenuSaveGame::ok done");
 }
 
 void GameMainMenuSaveGame::die() {
+	log_dbg("NOCOM GameMainMenuSaveGame::die start");
 	pause_game(false);
+	log_dbg("NOCOM GameMainMenuSaveGame::die middle");
 	UI::UniqueWindow::die();
+	log_dbg("NOCOM GameMainMenuSaveGame::die done");
 }
 
 bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
@@ -205,10 +241,14 @@ bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 }
 
 void GameMainMenuSaveGame::pause_game(bool paused) {
+	log_dbg("NOCOM GameMainMenuSaveGame::pause_game(%s) start", paused ? "pause" : "resume");
 	if (igbase().is_multiplayer()) {
+		log_dbg("NOCOM GameMainMenuSaveGame::pause_game MP");
 		return;
 	}
+	log_dbg("NOCOM GameMainMenuSaveGame::pause_game AAA");
 	igbase().game().game_controller()->set_paused(paused);
+	log_dbg("NOCOM GameMainMenuSaveGame::pause_game done");
 }
 
 /**

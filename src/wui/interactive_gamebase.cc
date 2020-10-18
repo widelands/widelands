@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/log.h"  // NOCOM
 #include "base/macros.h"
 #include "base/multithreading.h"
 #include "graphic/font_handler.h"
@@ -397,7 +398,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
+				log_dbg("NOCOM InteractiveGameBase::handle_key Ctrl-S pressed ...");
 				new GameMainMenuSaveGame(*this, menu_windows_.savegame);
+				log_dbg("NOCOM InteractiveGameBase::handle_key done.");
 			} else {
 				set_display_flag(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			}
