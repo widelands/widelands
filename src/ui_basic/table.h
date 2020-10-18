@@ -342,6 +342,7 @@ private:
 	bool shall_draw_tooltip(const int text_width, const Column& c) const;
 	bool
 	is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, const int column_width) const;
+	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };
 
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {
