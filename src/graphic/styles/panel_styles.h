@@ -33,7 +33,8 @@ struct PanelStyleInfo {
 	PanelStyleInfo(const Image* init_image, const RGBAColor& init_color, int init_margin)
 	   : margin_(init_margin), image_(init_image), color_(init_color) {
 	}
-	PanelStyleInfo(const PanelStyleInfo& other) : image_(other.image()), color_(other.color()) {
+	PanelStyleInfo(const PanelStyleInfo& other)
+	   : margin_(other.margin()), image_(other.image()), color_(other.color()) {
 	}
 
 	const RGBAColor& color() const {
