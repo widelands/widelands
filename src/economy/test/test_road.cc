@@ -76,6 +76,8 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 		// Map is deleted by EditorGameBase
 	}
 
+	DISALLOW_COPY_AND_ASSIGN(SimpleRoadTestsFixture);
+
 	Widelands::EditorGameBase g;
 	Widelands::Road r;
 	Widelands::Path path;

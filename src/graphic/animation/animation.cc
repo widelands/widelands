@@ -36,7 +36,8 @@ Animation::MipMapEntry::MipMapEntry() : has_playercolor_masks(false) {
 }
 
 Animation::Animation(const LuaTable& table)
-   : representative_frame_(
+   : nr_frames_(0),
+     representative_frame_(
         table.has_key("representative_frame") ? table.get_int("representative_frame") : 0),
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),

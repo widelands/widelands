@@ -265,7 +265,7 @@ public:
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
 	void start_task_idle(Game&, uint32_t anim, int32_t timeout, Vector2i offset = Vector2i::zero());
-	bool is_idle();
+	bool is_idle() const;
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
@@ -320,7 +320,7 @@ public:
 	}
 
 	// low level animation and walking handling
-	void set_animation(EditorGameBase&, uint32_t anim);
+	void set_animation(const EditorGameBase&, uint32_t anim);
 
 	/// \return true if we're currently walking
 	bool is_walking() {

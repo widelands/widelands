@@ -2308,7 +2308,7 @@ void Worker::dropoff_update(Game& game, State&) {
 }
 
 /// Give the recruit his diploma and say farwell to him.
-void Worker::start_task_releaserecruit(Game& game, Worker& recruit) {
+void Worker::start_task_releaserecruit(Game& game, const Worker& recruit) {
 	push_task(game, taskReleaserecruit);
 	molog(game.get_gametime(), "Starting to release %s %u...\n", recruit.descr().name().c_str(),
 	      recruit.serial());
@@ -2937,7 +2937,7 @@ void Worker::check_visible_sites(const Map& map, const Player& player) {
 void Worker::add_sites(Game& game,
                        const Map& map,
                        const Player& player,
-                       std::vector<ImmovableFound>& found_sites) {
+                       const std::vector<ImmovableFound>& found_sites) {
 
 	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
@@ -3075,7 +3075,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	stateLeave.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
-bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
+bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 
 	Coords oldest_coords = get_position();
 
@@ -3389,7 +3389,7 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name) {
 }
 
 const MapObjectProgram* Worker::Loader::get_program(const std::string& name) {
-	Worker& worker = get<Worker>();
+	const Worker& worker = get<Worker>();
 	return worker.descr().get_program(name);
 }
 

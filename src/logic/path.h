@@ -43,7 +43,7 @@ struct Path {
 
 	Path() {
 	}
-	Path(const Coords& c) : start_(c), end_(c) {
+	explicit Path(const Coords& c) : start_(c), end_(c) {
 	}
 	Path(CoordPath&);
 
@@ -85,7 +85,7 @@ private:
 struct CoordPath {
 	CoordPath() {
 	}
-	CoordPath(Coords c) {
+	explicit CoordPath(Coords c) {
 		coords_.push_back(c);
 	}
 	CoordPath(const Map& map, const Path& path);
