@@ -84,7 +84,7 @@ void TrainingWheels::run_objectives() {
 			scripts_to_run.insert(it->second.script);
 			it = idle_objectives_.erase(it);
 		} else {
-			 ++it;
+			++it;
 		}
 	}
 	for (const std::string& runme : scripts_to_run) {
