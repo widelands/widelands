@@ -437,8 +437,8 @@ int LuaPlayer::send_message(lua_State* L) {
          pops up. Default: no field attached to message
       :type field: :class:`wl.map.Field`
 
-      :arg modal: If this is ``false``, the game will not wait for the message window to close, but continue at once.
-      :type modal: :class:`boolean`
+      :arg modal: If this is ``false``, the game will not wait for the message window to close, but
+   continue at once. :type modal: :class:`boolean`
 
       :arg w: width of message box in pixels. Default: 400.
       :type w: :class:`integer`
@@ -500,7 +500,7 @@ int LuaPlayer::message_box(lua_State* L) {
 		mb->run<UI::Panel::Returncodes>();
 	} else {
 		new StoryMessageBox(
-				   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h);
+		   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h);
 	}
 
 	return 1;
