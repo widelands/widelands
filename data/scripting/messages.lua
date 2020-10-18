@@ -59,29 +59,6 @@ end
 
 
 -- RST
--- .. function:: message_box(player, title, message, parameters)
---
---    Waits if player is in building mode, then shows a scenario message box
---
---    :arg player: the recipient of the message
---    :arg title: the localized title of the message
---    :type title: :class:`string`
---    :arg body: the localized body of the message. You can use rt functions here.
---    :type body: :class:`string`
---    :arg parameters: Array of message parameters as defined in the Lua interface,
---                     for wl.game.Player, e.g. { field = f }.
---
-function message_box(player, title, body, parameters)
-   wait_for_roadbuilding()
-   -- In case the user input was forbidden for some reason, allow him to close the message box.
-   -- While the message box is shown, the user cannot do anything else anyway.
-   local user_input = wl.ui.get_user_input_allowed()
-   wl.ui.set_user_input_allowed(true)
-   player:message_box(title, rt(body), parameters)
-   wl.ui.set_user_input_allowed(user_input)
-end
-
--- RST
 -- .. function:: campaign_message_box(message, [sleeptime])
 --
 --    Sets message.h and message.w if not set and calls
