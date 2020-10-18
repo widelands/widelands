@@ -26,8 +26,6 @@
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_table.h"
 
-// NOCOM Let experienced players dismiss all training wheels
-
 const std::string kTrainingWheelsFile = kSaveDir + g_fs->file_separator() + "training_wheels.conf";
 const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs->file_separator() +
                                                 std::string("training_wheels") +

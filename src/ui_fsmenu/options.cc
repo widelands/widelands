@@ -231,6 +231,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(
         &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+	 training_wheels_(&box_ingame_, Vector2i::zero(), _("Teach me how to play")),
      os_(opt) {
 
 	// Buttons
@@ -295,6 +296,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
@@ -376,6 +378,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
+	training_wheels_.set_state(opt.training_wheels);
 
 	// New Game options
 	show_buildhelp_.set_state(opt.display_flags & InteractiveBase::dfShowBuildhelp);
@@ -629,6 +632,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
+	os_.training_wheels = training_wheels_.get_state();
 
 	// New Game options
 	int32_t flags = show_buildhelp_.get_state() ? InteractiveBase::dfShowBuildhelp : 0;
@@ -705,6 +709,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
+	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 
 	// New Game options
 	opt.display_flags = opt_section_.get_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
@@ -749,6 +754,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
+	opt_section_.set_bool("training_wheels", opt.training_wheels);
 
 	// New Game options
 	opt_section_.set_int("display_flags", opt.display_flags);
