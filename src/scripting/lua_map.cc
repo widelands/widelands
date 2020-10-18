@@ -1661,6 +1661,7 @@ const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
 };
 const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, buildings),
+   PROP_RO(LuaTribeDescription, builder),
    PROP_RO(LuaTribeDescription, carrier),
    PROP_RO(LuaTribeDescription, carrier2),
    PROP_RO(LuaTribeDescription, ferry),
@@ -1717,11 +1718,20 @@ int LuaTribeDescription::get_buildings(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: builder
+
+         (RO) the :class:`string` internal name of the builder type that this tribe uses
+*/
+int LuaTribeDescription::get_builder(lua_State* L) {
+	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->builder())->name());
+	return 1;
+}
+
+/* RST
    .. attribute:: carrier
 
          (RO) the :class:`string` internal name of the carrier type that this tribe uses
 */
-
 int LuaTribeDescription::get_carrier(lua_State* L) {
 	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->carrier())->name());
 	return 1;

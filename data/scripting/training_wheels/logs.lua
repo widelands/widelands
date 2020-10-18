@@ -1,10 +1,8 @@
--- Detect the player tribe's log producer ad tree planter buildings and teach how to build them
+-- Detect the player tribe's log producer and teach how to build it, along with Ctrl-click for the roads
 
 include "scripting/coroutine.lua"
-include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/richtext_scenarios.lua"
-include "scripting/table.lua"
 include "scripting/ui.lua"
 include "scripting/training_wheels/utils/buildings.lua"
 include "scripting/training_wheels/utils/ui.lua"
@@ -16,37 +14,39 @@ run(function()
    local player = wl.Game().players[interactive_player_slot]
    local tribe = player.tribe
 
-   print("Player tribe is: " .. tribe.name)
-
    -- Find the tree collector / log producer building
    local buildings = tribe.buildings
    local log_producer = find_immovable_collector_for_ware(buildings, "tree", "log")
    if log_producer == nil then
-      print("Log producer not found")
+      print("Log producer not found for tribe '" .. tribe.name .. "'. Aborting training wheel 'logs'.")
       return
    end
-   print("Log producer is: " .. log_producer.name)
+
+   if #player:get_buildings(log_producer.name) > 0 then
+      -- The player already knows how to to this, so don't bother them
+      player:mark_training_wheel_as_solved("logs")
+      return
+   end
 
    -- Find a suitable buildable field close to the the starting field
    local starting_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
    local starting_immovable = starting_field.immovable
    if starting_immovable == nil then
-      print("No starting field immovable - maybe we have a nomadic starting condition")
+      print("No starting field immovable. Aborting training wheel 'logs'.")
       return
    end
 
    local target_field = find_buildable_field(starting_field, log_producer.size, 4, 6)
 
    if target_field == nil then
-      print("No target field")
+      print("No target field found in radius. Aborting training wheel 'logs'.")
       return
    end
-
-   print("Target field is: " .. target_field.x .. " " .. target_field.y)
 
    local mapview = wl.ui.MapView()
    local auto_roadbuilding = mapview.auto_roadbuilding_mode
 
+   -- All set. Define our messages now.
    push_textdomain("training_wheels")
 
    local size_description = _"Click on a small, medium or big building space, then select the building from the small buildings tab."
@@ -56,6 +56,7 @@ run(function()
       size_description = _"Click on a big building space, then select the building from the big buildings tab."
    end
 
+   -- NOCOM tweak message window sizes
    local msg_logs = {
       title = _"Logs",
       position = "topright",
@@ -75,7 +76,7 @@ run(function()
       body = (
          li_object(log_producer.name, "Click on the flag in front of the building to start placing a road", player.color)
       ),
-      h = 280,
+      h = 180,
       w = 260,
       modal = false
    }
@@ -86,7 +87,7 @@ run(function()
       body = (
          li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button, then hold down the ‘Ctrl’ key and click on the indicated flag.")
       ),
-      h = 280,
+      h = 180,
       w = 260,
       modal = false
    }
@@ -95,33 +96,58 @@ run(function()
       title = _"Roads",
       position = "topright",
       body = (
-         li_object(log_producer.name, _"Click on the building’s button…") ..
+         li_object(log_producer.name, _"Click on the building’s button…", player.color) ..
          -- NOCOM We need the tribe's flag image
          li_image("images/wui/fieldaction/menu_build_flag.png", "…then hold down the ‘Ctrl’ key and click on the indicated flag.")
       ),
-      h = 280,
+      h = 180,
+      w = 260,
+      modal = false
+   }
+
+   local msg_road_not_connected = {
+      title = _"Roads",
+      position = "topright",
+      body = (
+         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the flag in front of the building, then on the ‘Build road’ button, then hold down the ‘Ctrl’ key and click on the indicated flag.")
+      ),
+      h = 180,
+      w = 260,
+      modal = false
+   }
+
+   local msg_finished = {
+      title = _"Logs",
+      position = "topright",
+      body = (
+         li_object(log_producer.name, _"Well done, we can produce logs now!", player.color)
+      ),
+      h = 140,
       w = 260,
       modal = false
    }
 
    pop_textdomain()
 
+   -- Teach player to place the building
    target_field:indicate(true)
-
    campaign_message_box(msg_logs)
+   scroll_to_field(target_field)
 
-   local starting_conquer_range = wl.Game():get_building_description(starting_immovable.descr.name).conquers
-
-   -- NOCOM harden this to player not following instructions
-   while not mapview.windows.field_action or not mapview.windows.field_action.tabs["small"] do
-      sleep(100)
-   end
-   target_field:indicate(false)
+   -- Wait for player to activate the small building tab
+   wait_for_field_action_tab("small")
    mapview.windows.field_action.tabs["small"]:indicate(true)
-   while not mapview.windows.field_action.tabs["small"].active do sleep(100) end
+   while not mapview.windows.field_action.tabs["small"].active do
+      sleep(100)
+      if not mapview.windows.field_action then
+         mapview:indicate(false)
+      end
+      wait_for_field_action_tab("small")
+      mapview.windows.field_action.tabs["small"]:indicate(true)
+   end
 
+   -- Explain road building before the road building mode blocks us
    if auto_roadbuilding then
-      -- Do this before the road building blocks us
       close_story_messagebox()
       target_field:indicate(true)
       campaign_message_box(msg_click_road_endflag)
@@ -129,39 +155,42 @@ run(function()
       mapview:indicate(false)
    end
 
-   local target_field = wait_for_constructionsite_field(log_producer.name, starting_field, starting_conquer_range)
+   -- Now wait for the constructionsite
+   local starting_conquer_range = wl.Game():get_building_description(starting_immovable.descr.name).conquers
+   local constructionsite_field = wait_for_constructionsite_field(log_producer.name, starting_field, starting_conquer_range)
+   local target_field = constructionsite_field.immovable.flag.fields[1]
 
+   -- When not auto roadbuilding, we need to click on the constructionsite's flag too
    if not auto_roadbuilding then
       mapview:indicate(false)
+      target_field:indicate(false)
       close_story_messagebox()
-      -- If not in roadbuilding mode, get the player to click the constructionsite's flag
       if not mapview.is_building_road then
-         print("Extra objective XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
          target_field:indicate(true)
          campaign_message_box(msg_enter_roadbuilding)
 
          -- Wait for player to click a flag
          while not mapview.windows.field_action or not mapview.windows.field_action.buttons["build_road"] do
-            while not mapview.windows.field_action do sleep(100) end
+            while not mapview.windows.field_action or not mapview.windows.field_action.tabs["roads"] do sleep(100) end
             if not mapview.windows.field_action.tabs["roads"].active or mapview.windows.field_action.buttons["build_flag"] then
-               print("OOps, we want a flag clicked!") -- NOCOM
                while mapview.windows.field_action and (not mapview.windows.field_action.tabs["roads"].active or mapview.windows.field_action.buttons["build_flag"]) do
                   sleep(100)
                end
             end
          end
          close_story_messagebox()
+
+         -- Explain road building button
          target_field:indicate(false)
-         -- NOCOM indicating does not work - maybe a layer problem local build_road_button = mapview.windows.field_action.buttons["build_road"]
-         --build_road_button:indicate(true)
-         print("We have a road button!")
+         local build_road_button = mapview.windows.field_action.buttons["build_road"]
+         build_road_button:indicate(true)
          campaign_message_box(msg_click_roadbutton)
          while not wl.ui.MapView().is_building_road do sleep(100) end
-         print("We're in roadbuilding mode!")
-         --build_road_button:indicate(false)
+         mapview:indicate(false)
       end
    end
 
+   -- Indicate target flag for road building and wait for the road
    target_field = starting_immovable.flag.fields[1]
    target_field:indicate(true)
 
@@ -169,9 +198,40 @@ run(function()
    close_story_messagebox()
    target_field:indicate(false)
 
-   -- NOCOM skip this if player already has one
+   -- Wait for the builder to arrive
+   local buildername = player.tribe.builder
+   local builder_present = false
+   local counter = 0
+   repeat
+      counter = counter + 1
+      if counter % 60 == 0 then
+         -- Builder has not arrived, explain road building again and wait for it
+         target_field:indicate(true)
+         close_story_messagebox()
+         campaign_message_box(msg_road_not_connected)
+         while not wl.ui.MapView().is_building_road do sleep(100) end
+         while wl.ui.MapView().is_building_road do sleep(100) end
+         mapview:indicate(false)
+      end
+      sleep(1000)
+      for b_idx, bob in ipairs(constructionsite_field.bobs) do
+         if bob.descr.name == buildername then
+            builder_present = true
+            target_field:indicate(false)
+            close_story_messagebox()
+            break
+         end
+      end
+   until builder_present == true
+
+   -- Teaching is done, so mark it as solved
+   player:mark_training_wheel_as_solved("logs")
+
+   -- Wait for the building and congratulate the player
    while #player:get_buildings(log_producer.name) < 1 do sleep(300) end
+   campaign_message_box(msg_finished)
 
-
-   -- wl.Game().players[1]:mark_training_wheel_as_solved("trees")
+   -- 1 minute should suffice to read the message box
+   sleep(60 * 1000)
+   close_story_messagebox()
 end)

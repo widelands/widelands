@@ -63,7 +63,7 @@ function wait_for_constructionsite_field(buildingname, center_field, radius)
       for f_idx, field in ipairs(search_area) do
          if field.immovable ~= nil then
             if field.immovable.descr.name == "constructionsite" and field.immovable.building == buildingname then
-               target_field = field.immovable.flag.fields[1]
+               target_field = field
             end
          end
       end
