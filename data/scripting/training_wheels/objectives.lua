@@ -5,6 +5,7 @@ include "scripting/coroutine.lua"
 include "scripting/messages.lua"
 include "scripting/richtext_scenarios.lua"
 include "scripting/ui.lua"
+include "scripting/training_wheels/utils/ui.lua"
 
 run(function()
    sleep(200)
@@ -28,6 +29,7 @@ run(function()
       position = "bottomright",
       h = 280,
       w = 260,
+      modal = false,
       body = (
          -- No intro text, the objective itself is enough
          ""
@@ -40,8 +42,7 @@ run(function()
       number = 1,
       body = (
          objective_text(_"Open the Objectives window",
-         li_image("images/wui/training_wheels_arrow.png", _"Click on the button that the arrow is pointing to, or press ‘%s’ to see the current game's objectives":bformat('o')) ..
-         li(_"You'll need to close this message window first."))
+         li_image("images/wui/training_wheels_arrow.png", _"Click on the button that the arrow is pointing to, or press ‘%s’ to see the current game's objectives":bformat('o')))
       )
    }
 
@@ -67,8 +68,11 @@ run(function()
    set_objective_done(o1)
 
    while not mapview.windows.objectives do sleep(100) end
-   sleep (100)
+
+   close_story_messagebox()
    mapview.buttons.objectives:indicate(false)
+   sleep (100)
+
    while mapview.windows.objectives do sleep(100) end
    set_objective_done(o2)
 

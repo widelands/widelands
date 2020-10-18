@@ -437,6 +437,9 @@ int LuaPlayer::send_message(lua_State* L) {
          pops up. Default: no field attached to message
       :type field: :class:`wl.map.Field`
 
+      :arg modal: If this is ``false``, the game will not wait for the message window to close, but continue at once.
+      :type modal: :class:`boolean`
+
       :arg w: width of message box in pixels. Default: 400.
       :type w: :class:`integer`
       :arg h: width of message box in pixels. Default: 300.
@@ -461,6 +464,7 @@ int LuaPlayer::message_box(lua_State* L) {
 	int32_t posx = -1;
 	int32_t posy = -1;
 	Widelands::Coords coords = Widelands::Coords::null();
+	bool is_modal = true;
 
 #define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
@@ -480,12 +484,24 @@ int LuaPlayer::message_box(lua_State* L) {
 			coords = (*get_user_class<LuaMaps::LuaField>(L, -1))->coords();
 		}
 		lua_pop(L, 1);
+
+		// Check whether we want a modal window
+		lua_getfield(L, 4, "modal");
+		if (!lua_isnil(L, -1)) {
+			is_modal = luaL_checkboolean(L, -1);
+		}
+		lua_pop(L, 1);
 	}
 #undef CHECK_UINT
-	std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
-	   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
 
-	mb->run<UI::Panel::Returncodes>();
+	if (is_modal) {
+		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
+		   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
+		mb->run<UI::Panel::Returncodes>();
+	} else {
+		new StoryMessageBox(
+				   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h);
+	}
 
 	return 1;
 }

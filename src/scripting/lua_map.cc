@@ -7305,11 +7305,12 @@ int LuaField::has_max_caps(lua_State* L) {
 /* RST
    .. method:: indicate(on)
 
-      Show/Hide an arrow that points to this field.
+      Show/Hide an arrow that points to this field. You can only point to 1 field at the same time.
 
       :arg on: Whether to show or hide the arrow
       :type on: :class:`boolean`
 */
+// UNTESTED
 int LuaField::indicate(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Expected 1 boolean");

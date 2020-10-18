@@ -288,11 +288,12 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 /* RST
    .. method:: indicate(on)
 
-      Show/Hide an arrow that points to this panel.
+      Show/Hide an arrow that points to this panel. You can only point to 1 panel at the same time.
 
       :arg on: Whether to show or hide the arrow
       :type on: :class:`boolean`
 */
+// UNTESTED
 int LuaPanel::indicate(lua_State* L) {
 	assert(panel_);
 	if (lua_gettop(L) != 2) {
