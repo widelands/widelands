@@ -78,6 +78,9 @@ public:
 	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
 	}
+	bool auto_roadbuild_mode() const {
+		return auto_roadbuild_mode_;
+	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
 

@@ -53,3 +53,20 @@ function find_buildable_field(center_field, size, min_radius, max_radius)
    until radius == max_radius
    return target_field
 end
+
+
+function wait_for_constructionsite_field(buildingname, center_field, radius)
+   local search_area = center_field:region(radius)
+   local target_field = nil
+   repeat
+      sleep(100)
+      for f_idx, field in ipairs(search_area) do
+         if field.immovable ~= nil then
+            if field.immovable.descr.name == "constructionsite" and field.immovable.building == buildingname then
+               target_field = field.immovable.flag.fields[1]
+            end
+         end
+      end
+   until target_field ~= nil
+   return target_field
+end

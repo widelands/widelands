@@ -642,7 +642,7 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, average_fps),  PROP_RO(LuaMapView, center_map_pixel),
    PROP_RW(LuaMapView, buildhelp),    PROP_RW(LuaMapView, census),
-   PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road),
+   PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road), PROP_RO(LuaMapView, auto_roadbuilding_mode),
    PROP_RO(LuaMapView, is_animating), PROP_RO(LuaMapView, interactive_player),
    {nullptr, nullptr, nullptr},
 };
@@ -737,6 +737,21 @@ int LuaMapView::set_statistics(lua_State* L) {
 */
 int LuaMapView::get_is_building_road(lua_State* L) {
 	lua_pushboolean(L, get()->in_road_building_mode());
+	return 1;
+}
+
+/* RST
+   .. attribute:: auto_roadbuild_mode
+
+      (RO) Is the player using automatic road building mode?
+*/
+int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		lua_pushboolean(L, false);
+	} else {
+		lua_pushboolean(L, ipl->auto_roadbuild_mode());
+	}
 	return 1;
 }
 
