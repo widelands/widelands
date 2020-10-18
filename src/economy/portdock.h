@@ -100,10 +100,10 @@ public:
 	void add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours);
 
 	void add_shippingitem(Game&, WareInstance&);
-	void update_shippingitem(Game&, WareInstance&);
+	void update_shippingitem(Game&, const WareInstance&);
 
 	void add_shippingitem(Game&, Worker&);
-	void update_shippingitem(Game&, Worker&);
+	void update_shippingitem(Game&, const Worker&);
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);

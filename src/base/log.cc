@@ -171,8 +171,9 @@ static const char* to_string(const LogType& type) {
 		return "WARNING";
 	case LogType::kError:
 		return "ERROR";
+	default:
+		NEVER_HERE();
 	}
-	NEVER_HERE();
 }
 
 void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt, ...) {

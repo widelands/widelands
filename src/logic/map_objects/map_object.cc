@@ -175,7 +175,7 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 		while (!objects_.empty()) {
 			MapObjectMap::iterator it = objects_.begin();
 			while (it != objects_.end() && (moi) != it->second->descr_->type()) {
-				it++;
+				++it;
 			}
 			if (it == objects_.end()) {
 				break;
@@ -208,28 +208,6 @@ void ObjectManager::insert(MapObject* obj) {
  */
 void ObjectManager::remove(MapObject& obj) {
 	objects_.erase(obj.serial_);
-}
-
-bool ObjectManager::object_still_available(const MapObject* const obj) const {
-	// TODO(Niektory): This function is used to check whether an object pointer is still valid
-	// by comparing it to known valid pointers. Not only it is slow, the C++ standard says:
-	// "Any other use of an invalid pointer value has implementation-defined behavior.
-	// Some implementations might define that copying an invalid pointer value causes
-	// a system-generated runtime fault."
-	// Instead of using this function after potential deletion we should ensure at the moment
-	// of an object's deletion that no pointers to it remain.
-
-	if (!obj) {
-		return false;
-	}
-	MapObjectMap::const_iterator it = objects_.begin();
-	while (it != objects_.end()) {
-		if (it->second == obj) {
-			return true;
-		}
-		++it;
-	}
-	return false;
 }
 
 /*
@@ -764,8 +742,8 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("%u: %s", serial, e.what());
 		}
 
-		MapObject& obj = *get_object();
 		if (packet_version >= 2) {
+			MapObject& obj = *get_object();
 			obj.reserved_by_worker_ = fr.unsigned_8();
 		}
 	} catch (const WException& e) {
@@ -797,7 +775,7 @@ void MapObject::Loader::load_pointers() {
  * We also preload some animation graphics here to prevent jitter at game start.
  */
 void MapObject::Loader::load_finish() {
-	MapObject& mo = get<MapObject>();
+	const MapObject& mo = get<MapObject>();
 	mo.descr().load_graphics();
 }
 

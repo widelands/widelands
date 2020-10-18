@@ -51,10 +51,6 @@ IFont* load_font(const std::string& face, int ptsize) {
 
 	TTF_Font* font = TTF_OpenFontIndexRW(ops, true, ptsize, 0);
 	if (!font) {
-		throw BadFont((boost::format("could not load font!: %s") % TTF_GetError()).str());
-	}
-
-	if (!font) {
 		throw BadFont(
 		   (boost::format("Font loading error for %s, %i pts: %s") % face % ptsize % TTF_GetError())
 		      .str());

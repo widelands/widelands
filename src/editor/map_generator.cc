@@ -40,7 +40,7 @@ constexpr uint32_t kMaxElevationHalf = 0x80000000;
 
 namespace Widelands {
 
-MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase)
+MapGenerator::MapGenerator(Map& map, UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase)
    : map_(map), map_info_(mapInfo), egbase_(egbase) {
 	std::unique_ptr<LuaTable> map_gen_config(egbase.lua().run_script("world/map_generation.lua"));
 	map_gen_config->do_not_warn_about_unaccessed_keys();
@@ -794,11 +794,11 @@ void MapGenerator::create_random_map() {
 		// Take the nearest ones
 		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
-		for (uint16_t i = 0; i < coords.size(); ++i) {
-			uint32_t test = map_.calc_distance(coords[i], playerstart);
+		for (const Coords& c : coords) {
+			uint32_t test = map_.calc_distance(c, playerstart);
 			if (test < min_distance) {
 				min_distance = test;
-				coords2 = coords[i];
+				coords2 = c;
 			}
 		}
 
@@ -846,7 +846,7 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	} else if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') ||
 	           (ch == 'J') || (ch == 'j')) {
 		return 23;
-	} else if (ch >= 'A' && ch < 'O') {
+	} else if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
 		if (ch > 'I') {
 			--res;
@@ -1130,8 +1130,8 @@ uint16_t Widelands::UniqueRandomMapInfo::generate_world_name_hash(const std::str
 	uint16_t hash = 0xa5a5;
 	int32_t posInHash = 0;
 
-	for (size_t idx = 0; idx < name.size(); idx++) {
-		hash ^= static_cast<uint8_t>(name[idx] & 0xff) << posInHash;
+	for (const char& ch : name) {
+		hash ^= static_cast<uint8_t>(ch & 0xff) << posInHash;
 		posInHash ^= 8;
 	}
 

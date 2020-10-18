@@ -20,7 +20,9 @@
 #ifndef WL_WUI_GAME_SUMMARY_H
 #define WL_WUI_GAME_SUMMARY_H
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
@@ -44,14 +46,17 @@ private:
 	void continue_clicked();
 	void player_selected(uint32_t idx);
 	std::string parse_player_info(std::string info);
+	bool compare_status(uint32_t, uint32_t) const;
 
 	Widelands::Game& game_;
 	uint32_t desired_speed_;
+	UI::Box* info_box_;
 	UI::Textarea* title_area_;
 	UI::Textarea* gametime_label_;
 	UI::Textarea* gametime_value_;
 	UI::Textarea* info_area_label_;
 	UI::MultilineTextarea* info_area_;
+	UI::Icon* widelands_icon_;
 	UI::Button* continue_button_;
 	UI::Button* stop_button_;
 	UI::Table<uintptr_t const>* players_table_;

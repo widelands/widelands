@@ -386,7 +386,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game& game) {
+void ConstructionSite::enhance(const Game& game) {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -646,18 +646,16 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 	// Check if we've got wares to consume
 	if (work_completed_ < work_steps_) {
-		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
-			WaresQueue& wq = *consume_wares_[i];
-
-			if (!wq.get_filled()) {
+		for (WaresQueue* wq : consume_wares_) {
+			if (!wq->get_filled()) {
 				continue;
 			}
 
-			wq.set_filled(wq.get_filled() - 1);
-			wq.set_max_size(wq.get_max_size() - 1);
+			wq->set_filled(wq->get_filled() - 1);
+			wq->set_max_size(wq->get_max_size() - 1);
 
 			// Update consumption statistic
-			get_owner()->ware_consumed(wq.get_index(), 1);
+			get_owner()->ware_consumed(wq->get_index(), 1);
 
 			working_ = true;
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
@@ -737,9 +735,6 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 
 	// Draw the partially finished building
-
-	static_assert(
-	   0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
 	info_.totaltime = CONSTRUCTIONSITE_STEP_TIME * work_steps_;
 	info_.completedtime = CONSTRUCTIONSITE_STEP_TIME * work_completed_;
 
