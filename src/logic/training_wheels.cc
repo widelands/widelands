@@ -87,7 +87,6 @@ void TrainingWheels::load_objectives() {
 			++it;
 		}
 	}
-
 }
 
 void TrainingWheels::run_objectives() {

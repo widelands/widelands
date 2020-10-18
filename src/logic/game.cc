@@ -533,9 +533,11 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
-	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the user switched off the option
-	if (get_config_bool("training_wheels", true) && (start_game_type == StartGameType::kMap ||
-	    (script_to_run.empty() && start_game_type == StartGameType::kSaveGame))) {
+	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
+	// user switched off the option
+	if (get_config_bool("training_wheels", true) &&
+	    (start_game_type == StartGameType::kMap ||
+	     (script_to_run.empty() && start_game_type == StartGameType::kSaveGame))) {
 		InteractivePlayer* ipl = get_ipl();
 		if (ipl && !ipl->is_multiplayer()) {
 			training_wheels_.reset(new TrainingWheels(lua()));
