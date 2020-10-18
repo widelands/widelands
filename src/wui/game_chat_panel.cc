@@ -245,21 +245,25 @@ void GameChatPanel::key_changed() {
 	}
 
 	// Extract the name to complete
-	// find_last_of starts at the given pos and goes forward until it finds space or @
+	// rfind starts at the given pos and goes forward until it finds a space
 	// -3 so we don't start searching in the double space chars at the end
-	size_t namepart_pos = str.find_last_of(" @", str.size() - 3);
+	size_t namepart_pos = str.rfind(' ', str.size() - 3);
 	if (namepart_pos == std::string::npos) {
 		// Not found, meaning the input only contains the name
 		namepart_pos = 0;
 	} else {
-		// Found something. Cut off the space or @
+		// Found something. Cut off the space
+		++namepart_pos;
+	}
+	if (str[namepart_pos] == '@') {
+		// If the first sign of the name is an @, skip it
 		++namepart_pos;
 	}
 	// Extract part, also remove trailing spaces
 	const std::string namepart = str.substr(namepart_pos, str.size() - 2 - namepart_pos);
 
 	if (namepart.empty()) {
-		// Nothing left to complete. Maybe a single '@' or 3+ spaces in a row
+		// Nothing left to complete. Maybe 3+ spaces in a row
 		return;
 	}
 
