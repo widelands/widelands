@@ -8,7 +8,7 @@ include "scripting/training_wheels/utils/buildings.lua"
 include "scripting/training_wheels/utils/ui.lua"
 
 run(function()
-   sleep(100)
+   sleep(10)
 
    local interactive_player_slot = wl.ui.MapView().interactive_player
    local player = wl.Game().players[interactive_player_slot]

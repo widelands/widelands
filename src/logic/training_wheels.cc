@@ -61,15 +61,10 @@ TrainingWheels::TrainingWheels(LuaInterface& lua) : profile_(Profile::err_log), 
 }
 
 void TrainingWheels::run_objectives() {
-	log_dbg("RUN OBJECTIVES");
-	for (const auto& test : idle_objectives_) {
-		log_dbg("Idle: %s", test.first.c_str());
-	}
 	// We collect the scripts before running them to prevent cocurrency issues
 	std::set<std::string> scripts_to_run;
 	// Now run
-	for (auto it = idle_objectives_.begin(); it != idle_objectives_.end(); ++it) {
-		log_dbg("Checking %s", it->first.c_str());
+	for (auto it = idle_objectives_.begin(); it != idle_objectives_.end();) {
 		if (running_objectives_.count(it->first) == 1) {
 			continue;
 		}
@@ -85,26 +80,14 @@ void TrainingWheels::run_objectives() {
 			log_info("Running training wheel '%s'", it->second.script.c_str());
 			running_objectives_.insert(it->first);
 			scripts_to_run.insert(it->second.script);
-			if (idle_objectives_.size() == 1) {
-				// Final element won't erase properly, so we hack this. Bleh.
-				// NOCOM fix this
-				log_dbg("Final element %s", it->first.c_str());
-				idle_objectives_.clear();
-				break;
-			}
 			it = idle_objectives_.erase(it);
 		} else {
-			log_dbg("Dependencies not met: %s", it->first.c_str());
+			 ++it;
 		}
 	}
 	for (const std::string& runme : scripts_to_run) {
 		lua_.run_script(kTrainingWheelsScriptingDir + runme);
 	}
-	log_dbg("RUN OBJECTIVES 2");
-	for (const auto& test : idle_objectives_) {
-		log_dbg("Idle: %s", test.first.c_str());
-	}
-	log_dbg("RUN OBJECTIVES 3");
 }
 
 void TrainingWheels::mark_as_solved(const std::string& objective) {

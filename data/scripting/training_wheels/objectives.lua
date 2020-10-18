@@ -7,7 +7,7 @@ include "scripting/ui.lua"
 include "scripting/training_wheels/utils/ui.lua"
 
 run(function()
-   sleep(200)
+   sleep(10)
 
    local mapview = wl.ui.MapView()
 
