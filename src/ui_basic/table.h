@@ -123,6 +123,7 @@ public:
 	void draw(RenderTarget&);
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool handle_key(bool down, SDL_Keysym code);
 };
 
@@ -295,6 +296,8 @@ public:
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 	bool handle_tooltip() override;
 
@@ -339,9 +342,8 @@ private:
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
 	void set_scrollpos(int32_t pos);
-	bool shall_draw_tooltip(const int text_width, const Column& c) const;
-	bool
-	is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, const int column_width) const;
+	bool shall_draw_tooltip(int text_width, const Column& c) const;
+	bool is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, int column_width) const;
 	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };
 

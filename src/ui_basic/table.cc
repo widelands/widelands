@@ -51,7 +51,7 @@ Table<void*>::Table(Panel* const parent,
                     uint32_t h,
                     PanelStyle style,
                     TableRows rowtype)
-   : Panel(parent, x, y, w, h, "jonas"),
+   : Panel(parent, x, y, w, h),
      total_width_(0),
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
@@ -408,8 +408,8 @@ bool Table<void*>::handle_tooltip() {
 UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryRecord& er) {
 	return const_cast<FontStyleInfo&>(
 	   er.font_style() != nullptr ? *er.font_style() :
-	   er.is_disabled()           ? g_style_manager->table_style(this->style_).disabled() :
-                                   g_style_manager->table_style(this->style_).enabled());
+	   er.is_disabled()           ? g_style_manager->table_style(style_).disabled() :
+                                   g_style_manager->table_style(style_).enabled());
 }
 bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
                                const Vector2i& point,
@@ -818,6 +818,9 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	EntryRecord& ea = get_record(a);
 	EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
+}
+bool Table<void*>::handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) {
+	return true;
 }
 
 Table<void*>::EntryRecord::EntryRecord(void* const e)
