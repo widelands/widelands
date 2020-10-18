@@ -1152,7 +1152,7 @@ Widelands::Objective& LuaObjective::get(lua_State* L, Widelands::Game& g) {
 
 /* RST
 InboxMessage
----------
+------------
 
 .. class:: InboxMessage
 

@@ -13,7 +13,7 @@ include "scripting/ui.lua"
 -- RST
 -- .. function:: send_message(player, title, body, parameters)
 --
---    Sends a message to the player.
+--    Sends a message to a player.
 --    If the popup parameter is true and the player is in building mode,
 --    the function waits until the player leaves the building mode
 --    before sending the message (only in singleplayer)
@@ -38,7 +38,8 @@ end
 -- RST
 -- .. function:: send_to_all(text[, heading])
 --
---    Sends a game status message to all players.
+--    Sends a game status message to all players. This is mainly used for 
+--    winconditions to show a summary of the wincondition result.
 --
 --    :arg text: the localized body of the message. You can use rt functions here.
 --    :type text: :class:`string`
@@ -59,19 +60,67 @@ end
 
 
 -- RST
--- .. function:: campaign_message_box(message, [sleeptime])
+-- .. function:: message_box(player, title, message, parameters)
 --
---    Sets message.h and message.w if not set and calls
---    message_box(player, title, body, parameters) for player 1
+--    Waits if player is in building mode, then shows a scenario message box.
+--    Usually you want to use :meth:`campaign_message_box` which has more options, 
+--    e.g. positioning of message boxes.  
 --
---    :arg message: the message to be sent
+--    :arg player: the recipient of the message
+--    :arg title: the localized title of the message
+--    :type title: :class:`string`
+--    :arg message: the localized body of the message. You must use 
+--                 :ref:`richtext functions <richtext.lua>` here.
+--    :type message: :class:`string`
+--    :arg parameters: Array of message parameters as defined in the Lua interface,
+--                     for :meth:`wl.game.Player.message_box`, e.g. { field = f }.
+--
+function message_box(player, title, body, parameters)
+   wait_for_roadbuilding()
+   -- In case the user input was forbidden for some reason, allow him to close the message box.
+   -- While the message box is shown, the user cannot do anything else anyway.
+   local user_input = wl.ui.get_user_input_allowed()
+   wl.ui.set_user_input_allowed(true)
+   player:message_box(title, rt(body), parameters)
+   wl.ui.set_user_input_allowed(user_input)
+end
+
+-- RST
+-- .. function:: campaign_message_box({message, [sleeptime, options]})
+--
+--    Sets the width and height of the message box and calls
+--    :meth:`message_box(player, title, body, parameters)` for player 1
+--
+--    :arg message: the message consist of the title and the body. Note that me body
+--                  must be formatted using the :ref:`richtext functions <richtext.lua>`.
 --    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
---    Besides the normal message arguments (see wl.Game.Player:message_box) the following ones can be used:
+--    Besides the normal message options (see :meth:`wl.game.Player.message_box`) the following ones can be used:
 --
---    :arg position: A string that indicates at which border of the screen the message box shall appear. Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). Overrides posx and posy. Default: Center. If only one direction is indicated, the other one stays central.
---    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new location stays on the screen when the message box is closed. Default: False.
---    :arg show_instantly: If true, the message box is shown immediately. If false, this function will wait until the player leaves the roadbuilding mode. Use this with care because it can be very interruptive. Default: false.
+--    :arg position: A string that indicates at which border of the screen the message box shall appear.
+--                   Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). 
+--                   Overrides posx and posy. Default: Center. If only one direction is indicated, 
+--                   the other one stays central.
+--    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new
+--                      location stays on the screen when the message box is closed. Default: False.
+--    :arg show_instantly: If true, the message box is shown immediately. If false, this function will
+--                    wait until the player leaves the roadbuilding mode. Use this with care because it 
+--                    can be very interruptive. Default: false.
+--
+--    Example:
+-- .. code-block:: lua
+--
+--    campaign_message_box({title = "The title", 
+--                          body = p("The body"),
+--                          200, 
+--                          w = 200,
+--                          h = 150,
+--                          position = "topleft",
+--                          scroll_back = true
+--                         })
+--
+-- In our campaigns the table of a campaign_message_box is defined in a separate file called
+-- 'texts.lua'.
 --
 function campaign_message_box(message, sleeptime)
    message.show_instantly = message.show_instantly or false
