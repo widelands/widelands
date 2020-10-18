@@ -23,6 +23,7 @@
 
 #include <SDL_mouse.h>
 #include <SDL_timer.h>
+#include <base/log.h>
 #include <graphic/graphic.h>
 #include <wlapplication.h>
 
@@ -51,7 +52,7 @@ Table<void*>::Table(Panel* const parent,
                     uint32_t h,
                     PanelStyle style,
                     TableRows rowtype)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, x, y, w, h, "jonas"),
      total_width_(0),
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
@@ -105,7 +106,8 @@ void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
                               const std::string& tooltip_string,
                               Align const alignment,
-                              TableColumnType column_type) {
+                              TableColumnType column_type,
+                              TableRowTooltip row_tooltip) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -129,6 +131,7 @@ void Table<void*>::add_column(uint32_t const width,
 		c.alignment = alignment;
 		c.compare = [this, col_index](
 		               uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
+		c.row_tooltip_mode = row_tooltip;
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
@@ -281,8 +284,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
-			const std::string& entry_tooltip = er.get_tooltip(i);
-			draw_tooltip(dst, entry_tooltip);
+
 			Vector2i point(curx, y);
 			int picw = 0;
 
@@ -363,6 +365,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 			case UI::Align::kLeft:
 				break;
 			}
+
 			constexpr int kMargin = 1;
 			rendered_text->draw(dst, point, Recti(kMargin, 0, curw - picw - 2 * kMargin, lineheight),
 			                    alignment, RenderedText::CropMode::kSelf);
@@ -373,42 +376,124 @@ void Table<void*>::draw(RenderTarget& dst) {
 		++idx;
 	}
 }
+bool Table<void*>::handle_tooltip() {
+	int32_t lineheight = get_lineheight();
+	uint32_t idx = scrollpos_ / lineheight;
+	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
 
-bool Table<void*>::draw_tooltip(RenderTarget& dst, const std::string& text) {
-	if (text.empty()) {
-		return false;
+	auto cursor_pos = get_mouse_position();
+	for (auto& row : entry_records_) {
+		for (uint32_t c = 0, column_x = 0; c < columns_.size(); ++c) {
+
+			const Column& column = columns_[c];
+			const int column_w = column.width;
+			Vector2i point(column_x, y);
+			log_dbg("cursor_pos: (%d,%d), point: (%d,%d), column_x: %d", cursor_pos.x, cursor_pos.y,
+			        point.x, point.y, column_x);
+			if (is_mouse_in(cursor_pos, point, column_w)) {
+				auto entry_string = row->get_string(c);
+				const UI::FontStyleInfo& font_style =
+				   row->font_style() != nullptr ? *row->font_style() :
+				   row->is_disabled()           ? g_style_manager->table_style(style_).disabled() :
+                                              g_style_manager->table_style(style_).enabled();
+				std::shared_ptr<const UI::RenderedText> rendered_text =
+				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
+
+				if (shall_draw_tooltip(rendered_text->width(), column)) {
+					return Panel::draw_tooltip(entry_string);
+				}
+			}
+			column_x += column_w;
+		}
 	}
-
-	std::string text_to_render = text;
-	if (!is_richtext(text_to_render)) {
-		text_to_render = as_richtext_paragraph(text_to_render, UI::FontStyle::kTooltip);
-	}
-
-	constexpr uint32_t kTipWidthMax = 360;
-	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   g_fh->render(text_to_render, kTipWidthMax);
-	if (rendered_text->rects.empty()) {
-		return false;
-	}
-
-	const uint16_t tip_width = rendered_text->width() + 4;
-	const uint16_t tip_height = rendered_text->height() + 4;
-
-	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
-	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
-	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
-	if (screen_bottom_right.x < tooltip_bottom_right.x) {
-		r.x -= 4 + r.w;
-	}
-	if (screen_bottom_right.y < tooltip_bottom_right.y) {
-		r.y -= 35 + r.h;
-	}
-
-	dst.fill_rect(r, RGBColor(63, 52, 34));
-	dst.draw_rect(r, RGBColor(0, 0, 0));
-	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
+	//	while (idx < entry_records_.size()) {
+	//		if (y >= static_cast<int32_t>(get_h())) {
+	//			log_dbg("exiting early...");
+	//			return true;
+	//		}
+	//
+	//		const EntryRecord& er = *entry_records_[idx];
+	//		log_dbg("#rows: %d", entry_records_.size());
+	//		Columns::size_type const nr_columns = columns_.size();
+	//		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
+	//			const Column& column = columns_[i];
+	//			const int curw = column.width;
+	//			const std::string& entry_string = er.get_string(i);
+	//			log_dbg("column string: %s", entry_string.c_str());
+	//
+	//			Vector2i point(curx, y);
+	//			const UI::FontStyleInfo& font_style =
+	//			   er.font_style() != nullptr ? *er.font_style() :
+	//			   er.is_disabled()           ? g_style_manager->table_style(style_).disabled() :
+	//                                         g_style_manager->table_style(style_).enabled();
+	//			std::shared_ptr<const UI::RenderedText> rendered_text =
+	//			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
+	//
+	//			curx += curw;
+	//			if (/*is_mouse_in(cursor_pos, point, curw) &&*/
+	//			    shall_draw_tooltip(rendered_text->width(), column)) {
+	//				log_dbg("drawing tooltip: %s", entry_string.c_str());
+	//				return Panel::draw_tooltip(entry_string);
+	//			}
+	//		}
+	//		y += lineheight;
+	//		++idx;
+	//	}
 	return true;
 }
+bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
+                               const Vector2i& point,
+                               const int column_width) const {
+	const int line = get_lineheight();
+
+	return cursor_pos.x >= point.x && cursor_pos.x <= point.x + column_width &&
+	       cursor_pos.y > point.y && cursor_pos.y < point.y + line;
+}
+
+bool Table<void*>::shall_draw_tooltip(const int text_width, const Column& c) const {
+	if (c.row_tooltip_mode == TableRowTooltip::kAlways) {
+		return true;
+	} else if (c.row_tooltip_mode == TableRowTooltip::kNever) {
+		return false;
+	}
+	return text_width > c.width;
+}
+
+// bool Table<void*>::draw_tooltip(RenderTarget& dst, const std::string& text) {
+//	if (text.empty()) {
+//		return false;
+//	}
+//
+//	std::string text_to_render = text;
+//	if (!is_richtext(text_to_render)) {
+//		text_to_render = as_richtext_paragraph(text_to_render, UI::FontStyle::kTooltip);
+//	}
+//
+//	constexpr uint32_t kTipWidthMax = 360;
+//	std::shared_ptr<const UI::RenderedText> rendered_text =
+//	   g_fh->render(text_to_render, kTipWidthMax);
+//	if (rendered_text->rects.empty()) {
+//		return false;
+//	}
+//
+//	const uint16_t tip_width = rendered_text->width() + 4;
+//	const uint16_t tip_height = rendered_text->height() + 4;
+//
+//	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+//	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
+//	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
+//	if (screen_bottom_right.x < tooltip_bottom_right.x) {
+//		r.x -= 4 + r.w;
+//	}
+//	if (screen_bottom_right.y < tooltip_bottom_right.y) {
+//		r.y -= 35 + r.h;
+//	}
+//
+//	dst.fill_rect(r, RGBColor(63, 52, 34));
+//	dst.draw_rect(r, RGBColor(0, 0, 0));
+//	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
+//	return true;
+//}
 
 /**
  * handle key presses
@@ -820,11 +905,6 @@ void Table<void*>::EntryRecord::set_string(uint8_t const col, const std::string&
 	data_.at(col).d_string = str;
 }
 
-void Table<void*>::EntryRecord::set_tooltip(uint8_t const col, const std::string& str) {
-	assert(col < data_.size());
-
-	data_.at(col).d_tooltip = str;
-}
 const Image* Table<void*>::EntryRecord::get_picture(uint8_t const col) const {
 	assert(col < data_.size());
 
@@ -836,9 +916,4 @@ const std::string& Table<void*>::EntryRecord::get_string(uint8_t const col) cons
 	return data_.at(col).d_string;
 }
 
-const std::string& Table<void*>::EntryRecord::get_tooltip(uint8_t const col) const {
-	assert(col < data_.size());
-
-	return data_.at(col).d_tooltip;
-}
 }  // namespace UI

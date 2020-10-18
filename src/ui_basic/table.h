@@ -33,6 +33,7 @@ namespace UI {
 
 enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
 enum class TableColumnType { kFixed, kFlexible };
+enum class TableRowTooltip { kDefault, kAlways, kNever };
 
 /** A table with columns and lines.
  *
@@ -68,7 +69,8 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                TableColumnType column_type = TableColumnType::kFixed);
+	                TableColumnType column_type = TableColumnType::kFixed,
+	                TableRowTooltip row_tooltip = TableRowTooltip::kDefault);
 
 	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
@@ -122,7 +124,6 @@ public:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_Keysym code);
-	bool draw_tooltip(RenderTarget& dst, const std::string& text);
 };
 
 template <> class Table<void*> : public Panel {
@@ -134,10 +135,8 @@ public:
 		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
 		/// Text conventions: Title Case for the 'str'
 		void set_string(uint8_t col, const std::string& str);
-		void set_tooltip(uint8_t col, const std::string& str);
 		const Image* get_picture(uint8_t col) const;
 		const std::string& get_string(uint8_t col) const;
-		const std::string& get_tooltip(uint8_t col) const;
 		void* entry() const {
 			return entry_;
 		}
@@ -164,7 +163,6 @@ public:
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
-			std::string d_tooltip;
 		};
 		std::vector<Data> data_;
 		bool disabled_;
@@ -194,7 +192,8 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                TableColumnType column_type = TableColumnType::kFixed);
+	                TableColumnType column_type = TableColumnType::kFixed,
+	                TableRowTooltip row_tooltip = TableRowTooltip::kDefault);
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_tooltip(uint8_t col, const std::string& tooltip);
@@ -297,6 +296,7 @@ public:
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+	bool handle_tooltip() override;
 
 private:
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
@@ -307,6 +307,7 @@ private:
 		int width;
 		Align alignment;
 		CompareFn compare;
+		TableRowTooltip row_tooltip_mode;
 	};
 	using Columns = std::vector<Column>;
 
@@ -338,7 +339,9 @@ private:
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
 	void set_scrollpos(int32_t pos);
-	bool draw_tooltip(RenderTarget& dst, const std::string& text);
+	bool shall_draw_tooltip(const int text_width, const Column& c) const;
+	bool
+	is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, const int column_width) const;
 };
 
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {
