@@ -31,6 +31,8 @@ const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs-
                                                 std::string("training_wheels") +
                                                 g_fs->file_separator();
 
+// NOCOM replays desync, just like with scenarios
+
 namespace Widelands {
 
 TrainingWheels::TrainingWheels(LuaInterface& lua) : profile_(Profile::err_log), lua_(lua) {
