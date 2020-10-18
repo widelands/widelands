@@ -6,42 +6,8 @@ include "scripting/messages.lua"
 include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
-
-local function find_log_producer(buildings)
-   for b_idx, building in ipairs(buildings) do
-      if (building.type_name == "productionsite") then
-         if #building.inputs == 0 then
-            if #building.collected_immovables > 0 then
-               local produces_log = false
-               for ware_idx, ware in ipairs(building.output_ware_types) do
-                  if ware.name == "log" then
-                     produces_log = true
-                     break
-                  end
-               end
-               if produces_log then
-                  for imm_idx, immovable in ipairs(building.collected_immovables) do
-                     if immovable:has_attribute("tree") then
-                        return building
-                     end
-                  end
-               end
-            end
-         end
-      end
-   end
-   return nil
-end
-
-local function find_target_field(starting_field, size, range)
-   for f_idx, field in ipairs(starting_field:region(range)) do
-      if field:has_caps(size) then
-         return field
-      end
-   end
-   return nil
-end
-
+include "scripting/training_wheels/utils/buildings.lua"
+include "scripting/training_wheels/utils/ui.lua"
 
 run(function()
    sleep(100)
@@ -54,7 +20,7 @@ run(function()
 
    -- Find the tree collector / log producer building
    local buildings = tribe.buildings
-   local log_producer = find_log_producer(buildings)
+   local log_producer = find_immovable_collector_for_ware(buildings, "tree", "log")
    if log_producer == nil then
       print("Log producer not found")
       return
@@ -69,13 +35,7 @@ run(function()
       return
    end
 
-   local target_field = find_target_field(starting_field, log_producer.size, 4)
-   if target_field == nil then
-      target_field = find_target_field(starting_field, log_producer.size, 5)
-      if target_field == nil then
-         target_field = find_target_field(starting_field, log_producer.size, 6)
-      end
-   end
+   local target_field = find_buildable_field(starting_field, log_producer.size, 4, 6)
 
    if target_field == nil then
       print("No target field")
@@ -97,30 +57,20 @@ run(function()
       title = _"Logs",
       position = "topright",
       body = (
-         ""
-      ),
-      h = 380,
-      w = 260
-   }
-
-
-   local obj_logs = {
-   name = "obj_logs",
-      title = _"Logs",
-      number = 1,
-      body = (
-         objective_text(_"Place Building",
          p(_"You need to supply your tribe with logs. Please build the following building:") ..
          li_object(log_producer.name, log_producer.descname, player.color) ..
-         li_image("images/wui/overlays/" .. log_producer.size .. ".png", size_description))
-      )
+         li_image("images/wui/overlays/" .. log_producer.size .. ".png", size_description)
+      ),
+      h = 280,
+      w = 260,
+      modal = false,
    }
 
    pop_textdomain()
 
    target_field:indicate(true)
 
-   local o = campaign_message_with_objective(msg_logs, obj_logs, 0)
+   campaign_message_box(msg_logs)
 
    local starting_conquer_range = wl.Game():get_building_description(starting_immovable.descr.name).conquers
    local search_area = starting_field:region(starting_conquer_range)
@@ -137,7 +87,7 @@ run(function()
       end
    until lumberjack_field ~= nil
 
-   set_objective_done(o)
+   close_story_messagebox()
    target_field:indicate(false)
 
    local mapview = wl.ui.MapView()
