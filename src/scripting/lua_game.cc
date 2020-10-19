@@ -75,7 +75,7 @@ Player
    This class represents one of the players in the game. You can access
    information about this player or act on his behalf. Note that you cannot
    instantiate a class of this type directly, use the :attr:`wl.Game.players`
-   insteadl
+   instead.
 */
 const char LuaPlayer::className[] = "Player";
 const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
@@ -89,6 +89,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
+   METHOD(LuaPlayer, acquire_training_wheel_lock),
    METHOD(LuaPlayer, mark_training_wheel_as_solved),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
@@ -438,7 +439,7 @@ int LuaPlayer::send_message(lua_State* L) {
       :type field: :class:`wl.map.Field`
 
       :arg modal: If this is ``false``, the game will not wait for the message window to close, but
-   continue at once. :type modal: :class:`boolean`
+         continue at once. :type modal: :class:`boolean`
 
       :arg w: width of message box in pixels. Default: 400.
       :type w: :class:`integer`
@@ -697,6 +698,26 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 }
 
 /* RST
+   .. method:: acquire_training_wheel_lock(name)
+
+      Try to mark the given training wheel as the active one.
+
+      :arg name: name of the training wheel that wants to run
+      :type name: :class:`string`
+
+      :returns: whether the training wheel is allowed to run
+      :rtype: :class:`boolean`
+*/
+// UNTESTED
+int LuaPlayer::acquire_training_wheel_lock(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "One argument is required for acquire_training_wheel_lock(string)");
+	}
+	const bool success = get_game(L).acquire_training_wheel_lock(luaL_checkstring(L, 2));
+	lua_pushboolean(L, success);
+	return 1;
+}
+/* RST
    .. method:: mark_training_wheel_as_solved(name)
 
       Marks a global training wheel objective as solved.
@@ -704,6 +725,7 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
       :arg name: name of the training wheel to be marked as solved
       :type name: :class:`string`
 */
+// UNTESTED
 int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "One argument is required for mark_training_wheel_as_solved(string)");

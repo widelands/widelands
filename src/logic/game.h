@@ -197,6 +197,7 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+	bool acquire_training_wheel_lock(const std::string& objective);
 	void mark_training_wheel_as_solved(const std::string& objective);
 
 	void postload() override;

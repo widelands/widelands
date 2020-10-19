@@ -37,6 +37,7 @@ public:
 	explicit TrainingWheels(LuaInterface& lua);
 	~TrainingWheels() = default;
 
+	bool acquire_lock(const std::string& objective);
 	void mark_as_solved(const std::string& objective, bool run_some_more);
 	void run_objectives();
 	bool has_objectives() const;
@@ -63,6 +64,7 @@ private:
 	std::set<std::string> running_objectives_;
 	std::set<std::string> solved_objectives_;
 	std::set<std::string> scripts_to_run_;
+	std::string current_objective_;
 	Profile profile_;
 
 	LuaInterface& lua_;  // Not owned

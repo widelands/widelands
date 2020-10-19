@@ -32,10 +32,11 @@ const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs-
                                                 g_fs->file_separator();
 
 // NOCOM document
+// NOCOM Python script for validating locks
 
 namespace Widelands {
 
-TrainingWheels::TrainingWheels(LuaInterface& lua) : profile_(Profile::err_log), lua_(lua) {
+TrainingWheels::TrainingWheels(LuaInterface& lua) : current_objective_(""), profile_(Profile::err_log), lua_(lua) {
 	g_fs->ensure_directory_exists(kSaveDir);
 	if (g_fs->file_exists(kTrainingWheelsFile)) {
 		profile_.read(kTrainingWheelsFile.c_str(), "global");
@@ -100,12 +101,21 @@ bool TrainingWheels::has_objectives() const {
 	return !scripts_to_run_.empty();
 }
 
+bool TrainingWheels::acquire_lock(const std::string& objective) {
+	if (current_objective_.empty()) {
+		current_objective_ = objective;
+		return true;
+	}
+	return current_objective_ == objective;
+}
+
 void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_more) {
 	log_info("Solved training wheel '%s'", objective.c_str());
 	solved_objectives_.insert(objective);
 	Section& section = profile_.pull_section("global");
 	section.set_bool(objective.c_str(), true);
 	write();
+	current_objective_ = "";
 	if (run_some_more) {
 		load_objectives();
 		run_objectives();

@@ -5,12 +5,16 @@ include "scripting/messages.lua"
 include "scripting/richtext_scenarios.lua"
 include "scripting/ui.lua"
 include "scripting/training_wheels/utils/buildings.lua"
+include "scripting/training_wheels/utils/lock.lua"
 include "scripting/training_wheels/utils/ui.lua"
+
+local training_wheel_name = training_wheel_name_from_filename(__file__)
 
 run(function()
    sleep(10)
 
-   local interactive_player_slot = wl.ui.MapView().interactive_player
+   local mapview = wl.ui.MapView()
+   local interactive_player_slot = mapview.interactive_player
    local player = wl.Game().players[interactive_player_slot]
    local tribe = player.tribe
 
@@ -54,10 +58,13 @@ run(function()
    end
    print("Conquering field is: " .. conquering_field.x .. " " .. conquering_field.y)
 
-   local mapview = wl.ui.MapView()
+
    local auto_roadbuilding = mapview.auto_roadbuilding_mode
 
-   -- All set. Define our messages now.
+   -- All set - now wait for lock
+   wait_for_lock(player, training_wheel_name)
+
+   -- Define our messages
    push_textdomain("training_wheels")
 
    local size_description = _"Click on a small, medium or big building space, then select the building from the small buildings tab."
@@ -252,7 +259,7 @@ run(function()
    until builder_present == true
 
    -- Teaching is done, so mark it as solved
-   player:mark_training_wheel_as_solved("logs")
+   player:mark_training_wheel_as_solved(training_wheel_name)
 
    -- Wait for the building and congratulate the player
    while #player:get_buildings(log_producer.name) < 1 do sleep(300) end

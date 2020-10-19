@@ -425,6 +425,12 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 	}
 }
 
+bool Game::acquire_training_wheel_lock(const std::string& objective) {
+	if (training_wheels_ != nullptr) {
+		return training_wheels_->acquire_lock(objective);
+	}
+	return false;
+}
 void Game::mark_training_wheel_as_solved(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
 		training_wheels_->mark_as_solved(objective, training_wheels_wanted_);

@@ -4,24 +4,19 @@ include "scripting/coroutine.lua"
 include "scripting/messages.lua"
 include "scripting/richtext_scenarios.lua"
 include "scripting/ui.lua"
+include "scripting/training_wheels/utils/lock.lua"
 include "scripting/training_wheels/utils/ui.lua"
+
+local training_wheel_name = training_wheel_name_from_filename(__file__)
 
 run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
+   local player = wl.Game().players[mapview.interactive_player]
+   wait_for_lock(player, training_wheel_name)
 
    push_textdomain("training_wheels")
-
-   local welcome_message = {
-      title = _"Welcome to Widelands!",
-      h = 160,
-      w = 360,
-      body = (
-         li_image("images/logos/wl-ico-64.png", h1(_"Welcome to Widelands!")) ..
-         li_image("images/wui/training_wheels_arrow.png", _"Follow the arrows to learn how to play.")
-      )
-   }
 
    local objectives_message = {
       title = _"Objectives",
@@ -59,8 +54,6 @@ run(function()
 
    local o2 = add_campaign_objective(obj_initial_close_objectives_window)
 
-   campaign_message_box(welcome_message, 100)
-
    mapview.buttons.objectives:indicate(true)
 
    local o1 = campaign_message_with_objective(objectives_message, objectives_message_objective, 0)
@@ -75,7 +68,5 @@ run(function()
    while mapview.windows.objectives do sleep(100) end
    set_objective_done(o2)
 
-   local interactive_player_slot = wl.ui.MapView().interactive_player
-   local player = wl.Game().players[interactive_player_slot]
-   player:mark_training_wheel_as_solved("objectives")
+   player:mark_training_wheel_as_solved(training_wheel_name)
 end)

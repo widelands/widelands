@@ -15,8 +15,19 @@
 -- The existing Training Wheels are listed in ``data/scripting/training_wheels/init.lua``.
 -- Their names need to be identical with their base file name (without the ``.lua`` file extension).
 -- For blocking the execution of a Training Wheel until the player has learned a prerequisite
--- Training Wheel, list them in the Training Wheel's Lua table.
+-- Training Wheel, list them in the Training Wheel's Lua table in the format
+-- ``example = { "prerequisite1", "prerequisite1" },``.
 -- The Training Wheel will trigger if any of its prerequisites has been completed.
+--
+-- All Training Wheel scripts must include ``scripting/training_wheels/utils/lock.lua`` and call the following two functions:
+--
+-- * ``wait_for_lock(player, training_wheel_name)``:
+--   Call this when the script's setup phase is done,
+--   so that the messages from multiple training wheels won't interfere with each other.
+-- * ``player:mark_training_wheel_as_solved(training_wheel_name)``:
+--   Call this when the teaching points have been completed.
+--   This will prevent the training wheel from being run again when a new game starts,
+--   and it will also signal to the other training wheels that they can try to acquire the lock.
 --
 -- Which Training Wheels have been completed previously by the player is stored in
 -- ``.widelands/save/training_wheels.conf``.
@@ -48,14 +59,20 @@
 --    include "scripting/messages.lua"
 --    include "scripting/richtext_scenarios.lua"
 --    include "scripting/ui.lua"
+--    include "scripting/training_wheels/utils/lock.lua"
 --    include "scripting/training_wheels/utils/ui.lua"
+--
+--    -- This needs to be called outside of the coroutine, otherwise ``__file__`` would be ``nil``.
+--    -- Using this function rather than just typing ``"example"`` will save us from typos
+--    local training_wheel_name = training_wheel_name_from_filename(__file__)
 --
 --    run(function()
 --       sleep(100)
 --
 --       local interactive_player_slot = wl.ui.MapView().interactive_player
 --       local player = wl.Game().players[interactive_player_slot]
---       local starting_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
+--
+--       wait_for_lock(player, training_wheel_name)
 --
 --       -- All set. Define our messages now.
 --       push_textdomain("training_wheels")
@@ -74,6 +91,7 @@
 --       pop_textdomain()
 --
 --       -- Point to the starting field and show the message
+--       local starting_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
 --       starting_field:indicate(true)
 --       campaign_message_box(msg_example)
 --       scroll_to_field(target_field)
@@ -83,7 +101,7 @@
 --       starting_field:indicate(false)
 --
 --       -- Teaching is done, so mark it as solved. Note that this matches the base filename.
---       player:mark_training_wheel_as_solved("example")
+--       player:mark_training_wheel_as_solved(training_wheel_name)
 --    end)
 --
 -- And the corresponding entry in ``init.lua``:
@@ -94,6 +112,7 @@
 --
 
 return {
-   objectives = {},
-   logs = { "objectives" },
+   welcome = {},
+   objectives = { "welcome" },
+   logs = { "welcome" },
 }
