@@ -145,7 +145,7 @@ Game::Game()
      scenario_difficulty_(kScenarioDifficultyNotSet),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
-	 training_wheels_wanted_(false),
+     training_wheels_wanted_(false),
      replay_(false) {
 	Economy::initialize_serial();
 }
@@ -470,9 +470,10 @@ bool Game::run(StartGameType const start_game_type,
 	postload();
 
 	InteractivePlayer* ipl = get_ipl();
-	training_wheels_wanted_ = get_config_bool("training_wheels", true) &&
-							  (start_game_type == StartGameType::kMap ||
-							   (script_to_run.empty() && start_game_type == StartGameType::kSaveGame));
+	training_wheels_wanted_ =
+	   get_config_bool("training_wheels", true) &&
+	   (start_game_type == StartGameType::kMap ||
+	    (script_to_run.empty() && start_game_type == StartGameType::kSaveGame));
 
 	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
@@ -539,7 +540,8 @@ bool Game::run(StartGameType const start_game_type,
 		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
 	}
 
-	// We don't run the training wheel objectives in scenarios, but we want the objectives available for marking them as solved if a scenario teaches the same content.
+	// We don't run the training wheel objectives in scenarios, but we want the objectives available
+	// for marking them as solved if a scenario teaches the same content.
 	if (ipl && !ipl->is_multiplayer()) {
 		training_wheels_.reset(new TrainingWheels(lua()));
 		if (!training_wheels_->has_objectives()) {
@@ -585,7 +587,8 @@ bool Game::run(StartGameType const start_game_type,
 
 	remove_loader_ui();
 
-	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the user switched off the option
+	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
+	// user switched off the option
 	if (training_wheels_ != nullptr && training_wheels_wanted_) {
 		training_wheels_->run_objectives();
 	}
