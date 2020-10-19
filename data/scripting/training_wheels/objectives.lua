@@ -36,7 +36,7 @@ run(function()
       number = 1,
       body = (
          objective_text(_"Open the Objectives window",
-         li_image("images/wui/training_wheels_arrow.png", _"Click on the button that the arrow is pointing to, or press ‘%s’ to see the current game's objectives":bformat('o')))
+         li_image("images/wui/training_wheels_arrow.png", _"Click on the button that the arrow is pointing to, or press ‘%s’ to see the current game's objectives.":bformat('o')))
       )
    }
 
