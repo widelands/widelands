@@ -33,7 +33,8 @@ const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs-
 
 namespace Widelands {
 
-TrainingWheels::TrainingWheels(LuaInterface& lua) : current_objective_(""), profile_(Profile::err_log), lua_(lua) {
+TrainingWheels::TrainingWheels(LuaInterface& lua)
+   : current_objective_(""), profile_(Profile::err_log), lua_(lua) {
 	g_fs->ensure_directory_exists(kSaveDir);
 	if (g_fs->file_exists(kTrainingWheelsFile)) {
 		profile_.read(kTrainingWheelsFile.c_str(), "global");
