@@ -183,7 +183,7 @@ int LuaPlayer::get_defeated(lua_State* L) {
 /* RST
    .. attribute:: messages
 
-      (RO) An array of all the messages sent to the player. Note that you
+      (RO) An array of all the inbox messages sent to the player. Note that you
       can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_messages(lua_State* L) {
@@ -203,8 +203,8 @@ int LuaPlayer::get_messages(lua_State* L) {
 /* RST
    .. attribute:: inbox
 
-      (RO) An array of the messages that are either read or new. Note that you
-      can't add messages to this array, use :meth:`send_t_inbox` for that.
+      (RO) An array of the inbox messages that are either read or new. Note that you
+      can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_inbox(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
