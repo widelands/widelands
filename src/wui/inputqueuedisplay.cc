@@ -181,9 +181,9 @@ void InputQueueDisplay::max_size_changed() {
 	if (cache_size_ <= 0) {
 		set_desired_size(0, 0);
 	} else {
-		set_desired_size(
-		   cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border +
-		   (increase_real_fill_ ? 2 * (CellWidth + CellSpacing) : 0), total_height_);
+		set_desired_size(cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border +
+		                    (increase_real_fill_ ? 2 * (CellWidth + CellSpacing) : 0),
+		                 total_height_);
 	}
 }
 
@@ -397,14 +397,16 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	if (interactive_base_.omnipotent() && queue_) {
 		x += CellWidth + 2 * CellSpacing + PriorityButtonSize;
 
-		decrease_real_fill_ = new UI::Button(
-		   this, "decrease_real_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-		   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Decrease real fill"));
+		decrease_real_fill_ = new UI::Button(this, "decrease_real_fill", x, y, kWareMenuPicWidth,
+		                                     kWareMenuPicHeight, UI::ButtonStyle::kWuiMenu,
+		                                     g_image_cache->get("images/ui_basic/scrollbar_down.png"),
+		                                     _("Decrease real fill"));
 
 		x += CellWidth + CellSpacing;
-		increase_real_fill_ = new UI::Button(
-		   this, "increase_real_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-		   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase real fill"));
+		increase_real_fill_ = new UI::Button(this, "increase_real_fill", x, y, kWareMenuPicWidth,
+		                                     kWareMenuPicHeight, UI::ButtonStyle::kWuiMenu,
+		                                     g_image_cache->get("images/ui_basic/scrollbar_up.png"),
+		                                     _("Increase real fill"));
 
 		increase_real_fill_->set_repeating(true);
 		decrease_real_fill_->set_repeating(true);

@@ -60,7 +60,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
 			   switch (note.action) {
 			   case Widelands::NoteBuilding::Action::kWorkersChanged:
 				   update_worker_table(production_site);
-					worker_table_selection_changed();
+				   worker_table_selection_changed();
 				   break;
 			   default:
 				   break;
@@ -119,10 +119,10 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 			worker_type_ = new UI::Dropdown<Widelands::DescriptionIndex>(
 			   worker_caps_, "worker_type", 0, 0, 100, 8, 34, _("Worker"), UI::DropdownType::kTextual,
 			   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
-			worker_xp_decrease_ = new UI::Button(
-			   worker_caps_, "xp_decrease", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
-			   _("Decrease experience by 1"));
+			worker_xp_decrease_ =
+			   new UI::Button(worker_caps_, "xp_decrease", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			                  g_image_cache->get("images/ui_basic/scrollbar_down.png"),
+			                  _("Decrease experience by 1"));
 			worker_xp_increase_ = new UI::Button(
 			   worker_caps_, "xp_increase", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase experience by 1"));
@@ -263,7 +263,8 @@ void ProductionSiteWindow::worker_table_selection_changed() {
 		const std::vector<std::pair<Widelands::DescriptionIndex, Widelands::Quantity>>
 		   working_positions = ps->descr().working_positions();
 		const size_t selected_index = worker_table_->get_selected();
-		const Widelands::Worker* worker = ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+		const Widelands::Worker* worker =
+		   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
 
 		Widelands::DescriptionIndex di = Widelands::INVALID_INDEX;
 		size_t i = 0;
@@ -320,7 +321,8 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 	const std::vector<std::pair<Widelands::DescriptionIndex, Widelands::Quantity>>
 	   working_positions = ps->descr().working_positions();
 	const size_t selected_index = worker_table_->get_selected();
-	Widelands::Worker* worker = ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+	Widelands::Worker* worker =
+	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
 
 	const Widelands::DescriptionIndex current =
 	   worker ? ibase()->egbase().tribes().safe_worker_index(worker->descr().name()) :
@@ -357,14 +359,16 @@ void ProductionSiteWindow::worker_table_xp_clicked(int8_t delta) {
 	assert(worker_table_->has_selection());
 
 	const size_t selected_index = worker_table_->get_selected();
-	Widelands::Worker* worker = ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+	Widelands::Worker* worker =
+	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
 	if (!worker) {
 		return;
 	}
 
 	assert(worker->needs_experience());
 	const int32_t max_xp = worker->descr().get_needed_experience() - 1;
-	worker->set_current_experience(std::max(0, std::min(max_xp, worker->get_current_experience() + delta)));
+	worker->set_current_experience(
+	   std::max(0, std::min(max_xp, worker->get_current_experience() + delta)));
 	Notifications::publish(
 	   Widelands::NoteBuilding(ps->serial(), Widelands::NoteBuilding::Action::kWorkersChanged));
 	update_worker_xp_buttons(worker);
