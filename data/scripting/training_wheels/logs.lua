@@ -128,65 +128,70 @@ run(function()
 
    pop_textdomain()
 
-   -- Teach player to place the building
-   target_field:indicate(true)
-   campaign_message_box(msg_logs)
-   scroll_to_field(target_field)
+   -- Check whether we already have a constructionsite from savegame
+   local starting_conquer_range = wl.Game():get_building_description(starting_immovable.descr.name).conquers
+   local constructionsite_search_area = starting_field:region(starting_conquer_range)
+   local constructionsite_field = find_constructionsite_field(log_producer.name, constructionsite_search_area)
 
-   -- Wait for player to activate the small building tab
-   wait_for_field_action_tab("small")
-   mapview.windows.field_action.tabs["small"]:indicate(true)
-   while not mapview.windows.field_action.tabs["small"].active do
-      sleep(100)
-      if not mapview.windows.field_action then
-         mapview:indicate(false)
-      end
+
+   if constructionsite_field == nil then
+      -- No constructionsite from savegame, so we teach player how to place the building
+      target_field:indicate(true)
+      campaign_message_box(msg_logs)
+      scroll_to_field(target_field)
+
+      -- Wait for player to activate the small building tab
       wait_for_field_action_tab("small")
       mapview.windows.field_action.tabs["small"]:indicate(true)
-   end
+      while not mapview.windows.field_action.tabs["small"].active do
+         sleep(100)
+         if not mapview.windows.field_action then
+            mapview:indicate(false)
+         end
+         wait_for_field_action_tab("small")
+         mapview.windows.field_action.tabs["small"]:indicate(true)
+      end
 
-   -- Explain road building before the road building mode blocks us
-   if auto_roadbuilding then
-      close_story_messagebox()
-      target_field:indicate(true)
-      campaign_message_box(msg_click_road_endflag)
-      while mapview.windows.field_action do sleep(100) end
-      mapview:indicate(false)
-   end
+      -- Explain road building before the road building mode blocks us
+      if auto_roadbuilding then
+         close_story_messagebox()
+         target_field:indicate(true)
+         campaign_message_box(msg_click_road_endflag)
+         while mapview.windows.field_action do sleep(100) end
+         mapview:indicate(false)
+      end
 
-   -- Now wait for the constructionsite
-   local starting_conquer_range = wl.Game():get_building_description(starting_immovable.descr.name).conquers
-   local constructionsite_field = wait_for_constructionsite_field(log_producer.name, starting_field, starting_conquer_range)
+      -- Now wait for the constructionsite
+      constructionsite_field = wait_for_constructionsite_field(log_producer.name, constructionsite_search_area)
+   end
    local target_field = constructionsite_field.immovable.flag.fields[1]
 
    -- When not auto roadbuilding, we need to click on the constructionsite's flag too
-   if not auto_roadbuilding then
+   --if not auto_roadbuilding then
+   if not mapview.is_building_road then
       mapview:indicate(false)
-      target_field:indicate(false)
       close_story_messagebox()
-      if not mapview.is_building_road then
-         target_field:indicate(true)
-         campaign_message_box(msg_enter_roadbuilding)
+      target_field:indicate(true)
+      campaign_message_box(msg_enter_roadbuilding)
 
-         -- Wait for player to click a flag
-         while not mapview.windows.field_action or not mapview.windows.field_action.buttons["build_road"] do
-            while not mapview.windows.field_action or not mapview.windows.field_action.tabs["roads"] do sleep(100) end
-            if not mapview.windows.field_action.tabs["roads"].active or mapview.windows.field_action.buttons["build_flag"] then
-               while mapview.windows.field_action and (not mapview.windows.field_action.tabs["roads"].active or mapview.windows.field_action.buttons["build_flag"]) do
-                  sleep(100)
-               end
+      -- Wait for player to click a flag
+      while not mapview.windows.field_action or not mapview.windows.field_action.buttons["build_road"] do
+         while not mapview.windows.field_action or not mapview.windows.field_action.tabs["roads"] do sleep(100) end
+         if not mapview.windows.field_action.tabs["roads"].active or mapview.windows.field_action.buttons["build_flag"] then
+            while mapview.windows.field_action and (not mapview.windows.field_action.tabs["roads"].active or mapview.windows.field_action.buttons["build_flag"]) do
+               sleep(100)
             end
          end
-         close_story_messagebox()
-
-         -- Explain road building button
-         target_field:indicate(false)
-         local build_road_button = mapview.windows.field_action.buttons["build_road"]
-         build_road_button:indicate(true)
-         campaign_message_box(msg_click_roadbutton)
-         while not wl.ui.MapView().is_building_road do sleep(100) end
-         mapview:indicate(false)
       end
+      close_story_messagebox()
+
+      -- Explain road building button
+      target_field:indicate(false)
+      local build_road_button = mapview.windows.field_action.buttons["build_road"]
+      build_road_button:indicate(true)
+      campaign_message_box(msg_click_roadbutton)
+      while not wl.ui.MapView().is_building_road do sleep(100) end
+      mapview:indicate(false)
    end
 
    -- Indicate target flag for road building and wait for the road
