@@ -594,18 +594,25 @@ void ProductionSite::cleanup(EditorGameBase& egbase) {
  *
  * returns true on success and false if there is no room for this worker
  */
-bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes) {
-	bool assigned = false;
+bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes, int32_t slot) {
 	WorkingPosition* current = working_positions_;
 	for (WorkingPosition* const end = current + descr().nr_working_positions(); current < end;
 	     ++current) {
-		if (current->worker.get(egbase)) {
+		if (slot < 0) {
+			if (current->worker.get(egbase)) {
+				continue;
+			}
+			assert(current->worker_request);
+			if (current->worker_request->get_index() != wdes.worker_index()) {
+				continue;
+			}
+		} else if (slot > 0) {
+			--slot;
 			continue;
-		}
-
-		assert(current->worker_request);
-		if (current->worker_request->get_index() != wdes.worker_index()) {
-			continue;
+		} else {
+			assert(!current->worker.get(egbase));
+			assert(current->worker_request);
+			assert(wdes.can_act_as(current->worker_request->get_index()));
 		}
 
 		// Okay, space is free and worker is fitting. Let's create him
@@ -617,17 +624,13 @@ bool ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes
 		current->worker = &worker;
 		delete current->worker_request;
 		current->worker_request = nullptr;
-		assigned = true;
-		break;
-	}
-	if (!assigned) {
-		return false;
-	}
 
-	if (upcast(Game, game, &egbase)) {
-		try_start_working(*game);
+		if (upcast(Game, game, &egbase)) {
+			try_start_working(*game);
+		}
+		return true;
 	}
-	return true;
+	return false;
 }
 
 /**

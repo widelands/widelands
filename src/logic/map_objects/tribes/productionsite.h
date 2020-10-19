@@ -347,7 +347,7 @@ public:
 	void act(Game&, uint32_t data) override;
 
 	void remove_worker(Worker&) override;
-	bool warp_worker(EditorGameBase&, const WorkerDescr& wd);
+	bool warp_worker(EditorGameBase&, const WorkerDescr& wd, int32_t slot = -1);
 
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
