@@ -31,7 +31,8 @@
 --   **do not** use any hard-coded building or worker names etc.
 --   Hard-coded ware names are OK if they are very basic, e.g. "log".
 --   Everything else should be handled by using generalized attributes.
--- * **Robustness:** Expect the player not to follow the intsructions.
+--   Also, test with different starting conditions, maps and savegames.
+-- * **Robustness:** Expect the player not to follow the instructions.
 --   This should not cause any crashes.
 -- * **Conciseness:** Keep the texts as short as possible, users don't like to read walls of text.
 --   Conciseness also helps with keeping the workload down for our translators.
