@@ -11,7 +11,7 @@ include "scripting/table.lua"
 include "scripting/ui.lua"
 
 -- RST
--- .. function:: send_message(player, title, body, parameters)
+-- .. function:: send_mail(player, title, body, parameters)
 --
 --    Sends a message to the inbox of a player.
 --    If the popup parameter is true and the player is in building mode,
@@ -24,10 +24,10 @@ include "scripting/ui.lua"
 --    :arg body: the localized body of the message. You can use rt functions here.
 --    :type body: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
---                     for wl.game.Player, e.g. { field = f, popup = true }.
+--                     for :meth:`wl.game.Player.send_to_inbox`, e.g. { field = f, popup = true }.
 --                     The popup parameter must be set.
 --
-function send_message(player, title, body, parameters)
+function send_mail(player, title, body, parameters)
    if (parameters["popup"]) then
       wait_for_roadbuilding()
    end
