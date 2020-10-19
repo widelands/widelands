@@ -1,5 +1,15 @@
 -- TODO(GunChleoc): Document more fully
 
+function select_warehouse_types(buildings)
+   local result = {}
+   for b_idx, building in ipairs(buildings) do
+      if (building.type_name == "warehouse") then
+         table.insert(result, building.name)
+      end
+   end
+   return result
+end
+
 -- Find tribe-dependent building type e.g. "trees" and "log" will give us a lumberjack
 function find_immovable_collector_for_ware(buildings, immovable_attribute, warename)
    for b_idx, building in ipairs(buildings) do
@@ -39,7 +49,15 @@ function find_buildable_field(center_field, size, min_radius, max_radius)
    local function find_buildable_field_helper(starting_field, size, range)
       for f_idx, field in ipairs(starting_field:region(range)) do
          if field:has_caps(size) then
-            return field
+            local space_for_flags = true
+            for nf_idx, nearby_field in ipairs(field:region(1)) do
+               if not nearby_field:has_caps("flag") then
+                  space_for_flags = false
+               end
+            end
+            if space_for_flags then
+               return field
+            end
          end
       end
       return nil

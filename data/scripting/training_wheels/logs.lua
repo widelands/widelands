@@ -29,12 +29,30 @@ run(function()
    end
 
    -- Find a suitable buildable field close to the the starting field
-   local starting_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
-   local starting_immovable = starting_field.immovable
-   if starting_immovable == nil then
-      print("No starting field immovable. Aborting training wheel 'logs'.")
-      return
+   local conquering_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
+   local conquering_immovable = conquering_field.immovable
+
+   -- Wait for a warehouse
+   local warehouse_types = select_warehouse_types(buildings)
+   local warehouse_immovable = nil
+   repeat
+      for b_idx, warehouse in ipairs(warehouse_types) do
+         local candidates = player:get_buildings(warehouse)
+         if #candidates > 0 then
+            warehouse_immovable = candidates[1]
+            break
+         end
+      end
+      if warehouse_immovable == nil then
+         sleep(300)
+      end
+   until warehouse_immovable ~= nil
+
+   if conquering_immovable == nil then
+      conquering_immovable = warehouse_immovable
+      conquering_field = warehouse_immovable.fields[1]
    end
+   print("Conquering field is: " .. conquering_field.x .. " " .. conquering_field.y)
 
    local mapview = wl.ui.MapView()
    local auto_roadbuilding = mapview.auto_roadbuilding_mode
@@ -90,7 +108,7 @@ run(function()
       body = (
          li_object(log_producer.name, _"Click on the building’s button…", player.color) ..
          -- We can't get the tribe's flag image, so we settle for the main building
-         li_object(starting_immovable.descr.name, "…then hold down the ‘Ctrl’ key and click on the flag in front of your main building.", player.color)
+         li_object(warehouse_immovable.descr.name, "…then hold down the ‘Ctrl’ key and click on the flag in front of the target building.", player.color)
       ),
       h = 280,
       w = 260,
@@ -122,8 +140,8 @@ run(function()
    pop_textdomain()
 
    -- Check whether we already have a constructionsite from savegame
-   local starting_conquer_range = wl.Game():get_building_description(starting_immovable.descr.name).conquers
-   local constructionsite_search_area = starting_field:region(starting_conquer_range)
+   local starting_conquer_range = wl.Game():get_building_description(conquering_immovable.descr.name).conquers
+   local constructionsite_search_area = conquering_field:region(starting_conquer_range)
    local constructionsite_field = find_constructionsite_field(log_producer.name, constructionsite_search_area)
    local target_field = nil
 
@@ -131,8 +149,8 @@ run(function()
    if constructionsite_field == nil then
       -- Find a suitable field close to a tree
       repeat
-         target_field = find_immovable_field(starting_field, "tree", 2, starting_conquer_range + log_producer.workarea_radius / 2)
-         target_field = find_buildable_field(starting_field, log_producer.size, 1, log_producer.workarea_radius - 1)
+         target_field = find_immovable_field(conquering_field, "tree", 2, starting_conquer_range + log_producer.workarea_radius / 2)
+         target_field = find_buildable_field(conquering_field, log_producer.size, 1, log_producer.workarea_radius - 1)
          if target_field == nil then
             sleep(1000)
          end
@@ -166,6 +184,7 @@ run(function()
 
       -- Now wait for the constructionsite
       constructionsite_field = wait_for_constructionsite_field(log_producer.name, constructionsite_search_area)
+      target_field:indicate(false)
    end
 
    -- When not auto roadbuilding, we need to click on the constructionsite's flag too
@@ -198,7 +217,7 @@ run(function()
    end
 
    -- Indicate target flag for road building and wait for the road
-   target_field = starting_immovable.flag.fields[1]
+   target_field = warehouse_immovable.flag.fields[1]
    target_field:indicate(true)
    scroll_to_field(target_field)
 
