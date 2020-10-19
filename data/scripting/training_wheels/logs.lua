@@ -89,10 +89,10 @@ run(function()
       position = "topright",
       body = (
          li_object(log_producer.name, _"Click on the building’s button…", player.color) ..
-         -- NOCOM We need the tribe's flag image
-         li_image("images/wui/fieldaction/menu_build_flag.png", "…then hold down the ‘Ctrl’ key and click on the indicated flag.")
+         -- We can't get the tribe's flag image, so we settle for the main building
+         li_object(starting_immovable.descr.name, "…then hold down the ‘Ctrl’ key and click on the flag in front of your main building.", player.color)
       ),
-      h = 180,
+      h = 280,
       w = 260,
       modal = false
    }
