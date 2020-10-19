@@ -115,7 +115,7 @@ run(function()
       body = (
          li_object(log_producer.name, _"Click on the building’s button…", player.color) ..
          -- We can't get the tribe's flag image, so we settle for the main building
-         li_object(warehouse_immovable.descr.name, "…then hold down the ‘Ctrl’ key and click on the flag in front of the target building.", player.color)
+         li_object(warehouse_immovable.descr.name, _"…then hold down the ‘Ctrl’ key and click on the flag in front of the target building.", player.color)
       ),
       h = 280,
       w = 260,
@@ -126,7 +126,7 @@ run(function()
       title = _"Roads",
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the flag in front of the building, then on the ‘Build road’ button, then hold down the ‘Ctrl’ key and click on the indicated flag.")
+         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button, then hold down the ‘Ctrl’ key and click on the indicated flag.")
       ),
       h = 180,
       w = 260,
