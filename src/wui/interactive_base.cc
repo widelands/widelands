@@ -192,7 +192,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      frametime_(0),
      avg_usframetime_(0),
      road_building_mode_(nullptr),
-     unique_window_handler_(new UniqueWindowHandler()) {
+     unique_window_handler_(new UniqueWindowHandler()),
+     cheat_mode_enabled_(false) {
 
 	// Load the buildhelp icons.
 	{
@@ -809,6 +810,14 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
+	}
+
+	if (cheat_mode_enabled_) {
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph("‹‹‹ CHEAT MODE ENABLED ›››", UI::FontStyle::kFsMenuIntro));
+		rendered_text->draw(
+		   dst, Vector2i((get_w() - rendered_text->width()) / 2,
+		                 (get_h() - rendered_text->height()) / 2));
 	}
 }
 
@@ -1443,6 +1452,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			GameChatMenu::create_script_console(
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
+		case SDLK_F3:
+			if (cheat_mode_enabled_ || (code.mod & KMOD_CTRL)) {
+				cheat_mode_enabled_ = !cheat_mode_enabled_;
+				return true;
+			}
+			break;
 #endif
 		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
 		case SDLK_SPACE:
