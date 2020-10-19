@@ -13,7 +13,7 @@ include "scripting/ui.lua"
 -- RST
 -- .. function:: send_message(player, title, body, parameters)
 --
---    Sends a message in a separate window to a player.
+--    Sends a message to the inbox of a player.
 --    If the popup parameter is true and the player is in building mode,
 --    the function waits until the player leaves the building mode
 --    before sending the message (only in singleplayer)
@@ -31,7 +31,7 @@ function send_message(player, title, body, parameters)
    if (parameters["popup"]) then
       wait_for_roadbuilding()
    end
-   player:send_message(title, body, parameters)
+   player:send_to_inbox(title, body, parameters)
 end
 
 

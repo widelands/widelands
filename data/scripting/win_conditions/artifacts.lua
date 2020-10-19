@@ -96,11 +96,11 @@ local r = {
 
       local function _broadcast_to_team(player, msg, f)
          if player.team == 0 then
-            player:send_message(msg.title, msg.body, {msg, field = f})
+            player:send_to_inbox(msg.title, msg.body, {msg, field = f})
          else
             for idx, plr in ipairs(plrs) do
                if plr.team == player.team then
-                  plr:send_message(msg.title, msg.body, {msg, field = f})
+                  plr:send_to_inbox(msg.title, msg.body, {msg, field = f})
                end
             end
          end
@@ -199,10 +199,10 @@ local r = {
          local key = _getkey(plr)
          -- If two or more teams have the same amount of artifacts, they are all considered winners.
          if artifacts_per_team[key] == max_artifacts then
-            plr:send_message(won_game_over.title, won_game_over.body .. msg)
+            plr:send_to_inbox(won_game_over.title, won_game_over.body .. msg)
             wl.game.report_result(plr, 1, make_extra_data(plr, wc_descname, wc_version, {score=artifacts_per_team[key]}))
          else
-            plr:send_message(lost_game_over.title, lost_game_over.body .. msg)
+            plr:send_to_inbox(lost_game_over.title, lost_game_over.body .. msg)
             wl.game.report_result(plr, 0, make_extra_data(plr, wc_descname, wc_version, {score=artifacts_per_team[key]}))
          end
       end
