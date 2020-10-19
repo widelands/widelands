@@ -73,7 +73,7 @@ struct FerryFleet : MapObject {
 	uint32_t count_unattended_waterways() const;
 	bool has_ferry(const Waterway& ww) const;
 
-	void request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime = -1);
+	void request_ferry(const EditorGameBase& egbase, Waterway* waterway, int32_t gametime = -1);
 	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
 	void cancel_ferry_request(Game& game, Waterway* waterway);
 

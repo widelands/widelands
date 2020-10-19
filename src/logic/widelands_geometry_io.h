@@ -76,8 +76,6 @@ Direction read_direction_8(StreamRead* fr);
 /// \throws direction_invalid if direction is > 6.
 Direction read_direction_8_allow_null(StreamRead* fr);
 
-MapIndex read_map_index_32(StreamRead* fr, MapIndex max);
-
 /// Read a Coords from the file. Use this when the result can only be a
 /// coordinate pair referring to a node.
 ///

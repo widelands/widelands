@@ -197,13 +197,13 @@ struct ImmovableActionData {
 	virtual const char* name() const = 0;
 	virtual void save(FileWrite& fw, Immovable& imm) const = 0;
 
-	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
+	static ImmovableActionData* load(FileRead& fr, const Immovable& imm, const std::string& name);
 };
 
 struct ActConstructData : ImmovableActionData {
 	const char* name() const override;
 	void save(FileWrite& fw, Immovable& imm) const override;
-	static ActConstructData* load(FileRead& fr, Immovable& imm);
+	static ActConstructData* load(FileRead& fr, const Immovable& imm);
 
 	Buildcost delivered;
 };

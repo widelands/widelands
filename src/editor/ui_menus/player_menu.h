@@ -52,7 +52,7 @@ private:
 		UI::Dropdown<std::string>* tribe;
 	};
 
-	EditorInteractive& eia();
+	EditorInteractive& eia() const;
 
 	/// Update player name on map for the given row's player
 	void name_changed(size_t row);

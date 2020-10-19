@@ -1842,7 +1842,7 @@ void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
 /*** struct Cmd_SetStockPolicy ***/
 CmdSetStockPolicy::CmdSetStockPolicy(uint32_t time,
                                      PlayerNumber p,
-                                     Building& wh,
+                                     const Building& wh,
                                      bool isworker,
                                      DescriptionIndex ware,
                                      StockPolicy policy)
@@ -1854,7 +1854,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(uint32_t time,
 }
 
 CmdSetStockPolicy::CmdSetStockPolicy()
-   : PlayerCommand(), warehouse_(0), isworker_(false), policy_() {
+   : PlayerCommand(), warehouse_(0), isworker_(false), ware_(0), policy_() {
 }
 
 void CmdSetStockPolicy::execute(Game& game) {
