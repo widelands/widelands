@@ -27,16 +27,23 @@ def main():
         if not os.path.isfile(file_path):
             continue
         print('Checking {}'.format(filename))
+        coroutine_found = False
         lock_acquired = False
         marked_solved = False
         with open(file_path, 'r', encoding='utf-8') as filecontents:
             for line in filecontents.readlines():
-                if 'wait_for_lock(' in line:
+                if 'run(function()' in line:
+                    coroutine_found = True
+                if coroutine_found and 'wait_for_lock(' in line:
                     lock_acquired = True
                 elif lock_acquired and 'mark_training_wheel_as_solved(' in line:
                     marked_solved = True
+        if not coroutine_found:
+            print(
+                "- ERROR: File did not call 'run(function()' - we have to have a coroutine!")
+            return_code = 1
         if not lock_acquired:
-            print("- ERROR: File did not call 'wait_for_lock'")
+            print("- ERROR: File did not call 'wait_for_lock' in a coroutine")
             return_code = 1
         if not marked_solved:
             print(
