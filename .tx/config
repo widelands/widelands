@@ -129,7 +129,7 @@ type = PO
 
 [widelands.training_wheels]
 file_filter = po/training_wheels/<lang>.po
-source_file = po/training_wheels/texts.pot
+source_file = po/training_wheels/training_wheels.pot
 source_lang = en
 type = PO
 
