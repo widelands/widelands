@@ -57,13 +57,40 @@ function find_buildable_field(center_field, size, min_radius, max_radius)
    return target_field
 end
 
+function find_immovable_field(center_field, immovable_attribute, min_radius, max_radius)
+   if max_radius < min_radius then
+      print("ERROR: max_radius < min_radius in find_immovable_field")
+      return nil
+   end
+
+   local function find_immovable_field_helper(starting_field, immovable_attribute, range)
+      for f_idx, field in ipairs(starting_field:region(range)) do
+         if field.immovable ~= nil and field.immovable:has_attribute(immovable_attribute) then
+            return field
+         end
+      end
+      return nil
+   end
+
+   local target_field = nil
+   local radius = min_radius
+   repeat
+      target_field = find_immovable_field_helper(center_field, immovable_attribute, radius)
+      if target_field ~= nil then
+         return target_field
+      end
+      radius = radius + 1
+   until radius == max_radius
+   return target_field
+end
+
 -- We can't list constructionsites directly, so we search a region for it
 function find_constructionsite_field(buildingname, search_area)
    for f_idx, field in ipairs(search_area) do
-      if field.immovable ~= nil then
-         if field.immovable.descr.name == "constructionsite" and field.immovable.building == buildingname then
-            return field
-         end
+      if field.immovable ~= nil and
+         field.immovable.descr.name == "constructionsite" and
+         field.immovable.building == buildingname then
+         return field
       end
    end
    return nil

@@ -36,13 +36,6 @@ run(function()
       return
    end
 
-   local target_field = find_buildable_field(starting_field, log_producer.size, 4, 6)
-
-   if target_field == nil then
-      print("No target field found in radius. Aborting training wheel 'logs'.")
-      return
-   end
-
    local mapview = wl.ui.MapView()
    local auto_roadbuilding = mapview.auto_roadbuilding_mode
 
@@ -132,10 +125,19 @@ run(function()
    local starting_conquer_range = wl.Game():get_building_description(starting_immovable.descr.name).conquers
    local constructionsite_search_area = starting_field:region(starting_conquer_range)
    local constructionsite_field = find_constructionsite_field(log_producer.name, constructionsite_search_area)
+   local target_field = nil
 
-
+   -- If there is no constructionsite from savegame, so we teach player how to place the building
    if constructionsite_field == nil then
-      -- No constructionsite from savegame, so we teach player how to place the building
+      -- Find a suitable field close to a tree
+      repeat
+         target_field = find_immovable_field(starting_field, "tree", 2, starting_conquer_range + log_producer.workarea_radius / 2)
+         target_field = find_buildable_field(starting_field, log_producer.size, 1, log_producer.workarea_radius - 1)
+         if target_field == nil then
+            sleep(1000)
+         end
+      until target_field ~= nil
+
       target_field:indicate(true)
       campaign_message_box(msg_logs)
       scroll_to_field(target_field)
@@ -159,18 +161,19 @@ run(function()
          campaign_message_box(msg_click_road_endflag)
          while mapview.windows.field_action do sleep(100) end
          mapview:indicate(false)
+         scroll_to_field(target_field)
       end
 
       -- Now wait for the constructionsite
       constructionsite_field = wait_for_constructionsite_field(log_producer.name, constructionsite_search_area)
    end
-   local target_field = constructionsite_field.immovable.flag.fields[1]
 
    -- When not auto roadbuilding, we need to click on the constructionsite's flag too
-   --if not auto_roadbuilding then
    if not mapview.is_building_road then
       mapview:indicate(false)
       close_story_messagebox()
+
+      target_field = constructionsite_field.immovable.flag.fields[1]
       target_field:indicate(true)
       campaign_message_box(msg_enter_roadbuilding)
 
@@ -197,6 +200,7 @@ run(function()
    -- Indicate target flag for road building and wait for the road
    target_field = starting_immovable.flag.fields[1]
    target_field:indicate(true)
+   scroll_to_field(target_field)
 
    while wl.ui.MapView().is_building_road do sleep(100) end
    close_story_messagebox()
