@@ -385,9 +385,8 @@ bool Table<void*>::handle_tooltip() {
 			const int column_w = column.width;
 			Vector2i point(column_x, y);
 			if (is_mouse_in(cursor_pos, point, column_w)) {
-				std::string entry_string = er.get_string(c);
+				const std::string& entry_string = er.get_string(c);
 				FontStyleInfo& font_style = get_column_fontstyle(er);
-				g_style_manager->table_style(style_).enabled();
 				std::shared_ptr<const UI::RenderedText> rendered_text =
 				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
@@ -404,11 +403,10 @@ bool Table<void*>::handle_tooltip() {
 }
 
 UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryRecord& er) {
-	return const_cast<FontStyleInfo&>(er.font_style() != nullptr ?
-	                                     *er.font_style() :
-	                                     er.is_disabled() ?
-	                                     g_style_manager->table_style(style_).disabled() :
-	                                     g_style_manager->table_style(style_).enabled());
+	return const_cast<FontStyleInfo&>(
+	   er.font_style() != nullptr ? *er.font_style() :
+	   er.is_disabled()           ? g_style_manager->table_style(style_).disabled() :
+                                   g_style_manager->table_style(style_).enabled());
 }
 bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
                                const Vector2i& point,
