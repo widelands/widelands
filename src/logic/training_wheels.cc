@@ -31,9 +31,6 @@ const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs-
                                                 std::string("training_wheels") +
                                                 g_fs->file_separator();
 
-// NOCOM document
-// NOCOM Python script for validating locks
-
 namespace Widelands {
 
 TrainingWheels::TrainingWheels(LuaInterface& lua) : current_objective_(""), profile_(Profile::err_log), lua_(lua) {

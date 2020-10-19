@@ -29,23 +29,51 @@
 namespace Widelands {
 
 // Teach new players about Widelands, integrated into any singleplayer non-scenario game
+// Check the scripting documentation for more information.
 class TrainingWheels {
 public:
-	/*
-	 * Runs the training wheel scripts defined in data/scripting/training_wheels
+	/**
+	 * @brief Parses the training wheel scripts defined in data/scripting/training_wheels
+	 * @param lua the game's Lua interface
 	 */
 	explicit TrainingWheels(LuaInterface& lua);
 	~TrainingWheels() = default;
 
+	/**
+	 * @brief acquire_lock Try to set the lock to the given training wheel objective
+	 * @param objective The training wheel objective wanting the lock
+	 * @return Whether the training wheel objective acquired the lock
+	 */
 	bool acquire_lock(const std::string& objective);
+	/**
+	 * @brief mark_as_solved Mark the given training wheel objective as solved and release the lock
+	 * @param objective The training wheel objective to be marked as solved
+	 * @param run_some_more Whether to trigger more training wheel scripts when available
+	 */
 	void mark_as_solved(const std::string& objective, bool run_some_more);
+	/**
+	 * @brief run_objectives Trigger all queued training wheel objectives
+	 */
 	void run_objectives();
+	/**
+	 * @brief has_objectives See if there are still unsolved objectives
+	 * @return Whether any more training wheels want to run
+	 */
 	bool has_objectives() const;
 
 private:
+	/**
+	 * @brief load_objectives Check for training wheel objectives that can be run
+	 */
 	void load_objectives();
+	/**
+	 * @brief write Write configuration to file
+	 */
 	void write();
 
+	/**
+	 * @brief A training whell's script and filename
+	 */
 	struct TrainingWheel {
 		explicit TrainingWheel(const std::string& key,
 		                       const std::vector<std::string>& init_dependencies)
@@ -59,12 +87,17 @@ private:
 		std::set<std::string> dependencies;
 	};
 
-	// Objective name, whether it was completed
+	// Objective name and its scripting information
 	std::map<std::string, TrainingWheel> idle_objectives_;
+	// Prevent concurrency issues while loading objectives
 	std::set<std::string> running_objectives_;
+	// Remember solved objectives for dependency check
 	std::set<std::string> solved_objectives_;
+	// The scripts that had their dependencies met and are waiting to run
 	std::set<std::string> scripts_to_run_;
+	// Mutex Lock for the currently rinnung objective
 	std::string current_objective_;
+	// For reading/writing progress to disk
 	Profile profile_;
 
 	LuaInterface& lua_;  // Not owned
