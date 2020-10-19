@@ -40,14 +40,11 @@ Textarea::Textarea(Panel* parent,
      align_(align),
      text_(text),
      style_(&style) {
-	log_dbg("NOCOM UI::Textarea ctor AAA");
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
 	font_scale_ = 1.0f;
-	log_dbg("NOCOM UI::Textarea ctor BBB");
 	update();
-	log_dbg("NOCOM UI::Textarea ctor done.");
 }
 
 Textarea::Textarea(Panel* parent,

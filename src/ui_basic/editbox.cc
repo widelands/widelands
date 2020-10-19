@@ -110,10 +110,8 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
      history_position_(-1),
      password_(false),
      warning_(false) {
-	log_dbg("NOCOM UI::EditBox ctor AAA");
 	set_thinks(false);
 
-	log_dbg("NOCOM UI::EditBox ctor BBB");
 	// Set alignment to the UI language's principal writing direction
 	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
@@ -121,22 +119,18 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	m_->selection_end = 0;
 	m_->selection_start = 0;
 	m_->scrolloffset = 0;
-	log_dbg("NOCOM UI::EditBox ctor CCC");
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
 
-	log_dbg("NOCOM UI::EditBox ctor DDD");
 	set_thinks(false);
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_handle_textinput();
-	log_dbg("NOCOM UI::EditBox ctor EEE");
 
 	// Initialize history as empty string
 	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i) {
 		history_[i] = "";
 	}
-	log_dbg("NOCOM UI::EditBox ctor done.");
 }
 
 EditBox::~EditBox() {

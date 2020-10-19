@@ -62,10 +62,8 @@ Button::Button  //  Common constructor
      title_(title_text),
      title_image_(title_image),
      style_(&g_style_manager->button_style(init_style)) {
-	log_dbg("NOCOM UI::Button ctor AAA");
 	set_thinks(false);
 	set_can_focus(enabled_);
-	log_dbg("NOCOM UI::Button ctor done.");
 }
 
 /// For textual buttons. If h = 0, h will resize according to the font's height. If both h = 0 and w

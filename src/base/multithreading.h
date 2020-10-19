@@ -27,6 +27,9 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
+// Uncomment this to get masses of log output to debug hangs and deadlocks
+// #define MUTEX_LOCK_DEBUG
+
 // Remember that the current thread is the thread that initialized the graphics system.
 // This function needs to be called exactly once when Widelands starts.
 void set_initializer_thread();
@@ -79,7 +82,7 @@ struct NoteThreadSafeFunctionHandled {
 class MutexLock {
 public:
 	// Which mutex to lock. Each entry corresponds to a different mutex.
-	enum class ID { kLogicFrame, kObjects, kCommands, kMessages, kIBaseVisualizations };
+	enum class ID { kLogicFrame, kObjects, kCommands, kMessages, kIBaseVisualizations, kI18N };
 
 	explicit MutexLock(ID);
 	explicit MutexLock(ID, const std::function<void()>& run_while_waiting);

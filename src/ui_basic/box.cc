@@ -46,7 +46,6 @@ Box::Box(Panel* const parent,
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
-	log_dbg("NOCOM UI::Box ctor.");
 }
 
 /**

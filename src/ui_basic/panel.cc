@@ -79,10 +79,8 @@ Panel::Panel(Panel* const nparent,
      running_(false),
      tooltip_(tooltip_text),
      logic_thread_locked_(LogicThreadState::kEndingConfirmed) {
-	log_dbg("NOCOM UI::Panel ctor AAA");
 	assert(nparent != this);
 	if (parent_) {
-		log_dbg("NOCOM UI::Panel ctor BBB");
 		next_ = parent_->first_child_;
 		prev_ = nullptr;
 		if (next_) {
@@ -91,12 +89,9 @@ Panel::Panel(Panel* const nparent,
 			parent_->last_child_ = this;
 		}
 		parent_->first_child_ = this;
-		log_dbg("NOCOM UI::Panel ctor CCC");
 	} else {
-		log_dbg("NOCOM UI::Panel ctor DDD");
 		prev_ = next_ = nullptr;
 	}
-	log_dbg("NOCOM UI::Panel ctor done.");
 }
 
 /**
@@ -1096,7 +1091,7 @@ void Panel::do_draw_inner(RenderTarget& dst) {
  * \param dst RenderTarget for the parent Panel
  */
 void Panel::do_draw(RenderTarget& dst) {
-#if 1  // NOCOM
+#ifdef MUTEX_LOCK_DEBUG
 	if (!initialized_) {
 		dst.fill_rect(Recti(x_, y_, w_, h_), RGBAColor(100, 100, 200, 100), BlendMode::Default);
 		return;

@@ -61,8 +61,6 @@ void UniqueWindow::Registry::toggle() {
 			window->restore();
 			opened();
 		} else {
-			// Delete rather than die() to make dropdown lists behave
-			// delete window;  // NOCOM
 			window->die();
 			window = nullptr;
 		}
@@ -76,9 +74,7 @@ void UniqueWindow::Registry::toggle() {
  * here.
  */
 UniqueWindow::Registry::~Registry() {
-	// delete window;
 	if (window) {
-		// window->die();  // NOCOM
 		delete window;
 		window = nullptr;
 	}

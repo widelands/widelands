@@ -32,6 +32,7 @@
 #endif
 
 #include "base/macros.h"
+#include "base/multithreading.h"
 #include "config.h"
 
 /// A macro to make i18n more readable and aid in tagging strings for translation
@@ -48,12 +49,15 @@ void release_textdomain();
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct Textdomain {
-	explicit Textdomain(const std::string& name) {
+	explicit Textdomain(const std::string& name) : lock_(MutexLock::ID::kI18N) {
 		grab_textdomain(name);
 	}
 	~Textdomain() {
 		release_textdomain();
 	}
+
+private:
+	MutexLock lock_;
 };
 
 void init_locale();

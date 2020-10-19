@@ -30,7 +30,6 @@
 #include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
 
-#include "base/log.h"  // NOCOM
 #include "base/macros.h"
 #include "base/multithreading.h"
 #include "base/rect.h"
