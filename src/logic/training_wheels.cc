@@ -100,14 +100,16 @@ bool TrainingWheels::has_objectives() const {
 	return !scripts_to_run_.empty();
 }
 
-void TrainingWheels::mark_as_solved(const std::string& objective) {
+void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_more) {
 	log_info("Solved training wheel '%s'", objective.c_str());
 	solved_objectives_.insert(objective);
 	Section& section = profile_.pull_section("global");
 	section.set_bool(objective.c_str(), true);
 	write();
-	load_objectives();
-	run_objectives();
+	if (run_some_more) {
+		load_objectives();
+		run_objectives();
+	}
 }
 
 void TrainingWheels::write() {

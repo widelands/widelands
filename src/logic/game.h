@@ -419,6 +419,7 @@ private:
 	std::string win_condition_displayname_;
 
 	std::unique_ptr<TrainingWheels> training_wheels_;
+	bool training_wheels_wanted_;
 
 	bool replay_;
 };
