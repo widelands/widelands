@@ -757,9 +757,7 @@ void FieldActionWindow::act_buildflag() {
 
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
-		if (upcast(InteractiveGameBase, igbase, &ibase())) {
-			EconomyOptionsWindow::create(*igbase, *flag);
-		}
+		EconomyOptionsWindow::create(ibase(), *flag);
 	}
 	die();
 }

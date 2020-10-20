@@ -164,31 +164,33 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	}
 }
 
-void EconomyOptionsWindow::create(InteractiveGameBase& igbase, const Widelands::Flag& flag) {
-	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
-	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
-	bool window_open = false;
-	if (ware_economy->get_options_window()) {
-		window_open = true;
-		EconomyOptionsWindow& window =
-		   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
-		if (window.is_minimal()) {
-			window.restore();
+void EconomyOptionsWindow::create(InteractiveBase& ibase, const Widelands::Flag& flag) {
+	if (upcast(InteractiveGameBase, igbase, &ibase)) {
+		Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
+		Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
+		bool window_open = false;
+		if (ware_economy->get_options_window()) {
+			window_open = true;
+			EconomyOptionsWindow& window =
+			   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
+			if (window.is_minimal()) {
+				window.restore();
+			}
+			window.move_to_top();
 		}
-		window.move_to_top();
-	}
-	if (worker_economy->get_options_window()) {
-		window_open = true;
-		EconomyOptionsWindow& window =
-		   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
-		if (window.is_minimal()) {
-			window.restore();
+		if (worker_economy->get_options_window()) {
+			window_open = true;
+			EconomyOptionsWindow& window =
+			   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+			if (window.is_minimal()) {
+				window.restore();
+			}
+			window.move_to_top();
 		}
-		window.move_to_top();
-	}
-	if (!window_open) {
-		new EconomyOptionsWindow(&igbase, ware_economy, worker_economy,
-		                         igbase.can_act(ware_economy->owner().player_number()));
+		if (!window_open) {
+			new EconomyOptionsWindow(igbase, ware_economy, worker_economy,
+									 igbase->can_act(ware_economy->owner().player_number()));
+		}
 	}
 }
 
