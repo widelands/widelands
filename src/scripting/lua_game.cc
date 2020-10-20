@@ -1217,7 +1217,7 @@ int LuaInboxMessage::get_body(lua_State* L) {
       (RO) The game time in milliseconds when this message was sent
 */
 int LuaInboxMessage::get_sent(lua_State* L) {
-	lua_pushuint32(L, get(L, get_game(L)).sent());
+	lua_pushuint32(L, get(L, get_game(L)).sent().get());
 	return 1;
 }
 

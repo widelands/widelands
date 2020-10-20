@@ -47,7 +47,7 @@ namespace Widelands {
 
 namespace {
 
-static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
+static const Duration kCostlessWorkerSpawnInterval = Duration(2500);
 constexpr int kFleeingUnitsCap = 500;
 
 // Goes through the list and removes all workers that are no longer in the
@@ -408,7 +408,7 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
      supply_(new WarehouseSupply(this)),
      next_military_act_(0),
      portdock_(nullptr) {
-	next_stock_remove_act_ = 0;
+	next_stock_remove_act_ = Time(0);
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
@@ -496,24 +496,23 @@ bool Warehouse::load_finish_planned_worker(PlannedWorkers& pw) {
 void Warehouse::load_finish(EditorGameBase& egbase) {
 	Building::load_finish(egbase);
 
-	Time next_spawn = never();
+	Time next_spawn;
 	const std::vector<DescriptionIndex>& worker_types_without_cost =
 	   owner().tribe().worker_types_without_cost();
 	for (uint8_t i = worker_types_without_cost.size(); i;) {
 		DescriptionIndex const worker_index = worker_types_without_cost.at(--i);
 		if (owner().is_worker_type_allowed(worker_index) &&
-		    next_worker_without_cost_spawn_[i] == never()) {
-			if (next_spawn == never()) {
-				next_spawn =
-				   schedule_act(dynamic_cast<Game&>(egbase), WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+		    next_worker_without_cost_spawn_[i].is_invalid()) {
+			if (next_spawn.is_invalid()) {
+				next_spawn = schedule_act(dynamic_cast<Game&>(egbase), kCostlessWorkerSpawnInterval);
 			}
 			next_worker_without_cost_spawn_[i] = next_spawn;
-			log_warn("player %u is allowed to create worker type %s but his "
-			         "%s %u at (%i, %i) does not have a next_spawn time set for that "
-			         "worker type; setting it to %u\n",
-			         owner().player_number(),
-			         owner().tribe().get_worker_descr(worker_index)->name().c_str(),
-			         descr().name().c_str(), serial(), get_position().x, get_position().y, next_spawn);
+			log_warn(
+			   "player %u is allowed to create worker type %s but his "
+			   "%s %u at (%i, %i) does not have a next_spawn time set for that "
+			   "worker type; setting it to %u\n",
+			   owner().player_number(), owner().tribe().get_worker_descr(worker_index)->name().c_str(),
+			   descr().name().c_str(), serial(), get_position().x, get_position().y, next_spawn.get());
 		}
 	}
 
@@ -546,7 +545,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase)) {
 
 		{
-			uint32_t const act_time = schedule_act(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			const Time act_time = schedule_act(*game, kCostlessWorkerSpawnInterval);
 			const std::vector<DescriptionIndex>& worker_types_without_cost =
 			   player->tribe().worker_types_without_cost();
 
@@ -559,9 +558,9 @@ bool Warehouse::init(EditorGameBase& egbase) {
 		// next_military_act_ is not touched in the loading code. Is only needed
 		// if the warehouse is created in the game?  I assume it's for the
 		// conquer_radius thing
-		next_military_act_ = schedule_act(*game, 1000);
+		next_military_act_ = schedule_act(*game, Duration(1000));
 
-		next_stock_remove_act_ = schedule_act(*game, 4000);
+		next_stock_remove_act_ = schedule_act(*game, Duration(4000));
 
 		log_info_time(egbase.get_gametime(), "Message: adding %s for player %i at (%d, %d)\n",
 		              to_string(descr().type()).c_str(), player->player_number(), position_.x,
@@ -610,7 +609,7 @@ void Warehouse::init_containers(const Player& player) {
 	worker_policy_.resize(nr_workers, StockPolicy::kNormal);
 
 	uint8_t nr_worker_types_without_cost = player.tribe().worker_types_without_cost().size();
-	next_worker_without_cost_spawn_.resize(nr_worker_types_without_cost, never());
+	next_worker_without_cost_spawn_.resize(nr_worker_types_without_cost, Time());
 }
 
 /**
@@ -768,7 +767,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 /// like Soylent Green? Or maybe I should just stop writing comments that late
 /// at night ;-)
 void Warehouse::act(Game& game, uint32_t const data) {
-	const int32_t gametime = game.get_gametime();
+	const Time& gametime = game.get_gametime();
 	{
 		const std::vector<DescriptionIndex>& worker_types_without_cost =
 		   owner().tribe().worker_types_without_cost();
@@ -777,22 +776,22 @@ void Warehouse::act(Game& game, uint32_t const data) {
 				DescriptionIndex const id = worker_types_without_cost.at(i);
 				if (owner().is_worker_type_allowed(id)) {
 					int32_t const stock = supply_->stock_workers(id);
-					int32_t tdelta = WORKER_WITHOUT_COST_SPAWN_INTERVAL;
+					Duration tdelta = kCostlessWorkerSpawnInterval;
 
 					if (stock < 100) {
-						tdelta -= 4 * (100 - stock);
+						tdelta -= Duration(4 * (100 - stock));
 						insert_workers(id, 1);
 					} else if (stock > 100) {
-						tdelta -= 4 * (stock - 100);
-						if (tdelta < 10) {
-							tdelta = 10;
+						tdelta -= Duration(4 * (stock - 100));
+						if (tdelta.get() < 10) {
+							tdelta = Duration(10);
 						}
 						remove_workers(id, 1);
 					}
 
 					next_worker_without_cost_spawn_[i] = schedule_act(game, tdelta);
 				} else {
-					next_worker_without_cost_spawn_[i] = never();
+					next_worker_without_cost_spawn_[i] = Time();
 				}
 			}
 		}
@@ -826,13 +825,13 @@ void Warehouse::act(Game& game, uint32_t const data) {
 				}
 			}
 		}
-		next_military_act_ = schedule_act(game, 1000);
+		next_military_act_ = schedule_act(game, Duration(1000));
 	}
 
-	if (static_cast<int32_t>(next_stock_remove_act_ - gametime) <= 0) {
+	if (next_stock_remove_act_ <= gametime) {
 		check_remove_stock(game);
 
-		next_stock_remove_act_ = schedule_act(game, 4000);
+		next_stock_remove_act_ = schedule_act(game, Duration(4000));
 	}
 
 	// Update planned workers; this is to update the request amounts and
@@ -1359,9 +1358,9 @@ void Warehouse::update_all_planned_workers(Game& game) {
 }
 
 void Warehouse::enable_spawn(Game& game, uint8_t const worker_types_without_cost_index) {
-	assert(next_worker_without_cost_spawn_[worker_types_without_cost_index] == never());
+	assert(next_worker_without_cost_spawn_[worker_types_without_cost_index].is_invalid());
 	next_worker_without_cost_spawn_[worker_types_without_cost_index] =
-	   schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+	   schedule_act(game, kCostlessWorkerSpawnInterval);
 }
 
 void Warehouse::PlannedWorkers::cleanup() {

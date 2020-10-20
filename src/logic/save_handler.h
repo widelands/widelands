@@ -83,7 +83,7 @@ private:
 	int32_t autosave_interval_in_ms_;
 	int32_t number_of_rolls_;  // For rolling file update
 
-	void initialize(uint32_t gametime);
+	void initialize(uint32_t realtime);
 	bool roll_save_files(const std::string& filename, std::string* error);
 	bool check_next_tick(Widelands::Game& game, uint32_t realtime);
 };

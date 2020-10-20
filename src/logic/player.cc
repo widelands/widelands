@@ -451,10 +451,10 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 
 MessageId Player::add_message_with_timeout(Game& game,
                                            std::unique_ptr<Message> message,
-                                           uint32_t const timeout,
+                                           const Duration& timeout,
                                            uint32_t const radius) {
 	const Map& map = game.map();
-	uint32_t const gametime = game.get_gametime();
+	const Time& gametime = game.get_gametime();
 	Coords const position = message->position();
 	for (const auto& tmp_message : messages()) {
 		if (tmp_message.second->type() == message->type() &&
@@ -2060,4 +2060,6 @@ void Player::write_statistics(FileWrite& fw) const {
 		write_stats(ware_stocks_, ware_index);
 	}
 }
+
+constexpr Time Player::AiPersistentState::kNoExpedition;
 }  // namespace Widelands
