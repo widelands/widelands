@@ -87,7 +87,7 @@ bool FerryFleet::init(EditorGameBase& egbase) {
 bool FerryFleet::init(EditorGameBase& egbase, Waterway* waterway) {
 	MapObject::init(egbase);
 
-	request_ferry(egbase, waterway);
+	request_ferry(egbase, waterway, egbase.get_gametime());
 
 	return find_other_fleet(egbase);
 }
@@ -100,8 +100,8 @@ struct StepEvalFindFerryFleet {
 	int32_t estimate(Map& /* map */, FCoords /* pos */) const {
 		return 0;
 	}
-	int32_t
-	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+	int32_t stepcost(
+	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		return checkstep_->allowed(map, from, to, dir, CheckStep::StepId::stepNormal) ? 1 : -1;
 	}
 
@@ -178,7 +178,7 @@ bool FerryFleet::merge(EditorGameBase& egbase, FerryFleet* other) {
 
 	while (!other->pending_ferry_requests_.empty()) {
 		auto pair = other->pending_ferry_requests_.begin();
-		uint32_t time = pair->first;
+		Time time = pair->first;
 		Waterway* ww = pair->second;
 		assert(ww->get_fleet() == other);
 		// set_fleet() tells the associated waterway to remove this request from the other fleet
@@ -270,7 +270,9 @@ void FerryFleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
  * in the next call to act(). When a ferry is found, its destination will be set to the waterway.
  * Multiple requests will be treated first come first served.
  */
-void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime) {
+void FerryFleet::request_ferry(const EditorGameBase& egbase,
+                               Waterway* waterway,
+                               const Time& gametime) {
 	for (const auto& pair : pending_ferry_requests_) {
 		if (pair.second == waterway) {
 			if (waterway->get_fleet() != this) {
@@ -280,7 +282,8 @@ void FerryFleet::request_ferry(EditorGameBase& egbase, Waterway* waterway, int32
 			return;
 		}
 	}
-	pending_ferry_requests_.emplace(gametime < 0 ? egbase.get_gametime() : gametime, waterway);
+	pending_ferry_requests_.emplace(
+	   gametime.is_invalid() ? egbase.get_gametime() : gametime, waterway);
 	waterway->set_fleet(this);
 }
 
@@ -329,7 +332,7 @@ bool FerryFleet::empty() const {
 /**
  * Trigger an update of ferry scheduling
  */
-void FerryFleet::update(EditorGameBase& egbase, uint32_t tdelta) {
+void FerryFleet::update(EditorGameBase& egbase, const Duration& tdelta) {
 	if (act_pending_) {
 		return;
 	}
@@ -361,7 +364,7 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 		// when there are no ferries yet or by a new ferry when we can't offer
 		// employment yet. We can't handle it now, so we reschedule the act()
 		molog(game.get_gametime(), "FerryFleet::act: inactive, retry later\n");
-		return update(game, 5000);
+		return update(game, Duration(5000));
 	}
 
 	molog(game.get_gametime(), "FerryFleet::act\n");
@@ -412,7 +415,7 @@ void FerryFleet::act(Game& game, uint32_t /* data */) {
 		      "... there are %" PRIuS " waterways requesting a ferry we cannot satisfy yet\n",
 		      pending_ferry_requests_.size());
 		// try again later
-		return update(game, 5000);
+		return update(game, Duration(5000));
 	}
 }
 
@@ -426,7 +429,7 @@ void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 	}
 	for (const auto& pair : pending_ferry_requests_) {
 		molog(egbase.get_gametime(), "* Waterway %u (requested at %u)\n", pair.second->serial(),
-		      pair.first);
+		      pair.first.get());
 	}
 }
 
@@ -450,7 +453,7 @@ void FerryFleet::Loader::load(FileRead& fr) {
 
 	const uint32_t nrww = fr.unsigned_32();
 	for (uint32_t i = 0; i < nrww; ++i) {
-		const uint32_t gametime = fr.unsigned_32();
+		const Time gametime(fr);
 		const uint32_t serial = fr.unsigned_32();
 		pending_ferry_requests_.emplace(gametime, serial);
 	}
@@ -524,7 +527,7 @@ void FerryFleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 	}
 	fw.unsigned_32(pending_ferry_requests_.size());
 	for (const auto& temp_ww : pending_ferry_requests_) {
-		fw.unsigned_32(temp_ww.first);
+		temp_ww.first.save(fw);
 		fw.unsigned_32(mos.get_object_file_index(*temp_ww.second));
 	}
 }

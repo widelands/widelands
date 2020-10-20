@@ -453,7 +453,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		// a chance to move away first
 		wakeup_neighbours(game);
 		state.ivar1 = 0;
-		schedule_act(game, 25);
+		schedule_act(game, Duration(25));
 		return;
 	}
 
@@ -718,7 +718,7 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 	}
 }
 
-void Ship::set_economy(Game& game, Economy* e, WareWorker type) {
+void Ship::set_economy(const Game& game, Economy* e, WareWorker type) {
 	// Do not check here that the economy actually changed, because on loading
 	// we rely that wares really get reassigned our economy.
 
@@ -818,7 +818,7 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		// I (tiborb) failed to invoke this situation when testing so
 		// I am not sure if following line behaves allright
 		get_fleet()->update(game);
-		start_task_idle(game, descr().main_animation(), kFleetInterval);
+		start_task_idle(game, descr().main_animation(), kFleetInterval.get());
 	}
 }
 

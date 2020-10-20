@@ -60,12 +60,12 @@ const Bob::Task Ferry::taskUnemployed = {
    "unemployed", static_cast<Bob::Ptr>(&Ferry::unemployed_update), nullptr, nullptr, true};
 
 void Ferry::start_task_unemployed(Game& game) {
-	assert(unemployed_since_ == 0);
+	assert(unemployed_since_.get() == 0);
 	push_task(game, taskUnemployed);
 	unemployed_since_ = game.get_gametime();
 }
 
-constexpr uint32_t kUnemployedLifetime = 1000 * 60 * 10;  // 10 minutes
+constexpr Duration kUnemployedLifetime = Duration(1000 * 60 * 10);  // 10 minutes
 
 void Ferry::unemployed_update(Game& game, State&) {
 	if (get_signal().size()) {
@@ -74,19 +74,19 @@ void Ferry::unemployed_update(Game& game, State&) {
 		if (get_signal() == "row") {
 			assert(destination_);
 			signal_handled();
-			unemployed_since_ = 0;
+			unemployed_since_ = Time(0);
 			pop_task(game);
 			push_task(game, taskRow);
-			return schedule_act(game, 10);
+			return schedule_act(game, Duration(10));
 		}
 	}
 	if (destination_) {
 		// Sometimes (e.g. when reassigned directly from waterway servicing),
 		// the 'row' signal is consumed before we can receive it
-		unemployed_since_ = 0;
+		unemployed_since_ = Time(0);
 		pop_task(game);
 		push_task(game, taskRow);
-		return schedule_act(game, 10);
+		return schedule_act(game, Duration(10));
 	}
 
 	assert(game.get_gametime() >= unemployed_since_);
@@ -224,7 +224,7 @@ void Ferry::row_update(Game& game, State&) {
 		      "[row]: Can't find a path to the waterway! Ferry at %3dx%3d, Waterway at %3dx%3d\n",
 		      get_position().x, get_position().y, destination_->x, destination_->y);
 		// try again later
-		return schedule_act(game, 50);
+		return schedule_act(game, Duration(50));
 	}
 	return start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware(), this));
 }
@@ -263,7 +263,7 @@ bool Ferry::init_fleet() {
 	return fleet->init(egbase);
 }
 
-Waterway* Ferry::get_destination(Game& game) const {
+Waterway* Ferry::get_destination(const Game& game) const {
 	if (!destination_) {
 		return nullptr;
 	}
@@ -316,7 +316,7 @@ void Ferry::Loader::load(FileRead& fr) {
 			} else {
 				ferry.destination_.reset(nullptr);
 			}
-			ferry.unemployed_since_ = fr.unsigned_32();
+			ferry.unemployed_since_ = Time(fr);
 			ferry.fleet_ = nullptr;
 		} else {
 			throw UnhandledVersionError("Ferry", packet_version, kCurrentPacketVersion);
@@ -335,7 +335,7 @@ void Ferry::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) 
 		fw.signed_16(destination_->x);
 		fw.signed_16(destination_->y);
 	}
-	fw.unsigned_32(unemployed_since_);
+	unemployed_since_.save(fw);
 }
 
 Ferry::Loader* Ferry::create_loader() {

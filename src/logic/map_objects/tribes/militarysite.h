@@ -173,7 +173,7 @@ private:
 	/**
 	 * Next gametime where we should heal something.
 	 */
-	int32_t nexthealtime_;
+	Time nexthealtime_;
 
 	struct SoldierJob {
 		Soldier* soldier;
@@ -182,7 +182,7 @@ private:
 	};
 	std::vector<SoldierJob> soldierjobs_;
 	SoldierPreference soldier_preference_;
-	int32_t next_swap_soldiers_time_;
+	Time next_swap_soldiers_time_;
 	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_;
 };

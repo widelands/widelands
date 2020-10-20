@@ -341,7 +341,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			cr->resume();
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + Duration(100), std::move(cr)));
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -519,12 +519,12 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Queue first statistics calculation
-		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
-		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
+		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 
 	if (writereplay_ || writesyncstream_) {
@@ -591,7 +591,7 @@ void Game::think() {
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(ctrl_->get_frametime(), get_gametime_pointer());
+		cmdqueue().run_queue(Duration(ctrl_->get_frametime()), get_gametime_pointer());
 
 		// check if autosave is needed
 		savehandler_.think(*this);
@@ -833,27 +833,27 @@ void Game::send_player_enemyflagaction(const Flag& flag,
 	}
 }
 
-void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
+void Game::send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction) {
 	send_player_command(new CmdShipScoutDirection(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_ship_construct_port(Ship& ship, Coords coords) {
+void Game::send_player_ship_construct_port(const Ship& ship, Coords coords) {
 	send_player_command(new CmdShipConstructPort(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship& ship, IslandExploreDirection direction) {
+void Game::send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction) {
 	send_player_command(new CmdShipExploreIsland(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_sink_ship(Ship& ship) {
+void Game::send_player_sink_ship(const Ship& ship) {
 	send_player_command(
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_cancel_expedition_ship(Ship& ship) {
+void Game::send_player_cancel_expedition_ship(const Ship& ship) {
 	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }

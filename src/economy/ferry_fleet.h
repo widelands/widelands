@@ -62,7 +62,7 @@ struct FerryFleet : MapObject {
 	bool init(EditorGameBase&) override;
 	bool init(EditorGameBase&, Waterway*);
 	void cleanup(EditorGameBase&) override;
-	void update(EditorGameBase&, uint32_t tdelta = 100);
+	void update(EditorGameBase&, const Duration& tdelta = Duration(100));
 
 	void add_ferry(Ferry* ferry);
 	void remove_ferry(EditorGameBase& egbase, Ferry* ferry);
@@ -73,7 +73,7 @@ struct FerryFleet : MapObject {
 	uint32_t count_unattended_waterways() const;
 	bool has_ferry(const Waterway& ww) const;
 
-	void request_ferry(EditorGameBase& egbase, Waterway* waterway, int32_t gametime = -1);
+	void request_ferry(const EditorGameBase& egbase, Waterway* waterway, const Time&);
 	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
 	void cancel_ferry_request(Game& game, Waterway* waterway);
 
@@ -87,7 +87,7 @@ private:
 	bool merge(EditorGameBase& egbase, FerryFleet* other);
 
 	std::vector<Ferry*> ferries_;
-	std::multimap<uint32_t, Waterway*> pending_ferry_requests_;
+	std::multimap<Time, Waterway*> pending_ferry_requests_;
 
 	bool act_pending_;
 
@@ -101,7 +101,7 @@ protected:
 
 	private:
 		std::vector<uint32_t> ferries_;
-		std::multimap<uint32_t, uint32_t> pending_ferry_requests_;
+		std::multimap<Time, uint32_t> pending_ferry_requests_;
 	};
 
 public:

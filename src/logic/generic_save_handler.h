@@ -53,7 +53,7 @@ public:
 
 	explicit GenericSaveHandler(std::function<void(FileSystem&)>
 	                               do_save,  // function that actually saves data to the filesystem
-	                            std::string complete_filename,
+	                            const std::string& complete_filename,
 	                            FileSystem::Type type)
 	   : do_save_(do_save),
 	     complete_filename_(complete_filename),

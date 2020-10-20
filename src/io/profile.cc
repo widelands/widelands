@@ -99,7 +99,7 @@ int32_t Section::Value::get_int() const {
 	if (*endp) {
 		throw wexception("%s: '%s' is not an integer", get_name(), get_string());
 	}
-	int32_t const result = i;
+	int32_t const result = static_cast<int32_t>(i);
 	if (i != result) {
 		throw wexception("%s: '%s' is out of range", get_name(), get_string());
 	}

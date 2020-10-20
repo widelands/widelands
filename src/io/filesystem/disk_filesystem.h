@@ -37,8 +37,8 @@ public:
 
 	void* load(const std::string& fname, size_t& length) override;
 
-	void write(const std::string& fname, void const* data, int32_t length, bool append);
-	void write(const std::string& fname, void const* data, int32_t length) override {
+	void write(const std::string& fname, void const* data, size_t length, bool append);
+	void write(const std::string& fname, void const* data, size_t length) override {
 		write(fname, data, length, false);
 	}
 
