@@ -419,7 +419,8 @@ int LuaPlayer::send_to_inbox(lua_State* L) {
    .. method:: message_box(title, message[, opts])
 
       Shows a message box to the player. While the message box is displayed the
-      game is set to pause.
+      game is set to pause. Usually you want to use :meth:`campaign_message_box`
+      which has more options, e.g. easier positioning of message boxes.
 
       :arg title: title of the message
       :type title: :class:`string`
@@ -1156,7 +1157,7 @@ InboxMessage
 
 .. class:: InboxMessage
 
-   This represents a message in the Message Box of a given user.
+   This represents a message in the inbox of a player.
 */
 const char LuaInboxMessage::className[] = "InboxMessage";
 const MethodType<LuaInboxMessage> LuaInboxMessage::Methods[] = {
