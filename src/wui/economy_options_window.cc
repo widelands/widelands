@@ -188,7 +188,7 @@ void EconomyOptionsWindow::create(InteractiveGameBase& igbase, const Widelands::
 	}
 	if (!window_open) {
 		new EconomyOptionsWindow(&igbase, ware_economy, worker_economy,
-								 igbase.can_act(ware_economy->owner().player_number()));
+		                         igbase.can_act(ware_economy->owner().player_number()));
 	}
 }
 
