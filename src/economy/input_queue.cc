@@ -118,7 +118,7 @@ void InputQueue::set_max_fill(Quantity size) {
 	update();
 }
 
-void InputQueue::set_consume_interval(const uint32_t time) {
+void InputQueue::set_consume_interval(const Duration& time) {
 	consume_interval_ = time;
 
 	update();
@@ -151,7 +151,7 @@ void InputQueue::read(FileRead& fr,
 			}
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
-			consume_interval_ = fr.unsigned_32();
+			consume_interval_ = Duration(fr);
 			if (fr.unsigned_8()) {
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
 				request_->read(fr, game, mol, tribes_lookup_table);
@@ -188,7 +188,7 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);
-	fw.signed_32(consume_interval_);
+	consume_interval_.save(fw);
 	if (request_) {
 		fw.unsigned_8(1);
 		request_->write(fw, game, mos);

@@ -186,7 +186,7 @@ You can combine these units in descending order as you please. Examples:
 */
 Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
 	// Convert unit part into milliseconds
-	auto as_ms = [](Duration number, const std::string& unit) {
+	auto as_ms = [](uint32_t number, const std::string& unit) {
 		if (unit == "s") {
 			return number * 1000;
 		}
@@ -203,7 +203,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		std::smatch match;
 		std::regex one_unit("^(\\d+)(s|m|ms)$");
 		if (std::regex_search(input, match, one_unit)) {
-			return as_ms(read_positive(match[1], endless()), match[2]);
+			return Duration(as_ms(read_positive(match[1], Duration().get()), match[2]));
 		}
 		std::regex two_units("^(\\d+)(m|s)(\\d+)(s|ms)$");
 		if (std::regex_search(input, match, two_units)) {
@@ -211,15 +211,15 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 				std::string unit(match[2]);
 				throw GameDataError("has duplicate unit '%s'", unit.c_str());
 			}
-			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
-			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
+			const Duration part1(as_ms(read_positive(match[1], Duration().get()), match[2]));
+			const Duration part2(as_ms(read_positive(match[3], Duration().get()), match[4]));
 			return part1 + part2;
 		}
 		std::regex three_units("^(\\d+)(m)(\\d+)(s)(\\d+)(ms)$");
 		if (std::regex_search(input, match, three_units)) {
-			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
-			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
-			const Duration part3 = as_ms(read_positive(match[5], endless()), match[6]);
+			const Duration part1(as_ms(read_positive(match[1], Duration().get()), match[2]));
+			const Duration part2(as_ms(read_positive(match[3], Duration().get()), match[4]));
+			const Duration part3(as_ms(read_positive(match[5], Duration().get()), match[6]));
 			return part1 + part2 + part3;
 		}
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
@@ -227,7 +227,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		if (std::regex_match(input, without_unit)) {
 			log_warn("Duration '%s' without unit in %s's program is deprecated", input.c_str(),
 			         descr.name().c_str());
-			return read_positive(input, endless());
+			return Duration(read_positive(input, Duration().get()));
 		}
 	} catch (const WException& e) {
 		throw GameDataError(

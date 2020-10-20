@@ -764,7 +764,7 @@ void ProductionSite::request_worker_callback(
 void ProductionSite::act(Game& game, uint32_t const data) {
 	Building::act(game, data);
 
-	if (program_timer_ && static_cast<int32_t>(game.get_gametime() - program_time_) >= 0) {
+	if (program_timer_ && game.get_gametime() >= program_time_) {
 		program_timer_ = false;
 
 		if (!can_start_working()) {
@@ -813,7 +813,7 @@ void ProductionSite::program_act(Game& game) {
 	if (is_stopped_ && state.ip == 0) {
 		program_end(game, ProgramResult::kFailed);
 		program_timer_ = true;
-		program_time_ = schedule_act(game, 20000);
+		program_time_ = schedule_act(game, Duration(20000));
 	} else {
 		(*state.program)[state.ip].execute(game, *this);
 	}
@@ -987,7 +987,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 /**
  * Advance the program to the next step.
  */
-void ProductionSite::program_step(Game& game, uint32_t const delay, ProgramResult const phase) {
+void ProductionSite::program_step(Game& game, const Duration& delay, ProgramResult const phase) {
 	State& state = top_state();
 	++state.ip;
 	state.phase = phase;
@@ -1008,11 +1008,11 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 	stack_.push_back(state);
 
 	program_timer_ = true;
-	uint32_t tdelta = 10;
+	Duration tdelta(10);
 	FailedSkippedPrograms::const_iterator i = failed_skipped_programs_.find(program_name);
 	if (i != failed_skipped_programs_.end()) {
-		uint32_t const gametime = game.get_gametime();
-		uint32_t const earliest_allowed_start_time = i->second + 10000;
+		const Time& gametime = game.get_gametime();
+		const Time& earliest_allowed_start_time = i->second + Duration(10000);
 		if (gametime + tdelta < earliest_allowed_start_time) {
 			tdelta = earliest_allowed_start_time - gametime;
 		}
@@ -1036,7 +1036,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		top_state().phase = result;
 	}
 
-	const uint32_t current_duration = game.get_gametime() - last_program_end_time;
+	const Duration current_duration = game.get_gametime() - last_program_end_time;
 	assert(game.get_gametime() >= last_program_end_time);
 	last_program_end_time = game.get_gametime();
 
@@ -1092,7 +1092,7 @@ void ProductionSite::notify_player(Game& game, uint8_t minutes, FailNotification
 			assert(!descr().out_of_resource_message().empty());
 			send_message(game, Message::Type::kEconomy, descr().out_of_resource_title(),
 			             descr().icon_filename(), descr().out_of_resource_heading(),
-			             descr().out_of_resource_message(), true, minutes * 60000, 0);
+			             descr().out_of_resource_message(), true, Duration(minutes * 60000), 0);
 		}
 
 		// The following sends "out of resources" messages to be picked up by AI
@@ -1152,17 +1152,18 @@ void ProductionSite::set_default_anim(const std::string& anim) {
 	default_anim_ = anim;
 }
 
-constexpr uint32_t kStatsEntireDuration = 5 * 60 * 1000;  // statistic evaluation base
-constexpr uint32_t kStatsDurationCap = 180 * 1000;  // This is highest allowed program duration
+constexpr Duration kStatsEntireDuration = Duration(5 * 60 * 1000);  // statistic evaluation base
+constexpr Duration kStatsDurationCap =
+   Duration(180 * 1000);  // This is highest allowed program duration
 
-void ProductionSite::update_actual_statistics(uint32_t duration, const bool produced) {
+void ProductionSite::update_actual_statistics(Duration duration, const bool produced) {
 	// just for case something went very wrong...
 	if (duration > kStatsDurationCap) {
 		duration = kStatsDurationCap;
 	}
-	const uint32_t past_duration = kStatsEntireDuration - duration;
-	actual_percent_ =
-	   (actual_percent_ * past_duration + produced * duration * 1000) / kStatsEntireDuration;
+	const Duration past_duration = kStatsEntireDuration - duration;
+	actual_percent_ = (actual_percent_ * past_duration.get() + produced * duration.get() * 1000) /
+	                  kStatsEntireDuration.get();
 	assert(actual_percent_ <= 1000);  // be sure we do not go above 100 %
 }
 

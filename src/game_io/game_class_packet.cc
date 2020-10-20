@@ -34,7 +34,7 @@ void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			game.gametime_ = fr.unsigned_32();
+			game.gametime_ = Time(fr);
 			game.scenario_difficulty_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
@@ -60,7 +60,7 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 
 	// EDITOR GAME CLASS
 	// Write gametime
-	fw.unsigned_32(game.gametime_);
+	game.gametime_.save(fw);
 
 	fw.unsigned_32(game.scenario_difficulty_);
 

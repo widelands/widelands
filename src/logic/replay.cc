@@ -41,13 +41,13 @@ namespace Widelands {
 constexpr uint32_t kReplayKnownToDesync = 0x2E21A100;
 constexpr uint32_t kReplayMagic = 0x2E21A101;
 constexpr uint8_t kCurrentPacketVersion = 3;
-constexpr uint32_t kSyncInterval = 200;
+constexpr Duration kSyncInterval = Duration(200);
 
 enum { pkt_end = 2, pkt_playercommand = 3, pkt_syncreport = 4 };
 
 class CmdReplaySyncRead : public Command {
 public:
-	CmdReplaySyncRead(const uint32_t init_duetime, const Md5Checksum& hash)
+	CmdReplaySyncRead(const Time& init_duetime, const Md5Checksum& hash)
 	   : Command(init_duetime), hash_(hash) {
 	}
 
@@ -63,7 +63,7 @@ public:
 			             "REPLAY: Lost synchronization at time %u\n"
 			             "I have:     %s\n"
 			             "Replay has: %s\n",
-			             duetime(), myhash.str().c_str(), hash_.str().c_str());
+			             duetime().get(), myhash.str().c_str(), hash_.str().c_str());
 
 			// In case syncstream logging is on, save it for analysis
 			game.save_syncstream(true);
@@ -81,7 +81,7 @@ private:
  * Load the savegame part of the given replay and open the command log.
  */
 ReplayReader::ReplayReader(Game& game, const std::string& filename) {
-	replaytime_ = 0;
+	replaytime_ = Time(0);
 
 	{
 		GameLoader gl(filename + kSavegameExtension, game);
@@ -130,12 +130,12 @@ ReplayReader::~ReplayReader() {
  * \return a \ref Command that should be enqueued in the command queue
  * or 0 if there are no remaining commands before the given time.
  */
-Command* ReplayReader::get_next_command(const uint32_t time) {
+Command* ReplayReader::get_next_command(const Time& time) {
 	if (!cmdlog_) {
 		return nullptr;
 	}
 
-	if (static_cast<int32_t>(replaytime_ - time) > 0) {
+	if (replaytime_ > time) {
 		return nullptr;
 	}
 
@@ -144,9 +144,9 @@ Command* ReplayReader::get_next_command(const uint32_t time) {
 
 		switch (pkt) {
 		case pkt_playercommand: {
-			replaytime_ = cmdlog_->unsigned_32();
+			replaytime_ = Time(cmdlog_->unsigned_32());
 
-			uint32_t duetime = cmdlog_->unsigned_32();
+			Time duetime(cmdlog_->unsigned_32());
 			uint32_t cmdserial = cmdlog_->unsigned_32();
 			PlayerCommand& cmd = *PlayerCommand::deserialize(*cmdlog_);
 			cmd.set_duetime(duetime);
@@ -156,7 +156,7 @@ Command* ReplayReader::get_next_command(const uint32_t time) {
 		}
 
 		case pkt_syncreport: {
-			uint32_t duetime = cmdlog_->unsigned_32();
+			Time duetime(cmdlog_->unsigned_32());
 			Md5Checksum hash;
 			cmdlog_->data(hash.data, sizeof(hash.data));
 
@@ -164,8 +164,8 @@ Command* ReplayReader::get_next_command(const uint32_t time) {
 		}
 
 		case pkt_end: {
-			uint32_t endtime = cmdlog_->unsigned_32();
-			log_err_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime);
+			Time endtime(cmdlog_->unsigned_32());
+			log_err_time(time, "REPLAY: End of replay (gametime: %u)\n", endtime.get());
 			delete cmdlog_;
 			cmdlog_ = nullptr;
 			return nullptr;
@@ -196,7 +196,7 @@ bool ReplayReader::end_of_replay() {
  */
 class CmdReplaySyncWrite : public Command {
 public:
-	explicit CmdReplaySyncWrite(const uint32_t init_duetime) : Command(init_duetime) {
+	explicit CmdReplaySyncWrite(const Time& init_duetime) : Command(init_duetime) {
 	}
 
 	QueueCommandTypes id() const override {
@@ -252,7 +252,7 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
  */
 ReplayWriter::~ReplayWriter() {
 	cmdlog_->unsigned_8(pkt_end);
-	cmdlog_->unsigned_32(game_.get_gametime());
+	cmdlog_->unsigned_32(game_.get_gametime().get());
 
 	delete cmdlog_;
 }
@@ -265,8 +265,8 @@ void ReplayWriter::send_player_command(PlayerCommand* cmd) {
 	// The semantics of the timestamp is
 	// "There will be no more player commands that are due *before* the
 	// given time".
-	cmdlog_->unsigned_32(game_.get_gametime());
-	cmdlog_->unsigned_32(cmd->duetime());
+	cmdlog_->unsigned_32(game_.get_gametime().get());
+	cmdlog_->unsigned_32(cmd->duetime().get());
 	cmdlog_->unsigned_32(cmd->cmdserial());
 	cmd->serialize(*cmdlog_);
 
@@ -278,7 +278,7 @@ void ReplayWriter::send_player_command(PlayerCommand* cmd) {
  */
 void ReplayWriter::send_sync(const Md5Checksum& hash) {
 	cmdlog_->unsigned_8(pkt_syncreport);
-	cmdlog_->unsigned_32(game_.get_gametime());
+	cmdlog_->unsigned_32(game_.get_gametime().get());
 	cmdlog_->data(hash.data, sizeof(hash.data));
 	cmdlog_->flush();
 }
