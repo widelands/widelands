@@ -38,7 +38,7 @@ class GameController;
 namespace Widelands {
 
 /// How often are statistics to be sampled.
-constexpr uint32_t kStatisticsSampleTime = 30000;
+constexpr Duration kStatisticsSampleTime = Duration(30 * 1000);
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 

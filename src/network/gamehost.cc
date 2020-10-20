@@ -425,7 +425,7 @@ struct Client {
 	std::string build_id;
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
-	int32_t time;  // last time report
+	Time time;  // last time report
 	uint32_t desiredspeed;
 	time_t hung_since;
 	/// The delta time where the last information about the hung client was sent to the other clients
@@ -454,11 +454,11 @@ struct GameHostImpl {
 
 	/// If we were to send out a plain networktime packet, this would be the
 	/// time. However, we have not yet committed to this networktime.
-	int32_t pseudo_networktime;
+	Time pseudo_networktime;
 	int32_t last_heartbeat;
 
 	/// The networktime we committed to by sending it across the network.
-	int32_t committed_networktime;
+	Time committed_networktime;
 
 	/// This is the time for local simulation
 	NetworkTime time;
@@ -480,7 +480,7 @@ struct GameHostImpl {
 
 	/// \c true if a syncreport is currently in flight
 	bool syncreport_pending;
-	int32_t syncreport_time;
+	Time syncreport_time;
 	Md5Checksum syncreport;
 	bool syncreport_arrived;
 
@@ -536,12 +536,12 @@ GameHost::GameHost(const std::string& playername, bool internet)
 		d->promoter.reset(new LanGamePromoter());
 	}
 	d->game = nullptr;
-	d->pseudo_networktime = 0;
+	d->pseudo_networktime = Time(0);
 	d->waiting = true;
 	d->networkspeed = 1000;
 	d->localdesiredspeed = 1000;
 	d->syncreport_pending = false;
-	d->syncreport_time = 0;
+	d->syncreport_time = Time(0);
 
 	d->settings.tribes = Widelands::get_all_tribeinfos();
 	set_multiplayer_game_settings();
@@ -709,7 +709,8 @@ void GameHost::run() {
 		d->committed_networktime = d->pseudo_networktime;
 
 		for (Client& client : d->clients) {
-			client.time = d->committed_networktime - 1;
+			client.time =
+			   d->committed_networktime - Duration(d->committed_networktime.get() > 0 ? 1 : 0);
 		}
 
 		// The call to check_hung_clients ensures that the game leaves the
@@ -728,7 +729,7 @@ void GameHost::run() {
 		}
 		clear_computer_players();
 	} catch (const std::exception& e) {
-		log_err("FATAL ERROR: %s", e.what());
+		log_err("GameHost received FATAL ERROR %s", e.what());
 		WLApplication::emergency_save(game);
 		clear_computer_players();
 		d->game = nullptr;
@@ -763,20 +764,20 @@ void GameHost::think() {
 
 		if (!d->waiting) {
 			int32_t diff = (delta * d->networkspeed) / 1000;
-			d->pseudo_networktime += diff;
+			d->pseudo_networktime.increment(Duration(diff));
 		}
 
 		d->time.think(real_speed());  // must be called even when d->waiting
 
 		if (d->pseudo_networktime != d->committed_networktime) {
-			if (d->pseudo_networktime - d->committed_networktime < 0) {
+			if (d->pseudo_networktime < d->committed_networktime) {
 				d->pseudo_networktime = d->committed_networktime;
 			} else if (curtime - d->last_heartbeat >= SERVER_TIMESTAMP_INTERVAL) {
 				d->last_heartbeat = curtime;
 
 				SendPacket packet;
 				packet.unsigned_8(NETCMD_TIME);
-				packet.signed_32(d->pseudo_networktime);
+				packet.unsigned_32(d->pseudo_networktime.get());
 				broadcast(packet);
 
 				committed_network_time(d->pseudo_networktime);
@@ -796,16 +797,16 @@ void GameHost::send_player_command(Widelands::PlayerCommand* pc) {
 }
 
 void GameHost::do_send_player_command(Widelands::PlayerCommand* pc) {
-	pc->set_duetime(d->committed_networktime + 1);
+	pc->set_duetime(d->committed_networktime + Duration(1));
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_PLAYERCOMMAND);
-	packet.signed_32(pc->duetime());
+	packet.unsigned_32(pc->duetime().get());
 	pc->serialize(packet);
 	broadcast(packet);
 	d->game->enqueue_command(pc);
 
-	committed_network_time(d->committed_networktime + 1);
+	committed_network_time(d->committed_networktime + Duration(1));
 }
 
 /**
@@ -1005,7 +1006,7 @@ void GameHost::send_system_message_code(const std::string& code,
 	NoteThreadSafeFunction::instantiate([this, &msg]() { d->chat.receive(msg); }, true);
 }
 
-int32_t GameHost::get_frametime() {
+Duration GameHost::get_frametime() {
 	return d->time.time() - d->game->get_gametime();
 }
 
@@ -1799,41 +1800,41 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	send_system_message_code("CLIENT_HAS_JOINED_GAME", effective_name);
 }
 
-void GameHost::committed_network_time(int32_t const time) {
-	assert(time - d->committed_networktime > 0);
+void GameHost::committed_network_time(const Time& time) {
+	assert(time > d->committed_networktime);
 
 	d->committed_networktime = time;
 	d->time.receive(time);
 
 	if (!d->syncreport_pending &&
-	    d->committed_networktime - d->syncreport_time >= SYNCREPORT_INTERVAL) {
+	    d->committed_networktime - d->syncreport_time >= Duration(SYNCREPORT_INTERVAL)) {
 		request_sync_reports();
 	}
 }
 
-void GameHost::receive_client_time(uint32_t const number, int32_t const time) {
+void GameHost::receive_client_time(uint32_t const number, const Time& time) {
 	assert(number < d->clients.size());
 
 	Client& client = d->clients.at(number);
 
-	if (time - client.time < 0) {
+	if (time < client.time) {
 		throw DisconnectException("BACKWARDS_RUNNING_TIME");
 	}
-	if (d->committed_networktime - time < 0) {
+	if (d->committed_networktime < time) {
 		throw DisconnectException("SIMULATING_BEYOND_TIME");
 	}
 	if (d->syncreport_pending && !client.syncreport_arrived) {
-		if (time - d->syncreport_time > 0) {
+		if (time > d->syncreport_time) {
 			throw DisconnectException("CLIENT_SYNC_REP_TIMEOUT");
 		}
 	}
 
 	client.time = time;
-	log_info("[Host]: Client %i: Time %i\n", number, time);
+	log_info("[Host]: Client %i: Time %i\n", number, time.get());
 
 	if (d->waiting) {
-		log_info("[Host]: Client %i reports time %i (networktime = %i) during hang\n", number, time,
-		         d->committed_networktime);
+		log_info("[Host]: Client %i reports time %i (networktime = %i) during hang\n", number,
+		         time.get(), d->committed_networktime.get());
 		check_hung_clients();
 	}
 }
@@ -1849,16 +1850,15 @@ void GameHost::check_hung_clients() {
 			continue;
 		}
 
-		int32_t const delta = d->committed_networktime - d->clients.at(i).time;
+		const Duration delta = d->committed_networktime - d->clients.at(i).time;
 
-		if (delta == 0) {
+		if (delta.get() == 0) {
 			// reset the hung_since time
 			d->clients.at(i).hung_since = 0;
 		} else {
 			assert(d->game != nullptr);
 			++nrdelayed;
-			if (delta >
-			    (5 * CLIENT_TIMESTAMP_INTERVAL * static_cast<int32_t>(d->networkspeed)) / 1000) {
+			if (delta > Duration(5 * CLIENT_TIMESTAMP_INTERVAL * d->networkspeed / 1000)) {
 				log_info("[Host]: Client %i (%s) hung\n", i,
 				         d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
@@ -1986,18 +1986,18 @@ void GameHost::request_sync_reports() {
 
 	d->syncreport_pending = true;
 	d->syncreport_arrived = false;
-	d->syncreport_time = d->committed_networktime + 1;
+	d->syncreport_time = d->committed_networktime + Duration(1);
 
 	for (Client& client : d->clients) {
 		client.syncreport_arrived = false;
 	}
 
-	log_info("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
+	log_info("[Host]: Requesting sync reports for time %i\n", d->syncreport_time.get());
 	d->game->report_sync_request();
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_SYNCREQUEST);
-	packet.signed_32(d->syncreport_time);
+	packet.unsigned_32(d->syncreport_time.get());
 	broadcast(packet);
 
 	d->game->enqueue_command(
@@ -2023,7 +2023,7 @@ void GameHost::check_sync_reports() {
 	}
 
 	d->syncreport_pending = false;
-	log_info("[Host]: comparing syncreports for time %i\n", d->syncreport_time);
+	log_info("[Host]: comparing syncreports for time %i\n", d->syncreport_time.get());
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		Client& client = d->clients.at(i);
@@ -2055,7 +2055,7 @@ void GameHost::check_sync_reports() {
 }
 
 void GameHost::sync_report_callback() {
-	assert(d->game->get_gametime() == static_cast<uint32_t>(d->syncreport_time));
+	assert(d->game->get_gametime() == d->syncreport_time);
 
 	d->syncreport = d->game->get_sync_hash();
 	d->syncreport_arrived = true;
@@ -2244,17 +2244,17 @@ void GameHost::handle_nettime(uint32_t const client_num, RecvPacket& r) {
 	if (!d->game) {
 		throw DisconnectException("TIME_SENT_NOT_READY");
 	}
-	receive_client_time(client_num, r.signed_32());
+	receive_client_time(client_num, Time(r.unsigned_32()));
 }
 
 void GameHost::handle_playercommmand(uint32_t const client_num, Client& client, RecvPacket& r) {
 	if (!d->game) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	}
-	int32_t time = r.signed_32();
+	Time time(r.unsigned_32());
 	Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(r);
-	log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %i\n", client_num,
-	         client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time);
+	log_info("[Host]: Client %u (%u) sent player command %u for %u, time = %u\n", client_num,
+	         client.playernum, static_cast<unsigned int>(plcmd->id()), plcmd->sender(), time.get());
 	if (plcmd->sender() != client.playernum + 1) {
 		throw DisconnectException("PLAYERCMD_FOR_OTHER");
 	}
@@ -2265,7 +2265,7 @@ void GameHost::handle_syncreport(uint32_t const client_num, Client& client, Recv
 	if (!d->game || !d->syncreport_pending || client.syncreport_arrived) {
 		throw DisconnectException("UNEXPECTED_SYNC_REP");
 	}
-	int32_t time = r.signed_32();
+	Time time(r.unsigned_32());
 	r.data(client.syncreport.data, 16);
 	client.syncreport_arrived = true;
 	receive_client_time(client_num, time);

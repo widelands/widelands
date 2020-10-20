@@ -27,6 +27,7 @@ wl_library(game_io
     base_macros
     base_multithreading
     base_scoped_timer
+    base_times
     build_info
     economy
     graphic_image_io

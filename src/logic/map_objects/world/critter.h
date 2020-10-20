@@ -121,7 +121,7 @@ private:
 	static Task const taskRoam;
 	static Task const taskProgram;
 
-	uint32_t creation_time_;
+	Time creation_time_;
 };
 }  // namespace Widelands
 

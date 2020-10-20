@@ -48,7 +48,7 @@
 
 namespace Widelands {
 
-static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
+static const Duration kBuildingLeaveInterval = Duration(1000);
 /**
  * The contents of 'table' are documented in doc/sphinx/source/lua_tribes_buildings.rst.org
  */
@@ -662,11 +662,11 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 	}
 
 	// Check time and queue
-	uint32_t const time = game.get_gametime();
+	const Time& time = game.get_gametime();
 
 	if (leave_queue_.empty()) {
 		if (leave_time_ <= time) {
-			leave_time_ = time + BUILDING_LEAVE_INTERVAL;
+			leave_time_ = time + kBuildingLeaveInterval;
 			return true;
 		}
 
@@ -699,7 +699,7 @@ Advance the leave queue.
 ===============
 */
 void Building::act(Game& game, uint32_t const data) {
-	uint32_t const time = game.get_gametime();
+	const Time& time = game.get_gametime();
 
 	if (leave_time_ <= time) {
 		bool wakeup = false;
@@ -714,7 +714,7 @@ void Building::act(Game& game, uint32_t const data) {
 				leave_allow_ = worker;
 
 				if (worker->wakeup_leave_building(game, *this)) {
-					leave_time_ = time + BUILDING_LEAVE_INTERVAL;
+					leave_time_ = time + kBuildingLeaveInterval;
 					wakeup = true;
 					break;
 				}
@@ -748,28 +748,29 @@ bool Building::fetch_from_flag(Game& game) {
 	return false;
 }
 
-void Building::draw(uint32_t gametime,
+void Building::draw(const Time& gametime,
                     const InfoToDraw info_to_draw,
                     const Vector2f& point_on_dst,
                     const Widelands::Coords& coords,
                     const float scale,
                     RenderTarget* dst) {
+	const Time t((gametime - animstart_).get());
+
 	if (was_immovable_) {
 		if (info_to_draw & InfoToDraw::kShowBuildings) {
-			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
-			                    gametime - animstart_, &get_owner()->get_playercolor());
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
+			                    &get_owner()->get_playercolor());
 		} else {
-			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
-			                    gametime - animstart_, nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
+			                    nullptr, kBuildingSilhouetteOpacity);
 		}
 	}
 
 	if (info_to_draw & InfoToDraw::kShowBuildings) {
-		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_,
-		                    &get_owner()->get_playercolor());
+		dst->blit_animation(point_on_dst, coords, scale, anim_, t, &get_owner()->get_playercolor());
 	} else {
-		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_, nullptr,
-		                    kBuildingSilhouetteOpacity);
+		dst->blit_animation(
+		   point_on_dst, coords, scale, anim_, t, nullptr, kBuildingSilhouetteOpacity);
 	}
 
 	//  door animation?
@@ -848,9 +849,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	      flag_->get_position().y);
 
 	molog(egbase.get_gametime(), "anim: %s\n", descr().get_animation_name(anim_).c_str());
-	molog(egbase.get_gametime(), "animstart: %i\n", animstart_);
+	molog(egbase.get_gametime(), "animstart: %i\n", animstart_.get());
 
-	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_);
+	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_.get());
 
 	molog(egbase.get_gametime(), "leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF
@@ -928,7 +929,7 @@ void Building::send_message(Game& game,
                             const std::string& heading,
                             const std::string& description,
                             bool link_to_building_lifetime,
-                            uint32_t throttle_time,
+                            const Duration& throttle_time,
                             uint32_t throttle_radius) {
 	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
 		return;
@@ -942,7 +943,7 @@ void Building::send_message(Game& game,
 	                                         heading, rt_description, get_position(),
 	                                         (link_to_building_lifetime ? serial_ : 0)));
 
-	if (throttle_time) {
+	if (throttle_time.get() > 0) {
 		get_owner()->add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
 	} else {
 		get_owner()->add_message(game, std::move(msg));

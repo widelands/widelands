@@ -65,7 +65,7 @@ void GameCmdQueuePacket::read(FileSystem& fs, Game& game, MapObjectLoader* const
 
 				item.cmd = &cmd;
 
-				cmdq.cmds_[cmd.duetime() % kCommandQueueBucketSize].push(item);
+				cmdq.cmds_[cmd.duetime().get() % kCommandQueueBucketSize].push(item);
 				++cmdq.ncmds_;
 			}
 		} else {
@@ -96,12 +96,12 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 	// Write all commands
 
 	// Find all the items in the current cmdqueue
-	uint32_t time = game.get_gametime();
+	Time time = game.get_gametime();
 	size_t nhandled = 0;
 
 	while (nhandled < cmdq.ncmds_) {
 		// Make a copy, so we can pop stuff
-		std::priority_queue<CmdQueue::CmdItem> p = cmdq.cmds_[time % kCommandQueueBucketSize];
+		std::priority_queue<CmdQueue::CmdItem> p = cmdq.cmds_[time.get() % kCommandQueueBucketSize];
 
 		while (!p.empty()) {
 			const CmdQueue::CmdItem& it = p.top();
@@ -128,7 +128,7 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 			// DONE: next command
 			p.pop();
 		}
-		++time;
+		time.increment();
 	}
 
 	fw.unsigned_16(0);  // end of command queue

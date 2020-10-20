@@ -347,7 +347,7 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
                                                              SoldierPreference::kRookies),
      soldier_upgrade_try_(false),
      doing_upgrade_request_(false) {
-	next_swap_soldiers_time_ = 0;
+	next_swap_soldiers_time_ = Time(0);
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
@@ -418,9 +418,9 @@ bool MilitarySite::init(EditorGameBase& egbase) {
 	update_soldier_request();
 
 	//  schedule the first healing
-	nexthealtime_ = egbase.get_gametime() + 1000;
+	nexthealtime_ = egbase.get_gametime() + Duration(1000);
 	if (game) {
-		schedule_act(*game, 1000);
+		schedule_act(*game, Duration(1000));
 	}
 	return true;
 }
@@ -723,7 +723,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	Building::act(game, data);
 
-	const int32_t timeofgame = game.get_gametime();
+	const Time& timeofgame = game.get_gametime();
 	if (normal_soldier_request_ && upgrade_soldier_request_) {
 		throw wexception(
 		   "MilitarySite::act: Two soldier requests are ongoing -- should never happen!\n");
@@ -735,7 +735,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	// TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > next_swap_soldiers_time_) {
-		next_swap_soldiers_time_ = timeofgame + (soldier_upgrade_try_ ? 20000 : 100000);
+		next_swap_soldiers_time_ = timeofgame + Duration(soldier_upgrade_try_ ? 20000 : 100000);
 		update_soldier_request();
 	}
 
@@ -780,8 +780,8 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 			soldier_to_heal->heal(total_heal);
 		}
 
-		nexthealtime_ = timeofgame + 1000;
-		schedule_act(game, 1000);
+		nexthealtime_ = timeofgame + Duration(1000);
+		schedule_act(game, Duration(1000));
 	}
 }
 
@@ -891,7 +891,8 @@ void MilitarySite::notify_player(Game& game, bool const discovered) {
 	send_message(game, Message::Type::kWarfareUnderAttack,
 	             /** TRANSLATORS: Militarysite is being attacked */
 	             pgettext("building", "Attack!"), descr().icon_filename(), _("You are under attack"),
-	             discovered ? descr().aggressor_str_ : descr().attack_str_, false, 60 * 1000, 5);
+	             discovered ? descr().aggressor_str_ : descr().attack_str_, false,
+	             Duration(60 * 1000), 5);
 }
 
 /*
@@ -1027,6 +1028,6 @@ const BuildingSettings* MilitarySite::create_building_settings() const {
 
 void MilitarySite::set_soldier_preference(SoldierPreference p) {
 	soldier_preference_ = p;
-	next_swap_soldiers_time_ = 0;
+	next_swap_soldiers_time_ = Time(0);
 }
 }  // namespace Widelands

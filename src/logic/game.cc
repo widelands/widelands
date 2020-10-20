@@ -342,7 +342,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			cr->resume();
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + Duration(100), std::move(cr)));
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -520,12 +520,12 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Queue first statistics calculation
-		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
-		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
+		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 
 	if (writereplay_ || writesyncstream_) {
@@ -592,7 +592,7 @@ void Game::think() {
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(ctrl_->get_frametime(), get_gametime_pointer());
+		cmdqueue().run_queue(Duration(ctrl_->get_frametime()), get_gametime_pointer());
 
 		// check if autosave is needed
 		savehandler_.think(*this);
@@ -716,11 +716,11 @@ void Game::send_player_command(PlayerCommand* pc) {
 	// clients, nor written to the replay. If multithreading has caused the
 	// command's duetime to lie in the past, we can just safely increase it.
 	if (pc->duetime() <= get_gametime()) {
-		const uint32_t new_time = get_gametime() + 1;
+		const Time new_time = get_gametime() + Duration(1);
 		if (g_verbose) {
 			log_info_time(get_gametime(),
 			              "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
-			              pc->duetime(), new_time, new_time - pc->duetime());
+			              pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
 		}
 		pc->set_duetime(new_time);
 	}

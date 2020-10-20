@@ -31,7 +31,7 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define REFRESH_TIME 5000
+constexpr Duration kRefreshInterval = Duration(5000);
 
 // Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
@@ -173,7 +173,7 @@ Update the map_view_ if we're tracking something.
 void WatchWindow::think() {
 	UI::Window::think();
 
-	if ((game().get_gametime() - last_visit_) > REFRESH_TIME) {
+	if ((game().get_gametime() - last_visit_) > kRefreshInterval) {
 		last_visit_ = game().get_gametime();
 		next_view();
 		return;

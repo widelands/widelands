@@ -143,6 +143,7 @@ wl_library(logic_map_objects
     base_math
     base_multithreading
     base_scoped_timer
+    base_times
     economy
     graphic
     graphic_animation
