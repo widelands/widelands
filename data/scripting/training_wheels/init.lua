@@ -69,7 +69,7 @@
 --    run(function()
 --       sleep(100)
 --
---       local interactive_player_slot = wl.ui.MapView().interactive_player
+--       local interactive_player_slot = wl.Game().interactive_player
 --       local player = wl.Game().players[interactive_player_slot]
 --
 --       wait_for_lock(player, training_wheel_name)

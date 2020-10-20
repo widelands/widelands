@@ -14,7 +14,7 @@ run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
-   local interactive_player_slot = mapview.interactive_player
+   local interactive_player_slot = wl.Game().interactive_player
    local player = wl.Game().players[interactive_player_slot]
    local tribe = player.tribe
 

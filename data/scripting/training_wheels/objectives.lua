@@ -13,7 +13,7 @@ run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
-   local player = wl.Game().players[mapview.interactive_player]
+   local player = wl.Game().players[wl.Game().interactive_player]
    wait_for_lock(player, training_wheel_name)
 
    push_textdomain("training_wheels")

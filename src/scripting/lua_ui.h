@@ -251,7 +251,6 @@ public:
 	int get_is_building_road(lua_State* L);
 	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
-	int get_interactive_player(lua_State* L);
 
 	/*
 	 * Lua Methods

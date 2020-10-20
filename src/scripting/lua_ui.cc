@@ -648,7 +648,6 @@ const PropertyType<LuaMapView> LuaMapView::Properties[] = {
    PROP_RO(LuaMapView, is_building_road),
    PROP_RO(LuaMapView, auto_roadbuilding_mode),
    PROP_RO(LuaMapView, is_animating),
-   PROP_RO(LuaMapView, interactive_player),
    {nullptr, nullptr, nullptr},
 };
 
@@ -770,20 +769,6 @@ int LuaMapView::get_is_animating(lua_State* L) {
 	return 1;
 }
 
-/* RST
-   .. attribute:: interactive_player
-
-      (RO) The player number for the interactive player.
-*/
-int LuaMapView::get_interactive_player(lua_State* L) {
-	InteractivePlayer* ipl = get_game(L).get_ipl();
-	if (ipl == nullptr) {
-		lua_pushinteger(L, 0);
-	} else {
-		lua_pushinteger(L, ipl->player_number());
-	}
-	return 1;
-}
 /*
  * Lua Functions
  */
