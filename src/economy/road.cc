@@ -446,10 +446,10 @@ void Road::update_wallet_chargetime(const Game& game) {
  * Subtract maintenance cost, and check for demotion.
  */
 void Road::charge_wallet(Game& game) {
-	const uint32_t current_gametime = game.get_gametime();
+	const Time& current_gametime = game.get_gametime();
 	assert(last_wallet_charge_ <= current_gametime);
 
-	wallet_ -= carriers_count() * (current_gametime - last_wallet_charge_) / 1000;
+	wallet_ -= (((current_gametime - last_wallet_charge_) / 1000) * carriers_count()).get();
 	last_wallet_charge_ = current_gametime;
 
 	if (wallet_ < 0) {

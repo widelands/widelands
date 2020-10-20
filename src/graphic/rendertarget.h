@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "base/rect.h"
+#include "base/times.h"
 #include "graphic/align.h"
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
@@ -112,7 +113,7 @@ public:
 	                    const Widelands::Coords& coords,
 	                    const float scale,
 	                    uint32_t animation_id,
-	                    uint32_t time,
+	                    const Time& time,
 	                    const RGBColor* player_color = nullptr,
 	                    float opacity = 1.0f,
 	                    const int percent_from_bottom = 100);

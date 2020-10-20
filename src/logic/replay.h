@@ -30,6 +30,8 @@
 
 #include <string>
 
+#include "base/times.h"
+
 struct Md5Checksum;
 
 class StreamRead;
@@ -48,13 +50,13 @@ public:
 	ReplayReader(Game& game, const std::string& filename);
 	~ReplayReader();
 
-	Command* get_next_command(uint32_t time);
+	Command* get_next_command(const Time& time);
 	bool end_of_replay();
 
 private:
 	StreamRead* cmdlog_;
 
-	uint32_t replaytime_;
+	Time replaytime_;
 };
 
 /**
