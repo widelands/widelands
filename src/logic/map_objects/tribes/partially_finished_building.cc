@@ -168,12 +168,12 @@ Return the completion "percentage", where 2^16 = completely built,
 */
 // TODO(unknown): should take gametime or so
 uint32_t PartiallyFinishedBuilding::get_built_per64k() const {
-	const uint32_t time = owner().egbase().get_gametime();
+	const uint32_t time = owner().egbase().get_gametime().get();
 	uint32_t thisstep = 0;
 
-	uint32_t ts = build_step_time();
+	uint32_t ts = build_step_time().get();
 	if (working_) {
-		thisstep = ts - (work_steptime_ - time);
+		thisstep = ts - (work_steptime_.get() - time);
 		// The check below is necessary because we drive construction via
 		// the construction worker in get_building_work(), and there can be
 		// a small delay between the worker completing his job and requesting

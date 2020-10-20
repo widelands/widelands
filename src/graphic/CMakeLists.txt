@@ -333,6 +333,7 @@ wl_library(graphic
     base_i18n
     base_log
     base_scoped_timer
+    base_times
     build_info
     graphic_align
     graphic_animation

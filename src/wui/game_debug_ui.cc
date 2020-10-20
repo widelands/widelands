@@ -210,12 +210,13 @@ void FieldDebugWindow::think() {
 		Widelands::Vision const vision = player_field.vision;
 		str += (boost::format("  vision: %u\n") % vision).str();
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
-			if (time_last_surveyed != Widelands::never()) {
+			if (time_last_surveyed.is_valid()) {
 				str += (boost::format("  D triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.d))
+				        time_last_surveyed.get() %
+				        static_cast<unsigned int>(player_field.resource_amounts.d))
 				          .str();
 
 			} else {
@@ -223,12 +224,13 @@ void FieldDebugWindow::think() {
 			}
 		}
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
-			if (time_last_surveyed != Widelands::never()) {
+			if (time_last_surveyed.is_valid()) {
 				str += (boost::format("  R triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.r))
+				        time_last_surveyed.get() %
+				        static_cast<unsigned int>(player_field.resource_amounts.r))
 				          .str();
 
 			} else {
@@ -247,7 +249,7 @@ void FieldDebugWindow::think() {
 			                      "    owner: %u\n"
 			                      "    immovable animation:\n%s\n"
 			                      "      ") %
-			        player_field.time_node_last_unseen %
+			        player_field.time_node_last_unseen.get() %
 			        static_cast<unsigned int>(player_field.owner) % animation_name.c_str())
 			          .str();
 		} else if (!vision.is_seen_by_us()) {

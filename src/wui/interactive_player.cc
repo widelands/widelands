@@ -58,7 +58,7 @@ namespace {
 // Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
 // 'pf'. See 'field_brightness' in fields_to_draw.cc for scale of values.
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
-                                const uint32_t gametime,
+                                const Time& gametime,
                                 const Widelands::Player::Field& pf) {
 	if (pf.vision == Widelands::VisibleState::kUnexplored) {
 		return 0.;
@@ -68,10 +68,11 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
 	if (pf.vision == Widelands::VisibleState::kPreviouslySeen) {
-		static const uint32_t kDecayTimeInMs = 20000;
-		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
+		static const Duration kDecayTimeInMs = Duration(20000);
+		const Duration time_ago = gametime - pf.time_node_last_unseen;
 		if (time_ago < kDecayTimeInMs) {
-			brightness = (brightness * (2 * kDecayTimeInMs - time_ago)) / (2 * kDecayTimeInMs);
+			brightness =
+			   (brightness * (2 * kDecayTimeInMs.get() - time_ago.get())) / (2 * kDecayTimeInMs.get());
 		} else {
 			brightness = brightness / 2;
 		}
@@ -128,7 +129,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 				   field.rendertarget_pixel, field.fcoords, scale,
 				   player_field.partially_finished_building.dismantlesite.building
 				      ->get_unoccupied_animation(),
-				   0, &field.owner->get_playercolor(), 1.f,
+				   Time(0), &field.owner->get_playercolor(), 1.f,
 				   100 -
 				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
 			} else {
@@ -136,26 +137,26 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 				   field.rendertarget_pixel, field.fcoords, scale,
 				   player_field.partially_finished_building.dismantlesite.building
 				      ->get_unoccupied_animation(),
-				   0, nullptr, Widelands::kBuildingSilhouetteOpacity,
+				   Time(0), nullptr, Widelands::kBuildingSilhouetteOpacity,
 				   100 -
 				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
 			}
 		} else if (info_to_draw & InfoToDraw::kShowBuildings) {
 			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-			                    building->get_unoccupied_animation(), 0,
+			                    building->get_unoccupied_animation(), Time(0),
 			                    &field.owner->get_playercolor());
 		} else {
 			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-			                    building->get_unoccupied_animation(), 0, nullptr,
+			                    building->get_unoccupied_animation(), Time(0), nullptr,
 			                    Widelands::kBuildingSilhouetteOpacity);
 		}
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-		                    field.owner->tribe().flag_animation(), 0,
+		                    field.owner->tribe().flag_animation(), Time(0),
 		                    &field.owner->get_playercolor());
 	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, 0,
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, Time(0),
 		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
 	}
 }
@@ -471,7 +472,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Widelands::Player& plr = player();
 	const Widelands::EditorGameBase& gbase = egbase();
 	const Widelands::Map& map = gbase.map();
-	const uint32_t gametime = gbase.get_gametime();
+	const Time& gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
 	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
@@ -507,7 +508,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			draw_road_building(*f);
 
-			draw_bridges(dst, f, f->seeing == Widelands::VisibleState::kVisible ? gametime : 0, scale);
+			draw_bridges(
+			   dst, f, f->seeing == Widelands::VisibleState::kVisible ? gametime : Time(0), scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Draw immovables and bobs.

@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -196,7 +195,7 @@ WareInstance::WareInstance(DescriptionIndex const i, const WareDescr* const ware
 WareInstance::~WareInstance() {
 	if (supply_) {
 		FORMAT_WARNINGS_OFF
-		molog(kNoTimestamp, "Ware %u still has supply %p\n", descr_index_, supply_);
+		molog(Time(), "Ware %u still has supply %p", descr_index_, supply_);
 		FORMAT_WARNINGS_ON
 		delete supply_;
 	}
@@ -480,7 +479,7 @@ void WareInstance::set_transfer(Game& game, Transfer& t) {
 	// the Transfer object in a way that is not valid yet (note that this
 	// function is called in the Transfer constructor before the Transfer
 	// is linked to the corresponding Request).
-	schedule_act(game, 1, 0);
+	schedule_act(game, Duration(1), 0);
 }
 
 /**
@@ -505,7 +504,7 @@ bool WareInstance::is_moving() const {
  * whatever reason.
  */
 void WareInstance::cancel_moving() {
-	molog(kNoTimestamp, "cancel_moving\n");
+	molog(Time(), "cancel_moving");
 
 	if (transfer_) {
 		transfer_->has_failed();
