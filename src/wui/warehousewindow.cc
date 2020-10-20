@@ -23,6 +23,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "wui/buildingwindow.h"
+#include "wui/economy_options_window.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/waresdisplay.h"
 
@@ -131,7 +132,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	if (can_act_) {
 		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 		UI::Button* b;
-		add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add(buttons, UI::Box::Resizing::kFullSize);
 		add_space(15);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
@@ -145,6 +146,25 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
 		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
 		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
+
+		buttons->add_inf_space();
+
+		b = new UI::Button(buttons,
+						   "configure_economy",
+						   0,
+						   0,
+						   34,
+						   34,
+						   UI::ButtonStyle::kWuiMenu,
+						   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
+						   _("Configure economy"));
+		buttons->add(b);
+
+		b->sigclicked.connect([this, &ib, &wh]() {
+			if (upcast(InteractiveGameBase, igbase, &ib)) {
+				EconomyOptionsWindow::create(*igbase, wh.base_flag());
+			}
+		});
 	}
 }
 

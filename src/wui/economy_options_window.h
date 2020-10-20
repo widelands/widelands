@@ -59,6 +59,9 @@ struct EconomyOptionsWindow : public UI::Window {
 		bool undeletable = false;
 	};
 
+	// Create an economy options window for the given flag
+	static void create(InteractiveGameBase& igbase, const Widelands::Flag& flag);
+
 	void create_target();
 	void do_create_target(const std::string&);
 	void save_targets();

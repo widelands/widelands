@@ -29,6 +29,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "ui_basic/messagebox.h"
+#include "wui/interactive_gamebase.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
@@ -160,6 +161,34 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	}
 	if (save_profile_dialog_) {
 		save_profile_dialog_->unset_parent();
+	}
+}
+
+void EconomyOptionsWindow::create(InteractiveGameBase& igbase, const Widelands::Flag& flag) {
+	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
+	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
+	bool window_open = false;
+	if (ware_economy->get_options_window()) {
+		window_open = true;
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	}
+	if (worker_economy->get_options_window()) {
+		window_open = true;
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	}
+	if (!window_open) {
+		new EconomyOptionsWindow(&igbase, ware_economy, worker_economy,
+								 igbase.can_act(ware_economy->owner().player_number()));
 	}
 }
 
