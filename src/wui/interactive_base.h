@@ -37,7 +37,6 @@
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
-struct ChatProvider;
 class UniqueWindowHandler;
 
 struct WorkareaPreview {
