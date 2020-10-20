@@ -231,10 +231,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(
         &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
-	 training_wheels_box_(&box_ingame_, 0, 0, UI::Box::Horizontal),
+     training_wheels_box_(&box_ingame_, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_, Vector2i::zero(), _("Teach me how to play")),
-	 training_wheels_reset_(&training_wheels_box_, "reset_training_wheels", 0, 0, 0, 0,
-							UI::ButtonStyle::kWuiSecondary, _("Reset progress")),
+     training_wheels_reset_(&training_wheels_box_,
+                            "reset_training_wheels",
+                            0,
+                            0,
+                            0,
+                            0,
+                            UI::ButtonStyle::kWuiSecondary,
+                            _("Reset progress")),
      os_(opt) {
 
 	// Buttons
