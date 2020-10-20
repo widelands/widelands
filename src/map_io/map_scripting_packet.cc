@@ -36,7 +36,7 @@
 namespace Widelands {
 
 namespace {
-constexpr uint32_t kCurrentPacketVersion = 4;
+constexpr uint32_t kCurrentPacketVersion = 5;
 
 // Write all .lua files that exist in the given 'path' in 'map_fs' to the 'target_fs'.
 void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
@@ -100,9 +100,13 @@ void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapO
 	if (g && fr.try_open(fs, "scripting/globals.dump")) {
 		try {
 			const uint32_t packet_version = fr.unsigned_32();
-			if (packet_version == kCurrentPacketVersion) {
+			if (packet_version >= 4 && packet_version <= kCurrentPacketVersion) {
 				upcast(LuaGameInterface, lgi, &g->lua());
 				signal(SIGABRT, &abort_handler);
+				if (packet_version >= 5) {
+					// TODO(Nordfriese): Savegame compatibility)
+					lgi->read_textdomain_stack(fr);
+				}
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 				signal(SIGABRT, SIG_DFL);
 			} else {
@@ -128,12 +132,16 @@ void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 	// Dump the global environment if this is a game and not in the editor
 	if (upcast(Game, g, &egbase)) {
+		upcast(LuaGameInterface, lgi, &g->lua());
+		assert(lgi);
 		FileWrite fw;
+
 		fw.unsigned_32(kCurrentPacketVersion);
+		lgi->write_textdomain_stack(fw);
+
 		const FileWrite::Pos pos = fw.get_pos();
 		fw.unsigned_32(0);  // N bytes written, follows below
 
-		upcast(LuaGameInterface, lgi, &g->lua());
 		uint32_t nwritten = little_32(lgi->write_global_env(fw, mos));
 		fw.data(&nwritten, 4, pos);
 

@@ -26,8 +26,12 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"  // NOCOM
 #include "build_info.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "scripting/report_error.h"
@@ -130,6 +134,7 @@ static std::map<const lua_State*, std::vector<std::string>> textdomains;
       :returns: :const:`nil`
 */
 static int L_push_textdomain(lua_State* L) {
+	log_dbg("NOCOM L_push_textdomain %p %s", L, luaL_checkstring(L, -1));
 	textdomains[L].push_back(luaL_checkstring(L, -1));
 	return 0;
 }
@@ -142,6 +147,7 @@ static int L_push_textdomain(lua_State* L) {
       :returns: :const:`nil`
 */
 static int L_pop_textdomain(lua_State* L) {
+	log_dbg("NOCOM L_pop_textdomain %p", L);
 	textdomains.at(L).pop_back();
 	return 0;
 }
@@ -158,6 +164,45 @@ static int L_set_textdomain(lua_State* L) {
 static std::string current_textdomain(const lua_State* L) {
 	const auto it = textdomains.find(L);
 	return it == textdomains.end() || it->second.empty() ? "" : it->second.back();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+void read_textdomain_stack(FileRead& fr, const lua_State* L) {
+	log_dbg("NOCOM read_textdomain_stack %p", L);
+	{
+		const auto it = textdomains.find(L);
+		if (it != textdomains.end()) {
+			it->second.clear();
+		}
+	}
+
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			for (size_t i = fr.unsigned_32(); i; --i) {
+				textdomains[L].push_back(fr.string());
+			}
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "read_textdomain_stack", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("LuaGlobals::read_textdomain_stack: %s", e.what());
+	}
+}
+void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
+	log_dbg("NOCOM write_textdomain_stack %p", L);
+	fw.unsigned_16(kCurrentPacketVersion);
+
+	const auto it = textdomains.find(L);
+	if (it == textdomains.end()) {
+		fw.unsigned_32(0);
+	} else {
+		fw.unsigned_32(it->second.size());
+		for (const std::string& str : it->second) {
+			fw.string(str);
+		}
+	}
 }
 
 /* RST

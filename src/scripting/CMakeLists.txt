@@ -69,7 +69,9 @@ wl_library(scripting_lua_interface
     base_i18n
     base_macros
     build_info
+    io_fileread
     io_filesystem
+    logic_exceptions
     scripting_base
     scripting_errors
     scripting_lua_table
