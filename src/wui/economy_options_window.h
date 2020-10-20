@@ -49,7 +49,7 @@ struct EconomyOptionsWindow : public UI::Window {
 	EconomyOptionsWindow(UI::Panel* parent,
 	                     Widelands::Economy* ware_economy,
 	                     Widelands::Economy* worker_economy,
-						 Widelands::WareWorker type,
+	                     Widelands::WareWorker type,
 	                     bool can_act);
 	~EconomyOptionsWindow() override;
 
@@ -61,7 +61,8 @@ struct EconomyOptionsWindow : public UI::Window {
 	};
 
 	// Create an economy options window for the given flag
-	static void create(InteractiveBase& ibase, const Widelands::Flag& flag, Widelands::WareWorker type);
+	static void
+	create(InteractiveBase& ibase, const Widelands::Flag& flag, Widelands::WareWorker type);
 	void activate_tab(Widelands::WareWorker type);
 
 	void create_target();

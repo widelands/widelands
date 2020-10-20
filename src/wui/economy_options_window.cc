@@ -38,7 +38,8 @@ constexpr int kDesiredWidth = 216;
 
 EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::Economy* ware_economy,
-                                           Widelands::Economy* worker_economy, Widelands::WareWorker type,
+                                           Widelands::Economy* worker_economy,
+                                           Widelands::WareWorker type,
                                            bool can_act)
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
      main_box_(this, 0, 0, UI::Box::Vertical),
@@ -165,7 +166,9 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	}
 }
 
-void EconomyOptionsWindow::create(InteractiveBase& ibase, const Widelands::Flag& flag, Widelands::WareWorker type) {
+void EconomyOptionsWindow::create(InteractiveBase& ibase,
+                                  const Widelands::Flag& flag,
+                                  Widelands::WareWorker type) {
 	if (upcast(InteractiveGameBase, igbase, &ibase)) {
 		Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
 		Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
