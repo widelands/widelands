@@ -11,12 +11,12 @@ include "scripting/table.lua"
 include "scripting/ui.lua"
 
 -- RST
--- .. function:: send_mail(player, title, body, parameters)
+-- .. function:: send_to_inbox_after(player, title, body, parameters)
 --
 --    Sends a message to the inbox of a player.
---    If the popup parameter is true and the player is in building mode,
---    the function waits until the player leaves the building mode
---    before sending the message (only in singleplayer)
+--    If the popup parameter is true and the player is in roadbuilding mode,
+--    the message is send after the player leaves the roadbuilding mode
+--    (only in singleplayer)
 --
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
@@ -27,7 +27,7 @@ include "scripting/ui.lua"
 --                     for :meth:`wl.game.Player.send_to_inbox`, e.g. { field = f, popup = true }.
 --                     The popup parameter must be set.
 --
-function send_mail(player, title, body, parameters)
+function send_to_inbox_after(player, title, body, parameters)
    if (parameters["popup"]) then
       wait_for_roadbuilding()
    end
@@ -36,23 +36,23 @@ end
 
 
 -- RST
--- .. function:: send_to_all(text[, heading])
+-- .. function:: send_to_all_inboxes(text[, heading])
 --
---    Sends a game status message to all players in a separate window. This is
---    mainly used for winconditions to show a summary.
+--    Sends a message to the inbox of all players and show it instantly.
+--    This is mainly used for winconditions to show the status.
 --
 --    :arg text: the localized body of the message. You can use rt functions here.
 --    :type text: :class:`string`
 --    :arg heading: the localized title of the message (optional)
 --    :type heading: :class:`string`
 --
-function send_to_all(text, heading)
+function send_to_all_inboxes(text, heading)
    push_textdomain("widelands")
    for idx,plr in ipairs(game.players) do
       if (heading ~= nil and heading ~= "") then
-         send_message(plr, _"Status", text, {popup=true, heading=heading})
+         send_to_inbox_after(plr, _"Status", text, {popup=true, heading=heading})
       else
-         send_message(plr, _"Status", text, {popup=true})
+         send_to_inbox_after(plr, _"Status", text, {popup=true})
       end
    end
    pop_textdomain()

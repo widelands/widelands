@@ -99,7 +99,7 @@ function do_game_over()
       l1, l2 = game.players[1], game.players[2]
       lc = points[1]
    end
-   send_to_all(game_over:bformat(
+   send_to_all_inboxes(game_over:bformat(
       w1.name, w2.name, l1.name, l2.name, (ngettext("%i point", "%i points", lc)):format(lc)
    ))
    game_over_done = true
@@ -130,7 +130,7 @@ function do_smuggling()
                recv_whf.immovable.descr.type_name ~= "warehouse" or
                recv_whf.immovable.owner ~= recv_plr
             then
-               send_to_all(smuggling_route_broken:bformat(
+               send_to_all_inboxes(smuggling_route_broken:bformat(
                   (ngettext("%i point", "%i points", route_descr.value)):format(route_descr.value), recv_plr.name, send_plr.name)
                )
                run(wait_for_established_route, route_descr)
