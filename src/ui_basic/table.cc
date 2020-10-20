@@ -405,10 +405,20 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 				return true;
 			}
 			break;
+		case SDLK_KP_8:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_UP:
 			move_selection(-1);
 			return true;
 
+		case SDLK_KP_2:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_DOWN:
 			move_selection(1);
 			return true;
@@ -469,10 +479,7 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
  *        negative values up.
  */
 void Table<void*>::move_selection(const int32_t offset) {
-	if (!has_selection()) {
-		return;
-	}
-	int32_t new_selection = (is_multiselect_ ? last_multiselect_ : selection_) + offset;
+	int32_t new_selection = has_selection() ? (is_multiselect_ ? last_multiselect_ : selection_) + offset : 0;
 
 	if (new_selection < 0) {
 		new_selection = 0;
