@@ -87,16 +87,16 @@ function message_box(player, title, body, parameters)
 end
 
 -- RST
--- .. function:: campaign_message_box({message, [sleeptime, options]})
+-- .. function:: campaign_message_box({message, [sleeptime, parameters]})
 --
 --    Sets the width and height of the message box and calls
---    :meth:`message_box` for player 1
+--    :meth:`message_box` for player 1. This function expects a table, so surround all values in curly braces.
 --
 --    :arg message: the message consist of the `title` and the `body`. Note that the body
 --                  must be formatted using the :ref:`richtext functions <richtext.lua>`.
 --    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
---    Besides the normal message options (see :meth:`wl.game.Player.message_box`) the following ones can be used:
+--    Besides the normal message parameters (see :meth:`wl.game.Player.message_box`) the following ones can be used:
 --
 --    :arg position: A string that indicates at which border of the screen the message box shall appear.
 --                   Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). 
