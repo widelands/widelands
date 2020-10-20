@@ -37,6 +37,7 @@
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
+struct ChatProvider;
 class UniqueWindowHandler;
 
 struct WorkareaPreview {
@@ -77,7 +78,7 @@ public:
 	// Manages all UniqueWindows.
 	UniqueWindowHandler& unique_windows();
 
-	InteractiveBase(Widelands::EditorGameBase&, Section& global_s);
+	InteractiveBase(Widelands::EditorGameBase&, Section& global_s, ChatProvider*);
 	~InteractiveBase() override;
 
 	Widelands::EditorGameBase& egbase() const {
@@ -315,6 +316,8 @@ protected:
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
 
 	void set_toolbar_imageset(const ToolbarImageset& imageset);
+
+	ChatProvider* chat_provider_;
 
 #ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;

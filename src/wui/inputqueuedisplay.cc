@@ -400,13 +400,13 @@ void InputQueueDisplay::update_max_fill_buttons() {
 		decrease_real_fill_ = new UI::Button(this, "decrease_real_fill", x, y, kWareMenuPicWidth,
 		                                     kWareMenuPicHeight, UI::ButtonStyle::kWuiMenu,
 		                                     g_image_cache->get("images/ui_basic/scrollbar_down.png"),
-		                                     _("Decrease real fill"));
+		                                     _("Remove ware"));
 
 		x += CellWidth + CellSpacing;
 		increase_real_fill_ = new UI::Button(this, "increase_real_fill", x, y, kWareMenuPicWidth,
 		                                     kWareMenuPicHeight, UI::ButtonStyle::kWuiMenu,
 		                                     g_image_cache->get("images/ui_basic/scrollbar_up.png"),
-		                                     _("Increase real fill"));
+		                                     _("Add ware"));
 
 		increase_real_fill_->set_repeating(true);
 		decrease_real_fill_->set_repeating(true);

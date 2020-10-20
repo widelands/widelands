@@ -30,6 +30,8 @@
 static char const* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
 static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
 
+constexpr int8_t kButtonSize = 34;
+
 /*
 ===============
 Create the window and its panels, add it to the registry.
@@ -117,18 +119,20 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		if (ibase()->omnipotent()) {
 			worker_caps_->set_desired_size(100, 50);  // Prevent dropdown asserts
 			worker_type_ = new UI::Dropdown<Widelands::DescriptionIndex>(
-			   worker_caps_, "worker_type", 0, 0, 100, 8, 34, _("Worker"), UI::DropdownType::kTextual,
+			   worker_caps_, "worker_type", 0, 0, 100, 8, kButtonSize, _("Worker"), UI::DropdownType::kTextual,
 			   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
 			worker_xp_decrease_ =
-			   new UI::Button(worker_caps_, "xp_decrease", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   new UI::Button(worker_caps_, "xp_decrease", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
 			                  g_image_cache->get("images/ui_basic/scrollbar_down.png"),
 			                  _("Decrease experience by 1"));
 			worker_xp_increase_ = new UI::Button(
-			   worker_caps_, "xp_increase", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   worker_caps_, "xp_increase", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase experience by 1"));
 			worker_caps_->add(worker_type_, UI::Box::Resizing::kExpandBoth);
+			worker_caps_->add_space(kButtonSize);
 			worker_caps_->add(worker_xp_decrease_);
 			worker_caps_->add(worker_xp_increase_);
+			worker_caps_->add_space(kButtonSize);
 			worker_type_->set_enabled(false);
 			worker_table_->selected.connect([this](uint32_t) { worker_table_selection_changed(); });
 			worker_type_->selected.connect([this]() { worker_table_dropdown_clicked(); });
@@ -139,7 +143,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		}
 		if (ibase()->can_act(production_site->owner().player_number())) {
 			UI::Button* evict_button =
-			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   new UI::Button(worker_caps_, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
 			                  g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
 			                  _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect([this]() { evict_worker(); });

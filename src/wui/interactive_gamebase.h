@@ -29,8 +29,6 @@
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_base.h"
 
-struct ChatProvider;
-
 class InteractiveGameBase : public InteractiveBase {
 public:
 	InteractiveGameBase(Widelands::Game&,
@@ -106,7 +104,6 @@ protected:
 		UI::UniqueWindow::Registry help;
 	} menu_windows_;
 
-	ChatProvider* chat_provider_;
 	UI::UniqueWindow::Registry chat_;
 	bool multiplayer_;
 

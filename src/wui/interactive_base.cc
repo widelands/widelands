@@ -162,8 +162,9 @@ void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 	dst.blit(Vector2i(x, get_h() - imageset.right_corner->height()), imageset.right_corner);
 }
 
-InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
+InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+     chat_provider_(c),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
@@ -816,7 +817,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 		   as_richtext_paragraph("‹‹‹ CHEAT MODE ENABLED ›››", UI::FontStyle::kFsMenuIntro));
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
-		                                  (get_h() - rendered_text->height()) / 2));
+		                                  2.5f * rendered_text->height()));
 	}
 }
 
@@ -1452,9 +1453,15 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
 		case SDLK_F3:
-			if (cheat_mode_enabled_ || (code.mod & KMOD_CTRL)) {
-				cheat_mode_enabled_ = !cheat_mode_enabled_;
-				return true;
+			if (cheat_mode_enabled_) {
+				cheat_mode_enabled_ = false;
+			} else if (code.mod & KMOD_CTRL) {
+				if (chat_provider_) {
+					/** TRANSLATORS: This is a chat message which is automatically sent */
+					/** TRANSLATORS: to all players when a player enables cheating mode */
+					chat_provider_->send(_("This player has enabled the cheating mode!"));
+				}
+				cheat_mode_enabled_ = true;
 			}
 			break;
 #endif
@@ -1478,6 +1485,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
 	const std::string cmd = boost::algorithm::join(args, " ");
+
+	if (chat_provider_) {
+		/** TRANSLATORS: This is a chat message which is automatically sent */
+		/** TRANSLATORS: to all players when a player uses the debug console */
+		chat_provider_->send(_("This player has just used the cheating console!"));
+	}
 
 	DebugConsole::write("Starting Lua interpretation!");
 	try {
