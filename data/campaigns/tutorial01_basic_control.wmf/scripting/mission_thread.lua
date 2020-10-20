@@ -54,8 +54,7 @@ function starting_infos()
 
    -- Teach building spaces
    campaign_message_box(initial_message_02, 200)
-   select_item_from_dropdown("dropdown_menu_showhide", 1)
-   select_item_from_dropdown("dropdown_menu_showhide", 1)
+   show_item_from_dropdown("dropdown_menu_showhide", 1)
    local o = campaign_message_with_objective(initial_message_03, obj_initial_toggle_building_spaces)
 
    -- Wait for buildhelp to come on
@@ -152,7 +151,7 @@ function build_lumberjack()
    sleep(3000)
 
    campaign_message_box(lumberjack_message_08)
-   wl.ui.MapView().dropdowns["dropdown_menu_gamespeed"]:open()
+   show_item_from_dropdown("dropdown_menu_gamespeed", 1)
 
    sleep(20*1000) -- let the player experiment a bit with the window
 
@@ -187,6 +186,7 @@ function learn_to_move()
    campaign_message_box(tell_about_minimap_1)
 
    -- Open the minimap
+   show_item_from_dropdown("dropdown_menu_mapview", 1)
    select_item_from_dropdown("dropdown_menu_mapview", 1)
    o = campaign_message_with_objective(tell_about_minimap_2, obj_moving_minimap)
 
@@ -332,6 +332,7 @@ function census_and_statistics()
 
    campaign_message_box(census_and_statistics_00)
 
+   show_item_from_dropdown("dropdown_menu_showhide", 2)
    select_item_from_dropdown("dropdown_menu_showhide", 2)
    sleep(200)
 
