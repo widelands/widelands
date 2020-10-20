@@ -816,8 +816,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	if (cheat_mode_enabled_) {
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 		   as_richtext_paragraph("‹‹‹ CHEAT MODE ENABLED ›››", UI::FontStyle::kFsMenuIntro));
-		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
-		                                  2.5f * rendered_text->height()));
+		rendered_text->draw(
+		   dst, Vector2i((get_w() - rendered_text->width()) / 2, 2.5f * rendered_text->height()));
 	}
 }
 

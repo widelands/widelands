@@ -119,12 +119,12 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		if (ibase()->omnipotent()) {
 			worker_caps_->set_desired_size(100, 50);  // Prevent dropdown asserts
 			worker_type_ = new UI::Dropdown<Widelands::DescriptionIndex>(
-			   worker_caps_, "worker_type", 0, 0, 100, 8, kButtonSize, _("Worker"), UI::DropdownType::kTextual,
-			   UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
-			worker_xp_decrease_ =
-			   new UI::Button(worker_caps_, "xp_decrease", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get("images/ui_basic/scrollbar_down.png"),
-			                  _("Decrease experience by 1"));
+			   worker_caps_, "worker_type", 0, 0, 100, 8, kButtonSize, _("Worker"),
+			   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
+			worker_xp_decrease_ = new UI::Button(
+			   worker_caps_, "xp_decrease", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+			   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
+			   _("Decrease experience by 1"));
 			worker_xp_increase_ = new UI::Button(
 			   worker_caps_, "xp_increase", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
 			   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase experience by 1"));
@@ -142,10 +142,10 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 			worker_caps_->add_inf_space();
 		}
 		if (ibase()->can_act(production_site->owner().player_number())) {
-			UI::Button* evict_button =
-			   new UI::Button(worker_caps_, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
-			                  _("Terminate the employment of the selected worker"));
+			UI::Button* evict_button = new UI::Button(
+			   worker_caps_, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+			   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
+			   _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect([this]() { evict_worker(); });
 			worker_caps_->add(evict_button);
 		}

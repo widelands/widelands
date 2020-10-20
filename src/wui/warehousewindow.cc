@@ -160,9 +160,9 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 			b->set_repeating(true);
 			b->sigclicked.connect([this]() { change_real_fill(-1); }), buttons->add(b);
 
-			b = new UI::Button(buttons, "cheat_increase_1", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                   g_image_cache->get("images/ui_basic/scrollbar_up.png"),
-			                   _("Add a ware")),
+			b =
+			   new UI::Button(buttons, "cheat_increase_1", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			                  g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Add a ware")),
 			b->set_repeating(true);
 			b->sigclicked.connect([this]() { change_real_fill(1); }), buttons->add(b);
 
