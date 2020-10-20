@@ -280,8 +280,8 @@ void GameChatPanel::key_changed() {
 	// Helper function: Compare the given names and extract a common prefix (if existing)
 	// Note: Do *not* use the capture clause. Since the lambda is static, it will still refer
 	// to the old variables which might no longer be valid
-	static const auto compare_names = [](const std::string& my_namepart,
-											std::string& my_candidate, const std::string& my_name) {
+	static const auto compare_names = [](const std::string& my_namepart, std::string& my_candidate,
+	                                     const std::string& my_name) {
 		size_t n_equal_chars = count_equal_chars(my_namepart, my_name);
 		if (n_equal_chars == my_namepart.size()) {
 			// We have a candidate!
