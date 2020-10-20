@@ -126,6 +126,8 @@ Flag::Flag(EditorGameBase& egbase,
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
+	MutexLock m(MutexLock::ID::kObjects);
+
 	std::fill(std::begin(roads_), std::end(roads_), nullptr);
 
 	set_owner(owning_player);
