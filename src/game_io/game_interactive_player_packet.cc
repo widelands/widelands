@@ -160,7 +160,7 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 		if (iplayer) {
 			fw.unsigned_32(iplayer->get_expedition_port_spaces().size());
 			for (const auto& pair : iplayer->get_expedition_port_spaces()) {
-				fw.unsigned_32(mos->get_object_file_index(*pair.first));
+				fw.unsigned_32(mos->get_object_file_index(*pair.first.get(game)));
 				fw.signed_16(pair.second.x);
 				fw.signed_16(pair.second.y);
 			}

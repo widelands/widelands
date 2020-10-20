@@ -36,7 +36,7 @@ struct EditorToolsizeMenu : public UI::UniqueWindow {
 	}
 
 private:
-	EditorInteractive& eia();
+	EditorInteractive& eia() const;
 	void decrease_radius();
 	void increase_radius();
 

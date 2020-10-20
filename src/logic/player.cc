@@ -451,10 +451,10 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 
 MessageId Player::add_message_with_timeout(Game& game,
                                            std::unique_ptr<Message> message,
-                                           uint32_t const timeout,
+                                           const Duration& timeout,
                                            uint32_t const radius) {
 	const Map& map = game.map();
-	uint32_t const gametime = game.get_gametime();
+	const Time& gametime = game.get_gametime();
 	Coords const position = message->position();
 	for (const auto& tmp_message : messages()) {
 		if (tmp_message.second->type() == message->type() &&
@@ -697,6 +697,10 @@ Waterway& Player::force_waterway(const Path& path) {
 }
 
 Building& Player::force_building(Coords const location, const FormerBuildings& former_buildings) {
+	if (former_buildings.empty()) {
+		throw wexception("Player::force_building(): empty former_buildings");
+	}
+
 	const Map& map = egbase().map();
 	DescriptionIndex idx = former_buildings.back().first;
 	const BuildingDescr* descr = egbase().tribes().get_building_descr(idx);
@@ -913,7 +917,7 @@ void Player::start_stop_building(PlayerImmovable& imm) {
 	}
 }
 
-void Player::start_or_cancel_expedition(Warehouse& wh) {
+void Player::start_or_cancel_expedition(const Warehouse& wh) {
 	if (wh.get_owner() == this) {
 		if (PortDock* pd = wh.get_portdock()) {
 			if (pd->expedition_started()) {
@@ -1193,8 +1197,9 @@ void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
  * returned array.
  */
 // TODO(unknown): Perform a meaningful sort on the soldiers array.
-uint32_t
-Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32_t nr_wanted) {
+uint32_t Player::find_attack_soldiers(const Flag& flag,
+                                      std::vector<Soldier*>* soldiers,
+                                      uint32_t nr_wanted) {
 	uint32_t count = 0;
 
 	if (soldiers) {
@@ -1237,7 +1242,7 @@ Player::find_attack_soldiers(Flag& flag, std::vector<Soldier*>* soldiers, uint32
 
 // TODO(unknown): Clean this mess up. The only action we really have right now is
 // to attack, so pretending we have more types is pointless.
-void Player::enemyflagaction(Flag& flag,
+void Player::enemyflagaction(const Flag& flag,
                              PlayerNumber const attacker,
                              const std::vector<Widelands::Soldier*>& soldiers) {
 	if (attacker != player_number()) {
@@ -1457,7 +1462,7 @@ bool Player::should_see(const FCoords& f, SeersList& nearby_objects) const {
 void Player::update_vision(const FCoords& f, bool force_visible) {
 	SeersList team_seers_list;
 	if (!force_visible) {
-		team_seers_list = std::move(team_seers());
+		team_seers_list = team_seers();
 	}
 	update_vision(f, force_visible, team_seers_list);
 }
@@ -1487,7 +1492,7 @@ void Player::update_vision_whole_map() {
 	}
 	const MapIndex max = egbase().map().max_index();
 	Widelands::Field* f = &egbase().map()[0];
-	SeersList team_seers_list = std::move(team_seers());
+	SeersList team_seers_list = team_seers();
 	for (MapIndex i = 0; i < max; ++i, ++f) {
 		update_vision(egbase().map().get_fcoords(*f), false, team_seers_list);
 	}
@@ -1503,7 +1508,7 @@ void Player::update_vision(const Area<FCoords>& area, bool force_visible) {
 	// When updating individual fields, only the objects from this list are evaluated.
 	SeersList nearby_objects;
 	if (!force_visible) {
-		nearby_objects = std::move(seers_for(area));
+		nearby_objects = seers_for(area);
 	}
 
 	for (const PlayerNumber& p : team_player_) {
@@ -2055,4 +2060,6 @@ void Player::write_statistics(FileWrite& fw) const {
 		write_stats(ware_stocks_, ware_index);
 	}
 }
+
+constexpr Time Player::AiPersistentState::kNoExpedition;
 }  // namespace Widelands

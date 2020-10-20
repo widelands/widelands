@@ -45,10 +45,10 @@ namespace Widelands {
  */
 class PlayerCommand : public GameLogicCommand {
 public:
-	PlayerCommand(uint32_t time, PlayerNumber);
+	PlayerCommand(const Time& time, PlayerNumber);
 
 	/// For savegame loading
-	PlayerCommand() : GameLogicCommand(0), sender_(0), cmdserial_(0) {
+	PlayerCommand() : GameLogicCommand(Time(0)), sender_(0), cmdserial_(0) {
 	}
 
 	void write_id_and_sender(StreamWrite& ser);
@@ -79,10 +79,7 @@ private:
 struct CmdBulldoze : public PlayerCommand {
 	CmdBulldoze() : PlayerCommand(), serial(0), recurse(0) {
 	}  // For savegame loading
-	CmdBulldoze(const uint32_t t,
-	            const int32_t p,
-	            PlayerImmovable& pi,
-	            const bool init_recurse = false)
+	CmdBulldoze(const Time& t, const int32_t p, PlayerImmovable& pi, const bool init_recurse = false)
 	   : PlayerCommand(t, p), serial(pi.serial()), recurse(init_recurse) {
 	}
 
@@ -104,9 +101,9 @@ private:
 };
 
 struct CmdBuild : public PlayerCommand {
-	CmdBuild() : PlayerCommand() {
+	CmdBuild() : PlayerCommand(), bi(0) {
 	}  // For savegame loading
-	CmdBuild(const uint32_t init_duetime, const int32_t p, const Coords& c, const DescriptionIndex i)
+	CmdBuild(const Time& init_duetime, const int32_t p, const Coords& c, const DescriptionIndex i)
 	   : PlayerCommand(init_duetime, p), coords(c), bi(i) {
 	}
 
@@ -130,8 +127,7 @@ private:
 struct CmdBuildFlag : public PlayerCommand {
 	CmdBuildFlag() : PlayerCommand() {
 	}  // For savegame loading
-	CmdBuildFlag(const uint32_t t, const int32_t p, const Coords& c)
-	   : PlayerCommand(t, p), coords(c) {
+	CmdBuildFlag(const Time& t, const int32_t p, const Coords& c) : PlayerCommand(t, p), coords(c) {
 	}
 
 	explicit CmdBuildFlag(StreamRead&);
@@ -153,7 +149,7 @@ private:
 struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
 	}  // For savegame loading
-	CmdBuildRoad(uint32_t, int32_t, Path&);
+	CmdBuildRoad(const Time&, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
 	~CmdBuildRoad() override;
@@ -178,7 +174,7 @@ private:
 struct CmdBuildWaterway : public PlayerCommand {
 	CmdBuildWaterway() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
 	}  // For savegame loading
-	CmdBuildWaterway(uint32_t, int32_t, Path&);
+	CmdBuildWaterway(const Time&, int32_t, Path&);
 	explicit CmdBuildWaterway(StreamRead&);
 
 	~CmdBuildWaterway() override;
@@ -203,7 +199,7 @@ private:
 struct CmdFlagAction : public PlayerCommand {
 	CmdFlagAction() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdFlagAction(const uint32_t t, const int32_t p, const Flag& f)
+	CmdFlagAction(const Time& t, const int32_t p, const Flag& f)
 	   : PlayerCommand(t, p), serial(f.serial()) {
 	}
 
@@ -226,7 +222,7 @@ private:
 struct CmdStartStopBuilding : public PlayerCommand {
 	CmdStartStopBuilding() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdStartStopBuilding(const uint32_t t, const PlayerNumber p, Building& b)
+	CmdStartStopBuilding(const Time& t, const PlayerNumber p, Building& b)
 	   : PlayerCommand(t, p), serial(b.serial()) {
 	}
 
@@ -250,7 +246,7 @@ struct CmdMilitarySiteSetSoldierPreference : public PlayerCommand {
 	CmdMilitarySiteSetSoldierPreference()
 	   : PlayerCommand(), serial(0), preference(SoldierPreference::kRookies) {
 	}  // For savegame loading
-	CmdMilitarySiteSetSoldierPreference(const uint32_t t,
+	CmdMilitarySiteSetSoldierPreference(const Time& t,
 	                                    const PlayerNumber p,
 	                                    Building& b,
 	                                    SoldierPreference prefs)
@@ -274,9 +270,9 @@ private:
 	Widelands::SoldierPreference preference;
 };
 struct CmdStartOrCancelExpedition : public PlayerCommand {
-	CmdStartOrCancelExpedition() : PlayerCommand() {
+	CmdStartOrCancelExpedition() : PlayerCommand(), serial(kInvalidSerial) {
 	}  // For savegame loading
-	CmdStartOrCancelExpedition(uint32_t const t, PlayerNumber const p, Building& b)
+	CmdStartOrCancelExpedition(const Time& t, PlayerNumber const p, Building& b)
 	   : PlayerCommand(t, p), serial(b.serial()) {
 	}
 
@@ -297,14 +293,11 @@ private:
 };
 
 struct CmdExpeditionConfig : public PlayerCommand {
-	CmdExpeditionConfig() : PlayerCommand() {
+	CmdExpeditionConfig()
+	   : PlayerCommand(), serial(kInvalidSerial), type(wwWARE), index(0), add(false) {
 	}  // For savegame loading
-	CmdExpeditionConfig(uint32_t const t,
-	                    PlayerNumber const p,
-	                    PortDock& pd,
-	                    WareWorker ww,
-	                    DescriptionIndex di,
-	                    bool a)
+	CmdExpeditionConfig(
+	   const Time& t, PlayerNumber const p, PortDock& pd, WareWorker ww, DescriptionIndex di, bool a)
 	   : PlayerCommand(t, p), serial(pd.serial()), type(ww), index(di), add(a) {
 	}
 
@@ -328,10 +321,10 @@ private:
 };
 
 struct CmdEnhanceBuilding : public PlayerCommand {
-	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
+	CmdEnhanceBuilding() : PlayerCommand(), serial_(0), bi_(0), keep_wares_(false) {
 	}  // For savegame loading
 	CmdEnhanceBuilding(
-	   const uint32_t init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
+	   const Time& init_duetime, const int32_t p, Building& b, const DescriptionIndex i, bool kw)
 	   : PlayerCommand(init_duetime, p), serial_(b.serial()), bi_(i), keep_wares_(kw) {
 	}
 
@@ -357,7 +350,7 @@ private:
 struct CmdDismantleBuilding : public PlayerCommand {
 	CmdDismantleBuilding() : PlayerCommand(), serial_(0), keep_wares_(false) {
 	}  // For savegame loading
-	CmdDismantleBuilding(const uint32_t t, const int32_t p, PlayerImmovable& pi, bool kw)
+	CmdDismantleBuilding(const Time& t, const int32_t p, PlayerImmovable& pi, bool kw)
 	   : PlayerCommand(t, p), serial_(pi.serial()), keep_wares_(kw) {
 	}
 
@@ -382,7 +375,7 @@ private:
 struct CmdEvictWorker : public PlayerCommand {
 	CmdEvictWorker() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdEvictWorker(const uint32_t t, const int32_t p, Worker& w)
+	CmdEvictWorker(const Time& t, const int32_t p, Worker& w)
 	   : PlayerCommand(t, p), serial(w.serial()) {
 	}
 
@@ -406,7 +399,7 @@ private:
 struct CmdShipScoutDirection : public PlayerCommand {
 	CmdShipScoutDirection() : PlayerCommand(), serial(0), dir(WalkingDir::IDLE) {
 	}  // For savegame loading
-	CmdShipScoutDirection(uint32_t const t, PlayerNumber const p, Serial s, WalkingDir direction)
+	CmdShipScoutDirection(const Time& t, PlayerNumber const p, Serial s, WalkingDir direction)
 	   : PlayerCommand(t, p), serial(s), dir(direction) {
 	}
 
@@ -430,7 +423,7 @@ private:
 struct CmdShipConstructPort : public PlayerCommand {
 	CmdShipConstructPort() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdShipConstructPort(uint32_t const t, PlayerNumber const p, Serial s, Coords c)
+	CmdShipConstructPort(const Time& t, PlayerNumber const p, Serial s, Coords c)
 	   : PlayerCommand(t, p), serial(s), coords(c) {
 	}
 
@@ -455,7 +448,7 @@ struct CmdShipExploreIsland : public PlayerCommand {
 	CmdShipExploreIsland()
 	   : PlayerCommand(), serial(0), island_explore_direction(IslandExploreDirection::kNotSet) {
 	}  // For savegame loading
-	CmdShipExploreIsland(uint32_t const t,
+	CmdShipExploreIsland(const Time& t,
 	                     PlayerNumber const p,
 	                     Serial s,
 	                     IslandExploreDirection direction)
@@ -482,7 +475,7 @@ private:
 struct CmdShipSink : public PlayerCommand {
 	CmdShipSink() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdShipSink(uint32_t const t, PlayerNumber const p, Serial s) : PlayerCommand(t, p), serial(s) {
+	CmdShipSink(const Time& t, PlayerNumber const p, Serial s) : PlayerCommand(t, p), serial(s) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -504,7 +497,7 @@ private:
 struct CmdShipCancelExpedition : public PlayerCommand {
 	CmdShipCancelExpedition() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdShipCancelExpedition(uint32_t const t, PlayerNumber const p, Serial s)
+	CmdShipCancelExpedition(const Time& t, PlayerNumber const p, Serial s)
 	   : PlayerCommand(t, p), serial(s) {
 	}
 
@@ -526,9 +519,15 @@ private:
 
 struct CmdSetWarePriority : public PlayerCommand {
 	// For savegame loading
-	CmdSetWarePriority() : PlayerCommand(), serial_(0), type_(0), index_(), priority_(0) {
+	CmdSetWarePriority()
+	   : PlayerCommand(),
+	     serial_(0),
+	     type_(0),
+	     index_(),
+	     priority_(0),
+	     is_constructionsite_setting_(false) {
 	}
-	CmdSetWarePriority(uint32_t duetime,
+	CmdSetWarePriority(const Time& duetime,
 	                   PlayerNumber sender,
 	                   PlayerImmovable&,
 	                   int32_t type,
@@ -558,9 +557,15 @@ private:
 };
 
 struct CmdSetInputMaxFill : public PlayerCommand {
-	CmdSetInputMaxFill() : PlayerCommand(), serial_(0), index_(), type_(wwWARE), max_fill_(0) {
+	CmdSetInputMaxFill()
+	   : PlayerCommand(),
+	     serial_(0),
+	     index_(),
+	     type_(wwWARE),
+	     max_fill_(0),
+	     is_constructionsite_setting_(false) {
 	}  // For savegame loading
-	CmdSetInputMaxFill(uint32_t duetime,
+	CmdSetInputMaxFill(const Time& duetime,
 	                   PlayerNumber,
 	                   PlayerImmovable&,
 	                   DescriptionIndex,
@@ -592,7 +597,7 @@ private:
 struct CmdChangeTargetQuantity : public PlayerCommand {
 	CmdChangeTargetQuantity() : PlayerCommand(), economy_(0), ware_type_() {
 	}  //  For savegame loading.
-	CmdChangeTargetQuantity(uint32_t duetime,
+	CmdChangeTargetQuantity(const Time& duetime,
 	                        PlayerNumber sender,
 	                        uint32_t economy,
 	                        DescriptionIndex index);
@@ -621,7 +626,7 @@ private:
 struct CmdSetWareTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWareTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {
 	}
-	CmdSetWareTargetQuantity(uint32_t duetime,
+	CmdSetWareTargetQuantity(const Time& duetime,
 	                         PlayerNumber sender,
 	                         uint32_t economy,
 	                         DescriptionIndex index,
@@ -647,7 +652,7 @@ private:
 struct CmdSetWorkerTargetQuantity : public CmdChangeTargetQuantity {
 	CmdSetWorkerTargetQuantity() : CmdChangeTargetQuantity(), permanent_(0) {
 	}
-	CmdSetWorkerTargetQuantity(uint32_t duetime,
+	CmdSetWorkerTargetQuantity(const Time& duetime,
 	                           PlayerNumber sender,
 	                           uint32_t economy,
 	                           DescriptionIndex index,
@@ -674,7 +679,7 @@ struct CmdChangeTrainingOptions : public PlayerCommand {
 	CmdChangeTrainingOptions()
 	   : PlayerCommand(), serial(0), attribute(TrainingAttribute::kHealth), value(0) {
 	}  // For savegame loading
-	CmdChangeTrainingOptions(const uint32_t t,
+	CmdChangeTrainingOptions(const Time& t,
 	                         const PlayerNumber p,
 	                         TrainingSite& ts,
 	                         const TrainingAttribute at,
@@ -704,7 +709,7 @@ private:
 struct CmdDropSoldier : public PlayerCommand {
 	CmdDropSoldier() : PlayerCommand(), serial(0), soldier(0) {
 	}  //  for savegames
-	CmdDropSoldier(const uint32_t t, const int32_t p, Building& b, const int32_t init_soldier)
+	CmdDropSoldier(const Time& t, const int32_t p, Building& b, const int32_t init_soldier)
 	   : PlayerCommand(t, p), serial(b.serial()), soldier(init_soldier) {
 	}
 
@@ -729,7 +734,7 @@ private:
 struct CmdChangeSoldierCapacity : public PlayerCommand {
 	CmdChangeSoldierCapacity() : PlayerCommand(), serial(0), val(0) {
 	}  //  for savegames
-	CmdChangeSoldierCapacity(const uint32_t t, const int32_t p, Building& b, const int32_t i)
+	CmdChangeSoldierCapacity(const Time& t, const int32_t p, Building& b, const int32_t i)
 	   : PlayerCommand(t, p), serial(b.serial()), val(i) {
 	}
 
@@ -754,7 +759,7 @@ private:
 struct CmdEnemyFlagAction : public PlayerCommand {
 	CmdEnemyFlagAction() : PlayerCommand(), serial(0) {
 	}  // For savegame loading
-	CmdEnemyFlagAction(uint32_t t, int32_t p, const Flag& f, const std::vector<Serial>& s)
+	CmdEnemyFlagAction(const Time& t, int32_t p, const Flag& f, const std::vector<Serial>& s)
 	   : PlayerCommand(t, p), serial(f.serial()), soldiers(s) {
 	}
 
@@ -780,7 +785,7 @@ private:
 struct PlayerMessageCommand : public PlayerCommand {
 	PlayerMessageCommand() : PlayerCommand() {
 	}  //  for savegames
-	PlayerMessageCommand(const uint32_t t, const PlayerNumber p, const MessageId& i)
+	PlayerMessageCommand(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerCommand(t, p), message_id_(i) {
 	}
 
@@ -800,7 +805,7 @@ private:
 struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 	CmdMessageSetStatusRead() : PlayerMessageCommand() {
 	}
-	CmdMessageSetStatusRead(const uint32_t t, const PlayerNumber p, const MessageId& i)
+	CmdMessageSetStatusRead(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerMessageCommand(t, p, i) {
 	}
 
@@ -818,7 +823,7 @@ struct CmdMessageSetStatusRead : public PlayerMessageCommand {
 struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
 	CmdMessageSetStatusArchived() : PlayerMessageCommand() {
 	}
-	CmdMessageSetStatusArchived(const uint32_t t, const PlayerNumber p, const MessageId& i)
+	CmdMessageSetStatusArchived(const Time& t, const PlayerNumber p, const MessageId& i)
 	   : PlayerMessageCommand(t, p, i) {
 	}
 
@@ -837,9 +842,9 @@ struct CmdMessageSetStatusArchived : public PlayerMessageCommand {
  * Command to change the stock policy for a ware or worker in a warehouse.
  */
 struct CmdSetStockPolicy : PlayerCommand {
-	CmdSetStockPolicy(uint32_t time,
+	CmdSetStockPolicy(const Time& time,
 	                  PlayerNumber p,
-	                  Building& wh,
+	                  const Building& wh,
 	                  bool isworker,
 	                  DescriptionIndex ware,
 	                  StockPolicy policy);
@@ -867,7 +872,7 @@ private:
 };
 
 struct CmdProposeTrade : PlayerCommand {
-	CmdProposeTrade(uint32_t time, PlayerNumber pn, const Trade& trade);
+	CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade);
 
 	QueueCommandTypes id() const override {
 		return QueueCommandTypes::kProposeTrade;
@@ -889,7 +894,7 @@ private:
 };
 
 struct CmdToggleMuteMessages : PlayerCommand {
-	CmdToggleMuteMessages(uint32_t t, PlayerNumber p, const Building& b, bool a)
+	CmdToggleMuteMessages(const Time& t, PlayerNumber p, const Building& b, bool a)
 	   : PlayerCommand(t, p), building_(b.serial()), all_(a) {
 	}
 
@@ -902,7 +907,7 @@ struct CmdToggleMuteMessages : PlayerCommand {
 	explicit CmdToggleMuteMessages(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdToggleMuteMessages() : PlayerCommand() {
+	CmdToggleMuteMessages() : PlayerCommand(), building_(kInvalidSerial), all_(false) {
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -913,7 +918,7 @@ private:
 };
 
 struct CmdMarkMapObjectForRemoval : PlayerCommand {
-	CmdMarkMapObjectForRemoval(uint32_t t, PlayerNumber p, const Immovable& mo, bool m)
+	CmdMarkMapObjectForRemoval(const Time& t, PlayerNumber p, const Immovable& mo, bool m)
 	   : PlayerCommand(t, p), object_(mo.serial()), mark_(m) {
 	}
 
@@ -926,7 +931,7 @@ struct CmdMarkMapObjectForRemoval : PlayerCommand {
 	explicit CmdMarkMapObjectForRemoval(StreamRead& des);
 	void serialize(StreamWrite& ser) override;
 
-	CmdMarkMapObjectForRemoval() : PlayerCommand() {
+	CmdMarkMapObjectForRemoval() : PlayerCommand(), object_(kInvalidSerial), mark_(false) {
 	}
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -937,7 +942,7 @@ private:
 };
 
 struct CmdPickCustomStartingPosition : PlayerCommand {
-	CmdPickCustomStartingPosition(uint32_t t, PlayerNumber p, const Coords& c)
+	CmdPickCustomStartingPosition(const Time& t, PlayerNumber p, const Coords& c)
 	   : PlayerCommand(t, p), coords_(c) {
 	}
 

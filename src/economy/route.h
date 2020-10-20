@@ -52,7 +52,7 @@ struct Route : public IRoute {
 	int32_t get_nrsteps() const {
 		return route_.size() - 1;
 	}
-	Flag& get_flag(EditorGameBase&, std::vector<Flag*>::size_type);
+	Flag& get_flag(EditorGameBase&, std::vector<Flag*>::size_type) const;
 
 	void trim_start(int32_t count);
 	void truncate(int32_t count);

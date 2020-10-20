@@ -705,10 +705,6 @@ std::string icustring2string(const icu::UnicodeString& convertme) {
 	convertme.toUTF8String(result);
 	return result;
 }
-std::string icuchar2string(const UChar& convertme) {
-	const icu::UnicodeString temp(convertme);
-	return icustring2string(temp);
-}
 
 // True if a string contains a character from the script's code blocks
 bool has_script_character(const char* input, UI::FontSets::Selector script) {

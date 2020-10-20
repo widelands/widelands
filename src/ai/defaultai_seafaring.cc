@@ -89,11 +89,11 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	int32_t const tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
 	uint16_t trees = 0;
 
-	for (uint32_t j = 0; j < immovables.size(); ++j) {
-		if (immovables.at(j).object->has_attribute(rocks_attr)) {
+	for (const Widelands::ImmovableFound& imm_found : immovables) {
+		if (imm_found.object->has_attribute(rocks_attr)) {
 			++rocks;
 		}
-		if (immovables.at(j).object->has_attribute(tree_attr)) {
+		if (imm_found.object->has_attribute(tree_attr)) {
 			++trees;
 		}
 	}
@@ -111,8 +111,8 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
-bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
-	if (gametime > last_seafaring_check_ + 20000U) {
+bool DefaultAI::marine_main_decisions(const Time& gametime) {
+	if (gametime > last_seafaring_check_ + Duration(20 * 1000)) {
 		const Widelands::Map& map = game().map();
 		map_allows_seafaring_ = map.allows_seafaring();
 		last_seafaring_check_ = gametime;
@@ -177,9 +177,8 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	}
 
 	// and now over ships
-	for (std::deque<ShipObserver>::iterator sp_iter = allships.begin(); sp_iter != allships.end();
-	     ++sp_iter) {
-		if (sp_iter->ship->state_is_expedition()) {
+	for (const ShipObserver& observer : allships) {
+		if (observer.ship->state_is_expedition()) {
 			++expeditions_in_progress;
 		}
 	}
@@ -258,7 +257,7 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 }
 
 // This identifies ships that are waiting for command
-bool DefaultAI::check_ships(uint32_t const gametime) {
+bool DefaultAI::check_ships(const Time& gametime) {
 	// There is possibility that the map is not seafaring but we still have ships and/or shipyards
 	if (!map_allows_seafaring_ &&
 	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
@@ -298,14 +297,14 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			     so.ship->get_ship_state() ==
 			        Widelands::Ship::ShipStates::kExpeditionPortspaceFound) &&
 			    !so.waiting_for_command_) {
-				if (gametime - so.last_command_time > 180 * 1000) {
+				if (gametime - so.last_command_time > Duration(180 * 1000)) {
 					so.waiting_for_command_ = true;
 					log_warn_time(
-					   game().get_gametime(),
+					   gametime,
 					   "  %1d: last command for ship %s at %3dx%3d was %3d seconds ago, something wrong "
 					   "here?...\n",
 					   player_number(), so.ship->get_shipname().c_str(), so.ship->get_position().x,
-					   so.ship->get_position().y, (gametime - so.last_command_time) / 1000);
+					   so.ship->get_position().y, (gametime - so.last_command_time).get() / 1000);
 				}
 			}
 
@@ -317,7 +316,8 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				// escape mode here indicates that we are going over known ports, that means that last
 				// port space we found when circumventing the island was already known to the ship.
 				// Or(!) this is a island without a port and ship would sail around forever
-			} else if ((so.escape_mode || (so.last_command_time + 5 * 60 * 1000) < gametime) &&
+			} else if ((so.escape_mode ||
+			            (so.last_command_time + Duration(5 * 60 * 1000)) < gametime) &&
 			           so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting) {
 				attempt_escape(so);
 			}
@@ -344,23 +344,21 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 	while (!marine_task_queue.empty()) {
 		if (marine_task_queue.back() == kStopShipyard) {
 			// iterate over all production sites searching for shipyard
-			for (std::deque<ProductionSiteObserver>::iterator site = productionsites.begin();
-			     site != productionsites.end(); ++site) {
-				if (site->bo->is(BuildingAttribute::kShipyard)) {
-					if (!site->site->is_stopped()) {
-						game().send_player_start_stop_building(*site->site);
+			for (const ProductionSiteObserver& observer : productionsites) {
+				if (observer.bo->is(BuildingAttribute::kShipyard)) {
+					if (!observer.site->is_stopped()) {
+						game().send_player_start_stop_building(*observer.site);
 					}
 				}
 			}
 		}
 
 		if (marine_task_queue.back() == kReprioritize) {
-			for (std::deque<ProductionSiteObserver>::iterator site = productionsites.begin();
-			     site != productionsites.end(); ++site) {
-				if (site->bo->is(BuildingAttribute::kShipyard)) {
-					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(*site->site, Widelands::wwWARE,
-						                                     site->bo->inputs.at(k),
+			for (const ProductionSiteObserver& observer : productionsites) {
+				if (observer.bo->is(BuildingAttribute::kShipyard)) {
+					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
+						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
+						                                     observer.bo->inputs.at(k),
 						                                     Widelands::kPriorityHigh);
 					}
 				}
@@ -380,7 +378,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 /**
  * This is part of check_ships() function separated for readability
  */
-void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
+void DefaultAI::check_ship_in_expedition(ShipObserver& so, const Time& gametime) {
 	Widelands::PlayerNumber const pn = player_->player_number();
 
 	// There is theoretical possibility that we have more than one ship in expedition mode,
@@ -398,7 +396,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 
 	// consistency check
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
-	uint32_t expedition_time = gametime - persistent_data->expedition_start_time;
+	Duration expedition_time = gametime - persistent_data->expedition_start_time;
 
 	// Obviously a new expedition
 	if (expedition_ship_ == kNoShip) {
@@ -413,7 +411,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		// Also we attempt to cancel expedition (the code for cancellation may not work properly)
 		// TODO(toptopple): - test expedition cancellation deeply (may need to be fixed)
 	} else if (expedition_time >= expedition_max_duration) {
-		assert(persistent_data->expedition_start_time > 0);
+		assert(persistent_data->expedition_start_time > Time(0));
 		persistent_data->colony_scan_area = Widelands::Player::AiPersistentState::kColonyScanMinArea;
 		persistent_data->no_more_expeditions = true;
 		game().send_player_cancel_expedition_ship(*so.ship);
@@ -438,8 +436,9 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		assert(expedition_time < expedition_max_duration);
 
 		// calculate percentage of remaining expedition time (range 0-100)
-		const uint32_t remaining_time = 100 - ((gametime - persistent_data->expedition_start_time) /
-		                                       (expedition_max_duration / 100));
+		const uint8_t remaining_time =
+		   100 - ((gametime - persistent_data->expedition_start_time).get() /
+		          (expedition_max_duration.get() / 100));
 		assert(remaining_time <= 100);
 
 		// calculate a new persistent_data->colony_scan_area
@@ -488,7 +487,7 @@ Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
 // navigation decisions (these notifications are processes not in 'real time')
 void DefaultAI::expedition_management(ShipObserver& so) {
 
-	const int32_t gametime = game().get_gametime();
+	const Time& gametime = game().get_gametime();
 	Widelands::PlayerNumber const pn = player_->player_number();
 
 	// second we put current spot into expedition visited_spots

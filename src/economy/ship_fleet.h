@@ -47,7 +47,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipFleetDescr);
 };
 
-constexpr int32_t kFleetInterval = 4000;
+constexpr Duration kFleetInterval = Duration(4000);
 constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
 
 /**
@@ -82,7 +82,7 @@ struct ShipFleet : MapObject {
 	explicit ShipFleet(Player* player);
 
 	PortDock* get_dock(Flag& flag) const;
-	PortDock* get_dock(EditorGameBase&, Coords) const;
+	PortDock* get_dock(const EditorGameBase&, Coords) const;
 	PortDock* get_arbitrary_dock() const;
 	void set_economy(Economy* e, WareWorker);
 
@@ -113,7 +113,7 @@ struct ShipFleet : MapObject {
 		return schedule_;
 	}
 
-	std::vector<Ship*>& get_ships() {
+	const std::vector<Ship*>& get_ships() const {
 		return ships_;
 	}
 	std::vector<PortDock*>& get_ports() {

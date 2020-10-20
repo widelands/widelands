@@ -22,6 +22,7 @@
 
 #include <cassert>
 
+#include "base/times.h"
 #include "graphic/playercolor.h"
 #include "logic/player_end_result.h"
 #include "logic/widelands.h"
@@ -44,7 +45,7 @@ class Player;
 struct PlayerEndStatus {
 	PlayerNumber player;
 	PlayerEndResult result;
-	uint32_t time;
+	Time time;
 	std::string info;
 };
 
