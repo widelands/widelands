@@ -36,7 +36,7 @@ public:
 	void think() override;
 
 	void send_player_command(Widelands::PlayerCommand*) override;
-	int32_t get_frametime() override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 	uint32_t real_speed() override;
 	uint32_t desired_speed() override;
@@ -46,7 +46,7 @@ public:
 
 private:
 	struct CmdReplayEnd : public Widelands::Command {
-		explicit CmdReplayEnd(uint32_t const init_duetime) : Widelands::Command(init_duetime) {
+		explicit CmdReplayEnd(const Time& init_duetime) : Widelands::Command(init_duetime) {
 		}
 		void execute(Widelands::Game& game) override;
 		Widelands::QueueCommandTypes id() const override;
@@ -55,7 +55,7 @@ private:
 	Widelands::Game& game_;
 	std::unique_ptr<Widelands::ReplayReader> replayreader_;
 	int32_t lastframe_;
-	int32_t time_;
+	Time time_;
 	uint32_t speed_;
 	bool paused_;
 };

@@ -867,7 +867,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 	PlayerImmovable::cleanup(egbase);
 }
 
-void Flag::draw(uint32_t gametime,
+void Flag::draw(const Time& gametime,
                 const InfoToDraw,
                 const Vector2f& field_on_dst,
                 const Coords& coords,
@@ -880,7 +880,7 @@ void Flag::draw(uint32_t gametime,
 
 	const RGBColor& player_color = owner().get_playercolor();
 	dst->blit_animation(field_on_dst, coords, scale, owner().tribe().flag_animation(),
-	                    gametime - animstart_, &player_color);
+	                    Time((gametime - animstart_).get()), &player_color);
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
 		Vector2f warepos = field_on_dst;
@@ -891,7 +891,7 @@ void Flag::draw(uint32_t gametime,
 			warepos.y -= (6.f + (i - 8.f) * 3.f) * scale;
 		}
 		dst->blit_animation(warepos, Widelands::Coords::null(), scale,
-		                    wares_[i].ware->descr().get_animation("idle", wares_[i].ware), 0,
+		                    wares_[i].ware->descr().get_animation("idle", wares_[i].ware), Time(0),
 		                    &player_color);
 	}
 }

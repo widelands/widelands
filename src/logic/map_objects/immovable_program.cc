@@ -147,9 +147,10 @@ ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& argumen
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
-	immovable.program_step(game, parameters.duration ? 1 + game.logic_rand() % parameters.duration +
-	                                                      game.logic_rand() % parameters.duration :
-	                                                   0);
+	immovable.program_step(
+	   game, Duration(parameters.duration.get() ? 1 + game.logic_rand() % parameters.duration.get() +
+	                                                 game.logic_rand() % parameters.duration.get() :
+	                                              0));
 }
 
 /* RST
@@ -576,8 +577,8 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 		         descr.name().c_str());
 		animation_name_ = arguments[0];
 
-		buildtime_ = read_positive(arguments[1]);
-		decaytime_ = read_positive(arguments[2]);
+		buildtime_ = Duration(read_positive(arguments[1]));
+		decaytime_ = Duration(read_positive(arguments[2]));
 	} else {
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');

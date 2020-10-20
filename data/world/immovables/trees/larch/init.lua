@@ -29,7 +29,7 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 5, 13 }
+         hotspot = { 4, 12 }
       }
    },
 }
@@ -55,7 +55,7 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 10, 29 }
+         hotspot = { 9, 28 }
       }
    },
 }
@@ -80,7 +80,7 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 13, 49 }
+         hotspot = { 12, 48 }
       }
    },
 }
@@ -111,7 +111,7 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 16, 60 },
+         hotspot = { 15, 59 },
          sound_effect = {
             path = "sound/animals/bird6",
             priority = 10

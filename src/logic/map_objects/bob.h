@@ -217,7 +217,7 @@ public:
 	uint32_t get_current_anim() const {
 		return anim_;
 	}
-	int32_t get_animstart() const {
+	const Time& get_animstart() const {
 		return animstart_;
 	}
 
@@ -225,7 +225,7 @@ public:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 	void schedule_destroy(Game&);
-	void schedule_act(Game&, uint32_t tdelta);
+	void schedule_act(Game&, const Duration& tdelta);
 	void skip_act();
 	Vector2f calc_drawpos(const EditorGameBase&, const Vector2f& field_on_dst, float scale) const;
 	void set_owner(Player*);
@@ -310,7 +310,7 @@ public:
 	}
 	State* get_state(const Task&);
 	State const* get_state(const Task&) const;
-	void push_task(Game& game, const Task& task, uint32_t tdelta = 10);
+	void push_task(Game& game, const Task& task, const Duration& tdelta = Duration(10));
 	void pop_task(Game&);
 
 	void signal_handled();
@@ -365,10 +365,10 @@ private:
 	Bob* linknext_;     ///< next object on this node
 	Bob** linkpprev_;
 	uint32_t anim_;
-	int32_t animstart_;  ///< gametime when the animation was started
+	Time animstart_;  ///< gametime when the animation was started
 	WalkingDir walking_;
-	int32_t walkstart_;  ///< start time (used for interpolation)
-	int32_t walkend_;    ///< end time (used for interpolation)
+	Time walkstart_;  ///< start time (used for interpolation)
+	Time walkend_;    ///< end time (used for interpolation)
 
 	// Task framework variables
 	std::vector<State> stack_;
