@@ -1,6 +1,6 @@
 -- RST
 -- messages.lua
--- --------------
+-- ------------
 --
 -- Functions to send messages to the player and to add objectives to campaigns.
 
@@ -11,7 +11,7 @@ include "scripting/table.lua"
 include "scripting/ui.lua"
 
 -- RST
--- .. function:: send_to_inbox_after(player, title, body, parameters)
+-- .. function:: send_to_inbox(player, title, body, parameters)
 --
 --    Sends a message to the inbox of a player.
 --    If the popup parameter is true and the player is in roadbuilding mode,
@@ -27,7 +27,7 @@ include "scripting/ui.lua"
 --                     for :meth:`wl.game.Player.send_to_inbox`, e.g. { field = f, popup = true }.
 --                     The popup parameter must be set.
 --
-function send_to_inbox_after(player, title, body, parameters)
+function send_to_inbox(player, title, body, parameters)
    if (parameters["popup"]) then
       wait_for_roadbuilding()
    end
@@ -50,9 +50,9 @@ function send_to_all_inboxes(text, heading)
    push_textdomain("widelands")
    for idx,plr in ipairs(game.players) do
       if (heading ~= nil and heading ~= "") then
-         send_to_inbox_after(plr, _"Status", text, {popup=true, heading=heading})
+         send_to_inbox(plr, _"Status", text, {popup=true, heading=heading})
       else
-         send_to_inbox_after(plr, _"Status", text, {popup=true})
+         send_to_inbox(plr, _"Status", text, {popup=true})
       end
    end
    pop_textdomain()
@@ -90,9 +90,10 @@ end
 -- .. function:: campaign_message_box({message, [sleeptime, parameters]})
 --
 --    Sets the width and height of the message box and calls
---    :meth:`message_box` for player 1. This function expects a table, so surround all values in curly braces.
+--    :meth:`message_box` for player 1. This function expects a table, so surround 
+--    all values in a pair of curly braces.
 --
---    :arg message: the message consist of the `title` and the `body`. Note that the body
+--    :arg message: the message consist of the `title` and the `body`. Note that the `body`
 --                  must be formatted using the :ref:`richtext functions <richtext.lua>`.
 --    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
