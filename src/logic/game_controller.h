@@ -22,6 +22,7 @@
 
 #include <string>
 
+#include "base/times.h"
 #include "logic/player_end_result.h"
 
 namespace Widelands {
@@ -49,7 +50,7 @@ public:
 
 	// TODO(Klaus Halfmann): Command must be deleted once it was handled.
 	virtual void send_player_command(Widelands::PlayerCommand*) = 0;
-	virtual int32_t get_frametime() = 0;
+	virtual Duration get_frametime() = 0;
 	virtual GameType get_game_type() = 0;
 
 	/**

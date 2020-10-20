@@ -227,7 +227,7 @@ private:
 	void check_splits();
 	void split(const std::set<OPtr<Flag>>&);
 
-	void start_request_timer(int32_t delta = 200);
+	void start_request_timer(const Duration& delta = Duration(200));
 
 	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
 	void process_requests(Game&, RSPairStruct* supply_pairs);

@@ -65,7 +65,11 @@ void MapFlagdataPacket::read(FileSystem& fs,
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
-					flag.animstart_ = fr.unsigned_16();
+					// TODO(Nordfriese): Saveloading compatibility:
+					// Change this line when we next increase the packet version:
+					flag.animstart_ = Time(fr.unsigned_16());
+					// SHOULD BE: flag.animstart_ = Time(fr);
+					// (same below)
 
 					{
 						FCoords building_position = map.get_fcoords(flag.position_);
@@ -174,7 +178,11 @@ void MapFlagdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 			//  Owner is already written in the existanz packet.
 
 			//  Animation is set by creator.
-			fw.unsigned_16(flag->animstart_);
+			// TODO(Nordfriese): Saveloading compatibility:
+			// Change this line when we next increase the packet version:
+			fw.unsigned_16(flag->animstart_.get());
+			// SHOULD BE: flag->animstart_.save(fw);
+			// (same above)
 
 			//  Roads are not saved, they are set on load.
 
