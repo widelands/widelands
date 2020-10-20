@@ -231,7 +231,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(
         &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
-     training_wheels_(&box_ingame_, Vector2i::zero(), _("Teach me how to play")),
+	 training_wheels_box_(&box_ingame_, 0, 0, UI::Box::Horizontal),
+     training_wheels_(&training_wheels_box_, Vector2i::zero(), _("Teach me how to play")),
+	 training_wheels_reset_(&training_wheels_box_, "reset_training_wheels", 0, 0, 0, 0,
+							UI::ButtonStyle::kWuiSecondary, _("Reset progress")),
      os_(opt) {
 
 	// Buttons
@@ -296,10 +299,19 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
-	box_ingame_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
+	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
+	training_wheels_box_.add_inf_space();
+	training_wheels_box_.add(&training_wheels_reset_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	training_wheels_box_.add_space(kPadding);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
+	training_wheels_reset_.sigclicked.connect([this]() {
+		training_wheels_reset_.set_enabled(false);
+		Profile training_wheels_profile;
+		training_wheels_profile.write(kTrainingWheelsFile);
+	});
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
 	ok_.sigclicked.connect(

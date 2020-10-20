@@ -26,7 +26,6 @@
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_table.h"
 
-const std::string kTrainingWheelsFile = kSaveDir + g_fs->file_separator() + "training_wheels.conf";
 const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs->file_separator() +
                                                 std::string("training_wheels") +
                                                 g_fs->file_separator();
@@ -37,7 +36,7 @@ TrainingWheels::TrainingWheels(LuaInterface& lua)
    : current_objective_(""), profile_(Profile::err_log), lua_(lua) {
 	g_fs->ensure_directory_exists(kSaveDir);
 	if (g_fs->file_exists(kTrainingWheelsFile)) {
-		profile_.read(kTrainingWheelsFile.c_str(), "global");
+		profile_.read(kTrainingWheelsFile, "global");
 	} else {
 		write();
 	}
@@ -122,7 +121,7 @@ void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_
 
 void TrainingWheels::write() {
 	try {  //  overwrite the old config file
-		profile_.write(kTrainingWheelsFile.c_str());
+		profile_.write(kTrainingWheelsFile);
 	} catch (const std::exception& e) {
 		log_warn("could not save training wheels: %s\n", e.what());
 	}
