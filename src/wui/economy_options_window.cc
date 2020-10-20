@@ -189,7 +189,7 @@ void EconomyOptionsWindow::create(InteractiveBase& ibase, const Widelands::Flag&
 		}
 		if (!window_open) {
 			new EconomyOptionsWindow(igbase, ware_economy, worker_economy,
-									 igbase->can_act(ware_economy->owner().player_number()));
+			                         igbase->can_act(ware_economy->owner().player_number()));
 		}
 	}
 }
