@@ -149,22 +149,22 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 
 		buttons->add_inf_space();
 
-		b = new UI::Button(buttons,
-						   "configure_economy",
-						   0,
-						   0,
-						   34,
-						   34,
-						   UI::ButtonStyle::kWuiMenu,
-						   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
-						   _("Configure economy"));
-		buttons->add(b);
+		if (upcast(InteractiveGameBase, igbase, &ib)) {
+			b = new UI::Button(buttons,
+							   "configure_economy",
+							   0,
+							   0,
+							   34,
+							   34,
+							   UI::ButtonStyle::kWuiMenu,
+							   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
+							   _("Configure economy"));
+			buttons->add(b);
 
-		b->sigclicked.connect([this, &ib, &wh]() {
-			if (upcast(InteractiveGameBase, igbase, &ib)) {
-				EconomyOptionsWindow::create(*igbase, wh.base_flag());
-			}
-		});
+			b->sigclicked.connect([this, igbase, &wh]() {
+					EconomyOptionsWindow::create(*igbase, wh.base_flag());
+			});
+		}
 	}
 }
 
