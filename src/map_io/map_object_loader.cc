@@ -84,7 +84,7 @@ void MapObjectLoader::load_finish_game(Game& g) {
 	}
 
 	while (!schedule_act_.empty()) {
-		schedule_act_.back()->schedule_act(g, 1);
+		schedule_act_.back()->schedule_act(g, Duration(1));
 		schedule_act_.pop_back();
 	}
 }

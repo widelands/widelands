@@ -342,7 +342,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			cr->resume();
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + Duration(100), std::move(cr)));
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -538,12 +538,12 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Queue first statistics calculation
-		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
-		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
+		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 
 	// We don't run the training wheel objectives in scenarios, but we want the objectives available
@@ -629,7 +629,7 @@ void Game::think() {
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(ctrl_->get_frametime(), get_gametime_pointer());
+		cmdqueue().run_queue(Duration(ctrl_->get_frametime()), get_gametime_pointer());
 
 		// check if autosave is needed
 		savehandler_.think(*this);

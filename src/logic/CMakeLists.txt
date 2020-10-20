@@ -61,6 +61,7 @@ wl_library(logic_game_controller
   USES_SDL2
   DEPENDS
     ai
+    base_times
     logic
     logic_commands
     logic_game_settings
@@ -177,6 +178,7 @@ wl_library(logic_commands
     base_i18n
     base_log
     base_macros
+    base_times
     economy # TODO(GunChleoc): Circular dependency
     graphic_text_layout
     io_fileread
@@ -229,6 +231,7 @@ wl_library(logic
     base_random
     base_scoped_timer
     base_time_string
+    base_times
     build_info
     economy
     game_io

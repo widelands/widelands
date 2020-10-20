@@ -51,16 +51,16 @@
 #include "logic/playercommand.h"
 
 // following is in milliseconds (widelands counts time in ms)
-constexpr int kFieldInfoExpiration = 12 * 1000;
-constexpr int kMineFieldInfoExpiration = 20 * 1000;
-constexpr int kNewMineConstInterval = 19000;
-constexpr int kBusyMineUpdateInterval = 2000;
+constexpr Duration kFieldInfoExpiration(12 * 1000);
+constexpr Duration kMineFieldInfoExpiration(20 * 1000);
+constexpr Duration kNewMineConstInterval(19000);
+constexpr Duration kBusyMineUpdateInterval(2000);
 // building of the same building can be started after 25s at earliest
-constexpr int kBuildingMinInterval = 25 * 1000;
-constexpr int kMinBFCheckInterval = 5 * 1000;
-constexpr int kMinMFCheckInterval = 19 * 1000;
-constexpr int kMarineDecisionInterval = 20 * 1000;
-constexpr int kRemainingBasicBuildingsResetTime = 1 * 60 * 1000;
+constexpr Duration kBuildingMinInterval(25 * 1000);
+constexpr Duration kMinBFCheckInterval(5 * 1000);
+constexpr Duration kMinMFCheckInterval(19 * 1000);
+constexpr Duration kMarineDecisionInterval(20 * 1000);
+constexpr Duration kRemainingBasicBuildingsResetTime(1 * 60 * 1000);
 
 // following two are used for roads management, for creating shortcuts and dismantling dispensable
 // roads
@@ -79,11 +79,21 @@ constexpr int kMineTypes = 4;
 
 namespace AI {
 
+// Fix undefined references
+constexpr Duration DefaultAI::kManagementUpdateInterval;
+constexpr Duration DefaultAI::kStatUpdateInterval;
+constexpr Duration DefaultAI::kFlagWarehouseUpdInterval;
+constexpr Duration DefaultAI::kExpeditionMinDuration;
+constexpr Duration DefaultAI::kExpeditionMaxDuration;
+constexpr Duration DefaultAI::kShipCheckInterval;
+constexpr Duration DefaultAI::kCampaignDuration;
+constexpr Duration DefaultAI::kTrainingSitesCheckInterval;
+
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
 
-uint32_t DefaultAI::last_seafaring_check_ = 0;
+Time DefaultAI::last_seafaring_check_ = Time(0);
 bool DefaultAI::map_allows_seafaring_ = false;
 
 /// Constructor of DefaultAI
@@ -237,7 +247,7 @@ void DefaultAI::think() {
 		late_initialization();
 	}
 
-	const uint32_t gametime = static_cast<uint32_t>(game().get_gametime());
+	const Time& gametime = game().get_gametime();
 
 	if (next_ai_think_ > gametime) {
 		return;
@@ -245,7 +255,7 @@ void DefaultAI::think() {
 
 	// AI now thinks twice in a seccond, if the game engine allows this
 	// if too busy, the period can be many seconds.
-	next_ai_think_ = gametime + 500;
+	next_ai_think_ = gametime + Duration(500);
 
 	if (player_->is_picking_custom_starting_position()) {
 		// TODO(Nordfriese): In picking_custom_starting_position mode, try to find
@@ -263,7 +273,7 @@ void DefaultAI::think() {
 
 	sort_task_pool();
 
-	const int32_t delay_time = gametime - taskPool.front().due_time;
+	const int32_t delay_time = gametime.get() - taskPool.front().due_time.get();
 
 	// Here we decide how many jobs will be run now (none - 5)
 	// in case no job is due now, it can be zero
@@ -343,7 +353,7 @@ void DefaultAI::think() {
 			if (check_economies()) {  // is a must
 				return;
 			}
-			set_taskpool_task_time(gametime + 1000, SchedulerTaskId::kRoadCheck);
+			set_taskpool_task_time(gametime + Duration(1000), SchedulerTaskId::kRoadCheck);
 			// testing 5 roads
 			{
 				const int32_t roads_to_check = roads.size() / 30 + 1;
@@ -357,26 +367,26 @@ void DefaultAI::think() {
 			}
 			break;
 		case SchedulerTaskId::kUnbuildableFCheck:
-			set_taskpool_task_time(gametime + 4000, SchedulerTaskId::kUnbuildableFCheck);
+			set_taskpool_task_time(gametime + Duration(4000), SchedulerTaskId::kUnbuildableFCheck);
 			update_all_not_buildable_fields();
 			break;
 		case SchedulerTaskId::kCheckEconomies:
 			check_economies();
-			set_taskpool_task_time(gametime + 8000, SchedulerTaskId::kCheckEconomies);
+			set_taskpool_task_time(gametime + Duration(8000), SchedulerTaskId::kCheckEconomies);
 			break;
 		case SchedulerTaskId::kProductionsitesStats:
 			update_productionsite_stats();
 			// Updating the stats every 10 seconds should be enough
-			set_taskpool_task_time(gametime + 10000, SchedulerTaskId::kProductionsitesStats);
+			set_taskpool_task_time(gametime + Duration(10000), SchedulerTaskId::kProductionsitesStats);
 			break;
 		case SchedulerTaskId::kConstructBuilding:
 			if (check_economies()) {  // economies must be consistent
 				return;
 			}
-			if (gametime < 15000) {  // More frequent at the beginning of game
-				set_taskpool_task_time(gametime + 2000, SchedulerTaskId::kConstructBuilding);
+			if (gametime < Time(15000)) {  // More frequent at the beginning of game
+				set_taskpool_task_time(gametime + Duration(2000), SchedulerTaskId::kConstructBuilding);
 			} else {
-				set_taskpool_task_time(gametime + 6000, SchedulerTaskId::kConstructBuilding);
+				set_taskpool_task_time(gametime + Duration(6000), SchedulerTaskId::kConstructBuilding);
 			}
 			if (construct_building(gametime)) {
 				time_of_last_construction_ = gametime;
@@ -387,7 +397,8 @@ void DefaultAI::think() {
 				return;
 			}
 			{
-				set_taskpool_task_time(gametime + 15000, SchedulerTaskId::kCheckProductionsites);
+				set_taskpool_task_time(
+				   gametime + Duration(15000), SchedulerTaskId::kCheckProductionsites);
 				// testing 5 productionsites (if there are 5 of them)
 				int32_t ps_to_check = (productionsites.size() < 5) ? productionsites.size() : 5;
 				for (int j = 0; j < ps_to_check; ++j) {
@@ -404,14 +415,14 @@ void DefaultAI::think() {
 			{
 				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 5;
 				set_taskpool_task_time(
-				   gametime + wait_multiplier * kShipCheckInterval, SchedulerTaskId::kCheckShips);
+				   gametime + kShipCheckInterval * wait_multiplier, SchedulerTaskId::kCheckShips);
 			}
 			break;
 		case SchedulerTaskId::KMarineDecisions:
 			// if function returns false, we can postpone for next call
 			{
 				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 5;
-				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
+				set_taskpool_task_time(gametime + kMarineDecisionInterval * wait_multiplier,
 				                       SchedulerTaskId::KMarineDecisions);
 			}
 			break;
@@ -419,7 +430,7 @@ void DefaultAI::think() {
 			if (check_economies()) {  // economies must be consistent
 				return;
 			}
-			set_taskpool_task_time(gametime + 15000, SchedulerTaskId::kCheckMines);
+			set_taskpool_task_time(gametime + Duration(15000), SchedulerTaskId::kCheckMines);
 			// checking 3 mines if possible
 			{
 				int32_t mines_to_check = (mines_.size() < 5) ? mines_.size() : 5;
@@ -435,9 +446,11 @@ void DefaultAI::think() {
 		case SchedulerTaskId::kCheckMilitarysites:
 			// just to be sure the value is reset
 			if (check_militarysites(gametime)) {
-				set_taskpool_task_time(gametime + 15 * 1000, SchedulerTaskId::kCheckMilitarysites);
+				set_taskpool_task_time(
+				   gametime + Duration(15 * 1000), SchedulerTaskId::kCheckMilitarysites);
 			} else {
-				set_taskpool_task_time(gametime + 4 * 1000, SchedulerTaskId::kCheckMilitarysites);
+				set_taskpool_task_time(
+				   gametime + Duration(4 * 1000), SchedulerTaskId::kCheckMilitarysites);
 			}
 			break;
 		case SchedulerTaskId::kCheckTrainingsites:
@@ -447,25 +460,26 @@ void DefaultAI::think() {
 			break;
 		case SchedulerTaskId::kCountMilitaryVacant:
 			count_military_vacant_positions();
-			set_taskpool_task_time(gametime + 25 * 1000, SchedulerTaskId::kCountMilitaryVacant);
+			set_taskpool_task_time(
+			   gametime + Duration(25 * 1000), SchedulerTaskId::kCountMilitaryVacant);
 			break;
 		case SchedulerTaskId::kWareReview:
 			if (check_economies()) {  // economies must be consistent
 				return;
 			}
-			set_taskpool_task_time(gametime + 15 * 60 * 1000, SchedulerTaskId::kWareReview);
+			set_taskpool_task_time(gametime + Duration(15 * 60 * 1000), SchedulerTaskId::kWareReview);
 			review_wares_targets(gametime);
 			break;
 		case SchedulerTaskId::kPrintStats:
 			if (check_economies()) {  // economies must be consistent
 				return;
 			}
-			set_taskpool_task_time(gametime + 10 * 60 * 1000, SchedulerTaskId::kPrintStats);
+			set_taskpool_task_time(gametime + Duration(10 * 60 * 1000), SchedulerTaskId::kPrintStats);
 			print_stats(gametime);
 			break;
 		case SchedulerTaskId::kCheckEnemySites:
 			check_enemy_sites(gametime);
-			set_taskpool_task_time(gametime + 19 * 1000, SchedulerTaskId::kCheckEnemySites);
+			set_taskpool_task_time(gametime + Duration(19 * 1000), SchedulerTaskId::kCheckEnemySites);
 			break;
 		case SchedulerTaskId::kManagementUpdate:
 			// This task is used for training the AI, so it should be usually disabled
@@ -528,7 +542,7 @@ void DefaultAI::late_initialization() {
 		ai_training_mode_ = true;
 		management_data.set_ai_training_mode();
 	}
-	const uint32_t gametime = game().get_gametime();
+	const Time& gametime = game().get_gametime();
 
 	log_info_time(gametime, "ComputerPlayer(%d): initializing as type %u%s\n", player_number(),
 	              static_cast<unsigned int>(type_),
@@ -550,7 +564,7 @@ void DefaultAI::late_initialization() {
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
 	const bool create_basic_buildings_list =
-	   !persistent_data->initialized || (gametime < kRemainingBasicBuildingsResetTime);
+	   !persistent_data->initialized || (gametime.get() < kRemainingBasicBuildingsResetTime.get());
 
 	if (!persistent_data->initialized) {
 		// As all data are initialized without given values, they must be populated with reasonable
@@ -571,8 +585,7 @@ void DefaultAI::late_initialization() {
 
 	} else {
 		// Doing some consistency checks
-		check_range<uint32_t>(
-		   persistent_data->expedition_start_time, gametime, "expedition_start_time");
+		check_range<Time>(persistent_data->expedition_start_time, gametime, "expedition_start_time");
 		check_range<uint16_t>(persistent_data->ships_utilization, 0, 10000, "ships_utilization_");
 
 		// for backward consistency
@@ -633,12 +646,13 @@ void DefaultAI::late_initialization() {
 		bo.cnt_limit_by_aimode = std::numeric_limits<int32_t>::max();
 		bo.cnt_upgrade_pending = 0;
 		bo.stocklevel_count = 0;
-		bo.stocklevel_time = 0;
-		bo.last_dismantle_time = 0;
+		bo.stocklevel_time = Time(0);
+		bo.last_dismantle_time = Time(0);
 		// this is set to negative number, otherwise the AI would wait 25 sec
 		// after game start not building anything
-		bo.construction_decision_time = -60 * 60 * 1000;
-		bo.last_building_built = kNever;
+		// TODO(Nordfriese): …but times can no longer be negative. Seems to be working fine though…
+		bo.construction_decision_time = Time(0);  // -60 * 60 * 1000;
+		bo.last_building_built = Time();
 		bo.build_material_shortage = false;
 		bo.current_stats = 0;
 		bo.unoccupied_count = 0;
@@ -673,8 +687,8 @@ void DefaultAI::late_initialization() {
 			log_dbg_time(
 			   gametime, " AI %d: %s strictly requires supporters\n", player_number(), bo.name);
 		}
-		bo.prohibited_till = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
-		bo.forced_after = bh.get_forced_after() * 1000;        // value in conf is in seconds
+		bo.prohibited_till = Time(bh.get_prohibited_till() * 1000);  // value in conf is in seconds
+		bo.forced_after = Time(bh.get_forced_after() * 1000);        // value in conf is in seconds
 		if (bld.get_isport()) {
 			bo.set_is(BuildingAttribute::kPort);
 		}
@@ -960,59 +974,59 @@ void DefaultAI::late_initialization() {
 	}
 
 	// Populating taskPool with all AI jobs and their starting times
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 0),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(0)),
 	                                 SchedulerTaskId::kConstructBuilding, 6,
 	                                 "construct a building"));
 	taskPool.push_back(SchedulerTask(
-	   std::max<uint32_t>(gametime, 1 * 1000), SchedulerTaskId::kRoadCheck, 2, "roads check"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 15 * 1000),
+	   std::max<Time>(gametime, Time(1000)), SchedulerTaskId::kRoadCheck, 2, "roads check"));
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(15 * 1000)),
 	                                 SchedulerTaskId::kCheckProductionsites, 5,
 	                                 "productionsites check"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(30 * 1000)),
 	                                 SchedulerTaskId::kProductionsitesStats, 1,
 	                                 "productionsites statistics"));
 	taskPool.push_back(SchedulerTask(
-	   std::max<uint32_t>(gametime, 30 * 1000), SchedulerTaskId::kCheckMines, 5, "check mines"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 0 * 1000),
+	   std::max<Time>(gametime, Time(30 * 1000)), SchedulerTaskId::kCheckMines, 5, "check mines"));
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(0)),
 	                                 SchedulerTaskId::kCheckMilitarysites, 5,
 	                                 "check militarysites"));
 	taskPool.push_back(SchedulerTask(
-	   std::max<uint32_t>(gametime, 30 * 1000), SchedulerTaskId::kCheckShips, 5, "check ships"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 1 * 1000),
+	   std::max<Time>(gametime, Time(30 * 1000)), SchedulerTaskId::kCheckShips, 5, "check ships"));
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
 	                                 SchedulerTaskId::kCheckEconomies, 1, "check economies"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 30 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(30 * 1000)),
 	                                 SchedulerTaskId::KMarineDecisions, 5, "marine decisions"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 2 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(2 * 60 * 1000)),
 	                                 SchedulerTaskId::kCheckTrainingsites, 5,
 	                                 "check training sites"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 1 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
 	                                 SchedulerTaskId::kBbuildableFieldsCheck, 2,
 	                                 "check buildable fields"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 1 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
 	                                 SchedulerTaskId::kMineableFieldsCheck, 2,
 	                                 "check mineable fields"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 1 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(1000)),
 	                                 SchedulerTaskId::kUnbuildableFCheck, 1,
 	                                 "check unbuildable fields"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 15 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(15 * 60 * 1000)),
 	                                 SchedulerTaskId::kWareReview, 9, "wares review"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 60 * 1000)),
 	                                 SchedulerTaskId::kPrintStats, 9, "print statistics"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 1 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(60 * 1000)),
 	                                 SchedulerTaskId::kCountMilitaryVacant, 2,
 	                                 "count military vacant"));
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 60 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 60 * 1000)),
 	                                 SchedulerTaskId::kCheckEnemySites, 6, "check enemy sites"));
 	if (ai_training_mode_) {
-		taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 1000),
+		taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 1000)),
 		                                 SchedulerTaskId::kManagementUpdate, 8, "reviewing"));
 	}
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 9 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(9 * 1000)),
 	                                 SchedulerTaskId::kUpdateStats, 6, "update player stats"));
 	taskPool.push_back(SchedulerTask(
-	   std::max<uint32_t>(gametime, 10 * 1000), SchedulerTaskId::kUpdateStats, 15, "review"));
+	   std::max<Time>(gametime, Time(10 * 1000)), SchedulerTaskId::kUpdateStats, 15, "review"));
 
-	taskPool.push_back(SchedulerTask(std::max<uint32_t>(gametime, 10 * 1000),
+	taskPool.push_back(SchedulerTask(std::max<Time>(gametime, Time(10 * 1000)),
 	                                 SchedulerTaskId::kWarehouseFlagDist, 5,
 	                                 "Flag-Warehouse Update"));
 
@@ -1069,7 +1083,7 @@ void DefaultAI::late_initialization() {
 			   map,
 			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(ps_obs.site->get_position()), 4));
 			do {
-				blocked_fields.add(mr.location(), game().get_gametime() + 20 * 60 * 1000);
+				blocked_fields.add(mr.location(), game().get_gametime() + Duration(20 * 60 * 1000));
 			} while (mr.advance(map));
 		}
 	}
@@ -1115,10 +1129,11 @@ void DefaultAI::late_initialization() {
 	}
 	expedition_max_duration =
 	   kExpeditionMinDuration +
-	   static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration) / scope;
+	   Duration(static_cast<double>(off) * (kExpeditionMaxDuration - kExpeditionMinDuration).get() /
+	            scope);
 	log_dbg_time(gametime, " %d: expedition max duration = %u (%u minutes), map area root: %u\n",
-	             player_number(), expedition_max_duration / 1000,
-	             expedition_max_duration / kOneMinute, map_area_root);
+	             player_number(), expedition_max_duration.get() / 1000,
+	             expedition_max_duration.get() / (60 * 1000), map_area_root);
 	assert(expedition_max_duration >= kExpeditionMinDuration);
 	assert(expedition_max_duration <= kExpeditionMaxDuration);
 
@@ -1137,7 +1152,7 @@ void DefaultAI::late_initialization() {
 	vacant_mil_positions_average_ = 0;
 	spots_avail.resize(4);
 	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
-	last_road_dismantled_ = 0;
+	last_road_dismantled_ = Time(0);
 	dead_ends_check_ = true;
 }
 
@@ -1148,7 +1163,7 @@ void DefaultAI::late_initialization() {
  * of them, so we rotate the buildable_fields container and check 35 fields, and in addition
  * we look for medium & big fields and near border fields if needed.
  */
-void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
+void DefaultAI::update_all_buildable_fields(const Time& gametime) {
 
 	// Every call we try to check first 35 buildable fields
 	constexpr uint16_t kMinimalFieldsCheck = 35;
@@ -1169,8 +1184,8 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 	       i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
 		BuildableField& bf = *buildable_fields.front();
 
-		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
-		    gametime) {
+		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration +
+		     Duration(1000)) <= gametime) {
 
 			//  check whether we lost ownership of the node
 			if (bf.coords.field->get_owned_by() != player_number()) {
@@ -1227,7 +1242,7 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
 			continue;
 		}
 		// We are not interested in fields where info has expired less than 20s ago
-		if (buildable_fields[j]->field_info_expiration + 20000 > gametime) {
+		if (buildable_fields[j]->field_info_expiration + Duration(20 * 1000) > gametime) {
 			continue;
 		}
 
@@ -1271,15 +1286,15 @@ void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
  * this shouldn't be used often, as it might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
-void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
+void DefaultAI::update_all_mineable_fields(const Time& gametime) {
 
 	uint16_t i = 0;  // counter, used to track # of checked fields
 
 	// we test 30 fields that were updated more than 1 seconds ago
 	// to avoid re-test of the same field twice
 	while (!mineable_fields.empty() &&
-	       (mineable_fields.front()->field_info_expiration - kMineFieldInfoExpiration + 1000) <=
-	          gametime &&
+	       (mineable_fields.front()->field_info_expiration - kMineFieldInfoExpiration +
+	        Duration(1000)) <= gametime &&
 	       i < 30) {
 		MineableField* mf = mineable_fields.front();
 
@@ -1372,7 +1387,7 @@ void DefaultAI::update_all_not_buildable_fields() {
 void DefaultAI::update_buildable_field(BuildableField& field) {
 	// look if there is any unowned land nearby
 	const Widelands::Map& map = game().map();
-	const uint32_t gametime = game().get_gametime();
+	const Time& gametime = game().get_gametime();
 	FindNodeUnownedWalkable find_unowned_walkable(player_, game());
 	FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
 	FindNodeUnownedBuildable find_unowned_buildable(player_, game());
@@ -1462,8 +1477,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	static bool resource_count_now = false;
 	resource_count_now = false;
 	// Testing in first 10 seconds or if last testing was more then 60 sec ago
-	if (field.last_resources_check_time < 10000 ||
-	    field.last_resources_check_time - gametime > 60 * 1000) {
+	if (field.last_resources_check_time < Time(10000) ||
+	    field.last_resources_check_time > gametime + Duration(60 * 1000)) {
 		resource_count_now = true;
 		field.last_resources_check_time = gametime;
 	}
@@ -1586,7 +1601,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// counting fields with fish, doing it roughly every 10-th minute is enough
 	if (field.water_nearby > 0 &&
-	    (field.fish_nearby == kUncalculated || (resource_count_now && gametime % 10 == 0))) {
+	    (field.fish_nearby == kUncalculated || (resource_count_now && gametime.get() % 10 == 0))) {
 		Widelands::CheckStepWalkOn fisher_cstep(Widelands::MOVECAPS_WALK, true);
 		static std::vector<Widelands::Coords> fish_fields_list;  // pity this contains duplicates
 		fish_fields_list.clear();
@@ -2213,7 +2228,7 @@ void DefaultAI::update_productionsite_stats() {
 // * military buildings use genetic algorithm logic to score fields
 //   Currently more military buildings are built than needed
 //   so there are always some vacant positions
-bool DefaultAI::construct_building(uint32_t gametime) {
+bool DefaultAI::construct_building(const Time& gametime) {
 	if (buildable_fields.empty()) {
 		return false;
 	}
@@ -2226,7 +2241,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Widelands::Map& map = game().map();
 
-	if (gametime > last_seafaring_check_ + 20000U) {
+	if (gametime > last_seafaring_check_ + Duration(20 * 1000)) {
 		map_allows_seafaring_ = map.allows_seafaring();
 		last_seafaring_check_ = gametime;
 	}
@@ -2268,7 +2283,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// Do we have basic economy established? Informing that we just left the basic economy mode.
 	if (!basic_economy_established && persistent_data->remaining_basic_buildings.empty()) {
 		log_info_time(gametime, "AI %2d: Player has achieved the basic economy at %s\n",
-		              player_number(), gamestring_with_leading_zeros(gametime));
+		              player_number(), gamestring_with_leading_zeros(gametime.get()));
 		basic_economy_established = true;
 		assert(persistent_data->remaining_basic_buildings.empty());
 	}
@@ -2280,7 +2295,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		              " missing), but enemy is "
 		              "nearby, so quitting the mode at %s\n",
 		              player_number(), persistent_data->remaining_basic_buildings.size(),
-		              gamestring_with_leading_zeros(gametime));
+		              gamestring_with_leading_zeros(gametime.get()));
 		basic_economy_established = true;
 		// Zeroing following to preserve consistency
 		persistent_data->remaining_basic_buildings.clear();
@@ -2321,8 +2336,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	inputs[10] = (has_enough_space);
 	inputs[11] = !(has_enough_space);
 
-	inputs[12] = (gametime > 45 * 60 * 1000);
-	inputs[13] = !(gametime > 45 * 60 * 1000);
+	inputs[12] = (gametime > Time(45 * 60 * 1000));
+	inputs[13] = !(gametime > Time(45 * 60 * 1000));
 
 	inputs[14] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy);
 	inputs[15] = !(expansion_type.get_expansion_type() == ExpansionMode::kEconomy);
@@ -2343,10 +2358,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	   !(player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn));
 	inputs[24] = (highest_nonmil_prio_ > 18 + management_data.get_military_number_at(65) / 10);
 	inputs[25] = !(highest_nonmil_prio_ > 18 + management_data.get_military_number_at(65) / 10);
+	// TODO(Nordfriese): Passing a PlayerNumber to a function that expects
+	// a Time is a very bad idea, no idea what was intended here…
 	inputs[26] = (player_statistics.get_modified_player_power(pn) >
-	              player_statistics.get_visible_enemies_power(pn));
+	              player_statistics.get_visible_enemies_power(Time(pn)));
 	inputs[27] = (player_statistics.get_modified_player_power(pn) <=
-	              player_statistics.get_visible_enemies_power(pn));
+	              player_statistics.get_visible_enemies_power(Time(pn)));
 	inputs[28] =
 	   (player_statistics.get_player_power(pn) > player_statistics.get_enemies_average_power());
 	inputs[29] =
@@ -2511,7 +2528,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	const int32_t stocked_wood_margin = calculate_stocklevel(wood_index) -
 	                                    productionsites.size() * 2 - numof_psites_in_constr +
 	                                    management_data.get_military_number_at(87) / 5;
-	if (gametime < 15 * 60 * 1000) {
+	if (gametime < Time(15 * 60 * 1000)) {
 		wood_policy_ = WoodPolicy::kAllowRangers;
 	} else if (stocked_wood_margin > 80) {
 		wood_policy_ = WoodPolicy::kDismantleRangers;
@@ -2684,7 +2701,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		                         bo.new_building == BuildingNecessity::kForced ||
 		                         bo.new_building == BuildingNecessity::kNeeded);
 		if (ai_training_mode_ && bo.type == BuildingObserver::Type::kProductionsite &&
-		    (gametime % 20 == 0 || log_needed)) {
+		    (gametime.get() % 20 == 0 || log_needed)) {
 			log_dbg_time(
 			   gametime,
 			   "AI %2d: %-35s(%2d now) %-11s: max prec: %2d/%2d, primary priority: %4d, overdue: "
@@ -3475,7 +3492,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	// send the command to construct a new building
 	game().send_player_build(player_number(), proposed_coords, best_building->id);
-	blocked_fields.add(proposed_coords, game().get_gametime() + 2 * 60 * 1000);
+	blocked_fields.add(proposed_coords, game().get_gametime() + Duration(2 * 60 * 1000));
 
 	// resetting new_building_overdue
 	best_building->new_building_overdue = 0;
@@ -3486,24 +3503,24 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	if ((best_building->is(BuildingAttribute::kSpaceConsumer) &&
 	     !best_building->is(BuildingAttribute::kRanger)) ||
 	    best_building->type == BuildingObserver::Type::kMilitarysite) {
-		uint32_t block_time = 0;
+		Time block_time(0);
 		uint32_t block_area = 0;
 		if (best_building->is(BuildingAttribute::kSpaceConsumer)) {
 			if (spots_ > kSpotsEnough) {
-				block_time = 45 * 60 * 1000;
+				block_time = Time(45 * 60 * 1000);
 			} else {
-				block_time = 15 * 60 * 1000;
+				block_time = Time(15 * 60 * 1000);
 			}
 			block_area = 5;
 		} else {  // militray buildings for a very short time
-			block_time = 25 * 1000;
+			block_time = Time(25 * 1000);
 			block_area = 6;
 		}
 
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(proposed_coords), block_area));
 		do {
-			blocked_fields.add(mr.location(), game().get_gametime() + block_time);
+			blocked_fields.add(mr.location(), game().get_gametime() + Duration(block_time.get()));
 		} while (mr.advance(map));
 	}
 
@@ -3516,7 +3533,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		best_building->construction_decision_time = gametime;
 	} else {
 		military_last_build_ = gametime;
-		best_building->construction_decision_time = gametime - kBuildingMinInterval / 2;
+		best_building->construction_decision_time = gametime - Duration(kBuildingMinInterval / 2);
 	}
 
 	// set the type of update that is needed
@@ -3528,7 +3545,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 }
 
 // Re-calculating warehouse to flag distances
-void DefaultAI::check_flag_distances(const uint32_t gametime) {
+void DefaultAI::check_flag_distances(const Time& gametime) {
 	for (WarehouseSiteObserver& wh_obs : warehousesites) {
 		uint16_t checked_flags = 0;
 		const uint32_t this_wh_hash = wh_obs.site->get_position().hash();
@@ -3613,10 +3630,10 @@ bool DefaultAI::dismantle_dead_ends() {
 }
 
 // improves current road system
-bool DefaultAI::improve_roads(uint32_t gametime) {
+bool DefaultAI::improve_roads(const Time& gametime) {
 
 	// First try to dismantle some dead ends on road
-	if (dead_ends_check_ || gametime % 50 == 0) {
+	if (dead_ends_check_ || gametime.get() % 50 == 0) {
 		if (dismantle_dead_ends()) {
 			return true;
 		}
@@ -3664,8 +3681,8 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 
 		// Occasionaly (not more then once in 15 seconds) we test if the road can be dismantled
 		// if there is shortage of spots we do it always
-		if (last_road_dismantled_ + 15 * 1000 < gametime &&
-		    (gametime % 40 == 0 || spots_ <= kSpotsEnough)) {
+		if (last_road_dismantled_ + Duration(15 * 1000) < gametime &&
+		    (gametime.get() % 40 == 0 || spots_ <= kSpotsEnough)) {
 			const Widelands::Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Widelands::Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Widelands::Road*>(&road));
@@ -3922,7 +3939,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 // connection is not known
 bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
                                      uint16_t checkradius,
-                                     uint32_t gametime) {
+                                     const Time& gametime) {
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
@@ -3936,8 +3953,8 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 	// this should not happen, but if the economy has a warehouse and a dismantle
 	// grace time set, we must 'zero' the dismantle grace time
 	if (!flag.get_economy(Widelands::wwWORKER)->warehouses().empty() &&
-	    eco->dismantle_grace_time != kNever) {
-		eco->dismantle_grace_time = kNever;
+	    eco->dismantle_grace_time.is_valid()) {
+		eco->dismantle_grace_time = Time();
 	}
 
 	// first we deal with situations when this is economy with no warehouses
@@ -3961,7 +3978,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 		// if grace time is not set, this is probably first time without a warehouse and we must set
 		// it
-		if (eco->dismantle_grace_time == kNever) {
+		if (eco->dismantle_grace_time.is_invalid()) {
 
 			// constructionsites
 			if (upcast(Widelands::ConstructionSite const, constructionsite, flag.get_building())) {
@@ -3970,11 +3987,13 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 				// first very special case - a port (in the phase of constructionsite)
 				// this might be a new colonization port
 				if (bo.is(BuildingAttribute::kPort)) {
-					eco->dismantle_grace_time = gametime + 60 * 60 * 1000;  // one hour should be enough
+					eco->dismantle_grace_time =
+					   gametime + Duration(60 * 60 * 1000);  // one hour should be enough
 				} else {  // other constructionsites, usually new (standalone) constructionsites
 					eco->dismantle_grace_time =
-					   gametime + 30 * 1000 +            // very shot time is enough
-					   (eco->flags.size() * 30 * 1000);  // + 30 seconds for every flag in economy
+					   gametime + Duration(30 * 1000 +  // very short time is enough
+					                       (eco->flags.size() * 30 *
+					                        1000));  // + 30 seconds for every flag in economy
 				}
 
 				// buildings
@@ -3982,11 +4001,11 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 
 				if (occupied_military_) {
 					eco->dismantle_grace_time =
-					   (gametime + 90 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
+					   gametime + Duration((90 * 60 * 1000) + (eco->flags.size() * 20 * 1000));
 
 				} else {  // for other normal buildings
 					eco->dismantle_grace_time =
-					   gametime + (45 * 60 * 1000) + (eco->flags.size() * 20 * 1000);
+					   gametime + Duration((45 * 60 * 1000) + (eco->flags.size() * 20 * 1000));
 				}
 			}
 
@@ -4169,10 +4188,10 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 	if (flag.get_economy(Widelands::wwWORKER)->warehouses().empty()) {
 
 		// blocking only if latest block was less then 60 seconds ago or it is last attempt
-		if (eco->fields_block_last_time + kOneMinute < gametime || last_attempt_) {
+		if (eco->fields_block_last_time + Duration((60 * 1000)) < gametime || last_attempt_) {
 			eco->fields_block_last_time = gametime;
 
-			const uint32_t block_time = last_attempt_ ? 10 * kOneMinute : 2 * kOneMinute;
+			const Duration block_time((last_attempt_ ? 10 : 2) * 60 * 1000);
 
 			FindNodeAcceptAll buildable_functor;
 			CheckStepOwnTerritory check_own(player_, Widelands::MOVECAPS_WALK, true);
@@ -4322,7 +4341,7 @@ bool DefaultAI::check_economies() {
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_productionsites(uint32_t gametime) {
+bool DefaultAI::check_productionsites(const Time& gametime) {
 	if (productionsites.empty()) {
 		return false;
 	}
@@ -4352,9 +4371,9 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// do not dismantle or upgrade the same type of building too soon - to give some time to update
 	// statistics
-	if (site.bo->last_dismantle_time >
-	    game().get_gametime() -
-	       (std::abs(management_data.get_military_number_at(164)) / 25 + 1) * 60 * 1000) {
+	if (game().get_gametime() <
+	    site.bo->last_dismantle_time +
+	       Duration((std::abs(management_data.get_military_number_at(164)) / 25 + 1) * 60 * 1000)) {
 		return false;
 	}
 
@@ -4424,7 +4443,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.upgrade_pending) {
 		// The site is in process of emptying its input queues
 		// Do nothing when some wares are left, but do not wait more then 4 minutes
-		if (site.bo->construction_decision_time + 4 * 60 * 1000 > gametime &&
+		if (site.bo->construction_decision_time + Duration(4 * 60 * 1000) > gametime &&
 		    !set_inputs_to_zero(site)) {
 			return false;
 		}
@@ -4454,11 +4473,12 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// gametime > 45 minutes.
 	if (considering_upgrade) {
 		if (site.bo->is(BuildingAttribute::kUpgradeExtends)) {
-			if (gametime < site.built_time + 10 * 60 * 1000) {
+			if (gametime < site.built_time + Duration(10 * 60 * 1000)) {
 				considering_upgrade = false;
 			}
 		} else {
-			if (gametime < 45 * 60 * 1000 || gametime < site.built_time + 20 * 60 * 1000) {
+			if (gametime < Time(45 * 60 * 1000) ||
+			    gametime < site.built_time + Duration(20 * 60 * 1000)) {
 				considering_upgrade = false;
 			}
 		}
@@ -4480,8 +4500,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		bool doing_upgrade = false;
 
 		// 10 minutes is a time to productions statics to settle
-		if ((en_bo.last_building_built == kNever ||
-		     gametime - en_bo.last_building_built >= 10 * 60 * 1000) &&
+		if ((en_bo.last_building_built.is_invalid() ||
+		     gametime - en_bo.last_building_built >= Duration(10 * 60 * 1000)) &&
 		    (en_bo.cnt_under_construction + en_bo.unoccupied_count) == 0) {
 
 			// forcing first upgrade
@@ -4606,7 +4626,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.bo->is(BuildingAttribute::kLumberjack)) {
 
 		// do not dismantle immediatelly
-		if ((game().get_gametime() - site.built_time) < 6 * 60 * 1000) {
+		if ((game().get_gametime() - site.built_time) < Duration(6 * 60 * 1000)) {
 			return false;
 		}
 
@@ -4630,7 +4650,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return false;
 		}
 
-		// so finally we dismantle the lumberjac
+		// so finally we dismantle the lumberjack
 		site.bo->last_dismantle_time = game().get_gametime();
 		if (connected_to_wh) {
 			game().send_player_dismantle(*site.site, true);
@@ -4648,7 +4668,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return false;
 		}
 
-		if (site.unoccupied_till + 6 * 60 * 1000 < gametime &&
+		if (site.unoccupied_till + Duration(6 * 60 * 1000) < gametime &&
 		    site.site->get_statistics_percent() == 0) {
 			site.bo->last_dismantle_time = gametime;
 			if (connected_to_wh) {
@@ -4661,7 +4681,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		}
 
 		// do not consider dismantling if we are under target
-		if (site.bo->last_dismantle_time + 90 * 1000 > game().get_gametime()) {
+		if (site.bo->last_dismantle_time + Duration(90 * 1000) > game().get_gametime()) {
 			return false;
 		}
 
@@ -4702,7 +4722,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			return true;
 		}
 
-		if (site.unoccupied_till + 6 * 60 * 1000 < gametime &&
+		if (site.unoccupied_till + Duration(6 * 60 * 1000) < gametime &&
 		    site.site->get_statistics_percent() == 0) {
 			// it is possible that there are rocks but quarry is not able to mine them
 			site.bo->last_dismantle_time = game().get_gametime();
@@ -4727,7 +4747,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// if we have more buildings then target
 		if ((site.bo->cnt_built - site.bo->unconnected_count) > site.bo->cnt_target &&
 		    site.unoccupied_till +
-		          (std::abs(management_data.get_military_number_at(166)) / 5 + 1) * 60 * 1000 <
+		          Duration((std::abs(management_data.get_military_number_at(166)) / 5 + 1) * 60 *
+		                   1000) <
 		       gametime &&
 		    site.site->can_start_working()) {
 
@@ -4745,7 +4766,8 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 		// a building can be dismanteld if it performs too bad, if it is not the last one
 		if (site.site->get_statistics_percent() <= 10 && site.bo->cnt_built > 1 &&
 		    site.unoccupied_till +
-		          (std::abs(management_data.get_military_number_at(167)) / 5 + 1) * 60 * 1000 <
+		          Duration((std::abs(management_data.get_military_number_at(167)) / 5 + 1) * 60 *
+		                   1000) <
 		       gametime &&
 		    site.site->can_start_working() &&
 		    get_stocklevel(*site.bo, gametime) >
@@ -4766,7 +4788,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 			   map, Widelands::Area<Widelands::FCoords>(
 			           map.get_fcoords(site.site->base_flag().get_position()), 5));
 			do {
-				blocked_fields.add(mr.location(), gametime + 5 * 60 * 100);
+				blocked_fields.add(mr.location(), gametime + Duration(5 * 60 * 100));
 			} while (mr.advance(map));
 		}
 
@@ -4779,11 +4801,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    check_building_necessity(*site.bo, PerfEvaluation::kForDismantle, gametime) ==
 	       BuildingNecessity::kNotNeeded &&
 	    gametime - site.bo->last_dismantle_time >
-	       static_cast<uint32_t>((std::abs(management_data.get_military_number_at(169)) / 5 + 1) *
-	                             60 * 1000) &&
+	       Duration(static_cast<uint32_t>(
+	          (std::abs(management_data.get_military_number_at(169)) / 5 + 1) * 60 * 1000)) &&
 
 	    site.bo->current_stats > site.site->get_statistics_percent() &&  // underperformer
-	    (game().get_gametime() - site.unoccupied_till) > 10 * 60 * 1000) {
+	    (game().get_gametime() - site.unoccupied_till) > Duration(10 * 60 * 1000)) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
 
@@ -4800,7 +4822,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	if (site.bo->inputs.empty() && site.bo->production_hints.empty() &&
 	    site.site->can_start_working() && !site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    site.site->get_statistics_percent() < 5 &&
-	    ((game().get_gametime() - site.built_time) > 10 * 60 * 1000)) {
+	    ((game().get_gametime() - site.built_time) > Duration(10 * 60 * 1000))) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
 		if (connected_to_wh) {
@@ -4868,7 +4890,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_mines_(uint32_t const gametime) {
+bool DefaultAI::check_mines_(const Time& gametime) {
 	if (mines_.empty()) {
 		return false;
 	}
@@ -4885,9 +4907,10 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	const bool connected_to_wh = !site.site->get_economy(Widelands::wwWORKER)->warehouses().empty();
 
 	// First we dismantle mines that are marked as such, generally we wait till all wares all gone
-	if (site.dismantle_pending_since != kNever) {
+	if (site.dismantle_pending_since.is_valid()) {
 		assert(site.dismantle_pending_since <= gametime);
-		if (set_inputs_to_zero(site) || site.dismantle_pending_since + 5 * 60 * 1000 < gametime) {
+		if (set_inputs_to_zero(site) ||
+		    site.dismantle_pending_since + Duration(5 * 60 * 1000) < gametime) {
 			if (connected_to_wh) {
 				game().send_player_dismantle(*site.site, true);
 			} else {
@@ -4895,7 +4918,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 			}
 
 			return true;
-		} else if (site.dismantle_pending_since + 3 * 60 * 1000 < gametime) {
+		} else if (site.dismantle_pending_since + Duration(3 * 60 * 1000) < gametime) {
 			stop_site(site);
 			return false;
 		} else {
@@ -4931,20 +4954,20 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 
 	// first get rid of mines that have been  missing workers for some time (10 minutes),
 	// released worker (if any) can be useful elsewhere !
-	if (!single_critical && site.built_time + 10 * 60 * 1000 < gametime &&
+	if (!single_critical && site.built_time + Duration(10 * 60 * 1000) < gametime &&
 	    !site.site->can_start_working() && mines_per_type[site.bo->mines].total_count() > 2) {
 		initiate_dismantling(site, gametime);
 		return false;
 	}
 
 	// to avoid problems with uint underflow, we discourage considerations below
-	if (gametime < 10 * 60 * 1000) {
+	if (gametime < Time(10 * 60 * 1000)) {
 		return false;
 	}
 
 	// After 15 minutes in existence we check whether a miner is needed for a critical unoccupied
 	// mine elsewhere
-	if (site.built_time + 15 * 60 * 1000 < gametime) {
+	if (site.built_time + Duration(15 * 60 * 1000) < gametime) {
 		if (!mines_per_type[site.bo->mines].is_critical && critical_mine_unoccupied(gametime)) {
 			for (uint8_t i = 0; i < site.site->descr().nr_working_positions(); i++) {
 				const Widelands::Worker* cw = site.site->working_positions()[i].worker.get(game());
@@ -4958,7 +4981,8 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	}
 
 	// if mine is working, doing nothing
-	if (site.no_resources_since > gametime - 5 * 60 * 1000) {
+	if (site.no_resources_since.is_invalid() ||
+	    gametime < site.no_resources_since + Duration(5 * 60 * 1000)) {
 		return false;
 	}
 
@@ -4992,7 +5016,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 		initiate_dismantling(site, gametime);
 		return true;
 		// if having an upgrade, after half hour
-	} else if (site.no_resources_since < gametime - 30 * 60 * 1000 && !forcing_upgrade) {
+	} else if (site.no_resources_since + Duration(30 * 60 * 1000) < gametime && !forcing_upgrade) {
 		initiate_dismantling(site, gametime);
 		return true;
 	}
@@ -5047,8 +5071,7 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	return changed;
 }
 
-BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
-                                                       const uint32_t gametime) {
+BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo, const Time& gametime) {
 	bo.primary_priority = 0;
 
 	// First there are situation when we cannot built the warehouse/port
@@ -5139,12 +5162,13 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 // dismantle
 BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
                                                       const PerfEvaluation purpose,
-                                                      const uint32_t gametime) {
+                                                      const Time& gametime) {
 	bo.primary_priority = 0;
 
 	static BasicEconomyBuildingStatus site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
 	site_needed_for_economy = BasicEconomyBuildingStatus::kNone;
-	if (gametime > 2 * 60 * 1000 && gametime < 120 * 60 * 1000 && !basic_economy_established) {
+	if (gametime > Time(2 * 60 * 1000) && gametime < Time(120 * 60 * 1000) &&
+	    !basic_economy_established) {
 		if (persistent_data->remaining_basic_buildings.count(bo.id) &&
 		    bo.cnt_under_construction == 0) {
 			assert(persistent_data->remaining_basic_buildings.count(bo.id) > 0);
@@ -5365,14 +5389,15 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// Logic is: after 30th minute we need second building if there is no enhanced building yet,
 	// and after 90th minute we want second building unconditionally
 	bool needs_second_for_upgrade = false;
-	if (gametime > 30 * 60 * 1000 && bo.cnt_built == 1 && bo.cnt_under_construction == 0 &&
+	if (gametime > Time(30 * 60 * 1000) && bo.cnt_built == 1 && bo.cnt_under_construction == 0 &&
 	    bo.is(BuildingAttribute::kUpgradeExtends) &&
 	    !bo.is(BuildingAttribute::kUpgradeSubstitutes) &&
 	    bo.type == BuildingObserver::Type::kProductionsite) {
 		const Widelands::DescriptionIndex enhancement = bo.desc->enhancement();
 		BuildingObserver& en_bo =
 		   get_building_observer(tribe_->get_building_descr(enhancement)->name().c_str());
-		if ((gametime > 30 * 60 * 1000 && en_bo.total_count() == 0) || gametime > 90 * 60 * 1000) {
+		if ((gametime > Time(30 * 60 * 1000) && en_bo.total_count() == 0) ||
+		    gametime > Time(90 * 60 * 1000)) {
 			// We fake this
 			bo.max_needed_preciousness = bo.max_preciousness * 2;
 			needs_second_for_upgrade = true;
@@ -5418,9 +5443,18 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[8] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? +3 : 0;
 			inputs[9] = (expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? +1 : 0;
 			inputs[10] = (expansion_type.get_expansion_type() == ExpansionMode::kBoth) ? +1 : 0;
-			inputs[11] = (bo.last_building_built + 5 * 60 * 100 < gametime) ? +1 : 0;
-			inputs[12] = (bo.last_building_built + 10 * 60 * 100 < gametime) ? +1 : 0;
-			inputs[13] = (bo.last_building_built + 20 * 60 * 100 < gametime) ? +1 : 0;
+			inputs[11] = (bo.last_building_built.is_valid() &&
+			              bo.last_building_built + Duration(5 * 60 * 100) < gametime) ?
+			                +1 :
+			                0;
+			inputs[12] = (bo.last_building_built.is_valid() &&
+			              bo.last_building_built + Duration(10 * 60 * 100) < gametime) ?
+			                +1 :
+			                0;
+			inputs[13] = (bo.last_building_built.is_valid() &&
+			              bo.last_building_built + Duration(20 * 60 * 100) < gametime) ?
+			                +1 :
+			                0;
 			inputs[14] = (bo.total_count() >= bo.cnt_target) ? -1 : 0;
 			inputs[15] = (bo.total_count() >= bo.cnt_target) ? -2 : 0;
 			inputs[16] = (bo.total_count() < bo.cnt_target) ? -1 : 0;
@@ -5518,7 +5552,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[14] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[15] = (get_stocklevel(bo, gametime) < 10) * 1;
 			inputs[16] = (get_stocklevel(bo, gametime) < 2) * 1;
-			if (gametime > 15 * 60) {
+			if (gametime > Time(15 * 60)) {
 				inputs[17] = (get_stocklevel(bo, gametime) > 30) * -1;
 				inputs[18] = (get_stocklevel(bo, gametime) > 20) * -1;
 				inputs[19] = (get_stocklevel(bo, gametime) > 10) * -1;
@@ -5530,11 +5564,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[23] = (msites_in_constr() > 0) ? 1 : -2;
 			inputs[24] = (msites_in_constr() > 1) ? 1 : -2;
 			inputs[25] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
-			if (gametime > 90 * 60) {
+			if (gametime > Time(90 * 60)) {
 				inputs[26] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
 				inputs[27] = (persistent_data->trees_around_cutters < 20) * 1;
 			}
-			if (gametime > 45 * 60) {
+			if (gametime > Time(45 * 60)) {
 				inputs[28] = (wood_policy_ != WoodPolicy::kAllowRangers) * 1;
 				inputs[29] = (persistent_data->trees_around_cutters < 20) * 1;
 				inputs[30] = (get_stocklevel(bo, gametime) > 30) * -1;
@@ -5568,14 +5602,22 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				inputs[48] = (persistent_data->trees_around_cutters < 60) * 1;
 				inputs[49] = (persistent_data->trees_around_cutters < 80) * 1;
 			}
-			inputs[50] = (bo.last_building_built + 1 * 60 * 100 > gametime) * -2;
-			inputs[51] = (bo.last_building_built + 2 * 60 * 100 > gametime) * -2;
-			inputs[52] = (bo.last_building_built + 4 * 60 * 100 > gametime) * -2;
-			inputs[53] = (bo.last_building_built + 6 * 60 * 100 > gametime) * -2;
-			inputs[54] = (5 * 60 * 100 > gametime) * -2;
-			inputs[55] = (6 * 60 * 100 > gametime) * -2;
-			inputs[56] = (8 * 60 * 100 > gametime) * -2;
-			inputs[57] = (10 * 60 * 100 > gametime) * -2;
+			inputs[50] = (bo.last_building_built.is_valid() &&
+			              bo.last_building_built + Duration(1 * 60 * 100) > gametime) *
+			             -2;
+			inputs[51] = (bo.last_building_built.is_valid() &&
+			              bo.last_building_built + Duration(2 * 60 * 100) > gametime) *
+			             -2;
+			inputs[52] = (bo.last_building_built.is_valid() &&
+			              bo.last_building_built + Duration(4 * 60 * 100) > gametime) *
+			             -2;
+			inputs[53] = (bo.last_building_built.is_valid() &&
+			              bo.last_building_built + Duration(6 * 60 * 100) > gametime) *
+			             -2;
+			inputs[54] = (Time(5 * 60 * 100) > gametime) * -2;
+			inputs[55] = (Time(6 * 60 * 100) > gametime) * -2;
+			inputs[56] = (Time(8 * 60 * 100) > gametime) * -2;
+			inputs[57] = (Time(10 * 60 * 100) > gametime) * -2;
 			inputs[58] = (spots_ < kSpotsEnough) ? -2 : 0;
 			inputs[59] = (spots_ < kSpotsTooLittle) ? -2 : 0;
 			inputs[60] = (spots_ < kSpotsTooLittle) ? -2 : 0;
@@ -5653,7 +5695,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			// b) if there is shortage of supported ware
 			if (bo.total_count() < bo.cnt_target ||
 			    (get_stocklevel(bo, gametime) == 0 &&
-			     bo.last_building_built + 10 * 60 * 100 < gametime)) {
+			     bo.last_building_built + Duration(10 * 60 * 100) < gametime)) {
 
 				if (persistent_data->remaining_basic_buildings.count(bo.id)) {
 					bo.primary_priority += std::abs(management_data.get_military_number_at(60) * 10);
@@ -5678,13 +5720,13 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
 				return BuildingNecessity::kForbidden;
 			}
-			if (gametime > 30 * 60 * 1000 && bo.total_count() == 0) {
+			if (gametime > Time(30 * 60 * 1000) && bo.total_count() == 0) {
 
 				int16_t tmp_score = 1;
 				tmp_score += mines_per_type[iron_resource_id].total_count();
 				tmp_score += (soldier_status_ == SoldiersStatus::kBadShortage) * 2;
 				tmp_score += (soldier_status_ == SoldiersStatus::kShortage) * 2;
-				tmp_score += (gametime / 60 / 1000 - 20) / 4;
+				tmp_score += (gametime.get() / 60 / 1000 - 20) / 4;
 				bo.max_needed_preciousness =
 				   1 + tmp_score * std::abs(management_data.get_military_number_at(134)) / 15;
 				bo.max_preciousness = bo.max_needed_preciousness;
@@ -5722,7 +5764,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 				return BuildingNecessity::kForbidden;
 			}
 
-			if (gametime < bo.last_building_built + 3 * 60 * 1000) {
+			if (bo.last_building_built.is_valid() &&
+			    gametime < bo.last_building_built + Duration(3 * 60 * 1000)) {
 				return BuildingNecessity::kForbidden;
 			}
 
@@ -5731,16 +5774,16 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			for (int i = 0; i < kFNeuronBitSize; i++) {
 				inputs[i] = 0;
 			}
-			inputs[0] = (gametime < 15 * 60 * 1000) ? -2 : 0;
-			inputs[1] = (gametime < 30 * 60 * 1000) ? -2 : 0;
-			inputs[2] = (gametime < 45 * 60 * 1000) ? -2 : 0;
+			inputs[0] = (gametime < Time(15 * 60 * 1000)) ? -2 : 0;
+			inputs[1] = (gametime < Time(30 * 60 * 1000)) ? -2 : 0;
+			inputs[2] = (gametime < Time(45 * 60 * 1000)) ? -2 : 0;
 			inputs[3] = (mines_per_type[bo.mines].total_count() == 1) ? 3 : 0;
 			inputs[4] = (mines_per_type[bo.mines].total_count() == 1) ? 2 : 0;
 			inputs[5] = (bo.mines == iron_resource_id) ? 2 : 1;
 			inputs[6] = (bo.current_stats - 50) / 10;
-			inputs[7] = (gametime < 15 * 60 * 1000) ? -1 : 0;
-			inputs[8] = (gametime < 30 * 60 * 1000) ? -1 : 0;
-			inputs[9] = (gametime < 45 * 60 * 1000) ? -1 : 0;
+			inputs[7] = (gametime < Time(15 * 60 * 1000)) ? -1 : 0;
+			inputs[8] = (gametime < Time(30 * 60 * 1000)) ? -1 : 0;
+			inputs[9] = (gametime < Time(45 * 60 * 1000)) ? -1 : 0;
 			inputs[10] = (mines_per_type[bo.mines].total_count() == 1) ? 2 : 0;
 			inputs[11] = (mines_per_type[bo.mines].total_count() == 1) ? 1 : 0;
 			inputs[12] = (bo.mines == iron_resource_id) ? 2 : 0;
@@ -5804,7 +5847,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[1] = bo.total_count() * -3 / 2;
 			inputs[2] =
 			   (bo.total_count() == 0) ? std::abs(management_data.get_military_number_at(0)) / 10 : 0;
-			inputs[3] = (gametime >= 25 * 60 * 1000 && bo.inputs.empty()) ?
+			inputs[3] = (gametime >= Time(25 * 60 * 1000) && bo.inputs.empty()) ?
 			               management_data.get_military_number_at(1) / 10 :
 			               0;
 			inputs[4] = (bo.max_needed_preciousness >= 10) ?
@@ -5832,7 +5875,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			              wood_policy_ == WoodPolicy::kStopRangers) ?
 			                std::abs(management_data.get_military_number_at(15)) / 10 :
 			                0;
-			inputs[12] = (gametime >= 15 * 60 * 1000) ?
+			inputs[12] = (gametime >= Time(15 * 60 * 1000)) ?
 			                std::abs(management_data.get_military_number_at(94)) / 10 :
 			                0;
 			inputs[13] = management_data.get_military_number_at(8) / 10;
@@ -5914,7 +5957,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			                0;
 			inputs[49] = (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? -4 : 1;
 			inputs[50] = (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ? -1 : 1;
-			inputs[51] = (gametime < 20 * 60 * 1000) ? -4 : 0;
+			inputs[51] = (gametime < Time(20 * 60 * 1000)) ? -4 : 0;
 			inputs[52] = (bo.total_count() == 0) ? 4 : 0;
 			inputs[53] = (bo.total_count() == 0) ? 2 : 0;
 			inputs[54] = (spots_ < kSpotsEnough) ? -5 : 0;
@@ -5933,27 +5976,29 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			                6 :
 			                0;
 			inputs[63] = (!bo.ware_outputs.empty() && !bo.inputs.empty()) ? bo.current_stats / 10 : 0;
-			inputs[64] = (gametime > 20 * 60 * 1000 && bo.total_count() == 0) ? 3 : 0;
-			inputs[65] = (gametime > 45 * 60 * 1000 && bo.total_count() == 0) ? 3 : 0;
-			inputs[66] = (gametime > 60 * 60 * 1000 && bo.total_count() <= 1) ? 3 : 0;
-			inputs[67] = (gametime > 50 * 60 * 1000 && bo.total_count() <= 1) ? 2 : 0;
+			inputs[64] = (gametime > Time(20 * 60 * 1000) && bo.total_count() == 0) ? 3 : 0;
+			inputs[65] = (gametime > Time(45 * 60 * 1000) && bo.total_count() == 0) ? 3 : 0;
+			inputs[66] = (gametime > Time(60 * 60 * 1000) && bo.total_count() <= 1) ? 3 : 0;
+			inputs[67] = (gametime > Time(50 * 60 * 1000) && bo.total_count() <= 1) ? 2 : 0;
 			inputs[68] =
-			   (bo.inputs.empty() && gametime > 50 * 60 * 1000 && bo.total_count() <= 1) ? 2 : 0;
+			   (bo.inputs.empty() && gametime > Time(50 * 60 * 1000) && bo.total_count() <= 1) ? 2 : 0;
 			inputs[69] =
-			   (!bo.inputs.empty() && gametime > 50 * 60 * 1000 && bo.total_count() <= 1) ? 2 : 0;
+			   (!bo.inputs.empty() && gametime > Time(50 * 60 * 1000) && bo.total_count() <= 1) ? 2 :
+			                                                                                      0;
 			inputs[70] =
-			   (bo.inputs.empty() && gametime > 25 * 60 * 1000 && bo.total_count() <= 1) ? 2 : 0;
+			   (bo.inputs.empty() && gametime > Time(25 * 60 * 1000) && bo.total_count() <= 1) ? 2 : 0;
 			inputs[71] =
-			   (!bo.inputs.empty() && gametime > 25 * 60 * 1000 && bo.total_count() <= 1) ? 2 : 0;
-			if (bo.last_building_built != kNever) {
-				inputs[72] = (gametime < bo.last_building_built + 3 * 60 * 1000) ? -4 : 0;
-				inputs[73] = (gametime < bo.last_building_built + 5 * 60 * 1000) ? -2 : 0;
-				inputs[74] = (gametime < bo.last_building_built + 2 * 60 * 1000) ? -5 : 0;
-				inputs[75] = (gametime < bo.last_building_built + 10 * 60 * 1000) ? -2 : 0;
-				inputs[76] = (gametime < bo.last_building_built + 20 * 60 * 1000) ? -2 : 0;
+			   (!bo.inputs.empty() && gametime > Time(25 * 60 * 1000) && bo.total_count() <= 1) ? 2 :
+			                                                                                      0;
+			if (bo.last_building_built.is_valid()) {
+				inputs[72] = (gametime < bo.last_building_built + Duration(3 * 60 * 1000)) ? -4 : 0;
+				inputs[73] = (gametime < bo.last_building_built + Duration(5 * 60 * 1000)) ? -2 : 0;
+				inputs[74] = (gametime < bo.last_building_built + Duration(2 * 60 * 1000)) ? -5 : 0;
+				inputs[75] = (gametime < bo.last_building_built + Duration(10 * 60 * 1000)) ? -2 : 0;
+				inputs[76] = (gametime < bo.last_building_built + Duration(20 * 60 * 1000)) ? -2 : 0;
 			}
-			inputs[77] = (gametime > 35 * 60 * 1000 && bo.total_count() == 0) ? 3 : 0;
-			inputs[78] = (gametime > 60 * 60 * 1000 && bo.total_count() == 0) ? 3 : 0;
+			inputs[77] = (gametime > Time(35 * 60 * 1000) && bo.total_count() == 0) ? 3 : 0;
+			inputs[78] = (gametime > Time(60 * 60 * 1000) && bo.total_count() == 0) ? 3 : 0;
 			inputs[79] = (expansion_type.get_expansion_type() == ExpansionMode::kResources ||
 			              expansion_type.get_expansion_type() == ExpansionMode::kSpace) *
 			             management_data.get_military_number_at(37) / 10;
@@ -5996,9 +6041,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			   std::abs(management_data.get_military_number_at(194)) - get_stocklevel(bo, gametime);
 			inputs[108] =
 			   std::abs(management_data.get_military_number_at(191)) - get_stocklevel(bo, gametime);
-			inputs[109] = (!bo.inputs.empty() && gametime > 50 * 60 * 1000 && bo.total_count() <= 1) ?
-			                 std::abs(management_data.get_military_number_at(163)) / 10 :
-			                 0;
+			inputs[109] =
+			   (!bo.inputs.empty() && gametime > Time(50 * 60 * 1000) && bo.total_count() <= 1) ?
+			      std::abs(management_data.get_military_number_at(163)) / 10 :
+			      0;
 			inputs[110] = (bo.ware_outputs.size() == 1) ?
 			                 (tribe_->get_ware_descr(bo.ware_outputs.at(0))
 			                     ->default_target_quantity(tribe_->name()) -
@@ -6127,10 +6173,9 @@ uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt,
 // and distinguish if we count stocks for production hint, for outputs or for workers of a
 // productionsite
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo,
-                                   const uint32_t gametime,
-                                   const WareWorker what) const {
-	if (bo.stocklevel_time < gametime - 5 * 1000) {
+uint32_t
+DefaultAI::get_stocklevel(BuildingObserver& bo, const Time& gametime, const WareWorker what) const {
+	if (bo.stocklevel_time + Duration(5 * 1000) < gametime) {
 		if (what == WareWorker::kWare && (!bo.production_hints.empty() || !bo.ware_outputs.empty())) {
 			// looking for smallest value
 			bo.stocklevel_count = std::numeric_limits<uint32_t>::max();
@@ -6393,7 +6438,7 @@ void DefaultAI::lose_immovable(const Widelands::PlayerImmovable& pi) {
 // this is called when a mine reports "out of resources"
 void DefaultAI::out_of_resources_site(const Widelands::ProductionSite& site) {
 
-	const uint32_t gametime = game().get_gametime();
+	const Time& gametime = game().get_gametime();
 
 	// we must identify which mine matches the productionsite a note reffers to
 	for (std::deque<ProductionSiteObserver>::iterator i = mines_.begin(); i != mines_.end(); ++i) {
@@ -6522,7 +6567,7 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 
 	} else {
 		++bo.cnt_built;
-		const uint32_t gametime = game().get_gametime();
+		const Time& gametime = game().get_gametime();
 		bo.last_building_built = gametime;
 		// erase building from remaining_basic_buildings, unless we are loading a saved game
 		if (!found_on_load && persistent_data->remaining_basic_buildings.count(bo.id) > 0) {
@@ -6542,8 +6587,8 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			productionsites.back().site = &dynamic_cast<Widelands::ProductionSite&>(b);
 			productionsites.back().bo = &bo;
 			productionsites.back().bo->new_building_overdue = 0;
-			if (found_on_load && gametime > 5 * 60 * 1000) {
-				productionsites.back().built_time = gametime - 5 * 60 * 1000;
+			if (found_on_load && gametime > Time(5 * 60 * 1000)) {
+				productionsites.back().built_time = gametime - Duration(5 * 60 * 1000);
 			} else {
 				productionsites.back().built_time = gametime;
 			}
@@ -6562,9 +6607,9 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			mines_.back().site = &dynamic_cast<Widelands::ProductionSite&>(b);
 			mines_.back().bo = &bo;
 			mines_.back().built_time = gametime;
-			assert(mines_.back().no_resources_since == kNever);
+			assert(mines_.back().no_resources_since.is_invalid());
 			assert(!mines_.back().upgrade_pending);
-			assert(mines_.back().dismantle_pending_since == kNever);
+			assert(mines_.back().dismantle_pending_since.is_invalid());
 			++mines_.back().bo->unoccupied_count;
 
 			++mines_per_type[bo.mines].finished;
@@ -6585,12 +6630,12 @@ void DefaultAI::gain_building(Widelands::Building& b, const bool found_on_load) 
 			militarysites.back().site = &dynamic_cast<Widelands::MilitarySite&>(b);
 			militarysites.back().bo = &bo;
 			militarysites.back().understaffed = 0;
-			if (found_on_load && gametime > 5 * 60 * 1000) {
-				militarysites.back().built_time = gametime - 5 * 60 * 1000;
+			if (found_on_load && gametime > Time(5 * 60 * 1000)) {
+				militarysites.back().built_time = gametime - Duration(5 * 60 * 1000);
 			} else {
 				militarysites.back().built_time = gametime;
 			}
-			militarysites.back().last_change = 0;
+			militarysites.back().last_change = Time(0);
 			++msites_per_size[bo.desc->get_size()].finished;
 
 		} else if (bo.type == BuildingObserver::Type::kTrainingsite) {
@@ -6747,9 +6792,9 @@ bool DefaultAI::check_supply(const BuildingObserver& bo) {
 }
 
 // TODO(tiborb): - should be called from scheduler, once in 60s is enough
-void DefaultAI::update_player_stat(const uint32_t gametime) {
-	if (player_statistics.get_update_time() > 0 &&
-	    player_statistics.get_update_time() + 15 * 1000 > gametime) {
+void DefaultAI::update_player_stat(const Time& gametime) {
+	if (player_statistics.get_update_time() > Time(0) &&
+	    player_statistics.get_update_time() + Duration(15 * 1000) > gametime) {
 		return;
 	}
 	player_statistics.set_update_time(gametime);
@@ -6815,7 +6860,7 @@ void DefaultAI::update_player_stat(const uint32_t gametime) {
 
 // This runs once in 15 minutes, and adjust wares targets based on number of
 // productionsites and ports
-void DefaultAI::review_wares_targets(uint32_t const gametime) {
+void DefaultAI::review_wares_targets(const Time& gametime) {
 
 	player_ = game().get_player(player_number());
 	tribe_ = &player_->tribe();
@@ -6856,7 +6901,7 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 }
 
 // Sets due_time based on job ID
-void DefaultAI::set_taskpool_task_time(const uint32_t gametime, const SchedulerTaskId task) {
+void DefaultAI::set_taskpool_task_time(const Time& gametime, const SchedulerTaskId task) {
 
 	for (auto& item : taskPool) {
 		if (item.id == task) {
@@ -6868,7 +6913,7 @@ void DefaultAI::set_taskpool_task_time(const uint32_t gametime, const SchedulerT
 }
 
 // Retrieves due time of the task based on its ID
-uint32_t DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
+const Time& DefaultAI::get_taskpool_task_time(const SchedulerTaskId task) {
 	for (const auto& item : taskPool) {
 		if (item.id == task) {
 			return item.due_time;
@@ -6929,10 +6974,10 @@ uint32_t DefaultAI::msites_built() const {
 // and needs to know what resourcess are missing for which player and so on.
 // By default it is off (see kPrintStats)
 // TODO(tiborb): - it would be nice to have this activated by a command line switch
-void DefaultAI::print_stats(uint32_t const gametime) {
+void DefaultAI::print_stats(const Time& gametime) {
 
 	if (!kPrintStats) {
-		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), SchedulerTaskId::kPrintStats);
+		set_taskpool_task_time(Time(), SchedulerTaskId::kPrintStats);
 		return;
 	}
 
@@ -6977,8 +7022,9 @@ void DefaultAI::print_stats(uint32_t const gametime) {
 	if (false) {
 		log_dbg_time(
 		   gametime, " AI %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
-		   gamestring_with_leading_zeros(gametime), static_cast<uint32_t>(productionsites.size()),
-		   static_cast<uint32_t>(militarysites.size()), static_cast<uint32_t>(mines_.size()),
+		   gamestring_with_leading_zeros(gametime.get()),
+		   static_cast<uint32_t>(productionsites.size()), static_cast<uint32_t>(militarysites.size()),
+		   static_cast<uint32_t>(mines_.size()),
 		   static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
 	}
 	if (false) {
@@ -7083,7 +7129,7 @@ void DefaultAI::check_range(T value, T bottom_range, T upper_range, const char* 
 template <typename T> void DefaultAI::check_range(T value, T upper_range, const char* value_name) {
 	if (value > upper_range) {
 		log_dbg_time(game().get_gametime(), " %d: unexpected value for %s: %d\n", player_number(),
-		             value_name, value);
+		             value_name, value.get());
 	}
 }
 
@@ -7101,7 +7147,7 @@ bool DefaultAI::remove_from_dqueue(std::deque<T const*>& dq, T const* member) {
 // Looking for situation where for a critical mine (iron, or marble) there is just one mine and it
 // is
 // unoccupied, probably we need to dismantle another one to release a miner
-bool DefaultAI::critical_mine_unoccupied(uint32_t gametime) {
+bool DefaultAI::critical_mine_unoccupied(const Time& gametime) {
 	// resetting unoccupied
 	for (auto& mine : mines_per_type) {
 		mine.second.unoccupied = 0;
@@ -7110,7 +7156,7 @@ bool DefaultAI::critical_mine_unoccupied(uint32_t gametime) {
 		if (!mines_per_type[mine.bo->mines].is_critical) {
 			continue;
 		}
-		if (mine.built_time + 3 * 60 * 1000 < gametime && !mine.site->can_start_working()) {
+		if (mine.built_time + Duration(3 * 60 * 1000) < gametime && !mine.site->can_start_working()) {
 			++mines_per_type[mine.bo->mines].unoccupied;
 		}
 	}
@@ -7155,7 +7201,7 @@ void DefaultAI::stop_site(const ProductionSiteObserver& site) {
 	}
 }
 
-void DefaultAI::initiate_dismantling(ProductionSiteObserver& site, uint32_t gametime) {
+void DefaultAI::initiate_dismantling(ProductionSiteObserver& site, const Time& gametime) {
 	site.dismantle_pending_since = gametime;
 	set_inputs_to_zero(site);
 	site.bo->construction_decision_time = gametime;

@@ -43,7 +43,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
                                     MapObjectLoader& mol)
 
 {
-	uint32_t const gametime = egbase.get_gametime();
+	const Time& gametime = egbase.get_gametime();
 	const Map& map = egbase.map();
 	Extent const extent = map.extent();
 	PlayerNumber const nr_players = map.get_nrplayers();
@@ -76,26 +76,26 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 					        "\tstatus  : %u\n"
 					        "\tbody    : %s\n",
 					        p, static_cast<int>(begin->second->type()), begin->second->title().c_str(),
-					        begin->second->sent(), begin->second->position().x,
+					        begin->second->sent().get(), begin->second->position().x,
 					        begin->second->position().y, static_cast<int>(begin->second->status()),
 					        begin->second->body().c_str());
 					messages->clear();
 				}
 			}
 
-			uint32_t previous_message_sent = 0;
+			Time previous_message_sent(0);
 			while (Section* const s = prof.get_next_section()) {
 				try {
-					uint32_t const sent = s->get_safe_int("sent");
+					const Time sent(s->get_safe_int("sent"));
 					if (sent < previous_message_sent) {
 						throw GameDataError("messages are not ordered: sent at %u but previous "
 						                    "message sent at %u",
-						                    sent, previous_message_sent);
+						                    sent.get(), previous_message_sent.get());
 					}
 					if (gametime < sent) {
 						throw GameDataError("message is sent in the future: sent at %u but "
 						                    "gametime is only %u",
-						                    sent, gametime);
+						                    sent.get(), gametime.get());
 					}
 
 					Message::Status status = Message::Status::kArchived;  //  default status
@@ -161,13 +161,13 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 		for (const auto& temp_message : messages) {
 			message_saver.add(temp_message.first);
 			const Message& message = *temp_message.second;
-			assert(message.sent() <= static_cast<uint32_t>(egbase.get_gametime()));
+			assert(message.sent() <= egbase.get_gametime());
 
 			Section& s = prof.create_section_duplicate(message.title().c_str());
 			s.set_int("type", static_cast<int32_t>(message.type()));
 			s.set_string("heading", message.heading());
 			s.set_string("icon", message.icon_filename());
-			s.set_int("sent", message.sent());
+			s.set_int("sent", message.sent().get());
 			s.set_string("body", message.body());
 			if (Coords const c = message.position()) {
 				set_coords("position", c, &s);

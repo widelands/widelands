@@ -85,7 +85,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	gametime_label_ = new UI::Textarea(bottom_box, _("Elapsed time:"));
 	bottom_box->add(gametime_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	bottom_box->add_space(kPadding);
-	gametime_value_ = new UI::Textarea(bottom_box, gametimestring(game_.get_gametime()));
+	gametime_value_ = new UI::Textarea(bottom_box, gametimestring(game_.get_gametime().get()));
 	bottom_box->add(gametime_value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	bottom_box->add_inf_space();
@@ -229,7 +229,7 @@ void GameSummaryScreen::fill_data() {
 		}
 		te.set_string(2, stat_str);
 		// Time
-		te.set_string(3, gametimestring(pes.time));
+		te.set_string(3, gametimestring(pes.time.get()));
 	}
 
 	if (local_in_game) {

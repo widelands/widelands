@@ -102,7 +102,7 @@ private:
 	/**
 	 * Gametime when the battle was created.
 	 */
-	int32_t creationtime_;
+	Time creationtime_;
 
 	/**
 	 * 1 if only the first soldier is ready, 2 if only the second soldier

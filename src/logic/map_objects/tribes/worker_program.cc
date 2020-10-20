@@ -601,7 +601,7 @@ void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::st
 	// level-dependent soldier animations, or we want to write a worker program for a soldier,
 	// we will need to store the animation name as a string in an sparam
 	act->iparam1 = parameters.animation;
-	act->iparam2 = parameters.duration;
+	act->iparam2 = parameters.duration.get();
 }
 
 /* RST
@@ -968,7 +968,7 @@ void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::stri
 			if (item.first == "radius") {
 				act->iparam1 = read_positive(item.second);
 			} else if (item.first == "duration") {
-				act->iparam2 = read_duration(item.second, worker_);
+				act->iparam2 = read_duration(item.second, worker_).get();
 			} else {
 				throw GameDataError(
 				   "Unknown parameter '%s'. Usage: scout=radius:<number> duration:<duration>",
