@@ -155,7 +155,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		buttons->add(b);
 
 		b->sigclicked.connect(
-		   [this, &ib, &wh]() { EconomyOptionsWindow::create(ib, wh.base_flag()); });
+		   [this, &ib, &wh, type]() { EconomyOptionsWindow::create(ib, wh.base_flag(), type); });
 	}
 }
 

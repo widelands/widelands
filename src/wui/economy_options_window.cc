@@ -38,7 +38,7 @@ constexpr int kDesiredWidth = 216;
 
 EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::Economy* ware_economy,
-                                           Widelands::Economy* worker_economy,
+                                           Widelands::Economy* worker_economy, Widelands::WareWorker type,
                                            bool can_act)
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
      main_box_(this, 0, 0, UI::Box::Vertical),
@@ -150,6 +150,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	   });
 
 	read_targets();
+	activate_tab(type);
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {
@@ -164,7 +165,7 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	}
 }
 
-void EconomyOptionsWindow::create(InteractiveBase& ibase, const Widelands::Flag& flag) {
+void EconomyOptionsWindow::create(InteractiveBase& ibase, const Widelands::Flag& flag, Widelands::WareWorker type) {
 	if (upcast(InteractiveGameBase, igbase, &ibase)) {
 		Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
 		Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
@@ -173,6 +174,7 @@ void EconomyOptionsWindow::create(InteractiveBase& ibase, const Widelands::Flag&
 			window_open = true;
 			EconomyOptionsWindow& window =
 			   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
+			window.activate_tab(type);
 			if (window.is_minimal()) {
 				window.restore();
 			}
@@ -182,16 +184,20 @@ void EconomyOptionsWindow::create(InteractiveBase& ibase, const Widelands::Flag&
 			window_open = true;
 			EconomyOptionsWindow& window =
 			   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+			window.activate_tab(type);
 			if (window.is_minimal()) {
 				window.restore();
 			}
 			window.move_to_top();
 		}
 		if (!window_open) {
-			new EconomyOptionsWindow(igbase, ware_economy, worker_economy,
+			new EconomyOptionsWindow(igbase, ware_economy, worker_economy, type,
 			                         igbase->can_act(ware_economy->owner().player_number()));
 		}
 	}
+}
+void EconomyOptionsWindow::activate_tab(Widelands::WareWorker type) {
+	tabpanel_.activate(type == Widelands::WareWorker::wwWARE ? "wares" : "workers");
 }
 
 std::string EconomyOptionsWindow::localize_profile_name(const std::string& name) {
