@@ -1,6 +1,6 @@
 -- TODO(GunChleoc): Document more fully
 
--- Sleep until we aqcuire permission to run
+-- Sleep until we acquire permission to run
 function wait_for_lock(player, training_wheel_name)
    local success = false
    repeat

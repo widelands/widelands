@@ -72,7 +72,7 @@ private:
 	void write();
 
 	/**
-	 * @brief A training whell's script and filename
+	 * @brief A training wheel's script and filename
 	 */
 	struct TrainingWheel {
 		explicit TrainingWheel(const std::string& key,
