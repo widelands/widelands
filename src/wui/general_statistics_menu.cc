@@ -53,7 +53,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
            0,
            430,
            PLOT_HEIGHT,
-           Widelands::kStatisticsSampleTime,
+           Widelands::kStatisticsSampleTime.get(),
            WuiPlotArea::Plotmode::kAbsolute),
      selected_information_(0) {
 	assert(my_registry_);

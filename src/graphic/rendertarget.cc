@@ -301,7 +301,7 @@ void RenderTarget::blit_animation(const Vector2f& dst,
                                   const Widelands::Coords& coords,
                                   const float scale,
                                   uint32_t animation_id,
-                                  uint32_t time,
+                                  const Time& time,
                                   const RGBColor* player_color,
                                   const float opacity,
                                   const int percent_from_bottom) {
@@ -312,7 +312,7 @@ void RenderTarget::blit_animation(const Vector2f& dst,
 		Rectf srcrc = animation.source_rectangle(percent_from_bottom, scale);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, coords, srcrc, dstrc, player_color, surface_, scale, opacity);
+			animation.blit(time.get(), coords, srcrc, dstrc, player_color, surface_, scale, opacity);
 		}
 	}
 }

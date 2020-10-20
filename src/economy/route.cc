@@ -52,7 +52,7 @@ void Route::init(int32_t totalcost) {
  * idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
  * Every route has at least one flag.
  */
-Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) {
+Flag& Route::get_flag(EditorGameBase& egbase, std::vector<Flag*>::size_type const idx) const {
 	assert(idx < route_.size());
 	return *route_[idx].get(egbase);
 }

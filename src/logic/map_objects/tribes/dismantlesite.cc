@@ -33,6 +33,8 @@
 
 namespace Widelands {
 
+constexpr Duration DismantleSite::kDismantlesiteStepTime;
+
 /**
  * The contents of 'table' are documented in
  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
@@ -62,7 +64,8 @@ IMPLEMENTATION
 ==============================
 */
 
-DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinishedBuilding(gdescr) {
+DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr)
+   : PartiallyFinishedBuilding(gdescr), next_dropout_index_(0) {
 }
 
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
@@ -226,7 +229,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 	}
 
 	// Check if one step has completed
-	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
+	if (game.get_gametime() >= work_steptime_ && working_) {
 		++work_completed_;
 
 		for (WaresQueue* wq : consume_wares_) {
@@ -259,9 +262,9 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
-		work_steptime_ = game.get_gametime() + DISMANTLESITE_STEP_TIME;
+		work_steptime_ = game.get_gametime() + kDismantlesiteStepTime;
 		worker.start_task_idle(
-		   game, worker.descr().get_animation("work", &worker), DISMANTLESITE_STEP_TIME);
+		   game, worker.descr().get_animation("work", &worker), kDismantlesiteStepTime.get());
 
 		working_ = true;
 	}
@@ -273,13 +276,13 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 Draw it.
 ===============
 */
-void DismantleSite::draw(uint32_t gametime,
+void DismantleSite::draw(const Time& gametime,
                          const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const Widelands::Coords& coords,
                          float scale,
                          RenderTarget* dst) {
-	uint32_t tanim = gametime - animstart_;
+	const Time tanim((gametime - animstart_).get());
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	if (was_immovable_) {

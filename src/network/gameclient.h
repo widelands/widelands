@@ -53,7 +53,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	// GameController interface
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand*) override;
-	int32_t get_frametime() override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 
 	uint32_t real_speed() override;

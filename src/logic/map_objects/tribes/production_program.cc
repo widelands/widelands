@@ -572,7 +572,7 @@ ProductionProgram::ActReturn::SiteHas::description_negation(const Tribes& tribes
 bool ProductionProgram::ActReturn::WorkersNeedExperience::evaluate(const ProductionSite& ps) const {
 	ProductionSite::WorkingPosition const* const wp = ps.working_positions_;
 	for (uint32_t i = ps.descr().nr_working_positions(); i;) {
-		if (wp[--i].worker->needs_experience()) {
+		if (wp[--i].worker.get(ps.get_owner()->egbase())->needs_experience()) {
 			return true;
 		}
 	}
@@ -880,7 +880,7 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	case ProgramResultHandlingMethod::kRepeat:
 		ps.top_state().phase = ProgramResult::kNone;
 		ps.program_timer_ = true;
-		ps.program_time_ = ps.schedule_act(game, 10);
+		ps.program_time_ = ps.schedule_act(game, Duration(10));
 		break;
 	}
 }
@@ -976,7 +976,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 
 void ProductionProgram::ActCallWorker::execute(Game& game, ProductionSite& ps) const {
 	// Always main worker is doing stuff
-	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 }
 
 bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
@@ -1040,7 +1040,7 @@ ProductionProgram::ActSleep::ActSleep(const std::vector<std::string>& arguments,
 }
 
 void ProductionProgram::ActSleep::execute(Game& game, ProductionSite& ps) const {
-	return ps.program_step(game, duration_ ? duration_ : 0, ps.top_state().phase);
+	return ps.program_step(game, duration_.get() ? duration_ : Duration(0), ps.top_state().phase);
 }
 
 /* RST
@@ -1049,14 +1049,14 @@ animate
 Runs an animation. See :ref:`map_object_programs_animate`.
 */
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
-                                          ProductionSiteDescr* descr) {
-	parameters = MapObjectProgram::parse_act_animate(arguments, *descr, false);
+                                          ProductionSiteDescr* descr)
+   : parameters(MapObjectProgram::parse_act_animate(arguments, *descr, false)) {
 }
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
 	ps.start_animation(game, parameters.animation);
 	return ps.program_step(
-	   game, parameters.duration ? parameters.duration : 0, ps.top_state().phase);
+	   game, parameters.duration.get() ? parameters.duration : Duration(0), ps.top_state().phase);
 }
 
 /* RST
@@ -1293,7 +1293,7 @@ ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& argume
 void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.produced_wares_.empty());
 	ps.produced_wares_ = produced_wares_;
-	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
 	assert(produced_wares_.size());
@@ -1377,7 +1377,7 @@ ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& argume
 void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) const {
 	assert(ps.recruited_workers_.empty());
 	ps.recruited_workers_ = recruited_workers_;
-	ps.working_positions_[ps.main_worker_].worker->update_task_buildingwork(game);
+	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
 	assert(recruited_workers_.size());
@@ -1871,8 +1871,8 @@ playsound
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
 ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
-                                              const ProductionSiteDescr& descr) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
+                                              const ProductionSiteDescr& descr)
+   : parameters(MapObjectProgram::parse_act_play_sound(arguments, descr)) {
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
@@ -2002,7 +2002,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	if (map.find_reachable_immovables(game, area, &immovables, cstep, FindImmovableByDescr(descr))) {
 		state.objvar = immovables[0].object;
 
-		psite.working_positions_[psite.main_worker_].worker->update_task_buildingwork(game);
+		psite.working_positions_[psite.main_worker_].worker.get(game)->update_task_buildingwork(game);
 		return;
 	}
 
@@ -2038,7 +2038,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 
 		state.coord = best_coords;
 
-		psite.working_positions_[psite.main_worker_].worker->update_task_buildingwork(game);
+		psite.working_positions_[psite.main_worker_].worker.get(game)->update_task_buildingwork(game);
 		return;
 	}
 

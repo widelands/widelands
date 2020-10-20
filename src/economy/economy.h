@@ -124,7 +124,7 @@ public:
 		return type_;
 	}
 
-	static void check_merge(Flag&, Flag&, WareWorker);
+	static void check_merge(const Flag&, const Flag&, WareWorker);
 	static void check_split(Flag&, Flag&, WareWorker);
 
 	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
@@ -227,7 +227,7 @@ private:
 	void check_splits();
 	void split(const std::set<OPtr<Flag>>&);
 
-	void start_request_timer(int32_t delta = 200);
+	void start_request_timer(const Duration& delta = Duration(200));
 
 	Supply* find_best_supply(Game&, const Request&, int32_t& cost);
 	void process_requests(Game&, RSPairStruct* supply_pairs);
@@ -236,7 +236,7 @@ private:
 	void create_requested_workers(Game&);
 	void create_requested_worker(Game&, DescriptionIndex);
 
-	bool has_request(Request&);
+	bool has_request(Request&) const;
 
 	/*************/
 	/* Variables */

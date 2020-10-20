@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 by the Widelands Development Team
+ * Copyright (C) 2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,23 +13,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#include "logic/map_revision.h"
+#include "base/times.h"
 
-#include <ctime>
+#include "io/fileread.h"
+#include "io/filewrite.h"
 
-#include "build_info.h"
-
-namespace Widelands {
-
-MapVersion::MapVersion()
-   : map_creator_version(build_id()),
-     map_version_major(0),
-     map_version_minor(0),
-     map_version_timestamp(static_cast<uint32_t>(time(nullptr))),
-     needs_widelands_version_after(0) {
+Duration::Duration(FileRead& fr) : value_(fr.unsigned_32()) {
 }
-}  // namespace Widelands
+void Duration::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}
+
+Time::Time(FileRead& fr) : value_(fr.unsigned_32()) {
+}
+void Time::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}

@@ -322,8 +322,7 @@ void GameMessageMenu::update_record(UI::Table<uintptr_t>::EntryRecord& er,
 	   ColStatus, g_image_cache->get(status_picture_filename[static_cast<int>(message.status())]));
 	er.set_picture(ColTitle, message.icon(), message.title());
 
-	const uint32_t time = message.sent();
-	er.set_string(ColTimeSent, gametimestring(time));
+	er.set_string(ColTimeSent, gametimestring(message.sent().get()));
 }
 
 /*

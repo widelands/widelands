@@ -42,10 +42,10 @@ void EconomyDataPacket::read(FileRead& fr) {
 				   eco_->serial_, saved_serial);
 			}
 			Economy* other_eco = nullptr;
-			assert(Economy::last_economy_serial_ >= (other_eco ? other_eco->serial_ : eco_->serial_));
+			assert(Economy::last_economy_serial_ >= eco_->serial_);
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
-				while (Time const last_modified = fr.unsigned_32()) {
+				while (const uint32_t last_modified = fr.unsigned_32()) {
 					char const* const type_name = fr.c_string();
 					uint32_t const permanent = fr.unsigned_32();
 					DescriptionIndex i;
@@ -61,11 +61,11 @@ void EconomyDataPacket::read(FileRead& fr) {
 								         type_name);
 							} else {
 								Economy::TargetQuantity& tq = eco_->target_quantities_[i];
-								if (tq.last_modified) {
+								if (tq.last_modified.get() > 0) {
 									throw GameDataError("duplicated entry for ware %s", type_name);
 								}
 								tq.permanent = permanent;
-								tq.last_modified = last_modified;
+								tq.last_modified = Time(last_modified);
 							}
 						} else if (other_eco) {
 							i = tribe.worker_index(type_name);
@@ -77,11 +77,11 @@ void EconomyDataPacket::read(FileRead& fr) {
 									         type_name);
 								} else {
 									Economy::TargetQuantity& tq = other_eco->target_quantities_[i];
-									if (tq.last_modified) {
+									if (tq.last_modified.get() > 0) {
 										throw GameDataError("duplicated entry for worker %s", type_name);
 									}
 									tq.permanent = permanent;
-									tq.last_modified = last_modified;
+									tq.last_modified = Time(last_modified);
 								}
 							} else {
 								log_warn("target quantity configured for \"%s\" in worker economy, "
@@ -106,11 +106,11 @@ void EconomyDataPacket::read(FileRead& fr) {
 								         type_name);
 							} else {
 								Economy::TargetQuantity& tq = eco_->target_quantities_[i];
-								if (tq.last_modified) {
+								if (tq.last_modified.get() > 0) {
 									throw GameDataError("duplicated entry for worker %s", type_name);
 								}
 								tq.permanent = permanent;
-								tq.last_modified = last_modified;
+								tq.last_modified = Time(last_modified);
 							}
 						} else {
 							log_warn("target quantity configured for \"%s\" in worker economy, "
@@ -147,8 +147,8 @@ void EconomyDataPacket::write(FileWrite& fw) {
 	for (const DescriptionIndex& w_index :
 	     (eco_->type() == wwWARE ? tribe.wares() : tribe.workers())) {
 		const Economy::TargetQuantity& tq = eco_->target_quantities_[w_index];
-		if (Time const last_modified = tq.last_modified) {
-			fw.unsigned_32(last_modified);
+		if (tq.last_modified.get() > 0) {
+			tq.last_modified.save(fw);
 			if (eco_->type() == wwWARE) {
 				fw.c_string(tribe.get_ware_descr(w_index)->name());
 			} else {

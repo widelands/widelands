@@ -93,7 +93,7 @@ public:
 	/// of m, the message deallocated instead.
 	MessageId add_message_with_timeout(Game&,
 	                                   std::unique_ptr<Message> message,
-	                                   uint32_t timeout,
+	                                   const Duration& timeout,
 	                                   uint32_t radius);
 
 	/// Indicates that the object linked to the message has been removed
@@ -165,7 +165,7 @@ public:
 		// Seafaring constants for controlling expeditions
 		static constexpr uint32_t kColonyScanStartArea = 35;
 		static constexpr uint32_t kColonyScanMinArea = 12;
-		static constexpr uint32_t kNoExpedition = 0;
+		static constexpr Time kNoExpedition = Time(0);
 
 		AiPersistentState()
 		   : initialized(false),
@@ -191,7 +191,7 @@ public:
 		bool initialized;
 		uint32_t colony_scan_area;
 		uint32_t trees_around_cutters;
-		uint32_t expedition_start_time;
+		Time expedition_start_time;
 		int16_t
 		   ships_utilization;  // 0-10000 to avoid floats, used for decision for building new ships
 		bool no_more_expeditions;
@@ -231,8 +231,8 @@ public:
 			//  darkening that actually hides the ground from the user).
 			terrains.d = terrains.r = 0;
 
-			time_triangle_last_surveyed[0] = never();
-			time_triangle_last_surveyed[1] = never();
+			time_triangle_last_surveyed[0] = Time();
+			time_triangle_last_surveyed[1] = Time();
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -474,7 +474,7 @@ public:
 	void start_stop_building(PlayerImmovable&);
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);
-	void start_or_cancel_expedition(Warehouse&);
+	void start_or_cancel_expedition(const Warehouse&);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 	void dismantle_building(Building*, bool keep_wares);
 
@@ -491,10 +491,11 @@ public:
 	void drop_soldier(PlayerImmovable&, Soldier&);
 	void change_training_options(TrainingSite&, TrainingAttribute attr, int32_t val);
 
-	uint32_t find_attack_soldiers(Flag&,
+	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
+	void
+	enemyflagaction(const Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
 
 	uint32_t casualties() const {
 		return casualties_;

@@ -122,7 +122,7 @@ private:
 	UI::Button cancel_;
 };
 
-inline EditorInteractive& EditorPlayerMenu::eia() {
+inline EditorInteractive& EditorPlayerMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 

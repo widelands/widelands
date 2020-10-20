@@ -103,7 +103,7 @@ public:
 	void set_location(PlayerImmovable*);
 	void set_economy(Economy*, WareWorker);
 
-	WareInstance* get_carried_ware(EditorGameBase& egbase) {
+	WareInstance* get_carried_ware(const EditorGameBase& egbase) {
 		return carried_ware_.get(egbase);
 	}
 	WareInstance const* get_carried_ware(const EditorGameBase& egbase) const {
@@ -162,7 +162,7 @@ public:
 
 	void start_task_gowarehouse(Game&);
 	void start_task_dropoff(Game&, WareInstance&);
-	void start_task_releaserecruit(Game&, Worker&);
+	void start_task_releaserecruit(Game&, const Worker&);
 	void start_task_fetchfromflag(Game&);
 
 	bool start_task_waitforcapacity(Game&, Flag&);
@@ -267,7 +267,7 @@ private:
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
 	struct PlaceToScout {
-		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
+		explicit PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
 		}
 		// The variable scoutme should not be accessed when randomwalk is true.
 		// Initializing the scoutme variable with an obviously-wrong value.
@@ -284,8 +284,8 @@ private:
 	void add_sites(Game& game,
 	               const Map& map,
 	               const Player& player,
-	               std::vector<ImmovableFound>& found_sites);
-	bool scout_random_walk(Game& game, const Map& map, State& state);
+	               const std::vector<ImmovableFound>& found_sites);
+	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
