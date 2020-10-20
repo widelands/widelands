@@ -521,7 +521,8 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
  *        negative values up.
  */
 void Table<void*>::move_selection(const int32_t offset) {
-	int32_t new_selection = has_selection() ? (is_multiselect_ ? last_multiselect_ : selection_) + offset : 0;
+	int32_t new_selection =
+	   has_selection() ? (is_multiselect_ ? last_multiselect_ : selection_) + offset : 0;
 
 	if (new_selection < 0) {
 		new_selection = 0;
