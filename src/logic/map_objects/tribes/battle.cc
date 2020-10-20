@@ -126,7 +126,7 @@ bool Battle::locked(const Game& game) {
 	if (!first_ || !second_) {
 		return false;
 	}
-	if (game.get_gametime() - creationtime_ < 1000) {
+	if (game.get_gametime() - creationtime_ < Duration(1000)) {
 		return true;  // don't change battles around willy-nilly
 	}
 	return first_->get_position() == second_->get_position();
@@ -198,12 +198,12 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	}
 
 	// Here is a timeout to prevent battle freezes
-	if (waitingForOpponent && (game.get_gametime() - creationtime_) > 90 * 1000) {
+	if (waitingForOpponent && (game.get_gametime() - creationtime_) > Duration(90 * 1000)) {
 		molog(
 		   game.get_gametime(),
 		   "[battle] soldier %u waiting for opponent %u too long (%5d sec), cancelling battle...\n",
 		   soldier.serial(), opponent(soldier)->serial(),
-		   (game.get_gametime() - creationtime_) / 1000);
+		   (game.get_gametime() - creationtime_).get() / 1000);
 		cancel(game, soldier);
 		return;
 	}
@@ -348,7 +348,7 @@ void Battle::Loader::load(FileRead& fr) {
 
 	Battle& battle = get<Battle>();
 
-	battle.creationtime_ = fr.signed_32();
+	battle.creationtime_ = Time(fr);
 	battle.readyflags_ = fr.unsigned_8();
 	battle.first_strikes_ = fr.unsigned_8();
 	battle.damage_ = fr.unsigned_32();
@@ -385,7 +385,7 @@ void Battle::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	MapObject::save(egbase, mos, fw);
 
-	fw.signed_32(creationtime_);
+	creationtime_.save(fw);
 	fw.unsigned_8(readyflags_);
 	fw.unsigned_8(first_strikes_);
 	fw.unsigned_32(damage_);

@@ -425,10 +425,10 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	}
 }
 
-constexpr unsigned kThinkInterval = 200;
+constexpr Duration kThinkInterval = Duration(200);
 
 void EconomyOptionsWindow::think() {
-	const uint32_t time = player_->egbase().get_gametime();
+	const Time& time = player_->egbase().get_gametime();
 	if (time - time_last_thought_ < kThinkInterval || !player_->get_economy(ware_serial_) ||
 	    !player_->get_economy(worker_serial_)) {
 		// If our economy has been deleted, die() was already called, no need to do anything

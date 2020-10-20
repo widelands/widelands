@@ -88,7 +88,7 @@ void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
 void SavegameLoader::add_general_information(SavegameData& gamedata,
                                              const Widelands::GamePreloadPacket& gpdp) const {
 	gamedata.set_mapname(gpdp.get_mapname());
-	gamedata.set_gametime(gpdp.get_gametime());
+	gamedata.set_gametime(gpdp.get_gametime().get());
 	gamedata.set_nrplayers(gpdp.get_number_of_players());
 	gamedata.version = gpdp.get_version();
 	gamedata.wincondition = gpdp.get_localized_win_condition();

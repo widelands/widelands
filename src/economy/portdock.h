@@ -137,7 +137,8 @@ private:
 	friend struct ShippingSchedule;
 
 	// Does nothing - we do not show them on the map
-	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	void
+	draw(const Time&, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
 	void init_fleet(EditorGameBase& egbase);

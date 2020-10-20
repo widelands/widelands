@@ -68,7 +68,7 @@ void Carrier::road_update(Game& game, State& state) {
 		// Blocked by an ongoing battle
 		signal_handled();
 		set_animation(game, descr().get_animation("idle", this));
-		return schedule_act(game, 250);
+		return schedule_act(game, Duration(250));
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
 		molog(game.get_gametime(), "[road]: Terminated by signal '%s'\n", signal.c_str());
@@ -89,7 +89,7 @@ void Carrier::road_update(Game& game, State& state) {
 			state.ivar1 = 1;
 
 			set_animation(game, descr().get_animation("idle", this));
-			return schedule_act(game, 50);
+			return schedule_act(game, Duration(50));
 		}
 	}
 
@@ -110,7 +110,7 @@ void Carrier::road_update(Game& game, State& state) {
 		Road& r = dynamic_cast<Road&>(road);
 		r.charge_wallet(game);
 		// if road still promoted then schedule demotion, otherwise go fully idle waiting until signal
-		return r.is_busy() ? schedule_act(game, (r.wallet() + 2) * 500) : skip_act();
+		return r.is_busy() ? schedule_act(game, Duration((r.wallet() + 2) * 500)) : skip_act();
 	} else {
 		skip_act();
 	}
@@ -157,7 +157,7 @@ void Carrier::transport_update(Game& game, State& state) {
 		// Blocked by an ongoing battle
 		signal_handled();
 		set_animation(game, descr().get_animation("idle", this));
-		return schedule_act(game, 250);
+		return schedule_act(game, Duration(250));
 	} else if (signal.size()) {
 		molog(game.get_gametime(), "[transport]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
@@ -269,7 +269,7 @@ void Carrier::pickup_from_flag(Game& game, const State& state) {
 			set_carried_ware(game, ware);
 
 			set_animation(game, descr().get_animation("idle", this));
-			return schedule_act(game, 20);
+			return schedule_act(game, Duration(20));
 		} else {
 			molog(game.get_gametime(), "[Carrier]: Nothing suitable on flag.\n");
 			return pop_task(game);
@@ -300,7 +300,7 @@ void Carrier::drop_ware(Game& game, State& state) {
 
 			promised_pickup_to_ = NOONE;
 			set_animation(game, descr().get_animation("idle", this));
-			return schedule_act(game, 20);
+			return schedule_act(game, Duration(20));
 		}
 
 		state.ivar1 = promised_pickup_to_;
@@ -319,7 +319,7 @@ void Carrier::drop_ware(Game& game, State& state) {
 		set_carried_ware(game, other);
 
 		set_animation(game, descr().get_animation("idle", this));
-		return schedule_act(game, 20);
+		return schedule_act(game, Duration(20));
 	} else {
 		return pop_task(game);
 	}

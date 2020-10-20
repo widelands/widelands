@@ -146,7 +146,7 @@ private:
 	/// The type of last building that was jumped to
 	Widelands::DescriptionIndex last_building_type_;
 	/// The last time the information in this Panel got updated
-	uint32_t lastupdate_;
+	Time lastupdate_;
 	/// Whether the window was minimized the last time that think() was executed
 	uint32_t was_minimized_;
 
