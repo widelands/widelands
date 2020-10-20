@@ -423,6 +423,48 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 			move_selection(1);
 			return true;
 
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEDOWN:
+			move_selection(get_h() / get_lineheight());
+			return true;
+
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEUP: {
+			const int32_t sel = get_h() / get_lineheight();
+			move_selection(-1 * sel);
+			return true;
+		}
+
+		case SDLK_KP_7:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_HOME:
+			multiselect(0);
+			scroll_to_item(0);
+			return true;
+
+		case SDLK_KP_1:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_END: {
+			const uint32_t sel = entry_records_.size() - 1;
+			multiselect(sel);
+			scroll_to_item(sel);
+			return true;
+		}
+
 		default:
 			break;  // not handled
 		}
@@ -489,7 +531,7 @@ void Table<void*>::move_selection(const int32_t offset) {
 
 	multiselect(new_selection);
 	// Scroll to newly selected entry
-	scroll_to_item(new_selection + offset);
+	scroll_to_item(new_selection);
 }
 
 /**
