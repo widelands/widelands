@@ -131,7 +131,7 @@ run(function()
       ),
       h = 140,
       w = 260,
-      modal = false
+      scroll_back = true
    }
 
    pop_textdomain()
@@ -251,10 +251,6 @@ run(function()
 
    -- Wait for the building and congratulate the player
    while #player:get_buildings(quarry.name) < 1 do sleep(300) end
+   msg_finished.field = constructionsite_field
    campaign_message_box(msg_finished)
-   scroll_to_field(constructionsite_field)
-
-   -- 1 minute should suffice to read the message box
-   sleep(60 * 1000)
-   close_story_messagebox()
 end)
