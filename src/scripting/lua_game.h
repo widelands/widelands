@@ -93,6 +93,7 @@ public:
 	int hide_fields(lua_State* L);
 	int mark_scenario_as_solved(lua_State* L);
 	int acquire_training_wheel_lock(lua_State* L);
+	int release_training_wheel_lock(lua_State* L);
 	int mark_training_wheel_as_solved(lua_State* L);
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);

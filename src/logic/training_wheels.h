@@ -45,6 +45,12 @@ public:
 	 * @return Whether the training wheel objective acquired the lock
 	 */
 	bool acquire_lock(const std::string& objective);
+
+	/**
+	 * @brief release_lock Releases the current training wheel lock without marking it as solved.
+	 */
+	void release_lock();
+
 	/**
 	 * @brief mark_as_solved Mark the given training wheel objective as solved and release the lock
 	 * @param objective The training wheel objective to be marked as solved

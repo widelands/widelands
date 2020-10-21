@@ -90,6 +90,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, hide_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
    METHOD(LuaPlayer, acquire_training_wheel_lock),
+   METHOD(LuaPlayer, release_training_wheel_lock),
    METHOD(LuaPlayer, mark_training_wheel_as_solved),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
@@ -717,6 +718,18 @@ int LuaPlayer::acquire_training_wheel_lock(lua_State* L) {
 	lua_pushboolean(L, success);
 	return 1;
 }
+
+/* RST
+   .. method:: release_training_wheel_lock()
+
+      Mark the current training wheel as no longer active.
+*/
+// UNTESTED
+int LuaPlayer::release_training_wheel_lock(lua_State* L) {
+	get_game(L).release_training_wheel_lock();
+	return 0;
+}
+
 /* RST
    .. method:: mark_training_wheel_as_solved(name)
 

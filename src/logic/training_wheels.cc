@@ -106,13 +106,17 @@ bool TrainingWheels::acquire_lock(const std::string& objective) {
 	return current_objective_ == objective;
 }
 
+void TrainingWheels::release_lock() {
+	current_objective_ = "";
+}
+
 void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_more) {
 	log_info("Solved training wheel '%s'", objective.c_str());
 	solved_objectives_.insert(objective);
 	Section& section = profile_.pull_section("global");
 	section.set_bool(objective.c_str(), true);
 	write();
-	current_objective_ = "";
+	release_lock();
 	if (run_some_more) {
 		load_objectives();
 		run_objectives();

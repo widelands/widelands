@@ -431,6 +431,11 @@ bool Game::acquire_training_wheel_lock(const std::string& objective) {
 	}
 	return false;
 }
+void Game::release_training_wheel_lock() {
+	if (training_wheels_ != nullptr) {
+		return training_wheels_->release_lock();
+	}
+}
 void Game::mark_training_wheel_as_solved(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
 		training_wheels_->mark_as_solved(objective, training_wheels_wanted_);

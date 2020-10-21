@@ -10,6 +10,24 @@ function select_warehouse_types(buildings)
    return result
 end
 
+-- Wait for a warehouse
+function wait_for_warehouse(player, buildings)
+   local warehouse_types = select_warehouse_types(buildings)
+   repeat
+      for b_idx, warehouse in ipairs(warehouse_types) do
+         local candidates = player:get_buildings(warehouse)
+         if #candidates > 0 then
+            warehouse_immovable = candidates[1]
+            break
+         end
+      end
+      if warehouse_immovable == nil then
+         sleep(300)
+      end
+   until warehouse_immovable ~= nil
+   return warehouse_immovable
+end
+
 -- Find tribe-dependent building type e.g. "trees" and "log" will give us a lumberjack
 function find_immovable_collector_for_ware(buildings, immovable_attribute, warename)
    for b_idx, building in ipairs(buildings) do

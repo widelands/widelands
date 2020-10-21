@@ -37,27 +37,12 @@ run(function()
    local conquering_immovable = conquering_field.immovable
 
    -- Wait for a warehouse
-   local warehouse_types = select_warehouse_types(buildings)
-   local warehouse_immovable = nil
-   repeat
-      for b_idx, warehouse in ipairs(warehouse_types) do
-         local candidates = player:get_buildings(warehouse)
-         if #candidates > 0 then
-            warehouse_immovable = candidates[1]
-            break
-         end
-      end
-      if warehouse_immovable == nil then
-         sleep(300)
-      end
-   until warehouse_immovable ~= nil
+   local warehouse_immovable = wait_for_warehouse(player, buildings)
 
    if conquering_immovable == nil then
       conquering_immovable = warehouse_immovable
       conquering_field = warehouse_immovable.fields[1]
    end
-   print("Conquering field is: " .. conquering_field.x .. " " .. conquering_field.y)
-
 
    local auto_roadbuilding = mapview.auto_roadbuilding_mode
 
@@ -96,7 +81,7 @@ run(function()
       title = _"Roads",
       position = "topright",
       body = (
-         li_object(quarry.name, "Click on the flag in front of the building to start placing a road", player.color)
+         li_object(quarry.name, "Click on the flag in front of the building to start placing a road.", player.color)
       ),
       h = 120,
       w = 260,
@@ -260,13 +245,6 @@ run(function()
          end
       end
    until builder_present == true
-
-   -- Teach placing flags on the road if there is room for them
-   target_field = find_needed_flag_on_road(conquering_field, player, starting_conquer_range)
-   if target_field ~= nil then
-      include "scripting/training_wheels/common.lua"
-      teach_flags_on_road(target_field)
-   end
 
    -- Teaching is done, so mark it as solved
    player:mark_training_wheel_as_solved(training_wheel_name)
