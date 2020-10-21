@@ -48,6 +48,24 @@
 -- * **Conciseness:** Keep the texts as short as possible, users don't like to read walls of text.
 --   Conciseness also helps with keeping the workload down for our translators.
 --
+-- Message Formatting
+-- ------------------
+--
+-- We should always follow the same formatting pattern to make it easier for the player
+-- to distinguish information from action items. We also use images to give visual
+-- references to the player.
+--
+-- * **Explanations:** Use ``p`` for core explanations if there is no appropriate visual reference for them.
+--   Otherwise, use ``li_image`` or ``li_object`` to illustrate.
+-- * **Actions:** When explaining an action that the player needs to take, use
+--   ``li_image`` or ``li_object`` to give a visual reference. If no appropriate images
+--   are available, use ``li`` to show it as a bullet point.
+-- * **Hints:** Hints with further information are shown with ``li_arrow``.
+--
+-- If you need text that's a bit longer, split it into separate translation units.
+-- You can then concatenate them with the ``join_sentences`` function.
+--
+--
 -- Example Training Wheel
 -- ----------------------
 --
@@ -81,9 +99,11 @@
 --          title = _"Example",
 --          position = "topright",
 --          body = (
---             p("This is an example with a non-modal story message box, so we can let the player do things while we show this message.")
+--             p("This is an example with a non-modal story message box, so we can let the player do things while we show this message.") ..
+--             li("Dear player, please do something.") ..
+--             li_arrow("BTW: This is a teachy Training Wheel")
 --          ),
---          h = 280,
+--          h = 380,
 --          w = 260,
 --          modal = false
 --       }

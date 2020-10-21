@@ -722,7 +722,7 @@ int LuaPlayer::acquire_training_wheel_lock(lua_State* L) {
 /* RST
    .. method:: release_training_wheel_lock()
 
-      Mark the current training wheel as no longer active.
+      Mark the current training wheel as no longer active without solving it.
 */
 // UNTESTED
 int LuaPlayer::release_training_wheel_lock(lua_State* L) {
@@ -733,7 +733,7 @@ int LuaPlayer::release_training_wheel_lock(lua_State* L) {
 /* RST
    .. method:: mark_training_wheel_as_solved(name)
 
-      Marks a global training wheel objective as solved.
+      Marks a global training wheel objective as solved. Also releases the lock.
 
       :arg name: name of the training wheel to be marked as solved
       :type name: :class:`string`
