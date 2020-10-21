@@ -109,7 +109,7 @@ end
 -- .. function:: broadcast(plrs, header, msg[, options])
 --
 --    broadcast a message to all players using
---    :meth:`wl.game.Player.send_to_inbox`. All parameters are passed
+--    :meth:`send_to_inbox`. All parameters are passed
 --    literally.
 
 function broadcast(plrs, header, msg, goptions)
