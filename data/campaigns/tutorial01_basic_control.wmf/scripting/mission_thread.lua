@@ -64,6 +64,7 @@ function starting_infos()
    end
    set_objective_done(o, 500)
    wl.ui.MapView():abort_road_building()
+   plr:mark_training_wheel_as_solved("building_spaces")
 
    build_lumberjack()
 end
@@ -134,6 +135,8 @@ function build_lumberjack()
       -- if the flag is already built, show the player a different message box
       campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
+
+   plr:mark_training_wheel_as_solved("flags")
 
    local o = campaign_message_with_objective(lumberjack_message_07a, obj_lumberjack_progress)
    scroll_to_field(first_lumberjack_field)
@@ -287,6 +290,7 @@ function build_a_quarry()
 
    second_quarry()
    plr:mark_training_wheel_as_solved("logs")
+   plr:mark_training_wheel_as_solved("rocks")
 
    -- Interludium: talk about census and statistics
    census_and_statistics()
