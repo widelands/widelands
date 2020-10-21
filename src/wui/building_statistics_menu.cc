@@ -62,6 +62,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      label_nr_owned_(&hbox_owned_, "", UI::Align::kRight),
      label_nr_construction_(&hbox_construction_, "", UI::Align::kRight),
      label_nr_unproductive_(&hbox_unproductive_, "", UI::Align::kRight),
+     label_threshold_(&main_box_, _("Low productivity threshold:"), UI::Align::kLeft),
 
      b_prev_owned_(&hbox_owned_,
                    "previous_owned",
@@ -124,17 +125,14 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                              0,
                              0,
                              kWindowWidth,
-                             kWindowWidth / 3,
+                             kWindowWidth - kBuildGridCellWidth,
                              low_production_,
                              0,
                              100,
                              UI::PanelStyle::kWui,
-                             /** TRANSLATORS: Buildings will be considered to have low */
-                             /** TRANSLATORS: productivity if their productivity falls */
-                             /** TRANSLATORS: below this percentage. Space is limited, */
-                             /** TRANSLATORS: keep this as short as possible. */
-                             _("Threshold:"),
-                             UI::SpinBox::Units::kPercent),
+                             "",
+                             UI::SpinBox::Units::kPercent,
+                             UI::SpinBox::Type::kBig),
 
      current_building_type_(Widelands::INVALID_INDEX),
      last_building_index_(0),
@@ -172,7 +170,10 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	main_box_.add(&hbox_owned_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&hbox_construction_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&hbox_unproductive_, UI::Box::Resizing::kFullSize);
-	main_box_.add(&unproductive_threshold_, UI::Box::Resizing::kFullSize);
+
+	main_box_.add_space(2 * kMargin);
+	main_box_.add(&label_threshold_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&unproductive_threshold_, UI::Box::Resizing::kFillSpace);
 
 	unproductive_threshold_.set_tooltip(_("Buildings will be considered unproductive if their "
 	                                      "productivity falls below this percentage"));

@@ -122,7 +122,7 @@ private:
 
 	UI::Box hbox_owned_, hbox_construction_, hbox_unproductive_;
 	UI::Textarea label_name_, label_owned_, label_construction_, label_unproductive_,
-	   label_nr_owned_, label_nr_construction_, label_nr_unproductive_;
+	   label_nr_owned_, label_nr_construction_, label_nr_unproductive_, label_threshold_;
 	UI::Button b_prev_owned_, b_next_owned_, b_prev_construction_, b_next_construction_,
 	   b_prev_unproductive_, b_next_unproductive_;
 	UI::SpinBox unproductive_threshold_;
