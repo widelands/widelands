@@ -63,20 +63,62 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      label_nr_construction_(&hbox_construction_, "", UI::Align::kRight),
      label_nr_unproductive_(&hbox_unproductive_, "", UI::Align::kRight),
 
-     b_prev_owned_(&hbox_owned_, "previous_owned", 0, 0, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-				g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building")),
-     b_next_owned_(&hbox_owned_, "next_owned", 0, 0, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-				g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building")),
+     b_prev_owned_(&hbox_owned_,
+                   "previous_owned",
+                   0,
+                   0,
+                   kButtonHeight,
+                   kButtonHeight,
+                   UI::ButtonStyle::kWuiMenu,
+                   g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+                   _("Show previous building")),
+     b_next_owned_(&hbox_owned_,
+                   "next_owned",
+                   0,
+                   0,
+                   kButtonHeight,
+                   kButtonHeight,
+                   UI::ButtonStyle::kWuiMenu,
+                   g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+                   _("Show next building")),
 
-     b_prev_construction_(&hbox_construction_, "previous_construction", 0, 0, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-				g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building")),
-     b_next_construction_(&hbox_construction_, "next_construction", 0, 0, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-				g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building")),
+     b_prev_construction_(&hbox_construction_,
+                          "previous_construction",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+                          _("Show previous building")),
+     b_next_construction_(&hbox_construction_,
+                          "next_construction",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+                          _("Show next building")),
 
-     b_prev_unproductive_(&hbox_unproductive_, "previous_unproductive", 0, 0, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-				g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building")),
-     b_next_unproductive_(&hbox_unproductive_, "next_unproductive", 0, 0, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-				g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building")),
+     b_prev_unproductive_(&hbox_unproductive_,
+                          "previous_unproductive",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+                          _("Show previous building")),
+     b_next_unproductive_(&hbox_unproductive_,
+                          "next_unproductive",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+                          _("Show next building")),
 
      unproductive_threshold_(&main_box_,
                              0,
@@ -87,11 +129,12 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                              0,
                              100,
                              UI::PanelStyle::kWui,
-	                         /** TRANSLATORS: Buildings will be considered to have low */
-	                         /** TRANSLATORS: productivity if their productivity falls */
-	                         /** TRANSLATORS: below this percentage. Space is limited, */
-	                         /** TRANSLATORS: keep this as short as possible. */
-	                         _("Threshold:"), UI::SpinBox::Units::kPercent),
+                             /** TRANSLATORS: Buildings will be considered to have low */
+                             /** TRANSLATORS: productivity if their productivity falls */
+                             /** TRANSLATORS: below this percentage. Space is limited, */
+                             /** TRANSLATORS: keep this as short as possible. */
+                             _("Threshold:"),
+                             UI::SpinBox::Units::kPercent),
 
      current_building_type_(Widelands::INVALID_INDEX),
      last_building_index_(0),
@@ -131,12 +174,11 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	main_box_.add(&hbox_unproductive_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&unproductive_threshold_, UI::Box::Resizing::kFullSize);
 
-	unproductive_threshold_.set_tooltip(_("Buildings will be considered unproductive if their productivity falls below this percentage"));
+	unproductive_threshold_.set_tooltip(_("Buildings will be considered unproductive if their "
+	                                      "productivity falls below this percentage"));
 
-	b_prev_owned_.sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kOwned, true); });
-	b_next_owned_.sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kOwned, false); });
+	b_prev_owned_.sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, true); });
+	b_next_owned_.sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, false); });
 	b_prev_construction_.sigclicked.connect(
 	   [this]() { jump_building(JumpTarget::kConstruction, true); });
 	b_next_construction_.sigclicked.connect(
@@ -625,10 +667,8 @@ void BuildingStatisticsMenu::update() {
 			if (has_selection_ && id == current_building_type_) {
 				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
 				                                                      "");
-				b_next_unproductive_.set_enabled(nr_unproductive >
-				                                                                     0);
-				b_prev_unproductive_.set_enabled(nr_unproductive >
-				                                                                     0);
+				b_next_unproductive_.set_enabled(nr_unproductive > 0);
+				b_prev_unproductive_.set_enabled(nr_unproductive > 0);
 				hbox_unproductive_.set_visible(true);
 				label_unproductive_.set_text(_("Low Productivity:"));
 			}
@@ -647,10 +687,8 @@ void BuildingStatisticsMenu::update() {
 			if (has_selection_ && id == current_building_type_) {
 				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
 				                                                      "");
-				b_next_unproductive_.set_enabled(
-				   total_soldier_capacity > total_stationed_soldiers);
-				b_prev_unproductive_.set_enabled(
-				   total_soldier_capacity > total_stationed_soldiers);
+				b_next_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
+				b_prev_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
 				hbox_unproductive_.set_visible(true);
 				/** TRANSLATORS: Label for number of buildings that are waiting for soldiers */
 				label_unproductive_.set_text(_("Lacking Soldiers:"));
