@@ -87,7 +87,8 @@ void PlayerCommand::write_id_and_sender(StreamWrite& ser) {
 }
 
 PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
-	switch (static_cast<QueueCommandTypes>(des.unsigned_8())) {
+	const uint8_t command_id = des.unsigned_8();
+	switch (static_cast<QueueCommandTypes>(command_id)) {
 	case QueueCommandTypes::kBulldoze:
 		return new CmdBulldoze(des);
 	case QueueCommandTypes::kBuild:
@@ -157,7 +158,7 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdMarkMapObjectForRemoval(des);
 
 	default:
-		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
+		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d", static_cast<unsigned>(command_id));
 	}
 }
 
