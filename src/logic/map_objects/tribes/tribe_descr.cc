@@ -252,8 +252,9 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
 
 	const auto load_bridge_if_present = [this](const LuaTable& animations_table,
 	                                           const std::string& animation_directory,
-	                                           Animation::Type animation_type, std::string s_dir,
-	                                           std::string s_type, uint32_t* id) {
+	                                           Animation::Type animation_type,
+	                                           const std::string& s_dir, const std::string& s_type,
+	                                           uint32_t* id) {
 		const std::string directional_name("bridge_" + s_type + "_" + s_dir);
 		if (animations_table.has_key(directional_name)) {
 			std::unique_ptr<LuaTable> animation_table = animations_table.get_table(directional_name);
@@ -381,7 +382,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& descriptio
 			throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
 		}
 		resource_indicators_[resource] = resis;
-	};
+	}
 
 	// Verify the resource indicators
 	for (DescriptionIndex resource_index = 0; resource_index < descriptions.nr_resources();

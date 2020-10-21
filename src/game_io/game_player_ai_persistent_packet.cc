@@ -45,7 +45,7 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				player->ai_data.initialized = (fr.unsigned_8() == 1) ? true : false;
 				player->ai_data.colony_scan_area = fr.unsigned_32();
 				player->ai_data.trees_around_cutters = fr.unsigned_32();
-				player->ai_data.expedition_start_time = fr.unsigned_32();
+				player->ai_data.expedition_start_time = Time(fr);
 				player->ai_data.ships_utilization = fr.unsigned_16();
 				player->ai_data.no_more_expeditions = (fr.unsigned_8() == 1) ? true : false;
 				player->ai_data.last_attacked_player = fr.signed_16();
@@ -138,7 +138,7 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		fw.unsigned_8(player->ai_data.initialized ? 1 : 0);
 		fw.unsigned_32(player->ai_data.colony_scan_area);
 		fw.unsigned_32(player->ai_data.trees_around_cutters);
-		fw.unsigned_32(player->ai_data.expedition_start_time);
+		player->ai_data.expedition_start_time.save(fw);
 		fw.unsigned_16(player->ai_data.ships_utilization);
 		fw.unsigned_8(player->ai_data.no_more_expeditions ? 1 : 0);
 		fw.signed_16(player->ai_data.last_attacked_player);

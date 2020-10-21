@@ -137,7 +137,7 @@ private:
 
 // Helper struct to save certain elemental data of a field without an actual instance of Field
 struct FieldData {
-	FieldData(const Field& f);
+	explicit FieldData(const Field& f);
 
 	std::string immovable;
 	std::list<std::string> bobs;

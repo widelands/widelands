@@ -36,7 +36,7 @@ constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
-constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
+constexpr Duration kUpdateTimeInGametimeMs = Duration(1000);  //  1 second, gametime
 
 inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -210,9 +210,9 @@ void BuildingStatisticsMenu::reset() {
 	productivity_labels_.resize(nr_building_types_);
 
 	// Ensure that defunct buttons disappear
-	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
-		if (tabs_[tab_index] != nullptr) {
-			tabs_[tab_index]->die();
+	for (UI::Box* tab : tabs_) {
+		if (tab != nullptr) {
+			tab->die();
 		}
 	}
 
@@ -548,7 +548,7 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
  */
 void BuildingStatisticsMenu::think() {
 	// Update statistics
-	const int32_t gametime = iplayer().game().get_gametime();
+	const Time& gametime = iplayer().game().get_gametime();
 
 	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_building_list();
@@ -628,13 +628,13 @@ void BuildingStatisticsMenu::update() {
 		uint32_t total_stationed_soldiers = 0;
 		uint32_t nr_unproductive = 0;
 
-		for (uint32_t l = 0; l < stats_vector.size(); ++l) {
-			if (stats_vector[l].is_constructionsite) {
+		for (const Widelands::Player::BuildingStats& stats : stats_vector) {
+			if (stats.is_constructionsite) {
 				++nr_build;
 			} else {
 				++nr_owned;
 				Widelands::BaseImmovable& immovable =
-				   *iplayer().game().map()[stats_vector[l].pos].get_immovable();
+				   *iplayer().game().map()[stats.pos].get_immovable();
 				if (building.type() == Widelands::MapObjectType::PRODUCTIONSITE ||
 				    building.type() == Widelands::MapObjectType::TRAININGSITE) {
 					Widelands::ProductionSite& productionsite =

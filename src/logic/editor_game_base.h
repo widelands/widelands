@@ -163,7 +163,7 @@ public:
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
-	uint32_t get_gametime() const {
+	const Time& get_gametime() const {
 		return gametime_;
 	}
 	// TODO(GunChleoc): Get rid.
@@ -186,7 +186,7 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	uint32_t& get_gametime_pointer() {
+	Time& get_gametime_pointer() {
 		return gametime_;
 	}
 	void set_ibase(InteractiveBase* const b);
@@ -255,7 +255,7 @@ private:
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
-	uint32_t gametime_;
+	Time gametime_;
 	ObjectManager objects_;
 
 	std::unique_ptr<LuaInterface> lua_;

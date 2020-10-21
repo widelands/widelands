@@ -263,8 +263,8 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 	}
 
 	FilenameSet files = list_directory(file);
-	for (FilenameSet::iterator pname = files.begin(); pname != files.end(); ++pname) {
-		std::string filename = fs_filename(pname->c_str());
+	for (const std::string& unlinkme : files) {
+		std::string filename = fs_filename(unlinkme.c_str());
 		if (filename == "..") {
 			continue;
 		}
@@ -272,10 +272,10 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 			continue;
 		}
 
-		if (is_directory(*pname)) {
-			unlink_directory(*pname);
+		if (is_directory(unlinkme)) {
+			unlink_directory(unlinkme);
 		} else {
-			unlink_file(*pname);
+			unlink_file(unlinkme);
 		}
 	}
 
@@ -441,7 +441,7 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
  */
 void RealFSImpl::write(const std::string& fname,
                        void const* const data,
-                       int32_t const length,
+                       size_t const length,
                        bool append) {
 	std::string fullname;
 

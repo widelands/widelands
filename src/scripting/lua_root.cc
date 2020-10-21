@@ -121,7 +121,7 @@ int LuaGame::get_real_speed(lua_State* L) {
    (RO) The absolute time elapsed since the game was started in milliseconds.
 */
 int LuaGame::get_time(lua_State* L) {
-	lua_pushint32(L, get_game(L).get_gametime());
+	lua_pushint32(L, get_game(L).get_gametime().get());
 	return 1;
 }
 
@@ -251,12 +251,12 @@ int LuaGame::get_scenario_difficulty(lua_State* L) {
 */
 int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
-	uint32_t runtime = get_game(L).get_gametime();
+	Time runtime = get_game(L).get_gametime();
 	if (nargs < 2) {
 		report_error(L, "Too few arguments!");
 	}
 	if (nargs == 3) {
-		runtime = luaL_checkuint32(L, 3);
+		runtime = Time(luaL_checkuint32(L, 3));
 		lua_pop(L, 1);
 	}
 

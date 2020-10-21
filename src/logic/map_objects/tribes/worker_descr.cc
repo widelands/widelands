@@ -103,10 +103,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 				                    program_name.c_str(), name().c_str());
 			}
 			try {
-				if (programs_.count(program_name)) {
-					throw wexception("this program has already been declared");
-				}
-
 				programs_[program_name] = std::unique_ptr<WorkerProgram>(new WorkerProgram(
 				   program_name, *programs_table->get_table(program_name), *this, descriptions));
 			} catch (const std::exception& e) {

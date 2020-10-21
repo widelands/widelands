@@ -78,7 +78,7 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 			tq.permanent = tribe.get_worker_descr(i)->default_target_quantity();
 			break;
 		}
-		tq.last_modified = 0;
+		tq.last_modified = Time(0);
 		target_quantities_[i] = tq;
 	}
 
@@ -118,7 +118,7 @@ Flag* Economy::get_arbitrary_flag() {
  * Since we could merge into both directions, we preserve the economy that is
  * currently bigger (should be more efficient).
  */
-void Economy::check_merge(Flag& f1, Flag& f2, WareWorker type) {
+void Economy::check_merge(const Flag& f1, const Flag& f2, WareWorker type) {
 	Economy* e1 = f1.get_economy(type);
 	Economy* e2 = f2.get_economy(type);
 	if (e1 != e2) {
@@ -308,7 +308,8 @@ void Economy::do_remove_flag(Flag& flag) {
 	for (Flags::iterator flag_iter = flags_.begin(); flag_iter != flags_.end(); ++flag_iter) {
 		if (*flag_iter == &flag) {
 			*flag_iter = *(flags_.end() - 1);
-			return flags_.pop_back();
+			flags_.pop_back();
+			return;
 		}
 	}
 	throw wexception("trying to remove nonexistent flag");
@@ -440,7 +441,7 @@ void Economy::add_request(Request& req) {
  * \return true if the given Request is registered with the \ref Economy, false
  * otherwise
  */
-bool Economy::has_request(Request& req) {
+bool Economy::has_request(Request& req) const {
 	return std::find(requests_.begin(), requests_.end(), &req) != requests_.end();
 }
 
@@ -592,7 +593,7 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
  * Make sure the request timer is running.
  * We can skip this for flagless economies (expedition ships don't need economy balancing...).
  */
-void Economy::start_request_timer(int32_t const delta) {
+void Economy::start_request_timer(const Duration& delta) {
 	if (!flags_.empty()) {
 		if (upcast(Game, game, &owner_.egbase())) {
 			game->cmdqueue().enqueue(
@@ -746,7 +747,8 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		if (!supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
-			int32_t const idletime = game.get_gametime() + 15000 + 2 * cost - req.get_required_time();
+			const int32_t idletime =
+			   game.get_gametime().get() + 15000 + 2 * cost - req.get_required_time().get();
 			// If the building wouldn't have to idle, we wait with the request
 			if (idletime < -200) {
 				if (supply_pairs->nexttimer < 0 || supply_pairs->nexttimer > -idletime) {
@@ -811,7 +813,7 @@ void Economy::balance_requestsupply(Game& game) {
 	}
 
 	if (rsps.nexttimer > 0) {  //  restart the timer, if necessary
-		start_request_timer(rsps.nexttimer);
+		start_request_timer(Duration(rsps.nexttimer));
 	}
 }
 
@@ -979,7 +981,7 @@ void Economy::create_requested_workers(Game& game) {
 /**
  * Helper function for \ref handle_active_supplies
  */
-static bool accept_warehouse_if_policy(Warehouse& wh,
+static bool accept_warehouse_if_policy(const Warehouse& wh,
                                        WareWorker type,
                                        DescriptionIndex ware,
                                        StockPolicy policy) {
@@ -1017,8 +1019,7 @@ void Economy::handle_active_supplies(Game& game) {
 		// Stock of particular ware in preferred warehouse
 		uint32_t preferred_wh_stock = std::numeric_limits<uint32_t>::max();
 
-		for (uint32_t nwh = 0; nwh < warehouses_.size(); ++nwh) {
-			Warehouse* wh = warehouses_[nwh];
+		for (Warehouse* wh : warehouses_) {
 			StockPolicy policy = wh->get_stock_policy(type_, ware);
 			if (policy == StockPolicy::kPrefer) {
 				haveprefer = true;
@@ -1047,7 +1048,7 @@ void Economy::handle_active_supplies(Game& game) {
 		} else {
 			wh = find_closest_warehouse(
 			   supply.get_position(game)->base_flag(), nullptr, 0,
-			   (!havenormal) ? WarehouseAcceptFn() : [this, ware](Warehouse& w) {
+			   (!havenormal) ? WarehouseAcceptFn() : [this, ware](const Warehouse& w) {
 				   return accept_warehouse_if_policy(w, type_, ware, StockPolicy::kNormal);
 			   });
 		}

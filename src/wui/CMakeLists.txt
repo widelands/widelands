@@ -41,6 +41,7 @@ wl_library(wui_economy_options
     economy_options_window.h
   DEPENDS
     economy
+    graphic_fonthandler
     logic
     logic_commands
     logic_filesystem_constants

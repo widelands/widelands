@@ -159,7 +159,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					field->time_node_last_unseen = stoi(field_vector[counter]);
+					field->time_node_last_unseen = Time(stol(field_vector[counter]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -174,8 +174,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					field->time_triangle_last_surveyed[0] = stoi(data_vector[0]);
-					field->time_triangle_last_surveyed[1] = stoi(data_vector[1]);
+					field->time_triangle_last_surveyed[0] = Time(stol(data_vector[0]));
+					field->time_triangle_last_surveyed[1] = Time(stol(data_vector[1]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -300,10 +300,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								         tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
-							field->partially_finished_building.constructionsite.totaltime =
-							   fr.unsigned_32();
+							field->partially_finished_building.constructionsite.totaltime = Duration(fr);
 							field->partially_finished_building.constructionsite.completedtime =
-							   fr.unsigned_32();
+							   Duration(fr);
 						}
 					}
 				}
@@ -329,9 +328,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						continue;
 					}
 
-					f.time_node_last_unseen = fr.unsigned_32();
-					f.time_triangle_last_surveyed[0] = fr.unsigned_32();
-					f.time_triangle_last_surveyed[1] = fr.unsigned_32();
+					f.time_node_last_unseen = Time(fr);
+					f.time_triangle_last_surveyed[0] = Time(fr);
+					f.time_triangle_last_surveyed[1] = Time(fr);
 
 					f.resource_amounts.d = fr.unsigned_8();
 					f.resource_amounts.r = fr.unsigned_8();
@@ -393,9 +392,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 									      egbase.descriptions().safe_building_index(fr.string())));
 								}
 
-								f.partially_finished_building.constructionsite.totaltime = fr.unsigned_32();
-								f.partially_finished_building.constructionsite.completedtime =
-								   fr.unsigned_32();
+								f.partially_finished_building.constructionsite.totaltime = Duration(fr);
+								f.partially_finished_building.constructionsite.completedtime = Duration(fr);
 							}
 						} else {
 							descr = fr.string();
@@ -419,9 +417,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 									      egbase.descriptions().safe_building_index(fr.string())));
 								}
 
-								f.partially_finished_building.constructionsite.totaltime = fr.unsigned_32();
-								f.partially_finished_building.constructionsite.completedtime =
-								   fr.unsigned_32();
+								f.partially_finished_building.constructionsite.totaltime = Duration(fr);
+								f.partially_finished_building.constructionsite.completedtime = Duration(fr);
 							}
 						}
 					}
@@ -529,7 +526,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Last Unseen
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << static_cast<unsigned>((*it)->time_node_last_unseen);
+				oss << static_cast<unsigned>((*it)->time_node_last_unseen.get());
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";
@@ -541,8 +538,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Last Surveyed
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << (*it)->time_triangle_last_surveyed[0] << "*"
-				    << (*it)->time_triangle_last_surveyed[1];
+				oss << (*it)->time_triangle_last_surveyed[0].get() << "*"
+				    << (*it)->time_triangle_last_surveyed[1].get();
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";
@@ -627,8 +624,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 						fw.string(d->name());
 					}
 
-					fw.unsigned_32(field->partially_finished_building.constructionsite.totaltime);
-					fw.unsigned_32(field->partially_finished_building.constructionsite.completedtime);
+					field->partially_finished_building.constructionsite.totaltime.save(fw);
+					field->partially_finished_building.constructionsite.completedtime.save(fw);
 				}
 			} else {
 				fw.string("");

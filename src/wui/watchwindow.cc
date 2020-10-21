@@ -31,7 +31,7 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define REFRESH_TIME 5000
+constexpr Duration kRefreshInterval = Duration(5000);
 
 // Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
@@ -171,7 +171,7 @@ Update the map_view_ if we're tracking something.
 void WatchWindow::think() {
 	UI::Window::think();
 
-	if ((game().get_gametime() - last_visit_) > REFRESH_TIME) {
+	if ((game().get_gametime() - last_visit_) > kRefreshInterval) {
 		last_visit_ = game().get_gametime();
 		next_view();
 		return;
@@ -246,8 +246,7 @@ void WatchWindow::do_follow() {
 		//  Find the bob closest to us
 		float closest_dist = 0;
 		Widelands::Bob* closest = nullptr;
-		for (uint32_t i = 0; i < bobs.size(); ++i) {
-			Widelands::Bob* const bob = bobs[i];
+		for (Widelands::Bob* const bob : bobs) {
 			const Vector2f field_position =
 			   MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 			const Vector2f p = bob->calc_drawpos(g, field_position, 1.f);

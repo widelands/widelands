@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "graphic/font_handler.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
@@ -43,12 +44,12 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
      ware_serial_(ware_economy->serial()),
      worker_serial_(worker_economy->serial()),
      player_(&ware_economy->owner()),
-     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
+     tabpanel_(&main_box_, UI::TabPanelStyle::kWuiDark),
      ware_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, ware_serial_, player_, can_act, Widelands::wwWARE, kDesiredWidth)),
      worker_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, worker_serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
-     dropdown_box_(this, 0, 0, UI::Box::Horizontal),
+     dropdown_box_(&main_box_, 0, 0, UI::Box::Horizontal),
      dropdown_(&dropdown_box_,
                "economy_profiles",
                0,
@@ -67,7 +68,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_image_cache->get(pic_tab_workers), worker_panel_, _("Workers"));
 
-	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal);
 	UI::Button* b = new UI::Button(
 	   buttons, "decrease_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 	   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
@@ -424,10 +425,10 @@ void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
 	}
 }
 
-constexpr unsigned kThinkInterval = 200;
+constexpr Duration kThinkInterval = Duration(200);
 
 void EconomyOptionsWindow::think() {
-	const uint32_t time = player_->egbase().get_gametime();
+	const Time& time = player_->egbase().get_gametime();
 	if (time - time_last_thought_ < kThinkInterval || !player_->get_economy(ware_serial_) ||
 	    !player_->get_economy(worker_serial_)) {
 		// If our economy has been deleted, die() was already called, no need to do anything
@@ -608,7 +609,7 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
      table_box_(&main_box_, 0, 0, UI::Box::Vertical),
      table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
      buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     profile_name_(&buttons_box_, 0, 0, 240, UI::PanelStyle::kWui),
+     profile_name_(&main_box_, 0, 0, 240, UI::PanelStyle::kWui),
      save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
      cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
      delete_(&buttons_box_, "delete", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Delete")) {
@@ -624,11 +625,13 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
 	delete_.sigclicked.connect([this] { delete_selected(); });
 
 	table_box_.add(&table_, UI::Box::Resizing::kFullSize);
-	buttons_box_.add(&profile_name_, UI::Box::Resizing::kFullSize);
-	buttons_box_.add(&save_);
+
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &save_ : &delete_);
 	buttons_box_.add(&cancel_);
-	buttons_box_.add(&delete_);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &delete_ : &save_);
+
 	main_box_.add(&table_box_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&profile_name_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	set_center_panel(&main_box_);
 

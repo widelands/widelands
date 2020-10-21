@@ -42,7 +42,7 @@ public:
 
 	void* load(const std::string& fname, size_t& length) override;
 
-	void write(const std::string& fname, void const* data, int32_t length) override;
+	void write(const std::string& fname, void const* data, size_t length) override;
 	void ensure_directory_exists(const std::string& fs_dirname) override;
 	void make_directory(const std::string& fs_dirname) override;
 

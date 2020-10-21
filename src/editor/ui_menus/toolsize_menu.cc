@@ -23,7 +23,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
 
-inline EditorInteractive& EditorToolsizeMenu::eia() {
+inline EditorInteractive& EditorToolsizeMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 

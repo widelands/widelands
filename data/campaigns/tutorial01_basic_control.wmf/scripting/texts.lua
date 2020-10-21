@@ -77,7 +77,7 @@ initial_message_02 = {
          _[[There are four different tribes in Widelands: the Barbarians, the Empire, the Atlanteans and the Frisians. All tribes have a different economy, strength and weaknesses, but the general gameplay is the same for all. We will play the Barbarians for now.]]) ..
       li_object("barbarians_headquarters", _[[You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and granite. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in.]], plr.color) ..
       p(_[[We need to find a nice place for the lumberjack’s hut. To make this easier, we can activate ‘Show Building Spaces’.]]) ..
-      li(_[[Left-click the ‘OK’ button to close this window so that I can show you how.]]) ..
+      li(_[[Left-click the ‘OK’ button to close this window. I'll show you where the menu is and where to show and hide the building spaces.]]) ..
       li_arrow(_[[Note that you cannot close this window by right-clicking on it. I have blocked this so that you will not close it by accident and miss important information.]])
    )
 }
@@ -88,7 +88,7 @@ initial_message_03 = {
    field = sf,
    body = (
       h1(_"Let’s dive right in!") ..
-      li_object("barbarians_lumberjacks_hut", _[[Now that I have shown you how to show and hide the building spaces, please switch them on again so that we can place our first building.]], plr.color)
+      li_object("barbarians_lumberjacks_hut", _[[Now that I have shown you where to show and hide the building spaces, please switch them on so that we can place our first building.]], plr.color)
    )
 }
 

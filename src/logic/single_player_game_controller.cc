@@ -42,8 +42,8 @@ SinglePlayerGameController::SinglePlayerGameController(Widelands::Game& game,
 }
 
 SinglePlayerGameController::~SinglePlayerGameController() {
-	for (uint32_t i = 0; i < computerplayers_.size(); ++i) {
-		delete computerplayers_[i];
+	for (AI::ComputerPlayer* ai : computerplayers_) {
+		delete ai;
 	}
 	computerplayers_.clear();
 }
@@ -62,7 +62,7 @@ void SinglePlayerGameController::think() {
 
 	frametime = frametime * real_speed() / 1000;
 
-	time_ = game_.get_gametime() + frametime;
+	time_ = game_.get_gametime() + Duration(frametime);
 
 	if (use_ai_ && game_.is_loaded()) {
 		const Widelands::PlayerNumber nr_players = game_.map().get_nrplayers();
@@ -85,7 +85,7 @@ void SinglePlayerGameController::send_player_command(Widelands::PlayerCommand* p
 	game_.enqueue_command(pc);
 }
 
-int32_t SinglePlayerGameController::get_frametime() {
+Duration SinglePlayerGameController::get_frametime() {
 	return time_ - game_.get_gametime();
 }
 

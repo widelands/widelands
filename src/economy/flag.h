@@ -171,7 +171,7 @@ protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
@@ -199,7 +199,7 @@ private:
 	};
 
 	Coords position_;
-	int32_t animstart_;
+	Time animstart_;
 
 	Building* building_;  ///< attached building (replaces road WALK_NW)
 	RoadBase* roads_[WalkingDir::LAST_DIRECTION];

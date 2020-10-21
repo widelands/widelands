@@ -282,7 +282,7 @@ private:
 	std::vector<StockPolicy> worker_policy_;
 
 	// Workers who live here at the moment
-	using WorkerList = std::vector<Worker*>;
+	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
 	std::vector<Time> next_worker_without_cost_spawn_;

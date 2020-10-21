@@ -35,7 +35,7 @@ namespace Widelands {
 /// and if not, warn and recreate it. Such redundancy would also waste space in
 /// the savegame.
 struct CmdDeleteMessage : public Command {
-	CmdDeleteMessage(uint32_t const t, PlayerNumber const p, const MessageId& m)
+	CmdDeleteMessage(const Time& t, PlayerNumber const p, const MessageId& m)
 	   : Command(t), player(p), message(m) {
 	}
 

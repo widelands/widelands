@@ -121,7 +121,7 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 			constexpr float kZoom = 1.f;
 			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)),
 			                   Widelands::Coords::null(), kZoom,
-			                   tribe.get_worker_descr(it.index)->main_animation(), 0,
+			                   tribe.get_worker_descr(it.index)->main_animation(), Time(0),
 			                   &player().get_playercolor());
 		} else {
 			y += IWD_WareBaseLine;

@@ -62,8 +62,6 @@ private:
 class DismantleSite : public PartiallyFinishedBuilding {
 	friend class MapBuildingdataPacket;
 
-	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
-
 	MO_DESCR(DismantleSiteDescr)
 
 public:
@@ -88,11 +86,12 @@ protected:
 
 	void cleanup(EditorGameBase&) override;
 
-	uint32_t build_step_time() const override {
-		return DISMANTLESITE_STEP_TIME;
+	static constexpr Duration kDismantlesiteStepTime = Duration(45000);
+	const Duration& build_step_time() const override {
+		return kDismantlesiteStepTime;
 	}
 
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Widelands::Coords& coords,

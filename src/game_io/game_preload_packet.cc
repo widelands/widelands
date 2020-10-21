@@ -53,7 +53,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 		int32_t const packet_version = s.get_int("packet_version");
 
 		if (packet_version >= 6 && packet_version <= kCurrentPacketVersion) {
-			gametime_ = s.get_safe_int("gametime");
+			gametime_ = Time(s.get_safe_int("gametime"));
 			mapname_ = s.get_safe_string("mapname");
 
 			background_ = s.get_safe_string("background");
@@ -85,7 +85,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_int("packet_version", kCurrentPacketVersion);
 
 	//  save some kind of header.
-	s.set_int("gametime", game.get_gametime());
+	s.set_int("gametime", game.get_gametime().get());
 	const Map& map = game.map();
 	s.set_string("mapname", map.get_name());  // Name of map
 

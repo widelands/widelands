@@ -68,7 +68,7 @@ struct Carrier : public Worker {
 
 private:
 	void find_pending_ware(Game&);
-	int32_t find_closest_flag(Game&);
+	int32_t find_closest_flag(const Game&);
 
 	// internal task stuff
 	void road_update(Game&, State&);
@@ -78,7 +78,7 @@ private:
 	static Task const taskTransport;
 
 	void deliver_to_building(Game&, State&);
-	void pickup_from_flag(Game&, State&);
+	void pickup_from_flag(Game&, const State&);
 	void drop_ware(Game&, State&);
 	void enter_building(Game&, State&);
 	bool swap_or_wait(Game&, State&);

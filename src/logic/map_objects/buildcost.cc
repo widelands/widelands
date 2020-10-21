@@ -32,11 +32,10 @@ namespace Widelands {
 Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& descriptions)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
-		int32_t value = INVALID_INDEX;
 		DescriptionIndex const idx = descriptions.load_ware(warename);
 
 		// Read value
-		value = table->get_int(warename);
+		int32_t value = table->get_int(warename);
 		if (value < 1) {
 			throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
 			                    "tables are allowed if you wish to have an amount of 0.");
@@ -54,16 +53,16 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& d
  */
 Widelands::Quantity Buildcost::total() const {
 	Widelands::Quantity sum = 0;
-	for (const_iterator it = begin(); it != end(); ++it) {
-		sum += it->second;
+	for (const auto& item : *this) {
+		sum += item.second;
 	}
 	return sum;
 }
 
 void Buildcost::save(FileWrite& fw, const Widelands::TribeDescr& tribe) const {
-	for (const_iterator it = begin(); it != end(); ++it) {
-		fw.c_string(tribe.get_ware_descr(it->first)->name());
-		fw.unsigned_8(it->second);
+	for (const auto& item : *this) {
+		fw.c_string(tribe.get_ware_descr(item.first)->name());
+		fw.unsigned_8(item.second);
 	}
 	fw.c_string("");
 }

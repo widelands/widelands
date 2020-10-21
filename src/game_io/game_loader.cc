@@ -64,7 +64,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	ScopedTimer timer("GameLoader::load() took %ums");
 
 	assert(game_.has_loader_ui());
-	auto set_progress_message = [](std::string text, unsigned step) {
+	auto set_progress_message = [](const std::string& text, unsigned step) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   (boost::format(_("Loading game: %1$s (%2$u/%3$d)")) % text % step % 6).str()));
 	};

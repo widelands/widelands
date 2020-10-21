@@ -139,17 +139,18 @@ animate
 Runs an animation. See :ref:`map_object_programs_animate`.
 */
 ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments,
-                                         const ImmovableDescr& descr) {
-	parameters = MapObjectProgram::parse_act_animate(arguments, descr, true);
+                                         const ImmovableDescr& descr)
+   : parameters(MapObjectProgram::parse_act_animate(arguments, descr, true)) {
 }
 
 /// Use convolution to make the animation time a random variable with binomial
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
 	immovable.start_animation(game, parameters.animation);
-	immovable.program_step(game, parameters.duration ? 1 + game.logic_rand() % parameters.duration +
-	                                                      game.logic_rand() % parameters.duration :
-	                                                   0);
+	immovable.program_step(
+	   game, Duration(parameters.duration.get() ? 1 + game.logic_rand() % parameters.duration.get() +
+	                                                 game.logic_rand() % parameters.duration.get() :
+	                                              0));
 }
 
 /* RST
@@ -159,8 +160,8 @@ playsound
 Plays a sound effect. See :ref:`map_object_programs_playsound`.
 */
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments,
-                                             const ImmovableDescr& descr) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr);
+                                             const ImmovableDescr& descr)
+   : parameters(MapObjectProgram::parse_act_play_sound(arguments, descr)) {
 }
 
 /**
@@ -569,8 +570,8 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 		         descr.name().c_str());
 		animation_name_ = arguments[0];
 
-		buildtime_ = read_positive(arguments[1]);
-		decaytime_ = read_positive(arguments[2]);
+		buildtime_ = Duration(read_positive(arguments[1]));
+		decaytime_ = Duration(read_positive(arguments[2]));
 	} else {
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
@@ -604,7 +605,7 @@ void ActConstructData::save(FileWrite& fw, Immovable& imm) const {
 	delivered.save(fw, imm.get_owner()->tribe());
 }
 
-ActConstructData* ActConstructData::load(FileRead& fr, Immovable& imm) {
+ActConstructData* ActConstructData::load(FileRead& fr, const Immovable& imm) {
 	ActConstructData* d = new ActConstructData;
 
 	try {
@@ -670,7 +671,7 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 }
 
 ImmovableActionData*
-ImmovableActionData::load(FileRead& fr, Immovable& imm, const std::string& name) {
+ImmovableActionData::load(FileRead& fr, const Immovable& imm, const std::string& name) {
 	if (name == "construct") {
 		return ActConstructData::load(fr, imm);
 	} else {
