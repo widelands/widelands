@@ -72,6 +72,7 @@ wl_library(logic_game_controller
 
 wl_library(logic_constants
   SRCS
+    vision.h
     widelands.cc
     widelands.h
 )
@@ -216,7 +217,6 @@ wl_library(logic
     replay.h
     save_handler.cc
     save_handler.h
-    see_unsee_node.h
     trade_agreement.h
     training_wheels.cc
     training_wheels.h
