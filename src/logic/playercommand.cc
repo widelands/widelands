@@ -160,7 +160,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdMarkMapObjectForRemoval(des);
 
 	default:
-		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d", static_cast<unsigned>(command_id));
+		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
+		                 static_cast<unsigned>(command_id));
 	}
 }
 
