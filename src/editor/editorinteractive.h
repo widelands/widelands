@@ -54,7 +54,7 @@ const static std::string kEditorSplashImage = std::string(kTemplateDir) + "loads
 class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
-		Tools(const Widelands::Map& map)
+		explicit Tools(const Widelands::Map& map)
 		   : current_pointer(&info),
 		     use_tool(EditorTool::First),
 		     increase_height(decrease_height, set_height),
@@ -119,6 +119,10 @@ public:
 
 	Widelands::Player* get_player() const override {
 		return nullptr;
+	}
+
+	bool omnipotent() const override {
+		return true;
 	}
 
 	// action functions

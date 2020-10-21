@@ -23,6 +23,8 @@
 #include <cassert>
 #include <cstdint>
 
+#include "base/macros.h"
+
 class BaseTrackPtr;
 
 /*
@@ -79,6 +81,9 @@ public:
 	Trackable() {
 		tracker_ = new Tracker(this);
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(Trackable);
+
 	virtual ~Trackable() {
 		tracker_->clear();
 	}

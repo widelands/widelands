@@ -492,7 +492,7 @@ void EditorInteractive::think() {
 
 	realtime_ = SDL_GetTicks();
 
-	egbase().get_gametime_pointer() += realtime_ - lasttime;
+	egbase().get_gametime_pointer().increment(Duration(realtime_ - lasttime));
 }
 
 void EditorInteractive::exit() {
@@ -538,7 +538,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
-	const uint32_t gametime = ebase.get_gametime();
+	const Time& gametime = ebase.get_gametime();
 
 	// The map provides a mapping from player number to Coords, while we require
 	// the inverse here. We construct this, but this is done on every frame and
@@ -953,7 +953,7 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	{
-		egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 		eia.load_world_units();
 		egbase.tribes();
 
@@ -1039,7 +1039,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 		// Close all windows.
 		for (Panel* child = get_first_child(); child; child = child->get_next_sibling()) {
-			if (is_a(UI::Window, child)) {
+			if (dynamic_cast<UI::Window*>(child) != nullptr) {
 				child->die();
 			}
 		}

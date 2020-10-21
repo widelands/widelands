@@ -43,13 +43,19 @@ void CmdLuaCoroutine::execute(Game& game) {
 		int rv = cr_->resume();
 		const uint32_t sleeptime = cr_->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, std::move(cr_)));
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(Time(sleeptime), std::move(cr_)));
 		} else if (rv == LuaCoroutine::DONE) {
 			cr_.reset();
 		}
 	} catch (LuaError& e) {
 		log_err_time(game.get_gametime(), "Error in Lua Coroutine\n");
 		log_err_time(game.get_gametime(), "%s\n", e.what());
+
+		if (g_fail_on_lua_error) {
+			log_err_time(game.get_gametime(), "Terminating Widelands.");
+			abort();
+		}
+
 		log_err_time(game.get_gametime(), "Send message to all players and pause game\n");
 		const std::string error_message = richtext_escape(e.what());
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {

@@ -77,7 +77,7 @@ struct GameClientImpl {
 	bool server_is_waiting;
 
 	/// Data for the last time message we sent.
-	uint32_t lasttimestamp;
+	Time lasttimestamp;
 	uint32_t lasttimestamp_realtime;
 
 	/// The real target speed, in milliseconds per second.
@@ -116,7 +116,7 @@ void GameClientImpl::send_hello() {
 void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
 	SendPacket s;
 	s.unsigned_8(NETCMD_PLAYERCOMMAND);
-	s.signed_32(game->get_gametime());
+	s.unsigned_32(game->get_gametime().get());
 	pc->serialize(s);
 	net->send(s);
 }
@@ -266,7 +266,8 @@ void GameClient::run() {
 		if (has_players_tribe()) {
 			tipstexts.push_back(get_players_tribe());
 		}
-		UI::ProgressWindow& loader_ui = game.create_loader_ui(tipstexts, false);
+		UI::ProgressWindow& loader_ui =
+		   game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
@@ -295,8 +296,7 @@ void GameClient::think() {
 			d->time.think(d->realspeed);
 		}
 
-		if (d->server_is_waiting &&
-		    d->game->get_gametime() == static_cast<uint32_t>(d->time.networktime())) {
+		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
 			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
@@ -316,10 +316,10 @@ void GameClient::think() {
 void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
 	assert(d->game);
 
-	// TODDO(Klaus Halfmann)should this be an assert?
+	// TODO(Klaus Halfmann): should this be an assert?
 	if (pc->sender() == d->settings.playernum + 1)  //  allow command for current player only
 	{
-		log_info("[Client]: send playercommand at time %i\n", d->game->get_gametime());
+		log_info("[Client]: send playercommand at time %i\n", d->game->get_gametime().get());
 
 		d->send_player_command(pc);
 
@@ -332,8 +332,8 @@ void GameClient::send_player_command(Widelands::PlayerCommand* pc) {
 	delete pc;
 }
 
-int32_t GameClient::get_frametime() {
-	return d->time.time() - d->game->get_gametime();
+Duration GameClient::get_frametime() {
+	return Time(d->time.time()) - d->game->get_gametime();
 }
 
 GameController::GameType GameClient::get_game_type() {
@@ -397,7 +397,8 @@ void GameClient::next_player_state(uint8_t) {
 	// client is not allowed to do this
 }
 
-void GameClient::set_map(const std::string&, const std::string&, uint32_t, bool) {
+void GameClient::set_map(
+   const std::string&, const std::string&, const std::string&, const std::string&, uint32_t, bool) {
 	// client is not allowed to do this
 }
 
@@ -596,11 +597,11 @@ const std::vector<ChatMessage>& GameClient::get_messages() const {
 void GameClient::send_time() {
 	assert(d->game);
 
-	log_info("[Client]: sending timestamp: %i\n", d->game->get_gametime());
+	log_info("[Client]: sending timestamp: %i\n", d->game->get_gametime().get());
 
 	SendPacket s;
 	s.unsigned_8(NETCMD_TIME);
-	s.signed_32(d->game->get_gametime());
+	s.unsigned_32(d->game->get_gametime().get());
 	d->net->send(s);
 
 	d->lasttimestamp = d->game->get_gametime();
@@ -612,7 +613,7 @@ void GameClient::sync_report_callback() {
 	if (d->net->is_connected()) {
 		SendPacket s;
 		s.unsigned_8(NETCMD_SYNCREPORT);
-		s.signed_32(d->game->get_gametime());
+		s.unsigned_32(d->game->get_gametime().get());
 		s.data(d->game->get_sync_hash().data, 16);
 		d->net->send(s);
 	}
@@ -661,6 +662,8 @@ void GameClient::handle_ping(RecvPacket&) {
 void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.mapname = packet.string();
 	d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
+	d->settings.map_theme = packet.string();
+	d->settings.map_background = packet.string();
 	d->settings.savegame = packet.unsigned_8() == 1;
 	d->settings.scenario = packet.unsigned_8() == 1;
 	log_info("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
@@ -900,7 +903,7 @@ void GameClient::handle_playercommand(RecvPacket& packet) {
 		throw DisconnectException("PLAYERCMD_WO_GAME");
 	}
 
-	int32_t const time = packet.signed_32();
+	const Time time(packet.unsigned_32());
 	Widelands::PlayerCommand& plcmd = *Widelands::PlayerCommand::deserialize(packet);
 	plcmd.set_duetime(time);
 	d->game->enqueue_command(&plcmd);
@@ -914,7 +917,7 @@ void GameClient::handle_syncrequest(RecvPacket& packet) {
 	if (!d->game) {
 		throw DisconnectException("SYNCREQUEST_WO_GAME");
 	}
-	int32_t const time = packet.signed_32();
+	const Time time(packet.unsigned_32());
 	d->time.receive(time);
 	d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
 	d->game->report_sync_request();
@@ -1027,7 +1030,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		log_info("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
-		d->time.receive(packet.signed_32());
+		d->time.receive(Time(packet.unsigned_32()));
 		break;
 	case NETCMD_WAIT:
 		log_info("[Client]: server is waiting.\n");

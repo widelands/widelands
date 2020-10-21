@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include "logic/widelands.h"
+#include "base/times.h"
 #include "sound/constants.h"
 
 namespace Widelands {
@@ -107,7 +107,7 @@ protected:
 		/// Animation ID
 		uint32_t animation = 0;
 		/// Animation duration before the next action will be called by the program.
-		Duration duration = 0;
+		Duration duration = Duration(0);
 	};
 	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If
 	/// 'is_idle_allowed' == false, throws a GameDataError if the animation is called "idle".

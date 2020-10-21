@@ -52,6 +52,32 @@
 
 namespace Widelands {
 
+const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"summer", "greenland", []() { return _("Summer"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"winter", "winterland", []() { return _("Winter"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"wasteland", "blackland", []() { return _("Wasteland"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"desert", "desert", []() { return _("Desert"); }}};
+const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
+	for (const OldWorldInfo& owi : kOldWorldNames) {
+		if (owi.old_name == old_name) {
+			return owi;
+		}
+	}
+	NEVER_HERE();
+}
+const Map::OldWorldInfo& Map::get_old_world_info_by_new_name(const std::string& new_name) {
+	for (const OldWorldInfo& owi : kOldWorldNames) {
+		if (owi.name == new_name) {
+			return owi;
+		}
+	}
+	NEVER_HERE();
+}
+
 FieldData::FieldData(const Field& field)
    : height(field.get_height()),
      resources(field.get_resources()),
@@ -85,7 +111,7 @@ bool FindCarnivores::accept(Bob* b) const {
 	return false;
 }
 bool FindCritter::accept(Bob* b) const {
-	return is_a(Critter, b);
+	return b && b->descr().type() == MapObjectType::CRITTER;
 }
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
@@ -457,6 +483,7 @@ void Map::cleanup() {
 	tags_.clear();
 	hint_ = std::string();
 	background_ = std::string();
+	background_theme_ = std::string();
 
 	objectives_.clear();
 	port_spaces_.clear();
@@ -504,12 +531,6 @@ void Map::create_empty_map(const EditorGameBase& egbase,
 	filesystem_.reset(nullptr);
 }
 
-// Made this a separate function to reduce compiler warnings
-template <typename T = Field>
-static inline void clear_array(std::unique_ptr<T[]>* array, uint32_t size) {
-	memset(array->get(), 0, sizeof(T) * size);
-}
-
 void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.x);
 	assert(new_origin.x < width_);
@@ -522,8 +543,7 @@ void Map::set_origin(const Coords& new_origin) {
 		starting_pos_[--i].reorigin(new_origin, extent());
 	}
 
-	std::unique_ptr<Field[]> new_field_order(new Field[field_size]);
-	clear_array<>(&new_field_order, field_size);
+	std::unique_ptr<Field[]> new_field_order(new Field[field_size]());
 
 	// Rearrange The fields
 	// NOTE because of the triangle design, we have to take special care of cases
@@ -569,12 +589,12 @@ void Map::set_origin(const Coords& new_origin) {
 
 	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
-	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
+	for (const Coords& space : port_spaces_) {
 		Coords temp;
-		if (yisodd && ((it->y % 2) == 0)) {
-			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
+		if (yisodd && ((space.y % 2) == 0)) {
+			temp = Coords(space.x - new_origin.x - 1, space.y - new_origin.y);
 		} else {
-			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+			temp = Coords(space.x - new_origin.x, space.y - new_origin.y);
 		}
 		normalize_coords(temp);
 		new_port_spaces.insert(temp);
@@ -616,12 +636,9 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 
 	// Generate the new fields. Does not modify the actual map yet.
 
-	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
-	clear_array<>(&new_fields, w * h);
-	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]);
-	std::unique_ptr<bool[]> was_created(new bool[w * h]);
-	clear_array<bool>(&was_preserved, width_ * height_);
-	clear_array<bool>(&was_created, w * h);
+	std::unique_ptr<Field[]> new_fields(new Field[w * h]());
+	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]());
+	std::unique_ptr<bool[]> was_created(new bool[w * h]());
 
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
@@ -811,8 +828,7 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 
 	const uint32_t field_size = w * h;
 
-	fields_.reset(new Field[field_size]);
-	clear_array<>(&fields_, field_size);
+	fields_.reset(new Field[field_size]());
 
 	pathfieldmgr_->set_size(field_size);
 }
@@ -974,6 +990,10 @@ void Map::set_background(const std::string& image_path) {
 	} else {
 		background_ = image_path;
 	}
+}
+
+void Map::set_background_theme(const std::string& bt) {
+	background_theme_ = bt;
 }
 
 void Map::add_tag(const std::string& tag) {
@@ -1686,15 +1706,14 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
-	for (uint32_t i = 0; i < 6; ++i) {
-		if (terrains[i] & TerrainDescription::Is::kWater ||
-		    terrains[i] & TerrainDescription::Is::kUnwalkable) {
+	for (const TerrainDescription::Is& is : terrains) {
+		if (is & TerrainDescription::Is::kWater || is & TerrainDescription::Is::kUnwalkable) {
 			return BaseImmovable::NONE;
 		}
-		if (terrains[i] & TerrainDescription::Is::kMineable) {
+		if (is & TerrainDescription::Is::kMineable) {
 			++cnt_mineable;
 		}
-		if (terrains[i] & TerrainDescription::Is::kWalkable) {
+		if (is & TerrainDescription::Is::kWalkable) {
 			++cnt_walkable;
 		}
 	}
@@ -1715,8 +1734,8 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		std::vector<ImmovableFound> objectlist;
 		find_immovables(egbase, Area<FCoords>(f, 1), &objectlist,
 		                FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-		for (uint32_t i = 0; i < objectlist.size(); ++i) {
-			const BaseImmovable* obj = objectlist[i].object;
+		for (const ImmovableFound& immfound : objectlist) {
+			const BaseImmovable* obj = immfound.object;
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE) {
 				continue;
@@ -2563,8 +2582,8 @@ void Map::recalculate_allows_seafaring() {
 				FCoords neighbour;
 				get_neighbour(get_fcoords(current_position), i, &neighbour);
 				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
-					if (reachable_from_current_port.count(neighbour) == 0) {
-						reachable_from_current_port.insert(neighbour);
+					auto insert = reachable_from_current_port.insert(neighbour);
+					if (insert.second) {
 						positions_to_check.push(neighbour);
 					}
 				}

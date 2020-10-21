@@ -61,7 +61,7 @@ void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker**
 	}
 }
 
-void ShippingItem::set_economy(Game& game, Economy* e, WareWorker type) {
+void ShippingItem::set_economy(const Game& game, Economy* e, WareWorker type) {
 	WareInstance* ware;
 	Worker* worker;
 	get(game, &ware, &worker);
@@ -101,7 +101,7 @@ void ShippingItem::end_shipping(Game& game) {
 
 	if (ware) {
 		ware->update(game);
-		ware->schedule_act(game, 10);
+		ware->schedule_act(game, Duration(10));
 	}
 	if (worker) {
 		worker->end_shipping(game);

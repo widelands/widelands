@@ -26,7 +26,7 @@
 /// An imageset for a horizontal toolbar
 struct ToolbarImageset {
 	ToolbarImageset();
-	ToolbarImageset(const LuaTable& table);
+	explicit ToolbarImageset(const LuaTable& table);
 
 	/// Will be painted beyond the left corner of the toolbar
 	const Image* left_corner;

@@ -41,7 +41,8 @@ void SupplyList::remove_supply(Supply& supp) {
 
 		if (*item_iter == &supp) {
 			*item_iter = *(supplies_.end() - 1);
-			return supplies_.pop_back();
+			supplies_.pop_back();
+			return;
 		}
 	}
 	throw wexception("SupplyList::remove: not in list");
@@ -52,8 +53,8 @@ void SupplyList::remove_supply(Supply& supp) {
  * supply that can match the given request.
  */
 bool SupplyList::have_supplies(Game& game, const Request& req) {
-	for (size_t i = 0; i < supplies_.size(); ++i) {
-		if (supplies_[i]->nr_supplies(game, req)) {
+	for (const Supply* supply : supplies_) {
+		if (supply->nr_supplies(game, req)) {
 			return true;
 		}
 	}

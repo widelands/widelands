@@ -260,9 +260,11 @@ void NetHostProxy::receive_commands() {
 			conn_->receive(&cmd);
 			uint8_t id;
 			conn_->receive(&id);
-			assert(clients_.count(
-			   id));  // TODO(Klaus Halfmann): As of a race condition this may not always hold.
-			clients_.at(id).state_ = Client::State::kDisconnected;
+			const auto client = clients_.find(id);
+			if (client != clients_.end()) {
+				// As of a race condition this may not always work
+				client->second.state_ = Client::State::kDisconnected;
+			}
 		}
 		break;
 	case RelayCommand::kFromClient:
@@ -272,8 +274,12 @@ void NetHostProxy::receive_commands() {
 			conn_->receive(&id);
 			std::unique_ptr<RecvPacket> packet(new RecvPacket);
 			conn_->receive(packet.get());
-			assert(clients_.count(id));
-			clients_.at(id).received_.push(std::move(packet));
+			const auto client = clients_.find(id);
+			if (client != clients_.end()) {
+				client->second.received_.push(std::move(packet));
+			} else {
+				log_warn("[NetHostProxy] Received packed from unknown client");
+			}
 		}
 		break;
 	case RelayCommand::kPing:

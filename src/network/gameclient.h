@@ -51,7 +51,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	// GameController interface
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand*) override;
-	int32_t get_frametime() override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 
 	uint32_t real_speed() override;
@@ -78,6 +78,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	virtual void set_map(const std::string& mapname,
 	                     const std::string& mapfilename,
+	                     const std::string&,
+	                     const std::string&,
 	                     uint32_t maxplayers,
 	                     bool savegame = false) override;
 	void set_player_state(uint8_t number, PlayerSettings::State state) override;

@@ -35,7 +35,7 @@ static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
+ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
@@ -49,7 +49,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 		   if (is_dying_) {
 			   return;
 		   }
-		   Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+		   Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 		   if (production_site == nullptr) {
 			   return;
 		   }
@@ -67,7 +67,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 }
 
 void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	assert(production_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
@@ -78,9 +78,8 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		UI::Box* prod_box = new UI::Box(
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
-		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
-			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *inputqueues[i]));
+		for (const Widelands::InputQueue* queue : inputqueues) {
+			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *queue));
 		}
 
 		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));
@@ -111,7 +110,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		}
 		worker_table_->fit_height();
 
-		if (igbase()->can_act(production_site->owner().player_number())) {
+		if (ibase()->can_act(production_site->owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button =
 			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
@@ -135,7 +134,7 @@ void ProductionSiteWindow::think() {
 	// existance.
 	BuildingWindow::think();
 
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	if (production_site == nullptr) {
 		return;
 	}
@@ -161,7 +160,8 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 	assert(production_site->descr().nr_working_positions() == worker_table_->size());
 
 	for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
-		const Widelands::Worker* worker = production_site->working_positions()[i].worker;
+		const Widelands::Worker* worker =
+		   production_site->working_positions()[i].worker.get(ibase()->egbase());
 		const Widelands::Request* request = production_site->working_positions()[i].worker_request;
 		UI::Table<uintptr_t>::EntryRecord& er = worker_table_->get_record(i);
 
@@ -201,16 +201,21 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 }
 
 void ProductionSiteWindow::evict_worker() {
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	if (production_site == nullptr) {
 		return;
 	}
 
 	if (worker_table_->has_selection()) {
 		Widelands::Worker* worker =
-		   production_site->working_positions()[worker_table_->get_selected()].worker;
+		   production_site->working_positions()[worker_table_->get_selected()].worker.get(
+		      ibase()->egbase());
 		if (worker) {
-			igbase()->game().send_player_evict_worker(*worker);
+			if (game_) {
+				game_->send_player_evict_worker(*worker);
+			} else {
+				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+			}
 		}
 	}
 }

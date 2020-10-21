@@ -76,7 +76,7 @@ UI::Button* SuggestedTeamsEntry::create_button(Widelands::PlayerNumber p) {
 	                  kSuggestedTeamsUnitSize, UI::ButtonStyle::kWuiSecondary,
 	                  playercolor_image(p, "images/players/player_position_menu.png"),
 	                  map_.get_scenario_player_name(p + 1), UI::Button::VisualState::kFlat);
-	b->sigclicked.connect([this, b, p]() {
+	b->sigclicked.connect([this, b]() {
 		auto teams_it = team_.begin();
 		for (std::vector<UI::Button*>& vector : buttons_) {
 			auto t = teams_it->begin();
@@ -263,6 +263,17 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
                          UI::DropdownType::kTextual,
                          UI::PanelStyle::kWui,
                          UI::ButtonStyle::kWuiSecondary),
+     theme_dropdown_(&tags_box_,
+                     "dropdown_theme",
+                     0,
+                     0,
+                     200,
+                     50,
+                     24,
+                     _("Theme"),
+                     UI::DropdownType::kTextual,
+                     UI::PanelStyle::kWui,
+                     UI::ButtonStyle::kWuiSecondary),
      new_suggested_team_(&teams_box_,
                          "new_suggested_team",
                          0,
@@ -316,10 +327,16 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	add_tag_checkbox(&tags_box_, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(&tags_box_, "4teams", localize_tag("4teams"));
 
-	balancing_dropdown_.set_autoexpand_display_button();
 	balancing_dropdown_.add(localize_tag("balanced"), "balanced");
 	balancing_dropdown_.add(localize_tag("unbalanced"), "unbalanced");
-	tags_box_.add(&balancing_dropdown_);
+	tags_box_.add(&balancing_dropdown_, UI::Box::Resizing::kFullSize);
+	tags_box_.add_space(padding_);
+
+	theme_dropdown_.add(pgettext("map_theme", "(none)"), "");
+	for (const Widelands::Map::OldWorldInfo& owi : Widelands::Map::kOldWorldNames) {
+		theme_dropdown_.add(owi.descname(), owi.name);
+	}
+	tags_box_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 
 	tags_box_.add_space(labelh_);
 
@@ -368,9 +385,10 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 		suggested_teams_entries_.push_back(ste);
 	});
 
-	buttons_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_, UI::Box::Resizing::kFullSize);
 	buttons_box_.add_space(4);
-	buttons_box_.add(&cancel_, UI::Box::Resizing::kFullSize);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_, UI::Box::Resizing::kFullSize);
+
 	tab_box_.add(&tabs_, UI::Box::Resizing::kFullSize);
 	tab_box_.add_space(4);
 	tab_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
@@ -393,6 +411,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	}
 
 	balancing_dropdown_.selected.connect([this] { changed(); });
+	theme_dropdown_.selected.connect([this] { changed(); });
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
@@ -439,6 +458,11 @@ void MainMenuMapOptions::update() {
 	}
 
 	balancing_dropdown_.select(tags.count("balanced") ? "balanced" : "unbalanced");
+
+	theme_dropdown_.select(map.get_background_theme());
+	if (!theme_dropdown_.has_selection()) {
+		theme_dropdown_.select("");
+	}
 }
 
 /**
@@ -471,6 +495,7 @@ void MainMenuMapOptions::clicked_ok() {
 		}
 	}
 	map.add_tag(balancing_dropdown_.get_selected());
+	map.set_background_theme(theme_dropdown_.get_selected());
 	Notifications::publish(NoteMapOptions());
 	registry_.destroy();
 }

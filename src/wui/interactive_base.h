@@ -170,8 +170,39 @@ public:
 	// Sets the landmark for the keyboard 'key' to 'point'
 	void set_landmark(size_t key, const MapView::View& view);
 
+	void add_wanted_building_window(const Widelands::Coords& coords,
+	                                const Vector2i point,
+	                                bool was_minimal,
+	                                bool was_pinned);
+	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
+	                                       bool avoid_fastclick,
+	                                       bool workarea_preview_wanted);
+	void show_ship_window(Widelands::Ship* ship);
+
 	MapView* map_view() {
 		return &map_view_;
+	}
+
+	// This function should return true only in EditorInteractive
+	virtual bool omnipotent() const {
+		return false;
+	}
+	// These two functions should be overridden only by InteractiveGameBase
+	virtual Widelands::Game* get_game() const {
+		return nullptr;
+	}
+	virtual Widelands::Game& game() const {
+		NEVER_HERE();
+	}
+	// These three functions should be overridden only by InteractivePlayer
+	virtual bool can_see(Widelands::PlayerNumber) const {
+		return true;
+	}
+	virtual bool can_act(Widelands::PlayerNumber) const {
+		return omnipotent();
+	}
+	virtual Widelands::PlayerNumber player_number() const {
+		return 0;
 	}
 
 protected:
@@ -226,7 +257,7 @@ protected:
 
 	void draw_bridges(RenderTarget* dst,
 	                  const FieldsToDraw::Field* f,
-	                  uint32_t gametime,
+	                  const Time& gametime,
 	                  float scale) const;
 	void draw_road_building(FieldsToDraw::Field&);
 
@@ -320,6 +351,26 @@ private:
 
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
+
+	struct WantedBuildingWindow {
+		explicit WantedBuildingWindow(const Vector2i& pos,
+		                              bool was_minimized,
+		                              bool was_pinned,
+		                              bool was_showing_workarea)
+		   : window_position(pos),
+		     minimize(was_minimized),
+		     pin(was_pinned),
+		     show_workarea(was_showing_workarea) {
+		}
+		const Vector2i window_position;
+		const bool minimize;
+		const bool pin;
+		const bool show_workarea;
+	};
+
+	// Building coordinates, window position, whether the window was minimized
+	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 
 	/// A horizontal menu bar embellished with background graphics
 	struct Toolbar : UI::Panel {

@@ -36,7 +36,16 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
+
+/// Vision values for saveloading. We only care about PreviouslySeen and Revealed states here,
+/// the details about current player objects' vision are reconstructed when loading map object data.
+/// The values are stored in savegames so don't change them.
+enum class SavedVisionState {
+	kNone = '0',            // Neither of the below states
+	kPreviouslySeen = 'P',  // Previously seen, unseen now
+	kRevealed = 'R'         // Explicitly revealed
+};
 
 inline bool from_unsigned(unsigned value) {
 	return value == 1;
@@ -76,12 +85,15 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				std::set<Player::Field*> seen_fields;
 
-				player->revealed_fields_.clear();
-				const unsigned no_revealed_fields = fr.unsigned_32();
-				for (unsigned i = 0; i < no_revealed_fields; ++i) {
-					const MapIndex revealed_index = fr.unsigned_32();
-					player->revealed_fields_.insert(revealed_index);
-					player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
+				// TODO(Niektory): Savegame compatibility
+				std::set<MapIndex> revealed_fields = {};
+				if (packet_version <= 4) {
+					const unsigned no_revealed_fields = fr.unsigned_32();
+					for (unsigned i = 0; i < no_revealed_fields; ++i) {
+						const MapIndex revealed_index = fr.unsigned_32();
+						revealed_fields.insert(revealed_index);
+						player->rediscover_node(map, map.get_fcoords(map[revealed_index]));
+					}
 				}
 
 				// Read numerical field infos as combined strings to reduce number of hard disk write
@@ -97,15 +109,42 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				std::vector<std::string> data_vector;
 				std::string parseme;
 
-				// Seeing
+				// field.vision
 				parseme = fr.c_string();
-				boost::split(field_vector, parseme, boost::is_any_of("|"));
-				assert(field_vector.size() == no_of_fields);
+
+				// TODO(Niektory): Savegame compatibility
+				if (packet_version <= 4) {
+					boost::split(field_vector, parseme, boost::is_any_of("|"));
+					assert(field_vector.size() == no_of_fields);
+				}
 
 				for (MapIndex m = 0; m < no_of_fields; ++m) {
 					Player::Field& f = player->fields_[m];
-					f.seeing = static_cast<Widelands::SeeUnseeNode>(stoi(field_vector[m]));
-					if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
+					assert(!f.vision.is_revealed());
+
+					// TODO(Niektory): Savegame compatibility
+					if (packet_version <= 4) {
+						VisibleState saved_vision = static_cast<VisibleState>(stoi(field_vector[m]));
+						if (f.vision == VisibleState::kUnexplored &&
+						    saved_vision == VisibleState::kPreviouslySeen) {
+							f.vision = Vision(VisibleState::kPreviouslySeen);
+						}
+						if (revealed_fields.count(m)) {
+							f.vision.set_revealed(true);
+							assert(f.vision.is_revealed());
+						}
+					} else {
+						SavedVisionState saved_vision = SavedVisionState(parseme.at(m));
+						if (saved_vision == SavedVisionState::kPreviouslySeen) {
+							assert(!f.vision.is_visible());
+							f.vision = Vision(VisibleState::kPreviouslySeen);
+						} else if (saved_vision == SavedVisionState::kRevealed) {
+							f.vision.set_revealed(true);
+							assert(f.vision.is_revealed());
+						}
+					}
+
+					if (f.vision == VisibleState::kPreviouslySeen) {
 						seen_fields.insert(&f);
 					}
 				}
@@ -128,7 +167,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						assert(field_vector.size() == additionally_seen);
 						for (size_t i = 0; i < additionally_seen; ++i) {
 							Player::Field& f = player->fields_[stoi(field_vector[i])];
-							assert(f.seeing == SeeUnseeNode::kUnexplored);
+							assert(f.vision == VisibleState::kUnexplored);
 							seen_fields.insert(&f);
 						}
 					}
@@ -159,7 +198,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					field->time_node_last_unseen = stoi(field_vector[counter]);
+					field->time_node_last_unseen = Time(stol(field_vector[counter]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -174,8 +213,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					field->time_triangle_last_surveyed[0] = stoi(data_vector[0]);
-					field->time_triangle_last_surveyed[1] = stoi(data_vector[1]);
+					field->time_triangle_last_surveyed[0] = Time(stol(data_vector[0]));
+					field->time_triangle_last_surveyed[1] = Time(stol(data_vector[1]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -302,10 +341,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								      tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
-							field->partially_finished_building.constructionsite.totaltime =
-							   fr.unsigned_32();
+							field->partially_finished_building.constructionsite.totaltime = Duration(fr);
 							field->partially_finished_building.constructionsite.completedtime =
-							   fr.unsigned_32();
+							   Duration(fr);
 						}
 					}
 				}
@@ -315,9 +353,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 			for (uint8_t i = fr.unsigned_8(); i; --i) {
 				Player& player = *egbase.get_player(fr.unsigned_8());
 
-				player.revealed_fields_.clear();
+				std::set<MapIndex> revealed_fields = {};
 				for (uint32_t j = fr.unsigned_32(); j; --j) {
-					player.revealed_fields_.insert(fr.unsigned_32());
+					revealed_fields.insert(fr.unsigned_32());
 				}
 
 				for (MapIndex m = map.max_index(); m; --m) {
@@ -325,15 +363,22 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 					f.owner = fr.unsigned_8();
 
-					f.seeing = static_cast<SeeUnseeNode>(fr.unsigned_8());
+					VisibleState saved_vision = static_cast<VisibleState>(fr.unsigned_8());
+					if (f.vision == VisibleState::kUnexplored &&
+					    saved_vision == VisibleState::kPreviouslySeen) {
+						f.vision = Vision(VisibleState::kPreviouslySeen);
+					}
+					if (revealed_fields.count(m - 1)) {
+						f.vision.set_revealed(true);
+					}
 
-					if (f.seeing != SeeUnseeNode::kPreviouslySeen && packet_version > 1) {
+					if (f.vision != VisibleState::kPreviouslySeen && packet_version > 1) {
 						continue;
 					}
 
-					f.time_node_last_unseen = fr.unsigned_32();
-					f.time_triangle_last_surveyed[0] = fr.unsigned_32();
-					f.time_triangle_last_surveyed[1] = fr.unsigned_32();
+					f.time_node_last_unseen = Time(fr);
+					f.time_triangle_last_surveyed[0] = Time(fr);
+					f.time_triangle_last_surveyed[1] = Time(fr);
 
 					f.resource_amounts.d = fr.unsigned_8();
 					f.resource_amounts.r = fr.unsigned_8();
@@ -400,9 +445,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 									      egbase.tribes().safe_building_index(fr.string())));
 								}
 
-								f.partially_finished_building.constructionsite.totaltime = fr.unsigned_32();
-								f.partially_finished_building.constructionsite.completedtime =
-								   fr.unsigned_32();
+								f.partially_finished_building.constructionsite.totaltime = Duration(fr);
+								f.partially_finished_building.constructionsite.completedtime = Duration(fr);
 							}
 						} else {
 							descr = fr.string();
@@ -426,9 +470,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 									      egbase.tribes().safe_building_index(fr.string())));
 								}
 
-								f.partially_finished_building.constructionsite.totaltime = fr.unsigned_32();
-								f.partially_finished_building.constructionsite.completedtime =
-								   fr.unsigned_32();
+								f.partially_finished_building.constructionsite.totaltime = Duration(fr);
+								f.partially_finished_building.constructionsite.completedtime = Duration(fr);
 							}
 						}
 					}
@@ -459,22 +502,21 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		fw.unsigned_8(p);
 		std::set<const Player::Field*> seen_fields;
 		std::set<const Player::Field*> additionally_seen_fields;
-		// Explicitly revealed fields
-		fw.unsigned_32(player->revealed_fields_.size());
-		for (const MapIndex& m : player->revealed_fields_) {
-			fw.unsigned_32(m);
-		}
 
 		// Write numerical field infos as combined strings to reduce number of hard disk write
 		// operations
 		{
-			// Seeing
+			// field.vision
 			std::ostringstream oss("");
 			const MapIndex upper_bound = map.max_index() - 1;
 			for (MapIndex m = 0; m < upper_bound; ++m) {
 				const Player::Field& f = player->fields_[m];
-				oss << static_cast<unsigned>(f.seeing) << "|";
-				if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
+				oss << static_cast<char>(f.vision.is_revealed() ?
+				                            SavedVisionState::kRevealed :
+				                            f.vision == VisibleState::kPreviouslySeen ?
+				                            SavedVisionState::kPreviouslySeen :
+				                            SavedVisionState::kNone);
+				if (f.vision == VisibleState::kPreviouslySeen) {
 					seen_fields.insert(&f);
 					// The data for some of the terrains and edges between PreviouslySeen
 					// and Unexplored fields is stored in an Unexplored field. The data
@@ -482,15 +524,19 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 					const Coords coords(m % map.get_width(), m / map.get_width());
 					for (const Coords& c : {map.tr_n(coords), map.tl_n(coords), map.l_n(coords)}) {
 						const Player::Field& neighbour = player->fields_[map.get_index(c)];
-						if (neighbour.seeing == SeeUnseeNode::kUnexplored) {
+						if (neighbour.vision == VisibleState::kUnexplored) {
 							additionally_seen_fields.insert(&neighbour);
 						}
 					}
 				}
 			}
 			const Player::Field& f = player->fields_[upper_bound];
-			oss << static_cast<unsigned>(f.seeing);
-			if (f.seeing == SeeUnseeNode::kPreviouslySeen) {
+			oss << static_cast<char>(f.vision.is_revealed() ?
+			                            SavedVisionState::kRevealed :
+			                            f.vision == VisibleState::kPreviouslySeen ?
+			                            SavedVisionState::kPreviouslySeen :
+			                            SavedVisionState::kNone);
+			if (f.vision == VisibleState::kPreviouslySeen) {
 				seen_fields.insert(&f);
 			}
 			fw.c_string(oss.str());
@@ -536,7 +582,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Last Unseen
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << static_cast<unsigned>((*it)->time_node_last_unseen);
+				oss << static_cast<unsigned>((*it)->time_node_last_unseen.get());
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";
@@ -548,8 +594,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			// Last Surveyed
 			std::ostringstream oss("");
 			for (auto it = seen_fields.begin(); it != seen_fields.end();) {
-				oss << (*it)->time_triangle_last_surveyed[0] << "*"
-				    << (*it)->time_triangle_last_surveyed[1];
+				oss << (*it)->time_triangle_last_surveyed[0].get() << "*"
+				    << (*it)->time_triangle_last_surveyed[1].get();
 				++it;
 				if (it != seen_fields.end()) {
 					oss << "|";
@@ -634,8 +680,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 						fw.string(d->name());
 					}
 
-					fw.unsigned_32(field->partially_finished_building.constructionsite.totaltime);
-					fw.unsigned_32(field->partially_finished_building.constructionsite.completedtime);
+					field->partially_finished_building.constructionsite.totaltime.save(fw);
+					field->partially_finished_building.constructionsite.completedtime.save(fw);
 				}
 			} else {
 				fw.string("");

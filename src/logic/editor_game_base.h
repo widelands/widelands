@@ -88,6 +88,10 @@ public:
 		return objects_;
 	}
 
+	virtual bool is_game() const {
+		return false;
+	}
+
 	// logic handler func
 	virtual void think();
 
@@ -113,12 +117,8 @@ public:
 	/// Optionally sets a background image.
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     bool show_game_tips,
-	                                     const std::string& background = std::string());
-
-	/// If 'background' is not empty, change the background image for the loader UI.
-	/// If 'backgound' is empty, show game tips instead.
-	/// There must be a loader ui and no game tips.
-	void change_loader_ui_background(const std::string& background);
+	                                     const std::string& theme,
+	                                     const std::string& background);
 
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
@@ -167,7 +167,7 @@ public:
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
-	uint32_t get_gametime() const {
+	const Time& get_gametime() const {
 		return gametime_;
 	}
 	// TODO(GunChleoc): Get rid.
@@ -190,7 +190,7 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	uint32_t& get_gametime_pointer() {
+	Time& get_gametime_pointer() {
 		return gametime_;
 	}
 	void set_ibase(InteractiveBase* const b);
@@ -267,7 +267,7 @@ private:
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
-	uint32_t gametime_;
+	Time gametime_;
 	ObjectManager objects_;
 
 	std::unique_ptr<LuaInterface> lua_;

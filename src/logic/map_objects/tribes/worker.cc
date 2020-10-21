@@ -91,7 +91,7 @@ bool Worker::run_createware(Game& game, State& state, const Action& action) {
 	player.ware_produced(wareid);
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -189,7 +189,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 
 	// Advance program state
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -299,7 +299,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 
 	// Advance program state
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -350,7 +350,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 		if (!list.empty()) {
 			set_program_objvar(game, state, list[game.logic_rand() % list.size()].object);
 			++state.ivar1;
-			schedule_act(game, 10);
+			schedule_act(game, Duration(10));
 			return true;
 		}
 	}
@@ -391,7 +391,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 					} else {
 						Coords const coord = imm->get_position();
 						MapIndex mapidx = map.get_index(coord, map.get_width());
-						if (owner().get_vision(mapidx) == SeeUnseeNode::kUnexplored) {
+						if (owner().get_vision(mapidx) == VisibleState::kUnexplored) {
 							list.erase(list.begin() + idx);
 						}
 					}
@@ -428,7 +428,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 		}
 	}
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -675,7 +675,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	}
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -759,7 +759,7 @@ bool Worker::run_animate(Game& game, State& state, const Action& action) {
 	set_animation(game, action.iparam1);
 
 	++state.ivar1;
-	schedule_act(game, action.iparam2);
+	schedule_act(game, Duration(action.iparam2));
 	return true;
 }
 
@@ -809,7 +809,7 @@ bool Worker::run_callobject(Game& game, State& state, const Action& action) {
 	}
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -824,7 +824,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		if (state.objvar1.get(game)) {
 			// already have an object, so don't create a new one
 			++state.ivar1;
-			schedule_act(game, 10);
+			schedule_act(game, Duration(10));
 			return true;
 		}
 	}
@@ -933,7 +933,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	}
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -964,7 +964,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	}
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -1015,7 +1015,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	}
 	game.mutable_map()->change_terrain(game, it->first, it->second);
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -1030,7 +1030,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 bool Worker::run_buildferry(Game& game, State& state, const Action&) {
 	game.create_worker(get_position(), owner_->tribe().ferry(), owner_);
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -1044,7 +1044,7 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
 	}
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -1101,7 +1101,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			                                        rdescr->descname(), rdescr->representative_image(),
 			                                        ri.descr().descname(), rt_description, position,
 			                                        serial_, rdescr->name())),
-			   rdescr->timeout_ms(), rdescr->timeout_radius());
+			   Duration(rdescr->timeout_ms()), rdescr->timeout_radius());
 		}
 	}
 
@@ -1118,7 +1118,7 @@ bool Worker::run_playsound(Game& game, State& state, const Action& action) {
 	   SoundType::kAmbient, action.iparam2, get_position(), action.iparam1, action.iparam3 == 1));
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -1158,7 +1158,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 	ware->remove(game);
 
 	++state.ivar1;
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 	return true;
 }
 
@@ -1334,9 +1334,7 @@ void Worker::cleanup(EditorGameBase& egbase) {
 	}
 
 	if (ware) {
-		if (egbase.objects().object_still_available(ware)) {
-			ware->destroy(egbase);
-		}
+		ware->destroy(egbase);
 	}
 
 	// We are destroyed, but we were maybe idling
@@ -1648,7 +1646,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			molog(game.get_gametime(), "[transfer]: set location to road %u\n", road->serial());
 			set_location(road);
 			set_animation(game, descr().get_animation("idle", this));
-			schedule_act(game, 10);  //  wait a little
+			schedule_act(game, Duration(10));  //  wait a little
 		} else {
 			throw wexception(
 			   "MO(%u): [transfer]: flag to bad nextstep %u", serial(), nextstep->serial());
@@ -1676,7 +1674,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 			set_location(dynamic_cast<Flag*>(nextstep));
 			set_animation(game, descr().get_animation("idle", this));
-			schedule_act(game, 10);  //  wait a little
+			schedule_act(game, Duration(10));  //  wait a little
 		} else {
 			throw wexception(
 			   "MO(%u): [transfer]: from road to bad nextstep %u", serial(), nextstep->serial());
@@ -2007,14 +2005,14 @@ void Worker::return_update(Game& game, State& state) {
 					if (WareInstance* const ware = fetch_carried_ware(game)) {
 						flag->add_ware(game, *ware);
 						set_animation(game, descr().get_animation("idle", this));
-						return schedule_act(game, 20);  //  rest a while
+						return schedule_act(game, Duration(20));  //  rest a while
 					}
 				}
 
 				// Don't try to enter building if it is a dismantle site
 				// It is no problem for builders since they won't return before
 				// dismantling is complete.
-				if (is_a(DismantleSite, location)) {
+				if (location && location->descr().type() == MapObjectType::DISMANTLESITE) {
 					set_location(nullptr);
 					return pop_task(game);
 				} else {
@@ -2152,7 +2150,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 		}
 	}
 
-	if (dynamic_cast<Warehouse const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		delete supply_;
 		supply_ = nullptr;
 
@@ -2269,7 +2267,7 @@ void Worker::dropoff_update(Game& game, State&) {
 				flag->add_ware(game, *fetch_carried_ware(game));
 
 				set_animation(game, descr().get_animation("idle", this));
-				return schedule_act(game, 50);
+				return schedule_act(game, Duration(50));
 			}
 
 			molog(game.get_gametime(), "[dropoff]: flag is overloaded\n");
@@ -2291,7 +2289,7 @@ void Worker::dropoff_update(Game& game, State&) {
 		throw wexception("MO(%u): [dropoff]: not on building on return", serial());
 	}
 
-	if (dynamic_cast<Warehouse const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		schedule_incorporate(game);
 		return;
 	}
@@ -2301,11 +2299,11 @@ void Worker::dropoff_update(Game& game, State&) {
 }
 
 /// Give the recruit his diploma and say farwell to him.
-void Worker::start_task_releaserecruit(Game& game, Worker& recruit) {
+void Worker::start_task_releaserecruit(Game& game, const Worker& recruit) {
 	push_task(game, taskReleaserecruit);
 	molog(game.get_gametime(), "Starting to release %s %u...\n", recruit.descr().name().c_str(),
 	      recruit.serial());
-	return schedule_act(game, 5000);
+	return schedule_act(game, Duration(5000));
 }
 
 void Worker::releaserecruit_update(Game& game, State&) {
@@ -2344,7 +2342,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 
 	// If we haven't got the ware yet, walk onto the flag
 	if (!get_carried_ware(game) && !state.ivar1) {
-		if (dynamic_cast<Building const*>(location)) {
+		if (location && location->descr().type() >= Widelands::MapObjectType::BUILDING) {
 			return start_task_leavebuilding(game, false);
 		}
 
@@ -2365,18 +2363,18 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 		}
 
 		set_animation(game, descr().get_animation("idle", this));
-		return schedule_act(game, 20);
+		return schedule_act(game, Duration(20));
 	}
 
 	// Go back into the building
-	if (dynamic_cast<Flag const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::FLAG) {
 		molog(game.get_gametime(), "[fetchfromflag]: return to building\n");
 
 		return start_task_move(
 		   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 	}
 
-	if (!dynamic_cast<Building const*>(location)) {
+	if (!location || location->descr().type() < Widelands::MapObjectType::BUILDING) {
 		// This can happen "naturally" if the building gets destroyed, but the
 		// flag is still there and the worker tries to enter from that flag.
 		// E.g. the player destroyed the building, it is destroyed, through an
@@ -2411,7 +2409,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 	}
 
 	// We're back!
-	if (dynamic_cast<Warehouse const*>(location)) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		schedule_incorporate(game);
 		return;
 	}
@@ -2600,7 +2598,7 @@ void Worker::start_task_fugitive(Game& game) {
 	push_task(game, taskFugitive);
 
 	// Fugitives survive for two to four minutes
-	top_state().ivar1 = game.get_gametime() + 120000 + 200 * (game.logic_rand() % 600);
+	top_state().ivar1 = game.get_gametime().get() + 120000 + 200 * (game.logic_rand() % 600);
 }
 
 struct FindFlagWithPlayersWarehouse {
@@ -2633,7 +2631,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 	if (location && location->get_owner() == get_owner()) {
 		molog(game.get_gametime(), "[fugitive]: we are on location\n");
 
-		if (dynamic_cast<Warehouse const*>(location)) {
+		if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 			return schedule_incorporate(game);
 		}
 
@@ -2707,8 +2705,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 		}
 	}
 
-	if ((state.ivar1 < 0) ||
-	    (static_cast<uint32_t>(state.ivar1) < game.get_gametime())) {  //  time to die?
+	if ((state.ivar1 < 0) || (Time(state.ivar1) < game.get_gametime())) {  //  time to die?
 		molog(game.get_gametime(), "[fugitive]: die\n");
 		return schedule_destroy(game);
 	}
@@ -2930,7 +2927,7 @@ void Worker::check_visible_sites(const Map& map, const Player& player) {
 void Worker::add_sites(Game& game,
                        const Map& map,
                        const Player& player,
-                       std::vector<ImmovableFound>& found_sites) {
+                       const std::vector<ImmovableFound>& found_sites) {
 
 	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
@@ -3002,7 +2999,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	push_task(game, taskScout);
 	State& state = top_state();
 	state.ivar1 = radius;
-	state.ivar2 = game.get_gametime() + time;
+	state.ivar2 = game.get_gametime().get() + time;
 
 	// The following code switches between two modes of operation:
 	// - Random walk
@@ -3068,7 +3065,7 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	stateLeave.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
-bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
+bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 
 	Coords oldest_coords = get_position();
 
@@ -3089,10 +3086,10 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			Coords const coord = list[lidx];
 			list.erase(list.begin() + lidx);
 			MapIndex idx = map.get_index(coord, map.get_width());
-			const SeeUnseeNode visible = owner().get_vision(idx);
+			const VisibleState visible = owner().get_vision(idx);
 
 			// If the field is not yet discovered, go there
-			if (visible == SeeUnseeNode::kUnexplored) {
+			if (visible == VisibleState::kUnexplored) {
 				molog(game.get_gametime(), "[scout]: Go to interesting field (%i, %i)\n", coord.x,
 				      coord.y);
 				if (!start_task_movepath(
@@ -3107,8 +3104,8 @@ bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
 			// Else evaluate for second best target
 			int dist = map.calc_distance(coord, get_position());
 			Time time = owner().fields()[idx].time_node_last_unseen;
-			// time is only valid if visible is 1
-			if (visible != SeeUnseeNode::kPreviouslySeen) {
+			// time is only valid if the field was previously seen but is no longer seen now
+			if (visible != VisibleState::kPreviouslySeen) {
 				time = oldest_time;
 			}
 
@@ -3195,7 +3192,7 @@ void Worker::scout_update(Game& game, State& state) {
 
 	const Map& map = game.map();
 
-	const bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
+	const bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime().get()) > 0;
 
 	// do not pop; this function is called many times per run.
 	struct PlaceToScout scoutat = scouts_worklist.back();
@@ -3214,7 +3211,7 @@ void Worker::scout_update(Game& game, State& state) {
 	}
 	// time to go home or found nothing to go to
 	pop_task(game);
-	schedule_act(game, 10);
+	schedule_act(game, Duration(10));
 }
 
 void Worker::draw_inner(const EditorGameBase& game,
@@ -3226,14 +3223,15 @@ void Worker::draw_inner(const EditorGameBase& game,
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	dst->blit_animation(point_on_dst, coords, scale, get_current_anim(),
-	                    game.get_gametime() - get_animstart(), &player_color);
+	                    Time((game.get_gametime() - get_animstart()).get()), &player_color);
 
 	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
 		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
 		const Vector2f location(
 		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
 		dst->blit_animation(location, Widelands::Coords::null(), scale,
-		                    carried_ware->descr().get_animation("idle", this), 0, &player_color);
+		                    carried_ware->descr().get_animation("idle", this), Time(0),
+		                    &player_color);
 	}
 }
 
@@ -3382,7 +3380,7 @@ const Bob::Task* Worker::Loader::get_task(const std::string& name) {
 }
 
 const MapObjectProgram* Worker::Loader::get_program(const std::string& name) {
-	Worker& worker = get<Worker>();
+	const Worker& worker = get<Worker>();
 	return worker.descr().get_program(name);
 }
 

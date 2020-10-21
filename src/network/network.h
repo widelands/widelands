@@ -92,7 +92,7 @@ using SyncReportCallback = std::function<void()>;
  * to schedule taking a synchronization hash.
  */
 struct CmdNetCheckSync : public Widelands::Command {
-	CmdNetCheckSync(uint32_t dt, SyncReportCallback);
+	CmdNetCheckSync(const Time& dt, SyncReportCallback);
 
 	void execute(Widelands::Game&) override;
 
@@ -117,17 +117,17 @@ class NetworkTime {
 public:
 	NetworkTime();
 
-	void reset(int32_t ntime);
+	void reset(const Time& ntime);
 	void fastforward();
 
 	void think(uint32_t speed);
-	int32_t time() const;
-	int32_t networktime() const;
-	void receive(int32_t ntime);
+	const Time& time() const;
+	const Time& networktime() const;
+	void receive(const Time& ntime);
 
 private:
-	int32_t networktime_;
-	int32_t time_;
+	Time networktime_;
+	Time time_;
 
 	uint32_t lastframe_;
 

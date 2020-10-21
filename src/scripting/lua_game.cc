@@ -522,7 +522,7 @@ int LuaPlayer::seen_field(lua_State* L) {
 	Widelands::MapIndex const i =
 	   (*get_user_class<LuaMaps::LuaField>(L, 2))->fcoords(L).field - &egbase.map()[0];
 
-	lua_pushboolean(L, get(L, egbase).get_vision(i) != Widelands::SeeUnseeNode::kUnexplored);
+	lua_pushboolean(L, get(L, egbase).get_vision(i) != Widelands::VisibleState::kUnexplored);
 	return 1;
 }
 
@@ -614,8 +614,8 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.hide_or_reveal_field(
-		   (*get_user_class<LuaMaps::LuaField>(L, -1))->coords(), Widelands::SeeUnseeNode::kVisible);
+		p.hide_or_reveal_field((*get_user_class<LuaMaps::LuaField>(L, -1))->coords(),
+		                       Widelands::HideOrRevealFieldMode::kReveal);
 		lua_pop(L, 1);
 	}
 
@@ -642,9 +642,10 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                                        Widelands::SeeUnseeNode::kUnexplored :
-	                                        Widelands::SeeUnseeNode::kPreviouslySeen;
+	const Widelands::HideOrRevealFieldMode mode =
+	   (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	      Widelands::HideOrRevealFieldMode::kHideAndForget :
+	      Widelands::HideOrRevealFieldMode::kHide;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
@@ -1218,7 +1219,7 @@ int LuaMessage::get_body(lua_State* L) {
       (RO) The game time in milliseconds when this message was sent
 */
 int LuaMessage::get_sent(lua_State* L) {
-	lua_pushuint32(L, get(L, get_game(L)).sent());
+	lua_pushuint32(L, get(L, get_game(L)).sent().get());
 	return 1;
 }
 
