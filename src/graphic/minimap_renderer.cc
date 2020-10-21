@@ -29,6 +29,7 @@
 #include "logic/field.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
+#include "logic/vision.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
@@ -182,11 +183,11 @@ void do_draw_minimap(Texture* texture,
 			Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 			move_r(mapwidth, f, i);
 
-			Widelands::SeeUnseeNode vision;
+			Widelands::VisibleState vision;
 			Widelands::PlayerNumber owner;
 			if (player == nullptr || player->see_all()) {
 				// This player has omnivision - show the field like it is in reality.
-				vision = Widelands::SeeUnseeNode::kVisible;  // Seen right now.
+				vision = Widelands::VisibleState::kVisible;  // Seen right now.
 				owner = f.field->get_owned_by();
 			} else {
 				// This player might be affected by fog of war - instead of the
@@ -196,14 +197,14 @@ void do_draw_minimap(Texture* texture,
 				// vision on the field.
 				// If she never had vision, field.vision will be 0.
 				const auto& field = player->fields()[i];
-				vision = field.seeing;
+				vision = field.vision;
 				owner = field.owner;
 			}
 
-			if (vision != Widelands::SeeUnseeNode::kUnexplored) {
+			if (vision != Widelands::VisibleState::kUnexplored) {
 				texture->set_pixel(x, y,
 				                   calc_minimap_color(egbase, f, layers, owner,
-				                                      vision == Widelands::SeeUnseeNode::kVisible));
+				                                      vision == Widelands::VisibleState::kVisible));
 			}
 		}
 	}

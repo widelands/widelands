@@ -206,6 +206,7 @@ wl_library(graphic_minimap_renderer
     graphic_playercolor
     graphic_surface
     logic
+    logic_constants
     logic_map
     logic_map_objects
     wui_mapview_pixelfunctions
@@ -221,6 +222,7 @@ wl_library(graphic_fields_to_draw
     graphic
     graphic_gl_utils
     logic
+    logic_constants
     logic_map_objects
     logic_widelands_geometry
     wui_mapview_pixelfunctions
