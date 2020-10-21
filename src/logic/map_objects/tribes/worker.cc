@@ -2786,15 +2786,17 @@ void Worker::geologist_update(Game& game, State& state) {
 			FCoords target;
 
 			auto is_mountain = [&map, &world](const FCoords& f) {
-				for (const TCoords<FCoords>& t : {
-					TCoords<FCoords>(f, TriangleIndex::D),
-					TCoords<FCoords>(f, TriangleIndex::R),
-					TCoords<FCoords>(map.tl_n(f), TriangleIndex::D),
-					TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
-					TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
-					TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
-					if (world.terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
-						t.node.field->terrain_r())).get_is() & TerrainDescription::Is::kMineable) {
+				for (const TCoords<FCoords>& t :
+				     {TCoords<FCoords>(f, TriangleIndex::D), TCoords<FCoords>(f, TriangleIndex::R),
+				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::D),
+				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
+				      TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
+				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
+					if (world
+					       .terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
+					                                                 t.node.field->terrain_r()))
+					       .get_is() &
+					    TerrainDescription::Is::kMineable) {
 						return true;
 					}
 				}
