@@ -40,18 +40,18 @@ end
 -- Search a radius for a buildplot with size "small" or "medium" etc.
 -- Tries to find it within min_radius first, then expands the radius by 1 until max_radius is reached
 -- Returns nil if nothing was found, a field otherwise.
-function find_buildable_field(center_field, size, min_radius, max_radius)
+function find_buildable_field(center_field, player, size, min_radius, max_radius)
    if max_radius < min_radius then
       print("ERROR: max_radius < min_radius in find_buildable_field")
       return nil
    end
 
-   local function find_buildable_field_helper(starting_field, size, range)
+   local function find_buildable_field_helper(starting_field, player, size, range)
       for f_idx, field in ipairs(starting_field:region(range)) do
-         if field:has_caps(size) then
+         if player == field.owner and field:has_caps(size) then
             local space_for_flags = true
             for nf_idx, nearby_field in ipairs(field:region(1)) do
-               if not nearby_field:has_caps("flag") then
+               if not (player == nearby_field.owner and nearby_field:has_caps("flag")) then
                   space_for_flags = false
                end
             end
@@ -66,7 +66,7 @@ function find_buildable_field(center_field, size, min_radius, max_radius)
    local target_field = nil
    local radius = min_radius
    repeat
-      target_field = find_buildable_field_helper(center_field, size, radius)
+      target_field = find_buildable_field_helper(center_field, player, size, radius)
       if target_field ~= nil then
          return target_field
       end
@@ -75,30 +75,30 @@ function find_buildable_field(center_field, size, min_radius, max_radius)
    return target_field
 end
 
-function find_immovable_field(center_field, immovable_attribute, min_radius, max_radius)
-   if max_radius < min_radius then
-      print("ERROR: max_radius < min_radius in find_immovable_field")
+function find_immovable_field(center_field, immovable_attribute, inner_radius, outer_radius)
+   if outer_radius <= inner_radius then
+      print("ERROR: outer_radius <= inner_radius in find_immovable_field")
       return nil
    end
 
-   local function find_immovable_field_helper(starting_field, immovable_attribute, range)
-      for f_idx, field in ipairs(starting_field:region(range)) do
+   local function find_immovable_field_helper(center_field, immovable_attribute, inner_radius, outer_radius)
+      -- Hollow region takes first the outer, then the inner radius
+      for f_idx, field in ipairs(center_field:region(outer_radius, inner_radius)) do
          if field.immovable ~= nil and field.immovable:has_attribute(immovable_attribute) then
             return field
          end
       end
-      return nil
    end
 
    local target_field = nil
-   local radius = min_radius
+   local radius = inner_radius + 1
    repeat
-      target_field = find_immovable_field_helper(center_field, immovable_attribute, radius)
+      target_field = find_immovable_field_helper(center_field, immovable_attribute, inner_radius, radius)
       if target_field ~= nil then
          return target_field
       end
       radius = radius + 1
-   until radius == max_radius
+   until radius == outer_radius
    return target_field
 end
 

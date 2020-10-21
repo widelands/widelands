@@ -114,6 +114,8 @@
 return {
    welcome = {},
    objectives = { "welcome" },
+   -- TODO(GunChleoc): teach map movement before we start building
    building_spaces = { "objectives" },
    logs = { "building_spaces" },
+   rocks = { "building_spaces" },
 }
