@@ -178,7 +178,7 @@ bool LanBase::is_open() {
 	return socket_v4.is_open() || socket_v6.is_open();
 }
 
-ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
+size_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
 	assert(buf != nullptr);
 	assert(addr != nullptr);
 	size_t recv_len = 0;

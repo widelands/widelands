@@ -49,7 +49,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              0,
              get_inner_w() - 2 * hmargin(),
              80,
-             increase_tool_.set_tool().get_interval().min,
+             increase_tool_.set_tool().get_interval().min_,
              0,
              MAX_FIELD_HEIGHT,
              UI::PanelStyle::kWui,

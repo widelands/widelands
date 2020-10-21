@@ -38,7 +38,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             0,
             get_inner_w() - 2 * hmargin(),
             80,
-            noise_tool_.get_interval().min,
+            noise_tool_.get_interval().min_,
             1,
             MAX_FIELD_HEIGHT,
             UI::PanelStyle::kWui,
@@ -50,7 +50,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             0,
             get_inner_w() - 2 * hmargin(),
             80,
-            noise_tool_.get_interval().max,
+            noise_tool_.get_interval().max_,
             0,
             MAX_FIELD_HEIGHT,
             UI::PanelStyle::kWui,
@@ -62,7 +62,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
              0,
              get_inner_w() - 2 * hmargin(),
              80,
-             noise_tool_.set_tool().get_interval().min,
+             noise_tool_.set_tool().get_interval().min_,
              0,
              MAX_FIELD_HEIGHT,
              UI::PanelStyle::kWui,
@@ -129,8 +129,8 @@ void EditorToolNoiseHeightOptionsMenu::update_interval(int32_t lower, int32_t up
 	Widelands::HeightInterval height_interval(lower, upper);
 	assert(height_interval.valid());
 
-	lower_.set_value(height_interval.min);
-	upper_.set_value(height_interval.max);
+	lower_.set_value(height_interval.min_);
+	upper_.set_value(height_interval.max_);
 	noise_tool_.set_interval(height_interval);
 	select_correct_tool();
 }

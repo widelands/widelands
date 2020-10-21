@@ -173,24 +173,24 @@ static Requirements read_and(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 const RequirementsStorage RequireAnd::storage(requirementIdAnd, read_and);
 
 bool RequireAttribute::check(const MapObject& obj) const {
-	if (TrainingAttribute::kTotal != at) {
-		int32_t const value = obj.get_training_attribute(at);
+	if (TrainingAttribute::kTotal != at_) {
+		int32_t const value = obj.get_training_attribute(at_);
 
-		return value >= min && value <= max;
+		return value >= min_ && value <= max_;
 	} else {
 		int32_t value = 0;
 		value += obj.get_training_attribute(TrainingAttribute::kHealth);
 		value += obj.get_training_attribute(TrainingAttribute::kAttack);
 		value += obj.get_training_attribute(TrainingAttribute::kDefense);
 		value += obj.get_training_attribute(TrainingAttribute::kEvade);
-		return value >= min && value <= max;
+		return value >= min_ && value <= max_;
 	}
 }
 
 void RequireAttribute::write(FileWrite& fw, EditorGameBase&, MapObjectSaver&) const {
-	fw.unsigned_8(static_cast<uint8_t>(at));
-	fw.signed_32(min);
-	fw.signed_32(max);
+	fw.unsigned_8(static_cast<uint8_t>(at_));
+	fw.signed_32(min_);
+	fw.signed_32(max_);
 }
 
 static Requirements read_attribute(FileRead& fr, EditorGameBase&, MapObjectLoader&) {

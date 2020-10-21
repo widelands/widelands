@@ -50,9 +50,9 @@ int32_t EditorNoiseHeightTool::handle_click_impl(const Widelands::NodeAndTriangl
 	do {
 		max = std::max(
 		   max, map->set_height(eia.egbase(), mr.location(),
-		                        args->interval.min +
-		                           static_cast<int32_t>(static_cast<double>(args->interval.max -
-		                                                                    args->interval.min + 1) *
+		                        args->interval.min_ +
+		                           static_cast<int32_t>(static_cast<double>(args->interval.max_ -
+		                                                                    args->interval.min_ + 1) *
 		                                                std::rand() / (RAND_MAX + 1.0))));  // NOLINT
 	} while (mr.advance(*map));
 	return mr.radius() + max;

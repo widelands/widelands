@@ -1,0 +1,51 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug-static",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\build",
+      "installRoot": "${projectDir}\\build\\install",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": [{
+          "name": "VCPKG_TARGET_TRIPLET",
+          "value": "x64-windows-static",
+          "type": "STRING"
+        },
+        {
+          "name": "OPTION_BUILD_WEBSITE_TOOLS",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_BUILD_WINSTATIC",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_ASAN",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_BUILD_CODECHECK",
+          "value": "False",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_USE_GLBINDING",
+          "value": "True",
+          "type": "BOOL"
+        },
+        {
+          "name": "OPTION_BUILD_TESTS",
+          "value": "False",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ]
+}
