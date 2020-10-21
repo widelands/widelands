@@ -137,6 +137,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdEvictWorker(des);
 	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
 		return new CmdMilitarySiteSetSoldierPreference(des);
+	case QueueCommandTypes::kToggleMuteMessages:
+		return new CmdToggleMuteMessages(des);
 
 	case QueueCommandTypes::kStartOrCancelExpedition:
 		return new CmdStartOrCancelExpedition(des);
