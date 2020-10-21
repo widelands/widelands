@@ -15,7 +15,7 @@ include "scripting/ui.lua"
 --
 --    Sends a message to the inbox of a player.
 --    If the popup parameter is true and the player is in roadbuilding mode,
---    the message is send after the player leaves the roadbuilding mode
+--    the message is sent after the player leaves the roadbuilding mode
 --    (only in singleplayer)
 --
 --    :arg player: the recipient of the message
