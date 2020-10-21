@@ -74,7 +74,7 @@ run(function()
       size_description = _"Click on a big building space, then select the building from the big buildings tab."
    end
 
-   local road_steepness_description = p(_"While to do that, check the markers to make the road as flat as possible:") ..
+   local road_steepness_description = p(_"While you do that, check the markers to make the road as flat as possible:") ..
       li_image("images/wui/overlays/road_building_green.png", _"The terrain is flat here. Your carriers will be very swift on this terrain.") ..
       li_image("images/wui/overlays/road_building_yellow.png", _"There is a small slope to climb to reach this field. This means that your workers will be faster walking downhill than they will be walking uphill.") ..
       li_image("images/wui/overlays/road_building_red.png", _"The connection between the fields is extremely steep. The speed increase in one direction is huge while the slowdown in the other is also substantial.")
@@ -107,7 +107,7 @@ run(function()
       title = _"Roads",
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button. Afterwards, click on the map to guide your road until you reach the flag in front of the target building.") .. road_steepness_description
+         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button. Afterwards, click the colored markers on the map to guide your road until you reach the flag in front of the target building.") .. road_steepness_description
       ),
       h = 380,
       w = 260,
@@ -120,7 +120,7 @@ run(function()
       body = (
          li_object(quarry.name, _"Click on the building’s button…", player.color) ..
          -- We can't get the tribe's flag image, so we settle for the main building
-         li_object(warehouse_immovable.descr.name, _"…then click on the map to guide your road until you reach the flag in front of the target building.", player.color) .. road_steepness_description
+         li_object(warehouse_immovable.descr.name, _"…then click the colored markers on the map to guide your road until you reach the flag in front of the target building.", player.color) .. road_steepness_description
       ),
       h = 480,
       w = 260,
@@ -131,7 +131,7 @@ run(function()
       title = _"Roads",
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button. Afterwards, click on the map to guide your road until you reach the flag in front of the target building.") .. road_steepness_description
+         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button. Afterwards, click the colored markers on the map to guide your road until you reach the flag in front of the target building.") .. road_steepness_description
       ),
       h = 380,
       w = 260,
@@ -223,7 +223,7 @@ run(function()
       local build_road_button = mapview.windows.field_action.buttons["build_road"]
       build_road_button:indicate(true)
       campaign_message_box(msg_click_roadbutton)
-      while not wl.ui.MapView().is_building_road do sleep(100) end
+      while not mapview.is_building_road do sleep(100) end
       mapview:indicate(false)
    end
 
@@ -231,15 +231,9 @@ run(function()
    target_field = warehouse_immovable.flag.fields[1]
    target_field:indicate(true)
 
-   while wl.ui.MapView().is_building_road do sleep(100) end
+   while mapview.is_building_road do sleep(100) end
    close_story_messagebox()
    target_field:indicate(false)
-
-   -- NOCOM teach placing flags on the road
-   target_field = find_needed_flag_on_road(conquering_field, player, starting_conquer_range)
-   if target_field ~= nil then
-      target_field:indicate(true)
-   end
 
    -- Wait for the builder to arrive
    local buildername = player.tribe.builder
@@ -252,8 +246,8 @@ run(function()
          target_field:indicate(true)
          close_story_messagebox()
          campaign_message_box(msg_road_not_connected)
-         while not wl.ui.MapView().is_building_road do sleep(100) end
-         while wl.ui.MapView().is_building_road do sleep(100) end
+         while not mapview.is_building_road do sleep(100) end
+         while mapview.is_building_road do sleep(100) end
          mapview:indicate(false)
       end
       sleep(1000)
@@ -267,8 +261,15 @@ run(function()
       end
    until builder_present == true
 
+   -- Teach placing flags on the road if there is room for them
+   target_field = find_needed_flag_on_road(conquering_field, player, starting_conquer_range)
+   if target_field ~= nil then
+      include "scripting/training_wheels/common.lua"
+      teach_flags_on_road(target_field)
+   end
+
    -- Teaching is done, so mark it as solved
-   -- player:mark_training_wheel_as_solved(training_wheel_name)
+   player:mark_training_wheel_as_solved(training_wheel_name)
 
    -- Wait for the building and congratulate the player
    while #player:get_buildings(quarry.name) < 1 do sleep(300) end

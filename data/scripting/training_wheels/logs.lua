@@ -74,6 +74,8 @@ run(function()
       size_description = _"Click on a big building space, then select the building from the big buildings tab."
    end
 
+   local explain_control_key = join_sentences(_"If you hold down the ‘Ctrl’ key while clicking on the second flag, this will also place more flags on your road if possible.", _"Your carriers can transport your wares faster if they share the load.")
+
    local msg_logs = {
       title = _"Logs",
       position = "topright",
@@ -102,9 +104,10 @@ run(function()
       title = _"Roads",
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button, then hold down the ‘Ctrl’ key and click on the indicated flag.")
+         li_image("images/wui/fieldaction/menu_build_way.png", "Click on the ‘Build road’ button, then and click on the indicated flag.") ..
+         li_arrow(explain_control_key)
       ),
-      h = 180,
+      h = 240,
       w = 260,
       modal = false
    }
@@ -115,9 +118,10 @@ run(function()
       body = (
          li_object(log_producer.name, _"Click on the building’s button…", player.color) ..
          -- We can't get the tribe's flag image, so we settle for the main building
-         li_object(warehouse_immovable.descr.name, _"…then hold down the ‘Ctrl’ key and click on the flag in front of the target building.", player.color)
+         li_object(warehouse_immovable.descr.name, _"…then click on the flag in front of the target building.", player.color) ..
+         li_arrow(explain_control_key)
       ),
-      h = 280,
+      h = 380,
       w = 260,
       modal = false
    }
@@ -126,9 +130,10 @@ run(function()
       title = _"Roads",
       position = "topright",
       body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button, then hold down the ‘Ctrl’ key and click on the indicated flag.")
+         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button, then click on the indicated flag.") ..
+         li_arrow(explain_control_key)
       ),
-      h = 180,
+      h = 240,
       w = 260,
       modal = false
    }
@@ -219,7 +224,7 @@ run(function()
       local build_road_button = mapview.windows.field_action.buttons["build_road"]
       build_road_button:indicate(true)
       campaign_message_box(msg_click_roadbutton)
-      while not wl.ui.MapView().is_building_road do sleep(100) end
+      while not mapview.is_building_road do sleep(100) end
       mapview:indicate(false)
    end
 
@@ -228,7 +233,7 @@ run(function()
    target_field:indicate(true)
    scroll_to_field(target_field)
 
-   while wl.ui.MapView().is_building_road do sleep(100) end
+   while mapview.is_building_road do sleep(100) end
    close_story_messagebox()
    target_field:indicate(false)
 
@@ -243,8 +248,8 @@ run(function()
          target_field:indicate(true)
          close_story_messagebox()
          campaign_message_box(msg_road_not_connected)
-         while not wl.ui.MapView().is_building_road do sleep(100) end
-         while wl.ui.MapView().is_building_road do sleep(100) end
+         while not mapview.is_building_road do sleep(100) end
+         while mapview.is_building_road do sleep(100) end
          mapview:indicate(false)
       end
       sleep(1000)
@@ -257,6 +262,13 @@ run(function()
          end
       end
    until builder_present == true
+
+   -- Teach placing flags on the road if there is room for them
+   target_field = find_needed_flag_on_road(conquering_field, player, starting_conquer_range)
+   if target_field ~= nil then
+      include "scripting/training_wheels/common.lua"
+      teach_flags_on_road(target_field)
+   end
 
    -- Teaching is done, so mark it as solved
    player:mark_training_wheel_as_solved(training_wheel_name)
