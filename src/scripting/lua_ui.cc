@@ -471,7 +471,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
 		report_error(L,
-		             "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
+		             "Attempted to highlight item %d on dropdown '%s'. Available range for this "
 		             "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
@@ -503,7 +503,8 @@ int LuaDropdown::highlight_item(lua_State* L) {
       :arg index: the index of the item to indicate, starting from ``1``
       :type index: :class:`integer`
 
-      Show an arrow that points to an item in this dropdown. You can only point to 1 panel at the same time.
+      Show an arrow that points to an item in this dropdown. You can only point to 1 panel at the
+      same time.
 */
 int LuaDropdown::indicate_item(lua_State* L) {
 	assert(panel_);
@@ -519,11 +520,13 @@ int LuaDropdown::indicate_item(lua_State* L) {
 	size_t desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
 		report_error(L,
-		             "Attempted to indicate item %" PRIuS " on dropdown '%s'. Avaliable range for this "
+		             "Attempted to indicate item %" PRIuS
+		             " on dropdown '%s'. Available range for this "
 		             "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
-	log_info("Indicating item %" PRIuS " in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+	log_info(
+	   "Indicating item %" PRIuS " in dropdown '%s'\n", desired_item, get()->get_name().c_str());
 
 	int x = panel_->get_x() + panel_->get_w();
 	int y = panel_->get_y();
