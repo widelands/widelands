@@ -5682,8 +5682,9 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			// a) we are under target
 			// b) if there is shortage of supported ware
 			if (bo.total_count() < bo.cnt_target ||
-			    (get_stocklevel(bo, gametime) == 0 && (bo.last_building_built.is_invalid() ||
-			     bo.last_building_built + Duration(10 * 60 * 100) < gametime))) {
+			    (get_stocklevel(bo, gametime) == 0 &&
+			     (bo.last_building_built.is_invalid() ||
+			      bo.last_building_built + Duration(10 * 60 * 100) < gametime))) {
 
 				if (persistent_data->remaining_basic_buildings.count(bo.id)) {
 					bo.primary_priority += std::abs(management_data.get_military_number_at(60) * 10);
