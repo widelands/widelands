@@ -102,7 +102,7 @@ end
 --    :arg position: A string that indicates at which border of the screen the message box shall appear.
 --                   Can be "top", "bottom", "right", "left" or a combination (e.g. "topright").
 --                   Overrides posx and posy. Default: Center. If only one direction is indicated,
---                   the other one stays central.
+--                   the other one stays centered.
 --    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new
 --                      location stays on the screen when the message box is closed. Default: False.
 --    :arg show_instantly: If true, the message box is shown immediately. If false, this function will
