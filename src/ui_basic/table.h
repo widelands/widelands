@@ -33,7 +33,6 @@ namespace UI {
 
 enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
 enum class TableColumnType { kFixed, kFlexible };
-enum class TableRowTooltip { kDefault, kAlways, kNever };
 
 /** A table with columns and lines.
  *
@@ -69,8 +68,7 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                TableColumnType column_type = TableColumnType::kFixed,
-	                TableRowTooltip row_tooltip = TableRowTooltip::kDefault);
+	                TableColumnType column_type = TableColumnType::kFixed);
 
 	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
@@ -193,8 +191,7 @@ public:
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
-	                TableColumnType column_type = TableColumnType::kFixed,
-	                TableRowTooltip row_tooltip = TableRowTooltip::kDefault);
+	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_tooltip(uint8_t col, const std::string& tooltip);
@@ -310,7 +307,6 @@ private:
 		int width;
 		Align alignment;
 		CompareFn compare;
-		TableRowTooltip row_tooltip_mode;
 	};
 	using Columns = std::vector<Column>;
 
@@ -342,7 +338,6 @@ private:
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
 	void set_scrollpos(int32_t pos);
-	bool shall_draw_tooltip(int text_width, const Column& c) const;
 	bool is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, int column_width) const;
 	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };

@@ -103,8 +103,7 @@ void Table<void*>::add_column(uint32_t const width,
                               const std::string& title,
                               const std::string& tooltip_string,
                               Align const alignment,
-                              TableColumnType column_type,
-                              TableRowTooltip row_tooltip) {
+                              TableColumnType column_type) {
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -128,7 +127,6 @@ void Table<void*>::add_column(uint32_t const width,
 		c.alignment = alignment;
 		c.compare = [this, col_index](
 		               uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
-		c.row_tooltip_mode = row_tooltip;
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
 			assert(flexible_column_ == std::numeric_limits<size_t>::max());
@@ -381,8 +379,7 @@ bool Table<void*>::handle_tooltip() {
 		const EntryRecord& er = *entry_records_[row];
 		for (uint32_t c = 0, column_x = 0; c < columns_.size(); ++c) {
 
-			const Column& column = columns_[c];
-			const int column_w = column.width;
+			const int column_w = columns_[c].width;
 			Vector2i point(column_x, y);
 			if (is_mouse_in(cursor_pos, point, column_w)) {
 				const std::string& entry_string = er.get_string(c);
@@ -390,7 +387,7 @@ bool Table<void*>::handle_tooltip() {
 				std::shared_ptr<const UI::RenderedText> rendered_text =
 				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
-				if (shall_draw_tooltip(rendered_text->width(), column)) {
+				if (rendered_text->width() > column_w) {
 					return Panel::draw_tooltip(entry_string);
 				}
 			}
@@ -403,11 +400,10 @@ bool Table<void*>::handle_tooltip() {
 }
 
 UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryRecord& er) {
-	return const_cast<FontStyleInfo&>(er.font_style() != nullptr ?
-	                                     *er.font_style() :
-	                                     er.is_disabled() ?
-	                                     g_style_manager->table_style(style_).disabled() :
-	                                     g_style_manager->table_style(style_).enabled());
+	return const_cast<FontStyleInfo&>(
+	   er.font_style() != nullptr ? *er.font_style() :
+	   er.is_disabled()           ? g_style_manager->table_style(style_).disabled() :
+                                   g_style_manager->table_style(style_).enabled());
 }
 bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
                                const Vector2i& point,
@@ -416,15 +412,6 @@ bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
 
 	return cursor_pos.x >= point.x && cursor_pos.x <= point.x + column_width &&
 	       cursor_pos.y > point.y && cursor_pos.y < point.y + line;
-}
-
-bool Table<void*>::shall_draw_tooltip(const int text_width, const Column& c) const {
-	if (c.row_tooltip_mode == TableRowTooltip::kAlways) {
-		return true;
-	} else if (c.row_tooltip_mode == TableRowTooltip::kNever) {
-		return false;
-	}
-	return text_width > c.width;
 }
 
 /**
