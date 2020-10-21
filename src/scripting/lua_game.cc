@@ -303,10 +303,10 @@ int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
    .. method:: send_to_inbox(title, message[, opts])
 
       Send a message to the players inbox.
-      There is also a function :meth:`send_to_inbox` in `messages.lua`, which 
+      There is also a function :meth:`send_to_inbox` in `messages.lua`, which
       has an option to wait before sending the message until the player leaves
       the roadbuilding mode.
-      Title or Message can be a formatted using wideland's 
+      Title or Message can be a formatted using wideland's
       :ref:`richtext functions <richtext.lua>`.
 
       :arg title: title of the message
@@ -1169,8 +1169,9 @@ const MethodType<LuaInboxMessage> LuaInboxMessage::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaInboxMessage> LuaInboxMessage::Properties[] = {
-   PROP_RO(LuaInboxMessage, title),     PROP_RO(LuaInboxMessage, body),   PROP_RO(LuaInboxMessage, sent),
-   PROP_RO(LuaInboxMessage, field),     PROP_RW(LuaInboxMessage, status), PROP_RO(LuaInboxMessage, heading),
+   PROP_RO(LuaInboxMessage, title),     PROP_RO(LuaInboxMessage, body),
+   PROP_RO(LuaInboxMessage, sent),      PROP_RO(LuaInboxMessage, field),
+   PROP_RW(LuaInboxMessage, status),    PROP_RO(LuaInboxMessage, heading),
    PROP_RO(LuaInboxMessage, icon_name), {nullptr, nullptr, nullptr},
 };
 

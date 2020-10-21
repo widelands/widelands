@@ -63,13 +63,13 @@ end
 -- .. function:: message_box(player, title, message, parameters)
 --
 --    Waits if player is in building mode, then shows a scenario message box.
---    Usually you want to use :meth:`campaign_message_box` which has more options, 
---    e.g. positioning of message boxes.  
+--    Usually you want to use :meth:`campaign_message_box` which has more options,
+--    e.g. positioning of message boxes.
 --
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
 --    :type title: :class:`string`
---    :arg message: the localized body of the message. You must use 
+--    :arg message: the localized body of the message. You must use
 --                 :ref:`richtext functions <richtext.lua>` here.
 --    :type message: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
@@ -90,7 +90,7 @@ end
 -- .. function:: campaign_message_box({message, [sleeptime, parameters]})
 --
 --    Sets the width and height of the message box and calls
---    :meth:`message_box` for player 1. This function expects a table, so surround 
+--    :meth:`message_box` for player 1. This function expects a table, so surround
 --    all values in a pair of curly braces.
 --
 --    :arg message: the message consist of the `title` and the `body`. Note that the `body`
@@ -100,13 +100,13 @@ end
 --    Besides the normal message parameters (see :meth:`wl.game.Player.message_box`) the following ones can be used:
 --
 --    :arg position: A string that indicates at which border of the screen the message box shall appear.
---                   Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). 
---                   Overrides posx and posy. Default: Center. If only one direction is indicated, 
+--                   Can be "top", "bottom", "right", "left" or a combination (e.g. "topright").
+--                   Overrides posx and posy. Default: Center. If only one direction is indicated,
 --                   the other one stays central.
 --    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new
 --                      location stays on the screen when the message box is closed. Default: False.
 --    :arg show_instantly: If true, the message box is shown immediately. If false, this function will
---                    wait until the player leaves the roadbuilding mode. Use this with care because it 
+--                    wait until the player leaves the roadbuilding mode. Use this with care because it
 --                    can be very interruptive. Default: false.
 --
 --    Example:
@@ -179,8 +179,8 @@ end
 --
 --    Adds an objective to a campaign.
 --
---    :arg objective: The objective to be added. If the variable obj_name exists, 
---                    obj_name, obj_title and obj_body are used. Otherwise, it 
+--    :arg objective: The objective to be added. If the variable obj_name exists,
+--                    obj_name, obj_title and obj_body are used. Otherwise, it
 --                    needs to have a name, title, and body.
 --
 --    :returns: The new objective.
