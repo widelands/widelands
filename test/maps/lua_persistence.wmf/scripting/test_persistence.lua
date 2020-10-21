@@ -55,8 +55,8 @@ function save_coroutine()
    objective = p:add_objective("lumber", "House", "Ship!")
    objective.done = true
 
-   p:send_message("dummy msg1", "dummy msg 1")
-   msg = p:send_message("hello nice", "World", {field = field })
+   p:send_to_inbox("dummy msg1", "dummy msg 1")
+   msg = p:send_to_inbox("hello nice", "World", {field = field })
    player_slot = map.player_slots[1]
 
    myset = Set:new{
