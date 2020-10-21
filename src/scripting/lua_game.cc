@@ -306,11 +306,11 @@ int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
       There is also a function :meth:`send_to_inbox` in `messages.lua`, which
       has an option to wait before sending the message until the player leaves
       the roadbuilding mode.
-      Title or Message can be a formatted using wideland's
+      Title or Message can be a formatted using widelands'
       :ref:`richtext functions <richtext.lua>`.
 
       :arg title: title of the message
-      :type ttitle: :class:`string`
+      :type title: :class:`string`
 
       :arg message: text of the message
       :type message: :class:`string`
