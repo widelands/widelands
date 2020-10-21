@@ -182,6 +182,11 @@ void BaseDropdown::set_height(int height) {
 	layout();
 }
 
+int BaseDropdown::lineheight() const {
+	assert(list_ != nullptr);
+	return list_->get_lineheight();
+}
+
 /*
  * This function is part of an ugly hack to handle dropdowns in modal
  * windows correctly. The problem is that our ListSelect's parent is the

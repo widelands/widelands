@@ -264,6 +264,7 @@ run(function()
    -- Wait for the building and congratulate the player
    while #player:get_buildings(log_producer.name) < 1 do sleep(300) end
    campaign_message_box(msg_finished)
+   scroll_to_field(constructionsite_field)
 
    -- 1 minute should suffice to read the message box
    sleep(60 * 1000)

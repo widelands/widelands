@@ -1,4 +1,4 @@
--- Welcome and teach objectives
+-- Teach objectives
 
 include "scripting/coroutine.lua"
 include "scripting/messages.lua"
@@ -66,7 +66,8 @@ run(function()
    sleep (100)
 
    while mapview.windows.objectives do sleep(100) end
-   set_objective_done(o2)
 
    player:mark_training_wheel_as_solved(training_wheel_name)
+
+   set_objective_done(o2)
 end)
