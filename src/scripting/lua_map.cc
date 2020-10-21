@@ -6811,6 +6811,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
    PROP_RO(LuaField, buildable),
+   PROP_RO(LuaField, has_roads),
    {nullptr, nullptr, nullptr},
 };
 
@@ -7138,6 +7139,8 @@ GET_X_NEIGHBOUR(tln)
 GET_X_NEIGHBOUR(bln)
 GET_X_NEIGHBOUR(brn)
 
+#undef GET_X_NEIGHBOUR
+
 /* RST
    .. attribute:: owner
 
@@ -7166,6 +7169,50 @@ int LuaField::get_buildable(lua_State* L) {
 	   (caps & Widelands::BUILDCAPS_MEDIUM) || (caps & Widelands::BUILDCAPS_BIG) ||
 	   (caps & Widelands::BUILDCAPS_MINE);
 	lua_pushboolean(L, is_buildable);
+	return 1;
+}
+
+/* RST
+   .. attribute:: has_roads
+
+      (RO) Whether any roads lead to the field.
+      Note that waterways are currently treated like roads.
+
+      :returns: ``true`` if any of the 6 directions has a road on it, ``false`` otherwise.
+*/
+int LuaField::get_has_roads(lua_State* L) {
+
+	const Widelands::FCoords& fc = fcoords(L);
+	Widelands::Field* f = fc.field;
+	if (f->get_road(Widelands::WalkingDir::WALK_E) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	if (f->get_road(Widelands::WalkingDir::WALK_SE) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	if (f->get_road(Widelands::WalkingDir::WALK_SW) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+
+	Widelands::FCoords neighbor;
+	const Widelands::Map& map = get_egbase(L).map();
+	map.get_ln(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_E) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+	}
+	map.get_tln(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SE) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+	}
+	map.get_trn(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SW) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+	}
+	lua_pushboolean(L, false);
+
 	return 1;
 }
 

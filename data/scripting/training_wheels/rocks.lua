@@ -235,7 +235,11 @@ run(function()
    close_story_messagebox()
    target_field:indicate(false)
 
-   -- NOOCM teach placing flags on the road
+   -- NOCOM teach placing flags on the road
+   target_field = find_needed_flag_on_road(conquering_field, player, starting_conquer_range)
+   if target_field ~= nil then
+      target_field:indicate(true)
+   end
 
    -- Wait for the builder to arrive
    local buildername = player.tribe.builder
@@ -264,7 +268,7 @@ run(function()
    until builder_present == true
 
    -- Teaching is done, so mark it as solved
-   player:mark_training_wheel_as_solved(training_wheel_name)
+   -- player:mark_training_wheel_as_solved(training_wheel_name)
 
    -- Wait for the building and congratulate the player
    while #player:get_buildings(quarry.name) < 1 do sleep(300) end

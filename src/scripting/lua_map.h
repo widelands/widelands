@@ -1468,6 +1468,7 @@ public:
 	int get_claimers(lua_State*);
 	int get_owner(lua_State*);
 	int get_buildable(lua_State*);
+	int get_has_roads(lua_State* L);
 
 	/*
 	 * Lua methods

@@ -122,3 +122,12 @@ function wait_for_constructionsite_field(buildingname, search_area)
    until target_field ~= nil
    return target_field
 end
+
+function find_needed_flag_on_road(starting_field, player, radius)
+   for f_idx, field in ipairs(starting_field:region(radius)) do
+      if player == field.owner and field.buildable and field.has_roads == true then
+         return field
+      end
+   end
+   return nil
+end
