@@ -24,7 +24,7 @@ run(function()
       body = (
          li_image("images/logos/wl-ico-64.png", h1(_"Welcome to Widelands!")) ..
          li_image("images/wui/training_wheels_arrow.png", _"Follow the arrows to learn how to play.") ..
-         p("Click ‘OK’ to continue.")
+         li("Click ‘OK’ to continue.")
       )
    }
 

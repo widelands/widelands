@@ -52,7 +52,7 @@ run(function()
       w = 260,
       body = (
          li_image("images/wui/overlays/small.png", _"Now we can see where it is possible to place buildings and flags.") ..
-         p("Click ‘OK’ to continue.")
+         li("Click ‘OK’ to continue.")
       )
    }
 
