@@ -39,7 +39,7 @@ class LuaInterface;
  */
 class FullscreenMenuLaunchGame : public FullscreenMenuBase {
 public:
-	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
+	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*, bool preconfigured = false);
 	~FullscreenMenuLaunchGame() override;
 
 	GameSettingsProvider& settings() const {
