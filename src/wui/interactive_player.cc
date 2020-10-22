@@ -117,7 +117,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
 		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
-			player_field.partially_finished_building.constructionsite.draw(
+			player_field.constructionsite.draw(
 			   field.rendertarget_pixel, field.fcoords, scale,
 			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
 		} else {
@@ -133,14 +133,14 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
 			    // TODO(Nordfriese): `building` can only be nullptr in savegame
 			    // compatibility cases – remove that check after v1.0
-			    player_field.partially_finished_building.dismantlesite.building) {
+			    player_field.dismantlesite.building) {
 				dst->blit_animation(
 				   field.rendertarget_pixel, field.fcoords, scale,
-				   player_field.partially_finished_building.dismantlesite.building
+				   player_field.dismantlesite.building
 				      ->get_unoccupied_animation(),
 				   Time(0), player_color, opacity,
 				   100 -
-				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+				      ((player_field.dismantlesite.progress * 100) >> 16));
 			} else {
 				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
 				                    building->get_unoccupied_animation(), Time(0), player_color,

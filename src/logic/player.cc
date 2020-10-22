@@ -94,8 +94,16 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 
 namespace Widelands {
 
-Player::Field::PartiallyFinishedBuildingDetails::PartiallyFinishedBuildingDetails() {
-	memset(this, 0, sizeof(Player::Field::PartiallyFinishedBuildingDetails));
+void Player::Field::set_constructionsite(bool new_value) {
+	if (is_constructionsite == new_value) {
+		return;
+	}
+	if (new_value) {
+		new (&constructionsite) ConstructionsiteInformation();
+	} else {
+		constructionsite.~ConstructionsiteInformation();
+	}
+	is_constructionsite = new_value;
 }
 
 /**
@@ -1343,12 +1351,13 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						}
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
-							field.partially_finished_building.constructionsite =
+							field.set_constructionsite(true);
+							field.constructionsite =
 							   const_cast<ConstructionSite*>(cs)->get_info();
 						} else if (upcast(DismantleSite const, ds, building)) {
-							field.partially_finished_building.dismantlesite.progress =
-							   ds->get_built_per64k();
-							field.partially_finished_building.dismantlesite.building = ds->get_building();
+							field.set_constructionsite(false);
+							field.dismantlesite.progress = ds->get_built_per64k();
+							field.dismantlesite.building = ds->get_building();
 						}
 					}
 				}

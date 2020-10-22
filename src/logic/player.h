@@ -221,6 +221,8 @@ public:
 		     owner(0),
 		     time_node_last_unseen(0),
 		     map_object_descr(nullptr),
+		     dismantlesite(),
+		     is_constructionsite(false),
 		     border(0),
 		     border_r(0),
 		     border_br(0),
@@ -232,6 +234,12 @@ public:
 
 			time_triangle_last_surveyed[0] = Time();
 			time_triangle_last_surveyed[1] = Time();
+		}
+
+		~Field() {
+			if (is_constructionsite) {
+				constructionsite.~ConstructionsiteInformation();
+			}
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -387,16 +395,15 @@ public:
 		 * on this node. `dismantlesite.progress` equals the value of
 		 * `get_built_per64k()` at the time the dismantlesite was last seen.
 		 */
-		union PartiallyFinishedBuildingDetails {
-			ConstructionsiteInformation constructionsite;
+		union {
 			struct {
 				uint32_t progress;
 				const BuildingDescr* building;
 			} dismantlesite;
-			PartiallyFinishedBuildingDetails();
-			~PartiallyFinishedBuildingDetails() {
-			}
-		} partially_finished_building;
+			ConstructionsiteInformation constructionsite;
+		};
+		bool is_constructionsite;
+		void set_constructionsite(bool);
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
