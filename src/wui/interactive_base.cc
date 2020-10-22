@@ -754,7 +754,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		draw_tooltip(
 		   in_road_building_mode(RoadBuildingType::kRoad) ?
 		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
-		      (boost::format(_("Waterway length: %1$u (limit: %2$u)")) %
+		      (boost::format(_("Waterway length: %1$u/%2$u")) %
 		       get_build_road_path().get_nsteps() % egbase().map().get_waterway_max_length())
 		         .str());
 	}
