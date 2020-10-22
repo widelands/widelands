@@ -28,7 +28,8 @@
 #include "map_io/map_loader.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, Widelands::Game* preconfigured,
+FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
+                                                 Widelands::Game* preconfigured,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl, preconfigured),

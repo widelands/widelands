@@ -33,7 +33,8 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
+FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
+                                                   GameSettingsProvider* const settings,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
    : UI::Window(&fsmm,

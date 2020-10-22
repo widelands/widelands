@@ -47,13 +47,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                                            UI::UniqueWindow::Registry& registry,
                                            const uint32_t w,
                                            const uint32_t h)
-   : UI::UniqueWindow(&parent,
-                      s,
-                      "random_map_menu",
-                      &registry,
-                      400,
-                      500,
-                      _("New Random Map")),
+   : UI::UniqueWindow(&parent, s, "random_map_menu", &registry, 400, 500, _("New Random Map")),
      style_(s),
      // UI elements
      margin_(4),
@@ -513,8 +507,7 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 		egbase.remove_loader_ui();
 
 		UI::WLMessageBox mbox(
-		   eia,
-           style_,
+		   eia, style_,
 		   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
 		     editor.*/
 		   _("Random Map"),

@@ -1443,7 +1443,8 @@ bool WLApplication::new_random_game(FullscreenMenuMain& fsmm) {
  * \return @c true if a game was played, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::new_game(FullscreenMenuMain& fsmm, Widelands::Game& game,
+bool WLApplication::new_game(FullscreenMenuMain& fsmm,
+                             Widelands::Game& game,
                              SinglePlayerGameSettingsProvider& sp,
                              const bool preconfigured,
                              bool* canceled) {

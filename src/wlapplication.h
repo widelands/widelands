@@ -184,7 +184,8 @@ struct WLApplication {
 	void mainmenu_multiplayer(FullscreenMenuMain&, bool internet);
 	void mainmenu_editor();
 	bool new_random_game(FullscreenMenuMain&);
-	bool new_game(FullscreenMenuMain&, Widelands::Game&,
+	bool new_game(FullscreenMenuMain&,
+	              Widelands::Game&,
 	              SinglePlayerGameSettingsProvider&,
 	              bool preconfigured,
 	              bool* canceled = nullptr);

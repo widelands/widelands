@@ -38,7 +38,10 @@ class LuaInterface;
  */
 class FullscreenMenuLaunchGame : public UI::Window {
 public:
-	FullscreenMenuLaunchGame(FullscreenMenuMain&, GameSettingsProvider*, GameController*, bool preconfigured = false);
+	FullscreenMenuLaunchGame(FullscreenMenuMain&,
+	                         GameSettingsProvider*,
+	                         GameController*,
+	                         bool preconfigured = false);
 	~FullscreenMenuLaunchGame() override;
 
 	bool handle_key(bool, SDL_Keysym) override;

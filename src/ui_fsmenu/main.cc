@@ -162,11 +162,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 		internet_login();
 		end_modal<MenuTarget>(multiplayer_.get_selected());
 	});
-	editor_.selected.connect(
-	   [this]() { end_modal<MenuTarget>(editor_.get_selected()); });
-	replay_.sigclicked.connect([this]() {
-		end_modal<MenuTarget>(MenuTarget::kReplay);
-	});
+	editor_.selected.connect([this]() { end_modal<MenuTarget>(editor_.get_selected()); });
+	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
 	   end_modal<MenuTarget>(MenuTarget::kAddOns);
 	}); */
@@ -237,12 +234,12 @@ void FullscreenMenuMain::set_labels() {
 	multiplayer_.clear();
 	editor_.clear();
 
-	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false,
-	                  _("Begin a new game"), "N");
-	singleplayer_.add(_("New Random Game"), MenuTarget::kRandomGame, nullptr,
-	                  false, _("Create a new random match"), "Z");
-	singleplayer_.add(_("Campaigns"), MenuTarget::kCampaign, nullptr, false,
-	                  _("Play a campaign"), "H");
+	singleplayer_.add(
+	   _("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"), "N");
+	singleplayer_.add(_("New Random Game"), MenuTarget::kRandomGame, nullptr, false,
+	                  _("Create a new random match"), "Z");
+	singleplayer_.add(
+	   _("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"), "H");
 	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
 	                  _("Play one of our beginners’ tutorials"), "T");
 	singleplayer_.add(
@@ -307,12 +304,12 @@ void FullscreenMenuMain::set_labels() {
 	multiplayer_.add(
 	   _("LAN / Direct IP"), MenuTarget::kLan, nullptr, false, _("Play a private online game"), "P");
 
-	editor_.add(_("New Map"), MenuTarget::kEditorNew, nullptr, false,
-	            _("Create a new empty map"), "K");
+	editor_.add(
+	   _("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"), "K");
 	editor_.add(_("Random Map"), MenuTarget::kEditorRandom, nullptr, false,
 	            _("Create a new random map"), "Y");
-	editor_.add(_("Load Map"), MenuTarget::kEditorLoad, nullptr, false,
-	            _("Edit an existing map"), "B");
+	editor_.add(
+	   _("Load Map"), MenuTarget::kEditorLoad, nullptr, false, _("Edit an existing map"), "B");
 
 	{
 		filename_for_continue_editing_ = "";
@@ -327,8 +324,7 @@ void FullscreenMenuMain::set_labels() {
 		}
 		if (last_edited) {
 			filename_for_continue_editing_ = last_edited->first.filename;
-			editor_.add(_("Continue Editing"), MenuTarget::kEditorContinue,
-			            nullptr, false,
+			editor_.add(_("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			            (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
 			             g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 			                .as_font_tag(
@@ -436,8 +432,7 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			break;
 		case SDLK_w:
 			if (!filename_for_continue_editing_.empty()) {
-				end_modal<MenuTarget>(
-				   MenuTarget::kEditorContinue);
+				end_modal<MenuTarget>(MenuTarget::kEditorContinue);
 				return true;
 			}
 			break;
