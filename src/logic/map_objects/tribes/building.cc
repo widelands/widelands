@@ -488,7 +488,6 @@ bool Building::init(EditorGameBase& egbase) {
 	// Start the animation
 	start_animation(egbase, descr().get_unoccupied_animation());
 
-	owner_->add_seer(*this);
 	if (descr().type() == MapObjectType::WAREHOUSE) {
 		set_seeing(true);
 	}
@@ -498,8 +497,7 @@ bool Building::init(EditorGameBase& egbase) {
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
-	owner_->remove_seer(
-	   *this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
+	set_seeing(false);
 
 	if (defeating_player_) {
 		Player* defeating_player = egbase.get_player(defeating_player_);
@@ -844,10 +842,10 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
-	if (get_workers().empty()) {
-		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
-			set_seeing(true);
-		}
+	// Builders should make partially finished building see, but not finished buildings.
+	// So we prevent builders from seeing here and override this in PartiallyFinishedBuilding.
+	if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
+		set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
@@ -878,10 +876,20 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
+	if (see == seeing_) {
+		return;
+	}
+
+	Player* player = get_owner();
+	const Map& map = player->egbase().map();
+
+	if (see) {
+		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	} else {
+		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	}
+
 	seeing_ = see;
-	get_owner()->update_vision(
-	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
-	   see);
 }
 
 /**

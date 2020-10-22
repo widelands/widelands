@@ -322,6 +322,10 @@ public:
 		return background_theme_;
 	}
 
+	const MapVersion& version() const {
+		return map_version_;
+	}
+
 	using Tags = std::set<std::string>;
 	const Tags& get_tags() const {
 		return tags_;

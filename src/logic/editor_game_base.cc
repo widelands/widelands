@@ -238,7 +238,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
                                                     PlayerNumber const new_owner) {
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& player_field = p->fields_[i];
-		if (SeeUnseeNode::kVisible == player_field.seeing) {
+		if (VisibleState::kVisible == player_field.vision) {
 			player_field.owner = new_owner;
 		}
 	}
@@ -248,7 +248,7 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr)) {
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
-			if (SeeUnseeNode::kVisible == player_field.seeing) {
+			if (VisibleState::kVisible == player_field.vision) {
 				player_field.map_object_descr = descr;
 			}
 		}
@@ -538,8 +538,8 @@ void EditorGameBase::set_road(const FCoords& f,
 	iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 		Player::Field& first_player_field = *p->fields_.get();
 		Player::Field& player_field = (&first_player_field)[i];
-		if (SeeUnseeNode::kVisible == player_field.seeing ||
-		    SeeUnseeNode::kVisible == (&first_player_field)[neighbour_i].seeing) {
+		if (VisibleState::kVisible == player_field.vision ||
+		    VisibleState::kVisible == (&first_player_field)[neighbour_i].vision) {
 			switch (direction) {
 			case WALK_SE:
 				player_field.r_se = roadtype;
