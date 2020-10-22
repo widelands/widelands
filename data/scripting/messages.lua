@@ -125,7 +125,7 @@ end
 --                          field = scroll_to_field, -- see wl.game.Player.message_box()
 --                          scroll_back = true       -- only useful if 'field' was set
 --                         },
---                          200                      -- optional sleeptime
+--                         200                      -- optional sleeptime
 --                        )
 --
 -- In the campaigns of this game the table of **message** is defined in
