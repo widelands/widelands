@@ -275,10 +275,14 @@ void Game::init_newgame(const GameSettings& settings) {
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
-	assert(maploader != nullptr);
-	maploader->preload_map(settings.scenario);
+	std::unique_ptr<MapLoader> maploader;
+	if (!settings.mapfilename.empty()) {
+		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
+		assert(maploader);
+		maploader->preload_map(settings.scenario);
+	}
 
+	// Load world and tribes, if they were not loaded already
 	world();
 	tribes();
 
@@ -308,9 +312,16 @@ void Game::init_newgame(const GameSettings& settings) {
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	maploader->load_map_complete(*this, settings.scenario ?
-	                                       Widelands::MapLoader::LoadType::kScenario :
-	                                       Widelands::MapLoader::LoadType::kGame);
+	if (!settings.mapfilename.empty()) {
+		assert(maploader);
+		maploader->load_map_complete(*this, settings.scenario ?
+		                                       Widelands::MapLoader::LoadType::kScenario :
+		                                       Widelands::MapLoader::LoadType::kGame);
+	} else {
+		// Normally the map loader takes care of this, but if the map was
+		// previously created for us we need to call this manually
+		allocate_player_maps();
+	}
 
 	// Check for win_conditions
 	if (!settings.scenario) {

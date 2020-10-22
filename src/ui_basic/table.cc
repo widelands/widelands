@@ -405,13 +405,65 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 				return true;
 			}
 			break;
+		case SDLK_KP_8:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_UP:
 			move_selection(-1);
 			return true;
 
+		case SDLK_KP_2:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
 		case SDLK_DOWN:
 			move_selection(1);
 			return true;
+
+		case SDLK_KP_3:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEDOWN:
+			move_selection(get_h() / get_lineheight());
+			return true;
+
+		case SDLK_KP_9:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_PAGEUP: {
+			const int32_t sel = get_h() / get_lineheight();
+			move_selection(-1 * sel);
+			return true;
+		}
+
+		case SDLK_KP_7:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_HOME:
+			multiselect(0);
+			scroll_to_item(0);
+			return true;
+
+		case SDLK_KP_1:
+			if (code.mod & KMOD_NUM) {
+				break;
+			}
+			FALLS_THROUGH;
+		case SDLK_END: {
+			const uint32_t sel = entry_records_.size() - 1;
+			multiselect(sel);
+			scroll_to_item(sel);
+			return true;
+		}
 
 		default:
 			break;  // not handled
@@ -469,10 +521,8 @@ bool Table<void*>::handle_mousepress(uint8_t const btn, int32_t, int32_t const y
  *        negative values up.
  */
 void Table<void*>::move_selection(const int32_t offset) {
-	if (!has_selection()) {
-		return;
-	}
-	int32_t new_selection = (is_multiselect_ ? last_multiselect_ : selection_) + offset;
+	int32_t new_selection =
+	   has_selection() ? (is_multiselect_ ? last_multiselect_ : selection_) + offset : 0;
 
 	if (new_selection < 0) {
 		new_selection = 0;
@@ -482,7 +532,7 @@ void Table<void*>::move_selection(const int32_t offset) {
 
 	multiselect(new_selection);
 	// Scroll to newly selected entry
-	scroll_to_item(new_selection + offset);
+	scroll_to_item(new_selection);
 }
 
 /**
