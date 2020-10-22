@@ -125,11 +125,10 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 // MapDetailsBox implementation
 
-MapDetailsBox::MapDetailsBox(Panel* parent,
-                             uint32_t,
-                             uint32_t standard_element_height,
-                             uint32_t padding)
+MapDetailsBox::MapDetailsBox(
+   Panel* parent, bool preconfigured, uint32_t, uint32_t standard_element_height, uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
+     preconfigured_(preconfigured),
      title_(this,
             0,
             0,
@@ -186,8 +185,8 @@ MapDetailsBox::~MapDetailsBox() {
 void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 	const GameSettings& game_settings = settings->settings();
 
-	select_map_.set_visible(settings->can_change_map());
-	select_map_.set_enabled(settings->can_change_map());
+	select_map_.set_visible(settings->can_change_map() && !preconfigured_);
+	select_map_.set_enabled(settings->can_change_map() && !preconfigured_);
 
 	show_map_description_savegame(game_settings);
 	show_map_name(game_settings);
@@ -198,12 +197,10 @@ void MapDetailsBox::show_map_description_savegame(const GameSettings& game_setti
 }
 
 void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {
-	const GameSettings& game_settings = settings->settings();
+	select_map_.set_visible(settings->can_change_map() && !preconfigured_);
+	select_map_.set_enabled(settings->can_change_map() && !preconfigured_);
 
-	select_map_.set_visible(settings->can_change_map());
-	select_map_.set_enabled(settings->can_change_map());
-
-	show_map_name(game_settings);
+	map_name_.set_text(map.get_name());
 	show_map_description(map, settings);
 	suggested_teams_box_.show(map.get_suggested_teams());
 }
@@ -212,7 +209,7 @@ void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 	// Translate the map's name
 	const char* nomap = _("(no map)");
 	i18n::Textdomain td("maps");
-	map_name_.set_text(game_settings.mapname.size() != 0 ? _(game_settings.mapname) : nomap);
+	map_name_.set_text(!game_settings.mapname.empty() ? _(game_settings.mapname) : nomap);
 }
 
 void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvider* settings) {
