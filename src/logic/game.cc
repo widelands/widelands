@@ -213,6 +213,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
 	// Replays can't handle scenarios
 	set_write_replay(false);
+	training_wheels_wanted_ = false;
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
 	if (!maploader) {
@@ -376,7 +377,8 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
-		if (win_condition_displayname_ == "Scenario") {
+		training_wheels_wanted_ = gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (win_condition_displayname_ == "Scenario" && !training_wheels_wanted_) {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
@@ -409,7 +411,8 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
-		if (win_condition_displayname_ == "Scenario") {
+		training_wheels_wanted_ = gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (win_condition_displayname_ == "Scenario" && !training_wheels_wanted_) {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
@@ -487,10 +490,6 @@ bool Game::run(StartGameType const start_game_type,
 	postload();
 
 	InteractivePlayer* ipl = get_ipl();
-	training_wheels_wanted_ =
-	   get_config_bool("training_wheels", true) &&
-	   (start_game_type == StartGameType::kMap ||
-	    (script_to_run.empty() && start_game_type == StartGameType::kSaveGame));
 
 	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
@@ -500,10 +499,12 @@ bool Game::run(StartGameType const start_game_type,
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
+			training_wheels_wanted_ = get_config_bool("training_wheels", true);
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios
 			set_write_replay(false);
+			training_wheels_wanted_ = false;
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),

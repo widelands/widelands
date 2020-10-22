@@ -114,5 +114,5 @@
 return {
    welcome = {},
    objectives = { "welcome" },
-   logs = { "welcome" },
+   logs = { "objectives" },
 }

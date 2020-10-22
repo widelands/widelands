@@ -52,6 +52,9 @@ run(function()
 
    pop_textdomain()
 
+   -- TODO(GunChleoc): This fails when the objective is written and the game saved before completing it, and then the game loaded again.
+   -- We need to add the active training wheel to the savegame data so we won't run it twice.
+
    local o2 = add_campaign_objective(obj_initial_close_objectives_window)
 
    mapview.buttons.objectives:indicate(true)
