@@ -120,35 +120,32 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 			player_field.partially_finished_building.constructionsite.draw(
 			   field.rendertarget_pixel, field.fcoords, scale,
 			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
-		} else if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
-		           // TODO(Nordfriese): `building` can only be nullptr in savegame
-		           // compatibility cases – remove that check after v1.0
-		           player_field.partially_finished_building.dismantlesite.building) {
+		} else {
+			const RGBColor* player_color;
+			float opacity;
 			if (info_to_draw & InfoToDraw::kShowBuildings) {
+				player_color = &field.owner->get_playercolor();
+				opacity = 1.0f;
+			} else {
+				player_color = nullptr;
+				opacity = Widelands::kBuildingSilhouetteOpacity;
+			}
+			if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
+			    // TODO(Nordfriese): `building` can only be nullptr in savegame
+			    // compatibility cases – remove that check after v1.0
+			    player_field.partially_finished_building.dismantlesite.building) {
 				dst->blit_animation(
 				   field.rendertarget_pixel, field.fcoords, scale,
 				   player_field.partially_finished_building.dismantlesite.building
 				      ->get_unoccupied_animation(),
-				   Time(0), &field.owner->get_playercolor(), 1.f,
+				   Time(0), player_color, opacity,
 				   100 -
 				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
 			} else {
-				dst->blit_animation(
-				   field.rendertarget_pixel, field.fcoords, scale,
-				   player_field.partially_finished_building.dismantlesite.building
-				      ->get_unoccupied_animation(),
-				   Time(0), nullptr, Widelands::kBuildingSilhouetteOpacity,
-				   100 -
-				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
+				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+				                    building->get_unoccupied_animation(), Time(0), player_color,
+				                    opacity);
 			}
-		} else if (info_to_draw & InfoToDraw::kShowBuildings) {
-			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-			                    building->get_unoccupied_animation(), Time(0),
-			                    &field.owner->get_playercolor());
-		} else {
-			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-			                    building->get_unoccupied_animation(), Time(0), nullptr,
-			                    Widelands::kBuildingSilhouetteOpacity);
 		}
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
