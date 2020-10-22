@@ -52,6 +52,11 @@ public:
 	 */
 	void mark_as_solved(const std::string& objective, bool run_some_more);
 	/**
+	 * @brief mark_as_unsolved Mark the given training wheel objective as no longer solved. Does not trigger anything else and does not refresh the information about currently running training wheels or training wheels to run.
+	 * @param objective The training wheel objective to be marked as unsolved
+	 */
+	void mark_as_unsolved(const std::string& objective);
+	/**
 	 * @brief run_objectives Trigger all queued training wheel objectives
 	 */
 	void run_objectives();
@@ -60,6 +65,10 @@ public:
 	 * @return Whether any more training wheels want to run
 	 */
 	bool has_objectives() const;
+
+	const std::set<std::string>& solved_objectives() const {
+		return solved_objectives_;
+	}
 
 private:
 	/**

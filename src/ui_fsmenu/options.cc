@@ -39,6 +39,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
+#include "ui_fsmenu/training_wheel_options.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
@@ -240,7 +241,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                             0,
                             0,
                             UI::ButtonStyle::kWuiSecondary,
-                            _("Reset progress")),
+                            _("Reset progress…")),
      os_(opt) {
 
 	// Buttons
@@ -315,8 +316,15 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 	training_wheels_reset_.sigclicked.connect([this]() {
 		training_wheels_reset_.set_enabled(false);
-		Profile training_wheels_profile;
-		training_wheels_profile.write(kTrainingWheelsFile);
+		cancel_.set_enabled(false);
+		apply_.set_enabled(false);
+		ok_.set_enabled(false);
+		TrainingWheelOptions training_wheel_options(this);
+		training_wheel_options.run<UI::Panel::Returncodes>();
+		training_wheels_reset_.set_enabled(true);
+		cancel_.set_enabled(true);
+		apply_.set_enabled(true);
+		ok_.set_enabled(true);
 	});
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });

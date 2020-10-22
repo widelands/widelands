@@ -77,7 +77,6 @@ void TrainingWheels::load_objectives() {
 			}
 		}
 		if (dependencies_met) {
-			log_info("Running training wheel '%s'", it->second.script.c_str());
 			running_objectives_.insert(it->first);
 			scripts_to_run_.insert(it->second.script);
 			it = idle_objectives_.erase(it);
@@ -89,6 +88,7 @@ void TrainingWheels::load_objectives() {
 
 void TrainingWheels::run_objectives() {
 	for (const std::string& runme : scripts_to_run_) {
+		log_info("Running training wheel '%s'", runme.c_str());
 		lua_.run_script(kTrainingWheelsScriptingDir + runme);
 	}
 	scripts_to_run_.clear();
@@ -117,6 +117,13 @@ void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_
 		load_objectives();
 		run_objectives();
 	}
+}
+
+void TrainingWheels::mark_as_unsolved(const std::string& objective) {
+	log_info("Unsolved training wheel '%s'", objective.c_str());
+	Section& section = profile_.pull_section("global");
+	section.set_bool(objective.c_str(), false);
+	write();
 }
 
 void TrainingWheels::write() {

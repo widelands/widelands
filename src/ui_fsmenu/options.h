@@ -35,6 +35,7 @@
 #include "wui/sound_options.h"
 
 class FullscreenMenuOptions;
+class TrainingWheelOptions;
 class Section;
 
 class OptionsCtrl {
