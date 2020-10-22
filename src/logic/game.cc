@@ -378,7 +378,7 @@ void Game::init_savegame(const GameSettings& settings) {
 
 		win_condition_displayname_ = gpdp.get_win_condition();
 		training_wheels_wanted_ = gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
-		if (win_condition_displayname_ == "Scenario" && !training_wheels_wanted_) {
+		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
@@ -412,7 +412,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 
 		win_condition_displayname_ = gpdp.get_win_condition();
 		training_wheels_wanted_ = gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
-		if (win_condition_displayname_ == "Scenario" && !training_wheels_wanted_) {
+		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
 		}
@@ -446,9 +446,10 @@ bool Game::acquire_training_wheel_lock(const std::string& objective) {
 	return false;
 }
 void Game::mark_training_wheel_as_solved(const std::string& objective) {
-	if (training_wheels_ != nullptr) {
-		training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
 	}
+	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
 }
 
 /**
@@ -499,7 +500,7 @@ bool Game::run(StartGameType const start_game_type,
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
-			training_wheels_wanted_ = get_config_bool("training_wheels", true);
+			training_wheels_wanted_ = get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios
@@ -560,12 +561,12 @@ bool Game::run(StartGameType const start_game_type,
 
 	// We don't run the training wheel objectives in scenarios, but we want the objectives available
 	// for marking them as solved if a scenario teaches the same content.
-	if (ipl && !ipl->is_multiplayer()) {
+	if (training_wheels_wanted_) {
 		training_wheels_.reset(new TrainingWheels(lua()));
 		if (!training_wheels_->has_objectives()) {
 			// Nothing to do, so let's free the memory
 			training_wheels_.reset(nullptr);
-		} else if (training_wheels_wanted_) {
+		} else {
 			// Just like with scenarios, replays will desync, so we switch them off.
 			writereplay_ = false;
 		}
