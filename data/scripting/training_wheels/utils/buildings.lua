@@ -64,17 +64,26 @@ function find_buildable_field(center_field, player, size, min_radius, max_radius
       return nil
    end
 
-   local function find_buildable_field_helper(starting_field, player, size, range)
-      for f_idx, field in ipairs(starting_field:region(range)) do
+   local function find_buildable_field_helper(center_field, player, size, range)
+      for f_idx, field in ipairs(center_field:region(range)) do
          if player == field.owner and field:has_caps(size) then
-            local space_for_flags = true
-            for nf_idx, nearby_field in ipairs(field:region(1)) do
-               if not (player == nearby_field.owner and nearby_field:has_caps("flag")) then
-                  space_for_flags = false
+            local sufficient_space = true
+            -- Search around the field's flag position for the space for roads
+            for nf_idx, nearby_field in ipairs(field.brn:region(1)) do
+               if player ~= nearby_field.owner or not nearby_field:has_caps("flag") then
+                  sufficient_space = false
                end
             end
-            if space_for_flags then
-               return field
+            if sufficient_space then
+               -- Ensure the border won't interfere
+               for nf_idx, nearby_field in ipairs(field:region(2)) do
+                  if player ~= nearby_field.owner then
+                     sufficient_space = false
+                  end
+               end
+               if sufficient_space then
+                     return field
+               end
             end
          end
       end
@@ -141,8 +150,8 @@ function wait_for_constructionsite_field(buildingname, search_area)
    return target_field
 end
 
-function find_needed_flag_on_road(starting_field, player, radius)
-   for f_idx, field in ipairs(starting_field:region(radius)) do
+function find_needed_flag_on_road(center_field, player, radius)
+   for f_idx, field in ipairs(center_field:region(radius)) do
       if player == field.owner and field.buildable and field.has_roads == true then
          return field
       end

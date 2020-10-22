@@ -77,7 +77,6 @@ void TrainingWheels::load_objectives() {
 			}
 		}
 		if (dependencies_met) {
-			log_info("Running training wheel '%s'", it->second.script.c_str());
 			running_objectives_.insert(it->first);
 			scripts_to_run_.insert(it->second.script);
 			it = idle_objectives_.erase(it);
@@ -89,6 +88,7 @@ void TrainingWheels::load_objectives() {
 
 void TrainingWheels::run_objectives() {
 	for (const std::string& runme : scripts_to_run_) {
+		log_info("Running training wheel '%s'", runme.c_str());
 		lua_.run_script(kTrainingWheelsScriptingDir + runme);
 	}
 	scripts_to_run_.clear();

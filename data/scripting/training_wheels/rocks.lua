@@ -147,7 +147,7 @@ run(function()
       -- Find a suitable field close to some rocks
       repeat
          target_field = find_immovable_field(conquering_field, "rocks", 2, starting_conquer_range + quarry.workarea_radius / 2)
-         target_field = find_buildable_field(target_field, player, quarry.size, 1, quarry.workarea_radius / 2)
+         target_field = find_buildable_field(target_field, player, quarry.size, 1, quarry.workarea_radius - 1)
          if target_field == nil then
             sleep(1000)
          end
