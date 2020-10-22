@@ -377,7 +377,8 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
-		training_wheels_wanted_ = gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -411,7 +412,8 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
-		training_wheels_wanted_ = gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -500,7 +502,8 @@ bool Game::run(StartGameType const start_game_type,
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
-			training_wheels_wanted_ = get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
+			training_wheels_wanted_ =
+			   get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios

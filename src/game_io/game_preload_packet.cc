@@ -59,7 +59,8 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			background_ = s.get_safe_string("background");
 			// TODO(Nordfriese): Savegame compatibility
 			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
-			training_wheels_wanted_ = (packet_version < 8 ? false : s.get_safe_bool("training_wheels"));
+			training_wheels_wanted_ =
+			   (packet_version < 8 ? false : s.get_safe_bool("training_wheels"));
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
 			number_of_players_ = s.get_safe_int("player_amount");
