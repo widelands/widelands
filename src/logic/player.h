@@ -238,7 +238,7 @@ public:
 
 		~Field() {
 			if (is_constructionsite) {
-				constructionsite.~ConstructionsiteInformation();
+				delete constructionsite;
 			}
 		}
 
@@ -400,7 +400,7 @@ public:
 				uint32_t progress;
 				const BuildingDescr* building;
 			} dismantlesite;
-			ConstructionsiteInformation constructionsite;
+			ConstructionsiteInformation* constructionsite;
 		};
 		bool is_constructionsite;
 		void set_constructionsite(bool);

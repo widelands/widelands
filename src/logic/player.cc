@@ -99,9 +99,9 @@ void Player::Field::set_constructionsite(bool new_value) {
 		return;
 	}
 	if (new_value) {
-		new (&constructionsite) ConstructionsiteInformation();
+		constructionsite = new ConstructionsiteInformation();
 	} else {
-		constructionsite.~ConstructionsiteInformation();
+		delete constructionsite;
 	}
 	is_constructionsite = new_value;
 }
@@ -1352,7 +1352,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
 							field.set_constructionsite(true);
-							field.constructionsite =
+							*field.constructionsite =
 							   const_cast<ConstructionSite*>(cs)->get_info();
 						} else if (upcast(DismantleSite const, ds, building)) {
 							field.set_constructionsite(false);

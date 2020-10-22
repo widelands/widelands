@@ -117,7 +117,7 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
 		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
-			player_field.constructionsite.draw(
+			player_field.constructionsite->draw(
 			   field.rendertarget_pixel, field.fcoords, scale,
 			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
 		} else {
