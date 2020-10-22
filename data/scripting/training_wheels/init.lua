@@ -16,7 +16,7 @@
 -- Their names need to be identical with their base file name (without the ``.lua`` file extension).
 -- For blocking the execution of a Training Wheel until the player has learned a prerequisite
 -- Training Wheel, list them in the Training Wheel's Lua table in the format
--- ``example = { "prerequisite1", "prerequisite1" },``.
+-- ``example = { descname = "Example", dependencies = "prerequisite1", "prerequisite1" } },``.
 -- The Training Wheel will trigger if any of its prerequisites has been completed.
 --
 -- All Training Wheel scripts must include ``scripting/training_wheels/utils/lock.lua`` and call the following two functions:
@@ -108,11 +108,32 @@
 --
 -- .. code-block:: lua
 --
---    example = { "objectives", "logs" },
+--    example = {
+--       descname = "Example",
+--       dependencies = { "objectives", "logs" }
+--    },
 --
 
-return {
-   welcome = {},
-   objectives = { "welcome" },
-   logs = { "welcome" },
+push_textdomain("training_wheels")
+
+result = {
+   welcome = {
+      -- TRANSLATORS: The title of an in-game teaching objective
+      descname = _"Welcome",
+      dependencies = {}
+   },
+   objectives = {
+      -- TRANSLATORS: The title of an in-game teaching objective
+      descname = _"Objectives",
+      dependencies = { "welcome" }
+   },
+   logs = {
+      -- TRANSLATORS: The title of an in-game teaching objective
+      descname = _"Logs & Roads",
+      dependencies = { "welcome" }
+   },
 }
+
+pop_textdomain()
+
+return result

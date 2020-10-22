@@ -43,17 +43,18 @@ TrainingWheels::TrainingWheels(LuaInterface& lua)
 	// Read init file and run
 	Section& section = profile_.pull_section("global");
 	std::unique_ptr<LuaTable> table(lua_.run_script("scripting/training_wheels/init.lua"));
-	std::unique_ptr<LuaTable> dependencies;
+	std::unique_ptr<LuaTable> wheel_table;
 	for (const std::string& key : table->keys<std::string>()) {
-		dependencies = table->get_table(key);
+		wheel_table = table->get_table(key);
 		const bool is_solved = section.get_bool(key.c_str());
 		section.set_bool(key.c_str(), is_solved);
 		if (is_solved) {
-			solved_objectives_.insert(key);
-			dependencies->do_not_warn_about_unaccessed_keys();
+			solved_objectives_.insert(std::make_pair(key, wheel_table->get_string("descname")));
+			wheel_table->do_not_warn_about_unaccessed_keys();
 		} else {
+			std::unique_ptr<LuaTable> dependencies = wheel_table->get_table("dependencies");
 			idle_objectives_.insert(
-			   std::make_pair(key, TrainingWheel(key, dependencies->array_entries<std::string>())));
+			   std::make_pair(key, TrainingWheel(key, wheel_table->get_string("descname"), dependencies->array_entries<std::string>())));
 		}
 	}
 	write();
@@ -77,7 +78,7 @@ void TrainingWheels::load_objectives() {
 			}
 		}
 		if (dependencies_met) {
-			running_objectives_.insert(it->first);
+			running_objectives_.insert(std::make_pair(it->first, it->second.descname));
 			scripts_to_run_.insert(it->second.script);
 			it = idle_objectives_.erase(it);
 		} else {
@@ -108,7 +109,14 @@ bool TrainingWheels::acquire_lock(const std::string& objective) {
 
 void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_more) {
 	log_info("Solved training wheel '%s'", objective.c_str());
-	solved_objectives_.insert(objective);
+	auto it = running_objectives_.find(objective);
+	if (it != running_objectives_.end()) {
+		solved_objectives_.insert(std::make_pair(objective, it->second));
+		running_objectives_.erase(it);
+	} else {
+		solved_objectives_.insert(std::make_pair(objective, objective));
+	}
+
 	Section& section = profile_.pull_section("global");
 	section.set_bool(objective.c_str(), true);
 	write();

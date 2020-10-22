@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "base/log.h" // NOCOM
 #include "logic/training_wheels.h"
 #include "scripting/lua_interface.h"
 #include "ui_basic/box.h"
@@ -31,17 +30,18 @@
 
 constexpr int kPadding = 4;
 
-TrainingWheelOptions::TrainingWheelOptions(Panel* parent) :
-	UI::Window(parent,
-			   "training_wheel_options",
-			   parent->get_x(), parent->get_y(), parent->get_w(), parent->get_h(),
-			   _("Reset Teaching Progress")),
-	lua_(new LuaInterface()),
-	training_wheels_(new Widelands::TrainingWheels(*lua_)) {
+TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
+   : UI::Window(parent,
+                "training_wheel_options",
+                parent->get_x(),
+                parent->get_y(),
+                parent->get_w(),
+                parent->get_h(),
+                _("Reset Teaching Progress")),
+     lua_(new LuaInterface()),
+     training_wheels_(new Widelands::TrainingWheels(*lua_)) {
 	UI::Box* main_box = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 	set_center_panel(main_box);
-
-	const std::set<std::string>& objectives = training_wheels_->solved_objectives();
 
 	main_box->add_space(0);
 
@@ -51,42 +51,44 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent) :
 
 	label_box->add_space(0);
 
-	UI::Textarea* title_label = new UI::Textarea(label_box, objectives.empty() ?
-											   _("There is no teaching progress yet") :
-											   _("Completed teaching objectives"));
+	const std::map<std::string, std::string>& objectives = training_wheels_->solved_objectives();
+	UI::Textarea* title_label =
+	   new UI::Textarea(label_box, objectives.empty() ?
+	                                  /** TRANSLATORS: Title above a list */
+	                                  _("There is no teaching progress yet") :
+	                                  /** TRANSLATORS: Title above a list */
+	                                  _("Completed teaching objectives"));
 	label_box->add(title_label, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	label_box->add_space(0);
 
-	// Add a row for each solved training wheel with a reset button. Box should scroll if there are many.
+	// Add a row for each solved training wheel with a reset button.
+	// Box should scroll if there are many.
 	if (!objectives.empty()) {
 		main_box->add_space(kPadding);
 		title_label->set_style(g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading));
 
-		UI::Box* list_box = new UI::Box(main_box, 0, 0, UI::Box::Vertical, 0, parent->get_h(), kPadding);
+		UI::Box* list_box =
+		   new UI::Box(main_box, 0, 0, UI::Box::Vertical, 0, parent->get_h(), kPadding);
 		list_box->set_scrolling(true);
 		main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
-		for (const std::string& objective : objectives) {
+		for (const auto& objective : objectives) {
 			UI::Box* entry_box = new UI::Box(list_box, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
 			list_box->add(entry_box, UI::Box::Resizing::kFullSize);
 			entry_box->add_space(0);
 
-			// NOCOM give titles to the training wheels
-			UI::Textarea* entry_label = new UI::Textarea(entry_box, objective);
+			UI::Textarea* entry_label = new UI::Textarea(entry_box, objective.second);
 			entry_box->add(entry_label, UI::Box::Resizing::kFullSize);
 			entry_label->set_style(g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelParagraph));
 
 			entry_box->add_inf_space();
 
-			UI::Button* reset_button = new UI::Button(entry_box,
-											"reset_progress",
-											0, 0, 0, 0,
-											UI::ButtonStyle::kWuiSecondary,
-											_("Reset"));
+			UI::Button* reset_button = new UI::Button(
+			   entry_box, "reset_progress", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Reset"));
 			entry_box->add(reset_button);
 			reset_button->sigclicked.connect([this, reset_button, &objective]() {
 				reset_button->set_enabled(false);
-				training_wheels_->mark_as_unsolved(objective);
+				training_wheels_->mark_as_unsolved(objective.first);
 			});
 
 			entry_box->add_space(0);
@@ -95,13 +97,12 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent) :
 
 	main_box->add_space(kPadding);
 
-	UI::Button* ok_button = new UI::Button(main_box, "ok", 0, 0, 0, 0,
-										   UI::ButtonStyle::kWuiPrimary, _("Done"));
+	UI::Button* ok_button =
+	   new UI::Button(main_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("Done"));
 	main_box->add(ok_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
-	ok_button->sigclicked.connect([this]() {
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-	});
+	ok_button->sigclicked.connect(
+	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk); });
 
 	main_box->add_space(0);
 }

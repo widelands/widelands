@@ -30,6 +30,10 @@ class TrainingWheels;
 
 class LuaInterface;
 
+/**
+ * @brief The TrainingWheelOptions class presents buttons to the user to reset the progress for
+ * individual training wheels.
+ */
 class TrainingWheelOptions : public UI::Window {
 public:
 	explicit TrainingWheelOptions(Panel* parent);

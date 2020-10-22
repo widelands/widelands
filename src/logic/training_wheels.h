@@ -66,7 +66,11 @@ public:
 	 */
 	bool has_objectives() const;
 
-	const std::set<std::string>& solved_objectives() const {
+	/**
+	 * @brief solved_objectives A list of all currently solved objectives
+	 * @return Map of <name, descname>
+	 */
+	const std::map<std::string, std::string>& solved_objectives() const {
 		return solved_objectives_;
 	}
 
@@ -85,26 +89,28 @@ private:
 	 */
 	struct TrainingWheel {
 		explicit TrainingWheel(const std::string& key,
+							   const std::string& init_descname,
 		                       const std::vector<std::string>& init_dependencies)
-		   : script(key + ".lua") {
+		   : script(key + ".lua"), descname(init_descname) {
 			for (const std::string& dependency : init_dependencies) {
 				dependencies.insert(dependency);
 			}
 		}
 
 		const std::string script;
+		const std::string descname;
 		std::set<std::string> dependencies;
 	};
 
 	// Objective name and its scripting information
 	std::map<std::string, TrainingWheel> idle_objectives_;
-	// Prevent concurrency issues while loading objectives
-	std::set<std::string> running_objectives_;
-	// Remember solved objectives for dependency check
-	std::set<std::string> solved_objectives_;
+	// Prevent concurrency issues while loading objectives, and remember descname for options. Name, descname
+	std::map<std::string, std::string> running_objectives_;
+	// Remember solved objectives for dependency check and options. Name, descname
+	std::map<std::string, std::string> solved_objectives_;
 	// The scripts that had their dependencies met and are waiting to run
 	std::set<std::string> scripts_to_run_;
-	// Mutex Lock for the currently rinnung objective
+	// Mutex Lock for the currently running objective
 	std::string current_objective_;
 	// For reading/writing progress to disk
 	Profile profile_;
