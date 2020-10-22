@@ -89,7 +89,7 @@ end
 -- RST
 -- .. function:: campaign_message_box({message, [opts]}, [sleeptime])
 --
---    Pause a game and show a message box for player 1. Since this function can 
+--    Pause a game and show a message box for player 1. Since this function can
 --    have several options there is an example below this description.
 --
 --    :arg table message, [opts]: The message consist of the `title`, the `body`
