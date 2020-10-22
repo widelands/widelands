@@ -20,6 +20,7 @@
 #include "ui_fsmenu/main.h"
 
 #include <cstdlib>
+#include <memory>
 
 #include <SDL_timer.h>
 
@@ -30,11 +31,13 @@
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
+#include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
 #include "wlapplication_options.h"
 #include "wui/login_box.h"
+#include "wui/mapdata.h"
 #include "wui/savegameloader.h"
 
 constexpr uint32_t kInitialFadeoutDelay = 2500;
@@ -108,7 +111,17 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                   UI::PanelStyle::kFsMenu,
                   UI::ButtonStyle::kFsMenuMenu),
      replay_(&vbox1_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     editor_(&vbox1_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
+     editor_(&vbox1_,
+             "editor",
+             0,
+             0,
+             butw_,
+             6,
+             buth_,
+             "",
+             UI::DropdownType::kTextualMenu,
+             UI::PanelStyle::kFsMenu,
+             UI::ButtonStyle::kFsMenuMenu),
      addons_(&vbox2_, "addons", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
@@ -145,9 +158,15 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 
 	singleplayer_.selected.connect(
 	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
-	multiplayer_.selected.connect([this]() { end_modal<MenuTarget>(multiplayer_.get_selected()); });
-	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
-	editor_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kEditor); });
+	multiplayer_.selected.connect([this]() {
+		internet_login();
+		end_modal<MenuTarget>(multiplayer_.get_selected());
+	});
+	editor_.selected.connect(
+	   [this]() { end_modal<MenuTarget>(editor_.get_selected()); });
+	replay_.sigclicked.connect([this]() {
+		end_modal<MenuTarget>(MenuTarget::kReplay);
+	});
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
 	   end_modal<MenuTarget>(MenuTarget::kAddOns);
 	}); */
@@ -159,9 +178,9 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	vbox1_.add_inf_space();
 	vbox1_.add(&multiplayer_, UI::Box::Resizing::kFullSize);
 	vbox1_.add_inf_space();
-	vbox1_.add(&replay_, UI::Box::Resizing::kFullSize);
-	vbox1_.add_inf_space();
 	vbox1_.add(&editor_, UI::Box::Resizing::kFullSize);
+	vbox1_.add_inf_space();
+	vbox1_.add(&replay_, UI::Box::Resizing::kFullSize);
 
 	vbox2_.add(&options_, UI::Box::Resizing::kFullSize);
 	vbox2_.add_inf_space();
@@ -190,14 +209,40 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	layout();
 }
 
+using MapEntry = std::pair<MapData, Widelands::MapVersion>;
+static void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
+	Widelands::Map map;
+	for (const std::string& file : g_fs->list_directory(directory)) {
+		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
+		if (ml) {
+			try {
+				map.set_filename(file);
+				ml->preload_map(true);
+				if (map.version().map_version_timestamp > 0) {
+					results.push_back(MapEntry(
+					   MapData(map, file, MapData::MapType::kNormal, MapData::DisplayType::kFilenames),
+					   map.version()));
+				}
+			} catch (...) {
+				// invalid file – silently ignore
+			}
+		} else if (g_fs->is_directory(file)) {
+			find_maps(file, results);
+		}
+	}
+}
+
 void FullscreenMenuMain::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
+	editor_.clear();
 
-	singleplayer_.add(
-	   _("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"), "N");
-	singleplayer_.add(
-	   _("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"), "H");
+	singleplayer_.add(_("New Game"), MenuTarget::kNewGame, nullptr, false,
+	                  _("Begin a new game"), "N");
+	singleplayer_.add(_("New Random Game"), MenuTarget::kRandomGame, nullptr,
+	                  false, _("Create a new random match"), "Z");
+	singleplayer_.add(_("Campaigns"), MenuTarget::kCampaign, nullptr, false,
+	                  _("Play a campaign"), "H");
 	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
 	                  _("Play one of our beginners’ tutorials"), "T");
 	singleplayer_.add(
@@ -206,7 +251,7 @@ void FullscreenMenuMain::set_labels() {
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
 	// every language switch because it contains localized strings.
 	{
-		filename_for_continue_ = "";
+		filename_for_continue_playing_ = "";
 		Widelands::Game game;
 		SinglePlayerLoader loader(game);
 		std::vector<SavegameData> games = loader.load_files(kSaveDir);
@@ -218,33 +263,37 @@ void FullscreenMenuMain::set_labels() {
 			}
 		}
 		if (newest_singleplayer) {
-			filename_for_continue_ = newest_singleplayer->filename;
+			filename_for_continue_playing_ = newest_singleplayer->filename;
 			singleplayer_.add(
 			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
-			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>") %
+			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
 			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
 			       .as_font_tag(
 			          /* strip leading "save/" and trailing ".wgf" */
-			          filename_for_continue_.substr(
-			             kSaveDir.length() + 1, filename_for_continue_.length() - kSaveDir.length() -
-			                                       kSavegameExtension.length() - 1)) %
-			    (boost::format(_("Map: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
-			                                      .as_font_tag(newest_singleplayer->mapname))
+			          filename_for_continue_playing_.substr(
+			             kSaveDir.length() + 1, filename_for_continue_playing_.length() -
+			                                       kSaveDir.length() - kSavegameExtension.length() -
+			                                       1)) %
+			    (boost::format(_("Map: %s")) %
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			        .as_font_tag(newest_singleplayer->mapname))
 			       .str() %
 			    (boost::format(_("Win Condition: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kTooltip)
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(newest_singleplayer->wincondition))
 			       .str() %
-			    (boost::format(_("Players: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
-			                                          .as_font_tag(newest_singleplayer->nrplayers))
+			    (boost::format(_("Players: %s")) %
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			        .as_font_tag(newest_singleplayer->nrplayers))
 			       .str() %
 			    (boost::format(_("Gametime: %s")) %
-			     g_style_manager->font_style(UI::FontStyle::kTooltip)
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 			        .as_font_tag(newest_singleplayer->gametime))
 			       .str() %
 			    /** TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today, 10:30' */
-			    (boost::format(_("Saved: %s")) % g_style_manager->font_style(UI::FontStyle::kTooltip)
-			                                        .as_font_tag(newest_singleplayer->savedatestring))
+			    (boost::format(_("Saved: %s")) %
+			     g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			        .as_font_tag(newest_singleplayer->savedatestring))
 			       .str())
 			      .str(),
 			   "C");
@@ -258,18 +307,69 @@ void FullscreenMenuMain::set_labels() {
 	multiplayer_.add(
 	   _("LAN / Direct IP"), MenuTarget::kLan, nullptr, false, _("Play a private online game"), "P");
 
+	editor_.add(_("New Map"), MenuTarget::kEditorNew, nullptr, false,
+	            _("Create a new empty map"), "K");
+	editor_.add(_("Random Map"), MenuTarget::kEditorRandom, nullptr, false,
+	            _("Create a new random map"), "Y");
+	editor_.add(_("Load Map"), MenuTarget::kEditorLoad, nullptr, false,
+	            _("Edit an existing map"), "B");
+
+	{
+		filename_for_continue_editing_ = "";
+		std::vector<MapEntry> v;
+		find_maps("maps/My_Maps", v);
+		MapEntry* last_edited = nullptr;
+		for (MapEntry& m : v) {
+			if (last_edited == nullptr ||
+			    m.second.map_version_timestamp > last_edited->second.map_version_timestamp) {
+				last_edited = &m;
+			}
+		}
+		if (last_edited) {
+			filename_for_continue_editing_ = last_edited->first.filename;
+			editor_.add(_("Continue Editing"), MenuTarget::kEditorContinue,
+			            nullptr, false,
+			            (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
+			             g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+			                .as_font_tag(
+			                   /* strip leading "maps/My_Maps/" and trailing ".wgf" */
+			                   filename_for_continue_editing_.substr(
+			                      13, filename_for_continue_editing_.length() - 17)) %
+			             (boost::format(_("Name: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(last_edited->first.localized_name))
+			                .str() %
+			             (boost::format(_("Size: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag((boost::format(_("%1$u×%2$u")) % last_edited->first.width %
+			                               last_edited->first.height)
+			                                 .str()))
+			                .str() %
+			             (boost::format(_("Players: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(std::to_string(last_edited->first.nrplayers)))
+			                .str() %
+			             (boost::format(_("Description: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(last_edited->first.description))
+			                .str())
+			               .str(),
+			            "W");
+		}
+	}
+
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));
+	editor_.set_label(_("Editor…"));
 	singleplayer_.set_tooltip(
 	   as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S"));
 	multiplayer_.set_tooltip(
 	   as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M"));
+	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
 
 	replay_.set_title(_("Watch Replay"));
 	replay_.set_tooltip(as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R"));
 
-	editor_.set_title(_("Editor"));
-	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
 	   as_tooltip_text_with_hotkey("This feature is still under development", "A"));
@@ -329,13 +429,23 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			end_modal<MenuTarget>(MenuTarget::kTutorial);
 			return true;
 		case SDLK_c:
-			if (!filename_for_continue_.empty()) {
+			if (!filename_for_continue_playing_.empty()) {
 				end_modal<MenuTarget>(MenuTarget::kContinueLastsave);
+				return true;
+			}
+			break;
+		case SDLK_w:
+			if (!filename_for_continue_editing_.empty()) {
+				end_modal<MenuTarget>(
+				   MenuTarget::kEditorContinue);
 				return true;
 			}
 			break;
 		case SDLK_n:
 			end_modal<MenuTarget>(MenuTarget::kNewGame);
+			return true;
+		case SDLK_z:
+			end_modal<MenuTarget>(MenuTarget::kRandomGame);
 			return true;
 		case SDLK_h:
 			end_modal<MenuTarget>(MenuTarget::kCampaign);
@@ -352,9 +462,6 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_p:
 			end_modal<MenuTarget>(MenuTarget::kLan);
 			return true;
-		case SDLK_e:
-			end_modal<MenuTarget>(MenuTarget::kEditor);
-			return true;
 		/* case SDLK_a:
 			end_modal<MenuTarget>(MenuTarget::kAddOns);
 			return true; */
@@ -367,11 +474,23 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_F1:
 			end_modal<MenuTarget>(MenuTarget::kAbout);
 			return true;
+		case SDLK_k:
+			end_modal<MenuTarget>(MenuTarget::kEditorNew);
+			return true;
+		case SDLK_y:
+			end_modal<MenuTarget>(MenuTarget::kEditorRandom);
+			return true;
+		case SDLK_b:
+			end_modal<MenuTarget>(MenuTarget::kEditorLoad);
+			return true;
 		case SDLK_s:
 			singleplayer_.toggle();
 			return true;
 		case SDLK_m:
 			multiplayer_.toggle();
+			return true;
+		case SDLK_e:
+			editor_.toggle();
 			return true;
 		default:
 			break;

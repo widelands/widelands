@@ -36,8 +36,11 @@ class FullscreenMenuMain : public UI::Panel {
 public:
 	explicit FullscreenMenuMain(bool first_ever_init);
 
-	const std::string& get_filename_for_continue() const {
-		return filename_for_continue_;
+	const std::string& get_filename_for_continue_playing() const {
+		return filename_for_continue_playing_;
+	}
+	const std::string& get_filename_for_continue_editing() const {
+		return filename_for_continue_editing_;
 	}
 
 	// Internet login stuff
@@ -78,7 +81,7 @@ private:
 	UI::Dropdown<MenuTarget> singleplayer_;
 	UI::Dropdown<MenuTarget> multiplayer_;
 	UI::Button replay_;
-	UI::Button editor_;
+	UI::Dropdown<MenuTarget> editor_;
 	UI::Button addons_;
 	UI::Button options_;
 	UI::Button about_;
@@ -86,7 +89,7 @@ private:
 	UI::Textarea version_;
 	UI::Textarea copyright_;
 
-	std::string filename_for_continue_;
+	std::string filename_for_continue_playing_, filename_for_continue_editing_;
 
 	const Image& splashscreen_;
 	const Image& title_image_;

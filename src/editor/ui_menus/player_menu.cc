@@ -39,8 +39,6 @@ constexpr int kMargin = 4;
 constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 }  // namespace
 
-// TODO(Nordfriese): Now that we support maps with any number of
-// players in the launch game UI, let's remove this warning?
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)

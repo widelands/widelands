@@ -28,14 +28,24 @@
 #include "map_io/map_loader.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
+FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, Widelands::Game* preconfigured,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl)
-   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
+   : FullscreenMenuLaunchGame(fsmm, settings, ctrl, preconfigured),
+     preconfigured_(preconfigured),
      player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
 
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
-	ok_.set_enabled(settings_->can_launch());
+	ok_.set_enabled(settings_->can_launch() || preconfigured_);
+
+	if (preconfigured) {
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+		update_win_conditions();
+		update_peaceful_mode();
+		update_custom_starting_positions();
+		update();
+		layout();
+	}
 }
 
 /**
@@ -43,7 +53,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
  * showing the actual setup menu.
  */
 void FullscreenMenuLaunchSPG::start() {
-	if (!clicked_select_map()) {
+	if (!preconfigured_ && !clicked_select_map()) {
 		end_modal<MenuTarget>(MenuTarget::kBack);
 	}
 }
@@ -53,7 +63,7 @@ void FullscreenMenuLaunchSPG::start() {
  * Returns whether a map has been selected.
  */
 bool FullscreenMenuLaunchSPG::clicked_select_map() {
-	if (!settings_->can_change_map()) {
+	if (preconfigured_ || !settings_->can_change_map()) {
 		return false;
 	}
 
@@ -78,9 +88,7 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 
 	update_win_conditions();
 	update_peaceful_mode();
-
 	update_custom_starting_positions();
-
 	update();
 
 	// force layout so all boxes and textareas are forced to update
@@ -89,21 +97,24 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 }
 
 void FullscreenMenuLaunchSPG::update() {
-	Widelands::Map map;  //  MapLoader needs a place to put its preload data
-	std::unique_ptr<Widelands::MapLoader> map_loader(
-	   map.get_correct_loader(settings_->settings().mapfilename));
-	map.set_filename(settings_->settings().mapfilename);
-	{
-		i18n::Textdomain td("maps");
-		map_loader->preload_map(true);
-	}
-
-	map_details.update(settings_, map);
-	ok_.set_enabled(settings_->can_launch());
-
 	peaceful_.set_state(settings_->is_peaceful_mode());
+	if (preconfigured_) {
+		map_details.update(settings_, *preconfigured_->mutable_map());
+		ok_.set_enabled(true);
+	} else {
+		Widelands::Map map;  //  MapLoader needs a place to put its preload data
+		std::unique_ptr<Widelands::MapLoader> map_loader(
+		   map.get_correct_loader(settings_->settings().mapfilename));
+		map.set_filename(settings_->settings().mapfilename);
+		{
+			i18n::Textdomain td("maps");
+			map_loader->preload_map(true);
+		}
 
-	enforce_player_names_and_tribes(map);
+		map_details.update(settings_, map);
+		ok_.set_enabled(settings_->can_launch());
+		enforce_player_names_and_tribes(map);
+	}
 }
 
 void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& map) {
@@ -143,7 +154,7 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
 
 void FullscreenMenuLaunchSPG::clicked_ok() {
 	const std::string filename = settings_->settings().mapfilename;
-	if (!g_fs->file_exists(filename)) {
+	if (!preconfigured_ && !g_fs->file_exists(filename)) {
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
 		                  "found at the given path.\n"
@@ -154,7 +165,7 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 		                  "finished!?!"),
 		                filename.c_str());
 	}
-	if (settings_->can_launch()) {
+	if (settings_->can_launch() || preconfigured_) {
 		if (settings_->settings().scenario) {
 			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
 		} else {

@@ -46,6 +46,7 @@
 #include "build_info.h"
 #include "config.h"
 #include "editor/editorinteractive.h"
+#include "editor/ui_menus/main_menu_random_map.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -463,7 +464,12 @@ WLApplication::~WLApplication() {
 void WLApplication::run() {
 	if (game_type_ == GameType::kEditor) {
 		g_sh->change_music("ingame");
-		EditorInteractive::run_editor(filename_, script_to_run_);
+		if (filename_.empty()) {
+			EditorInteractive::run_editor(EditorInteractive::Init::kDefault);
+		} else {
+			EditorInteractive::run_editor(
+			   EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
+		}
 	} else if (game_type_ == GameType::kReplay) {
 		replay(nullptr);
 	} else if (game_type_ == GameType::kLoadGame) {
@@ -1186,11 +1192,16 @@ void WLApplication::mainmenu() {
 			case MenuTarget::kTutorial:
 				need_to_reset = mainmenu_tutorial(*mm);
 				break;
-			case MenuTarget::kNewGame:
-				need_to_reset = new_game(*mm);
+			case MenuTarget::kNewGame: {
+				need_to_reset = true;
+				Widelands::Game game;
+				SinglePlayerGameSettingsProvider sp;
+				new_game(*mm, game, sp, false);
 				break;
+			}
 			case MenuTarget::kLoadGame:
-				need_to_reset = load_game(*mm);
+				need_to_reset = true;
+				load_game(*mm);
 				break;
 			case MenuTarget::kCampaign:
 				need_to_reset = campaign_game(*mm);
@@ -1222,15 +1233,34 @@ void WLApplication::mainmenu() {
 				break;
 			}
 			case MenuTarget::kContinueLastsave: {
-				const std::string& file = mm->get_filename_for_continue();
+				const std::string& file = mm->get_filename_for_continue_playing();
 				if (!file.empty()) {
 					need_to_reset = load_game(*mm, file);
 				}
 				break;
 			}
-			case MenuTarget::kEditor:
+			case MenuTarget::kEditorNew:
 				need_to_reset = true;
-				EditorInteractive::run_editor(filename_, script_to_run_);
+				EditorInteractive::run_editor(EditorInteractive::Init::kNew);
+				break;
+			case MenuTarget::kEditorRandom:
+				need_to_reset = true;
+				EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
+				break;
+			case MenuTarget::kEditorLoad:
+				need_to_reset = true;
+				EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
+				break;
+			case MenuTarget::kEditorContinue: {
+				const std::string& file = mm->get_filename_for_continue_editing();
+				if (!file.empty()) {
+					need_to_reset = true;
+					EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, file);
+				}
+				break;
+			}
+			case MenuTarget::kRandomGame:
+				need_to_reset = new_random_game(*mm);
 				break;
 			case MenuTarget::kExit:
 			default:
@@ -1359,6 +1389,53 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 	g_sh->change_music("menu", 1000);
 }
 
+bool WLApplication::new_random_game(FullscreenMenuMain& fsmm) {
+	Widelands::Game game;
+	SinglePlayerGameSettingsProvider sp;
+	UI::UniqueWindow::Registry r;
+
+	game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
+	game.world();
+	game.tribes();
+	EditorInteractive::load_world_units(nullptr, game);
+
+	MainMenuNewRandomMap m(fsmm, UI::WindowStyle::kFsMenu, r, 64, 64);
+	bool need_new_loader = false;
+	for (;;) {
+		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+			// user pressed Cancel
+			return false;
+		}
+		if (need_new_loader) {
+			game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
+			need_new_loader = false;
+		}
+		if (m.do_generate_map(game, nullptr, &sp)) {
+			game.remove_loader_ui();
+			bool canceled = false;
+			const bool result = new_game(fsmm, game, sp, true, &canceled);
+			if (result || !canceled) {
+				return true;
+			}
+			// User pressed Back – show the random map dialog again
+			need_new_loader = true;
+		} else {
+			// no starting positions found
+			UI::WLMessageBox mbox(
+			   &fsmm, UI::WindowStyle::kFsMenu, _("Map Generation Error"),
+			   _("The random map generator was unable to generate a suitable map. "
+			     "This happens occasionally because the generator is still in beta stage. "
+			     "Please try again with slightly different settings."),
+			   UI::WLMessageBox::MBoxType::kOkCancel);
+			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return false;
+			}
+		}
+	}
+
+	NEVER_HERE();
+}
+
 /**
  * Handle the "New game" menu option: Configure a single player game and
  * run it.
@@ -1366,16 +1443,21 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
  * \return @c true if a game was played, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::new_game(FullscreenMenuMain& fsmm) {
-	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLaunchSPG lgm(fsmm, &sp);
-	const MenuTarget code = lgm.run<MenuTarget>();
-
+bool WLApplication::new_game(FullscreenMenuMain& fsmm, Widelands::Game& game,
+                             SinglePlayerGameSettingsProvider& sp,
+                             const bool preconfigured,
+                             bool* canceled) {
+	MenuTarget code = MenuTarget::kNormalGame;
+	FullscreenMenuLaunchSPG lgm(fsmm, preconfigured ? &game : nullptr, &sp);
+	code = lgm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
+		if (canceled) {
+			*canceled = true;
+		}
 		return false;
 	}
-
-	Widelands::Game game;
+	const std::string map_theme = lgm.settings().settings().map_theme;
+	const std::string map_bg = lgm.settings().settings().map_background;
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 
@@ -1399,8 +1481,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm) {
 			if (sp.has_players_tribe()) {
 				tipstexts.push_back(sp.get_players_tribe());
 			}
-			game.create_loader_ui(tipstexts, false, lgm.settings().settings().map_theme,
-			                      lgm.settings().settings().map_background);
+			game.create_loader_ui(tipstexts, false, map_theme, map_bg);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 

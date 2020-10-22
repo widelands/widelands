@@ -192,7 +192,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	display_->set_min_free_vertical_space(400);
 	main_box_->add(display_, UI::Box::Resizing::kFullSize);
 
-	slider_ = new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
+	slider_ = new WuiPlotAreaSlider(main_box_, *plot_production_, 0, 0, kPlotWidth, 45);
 	slider_->changedto.connect([this](const int32_t timescale) { set_time(timescale); });
 	main_box_->add(slider_, UI::Box::Resizing::kFullSize);
 }
