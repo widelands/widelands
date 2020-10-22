@@ -96,26 +96,27 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = kBuildingSilhouetteOpacity;
 	}
 
+	uint32_t animation_id;
+	Time time = Time();
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-		                    animations[animation_index].first, anim_time - Duration(kFrameLength),
-		                    player_color_to_draw, opacity);
+		animation_id = animations[animation_index].first;
+		time = anim_time - Duration(kFrameLength);
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
 		// series
-		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-		                    animations[animation_index - 1].first,
-		                    Time(kFrameLength * (animations[animation_index - 1].second - 1)),
-		                    player_color_to_draw, opacity);
+		animation_id = animations[animation_index - 1].first;
+		time = Time(kFrameLength * (animations[animation_index - 1].second - 1));
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
-		const uint32_t unocc = was->get_unoccupied_animation();
-		dst->blit_animation(
-		   point_on_dst, Widelands::Coords::null(), scale, unocc,
-		   Time(kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1)),
-		   player_color_to_draw, opacity);
+		animation_id = was->get_unoccupied_animation();
+		time =
+		   Time(kFrameLength * (g_animation_manager->get_animation(animation_id).nr_frames() - 1));
+	}
+	if (time.is_valid()) {
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, animation_id, time,
+	                    player_color_to_draw, opacity);
 	}
 
 	// Now blit a segment of the current construction phase from the bottom.
