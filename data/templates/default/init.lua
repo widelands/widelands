@@ -45,7 +45,6 @@ local default_button_fonts = {
    enabled = default_ui_font,
    enabled_fsmenu_alternative = {
       color = {250, 200, 50},
-      -- color = {240, 220, 150},  -- NOCOM alternative colour
       face = fs_font_face,
       size = fs_font_size,
       bold = true,

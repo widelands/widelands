@@ -646,6 +646,10 @@ void FullscreenMenuMain::layout() {
 	// Tell child windows to update their size if necessary
 	for (UI::Panel* p = get_first_child(); p; p = p->get_next_sibling()) {
 		if (upcast(UI::Window, w, p)) {
+			if (w->window_layout_id() == UI::Window::WindowLayoutID::kNone) {
+				continue;
+			}
+
 			const bool minimal = w->is_minimal();
 			if (minimal) {
 				// make sure the new size is set even if the window is minimal…
