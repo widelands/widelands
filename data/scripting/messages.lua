@@ -87,41 +87,48 @@ function message_box(player, title, body, parameters)
 end
 
 -- RST
--- .. function:: campaign_message_box({message, [sleeptime, parameters]})
+-- .. function:: campaign_message_box({message, [opts]}, [sleeptime])
 --
---    Sets the width and height of the message box and calls
---    :meth:`message_box` for player 1. This function expects a table, so surround
---    all values in a pair of curly braces.
+--    Pause a game and show a message box for player 1. Since this function can 
+--    have several options there is an example below this description.
 --
---    :arg message: the message consist of the `title` and the `body`. Note that the `body`
---                  must be formatted using the :ref:`richtext functions <richtext.lua>`.
---    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
+--    :arg table message, [opts]: The message consist of the `title`, the `body`
+--           and optional parameters. Note that the `body` must be formatted
+--           using the :ref:`richtext functions <richtext.lua>`.
 --
---    Besides the normal message parameters (see :meth:`wl.game.Player.message_box`) the following ones can be used:
+--           **[opts]** can be a separated list of key value pairs defined by
+--           :meth:`wl.game.Player.message_box` and the following ones:
 --
---    :arg position: A string that indicates at which border of the screen the message box shall appear.
---                   Can be "top", "bottom", "right", "left" or a combination (e.g. "topright").
---                   Overrides posx and posy. Default: Center. If only one direction is indicated,
---                   the other one stays centered.
---    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new
---                      location stays on the screen when the message box is closed. Default: False.
---    :arg show_instantly: If true, the message box is shown immediately. If false, this function will
---                    wait until the player leaves the roadbuilding mode. Use this with care because it
---                    can be very interruptive. Default: false.
+--                  **position** - A string that indicates at which border of the screen the message box shall appear.
+--                  Can be "top", "bottom", "right", "left" or a combination (e.g. "topright").
+--                  Overrides posx and posy. Default: Center. If only one direction is indicated,
+--                  the other one stays centered.
+--
+--                  **scroll_back** - If true, the view scrolls/jumps back to where it came from. If false, the new
+--                  location stays on the screen when the message box is closed. Default: False.
+--
+--                  **show_instantly** - If true, the message box is shown immediately. If false, this function will
+--                  wait until the player leaves the roadbuilding mode. Be aware that this can be very interruptive.
+--                  Default: :type false:.
+--
+--    :arg int sleeptime: ms spent sleeping after the message has been dismissed by the player
 --
 --    Example:
 -- .. code-block:: lua
 --
---    campaign_message_box({title = "The title",    -- part of message
---                          body = p("The body"),   -- part of message
---                          200,                    -- optional sleeptime
---                          w = 200,                -- width (game.Player.message_box())
---                          h = 150,                -- height (game.Player.message_box())
+--    local scroll_to_field = map:get_field(47, 10)
+--    campaign_message_box({title = "The title",     -- title of the window
+--                          body = p("The body"),    -- text inside the window
+--                          w = 200,                 -- width (wl.game.Player.message_box())
+--                          h = 150,                 -- height (wl.game.Player.message_box())
 --                          position = "topleft",
---                          scroll_back = true
---                         })
+--                          field = scroll_to_field, -- see wl.game.Player.message_box()
+--                          scroll_back = true       -- only useful if 'field' was set
+--                         },
+--                          200                      -- optional sleeptime
+--                        )
 --
--- In the campaigns of this game the table of a campaign_message_box is defined in
+-- In the campaigns of this game the table of **message** is defined in
 -- a separate file called `texts.lua`.
 --
 
