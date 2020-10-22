@@ -1030,12 +1030,13 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
 	auto load_category = [eia, descriptions](const LuaTable& t, const std::string& key,
-	                                          Widelands::MapObjectType type) {
+	                                         Widelands::MapObjectType type) {
 		for (const auto& category_table :
 		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
 			// Even if we do not have an EditorInteractive, we still need to create the
 			// Category because it will load all the map objects we are interested in
-			std::unique_ptr<EditorCategory> c(new EditorCategory(*category_table, type, *descriptions));
+			std::unique_ptr<EditorCategory> c(
+			   new EditorCategory(*category_table, type, *descriptions));
 			if (eia) {
 				eia->editor_categories_[type].push_back(std::move(c));
 			}

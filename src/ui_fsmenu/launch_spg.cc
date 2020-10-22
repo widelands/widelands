@@ -30,11 +30,11 @@
 
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
                                                  Widelands::EditorGameBase& egbase,
-												 bool preconfigured,
+                                                 bool preconfigured,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
      player_setup(&individual_content_box, settings, standard_element_height_, padding_),
-	 preconfigured_(preconfigured),
+     preconfigured_(preconfigured),
      egbase_(egbase) {
 
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
