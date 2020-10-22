@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_REQUEST_H
 #define WL_ECONOMY_REQUEST_H
 
+#include "base/times.h"
 #include "economy/trackptr.h"
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -86,8 +87,8 @@ public:
 	Economy* get_economy() const {
 		return economy_;
 	}
-	int32_t get_required_time() const;
-	int32_t get_last_request_time() const {
+	Time get_required_time() const;
+	const Time& get_last_request_time() const {
 		return last_request_time_;
 	}
 	int32_t get_priority(int32_t cost) const;
@@ -101,10 +102,10 @@ public:
 	void set_economy(Economy*);
 	void set_count(Quantity);
 	void set_exact_match(bool match);
-	void set_required_time(int32_t time);
-	void set_required_interval(int32_t interval);
+	void set_required_time(const Time& time);
+	void set_required_interval(const Duration& interval);
 
-	void set_last_request_time(int32_t const time) {
+	void set_last_request_time(const Time& time) {
 		last_request_time_ = time;
 	}
 
@@ -128,7 +129,7 @@ public:
 	}
 
 private:
-	int32_t get_base_required_time(const EditorGameBase&, uint32_t nr) const;
+	Time get_base_required_time(const EditorGameBase&, uint32_t nr) const;
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer&);
 
@@ -154,9 +155,9 @@ private:
 	CallbackFn callbackfn_;  //  called on request success
 
 	//  when do we need the first ware (can be in the past)
-	int32_t required_time_;
-	int32_t required_interval_;  //  time between wares
-	int32_t last_request_time_;
+	Time required_time_;
+	Duration required_interval_;  //  time between wares
+	Time last_request_time_;
 
 	TransferList transfers_;  //  maximum size is count_
 

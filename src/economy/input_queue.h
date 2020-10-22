@@ -167,7 +167,7 @@ public:
 	 * This interval is merely a hint for the Supply/Request balancing code.
 	 * @param i The interval in ms.
 	 */
-	void set_consume_interval(uint32_t i);
+	void set_consume_interval(const Duration&);
 
 	/**
 	 * Returns the player owning the building containing this queue.
@@ -270,7 +270,7 @@ protected:
 	const WareWorker type_;
 
 	/// Time in ms between consumption at full speed.
-	uint32_t consume_interval_;
+	Duration consume_interval_;
 
 	/// The currently pending request.
 	std::unique_ptr<Request> request_;

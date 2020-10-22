@@ -289,7 +289,7 @@ public:
 	int32_t get_training_attribute(TrainingAttribute attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
-	void start_animation(EditorGameBase&, const std::string& animname, uint32_t time);
+	void start_animation(EditorGameBase&, const std::string& animname, const Duration& time);
 
 	/// Heal quantity of health points instantly
 	void heal(unsigned);
@@ -358,8 +358,8 @@ private:
 	/// the new states. I thought that it is cleaner to have this variable
 	/// separate.
 	CombatWalkingDir combat_walking_;
-	uint32_t combat_walkstart_;
-	uint32_t combat_walkend_;
+	Time combat_walkstart_;
+	Time combat_walkend_;
 
 	/**
 	 * If the soldier is involved in a challenge, it is assigned a battle

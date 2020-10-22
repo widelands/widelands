@@ -31,7 +31,7 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define REFRESH_TIME 5000
+constexpr Duration kRefreshInterval = Duration(5000);
 
 // Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
@@ -171,7 +171,7 @@ Update the map_view_ if we're tracking something.
 void WatchWindow::think() {
 	UI::Window::think();
 
-	if ((game().get_gametime() - last_visit_) > REFRESH_TIME) {
+	if ((game().get_gametime() - last_visit_) > kRefreshInterval) {
 		last_visit_ = game().get_gametime();
 		next_view();
 		return;
@@ -184,8 +184,7 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && Widelands::SeeUnseeNode::kUnexplored ==
-		              ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
+		if (ipl && !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {

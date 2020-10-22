@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2020 by the Widelands Development Team
+ * Copyright (C) 2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,19 +13,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#ifndef WL_LOGIC_SEE_UNSEE_NODE_H
-#define WL_LOGIC_SEE_UNSEE_NODE_H
+#include "base/times.h"
 
-namespace Widelands {
-// Do not change the order! It is stored in savegames.
-enum class SeeUnseeNode {
-	kUnexplored = 0,      // Never seen yet
-	kPreviouslySeen = 1,  // Previously seen
-	kVisible = 2          // Currently visible
-};
-}  // namespace Widelands
-#endif  // end of include guard: WL_LOGIC_SEE_UNSEE_NODE_H
+#include "io/fileread.h"
+#include "io/filewrite.h"
+
+Duration::Duration(FileRead& fr) : value_(fr.unsigned_32()) {
+}
+void Duration::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}
+
+Time::Time(FileRead& fr) : value_(fr.unsigned_32()) {
+}
+void Time::save(FileWrite& fw) const {
+	fw.unsigned_32(value_);
+}

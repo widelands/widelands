@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
+CmdCallEconomyBalance::CmdCallEconomyBalance(const Time& starttime,
                                              Economy* const economy,
                                              uint32_t const timerid)
    : GameLogicCommand(starttime) {

@@ -275,10 +275,14 @@ void Game::init_newgame(const GameSettings& settings) {
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
-	assert(maploader != nullptr);
-	maploader->preload_map(settings.scenario);
+	std::unique_ptr<MapLoader> maploader;
+	if (!settings.mapfilename.empty()) {
+		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
+		assert(maploader);
+		maploader->preload_map(settings.scenario);
+	}
 
+	// Load world and tribes, if they were not loaded already
 	world();
 	tribes();
 
@@ -308,9 +312,16 @@ void Game::init_newgame(const GameSettings& settings) {
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	maploader->load_map_complete(*this, settings.scenario ?
-	                                       Widelands::MapLoader::LoadType::kScenario :
-	                                       Widelands::MapLoader::LoadType::kGame);
+	if (!settings.mapfilename.empty()) {
+		assert(maploader);
+		maploader->load_map_complete(*this, settings.scenario ?
+		                                       Widelands::MapLoader::LoadType::kScenario :
+		                                       Widelands::MapLoader::LoadType::kGame);
+	} else {
+		// Normally the map loader takes care of this, but if the map was
+		// previously created for us we need to call this manually
+		allocate_player_maps();
+	}
 
 	// Check for win_conditions
 	if (!settings.scenario) {
@@ -341,7 +352,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			cr->resume();
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + Duration(100), std::move(cr)));
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -519,12 +530,12 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Queue first statistics calculation
-		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
-		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
+		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
 	}
 
 	if (writereplay_ || writesyncstream_) {
@@ -591,7 +602,7 @@ void Game::think() {
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(ctrl_->get_frametime(), get_gametime_pointer());
+		cmdqueue().run_queue(Duration(ctrl_->get_frametime()), get_gametime_pointer());
 
 		// check if autosave is needed
 		savehandler_.think(*this);

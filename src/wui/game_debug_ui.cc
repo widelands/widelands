@@ -207,19 +207,16 @@ void FieldDebugWindow::think() {
 		str += (boost::format("Player %u:\n") % static_cast<unsigned int>(plnum)).str();
 		str += (boost::format("  military influence: %u\n") % player_field.military_influence).str();
 
-		const Widelands::SeeUnseeNode vision = player_field.seeing;
-		str += (boost::format("  vision: %s\n") %
-		        (vision == Widelands::SeeUnseeNode::kVisible ?
-		            "revealed" :
-		            vision == Widelands::SeeUnseeNode::kPreviouslySeen ? "unseen" : "unexplored"))
-		          .str();
+		Widelands::Vision const vision = player_field.vision;
+		str += (boost::format("  vision: %u\n") % vision).str();
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
-			if (time_last_surveyed != Widelands::never()) {
+			if (time_last_surveyed.is_valid()) {
 				str += (boost::format("  D triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.d))
+				        time_last_surveyed.get() %
+				        static_cast<unsigned int>(player_field.resource_amounts.d))
 				          .str();
 
 			} else {
@@ -227,23 +224,23 @@ void FieldDebugWindow::think() {
 			}
 		}
 		{
-			Widelands::Time const time_last_surveyed =
+			Time const time_last_surveyed =
 			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
-			if (time_last_surveyed != Widelands::never()) {
+			if (time_last_surveyed.is_valid()) {
 				str += (boost::format("  R triangle last surveyed at %u: amount %u\n") %
-				        time_last_surveyed % static_cast<unsigned int>(player_field.resource_amounts.r))
+				        time_last_surveyed.get() %
+				        static_cast<unsigned int>(player_field.resource_amounts.r))
 				          .str();
 
 			} else {
 				str += "  R triangle never surveyed\n";
 			}
 		}
-		switch (vision) {
-		case Widelands::SeeUnseeNode::kUnexplored:
+
+		if (!vision.is_explored()) {
 			str += "  never seen\n";
-			break;
-		case Widelands::SeeUnseeNode::kPreviouslySeen: {
+		} else if (!vision.is_visible()) {
 			std::string animation_name = "(no animation)";
 			if (player_field.map_object_descr) {
 				animation_name = "(seen an animation)";
@@ -252,14 +249,16 @@ void FieldDebugWindow::think() {
 			                      "    owner: %u\n"
 			                      "    immovable animation:\n%s\n"
 			                      "      ") %
-			        player_field.time_node_last_unseen %
+			        player_field.time_node_last_unseen.get() %
 			        static_cast<unsigned int>(player_field.owner) % animation_name.c_str())
 			          .str();
-			break;
-		}
-		default:
-			str += "  visible\n";
-			break;
+		} else if (!vision.is_seen_by_us()) {
+			str += "  seen only by teammate(s)\n";
+		} else {
+			if (vision.is_revealed()) {
+				str += "  permanently revealed\n";
+			}
+			str += (boost::format("  seen %u times\n") % vision.seers()).str();
 		}
 	}
 	{

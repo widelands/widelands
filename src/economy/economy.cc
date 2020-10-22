@@ -77,7 +77,7 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 			tq.permanent = tribe.get_worker_descr(i)->default_target_quantity();
 			break;
 		}
-		tq.last_modified = 0;
+		tq.last_modified = Time(0);
 		target_quantities_[i] = tq;
 	}
 
@@ -592,7 +592,7 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
  * Make sure the request timer is running.
  * We can skip this for flagless economies (expedition ships don't need economy balancing...).
  */
-void Economy::start_request_timer(int32_t const delta) {
+void Economy::start_request_timer(const Duration& delta) {
 	if (!flags_.empty()) {
 		if (upcast(Game, game, &owner_.egbase())) {
 			game->cmdqueue().enqueue(
@@ -746,7 +746,8 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		if (!supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
-			int32_t const idletime = game.get_gametime() + 15000 + 2 * cost - req.get_required_time();
+			const int32_t idletime =
+			   game.get_gametime().get() + 15000 + 2 * cost - req.get_required_time().get();
 			// If the building wouldn't have to idle, we wait with the request
 			if (idletime < -200) {
 				if (supply_pairs->nexttimer < 0 || supply_pairs->nexttimer > -idletime) {
@@ -811,7 +812,7 @@ void Economy::balance_requestsupply(Game& game) {
 	}
 
 	if (rsps.nexttimer > 0) {  //  restart the timer, if necessary
-		start_request_timer(rsps.nexttimer);
+		start_request_timer(Duration(rsps.nexttimer));
 	}
 }
 
