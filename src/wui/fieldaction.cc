@@ -427,7 +427,7 @@ void FieldActionWindow::add_buttons_auto() {
 
 			if (ibase().egbase().is_game()) {
 				add_button(buildbox, "configure_economy", "images/wui/stats/genstats_nrwares.png",
-				           &FieldActionWindow::act_configure_economy, _("Configure economy"));
+				           &FieldActionWindow::act_configure_economy, _("Configure this flag’s economy"));
 				if (can_act) {
 					add_button(buildbox, "geologist", pic_geologist, &FieldActionWindow::act_geologist,
 					           _("Send geologist to explore site"));
