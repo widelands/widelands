@@ -757,7 +757,11 @@ void FieldActionWindow::act_buildflag() {
 
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
-		EconomyOptionsWindow::create(ibase(), *flag, Widelands::WareWorker::wwWARE);
+		if (upcast(InteractiveGameBase, igbase, &ibase())) {
+			Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
+			const bool can_act = igbase->can_act(ware_economy->owner().player_number());
+			EconomyOptionsWindow::create(&ibase(), *flag, Widelands::WareWorker::wwWARE, can_act);
+		}
 	}
 	die();
 }

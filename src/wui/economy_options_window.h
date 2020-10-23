@@ -62,7 +62,7 @@ struct EconomyOptionsWindow : public UI::Window {
 
 	// Create an economy options window for the given flag
 	static void
-	create(InteractiveBase& ibase, const Widelands::Flag& flag, Widelands::WareWorker type);
+	create(Panel* parent, const Widelands::Flag& flag, Widelands::WareWorker type, bool can_act);
 	void activate_tab(Widelands::WareWorker type);
 
 	void create_target();

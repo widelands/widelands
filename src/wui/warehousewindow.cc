@@ -129,10 +129,11 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
 
+	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	add(buttons, UI::Box::Resizing::kFullSize);
+	UI::Button* b;
+
 	if (can_act_) {
-		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-		UI::Button* b;
-		add(buttons, UI::Box::Resizing::kFullSize);
 		add_space(15);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
@@ -147,16 +148,17 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
 		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
 
-		buttons->add_inf_space();
-
-		b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-		                   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
-		                   _("Configure economy"));
-		buttons->add(b);
-
-		b->sigclicked.connect(
-		   [this, &ib, &wh, type]() { EconomyOptionsWindow::create(ib, wh.base_flag(), type); });
 	}
+
+	buttons->add_inf_space();
+
+	b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+					   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
+					   _("Configure economy"));
+	buttons->add(b);
+
+	b->sigclicked.connect(
+	   [this, &ib, &wh, type]() { EconomyOptionsWindow::create(&ib, wh.base_flag(), type, can_act_); });
 }
 
 /**
