@@ -356,28 +356,28 @@ World
    :ref:`toc_lua_world`.
 */
 
-const char LuaWorld::className[] = "World";
-const MethodType<LuaWorld> LuaWorld::Methods[] = {
-   METHOD(LuaWorld, new_critter_type),
-   METHOD(LuaWorld, new_immovable_type),
-   METHOD(LuaWorld, new_resource_type),
-   METHOD(LuaWorld, new_terrain_type),
+const char LuaDescriptions::className[] = "Descriptions";
+const MethodType<LuaDescriptions> LuaDescriptions::Methods[] = {
+   METHOD(LuaDescriptions, new_critter_type),
+   METHOD(LuaDescriptions, new_immovable_type),
+   METHOD(LuaDescriptions, new_resource_type),
+   METHOD(LuaDescriptions, new_terrain_type),
    {nullptr, nullptr},
 };
-const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   PROP_RO(LuaWorld, immovable_descriptions),
-   PROP_RO(LuaWorld, terrain_descriptions),
+const PropertyType<LuaDescriptions> LuaDescriptions::Properties[] = {
+   PROP_RO(LuaDescriptions, immovable_descriptions),
+   PROP_RO(LuaDescriptions, terrain_descriptions),
    {nullptr, nullptr, nullptr},
 };
 
-LuaWorld::LuaWorld(lua_State* /* L */) {
+LuaDescriptions::LuaDescriptions(lua_State* /* L */) {
 	// Nothing to do.
 }
 
-void LuaWorld::__persist(lua_State*) {
+void LuaDescriptions::__persist(lua_State*) {
 	// Nothing to be done.
 }
-void LuaWorld::__unpersist(lua_State*) {
+void LuaDescriptions::__unpersist(lua_State*) {
 	// Nothing to be done.
 }
 
@@ -400,7 +400,7 @@ void LuaWorld::__unpersist(lua_State*) {
 
       (RO) a list of :class:`LuaImmovableDescription` objects
 */
-int LuaWorld::get_immovable_descriptions(lua_State* L) {
+int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
@@ -420,7 +420,7 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 
       (RO) a list of :class:`LuaTerrainDescription` objects
 */
-int LuaWorld::get_terrain_descriptions(lua_State* L) {
+int LuaDescriptions::get_terrain_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
@@ -435,7 +435,7 @@ int LuaWorld::get_terrain_descriptions(lua_State* L) {
 
 // Documented in data/world/resources/init.lua.
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_resource_type(lua_State* L) {
+int LuaDescriptions::new_resource_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -453,7 +453,7 @@ int LuaWorld::new_resource_type(lua_State* L) {
 
 // Documented in data/world/terrains/init.lua.
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_terrain_type(lua_State* L) {
+int LuaDescriptions::new_terrain_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -470,7 +470,7 @@ int LuaWorld::new_terrain_type(lua_State* L) {
 
 // Documented in data/world/critters/badger/init.lua.
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_critter_type(lua_State* L) {
+int LuaDescriptions::new_critter_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -486,7 +486,7 @@ int LuaWorld::new_critter_type(lua_State* L) {
 
 // Documented in data/world/immovables/bush1/init.lua.
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_immovable_type(lua_State* L) {
+int LuaDescriptions::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -942,7 +942,7 @@ void luaopen_wlroot(lua_State* L, bool in_editor) {
 		add_parent<LuaGame, LuaBases::LuaEditorGameBase>(L);
 		lua_pop(L, 1);  // Pop the meta table
 	}
-	register_class<LuaWorld>(L, "", false);
+	register_class<LuaDescriptions>(L, "", false);
 	register_class<LuaTribes>(L, "", false);
 }
 }  // namespace LuaRoot

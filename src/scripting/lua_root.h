@@ -104,16 +104,16 @@ public:
 	 */
 };
 
-class LuaWorld : public LuaRootModuleClass {
+class LuaDescriptions : public LuaRootModuleClass {
 public:
-	LUNA_CLASS_HEAD(LuaWorld);
+	LUNA_CLASS_HEAD(LuaDescriptions);
 	const char* get_modulename() override {
 		return "";
 	}
 
-	LuaWorld() {
+	LuaDescriptions() {
 	}
-	explicit LuaWorld(lua_State* L);
+	explicit LuaDescriptions(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
