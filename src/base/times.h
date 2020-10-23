@@ -31,7 +31,7 @@ class FileWrite;
 struct Duration {
 	// The default-constructed Duration is the special "invalid" value
 	// (semantically an "endless" duration)
-	constexpr explicit Duration(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
+	constexpr explicit Duration(uint32_t v = (std::numeric_limits<uint32_t>::max)()) : value_(v) {
 	}
 	void operator+=(const Duration& delta) {
 		if (!is_valid() || !delta.is_valid()) {
@@ -133,7 +133,7 @@ private:
 struct Time {
 	// The default-constructed Time is the special "invalid" value
 	// (semantically meaning "never")
-	constexpr explicit Time(uint32_t v = std::numeric_limits<uint32_t>::max()) : value_(v) {
+	constexpr explicit Time(uint32_t v = (std::numeric_limits<uint32_t>::max)()) : value_(v) {
 	}
 
 	// Adding/subtracting intervals

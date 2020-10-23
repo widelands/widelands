@@ -30,7 +30,7 @@
 // Helper struct that contains the data needed for drawing all fields.
 class FieldsToDraw {
 public:
-	static constexpr int kInvalidIndex = std::numeric_limits<int>::min();
+	static constexpr int kInvalidIndex = (std::numeric_limits<int>::min)();
 
 	struct Field {
 		Widelands::Coords geometric_coords;  // geometric coordinates (i.e. map coordinates that can

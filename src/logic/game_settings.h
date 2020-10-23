@@ -59,7 +59,7 @@ struct PlayerSettings {
 struct UserSettings {
 	// TODO(k.halfman): make this some const instead of calculating this every time
 	static uint8_t none() {
-		return std::numeric_limits<uint8_t>::max();
+		return (std::numeric_limits<uint8_t>::max)();
 	}
 	static uint8_t not_connected() {
 		return none() - 1;
@@ -98,7 +98,7 @@ struct NoteGameSettings {
 	uint8_t usernum;
 
 	explicit NoteGameSettings(Action init_action,
-	                          PlayerSlot init_position = std::numeric_limits<uint8_t>::max(),
+	                          PlayerSlot init_position = (std::numeric_limits<uint8_t>::max)(),
 	                          uint8_t init_usernum = UserSettings::none())
 	   : action(init_action), position(init_position), usernum(init_usernum) {
 	}

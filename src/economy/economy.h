@@ -54,7 +54,7 @@ struct NoteEconomy {
 	const Action action;
 };
 
-constexpr Quantity kEconomyTargetInfinity = std::numeric_limits<Quantity>::max();
+constexpr Quantity kEconomyTargetInfinity = (std::numeric_limits<Quantity>::max)();
 
 /**
  * Each Economy represents all building and flags, which are connected over the same
