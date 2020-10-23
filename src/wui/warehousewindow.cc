@@ -147,18 +147,18 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		ADD_POLICY_BUTTON(prefer, Prefer, _("Preferably store selected wares here"))
 		ADD_POLICY_BUTTON(dontstock, DontStock, _("Do not store selected wares here"))
 		ADD_POLICY_BUTTON(remove, Remove, _("Remove selected wares from here"))
-
 	}
 
 	buttons->add_inf_space();
 
 	b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-					   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
-					   _("Configure this building’s economy"));
+	                   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
+	                   _("Configure this building’s economy"));
 	buttons->add(b);
 
-	b->sigclicked.connect(
-	   [this, &ib, &wh, type]() { EconomyOptionsWindow::create(&ib, wh.base_flag(), type, can_act_); });
+	b->sigclicked.connect([this, &ib, &wh, type]() {
+		EconomyOptionsWindow::create(&ib, wh.base_flag(), type, can_act_);
+	});
 }
 
 /**

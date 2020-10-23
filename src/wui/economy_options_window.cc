@@ -167,7 +167,8 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 
 void EconomyOptionsWindow::create(UI::Panel* parent,
                                   const Widelands::Flag& flag,
-                                  Widelands::WareWorker type, bool can_act) {
+                                  Widelands::WareWorker type,
+                                  bool can_act) {
 	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
 	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
 	bool window_open = false;
