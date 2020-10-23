@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -277,7 +277,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
 msgid "Warning"
-msgstr "Rabhadh"
+msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:129
 msgid ""
@@ -308,9 +308,6 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
-"Shaoilinn nach digeadh an triall gu ceann gu bràth tuilleadh. Chan eil sgot "
-"agam dè cho fada ’s a tha sinn air a bhith air a’ mhuir agus na gailleannan "
-"farmadach oirnn… fad iomadh mìos gun teagamh."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141
