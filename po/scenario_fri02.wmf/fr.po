@@ -5,16 +5,16 @@
 # Translators:
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # zecas <jjorge@free.fr>, 2018
-# Renaud Bouchard, 2019
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
+# Renaud Bouchard, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2020\n"
+"Last-Translator: Renaud Bouchard, 2020\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -311,9 +311,6 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
-"J'ai commencé à croire que le voyage ne s'arrêterait jamais. Je n'ai aucune "
-"idée du temps que nous avons passé sur la mer, ballottés par des tempêtes "
-"jalouses.... cela a dû durer des mois."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141

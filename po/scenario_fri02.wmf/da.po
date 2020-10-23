@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>, 2020\n"
 "Language-Team: Danish (https://www.transifex.com/widelands/teams/35159/da/)\n"
@@ -269,7 +269,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
 msgid "Warning"
-msgstr "Advarsel"
+msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:129
 msgid ""
@@ -299,9 +299,6 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
-"Jeg frygtede, at rejsen aldrig ville ende. Jeg har ingen ide om hvor lang "
-"tid, vi var på havet, smidt omkring af utallige storme ... det må have været"
-" måneder."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141

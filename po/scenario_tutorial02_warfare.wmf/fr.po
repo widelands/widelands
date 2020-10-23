@@ -11,12 +11,12 @@
 # Julien Schneider <schneider.julien@gmail.com>, 2020
 # Renaud Bouchard, 2016-2017,2019-2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
-# Tubuntu <tubuntu@testimonium.be>, 2015
+# Tubuntu, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2020-10-05 07:36+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
