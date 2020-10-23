@@ -95,7 +95,6 @@ struct WindowStyleInfo {
 	}
 
 private:
-
 	const RGBAColor window_border_focused_, window_border_unfocused_;
 	const Image* border_top_;
 	const Image* border_bottom_;
