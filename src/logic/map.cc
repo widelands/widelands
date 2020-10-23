@@ -2473,11 +2473,11 @@ Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval
 		do {
 			changed = false;
 			height_interval.min_ = height_interval.min_ < MAX_FIELD_HEIGHT_DIFF ?
-			                         0 :
-			                         height_interval.min_ - MAX_FIELD_HEIGHT_DIFF;
+			                          0 :
+			                          height_interval.min_ - MAX_FIELD_HEIGHT_DIFF;
 			height_interval.max_ = height_interval.max_ < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
-			                         height_interval.max_ + MAX_FIELD_HEIGHT_DIFF :
-			                         MAX_FIELD_HEIGHT;
+			                          height_interval.max_ + MAX_FIELD_HEIGHT_DIFF :
+			                          MAX_FIELD_HEIGHT;
 			do {
 				if (mr.location().field->height < height_interval.min_) {
 					mr.location().field->height = height_interval.min_;

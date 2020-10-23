@@ -34,8 +34,7 @@
 #include <dos.h>
 #include <windows.h>
 #ifdef _MSC_VER
-#include <direct.h>
-#include <io.h>
+#include <corecrt_io.h>
 #define S_ISDIR(x) ((x & _S_IFDIR) ? 1 : 0)
 #endif
 #else  // not _WIN32

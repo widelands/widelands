@@ -338,16 +338,16 @@ endif(USE_FLTO_IF_AVAILABLE STREQUAL  "yes")
 
 IF (WIN32)
   if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    # At least Win7
     add_definitions(-D_WIN32_WINNT=0x0601 -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS)
     # Needed for minizip
     add_definitions(-Dor=|| -Dand=&& -Dnot=!)
-    set (CMAKE_EXE_LINKER_FLAGS "/FORCE")
     if (OPTION_BUILD_WINSTATIC)
       if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         wl_add_flag(WL_GENERIC_CXX_FLAGS "/MTd")
+        set(EXTRA_LIBS msvcrtd charset)
       else()
         wl_add_flag(WL_GENERIC_CXX_FLAGS "/MT")
+        set(EXTRA_LIBS msvcrt charset)
       endif()
     endif()
   else()
