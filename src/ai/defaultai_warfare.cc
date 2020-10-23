@@ -152,7 +152,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 
 		++count;
 		// we test max 12 sites and prefer ones tested more then 1 min ago
-		if (((observer.second.last_tested + Duration(enemysites_check_delay_ * 1000)) > gametime &&
+		if (((observer.second.last_tested + enemysites_check_delay_ * 1000) > gametime &&
 		     count > 4) ||
 		    count > 12) {
 			continue;
@@ -560,11 +560,11 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 
 	// modifying enemysites_check_delay_,this depends on the count
 	// of enemysites in observer
-	if (enemy_sites.size() >= 13 && enemysites_check_delay_ < 180) {
-		enemysites_check_delay_ += 3;
+	if (enemy_sites.size() >= 13 && enemysites_check_delay_ < Duration(180)) {
+		enemysites_check_delay_ += Duration(3);
 	}
-	if (enemy_sites.size() < 10 && enemysites_check_delay_ > 30) {
-		enemysites_check_delay_ -= 2;
+	if (enemy_sites.size() < 10 && enemysites_check_delay_ > Duration(30)) {
+		enemysites_check_delay_ -= Duration(2);
 	}
 
 	// if coordinates hash is not set
