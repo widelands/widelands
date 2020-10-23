@@ -360,14 +360,12 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 				              player_statistics.get_old60_player_power(pn)) ?
 				                3 :
 				                -3;
-				// TODO(Nordfriese): Passing a PlayerNumber to a function that expects
-				// a Time is a very bad idea, no idea what was intended here…
-				inputs[18] = (player_statistics.get_visible_enemies_power(Time(pn)) >
-				              player_statistics.get_old_visible_enemies_power(Time(pn))) ?
+				inputs[18] = (player_statistics.get_visible_enemies_power(gametime) >
+				              player_statistics.get_old_visible_enemies_power(gametime)) ?
 				                -1 :
 				                1;
-				inputs[19] = (player_statistics.get_visible_enemies_power(Time(pn)) >
-				              player_statistics.get_old_visible_enemies_power(Time(pn))) ?
+				inputs[19] = (player_statistics.get_visible_enemies_power(gametime) >
+				              player_statistics.get_old_visible_enemies_power(gametime)) ?
 				                -3 :
 				                3;
 				inputs[20] = (player_statistics.get_player_power(owner_number) >

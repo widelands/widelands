@@ -355,10 +355,10 @@ private:
 	Time last_road_dismantled_;  // uses to prevent too frequent road dismantling
 	bool dead_ends_check_;       // Do we need to check and dismantle dead ends?
 
-	Time enemy_last_seen_;
+	// Time enemy_last_seen_;
 	Time last_attack_time_;
 	// check ms in this interval - will auto-adjust
-	uint32_t enemysites_check_delay_;
+	Duration enemysites_check_delay_;
 
 	int32_t spots_;  // sum of buildable fields
 
