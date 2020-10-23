@@ -34,7 +34,7 @@ template <typename T> struct Vector2 {
 
 	// Returns an invalid point.
 	static Vector2 invalid() {
-		return Vector2((std::numeric_limits<T>::max)(), (std::numeric_limits<T>::max)());
+		return Vector2(std::numeric_limits<T>::max(), std::numeric_limits<T>::max());
 	}
 
 	bool operator==(const Vector2& other) const {

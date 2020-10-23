@@ -29,12 +29,6 @@
 #include "logic/map_objects/tribes/program_result.h"
 #include "scripting/lua_table.h"
 
-#ifdef _WIN32
-#ifdef max
-#undef max
-#endif
-#endif
-
 namespace Widelands {
 
 class Request;
