@@ -498,9 +498,8 @@ int LuaDescriptions::new_critter_type(lua_State* L) {
 	return 0;
 }
 
-// Documented in data/world/immovables/artifacts/artifact00/init.lua and
-// data/tribes/immovables/ashes/init.lua
-// See also the World and Tribes sections in the Widelands Scripting Reference on the website.
+// Documented in data/world/immovables/bush1/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
