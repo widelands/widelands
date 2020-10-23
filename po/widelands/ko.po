@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-10 05:39+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-21 10:55+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -721,7 +721,7 @@ msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:203
 #: ../../src/ui_fsmenu/launch_mpg.cc:58
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:138
 #: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/mapdetails.cc:135
 #: ../../src/wui/minimap.cc:120
 msgid "Map"
@@ -753,7 +753,7 @@ msgid "Author: %s"
 msgstr "제작자: %s"
 
 #: ../../src/editor/tools/info_tool.cc:222
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:110
 #, c-format
 msgid "Description: %s"
 msgstr "설명: %s"
@@ -767,7 +767,7 @@ msgstr "현재: %s …"
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:179
 msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr "개체를 선택하려면 클릭하세요. 여러 개체를 선택하려면 Ctrl 키를 사용하세요."
+msgstr "항목을 선택하려면 누르십시오. 여러 개체를 선택하려면 Ctrl 키를 사용하십시오."
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:182
@@ -793,7 +793,7 @@ msgstr "내 지도"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:73
 #: ../../src/wui/mapdata.cc:161
 msgid "Multiplayer Scenarios"
-msgstr "멀티 선수 시나리오"
+msgstr "여러 선수 시나리오"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:75
@@ -2478,7 +2478,7 @@ msgstr "요청하신 이름이 이미 사용 중이거나 예약되어 있으므
 
 #: ../../src/network/internet_gaming.cc:444
 msgid "Our forums can be found at:"
-msgstr "우리의 게시판은 다음에서 찾을 수 있습니다 :"
+msgstr "우리의 게시판은 다음에서 찾을 수 있습니다:"
 
 #: ../../src/network/internet_gaming.cc:446
 msgid "For reporting bugs, visit:"
@@ -3065,8 +3065,8 @@ msgid "unnamed %u"
 msgstr "이름 없는 %u"
 
 #: ../../src/ui_fsmenu/launch_game.cc:57
-msgid "Type of game"
-msgstr "게임 종류"
+msgid "Configure this game"
+msgstr "이 놀이를 구성"
 
 #: ../../src/ui_fsmenu/launch_game.cc:71
 msgid "Peaceful mode"
@@ -3085,38 +3085,38 @@ msgstr "게임 시작"
 msgid "Back"
 msgstr "뒤로"
 
-#: ../../src/ui_fsmenu/launch_game.cc:181
+#: ../../src/ui_fsmenu/launch_game.cc:183
 msgid "The relations between players are set by the scenario"
 msgstr "선수 간의 관계는 시나리오에 의해 설정됩니다"
 
-#: ../../src/ui_fsmenu/launch_game.cc:183
+#: ../../src/ui_fsmenu/launch_game.cc:185
 msgid "The relations between players are set by the saved game"
 msgstr "선수 간의 관계는 저장된 놀이에 의해 설정됩니다"
 
-#: ../../src/ui_fsmenu/launch_game.cc:185
+#: ../../src/ui_fsmenu/launch_game.cc:187
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "선택한 승리 조건은 평화로운 경기를 허용하지 않습니다"
 
-#: ../../src/ui_fsmenu/launch_game.cc:187
+#: ../../src/ui_fsmenu/launch_game.cc:189
 msgid "Forbid fighting between players"
 msgstr "선수들 간의 싸움을 금지합니다"
 
-#: ../../src/ui_fsmenu/launch_game.cc:198
+#: ../../src/ui_fsmenu/launch_game.cc:200
 msgid "The starting positions are set by the scenario"
 msgstr "시작 위치는 시나리오에 의해 설정됩니다"
 
-#: ../../src/ui_fsmenu/launch_game.cc:200
+#: ../../src/ui_fsmenu/launch_game.cc:202
 msgid "The starting positions are set by the saved game"
 msgstr "시작 위치는 저장된 놀이에 의해 설정됩니다"
 
-#: ../../src/ui_fsmenu/launch_game.cc:203
+#: ../../src/ui_fsmenu/launch_game.cc:205
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "선수가 게임을 시작할 때 자신의 시작 위치를 선택할 수 있도록 허용합니다"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:210
+#: ../../src/ui_fsmenu/launch_game.cc:212
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:445
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:279
@@ -3124,21 +3124,21 @@ msgstr "선수가 게임을 시작할 때 자신의 시작 위치를 선택할 �
 msgid "Scenario"
 msgstr "시나리오"
 
-#: ../../src/ui_fsmenu/launch_game.cc:211
+#: ../../src/ui_fsmenu/launch_game.cc:213
 msgid "Win condition is set through the scenario"
 msgstr "승리 조건이 시나리오에 설정됨"
 
-#: ../../src/ui_fsmenu/launch_game.cc:216 ../../src/ui_fsmenu/launch_mpg.cc:65
+#: ../../src/ui_fsmenu/launch_game.cc:218 ../../src/ui_fsmenu/launch_mpg.cc:65
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:449
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
 msgid "Saved Game"
 msgstr "저장된 게임"
 
-#: ../../src/ui_fsmenu/launch_game.cc:218
+#: ../../src/ui_fsmenu/launch_game.cc:220
 msgid "The game is a saved game – the win condition was set before."
 msgstr "이 게임은 저장된 게임입니다 - 승리 조건이 이전에 설정되었습니다."
 
-#: ../../src/ui_fsmenu/launch_game.cc:282
+#: ../../src/ui_fsmenu/launch_game.cc:284
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
@@ -3217,7 +3217,7 @@ msgstr "승리 조건 스크립트 파일 '%s'를 불러오는 데 실패했습�
 
 #: ../../src/ui_fsmenu/launch_spg.cc:37
 msgid "Launch game"
-msgstr ""
+msgstr "게임 실행"
 
 #: ../../src/ui_fsmenu/loadgame.cc:42
 msgid "Choose a replay"
@@ -3245,15 +3245,15 @@ msgstr "혼자 놀기 차림표로 복귀"
 
 #: ../../src/ui_fsmenu/loadgame.cc:91
 msgid "Load this game"
-msgstr "해당 게임 불러오기"
+msgstr "해당 놀이를 불러오기"
 
 #: ../../src/ui_fsmenu/main.cc:179
 msgid "New Game"
-msgstr "새 게임"
+msgstr "새로운 놀이"
 
 #: ../../src/ui_fsmenu/main.cc:180
 msgid "Begin a new game"
-msgstr ""
+msgstr "새로운 놀이 시작"
 
 #: ../../src/ui_fsmenu/main.cc:181
 msgid "Campaigns"
@@ -3261,11 +3261,11 @@ msgstr "캠페인"
 
 #: ../../src/ui_fsmenu/main.cc:182
 msgid "Play a campaign"
-msgstr ""
+msgstr "켐페인을 시작"
 
 #: ../../src/ui_fsmenu/main.cc:183
 msgid "Tutorials"
-msgstr ""
+msgstr "자습서"
 
 #: ../../src/ui_fsmenu/main.cc:184
 msgid "Play one of our beginners’ tutorials"
@@ -3277,7 +3277,7 @@ msgstr "게임 불러오기"
 
 #: ../../src/ui_fsmenu/main.cc:186
 msgid "Continue a saved game"
-msgstr ""
+msgstr "저장된 놀이 계속하기"
 
 #: ../../src/ui_fsmenu/main.cc:205
 msgid "Continue Playing"
@@ -3293,7 +3293,7 @@ msgstr "지도: %s"
 msgid "Win Condition: %s"
 msgstr "승리 조건: %s"
 
-#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:105
 #, c-format
 msgid "Players: %s"
 msgstr "선수들: %s"
@@ -3316,7 +3316,7 @@ msgstr "통신 놀이"
 
 #: ../../src/ui_fsmenu/main.cc:238
 msgid "Join the Widelands lobby"
-msgstr ""
+msgstr "와이드랜드 앞마당 들어가기"
 
 #: ../../src/ui_fsmenu/main.cc:239 ../../src/wui/login_box.cc:32
 msgid "Online Game Settings"
@@ -3408,58 +3408,58 @@ msgid ""
 "General Public License V2.0"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:34
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:46
 msgid "Saved Players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:53
 #, c-format
 msgid "Player %u: –"
 msgstr ""
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:76
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Map Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Scenario Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:99
 #, c-format
 msgid "Size: %s"
-msgstr ""
+msgstr "크기: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:102
 #, c-format
 msgid "%1$u×%2$u"
-msgstr ""
+msgstr "%1$u×%2$u"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:117
 #, c-format
 msgid "Hint: %s"
-msgstr ""
+msgstr "도움말: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:149
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:148
 msgid "No map selected"
-msgstr ""
+msgstr "선택된 지도가 없습니다"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:159
 msgid "Change map or saved game"
 msgstr "지도 또는 저장된 게임 바꾸기"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:214
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:213
 msgid "(no map)"
 msgstr "(지도 없음)"
 
