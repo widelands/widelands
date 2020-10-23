@@ -126,7 +126,7 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_SDL2)
     if (OPTION_BUILD_WINSTATIC)
-      target_link_libraries(${NAME} "-static" SDL2::Main intl iconv mingw32 dxerr8 dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32 brotlidec-static brotlicommon-static brotlienc-static zstd)
+      target_link_libraries(${NAME} "-static" SDL2::Main ${EXTRA_LIBS} intl iconv dinput8 shell32 setupapi advapi32 uuid version oleaut32 ole32 imm32 winmm gdi32 user32 brotlidec-static brotlicommon-static brotlienc-static zstd)
     else()
       target_link_libraries(${NAME} SDL2::Main)
     endif()
