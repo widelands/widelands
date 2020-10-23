@@ -98,7 +98,7 @@ struct NoteGameSettings {
 	uint8_t usernum;
 
 	explicit NoteGameSettings(Action init_action,
-	                          PlayerSlot init_position = (std::numeric_limits<uint8_t>::max)(),
+	                          PlayerSlot init_position = std::numeric_limits<uint8_t>::max(),
 	                          uint8_t init_usernum = UserSettings::none())
 	   : action(init_action), position(init_position), usernum(init_usernum) {
 	}

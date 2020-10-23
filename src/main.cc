@@ -21,11 +21,10 @@
 #include <typeinfo>
 
 #ifdef _MSC_VER
+// Needed to resolve entry point
 #include <SDL.h>
-#define _MAIN_ SDL_main
 #else
 #include <unistd.h>
-#define _MAIN_ main
 #endif
 
 #include "base/wexception.h"
@@ -37,7 +36,7 @@
 /**
  * Cross-platform entry point for SDL applications.
  */
-int _MAIN_(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 	std::cout << "This is Widelands Version " << build_id() << " (" << build_type() << ")"
 	          << std::endl;
 

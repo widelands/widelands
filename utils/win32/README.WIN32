@@ -5,8 +5,4 @@ This directory holds tools and scripts for win32-system users.
   
 * Copy CMakeSettings.json to the top level directory to use with Visual Studio
 * Copy launch.vs.json to .vs/ as start configuration
-Common MSVC compiler errors:
-* "(": Invalid token on the right side of "::" 
-  MSVC tries to expand max/min macro
-  std::numeric_limits<T>::max() -> (std::numeric_limits<T>::max)()
 
