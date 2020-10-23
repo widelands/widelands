@@ -789,19 +789,15 @@ void Building::draw_info(const InfoToDraw info_to_draw,
 	             point_on_dst, scale, dst);
 }
 
-int32_t
-Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool adjust) const {
-	int32_t priority = kPriorityNormal;
+int32_t Building::get_priority(const WareWorker type, const DescriptionIndex ware_index) const {
 	if (type == wwWARE) {
-		// if priority is defined for specific ware,
-		// combine base priority and ware priority
-		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
+		const auto it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end()) {
-			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
+			return it->second;
 		}
 	}
 
-	return priority;
+	return kPriorityNormal;
 }
 
 /**
@@ -825,7 +821,7 @@ void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, i
 /**
  * Set base priority for this building (applies for all wares)
  */
-void Building::set_priority(int32_t const type,
+void Building::set_priority(const WareWorker type,
                             DescriptionIndex const ware_index,
                             int32_t const new_priority) {
 	if (type == wwWARE) {

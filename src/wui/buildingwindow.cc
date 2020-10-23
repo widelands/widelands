@@ -631,14 +631,6 @@ void BuildingWindow::toggle_workarea() {
 	}
 }
 
-void BuildingWindow::create_input_queue_panel(UI::Box* const box,
-                                              Widelands::Building& b,
-                                              const Widelands::InputQueue& iq,
-                                              bool show_only) {
-	// The *max* width should be larger than the default width
-	box->add(new InputQueueDisplay(box, 0, 0, *ibase(), b, iq, show_only));
-}
-
 /**
  * Center the player's view on the building. Callback function
  * for the corresponding button.

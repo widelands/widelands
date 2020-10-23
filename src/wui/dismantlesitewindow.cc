@@ -19,6 +19,8 @@
 
 #include "wui/dismantlesitewindow.h"
 
+#include "wui/inputqueuedisplay.h"
+
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
 DismantleSiteWindow::DismantleSiteWindow(InteractiveBase& parent,
@@ -36,6 +38,7 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 	UI::Box& subbox = *new UI::Box(&box, 0, 0, UI::Box::Vertical);
+	ensure_box_can_hold_input_queues(subbox);
 
 	// Add the progress bar
 	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
@@ -47,17 +50,12 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < dismantle_site->nr_dropout_waresqueues(); ++i) {
-		BuildingWindow::create_input_queue_panel(
-		   &subbox, *dismantle_site, *dismantle_site->get_dropout_waresqueue(i), true);
+		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site, *dismantle_site->get_dropout_waresqueue(i), true, false), UI::Box::Resizing::kFullSize);
 	}
 	for (uint32_t i = 0; i < dismantle_site->nr_consume_waresqueues(); ++i) {
-		BuildingWindow::create_input_queue_panel(
-		   &subbox, *dismantle_site, *dismantle_site->get_consume_waresqueue(i), true);
+		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site, *dismantle_site->get_consume_waresqueue(i), true, false), UI::Box::Resizing::kFullSize);
 	}
 
-	subbox.set_max_size(500, 400);
-	subbox.set_scrolling(true);
-	subbox.set_scrollbar_style(UI::PanelStyle::kWui);
 	box.add(&subbox, UI::Box::Resizing::kFullSize);
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));

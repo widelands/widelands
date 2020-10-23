@@ -164,6 +164,7 @@ void MapBuildingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 }
 
 void MapBuildingPacket::write_priorities(const Building& building, FileWrite& fw) {
+	// TODO(unknown): savegame compatibility
 	// Used to be base_priority which is no longer used. Remove after b20.
 	fw.unsigned_32(0);
 
@@ -204,6 +205,7 @@ void MapBuildingPacket::write_priorities(const Building& building, FileWrite& fw
 }
 
 void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
+	// TODO(unknown): savegame compatibility
 	fr.unsigned_32();  // unused, was base_priority which is unused. Remove after b20.
 
 	const TribeDescr& tribe = building.owner().tribe();
@@ -222,7 +224,7 @@ void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
 				throw GameDataError("unrecognized ware type %d while reading priorities", ware_type);
 			}
 
-			building.set_priority(ware_type, idx, fr.unsigned_32());
+			building.set_priority(WareWorker(ware_type), idx, fr.unsigned_32());
 		}
 	}
 }

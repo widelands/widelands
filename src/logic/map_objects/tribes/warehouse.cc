@@ -291,6 +291,8 @@ uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) cons
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
 	// be taken back to the warehouse as the request of the warehouse would be
 	// highered and would have the same value as the original request)
+	// TODO(Nordfriese): The result of `warehouse_->get_priority()` is typically very
+	// low, the result of the division by 100 is usually 0. What was intended here?
 	int32_t const y = x + (req.get_priority(0) / 100) -
 	                  (warehouse_->get_priority(wwWARE, req.get_index()) / 100) - 1;
 	// But the number should never be higher than the number of wares available

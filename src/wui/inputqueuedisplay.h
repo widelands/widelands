@@ -20,91 +20,69 @@
 #ifndef WL_WUI_INPUTQUEUEDISPLAY_H
 #define WL_WUI_INPUTQUEUEDISPLAY_H
 
-#include "logic/map_objects/tribes/ware_descr.h"
-#include "logic/map_objects/tribes/wareworker.h"
+#include <vector>
+
+#include "logic/map_objects/tribes/constructionsite.h"
+#include "logic/widelands.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/panel.h"
-#include "ui_basic/radiobutton.h"
+#include "ui_basic/icon.h"
+#include "ui_basic/slider.h"
 
 class InteractiveBase;
 
-namespace Widelands {
-class Building;
-class ConstructionSite;
-struct ProductionsiteSettings;
-class InputQueue;
-}  // namespace Widelands
+// Make the given box scrolling and set its scrollbar style and max size.
+// This is not strictly required, but not preparing the box like this will
+// make the layout look ugly if you add many input queue displays to it.
+void ensure_box_can_hold_input_queues(UI::Box&);
 
-/**
- * This passive class displays the status of an InputQueue
- * and shows priority buttons that can be manipulated.
- * It updates itself automatically through think().
- */
-class InputQueueDisplay : public UI::Panel {
+class InputQueueDisplay : public UI::Box {
 public:
-	enum { CellWidth = kWareMenuPicWidth, CellSpacing = 2, Border = 4, PriorityButtonSize = 10 };
+	// For real input queues
+	InputQueueDisplay(UI::Panel* parent, InteractiveBase&, Widelands::Building&, Widelands::InputQueue&, bool show_only, bool has_priority);
+	// For constructionsite settings
+	InputQueueDisplay(UI::Panel* parent, InteractiveBase&, Widelands::ConstructionSite&, Widelands::WareWorker, Widelands::DescriptionIndex);
 
-	// Constructor for real queues (e.g. in ProductionSites)
-	InputQueueDisplay(UI::Panel* parent,
-	                  int32_t x,
-	                  int32_t y,
-	                  InteractiveBase& igb,
-	                  Widelands::Building& building,
-	                  const Widelands::InputQueue& queue,
-	                  bool no_capacity_buttons = false,
-	                  bool no_priority_buttons = false);
-	// Constructor for fake queues (e.g. in ConstructionSite settings)
-	InputQueueDisplay(UI::Panel* parent,
-	                  int32_t x,
-	                  int32_t y,
-	                  InteractiveBase&,
-	                  Widelands::ConstructionSite&,
-	                  Widelands::WareWorker,
-	                  Widelands::DescriptionIndex,
-	                  bool no_capacity_buttons = false,
-	                  bool no_priority_buttons = false);
-	~InputQueueDisplay() override;
+	~InputQueueDisplay() override {
+	}
 
+protected:
 	void think() override;
 	void draw(RenderTarget&) override;
+	void draw_overlay(RenderTarget&) override;
 
 private:
-	InteractiveBase& interactive_base_;
+	// Common constructor
+	InputQueueDisplay(UI::Panel*, InteractiveBase&, Widelands::Building&, Widelands::WareWorker, Widelands::DescriptionIndex, Widelands::InputQueue*, Widelands::ProductionsiteSettings*, bool, bool);
+
+	InteractiveBase& ibase_;
+	bool can_act_, show_only_, has_priority_;
+
 	Widelands::Building& building_;
-	const Widelands::InputQueue* queue_;
-	const Widelands::ProductionsiteSettings* settings_;
-	UI::Radiogroup* priority_radiogroup_;
-	UI::Button* increase_max_fill_;
-	UI::Button* decrease_max_fill_;
-	UI::Button* increase_real_fill_;
-	UI::Button* decrease_real_fill_;
-	Widelands::DescriptionIndex index_;
+
 	Widelands::WareWorker type_;
-	const Image* icon_;  //< Index to ware's picture
-	const Image* max_fill_indicator_;
+	Widelands::DescriptionIndex index_;
 
-	uint32_t cache_size_;
-	uint32_t cache_max_fill_;
-	uint32_t total_height_;
-	bool no_capacity_buttons_;
-	bool no_priority_buttons_;
+	// Exactly one of these two is non-null
+	Widelands::InputQueue* queue_;
+	Widelands::ProductionsiteSettings* settings_;
 
-	virtual void max_size_changed();
-	void update_priority_buttons();
-	void update_max_fill_buttons();
-	void decrease_max_fill_clicked();
-	void increase_max_fill_clicked();
-	void decrease_real_fill_clicked();
-	void increase_real_fill_clicked();
-	void radiogroup_changed(int32_t);
-	void radiogroup_clicked();
-	void update_siblings_priority(int32_t);
-	void update_siblings_fill(int32_t);
+	Widelands::ProductionsiteSettings::InputQueueSetting* get_setting() const;
 
-	uint32_t check_max_size() const;
-	uint32_t check_max_fill() const;
+	void clicked_desired_fill(int8_t delta, bool recursion_start = true);
+	void clicked_real_fill(int8_t delta, bool recursion_start = true);
+	void set_priority(size_t, bool recursion_start = true);
 
-	void compute_max_fill_buttons_enabled_state();
+	const Image& max_fill_indicator_;
+	const Image& priority_image_;
+
+	UI::Box hbox_;
+	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_, b_increase_real_fill_;
+	UI::HorizontalSlider priority_;
+	unsigned slider_was_moved_;
+
+	size_t nr_icons_;
+	std::vector<UI::Icon*> icons_;
 };
 
 #endif  // end of include guard: WL_WUI_INPUTQUEUEDISPLAY_H

@@ -1196,7 +1196,7 @@ void CmdSetWarePriority::execute(Game& game) {
 		}
 	} else if (upcast(Building, psite, mo)) {
 		if (psite->owner().player_number() == sender()) {
-			psite->set_priority(type_, index_, priority_);
+			psite->set_priority(WareWorker(type_), index_, priority_);
 		}
 	}
 }

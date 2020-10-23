@@ -36,9 +36,11 @@ namespace Widelands {
 
 class InputQueue;
 
-constexpr int32_t kPriorityLow = 2;
-constexpr int32_t kPriorityNormal = 4;
-constexpr int32_t kPriorityHigh = 8;
+constexpr int32_t kPriorityVeryLow  =    0;
+constexpr int32_t kPriorityLow      =    4;
+constexpr int32_t kPriorityNormal   =    8;
+constexpr int32_t kPriorityHigh     =   16;
+constexpr int32_t kPriorityVeryHigh = 2048;
 
 constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
@@ -277,13 +279,8 @@ public:
 	bool leave_check_and_wait(Game&, Worker&);
 	void leave_skip(Game&, Worker&);
 
-	// Get/Set the priority for this waretype for this building. 'type' defines
-	// if this is for a worker or a ware, 'index' is the type of worker or ware.
-	// If 'adjust' is false, the three possible states kPriorityHigh,
-	// kPriorityNormal and kPriorityLow are returned, otherwise numerical
-	// values adjusted to the preciousness of the ware in general are returned.
-	virtual int32_t get_priority(WareWorker type, DescriptionIndex, bool adjust = true) const;
-	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);
+	virtual int32_t get_priority(WareWorker type, DescriptionIndex) const;
+	void set_priority(WareWorker type, DescriptionIndex ware_index, int32_t new_priority);
 
 	void collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const;
 
