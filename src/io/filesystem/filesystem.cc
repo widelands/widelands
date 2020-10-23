@@ -588,8 +588,12 @@ const char* FileSystem::fs_filename(const char* p) {
 }
 
 std::string FileSystem::fs_dirname(const std::string& full_path) {
-	const std::string filename = fs_filename(full_path.c_str());
-	return full_path.substr(0, full_path.size() - filename.size());
+	std::string filename = fs_filename(full_path.c_str());
+	filename = full_path.substr(0, full_path.size() - filename.size());
+#ifdef _WIN32
+	std::replace(filename.begin(), filename.end(), '\\', '/');
+#endif
+	return filename;
 }
 
 std::string FileSystem::filename_ext(const std::string& f) {

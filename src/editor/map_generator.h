@@ -73,7 +73,8 @@ struct MapGenerator {
 
 	MapGenerator(Map& map, UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase);
 
-	void create_random_map();
+	// Returns true if everything went well and all players have a good starting position
+	bool create_random_map();
 
 private:
 	void generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,

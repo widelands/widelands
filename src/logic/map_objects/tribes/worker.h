@@ -121,6 +121,8 @@ public:
 	bool wakeup_flag_capacity(Game&, Flag&);
 	bool wakeup_leave_building(Game&, Building&);
 
+	void set_current_experience(int32_t);
+
 	/// This should be called whenever the worker has done work that he gains
 	/// experience from. It may cause him to change his type so that he becomes
 	/// overqualified for his current working position and can be replaced.

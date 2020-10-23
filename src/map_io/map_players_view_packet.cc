@@ -198,7 +198,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					field->time_node_last_unseen = Time(stol(field_vector[counter]));
+					field->time_node_last_unseen = Time(stoll(field_vector[counter]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -213,8 +213,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					field->time_triangle_last_surveyed[0] = Time(stol(data_vector[0]));
-					field->time_triangle_last_surveyed[1] = Time(stol(data_vector[1]));
+					field->time_triangle_last_surveyed[0] = Time(stoll(data_vector[0]));
+					field->time_triangle_last_surveyed[1] = Time(stoll(data_vector[1]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
