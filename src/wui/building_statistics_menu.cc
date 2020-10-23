@@ -52,71 +52,98 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       100,
                       _("Building Statistics")),
      style_(g_style_manager->building_statistics_style()),
-     tab_panel_(this, UI::TabPanelStyle::kWuiDark),
-     navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
-     building_name_(
-        &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
-     owned_label_(&navigation_panel_,
-                  kMargin,
-                  kButtonRowHeight,
-                  0,
-                  kButtonHeight,
-                  _("Owned:"),
-                  UI::Align::kLeft,
-                  style_.building_statistics_details_font()),
-     construction_label_(&navigation_panel_,
-                         kMargin,
-                         2 * kButtonRowHeight,
-                         0,
-                         kButtonHeight,
-                         _("Under Construction:"),
-                         UI::Align::kLeft,
-                         style_.building_statistics_details_font()),
-     unproductive_box_(&navigation_panel_, kMargin, 3 * kButtonRowHeight + 3, UI::Box::Horizontal),
-     unproductive_label_(
-        &unproductive_box_,
-        /** TRANSLATORS: This is the first part of productivity with input field */
-        /** TRANSLATORS: Building statistics window - 'Low Productivity <input>%:' */
-        _("Low Productivity")),
-     // We need consistent height here - test
-     unproductive_percent_(&unproductive_box_, 0, 0, 35, UI::PanelStyle::kWui),
-     unproductive_label2_(
-        &unproductive_box_,
-        /** TRANSLATORS: This is the second part of productivity with input field */
-        /** TRANSLATORS: Building statistics window -  'Low Productivity <input>%:' */
-        _("%:"),
-        UI::Align::kLeft,
-        style_.building_statistics_details_font()),
-     no_owned_label_(&navigation_panel_,
-                     get_inner_w() - 2 * kButtonRowHeight - kMargin,
-                     kButtonRowHeight,
-                     0,
-                     kButtonHeight,
-                     "",
-                     UI::Align::kRight,
-                     style_.building_statistics_details_font()),
-     no_construction_label_(&navigation_panel_,
-                            get_inner_w() - 2 * kButtonRowHeight - kMargin,
-                            2 * kButtonRowHeight,
-                            0,
-                            kButtonHeight,
-                            "",
-                            UI::Align::kRight,
-                            style_.building_statistics_details_font()),
-     no_unproductive_label_(&navigation_panel_,
-                            get_inner_w() - 2 * kButtonRowHeight - kMargin,
-                            3 * kButtonRowHeight,
-                            0,
-                            kButtonHeight,
-                            "",
-                            UI::Align::kRight,
-                            style_.building_statistics_details_font()),
+     main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     tab_panel_(&main_box_, UI::TabPanelStyle::kWuiDark),
+     low_production_(33),
+
+     hbox_owned_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     hbox_construction_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     hbox_unproductive_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+
+     label_name_(&main_box_, _("(no building selected)"), UI::Align::kCenter),
+     label_owned_(&hbox_owned_, _("Owned:"), UI::Align::kLeft),
+     label_construction_(&hbox_construction_, _("Under construction:"), UI::Align::kLeft),
+     label_unproductive_(&hbox_unproductive_, "" /* text will be set later */, UI::Align::kLeft),
+     label_nr_owned_(&hbox_owned_, "", UI::Align::kRight),
+     label_nr_construction_(&hbox_construction_, "", UI::Align::kRight),
+     label_nr_unproductive_(&hbox_unproductive_, "", UI::Align::kRight),
+     label_threshold_(&main_box_, _("Low productivity threshold:"), UI::Align::kLeft),
+
+     b_prev_owned_(&hbox_owned_,
+                   "previous_owned",
+                   0,
+                   0,
+                   kButtonHeight,
+                   kButtonHeight,
+                   UI::ButtonStyle::kWuiMenu,
+                   g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+                   _("Show previous building")),
+     b_next_owned_(&hbox_owned_,
+                   "next_owned",
+                   0,
+                   0,
+                   kButtonHeight,
+                   kButtonHeight,
+                   UI::ButtonStyle::kWuiMenu,
+                   g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+                   _("Show next building")),
+
+     b_prev_construction_(&hbox_construction_,
+                          "previous_construction",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+                          _("Show previous building")),
+     b_next_construction_(&hbox_construction_,
+                          "next_construction",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+                          _("Show next building")),
+
+     b_prev_unproductive_(&hbox_unproductive_,
+                          "previous_unproductive",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+                          _("Show previous building")),
+     b_next_unproductive_(&hbox_unproductive_,
+                          "next_unproductive",
+                          0,
+                          0,
+                          kButtonHeight,
+                          kButtonHeight,
+                          UI::ButtonStyle::kWuiMenu,
+                          g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+                          _("Show next building")),
+
+     unproductive_threshold_(&main_box_,
+                             0,
+                             0,
+                             kWindowWidth,
+                             kWindowWidth - kBuildGridCellWidth,
+                             low_production_,
+                             0,
+                             100,
+                             UI::PanelStyle::kWui,
+                             "",
+                             UI::SpinBox::Units::kPercent,
+                             UI::SpinBox::Type::kBig),
+
      current_building_type_(Widelands::INVALID_INDEX),
      last_building_index_(0),
      last_building_type_(Widelands::INVALID_INDEX),
      lastupdate_(0),
      was_minimized_(false),
-     low_production_(33),
      has_selection_(false),
      nr_building_types_(parent.egbase().tribes().nrbuildings()) {
 
@@ -124,67 +151,52 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
 
-	unproductive_percent_.set_font_style_and_margin(
-	   style_.building_statistics_details_font(), style_.editbox_margin());
+	hbox_owned_.add(&label_owned_, UI::Box::Resizing::kFullSize);
+	hbox_owned_.add_inf_space();
+	hbox_owned_.add(&label_nr_owned_, UI::Box::Resizing::kFullSize);
+	hbox_owned_.add(&b_prev_owned_);
+	hbox_owned_.add(&b_next_owned_);
 
-	unproductive_label_.set_size(unproductive_label_.get_w(), kButtonRowHeight);
-	unproductive_percent_.set_text(std::to_string(low_production_));
-	unproductive_percent_.set_max_length(4);
-	unproductive_label2_.set_size(unproductive_label2_.get_w(), kButtonRowHeight);
-	unproductive_box_.add(&unproductive_label_);
-	unproductive_box_.add_space(2);
-	unproductive_box_.add(&unproductive_percent_);
-	unproductive_box_.add(&unproductive_label2_);
-	unproductive_box_.set_size(
-	   unproductive_label_.get_w() + unproductive_percent_.get_w() + unproductive_label2_.get_w(),
-	   kButtonRowHeight);
+	hbox_construction_.add(&label_construction_, UI::Box::Resizing::kFullSize);
+	hbox_construction_.add_inf_space();
+	hbox_construction_.add(&label_nr_construction_, UI::Box::Resizing::kFullSize);
+	hbox_construction_.add(&b_prev_construction_);
+	hbox_construction_.add(&b_next_construction_);
 
-	navigation_buttons_[NavigationButton::PrevOwned] = new UI::Button(
-	   &navigation_panel_, "previous_owned", get_inner_w() - 2 * kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
+	hbox_unproductive_.add(&label_unproductive_, UI::Box::Resizing::kFullSize);
+	hbox_unproductive_.add_inf_space();
+	hbox_unproductive_.add(&label_nr_unproductive_, UI::Box::Resizing::kFullSize);
+	hbox_unproductive_.add(&b_prev_unproductive_);
+	hbox_unproductive_.add(&b_next_unproductive_);
 
-	navigation_buttons_[NavigationButton::NextOwned] = new UI::Button(
-	   &navigation_panel_, "next_owned", get_inner_w() - kButtonRowHeight, kButtonRowHeight,
-	   kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
+	main_box_.set_size(200, 100);  // guard against SpinBox asserts
+	main_box_.add(&tab_panel_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&label_name_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&hbox_owned_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&hbox_construction_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&hbox_unproductive_, UI::Box::Resizing::kFullSize);
 
-	navigation_buttons_[NavigationButton::PrevConstruction] = new UI::Button(
-	   &navigation_panel_, "previous_constructed", get_inner_w() - 2 * kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
+	main_box_.add_space(2 * kMargin);
+	main_box_.add(&label_threshold_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&unproductive_threshold_, UI::Box::Resizing::kFillSpace);
 
-	navigation_buttons_[NavigationButton::NextConstruction] = new UI::Button(
-	   &navigation_panel_, "next_constructed", get_inner_w() - kButtonRowHeight,
-	   2 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
+	unproductive_threshold_.set_tooltip(_("Buildings will be considered unproductive if their "
+	                                      "productivity falls below this percentage"));
 
-	navigation_buttons_[NavigationButton::PrevUnproductive] = new UI::Button(
-	   &navigation_panel_, "previous_unproductive", get_inner_w() - 2 * kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Show previous building"));
-
-	navigation_buttons_[NavigationButton::NextUnproductive] = new UI::Button(
-	   &navigation_panel_, "next_unproductive", get_inner_w() - kButtonRowHeight,
-	   3 * kButtonRowHeight, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiMenu,
-	   g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Show next building"));
-
-	navigation_buttons_[NavigationButton::PrevOwned]->sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kOwned, true); });
-	navigation_buttons_[NavigationButton::NextOwned]->sigclicked.connect(
-	   [this]() { jump_building(JumpTarget::kOwned, false); });
-	navigation_buttons_[NavigationButton::PrevConstruction]->sigclicked.connect(
+	b_prev_owned_.sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, true); });
+	b_next_owned_.sigclicked.connect([this]() { jump_building(JumpTarget::kOwned, false); });
+	b_prev_construction_.sigclicked.connect(
 	   [this]() { jump_building(JumpTarget::kConstruction, true); });
-	navigation_buttons_[NavigationButton::NextConstruction]->sigclicked.connect(
+	b_next_construction_.sigclicked.connect(
 	   [this]() { jump_building(JumpTarget::kConstruction, false); });
-	navigation_buttons_[NavigationButton::PrevUnproductive]->sigclicked.connect(
+	b_prev_unproductive_.sigclicked.connect(
 	   [this]() { jump_building(JumpTarget::kUnproductive, true); });
-	navigation_buttons_[NavigationButton::NextUnproductive]->sigclicked.connect(
+	b_next_unproductive_.sigclicked.connect(
 	   [this]() { jump_building(JumpTarget::kUnproductive, false); });
 
-	unproductive_percent_.changed.connect([this]() { low_production_changed(); });
-	unproductive_percent_.ok.connect([this]() { low_production_reset_focus(); });
-	unproductive_percent_.cancel.connect([this]() { low_production_reset_focus(); });
+	unproductive_threshold_.changed.connect([this]() { low_production_changed(); });
+
+	set_center_panel(&main_box_);
 
 	init();
 }
@@ -224,7 +236,7 @@ void BuildingStatisticsMenu::reset() {
 	init(last_selected_tab);
 
 	// Reset navigator
-	building_name_.set_text("");
+	label_name_.set_visible(false);
 	if (has_selection_) {
 		if (building_buttons_[current_building_type_] != nullptr) {
 			set_current_building_type(current_building_type_);
@@ -544,7 +556,6 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 		iplayer().map_view()->scroll_to_field(
 		   stats_vector[last_building_index_].pos, MapView::Transition::Smooth);
 	}
-	low_production_reset_focus();
 	update();
 }
 
@@ -562,20 +573,6 @@ void BuildingStatisticsMenu::think() {
 	}
 	// Make sure we don't have a delay with displaying labels when we restore the window.
 	was_minimized_ = is_minimal();
-
-	// Adjust height to current tab
-	if (is_minimal()) {
-		tab_panel_.set_size(0, 0);
-	} else {
-		const int tab_height =
-		   35 +
-		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight) +
-		   kMargin;
-		tab_panel_.set_size(kWindowWidth, tab_height);
-		set_size(
-		   get_w(), tab_height + kMargin + navigation_panel_.get_h() + get_tborder() + get_bborder());
-		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
-	}
 }
 
 /*
@@ -599,21 +596,9 @@ void BuildingStatisticsMenu::update() {
 	const Widelands::Player& player = iplayer().player();
 	const Widelands::TribeDescr& tribe = player.tribe();
 
-	owned_label_.set_visible(false);
-	no_owned_label_.set_visible(false);
-	navigation_buttons_[NavigationButton::NextOwned]->set_visible(false);
-	navigation_buttons_[NavigationButton::PrevOwned]->set_visible(false);
-	construction_label_.set_visible(false);
-	no_construction_label_.set_visible(false);
-	navigation_buttons_[NavigationButton::NextConstruction]->set_visible(false);
-	navigation_buttons_[NavigationButton::PrevConstruction]->set_visible(false);
-	unproductive_box_.set_visible(false);
-	unproductive_label_.set_visible(false);
-	unproductive_percent_.set_visible(false);
-	unproductive_label2_.set_visible(false);
-	no_unproductive_label_.set_visible(false);
-	navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
-	navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
+	hbox_owned_.set_visible(false);
+	hbox_construction_.set_visible(false);
+	hbox_unproductive_.set_visible(false);
 
 	for (Widelands::DescriptionIndex id = 0; id < nr_building_types_; ++id) {
 		const Widelands::BuildingDescr& building = *tribe.get_building_descr(id);
@@ -686,20 +671,12 @@ void BuildingStatisticsMenu::update() {
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
-				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
+				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
 				                                                      "");
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(nr_unproductive >
-				                                                                     0);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_enabled(nr_unproductive >
-				                                                                     0);
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
-				unproductive_label_.set_text(_("Low Productivity"));
-				unproductive_box_.set_visible(true);
-				unproductive_label_.set_visible(true);
-				unproductive_percent_.set_visible(true);
-				unproductive_label2_.set_visible(true);
-				no_unproductive_label_.set_visible(true);
+				b_next_unproductive_.set_enabled(nr_unproductive > 0);
+				b_prev_unproductive_.set_enabled(nr_unproductive > 0);
+				hbox_unproductive_.set_visible(true);
+				label_unproductive_.set_text(_("Low Productivity:"));
 			}
 		} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
 			if (nr_owned) {
@@ -714,19 +691,13 @@ void BuildingStatisticsMenu::update() {
 				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
-				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
+				label_nr_unproductive_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
 				                                                      "");
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_enabled(
-				   total_soldier_capacity > total_stationed_soldiers);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_enabled(
-				   total_soldier_capacity > total_stationed_soldiers);
-				navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(true);
-				navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(true);
+				b_next_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
+				b_prev_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
+				hbox_unproductive_.set_visible(true);
 				/** TRANSLATORS: Label for number of buildings that are waiting for soldiers */
-				unproductive_label_.set_text(_("Lacking Soldiers:"));
-				unproductive_box_.set_visible(true);
-				unproductive_label_.set_visible(true);
-				no_unproductive_label_.set_visible(true);
+				label_unproductive_.set_text(_("Lacking Soldiers:"));
 			}
 		}
 
@@ -745,21 +716,15 @@ void BuildingStatisticsMenu::update() {
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
 		if (has_selection_ && id == current_building_type_) {
-			no_owned_label_.set_text(nr_owned > 0 ? std::to_string(nr_owned) : "");
-			navigation_buttons_[NavigationButton::NextOwned]->set_enabled(nr_owned > 0);
-			navigation_buttons_[NavigationButton::PrevOwned]->set_enabled(nr_owned > 0);
-			owned_label_.set_visible(true);
-			no_owned_label_.set_visible(true);
-			navigation_buttons_[NavigationButton::NextOwned]->set_visible(true);
-			navigation_buttons_[NavigationButton::PrevOwned]->set_visible(true);
+			label_nr_owned_.set_text(nr_owned > 0 ? std::to_string(nr_owned) : "");
+			b_next_owned_.set_enabled(nr_owned > 0);
+			b_prev_owned_.set_enabled(nr_owned > 0);
+			hbox_owned_.set_visible(true);
 			if (can_construct_this_building) {
-				no_construction_label_.set_text(nr_build > 0 ? std::to_string(nr_build) : "");
-				navigation_buttons_[NavigationButton::NextConstruction]->set_enabled(nr_build > 0);
-				navigation_buttons_[NavigationButton::PrevConstruction]->set_enabled(nr_build > 0);
-				construction_label_.set_visible(true);
-				no_construction_label_.set_visible(true);
-				navigation_buttons_[NavigationButton::NextConstruction]->set_visible(true);
-				navigation_buttons_[NavigationButton::PrevConstruction]->set_visible(true);
+				label_nr_construction_.set_text(nr_build > 0 ? std::to_string(nr_build) : "");
+				b_next_construction_.set_enabled(nr_build > 0);
+				b_prev_construction_.set_enabled(nr_build > 0);
+				hbox_construction_.set_visible(true);
 			}
 		}
 		building_buttons_[id]->set_tooltip(building.descname());
@@ -790,24 +755,12 @@ void BuildingStatisticsMenu::set_current_building_type(Widelands::DescriptionInd
 	// Update for current button
 	current_building_type_ = id;
 	building_buttons_[current_building_type_]->set_perm_pressed(true);
-	building_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
-	low_production_reset_focus();
+	label_name_.set_text(iplayer().player().tribe().get_building_descr(id)->descname());
 	has_selection_ = true;
 	update();
 }
 
 void BuildingStatisticsMenu::low_production_changed() {
-	const std::string cutoff = unproductive_percent_.text();
-	int number = boost::lexical_cast<int>(cutoff.c_str());
-
-	// Make sure that the user specified a correct number
-	if (std::to_string(number) == cutoff && 0 <= number && number <= 100) {
-		low_production_ = number;
-		update();
-	}
-}
-
-void BuildingStatisticsMenu::low_production_reset_focus() {
-	unproductive_percent_.set_can_focus(false);
-	unproductive_percent_.set_can_focus(true);
+	low_production_ = unproductive_threshold_.get_value();
+	update();
 }
