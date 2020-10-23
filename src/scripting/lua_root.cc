@@ -498,14 +498,15 @@ int LuaDescriptions::new_critter_type(lua_State* L) {
 	return 0;
 }
 
-// Documented in data/world/immovables/artifacts/artifact00/init.lua.
+// Documented in data/world/immovables/artifacts/artifact00/init.lua and
+// data/tribes/immovables/ashes/init.lua
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
 /* RST
    .. method:: new_immovable_type{table}
 
       Adds a new immovable type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_immovables`and :ref:`lua_world_immovables`  for detailed
-      documentation.
+      the descriptions. See :ref:`lua_tribes_immovables` and :ref:`lua_world_immovables`
+      for detailed documentation.
 
       :returns: :const:`0`
 */
