@@ -1414,6 +1414,13 @@ void Worker::create_needed_experience(Game& /* game */) {
 	current_exp_ = 0;
 }
 
+void Worker::set_current_experience(const int32_t xp) {
+	assert(needs_experience());
+	assert(xp >= 0);
+	assert(xp < descr().get_needed_experience());
+	current_exp_ = xp;
+}
+
 /**
  * Gain experience
  *
