@@ -1352,8 +1352,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 					} else {
 						if (upcast(ConstructionSite const, cs, building)) {
 							field.set_constructionsite(true);
-							*field.constructionsite =
-							   const_cast<ConstructionSite*>(cs)->get_info();
+							*field.constructionsite = const_cast<ConstructionSite*>(cs)->get_info();
 						} else if (upcast(DismantleSite const, ds, building)) {
 							field.set_constructionsite(false);
 							field.dismantlesite.progress = ds->get_built_per64k();

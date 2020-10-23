@@ -116,7 +116,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	}
 	if (time.is_valid()) {
 		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, animation_id, time,
-	                    player_color_to_draw, opacity);
+		                    player_color_to_draw, opacity);
 	}
 
 	// Now blit a segment of the current construction phase from the bottom.

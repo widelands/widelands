@@ -436,9 +436,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								   egbase.tribes().safe_building_index(fr.string()));
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
-								                          nullptr :
-								                          egbase.tribes().get_building_descr(
-								                             egbase.tribes().safe_building_index(descr));
+								                             nullptr :
+								                             egbase.tribes().get_building_descr(
+								                                egbase.tribes().safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(
@@ -462,9 +462,9 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
-								                          nullptr :
-								                          egbase.tribes().get_building_descr(
-								                             egbase.tribes().safe_building_index(descr));
+								                             nullptr :
+								                             egbase.tribes().get_building_descr(
+								                                egbase.tribes().safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(
@@ -665,20 +665,15 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 					// `building` can only be nullptr in compatibility cases.
 					// Remove the non-null check after v1.0
-					fw.string(field->dismantlesite.building ?
-					             field->dismantlesite.building->name() :
-					             "dismantlesite");
+					fw.string(field->dismantlesite.building ? field->dismantlesite.building->name() :
+					                                          "dismantlesite");
 					fw.unsigned_32(field->dismantlesite.progress);
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 					fw.string(field->constructionsite->becomes->name());
-					fw.string(field->constructionsite->was ?
-					             field->constructionsite->was->name() :
-					             "");
+					fw.string(field->constructionsite->was ? field->constructionsite->was->name() : "");
 
-					fw.unsigned_32(
-					   field->constructionsite->intermediates.size());
-					for (const BuildingDescr* d :
-					     field->constructionsite->intermediates) {
+					fw.unsigned_32(field->constructionsite->intermediates.size());
+					for (const BuildingDescr* d : field->constructionsite->intermediates) {
 						fw.string(d->name());
 					}
 
