@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-11 07:08+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-20 17:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -718,7 +718,7 @@ msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:203
 #: ../../src/ui_fsmenu/launch_mpg.cc:58
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:138
 #: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/mapdetails.cc:135
 #: ../../src/wui/minimap.cc:120
 msgid "Map"
@@ -750,7 +750,7 @@ msgid "Author: %s"
 msgstr "Ùghdar: %s"
 
 #: ../../src/editor/tools/info_tool.cc:222
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:110
 #, c-format
 msgid "Description: %s"
 msgstr "Tuairisgeul: %s"
@@ -3101,8 +3101,8 @@ msgid "unnamed %u"
 msgstr "gun ainm %u"
 
 #: ../../src/ui_fsmenu/launch_game.cc:57
-msgid "Type of game"
-msgstr "Seòrsa a’ gheama"
+msgid "Configure this game"
+msgstr "Rèitich an geama seo"
 
 #: ../../src/ui_fsmenu/launch_game.cc:71
 msgid "Peaceful mode"
@@ -3121,38 +3121,38 @@ msgstr "Tòisich air a’ gheama"
 msgid "Back"
 msgstr "Air ais"
 
-#: ../../src/ui_fsmenu/launch_game.cc:181
+#: ../../src/ui_fsmenu/launch_game.cc:183
 msgid "The relations between players are set by the scenario"
 msgstr "Thèid dàimhean nan cluicheadairean a shuidheachadh leis a’ chnàmh-sgeul"
 
-#: ../../src/ui_fsmenu/launch_game.cc:183
+#: ../../src/ui_fsmenu/launch_game.cc:185
 msgid "The relations between players are set by the saved game"
 msgstr "Chaidh dàimhean nan cluicheadairean a shuidheachadh leis a’ gheama air a shàbhaladh"
 
-#: ../../src/ui_fsmenu/launch_game.cc:185
+#: ../../src/ui_fsmenu/launch_game.cc:187
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "Cha cheadaich chumha na buaidhe a thag thu geamannan sìtheil"
 
-#: ../../src/ui_fsmenu/launch_game.cc:187
+#: ../../src/ui_fsmenu/launch_game.cc:189
 msgid "Forbid fighting between players"
 msgstr "Toirmisg sabaid eadar na cluicheadairean"
 
-#: ../../src/ui_fsmenu/launch_game.cc:198
+#: ../../src/ui_fsmenu/launch_game.cc:200
 msgid "The starting positions are set by the scenario"
 msgstr "Thèid na h-ionadan tòiseachaidh a shuidheachadh leis a’ chnàmh-sgeul"
 
-#: ../../src/ui_fsmenu/launch_game.cc:200
+#: ../../src/ui_fsmenu/launch_game.cc:202
 msgid "The starting positions are set by the saved game"
 msgstr "Thèid na h-ionadan tòiseachaidh a shuidheachadh leis a’ gheama air a shàbhaladh"
 
-#: ../../src/ui_fsmenu/launch_game.cc:203
+#: ../../src/ui_fsmenu/launch_game.cc:205
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Leig leis na cluicheadairean na h-ionadan tòiseachaidh aca fhèin a thaghadh aig toiseach a’ gheama"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:210
+#: ../../src/ui_fsmenu/launch_game.cc:212
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:445
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:279
@@ -3160,21 +3160,21 @@ msgstr "Leig leis na cluicheadairean na h-ionadan tòiseachaidh aca fhèin a tha
 msgid "Scenario"
 msgstr "Cnàmh-sgeul"
 
-#: ../../src/ui_fsmenu/launch_game.cc:211
+#: ../../src/ui_fsmenu/launch_game.cc:213
 msgid "Win condition is set through the scenario"
 msgstr "Chaidh cumha na buaidhe a shuidheachadh sa chnàmh-sgeul"
 
-#: ../../src/ui_fsmenu/launch_game.cc:216 ../../src/ui_fsmenu/launch_mpg.cc:65
+#: ../../src/ui_fsmenu/launch_game.cc:218 ../../src/ui_fsmenu/launch_mpg.cc:65
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:449
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
 msgid "Saved Game"
 msgstr "Geama air a shàbhaladh"
 
-#: ../../src/ui_fsmenu/launch_game.cc:218
+#: ../../src/ui_fsmenu/launch_game.cc:220
 msgid "The game is a saved game – the win condition was set before."
 msgstr "’S e geama air a shàbhaladh a tha sa gheama – chaidh cumha na buaidhe a shuidheachadh mar-thà."
 
-#: ../../src/ui_fsmenu/launch_game.cc:282
+#: ../../src/ui_fsmenu/launch_game.cc:284
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
@@ -3329,7 +3329,7 @@ msgstr "Mapa: %s"
 msgid "Win Condition: %s"
 msgstr "Cumha na buaidhe: %s"
 
-#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:105
 #, c-format
 msgid "Players: %s"
 msgstr "Cluicheadairean: %s"
@@ -3442,60 +3442,60 @@ msgstr "Tionndadh %1$s (%2$s)"
 msgid ""
 "(C) %1%-%2% by the Widelands Development Team · Licensed under the GNU "
 "General Public License V2.0"
-msgstr "(C) %1%-%2% leis an sgioba leasachaidh Widelands · Fo cheadachas GNU General Public License tionndadh 2.0"
+msgstr "(C) %1%-%2% le sgioba leasachaidh Widelands · Fo cheadachas GNU General Public License tionndadh 2.0"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:34
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr "treubh mhì-dhligheach “%s”"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:46
 msgid "Saved Players"
 msgstr "Cluicheadairean air an sàbhaladh"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:53
 #, c-format
 msgid "Player %u: –"
 msgstr "Cluicheadair %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:76
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr "Cluicheadair %1$u (%2$s): %3$s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Map Details"
 msgstr "Fiosrachadh a’ mhapa"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Scenario Details"
 msgstr "Fiosrachadh a’ chnàmh-sgeòil"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:99
 #, c-format
 msgid "Size: %s"
 msgstr "Meud: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:102
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:117
 #, c-format
 msgid "Hint: %s"
 msgstr "Gliocas: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:149
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:148
 msgid "No map selected"
 msgstr "Cha deach mapa a thaghadh"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:159
 msgid "Change map or saved game"
 msgstr "Atharraich am mapa no an geama air a shàbhaladh"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:214
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:213
 msgid "(no map)"
 msgstr "(gun mhapa)"
 
@@ -3776,7 +3776,7 @@ msgstr "Eadar-aghaidh"
 
 #: ../../src/ui_fsmenu/options.cc:247
 msgid "Windows"
-msgstr "Uinneagan"
+msgstr "Uinneag"
 
 #: ../../src/ui_fsmenu/options.cc:248
 msgid "Sound"
@@ -3788,11 +3788,11 @@ msgstr "Sàbhaladh"
 
 #: ../../src/ui_fsmenu/options.cc:250
 msgid "New Games"
-msgstr "Geamannan ùra"
+msgstr "Geama ùr"
 
 #: ../../src/ui_fsmenu/options.cc:251
 msgid "In-Game"
-msgstr "Am broinn geama"
+msgstr "Sa gheama"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:307

@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-10 09:25+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-19 15:56+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -717,7 +717,7 @@ msgstr "%1% x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:203
 #: ../../src/ui_fsmenu/launch_mpg.cc:58
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:138
 #: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/mapdetails.cc:135
 #: ../../src/wui/minimap.cc:120
 msgid "Map"
@@ -749,7 +749,7 @@ msgid "Author: %s"
 msgstr "Obra de: %s"
 
 #: ../../src/editor/tools/info_tool.cc:222
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:110
 #, c-format
 msgid "Description: %s"
 msgstr "Descripció: %s"
@@ -3074,8 +3074,8 @@ msgid "unnamed %u"
 msgstr "sense nom %u"
 
 #: ../../src/ui_fsmenu/launch_game.cc:57
-msgid "Type of game"
-msgstr "Tipus de partida"
+msgid "Configure this game"
+msgstr "Configura aquesta partida"
 
 #: ../../src/ui_fsmenu/launch_game.cc:71
 msgid "Peaceful mode"
@@ -3094,38 +3094,38 @@ msgstr "Comença la partida"
 msgid "Back"
 msgstr "Enrere"
 
-#: ../../src/ui_fsmenu/launch_game.cc:181
+#: ../../src/ui_fsmenu/launch_game.cc:183
 msgid "The relations between players are set by the scenario"
 msgstr "Les relacions entre els jugadors les estableix l'escenari."
 
-#: ../../src/ui_fsmenu/launch_game.cc:183
+#: ../../src/ui_fsmenu/launch_game.cc:185
 msgid "The relations between players are set by the saved game"
 msgstr "Les relacions entre els jugadors les estableix la partida desada."
 
-#: ../../src/ui_fsmenu/launch_game.cc:185
+#: ../../src/ui_fsmenu/launch_game.cc:187
 msgid "The selected win condition does not allow peaceful matches"
 msgstr "La condició de victòria seleccionada no permet partides pacífiques."
 
-#: ../../src/ui_fsmenu/launch_game.cc:187
+#: ../../src/ui_fsmenu/launch_game.cc:189
 msgid "Forbid fighting between players"
 msgstr "Prohibeix les lluites entre jugadors"
 
-#: ../../src/ui_fsmenu/launch_game.cc:198
+#: ../../src/ui_fsmenu/launch_game.cc:200
 msgid "The starting positions are set by the scenario"
 msgstr "Les posicions inicials les estableix l'escenari"
 
-#: ../../src/ui_fsmenu/launch_game.cc:200
+#: ../../src/ui_fsmenu/launch_game.cc:202
 msgid "The starting positions are set by the saved game"
 msgstr "Les posicions inicials dels jugadors les estableix la partida desada."
 
-#: ../../src/ui_fsmenu/launch_game.cc:203
+#: ../../src/ui_fsmenu/launch_game.cc:205
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr "Permet als jugadors escollir la seva posició a l'inici de la partida"
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:210
+#: ../../src/ui_fsmenu/launch_game.cc:212
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:445
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:279
@@ -3133,21 +3133,21 @@ msgstr "Permet als jugadors escollir la seva posició a l'inici de la partida"
 msgid "Scenario"
 msgstr "Escenari"
 
-#: ../../src/ui_fsmenu/launch_game.cc:211
+#: ../../src/ui_fsmenu/launch_game.cc:213
 msgid "Win condition is set through the scenario"
 msgstr "Condició de victòria assignada per a aquest escenari"
 
-#: ../../src/ui_fsmenu/launch_game.cc:216 ../../src/ui_fsmenu/launch_mpg.cc:65
+#: ../../src/ui_fsmenu/launch_game.cc:218 ../../src/ui_fsmenu/launch_mpg.cc:65
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:449
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
 msgid "Saved Game"
 msgstr "Carrega una partida"
 
-#: ../../src/ui_fsmenu/launch_game.cc:218
+#: ../../src/ui_fsmenu/launch_game.cc:220
 msgid "The game is a saved game – the win condition was set before."
 msgstr "La partida ja estava desada: la condició de victòria ja està establerta."
 
-#: ../../src/ui_fsmenu/launch_game.cc:282
+#: ../../src/ui_fsmenu/launch_game.cc:284
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
@@ -3302,7 +3302,7 @@ msgstr "Mapa: %s"
 msgid "Win Condition: %s"
 msgstr "Condició de victòria: %s"
 
-#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:105
 #, c-format
 msgid "Players: %s"
 msgstr "Jugadors: %s"
@@ -3417,58 +3417,58 @@ msgid ""
 "General Public License V2.0"
 msgstr "(C) %1%-%2% de l'equip de desenvolupament del Widelands sota la Llicència Pública General GNU V2.0"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:34
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr "cultura no vàlida ‘%s’"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:46
 msgid "Saved Players"
 msgstr "Jugadors desats"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:53
 #, c-format
 msgid "Player %u: –"
 msgstr "Jugador %u: –"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:76
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr "Jugador %1$u (%2$s): %3$s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Map Details"
 msgstr "Detalls del mapa"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Scenario Details"
 msgstr "Detalls de l'escenari"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:99
 #, c-format
 msgid "Size: %s"
 msgstr "Mida: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:102
 #, c-format
 msgid "%1$u×%2$u"
 msgstr "%1$u×%2$u"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:117
 #, c-format
 msgid "Hint: %s"
 msgstr "Consell: %s"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:149
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:148
 msgid "No map selected"
 msgstr "No hi ha cap mapa seleccionat"
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:159
 msgid "Change map or saved game"
 msgstr "Canvia el mapa o partida desada."
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:214
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:213
 msgid "(no map)"
 msgstr "(cap mapa)*"
 
