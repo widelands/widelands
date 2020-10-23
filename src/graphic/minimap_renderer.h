@@ -73,11 +73,37 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 // main view in map pixel coordinates and is used to draw the wire frame view
 // window. The 'view_point' is map pixel that will be drawn as the top-left
 // point in the resulting minimap.
+// This draws the entire minimap from start to finish. It can also be drawn in
+// stages by the functions below.
 std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
                                       const Widelands::Player* player,
                                       const Rectf& view_area,
                                       const MiniMapType& map_draw_type,
                                       MiniMapLayer layers);
+
+// Create an empty minimap texture.
+std::unique_ptr<Texture> create_minimap_empty(const Widelands::EditorGameBase& egbase,
+                                              MiniMapLayer layers);
+
+// Draw a static (independent of the view area) version of the minimap on the
+// given texture. Can update the entire texture or just a part of it,
+// depending on 'draw_full'.
+// If 'draw_full' is false, 'rows_drawn' has to be passed to keep track of
+// the row number where we stopped drawing.
+void draw_minimap_static(Texture& texture,
+                         const Widelands::EditorGameBase& egbase,
+                         const Widelands::Player* player,
+                         MiniMapLayer layers,
+                         const bool draw_full = true,
+                         uint16_t* rows_drawn = nullptr);
+
+// Blit the static texture from the previous step onto a new texture.
+// Optionally center it on 'view_area' and draw the view window.
+std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
+                                            const Widelands::EditorGameBase& egbase,
+                                            const Rectf& view_area,
+                                            const MiniMapType& map_draw_type,
+                                            MiniMapLayer layers);
 
 // Find an even multiplier to fit the map into 300px
 int scale_map(const Widelands::Map& map, bool zoom);

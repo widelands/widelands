@@ -88,13 +88,18 @@ private:
 		Rectf view_area_;
 		const Image* pic_map_spot_;
 
+		// Intermediate texture, cached between frames.
+		std::unique_ptr<Texture> minimap_image_static_;
+		uint16_t rows_drawn_;
+
 		// This needs to be owned since it will be rendered by the RenderQueue
 		// later, so it must be valid for the whole frame.
-		std::unique_ptr<Texture> minimap_image_;
+		std::unique_ptr<Texture> minimap_image_final_;
 
 	public:
 		MiniMapLayer* minimap_layers_;
 		MiniMapType* minimap_type_;
+		bool started_drawing_;
 	};
 
 	uint32_t number_of_buttons_per_row() const;
