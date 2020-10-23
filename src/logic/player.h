@@ -375,10 +375,16 @@ public:
 		 */
 		const MapObjectDescr* map_object_descr;
 
-		/* Information for constructionSite and DismantleSite animation.
+		/* Information for ConstructionSite and DismantleSite animation.
 		 * `constructionsite` is only valid if there is a constructionsite
-		 * on this node. `dismantlesite.progress` equals the value of
-		 * `get_built_per64k()` at the time the dismantlesite was last seen.
+		 * on this node. `dismantlesite` is only valid if there is a dismantlesite.
+		 *
+		 * `dismantlesite.progress` equals the value of `get_built_per64k()`
+		 * at the time the dismantlesite was last seen.
+		 *
+		 * `constructionsite` is allocated on demand because of its size.
+		 * Call `set_constructionsite(true)` before using `constructionsite`,
+		 * and call `set_constructionsite(false)` before using `dismantlesite`.
 		 */
 		union {
 			struct {
