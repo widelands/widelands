@@ -131,30 +131,6 @@ public:
 	int new_immovable_type(lua_State* L);
 	int new_resource_type(lua_State* L);
 	int new_terrain_type(lua_State* L);
-
-	/*
-	 * C methods
-	 */
-};
-
-class LuaTribes : public LuaRootModuleClass {
-public:
-	LUNA_CLASS_HEAD(LuaTribes);
-	const char* get_modulename() override {
-		return "";
-	}
-
-	LuaTribes() {
-	}
-	explicit LuaTribes(lua_State* L);
-
-	void __persist(lua_State* L) override;
-	void __unpersist(lua_State* L) override;
-
-	/*
-	 * Properties
-	 */
-
 	/*
 	 * Lua methods
 	 */
@@ -162,7 +138,6 @@ public:
 	int new_ferry_type(lua_State* L);
 	int new_constructionsite_type(lua_State* L);
 	int new_dismantlesite_type(lua_State* L);
-	int new_immovable_type(lua_State* L);
 	int new_market_type(lua_State* L);
 	int new_militarysite_type(lua_State* L);
 	int new_productionsite_type(lua_State* L);

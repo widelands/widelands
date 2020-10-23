@@ -362,6 +362,20 @@ const MethodType<LuaDescriptions> LuaDescriptions::Methods[] = {
    METHOD(LuaDescriptions, new_immovable_type),
    METHOD(LuaDescriptions, new_resource_type),
    METHOD(LuaDescriptions, new_terrain_type),
+   METHOD(LuaDescriptions, new_carrier_type),
+   METHOD(LuaDescriptions, new_ferry_type),
+   METHOD(LuaDescriptions, new_constructionsite_type),
+   METHOD(LuaDescriptions, new_dismantlesite_type),
+   METHOD(LuaDescriptions, new_market_type),
+   METHOD(LuaDescriptions, new_militarysite_type),
+   METHOD(LuaDescriptions, new_productionsite_type),
+   METHOD(LuaDescriptions, new_ship_type),
+   METHOD(LuaDescriptions, new_soldier_type),
+   METHOD(LuaDescriptions, new_trainingsite_type),
+   METHOD(LuaDescriptions, new_tribe),
+   METHOD(LuaDescriptions, new_ware_type),
+   METHOD(LuaDescriptions, new_warehouse_type),
+   METHOD(LuaDescriptions, new_worker_type),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDescriptions> LuaDescriptions::Properties[] = {
@@ -484,8 +498,17 @@ int LuaDescriptions::new_critter_type(lua_State* L) {
 	return 0;
 }
 
-// Documented in data/world/immovables/bush1/init.lua.
+// Documented in data/world/immovables/artifacts/artifact00/init.lua.
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
+/* RST
+   .. method:: new_immovable_type{table}
+
+      Adds a new immovable type. Takes a single argument, a table with
+      the descriptions. See :ref:`lua_tribes_immovables`and :ref:`lua_world_immovables`  for detailed
+      documentation.
+
+      :returns: :const:`0`
+*/
 int LuaDescriptions::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -501,69 +524,6 @@ int LuaDescriptions::new_immovable_type(lua_State* L) {
 	return 0;
 }
 
-/*
- ==========================================================
- C METHODS
- ==========================================================
- */
-
-/* RST
-Tribes
-------
-
-.. class:: Tribes
-
-   This offers access to the objects available for the tribes and allows to add
-   new objects. See :ref:`lua_tribes` for detailed documentation.
-*/
-
-const char LuaTribes::className[] = "Tribes";
-const MethodType<LuaTribes> LuaTribes::Methods[] = {
-   METHOD(LuaTribes, new_carrier_type),
-   METHOD(LuaTribes, new_ferry_type),
-   METHOD(LuaTribes, new_constructionsite_type),
-   METHOD(LuaTribes, new_dismantlesite_type),
-   METHOD(LuaTribes, new_immovable_type),
-   METHOD(LuaTribes, new_market_type),
-   METHOD(LuaTribes, new_militarysite_type),
-   METHOD(LuaTribes, new_productionsite_type),
-   METHOD(LuaTribes, new_ship_type),
-   METHOD(LuaTribes, new_soldier_type),
-   METHOD(LuaTribes, new_trainingsite_type),
-   METHOD(LuaTribes, new_tribe),
-   METHOD(LuaTribes, new_ware_type),
-   METHOD(LuaTribes, new_warehouse_type),
-   METHOD(LuaTribes, new_worker_type),
-   {nullptr, nullptr},
-};
-const PropertyType<LuaTribes> LuaTribes::Properties[] = {
-   {nullptr, nullptr, nullptr},
-};
-
-LuaTribes::LuaTribes(lua_State* /* L */) {
-	// Nothing to do.
-}
-
-void LuaTribes::__persist(lua_State*) {
-	// Nothing to be done.
-}
-
-void LuaTribes::__unpersist(lua_State*) {
-	// Nothing to be done.
-}
-
-/*
- ==========================================================
- PROPERTIES
- ==========================================================
- */
-
-/*
- ==========================================================
- LUA METHODS
- ==========================================================
- */
-
 /* RST
    .. method:: new_constructionsite_type{table}
 
@@ -573,7 +533,7 @@ void LuaTribes::__unpersist(lua_State*) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_constructionsite_type(lua_State* L) {
+int LuaDescriptions::new_constructionsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -597,7 +557,7 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_dismantlesite_type(lua_State* L) {
+int LuaDescriptions::new_dismantlesite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -621,7 +581,7 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_militarysite_type(lua_State* L) {
+int LuaDescriptions::new_militarysite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -645,7 +605,7 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_productionsite_type(lua_State* L) {
+int LuaDescriptions::new_productionsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -669,7 +629,7 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_trainingsite_type(lua_State* L) {
+int LuaDescriptions::new_trainingsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -693,7 +653,7 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_warehouse_type(lua_State* L) {
+int LuaDescriptions::new_warehouse_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -718,7 +678,7 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_market_type(lua_State* L) {
+int LuaDescriptions::new_market_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -734,30 +694,6 @@ int LuaTribes::new_market_type(lua_State* L) {
 }
 
 /* RST
-   .. method:: new_immovable_type{table}
-
-      Adds a new immovable type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_immovables` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_immovable_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::IMMOVABLE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-/* RST
    .. method:: new_ship_type{table}
 
       Adds a new ship type. Takes a single argument, a table with
@@ -766,7 +702,7 @@ int LuaTribes::new_immovable_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_ship_type(lua_State* L) {
+int LuaDescriptions::new_ship_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -790,7 +726,7 @@ int LuaTribes::new_ship_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_ware_type(lua_State* L) {
+int LuaDescriptions::new_ware_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -813,7 +749,7 @@ int LuaTribes::new_ware_type(lua_State* L) {
 
       :returns: :const:`nil`
 */
-int LuaTribes::new_carrier_type(lua_State* L) {
+int LuaDescriptions::new_carrier_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -836,7 +772,7 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 
       :returns: :const:`nil`
 */
-int LuaTribes::new_ferry_type(lua_State* L) {
+int LuaDescriptions::new_ferry_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -859,7 +795,7 @@ int LuaTribes::new_ferry_type(lua_State* L) {
 
       :returns: :const:`nil`
 */
-int LuaTribes::new_soldier_type(lua_State* L) {
+int LuaDescriptions::new_soldier_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -882,7 +818,7 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 
       :returns: :const:`nil`
 */
-int LuaTribes::new_worker_type(lua_State* L) {
+int LuaDescriptions::new_worker_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -906,7 +842,7 @@ int LuaTribes::new_worker_type(lua_State* L) {
 
       :returns: :const:`0`
 */
-int LuaTribes::new_tribe(lua_State* L) {
+int LuaDescriptions::new_tribe(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -943,6 +879,6 @@ void luaopen_wlroot(lua_State* L, bool in_editor) {
 		lua_pop(L, 1);  // Pop the meta table
 	}
 	register_class<LuaDescriptions>(L, "", false);
-	register_class<LuaTribes>(L, "", false);
+	register_class<LuaDescriptions>(L, "", false);
 }
 }  // namespace LuaRoot

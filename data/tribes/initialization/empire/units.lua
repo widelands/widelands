@@ -1,4 +1,4 @@
-tribes = wl.Tribes()
+tribes = wl.Descriptions()
 
 image_dirname = path.dirname(__file__) .. "images/"
 
