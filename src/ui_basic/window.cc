@@ -124,16 +124,6 @@ Window::Window(Panel* const parent,
                                  "")) {
 	set_title(title);
 
-	// TODO(Nordfriese): For easier testing of various image sets
-	if (s == WindowStyle::kFsMenu) {
-		const std::set<std::string> images =
-		   g_fs->list_directory("templates/default/fsmenu/windows/bg");
-		auto it = images.begin();
-		std::advance(it, std::rand() % images.size());  // NOLINT
-		style_.background_ = g_image_cache->get(*it);
-		set_title(title + " [" + g_fs->fs_filename(it->c_str()) + "]");
-	}
-
 	button_close_->sigclicked.connect([this] {
 		if (!pinned_) {
 			clicked_button_close();
