@@ -478,7 +478,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
 	}
 
 	if (Mix_PlayingMusic()) {
-		Mix_FadeOutMusic((std::max)(fadeout_ms, kMinimumMusicFade));
+		Mix_FadeOutMusic(std::max(fadeout_ms, kMinimumMusicFade));
 	}
 }
 

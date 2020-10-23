@@ -147,13 +147,13 @@ struct NodeAndTriangle {
 
 // A height interval.
 struct HeightInterval {
-	HeightInterval(const uint8_t Min, const uint8_t Max) : min_(Min), max_(Max) {
+	HeightInterval(const uint8_t Min, const uint8_t Max) : min(Min), max(Max) {
 	}
 	bool valid() const {
-		return min_ <= max_;
+		return min <= max;
 	}
 
-	uint8_t min_, max_;
+	uint8_t min, max;
 };
 }  // namespace Widelands
 

@@ -2455,14 +2455,14 @@ Map::change_height(const EditorGameBase& egbase, Area<FCoords> area, int16_t con
 uint32_t
 Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval height_interval) {
 	assert(height_interval.valid());
-	assert(height_interval.max_ <= MAX_FIELD_HEIGHT);
+	assert(height_interval.max <= MAX_FIELD_HEIGHT);
 	{
 		MapRegion<Area<FCoords>> mr(*this, area);
 		do {
-			if (mr.location().field->height < height_interval.min_) {
-				mr.location().field->height = height_interval.min_;
-			} else if (height_interval.max_ < mr.location().field->height) {
-				mr.location().field->height = height_interval.max_;
+			if (mr.location().field->height < height_interval.min) {
+				mr.location().field->height = height_interval.min;
+			} else if (height_interval.max < mr.location().field->height) {
+				mr.location().field->height = height_interval.max;
 			}
 		} while (mr.advance(*this));
 	}
@@ -2472,18 +2472,18 @@ Map::set_height(const EditorGameBase& egbase, Area<FCoords> area, HeightInterval
 		bool changed;
 		do {
 			changed = false;
-			height_interval.min_ = height_interval.min_ < MAX_FIELD_HEIGHT_DIFF ?
-			                          0 :
-			                          height_interval.min_ - MAX_FIELD_HEIGHT_DIFF;
-			height_interval.max_ = height_interval.max_ < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
-			                          height_interval.max_ + MAX_FIELD_HEIGHT_DIFF :
-			                          MAX_FIELD_HEIGHT;
+			height_interval.min = height_interval.min < MAX_FIELD_HEIGHT_DIFF ?
+			                         0 :
+			                         height_interval.min - MAX_FIELD_HEIGHT_DIFF;
+			height_interval.max = height_interval.max < MAX_FIELD_HEIGHT - MAX_FIELD_HEIGHT_DIFF ?
+			                         height_interval.max + MAX_FIELD_HEIGHT_DIFF :
+			                         MAX_FIELD_HEIGHT;
 			do {
-				if (mr.location().field->height < height_interval.min_) {
-					mr.location().field->height = height_interval.min_;
+				if (mr.location().field->height < height_interval.min) {
+					mr.location().field->height = height_interval.min;
 					changed = true;
-				} else if (height_interval.max_ < mr.location().field->height) {
-					mr.location().field->height = height_interval.max_;
+				} else if (height_interval.max < mr.location().field->height) {
+					mr.location().field->height = height_interval.max;
 					changed = true;
 				}
 			} while (mr.advance(*this));
