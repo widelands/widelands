@@ -724,7 +724,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			// Read information about worker outputs
-			if (prod.output_worker_types().size() > 0) {
+			if (!prod.output_worker_types().empty()) {
 				for (const Widelands::DescriptionIndex& temp_output : prod.output_worker_types()) {
 					if (temp_output == tribe_->soldier()) {
 						bo.set_is(BuildingAttribute::kBarracks);
@@ -3954,9 +3954,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 		bool occupied_military_ = false;
 		Widelands::Building* b = flag.get_building();
 		if (upcast(Widelands::MilitarySite, militb, b)) {
-			if (militb->soldier_control()->stationed_soldiers().size() > 0) {
-				occupied_military_ = true;
-			}
+			occupied_military_ = !militb->soldier_control()->stationed_soldiers().empty();
 		}
 
 		// check if we are within grace time, if not or gracetime unset we need to do something
@@ -4060,7 +4058,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 			// interested to connect to it
 			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
 			// ferries
-			if (player_immovable->economy(Widelands::wwWORKER).warehouses().size() == 0) {
+			if (player_immovable->economy(Widelands::wwWORKER).warehouses().empty()) {
 				continue;
 			}
 

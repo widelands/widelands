@@ -196,7 +196,7 @@ FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 		//  TODO(unknown): Something strange is going on with regard to the leading slash!
 		//  This is just an ugly workaround and does not solve the real
 		//  problem (which remains undiscovered)
-		if (('/' + path == filepath || path == filepath || path.length() == 1) && filename.size()) {
+		if (!filename.empty() && ('/' + path == filepath || path == filepath || path.length() == 1)) {
 			results.insert(complete_filename.substr(basedir_in_zip_file_.size()));
 		}
 
@@ -229,7 +229,7 @@ bool ZipFilesystem::file_exists(const std::string& path) const {
 		path_in = path_in.substr(1);
 	}
 
-	assert(path_in.size());
+	assert(!path_in.empty());
 
 	for (;;) {
 		const int32_t success =
@@ -370,7 +370,7 @@ void ZipFilesystem::make_directory(const std::string& dirname) {
 	complete_filename += "/";
 	complete_filename += dirname;
 
-	assert(dirname.size());
+	assert(!dirname.empty());
 	if (*complete_filename.rbegin() != '/') {
 		complete_filename += '/';
 	}

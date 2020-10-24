@@ -221,7 +221,7 @@ void Critter::start_task_program(Game& game, const std::string& programname) {
 }
 
 void Critter::program_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		molog(game.get_gametime(), "[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
@@ -263,7 +263,7 @@ constexpr uint32_t kMinCritterLifetime = 20 * 60 * 1000;
 constexpr uint32_t kMaxCritterLifetime = 10 * 60 * 60 * 1000;
 
 void Critter::roam_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		return pop_task(game);
 	}
 

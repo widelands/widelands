@@ -58,7 +58,6 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-default-member-init]',
     '[modernize-use-emplace]',
     '[modernize-use-equals-default]',
-    '[readability-container-size-empty]',
     '[readability-delete-null-pointer]',
     '[readability-else-after-return]',
     '[readability-function-size]',

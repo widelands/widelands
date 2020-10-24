@@ -1070,7 +1070,7 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("editor")) {
 		filename_ = commandline_["editor"];
-		if (filename_.size() && *filename_.rbegin() == '/') {
+		if (!filename_.empty() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kEditor;
@@ -1082,7 +1082,7 @@ void WLApplication::handle_commandline_parameters() {
 			throw wexception("replay can not be combined with other actions");
 		}
 		filename_ = commandline_["replay"];
-		if (filename_.size() && *filename_.rbegin() == '/') {
+		if (!filename_.empty() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kReplay;
@@ -1174,7 +1174,7 @@ void WLApplication::mainmenu() {
 	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
 
 	for (;;) {
-		if (message.size()) {
+		if (!message.empty()) {
 			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
 			UI::WLMessageBox mmb(mm.get(), UI::WindowStyle::kFsMenu, messagetitle,
@@ -1590,7 +1590,7 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 	}
 	try {
 		// Load selected campaign-map-file
-		if (filename.size()) {
+		if (!filename.empty()) {
 			return game.run_splayer_scenario_direct(filename.c_str(), "");
 		}
 	} catch (const std::exception& e) {

@@ -802,7 +802,7 @@ Calls another program of the same productionsite. Example:
       },
 */
 ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
-	if (arguments.size() < 1 || arguments.size() > 4) {
+	if (arguments.empty() || arguments.size() > 4) {
 		throw GameDataError(
 		   "Usage: call=<program name> [on failure|completion|skip fail|complete|skip|repeat]");
 	}
@@ -1186,7 +1186,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 		std::vector<std::string> group_list;
 		for (const auto& group : l_groups) {
-			assert(group.first.size());
+			assert(!group.first.empty());
 
 			std::vector<std::string> ware_list;
 			for (const auto& entry : group.first) {
@@ -1300,7 +1300,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
-	assert(produced_wares_.size());
+	assert(!produced_wares_.empty());
 
 	std::vector<std::string> ware_descnames;
 	uint8_t count = 0;
@@ -1384,7 +1384,7 @@ void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) cons
 	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
-	assert(recruited_workers_.size());
+	assert(!recruited_workers_.empty());
 	std::vector<std::string> worker_descnames;
 	uint8_t count = 0;
 	for (const auto& item_pair : recruited_workers_) {
