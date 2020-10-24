@@ -337,13 +337,9 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 
-			const UI::FontStyleInfo& font_style = er.font_style() != nullptr ?
-			                                         *er.font_style() :
-			                                         er.is_disabled() ?
-			                                         g_style_manager->table_style(style_).disabled() :
-			                                         g_style_manager->table_style(style_).enabled();
-			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
+			const UI::FontStyleInfo& font_style = get_column_fontstyle(er);
+			std::shared_ptr<const RenderedText> rendered_text =
+			   g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
@@ -371,6 +367,52 @@ void Table<void*>::draw(RenderTarget& dst) {
 		y += lineheight;
 		++idx;
 	}
+}
+
+bool Table<void*>::handle_tooltip() {
+	int32_t lineheight = get_lineheight();
+	uint32_t idx = scrollpos_ / lineheight;
+	int32_t y = 1 + idx * lineheight - scrollpos_ + headerheight_;
+
+	Vector2i cursor_pos = get_mouse_position();
+	for (uint32_t row = idx; row < entry_records_.size(); ++row) {
+		const EntryRecord& er = *entry_records_[row];
+		for (uint32_t c = 0, column_x = 0; c < columns_.size(); ++c) {
+
+			const int column_w = columns_[c].width;
+			Vector2i point(column_x, y);
+			if (is_mouse_in(cursor_pos, point, column_w)) {
+				const std::string& entry_string = er.get_string(c);
+				FontStyleInfo& font_style = get_column_fontstyle(er);
+				std::shared_ptr<const UI::RenderedText> rendered_text =
+				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
+
+				if (rendered_text->width() > column_w) {
+					return Panel::draw_tooltip(entry_string);
+				}
+			}
+			column_x += column_w;
+		}
+		y += lineheight;
+	}
+
+	return true;
+}
+
+UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryRecord& er) {
+	return const_cast<FontStyleInfo&>(er.font_style() != nullptr ?
+	                                     *er.font_style() :
+	                                     er.is_disabled() ?
+	                                     g_style_manager->table_style(style_).disabled() :
+	                                     g_style_manager->table_style(style_).enabled());
+}
+bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
+                               const Vector2i& point,
+                               const int column_width) const {
+	const int line = get_lineheight();
+
+	return cursor_pos.x >= point.x && cursor_pos.x <= point.x + column_width &&
+	       cursor_pos.y > point.y && cursor_pos.y < point.y + line;
 }
 
 /**
@@ -813,6 +855,10 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
+bool Table<void*>::handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) {
+	// needed to activate tooltip rendering without providing tooltiptext to parent (panel) class
+	return true;
+}
 
 Table<void*>::EntryRecord::EntryRecord(void* const e)
    : entry_(e), font_style_(nullptr), disabled_(false) {
@@ -832,6 +878,7 @@ void Table<void*>::EntryRecord::set_string(uint8_t const col, const std::string&
 	data_.at(col).d_picture = nullptr;
 	data_.at(col).d_string = str;
 }
+
 const Image* Table<void*>::EntryRecord::get_picture(uint8_t const col) const {
 	assert(col < data_.size());
 
@@ -842,4 +889,5 @@ const std::string& Table<void*>::EntryRecord::get_string(uint8_t const col) cons
 
 	return data_.at(col).d_string;
 }
+
 }  // namespace UI
