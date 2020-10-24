@@ -159,7 +159,7 @@ bool ZipFilesystem::is_writable() const {
  * cross-platform way of doing this
  */
 FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
-	assert(path_in.size());  //  prevent invalid read below
+	assert(!path_in.empty());  //  prevent invalid read below
 
 	std::string path = basedir_in_zip_file_;
 	if (*path_in.begin() != '/') {
