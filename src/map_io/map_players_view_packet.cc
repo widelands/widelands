@@ -198,7 +198,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				counter = 0;
 				for (auto& field : seen_fields) {
-					field->time_node_last_unseen = Time(stol(field_vector[counter]));
+					field->time_node_last_unseen = Time(stoll(field_vector[counter]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -213,8 +213,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					boost::split(data_vector, field_vector[counter], boost::is_any_of("*"));
 					assert(data_vector.size() == 2);
 
-					field->time_triangle_last_surveyed[0] = Time(stol(data_vector[0]));
-					field->time_triangle_last_surveyed[1] = Time(stol(data_vector[1]));
+					field->time_triangle_last_surveyed[0] = Time(stoll(data_vector[0]));
+					field->time_triangle_last_surveyed[1] = Time(stoll(data_vector[1]));
 					++counter;
 				}
 				assert(counter == no_of_seen_fields);
@@ -348,6 +348,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					}
 				}
 			}
+
+			// Data for kVisible fields is not saveloaded so rediscover it
+			if (packet_version == kCurrentPacketVersion) {
+				iterate_players_existing(p, nr_players, egbase, player) {
+					for (MapIndex m = 0; m < no_of_fields; ++m) {
+						Player::Field& f = player->fields_[m];
+						if (f.vision == VisibleState::kVisible) {
+							player->rediscover_node(map, map.get_fcoords(map[m]));
+						}
+					}
+				}
+			}
+
 		} else if (packet_version >= 1 && packet_version <= 2) {
 			// TODO(Nordfriese): Savegame compatibility, remove after v1.0
 			for (uint8_t i = fr.unsigned_8(); i; --i) {
