@@ -38,14 +38,14 @@ jobs:
         fetch-depth: 1
     - name: Check
       run: |
-        CXX=${{ matrix.compiler }}
-        if [ ${CXX:0:1} == c ]
+        CXX="${{ matrix.compiler }}"
+        if [ "${CXX:0:1}" == "c" ]
         then
           export CC="/usr/bin/${{ matrix.compiler }}"  # clang-10
-          export CXX="${CC/clang/clang++}              # clang++-10
+          export CXX="${CC/clang/clang++}"             # clang++-10
         else
           export CXX="/usr/bin/${{ matrix.compiler }}" # g++-10
-          export CC="${CXX/g++/gcc}                    # gcc-10
+          export CC="${CXX/g++/gcc}"                   # gcc-10
         fi
         echo "NOCOM '$CXX' '$CC'"
         mkdir build
