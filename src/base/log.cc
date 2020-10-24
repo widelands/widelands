@@ -169,8 +169,6 @@ static const char* to_string(const LogType& type) {
 		return "WARNING";
 	case LogType::kError:
 		return "ERROR";
-	default:
-		NEVER_HERE();
 	}
 }
 
