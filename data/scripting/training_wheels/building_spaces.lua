@@ -9,6 +9,8 @@ include "scripting/training_wheels/utils/ui.lua"
 
 local training_wheel_name = training_wheel_name_from_filename(__file__)
 
+local solved = false
+
 run(function()
    sleep(10)
 
@@ -60,24 +62,36 @@ run(function()
 
    campaign_message_box(msg_open_menu)
 
+   -- Check whether buildhelp is on in separate thread so the player can complete this via keyboard shortcut
+   run(function()
+      while not mapview.buildhelp do sleep(200) end
+      solved = true
+   end)
+
    local showhide_dropdown = mapview.dropdowns["dropdown_menu_showhide"]
 
    showhide_dropdown:indicate(true)
 
-   while not showhide_dropdown.expanded do sleep(100) end
+   while not showhide_dropdown.expanded and not solved do sleep(200) end
 
-   close_story_messagebox()
-   campaign_message_box(msg_select_item)
+   if not solved then
+      -- Player did not use keyboard shortcut, continue explaining
+      close_story_messagebox()
+      campaign_message_box(msg_select_item)
 
-   showhide_dropdown:indicate_item(1)
+      showhide_dropdown:indicate_item(1)
 
-   -- Wait for buildhelp to come on
-   while not mapview.buildhelp do sleep(200) end
+      -- Wait for buildhelp to come on
+      while not solved do sleep(200) end
+   end
 
    mapview:indicate(false)
 
    close_story_messagebox()
    campaign_message_box(msg_finished)
+
+   -- We might still have some indicators and messages boxes left over from unexpected player actions
+   clean_up_message_boxes_and_indicators()
 
    player:mark_training_wheel_as_solved(training_wheel_name)
 end)

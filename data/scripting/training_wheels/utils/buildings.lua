@@ -1,4 +1,6 @@
 -- TODO(GunChleoc): Document more fully
+include "scripting/messages.lua"
+include "scripting/training_wheels/utils/ui.lua"
 
 function select_warehouse_types(buildings)
    local result = {}
@@ -141,12 +143,20 @@ function find_constructionsite_field(buildingname, search_area)
    return nil
 end
 
-function wait_for_constructionsite_field(buildingname, search_area)
+function wait_for_constructionsite_field(buildingname, search_area, reminder_message, seconds)
    local target_field = nil
+   local counter = 0
    repeat
-      sleep(100)
+      counter = counter + 1
+      sleep(1000)
       target_field = find_constructionsite_field(buildingname, search_area)
-   until target_field ~= nil
+   until target_field ~= nil or counter % seconds == 0
+   if target_field == nil then
+      -- Player did not build the correct building. Remind player to place the building.
+      campaign_message_box(reminder_message)
+      target_field = wait_for_constructionsite_field(buildingname, search_area, reminder_message, seconds)
+      close_story_messagebox()
+   end
    return target_field
 end
 
@@ -157,4 +167,71 @@ function find_needed_flag_on_road(center_field, player, radius)
       end
    end
    return nil
+end
+
+
+-- Wait for a builder to arrive at the target field, or for the building type
+-- to be present in case the player rips the building and places it somwehere else
+-- Returns false if the construction site was ripped
+function wait_for_builder_or_building(player, target_field, buildingname, constructionsite_search_area, seconds)
+   if target_field == nil then return false end
+
+   push_textdomain("training_wheels")
+
+   local msg_road_not_connected = {
+      title = _"Roads",
+      position = "topright",
+      body = (
+         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button, then on another flag.")
+      ),
+      h = 140,
+      w = 260,
+      modal = false
+   }
+
+   pop_textdomain()
+
+   local mapview = wl.ui.MapView()
+   local buildername = player.tribe.builder
+   local counter = 0
+   local constructionsite_retries = 0
+   while true do
+      counter = counter + 1
+      if counter % seconds == 0 then
+         -- Builder has not arrived, explain road building again and wait for it
+         target_field.brn:indicate(true)
+         close_story_messagebox()
+         campaign_message_box(msg_road_not_connected)
+         scroll_to_field(target_field)
+         while not mapview.is_building_road do sleep(100) end
+         while mapview.is_building_road do sleep(100) end
+         mapview:indicate(false)
+      end
+      sleep(1000)
+      -- Check that we still have a constructionsite
+      target_field = find_constructionsite_field(buildingname, constructionsite_search_area)
+      if target_field == nil then
+         constructionsite_retries = constructionsite_retries + 1
+         if constructionsite_retries == 10 then
+            wl.Game().map:get_field(0, 0):indicate(false)
+            close_story_messagebox()
+            return false
+         end
+      else
+         -- A finished building somewhere else is also a success
+         if #player:get_buildings(buildingname) > 0 then
+            target_field:indicate(false)
+            close_story_messagebox()
+            return true
+         end
+         -- Now check for the builder
+         for b_idx, bob in ipairs(target_field.bobs) do
+            if bob.descr.name == buildername then
+               target_field:indicate(false)
+               close_story_messagebox()
+               return true
+            end
+         end
+      end
+   end
 end

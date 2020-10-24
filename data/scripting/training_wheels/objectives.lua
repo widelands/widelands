@@ -67,6 +67,9 @@ run(function()
 
    while mapview.windows.objectives do sleep(100) end
 
+   -- We might still have some indicators and messages boxes left over from unexpected player actions
+   clean_up_message_boxes_and_indicators()
+
    player:mark_training_wheel_as_solved(training_wheel_name)
 
    set_objective_done(o2)

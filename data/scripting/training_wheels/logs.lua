@@ -26,12 +26,6 @@ run(function()
       return
    end
 
-   if #player:get_buildings(log_producer.name) > 0 then
-      -- The player already knows how to to this, so don't bother them
-      player:mark_training_wheel_as_solved(training_wheel_name)
-      return
-   end
-
    -- Find a suitable buildable field close to the the starting field
    local conquering_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
    local conquering_immovable = conquering_field.immovable
@@ -44,10 +38,59 @@ run(function()
       conquering_field = warehouse_immovable.fields[1]
    end
 
-   local auto_roadbuilding = mapview.auto_roadbuilding_mode
 
-   -- All set - now wait for lock
-   wait_for_lock(player, training_wheel_name)
+   -- Check whether we already have a constructionsite from savegame
+   local starting_conquer_range = wl.Game():get_building_description(conquering_immovable.descr.name).conquers
+   local constructionsite_search_area = conquering_field:region(starting_conquer_range)
+   local constructionsite_field = find_constructionsite_field(log_producer.name, constructionsite_search_area)
+   local target_field = nil
+   local teach_placing_constructionsite = false
+
+   -- If there is no constructionsite from savegame, we will want to teach player how to place the building
+   if constructionsite_field == nil then
+      teach_placing_constructionsite = true
+
+      -- Wait until we find a suitable field near trees, then acquire lock.
+      -- The check again if there is still a suitable field and if not, release the lock and try again.
+      local function wait_for_starting_conditions(conquering_field, player, starting_conquer_range)
+         local result = nil
+
+         -- Find a suitable field close to a tree
+         local function find_tree_field(conquering_field, player, starting_conquer_range)
+            local tree_field = find_immovable_field(conquering_field, "tree", math.ceil(starting_conquer_range / 2), starting_conquer_range + log_producer.workarea_radius / 2)
+            if tree_field ~= nil then
+               tree_field = find_buildable_field(tree_field, player, log_producer.size, 1, log_producer.workarea_radius / 2)
+            end
+            return tree_field
+         end
+
+         repeat
+            result = find_tree_field(conquering_field, player, starting_conquer_range)
+            if result == nil then
+               sleep(1000)
+            end
+         until result ~= nil
+
+         -- All set - now wait for lock
+         wait_for_lock(player, training_wheel_name)
+
+         -- Check that we still have an appropriate field
+         result = find_tree_field(conquering_field, player, starting_conquer_range)
+         if result == nil then
+            -- While we were waiting for the lock, appropriate fields became unavailable.
+            -- Release the lock and try again.
+            player:release_training_wheel_lock()
+            wait_for_starting_conditions(starting_field, player, starting_conquer_range)
+         end
+         return result
+      end
+
+      constructionsite_field = wait_for_starting_conditions(conquering_field, player, starting_conquer_range)
+   else
+      -- All set - now wait for lock
+      wait_for_lock(player, training_wheel_name)
+      teach_placing_constructionsite = false
+   end
 
    -- Define our messages
    push_textdomain("training_wheels")
@@ -111,18 +154,6 @@ run(function()
       modal = false
    }
 
-   local msg_road_not_connected = {
-      title = _"Roads",
-      position = "topright",
-      body = (
-         li_image("images/wui/fieldaction/menu_build_way.png", _"Click on the flag in front of the building, then on the ‘Build road’ button, then click on the indicated flag.") ..
-         li_arrow(explain_control_key)
-      ),
-      h = 240,
-      w = 260,
-      modal = false
-   }
-
    local msg_finished = {
       title = _"Logs",
       position = "topright",
@@ -131,28 +162,15 @@ run(function()
       ),
       h = 140,
       w = 260,
-      scroll_back = true,
+      scroll_back = true
    }
 
    pop_textdomain()
 
-   -- Check whether we already have a constructionsite from savegame
-   local starting_conquer_range = wl.Game():get_building_description(conquering_immovable.descr.name).conquers
-   local constructionsite_search_area = conquering_field:region(starting_conquer_range)
-   local constructionsite_field = find_constructionsite_field(log_producer.name, constructionsite_search_area)
-   local target_field = nil
+   target_field = constructionsite_field
 
-   -- If there is no constructionsite from savegame, so we teach player how to place the building
-   if constructionsite_field == nil then
-      -- Find a suitable field close to a tree. Put some distance between it and the warehouse so that we can get some flags on the road.
-      repeat
-         target_field = find_immovable_field(conquering_field, "tree", math.ceil(starting_conquer_range / 2), starting_conquer_range + log_producer.workarea_radius / 2)
-         target_field = find_buildable_field(target_field, player, log_producer.size, 1, log_producer.workarea_radius / 2)
-         if target_field == nil then
-            sleep(1000)
-         end
-      until target_field ~= nil
-
+   -- If there is no constructionsite from savegame, we teach player how to place the building
+   if teach_placing_constructionsite then
       target_field:indicate(true)
       campaign_message_box(msg_logs)
       scroll_to_field(target_field)
@@ -170,7 +188,7 @@ run(function()
       end
 
       -- Explain road building before the road building mode blocks us
-      if auto_roadbuilding then
+      if mapview.auto_roadbuilding_mode then
          close_story_messagebox()
          target_field:indicate(true)
          campaign_message_box(msg_click_road_endflag)
@@ -180,12 +198,12 @@ run(function()
       end
 
       -- Now wait for the constructionsite
-      constructionsite_field = wait_for_constructionsite_field(log_producer.name, constructionsite_search_area)
+      constructionsite_field = wait_for_constructionsite_field(log_producer.name, constructionsite_search_area, msg_logs, 120)
       target_field:indicate(false)
    end
 
    -- When not auto roadbuilding, we need to click on the constructionsite's flag too
-   if not mapview.is_building_road then
+   if not mapview.is_building_road and not mapview.auto_roadbuilding_mode then
       mapview:indicate(false)
       close_story_messagebox()
 
@@ -223,37 +241,21 @@ run(function()
    target_field:indicate(false)
 
    -- Wait for the builder to arrive
-   local buildername = player.tribe.builder
-   local builder_present = false
-   local counter = 0
-   repeat
-      counter = counter + 1
-      if counter % 60 == 0 then
-         -- Builder has not arrived, explain road building again and wait for it
-         target_field:indicate(true)
-         close_story_messagebox()
-         campaign_message_box(msg_road_not_connected)
-         while not mapview.is_building_road do sleep(100) end
-         while mapview.is_building_road do sleep(100) end
-         mapview:indicate(false)
-      end
-      sleep(1000)
-      for b_idx, bob in ipairs(constructionsite_field.bobs) do
-         if bob.descr.name == buildername then
-            builder_present = true
-            target_field:indicate(false)
-            close_story_messagebox()
-            break
-         end
-      end
-   until builder_present == true
+   local success = wait_for_builder_or_building(player, constructionsite_field, log_producer.name, constructionsite_search_area, 60)
 
-   -- Teaching is done, so mark it as solved
-   player:mark_training_wheel_as_solved(training_wheel_name)
+   -- We might still have some indicators and messages boxes left over from unexpected player actions
+   clean_up_message_boxes_and_indicators()
 
-   -- Wait for the building and congratulate the player
+   if success then
+      -- Teaching is done, so mark it as solved
+      player:mark_training_wheel_as_solved(training_wheel_name)
 
-   while #player:get_buildings(log_producer.name) < 1 do sleep(300) end
-   msg_finished.field = constructionsite_field
-   campaign_message_box(msg_finished)
+      -- Wait for the building and congratulate the player
+      while #player:get_buildings(log_producer.name) < 1 do sleep(300) end
+      msg_finished.field = constructionsite_field
+      campaign_message_box(msg_finished)
+   else
+      -- Player was too uncooperative, we'll have to try again some time with a new game
+      player:release_training_wheel_lock()
+   end
 end)
