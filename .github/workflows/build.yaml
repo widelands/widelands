@@ -11,9 +11,8 @@ jobs:
     steps:
     - name: Installing dependencies
       run: |
-        nproc  # NOCOM
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev -y
+        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -25,11 +24,17 @@ jobs:
         mkdir build
         pushd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="Release" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
-        make -k -j3
+        make -k -j$(nproc)
         cd ..
+        # Prepare to start SDL
+        /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
+        export SDL_VIDEODRIVER=x11
+        export DISPLAY=:99.0
+        # Test website utils
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
+        # Testsuite
         ./regression_test.py -b build/src/widelands
   clang_tidy:
     runs-on: ubuntu-latest
