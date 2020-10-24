@@ -69,7 +69,7 @@
 #include "wui/interactive_base.h"
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
-   : InteractiveBase(e, get_config_section()),
+   : InteractiveBase(e, get_config_section(), nullptr),
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),

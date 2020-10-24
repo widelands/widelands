@@ -244,36 +244,29 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
         &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Workarea Overlaps")),
 
      // In-Game options
-     auto_roadbuild_mode_(&box_ingame_,
-                          UI::PanelStyle::kFsMenu,
-                          Vector2i::zero(),
-                          _("Start building road after placing a flag")),
-     transparent_chat_(&box_ingame_,
-                       UI::PanelStyle::kFsMenu,
-                       Vector2i::zero(),
-                       _("Show in-game chat with transparent background"),
-                       "",
-                       0),
+     auto_roadbuild_mode_(
+        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Start building road after placing a flag")),
+     transparent_chat_(
+        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
-     single_watchwin_(&box_ingame_,
-                      UI::PanelStyle::kFsMenu,
-                      Vector2i::zero(),
-                      /** TRANSLATORS: A watchwindow is a window where you keep watching an object
-                         or a map region, and it also lets you jump to it on the map. */
-                      _("Use single watchwindow mode")),
-     ctrl_zoom_(&box_ingame_,
-                UI::PanelStyle::kFsMenu,
-                Vector2i::zero(),
-                /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
-                _("Zoom only when Ctrl is pressed")),
-     game_clock_(&box_ingame_,
-                 UI::PanelStyle::kFsMenu,
-                 Vector2i::zero(),
-                 _("Display game time in the top left corner")),
-     numpad_diagonalscrolling_(&box_ingame_,
-                               UI::PanelStyle::kFsMenu,
-                               Vector2i::zero(),
-                               _("Allow diagonal scrolling with the numeric keypad")),
+     /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
+     /** TRANSLATORS: and it also lets you jump to it on the map. */
+     single_watchwin_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Use single watchwindow mode")),
+     /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
+     ctrl_zoom_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
+     game_clock_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Display game time in the top left corner")),
+     numpad_diagonalscrolling_(
+        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+     training_wheels_box_(&box_ingame_, 0, 0, UI::Box::Horizontal),
+     training_wheels_(&training_wheels_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Teach me how to play")),
+     training_wheels_reset_(&training_wheels_box_,
+                            "reset_training_wheels",
+                            0,
+                            0,
+                            0,
+                            0,
+                            UI::ButtonStyle::kFsMenuSecondary,
+                            _("Reset progress")),
      os_(opt) {
 
 	do_not_layout_on_resolution_change();
@@ -340,9 +333,19 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
+	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
+	training_wheels_box_.add_inf_space();
+	training_wheels_box_.add(&training_wheels_reset_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	training_wheels_box_.add_space(kPadding);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
+	training_wheels_reset_.sigclicked.connect([this]() {
+		training_wheels_reset_.set_enabled(false);
+		Profile training_wheels_profile;
+		training_wheels_profile.write(kTrainingWheelsFile);
+	});
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
 	ok_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOk); });
@@ -420,6 +423,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
+	training_wheels_.set_state(opt.training_wheels);
 
 	// New Game options
 	show_buildhelp_.set_state(opt.display_flags & InteractiveBase::dfShowBuildhelp);
@@ -673,6 +677,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
+	os_.training_wheels = training_wheels_.get_state();
 
 	// New Game options
 	int32_t flags = show_buildhelp_.get_state() ? InteractiveBase::dfShowBuildhelp : 0;
@@ -749,6 +754,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
+	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 
 	// New Game options
 	opt.display_flags = opt_section_.get_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
@@ -793,6 +799,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
+	opt_section_.set_bool("training_wheels", opt.training_wheels);
 
 	// New Game options
 	opt_section_.set_int("display_flags", opt.display_flags);

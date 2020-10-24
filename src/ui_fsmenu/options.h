@@ -71,6 +71,7 @@ public:
 		bool game_clock;
 		bool numpad_diagonalscrolling;
 		int32_t display_flags;
+		bool training_wheels;
 
 		// Language options
 		std::string language;
@@ -169,6 +170,10 @@ private:
 	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
+
+	UI::Box training_wheels_box_;
+	UI::Checkbox training_wheels_;
+	UI::Button training_wheels_reset_;
 
 	OptionsCtrl::OptionsStruct os_;
 

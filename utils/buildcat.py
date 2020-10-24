@@ -60,6 +60,9 @@ MAINPOTS = [
     ('win_conditions/win_conditions', [
         '../../data/scripting/win_conditions/*.lua',
     ]),
+    ('training_wheels/training_wheels', [
+        '../../data/scripting/training_wheels/*.lua',
+    ]),
     ('world/world', [
         '../../data/world/*.lua',
         '../../data/world/*/*.lua',

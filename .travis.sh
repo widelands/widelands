@@ -47,6 +47,11 @@ codecheck)
    ./run_tests.py
    popd
 
+   # Check training wheels
+   pushd ..
+   utils/validate_training_wheels.py
+   popd
+
    # Any codecheck warning is an error. Keep the codebase clean!!
    # Suppress color output.
    TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out

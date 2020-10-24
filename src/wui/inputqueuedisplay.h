@@ -76,6 +76,8 @@ private:
 	UI::Radiogroup* priority_radiogroup_;
 	UI::Button* increase_max_fill_;
 	UI::Button* decrease_max_fill_;
+	UI::Button* increase_real_fill_;
+	UI::Button* decrease_real_fill_;
 	Widelands::DescriptionIndex index_;
 	Widelands::WareWorker type_;
 	const Image* icon_;  //< Index to ware's picture
@@ -92,6 +94,8 @@ private:
 	void update_max_fill_buttons();
 	void decrease_max_fill_clicked();
 	void increase_max_fill_clicked();
+	void decrease_real_fill_clicked();
+	void increase_real_fill_clicked();
 	void radiogroup_changed(int32_t);
 	void radiogroup_clicked();
 	void update_siblings_priority(int32_t);
