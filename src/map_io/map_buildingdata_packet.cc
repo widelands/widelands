@@ -392,7 +392,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					try {
 						Worker& worker = mol.get<Worker>(worker_serial);
 						const DescriptionIndex& worker_index =
-						   tribe.worker_index(worker.descr().name().c_str());
+						   tribe.worker_index(worker.descr().name());
 						if (!warehouse.incorporated_workers_.count(worker_index)) {
 							warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
 						}

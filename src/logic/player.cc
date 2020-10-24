@@ -1717,7 +1717,7 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 	}
 
 	std::vector<BuildingStats>& stat = *get_mutable_building_statistics(
-	   egbase().descriptions().building_index(building_name.c_str()));
+	   egbase().descriptions().building_index(building_name));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;

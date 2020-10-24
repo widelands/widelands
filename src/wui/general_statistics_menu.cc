@@ -117,7 +117,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		assert(player_image);
 		UI::Button& cb =
 		   *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25, UI::ButtonStyle::kWuiMenu,
-		                   player_image, player->get_name().c_str());
+		                   player_image, player->get_name());
 		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
 		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
 
@@ -189,7 +189,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	if (hook) {
-		radiogroup_.add_button(hbox2, zero, g_image_cache->get(cs_pic), cs_name.c_str(), &btn);
+		radiogroup_.add_button(hbox2, zero, g_image_cache->get(cs_pic), cs_name, &btn);
 		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 

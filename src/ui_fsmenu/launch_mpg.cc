@@ -244,9 +244,9 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 
 	std::string filename = lsgm.filename();
 
-	if (g_fs->file_exists(filename.c_str())) {
+	if (g_fs->file_exists(filename)) {
 		// Read the needed data from file "elemental" of the used map.
-		std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(filename.c_str()));
+		std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(filename));
 		Profile prof;
 		prof.read("map/elemental", nullptr, *l_fs);
 		Section& s = prof.get_safe_section("global");
@@ -410,7 +410,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
  */
 void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	std::unique_ptr<FileSystem> l_fs(
-	   g_fs->make_sub_file_system(settings_->settings().mapfilename.c_str()));
+	   g_fs->make_sub_file_system(settings_->settings().mapfilename));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 
