@@ -1,4 +1,4 @@
--- Detect the player tribe's log producer and teach how to build it, along with placing roads roads step by step
+-- Detect the player tribe's quarry and teach how to build it, along with placing roads roads step by step
 
 include "scripting/coroutine.lua"
 include "scripting/messages.lua"
