@@ -75,7 +75,7 @@ Player
    This class represents one of the players in the game. You can access
    information about this player or act on his behalf. Note that you cannot
    instantiate a class of this type directly, use the :attr:`wl.Game.players`
-   insteadl
+   instead.
 */
 const char LuaPlayer::className[] = "Player";
 const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
@@ -89,6 +89,8 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
+   METHOD(LuaPlayer, acquire_training_wheel_lock),
+   METHOD(LuaPlayer, mark_training_wheel_as_solved),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
    METHOD(LuaPlayer, get_suitability),
@@ -438,6 +440,9 @@ int LuaPlayer::send_to_inbox(lua_State* L) {
          pops up. Default: no field attached to message
       :type field: :class:`wl.map.Field`
 
+      :arg modal: If this is ``false``, the game will not wait for the message window to close, but
+         continue at once. :type modal: :class:`boolean`
+
       :arg w: width of message box in pixels. Default: 400.
       :type w: :class:`integer`
       :arg h: width of message box in pixels. Default: 300.
@@ -462,6 +467,7 @@ int LuaPlayer::message_box(lua_State* L) {
 	int32_t posx = -1;
 	int32_t posy = -1;
 	Widelands::Coords coords = Widelands::Coords::null();
+	bool is_modal = true;
 
 #define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
@@ -481,12 +487,24 @@ int LuaPlayer::message_box(lua_State* L) {
 			coords = (*get_user_class<LuaMaps::LuaField>(L, -1))->coords();
 		}
 		lua_pop(L, 1);
+
+		// Check whether we want a modal window
+		lua_getfield(L, 4, "modal");
+		if (!lua_isnil(L, -1)) {
+			is_modal = luaL_checkboolean(L, -1);
+		}
+		lua_pop(L, 1);
 	}
 #undef CHECK_UINT
-	std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
-	   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
 
-	mb->run<UI::Panel::Returncodes>();
+	if (is_modal) {
+		std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
+		   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
+		mb->run<UI::Panel::Returncodes>();
+	} else {
+		new StoryMessageBox(
+		   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h);
+	}
 
 	return 1;
 }
@@ -679,6 +697,44 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	campvis.pull_section("scenarios").set_bool(luaL_checkstring(L, 2), true);
 	campvis.write(kCampVisFile.c_str(), false);
 
+	return 0;
+}
+
+/* RST
+   .. method:: acquire_training_wheel_lock(name)
+
+      Try to mark the given training wheel as the active one.
+
+      :arg name: name of the training wheel that wants to run
+      :type name: :class:`string`
+
+      :returns: whether the training wheel is allowed to run
+      :rtype: :class:`boolean`
+*/
+// UNTESTED
+int LuaPlayer::acquire_training_wheel_lock(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "One argument is required for acquire_training_wheel_lock(string)");
+	}
+	const bool success = get_game(L).acquire_training_wheel_lock(luaL_checkstring(L, 2));
+	lua_pushboolean(L, success);
+	return 1;
+}
+/* RST
+   .. method:: mark_training_wheel_as_solved(name)
+
+      Marks a global training wheel objective as solved.
+
+      :arg name: name of the training wheel to be marked as solved
+      :type name: :class:`string`
+*/
+// UNTESTED
+int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "One argument is required for mark_training_wheel_as_solved(string)");
+	}
+
+	get_game(L).mark_training_wheel_as_solved(luaL_checkstring(L, 2));
 	return 0;
 }
 

@@ -183,7 +183,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary),
-     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")) {
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
+     training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
+     training_wheel_indicator_field_(Widelands::FCoords::null(), nullptr) {
 	add_main_menu();
 
 	toolbar()->add_space(15);
@@ -586,6 +588,16 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 			}
 		}
+
+		// Blit arrow for training wheel instructions
+		if (training_wheel_indicator_field_ == f->fcoords) {
+			constexpr int kTrainingWheelArrowOffset = 5;
+			blit_field_overlay(
+			   dst, *f, training_wheel_indicator_pic_,
+			   Vector2i(-kTrainingWheelArrowOffset,
+			            training_wheel_indicator_pic_->height() + kTrainingWheelArrowOffset),
+			   scale);
+		}
 	}
 }
 
@@ -593,6 +605,23 @@ void InteractivePlayer::popup_message(Widelands::MessageId const id,
                                       const Widelands::Message& message) {
 	message_menu_.create();
 	dynamic_cast<GameMessageMenu&>(*message_menu_.window).show_new_message(id, message);
+}
+
+void InteractivePlayer::set_training_wheel_indicator_pos(const Vector2i& pos) {
+	constexpr int kTrainingWheelArrowOffset = 5;
+	if (pos == Vector2i::invalid()) {
+		training_wheel_indicator_icon_.reset(nullptr);
+	} else {
+		// We create a new icon every time to paint it on top of the other child panels
+		training_wheel_indicator_icon_.reset(new UI::Icon(this, training_wheel_indicator_pic_));
+		training_wheel_indicator_icon_->set_no_frame();
+		training_wheel_indicator_icon_->set_pos(
+		   Vector2i(pos.x - kTrainingWheelArrowOffset,
+		            pos.y - training_wheel_indicator_icon_->get_h() + kTrainingWheelArrowOffset));
+	}
+}
+void InteractivePlayer::set_training_wheel_indicator_field(const Widelands::FCoords& field) {
+	training_wheel_indicator_field_ = field;
 }
 
 bool InteractivePlayer::can_see(Widelands::PlayerNumber const p) const {
