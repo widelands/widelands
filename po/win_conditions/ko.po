@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2020-08-17 08:55+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -180,22 +180,22 @@ msgstr "%1$s 이 땅의 %2$3.0f%% 를 소유했습니다 (%3$i 중 %4$i)."
 msgid "Territory percentage"
 msgstr "영역 비율"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:211
+#: ../../data/scripting/win_conditions/territorial_functions.lua:215
 msgid "You own more than half of the map’s area."
 msgstr "당신은 지도 지역의 반 이상을 소유합니다."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:212
+#: ../../data/scripting/win_conditions/territorial_functions.lua:216
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "게임에서 승리하려면 %i 분 이상 사수하십시오."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:239
+#: ../../data/scripting/win_conditions/territorial_functions.lua:243
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s 이 지도 지역의 반 이상을 소유합니다."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:240
+#: ../../data/scripting/win_conditions/territorial_functions.lua:244
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."

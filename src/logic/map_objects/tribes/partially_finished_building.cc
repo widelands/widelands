@@ -210,6 +210,16 @@ void PartiallyFinishedBuilding::request_builder_callback(
 	b.builder_request_ = nullptr;
 
 	w->start_task_buildingwork(game);
-	b.set_seeing(true);
+}
+
+/*
+===============
+Override: Builders normally don't make (finished) buildings see.
+PartiallyFinishedBuilding is an exception.
+===============
+*/
+void PartiallyFinishedBuilding::add_worker(Worker& worker) {
+	Building::add_worker(worker);
+	set_seeing(true);
 }
 }  // namespace Widelands
