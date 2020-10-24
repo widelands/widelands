@@ -45,9 +45,9 @@ ExpeditionBootstrap::~ExpeditionBootstrap() {
 	assert(queues_.empty());
 }
 
-void ExpeditionBootstrap::is_ready(Game& game) {
+void ExpeditionBootstrap::check_is_ready(Game& game) {
 	for (auto& iq : queues_) {
-		if (iq.first->get_max_fill() != iq.first->get_filled()) {
+		if (iq.first->get_max_size() != iq.first->get_filled() || iq.first->get_max_size() != iq.first->get_max_fill()) {
 			return portdock_->set_expedition_bootstrap_complete(game, false);
 		}
 	}
@@ -60,7 +60,7 @@ void ExpeditionBootstrap::is_ready(Game& game) {
 void ExpeditionBootstrap::input_callback(
    Game& game, InputQueue* queue, DescriptionIndex, Worker*, void* data) {
 	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap*>(data);
-	eb->is_ready(game);
+	eb->check_is_ready(game);
 	// If we ask for several additional items of the same type, it may happen that a
 	// specific item was originally requested by queue B but is put into queue A. This
 	// causes both queues to cancel their requests so that some transfers are
@@ -147,7 +147,7 @@ void ExpeditionBootstrap::demand_additional_item(Game& game,
 		}
 		wq->set_callback(input_callback, this);
 		queues_.push_back(std::make_pair(std::unique_ptr<InputQueue>(wq), true));
-		return is_ready(game);
+		return check_is_ready(game);
 	} else {
 		// Remove the last matching additional queue
 		for (auto it = queues_.end(); it != queues_.begin();) {
@@ -165,7 +165,7 @@ void ExpeditionBootstrap::demand_additional_item(Game& game,
 				}
 				it->first->cleanup();
 				queues_.erase(it);
-				return is_ready(game);
+				return check_is_ready(game);
 			}
 		}
 		NEVER_HERE();
@@ -190,11 +190,9 @@ ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type, bool ad
 	NEVER_HERE();
 }
 
-InputQueue& ExpeditionBootstrap::first_empty_inputqueue(DescriptionIndex index,
-                                                        WareWorker type) const {
+InputQueue& ExpeditionBootstrap::inputqueue(const Request& r) const {
 	for (auto& iq : queues_) {
-		if (iq.first->get_index() == index && iq.first->get_type() == type &&
-		    iq.first->get_filled() < iq.first->get_max_fill()) {
+		if (iq.first->matches(r)) {
 			return *iq.first;
 		}
 	}

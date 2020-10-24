@@ -35,6 +35,7 @@
 namespace Widelands {
 
 class InputQueue;
+class Request;
 
 constexpr int32_t kPriorityVeryLow  =    0;
 constexpr int32_t kPriorityLow      =    4;
@@ -261,7 +262,11 @@ public:
 	}
 
 	/// \returns the queue for the matching ware or worker type or \throws WException.
-	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
+	/// This is usually called when a ware wants to enter the queue that requested it, so
+	/// the Request is passed for disambiguation. This may be nullptr, e.g. when we want
+	/// to get info about a queue. Currently disambiguation is used only by warehouse
+	/// code because expedition bootstraps may have multiple queues for the same item.
+	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;

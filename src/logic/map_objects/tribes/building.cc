@@ -621,7 +621,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const) {
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const, const Request*) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 

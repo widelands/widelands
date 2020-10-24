@@ -1411,6 +1411,18 @@ void Warehouse::set_worker_policy(DescriptionIndex ware, StockPolicy policy) {
  * and remove one of them if appropriate.
  */
 void Warehouse::check_remove_stock(Game& game) {
+	if (portdock_ && portdock_->expedition_bootstrap()) {
+		for (InputQueue* q : portdock_->expedition_bootstrap()->queues(true)) {
+			if (q->get_type() == wwWARE && q->get_filled() > q->get_max_fill()) {
+				// TODO(Nordfriese): We directly add the ware to the warehouse
+				// here. This is inconsistent, see issues #1444/3880/4311
+				q->set_filled(q->get_filled() - 1);
+				supply_->add_wares(q->get_index(), 1);
+				break;
+			}
+		}
+	}
+
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (DescriptionIndex ware = 0; ware < static_cast<DescriptionIndex>(ware_policy_.size());
 		     ++ware) {
@@ -1435,13 +1447,10 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
-// TODO(Nordfriese): Called by a Request/Transfer/WareInstance/whatever that enters
-// the expedition bootstrap. Should instead return the InputQueue that requested
-// this particular item. See discussion in PR #3884.
-InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
+InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const Request* r) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
-	return portdock_->expedition_bootstrap()->first_empty_inputqueue(index, type);
+	return r ? portdock_->expedition_bootstrap()->inputqueue(*r) : portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
 const BuildingSettings* Warehouse::create_building_settings() const {

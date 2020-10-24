@@ -68,7 +68,7 @@ void InputQueue::update() {
 }
 
 void InputQueue::request_callback(Game& game,
-                                  Request&,
+                                  Request& r,
                                   DescriptionIndex const index,
                                   Worker* const worker,
                                   PlayerImmovable& target) {
@@ -79,7 +79,7 @@ void InputQueue::request_callback(Game& game,
 		type = wwWORKER;
 	}
 
-	InputQueue& iq = dynamic_cast<Building&>(target).inputqueue(index, type);
+	InputQueue& iq = dynamic_cast<Building&>(target).inputqueue(index, type, &r);
 
 	iq.entered(index, worker);
 

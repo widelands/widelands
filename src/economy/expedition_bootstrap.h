@@ -74,10 +74,13 @@ public:
 	// Returns the matching input queue for the given index and type.
 	InputQueue& inputqueue(DescriptionIndex index, WareWorker type, bool) const;
 	InputQueue* inputqueue(size_t additional_index) const;
-	InputQueue& first_empty_inputqueue(DescriptionIndex index, WareWorker type) const;
+	InputQueue& inputqueue(const Request&) const;
 
 	void demand_additional_item(Game&, WareWorker, DescriptionIndex, bool);
 	size_t count_additional_queues() const;
+
+	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
+	void check_is_ready(Game& game);
 
 	// Delete all wares we currently handle.
 	void cleanup(EditorGameBase& egbase);
@@ -104,9 +107,6 @@ public:
 private:
 	// Handles arriving workers and wares.
 	static void input_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void*);
-
-	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
-	void is_ready(Game& game);
 
 	/** The Expedition is bootstapped here. */
 	PortDock* const portdock_;  // not owned

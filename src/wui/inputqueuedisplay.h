@@ -20,6 +20,7 @@
 #ifndef WL_WUI_INPUTQUEUEDISPLAY_H
 #define WL_WUI_INPUTQUEUEDISPLAY_H
 
+#include <map>
 #include <vector>
 
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -71,15 +72,18 @@ private:
 
 	void clicked_desired_fill(int8_t delta, bool recursion_start = true);
 	void clicked_real_fill(int8_t delta, bool recursion_start = true);
-	void set_priority(size_t, bool recursion_start = true);
+	void set_priority( /* size_t */ int32_t, bool recursion_start = true);
 
 	const Image& max_fill_indicator_;
-	const Image& priority_image_;
+	// const Image& priority_image_;
 
 	UI::Box hbox_;
 	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_, b_increase_real_fill_;
-	UI::HorizontalSlider priority_;
-	unsigned slider_was_moved_;
+			// b_p_very_low_, b_p_low_, b_p_normal_, b_p_high_, b_p_very_high_;
+	std::map<int32_t, UI::Button*> priority_buttons_;
+	UI::Panel spacer_;
+	// UI::HorizontalSlider priority_;
+	// unsigned slider_was_moved_;
 
 	size_t nr_icons_;
 	std::vector<UI::Icon*> icons_;
