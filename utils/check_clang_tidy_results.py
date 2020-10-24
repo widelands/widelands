@@ -65,7 +65,6 @@ SUPPRESSED_CHECKS = {
     '[readability-implicit-bool-conversion]',
     '[readability-inconsistent-declaration-parameter-name]',
     '[readability-named-parameter]',
-    '[readability-non-const-parameter]',
     '[readability-redundant-control-flow]',
     '[readability-redundant-member-init]',
     '[readability-redundant-string-cstr]',
