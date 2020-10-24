@@ -379,6 +379,11 @@ void Game::init_savegame(const GameSettings& settings) {
 		win_condition_displayname_ = gpdp.get_win_condition();
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			log_dbg("Training wheel from savegame");
+		}
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -414,6 +419,11 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		win_condition_displayname_ = gpdp.get_win_condition();
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			log_dbg("Training wheel from savegame");
+		}
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -570,7 +580,9 @@ bool Game::run(StartGameType const start_game_type,
 	// We don't run the training wheel objectives in scenarios, but we want the objectives available
 	// for marking them as solved if a scenario teaches the same content.
 	if (training_wheels_wanted_) {
-		training_wheels_.reset(new TrainingWheels(lua()));
+		if (training_wheels_ == nullptr) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+		}
 		if (!training_wheels_->has_objectives()) {
 			// Nothing to do, so let's free the memory
 			training_wheels_.reset(nullptr);
@@ -617,6 +629,7 @@ bool Game::run(StartGameType const start_game_type,
 	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
 	// user switched off the option
 	if (training_wheels_ != nullptr && training_wheels_wanted_) {
+		log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
 		training_wheels_->run_objectives();
 	}
 

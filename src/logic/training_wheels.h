@@ -67,6 +67,14 @@ public:
 	 */
 	bool has_objectives() const;
 
+	/**
+	 * @brief current_objective The training wheel that's currently active
+	 * @return A string with the training wheel's name, or empty if none are active
+	 */
+	const std::string& current_objective() const {
+		return current_objective_;
+	}
+
 private:
 	/**
 	 * @brief load_objectives Check for training wheel objectives that can be run

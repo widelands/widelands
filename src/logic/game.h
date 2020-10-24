@@ -203,6 +203,9 @@ public:
 	bool training_wheels_wanted() const {
 		return training_wheels_wanted_;
 	}
+	const std::string& active_training_wheel() const {
+		return training_wheels_->current_objective();
+	}
 
 	void postload() override;
 
