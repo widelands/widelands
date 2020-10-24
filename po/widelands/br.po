@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-10 05:39+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-19 15:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
@@ -161,7 +161,7 @@ msgstr "%1% %2%"
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:93
 msgid "Jan"
-msgstr ""
+msgstr "Gen"
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -170,7 +170,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:99
 msgid "Feb"
-msgstr ""
+msgstr "C'hw"
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -179,7 +179,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:105
 msgid "Mar"
-msgstr ""
+msgstr "Meur"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -188,7 +188,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:111
 msgid "Apr"
-msgstr ""
+msgstr "Ebr"
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -197,7 +197,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:117
 msgid "May"
-msgstr ""
+msgstr "Mae"
 
 #. * TRANSLATORS: June. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -206,7 +206,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:123
 msgid "Jun"
-msgstr ""
+msgstr "Mezh"
 
 #. * TRANSLATORS: July. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -215,7 +215,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:129
 msgid "Jul"
-msgstr ""
+msgstr "Goue"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -224,7 +224,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:135
 msgid "Aug"
-msgstr ""
+msgstr "Eost"
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -233,7 +233,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:141
 msgid "Sep"
-msgstr ""
+msgstr "Gwen"
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -242,7 +242,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:147
 msgid "Oct"
-msgstr ""
+msgstr "Here"
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -251,7 +251,7 @@ msgstr ""
 #. * TRANSLATORS: https://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:153
 msgid "Nov"
-msgstr ""
+msgstr "Du"
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -259,7 +259,7 @@ msgstr ""
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:158
 msgid "Dec"
-msgstr ""
+msgstr "Kzu"
 
 #: ../../src/editor/editorinteractive.cc:84 ../../src/ui_fsmenu/main.cc:265
 #: ../../src/wui/interactive_gamebase.cc:95
@@ -555,11 +555,11 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:503
 msgid "Unsaved Map"
-msgstr ""
+msgstr "Kartenn dienrollet"
 
 #: ../../src/editor/editorinteractive.cc:504
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "N'eo ket bet enrollet ar gartenn, ha sur oc'h e fell deoc'h mont kuit?"
 
 #: ../../src/editor/editorinteractive.cc:962
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:98
@@ -715,7 +715,7 @@ msgstr "%1%x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:203
 #: ../../src/ui_fsmenu/launch_mpg.cc:58
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:139
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:138
 #: ../../src/ui_fsmenu/netsetup_lan.cc:121 ../../src/wui/mapdetails.cc:135
 #: ../../src/wui/minimap.cc:120
 msgid "Map"
@@ -747,7 +747,7 @@ msgid "Author: %s"
 msgstr "Aozer: %s"
 
 #: ../../src/editor/tools/info_tool.cc:222
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:111
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:110
 #, c-format
 msgid "Description: %s"
 msgstr "Deskrivadur: %s"
@@ -1182,7 +1182,7 @@ msgstr "C'hoarier%u"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:181
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:52
 msgid "Tribe"
-msgstr ""
+msgstr "Meuriad"
 
 #: ../../src/editor/ui_menus/player_menu.cc:179
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:400
@@ -1195,7 +1195,7 @@ msgstr "Degouezh"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:402
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:100
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "Dibabet 'vo ar meuriad dre zegouezh"
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
@@ -1439,7 +1439,7 @@ msgstr "ya"
 #. console
 #: ../../src/io/profile.cc:47
 msgid "on"
-msgstr ""
+msgstr "on"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -1460,11 +1460,11 @@ msgstr "ket"
 #. console
 #: ../../src/io/profile.cc:60
 msgid "off"
-msgstr ""
+msgstr "off"
 
 #: ../../src/logic/editor_game_base.cc:224
 msgid "Loading tribes…"
-msgstr ""
+msgstr "O kargañ ar meuriadoù..."
 
 #: ../../src/logic/editor_game_base.cc:250
 #, c-format
@@ -1591,12 +1591,12 @@ msgstr "Deskrivadur ebet"
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:181
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% bet savet"
 
 #: ../../src/logic/map_objects/tribes/dismantlesite.cc:118
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% bet divontet"
 
 #. * TRANSLATORS: Militarysite lost (taken/destroyed by enemy)
 #: ../../src/logic/map_objects/tribes/militarysite.cc:244
@@ -2047,7 +2047,7 @@ msgstr "Labourerien"
 #: ../../src/wui/general_statistics_menu.cc:144
 #: ../../src/wui/interactive_player.cc:299 ../../src/wui/minimap.cc:175
 msgid "Buildings"
-msgstr ""
+msgstr "Savadurioù"
 
 #: ../../src/logic/map_objects/tribes/warehouse.cc:572
 msgid "A new port was added to your economy."
@@ -2998,7 +2998,7 @@ msgstr "Diaesder"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:57
 msgid "Tribe Name"
-msgstr ""
+msgstr "Anv ar meuriad"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:59
 msgid "Campaign Name"
@@ -3111,7 +3111,7 @@ msgid "unnamed %u"
 msgstr "disanv %u"
 
 #: ../../src/ui_fsmenu/launch_game.cc:57
-msgid "Type of game"
+msgid "Configure this game"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:71
@@ -3131,38 +3131,38 @@ msgstr "Kregiñ ganti"
 msgid "Back"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:181
+#: ../../src/ui_fsmenu/launch_game.cc:183
 msgid "The relations between players are set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:183
+#: ../../src/ui_fsmenu/launch_game.cc:185
 msgid "The relations between players are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:185
+#: ../../src/ui_fsmenu/launch_game.cc:187
 msgid "The selected win condition does not allow peaceful matches"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:187
+#: ../../src/ui_fsmenu/launch_game.cc:189
 msgid "Forbid fighting between players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:198
+#: ../../src/ui_fsmenu/launch_game.cc:200
 msgid "The starting positions are set by the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:200
+#: ../../src/ui_fsmenu/launch_game.cc:202
 msgid "The starting positions are set by the saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:203
+#: ../../src/ui_fsmenu/launch_game.cc:205
 msgid ""
 "Allow the players to choose their own starting positions at the beginning of"
 " the game"
 msgstr ""
 
 #. * TRANSLATORS: This is a map tag
-#: ../../src/ui_fsmenu/launch_game.cc:210
+#: ../../src/ui_fsmenu/launch_game.cc:212
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:445
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:279
@@ -3170,21 +3170,21 @@ msgstr ""
 msgid "Scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:211
+#: ../../src/ui_fsmenu/launch_game.cc:213
 msgid "Win condition is set through the scenario"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:216 ../../src/ui_fsmenu/launch_mpg.cc:65
+#: ../../src/ui_fsmenu/launch_game.cc:218 ../../src/ui_fsmenu/launch_mpg.cc:65
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:449
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:283
 msgid "Saved Game"
 msgstr "C'hoariadenn enrollet"
 
-#: ../../src/ui_fsmenu/launch_game.cc:218
+#: ../../src/ui_fsmenu/launch_game.cc:220
 msgid "The game is a saved game – the win condition was set before."
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_game.cc:282
+#: ../../src/ui_fsmenu/launch_game.cc:284
 #, c-format
 msgid ""
 "Unable to determine valid win conditions because the map '%s' could not be "
@@ -3339,7 +3339,7 @@ msgstr "Kartenn: %s"
 msgid "Win Condition: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:106
+#: ../../src/ui_fsmenu/main.cc:221 ../../src/ui_fsmenu/mapdetailsbox.cc:105
 #, c-format
 msgid "Players: %s"
 msgstr "C'hoarierien: %s"
@@ -3454,58 +3454,58 @@ msgid ""
 "General Public License V2.0"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:35
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:34
 #, c-format
 msgid "invalid tribe ‘%s’"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:47
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:46
 msgid "Saved Players"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:54
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:53
 #, c-format
 msgid "Player %u: –"
 msgstr ""
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:77
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:76
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Map Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:96
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:95
 msgid "Scenario Details"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:100
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:99
 #, c-format
 msgid "Size: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:103
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:102
 #, c-format
 msgid "%1$u×%2$u"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:118
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:117
 #, c-format
 msgid "Hint: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:149
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:148
 msgid "No map selected"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:160
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:159
 msgid "Change map or saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:214
+#: ../../src/ui_fsmenu/mapdetailsbox.cc:213
 msgid "(no map)"
 msgstr "(kartenn ebet)"
 
@@ -3743,7 +3743,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:217
 #: ../../src/wui/interactive_gamebase.cc:249
 msgid "Show Buildings"
-msgstr ""
+msgstr "Diskouez ar savadurioù"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
@@ -3953,19 +3953,19 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:185
 msgid "Destroy building?"
-msgstr ""
+msgstr "Distruj ar savadur?"
 
 #: ../../src/wui/actionconfirm.cc:186
 msgid "Do you really want to destroy this building?"
-msgstr ""
+msgstr "Ha sur oc'h e fell deoc'h distruj ar savadur-mañ?"
 
 #: ../../src/wui/actionconfirm.cc:244
 msgid "Dismantle building?"
-msgstr ""
+msgstr "Divontañ ar savadur?"
 
 #: ../../src/wui/actionconfirm.cc:245
 msgid "Do you really want to dismantle this building?"
-msgstr ""
+msgstr "Ha sur oc'h a fell deoc'h divontañ ar savadur-mañ?"
 
 #: ../../src/wui/actionconfirm.cc:247 ../../src/wui/actionconfirm.cc:306
 msgid "Preserve wares"
@@ -4074,7 +4074,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:48
 msgid "Building Statistics"
-msgstr ""
+msgstr "Stadegoù ar savadur"
 
 #: ../../src/wui/building_statistics_menu.cc:59
 msgid "Owned:"
@@ -4111,7 +4111,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:297
 msgid "Small buildings"
-msgstr ""
+msgstr "Savadurioù bihan"
 
 #: ../../src/wui/building_statistics_menu.cc:299
 msgid "Medium buildings"
@@ -4119,7 +4119,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:301
 msgid "Big buildings"
-msgstr ""
+msgstr "Savadurioù bras"
 
 #: ../../src/wui/building_statistics_menu.cc:303
 msgid "Mines"
@@ -4369,11 +4369,11 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:230
 msgid "Build small building"
-msgstr ""
+msgstr "Sevel ur savadur bihan"
 
 #: ../../src/wui/fieldaction.cc:231
 msgid "Build big building"
-msgstr ""
+msgstr "Sevel ar savadur bras"
 
 #: ../../src/wui/fieldaction.cc:231
 msgid "Build medium building"
@@ -5011,7 +5011,7 @@ msgstr ""
 #. * buildings are greyed out
 #: ../../src/wui/interactive_gamebase.cc:248
 msgid "Hide Buildings"
-msgstr ""
+msgstr "Kuzhat ar savadurioù"
 
 #: ../../src/wui/interactive_gamebase.cc:295
 msgid "Speed +"
