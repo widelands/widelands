@@ -7,29 +7,64 @@ on:
 
 jobs:
   testsuite:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - Release
+          - Debug
+        compiler:
+          - clang-10
+          - clang-9
+          - clang-8
+          - clang-7
+          - clang-6
+          - g++-10
+          - g++-9
+          - g++-8
+          - g++-7
+          - g++-6
+          - g++-5
     runs-on: ubuntu-latest
     steps:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Check
       run: |
-        export CC=/usr/bin/clang
-        export CXX=/usr/bin/clang++
+        if [[ ${{ matrix.compiler }} =~ clang* ]]
+        then
+          export CC=/usr/bin/${{ matrix.compiler }}  # clang-10
+          export CXX="${CC/clang/clang++}            # clang++-10
+        else
+          export CXX=/usr/bin/${{ matrix.compiler }} # g++-10
+          export CC="${CXX/g++/gcc}                  # gcc-10
+        fi
         mkdir build
         pushd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="Release" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc)
         cd ..
         # Prepare to start SDL
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
         export SDL_VIDEODRIVER=x11
         export DISPLAY=:99.0
+        # Ignore transient SDL errors
+        trap 'err_handler' ERR
+        err_handler() {
+          result=$?
+          if [ $result -eq 2 ] ; then
+            echo "SDL initialization failed. TEST SKIPPED.";
+          else
+            # Exit with this error
+            exit $result
+          fi
+        }
         # Test website utils
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web
