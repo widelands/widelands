@@ -61,7 +61,8 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
 			training_wheels_wanted_ =
 			   (packet_version < 8 ? false : s.get_safe_bool("training_wheels"));
-			active_training_wheel_ = (packet_version < 9 ? "" : s.get_safe_string("active_training_wheel"));
+			active_training_wheel_ =
+			   (packet_version < 9 ? "" : s.get_safe_string("active_training_wheel"));
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
 			number_of_players_ = s.get_safe_int("player_amount");
