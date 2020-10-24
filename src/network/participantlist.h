@@ -65,6 +65,15 @@ public:
 		kSpectator
 	};
 
+	/// Counts of current participants
+	struct ParticipantCounts {
+		/// Number of AIs currently in the game
+		int16_t ais;
+		/// Number of humans currently in the game
+		int16_t humans;
+		/// Sum of the other two
+		int16_t total;
+	};
 	/**
 	 * Constructor.
 	 * @param settings The settings of the current network game.
@@ -80,11 +89,10 @@ public:
 
 	/**
 	 * Returns the counts of currently connected participants.
-	 * Return value [2] - 1 is the highest permitted participant index for the other methods.
-	 * @return A pointer to an array with 3 elements containing the counts of connected
-	 *         participants for humans, AIs, and a total.
+	 * The contained total - 1 is the highest permitted participant index for the other methods.
+	 * @return The counts of participants active in the game.
 	 */
-	const int16_t* get_participant_counts() const;
+	const ParticipantCounts& get_participant_counts() const;
 
 	/**
 	 * Returns the type of participant.
@@ -165,14 +173,14 @@ public:
 	/**
 	 * Returns the ping time of the participant.
 	 * Returned is the time that it took the client to return a PING request by the network
-	 * relay.
+	 * relay (the RTT = Round Trip Time).
 	 * For AI participant the result is undefined.
 	 * In network games that don't use the network relay the result is undefined.
 	 * @warning Currently this method isn't implemented yet and always returns 0.
 	 * @param participant The index of the participant to get data about.
 	 * @return The RTT in milliseconds for this participant up to 255ms.
 	 */
-	uint8_t get_participant_ping(int16_t participant) const;
+	uint8_t get_participant_rtt(int16_t participant) const;
 
 	/// Called when the underlying data was updated and should be re-fetched.
 	boost::signals2::signal<void()> participants_updated;
@@ -220,8 +228,8 @@ private:
 	Widelands::Game*& game_;
 	/// A reference to the user name of the human on this computer.
 	const std::string& localplayername_;
-	/// Counts of current participants: humans, AIs, total
-	int16_t participant_counts_[3];
+	/// Counts of current participants
+	ParticipantCounts participant_counts_;
 };
 
 #endif  // WL_NETWORK_PARTICIPANTLIST_H

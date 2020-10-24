@@ -303,7 +303,7 @@ void GameChatPanel::key_changed() {
 	// If there already is a candidate, create a new candidate from the part that is
 	// the same for both candidates. (Note that the merged candidate might have wrong case,
 	// but that is fixed on the next completition)
-	const int16_t n_humans = chat_.participants_->get_participant_counts()[0];
+	const int16_t n_humans = chat_.participants_->get_participant_counts().humans;
 	const std::string& local_name = chat_.participants_->get_local_playername();
 	std::string candidate = "";
 	for (int16_t i = 0; i < n_humans; ++i) {
@@ -383,7 +383,7 @@ void GameChatPanel::prepare_recipients() {
 	}
 
 	// Iterate over all human players (except ourselves) and add their names
-	const int16_t n_humans = chat_.participants_->get_participant_counts()[0];
+	const int16_t n_humans = chat_.participants_->get_participant_counts().humans;
 	const std::string& local_name = chat_.participants_->get_local_playername();
 
 	for (int16_t i = 0; i < n_humans; ++i) {

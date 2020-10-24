@@ -9,7 +9,8 @@
 ParticipantList::ParticipantList(const GameSettings* settings,
                                  Widelands::Game*& game,
                                  const std::string& localplayername)
-   : settings_(settings), game_(game), localplayername_(localplayername), participant_counts_{-1} {
+   : settings_(settings), game_(game), localplayername_(localplayername),
+		participant_counts_{-1, -1, -1} {
 	assert(settings_ != nullptr);
 	// The pointer referenced by game_ might be undefined here
 	// localplayername_ might be empty here
@@ -20,8 +21,8 @@ ParticipantList::ParticipantList(const GameSettings* settings,
 	   [this]() { update_participant_counts(); }, boost::signals2::connect_position::at_front);
 }
 
-const int16_t* ParticipantList::get_participant_counts() const {
-	assert(participant_counts_[0] != -1);
+const ParticipantList::ParticipantCounts& ParticipantList::get_participant_counts() const {
+	assert(participant_counts_.total != -1);
 	return participant_counts_;
 }
 
@@ -30,8 +31,8 @@ const int16_t* ParticipantList::get_participant_counts() const {
 // and keeping them updated is just asking for trouble
 
 ParticipantList::ParticipantType ParticipantList::get_participant_type(int16_t participant) const {
-	assert(participant < participant_counts_[2]);
-	if (participant >= participant_counts_[0]) {
+	assert(participant < participant_counts_.total);
+	if (participant >= participant_counts_.humans) {
 		return ParticipantList::ParticipantType::kAI;
 	}
 	if (participant_to_user(participant).position == UserSettings::none()) {
@@ -47,7 +48,7 @@ Widelands::TeamNumber ParticipantList::get_participant_team(int16_t participant)
 }
 
 const std::string& ParticipantList::get_participant_name(int16_t participant) const {
-	if (participant < participant_counts_[0]) {
+	if (participant < participant_counts_.humans) {
 		// We can't use the name in the Player entry for normal users since it isn't the selected
 		// user name but instead a combined name of all the users for this player
 		return participant_to_user(participant).name;
@@ -59,8 +60,8 @@ const std::string& ParticipantList::get_participant_name(int16_t participant) co
 }
 
 bool ParticipantList::needs_teamchat() const {
-	assert(participant_counts_[0] >= 0);
-	if (participant_counts_[0] <= 1) {
+	assert(participant_counts_.humans >= 0);
+	if (participant_counts_.humans <= 1) {
 		// If 0: We have just connected and don't know anything about the users yet
 		// If 1: We are the only participant, so there can't be any teams
 		return false;
@@ -68,18 +69,18 @@ bool ParticipantList::needs_teamchat() const {
 
 	const int16_t my_index = get_local_participant_index();
 	assert(my_index >= 0);
-	assert(my_index < participant_counts_[0]);
+	assert(my_index < participant_counts_.humans);
 
 	// Check whether we are a player or a spectator
 	bool found_someone = false;
 	if (get_participant_type(my_index) == ParticipantType::kSpectator) {
 		// We are a spectator. Check if there are other spectators
-		for (int16_t i = 0; i < participant_counts_[0]; ++i) {
+		for (int16_t i = 0; i < participant_counts_.humans; ++i) {
 			if (get_participant_type(i) != ParticipantType::kSpectator) {
 				continue;
 			}
 			if (found_someone) {
-				// The first one we find might be we. If we find a second one,
+				// The first one we find might be us. If we find a second one,
 				// we know that there is a teammate
 				return true;
 			}
@@ -124,7 +125,7 @@ bool ParticipantList::needs_teamchat() const {
 		}  // end player slot with no team
 
 		// Search for other players with the same team
-		for (int16_t i = 0; i < participant_counts_[0]; ++i) {
+		for (int16_t i = 0; i < participant_counts_.humans; ++i) {
 			if (get_participant_type(i) != ParticipantType::kPlayer) {
 				// Skip spectators, they are no team players
 				// AIs can't be found here since we only check the first entries that are humans
@@ -149,7 +150,7 @@ const std::string& ParticipantList::get_local_playername() const {
 int16_t ParticipantList::get_local_participant_index() const {
 	assert(!localplayername_.empty());
 	// Find our player index
-	for (int16_t my_index = 0; my_index < participant_counts_[0]; ++my_index) {
+	for (int16_t my_index = 0; my_index < participant_counts_.humans; ++my_index) {
 		if (get_participant_name(my_index) == localplayername_) {
 			return my_index;
 		}
@@ -174,8 +175,8 @@ bool ParticipantList::is_ingame() const {
 	return (game_ != nullptr);
 }
 
-uint8_t ParticipantList::get_participant_ping(int16_t participant) const {
-	assert(participant < participant_counts_[2]);
+uint8_t ParticipantList::get_participant_rtt(int16_t participant) const {
+	assert(participant < participant_counts_.humans);
 	// TODO(Notabilis): Implement this function ... and all the Ping-stuff that belongs to it
 	// - Maybe show two RTTs per player: To the host and to the netrelay
 	// - Offer "autoUpdatePings(bool)" method to have the ping results be periodically refreshed
@@ -185,7 +186,7 @@ uint8_t ParticipantList::get_participant_ping(int16_t participant) const {
 }
 
 const UserSettings& ParticipantList::participant_to_user(int16_t participant) const {
-	assert(participant < participant_counts_[0]);
+	assert(participant < participant_counts_.humans);
 	assert(participant < static_cast<int16_t>(settings_->users.size()));
 	for (const UserSettings& u : settings_->users) {
 		if (u.position == UserSettings::not_connected()) {
@@ -201,9 +202,9 @@ const UserSettings& ParticipantList::participant_to_user(int16_t participant) co
 }
 
 int32_t ParticipantList::participant_to_playerindex(int16_t participant) const {
-	if (participant >= participant_counts_[0]) {
+	if (participant >= participant_counts_.humans) {
 		// AI
-		participant -= participant_counts_[0];
+		participant -= participant_counts_.humans;
 		assert(settings_ != nullptr);
 		assert(participant >= 0);
 		assert(static_cast<size_t>(participant) < settings_->players.size());
@@ -233,7 +234,7 @@ int32_t ParticipantList::participant_to_playerindex(int16_t participant) const {
 }
 
 const Widelands::Player* ParticipantList::participant_to_player(int16_t participant) const {
-	assert(participant < participant_counts_[2]);
+	assert(participant < participant_counts_.total);
 	assert(game_ != nullptr);
 	const Widelands::PlayersManager* pm = game_->player_manager();
 	assert(pm);
@@ -247,22 +248,22 @@ const Widelands::Player* ParticipantList::participant_to_player(int16_t particip
 void ParticipantList::update_participant_counts() {
 
 	// Number of connected humans
-	participant_counts_[0] = 0;
+	participant_counts_.humans = 0;
 	for (const UserSettings& u : settings_->users) {
 		// settings_->users might contain disconnected humans, filter them out
 		if (u.position != UserSettings::not_connected()) {
-			++participant_counts_[0];
+			++participant_counts_.humans;
 		}
 	}
-	assert(participant_counts_[0] <= static_cast<int16_t>(settings_->users.size()));
-	participant_counts_[1] = 0;
+	assert(participant_counts_.humans <= static_cast<int16_t>(settings_->users.size()));
+	participant_counts_.ais = 0;
 	for (size_t i = 0; i < settings_->players.size(); ++i) {
 		const PlayerSettings& player = settings_->players[i];
 		if (player.state != PlayerSettings::State::kComputer) {
 			// Ignore open, shared or human player slots
 			continue;
 		}
-		++participant_counts_[1];
+		++participant_counts_.ais;
 	}
-	participant_counts_[2] = participant_counts_[0] + participant_counts_[1];
+	participant_counts_.total = participant_counts_.humans + participant_counts_.ais;
 }
