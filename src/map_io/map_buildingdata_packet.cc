@@ -565,8 +565,8 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			   RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
 			militarysite.soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
 			militarysite.next_swap_soldiers_time_ = Time(fr);
-			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8() ? true : false;
-			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8() ? true : false;
+			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8();
+			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8();
 
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Militarysite", packet_version,

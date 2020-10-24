@@ -368,11 +368,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		marine_task_queue.pop_back();
 	}
 
-	if (map_allows_seafaring_) {
-		// here we indicate that normal frequency check makes sense
-		return true;
-	}
-	return false;
+	// If map_allows_seafaring_, we indicate that normal frequency check makes sense
+	return map_allows_seafaring_;
 }
 
 /**

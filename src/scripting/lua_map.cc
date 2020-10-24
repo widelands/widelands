@@ -172,11 +172,8 @@ struct SoldierMapDescr {
 		return health < ot.health;
 	}
 	bool operator==(const SoldierMapDescr& ot) const {
-		if (health == ot.health && attack == ot.attack && defense == ot.defense &&
-		    evade == ot.evade) {
-			return true;
-		}
-		return false;
+		return (health == ot.health && attack == ot.attack && defense == ot.defense &&
+		    evade == ot.evade);
 	}
 };
 
