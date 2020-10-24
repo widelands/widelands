@@ -6367,7 +6367,7 @@ int LuaShip::get_wares(lua_State* L) {
 	Widelands::Ship* ship = get(L, egbase);
 
 	Widelands::WareInstance* ware = nullptr;
-	std::string filter = "";
+	std::string filter;
 
 	if (lua_gettop(L) > 1) {
 		filter = luaL_checkstring(L, -1);
@@ -6422,7 +6422,7 @@ int LuaShip::get_workers(lua_State* L) {
 	Widelands::Ship* ship = get(L, egbase);
 
 	Widelands::Worker* worker = nullptr;
-	std::string filter = "";
+	std::string filter;
 
 	if (lua_gettop(L) > 1) {
 		filter = luaL_checkstring(L, -1);
