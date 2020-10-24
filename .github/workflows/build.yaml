@@ -7,6 +7,7 @@ on:
 
 jobs:
   testsuite:
+    # needs: [clang_tidy]  # NOCOM
     strategy:
       fail-fast: false
       matrix:
@@ -14,11 +15,11 @@ jobs:
           - Release
           - Debug
         compiler:
-          - clang-10
-          - clang-9
-          - clang-8
-          - clang-7
-          - clang-6
+          - clang++-10
+          - clang++-9
+          - clang++-8
+          - clang++-7
+          - clang++-6.0
           - g++-10
           - g++-9
           - g++-8
@@ -39,8 +40,8 @@ jobs:
       run: |
         if [[ ${{ matrix.compiler }} =~ clang* ]]
         then
-          export CC=/usr/bin/${{ matrix.compiler }}  # clang-10
-          export CXX="${CC/clang/clang++}            # clang++-10
+          export CXX=/usr/bin/${{ matrix.compiler }}  # clang++-10
+          export CXX="${CC/++/}                       # clang-10
         else
           export CXX=/usr/bin/${{ matrix.compiler }} # g++-10
           export CC="${CXX/g++/gcc}                  # gcc-10
@@ -71,6 +72,54 @@ jobs:
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
         # Testsuite
         ./regression_test.py -b build/src/widelands
+
+  includes:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Check for superfluous includes and forward declarations
+      run: |
+        cd src
+        ../utils/find_unused_includes.py
+
+  codecheck:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Run the codecheck suite
+      run: |
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
+        pushd ../cmake/codecheck
+        ./run_tests.py
+        popd
+        TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
+        if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then
+          echo "You have codecheck warnings (see above). Please fix."
+          exit 1
+        fi
+
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - name: Generate documentation
+      run: |
+        cd ../doc/sphinx
+        mkdir source/_static
+        ./extract_rst.py
+        sphinx-build -W -b json -d build/doctrees source build/json
+
   clang_tidy:
     runs-on: ubuntu-latest
     steps:
