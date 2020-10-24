@@ -9,8 +9,10 @@
 ParticipantList::ParticipantList(const GameSettings* settings,
                                  Widelands::Game*& game,
                                  const std::string& localplayername)
-   : settings_(settings), game_(game), localplayername_(localplayername),
-		participant_counts_{-1, -1, -1} {
+   : settings_(settings),
+     game_(game),
+     localplayername_(localplayername),
+     participant_counts_{-1, -1, -1} {
 	assert(settings_ != nullptr);
 	// The pointer referenced by game_ might be undefined here
 	// localplayername_ might be empty here
