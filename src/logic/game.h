@@ -29,6 +29,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
+#include "logic/training_wheels.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
@@ -195,6 +196,12 @@ public:
 	// run the 'script_to_run' directly after the game was loaded.
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
+
+	bool acquire_training_wheel_lock(const std::string& objective);
+	void mark_training_wheel_as_solved(const std::string& objective);
+	bool training_wheels_wanted() const {
+		return training_wheels_wanted_;
+	}
 
 	void postload() override;
 
@@ -414,6 +421,10 @@ private:
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
+
+	std::unique_ptr<TrainingWheels> training_wheels_;
+	bool training_wheels_wanted_;
+
 	bool replay_;
 };
 
