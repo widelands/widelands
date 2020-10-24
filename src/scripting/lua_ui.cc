@@ -82,6 +82,7 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
+   METHOD(LuaPanel, indicate),
    {nullptr, nullptr},
 };
 
@@ -281,6 +282,43 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 
 	lua_pushint32(L, cp.x);
 	lua_pushint32(L, cp.y);
+	return 2;
+}
+
+/* RST
+   .. method:: indicate(on)
+
+      Show/Hide an arrow that points to this panel. You can only point to 1 panel at the same time.
+
+      :arg on: Whether to show or hide the arrow
+      :type on: :class:`boolean`
+*/
+// UNTESTED
+int LuaPanel::indicate(lua_State* L) {
+	assert(panel_);
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 boolean");
+	}
+
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	const bool on = luaL_checkboolean(L, -1);
+	if (on) {
+		int x = panel_->get_x() + panel_->get_w();
+		int y = panel_->get_y();
+		UI::Panel* parent = panel_->get_parent();
+		while (parent != nullptr) {
+			x += parent->get_x() + parent->get_lborder();
+			y += parent->get_y() + parent->get_tborder();
+			parent = parent->get_parent();
+		}
+		ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
+	} else {
+		ipl->set_training_wheel_indicator_pos(Vector2i::invalid());
+	}
 	return 2;
 }
 
@@ -602,10 +640,15 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RO(LuaMapView, average_fps),  PROP_RO(LuaMapView, center_map_pixel),
-   PROP_RW(LuaMapView, buildhelp),    PROP_RW(LuaMapView, census),
-   PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road),
-   PROP_RO(LuaMapView, is_animating), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapView, average_fps),
+   PROP_RO(LuaMapView, center_map_pixel),
+   PROP_RW(LuaMapView, buildhelp),
+   PROP_RW(LuaMapView, census),
+   PROP_RW(LuaMapView, statistics),
+   PROP_RO(LuaMapView, is_building_road),
+   PROP_RO(LuaMapView, auto_roadbuilding_mode),
+   PROP_RO(LuaMapView, is_animating),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
@@ -702,6 +745,21 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: auto_roadbuild_mode
+
+      (RO) Is the player using automatic road building mode?
+*/
+int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		lua_pushboolean(L, false);
+	} else {
+		lua_pushboolean(L, ipl->auto_roadbuild_mode());
+	}
+	return 1;
+}
+
+/* RST
    .. attribute:: is_animating
 
       (RO) True if this MapView is currently panning or zooming.
@@ -710,6 +768,7 @@ int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, get()->map_view()->is_animating());
 	return 1;
 }
+
 /*
  * Lua Functions
  */

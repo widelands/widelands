@@ -36,6 +36,7 @@ cpp_pairs = (
 # directories contain lua files of the same name (e.g. "init.lua").
 lua_dirs = (
     ('data/scripting', '', 'auxiliary'),
+    ('data/scripting/training_wheels', '', 'auxiliary'),
     ('data/scripting/win_conditions', '', 'auxiliary'),
     ('data/scripting/editor', '', 'lua_world_other'),
     ('data/tribes/initialization/atlanteans', '', 'lua_tribes_defining'),

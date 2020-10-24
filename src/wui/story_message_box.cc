@@ -73,6 +73,10 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	move_inside_parent();
 	textarea_.focus();
 
+	if (!is_modal()) {
+		resume_game();
+	}
+
 	initialization_complete();
 }
 
@@ -80,13 +84,20 @@ void StoryMessageBox::clicked_ok() {
 	set_visible(false);
 	set_thinks(false);
 
+	if (is_modal()) {
+		resume_game();
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+	} else {
+		die();
+	}
+}
+
+void StoryMessageBox::resume_game() {
 	// Manually force the game to reevaluate its current state, especially time information.
 	game_->game_controller()->think();
 	// Now get the game running again.
 	game_->game_controller()->set_desired_speed(desired_speed_);
 	game_->save_handler().set_allow_saving(true);
-
-	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {
