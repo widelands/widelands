@@ -52,12 +52,19 @@ run(function()
 
    pop_textdomain()
 
-   -- NOCOM: This fails when the objective is written and the game saved before completing it, and then the game loaded again.
-   -- We need to add the active training wheel to the savegame data so we won't run it twice.
+   local objectives_from_savegame = player.objectives
+
+   if objectives_from_savegame["obj_initial_close_objectives_window"] then
+      objectives_from_savegame["obj_initial_close_objectives_window"]:remove()
+   end
 
    local o2 = add_campaign_objective(obj_initial_close_objectives_window)
 
    mapview.buttons.objectives:indicate(true)
+
+   if objectives_from_savegame["objectives_message_objective"] then
+      objectives_from_savegame["objectives_message_objective"]:remove()
+   end
 
    local o1 = campaign_message_with_objective(objectives_message, objectives_message_objective, 0)
    set_objective_done(o1)
