@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-08-23 15:41+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-22 08:59+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1415,7 +1415,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
+msgstr "De Boomslager dat warkt bi deese Boomslageree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -1768,7 +1768,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Boomplanteree."
+msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Boomplanteree."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:8
@@ -2167,7 +2167,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Osslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
+msgstr "De Boomhauer dat warkt bi deese Boomhaueree hett keene Bomen tum Ofslaan. Överlegg di, of du dat Huus plattrieten of ofbrannen willst, of bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:8
