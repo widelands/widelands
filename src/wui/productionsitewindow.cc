@@ -341,7 +341,8 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 #ifndef NDEBUG
 		const bool success =
 #endif
-		   ps->warp_worker(ibase()->egbase(), *ibase()->egbase().descriptions().get_worker_descr(selected),
+		   ps->warp_worker(ibase()->egbase(),
+		                   *ibase()->egbase().descriptions().get_worker_descr(selected),
 		                   selected_index);
 #ifndef NDEBUG
 		assert(success);
