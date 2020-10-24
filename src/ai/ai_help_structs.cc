@@ -969,8 +969,6 @@ void ManagementData::test_consistency(bool itemized) {
 			assert(f_neuron_pool[i].get_id() == i);
 		}
 	}
-
-	return;
 }
 
 void ManagementData::dump_data(const Widelands::PlayerNumber pn) {

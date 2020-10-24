@@ -186,7 +186,6 @@ void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
 	if (quit_sdl) {
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 	}
-	return;
 }
 
 /**
