@@ -36,11 +36,11 @@ ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr,
    : BuildingSettings(descr.name(), tribe), stopped(false) {
 	for (const auto& pair : descr.input_wares()) {
 		ware_queues.insert(
-		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
+		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, WarePriority::kNormal}));
 	}
 	for (const auto& pair : descr.input_workers()) {
 		worker_queues.insert(
-		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, kPriorityNormal}));
+		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, WarePriority::kNormal}));
 	}
 }
 
@@ -246,7 +246,7 @@ void ProductionsiteSettings::read(const Game& game,
 				const std::string name(fr.c_string());
 				di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
 				const uint32_t fill = fr.unsigned_32();
-				const int32_t priority = fr.signed_32();
+				const WarePriority priority(fr);
 				// Set the fill and priority if the queue exists.
 				// The check protects against changes in the input wares - we simply keep using the
 				// default instead in that case.
@@ -262,7 +262,7 @@ void ProductionsiteSettings::read(const Game& game,
 				const std::string name(fr.c_string());
 				di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
 				const uint32_t fill = fr.unsigned_32();
-				const int32_t priority = fr.signed_32();
+				const WarePriority priority(fr);
 				// Set the fill and priority if the queue exists.
 				// The check protects against changes in the input workers - we simply keep using the
 				// default instead in that case.
@@ -292,12 +292,12 @@ void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	for (const auto& pair : ware_queues) {
 		fw.c_string(tribe_.get_ware_descr(pair.first)->name());
 		fw.unsigned_32(pair.second.desired_fill);
-		fw.signed_32(pair.second.priority);
+		pair.second.priority.write(fw);
 	}
 	for (const auto& pair : worker_queues) {
 		fw.c_string(tribe_.get_worker_descr(pair.first)->name());
 		fw.unsigned_32(pair.second.desired_fill);
-		fw.signed_32(pair.second.priority);
+		pair.second.priority.write(fw);
 	}
 }
 

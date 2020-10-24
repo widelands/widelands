@@ -30,27 +30,27 @@ constexpr int8_t kButtonSize = 24;
 /*/ The slider indexes the available priorities as 0..4, so here are some conversion functions
 static size_t priority_to_index(const int32_t priority) {
 	switch (priority) {
-	case Widelands::kPriorityVeryLow:
+	case Widelands::WarePriority::kVeryLow:
 		return 0;
-	case Widelands::kPriorityLow:
+	case Widelands::WarePriority::kLow:
 		return 1;
 	case 2:  // TODO(Nordfriese): The value '2' is for savegame compatibility
-	case Widelands::kPriorityNormal:
+	case Widelands::WarePriority::kNormal:
 		return 2;
-	case Widelands::kPriorityHigh:
+	case Widelands::WarePriority::kHigh:
 		return 3;
-	case Widelands::kPriorityVeryHigh:
+	case Widelands::WarePriority::kVeryHigh:
 		return 4;
 	default: NEVER_HERE();
 	}
 }
 static int32_t index_to_priority(const size_t priority) {
 	switch (priority) {
-	case 0: return Widelands::kPriorityVeryLow;
-	case 1: return Widelands::kPriorityLow;
-	case 2: return Widelands::kPriorityNormal;
-	case 3: return Widelands::kPriorityHigh;
-	case 4: return Widelands::kPriorityVeryHigh;
+	case 0: return Widelands::WarePriority::kVeryLow;
+	case 1: return Widelands::WarePriority::kLow;
+	case 2: return Widelands::WarePriority::kNormal;
+	case 3: return Widelands::WarePriority::kHigh;
+	case 4: return Widelands::WarePriority::kVeryHigh;
 	default: NEVER_HERE();
 	}
 }
@@ -67,7 +67,12 @@ static std::string priority_tooltip(const size_t priority) {
 } */
 
 void ensure_box_can_hold_input_queues(UI::Box& b) {
-	b.set_max_size(500, 400);
+	UI::Panel* p = &b;
+	while (p->get_parent()) {
+		 p = p->get_parent();
+	}
+	b.set_max_size(p->get_w() - 200, p->get_h() - 200);
+
 	b.set_scrolling(true);
 	b.set_scrollbar_style(UI::PanelStyle::kWui);
 }
@@ -142,18 +147,18 @@ b_p_high_(&hbox_, "p_low", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/buildings/high_priority_button.png"), _("High priority")),
 b_p_very_high_(&hbox_, "p_very_high", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/buildings/stock_policy_prefer.png"), _("Very high priority")), */
-priority_buttons_(has_priority_ ? std::map<int32_t, UI::Button*> {
-	{Widelands::kPriorityVeryLow, new UI::Button(&hbox_, "p_very_low", 0, 0, kButtonSize, kButtonSize,
+priority_buttons_(has_priority_ ? std::map<Widelands::WarePriority, UI::Button*> {
+	{Widelands::WarePriority::kVeryLow, new UI::Button(&hbox_, "p_very_low", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/buildings/stock_policy_remove.png"), _("Very low priority"))},
-	{Widelands::kPriorityLow, new UI::Button(&hbox_, "p_low", 0, 0, kButtonSize, kButtonSize,
+	{Widelands::WarePriority::kLow, new UI::Button(&hbox_, "p_low", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/buildings/low_priority_button.png"), _("Low priority"))},
-	{Widelands::kPriorityNormal, new UI::Button(&hbox_, "p_normal", 0, 0, kButtonSize, kButtonSize,
+	{Widelands::WarePriority::kNormal, new UI::Button(&hbox_, "p_normal", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/buildings/normal_priority_button.png"), _("Normal priority"))},
-	{Widelands::kPriorityHigh, new UI::Button(&hbox_, "p_high", 0, 0, kButtonSize, kButtonSize,
+	{Widelands::WarePriority::kHigh, new UI::Button(&hbox_, "p_high", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/buildings/high_priority_button.png"), _("High priority"))},
-	{Widelands::kPriorityVeryHigh, new UI::Button(&hbox_, "p_very_high", 0, 0, kButtonSize, kButtonSize,
+	{Widelands::WarePriority::kVeryHigh, new UI::Button(&hbox_, "p_very_high", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/wui/buildings/stock_policy_prefer.png"), _("Very high priority"))}
-} : std::map<int32_t, UI::Button*> {}),
+} : std::map<Widelands::WarePriority, UI::Button*> {}),
 spacer_(&hbox_, 0, 0, 5 * kButtonSize, kButtonSize),
 /* priority_(this, 0, 0, 3 * kButtonSize,
 	                 kButtonSize * 2 / 3, 0, 4,
@@ -236,11 +241,11 @@ icons_(nr_icons_, nullptr) {
 	think();
 }
 
-void InputQueueDisplay::set_priority(const /* size_t index */ int32_t priority, const bool recursion_start) {
+void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority, const bool recursion_start) {
 	if (recursion_start && SDL_GetModState() & KMOD_CTRL) {
 		for (UI::Panel* p = get_parent()->get_first_child(); p; p = p->get_next_sibling()) {
 			if (upcast(InputQueueDisplay, i, p)) {
-				i->set_priority( /* index */ priority, false);
+				i->set_priority(priority, false);
 			}
 		}
 		return;
@@ -374,12 +379,12 @@ void InputQueueDisplay::think() {
 		} */
 		// priority_.set_tooltip(priority_tooltip(priority_.get_value()));
 
-		const int32_t p = queue_ ? building_.get_priority(type_, index_) : get_setting()->priority;
-		/* b_p_very_low_.set_enabled(p != Widelands::kPriorityVeryLow);
-		b_p_low_.set_enabled(p != Widelands::kPriorityLow);
-		b_p_normal_.set_enabled(p != Widelands::kPriorityNormal);
-		b_p_high_.set_enabled(p != Widelands::kPriorityHigh);
-		b_p_very_high_.set_enabled(p != Widelands::kPriorityVeryHigh); */
+		const Widelands::WarePriority& p = queue_ ? building_.get_priority(type_, index_) : get_setting()->priority;
+		/* b_p_very_low_.set_enabled(p != Widelands::WarePriority::kVeryLow);
+		b_p_low_.set_enabled(p != Widelands::WarePriority::kLow);
+		b_p_normal_.set_enabled(p != Widelands::WarePriority::kNormal);
+		b_p_high_.set_enabled(p != Widelands::WarePriority::kHigh);
+		b_p_very_high_.set_enabled(p != Widelands::WarePriority::kVeryHigh); */
 		for (auto& pair : priority_buttons_) {
 			pair.second->set_perm_pressed(p == pair.first);
 		}

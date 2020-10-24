@@ -287,10 +287,10 @@ Time Request::get_required_time() const {
 int32_t Request::get_priority(int32_t cost) const {
 	int MAX_IDLE_PRIORITY = 100;
 	bool is_construction_site = false;
-	int32_t modifier = kPriorityNormal;
+	int32_t modifier = WarePriority::kNormal.to_weighting_factor();
 
 	if (target_building_) {
-		modifier = target_building_->get_priority(get_type(), get_index());
+		modifier = target_building_->get_priority(get_type(), get_index()).to_weighting_factor();
 		if (target_constructionsite_) {
 			is_construction_site = true;
 		} else if (target_warehouse_) {
@@ -331,7 +331,7 @@ uint32_t Request::get_transfer_priority() const {
 	uint32_t pri = 0;
 
 	if (target_building_) {
-		pri = target_building_->get_priority(get_type(), get_index());
+		pri = target_building_->get_priority(get_type(), get_index()).to_weighting_factor();
 		if (target_constructionsite_) {
 			return pri + 3;
 		} else if (target_warehouse_) {

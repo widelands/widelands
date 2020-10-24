@@ -1168,9 +1168,9 @@ void CmdShipCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, MapOb
 CmdSetWarePriority::CmdSetWarePriority(const Time& init_duetime,
                                        const PlayerNumber init_sender,
                                        PlayerImmovable& imm,
-                                       const int32_t init_type,
+                                       const WareWorker init_type,
                                        const DescriptionIndex i,
-                                       const int32_t init_priority,
+                                       const WarePriority& init_priority,
                                        bool cs_setting)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
@@ -1209,9 +1209,9 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.unsigned_8(type_);
+	fw.unsigned_8(static_cast<uint8_t>(type_));
 	fw.signed_32(index_);
-	fw.signed_32(priority_);
+	priority_.write(fw);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
@@ -1221,9 +1221,9 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 		if (packet_version == kCurrentPacketVersionCmdSetWarePriority) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			type_ = fr.unsigned_8();
+			type_ = WareWorker(fr.unsigned_8());
 			index_ = fr.signed_32();
-			priority_ = fr.signed_32();
+			priority_ = WarePriority(fr);
 			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -1238,18 +1238,18 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
    : PlayerCommand(Time(0), des.unsigned_8()),
      serial_(des.unsigned_32()),
-     type_(des.unsigned_8()),
+     type_(WareWorker(des.unsigned_8())),
      index_(des.signed_32()),
-     priority_(des.signed_32()),
+     priority_(des),
      is_constructionsite_setting_(des.unsigned_8()) {
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
-	ser.unsigned_8(type_);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
 	ser.signed_32(index_);
-	ser.signed_32(priority_);
+	priority_.write(ser);
 	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 

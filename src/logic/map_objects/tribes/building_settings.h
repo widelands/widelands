@@ -75,7 +75,7 @@ struct ProductionsiteSettings : public BuildingSettings {
 	struct InputQueueSetting {
 		const uint32_t max_fill;
 		uint32_t desired_fill;
-		int32_t priority;
+		WarePriority priority;
 	};
 	std::map<DescriptionIndex, InputQueueSetting> ware_queues;
 	std::map<DescriptionIndex, InputQueueSetting> worker_queues;

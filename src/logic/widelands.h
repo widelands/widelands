@@ -24,6 +24,9 @@
 #include <limits>
 #include <vector>
 
+class StreamRead;
+class StreamWrite;
+
 namespace Widelands {
 
 //  Type definitions for the game logic.
@@ -61,6 +64,40 @@ using DescriptionIndex = uint16_t;
 constexpr DescriptionIndex INVALID_INDEX = std::numeric_limits<uint16_t>::max();
 constexpr DescriptionIndex kInvalidWare = INVALID_INDEX - 1;
 constexpr DescriptionIndex kNoResource = INVALID_INDEX - 1;
+
+class WarePriority {
+public:
+	WarePriority(const WarePriority&) = default;
+	WarePriority& operator=(const WarePriority&) = default;
+
+	~WarePriority() {
+	}
+
+	uint32_t to_weighting_factor() const {
+		return value_;
+	}
+
+	bool operator==(const WarePriority& w) const {
+		return value_ == w.value_;
+	}
+	// For ordering in sets and maps
+	bool operator<(const WarePriority& w) const {
+		return value_ < w.value_;
+	}
+
+	// For saveloading and (de)serializing of playercommands
+	void write(StreamWrite&) const;
+	explicit WarePriority(StreamRead&);
+
+	// Predefined constants. Use these instead of instantiating this directly.
+	static const WarePriority kVeryLow, kLow, kNormal, kHigh, kVeryHigh;
+
+private:
+	explicit WarePriority(uint32_t v) : value_(v) {
+	}
+
+	uint32_t value_;
+};
 
 using ResourceAmount = uint8_t;  /// 4 bits used, so 0 .. 15.
 

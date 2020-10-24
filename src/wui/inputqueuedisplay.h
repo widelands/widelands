@@ -72,7 +72,7 @@ private:
 
 	void clicked_desired_fill(int8_t delta, bool recursion_start = true);
 	void clicked_real_fill(int8_t delta, bool recursion_start = true);
-	void set_priority( /* size_t */ int32_t, bool recursion_start = true);
+	void set_priority(const Widelands::WarePriority&, bool recursion_start = true);
 
 	const Image& max_fill_indicator_;
 	// const Image& priority_image_;
@@ -80,7 +80,7 @@ private:
 	UI::Box hbox_;
 	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_, b_increase_real_fill_;
 			// b_p_very_low_, b_p_low_, b_p_normal_, b_p_high_, b_p_very_high_;
-	std::map<int32_t, UI::Button*> priority_buttons_;
+	std::map<Widelands::WarePriority, UI::Button*> priority_buttons_;
 	UI::Panel spacer_;
 	// UI::HorizontalSlider priority_;
 	// unsigned slider_was_moved_;

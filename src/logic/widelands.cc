@@ -17,4 +17,24 @@
  *
  */
 
-// Dummy file as cmake cannot handle header only libraries :(.
+#include "logic/widelands.h"
+
+#include "io/streamread.h"
+#include "io/streamwrite.h"
+
+namespace Widelands {
+
+const WarePriority WarePriority::kVeryLow(0);
+const WarePriority WarePriority::kLow(4);
+const WarePriority WarePriority::kNormal(16);
+const WarePriority WarePriority::kHigh(64);
+const WarePriority WarePriority::kVeryHigh(4096);
+
+WarePriority::WarePriority(StreamRead& fr) : value_(fr.unsigned_32()) {
+}
+
+void WarePriority::write(StreamWrite& fw) const {
+	fw.unsigned_32(value_);
+}
+
+}  // namespace Widelands

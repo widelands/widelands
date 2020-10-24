@@ -284,17 +284,17 @@ uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) cons
 	}
 
 	//  Calculate how many wares can be sent out - it might be that we need them
-	// ourselves. E.g. for hiring new soldiers.
+	// ourselves. E.g. for hiring new workers.
 	int32_t const x = wares_.stock(req.get_index());
 	// only mark an ware of that type as available, if the priority of the
 	// request + number of that wares in warehouse is > priority of request
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
 	// be taken back to the warehouse as the request of the warehouse would be
 	// highered and would have the same value as the original request)
-	// TODO(Nordfriese): The result of `warehouse_->get_priority()` is typically very
+	// TODO(Nordfriese): The result of `warehouse_->get_priority()` is often very
 	// low, the result of the division by 100 is usually 0. What was intended here?
 	int32_t const y = x + (req.get_priority(0) / 100) -
-	                  (warehouse_->get_priority(wwWARE, req.get_index()) / 100) - 1;
+	                  (warehouse_->get_priority(wwWARE, req.get_index()).to_weighting_factor() / 100) - 1;
 	// But the number should never be higher than the number of wares available
 	if (y > x) {
 		return x;
