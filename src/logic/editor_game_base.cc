@@ -318,7 +318,7 @@ Building& EditorGameBase::warp_building(const Coords& c,
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(
-	   *this, plr, c, false, true, std::move(former_buildings));
+	   *this, plr, c, false, true, former_buildings);
 }
 
 /**
@@ -339,7 +339,7 @@ EditorGameBase::warp_constructionsite(const Coords& c,
 	Player* plr = get_player(owner);
 	const TribeDescr& tribe = plr->tribe();
 	ConstructionSite& b = dynamic_cast<ConstructionSite&>(tribe.get_building_descr(idx)->create(
-	   *this, plr, c, true, loading, std::move(former_buildings)));
+	   *this, plr, c, true, loading, former_buildings));
 	if (settings) {
 		b.apply_settings(*settings);
 	}

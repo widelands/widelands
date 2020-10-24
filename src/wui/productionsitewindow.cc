@@ -283,12 +283,12 @@ void ProductionSiteWindow::worker_table_selection_changed() {
 
 		worker_type_->set_enabled(true);
 		worker_type_->add(_("(vacant)"), Widelands::INVALID_INDEX, nullptr, worker == nullptr);
-		const Widelands::WorkerDescr* descr = ibase()->egbase().tribes().get_worker_descr(di);
+		const Widelands::WorkerDescr* descr = ibase()->egbase().descriptions().get_worker_descr(di);
 		while (descr) {
 			worker_type_->add(
 			   descr->descname(), di, descr->icon(), worker && &worker->descr() == descr);
 			di = descr->becomes();
-			descr = ibase()->egbase().tribes().get_worker_descr(di);
+			descr = ibase()->egbase().descriptions().get_worker_descr(di);
 		}
 		update_worker_xp_buttons(worker);
 	} else {
@@ -329,7 +329,7 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
 
 	const Widelands::DescriptionIndex current =
-	   worker ? ibase()->egbase().tribes().safe_worker_index(worker->descr().name()) :
+	   worker ? ibase()->egbase().descriptions().safe_worker_index(worker->descr().name()) :
 	            Widelands::INVALID_INDEX;
 	if (current == selected) {
 		return;
@@ -341,7 +341,7 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 #ifndef NDEBUG
 		const bool success =
 #endif
-		   ps->warp_worker(ibase()->egbase(), *ibase()->egbase().tribes().get_worker_descr(selected),
+		   ps->warp_worker(ibase()->egbase(), *ibase()->egbase().descriptions().get_worker_descr(selected),
 		                   selected_index);
 #ifndef NDEBUG
 		assert(success);
