@@ -459,12 +459,12 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	const std::string scenario_name = luaL_checkstring(L, 3);
 	luaL_checktype(L, 4, LUA_TTABLE);
 
-	std::string dir = kCampaignDataDir + g_fs->file_separator() + campaign_name;
+	std::string dir = kCampaignDataDir + FileSystem::file_separator() + campaign_name;
 	boost::trim(dir);
 	g_fs->ensure_directory_exists(dir);
 
 	std::string complete_filename =
-	   dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	   dir + FileSystem::file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
 
 	std::map<std::string, const char*> data;
@@ -567,8 +567,8 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	const std::string campaign_name = luaL_checkstring(L, 2);
 	const std::string scenario_name = luaL_checkstring(L, 3);
 
-	std::string complete_filename = kCampaignDataDir + g_fs->file_separator() + campaign_name +
-	                                g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	std::string complete_filename = kCampaignDataDir + FileSystem::file_separator() + campaign_name +
+	                                FileSystem::file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
 
 	Profile profile;

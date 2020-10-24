@@ -72,7 +72,6 @@ SUPPRESSED_CHECKS = {
     '[readability-redundant-string-cstr]',
     '[readability-redundant-string-init]',
     '[readability-simplify-boolean-expr]',
-    '[readability-static-accessed-through-instance]',
     '[readability-static-definition-in-anonymous-namespace]'
 }
 

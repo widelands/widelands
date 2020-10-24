@@ -395,7 +395,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = g_style_manager->color_tag(
+	*s = StyleManager::color_tag(
 	   // Line break to make Codecheck happy.
 	   *s, g_style_manager->building_statistics_style().medium_color());
 }
