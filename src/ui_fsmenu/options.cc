@@ -244,21 +244,39 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
         &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Workarea Overlaps")),
 
      // In-Game options
-     auto_roadbuild_mode_(
-        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Start building road after placing a flag")),
-     transparent_chat_(
-        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
+     auto_roadbuild_mode_(&box_ingame_,
+                          UI::PanelStyle::kFsMenu,
+                          Vector2i::zero(),
+                          _("Start building road after placing a flag")),
+     transparent_chat_(&box_ingame_,
+                       UI::PanelStyle::kFsMenu,
+                       Vector2i::zero(),
+                       _("Show in-game chat with transparent background"),
+                       "",
+                       0),
 
      /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
      /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Use single watchwindow mode")),
+     single_watchwin_(
+        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Use single watchwindow mode")),
      /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
-     ctrl_zoom_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
-     game_clock_(&box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Display game time in the top left corner")),
-     numpad_diagonalscrolling_(
-        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+     ctrl_zoom_(&box_ingame_,
+                UI::PanelStyle::kFsMenu,
+                Vector2i::zero(),
+                _("Zoom only when Ctrl is pressed")),
+     game_clock_(&box_ingame_,
+                 UI::PanelStyle::kFsMenu,
+                 Vector2i::zero(),
+                 _("Display game time in the top left corner")),
+     numpad_diagonalscrolling_(&box_ingame_,
+                               UI::PanelStyle::kFsMenu,
+                               Vector2i::zero(),
+                               _("Allow diagonal scrolling with the numeric keypad")),
      training_wheels_box_(&box_ingame_, 0, 0, UI::Box::Horizontal),
-     training_wheels_(&training_wheels_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Teach me how to play")),
+     training_wheels_(&training_wheels_box_,
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i::zero(),
+                      _("Teach me how to play")),
      training_wheels_reset_(&training_wheels_box_,
                             "reset_training_wheels",
                             0,
