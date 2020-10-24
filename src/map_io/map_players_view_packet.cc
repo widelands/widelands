@@ -348,6 +348,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					}
 				}
 			}
+
+			// Data for kVisible fields is not saveloaded so rediscover it
+			if (packet_version == kCurrentPacketVersion) {
+				iterate_players_existing(p, nr_players, egbase, player) {
+					for (MapIndex m = 0; m < no_of_fields; ++m) {
+						Player::Field& f = player->fields_[m];
+						if (f.vision == VisibleState::kVisible) {
+							player->rediscover_node(map, map.get_fcoords(map[m]));
+						}
+					}
+				}
+			}
+
 		} else if (packet_version >= 1 && packet_version <= 2) {
 			// TODO(Nordfriese): Savegame compatibility, remove after v1.0
 			for (uint8_t i = fr.unsigned_8(); i; --i) {

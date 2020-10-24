@@ -48,6 +48,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      priority_radiogroup_(nullptr),
      increase_max_fill_(nullptr),
      decrease_max_fill_(nullptr),
+     increase_real_fill_(nullptr),
+     decrease_real_fill_(nullptr),
      index_(queue.get_index()),
      type_(queue.get_type()),
      max_fill_indicator_(g_image_cache->get(pic_max_fill_indicator)),
@@ -97,6 +99,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      priority_radiogroup_(nullptr),
      increase_max_fill_(nullptr),
      decrease_max_fill_(nullptr),
+     increase_real_fill_(nullptr),
+     decrease_real_fill_(nullptr),
      index_(di),
      type_(ww),
      max_fill_indicator_(g_image_cache->get(pic_max_fill_indicator)),
@@ -177,8 +181,9 @@ void InputQueueDisplay::max_size_changed() {
 	if (cache_size_ <= 0) {
 		set_desired_size(0, 0);
 	} else {
-		set_desired_size(
-		   cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border, total_height_);
+		set_desired_size(cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border +
+		                    (increase_real_fill_ ? 2 * (CellWidth + CellSpacing) : 0),
+		                 total_height_);
 	}
 }
 
@@ -326,6 +331,12 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	delete decrease_max_fill_;
 	increase_max_fill_ = nullptr;
 	decrease_max_fill_ = nullptr;
+	if (increase_real_fill_) {
+		delete increase_real_fill_;
+		delete decrease_real_fill_;
+		increase_real_fill_ = nullptr;
+		decrease_real_fill_ = nullptr;
+	}
 
 	if (cache_size_ <= 0 || no_capacity_buttons_) {
 		return;
@@ -382,6 +393,27 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
 	      .str());
 	increase_max_fill_->sigclicked.connect([this]() { increase_max_fill_clicked(); });
+
+	if (interactive_base_.omnipotent() && queue_) {
+		x += CellWidth + 2 * CellSpacing + PriorityButtonSize;
+
+		decrease_real_fill_ =
+		   new UI::Button(this, "decrease_real_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
+		                  UI::ButtonStyle::kWuiMenu,
+		                  g_image_cache->get("images/ui_basic/scrollbar_down.png"), _("Remove ware"));
+
+		x += CellWidth + CellSpacing;
+		increase_real_fill_ =
+		   new UI::Button(this, "increase_real_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
+		                  UI::ButtonStyle::kWuiMenu,
+		                  g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Add ware"));
+
+		increase_real_fill_->set_repeating(true);
+		decrease_real_fill_->set_repeating(true);
+
+		increase_real_fill_->sigclicked.connect([this]() { increase_real_fill_clicked(); });
+		decrease_real_fill_->sigclicked.connect([this]() { decrease_real_fill_clicked(); });
+	}
 
 	increase_max_fill_->set_repeating(true);
 	decrease_max_fill_->set_repeating(true);
@@ -514,6 +546,18 @@ void InputQueueDisplay::increase_max_fill_clicked() {
 	if (SDL_GetModState() & KMOD_SHIFT) {
 		update_siblings_fill(
 		   ((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::max() : 1));
+	}
+}
+
+// No Ctrl/Shift modifiers for the real-fill buttons. They are used only for cheating anyway.
+void InputQueueDisplay::increase_real_fill_clicked() {
+	if (queue_ && interactive_base_.omnipotent() && queue_->get_filled() < queue_->get_max_size()) {
+		const_cast<Widelands::InputQueue*>(queue_)->set_filled(queue_->get_filled() + 1);
+	}
+}
+void InputQueueDisplay::decrease_real_fill_clicked() {
+	if (queue_ && interactive_base_.omnipotent() && queue_->get_filled() > 0) {
+		const_cast<Widelands::InputQueue*>(queue_)->set_filled(queue_->get_filled() - 1);
 	}
 }
 
