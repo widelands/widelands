@@ -18,7 +18,7 @@ run(function()
    local player = wl.Game().players[interactive_player_slot]
    local tribe = player.tribe
 
-   -- Find the tree collector / log producer building
+   -- Find the rock collector / granite producer building
    local buildings = tribe.buildings
    local quarry = find_immovable_collector_for_ware(buildings, "rocks", "granite")
    if quarry == nil then
@@ -176,16 +176,16 @@ run(function()
       campaign_message_box(msg_granite)
       scroll_to_field(target_field)
 
-      -- Wait for player to activate the small building tab
-      wait_for_field_action_tab("small")
-      mapview.windows.field_action.tabs["small"]:indicate(true)
-      while not mapview.windows.field_action.tabs["small"].active do
+      -- Wait for player to activate the correct building tab
+      wait_for_field_action_tab(quarry.size)
+      mapview.windows.field_action.tabs[quarry.size]:indicate(true)
+      while not mapview.windows.field_action.tabs[quarry.size].active do
          sleep(100)
          if not mapview.windows.field_action then
             mapview:indicate(false)
          end
-         wait_for_field_action_tab("small")
-         mapview.windows.field_action.tabs["small"]:indicate(true)
+         wait_for_field_action_tab(quarry.size)
+         mapview.windows.field_action.tabs[quarry.size]:indicate(true)
       end
 
       -- Explain road building before the road building mode blocks us

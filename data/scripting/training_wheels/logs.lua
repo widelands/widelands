@@ -175,15 +175,15 @@ run(function()
       scroll_to_field(target_field)
 
       -- Wait for player to activate the small building tab
-      wait_for_field_action_tab("small")
-      mapview.windows.field_action.tabs["small"]:indicate(true)
-      while not mapview.windows.field_action.tabs["small"].active do
+      wait_for_field_action_tab(log_producer.size)
+      mapview.windows.field_action.tabs[log_producer.size]:indicate(true)
+      while not mapview.windows.field_action.tabs[log_producer.size].active do
          sleep(100)
          if not mapview.windows.field_action then
             mapview:indicate(false)
          end
-         wait_for_field_action_tab("small")
-         mapview.windows.field_action.tabs["small"]:indicate(true)
+         wait_for_field_action_tab(log_producer.size)
+         mapview.windows.field_action.tabs[log_producer.size]:indicate(true)
       end
 
       -- Explain road building before the road building mode blocks us
