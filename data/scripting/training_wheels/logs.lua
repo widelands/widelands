@@ -38,7 +38,6 @@ run(function()
       conquering_field = warehouse_immovable.fields[1]
    end
 
-
    -- Check whether we already have a constructionsite from savegame
    local starting_conquer_range = wl.Game():get_building_description(conquering_immovable.descr.name).conquers
    local constructionsite_search_area = conquering_field:region(starting_conquer_range)

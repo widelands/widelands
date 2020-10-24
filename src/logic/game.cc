@@ -213,6 +213,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
 	// Replays can't handle scenarios
 	set_write_replay(false);
+	training_wheels_wanted_ = false;
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
 	if (!maploader) {
@@ -376,6 +377,8 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -409,6 +412,8 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -448,9 +453,10 @@ void Game::release_training_wheel_lock() {
 	}
 }
 void Game::mark_training_wheel_as_solved(const std::string& objective) {
-	if (training_wheels_ != nullptr) {
-		training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
 	}
+	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
 }
 
 /**
@@ -492,10 +498,6 @@ bool Game::run(StartGameType const start_game_type,
 	postload();
 
 	InteractivePlayer* ipl = get_ipl();
-	training_wheels_wanted_ =
-	   get_config_bool("training_wheels", true) &&
-	   (start_game_type == StartGameType::kMap ||
-	    (script_to_run.empty() && start_game_type == StartGameType::kSaveGame));
 
 	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
@@ -505,10 +507,13 @@ bool Game::run(StartGameType const start_game_type,
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
+			training_wheels_wanted_ =
+			   get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios
 			set_write_replay(false);
+			training_wheels_wanted_ = false;
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),
@@ -564,12 +569,12 @@ bool Game::run(StartGameType const start_game_type,
 
 	// We don't run the training wheel objectives in scenarios, but we want the objectives available
 	// for marking them as solved if a scenario teaches the same content.
-	if (ipl && !ipl->is_multiplayer()) {
+	if (training_wheels_wanted_) {
 		training_wheels_.reset(new TrainingWheels(lua()));
 		if (!training_wheels_->has_objectives()) {
 			// Nothing to do, so let's free the memory
 			training_wheels_.reset(nullptr);
-		} else if (training_wheels_wanted_) {
+		} else {
 			// Just like with scenarios, replays will desync, so we switch them off.
 			writereplay_ = false;
 		}
