@@ -66,8 +66,6 @@ public:
 			// kVisible initializes to the "visible by teammates" state
 			value_ = 2;
 			break;
-		default:
-			NEVER_HERE();
 		}
 	}
 	Vision& operator=(const VisibleState vs) {
@@ -82,8 +80,6 @@ public:
 			// kVisible initializes to the "visible by teammates" state
 			value_ = 2;
 			break;
-		default:
-			NEVER_HERE();
 		}
 		return *this;
 	}
