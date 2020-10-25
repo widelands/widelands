@@ -142,13 +142,16 @@ void SinglePlayerSetupBox::update() {
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
-	// NOCOM returning from Fullscreen is broken
 	standard_height_ = standard_element_height;
 	title_.set_font_scale(scale);
+	// Get suggested_teams_dropdown_ out of the way for width resizing
+	suggested_teams_dropdown_.set_desired_size(200, standard_element_height);
 	for (auto& active_player_group : active_player_groups_) {
 		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
-	suggested_teams_dropdown_.set_desired_size(suggested_teams_dropdown_.get_w(), standard_element_height);
+	if (!active_player_groups_.empty()) {
+		suggested_teams_dropdown_.set_desired_size(active_player_groups_.front()->get_w(), standard_element_height);
+	}
 }
 void SinglePlayerSetupBox::reset() {
 	for (auto& p : active_player_groups_) {
