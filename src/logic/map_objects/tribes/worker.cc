@@ -2790,8 +2790,9 @@ void Worker::geologist_update(Game& game, State& state) {
 				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
 				      TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
 				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
-					if (descriptions.get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
-					                                                 t.node.field->terrain_r()))
+					if (descriptions
+					       .get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
+					                                                     t.node.field->terrain_r()))
 					       ->get_is() &
 					    TerrainDescription::Is::kMineable) {
 						return true;

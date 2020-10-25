@@ -299,14 +299,13 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = descriptions.building_index(
-							   tribes_lookup_table.lookup_building(descr));
+							DescriptionIndex di =
+							   descriptions.building_index(tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
 								field->map_object_descr = descriptions.get_building_descr(di);
 							} else {
-								di = descriptions.immovable_index(
-								   tribes_lookup_table.lookup_immovable(
-								      world_lookup_table.lookup_immovable(descr)));
+								di = descriptions.immovable_index(tribes_lookup_table.lookup_immovable(
+								   world_lookup_table.lookup_immovable(descr)));
 								if (di != INVALID_INDEX) {
 									field->map_object_descr = descriptions.get_immovable_descr(di);
 								} else {
@@ -462,8 +461,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								f.dismantlesite.progress = 0;
 							} else {
 								f.set_constructionsite(true);
-								f.constructionsite->becomes = descriptions.get_building_descr(
-								   descriptions.safe_building_index(descr));
+								f.constructionsite->becomes =
+								   descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
