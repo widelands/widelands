@@ -36,12 +36,11 @@ std::string SuggestedTeamLineup::as_richtext() const {
 
 		for (Widelands::PlayerNumber player : team) {
 			assert(player < kMaxPlayers);
-			result += "<img src=images/players/player_position_menu.png color=" + kPlayerColors[player].hex_value() + ">";
+			result += "<img src=images/players/player_position_menu.png color=" +
+			          kPlayerColors[player].hex_value() + ">";
 		}
 	}
 	return result;
 }
 
-
 }  // namespace Widelands
-

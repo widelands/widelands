@@ -585,16 +585,18 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 };
 
 MultiPlayerSetupPlayerBox::MultiPlayerSetupPlayerBox(UI::Panel* const parent,
-					 GameSettingsProvider* const settings, NetworkPlayerSettingsBackend* npsb,
-					 uint32_t standard_element_height,
-					uint32_t padding)
-	: PlayerSetupBox(parent, settings, standard_element_height, padding),
-	  npsb_(npsb) {
+                                                     GameSettingsProvider* const settings,
+                                                     NetworkPlayerSettingsBackend* npsb,
+                                                     uint32_t standard_element_height,
+                                                     uint32_t padding)
+   : PlayerSetupBox(parent, settings, standard_element_height, padding), npsb_(npsb) {
 	add_space(kPadding);
 }
 
-void MultiPlayerSetupPlayerBox::force_new_dimensions(float scale, uint32_t max_width,
-													 uint32_t max_height, uint32_t standard_element_height) {
+void MultiPlayerSetupPlayerBox::force_new_dimensions(float scale,
+                                                     uint32_t max_width,
+                                                     uint32_t max_height,
+                                                     uint32_t standard_element_height) {
 	standard_height_ = standard_element_height;
 	set_max_size(max_width, max_height);
 	title_.set_font_scale(scale);
@@ -603,7 +605,8 @@ void MultiPlayerSetupPlayerBox::force_new_dimensions(float scale, uint32_t max_w
 	}
 
 	suggested_teams_dropdown_.set_desired_size(max_width, standard_element_height);
-	scrollable_playerbox_.set_max_size(max_width, max_height - title_.get_h() - suggested_teams_dropdown_.get_h() - 5 * kPadding);
+	scrollable_playerbox_.set_max_size(
+	   max_width, max_height - title_.get_h() - suggested_teams_dropdown_.get_h() - 5 * kPadding);
 }
 
 void MultiPlayerSetupPlayerBox::update() {
@@ -677,7 +680,6 @@ void MultiPlayerSetupGroup::reset() {
 		c->die();
 	}
 	multi_player_client_groups.clear();
-
 }
 void MultiPlayerSetupGroup::reset_teams(const Widelands::Map& map) {
 	playerbox.reset_teams(map);

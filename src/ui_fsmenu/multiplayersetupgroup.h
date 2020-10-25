@@ -34,7 +34,7 @@ struct MultiPlayerPlayerGroup;
 
 namespace Widelands {
 class Map;
-} // namespace Widelands
+}  // namespace Widelands
 
 class MultiPlayerSetupPlayerBox : public PlayerSetupBox {
 
@@ -42,12 +42,15 @@ public:
 	friend struct MultiPlayerSetupGroup;
 
 	MultiPlayerSetupPlayerBox(UI::Panel* const parent,
-	                     GameSettingsProvider* const settings,
-						 NetworkPlayerSettingsBackend* npsb,
-	                     uint32_t standard_element_height,
-	                     uint32_t padding);
+	                          GameSettingsProvider* const settings,
+	                          NetworkPlayerSettingsBackend* npsb,
+	                          uint32_t standard_element_height,
+	                          uint32_t padding);
 
-	void force_new_dimensions(float scale, uint32_t max_width, uint32_t max_height, uint32_t standard_element_height);
+	void force_new_dimensions(float scale,
+	                          uint32_t max_width,
+	                          uint32_t max_height,
+	                          uint32_t standard_element_height);
 
 protected:
 	void update() override;
@@ -55,10 +58,9 @@ protected:
 	void update_player_group(size_t index) override;
 
 private:
-	NetworkPlayerSettingsBackend* npsb_; // not owned
+	NetworkPlayerSettingsBackend* npsb_;                               // not owned
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups_;  // not owned
 };
-
 
 /**
  * struct MultiPlayerSetupGroup

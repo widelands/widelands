@@ -29,16 +29,17 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 
-
 namespace Widelands {
 class Map;
-} // namespace Widelands
+}  // namespace Widelands
 
 /// Lists available team lineups for selection
 class SuggestedTeamsDropdown : public UI::Dropdown<size_t> {
 public:
-	explicit SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, int button_dimension);
-	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams, bool can_change_map);
+	explicit SuggestedTeamsDropdown(
+	   UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, int button_dimension);
+	void rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams,
+	             bool can_change_map);
 	const Widelands::SuggestedTeamLineup* get_lineup(size_t index) const;
 
 private:
@@ -49,9 +50,9 @@ class PlayerSetupBox : public UI::Box {
 
 public:
 	PlayerSetupBox(UI::Panel* const parent,
-	                     GameSettingsProvider* const settings,
-	                     uint32_t standard_element_height,
-	                     uint32_t padding);
+	               GameSettingsProvider* const settings,
+	               uint32_t standard_element_height,
+	               uint32_t padding);
 
 	void reset_teams(const Widelands::Map& map);
 

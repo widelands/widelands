@@ -125,10 +125,8 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 // MapDetailsBox implementation
 
-MapDetailsBox::MapDetailsBox(Panel* parent, bool preconfigured,
-                             uint32_t,
-                             uint32_t standard_element_height,
-                             uint32_t padding)
+MapDetailsBox::MapDetailsBox(
+   Panel* parent, bool preconfigured, uint32_t, uint32_t standard_element_height, uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0, padding),
      preconfigured_(preconfigured),
      title_(this,

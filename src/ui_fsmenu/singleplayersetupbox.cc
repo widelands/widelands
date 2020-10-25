@@ -150,7 +150,8 @@ void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_e
 		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
 	if (!active_player_groups_.empty()) {
-		suggested_teams_dropdown_.set_desired_size(active_player_groups_.front()->get_w(), standard_element_height);
+		suggested_teams_dropdown_.set_desired_size(
+		   active_player_groups_.front()->get_w(), standard_element_height);
 	}
 }
 void SinglePlayerSetupBox::reset() {

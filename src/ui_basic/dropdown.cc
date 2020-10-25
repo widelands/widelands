@@ -62,7 +62,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            const DropdownType type,
                            UI::PanelStyle style,
                            ButtonStyle button_style,
-						   bool skip_richtext_escape)
+                           bool skip_richtext_escape)
    : UI::NamedPanel(parent,
                     name,
                     x,
@@ -103,13 +103,13 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                                             UI::ButtonStyle::kWuiSecondary) :
                         button_style,
                      label,
-					 "",
-					 UI::Button::VisualState::kRaised,
-					 skip_richtext_escape),
+                     "",
+                     UI::Button::VisualState::kRaised,
+                     skip_richtext_escape),
      label_(label),
      type_(type),
      is_enabled_(true),
-	 skip_richtext_escape_(skip_richtext_escape),
+     skip_richtext_escape_(skip_richtext_escape),
      button_style_(button_style),
      autoexpand_display_button_(false) {
 	if (label.empty()) {

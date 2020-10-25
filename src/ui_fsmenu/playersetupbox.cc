@@ -25,22 +25,26 @@
 #include "base/i18n.h"
 #include "logic/map.h"
 
-SuggestedTeamsDropdown::SuggestedTeamsDropdown(UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, int button_dimension) :
-		UI::Dropdown<size_t>(parent, "suggested_teams_dropdown",
-				 x,
-				 y,
-				 list_w,
-				 10,
-				 button_dimension,
-				 "",
-				 UI::DropdownType::kTextual,
-				 UI::PanelStyle::kFsMenu,
-				 UI::ButtonStyle::kFsMenuMenu, true) {
+SuggestedTeamsDropdown::SuggestedTeamsDropdown(
+   UI::Panel* parent, int32_t x, int32_t y, uint32_t list_w, int button_dimension)
+   : UI::Dropdown<size_t>(parent,
+                          "suggested_teams_dropdown",
+                          x,
+                          y,
+                          list_w,
+                          10,
+                          button_dimension,
+                          "",
+                          UI::DropdownType::kTextual,
+                          UI::PanelStyle::kFsMenu,
+                          UI::ButtonStyle::kFsMenuMenu,
+                          true) {
 	set_visible(false);
 	set_enabled(false);
 }
 
-void SuggestedTeamsDropdown::rebuild(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams, bool can_change_map) {
+void SuggestedTeamsDropdown::rebuild(
+   const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams, bool can_change_map) {
 	set_visible(false);
 	set_enabled(false);
 	clear();
@@ -67,13 +71,12 @@ const Widelands::SuggestedTeamLineup* SuggestedTeamsDropdown::get_lineup(size_t 
 	}
 }
 
-
 PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
-                                           GameSettingsProvider* const settings,
-                                           uint32_t standard_element_height,
-                                           uint32_t padding)
+                               GameSettingsProvider* const settings,
+                               uint32_t standard_element_height,
+                               uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0, padding),
-	 standard_height_(standard_element_height),
+     standard_height_(standard_element_height),
      settings_(settings),
      scrollable_playerbox_(this, 0, 0, UI::Box::Vertical),
      title_(this,
@@ -84,13 +87,9 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
             _("Players"),
             UI::Align::kRight,
             g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
-	 suggested_teams_dropdown_(this,
-							   0,
-							   0,
-							   0,
-							   0),
-		  selected_lineup_(nullptr),
-		  suggested_team_selection_in_progress_(false) {
+     suggested_teams_dropdown_(this, 0, 0, 0, 0),
+     selected_lineup_(nullptr),
+     suggested_team_selection_in_progress_(false) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(padding);
 	add(&suggested_teams_dropdown_, UI::Box::Resizing::kFullSize);
@@ -117,7 +116,6 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
 		}
 	});
 }
-
 
 void PlayerSetupBox::reset_teams(const Widelands::Map& map) {
 	suggested_team_selection_in_progress_ = true;
