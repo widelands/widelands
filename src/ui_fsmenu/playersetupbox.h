@@ -25,13 +25,8 @@
 #include "logic/game_settings.h"
 #include "logic/suggested_teams.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-
-namespace Widelands {
-class Map;
-}  // namespace Widelands
 
 /// Lists available team lineups for selection
 class SuggestedTeamsDropdown : public UI::Dropdown<size_t> {
@@ -54,7 +49,7 @@ public:
 	               uint32_t standard_element_height,
 	               uint32_t padding);
 
-	void reset_teams(const Widelands::Map& map);
+	void reset_teams(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
 
 protected:
 	virtual void update() = 0;

@@ -117,10 +117,10 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
 	});
 }
 
-void PlayerSetupBox::reset_teams(const Widelands::Map& map) {
+void PlayerSetupBox::reset_teams(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
 	suggested_team_selection_in_progress_ = true;
 	selected_lineup_ = nullptr;
-	suggested_teams_dropdown_.rebuild(map.get_suggested_teams(), settings_->can_change_map());
+	suggested_teams_dropdown_.rebuild(suggested_teams, settings_->can_change_map());
 
 	if (settings_->can_change_map()) {
 		// Reset teams and slot state
@@ -132,7 +132,7 @@ void PlayerSetupBox::reset_teams(const Widelands::Map& map) {
 		}
 
 		// If it is a scenario, auto-set the teams if there is only 1
-		if (settings_->settings().scenario && map.get_suggested_teams().size() == 1) {
+		if (settings_->settings().scenario && suggested_teams.size() == 1) {
 			suggested_teams_dropdown_.select(0);
 			select_teams();
 			suggested_teams_dropdown_.set_enabled(false);

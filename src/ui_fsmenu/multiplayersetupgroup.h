@@ -32,10 +32,6 @@ struct GameSettingsProvider;
 struct MultiPlayerClientGroup;
 struct MultiPlayerPlayerGroup;
 
-namespace Widelands {
-class Map;
-}  // namespace Widelands
-
 class MultiPlayerSetupPlayerBox : public PlayerSetupBox {
 
 public:
@@ -84,7 +80,7 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                          uint32_t max_height,
 	                          uint32_t standard_element_height);
 
-	void reset_teams(const Widelands::Map& map);
+	void reset_teams(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);
 
 private:
 	void reset();

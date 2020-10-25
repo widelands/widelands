@@ -35,7 +35,6 @@
 #include "map_io/map_loader.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/mouse_constants.h"
 
 #define AI_NAME_PREFIX "ai" AI_NAME_SEPARATOR
 
@@ -681,8 +680,8 @@ void MultiPlayerSetupGroup::reset() {
 	}
 	multi_player_client_groups.clear();
 }
-void MultiPlayerSetupGroup::reset_teams(const Widelands::Map& map) {
-	playerbox.reset_teams(map);
+void MultiPlayerSetupGroup::reset_teams(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
+	playerbox.reset_teams(suggested_teams);
 }
 void MultiPlayerSetupGroup::update_players() {
 	playerbox.update();
