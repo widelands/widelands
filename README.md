@@ -166,8 +166,10 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 | utils | Diverse utilities: Building translations, code formatting, packaging Mac & Windows, ... |
 
 
-## Obtaining Travis and MS-Windows builds
+## Obtaining MacOS and MS-Windows builds and testsuite runs
 
-Travis builds are triggered for all pull requests and for new pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`. This will not work if the branch is in a fork though.
+Travis builds are triggered for all pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`. This will not work if the branch is in a fork though.
 
 All pushes to master will be built on AppVeyor. Pull request branches are deployed for MS-Windows using a GitHub action. To obtain MS-Windows builds if you do not wish to open a pull request, temporarily add the name of your branch to the `branches` section in `appveyor.yml`. This also does not work for branches in forks.
+
+All pull request branches as well as master are additionally deployed for MacOS, and a testsuite checks them under various compilers. To obtain MacOS builds or testsuite results, temporarily add the name of your branch to the `branches` section in `.github/workflows/build.yaml`. This *does* work for branches in forks as well.
