@@ -680,7 +680,8 @@ void MultiPlayerSetupGroup::reset() {
 	}
 	multi_player_client_groups.clear();
 }
-void MultiPlayerSetupGroup::reset_teams(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
+void MultiPlayerSetupGroup::reset_teams(
+   const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
 	playerbox.reset_teams(suggested_teams);
 }
 void MultiPlayerSetupGroup::update_players() {

@@ -117,7 +117,8 @@ PlayerSetupBox::PlayerSetupBox(UI::Panel* const parent,
 	});
 }
 
-void PlayerSetupBox::reset_teams(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
+void PlayerSetupBox::reset_teams(
+   const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams) {
 	suggested_team_selection_in_progress_ = true;
 	selected_lineup_ = nullptr;
 	suggested_teams_dropdown_.rebuild(suggested_teams, settings_->can_change_map());

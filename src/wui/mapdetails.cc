@@ -192,8 +192,8 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 				suggested_teams += "<p><vspace gap=2>" + lineup.as_richtext() + "</p>";
 			}
 			description +=
-					/** TRANSLATORS: Map header when selecting a map. Contents are a list of possible team
-					 * lineups. */
+			   /** TRANSLATORS: Map header when selecting a map. Contents are a list of possible team
+			    * lineups. */
 			   as_heading_with_content(_("Suggested Teams"), suggested_teams, style_, false, true);
 		}
 
