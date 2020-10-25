@@ -20,7 +20,6 @@
 #ifndef WL_WUI_INPUTQUEUEDISPLAY_H
 #define WL_WUI_INPUTQUEUEDISPLAY_H
 
-#include <map>
 #include <vector>
 
 #include "logic/map_objects/tribes/constructionsite.h"
@@ -49,7 +48,6 @@ public:
 
 protected:
 	void think() override;
-	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
 
 private:
@@ -73,17 +71,17 @@ private:
 	void clicked_desired_fill(int8_t delta, bool recursion_start = true);
 	void clicked_real_fill(int8_t delta, bool recursion_start = true);
 	void set_priority(const Widelands::WarePriority&, bool recursion_start = true);
+	void set_collapsed(bool, bool recursion_start = true);
 
 	const Image& max_fill_indicator_;
-	// const Image& priority_image_;
 
-	UI::Box hbox_;
-	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_, b_increase_real_fill_;
-			// b_p_very_low_, b_p_low_, b_p_normal_, b_p_high_, b_p_very_high_;
-	std::map<Widelands::WarePriority, UI::Button*> priority_buttons_;
+	UI::Box vbox_, hbox_;
+	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_, b_increase_real_fill_, collapse_;
+	UI::HorizontalSlider priority_;
 	UI::Panel spacer_;
-	// UI::HorizontalSlider priority_;
-	// unsigned slider_was_moved_;
+	const Widelands::WarePriority* slider_was_moved_;
+
+	bool collapsed_;
 
 	size_t nr_icons_;
 	std::vector<UI::Icon*> icons_;
