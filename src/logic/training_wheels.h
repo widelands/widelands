@@ -52,7 +52,9 @@ public:
 	 */
 	void mark_as_solved(const std::string& objective, bool run_some_more);
 	/**
-	 * @brief mark_as_unsolved Mark the given training wheel objective as no longer solved. Does not trigger anything else and does not refresh the information about currently running training wheels or training wheels to run.
+	 * @brief mark_as_unsolved Mark the given training wheel objective as no longer solved. Does not
+	 * trigger anything else and does not refresh the information about currently running training
+	 * wheels or training wheels to run.
 	 * @param objective The training wheel objective to be marked as unsolved
 	 */
 	void mark_as_unsolved(const std::string& objective);
@@ -89,7 +91,7 @@ private:
 	 */
 	struct TrainingWheel {
 		explicit TrainingWheel(const std::string& key,
-							   const std::string& init_descname,
+		                       const std::string& init_descname,
 		                       const std::vector<std::string>& init_dependencies)
 		   : script(key + ".lua"), descname(init_descname) {
 			for (const std::string& dependency : init_dependencies) {
@@ -104,7 +106,8 @@ private:
 
 	// Objective name and its scripting information
 	std::map<std::string, TrainingWheel> idle_objectives_;
-	// Prevent concurrency issues while loading objectives, and remember descname for options. Name, descname
+	// Prevent concurrency issues while loading objectives, and remember descname for options. Name,
+	// descname
 	std::map<std::string, std::string> running_objectives_;
 	// Remember solved objectives for dependency check and options. Name, descname
 	std::map<std::string, std::string> solved_objectives_;

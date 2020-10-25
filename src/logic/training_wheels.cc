@@ -54,7 +54,8 @@ TrainingWheels::TrainingWheels(LuaInterface& lua)
 		} else {
 			std::unique_ptr<LuaTable> dependencies = wheel_table->get_table("dependencies");
 			idle_objectives_.insert(
-			   std::make_pair(key, TrainingWheel(key, wheel_table->get_string("descname"), dependencies->array_entries<std::string>())));
+			   std::make_pair(key, TrainingWheel(key, wheel_table->get_string("descname"),
+			                                     dependencies->array_entries<std::string>())));
 		}
 	}
 	write();
