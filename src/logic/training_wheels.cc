@@ -26,9 +26,9 @@
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_table.h"
 
-const std::string kTrainingWheelsScriptingDir = std::string("scripting") + g_fs->file_separator() +
+const std::string kTrainingWheelsScriptingDir = std::string("scripting") + FileSystem::file_separator() +
                                                 std::string("training_wheels") +
-                                                g_fs->file_separator();
+                                                FileSystem::file_separator();
 
 namespace Widelands {
 
