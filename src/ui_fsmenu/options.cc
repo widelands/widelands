@@ -255,15 +255,17 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                        "",
                        0),
 
-     single_watchwin_(
-        &box_ingame_, UI::PanelStyle::kFsMenu, Vector2i::zero(),
-        /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
-        /** TRANSLATORS: and it also lets you jump to it on the map. */
-        _("Use single watchwindow mode")),
+     single_watchwin_(&box_ingame_,
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i::zero(),
+                      /** TRANSLATORS: A watchwindow is a window where you keep watching an object
+                         or a map region,*/
+                      /** TRANSLATORS: and it also lets you jump to it on the map. */
+                      _("Use single watchwindow mode")),
      ctrl_zoom_(&box_ingame_,
                 UI::PanelStyle::kFsMenu,
                 Vector2i::zero(),
-     /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
+                /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
                 _("Zoom only when Ctrl is pressed")),
      game_clock_(&box_ingame_,
                  UI::PanelStyle::kFsMenu,
