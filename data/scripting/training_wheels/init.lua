@@ -130,7 +130,7 @@ result = {
    logs = {
       -- TRANSLATORS: The title of an in-game teaching objective
       descname = _"Logs & Roads",
-      dependencies = { "welcome" }
+      dependencies = { "objectives" }
    },
 }
 
