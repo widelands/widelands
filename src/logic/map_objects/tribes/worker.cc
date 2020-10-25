@@ -1423,6 +1423,13 @@ void Worker::create_needed_experience(Game& /* game */) {
 	current_exp_ = 0;
 }
 
+void Worker::set_current_experience(const int32_t xp) {
+	assert(needs_experience());
+	assert(xp >= 0);
+	assert(xp < descr().get_needed_experience());
+	current_exp_ = xp;
+}
+
 /**
  * Gain experience
  *
@@ -2785,11 +2792,27 @@ void Worker::geologist_update(Game& game, State& state) {
 		if (map.find_reachable_fields(game, owner_area, &list, cstep, ffa)) {
 			FCoords target;
 
+			auto is_mountain = [&map, &world](const FCoords& f) {
+				for (const TCoords<FCoords>& t :
+				     {TCoords<FCoords>(f, TriangleIndex::D), TCoords<FCoords>(f, TriangleIndex::R),
+				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::D),
+				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
+				      TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
+				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
+					if (world
+					       .terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
+					                                                 t.node.field->terrain_r()))
+					       .get_is() &
+					    TerrainDescription::Is::kMineable) {
+						return true;
+					}
+				}
+				return false;
+			};
+
 			// is center a mountain piece?
-			bool is_center_mountain = (world.terrain_descr(owner_area.field->terrain_d()).get_is() &
-			                           TerrainDescription::Is::kMineable) |
-			                          (world.terrain_descr(owner_area.field->terrain_r()).get_is() &
-			                           TerrainDescription::Is::kMineable);
+			const bool is_center_mountain = is_mountain(owner_area);
+
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2798,10 +2821,7 @@ void Worker::geologist_update(Game& game, State& state) {
 			uint32_t i = game.logic_rand() % n;
 			do {
 				target = map.get_fcoords(list[game.logic_rand() % list.size()]);
-				is_target_mountain = (world.terrain_descr(target.field->terrain_d()).get_is() &
-				                      TerrainDescription::Is::kMineable) |
-				                     (world.terrain_descr(target.field->terrain_r()).get_is() &
-				                      TerrainDescription::Is::kMineable);
+				is_target_mountain = is_mountain(target);
 				if (i == 0) {
 					i = list.size();
 				}
