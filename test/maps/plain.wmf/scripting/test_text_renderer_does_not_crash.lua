@@ -5,9 +5,9 @@ run(function()
    sleep(5000)
 
    -- Test for <not_a_tag> in table and multilinetextarea.
-   send_message(p1, "Title <not_a_tag>", rt(p("Some text <not_a_tag> more&nbsp;text")), {popup = true})
+   send_to_inbox(p1, "Title <not_a_tag>", rt(p("Some text <not_a_tag> more&nbsp;text")), {popup = true})
    sleep(500)
-   send_message(p1, "Title <not_a_tag>", "Some text <not_a_tag> more&nbsp;text", {popup = true})
+   send_to_inbox(p1, "Title <not_a_tag>", "Some text <not_a_tag> more&nbsp;text", {popup = true})
    sleep(500)
 
    -- Test for <not_a_tag> in listselect and multilinetextarea.
