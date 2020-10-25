@@ -72,6 +72,10 @@ struct GamePreloadPacket : public GameDataPacket {
 		return gametype_;
 	}
 
+	bool get_training_wheels_wanted() const {
+		return training_wheels_wanted_;
+	}
+
 private:
 	std::string minimap_path_;
 	std::string mapname_;
@@ -79,6 +83,7 @@ private:
 	std::string background_theme_;
 	std::string win_condition_;
 	// Initializing everything to make cppcheck happy.
+	bool training_wheels_wanted_ = false;
 	Time gametime_ = Time(0);
 	uint8_t player_nr_ = 0U;  // The local player idx
 	uint8_t number_of_players_ = 0U;

@@ -133,6 +133,7 @@ public:
 	 * Properties
 	 */
 	int get_buildings(lua_State*);
+	int get_builder(lua_State* L);
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
 	int get_ferry(lua_State*);
@@ -1476,6 +1477,7 @@ public:
 	int region(lua_State* L);
 	int has_caps(lua_State*);
 	int has_max_caps(lua_State*);
+	int indicate(lua_State* L);
 
 	/*
 	 * C methods
