@@ -51,7 +51,8 @@ struct WlTestFixture {
 #endif
 		g_fs = new LayeredFileSystem();
 		// Find base dir from build/src/economy/test
-		std::string test_datadir = g_fs->canonicalize_name(g_fs->get_working_directory() + "/../../../../data");
+		std::string test_datadir =
+		   g_fs->canonicalize_name(g_fs->get_working_directory() + "/../../../../data");
 		g_fs->add_file_system(&FileSystem::create(test_datadir));
 	}
 	~WlTestFixture() {
