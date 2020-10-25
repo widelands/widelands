@@ -1102,8 +1102,8 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 	//  Every change in a digit will result in a complete id change
 
 	int32_t xorr = 0x0a;
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		xorr = xorr ^ nums[ix];
+	for (int32_t ix : nums) {
+		xorr = xorr ^ ix;
 	}
 
 	for (int32_t ix = kMapIdDigits - 1; ix >= 0; --ix) {

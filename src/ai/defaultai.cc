@@ -2064,16 +2064,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	      -std::abs(management_data.get_military_number_at(159)) :
 	      0;
 
-	for (uint16_t i = 0; i < score_parts_size; i++) {
-		field.military_score_ += score_parts[i];
+	for (int32_t part : score_parts) {
+		field.military_score_ += part;
 	}
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 			log_dbg_time(
 			   gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
-			for (uint16_t i = 0; i < score_parts_size; i++) {
-				log_dbg_time(gametime, "%d, ", score_parts[i]);
+			for (int32_t part : score_parts) {
+				log_dbg_time(gametime, "%d, ", part);
 			}
 			log_dbg_time(gametime, "\n");
 		}
