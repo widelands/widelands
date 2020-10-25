@@ -150,27 +150,31 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 		if (interactive_base_.omnipotent()) {
 			b = new UI::Button(buttons, "cheat_decrease_10", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"),
-			                   _("Remove 10 wares")),
+			                   _("Remove 10 wares"));
 			b->set_repeating(true);
-			b->sigclicked.connect([this]() { change_real_fill(-10); }), buttons->add(b);
+			b->sigclicked.connect([this]() { change_real_fill(-10); });
+			buttons->add(b);
 
 			b = new UI::Button(buttons, "cheat_decrease_1", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
-			                   _("Remove a ware")),
+			                   _("Remove a ware"));
 			b->set_repeating(true);
-			b->sigclicked.connect([this]() { change_real_fill(-1); }), buttons->add(b);
+			b->sigclicked.connect([this]() { change_real_fill(-1); });
+			buttons->add(b);
 
 			b =
 			   new UI::Button(buttons, "cheat_increase_1", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Add a ware")),
+			                  g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Add a ware"));
 			b->set_repeating(true);
-			b->sigclicked.connect([this]() { change_real_fill(1); }), buttons->add(b);
+			b->sigclicked.connect([this]() { change_real_fill(1); });
+			buttons->add(b);
 
 			b = new UI::Button(buttons, "cheat_increase_10", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 			                   g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"),
-			                   _("Add 10 wares")),
+			                   _("Add 10 wares"));
 			b->set_repeating(true);
-			b->sigclicked.connect([this]() { change_real_fill(10); }), buttons->add(b);
+			b->sigclicked.connect([this]() { change_real_fill(10); });
+			buttons->add(b);
 		}
 	}
 }
