@@ -15,7 +15,7 @@ run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
-   local player = wl.Game().players[wl.Game().interactive_player]
+   local player = get_interactive_player()
    wait_for_lock(player, training_wheel_name)
 
    -- Switch off the buildhelp if it was on, so that we can teach it

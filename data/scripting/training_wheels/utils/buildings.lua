@@ -104,31 +104,33 @@ function find_buildable_field(center_field, player, size, min_radius, max_radius
    return target_field
 end
 
-function find_immovable_field(center_field, immovable_attribute, inner_radius, outer_radius)
+function find_immovable_fields(center_field, immovable_attribute, inner_radius, outer_radius)
+   local found_fields = {}
    if outer_radius <= inner_radius then
       print("ERROR: outer_radius <= inner_radius in find_immovable_field")
-      return nil
+      return found_fields
    end
 
-   local function find_immovable_field_helper(center_field, immovable_attribute, inner_radius, outer_radius)
+   local function find_immovable_fields_helper(center_field, immovable_attribute, inner_radius, outer_radius)
       -- Hollow region takes first the outer, then the inner radius
+      local fields_this_round = {}
       for f_idx, field in ipairs(center_field:region(outer_radius, inner_radius)) do
          if field.immovable ~= nil and field.immovable:has_attribute(immovable_attribute) then
-            return field
+            table.insert(fields_this_round, field)
          end
       end
+      return fields_this_round
    end
 
-   local target_field = nil
    local radius = inner_radius + 1
    repeat
-      target_field = find_immovable_field_helper(center_field, immovable_attribute, inner_radius, radius)
-      if target_field ~= nil then
-         return target_field
+      found_fields = find_immovable_fields_helper(center_field, immovable_attribute, inner_radius, radius)
+      if #found_fields > 0 then
+         return found_fields
       end
       radius = radius + 1
    until radius == outer_radius
-   return target_field
+   return found_fields
 end
 
 -- We can't list constructionsites directly, so we search a region for it

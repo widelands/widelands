@@ -14,8 +14,7 @@ run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
-   local interactive_player_slot = wl.Game().interactive_player
-   local player = wl.Game().players[interactive_player_slot]
+   local player = get_interactive_player()
    local tribe = player.tribe
 
    -- Find the rock collector / granite producer building
@@ -27,7 +26,7 @@ run(function()
    end
 
    -- Find a suitable buildable field close to the the starting field
-   local conquering_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
+   local conquering_field = wl.Game().map.player_slots[wl.Game().interactive_player].starting_field
    local conquering_immovable = conquering_field.immovable
 
    -- Wait for a warehouse
@@ -56,16 +55,21 @@ run(function()
          local result = nil
 
          -- Find a suitable field close to some rocks
-         local function find_rocks_feld(conquering_field, player, starting_conquer_range)
-            local rocks_field = find_immovable_field(conquering_field, "rocks", 2, starting_conquer_range + quarry.workarea_radius / 2)
-            if rocks_field ~= nil then
-               rocks_field = find_buildable_field(rocks_field, player, quarry.size, 1, quarry.workarea_radius - 1)
+         local function find_rocks_field(conquering_field, player, starting_conquer_range)
+            local rocks_fields = find_immovable_fields(conquering_field, "rocks", 2, starting_conquer_range + quarry.workarea_radius / 2)
+            if #rocks_fields > 0 then
+               for f_idx, rocks_field in ipairs(rocks_fields) do
+                  local found_rocks_field = find_buildable_field(rocks_field, player, quarry.size, 1, quarry.workarea_radius - 1)
+                  if found_rocks_field ~= nil then
+                     return found_rocks_field
+                  end
+               end
             end
-            return rocks_field
+            return nil
          end
 
          repeat
-            result = find_rocks_feld(conquering_field, player, starting_conquer_range)
+            result = find_rocks_field(conquering_field, player, starting_conquer_range)
             if result == nil then
                sleep(1000)
             end
@@ -75,7 +79,7 @@ run(function()
          wait_for_lock(player, training_wheel_name)
 
          -- Check that we still have an appropriate field
-         result = find_rocks_feld(conquering_field, player, starting_conquer_range)
+         result = find_rocks_field(conquering_field, player, starting_conquer_range)
          if result == nil then
             -- While we were waiting for the lock, appropriate fields became unavailable.
             -- Release the lock and try again.

@@ -14,11 +14,10 @@ run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
-   local interactive_player_slot = wl.Game().interactive_player
-   local player = wl.Game().players[interactive_player_slot]
+   local player = get_interactive_player()
 
    -- Find a building to search its region
-   local starting_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
+   local starting_field = wl.Game().map.player_slots[wl.Game().interactive_player].starting_field
    local starting_immovable = starting_field.immovable
 
    -- Wait for a warehouse if we don't have an immovable on the starting field
@@ -96,6 +95,7 @@ run(function()
    -- Force buildhelp so we can show the flag position
    mapview.buildhelp = true
    target_field:indicate(true)
+   scroll_to_field(target_field)
    campaign_message_box(msg_click_flag_symbol)
 
    wait_for_field_action_tab("roads")

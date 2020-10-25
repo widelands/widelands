@@ -11,8 +11,7 @@ local training_wheel_name = training_wheel_name_from_filename(__file__)
 
 run(function()
    sleep(10)
-
-   local player = wl.Game().players[wl.Game().interactive_player]
+   local player = get_interactive_player()
    wait_for_lock(player, training_wheel_name)
 
    push_textdomain("training_wheels")

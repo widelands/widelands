@@ -14,8 +14,7 @@ run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
-   local interactive_player_slot = wl.Game().interactive_player
-   local player = wl.Game().players[interactive_player_slot]
+   local player = get_interactive_player()
    local tribe = player.tribe
 
    -- Find the tree collector / log producer building
@@ -27,7 +26,7 @@ run(function()
    end
 
    -- Find a suitable buildable field close to the the starting field
-   local conquering_field = wl.Game().map.player_slots[interactive_player_slot].starting_field
+   local conquering_field = wl.Game().map.player_slots[wl.Game().interactive_player].starting_field
    local conquering_immovable = conquering_field.immovable
 
    -- Wait for a warehouse
@@ -56,11 +55,16 @@ run(function()
 
          -- Find a suitable field close to a tree
          local function find_tree_field(conquering_field, player, starting_conquer_range)
-            local tree_field = find_immovable_field(conquering_field, "tree", math.ceil(starting_conquer_range / 2), starting_conquer_range + log_producer.workarea_radius / 2)
-            if tree_field ~= nil then
-               tree_field = find_buildable_field(tree_field, player, log_producer.size, 1, log_producer.workarea_radius / 2)
+            local tree_fields = find_immovable_fields(conquering_field, "tree", math.ceil(starting_conquer_range / 2), starting_conquer_range + log_producer.workarea_radius / 2)
+            if #tree_fields > 0 then
+               for f_idx, tree_field in ipairs(tree_fields) do
+                  local found_tree_field = find_buildable_field(tree_field, player, log_producer.size, 1, log_producer.workarea_radius / 2)
+                  if found_tree_field ~= nil then
+                     return found_tree_field
+                  end
+               end
             end
-            return tree_field
+            return nil
          end
 
          repeat
