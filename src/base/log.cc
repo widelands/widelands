@@ -34,8 +34,6 @@
 #include <windows.h>
 #endif
 
-#include "base/macros.h"
-#include "base/wexception.h"
 #ifdef _WIN32
 #include "build_info.h"
 #endif
@@ -121,6 +119,17 @@ void sdl_logging_func(void* userdata,
 	static_cast<Logger*>(userdata)->log_cstring(message);
 }
 #endif
+
+std::vector<std::string> split(const std::string& s) {
+	std::vector<std::string> result;
+	for (std::string::size_type pos = 0, endpos;
+	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
+		endpos = s.find('\n', pos);
+		result.push_back(s.substr(pos, endpos - pos));
+	}
+	return result;
+}
+
 }  // namespace
 
 // Default to stdout for logging.
@@ -165,34 +174,21 @@ static const char* to_string(const LogType& type) {
 	}
 }
 
-std::vector<std::string> split(const std::string& s) {
-	std::vector<std::string> result;
-	for (std::string::size_type pos = 0, endpos;
-	     (pos = s.find_first_not_of('\n', pos)) != std::string::npos; pos = endpos) {
-		endpos = s.find('\n', pos);
-		result.push_back(s.substr(pos, endpos - pos));
-	}
-	return result;
-}
-
-void log_to_stdout(const LogType type, uint32_t gametime, const char* const fmt, ...) {
+void do_log(const LogType type, const Time& gametime, const char* const fmt, ...) {
 	assert(logger != nullptr);
 
 	// message type and timestamp
 	char buffer_prefix[32];
 	{
-		const bool is_real_time = gametime == kNoTimestamp;
-		if (gametime == kNoTimestamp) {
-			gametime = SDL_GetTicks();
-		}
-		const uint32_t hours = gametime / (1000 * 60 * 60);
-		gametime -= hours * 1000 * 60 * 60;
-		const uint32_t minutes = gametime / (1000 * 60);
-		gametime -= minutes * 1000 * 60;
-		const uint32_t seconds = gametime / 1000;
-		gametime -= seconds * 1000;
+		uint32_t t = gametime.is_valid() ? gametime.get() : SDL_GetTicks();
+		const uint32_t hours = t / (1000 * 60 * 60);
+		t -= hours * 1000 * 60 * 60;
+		const uint32_t minutes = t / (1000 * 60);
+		t -= minutes * 1000 * 60;
+		const uint32_t seconds = t / 1000;
+		t -= seconds * 1000;
 		snprintf(buffer_prefix, sizeof(buffer_prefix), "[%02u:%02u:%02u.%03u %s] %s: ", hours,
-		         minutes, seconds, gametime, is_real_time ? "real" : "game", to_string(type));
+		         minutes, seconds, t, gametime.is_invalid() ? "real" : "game", to_string(type));
 	}
 
 	// actual log output

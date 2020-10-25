@@ -181,6 +181,8 @@ protected:
 
 	UI::Panel* get_open_dropdown() override;
 
+	std::vector<Recti> focus_overlay_rects() override;
+
 private:
 	static void layout_if_alive(int);
 	void layout() override;

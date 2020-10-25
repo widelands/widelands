@@ -178,6 +178,10 @@ void Button::set_enabled(bool const on) {
 	set_can_focus(enabled_);
 }
 
+std::vector<Recti> Button::focus_overlay_rects() {
+	return Panel::focus_overlay_rects(2, 2, 0);
+}
+
 /**
  * Redraw the button
  */

@@ -309,7 +309,7 @@ public:
 		   : worker_request(wr), worker(w) {
 		}
 		Request* worker_request;
-		Worker* worker;
+		OPtr<Worker> worker;
 	};
 
 	WorkingPosition const* working_positions() const {
@@ -323,7 +323,7 @@ public:
 
 	// receives the duration of the last period and the result (true if something was produced)
 	// and sets actual_percent_ to new value
-	void update_actual_statistics(uint32_t, bool);
+	void update_actual_statistics(Duration, bool);
 
 	uint8_t get_actual_statistics() {
 		return actual_percent_ / 10;
@@ -347,7 +347,7 @@ public:
 	void act(Game&, uint32_t data) override;
 
 	void remove_worker(Worker&) override;
-	bool warp_worker(EditorGameBase&, const WorkerDescr& wd);
+	bool warp_worker(EditorGameBase&, const WorkerDescr& wd, int32_t slot = -1);
 
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
@@ -422,7 +422,9 @@ protected:
 	/// how long it should take to mine, given the particular circumstances,
 	/// and pass the result to the following animation command, to set the
 	/// duration.
-	void program_step(Game&, uint32_t delay = 10, ProgramResult phase = ProgramResult::kNone);
+	void program_step(Game&,
+	                  const Duration& delay = Duration(10),
+	                  ProgramResult phase = ProgramResult::kNone);
 
 	void program_start(Game&, const std::string& program_name);
 	virtual void program_end(Game&, ProgramResult);
@@ -430,7 +432,7 @@ protected:
 
 	void format_statistics_string();
 	void try_start_working(Game&);
-	void set_post_timer(int32_t const t) {
+	void set_post_timer(const Duration& t) {
 		post_timer_ = t;
 	}
 
@@ -448,10 +450,10 @@ protected:  // TrainingSite must have access to this stuff
 	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
-	Stack stack_;           ///<  program stack
-	bool program_timer_;    ///< execute next instruction based on pointer
-	int32_t program_time_;  ///< timer time
-	int32_t post_timer_;    ///< Time to schedule after ends
+	Stack stack_;          ///<  program stack
+	bool program_timer_;   ///< execute next instruction based on pointer
+	Time program_time_;    ///< timer time
+	Duration post_timer_;  ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
@@ -460,7 +462,7 @@ protected:  // TrainingSite must have access to this stuff
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
 	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
-	uint32_t last_program_end_time;
+	Time last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
 

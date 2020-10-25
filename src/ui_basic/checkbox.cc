@@ -128,6 +128,11 @@ void Statebox::set_state(bool const on) {
 	}
 }
 
+std::vector<Recti> Statebox::focus_overlay_rects() {
+	return (flags_ & Has_Custom_Picture) ? Panel::focus_overlay_rects(1, 1, -1) :
+	                                       Panel::focus_overlay_rects();
+}
+
 /**
  * Redraw the entire checkbox
  */
@@ -136,7 +141,7 @@ void Statebox::draw_overlay(RenderTarget& dst) {
 	if (flags_ & Has_Custom_Picture) {
 		// TODO(Nordfriese): Move colours to style manager
 		if (flags_ & Is_Checked) {
-			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(229, 116, 2));
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(226, 200, 6));
 		} else if (flags_ & Is_Highlighted) {
 			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
 		}
@@ -144,6 +149,10 @@ void Statebox::draw_overlay(RenderTarget& dst) {
 }
 void Statebox::draw(RenderTarget& dst) {
 	if (flags_ & Has_Custom_Picture) {
+		if (flags_ & Is_Checked) {
+			dst.brighten_rect(Recti(0, 0, get_w(), get_h()), -24);
+		}
+
 		// center picture
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();

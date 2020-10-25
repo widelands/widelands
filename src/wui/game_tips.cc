@@ -45,8 +45,8 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
-	for (uint8_t i = 0; i < names.size(); ++i) {
-		load_tips(names[i]);
+	for (const std::string& name : names) {
+		load_tips(name);
 	}
 
 	if (!tips_.empty()) {

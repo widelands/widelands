@@ -34,17 +34,17 @@ void draw_border_markers(const FieldsToDraw::Field& field,
 	assert(field.owner != nullptr);
 
 	uint32_t const anim_idx = field.owner->tribe().frontier_animation();
-	if (field.seeing != Widelands::SeeUnseeNode::kUnexplored) {
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, anim_idx, 0,
+	if (field.seeing != Widelands::VisibleState::kUnexplored) {
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, anim_idx, Time(0),
 		                    &field.owner->get_playercolor());
 	}
 	for (const auto& nf : {fields_to_draw.at(field.rn_index), fields_to_draw.at(field.bln_index),
 	                       fields_to_draw.at(field.brn_index)}) {
-		if ((field.seeing != Widelands::SeeUnseeNode::kUnexplored ||
-		     nf.seeing != Widelands::SeeUnseeNode::kUnexplored) &&
+		if ((field.seeing != Widelands::VisibleState::kUnexplored ||
+		     nf.seeing != Widelands::VisibleState::kUnexplored) &&
 		    nf.is_border && (field.owner == nf.owner || nf.owner == nullptr)) {
 			dst->blit_animation(middle(field.rendertarget_pixel, nf.rendertarget_pixel),
-			                    Widelands::Coords::null(), scale, anim_idx, 0,
+			                    Widelands::Coords::null(), scale, anim_idx, Time(0),
 			                    &field.owner->get_playercolor());
 		}
 	}

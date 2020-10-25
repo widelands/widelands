@@ -30,6 +30,7 @@
 class MapDetailsBox : public UI::Box {
 public:
 	MapDetailsBox(Panel* parent,
+	              bool preconfigured,
 	              uint32_t standard_element_width,
 	              uint32_t standard_element_height,
 	              uint32_t padding);
@@ -48,6 +49,8 @@ public:
 	void show_warning(const std::string& text);
 
 private:
+	bool preconfigured_;
+
 	UI::Textarea title_;
 	UI::Box title_box_;
 	UI::Box content_box_;

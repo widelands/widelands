@@ -6,6 +6,11 @@ TAG: https://github.com/fnuecke/eris/releases/tag/v1.1.2-lua5.3
 
 Plus bugfix from commit 1566f6cfa027694941fb34229048e9b576aaa8e5
 
+Patch to silence compiler warning:
+
+compiler-warnings.patch
+
+
 We use this for heavy persistence and it also brings with it the Lua version
 that we use in Widelands. The Widelands team wishes to expresses total and
 complete gratitude to the authors of Eris for making it available under the MIT

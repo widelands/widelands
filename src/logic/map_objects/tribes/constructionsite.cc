@@ -45,6 +45,8 @@
 
 namespace Widelands {
 
+constexpr Duration ConstructionSite::kConstructionsiteStepTime;
+
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
                                        const Widelands::Coords& coords,
                                        float scale,
@@ -73,71 +75,61 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	push_animation(becomes, &animations, &total_frames);
 
 	uint32_t frame_index =
-	   totaltime ? std::min(completedtime * total_frames / totaltime, total_frames - 1) : 0;
+	   totaltime.get() ?
+	      std::min(completedtime.get() * total_frames / totaltime.get(), total_frames - 1) :
+	      0;
 	uint32_t animation_index = 0;
 	while (frame_index >= animations[animation_index].second) {
 		frame_index -= animations[animation_index].second;
 		++animation_index;
 		assert(animation_index < animations.size());
 	}
-	const uint32_t anim_time = frame_index * kFrameLength;
+	const Time anim_time(frame_index * kFrameLength);
 
+	const RGBColor* player_color_to_draw;
+	float opacity;
+	if (visible) {
+		player_color_to_draw = &player_color;
+		opacity = 1.0f;
+	} else {
+		player_color_to_draw = nullptr;
+		opacity = kBuildingSilhouetteOpacity;
+	}
+
+	uint32_t animation_id;
+	Time time = Time();
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
-		if (visible) {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-			                    animations[animation_index].first, anim_time - kFrameLength,
-			                    &player_color);
-		} else {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-			                    animations[animation_index].first, anim_time - kFrameLength, nullptr,
-			                    kBuildingSilhouetteOpacity);
-		}
+		animation_id = animations[animation_index].first;
+		time = anim_time - Duration(kFrameLength);
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
 		// series
-		if (visible) {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
-			   kFrameLength * (animations[animation_index - 1].second - 1), &player_color);
-		} else {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-			                    animations[animation_index - 1].first,
-			                    kFrameLength * (animations[animation_index - 1].second - 1), nullptr,
-			                    kBuildingSilhouetteOpacity);
-		}
+		animation_id = animations[animation_index - 1].first;
+		time = Time(kFrameLength * (animations[animation_index - 1].second - 1));
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
-		const uint32_t unocc = was->get_unoccupied_animation();
-		if (visible) {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, unocc,
-			   kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1),
-			   &player_color);
-		} else {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, unocc,
-			   kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1), nullptr,
-			   kBuildingSilhouetteOpacity);
-		}
+		animation_id = was->get_unoccupied_animation();
+		time =
+		   Time(kFrameLength * (g_animation_manager->get_animation(animation_id).nr_frames() - 1));
 	}
+	if (time.is_valid()) {
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, animation_id, time,
+		                    player_color_to_draw, opacity);
+	}
+
 	// Now blit a segment of the current construction phase from the bottom.
-	int percent = 100 * completedtime * total_frames;
-	if (totaltime) {
-		percent /= totaltime;
+	int percent = 100 * completedtime.get() * total_frames;
+	if (totaltime.get()) {
+		percent /= totaltime.get();
 	}
 	percent -= 100 * frame_index;
 	for (uint32_t i = 0; i < animation_index; ++i) {
 		percent -= 100 * animations[i].second;
 	}
-	if (visible) {
-		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-		                    &player_color, 1.f, percent);
-	} else {
-		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-		                    nullptr, kBuildingSilhouetteOpacity, percent);
-	}
+	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
+	                    player_color_to_draw, opacity, percent);
 }
 
 /**
@@ -253,7 +245,7 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 		WaresQueue& wq = *(consume_wares_[i] = new WaresQueue(*this, it->first, it->second));
 
 		wq.set_callback(ConstructionSite::wares_queue_callback, this);
-		wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
+		wq.set_consume_interval(kConstructionsiteStepTime);
 
 		work_steps_ += it->second;
 	}
@@ -386,7 +378,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 Start building the next enhancement even before the base building is completed.
 ===============
 */
-void ConstructionSite::enhance(Game& game) {
+void ConstructionSite::enhance(const Game& game) {
 	assert(building_->enhancement() != INVALID_INDEX);
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
@@ -420,7 +412,7 @@ void ConstructionSite::enhance(Game& game) {
 			WaresQueue& wq = *(consume_wares_[old_size + new_index] =
 			                      new WaresQueue(*this, pair.first, pair.second));
 			wq.set_callback(ConstructionSite::wares_queue_callback, this);
-			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
+			wq.set_consume_interval(kConstructionsiteStepTime);
 			++new_index;
 		} else {
 			for (size_t i = 0; i < old_size; ++i) {
@@ -595,9 +587,9 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 	// Check if one step has completed
 	if (working_) {
-		if (static_cast<int32_t>(game.get_gametime() - work_steptime_) < 0) {
+		if (game.get_gametime() < work_steptime_) {
 			worker.start_task_idle(game, worker.descr().get_animation("work", &worker),
-			                       work_steptime_ - game.get_gametime());
+			                       (work_steptime_ - game.get_gametime()).get());
 			builder_idle_ = false;
 			return true;
 		} else {
@@ -646,24 +638,22 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 
 	// Check if we've got wares to consume
 	if (work_completed_ < work_steps_) {
-		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
-			WaresQueue& wq = *consume_wares_[i];
-
-			if (!wq.get_filled()) {
+		for (WaresQueue* wq : consume_wares_) {
+			if (!wq->get_filled()) {
 				continue;
 			}
 
-			wq.set_filled(wq.get_filled() - 1);
-			wq.set_max_size(wq.get_max_size() - 1);
+			wq->set_filled(wq->get_filled() - 1);
+			wq->set_max_size(wq->get_max_size() - 1);
 
 			// Update consumption statistic
-			get_owner()->ware_consumed(wq.get_index(), 1);
+			get_owner()->ware_consumed(wq->get_index(), 1);
 
 			working_ = true;
-			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
+			work_steptime_ = game.get_gametime() + kConstructionsiteStepTime;
 
 			worker.start_task_idle(
-			   game, worker.descr().get_animation("work", &worker), CONSTRUCTIONSITE_STEP_TIME);
+			   game, worker.descr().get_animation("work", &worker), kConstructionsiteStepTime.get());
 			builder_idle_ = false;
 			return true;
 		}
@@ -673,7 +663,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 		worker.set_animation(game, worker.descr().get_animation("idle", &worker));
 		builder_idle_ = true;
 	}
-	worker.schedule_act(game, 2000);
+	worker.schedule_act(game, Duration(2000));
 	return true;
 }
 
@@ -709,13 +699,13 @@ void ConstructionSite::apply_settings(const BuildingSettings& cs) {
 Draw the construction site.
 ===============
 */
-void ConstructionSite::draw(uint32_t gametime,
+void ConstructionSite::draw(const Time& gametime,
                             InfoToDraw info_to_draw,
                             const Vector2f& point_on_dst,
                             const Widelands::Coords& coords,
                             float scale,
                             RenderTarget* dst) {
-	uint32_t tanim = gametime - animstart_;
+	Time tanim((gametime - animstart_).get());
 	const RGBColor& player_color = get_owner()->get_playercolor();
 	if (was_immovable_) {
 		if (info_to_draw & InfoToDraw::kShowBuildings) {
@@ -737,15 +727,13 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 
 	// Draw the partially finished building
-
-	static_assert(
-	   0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
-	info_.totaltime = CONSTRUCTIONSITE_STEP_TIME * work_steps_;
-	info_.completedtime = CONSTRUCTIONSITE_STEP_TIME * work_completed_;
+	info_.totaltime = kConstructionsiteStepTime * work_steps_;
+	info_.completedtime = kConstructionsiteStepTime * work_completed_;
 
 	if (working_) {
-		assert(work_steptime_ <= info_.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
-		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
+		assert(work_steptime_ <=
+		       Time((info_.completedtime + kConstructionsiteStepTime).get() + gametime.get()));
+		info_.completedtime += gametime + kConstructionsiteStepTime - work_steptime_;
 	}
 
 	info_.draw(

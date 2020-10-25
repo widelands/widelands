@@ -77,7 +77,7 @@ public:
 	// Manages all UniqueWindows.
 	UniqueWindowHandler& unique_windows();
 
-	InteractiveBase(Widelands::EditorGameBase&, Section& global_s);
+	InteractiveBase(Widelands::EditorGameBase&, Section& global_s, ChatProvider*);
 	~InteractiveBase() override;
 
 	Widelands::EditorGameBase& egbase() const {
@@ -185,7 +185,7 @@ public:
 
 	// This function should return true only in EditorInteractive
 	virtual bool omnipotent() const {
-		return false;
+		return cheat_mode_enabled_;
 	}
 	// These two functions should be overridden only by InteractiveGameBase
 	virtual Widelands::Game* get_game() const {
@@ -257,7 +257,7 @@ protected:
 
 	void draw_bridges(RenderTarget* dst,
 	                  const FieldsToDraw::Field* f,
-	                  uint32_t gametime,
+	                  const Time& gametime,
 	                  float scale) const;
 	void draw_road_building(FieldsToDraw::Field&);
 
@@ -315,6 +315,8 @@ protected:
 	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
 
 	void set_toolbar_imageset(const ToolbarImageset& imageset);
+
+	ChatProvider* chat_provider_;
 
 #ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;
@@ -416,6 +418,8 @@ private:
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
+
+	bool cheat_mode_enabled_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_BASE_H

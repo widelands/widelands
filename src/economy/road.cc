@@ -438,7 +438,7 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 /**
  * Update last_wallet_charge_ with the current gametime.
  */
-void Road::update_wallet_chargetime(Game& game) {
+void Road::update_wallet_chargetime(const Game& game) {
 	last_wallet_charge_ = game.get_gametime();
 }
 
@@ -446,10 +446,10 @@ void Road::update_wallet_chargetime(Game& game) {
  * Subtract maintenance cost, and check for demotion.
  */
 void Road::charge_wallet(Game& game) {
-	const uint32_t current_gametime = game.get_gametime();
+	const Time& current_gametime = game.get_gametime();
 	assert(last_wallet_charge_ <= current_gametime);
 
-	wallet_ -= carriers_count() * (current_gametime - last_wallet_charge_) / 1000;
+	wallet_ -= (((current_gametime - last_wallet_charge_) / 1000) * carriers_count()).get();
 	last_wallet_charge_ = current_gametime;
 
 	if (wallet_ < 0) {

@@ -122,7 +122,7 @@ private:
  * bobs moving onto the shore).
  */
 struct CheckStepDefault {
-	CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
+	explicit CheckStepDefault(uint8_t const movecaps) : movecaps_(movecaps) {
 	}
 
 	bool allowed(
@@ -139,7 +139,7 @@ private:
  * A ferry can travel on an edge if and only if both adjacent triangles are water.
  */
 struct CheckStepFerry {
-	CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
+	explicit CheckStepFerry(const EditorGameBase& egbase) : egbase_(egbase) {
 	}
 
 	bool allowed(

@@ -24,7 +24,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/editbox.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
@@ -53,16 +53,6 @@ private:
 
 	/// Which building state to jump through
 	enum class JumpTarget { kOwned, kConstruction, kUnproductive };
-
-	/// Array indices for the navigation buttons
-	enum NavigationButton {
-		PrevOwned,
-		NextOwned,
-		PrevConstruction,
-		NextConstruction,
-		PrevUnproductive,
-		NextUnproductive
-	};
 
 	/// Initialize the buttons
 	void reset();
@@ -109,6 +99,8 @@ private:
 	/// Style
 	const UI::BuildingStatisticsStyleInfo& style_;
 
+	UI::Box main_box_;
+
 	/// UI tabs
 	UI::TabPanel tab_panel_;
 	UI::Box* tabs_[kNoOfBuildingTabs];
@@ -125,19 +117,15 @@ private:
 	/// Labels with buildings' productivity
 	std::vector<UI::Textarea*> productivity_labels_;
 
-	/// The buttons for stepping through buildings
-	UI::Panel navigation_panel_;
-	UI::Button* navigation_buttons_[6];
-	UI::Textarea building_name_;
-	UI::Textarea owned_label_;
-	UI::Textarea construction_label_;
-	UI::Box unproductive_box_;
-	UI::Textarea unproductive_label_;
-	UI::EditBox unproductive_percent_;
-	UI::Textarea unproductive_label2_;
-	UI::Textarea no_owned_label_;
-	UI::Textarea no_construction_label_;
-	UI::Textarea no_unproductive_label_;
+	/// At which percent to deem buildings as unproductive
+	int low_production_;
+
+	UI::Box hbox_owned_, hbox_construction_, hbox_unproductive_;
+	UI::Textarea label_name_, label_owned_, label_construction_, label_unproductive_,
+	   label_nr_owned_, label_nr_construction_, label_nr_unproductive_, label_threshold_;
+	UI::Button b_prev_owned_, b_next_owned_, b_prev_construction_, b_next_construction_,
+	   b_prev_unproductive_, b_next_unproductive_;
+	UI::SpinBox unproductive_threshold_;
 
 	/// The building type we are currently navigating
 	Widelands::DescriptionIndex current_building_type_;
@@ -146,12 +134,9 @@ private:
 	/// The type of last building that was jumped to
 	Widelands::DescriptionIndex last_building_type_;
 	/// The last time the information in this Panel got updated
-	uint32_t lastupdate_;
+	Time lastupdate_;
 	/// Whether the window was minimized the last time that think() was executed
 	uint32_t was_minimized_;
-
-	/// At which percent to deem buildings as unproductive
-	int low_production_;
 
 	/// Whether a building has been selected
 	bool has_selection_;
