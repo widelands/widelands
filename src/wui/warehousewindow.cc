@@ -23,6 +23,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "wui/buildingwindow.h"
+#include "wui/economy_options_window.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/waresdisplay.h"
 
@@ -129,10 +130,11 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
 
+	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	add(buttons, UI::Box::Resizing::kFullSize);
+	UI::Button* b;
+
 	if (can_act_) {
-		UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-		UI::Button* b;
-		add(buttons, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 		add_space(15);
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
@@ -177,6 +179,17 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 			buttons->add(b);
 		}
 	}
+
+	buttons->add_inf_space();
+
+	b = new UI::Button(buttons, "configure_economy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+	                   g_image_cache->get("images/wui/stats/genstats_nrwares.png"),
+	                   _("Configure this building’s economy"));
+	buttons->add(b);
+
+	b->sigclicked.connect([this, &ib, &wh, type]() {
+		EconomyOptionsWindow::create(&ib, wh.base_flag(), type, can_act_);
+	});
 }
 
 void WarehouseWaresPanel::set_policy(Widelands::StockPolicy newpolicy) {
