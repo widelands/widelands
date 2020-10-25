@@ -19,6 +19,7 @@
 
 #include "wui/game_chat_panel.h"
 
+#include <SDL_keycode.h>
 #include <SDL_mouse.h>
 
 #include "base/i18n.h"
@@ -89,8 +90,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	} else {
 		// When an entry has been selected, update the "@playername " in the edit field
 		recipient_dropdown_.selected.connect([this]() { set_recipient(); });
-		// React to keypresses for autocompletition
-		editbox.changed.connect([this]() { key_changed(); });
+		// Other direction: If the input changed, update the dropdown
+		editbox.changed.connect([this]() { select_recipient(); });
 		// Figure out whether the local player has teammates
 		has_team_ = chat_.participants_->needs_teamchat();
 		// Fill the dropdown menu with usernames
@@ -126,6 +127,129 @@ GameChatPanel::~GameChatPanel() {
 	if (chat_.participants_ != nullptr) {
 		update_signal_connection.disconnect();
 	}
+}
+
+/**
+ * Try autocompletition of player names.
+ * If Ctrl+Space is pressed, try to autocomplete the last word around the cursor position
+ * E.g., if input is "pl" complete to "playername " if the start of the name is unique
+ */
+bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
+
+	if (chat_.participants_ == nullptr) {
+		// Nothing to do here
+		return false;
+	}
+
+	if (!down || code.sym != SDLK_SPACE || !(SDL_GetModState() & KMOD_CTRL)) {
+		return false;
+	}
+
+	// User is pressing Ctrl+Space, try autocomplete
+
+	std::string str = editbox.text();
+
+	if (str.empty()) {
+		return false;
+	}
+
+	// Extract the name to complete
+	// rfind starts at the given pos and goes forward until it finds a space
+	size_t namepart_start = str.rfind(' ', startpos);
+	if (namepart_start == std::string::npos) {
+		// Not found, meaning the input only contains the name
+		namepart_start = 0;
+	} else {
+		// Found something. Cut off the space
+		++namepart_start;
+	}
+	if (str[namepart_start] == '@') {
+		// If the first sign of the name is an @, skip it
+		++namepart_start;
+	}
+	size_t namepart_end = str.find(' ', editbox.get_caret_pos());
+
+	if (namepart_end <= namepart_start || namepart_start == str.size()) {
+		// Nothing to complete
+		// Maybe pressed it on an empty field or a single space or at the end of the input
+		return false;
+	}
+
+	// Extract part, also remove trailing spaces
+	const std::string namepart = str.substr(namepart_start, namepart_end - namepart_start);
+
+	// Helper function: Count the number of equal chars ignoring case
+	static const auto count_equal_chars = [](const std::string& a, const std::string& b) {
+		const size_t len = std::min(a.size(), b.size());
+		for (size_t i = 0; i < len; ++i) {
+			if (std::tolower(a[i]) != std::tolower(b[i]))
+				return i;
+		}
+		return len;
+	};
+
+	// Helper function: Compare the given names and extract a common prefix (if existing)
+	// Note: Do *not* use the capture clause. Since the lambda is static, it will still refer
+	// to the old variables which might no longer be valid
+	static const auto compare_names = [](const std::string& my_namepart, std::string& my_candidate,
+	                                     const std::string& my_name) {
+		size_t n_equal_chars = count_equal_chars(my_namepart, my_name);
+		if (n_equal_chars == my_namepart.size()) {
+			// We have a candidate!
+			// Check if we already have a candidate. If not, use this one
+			if (my_candidate.empty()) {
+				// Append a space so the user can continue typing after the completition
+				my_candidate = my_name + ' ';
+			} else {
+				// We already have one. Create an new candidate that is the combination of the two
+				n_equal_chars = count_equal_chars(my_candidate, my_name);
+				// No space appended here since the name is not complete yet
+				my_candidate = my_candidate.substr(0, n_equal_chars);
+			}
+		}
+	};
+
+	// Iterate over all possible completitions (i.e., usernames).
+	// For each, check whether they start with $namepart. If it does, store as candidate.
+	// If there already is a candidate, create a new candidate from the part that is
+	// the same for both candidates. (Note that the merged candidate might have wrong case,
+	// but that is fixed on the next completition)
+	const int16_t n_humans = chat_.participants_->get_participant_counts().humans;
+	const std::string& local_name = chat_.participants_->get_local_playername();
+	std::string candidate = "";
+	for (int16_t i = 0; i < n_humans; ++i) {
+		assert(chat_.participants_->get_participant_type(i) != ParticipantList::ParticipantType::kAI);
+		const std::string& name = chat_.participants_->get_participant_name(i);
+		if (namepart_start == 1 && str[0] == '@' && name == local_name) {
+			// Don't autocomplete to our own username when searching for a recipient
+			// Still do the autocomplete when in the middle of the message
+			continue;
+		}
+		compare_names(namepart, candidate, name);
+	}
+	// Also offer to complete to "@team" but only when at the beginning of the input
+	if (has_team_ && namepart_start == 1 && str[0] == '@') {
+		compare_names(namepart, candidate, "team");
+	}
+
+	// If we have a candidate, set the new text for the input box
+	if (!candidate.empty()) {
+		if (candidate.back() == ' ' && namepart_end != std::string::npos) {
+			// We are not at the end of the string. Remove the space character, if any
+			candidate.pop_back();
+		}
+		str.replace(namepart_start, namepart_end - namepart_start, candidate);
+		editbox.set_text(str);
+		// Move the cursor behind the completet name
+		assert(str.size() >= namepart_start + candidate.size());
+		editbox.set_caret_pos(namepart_start + candidate.size());
+		// Try to select the matching dropdown state again
+		select_recipient();
+	}
+
+
+	// We have handled the key
+	return true;
 }
 
 /**
@@ -221,113 +345,6 @@ void GameChatPanel::key_escape() {
 	}
 	// Trigger the signal that writing was aborted
 	aborted();
-}
-
-/**
- * Try autocompletition of player names.
- * If the last two chars of the input are space, try to autocomplete the last word to a player name.
- * E.g., if input is "pl  " complete to "playername " if the start of the name is unique
- */
-void GameChatPanel::key_changed() {
-
-	if (chat_.participants_ == nullptr) {
-		// Nothing to do here
-		return;
-	}
-
-	std::string str = editbox.text();
-
-	// Try to select the matching dropdown state
-	select_recipient();
-
-	if (str.size() < 3 || *(str.rbegin()) != ' ' || str[str.size() - 2] != ' ') {
-		return;
-	}
-
-	// Extract the name to complete
-	// rfind starts at the given pos and goes forward until it finds a space
-	// -3 so we don't start searching in the double space chars at the end
-	size_t namepart_pos = str.rfind(' ', str.size() - 3);
-	if (namepart_pos == std::string::npos) {
-		// Not found, meaning the input only contains the name
-		namepart_pos = 0;
-	} else {
-		// Found something. Cut off the space
-		++namepart_pos;
-	}
-	if (str[namepart_pos] == '@') {
-		// If the first sign of the name is an @, skip it
-		++namepart_pos;
-	}
-	// Extract part, also remove trailing spaces
-	const std::string namepart = str.substr(namepart_pos, str.size() - 2 - namepart_pos);
-
-	if (namepart.empty()) {
-		// Nothing left to complete. Maybe 3+ spaces in a row
-		return;
-	}
-
-	// Helper function: Count the number of equal chars ignoring case
-	static const auto count_equal_chars = [](const std::string& a, const std::string& b) {
-		const size_t len = std::min(a.size(), b.size());
-		for (size_t i = 0; i < len; ++i) {
-			if (std::tolower(a[i]) != std::tolower(b[i]))
-				return i;
-		}
-		return len;
-	};
-
-	// Helper function: Compare the given names and extract a common prefix (if existing)
-	// Note: Do *not* use the capture clause. Since the lambda is static, it will still refer
-	// to the old variables which might no longer be valid
-	static const auto compare_names = [](const std::string& my_namepart, std::string& my_candidate,
-	                                     const std::string& my_name) {
-		size_t n_equal_chars = count_equal_chars(my_namepart, my_name);
-		if (n_equal_chars == my_namepart.size()) {
-			// We have a candidate!
-			// Check if we already have a candidate. If not, use this one
-			if (my_candidate.empty()) {
-				// Append a space so the user can continue typing after the completition
-				my_candidate = my_name + " ";
-			} else {
-				// We already have one. Create an new candidate that is the combination of the two
-				n_equal_chars = count_equal_chars(my_candidate, my_name);
-				// No space appended here since the name is not complete yet
-				my_candidate = my_candidate.substr(0, n_equal_chars);
-			}
-		}
-	};
-
-	// Iterate over all possible completitions (i.e., usernames).
-	// For each, check whether they start with $namepart. If it does, store as candidate.
-	// If there already is a candidate, create a new candidate from the part that is
-	// the same for both candidates. (Note that the merged candidate might have wrong case,
-	// but that is fixed on the next completition)
-	const int16_t n_humans = chat_.participants_->get_participant_counts().humans;
-	const std::string& local_name = chat_.participants_->get_local_playername();
-	std::string candidate = "";
-	for (int16_t i = 0; i < n_humans; ++i) {
-		assert(chat_.participants_->get_participant_type(i) != ParticipantList::ParticipantType::kAI);
-		const std::string& name = chat_.participants_->get_participant_name(i);
-		if (namepart_pos == 1 && str[0] == '@' && name == local_name) {
-			// Don't autocomplete to our own username when searching for a recipient
-			// Still do the autocomplete when in the middle of the message
-			continue;
-		}
-		compare_names(namepart, candidate, name);
-	}
-	// Also offer to complete to "@team" but only when at the beginning of the input
-	if (has_team_ && namepart_pos == 1 && str[0] == '@') {
-		compare_names(namepart, candidate, "team");
-	}
-
-	// If we have a candidate, set the new text for the input box
-	if (!candidate.empty()) {
-		str.replace(namepart_pos, std::string::npos, candidate);
-		editbox.set_text(str);
-		// Try to select the matching dropdown state again
-		select_recipient();
-	}
 }
 
 /**

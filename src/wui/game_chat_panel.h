@@ -56,6 +56,7 @@ struct GameChatPanel : public UI::Panel {
 		editbox.set_text(text);
 	}
 
+	bool handle_key(bool down, SDL_Keysym code) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	void focus_edit();
 	void unfocus_edit();
@@ -66,7 +67,6 @@ private:
 	void key_enter();
 	void key_escape();
 	void draw(RenderTarget& dst) override;
-	void key_changed();
 	void set_recipient();
 	void prepare_recipients();
 	bool select_recipient();
