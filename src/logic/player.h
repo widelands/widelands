@@ -386,11 +386,12 @@ public:
 		 * Call `set_constructionsite(true)` before using `constructionsite`,
 		 * and call `set_constructionsite(false)` before using `dismantlesite`.
 		 */
+		struct DismantlesiteInformation {
+			uint32_t progress;
+			const BuildingDescr* building;
+		};
 		union {
-			struct {
-				uint32_t progress;
-				const BuildingDescr* building;
-			} dismantlesite;
+			DismantlesiteInformation dismantlesite;
 			ConstructionsiteInformation* constructionsite;
 		};
 		bool is_constructionsite;
