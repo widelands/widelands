@@ -69,7 +69,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 		title_label->set_style(g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading));
 
 		UI::Box* list_box =
-		   new UI::Box(main_box, 0, 0, UI::Box::Vertical, 0, parent->get_h(), kPadding);
+		   new UI::Box(main_box, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, kPadding);
 		list_box->set_scrolling(true);
 		main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
@@ -94,7 +94,6 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 			});
 
 			reset_buttons_.insert(reset_button);
-
 			entry_box->add_space(0);
 		}
 	}
