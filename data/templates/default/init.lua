@@ -73,6 +73,9 @@ return {
    minimum_font_size = 10,
    minimap_icon_frame = fs_font_color,
 
+   -- red, green, blue, alpha
+   window_border_focused = {220, 220, 250, 40},
+   window_border_unfocused = {50, 0, 0, 40},
    background_focused = {240, 240, 240, 200},
    background_semi_focused = {180, 180, 180, 200},
    focus_border_thickness = 2,
