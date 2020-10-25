@@ -507,6 +507,7 @@ void Scrollbar::layout() {
 	} else {
 		buttonsize_ = kSize;
 	}
+	set_can_focus(is_enabled());
 }
 
 }  // namespace UI

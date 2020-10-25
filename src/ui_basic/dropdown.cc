@@ -184,6 +184,10 @@ void BaseDropdown::set_height(int height) {
 	layout();
 }
 
+std::vector<Recti> BaseDropdown::focus_overlay_rects() {
+	return Panel::focus_overlay_rects(2, 2, 0);
+}
+
 /*
  * This function is part of an ugly hack to handle dropdowns in modal
  * windows correctly. The problem is that our ListSelect's parent is the

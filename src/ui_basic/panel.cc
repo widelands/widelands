@@ -663,15 +663,21 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
-std::vector<Recti> Panel::focus_overlay_rects() {
-	const int f = g_style_manager->focus_border_thickness();
+std::vector<Recti>
+Panel::focus_overlay_rects(const int off_x, const int off_y, const int strength_diff) {
+	const int f = g_style_manager->focus_border_thickness() + strength_diff;
 	const int16_t w = get_w();
 	const int16_t h = get_h();
-	if (w < 2 * f || h < 2 * f) {
+	if (w < 2 * (f + off_x) || h < 2 * (f + off_y)) {
 		return {Recti(0, 0, w, h)};
 	}
-	return {Recti(0, 0, w, f), Recti(0, h - f, w, f), Recti(0, f, f, h - 2 * f),
-	        Recti(w - f, f, f, h - 2 * f)};
+	return {Recti(off_x, off_y, w - 2 * off_x, f), Recti(off_x, h - off_y - f, w - 2 * off_x, f),
+	        Recti(off_x, off_y + f, f, h - 2 * f - 2 * off_y),
+	        Recti(w - off_x - f, off_y + f, f, h - 2 * f - 2 * off_y)};
+}
+
+std::vector<Recti> Panel::focus_overlay_rects() {
+	return focus_overlay_rects(0, 0, 0);
 }
 
 /**

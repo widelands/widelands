@@ -359,6 +359,8 @@ protected:
 	virtual bool is_focus_toplevel() const;
 
 	virtual std::vector<Recti> focus_overlay_rects();
+	// Convenience functions for overriding focus_overlay_rects()
+	std::vector<Recti> focus_overlay_rects(int off_x, int off_y, int strength_diff);
 
 	// Wait until the current logic frame has ended
 	void wait_for_current_logic_frame();
