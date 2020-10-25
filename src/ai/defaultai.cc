@@ -2312,10 +2312,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	const Widelands::PlayerNumber pn = player_number();
 
 	// Genetic algorithm is used here
-	static bool inputs[2 * kFNeuronBitSize] = {false};
-	for (bool& input : inputs) {
-		input = false;
-	}
+	static bool inputs[2 * kFNeuronBitSize] = { false };
+	// Resetting values as the variable is static
+	std::fill(std::begin(inputs), std::end(inputs), false);
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[2] =
@@ -5415,10 +5414,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
 			inputs[1] = (bo.max_needed_preciousness > 0) ? 2 : 0;
 			inputs[2] = (bo.max_needed_preciousness == 0) ? -3 : 0;
@@ -5517,10 +5514,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			static int16_t tmp_target = 2;
 			tmp_target = 2;
 			static int16_t inputs[2 * kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < 2 * kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 
 			inputs[0] = (persistent_data->trees_around_cutters < 10) * 2;
 			inputs[1] = (persistent_data->trees_around_cutters < 20) * 2;
@@ -5758,10 +5753,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (gametime < Time(15 * 60 * 1000)) ? -2 : 0;
 			inputs[1] = (gametime < Time(30 * 60 * 1000)) ? -2 : 0;
 			inputs[2] = (gametime < Time(45 * 60 * 1000)) ? -2 : 0;
@@ -5825,10 +5818,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.max_needed_preciousness > 0) {
 
 			static int16_t inputs[4 * kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < 4 * kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (bo.total_count() <= 1) ?
 			               std::abs(management_data.get_military_number_at(110)) / 10 :
 			               0;
