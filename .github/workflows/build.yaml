@@ -29,7 +29,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Run the codecheck suite
+    - name: Run codecheck
       run: |
         mkdir build
         cd build
@@ -37,6 +37,8 @@ jobs:
         pushd ../cmake/codecheck
         ./run_tests.py
         popd
+    - name: Check results
+      run: |
         TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
         if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then
           echo "You have codecheck warnings (see above). Please fix."
@@ -113,7 +115,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Check
+    - name: Compile
       run: |
         CXX="${{ matrix.compiler }}"
         if [ "${CXX:0:1}" == "c" ]
@@ -129,7 +131,8 @@ jobs:
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc)
         cd ..
-        # Prepare to start SDL
+    - name: Testsuite
+      run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
         export SDL_VIDEODRIVER=x11
         export DISPLAY=:99.0
@@ -146,12 +149,10 @@ jobs:
             exit $result
           fi
         }
-        # Testsuite
-        ./regression_test.py -b build/src/widelands
-        # Test website utils
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
+        ./regression_test.py -b build/src/widelands
 
   windows:
     # Skip this job on master branch
