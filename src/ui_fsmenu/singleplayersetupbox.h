@@ -25,10 +25,6 @@
 #include "ui_fsmenu/playersetupbox.h"
 #include "ui_fsmenu/singleplayerdropdown.h"
 
-namespace Widelands {
-class Map;
-}
-
 // horizontal group
 class SinglePlayerActivePlayerGroup : public UI::Box {
 public:
