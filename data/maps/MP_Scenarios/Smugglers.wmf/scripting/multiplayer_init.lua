@@ -98,7 +98,7 @@ function initialize()
       end
    end
 
-   send_to_all(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)), welcome_msg.heading)
+   send_to_all_inboxes(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)), welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implementes
    game.players[1]:add_objective("win_conditions", _"Rules", rt(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win))))
