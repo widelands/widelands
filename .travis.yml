@@ -53,7 +53,4 @@ language: cpp
 
 script:
   - >
-    mkdir build
-    cd build
-    cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF" -DCMAKE_EXE_LINKER_FLAGS="-L/usr/local/opt/gettext/lib -lintl" -DCMAKE_CXX_FLAGS="-I/usr/local/opt/gettext/include"
-    make -k -j3
+    mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE_TOOLS -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF" -DCMAKE_EXE_LINKER_FLAGS="-L/usr/local/opt/gettext/lib -lintl" -DCMAKE_CXX_FLAGS="-I/usr/local/opt/gettext/include" && make -k -j3
