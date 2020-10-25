@@ -23,6 +23,7 @@
 #include "ui_basic/window.h"
 
 #include <memory>
+#include <set>
 
 namespace Widelands {
 class TrainingWheels;
@@ -39,6 +40,7 @@ public:
 	explicit TrainingWheelOptions(Panel* parent);
 
 	std::unique_ptr<LuaInterface> lua_;
+	std::set<UI::Button*> reset_buttons_;
 	std::unique_ptr<Widelands::TrainingWheels> training_wheels_;
 };
 
