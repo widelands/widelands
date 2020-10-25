@@ -429,7 +429,8 @@ void FieldActionWindow::add_buttons_auto() {
 
 			if (ibase().egbase().is_game()) {
 				add_button(buildbox, "configure_economy", "images/wui/stats/genstats_nrwares.png",
-				           &FieldActionWindow::act_configure_economy, _("Configure economy"));
+				           &FieldActionWindow::act_configure_economy,
+				           _("Configure this flag’s economy"));
 				if (can_act) {
 					add_button(buildbox, "geologist", pic_geologist, &FieldActionWindow::act_geologist,
 					           _("Send geologist to explore site"));
@@ -759,31 +760,10 @@ void FieldActionWindow::act_buildflag() {
 
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
-		Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
-		Widelands::Economy* worker_economy = flag->get_economy(Widelands::wwWORKER);
-		bool window_open = false;
-		if (ware_economy->get_options_window()) {
-			window_open = true;
-			EconomyOptionsWindow& window =
-			   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
-			if (window.is_minimal()) {
-				window.restore();
-			}
-			window.move_to_top();
-		}
-		if (worker_economy->get_options_window()) {
-			window_open = true;
-			EconomyOptionsWindow& window =
-			   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
-			if (window.is_minimal()) {
-				window.restore();
-			}
-			window.move_to_top();
-		}
-		if (!window_open) {
-			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), ware_economy, worker_economy,
-			                         dynamic_cast<InteractiveGameBase&>(ibase()).can_act(
-			                            ware_economy->owner().player_number()));
+		if (upcast(InteractiveGameBase, igbase, &ibase())) {
+			Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
+			const bool can_act = igbase->can_act(ware_economy->owner().player_number());
+			EconomyOptionsWindow::create(&ibase(), *flag, Widelands::WareWorker::wwWARE, can_act);
 		}
 	}
 	die();

@@ -697,7 +697,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		expedition_.reset(nullptr);
 		return start_task_idle(game, descr().main_animation(), kShipInterval);
 	}
-		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input

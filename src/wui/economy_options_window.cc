@@ -38,6 +38,7 @@ constexpr int kDesiredWidth = 216;
 EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::Economy* ware_economy,
                                            Widelands::Economy* worker_economy,
+                                           Widelands::WareWorker type,
                                            bool can_act)
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
      main_box_(this, 0, 0, UI::Box::Vertical),
@@ -150,6 +151,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 
 	read_targets();
 
+	activate_tab(type);
+
 	initialization_complete();
 }
 
@@ -163,6 +166,41 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	if (save_profile_dialog_) {
 		save_profile_dialog_->unset_parent();
 	}
+}
+
+void EconomyOptionsWindow::create(UI::Panel* parent,
+                                  const Widelands::Flag& flag,
+                                  Widelands::WareWorker type,
+                                  bool can_act) {
+	Widelands::Economy* ware_economy = flag.get_economy(Widelands::wwWARE);
+	Widelands::Economy* worker_economy = flag.get_economy(Widelands::wwWORKER);
+	bool window_open = false;
+	if (ware_economy->get_options_window()) {
+		window_open = true;
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
+		window.activate_tab(type);
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	}
+	if (worker_economy->get_options_window()) {
+		window_open = true;
+		EconomyOptionsWindow& window =
+		   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
+		window.activate_tab(type);
+		if (window.is_minimal()) {
+			window.restore();
+		}
+		window.move_to_top();
+	}
+	if (!window_open) {
+		new EconomyOptionsWindow(parent, ware_economy, worker_economy, type, can_act);
+	}
+}
+void EconomyOptionsWindow::activate_tab(Widelands::WareWorker type) {
+	tabpanel_.activate(type == Widelands::WareWorker::wwWARE ? "wares" : "workers");
 }
 
 std::string EconomyOptionsWindow::localize_profile_name(const std::string& name) {

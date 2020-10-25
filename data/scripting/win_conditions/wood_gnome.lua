@@ -94,12 +94,12 @@ local r = {
       for i=1,#points-1 do
          privmsg = lost_game_over.body
          privmsg = privmsg .. msg
-         points[i][1]:send_message(lost_game_over.title, privmsg)
+         points[i][1]:send_to_inbox(lost_game_over.title, privmsg)
          wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
       end
       privmsg = won_game_over.body
       privmsg = privmsg .. msg
-      points[#points][1]:send_message(won_game_over.title, privmsg)
+      points[#points][1]:send_to_inbox(won_game_over.title, privmsg)
       wl.game.report_result(points[#points][1], 1,
          make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
    end
