@@ -377,12 +377,25 @@ void InputQueueDisplay::think() {
 }
 
 static const RGBAColor kPriorityColors[] = {
-	RGBAColor(255, 0, 0, 255),
-	RGBAColor(255, 127, 0, 255),
-	RGBAColor(255, 255, 0, 255),
-	RGBAColor(127, 255, 0, 255),
-	RGBAColor(0, 255, 0, 255)
+	RGBAColor(255, 0, 0, 63),
+	RGBAColor(255, 127, 0, 63),
+	RGBAColor(255, 255, 0, 63),
+	RGBAColor(0, 255, 0, 63),
+	RGBAColor(0, 127, 255, 63)
 };
+
+void InputQueueDisplay::draw(RenderTarget& r) {
+	// Draw priority indicator
+	if (has_priority_ && !collapsed_) {
+		const int x = hbox_.get_x() + priority_.get_x();
+		const int y = hbox_.get_y() + priority_.get_y() + priority_.get_h() / 2;
+		for (size_t i = 0; i < 5; ++i) {
+			r.fill_rect(Recti(x + i * kButtonSize, y - kButtonSize / 5, kButtonSize, kButtonSize * 2 / 5), kPriorityColors[i], BlendMode::Default);
+		}
+	}
+
+	UI::Box::draw(r);
+}
 
 void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 	// Draw max fill indicator
@@ -398,12 +411,12 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 	}
 
 	// Draw priority indicator
-	if (collapsed_ && has_priority_) {
+	if (has_priority_ && collapsed_) {
 		const size_t p = priority_to_index(queue_ ? building_.get_priority(type_, index_) : get_setting()->priority);
 		const int w = kButtonSize / 5;
 		const int x = hbox_.get_x() + collapse_.get_x() - w;
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
-		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * kButtonSize / 5, w, kButtonSize / 5), kPriorityColors[p]);
+		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * kButtonSize / 5, w, kButtonSize / 5), kPriorityColors[p], BlendMode::Copy);
 	}
 
 	UI::Box::draw_overlay(r);

@@ -48,6 +48,7 @@ public:
 
 protected:
 	void think() override;
+	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
 
 private:
