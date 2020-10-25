@@ -26,7 +26,6 @@
 #include "logic/training_wheels.h"
 #include "scripting/lua_interface.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
 constexpr int kPadding = 4;
