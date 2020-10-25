@@ -584,7 +584,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
-// NOCOM test with client
 MultiPlayerSetupPlayerBox::MultiPlayerSetupPlayerBox(UI::Panel* const parent,
 					 GameSettingsProvider* const settings, NetworkPlayerSettingsBackend* npsb,
 					 uint32_t standard_element_height,
