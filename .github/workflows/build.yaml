@@ -37,8 +37,6 @@ jobs:
         pushd ../cmake/codecheck
         ./run_tests.py
         popd
-    - name: Check results
-      run: |
         TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
         if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then
           echo "You have codecheck warnings (see above). Please fix."
@@ -149,10 +147,10 @@ jobs:
             exit $result
           fi
         }
+        ./regression_test.py -b build/src/widelands
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
-        ./regression_test.py -b build/src/widelands
 
   windows:
     # Skip this job on master branch
