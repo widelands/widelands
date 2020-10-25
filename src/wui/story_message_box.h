@@ -57,6 +57,7 @@ protected:
 private:
 	/// Get the game running again and close the window.
 	void clicked_ok();
+	void resume_game();
 
 	// UI elements
 	UI::Box main_box_;
