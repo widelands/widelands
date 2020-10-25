@@ -219,10 +219,10 @@ local r = {
          local lost_or_won = 0
          if (info[2] < win_points) then
             lost_or_won = 0
-            send_message(player, lost_game_over.title, lost_game_over.body, {popup = true})
+            send_to_inbox(player, lost_game_over.title, lost_game_over.body, {popup = true})
          else
             lost_or_won = 1
-            send_message(player, won_game_over.title, won_game_over.body, {popup = true})
+            send_to_inbox(player, won_game_over.title, won_game_over.body, {popup = true})
          end
          if (count_factions(plrs) > 1) then
             if (player.team == 0) then
