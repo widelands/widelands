@@ -158,6 +158,8 @@ protected:
 	bool repeating_;
 	const UI::Button::ImageMode image_mode_;
 
+	std::vector<Recti> focus_overlay_rects() override;
+
 	uint32_t time_nextact_;
 
 	std::string title_;         //  title string used when title_image_ == nullptr
