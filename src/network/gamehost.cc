@@ -152,10 +152,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number >= host_->settings().players.size()) {
 			return;
 		}
-		if (number == settings().playernum ||
-		    settings().players.at(number).state == PlayerSettings::State::kComputer) {
-			host_->set_player_team(number, team);
-		}
+		host_->set_player_team(number, team);
 	}
 
 	void set_player_closeable(uint8_t number, bool closeable) override {

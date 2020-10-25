@@ -584,7 +584,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
-// NOCOM fix setting team for unoccupied slots
 // NOCOM test with client
 MultiPlayerSetupPlayerBox::MultiPlayerSetupPlayerBox(UI::Panel* const parent,
 					 GameSettingsProvider* const settings, NetworkPlayerSettingsBackend* npsb,
