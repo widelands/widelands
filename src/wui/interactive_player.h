@@ -27,6 +27,7 @@
 #include "logic/message_id.h"
 #include "logic/note_map_options.h"
 #include "ui_basic/button.h"
+#include "ui_basic/icon.h"
 #include "wui/interactive_gamebase.h"
 
 /**
@@ -78,8 +79,18 @@ public:
 	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
 	}
+	bool auto_roadbuild_mode() const {
+		return auto_roadbuild_mode_;
+	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
+
+	// Indicate the given screen pixel to the player by painting an arrow. Use this for pointing the
+	// payer to a UI::Panel. Set to Vector2i::invalid() to switch it off.
+	void set_training_wheel_indicator_pos(const Vector2i& pos);
+	// Indicate the given field coordinates to the player by painting an arrow. Set to
+	// FCoords::null() to switch it off.
+	void set_training_wheel_indicator_field(const Widelands::FCoords& field);
 
 private:
 	// For referencing the items in statisticsmenu_
@@ -110,6 +121,13 @@ private:
 	UI::UniqueWindow::Registry message_menu_;
 
 	const Image* grid_marker_pic_;
+
+	// Arrow image for indicating a position for training wheels
+	const Image* training_wheel_indicator_pic_;
+	// Field position to indicate for training wheels
+	Widelands::FCoords training_wheel_indicator_field_;
+	// Arrow image for indicating a UI::Panel for training wheels
+	std::unique_ptr<UI::Icon> training_wheel_indicator_icon_;
 
 	void draw_immovables_for_visible_field(const Widelands::EditorGameBase&,
 	                                       const FieldsToDraw::Field&,

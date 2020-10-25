@@ -287,6 +287,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				assert(counter == no_of_seen_fields);
 
 				// Map objects
+				const Descriptions& descriptions = egbase.descriptions();
 				for (auto& field : seen_fields) {
 					std::string descr = fr.string();
 					if (descr.empty()) {
@@ -298,16 +299,16 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = egbase.descriptions().building_index(
+							DescriptionIndex di = descriptions.building_index(
 							   tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
-								field->map_object_descr = egbase.descriptions().get_building_descr(di);
+								field->map_object_descr = descriptions.get_building_descr(di);
 							} else {
-								di = egbase.descriptions().immovable_index(
+								di = descriptions.immovable_index(
 								   tribes_lookup_table.lookup_immovable(
 								      world_lookup_table.lookup_immovable(descr)));
 								if (di != INVALID_INDEX) {
-									field->map_object_descr = egbase.descriptions().get_immovable_descr(di);
+									field->map_object_descr = descriptions.get_immovable_descr(di);
 								} else {
 									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
 								}
@@ -315,37 +316,48 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						}
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
-							field->partially_finished_building.dismantlesite.building =
-							   egbase.descriptions().get_building_descr(
-							      egbase.descriptions().safe_building_index(
-							         tribes_lookup_table.lookup_building(fr.string())));
-							field->partially_finished_building.dismantlesite.progress = fr.unsigned_32();
+							field->set_constructionsite(false);
+							field->dismantlesite.building =
+							   descriptions.get_building_descr(descriptions.safe_building_index(
+							      tribes_lookup_table.lookup_building(fr.string())));
+							field->dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
-							field->partially_finished_building.constructionsite.becomes =
-							   egbase.descriptions().get_building_descr(
-							      egbase.descriptions().safe_building_index(
-							         tribes_lookup_table.lookup_building(fr.string())));
+							field->set_constructionsite(true);
+							field->constructionsite->becomes =
+							   descriptions.get_building_descr(descriptions.safe_building_index(
+							      tribes_lookup_table.lookup_building(fr.string())));
 							descr = fr.string();
-							field->partially_finished_building.constructionsite.was =
-							   descr.empty() ? nullptr :
-							                   egbase.descriptions().get_building_descr(
-							                      egbase.descriptions().safe_building_index(
-							                         tribes_lookup_table.lookup_building(descr)));
+							field->constructionsite->was =
+							   descr.empty() ?
+							      nullptr :
+							      descriptions.get_building_descr(descriptions.safe_building_index(
+							         tribes_lookup_table.lookup_building(descr)));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
-								field->partially_finished_building.constructionsite.intermediates.push_back(
-								   egbase.descriptions().get_building_descr(
-								      egbase.descriptions().safe_building_index(
-								         tribes_lookup_table.lookup_building(fr.string()))));
+								field->constructionsite->intermediates.push_back(
+								   descriptions.get_building_descr(descriptions.safe_building_index(
+								      tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
-							field->partially_finished_building.constructionsite.totaltime = Duration(fr);
-							field->partially_finished_building.constructionsite.completedtime =
-							   Duration(fr);
+							field->constructionsite->totaltime = Duration(fr);
+							field->constructionsite->completedtime = Duration(fr);
 						}
 					}
 				}
 			}
+
+			// Data for kVisible fields is not saveloaded so rediscover it
+			if (packet_version == kCurrentPacketVersion) {
+				iterate_players_existing(p, nr_players, egbase, player) {
+					for (MapIndex m = 0; m < no_of_fields; ++m) {
+						Player::Field& f = player->fields_[m];
+						if (f.vision == VisibleState::kVisible) {
+							player->rediscover_node(map, map.get_fcoords(map[m]));
+						}
+					}
+				}
+			}
+
 		} else if (packet_version >= 1 && packet_version <= 2) {
 			// TODO(Nordfriese): Savegame compatibility, remove after v1.0
 			for (uint8_t i = fr.unsigned_8(); i; --i) {
@@ -397,19 +409,20 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					if (descr.empty()) {
 						f.map_object_descr = nullptr;
 					} else {
+						const Descriptions& descriptions = egbase.descriptions();
 						// I here assume that no two immovables will have the same internal name
 						if (descr == "flag") {
 							f.map_object_descr = &g_flag_descr;
 						} else if (descr == "portdock") {
 							f.map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = egbase.descriptions().building_index(descr);
+							DescriptionIndex di = descriptions.building_index(descr);
 							if (di != INVALID_INDEX) {
-								f.map_object_descr = egbase.descriptions().get_building_descr(di);
+								f.map_object_descr = descriptions.get_building_descr(di);
 							} else {
-								di = egbase.descriptions().immovable_index(descr);
+								di = descriptions.immovable_index(descr);
 								if (di != INVALID_INDEX) {
-									f.map_object_descr = egbase.descriptions().get_immovable_descr(di);
+									f.map_object_descr = descriptions.get_immovable_descr(di);
 								} else {
 									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
 								}
@@ -418,53 +431,54 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 						if (packet_version > 1) {
 							if (f.map_object_descr->type() == MapObjectType::DISMANTLESITE) {
-								f.partially_finished_building.dismantlesite.building =
-								   egbase.descriptions().get_building_descr(
-								      egbase.descriptions().safe_building_index(fr.string()));
-								f.partially_finished_building.dismantlesite.progress = fr.unsigned_32();
+								f.set_constructionsite(false);
+								f.dismantlesite.building = descriptions.get_building_descr(
+								   descriptions.safe_building_index(fr.string()));
+								f.dismantlesite.progress = fr.unsigned_32();
 							} else if (f.map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
-								f.partially_finished_building.constructionsite.becomes =
-								   egbase.descriptions().get_building_descr(
-								      egbase.descriptions().safe_building_index(fr.string()));
+								f.set_constructionsite(true);
+								f.constructionsite->becomes = descriptions.get_building_descr(
+								   descriptions.safe_building_index(fr.string()));
 								descr = fr.string();
-								f.partially_finished_building.constructionsite.was =
-								   descr.empty() ? nullptr :
-								                   egbase.descriptions().get_building_descr(
-								                      egbase.descriptions().safe_building_index(descr));
+								f.constructionsite->was = descr.empty() ?
+								                             nullptr :
+								                             descriptions.get_building_descr(
+								                                descriptions.safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
-									f.partially_finished_building.constructionsite.intermediates.push_back(
-									   egbase.descriptions().get_building_descr(
-									      egbase.descriptions().safe_building_index(fr.string())));
+									f.constructionsite->intermediates.push_back(
+									   descriptions.get_building_descr(
+									      descriptions.safe_building_index(fr.string())));
 								}
 
-								f.partially_finished_building.constructionsite.totaltime = Duration(fr);
-								f.partially_finished_building.constructionsite.completedtime = Duration(fr);
+								f.constructionsite->totaltime = Duration(fr);
+								f.constructionsite->completedtime = Duration(fr);
 							}
 						} else {
 							descr = fr.string();
 							if (descr.empty()) {
-								f.partially_finished_building.dismantlesite.building = nullptr;
-								f.partially_finished_building.dismantlesite.progress = 0;
+								f.set_constructionsite(false);
+								f.dismantlesite.building = nullptr;
+								f.dismantlesite.progress = 0;
 							} else {
-								f.partially_finished_building.constructionsite.becomes =
-								   egbase.descriptions().get_building_descr(
-								      egbase.descriptions().safe_building_index(descr));
+								f.set_constructionsite(true);
+								f.constructionsite->becomes = descriptions.get_building_descr(
+								   descriptions.safe_building_index(descr));
 
 								descr = fr.string();
-								f.partially_finished_building.constructionsite.was =
-								   descr.empty() ? nullptr :
-								                   egbase.descriptions().get_building_descr(
-								                      egbase.descriptions().safe_building_index(descr));
+								f.constructionsite->was = descr.empty() ?
+								                             nullptr :
+								                             descriptions.get_building_descr(
+								                                descriptions.safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
-									f.partially_finished_building.constructionsite.intermediates.push_back(
-									   egbase.descriptions().get_building_descr(
-									      egbase.descriptions().safe_building_index(fr.string())));
+									f.constructionsite->intermediates.push_back(
+									   descriptions.get_building_descr(
+									      descriptions.safe_building_index(fr.string())));
 								}
 
-								f.partially_finished_building.constructionsite.totaltime = Duration(fr);
-								f.partially_finished_building.constructionsite.completedtime = Duration(fr);
+								f.constructionsite->totaltime = Duration(fr);
+								f.constructionsite->completedtime = Duration(fr);
 							}
 						}
 					}
@@ -656,25 +670,20 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 					// `building` can only be nullptr in compatibility cases.
 					// Remove the non-null check after v1.0
-					fw.string(field->partially_finished_building.dismantlesite.building ?
-					             field->partially_finished_building.dismantlesite.building->name() :
-					             "dismantlesite");
-					fw.unsigned_32(field->partially_finished_building.dismantlesite.progress);
+					fw.string(field->dismantlesite.building ? field->dismantlesite.building->name() :
+					                                          "dismantlesite");
+					fw.unsigned_32(field->dismantlesite.progress);
 				} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
-					fw.string(field->partially_finished_building.constructionsite.becomes->name());
-					fw.string(field->partially_finished_building.constructionsite.was ?
-					             field->partially_finished_building.constructionsite.was->name() :
-					             "");
+					fw.string(field->constructionsite->becomes->name());
+					fw.string(field->constructionsite->was ? field->constructionsite->was->name() : "");
 
-					fw.unsigned_32(
-					   field->partially_finished_building.constructionsite.intermediates.size());
-					for (const BuildingDescr* d :
-					     field->partially_finished_building.constructionsite.intermediates) {
+					fw.unsigned_32(field->constructionsite->intermediates.size());
+					for (const BuildingDescr* d : field->constructionsite->intermediates) {
 						fw.string(d->name());
 					}
 
-					field->partially_finished_building.constructionsite.totaltime.save(fw);
-					field->partially_finished_building.constructionsite.completedtime.save(fw);
+					field->constructionsite->totaltime.save(fw);
+					field->constructionsite->completedtime.save(fw);
 				}
 			} else {
 				fw.string("");
