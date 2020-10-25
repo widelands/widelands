@@ -74,6 +74,9 @@ struct Statebox : public Panel {
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
 
+protected:
+	std::vector<Recti> focus_overlay_rects() override;
+
 private:
 	void layout() override;
 	virtual void button_clicked() = 0;
