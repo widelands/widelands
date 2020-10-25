@@ -1124,6 +1124,8 @@ void GameHost::set_map(const std::string& mapname,
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
 	write_setting_all_players(packet);
 	broadcast(packet);
+	// Map changes are finished here
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	// If possible, offer the map / saved game as transfer
 	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
@@ -1574,8 +1576,6 @@ void GameHost::write_setting_all_players(SendPacket& packet) {
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 		write_setting_player(packet, i);
 	}
-	// Map changes are finished here
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {
@@ -1755,6 +1755,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
 	write_setting_all_players(packet);
 	d->net->send(client.sock_id, packet);
+	// Map changes are finished here
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLUSERS);
