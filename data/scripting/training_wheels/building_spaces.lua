@@ -68,18 +68,16 @@ run(function()
       solved = true
    end)
 
-   local showhide_dropdown = mapview.dropdowns["dropdown_menu_showhide"]
+   mapview.dropdowns["dropdown_menu_showhide"]:indicate(true)
 
-   showhide_dropdown:indicate(true)
-
-   while not showhide_dropdown.expanded and not solved do sleep(200) end
+   while not mapview.dropdowns["dropdown_menu_showhide"].expanded and not solved do sleep(200) end
 
    if not solved then
       -- Player did not use keyboard shortcut, continue explaining
       close_story_messagebox()
       campaign_message_box(msg_select_item)
 
-      showhide_dropdown:indicate_item(1)
+      mapview.dropdowns["dropdown_menu_showhide"]:indicate_item(1)
 
       -- Wait for buildhelp to come on
       while not solved do sleep(200) end
