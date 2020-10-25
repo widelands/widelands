@@ -1153,6 +1153,7 @@ void DefaultAI::late_initialization() {
 	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
 	last_road_dismantled_ = Time(0);
 	dead_ends_check_ = true;
+	last_attack_time_ = Time(0);
 }
 
 /**
@@ -2355,12 +2356,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	   !(player_statistics.get_player_power(pn) > player_statistics.get_old_player_power(pn));
 	inputs[24] = (highest_nonmil_prio_ > 18 + management_data.get_military_number_at(65) / 10);
 	inputs[25] = !(highest_nonmil_prio_ > 18 + management_data.get_military_number_at(65) / 10);
-	// TODO(Nordfriese): Passing a PlayerNumber to a function that expects
-	// a Time is a very bad idea, no idea what was intended here…
 	inputs[26] = (player_statistics.get_modified_player_power(pn) >
-	              player_statistics.get_visible_enemies_power(Time(pn)));
+	              player_statistics.get_visible_enemies_power(gametime));
 	inputs[27] = (player_statistics.get_modified_player_power(pn) <=
-	              player_statistics.get_visible_enemies_power(Time(pn)));
+	              player_statistics.get_visible_enemies_power(gametime));
 	inputs[28] =
 	   (player_statistics.get_player_power(pn) > player_statistics.get_enemies_average_power());
 	inputs[29] =
