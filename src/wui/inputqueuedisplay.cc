@@ -195,17 +195,48 @@ icons_(nr_icons_, nullptr) {
 	add_space(kButtonSize / 4);
 	add(&collapse_);
 
-	collapse_.sigclicked.connect([this]() { set_collapsed(!collapsed_); });
+	collapse_.sigclicked.connect([this]() {
+		const bool c = !collapsed_;
+		recurse([c](InputQueueDisplay& i) { i.set_collapsed(c); });
+	});
 
 	if (can_act_) {
-		b_decrease_desired_fill_.sigclicked.connect([this]() { clicked_desired_fill(-1); });
-		b_increase_desired_fill_.sigclicked.connect([this]() { clicked_desired_fill(1); });
-		b_decrease_real_fill_.sigclicked.connect([this]() { clicked_real_fill(-1); });
-		b_increase_real_fill_.sigclicked.connect([this]() { clicked_real_fill(1); });
+		b_decrease_desired_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_desired_fill(-1); });
+			} else {
+				clicked_desired_fill(-1);
+			}
+		});
+		b_increase_desired_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_desired_fill(1); });
+			} else {
+				clicked_desired_fill(1);
+			}
+		});
+		b_decrease_real_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_real_fill(-1); });
+			} else {
+				clicked_real_fill(-1);
+			}
+		});
+		b_increase_real_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_real_fill(1); });
+			} else {
+				clicked_real_fill(1);
+			}
+		});
 		priority_.changedto.connect([this](size_t i) {
 			const Widelands::WarePriority& p = index_to_priority(i);
 			slider_was_moved_ = &p;
-			set_priority(p);
+			if (SDL_GetModState() & KMOD_CTRL) {
+				recurse([&p](InputQueueDisplay& iqd) { iqd.set_priority(p); });
+			} else {
+				set_priority(p);
+			}
 		});
 	}
 
@@ -216,21 +247,16 @@ icons_(nr_icons_, nullptr) {
 	think();
 }
 
-void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority, const bool recursion_start) {
-	if (recursion_start && SDL_GetModState() & KMOD_CTRL) {
-		for (UI::Panel* p = get_parent()->get_first_child(); p; p = p->get_next_sibling()) {
-			if (upcast(InputQueueDisplay, i, p)) {
-				i->set_priority(priority, false);
-			}
+void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& functor) {
+	for (UI::Panel* p = get_parent()->get_first_child(); p; p = p->get_next_sibling()) {
+		if (upcast(InputQueueDisplay, i, p)) {
+			functor(*i);
 		}
-		return;
 	}
+}
 
-	if (!can_act_ || !has_priority_) {
-		return;
-	}
-
-	if (priority == (queue_ ? building_.get_priority(type_, index_) : get_setting()->priority)) {
+void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
+	if (!can_act_ || !has_priority_ || priority == (queue_ ? building_.get_priority(type_, index_) : get_setting()->priority)) {
 		return;
 	}
 
@@ -245,17 +271,8 @@ void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority, co
 	}
 }
 
-void InputQueueDisplay::clicked_desired_fill(const int8_t delta, const bool recursion_start) {
+void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 	assert(delta == 1 || delta == -1);
-
-	if (recursion_start && (SDL_GetModState() & KMOD_SHIFT)) {
-		for (UI::Panel* p = get_parent()->get_first_child(); p; p = p->get_next_sibling()) {
-			if (upcast(InputQueueDisplay, i, p)) {
-				i->clicked_desired_fill(delta, false);
-			}
-		}
-		return;
-	}
 
 	const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
 	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
@@ -279,17 +296,8 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta, const bool recu
 	}
 }
 
-void InputQueueDisplay::clicked_real_fill(int8_t delta, bool recursion_start) {
+void InputQueueDisplay::clicked_real_fill(const int8_t delta) {
 	assert(delta == 1 || delta == -1);
-
-	if (recursion_start && (SDL_GetModState() & KMOD_SHIFT)) {
-		for (UI::Panel* p = get_parent()->get_first_child(); p; p = p->get_next_sibling()) {
-			if (upcast(InputQueueDisplay, i, p)) {
-				i->clicked_real_fill(delta, false);
-			}
-		}
-		return;
-	}
 
 	if (!queue_ || !ibase_.omnipotent()) {
 		return;
@@ -309,17 +317,8 @@ void InputQueueDisplay::clicked_real_fill(int8_t delta, bool recursion_start) {
 	queue_->set_filled(new_fill);
 }
 
-void InputQueueDisplay::set_collapsed(const bool c, const bool recursion_start) {
+void InputQueueDisplay::set_collapsed(const bool c) {
 	assert(collapsed_ != c);
-	if (recursion_start) {
-		for (UI::Panel* p = get_parent()->get_first_child(); p; p = p->get_next_sibling()) {
-			if (upcast(InputQueueDisplay, i, p)) {
-				i->set_collapsed(c, false);
-			}
-		}
-		return;
-	}
-
 	collapsed_ = c;
 	priority_.set_visible(has_priority_ && !collapsed_);
 	spacer_.set_visible(!has_priority_ && !collapsed_);

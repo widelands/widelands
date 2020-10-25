@@ -68,10 +68,13 @@ private:
 
 	Widelands::ProductionsiteSettings::InputQueueSetting* get_setting() const;
 
-	void clicked_desired_fill(int8_t delta, bool recursion_start = true);
-	void clicked_real_fill(int8_t delta, bool recursion_start = true);
-	void set_priority(const Widelands::WarePriority&, bool recursion_start = true);
-	void set_collapsed(bool, bool recursion_start = true);
+	// Run a function on this InputQueueDisplay and all its siblings
+	void recurse(const std::function<void(InputQueueDisplay&)>&);
+
+	void clicked_desired_fill(int8_t delta);
+	void clicked_real_fill(int8_t delta);
+	void set_priority(const Widelands::WarePriority&);
+	void set_collapsed(bool);
 
 	const Image& max_fill_indicator_;
 
