@@ -18,7 +18,8 @@ jobs:
       with:
         fetch-depth: 1
     - name: Check
-      # To run a single check, call python ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* > ../clang-tidy.log
+      # To run a single check, call:
+      # python ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* > ../clang-tidy.log
 
       run: |
         export CC=/usr/bin/clang
