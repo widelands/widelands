@@ -80,7 +80,6 @@ protected:
 	void toggle_peaceful();
 	void toggle_custom_starting_positions();
 
-
 	void layout() override;
 
 	uint32_t standard_element_width_;
@@ -96,7 +95,6 @@ protected:
 	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
-
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;

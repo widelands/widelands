@@ -72,8 +72,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              UI::ButtonStyle::kFsMenuMenu),
      peaceful_(&map_box_, Vector2i::zero(), _("Peaceful mode")),
      custom_starting_positions_(&map_box_, Vector2i::zero(), _("Custom starting positions")),
-
-
      ok_(&map_box_,
          "ok",
          0,
@@ -103,11 +101,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      settings_(settings),
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false) {
-
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
-
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 
@@ -147,7 +143,6 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	map_box_.add_space(3 * padding_);
 	map_box_.add(&custom_starting_positions_);
 	map_box_.add_space(3 * padding_);
-
 
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kFullSize);
