@@ -218,13 +218,15 @@ public:
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
 		     r_sw(RoadSegment::kNone),
-		     owner(0),
 		     time_node_last_unseen(0),
 		     map_object_descr(nullptr),
+		     dismantlesite(),
+		     is_constructionsite(false),
 		     border(0),
 		     border_r(0),
 		     border_br(0),
-		     border_bl(0) {
+		     border_bl(0),
+		     owner(0) {
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
@@ -232,6 +234,12 @@ public:
 
 			time_triangle_last_surveyed[0] = Time();
 			time_triangle_last_surveyed[1] = Time();
+		}
+
+		~Field() {
+			if (is_constructionsite) {
+				delete constructionsite;
+			}
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -291,21 +299,6 @@ public:
 		RoadSegment r_e;
 		RoadSegment r_se;
 		RoadSegment r_sw;
-
-		/**
-		 * The owner of this node, as far as this player knows.
-		 * Only valid when this player has seen this node.
-		 */
-		PlayerNumber owner;
-
-		/**
-		 * The amount of resource at each of the triangles, as far as this player
-		 * knows.
-		 * The d component is only valid when time_last_surveyed[0] != Never().
-		 * The r component is only valid when time_last_surveyed[1] != Never().
-		 */
-		// TODO(unknown): Check this on access, at least in debug builds
-		Widelands::Field::ResourceAmounts resource_amounts;
 
 		/// Whether there is a road between this node and the node to the
 		/// east, as far as this player knows.
@@ -382,27 +375,48 @@ public:
 		 */
 		const MapObjectDescr* map_object_descr;
 
-		/* Information for constructionSite and DismantleSite animation.
+		/* Information for ConstructionSite and DismantleSite animation.
 		 * `constructionsite` is only valid if there is a constructionsite
-		 * on this node. `dismantlesite.progress` equals the value of
-		 * `get_built_per64k()` at the time the dismantlesite was last seen.
+		 * on this node. `dismantlesite` is only valid if there is a dismantlesite.
+		 *
+		 * `dismantlesite.progress` equals the value of `get_built_per64k()`
+		 * at the time the dismantlesite was last seen.
+		 *
+		 * `constructionsite` is allocated on demand because of its size.
+		 * Call `set_constructionsite(true)` before using `constructionsite`,
+		 * and call `set_constructionsite(false)` before using `dismantlesite`.
 		 */
-		union PartiallyFinishedBuildingDetails {
-			ConstructionsiteInformation constructionsite;
-			struct {
-				uint32_t progress;
-				const BuildingDescr* building;
-			} dismantlesite;
-			PartiallyFinishedBuildingDetails();
-			~PartiallyFinishedBuildingDetails() {
-			}
-		} partially_finished_building;
+		struct DismantlesiteInformation {
+			uint32_t progress;
+			const BuildingDescr* building;
+		};
+		union {
+			DismantlesiteInformation dismantlesite;
+			ConstructionsiteInformation* constructionsite;
+		};
+		bool is_constructionsite;
+		void set_constructionsite(bool);
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
 		bool border_r;
 		bool border_br;
 		bool border_bl;
+
+		/**
+		 * The owner of this node, as far as this player knows.
+		 * Only valid when this player has seen this node.
+		 */
+		PlayerNumber owner;
+
+		/**
+		 * The amount of resource at each of the triangles, as far as this player
+		 * knows.
+		 * The d component is only valid when time_last_surveyed[0] != Never().
+		 * The r component is only valid when time_last_surveyed[1] != Never().
+		 */
+		// TODO(unknown): Check this on access, at least in debug builds
+		Widelands::Field::ResourceAmounts resource_amounts;
 
 	private:
 		DISALLOW_COPY_AND_ASSIGN(Field);
