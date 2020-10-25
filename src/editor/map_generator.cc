@@ -1050,10 +1050,7 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 	assert(mapInfo.resource_amount <= Widelands::UniqueRandomMapInfo::raHigh);
 
 	mapIdsString_out = "";
-	int32_t nums[kMapIdDigits];
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		nums[ix] = 0;
-	}
+	int32_t nums[kMapIdDigits] = {0};
 
 	// Generate world name hash
 	uint16_t nameHash = generate_world_name_hash(mapInfo.world_name);
