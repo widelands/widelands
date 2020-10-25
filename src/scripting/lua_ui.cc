@@ -498,7 +498,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
 }
 
 /* RST
-   .. method:: highlight_item(index)
+   .. method:: indicate_item(index)
 
       :arg index: the index of the item to indicate, starting from ``1``
       :type index: :class:`integer`
