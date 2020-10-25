@@ -25,7 +25,7 @@
 #include "logic/player.h"
 #include "wui/interactive_base.h"
 
-constexpr int8_t kButtonSize = 24;
+constexpr int8_t kButtonSize = 25;
 
 // The slider indexes the available priorities as 0..4, so here are some conversion functions
 static size_t priority_to_index(const Widelands::WarePriority& priority) {
@@ -376,7 +376,16 @@ void InputQueueDisplay::think() {
 	collapse_.set_pic(g_image_cache->get(collapsed_ ? "images/ui_basic/scrollbar_right.png" : "images/ui_basic/scrollbar_left.png"));
 }
 
+static const RGBAColor kPriorityColors[] = {
+	RGBAColor(255, 0, 0, 255),
+	RGBAColor(255, 127, 0, 255),
+	RGBAColor(255, 255, 0, 255),
+	RGBAColor(127, 255, 0, 255),
+	RGBAColor(0, 255, 0, 255)
+};
+
 void InputQueueDisplay::draw_overlay(RenderTarget& r) {
+	// Draw max fill indicator
 	if (!show_only_) {
 		assert(nr_icons_);
 		const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
@@ -386,6 +395,15 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 				: (icons_[desired_fill - 1]->get_x() + icons_[desired_fill - 1]->get_w() + icons_[desired_fill]->get_x()) / 2;
 		const int ypos = hbox_.get_y() + icons_[0]->get_y() + (icons_[0]->get_h() - max_fill_indicator_.height()) / 2;
 		r.blit(Vector2i(xpos + hbox_.get_x() - max_fill_indicator_.width() / 2, ypos), &max_fill_indicator_);
+	}
+
+	// Draw priority indicator
+	if (collapsed_ && has_priority_) {
+		const size_t p = priority_to_index(queue_ ? building_.get_priority(type_, index_) : get_setting()->priority);
+		const int w = kButtonSize / 5;
+		const int x = hbox_.get_x() + collapse_.get_x() - w;
+		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
+		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * kButtonSize / 5, w, kButtonSize / 5), kPriorityColors[p]);
 	}
 
 	UI::Box::draw_overlay(r);
