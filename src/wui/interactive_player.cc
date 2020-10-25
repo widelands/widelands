@@ -602,6 +602,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
                                       const Widelands::Message& message) {
+	// Fix a race condition that happens only in the testsuite
+	MutexLock m(MutexLock::ID::kObjects);
+
 	message_menu_.create();
 	dynamic_cast<GameMessageMenu&>(*message_menu_.window).show_new_message(id, message);
 }
