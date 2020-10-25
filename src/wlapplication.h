@@ -39,6 +39,7 @@
 #include "base/vector.h"
 
 class FullscreenMenuMain;
+struct SinglePlayerGameSettingsProvider;
 
 namespace Widelands {
 class Game;
@@ -182,7 +183,11 @@ struct WLApplication {
 	void mainmenu_multiplayer(const FullscreenMenuMain&, bool internet);
 	void mainmenu_editor();
 
-	bool new_game();
+	bool new_random_game(FullscreenMenuMain&);
+	bool new_game(Widelands::Game&,
+	              SinglePlayerGameSettingsProvider&,
+	              bool preconfigured,
+	              bool* canceled = nullptr);
 	bool load_game(std::string filename = "");
 	bool campaign_game();
 	void replay();

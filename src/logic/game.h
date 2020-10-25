@@ -199,6 +199,9 @@ public:
 
 	bool acquire_training_wheel_lock(const std::string& objective);
 	void mark_training_wheel_as_solved(const std::string& objective);
+	bool training_wheels_wanted() const {
+		return training_wheels_wanted_;
+	}
 
 	void postload() override;
 

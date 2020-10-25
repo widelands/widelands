@@ -62,12 +62,14 @@ wl_library(ui_fsmenu_main
     graphic_text_layout
     logic
     logic_filesystem_constants
+    map_io_map_loader
     network
     ui_basic
     ui_fsmenu_base
     widelands_options
     wui
     wui_common_gamedetails
+    wui_common_mapdetails
   USES_SDL2
 )
 
