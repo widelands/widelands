@@ -271,10 +271,10 @@ function territory_game_over(fields, players, wc_descname, wc_version)
       for i=1,#territory_points.points do
          if territory_points.points[i][1] == team_str:format(pl.team) or territory_points.points[i][1] == pl.name then
             if territory_points.points[i][2] >= territory_points.points[1][2] then
-               pl:send_message(won_game_over.title, wonmsg .. territory_status(fields, "had"))
+               pl:send_to_inbox(won_game_over.title, wonmsg .. territory_status(fields, "had"))
                wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
             else
-               pl:send_message(lost_game_over.title, lostmsg .. territory_status(fields, "had"))
+               pl:send_to_inbox(lost_game_over.title, lostmsg .. territory_status(fields, "had"))
                wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
             end
          end

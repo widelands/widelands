@@ -32,7 +32,6 @@ constexpr int kBuildGridCellWidth = 55;
 constexpr int kMargin = 5;
 constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
-constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 

@@ -82,7 +82,7 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int send_message(lua_State* L);
+	int send_to_inbox(lua_State* L);
 	int message_box(lua_State* L);
 	int sees_field(lua_State* L);
 	int seen_field(lua_State* L);
@@ -156,19 +156,19 @@ public:
 	Widelands::Objective& get(lua_State*, Widelands::Game&);
 };
 
-class LuaMessage : public LuaGameModuleClass {
+class LuaInboxMessage : public LuaGameModuleClass {
 	Widelands::PlayerNumber player_number_;
 	Widelands::MessageId message_id_;
 
 public:
-	LUNA_CLASS_HEAD(LuaMessage);
-	~LuaMessage() override {
+	LUNA_CLASS_HEAD(LuaInboxMessage);
+	~LuaInboxMessage() override {
 	}
 
-	explicit LuaMessage(uint8_t, Widelands::MessageId);
-	LuaMessage() : player_number_(0), message_id_(0) {
+	explicit LuaInboxMessage(uint8_t, Widelands::MessageId);
+	LuaInboxMessage() : player_number_(0), message_id_(0) {
 	}
-	explicit LuaMessage(lua_State* L) {
+	explicit LuaInboxMessage(lua_State* L) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
