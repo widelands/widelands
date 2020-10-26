@@ -36,7 +36,8 @@ struct GameSettingsProvider;
  */
 class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuMapSelect(FullscreenMenuMain&, GameSettingsProvider*,
+	FullscreenMenuMapSelect(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
 	                        GameController*,
 	                        Widelands::EditorGameBase& egbase);
 

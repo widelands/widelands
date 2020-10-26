@@ -32,7 +32,8 @@ class Game;
 
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(FullscreenMenuMain&, GameSettingsProvider*,
+	FullscreenMenuLaunchSPG(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
 	                        Widelands::EditorGameBase& egbase,
 	                        bool preconfigured,
 	                        GameController* = nullptr);

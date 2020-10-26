@@ -36,7 +36,8 @@
 
 using Widelands::WidelandsMapLoader;
 
-FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
+FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
+                                                 GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Map")),
