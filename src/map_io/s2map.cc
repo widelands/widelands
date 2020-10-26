@@ -352,7 +352,14 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 		break;
 	}
 
-	return descriptions_->load_terrain(table_.at(world)[c]);
+	const std::string& terrain_name = table_.at(world)[c];
+	try {
+		return descriptions_->load_terrain(terrain_name);
+	} catch (const WException&) {
+		throw wexception("world does not define terrain type %s, you cannot "
+						 "play this settlers map",
+						 terrain_name.c_str());
+	}
 }
 
 }  // namespace
@@ -625,10 +632,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			if (!bobname.empty()) {
-				const Widelands::DescriptionIndex idx = descriptions->critter_index(bobname);
-				if (idx == Widelands::INVALID_INDEX) {
-					throw wexception("Missing bob type %s", bobname.c_str());
-				}
+				const Widelands::DescriptionIndex idx = descriptions->load_critter(bobname);
 				egbase.create_critter(Widelands::Coords(x, y), idx);
 			}
 		}
@@ -720,10 +724,11 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			Widelands::DescriptionIndex nres = 0;
 			if (*res) {
-				nres = descriptions->resource_index(res);
-				if (nres == Widelands::INVALID_INDEX) {
-					throw wexception("world does not define resource type %s, you can not "
-					                 "play settler maps here",
+				try {
+					nres = descriptions->load_resource(res);
+				} catch (const WException&) {
+					throw wexception("world does not define resource type %s, you cannot "
+									 "play this settlers map",
 					                 res);
 				}
 			}
@@ -768,8 +773,14 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	auto place_immovable = [&egbase, descriptions](
 	                          const Widelands::Coords& location,
 	                          const std::string& immovable_name) {
-		const Widelands::DescriptionIndex idx = descriptions->load_immovable(immovable_name);
-		egbase.create_immovable(location, idx, nullptr /* owner */);
+		try {
+			const Widelands::DescriptionIndex idx = descriptions->load_immovable(immovable_name);
+			egbase.create_immovable(location, idx, nullptr /* owner */);
+		} catch (const WException&) {
+			throw wexception("world does not define immovable type %s, you cannot "
+							 "play this settlers map",
+							 immovable_name.c_str());
+		}
 	};
 
 	uint8_t c;

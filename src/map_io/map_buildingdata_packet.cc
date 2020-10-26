@@ -80,6 +80,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 	} catch (...) {
 		return;
 	}
+// NCOCOM Fatal exception: buildingdata: building 1: warehouse: Unknown ware 'clay'
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
