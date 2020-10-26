@@ -356,28 +356,42 @@ World
    :ref:`toc_lua_world`.
 */
 
-const char LuaWorld::className[] = "World";
-const MethodType<LuaWorld> LuaWorld::Methods[] = {
-   METHOD(LuaWorld, new_critter_type),
-   METHOD(LuaWorld, new_immovable_type),
-   METHOD(LuaWorld, new_resource_type),
-   METHOD(LuaWorld, new_terrain_type),
+const char LuaDescriptions::className[] = "Descriptions";
+const MethodType<LuaDescriptions> LuaDescriptions::Methods[] = {
+   METHOD(LuaDescriptions, new_critter_type),
+   METHOD(LuaDescriptions, new_immovable_type),
+   METHOD(LuaDescriptions, new_resource_type),
+   METHOD(LuaDescriptions, new_terrain_type),
+   METHOD(LuaDescriptions, new_carrier_type),
+   METHOD(LuaDescriptions, new_ferry_type),
+   METHOD(LuaDescriptions, new_constructionsite_type),
+   METHOD(LuaDescriptions, new_dismantlesite_type),
+   METHOD(LuaDescriptions, new_market_type),
+   METHOD(LuaDescriptions, new_militarysite_type),
+   METHOD(LuaDescriptions, new_productionsite_type),
+   METHOD(LuaDescriptions, new_ship_type),
+   METHOD(LuaDescriptions, new_soldier_type),
+   METHOD(LuaDescriptions, new_trainingsite_type),
+   METHOD(LuaDescriptions, new_tribe),
+   METHOD(LuaDescriptions, new_ware_type),
+   METHOD(LuaDescriptions, new_warehouse_type),
+   METHOD(LuaDescriptions, new_worker_type),
    {nullptr, nullptr},
 };
-const PropertyType<LuaWorld> LuaWorld::Properties[] = {
-   PROP_RO(LuaWorld, immovable_descriptions),
-   PROP_RO(LuaWorld, terrain_descriptions),
+const PropertyType<LuaDescriptions> LuaDescriptions::Properties[] = {
+   PROP_RO(LuaDescriptions, immovable_descriptions),
+   PROP_RO(LuaDescriptions, terrain_descriptions),
    {nullptr, nullptr, nullptr},
 };
 
-LuaWorld::LuaWorld(lua_State* /* L */) {
+LuaDescriptions::LuaDescriptions(lua_State* /* L */) {
 	// Nothing to do.
 }
 
-void LuaWorld::__persist(lua_State*) {
+void LuaDescriptions::__persist(lua_State*) {
 	// Nothing to be done.
 }
-void LuaWorld::__unpersist(lua_State*) {
+void LuaDescriptions::__unpersist(lua_State*) {
 	// Nothing to be done.
 }
 
@@ -400,7 +414,7 @@ void LuaWorld::__unpersist(lua_State*) {
 
       (RO) a list of :class:`LuaImmovableDescription` objects
 */
-int LuaWorld::get_immovable_descriptions(lua_State* L) {
+int LuaDescriptions::get_immovable_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
@@ -420,7 +434,7 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 
       (RO) a list of :class:`LuaTerrainDescription` objects
 */
-int LuaWorld::get_terrain_descriptions(lua_State* L) {
+int LuaDescriptions::get_terrain_descriptions(lua_State* L) {
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
@@ -435,7 +449,7 @@ int LuaWorld::get_terrain_descriptions(lua_State* L) {
 
 // Documented in data/world/resources/init.lua.
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_resource_type(lua_State* L) {
+int LuaDescriptions::new_resource_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -451,9 +465,9 @@ int LuaWorld::new_resource_type(lua_State* L) {
 	return 0;
 }
 
-// Documented in data/world/terrains/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_terrain_type(lua_State* L) {
+// Documented in data/world/terrains/desert/beach/init.lua.
+// See also the World section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_terrain_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -469,8 +483,8 @@ int LuaWorld::new_terrain_type(lua_State* L) {
 }
 
 // Documented in data/world/critters/badger/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_critter_type(lua_State* L) {
+// See also the World section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_critter_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -484,9 +498,10 @@ int LuaWorld::new_critter_type(lua_State* L) {
 	return 0;
 }
 
-// Documented in data/world/immovables/bush1/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaWorld::new_immovable_type(lua_State* L) {
+// Documented in data/world/immovables/artifacts/artifact00/init.lua and
+// data/tribes/immovables/ashes/init.lua
+// See also the World and Tribes sections in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_immovable_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -501,79 +516,9 @@ int LuaWorld::new_immovable_type(lua_State* L) {
 	return 0;
 }
 
-/*
- ==========================================================
- C METHODS
- ==========================================================
- */
-
-/* RST
-Tribes
-------
-
-.. class:: Tribes
-
-   This offers access to the objects available for the tribes and allows to add
-   new objects. See :ref:`lua_tribes` for detailed documentation.
-*/
-
-const char LuaTribes::className[] = "Tribes";
-const MethodType<LuaTribes> LuaTribes::Methods[] = {
-   METHOD(LuaTribes, new_carrier_type),
-   METHOD(LuaTribes, new_ferry_type),
-   METHOD(LuaTribes, new_constructionsite_type),
-   METHOD(LuaTribes, new_dismantlesite_type),
-   METHOD(LuaTribes, new_immovable_type),
-   METHOD(LuaTribes, new_market_type),
-   METHOD(LuaTribes, new_militarysite_type),
-   METHOD(LuaTribes, new_productionsite_type),
-   METHOD(LuaTribes, new_ship_type),
-   METHOD(LuaTribes, new_soldier_type),
-   METHOD(LuaTribes, new_trainingsite_type),
-   METHOD(LuaTribes, new_tribe),
-   METHOD(LuaTribes, new_ware_type),
-   METHOD(LuaTribes, new_warehouse_type),
-   METHOD(LuaTribes, new_worker_type),
-   {nullptr, nullptr},
-};
-const PropertyType<LuaTribes> LuaTribes::Properties[] = {
-   {nullptr, nullptr, nullptr},
-};
-
-LuaTribes::LuaTribes(lua_State* /* L */) {
-	// Nothing to do.
-}
-
-void LuaTribes::__persist(lua_State*) {
-	// Nothing to be done.
-}
-
-void LuaTribes::__unpersist(lua_State*) {
-	// Nothing to be done.
-}
-
-/*
- ==========================================================
- PROPERTIES
- ==========================================================
- */
-
-/*
- ==========================================================
- LUA METHODS
- ==========================================================
- */
-
-/* RST
-   .. method:: new_constructionsite_type{table}
-
-      Adds a new constructionsite building type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_buildings_constructionsites` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_constructionsite_type(lua_State* L) {
+// Documented in data/tribes/buildings/partially_finished/constructionsite/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_constructionsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -588,16 +533,9 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_dismantlesite_type{table}
-
-      Adds a new disnamtlesite building type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_buildings_dismantlesites` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_dismantlesite_type(lua_State* L) {
+// Documented in data/tribes/buildings/partially_finished/dismantlesite/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_dismantlesite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -612,16 +550,9 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_militarysite_type{table}
-
-      Adds a new militarysite building type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_buildings_militarysites` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_militarysite_type(lua_State* L) {
+// Documented in data/tribes/buildings/militarysites/atlanteans/castle/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_militarysite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -636,16 +567,9 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_productionsite_type{table}
-
-      Adds a new productionsite building type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_buildings_productionsites` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_productionsite_type(lua_State* L) {
+// Documented in data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_productionsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -660,16 +584,9 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_trainingsite_type{table}
-
-      Adds a new trainingsite building type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_buildings_trainingsites` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_trainingsite_type(lua_State* L) {
+// Documented in data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_trainingsite_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -684,16 +601,9 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_warehouse_type{table}
-
-      Adds a new warehouse building type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_buildings_warehouses` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_warehouse_type(lua_State* L) {
+// Documented in data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_warehouse_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -708,17 +618,8 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 	return 0;
 }
 
-// TODO(GunChleoc): add RST marker
-/*
-   .. method:: new_market_type{table}
-
-      Adds a new market building type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_buildings_markets` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_market_type(lua_State* L) {
+// Only used in the test suite for now
+int LuaDescriptions::new_market_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -733,40 +634,9 @@ int LuaTribes::new_market_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_immovable_type{table}
-
-      Adds a new immovable type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_immovables` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_immovable_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::IMMOVABLE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-/* RST
-   .. method:: new_ship_type{table}
-
-      Adds a new ship type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_ships` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_ship_type(lua_State* L) {
+// Documented in data/tribes/ships/atlanteans/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_ship_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -781,16 +651,9 @@ int LuaTribes::new_ship_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_ware_type{table}
-
-      Adds a new ware type. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_wares` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_ware_type(lua_State* L) {
+// Documented in data/tribes/wares/armor/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_ware_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -805,15 +668,9 @@ int LuaTribes::new_ware_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_carrier_type{table}
-
-      Adds a new carrier worker type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
-
-      :returns: :const:`nil`
-*/
-int LuaTribes::new_carrier_type(lua_State* L) {
+// Documented in data/tribes/workers/atlanteans/carrier/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_carrier_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -828,15 +685,9 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_ferry_type{table}
-
-      Adds a new ferry worker type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
-
-      :returns: :const:`nil`
-*/
-int LuaTribes::new_ferry_type(lua_State* L) {
+// Documented in data/tribes/workers/atlanteans/ferry/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_ferry_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -851,15 +702,9 @@ int LuaTribes::new_ferry_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_soldier_type{table}
-
-      Adds a new soldier worker type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
-
-      :returns: :const:`nil`
-*/
-int LuaTribes::new_soldier_type(lua_State* L) {
+// Documented in data/tribes/workers/atlanteans/soldier/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_soldier_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -874,15 +719,9 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_worker_type{table}
-
-      Adds a new worker type. Takes a single argument, a table with
-      the descriptions. See the files in tribes/ for usage examples.
-
-      :returns: :const:`nil`
-*/
-int LuaTribes::new_worker_type(lua_State* L) {
+// Documented in data/tribes/workers/atlanteans/armorsmith/init.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_worker_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -897,16 +736,9 @@ int LuaTribes::new_worker_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-   .. method:: new_tribe{table}
-
-      Adds a new tribe. Takes a single argument, a table with
-      the descriptions. See :ref:`lua_tribes_tribes_units` for detailed
-      documentation.
-
-      :returns: :const:`0`
-*/
-int LuaTribes::new_tribe(lua_State* L) {
+// Documented in data/tribes/initialization/atlanteans/units.lua.
+// See also the Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_tribe(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
@@ -942,7 +774,6 @@ void luaopen_wlroot(lua_State* L, bool in_editor) {
 		add_parent<LuaGame, LuaBases::LuaEditorGameBase>(L);
 		lua_pop(L, 1);  // Pop the meta table
 	}
-	register_class<LuaWorld>(L, "", false);
-	register_class<LuaTribes>(L, "", false);
+	register_class<LuaDescriptions>(L, "", false);
 }
 }  // namespace LuaRoot

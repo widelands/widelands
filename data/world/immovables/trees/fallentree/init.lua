@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "fallentree",
    descname = _ "Fallen Tree",
    animation_directory = path.dirname(__file__),

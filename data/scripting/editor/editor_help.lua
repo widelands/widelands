@@ -7,10 +7,10 @@ function compare_by_title(a, b)
   return a["title"] < b["title"]
 end
 
--- Returns help entries for all the terrains in the world
+-- Returns help entries for all the terrains
 function get_terrains()
    local result = {}
-   for i, terrain in ipairs(wl.World().terrain_descriptions) do
+   for i, terrain in ipairs(wl.Descriptions().terrain_descriptions) do
       result[i] = {
          name = terrain.name,
          title = terrain.descname,
@@ -23,11 +23,11 @@ function get_terrains()
    return result
 end
 
--- Returns help entries for all the trees in the world
+-- Returns help entries for all the trees
 function get_trees()
    local result = {}
    local counter = 1
-   for i, immovable in ipairs(wl.World().immovable_descriptions) do
+   for i, immovable in ipairs(wl.Descriptions().immovable_descriptions) do
       if (immovable:has_attribute("tree")) then
          result[counter] = {
             name = immovable.name,

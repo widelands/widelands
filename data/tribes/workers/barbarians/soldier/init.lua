@@ -76,7 +76,7 @@ all_levels_bar = {
    max_evade = 2,
 }
 
-tribes:new_soldier_type {
+descriptions:new_soldier_type {
    name = "barbarians_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("barbarians_worker", "Soldier"),
