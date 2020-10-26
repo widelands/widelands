@@ -24,21 +24,21 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
+        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Test
       run: |
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
         pushd ../cmake/codecheck
         ./run_tests.py
         popd
     - name: Check
       run: |
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
         TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
     - name: Report
       run: |
@@ -75,7 +75,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
+        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -115,7 +115,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
