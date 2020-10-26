@@ -42,10 +42,12 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 }  // namespace
 
 MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
+                                           UI::WindowStyle s,
                                            UI::UniqueWindow::Registry& registry,
                                            const uint32_t w,
                                            const uint32_t h)
-   : UI::UniqueWindow(&parent, "random_map_menu", &registry, 400, 500, _("New Random Map")),
+   : UI::UniqueWindow(&parent, s, "random_map_menu", &registry, 400, 500, _("New Random Map")),
+     style_(s),
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
@@ -152,7 +154,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                 mountains_label_.get_h(),
                 (boost::format(_("%i %%")) % mountainsval_).str(),
                 UI::Align::kCenter),
-     island_mode_(&box_, Vector2i::zero(), _("Island mode")),
+     island_mode_(&box_, UI::PanelStyle::kWui, Vector2i::zero(), _("Island mode")),
      // Geeky stuff
      map_number_and_id_hbox_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      map_number_and_id_vbox_1_(&map_number_and_id_hbox_, 0, 0, UI::Box::Vertical, 0, 0, margin_),
@@ -504,7 +506,7 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 		egbase.remove_loader_ui();
 
 		UI::WLMessageBox mbox(
-		   eia,
+		   eia, style_,
 		   /** TRANSLATORS: Window title. This is shown after a random map has been created in the
 		     editor.*/
 		   _("Random Map"),

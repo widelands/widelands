@@ -27,6 +27,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
                                FileType filetype,
                                UI::PanelStyle style,
+                               UI::WindowStyle ws,
                                bool localize_autosave)
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
@@ -53,24 +54,24 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	switch (filetype_) {
 	case FileType::kReplay:
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new ReplayDeleter(parent_));
+		savegame_deleter_.reset(new ReplayDeleter(parent_, ws));
 		savegame_loader_.reset(new ReplayLoader(g));
 		break;
 	case FileType::kGameSinglePlayer:
 		table_ = new SavegameTableSinglePlayer(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new SavegameDeleter(parent_));
+		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
 		savegame_loader_.reset((new SinglePlayerLoader(g)));
 		break;
 	case FileType::kGameMultiPlayer:
 		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new SavegameDeleter(parent_));
+		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
 		savegame_loader_.reset(new MultiPlayerLoader(g));
 		break;
 	case FileType::kShowAll:
 		table_ = new SavegameTableMultiplayer(
 		   table_box_, style, localize_autosave);  // wrong? showAll = save window -> "accidental"
 		                                           // same table as multiplayer
-		savegame_deleter_.reset(new SavegameDeleter(parent_));
+		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;
 	}

@@ -36,23 +36,14 @@
 
 using Widelands::WidelandsMapLoader;
 
-FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const settings,
+FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
+                                                 GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
-   : FullscreenMenuLoadMapOrGame(),
+   : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Map")),
      checkbox_space_(20),
      // Less padding for big fonts; space is tight.
      checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
-
-     // Main title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Choose a map"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
@@ -89,8 +80,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
-	cb_dont_localize_mapnames_ =
-	   new UI::Checkbox(hbox, Vector2i::zero(), _("Show original map names"));
+	cb_dont_localize_mapnames_ = new UI::Checkbox(
+	   hbox, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show original map names"));
 	cb_dont_localize_mapnames_->set_state(false);
 
 	hbox->add(show_all_maps_, UI::Box::Resizing::kFullSize);
@@ -172,12 +163,10 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 }
 
 void FullscreenMenuMapSelect::layout() {
-	title_.set_size(get_w(), title_.get_h());
 	FullscreenMenuLoadMapOrGame::layout();
 	checkboxes_y_ = tabley_ - 3 * (team_tags_dropdown_->get_h() + checkbox_padding_) - 2 * padding_;
-	title_.set_pos(Vector2i(0, checkboxes_y_ / 3));
 	checkboxes_.set_pos(Vector2i(tablex_, checkboxes_y_));
-	checkboxes_.set_size(get_w() - 2 * tablex_, tabley_ - checkboxes_y_);
+	checkboxes_.set_size(get_inner_w() - 2 * tablex_, tabley_ - checkboxes_y_);
 	table_.set_size(tablew_, tableh_);
 	table_.set_pos(Vector2i(tablex_, tabley_));
 	map_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
@@ -232,9 +221,9 @@ void FullscreenMenuMapSelect::clicked_ok() {
 		return;
 	} else {
 		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
+			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
 		} else {
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+			end_modal<MenuTarget>(MenuTarget::kNormalGame);
 		}
 	}
 }
@@ -406,7 +395,7 @@ UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
                                                         const std::string& displ_name) {
 	tags_ordered_.push_back(tag);
 
-	UI::Checkbox* cb = new UI::Checkbox(box, Vector2i::zero(), displ_name);
+	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), displ_name);
 
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);

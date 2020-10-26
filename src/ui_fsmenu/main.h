@@ -25,13 +25,14 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/menu_target.h"
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  */
-class FullscreenMenuMain : public FullscreenMenuBase {
+class FullscreenMenuMain : public UI::Panel {
 public:
 	explicit FullscreenMenuMain(bool first_ever_init);
 
@@ -63,9 +64,10 @@ public:
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
 
-protected:
-	void clicked_ok() override {
-	}
+	int16_t calc_desired_window_x(UI::Window::WindowLayoutID);
+	int16_t calc_desired_window_y(UI::Window::WindowLayoutID);
+	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
+	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
 
 private:
 	void layout() override;
@@ -76,10 +78,10 @@ private:
 
 	UI::Box vbox1_, vbox2_;
 
-	UI::Dropdown<FullscreenMenuBase::MenuTarget> singleplayer_;
-	UI::Dropdown<FullscreenMenuBase::MenuTarget> multiplayer_;
+	UI::Dropdown<MenuTarget> singleplayer_;
+	UI::Dropdown<MenuTarget> multiplayer_;
 	UI::Button replay_;
-	UI::Dropdown<FullscreenMenuBase::MenuTarget> editor_;
+	UI::Dropdown<MenuTarget> editor_;
 	UI::Button addons_;
 	UI::Button options_;
 	UI::Button about_;
@@ -109,9 +111,9 @@ private:
 	std::string password_;
 	bool auto_log_;
 	bool register_;
-};
 
-int16_t calc_desired_window_width(const FullscreenMenuMain& parent);
-int16_t calc_desired_window_height(const FullscreenMenuMain& parent);
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
+};
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

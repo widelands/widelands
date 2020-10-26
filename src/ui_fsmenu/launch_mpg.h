@@ -38,7 +38,8 @@ struct ChatProvider;
  */
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchMPG(GameSettingsProvider*,
+	FullscreenMenuLaunchMPG(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
 	                        GameController*,
 	                        ChatProvider&,
 	                        Widelands::EditorGameBase& egbase);

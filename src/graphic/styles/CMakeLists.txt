@@ -10,6 +10,7 @@ wl_library(graphic_styles
     statistics_plot_style.h
     table_style.h
     ware_info_style.h
+    window_style.h
   DEPENDS
     base_exceptions
     graphic_color

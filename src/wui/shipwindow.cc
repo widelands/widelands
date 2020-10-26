@@ -51,7 +51,7 @@ constexpr int kPadding = 5;
 }  // namespace
 
 ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelands::Ship* ship)
-   : UniqueWindow(&ib, "shipwindow", &reg, 0, 0, ship->get_shipname()),
+   : UniqueWindow(&ib, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
      ibase_(ib),
      ship_(ship),
      vbox_(this, 0, 0, UI::Box::Vertical),
@@ -205,7 +205,7 @@ void ShipWindow::no_port_error_message() {
 	}
 	if (ibase_.can_act(ship->owner().player_number())) {
 		UI::WLMessageBox messagebox(
-		   get_parent(),
+		   get_parent(), UI::WindowStyle::kWui,
 		   /** TRANSLATORS: Window label when an expedition can't be canceled */
 		   _("Cancel Expedition"),
 		   _("This expedition can’t be canceled, because the "

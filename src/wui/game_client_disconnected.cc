@@ -39,6 +39,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                                                UI::UniqueWindow::Registry& registry,
                                                GameHost* host)
    : UI::UniqueWindow(gb,
+                      UI::WindowStyle::kWui,
                       "client_disconnected",
                       &registry,
                       2 * margin + width,
