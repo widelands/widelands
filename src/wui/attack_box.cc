@@ -24,6 +24,7 @@
 #include <SDL_mouse.h>
 
 #include "base/macros.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 
@@ -81,7 +82,7 @@ UI::Textarea& AttackBox::add_text(UI::Box& parent,
                                   UI::Align alignment,
                                   const UI::FontStyle style) {
 	UI::Textarea& result =
-	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_style_manager->font_style(style));
+	   *new UI::Textarea(&parent, style, str.c_str(), UI::Align::kLeft);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
@@ -225,7 +226,7 @@ void AttackBox::init() {
 	boost::format tooltip_format("<p>%s%s%s</p>");
 	{
 		UI::Textarea& txt =
-		   add_text(mainbox, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kLabel);
+		   add_text(mainbox, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
@@ -242,7 +243,7 @@ void AttackBox::init() {
 
 	{
 		UI::Textarea& txt =
-		   add_text(mainbox, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kLabel);
+		   add_text(mainbox, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %

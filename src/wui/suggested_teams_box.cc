@@ -44,7 +44,7 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
      indent_(indent),
      label_height_(g_image_cache->get("images/players/player_position_menu.png")->height() +
                    padding),
-     suggested_teams_box_label_(new UI::Textarea(this)),
+     suggested_teams_box_label_(new UI::Textarea(this, UI::FontStyle::kWuiLabel)),
      lineup_box_(nullptr) {
 	add(suggested_teams_box_label_);
 }
@@ -101,7 +101,7 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 
 				if (!is_first) {
 					lineup_box_->add_space(padding_);
-					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align::kCenter);
+					vs_label = new UI::Textarea(lineup_box_, UI::FontStyle::kWuiLabel, "x", UI::Align::kCenter);
 					lineup_box_->add(vs_label);
 					vs_label->set_visible(true);
 					vs_labels_.push_back(vs_label);

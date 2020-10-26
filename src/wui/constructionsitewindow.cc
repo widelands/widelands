@@ -189,7 +189,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   g_image_cache->get(pic_increase_capacity),
 				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 				cs_soldier_capacity_display_ =
-				   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+				   new UI::Textarea(&soldier_capacity_box, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
 				cs_soldier_capacity_decrease_->set_repeating(true);
 				cs_soldier_capacity_increase_->set_repeating(true);
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
@@ -249,7 +249,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   g_image_cache->get(pic_increase_capacity),
 			   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 			cs_soldier_capacity_display_ =
-			   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+			   new UI::Textarea(&soldier_capacity_box, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
 			cs_soldier_capacity_decrease_->set_repeating(true);
 			cs_soldier_capacity_increase_->set_repeating(true);
 			cs_soldier_capacity_decrease_->set_enabled(can_act);

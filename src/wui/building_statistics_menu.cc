@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -59,14 +60,14 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      hbox_construction_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      hbox_unproductive_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
 
-     label_name_(&main_box_, _("(no building selected)"), UI::Align::kCenter),
-     label_owned_(&hbox_owned_, _("Owned:"), UI::Align::kLeft),
-     label_construction_(&hbox_construction_, _("Under construction:"), UI::Align::kLeft),
-     label_unproductive_(&hbox_unproductive_, "" /* text will be set later */, UI::Align::kLeft),
-     label_nr_owned_(&hbox_owned_, "", UI::Align::kRight),
-     label_nr_construction_(&hbox_construction_, "", UI::Align::kRight),
-     label_nr_unproductive_(&hbox_unproductive_, "", UI::Align::kRight),
-     label_threshold_(&main_box_, _("Low productivity threshold:"), UI::Align::kLeft),
+     label_name_(&main_box_, UI::FontStyle::kWuiLabel, _("(no building selected)"), UI::Align::kCenter),
+     label_owned_(&hbox_owned_, UI::FontStyle::kWuiLabel, _("Owned:"), UI::Align::kLeft),
+     label_construction_(&hbox_construction_, UI::FontStyle::kWuiLabel, _("Under construction:"), UI::Align::kLeft),
+     label_unproductive_(&hbox_unproductive_, UI::FontStyle::kWuiLabel, "" /* text will be set later */, UI::Align::kLeft),
+     label_nr_owned_(&hbox_owned_, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
+     label_nr_construction_(&hbox_construction_, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
+     label_nr_unproductive_(&hbox_unproductive_, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
+     label_threshold_(&main_box_, UI::FontStyle::kWuiLabel, _("Low productivity threshold:"), UI::Align::kLeft),
 
      b_prev_owned_(&hbox_owned_,
                    "previous_owned",
@@ -419,14 +420,14 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
 	button_box->add(building_buttons_[id]);
 
 	owned_labels_[id] =
-	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter,
-	                    style_.building_statistics_button_font());
+	   new UI::Textarea(button_box, UI::FontStyle::kWuiLabel, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	owned_labels_[id]->set_style(style_.building_statistics_button_font());
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
-	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter,
-	                    style_.building_statistics_button_font());
+	   new UI::Textarea(button_box, UI::FontStyle::kWuiLabel, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	productivity_labels_[id]->set_style(style_.building_statistics_button_font());
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 

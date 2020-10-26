@@ -25,6 +25,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
+#include "graphic/style_manager.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/attack_target.h"

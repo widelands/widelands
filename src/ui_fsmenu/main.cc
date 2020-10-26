@@ -28,6 +28,7 @@
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -35,8 +36,8 @@
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/login_box.h"
 #include "wlapplication_options.h"
-#include "wui/login_box.h"
 #include "wui/mapdata.h"
 #include "wui/savegameloader.h"
 
@@ -127,21 +128,21 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
      about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      version_(this,
+              UI::FontStyle::kFsMenuInfoPanelParagraph,
               0,
               0,
               0,
               0,
               "",
-              UI::Align::kCenter,
-              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+              UI::Align::kCenter),
      copyright_(this,
+                UI::FontStyle::kFsMenuInfoPanelParagraph,
                 0,
                 0,
                 0,
                 0,
                 "",
-                UI::Align::kCenter,
-                g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+                UI::Align::kCenter),
      splashscreen_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/splash.jpg")),
      title_image_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/logo.png")),
      init_time_(kNoSplash),

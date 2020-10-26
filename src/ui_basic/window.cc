@@ -84,6 +84,7 @@ Window::Window(Panel* const parent,
                 w + kVerticalBorderThickness * 2,
                 kTopBorderThickness + h + kBottomBorderThickness),
      style_(g_style_manager->window_style(s)),
+     title_style_(g_style_manager->font_style(s == WindowStyle::kWui ? FontStyle::kWuiWindowTitle : FontStyle::kFsMenuWindowTitle)),
      is_minimal_(false),
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
      dragging_(false),
@@ -360,7 +361,7 @@ void Window::draw_border(RenderTarget& dst) {
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
 		std::shared_ptr<const UI::RenderedText> text = autofit_text(
-		   richtext_escape(title_), g_style_manager->font_style(UI::FontStyle::kWuiWindowTitle),
+		   richtext_escape(title_), title_style_,
 		   get_inner_w() - kTopBorderThickness);
 
 		Vector2i pos(

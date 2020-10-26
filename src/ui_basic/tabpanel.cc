@@ -50,6 +50,7 @@ constexpr uint32_t kNotFound = std::numeric_limits<uint32_t>::max();
 Tab::Tab(TabPanel* const tab_parent,
          size_t const tab_id,
          int32_t x,
+         FontStyle style,
          const std::string& name,
          const std::string& init_title,
          const Image* init_pic,
@@ -63,7 +64,7 @@ Tab::Tab(TabPanel* const tab_parent,
      tooltip(tooltip_text),
      panel(contents) {
 	if (!init_title.empty()) {
-		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, UI::FontStyle::kLabel));
+		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, style));
 		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
 		         kTabPanelButtonHeight);
 	}
@@ -270,7 +271,7 @@ uint32_t TabPanel::add_tab(const std::string& name,
 
 	size_t id = tabs_.size();
 	int32_t x = id > 0 ? tabs_[id - 1]->get_x() + tabs_[id - 1]->get_w() : 0;
-	tabs_.push_back(new Tab(this, id, x, name, title, pic, tooltip_text, panel));
+	tabs_.push_back(new Tab(this, id, x, style_ == TabPanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel, name, title, pic, tooltip_text, panel));
 
 	// Add a margin if there is a border
 	if (style_ == UI::TabPanelStyle::kFsMenu) {

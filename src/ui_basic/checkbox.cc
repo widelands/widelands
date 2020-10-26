@@ -92,7 +92,7 @@ void Statebox::layout() {
 		rendered_text_ =
 		   label_text_.empty() ?
 		      nullptr :
-		      UI::g_fh->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel),
+		      UI::g_fh->render(as_richtext_paragraph(label_text_, style_ == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel),
 		                       text_width(get_w(), pic_width));
 		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);

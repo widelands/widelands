@@ -29,7 +29,6 @@
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
-#include "graphic/style_manager.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -62,7 +61,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
-	     name(this, 0, 0, 0, 0),
+	     name(this, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
 	     settings_(settings),
 	     id_(id),
 	     slot_selection_locked_(false) {
@@ -598,21 +597,21 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      playerbox(this, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      scrollable_playerbox(&playerbox, 0, 0, UI::Box::Vertical),
      clients_(&clientbox,
+              UI::FontStyle::kFsGameSetupHeadings,
               0,
               0,
               0,
               0,
               _("Clients"),
-              UI::Align::kCenter,
-              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              UI::Align::kCenter),
      players_(&playerbox,
+              UI::FontStyle::kFsGameSetupHeadings,
               0,
               0,
               0,
               0,
               _("Players"),
-              UI::Align::kCenter,
-              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              UI::Align::kCenter),
      buth_(buth) {
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
 	clientbox.add_space(3 * kPadding);

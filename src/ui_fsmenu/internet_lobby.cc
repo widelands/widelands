@@ -23,6 +23,7 @@
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
@@ -53,12 +54,12 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
      right_column_(this, 0, 0, UI::Box::Vertical),
 
      // Left column content
-     label_clients_online_(&left_column_, 0, 0, 0, 0, _("Clients online:")),
+     label_clients_online_(&left_column_, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("Clients online:")),
      clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_opengames_(&right_column_, 0, 0, 0, 0, _("Open Games:")),
+     label_opengames_(&right_column_, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("Open Games:")),
      opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      joingame_(&right_column_,
                "join_game",
@@ -68,7 +69,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
-     servername_label_(&right_column_, 0, 0, 0, 0, _("Name of your server:")),
+     servername_label_(&right_column_, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("Name of your server:")),
      servername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      hostgame_(&right_column_,
                "host_game",
@@ -169,7 +170,7 @@ void FullscreenMenuInternetLobby::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 
 	uint32_t butw = get_inner_w() - right_column_x_ - right_column_margin_;
-	uint32_t buth = text_height(UI::FontStyle::kLabel) + 8;
+	uint32_t buth = text_height(UI::FontStyle::kFsMenuLabel) + 8;
 
 	tabley_ = tabley_ / 2;
 	tableh_ += tabley_;

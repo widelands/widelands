@@ -20,6 +20,7 @@
 #include "ui_fsmenu/mapdetailsbox.h"
 
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "map_io/map_loader.h"
 
 // Helper functions for localizable assembly of info strings
@@ -130,23 +131,23 @@ MapDetailsBox::MapDetailsBox(
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      preconfigured_(preconfigured),
      title_(this,
+            UI::FontStyle::kFsGameSetupHeadings,
             0,
             0,
             0,
             0,
             _("Map"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+            UI::Align::kCenter),
      title_box_(this, 0, 0, UI::Box::Horizontal),
      content_box_(this, 0, 0, UI::Box::Vertical),
      map_name_(&title_box_,
+               UI::FontStyle::kFsMenuLabel,
                0,
                0,
                0,
                0,
                _("No map selected"),
-               UI::Align::kLeft,
-               g_style_manager->font_style(UI::FontStyle::kLabel)),
+               UI::Align::kLeft),
      select_map_(&title_box_,
                  "change_map_or_save",
                  0,
@@ -231,7 +232,7 @@ void MapDetailsBox::force_new_dimensions(float scale,
 }
 
 void MapDetailsBox::set_map_description_text(const std::string& text) {
-	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kLabel));
+	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kFsMenuLabel));
 	map_description_.set_text(text);
 }
 void MapDetailsBox::show_warning(const std::string& text) {

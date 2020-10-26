@@ -22,6 +22,7 @@
 #include "base/macros.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"

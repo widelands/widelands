@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
@@ -292,7 +293,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 	const Widelands::Quantity amount = economy->target_quantity(ware).permanent;
 	if (amount == Widelands::kEconomyTargetInfinity) {
 		/** TRANSLATORS: Infinite number of wares or workers */
-		return g_style_manager->font_style(UI::FontStyle::kLabel).as_font_tag(_("∞"));
+		return g_style_manager->font_style(UI::FontStyle::kWuiLabel).as_font_tag(_("∞"));
 	}
 	return boost::lexical_cast<std::string>(amount);
 }

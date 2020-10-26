@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "graphic/styles/font_style.h"
 #include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
@@ -48,6 +49,7 @@ struct Tab : public NamedPanel {
 	Tab(TabPanel* parent,
 	    size_t id,
 	    int32_t x,
+	    FontStyle,
 	    const std::string& name,
 	    const std::string& title,
 	    const Image* pic,

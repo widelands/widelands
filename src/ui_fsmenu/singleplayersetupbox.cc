@@ -23,7 +23,6 @@
 
 #include "base/i18n.h"
 #include "graphic/playercolor.h"
-#include "graphic/style_manager.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -131,13 +130,13 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
      standard_height(standard_element_height),
      scrollable_playerbox(this, 0, 0, UI::Box::Vertical),
      title_(this,
+            UI::FontStyle::kFsGameSetupHeadings,
             0,
             0,
             0,
             0,
             _("Players"),
-            UI::Align::kRight,
-            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)) {
+            UI::Align::kRight) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
 	add(&scrollable_playerbox, Resizing::kExpandBoth);

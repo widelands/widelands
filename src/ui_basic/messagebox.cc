@@ -50,7 +50,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	// Make sure that there is space for buttons + message, but not too tall
 	const int maxheight = std::min(260, std::max(outerheight * 2 / 3, 200));
 
-	const UI::FontStyle font_style = UI::FontStyle::kLabel;
+	const UI::FontStyle font_style = s == WindowStyle::kWui ? UI::FontStyle::kWuiLabel : UI::FontStyle::kFsMenuLabel;
 
 	const int margin = 5;
 	int width, height = 0;

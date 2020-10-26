@@ -65,7 +65,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
-     filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
+     filename_label_(&filename_box_, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
      filename_editbox_(&filename_box_, 0, 0, 0, UI::PanelStyle::kWui),
 
      buttons_box_(load_or_save_.game_details()->button_box(), 0, 0, UI::Box::Horizontal),

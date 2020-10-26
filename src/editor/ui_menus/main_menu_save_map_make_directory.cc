@@ -41,7 +41,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            get_inner_w() - 2 * padding_,
            get_inner_h() - 3 * padding_ - buth_,
            padding_ / 2),
-     label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name:")),
+     label_(&vbox_, UI::FontStyle::kWuiLabel, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name:")),
      edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, UI::PanelStyle::kWui),
      ok_button_(this,
                 "ok",

@@ -67,7 +67,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      table_footer_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
-     directory_info_(&main_box_, 0, 0, 0, 0),
+     directory_info_(&main_box_, UI::FontStyle::kWuiLabel, 0, 0, 0, 0),
 
      // Bottom button row
      button_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),

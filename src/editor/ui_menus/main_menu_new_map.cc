@@ -70,7 +70,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	box_.set_size(100, 20);  // Prevent assert failures
 	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	UI::Textarea* terrain_label = new UI::Textarea(&box_, _("Terrain:"));
+	UI::Textarea* terrain_label = new UI::Textarea(&box_, UI::FontStyle::kWuiLabel, _("Terrain:"));
 	box_.add(terrain_label);
 	box_.add(&list_);
 	box_.add_space(2 * margin_);

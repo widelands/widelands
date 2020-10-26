@@ -21,25 +21,26 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
 
 Textarea::Textarea(Panel* parent,
+                   FontStyle style,
                    int32_t x,
                    int32_t y,
                    uint32_t w,
                    uint32_t h,
                    const std::string& text,
                    Align align,
-                   const UI::FontStyleInfo& style,
                    LayoutMode layout_mode)
    : Panel(parent, x, y, w, h),
      layoutmode_(layout_mode),
      align_(align),
      text_(text),
-     style_(&style) {
+     style_(&g_style_manager->font_style(style)) {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
@@ -48,18 +49,18 @@ Textarea::Textarea(Panel* parent,
 }
 
 Textarea::Textarea(Panel* parent,
+                   FontStyle style,
                    int32_t x,
                    int32_t y,
                    uint32_t w,
                    uint32_t h,
                    const std::string& text,
-                   Align align,
-                   const UI::FontStyleInfo& style)
-   : Textarea(parent, x, y, w, h, text, align, style, LayoutMode::AutoMove) {
+                   Align align)
+   : Textarea(parent, style, x, y, w, h, text, align, LayoutMode::AutoMove) {
 }
 
-Textarea::Textarea(Panel* parent, const std::string& text, Align align, const FontStyleInfo& style)
-   : Textarea(parent, 0, 0, 0, 0, text, align, style, LayoutMode::Layouted) {
+Textarea::Textarea(Panel* parent, FontStyle style, const std::string& text, Align align)
+   : Textarea(parent, style, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
 }
 
 void Textarea::set_style(const FontStyleInfo& style) {

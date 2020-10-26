@@ -28,6 +28,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -54,7 +55,7 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 
      type_(type),
      indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
-     curware_(this, 0, get_inner_h() - 25, get_inner_w(), 20, "", UI::Align::kCenter),
+     curware_(this, UI::FontStyle::kWuiLabel, 0, get_inner_h() - 25, get_inner_w(), 20, "", UI::Align::kCenter),
 
      selectable_(selectable),
      horizontal_(horizontal),

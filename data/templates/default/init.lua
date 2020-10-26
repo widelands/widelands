@@ -25,7 +25,7 @@ local wui_light =  {85, 63, 35}
 local wui_green =  {3, 15, 0}
 local wui_brown =  {32, 19, 8}
 
-local fs_font_color = {255, 255, 0}
+local fs_font_color = {250, 200, 50}
 local fs_font_face = "sans"
 local fs_font_size = 14
 
@@ -33,7 +33,14 @@ local wui_font_color = {255, 255, 0}
 local wui_font_face = "sans"
 local wui_font_size = 14
 
-local default_ui_font = {
+local default_wui_font = {
+   color = wui_font_color,
+   face = wui_font_face,
+   size = wui_font_size,
+   bold = true,
+   shadow = true
+}
+local default_fs_font = {
    color = fs_font_color,
    face = fs_font_face,
    size = fs_font_size,
@@ -42,14 +49,8 @@ local default_ui_font = {
 }
 
 local default_button_fonts = {
-   enabled = default_ui_font,
-   enabled_fsmenu_alternative = {
-      color = {250, 200, 50},
-      face = fs_font_face,
-      size = fs_font_size,
-      bold = true,
-      shadow = true
-   },
+   enabled_wui = default_wui_font,
+   enabled_fs = default_fs_font,
    disabled = {
          color = {127, 127, 127},
          face = fs_font_face,
@@ -120,14 +121,14 @@ return {
          -- Main menu ("Single Player", "Watch Replay", ...)
          menu = {
             enabled = {
-               font = default_button_fonts["enabled_fsmenu_alternative"],
+               font = default_button_fonts.enabled_fs,
                background = {
                   image = fs_button,
                   color = fs_blue,
                }
             },
             disabled = {
-               font = default_button_fonts["disabled"],
+               font = default_button_fonts.disabled,
                background = {
                   image = fs_button,
                   color = fs_blue,
@@ -137,14 +138,14 @@ return {
          -- Primary user selection ("OK", ...)
          primary = {
             enabled = {
-               font = default_button_fonts["enabled"],
+               font = default_button_fonts.enabled_fs,
                background = {
                   image = fs_button,
                   color = fs_green,
                }
             },
             disabled = {
-               font = default_button_fonts["disabled"],
+               font = default_button_fonts.disabled,
                background = {
                   image = fs_button,
                   color = fs_green,
@@ -154,14 +155,14 @@ return {
          -- Secondary user selection ("Cancel", "Delete", selection buttons, ...)
          secondary = {
             enabled = {
-               font = default_button_fonts["enabled"],
+               font = default_button_fonts.enabled_fs,
                background = {
                   image = fs_button,
                   color = fs_brown,
                }
             },
             disabled = {
-               font = default_button_fonts["disabled"],
+               font = default_button_fonts.disabled,
                background = {
                   image = fs_button,
                   color = fs_brown,
@@ -174,14 +175,14 @@ return {
          -- Main menu ("Exit Game"), Building Windows, selection buttons, ...
          menu = {
             enabled = {
-               font = default_button_fonts["enabled"],
+               font = default_button_fonts.enabled_wui,
                background = {
                   image = wui_button,
                   color = wui_light,
                }
             },
             disabled = {
-               font = default_button_fonts["disabled"],
+               font = default_button_fonts.disabled,
                background = {
                   image = wui_button,
                   color = wui_light,
@@ -191,14 +192,14 @@ return {
          -- Primary user selection ("OK", attack, ...)
          primary = {
             enabled = {
-               font = default_button_fonts["enabled"],
+               font = default_button_fonts.enabled_wui,
                background = {
                   image = wui_button,
                   color = wui_green,
                }
             },
             disabled = {
-               font = default_button_fonts["disabled"],
+               font = default_button_fonts.disabled,
                background = {
                   image = wui_button,
                   color = wui_green,
@@ -208,14 +209,14 @@ return {
          -- Secondary user selection ("Cancel", "Delete", ...)
          secondary = {
             enabled = {
-               font = default_button_fonts["enabled"],
+               font = default_button_fonts.enabled_wui,
                background = {
                   image = wui_button,
                   color = wui_brown,
                }
             },
             disabled = {
-               font = default_button_fonts["disabled"],
+               font = default_button_fonts.disabled,
                background = {
                   image = wui_button,
                   color = wui_brown,
@@ -226,14 +227,14 @@ return {
          -- transparent in order to match the background of the tab panel.
          building_stats = {
             enabled = {
-               font = default_button_fonts["enabled"],
+               font = default_button_fonts.enabled_wui,
                background = {
                   image = "",
                   color = {0, 0, 0},
                }
             },
             disabled = {
-               font = default_button_fonts["disabled"],
+               font = default_button_fonts.disabled,
                background = {
                   image = "",
                   color = {0, 0, 0},
@@ -651,10 +652,10 @@ return {
          bold = true,
          shadow = true
       },
-      -- Page titles. Also used in game summary TODO(GunChleoc): Refactor game summary
-      fsmenu_title = {
-         color = fs_font_color,
-         face = fs_font_face,
+      -- Page titles. Used in game summary TODO(GunChleoc): Refactor game summary
+      game_summary_title = {
+         color = wui_font_color,
+         face = wui_font_face,
          size = 22,
          bold = true,
          shadow = true
@@ -668,37 +669,38 @@ return {
          shadow = true
       },
 
-      -- Textarea default style, also used for sliders, checkboxes, both in fsmenu and wui ...
-      label = default_ui_font,
+      -- Textarea default style, also used for sliders, checkboxes
+      label_wui = default_wui_font,
+      label_fs = default_fs_font,
       tooltip = {
-         color = fs_font_color,
-         face = fs_font_face,
+         color = wui_font_color,
+         face = wui_font_face,
          size = 14,
          bold = false,
       },
       tooltip_hotkey = {
          color = {180, 180, 180},
-         face = fs_font_face,
+         face = wui_font_face,
          size = 14,
          bold = false,
       },
       tooltip_header = {
-         color = fs_font_color,
-         face = fs_font_face,
+         color = wui_font_color,
+         face = wui_font_face,
          size = 16,
          bold = true,
       },
       warning = {
          color = {255, 22, 22},
-         face = fs_font_face,
-         size = fs_font_size,
+         face = wui_font_face,
+         size = wui_font_size,
          bold = true,
          shadow = true
       },
       disabled = {
          color = {127, 127, 127},
-         face = fs_font_face,
-         size = fs_font_size,
+         face = wui_font_face,
+         size = wui_font_size,
          bold = true,
          shadow = true
       },
@@ -734,8 +736,15 @@ return {
          size = 12,
       },
       wui_window_title = {
-         color = fs_font_color,
+         color = wui_font_color,
          face = wui_font_face,
+         size = 13,
+         bold=true,
+         shadow=true,
+      },
+      fs_window_title = {
+         color = fs_font_color,
+         face = fs_font_face,
          size = 13,
          bold=true,
          shadow=true,
