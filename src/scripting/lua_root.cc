@@ -462,7 +462,7 @@ int new_map_object_description(lua_State* L, Widelands::MapObjectType type) {
 	}
 	return 0;
 }
-}  // namsepace
+}  // namespace
 
 // Documented in data/world/resources/init.lua.
 // See also the World and Tribes section in the Widelands Scripting Reference on the website.
