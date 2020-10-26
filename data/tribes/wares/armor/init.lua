@@ -60,7 +60,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    tribes:new_ware_type {
+--    descriptions:new_ware_type {
 --       name = "armor",
 --       descname = pgettext("ware", "Armor"),
 --       animation_directory = dirname,
@@ -79,7 +79,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_ware_type {
+descriptions:new_ware_type {
    name = "armor",
    -- TRANSLATORS: This is a ware name used in lists of wares
    descname = pgettext("ware", "Armor"),

@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 30,             -- Lower means it is less picky, i.e. it can deal better.
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_desert_hackberry_tiny",
    descname = _ "Desert Hackberry (tiny)",
    size = "small",
@@ -33,7 +33,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_desert_hackberry_small",
    descname = _ "Desert Hackberry (small)",
    size = "small",
@@ -57,7 +57,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_desert_hackberry_medium",
    descname = _ "Desert Hackberry (medium)",
    size = "small",
@@ -81,7 +81,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_desert_hackberry_ripe",
    descname = _ "Desert Hackberry (ripe)",
    size = "small",
