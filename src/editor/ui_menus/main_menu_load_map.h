@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_MAP_H
-#define WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_MAP_H
+#ifndef WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_MAP_HELLO_CODECHECK_H
+#define WL_EDITOR_UI_MENUS_MAIN_MENU_LOAD_MAP_HELLO_CODECHECK_H
 
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_load_or_save_map.h"
