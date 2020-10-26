@@ -170,8 +170,8 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
-		MainMenuNewRandomMap m(*this, menu_windows_.newrandommap, egbase().map().get_width(),
-		                       egbase().map().get_height());
+		MainMenuNewRandomMap m(*this, UI::WindowStyle::kWui, menu_windows_.newrandommap,
+		                       egbase().map().get_width(), egbase().map().get_height());
 		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			m.do_generate_map(egbase(), this, nullptr);
 		}
@@ -510,7 +510,7 @@ void EditorInteractive::exit() {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
-			UI::WLMessageBox mmb(this, _("Unsaved Map"),
+			UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("Unsaved Map"),
 			                     _("The map has not been saved, do you really want to quit?"),
 			                     UI::WLMessageBox::MBoxType::kOkCancel);
 			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {

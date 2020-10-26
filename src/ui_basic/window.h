@@ -25,6 +25,7 @@
 #include <memory>
 
 #include "graphic/note_graphic_resolution_changed.h"
+#include "graphic/styles/window_style.h"
 
 namespace UI {
 /**
@@ -56,9 +57,17 @@ namespace UI {
  */
 class Window : public NamedPanel {
 public:
+	/// Height the top border must have
+	static constexpr int16_t kTopBorderThickness = 20;
+	/// Height the bottom border must have
+	static constexpr int16_t kBottomBorderThickness = 20;
+	/// Width the vertical border graphics must have
+	static constexpr int16_t kVerticalBorderThickness = 20;
+
 	/// Do not use richtext for 'title'.
 	/// Text conventions: Title Case for the 'title'
 	Window(Panel* parent,
+	       WindowStyle style,
 	       const std::string& name,
 	       int32_t x,
 	       int32_t y,
@@ -113,6 +122,11 @@ public:
 	bool handle_tooltip() override;
 	bool handle_key(bool down, SDL_Keysym code) override;
 
+	enum class WindowLayoutID { kNone, kFsMenuDefault, kFsMenuOptions, kFsMenuAbout };
+	virtual WindowLayoutID window_layout_id() const {
+		return WindowLayoutID::kNone;
+	}
+
 protected:
 	void die() override;
 	void layout() override;
@@ -124,8 +138,14 @@ protected:
 		return true;
 	}
 
+	void do_not_layout_on_resolution_change() {
+		graphic_resolution_changed_subscriber_.reset();
+	}
+
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
+
+	WindowStyleInfo style_;
 
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
@@ -135,12 +155,6 @@ private:
 	bool pinned_;
 
 	std::string title_;
-
-	const Image* pic_lborder_;
-	const Image* pic_rborder_;
-	const Image* pic_top_;
-	const Image* pic_bottom_;
-	const Image* pic_background_;
 
 	Panel* center_panel_;
 	Panel* fastclick_panel_;

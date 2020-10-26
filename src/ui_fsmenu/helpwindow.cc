@@ -37,9 +37,16 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
                                            const std::string& caption,
                                            uint32_t width,
                                            uint32_t height)
-   : Window(
-        parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
-     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kWui)) {
+   : Window(parent,
+            UI::WindowStyle::kFsMenu,
+            "help_window",
+            0,
+            0,
+            width,
+            height,
+            (boost::format(_("Help: %s")) % caption).str()),
+     textarea_(
+        new MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
 
 	// Calculate sizes
@@ -47,7 +54,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
 	Button* btn =
-	   new Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kWuiPrimary, _("OK"));
+	   new Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
 
 	btn->sigclicked.connect([this]() { clicked_ok(); });
 	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));
@@ -77,13 +84,13 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
  *
  * Clicking the right mouse button inside the window acts like pressing Ok.
  */
-bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
 		return true;
 	}
-	return false;
+	return UI::Window::handle_mousepress(btn, x, y);
 }
 
 bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
@@ -94,10 +101,10 @@ bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
 			clicked_ok();
 			return true;
 		default:
-			return true;  // handled
+			break;
 		}
 	}
-	return true;
+	return UI::Window::handle_key(down, code);
 }
 
 void FullscreenHelpWindow::clicked_ok() {

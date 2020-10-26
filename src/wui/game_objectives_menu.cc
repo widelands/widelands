@@ -33,6 +33,7 @@ inline InteractivePlayer& GameObjectivesMenu::iplayer() const {
 
 GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(parent,
+                      UI::WindowStyle::kWui,
                       "objectives",
                       &registry,
                       580,

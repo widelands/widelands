@@ -53,7 +53,7 @@ TribalEncyclopedia::TribalEncyclopedia(InteractivePlayer& parent,
 		log_err_time(parent.egbase().get_gametime(),
 		             "Error loading script for tribal encyclopedia:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
-		   &parent, _("Error!"),
+		   &parent, UI::WindowStyle::kWui, _("Error!"),
 		   (boost::format("Error loading script for tribal encyclopedia:\n%s") % err.what()).str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();

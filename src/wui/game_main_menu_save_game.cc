@@ -45,6 +45,7 @@ InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
                       "save_game",
                       &registry,
                       parent.get_inner_w() - 40,
@@ -60,6 +61,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    igbase().game(),
                    LoadOrSaveGame::FileType::kShowAll,
                    UI::PanelStyle::kWui,
+                   UI::WindowStyle::kWui,
                    false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
@@ -236,8 +238,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
-		UI::WLMessageBox mbox(
-		   this, _("Error Saving Game!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Game!"), s,
+		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return false;
 		}
@@ -275,7 +277,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	// Show player an error message.
 	std::string msg = gsh.localized_formatted_result_message();
-	UI::WLMessageBox mbox(this, _("Error Saving Game!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mbox(
+	   this, UI::WindowStyle::kWui, _("Error Saving Game!"), msg, UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 
 	// If only the backup failed (likely just because of a file lock),

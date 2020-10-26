@@ -37,7 +37,8 @@ inline EditorInteractive& MainMenuNewMap::eia() {
 }
 
 MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
-   : UI::UniqueWindow(&parent, "new_map_menu", &registry, 360, 150, _("New Map")),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "new_map_menu", &registry, 360, 150, _("New Map")),
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),

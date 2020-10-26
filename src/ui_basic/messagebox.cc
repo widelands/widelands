@@ -32,11 +32,12 @@
 namespace UI {
 
 WLMessageBox::WLMessageBox(Panel* const parent,
+                           WindowStyle s,
                            const std::string& caption,
                            const std::string& text,
                            const MBoxType type,
                            Align align)
-   : Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()), type_(type) {
+   : Window(parent, s, "message_box", 0, 0, 20, 20, caption.c_str()), type_(type) {
 	// Calculate textarea dimensions depending on text size
 	const int outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
 	const int outerheight = parent ? parent->get_inner_h() : g_gr->get_yres();

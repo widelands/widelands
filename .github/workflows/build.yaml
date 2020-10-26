@@ -134,23 +134,11 @@ jobs:
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
         export SDL_VIDEODRIVER=x11
         export DISPLAY=:99.0
-        # Ignore transient SDL errors
-        trap 'err_handler' EXIT
-        err_handler() {
-          result=$?
-          if [ $result -eq 2 ]
-          then
-            echo "SDL initialization failed. TEST SKIPPED."
-          elif [ $result -ne 0 ]
-          then
-            echo "ERROR: $result"
-            exit $result
-          fi
-        }
+        # Ignore transient SDL errors (exit code 2)
         ./regression_test.py -b build/src/widelands
         mkdir temp_web
-        build/src/website/wl_map_object_info temp_web
-        build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
+        build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
+        build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
 
   windows:
     # Skip this job on master branch

@@ -30,16 +30,16 @@ constexpr int16_t kPadding = 4;
 
 FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
    : UI::Window(&fsmm,
+                UI::WindowStyle::kFsMenu,
                 "about",
-                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
-                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
-                calc_desired_window_width(fsmm),
-                calc_desired_window_height(fsmm),
+                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuAbout),
+                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuAbout),
+                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
+                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
                 _("About Widelands")),
-     parent_(fsmm),
      box_(this, 0, 0, UI::Box::Vertical),
-     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")),
-     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu) {
+     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu),
+     close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
 	try {
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> t(lua.run_script("txts/ABOUT.lua"));
@@ -56,19 +56,14 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 		log_err("%s", err.what());
 	}
 
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged&) { layout(); });
-
-	close_.sigclicked.connect([this]() {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	});
+	close_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kBack); });
 
 	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(kPadding);
 	box_.add(&close_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	box_.add_space(kPadding);
 
-	set_center_panel(&box_);
+	do_not_layout_on_resolution_change();
 
 	layout();
 	initialization_complete();
@@ -81,7 +76,7 @@ bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 		case SDLK_ESCAPE:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			end_modal<MenuTarget>(MenuTarget::kBack);
 			return true;
 		default:
 			break;
@@ -91,8 +86,8 @@ bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 }
 
 void FullscreenMenuAbout::layout() {
-	if (!is_minimal()) {
-		set_size(calc_desired_window_width(parent_), calc_desired_window_height(parent_));
-	}
 	UI::Window::layout();
+	if (!is_minimal()) {
+		box_.set_size(get_inner_w(), get_inner_h());
+	}
 }

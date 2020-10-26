@@ -102,8 +102,7 @@ void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	// Need to pull this out into a variable to make the includes script happy
 	InteractiveBase* i = game.get_ibase();
 	assert(i);
-
-	UI::WLMessageBox mmb(i, _("End of Replay"),
+	UI::WLMessageBox mmb(i, UI::WindowStyle::kWui, _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
 	                       "if you want to."),

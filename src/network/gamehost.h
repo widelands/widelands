@@ -29,6 +29,7 @@
 #include "network/network.h"
 
 struct ChatMessage;
+class FullscreenMenuMain;
 struct GameHostImpl;
 struct Client;
 
@@ -43,7 +44,7 @@ struct GameHost : public GameController {
 	/** playernumber 0 identifies the spectators */
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
-	GameHost(const std::string& playername, bool internet = false);
+	GameHost(FullscreenMenuMain&, const std::string& playername, bool internet = false);
 	~GameHost() override;
 
 	void run();
@@ -184,6 +185,8 @@ private:
 
 	std::list<Widelands::PlayerCommand*> pending_player_commands_;
 	void do_send_player_command(Widelands::PlayerCommand*);
+
+	FullscreenMenuMain& fsmm_;
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;

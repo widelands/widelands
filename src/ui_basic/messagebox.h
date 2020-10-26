@@ -54,6 +54,7 @@ namespace UI {
 struct WLMessageBox : public Window {
 	enum class MBoxType { kOk, kOkCancel };
 	WLMessageBox(Panel* parent,
+	             WindowStyle,
 	             const std::string& caption,
 	             const std::string& text,
 	             MBoxType,

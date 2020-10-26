@@ -32,7 +32,8 @@ static const char pic_tab_wares_warehouse[] = "images/wui/stats/menu_tab_wares_w
 static const char pic_tab_workers_warehouse[] = "images/wui/stats/menu_tab_workers_warehouse.png";
 
 StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")), player_(plr) {
+   : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
+     player_(plr) {
 	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
 	set_center_panel(tabs);
 

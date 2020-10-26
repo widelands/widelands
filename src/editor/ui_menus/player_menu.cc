@@ -42,9 +42,16 @@ constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
-	   /** TRANSLATORS: Window title in the editor when a player has selected more than the
-	      recommended number of players */
-	   : Window(parent, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
+	   : Window(parent,
+	            UI::WindowStyle::kWui,
+	            "editor_player_menu_warning_box",
+	            0,
+	            0,
+	            500,
+	            220,
+	            /** TRANSLATORS: Window title in the editor when a player has selected more than the
+	               recommended number of players */
+	            _("Too Many Players")),
 	     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
 	     warning_label_(
 	        &box_,
@@ -59,9 +66,13 @@ public:
 	          "purposes. Are you sure that you want more than 8 players?"),
 	        UI::Align::kLeft,
 	        UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	     /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except for
-	        testing purposes. Are you sure that you want more than 8 players?' */
-	     reminder_choice_(&box_, Vector2i::zero(), _("Do not remind me again")),
+	     reminder_choice_(
+	        &box_,
+	        UI::PanelStyle::kWui,
+	        Vector2i::zero(),
+	        /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except
+	           for testing purposes. Are you sure that you want more than 8 players?' */
+	        _("Do not remind me again")),
 	     button_box_(&box_, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
 	     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 	     cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {

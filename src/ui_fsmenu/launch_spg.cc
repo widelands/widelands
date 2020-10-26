@@ -28,17 +28,17 @@
 #include "map_io/map_loader.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const settings,
+FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
+                                                 GameSettingsProvider* const settings,
                                                  Widelands::EditorGameBase& egbase,
                                                  bool preconfigured,
                                                  GameController* const ctrl)
-   : FullscreenMenuLaunchGame(settings, ctrl),
+   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
      player_setup(&individual_content_box, settings, standard_element_height_, padding_),
      preconfigured_(preconfigured),
      egbase_(egbase) {
 
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
-	title_.set_text(_("Launch game"));
 	ok_.set_enabled(settings_->can_launch() || preconfigured_);
 
 	if (preconfigured) {
@@ -59,7 +59,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
  */
 void FullscreenMenuLaunchSPG::start() {
 	if (!preconfigured_ && !clicked_select_map()) {
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+		end_modal<MenuTarget>(MenuTarget::kBack);
 	}
 }
 
@@ -72,16 +72,18 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 		return false;
 	}
 
-	FullscreenMenuMapSelect msm(settings_, nullptr, egbase_);
-	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
+	set_visible(false);
+	FullscreenMenuMapSelect msm(fsmm_, settings_, nullptr, egbase_);
+	MenuTarget code = msm.run<MenuTarget>();
+	set_visible(true);
 
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	if (code == MenuTarget::kBack) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		settings_->set_scenario(false);
 		return false;  // back was pressed
 	}
 
-	settings_->set_scenario(code == FullscreenMenuBase::MenuTarget::kScenarioGame);
+	settings_->set_scenario(code == MenuTarget::kScenarioGame);
 
 	const MapData& mapdata = *msm.get_map();
 
@@ -141,7 +143,7 @@ void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& ma
 }
 
 void FullscreenMenuLaunchSPG::clicked_back() {
-	return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	return end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
@@ -170,19 +172,19 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 	}
 	if (settings_->can_launch() || preconfigured_) {
 		if (settings_->settings().scenario) {
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kScenarioGame);
+			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
 		} else {
 			if (win_condition_dropdown_.has_selection()) {
 				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 			}
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+			end_modal<MenuTarget>(MenuTarget::kNormalGame);
 		}
 	}
 }
 
 void FullscreenMenuLaunchSPG::layout() {
 	FullscreenMenuLaunchGame::layout();
-	player_setup.force_new_dimensions(scale_factor(), standard_element_height_);
+	player_setup.force_new_dimensions(1.f, standard_element_height_);
 }
 
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {

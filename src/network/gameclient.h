@@ -26,6 +26,7 @@
 #include "logic/player_end_result.h"
 #include "network/network.h"
 
+class FullscreenMenuMain;
 struct GameClientImpl;
 
 /**
@@ -39,7 +40,8 @@ struct GameClientImpl;
  * connect locally / via IP.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
-	GameClient(const std::pair<NetAddress, NetAddress>& host,
+	GameClient(FullscreenMenuMain&,
+	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
 	           const std::string& gamename = "");
@@ -112,6 +114,10 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
+	FullscreenMenuMain& fullscreen_menu_main() const {
+		return fsmm_;
+	}
+
 private:
 	/// for unique backupname
 	std::string backup_file_name(std::string& path) {
@@ -148,6 +154,8 @@ private:
 	void do_send_player_command(Widelands::PlayerCommand*);
 
 	GameClientImpl* d;
+
+	FullscreenMenuMain& fsmm_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H
