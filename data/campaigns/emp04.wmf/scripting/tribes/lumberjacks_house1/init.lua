@@ -2,7 +2,7 @@ dirname = "tribes/buildings/productionsites/empire/lumberjacks_house/"
 
 push_textdomain("scenario_emp04.wmf")
 
-tribes:new_productionsite_type {
+descriptions:new_productionsite_type {
    name = "empire_lumberjacks_house1",
    descname = "Lumberjack’s House",
    icon = dirname .. "menu.png",

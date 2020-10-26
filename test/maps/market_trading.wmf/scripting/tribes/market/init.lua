@@ -7,7 +7,7 @@
 -- TODO(sirver, trading): Add useful documentation here
 dirname = "test/maps/market_trading.wmf/" .. path.dirname(__file__)
 
-tribes:new_market_type {
+descriptions:new_market_type {
    name = "barbarians_market",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("barbarians_building", "Market"),

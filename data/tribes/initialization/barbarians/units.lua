@@ -1,4 +1,4 @@
-tribes = wl.Descriptions()
+descriptions = wl.Descriptions()
 
 image_dirname = path.dirname(__file__) .. "images/"
 
@@ -7,7 +7,7 @@ push_textdomain("tribes_encyclopedia")
 -- For formatting time strings
 include "tribes/scripting/help/time_strings.lua"
 
-tribes:new_tribe {
+descriptions:new_tribe {
    name = "barbarians",
    animation_directory = image_dirname,
    animations = {
