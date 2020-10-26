@@ -73,23 +73,31 @@ public:
 	bool worker_exists(const std::string& workername) const;
 	bool worker_exists(DescriptionIndex index) const;
 
-	/// Returns the index for 'buildingname' and throws an exception if the building can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'buildingname' and throws an exception if the building can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_building_index(const std::string& buildingname) const;
-	/// Returns the index for 'crittername' and throws an exception if the critter can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'crittername' and throws an exception if the critter can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_critter_index(const std::string& crittername) const;
-	/// Returns the index for 'immovablename' and throws an exception if the immovable can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'immovablename' and throws an exception if the immovable can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
-	/// Returns the index for 'warename' and throws an exception if the ware can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_resource_index(const std::string& warename) const;
-	/// Returns the index for 'shipname' and throws an exception if the ship can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'shipname' and throws an exception if the ship can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_ship_index(const std::string& shipname) const;
-	/// Returns the index for 'terrainname' and throws an exception if the terrain can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'terrainname' and throws an exception if the terrain can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_terrain_index(const std::string& terrainname) const;
 	/// Returns the index for 'tribename' and throws an exception if the tribe can't be found.
 	DescriptionIndex safe_tribe_index(const std::string& tribename) const;
-	/// Returns the index for 'warename' and throws an exception if the buildwareing can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_ware_index(const std::string& warename) const;
-	/// Returns the index for 'workername' and throws an exception if the worker can't be found. This function is safe for map/savegame compatibility.
+	/// Returns the index for 'workername' and throws an exception if the worker can't be found.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_worker_index(const std::string& workername) const;
 
 	DescriptionIndex building_index(const std::string& buildingname) const;
@@ -130,23 +138,31 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table);
 
-	/// Load a building that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load a building that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_building(const std::string& buildingname);
-	/// Load a critter that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load a critter that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_critter(const std::string& crittername);
-	/// Load an immovable that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load an immovable that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_immovable(const std::string& immovablename);
-	/// Load a resource that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load a resource that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_resource(const std::string& resourcename);
-	/// Load a ship that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load a ship that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_ship(const std::string& shipname);
-	/// Load a terrain that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load a terrain that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_terrain(const std::string& terrainname);
 	/// Load a tribe that has been registered previously with 'register_description'
 	DescriptionIndex load_tribe(const std::string& tribename);
-	/// Load a ware that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load a ware that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_ware(const std::string& warename);
-	/// Load a worker that has been registered previously with 'register_description'. This function is safe for map/savegame compatibility.
+	/// Load a worker that has been registered previously with 'register_description'.
+	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex load_worker(const std::string& workername);
 	/// Try to load a ware/worker that has been registered previously with 'register_description'
 	/// when we don't know whether it's a ware or worker.
@@ -157,7 +173,7 @@ public:
 	/// when we don't know whether it's a building or immovable.
 	/// Throws GameDataError if object hasn't been registered.
 	/// If first == 'true', we have a building. Otherwise, it's an immovable.
-	/// /// This function is safe for map/savegame compatibility.
+	/// This function is safe for map/savegame compatibility.
 	std::pair<bool, DescriptionIndex> load_building_or_immovable(const std::string& objectname) const;
 
 	uint32_t get_largest_workarea() const;

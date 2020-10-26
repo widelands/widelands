@@ -1930,11 +1930,14 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
+		// Consume strings and int before potential exception thrown
 		const std::string name = fr.c_string();
+		const int amount = fr.unsigned_32();
+		const std::string& stats_string = fr.c_string();
 		try {
 			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
-			current_produced_statistics_[idx] = fr.unsigned_32();
-			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
+			current_produced_statistics_[idx] = amount;
+			parse_stats(&ware_productions_, idx, stats_string, "produced");
 		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(), "Player %u production statistics: unknown ware name %s",
 			              player_number(), name.c_str());
@@ -1953,11 +1956,14 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
+		// Consume strings and int before potential exception thrown
 		const std::string name = fr.c_string();
+		const int amount = fr.unsigned_32();
+		const std::string& stats_string = fr.c_string();
 		try {
 			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
-			current_consumed_statistics_[idx] = fr.unsigned_32();
-			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
+			current_consumed_statistics_[idx] = amount;
+			parse_stats(&ware_consumptions_, idx, stats_string, "consumed");
 		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(),
 			              "Player %u consumption statistics: unknown ware name %s", player_number(),
@@ -1976,10 +1982,12 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
+		// Consume strings before potential exception thrown
 		const std::string name = fr.c_string();
+		const std::string& stats_string = fr.c_string();
 		try {
 			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
-			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
+			parse_stats(&ware_stocks_, idx, stats_string, "stock");
 		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
 			              player_number(), name.c_str());
