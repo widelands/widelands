@@ -43,6 +43,10 @@ public:
 	/// Looks up the new name for the 'immovable'.
 	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
 
+protected:
+	const std::string& lookup_entry(const std::string& entry,
+	                                const std::map<std::string, std::string>& table) const;
+
 private:
 	DISALLOW_COPY_AND_ASSIGN(WorldLegacyLookupTable);
 };
@@ -55,7 +59,7 @@ class PostOneWorldLegacyLookupTable : public WorldLegacyLookupTable {
 public:
 	PostOneWorldLegacyLookupTable();
 
-	// Implements OneWorldLegacyLookupTable.
+	// Implements WorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
 	std::string lookup_terrain(const std::string& terrain) const override;
 	std::string lookup_critter(const std::string& critter) const override;
@@ -74,13 +78,16 @@ class OneWorldLegacyLookupTable : public WorldLegacyLookupTable {
 public:
 	explicit OneWorldLegacyLookupTable(const std::string& old_world_name);
 
-	// Implements OneWorldLegacyLookupTable.
+	// Implements WorldLegacyLookupTable.
 	std::string lookup_resource(const std::string& resource) const override;
 	std::string lookup_terrain(const std::string& terrain) const override;
 	std::string lookup_critter(const std::string& critter) const override;
 	std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
+	const std::string& lookup_world_entry(const std::string& entry,
+	                                const std::map<std::string, std::map<std::string, std::string>>& table) const;
+
 	const std::string old_world_name_;
 	const std::map<std::string, std::string> resources_;
 	const std::map<std::string, std::map<std::string, std::string>> terrains_;

@@ -21,6 +21,16 @@
 
 #include <memory>
 
+const std::string&
+WorldLegacyLookupTable::lookup_entry(const std::string& entry,
+                                      const std::map<std::string, std::string>& table) const {
+	const auto& i = table.find(entry);
+	if (i != table.end()) {
+		return i->second;
+	}
+	return entry;
+}
+
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
 critters_
 {
@@ -88,35 +98,19 @@ terrains_
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
-	const auto& i = resources_.find(resource);
-	if (i == resources_.end()) {
-		return resource;
-	}
-	return i->second;
+	return lookup_entry(resource, resources_);
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
-	const auto& i = terrains_.find(terrain);
-	if (i == terrains_.end()) {
-		return terrain;
-	}
-	return i->second;
+	return lookup_entry(terrain, terrains_);
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
-		const auto& i = critters_.find(critter);
-		if (i == critters_.end()) {
-			return critter;
-		}
-		return i->second;
+	return lookup_entry(critter, critters_);
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
-	const auto& i = immovables_.find(immovable);
-	if (i == immovables_.end()) {
-		return immovable;
-	}
-	return i->second;
+	return lookup_entry(immovable, immovables_);
 }
 
 OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_world_name)
@@ -384,37 +378,28 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
 {
 }
 
-std::string OneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
-	const auto& i = resources_.find(resource);
-	if (i == resources_.end()) {
-		return resource;
+const std::string& OneWorldLegacyLookupTable::lookup_world_entry(const std::string& entry,
+									  const std::map<std::string, std::map<std::string, std::string> >& table) const {
+	const std::map<std::string, std::string>& world_entries = table.at(old_world_name_);
+	const auto& i = world_entries.find(entry);
+	if (i != world_entries.end()) {
+		return i->second;
 	}
-	return i->second;
+	return entry;
+}
+
+std::string OneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
+	return lookup_entry(resource, resources_);
 }
 
 std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
-	const std::map<std::string, std::string>& world_terrains = terrains_.at(old_world_name_);
-	const auto& i = world_terrains.find(terrain);
-	if (i != world_terrains.end()) {
-		return i->second;
-	}
-	return terrain;
+	return lookup_world_entry(terrain, terrains_);
 }
 
 std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
-	const std::map<std::string, std::string>& world_critters = critters_.at(old_world_name_);
-	const auto& i = world_critters.find(critter);
-	if (i != world_critters.end()) {
-		return i->second;
-	}
-	return critter;
+	return lookup_world_entry(critter, critters_);
 }
 
 std::string OneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
-	const std::map<std::string, std::string>& world_immovables = immovables_.at(old_world_name_);
-	const auto& i = world_immovables.find(immovable);
-	if (i != world_immovables.end()) {
-		return i->second;
-	}
-	return immovable;
+	return lookup_world_entry(immovable, immovables_);
 }
