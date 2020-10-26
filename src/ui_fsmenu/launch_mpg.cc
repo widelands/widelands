@@ -75,7 +75,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn =
 		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
 		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
-		btn->sigclicked.connect([this]() { pressedButton(FullscreenMenuBase::MenuTarget::kBack); });
+		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kBack); });
 
 		initialization_complete();
 	}
