@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-wl.World():new_terrain_type{
+wl.Descriptions():new_terrain_type{
    name = "lava-stone2",
    descname = _ "Lava Rocks 2",
    is = "unreachable",

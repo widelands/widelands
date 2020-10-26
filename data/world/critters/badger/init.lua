@@ -83,7 +83,7 @@
 --
 --    push_textdomain("world")
 --
---    wl.World():new_critter_type{
+--    wl.Descriptions():new_critter_type{
 --       name = "badger",
 --       descname = _ "Badger",
 --       animation_directory = path.dirname(__file__),
@@ -119,7 +119,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-wl.World():new_critter_type{
+wl.Descriptions():new_critter_type{
    name = "badger",
    descname = _ "Badger",
    icon = dirname .. "menu.png",

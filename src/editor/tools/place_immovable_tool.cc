@@ -56,8 +56,7 @@ int32_t EditorPlaceImmovableTool::handle_click_impl(const Widelands::NodeAndTria
 		do {
 			if (!mr.location().field->get_immovable() &&
 			    (mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK)) {
-				egbase.create_immovable(mr.location(), *i, Widelands::MapObjectDescr::OwnerType::kWorld,
-				                        nullptr /* owner */);
+				egbase.create_immovable(mr.location(), *i, nullptr /* owner */);
 			}
 			++i;
 		} while (mr.advance(*map));
@@ -85,8 +84,7 @@ int32_t EditorPlaceImmovableTool::handle_undo_impl(
 		}
 		if (!i->empty()) {
 			egbase.create_immovable_with_name(
-			   mr.location(), *i, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr /* owner */,
-			   nullptr /* former_building_descr */);
+			   mr.location(), *i, nullptr /* owner */, nullptr /* former_building_descr */);
 		}
 		++i;
 	} while (mr.advance(*map));

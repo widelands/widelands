@@ -35,19 +35,19 @@ public:
 	~FullscreenMenuAbout() override {
 	}
 
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuAbout;
+	}
+
 	bool handle_key(bool, SDL_Keysym) override;
 
-private:
+protected:
 	void layout() override;
 
-	FullscreenMenuMain& parent_;
-
+private:
 	UI::Box box_;
-	UI::Button close_;
 	UI::FileViewPanel tabs_;
-
-	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
-	   graphic_resolution_changed_subscriber_;
+	UI::Button close_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_ABOUT_H

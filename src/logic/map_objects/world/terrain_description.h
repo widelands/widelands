@@ -29,7 +29,7 @@ class LuaTable;
 class Texture;
 
 namespace Widelands {
-class World;
+class Descriptions;
 
 /// TerrainTextures have a fixed size and are squares.
 constexpr int kTextureSideLength = 64;
@@ -53,7 +53,7 @@ public:
 		const Image* icon;
 	};
 
-	TerrainDescription(const LuaTable& table, World&);
+	TerrainDescription(const LuaTable& table, Descriptions& descriptions);
 	~TerrainDescription() = default;
 
 	/// The name used internally for this terrain.
@@ -73,7 +73,7 @@ public:
 
 	// Return the basic terrain colour to be used in the minimap.
 	// 'shade' must be a brightness value, i.e. in [-128, 127].
-	const RGBColor& get_minimap_color(int shade);
+	const RGBColor& get_minimap_color(int shade) const;
 
 	/// Returns the type of terrain this is (water, walkable, and so on).
 	Is get_is() const;

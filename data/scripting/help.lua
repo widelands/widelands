@@ -20,9 +20,8 @@ include "scripting/richtext.lua"
 --    :returns: list of :class:`LuaImmovableDescription` that have the attribute "tree" and probabilities.
 --
 function tree_affinity_list(terrain_description)
-   local world = wl.World();
    local tree_list = {}
-   for i, immovable in ipairs(world.immovable_descriptions) do
+   for i, immovable in ipairs(wl.Descriptions().immovable_descriptions) do
       if (immovable:has_attribute("tree")) then
          local probability = immovable:probability_to_grow(terrain_description)
          if (probability > 0.01) then
@@ -53,9 +52,8 @@ end
 --    :returns: list of :class:`LuaTerrainDescription` and probabilities.
 --
 function terrain_affinity_list(immovable_description)
-   local world = wl.World();
    local terrain_list = {}
-   for i, terrain in ipairs(world.terrain_descriptions) do
+   for i, terrain in ipairs(wl.Descriptions().terrain_descriptions) do
       local probability = immovable_description:probability_to_grow(terrain)
       if (probability > 0.01) then
          -- sort the terrains by percentage
@@ -85,7 +83,6 @@ end
 --
 function terrain_affinity_help(immovable_description)
    push_textdomain("widelands")
-   local world = wl.World();
    local result = ""
    local terrain_list = terrain_affinity_list(immovable_description)
 

@@ -107,8 +107,8 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 WorkerProgram::WorkerProgram(const std::string& init_name,
                              const LuaTable& actions_table,
                              const WorkerDescr& worker,
-                             Tribes& tribes)
-   : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
+                             Descriptions& descriptions)
+   : MapObjectProgram(init_name), worker_(worker), descriptions_(descriptions) {
 
 	for (const std::string& line : actions_table.array_entries<std::string>()) {
 		if (line.empty()) {
@@ -173,7 +173,7 @@ void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std:
 		throw wexception("Usage: createware=<ware type>");
 	}
 
-	const DescriptionIndex ware_index = tribes_.load_ware(cmd[0]);
+	const DescriptionIndex ware_index = descriptions_.load_ware(cmd[0]);
 
 	act->function = &Worker::run_createware;
 	act->iparam1 = ware_index;
@@ -555,7 +555,7 @@ walk
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:500ms",
          "construct", -- 1. This will find a space for us if no object has been planted yet
@@ -667,8 +667,8 @@ plant
 ^^^^^
 .. function:: plant attrib:\<attribute\> [attrib:\<attribute\> ...] [unless object]
 
-   :arg string attrib\:\<attribute\>: Select at random any world immovable or immovable
-      of the worker's tribe that has this attribute.
+   :arg string attrib\:\<attribute\>: Select at random any immovable
+      that has this attribute.
 
    :arg empty unless object: Do not plant the immovable if it already exists at
       the current position.
@@ -699,7 +699,7 @@ plant
       buildship = {
          "walk=object-or-coords",
          -- Only create a shipconstruction if we don't already have one
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:barbarians_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:500ms",
          "construct",
@@ -1004,7 +1004,7 @@ construct
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          -- 2. This will create an object for us if we don't have one yet
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:atlanteans_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill 230",
          "animate=work duration:5s",
          -- 1. Add the current ware to the shipconstruction. This will find a space for us if no
