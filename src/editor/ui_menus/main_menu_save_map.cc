@@ -98,25 +98,13 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	make_directory_.sigclicked.connect([this]() { clicked_make_directory(); });
 	edit_options_.sigclicked.connect([this]() { clicked_edit_options(); });
 
-	// We always want the current map's data here
-	const Widelands::Map& map = parent.egbase().map();
-	MapData::MapType maptype;
-
-	if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-	    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-		maptype = MapData::MapType::kScenario;
-	} else {
-		maptype = MapData::MapType::kNormal;
-	}
-
-	MapData mapdata(map, "", maptype, MapData::DisplayType::kMapnames);
-
-	map_details_.update(mapdata, false);
-
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
 	layout();
+
+	// We always want the current map's data here
+	update_map_options();
 }
 
 /**
@@ -217,7 +205,9 @@ void MainMenuSaveMap::update_map_options() {
 
 	MapData mapdata(map, editbox_.text(), maptype, MapData::DisplayType::kMapnames);
 
-	map_details_.update(mapdata, false);
+	// TODO(GunChleoc): Trying to render the minimap while saving results in endless loop - probably
+	// because we're trying to load the map again there.
+	map_details_.update(mapdata, false, false);
 	if (old_name == editbox_.text()) {
 		editbox_.set_text(map_details_.name());
 		edit_box_changed();

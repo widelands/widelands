@@ -24,15 +24,15 @@ player1:place_building("barbarians_headquarters", map.player_slots[1].starting_f
 -- For immovables_descriptions.lua
 local field = map:get_field(63,79)
 if (field.immovable == nil) then
-   map:place_immovable("bush1", field, "world")
+   map:place_immovable("bush1", field)
 end
 field = map:get_field(62,79)
 if (field.immovable == nil) then
-   map:place_immovable("alder_summer_sapling", field, "world")
+   map:place_immovable("alder_summer_sapling", field)
 end
 field = map:get_field(61,79)
 if (field.immovable == nil) then
-   map:place_immovable("alder_summer_old", field, "world")
+   map:place_immovable("alder_summer_old", field)
 end
 
 -- =================================

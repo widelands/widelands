@@ -95,7 +95,8 @@ private:
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
-                                                 ChatProvider& chat)
+                                                 ChatProvider& chat,
+                                                 Widelands::EditorGameBase& egbase)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
 
      help_button_(this,
@@ -110,7 +111,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
      help_(nullptr),
 
      mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_),
-     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu) {
+     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
+     egbase_(egbase) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
@@ -202,7 +204,7 @@ void FullscreenMenuLaunchMPG::select_map() {
 	}
 
 	set_visible(false);
-	FullscreenMenuMapSelect msm(fsmm_, settings_, ctrl_);
+	FullscreenMenuMapSelect msm(fsmm_, settings_, ctrl_, egbase_);
 	MenuTarget code = msm.run<MenuTarget>();
 	set_visible(true);
 

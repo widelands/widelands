@@ -32,9 +32,9 @@ class Game;
 
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(FullscreenMenuMain&,
-	                        Widelands::Game* preconfigured,
-	                        GameSettingsProvider*,
+	FullscreenMenuLaunchSPG(FullscreenMenuMain&, GameSettingsProvider*,
+	                        Widelands::EditorGameBase& egbase,
+	                        bool preconfigured,
 	                        GameController* = nullptr);
 	~FullscreenMenuLaunchSPG() override;
 
@@ -49,13 +49,13 @@ private:
 	void win_condition_selected() override;
 	void layout() override;
 
-	Widelands::Game* preconfigured_;
-
 	SinglePlayerSetupBox player_setup;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	void update();
 	void enforce_player_names_and_tribes(Widelands::Map& map);
+	const bool preconfigured_;
+	Widelands::EditorGameBase& egbase_;  // Not owned
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

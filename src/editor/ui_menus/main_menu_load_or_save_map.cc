@@ -50,7 +50,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
      map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, parent.egbase()),
 
      display_mode_(&table_box_,
                    "display_mode",

@@ -28,13 +28,14 @@
 #include "map_io/map_loader.h"
 #include "ui_fsmenu/mapselect.h"
 
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
-                                                 Widelands::Game* preconfigured,
-                                                 GameSettingsProvider* const settings,
+FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm, GameSettingsProvider* const settings,
+                                                 Widelands::EditorGameBase& egbase,
+                                                 bool preconfigured,
                                                  GameController* const ctrl)
-   : FullscreenMenuLaunchGame(fsmm, settings, ctrl, preconfigured),
+   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
+     player_setup(&individual_content_box, settings, standard_element_height_, padding_),
      preconfigured_(preconfigured),
-     player_setup(&individual_content_box, settings, standard_element_height_, padding_) {
+     egbase_(egbase) {
 
 	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	ok_.set_enabled(settings_->can_launch() || preconfigured_);
@@ -69,7 +70,7 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 	}
 
 	set_visible(false);
-	FullscreenMenuMapSelect msm(fsmm_, settings_, nullptr);
+	FullscreenMenuMapSelect msm(fsmm_, settings_, nullptr, egbase_);
 	MenuTarget code = msm.run<MenuTarget>();
 	set_visible(true);
 
@@ -100,7 +101,7 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 void FullscreenMenuLaunchSPG::update() {
 	peaceful_.set_state(settings_->is_peaceful_mode());
 	if (preconfigured_) {
-		map_details.update(settings_, *preconfigured_->mutable_map());
+		map_details.update(settings_, *egbase_.mutable_map());
 		ok_.set_enabled(true);
 	} else {
 		Widelands::Map map;  //  MapLoader needs a place to put its preload data

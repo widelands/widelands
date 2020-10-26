@@ -1396,8 +1396,6 @@ bool WLApplication::new_random_game(FullscreenMenuMain& fsmm) {
 	UI::UniqueWindow::Registry r;
 
 	game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
-	game.world();
-	game.tribes();
 	EditorInteractive::load_world_units(nullptr, game);
 
 	MainMenuNewRandomMap m(fsmm, UI::WindowStyle::kFsMenu, r, 64, 64);
@@ -1450,7 +1448,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
                              const bool preconfigured,
                              bool* canceled) {
 	MenuTarget code = MenuTarget::kNormalGame;
-	FullscreenMenuLaunchSPG lgm(fsmm, preconfigured ? &game : nullptr, &sp);
+	FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
 	code = lgm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
 		if (canceled) {
@@ -1458,6 +1456,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
 		}
 		return false;
 	}
+
 	const std::string map_theme = lgm.settings().settings().map_theme;
 	const std::string map_bg = lgm.settings().settings().map_background;
 

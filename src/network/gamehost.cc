@@ -629,9 +629,10 @@ void GameHost::init_computer_players() {
 
 // TODO(k.halfmann): refactor into smaller functions
 void GameHost::run() {
+	Widelands::Game game;
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat);
+	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
 	const MenuTarget code = lm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
@@ -660,7 +661,6 @@ void GameHost::run() {
 	packet.unsigned_8(NETCMD_LAUNCH);
 	broadcast(packet);
 
-	Widelands::Game game;
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	game.set_auto_speed(get_config_bool("auto_speed", false));
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));

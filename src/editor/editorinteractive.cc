@@ -52,9 +52,9 @@
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
@@ -577,7 +577,6 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 	}
 
-	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (draw_immovables_) {
@@ -599,8 +598,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		// Draw resource overlay.
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
-			const std::string& immname =
-			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
+			const std::string& immname = ebase.descriptions()
+			                                .get_resource_descr(field.fcoords.field->get_resources())
+			                                ->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_image_cache->get(immname);
 				blit_field_overlay(
@@ -964,7 +964,6 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 	eia.load_world_units(&eia, egbase);
-	egbase.tribes();
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {
 		if (filename.empty()) {
@@ -1023,20 +1022,21 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 void EditorInteractive::load_world_units(EditorInteractive* eia,
                                          Widelands::EditorGameBase& egbase) {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-	Widelands::World* world = egbase.mutable_world();
+	Widelands::Descriptions* descriptions = egbase.mutable_descriptions();
 
 	log_info("┏━ Loading world\n");
 	ScopedTimer timer("┗━ took %ums");
 
 	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
-	auto load_category = [eia, world](const LuaTable& t, const std::string& key,
-	                                  Widelands::MapObjectType type) {
+	auto load_category = [eia, descriptions](const LuaTable& t, const std::string& key,
+	                                         Widelands::MapObjectType type) {
 		for (const auto& category_table :
 		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
 			// Even if we do not have an EditorInteractive, we still need to create the
 			// Category because it will load all the map objects we are interested in
-			std::unique_ptr<EditorCategory> c(new EditorCategory(*category_table, type, *world));
+			std::unique_ptr<EditorCategory> c(
+			   new EditorCategory(*category_table, type, *descriptions));
 			if (eia) {
 				eia->editor_categories_[type].push_back(std::move(c));
 			}
