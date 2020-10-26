@@ -604,7 +604,7 @@ MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
 		uint8_t packet_version = fr.unsigned_8();
 
 		if (packet_version == kCurrentPacketVersion) {
-			DescriptionIndex wareindex = egbase.mutable_descriptions()->load_ware(fr.c_string());
+			DescriptionIndex wareindex = egbase.descriptions().safe_ware_index(fr.c_string());
 			const WareDescr* descr = egbase.descriptions().get_ware_descr(wareindex);
 
 			std::unique_ptr<Loader> loader(new Loader);

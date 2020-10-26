@@ -3412,7 +3412,7 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 		try {
 			// header has already been read by caller
 			const WorkerDescr* descr =
-			   egbase.descriptions().get_worker_descr(egbase.mutable_descriptions()->load_worker(fr.c_string()));
+			   egbase.descriptions().get_worker_descr(egbase.descriptions().safe_worker_index(fr.c_string()));
 
 			Worker* worker = dynamic_cast<Worker*>(&descr->create_object());
 			std::unique_ptr<Loader> loader(worker->create_loader());
