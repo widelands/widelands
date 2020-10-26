@@ -36,14 +36,13 @@ jobs:
         popd
     - name: Check
       run: |
-        pwd
         mkdir build
         cd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
         TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
     - name: Report
       run: |
-        if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then
+        if grep '^[/_.a-zA-Z]\+:[0-9]\+:' build/codecheck.out; then
           echo "You have codecheck warnings (see above). Please fix."
           exit 1
         else
