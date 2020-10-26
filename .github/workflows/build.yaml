@@ -31,11 +31,12 @@ jobs:
         fetch-depth: 1
     - name: Test
       run: |
-        pushd ../cmake/codecheck
+        pushd cmake/codecheck
         ./run_tests.py
         popd
     - name: Check
       run: |
+        pwd
         mkdir build
         cd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
