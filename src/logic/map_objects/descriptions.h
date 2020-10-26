@@ -144,22 +144,18 @@ public:
 	/// Try to load a ware/worker that has been registered previously with 'register_description'
 	/// when we don't know whether it's a ware or worker
 	/// Throws GameDataError if object hasn't been registered
-	WareWorker try_load_ware_or_worker(const std::string& objectname) const;
+	std::pair<WareWorker, DescriptionIndex> load_ware_or_worker(const std::string& objectname) const;
+	/// Try to load a building or immovable that has been registered previously with 'register_description'
+	/// when we don't know whether it's a building or immovable
+	/// Throws GameDataError if object hasn't been registered
+	/// If first == 'true', we have a building. Otherwise, it's an immovable.
+	std::pair<bool, DescriptionIndex> load_building_or_immovable(const std::string& objectname) const;
 
 	uint32_t get_largest_workarea() const;
 	void increase_largest_workarea(uint32_t workarea);
 
 	/// For loading old maps
 	void set_old_world_name(const std::string& name);
-
-	const std::string& lookup_building(const std::string& name) const;
-	const std::string& lookup_critter(const std::string& name) const;
-	const std::string& lookup_immovable(const std::string& name) const;
-	const std::string& lookup_resource(const std::string& name) const;
-	const std::string& lookup_terrain(const std::string& name) const;
-	const std::string& lookup_ware(const std::string& name) const;
-	const std::string& lookup_worker(const std::string& name) const;
-
 private:
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;

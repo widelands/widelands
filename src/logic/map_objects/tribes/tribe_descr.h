@@ -96,8 +96,6 @@ public:
 	/// Return the given worker or die trying
 	DescriptionIndex safe_worker_index(const std::string& workername) const;
 
-	std::pair<WareWorker, DescriptionIndex> find_ware_or_worker(const std::string& ware_worker_name) const;
-
 	BuildingDescr const* get_building_descr(const DescriptionIndex& index) const;
 	ImmovableDescr const* get_immovable_descr(const DescriptionIndex& index) const;
 	WareDescr const* get_ware_descr(const DescriptionIndex& index) const;

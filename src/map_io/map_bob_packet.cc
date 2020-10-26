@@ -37,20 +37,19 @@ void MapBobPacket::read_bob(FileRead& fr,
                             const Coords& coords,
                             uint16_t /* packet_version */) {
 	const std::string owner = fr.c_string();
-	char const* const read_name = fr.c_string();
+	const std::string read_name = fr.c_string();
 	uint8_t subtype = fr.unsigned_8();
 	constexpr uint8_t kLegacyCritterType = 0;
 	Serial const serial = fr.unsigned_32();
 
 	if (subtype != kLegacyCritterType || owner != "world") {
-		throw GameDataError("unknown legacy bob %s/%s", owner.c_str(), read_name);
+		throw GameDataError("unknown legacy bob %s/%s", owner.c_str(), read_name.c_str());
 	}
 
-	const std::string name = egbase.descriptions().lookup_critter(read_name);
 	try {
 		Descriptions* descriptions = egbase.mutable_descriptions();
 		const CritterDescr& descr =
-		   *descriptions->get_critter_descr(descriptions->load_critter(name));
+		   *descriptions->get_critter_descr(descriptions->load_critter(read_name));
 		descr.create(egbase, nullptr, coords);
 		// We do not register this object as needing loading. This packet is only
 		// in fresh maps, that are just started. As soon as the game saves
@@ -60,7 +59,7 @@ void MapBobPacket::read_bob(FileRead& fr,
 		// further.
 	} catch (const WException& e) {
 		throw GameDataError(
-		   "%u (owner = \"%s\", name = \"%s\"): %s", serial, owner.c_str(), name.c_str(), e.what());
+		   "%u (owner = \"%s\", name = \"%s\"): %s", serial, owner.c_str(), read_name.c_str(), e.what());
 	}
 }
 

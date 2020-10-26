@@ -3411,10 +3411,8 @@ MapObject::Loader* Worker::load(EditorGameBase& egbase,
 	if (packet_version == kCurrentPacketVersionMapObject) {
 		try {
 			// header has already been read by caller
-			const std::string name = egbase.descriptions().lookup_worker(fr.c_string());
-
 			const WorkerDescr* descr =
-			   egbase.descriptions().get_worker_descr(egbase.descriptions().safe_worker_index(name));
+			   egbase.descriptions().get_worker_descr(egbase.mutable_descriptions()->load_worker(fr.c_string()));
 
 			Worker* worker = dynamic_cast<Worker*>(&descr->create_object());
 			std::unique_ptr<Loader> loader(worker->create_loader());

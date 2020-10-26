@@ -352,7 +352,7 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 		break;
 	}
 
-	return descriptions_->load_terrain(descriptions_->lookup_terrain(table_.at(world)[c]));
+	return descriptions_->load_terrain(table_.at(world)[c]);
 }
 
 }  // namespace
@@ -768,7 +768,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	auto place_immovable = [&egbase, descriptions](
 	                          const Widelands::Coords& location,
 	                          const std::string& immovable_name) {
-		const Widelands::DescriptionIndex idx = descriptions->load_immovable(descriptions->lookup_immovable(immovable_name));
+		const Widelands::DescriptionIndex idx = descriptions->load_immovable(immovable_name);
 		egbase.create_immovable(location, idx, nullptr /* owner */);
 	};
 

@@ -110,9 +110,25 @@ void Request::read(FileRead& fr,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			const std::pair<WareWorker, DescriptionIndex> wareworker = target_.owner().tribe().find_ware_or_worker(fr.c_string());
+			const std::string wareworker_name = fr.c_string();
+			const std::pair<WareWorker, DescriptionIndex> wareworker = game.descriptions().load_ware_or_worker(wareworker_name);
 			type_ = wareworker.first;
 			index_ = wareworker.second;
+			// Check that the tribe uses the ware/worker
+			switch (type_) {
+			case WareWorker::wwWARE: {
+				if (!target_.owner().tribe().has_ware(index_)) {
+					throw GameDataError("Request::read: tribe '%s' does not use ware '%s'", target_.owner().tribe().name().c_str(), wareworker_name.c_str());
+				}
+			} break;
+			case WareWorker::wwWORKER: {
+				if (!target_.owner().tribe().has_worker(index_)) {
+					throw GameDataError("Request::read: tribe '%s' does not use worker '%s'", target_.owner().tribe().name().c_str(), wareworker_name.c_str());
+				}
+			} break;
+			default:
+				NEVER_HERE();
+			}
 
 			// Overwrite initial economy because our WareWorker type may have changed
 			if (economy_) {

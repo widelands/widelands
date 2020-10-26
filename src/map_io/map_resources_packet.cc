@@ -47,13 +47,7 @@ void MapResourcesPacket::read(FileSystem& fs,
 			std::map<uint8_t, uint8_t> smap;
 			for (uint8_t i = 0; i < nr_res; ++i) {
 				uint8_t const id = fr.unsigned_16();
-				const std::string resource_name(egbase.descriptions().lookup_resource(fr.c_string()));
-				const DescriptionIndex res =
-				   egbase.mutable_descriptions()->load_resource(resource_name);
-				if (res == Widelands::INVALID_INDEX) {
-					throw GameDataError("Unknown resource '%s' in map", resource_name.c_str());
-				}
-				smap[id] = res;
+				smap[id] = egbase.mutable_descriptions()->load_resource(fr.c_string());
 			}
 
 			for (uint16_t y = 0; y < map->get_height(); ++y) {

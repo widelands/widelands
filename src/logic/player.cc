@@ -1930,16 +1930,17 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = egbase().descriptions().lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
-		if (!egbase().descriptions().ware_exists(idx)) {
-			log_warn_time(egbase().get_gametime(), "Player %u statistics: unknown ware name %s",
+		const std::string name = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
+			current_produced_statistics_[idx] = fr.unsigned_32();
+			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
+		} catch (const GameDataError&) {
+			log_warn_time(egbase().get_gametime(), "Player %u production statistics: unknown ware name %s",
 			              player_number(), name.c_str());
 			continue;
 		}
 
-		current_produced_statistics_[idx] = fr.unsigned_32();
-		parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
 	}
 
 	// Read consumption statistics
@@ -1952,17 +1953,17 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = egbase().descriptions().lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
-		if (!egbase().descriptions().ware_exists(idx)) {
+		const std::string name = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
+			current_consumed_statistics_[idx] = fr.unsigned_32();
+			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
+		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(),
 			              "Player %u consumption statistics: unknown ware name %s", player_number(),
 			              name.c_str());
 			continue;
 		}
-
-		current_consumed_statistics_[idx] = fr.unsigned_32();
-		parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
 	}
 
 	// Read stock statistics
@@ -1975,15 +1976,15 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = egbase().descriptions().lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
-		if (!egbase().descriptions().ware_exists(idx)) {
+		const std::string name = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
+			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
+		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
 			              player_number(), name.c_str());
 			continue;
 		}
-
-		parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
 	}
 
 	// All statistics should have the same size

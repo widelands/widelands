@@ -83,9 +83,10 @@ struct NoteMapObjectDescription {
 
 	const std::string name;
 	const LoadType type;
+	const bool allow_failure;
 
-	NoteMapObjectDescription(const std::string& init_name, LoadType init_type)
-	   : name(init_name), type(init_type) {
+	NoteMapObjectDescription(const std::string& init_name, LoadType init_type, bool init_allow_failure = false)
+	   : name(init_name), type(init_type), allow_failure(init_allow_failure) {
 	}
 };
 

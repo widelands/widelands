@@ -704,11 +704,8 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 			if (packet_version < 11) {
 				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
-			Immovable* imm = nullptr;
-
-			const std::string name = egbase.descriptions().lookup_immovable(fr.c_string());
-			imm = new Immovable(*egbase.descriptions().get_immovable_descr(
-			   egbase.mutable_descriptions()->load_immovable(name)));
+			Immovable* imm = new Immovable(*egbase.descriptions().get_immovable_descr(
+			   egbase.mutable_descriptions()->load_immovable(fr.c_string())));
 
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, packet_version);
