@@ -75,8 +75,6 @@ return {
    minimap_icon_frame = fs_font_color,
 
    -- red, green, blue, alpha
-   window_border_focused = {220, 220, 250, 40},
-   window_border_unfocused = {50, 0, 0, 40},
    background_focused = {240, 240, 240, 200},
    background_semi_focused = {180, 180, 180, 200},
    focus_border_thickness = 2,
@@ -481,23 +479,23 @@ return {
       },
       wui = {
          enabled = {
-            color = fs_font_color,
-            face = fs_font_face,
-            size = fs_font_size,
+            color = wui_font_color,
+            face = wui_font_face,
+            size = wui_font_size,
             bold = true,
             shadow = true
          },
          disabled = {
             color = {127, 127, 127},
-            face = fs_font_face,
-            size = fs_font_size,
+            face = wui_font_face,
+            size = wui_font_size,
             bold = true,
             shadow = true
          },
          hotkey = {
             color = {180, 180, 180},
-            face = fs_font_face,
-            size = fs_font_size,
+            face = wui_font_face,
+            size = wui_font_size,
             bold = true,
             shadow = true
          }

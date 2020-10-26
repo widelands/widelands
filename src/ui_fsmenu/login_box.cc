@@ -27,67 +27,91 @@
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/main.h"
 #include "wlapplication_options.h"
 
-LoginBox::LoginBox(Panel& parent)
-   : Window(
-        &parent, UI::WindowStyle::kFsMenu, "login_box", 0, 0, 500, 280, _("Online Game Settings")) {
-	center_to_parent();
+constexpr int8_t kMargin = 6;
 
-	int32_t margin = 10;
-
-	// TODO(Nordfriese): Magic numbers everywhere. Box layout please…
-	ta_nickname = new UI::Textarea(this, UI::FontStyle::kFsMenuLabel, margin, margin, 0, 0, _("Nickname:"));
-	ta_password = new UI::Textarea(this, UI::FontStyle::kFsMenuLabel, margin, 70, 0, 0, _("Password:"));
-	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kFsMenu);
-	eb_password = new UI::EditBox(this, 150, 70, 330, UI::PanelStyle::kFsMenu);
-
-	cb_register =
-	   new UI::Checkbox(this, UI::PanelStyle::kFsMenu, Vector2i(margin, 40),
-	                    _("Log in to a registered account."), "", get_inner_w() - 2 * margin);
-
-	register_account = new UI::MultilineTextarea(
-	   this, margin, 105, 470, 140, UI::PanelStyle::kFsMenu,
+LoginBox::LoginBox(FullscreenMenuMain& parent, UI::UniqueWindow::Registry& r)
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kFsMenu, "login_box", &r, 500, 290, _("Online Game Settings")),
+     fsmm_(parent),
+     main_box_(this, 0, 0, UI::Box::Vertical),
+     hbox_(&main_box_, 0, 0, UI::Box::Horizontal),
+     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     vbox1_(&hbox_, 0, 0, UI::Box::Vertical),
+     vbox2_(&hbox_, 0, 0, UI::Box::Vertical),
+     b_login_(&buttons_box_, "login", 0, 0, 200, 28, UI::ButtonStyle::kFsMenuPrimary, _("Save")),
+     b_cancel_(&buttons_box_, "cancel", 0, 0, 200, 28, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+eb_nickname_(&vbox2_, 0, 0, 330, UI::PanelStyle::kFsMenu),
+eb_password_(&vbox2_, 0, 0, 330, UI::PanelStyle::kFsMenu),
+cb_register_(&main_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0), _("Log in to a registered account.")),
+ta_nickname_(&vbox1_, UI::FontStyle::kFsMenuLabel, _("Nickname:")),
+ta_password_(&vbox1_, UI::FontStyle::kFsMenuLabel, _("Password:")),
+register_account_(&main_box_, 0, 0, 0, 180, UI::PanelStyle::kFsMenu,
 	   (boost::format(_("In order to use a registered "
 	                    "account, you need an account on the Widelands website. "
 	                    "Please log in at %s and set an online "
 	                    "gaming password on your profile page.")) %
 	    "\n\nhttps://widelands.org/accounts/register/\n\n")
-	      .str());
+	      .str()) {
+	vbox1_.add_space(kMargin);
+	vbox1_.add(&ta_nickname_, UI::Box::Resizing::kExpandBoth);
+	vbox1_.add_space(kMargin);
+	vbox1_.add(&ta_password_, UI::Box::Resizing::kExpandBoth);
+	vbox1_.add_space(kMargin);
 
-	loginbtn = new UI::Button(
-	   this, "login",
-	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
-	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kFsMenuPrimary, _("Save"));
+	vbox2_.add_space(kMargin);
+	vbox2_.add(&eb_nickname_, UI::Box::Resizing::kExpandBoth);
+	vbox2_.add_space(kMargin);
+	vbox2_.add(&eb_password_, UI::Box::Resizing::kExpandBoth);
+	vbox2_.add_space(kMargin);
 
-	cancelbtn = new UI::Button(
-	   this, "cancel",
-	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
-	                                   (get_inner_w() / 2 - 200) / 2,
-	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
+	hbox_.add_space(kMargin);
+	hbox_.add(&vbox1_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add_space(kMargin);
+	hbox_.add(&vbox2_, UI::Box::Resizing::kExpandBoth);
+	hbox_.add_space(kMargin);
 
-	loginbtn->sigclicked.connect([this]() { clicked_ok(); });
-	cancelbtn->sigclicked.connect([this]() { clicked_back(); });
-	eb_nickname->changed.connect([this]() { change_playername(); });
-	cb_register->clickedto.connect([this](bool) { clicked_register(); });
+	buttons_box_.add_space(kMargin);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &b_login_ : &b_cancel_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_space(kMargin);
+	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &b_cancel_ : &b_login_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_space(kMargin);
 
-	eb_nickname->set_text(get_config_string("nickname", _("nobody")));
-	cb_register->set_state(get_config_bool("registered", false));
-	eb_password->set_password(true);
+	main_box_.add_space(kMargin);
+	main_box_.add(&hbox_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(kMargin);
+	main_box_.add(&cb_register_, UI::Box::Resizing::kFullSize);
+	main_box_.add_space(kMargin);
+	main_box_.add(&register_account_, UI::Box::Resizing::kFullSize);
+	main_box_.add(&buttons_box_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add_space(kMargin);
+
+	set_center_panel(&main_box_);
+	center_to_parent();
+
+	b_login_.sigclicked.connect([this]() { clicked_ok(); });
+	b_cancel_.sigclicked.connect([this]() { clicked_back(); });
+	eb_nickname_.changed.connect([this]() { change_playername(); });
+	cb_register_.clickedto.connect([this](bool) { clicked_register(); });
+
+	eb_nickname_.set_text(get_config_string("nickname", _("nobody")));
+	cb_register_.set_state(get_config_bool("registered", false));
+	eb_password_.set_password(true);
 
 	if (registered()) {
-		eb_password->set_text(get_config_string("password_sha1", ""));
-		loginbtn->set_enabled(false);
+		eb_password_.set_text(get_config_string("password_sha1", ""));
+		b_login_.set_enabled(false);
 	} else {
-		eb_password->set_can_focus(false);
-		ta_password->set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
+		eb_password_.set_can_focus(false);
+		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
 	}
 
-	eb_nickname->focus();
+	eb_nickname_.focus();
 
-	eb_nickname->cancel.connect([this]() { clicked_back(); });
-	eb_password->cancel.connect([this]() { clicked_back(); });
+	eb_nickname_.cancel.connect([this]() { clicked_back(); });
+	eb_password_.cancel.connect([this]() { clicked_back(); });
 }
 
 /// think function of the UI (main loop)
@@ -99,30 +123,30 @@ void LoginBox::think() {
  * called, if "login" is pressed.
  */
 void LoginBox::clicked_ok() {
-	if (cb_register->get_state()) {
+	if (cb_register_.get_state()) {
 		if (check_password()) {
-			set_config_string("nickname", eb_nickname->text());
+			set_config_string("nickname", eb_nickname_.text());
 			set_config_bool("registered", true);
-			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+			fsmm_.internet_login_callback();
 		}
 	} else {
-		set_config_string("nickname", eb_nickname->text());
+		set_config_string("nickname", eb_nickname_.text());
 		set_config_bool("registered", false);
 		set_config_string("password_sha1", "");
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+		fsmm_.internet_login_callback();
 	}
 }
 
 /// Called if "cancel" was pressed
 void LoginBox::clicked_back() {
-	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+	die();
 }
 
 /// Called when nickname was changed
 void LoginBox::change_playername() {
-	cb_register->set_state(false);
-	eb_password->set_can_focus(false);
-	eb_password->set_text("");
+	cb_register_.set_state(false);
+	eb_password_.set_can_focus(false);
+	eb_password_.set_text("");
 }
 
 bool LoginBox::handle_key(bool down, SDL_Keysym code) {
@@ -143,46 +167,46 @@ bool LoginBox::handle_key(bool down, SDL_Keysym code) {
 }
 
 void LoginBox::clicked_register() {
-	if (cb_register->get_state()) {
-		ta_password->set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
-		eb_password->set_can_focus(false);
-		eb_password->set_text("");
+	if (cb_register_.get_state()) {
+		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
+		eb_password_.set_can_focus(false);
+		eb_password_.set_text("");
 	} else {
-		ta_password->set_style(g_style_manager->font_style(UI::FontStyle::kFsMenuLabel));
-		eb_password->set_can_focus(true);
-		eb_password->focus();
+		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kFsMenuLabel));
+		eb_password_.set_can_focus(true);
+		eb_password_.focus();
 	}
 }
 
 void LoginBox::verify_input() {
 	// Check if all neccessary input fields are valid
-	loginbtn->set_enabled(true);
-	eb_nickname->set_tooltip("");
-	eb_password->set_tooltip("");
-	eb_nickname->set_warning(false);
+	b_login_.set_enabled(true);
+	eb_nickname_.set_tooltip("");
+	eb_password_.set_tooltip("");
+	eb_nickname_.set_warning(false);
 
-	if (eb_nickname->text().empty()) {
-		eb_nickname->set_warning(true);
-		eb_nickname->set_tooltip(_("Please enter a nickname!"));
-		loginbtn->set_enabled(false);
-	} else if (!InternetGaming::ref().valid_username(eb_nickname->text())) {
-		eb_nickname->set_warning(true);
-		eb_nickname->set_tooltip(_("Enter a valid nickname. This value may contain only "
+	if (eb_nickname_.text().empty()) {
+		eb_nickname_.set_warning(true);
+		eb_nickname_.set_tooltip(_("Please enter a nickname!"));
+		b_login_.set_enabled(false);
+	} else if (!InternetGaming::ref().valid_username(eb_nickname_.text())) {
+		eb_nickname_.set_warning(true);
+		eb_nickname_.set_tooltip(_("Enter a valid nickname. This value may contain only "
 		                           "English letters, numbers, and @ . + - _ characters."));
-		loginbtn->set_enabled(false);
+		b_login_.set_enabled(false);
 	}
 
-	if (eb_password->text().empty() && cb_register->get_state()) {
-		eb_password->set_tooltip(_("Please enter your password!"));
-		loginbtn->set_enabled(false);
+	if (eb_password_.text().empty() && cb_register_.get_state()) {
+		eb_password_.set_tooltip(_("Please enter your password!"));
+		b_login_.set_enabled(false);
 	}
 
-	if (eb_password->has_focus() && eb_password->text() == get_config_string("password_sha1", "")) {
-		eb_password->set_text("");
+	if (eb_password_.has_focus() && eb_password_.text() == get_config_string("password_sha1", "")) {
+		eb_password_.set_text("");
 	}
 
-	if (cb_register->get_state() && eb_password->text() == get_config_string("password_sha1", "")) {
-		loginbtn->set_enabled(false);
+	if (cb_register_.get_state() && eb_password_.text() == get_config_string("password_sha1", "")) {
+		b_login_.set_enabled(false);
 	}
 }
 
@@ -191,7 +215,7 @@ bool LoginBox::check_password() {
 	// Try to connect to the metaserver
 	const std::string& meta = get_config_string("metaserver", INTERNET_GAMING_METASERVER);
 	uint32_t port = get_config_natural("metaserverport", kInternetGamingPort);
-	std::string password = crypto::sha1(eb_password->text());
+	std::string password = crypto::sha1(eb_password_.text());
 
 	if (!InternetGaming::ref().check_password(get_nickname(), password, meta, port)) {
 		// something went wrong -> show the error message
@@ -200,8 +224,8 @@ bool LoginBox::check_password() {
 		UI::WLMessageBox wmb(
 		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
-		eb_password->set_text("");
-		eb_password->focus();
+		eb_password_.set_text("");
+		eb_password_.focus();
 		return false;
 	}
 	// NOTE: The password is only stored (in memory and on disk) and transmitted (over the network to

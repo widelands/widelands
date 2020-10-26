@@ -202,6 +202,9 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	} else {
 		last_image_exchange_time_ = SDL_GetTicks();
 	}
+
+	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
+
 	focus();
 	set_labels();
 	layout();
@@ -453,7 +456,7 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			end_modal<MenuTarget>(MenuTarget::kMetaserver);
 			return true;
 		case SDLK_u:
-			end_modal<MenuTarget>(MenuTarget::kOnlineGameSettings);
+			show_internet_login();
 			return true;
 		case SDLK_p:
 			end_modal<MenuTarget>(MenuTarget::kLan);
@@ -674,9 +677,15 @@ void FullscreenMenuMain::layout() {
 }
 
 /// called if the user is not registered
-void FullscreenMenuMain::show_internet_login() {
-	LoginBox lb(*this);
-	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk && auto_log_) {
+void FullscreenMenuMain::show_internet_login(const bool modal) {
+	r_login_.create();
+	if (modal) {
+		r_login_.window->run<int>();
+		r_login_.destroy();
+	}
+}
+void FullscreenMenuMain::internet_login_callback() {
+	if (auto_log_) {
 		auto_log_ = false;
 		internet_login();
 	}
@@ -701,7 +710,7 @@ void FullscreenMenuMain::internet_login() {
 	// This is just to be on the safe side, in case the user changed the password in the config file.
 	if (!InternetGaming::ref().valid_username(nickname_)) {
 		auto_log_ = true;
-		show_internet_login();
+		show_internet_login(true);
 		return;
 	}
 
@@ -726,6 +735,6 @@ void FullscreenMenuMain::internet_login() {
 		InternetGaming::ref().reset();
 		set_config_string("password_sha1", "no_password_set");
 		auto_log_ = true;
-		show_internet_login();
+		show_internet_login(true);
 	}
 }

@@ -20,26 +20,29 @@
 #ifndef WL_UI_FSMENU_LOGIN_BOX_H
 #define WL_UI_FSMENU_LOGIN_BOX_H
 
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 
-struct LoginBox : public UI::Window {
-	explicit LoginBox(UI::Panel&);
+class FullscreenMenuMain;
+
+struct LoginBox : public UI::UniqueWindow {
+	explicit LoginBox(FullscreenMenuMain&, UI::UniqueWindow::Registry&);
 
 	void think() override;
 
 	std::string get_nickname() {
-		return eb_nickname->text();
+		return eb_nickname_.text();
 	}
 	std::string get_password() {
-		return eb_password->text();
+		return eb_password_.text();
 	}
 	bool registered() {
-		return cb_register->get_state();
+		return cb_register_.get_state();
 	}
 
 	/// Handle keypresses
@@ -53,14 +56,14 @@ private:
 	void verify_input();
 	bool check_password();
 
-	UI::Button* loginbtn;
-	UI::Button* cancelbtn;
-	UI::EditBox* eb_nickname;
-	UI::EditBox* eb_password;
-	UI::Checkbox* cb_register;
-	UI::Textarea* ta_nickname;
-	UI::Textarea* ta_password;
-	UI::MultilineTextarea* register_account;
+	FullscreenMenuMain& fsmm_;
+
+	UI::Box main_box_, hbox_, buttons_box_, vbox1_, vbox2_;
+	UI::Button b_login_, b_cancel_;
+	UI::EditBox eb_nickname_, eb_password_;
+	UI::Checkbox cb_register_;
+	UI::Textarea ta_nickname_, ta_password_;
+	UI::MultilineTextarea register_account_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LOGIN_BOX_H
