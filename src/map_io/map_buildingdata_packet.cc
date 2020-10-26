@@ -365,7 +365,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				Quantity amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (tribe.has_ware(id)) { // NOCOM why are we saving unused ware types?
+				// TODO(GunChleoc): Change these from vector to map so that we can avoid saveloading unused wares
+				if (tribe.has_ware(id)) {
 					warehouse.insert_wares(id, amount);
 					warehouse.set_ware_policy(id, policy);
 				}
@@ -376,7 +377,8 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				uint32_t amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (tribe.has_worker(id)) { // NOCOM why are we saving unused worker types?
+				// TODO(GunChleoc): Change these from vector to map so that we can avoid saveloading unused workers
+				if (tribe.has_worker(id)) {
 					warehouse.insert_workers(id, amount);
 					warehouse.set_worker_policy(id, policy);
 				}
