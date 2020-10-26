@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_oil_desert_sapling",
    descname = _ "Oil Palm (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_oil_desert_pole",
    descname = _ "Oil Palm (Pole)",
    size = "small",
@@ -59,7 +59,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_oil_desert_mature",
    descname = _ "Oil Palm (Mature)",
    size = "small",
@@ -88,7 +88,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_oil_desert_old",
    descname = _ "Oil Palm (Old)",
    species = _ "Oil Palm",

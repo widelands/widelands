@@ -2,7 +2,7 @@ dirname = "tribes/buildings/trainingsites/empire/trainingcamp/"
 
 push_textdomain("scenario_emp04.wmf")
 
-tribes:new_trainingsite_type {
+descriptions:new_trainingsite_type {
    name = "empire_trainingcamp1",
    descname = "Training Camp",
    icon = dirname .. "menu.png",

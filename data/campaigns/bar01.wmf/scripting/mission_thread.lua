@@ -17,8 +17,8 @@ function introduction_thread()
 
    campaign_message_box(briefing_msg_01)
    -- these buildings are still burning, but only for a while
-   map:place_immovable("destroyed_building",map:get_field(7,41),"tribes")
-   map:place_immovable("destroyed_building",map:get_field(5,52),"tribes")
+   map:place_immovable("destroyed_building", map:get_field(7,41))
+   map:place_immovable("destroyed_building", map:get_field(5,52))
    scroll_to_field(al_thunran)
    reveal_concentric(plr, al_thunran, 8, true, 50)
    campaign_message_box(briefing_msg_02) -- Al'thunran

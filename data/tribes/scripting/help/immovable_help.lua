@@ -60,7 +60,7 @@ function immovable_help_string(tribe, immovable_description)
       result = result .. h2(_"Becomes")
       for index, target in ipairs(becomes_list) do
          local target_description = nil
-         if (wl.Game():tribe_immovable_exists(target)) then
+         if (wl.Game():immovable_exists(target)) then
             -- We turn into another immovable
             target_description = wl.Game():get_immovable_description(target)
          else

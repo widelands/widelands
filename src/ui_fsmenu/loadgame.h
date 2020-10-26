@@ -25,14 +25,16 @@
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
 #include "wui/load_or_save_game.h"
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuLoadGame(Widelands::Game&, GameSettingsProvider* gsp, bool is_replay = false);
+	FullscreenMenuLoadGame(FullscreenMenuMain&,
+	                       Widelands::Game&,
+	                       GameSettingsProvider* gsp,
+	                       bool is_replay = false);
 
 	/// The currently selected filename
 	const std::string& filename() const;
@@ -56,7 +58,6 @@ private:
 
 	UI::Box main_box_;
 	UI::Box info_box_;
-	UI::Textarea title_;
 
 	LoadOrSaveGame load_or_save_;
 

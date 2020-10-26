@@ -34,7 +34,7 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
                                                        EditorInteractive& eia,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
-	const Widelands::World& world = eia.egbase().world();
+	const Widelands::Descriptions& descriptions = eia.egbase().descriptions();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
@@ -43,7 +43,7 @@ int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 		amount = (amount > args->change_by) ? amount - args->change_by : 0;
 
 		if (mr.location().field->get_resources() == args->current_resource &&
-		    map->is_resource_valid(world, mr.location(), args->current_resource) &&
+		    map->is_resource_valid(descriptions, mr.location(), args->current_resource) &&
 		    mr.location().field->get_resources_amount() != 0) {
 
 			args->original_resource.push_back(

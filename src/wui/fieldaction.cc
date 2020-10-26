@@ -258,7 +258,7 @@ Initialize a field action window, creating the appropriate buttons.
 FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
                                      Widelands::Player* const plr,
                                      UI::UniqueWindow::Registry* const registry)
-   : UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
+   : UI::UniqueWindow(ib, UI::WindowStyle::kWui, "field_action", registry, 68, 34, _("Action")),
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
@@ -338,7 +338,7 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 	const Widelands::Map& map = egbase.map();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   map, Widelands::Area<Widelands::FCoords>(
-	           map.get_fcoords(i.get_position()), egbase.tribes().get_largest_workarea()));
+	           map.get_fcoords(i.get_position()), egbase.descriptions().get_largest_workarea()));
 	do {
 		if (const Widelands::MapObject* mo = mr.location().field->get_immovable()) {
 			if (mo->descr().type() < Widelands::MapObjectType::BUILDING) {
@@ -427,7 +427,8 @@ void FieldActionWindow::add_buttons_auto() {
 
 			if (ibase().egbase().is_game()) {
 				add_button(buildbox, "configure_economy", "images/wui/stats/genstats_nrwares.png",
-				           &FieldActionWindow::act_configure_economy, _("Configure economy"));
+				           &FieldActionWindow::act_configure_economy,
+				           _("Configure this flag’s economy"));
 				if (can_act) {
 					add_button(buildbox, "geologist", pic_geologist, &FieldActionWindow::act_geologist,
 					           _("Send geologist to explore site"));
@@ -757,31 +758,10 @@ void FieldActionWindow::act_buildflag() {
 
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
-		Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
-		Widelands::Economy* worker_economy = flag->get_economy(Widelands::wwWORKER);
-		bool window_open = false;
-		if (ware_economy->get_options_window()) {
-			window_open = true;
-			EconomyOptionsWindow& window =
-			   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
-			if (window.is_minimal()) {
-				window.restore();
-			}
-			window.move_to_top();
-		}
-		if (worker_economy->get_options_window()) {
-			window_open = true;
-			EconomyOptionsWindow& window =
-			   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
-			if (window.is_minimal()) {
-				window.restore();
-			}
-			window.move_to_top();
-		}
-		if (!window_open) {
-			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), ware_economy, worker_economy,
-			                         dynamic_cast<InteractiveGameBase&>(ibase()).can_act(
-			                            ware_economy->owner().player_number()));
+		if (upcast(InteractiveGameBase, igbase, &ibase())) {
+			Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
+			const bool can_act = igbase->can_act(ware_economy->owner().player_number());
+			EconomyOptionsWindow::create(&ibase(), *flag, Widelands::WareWorker::wwWARE, can_act);
 		}
 	}
 	die();
@@ -956,7 +936,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(
-		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
+		           node_, workarea_radius + ibase().egbase().descriptions().get_largest_workarea()));
 		do {
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {

@@ -22,9 +22,9 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 
 constexpr int kBuildGridCellHeight = 50;
@@ -32,7 +32,6 @@ constexpr int kBuildGridCellWidth = 55;
 constexpr int kMargin = 5;
 constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
-constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
@@ -44,8 +43,13 @@ inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 
 BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                                                UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(
-        &parent, "building_statistics", &registry, kWindowWidth, 100, _("Building Statistics")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "building_statistics",
+                      &registry,
+                      kWindowWidth,
+                      100,
+                      _("Building Statistics")),
      style_(g_style_manager->building_statistics_style()),
      main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      tab_panel_(&main_box_, UI::TabPanelStyle::kWuiDark),
@@ -140,7 +144,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      lastupdate_(0),
      was_minimized_(false),
      has_selection_(false),
-     nr_building_types_(parent.egbase().tribes().nrbuildings()) {
+     nr_building_types_(parent.egbase().descriptions().nr_buildings()) {
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
@@ -272,7 +276,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 
 		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
 			const Widelands::BuildingDescr& descr =
-			   *iplayer().egbase().tribes().get_building_descr(id);
+			   *iplayer().egbase().descriptions().get_building_descr(id);
 			add_button(id, descr, row);
 			++current_column;
 			if (current_column == 1) {
@@ -345,7 +349,7 @@ bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
    const Widelands::Player& player, Widelands::DescriptionIndex index) const {
 	if (!player.tribe().has_building(index) && !player.get_building_statistics(index).empty()) {
 		const Widelands::BuildingDescr& descr =
-		   *iplayer().egbase().tribes().get_building_descr(index);
+		   *iplayer().egbase().descriptions().get_building_descr(index);
 		if (descr.type() == Widelands::MapObjectType::CONSTRUCTIONSITE ||
 		    descr.type() == Widelands::MapObjectType::DISMANTLESITE) {
 			return false;

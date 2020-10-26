@@ -1,6 +1,6 @@
 -- RST
 -- messages.lua
--- --------------
+-- ------------
 --
 -- Functions to send messages to the player and to add objectives to campaigns.
 
@@ -11,12 +11,12 @@ include "scripting/table.lua"
 include "scripting/ui.lua"
 
 -- RST
--- .. function:: send_message(player, title, body, parameters)
+-- .. function:: send_to_inbox(player, title, body, parameters)
 --
---    Sends a message to the player.
---    If the popup parameter is true and the player is in building mode,
---    the function waits until the player leaves the building mode
---    before sending the message (only in singleplayer)
+--    Sends a message to the inbox of a player.
+--    If the popup parameter is true and the player is in roadbuilding mode,
+--    the message is sent after the player leaves the roadbuilding mode
+--    (only in singleplayer)
 --
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
@@ -24,34 +24,35 @@ include "scripting/ui.lua"
 --    :arg body: the localized body of the message. You can use rt functions here.
 --    :type body: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
---                     for wl.game.Player, e.g. { field = f, popup = true }.
+--                     for :meth:`wl.game.Player.send_to_inbox`, e.g. { field = f, popup = true }.
 --                     The popup parameter must be set.
 --
-function send_message(player, title, body, parameters)
+function send_to_inbox(player, title, body, parameters)
    if (parameters["popup"]) then
       wait_for_roadbuilding()
    end
-   player:send_message(title, body, parameters)
+   player:send_to_inbox(title, body, parameters)
 end
 
 
 -- RST
--- .. function:: send_to_all(text[, heading])
+-- .. function:: send_to_all_inboxes(text[, heading])
 --
---    Sends a game status message to all players.
+--    Sends a message to the inbox of all players and show it instantly.
+--    This is mainly used for winconditions to show the status.
 --
 --    :arg text: the localized body of the message. You can use rt functions here.
 --    :type text: :class:`string`
 --    :arg heading: the localized title of the message (optional)
 --    :type heading: :class:`string`
 --
-function send_to_all(text, heading)
+function send_to_all_inboxes(text, heading)
    push_textdomain("widelands")
    for idx,plr in ipairs(game.players) do
       if (heading ~= nil and heading ~= "") then
-         send_message(plr, _"Status", text, {popup=true, heading=heading})
+         send_to_inbox(plr, _"Status", text, {popup=true, heading=heading})
       else
-         send_message(plr, _"Status", text, {popup=true})
+         send_to_inbox(plr, _"Status", text, {popup=true})
       end
    end
    pop_textdomain()
@@ -61,16 +62,20 @@ end
 -- RST
 -- .. function:: message_box(player, title, message, parameters)
 --
---    Waits if player is in building mode, then shows a scenario message box
+--    Waits if player is in building mode, then shows a scenario message box.
+--    Usually you want to use :meth:`campaign_message_box` which has more options,
+--    e.g. positioning of message boxes.
 --
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
 --    :type title: :class:`string`
---    :arg body: the localized body of the message. You can use rt functions here.
---    :type body: :class:`string`
+--    :arg message: the localized body of the message. You must use
+--                 :ref:`richtext functions <richtext.lua>` here.
+--    :type message: :class:`string`
 --    :arg parameters: Array of message parameters as defined in the Lua interface,
---                     for wl.game.Player, e.g. { field = f }.
+--                     for :meth:`wl.game.Player.message_box`, e.g. { field = f }.
 --
+
 function message_box(player, title, body, parameters)
    wait_for_roadbuilding()
    -- In case the user input was forbidden for some reason, allow him to close the message box.
@@ -82,20 +87,51 @@ function message_box(player, title, body, parameters)
 end
 
 -- RST
--- .. function:: campaign_message_box(message, [sleeptime])
+-- .. function:: campaign_message_box({message, [opts]}, [sleeptime])
 --
---    Sets message.h and message.w if not set and calls
---    message_box(player, title, body, parameters) for player 1
+--    Pause a game and show a message box for player 1. Since this function can
+--    have several options there is an example below this description.
 --
---    :arg message: the message to be sent
---    :arg sleeptime: ms spent sleeping after the message has been dismissed by the player
+--    :arg table message, [opts]: The message consist of the `title`, the `body`
+--           and optional parameters. Note that the `body` must be formatted
+--           using the :ref:`richtext functions <richtext.lua>`.
 --
---    Besides the normal message arguments (see wl.Game.Player:message_box) the following ones can be used:
+--           **[opts]** can be a separated list of key value pairs defined by
+--           :meth:`wl.game.Player.message_box` and the following ones:
 --
---    :arg position: A string that indicates at which border of the screen the message box shall appear. Can be "top", "bottom", "right", "left" or a combination (e.g. "topright"). Overrides posx and posy. Default: Center. If only one direction is indicated, the other one stays central.
---    :arg scroll_back: If true, the view scrolls/jumps back to where it came from. If false, the new location stays on the screen when the message box is closed. Default: False.
---    :arg show_instantly: If true, the message box is shown immediately. If false, this function will wait until the player leaves the roadbuilding mode. Use this with care because it can be very interruptive. Default: false.
+--                  **position** - A string that indicates at which border of the screen the message box shall appear.
+--                  Can be "top", "bottom", "right", "left" or a combination (e.g. "topright").
+--                  Overrides posx and posy. Default: Center. If only one direction is indicated,
+--                  the other one stays centered.
 --
+--                  **scroll_back** - If true, the view scrolls/jumps back to where it came from. If false, the new
+--                  location stays on the screen when the message box is closed. Default: False.
+--
+--                  **show_instantly** - If true, the message box is shown immediately. If false, this function will
+--                  wait until the player leaves the roadbuilding mode. Be aware that this can be very interruptive.
+--                  Default: :type false:.
+--
+--    :arg int sleeptime: ms spent sleeping after the message has been dismissed by the player
+--
+--    Example:
+-- .. code-block:: lua
+--
+--    local scroll_to_field = map:get_field(47, 10)
+--    campaign_message_box({title = "The title",     -- title of the window
+--                          body = p("The body"),    -- text inside the window
+--                          w = 200,                 -- width (wl.game.Player.message_box())
+--                          h = 150,                 -- height (wl.game.Player.message_box())
+--                          position = "topleft",
+--                          field = scroll_to_field, -- see wl.game.Player.message_box()
+--                          scroll_back = true       -- only useful if 'field' was set
+--                         },
+--                         200                      -- optional sleeptime
+--                        )
+--
+-- In the campaigns of this game the table of **message** is defined in
+-- a separate file called `texts.lua`.
+--
+
 function campaign_message_box(message, sleeptime)
    message.show_instantly = message.show_instantly or false
    message.scroll_back = message.scroll_back or false
@@ -150,7 +186,9 @@ end
 --
 --    Adds an objective to a campaign.
 --
---    :arg objective: The objective to be added. If the variable obj_name exists, obj_name, obj_title and obj_body are used. Otherwise, it needs to have a name, title, and body.
+--    :arg objective: The objective to be added. If the variable obj_name exists,
+--                    obj_name, obj_title and obj_body are used. Otherwise, it
+--                    needs to have a name, title, and body.
 --
 --    :returns: The new objective.
 --

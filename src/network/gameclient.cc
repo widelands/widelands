@@ -127,11 +127,11 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
  *  @return true to indicate that run is done.
  */
 bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FullscreenMenuLaunchMPG lgm(parent, parent, *parent);
+	FullscreenMenuLaunchMPG lgm(parent->fullscreen_menu_main(), parent, parent, *parent, *game);
 	modal = &lgm;
-	FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
+	MenuTarget code = lgm.run<MenuTarget>();
 	modal = nullptr;
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
@@ -193,11 +193,12 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game = nullptr;
 }
 
-GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
+GameClient::GameClient(FullscreenMenuMain& fsmm,
+                       const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl) {
+   : d(new GameClientImpl), fsmm_(fsmm) {
 
 	d->internet_ = internet;
 
@@ -1023,7 +1024,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		if (!d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
-		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+		d->modal->end_modal<MenuTarget>(MenuTarget::kOk);
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
@@ -1118,8 +1119,8 @@ void GameClient::disconnect(const std::string& reason,
 			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
 		}
 
-		UI::WLMessageBox mmb(
-		   d->modal, _("Disconnected from Host"), msg, UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mmb(d->modal, UI::WindowStyle::kWui, _("Disconnected from Host"), msg,
+		                     UI::WLMessageBox::MBoxType::kOk);
 		mmb.run<UI::Panel::Returncodes>();
 	}
 
@@ -1130,7 +1131,7 @@ void GameClient::disconnect(const std::string& reason,
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.
 	if (d->modal) {
-		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+		d->modal->end_modal<MenuTarget>(MenuTarget::kBack);
 	}
 	d->modal = nullptr;
 }

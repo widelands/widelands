@@ -51,7 +51,8 @@ BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                Widelands::Building& b,
                                const Widelands::BuildingDescr& descr,
                                bool avoid_fastclick)
-   : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "building_window", &reg, Width, 0, b.descr().descname()),
      game_(parent.get_game()),
      is_dying_(false),
      parent_(&parent),

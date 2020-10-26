@@ -206,7 +206,7 @@ function initialize()
    place_headquarters()
    disable_unused_buildings()
 
-   send_to_all(welcome_msg.body, welcome_msg.heading)
+   send_to_all_inboxes(welcome_msg.body, welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implemented
    game.players[1]:add_objective("win_conditions", _"Rules", rt(welcome_msg.body))

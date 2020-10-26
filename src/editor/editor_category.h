@@ -24,8 +24,8 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_type.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/widelands.h"
 
 class Image;
@@ -36,7 +36,7 @@ class EditorCategory {
 public:
 	explicit EditorCategory(const LuaTable& table,
 	                        Widelands::MapObjectType type,
-	                        Widelands::World& world);
+	                        Widelands::Descriptions& descriptions);
 
 	/// Internal name.
 	const std::string& name() const;

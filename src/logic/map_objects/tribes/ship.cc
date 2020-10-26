@@ -697,7 +697,6 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 		expedition_.reset(nullptr);
 		return start_task_idle(game, descr().main_animation(), kShipInterval);
 	}
-		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
 	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input
@@ -1272,8 +1271,8 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
 				std::string name = fr.c_string();
-				const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
-				descr = egbase.tribes().get_ship_descr(ship_index);
+				const DescriptionIndex& ship_index = egbase.descriptions().safe_ship_index(name);
+				descr = egbase.descriptions().get_ship_descr(ship_index);
 				loader->init(egbase, mol, descr->create_object());
 				loader->load(fr, packet_version);
 			} catch (const WException& e) {

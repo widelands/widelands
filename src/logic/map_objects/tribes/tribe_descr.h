@@ -25,14 +25,14 @@
 #include "base/macros.h"
 #include "graphic/animation/animation.h"
 #include "graphic/toolbar_imageset.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/widelands.h"
 
 namespace Widelands {
@@ -60,8 +60,7 @@ Two players can choose the same tribe.
 class TribeDescr {
 public:
 	TribeDescr(const Widelands::TribeBasicInfo& info,
-	           Tribes& tribes,
-	           const World& world,
+	           Descriptions& descriptions,
 	           const LuaTable& table,
 	           const LuaTable* scenario_table = nullptr);
 
@@ -71,7 +70,7 @@ public:
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
 
-	const std::vector<DescriptionIndex>& buildings() const;
+	const std::set<DescriptionIndex>& buildings() const;
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
 	const std::set<DescriptionIndex>& immovables() const;
@@ -147,26 +146,27 @@ public:
 private:
 	// Helper functions for loading everything in the constructor
 	void load_frontiers_flags_roads(const LuaTable& table);
-	void load_ships(const LuaTable& table, Tribes& tribes);
-	void load_wares(const LuaTable& table, Tribes& tribes);
-	void load_immovables(const LuaTable& table, Tribes& tribes, const World& world);
-	void load_workers(const LuaTable& table, Tribes& tribes);
-	void load_buildings(const LuaTable& table, Tribes& tribes);
+	void load_ships(const LuaTable& table, Descriptions& descriptions);
+	void load_wares(const LuaTable& table, Descriptions& descriptions);
+	void load_immovables(const LuaTable& table, Descriptions& descriptions);
+	void load_workers(const LuaTable& table, Descriptions& descriptions);
+	void load_buildings(const LuaTable& table, Descriptions& descriptions);
 
 	// Helper function for adding a special worker type (carriers etc.)
-	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);
+	DescriptionIndex add_special_worker(const std::string& workername, Descriptions& descriptions);
 	// Helper function for adding a special building type (port etc.)
-	DescriptionIndex add_special_building(const std::string& buildingname, Tribes& tribes);
+	DescriptionIndex add_special_building(const std::string& buildingname,
+	                                      Descriptions& descriptions);
 	// Make sure that everything is there and that dependencies are calculated
-	void finalize_loading(Tribes& tribes, const World& world);
+	void finalize_loading(Descriptions& descriptions);
 	// Helper function to calculate trainingsites proportions for the AI
-	void calculate_trainingsites_proportions(const Tribes& tribes);
+	void calculate_trainingsites_proportions(Descriptions& descriptions);
 
-	void process_productionsites(Tribes& tribes, const World& world);
+	void process_productionsites(Descriptions& descriptions);
 
 	const std::string name_;
 	const std::string descname_;
-	const Tribes& tribes_;
+	const Descriptions& descriptions_;
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
@@ -183,7 +183,7 @@ private:
 	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	RoadTextures road_textures_;
 
-	std::vector<DescriptionIndex> buildings_;
+	std::set<DescriptionIndex> buildings_;
 	std::set<DescriptionIndex> immovables_;  // The player immovables
 	std::set<DescriptionIndex> workers_;
 	std::set<DescriptionIndex> wares_;

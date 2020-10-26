@@ -79,7 +79,7 @@ Player
 */
 const char LuaPlayer::className[] = "Player";
 const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
-   METHOD(LuaPlayer, send_message),
+   METHOD(LuaPlayer, send_to_inbox),
    METHOD(LuaPlayer, message_box),
    METHOD(LuaPlayer, sees_field),
    METHOD(LuaPlayer, seen_field),
@@ -160,8 +160,8 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
 	Widelands::Player& player = get(L, egbase);
 
 	lua_newtable(L);
-	for (Widelands::DescriptionIndex i = 0; i < egbase.tribes().nrbuildings(); ++i) {
-		const Widelands::BuildingDescr* building_descr = egbase.tribes().get_building_descr(i);
+	for (Widelands::DescriptionIndex i = 0; i < egbase.descriptions().nr_buildings(); ++i) {
+		const Widelands::BuildingDescr* building_descr = egbase.descriptions().get_building_descr(i);
 		lua_pushstring(L, building_descr->name().c_str());
 		lua_pushboolean(L, player.is_building_type_allowed(i));
 		lua_settable(L, -3);
@@ -199,8 +199,8 @@ int LuaPlayer::get_defeated(lua_State* L) {
 /* RST
    .. attribute:: messages
 
-      (RO) An array of all the messages sent to the player. Note that you
-      can't add messages to this array, use :meth:`send_message` for that.
+      (RO) An array of all the inbox messages sent to the player. Note that you
+      can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_messages(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
@@ -209,7 +209,7 @@ int LuaPlayer::get_messages(lua_State* L) {
 	uint32_t cidx = 1;
 	for (const auto& temp_message : p.messages()) {
 		lua_pushuint32(L, cidx++);
-		to_lua<LuaMessage>(L, new LuaMessage(player_number(), temp_message.first));
+		to_lua<LuaInboxMessage>(L, new LuaInboxMessage(player_number(), temp_message.first));
 		lua_rawset(L, -3);
 	}
 
@@ -219,8 +219,8 @@ int LuaPlayer::get_messages(lua_State* L) {
 /* RST
    .. attribute:: inbox
 
-      (RO) An array of the messages that are either read or new. Note that you
-      can't add messages to this array, use :meth:`send_message` for that.
+      (RO) An array of the inbox messages that are either read or new. Note that you
+      can't add messages to this array, use :meth:`send_to_inbox` for that.
 */
 int LuaPlayer::get_inbox(lua_State* L) {
 	Widelands::Player& p = get(L, get_egbase(L));
@@ -233,7 +233,7 @@ int LuaPlayer::get_inbox(lua_State* L) {
 		}
 
 		lua_pushuint32(L, cidx++);
-		to_lua<LuaMessage>(L, new LuaMessage(player_number(), temp_message.first));
+		to_lua<LuaInboxMessage>(L, new LuaInboxMessage(player_number(), temp_message.first));
 		lua_rawset(L, -3);
 	}
 
@@ -316,17 +316,20 @@ int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
  */
 
 /* RST
-   .. method:: send_message(t, m[, opts])
+   .. method:: send_to_inbox(title, message[, opts])
 
-      Send a message to the player, the message will
-      appear in his inbox. Title or Message can be a
-      formatted using wideland's rich text.
+      Send a message to the players inbox.
+      There is also a function :meth:`send_to_inbox` in `messages.lua`, which
+      has an option to wait before sending the message until the player leaves
+      the roadbuilding mode.
+      Title or Message can be a formatted using widelands'
+      :ref:`richtext functions <richtext.lua>`.
 
-      :arg t: title of the message
-      :type t: :class:`string`
+      :arg title: title of the message
+      :type title: :class:`string`
 
-      :arg m: text of the message
-      :type m: :class:`string`
+      :arg message: text of the message
+      :type message: :class:`string`
 
       Opts is a table of optional arguments and can be omitted. If it
       exist it must contain string/value pairs of the following type:
@@ -353,9 +356,9 @@ int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
       :type building: :class:`string`
 
       :returns: the message created
-      :rtype: :class:`wl.game.Message`
+      :rtype: :class:`wl.game.InboxMessage`
 */
-int LuaPlayer::send_message(lua_State* L) {
+int LuaPlayer::send_to_inbox(lua_State* L) {
 	uint32_t n = lua_gettop(L);
 	const std::string title = luaL_checkstring(L, 2);
 	std::string heading = title;
@@ -428,22 +431,21 @@ int LuaPlayer::send_message(lua_State* L) {
 	                      heading, body, c, 0, sub_type, st)),
 	                   popup);
 
-	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
+	return to_lua<LuaInboxMessage>(L, new LuaInboxMessage(player_number(), message));
 }
 
 /* RST
-   .. method:: message_box(t, m[, opts])
+   .. method:: message_box(title, message[, opts])
 
       Shows a message box to the player. While the message box is displayed the
-      game will not continue. Use this carefully and prefer
-      :meth:`send_message` because it is less interruptive, but nevertheless
-      for a set of narrative messages with map movements, this is still useful.
+      game is set to pause. Usually you want to use :meth:`campaign_message_box`
+      which has more options, e.g. easier positioning of message boxes.
 
-      :arg t: title of the message
-      :type t: :class:`string`
+      :arg title: title of the message
+      :type title: :class:`string`
 
-      :arg m: text of the message
-      :type m: :class:`string`
+      :arg message: text of the message
+      :type message: :class:`string`
 
       Opts is a table of optional arguments and can be omitted. If it
       exist it must contain string/value pairs of the following type:
@@ -864,15 +866,15 @@ int LuaPlayer::get_buildings(lua_State* L) {
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
 	Widelands::Game& game = get_game(L);
-	const Widelands::Tribes& tribes = game.tribes();
+	const Widelands::Descriptions& descriptions = game.descriptions();
 
 	const char* name = luaL_checkstring(L, 2);
-	Widelands::DescriptionIndex i = tribes.building_index(name);
-	if (!tribes.building_exists(i)) {
+	Widelands::DescriptionIndex i = descriptions.building_index(name);
+	if (!descriptions.building_exists(i)) {
 		report_error(L, "Unknown building type: <%s>", name);
 	}
 
-	lua_pushboolean(L, tribes.get_building_descr(i)->suitability(
+	lua_pushboolean(L, descriptions.get_building_descr(i)->suitability(
 	                      game.map(), (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L)));
 	return 1;
 }
@@ -899,7 +901,8 @@ int LuaPlayer::allow_workers(lua_State* L) {
 	   tribe.worker_types_without_cost();
 
 	for (const Widelands::DescriptionIndex& worker_index : tribe.workers()) {
-		const Widelands::WorkerDescr* worker_descr = game.tribes().get_worker_descr(worker_index);
+		const Widelands::WorkerDescr* worker_descr =
+		   game.descriptions().get_worker_descr(worker_index);
 		if (!worker_descr->is_buildable()) {
 			continue;
 		}
@@ -1020,7 +1023,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
                                     const Widelands::TribeDescr& tribe,
                                     std::vector<Widelands::DescriptionIndex>& rv) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	const Widelands::Tribes& tribes = egbase.tribes();
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all") {
@@ -1028,7 +1031,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		}
 		// Only act on buildings that the tribe has or could conquer
 		const Widelands::TribeDescr& tribe_descr = get(L, egbase).tribe();
-		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
+		for (size_t i = 0; i < descriptions.nr_buildings(); ++i) {
 			const Widelands::DescriptionIndex& building_index =
 			   static_cast<Widelands::DescriptionIndex>(i);
 			const Widelands::BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
@@ -1045,7 +1048,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		while (lua_next(L, -2) != 0) {
 			const char* name = luaL_checkstring(L, -1);
 			Widelands::DescriptionIndex i = tribe.building_index(name);
-			if (!tribes.building_exists(i)) {
+			if (!descriptions.building_exists(i)) {
 				report_error(L, "Unknown building type: '%s'", name);
 			}
 
@@ -1236,34 +1239,35 @@ Widelands::Objective& LuaObjective::get(lua_State* L, Widelands::Game& g) {
 }
 
 /* RST
-Message
----------
+InboxMessage
+------------
 
-.. class:: Message
+.. class:: InboxMessage
 
-   This represents a message in the Message Box of a given user.
+   This represents a message in the inbox of a player.
 */
-const char LuaMessage::className[] = "Message";
-const MethodType<LuaMessage> LuaMessage::Methods[] = {
-   METHOD(LuaMessage, __eq),
+const char LuaInboxMessage::className[] = "InboxMessage";
+const MethodType<LuaInboxMessage> LuaInboxMessage::Methods[] = {
+   METHOD(LuaInboxMessage, __eq),
    {nullptr, nullptr},
 };
-const PropertyType<LuaMessage> LuaMessage::Properties[] = {
-   PROP_RO(LuaMessage, title),     PROP_RO(LuaMessage, body),   PROP_RO(LuaMessage, sent),
-   PROP_RO(LuaMessage, field),     PROP_RW(LuaMessage, status), PROP_RO(LuaMessage, heading),
-   PROP_RO(LuaMessage, icon_name), {nullptr, nullptr, nullptr},
+const PropertyType<LuaInboxMessage> LuaInboxMessage::Properties[] = {
+   PROP_RO(LuaInboxMessage, title),     PROP_RO(LuaInboxMessage, body),
+   PROP_RO(LuaInboxMessage, sent),      PROP_RO(LuaInboxMessage, field),
+   PROP_RW(LuaInboxMessage, status),    PROP_RO(LuaInboxMessage, heading),
+   PROP_RO(LuaInboxMessage, icon_name), {nullptr, nullptr, nullptr},
 };
 
-LuaMessage::LuaMessage(uint8_t plr, Widelands::MessageId id) {
+LuaInboxMessage::LuaInboxMessage(uint8_t plr, Widelands::MessageId id) {
 	player_number_ = plr;
 	message_id_ = id;
 }
 
-void LuaMessage::__persist(lua_State* L) {
+void LuaInboxMessage::__persist(lua_State* L) {
 	PERS_UINT32("player", player_number_);
 	PERS_UINT32("msg_idx", get_mos(L)->message_savers[player_number_ - 1][message_id_].value());
 }
-void LuaMessage::__unpersist(lua_State* L) {
+void LuaInboxMessage::__unpersist(lua_State* L) {
 	UNPERS_UINT32("player", player_number_)
 	uint32_t midx = 0;
 	UNPERS_UINT32("msg_idx", midx)
@@ -1281,7 +1285,7 @@ void LuaMessage::__unpersist(lua_State* L) {
 
       (RO) The title of this message
 */
-int LuaMessage::get_title(lua_State* L) {
+int LuaInboxMessage::get_title(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).title());
 	return 1;
 }
@@ -1290,7 +1294,7 @@ int LuaMessage::get_title(lua_State* L) {
 
       (RO) The body of this message
 */
-int LuaMessage::get_body(lua_State* L) {
+int LuaInboxMessage::get_body(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).body());
 	return 1;
 }
@@ -1300,7 +1304,7 @@ int LuaMessage::get_body(lua_State* L) {
 
       (RO) The game time in milliseconds when this message was sent
 */
-int LuaMessage::get_sent(lua_State* L) {
+int LuaInboxMessage::get_sent(lua_State* L) {
 	lua_pushuint32(L, get(L, get_game(L)).sent().get());
 	return 1;
 }
@@ -1310,7 +1314,7 @@ int LuaMessage::get_sent(lua_State* L) {
 
       (RO) The field that corresponds to this Message.
 */
-int LuaMessage::get_field(lua_State* L) {
+int LuaInboxMessage::get_field(lua_State* L) {
 	Widelands::Coords c = get(L, get_game(L)).position();
 	if (c == Widelands::Coords::null()) {
 		return 0;
@@ -1327,7 +1331,7 @@ int LuaMessage::get_field(lua_State* L) {
          * read
          * archived
 */
-int LuaMessage::get_status(lua_State* L) {
+int LuaInboxMessage::get_status(lua_State* L) {
 	switch (get(L, get_game(L)).status()) {
 	case Widelands::Message::Status::kNew:
 		lua_pushstring(L, "new");
@@ -1341,7 +1345,7 @@ int LuaMessage::get_status(lua_State* L) {
 	}
 	return 1;
 }
-int LuaMessage::set_status(lua_State* L) {
+int LuaInboxMessage::set_status(lua_State* L) {
 	Widelands::Message::Status status = Widelands::Message::Status::kNew;
 	std::string s = luaL_checkstring(L, -1);
 	if (s == "new") {
@@ -1364,7 +1368,7 @@ int LuaMessage::set_status(lua_State* L) {
 
       (RO) The long heading of this message that is shown in the body
 */
-int LuaMessage::get_heading(lua_State* L) {
+int LuaInboxMessage::get_heading(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).heading());
 	return 1;
 }
@@ -1374,7 +1378,7 @@ int LuaMessage::get_heading(lua_State* L) {
 
       (RO) The filename for the icon that is shown with the message title
 */
-int LuaMessage::get_icon_name(lua_State* L) {
+int LuaInboxMessage::get_icon_name(lua_State* L) {
 	lua_pushstring(L, get(L, get_game(L)).icon_filename());
 	return 1;
 }
@@ -1384,8 +1388,8 @@ int LuaMessage::get_icon_name(lua_State* L) {
  LUA METHODS
  ==========================================================
  */
-int LuaMessage::__eq(lua_State* L) {
-	lua_pushboolean(L, message_id_ == (*get_user_class<LuaMessage>(L, 2))->message_id_);
+int LuaInboxMessage::__eq(lua_State* L) {
+	lua_pushboolean(L, message_id_ == (*get_user_class<LuaInboxMessage>(L, 2))->message_id_);
 	return 1;
 }
 
@@ -1394,7 +1398,7 @@ int LuaMessage::__eq(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaMessage::get_plr(lua_State* L, Widelands::Game& game) {
+Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, Widelands::Game& game) {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}
@@ -1404,7 +1408,7 @@ Widelands::Player& LuaMessage::get_plr(lua_State* L, Widelands::Game& game) {
 	}
 	return *rv;
 }
-const Widelands::Message& LuaMessage::get(lua_State* L, Widelands::Game& game) {
+const Widelands::Message& LuaInboxMessage::get(lua_State* L, Widelands::Game& game) {
 	const Widelands::Message* rv = get_plr(L, game).messages()[message_id_];
 	if (!rv) {
 		report_error(L, "This message has been deleted!");
@@ -1462,6 +1466,6 @@ void luaopen_wlgame(lua_State* L) {
 	lua_pop(L, 1);  // Pop the meta table
 
 	register_class<LuaObjective>(L, "game");
-	register_class<LuaMessage>(L, "game");
+	register_class<LuaInboxMessage>(L, "game");
 }
 }  // namespace LuaGame
