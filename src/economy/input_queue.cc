@@ -143,10 +143,10 @@ void InputQueue::read(FileRead& fr,
 		if (packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
-				game.descriptions().safe_ware_index(fr.c_string());
+				index_ = game.descriptions().safe_ware_index(fr.c_string());
 			} else {
 				assert(type_ == wwWORKER);
-				game.descriptions().safe_worker_index(fr.c_string());
+				index_ = game.descriptions().safe_worker_index(fr.c_string());
 			}
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
@@ -173,6 +173,7 @@ void InputQueue::read(FileRead& fr,
 
 void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
+	assert(index_ != Widelands::INVALID_INDEX);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
 	switch (type_) {
