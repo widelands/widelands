@@ -80,7 +80,6 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 	} catch (...) {
 		return;
 	}
-// NCOCOM Fatal exception: buildingdata: building 1: warehouse: Unknown ware 'clay'
 
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
@@ -362,22 +361,22 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 
 			while (fr.unsigned_8()) {
 				const DescriptionIndex& id =
-				   tribe.safe_ware_index(fr.c_string());
+				   game.mutable_descriptions()->load_ware(fr.c_string());
 				Quantity amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (game.descriptions().ware_exists(id)) {
+				if (tribe.has_ware(id)) { // NOCOM why are we saving unused ware types?
 					warehouse.insert_wares(id, amount);
 					warehouse.set_ware_policy(id, policy);
 				}
 			}
 			while (fr.unsigned_8()) {
 				const DescriptionIndex& id =
-				   tribe.safe_worker_index(fr.c_string());
+				   game.mutable_descriptions()->load_worker(fr.c_string());
 				uint32_t amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (game.descriptions().worker_exists(id)) {
+				if (tribe.has_worker(id)) { // NOCOM why are we saving unused worker types?
 					warehouse.insert_workers(id, amount);
 					warehouse.set_worker_policy(id, policy);
 				}
