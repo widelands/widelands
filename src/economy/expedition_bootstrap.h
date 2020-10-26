@@ -87,11 +87,8 @@ public:
 	 * The actual data is stored in the buildingdata
 	 * packet, and there in the warehouse data packet.
 	 */
-	void load(Warehouse& warehouse,
-	          FileRead& fr,
-	          Game& game,
-	          MapObjectLoader& mol,
-	          uint16_t version);
+	void
+	load(Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t version);
 
 	/** Save this into a file.
 	 *

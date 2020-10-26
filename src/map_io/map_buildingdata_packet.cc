@@ -228,11 +228,10 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 	}
 }
 
-void MapBuildingdataPacket::read_partially_finished_building(
-   PartiallyFinishedBuilding& pfb,
-   FileRead& fr,
-   Game& game,
-   MapObjectLoader& mol) {
+void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBuilding& pfb,
+                                                             FileRead& fr,
+                                                             Game& game,
+                                                             MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketPFBuilding) {
@@ -289,11 +288,10 @@ void MapBuildingdataPacket::read_partially_finished_building(
 	}
 }
 
-void MapBuildingdataPacket::read_constructionsite(
-   ConstructionSite& constructionsite,
-   FileRead& fr,
-   Game& game,
-   MapObjectLoader& mol) {
+void MapBuildingdataPacket::read_constructionsite(ConstructionSite& constructionsite,
+                                                  FileRead& fr,
+                                                  Game& game,
+                                                  MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= 3) {
@@ -315,8 +313,8 @@ void MapBuildingdataPacket::read_constructionsite(
 					   game.descriptions().get_building_descr(
 					      game.descriptions().safe_building_index(fr.c_string())));
 				}
-				constructionsite.settings_.reset(BuildingSettings::load(
-				   game, constructionsite.owner().tribe(), fr));
+				constructionsite.settings_.reset(
+				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));
 			} else {
 				constructionsite.init_settings();
 			}
@@ -360,24 +358,24 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 			const TribeDescr& tribe = player->tribe();
 
 			while (fr.unsigned_8()) {
-				const DescriptionIndex& id =
-				   game.mutable_descriptions()->load_ware(fr.c_string());
+				const DescriptionIndex& id = game.mutable_descriptions()->load_ware(fr.c_string());
 				Quantity amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				// TODO(GunChleoc): Change these from vector to map so that we can avoid saveloading unused wares
+				// TODO(GunChleoc): Change these from vector to map so that we can avoid saveloading
+				// unused wares
 				if (tribe.has_ware(id)) {
 					warehouse.insert_wares(id, amount);
 					warehouse.set_ware_policy(id, policy);
 				}
 			}
 			while (fr.unsigned_8()) {
-				const DescriptionIndex& id =
-				   game.mutable_descriptions()->load_worker(fr.c_string());
+				const DescriptionIndex& id = game.mutable_descriptions()->load_worker(fr.c_string());
 				uint32_t amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				// TODO(GunChleoc): Change these from vector to map so that we can avoid saveloading unused workers
+				// TODO(GunChleoc): Change these from vector to map so that we can avoid saveloading
+				// unused workers
 				if (tribe.has_worker(id)) {
 					warehouse.insert_workers(id, amount);
 					warehouse.set_worker_policy(id, policy);
@@ -598,11 +596,10 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 	}
 }
 
-void MapBuildingdataPacket::read_productionsite(
-   ProductionSite& productionsite,
-   FileRead& fr,
-   Game& game,
-   MapObjectLoader& mol) {
+void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
+                                                FileRead& fr,
+                                                Game& game,
+                                                MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersionProductionsite) {

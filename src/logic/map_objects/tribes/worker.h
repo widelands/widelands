@@ -323,10 +323,8 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	virtual void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&);
 
-	static MapObject::Loader* load(EditorGameBase&,
-	                               MapObjectLoader&,
-	                               FileRead&,
-	                               uint8_t packet_version);
+	static MapObject::Loader*
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, uint8_t packet_version);
 };
 }  // namespace Widelands
 

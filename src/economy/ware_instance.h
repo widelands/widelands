@@ -119,8 +119,7 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader*
-	load(EditorGameBase&, MapObjectLoader&, FileRead&);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
 }  // namespace Widelands
 

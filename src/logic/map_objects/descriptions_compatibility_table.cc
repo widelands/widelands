@@ -33,9 +33,8 @@ DescriptionsCompatibilityTable::DescriptionsCompatibilityTable()
      ships_{} {
 }
 
-const std::string&
-DescriptionsCompatibilityTable::lookup_entry(const std::string& entry,
-                                      const std::map<std::string, std::string>& table) const {
+const std::string& DescriptionsCompatibilityTable::lookup_entry(
+   const std::string& entry, const std::map<std::string, std::string>& table) const {
 	const auto& i = table.find(entry);
 	if (i != table.end()) {
 		return i->second;
@@ -51,7 +50,8 @@ const std::string& DescriptionsCompatibilityTable::lookup_ware(const std::string
 	return lookup_entry(ware, wares_);
 }
 
-const std::string& DescriptionsCompatibilityTable::lookup_building(const std::string& building) const {
+const std::string&
+DescriptionsCompatibilityTable::lookup_building(const std::string& building) const {
 	return lookup_entry(building, buildings_);
 }
 
@@ -149,14 +149,14 @@ std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& i
 OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_world_name)
    : old_world_name_(old_world_name),
      // RESOURCES - They were all the same for all worlds.
-	 // All resources are always needed for map compatibility
+     // All resources are always needed for map compatibility
      resources_{{"granit", "resource_stones"}, {"stones", "resource_stones"},
                 {"gold", "resource_gold"},     {"iron", "resource_iron"},
                 {"coal", "resource_coal"},     {"water", "resource_water"},
                 {"fish", "resource_fish"}},
 
      // TERRAINS
-	 // All terrains are always needed for map compatibility
+     // All terrains are always needed for map compatibility
      terrains_{
         std::make_pair("greenland",
                        std::map<std::string, std::string>{
@@ -211,7 +211,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
      },
 
      // CRITTERS
-	 // All critters are always needed for map compatibility
+     // All critters are always needed for map compatibility
      critters_{
         std::make_pair("greenland",
                        std::map<std::string, std::string>{
@@ -235,112 +235,114 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
 
      // IMMOVABLES
      immovables_{
-        std::make_pair("blackland",
-                       std::map<std::string, std::string>{
-						   // World immovables are always needed for map compatibility
-                          {"stones1", "blackland_rocks1"},
-                          {"stones2", "blackland_rocks2"},
-                          {"stones3", "blackland_rocks3"},
-                          {"stones4", "blackland_rocks4"},
-                          {"stones5", "blackland_rocks5"},
-                          {"stones6", "blackland_rocks6"},
-                          {"sstones1", "standing_stone1_wasteland"},
-                          {"sstones2", "standing_stone2_wasteland"},
-                          {"sstones3", "standing_stone3_wasteland"},
-                          {"sstones4", "standing_stone4_wasteland"},
-                          {"sstones5", "standing_stone5_wasteland"},
-                          {"sstones6", "standing_stone6"},
-                          {"sstones7", "standing_stone7"},
-                          {"tree1", "umbrella_red_wasteland_old"},
-                          {"tree1_m", "umbrella_red_wasteland_mature"},
-                          {"tree1_s", "umbrella_red_wasteland_pole"},
-                          {"tree1_t", "umbrella_red_wasteland_sapling"},
-                          {"tree2", "mushroom_dark_wasteland_old"},
-                          {"tree2_m", "mushroom_dark_wasteland_mature"},
-                          {"tree2_s", "mushroom_dark_wasteland_pole"},
-                          {"tree2_t", "mushroom_dark_wasteland_sapling"},
-                          {"tree3", "twine_wasteland_old"},
-                          {"tree3_m", "twine_wasteland_mature"},
-                          {"tree3_s", "twine_wasteland_pole"},
-                          {"tree3_t", "twine_wasteland_sapling"},
-                          {"tree4", "umbrella_green_wasteland_old"},
-                          {"tree4_m", "umbrella_green_wasteland_mature"},
-                          {"tree4_s", "umbrella_green_wasteland_pole"},
-                          {"tree4_t", "umbrella_green_wasteland_sapling"},
-                          {"tree5", "mushroom_red_wasteland_old"},
-                          {"tree5_m", "mushroom_red_wasteland_mature"},
-                          {"tree5_s", "mushroom_red_wasteland_pole"},
-                          {"tree5_t", "mushroom_red_wasteland_sapling"},
-                          {"tree6", "mushroom_green_wasteland_old"},
-                          {"tree6_m", "mushroom_green_wasteland_mature"},
-                          {"tree6_s", "mushroom_green_wasteland_pole"},
-                          {"tree6_t", "mushroom_green_wasteland_sapling"},
-                          {"tree7", "cirrus_wasteland_old"},
-                          {"tree7_m", "cirrus_wasteland_mature"},
-                          {"tree7_s", "cirrus_wasteland_pole"},
-                          {"tree7_t", "cirrus_wasteland_sapling"},
-                          {"tree8", "liana_wasteland_old"},
-                          {"tree8_m", "liana_wasteland_mature"},
-                          {"tree8_s", "liana_wasteland_pole"},
-                          {"tree8_t", "liana_wasteland_sapling"},
-						   // Tribe immovables below - can be deleted whenever we break map compatibility
-                       }),
-        std::make_pair("desert",
-                       std::map<std::string, std::string>{
-						   // World immovables are always needed for map compatibility
-                          {"deadtree2", "deadtree5"},
-                          {"deadtree3", "deadtree6"},
-                          {"sstones1", "standing_stone1_desert"},
-                          {"sstones2", "standing_stone2_desert"},
-                          {"sstones3", "standing_stone3_desert"},
-                          {"sstones4", "standing_stone4_desert"},
-                          {"sstones5", "standing_stone5_desert"},
-                          {"sstones6", "standing_stone6"},
-                          {"sstones7", "standing_stone7"},
-                          {"stones1", "desert_rocks1"},
-                          {"stones2", "desert_rocks2"},
-                          {"stones3", "desert_rocks3"},
-                          {"stones4", "desert_rocks4"},
-                          {"stones5", "desert_rocks5"},
-                          {"stones6", "desert_rocks6"},
-                          {"tree1", "palm_date_desert_old"},
-                          {"tree1_m", "palm_date_desert_mature"},
-                          {"tree1_s", "palm_date_desert_pole"},
-                          {"tree1_t", "palm_date_desert_sapling"},
-                          {"tree2", "palm_borassus_desert_old"},
-                          {"tree2_m", "palm_borassus_desert_mature"},
-                          {"tree2_s", "palm_borassus_desert_pole"},
-                          {"tree2_t", "palm_borassus_desert_sapling"},
-                          {"tree3", "palm_coconut_desert_old"},
-                          {"tree3_m", "palm_coconut_desert_mature"},
-                          {"tree3_s", "palm_coconut_desert_pole"},
-                          {"tree3_t", "palm_coconut_desert_sapling"},
-                          {"tree4", "palm_roystonea_desert_old"},
-                          {"tree4_m", "palm_roystonea_desert_mature"},
-                          {"tree4_s", "palm_roystonea_desert_pole"},
-                          {"tree4_t", "palm_roystonea_desert_sapling"},
-                          {"tree5", "palm_oil_desert_old"},
-                          {"tree5_m", "palm_oil_desert_mature"},
-                          {"tree5_s", "palm_oil_desert_pole"},
-                          {"tree5_t", "palm_oil_desert_sapling"},
-                          {"tree6", "beech_summer_old"},
-                          {"tree6_m", "beech_summer_mature"},
-                          {"tree6_s", "beech_summer_pole"},
-                          {"tree6_t", "beech_summer_sapling"},
-                          {"tree7", "larch_summer_old"},
-                          {"tree7_m", "larch_summer_mature"},
-                          {"tree7_s", "larch_summer_pole"},
-                          {"tree7_t", "larch_summer_sapling"},
-                          {"tree8", "rowan_summer_old"},
-                          {"tree8_m", "rowan_summer_mature"},
-                          {"tree8_s", "rowan_summer_pole"},
-                          {"tree8_t", "rowan_summer_sapling"},
-						   // Tribe immovables below - can be deleted whenever we break map compatibility
-                       }),
+        std::make_pair(
+           "blackland",
+           std::map<std::string, std::string>{
+              // World immovables are always needed for map compatibility
+              {"stones1", "blackland_rocks1"},
+              {"stones2", "blackland_rocks2"},
+              {"stones3", "blackland_rocks3"},
+              {"stones4", "blackland_rocks4"},
+              {"stones5", "blackland_rocks5"},
+              {"stones6", "blackland_rocks6"},
+              {"sstones1", "standing_stone1_wasteland"},
+              {"sstones2", "standing_stone2_wasteland"},
+              {"sstones3", "standing_stone3_wasteland"},
+              {"sstones4", "standing_stone4_wasteland"},
+              {"sstones5", "standing_stone5_wasteland"},
+              {"sstones6", "standing_stone6"},
+              {"sstones7", "standing_stone7"},
+              {"tree1", "umbrella_red_wasteland_old"},
+              {"tree1_m", "umbrella_red_wasteland_mature"},
+              {"tree1_s", "umbrella_red_wasteland_pole"},
+              {"tree1_t", "umbrella_red_wasteland_sapling"},
+              {"tree2", "mushroom_dark_wasteland_old"},
+              {"tree2_m", "mushroom_dark_wasteland_mature"},
+              {"tree2_s", "mushroom_dark_wasteland_pole"},
+              {"tree2_t", "mushroom_dark_wasteland_sapling"},
+              {"tree3", "twine_wasteland_old"},
+              {"tree3_m", "twine_wasteland_mature"},
+              {"tree3_s", "twine_wasteland_pole"},
+              {"tree3_t", "twine_wasteland_sapling"},
+              {"tree4", "umbrella_green_wasteland_old"},
+              {"tree4_m", "umbrella_green_wasteland_mature"},
+              {"tree4_s", "umbrella_green_wasteland_pole"},
+              {"tree4_t", "umbrella_green_wasteland_sapling"},
+              {"tree5", "mushroom_red_wasteland_old"},
+              {"tree5_m", "mushroom_red_wasteland_mature"},
+              {"tree5_s", "mushroom_red_wasteland_pole"},
+              {"tree5_t", "mushroom_red_wasteland_sapling"},
+              {"tree6", "mushroom_green_wasteland_old"},
+              {"tree6_m", "mushroom_green_wasteland_mature"},
+              {"tree6_s", "mushroom_green_wasteland_pole"},
+              {"tree6_t", "mushroom_green_wasteland_sapling"},
+              {"tree7", "cirrus_wasteland_old"},
+              {"tree7_m", "cirrus_wasteland_mature"},
+              {"tree7_s", "cirrus_wasteland_pole"},
+              {"tree7_t", "cirrus_wasteland_sapling"},
+              {"tree8", "liana_wasteland_old"},
+              {"tree8_m", "liana_wasteland_mature"},
+              {"tree8_s", "liana_wasteland_pole"},
+              {"tree8_t", "liana_wasteland_sapling"},
+              // Tribe immovables below - can be deleted whenever we break map compatibility
+           }),
+        std::make_pair(
+           "desert",
+           std::map<std::string, std::string>{
+              // World immovables are always needed for map compatibility
+              {"deadtree2", "deadtree5"},
+              {"deadtree3", "deadtree6"},
+              {"sstones1", "standing_stone1_desert"},
+              {"sstones2", "standing_stone2_desert"},
+              {"sstones3", "standing_stone3_desert"},
+              {"sstones4", "standing_stone4_desert"},
+              {"sstones5", "standing_stone5_desert"},
+              {"sstones6", "standing_stone6"},
+              {"sstones7", "standing_stone7"},
+              {"stones1", "desert_rocks1"},
+              {"stones2", "desert_rocks2"},
+              {"stones3", "desert_rocks3"},
+              {"stones4", "desert_rocks4"},
+              {"stones5", "desert_rocks5"},
+              {"stones6", "desert_rocks6"},
+              {"tree1", "palm_date_desert_old"},
+              {"tree1_m", "palm_date_desert_mature"},
+              {"tree1_s", "palm_date_desert_pole"},
+              {"tree1_t", "palm_date_desert_sapling"},
+              {"tree2", "palm_borassus_desert_old"},
+              {"tree2_m", "palm_borassus_desert_mature"},
+              {"tree2_s", "palm_borassus_desert_pole"},
+              {"tree2_t", "palm_borassus_desert_sapling"},
+              {"tree3", "palm_coconut_desert_old"},
+              {"tree3_m", "palm_coconut_desert_mature"},
+              {"tree3_s", "palm_coconut_desert_pole"},
+              {"tree3_t", "palm_coconut_desert_sapling"},
+              {"tree4", "palm_roystonea_desert_old"},
+              {"tree4_m", "palm_roystonea_desert_mature"},
+              {"tree4_s", "palm_roystonea_desert_pole"},
+              {"tree4_t", "palm_roystonea_desert_sapling"},
+              {"tree5", "palm_oil_desert_old"},
+              {"tree5_m", "palm_oil_desert_mature"},
+              {"tree5_s", "palm_oil_desert_pole"},
+              {"tree5_t", "palm_oil_desert_sapling"},
+              {"tree6", "beech_summer_old"},
+              {"tree6_m", "beech_summer_mature"},
+              {"tree6_s", "beech_summer_pole"},
+              {"tree6_t", "beech_summer_sapling"},
+              {"tree7", "larch_summer_old"},
+              {"tree7_m", "larch_summer_mature"},
+              {"tree7_s", "larch_summer_pole"},
+              {"tree7_t", "larch_summer_sapling"},
+              {"tree8", "rowan_summer_old"},
+              {"tree8_m", "rowan_summer_mature"},
+              {"tree8_s", "rowan_summer_pole"},
+              {"tree8_t", "rowan_summer_sapling"},
+              // Tribe immovables below - can be deleted whenever we break map compatibility
+           }),
         std::make_pair(
            "greenland",
            std::map<std::string, std::string>{
-				 // World immovables are always needed for map compatibility
+              // World immovables are always needed for map compatibility
               {"sstones1", "standing_stone1_summer"}, {"sstones2", "standing_stone2_summer"},
               {"sstones3", "standing_stone3_summer"}, {"sstones4", "standing_stone4_summer"},
               {"sstones5", "standing_stone5_summer"}, {"sstones6", "standing_stone6"},
@@ -364,66 +366,68 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
               {"tree7_t", "larch_summer_sapling"},    {"tree8", "rowan_summer_old"},
               {"tree8_m", "rowan_summer_mature"},     {"tree8_s", "rowan_summer_pole"},
               {"tree8_t", "rowan_summer_sapling"},
-				 // Tribe immovables below - can be deleted whenever we break map compatibility
+              // Tribe immovables below - can be deleted whenever we break map compatibility
            }),
-        std::make_pair("winterland",
-                       std::map<std::string, std::string>{
-						   // World immovables are always needed for map compatibility
-                          {"sstones1", "standing_stone1_winter"},
-                          {"sstones2", "standing_stone2_winter"},
-                          {"sstones3", "standing_stone3_winter"},
-                          {"sstones4", "standing_stone4_winter"},
-                          {"sstones5", "standing_stone5_winter"},
-                          {"sstones6", "standing_stone6"},
-                          {"sstones7", "standing_stone7"},
-                          {"stones1", "winterland_rocks1"},
-                          {"stones2", "winterland_rocks2"},
-                          {"stones3", "winterland_rocks3"},
-                          {"stones4", "winterland_rocks4"},
-                          {"stones5", "winterland_rocks5"},
-                          {"stones6", "winterland_rocks6"},
-                          {"track", "track_winter"},
-                          {"tree1", "aspen_summer_old"},
-                          {"tree1_m", "aspen_summer_mature"},
-                          {"tree1_s", "aspen_summer_pole"},
-                          {"tree1_t", "aspen_summer_sapling"},
-                          {"tree2", "oak_summer_old"},
-                          {"tree2_m", "oak_summer_mature"},
-                          {"tree2_s", "oak_summer_pole"},
-                          {"tree2_t", "oak_summer_sapling"},
-                          {"tree3", "spruce_summer_old"},
-                          {"tree3_m", "spruce_summer_mature"},
-                          {"tree3_s", "spruce_summer_pole"},
-                          {"tree3_t", "spruce_summer_sapling"},
-                          {"tree4", "maple_winter_old"},
-                          {"tree4_m", "maple_winter_mature"},
-                          {"tree4_s", "maple_winter_pole"},
-                          {"tree4_t", "maple_winter_sapling"},
-                          {"tree5", "birch_summer_old"},
-                          {"tree5_m", "birch_summer_mature"},
-                          {"tree5_s", "birch_summer_pole"},
-                          {"tree5_t", "birch_summer_sapling"},
-                          {"tree6", "beech_summer_old"},
-                          {"tree6_m", "beech_summer_mature"},
-                          {"tree6_s", "beech_summer_pole"},
-                          {"tree6_t", "beech_summer_sapling"},
-                          {"tree7", "larch_summer_old"},
-                          {"tree7_m", "larch_summer_mature"},
-                          {"tree7_s", "larch_summer_pole"},
-                          {"tree7_t", "larch_summer_sapling"},
-                          {"tree8", "rowan_summer_old"},
-                          {"tree8_m", "rowan_summer_mature"},
-                          {"tree8_s", "rowan_summer_pole"},
-                          {"tree8_t", "rowan_summer_sapling"},
-						   // Tribe immovables below - can be deleted whenever we break map compatibility
-                       }),
+        std::make_pair(
+           "winterland",
+           std::map<std::string, std::string>{
+              // World immovables are always needed for map compatibility
+              {"sstones1", "standing_stone1_winter"},
+              {"sstones2", "standing_stone2_winter"},
+              {"sstones3", "standing_stone3_winter"},
+              {"sstones4", "standing_stone4_winter"},
+              {"sstones5", "standing_stone5_winter"},
+              {"sstones6", "standing_stone6"},
+              {"sstones7", "standing_stone7"},
+              {"stones1", "winterland_rocks1"},
+              {"stones2", "winterland_rocks2"},
+              {"stones3", "winterland_rocks3"},
+              {"stones4", "winterland_rocks4"},
+              {"stones5", "winterland_rocks5"},
+              {"stones6", "winterland_rocks6"},
+              {"track", "track_winter"},
+              {"tree1", "aspen_summer_old"},
+              {"tree1_m", "aspen_summer_mature"},
+              {"tree1_s", "aspen_summer_pole"},
+              {"tree1_t", "aspen_summer_sapling"},
+              {"tree2", "oak_summer_old"},
+              {"tree2_m", "oak_summer_mature"},
+              {"tree2_s", "oak_summer_pole"},
+              {"tree2_t", "oak_summer_sapling"},
+              {"tree3", "spruce_summer_old"},
+              {"tree3_m", "spruce_summer_mature"},
+              {"tree3_s", "spruce_summer_pole"},
+              {"tree3_t", "spruce_summer_sapling"},
+              {"tree4", "maple_winter_old"},
+              {"tree4_m", "maple_winter_mature"},
+              {"tree4_s", "maple_winter_pole"},
+              {"tree4_t", "maple_winter_sapling"},
+              {"tree5", "birch_summer_old"},
+              {"tree5_m", "birch_summer_mature"},
+              {"tree5_s", "birch_summer_pole"},
+              {"tree5_t", "birch_summer_sapling"},
+              {"tree6", "beech_summer_old"},
+              {"tree6_m", "beech_summer_mature"},
+              {"tree6_s", "beech_summer_pole"},
+              {"tree6_t", "beech_summer_sapling"},
+              {"tree7", "larch_summer_old"},
+              {"tree7_m", "larch_summer_mature"},
+              {"tree7_s", "larch_summer_pole"},
+              {"tree7_t", "larch_summer_sapling"},
+              {"tree8", "rowan_summer_old"},
+              {"tree8_m", "rowan_summer_mature"},
+              {"tree8_s", "rowan_summer_pole"},
+              {"tree8_t", "rowan_summer_sapling"},
+              // Tribe immovables below - can be deleted whenever we break map compatibility
+           }),
      }
 
 {
 }
 
-const std::string& OneWorldLegacyLookupTable::lookup_world_entry(const std::string& entry,
-									  const std::map<std::string, std::map<std::string, std::string> >& table) const {
+const std::string& OneWorldLegacyLookupTable::lookup_world_entry(
+   const std::string& entry,
+   const std::map<std::string, std::map<std::string, std::string>>& table) const {
 	const std::map<std::string, std::string>& world_entries = table.at(old_world_name_);
 	const auto& i = world_entries.find(entry);
 	if (i != world_entries.end()) {

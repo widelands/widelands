@@ -3404,15 +3404,13 @@ Worker::Loader* Worker::create_loader() {
  * Derived classes must override \ref create_loader to make sure
  * the appropriate actual load functions are called.
  */
-MapObject::Loader* Worker::load(EditorGameBase& egbase,
-                                MapObjectLoader& mol,
-                                FileRead& fr,
-                                uint8_t packet_version) {
+MapObject::Loader*
+Worker::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr, uint8_t packet_version) {
 	if (packet_version == kCurrentPacketVersionMapObject) {
 		try {
 			// header has already been read by caller
-			const WorkerDescr* descr =
-			   egbase.descriptions().get_worker_descr(egbase.descriptions().safe_worker_index(fr.c_string()));
+			const WorkerDescr* descr = egbase.descriptions().get_worker_descr(
+			   egbase.descriptions().safe_worker_index(fr.c_string()));
 
 			Worker* worker = dynamic_cast<Worker*>(&descr->create_object());
 			std::unique_ptr<Loader> loader(worker->create_loader());

@@ -515,9 +515,7 @@ const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter::load(EditorGameBase& egbase,
-                                 MapObjectLoader& mol,
-                                 FileRead& fr) {
+MapObject::Loader* Critter::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {

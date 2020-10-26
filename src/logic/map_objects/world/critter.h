@@ -97,8 +97,7 @@ public:
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
-	static MapObject::Loader*
-	load(EditorGameBase&, MapObjectLoader&, FileRead&);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 protected:
 	struct Loader : Bob::Loader {

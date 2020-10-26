@@ -357,8 +357,8 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 		return descriptions_->load_terrain(terrain_name);
 	} catch (const WException&) {
 		throw wexception("world does not define terrain type %s, you cannot "
-						 "play this settlers map",
-						 terrain_name.c_str());
+		                 "play this settlers map",
+		                 terrain_name.c_str());
 	}
 }
 
@@ -728,7 +728,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 					nres = descriptions->load_resource(res);
 				} catch (const WException&) {
 					throw wexception("world does not define resource type %s, you cannot "
-									 "play this settlers map",
+					                 "play this settlers map",
 					                 res);
 				}
 			}
@@ -771,15 +771,14 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  Descriptions compatibility information for the old world name.
 	// Puts an immovable with the 'immovable_name' onto the field 'locations'.
 	auto place_immovable = [&egbase, descriptions](
-	                          const Widelands::Coords& location,
-	                          const std::string& immovable_name) {
+	                          const Widelands::Coords& location, const std::string& immovable_name) {
 		try {
 			const Widelands::DescriptionIndex idx = descriptions->load_immovable(immovable_name);
 			egbase.create_immovable(location, idx, nullptr /* owner */);
 		} catch (const WException&) {
 			throw wexception("world does not define immovable type %s, you cannot "
-							 "play this settlers map",
-							 immovable_name.c_str());
+			                 "play this settlers map",
+			                 immovable_name.c_str());
 		}
 	};
 

@@ -26,8 +26,7 @@ namespace Widelands {
 
 class MapPlayersViewPacket {
 public:
-	void read(FileSystem&,
-	          EditorGameBase&);
+	void read(FileSystem&, EditorGameBase&);
 	void write(FileSystem&, EditorGameBase&);
 };
 }  // namespace Widelands

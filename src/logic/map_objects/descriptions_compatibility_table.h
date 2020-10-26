@@ -26,7 +26,9 @@
 #include "base/macros.h"
 
 /**
- * @brief The DescriptionsCompatibilityTable class contains mappings from old unit names to new unit names for map and game compatibility. World units need to be mapped forever, Tribe units can be removed from the list whenever we break savegame compatibility.
+ * @brief The DescriptionsCompatibilityTable class contains mappings from old unit names to new unit
+ * names for map and game compatibility. World units need to be mapped forever, Tribe units can be
+ * removed from the list whenever we break savegame compatibility.
  */
 class DescriptionsCompatibilityTable {
 public:
@@ -74,7 +76,6 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(DescriptionsCompatibilityTable);
 };
 
-
 /// If the map is newish and there is no old world to convert names from, we use
 /// this one that simply returns the looked up values, except for some renaming
 /// introduced through the merging of the tribes, which are handled here.
@@ -96,7 +97,6 @@ private:
 	const std::map<std::string, std::string> terrains_;
 };
 
-
 class OneWorldLegacyLookupTable : public DescriptionsCompatibilityTable {
 public:
 	explicit OneWorldLegacyLookupTable(const std::string& old_world_name);
@@ -108,8 +108,9 @@ public:
 	std::string lookup_immovable(const std::string& immovable) const override;
 
 private:
-	const std::string& lookup_world_entry(const std::string& entry,
-	                                const std::map<std::string, std::map<std::string, std::string>>& table) const;
+	const std::string&
+	lookup_world_entry(const std::string& entry,
+	                   const std::map<std::string, std::map<std::string, std::string>>& table) const;
 
 	const std::string old_world_name_;
 	// <old name, new name>

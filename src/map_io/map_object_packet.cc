@@ -45,9 +45,7 @@ MapObjectPacket::~MapObjectPacket() {
 	}
 }
 
-void MapObjectPacket::read(FileSystem& fs,
-                           EditorGameBase& egbase,
-                           MapObjectLoader& mol) {
+void MapObjectPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
@@ -61,8 +59,7 @@ void MapObjectPacket::read(FileSystem& fs,
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
-				loaders.insert(
-				   Immovable::load(egbase, mol, fr));
+				loaders.insert(Immovable::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderBattle:

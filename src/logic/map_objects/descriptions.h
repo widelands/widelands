@@ -79,8 +79,8 @@ public:
 	/// Returns the index for 'crittername' and throws an exception if the critter can't be found.
 	/// This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_critter_index(const std::string& crittername) const;
-	/// Returns the index for 'immovablename' and throws an exception if the immovable can't be found.
-	/// This function is safe for map/savegame compatibility.
+	/// Returns the index for 'immovablename' and throws an exception if the immovable can't be
+	/// found. This function is safe for map/savegame compatibility.
 	DescriptionIndex safe_immovable_index(const std::string& immovablename) const;
 	/// Returns the index for 'warename' and throws an exception if the ware can't be found.
 	/// This function is safe for map/savegame compatibility.
@@ -169,18 +169,19 @@ public:
 	/// Throws GameDataError if object hasn't been registered.
 	/// This function is safe for map/savegame compatibility.
 	std::pair<WareWorker, DescriptionIndex> load_ware_or_worker(const std::string& objectname) const;
-	/// Try to load a building or immovable that has been registered previously with 'register_description'
-	/// when we don't know whether it's a building or immovable.
-	/// Throws GameDataError if object hasn't been registered.
-	/// If first == 'true', we have a building. Otherwise, it's an immovable.
-	/// This function is safe for map/savegame compatibility.
-	std::pair<bool, DescriptionIndex> load_building_or_immovable(const std::string& objectname) const;
+	/// Try to load a building or immovable that has been registered previously with
+	/// 'register_description' when we don't know whether it's a building or immovable. Throws
+	/// GameDataError if object hasn't been registered. If first == 'true', we have a building.
+	/// Otherwise, it's an immovable. This function is safe for map/savegame compatibility.
+	std::pair<bool, DescriptionIndex>
+	load_building_or_immovable(const std::string& objectname) const;
 
 	uint32_t get_largest_workarea() const;
 	void increase_largest_workarea(uint32_t workarea);
 
 	/// For loading old maps
 	void set_old_world_name(const std::string& name);
+
 private:
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;

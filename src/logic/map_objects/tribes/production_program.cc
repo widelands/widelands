@@ -175,7 +175,8 @@ Available actions are:
 ProductionProgram::ActReturn::Condition* create_economy_condition(
    const std::string& item, const ProductionSiteDescr& descr, const Descriptions& descriptions) {
 	try {
-		const std::pair<WareWorker, DescriptionIndex> wareworker = descriptions.load_ware_or_worker(item);
+		const std::pair<WareWorker, DescriptionIndex> wareworker =
+		   descriptions.load_ware_or_worker(item);
 		switch (wareworker.first) {
 		case WareWorker::wwWARE: {
 			descr.ware_demand_checks()->insert(wareworker.second);

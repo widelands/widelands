@@ -134,9 +134,7 @@ uint32_t InputQueue::get_missing() const {
 
 constexpr uint16_t kCurrentPacketVersion = 3;
 
-void InputQueue::read(FileRead& fr,
-                      Game& game,
-                      MapObjectLoader& mol) {
+void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {

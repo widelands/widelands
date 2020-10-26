@@ -58,14 +58,12 @@ void MapBobPacket::read_bob(FileRead& fr,
 		// already (starting to roam), so we do not need to load anything
 		// further.
 	} catch (const WException& e) {
-		throw GameDataError(
-		   "%u (owner = \"%s\", name = \"%s\"): %s", serial, owner.c_str(), read_name.c_str(), e.what());
+		throw GameDataError("%u (owner = \"%s\", name = \"%s\"): %s", serial, owner.c_str(),
+		                    read_name.c_str(), e.what());
 	}
 }
 
-void MapBobPacket::read(FileSystem& fs,
-                        EditorGameBase& egbase,
-                        MapObjectLoader& mol) {
+void MapBobPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoader& mol) {
 	FileRead fr;
 	fr.open(fs, "binary/bob");
 

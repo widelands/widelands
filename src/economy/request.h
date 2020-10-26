@@ -110,8 +110,7 @@ public:
 
 	void start_transfer(Game&, Supply&);
 
-	void
-	read(FileRead&, Game&, MapObjectLoader&);
+	void read(FileRead&, Game&, MapObjectLoader&);
 	void write(FileWrite&, Game&, MapObjectSaver&) const;
 	Worker* get_transfer_worker();
 

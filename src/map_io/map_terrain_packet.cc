@@ -31,8 +31,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapTerrainPacket::read(FileSystem& fs,
-                            EditorGameBase& egbase) {
+void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	fr.open(fs, "binary/terrain");
 

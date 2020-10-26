@@ -49,9 +49,7 @@ struct MapObjectPacket {
 
 	~MapObjectPacket();
 
-	void read(FileSystem&,
-	          EditorGameBase&,
-	          MapObjectLoader&);
+	void read(FileSystem&, EditorGameBase&, MapObjectLoader&);
 
 	void load_finish();
 

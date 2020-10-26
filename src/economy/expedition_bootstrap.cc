@@ -306,11 +306,8 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 }
 
-void ExpeditionBootstrap::load(Warehouse& warehouse,
-                               FileRead& fr,
-                               Game& game,
-                               MapObjectLoader& mol,
-                               uint16_t packet_version) {
+void ExpeditionBootstrap::load(
+   Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t packet_version) {
 
 	assert(queues_.empty());
 	// Load worker queues

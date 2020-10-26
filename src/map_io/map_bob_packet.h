@@ -33,15 +33,11 @@ class MapObjectLoader;
 // This data packet contains critters on old maps. These days, the bobs are saved in the map_objects
 // packet.
 struct MapBobPacket {
-	void
-	read(FileSystem&, EditorGameBase&, MapObjectLoader&);
+	void read(FileSystem&, EditorGameBase&, MapObjectLoader&);
 
 private:
-	void read_bob(FileRead&,
-	              EditorGameBase&,
-	              MapObjectLoader&,
-	              const Coords&,
-	              uint16_t packet_version);
+	void
+	read_bob(FileRead&, EditorGameBase&, MapObjectLoader&, const Coords&, uint16_t packet_version);
 };
 }  // namespace Widelands
 

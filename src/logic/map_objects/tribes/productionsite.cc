@@ -129,13 +129,14 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				}
 				// Check if ware/worker exists already and if not, try to load it. Will throw a
 				// GameDataError on failure.
-				const std::pair<WareWorker, DescriptionIndex> wareworker = descriptions.load_ware_or_worker(ware_or_worker_name);
+				const std::pair<WareWorker, DescriptionIndex> wareworker =
+				   descriptions.load_ware_or_worker(ware_or_worker_name);
 				switch (wareworker.first) {
 				case WareWorker::wwWARE: {
 					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == wareworker.second) {
 							throw GameDataError(
-										"ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
+							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
 					input_wares_.push_back(WareAmount(wareworker.second, amount));

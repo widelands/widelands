@@ -597,9 +597,7 @@ void WareInstance::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& 
 	}
 }
 
-MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
-                                      MapObjectLoader& mol,
-                                      FileRead& fr) {
+MapObject::Loader* WareInstance::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 

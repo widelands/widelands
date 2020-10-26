@@ -1897,8 +1897,7 @@ void Player::init_statistics() {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr,
-                             const uint16_t /* packet_version */) {
+void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -1939,11 +1938,11 @@ void Player::read_statistics(FileRead& fr,
 			current_produced_statistics_[idx] = amount;
 			parse_stats(&ware_productions_, idx, stats_string, "produced");
 		} catch (const GameDataError&) {
-			log_warn_time(egbase().get_gametime(), "Player %u production statistics: unknown ware name %s",
-			              player_number(), name.c_str());
+			log_warn_time(egbase().get_gametime(),
+			              "Player %u production statistics: unknown ware name %s", player_number(),
+			              name.c_str());
 			continue;
 		}
-
 	}
 
 	// Read consumption statistics

@@ -148,9 +148,7 @@ constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 2;
 
 // static
-BuildingSettings* BuildingSettings::load(const Game& game,
-                                         const TribeDescr& tribe,
-                                         FileRead& fr) {
+BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
@@ -203,8 +201,7 @@ void BuildingSettings::save(const Game&, FileWrite& fw) const {
 	fw.c_string(descr_.c_str());
 }
 
-void MilitarysiteSettings::read(const Game& game,
-                                FileRead& fr) {
+void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
 	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -228,8 +225,7 @@ void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_8(prefer_heroes ? 1 : 0);
 }
 
-void ProductionsiteSettings::read(const Game& game,
-                                  FileRead& fr) {
+void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
 	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -293,8 +289,7 @@ void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	}
 }
 
-void TrainingsiteSettings::read(const Game& game,
-                                FileRead& fr) {
+void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
 	ProductionsiteSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -315,8 +310,7 @@ void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_32(desired_capacity);
 }
 
-void WarehouseSettings::read(const Game& game,
-                             FileRead& fr) {
+void WarehouseSettings::read(const Game& game, FileRead& fr) {
 	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();

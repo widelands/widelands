@@ -318,9 +318,7 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(EditorGameBase&,
-	                               MapObjectLoader&,
-	                               FileRead&);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 private:
 	/// If this immovable was created by a building, this can be set in order to display information

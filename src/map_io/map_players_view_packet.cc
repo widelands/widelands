@@ -51,8 +51,7 @@ inline bool from_unsigned(unsigned value) {
 	return value == 1;
 }
 
-void MapPlayersViewPacket::read(FileSystem& fs,
-                                EditorGameBase& egbase) {
+void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	if (!fr.try_open(fs, "binary/view")) {
 		// TODO(Nordfriese): Savegame compatibility – require this packet after v1.0
@@ -297,7 +296,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							std::pair<bool, DescriptionIndex> imm = descriptions.load_building_or_immovable(descr);
+							std::pair<bool, DescriptionIndex> imm =
+							   descriptions.load_building_or_immovable(descr);
 							if (imm.first) {
 								field->map_object_descr = descriptions.get_building_descr(imm.second);
 							} else {
@@ -307,13 +307,13 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->set_constructionsite(false);
-							field->dismantlesite.building =
-							   descriptions.get_building_descr(descriptions.safe_building_index(fr.string()));
+							field->dismantlesite.building = descriptions.get_building_descr(
+							   descriptions.safe_building_index(fr.string()));
 							field->dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->set_constructionsite(true);
-							field->constructionsite->becomes =
-							   descriptions.get_building_descr(descriptions.safe_building_index(fr.string()));
+							field->constructionsite->becomes = descriptions.get_building_descr(
+							   descriptions.safe_building_index(fr.string()));
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
@@ -322,7 +322,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->constructionsite->intermediates.push_back(
-								   descriptions.get_building_descr(descriptions.safe_building_index(fr.string())));
+								   descriptions.get_building_descr(
+								      descriptions.safe_building_index(fr.string())));
 							}
 
 							field->constructionsite->totaltime = Duration(fr);
@@ -402,7 +403,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							f.map_object_descr = &g_portdock_descr;
 						} else {
-							std::pair<bool, DescriptionIndex> imm = descriptions.load_building_or_immovable(descr);
+							std::pair<bool, DescriptionIndex> imm =
+							   descriptions.load_building_or_immovable(descr);
 							if (imm.first) {
 								f.map_object_descr = descriptions.get_building_descr(imm.second);
 							} else {

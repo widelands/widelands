@@ -45,9 +45,7 @@ struct BuildingSettings {
 	virtual ~BuildingSettings() {
 	}
 
-	static BuildingSettings* load(const Game&,
-	                              const TribeDescr&,
-	                              FileRead&);
+	static BuildingSettings* load(const Game&, const TribeDescr&, FileRead&);
 
 	virtual void save(const Game&, FileWrite&) const;
 	virtual void read(const Game&, FileRead&);

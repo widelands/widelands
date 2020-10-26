@@ -25,10 +25,7 @@
 namespace Widelands {
 class MapFlagdataPacket {
 public:
-	void read(FileSystem&,
-	          EditorGameBase&,
-	          bool,
-	          MapObjectLoader&);
+	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 };
 }  // namespace Widelands

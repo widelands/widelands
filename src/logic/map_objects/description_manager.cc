@@ -202,7 +202,8 @@ void DescriptionManager::mark_loading_done(const std::string& description_name) 
 	descriptions_being_loaded_.erase(descriptions_being_loaded_.find(description_name));
 }
 
-void DescriptionManager::load_description_on_demand(const std::string& description_name, bool allow_failure) {
+void DescriptionManager::load_description_on_demand(const std::string& description_name,
+                                                    bool allow_failure) {
 	if (registered_scenario_descriptions_.count(description_name) == 1 ||
 	    registered_descriptions_.count(description_name) == 1) {
 		if (descriptions_being_loaded_.count(description_name) == 0) {

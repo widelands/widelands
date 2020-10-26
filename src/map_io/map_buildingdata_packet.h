@@ -42,41 +42,18 @@ class Building;
  */
 class MapBuildingdataPacket {
 public:
-	void read(FileSystem&,
-	          EditorGameBase&,
-	          bool,
-	          MapObjectLoader&);
+	void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 private:
-	void read_constructionsite(ConstructionSite&,
-	                           FileRead&,
-	                           Game&,
-	                           MapObjectLoader&);
-	void read_dismantlesite(DismantleSite&,
-	                        FileRead&,
-	                        Game&,
-	                        MapObjectLoader&);
-	void read_partially_finished_building(PartiallyFinishedBuilding&,
-	                                      FileRead&,
-	                                      Game&,
-	                                      MapObjectLoader&);
-	void read_warehouse(Warehouse&,
-	                    FileRead&,
-	                    Game&,
-	                    MapObjectLoader&);
-	void read_militarysite(MilitarySite&,
-	                       FileRead&,
-	                       Game&,
-	                       MapObjectLoader&);
-	void read_trainingsite(TrainingSite&,
-	                       FileRead&,
-	                       Game&,
-	                       MapObjectLoader&);
-	void read_productionsite(ProductionSite&,
-	                         FileRead&,
-	                         Game&,
-	                         MapObjectLoader&);
+	void read_constructionsite(ConstructionSite&, FileRead&, Game&, MapObjectLoader&);
+	void read_dismantlesite(DismantleSite&, FileRead&, Game&, MapObjectLoader&);
+	void
+	read_partially_finished_building(PartiallyFinishedBuilding&, FileRead&, Game&, MapObjectLoader&);
+	void read_warehouse(Warehouse&, FileRead&, Game&, MapObjectLoader&);
+	void read_militarysite(MilitarySite&, FileRead&, Game&, MapObjectLoader&);
+	void read_trainingsite(TrainingSite&, FileRead&, Game&, MapObjectLoader&);
+	void read_productionsite(ProductionSite&, FileRead&, Game&, MapObjectLoader&);
 
 	void write_constructionsite(const ConstructionSite&, FileWrite&, Game&, MapObjectSaver&);
 	void write_dismantlesite(const DismantleSite&, FileWrite&, Game&, MapObjectSaver&);

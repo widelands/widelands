@@ -31,8 +31,7 @@ namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapResourcesPacket::read(FileSystem& fs,
-                              EditorGameBase& egbase) {
+void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	fr.open(fs, "binary/resource");
 

@@ -691,9 +691,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 }
 
-MapObject::Loader* Immovable::load(EditorGameBase& egbase,
-                                   MapObjectLoader& mol,
-                                   FileRead& fr) {
+MapObject::Loader* Immovable::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {

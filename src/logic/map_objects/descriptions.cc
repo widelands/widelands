@@ -156,11 +156,9 @@ bool Descriptions::tribe_exists(DescriptionIndex index) const {
 }
 
 DescriptionIndex Descriptions::safe_building_index(const std::string& buildingname) const {
-	DescriptionIndex result =
-	   building_index(buildingname);
+	DescriptionIndex result = building_index(buildingname);
 	if (result == Widelands::INVALID_INDEX) {
-		result =
-		   building_index(compatibility_table_->lookup_building(buildingname));
+		result = building_index(compatibility_table_->lookup_building(buildingname));
 		if (result == Widelands::INVALID_INDEX) {
 			throw GameDataError("Unknown building '%s'", buildingname.c_str());
 		}
@@ -536,7 +534,8 @@ DescriptionIndex Descriptions::load_worker(const std::string& workername) {
 	return safe_worker_index(workername);
 }
 
-std::pair<WareWorker, DescriptionIndex> Descriptions::load_ware_or_worker(const std::string& objectname) const {
+std::pair<WareWorker, DescriptionIndex>
+Descriptions::load_ware_or_worker(const std::string& objectname) const {
 	std::string looked_up_name = compatibility_table_->lookup_ware(objectname);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
@@ -553,7 +552,8 @@ std::pair<WareWorker, DescriptionIndex> Descriptions::load_ware_or_worker(const 
 	}
 	throw GameDataError("'%s' has not been registered as a ware/worker type", objectname.c_str());
 }
-std::pair<bool, DescriptionIndex> Descriptions::load_building_or_immovable(const std::string& objectname) const {
+std::pair<bool, DescriptionIndex>
+Descriptions::load_building_or_immovable(const std::string& objectname) const {
 	std::string looked_up_name = compatibility_table_->lookup_building(objectname);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
@@ -568,7 +568,8 @@ std::pair<bool, DescriptionIndex> Descriptions::load_building_or_immovable(const
 	if (ii != Widelands::INVALID_INDEX) {
 		return std::make_pair(false, ii);
 	}
-	throw GameDataError("'%s' has not been registered as a building or immovable type", objectname.c_str());
+	throw GameDataError(
+	   "'%s' has not been registered as a building or immovable type", objectname.c_str());
 }
 
 uint32_t Descriptions::get_largest_workarea() const {
@@ -581,9 +582,11 @@ void Descriptions::increase_largest_workarea(uint32_t workarea) {
 
 void Descriptions::set_old_world_name(const std::string& name) {
 	if (name.empty()) {
-		compatibility_table_ = std::unique_ptr<DescriptionsCompatibilityTable>(new PostOneWorldLegacyLookupTable());
+		compatibility_table_ =
+		   std::unique_ptr<DescriptionsCompatibilityTable>(new PostOneWorldLegacyLookupTable());
 	} else {
-		compatibility_table_ = std::unique_ptr<DescriptionsCompatibilityTable>(new OneWorldLegacyLookupTable(name));
+		compatibility_table_ =
+		   std::unique_ptr<DescriptionsCompatibilityTable>(new OneWorldLegacyLookupTable(name));
 	}
 }
 }  // namespace Widelands
