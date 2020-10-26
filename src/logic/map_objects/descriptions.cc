@@ -167,11 +167,11 @@ DescriptionIndex Descriptions::safe_building_index(const std::string& buildingna
 	}
 	return result;
 }
-DescriptionIndex Descriptions::safe_critter_index(const std::string& critername) const {
-	DescriptionIndex const result = critter_index(critername);
+DescriptionIndex Descriptions::safe_critter_index(const std::string& crittername) const {
+	DescriptionIndex const result = critter_index(crittername);
 
 	if (result == INVALID_INDEX) {
-		throw GameDataError("Unknown critter '%s'", critername.c_str());
+		throw GameDataError("Unknown critter '%s'", crittername.c_str());
 	}
 	return result;
 }
