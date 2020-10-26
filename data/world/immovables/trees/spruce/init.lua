@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_sapling",
    descname = _ "Spruce (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_pole",
    descname = _ "Spruce (Pole)",
    size = "small",
@@ -59,7 +59,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_mature",
    descname = _ "Spruce (Mature)",
    size = "small",
@@ -84,7 +84,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_old",
    descname = _ "Spruce (Old)",
    species = _ "Spruce",

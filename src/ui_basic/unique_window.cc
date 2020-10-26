@@ -81,12 +81,13 @@ UniqueWindow::Registry::~Registry() {
  * Register, position according to the registry information.
  */
 UniqueWindow::UniqueWindow(Panel* const parent,
+                           WindowStyle s,
                            const std::string& name,
                            UniqueWindow::Registry* const reg,
                            int32_t const w,
                            int32_t const h,
                            const std::string& title)
-   : Window(parent, name, 0, 0, w, h, title.c_str()), registry_(reg), usedefaultpos_(true) {
+   : Window(parent, s, name, 0, 0, w, h, title.c_str()), registry_(reg), usedefaultpos_(true) {
 	if (registry_) {
 		delete registry_->window;
 

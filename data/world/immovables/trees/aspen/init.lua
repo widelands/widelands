@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "aspen_summer_sapling",
    descname = _ "Aspen (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "aspen_summer_pole",
    descname = _ "Aspen (Pole)",
    size = "small",
@@ -59,7 +59,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "aspen_summer_mature",
    descname = _ "Aspen (Mature)",
    size = "small",
@@ -87,7 +87,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "aspen_summer_old",
    descname = _ "Aspen (Old)",
    species = _ "Aspen",

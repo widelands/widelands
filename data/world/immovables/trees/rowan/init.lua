@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_sapling",
    descname = _ "Rowan (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_pole",
    descname = _ "Rowan (Pole)",
    size = "small",
@@ -59,7 +59,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_mature",
    descname = _ "Rowan (Mature)",
    size = "small",
@@ -87,7 +87,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_old",
    descname = _ "Rowan (Old)",
    species = _ "Rowan",

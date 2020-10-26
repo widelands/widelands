@@ -97,7 +97,7 @@ function expedition()
          local idx = math.random(#fields)
          f = fields[idx]
          if ((f.resource == "iron") and not f.immovable) then
-            map:place_immovable("atlanteans_resi_iron_2",f,"tribes")
+            map:place_immovable("atlanteans_resi_iron_2", f)
             successful = true
          end
          table.remove(fields,idx)
@@ -166,7 +166,7 @@ end
 
 function waterways()
    sleep(5000)
-   map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
+   map:place_immovable("atlanteans_resi_gold_2", gold_mine)
 
    campaign_message_box(ferry_1)
    sleep(1000)
@@ -176,7 +176,7 @@ function waterways()
    while not construction_started_region(area, "atlanteans_ferry_yard") do sleep(1000) end
    sleep(5000)
    -- place resource indicator again in case player preferred ships/exploring
-   map:place_immovable("atlanteans_resi_gold_2", gold_mine, "tribes")
+   map:place_immovable("atlanteans_resi_gold_2", gold_mine)
 
    campaign_message_box(ferry_3)
    sleep(500)

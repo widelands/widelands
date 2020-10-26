@@ -32,6 +32,7 @@
 #include "graphic/styles/table_style.h"
 #include "graphic/styles/text_panel_style.h"
 #include "graphic/styles/ware_info_style.h"
+#include "graphic/styles/window_style.h"
 #include "scripting/lua_table.h"
 
 constexpr const char* const kTemplateDir = "templates/default/";
@@ -53,17 +54,12 @@ public:
 	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
 	const UI::TableStyleInfo& table_style(UI::PanelStyle) const;
 	const UI::WareInfoStyleInfo& ware_info_style(UI::WareInfoStyle) const;
+	const UI::WindowStyleInfo& window_style(UI::WindowStyle) const;
 	const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
 
 	// Special elements
 	int minimum_font_size() const;
 	const RGBColor& minimap_icon_frame() const;
-	const RGBAColor& window_border_focused() const {
-		return window_border_focused_;
-	}
-	const RGBAColor& window_border_unfocused() const {
-		return window_border_unfocused_;
-	}
 	const RGBAColor& focused_color() const {
 		return focused_color_;
 	}
@@ -86,6 +82,7 @@ private:
 	void set_statistics_plot_style(const LuaTable& table);
 	void set_building_statistics_style(const LuaTable& table);
 	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table);
+	void add_window_style(UI::WindowStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
 
@@ -98,13 +95,14 @@ private:
 
 	int minimum_font_size_, focus_border_thickness_;
 	RGBColor minimap_icon_frame_;
-	RGBAColor window_border_focused_, window_border_unfocused_, focused_color_, semi_focused_color_;
+	RGBAColor focused_color_, semi_focused_color_;
 	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
 	std::unique_ptr<const UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
 	std::unique_ptr<const UI::StatisticsPlotStyleInfo> statistics_plot_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::TableStyleInfo>> table_styles_;
 	std::map<UI::WareInfoStyle, std::unique_ptr<const UI::WareInfoStyleInfo>> ware_info_styles_;
+	std::map<UI::WindowStyle, std::unique_ptr<const UI::WindowStyleInfo>> window_styles_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };
