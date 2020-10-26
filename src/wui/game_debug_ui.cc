@@ -24,10 +24,10 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
@@ -275,7 +275,7 @@ void FieldDebugWindow::think() {
 			const Widelands::ResourceAmount initial_amount = coords_.field->get_initial_res_amount();
 
 			str += (boost::format("Resource: %s\n") %
-			        ibase().egbase().world().get_resource(ridx)->name().c_str())
+			        ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str())
 			          .str();
 
 			str += (boost::format("  Amount: %i/%i\n") % static_cast<unsigned int>(ramount) %

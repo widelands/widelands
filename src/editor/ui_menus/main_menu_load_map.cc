@@ -90,6 +90,7 @@ void MainMenuLoadMap::entry_selected() {
 		map_details_.clear();
 	} else {
 		map_details_.update(maps_data_[table_.get_selected()],
-		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized);
+		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized,
+		                    true);
 	}
 }

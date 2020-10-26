@@ -58,8 +58,9 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
      options_window_(nullptr) {
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
-	DescriptionIndex const nr_wares_or_workers =
-	   wwtype == wwWARE ? player.egbase().tribes().nrwares() : player.egbase().tribes().nrworkers();
+	DescriptionIndex const nr_wares_or_workers = wwtype == wwWARE ?
+	                                                player.egbase().descriptions().nr_wares() :
+	                                                player.egbase().descriptions().nr_workers();
 	wares_or_workers_.set_nrwares(nr_wares_or_workers);
 
 	target_quantities_ = new TargetQuantity[nr_wares_or_workers];
@@ -343,9 +344,9 @@ void Economy::set_target_quantity(WareWorker economy_type,
 	}
 #ifndef NDEBUG
 	if (type_ == wwWARE) {
-		assert(owner().egbase().tribes().ware_exists(ware_or_worker_type));
+		assert(owner().egbase().descriptions().ware_exists(ware_or_worker_type));
 	} else {
-		assert(owner().egbase().tribes().worker_exists(ware_or_worker_type));
+		assert(owner().egbase().descriptions().worker_exists(ware_or_worker_type));
 	}
 #endif
 	TargetQuantity& tq = target_quantities_[ware_or_worker_type];
@@ -383,9 +384,9 @@ void Economy::add_wares_or_workers(DescriptionIndex const id,
 void Economy::remove_wares_or_workers(DescriptionIndex const id, Quantity const count) {
 #ifndef NDEBUG
 	if (type_ == wwWARE) {
-		assert(owner().egbase().tribes().ware_exists(id));
+		assert(owner().egbase().descriptions().ware_exists(id));
 	} else {
-		assert(owner().egbase().tribes().worker_exists(id));
+		assert(owner().egbase().descriptions().worker_exists(id));
 	}
 #endif
 	wares_or_workers_.remove(id, count);
@@ -517,7 +518,7 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 			    req->is_open() &&
 			    (!is_soldier ||
 			     req->get_requirements().check(soldier_prototype(
-			        owner().egbase().tribes().get_worker_descr(ware_or_worker_type))))) {
+			        owner().egbase().descriptions().get_worker_descr(ware_or_worker_type))))) {
 				return true;
 			}
 		}
@@ -666,8 +667,8 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 				             supp.get_position(game)->base_flag().get_position().y,
 				             target_flag.get_position().x, target_flag.get_position().y,
 				             type_ == wwWARE ?
-				                game.tribes().get_ware_descr(req.get_index())->name().c_str() :
-				                game.tribes().get_worker_descr(req.get_index())->name().c_str());
+				                game.descriptions().get_ware_descr(req.get_index())->name().c_str() :
+				                game.descriptions().get_worker_descr(req.get_index())->name().c_str());
 			}
 			continue;
 		}

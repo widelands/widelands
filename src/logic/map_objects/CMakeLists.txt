@@ -12,7 +12,6 @@ wl_library(logic_map_objects_description_manager
     description_manager.cc
     description_manager.h
   DEPENDS
-    base_log
     base_macros
     io_filesystem
     logic_exceptions
@@ -45,6 +44,8 @@ wl_library(logic_map_objects
     buildcost.h
     checkstep.cc
     checkstep.h
+    descriptions.cc
+    descriptions.h
     findbob.cc
     findbob.h
     findimmovable.cc
@@ -103,8 +104,6 @@ wl_library(logic_map_objects
     tribes/trainingsite.h
     tribes/tribe_descr.cc
     tribes/tribe_descr.h
-    tribes/tribes.cc
-    tribes/tribes.h
     tribes/ware_descr.cc
     tribes/ware_descr.h
     tribes/warehouse.cc
@@ -130,8 +129,6 @@ wl_library(logic_map_objects
     world/resource_description.h
     world/terrain_description.cc
     world/terrain_description.h
-    world/world.cc
-    world/world.h
   USES_SDL2
   DEPENDS
     ai_hints

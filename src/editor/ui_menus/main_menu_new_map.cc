@@ -27,8 +27,8 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
@@ -123,7 +123,7 @@ void MainMenuNewMap::clicked_cancel() {
 void MainMenuNewMap::fill_list() {
 	list_.clear();
 	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
-	   eia().egbase().world().terrains();
+	   eia().egbase().descriptions().terrains();
 
 	for (Widelands::DescriptionIndex index = 0; index < terrains.size(); ++index) {
 		const Widelands::TerrainDescription& terrain = terrains.get(index);

@@ -90,7 +90,8 @@ private:
 
 FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
-                                                 ChatProvider& chat)
+                                                 ChatProvider& chat,
+                                                 Widelands::EditorGameBase& egbase)
    : FullscreenMenuLaunchGame(settings, ctrl),
 
      help_button_(this,
@@ -105,7 +106,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      help_(nullptr),
 
      mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_),
-     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu) {
+     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
+     egbase_(egbase) {
 
 	title_.set_text(_("Multiplayer Game Setup"));
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
@@ -201,7 +203,7 @@ void FullscreenMenuLaunchMPG::select_map() {
 		return;
 	}
 
-	FullscreenMenuMapSelect msm(settings_, ctrl_);
+	FullscreenMenuMapSelect msm(settings_, ctrl_, egbase_);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {

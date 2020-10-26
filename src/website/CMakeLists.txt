@@ -26,7 +26,6 @@ wl_binary(wl_create_spritesheet
     graphic_surface
     io_filesystem
     logic
-    logic_constants
     logic_map_objects
     lua_tree
     website_common

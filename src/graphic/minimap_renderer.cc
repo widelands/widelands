@@ -27,8 +27,8 @@
 #include "economy/roadbase.h"
 #include "graphic/playercolor.h"
 #include "logic/field.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/vision.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -54,9 +54,9 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    bool see_details) {
 	RGBColor color;
 	if (layers & MiniMapLayer::Terrain) {
-		color = egbase.world()
-		           .terrain_descr(f.field->terrain_d())
-		           .get_minimap_color(f.field->get_brightness());
+		color = egbase.descriptions()
+		           .get_terrain_descr(f.field->terrain_d())
+		           ->get_minimap_color(f.field->get_brightness());
 	}
 
 	if (layers & MiniMapLayer::Owner) {

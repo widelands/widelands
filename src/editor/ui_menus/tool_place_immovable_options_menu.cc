@@ -25,7 +25,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_immovable_tool.h"
 #include "logic/map.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 
@@ -59,11 +59,12 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
    EditorInteractive& parent, EditorPlaceImmovableTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Immovables"), tool) {
-	const Widelands::World& world = parent.egbase().world();
+	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	LuaInterface* lua = &parent.egbase().lua();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
-	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE), world.immovables(),
+	      this, parent.editor_categories(Widelands::MapObjectType::IMMOVABLE),
+	      descriptions.immovables(),
 	      [lua](UI::Panel* cb_parent, const Widelands::ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, lua, immovable_descr);
 	      },
