@@ -64,7 +64,8 @@ BaseMenu::~BaseMenu() {
 }
 
 void BaseMenu::layout() {
-	horizontal_padding_box_.set_size(get_w(), get_h());
+	Window::layout();
+	horizontal_padding_box_.set_size(get_inner_w(), get_inner_h());
 	vertical_padding_box_.set_max_size(
 	   horizontal_padding_box_.get_w() - 2 * 10 * padding, horizontal_padding_box_.get_h());
 	printBox(horizontal_padding_box_);
