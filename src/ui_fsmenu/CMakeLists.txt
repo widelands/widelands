@@ -44,6 +44,8 @@ wl_library(ui_fsmenu_main
     main.cc
     main.h
     menu_target.h
+    menu.h
+    menu.cc
   DEPENDS
     base_i18n
     base_random
