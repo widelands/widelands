@@ -58,6 +58,7 @@ struct UniqueWindow : public Window {
 	};
 
 	UniqueWindow(Panel* parent,
+	             WindowStyle,
 	             const std::string& name,
 	             Registry*,
 	             int32_t w,

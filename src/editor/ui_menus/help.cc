@@ -36,7 +36,7 @@ EditorHelp::EditorHelp(EditorInteractive& parent,
 	} catch (LuaError& err) {
 		log_err("Error loading script for editor help:\n%s\n", err.what());
 		UI::WLMessageBox wmb(
-		   &parent, _("Error!"),
+		   &parent, UI::WindowStyle::kWui, _("Error!"),
 		   (boost::format("Error loading script for editor help:\n%s") % err.what()).str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();

@@ -43,8 +43,13 @@ inline InteractivePlayer& BuildingStatisticsMenu::iplayer() const {
 
 BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                                                UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(
-        &parent, "building_statistics", &registry, kWindowWidth, 100, _("Building Statistics")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "building_statistics",
+                      &registry,
+                      kWindowWidth,
+                      100,
+                      _("Building Statistics")),
      style_(g_style_manager->building_statistics_style()),
      main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      tab_panel_(&main_box_, UI::TabPanelStyle::kWuiDark),
