@@ -128,7 +128,7 @@ void TwoColumnsMenu::layout() {
 }
 
 TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
-                                                   std::string& title,
+                                                   std::string title,
                                                    double right_column_width_factor)
    : TwoColumnsMenu(fsmm, title, right_column_width_factor),
      button_box_(&right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * padding, "button"),
@@ -139,6 +139,9 @@ TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
+}
+
+TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 }
 
 void TwoColumnsNavigationMenu::layout() {
