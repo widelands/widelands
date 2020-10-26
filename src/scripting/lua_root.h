@@ -131,9 +131,6 @@ public:
 	int new_immovable_type(lua_State* L);
 	int new_resource_type(lua_State* L);
 	int new_terrain_type(lua_State* L);
-	/*
-	 * Lua methods
-	 */
 	int new_carrier_type(lua_State* L);
 	int new_ferry_type(lua_State* L);
 	int new_constructionsite_type(lua_State* L);
