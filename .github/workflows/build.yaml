@@ -129,12 +129,6 @@ jobs:
         cmake .. -DCMAKE_BUILD_TYPE:STRING="${{ matrix.config }}" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_BUILD_WEBSITE_TOOLS="ON" -DOPTION_ASAN="OFF" -DOPTION_BUILD_CODECHECK="OFF"
         make -k -j$(nproc)
         cd ..
-    - name: Testsuite
-      run: |
-        /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
-        export SDL_VIDEODRIVER=x11
-        export DISPLAY=:99.0
-        ./regression_test.py -b build/src/widelands
     - name: Website Binaries
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
@@ -144,6 +138,10 @@ jobs:
         mkdir temp_web
         build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
+    - name: Testsuite
+      run: |
+        ./regression_test.py -b build/src/widelands
+
 
   windows:
     # Skip this job on master branch
