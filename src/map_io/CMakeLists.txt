@@ -27,8 +27,6 @@ wl_library(map_io
   SRCS
     coords_profile.cc
     coords_profile.h
-    tribes_legacy_lookup_table.cc # NOCOM get rid
-    tribes_legacy_lookup_table.h
     map_allowed_building_types_packet.cc
     map_allowed_building_types_packet.h
     map_allowed_worker_types_packet.cc

@@ -19,10 +19,22 @@
 
 #include "logic/map_objects/descriptions_compatibility_table.h"
 
-#include <memory>
+// Whenever we break savegame compatibility, we can empty these maps
+DescriptionsCompatibilityTable::DescriptionsCompatibilityTable()
+   :  // Workers
+     workers_{},
+     // Wares
+     wares_{
+        // {"old_name", "new_name"},
+     },
+     // Buildings
+     buildings_{},
+     // Ships
+     ships_{} {
+}
 
 const std::string&
-WorldLegacyLookupTable::lookup_entry(const std::string& entry,
+DescriptionsCompatibilityTable::lookup_entry(const std::string& entry,
                                       const std::map<std::string, std::string>& table) const {
 	const auto& i = table.find(entry);
 	if (i != table.end()) {
@@ -31,13 +43,31 @@ WorldLegacyLookupTable::lookup_entry(const std::string& entry,
 	return entry;
 }
 
+const std::string& DescriptionsCompatibilityTable::lookup_worker(const std::string& worker) const {
+	return lookup_entry(worker, workers_);
+}
+
+const std::string& DescriptionsCompatibilityTable::lookup_ware(const std::string& ware) const {
+	return lookup_entry(ware, wares_);
+}
+
+const std::string& DescriptionsCompatibilityTable::lookup_building(const std::string& building) const {
+	return lookup_entry(building, buildings_);
+}
+
+const std::string& DescriptionsCompatibilityTable::lookup_ship(const std::string& ship) const {
+	return lookup_entry(ship, ships_);
+}
+
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
 critters_
 {
+		// All critters are always needed for map compatibility
 	{"elk", "moose"},
 },
 immovables_
 {
+		// World immovables are always needed for map compatibility
 	{"blackland_stones1", "blackland_rocks1"},
 	{"blackland_stones2", "blackland_rocks2"},
 	{"blackland_stones3", "blackland_rocks3"},
@@ -62,9 +92,11 @@ immovables_
 	{"greenland_stones4", "greenland_rocks4"},
 	{"greenland_stones5", "greenland_rocks5"},
 	{"greenland_stones6", "greenland_rocks6"},
+		// Tribe immovables below - can be deleted whenever we break map compatibility
 },
 resources_
 {
+		// All resources are always needed for map compatibility
 	{"granite", "resource_stones"},
 	{"stones", "resource_stones"},
 	{"gold", "resource_gold"},
@@ -77,6 +109,7 @@ resources_
 // Renamed German spelled terrains into English
 terrains_
 {
+		// All terrains are always needed for map compatibility
 	{"wiese1", "summer_meadow1"},
 	{"wiese2", "summer_meadow2"},
 	{"wiese3", "summer_meadow3"},
@@ -116,12 +149,14 @@ std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& i
 OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_world_name)
    : old_world_name_(old_world_name),
      // RESOURCES - They were all the same for all worlds.
+	 // All resources are always needed for map compatibility
      resources_{{"granit", "resource_stones"}, {"stones", "resource_stones"},
                 {"gold", "resource_gold"},     {"iron", "resource_iron"},
                 {"coal", "resource_coal"},     {"water", "resource_water"},
                 {"fish", "resource_fish"}},
 
      // TERRAINS
+	 // All terrains are always needed for map compatibility
      terrains_{
         std::make_pair("greenland",
                        std::map<std::string, std::string>{
@@ -176,6 +211,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
      },
 
      // CRITTERS
+	 // All critters are always needed for map compatibility
      critters_{
         std::make_pair("greenland",
                        std::map<std::string, std::string>{
@@ -201,6 +237,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
      immovables_{
         std::make_pair("blackland",
                        std::map<std::string, std::string>{
+						   // World immovables are always needed for map compatibility
                           {"stones1", "blackland_rocks1"},
                           {"stones2", "blackland_rocks2"},
                           {"stones3", "blackland_rocks3"},
@@ -246,9 +283,11 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"tree8_m", "liana_wasteland_mature"},
                           {"tree8_s", "liana_wasteland_pole"},
                           {"tree8_t", "liana_wasteland_sapling"},
+						   // Tribe immovables below - can be deleted whenever we break map compatibility
                        }),
         std::make_pair("desert",
                        std::map<std::string, std::string>{
+						   // World immovables are always needed for map compatibility
                           {"deadtree2", "deadtree5"},
                           {"deadtree3", "deadtree6"},
                           {"sstones1", "standing_stone1_desert"},
@@ -296,10 +335,12 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"tree8_m", "rowan_summer_mature"},
                           {"tree8_s", "rowan_summer_pole"},
                           {"tree8_t", "rowan_summer_sapling"},
+						   // Tribe immovables below - can be deleted whenever we break map compatibility
                        }),
         std::make_pair(
            "greenland",
            std::map<std::string, std::string>{
+				 // World immovables are always needed for map compatibility
               {"sstones1", "standing_stone1_summer"}, {"sstones2", "standing_stone2_summer"},
               {"sstones3", "standing_stone3_summer"}, {"sstones4", "standing_stone4_summer"},
               {"sstones5", "standing_stone5_summer"}, {"sstones6", "standing_stone6"},
@@ -323,9 +364,11 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
               {"tree7_t", "larch_summer_sapling"},    {"tree8", "rowan_summer_old"},
               {"tree8_m", "rowan_summer_mature"},     {"tree8_s", "rowan_summer_pole"},
               {"tree8_t", "rowan_summer_sapling"},
+				 // Tribe immovables below - can be deleted whenever we break map compatibility
            }),
         std::make_pair("winterland",
                        std::map<std::string, std::string>{
+						   // World immovables are always needed for map compatibility
                           {"sstones1", "standing_stone1_winter"},
                           {"sstones2", "standing_stone2_winter"},
                           {"sstones3", "standing_stone3_winter"},
@@ -372,6 +415,7 @@ OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_worl
                           {"tree8_m", "rowan_summer_mature"},
                           {"tree8_s", "rowan_summer_pole"},
                           {"tree8_t", "rowan_summer_sapling"},
+						   // Tribe immovables below - can be deleted whenever we break map compatibility
                        }),
      }
 

@@ -32,7 +32,7 @@
 #include "scripting/lua_table.h"
 
 class TribesLegacyLookupTable; // NOCOM
-class WorldLegacyLookupTable; // NOCOM
+class DescriptionsCompatibilityTable; // NOCOM
 
 namespace Widelands {
 
@@ -166,7 +166,7 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
-	std::unique_ptr<TribesLegacyLookupTable> legacy_lookup_table_;
+	std::unique_ptr<DescriptionsCompatibilityTable> compatibility_table_;
 
 	uint32_t largest_workarea_;
 
@@ -176,7 +176,6 @@ private:
 
 	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;
-	std::unique_ptr<WorldLegacyLookupTable> compatibility_table_;
 	DISALLOW_COPY_AND_ASSIGN(Descriptions);
 };
 

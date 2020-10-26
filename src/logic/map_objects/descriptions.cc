@@ -46,7 +46,6 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -60,13 +59,12 @@ Descriptions::Descriptions(LuaInterface* lua)
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
      tribes_(new DescriptionMaintainer<TribeDescr>()),
-     legacy_lookup_table_(new TribesLegacyLookupTable()),
+     compatibility_table_(new PostOneWorldLegacyLookupTable()),
      largest_workarea_(0),
      scenario_tribes_(nullptr),
      tribes_have_been_registered_(false),
      lua_(lua),
-     description_manager_(new DescriptionManager(lua)),
-	compatibility_table_(new PostOneWorldLegacyLookupTable()) {
+     description_manager_(new DescriptionManager(lua)) {
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
@@ -162,7 +160,7 @@ DescriptionIndex Descriptions::safe_building_index(const std::string& buildingna
 	   building_index(buildingname);
 	if (result == Widelands::INVALID_INDEX) {
 		result =
-		   building_index(legacy_lookup_table_->lookup_building(buildingname));
+		   building_index(compatibility_table_->lookup_building(buildingname));
 		if (result == Widelands::INVALID_INDEX) {
 			throw GameDataError("Unknown building '%s'", buildingname.c_str());
 		}
@@ -180,7 +178,7 @@ DescriptionIndex Descriptions::safe_critter_index(const std::string& critername)
 DescriptionIndex Descriptions::safe_immovable_index(const std::string& immovablename) const {
 	DescriptionIndex result = immovable_index(immovablename);
 	if (result == Widelands::INVALID_INDEX) {
-		result = immovable_index(compatibility_table_->lookup_immovable(legacy_lookup_table_->lookup_immovable(immovablename)));
+		result = immovable_index(compatibility_table_->lookup_immovable(immovablename));
 		if (result == Widelands::INVALID_INDEX) {
 			throw GameDataError("Unknown immovable '%s'", immovablename.c_str());
 		}
@@ -200,7 +198,7 @@ DescriptionIndex Descriptions::safe_resource_index(const std::string& resourcena
 DescriptionIndex Descriptions::safe_ship_index(const std::string& shipname) const {
 	DescriptionIndex result = ship_index(shipname);
 	if (result == INVALID_INDEX) {
-		result = ship_index(legacy_lookup_table_->lookup_ship(shipname));
+		result = ship_index(compatibility_table_->lookup_ship(shipname));
 		if (result == INVALID_INDEX) {
 			throw GameDataError("Unknown ship '%s'", shipname.c_str());
 		}
@@ -227,7 +225,7 @@ DescriptionIndex Descriptions::safe_tribe_index(const std::string& tribename) co
 DescriptionIndex Descriptions::safe_ware_index(const std::string& warename) const {
 	DescriptionIndex result = ware_index(warename);
 	if (result == Widelands::INVALID_INDEX) {
-		result = ware_index(legacy_lookup_table_->lookup_ware(warename));
+		result = ware_index(compatibility_table_->lookup_ware(warename));
 		if (result == Widelands::INVALID_INDEX) {
 			throw GameDataError("Unknown ware '%s'", warename.c_str());
 		}
@@ -237,7 +235,7 @@ DescriptionIndex Descriptions::safe_ware_index(const std::string& warename) cons
 DescriptionIndex Descriptions::safe_worker_index(const std::string& workername) const {
 	DescriptionIndex result = worker_index(workername);
 	if (result == Widelands::INVALID_INDEX) {
-		result = worker_index(legacy_lookup_table_->lookup_worker(workername));
+		result = worker_index(compatibility_table_->lookup_worker(workername));
 		if (result == Widelands::INVALID_INDEX) {
 			throw GameDataError("Unknown worker '%s'", workername.c_str());
 		}
@@ -463,7 +461,7 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 
 DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
 	try {
-		description_manager_->load_description(legacy_lookup_table_->lookup_building(buildingname));
+		description_manager_->load_description(compatibility_table_->lookup_building(buildingname));
 	} catch (WException& e) {
 		throw GameDataError(
 		   "Error while loading building type '%s': %s", buildingname.c_str(), e.what());
@@ -483,7 +481,7 @@ DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
 
 DescriptionIndex Descriptions::load_immovable(const std::string& immovablename) {
 	try {
-		description_manager_->load_description(compatibility_table_->lookup_immovable(legacy_lookup_table_->lookup_immovable(immovablename)));
+		description_manager_->load_description(compatibility_table_->lookup_immovable(immovablename));
 	} catch (WException& e) {
 		throw GameDataError(
 		   "Error while loading immovable type '%s': %s", immovablename.c_str(), e.what());
@@ -503,7 +501,7 @@ DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
 
 DescriptionIndex Descriptions::load_ship(const std::string& shipname) {
 	try {
-		description_manager_->load_description(legacy_lookup_table_->lookup_ship(shipname));
+		description_manager_->load_description(compatibility_table_->lookup_ship(shipname));
 	} catch (WException& e) {
 		throw GameDataError("Error while loading ship type '%s': %s", shipname.c_str(), e.what());
 	}
@@ -522,7 +520,7 @@ DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
 
 DescriptionIndex Descriptions::load_ware(const std::string& warename) {
 	try {
-		description_manager_->load_description(legacy_lookup_table_->lookup_ware(warename));
+		description_manager_->load_description(compatibility_table_->lookup_ware(warename));
 	} catch (WException& e) {
 		throw GameDataError("Error while loading ware type '%s': %s", warename.c_str(), e.what());
 	}
@@ -531,7 +529,7 @@ DescriptionIndex Descriptions::load_ware(const std::string& warename) {
 
 DescriptionIndex Descriptions::load_worker(const std::string& workername) {
 	try {
-		description_manager_->load_description(legacy_lookup_table_->lookup_worker(workername));
+		description_manager_->load_description(compatibility_table_->lookup_worker(workername));
 	} catch (WException& e) {
 		throw GameDataError("Error while loading worker type '%s': %s", workername.c_str(), e.what());
 	}
@@ -539,14 +537,14 @@ DescriptionIndex Descriptions::load_worker(const std::string& workername) {
 }
 
 std::pair<WareWorker, DescriptionIndex> Descriptions::load_ware_or_worker(const std::string& objectname) const {
-	std::string looked_up_name = legacy_lookup_table_->lookup_ware(objectname);
+	std::string looked_up_name = compatibility_table_->lookup_ware(objectname);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
 	const DescriptionIndex wai = ware_index(looked_up_name);
 	if (wai != Widelands::INVALID_INDEX) {
 		return std::make_pair(WareWorker::wwWARE, wai);
 	}
-	looked_up_name = legacy_lookup_table_->lookup_worker(objectname);
+	looked_up_name = compatibility_table_->lookup_worker(objectname);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject));
 	const DescriptionIndex woi = worker_index(looked_up_name);
@@ -556,14 +554,14 @@ std::pair<WareWorker, DescriptionIndex> Descriptions::load_ware_or_worker(const 
 	throw GameDataError("'%s' has not been registered as a ware/worker type", objectname.c_str());
 }
 std::pair<bool, DescriptionIndex> Descriptions::load_building_or_immovable(const std::string& objectname) const {
-	std::string looked_up_name = legacy_lookup_table_->lookup_building(objectname);
+	std::string looked_up_name = compatibility_table_->lookup_building(objectname);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
 	const DescriptionIndex bi = building_index(looked_up_name);
 	if (bi != Widelands::INVALID_INDEX) {
 		return std::make_pair(true, bi);
 	}
-	looked_up_name = compatibility_table_->lookup_immovable(legacy_lookup_table_->lookup_immovable(objectname));
+	looked_up_name = compatibility_table_->lookup_immovable(objectname);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject));
 	const DescriptionIndex ii = immovable_index(looked_up_name);
@@ -583,9 +581,9 @@ void Descriptions::increase_largest_workarea(uint32_t workarea) {
 
 void Descriptions::set_old_world_name(const std::string& name) {
 	if (name.empty()) {
-		compatibility_table_ = std::unique_ptr<WorldLegacyLookupTable>(new PostOneWorldLegacyLookupTable());
+		compatibility_table_ = std::unique_ptr<DescriptionsCompatibilityTable>(new PostOneWorldLegacyLookupTable());
 	} else {
-		compatibility_table_ = std::unique_ptr<WorldLegacyLookupTable>(new OneWorldLegacyLookupTable(name));
+		compatibility_table_ = std::unique_ptr<DescriptionsCompatibilityTable>(new OneWorldLegacyLookupTable(name));
 	}
 }
 }  // namespace Widelands
