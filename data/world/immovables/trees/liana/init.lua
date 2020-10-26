@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "liana_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Sapling)",
@@ -35,7 +35,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "liana_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Pole)",
@@ -61,7 +61,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "liana_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Mature)",
@@ -90,7 +90,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "liana_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Old)",

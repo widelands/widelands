@@ -2,7 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "bar-ruin01",
    descname = _ "Ruin",
    size = "big",

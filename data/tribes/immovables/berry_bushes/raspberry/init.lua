@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 10,
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_raspberry_tiny",
    descname = _ "Raspberry Bush (tiny)",
    size = "small",
@@ -33,7 +33,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_raspberry_small",
    descname = _ "Raspberry Bush (small)",
    size = "small",
@@ -57,7 +57,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_raspberry_medium",
    descname = _ "Raspberry Bush (medium)",
    size = "small",
@@ -81,7 +81,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_raspberry_ripe",
    descname = _ "Raspberry Bush (ripe)",
    size = "small",

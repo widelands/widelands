@@ -54,7 +54,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    tribes:new_militarysite_type {
+--    descriptions:new_militarysite_type {
 --       name = "atlanteans_castle",
 --       descname = pgettext("atlanteans_building", "Castle"),
 --       animation_directory = dirname,
@@ -108,7 +108,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
+descriptions:new_militarysite_type {
    name = "atlanteans_castle",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Castle"),
