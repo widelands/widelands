@@ -29,8 +29,10 @@
 #include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/wareworker.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
+
+class TribesLegacyLookupTable; // NOCOM
+class WorldLegacyLookupTable; // NOCOM
 
 namespace Widelands {
 
@@ -147,6 +149,17 @@ public:
 	uint32_t get_largest_workarea() const;
 	void increase_largest_workarea(uint32_t workarea);
 
+	/// For loading old maps
+	void set_old_world_name(const std::string& name);
+
+	const std::string& lookup_building(const std::string& name) const;
+	const std::string& lookup_critter(const std::string& name) const;
+	const std::string& lookup_immovable(const std::string& name) const;
+	const std::string& lookup_resource(const std::string& name) const;
+	const std::string& lookup_terrain(const std::string& name) const;
+	const std::string& lookup_ware(const std::string& name) const;
+	const std::string& lookup_worker(const std::string& name) const;
+
 private:
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
@@ -167,6 +180,7 @@ private:
 
 	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;
+	std::unique_ptr<WorldLegacyLookupTable> compatibility_table_;
 	DISALLOW_COPY_AND_ASSIGN(Descriptions);
 };
 

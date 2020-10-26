@@ -21,17 +21,13 @@
 #define WL_MAP_IO_MAP_PLAYERS_VIEW_PACKET_H
 
 #include "map_io/map_data_packet.h"
-#include "map_io/tribes_legacy_lookup_table.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
 class MapPlayersViewPacket {
 public:
 	void read(FileSystem&,
-	          EditorGameBase&,
-	          const WorldLegacyLookupTable& world_lookup_table,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	          EditorGameBase&);
 	void write(FileSystem&, EditorGameBase&);
 };
 }  // namespace Widelands

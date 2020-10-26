@@ -26,7 +26,6 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -36,8 +35,7 @@ void MapBobPacket::read_bob(FileRead& fr,
                             EditorGameBase& egbase,
                             MapObjectLoader&,
                             const Coords& coords,
-                            const WorldLegacyLookupTable& lookup_table,
-                            uint16_t packet_version) {
+                            uint16_t /* packet_version */) {
 	const std::string owner = fr.c_string();
 	char const* const read_name = fr.c_string();
 	uint8_t subtype = fr.unsigned_8();
@@ -48,7 +46,7 @@ void MapBobPacket::read_bob(FileRead& fr,
 		throw GameDataError("unknown legacy bob %s/%s", owner.c_str(), read_name);
 	}
 
-	const std::string name = lookup_table.lookup_critter(read_name, packet_version);
+	const std::string name = egbase.descriptions().lookup_critter(read_name);
 	try {
 		Descriptions* descriptions = egbase.mutable_descriptions();
 		const CritterDescr& descr =
@@ -68,8 +66,7 @@ void MapBobPacket::read_bob(FileRead& fr,
 
 void MapBobPacket::read(FileSystem& fs,
                         EditorGameBase& egbase,
-                        MapObjectLoader& mol,
-                        const WorldLegacyLookupTable& lookup_table) {
+                        MapObjectLoader& mol) {
 	FileRead fr;
 	fr.open(fs, "binary/bob");
 
@@ -82,7 +79,7 @@ void MapBobPacket::read(FileSystem& fs,
 				for (uint16_t x = 0; x < map->get_width(); ++x) {
 					uint32_t const nr_bobs = fr.unsigned_32();
 					for (uint32_t i = 0; i < nr_bobs; ++i) {
-						read_bob(fr, egbase, mol, Coords(x, y), lookup_table, packet_version);
+						read_bob(fr, egbase, mol, Coords(x, y), packet_version);
 					}
 				}
 			}

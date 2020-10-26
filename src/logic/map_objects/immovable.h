@@ -31,9 +31,6 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
-class TribesLegacyLookupTable;
-class WorldLegacyLookupTable;
-
 namespace Widelands {
 
 class Building;
@@ -323,9 +320,7 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	static MapObject::Loader* load(EditorGameBase&,
 	                               MapObjectLoader&,
-	                               FileRead&,
-	                               const WorldLegacyLookupTable& world_lookup_table,
-	                               const TribesLegacyLookupTable& tribes_lookup_table);
+	                               FileRead&);
 
 private:
 	/// If this immovable was created by a building, this can be set in order to display information

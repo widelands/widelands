@@ -106,27 +106,13 @@ constexpr uint16_t kCurrentPacketVersion = 6;
  */
 void Request::read(FileRead& fr,
                    Game& game,
-                   MapObjectLoader& mol,
-                   const TribesLegacyLookupTable& tribes_lookup_table) {
+                   MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			const TribeDescr& tribe = target_.owner().tribe();
-			char const* const type_name = fr.c_string();
-			DescriptionIndex const wai = tribe.ware_index(tribes_lookup_table.lookup_ware(type_name));
-			if (tribe.has_ware(wai)) {
-				type_ = wwWARE;
-				index_ = wai;
-			} else {
-				DescriptionIndex const woi =
-				   tribe.worker_index(tribes_lookup_table.lookup_worker(type_name));
-				if (tribe.has_worker(woi)) {
-					type_ = wwWORKER;
-					index_ = woi;
-				} else {
-					throw wexception("Request::read: unknown type '%s'.\n", type_name);
-				}
-			}
+			const std::pair<WareWorker, DescriptionIndex> wareworker = target_.owner().tribe().find_ware_or_worker(fr.c_string());
+			type_ = wareworker.first;
+			index_ = wareworker.second;
 
 			// Overwrite initial economy because our WareWorker type may have changed
 			if (economy_) {

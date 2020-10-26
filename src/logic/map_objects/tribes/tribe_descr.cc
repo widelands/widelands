@@ -590,6 +590,18 @@ DescriptionIndex TribeDescr::safe_worker_index(const std::string& workername) co
 	return descriptions_.safe_worker_index(workername);
 }
 
+std::pair<WareWorker, DescriptionIndex> TribeDescr::find_ware_or_worker(const std::string& ware_worker_name) const {
+	const DescriptionIndex wai = ware_index(descriptions_.lookup_ware(ware_worker_name));
+	if (has_ware(wai)) {
+		return std::make_pair(WareWorker::wwWARE, wai);
+	}
+	const DescriptionIndex woi = worker_index(descriptions_.lookup_worker(ware_worker_name));
+	if (has_worker(woi)) {
+		return std::make_pair(WareWorker::wwWORKER, woi);
+	}
+	throw GameDataError("Tribe '%s' does not have ware/worker type '%s'", name().c_str(), ware_worker_name.c_str());
+}
+
 WareDescr const* TribeDescr::get_ware_descr(const DescriptionIndex& index) const {
 	return descriptions_.get_ware_descr(index);
 }

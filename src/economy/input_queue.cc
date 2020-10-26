@@ -136,25 +136,24 @@ constexpr uint16_t kCurrentPacketVersion = 3;
 
 void InputQueue::read(FileRead& fr,
                       Game& game,
-                      MapObjectLoader& mol,
-                      const TribesLegacyLookupTable& tribes_lookup_table) {
+                      MapObjectLoader& mol) {
 
 	uint16_t const packet_version = fr.unsigned_16();
 	try {
 		if (packet_version == kCurrentPacketVersion) {
 			if (fr.unsigned_8() == 0) {
 				assert(type_ == wwWARE);
-				index_ = owner().tribe().ware_index(tribes_lookup_table.lookup_ware(fr.c_string()));
+				game.descriptions().safe_ware_index(fr.c_string());
 			} else {
 				assert(type_ == wwWORKER);
-				index_ = owner().tribe().worker_index(tribes_lookup_table.lookup_worker(fr.c_string()));
+				game.descriptions().safe_worker_index(fr.c_string());
 			}
 			max_size_ = fr.unsigned_32();
 			max_fill_ = fr.signed_32();
 			consume_interval_ = Duration(fr);
 			if (fr.unsigned_8()) {
 				request_.reset(new Request(owner_, 0, InputQueue::request_callback, type_));
-				request_->read(fr, game, mol, tribes_lookup_table);
+				request_->read(fr, game, mol);
 			} else {
 				request_.reset();
 			}

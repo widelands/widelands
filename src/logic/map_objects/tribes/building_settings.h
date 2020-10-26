@@ -20,10 +20,10 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_SETTINGS_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_SETTINGS_H
 
+#include <map>
 #include <string>
 
 #include "logic/widelands.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 class FileRead;
 class FileWrite;
@@ -47,11 +47,10 @@ struct BuildingSettings {
 
 	static BuildingSettings* load(const Game&,
 	                              const TribeDescr&,
-	                              FileRead&,
-	                              const TribesLegacyLookupTable& tribes_lookup_table);
+	                              FileRead&);
 
 	virtual void save(const Game&, FileWrite&) const;
-	virtual void read(const Game&, FileRead&, const TribesLegacyLookupTable&);
+	virtual void read(const Game&, FileRead&);
 
 	virtual void apply(const BuildingSettings&) {
 	}
@@ -70,7 +69,7 @@ struct ProductionsiteSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const Game&, FileRead&) override;
 
 	struct InputQueueSetting {
 		const uint32_t max_fill;
@@ -89,7 +88,7 @@ struct MilitarysiteSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const Game&, FileRead&) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -103,7 +102,7 @@ struct TrainingsiteSettings : public ProductionsiteSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const Game&, FileRead&) override;
 
 	const uint32_t max_capacity;
 	uint32_t desired_capacity;
@@ -116,7 +115,7 @@ struct WarehouseSettings : public BuildingSettings {
 	void apply(const BuildingSettings&) override;
 
 	void save(const Game&, FileWrite&) const override;
-	void read(const Game&, FileRead&, const TribesLegacyLookupTable& tribes_lookup_table) override;
+	void read(const Game&, FileRead&) override;
 
 	std::map<DescriptionIndex, StockPolicy> ware_preferences;
 	std::map<DescriptionIndex, StockPolicy> worker_preferences;

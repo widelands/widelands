@@ -21,7 +21,6 @@
 #define WL_MAP_IO_MAP_BUILDINGDATA_PACKET_H
 
 #include "map_io/map_data_packet.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 class FileRead;
 class FileWrite;
@@ -46,46 +45,38 @@ public:
 	void read(FileSystem&,
 	          EditorGameBase&,
 	          bool,
-	          MapObjectLoader&,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	          MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 
 private:
 	void read_constructionsite(ConstructionSite&,
 	                           FileRead&,
 	                           Game&,
-	                           MapObjectLoader&,
-	                           const TribesLegacyLookupTable& tribes_lookup_table);
+	                           MapObjectLoader&);
 	void read_dismantlesite(DismantleSite&,
 	                        FileRead&,
 	                        Game&,
-	                        MapObjectLoader&,
-	                        const TribesLegacyLookupTable& tribes_lookup_table);
+	                        MapObjectLoader&);
 	void read_partially_finished_building(PartiallyFinishedBuilding&,
 	                                      FileRead&,
 	                                      Game&,
-	                                      MapObjectLoader&,
-	                                      const TribesLegacyLookupTable& tribes_lookup_table);
+	                                      MapObjectLoader&);
 	void read_warehouse(Warehouse&,
 	                    FileRead&,
 	                    Game&,
-	                    MapObjectLoader&,
-	                    const TribesLegacyLookupTable& tribes_lookup_table);
+	                    MapObjectLoader&);
 	void read_militarysite(MilitarySite&,
 	                       FileRead&,
 	                       Game&,
-	                       MapObjectLoader&,
-	                       const TribesLegacyLookupTable& tribes_lookup_table);
+	                       MapObjectLoader&);
 	void read_trainingsite(TrainingSite&,
 	                       FileRead&,
 	                       Game&,
-	                       MapObjectLoader&,
-	                       const TribesLegacyLookupTable& tribes_lookup_table);
+	                       MapObjectLoader&);
 	void read_productionsite(ProductionSite&,
 	                         FileRead&,
 	                         Game&,
-	                         MapObjectLoader&,
-	                         const TribesLegacyLookupTable& tribes_lookup_table);
+	                         MapObjectLoader&);
 
 	void write_constructionsite(const ConstructionSite&, FileWrite&, Game&, MapObjectSaver&);
 	void write_dismantlesite(const DismantleSite&, FileWrite&, Game&, MapObjectSaver&);

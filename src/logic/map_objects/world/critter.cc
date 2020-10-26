@@ -30,7 +30,6 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter_program.h"
-#include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -518,8 +517,7 @@ const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
 
 MapObject::Loader* Critter::load(EditorGameBase& egbase,
                                  MapObjectLoader& mol,
-                                 FileRead& fr,
-                                 const WorldLegacyLookupTable& lookup_table) {
+                                 FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -534,7 +532,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 			std::string critter_name = fr.c_string();
 			const CritterDescr* descr = nullptr;
 
-			critter_name = lookup_table.lookup_critter(critter_name, packet_version);
+			critter_name = egbase.descriptions().lookup_critter(critter_name);
 			descr = egbase.descriptions().get_critter_descr(
 			   egbase.mutable_descriptions()->load_critter(critter_name));
 

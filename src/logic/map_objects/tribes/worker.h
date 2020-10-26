@@ -27,7 +27,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/widelands_geometry.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -327,7 +326,6 @@ public:
 	static MapObject::Loader* load(EditorGameBase&,
 	                               MapObjectLoader&,
 	                               FileRead&,
-	                               const TribesLegacyLookupTable& lookup_table,
 	                               uint8_t packet_version);
 };
 }  // namespace Widelands

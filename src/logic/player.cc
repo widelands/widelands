@@ -1898,8 +1898,7 @@ void Player::init_statistics() {
  * \param fr source stream
  */
 void Player::read_statistics(FileRead& fr,
-                             const uint16_t /* packet_version */,
-                             const TribesLegacyLookupTable& lookup_table) {
+                             const uint16_t /* packet_version */) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -1931,7 +1930,7 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = lookup_table.lookup_ware(fr.c_string());
+		const std::string name = egbase().descriptions().lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
 		if (!egbase().descriptions().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(), "Player %u statistics: unknown ware name %s",
@@ -1953,7 +1952,7 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = lookup_table.lookup_ware(fr.c_string());
+		const std::string name = egbase().descriptions().lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
 		if (!egbase().descriptions().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(),
@@ -1976,7 +1975,7 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = lookup_table.lookup_ware(fr.c_string());
+		const std::string name = egbase().descriptions().lookup_ware(fr.c_string());
 		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
 		if (!egbase().descriptions().ware_exists(idx)) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",

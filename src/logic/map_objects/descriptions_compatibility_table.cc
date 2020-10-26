@@ -17,40 +17,14 @@
  *
  */
 
-#include "map_io/world_legacy_lookup_table.h"
+#include "logic/map_objects/descriptions_compatibility_table.h"
 
-#include <map>
 #include <memory>
-
-namespace {
-
-/// If the map is newish and there is no old world to convert names from, we use
-/// this one that simply returns the looked up values, except for some renaming
-/// introduced through the merging of the tribes, which are handled here.
-class PostOneWorldLegacyLookupTable : public WorldLegacyLookupTable {
-public:
-	PostOneWorldLegacyLookupTable();
-
-	// Implements OneWorldLegacyLookupTable.
-	std::string lookup_resource(const std::string& resource) const override;
-	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter, uint16_t packet_version) const override;
-	std::string lookup_immovable(const std::string& immovable) const override;
-
-private:
-	// Old name, <packet version when it got changed, new name>
-	const std::map<std::string, std::map<uint16_t, std::string>> critters_;
-	const std::map<std::string, std::string> immovables_;
-	const std::map<std::string, std::string> resources_;
-	const std::map<std::string, std::string> terrains_;
-};
 
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
 critters_
 {
-	// We need to bump the packet version in Critter every time we rename a critter.
-	// Also, don't forget to edit the OneWorldLegacyLookupTable! You can look up which world had which units in Build 18.
-	{"elk", {{2, "moose"}}},
+	{"elk", "moose"},
 },
 immovables_
 {
@@ -129,17 +103,12 @@ std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& ter
 	return i->second;
 }
 
-std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter,
-                                                          uint16_t packet_version) const {
-	std::string result = critter;
-	if (critters_.count(critter) == 1) {
-		for (const auto& candidate : critters_.at(result)) {
-			if (candidate.first >= packet_version) {
-				result = candidate.second;
-			}
+std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
+		const auto& i = critters_.find(critter);
+		if (i == critters_.end()) {
+			return critter;
 		}
-	}
-	return result;
+		return i->second;
 }
 
 std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
@@ -149,24 +118,6 @@ std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& i
 	}
 	return i->second;
 }
-
-class OneWorldLegacyLookupTable : public WorldLegacyLookupTable {
-public:
-	explicit OneWorldLegacyLookupTable(const std::string& old_world_name);
-
-	// Implements OneWorldLegacyLookupTable.
-	std::string lookup_resource(const std::string& resource) const override;
-	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter, uint16_t packet_version) const override;
-	std::string lookup_immovable(const std::string& immovable) const override;
-
-private:
-	const std::string old_world_name_;
-	const std::map<std::string, std::string> resources_;
-	const std::map<std::string, std::map<std::string, std::string>> terrains_;
-	const std::map<std::string, std::map<std::string, std::string>> critters_;
-	const std::map<std::string, std::map<std::string, std::string>> immovables_;
-};
 
 OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_world_name)
    : old_world_name_(old_world_name),
@@ -450,7 +401,7 @@ std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain
 	return terrain;
 }
 
-std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter, uint16_t) const {
+std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
 	const std::map<std::string, std::string>& world_critters = critters_.at(old_world_name_);
 	const auto& i = world_critters.find(critter);
 	if (i != world_critters.end()) {
@@ -466,17 +417,4 @@ std::string OneWorldLegacyLookupTable::lookup_immovable(const std::string& immov
 		return i->second;
 	}
 	return immovable;
-}
-
-}  // namespace
-
-WorldLegacyLookupTable::~WorldLegacyLookupTable() {
-}
-
-std::unique_ptr<WorldLegacyLookupTable>
-create_world_legacy_lookup_table(const std::string& old_world_name) {
-	if (old_world_name.empty()) {
-		return std::unique_ptr<WorldLegacyLookupTable>(new PostOneWorldLegacyLookupTable());
-	}
-	return std::unique_ptr<WorldLegacyLookupTable>(new OneWorldLegacyLookupTable(old_world_name));
 }

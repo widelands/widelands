@@ -28,8 +28,6 @@
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/world/critter_program.h"
 
-class WorldLegacyLookupTable;
-
 namespace Widelands {
 
 //
@@ -100,7 +98,7 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader*
-	load(EditorGameBase&, MapObjectLoader&, FileRead&, const WorldLegacyLookupTable& lookup_table);
+	load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 protected:
 	struct Loader : Bob::Loader {

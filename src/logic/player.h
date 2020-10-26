@@ -572,7 +572,7 @@ public:
 
 	void init_statistics();
 	void
-	read_statistics(FileRead&, uint16_t packet_version, const TribesLegacyLookupTable& lookup_table);
+	read_statistics(FileRead&, uint16_t packet_version);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;

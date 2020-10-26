@@ -25,6 +25,7 @@
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions_compatibility_table.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/carrier.h"
@@ -45,6 +46,7 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
+#include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/sound_handler.h"
 
 namespace Widelands {
@@ -63,7 +65,8 @@ Descriptions::Descriptions(LuaInterface* lua)
      scenario_tribes_(nullptr),
      tribes_have_been_registered_(false),
      lua_(lua),
-     description_manager_(new DescriptionManager(lua)) {
+     description_manager_(new DescriptionManager(lua)),
+	compatibility_table_(new PostOneWorldLegacyLookupTable()) {
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
@@ -155,10 +158,14 @@ bool Descriptions::tribe_exists(DescriptionIndex index) const {
 }
 
 DescriptionIndex Descriptions::safe_building_index(const std::string& buildingname) const {
-	const DescriptionIndex result =
-	   building_index(legacy_lookup_table_->lookup_building(buildingname));
-	if (!building_exists(result)) {
-		throw GameDataError("Unknown building '%s'", buildingname.c_str());
+	DescriptionIndex result =
+	   building_index(buildingname);
+	if (result == Widelands::INVALID_INDEX) {
+		result =
+		   building_index(legacy_lookup_table_->lookup_building(buildingname));
+		if (result == Widelands::INVALID_INDEX) {
+			throw GameDataError("Unknown building '%s'", buildingname.c_str());
+		}
 	}
 	return result;
 }
@@ -171,33 +178,42 @@ DescriptionIndex Descriptions::safe_critter_index(const std::string& critername)
 	return result;
 }
 DescriptionIndex Descriptions::safe_immovable_index(const std::string& immovablename) const {
-	const DescriptionIndex result =
-	   immovable_index(legacy_lookup_table_->lookup_immovable(immovablename));
-	if (!immovable_exists(result)) {
-		throw GameDataError("Unknown immovable '%s'", immovablename.c_str());
+	DescriptionIndex result = immovable_index(immovablename);
+	if (result == Widelands::INVALID_INDEX) {
+		result = immovable_index(lookup_immovable(immovablename));
+		if (result == Widelands::INVALID_INDEX) {
+			throw GameDataError("Unknown immovable '%s'", immovablename.c_str());
+		}
 	}
 	return result;
 }
 DescriptionIndex Descriptions::safe_resource_index(const std::string& resourcename) const {
-	DescriptionIndex const result = resource_index(resourcename);
-
+	DescriptionIndex result = resource_index(resourcename);
 	if (result == INVALID_INDEX) {
-		throw GameDataError("Unknown resource '%s'", resourcename.c_str());
+		result = resource_index(lookup_resource(resourcename));
+		if (result == INVALID_INDEX) {
+			throw GameDataError("Unknown resource '%s'", resourcename.c_str());
+		}
 	}
 	return result;
 }
 DescriptionIndex Descriptions::safe_ship_index(const std::string& shipname) const {
-	const DescriptionIndex result = ship_index(legacy_lookup_table_->lookup_ship(shipname));
-	if (!ship_exists(result)) {
-		throw GameDataError("Unknown ship '%s'", shipname.c_str());
+	DescriptionIndex result = ship_index(shipname);
+	if (result == INVALID_INDEX) {
+		result = ship_index(legacy_lookup_table_->lookup_ship(shipname));
+		if (result == INVALID_INDEX) {
+			throw GameDataError("Unknown ship '%s'", shipname.c_str());
+		}
 	}
 	return result;
 }
 DescriptionIndex Descriptions::safe_terrain_index(const std::string& terrainname) const {
-	DescriptionIndex const result = terrain_index(terrainname);
-
+	DescriptionIndex result = terrain_index(terrainname);
 	if (result == INVALID_INDEX) {
-		throw GameDataError("Unknown terrain '%s'", terrainname.c_str());
+		result = terrain_index(lookup_terrain(terrainname));
+		if (result == INVALID_INDEX) {
+			throw GameDataError("Unknown terrain '%s'", terrainname.c_str());
+		}
 	}
 	return result;
 }
@@ -209,16 +225,22 @@ DescriptionIndex Descriptions::safe_tribe_index(const std::string& tribename) co
 	return result;
 }
 DescriptionIndex Descriptions::safe_ware_index(const std::string& warename) const {
-	const DescriptionIndex result = ware_index(legacy_lookup_table_->lookup_ware(warename));
-	if (!ware_exists(result)) {
-		throw GameDataError("Unknown ware '%s'", warename.c_str());
+	DescriptionIndex result = ware_index(warename);
+	if (result == Widelands::INVALID_INDEX) {
+		result = ware_index(legacy_lookup_table_->lookup_ware(warename));
+		if (result == Widelands::INVALID_INDEX) {
+			throw GameDataError("Unknown ware '%s'", warename.c_str());
+		}
 	}
 	return result;
 }
 DescriptionIndex Descriptions::safe_worker_index(const std::string& workername) const {
-	const DescriptionIndex result = worker_index(legacy_lookup_table_->lookup_worker(workername));
-	if (!worker_exists(result)) {
-		throw GameDataError("Unknown worker '%s'", workername.c_str());
+	DescriptionIndex result = worker_index(workername);
+	if (result == Widelands::INVALID_INDEX) {
+		result = worker_index(legacy_lookup_table_->lookup_worker(workername));
+		if (result == Widelands::INVALID_INDEX) {
+			throw GameDataError("Unknown worker '%s'", workername.c_str());
+		}
 	}
 	return result;
 }
@@ -534,6 +556,36 @@ uint32_t Descriptions::get_largest_workarea() const {
 
 void Descriptions::increase_largest_workarea(uint32_t workarea) {
 	largest_workarea_ = std::max(largest_workarea_, workarea);
+}
+
+void Descriptions::set_old_world_name(const std::string& name) {
+	if (name.empty()) {
+		compatibility_table_ = std::unique_ptr<WorldLegacyLookupTable>(new PostOneWorldLegacyLookupTable());
+	} else {
+		compatibility_table_ = std::unique_ptr<WorldLegacyLookupTable>(new OneWorldLegacyLookupTable(name));
+	}
+}
+
+const std::string& Descriptions::lookup_building(const std::string& name) const {
+	return legacy_lookup_table_->lookup_building(name);
+}
+const std::string& Descriptions::lookup_critter(const std::string& name) const {
+	return compatibility_table_->lookup_critter(name);
+}
+const std::string& Descriptions::lookup_immovable(const std::string& name) const {
+	return compatibility_table_->lookup_immovable(legacy_lookup_table_->lookup_immovable(name));
+}
+const std::string& Descriptions::lookup_resource(const std::string& name) const {
+	return compatibility_table_->lookup_resource(name);
+}
+const std::string& Descriptions::lookup_terrain(const std::string& name) const {
+	return compatibility_table_->lookup_terrain(name);
+}
+const std::string& Descriptions::lookup_ware(const std::string& name) const {
+	return legacy_lookup_table_->lookup_ware(name);
+}
+const std::string& Descriptions::lookup_worker(const std::string& name) const {
+	return legacy_lookup_table_->lookup_worker(name);
 }
 
 }  // namespace Widelands

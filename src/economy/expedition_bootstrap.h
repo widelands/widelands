@@ -91,7 +91,6 @@ public:
 	          FileRead& fr,
 	          Game& game,
 	          MapObjectLoader& mol,
-	          const TribesLegacyLookupTable& tribes_lookup_table,
 	          uint16_t version);
 
 	/** Save this into a file.

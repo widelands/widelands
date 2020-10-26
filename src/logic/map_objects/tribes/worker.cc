@@ -61,7 +61,6 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "map_io/map_packet_versions.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/note_sound.h"
 
 namespace Widelands {
@@ -3408,12 +3407,11 @@ Worker::Loader* Worker::create_loader() {
 MapObject::Loader* Worker::load(EditorGameBase& egbase,
                                 MapObjectLoader& mol,
                                 FileRead& fr,
-                                const TribesLegacyLookupTable& lookup_table,
                                 uint8_t packet_version) {
 	if (packet_version == kCurrentPacketVersionMapObject) {
 		try {
 			// header has already been read by caller
-			const std::string name = lookup_table.lookup_worker(fr.c_string());
+			const std::string name = egbase.descriptions().lookup_worker(fr.c_string());
 
 			const WorkerDescr* descr =
 			   egbase.descriptions().get_worker_descr(egbase.descriptions().safe_worker_index(name));

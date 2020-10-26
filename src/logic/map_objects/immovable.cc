@@ -33,7 +33,6 @@
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -694,9 +693,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 
 MapObject::Loader* Immovable::load(EditorGameBase& egbase,
                                    MapObjectLoader& mol,
-                                   FileRead& fr,
-                                   const WorldLegacyLookupTable& world_lookup_table,
-                                   const TribesLegacyLookupTable& tribes_lookup_table) {
+                                   FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -709,8 +706,7 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 			}
 			Immovable* imm = nullptr;
 
-			const std::string name = tribes_lookup_table.lookup_immovable(
-			   world_lookup_table.lookup_immovable(fr.c_string()));
+			const std::string name = egbase.descriptions().lookup_immovable(fr.c_string());
 			imm = new Immovable(*egbase.descriptions().get_immovable_descr(
 			   egbase.mutable_descriptions()->load_immovable(name)));
 

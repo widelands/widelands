@@ -185,8 +185,7 @@ public:
 	 */
 	void read(FileRead& f,
 	          Game& g,
-	          MapObjectLoader& mol,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	          MapObjectLoader& mol);
 
 	/**
 	 * Writes the state of this class.

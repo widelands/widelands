@@ -599,13 +599,12 @@ void WareInstance::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& 
 
 MapObject::Loader* WareInstance::load(EditorGameBase& egbase,
                                       MapObjectLoader& mol,
-                                      FileRead& fr,
-                                      const TribesLegacyLookupTable& lookup_table) {
+                                      FileRead& fr) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
 
 		if (packet_version == kCurrentPacketVersion) {
-			const std::string warename = lookup_table.lookup_ware(fr.c_string());
+			const std::string warename = egbase.descriptions().lookup_ware(fr.c_string());
 
 			DescriptionIndex wareindex = egbase.descriptions().ware_index(warename);
 			const WareDescr* descr = egbase.descriptions().get_ware_descr(wareindex);

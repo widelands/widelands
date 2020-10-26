@@ -21,7 +21,6 @@
 #define WL_MAP_IO_MAP_FLAGDATA_PACKET_H
 
 #include "map_io/map_data_packet.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 class MapFlagdataPacket {
@@ -29,8 +28,7 @@ public:
 	void read(FileSystem&,
 	          EditorGameBase&,
 	          bool,
-	          MapObjectLoader&,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	          MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 };
 }  // namespace Widelands

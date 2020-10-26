@@ -26,15 +26,13 @@
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapTerrainPacket::read(FileSystem& fs,
-                            EditorGameBase& egbase,
-                            const WorldLegacyLookupTable& lookup_table) {
+                            EditorGameBase& egbase) {
 	FileRead fr;
 	fr.open(fs, "binary/terrain");
 
@@ -53,7 +51,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 					throw GameDataError(
 					   "MapTerrainPacket::read: WARNING: Found duplicate terrain id %i.", id);
 				}
-				const std::string terrain_name(lookup_table.lookup_terrain(fr.c_string()));
+				const std::string terrain_name(egbase.descriptions().lookup_terrain(fr.c_string()));
 				const DescriptionIndex terrain_idx =
 				   egbase.mutable_descriptions()->load_terrain(terrain_name);
 				if (terrain_idx == Widelands::INVALID_INDEX) {
