@@ -29,8 +29,10 @@
 
 namespace Widelands {
 
-FerryDescr::FerryDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
-   : CarrierDescr(init_descname, table, tribes, MapObjectType::FERRY) {
+FerryDescr::FerryDescr(const std::string& init_descname,
+                       const LuaTable& table,
+                       Descriptions& descriptions)
+   : CarrierDescr(init_descname, table, descriptions, MapObjectType::FERRY) {
 }
 
 // When pathfinding, we _always_ use a CheckStepFerry to account for our very special movement

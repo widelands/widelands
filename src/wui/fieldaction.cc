@@ -338,7 +338,7 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 	const Widelands::Map& map = egbase.map();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   map, Widelands::Area<Widelands::FCoords>(
-	           map.get_fcoords(i.get_position()), egbase.tribes().get_largest_workarea()));
+	           map.get_fcoords(i.get_position()), egbase.descriptions().get_largest_workarea()));
 	do {
 		if (const Widelands::MapObject* mo = mr.location().field->get_immovable()) {
 			if (mo->descr().type() < Widelands::MapObjectType::BUILDING) {
@@ -936,7 +936,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(
-		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
+		           node_, workarea_radius + ibase().egbase().descriptions().get_largest_workarea()));
 		do {
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {

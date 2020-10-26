@@ -33,6 +33,7 @@
 #include "economy/road.h"
 #include "economy/wares_queue.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findbob.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
@@ -43,9 +44,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warehouse.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
@@ -532,7 +531,7 @@ void DefaultAI::think() {
  * Cares for all variables not initialised during construction
  *
  * When DefaultAI is constructed, some information is not yet available (e.g.
- * world), so this is done after complete loading of the map.
+ * descriptions), so this is done after complete loading of the map.
  */
 void DefaultAI::late_initialization() {
 	player_ = game().get_player(player_number());
@@ -550,14 +549,14 @@ void DefaultAI::late_initialization() {
 		log_info_time(gametime, "    ... member of team %d\n", player_->team_number());
 	}
 
-	wares.resize(game().tribes().nrwares());
+	wares.resize(game().descriptions().nr_wares());
 	for (Widelands::DescriptionIndex i = 0;
-	     i < static_cast<Widelands::DescriptionIndex>(game().tribes().nrwares()); ++i) {
+	     i < static_cast<Widelands::DescriptionIndex>(game().descriptions().nr_wares()); ++i) {
 		wares.at(i).preciousness =
-		   game().tribes().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
+		   game().descriptions().get_ware_descr(i)->ai_hints().preciousness(tribe_->name());
 	}
 
-	const Widelands::DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
+	const Widelands::DescriptionIndex& nr_buildings = game().descriptions().nr_buildings();
 
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
@@ -753,15 +752,16 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
-			iron_resource_id = game().world().resource_index("resource_iron");
+			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
-				throw wexception("The AI needs the world to define the resource 'iron'");
+				throw wexception(
+				   "The AI needs the descriptions to define the resource 'resource_iron'");
 			}
 
 			if (bo.type == BuildingObserver::Type::kMine) {
 				// get the resource needed by the mine
 				if (bh.get_mines()) {
-					bo.mines = game().world().resource_index(bh.get_mines());
+					bo.mines = game().descriptions().resource_index(bh.get_mines());
 				}
 
 				bo.mines_percent = bh.get_mines_percent();
@@ -1395,7 +1395,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_resource_id);
 	FindNodeAllyOwned find_ally(player_, game(), player_number());
 	Widelands::PlayerNumber const pn = player_->player_number();
-	const Widelands::World& world = game().world();
+	const Widelands::Descriptions& descriptions = game().descriptions();
 
 	constexpr uint16_t kProductionArea = 6;
 	constexpr uint16_t kBuildableSpotsCheckArea = 10;
@@ -1566,13 +1566,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	if (field.water_nearby == kUncalculated) {
 		assert(field.open_water_nearby == kUncalculated);
 
-		FindNodeWater find_water(game().world());
+		FindNodeWater find_water(game().descriptions());
 		field.water_nearby =
 		   map.find_fields(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
 		                   nullptr, find_water);
 
 		if (field.water_nearby > 0) {
-			FindNodeOpenWater find_open_water(game().world());
+			FindNodeOpenWater find_open_water(game().descriptions());
 			field.open_water_nearby = map.find_fields(
 			   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea), nullptr,
 			   find_open_water);
@@ -1605,10 +1605,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		Widelands::CheckStepWalkOn fisher_cstep(Widelands::MOVECAPS_WALK, true);
 		static std::vector<Widelands::Coords> fish_fields_list;  // pity this contains duplicates
 		fish_fields_list.clear();
-		map.find_reachable_fields(game(),
-		                          Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
-		                          &fish_fields_list, fisher_cstep,
-		                          Widelands::FindNodeResource(world.resource_index("resource_fish")));
+		map.find_reachable_fields(
+		   game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
+		   &fish_fields_list, fisher_cstep,
+		   Widelands::FindNodeResource(descriptions.resource_index("resource_fish")));
 
 		// This is "list" of unique fields in fish_fields_list we got above
 		static std::set<Widelands::Coords> counted_fields;
@@ -6862,7 +6862,7 @@ void DefaultAI::review_wares_targets(const Time& gametime) {
 			continue;
 		}
 
-		Widelands::DescriptionIndex nritems = player_->egbase().tribes().nrwares();
+		Widelands::DescriptionIndex nritems = player_->egbase().descriptions().nr_wares();
 		for (Widelands::DescriptionIndex id = 0; id < nritems; ++id) {
 
 			// Just skip wares that are not used by a tribe
@@ -6971,7 +6971,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 
 	Widelands::PlayerNumber const pn = player_number();
 
-	const Widelands::DescriptionIndex& nr_buildings = game().tribes().nrbuildings();
+	const Widelands::DescriptionIndex& nr_buildings = game().descriptions().nr_buildings();
 	std::set<Widelands::DescriptionIndex> materials;
 
 	// Collect information about the different buildings that our tribe can have

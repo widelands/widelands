@@ -30,8 +30,8 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -287,6 +287,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				assert(counter == no_of_seen_fields);
 
 				// Map objects
+				const Descriptions& descriptions = egbase.descriptions();
 				for (auto& field : seen_fields) {
 					std::string descr = fr.string();
 					if (descr.empty()) {
@@ -299,22 +300,16 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							field->map_object_descr = &g_portdock_descr;
 						} else {
 							DescriptionIndex di =
-							   egbase.tribes().building_index(tribes_lookup_table.lookup_building(descr));
+							   descriptions.building_index(tribes_lookup_table.lookup_building(descr));
 							if (di != INVALID_INDEX) {
-								field->map_object_descr = egbase.tribes().get_building_descr(di);
+								field->map_object_descr = descriptions.get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(
-								   world_lookup_table.lookup_immovable(descr));
+								di = descriptions.immovable_index(tribes_lookup_table.lookup_immovable(
+								   world_lookup_table.lookup_immovable(descr)));
 								if (di != INVALID_INDEX) {
-									field->map_object_descr = egbase.world().get_immovable_descr(di);
+									field->map_object_descr = descriptions.get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(
-									   tribes_lookup_table.lookup_immovable(descr));
-									if (di != INVALID_INDEX) {
-										field->map_object_descr = egbase.tribes().get_immovable_descr(di);
-									} else {
-										throw GameDataError("invalid map_object_descr: %s", descr.c_str());
-									}
+									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
 								}
 							}
 						}
@@ -322,24 +317,24 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->set_constructionsite(false);
 							field->dismantlesite.building =
-							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							   descriptions.get_building_descr(descriptions.safe_building_index(
 							      tribes_lookup_table.lookup_building(fr.string())));
 							field->dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->set_constructionsite(true);
 							field->constructionsite->becomes =
-							   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							   descriptions.get_building_descr(descriptions.safe_building_index(
 							      tribes_lookup_table.lookup_building(fr.string())));
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
 							      nullptr :
-							      egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+							      descriptions.get_building_descr(descriptions.safe_building_index(
 							         tribes_lookup_table.lookup_building(descr)));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->constructionsite->intermediates.push_back(
-								   egbase.tribes().get_building_descr(egbase.tribes().safe_building_index(
+								   descriptions.get_building_descr(descriptions.safe_building_index(
 								      tribes_lookup_table.lookup_building(fr.string()))));
 							}
 
@@ -413,26 +408,22 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					if (descr.empty()) {
 						f.map_object_descr = nullptr;
 					} else {
+						const Descriptions& descriptions = egbase.descriptions();
 						// I here assume that no two immovables will have the same internal name
 						if (descr == "flag") {
 							f.map_object_descr = &g_flag_descr;
 						} else if (descr == "portdock") {
 							f.map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = egbase.tribes().building_index(descr);
+							DescriptionIndex di = descriptions.building_index(descr);
 							if (di != INVALID_INDEX) {
-								f.map_object_descr = egbase.tribes().get_building_descr(di);
+								f.map_object_descr = descriptions.get_building_descr(di);
 							} else {
-								di = egbase.world().get_immovable_index(descr);
+								di = descriptions.immovable_index(descr);
 								if (di != INVALID_INDEX) {
-									f.map_object_descr = egbase.world().get_immovable_descr(di);
+									f.map_object_descr = descriptions.get_immovable_descr(di);
 								} else {
-									di = egbase.tribes().immovable_index(descr);
-									if (di != INVALID_INDEX) {
-										f.map_object_descr = egbase.tribes().get_immovable_descr(di);
-									} else {
-										throw GameDataError("invalid map_object_descr: %s", descr.c_str());
-									}
+									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
 								}
 							}
 						}
@@ -440,23 +431,23 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						if (packet_version > 1) {
 							if (f.map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 								f.set_constructionsite(false);
-								f.dismantlesite.building = egbase.tribes().get_building_descr(
-								   egbase.tribes().safe_building_index(fr.string()));
+								f.dismantlesite.building = descriptions.get_building_descr(
+								   descriptions.safe_building_index(fr.string()));
 								f.dismantlesite.progress = fr.unsigned_32();
 							} else if (f.map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 								f.set_constructionsite(true);
-								f.constructionsite->becomes = egbase.tribes().get_building_descr(
-								   egbase.tribes().safe_building_index(fr.string()));
+								f.constructionsite->becomes = descriptions.get_building_descr(
+								   descriptions.safe_building_index(fr.string()));
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
 								                             nullptr :
-								                             egbase.tribes().get_building_descr(
-								                                egbase.tribes().safe_building_index(descr));
+								                             descriptions.get_building_descr(
+								                                descriptions.safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(
-									   egbase.tribes().get_building_descr(
-									      egbase.tribes().safe_building_index(fr.string())));
+									   descriptions.get_building_descr(
+									      descriptions.safe_building_index(fr.string())));
 								}
 
 								f.constructionsite->totaltime = Duration(fr);
@@ -470,19 +461,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								f.dismantlesite.progress = 0;
 							} else {
 								f.set_constructionsite(true);
-								f.constructionsite->becomes = egbase.tribes().get_building_descr(
-								   egbase.tribes().safe_building_index(descr));
+								f.constructionsite->becomes =
+								   descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
 								                             nullptr :
-								                             egbase.tribes().get_building_descr(
-								                                egbase.tribes().safe_building_index(descr));
+								                             descriptions.get_building_descr(
+								                                descriptions.safe_building_index(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(
-									   egbase.tribes().get_building_descr(
-									      egbase.tribes().safe_building_index(fr.string())));
+									   descriptions.get_building_descr(
+									      descriptions.safe_building_index(fr.string())));
 								}
 
 								f.constructionsite->totaltime = Duration(fr);

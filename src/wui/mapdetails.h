@@ -34,10 +34,16 @@
  */
 class MapDetails : public UI::Panel {
 public:
-	MapDetails(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style);
+	MapDetails(UI::Panel* parent,
+	           int32_t x,
+	           int32_t y,
+	           int32_t w,
+	           int32_t h,
+	           UI::PanelStyle style,
+	           Widelands::EditorGameBase& egbase);
 
 	void clear();
-	bool update(const MapData& mapdata, bool localize_mapname);
+	bool update(const MapData& mapdata, bool localize_mapname, bool render_minimap);
 	std::string name() {
 		return name_;
 	}
@@ -58,7 +64,7 @@ private:
 	// Used to render map preview
 	std::string last_map_;
 	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;
-	Widelands::EditorGameBase egbase_;
+	Widelands::EditorGameBase& egbase_;  // Not owned
 };
 
 #endif  // end of include guard: WL_WUI_MAPDETAILS_H

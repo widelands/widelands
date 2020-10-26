@@ -37,7 +37,8 @@
 using Widelands::WidelandsMapLoader;
 
 FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const settings,
-                                                 GameController* const ctrl)
+                                                 GameController* const ctrl,
+                                                 Widelands::EditorGameBase& egbase)
    : FullscreenMenuLoadMapOrGame(),
      checkbox_space_(20),
      // Less padding for big fonts; space is tight.
@@ -59,7 +60,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  UI::PanelStyle::kFsMenu),
+                  UI::PanelStyle::kFsMenu,
+                  egbase),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
@@ -193,7 +195,7 @@ void FullscreenMenuMapSelect::think() {
 		// Call performance heavy draw_minimap function only during think
 		update_map_details_ = false;
 		bool loadable = map_details_.update(
-		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state());
+		   maps_data_[table_.get_selected()], !cb_dont_localize_mapnames_->get_state(), true);
 		ok_.set_enabled(loadable && maps_data_.at(table_.get_selected()).nrplayers > 0);
 	}
 }
