@@ -313,7 +313,7 @@ void MapBuildingdataPacket::read_constructionsite(
 				for (uint32_t i = 0; i < intermediates; ++i) {
 					constructionsite.info_.intermediates.push_back(
 					   game.descriptions().get_building_descr(
-					      game.descriptions().building_index(fr.c_string())));
+					      game.descriptions().safe_building_index(fr.c_string())));
 				}
 				constructionsite.settings_.reset(BuildingSettings::load(
 				   game, constructionsite.owner().tribe(), fr));

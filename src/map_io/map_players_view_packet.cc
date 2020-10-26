@@ -402,16 +402,11 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							f.map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = descriptions.building_index(descr);
-							if (di != INVALID_INDEX) {
-								f.map_object_descr = descriptions.get_building_descr(di);
+							std::pair<bool, DescriptionIndex> imm = descriptions.load_building_or_immovable(descr);
+							if (imm.first) {
+								f.map_object_descr = descriptions.get_building_descr(imm.second);
 							} else {
-								di = descriptions.immovable_index(descr);
-								if (di != INVALID_INDEX) {
-									f.map_object_descr = descriptions.get_immovable_descr(di);
-								} else {
-									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
-								}
+								f.map_object_descr = descriptions.get_immovable_descr(imm.second);
 							}
 						}
 
