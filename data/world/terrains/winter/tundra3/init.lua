@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-wl.World():new_terrain_type{
+wl.Descriptions():new_terrain_type{
    name = "tundra3",
    descname = _ "Tundra 3",
    is = "arable",
