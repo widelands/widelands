@@ -53,7 +53,7 @@ Box::Box(Panel* const parent,
 
 void Box::draw_overlay(RenderTarget& dst) {
 	if (!get_name().empty() && has_focus()) {
-		log_dbg("%s has focus (%dx%d)", get_name().c_str(), get_w(), get_h());
+		//		log_dbg("%s has focus (%dx%d)", get_name().c_str(), get_w(), get_h());
 	}
 	Panel::draw_overlay(dst);
 }
