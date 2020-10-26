@@ -25,15 +25,14 @@
 #include "logic/cmd_luacoroutine.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/production_program.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker_program.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/globals.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_game.h"
@@ -125,7 +124,7 @@ int LuaGame::get_real_speed(lua_State* L) {
    (RO) The absolute time elapsed since the game was started in milliseconds.
 */
 int LuaGame::get_time(lua_State* L) {
-	lua_pushint32(L, get_game(L).get_gametime());
+	lua_pushint32(L, get_game(L).get_gametime().get());
 	return 1;
 }
 
@@ -255,12 +254,12 @@ int LuaGame::get_scenario_difficulty(lua_State* L) {
 */
 int LuaGame::launch_coroutine(lua_State* L) {
 	int nargs = lua_gettop(L);
-	uint32_t runtime = get_game(L).get_gametime();
+	Time runtime = get_game(L).get_gametime();
 	if (nargs < 2) {
 		report_error(L, "Too few arguments!");
 	}
 	if (nargs == 3) {
-		runtime = luaL_checkuint32(L, 3);
+		runtime = Time(luaL_checkuint32(L, 3));
 		lua_pop(L, 1);
 	}
 
@@ -401,18 +400,18 @@ void LuaWorld::__unpersist(lua_State*) {
 /* RST
    .. attribute:: immovable_descriptions
 
-      Returns a list of all the immovables that are available in the world.
+      Returns a list of all the immovables that are available.
 
       (RO) a list of :class:`LuaImmovableDescription` objects
 */
 int LuaWorld::get_immovable_descriptions(lua_State* L) {
-	const Widelands::World& world = get_egbase(L).world();
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
-	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_immovables(); ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_immovables(); ++i) {
 		lua_pushint32(L, index++);
 		to_lua<LuaMaps::LuaImmovableDescription>(
-		   L, new LuaMaps::LuaImmovableDescription(world.get_immovable_descr(i)));
+		   L, new LuaMaps::LuaImmovableDescription(descriptions.get_immovable_descr(i)));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -421,18 +420,18 @@ int LuaWorld::get_immovable_descriptions(lua_State* L) {
 /* RST
    .. attribute:: terrain_descriptions
 
-      Returns a list of all the terrains that are available in the world.
+      Returns a list of all the terrains that are available.
 
       (RO) a list of :class:`LuaTerrainDescription` objects
 */
 int LuaWorld::get_terrain_descriptions(lua_State* L) {
-	const Widelands::World& world = get_egbase(L).world();
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
-	for (Widelands::DescriptionIndex i = 0; i < world.terrains().size(); ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.terrains().size(); ++i) {
 		lua_pushint32(L, index++);
 		to_lua<LuaMaps::LuaTerrainDescription>(
-		   L, new LuaMaps::LuaTerrainDescription(&world.terrain_descr(i)));
+		   L, new LuaMaps::LuaTerrainDescription(descriptions.get_terrain_descr(i)));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -447,7 +446,7 @@ int LuaWorld::new_resource_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_world_object_type(
+		get_egbase(L).mutable_descriptions()->add_object_description(
 		   table, Widelands::MapObjectType::RESOURCE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
@@ -464,7 +463,7 @@ int LuaWorld::new_terrain_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_world_object_type(
+		get_egbase(L).mutable_descriptions()->add_object_description(
 		   table, Widelands::MapObjectType::TERRAIN);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
@@ -481,7 +480,7 @@ int LuaWorld::new_critter_type(lua_State* L) {
 	}
 	try {
 		LuaTable table(L);
-		get_egbase(L).mutable_world()->add_world_object_type(
+		get_egbase(L).mutable_descriptions()->add_object_description(
 		   table, Widelands::MapObjectType::CRITTER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
@@ -498,7 +497,7 @@ int LuaWorld::new_immovable_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_world()->add_world_object_type(
+		get_egbase(L).mutable_descriptions()->add_object_description(
 		   table, Widelands::MapObjectType::IMMOVABLE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
@@ -524,7 +523,8 @@ int LuaWorld::modify_unit(lua_State* L) {
 	const std::string property = luaL_checkstring(L, 4);
 
 	if (type == "resource") {
-		Widelands::ResourceDescription& descr = *egbase.mutable_world()->get_mutable_resource(egbase.mutable_world()->safe_resource_index(unit.c_str()));
+		Widelands::ResourceDescription& descr =
+		   *egbase.mutable_descriptions()->get_mutable_resource_descr(egbase.mutable_descriptions()->safe_resource_index(unit.c_str()));
 		if (property == "max_amount") {
 			descr.set_max_amount(luaL_checkuint32(L, 5));
 		} else {
@@ -604,9 +604,9 @@ int LuaTribes::get_all_workers(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (Widelands::DescriptionIndex i = 0; i < egbase.tribes().nrworkers(); ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < egbase.descriptions().nr_workers(); ++i) {
 		lua_pushint32(L, index++);
-		lua_pushstring(L, egbase.tribes().get_worker_descr(i)->name().c_str());
+		lua_pushstring(L, egbase.descriptions().get_worker_descr(i)->name().c_str());
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -634,9 +634,8 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::CONSTRUCTIONSITE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::CONSTRUCTIONSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -659,9 +658,8 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::DISMANTLESITE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::DISMANTLESITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -684,9 +682,8 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::MILITARYSITE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::MILITARYSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -709,9 +706,8 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::PRODUCTIONSITE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::PRODUCTIONSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -734,9 +730,8 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::TRAININGSITE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::TRAININGSITE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -759,9 +754,8 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::WAREHOUSE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::WAREHOUSE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -785,9 +779,8 @@ int LuaTribes::new_market_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::MARKET);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::MARKET);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -810,9 +803,8 @@ int LuaTribes::new_immovable_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::IMMOVABLE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::IMMOVABLE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -835,9 +827,8 @@ int LuaTribes::new_ship_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::SHIP);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::SHIP);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -860,9 +851,8 @@ int LuaTribes::new_ware_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::WARE);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::WARE);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -884,9 +874,8 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::CARRIER);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::CARRIER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -908,9 +897,8 @@ int LuaTribes::new_ferry_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::FERRY);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::FERRY);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -932,9 +920,8 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::SOLDIER);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::SOLDIER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -956,9 +943,8 @@ int LuaTribes::new_worker_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe_object_type(
-		   table, *egbase.mutable_world(), Widelands::MapObjectType::WORKER);
+		get_egbase(L).mutable_descriptions()->add_object_description(
+		   table, Widelands::MapObjectType::WORKER);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -981,8 +967,7 @@ int LuaTribes::new_tribe(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		Widelands::EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe(table, egbase.world());
+		get_egbase(L).mutable_descriptions()->add_tribe(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -1001,7 +986,7 @@ int LuaTribes::new_tribe(lua_State* L) {
 // through add-ons, the changes need to go here.
 int LuaTribes::modify_unit(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::Tribes& tribes = *egbase.mutable_tribes();
+	Widelands::Descriptions& tribes = *egbase.mutable_descriptions();
 	const std::string type = luaL_checkstring(L, 2);
 	const std::string unit = luaL_checkstring(L, 3);
 	const std::string property = luaL_checkstring(L, 4);
@@ -1104,7 +1089,7 @@ int LuaTribes::modify_unit(lua_State* L) {
 				const std::string descname = luaL_checkstring(L, 7);
 				std::unique_ptr<LuaTable> tbl(new LuaTable(L));
 				descr.mutable_programs()[prog_name] = std::unique_ptr<Widelands::ProductionProgram>(new Widelands::ProductionProgram(
-						prog_name, *tbl, tribes, *egbase.mutable_world(), &descr));
+						prog_name, *tbl, *egbase.mutable_descriptions(), &descr));
 			} else {
 				report_error(L, "modify_unit - productionsite - programs: invalid command '%s'", cmd.c_str());
 			}

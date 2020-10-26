@@ -63,6 +63,7 @@ wl_library(logic_game_controller
   USES_SDL2
   DEPENDS
     ai
+    base_times
     logic
     logic_commands
     logic_game_settings
@@ -73,6 +74,7 @@ wl_library(logic_game_controller
 
 wl_library(logic_constants
   SRCS
+    vision.h
     widelands.cc
     widelands.h
 )
@@ -193,6 +195,7 @@ wl_library(logic_commands
     base_i18n
     base_log
     base_macros
+    base_times
     economy # TODO(GunChleoc): Circular dependency
     graphic_text_layout
     io_fileread
@@ -230,8 +233,9 @@ wl_library(logic
     replay.h
     save_handler.cc
     save_handler.h
-    see_unsee_node.h
     trade_agreement.h
+    training_wheels.cc
+    training_wheels.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
@@ -243,6 +247,7 @@ wl_library(logic
     base_random
     base_scoped_timer
     base_time_string
+    base_times
     build_info
     economy
     game_io
@@ -264,7 +269,6 @@ wl_library(logic
     logic_generic_save_handler
     logic_map
     logic_map_objects
-    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

@@ -27,8 +27,8 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
@@ -94,14 +94,13 @@ void MainMenuNewMap::clicked_create_map() {
 	EditorInteractive& parent = eia();
 	Widelands::EditorGameBase& egbase = parent.egbase();
 	Widelands::Map* map = egbase.mutable_map();
-	egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 	Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
 
 	parent.cleanup_for_load();
 	egbase.init_addons(true);
 	// cleanup_for_load() deleted the world and tribes – reload them now
-	egbase.world();
-	egbase.tribes();
+	egbase.descriptions();
 
 	map->create_empty_map(egbase, map_size_box_.selected_width(), map_size_box_.selected_height(),
 	                      list_.get_selected(), _("No Name"),
@@ -125,7 +124,7 @@ void MainMenuNewMap::clicked_cancel() {
 void MainMenuNewMap::fill_list() {
 	list_.clear();
 	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
-	   eia().egbase().world().terrains();
+	   eia().egbase().descriptions().terrains();
 
 	for (Widelands::DescriptionIndex index = 0; index < terrains.size(); ++index) {
 		const Widelands::TerrainDescription& terrain = terrains.get(index);

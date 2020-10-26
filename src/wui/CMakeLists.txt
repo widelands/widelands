@@ -41,6 +41,7 @@ wl_library(wui_economy_options
     economy_options_window.h
   DEPENDS
     economy
+    graphic_fonthandler
     logic
     logic_commands
     logic_filesystem_constants
@@ -134,6 +135,7 @@ wl_library(wui_common_mapdetails
     graphic_text_layout
     io_filesystem
     logic
+    logic_exceptions
     logic_filesystem_constants
     logic_game_settings
     logic_map
@@ -264,10 +266,6 @@ wl_library(wui
     militarysitewindow.h
     minimap.cc
     minimap.h
-    multiplayersetupgroup.cc
-    multiplayersetupgroup.h
-    playerdescrgroup.cc
-    playerdescrgroup.h
     plot_area.cc
     plot_area.h
     portdockwaresdisplay.cc
@@ -335,9 +333,7 @@ wl_library(wui
     logic_map
     logic_map_objects
     logic_objectives
-    logic_tribe_basic_info
     logic_widelands_geometry
-    map_io_map_loader
     network
     note_sound
     notifications

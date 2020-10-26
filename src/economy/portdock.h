@@ -100,10 +100,10 @@ public:
 	void add_neighbours(std::vector<RoutingNodeNeighbour>& neighbours);
 
 	void add_shippingitem(Game&, WareInstance&);
-	void update_shippingitem(Game&, WareInstance&);
+	void update_shippingitem(Game&, const WareInstance&);
 
 	void add_shippingitem(Game&, Worker&);
-	void update_shippingitem(Game&, Worker&);
+	void update_shippingitem(Game&, const Worker&);
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);
@@ -137,7 +137,8 @@ private:
 	friend struct ShippingSchedule;
 
 	// Does nothing - we do not show them on the map
-	void draw(uint32_t, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
+	void
+	draw(const Time&, InfoToDraw, const Vector2f&, const Coords&, float, RenderTarget*) override {
 	}
 
 	void init_fleet(EditorGameBase& egbase);

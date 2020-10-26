@@ -35,6 +35,7 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "wlapplication.h"
 
 namespace {
 #define PROGRESS_STATUS_RECT_PADDING 2
@@ -46,10 +47,14 @@ namespace {
 
 namespace UI {
 
-ProgressWindow::ProgressWindow(const std::string& background)
+std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
+
+ProgressWindow::ProgressWindow(const std::string& theme, const std::string& background)
    : UI::FullscreenWindow(),
      label_center_(Vector2i::zero()),
+     theme_(theme),
      style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
+	event_buffer_.clear();
 	set_background(background);
 	step(_("Loading…"));
 }
@@ -57,6 +62,10 @@ ProgressWindow::ProgressWindow(const std::string& background)
 ProgressWindow::~ProgressWindow() {
 	for (IProgressVisualization* visualization : visualizations_) {
 		visualization->stop();  //  inform visualizations
+	}
+	// Replay keypresses buffered in ui_key()
+	for (SDL_Event event : event_buffer_) {
+		SDL_PushEvent(&event);
 	}
 }
 
@@ -95,8 +104,19 @@ void ProgressWindow::draw(RenderTarget& rt) {
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string& file_name) {
 	if (file_name.empty() || !g_fs->file_exists(file_name)) {
-		const std::set<std::string> images =
-		   g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/gameloading");
+		std::string dir = std::string(kTemplateDir) + "loadscreens/gameloading/";
+		if (theme_.empty()) {
+			// choose random theme
+			const std::set<std::string> dirs = g_fs->list_directory(dir);
+			auto it = dirs.begin();
+			std::advance(it, std::rand() % dirs.size());  // NOLINT
+			dir = *it;
+		} else if (g_fs->is_directory(dir + theme_)) {
+			dir += theme_;
+		} else {
+			throw wexception("Invalid ProgressWindow theme '%s'", theme_.c_str());
+		}
+		const std::set<std::string> images = g_fs->list_directory(dir);
 		auto it = images.begin();
 		std::advance(it, std::rand() % images.size());  // NOLINT
 		background_ = *it;
@@ -106,7 +126,25 @@ void ProgressWindow::set_background(const std::string& file_name) {
 	draw(*g_gr->get_render_target());
 }
 
+/// Callback function: Buffer keypress events to be replayed after the loading is over.
+bool ProgressWindow::ui_key(bool const down, SDL_Keysym const code) {
+	// WLApplication can handle some keys immediately; don't buffer them.
+	if (WLApplication::get()->handle_key(down, code.sym, code.mod)) {
+		return true;
+	}
+	SDL_Event event;
+	event.type = down ? SDL_KEYDOWN : SDL_KEYUP;
+	event.key.keysym = code;
+	event_buffer_.push_back(event);
+	return true;
+}
+
 void ProgressWindow::step(const std::string& description) {
+	// Handle events to respond to window resizing, to buffer keypresses,
+	// and to prevent "not responding" on windows & "beach ball" on macOS.
+	InputCallback input_callback = {nullptr, nullptr, nullptr, ui_key, nullptr, nullptr};
+	WLApplication::get()->handle_input(&input_callback);
+
 	RenderTarget& rt = *g_gr->get_render_target();
 	// always repaint the background first
 	draw(rt);
@@ -116,8 +154,6 @@ void ProgressWindow::step(const std::string& description) {
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
-	// Pump events to prevent "not responding" on windows & "beach ball" on macOS
-	SDL_PumpEvents();
 	update(true);
 }
 

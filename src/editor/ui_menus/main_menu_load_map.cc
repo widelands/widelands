@@ -53,7 +53,7 @@ void MainMenuLoadMap::clicked_ok() {
 		fill_table();
 	} else {
 		EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
-		eia.egbase().create_loader_ui({"editor"}, true, kEditorSplashImage);
+		eia.egbase().create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 		eia.load(mapdata.filename);
 		// load() will delete us.
 		eia.egbase().remove_loader_ui();
@@ -88,6 +88,7 @@ void MainMenuLoadMap::entry_selected() {
 		map_details_.clear();
 	} else {
 		map_details_.update(maps_data_[table_.get_selected()],
-		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized);
+		                    display_mode_.get_selected() == MapData::DisplayType::kMapnamesLocalized,
+		                    true);
 	}
 }

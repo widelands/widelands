@@ -77,6 +77,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	table_footer_box_.add_space(0);
 	table_footer_box_.add(&make_directory_);
 
+	fill_table();
+
 	table_.selected.connect([this](unsigned) { clicked_item(); });
 	table_.double_clicked.connect([this](unsigned) { double_clicked_item(); });
 	table_.cancel.connect([this]() { die(); });
@@ -96,26 +98,13 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent,
 	make_directory_.sigclicked.connect([this]() { clicked_make_directory(); });
 	edit_options_.sigclicked.connect([this]() { clicked_edit_options(); });
 
-	// We always want the current map's data here
-	const Widelands::Map& map = parent.egbase().map();
-	MapData::MapType maptype;
-
-	if (map.scenario_types() & Widelands::Map::MP_SCENARIO ||
-	    map.scenario_types() & Widelands::Map::SP_SCENARIO) {
-		maptype = MapData::MapType::kScenario;
-	} else {
-		maptype = MapData::MapType::kNormal;
-	}
-
-	MapData mapdata(map, "", maptype, MapData::DisplayType::kMapnames);
-
-	map_details_.update(mapdata, false);
-
 	subscriber_ = Notifications::subscribe<NoteMapOptions>(
 	   [this](const NoteMapOptions&) { update_map_options(); });
 
-	fill_table();
 	layout();
+
+	// We always want the current map's data here
+	update_map_options();
 }
 
 /**
@@ -216,7 +205,9 @@ void MainMenuSaveMap::update_map_options() {
 
 	MapData mapdata(map, editbox_.text(), maptype, MapData::DisplayType::kMapnames);
 
-	map_details_.update(mapdata, false);
+	// TODO(GunChleoc): Trying to render the minimap while saving results in endless loop - probably
+	// because we're trying to load the map again there.
+	map_details_.update(mapdata, false, false);
 	if (old_name == editbox_.text()) {
 		editbox_.set_text(map_details_.name());
 		edit_box_changed();
@@ -336,7 +327,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	egbase.create_loader_ui({"editor"}, true, kEditorSplashImage);
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 	Notifications::publish(UI::NoteLoadingMessage(_("Saving the map…")));
 
 	// Try saving the map.

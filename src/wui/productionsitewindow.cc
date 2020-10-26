@@ -30,12 +30,14 @@
 static char const* pic_tab_wares = "images/wui/buildings/menu_tab_wares.png";
 static char const* pic_tab_workers = "images/wui/buildings/menu_list_workers.png";
 
+constexpr int8_t kButtonSize = 34;
+
 /*
 ===============
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
+ProductionSiteWindow::ProductionSiteWindow(InteractiveBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick,
@@ -43,13 +45,16 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
    : BuildingWindow(parent, reg, ps, avoid_fastclick),
      production_site_(&ps),
      worker_table_(nullptr),
-     worker_caps_(nullptr) {
+     worker_caps_(nullptr),
+     worker_type_(nullptr),
+     worker_xp_decrease_(nullptr),
+     worker_xp_increase_(nullptr) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
 		   if (is_dying_) {
 			   return;
 		   }
-		   Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+		   Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 		   if (production_site == nullptr) {
 			   return;
 		   }
@@ -57,6 +62,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 			   switch (note.action) {
 			   case Widelands::NoteBuilding::Action::kWorkersChanged:
 				   update_worker_table(production_site);
+				   worker_table_selection_changed();
 				   break;
 			   default:
 				   break;
@@ -67,7 +73,7 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 }
 
 void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	assert(production_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
@@ -78,9 +84,8 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		UI::Box* prod_box = new UI::Box(
 		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
 
-		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
-			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *inputqueues[i]));
+		for (const Widelands::InputQueue* queue : inputqueues) {
+			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *queue));
 		}
 
 		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));
@@ -111,12 +116,36 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		}
 		worker_table_->fit_height();
 
-		if (igbase()->can_act(production_site->owner().player_number())) {
+		if (ibase()->omnipotent()) {
+			worker_caps_->set_desired_size(100, 50);  // Prevent dropdown asserts
+			worker_type_ = new UI::Dropdown<Widelands::DescriptionIndex>(
+			   worker_caps_, "worker_type", 0, 0, 100, 8, kButtonSize, _("Worker"),
+			   UI::DropdownType::kTextual, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu);
+			worker_xp_decrease_ = new UI::Button(
+			   worker_caps_, "xp_decrease", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+			   g_image_cache->get("images/ui_basic/scrollbar_down.png"),
+			   _("Decrease experience by 1"));
+			worker_xp_increase_ = new UI::Button(
+			   worker_caps_, "xp_increase", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+			   g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Increase experience by 1"));
+			worker_caps_->add(worker_type_, UI::Box::Resizing::kExpandBoth);
+			worker_caps_->add_space(kButtonSize);
+			worker_caps_->add(worker_xp_decrease_);
+			worker_caps_->add(worker_xp_increase_);
+			worker_caps_->add_space(kButtonSize);
+			worker_type_->set_enabled(false);
+			worker_table_->selected.connect([this](uint32_t) { worker_table_selection_changed(); });
+			worker_type_->selected.connect([this]() { worker_table_dropdown_clicked(); });
+			worker_xp_decrease_->sigclicked.connect([this]() { worker_table_xp_clicked(-1); });
+			worker_xp_increase_->sigclicked.connect([this]() { worker_table_xp_clicked(1); });
+		} else {
 			worker_caps_->add_inf_space();
-			UI::Button* evict_button =
-			   new UI::Button(worker_caps_, "evict", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
-			                  _("Terminate the employment of the selected worker"));
+		}
+		if (ibase()->can_act(production_site->owner().player_number())) {
+			UI::Button* evict_button = new UI::Button(
+			   worker_caps_, "evict", 0, 0, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiMenu,
+			   g_image_cache->get("images/wui/buildings/menu_drop_soldier.png"),
+			   _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect([this]() { evict_worker(); });
 			worker_caps_->add(evict_button);
 		}
@@ -127,6 +156,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		get_tabs()->add("workers", g_image_cache->get(pic_tab_workers), worker_box, workers_heading);
 		update_worker_table(production_site);
 	}
+	worker_table_selection_changed();
 	think();
 }
 
@@ -135,7 +165,7 @@ void ProductionSiteWindow::think() {
 	// existance.
 	BuildingWindow::think();
 
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	if (production_site == nullptr) {
 		return;
 	}
@@ -161,7 +191,8 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 	assert(production_site->descr().nr_working_positions() == worker_table_->size());
 
 	for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
-		const Widelands::Worker* worker = production_site->working_positions()[i].worker;
+		const Widelands::Worker* worker =
+		   production_site->working_positions()[i].worker.get(ibase()->egbase());
 		const Widelands::Request* request = production_site->working_positions()[i].worker_request;
 		UI::Table<uintptr_t>::EntryRecord& er = worker_table_->get_record(i);
 
@@ -201,16 +232,149 @@ void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* produc
 }
 
 void ProductionSiteWindow::evict_worker() {
-	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	Widelands::ProductionSite* production_site = production_site_.get(ibase()->egbase());
 	if (production_site == nullptr) {
 		return;
 	}
 
 	if (worker_table_->has_selection()) {
 		Widelands::Worker* worker =
-		   production_site->working_positions()[worker_table_->get_selected()].worker;
+		   production_site->working_positions()[worker_table_->get_selected()].worker.get(
+		      ibase()->egbase());
 		if (worker) {
-			igbase()->game().send_player_evict_worker(*worker);
+			if (game_) {
+				game_->send_player_evict_worker(*worker);
+			} else {
+				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+			}
 		}
 	}
+}
+
+void ProductionSiteWindow::worker_table_selection_changed() {
+	Widelands::ProductionSite* ps = production_site_.get(ibase()->egbase());
+	if (!ps || !ibase()->omnipotent()) {
+		return;
+	}
+
+	assert(worker_table_);
+	assert(worker_type_);
+	assert(worker_xp_decrease_);
+	assert(worker_xp_increase_);
+
+	worker_type_->clear();
+	if (worker_table_->has_selection()) {
+		const std::vector<std::pair<Widelands::DescriptionIndex, Widelands::Quantity>>
+		   working_positions = ps->descr().working_positions();
+		const size_t selected_index = worker_table_->get_selected();
+		const Widelands::Worker* worker =
+		   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+
+		Widelands::DescriptionIndex di = Widelands::INVALID_INDEX;
+		size_t i = 0;
+		for (const auto& pair : working_positions) {
+			if (i + pair.second > selected_index) {
+				di = pair.first;
+				break;
+			}
+			i += pair.second;
+		}
+		assert(di != Widelands::INVALID_INDEX);
+
+		worker_type_->set_enabled(true);
+		worker_type_->add(_("(vacant)"), Widelands::INVALID_INDEX, nullptr, worker == nullptr);
+		const Widelands::WorkerDescr* descr = ibase()->egbase().descriptions().get_worker_descr(di);
+		while (descr) {
+			worker_type_->add(
+			   descr->descname(), di, descr->icon(), worker && &worker->descr() == descr);
+			di = descr->becomes();
+			descr = ibase()->egbase().descriptions().get_worker_descr(di);
+		}
+		update_worker_xp_buttons(worker);
+	} else {
+		worker_type_->set_enabled(false);
+		update_worker_xp_buttons(nullptr);
+	}
+}
+
+void ProductionSiteWindow::update_worker_xp_buttons(const Widelands::Worker* w) {
+	if (w && !w->needs_experience()) {
+		w = nullptr;
+	}
+	const int32_t cur = w ? w->get_current_experience() : 0;
+	const int32_t max = w ? w->descr().get_needed_experience() - 1 : 0;
+	assert(cur >= 0);
+	assert(max >= 0);
+	worker_xp_decrease_->set_enabled(cur > 0);
+	worker_xp_increase_->set_enabled(cur < max);
+}
+
+void ProductionSiteWindow::worker_table_dropdown_clicked() {
+	Widelands::ProductionSite* ps = production_site_.get(ibase()->egbase());
+	if (ps == nullptr) {
+		return;
+	}
+
+	assert(ibase()->omnipotent());
+	assert(worker_table_);
+	assert(worker_table_->has_selection());
+	assert(worker_type_);
+	assert(worker_type_->has_selection());
+	const Widelands::DescriptionIndex selected = worker_type_->get_selected();
+
+	const std::vector<std::pair<Widelands::DescriptionIndex, Widelands::Quantity>>
+	   working_positions = ps->descr().working_positions();
+	const size_t selected_index = worker_table_->get_selected();
+	Widelands::Worker* worker =
+	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+
+	const Widelands::DescriptionIndex current =
+	   worker ? ibase()->egbase().descriptions().safe_worker_index(worker->descr().name()) :
+	            Widelands::INVALID_INDEX;
+	if (current == selected) {
+		return;
+	}
+	if (worker) {
+		worker->remove(ibase()->egbase());
+	}
+	if (selected != Widelands::INVALID_INDEX) {
+#ifndef NDEBUG
+		const bool success =
+#endif
+		   ps->warp_worker(ibase()->egbase(),
+		                   *ibase()->egbase().descriptions().get_worker_descr(selected),
+		                   selected_index);
+#ifndef NDEBUG
+		assert(success);
+#endif
+		Notifications::publish(
+		   Widelands::NoteBuilding(ps->serial(), Widelands::NoteBuilding::Action::kWorkersChanged));
+	}
+	worker_table_selection_changed();
+}
+
+void ProductionSiteWindow::worker_table_xp_clicked(int8_t delta) {
+	Widelands::ProductionSite* ps = production_site_.get(ibase()->egbase());
+	if (ps == nullptr || delta == 0) {
+		return;
+	}
+
+	assert(ibase()->omnipotent());
+	assert(worker_table_);
+	assert(worker_table_->has_selection());
+
+	const size_t selected_index = worker_table_->get_selected();
+	Widelands::Worker* worker =
+	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());
+	if (!worker) {
+		return;
+	}
+
+	assert(worker->needs_experience());
+	const int32_t max_xp = worker->descr().get_needed_experience() - 1;
+	worker->set_current_experience(
+	   std::max(0, std::min(max_xp, worker->get_current_experience() + delta)));
+	Notifications::publish(
+	   Widelands::NoteBuilding(ps->serial(), Widelands::NoteBuilding::Action::kWorkersChanged));
+	update_worker_xp_buttons(worker);
 }

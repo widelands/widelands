@@ -26,14 +26,20 @@
 #include "graphic/minimap_renderer.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "logic/game_settings.h"
 #include "map_io/map_loader.h"
 #include "ui_basic/box.h"
 #include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
 
-MapDetails::MapDetails(
-   Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style)
+MapDetails::MapDetails(Panel* parent,
+                       int32_t x,
+                       int32_t y,
+                       int32_t w,
+                       int32_t h,
+                       UI::PanelStyle style,
+                       Widelands::EditorGameBase& egbase)
    : UI::Panel(parent, x, y, w, h),
 
      style_(style),
@@ -61,7 +67,8 @@ MapDetails::MapDetails(
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, 0, 0, 0, 0, nullptr),
      suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0)),
-     egbase_(nullptr) {
+     last_map_(""),
+     egbase_(egbase) {
 
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
 	descr_.set_handle_mouse(false);
@@ -84,7 +91,6 @@ void MapDetails::clear() {
 	minimap_icon_.set_icon(nullptr);
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_size(0, 0);
-	minimap_image_.reset();
 	suggested_teams_box_->hide();
 }
 
@@ -101,10 +107,10 @@ void MapDetails::layout() {
 		minimap_icon_.set_desired_size(0, 0);
 	} else {
 		// Fit minimap to width
-		const int width = std::min<int>(
-		   main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_, minimap_image_->width());
-		const float scale = static_cast<float>(width) / minimap_image_->width();
-		const int height = scale * minimap_image_->height();
+		const int width = std::min<int>(main_box_.get_w() - UI::Scrollbar::kSize - 2 * padding_,
+		                                minimap_cache_.at(last_map_)->width());
+		const float scale = static_cast<float>(width) / minimap_cache_.at(last_map_)->width();
+		const int height = scale * minimap_cache_.at(last_map_)->height();
 
 		minimap_icon_.set_desired_size(width, height);
 	}
@@ -112,9 +118,11 @@ void MapDetails::layout() {
 	descr_box_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 }
 
-void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
+bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool render_minimap) {
 	clear();
 	name_ = mapdata.name;
+	last_map_ = mapdata.filename;
+	bool loadable = true;
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		name_label_.set_text(
@@ -190,27 +198,47 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
-		descr_.set_text(as_richtext(description));
-
 		// Render minimap
-		egbase_.cleanup_for_load();
-		std::unique_ptr<Widelands::MapLoader> ml(
-		   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
-		if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
-			minimap_image_ = draw_minimap(
-			   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
-			   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
-			minimap_icon_.set_icon(minimap_image_.get());
-			minimap_icon_.set_visible(true);
+		if (render_minimap) {
+			auto minimap = minimap_cache_.find(last_map_);
+			if (minimap != minimap_cache_.end()) {
+				minimap_icon_.set_icon(minimap->second.get());
+				minimap_icon_.set_visible(true);
+			} else {
+				egbase_.cleanup_for_load();
+				std::unique_ptr<Widelands::MapLoader> ml(
+				   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
+				try {
+					if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
+						minimap_cache_[last_map_] = draw_minimap(
+						   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+						   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
+						minimap_icon_.set_icon(minimap_cache_.at(last_map_).get());
+						minimap_icon_.set_visible(true);
+					}
+				} catch (const Widelands::GameDataError& e) {
+					// Put error message on top for better visibility
+					description =
+					   (boost::format("%s%s") % as_content(e.what(), style_) % description).str();
+					description =
+					   (boost::format("%s%s") % as_heading(_("Game data error"), style_) % description)
+					      .str();
+					loadable = false;
+				}
+			}
 		}
+
+		descr_.set_text(as_richtext(description));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {
 			suggested_teams_box_->hide();
+			suggested_teams_box_->set_size(0, 0);
 		} else {
 			suggested_teams_box_->set_size(get_parent()->get_w(), 0);
 			suggested_teams_box_->show(mapdata.suggested_teams);
 		}
 	}
 	layout();
+	return loadable;
 }

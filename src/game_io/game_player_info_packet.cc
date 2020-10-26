@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 25;
+constexpr uint16_t kCurrentPacketVersion = 26;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -93,6 +93,9 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 						player->is_picking_custom_starting_position_ = fr.unsigned_8();
 						player->initialization_index_ = fr.unsigned_8();
 					}
+					if (packet_version >= 26) {
+						player->allow_additional_expedition_items_ = fr.unsigned_8();
+					}
 				}
 			}
 
@@ -103,7 +106,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 				PlayerEndStatus status;
 				status.player = fr.unsigned_8();
 				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
-				status.time = fr.unsigned_32();
+				status.time = Time(fr);
 				status.info = fr.c_string();
 				manager->set_player_end_status(status);
 			}
@@ -163,6 +166,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 		}
 		fw.unsigned_8(plr->is_picking_custom_starting_position() ? 1 : 0);
 		fw.unsigned_8(plr->initialization_index_);
+		fw.unsigned_8(plr->allow_additional_expedition_items_ ? 1 : 0);
 	}
 	else {
 		fw.unsigned_8(0);  //  Player is NOT in game.
@@ -175,7 +179,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 	for (const PlayerEndStatus& status : end_status_list) {
 		fw.unsigned_8(status.player);
 		fw.unsigned_8(static_cast<uint8_t>(status.result));
-		fw.unsigned_32(status.time);
+		status.time.save(fw);
 		fw.c_string(status.info.c_str());
 	}
 

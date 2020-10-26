@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
-"PO-Revision-Date: 2020-08-26 12:03+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-10 08:08+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -585,7 +585,7 @@ msgstr "Holl de Alt-Tast drückt, um dat tweede anner Warktüüg to bruken (wenn
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr "Mit de Tahlen-Tasten (0-9) kannst du de Warktüüg-Gröte stracks fastsetten."
+msgstr "Mit de Tahlen-Tasten (0-9) kannst du de Warktüüg-Grött stracks fastsetten."
 
 #: ../../data/txts/tips/editor.lua:31
 msgid ""
@@ -831,7 +831,7 @@ msgstr "Bruuk »@Naam« am Anfang vun eener Snack-Naricht, um se blot an eener S
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr "Wenn dat Speel maal daalknallt, koom nich in Nood! Dat Speel word automatisk sekert un du naher wiederspölen."
+msgstr "Wenn dat Speel maal daalknallt, koom nich in Nood! Dat Speel word automatisk sekert un du kannst naher wiederspölen."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

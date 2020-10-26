@@ -42,7 +42,10 @@ local r = {
 
       player:reveal_fields(sf:region(10))
       player:conquer(sf, 9)
-      player:send_message(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
+
+      push_textdomain("tribes")
+      player:send_to_inbox(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
+      pop_textdomain()
 
       check_trees_rocks_poor_hamlet(player, sf, "atlanteans_warehouse", {granite = 4, planks = -1}, {log = 1, planks = 1, granite = 1})
    end

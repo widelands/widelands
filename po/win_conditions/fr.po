@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2020-07-23 08:45+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
@@ -189,23 +189,23 @@ msgstr "%1$s possède %2$3.0f%% des terrains (%3$i de %4$i)."
 msgid "Territory percentage"
 msgstr "Pourcentage de territoire"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:211
+#: ../../data/scripting/win_conditions/territorial_functions.lua:215
 msgid "You own more than half of the map’s area."
 msgstr "Vous possédez plus de la moitié de la carte."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:212
+#: ../../data/scripting/win_conditions/territorial_functions.lua:216
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Gardez la pendant %i minute de plus pour gagner la partie."
 msgstr[1] "Gardez la pendant %i minutes de plus pour gagner la partie."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:239
+#: ../../data/scripting/win_conditions/territorial_functions.lua:243
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s possède plus de la moitié de la carte."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:240
+#: ../../data/scripting/win_conditions/territorial_functions.lua:244
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."

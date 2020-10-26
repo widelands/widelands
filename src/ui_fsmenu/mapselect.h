@@ -37,9 +37,10 @@ struct GameSettingsProvider;
  */
 class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuMapSelect(GameSettingsProvider*, GameController*);
+	FullscreenMenuMapSelect(GameSettingsProvider*,
+	                        GameController*,
+	                        Widelands::EditorGameBase& egbase);
 
-	bool is_scenario();
 	MapData const* get_map() const;
 	void think() override;
 
@@ -97,6 +98,8 @@ private:
 	std::set<uint32_t> req_tags_;
 
 	std::vector<MapData> maps_data_;
+
+	bool update_map_details_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

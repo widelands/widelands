@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# ThonyVezbe <a.guechoum@gmail.com>, 2020
 # Irriep Nala Novram <allannkorh@yahoo.fr>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-14 13:20+0000\n"
+"Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,15 +53,15 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:39
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Kregiñ gant sevel mengleuzioù war ar menez"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "Sevel mengleuzioù glaou ha houarn"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:42
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "Savit ur mengleuz glaou hag ur mengleuz houarn."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid ""
@@ -106,7 +107,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:52
 msgid "water"
-msgstr ""
+msgstr "dour"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:53
 msgid "nothing was found here"
@@ -145,7 +146,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:68
 msgid "Bake bread"
-msgstr ""
+msgstr "Fardañ bara"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Build a well, a farm and a bakery"
@@ -773,7 +774,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:406
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "Ur beurevezh brav"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:407
 msgid "Thron recognizes…"
@@ -947,7 +948,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:496
 msgid "Victory"
-msgstr ""
+msgstr "Trec'h"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid ""
@@ -977,7 +978,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:511
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Un devezh yen ouzhpenn"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:512
 msgid "Thron looks worried…"

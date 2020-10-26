@@ -31,8 +31,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/message_queue.h"
-#include "logic/see_unsee_node.h"
-#include "logic/widelands.h"
+#include "logic/vision.h"
 #include "sound/constants.h"
 
 class Node;
@@ -93,7 +92,7 @@ public:
 	/// of m, the message deallocated instead.
 	MessageId add_message_with_timeout(Game&,
 	                                   std::unique_ptr<Message> message,
-	                                   uint32_t timeout,
+	                                   const Duration& timeout,
 	                                   uint32_t radius);
 
 	/// Indicates that the object linked to the message has been removed
@@ -165,7 +164,7 @@ public:
 		// Seafaring constants for controlling expeditions
 		static constexpr uint32_t kColonyScanStartArea = 35;
 		static constexpr uint32_t kColonyScanMinArea = 12;
-		static constexpr uint32_t kNoExpedition = 0;
+		static constexpr Time kNoExpedition = Time(0);
 
 		AiPersistentState()
 		   : initialized(false),
@@ -191,7 +190,7 @@ public:
 		bool initialized;
 		uint32_t colony_scan_area;
 		uint32_t trees_around_cutters;
-		uint32_t expedition_start_time;
+		Time expedition_start_time;
 		int16_t
 		   ships_utilization;  // 0-10000 to avoid floats, used for decision for building new ships
 		bool no_more_expeditions;
@@ -215,24 +214,32 @@ public:
 	struct Field {
 		Field()
 		   : military_influence(0),
-		     seeing(SeeUnseeNode::kUnexplored),
+		     vision(0),
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
 		     r_sw(RoadSegment::kNone),
-		     owner(0),
 		     time_node_last_unseen(0),
 		     map_object_descr(nullptr),
+		     dismantlesite(),
+		     is_constructionsite(false),
 		     border(0),
 		     border_r(0),
 		     border_br(0),
-		     border_bl(0) {
+		     border_bl(0),
+		     owner(0) {
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
 			//  darkening that actually hides the ground from the user).
 			terrains.d = terrains.r = 0;
 
-			time_triangle_last_surveyed[0] = never();
-			time_triangle_last_surveyed[1] = never();
+			time_triangle_last_surveyed[0] = Time();
+			time_triangle_last_surveyed[1] = Time();
+		}
+
+		~Field() {
+			if (is_constructionsite) {
+				delete constructionsite;
+			}
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -250,13 +257,7 @@ public:
 		MilitaryInfluence military_influence;
 
 		/// Indicates whether the player is currently seeing this node or has
-		/// has ever seen it.
-		///
-		/// The value is
-		///  `kUnexplored`      if the player has never seen the node
-		///  `kPreviouslySeen`  if the player does not currently see
-		///                     the node, but has seen it previously
-		///  `kVisible`         if the player currently sees the node
+		/// ever seen it.
 		///
 		/// Note a fundamental difference between seeing a node, and having
 		/// knownledge about resources. A node is considered continuously seen by
@@ -269,20 +270,16 @@ public:
 		/// by mining.
 		///
 		/// Buildings do not see on their own. Only people can see. But as soon
-		/// as a person enters a building, the person stops seeing. If it is the
-		/// only person in the building, the building itself starts to see (some
-		/// buildings, such as fortresses usually see much further than persons
-		/// standing on the ground). As soon as a person leaves a building, the
-		/// person begins to see on its own. If the building becomes empty of
+		/// as a person enters a building, the building itself starts to see
+		/// (some buildings, such as fortresses usually see much further than
+		/// persons standing on the ground). If the building becomes empty of
 		/// people, it stops seeing. Exception: Warehouses always see.
 		///
-		/// Only the Boolean representation of this value (whether the node has
-		/// ever been seen) is saved/loaded. The complete value is then obtained
-		/// by the calls to see_node or see_area peformed by all the building and
-		/// worker objects that can see the node.
-		///
-		/// \note Never change this directly. Use update_vision() to recalculate.
-		SeeUnseeNode seeing;
+		/// \note Do not change this directly. Instead, use see_area whenever
+		/// a worker or a building starts seeing an area, unsee_area when it
+		/// stops seeing that area, and hide_or_reveal_field to add or remove
+		/// permanent vision.
+		Vision vision;
 
 		//  Below follows information about the field, as far as this player
 		//  knows.
@@ -302,21 +299,6 @@ public:
 		RoadSegment r_e;
 		RoadSegment r_se;
 		RoadSegment r_sw;
-
-		/**
-		 * The owner of this node, as far as this player knows.
-		 * Only valid when this player has seen this node.
-		 */
-		PlayerNumber owner;
-
-		/**
-		 * The amount of resource at each of the triangles, as far as this player
-		 * knows.
-		 * The d component is only valid when time_last_surveyed[0] != Never().
-		 * The r component is only valid when time_last_surveyed[1] != Never().
-		 */
-		// TODO(unknown): Check this on access, at least in debug builds
-		Widelands::Field::ResourceAmounts resource_amounts;
 
 		/// Whether there is a road between this node and the node to the
 		/// east, as far as this player knows.
@@ -393,27 +375,48 @@ public:
 		 */
 		const MapObjectDescr* map_object_descr;
 
-		/* Information for constructionSite and DismantleSite animation.
+		/* Information for ConstructionSite and DismantleSite animation.
 		 * `constructionsite` is only valid if there is a constructionsite
-		 * on this node. `dismantlesite.progress` equals the value of
-		 * `get_built_per64k()` at the time the dismantlesite was last seen.
+		 * on this node. `dismantlesite` is only valid if there is a dismantlesite.
+		 *
+		 * `dismantlesite.progress` equals the value of `get_built_per64k()`
+		 * at the time the dismantlesite was last seen.
+		 *
+		 * `constructionsite` is allocated on demand because of its size.
+		 * Call `set_constructionsite(true)` before using `constructionsite`,
+		 * and call `set_constructionsite(false)` before using `dismantlesite`.
 		 */
-		union PartiallyFinishedBuildingDetails {
-			ConstructionsiteInformation constructionsite;
-			struct {
-				uint32_t progress;
-				const BuildingDescr* building;
-			} dismantlesite;
-			PartiallyFinishedBuildingDetails();
-			~PartiallyFinishedBuildingDetails() {
-			}
-		} partially_finished_building;
+		struct DismantlesiteInformation {
+			uint32_t progress;
+			const BuildingDescr* building;
+		};
+		union {
+			DismantlesiteInformation dismantlesite;
+			ConstructionsiteInformation* constructionsite;
+		};
+		bool is_constructionsite;
+		void set_constructionsite(bool);
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
 		bool border_r;
 		bool border_br;
 		bool border_bl;
+
+		/**
+		 * The owner of this node, as far as this player knows.
+		 * Only valid when this player has seen this node.
+		 */
+		PlayerNumber owner;
+
+		/**
+		 * The amount of resource at each of the triangles, as far as this player
+		 * knows.
+		 * The d component is only valid when time_last_surveyed[0] != Never().
+		 * The r component is only valid when time_last_surveyed[1] != Never().
+		 */
+		// TODO(unknown): Check this on access, at least in debug builds
+		Widelands::Field::ResourceAmounts resource_amounts;
 
 	private:
 		DISALLOW_COPY_AND_ASSIGN(Field);
@@ -423,24 +426,48 @@ public:
 		return fields_.get();
 	}
 
-	SeeUnseeNode get_vision(MapIndex) const;
-	bool is_seeing(MapIndex i) const {
-		return get_vision(i) == SeeUnseeNode::kVisible;
-	}
+	/// Returns whether the field is kUnexplored, kPreviouslySeen or kVisible.
+	/// Always kVisible in see_all mode.
+	VisibleState get_vision(MapIndex) const;
 
-	// Cause this player and all his team mates to recalculate the visibility
-	// state of the given area of fields. If `force_visible` is true, we
-	// will assume without checking that we can see all fields of this area.
-	void update_vision(const Area<FCoords>&, bool force_visible);
+	/// Returns whether this player is currently seeing this field.
+	/// Always true in see_all mode.
+	bool is_seeing(MapIndex) const;
+
+	/// Increment this player's vision for this node.
+	void see_node(MapIndex);
+
+	/// Decrement this player's vision for this node.
+	void unsee_node(MapIndex);
+
+	/// Increment this player's vision for each node in the area.
+	/// Called when a building or bob starts seeing this area.
+	void see_area(const Area<FCoords>&);
+
+	/// Decrement this player's vision for each node in an area.
+	/// Called when a building or bob stops seeing this area.
+	void unsee_area(const Area<FCoords>&);
 
 	/// Explicitly hide or reveal the given field. The modes are as follows:
-	/// - kPreviouslySeen: Decrement the field's vision
-	/// - kUnexplored:     Make the field completely black
-	/// - kVisible:        Give the player full vision of this field.
-	// Note that kPreviouslySeen and kVisible will work as expected only when
-	// no building or worker is seeing the field. But they will always undo
-	// the effects of revealing the field with kVisible.
-	void hide_or_reveal_field(const Coords&, SeeUnseeNode);
+	/// - kReveal:        Give the player full permanent vision of this field,
+	///                   independent of buildings' and workers' vision.
+	/// - kHide:          Remove permanent vision of this field.
+	/// - kHideAndForget: Same as kHide, plus make the field completely black.
+	// Note that kHide and kHideAndForget will have a visible effect only when
+	// no building or worker is seeing the field. But they will always unset
+	// the permanent vision state given by revealing the field with kReveal.
+	void hide_or_reveal_field(const Coords&, HideOrRevealFieldMode);
+
+	/// Update the team vision state of this field according to 'visible'.
+	void force_update_team_vision(MapIndex, bool visible);
+
+	/// Check if any of this player's allies is seeing this field right now
+	/// and update the field's vision state accordingly.
+	void update_team_vision(MapIndex);
+
+	/// Update the team vision state of all fields on the map.
+	/// This is slow, so use sparingly.
+	void update_team_vision_whole_map();
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
 		return fields_[i].military_influence;
@@ -474,7 +501,7 @@ public:
 	void start_stop_building(PlayerImmovable&);
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);
-	void start_or_cancel_expedition(Warehouse&);
+	void start_or_cancel_expedition(const Warehouse&);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 	void dismantle_building(Building*, bool keep_wares);
 
@@ -491,10 +518,11 @@ public:
 	void drop_soldier(PlayerImmovable&, Soldier&);
 	void change_training_options(TrainingSite&, TrainingAttribute attr, int32_t val);
 
-	uint32_t find_attack_soldiers(Flag&,
+	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
+	void
+	enemyflagaction(const Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
 
 	uint32_t casualties() const {
 		return casualties_;
@@ -568,10 +596,6 @@ public:
 
 	const std::string pick_shipname();
 
-	void add_seer(const MapObject&, const Area<FCoords>&);
-	void add_seer(const MapObject&);
-	void remove_seer(const MapObject&, const Area<FCoords>&);
-
 	void add_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	void remove_soldier(unsigned h, unsigned a, unsigned d, unsigned e);
 	uint32_t count_soldiers(unsigned h, unsigned a, unsigned d, unsigned e) const;
@@ -596,6 +620,13 @@ public:
 	}
 	bool get_starting_position_suitability(const Coords&) const;
 
+	bool additional_expedition_items_allowed() const {
+		return allow_additional_expedition_items_;
+	}
+	void set_allow_additional_expedition_items(bool allow) {
+		allow_additional_expedition_items_ = allow;
+	}
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -603,9 +634,8 @@ private:
 	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 
-	// Called when a node becomes seen or has changed.  Discovers the node and
-	// those of the 6 surrounding edges/triangles that are not seen from another
-	// node.
+	/// Called when a node becomes seen, stops being seen or has changed. Discovers the node and
+	/// those of the 6 surrounding edges/triangles that are not seen from another node.
 	void rediscover_node(const Map&, const FCoords&);
 
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
@@ -619,7 +649,7 @@ private:
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
 	TeamNumber team_number_;
-	std::set<PlayerNumber> team_player_;
+	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
 	bool see_all_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
@@ -638,20 +668,6 @@ private:
 	std::set<Serial> ships_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
-
-	using SeersList = std::list<const MapObject*>;
-
-	bool should_see(const FCoords&, SeersList& nearby_objects) const;
-	// Own bobs and buildings that are seeing fields in their vicinity
-	SeersList seers_;
-
-	void update_vision(const FCoords&, bool force_visible);
-	void update_vision(const FCoords&, bool force_visible, SeersList& nearby_objects);
-	void update_vision_whole_map();
-	SeersList team_seers();
-	SeersList seers_for(const Area<FCoords>&);
-
-	std::set<MapIndex> revealed_fields_;
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics
@@ -705,6 +721,8 @@ private:
 
 	bool is_picking_custom_starting_position_;
 
+	bool allow_additional_expedition_items_;
+
 	FxId message_fx_;
 	FxId attack_fx_;
 	FxId occupied_fx_;
@@ -712,7 +730,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
-void find_former_buildings(const Tribes& tribes,
+void find_former_buildings(const Descriptions& descriptions,
                            const DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 }  // namespace Widelands

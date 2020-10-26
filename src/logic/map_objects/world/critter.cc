@@ -28,8 +28,8 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter_program.h"
-#include "logic/map_objects/world/world.h"
 #include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
@@ -188,7 +188,7 @@ Critter::Critter(const CritterDescr& critter_descr) : Bob(critter_descr), creati
 }
 
 bool Critter::init(EditorGameBase& egbase) {
-	if (is_a(Game, &egbase)) {
+	if (egbase.is_game()) {
 		// in editor, assume t0 as creation time so bobs don't die of old age right away when the
 		// actual game starts
 		creation_time_ = egbase.get_gametime();
@@ -268,8 +268,8 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 
 	// alternately move and idle
-	Time idle_time_min = 1000;
-	Time idle_time_rnd = kCritterMaxIdleTime;
+	uint32_t idle_time_min = 1000;
+	uint32_t idle_time_rnd = kCritterMaxIdleTime;
 
 	if (state.ivar1) {
 		state.ivar1 = 0;
@@ -302,7 +302,7 @@ void Critter::roam_update(Game& game, State& state) {
 	}
 	state.ivar1 = 1;
 
-	const uint32_t age = game.get_gametime() - creation_time_;
+	const uint32_t age = (game.get_gametime() - creation_time_).get();
 	const uint32_t reproduction_rate = descr().get_reproduction_rate();
 
 	{  // chance to die
@@ -387,7 +387,7 @@ void Critter::roam_update(Game& game, State& state) {
 				upcast(Immovable, imm, get_position().field->get_immovable());
 				assert(imm);
 				molog(game.get_gametime(), "Yummy, I love a %s...\n", imm->descr().name().c_str());
-				imm->delay_growth(descr().get_size() * 2000);
+				imm->delay_growth(Duration(descr().get_size() * 2000));
 			} else {
 				Critter* food = candidates_for_eating[idx];
 				molog(game.get_gametime(), "Yummy, I love a %s...\n", food->descr().name().c_str());
@@ -496,7 +496,7 @@ Load / Save implementation
 
 // We need to bump this packet version every time we rename a critter, so that the world legacy
 // lookup table will work.
-constexpr uint8_t kCurrentPacketVersion = 3;
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 Critter::Loader::Loader() {
 }
@@ -512,7 +512,7 @@ const Bob::Task* Critter::Loader::get_task(const std::string& name) {
 }
 
 const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
-	Critter& critter = get<Critter>();
+	const Critter& critter = get<Critter>();
 	return critter.descr().get_program(name);
 }
 
@@ -528,26 +528,22 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			const std::string critter_owner = fr.c_string();
+			if (packet_version < 4) {
+				fr.c_string();  // Consume obsolete owner type (world/tribes)
+			}
 			std::string critter_name = fr.c_string();
 			const CritterDescr* descr = nullptr;
 
-			if (critter_owner == "world") {
-				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-				descr =
-				   egbase.world().get_critter_descr(egbase.mutable_world()->load_critter(critter_name));
-			} else {
-				throw GameDataError(
-				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());
-			}
+			critter_name = lookup_table.lookup_critter(critter_name, packet_version);
+			descr = egbase.descriptions().get_critter_descr(
+			   egbase.mutable_descriptions()->load_critter(critter_name));
 
 			if (!descr) {
-				throw GameDataError(
-				   "undefined critter %s/%s", critter_owner.c_str(), critter_name.c_str());
+				throw GameDataError("undefined critter '%s'", critter_name.c_str());
 			}
 
 			Critter& critter = dynamic_cast<Critter&>(descr->create_object());
-			critter.creation_time_ = packet_version >= 3 ? fr.unsigned_32() : 0;
+			critter.creation_time_ = packet_version >= 3 ? Time(fr) : Time(0);
 			loader->init(egbase, mol, critter);
 			loader->load(fr);
 		} else {
@@ -564,12 +560,8 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	const std::string save_owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
-	                                  "" :  // Tribes don't have critters
-	                                  "world";
-	fw.c_string(save_owner);
 	fw.c_string(descr().name());
-	fw.unsigned_32(creation_time_);
+	creation_time_.save(fw);
 
 	Bob::save(egbase, mos, fw);
 }

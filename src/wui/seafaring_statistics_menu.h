@@ -48,7 +48,6 @@ private:
 		kExpeditionWaiting,
 		kExpeditionScouting,
 		kExpeditionPortspaceFound,
-		kExpeditionColonizing,
 		kAll
 	};
 
@@ -131,7 +130,6 @@ private:
 	/// status.
 	bool satisfies_filter(const ShipInfo& info, ShipFilterStatus filter);
 
-	const Image* colony_icon_;
 	UI::Box main_box_;
 	// Buttons for ship states
 	UI::Box filter_box_;

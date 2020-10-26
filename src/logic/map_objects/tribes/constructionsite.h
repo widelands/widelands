@@ -34,7 +34,8 @@ enum class StockPolicy;
 
 /// Per-player and per-field constructionsite information
 struct ConstructionsiteInformation {
-	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {
+	ConstructionsiteInformation()
+	   : becomes(nullptr), was(nullptr), intermediates(), totaltime(0), completedtime(0) {
 	}
 
 	/// Draw the partly finished constructionsite
@@ -50,8 +51,8 @@ struct ConstructionsiteInformation {
 	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
 	std::vector<const BuildingDescr*>
 	   intermediates;  // If we enhance a building while it's still under construction
-	uint32_t totaltime;
-	uint32_t completedtime;
+	Duration totaltime;
+	Duration completedtime;
 };
 
 /*
@@ -74,7 +75,9 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 class ConstructionSiteDescr : public BuildingDescr {
 public:
-	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	ConstructionSiteDescr(const std::string& init_descname,
+	                      const LuaTable& t,
+	                      Descriptions& descriptions);
 	~ConstructionSiteDescr() override {
 	}
 
@@ -90,8 +93,6 @@ private:
 
 class ConstructionSite : public PartiallyFinishedBuilding {
 	friend class MapBuildingdataPacket;
-
-	static const uint32_t CONSTRUCTIONSITE_STEP_TIME = 30000;
 
 	MO_DESCR(ConstructionSiteDescr)
 
@@ -131,20 +132,21 @@ public:
 	}
 	void apply_settings(const BuildingSettings&);
 
-	void enhance(Game&);
+	void enhance(const Game&);
 
 	void add_dropout_wares(const std::map<DescriptionIndex, Quantity>&);
 
 protected:
 	void update_statistics_string(std::string* statistics_string) override;
 
-	uint32_t build_step_time() const override {
-		return CONSTRUCTIONSITE_STEP_TIME;
+	static constexpr Duration kConstructionsiteStepTime = Duration(30000);
+	const Duration& build_step_time() const override {
+		return kConstructionsiteStepTime;
 	}
 
 	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,

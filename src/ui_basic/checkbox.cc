@@ -46,8 +46,7 @@ Statebox::Statebox(Panel* const parent,
    : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
-     rendered_text_(nullptr),
-     rendered_width_(0) {
+     rendered_text_(nullptr) {
 	uint16_t w = pic->width();
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
@@ -73,7 +72,7 @@ Statebox::Statebox(Panel* const parent,
 
 void Statebox::layout() {
 	// We only need to relayout if we have text and the available width changed
-	if ((flags_ & Has_Text) && (rendered_width_ != get_w())) {
+	if ((flags_ & Has_Text)) {
 		int w = get_w();
 		int h = kStateboxSize;
 		int pic_width = kStateboxSize;
@@ -91,9 +90,7 @@ void Statebox::layout() {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
 		}
-		rendered_width_ = w;
-		set_desired_size(rendered_width_, h);
-		set_size(rendered_width_, h);
+		set_desired_size(w, h);
 	}
 }
 
@@ -131,25 +128,38 @@ void Statebox::set_state(bool const on) {
 	}
 }
 
+std::vector<Recti> Statebox::focus_overlay_rects() {
+	return (flags_ & Has_Custom_Picture) ? Panel::focus_overlay_rects(1, 1, -1) :
+	                                       Panel::focus_overlay_rects();
+}
+
 /**
  * Redraw the entire checkbox
  */
+void Statebox::draw_overlay(RenderTarget& dst) {
+	Panel::draw_overlay(dst);
+	if (flags_ & Has_Custom_Picture) {
+		// TODO(Nordfriese): Move colours to style manager
+		if (flags_ & Is_Checked) {
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(226, 200, 6));
+		} else if (flags_ & Is_Highlighted) {
+			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
+		}
+	}
+}
 void Statebox::draw(RenderTarget& dst) {
 	if (flags_ & Has_Custom_Picture) {
+		if (flags_ & Is_Checked) {
+			dst.brighten_rect(Recti(0, 0, get_w(), get_h()), -24);
+		}
+
 		// center picture
 		const uint16_t w = pic_graphics_->width();
 		const uint16_t h = pic_graphics_->height();
 
 		dst.blit(Vector2i((get_inner_w() - w) / 2, (get_inner_h() - h) / 2), pic_graphics_);
-
-		if (flags_ & Is_Checked) {
-			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(229, 116, 2));
-		} else if (flags_ & Is_Highlighted) {
-			dst.draw_rect(Recti(0, 0, get_w(), get_h()), RGBColor(100, 100, 80));
-		}
 	} else {
-		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_WIDTH) failed.");
-		static_assert(0 <= kStateboxSize, "assert(0 <= STATEBOX_HEIGHT) failed.");
+		static_assert(0 <= kStateboxSize, "assert(0 <= kStateboxSize) failed.");
 		Vector2i image_anchor = Vector2i::zero();
 		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 

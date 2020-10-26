@@ -49,12 +49,18 @@
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
+#include "wui/constructionsitewindow.h"
+#include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/logmessage.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
+#include "wui/shipwindow.h"
+#include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
+#include "wui/warehousewindow.h"
 
 namespace {
 
@@ -156,8 +162,9 @@ void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 	dst.blit(Vector2i(x, get_h() - imageset.right_corner->height()), imageset.right_corner);
 }
 
-InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
+InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+     chat_provider_(c),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
@@ -178,15 +185,16 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      workareas_cache_(nullptr),
      egbase_(the_egbase),
 #ifndef NDEBUG  //  not in releases
-     display_flags_(dfDebug | get_config_int("display_flags")),
+     display_flags_(dfDebug | get_config_int("display_flags", kDefaultDisplayFlags)),
 #else
-     display_flags_(get_config_int("display_flags")),
+     display_flags_(get_config_int("display_flags", kDefaultDisplayFlags)),
 #endif
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
      road_building_mode_(nullptr),
-     unique_window_handler_(new UniqueWindowHandler()) {
+     unique_window_handler_(new UniqueWindowHandler()),
+     cheat_mode_enabled_(false) {
 
 	// Load the buildhelp icons.
 	{
@@ -228,6 +236,32 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
 	   [this](const NoteSound& note) { play_sound_effect(note); });
+	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
+	   [this](const Widelands::NoteBuilding& note) {
+		   switch (note.action) {
+		   case Widelands::NoteBuilding::Action::kFinishWarp: {
+			   if (upcast(
+			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
+				   const Widelands::Coords coords = building->get_position();
+				   // Check whether the window is wanted
+				   if (wanted_building_windows_.count(coords.hash()) == 1) {
+					   const WantedBuildingWindow& wanted_building_window =
+					      *wanted_building_windows_.at(coords.hash());
+					   UI::UniqueWindow* building_window =
+					      show_building_window(coords, true, wanted_building_window.show_workarea);
+					   building_window->set_pos(wanted_building_window.window_position);
+					   if (wanted_building_window.minimize) {
+						   building_window->minimize();
+					   }
+					   building_window->set_pinned(wanted_building_window.pin);
+					   wanted_building_windows_.erase(coords.hash());
+				   }
+			   }
+		   } break;
+		   default:
+			   break;
+		   }
+	   });
 
 	toolbar_.set_layout_toplevel(true);
 	map_view_.changeview.connect([this] { mainview_move(); });
@@ -718,6 +752,15 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 	Game* game = dynamic_cast<Game*>(&egbase());
 
+	if (in_road_building_mode() && tooltip().empty()) {
+		draw_tooltip(
+		   in_road_building_mode(RoadBuildingType::kRoad) ?
+		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
+		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
+		       egbase().map().get_waterway_max_length())
+		         .str());
+	}
+
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
 	if (game != nullptr) {
@@ -764,7 +807,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	// In-game clock and FPS
 	if ((game != nullptr) && get_config_bool("game_clock", true)) {
 		// Blit in-game clock
-		const std::string gametime(gametimestring(egbase().get_gametime(), true));
+		const std::string gametime(gametimestring(egbase().get_gametime().get(), true));
 		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
 		rendered_text->draw(dst, Vector2i(5, 5));
@@ -777,6 +820,13 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}
+	}
+
+	if (cheat_mode_enabled_) {
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_richtext_paragraph("‹‹‹ CHEAT MODE ENABLED ›››", UI::FontStyle::kFsMenuIntro));
+		rendered_text->draw(
+		   dst, Vector2i((get_w() - rendered_text->width()) / 2, 2.5f * rendered_text->height()));
 	}
 }
 
@@ -803,7 +853,7 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
                                    const FieldsToDraw::Field* f,
-                                   uint32_t gametime,
+                                   const Time& gametime,
                                    float scale) const {
 	if (Widelands::is_bridge_segment(f->road_e)) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
@@ -1325,6 +1375,80 @@ void InteractiveBase::road_building_remove_overlay() {
 	road_building_mode_->overlay_steepness_indicators.clear();
 }
 
+void InteractiveBase::add_wanted_building_window(const Widelands::Coords& coords,
+                                                 const Vector2i point,
+                                                 bool was_minimal,
+                                                 bool was_pinned) {
+	wanted_building_windows_.insert(std::make_pair(
+	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
+	                     point, was_minimal, was_pinned, has_workarea_preview(coords)))));
+}
+
+UI::UniqueWindow* InteractiveBase::show_building_window(const Widelands::Coords& coord,
+                                                        bool avoid_fastclick,
+                                                        bool workarea_preview_wanted) {
+	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
+	upcast(Widelands::Building, building, immovable);
+	assert(building);
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("building_%d") % building->serial()).str());
+
+	switch (building->descr().type()) {
+	case Widelands::MapObjectType::CONSTRUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new ConstructionSiteWindow(*this, registry,
+			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
+			                           avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::DISMANTLESITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
+			new DismantleSiteWindow(
+			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
+		};
+		break;
+	case Widelands::MapObjectType::MILITARYSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new MilitarySiteWindow(*this, registry, *dynamic_cast<Widelands::MilitarySite*>(building),
+			                       avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::PRODUCTIONSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new ProductionSiteWindow(*this, registry,
+			                         *dynamic_cast<Widelands::ProductionSite*>(building),
+			                         avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::TRAININGSITE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new TrainingSiteWindow(*this, registry, *dynamic_cast<Widelands::TrainingSite*>(building),
+			                       avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	case Widelands::MapObjectType::WAREHOUSE:
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new WarehouseWindow(*this, registry, *dynamic_cast<Widelands::Warehouse*>(building),
+			                    avoid_fastclick, workarea_preview_wanted);
+		};
+		break;
+	// TODO(sirver,trading): Add UI for market.
+	default:
+		log_err_time(egbase().get_gametime(), "Unable to show window for building '%s', type '%s'.\n",
+		             building->descr().name().c_str(), to_string(building->descr().type()).c_str());
+		NEVER_HERE();
+	}
+	registry.create();
+	return registry.window;
+}
+
+void InteractiveBase::show_ship_window(Widelands::Ship* ship) {
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
+	registry.create();
+}
+
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	if (quick_navigation_.handle_key(down, code)) {
 		return true;
@@ -1337,6 +1461,18 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			GameChatMenu::create_script_console(
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
+		case SDLK_F3:
+			if (cheat_mode_enabled_) {
+				cheat_mode_enabled_ = false;
+			} else if (code.mod & KMOD_CTRL) {
+				if (chat_provider_) {
+					/** TRANSLATORS: This is a chat message which is automatically sent to all players
+					 * when a player enables cheating mode */
+					chat_provider_->send(_("This player has enabled the cheating mode!"));
+				}
+				cheat_mode_enabled_ = true;
+			}
+			break;
 #endif
 		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
 		case SDLK_SPACE:
@@ -1358,6 +1494,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
 	const std::string cmd = boost::algorithm::join(args, " ");
+
+	if (chat_provider_) {
+		/** TRANSLATORS: This is a chat message which is automatically sent to all players when a
+		 * player uses the debug console */
+		chat_provider_->send(_("This player has just used the cheating console!"));
+	}
 
 	DebugConsole::write("Starting Lua interpretation!");
 	try {

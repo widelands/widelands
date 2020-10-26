@@ -32,10 +32,6 @@
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
-namespace Widelands {
-class World;
-}  // namespace Widelands
-
 /******************/
 /* Helper classes */
 /******************/
@@ -54,6 +50,10 @@ struct WlTestFixture {
 		set_logging_dir();
 #endif
 		g_fs = new LayeredFileSystem();
+		// Find base dir from build/src/economy/test
+		std::string test_datadir =
+		   g_fs->canonicalize_name(g_fs->get_working_directory() + "/../../../../data");
+		g_fs->add_file_system(&FileSystem::create(test_datadir));
 	}
 	~WlTestFixture() {
 		delete g_fs;
@@ -75,6 +75,8 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 		delete end;
 		// Map is deleted by EditorGameBase
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(SimpleRoadTestsFixture);
 
 	Widelands::EditorGameBase g;
 	Widelands::Road r;

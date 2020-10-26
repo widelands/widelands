@@ -24,7 +24,7 @@
 
 /// Set the height of a node to a random value within a defined interval.
 struct EditorNoiseHeightTool : public EditorTool {
-	EditorNoiseHeightTool(
+	explicit EditorNoiseHeightTool(
 	   EditorSetHeightTool& the_set_tool,
 	   const Widelands::HeightInterval& the_interval = Widelands::HeightInterval(10, 14))
 	   : EditorTool(the_set_tool, the_set_tool), set_tool_(the_set_tool), interval_(the_interval) {

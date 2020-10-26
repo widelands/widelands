@@ -18,7 +18,7 @@ tribes:new_worker_type {
    programs = {
       buildship = {
          "walk=object-or-coords",
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:barbarians_shipconstruction unless object",
          "playsound=sound/sawmill/sawmill priority:80% allow_multiple",
          "animate=work duration:500ms",
          "construct",

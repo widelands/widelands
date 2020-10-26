@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2020-09-09 19:57+0000\n"
 "Last-Translator: Samuele Battarra <battarsa@email.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
@@ -4013,17 +4013,17 @@ msgid ""
 "an economy. Warning: the AI can't successfully start from this"
 msgstr "Inizia la partita con solo un magazzino e il minimo indispensabile per avviare un'economia. Attenzione: l'IA non è in grado di partire da questa condizione."
 
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
 msgid "Be careful"
 msgstr "Stai attento"
 
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:43
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:44
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
 msgid ""
 "You have only one iron for each tool you will need to start your economy. "
 "Make sure no unneeded tool is created."

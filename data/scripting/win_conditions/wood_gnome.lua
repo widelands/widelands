@@ -19,7 +19,10 @@ local wc_desc = _(
 [[As wood gnome you like big forests, so your task is to have more trees on ]] ..
 [[your territory than any other player. The game will end after 4 hours of ]] ..
 [[playing. The one with the most trees at that point will win the game.]])
-local wc_trees_owned = _"Trees owned"
+local wc_trees_owned = "Trees owned"
+-- This needs to be exactly like wc_trees_owned, but localized, because wc_trees_owned
+-- will be used as the key to fetch the translation in C++
+local wc_trees_owned_i18n = _"Trees owned"
 
 local r = {
    name = wc_name,
@@ -91,12 +94,12 @@ local r = {
       for i=1,#points-1 do
          privmsg = lost_game_over.body
          privmsg = privmsg .. msg
-         points[i][1]:send_message(lost_game_over.title, privmsg)
+         points[i][1]:send_to_inbox(lost_game_over.title, privmsg)
          wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
       end
       privmsg = won_game_over.body
       privmsg = privmsg .. msg
-      points[#points][1]:send_message(won_game_over.title, privmsg)
+      points[#points][1]:send_to_inbox(won_game_over.title, privmsg)
       wl.game.report_result(points[#points][1], 1,
          make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
    end

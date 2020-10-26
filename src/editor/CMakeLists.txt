@@ -113,6 +113,7 @@ wl_library(editor
     logic_map_object_type
     logic_map_objects
     logic_map_objects_description_maintainer
+    logic_single_player_game_settings
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

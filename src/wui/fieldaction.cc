@@ -329,7 +329,8 @@ void FieldActionWindow::init() {
 	warp_mouse_to_fastclick_panel();
 }
 
-static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
+static bool suited_for_targeting(Widelands::PlayerNumber p,
+                                 const Widelands::EditorGameBase& egbase,
                                  const Widelands::Immovable& i) {
 	if (i.descr().collected_by().empty()) {
 		return false;
@@ -337,15 +338,25 @@ static bool suited_for_targeting(const Widelands::EditorGameBase& egbase,
 	const Widelands::Map& map = egbase.map();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   map, Widelands::Area<Widelands::FCoords>(
-	           map.get_fcoords(i.get_position()), egbase.tribes().get_largest_workarea()));
+	           map.get_fcoords(i.get_position()), egbase.descriptions().get_largest_workarea()));
 	do {
 		if (const Widelands::MapObject* mo = mr.location().field->get_immovable()) {
-			if (i.descr().collected_by().count(mo->descr().name())) {
-				upcast(const Widelands::ProductionSite, ps, mo);
-				assert(ps);
-				assert(!ps->descr().workarea_info().empty());
-				if (map.calc_distance(ps->get_position(), i.get_position()) <=
-				    ps->descr().workarea_info().rbegin()->first) {
+			if (mo->descr().type() < Widelands::MapObjectType::BUILDING) {
+				continue;
+			}
+
+			const Widelands::BuildingDescr& descr =
+			   mo->descr().type() == Widelands::MapObjectType::CONSTRUCTIONSITE ?
+			      dynamic_cast<const Widelands::ConstructionSite&>(*mo).building() :
+			      dynamic_cast<const Widelands::Building&>(*mo).descr();
+
+			if (i.descr().collected_by().count(descr.name())) {
+				upcast(const Widelands::Building, b, mo);
+				assert(b);
+				assert(!descr.workarea_info().empty());
+				if (b->owner().player_number() == p &&
+				    map.calc_distance(b->get_position(), i.get_position()) <=
+				       descr.workarea_info().rbegin()->first) {
 					return true;
 				}
 			}
@@ -365,20 +376,20 @@ void FieldActionWindow::add_buttons_auto() {
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 
-	if (igbase) {
+	if (upcast(InteractivePlayer, ipl, igbase)) {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
-			if (suited_for_targeting(igbase->egbase(), *mo)) {
+			if (mo->is_marked_for_removal(ipl->player_number())) {
 				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
-				if (mo->is_marked_for_removal(igbase->player_number())) {
-					add_button(&box, "unmark_for_removal", pic_unmark_removal,
-					           &FieldActionWindow::act_unmark_removal,
-					           _("Marked for removal by a worker – click to unmark"));
-				} else {
-					add_button(&box, "mark_for_removal", pic_mark_removal,
-					           &FieldActionWindow::act_mark_removal,
-					           _("Mark this immovable for timely removal by a suited worker"));
-				}
+				add_button(&box, "unmark_for_removal", pic_unmark_removal,
+				           &FieldActionWindow::act_unmark_removal,
+				           _("Marked for removal by a worker – click to unmark"));
+				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
+			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
+				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+				add_button(&box, "mark_for_removal", pic_mark_removal,
+				           &FieldActionWindow::act_mark_removal,
+				           _("Mark this immovable for timely removal by a suited worker"));
 				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
 			}
 		}
@@ -414,9 +425,10 @@ void FieldActionWindow::add_buttons_auto() {
 				}
 			}
 
-			if (dynamic_cast<Game const*>(&ibase().egbase())) {
+			if (ibase().egbase().is_game()) {
 				add_button(buildbox, "configure_economy", "images/wui/stats/genstats_nrwares.png",
-				           &FieldActionWindow::act_configure_economy, _("Configure economy"));
+				           &FieldActionWindow::act_configure_economy,
+				           _("Configure this flag’s economy"));
 				if (can_act) {
 					add_button(buildbox, "geologist", pic_geologist, &FieldActionWindow::act_geologist,
 					           _("Send geologist to explore site"));
@@ -461,7 +473,7 @@ void FieldActionWindow::add_buttons_auto() {
 	}
 
 	//  Watch actions, only when in game (no use in editor).
-	if (dynamic_cast<const Game*>(&ibase().egbase())) {
+	if (ibase().egbase().is_game()) {
 		add_button(&watchbox, "watch", pic_watchfield, &FieldActionWindow::act_watch,
 		           _("Watch field in a separate window"));
 	}
@@ -533,7 +545,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
-		if (dynamic_cast<const Game*>(&ibase().egbase())) {
+		if (ibase().egbase().is_game()) {
 			if (!building_descr->is_buildable() ||
 			    !player_->is_building_type_allowed(building_index)) {
 				continue;
@@ -746,31 +758,10 @@ void FieldActionWindow::act_buildflag() {
 
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
-		Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
-		Widelands::Economy* worker_economy = flag->get_economy(Widelands::wwWORKER);
-		bool window_open = false;
-		if (ware_economy->get_options_window()) {
-			window_open = true;
-			EconomyOptionsWindow& window =
-			   *static_cast<EconomyOptionsWindow*>(ware_economy->get_options_window());
-			if (window.is_minimal()) {
-				window.restore();
-			}
-			window.move_to_top();
-		}
-		if (worker_economy->get_options_window()) {
-			window_open = true;
-			EconomyOptionsWindow& window =
-			   *static_cast<EconomyOptionsWindow*>(worker_economy->get_options_window());
-			if (window.is_minimal()) {
-				window.restore();
-			}
-			window.move_to_top();
-		}
-		if (!window_open) {
-			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), ware_economy, worker_economy,
-			                         dynamic_cast<InteractiveGameBase&>(ibase()).can_act(
-			                            ware_economy->owner().player_number()));
+		if (upcast(InteractiveGameBase, igbase, &ibase())) {
+			Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
+			const bool can_act = igbase->can_act(ware_economy->owner().player_number());
+			EconomyOptionsWindow::create(&ibase(), *flag, Widelands::WareWorker::wwWARE, can_act);
 		}
 	}
 	die();
@@ -945,7 +936,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(
-		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
+		           node_, workarea_radius + ibase().egbase().descriptions().get_largest_workarea()));
 		do {
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {
@@ -1119,9 +1110,10 @@ void show_field_action(InteractiveBase* const ibase,
 		// did he click on a flag or a road where a flag can be built?
 		if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
 			bool finish = false;
-			if (dynamic_cast<const Widelands::Flag*>(i)) {
+			if (i->descr().type() == Widelands::MapObjectType::FLAG) {
 				finish = true;
-			} else if (dynamic_cast<const Widelands::RoadBase*>(i)) {
+			} else if (i->descr().type() == Widelands::MapObjectType::ROAD ||
+			           i->descr().type() == Widelands::MapObjectType::WATERWAY) {
 				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 					upcast(Game, game, &player->egbase());
 					game->send_player_build_flag(player->player_number(), target);

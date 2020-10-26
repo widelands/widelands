@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-02 08:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -280,12 +280,12 @@ msgstr "Este equipamento é produzido em forjas com carvão, ferro e por vezes o
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:125
 msgid ""
-"You should also keep in mind that each of the three tribes in Widelands has "
-"its own way of training, so the buildings and wares are different. Also, the"
-" ability levels cannot be compared: an Imperial soldier has a base attack of"
-" %1% at level 0, while a Barbarian soldier at the same level only has a base"
-" attack of %2%."
-msgstr "Também deves lembrar-te que as três tribos do Widelands têm costumes, edifícios e mercadorias diferentes. Portanto, os níveis de competência  não podem ser comparados: um soldado Imperial tem uma base de ataque de %1% no nível 0, enquanto um Bárbaro no mesmo nível só tem %2%."
+"You should also keep in mind that each of the tribes in Widelands has its "
+"own way of training, so the buildings and wares are different. Also, the "
+"ability levels cannot be compared: an Imperial soldier has a base attack of "
+"%1% at level 0, while a Barbarian soldier at the same level only has a base "
+"attack of %2%."
+msgstr ""
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143

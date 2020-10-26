@@ -22,27 +22,20 @@
 
 #include <memory>
 
-#include "graphic/playercolor.h"
 #include "logic/game_settings.h"
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
+#include "ui_fsmenu/singleplayersetupbox.h"
 
-struct PlayerDescriptionGroup;
+namespace Widelands {
+class Game;
+}
 
-/**
- * Fullscreen menu for setting map and mapsettings for single and multi player
- * games.
- *
- * The menu has a lot dynamic user-interfaces, that are only shown in specific
- * cases:
- *    UI::Button select_map_  - only shown if the player has the right to
- *                               change the map.
- *
- */
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
+	FullscreenMenuLaunchSPG(GameSettingsProvider*,
+	                        Widelands::EditorGameBase& egbase,
+	                        bool preconfigured,
+	                        GameController* = nullptr);
 	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;
@@ -50,28 +43,19 @@ public:
 protected:
 	void clicked_ok() override;
 	void clicked_back() override;
+	bool clicked_select_map() override;
 
 private:
-	void layout() override;
-	void update(bool map_was_changed);
-
-	bool select_map();
 	void win_condition_selected() override;
-	void set_player_names_and_tribes();
-	void switch_to_position(uint8_t);
-	void safe_place_for_host(uint8_t);
+	void layout() override;
 
-	UI::Button select_map_;
-	UI::Button* pos_[kMaxPlayers];
-	UI::Textarea mapname_;
-	UI::Textarea name_, type_, team_, tribe_, init_, wincondition_type_;
-	PlayerDescriptionGroup* players_[kMaxPlayers];
-	std::string filename_;
-	std::string filename_proof_;  // local var. to check UI state
-	std::string player_save_name_[kMaxPlayers];
-	std::string player_save_tribe_[kMaxPlayers];
-	bool is_scenario_;
+	SinglePlayerSetupBox player_setup;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
+
+	void update();
+	void enforce_player_names_and_tribes(Widelands::Map& map);
+	const bool preconfigured_;
+	Widelands::EditorGameBase& egbase_;  // Not owned
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
 "PO-Revision-Date: 2020-09-04 08:26+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
@@ -24,23 +24,23 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../data/world/critters/badger/init.lua:122
+#: ../../data/world/critters/badger/init.lua:124
 msgid "Badger"
 msgstr "오소리"
 
-#: ../../data/world/critters/brownbear/init.lua:5
+#: ../../data/world/critters/brownbear/init.lua:7
 msgid "Brown bear"
 msgstr "붉은 곰"
 
-#: ../../data/world/critters/bunny/init.lua:5
+#: ../../data/world/critters/bunny/init.lua:7
 msgid "Bunny"
 msgstr "토끼"
 
-#: ../../data/world/critters/chamois/init.lua:5
+#: ../../data/world/critters/chamois/init.lua:7
 msgid "Chamois"
 msgstr "산양"
 
-#: ../../data/world/critters/deer/init.lua:5
+#: ../../data/world/critters/deer/init.lua:7
 msgid "Deer"
 msgstr "사슴"
 
@@ -48,43 +48,43 @@ msgstr "사슴"
 msgid "Duck"
 msgstr "오리"
 
-#: ../../data/world/critters/fox/init.lua:5
+#: ../../data/world/critters/fox/init.lua:7
 msgid "Fox"
 msgstr "여우"
 
-#: ../../data/world/critters/lynx/init.lua:5
+#: ../../data/world/critters/lynx/init.lua:7
 msgid "Lynx"
 msgstr "스라소니"
 
-#: ../../data/world/critters/marten/init.lua:5
+#: ../../data/world/critters/marten/init.lua:7
 msgid "Marten"
 msgstr "담비"
 
-#: ../../data/world/critters/moose/init.lua:5
+#: ../../data/world/critters/moose/init.lua:7
 msgid "Moose"
 msgstr "엘크"
 
-#: ../../data/world/critters/reindeer/init.lua:5
+#: ../../data/world/critters/reindeer/init.lua:7
 msgid "Reindeer"
 msgstr "순록"
 
-#: ../../data/world/critters/sheep/init.lua:5
+#: ../../data/world/critters/sheep/init.lua:7
 msgid "Sheep"
 msgstr "양"
 
-#: ../../data/world/critters/stag/init.lua:5
+#: ../../data/world/critters/stag/init.lua:7
 msgid "Stag"
 msgstr "수사슴"
 
-#: ../../data/world/critters/wildboar/init.lua:5
+#: ../../data/world/critters/wildboar/init.lua:7
 msgid "Wild boar"
 msgstr "멧돼지"
 
-#: ../../data/world/critters/wisent/init.lua:5
+#: ../../data/world/critters/wisent/init.lua:7
 msgid "Wisent"
 msgstr "들소"
 
-#: ../../data/world/critters/wolf/init.lua:5
+#: ../../data/world/critters/wolf/init.lua:7
 msgid "Wolf"
 msgstr "늑대"
 

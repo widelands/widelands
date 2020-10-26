@@ -43,7 +43,7 @@ private:
 
 	void load_s2mf_header(FileRead&);
 	void load_s2mf(Widelands::EditorGameBase&);
-	void postload_set_port_spaces(const Widelands::EditorGameBase& world);
+	void postload_set_port_spaces(const Widelands::EditorGameBase& egbase);
 };
 
 #endif  // end of include guard: WL_MAP_IO_S2MAP_H

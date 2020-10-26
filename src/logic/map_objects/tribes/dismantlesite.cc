@@ -33,6 +33,8 @@
 
 namespace Widelands {
 
+constexpr Duration DismantleSite::kDismantlesiteStepTime;
+
 /**
  * The contents of 'table' are documented in
  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
@@ -40,8 +42,8 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
+                                       Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -62,7 +64,8 @@ IMPLEMENTATION
 ==============================
 */
 
-DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinishedBuilding(gdescr) {
+DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr)
+   : PartiallyFinishedBuilding(gdescr), next_dropout_index_(0) {
 }
 
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
@@ -70,7 +73,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              const Coords& c,
                              Player* plr,
                              bool loading,
-                             FormerBuildings& former_buildings,
+                             const FormerBuildings& former_buildings,
                              const std::map<DescriptionIndex, Quantity>& preserved_wares)
    : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares), next_dropout_index_(0) {
 	position_ = c;
@@ -96,11 +99,9 @@ void DismantleSite::cleanup(EditorGameBase& egbase) {
 	if (was_immovable_ && work_completed_ >= work_steps_) {
 		// Put the old immovable in place again
 		for (const auto& pair : old_buildings_) {
-			if (!pair.second.empty()) {
-				egbase.create_immovable(position_, pair.first,
-				                        pair.second == "world" ? MapObjectDescr::OwnerType::kWorld :
-				                                                 MapObjectDescr::OwnerType::kTribe,
-				                        get_owner());
+			// 'false' means that this was built on top of an immovable, so we reinstate that immovable
+			if (!pair.second) {
+				egbase.create_immovable(position_, pair.first, get_owner());
 				break;
 			}
 		}
@@ -153,7 +154,8 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 	Buildcost result;
 	DescriptionIndex first_idx = INVALID_INDEX;
 	for (const auto& pair : building->get_former_buildings()) {
-		if (pair.second.empty()) {
+		// 'true' means that this is an enhanced building
+		if (pair.second) {
 			first_idx = pair.first;
 			break;
 		}
@@ -226,23 +228,22 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 	}
 
 	// Check if one step has completed
-	if (static_cast<int32_t>(game.get_gametime() - work_steptime_) >= 0 && working_) {
+	if (game.get_gametime() >= work_steptime_ && working_) {
 		++work_completed_;
 
-		for (uint32_t i = 0; i < consume_wares_.size(); ++i) {
-			WaresQueue& wq = *consume_wares_[i];
-			if (!wq.get_filled()) {
+		for (WaresQueue* wq : consume_wares_) {
+			if (!wq->get_filled()) {
 				continue;
 			}
 
-			wq.set_filled(wq.get_filled() - 1);
-			wq.set_max_size(wq.get_max_size() - 1);
+			wq->set_filled(wq->get_filled() - 1);
+			wq->set_max_size(wq->get_max_size() - 1);
 
 			// Update statistics
-			get_owner()->ware_produced(wq.get_index());
+			get_owner()->ware_produced(wq->get_index());
 
-			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_index());
-			WareInstance& ware = *new WareInstance(wq.get_index(), &wd);
+			const WareDescr& wd = *owner().tribe().get_ware_descr(wq->get_index());
+			WareInstance& ware = *new WareInstance(wq->get_index(), &wd);
 			ware.init(game);
 			worker.start_task_dropoff(game, ware);
 
@@ -260,9 +261,9 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 		   game, WALK_SE, worker.descr().get_right_walk_anims(false, &worker), true);
 		worker.set_location(nullptr);
 	} else if (!working_) {
-		work_steptime_ = game.get_gametime() + DISMANTLESITE_STEP_TIME;
+		work_steptime_ = game.get_gametime() + kDismantlesiteStepTime;
 		worker.start_task_idle(
-		   game, worker.descr().get_animation("work", &worker), DISMANTLESITE_STEP_TIME);
+		   game, worker.descr().get_animation("work", &worker), kDismantlesiteStepTime.get());
 
 		working_ = true;
 	}
@@ -274,13 +275,13 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 Draw it.
 ===============
 */
-void DismantleSite::draw(uint32_t gametime,
+void DismantleSite::draw(const Time& gametime,
                          const InfoToDraw info_to_draw,
                          const Vector2f& point_on_dst,
                          const Widelands::Coords& coords,
                          float scale,
                          RenderTarget* dst) {
-	uint32_t tanim = gametime - animstart_;
+	const Time tanim((gametime - animstart_).get());
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	if (was_immovable_) {

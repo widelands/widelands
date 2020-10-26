@@ -22,15 +22,14 @@
 
 #include <memory>
 
-#include "logic/widelands.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
+#include "ui_fsmenu/mapdetailsbox.h"
 
 class GameController;
-struct GameSettingsProvider;
 class LuaInterface;
 
 /**
@@ -40,12 +39,16 @@ class LuaInterface;
  */
 class FullscreenMenuLaunchGame : public FullscreenMenuBase {
 public:
-	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
+	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*, bool preconfigured = false);
 	~FullscreenMenuLaunchGame() override;
 
+	GameSettingsProvider& settings() const {
+		assert(settings_);
+		return *settings_;
+	}
+
 protected:
-	void clicked_ok() override;
-	void clicked_back() override;
+	virtual bool clicked_select_map() = 0;
 
 	LuaInterface* lua_;
 
@@ -77,9 +80,19 @@ protected:
 	void toggle_peaceful();
 	void toggle_custom_starting_positions();
 
-	uint32_t butw_;
-	uint32_t buth_;
+	void layout() override;
 
+	uint32_t standard_element_width_;
+	uint32_t standard_element_height_;
+	uint32_t padding_;
+
+	UI::Box main_box_;
+	UI::Box content_box_;
+	UI::Box individual_content_box;
+	UI::Box map_box_;
+
+	MapDetailsBox map_details;
+	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
@@ -90,7 +103,9 @@ protected:
 
 	bool peaceful_mode_forbidden_;
 
-	Widelands::PlayerNumber nr_players_;
+private:
+	void add_all_widgets();
+	void add_behaviour_to_widgets();
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H

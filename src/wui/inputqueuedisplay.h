@@ -26,7 +26,7 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
 
-class InteractiveGameBase;
+class InteractiveBase;
 
 namespace Widelands {
 class Building;
@@ -48,7 +48,7 @@ public:
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
-	                  InteractiveGameBase& igb,
+	                  InteractiveBase& igb,
 	                  Widelands::Building& building,
 	                  const Widelands::InputQueue& queue,
 	                  bool no_capacity_buttons = false,
@@ -57,7 +57,7 @@ public:
 	InputQueueDisplay(UI::Panel* parent,
 	                  int32_t x,
 	                  int32_t y,
-	                  InteractiveGameBase&,
+	                  InteractiveBase&,
 	                  Widelands::ConstructionSite&,
 	                  Widelands::WareWorker,
 	                  Widelands::DescriptionIndex,
@@ -69,13 +69,15 @@ public:
 	void draw(RenderTarget&) override;
 
 private:
-	InteractiveGameBase& igb_;
+	InteractiveBase& interactive_base_;
 	Widelands::Building& building_;
 	const Widelands::InputQueue* queue_;
 	const Widelands::ProductionsiteSettings* settings_;
 	UI::Radiogroup* priority_radiogroup_;
 	UI::Button* increase_max_fill_;
 	UI::Button* decrease_max_fill_;
+	UI::Button* increase_real_fill_;
+	UI::Button* decrease_real_fill_;
 	Widelands::DescriptionIndex index_;
 	Widelands::WareWorker type_;
 	const Image* icon_;  //< Index to ware's picture
@@ -92,6 +94,8 @@ private:
 	void update_max_fill_buttons();
 	void decrease_max_fill_clicked();
 	void increase_max_fill_clicked();
+	void decrease_real_fill_clicked();
+	void increase_real_fill_clicked();
 	void radiogroup_changed(int32_t);
 	void radiogroup_clicked();
 	void update_siblings_priority(int32_t);

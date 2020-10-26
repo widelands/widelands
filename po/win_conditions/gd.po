@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
-"PO-Revision-Date: 2020-07-23 07:48+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-11 07:09+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -189,11 +189,11 @@ msgstr "Bha %2$3.0f%% dhen tìr aig %1$s (%3$i de %4$i)."
 msgid "Territory percentage"
 msgstr "Ceudad an ranntair"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:211
+#: ../../data/scripting/win_conditions/territorial_functions.lua:215
 msgid "You own more than half of the map’s area."
 msgstr "Tha barrachd air an dàrna leth de roinn a’ mhapa agad."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:212
+#: ../../data/scripting/win_conditions/territorial_functions.lua:216
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
@@ -202,12 +202,12 @@ msgstr[1] "Cùm e fad %i mhionaid a bharrachd gus an geama a bhuannachd."
 msgstr[2] "Cùm e fad %i mhionaid a bharrachd gus an geama a bhuannachd."
 msgstr[3] "Cùm e fad %i mhionaid a bharrachd gus an geama a bhuannachd."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:239
+#: ../../data/scripting/win_conditions/territorial_functions.lua:243
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "Tha barrachd air an dàrna leth de roinn a’ mhapa aig %s."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:240
+#: ../../data/scripting/win_conditions/territorial_functions.lua:244
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -243,7 +243,7 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first. If the peaceful mode is selected, the game ends if "
 "one player has more land than any other player could gain."
-msgstr ""
+msgstr "Feuchaidh gach cluicheadair no sgioba barrachd air an dàrna leth dhe roinn a’ mhapa a cheannsachadh. Buannaichidh an cluicheadair no sgioba a chumas an roinn seo fad co-dhiù 20 mionaid no am fear aig a bheil barrachd ranntair na aig càch an ceann 4 uairean, ge b’ e dè dhiubh a thachras an toiseach. Ma thaghas tu am modh sìtheil, thig an geama gu crìoch nuair a bhios ranntair an dàrna cluicheadair nas motha na an ranntair a b’ urrainn dhan chluicheadair eile a bhuannachd."
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'

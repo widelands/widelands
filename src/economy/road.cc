@@ -26,11 +26,11 @@
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -296,7 +296,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 		// If he is in the building at our end flag or at the other road's
 		// end flag, he can be reassigned to the other road.
 		if (idx < 0) {
-			if (dynamic_cast<Building const*>(map.get_immovable(w->get_position()))) {
+			const MapObject* mo = map.get_immovable(w->get_position());
+			if (mo && mo->descr().type() >= Widelands::MapObjectType::BUILDING) {
 				Coords pos;
 				map.get_brn(w->get_position(), &pos);
 				if (pos == path.get_start()) {
@@ -428,16 +429,16 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 	default:
 		NEVER_HERE();
 	}
-	return (egbase.world().terrain_descr(fd.field->terrain_d()).get_is() &
+	return (egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
 	        TerrainDescription::Is::kUnwalkable) &&
-	       (egbase.world().terrain_descr(fr.field->terrain_r()).get_is() &
+	       (egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
 	        TerrainDescription::Is::kUnwalkable);
 }
 
 /**
  * Update last_wallet_charge_ with the current gametime.
  */
-void Road::update_wallet_chargetime(Game& game) {
+void Road::update_wallet_chargetime(const Game& game) {
 	last_wallet_charge_ = game.get_gametime();
 }
 
@@ -445,10 +446,10 @@ void Road::update_wallet_chargetime(Game& game) {
  * Subtract maintenance cost, and check for demotion.
  */
 void Road::charge_wallet(Game& game) {
-	const uint32_t current_gametime = game.get_gametime();
+	const Time& current_gametime = game.get_gametime();
 	assert(last_wallet_charge_ <= current_gametime);
 
-	wallet_ -= carriers_count() * (current_gametime - last_wallet_charge_) / 1000;
+	wallet_ -= (((current_gametime - last_wallet_charge_) / 1000) * carriers_count()).get();
 	last_wallet_charge_ = current_gametime;
 
 	if (wallet_ < 0) {

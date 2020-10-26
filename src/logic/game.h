@@ -29,6 +29,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
+#include "logic/training_wheels.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
@@ -38,7 +39,7 @@ class GameController;
 namespace Widelands {
 
 /// How often are statistics to be sampled.
-constexpr uint32_t kStatisticsSampleTime = 30000;
+constexpr Duration kStatisticsSampleTime = Duration(30 * 1000);
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
@@ -163,6 +164,10 @@ public:
 	Game();
 	~Game() override;
 
+	bool is_game() const override {
+		return true;
+	}
+
 	// life cycle
 	void set_game_controller(GameController*);
 	GameController* game_controller();
@@ -192,6 +197,12 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+	bool acquire_training_wheel_lock(const std::string& objective);
+	void mark_training_wheel_as_solved(const std::string& objective);
+	bool training_wheels_wanted() const {
+		return training_wheels_wanted_;
+	}
+
 	void postload() override;
 
 	void think() override;
@@ -204,7 +215,7 @@ public:
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.
 	 */
-	bool is_loaded() {
+	bool is_loaded() const {
 		return state_ == gs_running;
 	}
 
@@ -269,11 +280,11 @@ public:
 	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
-	void send_player_ship_scouting_direction(Ship&, WalkingDir);
-	void send_player_ship_construct_port(Ship&, Coords);
-	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
-	void send_player_sink_ship(Ship&);
-	void send_player_cancel_expedition_ship(Ship&);
+	void send_player_ship_scouting_direction(const Ship&, WalkingDir);
+	void send_player_ship_construct_port(const Ship&, Coords);
+	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
+	void send_player_sink_ship(const Ship&);
+	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
 
@@ -410,6 +421,10 @@ private:
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
+
+	std::unique_ptr<TrainingWheels> training_wheels_;
+	bool training_wheels_wanted_;
+
 	bool replay_;
 };
 

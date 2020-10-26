@@ -27,7 +27,7 @@
  * Status window for \ref TrainingSite
  */
 struct TrainingSiteWindow : public ProductionSiteWindow {
-	TrainingSiteWindow(InteractiveGameBase& parent,
+	TrainingSiteWindow(InteractiveBase& parent,
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::TrainingSite&,
 	                   bool avoid_fastclick,

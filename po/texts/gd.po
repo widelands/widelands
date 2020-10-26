@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-09-11 11:58+0000\n"
-"PO-Revision-Date: 2020-07-23 07:47+0000\n"
+"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"PO-Revision-Date: 2020-10-12 05:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Eadar-theangadairean"
 
 #: ../../data/txts/AUTHORS.lua:28
 msgid "Widelands Development Team"
-msgstr "An sgioba leasachaidh Widelands"
+msgstr "Sgioba leasachaidh Widelands"
 
 #: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"
@@ -700,7 +700,7 @@ msgstr "1-9"
 #: ../../data/txts/tips/general_game.lua:43
 msgctxt "hotkey"
 msgid "Ctrl + (1-9)"
-msgstr ""
+msgstr "Ctrl + (1-9)"
 
 #: ../../data/txts/tips/general_game.lua:43
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -743,12 +743,12 @@ msgstr "Tha raon-obrach glè bheag aig cuid a thogalaichean, can an tuathanas. M
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + (+/-)"
-msgstr ""
+msgstr "Ctrl + (+/-)"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
 msgid "Ctrl + 0"
-msgstr ""
+msgstr "Ctrl + 0"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
@@ -763,7 +763,7 @@ msgstr "Cleachd iuchraichean “,” (cromag) agus “.” (puing-stad) airson l
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Ctrl + (Page Up/Page Down)"
-msgstr ""
+msgstr "Ctrl + (Page Up/Page Down)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
@@ -773,7 +773,7 @@ msgstr "Page Up/Page Down"
 #: ../../data/txts/tips/general_game.lua:79
 msgctxt "hotkey"
 msgid "Shift + (Page Up/Page Down)"
-msgstr ""
+msgstr "Shift + (Page Up/Page Down)"
 
 #: ../../data/txts/tips/general_game.lua:79
 msgid ""
@@ -789,7 +789,7 @@ msgstr "Iuchraichean saighde"
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + Iuchraichean saighde"
 
 #: ../../data/txts/tips/general_game.lua:83
 msgid ""
@@ -799,7 +799,7 @@ msgstr "Gluais sealladh a’ mhapa le %1%. Gluaisidh %2% an sealladh nas luaithe
 #: ../../data/txts/tips/general_game.lua:83
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + Iuchraichean saighde"
 
 #: ../../data/txts/tips/general_game.lua:87
 msgid ""

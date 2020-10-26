@@ -67,11 +67,15 @@ struct Statebox : public Panel {
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
+	void draw_overlay(RenderTarget&) override;
 
 	void handle_mousein(bool inside) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
+
+protected:
+	std::vector<Recti> focus_overlay_rects() override;
 
 private:
 	void layout() override;
@@ -94,7 +98,6 @@ private:
 	const Image* pic_graphics_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 	const std::string label_text_;
-	int32_t rendered_width_;
 };
 
 /**

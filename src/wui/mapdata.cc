@@ -58,6 +58,8 @@ MapData::MapData(const Widelands::Map& map,
 	description = map.get_description().empty() ? "" : _(map.get_description());
 	hint = map.get_hint().empty() ? "" : _(map.get_hint());
 	required_addons = map.required_addons();
+	theme = map.get_background_theme();
+	background = map.get_background();
 	nrplayers = map.get_nrplayers();
 	width = map.get_width();
 	height = map.get_height();

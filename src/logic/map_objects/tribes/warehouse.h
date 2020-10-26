@@ -39,7 +39,7 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~WarehouseDescr() override {
 	}
 
@@ -282,7 +282,7 @@ private:
 	std::vector<StockPolicy> worker_policy_;
 
 	// Workers who live here at the moment
-	using WorkerList = std::vector<Worker*>;
+	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
 	std::vector<Time> next_worker_without_cost_spawn_;

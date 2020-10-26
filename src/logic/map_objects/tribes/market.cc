@@ -22,17 +22,19 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/productionsite.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/player.h"
 
 namespace Widelands {
 
-MarketDescr::MarketDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::MARKET, table, tribes) {
+MarketDescr::MarketDescr(const std::string& init_descname,
+                         const LuaTable& table,
+                         Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::MARKET, table, descriptions) {
 
-	DescriptionIndex const woi = tribes.worker_index(table.get_string("carrier"));
-	if (!tribes.worker_exists(woi)) {
+	DescriptionIndex const woi = descriptions.worker_index(table.get_string("carrier"));
+	if (!descriptions.worker_exists(woi)) {
 		throw wexception("The tribe does not define the worker in 'carrier'.");
 	}
 	carrier_ = woi;
@@ -141,7 +143,7 @@ void Market::try_launching_batch(Game* game) {
 	}
 }
 
-bool Market::is_ready_to_launch_batch(const int trade_id) {
+bool Market::is_ready_to_launch_batch(const int trade_id) const {
 	const auto it = trade_orders_.find(trade_id);
 	if (it == trade_orders_.end()) {
 		return false;
@@ -182,7 +184,7 @@ void Market::launch_batch(const int trade_id, Game* game) {
 
 			// Give the carrier a ware.
 			WareInstance* ware =
-			   new WareInstance(item_pair.first, game->tribes().get_ware_descr(item_pair.first));
+			   new WareInstance(item_pair.first, game->descriptions().get_ware_descr(item_pair.first));
 			ware->init(*game);
 			carrier->set_carried_ware(*game, ware);
 
@@ -232,15 +234,16 @@ void Market::traded_ware_arrived(const int trade_id,
                                  Game* game) {
 	auto& trade_order = trade_orders_.at(trade_id);
 
-	WareInstance* ware = new WareInstance(ware_index, game->tribes().get_ware_descr(ware_index));
+	WareInstance* ware =
+	   new WareInstance(ware_index, game->descriptions().get_ware_descr(ware_index));
 	ware->init(*game);
 
 	// TODO(sirver,trading): This is a hack. We should have a worker that
 	// carriers stuff out. At the moment this assumes this market is barbarians
 	// (which is always correct right now), creates a carrier for each received
 	// ware to drop it off. The carrier then leaves the building and goes home.
-	const WorkerDescr& w_desc =
-	   *game->tribes().get_worker_descr(game->tribes().worker_index("barbarians_carrier"));
+	const WorkerDescr& w_desc = *game->descriptions().get_worker_descr(
+	   game->descriptions().worker_index("barbarians_carrier"));
 	auto& worker = w_desc.create(*game, get_owner(), this, position_);
 	worker.start_task_dropoff(*game, *ware);
 	++trade_order.received_traded_wares_in_this_batch;

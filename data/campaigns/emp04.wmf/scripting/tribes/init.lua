@@ -62,7 +62,7 @@
 --       },
 --       frisians = {
 --          buildings = {
---             "frisians_warehouse1"
+--             { name = "frisians_warehouse1" }
 --          }
 --       }
 --    }

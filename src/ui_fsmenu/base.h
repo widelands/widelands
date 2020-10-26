@@ -41,7 +41,6 @@ public:
 		kTutorial,
 		kContinueLastsave,
 		kReplay,
-		kEditor,
 		kOptions,
 		kAddOns,
 		kAbout,
@@ -49,6 +48,7 @@ public:
 
 		// Single player
 		kNewGame,
+		kRandomGame,
 		kCampaign,
 		kLoadGame,
 
@@ -56,6 +56,12 @@ public:
 		kMetaserver,
 		kOnlineGameSettings,
 		kLan,
+
+		// Editor
+		kEditorNew,
+		kEditorRandom,
+		kEditorContinue,
+		kEditorLoad,
 
 		// Launch game
 		kNormalGame,

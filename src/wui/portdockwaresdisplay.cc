@@ -21,6 +21,7 @@
 
 #include "economy/expedition_bootstrap.h"
 #include "economy/portdock.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
 #include "ui_basic/icon.h"
 #include "wui/inputqueuedisplay.h"
@@ -204,8 +205,10 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 	UI::Box& box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 
 	// Add the input queues.
-	int32_t capacity =
-	   igb.egbase().tribes().get_ship_descr(wh.get_owner()->tribe().ship())->get_default_capacity();
+	int32_t capacity = igb.egbase()
+	                      .descriptions()
+	                      .get_ship_descr(wh.get_owner()->tribe().ship())
+	                      ->get_default_capacity();
 	for (const InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues(false)) {
 		InputQueueDisplay* iqd = new InputQueueDisplay(&box, 0, 0, igb, wh, *wq, true);
 		box.add(iqd);
@@ -213,7 +216,7 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 	}
 	assert(capacity >= 0);
 
-	if (capacity > 0) {
+	if (capacity > 0 && wh.owner().additional_expedition_items_allowed()) {
 		const bool can_act = igb.can_act(wh.get_owner()->player_number());
 		box.add(new PortDockAdditionalItemsDisplay(
 		           igb.game(), &box, can_act, *wh.get_portdock(), capacity),

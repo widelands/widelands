@@ -124,6 +124,7 @@ struct TabPanel : public Panel {
 	boost::signals2::signal<void()> sigclicked;
 
 	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 
 protected:
 	void layout() override;

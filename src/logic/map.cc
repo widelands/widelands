@@ -34,12 +34,12 @@
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
@@ -51,6 +51,32 @@
 #include "notifications/notifications.h"
 
 namespace Widelands {
+
+const std::vector<Map::OldWorldInfo> Map::kOldWorldNames = {
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"summer", "greenland", []() { return _("Summer"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"winter", "winterland", []() { return _("Winter"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"wasteland", "blackland", []() { return _("Wasteland"); }},
+   /** TRANSLATORS: A world name for the random map generator in the editor */
+   {"desert", "desert", []() { return _("Desert"); }}};
+const Map::OldWorldInfo& Map::get_old_world_info_by_old_name(const std::string& old_name) {
+	for (const OldWorldInfo& owi : kOldWorldNames) {
+		if (owi.old_name == old_name) {
+			return owi;
+		}
+	}
+	NEVER_HERE();
+}
+const Map::OldWorldInfo& Map::get_old_world_info_by_new_name(const std::string& new_name) {
+	for (const OldWorldInfo& owi : kOldWorldNames) {
+		if (owi.name == new_name) {
+			return owi;
+		}
+	}
+	NEVER_HERE();
+}
 
 FieldData::FieldData(const Field& field)
    : height(field.get_height()),
@@ -85,7 +111,7 @@ bool FindCarnivores::accept(Bob* b) const {
 	return false;
 }
 bool FindCritter::accept(Bob* b) const {
-	return is_a(Critter, b);
+	return b && b->descr().type() == MapObjectType::CRITTER;
 }
 bool FindBobByName::accept(Bob* b) const {
 	assert(b);
@@ -204,7 +230,7 @@ void Map::recalc_whole_map(const EditorGameBase& egbase) {
 	recalculate_allows_seafaring();
 }
 
-void Map::recalc_default_resources(const World& world) {
+void Map::recalc_default_resources(const Descriptions& descriptions) {
 	for (int16_t y = 0; y < height_; ++y) {
 		for (int16_t x = 0; x < width_; ++x) {
 			FCoords f, f1;
@@ -219,14 +245,14 @@ void Map::recalc_default_resources(const World& world) {
 
 			//  this node
 			{
-				const TerrainDescription& terr = world.terrain_descr(f.field->terrain_r());
-				++m[terr.get_default_resource()];
-				amount += terr.get_default_resource_amount();
+				const TerrainDescription* terr = descriptions.get_terrain_descr(f.field->terrain_r());
+				++m[terr->get_default_resource()];
+				amount += terr->get_default_resource_amount();
 			}
 			{
-				const TerrainDescription& terd = world.terrain_descr(f.field->terrain_d());
-				++m[terd.get_default_resource()];
-				amount += terd.get_default_resource_amount();
+				const TerrainDescription* terd = descriptions.get_terrain_descr(f.field->terrain_d());
+				++m[terd->get_default_resource()];
+				amount += terd->get_default_resource_amount();
 			}
 
 			//  If one of the neighbours is unwalkable, count its resource
@@ -234,10 +260,10 @@ void Map::recalc_default_resources(const World& world) {
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
 			{
-				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
-				const DescriptionIndex resr = terr.get_default_resource();
-				const ResourceAmount default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
+				const DescriptionIndex resr = terr->get_default_resource();
+				const ResourceAmount default_amount = terr->get_default_resource_amount();
+				if ((terr->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -245,10 +271,10 @@ void Map::recalc_default_resources(const World& world) {
 				amount += default_amount;
 			}
 			{
-				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
-				const DescriptionIndex resd = terd.get_default_resource();
-				const ResourceAmount default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
+				const DescriptionIndex resd = terd->get_default_resource();
+				const ResourceAmount default_amount = terd->get_default_resource_amount();
+				if ((terd->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -259,10 +285,10 @@ void Map::recalc_default_resources(const World& world) {
 			//  top right neigbour
 			get_neighbour(f, WALK_NE, &f1);
 			{
-				const TerrainDescription& terd = world.terrain_descr(f1.field->terrain_d());
-				const DescriptionIndex resd = terd.get_default_resource();
-				const ResourceAmount default_amount = terd.get_default_resource_amount();
-				if ((terd.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terd = descriptions.get_terrain_descr(f1.field->terrain_d());
+				const DescriptionIndex resd = terd->get_default_resource();
+				const ResourceAmount default_amount = terd->get_default_resource_amount();
+				if ((terd->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resd] += 3;
 				} else {
 					++m[resd];
@@ -273,10 +299,10 @@ void Map::recalc_default_resources(const World& world) {
 			//  left neighbour
 			get_neighbour(f, WALK_W, &f1);
 			{
-				const TerrainDescription& terr = world.terrain_descr(f1.field->terrain_r());
-				const DescriptionIndex resr = terr.get_default_resource();
-				const ResourceAmount default_amount = terr.get_default_resource_amount();
-				if ((terr.get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
+				const TerrainDescription* terr = descriptions.get_terrain_descr(f1.field->terrain_r());
+				const DescriptionIndex resr = terr->get_default_resource();
+				const ResourceAmount default_amount = terr->get_default_resource_amount();
+				if ((terr->get_is() & TerrainDescription::Is::kUnwalkable) && default_amount > 0) {
 					m[resr] += 3;
 				} else {
 					++m[resr];
@@ -457,6 +483,7 @@ void Map::cleanup() {
 	tags_.clear();
 	hint_ = std::string();
 	background_ = std::string();
+	background_theme_ = std::string();
 
 	objectives_.clear();
 	port_spaces_.clear();
@@ -504,12 +531,6 @@ void Map::create_empty_map(const EditorGameBase& egbase,
 	filesystem_.reset(nullptr);
 }
 
-// Made this a separate function to reduce compiler warnings
-template <typename T = Field>
-static inline void clear_array(std::unique_ptr<T[]>* array, uint32_t size) {
-	memset(array->get(), 0, sizeof(T) * size);
-}
-
 void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.x);
 	assert(new_origin.x < width_);
@@ -522,8 +543,7 @@ void Map::set_origin(const Coords& new_origin) {
 		starting_pos_[--i].reorigin(new_origin, extent());
 	}
 
-	std::unique_ptr<Field[]> new_field_order(new Field[field_size]);
-	clear_array<>(&new_field_order, field_size);
+	std::unique_ptr<Field[]> new_field_order(new Field[field_size]());
 
 	// Rearrange The fields
 	// NOTE because of the triangle design, we have to take special care of cases
@@ -569,12 +589,12 @@ void Map::set_origin(const Coords& new_origin) {
 
 	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
-	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
+	for (const Coords& space : port_spaces_) {
 		Coords temp;
-		if (yisodd && ((it->y % 2) == 0)) {
-			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
+		if (yisodd && ((space.y % 2) == 0)) {
+			temp = Coords(space.x - new_origin.x - 1, space.y - new_origin.y);
 		} else {
-			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+			temp = Coords(space.x - new_origin.x, space.y - new_origin.y);
 		}
 		normalize_coords(temp);
 		new_port_spaces.insert(temp);
@@ -616,12 +636,9 @@ void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, co
 
 	// Generate the new fields. Does not modify the actual map yet.
 
-	std::unique_ptr<Field[]> new_fields(new Field[w * h]);
-	clear_array<>(&new_fields, w * h);
-	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]);
-	std::unique_ptr<bool[]> was_created(new bool[w * h]);
-	clear_array<bool>(&was_preserved, width_ * height_);
-	clear_array<bool>(&was_created, w * h);
+	std::unique_ptr<Field[]> new_fields(new Field[w * h]());
+	std::unique_ptr<bool[]> was_preserved(new bool[width_ * height_]());
+	std::unique_ptr<bool[]> was_created(new bool[w * h]());
 
 	for (int16_t x = 0; x < width_; ++x) {
 		for (int16_t y = 0; y < height_; ++y) {
@@ -788,8 +805,7 @@ void Map::set_to(EditorGameBase& egbase, ResizeHistory rh) {
 		const FieldData& fd = backup.front();
 		FCoords fc = get_fcoords(operator[](i - 1));
 		if (!fd.immovable.empty()) {
-			egbase.create_immovable_with_name(
-			   fc, fd.immovable, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr, nullptr);
+			egbase.create_immovable_with_name(fc, fd.immovable, nullptr, nullptr);
 		}
 		for (const std::string& bob : fd.bobs) {
 			egbase.create_critter(fc, bob);
@@ -811,8 +827,7 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 
 	const uint32_t field_size = w * h;
 
-	fields_.reset(new Field[field_size]);
-	clear_array<>(&fields_, field_size);
+	fields_.reset(new Field[field_size]());
 
 	pathfieldmgr_->set_size(field_size);
 }
@@ -974,6 +989,10 @@ void Map::set_background(const std::string& image_path) {
 	} else {
 		background_ = image_path;
 	}
+}
+
+void Map::set_background_theme(const std::string& bt) {
+	background_theme_ = bt;
 }
 
 void Map::add_tag(const std::string& tag) {
@@ -1393,7 +1412,7 @@ void Map::recalc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f) 
 NodeCaps
 Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool consider_mobs) const {
 	uint8_t caps = CAPS_NONE;
-	const World& world = egbase.world();
+	const Descriptions& descriptions = egbase.descriptions();
 
 	// 1a) Get all the neighbours to make life easier
 	const FCoords tr = tr_n(f);
@@ -1401,14 +1420,17 @@ Map::calc_nodecaps_pass1(const EditorGameBase& egbase, const FCoords& f, bool co
 	const FCoords l = l_n(f);
 
 	const TerrainDescription::Is tr_d_terrain_is =
-	   world.terrain_descr(tr.field->terrain_d()).get_is();
+	   descriptions.get_terrain_descr(tr.field->terrain_d())->get_is();
 	const TerrainDescription::Is tl_r_terrain_is =
-	   world.terrain_descr(tl.field->terrain_r()).get_is();
+	   descriptions.get_terrain_descr(tl.field->terrain_r())->get_is();
 	const TerrainDescription::Is tl_d_terrain_is =
-	   world.terrain_descr(tl.field->terrain_d()).get_is();
-	const TerrainDescription::Is l_r_terrain_is = world.terrain_descr(l.field->terrain_r()).get_is();
-	const TerrainDescription::Is f_d_terrain_is = world.terrain_descr(f.field->terrain_d()).get_is();
-	const TerrainDescription::Is f_r_terrain_is = world.terrain_descr(f.field->terrain_r()).get_is();
+	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is();
+	const TerrainDescription::Is l_r_terrain_is =
+	   descriptions.get_terrain_descr(l.field->terrain_r())->get_is();
+	const TerrainDescription::Is f_d_terrain_is =
+	   descriptions.get_terrain_descr(f.field->terrain_d())->get_is();
+	const TerrainDescription::Is f_r_terrain_is =
+	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is();
 
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unwalkable = 0;
@@ -1676,25 +1698,25 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 	const FCoords tl = tl_n(f);
 	const FCoords l = l_n(f);
 
-	const World& world = egbase.world();
-	const TerrainDescription::Is terrains[6] = {world.terrain_descr(tr.field->terrain_d()).get_is(),
-	                                            world.terrain_descr(tl.field->terrain_r()).get_is(),
-	                                            world.terrain_descr(tl.field->terrain_d()).get_is(),
-	                                            world.terrain_descr(l.field->terrain_r()).get_is(),
-	                                            world.terrain_descr(f.field->terrain_d()).get_is(),
-	                                            world.terrain_descr(f.field->terrain_r()).get_is()};
+	const Descriptions& descriptions = egbase.descriptions();
+	const TerrainDescription::Is terrains[6] = {
+	   descriptions.get_terrain_descr(tr.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(tl.field->terrain_r())->get_is(),
+	   descriptions.get_terrain_descr(tl.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(l.field->terrain_r())->get_is(),
+	   descriptions.get_terrain_descr(f.field->terrain_d())->get_is(),
+	   descriptions.get_terrain_descr(f.field->terrain_r())->get_is()};
 
 	uint32_t cnt_mineable = 0;
 	uint32_t cnt_walkable = 0;
-	for (uint32_t i = 0; i < 6; ++i) {
-		if (terrains[i] & TerrainDescription::Is::kWater ||
-		    terrains[i] & TerrainDescription::Is::kUnwalkable) {
+	for (const TerrainDescription::Is& is : terrains) {
+		if (is & TerrainDescription::Is::kWater || is & TerrainDescription::Is::kUnwalkable) {
 			return BaseImmovable::NONE;
 		}
-		if (terrains[i] & TerrainDescription::Is::kMineable) {
+		if (is & TerrainDescription::Is::kMineable) {
 			++cnt_mineable;
 		}
-		if (terrains[i] & TerrainDescription::Is::kWalkable) {
+		if (is & TerrainDescription::Is::kWalkable) {
 			++cnt_walkable;
 		}
 	}
@@ -1715,8 +1737,8 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		std::vector<ImmovableFound> objectlist;
 		find_immovables(egbase, Area<FCoords>(f, 1), &objectlist,
 		                FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-		for (uint32_t i = 0; i < objectlist.size(); ++i) {
-			const BaseImmovable* obj = objectlist[i].object;
+		for (const ImmovableFound& immfound : objectlist) {
+			const BaseImmovable* obj = immfound.object;
 			int objsize = obj->get_size();
 			if (objsize == BaseImmovable::NONE) {
 				continue;
@@ -2303,21 +2325,21 @@ int32_t Map::change_terrain(const EditorGameBase& egbase,
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(egbase.world(), c.node, c.node.field->get_resources())) {
+	if (!is_resource_valid(egbase.descriptions(), c.node, c.node.field->get_resources())) {
 		clear_resources(c.node);
 	}
 
 	// always check south-east vertex
 	Widelands::FCoords f_se(c.node);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
-	if (!is_resource_valid(egbase.world(), f_se, f_se.field->get_resources())) {
+	if (!is_resource_valid(egbase.descriptions(), f_se, f_se.field->get_resources())) {
 		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
 	Widelands::FCoords f_sw_e(c.node);
 	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
-	if (!is_resource_valid(egbase.world(), f_sw_e, f_sw_e.field->get_resources())) {
+	if (!is_resource_valid(egbase.descriptions(), f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
 
@@ -2330,7 +2352,7 @@ int32_t Map::change_terrain(const EditorGameBase& egbase,
 	return kPotentiallyAffectedNeighbors;
 }
 
-bool Map::is_resource_valid(const Widelands::World& world,
+bool Map::is_resource_valid(const Widelands::Descriptions& descriptions,
                             const Widelands::FCoords& c,
                             DescriptionIndex curres) const {
 	if (curres == Widelands::kNoResource) {
@@ -2342,30 +2364,30 @@ bool Map::is_resource_valid(const Widelands::World& world,
 	int32_t count = 0;
 
 	//  this field
-	count += world.terrain_descr(c.field->terrain_r()).is_resource_valid(curres);
-	count += world.terrain_descr(c.field->terrain_d()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(c.field->terrain_r())->is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(c.field->terrain_d())->is_resource_valid(curres);
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
 	get_neighbour(c, Widelands::WALK_NW, &f1);
-	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
-	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres);
 
 	//  top right neigbour
 	get_neighbour(c, Widelands::WALK_NE, &f1);
-	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_d())->is_resource_valid(curres);
 
 	//  left neighbour
 	get_neighbour(c, Widelands::WALK_W, &f1);
-	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
+	count += descriptions.get_terrain_descr(f1.field->terrain_r())->is_resource_valid(curres);
 
 	return count > 1;
 }
 
-void Map::ensure_resource_consistency(const World& world) {
+void Map::ensure_resource_consistency(const Descriptions& descriptions) {
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		auto fcords = get_fcoords(fields_[i]);
-		if (!is_resource_valid(world, fcords, fcords.field->get_resources())) {
+		if (!is_resource_valid(descriptions, fcords, fcords.field->get_resources())) {
 			clear_resources(fcords);
 		}
 	}
@@ -2563,8 +2585,8 @@ void Map::recalculate_allows_seafaring() {
 				FCoords neighbour;
 				get_neighbour(get_fcoords(current_position), i, &neighbour);
 				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
-					if (reachable_from_current_port.count(neighbour) == 0) {
-						reachable_from_current_port.insert(neighbour);
+					auto insert = reachable_from_current_port.insert(neighbour);
+					if (insert.second) {
 						positions_to_check.push(neighbour);
 					}
 				}

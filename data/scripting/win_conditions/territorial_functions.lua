@@ -14,6 +14,12 @@ local team_str = _"Team %i"
 local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 
+local wc_stats = "Territory percentage"
+-- This needs to be exactly like wc_stats, but localized, because wc_stats
+-- will be used as the key to fetch the translation in C++
+-- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
+local wc_stats_i18n = _"Territory percentage"
+
 -- Used by calculate_territory_points keep track of when the winner changes
 local winning_players = {}
 local winning_teams = {}
@@ -56,8 +62,7 @@ territory_points = {
 -- variables for the territorial winconditions statsistics hook
 fields = 0
 statistics = {
-      -- TRANSLATORS: subtext of the territorial statistics hook. Keep it short and consistent with the translation of the Win condition.
-      name = _"Territory percentage",
+      name = wc_stats,
       pic = "images/wui/stats/genstats_territorial_small.png",
       calculator = function(p)
          local pts = count_owned_valuable_fields_for_all_players(wl.Game().players)
@@ -138,7 +143,11 @@ function calculate_territory_points(fields, players)
       -- Still the same winner
       territory_points.remaining_time = territory_points.remaining_time - 1
    elseif winning_points == -1 then
-      -- No winner. This value is used to calculate whether to send a report to players.
+      -- No winner. We need to reset the information about last winner candidates
+      territory_points.last_winning_player = -1
+      territory_points.last_winning_player_name = -1
+      territory_points.last_winning_team = -1
+      -- This value is used to calculate whether to send a report to players.
       if territory_points.remaining_time == 1800 then
          territory_points.remaining_time = 1201
       elseif territory_points.remaining_time ~= 1201 then
@@ -262,10 +271,10 @@ function territory_game_over(fields, players, wc_descname, wc_version)
       for i=1,#territory_points.points do
          if territory_points.points[i][1] == team_str:format(pl.team) or territory_points.points[i][1] == pl.name then
             if territory_points.points[i][2] >= territory_points.points[1][2] then
-               pl:send_message(won_game_over.title, wonmsg .. territory_status(fields, "had"))
+               pl:send_to_inbox(won_game_over.title, wonmsg .. territory_status(fields, "had"))
                wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
             else
-               pl:send_message(lost_game_over.title, lostmsg .. territory_status(fields, "had"))
+               pl:send_to_inbox(lost_game_over.title, lostmsg .. territory_status(fields, "had"))
                wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=territory_points.all_player_points[pl.number]}))
             end
          end

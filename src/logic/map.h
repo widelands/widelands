@@ -49,7 +49,7 @@ class EditorGameBase;
 class MapLoader;
 struct MapGenerator;
 struct PathfieldManager;
-class World;
+class Descriptions;
 
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
@@ -138,7 +138,7 @@ private:
 
 // Helper struct to save certain elemental data of a field without an actual instance of Field
 struct FieldData {
-	FieldData(const Field& f);
+	explicit FieldData(const Field& f);
 
 	std::string immovable;
 	std::list<std::string> bobs;
@@ -186,6 +186,22 @@ public:
 	friend struct MapGenerator;
 	friend struct MapElementalPacket;
 	friend struct WidelandsMapLoader;
+
+	struct OldWorldInfo {
+		// What we call it now (used for the gameloading UI's themes
+		// and by the random map generator)
+		std::string name;
+
+		// What this is called in very old map files. Used ONLY to map
+		// the world names of old maps to the new theme definitions.
+		std::string old_name;
+
+		// Localized name
+		std::function<std::string()> descname;
+	};
+	static const std::vector<OldWorldInfo> kOldWorldNames;
+	static const OldWorldInfo& get_old_world_info_by_new_name(const std::string& old_name);
+	static const OldWorldInfo& get_old_world_info_by_old_name(const std::string& old_name);
 
 	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
@@ -245,7 +261,7 @@ public:
 	/***
 	 * Ensures that resources match their adjacent terrains.
 	 */
-	void ensure_resource_consistency(const World&);
+	void ensure_resource_consistency(const Descriptions& descriptions);
 
 	/***
 	 * Recalculates all default resources.
@@ -254,7 +270,7 @@ public:
 	 * the editor. Since there, default resources
 	 * are not shown.
 	 */
-	void recalc_default_resources(const World&);
+	void recalc_default_resources(const Descriptions& descriptions);
 
 	void set_nrplayers(PlayerNumber);
 
@@ -270,6 +286,7 @@ public:
 	void set_description(const std::string& description);
 	void set_hint(const std::string& hint);
 	void set_background(const std::string& image_path);
+	void set_background_theme(const std::string&);
 	void add_tag(const std::string& tag);
 	void delete_tag(const std::string& tag);
 	void set_scenario_types(ScenarioTypes t) {
@@ -301,6 +318,13 @@ public:
 	}
 	const std::string& get_background() const {
 		return background_;
+	}
+	const std::string& get_background_theme() const {
+		return background_theme_;
+	}
+
+	const MapVersion& version() const {
+		return map_version_;
 	}
 
 	using Tags = std::set<std::string>;
@@ -517,7 +541,7 @@ public:
 	 *
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
-	bool is_resource_valid(const Widelands::World&,
+	bool is_resource_valid(const Widelands::Descriptions& descriptions,
 	                       const Widelands::FCoords& c,
 	                       DescriptionIndex curres) const;
 
@@ -634,6 +658,7 @@ private:
 	std::string description_;
 	std::string hint_;
 	std::string background_;
+	std::string background_theme_;
 	Tags tags_;
 	std::vector<SuggestedTeamLineup> suggested_teams_;
 

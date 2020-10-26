@@ -25,10 +25,10 @@
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/world/map_gen.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -40,13 +40,13 @@ constexpr uint32_t kMaxElevationHalf = 0x80000000;
 
 namespace Widelands {
 
-MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase)
+MapGenerator::MapGenerator(Map& map, UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase)
    : map_(map), map_info_(mapInfo), egbase_(egbase) {
 	std::unique_ptr<LuaTable> map_gen_config(egbase.lua().run_script("world/map_generation.lua"));
 	map_gen_config->do_not_warn_about_unaccessed_keys();
 
 	map_gen_info_.reset(
-	   new MapGenInfo(*map_gen_config->get_table(mapInfo.world_name), egbase.world()));
+	   new MapGenInfo(*map_gen_config->get_table(mapInfo.world_name), egbase.descriptions()));
 }
 
 void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
@@ -99,12 +99,12 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	if (set_immovable && (num = bobCategory->num_immovables())) {
 		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
-		   MapObjectDescr::OwnerType::kWorld, nullptr /* owner */, nullptr /* former_building_descr */
+		   nullptr /* owner */, nullptr /* former_building_descr */
 		);
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
-		egbase_.create_critter(fc, egbase_.world().critter_index(bobCategory->get_critter(
+		egbase_.create_critter(fc, egbase_.descriptions().critter_index(bobCategory->get_critter(
 		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
 }
@@ -117,25 +117,26 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	// We'll take the "D" terrain at first...
 	// TODO(unknown): Check how the editor handles this...
 
-	const World& world = egbase_.world();
+	const Descriptions& descriptions = egbase_.descriptions();
 	DescriptionIndex const tix = fc.field->get_terrains().d;
-	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
+	const TerrainDescription* terrain_description = descriptions.get_terrain_descr(tix);
 
-	const auto set_resource_helper = [this, &world, &terrain_description, &fc](
+	const auto set_resource_helper = [this, &descriptions, terrain_description, &fc](
 	                                    const uint32_t random_value,
 	                                    const int valid_resource_index) {
-		const DescriptionIndex res_idx = terrain_description.get_valid_resource(valid_resource_index);
-		const ResourceAmount max_amount = world.get_resource(res_idx)->max_amount();
+		const DescriptionIndex res_idx =
+		   terrain_description->get_valid_resource(valid_resource_index);
+		const ResourceAmount max_amount = descriptions.get_resource_descr(res_idx)->max_amount();
 		ResourceAmount res_val =
 		   static_cast<ResourceAmount>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<ResourceAmount>(map_info_.resource_amount) + 1;
 		res_val /= 3;
-		if (map_.is_resource_valid(world, fc, res_idx)) {
+		if (map_.is_resource_valid(descriptions, fc, res_idx)) {
 			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};
 
-	switch (terrain_description.get_num_valid_resources()) {
+	switch (terrain_description->get_num_valid_resources()) {
 	case 1: {
 		uint32_t const rnd1 = random1[fc.x + map_info_.w * fc.y];
 		set_resource_helper(rnd1, 0);
@@ -589,7 +590,7 @@ DescriptionIndex MapGenerator::figure_out_terrain(uint32_t* const random2,
 	      ttp, rng.rand() % map_gen_info_->get_area(atp, usedLandIndex).get_num_terrains(ttp));
 }
 
-void MapGenerator::create_random_map() {
+bool MapGenerator::create_random_map() {
 	//  Init random number generator with map number
 
 	//  We will use our own random number generator here so we do not influence
@@ -723,6 +724,8 @@ void MapGenerator::create_random_map() {
 		}
 	}
 
+	bool result = true;
+
 	// Random placement of starting positions
 	assert(map_info_.numPlayers);
 	std::vector<PlayerNumber> pn(map_info_.numPlayers);
@@ -794,11 +797,11 @@ void MapGenerator::create_random_map() {
 		// Take the nearest ones
 		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
-		for (uint16_t i = 0; i < coords.size(); ++i) {
-			uint32_t test = map_.calc_distance(coords[i], playerstart);
+		for (const Coords& c : coords) {
+			uint32_t test = map_.calc_distance(c, playerstart);
 			if (test < min_distance) {
 				min_distance = test;
-				coords2 = coords[i];
+				coords2 = c;
 			}
 		}
 
@@ -807,6 +810,7 @@ void MapGenerator::create_random_map() {
 			log_warn("Could not find a suitable place for player %u\n", n);
 			// Let's hope that one is at least on dry ground.
 			coords2 = playerstart;
+			result = false;
 		}
 
 		// Remove coordinates if they are an illegal starting position.
@@ -822,11 +826,14 @@ void MapGenerator::create_random_map() {
 			log_warn("Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
 			         coords2.x, coords2.y);
 			coords2 = Coords::null();
+			result = false;
 		}
 
 		// Finally set the found starting position
 		map_.set_starting_pos(n, coords2);
 	}
+
+	return result;
 }
 
 /**
@@ -846,7 +853,7 @@ int UniqueRandomMapInfo::map_id_char_to_number(char ch) {
 	} else if ((ch == '1') || (ch == 'l') || (ch == 'L') || (ch == 'I') || (ch == 'i') ||
 	           (ch == 'J') || (ch == 'j')) {
 		return 23;
-	} else if (ch >= 'A' && ch < 'O') {
+	} else if (ch >= 'A' && ch <= 'Z') {
 		char res = ch - 'A';
 		if (ch > 'I') {
 			--res;
@@ -1130,8 +1137,8 @@ uint16_t Widelands::UniqueRandomMapInfo::generate_world_name_hash(const std::str
 	uint16_t hash = 0xa5a5;
 	int32_t posInHash = 0;
 
-	for (size_t idx = 0; idx < name.size(); idx++) {
-		hash ^= static_cast<uint8_t>(name[idx] & 0xff) << posInHash;
+	for (const char& ch : name) {
+		hash ^= static_cast<uint8_t>(ch & 0xff) << posInHash;
 		posInHash ^= 8;
 	}
 

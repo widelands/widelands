@@ -26,7 +26,6 @@
 #include "logic/addons.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
-#include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/player_area.h"
 #include "notifications/notifications.h"
@@ -46,7 +45,6 @@ namespace Widelands {
 class PlayersManager;
 struct ObjectManager;
 class Player;
-class Tribes;
 struct BuildingSettings;
 
 struct NoteFieldPossession {
@@ -89,6 +87,10 @@ public:
 		return objects_;
 	}
 
+	virtual bool is_game() const {
+		return false;
+	}
+
 	// logic handler func
 	virtual void think();
 
@@ -117,12 +119,8 @@ public:
 	/// Optionally sets a background image.
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     bool show_game_tips,
-	                                     const std::string& background = std::string());
-
-	/// If 'background' is not empty, change the background image for the loader UI.
-	/// If 'backgound' is empty, show game tips instead.
-	/// There must be a loader ui and no game tips.
-	void change_loader_ui_background(const std::string& background);
+	                                     const std::string& theme,
+	                                     const std::string& background);
 
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;
@@ -143,35 +141,33 @@ public:
 	Building& warp_building(const Coords&,
 	                        PlayerNumber,
 	                        DescriptionIndex,
-	                        FormerBuildings former_buildings = FormerBuildings());
+	                        const FormerBuildings& former_buildings = FormerBuildings());
 	Building& warp_constructionsite(const Coords&,
 	                                PlayerNumber,
 	                                DescriptionIndex,
 	                                bool loading = false,
-	                                FormerBuildings former_buildings = FormerBuildings(),
+	                                const FormerBuildings& former_buildings = FormerBuildings(),
 	                                const BuildingSettings* settings = nullptr,
 	                                const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                   std::map<DescriptionIndex, Quantity>());
 	Building& warp_dismantlesite(const Coords&,
 	                             PlayerNumber,
 	                             bool loading = false,
-	                             FormerBuildings former_buildings = FormerBuildings(),
+	                             const FormerBuildings& former_buildings = FormerBuildings(),
 	                             const std::map<DescriptionIndex, Quantity>& preserved_wares =
 	                                std::map<DescriptionIndex, Quantity>());
 	Bob& create_critter(const Coords&, DescriptionIndex bob_type_idx, Player* owner = nullptr);
 	Bob& create_critter(const Coords&, const std::string& name, Player* owner = nullptr);
-	Immovable&
-	create_immovable(const Coords&, DescriptionIndex idx, MapObjectDescr::OwnerType, Player* owner);
+	Immovable& create_immovable(const Coords&, DescriptionIndex idx, Player* owner);
 	Immovable& create_immovable_with_name(const Coords&,
 	                                      const std::string& name,
-	                                      MapObjectDescr::OwnerType,
 	                                      Player* owner,
 	                                      const BuildingDescr* former_building);
 	Bob& create_ship(const Coords&, const DescriptionIndex ship_type_idx, Player* owner = nullptr);
 	Bob& create_ship(const Coords&, const std::string& name, Player* owner = nullptr);
 	Bob& create_worker(const Coords&, DescriptionIndex worker, Player* owner);
 
-	uint32_t get_gametime() const {
+	const Time& get_gametime() const {
 		return gametime_;
 	}
 	// TODO(GunChleoc): Get rid.
@@ -194,7 +190,7 @@ public:
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	uint32_t& get_gametime_pointer() {
+	Time& get_gametime_pointer() {
 		return gametime_;
 	}
 	void set_ibase(InteractiveBase* const b);
@@ -210,17 +206,11 @@ public:
 
 	InteractiveGameBase* get_igbase();
 
-	// Returns the world.
-	const World& world() const;
+	// Returns the tribe and world descriptions.
+	const Descriptions& descriptions() const;
 
-	// Returns the world that can be modified. Prefer world() whenever possible.
-	World* mutable_world();
-
-	// Returns the tribes.
-	const Tribes& tribes() const;
-
-	// Returns the mutable tribes. Prefer tribes() whenever possible.
-	Tribes* mutable_tribes();
+	// Returns the mutable descriptions. Prefer descriptions() whenever possible.
+	Descriptions* mutable_descriptions();
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
@@ -273,19 +263,15 @@ private:
 
 	Immovable& do_create_immovable(const Coords& c,
 	                               DescriptionIndex const idx,
-	                               MapObjectDescr::OwnerType type,
 	                               Player* owner,
 	                               const BuildingDescr* former_building_descr);
 
-	uint32_t gametime_;
+	Time gametime_;
 	ObjectManager objects_;
 
 	std::unique_ptr<LuaInterface> lua_;
 	std::unique_ptr<PlayersManager> player_manager_;
-
-	std::unique_ptr<DescriptionManager> description_manager_;
-	std::unique_ptr<World> world_;
-	std::unique_ptr<Tribes> tribes_;
+	std::unique_ptr<Descriptions> descriptions_;
 	std::unique_ptr<InteractiveBase> ibase_;
 	Map map_;
 
