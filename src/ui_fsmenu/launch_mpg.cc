@@ -149,7 +149,7 @@ void FullscreenMenuLaunchMPG::layout() {
 	FullscreenMenuLaunchGame::layout();
 	// hardcode help button because it does not fit in any box, align it to the map button...
 	help_button_.set_size(standard_element_height_, standard_element_height_);
-	help_button_.set_pos(Vector2i(get_inner_w() - standard_element_height_, 0));
+	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
 	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
 

@@ -110,11 +110,12 @@ TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
                                                    std::string title,
                                                    double right_column_width_factor)
    : TwoColumnsMenu(fsmm, title, right_column_width_factor),
-     button_box_(&right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * padding, "button"),
+     button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * padding, "button"),
      back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
-	button_box_.add(&ok_, UI::Box::Resizing::kFullSize);
-	button_box_.add(&back_, UI::Box::Resizing::kFullSize);
+	
+	button_box_.add(&back_, UI::Box::Resizing::kFillSpace);
+	button_box_.add(&ok_, UI::Box::Resizing::kFillSpace);
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	back_.sigclicked.connect([this]() { clicked_back(); });
