@@ -40,11 +40,11 @@ namespace UI {
  * checkbox graphics.
  */
 Statebox::Statebox(Panel* const parent,
+                   PanelStyle s,
                    Vector2i const p,
                    const Image* pic,
                    const std::string& tooltip_text)
-   : Panel(parent, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
-     style_(PanelStyle::kWui),  // unused for pictorial stateboxes
+   : Panel(parent, s, p.x, p.y, kStateboxSize, kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
      pic_graphics_(pic),
      rendered_text_(nullptr) {
@@ -67,10 +67,9 @@ Statebox::Statebox(Panel* const parent,
                    const std::string& label_text,
                    const std::string& tooltip_text,
                    int width)
-   : Panel(parent, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
-     style_(s),
+   : Panel(parent, s, p.x, p.y, std::max(width, kStateboxSize), kStateboxSize, tooltip_text),
      flags_(Is_Enabled),
-     pic_graphics_(g_image_cache->get(get_checkbox_graphics(style_))),
+     pic_graphics_(g_image_cache->get(get_checkbox_graphics(panel_style_))),
      rendered_text_(nullptr),
      label_text_(label_text) {
 	set_flags(Has_Text, !label_text_.empty());
@@ -92,7 +91,7 @@ void Statebox::layout() {
 		rendered_text_ =
 		   label_text_.empty() ?
 		      nullptr :
-		      UI::g_fh->render(as_richtext_paragraph(label_text_, style_ == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel),
+		      UI::g_fh->render(as_richtext_paragraph(label_text_, panel_style_ == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel),
 		                       text_width(get_w(), pic_width));
 		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
@@ -117,7 +116,7 @@ void Statebox::set_enabled(bool const enabled) {
 	set_can_focus(enabled);
 
 	if (!(flags_ & Has_Custom_Picture)) {
-		pic_graphics_ = g_image_cache->get(enabled ? get_checkbox_graphics(style_) :
+		pic_graphics_ = g_image_cache->get(enabled ? get_checkbox_graphics(panel_style_) :
 		                                             "images/ui_basic/checkbox.png");
 		set_flags(Is_Highlighted, (flags_ & Is_Highlighted) && (flags_ & Is_Enabled));
 	}

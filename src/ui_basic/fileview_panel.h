@@ -48,7 +48,6 @@ private:
 	const int padding_;
 	int contents_width_;
 	int contents_height_;
-	const UI::PanelStyle panel_style_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

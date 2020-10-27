@@ -40,7 +40,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources"), increase_tool),
      increase_tool_(increase_tool),
-     box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_,
                 0,
                 0,
@@ -65,8 +65,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              _("Set amount to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
-     resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     cur_selection_(&box_, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
+     resources_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1),
+     cur_selection_(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -89,7 +89,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_resources(); ++i) {
 		const Widelands::ResourceDescription& resource = *descriptions.get_resource_descr(i);
-		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
+		radiogroup_.add_button(&resources_box_, UI::PanelStyle::kWui, Vector2i::zero(),
 		                       g_image_cache->get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);

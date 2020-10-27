@@ -36,7 +36,7 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
      player_(parent.player()) {
 	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
 
-	UI::Box* vbox = new UI::Box(tabs, 0, 0, UI::Box::Vertical);
+	UI::Box* vbox = new UI::Box(tabs, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
 	// To optimize the layout, we arrange Attack and Evade level gradients horizontally
 	// and Health and Defense level gradients vertically
@@ -49,9 +49,9 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 
 	for (unsigned health = 0; health <= max_health_; ++health) {
 		for (unsigned defense = 0; defense <= max_defense_; ++defense) {
-			UI::Box* hbox1 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-			UI::Box* hbox2 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-			UI::Box* hbox3 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+			UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box* hbox2 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box* hbox3 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			for (unsigned attack = 0; attack <= max_attack_; ++attack) {
 				for (unsigned evade = 0; evade <= max_evade_; ++evade) {
 					if (attack || evade) {
@@ -59,11 +59,11 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 						hbox2->add_space(8);
 						hbox3->add_inf_space();
 					}
-					UI::Icon* icon1 = new UI::Icon(hbox1, soldier.get_attack_level_pic(attack));
-					UI::Icon* icon2 = new UI::Icon(hbox1, soldier.get_defense_level_pic(defense));
-					UI::Icon* icon3 = new UI::Icon(hbox2, soldier.get_health_level_pic(health));
-					UI::Icon* icon4 = new UI::Icon(hbox2, soldier.get_evade_level_pic(evade));
-					UI::Textarea* txt = new UI::Textarea(hbox3, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
+					UI::Icon* icon1 = new UI::Icon(hbox1, UI::PanelStyle::kWui, soldier.get_attack_level_pic(attack));
+					UI::Icon* icon2 = new UI::Icon(hbox1, UI::PanelStyle::kWui, soldier.get_defense_level_pic(defense));
+					UI::Icon* icon3 = new UI::Icon(hbox2, UI::PanelStyle::kWui, soldier.get_health_level_pic(health));
+					UI::Icon* icon4 = new UI::Icon(hbox2, UI::PanelStyle::kWui, soldier.get_evade_level_pic(evade));
+					UI::Textarea* txt = new UI::Textarea(hbox3, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
 					txt->set_fixed_width(2 * icon1->get_w());
 					hbox1->add(icon1, UI::Box::Resizing::kAlign);
 					hbox1->add(icon2, UI::Box::Resizing::kAlign);
@@ -103,16 +103,16 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 
 	tabs->add("all", _("Overview"), vbox);
 
-	vbox = new UI::Box(tabs, 0, 0, UI::Box::Vertical);
+	vbox = new UI::Box(tabs, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
-	UI::Box* hbox1 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	UI::Box* hbox2 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	UI::Box* hbox3 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
-	UI::Box* hbox4 = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+	UI::Box* hbox1 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* hbox2 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* hbox3 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* hbox4 = new UI::Box(vbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	for (unsigned h = 0; h <= max_health_; ++h) {
-		UI::Icon* i = new UI::Icon(hbox1, soldier.get_health_level_pic(h));
-		UI::Textarea* txt = new UI::Textarea(hbox1, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
+		UI::Icon* i = new UI::Icon(hbox1, UI::PanelStyle::kWui, soldier.get_health_level_pic(h));
+		UI::Textarea* txt = new UI::Textarea(hbox1, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
 		hbox1->add(i, UI::Box::Resizing::kAlign);
 		hbox1->add(txt, UI::Box::Resizing::kAlign);
@@ -125,8 +125,8 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		txt->set_tooltip(tt);
 	}
 	for (unsigned a = 0; a <= max_attack_; ++a) {
-		UI::Icon* i = new UI::Icon(hbox2, soldier.get_attack_level_pic(a));
-		UI::Textarea* txt = new UI::Textarea(hbox2, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
+		UI::Icon* i = new UI::Icon(hbox2, UI::PanelStyle::kWui, soldier.get_attack_level_pic(a));
+		UI::Textarea* txt = new UI::Textarea(hbox2, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
 		hbox2->add(i, UI::Box::Resizing::kAlign);
 		hbox2->add(txt, UI::Box::Resizing::kAlign);
@@ -139,8 +139,8 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		txt->set_tooltip(tt);
 	}
 	for (unsigned d = 0; d <= max_defense_; ++d) {
-		UI::Icon* i = new UI::Icon(hbox3, soldier.get_defense_level_pic(d));
-		UI::Textarea* txt = new UI::Textarea(hbox3, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
+		UI::Icon* i = new UI::Icon(hbox3, UI::PanelStyle::kWui, soldier.get_defense_level_pic(d));
+		UI::Textarea* txt = new UI::Textarea(hbox3, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
 		hbox3->add(i, UI::Box::Resizing::kAlign);
 		hbox3->add(txt, UI::Box::Resizing::kAlign);
@@ -153,8 +153,8 @@ SoldierStatisticsMenu::SoldierStatisticsMenu(InteractivePlayer& parent,
 		txt->set_tooltip(tt);
 	}
 	for (unsigned e = 0; e <= max_evade_; ++e) {
-		UI::Icon* i = new UI::Icon(hbox4, soldier.get_evade_level_pic(e));
-		UI::Textarea* txt = new UI::Textarea(hbox4, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
+		UI::Icon* i = new UI::Icon(hbox4, UI::PanelStyle::kWui, soldier.get_evade_level_pic(e));
+		UI::Textarea* txt = new UI::Textarea(hbox4, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kLeft);
 		txt->set_fixed_width(8 * i->get_w());
 		hbox4->add(i, UI::Box::Resizing::kAlign);
 		hbox4->add(txt, UI::Box::Resizing::kAlign);

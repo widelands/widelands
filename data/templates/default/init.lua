@@ -607,7 +607,7 @@ return {
       },
       -- Game and Map info panels
       fsmenu_info_panel_heading = {
-         color = { 255, 255, 0 },
+         color = fs_font_color,
          face = fs_font_face,
          size = fs_font_size,
          bold = true,
@@ -621,7 +621,7 @@ return {
       },
       -- Internet lobby and launch game
       fsmenu_game_setup_headings = {
-         color = { 0, 255, 0 },
+         color = { 127, 255, 191 },
          face = fs_font_face,
          size = fs_font_size,
          bold = true,
@@ -670,21 +670,39 @@ return {
       -- Textarea default style, also used for sliders, checkboxes
       label_wui = default_wui_font,
       label_fs = default_fs_font,
-      tooltip = {
+      tooltip_wui = {
          color = wui_font_color,
          face = wui_font_face,
          size = 14,
          bold = false,
       },
-      tooltip_hotkey = {
+      tooltip_hotkey_wui = {
          color = {180, 180, 180},
          face = wui_font_face,
          size = 14,
          bold = false,
       },
-      tooltip_header = {
+      tooltip_header_wui = {
          color = wui_font_color,
          face = wui_font_face,
+         size = 16,
+         bold = true,
+      },
+      tooltip_fs = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = 14,
+         bold = false,
+      },
+      tooltip_hotkey_fs = {
+         color = {180, 180, 180},
+         face = fs_font_face,
+         size = 14,
+         bold = false,
+      },
+      tooltip_header_fs = {
+         color = fs_font_color,
+         face = fs_font_face,
          size = 16,
          bold = true,
       },

@@ -43,7 +43,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
    : FullscreenMenuLoadMapOrGame(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
-     header_box_(this, 0, 0, UI::Box::Vertical),
+     header_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 
      subtitle_(&header_box_,
                0,
@@ -56,7 +56,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
      scenario_difficulty_header_(
-        this,
+        this, UI::PanelStyle::kFsMenu,
         UI::FontStyle::kFsMenuInfoPanelHeading,
         0,
         0,

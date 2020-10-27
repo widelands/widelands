@@ -118,7 +118,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	std::fill(active_colors_.begin(), active_colors_.end(), 0);
 
 	//  First, we must decide about the size.
-	main_box_ = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
+	main_box_ = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, 5);
 	main_box_->set_border(kSpacing, kSpacing, kSpacing, kSpacing);
 	set_center_panel(main_box_);
 

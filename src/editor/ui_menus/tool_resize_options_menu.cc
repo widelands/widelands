@@ -34,7 +34,7 @@ EditorToolResizeOptionsMenu::EditorToolResizeOptionsMenu(EditorInteractive& pare
                                                          UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 260, 200, _("Resize"), resize_tool),
      resize_tool_(resize_tool),
-     box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      map_size_box_(box_,
                    "tool_resize_map",
                    4,

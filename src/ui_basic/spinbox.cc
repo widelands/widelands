@@ -87,7 +87,7 @@ SpinBox::SpinBox(Panel* const parent,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
-   : Panel(parent, x, y, std::max(w, unit_w), 0),
+   : Panel(parent, style, x, y, std::max(w, unit_w), 0),
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
@@ -106,13 +106,13 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
 	                                                        UI::ButtonStyle::kWuiSecondary;
 
-	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
+	box_ = new UI::Box(this, style, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
 	sbi_->label = new UI::MultilineTextarea(box_, 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
 	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
 
-	sbi_->text = new UI::Textarea(box_, style == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
+	sbi_->text = new UI::Textarea(box_, style, style == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
 
 	bool is_big = type_ == SpinBox::Type::kBig;
 

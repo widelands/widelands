@@ -144,7 +144,7 @@ protected:
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
-	const WindowStyleInfo& style_;
+	const WindowStyleInfo& window_style_;
 	const FontStyleInfo& title_style_;
 
 	bool is_minimal_;

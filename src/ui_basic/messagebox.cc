@@ -32,7 +32,7 @@
 namespace UI {
 
 WLMessageBox::WLMessageBox(Panel* const parent,
-                           WindowStyle s,
+                           const WindowStyle s,
                            const std::string& caption,
                            const std::string& text,
                            const MBoxType type,
@@ -80,7 +80,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	}
 
 	textarea_.reset(new MultilineTextarea(this, margin, margin, width - 2 * margin, height,
-	                                      UI::PanelStyle::kWui, text, align, scrollmode));
+	                                      s == WindowStyle::kWui ? UI::PanelStyle::kWui : UI::PanelStyle::kFsMenu, text, align, scrollmode));
 
 	// Now add the buttons
 	const int button_y = textarea_->get_y() + textarea_->get_h() + 2 * margin;
@@ -91,13 +91,13 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	                            type_ == MBoxType::kOk ?
 	                               (width - button_w) / 2 :
 	                               UI::g_fh->fontset()->is_rtl() ? left_button_x : right_button_x,
-	                            button_y, button_w, 0, UI::ButtonStyle::kWuiPrimary, _("OK")));
+	                            button_y, button_w, 0, s == WindowStyle::kWui ? UI::ButtonStyle::kWuiPrimary : UI::ButtonStyle::kFsMenuPrimary, _("OK")));
 	ok_button_->sigclicked.connect([this]() { clicked_ok(); });
 
 	if (type_ == MBoxType::kOkCancel) {
 		cancel_button_.reset(
 		   new Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ? right_button_x : left_button_x,
-		              button_y, button_w, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")));
+		              button_y, button_w, 0, s == WindowStyle::kWui ? UI::ButtonStyle::kWuiSecondary : UI::ButtonStyle::kFsMenuSecondary, _("Cancel")));
 		cancel_button_->sigclicked.connect([this]() { clicked_back(); });
 	}
 

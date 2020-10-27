@@ -40,7 +40,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      const Widelands::InputQueue& queue,
                                      bool no_capacity_buttons,
                                      bool no_priority_buttons)
-   : UI::Panel(parent, x, y, 0, 28),
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, 0, 28),
      interactive_base_(ib),
      building_(building),
      queue_(&queue),
@@ -91,7 +91,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
                                      Widelands::DescriptionIndex di,
                                      bool no_capacity_buttons,
                                      bool no_priority_buttons)
-   : UI::Panel(parent, x, y, 0, 28),
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, 0, 28),
      interactive_base_(ib),
      building_(building),
      queue_(nullptr),
@@ -280,13 +280,13 @@ void InputQueueDisplay::update_priority_buttons() {
 		priority_radiogroup_ = new UI::Radiogroup();
 
 		priority_radiogroup_->add_button(
-		   this, pos, g_image_cache->get(pic_priority_high), _("Highest priority"));
+		   this, UI::PanelStyle::kWui, pos, g_image_cache->get(pic_priority_high), _("Highest priority"));
 		pos.y += PriorityButtonSize;
 		priority_radiogroup_->add_button(
-		   this, pos, g_image_cache->get(pic_priority_normal), _("Normal priority"));
+		   this, UI::PanelStyle::kWui, pos, g_image_cache->get(pic_priority_normal), _("Normal priority"));
 		pos.y += PriorityButtonSize;
 		priority_radiogroup_->add_button(
-		   this, pos, g_image_cache->get(pic_priority_low), _("Lowest priority"));
+		   this, UI::PanelStyle::kWui, pos, g_image_cache->get(pic_priority_low), _("Lowest priority"));
 	}
 
 	int32_t priority = -1;
@@ -351,7 +351,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	   this, "decrease_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
 	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_left.png"),
 	   (tooltip_format %
-	    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+	    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	       .as_font_tag(
 	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
 	          _("Decrease the number of wares you want to be stored here"))
@@ -360,12 +360,12 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	    as_listitem(
 	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
 	          explanation */
-	       _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kTooltip)
+	       _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kWuiTooltip)
 
 	    % as_listitem(
 	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
 	            explanation */
-	         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
+	         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kWuiTooltip))
 	      .str());
 	decrease_max_fill_->sigclicked.connect([this]() { decrease_max_fill_clicked(); });
 
@@ -376,7 +376,7 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_right.png"),
 	   (tooltip_format
 
-	    % g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+	    % g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	         .as_font_tag(
 	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
 	            _("Increase the number of wares you want to be stored here"))
@@ -385,12 +385,12 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	    as_listitem(
 	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
 	          explanation */
-	       _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kTooltip)
+	       _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kWuiTooltip)
 
 	    % as_listitem(
 	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
 	            explanation */
-	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
+	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kWuiTooltip))
 	      .str());
 	increase_max_fill_->sigclicked.connect([this]() { increase_max_fill_clicked(); });
 

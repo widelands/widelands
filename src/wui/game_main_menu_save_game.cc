@@ -54,8 +54,8 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      // Values for alignment and size
      padding_(4),
 
-     main_box_(this, 0, 0, UI::Box::Vertical),
-     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     info_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
                    igbase().game(),
@@ -64,11 +64,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                    UI::WindowStyle::kWui,
                    false),
 
-     filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
-     filename_label_(&filename_box_, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
+     filename_box_(load_or_save_.table_box(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     filename_label_(&filename_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
      filename_editbox_(&filename_box_, 0, 0, 0, UI::PanelStyle::kWui),
 
-     buttons_box_(load_or_save_.game_details()->button_box(), 0, 0, UI::Box::Horizontal),
+     buttons_box_(load_or_save_.game_details()->button_box(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      cancel_(&buttons_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
      ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 

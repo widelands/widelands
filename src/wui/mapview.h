@@ -104,7 +104,7 @@ public:
 	        const int32_t y,
 	        const uint32_t w,
 	        const uint32_t h);
-	virtual ~MapView();
+	~MapView() override;
 
 	// Called whenever the view changed, also during automatic animations.
 	boost::signals2::signal<void()> changeview;
@@ -182,11 +182,11 @@ public:
 	                           RenderTarget* dst);
 
 	// Not overriden from UI::Panel, instead we expect to be passed the data through.
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
-	bool handle_key(bool down, SDL_Keysym code);
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void stop_dragging();

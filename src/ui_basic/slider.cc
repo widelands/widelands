@@ -65,7 +65,7 @@ Slider::Slider(Panel* const parent,
                const int32_t x_gap,
                const int32_t y_gap,
                const int32_t bar_size)
-   : Panel(parent, x, y, w, h, tooltip_text),
+   : Panel(parent, style == SliderStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui, x, y, w, h, tooltip_text),
      min_value_(min_value),
      max_value_(max_value),
      value_(value),
@@ -564,7 +564,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const std::string& tooltip_text,
                                const uint32_t cursor_size,
                                const bool enabled)
-   : Panel(parent, x, y, w, h, tooltip_text),
+   : Panel(parent, init_style == SliderStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui, x, y, w, h, tooltip_text),
      style(g_style_manager->slider_style(init_style)),
      slider(this,
             // here, we take into account the h_gap introduced by HorizontalSlider

@@ -82,13 +82,13 @@ int16_t FullscreenMenuMain::calc_desired_window_y(const UI::Window::WindowLayout
 }
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
      buth_(get_h() * 9 / 200),
      padding_(buth_ / 3),
-     vbox1_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     vbox2_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     vbox1_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     vbox2_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      singleplayer_(&vbox1_,
                    "singleplayer",
                    0,
@@ -127,7 +127,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
      options_(&vbox2_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
-     version_(this,
+     version_(this, UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelParagraph,
               0,
               0,
@@ -135,7 +135,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
               0,
               "",
               UI::Align::kCenter),
-     copyright_(this,
+     copyright_(this, UI::PanelStyle::kFsMenu,
                 UI::FontStyle::kFsMenuInfoPanelParagraph,
                 0,
                 0,
@@ -268,7 +268,7 @@ void FullscreenMenuMain::set_labels() {
 			singleplayer_.add(
 			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
 			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
-			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+			    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
 			       .as_font_tag(
 			          /* strip leading "save/" and trailing ".wgf" */
 			          filename_for_continue_playing_.substr(
@@ -330,7 +330,7 @@ void FullscreenMenuMain::set_labels() {
 			filename_for_continue_editing_ = last_edited->first.filename;
 			editor_.add(_("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			            (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
-			             g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+			             g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
 			                .as_font_tag(
 			                   /* strip leading "maps/My_Maps/" and trailing ".wgf" */
 			                   filename_for_continue_editing_.substr(
@@ -362,24 +362,24 @@ void FullscreenMenuMain::set_labels() {
 	multiplayer_.set_label(_("Multiplayer…"));
 	editor_.set_label(_("Editor…"));
 	singleplayer_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S"));
+	   as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S", UI::PanelStyle::kFsMenu));
 	multiplayer_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M"));
-	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
+	   as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M", UI::PanelStyle::kFsMenu));
+	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E", UI::PanelStyle::kFsMenu));
 
 	replay_.set_title(_("Watch Replay"));
-	replay_.set_tooltip(as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R"));
+	replay_.set_tooltip(as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R", UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
-	   as_tooltip_text_with_hotkey("This feature is still under development", "A"));
+	   as_tooltip_text_with_hotkey("This feature is still under development", "A", UI::PanelStyle::kFsMenu));
 	options_.set_title(_("Options"));
-	options_.set_tooltip(as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O"));
+	options_.set_tooltip(as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O", UI::PanelStyle::kFsMenu));
 	about_.set_title(_("About Widelands"));
 	about_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1")));
+	   as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1"), UI::PanelStyle::kFsMenu));
 	exit_.set_title(_("Exit Widelands"));
-	exit_.set_tooltip(as_tooltip_text_with_hotkey(_("Quit the game"), pgettext("hotkey", "Esc")));
+	exit_.set_tooltip(as_tooltip_text_with_hotkey(_("Quit the game"), pgettext("hotkey", "Esc"), UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */

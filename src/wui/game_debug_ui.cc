@@ -40,7 +40,7 @@
 MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
                                          const Widelands::EditorGameBase& egbase,
                                          Widelands::MapObject& obj)
-   : UI::Panel(&parent, 0, 0, 350, 200),
+   : UI::Panel(&parent, UI::PanelStyle::kWui, 0, 0, 350, 200),
      egbase_(egbase),
      object_(&obj),
      log_(this,

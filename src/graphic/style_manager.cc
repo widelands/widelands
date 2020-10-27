@@ -233,9 +233,12 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kDisabled, *element_table, "disabled");
 	add_font_style(UI::FontStyle::kFsMenuLabel, *element_table, "label_fs");
 	add_font_style(UI::FontStyle::kWuiLabel, *element_table, "label_wui");
-	add_font_style(UI::FontStyle::kTooltipHeader, *element_table, "tooltip_header");
-	add_font_style(UI::FontStyle::kTooltipHotkey, *element_table, "tooltip_hotkey");
-	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
+	add_font_style(UI::FontStyle::kWuiTooltipHeader, *element_table, "tooltip_header_wui");
+	add_font_style(UI::FontStyle::kWuiTooltipHotkey, *element_table, "tooltip_hotkey_wui");
+	add_font_style(UI::FontStyle::kWuiTooltip, *element_table, "tooltip_wui");
+	add_font_style(UI::FontStyle::kFsTooltipHeader, *element_table, "tooltip_header_fs");
+	add_font_style(UI::FontStyle::kFsTooltipHotkey, *element_table, "tooltip_hotkey_fs");
+	add_font_style(UI::FontStyle::kFsTooltip, *element_table, "tooltip_fs");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(
 	   UI::FontStyle::kWuiAttackBoxSliderLabel, *element_table, "wui_attack_box_slider_label");

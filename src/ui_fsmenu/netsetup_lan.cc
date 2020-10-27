@@ -29,19 +29,19 @@
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Begin LAN Game")),
      // Boxes
-     left_column_(this, 0, 0, UI::Box::Vertical),
-     right_column_(this, 0, 0, UI::Box::Vertical),
+     left_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     right_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 
      // Left column content
-     label_opengames_(&left_column_, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("List of games in your local network:")),
+     label_opengames_(&left_column_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("List of games in your local network:")),
      table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_playername_(&right_column_, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("Your nickname:")),
+     label_playername_(&right_column_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("Your nickname:")),
      playername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     label_hostname_(&right_column_, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("Host to connect:")),
+     label_hostname_(&right_column_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0, _("Host to connect:")),
 
-     host_box_(&right_column_, 0, 0, UI::Box::Horizontal),
+     host_box_(&right_column_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",

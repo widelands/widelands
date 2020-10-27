@@ -61,7 +61,7 @@ public:
 	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
-	~Request();
+	~Request() override;
 
 	PlayerImmovable& target() const {
 		return target_;

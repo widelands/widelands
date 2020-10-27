@@ -116,7 +116,7 @@ private:
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
                            Widelands::Building& building)
-   : Panel(&parent, 0, 0, 0, 0),
+   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
      egbase_(gegbase),
      soldier_control_(building.soldier_control()),
      last_animate_time_(0) {
@@ -377,13 +377,13 @@ private:
 };
 
 SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Building& building)
-   : UI::Box(&parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
 
      ibase_(ib),
      building_(building),
      font_style_(UI::FontStyle::kWuiLabel),
      soldierpanel_(*this, ib.egbase(), building),
-     infotext_(this, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {
+     infotext_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	add_space(2);
@@ -409,14 +409,14 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 	         ->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
-	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	bool can_act = ibase_.can_act(building_.owner().player_number());
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
-		soldier_preference_.add_button(buttons, Vector2i::zero(),
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i::zero(),
 		                               g_image_cache->get("images/wui/buildings/prefer_rookies.png"),
 		                               _("Prefer rookies"));
-		soldier_preference_.add_button(buttons, Vector2i(32, 0),
+		soldier_preference_.add_button(buttons, UI::PanelStyle::kWui, Vector2i(32, 0),
 		                               g_image_cache->get("images/wui/buildings/prefer_heroes.png"),
 		                               _("Prefer heroes"));
 		UI::Radiobutton* button = soldier_preference_.get_first_button();

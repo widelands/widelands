@@ -100,6 +100,7 @@ struct EditBoxImpl {
 
 EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : Panel(parent,
+           style,
            x,
            y,
            w,

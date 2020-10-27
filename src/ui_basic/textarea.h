@@ -55,6 +55,7 @@ struct Textarea : public Panel {
 public:
 	explicit Textarea(
 	   Panel* const parent,
+	   PanelStyle,
 	   FontStyle,
 	   int32_t x,
 	   int32_t y,
@@ -64,6 +65,7 @@ public:
 	   Align align = UI::Align::kLeft);
 	explicit Textarea(
 	   Panel* parent,
+	   PanelStyle,
 	   FontStyle,
 	   const std::string& text = std::string(),
 	   Align align = UI::Align::kLeft);
@@ -91,6 +93,7 @@ private:
 	enum class LayoutMode { AutoMove, Layouted };
 
 	Textarea(Panel* const parent,
+	         PanelStyle,
 	         FontStyle,
 	         int32_t x,
 	         int32_t y,
@@ -110,7 +113,7 @@ private:
 	std::string text_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	const FontStyleInfo* style_;
+	const FontStyleInfo* font_style_;
 	float font_scale_;
 	int fixed_width_;
 };
