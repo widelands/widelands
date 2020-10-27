@@ -99,7 +99,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	//	right_column_content_box_.add_space(5 * padding);
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
-                                    _("Return to campaign selection"));
+	                                 _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
 	table_.selected.connect([this](unsigned) { entry_selected(); });
