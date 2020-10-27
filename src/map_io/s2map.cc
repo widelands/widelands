@@ -251,7 +251,7 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 /// terrain.
 class TerrainConverter {
 public:
-	TerrainConverter(Widelands::Descriptions* descriptions);
+	explicit TerrainConverter(Widelands::Descriptions* descriptions);
 	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
