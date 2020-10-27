@@ -22,6 +22,8 @@
 #include <cassert>
 #include <memory>
 
+#include "base/log.h"
+#include "base/math.h"
 #include "base/vector.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -51,7 +53,14 @@ Animation::Animation(const LuaTable& table)
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 			sound_effect_ =
 			   SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
-			sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
+
+			try {
+				sound_priority_ = math::read_percent_to_int(sound_effects->get_string("priority"));
+			} catch (const std::exception&) {
+				// TODO(GunChleoc): Compatibility, remove try-catch after v1.0
+				log_warn("Animation sound effect priority '%.2f' without percent symbol is deprecated", sound_effects->get_double("priority"));
+				sound_priority_ = std::round(100 * sound_effects->get_double("priority"));
+			}
 
 			if (sound_effects->has_key<std::string>("allow_multiple")) {
 				sound_allow_multiple_ = sound_effects->get_bool("allow_multiple");
