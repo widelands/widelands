@@ -17,7 +17,7 @@ descriptions:new_worker_type {
    programs = {
       buildship = {
          "walk=object-or-coords",
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:amazons_shipconstruction unless object",
          "animate=work duration:500ms",
          "construct",
          "animate=work duration:5s",

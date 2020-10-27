@@ -1,3 +1,3 @@
 return {
-   amazons_shipconstruction = { "shipconstruction" },
+   amazons_shipconstruction = { "amazons_shipconstruction" },
 }
