@@ -140,6 +140,9 @@ jobs:
         build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
     - name: Testsuite
       run: |
+        /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
+        export SDL_VIDEODRIVER=x11
+        export DISPLAY=:99.0
         ./regression_test.py -b build/src/widelands
 
 
