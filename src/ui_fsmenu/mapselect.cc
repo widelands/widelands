@@ -34,25 +34,20 @@
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 // Fix align for table headings & entries and for wordwrap.
 
+constexpr int checkbox_space_ = 20;
+
 using Widelands::WidelandsMapLoader;
 
 FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
-   : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Map")),
-     checkbox_space_(20),
+   : TwoColumnsNavigationMenu(fsmm, _("Choose Map")),
      // Less padding for big fonts; space is tight.
-     checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
-     checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
-     map_details_(this,
-                  right_column_x_,
-                  tabley_,
-                  get_right_column_w(right_column_x_),
-                  tableh_ - buth_ - 4 * padding_,
-                  UI::PanelStyle::kFsMenu,
-                  egbase),
+     checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding),
+     checkboxes_(&header_box_, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding),
+     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     map_details_(&right_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, egbase),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
@@ -68,8 +63,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 		back_.set_tooltip(_("Return to the single player menu"));
 	}
 
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	table_.selected.connect([this](uint32_t) { entry_selected(); });
 	table_.double_clicked.connect([this](uint32_t) { clicked_ok(); });
 	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
@@ -159,22 +152,17 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	team_tags_dropdown_->selected.connect([this] { fill_table(); });
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
+	header_box_.add(&checkboxes_, UI::Box::Resizing::kExpandBoth);
+	header_box_.add_space(2 * padding);
+	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
+	right_column_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
+	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+
 	layout();
 }
 
-void FullscreenMenuMapSelect::layout() {
-	FullscreenMenuLoadMapOrGame::layout();
-	checkboxes_y_ = tabley_ - 3 * (team_tags_dropdown_->get_h() + checkbox_padding_) - 2 * padding_;
-	checkboxes_.set_pos(Vector2i(tablex_, checkboxes_y_));
-	checkboxes_.set_size(get_inner_w() - 2 * tablex_, tabley_ - checkboxes_y_);
-	table_.set_size(tablew_, tableh_);
-	table_.set_pos(Vector2i(tablex_, tabley_));
-	map_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
-	map_details_.set_pos(Vector2i(right_column_x_, tabley_));
-}
-
 void FullscreenMenuMapSelect::think() {
-	FullscreenMenuLoadMapOrGame::think();
+	TwoColumnsNavigationMenu::think();
 
 	if (ctrl_) {
 		ctrl_->think();

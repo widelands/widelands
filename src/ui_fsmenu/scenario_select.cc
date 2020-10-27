@@ -88,6 +88,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	}
 
 	header_box_.add(&subtitle_, UI::Box::Resizing::kExpandBoth);
+	header_box_.add_space(10 * padding);
 
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 

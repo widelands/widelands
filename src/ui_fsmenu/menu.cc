@@ -57,7 +57,7 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, std::string& title)
 	vertical_padding_box_.add_space(10 * padding);
 
 	main_box_.add(&header_box_, UI::Box::Resizing::kFullSize);
-	main_box_.add_space(10 * padding);
+	//	main_box_.add_space(10 * padding);
 }
 
 BaseMenu::~BaseMenu() {
@@ -97,7 +97,7 @@ void TwoColumnsMenu::layout() {
 	// than main_box... ;(
 
 	content_box_.set_max_size(
-	   main_box_.get_w(), main_box_.get_h() - 1 * 10 * padding - header_box_.get_h());
+	   main_box_.get_w(), main_box_.get_h() /*- 1 * 10 * padding */ - header_box_.get_h());
 
 	right_column_box_.set_desired_size(get_w() * right_column_width_factor_, 0);
 	printBox(main_box_);
