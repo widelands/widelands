@@ -46,7 +46,7 @@ SUPPRESSED_CHECKS = {
     '[hicpp-use-emplace]',
     '[hicpp-use-equals-default]',
     '[hicpp-vararg]',
-    '[llvm-header-guard]',  # We have or own header style with a codecheck rule on it
+    '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
     '[misc-macro-parentheses]',
     '[misc-redundant-expression]',
     '[misc-suspicious-string-compare]',
