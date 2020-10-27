@@ -2,6 +2,15 @@
 include "scripting/messages.lua"
 include "scripting/training_wheels/utils/ui.lua"
 
+function has_productive_building_type(player, buildingname)
+   for b_idx, building in ipairs(player:get_buildings(buildingname)) do
+      if building.productivity > 10 then
+         return true
+      end
+   end
+   return false
+end
+
 function select_warehouse_types(buildings)
    local result = {}
    for b_idx, building in ipairs(buildings) do

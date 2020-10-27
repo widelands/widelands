@@ -461,6 +461,11 @@ void Game::mark_training_wheel_as_solved(const std::string& objective) {
 	}
 	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
 }
+void Game::skip_training_wheel(const std::string& objective) {
+	if (training_wheels_ != nullptr) {
+		training_wheels_->skip(objective, training_wheels_wanted_);
+	}
+}
 
 /**
  * Called for every game after loading (from a savegame or just from a map

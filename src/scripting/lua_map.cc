@@ -5638,6 +5638,7 @@ const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
    PROP_RO(LuaProductionSite, valid_inputs),
    PROP_RO(LuaProductionSite, is_stopped),
+   PROP_RO(LuaProductionSite, productivity),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5685,6 +5686,18 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 int LuaProductionSite::get_is_stopped(lua_State* L) {
 	Widelands::ProductionSite* ps = get(L, get_egbase(L));
 	lua_pushboolean(L, ps->is_stopped());
+	return 1;
+}
+
+/* RST
+   .. attribute:: productivity
+
+      (RO) Returns the building's current productivity percentage
+
+      :returns: A number between 0 and 100.
+*/
+int LuaProductionSite::get_productivity(lua_State* L) {
+	lua_pushinteger(L, get(L, get_egbase(L))->get_actual_statistics());
 	return 1;
 }
 

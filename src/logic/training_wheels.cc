@@ -123,6 +123,16 @@ void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_
 	}
 }
 
+void TrainingWheels::skip(const std::string& objective, bool run_some_more) {
+	log_info("Skipping training wheel '%s'", objective.c_str());
+	solved_objectives_.insert(objective);
+	release_lock();
+	if (run_some_more) {
+		load_objectives();
+		run_objectives();
+	}
+}
+
 void TrainingWheels::write() {
 	try {  //  overwrite the old config file
 		profile_.write(kTrainingWheelsFile);

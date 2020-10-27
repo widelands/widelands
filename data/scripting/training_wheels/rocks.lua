@@ -25,6 +25,12 @@ run(function()
       return
    end
 
+   -- If the player already built it, teach this some other time
+   if has_productive_building_type(player, quarry.name) then
+      player:skip_training_wheel(training_wheel_name)
+      return
+   end
+
    -- Find a suitable buildable field close to the the starting field
    local conquering_field = wl.Game().map.player_slots[wl.Game().interactive_player].starting_field
    local conquering_immovable = conquering_field.immovable
@@ -94,6 +100,12 @@ run(function()
       -- All set - now wait for lock
       wait_for_lock(player, training_wheel_name)
       teach_placing_constructionsite = false
+   end
+
+   -- The player built it in the meantime. Teach this some other time.
+   if has_productive_building_type(player, quarry.name) then
+      player:skip_training_wheel(training_wheel_name)
+      return
    end
 
    -- Define our messages

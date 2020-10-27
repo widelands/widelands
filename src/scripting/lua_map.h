@@ -1202,6 +1202,8 @@ public:
 	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
 	int get_is_stopped(lua_State* L);
+	int get_productivity(lua_State* L);
+
 
 	/*
 	 * Lua Methods
