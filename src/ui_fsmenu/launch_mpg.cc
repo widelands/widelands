@@ -110,8 +110,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_),
-     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
+     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, standard_element_height_),
+     chat_(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
      egbase_(egbase) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
@@ -123,8 +123,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	}
 	ok_.set_enabled(settings_->can_launch());
 
-	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		if (s.action == NoteGameSettings::Action::kMap) {
@@ -151,10 +151,10 @@ void FullscreenMenuLaunchMPG::layout() {
 	help_button_.set_size(standard_element_height_, standard_element_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - standard_element_height_, 0));
 
-	mpsg_.set_max_size(0, individual_content_box.get_h() / 2);
+	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
 
-	mpsg_.force_new_dimensions(1.f, individual_content_box.get_w(),
-	                           individual_content_box.get_h() / 2, standard_element_height_);
+	mpsg_.force_new_dimensions(
+	   1.f, left_column_box_.get_w(), left_column_box_.get_h() / 2, standard_element_height_);
 
 	// set focus to chat input
 	chat_.focus_edit();

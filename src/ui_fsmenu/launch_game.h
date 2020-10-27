@@ -26,9 +26,9 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapdetailsbox.h"
+#include "ui_fsmenu/menu.h"
 
 class GameController;
 class LuaInterface;
@@ -36,19 +36,13 @@ class LuaInterface;
 /**
  * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public UI::Window {
+class FullscreenMenuLaunchGame : public TwoColumnsNavigationMenu {
 public:
 	FullscreenMenuLaunchGame(FullscreenMenuMain&,
 	                         GameSettingsProvider*,
 	                         GameController*,
 	                         bool preconfigured = false);
 	~FullscreenMenuLaunchGame() override;
-
-	bool handle_key(bool, SDL_Keysym) override;
-
-	WindowLayoutID window_layout_id() const override {
-		return UI::Window::WindowLayoutID::kFsMenuDefault;
-	}
 
 	GameSettingsProvider& settings() const {
 		assert(settings_);
@@ -95,19 +89,13 @@ protected:
 
 	uint32_t standard_element_width_;
 	uint32_t standard_element_height_;
-	uint32_t padding_;
-
-	UI::Box main_box_;
-	UI::Box content_box_;
-	UI::Box individual_content_box;
-	UI::Box map_box_;
 
 	MapDetailsBox map_details;
 	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
-	UI::Button ok_, back_;
+
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 
