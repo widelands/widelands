@@ -59,7 +59,8 @@ public:
 	void mark_as_solved(const std::string& objective, bool run_some_more);
 
 	/**
-	 * The same as mark_as_solved without recording it as solved in the config file, so that it will run again in a new game but stop blocking other training wheels that depend on it.
+	 * The same as mark_as_solved without recording it as solved in the config file, so that it will
+	 * run again in a new game but stop blocking other training wheels that depend on it.
 	 */
 	void skip(const std::string& objective, bool run_some_more);
 
