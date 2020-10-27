@@ -583,7 +583,7 @@ void EditBox::set_caret_pos(const size_t pos) {
 	check_caret();
 }
 
-size_t EditBox::get_caret_pos() const {
+size_t EditBox::caret_pos() const {
 	return m_->caret;
 }
 

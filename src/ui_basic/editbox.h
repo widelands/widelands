@@ -82,7 +82,7 @@ struct EditBox : public Panel {
 	}
 
 	void set_caret_pos(size_t pos);
-	size_t get_caret_pos() const;
+	size_t caret_pos() const;
 
 private:
 	std::unique_ptr<EditBoxImpl> m_;
