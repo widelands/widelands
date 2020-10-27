@@ -44,13 +44,13 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
      standard_element_width_(get_w() / 3),
      standard_element_height_(get_h() * 9 / 200),
 
-     map_details(&right_column_box_,
+     map_details(&right_column_content_box_,
                  preconfigured,
                  standard_element_width_,
                  standard_element_height_,
                  padding),
 
-     configure_game(&right_column_box_,
+     configure_game(&right_column_content_box_,
                     0,
                     0,
                     0,
@@ -58,7 +58,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                     _("Configure this game"),
                     UI::Align::kCenter,
                     g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     win_condition_dropdown_(&right_column_box_,
+     win_condition_dropdown_(&right_column_content_box_,
                              "dropdown_wincondition",
                              0,
                              0,
@@ -70,7 +70,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
      peaceful_(&right_column_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
-     custom_starting_positions_(&right_column_box_,
+     custom_starting_positions_(&right_column_content_box_,
                                 UI::PanelStyle::kFsMenu,
                                 Vector2i::zero(),
                                 _("Custom starting positions")),
@@ -98,19 +98,16 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 }
 
 void FullscreenMenuLaunchGame::add_all_widgets() {
-	right_column_box_.add(&map_details);
-	right_column_box_.add_space(5 * padding);
+	right_column_content_box_.add(&map_details);
+	right_column_content_box_.add_space(5 * padding);
 
-	right_column_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	right_column_box_.add_space(3 * padding);
-	right_column_box_.add(&win_condition_dropdown_);
-	right_column_box_.add_space(3 * padding);
-	right_column_box_.add(&peaceful_);
-	right_column_box_.add_space(3 * padding);
-	right_column_box_.add(&custom_starting_positions_);
-
-	right_column_box_.add_inf_space();
-	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	right_column_content_box_.add_space(3 * padding);
+	right_column_content_box_.add(&win_condition_dropdown_);
+	right_column_content_box_.add_space(3 * padding);
+	right_column_content_box_.add(&peaceful_);
+	right_column_content_box_.add_space(3 * padding);
+	right_column_content_box_.add(&custom_starting_positions_);
 }
 
 void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {

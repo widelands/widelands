@@ -47,7 +47,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
      checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding),
      checkboxes_(&header_box_, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     map_details_(&right_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, egbase),
+     map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, egbase),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
@@ -155,8 +155,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	header_box_.add(&checkboxes_, UI::Box::Resizing::kExpandBoth);
 	header_box_.add_space(2 * padding);
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
-	right_column_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
-	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
 	layout();
 }
