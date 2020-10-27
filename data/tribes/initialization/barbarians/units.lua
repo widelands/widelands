@@ -972,28 +972,28 @@ descriptions:new_tribe {
       {
          name = "deadtree7",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Ashes
+            -- TRANSLATORS: Helptext for an atlantean immovable: Dead Tree
             purpose = _("The remains of an old tree.")
          }
       },
       {
          name = "balsa_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "balsa_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
@@ -1007,56 +1007,56 @@ descriptions:new_tribe {
       {
          name = "ironwood_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Balsa Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Ironwood Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Ironwood Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "ironwood_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Ironwood Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_black_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_desert_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
       {
          name = "rubber_winter_amazons_old",
          helptexts = {
-            -- TRANSLATORS: Helptext for an atlantean immovable: Corn Field
+            -- TRANSLATORS: Helptext for an atlantean immovable: Rubber Tree
             purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
          }
       },
