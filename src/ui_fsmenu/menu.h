@@ -77,7 +77,7 @@ protected:
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
-	UI::Box button_box_;
+	UI::Box right_column_content_box_, button_box_;
 
 	UI::Button back_;
 	UI::Button ok_;

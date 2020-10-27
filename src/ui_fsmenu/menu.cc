@@ -76,7 +76,7 @@ TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
                                double right_column_width_factor)
    : BaseMenu(fsmm, title),
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, 0, "content"),
-     left_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "individual"),
+     left_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "left"),
      right_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0 /*padding*/, "right"),
      right_column_width_factor_(right_column_width_factor) {
 
@@ -110,10 +110,15 @@ TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
                                                    std::string title,
                                                    double right_column_width_factor)
    : TwoColumnsMenu(fsmm, title, right_column_width_factor),
+     right_column_content_box_(
+        &right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * padding, "right content"),
      button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * padding, "button"),
      back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
-	
+
+	right_column_box_.add(&right_column_content_box_, UI::Box::Resizing::kExpandBoth);
+	right_column_box_.add_space(5 * padding);
+	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 	button_box_.add(&back_, UI::Box::Resizing::kFillSpace);
 	button_box_.add(&ok_, UI::Box::Resizing::kFillSpace);
 
@@ -126,6 +131,7 @@ TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 
 void TwoColumnsNavigationMenu::layout() {
 	TwoColumnsMenu::layout();
+	printBox(right_column_content_box_);
 	printBox(button_box_);
 }
 

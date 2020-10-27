@@ -53,9 +53,9 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
                "",
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     scenario_details_(&right_column_box_),
+     scenario_details_(&right_column_content_box_),
      scenario_difficulty_header_(
-        &right_column_box_,
+        &right_column_content_box_,
         0,
         0,
         0,
@@ -63,7 +63,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
         is_tutorial_ ? "" : _("Difficulty"),
         UI::Align::kLeft,
         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
-     scenario_difficulty_(&right_column_box_,
+     scenario_difficulty_(&right_column_content_box_,
                           "scenario_difficulty",
                           0,
                           0,
@@ -92,16 +92,14 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
-	right_column_box_.add(&scenario_details_, UI::Box::Resizing::kExpandBoth);
-	right_column_box_.add_inf_space();
-	right_column_box_.add(
+	right_column_content_box_.add(&scenario_details_, UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add(
 	   &scenario_difficulty_header_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	right_column_box_.add(&scenario_difficulty_, UI::Box::Resizing::kFullSize);
-	right_column_box_.add_space(5 * padding);
-	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&scenario_difficulty_, UI::Box::Resizing::kFullSize);
+	//	right_column_content_box_.add_space(5 * padding);
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
-	                                 _("Return to campaign selection"));
+                                    _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
 	table_.selected.connect([this](unsigned) { entry_selected(); });

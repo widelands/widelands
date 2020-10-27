@@ -34,7 +34,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& f
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Campaign description
-     campaign_details_(&right_column_box_),
+     campaign_details_(&right_column_content_box_),
      campaigns_(campvis) {
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
@@ -43,9 +43,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& f
 	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
-	right_column_box_.add(&campaign_details_, UI::Box::Resizing::kExpandBoth);
-	right_column_box_.add_space(5 * padding);
-	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&campaign_details_, UI::Box::Resizing::kExpandBoth);
 	/** TRANSLATORS: Campaign difficulty table header */
 	table_.add_column(45, _("Diff."), _("Difficulty"));
 	table_.add_column(130, _("Tribe"), _("Tribe Name"));
