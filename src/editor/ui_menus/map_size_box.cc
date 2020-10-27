@@ -23,8 +23,8 @@
 #include "logic/map.h"
 
 MapSizeBox::MapSizeBox(
-   UI::Box& parent, const std::string& name, int spacing, int map_width, int map_height)
-   : UI::Box(&parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, spacing),
+   UI::Box& parent, UI::PanelStyle s, const std::string& name, int spacing, int map_width, int map_height)
+   : UI::Box(&parent, s, 0, 0, UI::Box::Horizontal, 0, 0, spacing),
      width_(this,
             name + "_map_width",
             0,
@@ -34,8 +34,8 @@ MapSizeBox::MapSizeBox(
             24,
             _("Width"),
             UI::DropdownType::kTextual,
-            UI::PanelStyle::kWui,
-            UI::ButtonStyle::kWuiSecondary),
+            s,
+            s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary : UI::ButtonStyle::kFsMenuSecondary),
      height_(this,
              name + "_map_height",
              0,
@@ -45,8 +45,8 @@ MapSizeBox::MapSizeBox(
              24,
              _("Height"),
              UI::DropdownType::kTextual,
-             UI::PanelStyle::kWui,
-             UI::ButtonStyle::kWuiSecondary) {
+             s,
+             s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary : UI::ButtonStyle::kFsMenuSecondary) {
 	for (const int32_t& i : Widelands::kMapDimensions) {
 		width_.add(std::to_string(i), i);
 		height_.add(std::to_string(i), i);

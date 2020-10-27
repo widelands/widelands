@@ -84,7 +84,8 @@ Window::Window(Panel* const parent,
                 y,
                 w + kVerticalBorderThickness * 2,
                 kTopBorderThickness + h + kBottomBorderThickness),
-     window_style_(g_style_manager->window_style(s)),
+     window_style_(s),
+     window_style_info_(g_style_manager->window_style(window_style_)),
      title_style_(g_style_manager->font_style(s == WindowStyle::kWui ? FontStyle::kWuiWindowTitle : FontStyle::kFsMenuWindowTitle)),
      is_minimal_(false),
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
@@ -104,7 +105,7 @@ Window::Window(Panel* const parent,
                               kWindowTitlebarButtonsSize,
                               kWindowTitlebarButtonsSize,
                               s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
-                              g_image_cache->get(window_style_.button_close()),
+                              g_image_cache->get(window_style_info_.button_close()),
                               _("Close"))),
      button_pin_(new Button(this,
                             "b_pin",
@@ -157,11 +158,11 @@ Window::Window(Panel* const parent,
 
 void Window::update_toolbar_buttons() {
 	button_minimize_->set_pic(
-	   g_image_cache->get(is_minimal_ ? window_style_.button_unminimize() : window_style_.button_minimize()));
+	   g_image_cache->get(is_minimal_ ? window_style_info_.button_unminimize() : window_style_info_.button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
 	                                                 Button::VisualState::kRaised);
-	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_style_.button_unpin() : window_style_.button_pin()));
+	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_style_info_.button_unpin() : window_style_info_.button_pin()));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
 	                                        Button::VisualState::kRaised);
@@ -312,7 +313,7 @@ void Window::center_to_parent() {
  */
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
-		dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), window_style_.background(),
+		dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), window_style_info_.background(),
 		         Vector2i::zero());
 	}
 }
@@ -330,20 +331,20 @@ void Window::draw_border(RenderTarget& dst) {
 
 	const RGBAColor& focus_color =
 	   (get_parent() && get_parent()->focused_child() == this) || is_modal() ?
-	      window_style_.window_border_focused() :
-	      window_style_.window_border_unfocused();
+	      window_style_info_.window_border_focused() :
+	      window_style_info_.window_border_unfocused();
 
 	{  //  Top border.
 		int32_t pos = kCornerWidth;
 
 		dst.blitrect  //  top left corner
-		   (Vector2i::zero(), window_style_.border_top(), Recti(Vector2i::zero(), pos, kTopBorderThickness));
+		   (Vector2i::zero(), window_style_info_.border_top(), Recti(Vector2i::zero(), pos, kTopBorderThickness));
 
 		//  top bar
 		static_assert(0 <= kCornerWidth, "assert(0 <= kCornerWidth) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
 			dst.blitrect(
-			   Vector2i(pos, 0), window_style_.border_top(),
+			   Vector2i(pos, 0), window_style_info_.border_top(),
 			   Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength, kTopBorderThickness));
 		}
 
@@ -351,7 +352,7 @@ void Window::draw_border(RenderTarget& dst) {
 		const int32_t width = hz_bar_end - pos + kCornerWidth;
 		assert(0 <= kHorizonalBorderTotalLength - width);
 		dst.blitrect(
-		   Vector2i(pos, 0), window_style_.border_top(),
+		   Vector2i(pos, 0), window_style_info_.border_top(),
 		   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kTopBorderThickness));
 
 		// Focus overlay
@@ -380,7 +381,7 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(
 			   0 <= kVerticalBorderThickness, "assert(0 <= kVerticalBorderThickness) failed.");
 			dst.blitrect  // left top thingy
-			   (Vector2i(0, kTopBorderThickness), window_style_.border_left(),
+			   (Vector2i(0, kTopBorderThickness), window_style_info_.border_left(),
 			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
 
 			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
@@ -389,7 +390,7 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(
 			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
-				dst.blitrect(Vector2i(0, pos), window_style_.border_left(),
+				dst.blitrect(Vector2i(0, pos), window_style_info_.border_left(),
 				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
 				                   kVerticalBorderMiddleLength));
 			}
@@ -397,7 +398,7 @@ void Window::draw_border(RenderTarget& dst) {
 			//  odd pixels of left bar and left bottom thingy
 			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
 			assert(0 <= kVerticalBorderTotalLength - height);
-			dst.blitrect(Vector2i(0, pos), window_style_.border_left(),
+			dst.blitrect(Vector2i(0, pos), window_style_info_.border_left(),
 			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
 			                   kVerticalBorderThickness, height));
 		}
@@ -406,7 +407,7 @@ void Window::draw_border(RenderTarget& dst) {
 			const int32_t right_border_x = get_w() - kVerticalBorderThickness;
 
 			dst.blitrect  // right top thingy
-			   (Vector2i(right_border_x, kTopBorderThickness), window_style_.border_right(),
+			   (Vector2i(right_border_x, kTopBorderThickness), window_style_info_.border_right(),
 			    Recti(Vector2i::zero(), kVerticalBorderThickness, kVerticalBorderThingyHeight));
 
 			int32_t pos = kTopBorderThickness + kVerticalBorderThingyHeight;
@@ -415,14 +416,14 @@ void Window::draw_border(RenderTarget& dst) {
 			static_assert(
 			   0 <= kVerticalBorderThingyHeight, "assert(0 <= kVerticalBorderThingyHeight) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += kVerticalBorderMiddleLength) {
-				dst.blitrect(Vector2i(right_border_x, pos), window_style_.border_right(),
+				dst.blitrect(Vector2i(right_border_x, pos), window_style_info_.border_right(),
 				             Recti(Vector2i(0, kVerticalBorderThingyHeight), kVerticalBorderThickness,
 				                   kVerticalBorderMiddleLength));
 			}
 
 			// odd pixels of right bar and right bottom thingy
 			const int32_t height = vt_bar_end - pos + kVerticalBorderThingyHeight;
-			dst.blitrect(Vector2i(right_border_x, pos), window_style_.border_right(),
+			dst.blitrect(Vector2i(right_border_x, pos), window_style_info_.border_right(),
 			             Recti(Vector2i(0, kVerticalBorderTotalLength - height),
 			                   kVerticalBorderThickness, height));
 		}
@@ -431,12 +432,12 @@ void Window::draw_border(RenderTarget& dst) {
 			int32_t pos = kCornerWidth;
 
 			dst.blitrect  //  bottom left corner
-			   (Vector2i(0, get_h() - kBottomBorderThickness), window_style_.border_bottom(),
+			   (Vector2i(0, get_h() - kBottomBorderThickness), window_style_info_.border_bottom(),
 			    Recti(Vector2i::zero(), pos, kBottomBorderThickness));
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
-				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness), window_style_.border_bottom(),
+				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness), window_style_info_.border_bottom(),
 				             Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength,
 				                   kBottomBorderThickness));
 			}
@@ -444,7 +445,7 @@ void Window::draw_border(RenderTarget& dst) {
 			// odd pixels of bottom bar and bottom right corner
 			const int32_t width = hz_bar_end - pos + kCornerWidth;
 			dst.blitrect(
-			   Vector2i(pos, get_h() - kBottomBorderThickness), window_style_.border_bottom(),
+			   Vector2i(pos, get_h() - kBottomBorderThickness), window_style_info_.border_bottom(),
 			   Recti(Vector2i(kHorizonalBorderTotalLength - width, 0), width, kBottomBorderThickness));
 		}
 

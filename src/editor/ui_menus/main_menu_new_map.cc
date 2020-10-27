@@ -42,7 +42,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, UI::PanelStyle::kWui, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
-     map_size_box_(box_,
+     map_size_box_(box_, UI::PanelStyle::kWui,
                    "new_map_menu",
                    4,
                    parent.egbase().map().get_width(),
