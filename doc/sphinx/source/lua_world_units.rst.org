@@ -21,22 +21,22 @@ This is needed for registering the objects before they are loaded. For a given `
 
    push_textdomain("world")
 
-   wl.World():new_immovable_type{
+   wl.Descriptions():new_immovable_type{
       name = "alder_summer_sapling",
       ...
    }
 
-   wl.World():new_immovable_type{
+   wl.Descriptions():new_immovable_type{
       name = "alder_summer_pole",
       ...
    }
 
-   wl.World():new_immovable_type{
+   wl.Descriptions():new_immovable_type{
       name = "alder_summer_mature",
       ...
    }
 
-   wl.World():new_immovable_type{
+   wl.Descriptions():new_immovable_type{
       name = "alder_summer_old",
       ...
    }

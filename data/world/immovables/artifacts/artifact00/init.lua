@@ -108,7 +108,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    wl.World():new_immovable_type{
+--    wl.Descriptions():new_immovable_type{
 --       name = "artifact00",
 --       descname = _ "Artifact",
 --       animation_directory = dirname
@@ -168,7 +168,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "artifact00",
    descname = _ "Artifact",
    size = "small",

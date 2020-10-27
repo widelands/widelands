@@ -11,7 +11,6 @@ include "scripting/help.lua"
 return {
    func = function(terrain_name)
       push_textdomain("widelands_editor")
-      local world = wl.World();
       local terrain = wl.Editor():get_terrain_description(terrain_name)
 
       local result = ""

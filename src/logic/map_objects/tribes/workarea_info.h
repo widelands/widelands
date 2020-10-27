@@ -23,6 +23,8 @@
 #include <map>
 #include <string>
 
+#include "logic/widelands_geometry.h"
+
 /** The WorkareaInfo stores radii and for each radius a set of strings.
  *
  * A Workarea is a "circle" around a building that this building affects

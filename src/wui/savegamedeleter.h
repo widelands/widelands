@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "graphic/styles/window_style.h"
 #include "ui_basic/panel.h"
 #include "wui/savegamedata.h"
 
@@ -11,7 +12,7 @@
 /// replays
 class SavegameDeleter {
 public:
-	SavegameDeleter(UI::Panel* parent);
+	SavegameDeleter(UI::Panel* parent, UI::WindowStyle);
 
 	/// attempt to delete the passed savegames. Returns true, if deletion was actually attempted
 	/// (because deletion can be aborted by user via "cancel" in confirmation window)
@@ -33,11 +34,12 @@ private:
 	                                                             size_t no_failed) const;
 
 	UI::Panel* parent_;
+	UI::WindowStyle style_;
 };
 
 class ReplayDeleter : public SavegameDeleter {
 public:
-	ReplayDeleter(UI::Panel* parent);
+	ReplayDeleter(UI::Panel* parent, UI::WindowStyle);
 
 private:
 	const std::string

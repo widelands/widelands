@@ -1,4 +1,4 @@
-tribes = wl.Tribes()
+descriptions = wl.Descriptions()
 
 -- ===================================
 --    Campaign Specific Data

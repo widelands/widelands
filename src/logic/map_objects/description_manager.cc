@@ -22,7 +22,6 @@
 #include <cassert>
 #include <memory>
 
-#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
@@ -32,6 +31,7 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 
 	map_objecttype_subscriber_ = Notifications::subscribe<NoteMapObjectDescription>(
 	   [this](const NoteMapObjectDescription& note) {
+		   assert(!registered_descriptions_.empty());
 		   switch (note.type) {
 		   case NoteMapObjectDescription::LoadType::kObject:
 			   load_description_on_demand(note.name);
@@ -209,8 +209,7 @@ void DescriptionManager::load_description_on_demand(const std::string& descripti
 			load_description(description_name);
 		}
 	} else {
-		// TODO(GunChleoc): throw GameDataError once we use this for the world too
-		log_err("Unknown map object type '%s'\n", description_name.c_str());
+		throw GameDataError("Unknown map object type '%s'", description_name.c_str());
 	}
 }
 

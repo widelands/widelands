@@ -28,7 +28,7 @@
 #include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -418,8 +418,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 		fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	}
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(egbase.get_gametime().get(), egbase.world(), fields_to_draw_, scale, workarea,
-	               grid, player, dst);
+	::draw_terrain(egbase.get_gametime().get(), egbase.descriptions(), fields_to_draw_, scale,
+	               workarea, grid, player, dst);
 	return &fields_to_draw_;
 }
 

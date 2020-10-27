@@ -27,8 +27,8 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
@@ -37,7 +37,8 @@ inline EditorInteractive& MainMenuNewMap::eia() {
 }
 
 MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
-   : UI::UniqueWindow(&parent, "new_map_menu", &registry, 360, 150, _("New Map")),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "new_map_menu", &registry, 360, 150, _("New Map")),
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
@@ -121,7 +122,7 @@ void MainMenuNewMap::clicked_cancel() {
 void MainMenuNewMap::fill_list() {
 	list_.clear();
 	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
-	   eia().egbase().world().terrains();
+	   eia().egbase().descriptions().terrains();
 
 	for (Widelands::DescriptionIndex index = 0; index < terrains.size(); ++index) {
 		const Widelands::TerrainDescription& terrain = terrains.get(index);
