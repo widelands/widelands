@@ -1291,7 +1291,7 @@ descriptions:new_tribe {
          name = "amazons_hunter_gatherers_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Hunter-Gatherer's Hut
-            purpose = pgettext("builamazons_buildingding", "Hunts animals to produce meat. Catches fish in the waters."),
+            purpose = pgettext("amazons_building", "Hunts animals to produce meat. Catches fish in the waters."),
             -- TRANSLATORS: Note helptext for an amazon production site: Hunter-Gatherer's Hut
             note = pgettext("amazons_building", "The hunter-gatherer’s house needs animals or fish to hunt or catch within the work area."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Fisher's House, part 2
@@ -1335,7 +1335,7 @@ descriptions:new_tribe {
          name = "amazons_scouts_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Scout's Hut
-            purpose = pgettext("building", "Explores unknown territory."),
+            purpose = pgettext("amazons_building", "Explores unknown territory."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Scout's Hut
             performance = pgettext("amazons_building", "The scout pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
          }
@@ -1408,7 +1408,7 @@ descriptions:new_tribe {
          name = "amazons_food_preserver",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Food Preserver
-            purpose = pgettext("buiamazons_buildinglding", "Prepares rations to feed the scouts and miners."),
+            purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and miners."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Food Preserver
             performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 17):bformat(17))
          }

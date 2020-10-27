@@ -11,7 +11,7 @@ local r = {
    author = _"The Widelands Development Team",
    -- TRANSLATORS: This is a tribe name
    descname = _"Amazons (experimental)",
-   tooltip = _"The people of the amazonian jungle. Still in experimental state.",
+   tooltip = _"The people of the amazonian jungle. This tribe is still under development.",
    icon = dirname .. "images/icon.png",
    script = dirname .. "units.lua",
 
