@@ -42,19 +42,26 @@ LoginBox::LoginBox(FullscreenMenuMain& parent, UI::UniqueWindow::Registry& r)
      vbox1_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      vbox2_(&hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      b_login_(&buttons_box_, "login", 0, 0, 200, 28, UI::ButtonStyle::kFsMenuPrimary, _("Save")),
-     b_cancel_(&buttons_box_, "cancel", 0, 0, 200, 28, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
-eb_nickname_(&vbox2_, 0, 0, 330, UI::PanelStyle::kFsMenu),
-eb_password_(&vbox2_, 0, 0, 330, UI::PanelStyle::kFsMenu),
-cb_register_(&main_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0), _("Log in to a registered account.")),
-ta_nickname_(&vbox1_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, _("Nickname:")),
-ta_password_(&vbox1_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, _("Password:")),
-register_account_(&main_box_, 0, 0, 0, 180, UI::PanelStyle::kFsMenu,
-	   (boost::format(_("In order to use a registered "
-	                    "account, you need an account on the Widelands website. "
-	                    "Please log in at %s and set an online "
-	                    "gaming password on your profile page.")) %
-	    "\n\nhttps://widelands.org/accounts/register/\n\n")
-	      .str()) {
+     b_cancel_(
+        &buttons_box_, "cancel", 0, 0, 200, 28, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+     eb_nickname_(&vbox2_, 0, 0, 330, UI::PanelStyle::kFsMenu),
+     eb_password_(&vbox2_, 0, 0, 330, UI::PanelStyle::kFsMenu),
+     cb_register_(
+        &main_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0), _("Log in to a registered account.")),
+     ta_nickname_(&vbox1_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, _("Nickname:")),
+     ta_password_(&vbox1_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, _("Password:")),
+     register_account_(&main_box_,
+                       0,
+                       0,
+                       0,
+                       180,
+                       UI::PanelStyle::kFsMenu,
+                       (boost::format(_("In order to use a registered "
+                                        "account, you need an account on the Widelands website. "
+                                        "Please log in at %s and set an online "
+                                        "gaming password on your profile page.")) %
+                        "\n\nhttps://widelands.org/accounts/register/\n\n")
+                          .str()) {
 	vbox1_.add_space(kMargin);
 	vbox1_.add(&ta_nickname_, UI::Box::Resizing::kExpandBoth);
 	vbox1_.add_space(kMargin);
@@ -74,9 +81,11 @@ register_account_(&main_box_, 0, 0, 0, 180, UI::PanelStyle::kFsMenu,
 	hbox_.add_space(kMargin);
 
 	buttons_box_.add_space(kMargin);
-	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &b_login_ : &b_cancel_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add(
+	   UI::g_fh->fontset()->is_rtl() ? &b_login_ : &b_cancel_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kMargin);
-	buttons_box_.add(UI::g_fh->fontset()->is_rtl() ? &b_cancel_ : &b_login_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add(
+	   UI::g_fh->fontset()->is_rtl() ? &b_cancel_ : &b_login_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kMargin);
 
 	main_box_.add_space(kMargin);

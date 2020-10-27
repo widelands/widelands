@@ -60,7 +60,7 @@ struct WordWrap {
 	          uint32_t selection_start = 0,
 	          uint32_t selection_end = 0,
 	          uint32_t scrollbar_position = 0,
-              const std::string& caret_image_path = std::string());
+	          const std::string& caret_image_path = std::string());
 
 	void calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const;
 	uint32_t nrlines() const {

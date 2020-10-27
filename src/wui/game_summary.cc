@@ -52,14 +52,16 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->fit_height(game_.player_manager()->get_players_end_status().size());
 
 	info_box_ = new UI::Box(hbox1, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0);
-	info_area_label_ = new UI::Textarea(info_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Player Info:"));
+	info_area_label_ = new UI::Textarea(
+	   info_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Player Info:"));
 	info_area_ = new UI::MultilineTextarea(
 	   info_box_, 0, 0, 130,
 	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - kPadding),
 	   UI::PanelStyle::kWui, "");
 
-	widelands_icon_ = new UI::Icon(hbox1, UI::PanelStyle::kWui, 0, 0, info_area_->get_w(), info_area_->get_h(),
-	                               g_image_cache->get("images/logos/wl-ico-128.png"));
+	widelands_icon_ =
+	   new UI::Icon(hbox1, UI::PanelStyle::kWui, 0, 0, info_area_->get_w(), info_area_->get_h(),
+	                g_image_cache->get("images/logos/wl-ico-128.png"));
 
 	info_box_->add(info_area_label_);
 	info_box_->add(info_area_, UI::Box::Resizing::kFullSize);
@@ -82,10 +84,12 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 	bottom_box->add_space(kPadding);
 
-	gametime_label_ = new UI::Textarea(bottom_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Elapsed time:"));
+	gametime_label_ = new UI::Textarea(
+	   bottom_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Elapsed time:"));
 	bottom_box->add(gametime_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	bottom_box->add_space(kPadding);
-	gametime_value_ = new UI::Textarea(bottom_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, gametimestring(game_.get_gametime().get()));
+	gametime_value_ = new UI::Textarea(bottom_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+	                                   gametimestring(game_.get_gametime().get()));
 	bottom_box->add(gametime_value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	bottom_box->add_inf_space();

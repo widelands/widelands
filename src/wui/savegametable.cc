@@ -11,8 +11,10 @@
 
 SavegameTable::SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave)
    : UI::Table<uintptr_t>(parent, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
-     tooltip_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip : UI::FontStyle::kFsTooltip),
-     tooltip_header_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHeader : UI::FontStyle::kFsTooltipHeader),
+     tooltip_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
+                                                    UI::FontStyle::kFsTooltip),
+     tooltip_header_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHeader :
+                                                           UI::FontStyle::kFsTooltipHeader),
      localize_autosave_(localize_autosave) {
 }
 

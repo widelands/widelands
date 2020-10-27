@@ -48,7 +48,11 @@ public:
 	             const std::string& title,
 	             SoundType type,
 	             FxId representative_fx = kNoSoundEffect)
-	   : UI::Box(parent, style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+	   : UI::Box(parent,
+	             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+	             0,
+	             0,
+	             UI::Box::Horizontal),
 	     volume_(this,
 	             0,
 	             0,
@@ -121,7 +125,11 @@ constexpr int kSpacing = 12;
 }  // namespace
 
 SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
-   : UI::Box(&parent, style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
+   : UI::Box(&parent,
+             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+             0,
+             0,
+             UI::Box::Vertical) {
 
 	set_inner_spacing(kSpacing);
 

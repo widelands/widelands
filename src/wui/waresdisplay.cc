@@ -55,7 +55,15 @@ AbstractWaresDisplay::AbstractWaresDisplay(
 
      type_(type),
      indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
-     curware_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, get_inner_h() - 25, get_inner_w(), 20, "", UI::Align::kCenter),
+     curware_(this,
+              UI::PanelStyle::kWui,
+              UI::FontStyle::kWuiLabel,
+              0,
+              get_inner_h() - 25,
+              get_inner_w(),
+              20,
+              "",
+              UI::Align::kCenter),
 
      selectable_(selectable),
      horizontal_(horizontal),

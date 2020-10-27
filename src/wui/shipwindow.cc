@@ -64,11 +64,14 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Expedition buttons
-	UI::Box* exp_top = new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_top =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_top, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	UI::Box* exp_mid = new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_mid =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_mid, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	UI::Box* exp_bot = new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_bot =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	btn_scout_[Widelands::WALK_NW - 1] =

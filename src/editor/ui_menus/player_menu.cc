@@ -73,7 +73,8 @@ public:
 	        /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except
 	           for testing purposes. Are you sure that you want more than 8 players?' */
 	        _("Do not remind me again")),
-	     button_box_(&box_, UI::PanelStyle::kWui, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
+	     button_box_(
+	        &box_, UI::PanelStyle::kWui, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
 	     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 	     cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {
 

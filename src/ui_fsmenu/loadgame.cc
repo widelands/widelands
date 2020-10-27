@@ -66,7 +66,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 	info_box_.add_space(right_column_margin_);
 	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kFullSize);
 
-	button_spacer_ = new UI::Panel(load_or_save_.game_details()->button_box(), UI::PanelStyle::kFsMenu, 0, 0, 0, 0);
+	button_spacer_ = new UI::Panel(
+	   load_or_save_.game_details()->button_box(), UI::PanelStyle::kFsMenu, 0, 0, 0, 0);
 	load_or_save_.game_details()->button_box()->add(button_spacer_);
 
 	layout();

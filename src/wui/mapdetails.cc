@@ -67,7 +67,8 @@ MapDetails::MapDetails(Panel* parent,
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
-     suggested_teams_box_(new UI::SuggestedTeamsBox(this, style, 0, 0, UI::Box::Vertical, padding_, 0)),
+     suggested_teams_box_(
+        new UI::SuggestedTeamsBox(this, style, 0, 0, UI::Box::Vertical, padding_, 0)),
      last_map_(""),
      egbase_(egbase) {
 

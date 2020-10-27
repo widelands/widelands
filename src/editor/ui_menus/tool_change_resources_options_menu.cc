@@ -66,7 +66,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
      resources_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     cur_selection_(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
+     cur_selection_(
+        &box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/

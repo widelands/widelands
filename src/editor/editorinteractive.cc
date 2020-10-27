@@ -81,7 +81,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                10,
                34U,
                /** TRANSLATORS: Title for the main menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc"), UI::PanelStyle::kWui),
+               as_tooltip_text_with_hotkey(
+                  _("Main Menu"), pgettext("hotkey", "Esc"), UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),

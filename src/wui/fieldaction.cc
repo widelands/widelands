@@ -77,7 +77,8 @@ private:
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
-   : UI::IconGrid(parent, UI::PanelStyle::kWui, x, y, kBuildGridCellSize, kBuildGridCellSize, cols), plr_(plr) {
+   : UI::IconGrid(parent, UI::PanelStyle::kWui, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
+     plr_(plr) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
 	mousein.connect([this](Widelands::DescriptionIndex i) { mousein_slot(i); });
@@ -381,13 +382,15 @@ void FieldActionWindow::add_buttons_auto() {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
-				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box =
+				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				add_button(&box, "unmark_for_removal", pic_unmark_removal,
 				           &FieldActionWindow::act_unmark_removal,
 				           _("Marked for removal by a worker – click to unmark"));
 				add_tab("target", pic_tab_target, &box, _("Immovable Actions"));
 			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
-				UI::Box& box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& box =
+				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				add_button(&box, "mark_for_removal", pic_mark_removal,
 				           &FieldActionWindow::act_mark_removal,
 				           _("Mark this immovable for timely removal by a suited worker"));

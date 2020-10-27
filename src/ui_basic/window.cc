@@ -86,7 +86,8 @@ Window::Window(Panel* const parent,
                 kTopBorderThickness + h + kBottomBorderThickness),
      window_style_(s),
      window_style_info_(g_style_manager->window_style(window_style_)),
-     title_style_(g_style_manager->font_style(s == WindowStyle::kWui ? FontStyle::kWuiWindowTitle : FontStyle::kFsMenuWindowTitle)),
+     title_style_(g_style_manager->font_style(
+        s == WindowStyle::kWui ? FontStyle::kWuiWindowTitle : FontStyle::kFsMenuWindowTitle)),
      is_minimal_(false),
      oldh_(kTopBorderThickness + h + kBottomBorderThickness),
      dragging_(false),
@@ -97,34 +98,37 @@ Window::Window(Panel* const parent,
      pinned_(false),
      center_panel_(nullptr),
      fastclick_panel_(nullptr),
-     button_close_(new Button(this,
-                              "b_close",
-                              // positions will be set by first call to layout()
-                              0,
-                              0,
-                              kWindowTitlebarButtonsSize,
-                              kWindowTitlebarButtonsSize,
-                              s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
-                              g_image_cache->get(window_style_info_.button_close()),
-                              _("Close"))),
-     button_pin_(new Button(this,
-                            "b_pin",
-                            0,
-                            0,
-                            kWindowTitlebarButtonsSize,
-                            kWindowTitlebarButtonsSize,
-                            s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
-                            "",
-                            "")),
-     button_minimize_(new Button(this,
-                                 "b_minimize",
-                                 0,
-                                 0,
-                                 kWindowTitlebarButtonsSize,
-                                 kWindowTitlebarButtonsSize,
-                                 s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
-                                 "",
-                                 "")) {
+     button_close_(new Button(
+        this,
+        "b_close",
+        // positions will be set by first call to layout()
+        0,
+        0,
+        kWindowTitlebarButtonsSize,
+        kWindowTitlebarButtonsSize,
+        s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
+        g_image_cache->get(window_style_info_.button_close()),
+        _("Close"))),
+     button_pin_(new Button(
+        this,
+        "b_pin",
+        0,
+        0,
+        kWindowTitlebarButtonsSize,
+        kWindowTitlebarButtonsSize,
+        s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
+        "",
+        "")),
+     button_minimize_(new Button(
+        this,
+        "b_minimize",
+        0,
+        0,
+        kWindowTitlebarButtonsSize,
+        kWindowTitlebarButtonsSize,
+        s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
+        "",
+        "")) {
 	set_title(title);
 
 	button_close_->sigclicked.connect([this] {
@@ -157,12 +161,13 @@ Window::Window(Panel* const parent,
 }
 
 void Window::update_toolbar_buttons() {
-	button_minimize_->set_pic(
-	   g_image_cache->get(is_minimal_ ? window_style_info_.button_unminimize() : window_style_info_.button_minimize()));
+	button_minimize_->set_pic(g_image_cache->get(
+	   is_minimal_ ? window_style_info_.button_unminimize() : window_style_info_.button_minimize()));
 	button_minimize_->set_tooltip(is_minimal_ ? _("Restore") : _("Minimize"));
 	button_minimize_->set_visual_state(is_minimal_ ? Button::VisualState::kPermpressed :
 	                                                 Button::VisualState::kRaised);
-	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_style_info_.button_unpin() : window_style_info_.button_pin()));
+	button_pin_->set_pic(g_image_cache->get(pinned_ ? window_style_info_.button_unpin() :
+	                                                  window_style_info_.button_pin()));
 	button_pin_->set_tooltip(pinned_ ? _("Unpin") : _("Pin"));
 	button_pin_->set_visual_state(pinned_ ? Button::VisualState::kPermpressed :
 	                                        Button::VisualState::kRaised);
@@ -313,8 +318,8 @@ void Window::center_to_parent() {
  */
 void Window::draw(RenderTarget& dst) {
 	if (!is_minimal()) {
-		dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()), window_style_info_.background(),
-		         Vector2i::zero());
+		dst.tile(Recti(Vector2i::zero(), get_inner_w(), get_inner_h()),
+		         window_style_info_.background(), Vector2i::zero());
 	}
 }
 
@@ -338,7 +343,8 @@ void Window::draw_border(RenderTarget& dst) {
 		int32_t pos = kCornerWidth;
 
 		dst.blitrect  //  top left corner
-		   (Vector2i::zero(), window_style_info_.border_top(), Recti(Vector2i::zero(), pos, kTopBorderThickness));
+		   (Vector2i::zero(), window_style_info_.border_top(),
+		    Recti(Vector2i::zero(), pos, kTopBorderThickness));
 
 		//  top bar
 		static_assert(0 <= kCornerWidth, "assert(0 <= kCornerWidth) failed.");
@@ -362,9 +368,8 @@ void Window::draw_border(RenderTarget& dst) {
 	// draw the title if we have one
 	if (!title_.empty()) {
 		// The title shouldn't be richtext, but we escape it just to make sure.
-		std::shared_ptr<const UI::RenderedText> text = autofit_text(
-		   richtext_escape(title_), title_style_,
-		   get_inner_w() - kTopBorderThickness);
+		std::shared_ptr<const UI::RenderedText> text =
+		   autofit_text(richtext_escape(title_), title_style_, get_inner_w() - kTopBorderThickness);
 
 		Vector2i pos(
 		   get_lborder() + (get_inner_w() + kTopBorderThickness) / 2, kTopBorderThickness / 2);
@@ -437,7 +442,8 @@ void Window::draw_border(RenderTarget& dst) {
 
 			//  bottom bar
 			for (; pos < hz_bar_end_minus_middle; pos += kHorizontalBorderMiddleLength) {
-				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness), window_style_info_.border_bottom(),
+				dst.blitrect(Vector2i(pos, get_h() - kBottomBorderThickness),
+				             window_style_info_.border_bottom(),
 				             Recti(Vector2i(kCornerWidth, 0), kHorizontalBorderMiddleLength,
 				                   kBottomBorderThickness));
 			}

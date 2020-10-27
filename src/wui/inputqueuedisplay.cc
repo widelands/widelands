@@ -279,14 +279,16 @@ void InputQueueDisplay::update_priority_buttons() {
 	} else {
 		priority_radiogroup_ = new UI::Radiogroup();
 
-		priority_radiogroup_->add_button(
-		   this, UI::PanelStyle::kWui, pos, g_image_cache->get(pic_priority_high), _("Highest priority"));
+		priority_radiogroup_->add_button(this, UI::PanelStyle::kWui, pos,
+		                                 g_image_cache->get(pic_priority_high),
+		                                 _("Highest priority"));
 		pos.y += PriorityButtonSize;
-		priority_radiogroup_->add_button(
-		   this, UI::PanelStyle::kWui, pos, g_image_cache->get(pic_priority_normal), _("Normal priority"));
+		priority_radiogroup_->add_button(this, UI::PanelStyle::kWui, pos,
+		                                 g_image_cache->get(pic_priority_normal),
+		                                 _("Normal priority"));
 		pos.y += PriorityButtonSize;
-		priority_radiogroup_->add_button(
-		   this, UI::PanelStyle::kWui, pos, g_image_cache->get(pic_priority_low), _("Lowest priority"));
+		priority_radiogroup_->add_button(this, UI::PanelStyle::kWui, pos,
+		                                 g_image_cache->get(pic_priority_low), _("Lowest priority"));
 	}
 
 	int32_t priority = -1;
@@ -356,11 +358,11 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
 	          _("Decrease the number of wares you want to be stored here"))
 
-	    %
-	    as_listitem(
-	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	          explanation */
-	       _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kWuiTooltip)
+	    % as_listitem(
+	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	            explanation */
+	         _("Hold down Shift to decrease all ware types at the same time"),
+	         UI::FontStyle::kWuiTooltip)
 
 	    % as_listitem(
 	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
@@ -381,11 +383,11 @@ void InputQueueDisplay::update_max_fill_buttons() {
 	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
 	            _("Increase the number of wares you want to be stored here"))
 
-	    %
-	    as_listitem(
-	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	          explanation */
-	       _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kWuiTooltip)
+	    % as_listitem(
+	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
+	            explanation */
+	         _("Hold down Shift to increase all ware types at the same time"),
+	         UI::FontStyle::kWuiTooltip)
 
 	    % as_listitem(
 	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option

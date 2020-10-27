@@ -296,7 +296,9 @@ AttackBox::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
                                           int const w,
                                           int const h,
                                           bool restrict_rows)
-   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h), restricted_row_number_(restrict_rows), attack_box_(parent_box) {
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+     restricted_row_number_(restrict_rows),
+     attack_box_(parent_box) {
 	update_desired_size();
 }
 

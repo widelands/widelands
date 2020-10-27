@@ -253,8 +253,8 @@ void WareStatisticsMenu::layout() {
 	   std::max(3, AbstractWaresDisplay::calc_hgap(display_->get_extent().w, kPlotWidth)), false);
 	display_->get_desired_size(&w2, &h2);
 
-	main_box_->set_desired_size(
-	   std::max(w2, kPlotWidth) + 2 * kSpacing, h1 + h2 + h3 + text_height(UI::FontStyle::kWuiLabel));
+	main_box_->set_desired_size(std::max(w2, kPlotWidth) + 2 * kSpacing,
+	                            h1 + h2 + h3 + text_height(UI::FontStyle::kWuiLabel));
 	UI::UniqueWindow::layout();
 	layouting = false;
 }

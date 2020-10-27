@@ -61,7 +61,8 @@ Textarea::Textarea(Panel* parent,
    : Textarea(parent, s, style, x, y, w, h, text, align, LayoutMode::AutoMove) {
 }
 
-Textarea::Textarea(Panel* parent, PanelStyle s, FontStyle style, const std::string& text, Align align)
+Textarea::Textarea(
+   Panel* parent, PanelStyle s, FontStyle style, const std::string& text, Align align)
    : Textarea(parent, s, style, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
 }
 

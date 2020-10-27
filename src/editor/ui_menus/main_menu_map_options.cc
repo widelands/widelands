@@ -42,7 +42,13 @@ SuggestedTeamsEntry::SuggestedTeamsEntry(MainMenuMapOptions* mmmo,
                                          const Widelands::Map& map,
                                          unsigned w,
                                          Widelands::SuggestedTeamLineup t)
-   : UI::Panel(parent, UI::PanelStyle::kWui, 0, 0, w, kSuggestedTeamsUnitSize, _("Click player to remove")),
+   : UI::Panel(parent,
+               UI::PanelStyle::kWui,
+               0,
+               0,
+               w,
+               kSuggestedTeamsUnitSize,
+               _("Click player to remove")),
      map_(map),
      team_(std::move(t)),
      delete_(this,
@@ -223,7 +229,14 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),
-     tab_box_(this, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
+     tab_box_(this,
+              UI::PanelStyle::kWui,
+              padding_,
+              padding_,
+              UI::Box::Vertical,
+              max_w_,
+              get_inner_h(),
+              0),
      buttons_box_(&tab_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      ok_(&buttons_box_,
          "ok",
@@ -243,10 +256,32 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
              _("Cancel")),
      tabs_(&tab_box_, UI::TabPanelStyle::kWuiLight),
 
-     main_box_(&tabs_, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tags_box_(&tabs_, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     teams_box_(&tabs_, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     inner_teams_box_(&teams_box_, UI::PanelStyle::kWui,
+     main_box_(&tabs_,
+               UI::PanelStyle::kWui,
+               padding_,
+               padding_,
+               UI::Box::Vertical,
+               max_w_,
+               get_inner_h(),
+               0),
+     tags_box_(&tabs_,
+               UI::PanelStyle::kWui,
+               padding_,
+               padding_,
+               UI::Box::Vertical,
+               max_w_,
+               get_inner_h(),
+               0),
+     teams_box_(&tabs_,
+                UI::PanelStyle::kWui,
+                padding_,
+                padding_,
+                UI::Box::Vertical,
+                max_w_,
+                get_inner_h(),
+                0),
+     inner_teams_box_(&teams_box_,
+                      UI::PanelStyle::kWui,
                       padding_,
                       padding_,
                       UI::Box::Vertical,
@@ -256,7 +291,14 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
      name_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
      author_(&main_box_, 0, 0, max_w_, UI::PanelStyle::kWui),
-     size_(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_ - indent_, labelh_, ""),
+     size_(&main_box_,
+           UI::PanelStyle::kWui,
+           UI::FontStyle::kWuiLabel,
+           0,
+           0,
+           max_w_ - indent_,
+           labelh_,
+           ""),
      balancing_dropdown_(&tags_box_,
                          "dropdown_balancing",
                          0,
@@ -306,26 +348,31 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	   &main_box_, 0, 0, max_w_, remaining_space - hinth, UI::PanelStyle::kWui);
 	hint_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, hinth, UI::PanelStyle::kWui);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Map name:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Map name:")));
 	main_box_.add(&name_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Authors:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Authors:")));
 	main_box_.add(&author_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Description:")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Description:")));
 	main_box_.add(descr_);
 	main_box_.add_space(indent_);
 
-	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Hint (optional):")));
+	main_box_.add(new UI::Textarea(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Hint (optional):")));
 	main_box_.add(hint_);
 	main_box_.add_space(indent_);
 
 	main_box_.add(&size_);
 	main_box_.add_space(indent_);
 
-	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Tags:")));
+	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Tags:")));
 	add_tag_checkbox(&tags_box_, "ffa", localize_tag("ffa"));
 	add_tag_checkbox(&tags_box_, "1v1", localize_tag("1v1"));
 	add_tag_checkbox(&tags_box_, "2teams", localize_tag("2teams"));
@@ -345,9 +392,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 
 	tags_box_.add_space(labelh_);
 
-	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Waterway length limit:")));
-	UI::Box* ww_box = new UI::Box(&tags_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_);
-	waterway_length_warning_ = new UI::Icon(ww_box, UI::PanelStyle::kWui, g_image_cache->get("images/ui_basic/stop.png"));
+	tags_box_.add(new UI::Textarea(&tags_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                               max_w_, labelh_, _("Waterway length limit:")));
+	UI::Box* ww_box =
+	   new UI::Box(&tags_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_);
+	waterway_length_warning_ =
+	   new UI::Icon(ww_box, UI::PanelStyle::kWui, g_image_cache->get("images/ui_basic/stop.png"));
 	waterway_length_warning_->set_handle_mouse(true);
 	waterway_length_box_ =
 	   new UI::SpinBox(ww_box, 0, 0, max_w_ - waterway_length_warning_->get_w(), max_w_ * 2 / 3, 1,
@@ -376,7 +426,8 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, Registry& regi
 	   &teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_,
 	   (boost::format(ngettext("%u Player", "%u Players", nr_players)) % nr_players).str()));
 	teams_box_.add_space(padding_);
-	teams_box_.add(new UI::Textarea(&teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, max_w_, labelh_, _("Suggested Teams:")));
+	teams_box_.add(new UI::Textarea(&teams_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0,
+	                                0, max_w_, labelh_, _("Suggested Teams:")));
 	teams_box_.add_space(padding_);
 	teams_box_.add(&inner_teams_box_, UI::Box::Resizing::kFullSize);
 	teams_box_.add_space(padding_);
@@ -514,7 +565,8 @@ void MainMenuMapOptions::clicked_cancel() {
 void MainMenuMapOptions::add_tag_checkbox(UI::Box* parent,
                                           const std::string& tag,
                                           const std::string& displ_name) {
-	UI::Box* box = new UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
+	UI::Box* box = new UI::Box(
+	   parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, max_w_, checkbox_space_, 0);
 	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kWui, Vector2i::zero(), displ_name);
 	box->add(cb, UI::Box::Resizing::kFullSize);
 	box->add_space(checkbox_space_);

@@ -88,11 +88,13 @@ void Statebox::layout() {
 			h = pic_graphics_->height();
 			pic_width = pic_graphics_->width();
 		}
-		rendered_text_ =
-		   label_text_.empty() ?
-		      nullptr :
-		      UI::g_fh->render(as_richtext_paragraph(label_text_, panel_style_ == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel),
-		                       text_width(get_w(), pic_width));
+		rendered_text_ = label_text_.empty() ?
+		                    nullptr :
+		                    UI::g_fh->render(as_richtext_paragraph(
+		                                        label_text_, panel_style_ == PanelStyle::kFsMenu ?
+		                                                        UI::FontStyle::kFsMenuLabel :
+		                                                        UI::FontStyle::kWuiLabel),
+		                                     text_width(get_w(), pic_width));
 		if (rendered_text_) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);

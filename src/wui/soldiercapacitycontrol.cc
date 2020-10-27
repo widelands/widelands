@@ -79,7 +79,8 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
 	decrease_.sigclicked.connect([this]() { click_decrease(); });
 	increase_.sigclicked.connect([this]() { click_increase(); });
 
-	add(new UI::Textarea(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Capacity")), UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	add(new UI::Textarea(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Capacity")),
+	    UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	add(&decrease_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	add(&value_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	add(&increase_, UI::Box::Resizing::kAlign, UI::Align::kCenter);

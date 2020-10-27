@@ -57,7 +57,8 @@ Tab::Tab(TabPanel* const tab_parent,
          const Image* init_pic,
          const std::string& tooltip_text,
          Panel* const contents)
-   : NamedPanel(tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
+   : NamedPanel(
+        tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),
@@ -96,7 +97,12 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * yet.
  */
 TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
-   : Panel(parent, style == TabPanelStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui, 0, 0, 0, 0),
+   : Panel(parent,
+           style == TabPanelStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           0,
+           0,
+           0,
+           0),
      tab_style_(style),
      active_(0),
      highlight_(kNotFound),
@@ -272,7 +278,10 @@ uint32_t TabPanel::add_tab(const std::string& name,
 
 	size_t id = tabs_.size();
 	int32_t x = id > 0 ? tabs_[id - 1]->get_x() + tabs_[id - 1]->get_w() : 0;
-	tabs_.push_back(new Tab(this, panel_style_, id, x, tab_style_ == TabPanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel, name, title, pic, tooltip_text, panel));
+	tabs_.push_back(
+	   new Tab(this, panel_style_, id, x,
+	           tab_style_ == TabPanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel,
+	           name, title, pic, tooltip_text, panel));
 
 	// Add a margin if there is a border
 	if (tab_style_ == UI::TabPanelStyle::kFsMenu) {

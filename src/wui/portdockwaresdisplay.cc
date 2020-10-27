@@ -82,7 +82,10 @@ struct PortDockAdditionalItemsDisplay : UI::Box {
 public:
 	PortDockAdditionalItemsDisplay(
 	   Widelands::Game& g, Panel* parent, bool can_act, PortDock& pd, const uint32_t capacity)
-	   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal), game_(g), portdock_(pd), capacity_(capacity) {
+	   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+	     game_(g),
+	     portdock_(pd),
+	     capacity_(capacity) {
 		assert(capacity_ > 0);
 		assert(portdock_.expedition_bootstrap());
 		assert(portdock_.expedition_bootstrap()->count_additional_queues() <= capacity_);

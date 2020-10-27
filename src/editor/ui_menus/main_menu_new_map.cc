@@ -42,7 +42,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
      box_(this, UI::PanelStyle::kWui, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
-     map_size_box_(box_, UI::PanelStyle::kWui,
+     map_size_box_(box_,
+                   UI::PanelStyle::kWui,
                    "new_map_menu",
                    4,
                    parent.egbase().map().get_width(),
@@ -70,7 +71,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	box_.set_size(100, 20);  // Prevent assert failures
 	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	UI::Textarea* terrain_label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Terrain:"));
+	UI::Textarea* terrain_label =
+	   new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Terrain:"));
 	box_.add(terrain_label);
 	box_.add(&list_);
 	box_.add_space(2 * margin_);

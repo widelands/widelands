@@ -155,7 +155,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		// a simplified faksimile of the later building window that contains only
 		// the relevant options.
 		bool nothing_added = false;
-		UI::Box& settings_box = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+		UI::Box& settings_box =
+		   *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 		switch (construction_site->building().type()) {
 		case Widelands::MapObjectType::PRODUCTIONSITE:
 		case Widelands::MapObjectType::TRAININGSITE: {
@@ -178,7 +179,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				cs_ware_queues_.push_back(queue);
 			}
 			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
-				UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& soldier_capacity_box =
+				   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				cs_soldier_capacity_decrease_ = new UI::Button(
 				   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
@@ -189,7 +191,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   g_image_cache->get(pic_increase_capacity),
 				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 				cs_soldier_capacity_display_ =
-				   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
+				   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui,
+				                    UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
 				cs_soldier_capacity_decrease_->set_repeating(true);
 				cs_soldier_capacity_increase_->set_repeating(true);
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
@@ -238,7 +241,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		} break;
 		case Widelands::MapObjectType::MILITARYSITE: {
 			upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
-			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box& soldier_capacity_box =
+			   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			cs_soldier_capacity_decrease_ = new UI::Button(
 			   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
@@ -249,7 +253,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   g_image_cache->get(pic_increase_capacity),
 			   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 			cs_soldier_capacity_display_ =
-			   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
+			   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+			                    "", UI::Align::kCenter);
 			cs_soldier_capacity_decrease_->set_repeating(true);
 			cs_soldier_capacity_increase_->set_repeating(true);
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
@@ -279,7 +284,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
 			settings_box.add_space(8);
 
-			UI::Box& soldier_preference_box = *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+			UI::Box& soldier_preference_box =
+			   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			UI::Panel& soldier_preference_panel =
 			   *new UI::Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, 64, 32);
@@ -310,10 +316,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 			auto add_tab = [this, construction_site, can_act](
 			                  Widelands::WareWorker ww, FakeWaresDisplay** display) {
-				UI::Box& mainbox = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+				UI::Box& mainbox =
+				   *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 				*display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
 				mainbox.add(*display, UI::Box::Resizing::kFullSize);
-				UI::Box& buttonsbox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
+				UI::Box& buttonsbox =
+				   *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				mainbox.add_space(15);
 				UI::Button& sp_normal = *new UI::Button(

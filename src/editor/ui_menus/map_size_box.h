@@ -36,7 +36,12 @@ struct MapSizeBox : public UI::Box {
 	 * @param map_width Width to preselect
 	 * @param map_height Height to preselect
 	 */
-	MapSizeBox(UI::Box& parent, UI::PanelStyle, const std::string& name, int spacing, int map_width, int map_height);
+	MapSizeBox(UI::Box& parent,
+	           UI::PanelStyle,
+	           const std::string& name,
+	           int spacing,
+	           int map_width,
+	           int map_height);
 
 	/// This function will be triggered when a new width or height is selected from the dropdowns
 	void set_selection_function(const std::function<void()>& func);

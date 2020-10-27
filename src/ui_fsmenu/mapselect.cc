@@ -76,7 +76,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
 	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
-	UI::Box* hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	UI::Box* hbox = new UI::Box(
+	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
@@ -92,7 +93,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	// Row with dropdowns
 
-	hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	hbox = new UI::Box(
+	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
@@ -133,7 +135,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	// Row with checkboxes
 
-	hbox = new UI::Box(&checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	hbox = new UI::Box(
+	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
 	add_tag_checkbox(hbox, "ferries", localize_tag("ferries"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));

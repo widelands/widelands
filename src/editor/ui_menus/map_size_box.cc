@@ -22,8 +22,12 @@
 #include "base/i18n.h"
 #include "logic/map.h"
 
-MapSizeBox::MapSizeBox(
-   UI::Box& parent, UI::PanelStyle s, const std::string& name, int spacing, int map_width, int map_height)
+MapSizeBox::MapSizeBox(UI::Box& parent,
+                       UI::PanelStyle s,
+                       const std::string& name,
+                       int spacing,
+                       int map_width,
+                       int map_height)
    : UI::Box(&parent, s, 0, 0, UI::Box::Horizontal, 0, 0, spacing),
      width_(this,
             name + "_map_width",
@@ -35,7 +39,8 @@ MapSizeBox::MapSizeBox(
             _("Width"),
             UI::DropdownType::kTextual,
             s,
-            s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary : UI::ButtonStyle::kFsMenuSecondary),
+            s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
+                                        UI::ButtonStyle::kFsMenuSecondary),
      height_(this,
              name + "_map_height",
              0,
@@ -46,7 +51,8 @@ MapSizeBox::MapSizeBox(
              _("Height"),
              UI::DropdownType::kTextual,
              s,
-             s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary : UI::ButtonStyle::kFsMenuSecondary) {
+             s == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
+                                         UI::ButtonStyle::kFsMenuSecondary) {
 	for (const int32_t& i : Widelands::kMapDimensions) {
 		width_.add(std::to_string(i), i);
 		height_.add(std::to_string(i), i);

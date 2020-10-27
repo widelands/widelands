@@ -383,7 +383,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
      building_(building),
      font_style_(UI::FontStyle::kWuiLabel),
      soldierpanel_(*this, ib.egbase(), building),
-     infotext_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {
+     infotext_(
+        this, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Click soldier to send away")) {
 	add(&soldierpanel_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	add_space(2);

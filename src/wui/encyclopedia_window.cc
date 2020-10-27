@@ -68,12 +68,14 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			   tab_table->has_key("icon") ? tab_table->get_string("icon") : "";
 			const std::string tab_title = tab_table->get_string("title");
 
-			wrapper_boxes_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal))));
+			wrapper_boxes_.insert(
+			   std::make_pair(tab_name, std::unique_ptr<UI::Box>(new UI::Box(
+			                               &tabs_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal))));
 
 			boxes_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(
-			                wrapper_boxes_.at(tab_name).get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal))));
+			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(wrapper_boxes_.at(tab_name).get(),
+			                                                  UI::PanelStyle::kWui, 0, 0,
+			                                                  UI::Box::Horizontal))));
 
 			lists_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>(

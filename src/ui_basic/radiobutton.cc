@@ -26,8 +26,12 @@ namespace UI {
 /**
  * Initialize the radiobutton and link it into the group's linked list
  */
-Radiobutton::Radiobutton(
-   Panel* const parent, PanelStyle s, Vector2i const p, const Image* pic, Radiogroup& group, int32_t const id)
+Radiobutton::Radiobutton(Panel* const parent,
+                         PanelStyle s,
+                         Vector2i const p,
+                         const Image* pic,
+                         Radiogroup& group,
+                         int32_t const id)
    : Statebox(parent, s, p, pic), nextbtn_(group.buttons_), group_(group), id_(id) {
 	group.buttons_ = this;
 }

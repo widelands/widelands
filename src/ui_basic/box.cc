@@ -209,8 +209,8 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(new Scrollbar(
-			   this, sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
+			scrollbar_.reset(
+			   new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
 			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));

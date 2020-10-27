@@ -59,7 +59,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
      map_details(
         &map_box_, preconfigured, standard_element_width_, standard_element_height_, padding_),
 
-     configure_game(&map_box_, UI::PanelStyle::kFsMenu,
+     configure_game(&map_box_,
+                    UI::PanelStyle::kFsMenu,
                     UI::FontStyle::kFsGameSetupHeadings,
                     0,
                     0,

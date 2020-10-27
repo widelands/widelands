@@ -31,7 +31,8 @@ namespace UI {
  * bottom).
  */
 struct IconGrid : public Panel {
-	IconGrid(Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols);
+	IconGrid(
+	   Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols);
 
 	boost::signals2::signal<void(int32_t)> icon_clicked;
 	boost::signals2::signal<void(int32_t)> mouseout;

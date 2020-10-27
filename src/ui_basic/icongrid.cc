@@ -64,8 +64,13 @@ private:
 /**
  * Initialize the grid
  */
-IconGrid::IconGrid(
-   Panel* const parent, PanelStyle s, int32_t x, int32_t y, int32_t cellw, int32_t cellh, int32_t cols)
+IconGrid::IconGrid(Panel* const parent,
+                   PanelStyle s,
+                   int32_t x,
+                   int32_t y,
+                   int32_t cellw,
+                   int32_t cellh,
+                   int32_t cols)
    : Panel(parent, s, x, y, 0, 0), columns_(cols), cell_width_(cellw), cell_height_(cellh) {
 }
 

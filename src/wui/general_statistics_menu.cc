@@ -136,8 +136,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	const Vector2i zero = Vector2i::zero();
 
-	radiogroup_.add_button(
-	   hbox2, UI::PanelStyle::kWui, zero, g_image_cache->get("images/wui/stats/genstats_landsize.png"), _("Land"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_landsize.png"), _("Land"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
@@ -150,8 +151,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	                       _("Buildings"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(
-	   hbox2, UI::PanelStyle::kWui, zero, g_image_cache->get("images/wui/stats/genstats_nrwares.png"), _("Wares"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_nrwares.png"), _("Wares"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
@@ -164,8 +166,9 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	                       _("Casualties"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(
-	   hbox2, UI::PanelStyle::kWui, zero, g_image_cache->get("images/wui/stats/genstats_kills.png"), _("Kills"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_kills.png"), _("Kills"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
@@ -189,7 +192,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	if (hook) {
-		radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero, g_image_cache->get(cs_pic), cs_name.c_str(), &btn);
+		radiogroup_.add_button(
+		   hbox2, UI::PanelStyle::kWui, zero, g_image_cache->get(cs_pic), cs_name.c_str(), &btn);
 		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 

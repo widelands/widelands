@@ -45,11 +45,14 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      main_box_(this, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
 
-     table_and_details_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
-     table_box_(&table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     table_and_details_box_(
+        &main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     table_box_(
+        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
      table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
-     map_details_box_(&table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     map_details_box_(
+        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, parent.egbase()),
 
      display_mode_(&table_box_,

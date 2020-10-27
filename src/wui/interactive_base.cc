@@ -758,7 +758,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
 		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
 		       egbase().map().get_waterway_max_length())
-		         .str(), UI::PanelStyle::kWui);
+		         .str(),
+		   UI::PanelStyle::kWui);
 	}
 
 	// This portion of code keeps the speed of game so that FPS are kept within

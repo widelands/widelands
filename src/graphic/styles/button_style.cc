@@ -31,4 +31,3 @@ PanelStyle to_panel_style(const ButtonStyle s) {
 	}
 }
 }  // namespace UI
-

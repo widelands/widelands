@@ -130,7 +130,8 @@ MapDetailsBox::MapDetailsBox(
    Panel* parent, bool preconfigured, uint32_t, uint32_t standard_element_height, uint32_t padding)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      preconfigured_(preconfigured),
-     title_(this, UI::PanelStyle::kFsMenu,
+     title_(this,
+            UI::PanelStyle::kFsMenu,
             UI::FontStyle::kFsGameSetupHeadings,
             0,
             0,
@@ -140,7 +141,8 @@ MapDetailsBox::MapDetailsBox(
             UI::Align::kCenter),
      title_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      content_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     map_name_(&title_box_, UI::PanelStyle::kFsMenu,
+     map_name_(&title_box_,
+               UI::PanelStyle::kFsMenu,
                UI::FontStyle::kFsMenuLabel,
                0,
                0,
@@ -166,7 +168,8 @@ MapDetailsBox::MapDetailsBox(
                       "",
                       UI::Align::kLeft,
                       UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     suggested_teams_box_(&content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 4, 0, 0, 0) {
+     suggested_teams_box_(
+        &content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 4, 0, 0, 0) {
 	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);

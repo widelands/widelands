@@ -83,15 +83,16 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	upper_.changed.connect([this]() { update_upper(); });
 	set_to_.changed.connect([this]() { update_set_to(); });
 
-	UI::Textarea* label =
-	   new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, _("Random height"), UI::Align::kCenter);
+	UI::Textarea* label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0,
+	                                       0, 0, 0, _("Random height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&upper_);
 	box_.add(&lower_);
 
 	box_.add_space(2 * vspacing());
-	label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, _("Fixed height"), UI::Align::kCenter);
+	label = new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0,
+	                         _("Fixed height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&set_to_);

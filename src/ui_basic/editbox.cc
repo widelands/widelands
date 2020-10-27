@@ -567,7 +567,9 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const uint16_t fontheight = text_height(*m_->font_style, m_->font_scale);
 
-		const Image* caret_image = g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" : "images/ui_basic/caret_fs.png");
+		const Image* caret_image =
+		   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
+		                                                         "images/ui_basic/caret_fs.png");
 		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

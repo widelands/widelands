@@ -41,7 +41,8 @@ struct ProgressBar : public Panel {
 	};
 
 public:
-	ProgressBar(Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
+	ProgressBar(
+	   Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
 
 	uint32_t get_state() const {
 		return state_;
