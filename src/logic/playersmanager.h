@@ -21,6 +21,7 @@
 #define WL_LOGIC_PLAYERSMANAGER_H
 
 #include <cassert>
+#include <vector>
 
 #include "base/times.h"
 #include "graphic/playercolor.h"

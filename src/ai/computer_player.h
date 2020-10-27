@@ -20,6 +20,8 @@
 #ifndef WL_AI_COMPUTER_PLAYER_H
 #define WL_AI_COMPUTER_PLAYER_H
 
+#include <vector>
+
 #include <boost/algorithm/string/predicate.hpp>
 
 #include "base/macros.h"

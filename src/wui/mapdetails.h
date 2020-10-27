@@ -24,10 +24,10 @@
 
 #include "logic/editor_game_base.h"
 #include "ui_basic/box.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
 #include "wui/mapdata.h"
-#include "wui/suggested_teams_box.h"
 
 /**
  * Show a Panel with information about a map.
@@ -59,8 +59,6 @@ private:
 	UI::MultilineTextarea name_label_;
 	UI::MultilineTextarea descr_;
 	UI::Icon minimap_icon_;
-	UI::SuggestedTeamsBox* suggested_teams_box_;
-
 	// Used to render map preview
 	std::string last_map_;
 	std::unordered_map<std::string, std::unique_ptr<const Texture>> minimap_cache_;

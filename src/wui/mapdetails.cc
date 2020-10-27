@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/minimap_renderer.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -66,7 +67,6 @@ MapDetails::MapDetails(Panel* parent,
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(&descr_box_, 0, 0, 0, 0, nullptr),
-     suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0)),
      last_map_(""),
      egbase_(egbase) {
 
@@ -91,17 +91,10 @@ void MapDetails::clear() {
 	minimap_icon_.set_icon(nullptr);
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_size(0, 0);
-	suggested_teams_box_->hide();
 }
 
 void MapDetails::layout() {
-	// Adjust sizes for show / hide suggested teams
-	if (suggested_teams_box_->is_visible()) {
-		suggested_teams_box_->set_pos(Vector2i(0, get_h() - suggested_teams_box_->get_h()));
-		main_box_.set_size(get_w(), get_h() - suggested_teams_box_->get_h() - padding_);
-	} else {
-		main_box_.set_size(get_w(), get_h());
-	}
+	main_box_.set_size(get_w(), get_h());
 
 	if (minimap_icon_.icon() == nullptr) {
 		minimap_icon_.set_desired_size(0, 0);
@@ -194,6 +187,18 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
+		if (!mapdata.suggested_teams.empty()) {
+			// We need some more space below the heading to prevent icon overlap
+			std::string suggested_teams = "<p><vspace gap=4> </p>";
+			for (const auto& lineup : mapdata.suggested_teams) {
+				suggested_teams += "<p><vspace gap=2>" + lineup.as_richtext() + "</p>";
+			}
+			description +=
+			   /** TRANSLATORS: Map header when selecting a map. Contents are a list of possible team
+			    * lineups. */
+			   as_heading_with_content(_("Suggested Teams"), suggested_teams, style_, false, true);
+		}
+
 		// Render minimap
 		if (render_minimap) {
 			auto minimap = minimap_cache_.find(last_map_);
@@ -225,15 +230,6 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		}
 
 		descr_.set_text(as_richtext(description));
-
-		// Show / hide suggested teams
-		if (mapdata.suggested_teams.empty()) {
-			suggested_teams_box_->hide();
-			suggested_teams_box_->set_size(0, 0);
-		} else {
-			suggested_teams_box_->set_size(get_parent()->get_w(), 0);
-			suggested_teams_box_->show(mapdata.suggested_teams);
-		}
 	}
 	layout();
 	return loadable;

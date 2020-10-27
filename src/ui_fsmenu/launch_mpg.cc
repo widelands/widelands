@@ -475,6 +475,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 		ml->preload_map(true);
 	}
 
+	mpsg_.reset_teams(map.get_suggested_teams());
 	map_details.update(settings_, map);
 }
 

@@ -23,10 +23,6 @@
 
 #include "base/i18n.h"
 #include "graphic/playercolor.h"
-#include "graphic/style_manager.h"
-#include "logic/game.h"
-#include "logic/player.h"
-#include "map_io/map_loader.h"
 
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
                                                              int32_t const,
@@ -126,28 +122,7 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
                                            uint32_t standard_element_height,
                                            uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
-     settings_(settings),
-     standard_height(standard_element_height),
-     scrollable_playerbox(this, 0, 0, UI::Box::Vertical),
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Players"),
-            UI::Align::kRight,
-            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)) {
-	add(&title_, Resizing::kAlign, UI::Align::kCenter);
-	add_space(3 * padding);
-	add(&scrollable_playerbox, Resizing::kExpandBoth);
-	scrollable_playerbox.set_scrolling(true);
-	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
-		if (n.action == NoteGameSettings::Action::kMap) {
-			reset();
-		}
-		update();
-	});
+   : PlayerSetupBox(parent, settings, standard_element_height, padding) {
 }
 
 void SinglePlayerSetupBox::update() {
@@ -155,27 +130,38 @@ void SinglePlayerSetupBox::update() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
-	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
-		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
-		   &scrollable_playerbox, 0, standard_height, i, settings_));
-		scrollable_playerbox.add(active_player_groups.at(i), Resizing::kFullSize);
+	for (PlayerSlot i = active_player_groups_.size(); i < number_of_players; ++i) {
+		active_player_groups_.push_back(new SinglePlayerActivePlayerGroup(
+		   &scrollable_playerbox_, 0, standard_height_, i, settings_));
+		scrollable_playerbox_.add(active_player_groups_.at(i), Resizing::kFullSize);
 	}
 
-	for (auto& p : active_player_groups) {
+	for (auto& p : active_player_groups_) {
 		p->update();
 	}
 }
 
 void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
-	standard_height = standard_element_height;
+	standard_height_ = standard_element_height;
 	title_.set_font_scale(scale);
-	for (auto& active_player_group : active_player_groups) {
+	// Get suggested_teams_dropdown_ out of the way for width resizing
+	suggested_teams_dropdown_.set_desired_size(200, standard_element_height);
+	for (auto& active_player_group : active_player_groups_) {
 		active_player_group->force_new_dimensions(scale, standard_element_height);
+	}
+	if (!active_player_groups_.empty()) {
+		suggested_teams_dropdown_.set_desired_size(
+		   active_player_groups_.front()->get_w(), standard_element_height);
 	}
 }
 void SinglePlayerSetupBox::reset() {
-	for (auto& p : active_player_groups) {
+	for (auto& p : active_player_groups_) {
 		p->die();
 	}
-	active_player_groups.clear();
+	active_player_groups_.clear();
+	update();
+}
+
+void SinglePlayerSetupBox::update_player_group(size_t index) {
+	active_player_groups_.at(index)->update();
 }

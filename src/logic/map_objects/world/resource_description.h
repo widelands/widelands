@@ -21,6 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_WORLD_RESOURCE_DESCRIPTION_H
 
 #include <string>
+#include <vector>
 
 #include "base/macros.h"
 #include "logic/widelands.h"

@@ -87,6 +87,8 @@ wl_library(ui_fsmenu_gameloading
     mapdetailsbox.h
     multiplayersetupgroup.cc
     multiplayersetupgroup.h
+    playersetupbox.cc
+    playersetupbox.h
     singleplayerdropdown.cc
     singleplayerdropdown.h
     singleplayersetupbox.cc
@@ -118,7 +120,6 @@ wl_library(ui_fsmenu_gameloading
     widelands_options
     wui_chat_ui
     wui_common_gamedetails
-    wui_common_suggested_teams
 )
 
 wl_library(ui_fsmenu_maploading

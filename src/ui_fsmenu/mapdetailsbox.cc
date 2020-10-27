@@ -127,7 +127,7 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 MapDetailsBox::MapDetailsBox(
    Panel* parent, bool preconfigured, uint32_t, uint32_t standard_element_height, uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, 0, 0, UI::Box::Vertical, 0, 0, padding),
      preconfigured_(preconfigured),
      title_(this,
             0,
@@ -164,20 +164,18 @@ MapDetailsBox::MapDetailsBox(
                       UI::PanelStyle::kFsMenu,
                       "",
                       UI::Align::kLeft,
-                      UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     suggested_teams_box_(&content_box_, 0, 0, UI::Box::Vertical, 4, 0, 0, 0) {
+                      UI::MultilineTextarea::ScrollMode::kNoScrolling) {
 	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
-	add_space(3 * padding);
-	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	add_space(padding);
+	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	title_box_.add_inf_space();
 	title_box_.add(&select_map_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	add(&title_box_, UI::Box::Resizing::kFullSize);
-	add_space(3 * padding);
+	add_space(2 * padding);
 	add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add(&map_description_, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_space(3 * padding);
-	content_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
+	content_box_.add_space(padding);
 }
 MapDetailsBox::~MapDetailsBox() {
 }
@@ -202,7 +200,6 @@ void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) 
 
 	map_name_.set_text(map.get_name());
 	show_map_description(map, settings);
-	suggested_teams_box_.show(map.get_suggested_teams());
 }
 
 void MapDetailsBox::show_map_name(const GameSettings& game_settings) {

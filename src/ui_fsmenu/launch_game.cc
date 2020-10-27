@@ -158,6 +158,7 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	map_box_.add(&peaceful_);
 	map_box_.add_space(3 * padding_);
 	map_box_.add(&custom_starting_positions_);
+	map_box_.add_space(3 * padding_);
 
 	map_box_.add_inf_space();
 	map_box_.add(&ok_, UI::Box::Resizing::kFullSize);

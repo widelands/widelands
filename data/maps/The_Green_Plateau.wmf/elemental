@@ -15,3 +15,7 @@ theme="summer"
 [teams00]
 team1="0"
 team2="2"
+
+[teams01]
+team1="1"
+team2="2"

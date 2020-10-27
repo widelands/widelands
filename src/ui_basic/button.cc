@@ -49,11 +49,13 @@ Button::Button  //  Common constructor
     const std::string& title_text,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
-    ImageMode mode)
+    ImageMode mode,
+    bool skip_richtext_escape)
    : NamedPanel(parent, name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(true),
+     skip_richtext_escape_(skip_richtext_escape),
      visual_state_(init_state),
      disable_style_(ButtonDisableStyle::kMonochrome),
      repeating_(false),
@@ -77,7 +79,8 @@ Button::Button(Panel* const parent,
                UI::ButtonStyle init_style,
                const std::string& title_text,
                const std::string& tooltip_text,
-               UI::Button::VisualState init_state)
+               UI::Button::VisualState init_state,
+               bool skip_richtext_escape)
    : Button(parent,
             name,
             x,
@@ -89,7 +92,8 @@ Button::Button(Panel* const parent,
             title_text,
             tooltip_text,
             init_state,
-            UI::Button::ImageMode::kShrink) {
+            UI::Button::ImageMode::kShrink,
+            skip_richtext_escape) {
 	if (h == 0) {
 		// Automatically resize for font height and give it a margin.
 		int new_width = get_w();
@@ -120,7 +124,19 @@ Button::Button  //  for pictorial buttons
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
     ImageMode mode)
-   : Button(parent, name, x, y, w, h, init_style, title_image, "", tooltip_text, init_state, mode) {
+   : Button(parent,
+            name,
+            x,
+            y,
+            w,
+            h,
+            init_style,
+            title_image,
+            "",
+            tooltip_text,
+            init_state,
+            mode,
+            false) {
 }
 
 Button::~Button() {
@@ -240,8 +256,9 @@ void Button::draw(RenderTarget& dst) {
 
 	} else if (!title_.empty()) {
 		//  Otherwise draw title string centered
-		std::shared_ptr<const UI::RenderedText> rendered_text = autofit_text(
-		   richtext_escape(title_), style_to_use.font(), get_inner_w() - 2 * kButtonImageMargin);
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   autofit_text(skip_richtext_escape_ ? title_ : richtext_escape(title_), style_to_use.font(),
+		                get_inner_w() - 2 * kButtonImageMargin);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,

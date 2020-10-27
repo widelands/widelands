@@ -61,6 +61,8 @@ protected:
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
+	/// \param skip_richtext_escape do not escape the texts. Only use this if there are no user
+	/// input/translatable strings, or if it has been taken care of from the outside.
 	BaseDropdown(Panel* parent,
 	             const std::string& name,
 	             int32_t x,
@@ -71,7 +73,8 @@ protected:
 	             const std::string& label,
 	             const DropdownType type,
 	             PanelStyle style,
-	             ButtonStyle button_style);
+	             ButtonStyle button_style,
+	             bool skip_richtext_escape);
 	~BaseDropdown() override;
 
 public:
@@ -224,6 +227,7 @@ private:
 	uint32_t current_selection_;
 	DropdownType type_;
 	bool is_enabled_;
+	bool skip_richtext_escape_;
 	ButtonStyle button_style_;
 	bool autoexpand_display_button_;
 };
@@ -242,7 +246,9 @@ public:
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
-	/// Text conventions: Title Case for all elements
+	/// \param skip_richtext_escape do not escape the texts. Only use this if there are no user
+	/// input/translatable strings, or if it has been taken care of from the outside. Text
+	/// conventions: Title Case for all elements
 	Dropdown(Panel* parent,
 	         const std::string& name,
 	         int32_t x,
@@ -253,7 +259,8 @@ public:
 	         const std::string& label,
 	         const DropdownType type,
 	         PanelStyle style,
-	         ButtonStyle button_style)
+	         ButtonStyle button_style,
+	         bool skip_richtext_escape = false)
 	   : BaseDropdown(parent,
 	                  name,
 	                  x,
@@ -264,7 +271,8 @@ public:
 	                  label,
 	                  type,
 	                  style,
-	                  button_style) {
+	                  button_style,
+	                  skip_richtext_escape) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();
