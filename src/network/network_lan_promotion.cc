@@ -466,7 +466,7 @@ void LanGameFinder::run() {
 		NetGameInfo info;
 		NetAddress addr;
 
-		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info))) {
+		if (receive(&info, sizeof(info), &addr) < sizeof(info)) {
 			continue;
 		}
 
