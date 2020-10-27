@@ -62,6 +62,7 @@ struct GameChatPanel : public UI::Panel {
 	void unfocus_edit();
 
 private:
+
 	void layout() override;
 	void recalculate(bool has_new_message = false);
 	void key_enter();
@@ -70,6 +71,8 @@ private:
 	void set_recipient();
 	void prepare_recipients();
 	bool select_recipient();
+	void key_changed();
+	bool try_autocomplete();
 
 	ChatProvider& chat_;
 	UI::Box vbox_;

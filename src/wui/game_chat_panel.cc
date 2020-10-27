@@ -91,7 +91,8 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 		// When an entry has been selected, update the "@playername " in the edit field
 		recipient_dropdown_.selected.connect([this]() { set_recipient(); });
 		// Other direction: If the input changed, update the dropdown
-		editbox.changed.connect([this]() { select_recipient(); });
+		// Also react to doubled space for autocompletition
+		editbox.changed.connect([this]() { key_changed(); });
 		// Figure out whether the local player has teammates
 		has_team_ = chat_.participants_->needs_teamchat();
 		// Fill the dropdown menu with usernames
@@ -130,9 +131,7 @@ GameChatPanel::~GameChatPanel() {
 }
 
 /**
- * Try autocompletition of player names.
- * If Ctrl+Space is pressed, try to autocomplete the last word around the cursor position
- * E.g., if input is "pl" complete to "playername " if the start of the name is unique
+ * If Ctrl+Space is pressed, try to autocomplete the player name
  */
 bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 
@@ -147,15 +146,58 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 
 	// User is pressing Ctrl+Space, try autocomplete
 
-	std::string str = editbox.text();
 
-	if (str.empty()) {
+	if (editbox.text().empty()) {
 		return false;
 	}
 
+	// Try autocomplete. If it worked, we handled the key press
+	return try_autocomplete();
+}
+
+/**
+ * If doubled space is entered pressed, try to autocomplete the player name.
+ * Also keep dropdown selection in sync with entered "@name" text
+ */
+void GameChatPanel::key_changed() {
+	if (chat_.participants_ == nullptr) {
+		// Nothing to do here
+		return;
+	}
+	// Check if last entered two characters are space
+	std::string str = editbox.text();
+	const size_t cursor_pos = editbox.caret_pos();
+	if (cursor_pos < 2 || str[cursor_pos - 1] != ' ' || str[cursor_pos - 2] != ' ') {
+		// Update state of dropdown, we might have no valid recipient now
+		select_recipient();
+		return;
+	}
+	assert(!editbox.text().empty());
+	// Go back two chars since try_autocomplete() assumes that the cursor is in/at the name part
+	editbox.set_caret_pos(cursor_pos - 2);
+	if (!try_autocomplete()) {
+		// Set the cursor back
+		editbox.set_caret_pos(cursor_pos);
+		select_recipient();
+	} else {
+		// It worked and we replaced something. Remove the two spaces
+		str = editbox.text();
+		const size_t end_of_replacement = editbox.caret_pos();
+		str.erase(end_of_replacement, 2);
+		editbox.set_text(str);
+	}
+}
+
+/**
+ * Try autocompletition of player names around the cursor position.
+ * E.g., if input is "pl" complete to "playername " if the start of the name is unique
+ */
+bool GameChatPanel::try_autocomplete() {
+
 	// Extract the name to complete
 	// rfind starts at the given pos and goes forward until it finds a space
-	size_t namepart_start = str.rfind(' ', startpos);
+	std::string str = editbox.text();
+	size_t namepart_start = str.rfind(' ', (editbox.caret_pos() > 1 ? editbox.caret_pos() - 1 : 0));
 	if (namepart_start == std::string::npos) {
 		// Not found, meaning the input only contains the name
 		namepart_start = 0;
@@ -167,7 +209,7 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 		// If the first sign of the name is an @, skip it
 		++namepart_start;
 	}
-	size_t namepart_end = str.find(' ', editbox.get_caret_pos());
+	size_t namepart_end = str.find(' ', editbox.caret_pos());
 
 	if (namepart_end <= namepart_start || namepart_start == str.size()) {
 		// Nothing to complete
@@ -232,23 +274,24 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 		compare_names(namepart, candidate, "team");
 	}
 
-	// If we have a candidate, set the new text for the input box
-	if (!candidate.empty()) {
-		if (candidate.back() == ' ' && namepart_end != std::string::npos) {
-			// We are not at the end of the string. Remove the space character, if any
-			candidate.pop_back();
-		}
-		str.replace(namepart_start, namepart_end - namepart_start, candidate);
-		editbox.set_text(str);
-		// Move the cursor behind the completet name
-		assert(str.size() >= namepart_start + candidate.size());
-		editbox.set_caret_pos(namepart_start + candidate.size());
-		// Try to select the matching dropdown state again
-		select_recipient();
+	// If we have no candidate, abort
+	if (candidate.empty()) {
+		return false;
 	}
 
+	// We have a candidate, set it in the input box
+	str.replace(namepart_start, namepart_end - namepart_start, candidate);
 
-	// We have handled the key
+	if (namepart + " " == candidate) {
+		// Nothing would change, so abort
+		return false;
+	}
+
+	editbox.set_text(str);
+	// Move the cursor behind the completed name
+	editbox.set_caret_pos(namepart_start + candidate.size());
+	// Try to select the matching dropdown state again
+	select_recipient();
 	return true;
 }
 
