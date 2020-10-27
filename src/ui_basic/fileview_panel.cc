@@ -28,7 +28,6 @@
 namespace UI {
 
 FileViewPanel::FileViewPanel(Panel* parent,
-                             UI::PanelStyle scrollbar_style,
                              TabPanelStyle background_style)
    : TabPanel(parent, background_style), padding_(5), contents_width_(0), contents_height_(0) {
 	layout();

@@ -38,7 +38,7 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
                 _("About Widelands")),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     tabs_(&box_, UI::PanelStyle::kFsMenu, UI::TabPanelStyle::kFsMenu),
+     tabs_(&box_, UI::TabPanelStyle::kFsMenu),
      close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
 	try {
 		LuaInterface lua;
