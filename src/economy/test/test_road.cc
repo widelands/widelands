@@ -61,11 +61,13 @@ struct WlTestFixture {
 		while (!directory_to_add.empty() && directory_to_add.find('/', 4) != std::string::npos) {
 			directory_to_add = g_fs->canonicalize_name(directory_to_add + "/..");
 			++attempts;
-			if (attempts > 50) break;
+			if (attempts > 50)
+				break;
 		}
 		g_fs->add_file_system(&FileSystem::create(directory_to_add));
 
-		// Try to find the base + data dir from current working directory (e.g. build/src/economy/test)
+		// Try to find the base + data dir from current working directory (e.g.
+		// build/src/economy/test)
 		attempts = 0;
 		directory_to_add = g_fs->canonicalize_name(g_fs->get_working_directory());
 		while (!directory_to_add.empty() && directory_to_add.find('/', 0) != std::string::npos) {
@@ -76,7 +78,8 @@ struct WlTestFixture {
 				break;
 			}
 			++attempts;
-			if (attempts > 50) break;
+			if (attempts > 50)
+				break;
 		}
 	}
 	~WlTestFixture() {
