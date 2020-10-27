@@ -17,16 +17,13 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_BASE_H
-#define WL_UI_FSMENU_BASE_H
+#ifndef WL_UI_FSMENU_MENU_H
+#define WL_UI_FSMENU_MENU_H
 
-#include "main.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/panel.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
-#include <base/log.h>
+#include "ui_fsmenu/main.h"
 
 constexpr int padding = 4;
 
@@ -86,4 +83,4 @@ protected:
 	UI::Button ok_;
 };
 
-#endif  // end of include guard: WL_UI_FSMENU_BASE_H
+#endif  // end of include guard: WL_UI_FSMENU_MENU_H

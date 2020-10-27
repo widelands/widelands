@@ -155,7 +155,7 @@ wl_library(ui_fsmenu_maploading
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_loading_common
+    ui_fsmenu_main
     wui_common_mapdetails
 )
 

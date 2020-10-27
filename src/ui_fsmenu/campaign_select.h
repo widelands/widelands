@@ -20,10 +20,10 @@
 #ifndef WL_UI_FSMENU_CAMPAIGN_SELECT_H
 #define WL_UI_FSMENU_CAMPAIGN_SELECT_H
 
-#include "menu.h"
 #include "ui_basic/table.h"
 #include "ui_fsmenu/campaigndetails.h"
 #include "ui_fsmenu/campaigns.h"
+#include "ui_fsmenu/menu.h"
 
 /*
  * Fullscreen Menu for selecting a campaign

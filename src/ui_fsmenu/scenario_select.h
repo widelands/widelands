@@ -20,7 +20,6 @@
 #ifndef WL_UI_FSMENU_SCENARIO_SELECT_H
 #define WL_UI_FSMENU_SCENARIO_SELECT_H
 
-#include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
