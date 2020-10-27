@@ -3,7 +3,7 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_worker_type {
-   name = "amazons_stonecarver",
+   name = "amazons_stone_carver",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("amazons_worker", "Stonecarver"),
    icon = dirname .. "menu.png",

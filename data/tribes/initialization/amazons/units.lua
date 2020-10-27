@@ -701,7 +701,7 @@ descriptions:new_tribe {
       {
          -- Tools
          {
-            name = "amazons_stone carver",
+            name = "amazons_stone_carver",
             helptexts = {
                -- TRANSLATORS: Helptext for an amazon worker: Stone Carver
                purpose = pgettext("amazons_worker", "Produces spears for soldiers and tools for workers.")

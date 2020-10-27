@@ -44,7 +44,7 @@ descriptions:new_productionsite_type {
    },
 
    working_positions = {
-      amazons_stonecarver = 1
+      amazons_stone_carver = 1
    },
 
    inputs = {

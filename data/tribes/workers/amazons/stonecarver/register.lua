@@ -1,3 +1,3 @@
 return {
-   amazons_stonecarver = {},
+   amazons_stone_carver = {},
 }
