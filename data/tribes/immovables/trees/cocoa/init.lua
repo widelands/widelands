@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "cocoa_tree_sapling",
    descname = _ "Cocoa Tree (sapling)",
    size = "small",
@@ -25,7 +25,7 @@ tribes:new_immovable_type {
    }}
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "cocoa_tree_pole",
    descname = _ "Cocoa Tree (pole)",
    size = "small",
@@ -48,7 +48,7 @@ tribes:new_immovable_type {
    }}
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "cocoa_tree_mature",
    descname = _ "Cocoa Tree (mature)",
    size = "small",
@@ -71,7 +71,7 @@ tribes:new_immovable_type {
    }}
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "cocoa_tree_old",
    descname = _ "Cocoa Tree (old)",
    size = "small",

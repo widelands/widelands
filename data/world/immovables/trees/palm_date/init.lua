@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_date_desert_sapling",
    descname = _ "Date Palm (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_date_desert_pole",
    descname = _ "Date Palm (Pole)",
    size = "small",
@@ -60,7 +60,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_date_desert_mature",
    descname = _ "Date Palm (Mature)",
    size = "small",
@@ -88,7 +88,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_date_desert_old",
    descname = _ "Date Palm (Old)",
    species = _ "Date Palm",

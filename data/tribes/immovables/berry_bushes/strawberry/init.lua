@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 20,             -- Lower means it is less picky, i.e. it can deal better.
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_strawberry_tiny",
    descname = _ "Strawberries (tiny)",
    size = "small",
@@ -33,7 +33,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_strawberry_small",
    descname = _ "Strawberries (small)",
    size = "small",
@@ -57,7 +57,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_strawberry_medium",
    descname = _ "Strawberries (medium)",
    size = "small",
@@ -81,7 +81,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_strawberry_ripe",
    descname = _ "Strawberries (ripe)",
    size = "small",

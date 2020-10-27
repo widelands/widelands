@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_coconut_desert_sapling",
    descname = _ "Coconut Palm (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_coconut_desert_pole",
    descname = _ "Coconut Palm (Pole)",
    size = "small",
@@ -60,7 +60,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_coconut_desert_mature",
    descname = _ "Coconut Palm (Mature)",
    size = "small",
@@ -85,7 +85,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_coconut_desert_old",
    descname = _ "Coconut Palm (Old)",
    species = _ "Coconut Palm",

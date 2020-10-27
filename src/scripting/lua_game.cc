@@ -146,8 +146,8 @@ int LuaPlayer::get_allowed_buildings(lua_State* L) {
 	Widelands::Player& player = get(L, egbase);
 
 	lua_newtable(L);
-	for (Widelands::DescriptionIndex i = 0; i < egbase.tribes().nrbuildings(); ++i) {
-		const Widelands::BuildingDescr* building_descr = egbase.tribes().get_building_descr(i);
+	for (Widelands::DescriptionIndex i = 0; i < egbase.descriptions().nr_buildings(); ++i) {
+		const Widelands::BuildingDescr* building_descr = egbase.descriptions().get_building_descr(i);
 		lua_pushstring(L, building_descr->name().c_str());
 		lua_pushboolean(L, player.is_building_type_allowed(i));
 		lua_settable(L, -3);
@@ -840,15 +840,15 @@ int LuaPlayer::get_buildings(lua_State* L) {
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
 	Widelands::Game& game = get_game(L);
-	const Widelands::Tribes& tribes = game.tribes();
+	const Widelands::Descriptions& descriptions = game.descriptions();
 
 	const char* name = luaL_checkstring(L, 2);
-	Widelands::DescriptionIndex i = tribes.building_index(name);
-	if (!tribes.building_exists(i)) {
+	Widelands::DescriptionIndex i = descriptions.building_index(name);
+	if (!descriptions.building_exists(i)) {
 		report_error(L, "Unknown building type: <%s>", name);
 	}
 
-	lua_pushboolean(L, tribes.get_building_descr(i)->suitability(
+	lua_pushboolean(L, descriptions.get_building_descr(i)->suitability(
 	                      game.map(), (*get_user_class<LuaMaps::LuaField>(L, 3))->fcoords(L)));
 	return 1;
 }
@@ -875,7 +875,8 @@ int LuaPlayer::allow_workers(lua_State* L) {
 	   tribe.worker_types_without_cost();
 
 	for (const Widelands::DescriptionIndex& worker_index : tribe.workers()) {
-		const Widelands::WorkerDescr* worker_descr = game.tribes().get_worker_descr(worker_index);
+		const Widelands::WorkerDescr* worker_descr =
+		   game.descriptions().get_worker_descr(worker_index);
 		if (!worker_descr->is_buildable()) {
 			continue;
 		}
@@ -996,7 +997,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
                                     const Widelands::TribeDescr& tribe,
                                     std::vector<Widelands::DescriptionIndex>& rv) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	const Widelands::Tribes& tribes = egbase.tribes();
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all") {
@@ -1004,7 +1005,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		}
 		// Only act on buildings that the tribe has or could conquer
 		const Widelands::TribeDescr& tribe_descr = get(L, egbase).tribe();
-		for (size_t i = 0; i < tribes.nrbuildings(); ++i) {
+		for (size_t i = 0; i < descriptions.nr_buildings(); ++i) {
 			const Widelands::DescriptionIndex& building_index =
 			   static_cast<Widelands::DescriptionIndex>(i);
 			const Widelands::BuildingDescr& descr = *tribe_descr.get_building_descr(building_index);
@@ -1021,7 +1022,7 @@ void LuaPlayer::parse_building_list(lua_State* L,
 		while (lua_next(L, -2) != 0) {
 			const char* name = luaL_checkstring(L, -1);
 			Widelands::DescriptionIndex i = tribe.building_index(name);
-			if (!tribes.building_exists(i)) {
+			if (!descriptions.building_exists(i)) {
 				report_error(L, "Unknown building type: '%s'", name);
 			}
 

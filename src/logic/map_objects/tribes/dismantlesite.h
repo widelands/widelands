@@ -43,7 +43,9 @@ class DismantleSite;
 
 class DismantleSiteDescr : public BuildingDescr {
 public:
-	DismantleSiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	DismantleSiteDescr(const std::string& init_descname,
+	                   const LuaTable& t,
+	                   Descriptions& descriptions);
 	~DismantleSiteDescr() override {
 	}
 
@@ -69,7 +71,7 @@ public:
 	                       const Coords&,
 	                       Player*,
 	                       bool,
-	                       FormerBuildings& former_buildings,
+	                       const FormerBuildings& former_buildings,
 	                       const std::map<DescriptionIndex, Quantity>& preserved_wares);
 
 	bool burn_on_destroy() override;

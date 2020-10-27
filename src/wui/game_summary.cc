@@ -35,7 +35,7 @@
 constexpr uint8_t kPadding = 4;
 
 GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWindow::Registry* r)
-   : UI::UniqueWindow(parent, "game_summary", r, 0, 0, _("Game over")),
+   : UI::UniqueWindow(parent, UI::WindowStyle::kWui, "game_summary", r, 0, 0, _("Game over")),
      game_(parent->game()),
      desired_speed_(game_.game_controller()->desired_speed()) {
 	game_.game_controller()->set_desired_speed(0);

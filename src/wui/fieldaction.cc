@@ -258,7 +258,7 @@ Initialize a field action window, creating the appropriate buttons.
 FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
                                      Widelands::Player* const plr,
                                      UI::UniqueWindow::Registry* const registry)
-   : UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
+   : UI::UniqueWindow(ib, UI::WindowStyle::kWui, "field_action", registry, 68, 34, _("Action")),
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
@@ -338,7 +338,7 @@ static bool suited_for_targeting(Widelands::PlayerNumber p,
 	const Widelands::Map& map = egbase.map();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   map, Widelands::Area<Widelands::FCoords>(
-	           map.get_fcoords(i.get_position()), egbase.tribes().get_largest_workarea()));
+	           map.get_fcoords(i.get_position()), egbase.descriptions().get_largest_workarea()));
 	do {
 		if (const Widelands::MapObject* mo = mr.location().field->get_immovable()) {
 			if (mo->descr().type() < Widelands::MapObjectType::BUILDING) {
@@ -936,7 +936,7 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 
 		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 		   map, Widelands::Area<Widelands::FCoords>(
-		           node_, workarea_radius + ibase().egbase().tribes().get_largest_workarea()));
+		           node_, workarea_radius + ibase().egbase().descriptions().get_largest_workarea()));
 		do {
 			if (player_->is_seeing(map.get_index(mr.location()))) {
 				if (Widelands::BaseImmovable* imm = mr.location().field->get_immovable()) {

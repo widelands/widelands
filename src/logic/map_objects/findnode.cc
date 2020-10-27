@@ -23,9 +23,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 
 namespace Widelands {
 
@@ -81,18 +81,18 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 	case sizeBig:
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeSwim: {
-		const World& world = egbase.world();
-		return (world.terrain_descr(coord.field->terrain_d()).get_is() &
+		const Descriptions& world = egbase.descriptions();
+		return (world.get_terrain_descr(coord.field->terrain_d())->get_is() &
 		        TerrainDescription::Is::kWater) ||
-		       (world.terrain_descr(coord.field->terrain_r()).get_is() &
+		       (world.get_terrain_descr(coord.field->terrain_r())->get_is() &
 		        TerrainDescription::Is::kWater) ||
-		       (world.terrain_descr(map.tl_n(coord).field->terrain_d()).get_is() &
+		       (world.get_terrain_descr(map.tl_n(coord).field->terrain_d())->get_is() &
 		        TerrainDescription::Is::kWater) ||
-		       (world.terrain_descr(map.tl_n(coord).field->terrain_r()).get_is() &
+		       (world.get_terrain_descr(map.tl_n(coord).field->terrain_r())->get_is() &
 		        TerrainDescription::Is::kWater) ||
-		       (world.terrain_descr(map.tr_n(coord).field->terrain_d()).get_is() &
+		       (world.get_terrain_descr(map.tr_n(coord).field->terrain_d())->get_is() &
 		        TerrainDescription::Is::kWater) ||
-		       (world.terrain_descr(map.l_n(coord).field->terrain_r()).get_is() &
+		       (world.get_terrain_descr(map.l_n(coord).field->terrain_r())->get_is() &
 		        TerrainDescription::Is::kWater);
 	}
 	case sizeAny:
@@ -103,13 +103,14 @@ bool FindNodeSize::accept(const EditorGameBase& egbase, const FCoords& coord) co
 
 bool FindNodeTerraform::accept(const EditorGameBase& egbase, const FCoords& coord) const {
 	const Map& map = egbase.map();
-	const World& world = egbase.world();
-	return !(world.terrain_descr(coord.field->terrain_d()).enhancement().empty() &&
-	         world.terrain_descr(coord.field->terrain_r()).enhancement().empty() &&
-	         world.terrain_descr(map.tl_n(coord).field->terrain_d()).enhancement().empty() &&
-	         world.terrain_descr(map.tl_n(coord).field->terrain_r()).enhancement().empty() &&
-	         world.terrain_descr(map.tr_n(coord).field->terrain_d()).enhancement().empty() &&
-	         world.terrain_descr(map.l_n(coord).field->terrain_r()).enhancement().empty());
+	const Descriptions& descriptions = egbase.descriptions();
+	return !(
+	   descriptions.get_terrain_descr(coord.field->terrain_d())->enhancement().empty() &&
+	   descriptions.get_terrain_descr(coord.field->terrain_r())->enhancement().empty() &&
+	   descriptions.get_terrain_descr(map.tl_n(coord).field->terrain_d())->enhancement().empty() &&
+	   descriptions.get_terrain_descr(map.tl_n(coord).field->terrain_r())->enhancement().empty() &&
+	   descriptions.get_terrain_descr(map.tr_n(coord).field->terrain_d())->enhancement().empty() &&
+	   descriptions.get_terrain_descr(map.l_n(coord).field->terrain_r())->enhancement().empty());
 }
 
 bool FindNodeImmovableSize::accept(const EditorGameBase&, const FCoords& coord) const {

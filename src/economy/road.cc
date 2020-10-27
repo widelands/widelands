@@ -26,11 +26,11 @@
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -429,9 +429,9 @@ bool Road::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t
 	default:
 		NEVER_HERE();
 	}
-	return (egbase.world().terrain_descr(fd.field->terrain_d()).get_is() &
+	return (egbase.descriptions().get_terrain_descr(fd.field->terrain_d())->get_is() &
 	        TerrainDescription::Is::kUnwalkable) &&
-	       (egbase.world().terrain_descr(fr.field->terrain_r()).get_is() &
+	       (egbase.descriptions().get_terrain_descr(fr.field->terrain_r())->get_is() &
 	        TerrainDescription::Is::kUnwalkable);
 }
 

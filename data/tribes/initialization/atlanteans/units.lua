@@ -253,7 +253,7 @@
 --   The helptexts are then joined by the engine.
 --   In our example, we will get *"If all needed wares are delivered in time, this building can produce each type of ax in about 57 seconds on average. All three weapons take the same time for making, but the required raw materials vary."*
 
-tribes = wl.Tribes()
+descriptions = wl.Descriptions()
 
 image_dirname = path.dirname(__file__) .. "images/"
 
@@ -262,7 +262,7 @@ push_textdomain("tribes_encyclopedia")
 -- For formatting time strings
 include "tribes/scripting/help/time_strings.lua"
 
-tribes:new_tribe {
+descriptions:new_tribe {
    name = "atlanteans",
    animation_directory = image_dirname,
    animations = {

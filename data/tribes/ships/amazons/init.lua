@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_ship_type {
+descriptions:new_ship_type {
    name = "amazons_ship",
    -- TRANSLATORS: This is the ship's name used in lists of units
    descname = _"Ship",

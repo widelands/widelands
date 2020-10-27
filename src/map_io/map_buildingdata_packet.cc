@@ -152,25 +152,25 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							const std::string map_object_name(fr.c_string());
 							const std::string type(fr.c_string());
 							DescriptionIndex oldidx = INVALID_INDEX;
-							if (type.empty()) {
+							if (type == "building") {
 								oldidx = building.owner().tribe().safe_building_index(map_object_name);
-							} else if (type == "tribe") {
+							} else if (type == "immovable") {
 								oldidx = building.owner().tribe().immovable_index(map_object_name);
-							} else if (type == "world") {
-								oldidx = egbase.world().safe_immovable_index(map_object_name);
+								building.was_immovable_ =
+								   building.owner().tribe().get_immovable_descr(oldidx);
 							} else {
 								throw GameDataError(
-								   "Invalid FormerBuildings type %s, expected ''/'tribe'/'world'",
+								   "Invalid FormerBuildings type %s, expected 'building' or 'immovable'",
 								   type.c_str());
 							}
 							assert(oldidx != INVALID_INDEX);
-							building.old_buildings_.push_back(std::make_pair(oldidx, type));
+							building.old_buildings_.push_back(std::make_pair(oldidx, type == "building"));
 						}
 					} else {
 						while (fr.unsigned_8()) {
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(oldidx, ""));
+							building.old_buildings_.push_back(std::make_pair(oldidx, true));
 						}
 					}
 					// Only construction sites may have an empty list
@@ -326,7 +326,8 @@ void MapBuildingdataPacket::read_constructionsite(
 				const uint32_t intermediates = fr.unsigned_32();
 				for (uint32_t i = 0; i < intermediates; ++i) {
 					constructionsite.info_.intermediates.push_back(
-					   game.tribes().get_building_descr(game.tribes().building_index(fr.c_string())));
+					   game.descriptions().get_building_descr(
+					      game.descriptions().building_index(fr.c_string())));
 				}
 				constructionsite.settings_.reset(BuildingSettings::load(
 				   game, constructionsite.owner().tribe(), fr, tribes_lookup_table));
@@ -380,7 +381,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				Quantity amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (game.tribes().ware_exists(id)) {
+				if (game.descriptions().ware_exists(id)) {
 					warehouse.insert_wares(id, amount);
 					warehouse.set_ware_policy(id, policy);
 				}
@@ -391,7 +392,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				uint32_t amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (game.tribes().worker_exists(id)) {
+				if (game.descriptions().worker_exists(id)) {
 					warehouse.insert_workers(id, amount);
 					warehouse.set_worker_policy(id, policy);
 				}
@@ -429,7 +430,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 				const Time next_spawn(fr);
 				DescriptionIndex const worker_index = tribe.safe_worker_index(worker_typename);
-				if (!game.tribes().worker_exists(worker_index)) {
+				if (!game.descriptions().worker_exists(worker_index)) {
 					log_warn("%s %u has a next_spawn time for nonexistent "
 					         "worker type \"%s\" set to %u, ignoring\n",
 					         warehouse.descr().name().c_str(), warehouse.serial(),
@@ -765,7 +766,7 @@ void MapBuildingdataPacket::read_productionsite(
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol, tribes_lookup_table);
 
-				if (!game.tribes().ware_exists(wq->get_index())) {
+				if (!game.descriptions().ware_exists(wq->get_index())) {
 					delete wq;
 				} else {
 					productionsite.input_queues_.push_back(wq);
@@ -777,7 +778,7 @@ void MapBuildingdataPacket::read_productionsite(
 				WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol, tribes_lookup_table);
 
-				if (!game.tribes().worker_exists(wq->get_index())) {
+				if (!game.descriptions().worker_exists(wq->get_index())) {
 					delete wq;
 				} else {
 					productionsite.input_queues_.push_back(wq);
@@ -977,21 +978,15 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				const TribeDescr& td = building->owner().tribe();
 				for (const auto& pair : building->old_buildings_) {
 					const MapObjectDescr* b_descr = nullptr;
-					if (pair.second.empty()) {
+					if (pair.second) {
 						b_descr = td.get_building_descr(pair.first);
-					} else if (pair.second == "tribe") {
-						b_descr = td.get_immovable_descr(pair.first);
-					} else if (pair.second == "world") {
-						b_descr = egbase.world().get_immovable_descr(pair.first);
 					} else {
-						throw GameDataError(
-						   "Invalid FormerBuildings type %s, expected ''/'tribe'/'world'",
-						   pair.second.c_str());
+						b_descr = td.get_immovable_descr(pair.first);
 					}
 					assert(b_descr);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
-					fw.string(pair.second);
+					fw.string(pair.second ? "building" : "immovable");
 				}
 				fw.unsigned_8(0);
 			}

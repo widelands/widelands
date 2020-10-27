@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 90,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_roystonea_desert_sapling",
    descname = _ "Roystonea regia Palm (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_roystonea_desert_pole",
    descname = _ "Roystonea regia Palm (Pole)",
    size = "small",
@@ -60,7 +60,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_roystonea_desert_mature",
    descname = _ "Roystonea regia Palm (Mature)",
    size = "small",
@@ -85,7 +85,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "palm_roystonea_desert_old",
    descname = _ "Roystonea regia Palm (Old)",
    species = _ "Roystonea regia Palm",

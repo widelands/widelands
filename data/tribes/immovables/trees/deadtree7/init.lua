@@ -3,7 +3,7 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "deadtree7",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Dead Tree",

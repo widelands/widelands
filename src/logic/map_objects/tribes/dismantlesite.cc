@@ -42,8 +42,8 @@ constexpr Duration DismantleSite::kDismantlesiteStepTime;
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, tribes),
+                                       Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -73,7 +73,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              const Coords& c,
                              Player* plr,
                              bool loading,
-                             FormerBuildings& former_buildings,
+                             const FormerBuildings& former_buildings,
                              const std::map<DescriptionIndex, Quantity>& preserved_wares)
    : PartiallyFinishedBuilding(gdescr), preserved_wares_(preserved_wares), next_dropout_index_(0) {
 	position_ = c;
@@ -99,11 +99,9 @@ void DismantleSite::cleanup(EditorGameBase& egbase) {
 	if (was_immovable_ && work_completed_ >= work_steps_) {
 		// Put the old immovable in place again
 		for (const auto& pair : old_buildings_) {
-			if (!pair.second.empty()) {
-				egbase.create_immovable(position_, pair.first,
-				                        pair.second == "world" ? MapObjectDescr::OwnerType::kWorld :
-				                                                 MapObjectDescr::OwnerType::kTribe,
-				                        get_owner());
+			// 'false' means that this was built on top of an immovable, so we reinstate that immovable
+			if (!pair.second) {
+				egbase.create_immovable(position_, pair.first, get_owner());
 				break;
 			}
 		}
@@ -156,14 +154,15 @@ const Buildcost DismantleSite::count_returned_wares(Building* building) {
 	Buildcost result;
 	DescriptionIndex first_idx = INVALID_INDEX;
 	for (const auto& pair : building->get_former_buildings()) {
-		if (pair.second.empty()) {
+		// 'true' means that this is an enhanced building
+		if (pair.second) {
 			first_idx = pair.first;
 			break;
 		}
 	}
 	assert(first_idx != INVALID_INDEX);
 	for (const auto& pair : building->get_former_buildings()) {
-		if (!pair.second.empty()) {
+		if (!pair.second) {
 			continue;
 		}
 		const BuildingDescr* former_descr = building->owner().tribe().get_building_descr(pair.first);

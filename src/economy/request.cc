@@ -67,11 +67,11 @@ Request::Request(PlayerImmovable& init_target,
      required_interval_(0),
      last_request_time_(required_time_) {
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index)) {
+	if (w == wwWARE && !init_target.owner().egbase().descriptions().ware_exists(index)) {
 		throw wexception(
 		   "creating ware request with index %u, but the ware for this index doesn't exist", index);
 	}
-	if (w == wwWORKER && !init_target.owner().egbase().tribes().worker_exists(index)) {
+	if (w == wwWORKER && !init_target.owner().egbase().descriptions().worker_exists(index)) {
 		throw wexception(
 		   "creating worker request with index %u, but the worker for this index doesn't exist",
 		   index);
@@ -197,12 +197,12 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	assert(type_ == wwWARE || type_ == wwWORKER);
 	switch (type_) {
 	case wwWARE:
-		assert(game.tribes().ware_exists(index_));
-		fw.c_string(game.tribes().get_ware_descr(index_)->name());
+		assert(game.descriptions().ware_exists(index_));
+		fw.c_string(game.descriptions().get_ware_descr(index_)->name());
 		break;
 	case wwWORKER:
-		assert(game.tribes().worker_exists(index_));
-		fw.c_string(game.tribes().get_worker_descr(index_)->name());
+		assert(game.descriptions().worker_exists(index_));
+		fw.c_string(game.descriptions().get_worker_descr(index_)->name());
 		break;
 	}
 

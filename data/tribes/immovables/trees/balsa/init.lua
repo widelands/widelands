@@ -74,7 +74,7 @@ spritesheet_old = {
    }
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_amazons_sapling",
    -- TRANSLATORS: This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
@@ -92,7 +92,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_sapling
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
@@ -110,7 +110,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_pole
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
@@ -128,7 +128,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_mature
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Old)",
@@ -152,7 +152,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_old
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_black_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
@@ -170,7 +170,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_sapling
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_black_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
@@ -188,7 +188,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_pole
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_black_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
@@ -206,7 +206,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_mature
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_black_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Old)",
@@ -230,7 +230,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_old
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_desert_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
@@ -248,7 +248,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_sapling
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_desert_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
@@ -266,7 +266,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_pole
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_desert_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
@@ -284,7 +284,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_mature
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_desert_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Old)",
@@ -308,7 +308,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_old
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_winter_amazons_sapling",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
@@ -326,7 +326,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_sapling
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_winter_amazons_pole",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
@@ -344,7 +344,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_pole
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_winter_amazons_mature",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
@@ -362,7 +362,7 @@ tribes:new_immovable_type{
    spritesheets = spritesheet_mature
 }
 
-tribes:new_immovable_type{
+descriptions:new_immovable_type{
    name = "balsa_winter_amazons_old",
    -- TRANSLATORS:  This is a amazon rare tree.
    descname = _ "Balsa Tree (Old)",

@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
-tribes:new_trainingsite_type {
+descriptions:new_trainingsite_type {
    name = "amazons_warriors_gathering",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("amazons_building", "Warrior's Gathering"),

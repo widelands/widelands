@@ -178,7 +178,8 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		// Remaining buildings for basic economy
 		fw.unsigned_32(player->ai_data.remaining_basic_buildings.size());
 		for (auto bb : player->ai_data.remaining_basic_buildings) {
-			const std::string bld_name = game.tribes().get_building_descr(bb.first)->name().c_str();
+			const std::string bld_name =
+			   game.descriptions().get_building_descr(bb.first)->name().c_str();
 			fw.string(bld_name);
 			fw.unsigned_32(bb.second);
 		}
