@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_worker_type {
+descriptions:new_worker_type {
    name = "empire_pigbreeder",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("empire_worker", "Pig Breeder"),
