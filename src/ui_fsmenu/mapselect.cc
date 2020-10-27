@@ -43,8 +43,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
    : TwoColumnsNavigationMenu(fsmm, _("Choose Map")),
-     // Less padding for big fonts; space is tight.
-     checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding),
      checkboxes_(&header_box_, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, egbase),
