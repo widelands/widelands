@@ -47,7 +47,8 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, std::string& title)
      horizontal_padding_box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 0, "main horizontal"),
      vertical_padding_box_(
         &horizontal_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "main vertical"),
-     main_box_(&vertical_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "main") {
+     main_box_(&vertical_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "main"),
+     header_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "header") {
 	horizontal_padding_box_.add_space(10 * padding);
 	horizontal_padding_box_.add(&vertical_padding_box_, UI::Box::Resizing::kExpandBoth);
 	horizontal_padding_box_.add_space(10 * padding);
@@ -55,8 +56,7 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, std::string& title)
 	vertical_padding_box_.add(&main_box_, UI::Box::Resizing::kExpandBoth);
 	vertical_padding_box_.add_space(10 * padding);
 
-	/*main_box_.add(&header_box_, UI::Box::Resizing::kFullSize);
-	header_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);*/
+	main_box_.add(&header_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(10 * padding);
 }
 
@@ -72,37 +72,16 @@ void BaseMenu::layout() {
 	printBox(vertical_padding_box_);
 }
 
-bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
-		switch (code.sym) {
-		case SDLK_KP_ENTER:
-		case SDLK_RETURN:
-			clicked_ok();
-			return true;
-		case SDLK_ESCAPE:
-			clicked_back();
-			return true;
-		default:
-			break;  // not handled
-		}
-	}
-	return UI::Panel::handle_key(down, code);
-}
-
 TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
                                std::string& title,
                                double right_column_width_factor)
    : BaseMenu(fsmm, title),
-     sub_header_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "subheadercontent"),
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, 0, "content"),
      left_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "individual"),
      right_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0 /*padding*/, "right"),
-
      right_column_width_factor_(right_column_width_factor) {
 
-	main_box_.add(&sub_header_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
-
 	content_box_.add(&left_column_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add_space(5 * padding);
 	content_box_.add(&right_column_box_, UI::Box::Resizing::kFullSize);
@@ -117,8 +96,8 @@ void TwoColumnsMenu::layout() {
 	// (e.g. table!) and childbox just says ok I need to grow too which results in a childbox bigger
 	// than main_box... ;(
 
-	content_box_.set_max_size(main_box_.get_w(), main_box_.get_h() - /*header_box_.get_h() -*/
-	                                                1 * 10 * padding - sub_header_box_.get_h());
+	content_box_.set_max_size(
+	   main_box_.get_w(), main_box_.get_h() - 1 * 10 * padding - header_box_.get_h());
 
 	right_column_box_.set_desired_size(get_w() * right_column_width_factor_, 0);
 	printBox(main_box_);
@@ -148,6 +127,23 @@ TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 void TwoColumnsNavigationMenu::layout() {
 	TwoColumnsMenu::layout();
 	printBox(button_box_);
+}
+
+bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		case SDLK_ESCAPE:
+			clicked_back();
+			return true;
+		default:
+			break;  // not handled
+		}
+	}
+	return UI::Panel::handle_key(down, code);
 }
 
 void TwoColumnsNavigationMenu::clicked_back() {

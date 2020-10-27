@@ -40,10 +40,9 @@
  */
 FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& fsmm,
                                                            CampaignData* camp)
-   : FullscreenMenuLoadMapOrGame(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
+   : TwoColumnsNavigationMenu(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
-     header_box_(this, 0, 0, UI::Box::Vertical),
+     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      subtitle_(&header_box_,
                0,
@@ -54,9 +53,9 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
                "",
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     scenario_details_(this),
+     scenario_details_(&right_column_box_),
      scenario_difficulty_header_(
-        this,
+        &right_column_box_,
         0,
         0,
         0,
@@ -64,7 +63,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
         is_tutorial_ ? "" : _("Difficulty"),
         UI::Align::kLeft,
         g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
-     scenario_difficulty_(this,
+     scenario_difficulty_(&right_column_box_,
                           "scenario_difficulty",
                           0,
                           0,
@@ -88,20 +87,22 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 		   (boost::format("%s — %s") % campaign_->tribename % campaign_->descname).str());
 	}
 
-	header_box_.add_inf_space();
-	header_box_.add_inf_space();
-	header_box_.add_inf_space();
-	header_box_.add(&subtitle_, UI::Box::Resizing::kFullSize);
-	header_box_.add_inf_space();
-	header_box_.add_inf_space();
-	header_box_.add_inf_space();
+	header_box_.add(&subtitle_, UI::Box::Resizing::kExpandBoth);
+
+	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
+
+	right_column_box_.add(&scenario_details_, UI::Box::Resizing::kExpandBoth);
+	right_column_box_.add_inf_space();
+	right_column_box_.add(
+	   &scenario_difficulty_header_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	right_column_box_.add(&scenario_difficulty_, UI::Box::Resizing::kFullSize);
+	right_column_box_.add_space(5 * padding);
+	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
-	                                 _("Return to campaign selection"));
+                                    _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
-	back_.sigclicked.connect([this]() { clicked_back(); });
 	table_.selected.connect([this](unsigned) { entry_selected(); });
 	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 
@@ -141,20 +142,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 }
 
 void FullscreenMenuScenarioSelect::layout() {
-	FullscreenMenuLoadMapOrGame::layout();
-	header_box_.set_size(get_inner_w(), tabley_);
-	table_.set_size(tablew_, tableh_);
-	table_.set_pos(Vector2i(tablex_, tabley_));
-	scenario_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
-	scenario_details_.set_pos(Vector2i(right_column_x_, tabley_));
-	scenario_difficulty_.set_size(get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
-	scenario_difficulty_.set_pos(
-	   Vector2i(right_column_x_, ok_.get_y() - padding_ - scenario_difficulty_.get_h()));
-	scenario_difficulty_header_.set_size(
-	   get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
-	scenario_difficulty_header_.set_pos(Vector2i(
-	   right_column_x_,
-	   ok_.get_y() - padding_ - scenario_difficulty_.get_h() - scenario_difficulty_header_.get_h()));
+	TwoColumnsNavigationMenu::layout();
 }
 
 std::string FullscreenMenuScenarioSelect::get_map() {

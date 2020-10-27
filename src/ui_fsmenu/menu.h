@@ -46,7 +46,7 @@ protected:
 	void printBox(UI::Box& b);
 	void layout() override;
 
-	UI::Box main_box_;
+	UI::Box main_box_, header_box_;
 };
 
 class TwoColumnsMenu : public BaseMenu {
@@ -59,7 +59,7 @@ public:
 protected:
 	void layout() override;
 
-	UI::Box sub_header_box_, content_box_, left_column_box_, right_column_box_;
+	UI::Box content_box_, left_column_box_, right_column_box_;
 
 private:
 	/// right column width = get_w * factor. rest goes to left column (minus some padding)
