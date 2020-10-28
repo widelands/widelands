@@ -170,6 +170,7 @@ static const char* to_string(const LogType& type) {
 	case LogType::kError:
 		return "ERROR";
 	}
+	NEVER_HERE();
 }
 
 void do_log(const LogType type, const Time& gametime, const char* const fmt, ...) {
