@@ -91,7 +91,7 @@ jobs:
         then
           echo "No remote changes"
           git remote add push_target https://${GITHUB_ACTOR}:${PAT}@github.com/${GITHUB_REPOSITORY}.git
-          git commit -m "$COMMIT_MESSAGE" --author=$GITHUB_ACTOR
+          git commit -m "$COMMIT_MESSAGE" --author="The Widelands Code Formatting Bot <bunnybot@widelands.org>"
           git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
