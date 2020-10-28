@@ -33,9 +33,7 @@
 
 void GenericSaveHandler::clear() {
 	error_ = Error::kNone;
-	for (uint32_t index = 0; index < maxErrors_; index++) {
-		error_msg_[index].clear();
-	}
+	std::fill(std::begin(error_msg_), std::end(error_msg_), "");
 	backup_filename_.clear();
 	return;
 }
