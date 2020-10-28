@@ -27,10 +27,10 @@ jobs:
         cat <<- EOF > $HOME/.netrc
         machine github.com
         login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
+        password ${{ secrets.PAT }}
         machine api.github.com
         login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
+        password ${{ secrets.PAT }}
         EOF
         chmod 600 $HOME/.netrc
     - name: Installing python

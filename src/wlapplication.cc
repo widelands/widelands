@@ -106,7 +106,7 @@ void terminate(int) {
 /**
  * Returns the widelands executable path.
  */
-std::string get_executable_directory() {
+std::string get_executable_directory ( ) {
 	std::string executabledir;
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
