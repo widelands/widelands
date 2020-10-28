@@ -23,7 +23,6 @@ jobs:
         echo "::set-env name=branch::${GITHUB_REF##*/}"
         git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "actions@github.com"
-        git remote set-url origin https://$GITHUB_ACTOR:${{ secrets.PAT }}@github.com/$GITHUB_REPOSITORY.git
     - name: Installing python
       uses: actions/setup-python@v1
       with:
@@ -91,7 +90,8 @@ jobs:
         then
           echo "No remote changes"
           git commit -m "$COMMIT_MESSAGE"
-          git push origin "$branch"
+          git remote add push_target https://$GITHUB_ACTOR:${{secrets.PAT}}@github.com/$GITHUB_REPOSITORY.git
+          git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
           echo "The remote branch '$branch' ($GITHUB_REF) from '${{ github.repository }}' was updated from '${{ github.sha }}' to '$latest', cancel"
