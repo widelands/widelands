@@ -161,10 +161,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 
 	singleplayer_.selected.connect(
 	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
-	multiplayer_.selected.connect([this]() {
-		internet_login();
-		end_modal<MenuTarget>(multiplayer_.get_selected());
-	});
+	multiplayer_.selected.connect(
+	   [this]() { end_modal<MenuTarget>(multiplayer_.get_selected()); });
 	editor_.selected.connect([this]() { end_modal<MenuTarget>(editor_.get_selected()); });
 	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
