@@ -245,7 +245,8 @@ constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
 constexpr const char* const kImgButtonAbort = "images/wui/menu_abort.png";
 constexpr const char* const kImgButtonGeologist = "images/wui/fieldaction/menu_geologist.png";
 constexpr const char* const kImgButtonMarkRemoval = "images/wui/fieldaction/menu_mark_removal.png";
-constexpr const char* const kImgButtonUnmarkRemoval = "images/wui/fieldaction/menu_unmark_removal.png";
+constexpr const char* const kImgButtonUnmarkRemoval =
+   "images/wui/fieldaction/menu_unmark_removal.png";
 
 constexpr const char* const kImgTabTarget = "images/wui/fieldaction/menu_tab_target.png";
 constexpr const char* const kImgTabAttack = "images/wui/fieldaction/menu_tab_attack.png";
@@ -409,8 +410,8 @@ void FieldActionWindow::add_buttons_auto() {
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
 			if (can_act) {
-				add_button(buildbox, "build_road", kImgButtonBuildRoad, &FieldActionWindow::act_buildroad,
-				           _("Build road"));
+				add_button(buildbox, "build_road", kImgButtonBuildRoad,
+				           &FieldActionWindow::act_buildroad, _("Build road"));
 				if (map_.get_waterway_max_length() >= 2 &&
 				    Widelands::CheckStepFerry(igbase->egbase()).reachable_dest(map_, node_)) {
 					add_button(buildbox, "build_waterway", kImgButtonBuildWaterway,
@@ -430,8 +431,8 @@ void FieldActionWindow::add_buttons_auto() {
 				           &FieldActionWindow::act_configure_economy,
 				           _("Configure this flag’s economy"));
 				if (can_act) {
-					add_button(buildbox, "geologist", kImgButtonGeologist, &FieldActionWindow::act_geologist,
-					           _("Send geologist to explore site"));
+					add_button(buildbox, "geologist", kImgButtonGeologist,
+					           &FieldActionWindow::act_geologist, _("Send geologist to explore site"));
 				}
 			}
 		} else {
@@ -446,13 +447,13 @@ void FieldActionWindow::add_buttons_auto() {
 
 			// Add build actions
 			if (buildcaps & Widelands::BUILDCAPS_FLAG) {
-				add_button(buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
-				           _("Place a flag"));
+				add_button(buildbox, "build_flag", kImgButtonBuildFlag,
+				           &FieldActionWindow::act_buildflag, _("Place a flag"));
 			}
 
 			if (can_act && dynamic_cast<const Widelands::Road*>(imm)) {
-				add_button(buildbox, "destroy_road", kImgButtonRemoveRoad, &FieldActionWindow::act_removeroad,
-				           _("Destroy a road"));
+				add_button(buildbox, "destroy_road", kImgButtonRemoveRoad,
+				           &FieldActionWindow::act_removeroad, _("Destroy a road"));
 			}
 
 			if (can_act && dynamic_cast<const Widelands::Waterway*>(imm)) {
@@ -665,8 +666,8 @@ void FieldActionWindow::add_buttons_waterway(bool flag) {
 		           _("Build flag"));
 	}
 
-	add_button(&buildbox, "cancel_waterway", kImgButtonAbort, &FieldActionWindow::act_abort_buildwaterway,
-	           _("Cancel waterway"));
+	add_button(&buildbox, "cancel_waterway", kImgButtonAbort,
+	           &FieldActionWindow::act_abort_buildwaterway, _("Cancel waterway"));
 	add_button(&buildbox, "cancel_waterway_build_road", kImgButtonBuildRoad,
 	           &FieldActionWindow::act_abort_buildwaterway_and_start_buildroad,
 	           _("Cancel waterway and start building road"));

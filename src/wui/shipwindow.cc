@@ -36,7 +36,8 @@ constexpr const char* const kImgGoTo = "images/wui/ship/menu_ship_goto.png";
 constexpr const char* const kImgDestination = "images/wui/ship/menu_ship_destination.png";
 constexpr const char* const kImgSink = "images/wui/ship/menu_ship_sink.png";
 constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
-constexpr const char* const kImgCancelExpedition = "images/wui/ship/menu_ship_cancel_expedition.png";
+constexpr const char* const kImgCancelExpedition =
+   "images/wui/ship/menu_ship_cancel_expedition.png";
 constexpr const char* const kImgExploreCW = "images/wui/ship/ship_explore_island_cw.png";
 constexpr const char* const kImgExploreCCW = "images/wui/ship/ship_explore_island_ccw.png";
 constexpr const char* const kImgScoutNW = "images/wui/ship/ship_scout_nw.png";

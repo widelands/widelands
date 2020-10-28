@@ -32,8 +32,7 @@ constexpr unsigned kVBorder = 10;
 constexpr unsigned kDefaultItemsPerRow = 9;
 constexpr unsigned kItemWidth = 14;
 constexpr unsigned kItemHeight = 26;
-constexpr unsigned kWorkerBaseline =
-   2;  ///< Offset of anim center from bottom border of item rect
+constexpr unsigned kWorkerBaseline = 2;  ///< Offset of anim center from bottom border of item rect
 constexpr unsigned kWareBaseLine = -6;
 
 }  // anonymous namespace
