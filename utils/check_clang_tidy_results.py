@@ -12,7 +12,6 @@ SUPPRESSED_CHECKS = {
     '[android-cloexec-fopen]',
     '[boost-use-to-string]',
     '[bugprone-integer-division]',
-    # NOCOM '[bugprone-undefined-memory-manipulation]',
     '[cert-dcl50-cpp]',  # We need this for our logger
     '[cert-err58-cpp]',
     '[clang-analyzer-core.NonNullParamChecker]',
@@ -37,6 +36,7 @@ SUPPRESSED_CHECKS = {
     '[google-default-arguments]',
     '[google-readability-function-size]',
     '[google-runtime-references]',
+    '[hicpp-function-size]',
     '[hicpp-member-init]',
     '[hicpp-no-array-decay]',
     '[hicpp-no-malloc]',
