@@ -21,7 +21,6 @@ jobs:
     - name: Fetching branch info
       run: |
         echo "::set-env name=branch::${GITHUB_REF##*/}"
-        git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "actions@github.com"
     - name: Installing python
       uses: actions/setup-python@v1
@@ -73,6 +72,8 @@ jobs:
         fi
         echo "::set-env name=COMMIT_MESSAGE::$files"
     - name: Pushing changes
+      env:
+         PAT=${{ secrets.PAT }}
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
@@ -89,8 +90,8 @@ jobs:
         if [ "$latest" == "${{ github.sha }}" ]
         then
           echo "No remote changes"
-          git commit -m "$COMMIT_MESSAGE"
-          git remote add push_target https://$GITHUB_ACTOR:${{secrets.PAT}}@github.com/$GITHUB_REPOSITORY.git
+          git remote add push_target https://${GITHUB_ACTOR}:${PAT}@github.com/${GITHUB_REPOSITORY}.git
+          git commit -m "$COMMIT_MESSAGE" --author=$GITHUB_ACTOR
           git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
