@@ -1331,8 +1331,10 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	if (tribeinfos.empty()) {
-		UI::WLMessageBox mbox(&fsmm, UI::WindowStyle::kWui, _("No tribes found!"), _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
-							  UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mbox(
+		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
+		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return;
 	}
@@ -1457,8 +1459,10 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
                              bool* canceled) {
 	MenuTarget code = MenuTarget::kNormalGame;
 	if (sp.settings().tribes.empty()) {
-		UI::WLMessageBox mbox(&fsmm, UI::WindowStyle::kWui, _("No tribes found!"), _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
-							  UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mbox(
+		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
+		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return false;
 	}
