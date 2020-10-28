@@ -21,6 +21,8 @@ jobs:
     - name: Fetching branch info
       run: |
         echo "::set-env name=branch::${GITHUB_REF##*/}"
+        git config --global user.name "The Widelands Code Formatting Bot"
+        git config --global user.email "bunnybot@widelands.org"
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         cat <<- EOF > $HOME/.netrc
         machine github.com
@@ -97,13 +99,8 @@ jobs:
         if [ "$latest" == "${{ github.sha }}" ]
         then
           echo "No remote changes"
-          email=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/user/emails | grep email)
-          email=${email#*: \"}
-          email=${email%\",}
-          git config --global user.name "The Widelands Code Formatting Bot"
-          git config --global user.email "$email"
           git remote add push_target https://${GITHUB_ACTOR}:${{ secrets.PAT }}@github.com/${GITHUB_REPOSITORY}.git
-          git commit -m "$COMMIT_MESSAGE"
+          git commit -m "$COMMIT_MESSAGE" --author="$(git log -1 --format="%an") <$(git log -1 --format="%ae")>"
           git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
