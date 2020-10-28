@@ -311,7 +311,7 @@ WaresWorkersMap count_wares_on_flag_(Widelands::Flag& f,
 }
 
 // Sort functor to sort the owners claiming a field by their influence.
-static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
+int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
 	return first.second > second.second;
 }
 

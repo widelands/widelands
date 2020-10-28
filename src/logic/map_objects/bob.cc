@@ -1082,12 +1082,12 @@ void Bob::Loader::load(FileRead& fr) {
 
 				if (fr.unsigned_8()) {
 					uint32_t anims[6];
-					for (int j = 0; j < 6; ++j) {
+					for (uint32_t& anim : anims) {
 						std::string dir_animname = fr.c_string();
 						if (bob.descr().is_animation_known(dir_animname)) {
-							anims[j] = bob.descr().get_animation(dir_animname, &bob);
+							anim = bob.descr().get_animation(dir_animname, &bob);
 						} else {
-							anims[j] = bob.descr().main_animation();
+							anim = bob.descr().main_animation();
 							log_warn(
 							   "Unknown directional animation '%s' for bob '%s', using main animation "
 							   "instead.\n",
