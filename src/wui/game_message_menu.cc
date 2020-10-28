@@ -688,7 +688,8 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		}
 		break;
 	}
-	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(button_tooltip,
-	/** TRANSLATORS: Del is the "Delete" key on the keyboard */
-	   pgettext("hotkey", "Del"), UI::PanelStyle::kWui));
+	archivebtn_->set_tooltip(
+	   as_tooltip_text_with_hotkey(button_tooltip,
+	                               /** TRANSLATORS: Del is the "Delete" key on the keyboard */
+	                               pgettext("hotkey", "Del"), UI::PanelStyle::kWui));
 }
