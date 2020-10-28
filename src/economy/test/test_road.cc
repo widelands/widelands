@@ -50,37 +50,6 @@ struct WlTestFixture {
 		set_logging_dir();
 #endif
 		g_fs = new LayeredFileSystem();
-
-		// We need to add the datadir so we can read the tribes initializations from Lua.
-
-		// Cap the loops to protect against endless loops with crazy setups
-		int attempts = 0;
-
-		// Add disk filesystem root dir
-		std::string directory_to_add = g_fs->canonicalize_name(".");
-		while (!directory_to_add.empty() && directory_to_add.find('/', 4) != std::string::npos) {
-			directory_to_add = g_fs->canonicalize_name(directory_to_add + "/..");
-			++attempts;
-			if (attempts > 50)
-				break;
-		}
-		g_fs->add_file_system(&FileSystem::create(directory_to_add));
-
-		// Try to find the base + data dir from current working directory (e.g.
-		// build/src/economy/test)
-		attempts = 0;
-		directory_to_add = g_fs->canonicalize_name(g_fs->get_working_directory());
-		while (!directory_to_add.empty() && directory_to_add.find('/', 0) != std::string::npos) {
-			directory_to_add = g_fs->canonicalize_name(directory_to_add + "/..");
-			const std::string candidate(directory_to_add + "/data");
-			if (g_fs->file_exists(candidate)) {
-				g_fs->add_file_system(&FileSystem::create(candidate));
-				break;
-			}
-			++attempts;
-			if (attempts > 50)
-				break;
-		}
 	}
 	~WlTestFixture() {
 		delete g_fs;

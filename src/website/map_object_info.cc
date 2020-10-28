@@ -252,6 +252,9 @@ void write_tribes(Widelands::EditorGameBase& egbase, FileSystem* out_filesystem)
 	const Widelands::Descriptions& descriptions = egbase.descriptions();
 
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	if (tribeinfos.empty()) {
+		throw std::exception("No tribe infos found");
+	}
 	for (const Widelands::TribeBasicInfo& tribe_info : tribeinfos) {
 		log_info("\n\n=========================\nWriting tribe: %s\n=========================\n",
 		         tribe_info.name.c_str());

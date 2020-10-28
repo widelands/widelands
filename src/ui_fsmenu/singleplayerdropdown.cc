@@ -88,12 +88,13 @@ void SinglePlayerTribeDropdown::rebuild() {
 		}
 		dropdown_.set_enabled(dropdown_.size() > 1);
 	} else {
-		{
-			i18n::Textdomain td("tribes");
-			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-				dropdown_.add(_(tribeinfo.descname), tribeinfo.name, g_image_cache->get(tribeinfo.icon),
-				              false, tribeinfo.tooltip);
-			}
+		std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+		if (tribeinfos.empty()) {
+			throw std::exception("No tribe infos found");
+		}
+		for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
+			dropdown_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+						  false, tribeinfo.tooltip);
 		}
 		dropdown_.add(pgettext("tribe", "Random"), RANDOM,
 		              g_image_cache->get("images/ui_fsmenu/random.png"), false,

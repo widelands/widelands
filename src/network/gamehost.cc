@@ -544,6 +544,9 @@ GameHost::GameHost(FullscreenMenuMain& f, const std::string& playername, bool in
 	d->syncreport_time = Time(0);
 
 	d->settings.tribes = Widelands::get_all_tribeinfos();
+	if (d->settings.tribes.empty()) {
+		throw std::exception("No tribe infos found");
+	}
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;

@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
@@ -70,7 +71,7 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 		}
 	}
 	if (tribeinfos.empty()) {
-		throw GameDataError("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
+		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
 	return tribeinfos;
 }
