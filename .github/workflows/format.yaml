@@ -73,7 +73,7 @@ jobs:
         echo "::set-env name=COMMIT_MESSAGE::$files"
     - name: Pushing changes
       env:
-         PAT=${{ secrets.PAT }}
+         PAT: ${{ secrets.PAT }}
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
