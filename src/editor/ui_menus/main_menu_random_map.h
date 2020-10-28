@@ -48,6 +48,7 @@ template <typename T, typename ID> struct IDButton;
  */
 struct MainMenuNewRandomMap : public UI::UniqueWindow {
 	explicit MainMenuNewRandomMap(UI::Panel& parent,
+	                              UI::WindowStyle,
 	                              UI::UniqueWindow::Registry&,
 	                              uint32_t map_w,
 	                              uint32_t map_h);
@@ -82,6 +83,8 @@ private:
 	void normalize_landmass(MainMenuNewRandomMap::ButtonId clicked_button);
 
 	void set_map_info(Widelands::UniqueRandomMapInfo& map_info) const;
+
+	UI::WindowStyle style_;
 
 	// UI elements
 	int32_t margin_;

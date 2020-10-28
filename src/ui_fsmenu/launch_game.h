@@ -26,21 +26,29 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/base.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapdetailsbox.h"
 
 class GameController;
 class LuaInterface;
 
 /**
- * Fullscreen menu for setting map and mapsettings for single and multi player
- * games.
- *
+ * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public FullscreenMenuBase {
+class FullscreenMenuLaunchGame : public UI::Window {
 public:
-	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*, bool preconfigured = false);
+	FullscreenMenuLaunchGame(FullscreenMenuMain&,
+	                         GameSettingsProvider*,
+	                         GameController*,
+	                         bool preconfigured = false);
 	~FullscreenMenuLaunchGame() override;
+
+	bool handle_key(bool, SDL_Keysym) override;
+
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuDefault;
+	}
 
 	GameSettingsProvider& settings() const {
 		assert(settings_);
@@ -48,8 +56,11 @@ public:
 	}
 
 protected:
+	virtual void clicked_ok() = 0;
+	virtual void clicked_back() = 0;
 	virtual bool clicked_select_map() = 0;
 
+	FullscreenMenuMain& fsmm_;
 	LuaInterface* lua_;
 
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this
@@ -97,7 +108,6 @@ protected:
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
-	UI::Textarea title_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 

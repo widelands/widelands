@@ -36,11 +36,11 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -50,7 +50,7 @@ namespace {
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(const Tribes& tribes,
+void parse_working_positions(Descriptions& descriptions,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {
@@ -64,8 +64,8 @@ void parse_working_positions(const Tribes& tribes,
 			   NoteMapObjectDescription(worker_name, NoteMapObjectDescription::LoadType::kObject));
 
 			// Ensure that we did indeed load a worker
-			DescriptionIndex const woi = tribes.worker_index(worker_name);
-			if (!tribes.worker_exists(woi)) {
+			DescriptionIndex const woi = descriptions.worker_index(worker_name);
+			if (!descriptions.worker_exists(woi)) {
 				throw GameDataError("not a worker");
 			}
 			working_positions->push_back(std::make_pair(woi, amount));
@@ -91,9 +91,8 @@ ProductionSite BUILDING
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          MapObjectType init_type,
                                          const LuaTable& table,
-                                         Tribes& tribes,
-                                         World& world)
-   : BuildingDescr(init_descname, init_type, table, tribes),
+                                         Descriptions& descriptions)
+   : BuildingDescr(init_descname, init_type, table, descriptions),
      ware_demand_checks_(new std::set<DescriptionIndex>()),
      worker_demand_checks_(new std::set<DescriptionIndex>()),
      out_of_resource_productivity_threshold_(100) {
@@ -125,7 +124,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			const std::string& ware_or_worker_name = entry_table->get_string("name");
 			// Check if ware/worker exists already and if not, try to load it. Will throw a
 			// GameDataError on failure.
-			const WareWorker wareworker = tribes.try_load_ware_or_worker(ware_or_worker_name);
+			const WareWorker wareworker = descriptions.try_load_ware_or_worker(ware_or_worker_name);
 
 			int amount = entry_table->get_int("amount");
 			try {
@@ -133,7 +132,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					throw GameDataError("amount is out of range 1 .. 255");
 				}
 				if (wareworker == WareWorker::wwWARE) {
-					const DescriptionIndex idx = tribes.ware_index(ware_or_worker_name);
+					const DescriptionIndex idx = descriptions.ware_index(ware_or_worker_name);
 					for (const auto& temp_inputs : input_wares()) {
 						if (temp_inputs.first == idx) {
 							throw GameDataError(
@@ -142,7 +141,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					}
 					input_wares_.push_back(WareAmount(idx, amount));
 				} else {
-					const DescriptionIndex idx = tribes.worker_index(ware_or_worker_name);
+					const DescriptionIndex idx = descriptions.worker_index(ware_or_worker_name);
 					for (const auto& temp_inputs : input_workers()) {
 						if (temp_inputs.first == idx) {
 							throw GameDataError("worker type '%s' was declared multiple times",
@@ -157,7 +156,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	parse_working_positions(tribes, table.get_table("working_positions").get(), &working_positions_);
+	parse_working_positions(
+	   descriptions, table.get_table("working_positions").get(), &working_positions_);
 
 	// Get programs
 	items_table = table.get_table("programs");
@@ -176,10 +176,10 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 				         name().c_str());
 				programs_[MapObjectProgram::kMainProgram] =
 				   std::unique_ptr<ProductionProgram>(new ProductionProgram(
-				      MapObjectProgram::kMainProgram, *program_table, tribes, world, this));
+				      MapObjectProgram::kMainProgram, *program_table, descriptions, this));
 			} else {
 				programs_[program_name] = std::unique_ptr<ProductionProgram>(
-				   new ProductionProgram(program_name, *program_table, tribes, world, this));
+				   new ProductionProgram(program_name, *program_table, descriptions, this));
 			}
 		} catch (const std::exception& e) {
 			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(),
@@ -206,11 +206,12 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 
 	// Verify that any map resource collected is valid
 	if (!hints().collects_ware_from_map().empty()) {
-		if (!(tribes.ware_exists(hints().collects_ware_from_map()))) {
+		if (!(descriptions.ware_exists(hints().collects_ware_from_map()))) {
 			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
 			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
-		const DescriptionIndex collects_index = tribes.load_ware(hints().collects_ware_from_map());
+		const DescriptionIndex collects_index =
+		   descriptions.load_ware(hints().collects_ware_from_map());
 		if (!is_output_ware_type(collects_index)) {
 			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
 			                    "listed in the building's output",
@@ -221,9 +222,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
-                                         Tribes& tribes,
-                                         World& world)
-   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, tribes, world) {
+                                         Descriptions& descriptions)
+   : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, descriptions) {
 }
 
 void ProductionSiteDescr::clear_attributes() {
@@ -731,10 +731,10 @@ void ProductionSite::request_worker_callback(
 		}
 		if (!worker_placed) {
 			// Find the next smaller version of this worker
-			DescriptionIndex nuwo = game.tribes().nrworkers();
+			DescriptionIndex nuwo = game.descriptions().nr_workers();
 			DescriptionIndex current = 0;
 			for (; current < nuwo; ++current) {
-				WorkerDescr const* worker = game.tribes().get_worker_descr(current);
+				WorkerDescr const* worker = game.descriptions().get_worker_descr(current);
 				if (worker->becomes() == idx) {
 					idx = current;
 					break;

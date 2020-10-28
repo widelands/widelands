@@ -2,7 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-wl.World():new_critter_type{
+wl.Descriptions():new_critter_type{
    name = "wildboar",
    descname = _ "Wild boar",
    icon = dirname .. "menu.png",

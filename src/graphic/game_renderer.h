@@ -21,11 +21,11 @@
 #define WL_GRAPHIC_GAME_RENDERER_H
 
 #include "graphic/gl/fields_to_draw.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 
 // Draw the terrain only.
 void draw_terrain(uint32_t gametime,
-                  const Widelands::World& world,
+                  const Widelands::Descriptions& descriptions,
                   const FieldsToDraw& fields_to_draw,
                   const float scale,
                   const Workareas& workarea,

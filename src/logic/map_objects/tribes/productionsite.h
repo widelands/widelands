@@ -53,12 +53,10 @@ public:
 	ProductionSiteDescr(const std::string& init_descname,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 
 	Building& create_object() const override;
 

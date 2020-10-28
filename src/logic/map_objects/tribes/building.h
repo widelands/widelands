@@ -39,12 +39,12 @@ class Request;
 
 constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
-/* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
- * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
- * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
- * should therefore always be painted below the building image.
+/* The value 'true' means that the DescriptionIndex is a normal building, as
+ * happens e.g. when enhancing a building. The value 'false' means that the
+ * DescriptionIndex refers to an immovable, as happens e.g. with amazon treetop sentry. This
+ * immovable should therefore always be painted below the building image.
  */
-using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, bool>>;
 
 /*
  * Common to all buildings!
@@ -54,7 +54,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              Tribes& tribes);
+	              Descriptions& descriptions);
 	~BuildingDescr() override {
 	}
 
@@ -143,7 +143,7 @@ public:
 	                 Coords,
 	                 bool construct,
 	                 bool loading = false,
-	                 FormerBuildings former_buildings = FormerBuildings()) const;
+	                 const FormerBuildings& former_buildings = FormerBuildings()) const;
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
@@ -173,7 +173,7 @@ protected:
 private:
 	void set_enhancement_cost(const Buildcost& enhance_cost, const Buildcost& return_enhanced);
 
-	const Tribes& tribes_;
+	const Descriptions& descriptions_;
 	const bool buildable_;     // the player can build this himself
 	bool can_be_dismantled_;   // the player can dismantle this building
 	const bool destructible_;  // the player can destruct this himself
@@ -288,7 +288,7 @@ public:
 	 * empty except enhancements. For a dismantle site, the last item will
 	 * be the one being dismantled.
 	 */
-	const FormerBuildings get_former_buildings() {
+	const FormerBuildings& get_former_buildings() {
 		return old_buildings_;
 	}
 

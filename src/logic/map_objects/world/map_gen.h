@@ -50,7 +50,7 @@ struct MapGenAreaInfo {
 		kMountainsSnow
 	};
 
-	MapGenAreaInfo(const LuaTable& table, const World& world, Area area_type);
+	MapGenAreaInfo(const LuaTable& table, const Descriptions& descriptions, Area area_type);
 
 	size_t get_num_terrains(Terrain) const;
 	DescriptionIndex get_terrain(Terrain terrain_type, uint32_t index) const;
@@ -120,7 +120,7 @@ private:
  * This info is usually read from the file "mapgeninfo" of a world.
  */
 struct MapGenInfo {
-	MapGenInfo(const LuaTable& table, const World& world);
+	MapGenInfo(const LuaTable& table, const Descriptions& descriptions);
 
 	size_t get_num_areas(MapGenAreaInfo::Area area_type) const;
 	const MapGenAreaInfo& get_area(MapGenAreaInfo::Area area_type, uint32_t index) const;

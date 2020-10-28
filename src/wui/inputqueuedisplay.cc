@@ -377,20 +377,20 @@ void InputQueueDisplay::think() {
 }
 
 static const RGBAColor kPriorityColors[] = {
-	RGBAColor(255, 0, 0, 63),
-	RGBAColor(255, 127, 0, 63),
-	RGBAColor(255, 255, 0, 63),
-	RGBAColor(0, 255, 0, 63),
-	RGBAColor(0, 127, 255, 63)
+	RGBAColor(255, 0, 0, 127),
+	RGBAColor(255, 127, 0, 127),
+	RGBAColor(255, 255, 0, 127),
+	RGBAColor(0, 255, 0, 127),
+	RGBAColor(0, 127, 255, 127)
 };
 
 void InputQueueDisplay::draw(RenderTarget& r) {
 	// Draw priority indicator
 	if (has_priority_ && !collapsed_) {
 		const int x = hbox_.get_x() + priority_.get_x();
-		const int y = hbox_.get_y() + priority_.get_y() + priority_.get_h() / 2;
 		for (size_t i = 0; i < 5; ++i) {
-			r.fill_rect(Recti(x + i * kButtonSize, y - kButtonSize / 5, kButtonSize, kButtonSize * 2 / 5), kPriorityColors[i], BlendMode::Default);
+			r.fill_rect(Recti(x + i * kButtonSize, hbox_.get_y() + kButtonSize * 2 / 5,
+					kButtonSize, kButtonSize / 5), kPriorityColors[i], BlendMode::Default);
 		}
 	}
 

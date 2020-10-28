@@ -35,7 +35,10 @@
 #include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
-GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
+GameDetails::GameDetails(Panel* parent,
+                         UI::PanelStyle style,
+                         Mode mode,
+                         Widelands::EditorGameBase& egbase)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      style_(style),
      mode_(mode),
@@ -61,7 +64,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
      minimap_icon_(this, 0, 0, 0, 0, nullptr),
      button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)),
      last_game_(""),
-     egbase_(nullptr) {
+     egbase_(egbase) {
 
 	add(&name_label_, UI::Box::Resizing::kFullSize);
 	add_space(padding_);
@@ -73,9 +76,6 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 
 	minimap_icon_.set_visible(false);
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
-
-	// Fast initialize world now
-	egbase_.mutable_world(true);
 }
 
 void GameDetails::clear() {

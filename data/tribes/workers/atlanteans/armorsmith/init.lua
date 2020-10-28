@@ -30,7 +30,7 @@
 --
 --    push_textdomain("tribes")
 --
---    tribes:new_worker_type {
+--    descriptions:new_worker_type {
 --       name = "empire_fisher",
 --       descname = pgettext("empire_worker", "Fisher"),
 --       animation_directory = dirname,
@@ -83,7 +83,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_worker_type {
+descriptions:new_worker_type {
    name = "atlanteans_armorsmith",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("atlanteans_worker", "Armorsmith"),

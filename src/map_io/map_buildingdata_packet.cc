@@ -139,7 +139,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 
 					for (size_t i = (packet_version >= 7 ? fr.unsigned_32() : 0); i; --i) {
 						const std::string warename(fr.string());
-						building.set_priority(wwWARE, egbase.tribes().ware_index(warename), WarePriority(fr));
+						building.set_priority(wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr));
 					}
 
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
@@ -157,13 +157,14 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
 							const std::string type(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(oldidx, type));
+							building.old_buildings_.push_back(
+							   std::make_pair(oldidx, type.empty() || type == "building"));
 						}
 					} else {
 						while (fr.unsigned_8()) {
 							DescriptionIndex oldidx =
 							   building.owner().tribe().safe_building_index(fr.c_string());
-							building.old_buildings_.push_back(std::make_pair(oldidx, ""));
+							building.old_buildings_.push_back(std::make_pair(oldidx, true));
 						}
 					}
 					// Only construction sites may have an empty list
@@ -319,7 +320,8 @@ void MapBuildingdataPacket::read_constructionsite(
 				const uint32_t intermediates = fr.unsigned_32();
 				for (uint32_t i = 0; i < intermediates; ++i) {
 					constructionsite.info_.intermediates.push_back(
-					   game.tribes().get_building_descr(game.tribes().building_index(fr.c_string())));
+					   game.descriptions().get_building_descr(
+					      game.descriptions().building_index(fr.c_string())));
 				}
 				constructionsite.settings_.reset(BuildingSettings::load(
 				   game, constructionsite.owner().tribe(), fr, tribes_lookup_table));
@@ -373,7 +375,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				Quantity amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (game.tribes().ware_exists(id)) {
+				if (game.descriptions().ware_exists(id)) {
 					warehouse.insert_wares(id, amount);
 					warehouse.set_ware_policy(id, policy);
 				}
@@ -384,7 +386,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				uint32_t amount = fr.unsigned_32();
 				StockPolicy policy = static_cast<StockPolicy>(fr.unsigned_8());
 
-				if (game.tribes().worker_exists(id)) {
+				if (game.descriptions().worker_exists(id)) {
 					warehouse.insert_workers(id, amount);
 					warehouse.set_worker_policy(id, policy);
 				}
@@ -422,7 +424,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 				const Time next_spawn(fr);
 				DescriptionIndex const worker_index = tribe.safe_worker_index(worker_typename);
-				if (!game.tribes().worker_exists(worker_index)) {
+				if (!game.descriptions().worker_exists(worker_index)) {
 					log_warn("%s %u has a next_spawn time for nonexistent "
 					         "worker type \"%s\" set to %u, ignoring\n",
 					         warehouse.descr().name().c_str(), warehouse.serial(),
@@ -758,7 +760,7 @@ void MapBuildingdataPacket::read_productionsite(
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol, tribes_lookup_table);
 
-				if (!game.tribes().ware_exists(wq->get_index())) {
+				if (!game.descriptions().ware_exists(wq->get_index())) {
 					delete wq;
 				} else {
 					productionsite.input_queues_.push_back(wq);
@@ -770,7 +772,7 @@ void MapBuildingdataPacket::read_productionsite(
 				WorkersQueue* wq = new WorkersQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol, tribes_lookup_table);
 
-				if (!game.tribes().worker_exists(wq->get_index())) {
+				if (!game.descriptions().worker_exists(wq->get_index())) {
 					delete wq;
 				} else {
 					productionsite.input_queues_.push_back(wq);
@@ -963,7 +965,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 
 			fw.unsigned_32(building->ware_priorities_.size());
 			for (const auto& pair : building->ware_priorities_) {
-				fw.string(egbase.tribes().get_ware_descr(pair.first)->name());
+				fw.string(egbase.descriptions().get_ware_descr(pair.first)->name());
 				pair.second.write(fw);
 			}
 
@@ -979,7 +981,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 					const BuildingDescr* b_descr = td.get_building_descr(pair.first);
 					fw.unsigned_8(1);
 					fw.string(b_descr->name());
-					fw.string(pair.second);
+					fw.string(pair.second ? "building" : "immovable");
 				}
 				fw.unsigned_8(0);
 			}

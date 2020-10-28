@@ -75,7 +75,9 @@ The ConstructionSite's idling animation is the basic construction site marker.
 */
 class ConstructionSiteDescr : public BuildingDescr {
 public:
-	ConstructionSiteDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	ConstructionSiteDescr(const std::string& init_descname,
+	                      const LuaTable& t,
+	                      Descriptions& descriptions);
 	~ConstructionSiteDescr() override {
 	}
 

@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname (__file__)
 
-tribes:new_worker_type {
+descriptions:new_worker_type {
    name = "frisians_shipwright",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("frisians_worker", "Shipwright"),
@@ -17,7 +17,7 @@ tribes:new_worker_type {
    programs = {
       buildship = {
          "walk=object-or-coords",
-         "plant=attrib:shipconstruction unless object",
+         "plant=attrib:frisians_shipconstruction unless object",
          "animate=work duration:500ms",
          "construct",
          "animate=work duration:5s",
