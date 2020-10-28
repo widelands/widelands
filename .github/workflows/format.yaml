@@ -22,7 +22,7 @@ jobs:
       run: |
         echo "::set-env name=branch::${GITHUB_REF##*/}"
         git config --global user.name "The Widelands Code Formatting Bot"
-        git config --global user.email "bunnybot@widelands.org"
+        git config --global user.email "$(git log -1 --format=\"%ae\")"
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         cat <<- EOF > $HOME/.netrc
         machine github.com
@@ -100,7 +100,7 @@ jobs:
         then
           echo "No remote changes"
           git remote add push_target https://${GITHUB_ACTOR}:${{ secrets.PAT }}@github.com/${GITHUB_REPOSITORY}.git
-          git commit -m "$COMMIT_MESSAGE" --author="$(git log -1 --format="%an") <$(git log -1 --format="%ae")>"
+          git commit -m "$COMMIT_MESSAGE"
           git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
