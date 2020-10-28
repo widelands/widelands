@@ -1329,6 +1329,14 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
  */
 // TODO(Nordfriese): This should return a `bool` to indicate whether a game was started
 void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	if (tribeinfos.empty()) {
+		UI::WLMessageBox mbox(&fsmm, UI::WindowStyle::kWui, _("No tribes found!"), _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+							  UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return;
+	}
+
 	g_sh->change_music("ingame", 1000);
 
 	if (internet) {
@@ -1345,7 +1353,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 
 		// reinitalise in every run, else graphics look strange
-		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered);
+		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered, tribeinfos);
 		ns.run<MenuTarget>();
 
 		if (InternetGaming::ref().logged_in()) {
@@ -1363,7 +1371,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 
 		switch (menu_result) {
 		case MenuTarget::kHostgame: {
-			GameHost netgame(fsmm, playername);
+			GameHost netgame(fsmm, playername, tribeinfos);
 			netgame.run();
 			break;
 		}
@@ -1448,6 +1456,12 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
                              const bool preconfigured,
                              bool* canceled) {
 	MenuTarget code = MenuTarget::kNormalGame;
+	if (sp.settings().tribes.empty()) {
+		UI::WLMessageBox mbox(&fsmm, UI::WindowStyle::kWui, _("No tribes found!"), _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+							  UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return false;
+	}
 	FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
 	code = lgm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {

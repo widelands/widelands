@@ -28,9 +28,6 @@
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
 	s.tribes = Widelands::get_all_tribeinfos();
-	if (s.tribes.empty()) {
-		throw std::exception("No tribe infos found");
-	}
 	s.scenario = false;
 	s.multiplayer = false;
 	s.playernum = 0;
