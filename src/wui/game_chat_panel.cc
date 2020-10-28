@@ -280,13 +280,13 @@ bool GameChatPanel::try_autocomplete() {
 	}
 
 	// We have a candidate, set it in the input box
-	str.replace(namepart_start, namepart_end - namepart_start, candidate);
 
-	if (namepart + " " == candidate) {
+	if (namepart == candidate || (candidate.back() == ' ' && namepart + " " == candidate)) {
 		// Nothing would change, so abort
 		return false;
 	}
 
+	str.replace(namepart_start, namepart_end - namepart_start, candidate);
 	editbox.set_text(str);
 	// Move the cursor behind the completed name
 	editbox.set_caret_pos(namepart_start + candidate.size());
