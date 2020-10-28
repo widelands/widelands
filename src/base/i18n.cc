@@ -263,7 +263,7 @@ void set_locale(const std::string& name) {
 
 #ifdef __linux__
 	char* res = nullptr;
-	char const* encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
+	char const* encodings[] = {"", ".utf-8", "@euro", ".UTF-8"};
 	std::size_t found = alt_str.find(',', 0);
 	bool leave_while = false;
 	// try every possible combination of alternative and encoding
@@ -271,8 +271,8 @@ void set_locale(const std::string& name) {
 		std::string base_locale = alt_str.substr(0, int(found));
 		alt_str = alt_str.erase(0, int(found) + 1);
 
-		for (int j = 0; j < 4; ++j) {
-			std::string try_locale = base_locale + encoding[j];
+		for (char const* encoding : encodings) {
+			std::string try_locale = base_locale + encoding;
 			res = SETLOCALE(LC_MESSAGES, try_locale.c_str());
 			if (res) {
 				locale = try_locale;
