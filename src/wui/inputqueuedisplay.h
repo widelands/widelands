@@ -50,6 +50,7 @@ protected:
 	void think() override;
 	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
+	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 
 private:
 	// Common constructor
@@ -73,6 +74,7 @@ private:
 	void recurse(const std::function<void(InputQueueDisplay&)>&);
 
 	void clicked_desired_fill(int8_t delta);
+	void set_desired_fill(unsigned fill);
 	void clicked_real_fill(int8_t delta);
 	void set_priority(const Widelands::WarePriority&);
 	void set_collapsed(bool);

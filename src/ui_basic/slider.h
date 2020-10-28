@@ -77,6 +77,10 @@ public:
 	void set_enabled(bool enabled);
 
 	bool handle_key(bool, SDL_Keysym) override;
+	// Whether to use special key bindings intended for the InputQueueDisplay sliders
+	void set_in_game_key_bindings(bool b) {
+		in_game_key_bindings_ = b;
+	}
 
 protected:
 	void layout() override;
@@ -114,6 +118,7 @@ private:
 	int32_t max_value_;
 	int32_t value_;
 	int32_t relative_move_;
+	bool in_game_key_bindings_;
 
 	bool highlighted_;  //  mouse over
 	bool pressed_;      //  the cursor is pressed

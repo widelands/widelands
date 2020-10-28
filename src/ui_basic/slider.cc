@@ -70,6 +70,7 @@ Slider::Slider(Panel* const parent,
      max_value_(max_value),
      value_(value),
      relative_move_(0),
+     in_game_key_bindings_(false),
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
@@ -230,6 +231,27 @@ void Slider::set_highlighted(bool highlighted) {
 constexpr int16_t kLargeStepSize = 50;
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
+		if (in_game_key_bindings_) {
+			switch (code.sym) {
+			case SDLK_MINUS:
+			case SDLK_KP_MINUS:
+				set_value(code.mod & KMOD_CTRL ? 0 : get_value() - 1);
+				return true;
+			case SDLK_PLUS:
+			case SDLK_KP_PLUS:
+				set_value(code.mod & KMOD_CTRL ? get_max_value() : get_value() + 1);
+				return true;
+			default:
+				if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
+					set_value(get_min_value() + code.sym - SDLK_1);
+				} else if (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && !(code.mod & KMOD_NUM)) {
+					set_value(get_min_value() + code.sym - SDLK_KP_1);
+				} else {
+					break;
+				}
+				return true;
+			}
+		} else {
 		switch (code.sym) {
 
 		case SDLK_KP_6:
@@ -274,6 +296,7 @@ bool Slider::handle_key(bool down, SDL_Keysym code) {
 
 		default:
 			break;
+		}
 		}
 	}
 	return Panel::handle_key(down, code);

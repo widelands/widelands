@@ -23,6 +23,7 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
+#include "ui_basic/mouse_constants.h"
 #include "wui/interactive_base.h"
 
 constexpr int8_t kButtonSize = 25;
@@ -200,6 +201,8 @@ icons_(nr_icons_, nullptr) {
 		recurse([c](InputQueueDisplay& i) { i.set_collapsed(c); });
 	});
 
+	priority_.set_in_game_key_bindings(true);
+
 	if (can_act_) {
 		b_decrease_desired_fill_.sigclicked.connect([this]() {
 			if (SDL_GetModState() & KMOD_SHIFT) {
@@ -232,7 +235,7 @@ icons_(nr_icons_, nullptr) {
 		priority_.changedto.connect([this](size_t i) {
 			const Widelands::WarePriority& p = index_to_priority(i);
 			slider_was_moved_ = &p;
-			if (SDL_GetModState() & KMOD_CTRL) {
+			if (SDL_GetModState() & KMOD_SHIFT) {
 				recurse([&p](InputQueueDisplay& iqd) { iqd.set_priority(p); });
 			} else {
 				set_priority(p);
@@ -253,6 +256,26 @@ void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& f
 			functor(*i);
 		}
 	}
+}
+
+bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, const int32_t y) {
+	assert(nr_icons_ > 0);
+	if (btn != SDL_BUTTON_LEFT ||
+			y < hbox_.get_y() || y > hbox_.get_y() + kButtonSize ||
+			x < hbox_.get_x() + icons_[0]->get_x() || x > hbox_.get_x() + icons_.back()->get_x() + kButtonSize) {
+		return UI::Box::handle_mousepress(btn, x, y);
+	}
+
+	const uint32_t fill = (x + kButtonSize / 2 - hbox_.get_x() - icons_[0]->get_x()) / kButtonSize;
+	assert(fill <= nr_icons_);
+
+	if (SDL_GetModState() & KMOD_SHIFT) {
+		recurse([fill](InputQueueDisplay& i) { i.set_desired_fill(fill); });
+	} else {
+		set_desired_fill(fill);
+	}
+
+	return true;
 }
 
 void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
@@ -284,6 +307,27 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 
 	const bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
 	const unsigned new_fill = ctrl_down ? delta < 0 ? 0 : max_fill : desired_fill + delta;
+
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_set_input_max_fill(building_, index_, type_, new_fill, settings_ != nullptr);
+	} else {
+		if (queue_) {
+			queue_->set_max_fill(new_fill);
+		} else {
+			get_setting()->desired_fill = new_fill;
+		}
+	}
+}
+
+void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
+	const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
+	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
+	assert(desired_fill <= max_fill);
+	new_fill = std::min(new_fill, max_fill);
+
+	if (!can_act_ || desired_fill == new_fill) {
+		return;
+	}
 
 	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_set_input_max_fill(building_, index_, type_, new_fill, settings_ != nullptr);
