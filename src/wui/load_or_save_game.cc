@@ -28,9 +28,9 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                FileType filetype,
                                UI::PanelStyle style,
                                UI::WindowStyle ws,
-                               bool localize_autosave)
-   : parent_(parent),
-     table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
+                               bool localize_autosave,
+                               UI::Panel* table_parent)
+   : table_box_(new UI::Box(table_parent ? table_parent : parent, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
      // Savegame description
@@ -54,24 +54,24 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	switch (filetype_) {
 	case FileType::kReplay:
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new ReplayDeleter(parent_, ws));
+		savegame_deleter_.reset(new ReplayDeleter(parent, ws));
 		savegame_loader_.reset(new ReplayLoader(g));
 		break;
 	case FileType::kGameSinglePlayer:
 		table_ = new SavegameTableSinglePlayer(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
+		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
 		savegame_loader_.reset((new SinglePlayerLoader(g)));
 		break;
 	case FileType::kGameMultiPlayer:
 		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
+		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
 		savegame_loader_.reset(new MultiPlayerLoader(g));
 		break;
 	case FileType::kShowAll:
 		table_ = new SavegameTableMultiplayer(
 		   table_box_, style, localize_autosave);  // wrong? showAll = save window -> "accidental"
 		                                           // same table as multiplayer
-		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
+		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;
 	}
@@ -144,18 +144,18 @@ void LoadOrSaveGame::set_tooltips_of_buttons(size_t nr_of_selected_items) const 
 	if (nr_of_selected_items == 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-		      _("Delete this replay") :
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-		      _("Delete this game"));
+            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+            _("Delete this replay") :
+            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+            _("Delete this game"));
 	} else if (nr_of_selected_items > 1) {
 		delete_->set_tooltip(filetype_ == FileType::kReplay ?
-		                        /** TRANSLATORS: Tooltip for the delete button. The user has
-		                           selected multiple files */
-		                        _("Delete these replays") :
-		                        /** TRANSLATORS: Tooltip for the delete button. The user has
-		                           selected multiple files */
-		                        _("Delete these games"));
+                                 /** TRANSLATORS: Tooltip for the delete button. The user has
+                                    selected multiple files */
+                                 _("Delete these replays") :
+                                 /** TRANSLATORS: Tooltip for the delete button. The user has
+                                    selected multiple files */
+                                 _("Delete these games"));
 	} else {
 		delete_->set_tooltip("");
 	}

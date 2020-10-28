@@ -29,12 +29,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                                                Widelands::Game& g,
                                                GameSettingsProvider* gsp,
                                                bool is_replay)
-   : FullscreenMenuLoadMapOrGame(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
+   : TwoColumnsNavigationMenu(
+        fsmm, "choose_game", is_replay ? _("Choose Replay") : _("Choose Game")),
 
-     main_box_(this, 0, 0, UI::Box::Vertical),
-     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     //     main_box_(this, 0, 0, UI::Box::Vertical),
+     //     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
-     load_or_save_(&info_box_,
+     load_or_save_(&right_column_content_box_,
                    g,
                    is_replay ?
                       LoadOrSaveGame::FileType::kReplay :
@@ -42,32 +43,21 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                                                      LoadOrSaveGame::FileType::kGameSinglePlayer),
                    UI::PanelStyle::kFsMenu,
                    UI::WindowStyle::kFsMenu,
-                   true),
+                   true,
+                   &left_column_box_),
 
      is_replay_(is_replay),
      update_game_details_(false),
      showing_filenames_(false) {
 
-	// Make sure that we have some space to work with.
-	main_box_.set_size(get_w(), get_w());
-
-	main_box_.add_space(padding_);
-	main_box_.add_inf_space();
 	if (is_replay_) {
 		show_filenames_ = new UI::Checkbox(
 		   &main_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
 		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
 	}
-	main_box_.add_inf_space();
-	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(padding_);
 
-	info_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kFullSize);
-	info_box_.add_space(right_column_margin_);
-	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kFullSize);
-
-	button_spacer_ = new UI::Panel(load_or_save_.game_details()->button_box(), 0, 0, 0, 0);
-	load_or_save_.game_details()->button_box()->add(button_spacer_);
+	left_column_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
 
 	layout();
 
@@ -78,7 +68,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
-		                                                _("Return to the single player menu"));
+                                                      _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 
@@ -101,24 +91,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 }
 
 void FullscreenMenuLoadGame::think() {
-	FullscreenMenuLoadMapOrGame::think();
+	TwoColumnsNavigationMenu::think();
 
 	if (update_game_details_) {
 		// Call performance heavy draw_minimap function only during think
 		update_game_details_ = false;
 		load_or_save_.entry_selected();
 	}
-}
-
-void FullscreenMenuLoadGame::layout() {
-	FullscreenMenuLoadMapOrGame::layout();
-	main_box_.set_size(get_inner_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
-	main_box_.set_pos(Vector2i(tablex_, 0));
-	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
-	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
-	load_or_save_.table().set_desired_size(tablew_, tableh_);
-	load_or_save_.game_details()->set_max_size(
-	   main_box_.get_inner_w() - tablew_ - right_column_margin_, tableh_);
 }
 
 void FullscreenMenuLoadGame::toggle_filenames() {
@@ -191,5 +170,5 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 		break;
 	}
 
-	return FullscreenMenuLoadMapOrGame::handle_key(down, code);
+	return TwoColumnsNavigationMenu::handle_key(down, code);
 }

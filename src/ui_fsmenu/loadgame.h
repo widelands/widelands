@@ -25,11 +25,11 @@
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
-#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/menu.h"
 #include "wui/load_or_save_game.h"
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
-class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuLoadGame : public TwoColumnsNavigationMenu {
 public:
 	FullscreenMenuLoadGame(FullscreenMenuMain&,
 	                       Widelands::Game&,
@@ -47,22 +47,15 @@ protected:
 	void clicked_ok() override;
 
 	/// Update button status and game details
-	void entry_selected() override;
+	void entry_selected();
 
 	/// Fill load_or_save_'s table
-	void fill_table() override;
+	void fill_table();
 
 private:
-	void layout() override;
 	void toggle_filenames();
 
-	UI::Box main_box_;
-	UI::Box info_box_;
-
 	LoadOrSaveGame load_or_save_;
-
-	// TODO(GunChleoc): Get rid of this hack once everything is 100% box layout
-	UI::Panel* button_spacer_;
 	std::string filename_;
 
 	bool is_replay_;

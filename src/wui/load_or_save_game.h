@@ -46,7 +46,8 @@ protected:
 	               FileType filetype,
 	               UI::PanelStyle,
 	               UI::WindowStyle,
-	               bool localize_autosave);
+	               bool localize_autosave,
+	               UI::Panel* table_parent = nullptr);
 
 	/// Update gamedetails and tooltips and return information about the current selection
 	std::unique_ptr<SavegameData> entry_selected();
@@ -91,7 +92,6 @@ private:
 	bool compare_save_time(uint32_t, uint32_t) const;
 	bool compare_map_name(uint32_t, uint32_t) const;
 
-	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
 
