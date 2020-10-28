@@ -68,7 +68,7 @@ class TwoColumnsNavigationMenu : public TwoColumnsMenu {
 public:
 	TwoColumnsNavigationMenu(FullscreenMenuMain&,
 	                         const std::string& name,
-	                         const std::string title,
+	                         const std::string& title,
 	                         double right_column_width_factor = 1.0 / 3);
 	~TwoColumnsNavigationMenu() override;
 

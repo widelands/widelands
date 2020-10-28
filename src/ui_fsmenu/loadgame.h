@@ -22,9 +22,7 @@
 
 #include "logic/game.h"
 #include "logic/game_settings.h"
-#include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/panel.h"
 #include "ui_fsmenu/menu.h"
 #include "wui/load_or_save_game.h"
 

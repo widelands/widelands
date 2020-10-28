@@ -109,7 +109,7 @@ void TwoColumnsMenu::layout() {
 
 TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
                                                    const std::string& name,
-                                                   const std::string title,
+                                                   const std::string& title,
                                                    double right_column_width_factor)
    : TwoColumnsMenu(fsmm, name, title, right_column_width_factor),
      right_column_content_box_(

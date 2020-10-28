@@ -40,8 +40,6 @@ protected:
 	void fill_table();
 
 private:
-	void layout() override;
-
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 

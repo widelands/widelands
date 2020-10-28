@@ -48,6 +48,7 @@ wl_library(ui_fsmenu_main
     menu.cc
   DEPENDS
     base_i18n
+    base_log
     base_random
     build_info
     graphic
@@ -115,7 +116,6 @@ wl_library(ui_fsmenu_gameloading
     ui_basic
     ui_fsmenu_main
     ui_fsmenu_helpwindow
-    ui_fsmenu_loading_common
     ui_fsmenu_maploading
     widelands_options
     wui_chat_ui

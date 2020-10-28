@@ -97,7 +97,6 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	right_column_content_box_.add(
 	   &scenario_difficulty_header_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add(&scenario_difficulty_, UI::Box::Resizing::kFullSize);
-	//	right_column_content_box_.add_space(5 * padding);
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
                                     _("Return to campaign selection"));

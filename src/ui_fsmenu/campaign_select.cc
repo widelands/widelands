@@ -18,7 +18,6 @@
  */
 
 #include "ui_fsmenu/campaign_select.h"
-#include <base/log.h>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -57,14 +56,6 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& f
 	layout();
 
 	table_.cancel.connect([this]() { clicked_back(); });
-}
-
-void FullscreenMenuCampaignSelect::layout() {
-
-	TwoColumnsNavigationMenu::layout();
-
-	printBox(campaign_details_);
-	log_dbg("###############");
 }
 
 /**
