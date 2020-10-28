@@ -4,6 +4,7 @@ dirname = path.dirname (__file__)
 
 descriptions:new_immovable_type {
    name = "cocoa_tree_sapling",
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Cocoa Tree (sapling)",
    size = "small",
    icon = dirname .. "menu_sapling.png",
@@ -27,6 +28,7 @@ descriptions:new_immovable_type {
 
 descriptions:new_immovable_type {
    name = "cocoa_tree_pole",
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Cocoa Tree (pole)",
    size = "small",
    icon = dirname .. "menu_pole.png",
@@ -50,6 +52,7 @@ descriptions:new_immovable_type {
 
 descriptions:new_immovable_type {
    name = "cocoa_tree_mature",
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Cocoa Tree (mature)",
    size = "small",
    icon = dirname .. "menu_mature.png",
@@ -73,6 +76,7 @@ descriptions:new_immovable_type {
 
 descriptions:new_immovable_type {
    name = "cocoa_tree_old",
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Cocoa Tree (old)",
    size = "small",
    icon = dirname .. "menu_old.png",

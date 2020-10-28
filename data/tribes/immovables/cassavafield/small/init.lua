@@ -5,7 +5,7 @@ dirname = path.dirname(__file__)
 descriptions:new_immovable_type {
    name = "cassavarootfield_small",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext("immovable", "Cassavroot Field (small)"),
+   descname = pgettext("immovable", "Cassava Root Field (small)"),
    icon = dirname .. "menu.png",
    size = "small",
    programs = {

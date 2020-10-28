@@ -76,7 +76,7 @@ spritesheet_old = {
 
 descriptions:new_immovable_type{
    name = "balsa_amazons_sapling",
-   -- TRANSLATORS: This is a amazon rare tree.
+   -- TRANSLATORS: This is an amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
    size = "small",
    terrain_affinity = terrain_affinity,
@@ -94,7 +94,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_amazons_pole",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
    size = "small",
    terrain_affinity = terrain_affinity,
@@ -112,7 +112,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_amazons_mature",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
    size = "small",
    terrain_affinity = terrain_affinity,
@@ -130,9 +130,9 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_amazons_old",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Old)",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    species = _ "Balsa Tree",
    size = "small",
    terrain_affinity = terrain_affinity,
@@ -154,7 +154,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_black_amazons_sapling",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
    size = "small",
    terrain_affinity = terrain_affinity_black,
@@ -172,7 +172,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_black_amazons_pole",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
    size = "small",
    terrain_affinity = terrain_affinity_black,
@@ -190,7 +190,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_black_amazons_mature",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
    size = "small",
    terrain_affinity = terrain_affinity_black,
@@ -208,9 +208,9 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_black_amazons_old",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Old)",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    species = _ "Balsa Tree",
    size = "small",
    terrain_affinity = terrain_affinity_black,
@@ -232,7 +232,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_desert_amazons_sapling",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
@@ -250,7 +250,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_desert_amazons_pole",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
@@ -268,7 +268,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_desert_amazons_mature",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
@@ -286,9 +286,9 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_desert_amazons_old",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Old)",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    species = _ "Balsa Tree",
    size = "small",
    terrain_affinity = terrain_affinity_desert,
@@ -310,7 +310,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_winter_amazons_sapling",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Sapling)",
    size = "small",
    terrain_affinity = terrain_affinity_winter,
@@ -328,7 +328,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_winter_amazons_pole",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Pole)",
    size = "small",
    terrain_affinity = terrain_affinity_winter,
@@ -346,7 +346,7 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_winter_amazons_mature",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Mature)",
    size = "small",
    terrain_affinity = terrain_affinity_winter,
@@ -364,9 +364,9 @@ descriptions:new_immovable_type{
 
 descriptions:new_immovable_type{
    name = "balsa_winter_amazons_old",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Balsa Tree (Old)",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    species = _ "Balsa Tree",
    size = "small",
    terrain_affinity = terrain_affinity_winter,

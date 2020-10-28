@@ -5,7 +5,7 @@ dirname = path.dirname(__file__)
 
 descriptions:new_immovable_type{
    name = "deadtree7",
-   -- TRANSLATORS:  This is a amazon rare tree.
+   -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Dead Tree",
    size = "small",
    terrain_affinity = terrain_affinity,
