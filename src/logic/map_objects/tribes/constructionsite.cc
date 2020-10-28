@@ -96,7 +96,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = kBuildingSilhouetteOpacity;
 	}
 
-	uint32_t animation_id;
+	// Initialize variable to make checks happy
+	uint32_t animation_id = animations[0].first;
 	Time time = Time();
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one

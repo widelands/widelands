@@ -2066,7 +2066,7 @@ void CmdToggleMuteMessages::read(FileRead& fr, EditorGameBase& egbase, MapObject
 		if (packet_version == kCurrentPacketVersionCmdToggleMuteMessages) {
 			PlayerCommand::read(fr, egbase, mol);
 			building_ = fr.unsigned_32();
-			all_ = fr.unsigned_8() ? 1 : 0;
+			all_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdToggleMuteMessages", packet_version, kCurrentPacketVersionCmdToggleMuteMessages);
@@ -2110,7 +2110,7 @@ void CmdMarkMapObjectForRemoval::read(FileRead& fr, EditorGameBase& egbase, MapO
 		if (packet_version == kCurrentPacketVersionCmdMarkMapObjectForRemoval) {
 			PlayerCommand::read(fr, egbase, mol);
 			object_ = fr.unsigned_32();
-			mark_ = fr.unsigned_8() ? 1 : 0;
+			mark_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError("CmdMarkMapObjectForRemoval", packet_version,
 			                            kCurrentPacketVersionCmdMarkMapObjectForRemoval);
