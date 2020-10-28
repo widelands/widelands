@@ -121,7 +121,7 @@ void Shader::compile(const char* source) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
 			CLANG_DIAG_OFF("-Wunknown-pragmas")
 			CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-			glGetShaderInfoLog(shader_object_, infoLen, NULL, infoLog.get());
+			glGetShaderInfoLog(shader_object_, infoLen, nullptr, infoLog.get());
 			CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 			CLANG_DIAG_ON("-Wunknown-pragmas")
 			throw wexception(
@@ -167,7 +167,7 @@ void Program::build(const std::string& program_name) {
 			std::unique_ptr<char[]> infoLog(new char[infoLen]);
 			CLANG_DIAG_OFF("-Wunknown-pragmas")
 			CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-			glGetProgramInfoLog(program_object_, infoLen, NULL, infoLog.get());
+			glGetProgramInfoLog(program_object_, infoLen, nullptr, infoLog.get());
 			CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 			CLANG_DIAG_ON("-Wunknown-pragmas")
 			throw wexception("Error linking:\n%s", infoLog.get());
