@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-const WarePriority WarePriority::kVeryLow(0);
+const WarePriority WarePriority::kVeryLow(1);
 const WarePriority WarePriority::kLow(4);
 const WarePriority WarePriority::kNormal(16);
 const WarePriority WarePriority::kHigh(64);
