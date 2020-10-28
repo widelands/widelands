@@ -1169,10 +1169,10 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 			}
 			// Swimability of the directions
 			for (bool& swimmable : expedition_->swimmable) {
-				swimmable = fr.unsigned_8() == 1;
+				swimmable = fr.unsigned_8();
 			}
 			// whether scouting or exploring
-			expedition_->island_exploration = fr.unsigned_8() == 1;
+			expedition_->island_exploration = fr.unsigned_8();
 			// current direction
 			expedition_->scouting_direction = static_cast<WalkingDir>(fr.unsigned_8());
 			// Start coordinates of an island exploration

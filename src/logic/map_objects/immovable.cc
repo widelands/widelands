@@ -540,7 +540,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	if (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings) {
 		bool has_former_building = true;
 		if (packet_version > 10) {
-			has_former_building = fr.unsigned_8() == 1;
+			has_former_building = fr.unsigned_8();
 		}
 		if (has_former_building) {
 			Player* owner = imm.get_owner();
