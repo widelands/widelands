@@ -365,11 +365,7 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		//  make a histogram of the heights
 
-		uint32_t histo[1024];
-
-		for (uint32_t x = 0; x < 1024; ++x) {
-			histo[x] = 0;
-		}
+		uint32_t histo[1024] = {0};
 
 		for (uint32_t x = 0; x < w; ++x) {
 			for (uint32_t y = 0; y < h; ++y) {
@@ -1054,10 +1050,7 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 	assert(mapInfo.resource_amount <= Widelands::UniqueRandomMapInfo::raHigh);
 
 	mapIdsString_out = "";
-	int32_t nums[kMapIdDigits];
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		nums[ix] = 0;
-	}
+	int32_t nums[kMapIdDigits] = {0};
 
 	// Generate world name hash
 	uint16_t nameHash = generate_world_name_hash(mapInfo.world_name);
@@ -1109,8 +1102,8 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 	//  Every change in a digit will result in a complete id change
 
 	int32_t xorr = 0x0a;
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		xorr = xorr ^ nums[ix];
+	for (int32_t ix : nums) {
+		xorr = xorr ^ ix;
 	}
 
 	for (int32_t ix = kMapIdDigits - 1; ix >= 0; --ix) {
