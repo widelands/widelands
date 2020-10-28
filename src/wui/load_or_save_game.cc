@@ -144,18 +144,18 @@ void LoadOrSaveGame::set_tooltips_of_buttons(size_t nr_of_selected_items) const 
 	if (nr_of_selected_items == 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
-            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-            _("Delete this replay") :
-            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-            _("Delete this game"));
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this replay") :
+		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+		      _("Delete this game"));
 	} else if (nr_of_selected_items > 1) {
 		delete_->set_tooltip(filetype_ == FileType::kReplay ?
-                                 /** TRANSLATORS: Tooltip for the delete button. The user has
-                                    selected multiple files */
-                                 _("Delete these replays") :
-                                 /** TRANSLATORS: Tooltip for the delete button. The user has
-                                    selected multiple files */
-                                 _("Delete these games"));
+		                        /** TRANSLATORS: Tooltip for the delete button. The user has
+		                           selected multiple files */
+		                        _("Delete these replays") :
+		                        /** TRANSLATORS: Tooltip for the delete button. The user has
+		                           selected multiple files */
+		                        _("Delete these games"));
 	} else {
 		delete_->set_tooltip("");
 	}
