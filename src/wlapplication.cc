@@ -328,7 +328,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
-     mouse_locked_(0),
+     mouse_locked_(false),
      mouse_compensate_warp_(Vector2i::zero()),
      should_die_(false),
 #ifdef _WIN32
@@ -917,7 +917,7 @@ void WLApplication::init_language() {
 		SDL_ShowSimpleMessageBox(
 		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
 		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
-		   NULL);
+		   nullptr);
 		log_err("%s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
 		exit(1);
 	}

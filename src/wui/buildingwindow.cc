@@ -39,13 +39,13 @@
 #include "wui/unique_window_handler.h"
 #include "wui/waresdisplay.h"
 
-static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
-static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
-static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
-static const char* pic_mute_this = "images/wui/buildings/menu_mute_this.png";
-static const char* pic_unmute_this = "images/wui/buildings/menu_unmute_this.png";
-static const char* pic_mute_all = "images/wui/buildings/menu_mute_all.png";
-static const char* pic_unmute_all = "images/wui/buildings/menu_unmute_all.png";
+constexpr const char* const kImgBulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
+constexpr const char* const kImgDismantle = "images/wui/buildings/menu_bld_dismantle.png";
+constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
+constexpr const char* const kImgMuteThis = "images/wui/buildings/menu_mute_this.png";
+constexpr const char* const kImgUnmuteThis = "images/wui/buildings/menu_unmute_this.png";
+constexpr const char* const kImgMuteAll = "images/wui/buildings/menu_mute_all.png";
+constexpr const char* const kImgUnmuteAll = "images/wui/buildings/menu_unmute_all.png";
 
 BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                UI::UniqueWindow::Registry& reg,
@@ -196,17 +196,17 @@ void BuildingWindow::think() {
 			NEVER_HERE();
 		}
 		mute_this_->set_pic(
-		   g_image_cache->get(building->mute_messages() ? pic_unmute_this : pic_mute_this));
+		   g_image_cache->get(building->mute_messages() ? kImgUnmuteThis : kImgMuteThis));
 		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
 		                                                    _("Mute this building’s messages"));
 		if (building->owner().is_muted(
 		       building->owner().tribe().safe_building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
-			mute_all_->set_pic(g_image_cache->get(pic_unmute_all));
+			mute_all_->set_pic(g_image_cache->get(kImgUnmuteAll));
 			mute_all_->set_tooltip(_("All buildings of this type are muted – click to unmute"));
 		} else {
 			mute_this_->set_enabled(true);
-			mute_all_->set_pic(g_image_cache->get(pic_mute_all));
+			mute_all_->set_pic(g_image_cache->get(kImgMuteAll));
 			mute_all_->set_tooltip(_("Mute all buildings of this type"));
 		}
 	}
@@ -316,7 +316,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (capscache_ & Widelands::Building::PCap_Bulldoze) {
 			UI::Button* destroybtn =
 			   new UI::Button(capsbuttons, "destroy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_bulldoze), _("Destroy"));
+			                  g_image_cache->get(kImgBulldoze), _("Destroy"));
 			destroybtn->sigclicked.connect([this]() { act_bulldoze(); });
 			capsbuttons->add(destroybtn);
 
@@ -330,7 +330,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				if (!wares.empty()) {
 					UI::Button* dismantlebtn =
 					   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-					                  g_image_cache->get(pic_dismantle),
+					                  g_image_cache->get(kImgDismantle),
 					                  std::string(_("Dismantle")) + "<br>" +
 					                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 					                        .header_font()
@@ -354,10 +354,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (allow_muting(building->descr())) {
 			mute_this_ =
 			   new UI::Button(capsbuttons, "mute_this", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_mute_this), "" /* set by next think() */);
+			                  g_image_cache->get(kImgMuteThis), "" /* set by next think() */);
 			mute_all_ =
 			   new UI::Button(capsbuttons, "mute_all", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_mute_all), "" /* set by next think() */);
+			                  g_image_cache->get(kImgMuteAll), "" /* set by next think() */);
 			mute_all_->sigclicked.connect([this]() { act_mute(true); });
 			mute_this_->sigclicked.connect([this]() { act_mute(false); });
 			capsbuttons->add(mute_this_);
@@ -386,7 +386,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (ibase()->get_display_flag(InteractiveBase::dfDebug)) {
 			UI::Button* debugbtn =
 			   new UI::Button(capsbuttons, "debug", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_debug), _("Show Debug Window"));
+			                  g_image_cache->get(kImgDebug), _("Show Debug Window"));
 			debugbtn->sigclicked.connect([this]() { act_debug(); });
 			capsbuttons->add(debugbtn);
 		}

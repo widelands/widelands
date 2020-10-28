@@ -31,9 +31,9 @@
 std::string Md5Checksum::str() const {
 	std::string s;
 
-	for (uint32_t i = 0; i < sizeof(data); ++i) {
+	for (uint8_t d : data) {
 		char buf[3];
-		snprintf(buf, sizeof(buf), "%02x", data[i]);
+		snprintf(buf, sizeof(buf), "%02x", d);
 		s += buf;
 	}
 
