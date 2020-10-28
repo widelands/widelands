@@ -5,7 +5,7 @@ dirname = path.dirname(__file__)
 descriptions:new_ware_type {
    name = "cassavaroot",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Cassavaroot"),
+   descname = pgettext("ware", "Cassava Root"),
    animation_directory = dirname,
    icon = dirname .. "menu.png",
 

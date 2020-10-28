@@ -137,7 +137,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Liana
-                  pgettext("amazons_ware", "Lianas grow in the trees. Very durable ropes are made out of them.")
+                  pgettext("amazons_ware", "Lianas grow on trees. Very durable ropes are made out of them.")
                }
             }
          },
@@ -162,7 +162,7 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Water, part 1
                   pgettext("ware", "Water is the essence of life!"),
                   -- TRANSLATORS: Helptext for an amazon ware: Water, part 2
-                  pgettext("amazons_ware", "Water is used by the cassava root cookery, the chocolate brewery, the gold digger and the tapir farms.")
+                  pgettext("amazons_ware", "Water is used by the cassava root cooker, the chocolate brewery, the gold digger and the tapir farm.")
                }
             }
          },
@@ -214,7 +214,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Fish
-                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering).")
+                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -226,7 +226,7 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Meat, part 1
                   pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
                   -- TRANSLATORS: Helptext for an amazon ware: Meat, part 2
-                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering).")
+                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -402,7 +402,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Stone Bowl
-                  pgettext("amazons_ware", "Stone bowls are used to wash gold and to smelt the gold dust.")
+                  pgettext("amazons_ware", "Stone bowls are used to wash gold and to smelt gold dust.")
                }
             }
          },
@@ -438,7 +438,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Wooden Armor
-                  pgettext("amazons_ware", "This light wooden armor is a basic armor for the Amazons’ soldiers. It is produced by a dressmaker and used in a training glade – together with food – to train soldiers from health level 0 to level 1.")
+                  pgettext("amazons_ware", "This light wooden armor is a basic piece of armor for the Amazons’ soldiers. It is produced by a dressmaker and used in a training glade – together with food – to train soldiers from health level 0 to level 1.")
                }
             }
          },
@@ -449,7 +449,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Wodden Helmet
-                  pgettext ("amazons_ware", "A wooden helmet is a basic equipment to protect soldiers. It is produced by the dressmaker and used to train soldiers from health level 1 to level 2."),
+                  pgettext ("amazons_ware", "A wooden helmet is a basic piece of equipment for protecting soldiers. It is produced by the dressmaker and used to train soldiers from health level 1 to level 2."),
                }
             }
          },
@@ -460,7 +460,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Warriors Coat
-                  pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such clothes are the best armor.")
+                  pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such tunics are the best armor.")
                }
             }
          },
@@ -482,7 +482,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Padded Vest
-                  pgettext("amazons_ware", "A padded vest is a light but durable armor. It is produced by the dressmaker and used to train soldiers’ defence from level 0 to level 1.")
+                  pgettext("amazons_ware", "Padded vests are light but durable armor. They are produced by the dressmaker and used to train soldiers’ defence from level 0 to level 1.")
                }
             }
          },
@@ -493,7 +493,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Padded Protector
-                  pgettext("amazons_ware", "A padded protector is a strong and durable armor. It is produced by the dressmaker and used to train soldiers’ defence from level 1 to level 2.")
+                  pgettext("amazons_ware", "Padded protectors are strong and durable armor. They are produced by the dressmaker and used to train soldiers’ defence from level 1 to level 2.")
                }
             }
          },
@@ -504,7 +504,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Sturdy Boots
-                  pgettext("amazons_ware", "Sturdy boots are an excellent footwear for soldiers to be quicker on their feet. They are produced by the dressmaker and used to train soldiers’ evade from level 0 to level 1.")
+                  pgettext("amazons_ware", "Sturdy boots are excellent footwear for soldiers to be quicker on their feet. They are produced by the dressmaker and used to train soldiers’ evade from level 0 to level 1.")
                }
             }
          },
@@ -515,7 +515,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Swift Boots
-                  pgettext("amazons_ware", "Swift boots are a light and durable footwear for soldiers to be quicker on their feet. They are produced by the dressmaker and used to train soldiers’ evade from level 1 to level 2.")
+                  pgettext("amazons_ware", "Swift boots are light and durable footwear for soldiers to be quicker on their feet. They are produced by the dressmaker and used to train soldiers’ evade from level 1 to level 2.")
                }
             }
          },
@@ -1345,7 +1345,7 @@ descriptions:new_tribe {
       {
          name = "amazons_rope_weaver_booth",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an amazon production site: Rope Weaver Booth
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Rope Weaver's Booth
             purpose = pgettext("amazons_building", "Makes ropes from lianas.")
          }
       },
