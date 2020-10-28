@@ -146,7 +146,6 @@ bool GameChatPanel::handle_key(const bool down, const SDL_Keysym code) {
 
 	// User is pressing Ctrl+Space, try autocomplete
 
-
 	if (editbox.text().empty()) {
 		return false;
 	}

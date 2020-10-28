@@ -62,7 +62,6 @@ struct GameChatPanel : public UI::Panel {
 	void unfocus_edit();
 
 private:
-
 	void layout() override;
 	void recalculate(bool has_new_message = false);
 	void key_enter();
