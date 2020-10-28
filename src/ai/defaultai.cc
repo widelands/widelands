@@ -2312,7 +2312,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	const Widelands::PlayerNumber pn = player_number();
 
 	// Genetic algorithm is used here
-	static bool inputs[2 * kFNeuronBitSize] = { false };
+	static bool inputs[2 * kFNeuronBitSize] = {false};
 	// Resetting values as the variable is static
 	std::fill(std::begin(inputs), std::end(inputs), false);
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);

@@ -855,7 +855,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 	}
 #ifndef NDEBUG
 	for (RoadBase* rb : roads_) {
-			assert(!rb);
+		assert(!rb);
 	}
 #endif
 
