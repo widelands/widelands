@@ -568,7 +568,8 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	const std::string scenario_name = luaL_checkstring(L, 3);
 
 	std::string complete_filename = kCampaignDataDir + FileSystem::file_separator() + campaign_name +
-	                                FileSystem::file_separator() + scenario_name + kCampaignDataExtension;
+	                                FileSystem::file_separator() + scenario_name +
+	                                kCampaignDataExtension;
 	boost::trim(complete_filename);
 
 	Profile profile;

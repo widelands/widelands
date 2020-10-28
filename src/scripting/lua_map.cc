@@ -2262,7 +2262,8 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const uint32_t attribute_id = Widelands::MapObjectDescr::get_attribute_id(luaL_checkstring(L, 2));
+	const uint32_t attribute_id =
+	   Widelands::MapObjectDescr::get_attribute_id(luaL_checkstring(L, 2));
 	lua_pushboolean(L, get()->has_attribute(attribute_id));
 	return 1;
 }

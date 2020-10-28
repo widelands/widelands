@@ -127,7 +127,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	try {
 		g_fs->ensure_directory_exists(kTempFileDir);
 
-		std::string filename = kTempFileDir + FileSystem::file_separator() + timestring() + "_mapdata";
+		std::string filename =
+		   kTempFileDir + FileSystem::file_separator() + timestring() + "_mapdata";
 		std::string complete_filename = filename + kTempFileExtension;
 
 		// if a file with that name already exists, then try a few name modifications

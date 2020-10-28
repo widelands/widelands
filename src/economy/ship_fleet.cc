@@ -571,10 +571,8 @@ void ShipFleet::add_port(EditorGameBase& egbase, PortDock* port) {
 		set_economy(ports_[0]->get_economy(wwWORKER), wwWORKER);
 	} else {
 		if (!ships_.empty()) {
-			Economy::check_merge(
-			   ports_[0]->base_flag(), port->base_flag(), wwWARE);
-			Economy::check_merge(
-			   ports_[0]->base_flag(), port->base_flag(), wwWORKER);
+			Economy::check_merge(ports_[0]->base_flag(), port->base_flag(), wwWARE);
+			Economy::check_merge(ports_[0]->base_flag(), port->base_flag(), wwWORKER);
 		}
 	}
 

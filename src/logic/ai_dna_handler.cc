@@ -44,7 +44,8 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 	// AI files are in range 1-4
 	assert(slot > 0 && slot < 5);
 
-	const std::string full_filename = kAiDir + FileSystem::file_separator() + std::string("ai_input_") +
+	const std::string full_filename = kAiDir + FileSystem::file_separator() +
+	                                  std::string("ai_input_") +
 	                                  std::to_string(static_cast<int>(slot)) + kAiExtension;
 
 	Profile prof;
@@ -88,8 +89,8 @@ void AiDnaHandler::fetch_dna(std::vector<int16_t>& military_numbers,
 // This generates a new file with AI data in '.widelands/ai'
 void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t pn) {
 
-	const std::string full_filename = kAiDir + FileSystem::file_separator() + std::string(timestring()) +
-	                                  std::string("_ai_player_") +
+	const std::string full_filename = kAiDir + FileSystem::file_separator() +
+	                                  std::string(timestring()) + std::string("_ai_player_") +
 	                                  std::to_string(static_cast<int>(pn)) + kAiExtension;
 
 	log_dbg(" %d: AI to be dumped to %s\n", pn, full_filename.c_str());
