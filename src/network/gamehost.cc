@@ -519,8 +519,8 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(const std::string& playername, bool internet)
-   : d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+GameHost::GameHost(FullscreenMenuMain& f, const std::string& playername, bool internet)
+   : fsmm_(f), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log_info("[Host]: starting up.\n");
 
 	d->localplayername = playername;
@@ -644,11 +644,12 @@ void GameHost::init_computer_players() {
 
 // TODO(k.halfmann): refactor into smaller functions
 void GameHost::run() {
+	Widelands::Game game;
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(&d->hp, this, d->chat);
-	const FullscreenMenuBase::MenuTarget code = lm.run<FullscreenMenuBase::MenuTarget>();
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
+	const MenuTarget code = lm.run<MenuTarget>();
+	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
@@ -675,7 +676,6 @@ void GameHost::run() {
 	packet.unsigned_8(NETCMD_LAUNCH);
 	broadcast(packet);
 
-	Widelands::Game game;
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	game.set_auto_speed(get_config_bool("auto_speed", false));
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));

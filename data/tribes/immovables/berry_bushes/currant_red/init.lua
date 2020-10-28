@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 40,
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_currant_red_tiny",
    descname = _ "Red Currant (tiny)",
    size = "small",
@@ -33,7 +33,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_currant_red_small",
    descname = _ "Red Currant (small)",
    size = "small",
@@ -57,7 +57,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_currant_red_medium",
    descname = _ "Red Currant (medium)",
    size = "small",
@@ -81,7 +81,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_currant_red_ripe",
    descname = _ "Red Currant (ripe)",
    size = "small",

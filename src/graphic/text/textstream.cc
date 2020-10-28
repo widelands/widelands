@@ -100,8 +100,8 @@ std::string TextStream::till_any(std::string chars) {
 	size_t started_at = pos_;
 	bool found = false;
 	while (j < end_) {
-		for (size_t k = 0; k < chars.size(); ++k) {
-			if (chars[k] == text_[j]) {
+		for (char& ch : chars) {
+			if (ch == text_[j]) {
 				found = true;
 				break;
 			}

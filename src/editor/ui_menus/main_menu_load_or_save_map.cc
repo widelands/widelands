@@ -35,7 +35,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              const std::string& title,
                                              bool show_empty_dirs,
                                              const std::string& basedir)
-   : UI::UniqueWindow(&parent, name, &registry, parent.get_w(), parent.get_h(), title),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, name, &registry, parent.get_w(), parent.get_h(), title),
 
      // Values for alignment and size
      padding_(4),
@@ -49,7 +50,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
      map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, parent.egbase()),
 
      display_mode_(&table_box_,
                    "display_mode",

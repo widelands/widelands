@@ -24,23 +24,30 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
+        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
-    - name: Run codecheck
+    - name: Test
+      run: |
+        pushd cmake/codecheck
+        ./run_tests.py
+        popd
+    - name: Check
       run: |
         mkdir build
         cd build
         cmake .. -DCMAKE_BUILD_TYPE:STRING="Debug"
-        pushd ../cmake/codecheck
-        ./run_tests.py
-        popd
         TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
-        if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then
+    - name: Report
+      run: |
+        if grep '^[/_.a-zA-Z]\+:[0-9]\+:' build/codecheck.out; then
           echo "You have codecheck warnings (see above). Please fix."
           exit 1
+        else
+          echo "Codecheck is clear :)"
+          exit 0
         fi
 
   documentation:
@@ -68,19 +75,22 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
+        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
     - name: Check
+      # To run a single check, call:
+      # python ../utils/run-clang-tidy.py -checks=-*,my-check-prefix* > ../clang-tidy.log
+
       run: |
         export CC=/usr/bin/clang
         export CXX=/usr/bin/clang++
         mkdir build
         pushd build
         cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
-        python ../utils/run-clang-tidy.py -checks=-*,*braces*,cert*,clang-analyzer*,cppcoreguidelines-pro-type-static-cast-downcast,google*,hicpp-use*,llvm-namespace-comment,misc*,performance* > ../clang-tidy.log
+        python ../utils/run-clang-tidy.py -checks=*,-android*,-fuchsia* > ../clang-tidy.log
         popd
     - name: Report
       run: utils/check_clang_tidy_results.py clang-tidy.log
@@ -108,7 +118,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-regex-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -134,23 +144,11 @@ jobs:
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
         export SDL_VIDEODRIVER=x11
         export DISPLAY=:99.0
-        # Ignore transient SDL errors
-        trap 'err_handler' EXIT
-        err_handler() {
-          result=$?
-          if [ $result -eq 2 ]
-          then
-            echo "SDL initialization failed. TEST SKIPPED."
-          elif [ $result -ne 0 ]
-          then
-            echo "ERROR: $result"
-            exit $result
-          fi
-        }
+        # Ignore transient SDL errors (exit code 2)
         ./regression_test.py -b build/src/widelands
         mkdir temp_web
-        build/src/website/wl_map_object_info temp_web
-        build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf
+        build/src/website/wl_map_object_info temp_web || [ $? -eq 2 ]
+        build/src/website/wl_map_info data/maps/Archipelago_Sea.wmf || [ $? -eq 2 ]
 
   windows:
     # Skip this job on master branch

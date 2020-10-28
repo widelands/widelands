@@ -386,11 +386,12 @@ public:
 		 * Call `set_constructionsite(true)` before using `constructionsite`,
 		 * and call `set_constructionsite(false)` before using `dismantlesite`.
 		 */
+		struct DismantlesiteInformation {
+			uint32_t progress;
+			const BuildingDescr* building;
+		};
 		union {
-			struct {
-				uint32_t progress;
-				const BuildingDescr* building;
-			} dismantlesite;
+			DismantlesiteInformation dismantlesite;
 			ConstructionsiteInformation* constructionsite;
 		};
 		bool is_constructionsite;
@@ -729,7 +730,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
-void find_former_buildings(const Tribes& tribes,
+void find_former_buildings(const Descriptions& descriptions,
                            const DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 }  // namespace Widelands

@@ -25,8 +25,8 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 
 constexpr int kMaxValue = 63;
 
@@ -86,9 +86,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	// Add resource buttons
 	resources_box_.add_inf_space();
-	const Widelands::World& world = parent.egbase().world();
-	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_resources(); ++i) {
-		const Widelands::ResourceDescription& resource = *world.get_resource(i);
+	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_resources(); ++i) {
+		const Widelands::ResourceDescription& resource = *descriptions.get_resource_descr(i);
 		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
 		                       g_image_cache->get(resource.representative_image()),
 		                       resource.descname());
@@ -149,8 +149,11 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
  * Update all the textareas, so that they represent the correct values
  */
 void EditorToolChangeResourcesOptionsMenu::update() {
-	cur_selection_.set_text(
-	   (boost::format(_("Current: %s")) %
-	    eia().egbase().world().get_resource(increase_tool_.set_tool().get_cur_res())->descname())
-	      .str());
+	cur_selection_.set_text((boost::format(_("Current: %s")) %
+	                         eia()
+	                            .egbase()
+	                            .descriptions()
+	                            .get_resource_descr(increase_tool_.set_tool().get_cur_res())
+	                            ->descname())
+	                           .str());
 }

@@ -25,10 +25,10 @@
 #include "base/wexception.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findnode.h"
 #include "logic/map_objects/world/map_gen.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -46,7 +46,7 @@ MapGenerator::MapGenerator(Map& map, UniqueRandomMapInfo& mapInfo, EditorGameBas
 	map_gen_config->do_not_warn_about_unaccessed_keys();
 
 	map_gen_info_.reset(
-	   new MapGenInfo(*map_gen_config->get_table(mapInfo.world_name), egbase.world()));
+	   new MapGenInfo(*map_gen_config->get_table(mapInfo.world_name), egbase.descriptions()));
 }
 
 void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
@@ -99,12 +99,12 @@ void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
 	if (set_immovable && (num = bobCategory->num_immovables())) {
 		egbase_.create_immovable_with_name(
 		   fc, bobCategory->get_immovable(static_cast<size_t>(rng.rand() / (kMaxElevation / num))),
-		   MapObjectDescr::OwnerType::kWorld, nullptr /* owner */, nullptr /* former_building_descr */
+		   nullptr /* owner */, nullptr /* former_building_descr */
 		);
 	}
 
 	if (set_moveable && (num = bobCategory->num_critters())) {
-		egbase_.create_critter(fc, egbase_.world().critter_index(bobCategory->get_critter(
+		egbase_.create_critter(fc, egbase_.descriptions().critter_index(bobCategory->get_critter(
 		                              static_cast<size_t>(rng.rand() / (kMaxElevation / num)))));
 	}
 }
@@ -117,25 +117,26 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 	// We'll take the "D" terrain at first...
 	// TODO(unknown): Check how the editor handles this...
 
-	const World& world = egbase_.world();
+	const Descriptions& descriptions = egbase_.descriptions();
 	DescriptionIndex const tix = fc.field->get_terrains().d;
-	const TerrainDescription& terrain_description = egbase_.world().terrain_descr(tix);
+	const TerrainDescription* terrain_description = descriptions.get_terrain_descr(tix);
 
-	const auto set_resource_helper = [this, &world, &terrain_description, &fc](
+	const auto set_resource_helper = [this, &descriptions, terrain_description, &fc](
 	                                    const uint32_t random_value,
 	                                    const int valid_resource_index) {
-		const DescriptionIndex res_idx = terrain_description.get_valid_resource(valid_resource_index);
-		const ResourceAmount max_amount = world.get_resource(res_idx)->max_amount();
+		const DescriptionIndex res_idx =
+		   terrain_description->get_valid_resource(valid_resource_index);
+		const ResourceAmount max_amount = descriptions.get_resource_descr(res_idx)->max_amount();
 		ResourceAmount res_val =
 		   static_cast<ResourceAmount>(random_value / (kMaxElevation / max_amount));
 		res_val *= static_cast<ResourceAmount>(map_info_.resource_amount) + 1;
 		res_val /= 3;
-		if (map_.is_resource_valid(world, fc, res_idx)) {
+		if (map_.is_resource_valid(descriptions, fc, res_idx)) {
 			map_.initialize_resources(fc, res_idx, res_val);
 		}
 	};
 
-	switch (terrain_description.get_num_valid_resources()) {
+	switch (terrain_description->get_num_valid_resources()) {
 	case 1: {
 		uint32_t const rnd1 = random1[fc.x + map_info_.w * fc.y];
 		set_resource_helper(rnd1, 0);
@@ -364,11 +365,7 @@ uint32_t* MapGenerator::generate_random_value_map(uint32_t const w, uint32_t con
 
 		//  make a histogram of the heights
 
-		uint32_t histo[1024];
-
-		for (uint32_t x = 0; x < 1024; ++x) {
-			histo[x] = 0;
-		}
+		uint32_t histo[1024] = {0};
 
 		for (uint32_t x = 0; x < w; ++x) {
 			for (uint32_t y = 0; y < h; ++y) {
@@ -1053,10 +1050,7 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 	assert(mapInfo.resource_amount <= Widelands::UniqueRandomMapInfo::raHigh);
 
 	mapIdsString_out = "";
-	int32_t nums[kMapIdDigits];
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		nums[ix] = 0;
-	}
+	int32_t nums[kMapIdDigits] = {0};
 
 	// Generate world name hash
 	uint16_t nameHash = generate_world_name_hash(mapInfo.world_name);
@@ -1108,8 +1102,8 @@ void UniqueRandomMapInfo::generate_id_string(std::string& mapIdsString_out,
 	//  Every change in a digit will result in a complete id change
 
 	int32_t xorr = 0x0a;
-	for (uint32_t ix = 0; ix < kMapIdDigits; ++ix) {
-		xorr = xorr ^ nums[ix];
+	for (int32_t ix : nums) {
+		xorr = xorr ^ ix;
 	}
 
 	for (int32_t ix = kMapIdDigits - 1; ix >= 0; --ix) {

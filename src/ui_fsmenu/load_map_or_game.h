@@ -20,11 +20,11 @@
 #ifndef WL_UI_FSMENU_LOAD_MAP_OR_GAME_H
 #define WL_UI_FSMENU_LOAD_MAP_OR_GAME_H
 
-#include "ui_fsmenu/base.h"
-
 #include "base/i18n.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
+#include "ui_basic/window.h"
+#include "ui_fsmenu/main.h"
 
 namespace Widelands {
 class Game;
@@ -34,9 +34,13 @@ class Map;
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
 /// This class defines common coordinates for these UI screens.
 /// It also defines common buttons.
-class FullscreenMenuLoadMapOrGame : public FullscreenMenuBase {
+class FullscreenMenuLoadMapOrGame : public UI::Window {
 public:
-	FullscreenMenuLoadMapOrGame();
+	explicit FullscreenMenuLoadMapOrGame(FullscreenMenuMain&, const std::string& title);
+
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuDefault;
+	}
 
 protected:
 	void layout() override;
@@ -46,6 +50,13 @@ protected:
 	virtual void entry_selected() {
 	}
 	virtual void fill_table() {
+	}
+
+	virtual void clicked_back() {
+		end_modal<MenuTarget>(MenuTarget::kBack);
+	}
+	virtual void clicked_ok() {
+		end_modal<MenuTarget>(MenuTarget::kOk);
 	}
 
 	// Returns a y coordinate that can be used to position a Panel below the Panel directly above it

@@ -28,7 +28,7 @@
 #include "graphic/image_io.h"
 #include "graphic/texture.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -97,7 +97,7 @@ TerrainDescription::Type::Type(TerrainDescription::Is init_is) : is(init_is) {
 	}
 }
 
-TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& world)
+TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& descriptions)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      is_(terrain_type_from_string(table.get_string("is"))),
@@ -112,11 +112,11 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 		log_warn("Terrain '%s' contains obsolete 'tooltips' table", name().c_str());
 	}
 
-	for (DescriptionIndex di = world.get_nr_terrains(); di; --di) {
-		const TerrainDescription& t = world.terrain_descr(di - 1);
-		if (t.dither_layer_ == dither_layer_) {
+	for (DescriptionIndex di = descriptions.nr_terrains(); di; --di) {
+		const TerrainDescription* t = descriptions.get_terrain_descr(di - 1);
+		if (t->dither_layer_ == dither_layer_) {
 			throw GameDataError("Terrain %s has the same dither layer %i as %s", name_.c_str(),
-			                    dither_layer_, t.name_.c_str());
+			                    dither_layer_, t->name_.c_str());
 		}
 	}
 
@@ -158,12 +158,13 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Widelands::World& 
 
 	for (const std::string& resource :
 	     table.get_table("valid_resources")->array_entries<std::string>()) {
-		valid_resources_.push_back(world.load_resource(resource));
+		valid_resources_.push_back(descriptions.load_resource(resource));
 	}
 
 	const std::string default_resource(table.get_string("default_resource"));
-	default_resource_index_ =
-	   !default_resource.empty() ? world.load_resource(default_resource) : Widelands::INVALID_INDEX;
+	default_resource_index_ = !default_resource.empty() ?
+	                             descriptions.load_resource(default_resource) :
+	                             Widelands::INVALID_INDEX;
 
 	if (default_resource_amount_ > 0 && !is_resource_valid(default_resource_index_)) {
 		throw GameDataError("Default resource is not in valid resources.\n");
@@ -294,7 +295,7 @@ void TerrainDescription::set_minimap_color(const RGBColor& color) {
 	}
 }
 
-const RGBColor& TerrainDescription::get_minimap_color(int shade) {
+const RGBColor& TerrainDescription::get_minimap_color(int shade) const {
 	assert(-128 <= shade && shade <= 127);
 	return minimap_colors_[128 + shade];
 }

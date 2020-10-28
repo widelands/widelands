@@ -252,22 +252,23 @@ bool FindNodeMineable::accept(const Widelands::EditorGameBase&,
 }
 
 // Fishers and fishbreeders must be built near water
-FindNodeWater::FindNodeWater(const Widelands::World& world) : world_(world) {
+FindNodeWater::FindNodeWater(const Widelands::Descriptions& descriptions)
+   : descriptions_(descriptions) {
 }
 
 bool FindNodeWater::accept(const Widelands::EditorGameBase& egbase,
                            const Widelands::FCoords& coord) const {
-	return (world_.terrain_descr(coord.field->terrain_d()).get_is() &
+	return (descriptions_.get_terrain_descr(coord.field->terrain_d())->get_is() &
 	        Widelands::TerrainDescription::Is::kWater) ||
-	       (world_
-	           .terrain_descr(
+	       (descriptions_
+	           .get_terrain_descr(
 	              egbase.map().get_neighbour(coord, Widelands::WALK_W).field->terrain_r())
-	           .get_is() &
+	           ->get_is() &
 	        Widelands::TerrainDescription::Is::kWater) ||
-	       (world_
-	           .terrain_descr(
+	       (descriptions_
+	           .get_terrain_descr(
 	              egbase.map().get_neighbour(coord, Widelands::WALK_NW).field->terrain_r())
-	           .get_is() &
+	           ->get_is() &
 	        Widelands::TerrainDescription::Is::kWater);
 }
 
@@ -332,7 +333,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
      preferred(false),
-     enemy_nearby(0),
+     enemy_nearby(false),
      enemy_accessible_(false),
      enemy_wh_nearby(false),
      unowned_land_nearby(0),

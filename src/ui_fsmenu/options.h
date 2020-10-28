@@ -102,6 +102,10 @@ public:
 
 	bool handle_key(bool, SDL_Keysym) override;
 
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuOptions;
+	}
+
 private:
 	void layout() override;
 

@@ -202,7 +202,8 @@ SDL_GLContext initialize(
 
 		/** TRANSLATORS: Error message printed to console/command line/log file */
 		log_err("%s\n", display_message.c_str());
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), NULL);
+		SDL_ShowSimpleMessageBox(
+		   SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), nullptr);
 		exit(1);
 	};
 

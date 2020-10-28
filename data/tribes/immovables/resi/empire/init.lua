@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_none",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "No Resources"),
@@ -22,7 +22,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_water",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Water"),
@@ -42,7 +42,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_coal_1",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Coal"),
@@ -62,7 +62,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_gold_1",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Gold"),
@@ -82,7 +82,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_iron_1",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Iron"),
@@ -102,7 +102,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_stones_1",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "Some Marble"),
@@ -122,7 +122,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_coal_2",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Coal"),
@@ -142,7 +142,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_gold_2",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Gold"),
@@ -162,7 +162,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_iron_2",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Iron"),
@@ -182,7 +182,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "empire_resi_stones_2",
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("resource_indicator", "A Lot of Marble"),
