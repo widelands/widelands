@@ -18,9 +18,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        persist-credentials: false
     - name: Fetching branch info
       run: |
-        echo "::set-env name=branch::${GITHUB_REF##*/}"
+        echo "branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
         git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "$(git log -1 --format=\"%ae\")"
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
@@ -81,7 +83,7 @@ jobs:
             fi
           fi
         fi
-        echo "::set-env name=COMMIT_MESSAGE::$files"
+        echo "COMMIT_MESSAGE=$files" >> $GITHUB_ENV
     - name: Pushing changes
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
