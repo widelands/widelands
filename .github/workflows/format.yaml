@@ -18,6 +18,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Fetching branch info
+      run: |
+        echo "::set-env name=branch::${GITHUB_REF##*/}"
+        # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
+        cat <<- EOF > $HOME/.netrc
+        machine github.com
+        login $GITHUB_ACTOR
+        password ${{ secrets.PAT }}
+        machine api.github.com
+        login $GITHUB_ACTOR
+        password ${{ secrets.PAT }}
+        EOF
+        chmod 600 $HOME/.netrc
     - name: Installing python
       uses: actions/setup-python@v1
       with:
@@ -28,9 +41,7 @@ jobs:
         sudo apt-get install clang-format
         pip install pyformat
     - name: Invoking fix_formatting.py
-      run: |
-        echo "branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
-        python3 ./utils/fix_formatting.py
+      run: python3 ./utils/fix_formatting.py
     - name: Gathering changes
       run: |
         nrfiles=$(git status -s | wc -l)
@@ -70,8 +81,6 @@ jobs:
         fi
         echo "::set-env name=COMMIT_MESSAGE::$files"
     - name: Pushing changes
-      env:
-         PAT: ${{ secrets.PAT }}
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
         # skip if there's nothing to do
@@ -88,10 +97,13 @@ jobs:
         if [ "$latest" == "${{ github.sha }}" ]
         then
           echo "No remote changes"
-          git remote add push_target https://${GITHUB_ACTOR}:${PAT}@github.com/${GITHUB_REPOSITORY}.git
-          git config --global user.email "bunnybot@widelands.org"
+          email=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/user/emails | grep email)
+          email=${email#*: \"}
+          email=${email%\",}
           git config --global user.name "The Widelands Code Formatting Bot"
-          git commit -m "$COMMIT_MESSAGE" --author="The Widelands Code Formatting Bot <bunnybot@widelands.org>"
+          git config --global user.email "$email"
+          git remote add push_target https://${GITHUB_ACTOR}:${{ secrets.PAT }}@github.com/${GITHUB_REPOSITORY}.git
+          git commit -m "$COMMIT_MESSAGE"
           git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
