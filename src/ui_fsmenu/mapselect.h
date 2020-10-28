@@ -60,7 +60,7 @@ private:
 	void tagbox_changed(int32_t, bool);
 	void clear_filter();
 	void rebuild_balancing_dropdown();
-	
+
 	UI::Box checkboxes_;
 
 	MapTable table_;

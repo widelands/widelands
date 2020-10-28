@@ -29,7 +29,7 @@ constexpr int padding = 4;
 
 class BaseMenu : public UI::Window {
 public:
-	BaseMenu(FullscreenMenuMain&, std::string& title);
+	BaseMenu(FullscreenMenuMain&, const std::string& name, const std::string& title);
 	~BaseMenu() override;
 
 	WindowLayoutID window_layout_id() const override {
@@ -49,7 +49,8 @@ protected:
 class TwoColumnsMenu : public BaseMenu {
 public:
 	TwoColumnsMenu(FullscreenMenuMain&,
-	               std::string& title,
+	               const std::string& name,
+	               const std::string& title,
 	               double right_column_width_factor = 1.0 / 3);
 	~TwoColumnsMenu() override;
 
@@ -66,7 +67,8 @@ private:
 class TwoColumnsNavigationMenu : public TwoColumnsMenu {
 public:
 	TwoColumnsNavigationMenu(FullscreenMenuMain&,
-	                         std::string title,
+	                         const std::string& name,
+	                         const std::string title,
 	                         double right_column_width_factor = 1.0 / 3);
 	~TwoColumnsNavigationMenu() override;
 

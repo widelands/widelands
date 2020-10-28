@@ -35,15 +35,15 @@ void BaseMenu::printBox(UI::Box& b) {
 /**
  * Initialize a pre-game menu
  */
-BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, std::string& title)
+BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, const std::string& name, const std::string& title)
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
-                title,
+                name,
                 fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
-                _(title)),
+                title),
      horizontal_padding_box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 0, "main horizontal"),
      vertical_padding_box_(
         &horizontal_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "main vertical"),
@@ -72,9 +72,10 @@ void BaseMenu::layout() {
 }
 
 TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
-                               std::string& title,
+                               const std::string& name,
+                               const std::string& title,
                                double right_column_width_factor)
-   : BaseMenu(fsmm, title),
+   : BaseMenu(fsmm, name, title),
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, 0, "content"),
      left_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "left"),
      right_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0 /*padding*/, "right"),
@@ -107,9 +108,10 @@ void TwoColumnsMenu::layout() {
 }
 
 TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
-                                                   std::string title,
+                                                   const std::string& name,
+                                                   const std::string title,
                                                    double right_column_width_factor)
-   : TwoColumnsMenu(fsmm, title, right_column_width_factor),
+   : TwoColumnsMenu(fsmm, name, title, right_column_width_factor),
      right_column_content_box_(
         &right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * padding, "right content"),
      button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * padding, "button"),

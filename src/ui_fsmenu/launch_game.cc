@@ -37,7 +37,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                                    GameSettingsProvider* const settings,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
-   : TwoColumnsNavigationMenu(fsmm, _("Launch Game")),
+   : TwoColumnsNavigationMenu(fsmm, "launch_game", _("Launch Game")),
      fsmm_(fsmm),
 
      // Values for alignment and size

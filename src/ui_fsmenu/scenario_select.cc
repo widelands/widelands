@@ -40,7 +40,8 @@
  */
 FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& fsmm,
                                                            CampaignData* camp)
-   : TwoColumnsNavigationMenu(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
+   : TwoColumnsNavigationMenu(
+        fsmm, "choose_scenario", camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
@@ -99,7 +100,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	//	right_column_content_box_.add_space(5 * padding);
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
-	                                 _("Return to campaign selection"));
+                                    _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
 	table_.selected.connect([this](unsigned) { entry_selected(); });
