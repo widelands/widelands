@@ -31,10 +31,6 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                                                bool is_replay)
    : TwoColumnsNavigationMenu(
         fsmm, "choose_game", is_replay ? _("Choose Replay") : _("Choose Game")),
-
-     //     main_box_(this, 0, 0, UI::Box::Vertical),
-     //     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-
      load_or_save_(&right_column_content_box_,
                    g,
                    is_replay ?
@@ -52,8 +48,9 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 
 	if (is_replay_) {
 		show_filenames_ = new UI::Checkbox(
-		   &main_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
-		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
+		   &header_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
+		header_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
+		header_box_.add_space(5 * padding);
 	}
 
 	left_column_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kExpandBoth);
@@ -68,7 +65,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
-		                                                _("Return to the single player menu"));
+                                                      _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 
