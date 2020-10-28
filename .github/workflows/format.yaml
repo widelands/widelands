@@ -19,22 +19,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Fetching branch info
-      env:
-        PAT: ${{ secrets.PAT }}
       run: |
         echo "::set-env name=branch::${GITHUB_REF##*/}"
         git config --global user.name "The Widelands Code Formatting Bot"
         git config --global user.email "actions@github.com"
-        # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
-        cat <<- EOF > $HOME/.netrc
-        machine github.com
-        login $GITHUB_ACTOR
-        password $PAT
-        machine api.github.com
-        login $GITHUB_ACTOR
-        password $PAT
-        EOF
-        chmod 600 $HOME/.netrc
+        git remote set-url origin https://$GITHUB_ACTOR:${{ secrets.PAT }}@github.com/$GITHUB_REPOSITORY.git
     - name: Installing python
       uses: actions/setup-python@v1
       with:
