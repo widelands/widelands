@@ -19,6 +19,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Fetching branch info
+      env:
+        PAT: ${{ secrets.PAT }}
       run: |
         echo "::set-env name=branch::${GITHUB_REF##*/}"
         git config --global user.name "The Widelands Code Formatting Bot"
@@ -27,10 +29,10 @@ jobs:
         cat <<- EOF > $HOME/.netrc
         machine github.com
         login $GITHUB_ACTOR
-        password ${{ secrets.PAT }}
+        password $PAT
         machine api.github.com
         login $GITHUB_ACTOR
-        password ${{ secrets.PAT }}
+        password $PAT
         EOF
         chmod 600 $HOME/.netrc
     - name: Installing python
