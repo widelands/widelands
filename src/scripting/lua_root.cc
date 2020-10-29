@@ -447,293 +447,123 @@ int LuaDescriptions::get_terrain_descriptions(lua_State* L) {
 	return 1;
 }
 
-// Documented in data/world/resources/init.lua.
-// See also the World and Tribes section in the Widelands Scripting Reference on the website.
-int LuaDescriptions::new_resource_type(lua_State* L) {
+namespace {
+// Loads instantiation for a subclass of Widelands::MapObjectDescr into the engine.
+int new_map_object_description(lua_State* L, Widelands::MapObjectType type) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::RESOURCE);
+		get_egbase(L).mutable_descriptions()->add_object_description(table, type);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
-
 	return 0;
+}
+}  // namespace
+
+// Documented in data/world/resources/init.lua.
+// See also the World and Tribes section in the Widelands Scripting Reference on the website.
+int LuaDescriptions::new_resource_type(lua_State* L) {
+	return new_map_object_description(L, Widelands::MapObjectType::RESOURCE);
 }
 
 // Documented in data/world/terrains/desert/beach/init.lua.
 // See also the World section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_terrain_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::TERRAIN);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::TERRAIN);
 }
 
 // Documented in data/world/critters/badger/init.lua.
 // See also the World section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_critter_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-	try {
-		LuaTable table(L);
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::CRITTER);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::CRITTER);
 }
 
 // Documented in data/world/immovables/artifacts/artifact00/init.lua and
 // data/tribes/immovables/ashes/init.lua
 // See also the World and Tribes sections in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_immovable_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::IMMOVABLE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::IMMOVABLE);
 }
 
 // Documented in data/tribes/buildings/partially_finished/constructionsite/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_constructionsite_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::CONSTRUCTIONSITE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::CONSTRUCTIONSITE);
 }
 
 // Documented in data/tribes/buildings/partially_finished/dismantlesite/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_dismantlesite_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::DISMANTLESITE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::DISMANTLESITE);
 }
 
 // Documented in data/tribes/buildings/militarysites/atlanteans/castle/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_militarysite_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::MILITARYSITE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::MILITARYSITE);
 }
 
 // Documented in data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_productionsite_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::PRODUCTIONSITE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::PRODUCTIONSITE);
 }
 
 // Documented in data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_trainingsite_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::TRAININGSITE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::TRAININGSITE);
 }
 
 // Documented in data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_warehouse_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::WAREHOUSE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::WAREHOUSE);
 }
 
 // Only used in the test suite for now
 int LuaDescriptions::new_market_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::MARKET);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::MARKET);
 }
 
 // Documented in data/tribes/ships/atlanteans/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_ship_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::SHIP);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::SHIP);
 }
 
 // Documented in data/tribes/wares/armor/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_ware_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::WARE);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::WARE);
 }
 
 // Documented in data/tribes/workers/atlanteans/carrier/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_carrier_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::CARRIER);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::CARRIER);
 }
 
 // Documented in data/tribes/workers/atlanteans/ferry/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_ferry_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::FERRY);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::FERRY);
 }
 
 // Documented in data/tribes/workers/atlanteans/soldier/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_soldier_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::SOLDIER);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::SOLDIER);
 }
 
 // Documented in data/tribes/workers/atlanteans/armorsmith/init.lua.
 // See also the Tribes section in the Widelands Scripting Reference on the website.
 int LuaDescriptions::new_worker_type(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_descriptions()->add_object_description(
-		   table, Widelands::MapObjectType::WORKER);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
+	return new_map_object_description(L, Widelands::MapObjectType::WORKER);
 }
 
 // Documented in data/tribes/initialization/atlanteans/units.lua.

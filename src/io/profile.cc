@@ -33,8 +33,7 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 
-#define TRUE_WORDS 7
-static char const* trueWords[TRUE_WORDS] = {
+static char const* trueWords[] = {
    "true",
    /** TRANSLATORS: A variant of the commandline parameter "true" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
@@ -46,8 +45,7 @@ static char const* trueWords[TRUE_WORDS] = {
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
    _("on"), "1"};
 
-#define FALSE_WORDS 7
-static char const* falseWords[FALSE_WORDS] = {
+static char const* falseWords[] = {
    "false",
    /** TRANSLATORS: A variant of the commandline parameter "false" value */
    /** TRANSLATORS: Needs to be consistent with the translations in widelands-console */
@@ -126,13 +124,13 @@ uint32_t Section::Value::get_positive() const {
 }
 
 bool Section::Value::get_bool() const {
-	for (int32_t i = 0; i < TRUE_WORDS; ++i) {
-		if (boost::iequals(value_.get(), trueWords[i])) {
+	for (char const* word : trueWords) {
+		if (boost::iequals(value_.get(), word)) {
 			return true;
 		}
 	}
-	for (int32_t i = 0; i < FALSE_WORDS; ++i) {
-		if (boost::iequals(value_.get(), falseWords[i])) {
+	for (char const* word : falseWords) {
+		if (boost::iequals(value_.get(), word)) {
 			return false;
 		}
 	}
@@ -667,7 +665,7 @@ void Profile::read(char const* const filename, char const* const global_section,
 		char* p = nullptr;
 		Section* s = nullptr;
 
-		bool reading_multiline = 0;
+		bool reading_multiline = false;
 		std::string data;
 		char* key = nullptr;
 		bool translate_line = false;
@@ -836,7 +834,7 @@ void Profile::write(char const* const filename,
 
 				// Try to avoid _every_ possible way of
 				// getting inconsistent data
-				std::string tempstr("");
+				std::string tempstr;
 
 				if (multiline) {
 					// Show WL that a multilined text starts

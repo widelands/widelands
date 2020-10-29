@@ -185,7 +185,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   UI::ButtonStyle::kWuiSecondary);
 
 		for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
-			plr_tribe->add(_(tribeinfo.descname), tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+			plr_tribe->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
 			               false, tribeinfo.tooltip);
 		}
 

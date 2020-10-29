@@ -66,7 +66,7 @@ std::string Element::as_string() const {
 }
 
 std::string Element::values_as_string(const std::string& tabs) const {
-	std::string result = "";
+	std::string result;
 	if (!values_.empty()) {
 		for (size_t i = 0; i < values_.size() - 1; ++i) {
 			const auto& element = values_.at(i);
@@ -86,7 +86,7 @@ std::string Element::values_as_string(const std::string& tabs) const {
 }
 
 std::string Element::children_as_string() const {
-	std::string result = "";
+	std::string result;
 	if (!children_.empty()) {
 		for (size_t i = 0; i < children_.size() - 1; ++i) {
 			result += children_.at(i)->as_string() + ",\n";
@@ -106,8 +106,8 @@ Object::Object(const std::string& key, int level) : JSON::Element(key, level) {
 }
 
 std::string Object::as_string() const {
-	std::string result = "";
-	std::string tabs = "";
+	std::string result;
+	std::string tabs;
 	for (int i = 0; i < level_; ++i) {
 		tabs += tab_;
 	}
@@ -125,8 +125,8 @@ Array::Array(const std::string& key, int level) : JSON::Element(key, level) {
 }
 
 std::string Array::as_string() const {
-	std::string result = "";
-	std::string tabs = "";
+	std::string result;
+	std::string tabs;
 	for (int i = 0; i < level_; ++i) {
 		tabs += tab_;
 	}
