@@ -50,7 +50,7 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 	                      as_content(campaigndata.descname, UI::PanelStyle::kFsMenu))
 	                        .str());
 
-	std::string description = "";
+	std::string description;
 
 	if (campaigndata.visible) {
 		description = (boost::format("%s%s") %
