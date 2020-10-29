@@ -207,15 +207,12 @@ void WorkareaProgram::draw(uint32_t texture_id,
 	std::unordered_map<Widelands::TCoords<>, RGBAColor> triangle_colors{};
 	for (const WorkareasEntry& wa_map : workarea) {
 		for (const WorkareaPreviewData& data : wa_map.first) {
-			if (!triangle_colors.count(data.coords)) {
-				triangle_colors[data.coords] = RGBAColor(0, 0, 0, 0);
-			}
 			RGBAColor color_to_apply = workarea_colors[data.index];
 			if (data.use_special_coloring) {
 				color_to_apply = apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
 			}
 			triangle_colors[data.coords] =
-			   apply_color(triangle_colors.at(data.coords), color_to_apply);
+			   apply_color(triangle_colors[data.coords], color_to_apply);
 		}
 	}
 
