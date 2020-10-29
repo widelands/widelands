@@ -132,6 +132,7 @@ jobs:
     - name: Website Binaries
       run: |
         /sbin/start-stop-daemon --start --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 800x600x24 -ac +extension GLX
+        sleep 1m
         export SDL_VIDEODRIVER=x11
         export DISPLAY=:99.0
         # Ignore transient SDL errors (exit code 2)
