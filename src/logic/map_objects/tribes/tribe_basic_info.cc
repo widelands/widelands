@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
@@ -61,16 +62,18 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
-	FilenameSet dirs = g_fs->list_directory("tribes/initialization");
-	for (const std::string& dir : dirs) {
-		for (const std::string& file : g_fs->list_directory(dir)) {
-			if (strcmp(g_fs->fs_filename(file.c_str()), "init.lua") == 0) {
-				tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(file)));
+	if (g_fs->is_directory("tribes/initialization")) {
+		FilenameSet dirs = g_fs->list_directory("tribes/initialization");
+		for (const std::string& dir : dirs) {
+			for (const std::string& file : g_fs->list_directory(dir)) {
+				if (strcmp(g_fs->fs_filename(file.c_str()), "init.lua") == 0) {
+					tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(file)));
+				}
 			}
 		}
 	}
 	if (tribeinfos.empty()) {
-		throw GameDataError("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
+		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
 	return tribeinfos;
 }
