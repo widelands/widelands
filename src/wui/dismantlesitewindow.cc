@@ -50,10 +50,14 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < dismantle_site->nr_dropout_waresqueues(); ++i) {
-		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site, *dismantle_site->get_dropout_waresqueue(i), true, false), UI::Box::Resizing::kFullSize);
+		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
+		                                 *dismantle_site->get_dropout_waresqueue(i), true, false),
+		           UI::Box::Resizing::kFullSize);
 	}
 	for (uint32_t i = 0; i < dismantle_site->nr_consume_waresqueues(); ++i) {
-		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site, *dismantle_site->get_consume_waresqueue(i), true, false), UI::Box::Resizing::kFullSize);
+		subbox.add(new InputQueueDisplay(&subbox, *ibase(), *dismantle_site,
+		                                 *dismantle_site->get_consume_waresqueue(i), true, false),
+		           UI::Box::Resizing::kFullSize);
 	}
 
 	box.add(&subbox, UI::Box::Resizing::kFullSize);

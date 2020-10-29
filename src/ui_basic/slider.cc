@@ -253,51 +253,51 @@ bool Slider::handle_key(bool down, SDL_Keysym code) {
 				return true;
 			}
 		} else {
-		switch (code.sym) {
+			switch (code.sym) {
 
-		case SDLK_KP_6:
-		case SDLK_KP_8:
-			if (code.mod & KMOD_NUM) {
+			case SDLK_KP_6:
+			case SDLK_KP_8:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_UP:
+			case SDLK_RIGHT:
+				set_value(get_value() + 1);
+				return true;
+
+			case SDLK_KP_2:
+			case SDLK_KP_4:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_DOWN:
+			case SDLK_LEFT:
+				set_value(get_value() - 1);
+				return true;
+
+			case SDLK_KP_9:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_PAGEUP:
+				set_value(get_value() + kLargeStepSize);
+				return true;
+
+			case SDLK_KP_3:
+				if (code.mod & KMOD_NUM) {
+					break;
+				}
+				FALLS_THROUGH;
+			case SDLK_PAGEDOWN:
+				set_value(get_value() - kLargeStepSize);
+				return true;
+
+			default:
 				break;
 			}
-			FALLS_THROUGH;
-		case SDLK_UP:
-		case SDLK_RIGHT:
-			set_value(get_value() + 1);
-			return true;
-
-		case SDLK_KP_2:
-		case SDLK_KP_4:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_DOWN:
-		case SDLK_LEFT:
-			set_value(get_value() - 1);
-			return true;
-
-		case SDLK_KP_9:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEUP:
-			set_value(get_value() + kLargeStepSize);
-			return true;
-
-		case SDLK_KP_3:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_PAGEDOWN:
-			set_value(get_value() - kLargeStepSize);
-			return true;
-
-		default:
-			break;
-		}
 		}
 	}
 	return Panel::handle_key(down, code);
@@ -467,7 +467,9 @@ void HorizontalSlider::draw(RenderTarget& dst) {
 	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 1, 4), black);
 	dst.fill_rect(Recti(get_x_gap() + 1, get_y_gap(), 1, 3), black);
 
-	draw_cursor(dst, cursor_pos_, cursor_fixed_height_ < 0 ? 0 : (get_h() - cursor_fixed_height_) / 2, cursor_size_, cursor_fixed_height_ < 0 ? get_h() : cursor_fixed_height_);
+	draw_cursor(dst, cursor_pos_,
+	            cursor_fixed_height_ < 0 ? 0 : (get_h() - cursor_fixed_height_) / 2, cursor_size_,
+	            cursor_fixed_height_ < 0 ? get_h() : cursor_fixed_height_);
 }
 
 /**
@@ -499,11 +501,11 @@ bool HorizontalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 		//  click on cursor
 		cursor_pressed(x);
 		return true;
-	} else if (in_game_key_bindings_
-	           ? (y >= 0 && y < get_h() && x >= 0 && x < get_w())
-	           : (y >= get_y_gap() - 2 && y <= static_cast<int32_t>(get_h()) - get_y_gap() + 2 &&
-	           x >= get_x_gap() &&
-	           x < static_cast<int32_t>(get_w()) - get_x_gap())) {  //  click on bar
+	} else if (in_game_key_bindings_ ?
+	              (y >= 0 && y < get_h() && x >= 0 && x < get_w()) :
+	              (y >= get_y_gap() - 2 && y <= static_cast<int32_t>(get_h()) - get_y_gap() + 2 &&
+	               x >= get_x_gap() &&
+	               x < static_cast<int32_t>(get_w()) - get_x_gap())) {  //  click on bar
 		bar_pressed(x, get_x_gap());
 		return true;
 	} else {
@@ -538,7 +540,9 @@ void VerticalSlider::draw(RenderTarget& dst) {
 	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 4, 1), black);
 	dst.fill_rect(Recti(get_x_gap(), get_y_gap() + 1, 3, 1), black);
 
-	draw_cursor(dst, cursor_fixed_height_ < 0 ? 0 : (get_w() - cursor_fixed_height_) / 2, cursor_pos_, cursor_fixed_height_ < 0 ? get_w() : cursor_fixed_height_, cursor_size_);
+	draw_cursor(dst, cursor_fixed_height_ < 0 ? 0 : (get_w() - cursor_fixed_height_) / 2,
+	            cursor_pos_, cursor_fixed_height_ < 0 ? get_w() : cursor_fixed_height_,
+	            cursor_size_);
 }
 
 /**

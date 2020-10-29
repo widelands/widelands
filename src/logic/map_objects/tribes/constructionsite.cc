@@ -180,7 +180,8 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
+InputQueue&
+ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {

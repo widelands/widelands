@@ -141,11 +141,13 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->nr_dropout_waresqueues(); ++i) {
 		box.add(new InputQueueDisplay(&box, *ibase(), *construction_site,
-		                              *construction_site->get_dropout_waresqueue(i), true, false), UI::Box::Resizing::kFullSize);
+		                              *construction_site->get_dropout_waresqueue(i), true, false),
+		        UI::Box::Resizing::kFullSize);
 	}
 	for (uint32_t i = 0; i < construction_site->nr_consume_waresqueues(); ++i) {
-		box.add(new InputQueueDisplay(
-		   &box, *ibase(), *construction_site, *construction_site->get_consume_waresqueue(i), false, true), UI::Box::Resizing::kFullSize);
+		box.add(new InputQueueDisplay(&box, *ibase(), *construction_site,
+		                              *construction_site->get_consume_waresqueue(i), false, true),
+		        UI::Box::Resizing::kFullSize);
 	}
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));

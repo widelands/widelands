@@ -30,7 +30,11 @@ Icon::Icon(Panel* const parent,
            const int32_t w,
            const int32_t h,
            const Image* picture_id)
-   : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false), grey_out_color_(191, 191, 191, 191), grey_out_(false) {
+   : Panel(parent, x, y, w, h),
+     pic_(picture_id),
+     draw_frame_(false),
+     grey_out_color_(191, 191, 191, 191),
+     grey_out_(false) {
 	set_handle_mouse(false);
 	set_thinks(false);
 }

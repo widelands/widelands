@@ -35,12 +35,12 @@ ProductionsiteSettings::ProductionsiteSettings(const ProductionSiteDescr& descr,
                                                const TribeDescr& tribe)
    : BuildingSettings(descr.name(), tribe), stopped(false) {
 	for (const auto& pair : descr.input_wares()) {
-		ware_queues.insert(
-		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, WarePriority::kNormal}));
+		ware_queues.insert(std::make_pair(
+		   pair.first, InputQueueSetting{pair.second, pair.second, WarePriority::kNormal}));
 	}
 	for (const auto& pair : descr.input_workers()) {
-		worker_queues.insert(
-		   std::make_pair(pair.first, InputQueueSetting{pair.second, pair.second, WarePriority::kNormal}));
+		worker_queues.insert(std::make_pair(
+		   pair.first, InputQueueSetting{pair.second, pair.second, WarePriority::kNormal}));
 	}
 }
 

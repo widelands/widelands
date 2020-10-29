@@ -39,9 +39,18 @@ void ensure_box_can_hold_input_queues(UI::Box&);
 class InputQueueDisplay : public UI::Box {
 public:
 	// For real input queues
-	InputQueueDisplay(UI::Panel* parent, InteractiveBase&, Widelands::Building&, Widelands::InputQueue&, bool show_only, bool has_priority);
+	InputQueueDisplay(UI::Panel* parent,
+	                  InteractiveBase&,
+	                  Widelands::Building&,
+	                  Widelands::InputQueue&,
+	                  bool show_only,
+	                  bool has_priority);
 	// For constructionsite settings
-	InputQueueDisplay(UI::Panel* parent, InteractiveBase&, Widelands::ConstructionSite&, Widelands::WareWorker, Widelands::DescriptionIndex);
+	InputQueueDisplay(UI::Panel* parent,
+	                  InteractiveBase&,
+	                  Widelands::ConstructionSite&,
+	                  Widelands::WareWorker,
+	                  Widelands::DescriptionIndex);
 
 	~InputQueueDisplay() override {
 	}
@@ -54,7 +63,15 @@ protected:
 
 private:
 	// Common constructor
-	InputQueueDisplay(UI::Panel*, InteractiveBase&, Widelands::Building&, Widelands::WareWorker, Widelands::DescriptionIndex, Widelands::InputQueue*, Widelands::ProductionsiteSettings*, bool, bool);
+	InputQueueDisplay(UI::Panel*,
+	                  InteractiveBase&,
+	                  Widelands::Building&,
+	                  Widelands::WareWorker,
+	                  Widelands::DescriptionIndex,
+	                  Widelands::InputQueue*,
+	                  Widelands::ProductionsiteSettings*,
+	                  bool,
+	                  bool);
 
 	InteractiveBase& ibase_;
 	bool can_act_, show_only_, has_priority_;
@@ -82,7 +99,8 @@ private:
 	const Image& max_fill_indicator_;
 
 	UI::Box vbox_, hbox_;
-	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_, b_increase_real_fill_, collapse_;
+	UI::Button b_decrease_desired_fill_, b_increase_desired_fill_, b_decrease_real_fill_,
+	   b_increase_real_fill_, collapse_;
 	UI::HorizontalSlider priority_;
 	UI::Panel spacer_;
 	const Widelands::WarePriority* slider_was_moved_;

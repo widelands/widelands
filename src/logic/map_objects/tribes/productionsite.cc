@@ -431,7 +431,8 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& game) {
 	}
 }
 
-InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
+InputQueue&
+ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
 	for (InputQueue* ip_queue : input_queues_) {
 		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;

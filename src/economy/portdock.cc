@@ -405,7 +405,8 @@ uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDoc
 			} else {
 				assert(worker);
 				if (worker->get_transfer() && worker->get_transfer()->get_request()) {
-					priority += worker->get_transfer()->get_request()->get_normalized_transfer_priority();
+					priority +=
+					   worker->get_transfer()->get_request()->get_normalized_transfer_priority();
 				}
 			}
 		}

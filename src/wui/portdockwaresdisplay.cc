@@ -206,8 +206,10 @@ create_portdock_expedition_display(UI::Panel* parent, Warehouse& wh, Interactive
 	ensure_box_can_hold_input_queues(box);
 
 	// Add the input queues.
-	int32_t capacity =
-	   igb.egbase().descriptions().get_ship_descr(wh.get_owner()->tribe().ship())->get_default_capacity();
+	int32_t capacity = igb.egbase()
+	                      .descriptions()
+	                      .get_ship_descr(wh.get_owner()->tribe().ship())
+	                      ->get_default_capacity();
 	for (InputQueue* wq : wh.get_portdock()->expedition_bootstrap()->queues(false)) {
 		InputQueueDisplay* iqd = new InputQueueDisplay(&box, igb, wh, *wq, false, true);
 		box.add(iqd, UI::Box::Resizing::kFullSize);

@@ -86,7 +86,9 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 		ensure_box_can_hold_input_queues(*prod_box);
 
 		for (Widelands::InputQueue* queue : inputqueues) {
-			prod_box->add(new InputQueueDisplay(prod_box, *ibase(), *production_site, *queue, false, true), UI::Box::Resizing::kFullSize);
+			prod_box->add(
+			   new InputQueueDisplay(prod_box, *ibase(), *production_site, *queue, false, true),
+			   UI::Box::Resizing::kFullSize);
 		}
 
 		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));

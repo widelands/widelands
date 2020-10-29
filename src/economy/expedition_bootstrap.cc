@@ -47,7 +47,8 @@ ExpeditionBootstrap::~ExpeditionBootstrap() {
 
 void ExpeditionBootstrap::check_is_ready(Game& game) {
 	for (auto& iq : queues_) {
-		if (iq.first->get_max_size() != iq.first->get_filled() || iq.first->get_max_size() != iq.first->get_max_fill()) {
+		if (iq.first->get_max_size() != iq.first->get_filled() ||
+		    iq.first->get_max_size() != iq.first->get_max_fill()) {
 			return portdock_->set_expedition_bootstrap_complete(game, false);
 		}
 	}

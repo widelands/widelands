@@ -776,7 +776,8 @@ void Building::draw_info(const InfoToDraw info_to_draw,
 	             point_on_dst, scale, dst);
 }
 
-const WarePriority& Building::get_priority(const WareWorker type, const DescriptionIndex ware_index) const {
+const WarePriority& Building::get_priority(const WareWorker type,
+                                           const DescriptionIndex ware_index) const {
 	if (type == wwWARE) {
 		const auto it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end()) {

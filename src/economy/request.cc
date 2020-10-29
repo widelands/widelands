@@ -279,7 +279,9 @@ Time Request::get_required_time() const {
  */
 uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
-	const WarePriority& priority = (target_building_ ? target_building_->get_priority(get_type(), get_index()) : WarePriority::kNormal);
+	const WarePriority& priority =
+	   (target_building_ ? target_building_->get_priority(get_type(), get_index()) :
+	                       WarePriority::kNormal);
 
 	if (WarePriority::kVeryHigh <= priority) {
 		// Always serve requests with the highest priority first,
@@ -292,19 +294,20 @@ uint32_t Request::get_priority(const int32_t cost) const {
 	}
 
 	const uint32_t cur_time = economy_->owner().egbase().get_gametime().get();
-	const uint32_t req_time = (target_constructionsite_ ? get_required_time().get() : get_last_request_time().get());
+	const uint32_t req_time =
+	   (target_constructionsite_ ? get_required_time().get() : get_last_request_time().get());
 	return
-			// Linear scaling of request priority depending on
-			// the building's user-specified ware priority.
-			priority.to_weighting_factor() *
-			// Linear scaling of request priority depending on the time
-			// since the request was last supplied (constructionsites)
-			// or when the next ware is due (productionsites)
-			(cur_time > req_time ? cur_time - req_time : 1) *
-			// Requests with higher costs are preferred to keep the average waiting
-			// times short. This is capped at an arbitrary max cost of 30 seconds
-			// gametime to not disadvantage close-by supplies too much.
-			std::max(1, 30000 - cost);
+	   // Linear scaling of request priority depending on
+	   // the building's user-specified ware priority.
+	   priority.to_weighting_factor() *
+	   // Linear scaling of request priority depending on the time
+	   // since the request was last supplied (constructionsites)
+	   // or when the next ware is due (productionsites)
+	   (cur_time > req_time ? cur_time - req_time : 1) *
+	   // Requests with higher costs are preferred to keep the average waiting
+	   // times short. This is capped at an arbitrary max cost of 30 seconds
+	   // gametime to not disadvantage close-by supplies too much.
+	   std::max(1, 30000 - cost);
 }
 
 /**
