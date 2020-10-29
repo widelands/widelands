@@ -172,6 +172,7 @@ wl_library(ui_fsmenu_network
     graphic
     graphic_image_cache
     graphic_text_layout
+    logic_tribe_basic_info
     network
     sound
     ui_basic

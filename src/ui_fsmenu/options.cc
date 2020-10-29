@@ -574,7 +574,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
  */
 void FullscreenMenuOptions::update_language_stats() {
 	int percent = 100;
-	std::string message = "";
+	std::string message;
 	if (language_dropdown_.has_selection()) {
 		std::string locale = language_dropdown_.get_selected();
 		// Empty locale means try system locale

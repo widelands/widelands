@@ -155,6 +155,8 @@ void SinglePlayerSetupBox::update() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
+	assert(!settings.tribes.empty());
+
 	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
 		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
 		   &scrollable_playerbox, 0, standard_height, i, settings_));
