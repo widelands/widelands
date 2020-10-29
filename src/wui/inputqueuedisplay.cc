@@ -499,8 +499,8 @@ void InputQueueDisplay::think() {
 	}
 
 	if (has_priority_) {
-		const Widelands::WarePriority& p =
-		   queue_ ? building_.get_priority(type_, index_) : get_setting()->priority;
+		const Widelands::WarePriority& p =  // NOLINT
+		   queue_ ? building_.get_priority(type_, index_) : get_setting()->priority;  // NOLINT
 		// The purpose of this check is to prevent the slider from snapping back directly after
 		// the user dragged it, because the playercommand is not executed immediately of course
 		if (!slider_was_moved_ || *slider_was_moved_ == p) {
