@@ -27,18 +27,18 @@
 #include "wlapplication_options.h"
 
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
-   : TwoColumnsMenu(fsmm, "begin_lan_game", _("Begin LAN Game")),
+   : TwoColumnsBackNavigationMenu(fsmm, "begin_lan_game", _("Begin LAN Game")),
 
      // Left column content
      label_opengames_(&left_column_box_, 0, 0, 0, 0, _("List of games in your local network:")),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_playername_(&right_column_box_, 0, 0, 0, 0, _("Your nickname:")),
-     playername_(&right_column_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     label_hostname_(&right_column_box_, _("Host to connect:")),
+     label_playername_(&right_column_content_box_, 0, 0, 0, 0, _("Your nickname:")),
+     playername_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     label_hostname_(&right_column_content_box_, _("Host to connect:")),
 
-     host_box_(&right_column_box_, 0, 0, UI::Box::Horizontal),
+     host_box_(&right_column_content_box_, 0, 0, UI::Box::Horizontal),
      hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
@@ -50,7 +50,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
                    g_image_cache->get("images/ui_fsmenu/menu_load_game.png"),
                    _("Load previous host")),
      // Buttons
-     joingame_(&right_column_box_,
+     joingame_(&right_column_content_box_,
                "join_game",
                0,
                0,
@@ -58,36 +58,34 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
-     hostgame_(&right_column_box_,
+     hostgame_(&right_column_content_box_,
                "host_game",
                0,
                0,
                0,
                0,
                UI::ButtonStyle::kFsMenuSecondary,
-               _("Host a new game")),
-     back_(&right_column_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")) {
+               _("Host a new game")) {
 
 	left_column_box_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
 	left_column_box_.add_space(padding);
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
-	right_column_box_.set_inner_spacing(padding);
-	right_column_box_.add(&label_playername_, UI::Box::Resizing::kFullSize);
-	right_column_box_.add(&playername_, UI::Box::Resizing::kFullSize);
-	right_column_box_.add_inf_space();
-	right_column_box_.add(&label_hostname_, UI::Box::Resizing::kFullSize);
-	right_column_box_.add(&host_box_, UI::Box::Resizing::kFullSize);
-	right_column_box_.add_space(padding);
-	right_column_box_.add(&joingame_, UI::Box::Resizing::kFullSize);
-	right_column_box_.add_inf_space();
-	right_column_box_.add_inf_space();
-	right_column_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
-	right_column_box_.add_inf_space();
-	right_column_box_.add_inf_space();
-	right_column_box_.add_inf_space();
-	right_column_box_.add_inf_space();
-	right_column_box_.add(&back_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.set_inner_spacing(padding);
+	right_column_content_box_.add(&label_playername_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&playername_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add(&label_hostname_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&host_box_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(padding);
+	right_column_content_box_.add(&joingame_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add_inf_space();
 
 	host_box_.add(&hostname_, UI::Box::Resizing::kExpandBoth);
 	host_box_.add_space(padding);
@@ -272,21 +270,4 @@ void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 		joingame_.set_enabled(true);
 	}
 	table_.select(table_.no_selection_index());
-}
-
-bool FullscreenMenuNetSetupLAN::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
-		switch (code.sym) {
-		case SDLK_ESCAPE:
-			clicked_back();
-			return true;
-		default:
-			break;  // not handled
-		}
-	}
-	return UI::Window::handle_key(down, code);
-}
-
-void FullscreenMenuNetSetupLAN::clicked_back() {
-	end_modal<MenuTarget>(MenuTarget::kBack);
 }

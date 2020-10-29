@@ -28,7 +28,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/menu.h"
 
-class FullscreenMenuNetSetupLAN : public TwoColumnsMenu {
+class FullscreenMenuNetSetupLAN : public TwoColumnsBackNavigationMenu {
 public:
 	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
 
@@ -51,7 +51,6 @@ protected:
 
 private:
 	void layout() override;
-	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void game_selected(uint32_t);
 	void game_doubleclicked(uint32_t);
@@ -69,7 +68,6 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
-	void clicked_back();
 
 	// Left Column
 	UI::Textarea label_opengames_;
@@ -83,7 +81,7 @@ private:
 	UI::EditBox hostname_;
 	UI::Button loadlasthost_;
 
-	UI::Button joingame_, hostgame_, back_;
+	UI::Button joingame_, hostgame_;
 
 	LanGameFinder discovery_;
 };

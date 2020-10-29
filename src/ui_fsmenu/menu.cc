@@ -107,6 +107,50 @@ void TwoColumnsMenu::layout() {
 	printBox(right_column_box_);
 }
 
+TwoColumnsBackNavigationMenu::TwoColumnsBackNavigationMenu(FullscreenMenuMain& fsmm,
+                                                           const std::string& name,
+                                                           const std::string& title,
+                                                           double right_column_width_factor)
+   : TwoColumnsMenu(fsmm, name, title, right_column_width_factor),
+     right_column_content_box_(
+        &right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * padding, "right content"),
+     button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * padding, "button"),
+     back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")) {
+
+	right_column_box_.add(&right_column_content_box_, UI::Box::Resizing::kExpandBoth);
+	right_column_box_.add_space(5 * padding);
+	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
+	button_box_.add(&back_, UI::Box::Resizing::kFillSpace);
+
+	back_.sigclicked.connect([this]() { clicked_back(); });
+}
+
+TwoColumnsBackNavigationMenu::~TwoColumnsBackNavigationMenu() {
+}
+
+void TwoColumnsBackNavigationMenu::layout() {
+	TwoColumnsMenu::layout();
+	printBox(right_column_content_box_);
+	printBox(button_box_);
+}
+
+bool TwoColumnsBackNavigationMenu::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_ESCAPE:
+			clicked_back();
+			return true;
+		default:
+			break;  // not handled
+		}
+	}
+	return UI::Window::handle_key(down, code);
+}
+
+void TwoColumnsBackNavigationMenu::clicked_back() {
+	end_modal<MenuTarget>(MenuTarget::kBack);
+}
+
 TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
                                                    const std::string& name,
                                                    const std::string& title,

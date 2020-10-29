@@ -64,6 +64,25 @@ private:
 	double right_column_width_factor_;
 };
 
+class TwoColumnsBackNavigationMenu : public TwoColumnsMenu {
+public:
+	TwoColumnsBackNavigationMenu(FullscreenMenuMain&,
+	                             const std::string& name,
+	                             const std::string& title,
+	                             double right_column_width_factor = 1.0 / 3);
+	~TwoColumnsBackNavigationMenu() override;
+
+protected:
+	void layout() override;
+	virtual void clicked_back();
+	/// Handle keypresses
+	bool handle_key(bool down, SDL_Keysym code) override;
+
+	UI::Box right_column_content_box_, button_box_;
+
+	UI::Button back_;
+};
+
 class TwoColumnsNavigationMenu : public TwoColumnsMenu {
 public:
 	TwoColumnsNavigationMenu(FullscreenMenuMain&,
