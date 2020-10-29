@@ -174,6 +174,7 @@ wl_library(ui_fsmenu_network
     sound
     ui_basic
     ui_fsmenu_loading_common
+    ui_fsmenu_main
     widelands_options
     wui_chat_ui
 )
