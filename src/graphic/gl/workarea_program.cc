@@ -211,8 +211,7 @@ void WorkareaProgram::draw(uint32_t texture_id,
 			if (data.use_special_coloring) {
 				color_to_apply = apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
 			}
-			triangle_colors[data.coords] =
-			   apply_color(triangle_colors[data.coords], color_to_apply);
+			triangle_colors[data.coords] = apply_color(triangle_colors[data.coords], color_to_apply);
 		}
 	}
 
