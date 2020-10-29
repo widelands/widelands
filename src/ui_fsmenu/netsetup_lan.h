@@ -26,9 +26,9 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/menu.h"
 
-class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuNetSetupLAN : public TwoColumnsMenu {
 public:
 	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
 
@@ -47,10 +47,11 @@ public:
 	const std::string& get_playername();
 
 protected:
-	void clicked_ok() override;
+	void clicked_ok();
 
 private:
 	void layout() override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void game_selected(uint32_t);
 	void game_doubleclicked(uint32_t);
@@ -68,8 +69,7 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
-
-	UI::Box left_column_, right_column_;
+	void clicked_back();
 
 	// Left Column
 	UI::Textarea label_opengames_;
@@ -83,7 +83,7 @@ private:
 	UI::EditBox hostname_;
 	UI::Button loadlasthost_;
 
-	UI::Button joingame_, hostgame_;
+	UI::Button joingame_, hostgame_, back_;
 
 	LanGameFinder discovery_;
 };
