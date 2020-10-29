@@ -159,6 +159,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		eia().set_need_save(true);
 	}
 
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+
 	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
@@ -182,8 +184,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   16, plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
 
-		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-			plr_tribe->add(_(tribeinfo.descname), tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+		for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
+			plr_tribe->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
 			               false, tribeinfo.tooltip);
 		}
 
