@@ -92,7 +92,7 @@ public:
 		return last_request_time_;
 	}
 	uint32_t get_priority(int32_t cost) const;
-	uint32_t get_transfer_priority() const;
+	uint32_t get_normalized_transfer_priority() const;
 	uint32_t get_num_transfers() const {
 		return transfers_.size();
 	}

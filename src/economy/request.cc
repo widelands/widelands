@@ -22,6 +22,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
@@ -307,10 +308,30 @@ uint32_t Request::get_priority(const int32_t cost) const {
 }
 
 /**
- * Return the transfer priority, based on the priority set at the destination
+ * Return the transfer priority, based on the priority set at the destination,
+ * normalized on a scale from 0 (lowest) to Flag::kMaxTransferPriority (highest).
  */
-uint32_t Request::get_transfer_priority() const {
-	return target_building_ ? target_building_->get_priority(get_type(), get_index()).to_weighting_factor() : 0;
+uint32_t Request::get_normalized_transfer_priority() const {
+	if (!target_building_) {
+		return 0;
+	}
+
+	// Magic numbers for reasonable weighting. Results for the values at the time of writing:
+	// VeryLow  →  0
+	// Low      →  2
+	// Normal   →  7
+	// High     → 12
+	// VeryHigh → 16
+
+	const WarePriority& priority = target_building_->get_priority(get_type(), get_index());
+	if (WarePriority::kVeryHigh <= priority) {
+		return Flag::kMaxTransferPriority;
+	} else if (priority <= WarePriority::kVeryLow) {
+		return 0;
+	}
+
+	const uint32_t l = std::log2(priority.to_weighting_factor());
+	return l + 2 - l / 6;
 }
 
 /**
