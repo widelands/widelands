@@ -363,6 +363,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Rebuild the tribes dropdown from the server settings. This will keep the host and client UIs
 	/// in sync.
 	void rebuild_tribes_dropdown(const GameSettings& settings) {
+		assert(!settings.tribes.empty());
 		if (tribe_selection_locked_) {
 			return;
 		}

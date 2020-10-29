@@ -44,7 +44,10 @@ struct GameHost : public GameController {
 	/** playernumber 0 identifies the spectators */
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
-	GameHost(FullscreenMenuMain&, const std::string& playername, bool internet = false);
+	GameHost(FullscreenMenuMain&,
+	         const std::string& playername,
+	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
+	         bool internet = false);
 	~GameHost() override;
 
 	void run();
