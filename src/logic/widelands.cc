@@ -24,11 +24,13 @@
 
 namespace Widelands {
 
-const WarePriority WarePriority::kVeryLow(1);
-const WarePriority WarePriority::kLow(4);
-const WarePriority WarePriority::kNormal(16);
-const WarePriority WarePriority::kHigh(64);
-const WarePriority WarePriority::kVeryHigh(4096);
+// These are special values that get special treatment by Request code
+const WarePriority WarePriority::kVeryLow(0);
+const WarePriority WarePriority::kVeryHigh(std::numeric_limits<uint32_t>::max());
+// The values here are used as weighting factors by Request code
+const WarePriority WarePriority::kLow(1);
+const WarePriority WarePriority::kNormal(64);
+const WarePriority WarePriority::kHigh(4096);
 
 WarePriority::WarePriority(StreamRead& fr) : value_(fr.unsigned_32()) {
 }

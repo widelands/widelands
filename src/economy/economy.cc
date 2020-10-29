@@ -688,7 +688,7 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 struct RequestSupplyPair {
 	TrackPtr<Request> request;
 	TrackPtr<Supply> supply;
-	int32_t priority;
+	uint32_t priority;
 
 	/**
 	 * pairid is an explicit tie-breaker for comparison.
@@ -758,7 +758,6 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		}
 
 		const uint32_t priority = req.get_priority(cost);
-		assert(priority > 0);
 
 		RequestSupplyPair rsp;
 		rsp.request = &req;
@@ -781,13 +780,18 @@ void Economy::balance_requestsupply(Game& game) {
 	process_requests(game, &rsps);
 
 	//  Now execute request/supply pairs.
+
+	// Requests with the lowest possible priority are served only if there is nothing else to do
+	const bool first_priority_is_0 = !rsps.queue.empty() && rsps.queue.top().priority == 0;
+
 	while (!rsps.queue.empty()) {
 		RequestSupplyPair rsp = rsps.queue.top();
 
 		rsps.queue.pop();
 
 		if (!rsp.request || !rsp.supply || !has_request(*rsp.request) ||
-		    !rsp.supply->nr_supplies(game, *rsp.request)) {
+		    !rsp.supply->nr_supplies(game, *rsp.request) ||
+		    (!first_priority_is_0 && rsp.priority == 0)) {
 			rsps.nexttimer = 200;
 			continue;
 		}

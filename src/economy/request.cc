@@ -278,13 +278,24 @@ Time Request::get_required_time() const {
  */
 uint32_t Request::get_priority(const int32_t cost) const {
 	assert(cost >= 0);
-	const uint32_t priority = (target_building_ ? target_building_->get_priority(get_type(), get_index()) : WarePriority::kNormal).to_weighting_factor();
+	const WarePriority& priority = (target_building_ ? target_building_->get_priority(get_type(), get_index()) : WarePriority::kNormal);
+
+	if (WarePriority::kVeryHigh <= priority) {
+		// Always serve requests with the highest priority first,
+		// even if other requests have to wait then.
+		return std::numeric_limits<uint32_t>::max();
+	} else if (priority <= WarePriority::kVeryLow) {
+		// Requests with priority 0 are processed by the
+		// Economy only if there are no other requests.
+		return 0;
+	}
+
 	const uint32_t cur_time = economy_->owner().egbase().get_gametime().get();
 	const uint32_t req_time = (target_constructionsite_ ? get_required_time().get() : get_last_request_time().get());
 	return
 			// Linear scaling of request priority depending on
 			// the building's user-specified ware priority.
-			priority *
+			priority.to_weighting_factor() *
 			// Linear scaling of request priority depending on the time
 			// since the request was last supplied (constructionsites)
 			// or when the next ware is due (productionsites)

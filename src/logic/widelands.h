@@ -84,6 +84,9 @@ public:
 	bool operator<(const WarePriority& w) const {
 		return value_ < w.value_;
 	}
+	bool operator<=(const WarePriority& w) const {
+		return value_ <= w.value_;
+	}
 
 	// For saveloading and (de)serializing of playercommands
 	void write(StreamWrite&) const;

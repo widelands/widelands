@@ -41,7 +41,7 @@ static size_t priority_to_index(const Widelands::WarePriority& priority) {
 		return 4;
 	}
 	// TODO(Nordfriese): For savegame compatibility. Replace with NEVER_HERE() after v1.0
-	return 2;
+	return 1;
 }
 static const Widelands::WarePriority& index_to_priority(const size_t priority) {
 	switch (priority) {
