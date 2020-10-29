@@ -23,7 +23,7 @@ jobs:
     - name: Fetching branch info
       run: |
         echo "branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
-        export PAT="${{ secrets.PAT }}"
+        export PAT="${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
         if [ -z "$PAT" ]
         then
           export PAT="${{ secrets.GITHUB_TOKEN }}"

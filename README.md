@@ -130,7 +130,7 @@ The master branch and open pull requests will be formatted automatically by a Gi
 
 You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
 
-It is strongly recommened that you [create a Personal Access Token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) with permissions to write to your repos and trigger workflows. [Store this token as a secret](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) named `PAT` in your fork. If you do not do this, our continuous integration suite will not work properly for branches in your fork.
+It is strongly recommened that you [create a Personal Access Token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) with permissions to write to your repos and trigger workflows. [Store this token as a secret](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) named `WIDELANDS_FORMAT_TOKEN` in your fork. If you do not do this, our continuous integration suite will not work properly for branches in your fork.
 
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 
