@@ -807,7 +807,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 
 	// Node information
-	std::string node_text("");
+	std::string node_text;
 	if (game == nullptr) {
 		// Always blit node information in the editor
 		boost::format node_format("(%i, %i, %i)");

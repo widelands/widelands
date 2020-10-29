@@ -87,6 +87,8 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 
 	const MapData& mapdata = *msm.get_map();
 
+	assert(!settings_->settings().tribes.empty());
+
 	settings_->set_map(
 	   mapdata.name, mapdata.filename, mapdata.theme, mapdata.background, mapdata.nrplayers);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));

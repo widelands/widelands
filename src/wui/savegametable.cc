@@ -153,7 +153,7 @@ SavegameTableReplay::SavegameTableReplay(UI::Panel* parent,
 
 void SavegameTableReplay::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
-	std::string game_mode_tooltip = "";
+	std::string game_mode_tooltip;
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
 	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
@@ -217,7 +217,7 @@ SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,
 
 void SavegameTableMultiplayer::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
-	std::string game_mode_tooltip = "";
+	std::string game_mode_tooltip;
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
 	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
