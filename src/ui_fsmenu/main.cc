@@ -495,6 +495,10 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_e:
 			editor_.toggle();
 			return true;
+		case SDLK_F3:
+			// Easter egg: Press F3 to exchange the background immediately :-)
+			last_image_exchange_time_ -= (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval : last_image_exchange_time_);
+			return true;
 		default:
 			break;
 		}
