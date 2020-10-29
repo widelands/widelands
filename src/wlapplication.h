@@ -179,19 +179,21 @@ struct WLApplication {
 	void handle_input(InputCallback const*);
 
 	void mainmenu();
-	void mainmenu_tutorial();
-	void mainmenu_singleplayer();
-	void mainmenu_multiplayer(const FullscreenMenuMain&, bool internet);
-	void mainmenu_editor();
 
+	bool mainmenu_tutorial(FullscreenMenuMain&);
+	void mainmenu_singleplayer();
+	void mainmenu_multiplayer(FullscreenMenuMain&, bool internet);
+	void mainmenu_editor();
 	bool new_random_game(FullscreenMenuMain&);
-	bool new_game(Widelands::Game&,
+	bool new_game(FullscreenMenuMain&,
+	              Widelands::Game&,
 	              SinglePlayerGameSettingsProvider&,
 	              bool preconfigured,
 	              bool* canceled = nullptr);
-	bool load_game(std::string filename = "");
-	bool campaign_game();
-	void replay();
+	bool load_game(FullscreenMenuMain&, std::string filename = "");
+	bool campaign_game(FullscreenMenuMain&);
+	bool replay(FullscreenMenuMain*);
+
 	static void emergency_save(Widelands::Game&);
 
 private:

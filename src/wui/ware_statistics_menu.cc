@@ -98,6 +98,7 @@ protected:
 WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
                       "ware_statistics",
                       &registry,
                       kPlotWidth + 2 * kSpacing,

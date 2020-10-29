@@ -104,16 +104,16 @@ public:
 	 */
 };
 
-class LuaWorld : public LuaRootModuleClass {
+class LuaDescriptions : public LuaRootModuleClass {
 public:
-	LUNA_CLASS_HEAD(LuaWorld);
+	LUNA_CLASS_HEAD(LuaDescriptions);
 	const char* get_modulename() override {
 		return "";
 	}
 
-	LuaWorld() {
+	LuaDescriptions() {
 	}
-	explicit LuaWorld(lua_State* L);
+	explicit LuaDescriptions(lua_State* L);
 
 	void __persist(lua_State* L) override;
 	void __unpersist(lua_State* L) override;
@@ -131,42 +131,10 @@ public:
 	int new_immovable_type(lua_State* L);
 	int new_resource_type(lua_State* L);
 	int new_terrain_type(lua_State* L);
-
-	int modify_unit(lua_State* L);
-
-	/*
-	 * C methods
-	 */
-};
-
-class LuaTribes : public LuaRootModuleClass {
-public:
-	LUNA_CLASS_HEAD(LuaTribes);
-	const char* get_modulename() override {
-		return "";
-	}
-
-	LuaTribes() {
-	}
-	explicit LuaTribes(lua_State* L);
-
-	void __persist(lua_State* L) override;
-	void __unpersist(lua_State* L) override;
-
-	/*
-	 * Properties
-	 */
-
-	int get_all_workers(lua_State* L);
-
-	/*
-	 * Lua methods
-	 */
 	int new_carrier_type(lua_State* L);
 	int new_ferry_type(lua_State* L);
 	int new_constructionsite_type(lua_State* L);
 	int new_dismantlesite_type(lua_State* L);
-	int new_immovable_type(lua_State* L);
 	int new_market_type(lua_State* L);
 	int new_militarysite_type(lua_State* L);
 	int new_productionsite_type(lua_State* L);

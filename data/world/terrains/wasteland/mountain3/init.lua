@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-wl.World():new_terrain_type{
+wl.Descriptions():new_terrain_type{
    name = "wasteland_mountain3",
    descname = _ "Mountain 3",
    is = "mineable",

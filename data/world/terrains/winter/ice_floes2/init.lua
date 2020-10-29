@@ -1,6 +1,6 @@
 push_textdomain("world")
 
-wl.World():new_terrain_type{
+wl.Descriptions():new_terrain_type{
    name = "ice_floes2",
    descname = _ "Ice Floes 2",
    is = "water",

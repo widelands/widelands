@@ -43,7 +43,7 @@ constexpr int32_t kHugeSize = std::numeric_limits<int32_t>::max() / 2;
 
 struct ProgressIndicatorWindow : public UI::Window {
 	ProgressIndicatorWindow(AddOnsCtrl* parent, const std::string& title) :
-			UI::Window(parent->get_parent(), "progress", 0, 0, parent->get_w(), 2 * kRowButtonSize, title),
+			UI::Window(parent->get_parent(), UI::WindowStyle::kFsMenu, "progress", 0, 0, parent->get_w(), 2 * kRowButtonSize, title),
 			die_after_last_action(false),
 			box_(this, 0, 0, UI::Box::Vertical, get_inner_w()),
 			txt1_(&box_, "", UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
@@ -105,12 +105,12 @@ private:
 	UI::ProgressBar progress_;
 };
 
-AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
+AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowStyle::kFsMenu,
                 "addons",
-                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
-                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
-                calc_desired_window_width(fsmm),
-                calc_desired_window_height(fsmm),
+                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
+                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
+                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
+                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                 _("Add-On Manager")),
 		fsmm_(fsmm),
 		main_box_(this, 0, 0, UI::Box::Vertical),
@@ -128,7 +128,8 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		browse_addons_buttons_inner_box_2_(&browse_addons_buttons_inner_box_1_, 0, 0, UI::Box::Horizontal),
 		browse_addons_box_(&browse_addons_inner_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
 		filter_name_(&browse_addons_buttons_inner_box_1_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-		filter_verified_(&browse_addons_buttons_inner_box_2_, Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
+		filter_verified_(&browse_addons_buttons_inner_box_2_, UI::PanelStyle::kFsMenu,
+				Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
 		sort_order_(&browse_addons_buttons_inner_box_1_, "sort", 0, 0, 0, 10, filter_name_.get_h(),
 				_("Sort by"), UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
 		filter_reset_(&browse_addons_buttons_inner_box_2_, "f_reset", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, _("Reset"), _("Reset the filters")),
@@ -223,7 +224,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 		rebuild();
 	});
 
-	ok_.sigclicked.connect([this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack); });
+	ok_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kBack); });
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes();
 		tabs_.activate(1);
@@ -266,7 +267,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 							% pair.first.descname() % (pair.first.verified ? _("verified") : _("NOT VERIFIED")) % pair.first.author()).str();
 				}
 			}
-			UI::WLMessageBox w(this, _("Upgrade All"), text, UI::WLMessageBox::MBoxType::kOkCancel);
+			UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Upgrade All"), text, UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) { return; }
 		}
 		for (const auto& pair : upgrades) {
@@ -340,8 +341,6 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm,
 
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
-
-	set_center_panel(&main_box_);
 
 	refresh_remotes();
 }
@@ -420,7 +419,7 @@ bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 		case SDLK_ESCAPE:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			end_modal<MenuTarget>(MenuTarget::kBack);
 			return true;
 		default:
 			break;
@@ -685,7 +684,7 @@ void AddOnsCtrl::update_dependency_errors() {
 
 void AddOnsCtrl::layout() {
 	if (!is_minimal()) {
-		set_size(calc_desired_window_width(fsmm_), calc_desired_window_height(fsmm_));
+		main_box_.set_size(get_inner_w(), get_inner_h());
 
 		const bool has_warnings = !warn_requirements_.get_text().empty();
 		warn_requirements_.set_desired_size(warn_requirements_.get_w(), has_warnings ? get_inner_h() / 8 : 0);
@@ -856,7 +855,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 	} catch (const std::exception& e) {
 		log_err("download_addon %s: %s", info.internal_name.c_str(), e.what());
 		piw.end_modal(UI::Panel::Returncodes::kBack);
-		UI::WLMessageBox w(this, _("Error"), (boost::format(
+		UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Error"), (boost::format(
 				_("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n\nError Message:\n%2$s"))
 				% info.internal_name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
 		w.run<UI::Panel::Returncodes>();
@@ -914,7 +913,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, co
 	} catch (const std::exception& e) {
 		log_err("download_i18n %s: %s", info.internal_name.c_str(), e.what());
 		piw.end_modal(UI::Panel::Returncodes::kBack);
-		UI::WLMessageBox w(this, _("Error"), (boost::format(
+		UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Error"), (boost::format(
 				_("The translation files for the add-on ‘%1$s’ could not be downloaded from the server. "
 				"Installing/upgrading the translations for this add-on will be skipped.\n\nError Message:\n%2$s"))
 				% info.internal_name.c_str() % e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
@@ -925,7 +924,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw, co
 
 static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
-		UI::WLMessageBox w(ctrl, _("Uninstall"), (boost::format(_("Are you certain that you want to uninstall this add-on?\n\n"
+		UI::WLMessageBox w(ctrl, UI::WindowStyle::kFsMenu, _("Uninstall"), (boost::format(_("Are you certain that you want to uninstall this add-on?\n\n"
 			"%1$s\n"
 			"by %2$s\n"
 			"Version %3$u\n"
@@ -1006,7 +1005,7 @@ void AddOnsCtrl::autofix_dependencies() {
 			}
 		}
 		if (!found) {
-			UI::WLMessageBox w(this, _("Error"), (boost::format(_("The required add-on ‘%s’ could not be found on the server."))
+			UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Error"), (boost::format(_("The required add-on ‘%s’ could not be found on the server."))
 					% addon_to_install).str(), UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 		}
@@ -1126,7 +1125,7 @@ static std::string filesize_string(const uint32_t bytes) {
 struct RemoteInteractionWindow : public UI::Window {
 public:
 	RemoteInteractionWindow(AddOnsCtrl& parent, const AddOnInfo& info)
-	: UI::Window(parent.get_parent(), info.internal_name,
+	: UI::Window(parent.get_parent(), UI::WindowStyle::kFsMenu, info.internal_name,
 			parent.get_x() + kRowButtonSize, parent.get_y() - kRowButtonSize,
 			parent.get_inner_w() - 2 * kRowButtonSize, parent.get_inner_h() + 2 * kRowButtonSize, info.descname()),
 	box_(this, 0, 0, UI::Box::Vertical),
@@ -1232,7 +1231,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	install_.sigclicked.connect([ctrl, info]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
-			UI::WLMessageBox w(ctrl, _("Install"), (boost::format(_("Are you certain that you want to install this add-on?\n\n"
+			UI::WLMessageBox w(ctrl, UI::WindowStyle::kFsMenu, _("Install"), (boost::format(_("Are you certain that you want to install this add-on?\n\n"
 				"%1$s\n"
 				"by %2$s\n"
 				"%3$s\n"
@@ -1254,7 +1253,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	});
 	upgrade_.sigclicked.connect([this, ctrl, info, installed_version]() {
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {
-			UI::WLMessageBox w(ctrl, _("Upgrade"), (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
+			UI::WLMessageBox w(ctrl, UI::WindowStyle::kFsMenu, _("Upgrade"), (boost::format(_("Are you certain that you want to upgrade this add-on?\n\n"
 				"%1$s\n"
 				"by %2$s\n"
 				"%3$s\n"

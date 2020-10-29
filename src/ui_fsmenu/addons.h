@@ -88,6 +88,10 @@ public:
 
 	bool handle_key(bool, SDL_Keysym) override;
 
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuDefault;
+	}
+
 protected:
 	void layout() override;
 	void think() override;

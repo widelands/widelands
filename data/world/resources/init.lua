@@ -83,7 +83,7 @@
 --
 --    pics_dir = path.dirname(__file__) .. "pics/"
 --
---    wl.World():new_resource_type{
+--    wl.Descriptions():new_resource_type{
 --       name = "resource_coal",
 --       descname = _ "Coal",
 --       max_amount = 20,
@@ -105,7 +105,7 @@ push_textdomain("world")
 
 pics_dir = path.dirname(__file__) .. "pics/"
 
-wl.World():new_resource_type{
+wl.Descriptions():new_resource_type{
    name = "resource_coal",
    descname = _ "Coal",
    max_amount = 20,
@@ -121,7 +121,7 @@ wl.World():new_resource_type{
    }
 }
 
-wl.World():new_resource_type{
+wl.Descriptions():new_resource_type{
    name = "resource_gold",
    descname = _ "Gold",
    max_amount = 20,
@@ -137,7 +137,7 @@ wl.World():new_resource_type{
    }
 }
 
-wl.World():new_resource_type{
+wl.Descriptions():new_resource_type{
    name = "resource_iron",
    descname = _ "Iron",
    max_amount = 20,
@@ -153,7 +153,7 @@ wl.World():new_resource_type{
    }
 }
 
-wl.World():new_resource_type{
+wl.Descriptions():new_resource_type{
    name = "resource_stones",
    descname = _ "Stones",
    max_amount = 20,
@@ -169,7 +169,7 @@ wl.World():new_resource_type{
    }
 }
 
-wl.World():new_resource_type{
+wl.Descriptions():new_resource_type{
    name = "resource_water",
    descname = _ "Water",
    max_amount = 50,
@@ -185,7 +185,7 @@ wl.World():new_resource_type{
    }
 }
 
-wl.World():new_resource_type{
+wl.Descriptions():new_resource_type{
    name = "resource_fish",
    descname = _ "Fish",
    max_amount = 20,

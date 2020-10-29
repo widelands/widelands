@@ -37,7 +37,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              bool addons,
                                              bool show_empty_dirs,
                                              const std::string& basedir)
-   : UI::UniqueWindow(&parent, name, &registry, parent.get_w(), parent.get_h(), title),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, name, &registry, parent.get_w(), parent.get_h(), title),
 
      // Values for alignment and size
      padding_(4),

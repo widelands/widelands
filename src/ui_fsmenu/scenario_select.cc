@@ -38,21 +38,13 @@
  * Loads a list of all visible maps of selected campaign or all tutorials and
  * lets the user choose one.
  */
-FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
-   : FullscreenMenuLoadMapOrGame(),
+FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& fsmm,
+                                                           CampaignData* camp)
+   : FullscreenMenuLoadMapOrGame(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      header_box_(this, 0, 0, UI::Box::Vertical),
 
-     // Main title
-     title_(&header_box_,
-            0,
-            0,
-            0,
-            0,
-            is_tutorial_ ? _("Choose a tutorial") : _("Choose a scenario"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
      subtitle_(&header_box_,
                0,
                0,
@@ -98,8 +90,6 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 
 	header_box_.add_inf_space();
 	header_box_.add_inf_space();
-	header_box_.add_inf_space();
-	header_box_.add(&title_, UI::Box::Resizing::kFullSize);
 	header_box_.add_inf_space();
 	header_box_.add(&subtitle_, UI::Box::Resizing::kFullSize);
 	header_box_.add_inf_space();
@@ -152,7 +142,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
 
 void FullscreenMenuScenarioSelect::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
-	header_box_.set_size(get_w(), tabley_);
+	header_box_.set_size(get_inner_w(), tabley_);
 	table_.set_size(tablew_, tableh_);
 	table_.set_pos(Vector2i(tablex_, tabley_));
 	scenario_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
@@ -206,7 +196,7 @@ void FullscreenMenuScenarioSelect::clicked_ok() {
 	if (!scenario_data.playable) {
 		return;
 	}
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
 void FullscreenMenuScenarioSelect::entry_selected() {

@@ -23,7 +23,6 @@
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
@@ -37,7 +36,8 @@ struct GameSettingsProvider;
  */
 class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuMapSelect(GameSettingsProvider*,
+	FullscreenMenuMapSelect(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
 	                        GameController*,
 	                        Widelands::EditorGameBase& egbase);
 
@@ -67,7 +67,6 @@ private:
 	const int checkbox_padding_;
 	int32_t checkboxes_y_;
 
-	UI::Textarea title_;
 	UI::Box checkboxes_;
 
 	MapTable table_;
