@@ -151,8 +151,8 @@ public:
 	 */
 };
 
-
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from the scripting packet if it's not there.
+// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
+// the scripting packet if it's not there.
 class LuaWorld : public LuaRootModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaWorld);
@@ -160,12 +160,16 @@ public:
 		return "";
 	}
 	LuaWorld() = default;
-	explicit LuaWorld(lua_State*) {}
-	void __persist(lua_State*) override {}
-	void __unpersist(lua_State*) override {}
+	explicit LuaWorld(lua_State*) {
+	}
+	void __persist(lua_State*) override {
+	}
+	void __unpersist(lua_State*) override {
+	}
 };
 
-// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from the scripting packet if it's not there.
+// TODO(GunChleoc): This class is here for saveloading compatibility only. We'll get a SIGABRT from
+// the scripting packet if it's not there.
 class LuaTribes : public LuaRootModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaTribes);
@@ -173,11 +177,13 @@ public:
 		return "";
 	}
 	LuaTribes() = default;
-	explicit LuaTribes(lua_State*) {}
-	void __persist(lua_State*) override {}
-	void __unpersist(lua_State*) override {}
+	explicit LuaTribes(lua_State*) {
+	}
+	void __persist(lua_State*) override {
+	}
+	void __unpersist(lua_State*) override {
+	}
 };
-
 
 void luaopen_wlroot(lua_State*, bool in_editor);
 
