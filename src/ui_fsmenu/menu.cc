@@ -155,30 +155,20 @@ TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
                                                    const std::string& name,
                                                    const std::string& title,
                                                    double right_column_width_factor)
-   : TwoColumnsMenu(fsmm, name, title, right_column_width_factor),
-     right_column_content_box_(
-        &right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * padding, "right content"),
-     button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * padding, "button"),
-     back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
+   : TwoColumnsBackNavigationMenu(fsmm, name, title, right_column_width_factor),
+
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
 
-	right_column_box_.add(&right_column_content_box_, UI::Box::Resizing::kExpandBoth);
-	right_column_box_.add_space(5 * padding);
-	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
-	button_box_.add(&back_, UI::Box::Resizing::kFillSpace);
 	button_box_.add(&ok_, UI::Box::Resizing::kFillSpace);
 
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
-	back_.sigclicked.connect([this]() { clicked_back(); });
 }
 
 TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 }
 
 void TwoColumnsNavigationMenu::layout() {
-	TwoColumnsMenu::layout();
-	printBox(right_column_content_box_);
-	printBox(button_box_);
+	TwoColumnsBackNavigationMenu::layout();
 }
 
 bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
@@ -188,19 +178,13 @@ bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_RETURN:
 			clicked_ok();
 			return true;
-		case SDLK_ESCAPE:
-			clicked_back();
-			return true;
 		default:
 			break;  // not handled
 		}
 	}
-	return UI::Window::handle_key(down, code);
+	return TwoColumnsBackNavigationMenu::handle_key(down, code);
 }
 
-void TwoColumnsNavigationMenu::clicked_back() {
-	end_modal<MenuTarget>(MenuTarget::kBack);
-}
 void TwoColumnsNavigationMenu::clicked_ok() {
 	end_modal<MenuTarget>(MenuTarget::kOk);
 }

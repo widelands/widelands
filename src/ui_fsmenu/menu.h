@@ -83,7 +83,7 @@ protected:
 	UI::Button back_;
 };
 
-class TwoColumnsNavigationMenu : public TwoColumnsMenu {
+class TwoColumnsNavigationMenu : public TwoColumnsBackNavigationMenu {
 public:
 	TwoColumnsNavigationMenu(FullscreenMenuMain&,
 	                         const std::string& name,
@@ -93,14 +93,10 @@ public:
 
 protected:
 	void layout() override;
-	virtual void clicked_back();
 	virtual void clicked_ok();
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
-	UI::Box right_column_content_box_, button_box_;
-
-	UI::Button back_;
 	UI::Button ok_;
 };
 
