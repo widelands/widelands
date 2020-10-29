@@ -153,7 +153,7 @@ void DescriptionManager::load_description(const std::string& description_name) {
 		   description_name.c_str());
 	}
 
-	std::string object_script = "";
+	std::string object_script;
 
 	// Load it - scenario descriptions take precedence
 	if (registered_scenario_descriptions_.count(description_name) == 1) {
