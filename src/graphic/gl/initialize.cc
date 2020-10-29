@@ -189,7 +189,7 @@ SDL_GLContext initialize(
 	// does not exist for all languages, we show both the original and a localized text.
 	auto show_opengl_error_and_exit = [](const std::string& message,
 	                                     const std::string& localized_message) {
-		std::string display_message = "";
+		std::string display_message;
 		if (message != localized_message) {
 			display_message =
 			   message + "\n\n" +
