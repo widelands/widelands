@@ -23,7 +23,6 @@
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
-#include "ui_basic/mouse_constants.h"
 #include "wui/interactive_base.h"
 
 constexpr int8_t kButtonSize = 25;
@@ -137,7 +136,7 @@ b_increase_real_fill_(&hbox_, "increase_real", 0, 0, kButtonSize, kButtonSize,
 		UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_up.png"), _("Add ware")),
 collapse_(this, "collapse", 0, 0, kButtonSize, kButtonSize * 3 / 2, UI::ButtonStyle::kWuiMenu, "", "", UI::Button::VisualState::kFlat),
 priority_(&hbox_, 0, 0, 5 * kButtonSize,
-	                 kButtonSize * 2 / 3, 0, 4,
+	                 kButtonSize, 0, 4,
 	                 has_priority_ ? priority_to_index(
 					   	settings_ ? settings_->ware_queues.at(index_).priority : building_.get_priority(type_, index_)) : 2,
 		UI::SliderStyle::kWuiLight, "", kButtonSize, can_act_ && has_priority_),
@@ -181,6 +180,9 @@ icons_(nr_icons_, nullptr) {
 	hbox_.add(&b_increase_desired_fill_);
 	hbox_.add(&b_increase_real_fill_);
 
+	priority_.set_in_game_key_bindings(true);
+	priority_.set_cursor_fixed_height(kButtonSize * 2 / 3);
+
 	// To make sure the fill buttons are aligned even when some queues
 	// have priority buttons and some don't (e.g. in barracks)
 	hbox_.add_space(kButtonSize / 4);
@@ -200,8 +202,6 @@ icons_(nr_icons_, nullptr) {
 		const bool c = !collapsed_;
 		recurse([c](InputQueueDisplay& i) { i.set_collapsed(c); });
 	});
-
-	priority_.set_in_game_key_bindings(true);
 
 	if (can_act_) {
 		b_decrease_desired_fill_.sigclicked.connect([this]() {

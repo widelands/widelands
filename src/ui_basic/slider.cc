@@ -70,15 +70,16 @@ Slider::Slider(Panel* const parent,
      max_value_(max_value),
      value_(value),
      relative_move_(0),
-     in_game_key_bindings_(false),
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
      cursor_style_(&g_style_manager->slider_style(style).background()),
+     in_game_key_bindings_(false),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
-     cursor_size_(cursor_size) {
+     cursor_size_(cursor_size),
+     cursor_fixed_height_(-1) {
 	set_thinks(false);
 	set_can_focus(enabled_);
 	calculate_cursor_position();
@@ -466,7 +467,7 @@ void HorizontalSlider::draw(RenderTarget& dst) {
 	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 1, 4), black);
 	dst.fill_rect(Recti(get_x_gap() + 1, get_y_gap(), 1, 3), black);
 
-	draw_cursor(dst, cursor_pos_, 0, cursor_size_, get_h());
+	draw_cursor(dst, cursor_pos_, cursor_fixed_height_ < 0 ? 0 : (get_h() - cursor_fixed_height_) / 2, cursor_size_, cursor_fixed_height_ < 0 ? get_h() : cursor_fixed_height_);
 }
 
 /**
@@ -498,9 +499,11 @@ bool HorizontalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 		//  click on cursor
 		cursor_pressed(x);
 		return true;
-	} else if (y >= get_y_gap() - 2 && y <= static_cast<int32_t>(get_h()) - get_y_gap() + 2 &&
+	} else if (in_game_key_bindings_
+	           ? (y >= 0 && y < get_h() && x >= 0 && x < get_w())
+	           : (y >= get_y_gap() - 2 && y <= static_cast<int32_t>(get_h()) - get_y_gap() + 2 &&
 	           x >= get_x_gap() &&
-	           x < static_cast<int32_t>(get_w()) - get_x_gap()) {  //  click on bar
+	           x < static_cast<int32_t>(get_w()) - get_x_gap())) {  //  click on bar
 		bar_pressed(x, get_x_gap());
 		return true;
 	} else {
@@ -535,7 +538,7 @@ void VerticalSlider::draw(RenderTarget& dst) {
 	dst.fill_rect(Recti(get_x_gap(), get_y_gap(), 4, 1), black);
 	dst.fill_rect(Recti(get_x_gap(), get_y_gap() + 1, 3, 1), black);
 
-	draw_cursor(dst, 0, cursor_pos_, get_w(), cursor_size_);
+	draw_cursor(dst, cursor_fixed_height_ < 0 ? 0 : (get_w() - cursor_fixed_height_) / 2, cursor_pos_, cursor_fixed_height_ < 0 ? get_w() : cursor_fixed_height_, cursor_size_);
 }
 
 /**
