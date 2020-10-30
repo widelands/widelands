@@ -93,7 +93,6 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnIn
 				}
 			}
 			// …and now enable the ones we want
-			auto insert_before = addons->begin();
 			for (const auto& requirement : map_.required_addons()) {
 				bool found = false;
 				for (auto& pair : g_addons) {
@@ -107,8 +106,7 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnIn
 									pair.first.version);
 						}
 						assert(pair.first.category == AddOnCategory::kWorld);
-						addons->insert(insert_before, pair.first);
-						++insert_before;
+						addons->push_back(pair.first);
 						break;
 					}
 				}
@@ -144,6 +142,10 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnIn
 
 int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase, std::vector<AddOnInfo>* a) {
 	preload_map(false, a);
+
+	// Ensure add-ons are handled correctly
+	egbase.delete_world_and_tribes();
+	egbase.descriptions();
 
 	std::string timer_message = "WidelandsMapLoader::load_map_for_render() for '";
 	timer_message += map_.get_name();

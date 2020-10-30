@@ -69,6 +69,17 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
      lua_(lua),
      description_manager_(new DescriptionManager(lua)) {
 
+	assert(lua_);
+	for (const AddOnInfo& info : addons) {
+		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
+			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name + FileSystem::file_separator() + "preload.lua");
+			if (g_fs->file_exists(script)) {
+				log_info("Running preload script for add-on %s", info.internal_name.c_str());
+				lua_->run_script(script);
+			}
+		}
+	}
+
 	// Immediately register all add-on units.
 	// NOCOM There must be a better place for this?
 	for (const AddOnInfo& info : addons) {

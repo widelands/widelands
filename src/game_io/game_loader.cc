@@ -73,6 +73,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	log_info("Game: Reading Preload Data ... ");
 	GamePreloadPacket preload;
 	preload.read(fs_, game_);
+
 	// Now that the preload data was read, we apply the add-ons.
 	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
 	// only ones where it makes a difference whether they are enabled during loading or not.
@@ -100,6 +101,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
 		}
 	}
+	// Actually apply changes
+	game_.delete_world_and_tribes();
+	game_.descriptions();
 
 	log_info("Game: Reading Game Class Data ... ");
 	{

@@ -298,6 +298,17 @@ void EditorGameBase::allocate_player_maps() {
  * the graphics are loaded.
  */
 void EditorGameBase::postload() {
+	assert(lua_);
+	for (const AddOnInfo& info : enabled_addons_) {
+		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
+			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name + FileSystem::file_separator() + "postload.lua");
+			if (g_fs->file_exists(script)) {
+				log_info("Running postload script for add-on %s", info.internal_name.c_str());
+				lua_->run_script(script);
+			}
+		}
+	}
+
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 	assert(descriptions_);
 }
