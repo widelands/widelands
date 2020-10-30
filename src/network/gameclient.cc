@@ -249,7 +249,6 @@ void GameClient::run() {
 
 	d->send_hello();
 	d->settings.multiplayer = true;
-	assert(!d->settings.tribes.empty());
 
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
