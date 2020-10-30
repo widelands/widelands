@@ -350,7 +350,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (nr_requests > 0) {
-		*s = g_style_manager->color_tag(
+		*s = StyleManager::color_tag(
 		   (nr_requests == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker missing") :
@@ -362,7 +362,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (nr_coming > 0) {
-		*s = g_style_manager->color_tag(
+		*s = StyleManager::color_tag(
 		   (nr_coming == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker is coming") :
@@ -374,7 +374,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (is_stopped_) {
-		*s = g_style_manager->color_tag(
+		*s = StyleManager::color_tag(
 		   _("(stopped)"), g_style_manager->building_statistics_style().neutral_color());
 		return;
 	}
@@ -458,7 +458,7 @@ void ProductionSite::format_statistics_string() {
 
 	// boost::format would treat uint8_t as char
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
-	const std::string perc_str = g_style_manager->color_tag(
+	const std::string perc_str = StyleManager::color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
 	   (percent < 33) ?
 	      g_style_manager->building_statistics_style().low_color() :
@@ -484,7 +484,7 @@ void ProductionSite::format_statistics_string() {
 
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % g_style_manager->color_tag(trend, color)).str();
+		   (boost::format("%s\u2009%s") % perc_str % StyleManager::color_tag(trend, color)).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}

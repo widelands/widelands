@@ -766,7 +766,7 @@ void EconomyOptionsWindow::save_targets() {
 
 	g_fs->ensure_directory_exists(kEconomyProfilesDir);
 	std::string complete_filename =
-	   kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
+	   kEconomyProfilesDir + FileSystem::file_separator() + player_->tribe().name();
 	profile.write(complete_filename.c_str(), false);
 
 	// Inform the windows of other economies of new and deleted profiles
@@ -797,7 +797,7 @@ void EconomyOptionsWindow::read_targets() {
 	}
 
 	std::string complete_filename =
-	   kEconomyProfilesDir + g_fs->file_separator() + player_->tribe().name();
+	   kEconomyProfilesDir + FileSystem::file_separator() + player_->tribe().name();
 	Profile profile;
 	profile.read(complete_filename.c_str());
 
