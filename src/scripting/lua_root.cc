@@ -603,7 +603,27 @@ void luaopen_wlroot(lua_State* L, bool in_editor) {
 		register_class<LuaGame>(L, "", true);
 		add_parent<LuaGame, LuaBases::LuaEditorGameBase>(L);
 		lua_pop(L, 1);  // Pop the meta table
+
+		// TODO(GunChleoc): These 2 classes are only here for savegame compatibility
+		register_class<LuaWorld>(L, "", false);
+		register_class<LuaTribes>(L, "", false);
 	}
 	register_class<LuaDescriptions>(L, "", false);
 }
+
+const char LuaWorld::className[] = "World";
+const MethodType<LuaWorld> LuaWorld::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaWorld> LuaWorld::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+const char LuaTribes::className[] = "Tribes";
+const MethodType<LuaTribes> LuaTribes::Methods[] = {
+   {nullptr, nullptr},
+};
+const PropertyType<LuaTribes> LuaTribes::Properties[] = {
+   {nullptr, nullptr, nullptr},
+};
+
 }  // namespace LuaRoot
