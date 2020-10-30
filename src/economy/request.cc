@@ -127,8 +127,6 @@ void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 					                    target_.owner().tribe().name().c_str(), wareworker_name.c_str());
 				}
 			} break;
-			default:
-				NEVER_HERE();
 			}
 
 			// Overwrite initial economy because our WareWorker type may have changed
