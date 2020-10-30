@@ -27,17 +27,17 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/menu.h"
 #include "wui/game_chat_panel.h"
 
-class FullscreenMenuInternetLobby : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuInternetLobby : public TwoColumnsBackNavigationMenu {
 public:
 	FullscreenMenuInternetLobby(FullscreenMenuMain&, std::string&, std::string&, bool);
 
 	void think() override;
 
 protected:
-	void clicked_ok() override;
+	void clicked_ok();
 
 private:
 	void layout() override;
@@ -60,8 +60,6 @@ private:
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
 	FullscreenMenuMain& fsmm_;
-
-	UI::Box left_column_, right_column_;
 
 	// Left Column
 	UI::Textarea label_clients_online_;

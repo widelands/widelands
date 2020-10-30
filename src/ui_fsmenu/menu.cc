@@ -160,7 +160,6 @@ TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
 
 	button_box_.add(&ok_, UI::Box::Resizing::kFillSpace);
-
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 }
 
