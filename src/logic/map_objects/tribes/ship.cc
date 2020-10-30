@@ -1046,7 +1046,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = g_style_manager->color_tag(
+		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 
