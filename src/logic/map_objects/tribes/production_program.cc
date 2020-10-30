@@ -187,6 +187,7 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
 		}
 		}
+		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
