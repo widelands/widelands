@@ -231,7 +231,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                   queue_->get_max_size() :
                   type_ == Widelands::wwWORKER ? settings_->worker_queues.at(index_).max_fill :
                                                  settings_->ware_queues.at(index_).max_fill),
-     icons_(nr_icons_, nullptr) {
+     icons_(nr_icons_, nullptr),
+     fill_index_under_mouse_(-1) {
 
 	assert((queue_ == nullptr) ^ (settings_ == nullptr));
 
@@ -344,16 +345,24 @@ void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& f
 	}
 }
 
-bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, const int32_t y) {
+int32_t InputQueueDisplay::fill_index_at(const int32_t x, const int32_t y) const {
 	assert(nr_icons_ > 0);
-	if (btn != SDL_BUTTON_LEFT || y < hbox_.get_y() || y > hbox_.get_y() + kButtonSize ||
+	if (y < hbox_.get_y() || y > hbox_.get_y() + kButtonSize ||
 	    x < hbox_.get_x() + icons_[0]->get_x() ||
 	    x > hbox_.get_x() + icons_.back()->get_x() + kButtonSize) {
-		return UI::Box::handle_mousepress(btn, x, y);
+		return -1;
 	}
 
 	const uint32_t fill = (x + kButtonSize / 2 - hbox_.get_x() - icons_[0]->get_x()) / kButtonSize;
 	assert(fill <= nr_icons_);
+	return fill;
+}
+
+bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, const int32_t y) {
+	const int32_t fill = fill_index_at(x, y);
+	if (btn != SDL_BUTTON_LEFT || fill < 0 || show_only_ || !can_act_) {
+		return UI::Box::handle_mousepress(btn, x, y);
+	}
 
 	if (SDL_GetModState() & KMOD_SHIFT) {
 		recurse([fill](InputQueueDisplay& i) { i.set_desired_fill(fill); });
@@ -361,6 +370,11 @@ bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, co
 		set_desired_fill(fill);
 	}
 
+	return true;
+}
+
+bool InputQueueDisplay::handle_mousemove(uint8_t, const int32_t x, const int32_t y, int32_t, int32_t) {
+	fill_index_under_mouse_ = fill_index_at(x, y);
 	return true;
 }
 
@@ -540,17 +554,24 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
 		assert(desired_fill <= nr_icons_);
 
-		const int xpos = desired_fill == 0 ?
+		auto calc_xpos = [this](const size_t fill) {
+			return (fill == 0 ?
 		                    icons_[0]->get_x() :
-		                    desired_fill == nr_icons_ ?
+		                    fill == nr_icons_ ?
 		                    icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
-		                    (icons_[desired_fill - 1]->get_x() + icons_[desired_fill - 1]->get_w() +
-		                     icons_[desired_fill]->get_x()) /
-		                          2;
+		                    (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
+		                     icons_[fill]->get_x()) /
+		                          2) + hbox_.get_x() - max_fill_indicator_.width() / 2;
+		};
+
 		const int ypos = hbox_.get_y() + icons_[0]->get_y() +
 		                 (icons_[0]->get_h() - max_fill_indicator_.height()) / 2;
-		r.blit(Vector2i(xpos + hbox_.get_x() - max_fill_indicator_.width() / 2, ypos),
-		       &max_fill_indicator_);
+		r.blit(Vector2i(calc_xpos(desired_fill), ypos), &max_fill_indicator_);
+
+		if (can_act_ && fill_index_under_mouse_ >= 0) {
+			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos, max_fill_indicator_.width(), max_fill_indicator_.height()),
+	                    &max_fill_indicator_, Recti(0, 0, max_fill_indicator_.width(), max_fill_indicator_.height()), 0.4f, BlendMode::Default);
+		}
 	}
 
 	// Draw priority indicator

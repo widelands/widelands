@@ -60,6 +60,7 @@ protected:
 	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
+	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 
 private:
 	// Common constructor
@@ -109,6 +110,9 @@ private:
 
 	size_t nr_icons_;
 	std::vector<UI::Icon*> icons_;
+
+	int32_t fill_index_at(int32_t, int32_t) const;
+	int32_t fill_index_under_mouse_;
 };
 
 #endif  // end of include guard: WL_WUI_INPUTQUEUEDISPLAY_H
