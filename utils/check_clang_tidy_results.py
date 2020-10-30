@@ -70,7 +70,6 @@ SUPPRESSED_CHECKS = {
     '[readability-redundant-member-init]',
     '[readability-redundant-string-cstr]',
     '[readability-simplify-boolean-expr]',
-    '[readability-static-accessed-through-instance]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')

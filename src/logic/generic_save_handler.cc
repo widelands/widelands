@@ -54,7 +54,7 @@ uint32_t GenericSaveHandler::get_index(GenericSaveHandler::Error err) {
 
 void GenericSaveHandler::make_backup() {
 	std::string backup_filename_base =
-	   dir_ + g_fs->file_separator() + timestring() + "_" + filename_;
+	   dir_ + FileSystem::file_separator() + timestring() + "_" + filename_;
 	backup_filename_ = backup_filename_base + kTempBackupExtension;
 
 	// If a file with that name already exists, then try some name modifications.
