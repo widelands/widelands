@@ -373,7 +373,8 @@ bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, co
 	return true;
 }
 
-bool InputQueueDisplay::handle_mousemove(uint8_t, const int32_t x, const int32_t y, int32_t, int32_t) {
+bool InputQueueDisplay::handle_mousemove(
+   uint8_t, const int32_t x, const int32_t y, int32_t, int32_t) {
 	fill_index_under_mouse_ = fill_index_at(x, y);
 	return true;
 }
@@ -555,13 +556,13 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		assert(desired_fill <= nr_icons_);
 
 		auto calc_xpos = [this](const size_t fill) {
-			return (fill == 0 ?
-		                    icons_[0]->get_x() :
-		                    fill == nr_icons_ ?
-		                    icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
-		                    (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
-		                     icons_[fill]->get_x()) /
-		                          2) + hbox_.get_x() - max_fill_indicator_.width() / 2;
+			return (fill == 0 ? icons_[0]->get_x() :
+			                    fill == nr_icons_ ?
+			                    icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
+			                    (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
+			                     icons_[fill]->get_x()) /
+			                          2) +
+			       hbox_.get_x() - max_fill_indicator_.width() / 2;
 		};
 
 		const int ypos = hbox_.get_y() + icons_[0]->get_y() +
@@ -569,8 +570,11 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 		r.blit(Vector2i(calc_xpos(desired_fill), ypos), &max_fill_indicator_);
 
 		if (can_act_ && fill_index_under_mouse_ >= 0) {
-			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos, max_fill_indicator_.width(), max_fill_indicator_.height()),
-	                    &max_fill_indicator_, Recti(0, 0, max_fill_indicator_.width(), max_fill_indicator_.height()), 0.4f, BlendMode::Default);
+			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
+			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
+			                 &max_fill_indicator_,
+			                 Recti(0, 0, max_fill_indicator_.width(), max_fill_indicator_.height()),
+			                 0.4f, BlendMode::Default);
 		}
 	}
 
