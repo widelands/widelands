@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/widelands/teams/35159/pt_BR/)\n"
@@ -18,6 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. TRANSLATORS: Message title for a piece of information
+#: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
+msgid "Note"
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
+msgid ""
+"You appear not to have completed the previous mission. You may still play "
+"this scenario, but you will be at a disadvantage. I recommend that you "
+"complete the previous scenario first and then restart this mission."
+msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:25
 msgid "Build a basic economy"
@@ -187,25 +199,25 @@ msgstr ""
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:91
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:333
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:334
 msgid "How many sites where soldiers stay,"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:92
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:337
 msgid "How many sites where thou hold’st sway,"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:339
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:340
 msgid "Though not their whereabouts sees he"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:343
 msgid "Who’s ordering around here thee!"
 msgstr ""
 
@@ -253,52 +265,60 @@ msgid ""
 "us. We must defeat them both."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
-msgid "Warning"
-msgstr ""
-
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:129
-msgid ""
-"You appear not to have completed the previous mission. You may still play "
-"this scenario, but you will be at a disadvantage. I recommend that you "
-"complete the previous scenario first and then restart this mission."
-msgstr ""
-
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:135
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:144
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:153
-msgid "Welcome Back!"
-msgstr ""
-
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:136
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:145
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:154
-msgid "A new home"
-msgstr ""
-
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:138
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
 msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
-"were on the sea, tossed about by envious storms… it must have been months."
+"were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Introduction 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
+msgid ""
+"The storms maintained a firm grip on the ship throughout our voyage. There "
+"was hardly a day on which we did not wonder whether it would be our last. We"
+" were compelled to drop the precious metals we had taken with us overboard "
+"to steady the ship, feeling as though it were a squalid sacrifice to the "
+"gods to give us hope to live a few hours longer."
+msgstr ""
+
+#. TRANSLATORS: Reebaud – Introduction 1
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:132
+msgid ""
+"The few tools we managed to salvage from Langeness did not cope well. The "
+"miners’ picks proved especially vulnerable, and we had to throw them in the "
+"ocean when it became evident that they had been corroded by the sea salt so "
+"much that we could never again mine anything with them."
+msgstr ""
+
+#. TRANSLATORS: Reebaud – Introduction 1
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134
 msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
 
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:145
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:154
+msgid "Welcome Back!"
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:146
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:155
+msgid "A new home"
+msgstr ""
+
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:147
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:148
 msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Introduction 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:150
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:151
 msgid ""
 "Our ship was in no state to continue sailing, so we killed the locals and "
 "took their land. I just hope there aren’t more of them, so we can live in "
@@ -306,21 +326,21 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Introduction 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:156
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:157
 msgid ""
 "This place looks bleak and barren, my companions say, but I think it looks… "
 "beautiful."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Introduction 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:159
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:160
 msgid ""
 "My scouts no longer report any signs of living creatures nearby. We will "
 "start building our new home here."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Introduction 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:162
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:163
 msgid ""
 "We must start by building all the basic buildings. I see no mountains nearby"
 " where we might mine coal. We’d better build a charcoal kiln to burn logs "
@@ -329,42 +349,42 @@ msgid ""
 "couldn’t copy."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:167
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:168
 msgid "Go South"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:168
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Expand and conquer"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Expand South
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:170
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:171
 msgid ""
 "We have built a home in this wonderful landscape. But as our tribe grows, we"
 " need more space. We should start expanding our territory."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Expand South
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:173
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:174
 msgid ""
 "The scouts reported that the lands to the north are rugged hills, beautiful "
 "to behold but not suited for buildings. Let’s find out what we can discover "
 "in the south."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:178
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:187
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:196
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:188
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:207
 msgid "Metal Shortage"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:179
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "We are out of metals"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Train and recycle 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:181
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:182
 msgid ""
 "Chieftain Reebaud! We have a serious problem. We have discovered a mountain "
 "where we might be able to start mining coal and iron, but we have no miners,"
@@ -372,38 +392,38 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Hauke – Train and recycle 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:184
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:185
 msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:188
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:207
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:189
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "Getting new metal"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:190
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:191
 msgid ""
 "This is terrible news! Without iron or the means to produce any, we are "
 "stuck like this forever! You must come up with a solution."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:193
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:194
 msgid ""
 "I have seen some advanced weapons in our warehouses. Perhaps it would be "
 "possible to smelt them back into metal? But that seems like a waste of the "
 "precious swords…"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:198
 msgid "New metal"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Train and recycle 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:199
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:200
 msgid ""
 "Now I have an idea: When our soldiers are trained, they are equipped with "
 "new swords and the old weapons are discarded. These are unfit to use in "
@@ -411,7 +431,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Hauke – Train and recycle 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:202
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:203
 msgid ""
 "That is what we must do. We will use our weapons to train soldiers, then "
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
@@ -419,7 +439,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:209
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:210
 msgid ""
 "Not so hasty! To build a training camp, we will first need gold, and we "
 "don’t have any. We must first dismantle our port, which will give us just "
@@ -428,23 +448,23 @@ msgid ""
 "dismantle the port."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:213
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:214
 msgid "Metal Production"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "The mines are working"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:217
 msgid ""
 "Our mines have started working. Now, we only need to build a furnace and the"
 " metal production will be running smoothly."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:220
 msgid ""
 "Do we have a reindeer farm already? If not, we should build one now. We need"
 " more reindeer for the crowded roads, and we could already start sewing fur "
@@ -452,17 +472,17 @@ msgid ""
 "eventually?"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:222
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:232
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:233
 msgid "Fishing"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:223
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:224
 msgid "We need fish"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:226
 msgid ""
 "Chieftain Reebaud, I have more bad news. There are almost no fish in the "
 "waters nearby. While we can prepare rations using only fruit or bread, "
@@ -471,7 +491,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:228
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:229
 msgid ""
 "Fortunately, one of our fishermen thought of a solution. Our clay pits leave"
 " large holes in the ground; a fisher could fill them with water and grow "
@@ -483,12 +503,12 @@ msgstr ""
 "criar peixes nessas lagoas. Ele apenas precisa de muita água e frutas para "
 "alimentar os peixes."
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:233
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:234
 msgid "We have fish again"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:235
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:236
 msgid ""
 "Well done. We have built an aqua farm, and our mining economy is stable for "
 "now. However, the miners tell me that the resources are already low, and the"
@@ -496,30 +516,30 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:238
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:239
 msgid ""
 "The mines will still be able to produce then, but it will take about twenty "
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:241
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:242
 msgid "Recruiting"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Our economy is complete"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:244
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:245
 msgid ""
 "You are right – we should build more berry farms, fruit collector’s houses "
 "and taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:248
 msgid ""
 "However, we can already start focusing on recruiting and training soldiers. "
 "We can now afford to use metal for weapons, helmets and garments. I propose "
@@ -527,25 +547,25 @@ msgid ""
 "now."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:251
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:258
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:264
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:273
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:279
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:288
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:297
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:303
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:313
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:252
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:259
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:289
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:298
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:314
 msgid "We Are Not Alone"
 msgstr ""
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:253
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:265
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:280
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:289
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:304
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:266
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:281
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:290
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:305
 msgid "Salvete peregrini!"
 msgstr ""
 
@@ -553,32 +573,32 @@ msgstr ""
 #. province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:256
 msgid ""
 "Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego "
 "sum. Vos nominate!"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:259
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:274
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:298
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:314
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:275
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:299
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:315
 msgid "Strangers"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Supply Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:261
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:262
 msgid "…does anyone understand what he is saying?"
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:267
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:268
 msgid "Do they not even speak the noble language of the Empire?"
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 3
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:270
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:271
 msgid ""
 "Strangers! I, Murilius, Proconsul of the Northern Lands, a province of the "
 "Empire, demand to know who you are and what business you have in these "
@@ -587,7 +607,7 @@ msgstr ""
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional
 #. frisian greeting, nothing more.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:276
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:277
 msgid ""
 "Peace, representative of the Empire! I am Reebaud, the chieftain of this "
 "tribe. All we want is to settle down here, build our home and live our lives"
@@ -596,7 +616,7 @@ msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:282
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:283
 msgid ""
 "In this case, Reebaude, I must inform you of the presence of an "
 "inhospitable, hostile tribe of barbarians in the vicinity of this very "
@@ -604,7 +624,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:285
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:286
 msgid ""
 "If you seek to live peacefully here, you are not faced with a choice whether"
 " to allow them to live here – you are required to assist the Empire in "
@@ -612,7 +632,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:291
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:292
 msgid ""
 "Also, as a sign of your good intentions, we demand a gift of friendship to "
 "the Empire. As you should have noticed, I have presented you with a new "
@@ -621,7 +641,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:294
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:295
 msgid ""
 "30 logs, 40 slabs of granite, 30 fish, 30 mugs of beer, 150 buckets of "
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
@@ -629,7 +649,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:300
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:301
 msgid ""
 "Chieftain Reebaud – the demands of this arrogant Empire Proconsul are just "
 "outrageous. He treats us like we are his servants. And we certainly cannot "
@@ -638,7 +658,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:306
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:307
 msgid ""
 "If you fail to deliver these wares, the Empire shall treat you like enemies."
 " And so as to prevent you wasting your precious metal, I forbid you to "
@@ -647,7 +667,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:309
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:310
 msgid ""
 "You will have to fight those barbarians if you intend to live in the area; "
 "surely you can see that fighting them together with the Empire is easier "
@@ -657,7 +677,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:316
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
 msgid ""
 "This is the greatest outrage of all. How dare he order us to stop expanding "
 "our territory when all we want is to build a new home, and threaten us with "
@@ -665,7 +685,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:319
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:320
 msgid ""
 "I’d like to say we should attack him right now, but I fear we aren’t strong "
 "enough yet to hold our own against him in battle. We should hurry our "
@@ -674,22 +694,22 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:322
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:323
 msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:327
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:328
 msgid "The Scout Discovered Something"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:328
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "Our scout returned"
 msgstr ""
 
 #. TRANSLATORS: Hauke – Expansion hint
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:331
 msgid ""
 "Chieftain Reebaud! Our scout just returned. He has found a poem in the "
 "strange tongue this Proconsul speaks. With some difficulty, I have "
@@ -698,82 +718,82 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Hauke – Expansion hint
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:345
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:346
 msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:350
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:360
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:361
 msgid "The Empire is Angry"
 msgstr ""
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:352
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:361
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:353
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:362
 msgid "Hostes Imperii estis!"
 msgstr ""
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:354
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:355
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "destroying the beautiful building we presented you with!"
 msgstr ""
 
 #. TRANSLATORS: Murilius – enemy of the Empire
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:357
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:366
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:358
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:367
 msgid "You are enemies of the Empire, and I shall treat you as such!"
 msgstr ""
 
 #. TRANSLATORS: Murilius – enemy of the Empire: player built forbidden
 #. military buildings
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:363
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:364
 msgid ""
 "Barbarians! You have refused my offer of friendship most ungraciously by "
 "basely wasting your precious resources on expansion!"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:369
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:370
 msgid "Two Enemies"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:370
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:371
 msgid "Defeat the enemies!"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – defeat both enemies
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:372
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:373
 msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – defeat both enemies
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:375
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:376
 msgid ""
 "The barbarian tribe he mentioned is also a threat. I don’t want to share "
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the barbarians as well."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:379
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:380
 msgid "The Empire is Grateful"
 msgstr ""
 
 #. TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
 #. though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:381
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:382
 msgid "Salvete amici Imperii!"
 msgstr ""
 
 #. TRANSLATORS: Murilius – Supplied Murilius
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:383
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:384
 msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
@@ -782,7 +802,7 @@ msgstr ""
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
 #. choice
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:386
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:387
 msgid ""
 "Now I permit you to assist us in conquering the barbarians, who live in a "
 "sheltered valley northwest to us. I charge you, expand along the northern "
@@ -790,25 +810,25 @@ msgid ""
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:390
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:391
 msgid "The Reward For Your Service"
 msgstr ""
 
 #. TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:392
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:393
 msgid "Amici Imperii"
 msgstr ""
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:394
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:395
 msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:397
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:398
 msgid ""
 "I propose you start by sending legates to the Capital, so as to discover the"
 " most recent political activities. Once there, you can receive instructions "
@@ -817,16 +837,16 @@ msgid ""
 "tribe."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:400
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:401
 msgid "Another Enemy"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:401
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:402
 msgid "Defeat the Empire!"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:403
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:404
 msgid ""
 "Did I understand him correctly? After all we have done for him, after so "
 "many of my soldiers have laid down their lives for his sake, he wants us to "
@@ -835,33 +855,33 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:406
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:407
 msgid ""
 "We will punish this self-proclaimed Proconsul for his treachery! I shall "
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:411
 msgid "Victory"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:412
 msgid "Victory!"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:414
 msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
 msgid "Congratulations"
 msgstr ""
 
-#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:415
+#: ../../data/campaigns/fri02.wmf/scripting/texts.lua:416
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."

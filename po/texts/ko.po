@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-11 08:45+0000\n"
-"PO-Revision-Date: 2020-08-25 12:26+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-30 04:15+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -326,7 +326,7 @@ msgstr "제타OS"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you've done)"
-msgstr "번역확인:말맞는지--> 그리고 당신이 한 모든 것에 대해 (더 많은) 감사를 표합니다."
+msgstr "그리고, (당신이 한) 모든 것에 대해 더 많은 감사를 드립니다"
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
