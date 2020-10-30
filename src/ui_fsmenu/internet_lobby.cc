@@ -163,7 +163,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
 
 void FullscreenMenuInternetLobby::layout() {
 	TwoColumnsBackNavigationMenu::layout();
-	
+
 	//	uint32_t buth = text_height(UI::FontStyle::kLabel) + 8;
 	//
 
