@@ -65,17 +65,6 @@ wl_library(ui_fsmenu_main
   USES_SDL2
 )
 
-wl_library(ui_fsmenu_loading_common
-  SRCS
-    load_map_or_game.cc
-    load_map_or_game.h
-  DEPENDS
-    base_i18n
-    io_filesystem
-    ui_basic
-    ui_fsmenu_main
-)
-
 wl_library(ui_fsmenu_gameloading
   SRCS
     launch_game.cc
@@ -174,7 +163,6 @@ wl_library(ui_fsmenu_network
     network
     sound
     ui_basic
-    ui_fsmenu_loading_common
     ui_fsmenu_main
     widelands_options
     wui_chat_ui
