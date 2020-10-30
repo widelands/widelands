@@ -38,7 +38,7 @@ namespace Widelands {
 class DescriptionManager {
 public:
 	explicit DescriptionManager(LuaInterface* lua);
-	~DescriptionManager();
+	~DescriptionManager() = default;
 
 	/// Search a directory for 'register.lua' files and register their 'init.lua' scripts
 	void register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario);

@@ -179,8 +179,6 @@ MapDetailsBox::MapDetailsBox(
 	content_box_.add_space(3 * padding);
 	content_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
-MapDetailsBox::~MapDetailsBox() {
-}
 
 void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 	const GameSettings& game_settings = settings->settings();

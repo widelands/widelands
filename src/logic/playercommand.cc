@@ -353,9 +353,6 @@ CmdBuildRoad::CmdBuildRoad(StreamRead& des)
 	}
 }
 
-CmdBuildRoad::~CmdBuildRoad() {
-}
-
 void CmdBuildRoad::execute(Game& game) {
 	if (path == nullptr) {
 		assert(steps);
@@ -435,9 +432,6 @@ CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
-}
-
-CmdBuildWaterway::~CmdBuildWaterway() {
 }
 
 void CmdBuildWaterway::execute(Game& game) {

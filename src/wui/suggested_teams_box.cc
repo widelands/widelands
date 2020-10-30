@@ -48,8 +48,6 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
      lineup_box_(nullptr) {
 	add(suggested_teams_box_label_);
 }
-SuggestedTeamsBox::~SuggestedTeamsBox() {
-}
 
 void SuggestedTeamsBox::hide() {
 	// Delete former images

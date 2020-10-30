@@ -129,9 +129,6 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 	}
 }
 
-ImmovableProgram::Action::~Action() {
-}
-
 /* RST
 
 animate

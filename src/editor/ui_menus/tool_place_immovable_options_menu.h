@@ -32,7 +32,7 @@ struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolPlaceImmovableOptionsMenu(EditorInteractive&,
 	                                    EditorPlaceImmovableTool&,
 	                                    UI::UniqueWindow::Registry&);
-	virtual ~EditorToolPlaceImmovableOptionsMenu();
+	virtual ~EditorToolPlaceImmovableOptionsMenu() = default;
 
 private:
 	std::unique_ptr<

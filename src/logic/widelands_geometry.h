@@ -38,7 +38,7 @@ struct Extent {
  */
 // TODO(sirver): This should go away and be replaced by Vector2i16.
 struct Coords {
-	Coords();
+	Coords() = default;
 	Coords(int16_t nx, int16_t ny);
 
 	/// Returns a special value indicating invalidity.

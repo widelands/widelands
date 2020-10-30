@@ -152,7 +152,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad(const Time&, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
-	~CmdBuildRoad() override;
+	~CmdBuildRoad() override = default;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -177,7 +177,7 @@ struct CmdBuildWaterway : public PlayerCommand {
 	CmdBuildWaterway(const Time&, int32_t, Path&);
 	explicit CmdBuildWaterway(StreamRead&);
 
-	~CmdBuildWaterway() override;
+	~CmdBuildWaterway() override = default;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;

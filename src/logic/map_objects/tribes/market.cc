@@ -62,9 +62,6 @@ bool Market::TradeOrder::fulfilled() const {
 Market::Market(const MarketDescr& the_descr) : Building(the_descr) {
 }
 
-Market::~Market() {
-}
-
 void Market::new_trade(const int trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,

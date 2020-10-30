@@ -36,7 +36,7 @@ struct SuggestedTeamsBox : public UI::Box {
 	                  int32_t indent,
 	                  int32_t max_x = 0,
 	                  int32_t max_y = 0);
-	~SuggestedTeamsBox();
+	~SuggestedTeamsBox() = default;
 
 	void hide();
 	void show(const std::vector<Widelands::SuggestedTeamLineup>& suggested_teams);

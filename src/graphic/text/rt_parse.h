@@ -113,7 +113,7 @@ struct Child {
 class Parser {
 public:
 	Parser();
-	~Parser();
+	~Parser() = default;
 	Tag* parse(std::string text, const TagSet&);
 	std::string remaining_text();
 

@@ -211,9 +211,6 @@ TrainingAttribute parse_training_attribute(const std::string& argument) {
 }
 }  // namespace
 
-ProductionProgram::Action::~Action() {
-}
-
 bool ProductionProgram::Action::get_building_work(Game&, ProductionSite&, Worker&) const {
 	return false;
 }
@@ -422,8 +419,6 @@ Examples for ``return=skipped``:
    -- with these wares with another program.
    return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat
 */
-ProductionProgram::ActReturn::Condition::~Condition() {
-}
 
 ProductionProgram::ActReturn::Negation::Negation(const std::vector<std::string>& arguments,
                                                  std::vector<std::string>::const_iterator& begin,

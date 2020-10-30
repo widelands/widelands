@@ -33,7 +33,7 @@ struct EditorToolSetTerrainOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolSetTerrainOptionsMenu(EditorInteractive&,
 	                                EditorSetTerrainTool&,
 	                                UI::UniqueWindow::Registry&);
-	virtual ~EditorToolSetTerrainOptionsMenu();
+	virtual ~EditorToolSetTerrainOptionsMenu() = default;
 
 private:
 	std::unique_ptr<

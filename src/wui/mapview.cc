@@ -325,9 +325,6 @@ MapView::MapView(
      dragging_(false) {
 }
 
-MapView::~MapView() {
-}
-
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
 	return MapviewPixelFunctions::map_to_panel(view_.viewpoint, view_.zoom, map_pixel);
 }
