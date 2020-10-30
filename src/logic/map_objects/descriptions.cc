@@ -458,80 +458,51 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 }
 
 DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_building(buildingname));
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading building type '%s': %s", buildingname.c_str(), e.what());
-	}
-	return safe_building_index(buildingname);
+	const std::string& looked_up_name = compatibility_table_->lookup_building(buildingname);
+	description_manager_->load_description(looked_up_name);
+	return safe_building_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_critter(crittername));
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading critter type '%s': %s", crittername.c_str(), e.what());
-	}
-	return safe_critter_index(crittername);
+	const std::string& looked_up_name = compatibility_table_->lookup_critter(crittername);
+	description_manager_->load_description(looked_up_name);
+	return safe_critter_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_immovable(const std::string& immovablename) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_immovable(immovablename));
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading immovable type '%s': %s", immovablename.c_str(), e.what());
-	}
-	return safe_immovable_index(immovablename);
+	const std::string& looked_up_name = compatibility_table_->lookup_immovable(immovablename);
+	description_manager_->load_description(looked_up_name);
+	return safe_immovable_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_resource(resourcename));
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading resource type '%s': %s", resourcename.c_str(), e.what());
-	}
-	return safe_resource_index(resourcename);
+	const std::string& looked_up_name = compatibility_table_->lookup_resource(resourcename);
+	description_manager_->load_description(looked_up_name);
+	return safe_resource_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_ship(const std::string& shipname) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_ship(shipname));
-	} catch (WException& e) {
-		throw GameDataError("Error while loading ship type '%s': %s", shipname.c_str(), e.what());
-	}
-	return safe_ship_index(shipname);
+	const std::string& looked_up_name = compatibility_table_->lookup_ship(shipname);
+	description_manager_->load_description(looked_up_name);
+	return safe_ship_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_terrain(terrainname));
-	} catch (WException& e) {
-		throw GameDataError(
-		   "Error while loading terrain type '%s': %s", terrainname.c_str(), e.what());
-	}
-	return safe_terrain_index(terrainname);
+	const std::string& looked_up_name = compatibility_table_->lookup_terrain(terrainname);
+	description_manager_->load_description(looked_up_name);
+	return safe_terrain_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_ware(const std::string& warename) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_ware(warename));
-	} catch (WException& e) {
-		throw GameDataError("Error while loading ware type '%s': %s", warename.c_str(), e.what());
-	}
-	return safe_ware_index(warename);
+	const std::string& looked_up_name = compatibility_table_->lookup_ware(warename);
+	description_manager_->load_description(looked_up_name);
+	return safe_ware_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_worker(const std::string& workername) {
-	try {
-		description_manager_->load_description(compatibility_table_->lookup_worker(workername));
-	} catch (WException& e) {
-		throw GameDataError("Error while loading worker type '%s': %s", workername.c_str(), e.what());
-	}
-	return safe_worker_index(workername);
+	const std::string& looked_up_name = compatibility_table_->lookup_worker(workername);
+	description_manager_->load_description(looked_up_name);
+	return safe_worker_index(looked_up_name);
 }
 
 std::pair<WareWorker, DescriptionIndex>
