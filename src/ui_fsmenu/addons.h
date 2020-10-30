@@ -112,6 +112,7 @@ private:
 
 	UI::Box main_box_, buttons_box_;
 	UI::MultilineTextarea warn_requirements_;
+	UI::Panel tabs_placeholder_;
 	UI::TabPanel tabs_;
 	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_, installed_addons_buttons_box_, installed_addons_box_,
 			browse_addons_outer_wrapper_, browse_addons_inner_wrapper_, browse_addons_buttons_box_,

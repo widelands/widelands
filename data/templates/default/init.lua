@@ -600,6 +600,13 @@ return {
          bold = true,
          shadow = true
       },
+      italic = {
+         color = { 238, 238, 238 },
+         face = "serif",
+         size = fs_font_size,
+         italic = true,
+         shadow = true,
+      },
       -- Displayed in the loading screens
       fsmenu_gametip = {
          color = { 33, 33, 27 },

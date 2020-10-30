@@ -116,7 +116,8 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowS
 		main_box_(this, 0, 0, UI::Box::Vertical),
 		buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 		warn_requirements_(&main_box_, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
-		tabs_(&main_box_, UI::TabPanelStyle::kFsMenu),
+		tabs_placeholder_(&main_box_, 0, 0, 0, 0),
+		tabs_(this, UI::TabPanelStyle::kFsMenu),
 		installed_addons_outer_wrapper_(&tabs_, 0, 0, UI::Box::Horizontal),
 		installed_addons_inner_wrapper_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
 		installed_addons_buttons_box_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
@@ -137,7 +138,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowS
 		refresh_(&buttons_box_, "refresh", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("Refresh"), _("Refresh the list of add-ons available from the server")),
 		ok_(&buttons_box_, "ok", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-		autofix_dependencies_(&main_box_, "autofix", 0, 0, 2 * kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
+		autofix_dependencies_(&buttons_box_, "autofix", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				_("Fix dependencies…"), _("Try to automatically fix the dependency errors")),
 		move_top_(&installed_addons_buttons_box_, "move_top", 0, 0, kRowButtonSize, kRowButtonSize, UI::ButtonStyle::kFsMenuSecondary,
 				g_image_cache->get("images/ui_basic/scrollbar_up_fast.png"), _("Move selected add-on to top")),
@@ -159,7 +160,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowS
 	installed_addons_outer_wrapper_.add(&installed_addons_buttons_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	browse_addons_outer_wrapper_.add(&browse_addons_buttons_box_, UI::Box::Resizing::kFullSize);
-	browse_addons_outer_wrapper_.add_space(kRowButtonSpacing);
+	browse_addons_outer_wrapper_.add_space(2 * kRowButtonSpacing);
 	browse_addons_outer_wrapper_.add(&browse_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
 
 	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
@@ -206,7 +207,9 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowS
 	browse_addons_buttons_inner_box_2_.add(&filter_verified_, UI::Box::Resizing::kFullSize);
 	browse_addons_buttons_inner_box_2_.add(&filter_reset_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_buttons_inner_box_1_.add(&browse_addons_buttons_inner_box_2_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_inner_box_1_.add_space(kRowButtonSpacing);
 	browse_addons_buttons_inner_box_1_.add(&filter_name_, UI::Box::Resizing::kExpandBoth);
+	browse_addons_buttons_inner_box_1_.add_space(kRowButtonSpacing);
 	browse_addons_buttons_inner_box_1_.add(&sort_order_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_buttons_box_.add(&browse_addons_buttons_inner_box_1_, UI::Box::Resizing::kExpandBoth);
 
@@ -319,16 +322,19 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowS
 		focus_installed_addon_row(info);
 	});
 
+	buttons_box_.add_space(kRowButtonSpacing);
 	buttons_box_.add(&upgrade_all_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kRowButtonSpacing);
 	buttons_box_.add(&refresh_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kRowButtonSpacing);
+	buttons_box_.add(&autofix_dependencies_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_space(kRowButtonSpacing);
 	buttons_box_.add(&ok_, UI::Box::Resizing::kExpandBoth);
+	buttons_box_.add_space(kRowButtonSpacing);
 
-	main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
+	main_box_.add(&tabs_placeholder_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(kRowButtonSpacing);
 	main_box_.add(&warn_requirements_, UI::Box::Resizing::kFullSize);
-	main_box_.add(&autofix_dependencies_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add_space(kRowButtonSpacing);
 	main_box_.add(&buttons_box_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(kRowButtonSpacing);
@@ -679,6 +685,7 @@ void AddOnsCtrl::update_dependency_errors() {
 				% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(list)).str());
 		warn_requirements_.set_tooltip(_("Add-Ons with dependency errors may work incorrectly or prevent games and maps from loading."));
 	}
+	autofix_dependencies_.set_enabled(!warn_requirements.empty());
 	layout();
 }
 
@@ -686,13 +693,16 @@ void AddOnsCtrl::layout() {
 	if (!is_minimal()) {
 		main_box_.set_size(get_inner_w(), get_inner_h());
 
-		const bool has_warnings = !warn_requirements_.get_text().empty();
-		warn_requirements_.set_desired_size(warn_requirements_.get_w(), has_warnings ? get_inner_h() / 8 : 0);
-		autofix_dependencies_.set_visible(has_warnings);
-		autofix_dependencies_.set_desired_size(ok_.get_w(), has_warnings ? ok_.get_h() : 0);
+		warn_requirements_.set_visible(!warn_requirements_.get_text().empty());
 
-		installed_addons_outer_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize);
-		browse_addons_inner_wrapper_.set_max_size(tabs_.get_w(), tabs_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
+		// Box layouting does not work well together with this scrolling tab panel, so we
+		// use a plain Panel as a fixed-size placeholder which is layouted by the box and
+		// we manually position and resize the real tab panel on top of the placeholder.
+		tabs_.set_pos(Vector2i(tabs_placeholder_.get_x(), tabs_placeholder_.get_y()));
+		tabs_.set_size(tabs_placeholder_.get_w(), tabs_placeholder_.get_h());
+
+		installed_addons_outer_wrapper_.set_max_size(tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 2 * kRowButtonSize);
+		browse_addons_inner_wrapper_.set_max_size(tabs_placeholder_.get_w(), tabs_placeholder_.get_h() - 2 * kRowButtonSize - browse_addons_buttons_box_.get_h());
 	}
 
 	UI::Window::layout();
@@ -1043,9 +1053,14 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 	category_(this, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
 	version_(this, 0, 0, 0, 0, std::to_string(info.version),
 		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
-		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
-		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("by %s")) % info.author()).str())
+	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
+		% (boost::format(
+			/** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
+			_("%1$s %2$s"))
+				% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
+				% g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag((boost::format(_("(%s)")) % info.internal_name).str())
+		).str()
+		% g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag((boost::format(_("by %s")) % info.author()).str())
 		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()) {
 
 	uninstall_.sigclicked.connect([ctrl, info]() {
@@ -1147,9 +1162,9 @@ public:
 
 		for (const auto& comment : info.user_comments) {
 			text += "</p><vspace gap=32><p>";
-			text += g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(time_string(comment.timestamp));
+			text += g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag(time_string(comment.timestamp));
 			text += "<br>";
-			text += g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag((boost::format(_("‘%1$s’ commented on version %2$u:"))
+			text += g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag((boost::format(_("‘%1$s’ commented on version %2$u:"))
 					% comment.username % comment.version).str());
 			text += "<br>";
 			text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(comment.message);
@@ -1205,14 +1220,17 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 	bottom_row_left_(this, 0, 0, 0, 0, time_string(info.upload_timestamp),
 			UI::Align::kLeft, g_style_manager->font_style(UI::FontStyle::kTooltip)),
-	bottom_row_right_(this, 0, 0, 0, 0, (boost::format(_("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"))
+	bottom_row_right_(this, 0, 0, 0, 0, info.internal_name.empty() ? "" : (boost::format(_("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"))
 			% filesize_string(info.total_file_size) % info.download_count
 			% (info.votes ? (boost::format("%.2f") % info.average_rating).str() : "–")
 			% info.user_comments.size()).str(),
 		UI::Align::kRight, g_style_manager->font_style(UI::FontStyle::kTooltip)),
-	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt>%s<p>%s</p><p>%s</p></rt>")
-		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
-		% g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(info.author() == info.upload_username ?
+	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
+		/** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
+		% (boost::format(_("%1$s %2$s"))
+				% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(info.descname())
+				% g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag((boost::format(_("(%s)")) % info.internal_name).str())).str()
+		% g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag(info.author() == info.upload_username ?
 				(boost::format(_("by %s")) % info.author()).str() :
 				(boost::format(_("by %1$s (uploaded by %2$s)")) % info.author() % info.upload_username).str())
 		% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(info.description())).str()),
@@ -1297,7 +1315,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 		(boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
 	verified_.set_tooltip(info.internal_name.empty() ? _("Error") : info.verified ? _("Verified by the Widelands Development Team") :
 		_("This add-on was not checked by the Widelands Development Team yet. We cannot guarantee that it does not contain harmful or offensive content."));
-	bottom_row_right_.set_tooltip((boost::format("%s<br>%s<br>%s<br>%s")
+	bottom_row_right_.set_tooltip(info.internal_name.empty() ? "" : (boost::format("%s<br>%s<br>%s<br>%s")
 		% (boost::format(ngettext("Total size: %u byte", "Total size: %u bytes", info.total_file_size)) % info.total_file_size).str()
 		% (boost::format(ngettext("%u download", "%u downloads", info.download_count)) % info.download_count).str()
 		% (info.votes ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)", "Average rating: %1$.3f (%2$u votes)", info.votes))

@@ -57,6 +57,18 @@ NetAddons::~NetAddons() {
 	}
 }
 
+void NetAddons::set_url_and_timeout(std::string url) {
+	size_t pos = 0;
+	while ((pos = url.find(' ')) != std::string::npos) {
+		url.replace(pos, 1, "%20");
+	}
+	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
+
+	// Times are in seconds
+	curl_easy_setopt(curl_, CURLOPT_CONNECTTIMEOUT, 10);
+	curl_easy_setopt(curl_, CURLOPT_TIMEOUT, 30);
+}
+
 static size_t refresh_remotes_callback(char* received_data, size_t, const size_t char_count, std::string* out) {
 	for (size_t i = 0; i < char_count; ++i) {
 		(*out) += received_data[i];
@@ -80,7 +92,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	std::vector<AddOnInfo> result_vector;
 
-	curl_easy_setopt(curl_, CURLOPT_URL, "https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
+	set_url_and_timeout("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
 
 	std::string output;
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &output);
@@ -140,7 +152,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 			// Some locales require the string to use a comma instead of a period as decimal point.
 			// C++11 doesn't seem to have an easy way around this, and I don't want to mess
-			// with the locale setting. So we use sprintf to check whether the string was
+			// with the locale setting. So we use snprintf to check whether the string was
 			// converted correctly, and if it wasn't we replace the period with a comma.
 			const size_t len = word.length() + 1;
 			char buffer[16];
@@ -222,14 +234,6 @@ static void check_downloaded_file(const std::string& path, const std::string& ch
 	}
 }
 
-void NetAddons::set_url(std::string url) {
-	size_t pos = 0;
-	while ((pos = url.find(' ')) != std::string::npos) {
-		url.replace(pos, 1, "%20");
-	}
-	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
-}
-
 // TODO(Nordfriese): Add-on downloading speed would benefit greatly from storing
 // the files as ZIPs on the server. Similar for translation bundles. Perhaps
 // someone would like to write code to uncompress a downloaded ZIP file some day…
@@ -237,7 +241,7 @@ void NetAddons::set_url(std::string url) {
 void NetAddons::download_addon_file(const std::string& name, const std::string& checksum, const std::string& output) {
 	init();
 
-	set_url(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/addons/") + name);
+	set_url_and_timeout(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/addons/") + name);
 
 	std::FILE* out_file = std::fopen(output.c_str(), "wb");
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
@@ -264,7 +268,7 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 	const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + kTempFileExtension;
 	const std::string canonical_output = g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
 
-	set_url(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/") + name + "/" + locale);
+	set_url_and_timeout(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/") + name + "/" + locale);
 
 	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {

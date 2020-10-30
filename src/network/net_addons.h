@@ -54,7 +54,8 @@ private:
 	// Open the connection if it was not open yet; throws an error if this fails
 	void init();
 
-	void set_url(std::string);
+	// Set the URL (whitespace-safe) and adjust the timeout values.
+	void set_url_and_timeout(std::string);
 
 	CURL* curl_;
 };
