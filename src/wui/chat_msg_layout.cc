@@ -47,7 +47,7 @@ std::string sanitize_message(const std::string& given_text) {
 
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
-	std::string message = "";
+	std::string message;
 
 	const std::string sanitized = sanitize_message(chat_message.msg);
 	const std::string sender_escaped = richtext_escape(chat_message.sender);

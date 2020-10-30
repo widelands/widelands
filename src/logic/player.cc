@@ -365,18 +365,10 @@ void Player::AiPersistentState::initialize() {
 	assert(neuron_functs.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
 	assert(f_neurons.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	assert(magic_numbers.size() == Widelands::Player::AiPersistentState::kMagicNumbersSize);
-	for (size_t i = 0; i < neuron_weights.size(); ++i) {
-		neuron_weights.at(i) = 0;
-	}
-	for (size_t i = 0; i < neuron_functs.size(); ++i) {
-		neuron_functs.at(i) = 0;
-	}
-	for (size_t i = 0; i < f_neurons.size(); ++i) {
-		f_neurons.at(i) = 0;
-	}
-	for (size_t i = 0; i < magic_numbers.size(); ++i) {
-		magic_numbers.at(i) = 0;
-	}
+	std::fill(std::begin(neuron_weights), std::end(neuron_weights), 0);
+	std::fill(std::begin(neuron_functs), std::end(neuron_functs), 0);
+	std::fill(std::begin(f_neurons), std::end(f_neurons), 0);
+	std::fill(std::begin(magic_numbers), std::end(magic_numbers), 0);
 	remaining_basic_buildings.clear();
 
 	initialized = true;
