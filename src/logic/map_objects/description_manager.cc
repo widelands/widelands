@@ -61,14 +61,14 @@ void DescriptionManager::register_directory(const std::string& dirname,
 		if (filesystem->is_directory(file)) {
 			register_directory(file, filesystem, is_scenario);
 		} else {
-			if (strcmp(filesystem->fs_filename(file.c_str()), "register.lua") == 0) {
+			if (strcmp(FileSystem::fs_filename(file.c_str()), "register.lua") == 0) {
 				if (is_scenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
 					for (const std::string& object_name : names_table->keys<std::string>()) {
 						const std::vector<std::string> attributes =
 						   names_table->get_table(object_name)->array_entries<std::string>();
 						register_scenario_description(filesystem, object_name,
-						                              filesystem->fs_dirname(file) + "init.lua",
+						                              FileSystem::fs_dirname(file) + "init.lua",
 						                              attributes);
 						register_attributes(attributes, object_name);
 					}
@@ -78,7 +78,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						const std::vector<std::string> attributes =
 						   names_table->get_table(object_name)->array_entries<std::string>();
 						register_description(
-						   object_name, filesystem->fs_dirname(file) + "init.lua", attributes);
+						   object_name, FileSystem::fs_dirname(file) + "init.lua", attributes);
 						register_attributes(attributes, object_name);
 					}
 				}

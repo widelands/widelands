@@ -120,7 +120,7 @@ void MainMenuSaveMap::clicked_ok() {
 	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
 		complete_filename = filename = maps_data_[table_.get_selected()].filename;
 	} else {
-		complete_filename = curdir_ + g_fs->file_separator() + filename;
+		complete_filename = curdir_ + FileSystem::file_separator() + filename;
 	}
 
 	if (g_fs->is_directory(complete_filename.c_str()) &&
@@ -153,7 +153,7 @@ void MainMenuSaveMap::clicked_make_directory() {
 	while (open_dialogue) {
 		open_dialogue = false;
 		if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-			std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+			std::string fullname = curdir_ + FileSystem::file_separator() + md.get_dirname();
 			// Trim it for preceding/trailing whitespaces in user input
 			boost::trim(fullname);
 			if (g_fs->file_exists(fullname)) {
@@ -291,7 +291,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	//  Append directory name.
-	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+	const std::string complete_filename = curdir_ + FileSystem::file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
