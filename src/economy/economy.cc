@@ -710,11 +710,10 @@ using RSPairQueue = std::
 
 struct RSPairStruct {
 	RSPairQueue queue;
-	uint32_t pairid;
-	int32_t nexttimer;
+	uint32_t pairid = 0;
+	int32_t nexttimer = 0;
 
-	RSPairStruct() : pairid(0), nexttimer(0) {
-	}
+	RSPairStruct() = default;
 };
 
 /**

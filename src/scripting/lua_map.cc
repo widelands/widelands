@@ -148,13 +148,12 @@ struct SoldierMapDescr {
 	                uint8_t init_evade)
 	   : health(init_health), attack(init_attack), defense(init_defense), evade(init_evade) {
 	}
-	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0) {
-	}
+	SoldierMapDescr() = default;
 
-	uint8_t health;
-	uint8_t attack;
-	uint8_t defense;
-	uint8_t evade;
+	uint8_t health = 0;
+	uint8_t attack = 0;
+	uint8_t defense = 0;
+	uint8_t evade = 0;
 
 	bool operator<(const SoldierMapDescr& ot) const {
 		bool equal_health = health == ot.health;
