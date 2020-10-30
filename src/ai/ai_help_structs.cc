@@ -135,9 +135,9 @@ bool CheckStepOwnTerritory::reachable_dest(const Widelands::Map& map,
                                            const Widelands::FCoords& dest) const {
 	const uint8_t endcaps = player->get_buildcaps(dest);
 	if (Widelands::BaseImmovable const* const imm = map.get_immovable(dest)) {
-		return imm->descr().type() >= Widelands::MapObjectType::FLAG ;
+		return imm->descr().type() >= Widelands::MapObjectType::FLAG;
 	}
-	return endcaps & Widelands::MOVECAPS_WALK ;
+	return endcaps & Widelands::MOVECAPS_WALK;
 }
 
 // We are looking for fields we can walk on

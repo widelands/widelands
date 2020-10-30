@@ -338,8 +338,9 @@ bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& play
 		return false;
 	}
 	// Only add allowed buildings or buildings that are owned by the player.
-	return ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
-	    !player.get_building_statistics(index).empty());
+	return (
+	   (player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
+	   !player.get_building_statistics(index).empty());
 }
 
 bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
@@ -348,7 +349,7 @@ bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
 		const Widelands::BuildingDescr& descr =
 		   *iplayer().egbase().descriptions().get_building_descr(index);
 		return (descr.type() != Widelands::MapObjectType::CONSTRUCTIONSITE &&
-		    descr.type() != Widelands::MapObjectType::DISMANTLESITE);
+		        descr.type() != Widelands::MapObjectType::DISMANTLESITE);
 	}
 	return false;
 }

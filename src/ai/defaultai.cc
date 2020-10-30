@@ -3901,7 +3901,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		}
 	}
 
-	return alternative_path + wares_on_road <= road_length + 12 ;
+	return alternative_path + wares_on_road <= road_length + 12;
 }
 
 // Trying to connect the flag to another one, be it from own economy
@@ -6992,7 +6992,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		}
 	}
 
-	if (false) { // NOLINT
+	if (false) {  // NOLINT
 		log_dbg_time(
 		   gametime, " AI %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
 		   gamestring_with_leading_zeros(gametime.get()),
@@ -7000,7 +7000,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		   static_cast<uint32_t>(mines_.size()),
 		   static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
 	}
-	if (false) { // NOLINT
+	if (false) {  // NOLINT
 		log_dbg_time(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
 		             "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
 		             "stock", "targ.");
@@ -7042,7 +7042,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 				btype = "?";
 			}
 
-			if (true) { // NOLINT
+			if (true) {  // NOLINT
 				log_dbg_time(gametime, " %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
 				             btype.c_str(), bo.name,
 				             bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
@@ -7070,7 +7070,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		why += ", less then 2 mines";
 	}
 
-	if (false) { // NOLINT
+	if (false) {  // NOLINT
 		log_dbg_time(gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
 		             numof_psites_in_constr, mines_in_constr(),
 		             (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ?
@@ -7079,7 +7079,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		             why.c_str());
 	}
 
-	if (false) { // NOLINT
+	if (false) {  // NOLINT
 		log_dbg_time(gametime,
 		             "Least military score: %5d/%3d, msites in constr: %3d,"
 		             "soldier st: %2d, strength: %3d\n",
