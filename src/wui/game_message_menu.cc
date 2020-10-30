@@ -480,7 +480,7 @@ void GameMessageMenu::archive_or_restore() {
 
 	std::set<uint32_t> selections = list->selections();
 	for (const uint32_t index : selections) {
-		const uintptr_t selected_record = list->get(list->get_record(index));
+		const uintptr_t selected_record = UI::Table<uintptr_t>::get(list->get_record(index));
 		switch (mode) {
 		case Mode::kInbox:
 			// Archive highlighted message

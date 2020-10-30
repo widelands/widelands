@@ -202,7 +202,7 @@ FontSets::FontSets() {
 			}
 
 			try {  // Begin read locale from table
-				localename = g_fs->filename_without_ext(path);
+				localename = FileSystem::filename_without_ext(path);
 				std::unique_ptr<LuaTable> locale_table = all_locales->get_table(localename);
 				locale_table
 				   ->do_not_warn_about_unaccessed_keys();  // We are only reading the fontset names

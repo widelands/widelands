@@ -218,7 +218,7 @@ void SaveHandler::initialize(uint32_t realtime) {
 std::string SaveHandler::create_file_name(const std::string& dir,
                                           const std::string& filename) const {
 	// Append directory name.
-	std::string complete_filename = dir + g_fs->file_separator() + filename;
+	std::string complete_filename = dir + FileSystem::file_separator() + filename;
 	// Trim it for preceding/trailing whitespaces in user input
 	boost::trim(complete_filename);
 

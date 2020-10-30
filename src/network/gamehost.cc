@@ -519,7 +519,10 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(FullscreenMenuMain& f, const std::string& playername, bool internet)
+GameHost::GameHost(FullscreenMenuMain& f,
+                   const std::string& playername,
+                   std::vector<Widelands::TribeBasicInfo> tribeinfos,
+                   bool internet)
    : fsmm_(f), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log_info("[Host]: starting up.\n");
 
@@ -556,7 +559,9 @@ GameHost::GameHost(FullscreenMenuMain& f, const std::string& playername, bool in
 	d->syncreport_pending = false;
 	d->syncreport_time = Time(0);
 
-	d->settings.tribes = Widelands::get_all_tribeinfos();
+	assert(!tribeinfos.empty());
+	d->settings.tribes = std::move(tribeinfos);
+
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
