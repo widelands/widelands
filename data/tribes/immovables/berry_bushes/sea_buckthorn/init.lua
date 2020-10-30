@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 15,              -- Lower means it is less picky, i.e. it can deal better.
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_sea_buckthorn_tiny",
    descname = _ "Sea Buckthorn (tiny)",
    size = "small",
@@ -33,7 +33,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_sea_buckthorn_small",
    descname = _ "Sea Buckthorn (small)",
    size = "small",
@@ -57,7 +57,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_sea_buckthorn_medium",
    descname = _ "Sea Buckthorn (medium)",
    size = "small",
@@ -81,7 +81,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_sea_buckthorn_ripe",
    descname = _ "Sea Buckthorn (ripe)",
    size = "small",

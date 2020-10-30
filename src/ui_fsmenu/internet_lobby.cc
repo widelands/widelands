@@ -24,6 +24,7 @@
 #include "build_info.h"
 #include "graphic/image_cache.h"
 #include "graphic/text_layout.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
@@ -42,10 +43,12 @@ const uint8_t kClientUnregistered = 2;
 const uint8_t kClientIRC = 4;
 }  // namespace
 
-FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsmm,
-                                                         std::string& nick,
-                                                         std::string& pwd,
-                                                         bool registered)
+FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
+   FullscreenMenuMain& fsmm,
+   std::string& nick,
+   std::string& pwd,
+   bool registered,
+   std::vector<Widelands::TribeBasicInfo>& tribeinfos)
    : TwoColumnsBackNavigationMenu(fsmm, "metaserver_lobby", _("Metaserver Lobby")),
      fsmm_(fsmm),
 
@@ -80,7 +83,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
      // Login information
      nickname_(nick),
      password_(pwd),
-     is_registered_(registered) {
+     is_registered_(registered),
+     tribeinfos_(tribeinfos) {
 
 	back_.set_title(_("Leave Lobby"));
 
@@ -468,7 +472,7 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		}
 
 		// Start our relay host
-		GameHost netgame(fsmm_, InternetGaming::ref().get_local_clientname(), true);
+		GameHost netgame(fsmm_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true);
 		netgame.run();
 	} catch (...) {
 		// Log out before going back to the main menu

@@ -30,9 +30,17 @@
 #include "ui_fsmenu/menu.h"
 #include "wui/game_chat_panel.h"
 
+namespace Widelands {
+struct TribeBasicInfo;
+}
+
 class FullscreenMenuInternetLobby : public TwoColumnsBackNavigationMenu {
 public:
-	FullscreenMenuInternetLobby(FullscreenMenuMain&, std::string&, std::string&, bool);
+	FullscreenMenuInternetLobby(FullscreenMenuMain&,
+	                            std::string&,
+	                            std::string&,
+	                            bool,
+	                            std::vector<Widelands::TribeBasicInfo>& tribeinfos);
 
 	void think() override;
 
@@ -81,6 +89,9 @@ private:
 	const std::string nickname_;
 	const std::string password_;
 	bool is_registered_;
+
+	// Tribes check
+	std::vector<Widelands::TribeBasicInfo>& tribeinfos_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

@@ -80,8 +80,8 @@ bool can_build_port_here(const PlayerNumber player_number, const Map& map, const
 	map.get_ln(coord, &c[1]);
 	map.get_tln(coord, &c[2]);
 	map.get_trn(coord, &c[3]);
-	for (int i = 0; i < 4; ++i) {
-		MapRegion<Area<FCoords>> area(map, Area<FCoords>(c[i], 1));
+	for (const Widelands::FCoords& fc : c) {
+		MapRegion<Area<FCoords>> area(map, Area<FCoords>(fc, 1));
 		do {
 			if (!can_support_port(player_number, area.location())) {
 				return false;
@@ -1045,7 +1045,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = g_style_manager->color_tag(
+		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 
@@ -1168,11 +1168,11 @@ void Ship::Loader::load(FileRead& fr, uint8_t packet_version) {
 				expedition_->seen_port_buildspaces.push_back(read_coords_32(&fr));
 			}
 			// Swimability of the directions
-			for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
-				expedition_->swimmable[i] = (fr.unsigned_8() == 1);
+			for (bool& swimmable : expedition_->swimmable) {
+				swimmable = fr.unsigned_8();
 			}
 			// whether scouting or exploring
-			expedition_->island_exploration = fr.unsigned_8() == 1;
+			expedition_->island_exploration = fr.unsigned_8();
 			// current direction
 			expedition_->scouting_direction = static_cast<WalkingDir>(fr.unsigned_8());
 			// Start coordinates of an island exploration
@@ -1309,9 +1309,9 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 		for (const Coords& coords : expedition_->seen_port_buildspaces) {
 			write_coords_32(&fw, coords);
 		}
-		// swimability of the directions
-		for (uint8_t i = 0; i < LAST_DIRECTION; ++i) {
-			fw.unsigned_8(expedition_->swimmable[i] ? 1 : 0);
+		// swimmability of the directions
+		for (const bool& swim : expedition_->swimmable) {
+			fw.unsigned_8(swim ? 1 : 0);
 		}
 		// whether scouting or exploring
 		fw.unsigned_8(expedition_->island_exploration ? 1 : 0);

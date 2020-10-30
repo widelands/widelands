@@ -1,6 +1,6 @@
 dirname = "test/maps/plain.wmf/" .. path.dirname(__file__)
 
-tribes:new_productionsite_type {
+descriptions:new_productionsite_type {
    msgctxt = "barbarians_building",
    name = "barbarians_spritesheet_animation",
    -- TRANSLATORS: This is a building name used in lists of buildings

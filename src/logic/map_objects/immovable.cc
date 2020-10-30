@@ -488,7 +488,7 @@ void Immovable::draw_construction(const Time& gametime,
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(info_to_draw, descr().descname(),
-	             g_style_manager->color_tag(
+	             StyleManager::color_tag(
 	                (boost::format(_("%i%% built")) % (done.get() * 100 / total.get())).str(),
 	                g_style_manager->building_statistics_style().construction_color()),
 	             point_on_dst, scale, dst);
@@ -540,7 +540,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	if (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings) {
 		bool has_former_building = true;
 		if (packet_version > 10) {
-			has_former_building = fr.unsigned_8() == 1;
+			has_former_building = fr.unsigned_8();
 		}
 		if (has_former_building) {
 			Player* owner = imm.get_owner();
@@ -739,10 +739,10 @@ bool Immovable::construct_remaining_buildcost(Game& /* game */, Buildcost* build
 	}
 
 	const Buildcost& total = descr().buildcost();
-	for (Buildcost::const_iterator it = total.begin(); it != total.end(); ++it) {
-		uint32_t delivered = d->delivered[it->first];
-		if (delivered < it->second) {
-			(*buildcost)[it->first] = it->second - delivered;
+	for (const auto& item : total) {
+		uint32_t delivered = d->delivered[item.first];
+		if (delivered < item.second) {
+			(*buildcost)[item.first] = item.second - delivered;
 		}
 	}
 
