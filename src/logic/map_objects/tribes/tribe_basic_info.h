@@ -72,7 +72,8 @@ std::vector<TribeBasicInfo> get_all_tribeinfos();
 TribeBasicInfo get_tribeinfo(const std::string& tribename);
 
 /// Returns whether this tribe is listed in tribes/initialization/<tribe>/init.lua.
-bool tribe_exists(const std::string& tribename);
+bool tribe_exists(const std::string& tribename,
+                  std::vector<TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos());
 
 }  // namespace Widelands
 
