@@ -453,6 +453,8 @@ void EditorInteractive::load(const std::string& filename) {
 	}
 	ml->preload_map(true, &egbase().enabled_addons());
 
+	EditorInteractive::load_world_units(this, egbase());
+
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
 	iterate_player_numbers(p, map->get_nrplayers()) {
@@ -1042,6 +1044,10 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	log_info("┏━ Loading world\n");
 	ScopedTimer timer("┗━ took %ums");
 
+	if (eia) {
+		eia->editor_categories_.clear();
+	}
+
 	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
 	auto load_category = [eia, descriptions](const LuaTable& t, const std::string& key,
@@ -1057,6 +1063,12 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 			}
 		}
 	};
+	auto load_resources = [](const LuaTable& t) {
+		for (const std::string& item : t.get_table("resources")->array_entries<std::string>()) {
+			Notifications::publish(Widelands::NoteMapObjectDescription(
+			   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+		}
+	};
 
 	log_info("┃    Critters");
 	load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
@@ -1068,9 +1080,17 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
 
 	log_info("┃    Resources");
-	for (const std::string& item : table->get_table("resources")->array_entries<std::string>()) {
-		Notifications::publish(Widelands::NoteMapObjectDescription(
-		   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	load_resources(*table);
+
+	for (const AddOnInfo& info : egbase.enabled_addons()) {
+		if (info.category == AddOnCategory::kWorld) {
+			log_info("┃    Add-On ‘%s’", info.internal_name.c_str());
+			table = egbase.lua().run_script(kAddOnDir + '/' + info.internal_name + "/editor.lua");
+			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
+			load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
+			load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
+			load_resources(*table);
+		}
 	}
 }
 

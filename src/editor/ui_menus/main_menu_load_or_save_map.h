@@ -72,6 +72,7 @@ protected:
 	std::vector<MapData> maps_data_;
 
 	// Side panel with details about the currently selected map
+	Widelands::EditorGameBase egbase_;
 	UI::Box map_details_box_;
 	MapDetails map_details_;
 

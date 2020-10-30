@@ -25,6 +25,7 @@
 
 #include "base/macros.h"
 #include "io/filesystem/filesystem.h"
+#include "logic/addons.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/map_object_type.h"
@@ -46,7 +47,7 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	Descriptions(LuaInterface* lua);
+	explicit Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>&);
 	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
@@ -166,6 +167,9 @@ private:
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
 	bool tribes_have_been_registered_;
+
+	std::unique_ptr<Notifications::Subscriber<DescriptionManager::NoteMapObjectDescriptionTypeCheck>> subscriber_;
+	void check(const DescriptionManager::NoteMapObjectDescriptionTypeCheck&) const;
 
 	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;

@@ -447,18 +447,24 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 
 	Widelands::Map* map = egbase.mutable_map();
 
+	// TODO(Nordfriese): Perhaps support add-ons in the future? For now we just disable them all
+
 	if (eia) {
 		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 		eia->cleanup_for_load();
+
+		egbase.enabled_addons().clear();
+		// egbase.init_addons(true);
+
+		// cleanup_for_load() deleted the world and tribes – reload them now
+		EditorInteractive::load_world_units(eia, egbase);
 	} else {
+		egbase.enabled_addons().clear();
+		// egbase.init_addons(true);
+
 		egbase.cleanup_for_load();
 	}
 
-	// TODO(Nordfriese): Perhaps support add-ons in the future?
-	// For now, we just disable them all…
-	egbase.enabled_addons().clear();
-	// egbase.init_addons(true);
-	egbase.descriptions();
 
 	Widelands::UniqueRandomMapInfo map_info;
 	set_map_info(map_info);

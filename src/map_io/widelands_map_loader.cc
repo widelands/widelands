@@ -142,8 +142,8 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnIn
 	return 0;
 }
 
-int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase) {
-	preload_map(false, nullptr);
+int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase, std::vector<AddOnInfo>* a) {
+	preload_map(false, a);
 
 	std::string timer_message = "WidelandsMapLoader::load_map_for_render() for '";
 	timer_message += map_.get_name();

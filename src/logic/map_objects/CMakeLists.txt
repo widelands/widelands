@@ -155,9 +155,11 @@ wl_library(logic_map_objects
     io_fileread
     io_filesystem
     logic # TODO(GunChleoc): Circular dependency
+    logic_addons
     logic_commands # TODO(GunChleoc): Circular dependency
     logic_constants
     logic_exceptions
+    logic_filesystem_constants
     logic_game_controller
     logic_map # TODO(GunChleoc): Circular dependency
     logic_map_object_type

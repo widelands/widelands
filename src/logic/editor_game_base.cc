@@ -220,7 +220,7 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		// to descriptions through this method already.
 		ScopedTimer timer("Registering the descriptions took %ums");
 		assert(lua_);
-		descriptions_.reset(new Descriptions(lua_.get()));
+		descriptions_.reset(new Descriptions(lua_.get(), enabled_addons_));
 	}
 	return descriptions_.get();
 }
