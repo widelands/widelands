@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -1436,8 +1438,8 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const
 	           portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 
-const BuildingSettings* Warehouse::create_building_settings() const {
-	WarehouseSettings* settings = new WarehouseSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
+	std::unique_ptr<WarehouseSettings> settings(new WarehouseSettings(descr(), owner().tribe()));
 	for (auto& pair : settings->ware_preferences) {
 		pair.second = get_ware_policy(pair.first);
 	}

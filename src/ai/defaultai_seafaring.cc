@@ -368,11 +368,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		marine_task_queue.pop_back();
 	}
 
-	if (map_allows_seafaring_) {
-		// here we indicate that normal frequency check makes sense
-		return true;
-	}
-	return false;
+	// If map_allows_seafaring_, we indicate that normal frequency check makes sense
+	return map_allows_seafaring_;
 }
 
 /**
@@ -557,7 +554,6 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	so.last_command_time = gametime;
 	so.waiting_for_command_ = false;
-	return;
 }
 
 // Here we investigate possibility to go for open sea, preferably to unexplored territories

@@ -30,7 +30,6 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter_program.h"
-#include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -516,10 +515,7 @@ const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter::load(EditorGameBase& egbase,
-                                 MapObjectLoader& mol,
-                                 FileRead& fr,
-                                 const WorldLegacyLookupTable& lookup_table) {
+MapObject::Loader* Critter::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -531,16 +527,9 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 			if (packet_version < 4) {
 				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
-			std::string critter_name = fr.c_string();
-			const CritterDescr* descr = nullptr;
 
-			critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-			descr = egbase.descriptions().get_critter_descr(
-			   egbase.mutable_descriptions()->load_critter(critter_name));
-
-			if (!descr) {
-				throw GameDataError("undefined critter '%s'", critter_name.c_str());
-			}
+			const CritterDescr* descr = egbase.descriptions().get_critter_descr(
+			   egbase.mutable_descriptions()->load_critter(fr.c_string()));
 
 			Critter& critter = dynamic_cast<Critter&>(descr->create_object());
 			critter.creation_time_ = packet_version >= 3 ? Time(fr) : Time(0);

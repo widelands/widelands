@@ -76,7 +76,7 @@ void MapBuildingPacket::read(FileSystem& fs,
 							   name, NoteMapObjectDescription::LoadType::kObject));
 
 							const TribeDescr& tribe = player->tribe();
-							const DescriptionIndex index = tribe.building_index(name);
+							const DescriptionIndex index = tribe.safe_building_index(name);
 							const BuildingDescr* bd = tribe.get_building_descr(index);
 							// Check if tribe has this building itself
 							// OR alternatively if this building might be a conquered militarysite

@@ -305,12 +305,8 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	}
 }
 
-void ExpeditionBootstrap::load(Warehouse& warehouse,
-                               FileRead& fr,
-                               Game& game,
-                               MapObjectLoader& mol,
-                               const TribesLegacyLookupTable& tribes_lookup_table,
-                               uint16_t packet_version) {
+void ExpeditionBootstrap::load(
+   Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t packet_version) {
 
 	assert(queues_.empty());
 	// Load worker queues
@@ -321,7 +317,7 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);
-				wq->read(fr, game, mol, tribes_lookup_table);
+				wq->read(fr, game, mol);
 				const bool removable = fr.unsigned_8();
 				wq->set_callback(input_callback, this);
 
@@ -342,7 +338,7 @@ void ExpeditionBootstrap::load(Warehouse& warehouse,
 		uint8_t num_queues = fr.unsigned_8();
 		for (uint8_t i = 0; i < num_queues; ++i) {
 			WaresQueue* wq = new WaresQueue(warehouse, INVALID_INDEX, 0);
-			wq->read(fr, game, mol, tribes_lookup_table);
+			wq->read(fr, game, mol);
 			bool removable = packet_version >= 8 ? fr.unsigned_8() : false;
 			wq->set_callback(input_callback, this);
 

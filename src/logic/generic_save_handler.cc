@@ -35,7 +35,6 @@ void GenericSaveHandler::clear() {
 	error_ = Error::kNone;
 	std::fill(std::begin(error_msg_), std::end(error_msg_), "");
 	backup_filename_.clear();
-	return;
 }
 
 uint32_t GenericSaveHandler::get_index(GenericSaveHandler::Error err) {
@@ -95,8 +94,6 @@ void GenericSaveHandler::make_backup() {
 		log_err("%s", error_msg_[index].c_str());
 		return;
 	}
-
-	return;
 }
 
 void GenericSaveHandler::save_file() {
@@ -130,7 +127,6 @@ void GenericSaveHandler::save_file() {
 			}
 		}
 	}
-	return;
 }
 
 GenericSaveHandler::Error GenericSaveHandler::save() {

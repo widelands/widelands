@@ -502,7 +502,7 @@ void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 	if (fr.unsigned_8()) {  // Do we have an expedition?
 		pd.expedition_bootstrap_.reset(new ExpeditionBootstrap(&pd));
 	}
-	pd.expedition_ready_ = (fr.unsigned_8() == 1) ? true : false;
+	pd.expedition_ready_ = fr.unsigned_8();
 }
 
 // During the first loading phase we only loaded the serials.
