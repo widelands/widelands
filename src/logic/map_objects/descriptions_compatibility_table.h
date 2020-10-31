@@ -59,9 +59,6 @@ public:
 	/// Looks up the new name for the 'ship'.
 	const std::string& lookup_ship(const std::string& ship) const;
 
-	/// Looks up the new name for the 'program'.
-	const std::string& lookup_program(const std::string& program) const;
-
 protected:
 	const std::string& lookup_entry(const std::string& entry,
 	                                const std::map<std::string, std::string>& table) const;
