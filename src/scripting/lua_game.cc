@@ -769,7 +769,7 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
    .. method:: skip_training_wheel(name)
 
       Skips the execution of a training wheel and activates the training wheels that depend on it.
-   Also releases the lock.
+      Also releases the lock.
 
       :arg name: name of the training wheel to be skipped
       :type name: :class:`string`
