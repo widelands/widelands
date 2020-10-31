@@ -166,7 +166,6 @@ DescriptionIndex Descriptions::immovable_index(const std::string& immovablename)
 }
 DescriptionIndex Descriptions::resource_index(const std::string& resourcename) const {
 	// TODO(GunChleoc): Having "none" in the backend here is bad design.
-	// I think we have this for supporting LuaField::get_resource only, but we need to verify this.
 	return resourcename != "none" ? resources_->get_index(resourcename) : Widelands::kNoResource;
 }
 DescriptionIndex Descriptions::ship_index(const std::string& shipname) const {
@@ -373,64 +372,59 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 	return tribe_index(tribename);
 }
 
-DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
-	const std::string& looked_up_name = compatibility_table_->lookup_building(buildingname);
+template <typename T>
+DescriptionIndex Descriptions::load_description(const DescriptionMaintainer<T>& maintainer, const std::string& objectname, MapObjectType type) {
+	const std::string& looked_up_name = compatibility_table_->lookup(objectname, type);
 	description_manager_->load_description(looked_up_name);
-	return building_index(looked_up_name);
+	return maintainer.get_index(looked_up_name);
+}
+
+DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
+	return load_description(*buildings_, buildingname, MapObjectType::BUILDING);
 }
 
 DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
-	const std::string& looked_up_name = compatibility_table_->lookup_critter(crittername);
-	description_manager_->load_description(looked_up_name);
-	return critter_index(looked_up_name);
+	return load_description(*critters_, crittername, MapObjectType::CRITTER);
 }
 
 DescriptionIndex Descriptions::load_immovable(const std::string& immovablename) {
-	const std::string& looked_up_name = compatibility_table_->lookup_immovable(immovablename);
-	description_manager_->load_description(looked_up_name);
-	return immovable_index(looked_up_name);
+	return load_description(*immovables_, immovablename, MapObjectType::IMMOVABLE);
 }
 
 DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
-	const std::string& looked_up_name = compatibility_table_->lookup_resource(resourcename);
-	description_manager_->load_description(looked_up_name);
-	return resource_index(looked_up_name);
+	// TODO(GunChleoc): Having "none" in the backend here is bad design.
+	if (resourcename == "none") {
+		return Widelands::kNoResource;
+	}
+	return load_description(*resources_, resourcename, MapObjectType::RESOURCE);
 }
 
 DescriptionIndex Descriptions::load_ship(const std::string& shipname) {
-	const std::string& looked_up_name = compatibility_table_->lookup_ship(shipname);
-	description_manager_->load_description(looked_up_name);
-	return ship_index(looked_up_name);
+	return load_description(*ships_, shipname, MapObjectType::SHIP);
 }
 
 DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
-	const std::string& looked_up_name = compatibility_table_->lookup_terrain(terrainname);
-	description_manager_->load_description(looked_up_name);
-	return terrain_index(looked_up_name);
+	return load_description(*terrains_, terrainname, MapObjectType::TERRAIN);
 }
 
 DescriptionIndex Descriptions::load_ware(const std::string& warename) {
-	const std::string& looked_up_name = compatibility_table_->lookup_ware(warename);
-	description_manager_->load_description(looked_up_name);
-	return ware_index(looked_up_name);
+	return load_description(*wares_, warename, MapObjectType::WARE);
 }
 
 DescriptionIndex Descriptions::load_worker(const std::string& workername) {
-	const std::string& looked_up_name = compatibility_table_->lookup_worker(workername);
-	description_manager_->load_description(looked_up_name);
-	return worker_index(looked_up_name);
+	return load_description(*workers_, workername, MapObjectType::WORKER);
 }
 
 std::pair<WareWorker, DescriptionIndex>
 Descriptions::load_ware_or_worker(const std::string& objectname) const {
-	std::string looked_up_name = compatibility_table_->lookup_ware(objectname);
+	std::string looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::WARE);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
 	const DescriptionIndex wai = ware_index(looked_up_name);
 	if (wai != Widelands::INVALID_INDEX) {
 		return std::make_pair(WareWorker::wwWARE, wai);
 	}
-	looked_up_name = compatibility_table_->lookup_worker(objectname);
+	looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::WORKER);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject));
 	const DescriptionIndex woi = worker_index(looked_up_name);
@@ -441,14 +435,14 @@ Descriptions::load_ware_or_worker(const std::string& objectname) const {
 }
 std::pair<bool, DescriptionIndex>
 Descriptions::load_building_or_immovable(const std::string& objectname) const {
-	std::string looked_up_name = compatibility_table_->lookup_building(objectname);
+	std::string looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::BUILDING);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject, true));
 	const DescriptionIndex bi = building_index(looked_up_name);
 	if (bi != Widelands::INVALID_INDEX) {
 		return std::make_pair(true, bi);
 	}
-	looked_up_name = compatibility_table_->lookup_immovable(objectname);
+	looked_up_name = compatibility_table_->lookup(objectname, MapObjectType::IMMOVABLE);
 	Notifications::publish(
 	   NoteMapObjectDescription(looked_up_name, NoteMapObjectDescription::LoadType::kObject));
 	const DescriptionIndex ii = immovable_index(looked_up_name);

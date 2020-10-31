@@ -19,6 +19,10 @@
 
 #include "logic/map_objects/descriptions_compatibility_table.h"
 
+#include "base/wexception.h"
+
+namespace Widelands {
+
 // Whenever we break savegame compatibility, we can empty these maps
 DescriptionsCompatibilityTable::DescriptionsCompatibilityTable()
    :  // Workers
@@ -42,21 +46,19 @@ const std::string& DescriptionsCompatibilityTable::lookup_entry(
 	return entry;
 }
 
-const std::string& DescriptionsCompatibilityTable::lookup_worker(const std::string& worker) const {
-	return lookup_entry(worker, workers_);
-}
-
-const std::string& DescriptionsCompatibilityTable::lookup_ware(const std::string& ware) const {
-	return lookup_entry(ware, wares_);
-}
-
-const std::string&
-DescriptionsCompatibilityTable::lookup_building(const std::string& building) const {
-	return lookup_entry(building, buildings_);
-}
-
-const std::string& DescriptionsCompatibilityTable::lookup_ship(const std::string& ship) const {
-	return lookup_entry(ship, ships_);
+const std::string& DescriptionsCompatibilityTable::lookup(const std::string& name, MapObjectType type) const {
+	switch (type) {
+	case MapObjectType::BUILDING:
+		return lookup_entry(name, buildings_);
+	case MapObjectType::SHIP:
+		return lookup_entry(name, ships_);
+	case MapObjectType::WARE:
+		return lookup_entry(name, wares_);
+	case MapObjectType::WORKER:
+		return lookup_entry(name, workers_);
+	default:
+		NEVER_HERE();
+	}
 }
 
 PostOneWorldLegacyLookupTable::PostOneWorldLegacyLookupTable() :
@@ -130,20 +132,19 @@ terrains_
 {
 }
 
-std::string PostOneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
-	return lookup_entry(resource, resources_);
-}
-
-std::string PostOneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
-	return lookup_entry(terrain, terrains_);
-}
-
-std::string PostOneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
-	return lookup_entry(critter, critters_);
-}
-
-std::string PostOneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
-	return lookup_entry(immovable, immovables_);
+const std::string& PostOneWorldLegacyLookupTable::lookup(const std::string& name, MapObjectType type) const {
+	switch (type) {
+	case MapObjectType::CRITTER:
+		return lookup_entry(name, critters_);
+	case MapObjectType::IMMOVABLE:
+		return lookup_entry(name, immovables_);
+	case MapObjectType::RESOURCE:
+		return lookup_entry(name, resources_);
+	case MapObjectType::TERRAIN:
+		return lookup_entry(name, terrains_);
+	default:
+		return DescriptionsCompatibilityTable::lookup(name, type);
+	}
 }
 
 OneWorldLegacyLookupTable::OneWorldLegacyLookupTable(const std::string& old_world_name)
@@ -436,18 +437,18 @@ const std::string& OneWorldLegacyLookupTable::lookup_world_entry(
 	return entry;
 }
 
-std::string OneWorldLegacyLookupTable::lookup_resource(const std::string& resource) const {
-	return lookup_entry(resource, resources_);
+const std::string& OneWorldLegacyLookupTable::lookup(const std::string& name, MapObjectType type) const {
+	switch (type) {
+	case MapObjectType::CRITTER:
+		return lookup_world_entry(name, critters_);
+	case MapObjectType::IMMOVABLE:
+		return lookup_world_entry(name, immovables_);
+	case MapObjectType::RESOURCE:
+		return lookup_entry(name, resources_);
+	case MapObjectType::TERRAIN:
+		return lookup_world_entry(name, terrains_);
+	default:
+		return DescriptionsCompatibilityTable::lookup(name, type);
+	}
 }
-
-std::string OneWorldLegacyLookupTable::lookup_terrain(const std::string& terrain) const {
-	return lookup_world_entry(terrain, terrains_);
-}
-
-std::string OneWorldLegacyLookupTable::lookup_critter(const std::string& critter) const {
-	return lookup_world_entry(critter, critters_);
-}
-
-std::string OneWorldLegacyLookupTable::lookup_immovable(const std::string& immovable) const {
-	return lookup_world_entry(immovable, immovables_);
-}
+} // namespace Widelands

@@ -24,6 +24,9 @@
 #include <string>
 
 #include "base/macros.h"
+#include "logic/map_objects/map_object_type.h"
+
+namespace Widelands {
 
 /**
  * @brief The DescriptionsCompatibilityTable class contains mappings from old unit names to new unit
@@ -35,29 +38,8 @@ public:
 	DescriptionsCompatibilityTable();
 	virtual ~DescriptionsCompatibilityTable() = default;
 
-	/// Looks up the new name for the 'resource'.
-	virtual std::string lookup_resource(const std::string& resource) const = 0;
-
-	/// Looks up the new name for the 'terrain'.
-	virtual std::string lookup_terrain(const std::string& terrain) const = 0;
-
-	/// Looks up the new name for the 'critter'.
-	virtual std::string lookup_critter(const std::string& critter) const = 0;
-
-	/// Looks up the new name for the 'immovable'.
-	virtual std::string lookup_immovable(const std::string& immovable) const = 0;
-
-	/// Looks up the new name for the 'worker'.
-	const std::string& lookup_worker(const std::string& worker) const;
-
-	/// Looks up the new name for the 'ware'.
-	const std::string& lookup_ware(const std::string& ware) const;
-
-	/// Looks up the new name for the 'building'.
-	const std::string& lookup_building(const std::string& building) const;
-
-	/// Looks up the new name for the 'ship'.
-	const std::string& lookup_ship(const std::string& ship) const;
+	/// Looks up the new name for the description 'type' with the old name 'name'.
+	virtual const std::string& lookup(const std::string& name, MapObjectType type) const;
 
 protected:
 	const std::string& lookup_entry(const std::string& entry,
@@ -80,11 +62,7 @@ class PostOneWorldLegacyLookupTable : public DescriptionsCompatibilityTable {
 public:
 	PostOneWorldLegacyLookupTable();
 
-	// Implements DescriptionsCompatibilityTable.
-	std::string lookup_resource(const std::string& resource) const override;
-	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
-	std::string lookup_immovable(const std::string& immovable) const override;
+	const std::string& lookup(const std::string& name, MapObjectType type) const override;
 
 private:
 	// <old name, new name>
@@ -98,11 +76,7 @@ class OneWorldLegacyLookupTable : public DescriptionsCompatibilityTable {
 public:
 	explicit OneWorldLegacyLookupTable(const std::string& old_world_name);
 
-	// Implements DescriptionsCompatibilityTable.
-	std::string lookup_resource(const std::string& resource) const override;
-	std::string lookup_terrain(const std::string& terrain) const override;
-	std::string lookup_critter(const std::string& critter) const override;
-	std::string lookup_immovable(const std::string& immovable) const override;
+	const std::string& lookup(const std::string& name, MapObjectType type) const override;
 
 private:
 	const std::string&
@@ -117,5 +91,6 @@ private:
 	const std::map<std::string, std::map<std::string, std::string>> critters_;
 	const std::map<std::string, std::map<std::string, std::string>> immovables_;
 };
+} // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DESCRIPTIONS_COMPATIBILITY_TABLE_H

@@ -30,13 +30,12 @@
 #include "logic/map_objects/tribes/wareworker.h"
 #include "scripting/lua_table.h"
 
-class DescriptionsCompatibilityTable;
-
 namespace Widelands {
 
 class BuildingDescr;
 class ConstructionSiteDescr;
 class CritterDescr;
+class DescriptionsCompatibilityTable;
 class DismantleSiteDescr;
 class ImmovableDescr;
 class ResourceDescription;
@@ -163,6 +162,9 @@ public:
 	const DismantleSiteDescr* dismantlesite() const;
 
 private:
+	template <typename T>
+	DescriptionIndex load_description(const DescriptionMaintainer<T>&, const std::string& objectname, MapObjectType type);
+
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<TerrainDescription>> terrains_;
