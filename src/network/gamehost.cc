@@ -2215,7 +2215,6 @@ void GameHost::handle_disconnect(uint32_t const client_num, RecvPacket& r) {
 		std::string arg = r.string();
 		disconnect_client(client_num, reason, false, arg);
 	}
-	return;
 }
 
 void GameHost::handle_ping(Client& client) {
@@ -2229,7 +2228,6 @@ void GameHost::handle_ping(Client& client) {
 	client.playernum = UserSettings::not_connected();
 	d->net->close(client.sock_id);
 	client.sock_id = 0;
-	return;
 }
 
 /** Wait for NETCMD_HELLO and handle unexpected other commands */
