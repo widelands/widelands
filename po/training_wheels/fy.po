@@ -1,0 +1,117 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2020 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-19 15:57+0000\n"
+"PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Language-Team: Western Frisian (https://www.transifex.com/widelands/teams/35159/fy/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fy\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../data/scripting/training_wheels/logs.lua:70
+msgid ""
+"Click on a small, medium or big building space, then select the building "
+"from the small buildings tab."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:72
+msgid ""
+"Click on a medium or big building space, then select the building from the "
+"medium buildings tab."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:74
+msgid ""
+"Click on a big building space, then select the building from the big "
+"buildings tab."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:78
+#: ../../data/scripting/training_wheels/logs.lua:137
+msgid "Logs"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:81
+msgid ""
+"You need to supply your tribe with logs. Please build the following "
+"building:"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:91
+#: ../../data/scripting/training_wheels/logs.lua:102
+#: ../../data/scripting/training_wheels/logs.lua:113
+#: ../../data/scripting/training_wheels/logs.lua:126
+msgid "Roads"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:116
+msgid "Click on the building’s button…"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:118
+msgid ""
+"…then hold down the ‘Ctrl’ key and click on the flag in front of the target "
+"building."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:129
+msgid ""
+"Click on the flag in front of the building, then on the ‘Build road’ button,"
+" then hold down the ‘Ctrl’ key and click on the indicated flag."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/logs.lua:140
+msgid "Well done, we can produce logs now!"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/objectives.lua:22
+#: ../../data/scripting/training_wheels/objectives.lua:35
+msgid "Objectives"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/objectives.lua:38
+msgid "Open the Objectives window"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/objectives.lua:39
+#, lua-format
+msgid ""
+"Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
+"current game's objectives."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/objectives.lua:45
+msgid "Close this window"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/objectives.lua:47
+msgid "Closing this window"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/objectives.lua:48
+msgid ""
+" You can open and close this window by clicking on the ‘Objectives’ button "
+"in the toolbar on the bottom of the screen."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/objectives.lua:49
+msgid ""
+"Like any other window, you can also close the ‘Objectives’ window by right-"
+"clicking on it."
+msgstr ""
+
+#: ../../data/scripting/training_wheels/welcome.lua:21
+#: ../../data/scripting/training_wheels/welcome.lua:25
+msgid "Welcome to Widelands!"
+msgstr ""
+
+#: ../../data/scripting/training_wheels/welcome.lua:26
+msgid "Follow the arrows to learn how to play."
+msgstr ""

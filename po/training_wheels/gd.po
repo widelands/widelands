@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-19 15:29+0000\n"
+"POT-Creation-Date: 2020-10-19 15:57+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -53,7 +53,7 @@ msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
 msgstr ""
-"Tha an treubh agad feumadh air fiodh. Feuch an tog thu an togalach seo:"
+"Tha an treubh agad feumach air fiodh. Feuch an tog thu an togalach seo:"
 
 #: ../../data/scripting/training_wheels/logs.lua:91
 #: ../../data/scripting/training_wheels/logs.lua:102
@@ -65,6 +65,23 @@ msgstr "Rathaidean"
 #: ../../data/scripting/training_wheels/logs.lua:116
 msgid "Click on the building’s button…"
 msgstr "Briog air putan an togalaich…"
+
+#: ../../data/scripting/training_wheels/logs.lua:118
+msgid ""
+"…then hold down the ‘Ctrl’ key and click on the flag in front of the target "
+"building."
+msgstr ""
+"…agus cùm sìos iuchair “Ctrl” an uairsin fhad ’s a bhios tu a’ briogadh air "
+"a’ bhratach air beulaibh an togalaich."
+
+#: ../../data/scripting/training_wheels/logs.lua:129
+msgid ""
+"Click on the flag in front of the building, then on the ‘Build road’ button,"
+" then hold down the ‘Ctrl’ key and click on the indicated flag."
+msgstr ""
+"Briog air a’ bhratach air beulaibh an togalaich, air a’ phutan “Tog rathad” "
+"an uairsin agus cùm sìos iuchair “Ctrl” an uairsin fhad ’s a bhios tu a’ "
+"briogadh air a’ bhratach dhan a tha an t-saighead a’ tomhadh."
 
 #: ../../data/scripting/training_wheels/logs.lua:140
 msgid "Well done, we can produce logs now!"
@@ -83,7 +100,7 @@ msgstr "Fosgail uinneag nan amasan"
 #, lua-format
 msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
-"current game's objectives"
+"current game's objectives."
 msgstr ""
 "Briog air a’ phutan a tha an t-saighead a’ tomhadh ris no brùth air  “%s” "
 "airson amasan a’ gheama làithrich a shealltainn."

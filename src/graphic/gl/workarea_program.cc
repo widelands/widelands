@@ -24,6 +24,17 @@
 #include "graphic/gl/utils.h"
 #include "wui/mapviewpixelconstants.h"
 
+namespace std {
+
+// This hash function lets us use TCoords as keys in std::unordered_map.
+template <> struct hash<Widelands::TCoords<>> {
+	std::size_t operator()(const Widelands::TCoords<>& key) const {
+		return (static_cast<std::size_t>(key.node.hash()) << 1) ^ static_cast<std::size_t>(key.t);
+	}
+};
+
+}  // namespace std
+
 WorkareaProgram::WorkareaProgram() : cache_(nullptr) {
 	gl_program_.build("workarea");
 
@@ -193,21 +204,23 @@ void WorkareaProgram::draw(uint32_t texture_id,
 		outer_vertices_.reserve(estimate_outer);
 	}
 
-	auto emplace_triangle = [this, workarea, fields_to_draw](
+	std::unordered_map<Widelands::TCoords<>, RGBAColor> triangle_colors{};
+	for (const WorkareasEntry& wa_map : workarea) {
+		for (const WorkareaPreviewData& data : wa_map.first) {
+			RGBAColor color_to_apply = workarea_colors[data.index];
+			if (data.use_special_coloring) {
+				color_to_apply = apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
+			}
+			triangle_colors[data.coords] = apply_color(triangle_colors[data.coords], color_to_apply);
+		}
+	}
+
+	auto emplace_triangle = [this, workarea, fields_to_draw, triangle_colors](
 	                           const FieldsToDraw::Field& field,
 	                           Widelands::TriangleIndex triangle_index) {
 		RGBAColor color(0, 0, 0, 0);
-		for (const WorkareasEntry& wa_map : workarea) {
-			for (const WorkareaPreviewData& data : wa_map.first) {
-				if (data.coords == Widelands::TCoords<>(field.fcoords, triangle_index)) {
-					RGBAColor color_to_apply = workarea_colors[data.index];
-					if (data.use_special_coloring) {
-						color_to_apply =
-						   apply_color_special(color_to_apply, RGBAColor(data.special_coloring));
-					}
-					color = apply_color(color, color_to_apply);
-				}
-			}
+		if (triangle_colors.count(Widelands::TCoords<>(field.fcoords, triangle_index))) {
+			color = triangle_colors.at(Widelands::TCoords<>(field.fcoords, triangle_index));
 		}
 		if (color.a > 0) {
 			add_vertex(field, color, &vertices_);

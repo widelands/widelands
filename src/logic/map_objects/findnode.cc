@@ -223,10 +223,6 @@ bool FindNodeShore::accept(const EditorGameBase& egbase, const FCoords& coords) 
 	}
 
 	// We iterated over all reachanble fields or we found sufficient number of swimmable nodes
-	if (accepted_nodes.size() >= min_fields) {
-		return true;
-	}
-
-	return false;
+	return accepted_nodes.size() >= min_fields;
 }
 }  // namespace Widelands
