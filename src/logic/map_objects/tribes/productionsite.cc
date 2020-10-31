@@ -1108,8 +1108,9 @@ void ProductionSite::unnotify_player() {
 	set_production_result("");
 }
 
-const BuildingSettings* ProductionSite::create_building_settings() const {
-	ProductionsiteSettings* settings = new ProductionsiteSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings() const {
+	std::unique_ptr<ProductionsiteSettings> settings(
+	   new ProductionsiteSettings(descr(), owner().tribe()));
 	settings->stopped = is_stopped_;
 	for (auto& pair : settings->ware_queues) {
 		pair.second.priority = get_priority(wwWARE, pair.first, false);
