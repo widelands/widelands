@@ -20,7 +20,6 @@
 #ifndef WL_MAP_IO_MAP_TERRAIN_PACKET_H
 #define WL_MAP_IO_MAP_TERRAIN_PACKET_H
 
-class WorldLegacyLookupTable;
 class FileSystem;
 
 namespace Widelands {
@@ -29,7 +28,7 @@ class EditorGameBase;
 
 class MapTerrainPacket {
 public:
-	void read(FileSystem&, EditorGameBase&, const WorldLegacyLookupTable& lookup_table);
+	void read(FileSystem&, EditorGameBase&);
 	void write(FileSystem&, EditorGameBase&);
 };
 }  // namespace Widelands

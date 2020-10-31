@@ -45,11 +45,7 @@ MapObjectPacket::~MapObjectPacket() {
 	}
 }
 
-void MapObjectPacket::read(FileSystem& fs,
-                           EditorGameBase& egbase,
-                           MapObjectLoader& mol,
-                           const WorldLegacyLookupTable& world_lookup_table,
-                           const TribesLegacyLookupTable& tribes_lookup_table) {
+void MapObjectPacket::read(FileSystem& fs, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/mapobjects");
@@ -63,8 +59,7 @@ void MapObjectPacket::read(FileSystem& fs,
 			case 0:
 				return;
 			case MapObject::HeaderImmovable:
-				loaders.insert(
-				   Immovable::load(egbase, mol, fr, world_lookup_table, tribes_lookup_table));
+				loaders.insert(Immovable::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderBattle:
@@ -72,18 +67,18 @@ void MapObjectPacket::read(FileSystem& fs,
 				break;
 
 			case MapObject::HeaderCritter:
-				loaders.insert(Critter::load(egbase, mol, fr, world_lookup_table));
+				loaders.insert(Critter::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderWorker:
 				// We can't use the worker's savegame version, because some stuff is loaded before
 				// that
 				// packet version, and we removed the tribe name.
-				loaders.insert(Worker::load(egbase, mol, fr, tribes_lookup_table, packet_version));
+				loaders.insert(Worker::load(egbase, mol, fr, packet_version));
 				break;
 
 			case MapObject::HeaderWareInstance:
-				loaders.insert(WareInstance::load(egbase, mol, fr, tribes_lookup_table));
+				loaders.insert(WareInstance::load(egbase, mol, fr));
 				break;
 
 			case MapObject::HeaderShip:

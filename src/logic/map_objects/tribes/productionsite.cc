@@ -122,33 +122,34 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
 		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
 			const std::string& ware_or_worker_name = entry_table->get_string("name");
-			// Check if ware/worker exists already and if not, try to load it. Will throw a
-			// GameDataError on failure.
-			const WareWorker wareworker = descriptions.try_load_ware_or_worker(ware_or_worker_name);
-
 			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw GameDataError("amount is out of range 1 .. 255");
 				}
-				if (wareworker == WareWorker::wwWARE) {
-					const DescriptionIndex idx = descriptions.ware_index(ware_or_worker_name);
+				// Check if ware/worker exists already and if not, try to load it. Will throw a
+				// GameDataError on failure.
+				const std::pair<WareWorker, DescriptionIndex> wareworker =
+				   descriptions.load_ware_or_worker(ware_or_worker_name);
+				switch (wareworker.first) {
+				case WareWorker::wwWARE: {
 					for (const auto& temp_inputs : input_wares()) {
-						if (temp_inputs.first == idx) {
+						if (temp_inputs.first == wareworker.second) {
 							throw GameDataError(
 							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-					input_wares_.push_back(WareAmount(idx, amount));
-				} else {
-					const DescriptionIndex idx = descriptions.worker_index(ware_or_worker_name);
+					input_wares_.push_back(WareAmount(wareworker.second, amount));
+				} break;
+				case WareWorker::wwWORKER: {
 					for (const auto& temp_inputs : input_workers()) {
-						if (temp_inputs.first == idx) {
+						if (temp_inputs.first == wareworker.second) {
 							throw GameDataError("worker type '%s' was declared multiple times",
 							                    ware_or_worker_name.c_str());
 						}
 					}
-					input_workers_.push_back(WareAmount(idx, amount));
+					input_workers_.push_back(WareAmount(wareworker.second, amount));
+				} break;
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
