@@ -58,6 +58,8 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, const std::string& name, const std:
 	vertical_padding_box_.add_space(10 * padding);
 
 	main_box_.add(&header_box_, UI::Box::Resizing::kFullSize);
+
+	do_not_layout_on_resolution_change();
 }
 
 BaseMenu::~BaseMenu() {
@@ -68,11 +70,11 @@ void BaseMenu::layout() {
 	horizontal_padding_box_.set_size(get_inner_w(), get_inner_h());
 	vertical_padding_box_.set_max_size(
 	   horizontal_padding_box_.get_w() - 2 * 10 * padding, horizontal_padding_box_.get_h());
+	standard_height_ = get_h() * 9 / 200;
+	log_dbg("window height: %d, inner: %d, standard height: %d", get_h(), get_inner_h(),
+	        standard_height_);
 	printBox(horizontal_padding_box_);
 	printBox(vertical_padding_box_);
-	//	standard_height = 6 * padding /* * some_factor*/;
-	standard_height_ = get_h() * 9 / 200;
-	log_dbg("window height: %d, standard height", get_h(), standard_height_);
 }
 
 TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
