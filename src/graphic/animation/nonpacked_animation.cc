@@ -86,7 +86,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	for (const std::string& filename : image_files) {
 		const Image* image = g_image_cache->get(filename);
 		if (!frames.empty() && (frames.front()->width() != image->width() ||
-		                      frames.front()->height() != image->height())) {
+		                        frames.front()->height() != image->height())) {
 			throw Widelands::GameDataError(
 			   "wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
 			   image->width(), image->height(), filename.c_str(), frames.front()->width(),
