@@ -307,13 +307,13 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->set_constructionsite(false);
-							field->dismantlesite.building = descriptions->get_building_descr(
-							   descriptions->load_building(fr.string()));
+							field->dismantlesite.building =
+							   descriptions->get_building_descr(descriptions->load_building(fr.string()));
 							field->dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->set_constructionsite(true);
-							field->constructionsite->becomes = descriptions->get_building_descr(
-							   descriptions->load_building(fr.string()));
+							field->constructionsite->becomes =
+							   descriptions->get_building_descr(descriptions->load_building(fr.string()));
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
@@ -423,10 +423,10 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 								f.constructionsite->becomes = descriptions->get_building_descr(
 								   descriptions->load_building(fr.string()));
 								descr = fr.string();
-								f.constructionsite->was = descr.empty() ?
-								                             nullptr :
-								                             descriptions->get_building_descr(
-								                                descriptions->load_building(descr));
+								f.constructionsite->was =
+								   descr.empty() ?
+								      nullptr :
+								      descriptions->get_building_descr(descriptions->load_building(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(
@@ -449,10 +449,10 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 								   descriptions->get_building_descr(descriptions->load_building(descr));
 
 								descr = fr.string();
-								f.constructionsite->was = descr.empty() ?
-								                             nullptr :
-								                             descriptions->get_building_descr(
-								                                descriptions->load_building(descr));
+								f.constructionsite->was =
+								   descr.empty() ?
+								      nullptr :
+								      descriptions->get_building_descr(descriptions->load_building(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(

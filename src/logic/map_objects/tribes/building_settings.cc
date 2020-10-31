@@ -154,7 +154,8 @@ BuildingSettings* BuildingSettings::load(Game& game, const TribeDescr& tribe, Fi
 		if (packet_version == kCurrentPacketVersion) {
 			Descriptions* descriptions = game.mutable_descriptions();
 			const std::string name(fr.c_string());
-			const BuildingDescr* descr = descriptions->get_building_descr(descriptions->load_building(name));
+			const BuildingDescr* descr =
+			   descriptions->get_building_descr(descriptions->load_building(name));
 			BuildingSettings* result = nullptr;
 			switch (descr->type()) {
 			case MapObjectType::TRAININGSITE: {

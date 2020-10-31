@@ -156,14 +156,17 @@ public:
 	/// For loading old maps
 	void set_old_world_name(const std::string& name);
 
-	/// We have 1 global constructionsite, so we can have a direct accessor for defining & saveloading
+	/// We have 1 global constructionsite, so we can have a direct accessor for defining &
+	/// saveloading
 	const ConstructionSiteDescr* constructionsite() const;
 	/// We have 1 global dismantlesite, so we can have a direct accessor for defining & saveloading
 	const DismantleSiteDescr* dismantlesite() const;
 
 private:
 	template <typename T>
-	DescriptionIndex load_description(const DescriptionMaintainer<T>&, const std::string& objectname, MapObjectType type);
+	DescriptionIndex load_description(const DescriptionMaintainer<T>&,
+	                                  const std::string& objectname,
+	                                  MapObjectType type);
 
 	std::unique_ptr<DescriptionMaintainer<CritterDescr>> critters_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
@@ -176,8 +179,8 @@ private:
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
 	std::unique_ptr<DescriptionsCompatibilityTable> compatibility_table_;
 
-	const ConstructionSiteDescr* constructionsite_; // Owned by buildings_
-	const DismantleSiteDescr* dismantlesite_; // Owned by buildings_
+	const ConstructionSiteDescr* constructionsite_;  // Owned by buildings_
+	const DismantleSiteDescr* dismantlesite_;        // Owned by buildings_
 
 	uint32_t largest_workarea_;
 

@@ -236,7 +236,8 @@ void MapBuildingdataPacket::read_partially_finished_building(PartiallyFinishedBu
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketPFBuilding) {
 			const TribeDescr& tribe = pfb.owner().tribe();
-			pfb.building_ = tribe.get_building_descr(game.mutable_descriptions()->load_building(fr.c_string()));
+			pfb.building_ =
+			   tribe.get_building_descr(game.mutable_descriptions()->load_building(fr.c_string()));
 
 			delete pfb.builder_request_;
 			if (fr.unsigned_8()) {
@@ -311,8 +312,7 @@ void MapBuildingdataPacket::read_constructionsite(ConstructionSite& construction
 				const uint32_t intermediates = fr.unsigned_32();
 				for (uint32_t i = 0; i < intermediates; ++i) {
 					constructionsite.info_.intermediates.push_back(
-					   descriptions->get_building_descr(
-					      descriptions->load_building(fr.c_string())));
+					   descriptions->get_building_descr(descriptions->load_building(fr.c_string())));
 				}
 				constructionsite.settings_.reset(
 				   BuildingSettings::load(game, constructionsite.owner().tribe(), fr));

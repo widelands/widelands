@@ -3410,7 +3410,8 @@ Worker::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr, uint8_t
 		Descriptions* descriptions = egbase.mutable_descriptions();
 		try {
 			// header has already been read by caller
-			const WorkerDescr* descr = descriptions->get_worker_descr(descriptions->load_worker(fr.c_string()));
+			const WorkerDescr* descr =
+			   descriptions->get_worker_descr(descriptions->load_worker(fr.c_string()));
 
 			Worker* worker = dynamic_cast<Worker*>(&descr->create_object());
 			std::unique_ptr<Loader> loader(worker->create_loader());

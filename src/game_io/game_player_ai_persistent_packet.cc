@@ -106,7 +106,8 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
 					// Buildings saved as strings
 					const std::string building_string = fr.string();
-					const Widelands::DescriptionIndex bld_idx = descriptions->load_building(building_string);
+					const Widelands::DescriptionIndex bld_idx =
+					   descriptions->load_building(building_string);
 					player->ai_data.remaining_basic_buildings.emplace(bld_idx, fr.unsigned_32());
 				}
 				// Basic sanity check for remaining basic buildings

@@ -360,7 +360,8 @@ EditorGameBase::warp_dismantlesite(const Coords& c,
                                    const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
 
-	return *new DismantleSite(*plr->egbase().descriptions().dismantlesite(), *this, c, plr, loading, former_buildings, preserved_wares);
+	return *new DismantleSite(*plr->egbase().descriptions().dismantlesite(), *this, c, plr, loading,
+	                          former_buildings, preserved_wares);
 }
 
 /**

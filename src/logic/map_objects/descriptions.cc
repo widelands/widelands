@@ -285,12 +285,16 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 		workers_->add(new CarrierDescr(type_descname, table, *this));
 		break;
 	case MapObjectType::CONSTRUCTIONSITE: {
-		Widelands::DescriptionIndex constructionsite_index = buildings_->add(new ConstructionSiteDescr(type_descname, table, *this));
-		constructionsite_ = dynamic_cast<const ConstructionSiteDescr*>(get_building_descr(constructionsite_index));
+		Widelands::DescriptionIndex constructionsite_index =
+		   buildings_->add(new ConstructionSiteDescr(type_descname, table, *this));
+		constructionsite_ =
+		   dynamic_cast<const ConstructionSiteDescr*>(get_building_descr(constructionsite_index));
 	} break;
 	case MapObjectType::DISMANTLESITE: {
-		Widelands::DescriptionIndex dismantlesite_index = buildings_->add(new DismantleSiteDescr(type_descname, table, *this));
-		dismantlesite_ = dynamic_cast<const DismantleSiteDescr*>(get_building_descr(dismantlesite_index));
+		Widelands::DescriptionIndex dismantlesite_index =
+		   buildings_->add(new DismantleSiteDescr(type_descname, table, *this));
+		dismantlesite_ =
+		   dynamic_cast<const DismantleSiteDescr*>(get_building_descr(dismantlesite_index));
 	} break;
 	case MapObjectType::FERRY:
 		workers_->add(new FerryDescr(type_descname, table, *this));
@@ -373,7 +377,9 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 }
 
 template <typename T>
-DescriptionIndex Descriptions::load_description(const DescriptionMaintainer<T>& maintainer, const std::string& objectname, MapObjectType type) {
+DescriptionIndex Descriptions::load_description(const DescriptionMaintainer<T>& maintainer,
+                                                const std::string& objectname,
+                                                MapObjectType type) {
 	const std::string& looked_up_name = compatibility_table_->lookup(objectname, type);
 	description_manager_->load_description(looked_up_name);
 	return maintainer.get_index(looked_up_name);

@@ -181,8 +181,7 @@ void ImmovableProgram::postload_immovable_relations(const Descriptions& descript
 	for (const auto& pair : immovable_relations_) {
 		const DescriptionIndex immovable_index = descriptions.immovable_index(pair.second);
 		assert(immovable_index != Widelands::INVALID_INDEX);
-		descriptions.get_mutable_immovable_descr(immovable_index)
-		   ->add_became_from(pair.first);
+		descriptions.get_mutable_immovable_descr(immovable_index)->add_became_from(pair.first);
 	}
 	immovable_relations_.clear();
 }

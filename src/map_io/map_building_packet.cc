@@ -201,7 +201,8 @@ void MapBuildingPacket::write_priorities(const Building& building, FileWrite& fw
 }
 
 void MapBuildingPacket::read_priorities(EditorGameBase& egbase, Building& building, FileRead& fr) {
-	// TODO(Gunchleoc): Was base_priority which is unused. Remove when we break savegame compatibility.
+	// TODO(Gunchleoc): Was base_priority which is unused. Remove when we break savegame
+	// compatibility.
 	fr.unsigned_32();
 
 	Descriptions* descriptions = egbase.mutable_descriptions();

@@ -46,7 +46,8 @@ const std::string& DescriptionsCompatibilityTable::lookup_entry(
 	return entry;
 }
 
-const std::string& DescriptionsCompatibilityTable::lookup(const std::string& name, MapObjectType type) const {
+const std::string& DescriptionsCompatibilityTable::lookup(const std::string& name,
+                                                          MapObjectType type) const {
 	switch (type) {
 	case MapObjectType::BUILDING:
 		return lookup_entry(name, buildings_);
@@ -132,7 +133,8 @@ terrains_
 {
 }
 
-const std::string& PostOneWorldLegacyLookupTable::lookup(const std::string& name, MapObjectType type) const {
+const std::string& PostOneWorldLegacyLookupTable::lookup(const std::string& name,
+                                                         MapObjectType type) const {
 	switch (type) {
 	case MapObjectType::CRITTER:
 		return lookup_entry(name, critters_);
@@ -437,7 +439,8 @@ const std::string& OneWorldLegacyLookupTable::lookup_world_entry(
 	return entry;
 }
 
-const std::string& OneWorldLegacyLookupTable::lookup(const std::string& name, MapObjectType type) const {
+const std::string& OneWorldLegacyLookupTable::lookup(const std::string& name,
+                                                     MapObjectType type) const {
 	switch (type) {
 	case MapObjectType::CRITTER:
 		return lookup_world_entry(name, critters_);
@@ -451,4 +454,4 @@ const std::string& OneWorldLegacyLookupTable::lookup(const std::string& name, Ma
 		return DescriptionsCompatibilityTable::lookup(name, type);
 	}
 }
-} // namespace Widelands
+}  // namespace Widelands

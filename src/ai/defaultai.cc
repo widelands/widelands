@@ -703,7 +703,7 @@ void DefaultAI::late_initialization() {
 		// I just presume cut wood is named "log" in the game
 
 		const Widelands::DescriptionIndex log_index = tribe_->ware_index("log");
-		if (log_index == Widelands::INVALID_INDEX ) {
+		if (log_index == Widelands::INVALID_INDEX) {
 			log_warn("The AI needs the ware 'log' to be defined. It will probably not function well.");
 		}
 		if (bo.production_hints.count(log_index)) {
@@ -2522,7 +2522,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 	// we must calculate wood policy
 	const Widelands::DescriptionIndex wood_index = tribe_->ware_index("log");
-	if (wood_index == Widelands::INVALID_INDEX ) {
+	if (wood_index == Widelands::INVALID_INDEX) {
 		log_warn("The AI needs the ware 'log' to be defined. It will probably not function well.");
 	}
 	// stocked wood is to be in some propotion to productionsites and

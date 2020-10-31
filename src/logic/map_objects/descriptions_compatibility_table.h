@@ -91,6 +91,6 @@ private:
 	const std::map<std::string, std::map<std::string, std::string>> critters_;
 	const std::map<std::string, std::map<std::string, std::string>> immovables_;
 };
-} // namespace Widelands
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DESCRIPTIONS_COMPATIBILITY_TABLE_H

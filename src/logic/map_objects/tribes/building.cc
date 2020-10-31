@@ -323,7 +323,8 @@ Create a construction site for this type of building
 ===============
 */
 Building& BuildingDescr::create_constructionsite() const {
-	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descriptions_.constructionsite()->create_object());
+	ConstructionSite& csite =
+	   dynamic_cast<ConstructionSite&>(descriptions_.constructionsite()->create_object());
 	csite.set_building(*this);
 
 	return csite;
@@ -917,8 +918,7 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             const Duration& throttle_time,
                             uint32_t throttle_radius) {
-	if (mute_messages() ||
-	    owner().is_muted(game.descriptions().building_index(descr().name()))) {
+	if (mute_messages() || owner().is_muted(game.descriptions().building_index(descr().name()))) {
 		return;
 	}
 
