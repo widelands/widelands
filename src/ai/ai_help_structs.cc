@@ -135,16 +135,9 @@ bool CheckStepOwnTerritory::reachable_dest(const Widelands::Map& map,
                                            const Widelands::FCoords& dest) const {
 	const uint8_t endcaps = player->get_buildcaps(dest);
 	if (Widelands::BaseImmovable const* const imm = map.get_immovable(dest)) {
-		if (imm->descr().type() >= Widelands::MapObjectType::FLAG) {
-			return true;
-		} else {
-			return false;
-		}
+		return imm->descr().type() >= Widelands::MapObjectType::FLAG;
 	}
-	if (endcaps & Widelands::MOVECAPS_WALK) {
-		return true;
-	}
-	return false;
+	return endcaps & Widelands::MOVECAPS_WALK;
 }
 
 // We are looking for fields we can walk on
@@ -1191,10 +1184,7 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time
 	if (all_stats[pn].last_time_seen.is_invalid()) {
 		return false;
 	}
-	if (all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime) {
-		return true;
-	}
-	return false;
+	return all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime;
 }
 
 // This is the strength of a player
