@@ -29,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
-#include "logic/training_wheels.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
@@ -54,6 +53,7 @@ enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
+class TrainingWheels;
 enum class StockPolicy;
 
 enum {

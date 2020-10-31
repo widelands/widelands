@@ -61,6 +61,7 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
+#include "logic/training_wheels.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
