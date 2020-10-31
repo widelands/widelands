@@ -1180,8 +1180,8 @@ void TagHandler::make_text_nodes(const std::string& txt,
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(new TextNode(
-					                                              font_cache_, ns, word)));
+					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(
+					                                              new TextNode(font_cache_, ns, word)));
 				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;

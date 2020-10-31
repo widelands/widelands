@@ -409,8 +409,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
  * load all playerdata from savegame and update UI accordingly
  */
 void FullscreenMenuLaunchMPG::load_previous_playerdata() {
-	std::unique_ptr<FileSystem> l_fs(
-	   g_fs->make_sub_file_system(settings_->settings().mapfilename));
+	std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(settings_->settings().mapfilename));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 

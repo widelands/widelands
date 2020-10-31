@@ -115,9 +115,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const Image* player_image = playercolor_image(p - 1, "images/players/genstats_player.png");
 		assert(player_image);
-		UI::Button& cb =
-		   *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25, UI::ButtonStyle::kWuiMenu,
-		                   player_image, player->get_name());
+		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
+		                                 UI::ButtonStyle::kWuiMenu, player_image, player->get_name());
 		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
 		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
 

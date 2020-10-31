@@ -109,8 +109,7 @@ void load_helptexts(Widelands::MapObjectDescr* descr,
 					std::string helptext = category_table->get_string(*it);
 					++it;
 					for (; it != helptext_keys.end(); ++it) {
-						helptext =
-						   i18n::join_sentences(helptext, category_table->get_string(*it));
+						helptext = i18n::join_sentences(helptext, category_table->get_string(*it));
 					}
 					helptexts[category_key] = helptext;
 				} else {
