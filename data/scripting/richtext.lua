@@ -226,7 +226,7 @@ end
 --    Returns the given text wrapped in a font tag for the
 --    default color that is used for texts in the main menu.
 function fs_color(text)
-   return "<font color=FAC832>" .. text .. "</font>"
+   return "<font color=FFDC00>" .. text .. "</font>"
 end
 
 

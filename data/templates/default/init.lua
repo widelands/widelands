@@ -25,7 +25,7 @@ local wui_light =  {85, 63, 35}
 local wui_green =  {3, 15, 0}
 local wui_brown =  {32, 19, 8}
 
-local fs_font_color = {250, 200, 50}
+local fs_font_color = {255, 220, 0}
 local fs_font_face = "sans"
 local fs_font_size = 14
 
