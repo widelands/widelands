@@ -2032,7 +2032,8 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 void CmdToggleMuteMessages::execute(Game& game) {
 	if (upcast(Building, b, game.objects().get_object(building_))) {
 		if (all_) {
-			const DescriptionIndex di = game.descriptions().safe_building_index(b->descr().name());
+			const DescriptionIndex di = game.descriptions().building_index(b->descr().name());
+			assert(di != Widelands::INVALID_INDEX);
 			b->get_owner()->set_muted(di, !b->owner().is_muted(di));
 		} else {
 			b->set_mute_messages(!b->mute_messages());

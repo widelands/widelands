@@ -1265,11 +1265,11 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			try {
+				Descriptions* descriptions = egbase.mutable_descriptions();
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
 				std::string name = fr.c_string();
-				const DescriptionIndex& ship_index = egbase.descriptions().safe_ship_index(name);
-				descr = egbase.descriptions().get_ship_descr(ship_index);
+				descr = descriptions->get_ship_descr(descriptions->load_ship(name));
 				loader->init(egbase, mol, descr->create_object());
 				loader->load(fr, packet_version);
 			} catch (const WException& e) {

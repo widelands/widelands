@@ -284,7 +284,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 				assert(counter == no_of_seen_fields);
 
 				// Map objects
-				const Descriptions& descriptions = egbase.descriptions();
+				Descriptions* descriptions = egbase.mutable_descriptions();
 				for (auto& field : seen_fields) {
 					std::string descr = fr.string();
 					if (descr.empty()) {
@@ -297,33 +297,33 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
 							std::pair<bool, DescriptionIndex> imm =
-							   descriptions.load_building_or_immovable(descr);
+							   descriptions->load_building_or_immovable(descr);
 							if (imm.first) {
-								field->map_object_descr = descriptions.get_building_descr(imm.second);
+								field->map_object_descr = descriptions->get_building_descr(imm.second);
 							} else {
-								field->map_object_descr = descriptions.get_immovable_descr(imm.second);
+								field->map_object_descr = descriptions->get_immovable_descr(imm.second);
 							}
 						}
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->set_constructionsite(false);
-							field->dismantlesite.building = descriptions.get_building_descr(
-							   descriptions.safe_building_index(fr.string()));
+							field->dismantlesite.building = descriptions->get_building_descr(
+							   descriptions->load_building(fr.string()));
 							field->dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->set_constructionsite(true);
-							field->constructionsite->becomes = descriptions.get_building_descr(
-							   descriptions.safe_building_index(fr.string()));
+							field->constructionsite->becomes = descriptions->get_building_descr(
+							   descriptions->load_building(fr.string()));
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
 							      nullptr :
-							      descriptions.get_building_descr(descriptions.safe_building_index(descr));
+							      descriptions->get_building_descr(descriptions->load_building(descr));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->constructionsite->intermediates.push_back(
-								   descriptions.get_building_descr(
-								      descriptions.safe_building_index(fr.string())));
+								   descriptions->get_building_descr(
+								      descriptions->load_building(fr.string())));
 							}
 
 							field->constructionsite->totaltime = Duration(fr);
@@ -396,7 +396,7 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 					if (descr.empty()) {
 						f.map_object_descr = nullptr;
 					} else {
-						const Descriptions& descriptions = egbase.descriptions();
+						Descriptions* descriptions = egbase.mutable_descriptions();
 						// I here assume that no two immovables will have the same internal name
 						if (descr == "flag") {
 							f.map_object_descr = &g_flag_descr;
@@ -404,34 +404,34 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							f.map_object_descr = &g_portdock_descr;
 						} else {
 							std::pair<bool, DescriptionIndex> imm =
-							   descriptions.load_building_or_immovable(descr);
+							   descriptions->load_building_or_immovable(descr);
 							if (imm.first) {
-								f.map_object_descr = descriptions.get_building_descr(imm.second);
+								f.map_object_descr = descriptions->get_building_descr(imm.second);
 							} else {
-								f.map_object_descr = descriptions.get_immovable_descr(imm.second);
+								f.map_object_descr = descriptions->get_immovable_descr(imm.second);
 							}
 						}
 
 						if (packet_version > 1) {
 							if (f.map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 								f.set_constructionsite(false);
-								f.dismantlesite.building = descriptions.get_building_descr(
-								   descriptions.safe_building_index(fr.string()));
+								f.dismantlesite.building = descriptions->get_building_descr(
+								   descriptions->load_building(fr.string()));
 								f.dismantlesite.progress = fr.unsigned_32();
 							} else if (f.map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 								f.set_constructionsite(true);
-								f.constructionsite->becomes = descriptions.get_building_descr(
-								   descriptions.safe_building_index(fr.string()));
+								f.constructionsite->becomes = descriptions->get_building_descr(
+								   descriptions->load_building(fr.string()));
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
 								                             nullptr :
-								                             descriptions.get_building_descr(
-								                                descriptions.safe_building_index(descr));
+								                             descriptions->get_building_descr(
+								                                descriptions->load_building(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(
-									   descriptions.get_building_descr(
-									      descriptions.safe_building_index(fr.string())));
+									   descriptions->get_building_descr(
+									      descriptions->load_building(fr.string())));
 								}
 
 								f.constructionsite->totaltime = Duration(fr);
@@ -446,18 +446,18 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 							} else {
 								f.set_constructionsite(true);
 								f.constructionsite->becomes =
-								   descriptions.get_building_descr(descriptions.safe_building_index(descr));
+								   descriptions->get_building_descr(descriptions->load_building(descr));
 
 								descr = fr.string();
 								f.constructionsite->was = descr.empty() ?
 								                             nullptr :
-								                             descriptions.get_building_descr(
-								                                descriptions.safe_building_index(descr));
+								                             descriptions->get_building_descr(
+								                                descriptions->load_building(descr));
 
 								for (uint32_t j = fr.unsigned_32(); j; --j) {
 									f.constructionsite->intermediates.push_back(
-									   descriptions.get_building_descr(
-									      descriptions.safe_building_index(fr.string())));
+									   descriptions->get_building_descr(
+									      descriptions->load_building(fr.string())));
 								}
 
 								f.constructionsite->totaltime = Duration(fr);

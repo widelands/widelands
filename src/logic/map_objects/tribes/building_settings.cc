@@ -148,13 +148,13 @@ constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 2;
 
 // static
-BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr) {
+BuildingSettings* BuildingSettings::load(Game& game, const TribeDescr& tribe, FileRead& fr) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
+			Descriptions* descriptions = game.mutable_descriptions();
 			const std::string name(fr.c_string());
-			const DescriptionIndex index = tribe.safe_building_index(name);
-			const BuildingDescr* descr = tribe.get_building_descr(index);
+			const BuildingDescr* descr = descriptions->get_building_descr(descriptions->load_building(name));
 			BuildingSettings* result = nullptr;
 			switch (descr->type()) {
 			case MapObjectType::TRAININGSITE: {
@@ -192,7 +192,7 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 	NEVER_HERE();
 }
 
-void BuildingSettings::read(const Game&, FileRead&) {
+void BuildingSettings::read(Game&, FileRead&) {
 	// Header was peeled away by load()
 }
 
@@ -201,7 +201,7 @@ void BuildingSettings::save(const Game&, FileWrite& fw) const {
 	fw.c_string(descr_.c_str());
 }
 
-void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
+void MilitarysiteSettings::read(Game& game, FileRead& fr) {
 	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -225,16 +225,17 @@ void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_8(prefer_heroes ? 1 : 0);
 }
 
-void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
+void ProductionsiteSettings::read(Game& game, FileRead& fr) {
 	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
+			Descriptions* descriptions = game.mutable_descriptions();
 			stopped = fr.unsigned_8();
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
-				const DescriptionIndex di = tribe_.safe_ware_index(fr.c_string());
+				const DescriptionIndex di = descriptions->load_ware(fr.c_string());
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -248,7 +249,7 @@ void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
 				}
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
-				const DescriptionIndex di = tribe_.safe_worker_index(fr.c_string());
+				const DescriptionIndex di = descriptions->load_worker(fr.c_string());
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -289,7 +290,7 @@ void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	}
 }
 
-void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
+void TrainingsiteSettings::read(Game& game, FileRead& fr) {
 	ProductionsiteSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
@@ -310,16 +311,17 @@ void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_32(desired_capacity);
 }
 
-void WarehouseSettings::read(const Game& game, FileRead& fr) {
+void WarehouseSettings::read(Game& game, FileRead& fr) {
 	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionWarehouse) {
+			Descriptions* descriptions = game.mutable_descriptions();
 			launch_expedition = fr.unsigned_8();
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
-				const DescriptionIndex di = tribe_.safe_ware_index(fr.c_string());
+				const DescriptionIndex di = descriptions->load_ware(fr.c_string());
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_ware(di)) {
@@ -327,7 +329,7 @@ void WarehouseSettings::read(const Game& game, FileRead& fr) {
 				}
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
-				const DescriptionIndex di = tribe_.safe_worker_index(fr.c_string());
+				const DescriptionIndex di = descriptions->load_worker(fr.c_string());
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_worker(di)) {

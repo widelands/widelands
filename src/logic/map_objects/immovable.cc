@@ -544,7 +544,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		if (has_former_building) {
 			Player* owner = imm.get_owner();
 			if (owner) {
-				DescriptionIndex idx = owner->tribe().safe_building_index(fr.string());
+				DescriptionIndex idx = egbase().mutable_descriptions()->load_building(fr.string());
 				if (owner->tribe().has_building(idx)) {
 					imm.set_former_building(*owner->tribe().get_building_descr(idx));
 				}
