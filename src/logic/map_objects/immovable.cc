@@ -33,7 +33,6 @@
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -254,7 +253,7 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
  * Cleanup
  */
 ImmovableDescr::~ImmovableDescr() {
-	while (programs_.size()) {
+	while (!programs_.empty()) {
 		delete programs_.begin()->second;
 		programs_.erase(programs_.begin());
 	}
@@ -545,7 +544,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 		if (has_former_building) {
 			Player* owner = imm.get_owner();
 			if (owner) {
-				DescriptionIndex idx = owner->tribe().building_index(fr.string());
+				DescriptionIndex idx = owner->tribe().safe_building_index(fr.string());
 				if (owner->tribe().has_building(idx)) {
 					imm.set_former_building(*owner->tribe().get_building_descr(idx));
 				}
@@ -692,11 +691,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 }
 
-MapObject::Loader* Immovable::load(EditorGameBase& egbase,
-                                   MapObjectLoader& mol,
-                                   FileRead& fr,
-                                   const WorldLegacyLookupTable& world_lookup_table,
-                                   const TribesLegacyLookupTable& tribes_lookup_table) {
+MapObject::Loader* Immovable::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -707,12 +702,8 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 			if (packet_version < 11) {
 				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
-			Immovable* imm = nullptr;
-
-			const std::string name = tribes_lookup_table.lookup_immovable(
-			   world_lookup_table.lookup_immovable(fr.c_string()));
-			imm = new Immovable(*egbase.descriptions().get_immovable_descr(
-			   egbase.mutable_descriptions()->load_immovable(name)));
+			Immovable* imm = new Immovable(*egbase.descriptions().get_immovable_descr(
+			   egbase.mutable_descriptions()->load_immovable(fr.c_string())));
 
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, packet_version);
@@ -820,7 +811,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
  * Cleanup
  */
 PlayerImmovable::~PlayerImmovable() {
-	if (workers_.size()) {
+	if (!workers_.empty()) {
 		log_warn("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
 	}
 }

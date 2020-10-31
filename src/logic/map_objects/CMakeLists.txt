@@ -48,6 +48,8 @@ wl_library(logic_map_objects
     checkstep.h
     descriptions.cc
     descriptions.h
+    descriptions_compatibility_table.cc
+    descriptions_compatibility_table.h
     findbob.cc
     findbob.h
     findimmovable.cc

@@ -80,7 +80,7 @@ void GameObjectivesMenu::think() {
 		}
 	}
 	list.sort();
-	if (list.size() && !list.has_selection()) {
+	if (!list.empty() && !list.has_selection()) {
 		list.select(0);
 	}
 }

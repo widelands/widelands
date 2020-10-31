@@ -123,6 +123,7 @@ public:
 	 */
 	int get_immovable_descriptions(lua_State* L);
 	int get_terrain_descriptions(lua_State* L);
+	int get_worker_descriptions(lua_State*);
 
 	/*
 	 * Lua methods

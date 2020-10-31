@@ -595,6 +595,10 @@ bool Game::run(StartGameType const start_game_type,
 		}
 	}
 
+	// Need to do this again to ensure that add-ons are postloaded
+	// correctly after the replay writer may have reset them.
+	postload();
+
 	sync_reset();
 
 #ifdef _WIN32

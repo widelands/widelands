@@ -148,16 +148,12 @@ constexpr uint8_t kCurrentPacketVersionTrainingsite = 1;
 constexpr uint8_t kCurrentPacketVersionWarehouse = 2;
 
 // static
-BuildingSettings* BuildingSettings::load(const Game& game,
-                                         const TribeDescr& tribe,
-                                         FileRead& fr,
-                                         const TribesLegacyLookupTable& tribes_lookup_table) {
+BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tribe, FileRead& fr) {
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			const std::string name(fr.c_string());
-			const DescriptionIndex index =
-			   tribe.safe_building_index(tribes_lookup_table.lookup_building(name));
+			const DescriptionIndex index = tribe.safe_building_index(name);
 			const BuildingDescr* descr = tribe.get_building_descr(index);
 			BuildingSettings* result = nullptr;
 			switch (descr->type()) {
@@ -184,7 +180,7 @@ BuildingSettings* BuildingSettings::load(const Game& game,
 				throw GameDataError("Unsupported building category %s (%s)",
 				                    to_string(descr->type()).c_str(), name.c_str());
 			}
-			result->read(game, fr, tribes_lookup_table);
+			result->read(game, fr);
 			return result;
 		} else {
 			throw UnhandledVersionError(
@@ -196,7 +192,7 @@ BuildingSettings* BuildingSettings::load(const Game& game,
 	NEVER_HERE();
 }
 
-void BuildingSettings::read(const Game&, FileRead&, const TribesLegacyLookupTable&) {
+void BuildingSettings::read(const Game&, FileRead&) {
 	// Header was peeled away by load()
 }
 
@@ -205,10 +201,8 @@ void BuildingSettings::save(const Game&, FileWrite& fw) const {
 	fw.c_string(descr_.c_str());
 }
 
-void MilitarysiteSettings::read(const Game& game,
-                                FileRead& fr,
-                                const TribesLegacyLookupTable& tribes_lookup_table) {
-	BuildingSettings::read(game, fr, tribes_lookup_table);
+void MilitarysiteSettings::read(const Game& game, FileRead& fr) {
+	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionMilitarysite) {
@@ -231,10 +225,8 @@ void MilitarysiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_8(prefer_heroes ? 1 : 0);
 }
 
-void ProductionsiteSettings::read(const Game& game,
-                                  FileRead& fr,
-                                  const TribesLegacyLookupTable& tribes_lookup_table) {
-	BuildingSettings::read(game, fr, tribes_lookup_table);
+void ProductionsiteSettings::read(const Game& game, FileRead& fr) {
+	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionProductionsite) {
@@ -242,9 +234,7 @@ void ProductionsiteSettings::read(const Game& game,
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
-				DescriptionIndex di = Widelands::INVALID_INDEX;
-				const std::string name(fr.c_string());
-				di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
+				const DescriptionIndex di = tribe_.safe_ware_index(fr.c_string());
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -258,9 +248,7 @@ void ProductionsiteSettings::read(const Game& game,
 				}
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
-				DescriptionIndex di = Widelands::INVALID_INDEX;
-				const std::string name(fr.c_string());
-				di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
+				const DescriptionIndex di = tribe_.safe_worker_index(fr.c_string());
 				const uint32_t fill = fr.unsigned_32();
 				const int32_t priority = fr.signed_32();
 				// Set the fill and priority if the queue exists.
@@ -301,10 +289,8 @@ void ProductionsiteSettings::save(const Game& game, FileWrite& fw) const {
 	}
 }
 
-void TrainingsiteSettings::read(const Game& game,
-                                FileRead& fr,
-                                const TribesLegacyLookupTable& tribes_lookup_table) {
-	ProductionsiteSettings::read(game, fr, tribes_lookup_table);
+void TrainingsiteSettings::read(const Game& game, FileRead& fr) {
+	ProductionsiteSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionTrainingsite) {
@@ -324,10 +310,8 @@ void TrainingsiteSettings::save(const Game& game, FileWrite& fw) const {
 	fw.unsigned_32(desired_capacity);
 }
 
-void WarehouseSettings::read(const Game& game,
-                             FileRead& fr,
-                             const TribesLegacyLookupTable& tribes_lookup_table) {
-	BuildingSettings::read(game, fr, tribes_lookup_table);
+void WarehouseSettings::read(const Game& game, FileRead& fr) {
+	BuildingSettings::read(game, fr);
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersionWarehouse) {
@@ -335,9 +319,7 @@ void WarehouseSettings::read(const Game& game,
 			const uint32_t nr_wares = fr.unsigned_32();
 			const uint32_t nr_workers = fr.unsigned_32();
 			for (uint32_t i = 0; i < nr_wares; ++i) {
-				DescriptionIndex di = Widelands::INVALID_INDEX;
-				const std::string name(fr.c_string());
-				di = tribe_.safe_ware_index(tribes_lookup_table.lookup_ware(name));
+				const DescriptionIndex di = tribe_.safe_ware_index(fr.c_string());
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_ware(di)) {
@@ -345,9 +327,7 @@ void WarehouseSettings::read(const Game& game,
 				}
 			}
 			for (uint32_t i = 0; i < nr_workers; ++i) {
-				DescriptionIndex di = Widelands::INVALID_INDEX;
-				const std::string name(fr.c_string());
-				di = tribe_.safe_worker_index(tribes_lookup_table.lookup_worker(name));
+				const DescriptionIndex di = tribe_.safe_worker_index(fr.c_string());
 				const uint8_t pref = fr.unsigned_8();
 				// Condition protects against changes in the tribe's roster
 				if (tribe_.has_worker(di)) {

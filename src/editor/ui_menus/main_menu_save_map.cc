@@ -117,7 +117,7 @@ void MainMenuSaveMap::clicked_ok() {
 	std::string filename = editbox_.text();
 	std::string complete_filename;
 
-	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
+	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
 		complete_filename = filename = maps_data_[table_.get_selected()].filename;
 	} else {
 		complete_filename = curdir_ + FileSystem::file_separator() + filename;
@@ -359,10 +359,6 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	// If only the backup failed (likely just because of a file lock),
 	// then leave the dialog open for the player to try with a new filename.
-	if (error == GenericSaveHandler::Error::kBackupFailed) {
-		return false;
-	}
-
 	// In the other error cases close the dialog.
-	return true;
+	return error != GenericSaveHandler::Error::kBackupFailed;
 }

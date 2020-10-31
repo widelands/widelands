@@ -92,11 +92,7 @@ bool CheckStepDefault::allowed(
 	// Swimming bobs are allowed to move from a water field to a shore field
 	NodeCaps const startcaps = start.field->nodecaps();
 
-	if ((endcaps & MOVECAPS_WALK) && (startcaps & movecaps_ & MOVECAPS_SWIM)) {
-		return true;
-	}
-
-	return false;
+	return (endcaps & MOVECAPS_WALK) && (startcaps & movecaps_ & MOVECAPS_SWIM);
 }
 
 bool CheckStepDefault::reachable_dest(const Map& map, const FCoords& dest) const {

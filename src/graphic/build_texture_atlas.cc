@@ -68,10 +68,7 @@ bool should_be_packed(const std::string& filename, std::unique_ptr<Texture>* ima
 	}
 	*image = load_image(filename, g_fs);
 	const auto area = (*image)->width() * (*image)->height();
-	if (area > kMaxAreaForTextureAtlas) {
-		return false;
-	}
-	return true;
+	return area <= kMaxAreaForTextureAtlas;
 }
 
 // Pack the images in 'filenames' into texture atlases.
