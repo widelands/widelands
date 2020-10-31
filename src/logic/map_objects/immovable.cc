@@ -253,7 +253,7 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
  * Cleanup
  */
 ImmovableDescr::~ImmovableDescr() {
-	while (programs_.size()) {
+	while (!programs_.empty()) {
 		delete programs_.begin()->second;
 		programs_.erase(programs_.begin());
 	}
@@ -811,7 +811,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
  * Cleanup
  */
 PlayerImmovable::~PlayerImmovable() {
-	if (workers_.size()) {
+	if (!workers_.empty()) {
 		log_warn("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
 	}
 }

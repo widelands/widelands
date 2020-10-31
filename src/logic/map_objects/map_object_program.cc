@@ -353,7 +353,7 @@ actions also have an animation associated with them that will be played instead,
 */
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
-	if (arguments.size() < 1 || arguments.size() > 2) {
+	if (arguments.empty() || arguments.size() > 2) {
 		throw GameDataError("Usage: animate=<animation_name> [duration:<duration>]");
 	}
 

@@ -76,7 +76,7 @@ Flag::~Flag() {
 		log_warn("Flag: ouch! building left\n");
 	}
 
-	if (flag_jobs_.size()) {
+	if (!flag_jobs_.empty()) {
 		log_warn("Flag: ouch! flagjobs left\n");
 	}
 

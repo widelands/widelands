@@ -301,7 +301,7 @@ void GameMessageMenu::think() {
 		}
 	}
 
-	if (list->size()) {
+	if (!list->empty()) {
 		if (!list->has_selection()) {
 			list->select(0);
 		}
