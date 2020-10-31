@@ -17,26 +17,4 @@
  *
  */
 
-#include "logic/widelands.h"
-
-#include "io/streamread.h"
-#include "io/streamwrite.h"
-
-namespace Widelands {
-
-// All these values are used as weighting factors by Request code.
-const WarePriority WarePriority::kLow(1);
-const WarePriority WarePriority::kNormal(64);
-const WarePriority WarePriority::kHigh(4096);
-// These two constants additionally get special treatment.
-const WarePriority WarePriority::kVeryLow(0);
-const WarePriority WarePriority::kVeryHigh(std::numeric_limits<uint32_t>::max());
-
-WarePriority::WarePriority(StreamRead& fr) : value_(fr.unsigned_32()) {
-}
-
-void WarePriority::write(StreamWrite& fw) const {
-	fw.unsigned_32(value_);
-}
-
-}  // namespace Widelands
+// Dummy file as cmake cannot handle header only libraries :(.

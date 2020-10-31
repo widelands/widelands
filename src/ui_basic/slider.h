@@ -77,10 +77,7 @@ public:
 	void set_enabled(bool enabled);
 
 	bool handle_key(bool, SDL_Keysym) override;
-	// Whether to use special input method behaviour intended for the InputQueueDisplay sliders
-	void set_in_game_key_bindings(bool b) {
-		in_game_key_bindings_ = b;
-	}
+
 	void set_cursor_fixed_height(int32_t h) {
 		cursor_fixed_height_ = h;
 	}
@@ -129,7 +126,6 @@ private:
 	const UI::PanelStyleInfo* cursor_style_;  // Cursor color and texture. Not owned.
 
 protected:
-	bool in_game_key_bindings_;
 	int32_t x_gap_;  //  draw positions
 	int32_t y_gap_;
 	int32_t bar_size_;

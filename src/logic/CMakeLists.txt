@@ -75,8 +75,6 @@ wl_library(logic_constants
     vision.h
     widelands.cc
     widelands.h
-  DEPENDS
-    io_stream
 )
 
 wl_library(logic_filesystem_constants

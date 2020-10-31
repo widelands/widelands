@@ -74,7 +74,6 @@ Slider::Slider(Panel* const parent,
      pressed_(false),
      enabled_(enabled),
      cursor_style_(&g_style_manager->slider_style(style).background()),
-     in_game_key_bindings_(false),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
@@ -232,72 +231,24 @@ void Slider::set_highlighted(bool highlighted) {
 constexpr int16_t kLargeStepSize = 50;
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
-		if (in_game_key_bindings_) {
-			switch (code.sym) {
-			case SDLK_MINUS:
-			case SDLK_KP_MINUS:
-				set_value(code.mod & KMOD_CTRL ? 0 : get_value() - 1);
-				return true;
-			case SDLK_PLUS:
-			case SDLK_KP_PLUS:
-				set_value(code.mod & KMOD_CTRL ? get_max_value() : get_value() + 1);
-				return true;
-			default:
-				if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
-					set_value(get_min_value() + code.sym - SDLK_1);
-				} else if (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && !(code.mod & KMOD_NUM)) {
-					set_value(get_min_value() + code.sym - SDLK_KP_1);
-				} else {
-					break;
-				}
-				return true;
-			}
-		} else {
-			switch (code.sym) {
-
-			case SDLK_KP_6:
-			case SDLK_KP_8:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
-			case SDLK_UP:
-			case SDLK_RIGHT:
-				set_value(get_value() + 1);
-				return true;
-
-			case SDLK_KP_2:
-			case SDLK_KP_4:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
-			case SDLK_DOWN:
-			case SDLK_LEFT:
-				set_value(get_value() - 1);
-				return true;
-
-			case SDLK_KP_9:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
-			case SDLK_PAGEUP:
-				set_value(get_value() + kLargeStepSize);
-				return true;
-
-			case SDLK_KP_3:
-				if (code.mod & KMOD_NUM) {
-					break;
-				}
-				FALLS_THROUGH;
-			case SDLK_PAGEDOWN:
-				set_value(get_value() - kLargeStepSize);
-				return true;
-
-			default:
+		switch (code.sym) {
+		case SDLK_MINUS:
+		case SDLK_KP_MINUS:
+			set_value(code.mod & KMOD_CTRL ? 0 : get_value() - 1);
+			return true;
+		case SDLK_PLUS:
+		case SDLK_KP_PLUS:
+			set_value(code.mod & KMOD_CTRL ? get_max_value() : get_value() + 1);
+			return true;
+		default:
+			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
+				set_value(get_min_value() + code.sym - SDLK_1);
+			} else if (code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9 && !(code.mod & KMOD_NUM)) {
+				set_value(get_min_value() + code.sym - SDLK_KP_1);
+			} else {
 				break;
 			}
+			return true;
 		}
 	}
 	return Panel::handle_key(down, code);
@@ -501,11 +452,7 @@ bool HorizontalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 		//  click on cursor
 		cursor_pressed(x);
 		return true;
-	} else if (in_game_key_bindings_ ?
-	              (y >= 0 && y < get_h() && x >= 0 && x < get_w()) :
-	              (y >= get_y_gap() - 2 && y <= static_cast<int32_t>(get_h()) - get_y_gap() + 2 &&
-	               x >= get_x_gap() &&
-	               x < static_cast<int32_t>(get_w()) - get_x_gap())) {  //  click on bar
+	} else if (y >= 0 && y < get_h() && x >= 0 && x < get_w()) {  //  click on bar
 		bar_pressed(x, get_x_gap());
 		return true;
 	} else {

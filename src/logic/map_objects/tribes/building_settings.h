@@ -23,6 +23,7 @@
 #include <map>
 #include <string>
 
+#include "economy/ware_priority.h"
 #include "logic/widelands.h"
 
 class FileRead;

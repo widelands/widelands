@@ -266,7 +266,6 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_increase_desired_fill_);
 	hbox_.add(&b_increase_real_fill_);
 
-	priority_.set_in_game_key_bindings(true);
 	priority_.set_cursor_fixed_height(kButtonSize * 2 / 3);
 
 	// To make sure the fill buttons are aligned even when some queues

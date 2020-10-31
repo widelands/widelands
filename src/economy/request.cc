@@ -321,11 +321,13 @@ uint32_t Request::get_normalized_transfer_priority() const {
 	}
 
 	// Magic numbers for reasonable weighting. Results for the values at the time of writing:
-	// VeryLow  →  0
-	// Low      →  2
-	// Normal   →  7
-	// High     → 12
-	// VeryHigh → 16
+	//  Priority     Weighting factor      Result of the
+	//              (ware_priority.cc)   calculation below
+	// VeryLow               0                  0
+	// Low                   1                  2
+	// Normal               64                  7
+	// High               4096                 12
+	// VeryHigh         2^32-1                 16
 
 	const WarePriority& priority = target_building_->get_priority(get_type(), get_index());
 	if (WarePriority::kVeryHigh <= priority) {
@@ -334,8 +336,8 @@ uint32_t Request::get_normalized_transfer_priority() const {
 		return 0;
 	}
 
-	const uint32_t l = std::log2(priority.to_weighting_factor());
-	return l + 2 - l / 6;
+	const uint32_t factor = std::log2(priority.to_weighting_factor());
+	return factor + 2 - factor / 6;
 }
 
 /**
