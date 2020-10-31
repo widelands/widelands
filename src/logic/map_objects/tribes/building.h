@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 
+#include <memory>
+
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
@@ -314,7 +316,7 @@ public:
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
 
-	virtual const BuildingSettings* create_building_settings() const {
+	virtual std::unique_ptr<const BuildingSettings> create_building_settings() const {
 		return nullptr;
 	}
 

@@ -511,7 +511,6 @@ void WLApplication::run() {
 
 	should_die_ = true;
 	game_logic_thread.join();
-	return;
 }
 
 /**
