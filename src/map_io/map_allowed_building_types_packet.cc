@@ -74,10 +74,10 @@ void MapAllowedBuildingTypesPacket::read(FileSystem& fs,
 
 					bool allowed;
 					while (const char* const name = s.get_next_bool(nullptr, &allowed)) {
-						const DescriptionIndex index = tribe.building_index(name);
-						if (tribe.has_building(index)) {
+						try {
+							const DescriptionIndex index = tribe.safe_building_index(name);
 							player->allow_building_type(index, allowed);
-						} else {
+						} catch (const GameDataError&) {
 							log_warn("MapAllowedBuildingTypesPacket - tribe %s does not define "
 							         "building type \"%s\"\n",
 							         tribe.name().c_str(), name);

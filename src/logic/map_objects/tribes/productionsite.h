@@ -369,7 +369,7 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void update_statistics_string(std::string* statistics) override;

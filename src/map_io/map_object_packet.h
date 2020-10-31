@@ -23,8 +23,6 @@
 #include "logic/map_objects/map_object.h"
 
 class FileSystem;
-class WorldLegacyLookupTable;
-class TribesLegacyLookupTable;
 
 namespace Widelands {
 
@@ -51,11 +49,7 @@ struct MapObjectPacket {
 
 	~MapObjectPacket();
 
-	void read(FileSystem&,
-	          EditorGameBase&,
-	          MapObjectLoader&,
-	          const WorldLegacyLookupTable& world_lookup_table,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileSystem&, EditorGameBase&, MapObjectLoader&);
 
 	void load_finish();
 
