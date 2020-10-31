@@ -138,7 +138,7 @@ void TwoColumnsBackNavigationMenu::layout() {
 	TwoColumnsMenu::layout();
 	printBox(right_column_content_box_);
 	printBox(button_box_);
-	//	back_.set_desired_size(0, standard_height_);
+	back_.set_desired_size(button_box_.get_w(), standard_height_);
 }
 
 bool TwoColumnsBackNavigationMenu::handle_key(bool down, SDL_Keysym code) {
@@ -175,7 +175,10 @@ TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 
 void TwoColumnsNavigationMenu::layout() {
 	TwoColumnsBackNavigationMenu::layout();
-	//	ok_.set_desired_size(0, standard_height_);
+	int w, not_used;
+	ok_.get_desired_size(&w, &not_used);
+	back_.set_desired_size(w - (padding / 2), standard_height_);
+	ok_.set_desired_size(w - (padding / 2), standard_height_);
 }
 
 bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
