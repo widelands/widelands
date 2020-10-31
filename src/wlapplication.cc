@@ -503,8 +503,6 @@ void WLApplication::run() {
 	}
 
 	g_sh->stop_music(500);
-
-	return;
 }
 
 /**

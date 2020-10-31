@@ -175,16 +175,19 @@ Available actions are:
 ProductionProgram::ActReturn::Condition* create_economy_condition(
    const std::string& item, const ProductionSiteDescr& descr, const Descriptions& descriptions) {
 	try {
-		const WareWorker wareworker = descriptions.try_load_ware_or_worker(item);
-		if (wareworker == WareWorker::wwWARE) {
-			const DescriptionIndex index = descriptions.ware_index(item);
-			descr.ware_demand_checks()->insert(index);
-			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
-		} else {
-			const DescriptionIndex index = descriptions.worker_index(item);
-			descr.worker_demand_checks()->insert(index);
-			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
+		const std::pair<WareWorker, DescriptionIndex> wareworker =
+		   descriptions.load_ware_or_worker(item);
+		switch (wareworker.first) {
+		case WareWorker::wwWARE: {
+			descr.ware_demand_checks()->insert(wareworker.second);
+			return new ProductionProgram::ActReturn::EconomyNeedsWare(wareworker.second);
 		}
+		case WareWorker::wwWORKER: {
+			descr.worker_demand_checks()->insert(wareworker.second);
+			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
+		}
+		}
+		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
