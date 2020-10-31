@@ -204,8 +204,9 @@ bool GameChatPanel::try_autocomplete() {
 		// Found something. Cut off the space
 		++namepart_start;
 	}
-	if (str[namepart_start] == '@') {
-		// If the first sign of the name is an @, skip it
+	if (namepart_start == 0 && str[0] == '@') {
+		// If we are at the beginning of the line and the first char is @,
+		// assume it is the whisper-sign and ignore the @
 		++namepart_start;
 	}
 	size_t namepart_end = str.find(' ', editbox.caret_pos());

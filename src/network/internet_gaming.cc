@@ -1045,7 +1045,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
  * Check for vaild username characters and make sure it's not "team".
  */
 bool InternetGaming::valid_username(const std::string& username) {
-	if (username.empty() || username[0] == '@' ||
+	if (username.empty() ||
 	    username.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
 	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
 		return false;
