@@ -62,7 +62,7 @@ bool SinglePlayerGameSettingsProvider::can_change_player_team(uint8_t) {
 }
 
 bool SinglePlayerGameSettingsProvider::can_launch() {
-	return s.mapname.size() != 0 && s.players.size() >= 1;
+	return !s.mapname.empty() && !s.players.empty();
 }
 
 std::string SinglePlayerGameSettingsProvider::get_map() {

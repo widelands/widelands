@@ -436,7 +436,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 }
 
 void EditorInteractive::load(const std::string& filename) {
-	assert(filename.size());
+	assert(!filename.empty());
 	assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();

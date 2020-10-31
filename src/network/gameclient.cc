@@ -1093,7 +1093,7 @@ void GameClient::disconnect(const std::string& reason,
 		if (sendreason) {
 			SendPacket s;
 			s.unsigned_8(NETCMD_DISCONNECT);
-			s.unsigned_8(arg.size() < 1 ? 1 : 2);
+			s.unsigned_8(arg.empty() ? 1 : 2);
 			s.string(reason);
 			if (!arg.empty()) {
 				s.string(arg);
