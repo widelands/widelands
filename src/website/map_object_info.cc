@@ -103,14 +103,14 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 
 		if (upcast(Widelands::ProductionSiteDescr const, productionsite, building)) {
 			// Produces wares
-			if (productionsite->output_ware_types().size() > 0) {
+			if (!productionsite->output_ware_types().empty()) {
 				JSON::Array* json_wares_array = json_building->add_array("produced_wares");
 				for (Widelands::DescriptionIndex ware_index : productionsite->output_ware_types()) {
 					json_wares_array->add_empty(tribe.get_ware_descr(ware_index)->name());
 				}
 			}
 			// Produces workers
-			if (productionsite->output_worker_types().size() > 0 ||
+			if (!productionsite->output_worker_types().empty() ||
 			    productionsite->type() == Widelands::MapObjectType::TRAININGSITE) {
 				JSON::Array* json_workers_array = json_building->add_array("produced_workers");
 				for (Widelands::DescriptionIndex worker_index : productionsite->output_worker_types()) {
@@ -123,7 +123,7 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 			}
 
 			// Consumes
-			if (productionsite->input_wares().size() > 0) {
+			if (!productionsite->input_wares().empty()) {
 				JSON::Array* json_wares_array = json_building->add_array("stored_wares");
 				for (Widelands::WareAmount input : productionsite->input_wares()) {
 					const Widelands::WareDescr& ware = *tribe.get_ware_descr(input.first);

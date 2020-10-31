@@ -512,7 +512,7 @@ void FullscreenMenuOptions::layout() {
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
-	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
+	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale.empty());
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
 	// Handle non-standard setups where the locale directory might be missing

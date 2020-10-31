@@ -1034,7 +1034,7 @@ void Map::find_reachable(const EditorGameBase& egbase,
 
 	queue.push_back(area);
 
-	while (queue.size()) {
+	while (!queue.empty()) {
 		// Pop the last ware from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
