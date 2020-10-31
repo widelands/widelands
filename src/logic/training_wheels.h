@@ -32,6 +32,26 @@ namespace Widelands {
 // Check the scripting documentation for more information.
 class TrainingWheels {
 public:
+
+	/**
+	 * @brief A training wheel's script, display name, solving status and dependencies
+	 */
+	struct TrainingWheel {
+		explicit TrainingWheel(bool init_solved, const std::string& key,
+		                       const std::string& init_descname,
+		                       const std::vector<std::string>& init_dependencies)
+		   : solved(init_solved), script(key + ".lua"), descname(init_descname) {
+			for (const std::string& dependency : init_dependencies) {
+				dependencies.insert(dependency);
+			}
+		}
+
+		bool solved;
+		const std::string script;
+		const std::string descname;
+		std::set<std::string> dependencies;
+	};
+
 	/**
 	 * @brief Parses the training wheel scripts defined in data/scripting/training_wheels
 	 * @param lua the game's Lua interface
@@ -69,12 +89,9 @@ public:
 	bool has_objectives() const;
 
 	/**
-	 * @brief solved_objectives A list of all currently solved objectives
-	 * @return Map of <name, descname>
+	 * Returns all idle, running and solved objectives
 	 */
-	const std::map<std::string, std::string>& solved_objectives() const {
-		return solved_objectives_;
-	}
+	std::map<std::string, TrainingWheel> all_objectives() const;
 
 private:
 	/**
@@ -86,31 +103,13 @@ private:
 	 */
 	void write();
 
-	/**
-	 * @brief A training wheel's script and filename
-	 */
-	struct TrainingWheel {
-		explicit TrainingWheel(const std::string& key,
-		                       const std::string& init_descname,
-		                       const std::vector<std::string>& init_dependencies)
-		   : script(key + ".lua"), descname(init_descname) {
-			for (const std::string& dependency : init_dependencies) {
-				dependencies.insert(dependency);
-			}
-		}
-
-		const std::string script;
-		const std::string descname;
-		std::set<std::string> dependencies;
-	};
-
 	// Objective name and its scripting information
 	std::map<std::string, TrainingWheel> idle_objectives_;
 	// Prevent concurrency issues while loading objectives, and remember descname for options. Name,
 	// descname
-	std::map<std::string, std::string> running_objectives_;
+	std::map<std::string, TrainingWheel> running_objectives_;
 	// Remember solved objectives for dependency check and options. Name, descname
-	std::map<std::string, std::string> solved_objectives_;
+	std::map<std::string, TrainingWheel> solved_objectives_;
 	// The scripts that had their dependencies met and are waiting to run
 	std::set<std::string> scripts_to_run_;
 	// Mutex Lock for the currently running objective

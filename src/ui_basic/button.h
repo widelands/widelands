@@ -106,6 +106,11 @@ public:
 		return title_;
 	}
 
+	// Expand to fit text
+	// If h == 0, automatically resize for font height and give it a margin.
+	// If w == 0 too, automatically resize for text width too.
+	void expand(int w, int h);
+
 	bool enabled() const {
 		return enabled_;
 	}

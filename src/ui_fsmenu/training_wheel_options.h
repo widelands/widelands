@@ -20,14 +20,12 @@
 #ifndef WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 #define WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 
+#include "logic/training_wheels.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/window.h"
 
 #include <memory>
 #include <set>
-
-namespace Widelands {
-class TrainingWheels;
-}
 
 class LuaInterface;
 
@@ -39,9 +37,23 @@ class TrainingWheelOptions : public UI::Window {
 public:
 	explicit TrainingWheelOptions(Panel* parent);
 
+private:
+	struct Entry {
+		explicit Entry(Widelands::TrainingWheels::TrainingWheel init_training_wheel, UI::Checkbox* init_checkbox) :
+		training_wheel(init_training_wheel), initial_state(init_training_wheel.solved), checkbox(init_checkbox) {}
+		const Widelands::TrainingWheels::TrainingWheel training_wheel;
+		const bool initial_state;
+		UI::Checkbox* checkbox;
+	};
+
+	void toggle_mark_unmark_all_button();
+
 	std::unique_ptr<LuaInterface> lua_;
 	std::set<UI::Button*> reset_buttons_;
+	std::map<std::string, Entry> checkboxes_;
 	std::unique_ptr<Widelands::TrainingWheels> training_wheels_;
+	UI::Button* mark_unmark_button_;
+	bool mark_unmark_state_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H

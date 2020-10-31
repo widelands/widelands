@@ -281,14 +281,15 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                       UI::PanelStyle::kFsMenu,
                       Vector2i::zero(),
                       _("Teach me how to play")),
-     training_wheels_reset_(&training_wheels_box_,
-                            "reset_training_wheels",
+     training_wheels_button_(&training_wheels_box_,
+                            "edit_training_wheels",
                             0,
                             0,
                             0,
                             0,
                             UI::ButtonStyle::kFsMenuSecondary,
-                            _("Reset progress…")),
+							 /** TRANSLATORS: Button to bring up a window to edit teaching progress in the Options */
+                            _("Progress…")),
      os_(opt) {
 
 	do_not_layout_on_resolution_change();
@@ -358,19 +359,19 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
-	training_wheels_box_.add(&training_wheels_reset_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	training_wheels_box_.add(&training_wheels_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	training_wheels_box_.add_space(kPadding);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
-	training_wheels_reset_.sigclicked.connect([this]() {
-		training_wheels_reset_.set_enabled(false);
+	training_wheels_button_.sigclicked.connect([this]() {
+		training_wheels_button_.set_enabled(false);
 		cancel_.set_enabled(false);
 		apply_.set_enabled(false);
 		ok_.set_enabled(false);
 		TrainingWheelOptions training_wheel_options(this);
 		training_wheel_options.run<UI::Panel::Returncodes>();
-		training_wheels_reset_.set_enabled(true);
+		training_wheels_button_.set_enabled(true);
 		cancel_.set_enabled(true);
 		apply_.set_enabled(true);
 		ok_.set_enabled(true);

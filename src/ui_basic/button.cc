@@ -90,22 +90,7 @@ Button::Button(Panel* const parent,
             tooltip_text,
             init_state,
             UI::Button::ImageMode::kShrink) {
-	if (h == 0) {
-		// Automatically resize for font height and give it a margin.
-		int new_width = get_w();
-		const int new_height =
-		   std::max(text_height(g_style_manager->button_style(init_style).enabled().font()),
-		            text_height(g_style_manager->button_style(init_style).disabled().font())) +
-		   4 * kButtonImageMargin;
-		if (w == 0) {
-			// Automatically resize for text width too.
-			new_width = std::max(text_width(title_, style_->enabled().font()),
-			                     text_width(title_, style_->disabled().font())) +
-			            8 * kButtonImageMargin;
-		}
-		set_desired_size(new_width, new_height);
-		set_size(new_width, new_height);
-	}
+	expand(w, h);
 }
 
 Button::Button  //  for pictorial buttons
@@ -137,6 +122,25 @@ void Button::set_pic(const Image* pic) {
 	}
 
 	title_image_ = pic;
+}
+
+void Button::expand(int w, int h) {
+	if (h == 0) {
+		// Automatically resize for font height and give it a margin.
+		int new_width = get_w();
+		const int new_height =
+		   std::max(get_h(), (std::max(text_height(style_->enabled().font()),
+		            text_height(style_->disabled().font())) +
+		   4 * kButtonImageMargin));
+		if (w == 0) {
+			// Automatically resize for text width too.
+			new_width = std::max(new_width, (std::max(text_width(title_, style_->enabled().font()),
+			                     text_width(title_, style_->disabled().font())) +
+			            8 * kButtonImageMargin));
+		}
+		set_desired_size(new_width, new_height);
+		set_size(new_width, new_height);
+	}
 }
 
 /**

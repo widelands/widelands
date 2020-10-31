@@ -48,13 +48,13 @@ TrainingWheels::TrainingWheels(LuaInterface& lua)
 		wheel_table = table->get_table(key);
 		const bool is_solved = section.get_bool(key.c_str());
 		section.set_bool(key.c_str(), is_solved);
+		std::unique_ptr<LuaTable> dependencies = wheel_table->get_table("dependencies");
 		if (is_solved) {
-			solved_objectives_.insert(std::make_pair(key, wheel_table->get_string("descname")));
+			solved_objectives_.insert(std::make_pair(key, TrainingWheel(true, key, wheel_table->get_string("descname"), dependencies->array_entries<std::string>())));
 			wheel_table->do_not_warn_about_unaccessed_keys();
 		} else {
-			std::unique_ptr<LuaTable> dependencies = wheel_table->get_table("dependencies");
 			idle_objectives_.insert(
-			   std::make_pair(key, TrainingWheel(key, wheel_table->get_string("descname"),
+			   std::make_pair(key, TrainingWheel(false, key, wheel_table->get_string("descname"),
 			                                     dependencies->array_entries<std::string>())));
 		}
 	}
@@ -79,7 +79,7 @@ void TrainingWheels::load_objectives() {
 			}
 		}
 		if (dependencies_met) {
-			running_objectives_.insert(std::make_pair(it->first, it->second.descname));
+			running_objectives_.insert(std::make_pair(it->first, it->second));
 			scripts_to_run_.insert(it->second.script);
 			it = idle_objectives_.erase(it);
 		} else {
@@ -100,6 +100,14 @@ bool TrainingWheels::has_objectives() const {
 	return !scripts_to_run_.empty();
 }
 
+std::map<std::string, TrainingWheels::TrainingWheel> TrainingWheels::all_objectives() const {
+	std::map<std::string, TrainingWheels::TrainingWheel> result;
+	result.insert(idle_objectives_.begin(), idle_objectives_.end());
+	result.insert(running_objectives_.begin(), running_objectives_.end());
+	result.insert(solved_objectives_.begin(), solved_objectives_.end());
+	return result;
+}
+
 bool TrainingWheels::acquire_lock(const std::string& objective) {
 	if (current_objective_.empty()) {
 		current_objective_ = objective;
@@ -112,10 +120,11 @@ void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_
 	log_info("Solved training wheel '%s'", objective.c_str());
 	auto it = running_objectives_.find(objective);
 	if (it != running_objectives_.end()) {
+		it->second.solved = true;
 		solved_objectives_.insert(std::make_pair(objective, it->second));
 		running_objectives_.erase(it);
 	} else {
-		solved_objectives_.insert(std::make_pair(objective, objective));
+		solved_objectives_.insert(std::make_pair(objective, TrainingWheel(true, objective, objective, {})));
 	}
 
 	Section& section = profile_.pull_section("global");
