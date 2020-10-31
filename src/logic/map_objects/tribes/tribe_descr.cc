@@ -579,17 +579,6 @@ DescriptionIndex TribeDescr::worker_index(const std::string& workername) const {
 	return descriptions_.worker_index(workername);
 }
 
-DescriptionIndex TribeDescr::safe_building_index(const std::string& buildingname) const {
-	return descriptions_.safe_building_index(buildingname);
-}
-
-DescriptionIndex TribeDescr::safe_ware_index(const std::string& warename) const {
-	return descriptions_.safe_ware_index(warename);
-}
-DescriptionIndex TribeDescr::safe_worker_index(const std::string& workername) const {
-	return descriptions_.safe_worker_index(workername);
-}
-
 WareDescr const* TribeDescr::get_ware_descr(const DescriptionIndex& index) const {
 	return descriptions_.get_ware_descr(index);
 }

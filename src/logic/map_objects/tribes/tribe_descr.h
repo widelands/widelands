@@ -89,13 +89,6 @@ public:
 	DescriptionIndex ware_index(const std::string& warename) const;
 	DescriptionIndex worker_index(const std::string& workername) const;
 
-	/// Return the given building or die trying
-	DescriptionIndex safe_building_index(const std::string& buildingname) const;
-	/// Return the given ware or die trying
-	DescriptionIndex safe_ware_index(const std::string& warename) const;
-	/// Return the given worker or die trying
-	DescriptionIndex safe_worker_index(const std::string& workername) const;
-
 	BuildingDescr const* get_building_descr(const DescriptionIndex& index) const;
 	ImmovableDescr const* get_immovable_descr(const DescriptionIndex& index) const;
 	WareDescr const* get_ware_descr(const DescriptionIndex& index) const;

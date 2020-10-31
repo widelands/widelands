@@ -155,92 +155,6 @@ bool Descriptions::tribe_exists(DescriptionIndex index) const {
 	return tribes_->get_mutable(index) != nullptr;
 }
 
-DescriptionIndex Descriptions::safe_building_index(const std::string& buildingname) const {
-	DescriptionIndex result = building_index(buildingname);
-	if (result == Widelands::INVALID_INDEX) {
-		result = building_index(compatibility_table_->lookup_building(buildingname));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown building '%s'", buildingname.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_critter_index(const std::string& crittername) const {
-	DescriptionIndex const result = critter_index(crittername);
-
-	if (result == INVALID_INDEX) {
-		throw GameDataError("Unknown critter '%s'", crittername.c_str());
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_immovable_index(const std::string& immovablename) const {
-	DescriptionIndex result = immovable_index(immovablename);
-	if (result == Widelands::INVALID_INDEX) {
-		result = immovable_index(compatibility_table_->lookup_immovable(immovablename));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown immovable '%s'", immovablename.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_resource_index(const std::string& resourcename) const {
-	DescriptionIndex result = resource_index(resourcename);
-	if (result == INVALID_INDEX) {
-		result = resource_index(compatibility_table_->lookup_resource(resourcename));
-		if (result == INVALID_INDEX) {
-			throw GameDataError("Unknown resource '%s'", resourcename.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_ship_index(const std::string& shipname) const {
-	DescriptionIndex result = ship_index(shipname);
-	if (result == INVALID_INDEX) {
-		result = ship_index(compatibility_table_->lookup_ship(shipname));
-		if (result == INVALID_INDEX) {
-			throw GameDataError("Unknown ship '%s'", shipname.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_terrain_index(const std::string& terrainname) const {
-	DescriptionIndex result = terrain_index(terrainname);
-	if (result == INVALID_INDEX) {
-		result = terrain_index(compatibility_table_->lookup_terrain(terrainname));
-		if (result == INVALID_INDEX) {
-			throw GameDataError("Unknown terrain '%s'", terrainname.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_tribe_index(const std::string& tribename) const {
-	const DescriptionIndex result = tribe_index(tribename);
-	if (!tribe_exists(result)) {
-		throw GameDataError("Unknown tribe '%s'", tribename.c_str());
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_ware_index(const std::string& warename) const {
-	DescriptionIndex result = ware_index(warename);
-	if (result == Widelands::INVALID_INDEX) {
-		result = ware_index(compatibility_table_->lookup_ware(warename));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown ware '%s'", warename.c_str());
-		}
-	}
-	return result;
-}
-DescriptionIndex Descriptions::safe_worker_index(const std::string& workername) const {
-	DescriptionIndex result = worker_index(workername);
-	if (result == Widelands::INVALID_INDEX) {
-		result = worker_index(compatibility_table_->lookup_worker(workername));
-		if (result == Widelands::INVALID_INDEX) {
-			throw GameDataError("Unknown worker '%s'", workername.c_str());
-		}
-	}
-	return result;
-}
-
 DescriptionIndex Descriptions::building_index(const std::string& buildingname) const {
 	return buildings_->get_index(buildingname);
 }
@@ -456,7 +370,7 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 	} catch (WException& e) {
 		throw GameDataError("Error while loading tribe '%s': %s", tribename.c_str(), e.what());
 	}
-	return safe_tribe_index(tribename);
+	return tribe_index(tribename);
 }
 
 DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
