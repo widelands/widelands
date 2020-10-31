@@ -2854,7 +2854,8 @@ int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 		lua_pushint32(L, index++);
 		const Widelands::ProductionSiteDescr* descr =
 		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
-		      descriptions.get_building_descr(descriptions.safe_building_index(site)));
+		      descriptions.get_building_descr(descriptions.building_index(site)));
+		assert(descr != nullptr);
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -2877,7 +2878,8 @@ int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L)
 		lua_pushint32(L, index++);
 		const Widelands::ProductionSiteDescr* descr =
 		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
-		      decriptions.get_building_descr(decriptions.safe_building_index(site)));
+		      decriptions.get_building_descr(decriptions.building_index(site)));
+		assert(descr != nullptr);
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -3502,7 +3504,8 @@ int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	if (descriptions.tribe_exists(tribename)) {
-		const Widelands::DescriptionIndex& ware_index = descriptions.safe_ware_index(get()->name());
+		const Widelands::DescriptionIndex& ware_index = descriptions.ware_index(get()->name());
+		assert(ware_index != Widelands::INVALID_INDEX);
 		int tribeindex = descriptions.tribe_index(tribename);
 		lua_pushboolean(
 		   L, descriptions.get_tribe_descr(tribeindex)->is_construction_material(ware_index));
