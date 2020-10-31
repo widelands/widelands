@@ -56,8 +56,6 @@
 #include "map_io/map_waterway_packet.h"
 #include "map_io/map_waterwaydata_packet.h"
 #include "map_io/map_wincondition_packet.h"
-#include "map_io/tribes_legacy_lookup_table.h"
-#include "map_io/world_legacy_lookup_table.h"
 #include "ui_basic/progresswindow.h"
 
 namespace Widelands {
@@ -118,11 +116,11 @@ int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase) {
 	map_.set_size(map_.width_, map_.height_);
 	mol_.reset(new MapObjectLoader());
 
-	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table(
-	   create_world_legacy_lookup_table(old_world_name_));
+	egbase.mutable_descriptions()->set_old_world_name(old_world_name_);
+
 	{
 		MapTerrainPacket p;
-		p.read(*fs_, egbase, *world_lookup_table);
+		p.read(*fs_, egbase);
 	}
 
 	{
@@ -174,6 +172,8 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	}
 	// PRELOAD DATA END
 
+	egbase.mutable_descriptions()->set_old_world_name(old_world_name_);
+
 	if (fs_->file_exists("port_spaces")) {
 		log_info("Reading Port Spaces Data ... ");
 
@@ -188,21 +188,18 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		p.read(*fs_, egbase, is_game, *mol_);
 	}
 
-	std::unique_ptr<WorldLegacyLookupTable> world_lookup_table(
-	   create_world_legacy_lookup_table(old_world_name_));
-	std::unique_ptr<TribesLegacyLookupTable> tribes_lookup_table(new TribesLegacyLookupTable());
 	log_info("Reading Terrain Data ... ");
 	set_progress_message(_("Terrains"), 3);
 	{
 		MapTerrainPacket p;
-		p.read(*fs_, egbase, *world_lookup_table);
+		p.read(*fs_, egbase);
 	}
 
 	MapObjectPacket mapobjects;
 
 	log_info("Reading Map Objects ... ");
 	set_progress_message(_("Map objects"), 4);
-	mapobjects.read(*fs_, egbase, *mol_, *world_lookup_table, *tribes_lookup_table);
+	mapobjects.read(*fs_, egbase, *mol_);
 
 	log_info("Reading Player Start Position Data ... ");
 	set_progress_message(_("Starting positions"), 5);
@@ -218,7 +215,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log_info("Reading (legacy) Bob Data ... ");
 		{
 			MapBobPacket p;
-			p.read(*fs_, egbase, *mol_, *world_lookup_table);
+			p.read(*fs_, egbase, *mol_);
 		}
 	}
 
@@ -226,7 +223,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	set_progress_message(_("Resources"), 6);
 	{
 		MapResourcesPacket p;
-		p.read(*fs_, egbase, *world_lookup_table);
+		p.read(*fs_, egbase);
 	}
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
@@ -295,14 +292,14 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		set_progress_message(_("Initializing flags"), 13);
 		{
 			MapFlagdataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
+			p.read(*fs_, egbase, is_game, *mol_);
 		}
 
 		log_info("Reading Roaddata Data ... ");
 		set_progress_message(_("Initializing roads and waterways"), 14);
 		{
 			MapRoaddataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
+			p.read(*fs_, egbase, is_game, *mol_);
 		}
 
 		log_info("Reading Waterwaydata Data ... ");
@@ -315,7 +312,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		set_progress_message(_("Initializing buildings"), 15);
 		{
 			MapBuildingdataPacket p;
-			p.read(*fs_, egbase, is_game, *mol_, *tribes_lookup_table);
+			p.read(*fs_, egbase, is_game, *mol_);
 		}
 
 		log_info("Second and third phase loading Map Objects ... ");
@@ -342,7 +339,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		set_progress_message(_("Vision"), 17);
 		{
 			MapPlayersViewPacket p;
-			p.read(*fs_, egbase, *world_lookup_table, *tribes_lookup_table);
+			p.read(*fs_, egbase);
 		}
 
 		//  This must come before anything that references messages, such as:
