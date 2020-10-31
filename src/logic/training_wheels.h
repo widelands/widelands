@@ -32,12 +32,12 @@ namespace Widelands {
 // Check the scripting documentation for more information.
 class TrainingWheels {
 public:
-
 	/**
 	 * @brief A training wheel's script, display name, solving status and dependencies
 	 */
 	struct TrainingWheel {
-		explicit TrainingWheel(bool init_solved, const std::string& key,
+		explicit TrainingWheel(bool init_solved,
+		                       const std::string& key,
 		                       const std::string& init_descname,
 		                       const std::vector<std::string>& init_dependencies)
 		   : solved(init_solved), script(key + ".lua"), descname(init_descname) {
