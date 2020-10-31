@@ -65,7 +65,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
       if win_conditions__initially_without_warehouse[idx] == nil then
          win_conditions__initially_without_warehouse[idx] = p.defeated
       elseif p.defeated and not win_conditions__initially_without_warehouse[idx] then
-         p:send_message(heading, msg)
+         p:send_to_inbox(heading, msg)
          p.see_all = 1
          if (wc_name and wc_ver) then
             wl.game.report_result(p, 0, make_extra_data(p, wc_name, wc_ver))
@@ -109,13 +109,13 @@ end
 -- .. function:: broadcast(plrs, header, msg[, options])
 --
 --    broadcast a message to all players using
---    :meth:`wl.game.Player.send_message <wl.game.Player.send_message>`. All parameters are passed
+--    :meth:`send_to_inbox`. All parameters are passed
 --    literally.
 
 function broadcast(plrs, header, msg, goptions)
    local options = goptions or {}
    for idx, p in ipairs(plrs) do
-      send_message(p, header, msg, options)
+      send_to_inbox(p, header, msg, options)
    end
 end
 
@@ -123,7 +123,7 @@ function broadcast_win(plrs, header, msg, goptions, wc_name, wc_ver, gextra)
    local options = goptions or {}
    local extra = gextra or {}
    for idx, p in ipairs(plrs) do
-       p:send_message(header, msg, options)
+       p:send_to_inbox(header, msg, options)
        wl.game.report_result(p, 1, make_extra_data(p, wc_name, wc_ver, extra))
    end
 end
@@ -132,7 +132,7 @@ function broadcast_lost(plrs, header, msg, goptions, wc_name, wc_ver, gextra)
    local options = goptions or {}
    local extra = gextra or {}
    for idx, p in ipairs(plrs) do
-       p:send_message(header, msg, options)
+       p:send_to_inbox(header, msg, options)
        wl.game.report_result(p, 0, make_extra_data(p, wc_name, wc_ver, extra))
    end
 end

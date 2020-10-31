@@ -25,8 +25,8 @@ function save_coroutine()
    a = { "Hallo", "Welt" }
    c = { func = function(a) return "I say " .. a .. "!" end }
    field = map:get_field(32,34)
-   tree = map:place_immovable("spruce_summer_old", field, "world")
-   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34), "world")
+   tree = map:place_immovable("spruce_summer_old", field)
+   removed_tree = map:place_immovable("alder_summer_old", map:get_field(34,34))
    removed_tree:remove()
 
    field.terd = "desert_beach"
@@ -55,8 +55,8 @@ function save_coroutine()
    objective = p:add_objective("lumber", "House", "Ship!")
    objective.done = true
 
-   p:send_message("dummy msg1", "dummy msg 1")
-   msg = p:send_message("hello nice", "World", {field = field })
+   p:send_to_inbox("dummy msg1", "dummy msg 1")
+   msg = p:send_to_inbox("hello nice", "World", {field = field })
    player_slot = map.player_slots[1]
 
    myset = Set:new{

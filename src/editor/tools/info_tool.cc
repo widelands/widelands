@@ -22,9 +22,10 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/text_layout.h"
+#include "logic/map_objects/descriptions.h"
+#include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
@@ -38,8 +39,8 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 
 	parent.stop_painting();
 
-	UI::Window* const w =
-	   new UI::Window(&parent, "field_information", 30, 30, 400, 200, _("Field Information"));
+	UI::Window* const w = new UI::Window(&parent, UI::WindowStyle::kWui, "field_information", 30, 30,
+	                                     400, 200, _("Field Information"));
 	UI::MultilineTextarea* const multiline_textarea =
 	   new UI::MultilineTextarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), UI::PanelStyle::kWui);
 
@@ -111,14 +112,14 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 	buf += as_heading(_("Terrain"), UI::PanelStyle::kWui);
 
 	const Widelands::Field& tf = (*map)[center.triangle.node];
-	const Widelands::TerrainDescription& ter = parent.egbase().world().terrain_descr(
+	const Widelands::TerrainDescription* ter = parent.egbase().descriptions().get_terrain_descr(
 	   center.triangle.t == Widelands::TriangleIndex::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf += as_listitem(
-	   (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str(), font_style);
+	   (boost::format(pgettext("terrain_name", "Name: %s")) % ter->descname()).str(), font_style);
 
 	std::vector<std::string> terrain_is_strings;
-	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
+	for (const Widelands::TerrainDescription::Type& terrain_type : ter->get_types()) {
 		terrain_is_strings.push_back(terrain_type.descname);
 	}
 
@@ -194,7 +195,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 		buf += as_heading(_("Resources"), UI::PanelStyle::kWui);
 		buf += as_listitem(
 		   (boost::format(pgettext("resources", "%1%x %2%")) % static_cast<unsigned int>(ramount) %
-		    parent.egbase().world().get_resource(f.get_resources())->descname())
+		    parent.egbase().descriptions().get_resource_descr(f.get_resources())->descname())
 		      .str(),
 		   font_style);
 	}

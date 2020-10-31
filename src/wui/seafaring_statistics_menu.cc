@@ -40,7 +40,13 @@ constexpr int kButtonSize = 34;
 
 SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                                                  UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&plr, "seafaring_statistics", &registry, 375, 375, _("Seafaring Statistics")),
+   : UI::UniqueWindow(&plr,
+                      UI::WindowStyle::kWui,
+                      "seafaring_statistics",
+                      &registry,
+                      375,
+                      375,
+                      _("Seafaring Statistics")),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, get_inner_w(), get_inner_h(), kPadding),
      filter_box_(
         &main_box_, 0, 0, UI::Box::Horizontal, get_inner_w() - 2 * kPadding, kButtonSize, kPadding),
@@ -217,7 +223,7 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 
 const Image*
 SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStatus status) const {
-	std::string filename = "";
+	std::string filename;
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
 		filename = "images/wui/stats/ship_stats_idle.png";

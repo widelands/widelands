@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRAININGSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRAININGSITE_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -29,14 +31,11 @@ struct TrainingSiteWindow;
 
 namespace Widelands {
 
-class World;
-
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const LuaTable& table,
-	                  Tribes& tribes,
-	                  World& world);
+	                  Descriptions& descriptions);
 	~TrainingSiteDescr() override {
 	}
 
@@ -198,7 +197,7 @@ public:
 	void training_done();
 	ProductionProgram::Action::TrainingParameters checked_soldier_training() const;
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void program_end(Game&, ProgramResult) override;

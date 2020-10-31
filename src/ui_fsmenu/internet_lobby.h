@@ -30,9 +30,17 @@
 #include "ui_fsmenu/load_map_or_game.h"
 #include "wui/game_chat_panel.h"
 
+namespace Widelands {
+struct TribeBasicInfo;
+}
+
 class FullscreenMenuInternetLobby : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuInternetLobby(std::string&, std::string&, bool);
+	FullscreenMenuInternetLobby(FullscreenMenuMain&,
+	                            std::string&,
+	                            std::string&,
+	                            bool,
+	                            std::vector<Widelands::TribeBasicInfo>& tribeinfos);
 
 	void think() override;
 
@@ -59,7 +67,7 @@ private:
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
-	UI::Textarea title_;
+	FullscreenMenuMain& fsmm_;
 
 	UI::Box left_column_, right_column_;
 
@@ -83,6 +91,9 @@ private:
 	const std::string nickname_;
 	const std::string password_;
 	bool is_registered_;
+
+	// Tribes check
+	std::vector<Widelands::TribeBasicInfo>& tribeinfos_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 35,
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_stink_tree_tiny",
    descname = _ "Stink Shepherd’s Tree (tiny)",
    size = "small",
@@ -33,7 +33,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_stink_tree_small",
    descname = _ "Stink Shepherd’s Tree (small)",
    size = "small",
@@ -57,7 +57,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_stink_tree_medium",
    descname = _ "Stink Shepherd’s Tree (medium)",
    size = "small",
@@ -81,7 +81,7 @@ tribes:new_immovable_type {
    }
 }
 
-tribes:new_immovable_type {
+descriptions:new_immovable_type {
    name = "berry_bush_stink_tree_ripe",
    descname = _ "Stink Shepherd’s Tree (ripe)",
    size = "small",

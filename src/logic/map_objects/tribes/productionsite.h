@@ -54,12 +54,10 @@ public:
 	ProductionSiteDescr(const std::string& init_descname,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 
 	Building& create_object() const override;
 
@@ -371,7 +369,7 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void update_statistics_string(std::string* statistics) override;

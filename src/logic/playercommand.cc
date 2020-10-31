@@ -87,7 +87,8 @@ void PlayerCommand::write_id_and_sender(StreamWrite& ser) {
 }
 
 PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
-	switch (static_cast<QueueCommandTypes>(des.unsigned_8())) {
+	const uint8_t command_id = des.unsigned_8();
+	switch (static_cast<QueueCommandTypes>(command_id)) {
 	case QueueCommandTypes::kBulldoze:
 		return new CmdBulldoze(des);
 	case QueueCommandTypes::kBuild:
@@ -136,6 +137,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdEvictWorker(des);
 	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
 		return new CmdMilitarySiteSetSoldierPreference(des);
+	case QueueCommandTypes::kToggleMuteMessages:
+		return new CmdToggleMuteMessages(des);
 
 	case QueueCommandTypes::kStartOrCancelExpedition:
 		return new CmdStartOrCancelExpedition(des);
@@ -157,7 +160,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdMarkMapObjectForRemoval(des);
 
 	default:
-		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
+		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
+		                 static_cast<unsigned>(command_id));
 	}
 }
 
@@ -250,7 +254,7 @@ CmdBuild::CmdBuild(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 }
 
 void CmdBuild::execute(Game& game) {
-	// Empty former vector since its a new csite.
+	// Empty former_buildings vector since it's a new csite.
 	FormerBuildings former_buildings;
 	game.get_player(sender())->build(coords, bi, true, former_buildings);
 }
@@ -1408,7 +1412,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const Time& init_duetime,
 
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.descriptions().ware_exists(ware_type())) {
 		player->get_economy(economy())->set_target_quantity(
 		   wwWARE, ware_type(), permanent_, duetime());
 	}
@@ -1461,7 +1465,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const Time& init_duetime,
 
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.descriptions().worker_exists(ware_type())) {
 		player->get_economy(economy())->set_target_quantity(
 		   wwWORKER, ware_type(), permanent_, duetime());
 	}
@@ -1888,7 +1892,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 			}
 
 			if (isworker_) {
-				if (!(game.tribes().worker_exists(ware_))) {
+				if (!(game.descriptions().worker_exists(ware_))) {
 					log_warn_time(game.get_gametime(),
 					              "Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(),
 					              ware_);
@@ -1896,7 +1900,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 				}
 				warehouse->set_worker_policy(ware_, policy_);
 			} else {
-				if (!(game.tribes().ware_exists(ware_))) {
+				if (!(game.descriptions().ware_exists(ware_))) {
 					log_warn_time(game.get_gametime(),
 					              "Cmd_SetStockPolicy: sender %u, ware %u does not exist\n", sender(),
 					              ware_);
@@ -2028,7 +2032,7 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 void CmdToggleMuteMessages::execute(Game& game) {
 	if (upcast(Building, b, game.objects().get_object(building_))) {
 		if (all_) {
-			const DescriptionIndex di = game.tribes().safe_building_index(b->descr().name());
+			const DescriptionIndex di = game.descriptions().safe_building_index(b->descr().name());
 			b->get_owner()->set_muted(di, !b->owner().is_muted(di));
 		} else {
 			b->set_mute_messages(!b->mute_messages());
@@ -2056,7 +2060,7 @@ void CmdToggleMuteMessages::read(FileRead& fr, EditorGameBase& egbase, MapObject
 		if (packet_version == kCurrentPacketVersionCmdToggleMuteMessages) {
 			PlayerCommand::read(fr, egbase, mol);
 			building_ = fr.unsigned_32();
-			all_ = fr.unsigned_8() ? 1 : 0;
+			all_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdToggleMuteMessages", packet_version, kCurrentPacketVersionCmdToggleMuteMessages);
@@ -2100,7 +2104,7 @@ void CmdMarkMapObjectForRemoval::read(FileRead& fr, EditorGameBase& egbase, MapO
 		if (packet_version == kCurrentPacketVersionCmdMarkMapObjectForRemoval) {
 			PlayerCommand::read(fr, egbase, mol);
 			object_ = fr.unsigned_32();
-			mark_ = fr.unsigned_8() ? 1 : 0;
+			mark_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError("CmdMarkMapObjectForRemoval", packet_version,
 			                            kCurrentPacketVersionCmdMarkMapObjectForRemoval);

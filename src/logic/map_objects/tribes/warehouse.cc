@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -47,7 +49,7 @@ namespace Widelands {
 
 namespace {
 
-static const Duration kCostlessWorkerSpawnInterval = Duration(2500);
+constexpr Duration kCostlessWorkerSpawnInterval = Duration(2500);
 constexpr int kFleeingUnitsCap = 500;
 
 // Goes through the list and removes all workers that are no longer in the
@@ -329,8 +331,8 @@ Warehouse Building
  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, tribes),
+                               Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, descriptions),
      conquers_(0),
      heal_per_second_(0) {
 	heal_per_second_ = table.get_int("heal_per_second");
@@ -600,8 +602,8 @@ bool Warehouse::init(EditorGameBase& egbase) {
 }
 
 void Warehouse::init_containers(const Player& player) {
-	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
-	DescriptionIndex const nr_workers = player.egbase().tribes().nrworkers();
+	DescriptionIndex const nr_wares = player.egbase().descriptions().nr_wares();
+	DescriptionIndex const nr_workers = player.egbase().descriptions().nr_workers();
 	supply_->set_nrwares(nr_wares);
 	supply_->set_nrworkers(nr_workers);
 
@@ -999,7 +1001,7 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 				// Create a new one
 				// NOTE: This code lies about the TrainingAttributes of the new worker
 				supply_->remove_workers(worker_id, 1);
-				const WorkerDescr& workerdescr = *game.tribes().get_worker_descr(worker_id);
+				const WorkerDescr& workerdescr = *game.descriptions().get_worker_descr(worker_id);
 				return workerdescr.create(game, get_owner(), this, position_);
 			}
 		}
@@ -1008,7 +1010,7 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 			// don't want to use an upgraded worker, so create new one.
 			create_worker(game, worker_id);
 		} else {
-			worker_id = game.tribes().get_worker_descr(worker_id)->becomes();
+			worker_id = game.descriptions().get_worker_descr(worker_id)->becomes();
 		}
 	} while (owner().tribe().has_worker(worker_id));
 
@@ -1442,8 +1444,8 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	return portdock_->expedition_bootstrap()->first_empty_inputqueue(index, type);
 }
 
-const BuildingSettings* Warehouse::create_building_settings() const {
-	WarehouseSettings* settings = new WarehouseSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
+	std::unique_ptr<WarehouseSettings> settings(new WarehouseSettings(descr(), owner().tribe()));
 	for (auto& pair : settings->ware_preferences) {
 		pair.second = get_ware_policy(pair.first);
 	}

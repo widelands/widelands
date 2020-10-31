@@ -4,7 +4,7 @@
 
 function send_building_lost_message(f)
    local message = building_lost(f.immovable.descr.name)
-   send_message(
+   send_to_inbox(
       p1,
       message.title,
       message.text,

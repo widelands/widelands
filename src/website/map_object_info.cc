@@ -29,10 +29,12 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "website/json/json.h"
 #include "website/website_common.h"
 
@@ -247,9 +249,12 @@ void write_tribes(Widelands::EditorGameBase& egbase, FileSystem* out_filesystem)
 	JSON::Array* json_tribes_array = json->add_array("tribes");
 
 	/// Tribes
-	const Widelands::Tribes& tribes = egbase.tribes();
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
 
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	if (tribeinfos.empty()) {
+		throw wexception("No tribe infos found");
+	}
 	for (const Widelands::TribeBasicInfo& tribe_info : tribeinfos) {
 		log_info("\n\n=========================\nWriting tribe: %s\n=========================\n",
 		         tribe_info.name.c_str());
@@ -265,7 +270,7 @@ void write_tribes(Widelands::EditorGameBase& egbase, FileSystem* out_filesystem)
 		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
 
 		const Widelands::TribeDescr& tribe =
-		   *tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
+		   *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));
 		write_buildings(tribe, out_filesystem);
 		write_wares(tribe, out_filesystem);
 		write_workers(tribe, out_filesystem);

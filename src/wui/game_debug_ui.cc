@@ -24,10 +24,10 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
@@ -80,7 +80,7 @@ MapObjectDebugWindow
 ==============================================================================
 */
 MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::MapObject& obj)
-   : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
+   : UI::Window(&parent, UI::WindowStyle::kWui, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
      object_(&obj),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
@@ -131,7 +131,7 @@ FieldDebugWindow
 */
 FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords const coords)
    : /** TRANSLATORS: Title for a window that shows debug information for a field on the map */
-     UI::Window(&parent, "field_debug", 0, 60, 300, 400, _("Debug Field")),
+     UI::Window(&parent, UI::WindowStyle::kWui, "field_debug", 0, 60, 300, 400, _("Debug Field")),
      text_(""),
      map_(parent.egbase().map()),
      coords_(map_.get_fcoords(coords)),
@@ -271,7 +271,7 @@ void FieldDebugWindow::think() {
 			const Widelands::ResourceAmount initial_amount = coords_.field->get_initial_res_amount();
 
 			str += (boost::format("Resource: %s\n") %
-			        ibase().egbase().world().get_resource(ridx)->name().c_str())
+			        ibase().egbase().descriptions().get_resource_descr(ridx)->name().c_str())
 			          .str();
 
 			str += (boost::format("  Amount: %i/%i\n") % static_cast<unsigned int>(ramount) %

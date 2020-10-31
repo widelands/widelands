@@ -386,11 +386,12 @@ public:
 		 * Call `set_constructionsite(true)` before using `constructionsite`,
 		 * and call `set_constructionsite(false)` before using `dismantlesite`.
 		 */
+		struct DismantlesiteInformation {
+			uint32_t progress;
+			const BuildingDescr* building;
+		};
 		union {
-			struct {
-				uint32_t progress;
-				const BuildingDescr* building;
-			} dismantlesite;
+			DismantlesiteInformation dismantlesite;
 			ConstructionsiteInformation* constructionsite;
 		};
 		bool is_constructionsite;
@@ -570,8 +571,7 @@ public:
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
 	void init_statistics();
-	void
-	read_statistics(FileRead&, uint16_t packet_version, const TribesLegacyLookupTable& lookup_table);
+	void read_statistics(FileRead&, uint16_t packet_version);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
@@ -729,7 +729,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };
 
-void find_former_buildings(const Tribes& tribes,
+void find_former_buildings(const Descriptions& descriptions,
                            const DescriptionIndex bi,
                            FormerBuildings* former_buildings);
 }  // namespace Widelands

@@ -32,13 +32,13 @@
 #include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -96,7 +96,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = kBuildingSilhouetteOpacity;
 	}
 
-	uint32_t animation_id;
+	// Initialize variable to make checks happy
+	uint32_t animation_id = animations[0].first;
 	Time time = Time();
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
@@ -138,8 +139,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
+                                             Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -169,9 +170,8 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s =
-	   g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
-	                              g_style_manager->building_statistics_style().construction_color());
+	*s = StyleManager::color_tag((boost::format(_("%i%% built")) % percent).str(),
+	                             g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -221,7 +221,8 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 		// Enhancement and/or built over immovable
 		for (auto it = old_buildings_.end(); it != old_buildings_.begin();) {
 			--it;
-			if (it->second.empty()) {
+			// 'true' means we're enhancing a building
+			if (it->second) {
 				const BuildingDescr* was_descr = owner().tribe().get_building_descr(it->first);
 				info_.was = was_descr;
 				buildcost = &building_->enhancement_cost();
@@ -300,7 +301,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		// Put the real building in place
 		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(std::make_pair(becomes_idx, ""));
+		old_buildings_.push_back(std::make_pair(becomes_idx, true));
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(game);
@@ -383,7 +384,8 @@ void ConstructionSite::enhance(const Game& game) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(std::make_pair(owner().tribe().building_index(building_->name()), ""));
+	old_buildings_.push_back(
+	   std::make_pair(owner().tribe().building_index(building_->name()), true));
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;
@@ -691,7 +693,6 @@ Overwrite as many values of the current settings with those of the given setting
 void ConstructionSite::apply_settings(const BuildingSettings& cs) {
 	assert(settings_);
 	settings_->apply(cs);
-	delete &cs;
 }
 
 /*

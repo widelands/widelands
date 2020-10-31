@@ -42,9 +42,16 @@ constexpr Widelands::PlayerNumber kMaxRecommendedPlayers = 8;
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
-	   /** TRANSLATORS: Window title in the editor when a player has selected more than the
-	      recommended number of players */
-	   : Window(parent, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
+	   : Window(parent,
+	            UI::WindowStyle::kWui,
+	            "editor_player_menu_warning_box",
+	            0,
+	            0,
+	            500,
+	            220,
+	            /** TRANSLATORS: Window title in the editor when a player has selected more than the
+	               recommended number of players */
+	            _("Too Many Players")),
 	     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
 	     warning_label_(
 	        &box_,
@@ -59,9 +66,13 @@ public:
 	          "purposes. Are you sure that you want more than 8 players?"),
 	        UI::Align::kLeft,
 	        UI::MultilineTextarea::ScrollMode::kNoScrolling),
-	     /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except for
-	        testing purposes. Are you sure that you want more than 8 players?' */
-	     reminder_choice_(&box_, Vector2i::zero(), _("Do not remind me again")),
+	     reminder_choice_(
+	        &box_,
+	        UI::PanelStyle::kWui,
+	        Vector2i::zero(),
+	        /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except
+	           for testing purposes. Are you sure that you want more than 8 players?' */
+	        _("Do not remind me again")),
 	     button_box_(&box_, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
 	     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 	     cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {
@@ -148,6 +159,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		eia().set_need_save(true);
 	}
 
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+
 	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
@@ -171,8 +184,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		   16, plr_name->get_h(), _("Tribe"), UI::DropdownType::kPictorial, UI::PanelStyle::kWui,
 		   UI::ButtonStyle::kWuiSecondary);
 
-		for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-			plr_tribe->add(_(tribeinfo.descname), tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+		for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
+			plr_tribe->add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
 			               false, tribeinfo.tooltip);
 		}
 
@@ -181,7 +194,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent,
 		               _("The tribe will be selected at random"));
 
 		plr_tribe->select((p <= map.get_nrplayers() &&
-		                   eia().egbase().tribes().tribe_exists(map.get_scenario_player_tribe(p))) ?
+		                   Widelands::tribe_exists(map.get_scenario_player_tribe(p), tribeinfos)) ?
 		                     map.get_scenario_player_tribe(p) :
 		                     "");
 		plr_tribe->selected.connect([this, p]() { player_tribe_clicked(p - 1); });
@@ -274,7 +287,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			rows_.at(pn - 1)->name->set_text(name);
 
 			const std::string& tribename = rows_.at(pn - 1)->tribe->get_selected();
-			assert(tribename.empty() || eia().egbase().tribes().tribe_exists(tribename));
+			assert(tribename.empty() || Widelands::tribe_exists(tribename));
 			map->set_scenario_player_tribe(pn, tribename);
 			rows_.at(pn - 1)->box->set_visible(true);
 		}
@@ -298,7 +311,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 
 void EditorPlayerMenu::player_tribe_clicked(size_t row) {
 	const std::string& tribename = rows_.at(row)->tribe->get_selected();
-	assert(tribename.empty() || eia().egbase().tribes().tribe_exists(tribename));
+	assert(tribename.empty() || Widelands::tribe_exists(tribename));
 	EditorInteractive& menu = eia();
 	menu.egbase().mutable_map()->set_scenario_player_tribe(row + 1, tribename);
 	menu.set_need_save(true);

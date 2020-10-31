@@ -28,9 +28,8 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter_program.h"
-#include "logic/map_objects/world/world.h"
-#include "map_io/world_legacy_lookup_table.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -496,7 +495,7 @@ Load / Save implementation
 
 // We need to bump this packet version every time we rename a critter, so that the world legacy
 // lookup table will work.
-constexpr uint8_t kCurrentPacketVersion = 3;
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 Critter::Loader::Loader() {
 }
@@ -516,10 +515,7 @@ const MapObjectProgram* Critter::Loader::get_program(const std::string& name) {
 	return critter.descr().get_program(name);
 }
 
-MapObject::Loader* Critter::load(EditorGameBase& egbase,
-                                 MapObjectLoader& mol,
-                                 FileRead& fr,
-                                 const WorldLegacyLookupTable& lookup_table) {
+MapObject::Loader* Critter::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -528,23 +524,12 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			const std::string critter_owner = fr.c_string();
-			std::string critter_name = fr.c_string();
-			const CritterDescr* descr = nullptr;
-
-			if (critter_owner == "world") {
-				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
-				descr =
-				   egbase.world().get_critter_descr(egbase.mutable_world()->load_critter(critter_name));
-			} else {
-				throw GameDataError(
-				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());
+			if (packet_version < 4) {
+				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
 
-			if (!descr) {
-				throw GameDataError(
-				   "undefined critter %s/%s", critter_owner.c_str(), critter_name.c_str());
-			}
+			const CritterDescr* descr = egbase.descriptions().get_critter_descr(
+			   egbase.mutable_descriptions()->load_critter(fr.c_string()));
 
 			Critter& critter = dynamic_cast<Critter&>(descr->create_object());
 			critter.creation_time_ = packet_version >= 3 ? Time(fr) : Time(0);
@@ -564,10 +549,6 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	const std::string save_owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
-	                                  "" :  // Tribes don't have critters
-	                                  "world";
-	fw.c_string(save_owner);
 	fw.c_string(descr().name());
 	creation_time_.save(fw);
 

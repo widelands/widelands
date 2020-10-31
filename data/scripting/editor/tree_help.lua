@@ -11,7 +11,6 @@ include "scripting/help.lua"
 return {
    func = function(tree_name)
       push_textdomain("widelands_editor")
-      local world = wl.World();
       local tree = wl.Editor():get_immovable_description(tree_name)
       local result = li_object(tree.name, "")
 

@@ -29,21 +29,24 @@
 #include "wlapplication_options.h"
 
 LoginBox::LoginBox(Panel& parent)
-   : Window(&parent, "login_box", 0, 0, 500, 280, _("Online Game Settings")) {
+   : Window(
+        &parent, UI::WindowStyle::kFsMenu, "login_box", 0, 0, 500, 280, _("Online Game Settings")) {
 	center_to_parent();
 
 	int32_t margin = 10;
 
+	// TODO(Nordfriese): Magic numbers everywhere. Box layout please…
 	ta_nickname = new UI::Textarea(this, margin, margin, 0, 0, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 70, 0, 0, _("Password:"));
-	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kWui);
-	eb_password = new UI::EditBox(this, 150, 70, 330, UI::PanelStyle::kWui);
+	eb_nickname = new UI::EditBox(this, 150, margin, 330, UI::PanelStyle::kFsMenu);
+	eb_password = new UI::EditBox(this, 150, 70, 330, UI::PanelStyle::kFsMenu);
 
-	cb_register = new UI::Checkbox(this, Vector2i(margin, 40), _("Log in to a registered account."),
-	                               "", get_inner_w() - 2 * margin);
+	cb_register =
+	   new UI::Checkbox(this, UI::PanelStyle::kFsMenu, Vector2i(margin, 40),
+	                    _("Log in to a registered account."), "", get_inner_w() - 2 * margin);
 
 	register_account = new UI::MultilineTextarea(
-	   this, margin, 105, 470, 140, UI::PanelStyle::kWui,
+	   this, margin, 105, 470, 140, UI::PanelStyle::kFsMenu,
 	   (boost::format(_("In order to use a registered "
 	                    "account, you need an account on the Widelands website. "
 	                    "Please log in at %s and set an online "
@@ -55,13 +58,13 @@ LoginBox::LoginBox(Panel& parent)
 	   this, "login",
 	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
 	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Save"));
+	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kFsMenuPrimary, _("Save"));
 
 	cancelbtn = new UI::Button(
 	   this, "cancel",
 	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 	                                   (get_inner_w() / 2 - 200) / 2,
-	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
+	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
 
 	loginbtn->sigclicked.connect([this]() { clicked_ok(); });
 	cancelbtn->sigclicked.connect([this]() { clicked_back(); });
@@ -193,7 +196,8 @@ bool LoginBox::check_password() {
 		// something went wrong -> show the error message
 		// idealy it is about the wrong password
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
-		UI::WLMessageBox wmb(this, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox wmb(
+		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();
 		eb_password->set_text("");
 		eb_password->focus();

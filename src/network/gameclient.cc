@@ -127,11 +127,11 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
  *  @return true to indicate that run is done.
  */
 bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FullscreenMenuLaunchMPG lgm(parent, parent, *parent);
+	FullscreenMenuLaunchMPG lgm(parent->fullscreen_menu_main(), parent, parent, *parent, *game);
 	modal = &lgm;
-	FullscreenMenuBase::MenuTarget code = lgm.run<FullscreenMenuBase::MenuTarget>();
+	MenuTarget code = lgm.run<MenuTarget>();
 	modal = nullptr;
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
@@ -193,11 +193,12 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game = nullptr;
 }
 
-GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
+GameClient::GameClient(FullscreenMenuMain& fsmm,
+                       const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl) {
+   : d(new GameClientImpl), fsmm_(fsmm) {
 
 	d->internet_ = internet;
 
@@ -552,10 +553,10 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.state = static_cast<PlayerSettings::State>(packet.unsigned_8());
 	player.name = packet.string();
 	player.tribe = packet.string();
-	player.random_tribe = packet.unsigned_8() == 1;
+	player.random_tribe = packet.unsigned_8();
 	player.initialization_index = packet.unsigned_8();
 	player.ai = packet.string();
-	player.random_ai = packet.unsigned_8() == 1;
+	player.random_ai = packet.unsigned_8();
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
@@ -573,7 +574,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	d->settings.users.at(number).name = packet.string();
 	d->settings.users.at(number).position = packet.signed_32();
-	d->settings.users.at(number).ready = packet.unsigned_8() == 1;
+	d->settings.users.at(number).ready = packet.unsigned_8();
 
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
@@ -664,8 +665,8 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
 	d->settings.map_theme = packet.string();
 	d->settings.map_background = packet.string();
-	d->settings.savegame = packet.unsigned_8() == 1;
-	d->settings.scenario = packet.unsigned_8() == 1;
+	d->settings.savegame = packet.unsigned_8();
+	d->settings.scenario = packet.unsigned_8();
 	log_info("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
 	         d->settings.mapfilename.c_str());
 
@@ -728,7 +729,7 @@ void GameClient::handle_new_file(RecvPacket& packet) {
 	d->file_->bytes = bytes;
 	d->file_->filename = path;
 	d->file_->md5sum = md5;
-	size_t position = path.rfind(g_fs->file_separator(), path.size() - 2);
+	size_t position = path.rfind(FileSystem::file_separator(), path.size() - 2);
 	if (position != std::string::npos) {
 		path.resize(position);
 		g_fs->ensure_directory_exists(path);
@@ -1023,7 +1024,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		if (!d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
-		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+		d->modal->end_modal<MenuTarget>(MenuTarget::kOk);
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
@@ -1118,8 +1119,8 @@ void GameClient::disconnect(const std::string& reason,
 			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
 		}
 
-		UI::WLMessageBox mmb(
-		   d->modal, _("Disconnected from Host"), msg, UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mmb(d->modal, UI::WindowStyle::kWui, _("Disconnected from Host"), msg,
+		                     UI::WLMessageBox::MBoxType::kOk);
 		mmb.run<UI::Panel::Returncodes>();
 	}
 
@@ -1130,7 +1131,7 @@ void GameClient::disconnect(const std::string& reason,
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.
 	if (d->modal) {
-		d->modal->end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+		d->modal->end_modal<MenuTarget>(MenuTarget::kBack);
 	}
 	d->modal = nullptr;
 }

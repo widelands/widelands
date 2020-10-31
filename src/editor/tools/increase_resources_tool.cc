@@ -21,23 +21,23 @@
 
 #include "editor/editorinteractive.h"
 #include "logic/field.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
 int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndTriangle<>& center,
                                                        EditorInteractive& eia,
                                                        EditorActionArgs* args,
                                                        Widelands::Map* map) {
-	const Widelands::World& world = eia.egbase().world();
+	const Widelands::Descriptions& descriptions = eia.egbase().descriptions();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 	   *map, Widelands::Area<Widelands::FCoords>(map->get_fcoords(center.node), args->sel_radius));
 	do {
 		Widelands::ResourceAmount amount = mr.location().field->get_resources_amount();
 		Widelands::ResourceAmount max_amount =
 		   args->current_resource != Widelands::kNoResource ?
-		      world.get_resource(args->current_resource)->max_amount() :
+		      descriptions.get_resource_descr(args->current_resource)->max_amount() :
 		      0;
 
 		amount += args->change_by;
@@ -47,7 +47,7 @@ int32_t EditorIncreaseResourcesTool::handle_click_impl(const Widelands::NodeAndT
 
 		if ((mr.location().field->get_resources() == args->current_resource ||
 		     !mr.location().field->get_resources_amount()) &&
-		    map->is_resource_valid(world, mr.location(), args->current_resource) &&
+		    map->is_resource_valid(descriptions, mr.location(), args->current_resource) &&
 		    mr.location().field->get_resources_amount() != max_amount) {
 
 			args->original_resource.push_back(

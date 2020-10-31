@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
@@ -39,7 +41,7 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~WarehouseDescr() override {
 	}
 
@@ -202,7 +204,7 @@ public:
 	// Returns the first matching not completely filled waresqueue of the expedition if this is a
 	// port.
 	// Will throw an exception otherwise or if all queues of this type are full.
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
