@@ -51,10 +51,7 @@ inline bool from_unsigned(unsigned value) {
 	return value == 1;
 }
 
-void MapPlayersViewPacket::read(FileSystem& fs,
-                                EditorGameBase& egbase,
-                                const WorldLegacyLookupTable& world_lookup_table,
-                                const TribesLegacyLookupTable& tribes_lookup_table) {
+void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	if (!fr.try_open(fs, "binary/view")) {
 		// TODO(Nordfriese): Savegame compatibility – require this packet after v1.0
@@ -299,43 +296,34 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							field->map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di =
-							   descriptions.building_index(tribes_lookup_table.lookup_building(descr));
-							if (di != INVALID_INDEX) {
-								field->map_object_descr = descriptions.get_building_descr(di);
+							std::pair<bool, DescriptionIndex> imm =
+							   descriptions.load_building_or_immovable(descr);
+							if (imm.first) {
+								field->map_object_descr = descriptions.get_building_descr(imm.second);
 							} else {
-								di = descriptions.immovable_index(tribes_lookup_table.lookup_immovable(
-								   world_lookup_table.lookup_immovable(descr)));
-								if (di != INVALID_INDEX) {
-									field->map_object_descr = descriptions.get_immovable_descr(di);
-								} else {
-									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
-								}
+								field->map_object_descr = descriptions.get_immovable_descr(imm.second);
 							}
 						}
 
 						if (field->map_object_descr->type() == MapObjectType::DISMANTLESITE) {
 							field->set_constructionsite(false);
-							field->dismantlesite.building =
-							   descriptions.get_building_descr(descriptions.safe_building_index(
-							      tribes_lookup_table.lookup_building(fr.string())));
+							field->dismantlesite.building = descriptions.get_building_descr(
+							   descriptions.safe_building_index(fr.string()));
 							field->dismantlesite.progress = fr.unsigned_32();
 						} else if (field->map_object_descr->type() == MapObjectType::CONSTRUCTIONSITE) {
 							field->set_constructionsite(true);
-							field->constructionsite->becomes =
-							   descriptions.get_building_descr(descriptions.safe_building_index(
-							      tribes_lookup_table.lookup_building(fr.string())));
+							field->constructionsite->becomes = descriptions.get_building_descr(
+							   descriptions.safe_building_index(fr.string()));
 							descr = fr.string();
 							field->constructionsite->was =
 							   descr.empty() ?
 							      nullptr :
-							      descriptions.get_building_descr(descriptions.safe_building_index(
-							         tribes_lookup_table.lookup_building(descr)));
+							      descriptions.get_building_descr(descriptions.safe_building_index(descr));
 
 							for (uint32_t j = fr.unsigned_32(); j; --j) {
 								field->constructionsite->intermediates.push_back(
-								   descriptions.get_building_descr(descriptions.safe_building_index(
-								      tribes_lookup_table.lookup_building(fr.string()))));
+								   descriptions.get_building_descr(
+								      descriptions.safe_building_index(fr.string())));
 							}
 
 							field->constructionsite->totaltime = Duration(fr);
@@ -415,16 +403,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						} else if (descr == "portdock") {
 							f.map_object_descr = &g_portdock_descr;
 						} else {
-							DescriptionIndex di = descriptions.building_index(descr);
-							if (di != INVALID_INDEX) {
-								f.map_object_descr = descriptions.get_building_descr(di);
+							std::pair<bool, DescriptionIndex> imm =
+							   descriptions.load_building_or_immovable(descr);
+							if (imm.first) {
+								f.map_object_descr = descriptions.get_building_descr(imm.second);
 							} else {
-								di = descriptions.immovable_index(descr);
-								if (di != INVALID_INDEX) {
-									f.map_object_descr = descriptions.get_immovable_descr(di);
-								} else {
-									throw GameDataError("invalid map_object_descr: %s", descr.c_str());
-								}
+								f.map_object_descr = descriptions.get_immovable_descr(imm.second);
 							}
 						}
 

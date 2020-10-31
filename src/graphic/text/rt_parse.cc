@@ -49,10 +49,7 @@ std::string Attr::get_string() const {
 }
 
 bool Attr::get_bool() const {
-	if (value_ == "true" || value_ == "1" || value_ == "yes") {
-		return true;
-	}
-	return false;
+	return value_ == "true" || value_ == "1" || value_ == "yes";
 }
 
 RGBColor Attr::get_color() const {

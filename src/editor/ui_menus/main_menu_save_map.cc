@@ -366,10 +366,6 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	// If only the backup failed (likely just because of a file lock),
 	// then leave the dialog open for the player to try with a new filename.
-	if (error == GenericSaveHandler::Error::kBackupFailed) {
-		return false;
-	}
-
 	// In the other error cases close the dialog.
-	return true;
+	return error != GenericSaveHandler::Error::kBackupFailed;
 }

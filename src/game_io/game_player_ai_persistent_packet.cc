@@ -42,12 +42,12 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 				// Make sure that all containers are reset properly etc.
 				player->ai_data.initialize();
 				// Contains Genetic algorithm data
-				player->ai_data.initialized = (fr.unsigned_8() == 1) ? true : false;
+				player->ai_data.initialized = fr.unsigned_8();
 				player->ai_data.colony_scan_area = fr.unsigned_32();
 				player->ai_data.trees_around_cutters = fr.unsigned_32();
 				player->ai_data.expedition_start_time = Time(fr);
 				player->ai_data.ships_utilization = fr.unsigned_16();
-				player->ai_data.no_more_expeditions = (fr.unsigned_8() == 1) ? true : false;
+				player->ai_data.no_more_expeditions = fr.unsigned_8();
 				player->ai_data.last_attacked_player = fr.signed_16();
 				player->ai_data.least_military_score = fr.unsigned_32();
 				player->ai_data.target_military_score = fr.unsigned_32();
@@ -106,7 +106,7 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					// Buildings saved as strings
 					const std::string building_string = fr.string();
 					const Widelands::DescriptionIndex bld_idx =
-					   player->tribe().building_index(building_string);
+					   player->tribe().safe_building_index(building_string);
 					player->ai_data.remaining_basic_buildings.emplace(bld_idx, fr.unsigned_32());
 				}
 				// Basic sanity check for remaining basic buildings

@@ -1083,10 +1083,7 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LALT:
 			return false;
 		}
-		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12)) {
-			return false;
-		}
-		return true;
+		return !(code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12));
 	}
 
 	return false;

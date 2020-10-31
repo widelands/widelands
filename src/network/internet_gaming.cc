@@ -1046,10 +1046,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
  * Check for vaild username characters.
  */
 bool InternetGaming::valid_username(const std::string& username) {
-	if (username.empty() ||
-	    username.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
-	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
-		return false;
-	}
-	return true;
+	return !(username.empty() || username.find_first_not_of(
+	                                "abcdefghijklmnopqrstuvwxyz"
+	                                "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size());
 }
