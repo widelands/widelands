@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "logic/filesystem_constants.h"
 #include "scripting/lua_interface.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
