@@ -30,7 +30,7 @@ constexpr int kPadding = 4;
 
 TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
    : UI::Window(parent,
-				UI::WindowStyle::kFsMenu,
+                UI::WindowStyle::kFsMenu,
                 "training_wheel_options",
                 parent->get_x(),
                 parent->get_y(),
@@ -39,7 +39,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
                 /** TRANSLATORS: Window Title in Options */
                 pgettext("teaching_progress", "Edit Teaching Progress")),
      lua_(new LuaInterface()),
-     training_wheels_(new Widelands::TrainingWheels(*lua_)), mark_unmark_state_(false) {
+     training_wheels_(new Widelands::TrainingWheels(*lua_)),
+     mark_unmark_state_(false) {
 
 	// Some horizontal padding
 	UI::Box* wrapper_box = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
@@ -53,9 +54,10 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	main_box->add_space(0);
 
 	const auto& objectives = training_wheels_->all_objectives();
-	UI::Textarea* title_label = new UI::Textarea(main_box,
-	                      /** TRANSLATORS: Title above a list */
-	                      pgettext("teaching_progress", "Teaching objectives"));
+	UI::Textarea* title_label =
+	   new UI::Textarea(main_box,
+	                    /** TRANSLATORS: Title above a list */
+	                    pgettext("teaching_progress", "Teaching objectives"));
 	title_label->set_style(g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading));
 	main_box->add(title_label, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box->add_space(0);
@@ -73,15 +75,14 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 		if (!objective.second.solved) {
 			mark_unmark_state_ = true;
 		}
-		UI::Checkbox* checkbox = new UI::Checkbox(list_box, UI::PanelStyle::kFsMenu,
-												  Vector2i::zero(),
-												  objective.second.descname);
+		UI::Checkbox* checkbox = new UI::Checkbox(
+		   list_box, UI::PanelStyle::kFsMenu, Vector2i::zero(), objective.second.descname);
 		checkbox->set_state(objective.second.solved);
 		list_box->add(checkbox);
-		checkboxes_.insert(std::make_pair(objective.first, TrainingWheelOptions::Entry(objective.second, checkbox)));
+		checkboxes_.insert(
+		   std::make_pair(objective.first, TrainingWheelOptions::Entry(objective.second, checkbox)));
 		list_box->add_space(0);
 	}
-
 
 	main_box->add_space(kPadding);
 
@@ -93,8 +94,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	horizontal_box->add_inf_space();
 
 	// Close without any action
-	UI::Button* cancel_button =
-	   new UI::Button(horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
+	UI::Button* cancel_button = new UI::Button(
+	   horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
 	horizontal_box->add(cancel_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	// Ensure some space between the buttons
@@ -103,10 +104,9 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	cancel_button->sigclicked.connect(
 	   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
 
-
 	// Reset states of the checkboxes
-	UI::Button* reset_button =
-	   new UI::Button(horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset"));
+	UI::Button* reset_button = new UI::Button(
+	   horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset"));
 	horizontal_box->add(reset_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	horizontal_box->add_space(0);
@@ -128,8 +128,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	toggle_mark_unmark_all_button();
 	toggle_mark_unmark_all_button();
 
-	mark_unmark_button_->sigclicked.connect(
-	   [this]() {
+	mark_unmark_button_->sigclicked.connect([this]() {
 		for (const auto& checkboxinfo : checkboxes_) {
 			checkboxinfo.second.checkbox->set_state(mark_unmark_state_);
 		}
@@ -144,8 +143,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	horizontal_box->add_inf_space();
 	horizontal_box->add_space(0);
 
-	ok_button->sigclicked.connect(
-	   [this]() {
+	ok_button->sigclicked.connect([this]() {
 		for (const auto& checkboxinfo : checkboxes_) {
 			const bool solve = checkboxinfo.second.checkbox->get_state();
 			if (solve) {

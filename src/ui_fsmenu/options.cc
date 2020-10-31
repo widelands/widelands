@@ -281,15 +281,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                       UI::PanelStyle::kFsMenu,
                       Vector2i::zero(),
                       _("Teach me how to play")),
-     training_wheels_button_(&training_wheels_box_,
-                            "edit_training_wheels",
-                            0,
-                            0,
-                            0,
-                            0,
-                            UI::ButtonStyle::kFsMenuSecondary,
-							 /** TRANSLATORS: Button to bring up a window to edit teaching progress in the Options */
-                            _("Progress…")),
+     training_wheels_button_(
+        &training_wheels_box_,
+        "edit_training_wheels",
+        0,
+        0,
+        0,
+        0,
+        UI::ButtonStyle::kFsMenuSecondary,
+        /** TRANSLATORS: Button to bring up a window to edit teaching progress in the Options */
+        _("Progress…")),
      os_(opt) {
 
 	do_not_layout_on_resolution_change();

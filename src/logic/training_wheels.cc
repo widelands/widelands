@@ -50,7 +50,9 @@ TrainingWheels::TrainingWheels(LuaInterface& lua)
 		section.set_bool(key.c_str(), is_solved);
 		std::unique_ptr<LuaTable> dependencies = wheel_table->get_table("dependencies");
 		if (is_solved) {
-			solved_objectives_.insert(std::make_pair(key, TrainingWheel(true, key, wheel_table->get_string("descname"), dependencies->array_entries<std::string>())));
+			solved_objectives_.insert(
+			   std::make_pair(key, TrainingWheel(true, key, wheel_table->get_string("descname"),
+			                                     dependencies->array_entries<std::string>())));
 			wheel_table->do_not_warn_about_unaccessed_keys();
 		} else {
 			idle_objectives_.insert(
@@ -124,7 +126,8 @@ void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_
 		solved_objectives_.insert(std::make_pair(objective, it->second));
 		running_objectives_.erase(it);
 	} else {
-		solved_objectives_.insert(std::make_pair(objective, TrainingWheel(true, objective, objective, {})));
+		solved_objectives_.insert(
+		   std::make_pair(objective, TrainingWheel(true, objective, objective, {})));
 	}
 
 	Section& section = profile_.pull_section("global");
