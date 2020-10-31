@@ -32,6 +32,7 @@ constexpr int kPadding = 4;
 
 TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
    : UI::Window(parent,
+				UI::WindowStyle::kFsMenu,
                 "training_wheel_options",
                 parent->get_x(),
                 parent->get_y(),
