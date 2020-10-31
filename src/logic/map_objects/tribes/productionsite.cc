@@ -122,33 +122,34 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
 		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
 			const std::string& ware_or_worker_name = entry_table->get_string("name");
-			// Check if ware/worker exists already and if not, try to load it. Will throw a
-			// GameDataError on failure.
-			const WareWorker wareworker = descriptions.try_load_ware_or_worker(ware_or_worker_name);
-
 			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw GameDataError("amount is out of range 1 .. 255");
 				}
-				if (wareworker == WareWorker::wwWARE) {
-					const DescriptionIndex idx = descriptions.ware_index(ware_or_worker_name);
+				// Check if ware/worker exists already and if not, try to load it. Will throw a
+				// GameDataError on failure.
+				const std::pair<WareWorker, DescriptionIndex> wareworker =
+				   descriptions.load_ware_or_worker(ware_or_worker_name);
+				switch (wareworker.first) {
+				case WareWorker::wwWARE: {
 					for (const auto& temp_inputs : input_wares()) {
-						if (temp_inputs.first == idx) {
+						if (temp_inputs.first == wareworker.second) {
 							throw GameDataError(
 							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-					input_wares_.push_back(WareAmount(idx, amount));
-				} else {
-					const DescriptionIndex idx = descriptions.worker_index(ware_or_worker_name);
+					input_wares_.push_back(WareAmount(wareworker.second, amount));
+				} break;
+				case WareWorker::wwWORKER: {
 					for (const auto& temp_inputs : input_workers()) {
-						if (temp_inputs.first == idx) {
+						if (temp_inputs.first == wareworker.second) {
 							throw GameDataError("worker type '%s' was declared multiple times",
 							                    ware_or_worker_name.c_str());
 						}
 					}
-					input_workers_.push_back(WareAmount(idx, amount));
+					input_workers_.push_back(WareAmount(wareworker.second, amount));
+				} break;
 				}
 			} catch (const WException& e) {
 				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
@@ -350,7 +351,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (nr_requests > 0) {
-		*s = g_style_manager->color_tag(
+		*s = StyleManager::color_tag(
 		   (nr_requests == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker missing") :
@@ -362,7 +363,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (nr_coming > 0) {
-		*s = g_style_manager->color_tag(
+		*s = StyleManager::color_tag(
 		   (nr_coming == 1 ?
 		       /** TRANSLATORS: Productivity label on a building if there is 1 worker missing */
 		       _("Worker is coming") :
@@ -374,7 +375,7 @@ void ProductionSite::update_statistics_string(std::string* s) {
 	}
 
 	if (is_stopped_) {
-		*s = g_style_manager->color_tag(
+		*s = StyleManager::color_tag(
 		   _("(stopped)"), g_style_manager->building_statistics_style().neutral_color());
 		return;
 	}
@@ -458,7 +459,7 @@ void ProductionSite::format_statistics_string() {
 
 	// boost::format would treat uint8_t as char
 	const unsigned int percent = std::min(get_actual_statistics() * 100 / 98, 100);
-	const std::string perc_str = g_style_manager->color_tag(
+	const std::string perc_str = StyleManager::color_tag(
 	   (boost::format(_("%i%%")) % percent).str(),
 	   (percent < 33) ?
 	      g_style_manager->building_statistics_style().low_color() :
@@ -484,7 +485,7 @@ void ProductionSite::format_statistics_string() {
 
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
-		   (boost::format("%s\u2009%s") % perc_str % g_style_manager->color_tag(trend, color)).str();
+		   (boost::format("%s\u2009%s") % perc_str % StyleManager::color_tag(trend, color)).str();
 	} else {
 		statistics_string_on_changed_statistics_ = perc_str;
 	}
@@ -1107,8 +1108,9 @@ void ProductionSite::unnotify_player() {
 	set_production_result("");
 }
 
-const BuildingSettings* ProductionSite::create_building_settings() const {
-	ProductionsiteSettings* settings = new ProductionsiteSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings() const {
+	std::unique_ptr<ProductionsiteSettings> settings(
+	   new ProductionsiteSettings(descr(), owner().tribe()));
 	settings->stopped = is_stopped_;
 	for (auto& pair : settings->ware_queues) {
 		pair.second.priority = get_priority(wwWARE, pair.first, false);

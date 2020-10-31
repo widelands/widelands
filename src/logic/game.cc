@@ -592,8 +592,9 @@ bool Game::run(StartGameType const start_game_type,
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
-		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
-		                          std::string("_") + prefix_for_replays + kReplayExtension;
+		const std::string fname = kReplayDir + FileSystem::file_separator() +
+		                          std::string(timestring()) + std::string("_") + prefix_for_replays +
+		                          kReplayExtension;
 		if (writereplay_) {
 			log_info_time(get_gametime(), "Starting replay writer\n");
 

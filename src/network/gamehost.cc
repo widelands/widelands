@@ -506,7 +506,10 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(FullscreenMenuMain& f, const std::string& playername, bool internet)
+GameHost::GameHost(FullscreenMenuMain& f,
+                   const std::string& playername,
+                   std::vector<Widelands::TribeBasicInfo> tribeinfos,
+                   bool internet)
    : fsmm_(f), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log_info("[Host]: starting up.\n");
 
@@ -543,7 +546,9 @@ GameHost::GameHost(FullscreenMenuMain& f, const std::string& playername, bool in
 	d->syncreport_pending = false;
 	d->syncreport_time = Time(0);
 
-	d->settings.tribes = Widelands::get_all_tribeinfos();
+	assert(!tribeinfos.empty());
+	d->settings.tribes = std::move(tribeinfos);
+
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -2134,7 +2139,6 @@ void GameHost::handle_disconnect(uint32_t const client_num, RecvPacket& r) {
 		std::string arg = r.string();
 		disconnect_client(client_num, reason, false, arg);
 	}
-	return;
 }
 
 void GameHost::handle_ping(Client& client) {
@@ -2148,7 +2152,6 @@ void GameHost::handle_ping(Client& client) {
 	client.playernum = UserSettings::not_connected();
 	d->net->close(client.sock_id);
 	client.sock_id = 0;
-	return;
 }
 
 /** Wait for NETCMD_HELLO and handle unexpected other commands */
@@ -2184,7 +2187,7 @@ void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
 		}
 		std::string tribe = r.string();
-		bool random_tribe = r.unsigned_8() == 1;
+		bool random_tribe = r.unsigned_8();
 		set_player_tribe(num, tribe, random_tribe);
 	}
 }

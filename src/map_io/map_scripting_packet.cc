@@ -62,7 +62,7 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 			write_tribes_dir(target_fs, map_fs, file);
 		} else {
 			// Write file
-			const std::string filename(map_fs->fs_filename(file.c_str()));
+			const std::string filename(FileSystem::fs_filename(file.c_str()));
 			// TODO(GunChleoc): Savegame compatibility, forbid "helptexts.lua" after v1.0
 			if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" ||
 			    boost::ends_with(filename, ".png")) {

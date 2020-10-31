@@ -368,7 +368,7 @@ int LuaPlayer::send_to_inbox(lua_State* L) {
 	Widelands::Coords c = Widelands::Coords::null();
 	Widelands::Message::Status st = Widelands::Message::Status::kNew;
 	bool popup = false;
-	std::string sub_type = "";
+	std::string sub_type;
 
 	Widelands::Game& game = get_game(L);
 	Widelands::Player& plr = get(L, game);
