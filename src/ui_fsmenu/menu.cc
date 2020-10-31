@@ -48,7 +48,8 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, const std::string& name, const std:
      vertical_padding_box_(
         &horizontal_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "main vertical"),
      main_box_(&vertical_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "main"),
-     header_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "header") {
+     header_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "header"),
+     standard_height_(get_h() * 9 / 200) {
 	horizontal_padding_box_.add_space(10 * padding);
 	horizontal_padding_box_.add(&vertical_padding_box_, UI::Box::Resizing::kExpandBoth);
 	horizontal_padding_box_.add_space(10 * padding);
@@ -69,6 +70,9 @@ void BaseMenu::layout() {
 	   horizontal_padding_box_.get_w() - 2 * 10 * padding, horizontal_padding_box_.get_h());
 	printBox(horizontal_padding_box_);
 	printBox(vertical_padding_box_);
+	//	standard_height = 6 * padding /* * some_factor*/;
+	standard_height_ = get_h() * 9 / 200;
+	log_dbg("window height: %d, standard height", get_h(), standard_height_);
 }
 
 TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
@@ -132,6 +136,7 @@ void TwoColumnsBackNavigationMenu::layout() {
 	TwoColumnsMenu::layout();
 	printBox(right_column_content_box_);
 	printBox(button_box_);
+	//	back_.set_desired_size(0, standard_height_);
 }
 
 bool TwoColumnsBackNavigationMenu::handle_key(bool down, SDL_Keysym code) {
@@ -168,6 +173,7 @@ TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 
 void TwoColumnsNavigationMenu::layout() {
 	TwoColumnsBackNavigationMenu::layout();
+	//	ok_.set_desired_size(0, standard_height_);
 }
 
 bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {

@@ -44,6 +44,7 @@ protected:
 	void layout() override;
 
 	UI::Box main_box_, header_box_;
+	uint32_t standard_height_;
 };
 
 class TwoColumnsMenu : public BaseMenu {
