@@ -119,7 +119,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
    : WorkerDescr(init_descname, MapObjectType::WORKER, table, descriptions) {
 }
 
-WorkerDescr::~WorkerDescr() {
+WorkerDescr::~WorkerDescr() { // NOLINT
+	// WorkerProgram needs this
 }
 
 void WorkerDescr::set_default_target_quantity(int quantity) {

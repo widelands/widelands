@@ -1789,7 +1789,8 @@ Renderer::Renderer(ImageCache* image_cache,
 	TextureCache* render(const std::string&, uint16_t, const TagSet&);
 }
 
-Renderer::~Renderer() {
+Renderer::~Renderer() { // NOLINT
+	// FontCache, FontHandler and Parser need this
 }
 
 std::shared_ptr<RenderNode>
