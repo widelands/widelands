@@ -2187,7 +2187,7 @@ void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
 		}
 		std::string tribe = r.string();
-		bool random_tribe = r.unsigned_8() == 1;
+		bool random_tribe = r.unsigned_8();
 		set_player_tribe(num, tribe, random_tribe);
 	}
 }
