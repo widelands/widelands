@@ -359,14 +359,8 @@ EditorGameBase::warp_dismantlesite(const Coords& c,
                                    const FormerBuildings& former_buildings,
                                    const std::map<DescriptionIndex, Quantity>& preserved_wares) {
 	Player* plr = get_player(owner);
-	const TribeDescr& tribe = plr->tribe();
 
-	BuildingDescr const* const descr =
-	   tribe.get_building_descr(tribe.safe_building_index("dismantlesite"));
-
-	upcast(const DismantleSiteDescr, ds_descr, descr);
-
-	return *new DismantleSite(*ds_descr, *this, c, plr, loading, former_buildings, preserved_wares);
+	return *new DismantleSite(*plr->egbase().descriptions().dismantlesite(), *this, c, plr, loading, former_buildings, preserved_wares);
 }
 
 /**
@@ -454,7 +448,9 @@ Bob& EditorGameBase::create_ship(const Coords& c,
 
 Bob& EditorGameBase::create_ship(const Coords& c, const std::string& name, Player* owner) {
 	try {
-		return create_ship(c, descriptions().safe_ship_index(name), owner);
+		const DescriptionIndex ship_index = descriptions().ship_index(name);
+		assert(ship_index != Widelands::INVALID_INDEX);
+		return create_ship(c, ship_index, owner);
 	} catch (const GameDataError& e) {
 		throw GameDataError("create_ship(%i,%i,%s,%s): ship not found: %s", c.x, c.y, name.c_str(),
 		                    owner->get_name().c_str(), e.what());

@@ -323,9 +323,7 @@ Create a construction site for this type of building
 ===============
 */
 Building& BuildingDescr::create_constructionsite() const {
-	BuildingDescr const* const descr =
-	   descriptions_.get_building_descr(descriptions_.safe_building_index("constructionsite"));
-	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descr->create_object());
+	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descriptions_.constructionsite()->create_object());
 	csite.set_building(*this);
 
 	return csite;
@@ -844,7 +842,7 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 void Building::add_worker(Worker& worker) {
 	// Builders should make partially finished building see, but not finished buildings.
 	// So we prevent builders from seeing here and override this in PartiallyFinishedBuilding.
-	if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
+	if (owner().tribe().worker_index(worker.descr().name()) != owner().tribe().builder()) {
 		set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
@@ -920,7 +918,7 @@ void Building::send_message(Game& game,
                             const Duration& throttle_time,
                             uint32_t throttle_radius) {
 	if (mute_messages() ||
-	    owner().is_muted(game.descriptions().safe_building_index(descr().name()))) {
+	    owner().is_muted(game.descriptions().building_index(descr().name()))) {
 		return;
 	}
 

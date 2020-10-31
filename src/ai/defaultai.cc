@@ -696,10 +696,17 @@ void DefaultAI::late_initialization() {
 		bo.max_needed_preciousness = 0;
 
 		for (auto& ph : bh.supported_production()) {
-			bo.production_hints.insert(tribe_->safe_ware_index(ph));
+			const Widelands::DescriptionIndex supported_ware_index = tribe_->ware_index(ph);
+			assert(supported_ware_index != Widelands::INVALID_INDEX);
+			bo.production_hints.insert(supported_ware_index);
 		}
 		// I just presume cut wood is named "log" in the game
-		if (bo.production_hints.count(tribe_->safe_ware_index("log"))) {
+
+		const Widelands::DescriptionIndex log_index = tribe_->ware_index("log");
+		if (log_index == Widelands::INVALID_INDEX ) {
+			log_warn("The AI needs the ware 'log' to be defined. It will probably not function well.");
+		}
+		if (bo.production_hints.count(log_index)) {
 			bo.set_is(BuildingAttribute::kRanger);
 		}
 		// Is total count of this building limited by AI mode?
@@ -2514,7 +2521,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	assert(persistent_data->target_military_score >= persistent_data->least_military_score);
 
 	// we must calculate wood policy
-	const Widelands::DescriptionIndex wood_index = tribe_->safe_ware_index("log");
+	const Widelands::DescriptionIndex wood_index = tribe_->ware_index("log");
+	if (wood_index == Widelands::INVALID_INDEX ) {
+		log_warn("The AI needs the ware 'log' to be defined. It will probably not function well.");
+	}
 	// stocked wood is to be in some propotion to productionsites and
 	// constructionsites (this proportion is bit artifical, or we can say
 	// it is proportion to the size of economy). Plus some positive 'margin'

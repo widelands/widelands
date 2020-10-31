@@ -414,7 +414,8 @@ bool BuildingObserver::has_collected_map_resource() const {
 void BuildingObserver::set_collected_map_resource(const Widelands::TribeDescr& tribe,
                                                   const std::string& ware_name) {
 	if (!ware_name.empty()) {
-		collected_map_resource = tribe.safe_ware_index(ware_name);
+		collected_map_resource = tribe.ware_index(ware_name);
+		assert(has_collected_map_resource());
 	} else {
 		collected_map_resource = Widelands::INVALID_INDEX;
 	}

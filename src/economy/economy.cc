@@ -921,7 +921,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
 				   std::min(min_workers_createable, pair.second.at(di) / costpair.second);
 				plan_at_least_one |= pair.first->target_quantity(di).permanent == 0;
 			} else {
-				di = tribe.safe_worker_index(costpair.first);
+				di = tribe.worker_index(costpair.first);
 				assert(tribe.has_worker(di));
 				min_workers_createable = std::max(min_workers_createable, wares_or_workers_.stock(di));
 				// TODO(Nordfriese): As long as worker buildcosts contain only wares and carriers, this

@@ -244,7 +244,9 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
 	}
 	collected_by_.insert(prodsite);
 	for (const std::string& immo : became_from_) {
-		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(immo))
+		const DescriptionIndex immovable_index = descriptions.immovable_index(immo);
+		assert(immovable_index != Widelands::INVALID_INDEX);
+		descriptions.get_mutable_immovable_descr(immovable_index)
 		   ->add_collected_by(descriptions, prodsite);
 	}
 }

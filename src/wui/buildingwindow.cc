@@ -193,7 +193,7 @@ void BuildingWindow::think() {
 		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
 		                                                    _("Mute this building’s messages"));
 		if (building->owner().is_muted(
-		       building->owner().tribe().safe_building_index(building->descr().name()))) {
+		       building->owner().tribe().building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
 			mute_all_->set_pic(g_image_cache->get(kImgUnmuteAll));
 			mute_all_->set_tooltip(_("All buildings of this type are muted – click to unmute"));

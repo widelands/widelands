@@ -1181,7 +1181,9 @@ void Warehouse::create_worker(Game& game, DescriptionIndex const worker) {
 			// Update statistics accordingly
 			get_owner()->ware_consumed(id_ware, buildcost.second);
 		} else {
-			remove_workers(owner().tribe().safe_worker_index(input), buildcost.second);
+			const DescriptionIndex worker_index = owner().tribe().worker_index(input);
+			assert(worker_index != Widelands::INVALID_INDEX);
+			remove_workers(worker_index, buildcost.second);
 		}
 	}
 

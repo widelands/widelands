@@ -371,12 +371,14 @@ void Descriptions::add_object_description(const LuaTable& table, MapObjectType t
 	case MapObjectType::CARRIER:
 		workers_->add(new CarrierDescr(type_descname, table, *this));
 		break;
-	case MapObjectType::CONSTRUCTIONSITE:
-		buildings_->add(new ConstructionSiteDescr(type_descname, table, *this));
-		break;
-	case MapObjectType::DISMANTLESITE:
-		buildings_->add(new DismantleSiteDescr(type_descname, table, *this));
-		break;
+	case MapObjectType::CONSTRUCTIONSITE: {
+		Widelands::DescriptionIndex constructionsite_index = buildings_->add(new ConstructionSiteDescr(type_descname, table, *this));
+		constructionsite_ = dynamic_cast<const ConstructionSiteDescr*>(get_building_descr(constructionsite_index));
+	} break;
+	case MapObjectType::DISMANTLESITE: {
+		Widelands::DescriptionIndex dismantlesite_index = buildings_->add(new DismantleSiteDescr(type_descname, table, *this));
+		dismantlesite_ = dynamic_cast<const DismantleSiteDescr*>(get_building_descr(dismantlesite_index));
+	} break;
 	case MapObjectType::FERRY:
 		workers_->add(new FerryDescr(type_descname, table, *this));
 		break;
@@ -559,5 +561,18 @@ void Descriptions::set_old_world_name(const std::string& name) {
 		compatibility_table_ =
 		   std::unique_ptr<DescriptionsCompatibilityTable>(new OneWorldLegacyLookupTable(name));
 	}
+}
+
+const ConstructionSiteDescr* Descriptions::constructionsite() const {
+	if (constructionsite_ == nullptr) {
+		throw GameDataError("The 'constructionsite' building description was not loaded");
+	}
+	return constructionsite_;
+}
+const DismantleSiteDescr* Descriptions::dismantlesite() const {
+	if (dismantlesite_ == nullptr) {
+		throw GameDataError("The 'dismantlesite' building description was not loaded");
+	}
+	return dismantlesite_;
 }
 }  // namespace Widelands
