@@ -460,49 +460,49 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 DescriptionIndex Descriptions::load_building(const std::string& buildingname) {
 	const std::string& looked_up_name = compatibility_table_->lookup_building(buildingname);
 	description_manager_->load_description(looked_up_name);
-	return safe_building_index(looked_up_name);
+	return building_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_critter(const std::string& crittername) {
 	const std::string& looked_up_name = compatibility_table_->lookup_critter(crittername);
 	description_manager_->load_description(looked_up_name);
-	return safe_critter_index(looked_up_name);
+	return critter_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_immovable(const std::string& immovablename) {
 	const std::string& looked_up_name = compatibility_table_->lookup_immovable(immovablename);
 	description_manager_->load_description(looked_up_name);
-	return safe_immovable_index(looked_up_name);
+	return immovable_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_resource(const std::string& resourcename) {
 	const std::string& looked_up_name = compatibility_table_->lookup_resource(resourcename);
 	description_manager_->load_description(looked_up_name);
-	return safe_resource_index(looked_up_name);
+	return resource_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_ship(const std::string& shipname) {
 	const std::string& looked_up_name = compatibility_table_->lookup_ship(shipname);
 	description_manager_->load_description(looked_up_name);
-	return safe_ship_index(looked_up_name);
+	return ship_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_terrain(const std::string& terrainname) {
 	const std::string& looked_up_name = compatibility_table_->lookup_terrain(terrainname);
 	description_manager_->load_description(looked_up_name);
-	return safe_terrain_index(looked_up_name);
+	return terrain_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_ware(const std::string& warename) {
 	const std::string& looked_up_name = compatibility_table_->lookup_ware(warename);
 	description_manager_->load_description(looked_up_name);
-	return safe_ware_index(looked_up_name);
+	return ware_index(looked_up_name);
 }
 
 DescriptionIndex Descriptions::load_worker(const std::string& workername) {
 	const std::string& looked_up_name = compatibility_table_->lookup_worker(workername);
 	description_manager_->load_description(looked_up_name);
-	return safe_worker_index(looked_up_name);
+	return worker_index(looked_up_name);
 }
 
 std::pair<WareWorker, DescriptionIndex>
