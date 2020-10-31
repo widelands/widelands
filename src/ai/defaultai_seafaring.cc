@@ -554,7 +554,6 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	so.last_command_time = gametime;
 	so.waiting_for_command_ = false;
-	return;
 }
 
 // Here we investigate possibility to go for open sea, preferably to unexplored territories
