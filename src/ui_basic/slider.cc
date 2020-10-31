@@ -228,7 +228,6 @@ void Slider::set_highlighted(bool highlighted) {
 	highlighted_ = highlighted;
 }
 
-constexpr int16_t kLargeStepSize = 50;
 bool Slider::handle_key(bool down, SDL_Keysym code) {
 	if (down && enabled_) {
 		switch (code.sym) {
