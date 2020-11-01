@@ -130,7 +130,11 @@ The master branch and open pull requests will be formatted automatically by a Gi
 
 You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
 
-It is strongly recommened that you [create a Personal Access Token](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) with the scope `Repo → public_repo`. [Store this token as a secret](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) named `WIDELANDS_FORMAT_TOKEN` in your fork. If you do not do this, our continuous integration suite will not work properly for branches in your fork.
+In order to ensure that our continuous integration suite will work properly for branches in your fork, it is strongly recommened that you create a personal access token for our formatting action:
+1. Create a Personal Access Token in your **profile** (https://github.com/settings/tokens). Select the scope `Repo → public_repo` for the new token. The token's note does not matter. Copy the token's hash.
+2. Create a secret in your **widelands fork** (`https://github.com/<username>/widelands/settings/secrets`). The secret must be named `WIDELANDS_FORMAT_TOKEN`. Its content must be the hash of the token you just created.
+
+More information about [Personal Access Tokens may be found here](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token). More information about [secrets may be found here](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
 
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 
