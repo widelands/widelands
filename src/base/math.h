@@ -20,6 +20,8 @@
 #ifndef WL_BASE_MATH_H
 #define WL_BASE_MATH_H
 
+#include <string>
+
 namespace math {
 
 // Returns 1 for positive and -1 for negative numbers.
@@ -42,6 +44,15 @@ template <typename T> T clamp(const T& val, const T& low, const T& high) {
 template <typename T> T sqr(const T& a) {
 	return a * a;
 }
+
+static constexpr unsigned k100PercentAsInt = 10000U;
+
+/**
+ * @brief Reads a percentage
+ * @param input A percentage in the format 12%, 12.5% or 12.53%.
+ * @return Scaled percentage as integer, where 100% corresponds to k100PercentAsInt.
+ * */
+unsigned read_percent_to_int(const std::string& input);
 
 }  // namespace math
 
