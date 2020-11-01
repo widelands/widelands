@@ -1445,6 +1445,14 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	assert(portdock_->expedition_bootstrap() != nullptr);
 	return portdock_->expedition_bootstrap()->first_empty_inputqueue(index, type);
 }
+bool Warehouse::has_inputqueue(DescriptionIndex wi, WareWorker type) const {
+	for (const auto& queue : portdock_->expedition_bootstrap()->queues(false)) {
+		if (queue->get_index() == wi && queue->get_type() == type) {
+			return true;
+		}
+	}
+	return false;
+}
 
 std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
 	std::unique_ptr<WarehouseSettings> settings(new WarehouseSettings(descr(), owner().tribe()));

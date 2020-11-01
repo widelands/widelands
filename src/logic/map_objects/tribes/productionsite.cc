@@ -458,6 +458,15 @@ InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker con
 	                 type == WareWorker::wwWARE ? "ware" : "worker", wi, item_name.c_str());
 }
 
+bool ProductionSite::has_inputqueue(DescriptionIndex wi, WareWorker type) const {
+	for (InputQueue* ip_queue : input_queues_) {
+		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
+			return true;
+		}
+	}
+	return false;
+}
+
 /**
  * Calculate statistic.
  */

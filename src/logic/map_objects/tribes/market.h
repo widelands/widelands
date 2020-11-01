@@ -55,6 +55,7 @@ public:
 	void cancel_trade(int trade_id);
 
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	bool has_inputqueue(DescriptionIndex wi, WareWorker type) const override;
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);

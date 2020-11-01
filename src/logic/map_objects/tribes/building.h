@@ -262,6 +262,7 @@ public:
 
 	/// \returns the queue for the matching ware or worker type or \throws WException.
 	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
+	virtual bool has_inputqueue(DescriptionIndex, WareWorker) const;
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;

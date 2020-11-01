@@ -1303,12 +1303,17 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			b->inputqueue(index_, type_).set_max_fill(max_fill_);
+			// TODO(GunChleoc): Savegame compatibility. Remove has_inputqueue function and else branch after v1.0
+			if (b->has_inputqueue(index_, type_)) {
+				b->inputqueue(index_, type_).set_max_fill(max_fill_);
+			} else {
+				log_warn("Building %s has no input queue for index %d, skipping max fill command", b->descr().name().c_str(), index_);
+			}
 		}
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 3;
+constexpr uint16_t kCurrentPacketVersionCmdSetInputMaxFill = 4;
 
 void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetInputMaxFill);
@@ -1316,8 +1321,10 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.signed_32(index_);
 	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
+	fw.string(type_ == wwWARE ?
+				  egbase.descriptions().get_ware_descr(index_)->name() :
+				  egbase.descriptions().get_worker_descr(index_)->name());
 	fw.unsigned_32(max_fill_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1325,14 +1332,23 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetInputMaxFill) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			index_ = fr.signed_32();
+			if (packet_version == 3) {
+				// TODO(GunChleoc): Savegame compatibility. Remove after v1.0.
+				index_ = fr.signed_32();
+			}
 			if (fr.unsigned_8() == 0) {
 				type_ = wwWARE;
+				if (packet_version > 3) {
+					index_ = egbase.mutable_descriptions()->load_ware(fr.string());
+				}
 			} else {
 				type_ = wwWORKER;
+				if (packet_version > 3) {
+					index_ = egbase.mutable_descriptions()->load_worker(fr.string());
+				}
 			}
 			max_fill_ = fr.unsigned_32();
 			is_constructionsite_setting_ = fr.unsigned_8();

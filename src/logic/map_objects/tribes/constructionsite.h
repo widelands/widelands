@@ -104,6 +104,7 @@ public:
 	}
 
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	bool has_inputqueue(DescriptionIndex wi, WareWorker type) const override;
 
 	void set_building(const BuildingDescr&) override;
 	const BuildingDescr& building() const {

@@ -221,6 +221,12 @@ InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker) {
 	// The parent will throw an exception.
 	return Building::inputqueue(index, ware_worker);
 }
+bool Market::has_inputqueue(DescriptionIndex wi, WareWorker type) const {
+	if (type != wwWARE) {
+		return false;
+	}
+	return wares_queue_.find(wi) != wares_queue_.end();
+}
 
 void Market::cleanup(EditorGameBase& egbase) {
 	for (auto& pair : wares_queue_) {
