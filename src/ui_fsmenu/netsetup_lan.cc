@@ -252,7 +252,7 @@ void FullscreenMenuNetSetupLAN::discovery_callback(int32_t const type,
 void FullscreenMenuNetSetupLAN::change_hostname() {
 	// Allow user to enter a hostname manually
 	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());
-	joingame_.set_enabled(hostname_.text().size());
+	joingame_.set_enabled(!hostname_.text().empty());
 }
 
 void FullscreenMenuNetSetupLAN::change_playername() {
@@ -290,7 +290,7 @@ void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section& s = get_config_safe_section();
 	std::string const host = s.get_string("lasthost", "");
 	hostname_.set_text(host);
-	if (host.size()) {
+	if (!host.empty()) {
 		joingame_.set_enabled(true);
 	}
 	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());

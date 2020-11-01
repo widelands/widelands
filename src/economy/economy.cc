@@ -88,13 +88,13 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
 Economy::~Economy() {
 	Notifications::publish(NoteEconomy{serial_, serial_, NoteEconomy::Action::kDeleted});
 
-	if (requests_.size()) {
+	if (!requests_.empty()) {
 		log_warn("Economy still has requests left on destruction\n");
 	}
-	if (flags_.size()) {
+	if (!flags_.empty()) {
 		log_warn("Economy still has flags left on destruction\n");
 	}
-	if (warehouses_.size()) {
+	if (!warehouses_.empty()) {
 		log_warn("Economy still has warehouses left on destruction\n");
 	}
 
@@ -149,7 +149,7 @@ void Economy::check_split(Flag& f1, Flag& f2, WareWorker type) {
 
 void Economy::check_splits() {
 	EditorGameBase& egbase = owner().egbase();
-	while (split_checks_.size()) {
+	while (!split_checks_.empty()) {
 		Flag* f1 = split_checks_.back().first.get(egbase);
 		Flag* f2 = split_checks_.back().second.get(egbase);
 		split_checks_.pop_back();
@@ -240,7 +240,7 @@ Warehouse* Economy::find_closest_warehouse(Flag& start,
                                            Route* route,
                                            uint32_t cost_cutoff,
                                            const Economy::WarehouseAcceptFn& acceptfn) {
-	if (!warehouses().size()) {
+	if (warehouses().empty()) {
 		return nullptr;
 	}
 
@@ -710,11 +710,10 @@ using RSPairQueue = std::
 
 struct RSPairStruct {
 	RSPairQueue queue;
-	uint32_t pairid;
-	int32_t nexttimer;
+	uint32_t pairid = 0;
+	int32_t nexttimer = 0;
 
-	RSPairStruct() : pairid(0), nexttimer(0) {
-	}
+	RSPairStruct() = default;
 };
 
 /**
@@ -966,7 +965,7 @@ void Economy::create_requested_worker(Game& game, DescriptionIndex index) {
  * try to create the worker at warehouses.
  */
 void Economy::create_requested_workers(Game& game) {
-	if (type_ != wwWORKER || !warehouses().size()) {
+	if (type_ != wwWORKER || warehouses().empty()) {
 		return;
 	}
 
@@ -993,7 +992,7 @@ static bool accept_warehouse_if_policy(const Warehouse& wh,
  * being sent to a specific request) to a warehouse.
  */
 void Economy::handle_active_supplies(Game& game) {
-	if (!warehouses().size()) {
+	if (warehouses().empty()) {
 		return;
 	}
 
