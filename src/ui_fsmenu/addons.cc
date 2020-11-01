@@ -597,7 +597,7 @@ void AddOnsCtrl::rebuild() {
 		std::string text = (boost::format(ngettext(_("Upgrade the following %u add-on:"), _("Upgrade the following %u add-ons:"),
 								has_upgrades.size())) % has_upgrades.size()).str();
 		for (const std::string& name : has_upgrades) {
-			text += "\n";
+			text += "<br>";
 			text += (boost::format(_("· %s")) % name).str();
 		}
 		upgrade_all_.set_tooltip(text);
