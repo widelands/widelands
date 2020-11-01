@@ -81,7 +81,7 @@ UI::Textarea& AttackBox::add_text(UI::Box& parent,
                                   UI::Align alignment,
                                   const UI::FontStyle style) {
 	UI::Textarea& result =
-	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_style_manager->font_style(style));
+	   *new UI::Textarea(&parent, str, UI::Align::kLeft, g_style_manager->font_style(style));
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }

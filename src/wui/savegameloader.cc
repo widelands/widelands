@@ -45,7 +45,7 @@ void SavegameLoader::load_savegame_from_directory(const std::string& gamefilenam
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 
-	Widelands::GameLoader gl(gamefilename.c_str(), game_);
+	Widelands::GameLoader gl(gamefilename, game_);
 	gl.preload_game(gpdp);
 	gamedata.gametype = gpdp.get_gametype();
 	if (!is_valid_gametype(gamedata)) {
@@ -61,14 +61,14 @@ void SavegameLoader::load_savegame_from_file(const std::string& gamefilename,
                                              std::vector<SavegameData>& loaded_games) const {
 	std::string savename = get_savename(gamefilename);
 
-	if (!g_fs->file_exists(savename.c_str()) || !boost::ends_with(savename, kSavegameExtension)) {
+	if (!g_fs->file_exists(savename) || !boost::ends_with(savename, kSavegameExtension)) {
 		return;
 	}
 
 	Widelands::GamePreloadPacket gpdp;
 	SavegameData gamedata(gamefilename);
 	try {
-		Widelands::GameLoader gl(savename.c_str(), game_);
+		Widelands::GameLoader gl(savename, game_);
 		gl.preload_game(gpdp);
 		gamedata.gametype = gpdp.get_gametype();
 		if (!is_valid_gametype(gamedata)) {

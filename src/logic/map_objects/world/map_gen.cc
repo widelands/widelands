@@ -310,7 +310,7 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const Descriptions& descriptions) 
 			MapGenBobCategory& category = bob_categories_.at(entry->get_string("name"));
 
 			for (size_t jx = 0; jx < category.num_immovables(); jx++) {
-				if (descriptions.immovable_index(category.get_immovable(jx).c_str()) ==
+				if (descriptions.immovable_index(category.get_immovable(jx)) ==
 				    Widelands::INVALID_INDEX) {
 					throw wexception("unknown immovable %s", category.get_immovable(jx).c_str());
 				}

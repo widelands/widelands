@@ -785,7 +785,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			++i;
 		}
 		// Now really write the file
-		fw.write(*g_fs, d->file_->filename.c_str());
+		fw.write(*g_fs, d->file_->filename);
 
 		// Check for consistence
 		FileRead fr;

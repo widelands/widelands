@@ -103,7 +103,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		items_table = table.get_table("out_of_resource_notification");
 		out_of_resource_title_ = items_table->get_string("title");
 		out_of_resource_heading_ = items_table->get_string("heading");
-		out_of_resource_message_ = items_table->get_string("message").c_str();
+		out_of_resource_message_ = items_table->get_string("message");
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}

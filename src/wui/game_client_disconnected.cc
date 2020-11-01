@@ -116,7 +116,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	}
 
 	// Set default mode to normal AI
-	type_dropdown_.select(AI::DefaultAI::normal_impl.name.c_str());
+	type_dropdown_.select(AI::DefaultAI::normal_impl.name);
 
 	if (get_usedefaultpos()) {
 		center_to_parent();

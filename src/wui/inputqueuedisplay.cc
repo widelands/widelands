@@ -60,12 +60,12 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
      no_priority_buttons_(no_priority_buttons) {
 	if (type_ == Widelands::wwWARE) {
 		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_->get_index());
-		set_tooltip(ware.descname().c_str());
+		set_tooltip(ware.descname());
 		icon_ = ware.icon();
 	} else {
 		const Widelands::WorkerDescr& worker =
 		   *queue.owner().tribe().get_worker_descr(queue_->get_index());
-		set_tooltip(worker.descname().c_str());
+		set_tooltip(worker.descname());
 		icon_ = worker.icon();
 	}
 
@@ -111,11 +111,11 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
 	cache_max_fill_ = check_max_fill();
 	if (type_ == Widelands::wwWARE) {
 		const Widelands::WareDescr& ware = *building.owner().tribe().get_ware_descr(index_);
-		set_tooltip(ware.descname().c_str());
+		set_tooltip(ware.descname());
 		icon_ = ware.icon();
 	} else {
 		const Widelands::WorkerDescr& worker = *building.owner().tribe().get_worker_descr(index_);
-		set_tooltip(worker.descname().c_str());
+		set_tooltip(worker.descname());
 		icon_ = worker.icon();
 	}
 

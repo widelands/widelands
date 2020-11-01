@@ -93,13 +93,13 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 			uint16_t team_section_id = 0;
 			std::string teamsection_key = (boost::format("teams%02i") % team_section_id).str();
-			while (Section* teamsection = prof.get_section(teamsection_key.c_str())) {
+			while (Section* teamsection = prof.get_section(teamsection_key)) {
 
 				// A lineup is made up of teams
 				SuggestedTeamLineup lineup;
 
 				uint16_t team_number = 1;
-				std::string team_key = (boost::format("team%i") % team_number).str().c_str();
+				std::string team_key = (boost::format("team%i") % team_number).str();
 				std::string team_string = teamsection->get_string(team_key.c_str(), "");
 				while (!team_string.empty()) {
 					// A team is made up of players
@@ -127,7 +127,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 
 				// Increase teamsection
 				++team_section_id;
-				teamsection_key = (boost::format("teams%02i") % team_section_id).str().c_str();
+				teamsection_key = (boost::format("teams%02i") % team_section_id).str();
 			}
 		} else {
 			throw UnhandledVersionError(

@@ -48,8 +48,8 @@ struct LuaCloser {
 };
 
 class LuaClass : public LunaClass {
-	int x;
-	int prop;
+	int x = 0;
+	int prop = 0;
 
 public:
 	LUNA_CLASS_HEAD(LuaClass);
@@ -95,7 +95,7 @@ PROP_RO(LuaClass, propr)
    END_LUNA_PROPERTIES()
 
       class LuaSubClass : public LuaClass {
-	int y;
+	int y = 0;
 
 public:
 	LUNA_CLASS_HEAD(LuaSubClass);
@@ -123,7 +123,7 @@ int LuaSubClass::subtest(lua_State* L) {
 }
 
 class LuaVirtualClass : public LuaClass {
-	int z;
+	int z = 0;
 
 public:
 	LUNA_CLASS_HEAD(LuaVirtualClass);
@@ -167,7 +167,7 @@ LuaSecond::~LuaSecond() {
 }
 
 class LuaMultiClass : public LuaClass, public LuaSecond {
-	int z;
+	int z = 0;
 
 public:
 	LUNA_CLASS_HEAD(LuaMultiClass);

@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
 		{
 			FileWrite fw;
 			save_to_png(minimap.get(), &fw, ColorType::RGBA);
-			fw.write(*in_out_filesystem, (map_file + ".png").c_str());
+			fw.write(*in_out_filesystem, map_file + ".png");
 		}
 
 		// Write JSON.
@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
 			   dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();
 			json->add_string("world_name", world_name);
 			json->add_string("minimap", map_path + ".png");
-			json->write_to_file(*in_out_filesystem, (map_file + ".json").c_str());
+			json->write_to_file(*in_out_filesystem, map_file + ".json");
 		}
 		egbase.cleanup_objects();
 	} catch (std::exception& e) {
