@@ -95,7 +95,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	// Close without any action
 	UI::Button* cancel_button = new UI::Button(
-	   horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
+	   horizontal_box, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
 	horizontal_box->add(cancel_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	// Ensure some space between the buttons
@@ -106,7 +106,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	// Reset states of the checkboxes
 	UI::Button* reset_button = new UI::Button(
-	   horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset"));
+	   horizontal_box, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset"));
 	horizontal_box->add(reset_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	horizontal_box->add_space(0);
@@ -119,7 +119,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	// Mark/Unmark all checkboxes
 	mark_unmark_button_ =
-	   new UI::Button(horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "");
+	   new UI::Button(horizontal_box, "mark_unmark", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "");
 	horizontal_box->add(mark_unmark_button_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	horizontal_box->add_space(0);
@@ -137,8 +137,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	// Apply settings from checkboxes and close
 	UI::Button* ok_button =
-	   new UI::Button(horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary,
-	                  pgettext("teaching_progress", "OK"));
+	   new UI::Button(horizontal_box, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
 	horizontal_box->add(ok_button, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	horizontal_box->add_space(0);
