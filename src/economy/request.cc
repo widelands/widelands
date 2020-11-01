@@ -89,7 +89,7 @@ Request::~Request() {
 	}
 
 	// Cancel all ongoing transfers
-	while (transfers_.size()) {
+	while (!transfers_.empty()) {
 		cancel_transfer(0);
 	}
 }

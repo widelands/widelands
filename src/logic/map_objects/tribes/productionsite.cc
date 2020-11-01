@@ -884,7 +884,7 @@ void ProductionSite::try_start_working(Game& game) {
  * \note We assume that the worker is inside the building when this is called.
  */
 bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const success) {
-	assert(descr().working_positions().size());
+	assert(!descr().working_positions().empty());
 	assert(main_worker_ >= 0);
 	assert(&worker == working_positions_[main_worker_].worker.get(game));
 
@@ -1029,7 +1029,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
  * \post No program is running, acting is scheduled
  */
 void ProductionSite::program_end(Game& game, ProgramResult const result) {
-	assert(stack_.size());
+	assert(!stack_.empty());
 
 	const std::string& program_name = top_state().program->name();
 
