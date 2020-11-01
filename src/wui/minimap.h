@@ -75,6 +75,9 @@ private:
 		// Set the currently viewed area in map pixel space.
 		void set_view(const Rectf&);
 
+		// Delete the intermediate texture, causing a full redraw on the next draw().
+		void reset();
+
 		void draw(RenderTarget&) override;
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
@@ -88,9 +91,13 @@ private:
 		Rectf view_area_;
 		const Image* pic_map_spot_;
 
+		// Intermediate texture, cached between frames.
+		std::unique_ptr<Texture> minimap_image_static_;
+		uint16_t rows_drawn_;
+
 		// This needs to be owned since it will be rendered by the RenderQueue
 		// later, so it must be valid for the whole frame.
-		std::unique_ptr<Texture> minimap_image_;
+		std::unique_ptr<Texture> minimap_image_final_;
 
 	public:
 		MiniMapLayer* minimap_layers_;

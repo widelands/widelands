@@ -200,8 +200,6 @@ wl_library(graphic_minimap_renderer
     minimap_renderer.h
   DEPENDS
     base_geometry
-    base_macros
-    base_multithreading
     economy
     graphic_playercolor
     graphic_surface
