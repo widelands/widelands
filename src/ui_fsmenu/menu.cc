@@ -108,7 +108,8 @@ void TwoColumnsMenu::layout() {
 	right_column_width_ = get_inner_w() * right_column_width_factor_;
 	log_dbg(
 	   "width: %d, inner width: %d, right width %d", get_w(), get_inner_w(), right_column_width_);
-	right_column_box_.set_desired_size(right_column_width_, 0);
+	//	right_column_box_.set_desired_size(right_column_width_, 0);
+	right_column_box_.set_max_size(right_column_width_, 0);
 	printBox(main_box_);
 	printBox(header_box_);
 	printBox(content_box_);

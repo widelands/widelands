@@ -167,11 +167,9 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
 
 void FullscreenMenuInternetLobby::layout() {
 	TwoColumnsBackNavigationMenu::layout();
-	int w, not_used;
-	joingame_.get_desired_size(&w, &not_used);
-	joingame_.set_desired_size(w, standard_height_);
-	hostgame_.set_desired_size(w, standard_height_);
-	servername_.set_desired_size(w, standard_height_);
+	joingame_.set_desired_size(0, standard_height_);
+	hostgame_.set_desired_size(0, standard_height_);
+	servername_.set_desired_size(0, standard_height_);
 }
 
 /// think function of the UI (main loop)

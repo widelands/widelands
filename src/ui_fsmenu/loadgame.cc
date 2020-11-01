@@ -90,8 +90,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 }
 void FullscreenMenuLoadGame::layout() {
 	TwoColumnsNavigationMenu::layout();
-	load_or_save_.game_details()->set_max_size(right_column_width_, 0);
-	load_or_save_.delete_->set_desired_size(right_column_width_, standard_height_);
+	load_or_save_.delete_->set_desired_size(0, standard_height_);
 }
 void FullscreenMenuLoadGame::think() {
 	TwoColumnsNavigationMenu::think();

@@ -36,7 +36,6 @@ public:
 
 protected:
 	void clicked_ok() override;
-	void layout() override;
 	void entry_selected();
 	void fill_table();
 
