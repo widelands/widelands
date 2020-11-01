@@ -276,7 +276,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 	const std::string key = input.substr(0, idx);
 
 	if (!expected_key.empty()) {
-		if (idx == input.npos) {
+		if (idx == std::string::npos) {
 			throw GameDataError("Empty value in '%s' for separator '%c'\n", input.c_str(), separator);
 		}
 		if (key != expected_key) {
@@ -285,7 +285,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 		}
 	}
 
-	return std::make_pair(key, idx == input.npos ? default_value : input.substr(idx + 1));
+	return std::make_pair(key, idx == std::string::npos ? default_value : input.substr(idx + 1));
 }
 
 /* RST
@@ -334,7 +334,7 @@ actions also have an animation associated with them that will be played instead,
 */
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
-	if (arguments.size() < 1 || arguments.size() > 2) {
+	if (arguments.empty() || arguments.size() > 2) {
 		throw GameDataError("Usage: animate=<animation_name> [duration:<duration>]");
 	}
 

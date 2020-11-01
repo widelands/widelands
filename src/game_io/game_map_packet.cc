@@ -47,8 +47,6 @@ void GameMapPacket::read(FileSystem& fs, Game& game, MapObjectLoader* const) {
 	wml_->preload_map(true);
 
 	//  DONE, mapfs gets deleted by WidelandsMapLoader.
-
-	return;
 }
 
 void GameMapPacket::read_complete(Game& game) {

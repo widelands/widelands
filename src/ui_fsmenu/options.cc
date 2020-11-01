@@ -503,7 +503,7 @@ void FullscreenMenuOptions::layout() {
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
-	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
+	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale.empty());
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
 	// Handle non-standard setups where the locale directory might be missing
@@ -561,7 +561,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {
 		const LanguageEntry& language_entry = entry.second;
-		language_dropdown_.add(language_entry.descname.c_str(), language_entry.localename, nullptr,
+		language_dropdown_.add(language_entry.descname, language_entry.localename, nullptr,
 		                       language_entry.localename == selected_locale, "");
 	}
 }
@@ -573,7 +573,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
  */
 void FullscreenMenuOptions::update_language_stats() {
 	int percent = 100;
-	std::string message = "";
+	std::string message;
 	if (language_dropdown_.has_selection()) {
 		std::string locale = language_dropdown_.get_selected();
 		// Empty locale means try system locale

@@ -223,7 +223,7 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 
 const Image*
 SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStatus status) const {
-	std::string filename = "";
+	std::string filename;
 	switch (status) {
 	case SeafaringStatisticsMenu::ShipFilterStatus::kIdle:
 		filename = "images/wui/stats/ship_stats_idle.png";

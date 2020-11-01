@@ -76,7 +76,7 @@ Flag::~Flag() {
 		log_warn("Flag: ouch! building left\n");
 	}
 
-	if (flag_jobs_.size()) {
+	if (!flag_jobs_.empty()) {
 		log_warn("Flag: ouch! flagjobs left\n");
 	}
 
@@ -848,12 +848,16 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		assert(!building_);
 	}
 
-	for (uint8_t i = 0; i < (sizeof(roads_) / sizeof(roads_[0])); ++i) {
-		if (roads_[i]) {
-			roads_[i]->remove(egbase);  //  immediate death
-			assert(!roads_[i]);
+	for (RoadBase* rb : roads_) {
+		if (rb) {
+			rb->remove(egbase);  //  immediate death
 		}
 	}
+#ifndef NDEBUG
+	for (RoadBase* rb : roads_) {
+		assert(!rb);
+	}
+#endif
 
 	if (Economy* e = get_economy(wwWARE)) {
 		e->remove_flag(*this);
