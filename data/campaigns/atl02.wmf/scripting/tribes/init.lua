@@ -29,18 +29,22 @@ local result = {
          {
             {
                name= "coin_wood",
+               default_target_quantity = 5,
                preciousness = 1
             },
             {
                name= "coin_copper",
+               default_target_quantity = 4,
                preciousness = 1
             },
             {
                name= "coin_silver",
+               default_target_quantity = 3,
                preciousness = 1
             },
             {
                name= "coin_gold",
+               default_target_quantity = 2,
                preciousness = 1
             }
          },

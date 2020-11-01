@@ -27,10 +27,6 @@ descriptions:new_productionsite_type {
       { name = "iron", amount = 3 },
       { name = "coal", amount = 4 },
       { name = "log", amount = 5 },
-      { name = "coin_wood", amount = 5 },
-      { name = "coin_copper", amount = 4 },
-      { name = "coin_silver", amount = 3 },
-      { name = "coin_gold", amount = 2 }
    },
 
    programs = {
@@ -49,8 +45,8 @@ descriptions:new_productionsite_type {
          descname = _"trading",
          actions = {
             "callworker=find_pole",
-            "return= failed unless site has log:5",
-            "return=skipped when site has coin_wood:5",
+            "return=failed unless site has log:5",
+            "return=skipped unless economy needs coin_wood",
             "consume=log:5",
             "callworker=log_trade",
             "sleep=duration:30s",
@@ -61,8 +57,8 @@ descriptions:new_productionsite_type {
          descname = _"trading",
          actions = {
             "callworker=find_pole",
-            "return= failed unless site has coal:4",
-            "return=skipped when site has coin_copper:4",
+            "return=failed unless site has coal:4",
+            "return=skipped unless economy needs coin_copper",
             "consume=coal:4",
             "callworker=coal_trade",
             "sleep=duration:30s",
@@ -73,8 +69,8 @@ descriptions:new_productionsite_type {
          descname = _"trading",
          actions = {
             "callworker=find_pole",
-            "return= failed unless site has iron:3",
-            "return=skipped when site has coin_silver:3",
+            "return=failed unless site has iron:3",
+            "return=skipped unless economy needs coin_silver",
             "consume=iron:3",
             "callworker=iron_trade",
             "sleep=duration:30s",
@@ -85,8 +81,8 @@ descriptions:new_productionsite_type {
          descname = _"trading",
          actions = {
             "callworker=find_pole",
-            "return= failed unless site has gold:2",
-            "return=skipped when site has coin_gold:2",
+            "return=failed unless site has gold:2",
+            "return=skipped unless economy needs coin_gold",
             "consume=gold:2",
             "callworker=gold_trade",
             "sleep=duration:30s",
