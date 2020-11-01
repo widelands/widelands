@@ -128,8 +128,8 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	set_handle_textinput();
 }
 
-EditBox::~EditBox() { // NOLINT
-	// place a destructor where the compiler can find the EditBoxImpl destructor
+EditBox::~EditBox() {  // NOLINT
+	                    // place a destructor where the compiler can find the EditBoxImpl destructor
 }
 
 /**

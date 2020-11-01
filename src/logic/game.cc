@@ -150,8 +150,8 @@ Game::Game()
 	Economy::initialize_serial();
 }
 
-Game::~Game() { // NOLINT
-	// ReplayWriter needs this
+Game::~Game() {  // NOLINT
+	              // ReplayWriter needs this
 }
 
 void Game::sync_reset() {
