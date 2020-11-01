@@ -271,7 +271,7 @@ public:
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
 	void send_player_set_ware_priority(
-	   PlayerImmovable&, int32_t type, DescriptionIndex index, int32_t prio, bool is_cs = false);
+	   PlayerImmovable&, WareWorker, DescriptionIndex, const WarePriority&, bool is_cs = false);
 	void send_player_set_input_max_fill(
 	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);

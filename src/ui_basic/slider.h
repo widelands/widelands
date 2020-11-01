@@ -78,6 +78,10 @@ public:
 
 	bool handle_key(bool, SDL_Keysym) override;
 
+	void set_cursor_fixed_height(int32_t h) {
+		cursor_fixed_height_ = h;
+	}
+
 protected:
 	void layout() override;
 	void calculate_cursor_position();
@@ -128,6 +132,7 @@ protected:
 
 	int32_t cursor_pos_;   //  cursor position
 	int32_t cursor_size_;  //  cursor width
+	int32_t cursor_fixed_height_;
 };
 
 /**
