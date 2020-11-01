@@ -77,6 +77,8 @@ public:
 	const ResourceIndicatorSet& resource_indicators() const;
 
 	std::set<DescriptionIndex>& mutable_wares();
+	std::set<DescriptionIndex>& mutable_workers();
+	std::set<DescriptionIndex>& mutable_buildings();
 	std::set<DescriptionIndex>& mutable_immovables();
 
 	bool has_building(const DescriptionIndex& index) const;
@@ -143,6 +145,9 @@ public:
 	}
 
 	const WaresOrder& workers_order() const {
+		return workers_order_;
+	}
+	WaresOrder& mutable_workers_order() {
 		return workers_order_;
 	}
 

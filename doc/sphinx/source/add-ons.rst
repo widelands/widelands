@@ -46,8 +46,8 @@ Note: Only ``name`` and ``description`` can be marked for translation. They may 
 
 Categories
 ----------
-- `world`_
 - `tribes`_
+- `world`_
 - `script`_
 - `maps`_
 - `campaign`_
@@ -56,26 +56,22 @@ Categories
 - `theme`_
 
 
-world
-~~~~~
-A script that modifies world units, namely terrains, critter, and resources. You can modify existing units and create new ones.
-
-The add-on's directory can contain ``register.lua`` files with matching ``init.lua`` files to define new units.
-
-The add-on has to contain a script called ``editor.lua`` which will be used to expose any new types to the editor interface. For details see the official editor init script ``data/world/init.lua``.
-
-NOCOM support pre- and postloading
-
-
 tribes
 ~~~~~~
-A script that modifies tribe units, such as wares, workers, or buildings. You can modify existing units and create new ones.
+A set of scripts that modify tribe units, namely wares, workers, buildings, immovables, ships, or tribes. You can modify existing units and create new ones.
 
-The add-on needs to contain a script called ``init.lua`` which will be run after the default tribes were loaded. For details see the official tribe loading scripts in ``data/tribes/**/init.lua``.
+New units are defined by creating one or more ``register.lua`` files with matching ``init.lua``s, just like for official units. Modifications to existing units may be performed in the optional ``preload.lua`` and ``postload.lua`` files. It is recommended to use the function ``Descriptions.modify_unit`` in the ``postload.lua`` for this purpose. You will also need to use this function to add new units to existing tribes if desired.
 
-If the add-on introduces one or more new tribes, it will additionally need to contain a script called ``preload.lua``. For details see the official tribe preload script ``data/tribes/preload.lua``.
+If the add-on introduces one or more new tribes, it will additionally need to contain a script called ``tribes.lua``. For details see *NOCOM insert reference here*.
 
-NOCOM support pre- and postloading, and new tribes
+
+world
+~~~~~
+A script that modifies world units, namely terrains, critter, or resources. You can modify existing units and create new ones.
+
+The structure of world add-ons is identical to the structure of tribe add-ons (``register.lua``s, ``init.lua``s, optional ``preload.lua`` and/or ``postload.lua``; no ``tribes.lua`` though).
+
+Additionally, a world add-on has to contain a script called ``editor.lua`` which will be used to expose any new types to the editor interface. For details see the official editor init script ``data/world/init.lua``. Note that this script needs to be present even if no new units are added.
 
 
 script

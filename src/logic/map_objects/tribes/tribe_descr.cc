@@ -542,6 +542,12 @@ const std::set<DescriptionIndex>& TribeDescr::wares() const {
 std::set<DescriptionIndex>& TribeDescr::mutable_wares() {
 	return wares_;
 }
+std::set<DescriptionIndex>& TribeDescr::mutable_workers() {
+	return workers_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_buildings() {
+	return buildings_;
+}
 const std::set<DescriptionIndex>& TribeDescr::workers() const {
 	return workers_;
 }

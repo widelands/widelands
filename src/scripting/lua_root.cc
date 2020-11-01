@@ -612,7 +612,8 @@ int LuaDescriptions::new_tribe(lua_State* L) {
 
       TODO(Nordfriese): Document
 
-      Meant to be used by add-ons of the `tribes` and `world` categories from their init.lua.
+      This powerful function is meant to be used by add-ons of the ``tribes``
+      and ``world`` categories from their ``postload.lua``.
 */
 // TODO(Nordfriese): I only added functions I need for my own add-ons.
 // If anyone requests the possibility to modify any other tribe-related properties
@@ -623,6 +624,9 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 	const std::string type = luaL_checkstring(L, 2);
 	const std::string unit = luaL_checkstring(L, 3);
 	const std::string property = luaL_checkstring(L, 4);
+
+	// Load the unit to modify if it was not loaded yet
+	Notifications::publish(Widelands::NoteMapObjectDescription(unit, Widelands::NoteMapObjectDescription::LoadType::kObject));
 
 	if (type == "resource") {
 		Widelands::ResourceDescription& descr =
@@ -636,14 +640,44 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 		Widelands::TribeDescr& descr = *descrs.get_mutable_tribe_descr(descrs.safe_tribe_index(unit));
 		if (property == "add_ware") {
 			const std::string warename = luaL_checkstring(L, 5);
+			Notifications::publish(Widelands::NoteMapObjectDescription(warename, Widelands::NoteMapObjectDescription::LoadType::kObject));
+
 			const size_t column = luaL_checkuint32(L, 6);
 			const Widelands::DescriptionIndex di = descrs.safe_ware_index(warename);
 			descr.mutable_wares().insert(di);
 			descr.mutable_wares_order()[column].push_back(di);
+
+			// Update the player's ware statistics
+			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
+				if (&player->tribe() == &descr) {
+					player->init_statistics();
+				}
+			}
+		} else if (property == "add_worker") {
+			const std::string workername = luaL_checkstring(L, 5);
+			Notifications::publish(Widelands::NoteMapObjectDescription(workername, Widelands::NoteMapObjectDescription::LoadType::kObject));
+
+			const size_t column = luaL_checkuint32(L, 6);
+			const Widelands::DescriptionIndex di = descrs.safe_worker_index(workername);
+			descr.mutable_workers().insert(di);
+			descr.mutable_workers_order()[column].push_back(di);
+		} else if (property == "add_building") {
+			const std::string buildingname = luaL_checkstring(L, 5);
+			Notifications::publish(Widelands::NoteMapObjectDescription(buildingname, Widelands::NoteMapObjectDescription::LoadType::kObject));
+
+			const Widelands::DescriptionIndex di = descrs.safe_building_index(buildingname);
+			descr.mutable_buildings().insert(di);
+
+			// Ensure the new building can be built
+			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
+				if (&player->tribe() == &descr) {
+					player->allow_building_type(di, true);
+				}
+			}
 		} else if (property == "add_immovable") {
 			const std::string immo_name = luaL_checkstring(L, 5);
-			const Widelands::DescriptionIndex di = descrs.safe_immovable_index(immo_name);
-			descr.mutable_immovables().insert(di);
+			Notifications::publish(Widelands::NoteMapObjectDescription(immo_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
+			descr.mutable_immovables().insert(descrs.safe_immovable_index(immo_name));
 		} else {
 			report_error(L, "modify_unit not supported yet for tribe property '%s'", property.c_str());
 		}
@@ -670,6 +704,8 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 		if (property == "input") {
 			const std::string cmd = luaL_checkstring(L, 5);
 			const std::string input_name = luaL_checkstring(L, 6);
+			Notifications::publish(Widelands::NoteMapObjectDescription(input_name, Widelands::NoteMapObjectDescription::LoadType::kObject));
+
 			if (cmd == "add_ware") {
 				const Widelands::DescriptionIndex di = descrs.safe_ware_index(input_name);
 				const Widelands::Quantity amount = luaL_checkuint32(L, 7);
@@ -688,7 +724,7 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 				report_error(L, "modify_unit - productionsite - input - modify_ware: %s not found", input_name.c_str());
 			} else if (cmd == "remove_ware") {
 				const Widelands::DescriptionIndex di = descrs.safe_ware_index(input_name);
-				for (auto it = descr.mutable_input_wares().begin(); it != descr.mutable_input_wares().end();) {
+				for (auto it = descr.mutable_input_wares().begin(); it != descr.mutable_input_wares().end(); ++it) {
 					if (it->first == di) {
 						descr.mutable_input_wares().erase(it);
 						return 0;
@@ -713,7 +749,7 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 				report_error(L, "modify_unit - productionsite - input - modify_worker: %s not found", input_name.c_str());
 			} else if (cmd == "remove_worker") {
 				const Widelands::DescriptionIndex di = descrs.safe_worker_index(input_name);
-				for (auto it = descr.mutable_input_workers().begin(); it != descr.mutable_input_workers().end();) {
+				for (auto it = descr.mutable_input_workers().begin(); it != descr.mutable_input_workers().end(); ++it) {
 					if (it->first == di) {
 						descr.mutable_input_workers().erase(it);
 						return 0;
@@ -727,7 +763,6 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 			const std::string cmd = luaL_checkstring(L, 5);
 			const std::string prog_name = luaL_checkstring(L, 6);
 			if (cmd == "set") {
-				const std::string descname = luaL_checkstring(L, 7);
 				std::unique_ptr<LuaTable> tbl(new LuaTable(L));
 				descr.mutable_programs()[prog_name] = std::unique_ptr<Widelands::ProductionProgram>(new Widelands::ProductionProgram(
 						prog_name, *tbl, descrs, &descr));
