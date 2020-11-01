@@ -166,8 +166,7 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 		json_building->add_string("helptext", get_helptext(*building, tribe));
 	}
 
-	json->write_to_file(
-	   *out_filesystem, (boost::format("%s_buildings.json") % tribe.name()).str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_buildings.json") % tribe.name()).str());
 	log_info("\n");
 }
 
@@ -192,8 +191,7 @@ void write_wares(const Widelands::TribeDescr& tribe, FileSystem* out_filesystem)
 		json_ware->add_string("helptext", get_helptext(ware, tribe));
 	}
 
-	json->write_to_file(
-	   *out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str());
 	log_info("\n");
 }
 
@@ -225,8 +223,7 @@ void write_workers(const Widelands::TribeDescr& tribe, FileSystem* out_filesyste
 		}
 	}
 
-	json->write_to_file(
-	   *out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str());
 	log_info("\n");
 }
 
