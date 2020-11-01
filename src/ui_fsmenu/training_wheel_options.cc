@@ -118,8 +118,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	});
 
 	// Mark/Unmark all checkboxes
-	mark_unmark_button_ =
-	   new UI::Button(horizontal_box, "mark_unmark", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "");
+	mark_unmark_button_ = new UI::Button(
+	   horizontal_box, "mark_unmark", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, "");
 	horizontal_box->add(mark_unmark_button_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	horizontal_box->add_inf_space();
 	horizontal_box->add_space(0);
@@ -159,7 +159,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	wrapper_box->add_space(0);
 
 	// Make all buttons the same width
-	const int desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()), std::max(mark_unmark_button_->get_w(), ok_button->get_w()));
+	const int desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()),
+	                                   std::max(mark_unmark_button_->get_w(), ok_button->get_w()));
 	cancel_button->set_desired_size(desired_width, cancel_button->get_h());
 	reset_button->set_desired_size(desired_width, reset_button->get_h());
 	mark_unmark_button_->set_desired_size(desired_width, mark_unmark_button_->get_h());

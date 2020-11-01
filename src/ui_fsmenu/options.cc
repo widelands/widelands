@@ -367,9 +367,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
 
-	training_wheels_.changed.connect([this]() {
-		training_wheels_button_.set_enabled(training_wheels_.get_state());
-	});
+	training_wheels_.changed.connect(
+	   [this]() { training_wheels_button_.set_enabled(training_wheels_.get_state()); });
 	training_wheels_button_.set_enabled(training_wheels_.get_state());
 	training_wheels_button_.sigclicked.connect([this]() {
 		training_wheels_button_.set_enabled(false);
