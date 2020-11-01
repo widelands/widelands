@@ -283,12 +283,12 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	add_space(kButtonSize / 4);
 	add(&collapse_);
 
-	collapse_.sigclicked.connect([this]() {
-		const bool c = !collapsed_;
-		recurse([c](InputQueueDisplay& i) { i.set_collapsed(c); });
-	});
-
 	if (can_act_) {
+		collapse_.sigclicked.connect([this]() {
+			const bool c = !collapsed_;
+			recurse([c](InputQueueDisplay& i) { i.set_collapsed(c); });
+		});
+
 		b_decrease_desired_fill_.sigclicked.connect([this]() {
 			if (SDL_GetModState() & KMOD_SHIFT) {
 				recurse([](InputQueueDisplay& i) { i.clicked_desired_fill(-1); });
@@ -326,6 +326,9 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 				set_priority(p);
 			}
 		});
+	} else {
+		collapse_.set_visible(false);
+		set_collapsed(true);
 	}
 
 	set_tooltip(type_ == Widelands::wwWARE ?

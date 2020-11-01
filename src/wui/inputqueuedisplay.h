@@ -52,8 +52,7 @@ public:
 	                  Widelands::WareWorker,
 	                  Widelands::DescriptionIndex);
 
-	~InputQueueDisplay() override {
-	}
+	~InputQueueDisplay() override = default;
 
 protected:
 	void think() override;
