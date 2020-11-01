@@ -39,7 +39,7 @@
 namespace Widelands {
 
 MapObjectPacket::~MapObjectPacket() {
-	while (loaders.size()) {
+	while (!loaders.empty()) {
 		delete *loaders.begin();
 		loaders.erase(loaders.begin());
 	}
