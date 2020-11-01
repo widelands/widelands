@@ -136,7 +136,7 @@ void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 		upcast(LuaGameInterface, lgi, &g->lua());
 		uint32_t nwritten = little_32(lgi->write_global_env(fw, mos));
 		fw.data(&nwritten, 4, pos);
-
+		fs.ensure_directory_exists("scripting");
 		fw.write(fs, "scripting/globals.dump");
 	}
 }
