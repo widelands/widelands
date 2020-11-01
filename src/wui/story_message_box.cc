@@ -39,8 +39,7 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  int32_t const y,
                                  uint32_t const w,
                                  uint32_t const h)
-   : UI::Window(
-        game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title.c_str()),
+   : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
      button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
      textarea_(&main_box_, 0, 0, 100, 50, UI::PanelStyle::kWui, body),
