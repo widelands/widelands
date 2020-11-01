@@ -89,7 +89,9 @@ std::unique_ptr<Texture> create_minimap_empty(const Widelands::EditorGameBase& e
 // given texture. Can update the entire texture or just a part of it,
 // depending on 'draw_full'.
 // If 'draw_full' is false, 'rows_drawn' has to be passed to keep track of
-// the row number where we stopped drawing.
+// the row number where we stopped drawing. We will start from that row
+// (or row zero if it exceeds the map height) and the variable will be updated
+// to contain the row where we stopped.
 void draw_minimap_static(Texture& texture,
                          const Widelands::EditorGameBase& egbase,
                          const Widelands::Player* player,
