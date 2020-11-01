@@ -413,10 +413,10 @@ desert = {
             weight = 1,
             mountainfoot_terrains = { "mountainmeadow" },
             mountain_terrains = {
-               "mountain1", "mountain2", "mountain3", "mountain4"
+               "mountain1", "mountain2"
             },
             snow_terrains = {
-               "mountain1", "mountain2", "mountain3", "mountain4"
+               "mountain3", "mountain4"
             },
          }
       }
@@ -589,7 +589,7 @@ winterland = {
             name = "wasteland",
             weight = 1,
             inner_terrains = { "tundra_taiga" },
-            outer_terrains = { "tundra" },
+            outer_terrains = { "tundra", "snow" },
          },
       },
       mountains = {
@@ -597,11 +597,8 @@ winterland = {
             name = "mountains",
             weight = 1,
             mountainfoot_terrains = { "tundra_taiga" },
-            mountain_terrains = {
-               "winter_mountain1", "winter_mountain2",
-               "winter_mountain3", "winter_mountain4"
-            },
-            snow_terrains = { "snow" },
+            mountain_terrains = { "winter_mountain3", "winter_mountain4" },
+            snow_terrains = { "winter_mountain1", "winter_mountain2" },
          }
       }
    }, -- areas

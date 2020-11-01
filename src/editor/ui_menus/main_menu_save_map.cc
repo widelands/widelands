@@ -124,13 +124,13 @@ void MainMenuSaveMap::clicked_ok() {
 	std::string filename = editbox_.text();
 	std::string complete_filename;
 
-	if (filename == "" && table_.has_selection()) {  //  Maybe a directory is selected.
+	if (filename.empty() && table_.has_selection()) {  //  Maybe a directory is selected.
 		complete_filename = filename = maps_data_[table_.get_selected()].filename;
 	} else {
 		complete_filename = curdir_ + FileSystem::file_separator() + filename;
 	}
 
-	if (g_fs->is_directory(complete_filename.c_str()) &&
+	if (g_fs->is_directory(complete_filename) &&
 	    !Widelands::WidelandsMapLoader::is_widelands_map(complete_filename)) {
 		set_current_directory(complete_filename);
 		fill_table();

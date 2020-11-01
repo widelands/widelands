@@ -367,7 +367,7 @@ void FullscreenMenuMapSelect::fill_table() {
 			} catch (...) {
 				log_warn("Mapselect: Skip %s due to unknown exception\n", mapfilename.c_str());
 			}
-		} else if (g_fs->is_directory(mapfilename) && g_fs->list_directory(mapfilename).size() > 0) {
+		} else if (g_fs->is_directory(mapfilename) && !g_fs->list_directory(mapfilename).empty()) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {

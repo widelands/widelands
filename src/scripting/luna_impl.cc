@@ -35,10 +35,10 @@ static void instantiate_new_lua_class(lua_State* L) {
 
 	// get this classes instantiator
 	lua_getglobal(L, "wl");  //  S: wl
-	if (module != "") {
-		lua_getfield(L, -1, module.c_str());  // S: wl module
-	} else {
+	if (module.empty()) {
 		lua_pushvalue(L, -1);  // S: wl wl
+	} else {
+		lua_getfield(L, -1, module.c_str());  // S: wl module
 	}
 
 	const std::string instantiator = "__" + klass;

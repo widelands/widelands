@@ -405,7 +405,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				if (history_position_ > CHAT_HISTORY_SIZE - 2) {
 					history_position_ = CHAT_HISTORY_SIZE - 2;
 				}
-				if (history_[++history_position_].size() > 0) {
+				if (!history_[++history_position_].empty()) {
 					m_->text = history_[history_position_];
 					m_->caret = m_->text.size();
 					check_caret();

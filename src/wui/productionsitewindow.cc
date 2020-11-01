@@ -79,7 +79,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	const std::vector<Widelands::InputQueue*>& inputqueues = production_site->inputqueues();
 
-	if (inputqueues.size()) {
+	if (!inputqueues.empty()) {
 		// Add the wares tab
 		UI::Box* prod_box = new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical,
 		                                g_gr->get_xres() - 80, g_gr->get_yres() - 80);
