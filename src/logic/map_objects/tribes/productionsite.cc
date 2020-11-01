@@ -445,7 +445,8 @@ ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, con
 	case WareWorker::wwWARE:
 		if (const WareDescr* ware_descr = owner().tribe().get_ware_descr(wi)) {
 			item_name = ware_descr->name();
-		} break;
+		}
+		break;
 	case WareWorker::wwWORKER:
 		if (const WorkerDescr* worker_descr = owner().tribe().get_worker_descr(wi)) {
 			item_name = worker_descr->name();

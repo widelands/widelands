@@ -293,7 +293,9 @@ void CmdBuild::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) 
 				const int size = egbase.descriptions().get_building_descr(bi)->get_size();
 				if ((egbase.map().get_fcoords(coords).field->get_caps() & size) < size) {
 					bi = Widelands::INVALID_INDEX;
-					log_warn("Building with index %d does not fit on selected field. Ignoring build command.", bi);
+					log_warn(
+					   "Building with index %d does not fit on selected field. Ignoring build command.",
+					   bi);
 				}
 			}
 		}
@@ -734,7 +736,7 @@ void CmdExpeditionConfig::execute(Game& game) {
 		if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
 			// TODO(GunChleoc): Savegame compatibility, remove this condition after v1.0
 			if ((type == wwWARE && pd->owner().tribe().has_ware(index)) ||
-				(type == wwWORKER && pd->owner().tribe().has_worker(index))) {
+			    (type == wwWORKER && pd->owner().tribe().has_worker(index))) {
 				x->demand_additional_item(game, type, index, add);
 			}
 		}
@@ -785,9 +787,8 @@ void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObject
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 	fw.unsigned_8(type == wwWARE ? 0 : 1);
-	fw.string(type == wwWARE ?
-				  egbase.descriptions().name(index, MapObjectType::WARE) :
-				  egbase.descriptions().name(index, MapObjectType::WORKER));
+	fw.string(type == wwWARE ? egbase.descriptions().name(index, MapObjectType::WARE) :
+	                           egbase.descriptions().name(index, MapObjectType::WORKER));
 	fw.unsigned_8(add ? 1 : 0);
 }
 
@@ -1254,7 +1255,8 @@ void CmdSetWarePriority::execute(Game& game) {
 		}
 	} else if (upcast(Building, psite, mo)) {
 		if (psite->owner().player_number() == sender()) {
-			// TODO(GunChleoc): Savegame compatibility, remove condition & has_ware_priority function after v1.0
+			// TODO(GunChleoc): Savegame compatibility, remove condition & has_ware_priority function
+			// after v1.0
 			if (psite->has_ware_priority(index_)) {
 				psite->set_priority(WareWorker(type_), index_, priority_);
 			}
@@ -1368,11 +1370,13 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			// TODO(GunChleoc): Savegame compatibility. Remove has_inputqueue function and else branch after v1.0
+			// TODO(GunChleoc): Savegame compatibility. Remove has_inputqueue function and else branch
+			// after v1.0
 			if (b->has_inputqueue(index_, type_)) {
 				b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
 			} else {
-				log_warn("Building %s has no input queue for index %d, skipping max fill command", b->descr().name().c_str(), index_);
+				log_warn("Building %s has no input queue for index %d, skipping max fill command",
+				         b->descr().name().c_str(), index_);
 			}
 			if (upcast(Warehouse, wh, b)) {
 				if (PortDock* p = wh->get_portdock()) {
@@ -1393,9 +1397,8 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
-	fw.string(type_ == wwWARE ?
-				  egbase.descriptions().name(index_, MapObjectType::WARE) :
-				  egbase.descriptions().name(index_, MapObjectType::WORKER));
+	fw.string(type_ == wwWARE ? egbase.descriptions().name(index_, MapObjectType::WARE) :
+	                            egbase.descriptions().name(index_, MapObjectType::WORKER));
 	fw.unsigned_32(max_fill_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1981,17 +1984,18 @@ void CmdSetStockPolicy::execute(Game& game) {
 
 			if (isworker_) {
 				if (!(warehouse->owner().tribe().has_worker(ware_))) {
-					log_warn_time(game.get_gametime(),
-					              "Cmd_SetStockPolicy: sender %u, worker %u not used by player's tribe\n", sender(),
-					              ware_);
+					log_warn_time(
+					   game.get_gametime(),
+					   "Cmd_SetStockPolicy: sender %u, worker %u not used by player's tribe\n", sender(),
+					   ware_);
 					return;
 				}
 				warehouse->set_worker_policy(ware_, policy_);
 			} else {
 				if (!(warehouse->owner().tribe().has_ware(ware_))) {
 					log_warn_time(game.get_gametime(),
-					              "Cmd_SetStockPolicy: sender %u, ware %u not used by player's tribe\n", sender(),
-					              ware_);
+					              "Cmd_SetStockPolicy: sender %u, ware %u not used by player's tribe\n",
+					              sender(), ware_);
 					return;
 				}
 				warehouse->set_ware_policy(ware_, policy_);
@@ -2028,9 +2032,8 @@ void CmdSetStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 				// TODO(GunChleoc): Savegame compatibility, remove packet version 3 after v1.0
 				ware_ = DescriptionIndex(fr.unsigned_8());
 			} else {
-				ware_ = isworker_ ?
-							egbase.mutable_descriptions()->load_worker(fr.string()) :
-							egbase.mutable_descriptions()->load_ware(fr.string());
+				ware_ = isworker_ ? egbase.mutable_descriptions()->load_worker(fr.string()) :
+				                    egbase.mutable_descriptions()->load_ware(fr.string());
 			}
 			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
 		} else {
@@ -2047,7 +2050,8 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(warehouse_);
 	fw.unsigned_8(isworker_);
-	fw.string(isworker_ ? egbase.descriptions().name(ware_, MapObjectType::WORKER) : egbase.descriptions().name(ware_, MapObjectType::WARE));
+	fw.string(isworker_ ? egbase.descriptions().name(ware_, MapObjectType::WORKER) :
+	                      egbase.descriptions().name(ware_, MapObjectType::WARE));
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
