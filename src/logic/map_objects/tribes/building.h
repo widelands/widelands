@@ -287,6 +287,7 @@ public:
 	// values adjusted to the preciousness of the ware in general are returned.
 	virtual int32_t get_priority(WareWorker type, DescriptionIndex, bool adjust = true) const;
 	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);
+	bool has_ware_priority(DescriptionIndex ware_index) const;
 
 	void collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const;
 

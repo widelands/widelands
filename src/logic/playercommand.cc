@@ -1253,17 +1253,20 @@ void CmdSetWarePriority::execute(Game& game) {
 						return;
 					}
 				}
-				NEVER_HERE();
+				// TODO(GunChleoc): Savegame compatibility, add NEVER_HERE(); after v1.0
 			}
 		}
 	} else if (upcast(Building, psite, mo)) {
 		if (psite->owner().player_number() == sender()) {
-			psite->set_priority(type_, index_, priority_);
+			// TODO(GunChleoc): Savegame compatibility, remove condition & has_ware_priority function after v1.0
+			if (psite->has_ware_priority(index_)) {
+				psite->set_priority(type_, index_, priority_);
+			}
 		}
 	}
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 2;
+constexpr uint16_t kCurrentPacketVersionCmdSetWarePriority = 3;
 
 void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersionCmdSetWarePriority);
@@ -1272,7 +1275,7 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.unsigned_8(type_);
-	fw.signed_32(index_);
+	fw.string(egbase.descriptions().name(index_, MapObjectType::WARE));
 	fw.signed_32(priority_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1280,11 +1283,15 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdSetWarePriority) {
+		if (packet_version > 2 && packet_version <= kCurrentPacketVersionCmdSetWarePriority) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			type_ = fr.unsigned_8();
-			index_ = fr.signed_32(); // NOCOM
+			if (packet_version == 2) {
+				index_ = fr.signed_32();
+			} else {
+				index_ = egbase.mutable_descriptions()->load_ware(fr.string());
+			}
 			priority_ = fr.signed_32();
 			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {

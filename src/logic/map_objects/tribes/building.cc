@@ -821,6 +821,9 @@ void Building::set_priority(int32_t const type,
 		ware_priorities_[ware_index] = new_priority;
 	}
 }
+bool Building::has_ware_priority(DescriptionIndex ware_index) const {
+	return ware_priorities_.count(ware_index);
+}
 
 void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
