@@ -54,8 +54,9 @@ public:
 	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
 	void cancel_trade(int trade_id);
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	bool has_inputqueue(DescriptionIndex wi, WareWorker type) const override;
+
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);

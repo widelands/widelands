@@ -31,7 +31,6 @@
 
 namespace Widelands {
 
-class Request;
 class Soldier;
 class WorkerDescr;
 
@@ -338,7 +337,7 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	bool has_inputqueue(DescriptionIndex, WareWorker type) const override;
 
 	bool init(EditorGameBase&) override;

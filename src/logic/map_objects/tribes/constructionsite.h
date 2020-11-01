@@ -103,7 +103,7 @@ public:
 		return info_;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	bool has_inputqueue(DescriptionIndex wi, WareWorker type) const override;
 
 	void set_building(const BuildingDescr&) override;

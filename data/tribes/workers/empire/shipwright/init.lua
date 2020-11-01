@@ -44,7 +44,7 @@ descriptions:new_worker_type {
       work = {
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 50
+            priority = "50%"
          },
          hotspot = { 12, 27 },
          fps = 10

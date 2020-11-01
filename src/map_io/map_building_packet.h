@@ -23,7 +23,6 @@
 #include "map_io/map_data_packet.h"
 
 class FileRead;
-class FileWrite;
 
 namespace Widelands {
 
@@ -39,7 +38,6 @@ struct MapBuildingPacket {
 
 protected:
 	void read_priorities(EditorGameBase& egbase, Building&, FileRead&);
-	void write_priorities(const Building&, FileWrite&);
 };
 }  // namespace Widelands
 

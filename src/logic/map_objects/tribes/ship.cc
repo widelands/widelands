@@ -641,7 +641,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				if (ware) {
 					WaresQueue* wq;
 					try {
-						wq = dynamic_cast<WaresQueue*>(&cs->inputqueue(ware->descr_index(), wwWARE));
+						wq = dynamic_cast<WaresQueue*>(
+						   &cs->inputqueue(ware->descr_index(), wwWARE, nullptr));
 						assert(wq);
 					} catch (const WException&) {
 						// cs->inputqueue() may throw if this is an additional item

@@ -208,7 +208,7 @@ public:
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	bool has_inputqueue(DescriptionIndex wi, WareWorker type) const override;
 
 	void log_general_info(const EditorGameBase&) const override;

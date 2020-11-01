@@ -279,27 +279,11 @@ void WarehouseSupply::send_to_storage(Game&, Warehouse* /* wh */) {
 }
 
 uint32_t WarehouseSupply::nr_supplies(const Game& game, const Request& req) const {
-	if (req.get_type() == wwWORKER) {
-		return warehouse_->count_workers(
-		   game, req.get_index(), req.get_requirements(),
-		   (req.get_exact_match() ? Warehouse::Match::kExact : Warehouse::Match::kCompatible));
-	}
-
-	//  Calculate how many wares can be sent out - it might be that we need them
-	// ourselves. E.g. for hiring new soldiers.
-	int32_t const x = wares_.stock(req.get_index());
-	// only mark an ware of that type as available, if the priority of the
-	// request + number of that wares in warehouse is > priority of request
-	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
-	// be taken back to the warehouse as the request of the warehouse would be
-	// highered and would have the same value as the original request)
-	int32_t const y = x + (req.get_priority(0) / 100) -
-	                  (warehouse_->get_priority(wwWARE, req.get_index()) / 100) - 1;
-	// But the number should never be higher than the number of wares available
-	if (y > x) {
-		return x;
-	}
-	return (x > 0) ? x : 0;
+	return req.get_type() == wwWORKER ?
+	          warehouse_->count_workers(game, req.get_index(), req.get_requirements(),
+	                                    (req.get_exact_match() ? Warehouse::Match::kExact :
+	                                                             Warehouse::Match::kCompatible)) :
+	          wares_.stock(req.get_index());
 }
 
 /// Launch a ware.
@@ -1413,6 +1397,18 @@ void Warehouse::set_worker_policy(DescriptionIndex ware, StockPolicy policy) {
  * and remove one of them if appropriate.
  */
 void Warehouse::check_remove_stock(Game& game) {
+	if (portdock_ && portdock_->expedition_bootstrap()) {
+		for (InputQueue* q : portdock_->expedition_bootstrap()->queues(true)) {
+			if (q->get_type() == wwWARE && q->get_filled() > q->get_max_fill()) {
+				// TODO(Nordfriese): We directly add the ware to the warehouse
+				// here. This is inconsistent, see issues #1444/3880/4311
+				q->set_filled(q->get_filled() - 1);
+				supply_->add_wares(q->get_index(), 1);
+				break;
+			}
+		}
+	}
+
 	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (DescriptionIndex ware = 0; ware < static_cast<DescriptionIndex>(ware_policy_.size());
 		     ++ware) {
@@ -1437,13 +1433,11 @@ void Warehouse::check_remove_stock(Game& game) {
 	}
 }
 
-// TODO(Nordfriese): Called by a Request/Transfer/WareInstance/whatever that enters
-// the expedition bootstrap. Should instead return the InputQueue that requested
-// this particular item. See discussion in PR #3884.
-InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
+InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type, const Request* r) {
 	assert(portdock_ != nullptr);
 	assert(portdock_->expedition_bootstrap() != nullptr);
-	return portdock_->expedition_bootstrap()->first_empty_inputqueue(index, type);
+	return r ? portdock_->expedition_bootstrap()->inputqueue(*r) :
+	           portdock_->expedition_bootstrap()->inputqueue(index, type, false);
 }
 bool Warehouse::has_inputqueue(DescriptionIndex wi, WareWorker type) const {
 	for (const auto& queue : portdock_->expedition_bootstrap()->queues(false)) {
