@@ -112,4 +112,6 @@ wl_library(base_math
   SRCS
     math.h
     math.cc
+  DEPENDS
+    base_exceptions
 )
