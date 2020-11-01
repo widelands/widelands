@@ -732,7 +732,11 @@ CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des)
 void CmdExpeditionConfig::execute(Game& game) {
 	if (upcast(PortDock, pd, game.objects().get_object(serial))) {
 		if (ExpeditionBootstrap* x = pd->expedition_bootstrap()) {
-			x->demand_additional_item(game, type, index, add);
+			// TODO(GunChleoc): Savegame compatibility, remove this condition after v1.0
+			if ((type == wwWARE && pd->owner().tribe().has_ware(index)) ||
+				(type == wwWORKER && pd->owner().tribe().has_worker(index))) {
+				x->demand_additional_item(game, type, index, add);
+			}
 		}
 	}
 }
@@ -745,16 +749,31 @@ void CmdExpeditionConfig::serialize(StreamWrite& ser) {
 	ser.unsigned_8(add ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdExpeditionConfig = 1;
+constexpr uint16_t kCurrentPacketVersionCmdExpeditionConfig = 2;
 
 void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdExpeditionConfig) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdExpeditionConfig) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PortDock>(fr.unsigned_32(), mol);
-			type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
-			index = fr.unsigned_32(); // NOCOM
+			if (packet_version == 1) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 1 after v1.0
+				type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
+				index = fr.unsigned_32();
+			} else {
+				if (fr.unsigned_8() == 0) {
+					type = wwWARE;
+					if (packet_version > 1) {
+						index = egbase.mutable_descriptions()->load_ware(fr.string());
+					}
+				} else {
+					type = wwWORKER;
+					if (packet_version > 1) {
+						index = egbase.mutable_descriptions()->load_worker(fr.string());
+					}
+				}
+			}
 			add = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -770,7 +789,9 @@ void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObject
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 	fw.unsigned_8(type == wwWARE ? 0 : 1);
-	fw.unsigned_32(index);
+	fw.string(type == wwWARE ?
+				  egbase.descriptions().name(index, MapObjectType::WARE) :
+				  egbase.descriptions().name(index, MapObjectType::WORKER));
 	fw.unsigned_8(add ? 1 : 0);
 }
 
