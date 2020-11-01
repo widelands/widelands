@@ -40,7 +40,7 @@ public:
 	                              GameSettingsProvider* const settings);
 
 	void update();
-	void force_new_dimensions( uint32_t standard_element_height);
+	void force_new_dimensions(uint32_t standard_element_height);
 
 private:
 	PlayerSlot id_;
