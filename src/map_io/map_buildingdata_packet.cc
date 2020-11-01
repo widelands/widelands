@@ -141,7 +141,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					for (size_t i = (packet_version >= 7 ? fr.unsigned_32() : 0); i; --i) {
 						const std::string warename(fr.string());
 						building.set_priority(
-						   wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr));
+						   wwWARE, descriptions->load_ware(warename), WarePriority(fr));
 					}
 
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
