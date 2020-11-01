@@ -45,10 +45,13 @@ run(function()
       return result
    end
 
-   local target_field = wait_for_starting_conditions(
-                           starting_field,
-                           player,
-                           wl.Game():get_building_description(starting_immovable.descr.name).conquers)
+   local target_field = nil
+   repeat
+      target_field = wait_for_starting_conditions(
+                        starting_field,
+                        player,
+                        wl.Game():get_building_description(starting_immovable.descr.name).conquers)
+   until target_field ~= nil
 
    -- Define our messages
    push_textdomain("training_wheels")
@@ -88,9 +91,7 @@ run(function()
       modal = false
    }
 
-
    pop_textdomain()
-
 
    -- Force buildhelp so we can show the flag position
    mapview.buildhelp = true
