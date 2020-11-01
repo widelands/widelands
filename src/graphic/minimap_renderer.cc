@@ -47,9 +47,9 @@ int round_up_to_nearest_even(int number) {
 // Returns the color to be used in the minimap for the given field.
 inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
                                    const Widelands::FCoords& f,
-                                   MiniMapLayer layers,
-                                   Widelands::PlayerNumber owner,
-                                   bool see_details) {
+                                   const MiniMapLayer layers,
+                                   const Widelands::PlayerNumber owner,
+                                   const bool see_details) {
 	RGBColor color;
 	if (layers & MiniMapLayer::Terrain) {
 		color = egbase.descriptions()
@@ -162,11 +162,11 @@ void draw_view_window(const Widelands::Map& map,
 // Does the actual work of drawing the minimap.
 void do_draw_minimap(Texture& texture,
                      const Widelands::EditorGameBase& egbase,
-                     const Widelands::Player* player,
+                     const Widelands::Player* const player,
                      const Vector2i& top_left,
-                     MiniMapLayer layers,
+                     const MiniMapLayer layers,
                      const bool draw_full = true,
-                     uint16_t* rows_drawn = nullptr) {
+                     uint16_t* const rows_drawn = nullptr) {
 	const Widelands::Map& map = egbase.map();
 	const uint8_t scale = scale_map(map, layers & MiniMapLayer::Zoom2);
 	const uint16_t map_h = map.get_height();
@@ -214,7 +214,7 @@ void do_draw_minimap(Texture& texture,
 			}
 
 			if (vision != Widelands::VisibleState::kUnexplored) {
-				RGBAColor color = calc_minimap_color(
+				const RGBAColor color = calc_minimap_color(
 				   egbase, f, layers, owner, vision == Widelands::VisibleState::kVisible);
 				for (uint8_t x_offset = 0; x_offset < scale; ++x_offset) {
 					for (uint8_t y_offset = 0; y_offset < scale; ++y_offset) {
@@ -254,17 +254,17 @@ Vector2f minimap_pixel_to_mappixel(const Widelands::Map& map,
 }
 
 std::unique_ptr<Texture> draw_minimap(const Widelands::EditorGameBase& egbase,
-                                      const Widelands::Player* player,
+                                      const Widelands::Player* const player,
                                       const Rectf& view_area,
                                       const MiniMapType& minimap_type,
-                                      MiniMapLayer layers) {
+                                      const MiniMapLayer layers) {
 	std::unique_ptr<Texture> texture_static = create_minimap_empty(egbase, layers);
 	draw_minimap_static(*texture_static, egbase, player, layers);
 	return draw_minimap_final(*texture_static, egbase, view_area, minimap_type, layers);
 }
 
 std::unique_ptr<Texture> create_minimap_empty(const Widelands::EditorGameBase& egbase,
-                                              MiniMapLayer layers) {
+                                              const MiniMapLayer layers) {
 	const Widelands::Map& map = egbase.map();
 	const int8_t scale = scale_map(map, layers & MiniMapLayer::Zoom2);
 	const int16_t minimap_w = map.get_width() * scale;
@@ -278,9 +278,9 @@ std::unique_ptr<Texture> create_minimap_empty(const Widelands::EditorGameBase& e
 void draw_minimap_static(Texture& texture,
                          const Widelands::EditorGameBase& egbase,
                          const Widelands::Player* player,
-                         MiniMapLayer layers,
+                         const MiniMapLayer layers,
                          const bool draw_full,
-                         uint16_t* rows_drawn) {
+                         uint16_t* const rows_drawn) {
 	const Widelands::Map& map = egbase.map();
 	const Widelands::Coords node = MapviewPixelFunctions::calc_node_and_triangle(map, 0, 0).node;
 
@@ -294,7 +294,7 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
                                             const Widelands::EditorGameBase& egbase,
                                             const Rectf& view_area,
                                             const MiniMapType& minimap_type,
-                                            MiniMapLayer layers) {
+                                            const MiniMapLayer layers) {
 	const Widelands::Map& map = egbase.map();
 	const bool zoom = layers & MiniMapLayer::Zoom2;
 	const int8_t scale = scale_map(map, zoom);
@@ -306,10 +306,10 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 	// Center the view on the middle of the 'view_area'.
 	switch (minimap_type) {
 	case MiniMapType::kStaticViewWindow: {
-		uint16_t move_x =
+		const uint16_t move_x =
 		   static_cast<uint16_t>(view_area.center().x * scale / kTriangleWidth + minimap_w / 2) %
 		   minimap_w;
-		uint16_t move_y =
+		const uint16_t move_y =
 		   static_cast<uint16_t>(view_area.center().y * scale / kTriangleHeight + minimap_h / 2) %
 		   minimap_h;
 
