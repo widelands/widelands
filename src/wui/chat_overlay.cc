@@ -59,9 +59,7 @@ struct ChatOverlay::Impl {
 	FxId new_message_;
 
 	Impl()
-	   : oldest_(0),
-	     sound_played_(time(nullptr)),
-	     chat_message_subscriber_(
+	   : chat_message_subscriber_(
 	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
 	     log_message_subscriber_(
 	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
