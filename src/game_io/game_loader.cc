@@ -118,7 +118,14 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			game_.delete_world_and_tribes();
 			game_.descriptions();
 
-			// NOCOM ugly!
+			// TODO(Nordfriese): This needs to be done here already to prevent the
+			// GamePlayerInfoPacket from crashing in the case that we are loading
+			// a savegame and any player's tribe is receiving a new ware from an
+			// add-on's postload.lua. It would be much better to load only the
+			// tribes that are being played, but this would require rewriting
+			// the GamePlayerInfoPacket so that we know *all* tribes in the game
+			// *before* loading any ware statistics. Do this when we next break
+			// savegame compatibility completely.
 			game_.load_all_tribes();
 			game_.postload_addons();
 		}

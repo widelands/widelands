@@ -70,6 +70,9 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
      lua_(lua),
      description_manager_(new DescriptionManager(lua)) {
 
+	// Immediately preload and register all add-on units. Better to do this
+	// very early than to risk crashes because it was done too late…
+
 	assert(lua_);
 	for (const AddOnInfo& info : addons) {
 		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
@@ -81,8 +84,6 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 		}
 	}
 
-	// Immediately register all add-on units.
-	// NOCOM There must be a better place for this?
 	for (const AddOnInfo& info : addons) {
 		if (info.category == AddOnCategory::kWorld) {
 			description_manager_->register_directory(kAddOnDir + FileSystem::file_separator() + info.internal_name,
