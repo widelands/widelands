@@ -281,15 +281,18 @@ void draw_minimap_static(Texture& texture,
                          const MiniMapLayer layers,
                          const bool draw_full,
                          uint16_t* const rows_drawn) {
-	NoteThreadSafeFunction::instantiate([&texture, &egbase, player, layers, draw_full, rows_drawn]() {
-	const Widelands::Map& map = egbase.map();
-	const Widelands::Coords node = MapviewPixelFunctions::calc_node_and_triangle(map, 0, 0).node;
+	NoteThreadSafeFunction::instantiate(
+	   [&texture, &egbase, player, layers, draw_full, rows_drawn]() {
+		   const Widelands::Map& map = egbase.map();
+		   const Widelands::Coords node =
+		      MapviewPixelFunctions::calc_node_and_triangle(map, 0, 0).node;
 
-	texture.lock();
-	do_draw_minimap(
-	   texture, egbase, player, Vector2i(node.x, node.y), layers, draw_full, rows_drawn);
-	texture.unlock(Texture::Unlock_Update);
-	}, true);
+		   texture.lock();
+		   do_draw_minimap(
+		      texture, egbase, player, Vector2i(node.x, node.y), layers, draw_full, rows_drawn);
+		   texture.unlock(Texture::Unlock_Update);
+	   },
+	   true);
 }
 
 std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
