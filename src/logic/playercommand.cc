@@ -1958,9 +1958,10 @@ void CmdSetStockPolicy::execute(Game& game) {
 		MapObject* mo = game.objects().get_object(warehouse_);
 		if (upcast(ConstructionSite, cs, mo)) {
 			if (upcast(WarehouseSettings, s, cs->get_settings())) {
-				if (isworker_) {
+				// TODO(GunChleoc): Savegame compatibility, remove count checks after v1.0
+				if (isworker_ && s->worker_preferences.count(ware_) == 1) {
 					s->worker_preferences[ware_] = policy_;
-				} else {
+				} else if (s->ware_preferences.count(ware_) == 1) {
 					s->ware_preferences[ware_] = policy_;
 				}
 			}
@@ -1973,17 +1974,17 @@ void CmdSetStockPolicy::execute(Game& game) {
 			}
 
 			if (isworker_) {
-				if (!(game.descriptions().worker_exists(ware_))) {
+				if (!(warehouse->owner().tribe().has_worker(ware_))) {
 					log_warn_time(game.get_gametime(),
-					              "Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(),
+					              "Cmd_SetStockPolicy: sender %u, worker %u not used by player's tribe\n", sender(),
 					              ware_);
 					return;
 				}
 				warehouse->set_worker_policy(ware_, policy_);
 			} else {
-				if (!(game.descriptions().ware_exists(ware_))) {
+				if (!(warehouse->owner().tribe().has_ware(ware_))) {
 					log_warn_time(game.get_gametime(),
-					              "Cmd_SetStockPolicy: sender %u, ware %u does not exist\n", sender(),
+					              "Cmd_SetStockPolicy: sender %u, ware %u not used by player's tribe\n", sender(),
 					              ware_);
 					return;
 				}
@@ -2008,16 +2009,23 @@ void CmdSetStockPolicy::serialize(StreamWrite& ser) {
 	ser.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
-constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 1;
+constexpr uint8_t kCurrentPacketVersionCmdSetStockPolicy = 2;
 
 void CmdSetStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersionCmdSetStockPolicy) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdSetStockPolicy) {
 			PlayerCommand::read(fr, egbase, mol);
 			warehouse_ = fr.unsigned_32();
 			isworker_ = fr.unsigned_8();
-			ware_ = DescriptionIndex(fr.unsigned_8()); // NOCOM
+			if (packet_version == 3) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 3 after v1.0
+				ware_ = DescriptionIndex(fr.unsigned_8());
+			} else {
+				ware_ = isworker_ ?
+							egbase.mutable_descriptions()->load_worker(fr.string()) :
+							egbase.mutable_descriptions()->load_ware(fr.string());
+			}
 			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
@@ -2033,7 +2041,7 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(warehouse_);
 	fw.unsigned_8(isworker_);
-	fw.unsigned_8(ware_);
+	fw.string(isworker_ ? egbase.descriptions().name(ware_, MapObjectType::WORKER) : egbase.descriptions().name(ware_, MapObjectType::WARE));
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
