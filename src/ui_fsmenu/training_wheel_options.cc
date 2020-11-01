@@ -78,7 +78,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 		UI::Checkbox* checkbox = new UI::Checkbox(
 		   list_box, UI::PanelStyle::kFsMenu, Vector2i::zero(), objective.second.descname);
 		checkbox->set_state(objective.second.solved);
-		list_box->add(checkbox);
+		list_box->add(checkbox, UI::Box::Resizing::kFullSize);
 		checkboxes_.insert(
 		   std::make_pair(objective.first, TrainingWheelOptions::Entry(objective.second, checkbox)));
 		list_box->add_space(0);
