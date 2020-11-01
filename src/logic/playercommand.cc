@@ -810,6 +810,10 @@ void CmdEnhanceBuilding::execute(Game& game) {
 			cs->enhance(game);
 		}
 	} else if (upcast(Building, building, mo)) {
+		if (bi_ != Widelands::INVALID_INDEX && bi_ != building->descr().enhancement()) {
+			// TODO(GunChleoc): Savegame compatibility, remove this condition after v1.0
+			bi_ = building->descr().enhancement();
+		}
 		game.get_player(sender())->enhance_building(building, bi_, keep_wares_);
 	}
 }
@@ -821,15 +825,25 @@ void CmdEnhanceBuilding::serialize(StreamWrite& ser) {
 	ser.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 2;
+constexpr uint16_t kCurrentPacketVersionCmdEnhanceBuilding = 3;
 
 void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdEnhanceBuilding) {
+		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionCmdEnhanceBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			bi_ = fr.unsigned_16(); // NOCOM
+			if (packet_version == 2) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 2 after v1.0
+				bi_ = fr.unsigned_16();
+			} else {
+				std::string buildingname = fr.string();
+				if (buildingname.empty()) {
+					bi_ = Widelands::INVALID_INDEX;
+				} else {
+					bi_ = egbase.mutable_descriptions()->load_building(buildingname);
+				}
+			}
 			keep_wares_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -843,7 +857,11 @@ void CmdEnhanceBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_16(kCurrentPacketVersionCmdEnhanceBuilding);
 	PlayerCommand::write(fw, egbase, mos);
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.unsigned_16(bi_);
+	if (bi_ == Widelands::INVALID_INDEX) {
+		fw.string("");
+	} else {
+		fw.string(egbase.descriptions().name(bi_, MapObjectType::BUILDING));
+	}
 	fw.unsigned_8(keep_wares_ ? 1 : 0);
 }
 
