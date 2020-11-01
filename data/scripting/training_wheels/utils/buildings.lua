@@ -123,9 +123,11 @@ function find_immovable_fields(center_field, immovable_attribute, inner_radius, 
    local function find_immovable_fields_helper(center_field, immovable_attribute, inner_radius, outer_radius)
       -- Hollow region takes first the outer, then the inner radius
       local fields_this_round = {}
-      for f_idx, field in ipairs(center_field:region(outer_radius, inner_radius)) do
-         if field.immovable ~= nil and field.immovable:has_attribute(immovable_attribute) then
-            table.insert(fields_this_round, field)
+      if center_field ~= nil then
+         for f_idx, field in ipairs(center_field:region(outer_radius, inner_radius)) do
+            if field.immovable ~= nil and field.immovable:has_attribute(immovable_attribute) then
+               table.insert(fields_this_round, field)
+            end
          end
       end
       return fields_this_round
