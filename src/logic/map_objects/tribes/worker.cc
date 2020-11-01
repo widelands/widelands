@@ -1282,14 +1282,14 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 	case wwWORKER: {
 		worker_economy_ = economy;
 		if (old) {
-			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name()), 1);
 		}
 		if (supply_) {
 			supply_->set_economy(worker_economy_);
 		}
 		if (worker_economy_) {
 			worker_economy_->add_wares_or_workers(
-			   owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
+			   owner().tribe().worker_index(descr().name()), 1, ware_economy_);
 		}
 	} break;
 	}

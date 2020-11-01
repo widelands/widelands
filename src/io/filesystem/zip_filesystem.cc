@@ -405,7 +405,7 @@ void ZipFilesystem::set_time_info(tm_zip& time) {
  * \throw FileNotFoundError if the file couldn't be opened.
  */
 void* ZipFilesystem::load(const std::string& fname, size_t& length) {
-	if (!file_exists(fname.c_str()) || is_directory(fname.c_str())) {
+	if (!file_exists(fname) || is_directory(fname)) {
 		throw ZipOperationError(
 		   "ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
 	}
@@ -485,7 +485,7 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, size
 }
 
 StreamRead* ZipFilesystem::open_stream_read(const std::string& fname) {
-	if (!file_exists(fname.c_str()) || is_directory(fname.c_str())) {
+	if (!file_exists(fname) || is_directory(fname)) {
 		throw ZipOperationError(
 		   "ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
 	}

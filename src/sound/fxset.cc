@@ -34,7 +34,7 @@
  * \param random: Randomize the time last played a bit to prevent sound onslaught at game start
  */
 FXset::FXset(const std::string& path, uint32_t random) : last_used_(random % 2000) {
-	const std::string dirname = FileSystem::fs_dirname(path.c_str());
+	const std::string dirname = FileSystem::fs_dirname(path);
 	const std::string basename = FileSystem::fs_filename(path.c_str());
 	paths_ = g_fs->get_sequential_files(dirname, basename, "ogg");
 
