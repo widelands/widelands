@@ -43,6 +43,7 @@ public:
 protected:
 	/// Sets the current selected filename and ends the modal screen with 'Ok' status.
 	void clicked_ok() override;
+	void layout() override;
 
 	/// Update button status and game details
 	void entry_selected();

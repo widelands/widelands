@@ -59,6 +59,7 @@ protected:
 	void layout() override;
 
 	UI::Box content_box_, left_column_box_, right_column_box_;
+	int right_column_width_;
 
 private:
 	/// right column width = get_w * factor. rest goes to left column (minus some padding)

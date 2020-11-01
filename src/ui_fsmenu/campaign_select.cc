@@ -90,6 +90,11 @@ void FullscreenMenuCampaignSelect::entry_selected() {
 	}
 }
 
+void FullscreenMenuCampaignSelect::layout() {
+	TwoColumnsNavigationMenu::layout();
+	campaign_details_.set_max_size(right_column_width_, 0);
+}
+
 /**
  * fill the campaign list
  */

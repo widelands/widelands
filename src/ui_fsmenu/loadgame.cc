@@ -65,7 +65,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
-		                                                _("Return to the single player menu"));
+                                                      _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 
@@ -86,7 +86,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
 }
-
+void FullscreenMenuLoadGame::layout() {
+	TwoColumnsNavigationMenu::layout();
+	load_or_save_.game_details()->set_max_size(right_column_width_, 0);
+}
 void FullscreenMenuLoadGame::think() {
 	TwoColumnsNavigationMenu::think();
 

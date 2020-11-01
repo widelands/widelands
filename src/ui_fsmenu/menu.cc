@@ -70,7 +70,7 @@ void BaseMenu::layout() {
 	horizontal_padding_box_.set_size(get_inner_w(), get_inner_h());
 	vertical_padding_box_.set_max_size(
 	   horizontal_padding_box_.get_w() - 2 * 10 * padding, horizontal_padding_box_.get_h());
-	standard_height_ = get_h() * 9 / 200;
+	standard_height_ = get_inner_h() * 9 / 200;
 	log_dbg("window height: %d, inner: %d, standard height: %d", get_h(), get_inner_h(),
 	        standard_height_);
 	printBox(horizontal_padding_box_);
@@ -85,6 +85,7 @@ TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
      content_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, 0, "content"),
      left_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "left"),
      right_column_box_(&content_box_, 0, 0, UI::Box::Vertical, 0, 0, 0 /*padding*/, "right"),
+     right_column_width_(get_w() * right_column_width_factor),
      right_column_width_factor_(right_column_width_factor) {
 
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
@@ -104,8 +105,10 @@ void TwoColumnsMenu::layout() {
 
 	content_box_.set_max_size(
 	   main_box_.get_w(), main_box_.get_h() /*- 1 * 10 * padding */ - header_box_.get_h());
-
-	right_column_box_.set_desired_size(get_w() * right_column_width_factor_, 0);
+	right_column_width_ = get_inner_w() * right_column_width_factor_;
+	log_dbg(
+	   "width: %d, inner width: %d, right width %d", get_w(), get_inner_w(), right_column_width_);
+	right_column_box_.set_desired_size(right_column_width_, 0);
 	printBox(main_box_);
 	printBox(header_box_);
 	printBox(content_box_);
@@ -138,7 +141,7 @@ void TwoColumnsBackNavigationMenu::layout() {
 	TwoColumnsMenu::layout();
 	printBox(right_column_content_box_);
 	printBox(button_box_);
-	back_.set_desired_size(button_box_.get_w(), standard_height_);
+	back_.set_desired_size(right_column_width_, standard_height_);
 }
 
 bool TwoColumnsBackNavigationMenu::handle_key(bool down, SDL_Keysym code) {
@@ -175,10 +178,8 @@ TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 
 void TwoColumnsNavigationMenu::layout() {
 	TwoColumnsBackNavigationMenu::layout();
-	int w, not_used;
-	ok_.get_desired_size(&w, &not_used);
-	back_.set_desired_size(w - (padding / 2), standard_height_);
-	ok_.set_desired_size(w - (padding / 2), standard_height_);
+	back_.set_desired_size((right_column_width_ / 2) - (padding / 2), standard_height_);
+	ok_.set_desired_size((right_column_width_ / 2) - (padding / 2), standard_height_);
 }
 
 bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {

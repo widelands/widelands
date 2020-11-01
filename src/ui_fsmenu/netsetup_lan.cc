@@ -111,11 +111,17 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
 }
 
 void FullscreenMenuNetSetupLAN::layout() {
-	TwoColumnsMenu::layout();
+	TwoColumnsBackNavigationMenu::layout();
+
+	joingame_.set_desired_size(right_column_width_, standard_height_);
+	playername_.set_desired_size(right_column_width_, standard_height_);
+	hostgame_.set_desired_size(right_column_width_, standard_height_);
+	hostname_.set_desired_size(right_column_width_ - standard_height_ - padding, standard_height_);
+	loadlasthost_.set_desired_size(standard_height_, standard_height_);
 }
 
 void FullscreenMenuNetSetupLAN::think() {
-	TwoColumnsMenu::think();
+	TwoColumnsBackNavigationMenu::think();
 	change_playername();
 
 	discovery_.run();

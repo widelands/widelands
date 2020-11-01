@@ -142,6 +142,8 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 
 void FullscreenMenuScenarioSelect::layout() {
 	TwoColumnsNavigationMenu::layout();
+	scenario_details_.set_max_size(right_column_width_, 0);
+	scenario_difficulty_.set_desired_size(right_column_width_, standard_height_);
 }
 
 std::string FullscreenMenuScenarioSelect::get_map() {
