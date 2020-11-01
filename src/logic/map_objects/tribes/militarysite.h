@@ -107,7 +107,7 @@ public:
 		return soldier_preference_;
 	}
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void conquer_area(EditorGameBase&);

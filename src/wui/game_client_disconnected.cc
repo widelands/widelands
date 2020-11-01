@@ -139,7 +139,7 @@ void GameClientDisconnected::clicked_continue() {
 	assert(type_dropdown_.has_selection());
 
 	const std::string selection = type_dropdown_.get_selected();
-	assert(selection != "");
+	assert(!selection.empty());
 
 	set_ai(selection);
 	// Visibility works as a hint that the window was closed by a button click

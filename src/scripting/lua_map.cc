@@ -172,11 +172,8 @@ struct SoldierMapDescr {
 		return health < ot.health;
 	}
 	bool operator==(const SoldierMapDescr& ot) const {
-		if (health == ot.health && attack == ot.attack && defense == ot.defense &&
-		    evade == ot.evade) {
-			return true;
-		}
-		return false;
+		return (health == ot.health && attack == ot.attack && defense == ot.defense &&
+		        evade == ot.evade);
 	}
 };
 
@@ -311,7 +308,7 @@ WaresWorkersMap count_wares_on_flag_(Widelands::Flag& f,
 }
 
 // Sort functor to sort the owners claiming a field by their influence.
-static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
+int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
 	return first.second > second.second;
 }
 
@@ -2262,7 +2259,8 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const uint32_t attribute_id = get()->get_attribute_id(luaL_checkstring(L, 2));
+	const uint32_t attribute_id =
+	   Widelands::MapObjectDescr::get_attribute_id(luaL_checkstring(L, 2));
 	lua_pushboolean(L, get()->has_attribute(attribute_id));
 	return 1;
 }
@@ -6367,7 +6365,7 @@ int LuaShip::get_wares(lua_State* L) {
 	Widelands::Ship* ship = get(L, egbase);
 
 	Widelands::WareInstance* ware = nullptr;
-	std::string filter = "";
+	std::string filter;
 
 	if (lua_gettop(L) > 1) {
 		filter = luaL_checkstring(L, -1);
@@ -6422,7 +6420,7 @@ int LuaShip::get_workers(lua_State* L) {
 	Widelands::Ship* ship = get(L, egbase);
 
 	Widelands::Worker* worker = nullptr;
-	std::string filter = "";
+	std::string filter;
 
 	if (lua_gettop(L) > 1) {
 		filter = luaL_checkstring(L, -1);

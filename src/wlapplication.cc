@@ -503,8 +503,6 @@ void WLApplication::run() {
 	}
 
 	g_sh->stop_music(500);
-
-	return;
 }
 
 /**
@@ -1070,7 +1068,7 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("editor")) {
 		filename_ = commandline_["editor"];
-		if (filename_.size() && *filename_.rbegin() == '/') {
+		if (!filename_.empty() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kEditor;
@@ -1082,7 +1080,7 @@ void WLApplication::handle_commandline_parameters() {
 			throw wexception("replay can not be combined with other actions");
 		}
 		filename_ = commandline_["replay"];
-		if (filename_.size() && *filename_.rbegin() == '/') {
+		if (!filename_.empty() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kReplay;
@@ -1174,7 +1172,7 @@ void WLApplication::mainmenu() {
 	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
 
 	for (;;) {
-		if (message.size()) {
+		if (!message.empty()) {
 			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
 			UI::WLMessageBox mmb(mm.get(), UI::WindowStyle::kFsMenu, messagetitle,
@@ -1329,6 +1327,16 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
  */
 // TODO(Nordfriese): This should return a `bool` to indicate whether a game was started
 void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	if (tribeinfos.empty()) {
+		UI::WLMessageBox mbox(
+		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
+		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return;
+	}
+
 	g_sh->change_music("ingame", 1000);
 
 	if (internet) {
@@ -1345,7 +1353,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 
 		// reinitalise in every run, else graphics look strange
-		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered);
+		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered, tribeinfos);
 		ns.run<MenuTarget>();
 
 		if (InternetGaming::ref().logged_in()) {
@@ -1363,7 +1371,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 
 		switch (menu_result) {
 		case MenuTarget::kHostgame: {
-			GameHost netgame(fsmm, playername);
+			GameHost netgame(fsmm, playername, tribeinfos);
 			netgame.run();
 			break;
 		}
@@ -1448,6 +1456,14 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
                              const bool preconfigured,
                              bool* canceled) {
 	MenuTarget code = MenuTarget::kNormalGame;
+	if (sp.settings().tribes.empty()) {
+		UI::WLMessageBox mbox(
+		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
+		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return false;
+	}
 	FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
 	code = lgm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
@@ -1572,7 +1588,7 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 	}
 	try {
 		// Load selected campaign-map-file
-		if (filename.size()) {
+		if (!filename.empty()) {
 			return game.run_splayer_scenario_direct(filename.c_str(), "");
 		}
 	} catch (const std::exception& e) {

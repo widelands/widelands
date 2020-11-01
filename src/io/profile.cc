@@ -834,7 +834,7 @@ void Profile::write(char const* const filename,
 
 				// Try to avoid _every_ possible way of
 				// getting inconsistent data
-				std::string tempstr("");
+				std::string tempstr;
 
 				if (multiline) {
 					// Show WL that a multilined text starts

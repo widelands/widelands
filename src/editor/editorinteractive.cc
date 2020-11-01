@@ -436,7 +436,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 }
 
 void EditorInteractive::load(const std::string& filename) {
-	assert(filename.size());
+	assert(!filename.empty());
 	assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();
@@ -963,7 +963,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
-	eia.load_world_units(&eia, egbase);
+	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {
 		if (filename.empty()) {

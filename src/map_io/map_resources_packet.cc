@@ -26,15 +26,12 @@
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapResourcesPacket::read(FileSystem& fs,
-                              EditorGameBase& egbase,
-                              const WorldLegacyLookupTable& lookup_table) {
+void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	fr.open(fs, "binary/resource");
 
@@ -49,13 +46,7 @@ void MapResourcesPacket::read(FileSystem& fs,
 			std::map<uint8_t, uint8_t> smap;
 			for (uint8_t i = 0; i < nr_res; ++i) {
 				uint8_t const id = fr.unsigned_16();
-				const std::string resource_name(lookup_table.lookup_resource(fr.c_string()));
-				const DescriptionIndex res =
-				   egbase.mutable_descriptions()->load_resource(resource_name);
-				if (res == Widelands::INVALID_INDEX) {
-					throw GameDataError("Unknown resource '%s' in map", resource_name.c_str());
-				}
-				smap[id] = res;
+				smap[id] = egbase.mutable_descriptions()->load_resource(fr.c_string());
 			}
 
 			for (uint16_t y = 0; y < map->get_height(); ++y) {

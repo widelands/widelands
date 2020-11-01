@@ -61,10 +61,7 @@ bool can_support_port(const PlayerNumber player_number, const FCoords& coord) {
 		return false;
 	}
 	BaseImmovable* baim = coord.field->get_immovable();
-	if (baim != nullptr && baim->descr().type() >= MapObjectType::FLAG) {
-		return false;
-	}
-	return true;
+	return (baim == nullptr || baim->descr().type() < MapObjectType::FLAG);
 }
 
 /// Returns true if a ship owned by 'player_number' can land and erect a port at 'coord'.
@@ -1045,7 +1042,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = g_style_manager->color_tag(
+		statistics_string = StyleManager::color_tag(
 		   statistics_string, g_style_manager->building_statistics_style().medium_color());
 	}
 

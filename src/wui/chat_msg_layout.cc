@@ -33,7 +33,7 @@ std::string as_playercolor(const int16_t playern, const std::string& text) {
 	                                 kPlayerColors[playern] :
 	                                 g_style_manager->font_style(UI::FontStyle::kChatServer).color();
 	return g_style_manager->font_style(UI::FontStyle::kChatPlayername)
-	   .as_font_tag(g_style_manager->color_tag(text, playercolor));
+	   .as_font_tag(StyleManager::color_tag(text, playercolor));
 }
 
 std::string sanitize_message(const std::string& given_text) {
@@ -47,13 +47,13 @@ std::string sanitize_message(const std::string& given_text) {
 
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
-	std::string message = "";
+	std::string message;
 
 	const std::string sanitized = sanitize_message(chat_message.msg);
 	const std::string sender_escaped = richtext_escape(chat_message.sender);
 	const std::string recipient_escaped = richtext_escape(chat_message.recipient);
 
-	if (chat_message.recipient.size() && chat_message.sender.size()) {
+	if (!chat_message.recipient.empty() && !chat_message.sender.empty()) {
 		// Personal message handling
 		if (sanitized.compare(0, 3, "/me")) {
 			message =
@@ -76,7 +76,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 			      chat_message.playern, (chat_message.sender.empty() ? "***" : sender_escaped)) +
 			   g_style_manager->font_style(UI::FontStyle::kChatMessage)
 			      .as_font_tag(sanitized.substr(3));
-		} else if (chat_message.sender.size()) {
+		} else if (!chat_message.sender.empty()) {
 			const std::string sender_formatted =
 			   as_playercolor(chat_message.playern, (boost::format("%s:") % sender_escaped).str());
 			message = (boost::format("%s %s") % sender_formatted %

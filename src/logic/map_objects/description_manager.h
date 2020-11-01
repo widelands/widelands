@@ -70,7 +70,7 @@ public:
 
 private:
 	/// Load a description on demand via notification
-	void load_description_on_demand(const std::string& description_name);
+	void load_description_on_demand(const std::string& description_name, bool allow_failure);
 	/// For loading all map object descriptions with a given attribute on demand
 	void register_attributes(const std::vector<std::string>& attributes,
 	                         const std::string& description_name);

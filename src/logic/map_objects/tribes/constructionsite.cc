@@ -170,9 +170,8 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s =
-	   g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
-	                              g_style_manager->building_statistics_style().construction_color());
+	*s = StyleManager::color_tag((boost::format(_("%i%% built")) % percent).str(),
+	                             g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -694,7 +693,6 @@ Overwrite as many values of the current settings with those of the given setting
 void ConstructionSite::apply_settings(const BuildingSettings& cs) {
 	assert(settings_);
 	settings_->apply(cs);
-	delete &cs;
 }
 
 /*

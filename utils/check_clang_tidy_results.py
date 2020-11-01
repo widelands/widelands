@@ -59,21 +59,14 @@ SUPPRESSED_CHECKS = {
     '[modernize-use-default-member-init]',
     '[modernize-use-emplace]',
     '[modernize-use-equals-default]',
-    '[readability-container-size-empty]',
     '[readability-delete-null-pointer]',
     '[readability-else-after-return]',
     '[readability-function-size]',
     '[readability-implicit-bool-conversion]',
     '[readability-inconsistent-declaration-parameter-name]',
     '[readability-named-parameter]',
-    '[readability-non-const-parameter]',
-    '[readability-redundant-control-flow]',
     '[readability-redundant-member-init]',
     '[readability-redundant-string-cstr]',
-    '[readability-redundant-string-init]',
-    '[readability-simplify-boolean-expr]',
-    '[readability-static-accessed-through-instance]',
-    '[readability-static-definition-in-anonymous-namespace]'
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
