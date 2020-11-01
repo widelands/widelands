@@ -63,6 +63,8 @@ public:
 	size_t nr_wares() const;
 	size_t nr_workers() const;
 
+	const std::string& name(DescriptionIndex index, MapObjectType type) const;
+
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(DescriptionIndex index) const;
 	bool immovable_exists(DescriptionIndex index) const;

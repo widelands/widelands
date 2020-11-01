@@ -124,6 +124,29 @@ size_t Descriptions::nr_workers() const {
 	return workers_->size();
 }
 
+const std::string& Descriptions::name(DescriptionIndex index, MapObjectType type) const {
+	switch (type) {
+	case MapObjectType::CRITTER:
+		return get_critter_descr(index)->name();
+	case MapObjectType::RESOURCE:
+		return get_resource_descr(index)->name();
+	case MapObjectType::TERRAIN:
+		return get_terrain_descr(index)->name();
+	case MapObjectType::IMMOVABLE:
+		return get_immovable_descr(index)->name();
+	case MapObjectType::BUILDING:
+		return get_building_descr(index)->name();
+	case MapObjectType::SHIP:
+		return get_ship_descr(index)->name();
+	case MapObjectType::WARE:
+		return get_ware_descr(index)->name();
+	case MapObjectType::WORKER:
+		return get_worker_descr(index)->name();
+	default:
+		NEVER_HERE();
+	}
+}
+
 bool Descriptions::ware_exists(const std::string& warename) const {
 	return wares_->exists(warename) != nullptr;
 }

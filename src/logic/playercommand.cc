@@ -254,9 +254,12 @@ CmdBuild::CmdBuild(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 }
 
 void CmdBuild::execute(Game& game) {
-	// Empty former_buildings vector since it's a new csite.
-	FormerBuildings former_buildings;
-	game.get_player(sender())->build(coords, bi, true, former_buildings);
+	// TODO(GunChleoc): Savegame compatibility, remove condition after v1.0
+	if (bi != Widelands::INVALID_INDEX) {
+		// Empty former_buildings vector since it's a new csite.
+		FormerBuildings former_buildings;
+		game.get_player(sender())->build(coords, bi, true, former_buildings);
+	}
 }
 
 void CmdBuild::serialize(StreamWrite& ser) {
@@ -265,19 +268,35 @@ void CmdBuild::serialize(StreamWrite& ser) {
 	write_coords_32(&ser, coords);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdBuild = 1;
+constexpr uint16_t kCurrentPacketVersionCmdBuild = 2;
 
 void CmdBuild::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdBuild) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdBuild) {
 			PlayerCommand::read(fr, egbase, mol);
-			bi = fr.unsigned_16();
+			if (packet_version == 1) {
+				// TODO(GunChleoc): Savegame compatibility, remove packet version 1 after v1.0
+				bi = fr.unsigned_16();
+			} else {
+				bi = egbase.mutable_descriptions()->load_building(fr.string());
+			}
 			coords = read_coords_32(&fr, egbase.map().extent());
 		} else {
 			throw UnhandledVersionError("CmdBuild", packet_version, kCurrentPacketVersionCmdBuild);
 		}
-
+		if (packet_version == 1) {
+			if (!egbase.get_player(sender())->tribe().has_building(bi)) {
+				bi = Widelands::INVALID_INDEX;
+				log_warn("Player does not have building with index %d. Ignoring build command.", bi);
+			} else {
+				const int size = egbase.descriptions().get_building_descr(bi)->get_size();
+				if ((egbase.map().get_fcoords(coords).field->get_caps() & size) < size) {
+					bi = Widelands::INVALID_INDEX;
+					log_warn("Building with index %d does not fit on selected field. Ignoring build command.", bi);
+				}
+			}
+		}
 	} catch (const WException& e) {
 		throw GameDataError("build: %s", e.what());
 	}
@@ -288,7 +307,7 @@ void CmdBuild::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos)
 	fw.unsigned_16(kCurrentPacketVersionCmdBuild);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-	fw.unsigned_16(bi);
+	fw.string(egbase.descriptions().name(bi, MapObjectType::BUILDING));
 	write_coords_32(&fw, coords);
 }
 
@@ -735,7 +754,7 @@ void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLo
 			PlayerCommand::read(fr, egbase, mol);
 			serial = get_object_serial_or_zero<PortDock>(fr.unsigned_32(), mol);
 			type = fr.unsigned_8() == 0 ? wwWARE : wwWORKER;
-			index = fr.unsigned_32();
+			index = fr.unsigned_32(); // NOCOM
 			add = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -789,7 +808,7 @@ void CmdEnhanceBuilding::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 		if (packet_version == kCurrentPacketVersionCmdEnhanceBuilding) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			bi_ = fr.unsigned_16();
+			bi_ = fr.unsigned_16(); // NOCOM
 			keep_wares_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -1226,7 +1245,7 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			type_ = fr.unsigned_8();
-			index_ = fr.signed_32();
+			index_ = fr.signed_32(); // NOCOM
 			priority_ = fr.signed_32();
 			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
@@ -1323,8 +1342,8 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
 	fw.string(type_ == wwWARE ?
-				  egbase.descriptions().get_ware_descr(index_)->name() :
-				  egbase.descriptions().get_worker_descr(index_)->name());
+				  egbase.descriptions().name(index_, MapObjectType::WARE) :
+				  egbase.descriptions().name(index_, MapObjectType::WORKER));
 	fw.unsigned_32(max_fill_);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
@@ -1952,7 +1971,7 @@ void CmdSetStockPolicy::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoad
 			PlayerCommand::read(fr, egbase, mol);
 			warehouse_ = fr.unsigned_32();
 			isworker_ = fr.unsigned_8();
-			ware_ = DescriptionIndex(fr.unsigned_8());
+			ware_ = DescriptionIndex(fr.unsigned_8()); // NOCOM
 			policy_ = static_cast<StockPolicy>(fr.unsigned_8());
 		} else {
 			throw UnhandledVersionError(
