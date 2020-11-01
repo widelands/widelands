@@ -115,7 +115,7 @@ wl.Descriptions():new_immovable_type{
          hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird2",
-            priority = 10
+            priority = "10%"
          },
       },
       falling = {
