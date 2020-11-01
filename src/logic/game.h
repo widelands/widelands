@@ -201,12 +201,8 @@ public:
 	void release_training_wheel_lock();
 	void mark_training_wheel_as_solved(const std::string& objective);
 	void skip_training_wheel(const std::string& objective);
-	bool training_wheels_wanted() const {
-		return training_wheels_wanted_;
-	}
-	const std::string& active_training_wheel() const {
-		return training_wheels_->current_objective();
-	}
+	bool training_wheels_wanted() const;
+	std::string active_training_wheel() const;
 
 	void postload() override;
 

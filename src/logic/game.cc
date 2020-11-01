@@ -452,7 +452,7 @@ bool Game::acquire_training_wheel_lock(const std::string& objective) {
 }
 void Game::release_training_wheel_lock() {
 	if (training_wheels_ != nullptr) {
-		return training_wheels_->release_lock();
+		training_wheels_->release_lock();
 	}
 }
 void Game::mark_training_wheel_as_solved(const std::string& objective) {
@@ -465,6 +465,12 @@ void Game::skip_training_wheel(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
 		training_wheels_->skip(objective, training_wheels_wanted_);
 	}
+}
+bool Game::training_wheels_wanted() const {
+	return training_wheels_wanted_;
+}
+std::string Game::active_training_wheel() const {
+	return training_wheels_ ? training_wheels_->current_objective() : "";
 }
 
 /**
