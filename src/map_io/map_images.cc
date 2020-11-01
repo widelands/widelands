@@ -30,7 +30,7 @@ void load_map_images(FileSystem& fs) {
 		return;
 	}
 	for (const std::string& pname : fs.list_directory("pics")) {
-		if (fs.is_directory(pname.c_str())) {
+		if (fs.is_directory(pname)) {
 			continue;
 		}
 		const std::string hash = std::string("map:") + FileSystem::fs_filename(pname.c_str());

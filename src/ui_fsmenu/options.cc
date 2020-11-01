@@ -561,7 +561,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {
 		const LanguageEntry& language_entry = entry.second;
-		language_dropdown_.add(language_entry.descname.c_str(), language_entry.localename, nullptr,
+		language_dropdown_.add(language_entry.descname, language_entry.localename, nullptr,
 		                       language_entry.localename == selected_locale, "");
 	}
 }

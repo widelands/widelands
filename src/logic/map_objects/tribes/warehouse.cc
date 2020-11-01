@@ -1009,7 +1009,7 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 		incorporate_ware(egbase, ware);
 	}
 
-	DescriptionIndex worker_index = owner().tribe().worker_index(w->descr().name().c_str());
+	DescriptionIndex worker_index = owner().tribe().worker_index(w->descr().name());
 
 	supply_->add_workers(worker_index, 1);
 

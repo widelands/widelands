@@ -50,13 +50,11 @@ SUPPRESSED_CHECKS = {
     '[misc-macro-parentheses]',
     '[misc-redundant-expression]',
     '[misc-suspicious-string-compare]',
-    '[modernize-make-shared]',
     '[modernize-make-unique]',
     '[modernize-pass-by-value]',
     '[modernize-raw-string-literal]',
     '[modernize-return-braced-init-list]',
     '[modernize-use-auto]',
-    '[modernize-use-default-member-init]',
     '[modernize-use-emplace]',
     '[modernize-use-equals-default]',
     '[readability-else-after-return]',
@@ -65,7 +63,6 @@ SUPPRESSED_CHECKS = {
     '[readability-inconsistent-declaration-parameter-name]',
     '[readability-named-parameter]',
     '[readability-redundant-member-init]',
-    '[readability-redundant-string-cstr]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')
