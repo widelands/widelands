@@ -50,7 +50,7 @@ static constexpr unsigned k100PercentAsInt = 10000U;
 /**
  * @brief Reads a percentage
  * @param input A percentage in the format 12%, 12.5% or 12.53%.
- * @return Scaled precentage as integer, where 100% corresponds to k100PercentAsInt.
+ * @return Scaled percentage as integer, where 100% corresponds to k100PercentAsInt.
  * */
 unsigned read_percent_to_int(const std::string& input);
 

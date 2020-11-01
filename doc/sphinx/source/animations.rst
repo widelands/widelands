@@ -37,7 +37,7 @@ and what your image files need to look like:
          sound_effect = {
             path = "sound/foo/bar",
             priority = "5.4%",
-            allow_multiple = true, -- If this is given and true, multiple mapobjects can play the same sound
+            allow_multiple = true,
          },
          representative_frame = 3,
       },
