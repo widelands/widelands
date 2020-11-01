@@ -476,9 +476,7 @@ WLApplication::~WLApplication() {
 
 	TTF_Quit();  // TODO(unknown): not here
 
-	if (g_fs) {
-		delete g_fs;
-	}
+	delete g_fs;
 	g_fs = nullptr;
 
 	if (redirected_stdio_) {
