@@ -181,7 +181,8 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+InputQueue&
+ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {
@@ -330,11 +331,11 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		if (settings_) {
 			if (upcast(ProductionsiteSettings, ps, settings_.get())) {
 				for (const auto& pair : ps->ware_queues) {
-					b.inputqueue(pair.first, wwWARE).set_max_fill(pair.second.desired_fill);
+					b.inputqueue(pair.first, wwWARE, nullptr).set_max_fill(pair.second.desired_fill);
 					b.set_priority(wwWARE, pair.first, pair.second.priority);
 				}
 				for (const auto& pair : ps->worker_queues) {
-					b.inputqueue(pair.first, wwWORKER).set_max_fill(pair.second.desired_fill);
+					b.inputqueue(pair.first, wwWORKER, nullptr).set_max_fill(pair.second.desired_fill);
 					b.set_priority(wwWORKER, pair.first, pair.second.priority);
 				}
 				if (upcast(TrainingsiteSettings, ts, ps)) {

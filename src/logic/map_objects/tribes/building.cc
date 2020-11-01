@@ -611,7 +611,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const) {
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const, const Request*) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -779,47 +779,31 @@ void Building::draw_info(const InfoToDraw info_to_draw,
 	             point_on_dst, scale, dst);
 }
 
-int32_t
-Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool adjust) const {
-	int32_t priority = kPriorityNormal;
+const WarePriority& Building::get_priority(const WareWorker type,
+                                           const DescriptionIndex ware_index) const {
 	if (type == wwWARE) {
-		// if priority is defined for specific ware,
-		// combine base priority and ware priority
-		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
+		const auto it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end()) {
-			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
+			return it->second;
 		}
 	}
 
-	return priority;
-}
-
-/**
- * Collect priorities assigned to wares of this building
- * priorities are identified by ware type and index
- */
-void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const {
-	if (ware_priorities_.empty()) {
-		return;
-	}
-	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
-	std::map<DescriptionIndex, int32_t>::const_iterator it;
-	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == kPriorityNormal) {
-			continue;
-		}
-		ware_priorities[it->first] = it->second;
-	}
+	return WarePriority::kNormal;
 }
 
 /**
  * Set base priority for this building (applies for all wares)
  */
-void Building::set_priority(int32_t const type,
-                            DescriptionIndex const ware_index,
-                            int32_t const new_priority) {
+void Building::set_priority(const WareWorker type,
+                            const DescriptionIndex ware_index,
+                            const WarePriority& new_priority) {
 	if (type == wwWARE) {
-		ware_priorities_[ware_index] = new_priority;
+		// WarePriority is not default-constructible, so no [] access :(
+		if (ware_priorities_.count(ware_index)) {
+			ware_priorities_.at(ware_index) = new_priority;
+		} else {
+			ware_priorities_.emplace(ware_index, new_priority);
+		}
 	}
 }
 

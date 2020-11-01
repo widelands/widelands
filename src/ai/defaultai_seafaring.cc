@@ -359,7 +359,7 @@ bool DefaultAI::check_ships(const Time& gametime) {
 					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
 						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
 						                                     observer.bo->inputs.at(k),
-						                                     Widelands::kPriorityHigh);
+						                                     Widelands::WarePriority::kHigh);
 					}
 				}
 			}
