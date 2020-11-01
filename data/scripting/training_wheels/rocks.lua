@@ -175,7 +175,7 @@ run(function()
       title = _"Granite",
       position = "topright",
       body = (
-         li_object(quarry.name, _"Well done! We can produce granite now, which we will need for building more buildings.", player.color)
+         li_object(quarry.name, _"Well done! We will soon start producing granite, which we will need for building more buildings.", player.color)
       ),
       h = 140,
       w = 260,
@@ -264,13 +264,14 @@ run(function()
    clean_up_message_boxes_and_indicators()
 
    if success then
+      -- Congratulate the player
+      sleep(4000)
+      scroll_to_field(constructionsite_field)
+      campaign_message_box(msg_finished)
+      sleep(4000)
+
       -- Teaching is done, so mark it as solved
       player:mark_training_wheel_as_solved(training_wheel_name)
-
-      -- Wait for the building and congratulate the player
-      while #player:get_buildings(quarry.name) < 1 do sleep(300) end
-      msg_finished.field = constructionsite_field
-      campaign_message_box(msg_finished)
    else
       -- Player was too uncooperative, we'll have to try again some time with a new game
       player:release_training_wheel_lock()
