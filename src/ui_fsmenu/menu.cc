@@ -98,17 +98,12 @@ TwoColumnsMenu::~TwoColumnsMenu() {
 
 void TwoColumnsMenu::layout() {
 	BaseMenu::layout();
-	// TODO(jmoerschbach): this feels weird (and error prone), but we need to limit child box
-	// manually because otherwise, children of childbox may claim to need more height than available
-	// (e.g. table!) and childbox just says ok I need to grow too which results in a childbox bigger
-	// than main_box... ;(
 
 	content_box_.set_max_size(
 	   main_box_.get_w(), main_box_.get_h() /*- 1 * 10 * padding */ - header_box_.get_h());
 	right_column_width_ = get_inner_w() * right_column_width_factor_;
 	log_dbg(
 	   "width: %d, inner width: %d, right width %d", get_w(), get_inner_w(), right_column_width_);
-	//	right_column_box_.set_desired_size(right_column_width_, 0);
 	right_column_box_.set_max_size(right_column_width_, 0);
 	printBox(main_box_);
 	printBox(header_box_);

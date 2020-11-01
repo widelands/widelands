@@ -39,16 +39,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                                    const bool preconfigured)
    : TwoColumnsNavigationMenu(fsmm, "launch_game", _("Launch Game")),
      fsmm_(fsmm),
-
-     // Values for alignment and size
-     standard_element_width_(get_w() / 3),
-     standard_element_height_(get_h() * 9 / 200),
-
-     map_details(&right_column_content_box_,
-                 preconfigured,
-                 standard_element_width_,
-                 standard_element_height_,
-                 padding),
+     map_details(&right_column_content_box_, preconfigured, standard_height_, padding),
 
      configure_game(&right_column_content_box_,
                     0,
@@ -62,9 +53,9 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                              "dropdown_wincondition",
                              0,
                              0,
-                             standard_element_width_,
+                             0,
                              10,  // max number of items
-                             standard_element_height_,
+                             standard_height_,
                              "",
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
@@ -84,8 +75,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
 	ok_.set_title(_("Start game"));
 
-	do_not_layout_on_resolution_change();
-
 	lua_ = new LuaInterface();
 	add_all_widgets();
 	add_behaviour_to_widgets();
@@ -98,12 +87,11 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 }
 
 void FullscreenMenuLaunchGame::add_all_widgets() {
-	right_column_content_box_.add(&map_details);
+	right_column_content_box_.add(&map_details, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(5 * padding);
-
 	right_column_content_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add_space(3 * padding);
-	right_column_content_box_.add(&win_condition_dropdown_);
+	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * padding);
 	right_column_content_box_.add(&peaceful_);
 	right_column_content_box_.add_space(3 * padding);
@@ -118,17 +106,11 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 }
 void FullscreenMenuLaunchGame::layout() {
 	TwoColumnsNavigationMenu::layout();
+	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
-	standard_element_width_ = get_w() / 3;
-	standard_element_height_ = get_h() * 9 / 200;
-
-	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
-	custom_starting_positions_.set_desired_size(
-	   standard_element_width_,
-	   // text doesn't fit in one line with some translations
-	   2 * standard_element_height_);
-
-	map_details.force_new_dimensions(1.f, standard_element_width_, standard_element_height_);
+	map_details.set_max_size(0, right_column_box_.get_h() / 2);
+	map_details.force_new_dimensions(right_column_width_, standard_height_);
+	printBox(map_details);
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {

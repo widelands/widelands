@@ -125,8 +125,10 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 // MapDetailsBox implementation
 
-MapDetailsBox::MapDetailsBox(
-   Panel* parent, bool preconfigured, uint32_t, uint32_t standard_element_height, uint32_t padding)
+MapDetailsBox::MapDetailsBox(Panel* parent,
+                             bool preconfigured,
+                             uint32_t standard_element_height,
+                             uint32_t padding)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      preconfigured_(preconfigured),
      title_(this,
@@ -220,14 +222,10 @@ void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
 	select_map_.sigclicked.connect(action);
 }
 
-void MapDetailsBox::force_new_dimensions(float scale,
-                                         uint32_t standard_element_width,
-                                         uint32_t standard_element_height) {
-	title_.set_font_scale(scale);
-	map_name_.set_font_scale(scale);
-	map_name_.set_fixed_width(standard_element_width - standard_element_height);
-	select_map_.set_desired_size(standard_element_height, standard_element_height);
-	content_box_.set_max_size(standard_element_width, 6 * standard_element_height);
+void MapDetailsBox::force_new_dimensions(uint32_t width, uint32_t height) {
+	map_name_.set_fixed_width(width - height);
+	select_map_.set_desired_size(height, height);
+	content_box_.set_max_size(width, get_h() - title_.get_h() - title_box_.get_h() - 2 * 3 * 4);
 }
 
 void MapDetailsBox::set_map_description_text(const std::string& text) {

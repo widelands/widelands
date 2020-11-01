@@ -86,9 +86,6 @@ protected:
 
 	void layout() override;
 
-	uint32_t standard_element_width_;
-	uint32_t standard_element_height_;
-
 	MapDetailsBox map_details;
 	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;

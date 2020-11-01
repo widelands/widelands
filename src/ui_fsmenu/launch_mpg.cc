@@ -103,14 +103,14 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
                   "help",
                   0,
                   0,
-                  standard_element_height_,
-                  standard_element_height_,
+                  standard_height_,
+                  standard_height_,
                   UI::ButtonStyle::kFsMenuSecondary,
                   g_image_cache->get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, standard_element_height_),
+     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, standard_height_),
      chat_(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
      egbase_(egbase) {
 
@@ -124,6 +124,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	ok_.set_enabled(settings_->can_launch());
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add_space(padding);
 	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
@@ -143,18 +144,19 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	}
 }
 
-FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() = default;
+FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
+}
 
 void FullscreenMenuLaunchMPG::layout() {
 	FullscreenMenuLaunchGame::layout();
-	// hardcode help button because it does not fit in any box, align it to the map button...
-	help_button_.set_size(standard_element_height_, standard_element_height_);
+	// hardcode help button because it does not fit in any box, place it in top right corner
+	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
 	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
 
 	mpsg_.force_new_dimensions(
-	   1.f, left_column_box_.get_w(), left_column_box_.get_h() / 2, standard_element_height_);
+	   1.f, left_column_box_.get_w(), left_column_box_.get_h() / 2, standard_height_);
 
 	// set focus to chat input
 	chat_.focus_edit();
