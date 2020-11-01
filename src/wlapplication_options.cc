@@ -43,7 +43,7 @@ Section& get_config_section(const std::string& section) {
 }
 
 Section* get_config_section_ptr(const std::string& section) {
-	return g_options.get_section(section.c_str());
+	return g_options.get_section(section);
 }
 
 bool get_config_bool(const std::string& name, const bool dflt) {
@@ -84,7 +84,7 @@ Section& get_config_safe_section() {
 }
 
 Section& get_config_safe_section(const std::string& section) {
-	return g_options.get_safe_section(section.c_str());
+	return g_options.get_safe_section(section);
 }
 
 void set_config_bool(const std::string& name, const bool value) {

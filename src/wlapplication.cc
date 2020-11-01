@@ -485,7 +485,7 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(filename_.c_str(), script_to_run_);
+			game.run_splayer_scenario_direct(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
 			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
@@ -879,7 +879,7 @@ bool WLApplication::init_settings() {
 	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
-		get_config_string("uuid", generate_random_uuid().c_str());
+		get_config_string("uuid", generate_random_uuid());
 	}
 	get_config_int("last_start", time(nullptr));
 
@@ -1151,7 +1151,7 @@ void WLApplication::handle_commandline_parameters() {
 		// TODO(unknown): barf here on unknown option; the list of known options
 		// needs to be centralized
 
-		set_config_string(it->first.c_str(), it->second.c_str());
+		set_config_string(it->first, it->second);
 	}
 
 	if (commandline_.count("help") || commandline_.count("version")) {
@@ -1311,7 +1311,7 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 	}
 	try {
 		// Load selected tutorial-map-file
-		game.run_splayer_scenario_direct(select_campaignmap.get_map().c_str(), "");
+		game.run_splayer_scenario_direct(select_campaignmap.get_map(), "");
 	} catch (const std::exception& e) {
 		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
@@ -1478,7 +1478,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
 
 	if (code == MenuTarget::kScenarioGame) {  // scenario
 		try {
-			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
+			game.run_splayer_scenario_direct(sp.get_map(), "");
 		} catch (const std::exception& e) {
 			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1587,7 +1587,7 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 	try {
 		// Load selected campaign-map-file
 		if (!filename.empty()) {
-			return game.run_splayer_scenario_direct(filename.c_str(), "");
+			return game.run_splayer_scenario_direct(filename, "");
 		}
 	} catch (const std::exception& e) {
 		log_err("Fatal exception: %s\n", e.what());
