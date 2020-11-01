@@ -567,7 +567,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			}
 
 			for (InternetGame& old_game : old) {
-				if (old_game.name.size()) {
+				if (!old_game.name.empty()) {
 					format_and_add_chat(
 					   "", "", true,
 					   (boost::format(_("The game %s has been closed")) % old_game.name).str());
@@ -620,7 +620,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			          });
 
 			for (InternetClient& client : old) {
-				if (client.name.size()) {
+				if (!client.name.empty()) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
@@ -1030,7 +1030,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 	} else {
 		c.sender = from;
 	}
-	c.playern = system ? -1 : to.size() ? 3 : 7;
+	c.playern = system ? -1 : to.empty() ? 7 : 3;
 	c.recipient = to;
 
 	receive(c);
@@ -1046,10 +1046,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
  * Check for vaild username characters.
  */
 bool InternetGaming::valid_username(const std::string& username) {
-	if (username.empty() ||
-	    username.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
-	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
-		return false;
-	}
-	return true;
+	return !(username.empty() || username.find_first_not_of(
+	                                "abcdefghijklmnopqrstuvwxyz"
+	                                "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size());
 }

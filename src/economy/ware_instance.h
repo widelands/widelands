@@ -23,7 +23,6 @@
 #include "economy/transfer.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/tribes/ware_descr.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -120,8 +119,7 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader*
-	load(EditorGameBase&, MapObjectLoader&, FileRead&, const TribesLegacyLookupTable& lookup_table);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 };
 }  // namespace Widelands
 

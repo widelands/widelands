@@ -175,16 +175,19 @@ Available actions are:
 ProductionProgram::ActReturn::Condition* create_economy_condition(
    const std::string& item, const ProductionSiteDescr& descr, const Descriptions& descriptions) {
 	try {
-		const WareWorker wareworker = descriptions.try_load_ware_or_worker(item);
-		if (wareworker == WareWorker::wwWARE) {
-			const DescriptionIndex index = descriptions.ware_index(item);
-			descr.ware_demand_checks()->insert(index);
-			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
-		} else {
-			const DescriptionIndex index = descriptions.worker_index(item);
-			descr.worker_demand_checks()->insert(index);
-			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
+		const std::pair<WareWorker, DescriptionIndex> wareworker =
+		   descriptions.load_ware_or_worker(item);
+		switch (wareworker.first) {
+		case WareWorker::wwWARE: {
+			descr.ware_demand_checks()->insert(wareworker.second);
+			return new ProductionProgram::ActReturn::EconomyNeedsWare(wareworker.second);
 		}
+		case WareWorker::wwWORKER: {
+			descr.worker_demand_checks()->insert(wareworker.second);
+			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
+		}
+		}
+		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
@@ -802,7 +805,7 @@ Calls another program of the same productionsite. Example:
       },
 */
 ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
-	if (arguments.size() < 1 || arguments.size() > 4) {
+	if (arguments.empty() || arguments.size() > 4) {
 		throw GameDataError(
 		   "Usage: call=<program name> [on failure|completion|skip fail|complete|skip|repeat]");
 	}
@@ -1186,7 +1189,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 		std::vector<std::string> group_list;
 		for (const auto& group : l_groups) {
-			assert(group.first.size());
+			assert(!group.first.empty());
 
 			std::vector<std::string> ware_list;
 			for (const auto& entry : group.first) {
@@ -1300,7 +1303,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
-	assert(produced_wares_.size());
+	assert(!produced_wares_.empty());
 
 	std::vector<std::string> ware_descnames;
 	uint8_t count = 0;
@@ -1384,7 +1387,7 @@ void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) cons
 	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
-	assert(recruited_workers_.size());
+	assert(!recruited_workers_.empty());
 	std::vector<std::string> worker_descnames;
 	uint8_t count = 0;
 	for (const auto& item_pair : recruited_workers_) {

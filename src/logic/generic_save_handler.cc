@@ -35,7 +35,6 @@ void GenericSaveHandler::clear() {
 	error_ = Error::kNone;
 	std::fill(std::begin(error_msg_), std::end(error_msg_), "");
 	backup_filename_.clear();
-	return;
 }
 
 uint32_t GenericSaveHandler::get_index(GenericSaveHandler::Error err) {
@@ -54,7 +53,7 @@ uint32_t GenericSaveHandler::get_index(GenericSaveHandler::Error err) {
 
 void GenericSaveHandler::make_backup() {
 	std::string backup_filename_base =
-	   dir_ + g_fs->file_separator() + timestring() + "_" + filename_;
+	   dir_ + FileSystem::file_separator() + timestring() + "_" + filename_;
 	backup_filename_ = backup_filename_base + kTempBackupExtension;
 
 	// If a file with that name already exists, then try some name modifications.
@@ -95,8 +94,6 @@ void GenericSaveHandler::make_backup() {
 		log_err("%s", error_msg_[index].c_str());
 		return;
 	}
-
-	return;
 }
 
 void GenericSaveHandler::save_file() {
@@ -130,7 +127,6 @@ void GenericSaveHandler::save_file() {
 			}
 		}
 	}
-	return;
 }
 
 GenericSaveHandler::Error GenericSaveHandler::save() {

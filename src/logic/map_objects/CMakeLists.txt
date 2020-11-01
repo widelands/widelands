@@ -27,6 +27,7 @@ wl_library(logic_tribe_basic_info
     tribes/tribe_basic_info.h
   DEPENDS
     base_i18n
+    base_log
     io_filesystem
     logic_exceptions
     scripting_lua_table
@@ -46,6 +47,8 @@ wl_library(logic_map_objects
     checkstep.h
     descriptions.cc
     descriptions.h
+    descriptions_compatibility_table.cc
+    descriptions_compatibility_table.h
     findbob.cc
     findbob.h
     findimmovable.cc
