@@ -391,6 +391,8 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
+	enabled_addons().clear();  // will be loaded later
+
 	int8_t player_nr;
 
 	{
@@ -488,6 +490,7 @@ bool Game::run(StartGameType const start_game_type,
 	InteractivePlayer* ipl = get_ipl();
 
 	if (start_game_type != StartGameType::kSaveGame) {
+		postload_addons();
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */

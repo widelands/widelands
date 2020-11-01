@@ -298,6 +298,12 @@ void EditorGameBase::allocate_player_maps() {
  * the graphics are loaded.
  */
 void EditorGameBase::postload() {
+	create_tempfile_and_save_mapdata(FileSystem::ZIP);
+	assert(descriptions_);
+}
+
+void EditorGameBase::postload_addons() {
+	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
 	assert(lua_);
 	for (const AddOnInfo& info : enabled_addons_) {
 		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
@@ -308,9 +314,6 @@ void EditorGameBase::postload() {
 			}
 		}
 	}
-
-	create_tempfile_and_save_mapdata(FileSystem::ZIP);
-	assert(descriptions_);
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,

@@ -117,6 +117,10 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 		if (addons_changed) {
 			game_.delete_world_and_tribes();
 			game_.descriptions();
+
+			// NOCOM ugly!
+			game_.load_all_tribes();
+			game_.postload_addons();
 		}
 	}
 

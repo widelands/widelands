@@ -109,6 +109,7 @@ public:
 	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
+	void postload_addons();
 	virtual void cleanup_for_load();
 	void delete_world_and_tribes();
 
