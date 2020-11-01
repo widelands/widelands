@@ -17,7 +17,7 @@ wl.Descriptions():new_critter_type{
       idle = {
          sound_effect = {
             path = dirname .. "duck",
-            priority = 0.01
+            priority = "0.01%"
          },
          hotspot = { 5, 7 },
          fps = 4,

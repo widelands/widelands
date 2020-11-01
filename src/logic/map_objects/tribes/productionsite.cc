@@ -151,8 +151,9 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 					input_workers_.push_back(WareAmount(wareworker.second, amount));
 				} break;
 				}
-			} catch (const WException& e) {
-				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
+			} catch (const std::exception& e) {
+				throw GameDataError(
+				   "input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
 			}
 		}
 	}

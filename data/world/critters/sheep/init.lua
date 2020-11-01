@@ -19,7 +19,7 @@ wl.Descriptions():new_critter_type{
       idle = {
          sound_effect = {
             path = "sound/farm/sheep",
-            priority = 0.01
+            priority = "0.01%"
          },
          hotspot = { 8, 16 },
          fps = 20,
