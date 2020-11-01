@@ -31,7 +31,11 @@ Icon::Icon(Panel* const parent,
            const int32_t w,
            const int32_t h,
            const Image* picture_id)
-   : Panel(parent, s, x, y, w, h), pic_(picture_id), draw_frame_(false), grey_out_(false) {
+   : Panel(parent, s, x, y, w, h),
+     pic_(picture_id),
+     draw_frame_(false),
+     grey_out_color_(191, 191, 191, 191),
+     grey_out_(false) {
 	set_handle_mouse(false);
 	set_thinks(false);
 }
@@ -70,7 +74,7 @@ void Icon::draw(RenderTarget& dst) {
 		if (grey_out_) {
 			dst.blitrect_scale_monochrome(
 			   Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height), pic_,
-			   Recti(0, 0, pic_->width(), pic_->height()), RGBAColor(191, 191, 191, 191));
+			   Recti(0, 0, pic_->width(), pic_->height()), grey_out_color_);
 		} else {
 			dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
 			                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1.,
