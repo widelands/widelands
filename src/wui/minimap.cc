@@ -43,22 +43,24 @@ MiniMap::View::View(UI::Panel& parent,
      pic_map_spot_(g_image_cache->get("images/wui/overlays/map_spot.png")),
      rows_drawn_(0),
      minimap_layers_(flags),
-     minimap_type_(type),
-     started_drawing_(false) {
+     minimap_type_(type) {
 }
 
 void MiniMap::View::set_view(const Rectf& view_area) {
 	view_area_ = view_area;
 }
 
+void MiniMap::View::reset() {
+	minimap_image_static_.reset();
+}
+
 void MiniMap::View::draw(RenderTarget& dst) {
-	if (!started_drawing_) {
+	if (!minimap_image_static_) {
 		// Draw the entire minimap from the beginning.
 		minimap_image_static_ =
 		   create_minimap_empty(ibase_.egbase(), *minimap_layers_ | MiniMapLayer::ViewWindow);
 		draw_minimap_static(*minimap_image_static_, ibase_.egbase(), ibase_.get_player(),
 		                    *minimap_layers_ | MiniMapLayer::ViewWindow);
-		started_drawing_ = true;
 	} else {
 		// Just update a part of the minimap.
 		draw_minimap_static(*minimap_image_static_, ibase_.egbase(), ibase_.get_player(),
@@ -90,7 +92,7 @@ void MiniMap::View::set_zoom(const bool zoom) {
 	const Widelands::Map& map = ibase_.egbase().map();
 	set_size(map.get_width() * scale_map(map, zoom), map.get_height() * scale_map(map, zoom));
 	// The texture needs to be recreated when the size changes.
-	started_drawing_ = false;
+	reset();
 }
 
 bool MiniMap::View::can_zoom() {
@@ -223,7 +225,7 @@ MiniMap::MiniMap(InteractiveBase& ibase, Registry* const registry)
 void MiniMap::toggle(MiniMapLayer const button) {
 	*view_.minimap_layers_ = MiniMapLayer(*view_.minimap_layers_ ^ button);
 	// Redraw the entire minimap when changing layers - this looks nicer.
-	view_.started_drawing_ = false;
+	view_.reset();
 	if (button == MiniMapLayer::Zoom2) {
 		resize();
 	}

@@ -75,6 +75,9 @@ private:
 		// Set the currently viewed area in map pixel space.
 		void set_view(const Rectf&);
 
+		// Delete the intermediate texture, causing a full redraw on the next draw().
+		void reset();
+
 		void draw(RenderTarget&) override;
 
 		bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
@@ -99,7 +102,6 @@ private:
 	public:
 		MiniMapLayer* minimap_layers_;
 		MiniMapType* minimap_type_;
-		bool started_drawing_;
 	};
 
 	uint32_t number_of_buttons_per_row() const;
