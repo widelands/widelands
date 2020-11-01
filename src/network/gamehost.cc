@@ -240,7 +240,7 @@ struct HostChatProvider : public ChatProvider {
 		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
 		c.sender = h->get_local_playername();
-		if (c.msg.size() && *c.msg.begin() == '@') {
+		if (!c.msg.empty() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
 			if (space >= c.msg.size() - 1) {
@@ -301,7 +301,7 @@ struct HostChatProvider : public ChatProvider {
 				if (arg1.empty()) {
 					c.msg = _("Wrong use, should be: /announce <message>");
 				} else {
-					if (arg2.size()) {
+					if (!arg2.empty()) {
 						arg1 += " " + arg2;
 					}
 					c.msg = "HOST ANNOUNCEMENT: " + arg1;
@@ -329,7 +329,7 @@ struct HostChatProvider : public ChatProvider {
 					c.msg = _("Wrong use, should be: /kick <name> <reason>");
 				} else {
 					kickUser = arg1;
-					if (arg2.size()) {
+					if (!arg2.empty()) {
 						kickReason = arg2;
 					} else {
 						kickReason = "No reason given!";
@@ -355,7 +355,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "ack_kick") {
 				if (arg1.empty()) {
 					c.msg = _("Kick acknowledgement cancelled: No name given!");
-				} else if (arg2.size()) {
+				} else if (!arg2.empty()) {
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				} else {
 					if (arg1 == kickUser) {
@@ -1027,7 +1027,7 @@ bool GameHost::can_launch() {
 	if (d->settings.mapname.empty()) {
 		return false;
 	}
-	if (d->settings.players.size() < 1) {
+	if (d->settings.players.empty()) {
 		return false;
 	}
 	if (d->game) {
@@ -2149,7 +2149,6 @@ void GameHost::handle_disconnect(uint32_t const client_num, RecvPacket& r) {
 		std::string arg = r.string();
 		disconnect_client(client_num, reason, false, arg);
 	}
-	return;
 }
 
 void GameHost::handle_ping(Client& client) {
@@ -2163,7 +2162,6 @@ void GameHost::handle_ping(Client& client) {
 	client.playernum = UserSettings::not_connected();
 	d->net->close(client.sock_id);
 	client.sock_id = 0;
-	return;
 }
 
 /** Wait for NETCMD_HELLO and handle unexpected other commands */
@@ -2199,7 +2197,7 @@ void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
 		}
 		std::string tribe = r.string();
-		bool random_tribe = r.unsigned_8() == 1;
+		bool random_tribe = r.unsigned_8();
 		set_player_tribe(num, tribe, random_tribe);
 	}
 }
@@ -2283,7 +2281,7 @@ void GameHost::handle_chat(Client& client, RecvPacket& r) {
 	ChatMessage c(r.string());
 	c.playern = d->settings.users.at(client.usernum).position;
 	c.sender = d->settings.users.at(client.usernum).name;
-	if (c.msg.size() && *c.msg.begin() == '@') {
+	if (!c.msg.empty() && *c.msg.begin() == '@') {
 		// Personal message
 		std::string::size_type const space = c.msg.find(' ');
 		if (space >= c.msg.size() - 1) {

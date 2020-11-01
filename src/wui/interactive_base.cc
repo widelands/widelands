@@ -916,14 +916,14 @@ void InteractiveBase::mainview_move() {
 
 // Open the minimap or close it if it's open
 void InteractiveBase::toggle_minimap() {
-	if (minimap_registry_.window) {
-		delete minimap_registry_.window;
-	} else {
+	if (!minimap_registry_.window) {
 		minimap_ = new MiniMap(*this, &minimap_registry_);
 		minimap_->warpview.connect([this](const Vector2f& map_pixel) {
 			map_view_.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 		});
 		mainview_move();
+	} else {
+		delete minimap_registry_.window;
 	}
 	rebuild_mapview_menu();
 }

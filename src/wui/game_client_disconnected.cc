@@ -116,7 +116,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	}
 
 	// Set default mode to normal AI
-	type_dropdown_.select(AI::DefaultAI::normal_impl.name.c_str());
+	type_dropdown_.select(AI::DefaultAI::normal_impl.name);
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
@@ -141,7 +141,7 @@ void GameClientDisconnected::clicked_continue() {
 	assert(type_dropdown_.has_selection());
 
 	const std::string selection = type_dropdown_.get_selected();
-	assert(selection != "");
+	assert(!selection.empty());
 
 	set_ai(selection);
 	// Visibility works as a hint that the window was closed by a button click

@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/tribes/warehouse.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
@@ -1023,7 +1025,7 @@ void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 		incorporate_ware(egbase, ware);
 	}
 
-	DescriptionIndex worker_index = owner().tribe().worker_index(w->descr().name().c_str());
+	DescriptionIndex worker_index = owner().tribe().worker_index(w->descr().name());
 
 	supply_->add_workers(worker_index, 1);
 
@@ -1442,8 +1444,8 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	return portdock_->expedition_bootstrap()->first_empty_inputqueue(index, type);
 }
 
-const BuildingSettings* Warehouse::create_building_settings() const {
-	WarehouseSettings* settings = new WarehouseSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() const {
+	std::unique_ptr<WarehouseSettings> settings(new WarehouseSettings(descr(), owner().tribe()));
 	for (auto& pair : settings->ware_preferences) {
 		pair.second = get_ware_policy(pair.first);
 	}

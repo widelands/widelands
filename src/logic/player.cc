@@ -1021,7 +1021,7 @@ void Player::enhance_or_dismantle(Building* building,
 		}
 		assert(keep_wares || wares.empty());
 
-		const BuildingSettings* settings = nullptr;
+		std::unique_ptr<const BuildingSettings> settings;
 		if (index_of_new_building != INVALID_INDEX) {
 			settings = building->create_building_settings();
 			// For enhancing, register whether the window was open
@@ -1034,7 +1034,7 @@ void Player::enhance_or_dismantle(Building* building,
 
 		if (index_of_new_building != INVALID_INDEX) {
 			building = &egbase().warp_constructionsite(position, player_number_, index_of_new_building,
-			                                           false, former_buildings, settings, wares);
+			                                           false, former_buildings, settings.get(), wares);
 		} else {
 			building =
 			   &egbase().warp_dismantlesite(position, player_number_, false, former_buildings, wares);
@@ -1716,8 +1716,8 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 		building_stats_.resize(nr_buildings);
 	}
 
-	std::vector<BuildingStats>& stat = *get_mutable_building_statistics(
-	   egbase().descriptions().building_index(building_name.c_str()));
+	std::vector<BuildingStats>& stat =
+	   *get_mutable_building_statistics(egbase().descriptions().building_index(building_name));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;
@@ -1889,9 +1889,7 @@ void Player::init_statistics() {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr,
-                             const uint16_t /* packet_version */,
-                             const TribesLegacyLookupTable& lookup_table) {
+void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -1923,16 +1921,20 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = lookup_table.lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
-		if (!egbase().descriptions().ware_exists(idx)) {
-			log_warn_time(egbase().get_gametime(), "Player %u statistics: unknown ware name %s",
-			              player_number(), name.c_str());
+		// Consume strings and int before potential exception thrown
+		const std::string name = fr.c_string();
+		const int amount = fr.unsigned_32();
+		const std::string& stats_string = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
+			current_produced_statistics_[idx] = amount;
+			parse_stats(&ware_productions_, idx, stats_string, "produced");
+		} catch (const GameDataError&) {
+			log_warn_time(egbase().get_gametime(),
+			              "Player %u production statistics: unknown ware name %s", player_number(),
+			              name.c_str());
 			continue;
 		}
-
-		current_produced_statistics_[idx] = fr.unsigned_32();
-		parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
 	}
 
 	// Read consumption statistics
@@ -1945,17 +1947,20 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = lookup_table.lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
-		if (!egbase().descriptions().ware_exists(idx)) {
+		// Consume strings and int before potential exception thrown
+		const std::string name = fr.c_string();
+		const int amount = fr.unsigned_32();
+		const std::string& stats_string = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
+			current_consumed_statistics_[idx] = amount;
+			parse_stats(&ware_consumptions_, idx, stats_string, "consumed");
+		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(),
 			              "Player %u consumption statistics: unknown ware name %s", player_number(),
 			              name.c_str());
 			continue;
 		}
-
-		current_consumed_statistics_[idx] = fr.unsigned_32();
-		parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
 	}
 
 	// Read stock statistics
@@ -1968,15 +1973,17 @@ void Player::read_statistics(FileRead& fr,
 	}
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		const std::string name = lookup_table.lookup_ware(fr.c_string());
-		const DescriptionIndex idx = egbase().descriptions().ware_index(name);
-		if (!egbase().descriptions().ware_exists(idx)) {
+		// Consume strings before potential exception thrown
+		const std::string name = fr.c_string();
+		const std::string& stats_string = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
+			parse_stats(&ware_stocks_, idx, stats_string, "stock");
+		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
 			              player_number(), name.c_str());
 			continue;
 		}
-
-		parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
 	}
 
 	// All statistics should have the same size

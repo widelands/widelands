@@ -286,7 +286,7 @@ uint32_t WordWrap::height() const {
  * appears in in the wrapped text, and also the @p pos within that line (as an offset).
  */
 void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const {
-	assert(lines_.size());
+	assert(!lines_.empty());
 	assert(lines_[0].start == 0);
 
 	uint32_t min = 0;

@@ -79,10 +79,8 @@ void MiniMap::View::set_zoom(const bool zoom) {
 bool MiniMap::View::can_zoom() {
 	const Widelands::Map& map = ibase_.egbase().map();
 	// The zoomed MiniMap needs to fit into: height - windows boarders - button height. -> 60px
-	if (scale_map(map, true) == 1 || map.get_height() * scale_map(map, true) > ibase_.get_h() - 60) {
-		return false;
-	}
-	return true;
+	return !(scale_map(map, true) == 1 ||
+	         map.get_height() * scale_map(map, true) > ibase_.get_h() - 60);
 }
 
 /*

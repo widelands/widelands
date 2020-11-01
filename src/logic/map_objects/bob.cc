@@ -185,7 +185,7 @@ void Bob::act(Game& game, uint32_t const data) {
  */
 void Bob::do_act(Game& game) {
 	assert(!in_act_);
-	assert(stack_.size());
+	assert(!stack_.empty());
 
 	in_act_ = true;
 
@@ -385,7 +385,7 @@ void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout
 }
 
 void Bob::idle_update(Game& game, State& state) {
-	if (!state.ivar1 || get_signal().size()) {
+	if (!state.ivar1 || !get_signal().empty()) {
 		return pop_task(game);
 	}
 
@@ -629,7 +629,7 @@ bool Bob::start_task_movepath(Game& game,
 }
 
 void Bob::movepath_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		return pop_task(game);
 	}
 
@@ -1109,7 +1109,7 @@ void Bob::Loader::load(FileRead& fr) {
 				}
 
 				std::string programname = fr.c_string();
-				if (programname.size()) {
+				if (!programname.empty()) {
 					state.program = get_program(programname);
 				}
 			}

@@ -127,7 +127,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	try {
 		g_fs->ensure_directory_exists(kTempFileDir);
 
-		std::string filename = kTempFileDir + g_fs->file_separator() + timestring() + "_mapdata";
+		std::string filename =
+		   kTempFileDir + FileSystem::file_separator() + timestring() + "_mapdata";
 		std::string complete_filename = filename + kTempFileExtension;
 
 		// if a file with that name already exists, then try a few name modifications
@@ -416,7 +417,7 @@ Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
                                                       const std::string& name,
                                                       Player* owner,
                                                       const BuildingDescr* former_building_descr) {
-	const DescriptionIndex idx = descriptions().immovable_index(name.c_str());
+	const DescriptionIndex idx = descriptions().immovable_index(name);
 	if (!descriptions().immovable_exists(idx)) {
 		throw wexception("EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined", c.x,
 		                 c.y, name.c_str());

@@ -230,7 +230,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	}
 
 	//  Append directory name.
-	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+	const std::string complete_filename = curdir_ + FileSystem::file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
