@@ -39,9 +39,9 @@ static const int32_t CHAT_DISPLAY_TIME = 10;
 static const uint32_t MARGIN = 2;
 
 struct ChatOverlay::Impl {
-	bool transparent_;
-	ChatProvider* chat_;
-	bool havemessages_;
+	bool transparent_ = 0; // NOLINT
+	ChatProvider* chat_ = nullptr; // NOLINT
+	bool havemessages_ = 0; // NOLINT
 
 	/// Reception time of oldest message
 	time_t oldest_ = std::time(nullptr);
