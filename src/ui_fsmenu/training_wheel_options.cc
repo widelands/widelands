@@ -158,6 +158,15 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	main_box->add_space(0);
 
 	wrapper_box->add_space(0);
+
+	// Make all buttons the same width
+	const int desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()), std::max(mark_unmark_button_->get_w(), ok_button->get_w()));
+	cancel_button->set_desired_size(desired_width, cancel_button->get_h());
+	reset_button->set_desired_size(desired_width, reset_button->get_h());
+	mark_unmark_button_->set_desired_size(desired_width, mark_unmark_button_->get_h());
+	ok_button->set_desired_size(desired_width, ok_button->get_h());
+
+	center_to_parent();
 }
 
 void TrainingWheelOptions::toggle_mark_unmark_all_button() {

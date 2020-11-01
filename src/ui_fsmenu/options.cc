@@ -357,6 +357,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
@@ -365,12 +366,17 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
+
+	training_wheels_.changed.connect([this]() {
+		training_wheels_button_.set_enabled(training_wheels_.get_state());
+	});
+	training_wheels_button_.set_enabled(training_wheels_.get_state());
 	training_wheels_button_.sigclicked.connect([this]() {
 		training_wheels_button_.set_enabled(false);
 		cancel_.set_enabled(false);
 		apply_.set_enabled(false);
 		ok_.set_enabled(false);
-		TrainingWheelOptions training_wheel_options(this);
+		TrainingWheelOptions training_wheel_options(get_parent());
 		training_wheel_options.run<UI::Panel::Returncodes>();
 		training_wheels_button_.set_enabled(true);
 		cancel_.set_enabled(true);
