@@ -1034,7 +1034,7 @@ void Map::find_reachable(const EditorGameBase& egbase,
 
 	queue.push_back(area);
 
-	while (queue.size()) {
+	while (!queue.empty()) {
 		// Pop the last ware from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
@@ -2619,7 +2619,7 @@ void Map::cleanup_port_spaces(const EditorGameBase& egbase) {
 bool Map::has_artifacts() {
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		if (upcast(Immovable, immovable, fields_[i].get_immovable())) {
-			if (immovable->descr().has_attribute(immovable->descr().get_attribute_id("artifact"))) {
+			if (immovable->descr().has_attribute(MapObjectDescr::get_attribute_id("artifact"))) {
 				return true;
 			}
 		}

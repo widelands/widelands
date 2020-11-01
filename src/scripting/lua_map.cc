@@ -148,13 +148,12 @@ struct SoldierMapDescr {
 	                uint8_t init_evade)
 	   : health(init_health), attack(init_attack), defense(init_defense), evade(init_evade) {
 	}
-	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0) {
-	}
+	SoldierMapDescr() = default;
 
-	uint8_t health;
-	uint8_t attack;
-	uint8_t defense;
-	uint8_t evade;
+	uint8_t health = 0;
+	uint8_t attack = 0;
+	uint8_t defense = 0;
+	uint8_t evade = 0;
 
 	bool operator<(const SoldierMapDescr& ot) const {
 		bool equal_health = health == ot.health;
@@ -172,11 +171,8 @@ struct SoldierMapDescr {
 		return health < ot.health;
 	}
 	bool operator==(const SoldierMapDescr& ot) const {
-		if (health == ot.health && attack == ot.attack && defense == ot.defense &&
-		    evade == ot.evade) {
-			return true;
-		}
-		return false;
+		return (health == ot.health && attack == ot.attack && defense == ot.defense &&
+		        evade == ot.evade);
 	}
 };
 
@@ -2262,7 +2258,8 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const uint32_t attribute_id = get()->get_attribute_id(luaL_checkstring(L, 2));
+	const uint32_t attribute_id =
+	   Widelands::MapObjectDescr::get_attribute_id(luaL_checkstring(L, 2));
 	lua_pushboolean(L, get()->has_attribute(attribute_id));
 	return 1;
 }
@@ -2337,7 +2334,7 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_building_index(name.c_str());
+	Widelands::DescriptionIndex idx = descriptions.safe_building_index(name);
 	set_description_pointer(descriptions.get_building_descr(idx));
 }
 
@@ -2690,7 +2687,7 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	for (const std::string& resource_name : get()->collected_resources()) {
 		lua_pushint32(L, index++);
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_name.c_str()));
+		   egbase.descriptions().resource_index(resource_name));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
@@ -2774,7 +2771,7 @@ int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 	for (const std::string& resource_name : get()->created_resources()) {
 		lua_pushint32(L, index++);
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_name.c_str()));
+		   egbase.descriptions().resource_index(resource_name));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
@@ -3410,7 +3407,7 @@ void LuaShipDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_ship_index(name.c_str());
+	Widelands::DescriptionIndex idx = descriptions.safe_ship_index(name);
 	set_description_pointer(descriptions.get_ship_descr(idx));
 }
 
@@ -3452,7 +3449,7 @@ void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_ware_index(name.c_str());
+	Widelands::DescriptionIndex idx = descriptions.safe_ware_index(name);
 	set_description_pointer(descriptions.get_ware_descr(idx));
 }
 
@@ -3577,7 +3574,7 @@ void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
 	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
-	Widelands::DescriptionIndex idx = descriptions.safe_worker_index(name.c_str());
+	Widelands::DescriptionIndex idx = descriptions.safe_worker_index(name);
 	set_description_pointer(descriptions.get_worker_descr(idx));
 }
 
@@ -5714,7 +5711,7 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 			                tribe.get_worker_descr(sp.first.first)->name().c_str(),
 			             ps->descr().name().c_str());
 		}
-		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
+		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second, nullptr);
 		if (sp.second > iq.get_max_size()) {
 			report_error(
 			   L, "Not enough space for %u inputs, only for %i", sp.second, iq.get_max_size());
@@ -5752,7 +5749,7 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 	for (const auto& input : input_set) {
 		uint32_t cnt = 0;
 		if (valid_inputs.count(input)) {
-			cnt = ps->inputqueue(input.first, input.second).get_filled();
+			cnt = ps->inputqueue(input.first, input.second, nullptr).get_filled();
 		}
 
 		if (return_number) {  // this is the only thing the customer wants to know

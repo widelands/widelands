@@ -168,7 +168,7 @@ void TextureAtlas::pack(const int max_dimension,
 		       std::max(j.texture->width(), j.texture->height());
 	});
 
-	while (blocks_.size()) {
+	while (!blocks_.empty()) {
 		texture_atlases->emplace_back(
 		   pack_as_many_as_possible(max_dimension, texture_atlases->size(), pack_info));
 	}

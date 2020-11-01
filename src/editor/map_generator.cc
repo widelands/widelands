@@ -1009,7 +1009,7 @@ bool UniqueRandomMapInfo::set_from_id_string(UniqueRandomMapInfo& mapInfo_out,
 	//  Number of players
 	mapInfo_out.numPlayers = nums[12];
 	//  Island mode
-	mapInfo_out.islandMode = (nums[13] == 1) ? true : false;
+	mapInfo_out.islandMode = nums[13];
 
 	// World name hash
 	uint16_t world_name_hash = (nums[14]) | (nums[15] << 5) | (nums[16] << 10) | (nums[17] << 15);

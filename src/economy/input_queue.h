@@ -177,16 +177,17 @@ public:
 		return owner_.owner();
 	}
 
+	bool matches(const Request& r) const {
+		return request_.get() == &r;
+	}
+
 	/**
 	 * Overwrites the state of this class with the read data.
 	 * @param fr A stream to read the data from.
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the lading. Required to pass to Request::read().
 	 */
-	void read(FileRead& f,
-	          Game& g,
-	          MapObjectLoader& mol,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileRead& f, Game& g, MapObjectLoader& mol);
 
 	/**
 	 * Writes the state of this class.

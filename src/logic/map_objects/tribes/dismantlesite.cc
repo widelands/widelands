@@ -115,9 +115,8 @@ Print completion percentage.
 */
 void DismantleSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s =
-	   g_style_manager->color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
-	                              g_style_manager->building_statistics_style().construction_color());
+	*s = StyleManager::color_tag((boost::format(_("%u%% dismantled")) % percent).str(),
+	                             g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -183,10 +182,7 @@ Construction sites only burn if some of the work has been completed.
 ===============
 */
 bool DismantleSite::burn_on_destroy() {
-	if (work_completed_ >= work_steps_) {
-		return false;  // completed, so don't burn
-	}
-	return true;
+	return work_completed_ < work_steps_;
 }
 
 /*

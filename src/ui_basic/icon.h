@@ -48,11 +48,15 @@ struct Icon : public Panel {
 	void set_grey_out(bool g) {
 		grey_out_ = g;
 	}
+	void set_grey_out_color(const RGBAColor& c) {
+		grey_out_color_ = c;
+	}
 
 private:
 	const Image* pic_;
 	bool draw_frame_;
 	RGBColor framecolor_;
+	RGBAColor grey_out_color_;
 	bool grey_out_;
 };
 }  // namespace UI

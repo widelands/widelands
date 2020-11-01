@@ -400,12 +400,13 @@ uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDoc
 				if (ware->get_transfer() && ware->get_transfer()->get_request()) {
 					// I don't know when this shouldn't be true,
 					// but the regression tests assure me that it's possible…
-					priority += ware->get_transfer()->get_request()->get_transfer_priority();
+					priority += ware->get_transfer()->get_request()->get_normalized_transfer_priority();
 				}
 			} else {
 				assert(worker);
 				if (worker->get_transfer() && worker->get_transfer()->get_request()) {
-					priority += worker->get_transfer()->get_request()->get_transfer_priority();
+					priority +=
+					   worker->get_transfer()->get_request()->get_normalized_transfer_priority();
 				}
 			}
 		}
@@ -501,7 +502,7 @@ void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 	if (fr.unsigned_8()) {  // Do we have an expedition?
 		pd.expedition_bootstrap_.reset(new ExpeditionBootstrap(&pd));
 	}
-	pd.expedition_ready_ = (fr.unsigned_8() == 1) ? true : false;
+	pd.expedition_ready_ = fr.unsigned_8();
 }
 
 // During the first loading phase we only loaded the serials.

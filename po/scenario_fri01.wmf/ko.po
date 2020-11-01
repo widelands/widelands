@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-11 08:45+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -975,41 +975,55 @@ msgstr ""
 "아, 그리고 돛을 위해 갈대와 털로 만든 튼튼한 천을 짜는 직조공장이 필요합니다. 그런 다음 항구에서 원정을 시작할 수 있습니다. "
 "신들에게 기도드리시고 서두르십시오!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
 msgstr "군인들을 잊지 마십시오"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
 msgstr "군인들이 항구로 이동합니다!"
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
 #, lua-format
 msgid ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldier on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldier, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgid_plural ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldiers on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldiers, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgstr[0] ""
+"급히 서둘러서 잊을 뻔 했어요. – 착륙 할 곳이 어디든 시작하려면 건축 자재가 필요하고 새로운 식민지를 확보하고 확장하려면 군인이 "
+"필요합니다. 원정대를 적재한 후에도 몇 가지 물품과 일꾼들을 위한 충분한 여유 공간이 배 안에 있어야 합니다. 게다가,  군인을 최대 "
+"%d 명까지 수용 할 수있는 공간이 있어야 합니다. 만약 아무도 모두 함께 꽉 차 있는 것에 개의치 않는다면 말이죠. 항구가 완공되면 "
+"건축 자재와 우리의 가장 좋은 사람들을 항구로 보내서 우리가 출항할 때 출항할 준비를 하도록 하십시오!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+msgid ""
+"All wares and workers that are loaded onto the expedition as well as some of"
+" the soldiers in the port will be carried over to the next scenario."
+msgstr "항구에 있는 일부 군인들은 물론 원정대에 실리는 모든 물품과 일꾼들은 다음 시나리오로 넘어갈 것입니다."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr "승리"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr "우리는 탈출했습니다!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
@@ -1018,12 +1032,12 @@ msgstr ""
 "신들은 우리의 기도에 응답했습니다. 우리는 이 섬의 익사로부터 탈출할 것이고, 저는 우리가 이 세상의 더 평화로운 구석에 새로운 집을 "
 "다시 지을 수 있을 것이라고 확신합니다!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr "축하합니다"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"

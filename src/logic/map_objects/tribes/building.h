@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 
+#include <memory>
+
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
@@ -35,10 +37,7 @@
 namespace Widelands {
 
 class InputQueue;
-
-constexpr int32_t kPriorityLow = 2;
-constexpr int32_t kPriorityNormal = 4;
-constexpr int32_t kPriorityHigh = 8;
+class Request;
 
 constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
@@ -259,7 +258,11 @@ public:
 	}
 
 	/// \returns the queue for the matching ware or worker type or \throws WException.
-	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
+	/// This is usually called when a ware wants to enter the queue that requested it, so
+	/// the Request is passed for disambiguation. This may be nullptr, e.g. when we want
+	/// to get info about a queue. Currently disambiguation is used only by warehouse
+	/// code because expedition bootstraps may have multiple queues for the same item.
+	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
@@ -277,15 +280,8 @@ public:
 	bool leave_check_and_wait(Game&, Worker&);
 	void leave_skip(Game&, Worker&);
 
-	// Get/Set the priority for this waretype for this building. 'type' defines
-	// if this is for a worker or a ware, 'index' is the type of worker or ware.
-	// If 'adjust' is false, the three possible states kPriorityHigh,
-	// kPriorityNormal and kPriorityLow are returned, otherwise numerical
-	// values adjusted to the preciousness of the ware in general are returned.
-	virtual int32_t get_priority(WareWorker type, DescriptionIndex, bool adjust = true) const;
-	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);
-
-	void collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const;
+	const WarePriority& get_priority(WareWorker, DescriptionIndex) const;
+	void set_priority(WareWorker, DescriptionIndex, const WarePriority&);
 
 	/**
 	 * The former buildings vector keeps track of all former buildings
@@ -314,7 +310,7 @@ public:
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
 
-	virtual const BuildingSettings* create_building_settings() const {
+	virtual std::unique_ptr<const BuildingSettings> create_building_settings() const {
 		return nullptr;
 	}
 
@@ -393,7 +389,7 @@ protected:
 	//  The player who has defeated this building.
 	PlayerNumber defeating_player_;
 
-	std::map<DescriptionIndex, int32_t> ware_priorities_;
+	std::map<DescriptionIndex, WarePriority> ware_priorities_;
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool seeing_;

@@ -189,7 +189,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 			} catch (const WException&) {
 			}  //  we simply skip illegal entries
 		} else if (g_fs->is_directory(mapfilename) &&
-		           (show_empty_dirs_ || g_fs->list_directory(mapfilename).size() > 0)) {
+		           (show_empty_dirs_ || !g_fs->list_directory(mapfilename).empty())) {
 			// Add subdirectory to the list
 			const char* fs_filename = FileSystem::fs_filename(mapfilename.c_str());
 			if (!strcmp(fs_filename, ".") || !strcmp(fs_filename, "..")) {

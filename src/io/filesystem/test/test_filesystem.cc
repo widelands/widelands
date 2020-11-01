@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_SUITE(FileSystemTests)
 
 BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	setenv("HOME", "/home/test", 1);
-	std::string cwd = RealFSImpl("").get_working_directory();
+	const std::string cwd(FileSystem::get_working_directory());
 
 	// RealFSImpl is constructed with a root directory...
 
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 // ~ gets expanded to $HOME
 BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
 	setenv("HOME", "/my/home", 1);
-	std::string cwd = RealFSImpl("").get_working_directory();
+	const std::string cwd(FileSystem::get_working_directory());
 
 	TEST_CANONICALIZE_NAME("~", "path", "/my/home/path")
 	TEST_CANONICALIZE_NAME("~/test", "path", "/my/home/test/path")

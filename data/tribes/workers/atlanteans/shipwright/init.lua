@@ -42,7 +42,7 @@ descriptions:new_worker_type {
       idle = {
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 50
+            priority = "50%"
          },
          hotspot = { 12, 28 },
          fps = 10
