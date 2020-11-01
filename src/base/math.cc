@@ -33,7 +33,8 @@ unsigned read_percent_to_int(const std::string& input) {
 		// Convert to range
 		uint64_t result =
 		   100U * std::stoul(match[0]) +
-				// Match[1] are the outer () around ([.](\\d{1,2})), but we're interested in (\\d{1,2}) here, which is match[2].
+		   // Match[1] are the outer () around ([.](\\d{1,2})), but we're interested in (\\d{1,2})
+		   // here, which is match[2].
 		   (match[2].str().empty() ?
 		       0U :
 		       match[2].str().size() == 1 ? 10U * std::stoul(match[2]) : std::stoul(match[2]));
