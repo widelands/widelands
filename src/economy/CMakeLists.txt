@@ -48,6 +48,8 @@ wl_library(economy
     warehousesupply.h
     input_queue.cc
     input_queue.h
+    ware_priority.cc
+    ware_priority.h
     wares_queue.cc
     wares_queue.h
     waterway.cc
@@ -61,6 +63,7 @@ wl_library(economy
     base_times
     graphic
     io_fileread
+    io_stream
     logic
     logic_commands
     logic_constants
