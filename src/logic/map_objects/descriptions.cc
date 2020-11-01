@@ -198,7 +198,7 @@ const CritterDescr* Descriptions::get_critter_descr(DescriptionIndex index) cons
 	return critters_->get_mutable(index);
 }
 const CritterDescr* Descriptions::get_critter_descr(const std::string& name) const {
-	return critters_->exists(name.c_str());
+	return critters_->exists(name);
 }
 
 const ImmovableDescr* Descriptions::get_immovable_descr(DescriptionIndex index) const {
@@ -259,7 +259,7 @@ void Descriptions::register_scenario_tribes(FileSystem* filesystem) {
 
 void Descriptions::add_object_description(const LuaTable& table, MapObjectType type) {
 	const std::string& type_name = table.get_string("name");
-	const std::string& type_descname = table.get_string("descname").c_str();
+	const std::string& type_descname = table.get_string("descname");
 
 	// TODO(GunChleoc): Compatibility, remove after v1.0
 	if (table.has_key<std::string>("msgctxt")) {

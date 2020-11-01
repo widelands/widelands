@@ -350,7 +350,7 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 		temp += er.get_string(1);
 		std::string text(chat_.get_edit_text());
 
-		if (text.size() && (text.at(0) == '@')) {  // already PM ?
+		if (!text.empty() && (text.at(0) == '@')) {  // already PM ?
 			if (text.find(' ') <= text.size()) {
 				text = text.substr(text.find(' '), text.size());
 			} else {

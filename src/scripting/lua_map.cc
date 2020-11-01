@@ -148,13 +148,12 @@ struct SoldierMapDescr {
 	                uint8_t init_evade)
 	   : health(init_health), attack(init_attack), defense(init_defense), evade(init_evade) {
 	}
-	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0) {
-	}
+	SoldierMapDescr() = default;
 
-	uint8_t health;
-	uint8_t attack;
-	uint8_t defense;
-	uint8_t evade;
+	uint8_t health = 0;
+	uint8_t attack = 0;
+	uint8_t defense = 0;
+	uint8_t evade = 0;
 
 	bool operator<(const SoldierMapDescr& ot) const {
 		bool equal_health = health == ot.health;
@@ -2690,7 +2689,7 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	for (const std::string& resource_name : get()->collected_resources()) {
 		lua_pushint32(L, index++);
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_name.c_str()));
+		   egbase.descriptions().resource_index(resource_name));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
@@ -2774,7 +2773,7 @@ int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 	for (const std::string& resource_name : get()->created_resources()) {
 		lua_pushint32(L, index++);
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_name.c_str()));
+		   egbase.descriptions().resource_index(resource_name));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);

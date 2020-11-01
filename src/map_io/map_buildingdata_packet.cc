@@ -394,8 +394,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 
 					try {
 						Worker& worker = mol.get<Worker>(worker_serial);
-						const DescriptionIndex& worker_index =
-						   tribe.worker_index(worker.descr().name().c_str());
+						const DescriptionIndex& worker_index = tribe.worker_index(worker.descr().name());
 						if (!warehouse.incorporated_workers_.count(worker_index)) {
 							warehouse.incorporated_workers_[worker_index] = Warehouse::WorkerList();
 						}
@@ -738,7 +737,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 			productionsite.program_time_ = Time(fr);
 
 			uint16_t nr_queues = fr.unsigned_16();
-			assert(!productionsite.input_queues_.size());
+			assert(productionsite.input_queues_.empty());
 			for (uint16_t i = 0; i < nr_queues; ++i) {
 				WaresQueue* wq = new WaresQueue(productionsite, INVALID_INDEX, 0);
 				wq->read(fr, game, mol);

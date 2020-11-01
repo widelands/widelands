@@ -586,7 +586,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
-	if (action.sparam1.size()) {
+	if (!action.sparam1.empty()) {
 		if (action.iparam4) {
 			functor.add(FindNodeResourceBreedable(descriptions.resource_index(action.sparam1)));
 		} else {
@@ -610,7 +610,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		FailNotificationType fail_notification_type = FailNotificationType::kDefault;
 
 		// In case this is a fishbreeder, we do more checks
-		if (action.sparam1.size() && action.iparam4) {
+		if (!action.sparam1.empty() && action.iparam4) {
 
 			// We need to create create another functor that will look for nodes full of fish
 			FindNodeAnd functorAnyFull;
@@ -814,7 +814,7 @@ bool Worker::run_callobject(Game& game, State& state, const Action& action) {
  * been selected by a previous command (i.e. plant)
  */
 bool Worker::run_plant(Game& game, State& state, const Action& action) {
-	assert(action.sparamv.size());
+	assert(!action.sparamv.empty());
 
 	if (action.iparam1 == Action::plantUnlessObject) {
 		if (state.objvar1.get(game)) {
@@ -1282,14 +1282,14 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 	case wwWORKER: {
 		worker_economy_ = economy;
 		if (old) {
-			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name()), 1);
 		}
 		if (supply_) {
 			supply_->set_economy(worker_economy_);
 		}
 		if (worker_economy_) {
 			worker_economy_->add_wares_or_workers(
-			   owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
+			   owner().tribe().worker_index(descr().name()), 1, ware_economy_);
 		}
 	} break;
 	}
@@ -1466,7 +1466,7 @@ DescriptionIndex Worker::level(Game& game) {
  */
 void Worker::init_auto_task(Game& game) {
 	if (PlayerImmovable* location = get_location(game)) {
-		if (get_economy(wwWORKER)->warehouses().size() ||
+		if (!get_economy(wwWORKER)->warehouses().empty() ||
 		    location->descr().type() >= MapObjectType::BUILDING) {
 			return start_task_gowarehouse(game);
 		}
@@ -1535,7 +1535,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 	// Signal handling
 	const std::string& signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		// The caller requested a route update, or the previously calculated route
 		// failed.
 		// We will recalculate the route on the next update().
@@ -1746,7 +1746,7 @@ void Worker::shipping_update(Game& game, State& state) {
 	// Signal handling
 	const std::string& signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "endshipping") {
 			signal_handled();
 			if (!dynamic_cast<Warehouse*>(location)) {
@@ -2062,7 +2062,7 @@ void Worker::start_task_program(Game& game, const std::string& programname) {
 }
 
 void Worker::program_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		molog(game.get_gametime(), "[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
@@ -2134,7 +2134,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 	// Signal handling
 	std::string signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		// if routing has failed, try a different warehouse/route on next update()
 		if (signal == "fail" || signal == "cancel") {
 			molog(game.get_gametime(), "[gowarehouse]: caught '%s'\n", signal.c_str());
@@ -2172,7 +2172,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 		return start_task_leavebuilding(game, true);
 	}
 
-	if (!get_economy(wwWORKER)->warehouses().size()) {
+	if (get_economy(wwWORKER)->warehouses().empty()) {
 		molog(game.get_gametime(), "[gowarehouse]: No warehouse left in WorkerEconomy\n");
 		return pop_task(game);
 	}
@@ -2225,7 +2225,7 @@ void Worker::start_task_dropoff(Game& game, WareInstance& ware) {
 void Worker::dropoff_update(Game& game, State&) {
 	std::string signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		molog(game.get_gametime(), "[dropoff]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
@@ -2326,7 +2326,7 @@ void Worker::start_task_fetchfromflag(Game& game) {
 
 void Worker::fetchfromflag_update(Game& game, State& state) {
 	std::string signal = get_signal();
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "location") {
 			molog(game.get_gametime(), "[fetchfromflag]: Building disappeared, become fugitive\n");
 			return pop_task(game);
@@ -2446,7 +2446,7 @@ bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
 void Worker::waitforcapacity_update(Game& game, State&) {
 	std::string signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "wakeup") {
 			signal_handled();
 		}
@@ -2509,7 +2509,7 @@ void Worker::leavebuilding_update(Game& game, State& state) {
 
 	if (signal == "wakeup") {
 		signal_handled();
-	} else if (signal.size()) {
+	} else if (!signal.empty()) {
 		return pop_task(game);
 	}
 
@@ -2617,7 +2617,7 @@ private:
 };
 
 void Worker::fugitive_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		molog(game.get_gametime(), "[fugitive]: interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
@@ -2638,7 +2638,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
+		if (flag->get_owner() == get_owner() && !flag->economy(wwWORKER).warehouses().empty()) {
 			set_location(flag);
 			if (does_carry_ware()) {
 				if (flag->has_capacity()) {
@@ -2749,7 +2749,7 @@ void Worker::geologist_update(Game& game, State& state) {
 	if (signal == "fail") {
 		molog(game.get_gametime(), "[geologist]: Caught signal '%s'\n", signal.c_str());
 		signal_handled();
-	} else if (signal.size()) {
+	} else if (!signal.empty()) {
 		molog(game.get_gametime(), "[geologist]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
@@ -3195,7 +3195,7 @@ void Worker::scout_update(Game& game, State& state) {
 	const std::string& signal = get_signal();
 	molog(game.get_gametime(), "  Update Scout (%i time)\n", state.ivar2);
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		molog(game.get_gametime(), "[scout]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}

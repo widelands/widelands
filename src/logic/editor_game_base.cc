@@ -412,7 +412,7 @@ Immovable& EditorGameBase::create_immovable_with_name(const Coords& c,
                                                       const std::string& name,
                                                       Player* owner,
                                                       const BuildingDescr* former_building_descr) {
-	const DescriptionIndex idx = descriptions().immovable_index(name.c_str());
+	const DescriptionIndex idx = descriptions().immovable_index(name);
 	if (!descriptions().immovable_exists(idx)) {
 		throw wexception("EditorGameBase::create_immovable_with_name(%i, %i): %s is not defined", c.x,
 		                 c.y, name.c_str());
