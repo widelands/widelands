@@ -764,14 +764,10 @@ void CmdExpeditionConfig::read(FileRead& fr, EditorGameBase& egbase, MapObjectLo
 			} else {
 				if (fr.unsigned_8() == 0) {
 					type = wwWARE;
-					if (packet_version > 1) {
-						index = egbase.mutable_descriptions()->load_ware(fr.string());
-					}
+					index = egbase.mutable_descriptions()->load_ware(fr.string());
 				} else {
 					type = wwWORKER;
-					if (packet_version > 1) {
-						index = egbase.mutable_descriptions()->load_worker(fr.string());
-					}
+					index = egbase.mutable_descriptions()->load_worker(fr.string());
 				}
 			}
 			add = fr.unsigned_8();
@@ -811,7 +807,7 @@ void CmdEnhanceBuilding::execute(Game& game) {
 		}
 	} else if (upcast(Building, building, mo)) {
 		if (bi_ != Widelands::INVALID_INDEX && bi_ != building->descr().enhancement()) {
-			// TODO(GunChleoc): Savegame compatibility, remove this condition after v1.0
+			// TODO(GunChleoc): Savegame compatibility, remove this assignment after v1.0
 			bi_ = building->descr().enhancement();
 		}
 		game.get_player(sender())->enhance_building(building, bi_, keep_wares_);
@@ -1290,7 +1286,11 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 			if (packet_version == 2) {
 				index_ = fr.signed_32();
 			} else {
-				index_ = egbase.mutable_descriptions()->load_ware(fr.string());
+				if (type_ == WareWorker::wwWARE) {
+					index_ = egbase.mutable_descriptions()->load_ware(fr.string());
+				} else {
+					index_ = egbase.mutable_descriptions()->load_worker(fr.string());
+				}
 			}
 			priority_ = WarePriority(fr);
 			is_constructionsite_setting_ = fr.unsigned_8();
