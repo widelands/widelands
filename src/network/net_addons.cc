@@ -92,7 +92,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	std::vector<AddOnInfo> result_vector;
 
-	set_url_and_timeout("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/list");
+	set_url_and_timeout("https://raw.githubusercontent.com/widelands/wl_addons_server/master/list");
 
 	std::string output;
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &output);
@@ -241,7 +241,7 @@ static void check_downloaded_file(const std::string& path, const std::string& ch
 void NetAddons::download_addon_file(const std::string& name, const std::string& checksum, const std::string& output) {
 	init();
 
-	set_url_and_timeout(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/addons/") + name);
+	set_url_and_timeout(std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/addons/") + name);
 
 	std::FILE* out_file = std::fopen(output.c_str(), "wb");
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
@@ -268,7 +268,7 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 	const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + kTempFileExtension;
 	const std::string canonical_output = g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
 
-	set_url_and_timeout(std::string("https://raw.githubusercontent.com/Noordfrees/wl_addons_server/master/i18n/") + name + "/" + locale);
+	set_url_and_timeout(std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/i18n/") + name + "/" + locale);
 
 	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
 	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
