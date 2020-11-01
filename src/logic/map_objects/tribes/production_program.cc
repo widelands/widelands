@@ -25,6 +25,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/wexception.h"
 #include "config.h"
 #include "economy/economy.h"
@@ -1494,11 +1495,11 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 			} else if (item.first == "radius") {
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {
-				max_resources_ = read_percent_to_int(item.second);
+				max_resources_ = math::read_percent_to_int(item.second);
 			} else if (item.first == "when_empty") {
-				depleted_chance_ = read_percent_to_int(item.second);
+				depleted_chance_ = math::read_percent_to_int(item.second);
 			} else if (item.first == "experience_on_fail") {
-				experience_chance_ = read_percent_to_int(item.second);
+				experience_chance_ = math::read_percent_to_int(item.second);
 			} else {
 				throw GameDataError(
 				   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
@@ -1556,12 +1557,12 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 	}
 
 	//  how much is dug
-	unsigned dug_percentage = MapObjectProgram::kMaxProbability;
+	unsigned dug_percentage = math::k100PercentAsInt;
 	if (totalstart) {
-		dug_percentage = (totalstart - totalres) * MapObjectProgram::kMaxProbability / totalstart;
+		dug_percentage = (totalstart - totalres) * math::k100PercentAsInt / totalstart;
 	}
 	if (!totalres) {
-		dug_percentage = MapObjectProgram::kMaxProbability;
+		dug_percentage = math::k100PercentAsInt;
 	}
 
 	if (dug_percentage < max_resources_) {
@@ -1605,7 +1606,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (depleted_chance_ <= 20 * MapObjectProgram::kMaxProbability / 100U) {
+		if (depleted_chance_ <= 20 * math::k100PercentAsInt / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
@@ -1614,11 +1615,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (depleted_chance_ <= game.logic_rand() % MapObjectProgram::kMaxProbability) {
+		if (depleted_chance_ <= game.logic_rand() % math::k100PercentAsInt) {
 
 			// Gain experience
 			if (experience_chance_ > 0 &&
-			    experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
+			    experience_chance_ >= game.logic_rand() % math::k100PercentAsInt) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);
@@ -1991,7 +1992,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	DescriptionIndex available_resource = INVALID_INDEX;
 
 	for (const auto& item : buildcost) {
-		if (psite.inputqueue(item.first, wwWARE).get_filled() > 0) {
+		if (psite.inputqueue(item.first, wwWARE, nullptr).get_filled() > 0) {
 			available_resource = item.first;
 			break;
 		}
@@ -2081,7 +2082,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	}
 
 	for (Buildcost::const_iterator it = remaining.begin(); it != remaining.end(); ++it) {
-		WaresQueue& thiswq = dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE));
+		WaresQueue& thiswq = dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE, nullptr));
 		if (thiswq.get_filled() > 0) {
 			wq = &thiswq;
 			break;

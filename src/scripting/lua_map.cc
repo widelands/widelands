@@ -5724,7 +5724,7 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 			                tribe.get_worker_descr(sp.first.first)->name().c_str(),
 			             ps->descr().name().c_str());
 		}
-		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
+		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second, nullptr);
 		if (sp.second > iq.get_max_size()) {
 			report_error(
 			   L, "Not enough space for %u inputs, only for %i", sp.second, iq.get_max_size());
@@ -5762,7 +5762,7 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 	for (const auto& input : input_set) {
 		uint32_t cnt = 0;
 		if (valid_inputs.count(input)) {
-			cnt = ps->inputqueue(input.first, input.second).get_filled();
+			cnt = ps->inputqueue(input.first, input.second, nullptr).get_filled();
 		}
 
 		if (return_number) {  // this is the only thing the customer wants to know
