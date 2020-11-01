@@ -29,7 +29,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                UI::PanelStyle style,
                                UI::WindowStyle ws,
                                bool localize_autosave,
-                               UI::Panel* table_parent)
+                               UI::Panel* table_parent,
+                               UI::Panel* delete_button_parent)
    : table_box_(new UI::Box(table_parent ? table_parent : parent, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
@@ -39,15 +40,16 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
         style,
         filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame,
         g),
-     delete_(new UI::Button(game_details()->button_box(),
-                            "delete",
-                            0,
-                            0,
-                            0,
-                            0,
-                            style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                               UI::ButtonStyle::kWuiSecondary,
-                            _("Delete"))),
+     delete_(
+        new UI::Button(delete_button_parent ? delete_button_parent : game_details()->button_box(),
+                       "delete",
+                       0,
+                       0,
+                       0,
+                       0,
+                       style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                          UI::ButtonStyle::kWuiSecondary,
+                       _("Delete"))),
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
@@ -83,7 +85,9 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	                           [this](uint32_t a, uint32_t b) { return compare_map_name(a, b); });
 
 	table_box_->add(table_, UI::Box::Resizing::kExpandBoth);
-	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	if (!delete_button_parent) {
+		game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
+	}
 	delete_->set_enabled(false);
 	delete_->sigclicked.connect([this] { clicked_delete(); });
 
@@ -144,18 +148,18 @@ void LoadOrSaveGame::set_tooltips_of_buttons(size_t nr_of_selected_items) const 
 	if (nr_of_selected_items == 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-		      _("Delete this replay") :
-		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
-		      _("Delete this game"));
+            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+            _("Delete this replay") :
+            /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
+            _("Delete this game"));
 	} else if (nr_of_selected_items > 1) {
 		delete_->set_tooltip(filetype_ == FileType::kReplay ?
-		                        /** TRANSLATORS: Tooltip for the delete button. The user has
-		                           selected multiple files */
-		                        _("Delete these replays") :
-		                        /** TRANSLATORS: Tooltip for the delete button. The user has
-		                           selected multiple files */
-		                        _("Delete these games"));
+                                 /** TRANSLATORS: Tooltip for the delete button. The user has
+                                    selected multiple files */
+                                 _("Delete these replays") :
+                                 /** TRANSLATORS: Tooltip for the delete button. The user has
+                                    selected multiple files */
+                                 _("Delete these games"));
 	} else {
 		delete_->set_tooltip("");
 	}

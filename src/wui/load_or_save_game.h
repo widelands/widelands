@@ -47,7 +47,8 @@ protected:
 	               UI::PanelStyle,
 	               UI::WindowStyle,
 	               bool localize_autosave,
-	               UI::Panel* table_parent = nullptr);
+	               UI::Panel* table_parent = nullptr,
+	               UI::Panel* delete_button_parent = nullptr);
 
 	/// Update gamedetails and tooltips and return information about the current selection
 	std::unique_ptr<SavegameData> entry_selected();

@@ -40,7 +40,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                    UI::PanelStyle::kFsMenu,
                    UI::WindowStyle::kFsMenu,
                    true,
-                   &left_column_box_),
+                   &left_column_box_,
+                   &right_column_content_box_),
 
      is_replay_(is_replay),
      update_game_details_(false),
@@ -55,6 +56,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 
 	left_column_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add(load_or_save_.delete_, UI::Box::Resizing::kFullSize);
 
 	layout();
 
@@ -89,6 +91,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 void FullscreenMenuLoadGame::layout() {
 	TwoColumnsNavigationMenu::layout();
 	load_or_save_.game_details()->set_max_size(right_column_width_, 0);
+	load_or_save_.delete_->set_desired_size(right_column_width_, standard_height_);
 }
 void FullscreenMenuLoadGame::think() {
 	TwoColumnsNavigationMenu::think();
