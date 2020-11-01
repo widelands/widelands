@@ -30,10 +30,7 @@
 
 class MapDetailsBox : public UI::Box {
 public:
-	MapDetailsBox(Panel* parent,
-	              bool preconfigured,
-	              uint32_t standard_element_height,
-	              uint32_t padding);
+	MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding);
 	~MapDetailsBox();
 
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
@@ -49,6 +46,7 @@ public:
 	void show_warning(const std::string& text);
 
 private:
+	int padding_;
 	bool preconfigured_;
 
 	UI::Textarea title_;

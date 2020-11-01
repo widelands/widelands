@@ -39,7 +39,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                                    const bool preconfigured)
    : TwoColumnsNavigationMenu(fsmm, "launch_game", _("Launch Game")),
      fsmm_(fsmm),
-     map_details(&right_column_content_box_, preconfigured, standard_height_, padding),
+     map_details(&right_column_content_box_, preconfigured, padding),
 
      configure_game(&right_column_content_box_,
                     0,
