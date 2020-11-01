@@ -39,13 +39,13 @@ static const int32_t CHAT_DISPLAY_TIME = 10;
 static const uint32_t MARGIN = 2;
 
 struct ChatOverlay::Impl {
-	bool transparent_;
-	ChatProvider* chat_;
-	bool havemessages_;
+	bool transparent_ = false;
+	ChatProvider* chat_ = nullptr;
+	bool havemessages_ = false;
 
 	/// Reception time of oldest message
-	time_t oldest_;
-	time_t sound_played_;
+	time_t oldest_ = std::time(nullptr);
+	time_t sound_played_ = std::time(nullptr);
 
 	/// Layouted message list
 	std::string all_text_;
@@ -59,12 +59,7 @@ struct ChatOverlay::Impl {
 	FxId new_message_;
 
 	Impl()
-	   : transparent_(false),
-	     chat_(nullptr),
-	     havemessages_(false),
-	     oldest_(0),
-	     sound_played_(time(nullptr)),
-	     chat_message_subscriber_(
+	   : chat_message_subscriber_(
 	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
 	     log_message_subscriber_(
 	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {

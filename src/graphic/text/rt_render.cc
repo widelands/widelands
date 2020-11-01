@@ -821,7 +821,7 @@ public:
 		return 0;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
-		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
+		return std::make_shared<UI::RenderedText>();
 	}
 	bool is_non_mandatory_space() const override {
 		return true;
