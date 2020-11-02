@@ -24,7 +24,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev curl libcurl4 libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev -y
+        sudo apt-get install cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-openssl-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -75,7 +75,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev curl libcurl4 libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
+        sudo apt-get install git cmake g++ gcc gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-openssl-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev clang-tidy -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -118,7 +118,7 @@ jobs:
     - name: Installing dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev curl libcurl4 libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
+        sudo apt-get install git cmake ${{ matrix.compiler }} gettext libboost-dev libboost-system-dev libboost-test-dev libcurl4-openssl-dev libglew-dev libpng-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev python zlib1g-dev mesa-utils linux-generic xserver-xorg-core xserver-xorg xserver-xorg-video-all xserver-xorg-input-all libwayland-egl1-mesa -y
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -239,7 +239,7 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost curl libcurl4 ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost libcurl4-openssl-dev ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
       with:
