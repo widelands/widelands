@@ -763,30 +763,6 @@ void DefaultAI::late_initialization() {
 				bo.supported_by_buildings.insert(tribe_->building_index(supporting_building_name));
 			}
 
-			bo.requires_supporters = !bo.supported_by_buildings.empty();
-			if (bo.requires_supporters) {
-				log_dbg_time(
-				   gametime, "AI %d: %s strictly requires supporters", player_number(), bo.name);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   frisians_charcoal_burners_house
-				 *   frisians_collectors_house
-				 *   frisians_beekeepers_house
-				 *   frisians_aqua_farm
-				 *
-				 *
-				 * NOCOM Added in new code:
-				 *
-				 *   atlanteans_woodcutters_house
-				 *   atlanteans_fishers_house
-				 *   barbarians_lumberjacks_hut
-				 *   barbarians_hunters_hut
-				 *   empire_lumberjacks_house
-				 *   frisians_woodcutters_house
-				 *
-				 * */
-			}
-
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
 				throw wexception(
@@ -982,6 +958,26 @@ void DefaultAI::late_initialization() {
 					 *
 					 * */
 				}
+			}
+			bo.requires_supporters = !bo.supported_by_buildings.empty();
+			// Exclude basic buildings from strictly requiring supporters. We don't want them to wait for their supportinb buildings before they get built.
+			if (bo.requires_supporters) {
+				if (bo.is(BuildingAttribute::kFisher) || bo.is(BuildingAttribute::kHunter)
+					 || bo.is(BuildingAttribute::kLumberjack) || bo.is(BuildingAttribute::kNeedsRocks)
+					 || bo.is(BuildingAttribute::kRanger) || bo.is(BuildingAttribute::kWell)) {
+					bo.requires_supporters = false;
+				} else {
+					log_dbg_time(
+					   gametime, "AI %d: %s strictly requires supporters", player_number(), bo.name);
+				}
+				/* Buildings detected at the time of writing:
+				 *
+				 *   frisians_charcoal_burners_house
+				 *   frisians_collectors_house
+				 *   frisians_beekeepers_house
+				 *   frisians_aqua_farm
+				 *
+				 * */
 			}
 
 			continue;
