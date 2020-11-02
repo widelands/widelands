@@ -167,6 +167,12 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void log_general_info(const EditorGameBase&) const override;
 
+	/**
+	 * Clamp the maximal value of \ref PendingWare::priority.
+	 * After reaching this value, the pure FIFO approach is applied
+	 */
+	static constexpr uint8_t kMaxTransferPriority = 16;
+
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

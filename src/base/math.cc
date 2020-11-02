@@ -17,4 +17,37 @@
  *
  */
 
-// Dummy file as cmake cannot handle header only libraries :(.
+#include "base/math.h"
+
+#include <regex>
+
+#include "base/wexception.h"
+
+namespace math {
+
+// This function has RST documentation in logic/map_objects/map_object_program
+unsigned read_percent_to_int(const std::string& input) {
+	std::smatch match;
+	std::regex re("^\\d+([.](\\d{1,2})){0,1}%$");
+	if (std::regex_search(input, match, re)) {
+		// Convert to range
+		uint64_t result =
+		   100U * std::stoul(match[0]) +
+		   // Match[1] are the outer () around ([.](\\d{1,2})), but we're interested in (\\d{1,2})
+		   // here, which is match[2].
+		   (match[2].str().empty() ?
+		       0U :
+		       match[2].str().size() == 1 ? 10U * std::stoul(match[2]) : std::stoul(match[2]));
+
+		if (result > k100PercentAsInt) {
+			throw wexception(
+			   "Given percentage of '%s' is greater than the 100%% allowed", input.c_str());
+		}
+		return result;
+	}
+	throw wexception(
+	   "Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.",
+	   input.c_str());
+}
+
+}  // namespace math

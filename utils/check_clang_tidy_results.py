@@ -49,7 +49,6 @@ SUPPRESSED_CHECKS = {
     '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
     '[misc-macro-parentheses]',
     '[misc-redundant-expression]',
-    '[misc-suspicious-string-compare]',
     '[modernize-make-unique]',
     '[modernize-pass-by-value]',
     '[modernize-raw-string-literal]',
