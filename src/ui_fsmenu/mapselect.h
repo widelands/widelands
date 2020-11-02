@@ -94,6 +94,5 @@ private:
 
 	bool update_map_details_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H
-}

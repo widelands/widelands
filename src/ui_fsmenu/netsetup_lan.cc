@@ -30,15 +30,36 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
    : TwoColumnsBackNavigationMenu(fsmm, "begin_lan_game", _("Begin LAN Game")),
 
      // Left column content
-     label_opengames_(&left_column_box_, 0, 0, 0, 0, _("List of games in your local network:")),
+     label_opengames_(&left_column_box_,
+                      UI::PanelStyle::kFsMenu,
+                      UI::FontStyle::kFsMenuLabel,
+                      0,
+                      0,
+                      0,
+                      0,
+                      _("List of games in your local network:")),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_playername_(&right_column_content_box_, 0, 0, 0, 0, _("Your nickname:")),
-     playername_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     label_hostname_(&right_column_content_box_, _("Host to connect:")),
+     label_playername_(&right_column_box_,
+                       UI::PanelStyle::kFsMenu,
+                       UI::FontStyle::kFsMenuLabel,
+                       0,
+                       0,
+                       0,
+                       0,
+                       _("Your nickname:")),
+     playername_(&right_column_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     label_hostname_(&right_column_box_,
+                     UI::PanelStyle::kFsMenu,
+                     UI::FontStyle::kFsMenuLabel,
+                     0,
+                     0,
+                     0,
+                     0,
+                     _("Host to connect:")),
 
-     host_box_(&right_column_content_box_, 0, 0, UI::Box::Horizontal),
+     host_box_(&right_column_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
@@ -234,7 +255,7 @@ void FullscreenMenuNetSetupLAN::discovery_callback(int32_t const type,
 void FullscreenMenuNetSetupLAN::change_hostname() {
 	// Allow user to enter a hostname manually
 	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());
-	joingame_.set_enabled(hostname_.text().size());
+	joingame_.set_enabled(!hostname_.text().empty());
 }
 
 void FullscreenMenuNetSetupLAN::change_playername() {
@@ -272,7 +293,7 @@ void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section& s = get_config_safe_section();
 	std::string const host = s.get_string("lasthost", "");
 	hostname_.set_text(host);
-	if (host.size()) {
+	if (!host.empty()) {
 		joingame_.set_enabled(true);
 	}
 	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());

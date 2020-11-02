@@ -34,13 +34,13 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 		   assert(!registered_descriptions_.empty());
 		   switch (note.type) {
 		   case NoteMapObjectDescription::LoadType::kObject:
-			   load_description_on_demand(note.name);
+			   load_description_on_demand(note.name, note.allow_failure);
 			   break;
 		   case NoteMapObjectDescription::LoadType::kAttribute:
 			   auto it = registered_attributes_.find(note.name);
 			   if (it != registered_attributes_.end()) {
 				   for (const std::string& objectname : it->second) {
-					   load_description_on_demand(objectname);
+					   load_description_on_demand(objectname, false);
 				   }
 				   registered_attributes_.erase(it);
 			   }
@@ -202,13 +202,14 @@ void DescriptionManager::mark_loading_done(const std::string& description_name) 
 	descriptions_being_loaded_.erase(descriptions_being_loaded_.find(description_name));
 }
 
-void DescriptionManager::load_description_on_demand(const std::string& description_name) {
+void DescriptionManager::load_description_on_demand(const std::string& description_name,
+                                                    bool allow_failure) {
 	if (registered_scenario_descriptions_.count(description_name) == 1 ||
 	    registered_descriptions_.count(description_name) == 1) {
 		if (descriptions_being_loaded_.count(description_name) == 0) {
 			load_description(description_name);
 		}
-	} else {
+	} else if (!allow_failure) {
 		throw GameDataError("Unknown map object type '%s'", description_name.c_str());
 	}
 }

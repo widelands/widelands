@@ -39,10 +39,10 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  int32_t const y,
                                  uint32_t const w,
                                  uint32_t const h)
-   : UI::Window(
-        game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title.c_str()),
-     main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
-     button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
+   : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
+     main_box_(this, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
+     button_box_(
+        &main_box_, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
      textarea_(&main_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, body),
      ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      desired_speed_(game->game_controller()->desired_speed()),

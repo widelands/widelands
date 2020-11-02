@@ -25,6 +25,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/wexception.h"
 #include "config.h"
 #include "economy/economy.h"
@@ -175,16 +176,19 @@ Available actions are:
 ProductionProgram::ActReturn::Condition* create_economy_condition(
    const std::string& item, const ProductionSiteDescr& descr, const Descriptions& descriptions) {
 	try {
-		const WareWorker wareworker = descriptions.try_load_ware_or_worker(item);
-		if (wareworker == WareWorker::wwWARE) {
-			const DescriptionIndex index = descriptions.ware_index(item);
-			descr.ware_demand_checks()->insert(index);
-			return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
-		} else {
-			const DescriptionIndex index = descriptions.worker_index(item);
-			descr.worker_demand_checks()->insert(index);
-			return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
+		const std::pair<WareWorker, DescriptionIndex> wareworker =
+		   descriptions.load_ware_or_worker(item);
+		switch (wareworker.first) {
+		case WareWorker::wwWARE: {
+			descr.ware_demand_checks()->insert(wareworker.second);
+			return new ProductionProgram::ActReturn::EconomyNeedsWare(wareworker.second);
 		}
+		case WareWorker::wwWORKER: {
+			descr.worker_demand_checks()->insert(wareworker.second);
+			return new ProductionProgram::ActReturn::EconomyNeedsWorker(wareworker.second);
+		}
+		}
+		NEVER_HERE();
 	} catch (const GameDataError& e) {
 		throw GameDataError("economy condition: %s", e.what());
 	}
@@ -802,7 +806,7 @@ Calls another program of the same productionsite. Example:
       },
 */
 ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments) {
-	if (arguments.size() < 1 || arguments.size() > 4) {
+	if (arguments.empty() || arguments.size() > 4) {
 		throw GameDataError(
 		   "Usage: call=<program name> [on failure|completion|skip fail|complete|skip|repeat]");
 	}
@@ -1186,7 +1190,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 		std::vector<std::string> group_list;
 		for (const auto& group : l_groups) {
-			assert(group.first.size());
+			assert(!group.first.empty());
 
 			std::vector<std::string> ware_list;
 			for (const auto& entry : group.first) {
@@ -1300,7 +1304,7 @@ void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) cons
 	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
-	assert(produced_wares_.size());
+	assert(!produced_wares_.empty());
 
 	std::vector<std::string> ware_descnames;
 	uint8_t count = 0;
@@ -1384,7 +1388,7 @@ void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) cons
 	ps.working_positions_[ps.main_worker_].worker.get(game)->update_task_buildingwork(game);
 
 	const TribeDescr& tribe = ps.owner().tribe();
-	assert(recruited_workers_.size());
+	assert(!recruited_workers_.empty());
 	std::vector<std::string> worker_descnames;
 	uint8_t count = 0;
 	for (const auto& item_pair : recruited_workers_) {
@@ -1491,11 +1495,11 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 			} else if (item.first == "radius") {
 				workarea_ = read_positive(item.second);
 			} else if (item.first == "yield") {
-				max_resources_ = read_percent_to_int(item.second);
+				max_resources_ = math::read_percent_to_int(item.second);
 			} else if (item.first == "when_empty") {
-				depleted_chance_ = read_percent_to_int(item.second);
+				depleted_chance_ = math::read_percent_to_int(item.second);
 			} else if (item.first == "experience_on_fail") {
-				experience_chance_ = read_percent_to_int(item.second);
+				experience_chance_ = math::read_percent_to_int(item.second);
 			} else {
 				throw GameDataError(
 				   "Unknown argument '%s'. Usage: mine=<resource name> radius:<number> "
@@ -1553,12 +1557,12 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 	}
 
 	//  how much is dug
-	unsigned dug_percentage = MapObjectProgram::kMaxProbability;
+	unsigned dug_percentage = math::k100PercentAsInt;
 	if (totalstart) {
-		dug_percentage = (totalstart - totalres) * MapObjectProgram::kMaxProbability / totalstart;
+		dug_percentage = (totalstart - totalres) * math::k100PercentAsInt / totalstart;
 	}
 	if (!totalres) {
-		dug_percentage = MapObjectProgram::kMaxProbability;
+		dug_percentage = math::k100PercentAsInt;
 	}
 
 	if (dug_percentage < max_resources_) {
@@ -1602,7 +1606,7 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  there is a sufficiently high chance, that the mine
 		//  will still produce enough.
 		//  e.g. mines have chance=5, wells have 65
-		if (depleted_chance_ <= 20 * MapObjectProgram::kMaxProbability / 100U) {
+		if (depleted_chance_ <= 20 * math::k100PercentAsInt / 100U) {
 			ps.notify_player(game, 60);
 			// and change the default animation
 			ps.set_default_anim("empty");
@@ -1611,11 +1615,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
-		if (depleted_chance_ <= game.logic_rand() % MapObjectProgram::kMaxProbability) {
+		if (depleted_chance_ <= game.logic_rand() % math::k100PercentAsInt) {
 
 			// Gain experience
 			if (experience_chance_ > 0 &&
-			    experience_chance_ >= game.logic_rand() % MapObjectProgram::kMaxProbability) {
+			    experience_chance_ >= game.logic_rand() % math::k100PercentAsInt) {
 				ps.train_workers(game);
 			}
 			return ps.program_end(game, ProgramResult::kFailed);
@@ -1988,7 +1992,7 @@ void ProductionProgram::ActConstruct::execute(Game& game, ProductionSite& psite)
 	DescriptionIndex available_resource = INVALID_INDEX;
 
 	for (const auto& item : buildcost) {
-		if (psite.inputqueue(item.first, wwWARE).get_filled() > 0) {
+		if (psite.inputqueue(item.first, wwWARE, nullptr).get_filled() > 0) {
 			available_resource = item.first;
 			break;
 		}
@@ -2078,7 +2082,7 @@ bool ProductionProgram::ActConstruct::get_building_work(Game& game,
 	}
 
 	for (Buildcost::const_iterator it = remaining.begin(); it != remaining.end(); ++it) {
-		WaresQueue& thiswq = dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE));
+		WaresQueue& thiswq = dynamic_cast<WaresQueue&>(psite.inputqueue(it->first, wwWARE, nullptr));
 		if (thiswq.get_filled() > 0) {
 			wq = &thiswq;
 			break;

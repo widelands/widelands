@@ -103,7 +103,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		items_table = table.get_table("out_of_resource_notification");
 		out_of_resource_title_ = items_table->get_string("title");
 		out_of_resource_heading_ = items_table->get_string("heading");
-		out_of_resource_message_ = items_table->get_string("message").c_str();
+		out_of_resource_message_ = items_table->get_string("message");
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -122,36 +122,38 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		   table.get_table("inputs")->array_entries<std::unique_ptr<LuaTable>>();
 		for (std::unique_ptr<LuaTable>& entry_table : input_entries) {
 			const std::string& ware_or_worker_name = entry_table->get_string("name");
-			// Check if ware/worker exists already and if not, try to load it. Will throw a
-			// GameDataError on failure.
-			const WareWorker wareworker = descriptions.try_load_ware_or_worker(ware_or_worker_name);
-
 			int amount = entry_table->get_int("amount");
 			try {
 				if (amount < 1 || 255 < amount) {
 					throw GameDataError("amount is out of range 1 .. 255");
 				}
-				if (wareworker == WareWorker::wwWARE) {
-					const DescriptionIndex idx = descriptions.ware_index(ware_or_worker_name);
+				// Check if ware/worker exists already and if not, try to load it. Will throw a
+				// GameDataError on failure.
+				const std::pair<WareWorker, DescriptionIndex> wareworker =
+				   descriptions.load_ware_or_worker(ware_or_worker_name);
+				switch (wareworker.first) {
+				case WareWorker::wwWARE: {
 					for (const auto& temp_inputs : input_wares()) {
-						if (temp_inputs.first == idx) {
+						if (temp_inputs.first == wareworker.second) {
 							throw GameDataError(
 							   "ware type '%s' was declared multiple times", ware_or_worker_name.c_str());
 						}
 					}
-					input_wares_.push_back(WareAmount(idx, amount));
-				} else {
-					const DescriptionIndex idx = descriptions.worker_index(ware_or_worker_name);
+					input_wares_.push_back(WareAmount(wareworker.second, amount));
+				} break;
+				case WareWorker::wwWORKER: {
 					for (const auto& temp_inputs : input_workers()) {
-						if (temp_inputs.first == idx) {
+						if (temp_inputs.first == wareworker.second) {
 							throw GameDataError("worker type '%s' was declared multiple times",
 							                    ware_or_worker_name.c_str());
 						}
 					}
-					input_workers_.push_back(WareAmount(idx, amount));
+					input_workers_.push_back(WareAmount(wareworker.second, amount));
+				} break;
 				}
-			} catch (const WException& e) {
-				throw wexception("input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
+			} catch (const std::exception& e) {
+				throw GameDataError(
+				   "input \"%s=%d\": %s", ware_or_worker_name.c_str(), amount, e.what());
 			}
 		}
 	}
@@ -431,7 +433,8 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& game) {
 	}
 }
 
-InputQueue& ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+InputQueue&
+ProductionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
 	for (InputQueue* ip_queue : input_queues_) {
 		if (ip_queue->get_index() == wi && ip_queue->get_type() == type) {
 			return *ip_queue;
@@ -882,7 +885,7 @@ void ProductionSite::try_start_working(Game& game) {
  * \note We assume that the worker is inside the building when this is called.
  */
 bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const success) {
-	assert(descr().working_positions().size());
+	assert(!descr().working_positions().empty());
 	assert(main_worker_ >= 0);
 	assert(&worker == working_positions_[main_worker_].worker.get(game));
 
@@ -1027,7 +1030,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
  * \post No program is running, acting is scheduled
  */
 void ProductionSite::program_end(Game& game, ProgramResult const result) {
-	assert(stack_.size());
+	assert(!stack_.empty());
 
 	const std::string& program_name = top_state().program->name();
 
@@ -1107,11 +1110,12 @@ void ProductionSite::unnotify_player() {
 	set_production_result("");
 }
 
-const BuildingSettings* ProductionSite::create_building_settings() const {
-	ProductionsiteSettings* settings = new ProductionsiteSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings() const {
+	std::unique_ptr<ProductionsiteSettings> settings(
+	   new ProductionsiteSettings(descr(), owner().tribe()));
 	settings->stopped = is_stopped_;
 	for (auto& pair : settings->ware_queues) {
-		pair.second.priority = get_priority(wwWARE, pair.first, false);
+		pair.second.priority = get_priority(wwWARE, pair.first);
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWARE && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());
@@ -1125,7 +1129,7 @@ const BuildingSettings* ProductionSite::create_building_settings() const {
 		}
 	}
 	for (auto& pair : settings->worker_queues) {
-		pair.second.priority = get_priority(wwWORKER, pair.first, false);
+		pair.second.priority = get_priority(wwWORKER, pair.first);
 		for (const auto& queue : input_queues_) {
 			if (queue->get_type() == wwWORKER && queue->get_index() == pair.first) {
 				pair.second.desired_fill = std::min(pair.second.max_fill, queue->get_max_fill());

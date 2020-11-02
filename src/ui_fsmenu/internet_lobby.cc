@@ -23,6 +23,7 @@
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "network/gameclient.h"
@@ -53,12 +54,26 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
      fsmm_(fsmm),
 
      // Left column content
-     label_clients_online_(&left_column_box_, 0, 0, 0, 0, _("Clients online:")),
+     label_clients_online_(&left_column_box_,
+                           UI::PanelStyle::kFsMenu,
+                           UI::FontStyle::kFsMenuLabel,
+                           0,
+                           0,
+                           0,
+                           0,
+                           _("Clients online:")),
      clientsonline_table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      chat_(&left_column_box_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_opengames_(&right_column_content_box_, 0, 0, 0, 0, _("Open Games:")),
+     label_opengames_(&right_column_content_box_,
+                      UI::PanelStyle::kFsMenu,
+                      UI::FontStyle::kFsMenuLabel,
+                      0,
+                      0,
+                      0,
+                      0,
+                      _("Open Games:")),
      opengames_list_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      joingame_(&right_column_content_box_,
                "join_game",
@@ -68,7 +83,14 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
-     servername_label_(&right_column_content_box_, 0, 0, 0, 0, _("Name of your server:")),
+     servername_label_(&right_column_content_box_,
+                       UI::PanelStyle::kFsMenu,
+                       UI::FontStyle::kFsMenuLabel,
+                       0,
+                       0,
+                       0,
+                       0,
+                       _("Name of your server:")),
      servername_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      hostgame_(&right_column_content_box_,
                "host_game",
@@ -136,10 +158,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
 	                  "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_yellow.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_red.png> %s</p></rt>") %
-	    g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
-	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
-	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
-	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered")))
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader).as_font_tag(_("User Status")) %
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Administrator")) %
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Registered")) %
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Unregistered")))
 	      .str();
 	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */

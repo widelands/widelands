@@ -25,7 +25,6 @@
 #include "logic/map_objects/tribes/requirements.h"
 #include "logic/map_objects/tribes/wareworker.h"
 #include "logic/widelands.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -61,7 +60,7 @@ public:
 	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
-	~Request();
+	~Request() override;
 
 	PlayerImmovable& target() const {
 		return target_;
@@ -91,8 +90,8 @@ public:
 	const Time& get_last_request_time() const {
 		return last_request_time_;
 	}
-	int32_t get_priority(int32_t cost) const;
-	uint32_t get_transfer_priority() const;
+	uint32_t get_priority(int32_t cost) const;
+	uint32_t get_normalized_transfer_priority() const;
 	uint32_t get_num_transfers() const {
 		return transfers_.size();
 	}
@@ -111,8 +110,7 @@ public:
 
 	void start_transfer(Game&, Supply&);
 
-	void
-	read(FileRead&, Game&, MapObjectLoader&, const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileRead&, Game&, MapObjectLoader&);
 	void write(FileWrite&, Game&, MapObjectSaver&) const;
 	Worker* get_transfer_worker();
 

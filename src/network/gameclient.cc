@@ -249,7 +249,6 @@ void GameClient::run() {
 
 	d->send_hello();
 	d->settings.multiplayer = true;
-	assert(!d->settings.tribes.empty());
 
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
@@ -554,10 +553,10 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.state = static_cast<PlayerSettings::State>(packet.unsigned_8());
 	player.name = packet.string();
 	player.tribe = packet.string();
-	player.random_tribe = packet.unsigned_8() == 1;
+	player.random_tribe = packet.unsigned_8();
 	player.initialization_index = packet.unsigned_8();
 	player.ai = packet.string();
-	player.random_ai = packet.unsigned_8() == 1;
+	player.random_ai = packet.unsigned_8();
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
@@ -575,7 +574,7 @@ void GameClient::receive_one_user(uint32_t const number, StreamRead& packet) {
 
 	d->settings.users.at(number).name = packet.string();
 	d->settings.users.at(number).position = packet.signed_32();
-	d->settings.users.at(number).ready = packet.unsigned_8() == 1;
+	d->settings.users.at(number).ready = packet.unsigned_8();
 
 	if (static_cast<int32_t>(number) == d->settings.usernum) {
 		d->localplayername = d->settings.users.at(number).name;
@@ -666,8 +665,8 @@ void GameClient::handle_setting_map(RecvPacket& packet) {
 	d->settings.mapfilename = g_fs->FileSystem::fix_cross_file(packet.string());
 	d->settings.map_theme = packet.string();
 	d->settings.map_background = packet.string();
-	d->settings.savegame = packet.unsigned_8() == 1;
-	d->settings.scenario = packet.unsigned_8() == 1;
+	d->settings.savegame = packet.unsigned_8();
+	d->settings.scenario = packet.unsigned_8();
 	log_info("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
 	         d->settings.mapfilename.c_str());
 
@@ -786,7 +785,7 @@ void GameClient::handle_file_part(RecvPacket& packet) {
 			++i;
 		}
 		// Now really write the file
-		fw.write(*g_fs, d->file_->filename.c_str());
+		fw.write(*g_fs, d->file_->filename);
 
 		// Check for consistence
 		FileRead fr;
@@ -1094,7 +1093,7 @@ void GameClient::disconnect(const std::string& reason,
 		if (sendreason) {
 			SendPacket s;
 			s.unsigned_8(NETCMD_DISCONNECT);
-			s.unsigned_8(arg.size() < 1 ? 1 : 2);
+			s.unsigned_8(arg.empty() ? 1 : 2);
 			s.string(reason);
 			if (!arg.empty()) {
 				s.string(arg);

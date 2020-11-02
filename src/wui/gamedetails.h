@@ -59,7 +59,6 @@ private:
 	void show_game_description(const SavegameData& gamedata);
 	void show_minimap(const SavegameData& gamedata);
 
-	const UI::PanelStyle style_;
 	const Mode mode_;
 	const int padding_;
 

@@ -20,7 +20,6 @@
 #include "ui_fsmenu/menu.h"
 
 #include "base/i18n.h"
-#include "base/log.h"
 
 namespace FsMenu {
 /*
@@ -43,10 +42,11 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, const std::string& name, const std:
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                 title),
-     horizontal_padding_box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 0),
-     vertical_padding_box_(&horizontal_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     main_box_(&vertical_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     header_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     horizontal_padding_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     vertical_padding_box_(
+        &horizontal_padding_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     main_box_(&vertical_padding_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     header_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      standard_height_(get_h() * 9 / 200) {
 	horizontal_padding_box_.add_space(10 * kPadding);
 	horizontal_padding_box_.add(&vertical_padding_box_, UI::Box::Resizing::kExpandBoth);
@@ -76,9 +76,9 @@ TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
                                const std::string& title,
                                double right_column_width_factor)
    : BaseMenu(fsmm, name, title),
-     content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     left_column_box_(&content_box_, 0, 0, UI::Box::Vertical),
-     right_column_box_(&content_box_, 0, 0, UI::Box::Vertical),
+     content_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     left_column_box_(&content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     right_column_box_(&content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      right_column_width_(get_inner_w() * right_column_width_factor),
      right_column_width_factor_(right_column_width_factor) {
 
@@ -104,8 +104,10 @@ TwoColumnsBackNavigationMenu::TwoColumnsBackNavigationMenu(FullscreenMenuMain& f
                                                            const std::string& title,
                                                            double right_column_width_factor)
    : TwoColumnsMenu(fsmm, name, title, right_column_width_factor),
-     right_column_content_box_(&right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * kPadding),
-     button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * kPadding),
+     right_column_content_box_(
+        &right_column_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 1 * kPadding),
+     button_box_(
+        &right_column_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, 1 * kPadding),
      back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")) {
 
 	right_column_box_.add(&right_column_content_box_, UI::Box::Resizing::kExpandBoth);

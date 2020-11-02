@@ -49,11 +49,10 @@ Table<void*>::Table(Panel* const parent,
                     uint32_t h,
                     PanelStyle style,
                     TableRows rowtype)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      total_width_(0),
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
-     style_(style),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
@@ -183,7 +182,6 @@ void Table<void*>::header_button_clicked(Columns::size_type const n) {
 
 	set_sort_column(n);
 	sort();
-	return;
 }
 
 /**
@@ -389,7 +387,7 @@ bool Table<void*>::handle_tooltip() {
 				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
 				if (rendered_text->width() > column_w) {
-					return Panel::draw_tooltip(entry_string);
+					return Panel::draw_tooltip(entry_string, panel_style_);
 				}
 			}
 			column_x += column_w;
@@ -401,10 +399,11 @@ bool Table<void*>::handle_tooltip() {
 }
 
 UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryRecord& er) {
-	return const_cast<FontStyleInfo&>(
-	   er.font_style() != nullptr ? *er.font_style() :
-	   er.is_disabled()           ? g_style_manager->table_style(style_).disabled() :
-                                   g_style_manager->table_style(style_).enabled());
+	return const_cast<FontStyleInfo&>(er.font_style() != nullptr ?
+	                                     *er.font_style() :
+	                                     er.is_disabled() ?
+	                                     g_style_manager->table_style(panel_style_).disabled() :
+	                                     g_style_manager->table_style(panel_style_).enabled());
 }
 bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
                                const Vector2i& point,

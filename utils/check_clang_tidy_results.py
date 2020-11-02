@@ -49,27 +49,19 @@ SUPPRESSED_CHECKS = {
     '[llvm-header-guard]',  # We have our own header style with a codecheck rule on it
     '[misc-macro-parentheses]',
     '[misc-redundant-expression]',
-    '[misc-suspicious-string-compare]',
-    '[modernize-make-shared]',
     '[modernize-make-unique]',
     '[modernize-pass-by-value]',
     '[modernize-raw-string-literal]',
     '[modernize-return-braced-init-list]',
     '[modernize-use-auto]',
-    '[modernize-use-default-member-init]',
     '[modernize-use-emplace]',
     '[modernize-use-equals-default]',
-    '[readability-container-size-empty]',
-    '[readability-delete-null-pointer]',
     '[readability-else-after-return]',
     '[readability-function-size]',
     '[readability-implicit-bool-conversion]',
     '[readability-inconsistent-declaration-parameter-name]',
     '[readability-named-parameter]',
-    '[readability-redundant-control-flow]',
     '[readability-redundant-member-init]',
-    '[readability-redundant-string-cstr]',
-    '[readability-simplify-boolean-expr]',
 }
 
 CHECK_REGEX = re.compile(r'.*\[([A-Za-z0-9.-]+)\]$')

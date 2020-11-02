@@ -246,9 +246,9 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 
 	std::string filename = lsgm.filename();
 
-	if (g_fs->file_exists(filename.c_str())) {
+	if (g_fs->file_exists(filename)) {
 		// Read the needed data from file "elemental" of the used map.
-		std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(filename.c_str()));
+		std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(filename));
 		Profile prof;
 		prof.read("map/elemental", nullptr, *l_fs);
 		Section& s = prof.get_safe_section("global");
@@ -264,7 +264,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		if (g_fs->is_directory(filename)) {
 			// Send a warning
 			UI::WLMessageBox warning(
-			   this, UI::WindowStyle::kFsMenu, _("Saved Game is Directory"),
+			   get_parent(), UI::WindowStyle::kFsMenu, _("Saved Game is Directory"),
 			   _("WARNING:\n"
 			     "The saved game you selected is a directory."
 			     " This happens if you set the option ‘nozip’ to "
@@ -411,8 +411,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
  * load all playerdata from savegame and update UI accordingly
  */
 void FullscreenMenuLaunchMPG::load_previous_playerdata() {
-	std::unique_ptr<FileSystem> l_fs(
-	   g_fs->make_sub_file_system(settings_->settings().mapfilename.c_str()));
+	std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(settings_->settings().mapfilename));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 

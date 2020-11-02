@@ -106,7 +106,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		tableEntry.set_disabled(!campaign_data.visible);
 	}
 
-	if (table_.size()) {
+	if (!table_.empty()) {
 		table_.sort();
 		table_.select(0);
 	}

@@ -85,7 +85,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                 _("Options")),
 
      // Buttons
-     button_box_(this, 0, 0, UI::Box::Horizontal),
+     button_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
      apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
@@ -93,13 +93,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      // Tabs
      tabs_(this, UI::TabPanelStyle::kFsMenu),
 
-     box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
-     box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_newgame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_ingame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_interface_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     box_interface_left_(
+        &box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_windows_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_sound_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
      language_dropdown_(&box_interface_left_,
@@ -275,7 +276,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                UI::PanelStyle::kFsMenu,
                                Vector2i::zero(),
                                _("Allow diagonal scrolling with the numeric keypad")),
-     training_wheels_box_(&box_ingame_, 0, 0, UI::Box::Horizontal),
+     training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
                       UI::PanelStyle::kFsMenu,
                       Vector2i::zero(),
@@ -503,7 +504,7 @@ void FullscreenMenuOptions::layout() {
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
-	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
+	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale.empty());
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
 	// Handle non-standard setups where the locale directory might be missing
@@ -561,7 +562,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {
 		const LanguageEntry& language_entry = entry.second;
-		language_dropdown_.add(language_entry.descname.c_str(), language_entry.localename, nullptr,
+		language_dropdown_.add(language_entry.descname, language_entry.localename, nullptr,
 		                       language_entry.localename == selected_locale, "");
 	}
 }

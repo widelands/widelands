@@ -29,13 +29,14 @@ namespace UI {
  * Initialize an empty box
  */
 Box::Box(Panel* const parent,
+         PanelStyle s,
          int32_t const x,
          int32_t const y,
          uint32_t const orientation,
          int32_t const max_x,
          int32_t const max_y,
          uint32_t const inner_spacing)
-   : Panel(parent, x, y, 0, 0),
+   : Panel(parent, s, x, y, 0, 0),
 
      max_x_(max_x ? max_x : g_gr->get_xres()),
      max_y_(max_y ? max_y : g_gr->get_yres()),
@@ -43,7 +44,6 @@ Box::Box(Panel* const parent,
      scrolling_(false),
      force_scrolling_(false),
      scrollbar_(nullptr),
-     scrollbar_style_(UI::PanelStyle::kFsMenu),
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
@@ -75,11 +75,6 @@ void Box::set_force_scrolling(bool f) {
 		return;
 	}
 	force_scrolling_ = f;
-	update_desired_size();
-}
-
-void Box::set_scrollbar_style(UI::PanelStyle s) {
-	scrollbar_style_ = s;
 	update_desired_size();
 }
 
@@ -215,8 +210,8 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(new Scrollbar(
-			   this, sb_x, sb_y, sb_w, sb_h, scrollbar_style_, orientation_ == Horizontal));
+			scrollbar_.reset(
+			   new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
 			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));

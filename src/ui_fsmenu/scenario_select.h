@@ -61,6 +61,5 @@ private:
 
 	std::vector<ScenarioData> scenarios_data_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_SCENARIO_SELECT_H
-}

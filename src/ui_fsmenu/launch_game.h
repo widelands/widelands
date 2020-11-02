@@ -101,6 +101,5 @@ private:
 	void add_all_widgets();
 	void add_behaviour_to_widgets();
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H
-}
