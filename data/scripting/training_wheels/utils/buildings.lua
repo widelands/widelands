@@ -159,9 +159,10 @@ end
 function wait_for_constructionsite_field(buildingname, search_area, reminder_message, seconds)
    local target_field = nil
    local counter = 0
+   seconds = seconds * 10
    repeat
       counter = counter + 1
-      sleep(1000)
+      sleep(100)
       target_field = find_constructionsite_field(buildingname, search_area)
    until target_field ~= nil or counter % seconds == 0
    if target_field == nil then
