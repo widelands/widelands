@@ -93,7 +93,7 @@ private:
 
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	const FontStyleInfo* style_;
+	const FontStyleInfo* font_style_;
 	float font_scale_;
 
 	const Align align_;

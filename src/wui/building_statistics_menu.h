@@ -21,6 +21,7 @@
 #define WL_WUI_BUILDING_STATISTICS_MENU_H
 
 #include "graphic/color.h"
+#include "graphic/styles/building_statistics_style.h"
 #include "logic/map_objects/tribes/building.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

@@ -55,8 +55,8 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
    : UniqueWindow(&ib, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
      ibase_(ib),
      ship_(ship),
-     vbox_(this, 0, 0, UI::Box::Vertical),
-     navigation_box_(&vbox_, 0, 0, UI::Box::Vertical) {
+     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     navigation_box_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
@@ -65,11 +65,14 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Expedition buttons
-	UI::Box* exp_top = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_top =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_top, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	UI::Box* exp_mid = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_mid =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_mid, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	UI::Box* exp_bot = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_bot =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	btn_scout_[Widelands::WALK_NW - 1] =
@@ -120,7 +123,7 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Bottom buttons
-	UI::Box* buttons = new UI::Box(&vbox_, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
 
 	btn_sink_ = make_button(buttons, "sink", _("Sink the ship"), kImgSink, [this]() { act_sink(); });
