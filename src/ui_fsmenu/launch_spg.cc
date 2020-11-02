@@ -187,7 +187,4 @@ void FullscreenMenuLaunchSPG::layout() {
 	player_setup.force_new_dimensions(standard_height_);
 }
 
-FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
-}
 }  // namespace FsMenu
-
