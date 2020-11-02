@@ -55,7 +55,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const LuaTable& table,
                              Descriptions& descriptions)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
-     hints_(table.get_table("aihints"), name()),
      descriptions_(descriptions),
      buildable_(table.has_key("buildcost")),
      can_be_dismantled_(table.has_key("return_on_dismantle")),
@@ -66,6 +65,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhancement_(INVALID_INDEX),
      enhanced_from_(INVALID_INDEX),
      enhanced_building_(false),
+     hints_(table.get_table("aihints"), name()),
      vision_range_(0) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", name().c_str());
