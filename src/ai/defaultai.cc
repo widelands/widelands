@@ -693,13 +693,13 @@ void DefaultAI::late_initialization() {
 		if (bh.get_ai_limit(type_) >= 0) {
 			bo.cnt_limit_by_aimode = bh.get_ai_limit(type_);
 		}
+
 		// Read all interesting data from ware producing buildings
 		if (bld.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 			const Widelands::ProductionSiteDescr& prod =
 			   dynamic_cast<const Widelands::ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine :
 			                             BuildingObserver::Type::kProductionsite;
-
 			for (const auto& temp_input : prod.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 			}
@@ -1058,7 +1058,7 @@ void DefaultAI::late_initialization() {
 	if (count_buildings_with_attribute(BuildingAttribute::kWell) != 1) {
 		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of well. "
-		   "This is the building that collects the map resource 'resource_water\'.",
+		   "This is the building that collects a map resource, is not a mine and not 'needs_water'.",
 		   tribe_->name().c_str());
 	}
 	if (count_buildings_with_attribute(BuildingAttribute::kLumberjack) != 1) {
@@ -1079,7 +1079,7 @@ void DefaultAI::late_initialization() {
 	if (count_buildings_with_attribute(BuildingAttribute::kFisher) != 1) {
 		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of fisher's building. "
-		   "This is the building that collects the map resource 'resource_fish'.",
+		   "This is the building that collects a map resource, is not a mine and 'needs_water'.",
 		   tribe_->name().c_str());
 	}
 

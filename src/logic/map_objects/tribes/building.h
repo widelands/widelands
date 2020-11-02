@@ -197,6 +197,7 @@ private:
 	AI::BuildingHints hints_;  // hints (knowledge) for computer players
 	DescriptionIndex built_over_immovable_;  // can be built only on nodes where an immovable with
 	                                         // this attribute stands
+
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t vision_range_;
 	DISALLOW_COPY_AND_ASSIGN(BuildingDescr);
