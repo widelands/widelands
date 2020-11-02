@@ -1031,8 +1031,8 @@ void WLApplication::handle_commandline_parameters() {
 		commandline_.erase("datadir");
 	} else {
 		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
-                    INSTALL_DATADIR :
-                    get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+		              INSTALL_DATADIR :
+		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 #ifdef USE_XDG
 		// Overwrite with first folder found in XDG_DATA_DIRS
 		for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
