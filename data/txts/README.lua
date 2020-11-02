@@ -3,7 +3,7 @@ include "txts/help/common_helptexts.lua"
 push_textdomain("texts")
 
 local r = {
-   rt(
+   rt(fs_color(
       p_font("align=center", "size=38 face=Widelands/Widelands.ttf color=2F9131", img("images/logos/wl-ico-32.png") .. "Widelands") ..
       p_font("align=center", "size=14 italic=1 color=D1D1D1", _"an open source strategy game") ..
       help_introduction() ..
@@ -32,7 +32,7 @@ local r = {
           li(_"If the bug concerns something not being displayed correctly or if it helps demonstrate the issue, please include one or more screenshots.") ..
           li(_"If you have a save game or replay demonstrating the issue (for instance crashes where it can be hard to tell exactly what is triggering it), please include that too. For more information, see the section on Replays below.")) ..
       help_replays()
-   )
+   ))
 }
 pop_textdomain()
 return r
