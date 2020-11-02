@@ -255,11 +255,10 @@ void NetAddons::download_addon_file(const std::string& name,
 	   name);
 
 	std::FILE* out_file = std::fopen(output.c_str(), "wb");
-	curl_easy_setopt(
-	   curl_, CURLOPT_WRITEFUNCTION,
-	   [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
-		   return std::fwrite(ptr, size, nmemb, stream);
-	   });
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION,
+	                 [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
+		                 return std::fwrite(ptr, size, nmemb, stream);
+	                 });
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
 
 	const CURLcode res = curl_easy_perform(curl_);
@@ -291,11 +290,10 @@ std::string NetAddons::download_i18n(const std::string& name,
 	   name + "/" + locale);
 
 	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
-	curl_easy_setopt(
-	   curl_, CURLOPT_WRITEFUNCTION,
-	   [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
-		   return std::fwrite(ptr, size, nmemb, stream);
-	   });
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION,
+	                 [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
+		                 return std::fwrite(ptr, size, nmemb, stream);
+	                 });
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
 
 	const CURLcode res = curl_easy_perform(curl_);

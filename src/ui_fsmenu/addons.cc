@@ -825,10 +825,11 @@ void AddOnsCtrl::update_dependency_errors() {
 						break;
 					} else if (a.first.internal_name == requirement) {
 						warn_requirements.push_back(
-						   (boost::format(_("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
-							                "listed in the wrong order")) %
-							addon->first.descname() % prev_descname % search_result->first.descname())
-							  .str());
+						   (boost::format(
+						       _("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+						         "listed in the wrong order")) %
+						    addon->first.descname() % prev_descname % search_result->first.descname())
+						      .str());
 						break;
 					}
 				}
@@ -898,12 +899,13 @@ static void install_translation(const std::string& temp_locale_path,
 	const std::string temp_filename = g_fs->fs_filename(temp_locale_path.c_str());  // nds.mo.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));    // nds
 
-	const std::string new_locale_dir = i18n::kAddOnLocaleDir + FileSystem::file_separator() + locale +
-	                                   FileSystem::file_separator() +
+	const std::string new_locale_dir = i18n::kAddOnLocaleDir + FileSystem::file_separator() +
+	                                   locale + FileSystem::file_separator() +
 	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + addon_name + ".mo";
+	const std::string new_locale_path =
+	   new_locale_dir + FileSystem::file_separator() + addon_name + ".mo";
 
 	assert(!g_fs->is_directory(new_locale_path));
 	if (g_fs->file_exists(new_locale_path)) {
@@ -1010,9 +1012,8 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 	try {
 		piw.set_message_1((boost::format(_("Downloading ‘%s’…")) % info.descname()).str());
 
-		const std::string temp_dir =
-		   g_fs->canonicalize_name(i18n::get_homedir() + "/" + kTempFileDir + "/" +
-		                           info.internal_name + kTempFileExtension);
+		const std::string temp_dir = g_fs->canonicalize_name(
+		   i18n::get_homedir() + "/" + kTempFileDir + "/" + info.internal_name + kTempFileExtension);
 		if (g_fs->file_exists(temp_dir)) {
 			// cleanse outdated cache
 			g_fs->fs_unlink(temp_dir);
@@ -1157,8 +1158,8 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 
 	// …and its translations
 	for (const std::string& locale : g_fs->list_directory(i18n::kAddOnLocaleDir)) {
-		g_fs->fs_unlink(locale + FileSystem::file_separator() + "LC_MESSAGES" + FileSystem::file_separator() +
-		                info.internal_name + ".mo");
+		g_fs->fs_unlink(locale + FileSystem::file_separator() + "LC_MESSAGES" +
+		                FileSystem::file_separator() + info.internal_name + ".mo");
 	}
 
 	for (auto it = g_addons.begin(); it != g_addons.end(); ++it) {
