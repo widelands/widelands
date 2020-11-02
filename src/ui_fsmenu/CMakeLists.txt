@@ -44,6 +44,8 @@ wl_library(ui_fsmenu_helpwindow
 
 wl_library(ui_fsmenu_main
   SRCS
+    login_box.cc
+    login_box.h
     main.cc
     main.h
     menu_target.h
@@ -52,6 +54,7 @@ wl_library(ui_fsmenu_main
     base_random
     build_info
     graphic
+    graphic_fonthandler
     graphic_text_layout
     logic
     logic_filesystem_constants
@@ -59,7 +62,6 @@ wl_library(ui_fsmenu_main
     network
     ui_basic
     widelands_options
-    wui
     wui_common_gamedetails
     wui_common_mapdetails
   USES_SDL2
@@ -170,6 +172,7 @@ wl_library(ui_fsmenu_network
     base_i18n
     base_random
     build_info
+    graphic
     graphic_image_cache
     graphic_text_layout
     logic_tribe_basic_info

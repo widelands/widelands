@@ -42,23 +42,24 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
      training_wheels_(new Widelands::TrainingWheels(*lua_)),
      mark_unmark_state_(false) {
 
+	UI::PanelStyle panel_style = UI::PanelStyle::kFsMenu;
+
 	// Some horizontal padding
-	UI::Box* wrapper_box = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+	UI::Box* wrapper_box = new UI::Box(this, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
 	set_center_panel(wrapper_box);
 
 	wrapper_box->add_space(0);
 
-	UI::Box* main_box = new UI::Box(wrapper_box, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+	UI::Box* main_box = new UI::Box(wrapper_box, panel_style, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 	wrapper_box->add(main_box, UI::Box::Resizing::kExpandBoth);
 
 	main_box->add_space(0);
 
 	const auto& objectives = training_wheels_->all_objectives();
 	UI::Textarea* title_label =
-	   new UI::Textarea(main_box,
+	   new UI::Textarea(main_box, panel_style, UI::FontStyle::kWuiInfoPanelHeading,
 	                    /** TRANSLATORS: Title above a list */
 	                    pgettext("teaching_progress", "Teaching objectives"));
-	title_label->set_style(g_style_manager->font_style(UI::FontStyle::kWuiInfoPanelHeading));
 	main_box->add(title_label, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box->add_space(0);
 
@@ -67,7 +68,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	main_box->add_space(kPadding);
 
 	UI::Box* list_box =
-	   new UI::Box(main_box, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, kPadding);
+	   new UI::Box(main_box, panel_style, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, kPadding);
 	list_box->set_scrolling(true);
 	main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
@@ -87,7 +88,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	main_box->add_space(kPadding);
 
 	// Bottom button row with actions
-	UI::Box* horizontal_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+	UI::Box* horizontal_box = new UI::Box(main_box, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
 	main_box->add(horizontal_box, UI::Box::Resizing::kFullSize);
 
 	horizontal_box->add_space(0);

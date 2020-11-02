@@ -25,7 +25,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu_target.h"
 
 /**
@@ -44,8 +44,10 @@ public:
 	}
 
 	// Internet login stuff
-	void show_internet_login();
+	void show_internet_login(bool modal = false);
 	void internet_login();
+	void internet_login_callback();
+
 	std::string get_nickname() const {
 		return nickname_;
 	}
@@ -105,6 +107,8 @@ private:
 
 	bool visible_;
 	void set_button_visibility(bool);
+
+	UI::UniqueWindow::Registry r_login_;
 
 	// Values from internet login window
 	std::string nickname_;

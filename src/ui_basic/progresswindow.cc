@@ -47,10 +47,10 @@ namespace UI {
 std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 
 ProgressWindow::ProgressWindow(const std::string& theme, const std::string& background)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr, PanelStyle::kFsMenu /* unused */, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme),
-     style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
+     progress_style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -85,7 +85,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * kProgressStatusPositionY / 100;
 
-	const uint32_t h = text_height(style_.font());
+	const uint32_t h = text_height(progress_style_.font());
 
 	label_rectangle_.x = get_w() / 6;
 	label_rectangle_.w = get_w() * 2 / 3;
@@ -98,10 +98,10 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * kProgressStatusBorderX;
 	border_rect.h += 2 * kProgressStatusBorderY;
 
-	rt.draw_rect(border_rect, style_.font().color());
+	rt.draw_rect(border_rect, progress_style_.font().color());
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse
 	// the Progressbar class.
-	rt.fill_rect(label_rectangle_, style_.medium_color());
+	rt.fill_rect(label_rectangle_, progress_style_.medium_color());
 }
 
 /// Set a picture to render in the background
@@ -153,7 +153,7 @@ void ProgressWindow::step(const std::string& description) {
 	draw(rt);
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(description, style_.font()));
+	   UI::g_fh->render(as_richtext_paragraph(description, progress_style_.font()));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 
