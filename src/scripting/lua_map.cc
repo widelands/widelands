@@ -2113,7 +2113,7 @@ int LuaMapObjectDescription::helptexts(lua_State* L) {
 // Sets the description pointer for a MapObjectDescription type
 #define UNPERSIST_DESCRIPTION(L, type, name)                                                       \
 	Widelands::Descriptions* descriptions = get_egbase(L).mutable_descriptions();                   \
-	Widelands::DescriptionIndex idx = descriptions->load_##type(name.c_str());                      \
+	Widelands::DescriptionIndex idx = descriptions->load_##type(name);                              \
 	set_description_pointer(descriptions->get_##type##_descr(idx));
 
 /* RST
