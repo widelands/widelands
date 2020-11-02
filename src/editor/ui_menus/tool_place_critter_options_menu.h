@@ -35,7 +35,7 @@ struct EditorToolPlaceCritterOptionsMenu : public EditorToolOptionsMenu {
 	EditorToolPlaceCritterOptionsMenu(EditorInteractive&,
 	                                  EditorPlaceCritterTool&,
 	                                  UI::UniqueWindow::Registry&);
-	virtual ~EditorToolPlaceCritterOptionsMenu();
+	~EditorToolPlaceCritterOptionsMenu() override;
 
 private:
 	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>>

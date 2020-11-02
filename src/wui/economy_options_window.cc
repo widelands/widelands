@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/ware_descr.h"
@@ -41,7 +42,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::WareWorker type,
                                            bool can_act)
    : UI::Window(parent, UI::WindowStyle::kWui, "economy_options", 0, 0, 0, 0, _("Economy options")),
-     main_box_(this, 0, 0, UI::Box::Vertical),
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      ware_serial_(ware_economy->serial()),
      worker_serial_(worker_economy->serial()),
      player_(&ware_economy->owner()),
@@ -50,7 +51,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
         &tabpanel_, this, ware_serial_, player_, can_act, Widelands::wwWARE, kDesiredWidth)),
      worker_panel_(new EconomyOptionsPanel(
         &tabpanel_, this, worker_serial_, player_, can_act, Widelands::wwWORKER, kDesiredWidth)),
-     dropdown_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     dropdown_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      dropdown_(&dropdown_box_,
                "economy_profiles",
                0,
@@ -69,7 +70,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_image_cache->get(pic_tab_workers), worker_panel_, _("Workers"));
 
-	UI::Box* buttons = new UI::Box(&main_box_, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	UI::Button* b = new UI::Button(
 	   buttons, "decrease_target_fast", 0, 0, 40, 28, UI::ButtonStyle::kWuiSecondary,
 	   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"), _("Decrease target by 10"));
@@ -295,7 +296,7 @@ EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIn
 	const Widelands::Quantity amount = economy->target_quantity(ware).permanent;
 	if (amount == Widelands::kEconomyTargetInfinity) {
 		/** TRANSLATORS: Infinite number of wares or workers */
-		return g_style_manager->font_style(UI::FontStyle::kLabel).as_font_tag(_("∞"));
+		return g_style_manager->font_style(UI::FontStyle::kWuiLabel).as_font_tag(_("∞"));
 	}
 	return boost::lexical_cast<std::string>(amount);
 }
@@ -310,7 +311,7 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
                                                                bool can_act,
                                                                Widelands::WareWorker type,
                                                                int32_t min_w)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      serial_(serial),
      player_(player),
      type_(type),
@@ -652,10 +653,10 @@ EconomyOptionsWindow::SaveProfileWindow::SaveProfileWindow(UI::Panel* parent,
                 0,
                 _("Save Profile")),
      economy_options_(eco),
-     main_box_(this, 0, 0, UI::Box::Vertical),
-     table_box_(&main_box_, 0, 0, UI::Box::Vertical),
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     table_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      table_(&table_box_, 0, 0, 460, 120, UI::PanelStyle::kWui),
-     buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     buttons_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      profile_name_(&main_box_, 0, 0, 240, UI::PanelStyle::kWui),
      save_(&buttons_box_, "save", 0, 0, 80, 34, UI::ButtonStyle::kWuiPrimary, _("Save")),
      cancel_(&buttons_box_, "cancel", 0, 0, 80, 34, UI::ButtonStyle::kWuiSecondary, _("Cancel")),

@@ -228,13 +228,17 @@ StyleManager::StyleManager() {
 	add_font_style(
 	   UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
 	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
-	add_font_style(UI::FontStyle::kFsMenuTitle, *element_table, "fsmenu_title");
+	add_font_style(UI::FontStyle::kGameSummaryTitle, *element_table, "game_summary_title");
 	add_font_style(UI::FontStyle::kFsMenuTranslationInfo, *element_table, "fsmenu_translation_info");
 	add_font_style(UI::FontStyle::kDisabled, *element_table, "disabled");
-	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
-	add_font_style(UI::FontStyle::kTooltipHeader, *element_table, "tooltip_header");
-	add_font_style(UI::FontStyle::kTooltipHotkey, *element_table, "tooltip_hotkey");
-	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
+	add_font_style(UI::FontStyle::kFsMenuLabel, *element_table, "label_fs");
+	add_font_style(UI::FontStyle::kWuiLabel, *element_table, "label_wui");
+	add_font_style(UI::FontStyle::kWuiTooltipHeader, *element_table, "tooltip_header_wui");
+	add_font_style(UI::FontStyle::kWuiTooltipHotkey, *element_table, "tooltip_hotkey_wui");
+	add_font_style(UI::FontStyle::kWuiTooltip, *element_table, "tooltip_wui");
+	add_font_style(UI::FontStyle::kFsTooltipHeader, *element_table, "tooltip_header_fs");
+	add_font_style(UI::FontStyle::kFsTooltipHotkey, *element_table, "tooltip_hotkey_fs");
+	add_font_style(UI::FontStyle::kFsTooltip, *element_table, "tooltip_fs");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(
 	   UI::FontStyle::kWuiAttackBoxSliderLabel, *element_table, "wui_attack_box_slider_label");
@@ -245,6 +249,7 @@ StyleManager::StyleManager() {
 	   UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
 	add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
 	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
+	add_font_style(UI::FontStyle::kFsMenuWindowTitle, *element_table, "fs_window_title");
 	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
 	check_completeness(
 	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));

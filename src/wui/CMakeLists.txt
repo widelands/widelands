@@ -41,6 +41,7 @@ wl_library(wui_economy_options
     economy_options_window.h
   DEPENDS
     economy
+    graphic
     graphic_fonthandler
     logic
     logic_commands
@@ -130,6 +131,7 @@ wl_library(wui_common_mapdetails
   DEPENDS
     base_exceptions
     base_i18n
+    graphic
     graphic_image_cache
     graphic_minimap_renderer
     graphic_text_layout
@@ -256,8 +258,6 @@ wl_library(wui
     interactive_spectator.h
     itemwaresdisplay.cc
     itemwaresdisplay.h
-    login_box.cc
-    login_box.h
     logmessage.h
     militarysitewindow.cc
     militarysitewindow.h
@@ -316,6 +316,7 @@ wl_library(wui
     graphic_minimap_renderer
     graphic_mouse_cursor
     graphic_playercolor
+    graphic_styles
     graphic_surface
     graphic_text_layout
     graphic_toolbar_imageset

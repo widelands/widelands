@@ -327,7 +327,8 @@ void WordWrap::draw(RenderTarget& dst,
                     bool with_selection,
                     uint32_t selection_start,
                     uint32_t selection_end,
-                    uint32_t scrollbar_position) {
+                    uint32_t scrollbar_position,
+                    const std::string& caret_image_path) {
 	if (lines_.empty()) {
 		return;
 	}
@@ -371,7 +372,7 @@ void WordWrap::draw(RenderTarget& dst,
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, fontsize_);
 
-			const Image* caret_image = g_image_cache->get("images/ui_basic/caret.png");
+			const Image* caret_image = g_image_cache->get(caret_image_path);
 			Vector2i caretpt = Vector2i::zero();
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

@@ -134,8 +134,8 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
      object_(&map_object),
      checkbox_(nullptr) {
 	const int padding = 6;
-	UI::Box* main_box = new UI::Box(this, padding, padding, UI::Box::Vertical);
-	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
+	UI::Box* main_box = new UI::Box(this, UI::PanelStyle::kWui, padding, padding, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(main_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   main_box, 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,

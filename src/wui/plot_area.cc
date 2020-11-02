@@ -324,7 +324,7 @@ WuiPlotArea::WuiPlotArea(UI::Panel* const parent,
                          int32_t const h,
                          uint32_t sample_rate,
                          Plotmode plotmode)
-   : UI::Panel(parent, x, y, w, h),
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      plotmode_(plotmode),
      sample_rate_(sample_rate),
      needs_update_(true),

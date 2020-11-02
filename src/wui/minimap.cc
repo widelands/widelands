@@ -38,7 +38,7 @@ MiniMap::View::View(UI::Panel& parent,
                     uint32_t const,
                     uint32_t const,
                     InteractiveBase& ibase)
-   : UI::Panel(&parent, x, y, 10, 10),
+   : UI::Panel(&parent, UI::PanelStyle::kWui, x, y, 10, 10),
      ibase_(ibase),
      pic_map_spot_(g_image_cache->get("images/wui/overlays/map_spot.png")),
      rows_drawn_(0),

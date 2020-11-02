@@ -52,12 +52,14 @@ FxId Panel::click_fx_ = kNoSoundEffect;
  * Initialize a panel, link it into the parent's queue.
  */
 Panel::Panel(Panel* const nparent,
+             const PanelStyle s,
              const int nx,
              const int ny,
              const int nw,
              const int nh,
              const std::string& tooltip_text)
-   : initialized_(false),
+   : panel_style_(s),
+     initialized_(false),
      parent_(nparent),
      first_child_(nullptr),
      last_child_(nullptr),
@@ -857,7 +859,7 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  * false otherwise.
  */
 bool Panel::handle_tooltip() {
-	return draw_tooltip(tooltip());
+	return draw_tooltip(tooltip(), panel_style_);
 }
 
 // Whether TAB events should be handled by this panel's parent (`false`) or by `this` (`true`)
@@ -1516,7 +1518,7 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(const std::string& text) {
+bool Panel::draw_tooltip(const std::string& text, const PanelStyle style) {
 	if (text.empty()) {
 		return false;
 	}
@@ -1524,7 +1526,9 @@ bool Panel::draw_tooltip(const std::string& text) {
 	RenderTarget& dst = *g_gr->get_render_target();
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_richtext_paragraph(text_to_render, UI::FontStyle::kTooltip);
+		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
+		                                                          UI::FontStyle::kWuiTooltip :
+		                                                          UI::FontStyle::kFsTooltip);
 	}
 
 	constexpr uint32_t kTipWidthMax = 360;

@@ -75,7 +75,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
       create_checkbox,
    const std::function<void()> select_correct_tool,
    ToolType* const tool)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
@@ -93,7 +93,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 	add(&tab_panel_);
 
 	for (const auto& category : categories) {
-		UI::Box* vertical = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+		UI::Box* vertical = new UI::Box(&tab_panel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 		const int kSpacing = 5;
 		vertical->add_space(kSpacing);
 
@@ -101,7 +101,7 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
 		UI::Box* horizontal = nullptr;
 		for (const int i : category->items()) {
 			if (nitems_handled % category->items_per_row() == 0) {
-				horizontal = new UI::Box(vertical, 0, 0, UI::Box::Horizontal);
+				horizontal = new UI::Box(vertical, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				horizontal->add_space(kSpacing);
 
 				vertical->add(horizontal);

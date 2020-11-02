@@ -28,6 +28,7 @@
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -35,8 +36,8 @@
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/login_box.h"
 #include "wlapplication_options.h"
-#include "wui/login_box.h"
 #include "wui/mapdata.h"
 #include "wui/savegameloader.h"
 
@@ -81,13 +82,13 @@ int16_t FullscreenMenuMain::calc_desired_window_y(const UI::Window::WindowLayout
 }
 
 FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
      buth_(get_h() * 9 / 200),
      padding_(buth_ / 3),
-     vbox1_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     vbox2_(this, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     vbox1_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     vbox2_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      singleplayer_(&vbox1_,
                    "singleplayer",
                    0,
@@ -127,21 +128,23 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
      about_(&vbox2_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      exit_(&vbox2_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, ""),
      version_(this,
+              UI::PanelStyle::kFsMenu,
+              UI::FontStyle::kFsMenuInfoPanelParagraph,
               0,
               0,
               0,
               0,
               "",
-              UI::Align::kCenter,
-              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+              UI::Align::kCenter),
      copyright_(this,
+                UI::PanelStyle::kFsMenu,
+                UI::FontStyle::kFsMenuInfoPanelParagraph,
                 0,
                 0,
                 0,
                 0,
                 "",
-                UI::Align::kCenter,
-                g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
+                UI::Align::kCenter),
      splashscreen_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/splash.jpg")),
      title_image_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/logo.png")),
      init_time_(kNoSplash),
@@ -158,10 +161,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 
 	singleplayer_.selected.connect(
 	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
-	multiplayer_.selected.connect([this]() {
-		internet_login();
-		end_modal<MenuTarget>(multiplayer_.get_selected());
-	});
+	multiplayer_.selected.connect([this]() { end_modal<MenuTarget>(multiplayer_.get_selected()); });
 	editor_.selected.connect([this]() { end_modal<MenuTarget>(editor_.get_selected()); });
 	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
@@ -201,6 +201,9 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	} else {
 		last_image_exchange_time_ = SDL_GetTicks();
 	}
+
+	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
+
 	focus();
 	set_labels();
 	layout();
@@ -266,7 +269,7 @@ void FullscreenMenuMain::set_labels() {
 			singleplayer_.add(
 			   _("Continue Playing"), MenuTarget::kContinueLastsave, nullptr, false,
 			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s<br>%s") %
-			    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+			    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
 			       .as_font_tag(
 			          /* strip leading "save/" and trailing ".wgf" */
 			          filename_for_continue_playing_.substr(
@@ -328,7 +331,7 @@ void FullscreenMenuMain::set_labels() {
 			filename_for_continue_editing_ = last_edited->first.filename;
 			editor_.add(_("Continue Editing"), MenuTarget::kEditorContinue, nullptr, false,
 			            (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
-			             g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+			             g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
 			                .as_font_tag(
 			                   /* strip leading "maps/My_Maps/" and trailing ".wgf" */
 			                   filename_for_continue_editing_.substr(
@@ -359,25 +362,30 @@ void FullscreenMenuMain::set_labels() {
 	singleplayer_.set_label(_("Single Player…"));
 	multiplayer_.set_label(_("Multiplayer…"));
 	editor_.set_label(_("Editor…"));
-	singleplayer_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Begin or load a single-player campaign or free game"), "S"));
-	multiplayer_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Play with your friends over the internet"), "M"));
-	editor_.set_tooltip(as_tooltip_text_with_hotkey(_("Launch the map editor"), "E"));
+	singleplayer_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Begin or load a single-player campaign or free game"), "S", UI::PanelStyle::kFsMenu));
+	multiplayer_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Play with your friends over the internet"), "M", UI::PanelStyle::kFsMenu));
+	editor_.set_tooltip(
+	   as_tooltip_text_with_hotkey(_("Launch the map editor"), "E", UI::PanelStyle::kFsMenu));
 
 	replay_.set_title(_("Watch Replay"));
-	replay_.set_tooltip(as_tooltip_text_with_hotkey(_("Watch the replay of an old game"), "R"));
+	replay_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Watch the replay of an old game"), "R", UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
-	   as_tooltip_text_with_hotkey("This feature is still under development", "A"));
+	   as_tooltip_text_with_hotkey(
+	      "This feature is still under development", "A", UI::PanelStyle::kFsMenu));
 	options_.set_title(_("Options"));
-	options_.set_tooltip(as_tooltip_text_with_hotkey(_("Technical and game-related settings"), "O"));
+	options_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Technical and game-related settings"), "O", UI::PanelStyle::kFsMenu));
 	about_.set_title(_("About Widelands"));
-	about_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Readme, License, and Credits"), pgettext("hotkey", "F1")));
+	about_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Readme, License, and Credits"), pgettext("hotkey", "F1"), UI::PanelStyle::kFsMenu));
 	exit_.set_title(_("Exit Widelands"));
-	exit_.set_tooltip(as_tooltip_text_with_hotkey(_("Quit the game"), pgettext("hotkey", "Esc")));
+	exit_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Quit the game"), pgettext("hotkey", "Esc"), UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
@@ -454,7 +462,7 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			end_modal<MenuTarget>(MenuTarget::kMetaserver);
 			return true;
 		case SDLK_u:
-			end_modal<MenuTarget>(MenuTarget::kOnlineGameSettings);
+			show_internet_login();
 			return true;
 		case SDLK_p:
 			end_modal<MenuTarget>(MenuTarget::kLan);
@@ -488,6 +496,12 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			return true;
 		case SDLK_e:
 			editor_.toggle();
+			return true;
+		case SDLK_F3:
+			// Easter egg: Press F3 to exchange the background immediately :-)
+			last_image_exchange_time_ -=
+			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
+			                                                         last_image_exchange_time_);
 			return true;
 		default:
 			break;
@@ -675,9 +689,15 @@ void FullscreenMenuMain::layout() {
 }
 
 /// called if the user is not registered
-void FullscreenMenuMain::show_internet_login() {
-	LoginBox lb(*this);
-	if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk && auto_log_) {
+void FullscreenMenuMain::show_internet_login(const bool modal) {
+	r_login_.create();
+	if (modal) {
+		r_login_.window->run<int>();
+		r_login_.destroy();
+	}
+}
+void FullscreenMenuMain::internet_login_callback() {
+	if (auto_log_) {
 		auto_log_ = false;
 		internet_login();
 	}
@@ -702,7 +722,7 @@ void FullscreenMenuMain::internet_login() {
 	// This is just to be on the safe side, in case the user changed the password in the config file.
 	if (!InternetGaming::ref().valid_username(nickname_)) {
 		auto_log_ = true;
-		show_internet_login();
+		show_internet_login(true);
 		return;
 	}
 
@@ -727,6 +747,6 @@ void FullscreenMenuMain::internet_login() {
 		InternetGaming::ref().reset();
 		set_config_string("password_sha1", "no_password_set");
 		auto_log_ = true;
-		show_internet_login();
+		show_internet_login(true);
 	}
 }

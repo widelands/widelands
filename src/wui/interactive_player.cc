@@ -615,7 +615,8 @@ void InteractivePlayer::set_training_wheel_indicator_pos(const Vector2i& pos) {
 		training_wheel_indicator_icon_.reset(nullptr);
 	} else {
 		// We create a new icon every time to paint it on top of the other child panels
-		training_wheel_indicator_icon_.reset(new UI::Icon(this, training_wheel_indicator_pic_));
+		training_wheel_indicator_icon_.reset(
+		   new UI::Icon(this, UI::PanelStyle::kWui, training_wheel_indicator_pic_));
 		training_wheel_indicator_icon_->set_no_frame();
 		training_wheel_indicator_icon_->set_pos(
 		   Vector2i(pos.x - kTrainingWheelArrowOffset,

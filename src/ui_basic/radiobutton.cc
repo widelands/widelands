@@ -26,9 +26,13 @@ namespace UI {
 /**
  * Initialize the radiobutton and link it into the group's linked list
  */
-Radiobutton::Radiobutton(
-   Panel* const parent, Vector2i const p, const Image* pic, Radiogroup& group, int32_t const id)
-   : Statebox(parent, p, pic), nextbtn_(group.buttons_), group_(group), id_(id) {
+Radiobutton::Radiobutton(Panel* const parent,
+                         PanelStyle s,
+                         Vector2i const p,
+                         const Image* pic,
+                         Radiogroup& group,
+                         int32_t const id)
+   : Statebox(parent, s, p, pic), nextbtn_(group.buttons_), group_(group), id_(id) {
 	group.buttons_ = this;
 }
 
@@ -88,12 +92,13 @@ Radiogroup::~Radiogroup() {
  * Returns the ID of the new button.
  */
 int32_t Radiogroup::add_button(Panel* const parent,
+                               PanelStyle s,
                                Vector2i const p,
                                const Image* pic,
                                const std::string& tooltip,
                                Radiobutton** ret_btn) {
 	++highestid_;
-	Radiobutton* btn = new Radiobutton(parent, p, pic, *this, highestid_);
+	Radiobutton* btn = new Radiobutton(parent, s, p, pic, *this, highestid_);
 	btn->set_tooltip(tooltip);
 	if (ret_btn) {
 		(*ret_btn) = btn;

@@ -122,7 +122,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
                                          InteractiveBase& ib,
                                          Widelands::Warehouse& wh,
                                          Widelands::WareWorker type)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
      interactive_base_(ib),
      wh_(wh),
      can_act_(interactive_base_.can_act(wh_.owner().player_number())),
@@ -130,7 +130,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
      display_(this, width, wh_, type_, can_act_) {
 	add(&display_, Resizing::kFullSize);
 
-	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	add(buttons, UI::Box::Resizing::kFullSize);
 	UI::Button* b;
 

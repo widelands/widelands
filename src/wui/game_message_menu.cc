@@ -118,7 +118,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	                  g_image_cache->get("images/wui/menus/goto.png"),
 	                  as_tooltip_text_with_hotkey(
 	                     /** TRANSLATORS: Tooltip in the messages window */
-	                     _("Center main mapview on location"), "g"));
+	                     _("Center main mapview on location"), "g", UI::PanelStyle::kWui));
 	centerviewbtn_->set_enabled(false);
 
 	if (get_usedefaultpos()) {
@@ -573,7 +573,7 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the messages window */
-		   _("Show all messages"), pgettext("hotkey", "Alt+0")));
+		   _("Show all messages"), pgettext("hotkey", "Alt+0"), UI::PanelStyle::kWui));
 	}
 }
 
@@ -583,19 +583,19 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show geologists' messages only"), pgettext("hotkey", "Alt+1")));
+	   _("Show geologists' messages only"), pgettext("hotkey", "Alt+1"), UI::PanelStyle::kWui));
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show economy messages only"), pgettext("hotkey", "Alt+2")));
+	   _("Show economy messages only"), pgettext("hotkey", "Alt+2"), UI::PanelStyle::kWui));
 	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show seafaring messages only"), pgettext("hotkey", "Alt+3")));
+	   _("Show seafaring messages only"), pgettext("hotkey", "Alt+3"), UI::PanelStyle::kWui));
 	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show warfare messages only"), pgettext("hotkey", "Alt+4")));
+	   _("Show warfare messages only"), pgettext("hotkey", "Alt+4"), UI::PanelStyle::kWui));
 	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show scenario messages only"), pgettext("hotkey", "Alt+5")));
+	   _("Show scenario messages only"), pgettext("hotkey", "Alt+5"), UI::PanelStyle::kWui));
 }
 
 /**
@@ -691,6 +691,8 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		}
 		break;
 	}
-	/** TRANSLATORS: Del is the "Delete" key on the keyboard */
-	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(button_tooltip, pgettext("hotkey", "Del")));
+	archivebtn_->set_tooltip(
+	   as_tooltip_text_with_hotkey(button_tooltip,
+	                               /** TRANSLATORS: Del is the "Delete" key on the keyboard */
+	                               pgettext("hotkey", "Del"), UI::PanelStyle::kWui));
 }

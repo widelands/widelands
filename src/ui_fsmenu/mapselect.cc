@@ -44,7 +44,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
      checkbox_space_(20),
      // Less padding for big fonts; space is tight.
      checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
-     checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
+     checkboxes_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
      table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
                   right_column_x_,
@@ -76,7 +76,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	table_.set_column_compare(1, [this](uint32_t a, uint32_t b) { return compare_mapnames(a, b); });
 	table_.set_column_compare(2, [this](uint32_t a, uint32_t b) { return compare_size(a, b); });
 
-	UI::Box* hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	UI::Box* hbox = new UI::Box(
+	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	show_all_maps_ = new UI::Button(
 	   hbox, "show_all_maps", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Show all maps"));
@@ -92,7 +93,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	// Row with dropdowns
 
-	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	hbox = new UI::Box(
+	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 
 	official_tags_dropdown_ = new UI::Dropdown<std::string>(
 	   hbox, "dropdown_official_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
@@ -133,7 +135,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 
 	// Row with checkboxes
 
-	hbox = new UI::Box(&checkboxes_, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
+	hbox = new UI::Box(
+	   &checkboxes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, checkbox_space_, get_w());
 	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
 	add_tag_checkbox(hbox, "ferries", localize_tag("ferries"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));

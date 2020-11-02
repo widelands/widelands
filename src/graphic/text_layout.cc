@@ -236,9 +236,17 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	NEVER_HERE();
 }
 
-std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey) {
+std::string as_tooltip_text_with_hotkey(const std::string& text,
+                                        const std::string& hotkey,
+                                        const UI::PanelStyle style) {
 	boost::format f("<rt><p>%s %s</p></rt>");
-	f % g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(text);
-	f % g_style_manager->font_style(UI::FontStyle::kTooltipHotkey).as_font_tag("(" + hotkey + ")");
+	f % g_style_manager
+	       ->font_style(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
+	                                                    UI::FontStyle::kFsTooltip)
+	       .as_font_tag(text);
+	f % g_style_manager
+	       ->font_style(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHotkey :
+	                                                    UI::FontStyle::kFsTooltipHotkey)
+	       .as_font_tag("(" + hotkey + ")");
 	return f.str();
 }

@@ -86,6 +86,7 @@ public:
 	};
 
 	Panel(Panel* const nparent,
+	      UI::PanelStyle,
 	      int32_t const nx,
 	      int32_t const ny,
 	      int const nw,
@@ -350,7 +351,7 @@ protected:
 
 	static void play_click();
 
-	static bool draw_tooltip(const std::string& text);
+	static bool draw_tooltip(const std::string& text, PanelStyle);
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
@@ -368,6 +369,8 @@ protected:
 	// notes are still handled and the graphics refreshed.
 	// Does _not_ handle user input (this is on purpose!!)
 	void stay_responsive();
+
+	const PanelStyle panel_style_;
 
 private:
 	bool initialized_;
@@ -483,13 +486,14 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
  */
 struct NamedPanel : public Panel {
 	NamedPanel(Panel* const nparent,
+	           UI::PanelStyle s,
 	           const std::string& name,
 	           int32_t const nx,
 	           int32_t const ny,
 	           int const nw,
 	           int const nh,
 	           const std::string& tooltip_text = std::string())
-	   : Panel(nparent, nx, ny, nw, nh, tooltip_text), name_(name) {
+	   : Panel(nparent, s, nx, ny, nw, nh, tooltip_text), name_(name) {
 	}
 
 	const std::string& get_name() const {

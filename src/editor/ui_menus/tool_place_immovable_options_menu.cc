@@ -47,7 +47,8 @@ UI::Checkbox* create_immovable_checkbox(UI::Panel* parent,
 		tooltip.append(cr->pop_table()->get_string("text"));
 	}
 
-	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), pic, tooltip);
+	UI::Checkbox* cb =
+	   new UI::Checkbox(parent, UI::PanelStyle::kWui, Vector2i::zero(), pic, tooltip);
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));
