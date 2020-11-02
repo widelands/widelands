@@ -159,7 +159,8 @@ void LuaCoroutine::read(lua_State* parent, FileRead& fr) {
 	const uint8_t packet_version = fr.unsigned_8();
 
 	if (packet_version > kCoroutineDataPacketVersion || packet_version < 4) {
-		throw Widelands::UnhandledVersionError("LuaCoroutine", packet_version, kCoroutineDataPacketVersion);
+		throw Widelands::UnhandledVersionError(
+		   "LuaCoroutine", packet_version, kCoroutineDataPacketVersion);
 	}
 
 	ninput_args_ = fr.unsigned_32();
