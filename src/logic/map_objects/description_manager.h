@@ -38,7 +38,7 @@ namespace Widelands {
 class DescriptionManager {
 public:
 	explicit DescriptionManager(LuaInterface* lua);
-	~DescriptionManager();
+	~DescriptionManager() = default;
 
 	enum class RegistryCaller { kDefault, kScenario, kTribeAddon, kWorldAddon };
 	/// Search a directory for 'register.lua' files and register their 'init.lua' scripts

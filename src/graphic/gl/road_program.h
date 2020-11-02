@@ -29,7 +29,7 @@ class RoadProgram {
 public:
 	// Compiles the program. Throws on error.
 	RoadProgram();
-	~RoadProgram();
+	~RoadProgram() = default;
 
 	// Draws the roads. The dimensions of the renderbuffer are needed to convert from pixel to GL
 	// space.

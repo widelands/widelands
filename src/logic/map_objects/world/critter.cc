@@ -146,9 +146,6 @@ CritterDescr::CritterDescr(const std::string& init_descname,
 	}
 }
 
-CritterDescr::~CritterDescr() {
-}
-
 bool CritterDescr::is_swimming() const {
 	const static uint32_t swimming_attribute = get_attribute_id("swimming", true);
 	return has_attribute(swimming_attribute);
@@ -496,9 +493,6 @@ Load / Save implementation
 // We need to bump this packet version every time we rename a critter, so that the world legacy
 // lookup table will work.
 constexpr uint8_t kCurrentPacketVersion = 4;
-
-Critter::Loader::Loader() {
-}
 
 const Bob::Task* Critter::Loader::get_task(const std::string& name) {
 	if (name == "roam") {
