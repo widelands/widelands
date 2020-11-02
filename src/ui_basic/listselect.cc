@@ -70,7 +70,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const uint32_t h,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      widest_text_(0),
      widest_hotkey_(0),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),

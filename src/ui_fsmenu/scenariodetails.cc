@@ -25,7 +25,7 @@
 #include "ui_basic/scrollbar.h"
 
 ScenarioDetails::ScenarioDetails(Panel* parent)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      name_label_(this,
                  0,
                  0,

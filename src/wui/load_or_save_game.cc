@@ -30,7 +30,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                UI::WindowStyle ws,
                                bool localize_autosave)
    : parent_(parent),
-     table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
+     table_box_(new UI::Box(parent, style, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
      // Savegame description

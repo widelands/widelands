@@ -84,7 +84,7 @@ private:
 
 	void set_map_info(Widelands::UniqueRandomMapInfo& map_info) const;
 
-	UI::WindowStyle style_;
+	UI::FontStyle label_style_;
 
 	// UI elements
 	int32_t margin_;

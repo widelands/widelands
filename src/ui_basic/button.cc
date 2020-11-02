@@ -50,7 +50,7 @@ Button::Button  //  Common constructor
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
     ImageMode mode)
-   : NamedPanel(parent, name, x, y, w, h, tooltip_text),
+   : NamedPanel(parent, to_panel_style(init_style), name, x, y, w, h, tooltip_text),
      highlighted_(false),
      pressed_(false),
      enabled_(true),
@@ -61,7 +61,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     style_(&g_style_manager->button_style(init_style)) {
+     button_style_(&g_style_manager->button_style(init_style)) {
 	set_thinks(false);
 	set_can_focus(enabled_);
 }
@@ -99,8 +99,8 @@ Button::Button(Panel* const parent,
 		   4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
-			new_width = std::max(text_width(title_, style_->enabled().font()),
-			                     text_width(title_, style_->disabled().font())) +
+			new_width = std::max(text_width(title_, button_style_->enabled().font()),
+			                     text_width(title_, button_style_->disabled().font())) +
 			            8 * kButtonImageMargin;
 		}
 		set_desired_size(new_width, new_height);
@@ -189,7 +189,7 @@ void Button::draw(RenderTarget& dst) {
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
 	const UI::TextPanelStyleInfo& style_to_use =
-	   is_monochrome ? style_->disabled() : style_->enabled();
+	   is_monochrome ? button_style_->disabled() : button_style_->enabled();
 
 	// Draw the background
 	draw_background(dst, style_to_use.background());
@@ -398,7 +398,7 @@ void Button::set_perm_pressed(bool pressed) {
 }
 
 void Button::set_style(UI::ButtonStyle bstyle) {
-	style_ = &g_style_manager->button_style(bstyle);
+	button_style_ = &g_style_manager->button_style(bstyle);
 }
 
 void Button::toggle() {
