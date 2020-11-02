@@ -31,7 +31,7 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_fsmenu/campaigns.h"
-
+namespace FsMenu {
 /**
  * FullscreenMenuScenarioSelect UI.
  *
@@ -89,7 +89,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	}
 
 	header_box_.add(&subtitle_, UI::Box::Resizing::kExpandBoth);
-	header_box_.add_space(10 * padding);
+	header_box_.add_space(10 * kPadding);
 
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 
@@ -99,7 +99,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	right_column_content_box_.add(&scenario_difficulty_, UI::Box::Resizing::kFullSize);
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
-	                                 _("Return to campaign selection"));
+                                    _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
 	table_.selected.connect([this](unsigned) { entry_selected(); });
@@ -247,3 +247,4 @@ void FullscreenMenuScenarioSelect::fill_table() {
 	}
 	entry_selected();
 }
+}  // namespace FsMenu

@@ -27,7 +27,7 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/menu.h"
-
+namespace FsMenu {
 class FullscreenMenuNetSetupLAN : public TwoColumnsBackNavigationMenu {
 public:
 	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
@@ -85,5 +85,5 @@ private:
 
 	LanGameFinder discovery_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

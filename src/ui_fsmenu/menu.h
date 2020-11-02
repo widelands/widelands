@@ -25,7 +25,8 @@
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 
-constexpr int padding = 4;
+namespace FsMenu {
+constexpr int kPadding = 4;
 
 class BaseMenu : public UI::Window {
 public:
@@ -101,5 +102,5 @@ protected:
 
 	UI::Button ok_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_MENU_H

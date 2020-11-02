@@ -22,6 +22,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 
+namespace FsMenu {
 void BaseMenu::printBox(UI::Box& b) {
 	log_dbg("%s: (%d,%d) %dx%d", b.get_name().c_str(), b.get_x(), b.get_y(), b.get_w(), b.get_h());
 } /*
@@ -50,12 +51,12 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, const std::string& name, const std:
      main_box_(&vertical_padding_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "main"),
      header_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0, "header"),
      standard_height_(get_h() * 9 / 200) {
-	horizontal_padding_box_.add_space(10 * padding);
+	horizontal_padding_box_.add_space(10 * kPadding);
 	horizontal_padding_box_.add(&vertical_padding_box_, UI::Box::Resizing::kExpandBoth);
-	horizontal_padding_box_.add_space(10 * padding);
-	vertical_padding_box_.add_space(10 * padding);
+	horizontal_padding_box_.add_space(10 * kPadding);
+	vertical_padding_box_.add_space(10 * kPadding);
 	vertical_padding_box_.add(&main_box_, UI::Box::Resizing::kExpandBoth);
-	vertical_padding_box_.add_space(10 * padding);
+	vertical_padding_box_.add_space(10 * kPadding);
 
 	main_box_.add(&header_box_, UI::Box::Resizing::kFullSize);
 
@@ -69,7 +70,7 @@ void BaseMenu::layout() {
 	Window::layout();
 	horizontal_padding_box_.set_size(get_inner_w(), get_inner_h());
 	vertical_padding_box_.set_max_size(
-	   horizontal_padding_box_.get_w() - 2 * 10 * padding, horizontal_padding_box_.get_h());
+	   horizontal_padding_box_.get_w() - 2 * 10 * kPadding, horizontal_padding_box_.get_h());
 	standard_height_ = get_inner_h() * 9 / 200;
 	log_dbg("window height: %d, inner: %d, standard height: %d", get_h(), get_inner_h(),
 	        standard_height_);
@@ -90,7 +91,7 @@ TwoColumnsMenu::TwoColumnsMenu(FullscreenMenuMain& fsmm,
 
 	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
 	content_box_.add(&left_column_box_, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_space(5 * padding);
+	content_box_.add_space(5 * kPadding);
 	content_box_.add(&right_column_box_, UI::Box::Resizing::kFullSize);
 }
 TwoColumnsMenu::~TwoColumnsMenu() {
@@ -102,8 +103,7 @@ void TwoColumnsMenu::layout() {
 	content_box_.set_max_size(
 	   main_box_.get_w(), main_box_.get_h() /*- 1 * 10 * padding */ - header_box_.get_h());
 	right_column_width_ = get_inner_w() * right_column_width_factor_;
-	log_dbg(
-	   "width: %d, inner width: %d, right width %d", get_w(), get_inner_w(), right_column_width_);
+
 	right_column_box_.set_max_size(right_column_width_, 0);
 	printBox(main_box_);
 	printBox(header_box_);
@@ -118,12 +118,12 @@ TwoColumnsBackNavigationMenu::TwoColumnsBackNavigationMenu(FullscreenMenuMain& f
                                                            double right_column_width_factor)
    : TwoColumnsMenu(fsmm, name, title, right_column_width_factor),
      right_column_content_box_(
-        &right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * padding, "right content"),
-     button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * padding, "button"),
+        &right_column_box_, 0, 0, UI::Box::Vertical, 0, 0, 1 * kPadding, "right content"),
+     button_box_(&right_column_box_, 0, 0, UI::Box::Horizontal, 0, 0, 1 * kPadding, "button"),
      back_(&button_box_, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")) {
 
 	right_column_box_.add(&right_column_content_box_, UI::Box::Resizing::kExpandBoth);
-	right_column_box_.add_space(5 * padding);
+	right_column_box_.add_space(5 * kPadding);
 	right_column_box_.add(&button_box_, UI::Box::Resizing::kFullSize);
 	button_box_.add(&back_, UI::Box::Resizing::kFillSpace);
 
@@ -174,8 +174,8 @@ TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
 
 void TwoColumnsNavigationMenu::layout() {
 	TwoColumnsBackNavigationMenu::layout();
-	back_.set_desired_size((right_column_width_ / 2) - (padding / 2), standard_height_);
-	ok_.set_desired_size((right_column_width_ / 2) - (padding / 2), standard_height_);
+	back_.set_desired_size((right_column_width_ / 2) - (kPadding / 2), standard_height_);
+	ok_.set_desired_size((right_column_width_ / 2) - (kPadding / 2), standard_height_);
 }
 
 bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
@@ -195,3 +195,4 @@ bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 void TwoColumnsNavigationMenu::clicked_ok() {
 	end_modal<MenuTarget>(MenuTarget::kOk);
 }
+}  // namespace FsMenu

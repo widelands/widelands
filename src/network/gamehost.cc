@@ -637,7 +637,7 @@ void GameHost::run() {
 	Widelands::Game game;
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
+	FsMenu::FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
 	const MenuTarget code = lm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
@@ -722,10 +722,9 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ?
-		            Widelands::Game::StartGameType::kSaveGame :
-		            d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-		                                   Widelands::Game::StartGameType::kMap,
+		game.run(d->settings.savegame ? Widelands::Game::StartGameType::kSaveGame :
+		         d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+                                      Widelands::Game::StartGameType::kMap,
 		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
@@ -1962,8 +1961,8 @@ void GameHost::update_network_speed() {
 		}
 
 		d->networkspeed = (speeds.size() % 2) ?
-		                     speeds.at(speeds.size() / 2) :
-		                     (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
+                           speeds.at(speeds.size() / 2) :
+                           (speeds.at(speeds.size() / 2) + speeds.at((speeds.size() / 2) - 1)) / 2;
 
 		if (d->networkspeed > std::numeric_limits<uint16_t>::max()) {
 			d->networkspeed = std::numeric_limits<uint16_t>::max();

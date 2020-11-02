@@ -27,15 +27,14 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "ui_fsmenu/mapselect.h"
-
+namespace FsMenu {
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  Widelands::EditorGameBase& egbase,
                                                  bool preconfigured,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
-     player_setup(
-        &left_column_box_, settings, standard_height_ /*standard_element_height_*/, padding),
+     player_setup(&left_column_box_, settings, standard_height_, kPadding),
      preconfigured_(preconfigured),
      egbase_(egbase) {
 
@@ -190,3 +189,4 @@ void FullscreenMenuLaunchSPG::layout() {
 
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 }
+}  // namespace FsMenu

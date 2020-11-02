@@ -31,7 +31,7 @@
 
 class GameController;
 class LuaInterface;
-
+namespace FsMenu {
 /**
  * Menu for setting map and mapsettings for single- and multiplayer games.
  */
@@ -103,3 +103,4 @@ private:
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_GAME_H
+}

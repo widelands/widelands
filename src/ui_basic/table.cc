@@ -401,11 +401,10 @@ bool Table<void*>::handle_tooltip() {
 }
 
 UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryRecord& er) {
-	return const_cast<FontStyleInfo&>(er.font_style() != nullptr ?
-	                                     *er.font_style() :
-	                                     er.is_disabled() ?
-	                                     g_style_manager->table_style(style_).disabled() :
-	                                     g_style_manager->table_style(style_).enabled());
+	return const_cast<FontStyleInfo&>(
+	   er.font_style() != nullptr ? *er.font_style() :
+	   er.is_disabled()           ? g_style_manager->table_style(style_).disabled() :
+                                   g_style_manager->table_style(style_).enabled());
 }
 bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
                                const Vector2i& point,

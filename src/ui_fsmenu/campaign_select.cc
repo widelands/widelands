@@ -22,7 +22,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "scripting/lua_table.h"
-
+namespace FsMenu {
 /**
  * CampaignSelect UI
  * Loads a list of all visible campaigns
@@ -122,3 +122,4 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
 	}
 	return table_[rowa] < table_[rowb];
 }
+}  // namespace FsMenu

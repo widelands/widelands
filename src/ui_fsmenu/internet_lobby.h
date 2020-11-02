@@ -33,7 +33,7 @@
 namespace Widelands {
 struct TribeBasicInfo;
 }
-
+namespace FsMenu {
 class FullscreenMenuInternetLobby : public TwoColumnsBackNavigationMenu {
 public:
 	FullscreenMenuInternetLobby(FullscreenMenuMain&,
@@ -93,5 +93,5 @@ private:
 	// Tribes check
 	std::vector<Widelands::TribeBasicInfo>& tribeinfos_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

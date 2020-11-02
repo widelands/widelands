@@ -30,7 +30,7 @@
 #include "wui/game_chat_panel.h"
 
 struct ChatProvider;
-
+namespace FsMenu {
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
@@ -74,5 +74,5 @@ private:
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H

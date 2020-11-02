@@ -29,7 +29,7 @@
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "wui/map_tags.h"
-
+namespace FsMenu {
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 // Fix align for table headings & entries and for wordwrap.
 
@@ -42,7 +42,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
    : TwoColumnsNavigationMenu(fsmm, "choose_map", _("Choose Map")),
-     checkboxes_(&header_box_, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding),
+     checkboxes_(&header_box_, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, egbase),
 
@@ -150,7 +150,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
 	header_box_.add(&checkboxes_, UI::Box::Resizing::kExpandBoth);
-	header_box_.add_space(2 * padding);
+	header_box_.add_space(2 * kPadding);
 	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 
@@ -429,3 +429,4 @@ void FullscreenMenuMapSelect::rebuild_balancing_dropdown() {
 		fill_table();
 	}
 }
+}  // namespace FsMenu

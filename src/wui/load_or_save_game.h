@@ -36,7 +36,7 @@ class LoadOrSaveGame {
 	friend class FullscreenMenuLoadGame;
 	friend struct GameMainMenuSaveGame;
 
-protected:
+public:
 	/// Choose which type of files to show
 	enum class FileType { kShowAll, kGameMultiPlayer, kGameSinglePlayer, kReplay };
 

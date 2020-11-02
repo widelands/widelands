@@ -40,7 +40,7 @@
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-
+namespace FsMenu {
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow(UI::Panel* parent, GameController* gc, uint32_t w, uint32_t h)
@@ -124,7 +124,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	ok_.set_enabled(settings_->can_launch());
 
 	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	left_column_box_.add_space(padding);
+	left_column_box_.add_space(kPadding);
 	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
@@ -487,3 +487,4 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 	                              _("Multiplayer Game Setup"));
 	help.run<UI::Panel::Returncodes>();
 }
+}  // namespace FsMenu

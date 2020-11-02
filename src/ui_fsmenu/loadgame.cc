@@ -24,7 +24,7 @@
 #include "base/i18n.h"
 #include "wlapplication_options.h"
 #include "wui/gamedetails.h"
-
+namespace FsMenu {
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                                                Widelands::Game& g,
                                                GameSettingsProvider* gsp,
@@ -51,12 +51,12 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 		show_filenames_ = new UI::Checkbox(
 		   &header_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
 		header_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
-		header_box_.add_space(5 * padding);
+		header_box_.add_space(5 * kPadding);
 	}
 
 	left_column_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
-	right_column_content_box_.add(load_or_save_.delete_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(load_or_save_.delete_button(), UI::Box::Resizing::kFullSize);
 
 	layout();
 
@@ -67,7 +67,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
-		                                                _("Return to the single player menu"));
+                                                      _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 
@@ -90,7 +90,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 }
 void FullscreenMenuLoadGame::layout() {
 	TwoColumnsNavigationMenu::layout();
-	load_or_save_.delete_->set_desired_size(0, standard_height_);
+	load_or_save_.delete_button()->set_desired_size(0, standard_height_);
 }
 void FullscreenMenuLoadGame::think() {
 	TwoColumnsNavigationMenu::think();
@@ -174,3 +174,4 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 
 	return TwoColumnsNavigationMenu::handle_key(down, code);
 }
+}  // namespace FsMenu

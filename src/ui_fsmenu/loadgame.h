@@ -25,7 +25,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_fsmenu/menu.h"
 #include "wui/load_or_save_game.h"
-
+namespace FsMenu {
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public TwoColumnsNavigationMenu {
 public:
@@ -63,5 +63,5 @@ private:
 	UI::Checkbox* show_filenames_;
 	bool showing_filenames_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

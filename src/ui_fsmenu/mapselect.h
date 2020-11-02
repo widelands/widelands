@@ -30,7 +30,7 @@
 using Widelands::Map;
 class GameController;
 struct GameSettingsProvider;
-
+namespace FsMenu {
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
@@ -96,3 +96,4 @@ private:
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H
+}

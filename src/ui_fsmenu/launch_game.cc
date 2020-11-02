@@ -32,14 +32,14 @@
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-
+namespace FsMenu {
 FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                                    GameSettingsProvider* const settings,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
    : TwoColumnsNavigationMenu(fsmm, "launch_game", _("Launch Game")),
      fsmm_(fsmm),
-     map_details(&right_column_content_box_, preconfigured, padding),
+     map_details(&right_column_content_box_, preconfigured, kPadding),
 
      configure_game(&right_column_content_box_,
                     0,
@@ -88,13 +88,13 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 
 void FullscreenMenuLaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details, UI::Box::Resizing::kExpandBoth);
-	right_column_content_box_.add_space(5 * padding);
+	right_column_content_box_.add_space(5 * kPadding);
 	right_column_content_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	right_column_content_box_.add_space(3 * padding);
+	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
-	right_column_content_box_.add_space(3 * padding);
+	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&peaceful_);
-	right_column_content_box_.add_space(3 * padding);
+	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&custom_starting_positions_);
 }
 
@@ -266,3 +266,4 @@ void FullscreenMenuLaunchGame::toggle_peaceful() {
 void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
 	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
 }
+}  // namespace FsMenu

@@ -29,7 +29,7 @@
 namespace Widelands {
 class Game;
 }
-
+namespace FsMenu {
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
 	FullscreenMenuLaunchSPG(FullscreenMenuMain&,
@@ -58,5 +58,5 @@ private:
 	const bool preconfigured_;
 	Widelands::EditorGameBase& egbase_;  // Not owned
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

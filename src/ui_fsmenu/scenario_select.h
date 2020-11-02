@@ -26,7 +26,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/menu.h"
 #include "ui_fsmenu/scenariodetails.h"
-
+namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign or tutorial scenario
  */
@@ -63,3 +63,4 @@ private:
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_SCENARIO_SELECT_H
+}

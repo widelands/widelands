@@ -42,7 +42,7 @@ const uint8_t kClientUnregistered = 2;
 // 3 was INTERNET_CLIENT_BOT which is not used
 const uint8_t kClientIRC = 4;
 }  // namespace
-
+namespace FsMenu {
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
    FullscreenMenuMain& fsmm,
    std::string& nick,
@@ -88,12 +88,12 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
 
 	back_.set_title(_("Leave Lobby"));
 
-	left_column_box_.set_inner_spacing(padding);
+	left_column_box_.set_inner_spacing(kPadding);
 	left_column_box_.add(&label_clients_online_, UI::Box::Resizing::kFullSize);
 	left_column_box_.add(&clientsonline_table_, UI::Box::Resizing::kExpandBoth);
 	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
-	right_column_content_box_.set_inner_spacing(padding);
+	right_column_content_box_.set_inner_spacing(kPadding);
 	right_column_content_box_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add(&opengames_list_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(0);
@@ -476,3 +476,4 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		throw;
 	}
 }
+}  // namespace FsMenu

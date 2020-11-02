@@ -25,6 +25,7 @@
 #include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/menu.h"
 
+namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign
  */
@@ -51,5 +52,5 @@ private:
 
 	Campaigns* campaigns_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H
