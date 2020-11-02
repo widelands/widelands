@@ -49,9 +49,6 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 	   });
 }
 
-DescriptionManager::~DescriptionManager() {
-}
-
 /// Walk given directory and register descriptions
 void DescriptionManager::register_directory(const std::string& dirname,
                                             FileSystem* filesystem,

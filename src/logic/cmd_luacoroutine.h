@@ -34,7 +34,7 @@ struct CmdLuaCoroutine : public GameLogicCommand {
 	   : GameLogicCommand(init_duetime), cr_(std::move(cr)) {
 	}
 
-	~CmdLuaCoroutine() override;
+	~CmdLuaCoroutine() override = default;
 
 	// Write these commands to a file (for savegames)
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;

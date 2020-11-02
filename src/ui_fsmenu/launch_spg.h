@@ -37,7 +37,7 @@ public:
 	                        Widelands::EditorGameBase& egbase,
 	                        bool preconfigured,
 	                        GameController* = nullptr);
-	~FullscreenMenuLaunchSPG() override;
+	~FullscreenMenuLaunchSPG() override = default;
 
 	void start() override;
 

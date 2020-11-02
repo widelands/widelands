@@ -51,7 +51,7 @@ struct Handler {
 	 */
 	using HandlerFn = std::function<void(const std::vector<std::string>&)>;
 
-	Handler();
+	Handler() = default;
 	virtual ~Handler();
 
 protected:

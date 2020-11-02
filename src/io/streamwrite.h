@@ -40,7 +40,7 @@ class StreamWrite {
 public:
 	explicit StreamWrite() {
 	}
-	virtual ~StreamWrite();
+	virtual ~StreamWrite() = default;
 
 	/**
 	 * Write a number of bytes to the stream.

@@ -31,7 +31,7 @@
 class DitherProgram {
 public:
 	DitherProgram();
-	~DitherProgram();
+	~DitherProgram() = default;
 
 	// Draws the terrain.
 	void draw(uint32_t gametime,

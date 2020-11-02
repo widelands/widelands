@@ -31,7 +31,7 @@
 class MapDetailsBox : public UI::Box {
 public:
 	MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding);
-	~MapDetailsBox() override;
+	~MapDetailsBox() override = default;
 
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
 	void update_from_savegame(GameSettingsProvider* settings);

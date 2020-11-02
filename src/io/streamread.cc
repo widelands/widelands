@@ -24,9 +24,6 @@
 #include "base/wexception.h"
 #include "io/machdep.h"
 
-StreamRead::~StreamRead() {
-}
-
 StreamRead::DataError::DataError(char const* const fmt, ...) {
 	char buffer[256];
 	{
