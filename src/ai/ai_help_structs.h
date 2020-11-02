@@ -456,10 +456,64 @@ struct BuildingObserver {
 	void unset_is(BuildingAttribute);
 
 	// Building collects a ware from the map
-	bool has_collected_map_resource() const;
-	void set_collected_map_resource(const Widelands::TribeDescr& tribe,
-	                                const std::string& ware_name);
-	Widelands::DescriptionIndex get_collected_map_resource() const;
+	void add_collected_map_resource(const Widelands::TribeDescr& tribe, const std::string& ware_name);
+	const std::set<Widelands::DescriptionIndex>& get_collected_map_resources() const;
+
+	/* NOCOM collects transition notes
+	 *
+
+	 Replace with needs bob/immovable/resource?
+
+- atlanteans/fishers_house:      "fish",
+- atlanteans/woodcutters_house:  "log",
+- atlanteans/quarry:             "granite"
+- atlanteans/hunters_house:      "meat",
+- atlanteans/well:               "water"
+
+- barbarians/hunters_hut:        "meat",
+- barbarians/quarry:             "granite"
+- barbarians/well:               "water",
+- barbarians/fishers_hut:        "fish",
+- barbarians/lumberjacks_hut:    "log",
+
+- empire/fishers_house:          "fish",
+- empire/lumberjacks_house:      "log"
+- empire/quarry:                 "granite"
+- empire/hunters_house:          "meat",
+- empire/well:                   "water"
+
+- frisians/fishers_house:        "fish",
+- frisians/woodcutters_house:    "log"
+- frisians/collectors_house:     "fruit",
+- frisians/aqua_farm:            "fish",
+- frisians/quarry:               "granite"
+- frisians/hunters_house:        "meat",
+- frisians/well:                 "water",
+- frisians/beekeepers_house:     "honey",
+
+	/* NOCOM collects transition notes
+	 *
+
+[00:00:21.048 real] DEBUG: NOCOM atlanteans_farm collects corn                - Eliminate
+[00:00:21.050 real] DEBUG: NOCOM atlanteans_blackroot_farm collects blackroot - Eliminate
+
+[00:00:20.311 real] DEBUG: NOCOM barbarians_reed_yard collects reed - Eliminate
+[00:00:20.372 real] DEBUG: NOCOM barbarians_farm collects wheat     - Eliminate
+
+
+[00:00:21.562 real] DEBUG: NOCOM empire_quarry collects marble - Added
+
+[00:00:21.589 real] DEBUG: NOCOM empire_vineyard collects grape - Eliminate
+[00:00:21.615 real] DEBUG: NOCOM empire_farm collects wheat     - Eliminate
+
+
+- frisians/aqua_farm:            "fish", - Missing
+
+[00:00:21.952 real] DEBUG: NOCOM frisians_hunters_house collects fur - Added
+[00:00:21.958 real] DEBUG: NOCOM frisians_reed_farm collects reed    - Eliminate
+[00:00:22.060 real] DEBUG: NOCOM frisians_farm collects barley       - Eliminate
+
+	 * */
 
 	char const* name;
 	Widelands::DescriptionIndex id;
@@ -537,7 +591,7 @@ supports_production_of:
 	bool build_material_shortage;
 
 private:
-	Widelands::DescriptionIndex collected_map_resource;
+	std::set<Widelands::DescriptionIndex> collected_map_resources;
 	std::set<BuildingAttribute> is_what;
 };
 

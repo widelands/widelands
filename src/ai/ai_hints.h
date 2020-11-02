@@ -75,8 +75,16 @@ struct BuildingHints {
 		return supports_seafaring_;
 	}
 
-	const std::string& collects_ware_from_map() const {
-		return collects_ware_from_map_;
+	bool collects_ware_from_map(const std::string& warename) const {
+		return collects_wares_from_map_.count(warename) == 1;
+	}
+
+	const std::set<std::string>& wares_collected_from_map() const {
+		return collects_wares_from_map_;
+	}
+
+	void add_collects_ware_from_map(const std::string& warename) {
+		collects_wares_from_map_.insert(warename);
 	}
 
 	uint32_t get_prohibited_till() const {
@@ -110,7 +118,7 @@ private:
 	const bool mountain_conqueror_;
 	const bool shipyard_;
 	const bool supports_seafaring_;
-	const std::string collects_ware_from_map_;
+	std::set<std::string> collects_wares_from_map_;
 	const int32_t prohibited_till_;
 	const uint32_t basic_amount_;
 	const int32_t forced_after_;

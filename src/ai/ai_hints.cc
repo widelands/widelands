@@ -141,9 +141,9 @@ Production Sites
 ----------------
 
 **collects_ware_from_map**
-    The building will generate this ware from the map, e.g. a well mining the ``water`` ware,
-    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be
-    listed as the first one of the building's outputs, e.g.::
+    **DEPRECATED** The building will generate this ware from the map, e.g. a well mining the
+    ``water`` ware, or the hunter returning from the hunt with the ``meat`` ware. The same
+    ware needs also to be listed as the first one of the building's outputs, e.g.::
 
         aihints = {
             collects_ware_from_map = "meat"
@@ -241,9 +241,6 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
      shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
      supports_seafaring_(
         table->has_key("supports_seafaring") ? table->get_bool("supports_seafaring") : false),
-     collects_ware_from_map_(table->has_key("collects_ware_from_map") ?
-                                table->get_string("collects_ware_from_map") :
-                                ""),
      prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
      basic_amount_(table->has_key("basic_amount") ? table->get_int("basic_amount") : 0),
      // 10 days default
@@ -270,6 +267,10 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
 	if (table->has_key("requires_supporters")) {
 		log_warn("%s: The 'requires_supporters' key in 'ai_hints' is no longer used",
 		    building_name.c_str());
+	}
+
+	if (table->has_key("collects_ware_from_map")) {
+		log_warn("The 'collects_ware_from_map' key in 'ai_hints' is no longer used");
 	}
 }
 

@@ -408,27 +408,13 @@ void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	assert(!is(attribute));
 }
 
-bool BuildingObserver::has_collected_map_resource() const {
-	return collected_map_resource != Widelands::INVALID_INDEX;
-}
-// NOCOM replace set_collected_map_resource?
-void BuildingObserver::set_collected_map_resource(const Widelands::TribeDescr& tribe,
+void BuildingObserver::add_collected_map_resource(const Widelands::TribeDescr& tribe,
                                                   const std::string& ware_name) {
-	if (!ware_name.empty()) {
-		collected_map_resource = tribe.safe_ware_index(ware_name);
-	} else {
-		collected_map_resource = Widelands::INVALID_INDEX;
-	}
+	collected_map_resources.insert(tribe.safe_ware_index(ware_name));
 }
 
-// NOCOM replace get_collected_map_resource?
-Widelands::DescriptionIndex BuildingObserver::get_collected_map_resource() const {
-	if (has_collected_map_resource()) {
-		return collected_map_resource;
-	} else {
-		throw wexception("Building '%s' needs to define the AI hint \"collects_ware_from_map\"",
-		                 desc->name().c_str());
-	}
+const std::set<Widelands::DescriptionIndex>& BuildingObserver::get_collected_map_resources() const {
+	return collected_map_resources;
 }
 
 AiModeBuildings BuildingObserver::aimode_limit_status() const {

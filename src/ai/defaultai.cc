@@ -679,7 +679,9 @@ void DefaultAI::late_initialization() {
 		bo.expansion_type = bh.is_expansion_type();
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
-		bo.set_collected_map_resource(*tribe_, bh.collects_ware_from_map());
+		for (const std::string& warename : bh.wares_collected_from_map()) {
+			bo.add_collected_map_resource(*tribe_, warename);
+		}
 		bo.prohibited_till = Time(bh.get_prohibited_till() * 1000);  // value in conf is in seconds
 		bo.forced_after = Time(bh.get_forced_after() * 1000);        // value in conf is in seconds
 		if (bld.get_isport()) {
@@ -841,27 +843,27 @@ void DefaultAI::late_initialization() {
 			}
 
 			// some important buildings are identified first the woodcutter/lumberjack
-			if (bh.collects_ware_from_map() == "log") {
+			if (bh.collects_ware_from_map("log")) {
 				bo.set_is(BuildingAttribute::kLumberjack);
 			}
 			// quarries
-			if (bh.collects_ware_from_map() == "granite") {
+			if (bh.collects_ware_from_map("granite")) {
 				bo.set_is(BuildingAttribute::kNeedsRocks);
 			}
 			// wells
-			if (bh.collects_ware_from_map() == "water") {
+			if (bh.collects_ware_from_map("water")) {
 				bo.set_is(BuildingAttribute::kWell);
 			}
 			// here we identify hunters
-			if (bh.collects_ware_from_map() == "meat") {
+			if (bh.collects_ware_from_map("meat")) {
 				bo.set_is(BuildingAttribute::kHunter);
 			}
 			// and fishers
-			if (bh.collects_ware_from_map() == "fish" && bo.inputs.empty()) {
+			if (bh.collects_ware_from_map("fish") && bo.inputs.empty()) {
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 			// and collectors
-			if (bh.collects_ware_from_map() == "fruit") {
+			if (bh.collects_ware_from_map("fruit")) {
 				bo.set_is(BuildingAttribute::kNeedsBerry);
 			}
 
@@ -2799,7 +2801,11 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					prio += bo.primary_priority;
 
 					// keep wells more distant
-					if (bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) > 2) {
+					uint8_t collecting_producers_nearby_count = 0;
+					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+						collecting_producers_nearby_count += bf->collecting_producers_nearby.at(collected_resource);
+					}
+					if (collecting_producers_nearby_count > 2) {
 						continue;
 					}
 
@@ -2830,8 +2836,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// consider cutters and rangers nearby
 					prio += 2 * count_supporters_nearby *
 					        std::abs(management_data.get_military_number_at(25));
-					prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) *
-					        std::abs(management_data.get_military_number_at(36)) * 3;
+					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+						prio -= bf->collecting_producers_nearby.at(collected_resource) *
+								std::abs(management_data.get_military_number_at(36)) * 3;
+					}
 
 				} else if (bo.is(BuildingAttribute::kNeedsRocks)) {
 
@@ -2861,9 +2869,11 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio *= 2;
 					}
 
-					// to prevent to many quaries on one spot
-					prio =
-					   prio - 50 * bf->collecting_producers_nearby.at(bo.get_collected_map_resource());
+					// to prevent to many quarries on one spot
+					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+						prio =
+						   prio - 50 * bf->collecting_producers_nearby.at(collected_resource);
+					}
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {
 
@@ -2880,8 +2890,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					prio += count_supporters_nearby * 5;
 
-					prio += (bf->critters_nearby * 3) - 8 -
-					        5 * bf->collecting_producers_nearby.at(bo.get_collected_map_resource());
+					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+						prio += (bf->critters_nearby * 3) - 8 -
+								5 * bf->collecting_producers_nearby.at(collected_resource);
+					}
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
@@ -2896,7 +2908,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) * 20;
+					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+						prio -= bf->collecting_producers_nearby.at(collected_resource) * 20;
+					}
 					prio += count_supporters_nearby * 20;
 
 					prio += -5 + bf->fish_nearby *
@@ -3125,8 +3139,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) *
-							        std::abs(management_data.get_military_number_at(108)) / 5;
+							for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+								prio -= bf->collecting_producers_nearby.at(collected_resource) *
+										std::abs(management_data.get_military_number_at(108)) / 5;
+							}
 						}
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
@@ -6232,8 +6248,8 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 	for (const Widelands::DescriptionIndex& i : bo.ware_outputs) {
 		++field.producers_nearby.at(i);
 	}
-	if (bo.has_collected_map_resource()) {
-		++field.collecting_producers_nearby.at(bo.get_collected_map_resource());
+	for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+		++field.collecting_producers_nearby.at(collected_resource);
 	}
 
 	if (bo.type == BuildingObserver::Type::kProductionsite) {
