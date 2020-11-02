@@ -670,7 +670,7 @@ void DefaultAI::late_initialization() {
 			   std::make_pair(bo.id, bh.basic_amount()));
 		}
 		bo.basic_amount = bh.basic_amount();
-		if (bh.get_needs_water()) {
+		if (bh.needs_water()) {
 			bo.set_is(BuildingAttribute::kNeedsCoast);
 		}
 		if (bh.is_space_consumer()) {
@@ -876,31 +876,59 @@ void DefaultAI::late_initialization() {
 				}
 			}
 
-			// some important buildings are identified first the woodcutter/lumberjack
+			// Some important buildings are identified
 
-			// A Lumberjack is a building that collects trees
-			Widelands::MapObjectDescr::AttributeIndex attribute = Widelands::MapObjectDescr::get_attribute_id("tree");
-			for (const std::string& immovable_name : prod.collected_immovables()) {
-				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
-				if (immovable_descr->has_attribute(attribute)) {
-					log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kLumberjack);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   atlanteans_woodcutters_house
-					 *   barbarians_lumberjacks_hut
-					 *   empire_lumberjacks_house
-					 *   frisians_woodcutters_house
-					 *
-					 * */
-					break;
+			// Woodcutters/Lumberjacks, Quarries and Collectors are a buildings that collect an immovable attribute and create no immovables themselves
+			Widelands::MapObjectDescr::AttributeIndex tree_attribute = Widelands::MapObjectDescr::get_attribute_id("tree");
+			if (prod.created_immovables().empty()) {
+				Widelands::MapObjectDescr::AttributeIndex rocks_attribute = Widelands::MapObjectDescr::get_attribute_id("rocks");
+				Widelands::MapObjectDescr::AttributeIndex bush_attribute = Widelands::MapObjectDescr::get_attribute_id("ripe_bush");
+
+				for (const std::string& immovable_name : prod.collected_immovables()) {
+					const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
+					if (immovable_descr->has_attribute(tree_attribute)) {
+						log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
+						bo.set_is(BuildingAttribute::kLumberjack);
+						/* Buildings detected at the time of writing:
+						 *
+						 *   atlanteans_woodcutters_house
+						 *   barbarians_lumberjacks_hut
+						 *   empire_lumberjacks_house
+						 *   frisians_woodcutters_house
+						 *
+						 * */
+						break;
+					}
+					if (immovable_descr->has_attribute(rocks_attribute)) {
+						log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
+						bo.set_is(BuildingAttribute::kNeedsRocks);
+						/* Buildings detected at the time of writing:
+						 *
+						 *   atlanteans_quarry
+						 *   barbarians_quarry
+						 *   empire_quarry
+						 *   frisians_quarry
+						 *
+						 * */
+						break;
+					}
+					if (immovable_descr->has_attribute(bush_attribute)) {
+						log_dbg_time(gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
+						bo.set_is(BuildingAttribute::kNeedsBerry);
+						/* Buildings detected at the time of writing:
+						 *
+						 *   frisians_collectors_house
+						 *
+						 * */
+						break;
+					}
 				}
 			}
 
-			// A ranger is a building that creates trees
+			// A Forester/Ranger is a building that creates trees
 			for (const std::string& immovable_name : prod.created_immovables()) {
 				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
-				if (immovable_descr->has_attribute(attribute)) {
+				if (immovable_descr->has_attribute(tree_attribute)) {
 					log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
 					bo.set_is(BuildingAttribute::kRanger);
 					/* Buildings detected at the time of writing:
@@ -915,38 +943,6 @@ void DefaultAI::late_initialization() {
 				}
 			}
 
-			// quarries
-			attribute = Widelands::MapObjectDescr::get_attribute_id("rocks");
-			for (const std::string& immovable_name : prod.collected_immovables()) {
-				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
-				if (immovable_descr->has_attribute(attribute)) {
-					log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kNeedsRocks);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   atlanteans_quarry
-					 *   barbarians_quarry
-					 *   empire_quarry
-					 *   frisians_quarry
-					 *
-					 * */
-					break;
-				}
-			}
-
-			// wells
-			if (prod.collected_resources().count("resource_water") == 1) {
-				log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
-				bo.set_is(BuildingAttribute::kWell);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   atlanteans_well
-				 *   barbarians_well
-				 *   empire_well
-				 *   frisians_well
-				 *
-				 * */
-			}
 			// here we identify hunters
 			if (!prod.collected_bobs().empty()) {
 				log_dbg_time(gametime, "AI %d detected hunter: %s", player_number(), bo.name);
@@ -960,36 +956,31 @@ void DefaultAI::late_initialization() {
 				 *
 				 * */
 			}
-			// and fishers
-			if (prod.collected_resources().count("resource_fish") == 1) {
-				log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
-				bo.set_is(BuildingAttribute::kFisher);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   atlanteans_fishers_house
-				 *   barbarians_fishers_hut
-				 *   empire_fishers_house
-				 *   frisians_fishers_house
-				 *
-				 * */
-			}
-			// and collectors
-			attribute = Widelands::MapObjectDescr::get_attribute_id("ripe_bush");
-			for (const std::string& immovable_name : prod.collected_immovables()) {
-				if (!prod.created_immovables().empty()) {
-					// Exclude empire_vineyard
-					continue;
-				}
-				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
-				if (immovable_descr->has_attribute(attribute)) {
-					log_dbg_time(gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kNeedsBerry);
+
+			// wells and fishers
+			if (!prod.get_ismine() && !prod.collected_resources().empty()) {
+				if (bh.needs_water()) {
+					log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
+					bo.set_is(BuildingAttribute::kFisher);
 					/* Buildings detected at the time of writing:
 					 *
-					 *   frisians_collectors_house
+					 *   atlanteans_fishers_house
+					 *   barbarians_fishers_hut
+					 *   empire_fishers_house
+					 *   frisians_fishers_house
 					 *
 					 * */
-					break;
+				} else {
+					log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
+					bo.set_is(BuildingAttribute::kWell);
+					/* Buildings detected at the time of writing:
+					 *
+					 *   atlanteans_well
+					 *   barbarians_well
+					 *   empire_well
+					 *   frisians_well
+					 *
+					 * */
 				}
 			}
 

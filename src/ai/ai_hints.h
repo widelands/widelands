@@ -46,7 +46,7 @@ struct BuildingHints {
 		return mines_.c_str();
 	}
 
-	bool get_needs_water() const {
+	bool needs_water() const {
 		return needs_water_;
 	}
 
