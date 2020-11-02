@@ -420,8 +420,7 @@ void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
 	const unsigned new_fill = ctrl_down ? delta < 0 ? 0 : max_fill : desired_fill + delta;
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_input_max_fill(
-		   *b, index_, type_, new_fill, settings_ != nullptr);
+		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr);
 	} else {
 		if (queue_) {
 			queue_->set_max_fill(new_fill);
@@ -447,8 +446,7 @@ void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
 	}
 
 	if (Widelands::Game* game = ibase_.get_game()) {
-		game->send_player_set_input_max_fill(
-		   *b, index_, type_, new_fill, settings_ != nullptr);
+		game->send_player_set_input_max_fill(*b, index_, type_, new_fill, settings_ != nullptr);
 	} else {
 		if (queue_) {
 			queue_->set_max_fill(new_fill);
@@ -533,7 +531,7 @@ void InputQueueDisplay::think() {
 	}
 
 	if (has_priority_) {
-		const Widelands::WarePriority& p =                                            // NOLINT
+		const Widelands::WarePriority& p =                                     // NOLINT
 		   queue_ ? b->get_priority(type_, index_) : get_setting()->priority;  // NOLINT
 		// The purpose of this check is to prevent the slider from snapping back directly after
 		// the user dragged it, because the playercommand is not executed immediately of course
@@ -604,8 +602,8 @@ void InputQueueDisplay::draw_overlay(RenderTarget& r) {
 
 	// Draw priority indicator
 	if (has_priority_ && collapsed_) {
-		const size_t p = priority_to_index(queue_ ? b->get_priority(type_, index_) :
-		                                            get_setting()->priority);
+		const size_t p =
+		   priority_to_index(queue_ ? b->get_priority(type_, index_) : get_setting()->priority);
 		const int w = kButtonSize / 5;
 		const int x = hbox_.get_x() + collapse_.get_x() - w;
 		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
