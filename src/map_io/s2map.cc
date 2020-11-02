@@ -60,7 +60,7 @@ struct S2MapDescrHeader {
 
 // Some basic checks to identify obviously invalid headers
 bool is_valid_header(const S2MapDescrHeader& header) {
-	if (strncmp(header.magic, "WORLD_V1.0", 10)) {
+	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
 		return false;
 	}
 	if (header.name[19]) {
@@ -376,7 +376,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 	map_.cleanup();
 
 	FileRead fr;
-	fr.open(*g_fs, filename_.c_str());
+	fr.open(*g_fs, filename_);
 
 	load_s2mf_header(fr);
 
@@ -466,7 +466,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	uint8_t* pc;
 
 	FileRead fr;
-	fr.open(*g_fs, filename_.c_str());
+	fr.open(*g_fs, filename_);
 
 	load_s2mf_header(fr);
 	map_.set_size(map_.width_, map_.height_);

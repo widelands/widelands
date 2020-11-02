@@ -177,6 +177,10 @@ public:
 		return owner_.owner();
 	}
 
+	bool matches(const Request& r) const {
+		return request_.get() == &r;
+	}
+
 	/**
 	 * Overwrites the state of this class with the read data.
 	 * @param fr A stream to read the data from.
