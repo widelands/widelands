@@ -41,7 +41,8 @@ struct ProgressBar : public Panel {
 	};
 
 public:
-	ProgressBar(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
+	ProgressBar(
+	   Panel* parent, PanelStyle, int32_t x, int32_t y, int32_t w, int32_t h, uint32_t orientation);
 
 	uint32_t get_state() const {
 		return state_;
@@ -59,7 +60,7 @@ private:
 	uint32_t orientation_;
 	uint32_t state_;  ///< state_ is [0..total_]
 	uint32_t total_;  ///< maximum progress
-	const UI::ProgressbarStyleInfo& style_;
+	const UI::ProgressbarStyleInfo& progress_style_;
 };
 }  // namespace UI
 

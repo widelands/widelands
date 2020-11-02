@@ -83,9 +83,7 @@ void ensure_box_can_hold_input_queues(UI::Box& b) {
 		p = p->get_parent();
 	}
 	b.set_max_size(p->get_w() - 200, p->get_h() - 200);
-
 	b.set_scrolling(true);
-	b.set_scrollbar_style(UI::PanelStyle::kWui);
 }
 
 InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
@@ -115,7 +113,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 
 static inline std::string create_tooltip(const bool increase) {
 	return (boost::format("<p>%s%s%s</p>") %
-	        g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+	        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	           .as_font_tag(
 	              increase ?
 	                 /** TRANSLATORS: Button tooltip in in a building's wares input queue */
@@ -129,7 +127,7 @@ static inline std::string create_tooltip(const bool increase) {
 	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
 	                          option explanation */
 	                       _("Hold down Shift to decrease all ware types at the same time"),
-	                    UI::FontStyle::kTooltip) %
+	                    UI::FontStyle::kWuiTooltip) %
 	        as_listitem(increase ?
 	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
 	                          option explanation */
@@ -137,7 +135,7 @@ static inline std::string create_tooltip(const bool increase) {
 	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
 	                          option explanation */
 	                       _("Hold down Ctrl to allow none of this ware"),
-	                    UI::FontStyle::kTooltip))
+	                    UI::FontStyle::kWuiTooltip))
 	   .str();
 }
 
@@ -150,7 +148,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                                      Widelands::ProductionsiteSettings* s,
                                      bool show_only,
                                      bool has_priority)
-   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      ibase_(ib),
      can_act_(!show_only && ibase_.can_act(bld.owner().player_number())),
      show_only_(show_only),
@@ -161,8 +159,8 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
      queue_(q),
      settings_(s),
      max_fill_indicator_(*g_image_cache->get("images/wui/buildings/max_fill_indicator.png")),
-     vbox_(this, 0, 0, UI::Box::Vertical),
-     hbox_(&vbox_, 0, 0, UI::Box::Horizontal),
+     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     hbox_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      b_decrease_desired_fill_(&hbox_,
                               "decrease_desired",
                               0,
@@ -224,7 +222,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
                "",
                kButtonSize,
                can_act_ && has_priority_),
-     spacer_(&hbox_, 0, 0, priority_.get_w(), priority_.get_h()),
+     spacer_(&hbox_, UI::PanelStyle::kWui, 0, 0, priority_.get_w(), priority_.get_h()),
      slider_was_moved_(nullptr),
      collapsed_(false),
      nr_icons_(queue_ ?
@@ -255,7 +253,7 @@ InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
 	hbox_.add(&b_decrease_desired_fill_);
 
 	for (size_t i = 0; i < nr_icons_; ++i) {
-		icons_[i] = new UI::Icon(&hbox_, 0, 0, kButtonSize, kButtonSize,
+		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
 		                         type_ == Widelands::wwWARE ?
 		                            building_.owner().tribe().get_ware_descr(index_)->icon() :
 		                            building_.owner().tribe().get_worker_descr(index_)->icon());

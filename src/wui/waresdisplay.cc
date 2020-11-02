@@ -28,6 +28,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
@@ -49,12 +50,20 @@ AbstractWaresDisplay::AbstractWaresDisplay(
    int32_t hgap,
    int32_t vgap)
    :  // Size is set when add_warelist is called, as it depends on the type_.
-     UI::Panel(parent, x, y, 0, 0),
+     UI::Panel(parent, UI::PanelStyle::kWui, x, y, 0, 0),
      tribe_(tribe),
 
      type_(type),
      indices_(type_ == Widelands::wwWORKER ? tribe_.workers() : tribe_.wares()),
-     curware_(this, 0, get_inner_h() - 25, get_inner_w(), 20, "", UI::Align::kCenter),
+     curware_(this,
+              UI::PanelStyle::kWui,
+              UI::FontStyle::kWuiLabel,
+              0,
+              get_inner_h() - 25,
+              get_inner_w(),
+              20,
+              "",
+              UI::Align::kCenter),
 
      selectable_(selectable),
      horizontal_(horizontal),
