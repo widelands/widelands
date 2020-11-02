@@ -102,7 +102,6 @@ private:
 	const bool mountain_conqueror_;
 	const bool shipyard_;
 	const bool supports_seafaring_;
-	std::set<std::string> collects_wares_from_map_;
 	const int32_t prohibited_till_;
 	const uint32_t basic_amount_;
 	const int32_t forced_after_;

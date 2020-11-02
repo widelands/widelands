@@ -957,7 +957,7 @@ void DefaultAI::late_initialization() {
 				}
 			}
 			bo.requires_supporters = !bo.supported_by_buildings.empty();
-			// Exclude basic buildings from strictly requiring supporters. We don't want them to wait for their supportinb buildings before they get built.
+			// Exclude basic buildings from strictly requiring supporters. We don't want them to wait for their supporting buildings before they get built.
 			if (bo.requires_supporters) {
 				if (bo.is(BuildingAttribute::kFisher) || bo.is(BuildingAttribute::kHunter)
 					 || bo.is(BuildingAttribute::kLumberjack) || bo.is(BuildingAttribute::kNeedsRocks)
@@ -1051,7 +1051,7 @@ void DefaultAI::late_initialization() {
 	if (count_buildings_with_attribute(BuildingAttribute::kWell) != 1) {
 		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of well. "
-		   "This is the building that collects a map resource, is not a mine and not 'needs_water'.",
+		   "This is the building that collects a map resource, is not a mine and not 'needs_water' in its AI hints.",
 		   tribe_->name().c_str());
 	}
 	if (count_buildings_with_attribute(BuildingAttribute::kLumberjack) != 1) {
@@ -1072,7 +1072,7 @@ void DefaultAI::late_initialization() {
 	if (count_buildings_with_attribute(BuildingAttribute::kFisher) != 1) {
 		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of fisher's building. "
-		   "This is the building that collects a map resource, is not a mine and 'needs_water'.",
+		   "This is the building that collects a map resource, is not a mine and 'needs_water' in its AI hints.",
 		   tribe_->name().c_str());
 	}
 
@@ -2977,7 +2977,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio *= 2;
 					}
 
-					// to prevent to many quarries on one spot
+					// to prevent too many quarries on one spot
 					for (const auto& supported_building : bo.supported_producers) {
 						prio =
 						   prio - 50 * bf->count_supported_producers_nearby(supported_building.first);
@@ -6353,6 +6353,7 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 		++field.producers_nearby.at(i);
 	}
 	for (const auto& supported_building : bo.supported_producers) {
+		// Using std::map syntax to create entry on demand.
 		++field.supported_producers_nearby[supported_building.first];
 	}
 
