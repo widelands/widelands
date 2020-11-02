@@ -47,7 +47,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                      uint32_t const h,
                      UI::PanelStyle style,
                      bool const horiz)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      horizontal_(horiz),
      force_draw_(false),
      pos_(0),

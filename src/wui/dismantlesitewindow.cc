@@ -36,12 +36,12 @@ void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wante
 	assert(dismantle_site != nullptr);
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
-	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
-	UI::Box& subbox = *new UI::Box(&box, 0, 0, UI::Box::Vertical);
+	UI::Box& box = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	UI::Box& subbox = *new UI::Box(&box, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	ensure_box_can_hold_input_queues(subbox);
 
 	// Add the progress bar
-	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
+	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, 0, 0, UI::ProgressBar::DefaultWidth,
 	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
