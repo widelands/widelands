@@ -743,11 +743,8 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 				/* Buildings detected at the time of writing:
 				 *
-				 *   frisians_clay_pit -> frisians_aqua_farm, frisians_charcoal_burners_house
-				 *   frisians_farm     -> frisians_beekeepers_house
-				 *
-				 * NOCOM Added in new code:
-				 *
+				 *   frisians_clay_pit  -> frisians_aqua_farm, frisians_charcoal_burners_house
+				 *   frisians_farm      -> frisians_beekeepers_house
 				 *   frisians_reed_farm -> frisians_beekeepers_house
 				 *
 				 * */
