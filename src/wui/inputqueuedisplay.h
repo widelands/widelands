@@ -76,7 +76,7 @@ private:
 	InteractiveBase& ibase_;
 	bool can_act_, show_only_, has_priority_;
 
-	Widelands::Building& building_;
+	Widelands::OPtr<Widelands::Building> building_;
 
 	Widelands::WareWorker type_;
 	Widelands::DescriptionIndex index_;
