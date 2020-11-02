@@ -76,8 +76,7 @@ public:
 	     image_cache_(image_cache) {
 		assert(image_cache);
 	}
-	~FontHandler() override {
-	}
+	~FontHandler() override = default;
 
 	// This will render the 'text' with a width restriction of 'w'. If 'w' == 0, no restriction is
 	// applied.
