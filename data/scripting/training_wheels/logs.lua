@@ -11,7 +11,8 @@ include "scripting/training_wheels/utils/ui.lua"
 local training_wheel_name = training_wheel_name_from_filename(__file__)
 
 run(function()
-   sleep(10)
+   -- Give the buildhelp training wheel a chance to execute first
+   sleep(2000)
 
    local mapview = wl.ui.MapView()
    local player = get_interactive_player()

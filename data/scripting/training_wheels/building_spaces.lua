@@ -16,10 +16,8 @@ run(function()
 
    local mapview = wl.ui.MapView()
    local player = get_interactive_player()
+   while mapview.buildhelp do sleep(100) end
    wait_for_lock(player, training_wheel_name)
-
-   -- Switch off the buildhelp if it was on, so that we can teach it
-   mapview.buildhelp = false
 
    push_textdomain("training_wheels")
 
@@ -30,7 +28,7 @@ run(function()
       w = 260,
       modal = false,
       body = (
-         li_image("images/wui/menus/showhide.png", _"We will want to place some buildings so that we can produce wares.") ..
+         li_image("images/wui/menus/showhide.png", _"We will want to place buildings so that we can produce wares.") ..
          p(_"So, let’s find out where we have space for them.") ..
          li_image("images/wui/training_wheels_arrow.png", _"Click on the ‘Show / Hide’ menu.")
       )
