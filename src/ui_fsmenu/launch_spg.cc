@@ -190,4 +190,3 @@ void FullscreenMenuLaunchSPG::layout() {
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 }
 }  // namespace FsMenu
-
