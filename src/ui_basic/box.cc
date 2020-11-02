@@ -34,9 +34,8 @@ Box::Box(Panel* const parent,
          uint32_t const orientation,
          int32_t const max_x,
          int32_t const max_y,
-         uint32_t const inner_spacing,
-         const std::string& name)
-   : NamedPanel(parent, name, x, y, 0, 0),
+         uint32_t const inner_spacing)
+   : Panel(parent, x, y, 0, 0),
 
      max_x_(max_x ? max_x : g_gr->get_xres()),
      max_y_(max_y ? max_y : g_gr->get_yres()),
@@ -48,14 +47,6 @@ Box::Box(Panel* const parent,
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
-	set_can_focus(true);
-}
-
-void Box::draw_overlay(RenderTarget& dst) {
-	if (!get_name().empty() && has_focus()) {
-		// log_dbg("%s has focus (%dx%d)", get_name().c_str(), get_w(), get_h());
-	}
-	Panel::draw_overlay(dst);
 }
 
 /**

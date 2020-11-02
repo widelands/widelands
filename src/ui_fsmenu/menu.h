@@ -41,7 +41,6 @@ private:
 	UI::Box horizontal_padding_box_, vertical_padding_box_;
 
 protected:
-	void printBox(UI::Box& b);
 	void layout() override;
 
 	UI::Box main_box_, header_box_;

@@ -34,7 +34,7 @@ namespace UI {
  * The Panels you add to the Box must be children of the Box.
  * The Box automatically resizes itself and positions the added children.
  */
-struct Box : public NamedPanel {
+struct Box : public Panel {
 	// Determines whether the box' contents are layed out horizontally or vertically.
 	enum {
 		Horizontal = 0,
@@ -47,8 +47,7 @@ struct Box : public NamedPanel {
 	    uint32_t orientation,
 	    int32_t max_x = 0,
 	    int32_t max_y = 0,
-	    uint32_t inner_spacing = 0,
-	    const std::string& name = "");
+	    uint32_t inner_spacing = 0);
 
 	void set_scrolling(bool scroll);
 	void set_force_scrolling(bool);
@@ -79,8 +78,6 @@ struct Box : public NamedPanel {
 		return scrollbar_.get();
 	}
 	void set_scrollbar_style(UI::PanelStyle);
-
-	void draw_overlay(RenderTarget&) override;
 
 protected:
 	void layout() override;

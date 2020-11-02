@@ -110,7 +110,6 @@ void FullscreenMenuLaunchGame::layout() {
 
 	map_details.set_max_size(0, right_column_box_.get_h() / 2);
 	map_details.force_new_dimensions(right_column_width_, standard_height_);
-	printBox(map_details);
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {
