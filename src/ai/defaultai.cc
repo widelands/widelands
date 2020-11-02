@@ -679,9 +679,6 @@ void DefaultAI::late_initialization() {
 		bo.expansion_type = bh.is_expansion_type();
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
-		for (const std::string& warename : bh.wares_collected_from_map()) {
-			bo.add_collected_map_resource(*tribe_, warename);
-		}
 		bo.prohibited_till = Time(bh.get_prohibited_till() * 1000);  // value in conf is in seconds
 		bo.forced_after = Time(bh.get_forced_after() * 1000);        // value in conf is in seconds
 		if (bld.get_isport()) {
@@ -692,24 +689,27 @@ void DefaultAI::late_initialization() {
 		bo.max_preciousness = 0;
 		bo.max_needed_preciousness = 0;
 
-		for (auto& ph : bh.supported_production()) {
-			bo.production_hints.insert(tribe_->safe_ware_index(ph));
-		}
-		// I just presume cut wood is named "log" in the game
-		if (bo.production_hints.count(tribe_->safe_ware_index("log"))) {
-			bo.set_is(BuildingAttribute::kRanger);
-		}
 		// Is total count of this building limited by AI mode?
 		if (bh.get_ai_limit(type_) >= 0) {
 			bo.cnt_limit_by_aimode = bh.get_ai_limit(type_);
 		}
-
 		// Read all interesting data from ware producing buildings
 		if (bld.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
 			const Widelands::ProductionSiteDescr& prod =
 			   dynamic_cast<const Widelands::ProductionSiteDescr&>(bld);
 			bo.type = bld.get_ismine() ? BuildingObserver::Type::kMine :
 			                             BuildingObserver::Type::kProductionsite;
+
+			// A ranger is a building that creates trees
+			const Widelands::MapObjectDescr::AttributeIndex tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
+			for (const std::string& immovable_name : prod.created_immovables()) {
+				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
+				if (immovable_descr->has_attribute(tree_attr)) {
+					bo.set_is(BuildingAttribute::kRanger);
+					break;
+				}
+			}
+
 			for (const auto& temp_input : prod.input_wares()) {
 				bo.inputs.push_back(temp_input.first);
 			}
@@ -745,13 +745,22 @@ void DefaultAI::late_initialization() {
 			}
 
 			// If this is a producer, does it act also as supporter?
-			if (!bo.ware_outputs.empty() && !bo.production_hints.empty()) {
+			if (!bo.ware_outputs.empty() && !prod.supported_productionsites().empty()) {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
+			bo.supported_producers.clear();
+			for (const std::string supported_building_name : prod.supported_productionsites()) {
+				Widelands::DescriptionIndex supported_building_index = tribe_->building_index(supported_building_name);
+				bo.supported_producers.insert(std::make_pair(supported_building_index, dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(supported_building_index))));
+			}
+			bo.supported_by_buildings.clear();
+			for (const std::string supporting_building_name : prod.supported_by_productionsites()) {
+				bo.supported_by_buildings.insert(tribe_->building_index(supporting_building_name));
+			}
 			// NOCOM this adds woodcutters/lumberjacks, Barbarian Hunter, Atlantean Fisher to the
 			// 'requires_supporters' list
-			bo.requires_supporters = prod.needs_supporters();
+			bo.requires_supporters = !bo.supported_by_buildings.empty();
 
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
@@ -843,28 +852,47 @@ void DefaultAI::late_initialization() {
 			}
 
 			// some important buildings are identified first the woodcutter/lumberjack
-			if (bh.collects_ware_from_map("log")) {
-				bo.set_is(BuildingAttribute::kLumberjack);
+
+			// A Lumberjack is a building that collects trees
+			Widelands::MapObjectDescr::AttributeIndex attribute = Widelands::MapObjectDescr::get_attribute_id("tree");
+			for (const std::string& immovable_name : prod.collected_immovables()) {
+				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
+				if (immovable_descr->has_attribute(attribute)) {
+					bo.set_is(BuildingAttribute::kLumberjack);
+					break;
+				}
 			}
+
 			// quarries
-			if (bh.collects_ware_from_map("granite")) {
-				bo.set_is(BuildingAttribute::kNeedsRocks);
+			attribute = Widelands::MapObjectDescr::get_attribute_id("rocks");
+			for (const std::string& immovable_name : prod.collected_immovables()) {
+				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
+				if (immovable_descr->has_attribute(attribute)) {
+					bo.set_is(BuildingAttribute::kNeedsRocks);
+					break;
+				}
 			}
+
 			// wells
-			if (bh.collects_ware_from_map("water")) {
+			if (prod.collected_resources().count("resource_water") == 1) {
 				bo.set_is(BuildingAttribute::kWell);
 			}
 			// here we identify hunters
-			if (bh.collects_ware_from_map("meat")) {
+			if (!prod.collected_bobs().empty()) {
 				bo.set_is(BuildingAttribute::kHunter);
 			}
 			// and fishers
-			if (bh.collects_ware_from_map("fish") && bo.inputs.empty()) {
+			if (prod.collected_resources().count("resource_fish") == 1) {
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 			// and collectors
-			if (bh.collects_ware_from_map("fruit")) {
-				bo.set_is(BuildingAttribute::kNeedsBerry);
+			attribute = Widelands::MapObjectDescr::get_attribute_id("ripe_bush");
+			for (const std::string& immovable_name : prod.collected_immovables()) {
+				const Widelands::ImmovableDescr* immovable_descr = tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
+				if (immovable_descr->has_attribute(attribute)) {
+					bo.set_is(BuildingAttribute::kNeedsBerry);
+					break;
+				}
 			}
 
 			continue;
@@ -928,42 +956,41 @@ void DefaultAI::late_initialization() {
 	// Also note that the AI assumes that some buildings are unique, if you want to
 	// create e.g. two barracks or bakeries, the impact on the AI must be considered
 	if (count_buildings_with_attribute(BuildingAttribute::kBarracks) != 1) {
-		throw wexception("The AI needs the tribe '%s' to define 1 type of barracks building. "
+		log_warn("The AI needs the tribe '%s' to define 1 type of barracks building. "
 		                 "This is the building that produces the tribe's 'soldier' worker.",
 		                 tribe_->name().c_str());
 	}
 	if (count_buildings_with_attribute(BuildingAttribute::kRanger) != 1) {
-		throw wexception(
+		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of ranger's building. "
-		   "This is the building that has 'supports_production_of = { \"log\" }' in its AI hints.",
+		   "This is the building that creates immovables with the attribute 'tree'.",
 		   tribe_->name().c_str());
 	}
 	if (count_buildings_with_attribute(BuildingAttribute::kWell) != 1) {
-		throw wexception(
+		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of well. "
-		   "This is the building that has 'collects_ware_from_map = \"water\"' in its AI hints.",
+		   "This is the building that collects the map resource 'resource_water\'.",
 		   tribe_->name().c_str());
 	}
 	if (count_buildings_with_attribute(BuildingAttribute::kLumberjack) != 1) {
-		throw wexception(
+		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of lumberjack's building. "
-		   "This is the building that has 'collects_ware_from_map = \"log\"' in its AI hints.",
+		   "This is the building that collects immovables with the attribute 'tree'.",
 		   tribe_->name().c_str());
 	}
 
 	if (count_buildings_with_attribute(BuildingAttribute::kHunter) != 0 &&
 	    count_buildings_with_attribute(BuildingAttribute::kHunter) != 1) {
-		throw wexception(
+		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of hunter's building at the most. "
-		   "Hunters are buildings that have 'collects_ware_from_map = \"meat\"' in their AI hints.",
+		   "Hunters are buildings that collect any bob from the map.",
 		   tribe_->name().c_str());
 	}
 
 	if (count_buildings_with_attribute(BuildingAttribute::kFisher) != 1) {
-		throw wexception(
+		log_warn(
 		   "The AI needs the tribe '%s' to define 1 type of fisher's building. "
-		   "This is the building that has 'collects_ware_from_map = \"fish\"' in its AI hints "
-		   "and doesn't have any ware inputs.",
+		   "This is the building that collects the map resource 'resource_fish'.",
 		   tribe_->name().c_str());
 	}
 
@@ -1649,7 +1676,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 
 		// Counting trees nearby
-		int32_t const tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
+		Widelands::MapObjectDescr::AttributeIndex const tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
 		field.trees_nearby = map.find_immovables(
 		   game(),
 		   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
@@ -1686,9 +1713,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.own_military_presence = 0;
 	field.own_non_military_nearby = 0;
 	field.producers_nearby.clear();
-	field.collecting_producers_nearby.clear();
+	field.supported_producers_nearby.clear();
 	field.producers_nearby.resize(wares.size());
-	field.collecting_producers_nearby.resize(wares.size());
 	field.rangers_nearby = 0;
 	field.space_consumers_nearby = 0;
 	field.supporters_nearby.clear();
@@ -2801,11 +2827,11 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					prio += bo.primary_priority;
 
 					// keep wells more distant
-					uint8_t collecting_producers_nearby_count = 0;
-					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
-						collecting_producers_nearby_count += bf->collecting_producers_nearby.at(collected_resource);
+					uint8_t supported_producers_nearby_count = 0;
+					for (const auto& supported_building : bo.supported_producers) {
+						supported_producers_nearby_count += bf->supported_producers_nearby.at(supported_building.first);
 					}
-					if (collecting_producers_nearby_count > 2) {
+					if (supported_producers_nearby_count > 2) {
 						continue;
 					}
 
@@ -2836,8 +2862,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// consider cutters and rangers nearby
 					prio += 2 * count_supporters_nearby *
 					        std::abs(management_data.get_military_number_at(25));
-					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
-						prio -= bf->collecting_producers_nearby.at(collected_resource) *
+					for (const auto& supported_building : bo.supported_producers) {
+						prio -= bf->supported_producers_nearby.at(supported_building.first) *
 								std::abs(management_data.get_military_number_at(36)) * 3;
 					}
 
@@ -2870,9 +2896,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					}
 
 					// to prevent to many quarries on one spot
-					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+					for (const auto& supported_building : bo.supported_producers) {
 						prio =
-						   prio - 50 * bf->collecting_producers_nearby.at(collected_resource);
+						   prio - 50 * bf->supported_producers_nearby.at(supported_building.first);
 					}
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {
@@ -2890,9 +2916,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					prio += count_supporters_nearby * 5;
 
-					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
+					for (const auto& supported_building : bo.supported_producers) {
 						prio += (bf->critters_nearby * 3) - 8 -
-								5 * bf->collecting_producers_nearby.at(collected_resource);
+								5 * bf->supported_producers_nearby.at(supported_building.first);
 					}
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
@@ -2908,8 +2934,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
-						prio -= bf->collecting_producers_nearby.at(collected_resource) * 20;
+					for (const auto& supported_building : bo.supported_producers) {
+						prio -= bf->supported_producers_nearby.at(supported_building.first) * 20;
 					}
 					prio += count_supporters_nearby * 20;
 
@@ -2919,7 +2945,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio *= 3;
 					}
 
-				} else if (!bo.production_hints.empty()) {
+				} else if (!bo.supported_producers.empty()) {
 					if (bo.is(BuildingAttribute::kRanger)) {
 						assert(bo.cnt_target > 0);
 					}
@@ -2939,10 +2965,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						prio -= bf->water_nearby / 5;
 
-						for (auto ph : bo.production_hints) {
-							assert(ph != Widelands::INVALID_INDEX);
+						for (const auto& supported_building : bo.supported_producers) {
+							assert(supported_building.first != Widelands::INVALID_INDEX);
 							prio += management_data.neuron_pool[67].get_result_safe(
-							           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) /
+							           bf->supported_producers_nearby.at(supported_building.first) * 5, kAbsValue) /
 							        2;
 						}
 
@@ -2950,9 +2976,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						   management_data.neuron_pool[49].get_result_safe(bf->trees_nearby, kAbsValue) /
 						   5;
 
-						for (auto ph : bo.production_hints) {
-							assert(ph != Widelands::INVALID_INDEX);
-							prio += bf->collecting_producers_nearby.at(ph) * 5 -
+						for (const auto& supported_building : bo.supported_producers) {
+							assert(supported_building.first != Widelands::INVALID_INDEX);
+							prio += bf->supported_producers_nearby.at(supported_building.first) * 5 -
 							        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
 							        bf->space_consumers_nearby *
 							           std::abs(management_data.get_military_number_at(102)) / 5 -
@@ -2973,10 +2999,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						// This is for a special case this is also supporter, it considers
 						// producers nearby
-						for (auto ph : bo.production_hints) {
-							assert(ph != Widelands::INVALID_INDEX);
+						for (const auto& supported_building : bo.supported_producers) {
+							assert(supported_building.first != Widelands::INVALID_INDEX);
 							prio += management_data.neuron_pool[51].get_result_safe(
-							           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) /
+							           bf->supported_producers_nearby.at(supported_building.first) * 5, kAbsValue) /
 							        2;
 						}
 						// now we find out if the supporter is needed depending on output stocklevel
@@ -2994,9 +3020,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 
 						// taking into account the vicinity
-						for (auto ph : bo.production_hints) {
-							assert(ph != Widelands::INVALID_INDEX);
-							prio += bf->collecting_producers_nearby.at(ph) * 10;
+						for (const auto& supported_building : bo.supported_producers) {
+							assert(supported_building.first != Widelands::INVALID_INDEX);
+							prio += bf->supported_producers_nearby.at(supported_building.first) * 10;
 						}
 						prio -= count_supporters_nearby * 15;
 
@@ -3040,9 +3066,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 						// taking into account the vicinity
-						for (auto ph : bo.production_hints) {
-							assert(ph != Widelands::INVALID_INDEX);
-							prio += bf->collecting_producers_nearby.at(ph) * 10;
+						for (const auto& supported_building : bo.supported_producers) {
+							assert(supported_building.first != Widelands::INVALID_INDEX);
+							prio += bf->supported_producers_nearby.at(supported_building.first) * 10;
 						}
 						prio -= count_supporters_nearby * 8;
 
@@ -3087,9 +3113,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 
-						for (auto ph : bo.production_hints) {
-							assert(ph != Widelands::INVALID_INDEX);
-							prio += bf->collecting_producers_nearby.at(ph) * 10;
+						for (const auto& supported_building : bo.supported_producers) {
+							assert(supported_building.first != Widelands::INVALID_INDEX);
+							prio += bf->supported_producers_nearby.at(supported_building.first) * 10;
 						}
 						prio -= count_supporters_nearby * 20;
 
@@ -3108,7 +3134,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					prio -= (bf->enemy_nearby) * 100;
 					prio -= (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 100;
 				} else {  // finally normal productionsites
-					assert(bo.production_hints.empty());
+					assert(bo.supported_producers.empty());
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio += 150;
@@ -3139,8 +3165,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
-								prio -= bf->collecting_producers_nearby.at(collected_resource) *
+							for (const auto& supported_building : bo.supported_producers) {
+								prio -= bf->supported_producers_nearby.at(supported_building.first) *
 										std::abs(management_data.get_military_number_at(108)) / 5;
 							}
 						}
@@ -4729,7 +4755,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// All other SPACE_CONSUMERS without input and above target_count
 	if (site.bo->inputs.empty()               // does not consume anything
-	    && site.bo->production_hints.empty()  // not a renewing building (forester...)
+	    && site.bo->supported_producers.empty()  // not a renewing building (forester...)
 	    && site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    !site.bo->is(BuildingAttribute::kRanger)) {
 
@@ -4808,7 +4834,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// remaining buildings without inputs and not supporting ones (fishers only left probably and
 	// hunters)
-	if (site.bo->inputs.empty() && site.bo->production_hints.empty() &&
+	if (site.bo->inputs.empty() && site.bo->supported_producers.empty() &&
 	    site.site->can_start_working() && !site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    site.site->get_statistics_percent() < 5 &&
 	    ((game().get_gametime() - site.built_time) > Duration(10 * 60 * 1000))) {
@@ -4824,7 +4850,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	// supporting productionsites (rangers)
 	// stop/start them based on stock avaiable
-	if (!site.bo->production_hints.empty()) {
+	if (!site.bo->supported_producers.empty()) {
 
 		if (!site.bo->is(BuildingAttribute::kRanger)) {
 			// other supporting sites, like fish breeders, gamekeepers are not dismantled at all
@@ -5653,7 +5679,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		           bo.cnt_under_construction + bo.unoccupied_count == 0) {
 			bo.max_needed_preciousness = bo.max_preciousness;  // even when rocks are not needed
 			return BuildingNecessity::kAllowed;
-		} else if (!bo.production_hints.empty() && !bo.is(BuildingAttribute::kSupportingProducer)) {
+		} else if (!bo.supported_producers.empty() && !bo.is(BuildingAttribute::kSupportingProducer)) {
 			// Pure supporting sites only
 
 			if (bo.cnt_under_construction + bo.unoccupied_count - bo.unconnected_count > 0) {
@@ -6158,14 +6184,17 @@ uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt,
 uint32_t
 DefaultAI::get_stocklevel(BuildingObserver& bo, const Time& gametime, const WareWorker what) const {
 	if (bo.stocklevel_time + Duration(5 * 1000) < gametime) {
-		if (what == WareWorker::kWare && (!bo.production_hints.empty() || !bo.ware_outputs.empty())) {
+		if (what == WareWorker::kWare && (!bo.supported_producers.empty() || !bo.ware_outputs.empty())) {
 			// looking for smallest value
 			bo.stocklevel_count = std::numeric_limits<uint32_t>::max();
-			for (auto ph : bo.production_hints) {
-				const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
-				if (res < bo.stocklevel_count) {
-					bo.stocklevel_count = res;
+			for (const auto& supported_building : bo.supported_producers) {
+				for (Widelands::DescriptionIndex output_ware : supported_building.second->output_ware_types()) {
+					const uint32_t res = calculate_stocklevel(static_cast<size_t>(output_ware), what);
+					if (res < bo.stocklevel_count) {
+						bo.stocklevel_count = res;
+					}
 				}
+
 			}
 			for (auto ph : bo.ware_outputs) {
 				const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
@@ -6248,8 +6277,8 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 	for (const Widelands::DescriptionIndex& i : bo.ware_outputs) {
 		++field.producers_nearby.at(i);
 	}
-	for (Widelands::DescriptionIndex collected_resource : bo.get_collected_map_resources()) {
-		++field.collecting_producers_nearby.at(collected_resource);
+	for (const auto& supported_building : bo.supported_producers) {
+		++field.supported_producers_nearby.at(supported_building.first);
 	}
 
 	if (bo.type == BuildingObserver::Type::kProductionsite) {

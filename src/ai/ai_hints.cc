@@ -257,11 +257,6 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
 	if (table->has_key("supports_production_of")) {
 		log_warn("%s: The 'supports_production_of' key in 'ai_hints' is no longer used",
 		    building_name.c_str());
-		// NOCOM get rid
-		for (const std::string& ware_name :
-		     table->get_table("supports_production_of")->array_entries<std::string>()) {
-			supported_production_.insert(ware_name);
-		}
 	}
 
 	if (table->has_key("requires_supporters")) {

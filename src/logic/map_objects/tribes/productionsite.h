@@ -209,11 +209,6 @@ public:
 	std::set<std::string> supported_by_productionsites() const {
 		return supported_by_productionsites_;
 	}
-	/// Returns whether this production site needs map resources or objects that are created by a
-	/// different production site.
-	bool needs_supporters() const {
-		return !supported_by_productionsites_.empty();
-	}
 
 protected:
 	void add_output_ware_type(DescriptionIndex index) {

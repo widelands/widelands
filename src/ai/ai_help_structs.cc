@@ -408,15 +408,6 @@ void BuildingObserver::unset_is(const BuildingAttribute attribute) {
 	assert(!is(attribute));
 }
 
-void BuildingObserver::add_collected_map_resource(const Widelands::TribeDescr& tribe,
-                                                  const std::string& ware_name) {
-	collected_map_resources.insert(tribe.safe_ware_index(ware_name));
-}
-
-const std::set<Widelands::DescriptionIndex>& BuildingObserver::get_collected_map_resources() const {
-	return collected_map_resources;
-}
-
 AiModeBuildings BuildingObserver::aimode_limit_status() const {
 	if (total_count() > cnt_limit_by_aimode) {
 		return AiModeBuildings::kLimitExceeded;

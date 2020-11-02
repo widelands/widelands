@@ -205,14 +205,6 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		         "removed.\n",
 		         name().c_str());
 	}
-
-	// Get collected map resources for AI
-	if (input_wares_.empty() && input_workers().empty()) {
-		for (const DescriptionIndex& output_ware : output_ware_types_) {
-			// log_dbg("NOCOM %s collects %s", name().c_str(), descriptions.get_ware_descr(output_ware)->name().c_str());
-			hints_.add_collects_ware_from_map(descriptions.get_ware_descr(output_ware)->name());
-		}
-	}
 }
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
