@@ -48,7 +48,7 @@ descriptions:new_productionsite_type {
    },
 
    inputs = {
-      { name = "charcoal", amount = 3 },
+      { name = "coal", amount = 3 },
       { name = "amazons_bread", amount = 6 },
       { name = "fish", amount = 6 },
       { name = "meat", amount = 6 },
@@ -61,7 +61,7 @@ descriptions:new_productionsite_type {
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
-            "consume=amazons_bread:2 fish,meat:2 charcoal",
+            "consume=amazons_bread:2 fish,meat:2 coal",
             "sleep=duration:5s",
             "animate=working duration:18s",
             "sleep=duration:10s",

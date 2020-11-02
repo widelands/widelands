@@ -273,7 +273,7 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "charcoal",
+            name = "coal",
             default_target_quantity = 20,
             preciousness = 10,
             helptexts = {
@@ -1316,7 +1316,7 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "amazons_rare_trees_woodcutters_hut",
+         name = "amazons_rare_tree_cutters_hut",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Trees Woodcutter's Hut
             purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber.")
@@ -1366,7 +1366,7 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "amazons_stonecarvery",
+         name = "amazons_stone_workshop",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Stonecarvery
             purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers.")

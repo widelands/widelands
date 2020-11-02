@@ -44,7 +44,7 @@ descriptions:new_productionsite_type {
    },
 
    inputs = {
-      { name = "charcoal", amount = 3 },
+      { name = "coal", amount = 3 },
       { name = "fish", amount = 3 },
    },
 
@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
          descname = _"enhancing the fertility of land",
          actions = {
             "callworker=check",
-            "consume=charcoal fish",
+            "consume=coal fish",
             "call=terraform",
             "call=terraform",
             "call=terraform",

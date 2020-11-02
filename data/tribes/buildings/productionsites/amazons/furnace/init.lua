@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
    },
 
    inputs = {
-      { name = "charcoal", amount = 8 },
+      { name = "coal", amount = 8 },
       { name = "gold_dust", amount = 8 },
    },
 
@@ -60,7 +60,7 @@ descriptions:new_productionsite_type {
          actions = {
             -- time total: 72
             "return=skipped unless economy needs gold",
-            "consume=charcoal gold_dust",
+            "consume=coal gold_dust",
             "sleep=duration:30s",
             "animate=working duration:42s",
             "produce=gold"

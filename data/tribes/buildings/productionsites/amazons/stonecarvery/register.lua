@@ -1,3 +1,0 @@
-return {
-   amazons_stonecarvery = {},
-}
