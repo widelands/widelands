@@ -65,7 +65,7 @@ WidelandsMapLoader::WidelandsMapLoader(FileSystem* fs, Map* const m) : MapLoader
 }
 
 WidelandsMapLoader::~WidelandsMapLoader() {  // NOLINT
-	                                          // GameMapPacket needs this desctructor
+	                                          // GameMapPacket needs this destructor
 }
 
 /**
