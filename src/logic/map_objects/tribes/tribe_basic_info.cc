@@ -83,6 +83,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
+
 	if (g_fs->is_directory("tribes/initialization")) {
 		FilenameSet dirs = g_fs->list_directory("tribes/initialization");
 		for (const std::string& dir : dirs) {
@@ -93,9 +94,25 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 			}
 		}
 	}
+
 	if (tribeinfos.empty()) {
 		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
+
+	for (const auto& pair : g_addons) {
+		if (pair.first.category == AddOnCategory::kTribes && pair.second) {
+			const std::string dirname = kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "tribes";
+			if (g_fs->is_directory(dirname)) {
+				for (const std::string& tribe : g_fs->list_directory(dirname)) {
+					const std::string script_path = tribe + g_fs->file_separator() + "init.lua";
+					if (g_fs->file_exists(script_path)) {
+						tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(script_path)));
+					}
+				}
+			}
+		}
+	}
+
 	return tribeinfos;
 }
 
