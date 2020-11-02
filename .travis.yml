@@ -9,6 +9,7 @@ addons:
       - libboost-system-dev
       - libboost-test-dev
       - curl
+      - libcurl4
       - libglew-dev
       - libicu-dev
       - libpng-dev
