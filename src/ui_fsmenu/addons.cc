@@ -896,8 +896,9 @@ static void install_translation(const std::string& temp_locale_path,
 	// where "nds" is the language abbreviation and "addon_name.wad" the add-on's name.
 	// If we use a different structure, gettext will not find the translations!
 
-	const std::string temp_filename = FileSystem::fs_filename(temp_locale_path.c_str());  // nds.mo.tmp
-	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));    // nds
+	const std::string temp_filename =
+	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.mo.tmp
+	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));  // nds
 
 	const std::string new_locale_dir = i18n::kAddOnLocaleDir + FileSystem::file_separator() +
 	                                   locale + FileSystem::file_separator() +
