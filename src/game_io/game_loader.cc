@@ -86,21 +86,21 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 				if (pair.first.internal_name == requirement.first) {
 					found = true;
 					if (pair.first.version != requirement.second) {
-						log_warn("Savegame requires add-on '%s' at version %u but version %u is installed. "
-								"They might be compatible, but this is not necessarily the case.\n",
-								requirement.first.c_str(),
-								requirement.second,
-								pair.first.version);
+						log_warn(
+						   "Savegame requires add-on '%s' at version %u but version %u is installed. "
+						   "They might be compatible, but this is not necessarily the case.\n",
+						   requirement.first.c_str(), requirement.second, pair.first.version);
 					}
 					assert(pair.first.category == AddOnCategory::kWorld ||
-							pair.first.category == AddOnCategory::kTribes ||
-							pair.first.category == AddOnCategory::kScript);
+					       pair.first.category == AddOnCategory::kTribes ||
+					       pair.first.category == AddOnCategory::kScript);
 					game_.enabled_addons().push_back(pair.first);
 					break;
 				}
 			}
 			if (!found) {
-				throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
+				throw GameDataError("Add-on '%s' (version %u) required but not installed",
+				                    requirement.first.c_str(), requirement.second);
 			}
 		}
 

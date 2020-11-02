@@ -137,8 +137,9 @@ void DescriptionManager::register_scenario_description(FileSystem* filesystem,
 		   description_name.c_str(), script_path.c_str());
 	}
 
-	registered_scenario_descriptions_.insert(
-	   std::make_pair(description_name, RegisteredObject("map:" + script_path, attributes, RegistryCaller::kScenario)));
+	registered_scenario_descriptions_.insert(std::make_pair(
+	   description_name,
+	   RegisteredObject("map:" + script_path, attributes, RegistryCaller::kScenario)));
 }
 
 void DescriptionManager::load_description(const std::string& description_name) {

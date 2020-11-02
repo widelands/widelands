@@ -41,14 +41,16 @@ struct NetAddons {
 	// Requests the file with the given name (e.g. "cool_feature.wad/init.lua")
 	// from the server and downloads it to the given canonical location.
 	// Verifies file integrity by calculating the file's checksum.
-	void download_addon_file(const std::string& name, const std::string& checksum, const std::string& save_as);
+	void download_addon_file(const std::string& name,
+	                         const std::string& checksum,
+	                         const std::string& save_as);
 
-	// Requests the MO file for the given add-on (cool_feature.wad) and locale ("nds.mo") from the server,
-	// downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp),
-	// and returns the canonical path to the downloaded file.
-	// The temp file's filename is guaranteed to be in the format
-	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-	std::string download_i18n(const std::string& addon, const std::string& checksum, const std::string& locale);
+	// Requests the MO file for the given add-on (cool_feature.wad) and locale ("nds.mo") from the
+	// server, downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp), and
+	// returns the canonical path to the downloaded file. The temp file's filename is guaranteed to
+	// be in the format "nds.mo.tmp" (where 'nds' is the language's abbreviation).
+	std::string
+	download_i18n(const std::string& addon, const std::string& checksum, const std::string& locale);
 
 private:
 	// Open the connection if it was not open yet; throws an error if this fails

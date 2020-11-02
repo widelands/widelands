@@ -64,9 +64,8 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
      largest_workarea_(0),
      scenario_tribes_(nullptr),
      tribes_have_been_registered_(false),
-     subscriber_(Notifications::subscribe<DescriptionManager::NoteMapObjectDescriptionTypeCheck>([this](DescriptionManager::NoteMapObjectDescriptionTypeCheck note) {
-     	check(note);
-     })),
+     subscriber_(Notifications::subscribe<DescriptionManager::NoteMapObjectDescriptionTypeCheck>(
+        [this](DescriptionManager::NoteMapObjectDescriptionTypeCheck note) { check(note); })),
      lua_(lua),
      description_manager_(new DescriptionManager(lua)) {
 
@@ -76,7 +75,8 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 	assert(lua_);
 	for (const AddOnInfo& info : addons) {
 		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
-			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name + FileSystem::file_separator() + "preload.lua");
+			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
+			                         FileSystem::file_separator() + "preload.lua");
 			if (g_fs->file_exists(script)) {
 				log_info("Running preload script for add-on %s", info.internal_name.c_str());
 				lua_->run_script(script);
@@ -86,18 +86,21 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 
 	for (const AddOnInfo& info : addons) {
 		if (info.category == AddOnCategory::kWorld) {
-			description_manager_->register_directory(kAddOnDir + FileSystem::file_separator() + info.internal_name,
-					g_fs, DescriptionManager::RegistryCaller::kWorldAddon);
+			description_manager_->register_directory(
+			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
+			   DescriptionManager::RegistryCaller::kWorldAddon);
 		} else if (info.category == AddOnCategory::kTribes) {
-			description_manager_->register_directory(kAddOnDir + FileSystem::file_separator() + info.internal_name,
-					g_fs, DescriptionManager::RegistryCaller::kTribeAddon);
+			description_manager_->register_directory(
+			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
+			   DescriptionManager::RegistryCaller::kTribeAddon);
 		}
 	}
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes, DescriptionManager::RegistryCaller::kDefault);
+		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes,
+		                                           DescriptionManager::RegistryCaller::kDefault);
 		if (!attributes.empty()) {
 			throw GameDataError("Tribes can't have attributes - please remove all attributes in "
 			                    "'register.lua' for tribe '%s'.",
@@ -106,7 +109,8 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 	}
 
 	// Walk world directory and register objects
-	description_manager_->register_directory("world", g_fs, DescriptionManager::RegistryCaller::kDefault);
+	description_manager_->register_directory(
+	   "world", g_fs, DescriptionManager::RegistryCaller::kDefault);
 
 	// We register tribes on demand in load_tribe for performance reasons
 }
@@ -377,7 +381,8 @@ void Descriptions::register_scenario_tribes(FileSystem* filesystem) {
 		if (filesystem->file_exists("scripting/tribes/init.lua")) {
 			scenario_tribes_ = lua_->run_script("map:scripting/tribes/init.lua");
 		}
-		description_manager_->register_directory("scripting/tribes", filesystem, DescriptionManager::RegistryCaller::kScenario);
+		description_manager_->register_directory(
+		   "scripting/tribes", filesystem, DescriptionManager::RegistryCaller::kScenario);
 	}
 }
 
@@ -484,7 +489,8 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 		// Register tribes on demand for better performance during mapselect, for the editor and for
 		// the website tools
 		if (!tribes_have_been_registered_) {
-			description_manager_->register_directory("tribes", g_fs, DescriptionManager::RegistryCaller::kDefault);
+			description_manager_->register_directory(
+			   "tribes", g_fs, DescriptionManager::RegistryCaller::kDefault);
 			tribes_have_been_registered_ = true;
 		}
 		description_manager_->load_description(tribename);
@@ -598,29 +604,30 @@ void Descriptions::set_old_world_name(const std::string& name) {
 	}
 }
 
-#define CHECK_FACTORY(addon, unit_type) \
-	if (unit_type##_index(note.description_name) != INVALID_INDEX) { \
-		throw GameDataError(#addon " add-ons must not define " #unit_type "s (offending unit: %s)", note.description_name.c_str()); \
+#define CHECK_FACTORY(addon, unit_type)                                                            \
+	if (unit_type##_index(note.description_name) != INVALID_INDEX) {                                \
+		throw GameDataError(#addon " add-ons must not define " #unit_type "s (offending unit: %s)",  \
+		                    note.description_name.c_str());                                          \
 	}
 
 void Descriptions::check(const DescriptionManager::NoteMapObjectDescriptionTypeCheck& note) const {
 	switch (note.caller) {
- 	case DescriptionManager::RegistryCaller::kTribeAddon:
- 		CHECK_FACTORY(Tribe, critter)
- 		CHECK_FACTORY(Tribe, terrain)
- 		CHECK_FACTORY(Tribe, resource)
- 		break;
- 	case DescriptionManager::RegistryCaller::kWorldAddon:
- 		CHECK_FACTORY(World, tribe)
- 		CHECK_FACTORY(World, ware)
- 		CHECK_FACTORY(World, worker)
- 		CHECK_FACTORY(World, building)
- 		CHECK_FACTORY(World, ship)
- 		break;
- 	default:
- 		// Scenarios and official scripts may load anything
- 		break;
- 	}
+	case DescriptionManager::RegistryCaller::kTribeAddon:
+		CHECK_FACTORY(Tribe, critter)
+		CHECK_FACTORY(Tribe, terrain)
+		CHECK_FACTORY(Tribe, resource)
+		break;
+	case DescriptionManager::RegistryCaller::kWorldAddon:
+		CHECK_FACTORY(World, tribe)
+		CHECK_FACTORY(World, ware)
+		CHECK_FACTORY(World, worker)
+		CHECK_FACTORY(World, building)
+		CHECK_FACTORY(World, ship)
+		break;
+	default:
+		// Scenarios and official scripts may load anything
+		break;
+	}
 }
 
 #undef CHECK_FACTORY

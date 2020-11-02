@@ -99,7 +99,8 @@ static inline bool addon_initially_enabled(AddOnCategory c) {
 void EditorGameBase::init_addons(bool world_only) {
 	enabled_addons_.clear();
 	for (const auto& pair : g_addons) {
-		if (pair.second && (world_only ? pair.first.category == AddOnCategory::kWorld : addon_initially_enabled(pair.first.category))) {
+		if (pair.second && (world_only ? pair.first.category == AddOnCategory::kWorld :
+		                                 addon_initially_enabled(pair.first.category))) {
 			enabled_addons_.push_back(pair.first);
 		}
 	}
@@ -310,7 +311,8 @@ void EditorGameBase::postload_addons() {
 
 	for (const AddOnInfo& info : enabled_addons_) {
 		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
-			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name + FileSystem::file_separator() + "postload.lua");
+			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
+			                         FileSystem::file_separator() + "postload.lua");
 			if (g_fs->file_exists(script)) {
 				log_info("Running postload script for add-on %s", info.internal_name.c_str());
 				lua_->run_script(script);

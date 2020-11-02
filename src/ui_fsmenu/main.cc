@@ -165,7 +165,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	editor_.selected.connect([this]() { end_modal<MenuTarget>(editor_.get_selected()); });
 	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
 	addons_.sigclicked.connect([this]() {  // Not yet implemented
-	   end_modal<MenuTarget>(MenuTarget::kAddOns);
+		end_modal<MenuTarget>(MenuTarget::kAddOns);
 	});
 	options_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOptions); });
 	about_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kAbout); });
@@ -370,7 +370,8 @@ void FullscreenMenuMain::set_labels() {
 	   _("Watch the replay of an old game"), "R", UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
-	addons_.set_tooltip(as_tooltip_text_with_hotkey(_("Install and manage add-ons"), "A", UI::PanelStyle::kFsMenu));
+	addons_.set_tooltip(
+	   as_tooltip_text_with_hotkey(_("Install and manage add-ons"), "A", UI::PanelStyle::kFsMenu));
 	options_.set_title(_("Options"));
 	options_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Technical and game-related settings"), "O", UI::PanelStyle::kFsMenu));

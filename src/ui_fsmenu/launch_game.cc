@@ -294,14 +294,14 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 				if (t) {
 					if (t->has_key("textdomain")) {
 						i18n::AddOnTextdomain td(t->get_string("textdomain"));
-						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script, nullptr,
-							                        win_condition_script == last_win_condition_,
-							                        t->get_string("description"));
+						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script,
+						                            nullptr, win_condition_script == last_win_condition_,
+						                            t->get_string("description"));
 					} else {
 						i18n::Textdomain td("win_conditions");
-						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script, nullptr,
-							                        win_condition_script == last_win_condition_,
-							                        t->get_string("description"));
+						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script,
+						                            nullptr, win_condition_script == last_win_condition_,
+						                            t->get_string("description"));
 					}
 				}
 			} catch (LuaTableKeyError& e) {

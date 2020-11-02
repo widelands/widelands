@@ -171,7 +171,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		if (include_addon_maps_) {
 			for (auto& addon : g_addons) {
 				if (addon.first.category == AddOnCategory::kMaps) {
-					for (const std::string& mapname : g_fs->list_directory(kAddOnDir + g_fs->file_separator() + addon.first.internal_name)) {
+					for (const std::string& mapname : g_fs->list_directory(
+					        kAddOnDir + g_fs->file_separator() + addon.first.internal_name)) {
 						files.insert(mapname);
 					}
 				}

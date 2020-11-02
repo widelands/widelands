@@ -234,13 +234,14 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::NodeAndTriangle<>& ce
 				if (addons.empty()) {
 					addons = parent.egbase().enabled_addons()[i].descname();
 				} else {
-					addons = (boost::format(_("%1$s; %2$s")) % addons % parent.egbase().enabled_addons()[i].descname()).str();
+					addons = (boost::format(_("%1$s; %2$s")) % addons %
+					          parent.egbase().enabled_addons()[i].descname())
+					            .str();
 				}
 			}
 		}
 		buf += as_listitem(
-		   (boost::format(_("Enabled Add-Ons: %s")) % richtext_escape(addons)).str(),
-		   font_style);
+		   (boost::format(_("Enabled Add-Ons: %s")) % richtext_escape(addons)).str(), font_style);
 	}
 
 	multiline_textarea->set_text(as_richtext(buf));

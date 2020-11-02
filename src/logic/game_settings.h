@@ -134,11 +134,14 @@ struct GameSettings {
 		}
 		for (const auto& pair : g_addons) {
 			if (pair.first.category == AddOnCategory::kWinCondition) {
-				const std::string filename = kAddOnDir + g_fs->file_separator() + pair.first.internal_name + g_fs->file_separator() + "init.lua";
+				const std::string filename = kAddOnDir + g_fs->file_separator() +
+				                             pair.first.internal_name + g_fs->file_separator() +
+				                             "init.lua";
 				if (g_fs->file_exists(filename)) {
 					win_condition_scripts.push_back(filename);
 				} else {
-					throw wexception("Add-on win condition file \"%s\" does not exist", filename.c_str());
+					throw wexception(
+					   "Add-on win condition file \"%s\" does not exist", filename.c_str());
 				}
 			}
 		}

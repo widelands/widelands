@@ -76,7 +76,8 @@ public:
 		const std::string description_name;
 		const RegistryCaller caller;
 
-		NoteMapObjectDescriptionTypeCheck(const std::string& n, RegistryCaller c) : description_name(n), caller(c) {
+		NoteMapObjectDescriptionTypeCheck(const std::string& n, RegistryCaller c)
+		   : description_name(n), caller(c) {
 		}
 	};
 

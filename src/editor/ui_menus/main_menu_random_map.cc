@@ -476,7 +476,6 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 		egbase.cleanup_for_load();
 	}
 
-
 	Widelands::UniqueRandomMapInfo map_info;
 	set_map_info(map_info);
 

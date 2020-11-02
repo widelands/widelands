@@ -32,25 +32,27 @@
 #include "logic/filesystem_constants.h"
 
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
-	{AddOnCategory::kNone, AddOnCategoryInfo {"",
-			[]() { return _("Error"); }, "images/ui_basic/stop.png", false}},
-	{AddOnCategory::kTribes, AddOnCategoryInfo {"tribes",
-			[]() { return _("Tribes"); }, "images/wui/stats/menu_tab_wares_warehouse.png", true}},
-	{AddOnCategory::kWorld, AddOnCategoryInfo {"world",
-			[]() { return _("World"); }, "images/wui/menus/toggle_immovables.png", true}},
-	{AddOnCategory::kScript, AddOnCategoryInfo {"script",
-			[]() { return _("Script"); }, "images/logos/WL-Editor-32.png", true}},
-	{AddOnCategory::kMaps, AddOnCategoryInfo {"maps",
-			[]() { return _("Map Set"); }, "images/wui/menus/toggle_minimap.png", false}},
-	{AddOnCategory::kCampaign, AddOnCategoryInfo {"campaign",
-			[]() { return _("Campaign"); }, "images/wui/messages/messages_warfare.png", false}},
-	{AddOnCategory::kWinCondition, AddOnCategoryInfo {"win_condition",
-			[]() { return _("Win Condition"); }, "images/wui/menus/objectives.png", false}},
-	{AddOnCategory::kStartingCondition, AddOnCategoryInfo {"starting_condition",
-			[]() { return _("Starting Condition"); }, "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", false}},
-	{AddOnCategory::kTheme, AddOnCategoryInfo {"theme",
-			[]() { return _("Theme"); }, "images/wui/menus/main_menu.png", false}}
-};
+   {AddOnCategory::kNone,
+    AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
+   {AddOnCategory::kTribes,
+    AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
+                      "images/wui/stats/menu_tab_wares_warehouse.png", true}},
+   {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
+                                             "images/wui/menus/toggle_immovables.png", true}},
+   {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
+                                              "images/logos/WL-Editor-32.png", true}},
+   {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
+                                            "images/wui/menus/toggle_minimap.png", false}},
+   {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
+                                                "images/wui/messages/messages_warfare.png", false}},
+   {AddOnCategory::kWinCondition,
+    AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
+                      "images/wui/menus/objectives.png", false}},
+   {AddOnCategory::kStartingCondition,
+    AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
+                      "tribes/buildings/warehouses/atlanteans/headquarters/menu.png", false}},
+   {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
+                                             "images/wui/menus/main_menu.png", false}}};
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
 
@@ -63,7 +65,8 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 			if (pair.first.internal_name == requirement.first) {
 				found = true;
 				if (pair.first.version != requirement.second) {
-					addons_wrong_version[requirement.first] = std::make_pair(pair.first.version, requirement.second);
+					addons_wrong_version[requirement.first] =
+					   std::make_pair(pair.first.version, requirement.second);
 				}
 				break;
 			}
@@ -80,15 +83,20 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 			std::string list;
 			for (const auto& a : addons_wrong_version) {
 				if (list.empty()) {
-					list = (boost::format(_("%1$s (expected version %2$u, found %3$u)"))
-							% a.first % a.second.second % a.second.first).str();
+					list = (boost::format(_("%1$s (expected version %2$u, found %3$u)")) % a.first %
+					        a.second.second % a.second.first)
+					          .str();
 				} else {
-					list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)"))
-							% list % a.first % a.second.second % a.second.first).str();
+					list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)")) % list %
+					        a.first % a.second.second % a.second.first)
+					          .str();
 				}
 			}
-			return (boost::format(ngettext("%1$u add-on with wrong version: %2$s", "%1$u add-ons with wrong version: %2$s",
-					addons_wrong_version.size())) % addons_wrong_version.size() % list).str();
+			return (boost::format(ngettext("%1$u add-on with wrong version: %2$s",
+			                               "%1$u add-ons with wrong version: %2$s",
+			                               addons_wrong_version.size())) %
+			        addons_wrong_version.size() % list)
+			   .str();
 		}
 	} else {
 		if (addons_wrong_version.empty()) {
@@ -101,7 +109,9 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 				}
 			}
 			return (boost::format(ngettext("%1$u missing add-on: %2$s", "%1$u missing add-ons: %2$s",
-					addons_missing.size())) % addons_missing.size() % list).str();
+			                               addons_missing.size())) %
+			        addons_missing.size() % list)
+			   .str();
 		} else {
 			std::string list;
 			for (const std::string& a : addons_missing) {
@@ -112,15 +122,22 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 				}
 			}
 			for (const auto& a : addons_wrong_version) {
-				list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)"))
-						% list % a.first % a.second.second % a.second.first).str();
+				list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)")) % list %
+				        a.first % a.second.second % a.second.first)
+				          .str();
 			}
-			return (boost::format(_("%1$s and %2$s: %3$s"))
-					% (boost::format(ngettext(_("%u missing add-on"), _("%u missing add-ons"),
-							addons_missing.size())) % addons_missing.size()).str()
-					% (boost::format(ngettext(_("%u add-on with wrong version"), _("%u add-ons with wrong version"),
-							addons_missing.size())) % addons_missing.size()).str()
-					% list).str();
+			return (boost::format(_("%1$s and %2$s: %3$s")) %
+			        (boost::format(ngettext(
+			            _("%u missing add-on"), _("%u missing add-ons"), addons_missing.size())) %
+			         addons_missing.size())
+			           .str() %
+			        (boost::format(ngettext(_("%u add-on with wrong version"),
+			                                _("%u add-ons with wrong version"),
+			                                addons_missing.size())) %
+			         addons_missing.size())
+			           .str() %
+			        list)
+			   .str();
 		}
 	}
 }
@@ -133,12 +150,15 @@ std::string check_requirements(const AddOnRequirements& required_addons) {
 	}
 	std::string result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result = (boost::format(_("%1$s<br>· %2$s (version %3$u)")) % result % pair.first % pair.second).str();
+		result =
+		   (boost::format(_("%1$s<br>· %2$s (version %3$u)")) % result % pair.first % pair.second)
+		      .str();
 	}
 	return result;
 }
 
-unsigned count_all_dependencies(const std::string& info, const std::map<std::string, AddOnState>& all) {
+unsigned count_all_dependencies(const std::string& info,
+                                const std::map<std::string, AddOnState>& all) {
 	const auto it = all.find(info);
 	if (it == all.end()) {
 		log_warn("count_all_dependencies: '%s' not installed", info.c_str());
@@ -161,7 +181,8 @@ AddOnCategory get_category(const std::string& name) {
 }
 
 AddOnInfo preload_addon(const std::string& name) {
-	std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(kAddOnDir + g_fs->file_separator() + name));
+	std::unique_ptr<FileSystem> fs(
+	   g_fs->make_sub_file_system(kAddOnDir + g_fs->file_separator() + name));
 	Profile profile;
 	profile.read("addon", nullptr, *fs);
 	Section& s = profile.get_safe_section("global");
@@ -174,25 +195,32 @@ AddOnInfo preload_addon(const std::string& name) {
 	const std::string unlocalized_description = s.get_safe_string("description");
 	const std::string unlocalized_author = s.get_safe_string("author");
 
-	AddOnInfo i = {
-		name,
-		[name, unlocalized_descname]() {
-			i18n::AddOnTextdomain td(name);
-			return i18n::translate(unlocalized_descname);
-		},
-		[name, unlocalized_description]() {
-			i18n::AddOnTextdomain td(name);
-			return i18n::translate(unlocalized_description);
-		},
-		[name, unlocalized_author]() {
-			i18n::AddOnTextdomain td(name);
-			return i18n::translate(unlocalized_author);
-		},
-		s.get_safe_positive("version"),
-		i18n_profile.get_safe_section("global").get_positive(name.c_str(), 1),
-		get_category(s.get_safe_string("category")),
-		{}, false, {{}, {}, {}, {}}, 0, "", 0, 0, 0, 0.f, {}
-	};
+	AddOnInfo i = {name,
+	               [name, unlocalized_descname]() {
+		               i18n::AddOnTextdomain td(name);
+		               return i18n::translate(unlocalized_descname);
+	               },
+	               [name, unlocalized_description]() {
+		               i18n::AddOnTextdomain td(name);
+		               return i18n::translate(unlocalized_description);
+	               },
+	               [name, unlocalized_author]() {
+		               i18n::AddOnTextdomain td(name);
+		               return i18n::translate(unlocalized_author);
+	               },
+	               s.get_safe_positive("version"),
+	               i18n_profile.get_safe_section("global").get_positive(name.c_str(), 1),
+	               get_category(s.get_safe_string("category")),
+	               {},
+	               false,
+	               {{}, {}, {}, {}},
+	               0,
+	               "",
+	               0,
+	               0,
+	               0,
+	               0.f,
+	               {}};
 
 	if (i.category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());

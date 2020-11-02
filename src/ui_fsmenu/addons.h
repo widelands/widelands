@@ -45,9 +45,12 @@ struct InstalledAddOnRow : public UI::Panel {
 	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, bool enabled);
 	~InstalledAddOnRow() override {
 	}
-	const AddOnInfo& info() const { return info_; }
+	const AddOnInfo& info() const {
+		return info_;
+	}
 	void layout() override;
 	void draw(RenderTarget&) override;
+
 private:
 	AddOnInfo info_;
 	UI::Button uninstall_;
@@ -57,14 +60,23 @@ private:
 	UI::MultilineTextarea txt_;
 };
 struct RemoteAddOnRow : public UI::Panel {
-	RemoteAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, uint32_t installed_version, uint32_t installed_i18n_version);
+	RemoteAddOnRow(Panel*,
+	               AddOnsCtrl*,
+	               const AddOnInfo&,
+	               uint32_t installed_version,
+	               uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {
 	}
 	void layout() override;
 	void draw(RenderTarget&) override;
-	const AddOnInfo& info() const { return info_; }
+	const AddOnInfo& info() const {
+		return info_;
+	}
 	bool upgradeable() const;
-	bool full_upgrade_possible() const { return full_upgrade_possible_; }
+	bool full_upgrade_possible() const {
+		return full_upgrade_possible_;
+	}
+
 private:
 	AddOnInfo info_;
 	UI::Button install_, upgrade_, uninstall_, interact_;
@@ -114,16 +126,17 @@ private:
 	UI::MultilineTextarea warn_requirements_;
 	UI::Panel tabs_placeholder_;
 	UI::TabPanel tabs_;
-	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_, installed_addons_buttons_box_, installed_addons_box_,
-			browse_addons_outer_wrapper_, browse_addons_inner_wrapper_, browse_addons_buttons_box_,
-			browse_addons_buttons_inner_box_1_, browse_addons_buttons_inner_box_2_, browse_addons_box_;
+	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_,
+	   installed_addons_buttons_box_, installed_addons_box_, browse_addons_outer_wrapper_,
+	   browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_buttons_inner_box_1_,
+	   browse_addons_buttons_inner_box_2_, browse_addons_box_;
 	std::map<AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
-	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_,
-			move_top_, move_up_, move_down_, move_bottom_;
+	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_, move_top_,
+	   move_up_, move_down_, move_bottom_;
 
 	void category_filter_changed(AddOnCategory);
 	void check_enable_move_buttons();

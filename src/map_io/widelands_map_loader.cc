@@ -98,10 +98,8 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnIn
 						found = true;
 						if (pair.first.version != requirement.second) {
 							log_warn("Map requires add-on '%s' at version %u but version %u is installed. "
-									"They might be compatible, but this is not necessarily the case.\n",
-									requirement.first.c_str(),
-									requirement.second,
-									pair.first.version);
+							         "They might be compatible, but this is not necessarily the case.\n",
+							         requirement.first.c_str(), requirement.second, pair.first.version);
 						}
 						assert(pair.first.category == AddOnCategory::kWorld);
 						addons->push_back(pair.first);
@@ -109,7 +107,8 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOnIn
 					}
 				}
 				if (!found) {
-					throw GameDataError("Add-on '%s' (version %u) required but not installed", requirement.first.c_str(), requirement.second);
+					throw GameDataError("Add-on '%s' (version %u) required but not installed",
+					                    requirement.first.c_str(), requirement.second);
 				}
 			}
 		}

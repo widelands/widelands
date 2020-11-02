@@ -204,7 +204,8 @@ private:
 	std::unique_ptr<LuaTable> scenario_tribes_;
 	bool tribes_have_been_registered_;
 
-	std::unique_ptr<Notifications::Subscriber<DescriptionManager::NoteMapObjectDescriptionTypeCheck>> subscriber_;
+	std::unique_ptr<Notifications::Subscriber<DescriptionManager::NoteMapObjectDescriptionTypeCheck>>
+	   subscriber_;
 	void check(const DescriptionManager::NoteMapObjectDescriptionTypeCheck&) const;
 
 	LuaInterface* lua_;  // Not owned

@@ -69,7 +69,8 @@ void NetAddons::set_url_and_timeout(std::string url) {
 	curl_easy_setopt(curl_, CURLOPT_TIMEOUT, 30);
 }
 
-static size_t refresh_remotes_callback(char* received_data, size_t, const size_t char_count, std::string* out) {
+static size_t
+refresh_remotes_callback(char* received_data, size_t, const size_t char_count, std::string* out) {
 	for (size_t i = 0; i < char_count; ++i) {
 		(*out) += received_data[i];
 	}
@@ -126,7 +127,8 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 	const uint16_t list_version = next_number(output);
 	if (list_version != kCurrentListVersion) {
-		throw wexception("List version mismatch! Found version %u, supported version is %u", list_version, kCurrentListVersion);
+		throw wexception("List version mismatch! Found version %u, supported version is %u",
+		                 list_version, kCurrentListVersion);
 	}
 
 	const size_t nr_addons = next_number(output);
@@ -166,7 +168,8 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 				info.average_rating = std::strtof(word.c_str(), nullptr);
 				std::snprintf(buffer, len, "%f", info.average_rating);
 				if (word != buffer) {
-					throw wexception("Floating point conversion: Only period and comma as decimal points supported");
+					throw wexception(
+					   "Floating point conversion: Only period and comma as decimal points supported");
 				}
 			}
 		}
@@ -175,7 +178,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			const std::string msg = next_word(output);
 			const uint32_t v = next_number(output);
 			const uint32_t t = next_number(output);
-			info.user_comments.push_back(AddOnComment {name, msg, v, t});
+			info.user_comments.push_back(AddOnComment{name, msg, v, t});
 		}
 
 		info.version = next_number(output);
@@ -200,9 +203,11 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		for (size_t sums = next_number(output); sums; --sums) {
 			info.file_list.checksums.push_back(next_word(output));
 		}
-		if (info.file_list.checksums.size() != info.file_list.files.size() + info.file_list.locales.size()) {
+		if (info.file_list.checksums.size() !=
+		    info.file_list.files.size() + info.file_list.locales.size()) {
 			throw wexception("Found %" PRIuS " files and %" PRIuS " locales, but %" PRIuS " checksums",
-					info.file_list.files.size(), info.file_list.locales.size(), info.file_list.checksums.size());
+			                 info.file_list.files.size(), info.file_list.locales.size(),
+			                 info.file_list.checksums.size());
 		}
 
 		info.verified = next_word(output) == "verified";
@@ -227,10 +232,12 @@ static void check_downloaded_file(const std::string& path, const std::string& ch
 		md5sum.finish_checksum();
 		const std::string md5 = md5sum.get_checksum().str();
 		if (checksum != md5) {
-			throw wexception("Downloaded file '%s': Checksum mismatch, found %s, expected %s", path.c_str(), md5.c_str(), checksum.c_str());
+			throw wexception("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
+			                 path.c_str(), md5.c_str(), checksum.c_str());
 		}
 	} catch (const std::exception& e) {
-		throw wexception("Downloaded file '%s': Unable to check output file: %s", path.c_str(), e.what());
+		throw wexception(
+		   "Downloaded file '%s': Unable to check output file: %s", path.c_str(), e.what());
 	}
 }
 
@@ -238,15 +245,20 @@ static void check_downloaded_file(const std::string& path, const std::string& ch
 // the files as ZIPs on the server. Similar for translation bundles. Perhaps
 // someone would like to write code to uncompress a downloaded ZIP file some day…
 
-void NetAddons::download_addon_file(const std::string& name, const std::string& checksum, const std::string& output) {
+void NetAddons::download_addon_file(const std::string& name,
+                                    const std::string& checksum,
+                                    const std::string& output) {
 	init();
 
-	set_url_and_timeout(std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/addons/") + name);
+	set_url_and_timeout(
+	   std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/addons/") +
+	   name);
 
 	std::FILE* out_file = std::fopen(output.c_str(), "wb");
-	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
-		return std::fwrite(ptr, size, nmemb, stream);
-	});
+	curl_easy_setopt(
+	   curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+		   return std::fwrite(ptr, size, nmemb, stream);
+	   });
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
 
 	const CURLcode res = curl_easy_perform(curl_);
@@ -259,21 +271,29 @@ void NetAddons::download_addon_file(const std::string& name, const std::string& 
 	check_downloaded_file(output, checksum);
 }
 
-std::string NetAddons::download_i18n(const std::string& name, const std::string& checksum, const std::string& locale) {
+std::string NetAddons::download_i18n(const std::string& name,
+                                     const std::string& checksum,
+                                     const std::string& locale) {
 	init();
 
-	const std::string temp_dirname = kTempFileDir + g_fs->file_separator() + name + ".mo" + kTempFileExtension;
+	const std::string temp_dirname =
+	   kTempFileDir + g_fs->file_separator() + name + ".mo" + kTempFileExtension;
 	g_fs->ensure_directory_exists(temp_dirname);
 
-	const std::string relative_output = temp_dirname + g_fs->file_separator() + locale + kTempFileExtension;
-	const std::string canonical_output = g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
+	const std::string relative_output =
+	   temp_dirname + g_fs->file_separator() + locale + kTempFileExtension;
+	const std::string canonical_output =
+	   g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
 
-	set_url_and_timeout(std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/i18n/") + name + "/" + locale);
+	set_url_and_timeout(
+	   std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/i18n/") +
+	   name + "/" + locale);
 
 	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
-	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
-		return std::fwrite(ptr, size, nmemb, stream);
-	});
+	curl_easy_setopt(
+	   curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+		   return std::fwrite(ptr, size, nmemb, stream);
+	   });
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
 
 	const CURLcode res = curl_easy_perform(curl_);
@@ -281,7 +301,8 @@ std::string NetAddons::download_i18n(const std::string& name, const std::string&
 	fclose(out_file);
 
 	if (res != CURLE_OK) {
-		throw wexception("[%s / %s] CURL terminated with error code %d\n", name.c_str(), locale.c_str(), res);
+		throw wexception(
+		   "[%s / %s] CURL terminated with error code %d\n", name.c_str(), locale.c_str(), res);
 	}
 
 	check_downloaded_file(relative_output, checksum);

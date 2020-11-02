@@ -133,7 +133,8 @@ static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
       :returns: :const:`nil`
 */
 static int L_push_textdomain(lua_State* L) {
-	textdomains[L].push_back(std::make_pair(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2)));
+	textdomains[L].push_back(
+	   std::make_pair(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2)));
 	return 0;
 }
 /* RST
@@ -160,7 +161,8 @@ static int L_set_textdomain(lua_State* L) {
 
 static TextdomainInfo current_textdomain(const lua_State* L) {
 	const auto it = textdomains.find(L);
-	return it == textdomains.end() || it->second.empty() ? TextdomainInfo("", false) : it->second.back();
+	return it == textdomains.end() || it->second.empty() ? TextdomainInfo("", false) :
+	                                                       it->second.back();
 }
 
 /* RST

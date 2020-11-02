@@ -76,11 +76,12 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 				const std::string substring = addons.substr(0, commapos);
 				const size_t colonpos = addons.find(':');
 				if (colonpos == std::string::npos) {
-					log_warn("Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+					log_warn(
+					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
-					map->required_addons_.push_back(std::make_pair(substring.substr(0, colonpos),
-							std::strtol(version.c_str(), nullptr, 10)));
+					map->required_addons_.push_back(std::make_pair(
+					   substring.substr(0, colonpos), std::strtol(version.c_str(), nullptr, 10)));
 				}
 				if (commapos == std::string::npos) {
 					break;
