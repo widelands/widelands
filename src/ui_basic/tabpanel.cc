@@ -48,17 +48,21 @@ constexpr uint32_t kNotFound = std::numeric_limits<uint32_t>::max();
  * =================
  */
 Tab::Tab(TabPanel* const tab_parent,
+         PanelStyle s,
          size_t const tab_id,
          int32_t x,
+         FontStyle style,
          const std::string& name,
          const std::string& init_title,
          const Image* init_pic,
          const std::string& tooltip_text,
          Panel* const contents)
-   : NamedPanel(tab_parent, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
+   : NamedPanel(
+        tab_parent, s, name, x, 0, kTabPanelButtonHeight, kTabPanelButtonHeight, tooltip_text),
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),
+     font_style_(style),
      rendered_title(nullptr),
      tooltip(tooltip_text),
      panel(contents) {
@@ -69,7 +73,7 @@ void Tab::set_title(const std::string& init_title) {
 	if (init_title.empty()) {
 		rendered_title = nullptr;
 	} else {
-		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, UI::FontStyle::kLabel));
+		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, font_style_));
 		const int16_t old_w = get_w();
 		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
 		         kTabPanelButtonHeight);
@@ -115,8 +119,13 @@ bool Tab::handle_mousepress(uint8_t, int32_t, int32_t) {
  * yet.
  */
 TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
-   : Panel(parent, 0, 0, 0, 0),
-     style_(style),
+   : Panel(parent,
+           style == TabPanelStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           0,
+           0,
+           0,
+           0),
+     tab_style_(style),
      active_(0),
      highlight_(kNotFound),
      background_style_(g_style_manager->tabpanel_style(style)) {
@@ -225,7 +234,7 @@ void TabPanel::layout() {
 		// avoid excessive craziness in case there is a wraparound
 		h = std::min(h, h - (kTabPanelButtonHeight + kTabPanelSeparatorHeight));
 		// If we have a border, we will also want some margin to the bottom
-		if (style_ == UI::TabPanelStyle::kFsMenu) {
+		if (tab_style_ == UI::TabPanelStyle::kFsMenu) {
 			h -= kTabPanelSeparatorHeight;
 		}
 		panel->set_size(get_w(), h);
@@ -291,10 +300,13 @@ uint32_t TabPanel::add_tab(const std::string& name,
 
 	size_t id = tabs_.size();
 	int32_t x = id > 0 ? tabs_[id - 1]->get_x() + tabs_[id - 1]->get_w() : 0;
-	tabs_.push_back(new Tab(this, id, x, name, title, pic, tooltip_text, panel));
+	tabs_.push_back(
+	   new Tab(this, panel_style_, id, x,
+	           tab_style_ == TabPanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel,
+	           name, title, pic, tooltip_text, panel));
 
 	// Add a margin if there is a border
-	if (style_ == UI::TabPanelStyle::kFsMenu) {
+	if (tab_style_ == UI::TabPanelStyle::kFsMenu) {
 		panel->set_border(kTabPanelSeparatorHeight + 1, kTabPanelSeparatorHeight + 1,
 		                  kTabPanelSeparatorHeight, kTabPanelSeparatorHeight);
 		panel->set_pos(Vector2i(0, kTabPanelButtonHeight));
@@ -437,7 +449,7 @@ void TabPanel::draw(RenderTarget& dst) {
 	                  2 * BUTTON_EDGE_BRIGHT_FACTOR);
 
 	// Draw border around the main panel
-	if (style_ == UI::TabPanelStyle::kFsMenu) {
+	if (tab_style_ == UI::TabPanelStyle::kFsMenu) {
 		//  left edge
 		dst.brighten_rect(Recti(0, kTabPanelButtonHeight, 2, get_h() - 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		//  bottom edge

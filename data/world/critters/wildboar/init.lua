@@ -21,7 +21,7 @@ wl.Descriptions():new_critter_type{
          fps = 20,
          sound_effect = {
             path = "sound/animals/boar",
-            priority = 0.01
+            priority = "0.01%"
          },
       },
       eating = {

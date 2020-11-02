@@ -56,7 +56,7 @@
 namespace Widelands {
 
 // Overall package version
-constexpr uint16_t kCurrentPacketVersion = 6;
+constexpr uint16_t kCurrentPacketVersion = 7;
 
 // Building type package versions
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
@@ -135,6 +135,12 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					building.leave_time_ = Time(fr);
 
 					building.mute_messages_ = packet_version >= 6 && fr.unsigned_8();
+
+					for (size_t i = (packet_version >= 7 ? fr.unsigned_32() : 0); i; --i) {
+						const std::string warename(fr.string());
+						building.set_priority(
+						   wwWARE, egbase.descriptions().ware_index(warename), WarePriority(fr));
+					}
 
 					if (uint32_t const leaver_serial = fr.unsigned_32()) {
 						try {
@@ -947,6 +953,13 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 			}
 			building->leave_time_.save(fw);
 			fw.unsigned_8(building->mute_messages_ ? 1 : 0);
+
+			fw.unsigned_32(building->ware_priorities_.size());
+			for (const auto& pair : building->ware_priorities_) {
+				fw.string(egbase.descriptions().get_ware_descr(pair.first)->name());
+				pair.second.write(fw);
+			}
+
 			if (MapObject const* const o = building->leave_allow_.get(egbase)) {
 				assert(mos.is_object_known(*o));
 				fw.unsigned_32(mos.get_object_file_index(*o));

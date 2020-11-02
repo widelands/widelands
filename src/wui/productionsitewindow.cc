@@ -81,11 +81,14 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 
 	if (!inputqueues.empty()) {
 		// Add the wares tab
-		UI::Box* prod_box = new UI::Box(
-		   get_tabs(), 0, 0, UI::Box::Vertical, g_gr->get_xres() - 80, g_gr->get_yres() - 80);
+		UI::Box* prod_box = new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical,
+		                                g_gr->get_xres() - 80, g_gr->get_yres() - 80);
+		ensure_box_can_hold_input_queues(*prod_box);
 
-		for (const Widelands::InputQueue* queue : inputqueues) {
-			prod_box->add(new InputQueueDisplay(prod_box, 0, 0, *ibase(), *production_site, *queue));
+		for (Widelands::InputQueue* queue : inputqueues) {
+			prod_box->add(
+			   new InputQueueDisplay(prod_box, *ibase(), *production_site, *queue, false, true),
+			   UI::Box::Resizing::kFullSize);
 		}
 
 		get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), prod_box, _("Wares"));
@@ -95,9 +98,9 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 	if (!production_site->descr().nr_working_positions()) {
 		worker_table_ = nullptr;
 	} else {
-		UI::Box* worker_box = new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
+		UI::Box* worker_box = new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 		worker_table_ = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100, UI::PanelStyle::kWui);
-		worker_caps_ = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
+		worker_caps_ = new UI::Box(worker_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 		const std::string workers_heading =
 		   (production_site->descr().nr_working_positions() == 1) ?

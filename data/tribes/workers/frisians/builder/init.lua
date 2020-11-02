@@ -56,7 +56,7 @@ descriptions:new_worker_type {
          hotspot = {9, 24},
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 50
+            priority = "50%"
          },
       },
    },

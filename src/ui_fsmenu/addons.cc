@@ -25,6 +25,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 #include "scripting/lua_table.h"
@@ -45,10 +46,10 @@ struct ProgressIndicatorWindow : public UI::Window {
 	ProgressIndicatorWindow(AddOnsCtrl* parent, const std::string& title) :
 			UI::Window(parent->get_parent(), UI::WindowStyle::kFsMenu, "progress", 0, 0, parent->get_w(), 2 * kRowButtonSize, title),
 			die_after_last_action(false),
-			box_(this, 0, 0, UI::Box::Vertical, get_inner_w()),
-			txt1_(&box_, "", UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)),
-			txt2_(&box_, "", UI::Align::kLeft, g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)),
-			progress_(&box_, 0, 0, get_w(), kRowButtonSize, UI::ProgressBar::Horizontal) {
+			box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
+			txt1_(&box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading, "", UI::Align::kCenter),
+			txt2_(&box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelParagraph, "", UI::Align::kLeft),
+			progress_(&box_, UI::PanelStyle::kFsMenu, 0, 0, get_w(), kRowButtonSize, UI::ProgressBar::Horizontal) {
 
 		box_.add(&txt1_, UI::Box::Resizing::kFullSize);
 		box_.add_space(kRowButtonSpacing);
@@ -113,21 +114,21 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowS
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                 _("Add-On Manager")),
 		fsmm_(fsmm),
-		main_box_(this, 0, 0, UI::Box::Vertical),
-		buttons_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+		main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 		warn_requirements_(&main_box_, 0, 0, get_w(), get_h() / 12, UI::PanelStyle::kFsMenu, "", UI::Align::kCenter),
-		tabs_placeholder_(&main_box_, 0, 0, 0, 0),
+		tabs_placeholder_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0),
 		tabs_(this, UI::TabPanelStyle::kFsMenu),
-		installed_addons_outer_wrapper_(&tabs_, 0, 0, UI::Box::Horizontal),
-		installed_addons_inner_wrapper_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
-		installed_addons_buttons_box_(&installed_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
-		installed_addons_box_(&installed_addons_inner_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
-		browse_addons_outer_wrapper_(&tabs_, 0, 0, UI::Box::Vertical),
-		browse_addons_inner_wrapper_(&browse_addons_outer_wrapper_, 0, 0, UI::Box::Vertical),
-		browse_addons_buttons_box_(&browse_addons_outer_wrapper_, 0, 0, UI::Box::Horizontal),
-		browse_addons_buttons_inner_box_1_(&browse_addons_buttons_box_, 0, 0, UI::Box::Vertical),
-		browse_addons_buttons_inner_box_2_(&browse_addons_buttons_inner_box_1_, 0, 0, UI::Box::Horizontal),
-		browse_addons_box_(&browse_addons_inner_wrapper_, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
+		installed_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+		installed_addons_inner_wrapper_(&installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		installed_addons_buttons_box_(&installed_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		installed_addons_box_(&installed_addons_inner_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
+		browse_addons_outer_wrapper_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		browse_addons_inner_wrapper_(&browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		browse_addons_buttons_box_(&browse_addons_outer_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+		browse_addons_buttons_inner_box_1_(&browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+		browse_addons_buttons_inner_box_2_(&browse_addons_buttons_inner_box_1_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+		browse_addons_box_(&browse_addons_inner_wrapper_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, kHugeSize, kHugeSize),
 		filter_name_(&browse_addons_buttons_inner_box_1_, 0, 0, 100, UI::PanelStyle::kFsMenu),
 		filter_verified_(&browse_addons_buttons_inner_box_2_, UI::PanelStyle::kFsMenu,
 				Vector2i(0, 0), _("Verified only"), _("Show only verified add-ons in the Browse tab")),
@@ -191,7 +192,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm) : UI::Window(&fsmm, UI::WindowS
 		uint8_t index = 0;
 		for (const auto& pair : kAddOnCategories) {
 			if (pair.first == AddOnCategory::kNone) { continue; }
-			UI::Checkbox* c = new UI::Checkbox(&browse_addons_buttons_box_, Vector2i(0, 0), g_image_cache->get(pair.second.icon),
+			UI::Checkbox* c = new UI::Checkbox(&browse_addons_buttons_box_, UI::PanelStyle::kFsMenu, Vector2i(0, 0), g_image_cache->get(pair.second.icon),
 					(boost::format(_("Toggle category ‘%s’")) % pair.second.descname()).str());
 			filter_category_[pair.first] = c;
 			c->set_state(true);
@@ -1043,16 +1044,15 @@ void AddOnsCtrl::autofix_dependencies() {
 }
 
 InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, bool enabled)
-	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 2 * kRowButtonSize + 3 * kRowButtonSpacing),
+	: UI::Panel(parent, UI::PanelStyle::kFsMenu, 0, 0, 3 * kRowButtonSize, 2 * kRowButtonSize + 3 * kRowButtonSpacing),
 	info_(info),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/menus/exit.png"), _("Uninstall")),
 	toggle_enabled_(kAddOnCategories.at(info.category).can_disable_addons ? new UI::Button(this, "on-off", 0, 0, 24, 24,
 			UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get(
 					enabled ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"),
 					enabled ? _("Disable") : _("Enable"), UI::Button::VisualState::kFlat) : nullptr),
-	category_(this, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
-	version_(this, 0, 0, 0, 0, std::to_string(info.version),
-		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
+	category_(this, UI::PanelStyle::kFsMenu, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
+	version_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings, 0, 0, 0, 0, std::to_string(info.version), UI::Align::kCenter),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
 		% (boost::format(
 			/** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
@@ -1143,7 +1143,7 @@ public:
 	: UI::Window(parent.get_parent(), UI::WindowStyle::kFsMenu, info.internal_name,
 			parent.get_x() + kRowButtonSize, parent.get_y() - kRowButtonSize,
 			parent.get_inner_w() - 2 * kRowButtonSize, parent.get_inner_h() + 2 * kRowButtonSize, info.descname()),
-	box_(this, 0, 0, UI::Box::Vertical),
+	box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 	txt_(&box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
 	voting_(&box_, "voting", 0, 0, 0, 11, kRowButtonSize - kRowButtonSpacing, _("Your vote"),
 			UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
@@ -1208,23 +1208,22 @@ private:
 };
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo& info, uint32_t installed_version, uint32_t installed_i18n_version)
-	: UI::Panel(parent, 0, 0, 3 * kRowButtonSize, 4 * kRowButtonSize),
+	: UI::Panel(parent, UI::PanelStyle::kFsMenu, 0, 0, 3 * kRowButtonSize, 4 * kRowButtonSize),
 	info_(info),
 	install_(this, "install", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/continue.png"), _("Install")),
 	upgrade_(this, "upgrade", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/buildings/menu_up_train.png"), _("Upgrade")),
 	uninstall_(this, "uninstall", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/wui/menus/exit.png"), _("Uninstall")),
 	interact_(this, "interact", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, "…", _("Comments and Votes")),
-	category_(this, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
-	verified_(this, g_image_cache->get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
-	version_(this, 0, 0, 0, 0, std::to_string(info.version),
-		UI::Align::kCenter, g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-	bottom_row_left_(this, 0, 0, 0, 0, time_string(info.upload_timestamp),
-			UI::Align::kLeft, g_style_manager->font_style(UI::FontStyle::kTooltip)),
-	bottom_row_right_(this, 0, 0, 0, 0, info.internal_name.empty() ? "" : (boost::format(_("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"))
+	category_(this, UI::PanelStyle::kFsMenu, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
+	verified_(this, UI::PanelStyle::kFsMenu, g_image_cache->get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
+	version_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings, 0, 0, 0, 0, std::to_string(info.version), UI::Align::kCenter),
+	bottom_row_left_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsTooltip, 0, 0, 0, 0, time_string(info.upload_timestamp),
+			UI::Align::kLeft),
+	bottom_row_right_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsTooltip, 0, 0, 0, 0, info.internal_name.empty() ? "" : (boost::format(_("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"))
 			% filesize_string(info.total_file_size) % info.download_count
 			% (info.votes ? (boost::format("%.2f") % info.average_rating).str() : "–")
 			% info.user_comments.size()).str(),
-		UI::Align::kRight, g_style_manager->font_style(UI::FontStyle::kTooltip)),
+		UI::Align::kRight),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
 		/** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
 		% (boost::format(_("%1$s %2$s"))

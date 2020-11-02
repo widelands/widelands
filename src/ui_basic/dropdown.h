@@ -266,7 +266,7 @@ public:
 	                  style,
 	                  button_style) {
 	}
-	~Dropdown() {
+	~Dropdown() override {
 		entry_cache_.clear();
 	}
 

@@ -81,8 +81,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                34U,
                10,
                34U,
-               /** TRANSLATORS: Title for the main menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Title for the main menu button in the editor */
+                  _("Main Menu"),
+                  pgettext("hotkey", "Esc"),
+                  UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -94,7 +97,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                12,
                34U,
                /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Tools"), "T"),
+               as_tooltip_text_with_hotkey(_("Tools"), "T", UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),

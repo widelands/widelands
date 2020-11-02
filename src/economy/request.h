@@ -60,7 +60,7 @@ public:
 	using CallbackFn = void (*)(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	Request(PlayerImmovable& target, DescriptionIndex, CallbackFn, WareWorker);
-	~Request();
+	~Request() override;
 
 	PlayerImmovable& target() const {
 		return target_;
@@ -90,8 +90,8 @@ public:
 	const Time& get_last_request_time() const {
 		return last_request_time_;
 	}
-	int32_t get_priority(int32_t cost) const;
-	uint32_t get_transfer_priority() const;
+	uint32_t get_priority(int32_t cost) const;
+	uint32_t get_normalized_transfer_priority() const;
 	uint32_t get_num_transfers() const {
 		return transfers_.size();
 	}

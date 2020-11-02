@@ -60,7 +60,7 @@ struct S2MapDescrHeader {
 
 // Some basic checks to identify obviously invalid headers
 bool is_valid_header(const S2MapDescrHeader& header) {
-	if (strncmp(header.magic, "WORLD_V1.0", 10)) {
+	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
 		return false;
 	}
 	if (header.name[19]) {
