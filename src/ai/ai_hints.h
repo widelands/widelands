@@ -34,7 +34,7 @@ enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	explicit BuildingHints(std::unique_ptr<LuaTable>);
+	explicit BuildingHints(std::unique_ptr<LuaTable>, const std::string& building_name);
 	~BuildingHints() {
 	}
 
@@ -65,10 +65,6 @@ struct BuildingHints {
 	}
 	bool is_mountain_conqueror() const {
 		return mountain_conqueror_;
-	}
-
-	bool requires_supporters() const {
-		return requires_supporters_;
 	}
 
 	bool is_shipyard() const {
@@ -122,7 +118,6 @@ private:
 	const int16_t very_weak_ai_limit_;
 	const int16_t weak_ai_limit_;
 	const int16_t normal_ai_limit_;
-	const bool requires_supporters_;
 	int trainingsites_max_percent_;
 	std::set<std::string> supported_production_;
 

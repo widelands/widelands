@@ -679,12 +679,7 @@ void DefaultAI::late_initialization() {
 		bo.expansion_type = bh.is_expansion_type();
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
-		bo.requires_supporters = bh.requires_supporters();
 		bo.set_collected_map_resource(*tribe_, bh.collects_ware_from_map());
-		if (bo.requires_supporters) {
-			log_dbg_time(
-			   gametime, " AI %d: %s strictly requires supporters\n", player_number(), bo.name);
-		}
 		bo.prohibited_till = Time(bh.get_prohibited_till() * 1000);  // value in conf is in seconds
 		bo.forced_after = Time(bh.get_forced_after() * 1000);        // value in conf is in seconds
 		if (bld.get_isport()) {
@@ -751,6 +746,10 @@ void DefaultAI::late_initialization() {
 			if (!bo.ware_outputs.empty() && !bo.production_hints.empty()) {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
+
+			// NOCOM this adds woodcutters/lumberjacks, Barbarian Hunter, Atlantean Fisher to the
+			// 'requires_supporters' list
+			bo.requires_supporters = prod.needs_supporters();
 
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
@@ -1691,7 +1690,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.rangers_nearby = 0;
 	field.space_consumers_nearby = 0;
 	field.supporters_nearby.clear();
-	field.supporters_nearby.resize(wares.size());
 	field.unconnected_nearby = false;
 
 	// collect information about productionsites nearby
@@ -2779,14 +2777,12 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
 
 				// Some productionsites strictly require supporting sites nearby
+				uint8_t count_supporters_nearby = 0;
 				if (bo.requires_supporters) {
-					uint16_t supporters_nearby = 0;
-					for (auto output : bo.ware_outputs) {
-						supporters_nearby += bf->supporters_nearby.at(output);
-					}
-					if (supporters_nearby == 0) {
+					if (bf->supporters_nearby.count(bo.desc->name()) != 1) {
 						continue;
 					}
+					count_supporters_nearby = bf->supporters_nearby.at(bo.desc->name());
 				}
 
 				// this can be only a well (as by now)
@@ -2832,7 +2828,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					        (bf->trees_nearby - trees_nearby_treshold_) / 10;
 
 					// consider cutters and rangers nearby
-					prio += 2 * bf->supporters_nearby.at(bo.get_collected_map_resource()) *
+					prio += 2 * count_supporters_nearby *
 					        std::abs(management_data.get_military_number_at(25));
 					prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) *
 					        std::abs(management_data.get_military_number_at(36)) * 3;
@@ -2882,7 +2878,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio += bf->supporters_nearby.at(bo.get_collected_map_resource()) * 5;
+					prio += count_supporters_nearby * 5;
 
 					prio += (bf->critters_nearby * 3) - 8 -
 					        5 * bf->collecting_producers_nearby.at(bo.get_collected_map_resource());
@@ -2901,7 +2897,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					prio += bo.primary_priority;
 
 					prio -= bf->collecting_producers_nearby.at(bo.get_collected_map_resource()) * 20;
-					prio += bf->supporters_nearby.at(bo.get_collected_map_resource()) * 20;
+					prio += count_supporters_nearby * 20;
 
 					prio += -5 + bf->fish_nearby *
 					                (1 + std::abs(management_data.get_military_number_at(63) / 15));
@@ -2946,8 +2942,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
 							        bf->space_consumers_nearby *
 							           std::abs(management_data.get_military_number_at(102)) / 5 -
-							        bf->rocks_nearby / 3 + bf->supporters_nearby.at(ph) * 3;
+							        bf->rocks_nearby / 3;
 						}
+						prio += count_supporters_nearby * 3;
 						// don't block port building spots with trees
 						if (bf->unowned_portspace_vicinity_nearby > 0) {
 							prio -= 500;
@@ -2986,8 +2983,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						for (auto ph : bo.production_hints) {
 							assert(ph != Widelands::INVALID_INDEX);
 							prio += bf->collecting_producers_nearby.at(ph) * 10;
-							prio -= bf->supporters_nearby.at(ph) * 15;
 						}
+						prio -= count_supporters_nearby * 15;
 
 						if (bf->enemy_nearby) {  // not close to the enemy
 							prio -= 20;
@@ -3032,8 +3029,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						for (auto ph : bo.production_hints) {
 							assert(ph != Widelands::INVALID_INDEX);
 							prio += bf->collecting_producers_nearby.at(ph) * 10;
-							prio -= bf->supporters_nearby.at(ph) * 8;
 						}
+						prio -= count_supporters_nearby * 8;
 
 						if (bf->enemy_nearby) {  // not close to the enemy
 							prio -= 20;
@@ -3079,8 +3076,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						for (auto ph : bo.production_hints) {
 							assert(ph != Widelands::INVALID_INDEX);
 							prio += bf->collecting_producers_nearby.at(ph) * 10;
-							prio -= bf->supporters_nearby.at(ph) * 20;
 						}
+						prio -= count_supporters_nearby * 20;
 
 						if (bf->enemy_nearby) {
 							prio -= 20;
@@ -3172,11 +3169,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						               (40 - current_stocklevel) / 2, kAbsValue);
 					}
 					// This considers supporters nearby
-					for (auto ph : bo.ware_outputs) {
-						prio += management_data.neuron_pool[52].get_result_safe(
-						           bf->supporters_nearby.at(ph) * 5, kAbsValue) /
-						        2;
-					}
+					prio += management_data.neuron_pool[52].get_result_safe(
+					           count_supporters_nearby * 5, kAbsValue) /
+					        2;
 
 					if (prio <= 0) {
 						continue;
@@ -6241,9 +6236,13 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 		++field.collecting_producers_nearby.at(bo.get_collected_map_resource());
 	}
 
-	if (!bo.production_hints.empty()) {
-		for (auto ph : bo.production_hints) {
-			++field.supporters_nearby.at(ph);
+	if (bo.type == BuildingObserver::Type::kProductionsite) {
+		const Widelands::ProductionSiteDescr* productionsite = dynamic_cast<const Widelands::ProductionSiteDescr*>(bo.desc);
+		for (const auto& supported : productionsite->supported_productionsites()) {
+			if (field.supporters_nearby.count(supported) != 1) {
+				field.supporters_nearby[supported] = 0;
+			}
+			++field.supporters_nearby[supported];
 		}
 	}
 

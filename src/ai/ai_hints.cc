@@ -199,7 +199,7 @@ Production Sites
         space_consumer = true,
 
 **supports_production_of**
-    This building will support the production of the given wares without producing
+    **DEPRECATED** This building will support the production of the given wares without producing
     it directly, e.g.::
 
         supports_production_of = { "fish" },
@@ -212,7 +212,7 @@ Production Sites
     production sites when deciding on the building's location.
 
 **requires_supporters**
-    This building will be built only if a supporter is nearby::
+    **DEPRECATED** This building will be built only if a supporter is nearby::
 
         requires_supporters = true,
 
@@ -230,7 +230,7 @@ Production Sites
 
 */
 
-BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
+BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string& building_name)
    : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
      needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
@@ -253,16 +253,23 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
      normal_ai_limit_(table->has_key("normal_ai_limit") ? table->get_int("normal_ai_limit") : -1),
-     requires_supporters_(
-        table->has_key("requires_supporters") ? table->get_bool("requires_supporters") : false),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    0) {
+
 	if (table->has_key("supports_production_of")) {
+		log_warn("%s: The 'supports_production_of' key in 'ai_hints' is no longer used",
+		    building_name.c_str());
+		// NOCOM get rid
 		for (const std::string& ware_name :
 		     table->get_table("supports_production_of")->array_entries<std::string>()) {
 			supported_production_.insert(ware_name);
 		}
+	}
+
+	if (table->has_key("requires_supporters")) {
+		log_warn("%s: The 'requires_supporters' key in 'ai_hints' is no longer used",
+		    building_name.c_str());
 	}
 }
 
