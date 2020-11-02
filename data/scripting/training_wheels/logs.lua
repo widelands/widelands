@@ -264,14 +264,7 @@ run(function()
    clean_up_message_boxes_and_indicators()
 
    if success then
-      -- Congratulate the player
-      sleep(4000)
-      scroll_to_field(constructionsite_field)
-      campaign_message_box(msg_finished)
-      sleep(4000)
-
-      -- Teaching is done, so mark it as solved
-      player:mark_training_wheel_as_solved(training_wheel_name)
+      finish_training_wheel_for_placing_building(constructionsite_field, log_producer.name, msg_finished, player, training_wheel_name)
    else
       -- Player was too uncooperative, we'll have to try again some time with a new game
       player:release_training_wheel_lock()

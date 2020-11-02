@@ -249,3 +249,21 @@ function wait_for_builder_or_building(player, target_field, buildingname, constr
       end
    end
 end
+
+function finish_training_wheel_for_placing_building(constructionsite_field, buildingname, msg_finished, player, training_wheel_name)
+   sleep(4000)
+   if constructionsite_field.immovable ~= nil and
+   constructionsite_field.immovable.descr.name == "constructionsite" and
+   constructionsite_field.immovable.building == buildingname then
+      -- Congratulate the player
+      scroll_to_field(constructionsite_field)
+      campaign_message_box(msg_finished)
+      sleep(4000)
+
+      -- Teaching is done, so mark it as solved
+      player:mark_training_wheel_as_solved(training_wheel_name)
+   else
+      -- Player was too uncooperative, we'll have to try again some time with a new game
+      player:release_training_wheel_lock()
+   end
+end

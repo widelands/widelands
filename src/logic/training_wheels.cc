@@ -106,6 +106,7 @@ bool TrainingWheels::acquire_lock(const std::string& objective) {
 	return current_objective_ == objective;
 }
 
+// TODO(Gunchleoc): Optionally add training wheel name so that it can be put back in the queue
 void TrainingWheels::release_lock() {
 	current_objective_ = "";
 }
