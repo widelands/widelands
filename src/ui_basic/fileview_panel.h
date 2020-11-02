@@ -33,7 +33,7 @@ namespace UI {
  */
 class FileViewPanel : public TabPanel {
 public:
-	FileViewPanel(Panel* parent, UI::PanelStyle scrollbar_style, UI::TabPanelStyle background_style);
+	FileViewPanel(Panel* parent, UI::TabPanelStyle background_style);
 
 	/// Reads the text for the active tab from 'lua_script' if it hasn't been loaded yet.
 	void load_tab_contents();
@@ -48,7 +48,6 @@ private:
 	const int padding_;
 	int contents_width_;
 	int contents_height_;
-	const UI::PanelStyle panel_style_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

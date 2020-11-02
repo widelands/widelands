@@ -46,7 +46,7 @@ struct GeneralStatisticsMenu : public UI::UniqueWindow {
 	};
 
 	GeneralStatisticsMenu(InteractiveGameBase&, Registry&);
-	virtual ~GeneralStatisticsMenu();
+	~GeneralStatisticsMenu() override;
 
 private:
 	Registry* my_registry_;

@@ -141,10 +141,12 @@ protected:
 		graphic_resolution_changed_subscriber_.reset();
 	}
 
+	const WindowStyle window_style_;
+	const WindowStyleInfo& window_style_info_;
+	const FontStyleInfo& title_style_;
+
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);
-
-	WindowStyleInfo style_;
 
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height

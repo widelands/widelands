@@ -316,7 +316,6 @@ private:
 	int total_width_;
 	int32_t lineheight_;
 	const uint32_t headerheight_;
-	const UI::PanelStyle style_;
 	const UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar

@@ -26,6 +26,7 @@
 namespace UI {
 
 SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
+                                     const PanelStyle s,
                                      int32_t x,
                                      int32_t y,
                                      uint32_t orientation,
@@ -34,6 +35,7 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
                                      int32_t max_x,
                                      int32_t max_y)
    : UI::Box(parent,
+             s,
              x,
              y,
              orientation,
@@ -44,7 +46,8 @@ SuggestedTeamsBox::SuggestedTeamsBox(Panel* parent,
      indent_(indent),
      label_height_(g_image_cache->get("images/players/player_position_menu.png")->height() +
                    padding),
-     suggested_teams_box_label_(new UI::Textarea(this)),
+     suggested_teams_box_label_(new UI::Textarea(
+        this, s, s == PanelStyle::kWui ? FontStyle::kWuiLabel : FontStyle::kFsMenuLabel)),
      lineup_box_(nullptr) {
 	add(suggested_teams_box_label_);
 }
@@ -90,9 +93,9 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 		UI::Textarea* vs_label;
 		for (const Widelands::SuggestedTeamLineup& lineup : suggested_teams_) {
 
-			lineup_box_ =
-			   new UI::Box(this, indent_, teamlist_offset + lineup_counter * (label_height_),
-			               UI::Box::Horizontal, get_w() - indent_);
+			lineup_box_ = new UI::Box(this, panel_style_, indent_,
+			                          teamlist_offset + lineup_counter * (label_height_),
+			                          UI::Box::Horizontal, get_w() - indent_);
 
 			lineup_box_->set_size(get_w(), label_height_);
 
@@ -101,7 +104,10 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 
 				if (!is_first) {
 					lineup_box_->add_space(padding_);
-					vs_label = new UI::Textarea(lineup_box_, "x", UI::Align::kCenter);
+					vs_label = new UI::Textarea(
+					   lineup_box_, panel_style_,
+					   panel_style_ == PanelStyle::kWui ? FontStyle::kWuiLabel : FontStyle::kFsMenuLabel,
+					   "×", UI::Align::kCenter);
 					lineup_box_->add(vs_label);
 					vs_label->set_visible(true);
 					vs_labels_.push_back(vs_label);
@@ -115,8 +121,8 @@ void SuggestedTeamsBox::show(const std::vector<Widelands::SuggestedTeamLineup>& 
 					   playercolor_image(player, "images/players/player_position_menu.png");
 
 					assert(player_image);
-					player_icon = new UI::Icon(
-					   lineup_box_, 0, 0, player_image->width(), player_image->height(), player_image);
+					player_icon = new UI::Icon(lineup_box_, panel_style_, 0, 0, player_image->width(),
+					                           player_image->height(), player_image);
 					player_icon->set_visible(true);
 					player_icon->set_no_frame();
 					lineup_box_->add(player_icon);
