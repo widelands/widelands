@@ -1052,7 +1052,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddO
 					enabled ? "images/ui_basic/checkbox_checked.png" : "images/ui_basic/checkbox_empty.png"),
 					enabled ? _("Disable") : _("Enable"), UI::Button::VisualState::kFlat) : nullptr),
 	category_(this, UI::PanelStyle::kFsMenu, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
-	version_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings, 0, 0, 0, 0, std::to_string(info.version), UI::Align::kCenter),
+	version_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading, 0, 0, 0, 0, std::to_string(info.version), UI::Align::kCenter),
 	txt_(this, 0, 0, 24, 24, UI::PanelStyle::kFsMenu, (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
 		% (boost::format(
 			/** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
@@ -1216,10 +1216,12 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent, AddOnsCtrl* ctrl, const AddOnInfo&
 	interact_(this, "interact", 0, 0, 24, 24, UI::ButtonStyle::kFsMenuSecondary, "…", _("Comments and Votes")),
 	category_(this, UI::PanelStyle::kFsMenu, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
 	verified_(this, UI::PanelStyle::kFsMenu, g_image_cache->get(info.verified ? "images/ui_basic/list_selected.png" : "images/ui_basic/stop.png")),
-	version_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsGameSetupHeadings, 0, 0, 0, 0, std::to_string(info.version), UI::Align::kCenter),
+	version_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading, 0, 0, 0, 0, std::to_string(info.version), UI::Align::kCenter),
 	bottom_row_left_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsTooltip, 0, 0, 0, 0, time_string(info.upload_timestamp),
 			UI::Align::kLeft),
-	bottom_row_right_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsTooltip, 0, 0, 0, 0, info.internal_name.empty() ? "" : (boost::format(_("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"))
+	bottom_row_right_(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsTooltip, 0, 0, 0, 0, info.internal_name.empty() ? "" : (boost::format(
+		/** TRANSLATORS: Filesize · Download count · Average rating · Number of comments */
+		_("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"))
 			% filesize_string(info.total_file_size) % info.download_count
 			% (info.votes ? (boost::format("%.2f") % info.average_rating).str() : "–")
 			% info.user_comments.size()).str(),

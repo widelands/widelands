@@ -154,6 +154,13 @@ public:
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
+	// Read helptext from Lua table
+	void load_helptexts(MapObjectDescr*, const LuaTable&);
+
+	// Make sure that everything is there and that dependencies are calculated.
+	// This needs to be called exactly once during postloading.
+	void finalize_loading(Descriptions& descriptions);
+
 private:
 	// Helper functions for loading everything in the constructor
 	void load_frontiers_flags_roads(const LuaTable& table);
@@ -168,8 +175,6 @@ private:
 	// Helper function for adding a special building type (port etc.)
 	DescriptionIndex add_special_building(const std::string& buildingname,
 	                                      Descriptions& descriptions);
-	// Make sure that everything is there and that dependencies are calculated
-	void finalize_loading(Descriptions& descriptions);
 	// Helper function to calculate trainingsites proportions for the AI
 	void calculate_trainingsites_proportions(Descriptions& descriptions);
 
