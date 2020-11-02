@@ -116,7 +116,10 @@ private:
 SoldierPanel::SoldierPanel(UI::Panel& parent,
                            Widelands::EditorGameBase& gegbase,
                            Widelands::Building& building)
-   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0), egbase_(gegbase), building_(&building), last_animate_time_(0) {
+   : Panel(&parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
+     egbase_(gegbase),
+     building_(&building),
+     last_animate_time_(0) {
 	assert(building.soldier_control() != nullptr);
 	Soldier::calc_info_icon_size(building.owner().tribe(), icon_width_, icon_height_);
 	icon_width_ += 2 * kIconBorder;
