@@ -282,6 +282,8 @@ void WLApplication::setup_homedir() {
 #else
 	set_config_directory(homedir_);
 #endif
+
+	i18n::set_homedir(homedir_);
 }
 
 WLApplication* WLApplication::the_singleton = nullptr;
@@ -419,7 +421,10 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 				if (name.find(kAddOnExtension) != name.length() - kAddOnExtension.length()) {
 					log_warn("Not loading add-on '%s' (wrong file name extension)\n", name.c_str());
 				} else {
-					if (g_fs->file_exists(kAddOnDir + g_fs->file_separator() + name)) {
+					std::string path(kAddOnDir);
+					path += FileSystem::file_separator();
+					path += name;
+					if (g_fs->file_exists(path)) {
 						found.insert(name);
 						g_addons.push_back(
 						   std::make_pair(preload_addon(name), substring.substr(colonpos) == ":true"));
@@ -433,8 +438,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 			}
 			desired_addons = desired_addons.substr(commapos + 1);
 		}
-		for (std::string name : g_fs->list_directory(kAddOnDir)) {
-			std::string addon_name(g_fs->fs_filename(name.c_str()));
+		for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
+			std::string addon_name(FileSystem::fs_filename(name.c_str()));
 			if (!found.count(addon_name) &&
 			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
 				g_addons.push_back(std::make_pair(preload_addon(addon_name), false));

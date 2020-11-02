@@ -256,7 +256,8 @@ void NetAddons::download_addon_file(const std::string& name,
 
 	std::FILE* out_file = std::fopen(output.c_str(), "wb");
 	curl_easy_setopt(
-	   curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+	   curl_, CURLOPT_WRITEFUNCTION,
+	   [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
 		   return std::fwrite(ptr, size, nmemb, stream);
 	   });
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
@@ -277,13 +278,13 @@ std::string NetAddons::download_i18n(const std::string& name,
 	init();
 
 	const std::string temp_dirname =
-	   kTempFileDir + g_fs->file_separator() + name + ".mo" + kTempFileExtension;
+	   kTempFileDir + FileSystem::file_separator() + name + ".mo" + kTempFileExtension;
 	g_fs->ensure_directory_exists(temp_dirname);
 
 	const std::string relative_output =
-	   temp_dirname + g_fs->file_separator() + locale + kTempFileExtension;
+	   temp_dirname + FileSystem::file_separator() + locale + kTempFileExtension;
 	const std::string canonical_output =
-	   g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + relative_output);
+	   g_fs->canonicalize_name(i18n::get_homedir() + "/" + relative_output);
 
 	set_url_and_timeout(
 	   std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/i18n/") +
@@ -291,7 +292,8 @@ std::string NetAddons::download_i18n(const std::string& name,
 
 	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
 	curl_easy_setopt(
-	   curl_, CURLOPT_WRITEFUNCTION, [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {
+	   curl_, CURLOPT_WRITEFUNCTION,
+	   [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
 		   return std::fwrite(ptr, size, nmemb, stream);
 	   });
 	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);

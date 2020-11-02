@@ -59,8 +59,8 @@ Campaigns::Campaigns() {
 	std::vector<std::string> campaign_config_scripts = {"campaigns/campaigns.lua"};
 	for (const auto& pair : g_addons) {
 		if (pair.first.category == AddOnCategory::kCampaign) {
-			campaign_config_scripts.push_back(kAddOnDir + g_fs->file_separator() +
-			                                  pair.first.internal_name + g_fs->file_separator() +
+			campaign_config_scripts.push_back(kAddOnDir + FileSystem::file_separator() +
+			                                  pair.first.internal_name + FileSystem::file_separator() +
 			                                  "campaigns.lua");
 		}
 	}

@@ -54,6 +54,9 @@ const std::string& get_localedir();
 const std::string kAddOnLocaleDir = "addons_i18n";
 const std::string& get_addon_locale_dir();
 
+void set_homedir(const std::string&);
+const std::string& get_homedir();
+
 /// Create an object of this type to grab a textdomain and make sure that it is
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.

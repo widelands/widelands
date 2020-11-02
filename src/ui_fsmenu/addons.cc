@@ -19,6 +19,7 @@
 
 #include "ui_fsmenu/addons.h"
 
+#include <cstdlib>
 #include <iomanip>
 #include <memory>
 
@@ -411,8 +412,9 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	move_up_.sigclicked.connect([this]() {
 		const AddOnInfo info = selected_installed_addon();
 		auto it = g_addons.begin();
-		for (; it->first.internal_name != info.internal_name; ++it)
-			;
+		while (it->first.internal_name != info.internal_name) {
+			++it;
+		}
 		const bool state = it->second;
 		it = g_addons.erase(it);
 		--it;
@@ -423,8 +425,9 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	move_down_.sigclicked.connect([this]() {
 		const AddOnInfo info = selected_installed_addon();
 		auto it = g_addons.begin();
-		for (; it->first.internal_name != info.internal_name; ++it)
-			;
+		while (it->first.internal_name != info.internal_name) {
+			++it;
+		}
 		const bool state = it->second;
 		it = g_addons.erase(it);
 		++it;
@@ -435,8 +438,9 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	move_top_.sigclicked.connect([this]() {
 		const AddOnInfo info = selected_installed_addon();
 		auto it = g_addons.begin();
-		for (; it->first.internal_name != info.internal_name; ++it)
-			;
+		while (it->first.internal_name != info.internal_name) {
+			++it;
+		}
 		const bool state = it->second;
 		it = g_addons.erase(it);
 		g_addons.insert(g_addons.begin(), std::make_pair(info, state));
@@ -446,8 +450,9 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	move_bottom_.sigclicked.connect([this]() {
 		const AddOnInfo info = selected_installed_addon();
 		auto it = g_addons.begin();
-		for (; it->first.internal_name != info.internal_name; ++it)
-			;
+		while (it->first.internal_name != info.internal_name) {
+			++it;
+		}
 		const bool state = it->second;
 		it = g_addons.erase(it);
 		g_addons.push_back(std::make_pair(info, state));
@@ -573,7 +578,7 @@ void AddOnsCtrl::refresh_remotes() {
 		remotes_ = network_handler_.refresh_remotes();
 	} catch (const std::exception& e) {
 		std::string error = e.what();
-		/** TRANSLATORS: This will be inserted into the string "Server Connection Error \n by %s" */
+		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
 		const std::string bug = _("a networking bug");
 		remotes_ = {
 		   AddOnInfo{"",
@@ -694,7 +699,7 @@ void AddOnsCtrl::rebuild() {
 					return false;
 				} else if (b.votes == 0) {
 					return true;
-				} else if (a.average_rating == b.average_rating) {
+				} else if (std::abs(a.average_rating - b.average_rating) < 0.01f) {
 					// ambiguity – always choose the one with more votes
 					return a.votes > b.votes;
 				} else {
@@ -705,7 +710,7 @@ void AddOnsCtrl::rebuild() {
 					return false;
 				} else if (b.votes == 0) {
 					return true;
-				} else if (a.average_rating == b.average_rating) {
+				} else if (std::abs(a.average_rating - b.average_rating) < 0.01f) {
 					return a.votes > b.votes;
 				} else {
 					return a.average_rating > b.average_rating;
@@ -813,28 +818,19 @@ void AddOnsCtrl::update_dependency_errors() {
 					break;
 				}
 				// check if `previous_requirement` comes before `requirement`
-				bool found_prev = false;
-				bool wrong_order = false;
 				std::string prev_descname;
 				for (const AddOnState& a : g_addons) {
 					if (a.first.internal_name == previous_requirement) {
-						found_prev = true;
 						prev_descname = a.first.descname();
 						break;
 					} else if (a.first.internal_name == requirement) {
-						if (!found_prev) {
-							wrong_order = true;
-						} else {
-							break;
-						}
+						warn_requirements.push_back(
+						   (boost::format(_("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
+							                "listed in the wrong order")) %
+							addon->first.descname() % prev_descname % search_result->first.descname())
+							  .str());
+						break;
 					}
-				}
-				if (wrong_order) {
-					warn_requirements.push_back(
-					   (boost::format(_("· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are "
-					                    "listed in the wrong order")) %
-					    addon->first.descname() % prev_descname % search_result->first.descname())
-					      .str());
 				}
 			}
 		}
@@ -902,12 +898,12 @@ static void install_translation(const std::string& temp_locale_path,
 	const std::string temp_filename = g_fs->fs_filename(temp_locale_path.c_str());  // nds.mo.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));    // nds
 
-	const std::string new_locale_dir = i18n::kAddOnLocaleDir + g_fs->file_separator() + locale +
-	                                   g_fs->file_separator() +
+	const std::string new_locale_dir = i18n::kAddOnLocaleDir + FileSystem::file_separator() + locale +
+	                                   FileSystem::file_separator() +
 	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
 	g_fs->ensure_directory_exists(new_locale_dir);
 
-	const std::string new_locale_path = new_locale_dir + g_fs->file_separator() + addon_name + ".mo";
+	const std::string new_locale_path = new_locale_dir + FileSystem::file_separator() + addon_name + ".mo";
 
 	assert(!g_fs->is_directory(new_locale_path));
 	if (g_fs->file_exists(new_locale_path)) {
@@ -941,7 +937,7 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 
 	// Install the add-on
 	{
-		const std::string new_path = kAddOnDir + g_fs->file_separator() + remote.internal_name;
+		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote.internal_name;
 
 		assert(g_fs->is_directory(path));
 		if (g_fs->file_exists(new_path)) {
@@ -981,7 +977,7 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
 		}
 
 		// Upgrade the add-on
-		const std::string new_path = kAddOnDir + g_fs->file_separator() + remote.internal_name;
+		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote.internal_name;
 
 		assert(g_fs->is_directory(path));
 		assert(g_fs->is_directory(new_path));
@@ -1015,7 +1011,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 		piw.set_message_1((boost::format(_("Downloading ‘%s’…")) % info.descname()).str());
 
 		const std::string temp_dir =
-		   g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + kTempFileDir + "/" +
+		   g_fs->canonicalize_name(i18n::get_homedir() + "/" + kTempFileDir + "/" +
 		                           info.internal_name + kTempFileExtension);
 		if (g_fs->file_exists(temp_dir)) {
 			// cleanse outdated cache
@@ -1023,7 +1019,10 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 		}
 		g_fs->ensure_directory_exists(temp_dir);
 		for (const std::string& subdir : info.file_list.directories) {
-			g_fs->ensure_directory_exists(g_fs->canonicalize_name(temp_dir + "/" + subdir));
+			std::string d(temp_dir);
+			d.push_back('/');
+			d += subdir;
+			g_fs->ensure_directory_exists(g_fs->canonicalize_name(d));
 		}
 
 		piw.action_params = info.file_list.files;
@@ -1154,11 +1153,11 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 	}
 
 	// Delete the add-on…
-	g_fs->fs_unlink(kAddOnDir + g_fs->file_separator() + info.internal_name);
+	g_fs->fs_unlink(kAddOnDir + FileSystem::file_separator() + info.internal_name);
 
 	// …and its translations
 	for (const std::string& locale : g_fs->list_directory(i18n::kAddOnLocaleDir)) {
-		g_fs->fs_unlink(locale + g_fs->file_separator() + "LC_MESSAGES" + g_fs->file_separator() +
+		g_fs->fs_unlink(locale + FileSystem::file_separator() + "LC_MESSAGES" + FileSystem::file_separator() +
 		                info.internal_name + ".mo");
 	}
 

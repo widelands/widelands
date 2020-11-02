@@ -57,9 +57,9 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 		}
 		for (const auto& pair : g_addons) {
 			if (pair.first.category == AddOnCategory::kStartingCondition) {
-				const std::string script_path = kAddOnDir + g_fs->file_separator() +
-				                                pair.first.internal_name + g_fs->file_separator() +
-				                                name + ".lua";
+				const std::string script_path = kAddOnDir + FileSystem::file_separator() +
+				                                pair.first.internal_name +
+				                                FileSystem::file_separator() + name + ".lua";
 				if (!g_fs->file_exists(script_path)) {
 					continue;
 				}
@@ -104,11 +104,12 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 
 	for (const auto& pair : g_addons) {
 		if (pair.first.category == AddOnCategory::kTribes && pair.second) {
-			const std::string dirname = kAddOnDir + g_fs->file_separator() + pair.first.internal_name +
-			                            g_fs->file_separator() + "tribes";
+			const std::string dirname = kAddOnDir + FileSystem::file_separator() +
+			                            pair.first.internal_name + FileSystem::file_separator() +
+			                            "tribes";
 			if (g_fs->is_directory(dirname)) {
 				for (const std::string& tribe : g_fs->list_directory(dirname)) {
-					const std::string script_path = tribe + g_fs->file_separator() + "init.lua";
+					const std::string script_path = tribe + FileSystem::file_separator() + "init.lua";
 					if (g_fs->file_exists(script_path)) {
 						tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(script_path)));
 					}

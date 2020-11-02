@@ -631,7 +631,7 @@ int LuaDescriptions::modify_unit(lua_State* L) {
 
 	if (type == "resource") {
 		Widelands::ResourceDescription& resource_descr =
-		   *descrs.get_mutable_resource_descr(descrs.safe_resource_index(unit.c_str()));
+		   *descrs.get_mutable_resource_descr(descrs.safe_resource_index(unit));
 		if (property == "max_amount") {
 			resource_descr.set_max_amount(luaL_checkuint32(L, 5));
 		} else {

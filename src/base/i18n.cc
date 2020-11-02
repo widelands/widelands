@@ -59,6 +59,7 @@ std::vector<std::pair<std::string, std::string>> textdomains;
 std::string env_locale;
 std::string locale;
 std::string localedir;
+std::string homedir;
 
 }  // namespace
 
@@ -82,6 +83,14 @@ void set_localedir(const std::string& dname) {
 
 const std::string& get_localedir() {
 	return localedir;
+}
+
+void set_homedir(const std::string& dname) {
+	homedir = dname;
+}
+
+const std::string& get_homedir() {
+	return homedir;
 }
 
 /**
@@ -154,11 +163,11 @@ void init_locale() {
 #endif
 }
 
-static std::string canonical_addon_locale_dir = "";
+static std::string canonical_addon_locale_dir;
 const std::string& get_addon_locale_dir() {
 	if (canonical_addon_locale_dir.empty()) {
 		canonical_addon_locale_dir =
-		   g_fs->canonicalize_name(g_fs->get_userdatadir() + "/" + kAddOnLocaleDir);
+		   g_fs->canonicalize_name(FileSystem::get_userdatadir() + "/" + kAddOnLocaleDir);
 		assert(!canonical_addon_locale_dir.empty());
 	}
 	return canonical_addon_locale_dir;

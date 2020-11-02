@@ -182,7 +182,7 @@ AddOnCategory get_category(const std::string& name) {
 
 AddOnInfo preload_addon(const std::string& name) {
 	std::unique_ptr<FileSystem> fs(
-	   g_fs->make_sub_file_system(kAddOnDir + g_fs->file_separator() + name));
+	   g_fs->make_sub_file_system(kAddOnDir + FileSystem::file_separator() + name));
 	Profile profile;
 	profile.read("addon", nullptr, *fs);
 	Section& s = profile.get_safe_section("global");
