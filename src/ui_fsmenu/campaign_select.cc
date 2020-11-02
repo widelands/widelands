@@ -29,7 +29,7 @@ namespace FsMenu {
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& fsmm,
                                                            Campaigns* campvis)
-   : TwoColumnsNavigationMenu(fsmm, "choose_campaign", _("Choose Campaign")),
+   : TwoColumnsFullNavigationMenu(fsmm, "choose_campaign", _("Choose Campaign")),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Campaign description

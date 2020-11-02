@@ -35,7 +35,7 @@ namespace FsMenu {
 /**
  * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public TwoColumnsNavigationMenu {
+class FullscreenMenuLaunchGame : public TwoColumnsFullNavigationMenu {
 public:
 	FullscreenMenuLaunchGame(FullscreenMenuMain&,
 	                         GameSettingsProvider*,

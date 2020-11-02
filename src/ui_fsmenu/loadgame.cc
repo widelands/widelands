@@ -29,7 +29,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
                                                Widelands::Game& g,
                                                GameSettingsProvider* gsp,
                                                bool is_replay)
-   : TwoColumnsNavigationMenu(
+   : TwoColumnsFullNavigationMenu(
         fsmm, "choose_game", is_replay ? _("Choose Replay") : _("Choose Game")),
      load_or_save_(&right_column_content_box_,
                    g,
@@ -67,7 +67,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
-		                                                _("Return to the single player menu"));
+                                                      _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 
@@ -89,11 +89,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
 }
 void FullscreenMenuLoadGame::layout() {
-	TwoColumnsNavigationMenu::layout();
+	TwoColumnsFullNavigationMenu::layout();
 	load_or_save_.delete_button()->set_desired_size(0, standard_height_);
 }
 void FullscreenMenuLoadGame::think() {
-	TwoColumnsNavigationMenu::think();
+	TwoColumnsFullNavigationMenu::think();
 
 	if (update_game_details_) {
 		// Call performance heavy draw_minimap function only during think
@@ -172,6 +172,6 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 		break;
 	}
 
-	return TwoColumnsNavigationMenu::handle_key(down, code);
+	return TwoColumnsFullNavigationMenu::handle_key(down, code);
 }
 }  // namespace FsMenu

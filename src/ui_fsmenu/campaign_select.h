@@ -29,7 +29,7 @@ namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign
  */
-class FullscreenMenuCampaignSelect : public TwoColumnsNavigationMenu {
+class FullscreenMenuCampaignSelect : public TwoColumnsFullNavigationMenu {
 public:
 	FullscreenMenuCampaignSelect(FullscreenMenuMain&, Campaigns* campvis);
 

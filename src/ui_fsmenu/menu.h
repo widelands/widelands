@@ -66,13 +66,13 @@ private:
 	double right_column_width_factor_;
 };
 
-class TwoColumnsBackNavigationMenu : public TwoColumnsMenu {
+class TwoColumnsBasicNavigationMenu : public TwoColumnsMenu {
 public:
-	TwoColumnsBackNavigationMenu(FullscreenMenuMain&,
-	                             const std::string& name,
-	                             const std::string& title,
-	                             double right_column_width_factor = 1.0 / 3);
-	~TwoColumnsBackNavigationMenu() override;
+	TwoColumnsBasicNavigationMenu(FullscreenMenuMain&,
+	                              const std::string& name,
+	                              const std::string& title,
+	                              double right_column_width_factor = 1.0 / 3);
+	~TwoColumnsBasicNavigationMenu() override;
 
 protected:
 	void layout() override;
@@ -85,13 +85,13 @@ protected:
 	UI::Button back_;
 };
 
-class TwoColumnsNavigationMenu : public TwoColumnsBackNavigationMenu {
+class TwoColumnsFullNavigationMenu : public TwoColumnsBasicNavigationMenu {
 public:
-	TwoColumnsNavigationMenu(FullscreenMenuMain&,
-	                         const std::string& name,
-	                         const std::string& title,
-	                         double right_column_width_factor = 1.0 / 3);
-	~TwoColumnsNavigationMenu() override;
+	TwoColumnsFullNavigationMenu(FullscreenMenuMain&,
+	                             const std::string& name,
+	                             const std::string& title,
+	                             double right_column_width_factor = 1.0 / 3);
+	~TwoColumnsFullNavigationMenu() override;
 
 protected:
 	void layout() override;

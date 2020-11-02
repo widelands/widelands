@@ -28,7 +28,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/menu.h"
 namespace FsMenu {
-class FullscreenMenuNetSetupLAN : public TwoColumnsBackNavigationMenu {
+class FullscreenMenuNetSetupLAN : public TwoColumnsBasicNavigationMenu {
 public:
 	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
 

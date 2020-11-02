@@ -27,7 +27,7 @@
 #include "wlapplication_options.h"
 namespace FsMenu {
 FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
-   : TwoColumnsBackNavigationMenu(fsmm, "begin_lan_game", _("Begin LAN Game")),
+   : TwoColumnsBasicNavigationMenu(fsmm, "begin_lan_game", _("Begin LAN Game")),
 
      // Left column content
      label_opengames_(&left_column_box_,
@@ -132,7 +132,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
 }
 
 void FullscreenMenuNetSetupLAN::layout() {
-	TwoColumnsBackNavigationMenu::layout();
+	TwoColumnsBasicNavigationMenu::layout();
 
 	joingame_.set_desired_size(0, standard_height_);
 	playername_.set_desired_size(0, standard_height_);
@@ -142,7 +142,7 @@ void FullscreenMenuNetSetupLAN::layout() {
 }
 
 void FullscreenMenuNetSetupLAN::think() {
-	TwoColumnsBackNavigationMenu::think();
+	TwoColumnsBasicNavigationMenu::think();
 	change_playername();
 
 	discovery_.run();

@@ -30,7 +30,7 @@ namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign or tutorial scenario
  */
-class FullscreenMenuScenarioSelect : public TwoColumnsNavigationMenu {
+class FullscreenMenuScenarioSelect : public TwoColumnsFullNavigationMenu {
 public:
 	// If camp is not set, we'll be loading the tutorials
 	explicit FullscreenMenuScenarioSelect(FullscreenMenuMain&, CampaignData* camp = nullptr);

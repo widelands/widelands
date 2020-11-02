@@ -99,10 +99,10 @@ void TwoColumnsMenu::layout() {
 	right_column_box_.set_max_size(right_column_width_, 0);
 }
 
-TwoColumnsBackNavigationMenu::TwoColumnsBackNavigationMenu(FullscreenMenuMain& fsmm,
-                                                           const std::string& name,
-                                                           const std::string& title,
-                                                           double right_column_width_factor)
+TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(FullscreenMenuMain& fsmm,
+                                                             const std::string& name,
+                                                             const std::string& title,
+                                                             double right_column_width_factor)
    : TwoColumnsMenu(fsmm, name, title, right_column_width_factor),
      right_column_content_box_(
         &right_column_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 1 * kPadding),
@@ -118,15 +118,15 @@ TwoColumnsBackNavigationMenu::TwoColumnsBackNavigationMenu(FullscreenMenuMain& f
 	back_.sigclicked.connect([this]() { clicked_back(); });
 }
 
-TwoColumnsBackNavigationMenu::~TwoColumnsBackNavigationMenu() {
+TwoColumnsBasicNavigationMenu::~TwoColumnsBasicNavigationMenu() {
 }
 
-void TwoColumnsBackNavigationMenu::layout() {
+void TwoColumnsBasicNavigationMenu::layout() {
 	TwoColumnsMenu::layout();
 	back_.set_desired_size(right_column_width_, standard_height_);
 }
 
-bool TwoColumnsBackNavigationMenu::handle_key(bool down, SDL_Keysym code) {
+bool TwoColumnsBasicNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
@@ -139,15 +139,15 @@ bool TwoColumnsBackNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
-void TwoColumnsBackNavigationMenu::clicked_back() {
+void TwoColumnsBasicNavigationMenu::clicked_back() {
 	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
-TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
-                                                   const std::string& name,
-                                                   const std::string& title,
-                                                   double right_column_width_factor)
-   : TwoColumnsBackNavigationMenu(fsmm, name, title, right_column_width_factor),
+TwoColumnsFullNavigationMenu::TwoColumnsFullNavigationMenu(FullscreenMenuMain& fsmm,
+                                                           const std::string& name,
+                                                           const std::string& title,
+                                                           double right_column_width_factor)
+   : TwoColumnsBasicNavigationMenu(fsmm, name, title, right_column_width_factor),
 
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
 
@@ -155,16 +155,16 @@ TwoColumnsNavigationMenu::TwoColumnsNavigationMenu(FullscreenMenuMain& fsmm,
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
 }
 
-TwoColumnsNavigationMenu::~TwoColumnsNavigationMenu() {
+TwoColumnsFullNavigationMenu::~TwoColumnsFullNavigationMenu() {
 }
 
-void TwoColumnsNavigationMenu::layout() {
-	TwoColumnsBackNavigationMenu::layout();
+void TwoColumnsFullNavigationMenu::layout() {
+	TwoColumnsBasicNavigationMenu::layout();
 	back_.set_desired_size((right_column_width_ / 2) - (kPadding / 2), standard_height_);
 	ok_.set_desired_size((right_column_width_ / 2) - (kPadding / 2), standard_height_);
 }
 
-bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
+bool TwoColumnsFullNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
@@ -175,10 +175,10 @@ bool TwoColumnsNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 			break;  // not handled
 		}
 	}
-	return TwoColumnsBackNavigationMenu::handle_key(down, code);
+	return TwoColumnsBasicNavigationMenu::handle_key(down, code);
 }
 
-void TwoColumnsNavigationMenu::clicked_ok() {
+void TwoColumnsFullNavigationMenu::clicked_ok() {
 	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 }  // namespace FsMenu

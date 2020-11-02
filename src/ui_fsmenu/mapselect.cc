@@ -41,7 +41,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
-   : TwoColumnsNavigationMenu(fsmm, "choose_map", _("Choose Map")),
+   : TwoColumnsFullNavigationMenu(fsmm, "choose_map", _("Choose Map")),
      checkboxes_(
         &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
@@ -162,7 +162,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 }
 
 void FullscreenMenuMapSelect::think() {
-	TwoColumnsNavigationMenu::think();
+	TwoColumnsFullNavigationMenu::think();
 
 	if (ctrl_) {
 		ctrl_->think();

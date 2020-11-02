@@ -34,7 +34,7 @@ namespace FsMenu {
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-class FullscreenMenuMapSelect : public TwoColumnsNavigationMenu {
+class FullscreenMenuMapSelect : public TwoColumnsFullNavigationMenu {
 public:
 	FullscreenMenuMapSelect(FullscreenMenuMain&,
 	                        GameSettingsProvider*,

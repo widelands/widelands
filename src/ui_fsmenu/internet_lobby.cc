@@ -50,7 +50,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
    std::string& pwd,
    bool registered,
    std::vector<Widelands::TribeBasicInfo>& tribeinfos)
-   : TwoColumnsBackNavigationMenu(fsmm, "metaserver_lobby", _("Metaserver Lobby")),
+   : TwoColumnsBasicNavigationMenu(fsmm, "metaserver_lobby", _("Metaserver Lobby")),
      fsmm_(fsmm),
 
      // Left column content
@@ -188,7 +188,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
 }
 
 void FullscreenMenuInternetLobby::layout() {
-	TwoColumnsBackNavigationMenu::layout();
+	TwoColumnsBasicNavigationMenu::layout();
 	joingame_.set_desired_size(0, standard_height_);
 	hostgame_.set_desired_size(0, standard_height_);
 	servername_.set_desired_size(0, standard_height_);
@@ -196,7 +196,7 @@ void FullscreenMenuInternetLobby::layout() {
 
 /// think function of the UI (main loop)
 void FullscreenMenuInternetLobby::think() {
-	TwoColumnsBackNavigationMenu::think();
+	TwoColumnsBasicNavigationMenu::think();
 
 	if (!InternetGaming::ref().error()) {
 

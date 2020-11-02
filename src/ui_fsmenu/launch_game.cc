@@ -37,7 +37,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                                    GameSettingsProvider* const settings,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
-   : TwoColumnsNavigationMenu(fsmm, "launch_game", _("Launch Game")),
+   : TwoColumnsFullNavigationMenu(fsmm, "launch_game", _("Launch Game")),
      fsmm_(fsmm),
      map_details(&right_column_content_box_, preconfigured, kPadding),
 
@@ -106,7 +106,7 @@ void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
 void FullscreenMenuLaunchGame::layout() {
-	TwoColumnsNavigationMenu::layout();
+	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
 	map_details.set_max_size(0, right_column_box_.get_h() / 2);
