@@ -327,7 +327,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
      mouse_swapped_(false),
      faking_middle_mouse_button_(false),
      mouse_position_(Vector2i::zero()),
-     mouse_locked_(0),
+     mouse_locked_(false),
      mouse_compensate_warp_(Vector2i::zero()),
      should_die_(false),
 #ifdef _WIN32
@@ -440,9 +440,7 @@ WLApplication::~WLApplication() {
 
 	TTF_Quit();  // TODO(unknown): not here
 
-	if (g_fs) {
-		delete g_fs;
-	}
+	delete g_fs;
 	g_fs = nullptr;
 
 	if (redirected_stdio_) {
@@ -487,7 +485,7 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(filename_.c_str(), script_to_run_);
+			game.run_splayer_scenario_direct(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
 			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
@@ -503,8 +501,6 @@ void WLApplication::run() {
 	}
 
 	g_sh->stop_music(500);
-
-	return;
 }
 
 /**
@@ -883,7 +879,7 @@ bool WLApplication::init_settings() {
 	if (last_start + 12 * 60 * 60 < time(nullptr) || !get_config_string("uuid", "").empty()) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
-		get_config_string("uuid", generate_random_uuid().c_str());
+		get_config_string("uuid", generate_random_uuid());
 	}
 	get_config_int("last_start", time(nullptr));
 
@@ -910,7 +906,7 @@ void WLApplication::init_language() {
 		SDL_ShowSimpleMessageBox(
 		   SDL_MESSAGEBOX_ERROR, "'locale' directory not valid",
 		   std::string(i18n::get_localedir() + "\nis not a directory. Please fix this.").c_str(),
-		   NULL);
+		   nullptr);
 		log_err("%s is not a directory. Please fix this.\n", i18n::get_localedir().c_str());
 		exit(1);
 	}
@@ -1070,7 +1066,7 @@ void WLApplication::handle_commandline_parameters() {
 
 	if (commandline_.count("editor")) {
 		filename_ = commandline_["editor"];
-		if (filename_.size() && *filename_.rbegin() == '/') {
+		if (!filename_.empty() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kEditor;
@@ -1082,7 +1078,7 @@ void WLApplication::handle_commandline_parameters() {
 			throw wexception("replay can not be combined with other actions");
 		}
 		filename_ = commandline_["replay"];
-		if (filename_.size() && *filename_.rbegin() == '/') {
+		if (!filename_.empty() && *filename_.rbegin() == '/') {
 			filename_.erase(filename_.size() - 1);
 		}
 		game_type_ = GameType::kReplay;
@@ -1155,7 +1151,7 @@ void WLApplication::handle_commandline_parameters() {
 		// TODO(unknown): barf here on unknown option; the list of known options
 		// needs to be centralized
 
-		set_config_string(it->first.c_str(), it->second.c_str());
+		set_config_string(it->first, it->second);
 	}
 
 	if (commandline_.count("help") || commandline_.count("version")) {
@@ -1174,7 +1170,7 @@ void WLApplication::mainmenu() {
 	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
 
 	for (;;) {
-		if (message.size()) {
+		if (!message.empty()) {
 			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
 			UI::WLMessageBox mmb(mm.get(), UI::WindowStyle::kFsMenu, messagetitle,
@@ -1315,7 +1311,7 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 	}
 	try {
 		// Load selected tutorial-map-file
-		game.run_splayer_scenario_direct(select_campaignmap.get_map().c_str(), "");
+		game.run_splayer_scenario_direct(select_campaignmap.get_map(), "");
 	} catch (const std::exception& e) {
 		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
@@ -1329,6 +1325,16 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
  */
 // TODO(Nordfriese): This should return a `bool` to indicate whether a game was started
 void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	if (tribeinfos.empty()) {
+		UI::WLMessageBox mbox(
+		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
+		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return;
+	}
+
 	g_sh->change_music("ingame", 1000);
 
 	if (internet) {
@@ -1345,7 +1351,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 
 		// reinitalise in every run, else graphics look strange
-		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered);
+		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered, tribeinfos);
 		ns.run<MenuTarget>();
 
 		if (InternetGaming::ref().logged_in()) {
@@ -1363,7 +1369,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 
 		switch (menu_result) {
 		case MenuTarget::kHostgame: {
-			GameHost netgame(fsmm, playername);
+			GameHost netgame(fsmm, playername, tribeinfos);
 			netgame.run();
 			break;
 		}
@@ -1448,6 +1454,14 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
                              const bool preconfigured,
                              bool* canceled) {
 	MenuTarget code = MenuTarget::kNormalGame;
+	if (sp.settings().tribes.empty()) {
+		UI::WLMessageBox mbox(
+		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
+		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return false;
+	}
 	FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
 	code = lgm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
@@ -1464,7 +1478,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
 
 	if (code == MenuTarget::kScenarioGame) {  // scenario
 		try {
-			game.run_splayer_scenario_direct(sp.get_map().c_str(), "");
+			game.run_splayer_scenario_direct(sp.get_map(), "");
 		} catch (const std::exception& e) {
 			log_err("Fatal exception: %s\n", e.what());
 			emergency_save(game);
@@ -1572,8 +1586,8 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 	}
 	try {
 		// Load selected campaign-map-file
-		if (filename.size()) {
-			return game.run_splayer_scenario_direct(filename.c_str(), "");
+		if (!filename.empty()) {
+			return game.run_splayer_scenario_direct(filename, "");
 		}
 	} catch (const std::exception& e) {
 		log_err("Fatal exception: %s\n", e.what());

@@ -98,8 +98,8 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 }  // namespace
 
 InteractiveBase::Toolbar::Toolbar(Panel* parent)
-   : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
-     box(this, 0, 0, UI::Box::Horizontal),
+   : UI::Panel(parent, UI::PanelStyle::kWui, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
+     box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      repeat(0) {
 }
 
@@ -163,7 +163,7 @@ void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 }
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr, UI::PanelStyle::kWui, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      chat_provider_(c),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
@@ -758,7 +758,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
 		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
 		       egbase().map().get_waterway_max_length())
-		         .str());
+		         .str(),
+		   UI::PanelStyle::kWui);
 	}
 
 	// This portion of code keeps the speed of game so that FPS are kept within
@@ -786,7 +787,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 
 	// Node information
-	std::string node_text("");
+	std::string node_text;
 	if (game == nullptr) {
 		// Always blit node information in the editor
 		static boost::format node_format("(%i, %i, %i)");
@@ -883,14 +884,14 @@ void InteractiveBase::mainview_move() {
 
 // Open the minimap or close it if it's open
 void InteractiveBase::toggle_minimap() {
-	if (minimap_registry_.window) {
-		delete minimap_registry_.window;
-	} else {
+	if (!minimap_registry_.window) {
 		minimap_ = new MiniMap(*this, &minimap_registry_);
 		minimap_->warpview.connect([this](const Vector2f& map_pixel) {
 			map_view_.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 		});
 		mainview_move();
+	} else {
+		delete minimap_registry_.window;
 	}
 	rebuild_mapview_menu();
 }

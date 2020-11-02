@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/math.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions.h"
@@ -120,16 +121,13 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
-		} catch (const GameDataError& e) {
+		} catch (const std::exception& e) {
 			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}
 	}
 	if (actions_.empty()) {
 		throw GameDataError("No actions found");
 	}
-}
-
-ImmovableProgram::Action::~Action() {
 }
 
 /* RST
@@ -231,7 +229,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 					bob_ = true;
 					type_name_ = item.second;
 				} else if (item.first == "chance") {
-					probability_ = read_percent_to_int(item.second);
+					probability_ = math::read_percent_to_int(item.second);
 				} else {
 					throw GameDataError(
 					   "Unknown argument '%s'. Usage: [bob:]name [chance:<percent>]", argument.c_str());
@@ -246,7 +244,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				log_warn("%s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
 				         "instead.\n",
 				         descr.name().c_str());
-				probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
+				probability_ = (read_positive(item.first, 254) * math::k100PercentAsInt) / 256;
 			} else {
 				type_name_ = argument;
 			}
@@ -266,7 +264,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		if (!bob_) {
 			immovable_relations_.push_back(std::make_pair(descr.name(), type_name_));
 		}
-	} catch (const WException& e) {
+	} catch (const std::exception& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
 }
@@ -275,7 +273,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (immovable.apply_growth_delay(game)) {
 		return;
 	}
-	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
+	if (probability_ == 0 || game.logic_rand() % math::k100PercentAsInt < probability_) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
 		std::set<PlayerNumber> mfr = immovable.get_marked_for_removal();
@@ -402,12 +400,12 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 	} else {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 		if (item.first == "chance") {
-			probability_ = read_percent_to_int(item.second);
+			probability_ = math::read_percent_to_int(item.second);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 			log_warn("%s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
 			         descr.name().c_str());
-			probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
+			probability_ = (read_positive(item.first, 254) * math::k100PercentAsInt) / 256;
 		} else {
 			throw GameDataError(
 			   "Unknown argument '%s'. Usage: [chance:<percent>]", arguments.front().c_str());
@@ -416,7 +414,7 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 }
 
 void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) const {
-	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
+	if (probability_ == 0 || game.logic_rand() % math::k100PercentAsInt < probability_) {
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 	} else {
 		immovable.program_step(game);
@@ -474,12 +472,12 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 		         "'seed=<immovable_name> proximity:<percent>' in %s\n",
 		         descr.name().c_str());
 		type_name_ = arguments.front();
-		probability_ = (read_positive(arguments.at(1), 254) * kMaxProbability) / 256;
+		probability_ = (read_positive(arguments.at(1), 254) * math::k100PercentAsInt) / 256;
 	} else {
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (item.first == "proximity") {
-				probability_ = read_percent_to_int(item.second);
+				probability_ = math::read_percent_to_int(item.second);
 			} else if (item.second.empty()) {
 				// TODO(GunChleoc): It would be nice to check if target exists, but we can't guarantee
 				// the load order. Maybe in postload() one day.
@@ -511,7 +509,7 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		do {
 			mr.extend(map);
 			fringe_size += 6;
-		} while (game.logic_rand() % kMaxProbability < probability_);
+		} while (game.logic_rand() % math::k100PercentAsInt < probability_);
 
 		for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
 			mr.advance(map);
@@ -655,13 +653,13 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 		}
 
 		uint32_t randdecay = g.logic_rand() % totaldelivered;
-		for (Buildcost::iterator it = d->delivered.begin(); it != d->delivered.end(); ++it) {
-			if (randdecay < it->second) {
-				it->second--;
+		for (auto& item : d->delivered) {
+			if (randdecay < item.second) {
+				item.second--;
 				break;
 			}
 
-			randdecay -= it->second;
+			randdecay -= item.second;
 		}
 
 		imm.anim_construction_done_ = d->delivered.total();

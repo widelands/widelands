@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-11 08:45+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-23 08:46+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,8 +160,9 @@ msgstr "Wi mutten eene moje Stee finnen, waar wi dat Boomhauer-Huus bauen könen
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
-"Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr "Klick de »Jau«-Knoop mit de linke Muustaste an, um deeses Fenster to sluten, un dann wies ick di, wo dat gaht."
+"Left-click the ‘OK’ button to close this window. I'll show you where the "
+"menu is and where to show and hide the building spaces."
+msgstr "Klick de »Jau«-Knoop mit de linke Muustaste an, um deeses Fenster to sluten. Dann wies ick di, waar dat Menü is un waar du de Rüümte tum Bauen an- un utknipst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
@@ -172,9 +173,9 @@ msgstr "Deeses Fenster hier kannst du nich mit de rechten Muustast tomaken. Dat 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
-"Now that I have shown you how to show and hide the building spaces, please "
-"switch them on again so that we can place our first building."
-msgstr "Nu hebb ick di wiest, wo du Rüüümte tum Bauen wiest un verbargst. Bidde maak se weer an, daarmit wi uns' eerstes Huus bauen könen."
+"Now that I have shown you where to show and hide the building spaces, please"
+" switch them on so that we can place our first building."
+msgstr "Nu hebb ick di wiest, waar du de Rüüümte tum Bauen wiest un verbargst. Bidde maak se weer an, daarmit wi uns' eerstes Huus bauen könen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"

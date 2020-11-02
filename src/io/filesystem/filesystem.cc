@@ -157,11 +157,7 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 	}
 #endif
 	assert(root_size < path_size);  //  Otherwise an invalid read happens below.
-	if (path[root_size] != file_separator()) {
-		return false;
-	}
-
-	return true;
+	return path[root_size] == file_separator();
 }
 
 /**

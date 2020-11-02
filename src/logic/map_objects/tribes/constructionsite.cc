@@ -96,7 +96,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		opacity = kBuildingSilhouetteOpacity;
 	}
 
-	uint32_t animation_id;
+	// Initialize variable to make checks happy
+	uint32_t animation_id = animations[0].first;
 	Time time = Time();
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
@@ -169,9 +170,8 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s =
-	   g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
-	                              g_style_manager->building_statistics_style().construction_color());
+	*s = StyleManager::color_tag((boost::format(_("%i%% built")) % percent).str(),
+	                             g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -179,7 +179,8 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+InputQueue&
+ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {
@@ -328,11 +329,11 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		if (settings_) {
 			if (upcast(ProductionsiteSettings, ps, settings_.get())) {
 				for (const auto& pair : ps->ware_queues) {
-					b.inputqueue(pair.first, wwWARE).set_max_fill(pair.second.desired_fill);
+					b.inputqueue(pair.first, wwWARE, nullptr).set_max_fill(pair.second.desired_fill);
 					b.set_priority(wwWARE, pair.first, pair.second.priority);
 				}
 				for (const auto& pair : ps->worker_queues) {
-					b.inputqueue(pair.first, wwWORKER).set_max_fill(pair.second.desired_fill);
+					b.inputqueue(pair.first, wwWORKER, nullptr).set_max_fill(pair.second.desired_fill);
 					b.set_priority(wwWORKER, pair.first, pair.second.priority);
 				}
 				if (upcast(TrainingsiteSettings, ts, ps)) {
@@ -693,7 +694,6 @@ Overwrite as many values of the current settings with those of the given setting
 void ConstructionSite::apply_settings(const BuildingSettings& cs) {
 	assert(settings_);
 	settings_->apply(cs);
-	delete &cs;
 }
 
 /*

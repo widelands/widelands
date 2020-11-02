@@ -31,7 +31,7 @@ class Map;
  * and tribes (scenario packet)
  */
 struct MapPlayerNamesAndTribesPacket {
-	virtual ~MapPlayerNamesAndTribesPacket();
+	virtual ~MapPlayerNamesAndTribesPacket() = default;
 
 	virtual void read(FileSystem&, EditorGameBase&, bool, MapObjectLoader&);
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);

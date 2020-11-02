@@ -23,7 +23,9 @@
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
@@ -42,23 +44,39 @@ const uint8_t kClientUnregistered = 2;
 const uint8_t kClientIRC = 4;
 }  // namespace
 
-FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsmm,
-                                                         std::string& nick,
-                                                         std::string& pwd,
-                                                         bool registered)
+FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
+   FullscreenMenuMain& fsmm,
+   std::string& nick,
+   std::string& pwd,
+   bool registered,
+   std::vector<Widelands::TribeBasicInfo>& tribeinfos)
    : FullscreenMenuLoadMapOrGame(fsmm, _("Metaserver Lobby")),
      fsmm_(fsmm),
      // Boxes
-     left_column_(this, 0, 0, UI::Box::Vertical),
-     right_column_(this, 0, 0, UI::Box::Vertical),
+     left_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     right_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 
      // Left column content
-     label_clients_online_(&left_column_, 0, 0, 0, 0, _("Clients online:")),
+     label_clients_online_(&left_column_,
+                           UI::PanelStyle::kFsMenu,
+                           UI::FontStyle::kFsMenuLabel,
+                           0,
+                           0,
+                           0,
+                           0,
+                           _("Clients online:")),
      clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_opengames_(&right_column_, 0, 0, 0, 0, _("Open Games:")),
+     label_opengames_(&right_column_,
+                      UI::PanelStyle::kFsMenu,
+                      UI::FontStyle::kFsMenuLabel,
+                      0,
+                      0,
+                      0,
+                      0,
+                      _("Open Games:")),
      opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      joingame_(&right_column_,
                "join_game",
@@ -68,7 +86,14 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
-     servername_label_(&right_column_, 0, 0, 0, 0, _("Name of your server:")),
+     servername_label_(&right_column_,
+                       UI::PanelStyle::kFsMenu,
+                       UI::FontStyle::kFsMenuLabel,
+                       0,
+                       0,
+                       0,
+                       0,
+                       _("Name of your server:")),
      servername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      hostgame_(&right_column_,
                "host_game",
@@ -83,7 +108,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
      // Login information
      nickname_(nick),
      password_(pwd),
-     is_registered_(registered) {
+     is_registered_(registered),
+     tribeinfos_(tribeinfos) {
 
 	ok_.set_visible(false);  // We have 2 starting buttons, so we need a different layout here.
 	back_.set_title(_("Leave Lobby"));
@@ -136,10 +162,10 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(FullscreenMenuMain& fsm
 	                  "<p valign=bottom><img src=images/wui/overlays/road_building_green.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_yellow.png> %s"
 	                  "<br><img src=images/wui/overlays/road_building_red.png> %s</p></rt>") %
-	    g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("User Status")) %
-	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Administrator")) %
-	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Registered")) %
-	    g_style_manager->font_style(UI::FontStyle::kTooltip).as_font_tag(_("Unregistered")))
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader).as_font_tag(_("User Status")) %
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Administrator")) %
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Registered")) %
+	    g_style_manager->font_style(UI::FontStyle::kFsTooltip).as_font_tag(_("Unregistered")))
 	      .str();
 	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
@@ -169,7 +195,7 @@ void FullscreenMenuInternetLobby::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 
 	uint32_t butw = get_inner_w() - right_column_x_ - right_column_margin_;
-	uint32_t buth = text_height(UI::FontStyle::kLabel) + 8;
+	uint32_t buth = text_height(UI::FontStyle::kFsMenuLabel) + 8;
 
 	tabley_ = tabley_ / 2;
 	tableh_ += tabley_;
@@ -346,7 +372,7 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 		temp += er.get_string(1);
 		std::string text(chat_.get_edit_text());
 
-		if (text.size() && (text.at(0) == '@')) {  // already PM ?
+		if (!text.empty() && (text.at(0) == '@')) {  // already PM ?
 			if (text.find(' ') <= text.size()) {
 				text = text.substr(text.find(' '), text.size());
 			} else {
@@ -488,7 +514,7 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		}
 
 		// Start our relay host
-		GameHost netgame(fsmm_, InternetGaming::ref().get_local_clientname(), true);
+		GameHost netgame(fsmm_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true);
 		netgame.run();
 	} catch (...) {
 		// Log out before going back to the main menu

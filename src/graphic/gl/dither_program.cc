@@ -52,9 +52,6 @@ DitherProgram::DitherProgram() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
 }
 
-DitherProgram::~DitherProgram() {
-}
-
 void DitherProgram::add_vertex(const FieldsToDraw::Field& field,
                                const TrianglePoint triangle_point,
                                const Vector2f& texture_offset) {

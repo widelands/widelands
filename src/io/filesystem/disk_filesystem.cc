@@ -125,7 +125,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 	glob_t gl;
 	int32_t ofs;
 
-	if (path.size()) {
+	if (!path.empty()) {
 		if (is_path_absolute(path)) {
 			buf = path + "/*";
 			ofs = 0;

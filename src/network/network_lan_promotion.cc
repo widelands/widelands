@@ -472,7 +472,7 @@ void LanGameFinder::run() {
 
 		log_info("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
 
-		if (strncmp(info.magic, "GAME", 6) || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
+		if (strncmp(info.magic, "GAME", 6) != 0 || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
 			continue;
 		}
 

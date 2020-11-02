@@ -33,7 +33,6 @@
 #include "logic/map_objects/terrain_affinity.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -254,7 +253,7 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
  * Cleanup
  */
 ImmovableDescr::~ImmovableDescr() {
-	while (programs_.size()) {
+	while (!programs_.empty()) {
 		delete programs_.begin()->second;
 		programs_.erase(programs_.begin());
 	}
@@ -315,9 +314,6 @@ Immovable::Immovable(const ImmovableDescr& imm_descr,
      anim_construction_done_(0),
      program_step_(0),
      growth_delay_(0) {
-}
-
-Immovable::~Immovable() {
 }
 
 BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase&) const {
@@ -488,7 +484,7 @@ void Immovable::draw_construction(const Time& gametime,
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(info_to_draw, descr().descname(),
-	             g_style_manager->color_tag(
+	             StyleManager::color_tag(
 	                (boost::format(_("%i%% built")) % (done.get() * 100 / total.get())).str(),
 	                g_style_manager->building_statistics_style().construction_color()),
 	             point_on_dst, scale, dst);
@@ -540,12 +536,12 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	if (packet_version > kCurrentPacketVersionImmovableNoFormerBuildings) {
 		bool has_former_building = true;
 		if (packet_version > 10) {
-			has_former_building = fr.unsigned_8() == 1;
+			has_former_building = fr.unsigned_8();
 		}
 		if (has_former_building) {
 			Player* owner = imm.get_owner();
 			if (owner) {
-				DescriptionIndex idx = owner->tribe().building_index(fr.string());
+				DescriptionIndex idx = owner->tribe().safe_building_index(fr.string());
 				if (owner->tribe().has_building(idx)) {
 					imm.set_former_building(*owner->tribe().get_building_descr(idx));
 				}
@@ -692,11 +688,7 @@ void Immovable::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 	}
 }
 
-MapObject::Loader* Immovable::load(EditorGameBase& egbase,
-                                   MapObjectLoader& mol,
-                                   FileRead& fr,
-                                   const WorldLegacyLookupTable& world_lookup_table,
-                                   const TribesLegacyLookupTable& tribes_lookup_table) {
+MapObject::Loader* Immovable::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
@@ -707,12 +699,8 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 			if (packet_version < 11) {
 				fr.c_string();  // Consume obsolete owner type (world/tribes)
 			}
-			Immovable* imm = nullptr;
-
-			const std::string name = tribes_lookup_table.lookup_immovable(
-			   world_lookup_table.lookup_immovable(fr.c_string()));
-			imm = new Immovable(*egbase.descriptions().get_immovable_descr(
-			   egbase.mutable_descriptions()->load_immovable(name)));
+			Immovable* imm = new Immovable(*egbase.descriptions().get_immovable_descr(
+			   egbase.mutable_descriptions()->load_immovable(fr.c_string())));
 
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, packet_version);
@@ -739,10 +727,10 @@ bool Immovable::construct_remaining_buildcost(Game& /* game */, Buildcost* build
 	}
 
 	const Buildcost& total = descr().buildcost();
-	for (Buildcost::const_iterator it = total.begin(); it != total.end(); ++it) {
-		uint32_t delivered = d->delivered[it->first];
-		if (delivered < it->second) {
-			(*buildcost)[it->first] = it->second - delivered;
+	for (const auto& item : total) {
+		uint32_t delivered = d->delivered[item.first];
+		if (delivered < item.second) {
+			(*buildcost)[item.first] = item.second - delivered;
 		}
 	}
 
@@ -820,7 +808,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
  * Cleanup
  */
 PlayerImmovable::~PlayerImmovable() {
-	if (workers_.size()) {
+	if (!workers_.empty()) {
 		log_warn("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
 	}
 }
@@ -937,9 +925,6 @@ void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;
-
-PlayerImmovable::Loader::Loader() {
-}
 
 void PlayerImmovable::Loader::load(FileRead& fr) {
 	BaseImmovable::Loader::load(fr);

@@ -98,7 +98,7 @@ public:
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
-	~Button() override;
+	~Button() override = default;
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string&);
@@ -165,7 +165,7 @@ protected:
 	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
-	const UI::ButtonStyleInfo* style_;  // Background color and texture. Not owned.
+	const UI::ButtonStyleInfo* button_style_;  // Background color and texture. Not owned.
 };
 
 }  // namespace UI

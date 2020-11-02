@@ -85,6 +85,8 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 
 	const MapData& mapdata = *msm.get_map();
 
+	assert(!settings_->settings().tribes.empty());
+
 	settings_->set_map(
 	   mapdata.name, mapdata.filename, mapdata.theme, mapdata.background, mapdata.nrplayers);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
@@ -183,7 +185,4 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 void FullscreenMenuLaunchSPG::layout() {
 	FullscreenMenuLaunchGame::layout();
 	player_setup.force_new_dimensions(1.f, standard_element_height_);
-}
-
-FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
 }

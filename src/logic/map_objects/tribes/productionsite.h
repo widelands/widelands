@@ -31,7 +31,6 @@
 
 namespace Widelands {
 
-class Request;
 class Soldier;
 class WorkerDescr;
 
@@ -338,7 +337,7 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -369,7 +368,7 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void update_statistics_string(std::string* statistics) override;

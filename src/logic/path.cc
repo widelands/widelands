@@ -43,8 +43,8 @@ void Path::reverse() {
 	std::swap(start_, end_);
 	std::reverse(path_.begin(), path_.end());
 
-	for (uint32_t i = 0; i < path_.size(); ++i) {
-		path_[i] = get_reverse_dir(path_[i]);
+	for (Direction& dir : path_) {
+		dir = get_reverse_dir(dir);
 	}
 }
 
@@ -142,8 +142,8 @@ void CoordPath::reverse() {
 	std::reverse(path_.begin(), path_.end());
 	std::reverse(coords_.begin(), coords_.end());
 
-	for (uint32_t i = 0; i < path_.size(); ++i) {
-		path_[i] = get_reverse_dir(path_[i]);
+	for (Direction& dir : path_) {
+		dir = get_reverse_dir(dir);
 	}
 }
 

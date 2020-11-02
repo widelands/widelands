@@ -51,7 +51,7 @@ const std::string& ResourceDescription::editor_image(uint32_t const amount) cons
 	uint32_t bestmatch = 0;
 	int32_t min_diff = editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
 
-	assert(editor_pictures_.size());
+	assert(!editor_pictures_.empty());
 
 	for (uint32_t i = 1; i < editor_pictures_.size(); ++i) {
 		const int32_t diff = editor_pictures_[i].upper_limit - static_cast<int32_t>(amount);

@@ -25,7 +25,7 @@
 #include "ui_basic/scrollbar.h"
 
 CampaignDetails::CampaignDetails(Panel* parent)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      name_label_(this,
                  0,
                  0,
@@ -50,7 +50,7 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 	                      as_content(campaigndata.descname, UI::PanelStyle::kFsMenu))
 	                        .str());
 
-	std::string description = "";
+	std::string description;
 
 	if (campaigndata.visible) {
 		description = (boost::format("%s%s") %

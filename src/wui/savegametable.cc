@@ -11,6 +11,10 @@
 
 SavegameTable::SavegameTable(UI::Panel* parent, UI::PanelStyle style, bool localize_autosave)
    : UI::Table<uintptr_t>(parent, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
+     tooltip_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltip :
+                                                    UI::FontStyle::kFsTooltip),
+     tooltip_header_style_(style == UI::PanelStyle::kWui ? UI::FontStyle::kWuiTooltipHeader :
+                                                           UI::FontStyle::kFsTooltipHeader),
      localize_autosave_(localize_autosave) {
 }
 
@@ -153,23 +157,23 @@ SavegameTableReplay::SavegameTableReplay(UI::Panel* parent,
 
 void SavegameTableReplay::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
-	std::string game_mode_tooltip = "";
+	std::string game_mode_tooltip;
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
-	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
+	g_style_manager->font_style(tooltip_header_style_).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-	game_mode_tooltip += as_listitem(_("SP = Single Player"), UI::FontStyle::kTooltip);
+	game_mode_tooltip += as_listitem(_("SP = Single Player"), tooltip_style_);
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-	game_mode_tooltip += as_listitem(_("MP = Multiplayer"), UI::FontStyle::kTooltip);
+	game_mode_tooltip += as_listitem(_("MP = Multiplayer"), tooltip_style_);
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
+	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), tooltip_style_);
 
-	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(tooltip_style_)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,
@@ -217,19 +221,19 @@ SavegameTableMultiplayer::SavegameTableMultiplayer(UI::Panel* parent,
 
 void SavegameTableMultiplayer::add_columns() {
 	add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
-	std::string game_mode_tooltip = "";
+	std::string game_mode_tooltip;
 	/** TRANSLATORS: Tooltip header for the "Mode" column when choosing a game/replay to
 	load.*/
-	g_style_manager->font_style(UI::FontStyle::kTooltipHeader).as_font_tag(_("Game Mode"));
+	g_style_manager->font_style(tooltip_header_style_).as_font_tag(_("Game Mode"));
 
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-	game_mode_tooltip += as_listitem(_("MP = Multiplayer"), UI::FontStyle::kTooltip);
+	game_mode_tooltip += as_listitem(_("MP = Multiplayer"), tooltip_style_);
 	/** TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to load. */
 	/** TRANSLATORS: Make sure that you keep consistency in your translation. */
-	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), UI::FontStyle::kTooltip);
+	game_mode_tooltip += as_listitem(_("H = Multiplayer (Host)"), tooltip_style_);
 
-	game_mode_tooltip += g_style_manager->font_style(UI::FontStyle::kTooltip)
+	game_mode_tooltip += g_style_manager->font_style(tooltip_style_)
 	                        .as_font_tag(_("Numbers are the number of players."));
 
 	add_column(65,

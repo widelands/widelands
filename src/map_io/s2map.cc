@@ -38,7 +38,6 @@
 #include "logic/map_objects/map_object.h"
 #include "logic/mapregion.h"
 #include "map_io/map_loader.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 using std::cerr;
 using std::endl;
@@ -61,7 +60,7 @@ struct S2MapDescrHeader {
 
 // Some basic checks to identify obviously invalid headers
 bool is_valid_header(const S2MapDescrHeader& header) {
-	if (strncmp(header.magic, "WORLD_V1.0", 10)) {
+	if (strncmp(header.magic, "WORLD_V1.0", 10) != 0) {
 		return false;
 	}
 	if (header.name[19]) {
@@ -252,23 +251,19 @@ std::string get_world_name(S2MapLoader::WorldType world) {
 /// terrain.
 class TerrainConverter {
 public:
-	TerrainConverter(const Widelands::Descriptions& descriptions,
-	                 const WorldLegacyLookupTable& lookup_table);
+	explicit TerrainConverter(Widelands::Descriptions* descriptions);
 	Widelands::DescriptionIndex lookup(S2MapLoader::WorldType world, int8_t c) const;
 
 protected:
-	const WorldLegacyLookupTable& world_legacy_lookup_table_;
-	const Widelands::Descriptions& descriptions_;
+	Widelands::Descriptions* descriptions_;
 	const std::map<S2MapLoader::WorldType, std::vector<std::string>> table_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(TerrainConverter);
 };
 
-TerrainConverter::TerrainConverter(const Widelands::Descriptions& descriptions,
-                                   const WorldLegacyLookupTable& lookup_table)
-   : world_legacy_lookup_table_(lookup_table),
-     descriptions_(descriptions),
+TerrainConverter::TerrainConverter(Widelands::Descriptions* descriptions)
+   : descriptions_(descriptions),
      table_{std::make_pair(
                S2MapLoader::WorldType::kGreenland,
                std::vector<std::string>{
@@ -357,8 +352,14 @@ Widelands::DescriptionIndex TerrainConverter::lookup(S2MapLoader::WorldType worl
 		break;
 	}
 
-	return descriptions_.terrains().get_index(
-	   world_legacy_lookup_table_.lookup_terrain(table_.at(world)[c]));
+	const std::string& terrain_name = table_.at(world)[c];
+	try {
+		return descriptions_->load_terrain(terrain_name);
+	} catch (const WException&) {
+		throw wexception("world does not define terrain type %s, you cannot "
+		                 "play this settlers map",
+		                 terrain_name.c_str());
+	}
 }
 
 }  // namespace
@@ -375,7 +376,7 @@ int32_t S2MapLoader::preload_map(bool const scenario) {
 	map_.cleanup();
 
 	FileRead fr;
-	fr.open(*g_fs, filename_.c_str());
+	fr.open(*g_fs, filename_);
 
 	load_s2mf_header(fr);
 
@@ -465,7 +466,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	uint8_t* pc;
 
 	FileRead fr;
-	fr.open(*g_fs, filename_.c_str());
+	fr.open(*g_fs, filename_);
 
 	load_s2mf_header(fr);
 	map_.set_size(map_.width_, map_.height_);
@@ -497,11 +498,10 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		throw wexception("Section 2 (Terrain 1) not found");
 	}
 
-	std::unique_ptr<WorldLegacyLookupTable> lookup_table(
-	   create_world_legacy_lookup_table(get_world_name(worldtype_)));
+	egbase.mutable_descriptions()->set_old_world_name(get_world_name(worldtype_));
 
-	const Widelands::Descriptions& descriptions = egbase.descriptions();
-	TerrainConverter terrain_converter(descriptions, *lookup_table);
+	Widelands::Descriptions* descriptions = egbase.mutable_descriptions();
+	TerrainConverter terrain_converter(descriptions);
 
 	f = map_.fields_.get();
 	pc = section.get();
@@ -632,10 +632,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			}
 
 			if (!bobname.empty()) {
-				Widelands::DescriptionIndex const idx = descriptions.critter_index(bobname);
-				if (idx == Widelands::INVALID_INDEX) {
-					throw wexception("Missing bob type %s", bobname.c_str());
-				}
+				const Widelands::DescriptionIndex idx = descriptions->load_critter(bobname);
 				egbase.create_critter(Widelands::Coords(x, y), idx);
 			}
 		}
@@ -727,10 +724,11 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 
 			Widelands::DescriptionIndex nres = 0;
 			if (*res) {
-				nres = descriptions.resource_index(res);
-				if (nres == Widelands::INVALID_INDEX) {
-					throw wexception("world does not define resource type %s, you can not "
-					                 "play settler maps here",
+				try {
+					nres = descriptions->load_resource(res);
+				} catch (const WException&) {
+					throw wexception("world does not define resource type %s, you cannot "
+					                 "play this settlers map",
 					                 res);
 				}
 			}
@@ -770,18 +768,18 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  Now try to convert the remaining stuff to Widelands-format. This will
 	//  read and construct the name of the old immovables before the one world
 	//  conversion. We will then convert them using the
-	//  OneWorldLegacyLookupTable.
-	// Puts an immovable with the 'old_immovable_name' onto the field 'locations'.
-	auto place_immovable = [&egbase, &lookup_table, &descriptions](
-	                          const Widelands::Coords& location,
-	                          const std::string& old_immovable_name) {
-		const std::string new_immovable_name = lookup_table->lookup_immovable(old_immovable_name);
-		Widelands::DescriptionIndex const idx =
-		   descriptions.immovable_index(new_immovable_name.c_str());
-		if (idx == Widelands::INVALID_INDEX) {
-			throw wexception("Missing immovable type %s", new_immovable_name.c_str());
+	//  Descriptions compatibility information for the old world name.
+	// Puts an immovable with the 'immovable_name' onto the field 'locations'.
+	auto place_immovable = [&egbase, descriptions](
+	                          const Widelands::Coords& location, const std::string& immovable_name) {
+		try {
+			const Widelands::DescriptionIndex idx = descriptions->load_immovable(immovable_name);
+			egbase.create_immovable(location, idx, nullptr /* owner */);
+		} catch (const WException&) {
+			throw wexception("world does not define immovable type %s, you cannot "
+			                 "play this settlers map",
+			                 immovable_name.c_str());
 		}
-		egbase.create_immovable(location, idx, nullptr /* owner */);
 	};
 
 	uint8_t c;

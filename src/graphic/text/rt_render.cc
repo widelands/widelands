@@ -220,8 +220,7 @@ public:
 	explicit RenderNode(const NodeStyle& ns)
 	   : floating_(Floating::kNone), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
-	virtual ~RenderNode() {
-	}
+	virtual ~RenderNode() = default;
 
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
@@ -316,8 +315,7 @@ public:
 	explicit Layout(std::vector<std::shared_ptr<RenderNode>>& all)
 	   : h_(0), idx_(0), all_nodes_(all) {
 	}
-	virtual ~Layout() {
-	}
+	virtual ~Layout() = default;
 
 	uint16_t height() {
 		return h_;
@@ -621,8 +619,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 class TextNode : public RenderNode {
 public:
 	TextNode(FontCache& font, NodeStyle&, const std::string& txt);
-	~TextNode() override {
-	}
+	~TextNode() override = default;
 
 	std::string debug_info() const override {
 		return "'" + txt_ + "'";
@@ -711,8 +708,7 @@ public:
 		w_ = w;
 		check_size();
 	}
-	~FillingTextNode() override {
-	}
+	~FillingTextNode() override = default;
 
 	std::string debug_info() const override {
 		return "ft";
@@ -821,7 +817,7 @@ public:
 		return 0;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
-		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
+		return std::make_shared<UI::RenderedText>();
 	}
 	bool is_non_mandatory_space() const override {
 		return true;
@@ -1120,8 +1116,7 @@ public:
 	     renderer_style_(renderer_style),
 	     fontsets_(fontsets) {
 	}
-	virtual ~TagHandler() {
-	}
+	virtual ~TagHandler() = default;
 
 	virtual void enter() {
 	}
@@ -1180,8 +1175,8 @@ void TagHandler::make_text_nodes(const std::string& txt,
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(new TextNode(
-					                                              font_cache_, ns, word.c_str())));
+					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(
+					                                              new TextNode(font_cache_, ns, word)));
 				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -1732,7 +1727,7 @@ public:
 	// Handle attributes that are in rt, but not in div.
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
-		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
+		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : false);
 		trim_spaces_ = (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
 		shrink_to_fit_ = shrink_to_fit_ && trim_spaces_;
 	}
@@ -1794,7 +1789,8 @@ Renderer::Renderer(ImageCache* image_cache,
 	TextureCache* render(const std::string&, uint16_t, const TagSet&);
 }
 
-Renderer::~Renderer() {
+Renderer::~Renderer() {  // NOLINT
+	                      // FontCache, FontHandler and Parser need this
 }
 
 std::shared_ptr<RenderNode>

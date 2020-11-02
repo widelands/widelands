@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-11 08:45+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-23 19:01+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,8 +160,9 @@ msgstr "Necessitem un lloc per la cabana del llenyataire. Per fer-ho més fàcil
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
-"Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr "Feu clic esquerre en el botó «Accepta» per tancar aquesta finestra i us ho pugui ensenyar."
+"Left-click the ‘OK’ button to close this window. I'll show you where the "
+"menu is and where to show and hide the building spaces."
+msgstr "Feu clic esquerre en el botó «Accepta» per tancar aquesta finestra. Us ensenyaré on està el menú i com es mostren i amaguen els espais de construcció."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
@@ -172,9 +173,9 @@ msgstr "Observeu que no podeu tancar la finestra fent-hi un clic amb el botó dr
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
-"Now that I have shown you how to show and hide the building spaces, please "
-"switch them on again so that we can place our first building."
-msgstr "Ara que us he mostrat com podeu mostrar i amagar els espais de construcció, mostreu-los de nou per tal de construir un edifici."
+"Now that I have shown you where to show and hide the building spaces, please"
+" switch them on so that we can place our first building."
+msgstr "Ara que us he mostrat des d'on podeu mostrar i amagar els espais de construcció, mostreu-los per tal de construir un edifici."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"

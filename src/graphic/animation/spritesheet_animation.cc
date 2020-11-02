@@ -254,7 +254,7 @@ void SpriteSheetAnimation::add_scale_if_files_present(const std::string& basenam
                                                       float scale_as_float,
                                                       const std::string& scale_as_string) {
 	const std::string path =
-	   directory + g_fs->file_separator() + basename + scale_as_string + ".png";
+	   directory + FileSystem::file_separator() + basename + scale_as_string + ".png";
 	if (g_fs->file_exists(path)) {
 		mipmaps_.insert(
 		   std::make_pair(scale_as_float, std::unique_ptr<SpriteSheetMipMapEntry>(

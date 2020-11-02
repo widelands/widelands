@@ -87,11 +87,6 @@ protected:
 	void clicked_goto();
 	void act_mute(bool all);
 
-	void create_input_queue_panel(UI::Box*,
-	                              Widelands::Building&,
-	                              const Widelands::InputQueue&,
-	                              bool = false);
-
 	Widelands::Game* const game_;
 
 	bool is_dying_;

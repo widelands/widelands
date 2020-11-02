@@ -80,8 +80,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                34U,
                10,
                34U,
-               /** TRANSLATORS: Title for the main menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Title for the main menu button in the editor */
+                  _("Main Menu"),
+                  pgettext("hotkey", "Esc"),
+                  UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -93,7 +96,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                12,
                34U,
                /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Tools"), "T"),
+               as_tooltip_text_with_hotkey(_("Tools"), "T", UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -436,7 +439,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 }
 
 void EditorInteractive::load(const std::string& filename) {
-	assert(filename.size());
+	assert(!filename.empty());
 	assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();
@@ -963,7 +966,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
 	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
-	eia.load_world_units(&eia, egbase);
+	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {
 		if (filename.empty()) {

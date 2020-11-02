@@ -75,7 +75,7 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 	if (image_files.empty()) {
 		throw Widelands::GameDataError("animation without image files.");
 	}
-	if (playercolor_mask_image_files.size() &&
+	if (!playercolor_mask_image_files.empty() &&
 	    playercolor_mask_image_files.size() != image_files.size()) {
 		throw Widelands::GameDataError(
 		   "animation has %" PRIuS " frames but playercolor mask has %" PRIuS
@@ -85,8 +85,8 @@ void NonPackedAnimation::NonPackedMipMapEntry::load_graphics() {
 
 	for (const std::string& filename : image_files) {
 		const Image* image = g_image_cache->get(filename);
-		if (frames.size() && (frames.front()->width() != image->width() ||
-		                      frames.front()->height() != image->height())) {
+		if (!frames.empty() && (frames.front()->width() != image->width() ||
+		                        frames.front()->height() != image->height())) {
 			throw Widelands::GameDataError(
 			   "wrong size: (%u, %u) for file %s, should be (%u, %u) like the first frame",
 			   image->width(), image->height(), filename.c_str(), frames.front()->width(),

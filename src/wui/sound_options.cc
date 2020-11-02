@@ -48,7 +48,11 @@ public:
 	             const std::string& title,
 	             SoundType type,
 	             FxId representative_fx = kNoSoundEffect)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
+	   : UI::Box(parent,
+	             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+	             0,
+	             0,
+	             UI::Box::Horizontal),
 	     volume_(this,
 	             0,
 	             0,
@@ -121,24 +125,28 @@ constexpr int kSpacing = 12;
 }  // namespace
 
 SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
-   : UI::Box(&parent, 0, 0, UI::Box::Vertical) {
+   : UI::Box(&parent,
+             style == UI::SliderStyle::kFsMenu ? UI::PanelStyle::kFsMenu : UI::PanelStyle::kWui,
+             0,
+             0,
+             UI::Box::Vertical) {
 
 	set_inner_spacing(kSpacing);
 
 	add(new SoundControl(this, style, pgettext("sound_options", "Music"), SoundType::kMusic));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "Chat Messages"), SoundType::kChat,
-	                     g_sh->register_fx(SoundType::kChat, "sound/lobby_chat")));
+	                     SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "Game Messages"),
 	                     SoundType::kMessage,
-	                     g_sh->register_fx(SoundType::kMessage, "sound/message")));
+	                     SoundHandler::register_fx(SoundType::kMessage, "sound/message")));
 
 	add(new SoundControl(this, style, pgettext("sound_options", "User Interface"), SoundType::kUI));
 
-	add(new SoundControl(this, style, pgettext("sound_options", "Ambient Sounds"),
-	                     SoundType::kAmbient,
-	                     g_sh->register_fx(SoundType::kAmbient, "sound/create_construction_site")));
+	add(new SoundControl(
+	   this, style, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
+	   SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")));
 
 	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with
 	// Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if

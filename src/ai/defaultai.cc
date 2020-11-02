@@ -724,7 +724,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			// Read information about worker outputs
-			if (prod.output_worker_types().size() > 0) {
+			if (!prod.output_worker_types().empty()) {
 				for (const Widelands::DescriptionIndex& temp_output : prod.output_worker_types()) {
 					if (temp_output == tribe_->soldier()) {
 						bo.set_is(BuildingAttribute::kBarracks);
@@ -1665,9 +1665,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// resetting some values
 	field.enemy_nearby =
-	   (field.enemy_owned_land_nearby > std::abs(management_data.get_military_number_at(41) / 4)) ?
-	      true :
-	      false;
+	   field.enemy_owned_land_nearby > std::abs(management_data.get_military_number_at(41) / 4);
 	if (field.enemy_owned_land_nearby == 0) {
 		assert(!field.enemy_nearby);
 	}
@@ -2064,16 +2062,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	      -std::abs(management_data.get_military_number_at(159)) :
 	      0;
 
-	for (uint16_t i = 0; i < score_parts_size; i++) {
-		field.military_score_ += score_parts[i];
+	for (int32_t part : score_parts) {
+		field.military_score_ += part;
 	}
 
 	if (ai_training_mode_) {
 		if (field.military_score_ < -5000 || field.military_score_ > 2000) {
 			log_dbg_time(
 			   gametime, "Warning field.military_score_ %5d, compounds: ", field.military_score_);
-			for (uint16_t i = 0; i < score_parts_size; i++) {
-				log_dbg_time(gametime, "%d, ", score_parts[i]);
+			for (int32_t part : score_parts) {
+				log_dbg_time(gametime, "%d, ", part);
 			}
 			log_dbg_time(gametime, "\n");
 		}
@@ -2312,10 +2310,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 	const Widelands::PlayerNumber pn = player_number();
 
 	// Genetic algorithm is used here
-	static bool inputs[2 * kFNeuronBitSize] = {0};
-	for (int i = 0; i < 2 * kFNeuronBitSize; i++) {
-		inputs[i] = 0;
-	}
+	static bool inputs[2 * kFNeuronBitSize] = {false};
+	// Resetting values as the variable is static
+	std::fill(std::begin(inputs), std::end(inputs), false);
 	inputs[0] = (pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[1] = !(pow(msites_in_constr(), 2) > militarysites.size() + 2);
 	inputs[2] =
@@ -3904,11 +3901,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		}
 	}
 
-	if (alternative_path + wares_on_road <= road_length + 12) {
-		return true;
-	}
-
-	return false;
+	return alternative_path + wares_on_road <= road_length + 12;
 }
 
 // Trying to connect the flag to another one, be it from own economy
@@ -3955,9 +3948,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 		bool occupied_military_ = false;
 		Widelands::Building* b = flag.get_building();
 		if (upcast(Widelands::MilitarySite, militb, b)) {
-			if (militb->soldier_control()->stationed_soldiers().size() > 0) {
-				occupied_military_ = true;
-			}
+			occupied_military_ = !militb->soldier_control()->stationed_soldiers().empty();
 		}
 
 		// check if we are within grace time, if not or gracetime unset we need to do something
@@ -4061,7 +4052,7 @@ bool DefaultAI::create_shortcut_road(const Widelands::Flag& flag,
 			// interested to connect to it
 			// TODO(Nordfriese): Someone should update the code since the big economy splitting for the
 			// ferries
-			if (player_immovable->economy(Widelands::wwWORKER).warehouses().size() == 0) {
+			if (player_immovable->economy(Widelands::wwWORKER).warehouses().empty()) {
 				continue;
 			}
 
@@ -5415,10 +5406,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (bo.max_needed_preciousness == 0) ? -1 : 0;
 			inputs[1] = (bo.max_needed_preciousness > 0) ? 2 : 0;
 			inputs[2] = (bo.max_needed_preciousness == 0) ? -3 : 0;
@@ -5517,10 +5506,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			static int16_t tmp_target = 2;
 			tmp_target = 2;
 			static int16_t inputs[2 * kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < 2 * kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 
 			inputs[0] = (persistent_data->trees_around_cutters < 10) * 2;
 			inputs[1] = (persistent_data->trees_around_cutters < 20) * 2;
@@ -5758,10 +5745,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 
 			static int16_t inputs[kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (gametime < Time(15 * 60 * 1000)) ? -2 : 0;
 			inputs[1] = (gametime < Time(30 * 60 * 1000)) ? -2 : 0;
 			inputs[2] = (gametime < Time(45 * 60 * 1000)) ? -2 : 0;
@@ -5825,10 +5810,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		} else if (bo.max_needed_preciousness > 0) {
 
 			static int16_t inputs[4 * kFNeuronBitSize] = {0};
-			// Reseting values as the variable is static
-			for (int i = 0; i < 4 * kFNeuronBitSize; i++) {
-				inputs[i] = 0;
-			}
+			// Resetting values as the variable is static
+			std::fill(std::begin(inputs), std::end(inputs), 0);
 			inputs[0] = (bo.total_count() <= 1) ?
 			               std::abs(management_data.get_military_number_at(110)) / 10 :
 			               0;
@@ -7007,7 +6990,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		}
 	}
 
-	if (false) {
+	if (false) {  // NOLINT
 		log_dbg_time(
 		   gametime, " AI %1d: %s Buildings count: Pr:%3u, Ml:%3u, Mi:%2u, Wh:%2u, Po:%u.\n", pn,
 		   gamestring_with_leading_zeros(gametime.get()),
@@ -7015,7 +6998,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		   static_cast<uint32_t>(mines_.size()),
 		   static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
 	}
-	if (false) {
+	if (false) {  // NOLINT
 		log_dbg_time(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
 		             "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
 		             "stock", "targ.");
@@ -7057,7 +7040,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 				btype = "?";
 			}
 
-			if (true) {
+			if (true) {  // NOLINT
 				log_dbg_time(gametime, " %1s %-30s %5d(%3d%%)  %6d %6d %6d %8s %5d %5d %5d %5d\n",
 				             btype.c_str(), bo.name,
 				             bo.total_count() - bo.cnt_under_construction - bo.unoccupied_count -
@@ -7085,7 +7068,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		why += ", less then 2 mines";
 	}
 
-	if (false) {
+	if (false) {  // NOLINT
 		log_dbg_time(gametime, "Prodsites in constr: %2d, mines in constr: %2d %s %s\n",
 		             numof_psites_in_constr, mines_in_constr(),
 		             (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) ?
@@ -7094,7 +7077,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		             why.c_str());
 	}
 
-	if (false) {
+	if (false) {  // NOLINT
 		log_dbg_time(gametime,
 		             "Least military score: %5d/%3d, msites in constr: %3d,"
 		             "soldier st: %2d, strength: %3d\n",

@@ -135,16 +135,9 @@ bool CheckStepOwnTerritory::reachable_dest(const Widelands::Map& map,
                                            const Widelands::FCoords& dest) const {
 	const uint8_t endcaps = player->get_buildcaps(dest);
 	if (Widelands::BaseImmovable const* const imm = map.get_immovable(dest)) {
-		if (imm->descr().type() >= Widelands::MapObjectType::FLAG) {
-			return true;
-		} else {
-			return false;
-		}
+		return imm->descr().type() >= Widelands::MapObjectType::FLAG;
 	}
-	if (endcaps & Widelands::MOVECAPS_WALK) {
-		return true;
-	}
-	return false;
+	return endcaps & Widelands::MOVECAPS_WALK;
 }
 
 // We are looking for fields we can walk on
@@ -298,9 +291,6 @@ NearFlag::NearFlag() {
 	to_be_checked = true;
 }
 
-EventTimeQueue::EventTimeQueue() {
-}
-
 void EventTimeQueue::push(const Time& production_time, const uint32_t additional_id) {
 	queue.push_front(std::make_pair(production_time, additional_id));
 }
@@ -333,7 +323,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),
      preferred(false),
-     enemy_nearby(0),
+     enemy_nearby(false),
      enemy_accessible_(false),
      enemy_wh_nearby(false),
      unowned_land_nearby(0),
@@ -969,8 +959,6 @@ void ManagementData::test_consistency(bool itemized) {
 			assert(f_neuron_pool[i].get_id() == i);
 		}
 	}
-
-	return;
 }
 
 void ManagementData::dump_data(const Widelands::PlayerNumber pn) {
@@ -1193,10 +1181,7 @@ bool PlayersStrengths::player_seen_lately(Widelands::PlayerNumber pn, const Time
 	if (all_stats[pn].last_time_seen.is_invalid()) {
 		return false;
 	}
-	if (all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime) {
-		return true;
-	}
-	return false;
+	return all_stats[pn].last_time_seen + Duration(2U * 60U * 1000U) > gametime;
 }
 
 // This is the strength of a player
