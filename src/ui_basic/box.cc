@@ -19,7 +19,6 @@
 
 #include "ui_basic/box.h"
 
-#include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "ui_basic/scrollbar.h"
