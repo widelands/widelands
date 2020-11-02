@@ -98,8 +98,8 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 }  // namespace
 
 InteractiveBase::Toolbar::Toolbar(Panel* parent)
-   : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
-     box(this, 0, 0, UI::Box::Horizontal),
+   : UI::Panel(parent, UI::PanelStyle::kWui, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
+     box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      repeat(0) {
 }
 
@@ -163,7 +163,7 @@ void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 }
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr, UI::PanelStyle::kWui, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      chat_provider_(c),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
@@ -758,7 +758,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
 		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
 		       egbase().map().get_waterway_max_length())
-		         .str());
+		         .str(),
+		   UI::PanelStyle::kWui);
 	}
 
 	// This portion of code keeps the speed of game so that FPS are kept within

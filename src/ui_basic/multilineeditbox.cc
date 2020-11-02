@@ -53,6 +53,7 @@ struct MultilineEditbox::Data {
 	/// 0 indicates that the cursor is before the first character,
 	/// text.size() inidicates that the cursor is after the last character.
 	uint32_t cursor_pos;
+	std::string caret_image_path;
 
 	const int lineheight;
 
@@ -101,7 +102,7 @@ private:
  */
 MultilineEditbox::MultilineEditbox(
    Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : Panel(parent, x, y, w, h), d_(new Data(*this, g_style_manager->editbox_style(style))) {
+   : Panel(parent, style, x, y, w, h), d_(new Data(*this, g_style_manager->editbox_style(style))) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
@@ -109,10 +110,11 @@ MultilineEditbox::MultilineEditbox(
 }
 
 MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& init_style)
-   : scrollbar(
-        &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
+   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), o.panel_style_),
      style(init_style),
      cursor_pos(0),
+     caret_image_path(o.panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
+                                                           "images/ui_basic/caret_fs.png"),
      lineheight(text_height(style.font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
@@ -154,7 +156,7 @@ void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
 	calculate_selection_boundaries(start, end);
 	ww.draw(dst, Vector2i(0, -int32_t(scrollbar.get_scrollpos())), UI::Align::kLeft,
 	        with_caret ? cursor_pos : std::numeric_limits<uint32_t>::max(),
-	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos());
+	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
 /**

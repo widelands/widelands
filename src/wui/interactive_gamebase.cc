@@ -81,8 +81,11 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                34U,
                10,
                34U,
-               /** TRANSLATORS: Title for the main menu button in the game */
-               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Title for the main menu button in the game */
+                  _("Main Menu"),
+                  pgettext("hotkey", "Esc"),
+                  UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),

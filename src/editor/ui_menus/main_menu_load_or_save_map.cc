@@ -43,13 +43,16 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 
      show_empty_dirs_(show_empty_dirs),
 
-     main_box_(this, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
+     main_box_(this, UI::PanelStyle::kWui, padding_, padding_, UI::Box::Vertical, 0, 0, padding_),
 
-     table_and_details_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
-     table_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     table_and_details_box_(
+        &main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     table_box_(
+        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
      table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
-     map_details_box_(&table_and_details_box_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
+     map_details_box_(
+        &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
      map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, parent.egbase()),
 
      display_mode_(&table_box_,
@@ -65,12 +68,12 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiSecondary),
 
-     table_footer_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     table_footer_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
 
-     directory_info_(&main_box_, 0, 0, 0, 0),
+     directory_info_(&main_box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0),
 
      // Bottom button row
-     button_box_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
+     button_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
 
