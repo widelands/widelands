@@ -27,8 +27,8 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/textarea.h"
 #include "wlapplication_options.h"
 
@@ -37,18 +37,20 @@ inline EditorInteractive& MainMenuNewMap::eia() {
 }
 
 MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
-   : UI::UniqueWindow(&parent, "new_map_menu", &registry, 360, 150, _("New Map")),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "new_map_menu", &registry, 360, 150, _("New Map")),
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
-     box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
+     box_(this, UI::PanelStyle::kWui, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      map_size_box_(box_,
+                   UI::PanelStyle::kWui,
                    "new_map_menu",
                    4,
                    parent.egbase().map().get_width(),
                    parent.egbase().map().get_height()),
      list_(&box_, 0, 0, box_width_, 330, UI::PanelStyle::kWui),
      // Buttons
-     button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
+     button_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      ok_button_(&button_box_,
                 "create_map",
                 0,
@@ -69,7 +71,8 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent, Registry& registry)
 	box_.set_size(100, 20);  // Prevent assert failures
 	box_.add(&map_size_box_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
-	UI::Textarea* terrain_label = new UI::Textarea(&box_, _("Terrain:"));
+	UI::Textarea* terrain_label =
+	   new UI::Textarea(&box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, _("Terrain:"));
 	box_.add(terrain_label);
 	box_.add(&list_);
 	box_.add_space(2 * margin_);
@@ -121,7 +124,7 @@ void MainMenuNewMap::clicked_cancel() {
 void MainMenuNewMap::fill_list() {
 	list_.clear();
 	const Widelands::DescriptionMaintainer<Widelands::TerrainDescription>& terrains =
-	   eia().egbase().world().terrains();
+	   eia().egbase().descriptions().terrains();
 
 	for (Widelands::DescriptionIndex index = 0; index < terrains.size(); ++index) {
 		const Widelands::TerrainDescription& terrain = terrains.get(index);

@@ -179,6 +179,8 @@ protected:
 
 	UI::Panel* get_open_dropdown() override;
 
+	std::vector<Recti> focus_overlay_rects() override;
+
 private:
 	static void layout_if_alive(int);
 	void layout() override;
@@ -264,7 +266,7 @@ public:
 	                  style,
 	                  button_style) {
 	}
-	~Dropdown() {
+	~Dropdown() override {
 		entry_cache_.clear();
 	}
 

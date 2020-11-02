@@ -93,8 +93,10 @@ bool SoldierLevelRange::matches(const Soldier* soldier) const {
 	               soldier->get_defense_level(), soldier->get_evade_level());
 }
 
-SoldierDescr::SoldierDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
-   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, tribes),
+SoldierDescr::SoldierDescr(const std::string& init_descname,
+                           const LuaTable& table,
+                           Descriptions& descriptions)
+   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, descriptions),
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
@@ -841,7 +843,7 @@ void Soldier::attack_update(Game& game, State& state) {
 	std::string signal = get_signal();
 	uint32_t defenders = 0;
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "battle" || signal == "wakeup" || signal == "sleep") {
 			state.ivar3 = 0;
 			signal_handled();
@@ -1150,7 +1152,7 @@ struct SoldierDistance {
 void Soldier::defense_update(Game& game, State& state) {
 	std::string signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "blocked" || signal == "battle" || signal == "wakeup") {
 			signal_handled();
 		} else {
@@ -1410,7 +1412,7 @@ void Soldier::battle_update(Game& game, State&) {
 	molog(game.get_gametime(), "[battle] update for player %u's soldier: signal = \"%s\"\n",
 	      owner().player_number(), signal.c_str());
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "blocked") {
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle", this), 5000);
@@ -1582,7 +1584,7 @@ void Soldier::die_update(Game& game, State& state) {
 	molog(game.get_gametime(), "[die] update for player %u's soldier: signal = \"%s\"\n",
 	      owner().player_number(), signal.c_str());
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		signal_handled();
 	}
 

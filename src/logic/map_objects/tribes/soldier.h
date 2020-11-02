@@ -66,7 +66,7 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	SoldierDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~SoldierDescr() override {
 	}
 

@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "larch_summer_sapling",
    descname = _ "Larch (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "larch_summer_pole",
    descname = _ "Larch (Pole)",
    size = "small",
@@ -59,7 +59,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "larch_summer_mature",
    descname = _ "Larch (Mature)",
    size = "small",
@@ -84,7 +84,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "larch_summer_old",
    descname = _ "Larch (Old)",
    species = _ "Larch",
@@ -112,7 +112,7 @@ wl.World():new_immovable_type{
          hotspot = { 15, 59 },
          sound_effect = {
             path = "sound/animals/bird6",
-            priority = 10
+            priority = "10%"
          },
       }
    },

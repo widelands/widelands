@@ -85,6 +85,7 @@ public:
 	 * Lua Methods
 	 */
 	int get_descendant_position(lua_State* L);
+	int indicate(lua_State* L);
 
 	/*
 	 * C Methods
@@ -248,6 +249,7 @@ public:
 	int get_statistics(lua_State* L);
 	int set_statistics(lua_State* L);
 	int get_is_building_road(lua_State* L);
+	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
 
 	/*

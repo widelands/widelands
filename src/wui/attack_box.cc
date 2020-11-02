@@ -24,6 +24,7 @@
 #include <SDL_mouse.h>
 
 #include "base/macros.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/map_objects/tribes/soldier.h"
 
@@ -34,7 +35,7 @@ AttackBox::AttackBox(UI::Panel* parent,
                      Widelands::FCoords* target,
                      uint32_t const x,
                      uint32_t const y)
-   : UI::Box(parent, x, y, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kWui, x, y, UI::Box::Vertical),
      player_(player),
      map_(player_->egbase().map()),
      node_coordinates_(target),
@@ -81,7 +82,7 @@ UI::Textarea& AttackBox::add_text(UI::Box& parent,
                                   UI::Align alignment,
                                   const UI::FontStyle style) {
 	UI::Textarea& result =
-	   *new UI::Textarea(&parent, str.c_str(), UI::Align::kLeft, g_style_manager->font_style(style));
+	   *new UI::Textarea(&parent, UI::PanelStyle::kWui, style, str, UI::Align::kLeft);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
@@ -185,16 +186,16 @@ void AttackBox::init() {
 	std::vector<Widelands::Soldier*> all_attackers = get_max_attackers();
 	const size_t max_attackers = all_attackers.size();
 
-	UI::Box& mainbox = *new UI::Box(this, 0, 0, UI::Box::Vertical);
+	UI::Box& mainbox = *new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	add(&mainbox);
 
-	UI::Box& linebox = *new UI::Box(&mainbox, 0, 0, UI::Box::Horizontal);
+	UI::Box& linebox = *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	mainbox.add(&linebox);
 
 	less_soldiers_ = add_button(linebox, "0", &AttackBox::send_less_soldiers,
 	                            _("Send less soldiers. Hold down Ctrl to send no soldiers"));
 
-	UI::Box& columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
+	UI::Box& columnbox = *new UI::Box(&linebox, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	linebox.add(&columnbox);
 
 	soldiers_text_.reset(&add_text(columnbox, slider_heading(max_attackers > 0 ? 1 : 0),
@@ -225,33 +226,33 @@ void AttackBox::init() {
 	boost::format tooltip_format("<p>%s%s%s</p>");
 	{
 		UI::Textarea& txt =
-		   add_text(mainbox, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kLabel);
+		   add_text(mainbox, _("Attackers:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		// Needed so we can get tooltips
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to remove him from the list of attackers")) %
 		    as_listitem(
-		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kTooltip) %
+		       _("Hold down Ctrl to remove all soldiers from the list"), UI::FontStyle::kWuiTooltip) %
 		    as_listitem(_("Hold down Shift to remove all soldiers up to the one you’re pointing at"),
-		                UI::FontStyle::kTooltip))
+		                UI::FontStyle::kWuiTooltip))
 		      .str());
 		mainbox.add(attacking_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
 
 	{
 		UI::Textarea& txt =
-		   add_text(mainbox, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kLabel);
+		   add_text(mainbox, _("Not attacking:"), UI::Align::kLeft, UI::FontStyle::kWuiLabel);
 		txt.set_handle_mouse(true);
 		txt.set_tooltip(
 		   (tooltip_format %
-		    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
+		    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 		       .as_font_tag(_("Click on a soldier to add him to the list of attackers")) %
 		    as_listitem(
-		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kTooltip) %
+		       _("Hold down Ctrl to add all soldiers to the list"), UI::FontStyle::kWuiTooltip) %
 		    as_listitem(_("Hold down Shift to add all soldiers up to the one you’re pointing at"),
-		                UI::FontStyle::kTooltip))
+		                UI::FontStyle::kWuiTooltip))
 		      .str());
 		mainbox.add(remaining_soldiers_.get(), UI::Box::Resizing::kFullSize);
 	}
@@ -295,7 +296,9 @@ AttackBox::ListOfSoldiers::ListOfSoldiers(UI::Panel* const parent,
                                           int const w,
                                           int const h,
                                           bool restrict_rows)
-   : UI::Panel(parent, x, y, w, h), restricted_row_number_(restrict_rows), attack_box_(parent_box) {
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
+     restricted_row_number_(restrict_rows),
+     attack_box_(parent_box) {
 	update_desired_size();
 }
 

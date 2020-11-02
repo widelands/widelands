@@ -29,10 +29,12 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/militarysite.h"
+#include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_descr.h"
 #include "website/json/json.h"
 #include "website/website_common.h"
 
@@ -101,14 +103,14 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 
 		if (upcast(Widelands::ProductionSiteDescr const, productionsite, building)) {
 			// Produces wares
-			if (productionsite->output_ware_types().size() > 0) {
+			if (!productionsite->output_ware_types().empty()) {
 				JSON::Array* json_wares_array = json_building->add_array("produced_wares");
 				for (Widelands::DescriptionIndex ware_index : productionsite->output_ware_types()) {
 					json_wares_array->add_empty(tribe.get_ware_descr(ware_index)->name());
 				}
 			}
 			// Produces workers
-			if (productionsite->output_worker_types().size() > 0 ||
+			if (!productionsite->output_worker_types().empty() ||
 			    productionsite->type() == Widelands::MapObjectType::TRAININGSITE) {
 				JSON::Array* json_workers_array = json_building->add_array("produced_workers");
 				for (Widelands::DescriptionIndex worker_index : productionsite->output_worker_types()) {
@@ -121,7 +123,7 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 			}
 
 			// Consumes
-			if (productionsite->input_wares().size() > 0) {
+			if (!productionsite->input_wares().empty()) {
 				JSON::Array* json_wares_array = json_building->add_array("stored_wares");
 				for (Widelands::WareAmount input : productionsite->input_wares()) {
 					const Widelands::WareDescr& ware = *tribe.get_ware_descr(input.first);
@@ -164,8 +166,7 @@ void write_buildings(const Widelands::TribeDescr& tribe, FileSystem* out_filesys
 		json_building->add_string("helptext", get_helptext(*building, tribe));
 	}
 
-	json->write_to_file(
-	   *out_filesystem, (boost::format("%s_buildings.json") % tribe.name()).str().c_str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_buildings.json") % tribe.name()).str());
 	log_info("\n");
 }
 
@@ -190,8 +191,7 @@ void write_wares(const Widelands::TribeDescr& tribe, FileSystem* out_filesystem)
 		json_ware->add_string("helptext", get_helptext(ware, tribe));
 	}
 
-	json->write_to_file(
-	   *out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str().c_str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str());
 	log_info("\n");
 }
 
@@ -223,8 +223,7 @@ void write_workers(const Widelands::TribeDescr& tribe, FileSystem* out_filesyste
 		}
 	}
 
-	json->write_to_file(
-	   *out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str().c_str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str());
 	log_info("\n");
 }
 
@@ -247,9 +246,12 @@ void write_tribes(Widelands::EditorGameBase& egbase, FileSystem* out_filesystem)
 	JSON::Array* json_tribes_array = json->add_array("tribes");
 
 	/// Tribes
-	const Widelands::Tribes& tribes = egbase.tribes();
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
 
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	if (tribeinfos.empty()) {
+		throw wexception("No tribe infos found");
+	}
 	for (const Widelands::TribeBasicInfo& tribe_info : tribeinfos) {
 		log_info("\n\n=========================\nWriting tribe: %s\n=========================\n",
 		         tribe_info.name.c_str());
@@ -262,10 +264,10 @@ void write_tribes(Widelands::EditorGameBase& egbase, FileSystem* out_filesystem)
 		std::unique_ptr<JSON::Object> json_tribe_for_file(new JSON::Object());
 		add_tribe_info(tribe_info, json_tribe_for_file.get());
 		json_tribe_for_file->write_to_file(
-		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
+		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str());
 
 		const Widelands::TribeDescr& tribe =
-		   *tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
+		   *descriptions.get_tribe_descr(descriptions.tribe_index(tribe_info.name));
 		write_buildings(tribe, out_filesystem);
 		write_wares(tribe, out_filesystem);
 		write_workers(tribe, out_filesystem);

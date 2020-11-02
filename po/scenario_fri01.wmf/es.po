@@ -5,14 +5,16 @@
 # Translators:
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Walter Benkel <tromaster@gmail.com>, 2020
+# Madkat Here, 2020
+# Thadah D. Denyse <juchuf@gmail.com>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Walter Benkel <tromaster@gmail.com>, 2020\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1102,52 +1104,71 @@ msgstr ""
 "podemos iniciar una expedición desde el puerto. ¡Ora a los dioses y date "
 "prisa!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
 msgstr "No Olvides a los Soldados"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
 msgstr "¡Soldados, al puerto!"
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
 #, lua-format
 msgid ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldier on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldier, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgid_plural ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldiers on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldiers, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgstr[0] ""
 "Con tanta prisa casi lo olvido – donde sea que desembarquemos, necesitaremos"
-" soldados para expandir y asegurar nuestra nueva colonia. Hay lugar para "
-"hasta %d soldado en nuestro barco, si a nadie le importa ir abarrotado. "
-"¡Enviemos a nuestros mejores hombres al puerto para que se preparen para "
-"embarcar y zarpar!"
+" materiales de construcción para comenzar, y soldados para asegurar y "
+"expandir nuestra nueva colonia. Incluso después de cargar la expedición, el "
+"barco debería tener suficiente espacio libre para algunas mercancías y "
+"trabajadores. Aparte de eso, debería haber lugar para hasta %d soldado, si a"
+" nadie le importa ir abarrotado. ¡Enviemos suministros de construcción y a "
+"nuestros mejores hombres al puerto cuando esté completado, para que se "
+"preparen para embarcar y zarpar!"
 msgstr[1] ""
 "Con tanta prisa casi lo olvido – donde sea que desembarquemos, necesitaremos"
-" soldados para expandir y asegurar nuestra nueva colonia. Hay lugar para "
-"hasta %d soldados en nuestro barco, si a nadie le importa ir abarrotado. "
-"¡Enviemos a nuestros mejores hombres al puerto para que se preparen para "
-"embarcar y zarpar!"
+" materiales de construcción para comenzar, y soldados para asegurar y "
+"expandir nuestra nueva colonia. Incluso después de cargar la expedición, el "
+"barco debería tener suficiente espacio libre para algunas mercancías y "
+"trabajadores. Aparte de eso, debería haber lugar para hasta %d soldados, si "
+"a nadie le importa ir abarrotado. ¡Enviemos suministros de construcción y a "
+"nuestros mejores hombres al puerto cuando esté completado, para que se "
+"preparen para embarcar y zarpar!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+msgid ""
+"All wares and workers that are loaded onto the expedition as well as some of"
+" the soldiers in the port will be carried over to the next scenario."
+msgstr ""
+"Todas las mercancías y los trabajadores que se carguen en la expedición, así"
+" como algunos de los soldados en el puerto, se transferirán al siguiente "
+"escenario."
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr "Victoria"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr "¡Hemos escapado!"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
@@ -1157,12 +1178,12 @@ msgstr ""
 "de la isla, y estoy confiado de que podremos construir un nuevo hogar en "
 "alguna esquina más pacífica de este mundo!"
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr "Felicidades"
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"

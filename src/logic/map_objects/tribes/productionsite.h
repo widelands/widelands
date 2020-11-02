@@ -31,7 +31,6 @@
 
 namespace Widelands {
 
-class Request;
 class Soldier;
 class WorkerDescr;
 
@@ -54,12 +53,10 @@ public:
 	ProductionSiteDescr(const std::string& init_descname,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 
 	Building& create_object() const override;
 
@@ -340,14 +337,14 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
 	void remove_worker(Worker&) override;
-	bool warp_worker(EditorGameBase&, const WorkerDescr& wd);
+	bool warp_worker(EditorGameBase&, const WorkerDescr& wd, int32_t slot = -1);
 
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
@@ -371,7 +368,7 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void update_statistics_string(std::string* statistics) override;

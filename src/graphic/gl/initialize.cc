@@ -51,6 +51,8 @@ SDL_GLContext initialize(
 	SDL_GLContext gl_context = SDL_GL_CreateContext(sdl_window);
 	SDL_GL_MakeCurrent(sdl_window, gl_context);
 
+	SDL_GL_SetSwapInterval(0);
+
 #ifdef USE_GLBINDING
 #ifndef GLBINDING3
 	glbinding::Binding::initialize();
@@ -189,7 +191,7 @@ SDL_GLContext initialize(
 	// does not exist for all languages, we show both the original and a localized text.
 	auto show_opengl_error_and_exit = [](const std::string& message,
 	                                     const std::string& localized_message) {
-		std::string display_message = "";
+		std::string display_message;
 		if (message != localized_message) {
 			display_message =
 			   message + "\n\n" +
@@ -202,7 +204,8 @@ SDL_GLContext initialize(
 
 		/** TRANSLATORS: Error message printed to console/command line/log file */
 		log_err("%s\n", display_message.c_str());
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), NULL);
+		SDL_ShowSimpleMessageBox(
+		   SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), nullptr);
 		exit(1);
 	};
 

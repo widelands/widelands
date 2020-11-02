@@ -62,8 +62,8 @@ BobDescr::BobDescr(const std::string& init_descname,
 }
 
 /**
- * Only tribe bobs have a vision range, since it would be irrelevant
- * for world bobs.
+ * Only tribe bobs (workers, ships) have a vision range, since it would be irrelevant
+ * for world bobs (critters).
  *
  * \returns radius (in fields) of area that the bob can see
  */
@@ -185,7 +185,7 @@ void Bob::act(Game& game, uint32_t const data) {
  */
 void Bob::do_act(Game& game) {
 	assert(!in_act_);
-	assert(stack_.size());
+	assert(!stack_.empty());
 
 	in_act_ = true;
 
@@ -385,7 +385,7 @@ void Bob::start_task_idle(Game& game, uint32_t const anim, int32_t const timeout
 }
 
 void Bob::idle_update(Game& game, State& state) {
-	if (!state.ivar1 || get_signal().size()) {
+	if (!state.ivar1 || !get_signal().empty()) {
 		return pop_task(game);
 	}
 
@@ -629,7 +629,7 @@ bool Bob::start_task_movepath(Game& game,
 }
 
 void Bob::movepath_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		return pop_task(game);
 	}
 
@@ -887,16 +887,12 @@ bool Bob::check_node_blocked(Game& game, const FCoords& field, bool) {
  * This will update the owner's viewing area.
  */
 void Bob::set_owner(Player* const player) {
-	if (owner_) {
-		owner_->remove_seer(*this, Area<FCoords>(get_position(), descr().vision_range()));
+	if (owner_ && position_.field) {
+		owner_->unsee_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
 	owner_ = player;
-	if (owner_) {
-		if (position_.field) {
-			owner_->add_seer(*this, Area<FCoords>(get_position(), descr().vision_range()));
-		} else {
-			owner_->add_seer(*this);
-		}
+	if (owner_ && position_.field) {
+		owner_->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 	}
 }
 
@@ -926,9 +922,9 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	*linkpprev_ = this;
 
 	if (owner_) {
-		owner_->update_vision(Area<FCoords>(get_position(), descr().vision_range()), true);
+		owner_->see_area(Area<FCoords>(get_position(), descr().vision_range()));
 		if (oldposition.field) {
-			owner_->update_vision(Area<FCoords>(oldposition, descr().vision_range()), false);
+			owner_->unsee_area(Area<FCoords>(oldposition, descr().vision_range()));
 		}
 	}
 
@@ -1086,12 +1082,12 @@ void Bob::Loader::load(FileRead& fr) {
 
 				if (fr.unsigned_8()) {
 					uint32_t anims[6];
-					for (int j = 0; j < 6; ++j) {
+					for (uint32_t& anim : anims) {
 						std::string dir_animname = fr.c_string();
 						if (bob.descr().is_animation_known(dir_animname)) {
-							anims[j] = bob.descr().get_animation(dir_animname, &bob);
+							anim = bob.descr().get_animation(dir_animname, &bob);
 						} else {
-							anims[j] = bob.descr().main_animation();
+							anim = bob.descr().main_animation();
 							log_warn(
 							   "Unknown directional animation '%s' for bob '%s', using main animation "
 							   "instead.\n",
@@ -1113,7 +1109,7 @@ void Bob::Loader::load(FileRead& fr) {
 				}
 
 				std::string programname = fr.c_string();
-				if (programname.size()) {
+				if (!programname.empty()) {
 					state.program = get_program(programname);
 				}
 			}

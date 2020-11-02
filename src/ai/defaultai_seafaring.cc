@@ -89,11 +89,11 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	int32_t const tree_attr = Widelands::MapObjectDescr::get_attribute_id("tree");
 	uint16_t trees = 0;
 
-	for (uint32_t j = 0; j < immovables.size(); ++j) {
-		if (immovables.at(j).object->has_attribute(rocks_attr)) {
+	for (const Widelands::ImmovableFound& imm_found : immovables) {
+		if (imm_found.object->has_attribute(rocks_attr)) {
 			++rocks;
 		}
-		if (immovables.at(j).object->has_attribute(tree_attr)) {
+		if (imm_found.object->has_attribute(tree_attr)) {
 			++trees;
 		}
 	}
@@ -177,9 +177,8 @@ bool DefaultAI::marine_main_decisions(const Time& gametime) {
 	}
 
 	// and now over ships
-	for (std::deque<ShipObserver>::iterator sp_iter = allships.begin(); sp_iter != allships.end();
-	     ++sp_iter) {
-		if (sp_iter->ship->state_is_expedition()) {
+	for (const ShipObserver& observer : allships) {
+		if (observer.ship->state_is_expedition()) {
 			++expeditions_in_progress;
 		}
 	}
@@ -345,24 +344,22 @@ bool DefaultAI::check_ships(const Time& gametime) {
 	while (!marine_task_queue.empty()) {
 		if (marine_task_queue.back() == kStopShipyard) {
 			// iterate over all production sites searching for shipyard
-			for (std::deque<ProductionSiteObserver>::iterator site = productionsites.begin();
-			     site != productionsites.end(); ++site) {
-				if (site->bo->is(BuildingAttribute::kShipyard)) {
-					if (!site->site->is_stopped()) {
-						game().send_player_start_stop_building(*site->site);
+			for (const ProductionSiteObserver& observer : productionsites) {
+				if (observer.bo->is(BuildingAttribute::kShipyard)) {
+					if (!observer.site->is_stopped()) {
+						game().send_player_start_stop_building(*observer.site);
 					}
 				}
 			}
 		}
 
 		if (marine_task_queue.back() == kReprioritize) {
-			for (std::deque<ProductionSiteObserver>::iterator site = productionsites.begin();
-			     site != productionsites.end(); ++site) {
-				if (site->bo->is(BuildingAttribute::kShipyard)) {
-					for (uint32_t k = 0; k < site->bo->inputs.size(); ++k) {
-						game().send_player_set_ware_priority(*site->site, Widelands::wwWARE,
-						                                     site->bo->inputs.at(k),
-						                                     Widelands::kPriorityHigh);
+			for (const ProductionSiteObserver& observer : productionsites) {
+				if (observer.bo->is(BuildingAttribute::kShipyard)) {
+					for (uint32_t k = 0; k < observer.bo->inputs.size(); ++k) {
+						game().send_player_set_ware_priority(*observer.site, Widelands::wwWARE,
+						                                     observer.bo->inputs.at(k),
+						                                     Widelands::WarePriority::kHigh);
 					}
 				}
 			}
@@ -371,11 +368,8 @@ bool DefaultAI::check_ships(const Time& gametime) {
 		marine_task_queue.pop_back();
 	}
 
-	if (map_allows_seafaring_) {
-		// here we indicate that normal frequency check makes sense
-		return true;
-	}
-	return false;
+	// If map_allows_seafaring_, we indicate that normal frequency check makes sense
+	return map_allows_seafaring_;
 }
 
 /**
@@ -560,7 +554,6 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 	so.last_command_time = gametime;
 	so.waiting_for_command_ = false;
-	return;
 }
 
 // Here we investigate possibility to go for open sea, preferably to unexplored territories
@@ -600,7 +593,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 				possible_directions.push_back(dir);
 			}
 			if (player_->get_vision(map.get_index(tmp_coords, map.get_width())) ==
-			    Widelands::SeeUnseeNode::kUnexplored) {
+			    Widelands::VisibleState::kUnexplored) {
 				// So this field was never seen before, the direction is inserted into
 				// new_teritory_directions, and searching in this direction quits here
 				new_teritory_directions.push_back(dir);

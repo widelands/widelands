@@ -50,12 +50,14 @@ FxId Panel::click_fx_ = kNoSoundEffect;
  * Initialize a panel, link it into the parent's queue.
  */
 Panel::Panel(Panel* const nparent,
+             const PanelStyle s,
              const int nx,
              const int ny,
              const int nw,
              const int nh,
              const std::string& tooltip_text)
-   : parent_(nparent),
+   : panel_style_(s),
+     parent_(nparent),
      first_child_(nullptr),
      last_child_(nullptr),
      mousein_child_(nullptr),
@@ -471,15 +473,21 @@ void Panel::draw(RenderTarget&) {
 void Panel::draw_border(RenderTarget&) {
 }
 
-std::vector<Recti> Panel::focus_overlay_rects() {
-	const int f = g_style_manager->focus_border_thickness();
+std::vector<Recti>
+Panel::focus_overlay_rects(const int off_x, const int off_y, const int strength_diff) {
+	const int f = g_style_manager->focus_border_thickness() + strength_diff;
 	const int16_t w = get_w();
 	const int16_t h = get_h();
-	if (w < 2 * f || h < 2 * f) {
+	if (w < 2 * (f + off_x) || h < 2 * (f + off_y)) {
 		return {Recti(0, 0, w, h)};
 	}
-	return {Recti(0, 0, w, f), Recti(0, h - f, w, f), Recti(0, f, f, h - 2 * f),
-	        Recti(w - f, f, f, h - 2 * f)};
+	return {Recti(off_x, off_y, w - 2 * off_x, f), Recti(off_x, h - off_y - f, w - 2 * off_x, f),
+	        Recti(off_x, off_y + f, f, h - 2 * f - 2 * off_y),
+	        Recti(w - off_x - f, off_y + f, f, h - 2 * f - 2 * off_y)};
+}
+
+std::vector<Recti> Panel::focus_overlay_rects() {
+	return focus_overlay_rects(0, 0, 0);
 }
 
 /**
@@ -492,6 +500,9 @@ void Panel::draw_overlay(RenderTarget& dst) {
 			if (p->parent_->focus_ != p) {
 				// doesn't have toplevel focus
 				return;
+			}
+			if (p->parent_->is_focus_toplevel()) {
+				break;
 			}
 		}
 		for (const Recti& r : focus_overlay_rects()) {
@@ -647,7 +658,7 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  * false otherwise.
  */
 bool Panel::handle_tooltip() {
-	return draw_tooltip(tooltip());
+	return draw_tooltip(tooltip(), panel_style_);
 }
 
 // Whether TAB events should be handled by this panel's parent (`false`) or by `this` (`true`)
@@ -1072,10 +1083,7 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		case SDLK_LALT:
 			return false;
 		}
-		if (code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12)) {
-			return false;
-		}
-		return true;
+		return !(code.mod & KMOD_CTRL || (code.sym >= SDLK_F1 && code.sym <= SDLK_F12));
 	}
 
 	return false;
@@ -1267,7 +1275,7 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(const std::string& text) {
+bool Panel::draw_tooltip(const std::string& text, const PanelStyle style) {
 	if (text.empty()) {
 		return false;
 	}
@@ -1275,7 +1283,9 @@ bool Panel::draw_tooltip(const std::string& text) {
 	RenderTarget& dst = *g_gr->get_render_target();
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_richtext_paragraph(text_to_render, UI::FontStyle::kTooltip);
+		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
+		                                                          UI::FontStyle::kWuiTooltip :
+		                                                          UI::FontStyle::kFsTooltip);
 	}
 
 	constexpr uint32_t kTipWidthMax = 360;

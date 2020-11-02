@@ -32,10 +32,6 @@
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 CLANG_DIAG_OFF("-Wused-but-marked-unused")
 
-namespace Widelands {
-class World;
-}  // namespace Widelands
-
 /******************/
 /* Helper classes */
 /******************/

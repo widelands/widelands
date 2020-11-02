@@ -22,6 +22,7 @@
 #include "base/macros.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -38,20 +39,21 @@
 #include "wui/unique_window_handler.h"
 #include "wui/waresdisplay.h"
 
-static const char* pic_bulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
-static const char* pic_dismantle = "images/wui/buildings/menu_bld_dismantle.png";
-static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
-static const char* pic_mute_this = "images/wui/buildings/menu_mute_this.png";
-static const char* pic_unmute_this = "images/wui/buildings/menu_unmute_this.png";
-static const char* pic_mute_all = "images/wui/buildings/menu_mute_all.png";
-static const char* pic_unmute_all = "images/wui/buildings/menu_unmute_all.png";
+constexpr const char* const kImgBulldoze = "images/wui/buildings/menu_bld_bulldoze.png";
+constexpr const char* const kImgDismantle = "images/wui/buildings/menu_bld_dismantle.png";
+constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
+constexpr const char* const kImgMuteThis = "images/wui/buildings/menu_mute_this.png";
+constexpr const char* const kImgUnmuteThis = "images/wui/buildings/menu_unmute_this.png";
+constexpr const char* const kImgMuteAll = "images/wui/buildings/menu_mute_all.png";
+constexpr const char* const kImgUnmuteAll = "images/wui/buildings/menu_unmute_all.png";
 
 BuildingWindow::BuildingWindow(InteractiveBase& parent,
                                UI::UniqueWindow::Registry& reg,
                                Widelands::Building& b,
                                const Widelands::BuildingDescr& descr,
                                bool avoid_fastclick)
-   : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "building_window", &reg, Width, 0, b.descr().descname()),
      game_(parent.get_game()),
      is_dying_(false),
      parent_(&parent),
@@ -109,12 +111,12 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	toggle_workarea_ = nullptr;
 	avoid_fastclick_ = avoid_fastclick;
 
-	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
+	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
 
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
 
-	capsbuttons_ = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
+	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);
 
 	// actually create buttons on the first call to think(),
@@ -188,17 +190,17 @@ void BuildingWindow::think() {
 			NEVER_HERE();
 		}
 		mute_this_->set_pic(
-		   g_image_cache->get(building->mute_messages() ? pic_unmute_this : pic_mute_this));
+		   g_image_cache->get(building->mute_messages() ? kImgUnmuteThis : kImgMuteThis));
 		mute_this_->set_tooltip(building->mute_messages() ? _("Muted – click to unmute") :
 		                                                    _("Mute this building’s messages"));
 		if (building->owner().is_muted(
 		       building->owner().tribe().safe_building_index(building->descr().name()))) {
 			mute_this_->set_enabled(false);
-			mute_all_->set_pic(g_image_cache->get(pic_unmute_all));
+			mute_all_->set_pic(g_image_cache->get(kImgUnmuteAll));
 			mute_all_->set_tooltip(_("All buildings of this type are muted – click to unmute"));
 		} else {
 			mute_this_->set_enabled(true);
-			mute_all_->set_pic(g_image_cache->get(pic_mute_all));
+			mute_all_->set_pic(g_image_cache->get(kImgMuteAll));
 			mute_all_->set_tooltip(_("Mute all buildings of this type"));
 		}
 	}
@@ -272,7 +274,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			// enhance/destroy/dismantle buttons are fixed in their position
 			// and not subject to the number of buttons on the right of the
 			// panel.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 		}  // upcast to productionsite
 
@@ -308,7 +310,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (capscache_ & Widelands::Building::PCap_Bulldoze) {
 			UI::Button* destroybtn =
 			   new UI::Button(capsbuttons, "destroy", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_bulldoze), _("Destroy"));
+			                  g_image_cache->get(kImgBulldoze), _("Destroy"));
 			destroybtn->sigclicked.connect([this]() { act_bulldoze(); });
 			capsbuttons->add(destroybtn);
 
@@ -322,7 +324,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				if (!wares.empty()) {
 					UI::Button* dismantlebtn =
 					   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-					                  g_image_cache->get(pic_dismantle),
+					                  g_image_cache->get(kImgDismantle),
 					                  std::string(_("Dismantle")) + "<br>" +
 					                     g_style_manager->ware_info_style(UI::WareInfoStyle::kNormal)
 					                        .header_font()
@@ -338,7 +340,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 			capsbuttons->add_inf_space();
 		}
@@ -346,10 +348,10 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (allow_muting(building->descr())) {
 			mute_this_ =
 			   new UI::Button(capsbuttons, "mute_this", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_mute_this), "" /* set by next think() */);
+			                  g_image_cache->get(kImgMuteThis), "" /* set by next think() */);
 			mute_all_ =
 			   new UI::Button(capsbuttons, "mute_all", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_mute_all), "" /* set by next think() */);
+			                  g_image_cache->get(kImgMuteAll), "" /* set by next think() */);
 			mute_all_->sigclicked.connect([this]() { act_mute(true); });
 			mute_this_->sigclicked.connect([this]() { act_mute(false); });
 			capsbuttons->add(mute_this_);
@@ -378,7 +380,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (ibase()->get_display_flag(InteractiveBase::dfDebug)) {
 			UI::Button* debugbtn =
 			   new UI::Button(capsbuttons, "debug", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			                  g_image_cache->get(pic_debug), _("Show Debug Window"));
+			                  g_image_cache->get(kImgDebug), _("Show Debug Window"));
 			debugbtn->sigclicked.connect([this]() { act_debug(); });
 			capsbuttons->add(debugbtn);
 		}
@@ -629,14 +631,6 @@ void BuildingWindow::toggle_workarea() {
 	} else {
 		show_workarea();
 	}
-}
-
-void BuildingWindow::create_input_queue_panel(UI::Box* const box,
-                                              Widelands::Building& b,
-                                              const Widelands::InputQueue& iq,
-                                              bool show_only) {
-	// The *max* width should be larger than the default width
-	box->add(new InputQueueDisplay(box, 0, 0, *ibase(), b, iq, show_only));
 }
 
 /**

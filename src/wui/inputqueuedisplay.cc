@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2010-2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,542 +19,575 @@
 
 #include "wui/inputqueuedisplay.h"
 
-#include "economy/input_queue.h"
-#include "economy/request.h"
-#include "graphic/rendertarget.h"
+#include "base/i18n.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
 #include "wui/interactive_base.h"
 
-static char const* pic_priority_low = "images/wui/buildings/low_priority_button.png";
-static char const* pic_priority_normal = "images/wui/buildings/normal_priority_button.png";
-static char const* pic_priority_high = "images/wui/buildings/high_priority_button.png";
-static char const* pic_max_fill_indicator = "images/wui/buildings/max_fill_indicator.png";
+constexpr int8_t kButtonSize = 25;
 
-InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
-                                     int32_t const x,
-                                     int32_t const y,
-                                     InteractiveBase& ib,
-                                     Widelands::Building& building,
-                                     const Widelands::InputQueue& queue,
-                                     bool no_capacity_buttons,
-                                     bool no_priority_buttons)
-   : UI::Panel(parent, x, y, 0, 28),
-     interactive_base_(ib),
-     building_(building),
-     queue_(&queue),
-     settings_(nullptr),
-     priority_radiogroup_(nullptr),
-     increase_max_fill_(nullptr),
-     decrease_max_fill_(nullptr),
-     index_(queue.get_index()),
-     type_(queue.get_type()),
-     max_fill_indicator_(g_image_cache->get(pic_max_fill_indicator)),
-     cache_size_(queue.get_max_size()),
-     cache_max_fill_(queue.get_max_fill()),
-     total_height_(0),
-     no_capacity_buttons_(no_capacity_buttons),
-     no_priority_buttons_(no_priority_buttons) {
-	if (type_ == Widelands::wwWARE) {
-		const Widelands::WareDescr& ware = *queue.owner().tribe().get_ware_descr(queue_->get_index());
-		set_tooltip(ware.descname().c_str());
-		icon_ = ware.icon();
-	} else {
-		const Widelands::WorkerDescr& worker =
-		   *queue.owner().tribe().get_worker_descr(queue_->get_index());
-		set_tooltip(worker.descname().c_str());
-		icon_ = worker.icon();
+// The slider indexes the available priorities as 0..4, so here are some conversion functions
+static size_t priority_to_index(const Widelands::WarePriority& priority) {
+	if (priority == Widelands::WarePriority::kVeryLow) {
+		return 0;
+	} else if (priority == Widelands::WarePriority::kLow) {
+		return 1;
+	} else if (priority == Widelands::WarePriority::kNormal) {
+		return 2;
+	} else if (priority == Widelands::WarePriority::kHigh) {
+		return 3;
+	} else if (priority == Widelands::WarePriority::kVeryHigh) {
+		return 4;
 	}
-
-	uint16_t ph = max_fill_indicator_->height();
-
-	uint32_t priority_button_height = no_priority_buttons ? 0 : 3 * PriorityButtonSize;
-	uint32_t image_height =
-	   no_capacity_buttons ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
-
-	total_height_ = std::max(priority_button_height, image_height) + 2 * Border;
-
-	max_size_changed();
-
-	set_thinks(true);
+	// TODO(Nordfriese): For savegame compatibility. Replace with NEVER_HERE() after v1.0
+	return 1;
 }
-
-InputQueueDisplay::InputQueueDisplay(UI::Panel* const parent,
-                                     int32_t const x,
-                                     int32_t const y,
-                                     InteractiveBase& ib,
-                                     Widelands::ConstructionSite& building,
-                                     Widelands::WareWorker ww,
-                                     Widelands::DescriptionIndex di,
-                                     bool no_capacity_buttons,
-                                     bool no_priority_buttons)
-   : UI::Panel(parent, x, y, 0, 28),
-     interactive_base_(ib),
-     building_(building),
-     queue_(nullptr),
-     settings_(dynamic_cast<const Widelands::ProductionsiteSettings*>(building.get_settings())),
-     priority_radiogroup_(nullptr),
-     increase_max_fill_(nullptr),
-     decrease_max_fill_(nullptr),
-     index_(di),
-     type_(ww),
-     max_fill_indicator_(g_image_cache->get(pic_max_fill_indicator)),
-     total_height_(0),
-     no_capacity_buttons_(no_capacity_buttons),
-     no_priority_buttons_(no_priority_buttons) {
-	cache_size_ = check_max_size();
-	cache_max_fill_ = check_max_fill();
-	if (type_ == Widelands::wwWARE) {
-		const Widelands::WareDescr& ware = *building.owner().tribe().get_ware_descr(index_);
-		set_tooltip(ware.descname().c_str());
-		icon_ = ware.icon();
-	} else {
-		const Widelands::WorkerDescr& worker = *building.owner().tribe().get_worker_descr(index_);
-		set_tooltip(worker.descname().c_str());
-		icon_ = worker.icon();
-	}
-
-	uint16_t ph = max_fill_indicator_->height();
-
-	uint32_t priority_button_height = no_priority_buttons_ ? 0 : 3 * PriorityButtonSize;
-	uint32_t image_height =
-	   no_capacity_buttons_ ? kWareMenuPicHeight : std::max<int32_t>(kWareMenuPicHeight, ph);
-
-	total_height_ = std::max(priority_button_height, image_height) + 2 * Border;
-
-	max_size_changed();
-
-	set_thinks(true);
-}
-
-InputQueueDisplay::~InputQueueDisplay() {
-	delete priority_radiogroup_;
-}
-
-uint32_t InputQueueDisplay::check_max_size() const {
-	if (queue_) {
-		return queue_->get_max_size();
-	}
-	assert(settings_);
-	for (const auto& pair :
-	     type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
-		if (pair.first == index_) {
-			return pair.second.max_fill;
-		}
-	}
-	NEVER_HERE();
-}
-
-uint32_t InputQueueDisplay::check_max_fill() const {
-	if (queue_) {
-		return queue_->get_max_fill();
-	}
-	assert(settings_);
-	for (const auto& pair :
-	     type_ == Widelands::wwWARE ? settings_->ware_queues : settings_->worker_queues) {
-		if (pair.first == index_) {
-			return pair.second.desired_fill;
-		}
-	}
-	NEVER_HERE();
-}
-
-/**
- * Recalculate the panel's size based on the size of the queue.
- *
- * This is useful for construction sites, whose queues shrink over time.
- */
-void InputQueueDisplay::max_size_changed() {
-	uint32_t pbs = no_priority_buttons_ ? 0 : PriorityButtonSize;
-	uint32_t ctrl_b_size = no_capacity_buttons_ ? 0 : 2 * kWareMenuPicWidth;
-
-	cache_size_ = check_max_size();
-
-	update_priority_buttons();
-	update_max_fill_buttons();
-
-	if (cache_size_ <= 0) {
-		set_desired_size(0, 0);
-	} else {
-		set_desired_size(
-		   cache_size_ * (CellWidth + CellSpacing) + pbs + ctrl_b_size + 2 * Border, total_height_);
-	}
-}
-
-/**
- * Compare the current InputQueue state with the cached state; update if necessary.
- */
-void InputQueueDisplay::think() {
-	if (static_cast<uint32_t>(check_max_size()) != cache_size_) {
-		max_size_changed();
-	}
-
-	// TODO(sirver): It seems cache_max_fill_ is not really useful for anything.
-	if (static_cast<uint32_t>(check_max_fill()) != cache_max_fill_) {
-		cache_max_fill_ = check_max_fill();
-		compute_max_fill_buttons_enabled_state();
-	}
-}
-
-/**
- * Render the current InputQueue state.
- */
-void InputQueueDisplay::draw(RenderTarget& dst) {
-	if (!cache_size_) {
-		return;
-	}
-
-	cache_max_fill_ = check_max_fill();
-
-	uint32_t nr_inputs_to_draw =
-	   queue_ ? std::min(queue_->get_filled(), cache_size_) : cache_max_fill_;
-	uint32_t nr_missing_to_draw =
-	   queue_ ? std::min(queue_->get_missing(), cache_max_fill_) + cache_size_ - cache_max_fill_ :
-	            cache_size_ - cache_max_fill_;
-	if (nr_inputs_to_draw > cache_max_fill_) {
-		nr_missing_to_draw -= nr_inputs_to_draw - cache_max_fill_;
-	}
-	uint32_t nr_coming_to_draw = cache_size_ - nr_inputs_to_draw - nr_missing_to_draw;
-	assert(nr_inputs_to_draw + nr_missing_to_draw + nr_coming_to_draw == cache_size_);
-
-	Vector2i point = Vector2i::zero();
-	point.x = Border + (no_capacity_buttons_ ? 0 : CellWidth + CellSpacing);
-	point.y = Border + (total_height_ - 2 * Border - kWareMenuPicHeight) / 2;
-
-	for (; nr_inputs_to_draw; --nr_inputs_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect(Vector2i(point.x, point.y), icon_, Recti(0, 0, icon_->width(), icon_->height()),
-		             BlendMode::UseAlpha);
-	}
-	for (; nr_coming_to_draw; --nr_coming_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
-		                              Recti(0, 0, icon_->width(), icon_->height()),
-		                              RGBAColor(127, 127, 127, 191));
-	}
-	for (; nr_missing_to_draw; --nr_missing_to_draw, point.x += CellWidth + CellSpacing) {
-		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
-		                              Recti(0, 0, icon_->width(), icon_->height()),
-		                              RGBAColor(191, 191, 191, 127));
-	}
-
-	if (!no_capacity_buttons_) {
-		uint16_t pw = max_fill_indicator_->width();
-		point.y = Border;
-		point.x = Border + CellWidth + CellSpacing + (cache_max_fill_ * (CellWidth + CellSpacing)) -
-		          CellSpacing / 2 - pw / 2;
-		dst.blit(point, max_fill_indicator_);
-	}
-}
-
-/**
- * Updates priority buttons of the InputQueue
- */
-void InputQueueDisplay::update_priority_buttons() {
-
-	if (type_ != Widelands::wwWARE) {
-		return;
-	}
-
-	if (cache_size_ <= 0 || no_priority_buttons_) {
-		delete priority_radiogroup_;
-		priority_radiogroup_ = nullptr;
-	}
-
-	Vector2i pos = Vector2i(cache_size_ * CellWidth + Border, 0);
-	pos.x = (cache_size_ + 2) * (CellWidth + CellSpacing) + Border;
-	pos.y = Border + (total_height_ - 2 * Border - 3 * PriorityButtonSize) / 2;
-
-	if (priority_radiogroup_) {
-		pos.y += 2 * PriorityButtonSize;
-		for (UI::Radiobutton* btn = priority_radiogroup_->get_first_button(); btn;
-		     btn = btn->next_button()) {
-			btn->set_pos(pos);
-			pos.y -= PriorityButtonSize;
-		}
-	} else {
-		priority_radiogroup_ = new UI::Radiogroup();
-
-		priority_radiogroup_->add_button(
-		   this, pos, g_image_cache->get(pic_priority_high), _("Highest priority"));
-		pos.y += PriorityButtonSize;
-		priority_radiogroup_->add_button(
-		   this, pos, g_image_cache->get(pic_priority_normal), _("Normal priority"));
-		pos.y += PriorityButtonSize;
-		priority_radiogroup_->add_button(
-		   this, pos, g_image_cache->get(pic_priority_low), _("Lowest priority"));
-	}
-
-	int32_t priority = -1;
-	if (settings_) {
-		for (const auto& pair : settings_->ware_queues) {
-			if (pair.first == index_) {
-				priority = pair.second.priority;
-				break;
-			}
-		}
-	} else {
-		priority = building_.get_priority(type_, index_, false);
-	}
+static const Widelands::WarePriority& index_to_priority(const size_t priority) {
 	switch (priority) {
-	case Widelands::kPriorityHigh:
-		priority_radiogroup_->set_state(0);
-		break;
-	case Widelands::kPriorityNormal:
-		priority_radiogroup_->set_state(1);
-		break;
-	case Widelands::kPriorityLow:
-		priority_radiogroup_->set_state(2);
-		break;
+	case 0:
+		return Widelands::WarePriority::kVeryLow;
+	case 1:
+		return Widelands::WarePriority::kLow;
+	case 2:
+		return Widelands::WarePriority::kNormal;
+	case 3:
+		return Widelands::WarePriority::kHigh;
+	case 4:
+		return Widelands::WarePriority::kVeryHigh;
 	default:
 		NEVER_HERE();
 	}
-
-	priority_radiogroup_->changedto.connect([this](int32_t i) { radiogroup_changed(i); });
-	priority_radiogroup_->clicked.connect([this]() { radiogroup_clicked(); });
-
-	bool const can_act = interactive_base_.can_act(building_.owner().player_number());
-	if (!can_act) {
-		priority_radiogroup_->set_enabled(false);
-	}
 }
 
-/**
- * Updates the desired size buttons
- */
-void InputQueueDisplay::update_max_fill_buttons() {
-	delete increase_max_fill_;
-	delete decrease_max_fill_;
-	increase_max_fill_ = nullptr;
-	decrease_max_fill_ = nullptr;
-
-	if (cache_size_ <= 0 || no_capacity_buttons_) {
-		return;
-	}
-
-	uint32_t x = Border;
-	uint32_t y = Border + (total_height_ - 2 * Border - kWareMenuPicWidth) / 2;
-
-	boost::format tooltip_format("<p>%s%s%s</p>");
-
-	decrease_max_fill_ = new UI::Button(
-	   this, "decrease_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_left.png"),
-	   (tooltip_format %
-	    g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
-	       .as_font_tag(
-	          /** TRANSLATORS: Button tooltip in in a building's wares input queue */
-	          _("Decrease the number of wares you want to be stored here"))
-
-	    %
-	    as_listitem(
-	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	          explanation */
-	       _("Hold down Shift to decrease all ware types at the same time"), UI::FontStyle::kTooltip)
-
-	    % as_listitem(
-	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	            explanation */
-	         _("Hold down Ctrl to allow none of this ware"), UI::FontStyle::kTooltip))
-	      .str());
-	decrease_max_fill_->sigclicked.connect([this]() { decrease_max_fill_clicked(); });
-
-	x = Border + (cache_size_ + 1) * (CellWidth + CellSpacing);
-
-	increase_max_fill_ = new UI::Button(
-	   this, "increase_max_fill", x, y, kWareMenuPicWidth, kWareMenuPicHeight,
-	   UI::ButtonStyle::kWuiMenu, g_image_cache->get("images/ui_basic/scrollbar_right.png"),
-	   (tooltip_format
-
-	    % g_style_manager->font_style(UI::FontStyle::kTooltipHeader)
-	         .as_font_tag(
-	            /** TRANSLATORS: Button tooltip in a building's wares input queue */
-	            _("Increase the number of wares you want to be stored here"))
-
-	    %
-	    as_listitem(
-	       /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	          explanation */
-	       _("Hold down Shift to increase all ware types at the same time"), UI::FontStyle::kTooltip)
-
-	    % as_listitem(
-	         /** TRANSLATORS: Button tooltip in in a building's wares input queue - option
-	            explanation */
-	         _("Hold down Ctrl to allow all of this ware"), UI::FontStyle::kTooltip))
-	      .str());
-	increase_max_fill_->sigclicked.connect([this]() { increase_max_fill_clicked(); });
-
-	increase_max_fill_->set_repeating(true);
-	decrease_max_fill_->set_repeating(true);
-	compute_max_fill_buttons_enabled_state();
-}
-
-/**
- * Update priority when radiogroup has changed
- */
-void InputQueueDisplay::radiogroup_changed(int32_t state) {
-	assert(type_ == Widelands::wwWARE);
-	if (!interactive_base_.can_act(building_.owner().player_number())) {
-		return;
-	}
-
-	int32_t priority = 0;
-
-	switch (state) {
+static std::string priority_tooltip(const size_t priority) {
+	switch (priority) {
 	case 0:
-		priority = Widelands::kPriorityHigh;
-		break;
+		return _("Priority: Very Low");
 	case 1:
-		priority = Widelands::kPriorityNormal;
-		break;
+		return _("Priority: Low");
 	case 2:
-		priority = Widelands::kPriorityLow;
-		break;
+		return _("Priority: Normal");
+	case 3:
+		return _("Priority: High");
+	case 4:
+		return _("Priority: Very High");
 	default:
+		NEVER_HERE();
+	}
+}
+
+void ensure_box_can_hold_input_queues(UI::Box& b) {
+	UI::Panel* p = &b;
+	while (p->get_parent()) {
+		p = p->get_parent();
+	}
+	b.set_max_size(p->get_w() - 200, p->get_h() - 200);
+	b.set_scrolling(true);
+}
+
+InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
+                                     InteractiveBase& ib,
+                                     Widelands::Building& bld,
+                                     Widelands::InputQueue& q,
+                                     bool show_only,
+                                     bool has_priority)
+   : InputQueueDisplay(
+        parent, ib, bld, q.get_type(), q.get_index(), &q, nullptr, show_only, has_priority) {
+}
+InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
+                                     InteractiveBase& ib,
+                                     Widelands::ConstructionSite& csite,
+                                     Widelands::WareWorker ww,
+                                     Widelands::DescriptionIndex di)
+   : InputQueueDisplay(parent,
+                       ib,
+                       csite,
+                       ww,
+                       di,
+                       nullptr,
+                       dynamic_cast<Widelands::ProductionsiteSettings*>(csite.get_settings()),
+                       false,
+                       true) {
+}
+
+static inline std::string create_tooltip(const bool increase) {
+	return (boost::format("<p>%s%s%s</p>") %
+	        g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+	           .as_font_tag(
+	              increase ?
+	                 /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+	                 _("Increase the number of wares you want to be stored here") :
+	                 /** TRANSLATORS: Button tooltip in in a building's wares input queue */
+	                 _("Decrease the number of wares you want to be stored here")) %
+	        as_listitem(increase ?
+	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                          option explanation */
+	                       _("Hold down Shift to increase all ware types at the same time") :
+	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                          option explanation */
+	                       _("Hold down Shift to decrease all ware types at the same time"),
+	                    UI::FontStyle::kWuiTooltip) %
+	        as_listitem(increase ?
+	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                          option explanation */
+	                       _("Hold down Ctrl to allow all of this ware") :
+	                       /** TRANSLATORS: Button tooltip in in a building's wares input queue -
+	                          option explanation */
+	                       _("Hold down Ctrl to allow none of this ware"),
+	                    UI::FontStyle::kWuiTooltip))
+	   .str();
+}
+
+InputQueueDisplay::InputQueueDisplay(UI::Panel* parent,
+                                     InteractiveBase& ib,
+                                     Widelands::Building& bld,
+                                     Widelands::WareWorker ww,
+                                     Widelands::DescriptionIndex idx,
+                                     Widelands::InputQueue* q,
+                                     Widelands::ProductionsiteSettings* s,
+                                     bool show_only,
+                                     bool has_priority)
+   : UI::Box(parent, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     ibase_(ib),
+     can_act_(!show_only && ibase_.can_act(bld.owner().player_number())),
+     show_only_(show_only),
+     has_priority_(has_priority && ww == Widelands::wwWARE),
+     building_(bld),
+     type_(ww),
+     index_(idx),
+     queue_(q),
+     settings_(s),
+     max_fill_indicator_(*g_image_cache->get("images/wui/buildings/max_fill_indicator.png")),
+     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     hbox_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     b_decrease_desired_fill_(&hbox_,
+                              "decrease_desired",
+                              0,
+                              0,
+                              kButtonSize,
+                              kButtonSize,
+                              UI::ButtonStyle::kWuiMenu,
+                              g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+                              create_tooltip(false)),
+     b_increase_desired_fill_(&hbox_,
+                              "increase_desired",
+                              0,
+                              0,
+                              kButtonSize,
+                              kButtonSize,
+                              UI::ButtonStyle::kWuiMenu,
+                              g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+                              create_tooltip(true)),
+     b_decrease_real_fill_(&hbox_,
+                           "decrease_real",
+                           0,
+                           0,
+                           kButtonSize,
+                           kButtonSize,
+                           UI::ButtonStyle::kWuiMenu,
+                           g_image_cache->get("images/ui_basic/scrollbar_down.png"),
+                           _("Remove ware")),
+     b_increase_real_fill_(&hbox_,
+                           "increase_real",
+                           0,
+                           0,
+                           kButtonSize,
+                           kButtonSize,
+                           UI::ButtonStyle::kWuiMenu,
+                           g_image_cache->get("images/ui_basic/scrollbar_up.png"),
+                           _("Add ware")),
+     collapse_(this,
+               "collapse",
+               0,
+               0,
+               kButtonSize,
+               kButtonSize * 3 / 2,
+               UI::ButtonStyle::kWuiMenu,
+               "",
+               "",
+               UI::Button::VisualState::kFlat),
+     priority_(&hbox_,
+               0,
+               0,
+               5 * kButtonSize,
+               kButtonSize,
+               0,
+               4,
+               has_priority_ ?
+                  priority_to_index(settings_ ? settings_->ware_queues.at(index_).priority :
+                                                building_.get_priority(type_, index_)) :
+                  2,
+               UI::SliderStyle::kWuiLight,
+               "",
+               kButtonSize,
+               can_act_ && has_priority_),
+     spacer_(&hbox_, UI::PanelStyle::kWui, 0, 0, priority_.get_w(), priority_.get_h()),
+     slider_was_moved_(nullptr),
+     collapsed_(false),
+     nr_icons_(queue_ ?
+                  queue_->get_max_size() :
+                  type_ == Widelands::wwWORKER ? settings_->worker_queues.at(index_).max_fill :
+                                                 settings_->ware_queues.at(index_).max_fill),
+     icons_(nr_icons_, nullptr),
+     fill_index_under_mouse_(-1) {
+
+	assert((queue_ == nullptr) ^ (settings_ == nullptr));
+
+	b_decrease_real_fill_.set_visible(queue_ && ibase_.omnipotent());
+	b_increase_real_fill_.set_visible(queue_ && ibase_.omnipotent());
+
+	b_decrease_desired_fill_.set_visible(!show_only_);
+	b_increase_desired_fill_.set_visible(!show_only_);
+	b_decrease_desired_fill_.set_enabled(can_act_);
+	b_increase_desired_fill_.set_enabled(can_act_);
+
+	b_increase_desired_fill_.set_repeating(true);
+	b_increase_real_fill_.set_repeating(true);
+	b_decrease_desired_fill_.set_repeating(true);
+	b_decrease_real_fill_.set_repeating(true);
+
+	vbox_.add_space(kButtonSize / 4);
+
+	hbox_.add(&b_decrease_real_fill_);
+	hbox_.add(&b_decrease_desired_fill_);
+
+	for (size_t i = 0; i < nr_icons_; ++i) {
+		icons_[i] = new UI::Icon(&hbox_, UI::PanelStyle::kWui, 0, 0, kButtonSize, kButtonSize,
+		                         type_ == Widelands::wwWARE ?
+		                            building_.owner().tribe().get_ware_descr(index_)->icon() :
+		                            building_.owner().tribe().get_worker_descr(index_)->icon());
+		hbox_.add(icons_[i]);
+	}
+
+	hbox_.add_inf_space();
+	hbox_.add(&b_increase_desired_fill_);
+	hbox_.add(&b_increase_real_fill_);
+
+	priority_.set_cursor_fixed_height(kButtonSize * 2 / 3);
+
+	// To make sure the fill buttons are aligned even when some queues
+	// have priority buttons and some don't (e.g. in barracks)
+	hbox_.add_space(kButtonSize / 4);
+	priority_.set_visible(has_priority_);
+	spacer_.set_visible(!has_priority_);
+	hbox_.add(&priority_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	hbox_.add(&spacer_);
+
+	vbox_.add(&hbox_, UI::Box::Resizing::kFullSize);
+	vbox_.add_space(kButtonSize / 4);
+	add(&vbox_, UI::Box::Resizing::kExpandBoth);
+
+	add_space(kButtonSize / 4);
+	add(&collapse_);
+
+	if (can_act_) {
+		collapse_.sigclicked.connect([this]() {
+			const bool c = !collapsed_;
+			recurse([c](InputQueueDisplay& i) { i.set_collapsed(c); });
+		});
+
+		b_decrease_desired_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_desired_fill(-1); });
+			} else {
+				clicked_desired_fill(-1);
+			}
+		});
+		b_increase_desired_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_desired_fill(1); });
+			} else {
+				clicked_desired_fill(1);
+			}
+		});
+		b_decrease_real_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_real_fill(-1); });
+			} else {
+				clicked_real_fill(-1);
+			}
+		});
+		b_increase_real_fill_.sigclicked.connect([this]() {
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([](InputQueueDisplay& i) { i.clicked_real_fill(1); });
+			} else {
+				clicked_real_fill(1);
+			}
+		});
+		priority_.changedto.connect([this](size_t i) {
+			const Widelands::WarePriority& p = index_to_priority(i);
+			slider_was_moved_ = &p;
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				recurse([&p](InputQueueDisplay& iqd) { iqd.set_priority(p); });
+			} else {
+				set_priority(p);
+			}
+		});
+	} else {
+		collapse_.set_visible(false);
+		set_collapsed(true);
+	}
+
+	set_tooltip(type_ == Widelands::wwWARE ?
+	               building_.owner().tribe().get_ware_descr(index_)->descname() :
+	               building_.owner().tribe().get_worker_descr(index_)->descname());
+
+	// Initialize tooltips, icon colours and stuff
+	think();
+}
+
+void InputQueueDisplay::recurse(const std::function<void(InputQueueDisplay&)>& functor) {
+	for (UI::Panel* p = get_parent()->get_first_child(); p; p = p->get_next_sibling()) {
+		if (upcast(InputQueueDisplay, i, p)) {
+			functor(*i);
+		}
+	}
+}
+
+int32_t InputQueueDisplay::fill_index_at(const int32_t x, const int32_t y) const {
+	assert(nr_icons_ > 0);
+	if (y < hbox_.get_y() || y > hbox_.get_y() + kButtonSize ||
+	    x < hbox_.get_x() + icons_[0]->get_x() ||
+	    x > hbox_.get_x() + icons_.back()->get_x() + kButtonSize) {
+		return -1;
+	}
+
+	const uint32_t fill = (x + kButtonSize / 2 - hbox_.get_x() - icons_[0]->get_x()) / kButtonSize;
+	assert(fill <= nr_icons_);
+	return fill;
+}
+
+bool InputQueueDisplay::handle_mousepress(const uint8_t btn, const int32_t x, const int32_t y) {
+	const int32_t fill = fill_index_at(x, y);
+	if (btn != SDL_BUTTON_LEFT || fill < 0 || show_only_ || !can_act_) {
+		return UI::Box::handle_mousepress(btn, x, y);
+	}
+
+	if (SDL_GetModState() & KMOD_SHIFT) {
+		recurse([fill](InputQueueDisplay& i) { i.set_desired_fill(fill); });
+	} else {
+		set_desired_fill(fill);
+	}
+
+	return true;
+}
+
+bool InputQueueDisplay::handle_mousemove(
+   uint8_t, const int32_t x, const int32_t y, int32_t, int32_t) {
+	fill_index_under_mouse_ = fill_index_at(x, y);
+	return true;
+}
+
+void InputQueueDisplay::set_priority(const Widelands::WarePriority& priority) {
+	if (!can_act_ || !has_priority_ ||
+	    priority == (queue_ ? building_.get_priority(type_, index_) : get_setting()->priority)) {
 		return;
 	}
-	if (SDL_GetModState() & KMOD_CTRL) {
-		update_siblings_priority(state);
-	}
-	if (Widelands::Game* game = interactive_base_.get_game()) {
+
+	if (Widelands::Game* game = ibase_.get_game()) {
 		game->send_player_set_ware_priority(building_, type_, index_, priority, settings_ != nullptr);
 	} else {
-		NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+		if (queue_) {
+			building_.set_priority(type_, index_, priority);
+		} else {
+			get_setting()->priority = priority;
+		}
 	}
 }
 
-void InputQueueDisplay::radiogroup_clicked() {
-	// Already set option has been clicked again
-	// Unimportant for this queue, but update other queues
-	if (SDL_GetModState() & KMOD_CTRL) {
-		update_siblings_priority(priority_radiogroup_->get_state());
-	}
-}
+void InputQueueDisplay::clicked_desired_fill(const int8_t delta) {
+	assert(delta == 1 || delta == -1);
 
-void InputQueueDisplay::update_siblings_priority(int32_t state) {
-	// "Release" the CTRL key to avoid recursion
-	const SDL_Keymod old_modifiers = SDL_GetModState();
-	SDL_SetModState(KMOD_NONE);
+	const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
+	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
+	assert(desired_fill <= max_fill);
 
-	Panel* sibling = get_parent()->get_first_child();
-	// Well, at least we should be a child of our parent
-	assert(sibling != nullptr);
-	do {
-		if (sibling == this) {
-			// We already have been set
-			continue;
-		}
-		InputQueueDisplay* display = dynamic_cast<InputQueueDisplay*>(sibling);
-		if (display == nullptr) {
-			// Cast failed. Sibling is no InputQueueDisplay
-			continue;
-		}
-		if (display->type_ != Widelands::wwWARE) {
-			// No ware, so there is no radio group
-			continue;
-		}
-		assert(display->priority_radiogroup_ != nullptr);
-		if (display->priority_radiogroup_->get_state() == state) {
-			// Nothing to do for this queue
-			continue;
-		}
-		// Calling set_state() leads to radiogroup_changed()) getting called, which does the real
-		// change
-		// TODO(Notabilis): When bug 1738485 is fixed probably replace with
-		// send_player_set_ware_priority()
-		display->priority_radiogroup_->set_state(state);
-	} while ((sibling = sibling->get_next_sibling()));
-
-	SDL_SetModState(old_modifiers);
-}
-
-/**
- * One of the buttons to increase or decrease the amount of wares
- * stored here has been clicked
- */
-void InputQueueDisplay::decrease_max_fill_clicked() {
-	if (!interactive_base_.can_act(building_.owner().player_number())) {
+	if (!can_act_ || desired_fill == (delta < 0 ? 0 : max_fill)) {
 		return;
 	}
 
-	// Update the value of this queue if required
-	if (cache_max_fill_ > 0) {
-		if (Widelands::Game* game = interactive_base_.get_game()) {
-			game->send_player_set_input_max_fill(
-			   building_, index_, type_, ((SDL_GetModState() & KMOD_CTRL) ? 0 : cache_max_fill_ - 1),
-			   settings_ != nullptr);
-		} else {
-			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-		}
-	}
+	const bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
+	const unsigned new_fill = ctrl_down ? delta < 0 ? 0 : max_fill : desired_fill + delta;
 
-	// Update other queues of this building
-	if (SDL_GetModState() & KMOD_SHIFT) {
-		// Using int16_t instead of int32_t on purpose to avoid over-/underflows
-		update_siblings_fill(
-		   ((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::min() : -1));
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_set_input_max_fill(
+		   building_, index_, type_, new_fill, settings_ != nullptr);
+	} else {
+		if (queue_) {
+			queue_->set_max_fill(new_fill);
+		} else {
+			get_setting()->desired_fill = new_fill;
+		}
 	}
 }
 
-void InputQueueDisplay::increase_max_fill_clicked() {
-	if (!interactive_base_.can_act(building_.owner().player_number())) {
+void InputQueueDisplay::set_desired_fill(unsigned new_fill) {
+	const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
+	const unsigned max_fill = queue_ ? queue_->get_max_size() : get_setting()->max_fill;
+	assert(desired_fill <= max_fill);
+	new_fill = std::min(new_fill, max_fill);
+
+	if (!can_act_ || desired_fill == new_fill) {
 		return;
 	}
 
-	if (cache_max_fill_ < cache_size_) {
-		if (Widelands::Game* game = interactive_base_.get_game()) {
-			game->send_player_set_input_max_fill(
-			   building_, index_, type_,
-			   ((SDL_GetModState() & KMOD_CTRL) ? cache_size_ : cache_max_fill_ + 1),
-			   settings_ != nullptr);
+	if (Widelands::Game* game = ibase_.get_game()) {
+		game->send_player_set_input_max_fill(
+		   building_, index_, type_, new_fill, settings_ != nullptr);
+	} else {
+		if (queue_) {
+			queue_->set_max_fill(new_fill);
 		} else {
-			NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
+			get_setting()->desired_fill = new_fill;
 		}
-	}
-
-	if (SDL_GetModState() & KMOD_SHIFT) {
-		update_siblings_fill(
-		   ((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::max() : 1));
 	}
 }
 
-void InputQueueDisplay::update_siblings_fill(int32_t delta) {
-	Panel* sibling = get_parent()->get_first_child();
-	// Well, at least we should be a child of our parent
-	assert(sibling != nullptr);
-	do {
-		if (sibling == this) {
-			// We already have been set
-			continue;
-		}
-		InputQueueDisplay* display = dynamic_cast<InputQueueDisplay*>(sibling);
-		if (display == nullptr || display->no_capacity_buttons_) {
-			// Cast failed. Sibling is no InputQueueDisplay
-			continue;
-		}
-		uint32_t new_fill =
-		   std::max(0, std::min<int32_t>(static_cast<int32_t>(display->cache_max_fill_) + delta,
-		                                 display->cache_size_));
-		if (new_fill != display->cache_max_fill_) {
-			if (Widelands::Game* game = interactive_base_.get_game()) {
-				game->send_player_set_input_max_fill(
-				   building_, display->index_, display->type_, new_fill, settings_ != nullptr);
-			} else {
-				NEVER_HERE();  // TODO(Nordfriese / Scenario Editor): implement
-			}
-		}
-	} while ((sibling = sibling->get_next_sibling()));
+void InputQueueDisplay::clicked_real_fill(const int8_t delta) {
+	assert(delta == 1 || delta == -1);
+
+	if (!queue_ || !ibase_.omnipotent()) {
+		return;
+	}
+
+	const unsigned real_fill = queue_->get_filled();
+	const unsigned max_fill = queue_->get_max_size();
+	assert(real_fill <= max_fill);
+
+	if (real_fill == (delta < 0 ? 0 : max_fill)) {
+		return;
+	}
+
+	const bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
+	const unsigned new_fill = ctrl_down ? delta < 0 ? 0 : max_fill : real_fill + delta;
+
+	queue_->set_filled(new_fill);
 }
 
-void InputQueueDisplay::compute_max_fill_buttons_enabled_state() {
+void InputQueueDisplay::set_collapsed(const bool c) {
+	assert(collapsed_ != c);
+	collapsed_ = c;
+	priority_.set_visible(has_priority_ && !collapsed_);
+	spacer_.set_visible(!has_priority_ && !collapsed_);
+	b_decrease_desired_fill_.set_visible(!collapsed_ && !show_only_);
+	b_increase_desired_fill_.set_visible(!collapsed_ && !show_only_);
+	b_decrease_real_fill_.set_visible(!collapsed_ && ibase_.omnipotent());
+	b_increase_real_fill_.set_visible(!collapsed_ && ibase_.omnipotent());
+}
 
-	// Disable those buttons for replay watchers
-	bool const can_act = interactive_base_.can_act(building_.owner().player_number());
-	if (!can_act) {
-		if (increase_max_fill_) {
-			increase_max_fill_->set_enabled(false);
+inline Widelands::ProductionsiteSettings::InputQueueSetting*
+InputQueueDisplay::get_setting() const {
+	return settings_ ? type_ == Widelands::wwWARE ? &settings_->ware_queues.at(index_) :
+	                                                &settings_->worker_queues.at(index_) :
+	                   nullptr;
+}
+
+static const RGBAColor kColorComing(127, 127, 127, 191);
+static const RGBAColor kColorMissing(191, 191, 191, 127);
+
+void InputQueueDisplay::think() {
+	if (queue_ && queue_->get_max_size() == 0) {
+		set_visible(false);
+		return;
+	}
+	set_visible(true);
+
+	const Widelands::ProductionsiteSettings::InputQueueSetting* setting = get_setting();
+	const unsigned max_fill = queue_ ? queue_->get_max_size() : setting->max_fill;
+	const unsigned real_fill = queue_ ? queue_->get_filled() : setting->desired_fill;
+	const unsigned desired_fill = queue_ ? queue_->get_max_fill() : setting->desired_fill;
+	const unsigned nr_missing = queue_ ? queue_->get_missing() : 0;
+	const unsigned nr_coming =
+	   queue_ && real_fill < desired_fill ? desired_fill - real_fill - nr_missing : 0;
+
+	assert(desired_fill <= max_fill);
+	assert(real_fill <= max_fill);
+	assert(nr_missing <= max_fill - real_fill);
+	assert(nr_coming <= max_fill - real_fill);
+	assert(max_fill <= nr_icons_);
+
+	for (unsigned i = 0; i < nr_icons_; ++i) {
+		icons_[i]->set_visible(i < max_fill);
+		icons_[i]->set_grey_out(i >= real_fill);
+		icons_[i]->set_grey_out_color(i < real_fill + nr_coming ? kColorComing : kColorMissing);
+	}
+
+	if (has_priority_) {
+		const Widelands::WarePriority& p =                                            // NOLINT
+		   queue_ ? building_.get_priority(type_, index_) : get_setting()->priority;  // NOLINT
+		// The purpose of this check is to prevent the slider from snapping back directly after
+		// the user dragged it, because the playercommand is not executed immediately of course
+		if (!slider_was_moved_ || *slider_was_moved_ == p) {
+			priority_.set_value(priority_to_index(p));
+			slider_was_moved_ = nullptr;
 		}
-		if (decrease_max_fill_) {
-			decrease_max_fill_->set_enabled(false);
+		priority_.set_tooltip(priority_tooltip(priority_.get_value()));
+	}
+
+	collapse_.set_tooltip(collapsed_ ? _("Show controls") : _("Hide controls"));
+	collapse_.set_pic(g_image_cache->get(collapsed_ ? "images/ui_basic/scrollbar_right.png" :
+	                                                  "images/ui_basic/scrollbar_left.png"));
+}
+
+static const RGBAColor kPriorityColors[] = {RGBAColor(255, 0, 0, 127), RGBAColor(255, 127, 0, 127),
+                                            RGBAColor(255, 255, 0, 127), RGBAColor(0, 255, 0, 127),
+                                            RGBAColor(0, 127, 255, 127)};
+
+void InputQueueDisplay::draw(RenderTarget& r) {
+	// Draw priority indicator
+	if (has_priority_ && !collapsed_) {
+		const int x = hbox_.get_x() + priority_.get_x();
+		for (size_t i = 0; i < 5; ++i) {
+			r.fill_rect(Recti(x + i * kButtonSize, hbox_.get_y() + kButtonSize * 2 / 5, kButtonSize,
+			                  kButtonSize / 5),
+			            kPriorityColors[i], BlendMode::Default);
 		}
 	}
+
+	UI::Box::draw(r);
+}
+
+void InputQueueDisplay::draw_overlay(RenderTarget& r) {
+	// Draw max fill indicator
+	if (!show_only_) {
+		assert(nr_icons_);
+		const unsigned desired_fill = queue_ ? queue_->get_max_fill() : get_setting()->desired_fill;
+		assert(desired_fill <= nr_icons_);
+
+		auto calc_xpos = [this](const size_t fill) {
+			return (fill == 0 ? icons_[0]->get_x() :
+			                    fill == nr_icons_ ?
+			                    icons_[nr_icons_ - 1]->get_x() + icons_[nr_icons_ - 1]->get_w() :
+			                    (icons_[fill - 1]->get_x() + icons_[fill - 1]->get_w() +
+			                     icons_[fill]->get_x()) /
+			                          2) +
+			       hbox_.get_x() - max_fill_indicator_.width() / 2;
+		};
+
+		const int ypos = hbox_.get_y() + icons_[0]->get_y() +
+		                 (icons_[0]->get_h() - max_fill_indicator_.height()) / 2;
+		r.blit(Vector2i(calc_xpos(desired_fill), ypos), &max_fill_indicator_);
+
+		if (can_act_ && fill_index_under_mouse_ >= 0) {
+			r.blitrect_scale(Rectf(calc_xpos(fill_index_under_mouse_), ypos,
+			                       max_fill_indicator_.width(), max_fill_indicator_.height()),
+			                 &max_fill_indicator_,
+			                 Recti(0, 0, max_fill_indicator_.width(), max_fill_indicator_.height()),
+			                 0.4f, BlendMode::Default);
+		}
+	}
+
+	// Draw priority indicator
+	if (has_priority_ && collapsed_) {
+		const size_t p = priority_to_index(queue_ ? building_.get_priority(type_, index_) :
+		                                            get_setting()->priority);
+		const int w = kButtonSize / 5;
+		const int x = hbox_.get_x() + collapse_.get_x() - w;
+		r.brighten_rect(Recti(x, hbox_.get_y(), w, kButtonSize), -32);
+		r.fill_rect(Recti(x, hbox_.get_y() + (4 - p) * kButtonSize / 5, w, kButtonSize / 5),
+		            kPriorityColors[p], BlendMode::Copy);
+	}
+
+	UI::Box::draw_overlay(r);
 }

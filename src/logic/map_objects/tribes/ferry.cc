@@ -29,8 +29,10 @@
 
 namespace Widelands {
 
-FerryDescr::FerryDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes)
-   : CarrierDescr(init_descname, table, tribes, MapObjectType::FERRY) {
+FerryDescr::FerryDescr(const std::string& init_descname,
+                       const LuaTable& table,
+                       Descriptions& descriptions)
+   : CarrierDescr(init_descname, table, descriptions, MapObjectType::FERRY) {
 }
 
 // When pathfinding, we _always_ use a CheckStepFerry to account for our very special movement
@@ -68,7 +70,7 @@ void Ferry::start_task_unemployed(Game& game) {
 constexpr Duration kUnemployedLifetime = Duration(1000 * 60 * 10);  // 10 minutes
 
 void Ferry::unemployed_update(Game& game, State&) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		molog(
 		   game.get_gametime(), "[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
 		if (get_signal() == "row") {
@@ -185,7 +187,7 @@ void Ferry::row_update(Game& game, State&) {
 	const Map& map = game.map();
 
 	const std::string& signal = get_signal();
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "road" || signal == "fail" || signal == "row" || signal == "wakeup") {
 			molog(game.get_gametime(), "[row]: Got signal '%s' -> recalculate\n", signal.c_str());
 			signal_handled();

@@ -40,7 +40,6 @@ void CmdLuaScript::execute(Game& game) {
 		throw GameDataError("lua: %s", e.what());
 	}
 	log_info("done\n");
-	return;
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;

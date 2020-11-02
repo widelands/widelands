@@ -26,32 +26,43 @@
 #include "network/network.h"
 #include "wlapplication_options.h"
 
-FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
-   : FullscreenMenuLoadMapOrGame(),
-     // Main title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Begin Network Game"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-
+FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
+   : FullscreenMenuLoadMapOrGame(fsmm, _("Begin LAN Game")),
      // Boxes
-     left_column_(this, 0, 0, UI::Box::Vertical),
-     right_column_(this, 0, 0, UI::Box::Vertical),
+     left_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     right_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 
      // Left column content
-     label_opengames_(&left_column_, 0, 0, 0, 0, _("List of games in your local network:")),
+     label_opengames_(&left_column_,
+                      UI::PanelStyle::kFsMenu,
+                      UI::FontStyle::kFsMenuLabel,
+                      0,
+                      0,
+                      0,
+                      0,
+                      _("List of games in your local network:")),
      table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_playername_(&right_column_, 0, 0, 0, 0, _("Your nickname:")),
+     label_playername_(&right_column_,
+                       UI::PanelStyle::kFsMenu,
+                       UI::FontStyle::kFsMenuLabel,
+                       0,
+                       0,
+                       0,
+                       0,
+                       _("Your nickname:")),
      playername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     label_hostname_(&right_column_, 0, 0, 0, 0, _("Host to connect:")),
+     label_hostname_(&right_column_,
+                     UI::PanelStyle::kFsMenu,
+                     UI::FontStyle::kFsMenuLabel,
+                     0,
+                     0,
+                     0,
+                     0,
+                     _("Host to connect:")),
 
-     host_box_(&right_column_, 0, 0, UI::Box::Horizontal),
+     host_box_(&right_column_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
@@ -111,9 +122,6 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	back_.sigclicked.connect([this]() { clicked_back(); });
 	loadlasthost_.sigclicked.connect([this]() { clicked_lasthost(); });
 
-	playername_.set_font_scale(scale_factor());
-	hostname_.set_font_scale(scale_factor());
-
 	hostname_.changed.connect([this]() { change_hostname(); });
 	playername_.set_text(get_config_string("nickname", (_("nobody"))));
 	playername_.changed.connect([this]() { change_playername(); });
@@ -131,12 +139,8 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 void FullscreenMenuNetSetupLAN::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 
-	butw_ = get_w() - right_column_x_ - right_column_margin_;
+	butw_ = get_inner_w() - right_column_x_ - right_column_margin_;
 	const int colum_header_h = label_opengames_.get_h() + padding_;
-
-	title_.set_font_scale(scale_factor());
-	title_.set_size(get_w(), title_.get_h());
-	title_.set_pos(Vector2i(0, (tabley_ - colum_header_h) / 3));
 
 	left_column_.set_size(tablew_, tableh_ + colum_header_h);
 	left_column_.set_pos(Vector2i(tablex_, tabley_ - colum_header_h));
@@ -154,7 +158,7 @@ void FullscreenMenuNetSetupLAN::layout() {
 }
 
 void FullscreenMenuNetSetupLAN::think() {
-	FullscreenMenuBase::think();
+	FullscreenMenuLoadMapOrGame::think();
 	change_playername();
 
 	discovery_.run();
@@ -266,8 +270,8 @@ void FullscreenMenuNetSetupLAN::discovery_callback(int32_t const type,
 
 void FullscreenMenuNetSetupLAN::change_hostname() {
 	// Allow user to enter a hostname manually
-	table_.select(table_.no_selection_index());
-	joingame_.set_enabled(hostname_.text().size());
+	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());
+	joingame_.set_enabled(!hostname_.text().empty());
 }
 
 void FullscreenMenuNetSetupLAN::change_playername() {
@@ -294,19 +298,19 @@ void FullscreenMenuNetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
 	set_config_string("lasthost", hostname_.text());
 
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kJoingame);
+	end_modal<MenuTarget>(MenuTarget::kJoingame);
 }
 
 void FullscreenMenuNetSetupLAN::clicked_hostgame() {
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kHostgame);
+	end_modal<MenuTarget>(MenuTarget::kHostgame);
 }
 
 void FullscreenMenuNetSetupLAN::clicked_lasthost() {
 	Section& s = get_config_safe_section();
 	std::string const host = s.get_string("lasthost", "");
 	hostname_.set_text(host);
-	if (host.size()) {
+	if (!host.empty()) {
 		joingame_.set_enabled(true);
 	}
-	table_.select(table_.no_selection_index());
+	table_.select(UI::Table<const NetOpenGame* const>::no_selection_index());
 }

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-08-25 12:28+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-27 04:56+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -129,24 +129,29 @@ msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound            소리가 비활성화된 상태에서 놀이를 시작합니다."
 
 #: ../../src/wlapplication_messages.cc:94
+msgid ""
+" --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
+msgstr " --fail-on-lua-error  루아 오류가 발생할 때 와이드랜드를 강제로 종료됩니다."
+
+#: ../../src/wlapplication_messages.cc:96
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip              저장 파일을 ZIP로 압축하지 않습니다."
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:98
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr " --editor             와이드랜드 편집기를 직접 시작합니다.\n                      편집기에서 지도 FILENAME을 직접 불러오기 위해\n                      =FILENAME을 직접 추가할 수 있습니다."
 
-#: ../../src/wlapplication_messages.cc:100
+#: ../../src/wlapplication_messages.cc:102
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
 msgstr " --ai_training        인공지능 훈련 모드를 활성화합니다.\n                      이 모드에 대한 자세한 내용은 다음 페이지를 봐 주십시오.\n                      https://www.widelands.org/wiki/Ai%20Training/"
 
-#: ../../src/wlapplication_messages.cc:104
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --auto_speed         In multiplayer games only, this will keep\n"
 "                      adjusting the game speed automatically,\n"
@@ -154,17 +159,17 @@ msgid ""
 "                      --ai_training."
 msgstr " --auto_speed         멀티플레이어 게임에서만 FPS에 따라\n                      자동으로 게임 속도를 조정합니다.\n                      --ai_training과 함께 사용하면\n                      유용합니다."
 
-#: ../../src/wlapplication_messages.cc:109
+#: ../../src/wlapplication_messages.cc:111
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=FILENAME  시나리오 지도로 지도 파일이름을\n                      직접 시작합니다."
 
-#: ../../src/wlapplication_messages.cc:112
+#: ../../src/wlapplication_messages.cc:114
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=FILENAME  저장 자료 파일 이름을 직접 불러옵니다."
 
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:115
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -174,7 +179,7 @@ msgstr " --script=FILENAME 초기화 후 지정된 루아 스크립트를 실행
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:119
+#: ../../src/wlapplication_messages.cc:121
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -182,7 +187,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                      땅길에 연결되지 않은 깃발을 세웠을 때\n                      자동으로 땅길 건설 모드로 전환할지\\                      여부를 설정합니다."
 
-#: ../../src/wlapplication_messages.cc:125
+#: ../../src/wlapplication_messages.cc:127
 msgid "Graphic options:"
 msgstr "그래픽 선택사항:"
 
@@ -190,22 +195,22 @@ msgstr "그래픽 선택사항:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:132
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                      놀이 화면에 전체 화면 모드의 사용을\n                      설정합니다."
 
-#: ../../src/wlapplication_messages.cc:134
+#: ../../src/wlapplication_messages.cc:136
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         픽셀 단위의 창의 너비 입니다."
 
-#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:137
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         픽셀 단위의 창의 높이 입니다."
 
-#: ../../src/wlapplication_messages.cc:136
+#: ../../src/wlapplication_messages.cc:138
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]     프레임 속도의 최대 값을 지정합니다."
 
@@ -213,17 +218,17 @@ msgstr " --maxfps=[5 ...]     프레임 속도의 최대 값을 지정합니다.
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:143
 msgid "Options for the internal window manager:"
 msgstr "내부 창 관리자 선택사항:"
 
-#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr " --animate_map_panning=[yes|no]\n                      지도에서 자동 이동을 애니메이션 시킬지\n                      여부를 설정합니다."
 
-#: ../../src/wlapplication_messages.cc:145
+#: ../../src/wlapplication_messages.cc:147
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -235,7 +240,7 @@ msgstr " --border_snap_distance=[0 ...]\n                      창의 가장자�
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:153
+#: ../../src/wlapplication_messages.cc:155
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -243,7 +248,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                      창의 가장자리가 화면 가장자리에 닿았을 때\n                      창 테두리를 지웁니다."
 
-#: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:160
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -251,7 +256,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      창의 가장자리가 패널 가장자리에서\n                      이 거리 내에 도달하면 창을 패널 가장자리로\n                      이동합니다."
 
-#: ../../src/wlapplication_messages.cc:163
+#: ../../src/wlapplication_messages.cc:165
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -259,15 +264,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      창이 패널과 겹쳐 있을 때 창만\n                      패널 가장자리로 이동시킵니다."
 
-#: ../../src/wlapplication_messages.cc:169
+#: ../../src/wlapplication_messages.cc:171
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            디버그 메시지를 활성화합니다."
 
-#: ../../src/wlapplication_messages.cc:170
+#: ../../src/wlapplication_messages.cc:172
 msgid " --help               Show this help"
 msgstr " --help               이 도움말을 표시"
 
-#: ../../src/wlapplication_messages.cc:171
+#: ../../src/wlapplication_messages.cc:173
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

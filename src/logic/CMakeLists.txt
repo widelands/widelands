@@ -72,6 +72,7 @@ wl_library(logic_game_controller
 
 wl_library(logic_constants
   SRCS
+    vision.h
     widelands.cc
     widelands.h
 )
@@ -216,8 +217,9 @@ wl_library(logic
     replay.h
     save_handler.cc
     save_handler.h
-    see_unsee_node.h
     trade_agreement.h
+    training_wheels.cc
+    training_wheels.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
@@ -250,7 +252,6 @@ wl_library(logic
     logic_generic_save_handler
     logic_map
     logic_map_objects
-    logic_map_objects_description_manager
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

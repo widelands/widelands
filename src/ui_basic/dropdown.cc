@@ -63,6 +63,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            UI::PanelStyle style,
                            ButtonStyle button_style)
    : UI::NamedPanel(parent,
+                    style,
                     name,
                     x,
                     y,
@@ -78,7 +79,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      list_offset_y_(0),
      base_height_(base_height(button_dimension, style)),
      mouse_tolerance_(50),
-     button_box_(this, 0, 0, UI::Box::Horizontal, w, get_h()),
+     button_box_(this, style, 0, 0, UI::Box::Horizontal, w, get_h()),
      push_button_(type == DropdownType::kTextual ?
                      new UI::Button(&button_box_,
                                     "dropdown_select",
@@ -180,6 +181,10 @@ BaseDropdown::~BaseDropdown() {
 void BaseDropdown::set_height(int height) {
 	max_list_height_ = height - base_height_;
 	layout();
+}
+
+std::vector<Recti> BaseDropdown::focus_overlay_rects() {
+	return Panel::focus_overlay_rects(2, 2, 0);
 }
 
 /*

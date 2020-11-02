@@ -31,7 +31,7 @@ namespace Widelands {
 
 class MarketDescr : public BuildingDescr {
 public:
-	MarketDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	MarketDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~MarketDescr() override {
 	}
 
@@ -54,7 +54,7 @@ public:
 	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
 	void cancel_trade(int trade_id);
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);

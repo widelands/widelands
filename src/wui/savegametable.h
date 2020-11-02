@@ -19,6 +19,8 @@ protected:
 	void create_directory_entry(UI::Table<uintptr_t const>::EntryRecord& te,
 	                            const SavegameData& savegame);
 
+	UI::FontStyle tooltip_style_, tooltip_header_style_;
+
 private:
 	bool localize_autosave_;
 

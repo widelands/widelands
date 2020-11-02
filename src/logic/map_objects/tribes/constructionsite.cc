@@ -32,13 +32,13 @@
 #include "graphic/style_manager.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/partially_finished_building.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/trainingsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
@@ -86,46 +86,40 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	}
 	const Time anim_time(frame_index * kFrameLength);
 
+	const RGBColor* player_color_to_draw;
+	float opacity;
+	if (visible) {
+		player_color_to_draw = &player_color;
+		opacity = 1.0f;
+	} else {
+		player_color_to_draw = nullptr;
+		opacity = kBuildingSilhouetteOpacity;
+	}
+
+	// Initialize variable to make checks happy
+	uint32_t animation_id = animations[0].first;
+	Time time = Time();
 	if (frame_index > 0) {
 		// Not the first pic within this animation – draw the previous one
-		if (visible) {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-			                    animations[animation_index].first, anim_time - Duration(kFrameLength),
-			                    &player_color);
-		} else {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-			                    animations[animation_index].first, anim_time - Duration(kFrameLength),
-			                    nullptr, kBuildingSilhouetteOpacity);
-		}
+		animation_id = animations[animation_index].first;
+		time = anim_time - Duration(kFrameLength);
 	} else if (animation_index > 0) {
 		// The first pic, but not the first series of animations – draw the last pic of the previous
 		// series
-		if (visible) {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, animations[animation_index - 1].first,
-			   Time(kFrameLength * (animations[animation_index - 1].second - 1)), &player_color);
-		} else {
-			dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale,
-			                    animations[animation_index - 1].first,
-			                    Time(kFrameLength * (animations[animation_index - 1].second - 1)),
-			                    nullptr, kBuildingSilhouetteOpacity);
-		}
+		animation_id = animations[animation_index - 1].first;
+		time = Time(kFrameLength * (animations[animation_index - 1].second - 1));
 	} else if (was) {
 		//  First pic in first series, but there was another building here before –
 		//  get its most fitting picture and draw it instead
-		const uint32_t unocc = was->get_unoccupied_animation();
-		if (visible) {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, unocc,
-			   Time(kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1)),
-			   &player_color);
-		} else {
-			dst->blit_animation(
-			   point_on_dst, Widelands::Coords::null(), scale, unocc,
-			   Time(kFrameLength * (g_animation_manager->get_animation(unocc).nr_frames() - 1)),
-			   nullptr, kBuildingSilhouetteOpacity);
-		}
+		animation_id = was->get_unoccupied_animation();
+		time =
+		   Time(kFrameLength * (g_animation_manager->get_animation(animation_id).nr_frames() - 1));
 	}
+	if (time.is_valid()) {
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, animation_id, time,
+		                    player_color_to_draw, opacity);
+	}
+
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime.get() * total_frames;
 	if (totaltime.get()) {
@@ -135,13 +129,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	for (uint32_t i = 0; i < animation_index; ++i) {
 		percent -= 100 * animations[i].second;
 	}
-	if (visible) {
-		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-		                    &player_color, 1.f, percent);
-	} else {
-		dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
-		                    nullptr, kBuildingSilhouetteOpacity, percent);
-	}
+	dst->blit_animation(point_on_dst, coords, scale, animations[animation_index].first, anim_time,
+	                    player_color_to_draw, opacity, percent);
 }
 
 /**
@@ -150,8 +139,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes),
+                                             Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, descriptions),
      creation_fx_(
         SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 }
@@ -181,9 +170,8 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s =
-	   g_style_manager->color_tag((boost::format(_("%i%% built")) % percent).str(),
-	                              g_style_manager->building_statistics_style().construction_color());
+	*s = StyleManager::color_tag((boost::format(_("%i%% built")) % percent).str(),
+	                             g_style_manager->building_statistics_style().construction_color());
 }
 
 /*
@@ -191,7 +179,8 @@ void ConstructionSite::update_statistics_string(std::string* s) {
 Access to the wares queues by id
 =======
 */
-InputQueue& ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type) {
+InputQueue&
+ConstructionSite::inputqueue(DescriptionIndex const wi, WareWorker const type, const Request*) {
 	// There are no worker queues here
 	// Hopefully, our construction sites are safe enough not to kill workers
 	if (type != wwWARE) {
@@ -233,7 +222,8 @@ bool ConstructionSite::init(EditorGameBase& egbase) {
 		// Enhancement and/or built over immovable
 		for (auto it = old_buildings_.end(); it != old_buildings_.begin();) {
 			--it;
-			if (it->second.empty()) {
+			// 'true' means we're enhancing a building
+			if (it->second) {
 				const BuildingDescr* was_descr = owner().tribe().get_building_descr(it->first);
 				info_.was = was_descr;
 				buildcost = &building_->enhancement_cost();
@@ -312,7 +302,7 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		// Put the real building in place
 		Game& game = dynamic_cast<Game&>(egbase);
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
-		old_buildings_.push_back(std::make_pair(becomes_idx, ""));
+		old_buildings_.push_back(std::make_pair(becomes_idx, true));
 		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(game);
@@ -339,11 +329,11 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 		if (settings_) {
 			if (upcast(ProductionsiteSettings, ps, settings_.get())) {
 				for (const auto& pair : ps->ware_queues) {
-					b.inputqueue(pair.first, wwWARE).set_max_fill(pair.second.desired_fill);
+					b.inputqueue(pair.first, wwWARE, nullptr).set_max_fill(pair.second.desired_fill);
 					b.set_priority(wwWARE, pair.first, pair.second.priority);
 				}
 				for (const auto& pair : ps->worker_queues) {
-					b.inputqueue(pair.first, wwWORKER).set_max_fill(pair.second.desired_fill);
+					b.inputqueue(pair.first, wwWORKER, nullptr).set_max_fill(pair.second.desired_fill);
 					b.set_priority(wwWORKER, pair.first, pair.second.priority);
 				}
 				if (upcast(TrainingsiteSettings, ts, ps)) {
@@ -395,7 +385,8 @@ void ConstructionSite::enhance(const Game& game) {
 	Notifications::publish(NoteImmovable(this, NoteImmovable::Ownership::LOST));
 
 	info_.intermediates.push_back(building_);
-	old_buildings_.push_back(std::make_pair(owner().tribe().building_index(building_->name()), ""));
+	old_buildings_.push_back(
+	   std::make_pair(owner().tribe().building_index(building_->name()), true));
 	building_ = owner().tribe().get_building_descr(building_->enhancement());
 	assert(building_);
 	info_.becomes = building_;
@@ -703,7 +694,6 @@ Overwrite as many values of the current settings with those of the given setting
 void ConstructionSite::apply_settings(const BuildingSettings& cs) {
 	assert(settings_);
 	settings_->apply(cs);
-	delete &cs;
 }
 
 /*

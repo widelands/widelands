@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-05 14:30+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-14 14:40+0000\n"
 "Last-Translator: ThonyVezbe <a.guechoum@gmail.com>\n"
 "Language-Team: Breton (http://www.transifex.com/widelands/widelands/language/br/)\n"
 "MIME-Version: 1.0\n"
@@ -519,7 +519,7 @@ msgstr ""
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/init.lua:58
 msgctxt "building"
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Lec'h divontañ"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:171
@@ -1240,7 +1240,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:156
 msgid "making a fishing net"
-msgstr ""
+msgstr "ober ur roued pesketa"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
@@ -3340,7 +3340,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
 msgctxt "atlanteans_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Penngarter"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/port/init.lua:8
@@ -3359,7 +3359,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters_interim/init.lua:8
 msgctxt "barbarians_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Penngarter"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/barbarians/port/init.lua:8
@@ -3377,7 +3377,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/init.lua:8
 msgctxt "empire_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Penngarter"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/init.lua:8
@@ -3401,7 +3401,7 @@ msgstr ""
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/init.lua:8
 msgctxt "frisians_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Penngarter"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/port/init.lua:8
@@ -3673,7 +3673,7 @@ msgstr ""
 #: ../../data/tribes/immovables/destroyed_building/init.lua:8
 msgctxt "immovable"
 msgid "Destroyed building"
-msgstr ""
+msgstr "Savadur distrujet"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
@@ -3960,7 +3960,7 @@ msgstr ""
 #: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
 #: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
 msgid "Headquarters"
-msgstr ""
+msgstr "Penngarter"
 
 #. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:13
@@ -4131,7 +4131,7 @@ msgstr "Labourerien"
 
 #: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
-msgstr ""
+msgstr "Savadurioù"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
@@ -5442,7 +5442,7 @@ msgstr "Pesked"
 #: ../../data/tribes/wares/fishing_net/init.lua:8
 msgctxt "ware"
 msgid "Fishing Net"
-msgstr ""
+msgstr "Roued pesketa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fishing_rod/init.lua:8

@@ -27,7 +27,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/widelands_geometry.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -120,6 +119,8 @@ public:
 
 	bool wakeup_flag_capacity(Game&, Flag&);
 	bool wakeup_leave_building(Game&, Building&);
+
+	void set_current_experience(int32_t);
 
 	/// This should be called whenever the worker has done work that he gains
 	/// experience from. It may cause him to change his type so that he becomes
@@ -322,11 +323,8 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	virtual void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&);
 
-	static MapObject::Loader* load(EditorGameBase&,
-	                               MapObjectLoader&,
-	                               FileRead&,
-	                               const TribesLegacyLookupTable& lookup_table,
-	                               uint8_t packet_version);
+	static MapObject::Loader*
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, uint8_t packet_version);
 };
 }  // namespace Widelands
 

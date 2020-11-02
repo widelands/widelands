@@ -1,0 +1,140 @@
+# Widelands PATH/TO/FILE.PO
+# Copyright (C) 2005-2020 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# GunChleoc, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svnVERSION\n"
+"Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2020-10-19 15:57+0000\n"
+"PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: GunChleoc, 2020\n"
+"Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
+
+#: ../../data/scripting/training_wheels/logs.lua:70
+msgid ""
+"Click on a small, medium or big building space, then select the building "
+"from the small buildings tab."
+msgstr ""
+"Briog air ionad togail beag, meadhanach no mòr agus tagh an togalach o thaba"
+" nan togalaichean beaga an uairsin."
+
+#: ../../data/scripting/training_wheels/logs.lua:72
+msgid ""
+"Click on a medium or big building space, then select the building from the "
+"medium buildings tab."
+msgstr ""
+"Briog air ionad togail meadhanach no mòr agus tagh an togalach o thaba nan "
+"togalaichean meadhanach an uairsin."
+
+#: ../../data/scripting/training_wheels/logs.lua:74
+msgid ""
+"Click on a big building space, then select the building from the big "
+"buildings tab."
+msgstr ""
+"Briog air ionad togail mòr agus tagh an togalach o thaba nan togalaichean "
+"mòra an uairsin."
+
+#: ../../data/scripting/training_wheels/logs.lua:78
+#: ../../data/scripting/training_wheels/logs.lua:137
+msgid "Logs"
+msgstr "Fiodh"
+
+#: ../../data/scripting/training_wheels/logs.lua:81
+msgid ""
+"You need to supply your tribe with logs. Please build the following "
+"building:"
+msgstr ""
+"Tha an treubh agad feumach air fiodh. Feuch an tog thu an togalach seo:"
+
+#: ../../data/scripting/training_wheels/logs.lua:91
+#: ../../data/scripting/training_wheels/logs.lua:102
+#: ../../data/scripting/training_wheels/logs.lua:113
+#: ../../data/scripting/training_wheels/logs.lua:126
+msgid "Roads"
+msgstr "Rathaidean"
+
+#: ../../data/scripting/training_wheels/logs.lua:116
+msgid "Click on the building’s button…"
+msgstr "Briog air putan an togalaich…"
+
+#: ../../data/scripting/training_wheels/logs.lua:118
+msgid ""
+"…then hold down the ‘Ctrl’ key and click on the flag in front of the target "
+"building."
+msgstr ""
+"…agus cùm sìos iuchair “Ctrl” an uairsin fhad ’s a bhios tu a’ briogadh air "
+"a’ bhratach air beulaibh an togalaich."
+
+#: ../../data/scripting/training_wheels/logs.lua:129
+msgid ""
+"Click on the flag in front of the building, then on the ‘Build road’ button,"
+" then hold down the ‘Ctrl’ key and click on the indicated flag."
+msgstr ""
+"Briog air a’ bhratach air beulaibh an togalaich, air a’ phutan “Tog rathad” "
+"an uairsin agus cùm sìos iuchair “Ctrl” an uairsin fhad ’s a bhios tu a’ "
+"briogadh air a’ bhratach dhan a tha an t-saighead a’ tomhadh."
+
+#: ../../data/scripting/training_wheels/logs.lua:140
+msgid "Well done, we can produce logs now!"
+msgstr "Sin thu fhèin, gheibh sinn fiodh a-nis!"
+
+#: ../../data/scripting/training_wheels/objectives.lua:22
+#: ../../data/scripting/training_wheels/objectives.lua:35
+msgid "Objectives"
+msgstr "Amasan"
+
+#: ../../data/scripting/training_wheels/objectives.lua:38
+msgid "Open the Objectives window"
+msgstr "Fosgail uinneag nan amasan"
+
+#: ../../data/scripting/training_wheels/objectives.lua:39
+#, lua-format
+msgid ""
+"Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
+"current game's objectives."
+msgstr ""
+"Briog air a’ phutan a tha an t-saighead a’ tomhadh ris no brùth air  “%s” "
+"airson amasan a’ gheama làithrich a shealltainn."
+
+#: ../../data/scripting/training_wheels/objectives.lua:45
+msgid "Close this window"
+msgstr "Dùin an uinneag seo"
+
+#: ../../data/scripting/training_wheels/objectives.lua:47
+msgid "Closing this window"
+msgstr "Dùnadh na h-uinneige seo"
+
+#: ../../data/scripting/training_wheels/objectives.lua:48
+msgid ""
+" You can open and close this window by clicking on the ‘Objectives’ button "
+"in the toolbar on the bottom of the screen."
+msgstr ""
+" ’S urrainn dhut an uinneag seo fhosgladh ’s a dhùnadh le briogadh air a’ "
+"phutan “Amasan” air a’ bhàr-inneal aig bonn na sgrìn."
+
+#: ../../data/scripting/training_wheels/objectives.lua:49
+msgid ""
+"Like any other window, you can also close the ‘Objectives’ window by right-"
+"clicking on it."
+msgstr ""
+"Mar a nì thu le uinneag sam bith eile, ’s urrainn dhut uinneag nan “Amasan” "
+"a dhùnadh le briogadh deas oirre."
+
+#: ../../data/scripting/training_wheels/welcome.lua:21
+#: ../../data/scripting/training_wheels/welcome.lua:25
+msgid "Welcome to Widelands!"
+msgstr "Fàilte gu Widelands!"
+
+#: ../../data/scripting/training_wheels/welcome.lua:26
+msgid "Follow the arrows to learn how to play."
+msgstr ""
+"Lean ris na saighdean airson ionnsachadh mar a chluicheas tu an geama."

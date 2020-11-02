@@ -46,7 +46,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          uint32_t const w,
                          uint32_t const h,
                          bool const init_single_window)
-   : UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
+   : UI::Window(&parent, UI::WindowStyle::kWui, "watch", x, y, w, h, _("Watch")),
      parent_(parent),
      map_view_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
@@ -184,8 +184,7 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && Widelands::SeeUnseeNode::kUnexplored ==
-		              ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
+		if (ipl && !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {

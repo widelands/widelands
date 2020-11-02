@@ -46,7 +46,8 @@ namespace UI {
 EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        UI::UniqueWindow::Registry& registry,
                                        LuaInterface* const lua)
-   : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      lua_(lua),
      tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }
@@ -67,12 +68,14 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 			   tab_table->has_key("icon") ? tab_table->get_string("icon") : "";
 			const std::string tab_title = tab_table->get_string("title");
 
-			wrapper_boxes_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(&tabs_, 0, 0, UI::Box::Horizontal))));
+			wrapper_boxes_.insert(
+			   std::make_pair(tab_name, std::unique_ptr<UI::Box>(new UI::Box(
+			                               &tabs_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal))));
 
 			boxes_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(
-			                wrapper_boxes_.at(tab_name).get(), 0, 0, UI::Box::Horizontal))));
+			   tab_name, std::unique_ptr<UI::Box>(new UI::Box(wrapper_boxes_.at(tab_name).get(),
+			                                                  UI::PanelStyle::kWui, 0, 0,
+			                                                  UI::Box::Horizontal))));
 
 			lists_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>(
@@ -137,7 +140,7 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 		log_err_time(parent.egbase().get_gametime(), "Error loading script for encyclopedia:\n%s\n",
 		             err.what());
 		UI::WLMessageBox wmb(
-		   &parent, _("Error!"),
+		   &parent, UI::WindowStyle::kWui, _("Error!"),
 		   (boost::format("Error loading script for encyclopedia:\n%s") % err.what()).str(),
 		   UI::WLMessageBox::MBoxType::kOk);
 		wmb.run<UI::Panel::Returncodes>();

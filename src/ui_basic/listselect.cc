@@ -70,7 +70,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const uint32_t h,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      widest_text_(0),
      widest_hotkey_(0),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
@@ -484,7 +484,12 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 
 		y = (y + scrollpos_) / get_lineheight();
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
-			return false;
+			if (selection_mode_ == ListselectLayout::kDropdown) {
+				set_visible(false);
+				return true;
+			} else {
+				return false;
+			}
 		}
 		play_click();
 		select(y);

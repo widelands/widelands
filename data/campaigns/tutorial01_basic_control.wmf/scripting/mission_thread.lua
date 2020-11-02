@@ -39,7 +39,7 @@ end
 
 function starting_infos()
    -- So that the player cannot build anything here
-   map:place_immovable("debris00", second_quarry_field, "world")
+   map:place_immovable("debris00", second_quarry_field)
    reveal_concentric(plr, sf, 13, true, 80)
    sleep(1000)
 
@@ -50,6 +50,7 @@ function starting_infos()
    wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end
    while wl.ui.MapView().windows.objectives do sleep(100) end
+   plr:mark_training_wheel_as_solved("objectives")
    sleep(500)
 
    -- Teach building spaces
@@ -285,6 +286,7 @@ function build_a_quarry()
    wait_for_quarry_road_connection(first_quarry_field, cs, o)
 
    second_quarry()
+   plr:mark_training_wheel_as_solved("logs")
 
    -- Interludium: talk about census and statistics
    census_and_statistics()
@@ -355,7 +357,7 @@ function messages()
    local old_gamespeed = wl.Game().desired_speed
    wl.Game().desired_speed = 1000
 
-   send_message(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
+   send_to_inbox(plr, teaching_about_messages.title, teaching_about_messages.body, teaching_about_messages, {heading = teaching_about_messages.heading})
    local o = add_campaign_objective(obj_archive_all_messages)
 
    while #plr.inbox > 0 do sleep(200) end

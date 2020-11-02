@@ -30,7 +30,7 @@
 
 class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuNetSetupLAN();
+	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
 
 	void think() override;
 
@@ -68,8 +68,6 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
-
-	UI::Textarea title_;
 
 	UI::Box left_column_, right_column_;
 

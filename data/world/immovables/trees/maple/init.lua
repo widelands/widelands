@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "maple_winter_sapling",
    descname = _ "Maple (Sapling)",
    size = "small",
@@ -34,7 +34,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "maple_winter_pole",
    descname = _ "Maple (Pole)",
    size = "small",
@@ -59,7 +59,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "maple_winter_mature",
    descname = _ "Maple (Mature)",
    size = "small",
@@ -84,7 +84,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "maple_winter_old",
    descname = _ "Maple (Old)",
    species = _ "Maple",
@@ -112,7 +112,7 @@ wl.World():new_immovable_type{
          hotspot = { 23, 59 },
          sound_effect = {
             path = "sound/animals/bird4",
-            priority = 10
+            priority = "10%"
          },
       },
    },

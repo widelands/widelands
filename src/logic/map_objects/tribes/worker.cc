@@ -39,6 +39,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findbob.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/findnode.h"
@@ -53,7 +54,6 @@
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
@@ -61,7 +61,6 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 #include "map_io/map_packet_versions.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 #include "sound/note_sound.h"
 
 namespace Widelands {
@@ -110,11 +109,9 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().resource_index(action.sparam1);
+	DescriptionIndex const res = game.descriptions().resource_index(action.sparam1);
 	if (res == Widelands::INVALID_INDEX) {
-		throw GameDataError(_("should mine resource %s, which does not exist in world; tribe "
-		                      "is not compatible with world"),
-		                    action.sparam1.c_str());
+		throw GameDataError("should mine resource %s, which does not exist", action.sparam1.c_str());
 	}
 
 	// Select one of the fields randomly
@@ -215,11 +212,10 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 	Map* map = game.mutable_map();
 
 	// Make sure that the specified resource is available in this world
-	DescriptionIndex const res = game.world().resource_index(action.sparam1);
+	DescriptionIndex const res = game.descriptions().resource_index(action.sparam1);
 	if (res == Widelands::INVALID_INDEX) {
-		throw GameDataError(_("should breed resource type %s, which does not exist in world; "
-		                      "tribe is not compatible with world"),
-		                    action.sparam1.c_str());
+		throw GameDataError(
+		   "should breed resource type %s, which does not exist", action.sparam1.c_str());
 	}
 
 	// Select one of the fields randomly
@@ -391,7 +387,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 					} else {
 						Coords const coord = imm->get_position();
 						MapIndex mapidx = map.get_index(coord, map.get_width());
-						if (owner().get_vision(mapidx) == SeeUnseeNode::kUnexplored) {
+						if (owner().get_vision(mapidx) == VisibleState::kUnexplored) {
 							list.erase(list.begin() + idx);
 						}
 					}
@@ -481,14 +477,14 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 
 	// Okay, I do not know whether this terrain suits. Let's obtain the value (and then cache it)
 
-	const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
+	const DescriptionMaintainer<ImmovableDescr>& immovables = game.descriptions().immovables();
 
 	// TODO(kxq): could the tree_sapling come from config? Currently, there is only one sparam..
 	// TODO(k.halfmann): avoid fetching this vlaues every time, as it is const during runtime?.
 	// This code is only executed at cache miss.
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
-	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
+	const DescriptionMaintainer<TerrainDescription>& terrains = game.descriptions().terrains();
 	int best = 0;
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
@@ -582,7 +578,7 @@ struct FindNodeSpace {
 bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	std::vector<Coords> list;
 	const Map& map = game.map();
-	const World& world = game.world();
+	const Descriptions& descriptions = game.descriptions();
 
 	CheckStepDefault cstep(descr().movecaps());
 
@@ -590,11 +586,11 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
-	if (action.sparam1.size()) {
+	if (!action.sparam1.empty()) {
 		if (action.iparam4) {
-			functor.add(FindNodeResourceBreedable(world.resource_index(action.sparam1)));
+			functor.add(FindNodeResourceBreedable(descriptions.resource_index(action.sparam1)));
 		} else {
-			functor.add(FindNodeResource(world.resource_index(action.sparam1)));
+			functor.add(FindNodeResource(descriptions.resource_index(action.sparam1)));
 		}
 	}
 
@@ -614,13 +610,13 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		FailNotificationType fail_notification_type = FailNotificationType::kDefault;
 
 		// In case this is a fishbreeder, we do more checks
-		if (action.sparam1.size() && action.iparam4) {
+		if (!action.sparam1.empty() && action.iparam4) {
 
 			// We need to create create another functor that will look for nodes full of fish
 			FindNodeAnd functorAnyFull;
 			functorAnyFull.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 			functorAnyFull.add(FindNodeResourceBreedable(
-			   world.resource_index(action.sparam1), AnimalBreedable::kAnimalFull));
+			   descriptions.resource_index(action.sparam1), AnimalBreedable::kAnimalFull));
 
 			if (action.iparam5 > -1) {
 				functorAnyFull.add(FindNodeImmovableAttribute(action.iparam5), true);
@@ -818,7 +814,7 @@ bool Worker::run_callobject(Game& game, State& state, const Action& action) {
  * been selected by a previous command (i.e. plant)
  */
 bool Worker::run_plant(Game& game, State& state, const Action& action) {
-	assert(action.sparamv.size());
+	assert(!action.sparamv.empty());
 
 	if (action.iparam1 == Action::plantUnlessObject) {
 		if (state.objvar1.get(game)) {
@@ -847,24 +843,22 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<int, DescriptionIndex, MapObjectDescr::OwnerType>>
-	   best_suited_immovables_index;
+	std::set<std::pair<int, DescriptionIndex>> best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
 	                                 const uint32_t attribute_id, const DescriptionIndex index,
-	                                 const ImmovableDescr& immovable_description,
-	                                 MapObjectDescr::OwnerType owner_type) {
+	                                 const ImmovableDescr& immovable_description) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
 		int p = TerrainAffinity::kPrecisionFactor;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
-			   immovable_description.terrain_affinity(), fpos, map, game.world().terrains());
+			   immovable_description.terrain_affinity(), fpos, map, game.descriptions().terrains());
 		}
-		best_suited_immovables_index.insert(std::make_tuple(p, index, owner_type));
+		best_suited_immovables_index.insert(std::make_pair(p, index));
 		if (best_suited_immovables_index.size() > 6) {
 			best_suited_immovables_index.erase(best_suited_immovables_index.begin());
 		}
@@ -882,17 +876,10 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		}
 		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(attrib);
 
-		// Add world immovables
-		const DescriptionMaintainer<ImmovableDescr>& world_immovables = game.world().immovables();
-		for (uint32_t i = 0; i < world_immovables.size(); ++i) {
-			test_suitability(
-			   attribute_id, i, world_immovables.get(i), MapObjectDescr::OwnerType::kWorld);
-		}
-
-		// Add tribe immovables
-		for (const DescriptionIndex i : owner().tribe().immovables()) {
-			test_suitability(attribute_id, i, *owner().tribe().get_immovable_descr(i),
-			                 MapObjectDescr::OwnerType::kTribe);
+		// Add immovables
+		const DescriptionMaintainer<ImmovableDescr>& immovables = game.descriptions().immovables();
+		for (uint32_t i = 0; i < immovables.size(); ++i) {
+			test_suitability(attribute_id, i, immovables.get(i));
 		}
 	}
 
@@ -908,25 +895,22 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Each candidate is weighted by its probability to grow.
 	int total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
-		const int weight = std::get<0>(bsii);
+		const int weight = bsii.first;
 		total_weight += weight;
 	}
 
 	// Avoid division by 0
 	int choice = game.logic_rand() % std::max(1, total_weight);
 	for (const auto& bsii : best_suited_immovables_index) {
-		const int weight = std::get<0>(bsii);
-		state.ivar2 = std::get<1>(bsii);
-		state.ivar3 = static_cast<int>(std::get<2>(bsii));
+		const int weight = bsii.first;
+		state.ivar2 = bsii.second;
 		choice -= weight;
 		if (0 > choice) {
 			break;
 		}
 	}
 
-	Immovable& newimm = game.create_immovable(
-	   pos, state.ivar2, static_cast<Widelands::MapObjectDescr::OwnerType>(state.ivar3),
-	   get_owner());
+	Immovable& newimm = game.create_immovable(pos, state.ivar2, get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject) {
 		state.objvar1 = &newimm;
@@ -953,7 +937,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 	if (owner_->tribe().has_worker(index)) {
 		game.create_worker(get_position(), index, owner_);
 	} else {
-		const DescriptionIndex critter = game.world().critter_index(bob);
+		const DescriptionIndex critter = game.descriptions().critter_index(bob);
 		if (critter == INVALID_INDEX) {
 			molog(game.get_gametime(), "  WARNING: Unknown bob %s\n", bob.c_str());
 			send_signal(game, "fail");
@@ -969,7 +953,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 }
 
 bool Worker::run_terraform(Game& game, State& state, const Action&) {
-	const World& world = game.world();
+	const Descriptions& descriptions = game.descriptions();
 	std::map<TCoords<FCoords>, DescriptionIndex> triangles;
 	const FCoords f = get_position();
 	FCoords tln, ln, trn;
@@ -977,28 +961,33 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	game.map().get_trn(f, &trn);
 	game.map().get_ln(f, &ln);
 
-	DescriptionIndex di =
-	   world.get_terrain_index(world.terrain_descr(f.field->terrain_r()).enhancement());
+	DescriptionIndex di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(f.field->terrain_r())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::R), di));
 	}
-	di = world.get_terrain_index(world.terrain_descr(f.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(f.field->terrain_d())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(f, TriangleIndex::D), di));
 	}
-	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_r()).enhancement());
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(tln.field->terrain_r())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::R), di));
 	}
-	di = world.get_terrain_index(world.terrain_descr(tln.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(tln.field->terrain_d())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(tln, TriangleIndex::D), di));
 	}
-	di = world.get_terrain_index(world.terrain_descr(ln.field->terrain_r()).enhancement());
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(ln.field->terrain_r())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(ln, TriangleIndex::R), di));
 	}
-	di = world.get_terrain_index(world.terrain_descr(trn.field->terrain_d()).enhancement());
+	di = descriptions.terrain_index(
+	   descriptions.get_terrain_descr(trn.field->terrain_d())->enhancement());
 	if (di != INVALID_INDEX) {
 		triangles.emplace(std::make_pair(TCoords<FCoords>(trn, TriangleIndex::D), di));
 	}
@@ -1074,17 +1063,18 @@ bool Worker::run_repeatsearch(Game& game, State& state, const Action& action) {
 bool Worker::run_findresources(Game& game, State& state, const Action&) {
 	const FCoords position = game.map().get_fcoords(get_position());
 	BaseImmovable const* const imm = position.field->get_immovable();
-	const World& world = game.world();
+	const Descriptions& descriptions = game.descriptions();
 
 	if (!(imm && imm->get_size() > BaseImmovable::NONE)) {
 
-		const ResourceDescription* const rdescr = world.get_resource(position.field->get_resources());
+		const ResourceDescription* const rdescr =
+		   descriptions.get_resource_descr(position.field->get_resources());
 		const TribeDescr& t = owner().tribe();
 		const Immovable& ri = game.create_immovable(
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe, get_owner());
+		   get_owner());
 
 		// Geologist also sends a message notifying the player
 		// TODO(GunChleoc): We keep formatting this even when timeout has not elapsed
@@ -1292,14 +1282,14 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 	case wwWORKER: {
 		worker_economy_ = economy;
 		if (old) {
-			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+			old->remove_wares_or_workers(owner().tribe().worker_index(descr().name()), 1);
 		}
 		if (supply_) {
 			supply_->set_economy(worker_economy_);
 		}
 		if (worker_economy_) {
 			worker_economy_->add_wares_or_workers(
-			   owner().tribe().worker_index(descr().name().c_str()), 1, ware_economy_);
+			   owner().tribe().worker_index(descr().name()), 1, ware_economy_);
 		}
 	} break;
 	}
@@ -1423,6 +1413,13 @@ void Worker::create_needed_experience(Game& /* game */) {
 	current_exp_ = 0;
 }
 
+void Worker::set_current_experience(const int32_t xp) {
+	assert(needs_experience());
+	assert(xp >= 0);
+	assert(xp < descr().get_needed_experience());
+	current_exp_ = xp;
+}
+
 /**
  * Gain experience
  *
@@ -1469,7 +1466,7 @@ DescriptionIndex Worker::level(Game& game) {
  */
 void Worker::init_auto_task(Game& game) {
 	if (PlayerImmovable* location = get_location(game)) {
-		if (get_economy(wwWORKER)->warehouses().size() ||
+		if (!get_economy(wwWORKER)->warehouses().empty() ||
 		    location->descr().type() >= MapObjectType::BUILDING) {
 			return start_task_gowarehouse(game);
 		}
@@ -1538,7 +1535,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 	// Signal handling
 	const std::string& signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		// The caller requested a route update, or the previously calculated route
 		// failed.
 		// We will recalculate the route on the next update().
@@ -1749,7 +1746,7 @@ void Worker::shipping_update(Game& game, State& state) {
 	// Signal handling
 	const std::string& signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "endshipping") {
 			signal_handled();
 			if (!dynamic_cast<Warehouse*>(location)) {
@@ -2065,7 +2062,7 @@ void Worker::start_task_program(Game& game, const std::string& programname) {
 }
 
 void Worker::program_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		molog(game.get_gametime(), "[program]: Interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
@@ -2137,7 +2134,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 	// Signal handling
 	std::string signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		// if routing has failed, try a different warehouse/route on next update()
 		if (signal == "fail" || signal == "cancel") {
 			molog(game.get_gametime(), "[gowarehouse]: caught '%s'\n", signal.c_str());
@@ -2175,7 +2172,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 		return start_task_leavebuilding(game, true);
 	}
 
-	if (!get_economy(wwWORKER)->warehouses().size()) {
+	if (get_economy(wwWORKER)->warehouses().empty()) {
 		molog(game.get_gametime(), "[gowarehouse]: No warehouse left in WorkerEconomy\n");
 		return pop_task(game);
 	}
@@ -2228,7 +2225,7 @@ void Worker::start_task_dropoff(Game& game, WareInstance& ware) {
 void Worker::dropoff_update(Game& game, State&) {
 	std::string signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		molog(game.get_gametime(), "[dropoff]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
@@ -2329,7 +2326,7 @@ void Worker::start_task_fetchfromflag(Game& game) {
 
 void Worker::fetchfromflag_update(Game& game, State& state) {
 	std::string signal = get_signal();
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "location") {
 			molog(game.get_gametime(), "[fetchfromflag]: Building disappeared, become fugitive\n");
 			return pop_task(game);
@@ -2449,7 +2446,7 @@ bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
 void Worker::waitforcapacity_update(Game& game, State&) {
 	std::string signal = get_signal();
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		if (signal == "wakeup") {
 			signal_handled();
 		}
@@ -2512,7 +2509,7 @@ void Worker::leavebuilding_update(Game& game, State& state) {
 
 	if (signal == "wakeup") {
 		signal_handled();
-	} else if (signal.size()) {
+	} else if (!signal.empty()) {
 		return pop_task(game);
 	}
 
@@ -2620,7 +2617,7 @@ private:
 };
 
 void Worker::fugitive_update(Game& game, State& state) {
-	if (get_signal().size()) {
+	if (!get_signal().empty()) {
 		molog(game.get_gametime(), "[fugitive]: interrupted by signal '%s'\n", get_signal().c_str());
 		return pop_task(game);
 	}
@@ -2641,7 +2638,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
+		if (flag->get_owner() == get_owner() && !flag->economy(wwWORKER).warehouses().empty()) {
 			set_location(flag);
 			if (does_carry_ware()) {
 				if (flag->has_capacity()) {
@@ -2752,14 +2749,14 @@ void Worker::geologist_update(Game& game, State& state) {
 	if (signal == "fail") {
 		molog(game.get_gametime(), "[geologist]: Caught signal '%s'\n", signal.c_str());
 		signal_handled();
-	} else if (signal.size()) {
+	} else if (!signal.empty()) {
 		molog(game.get_gametime(), "[geologist]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
 
 	//
 	const Map& map = game.map();
-	const World& world = game.world();
+	const Descriptions& descriptions = game.descriptions();
 	Area<FCoords> owner_area(
 	   map.get_fcoords(dynamic_cast<Flag&>(*get_location(game)).get_position()), state.ivar2);
 
@@ -2785,11 +2782,27 @@ void Worker::geologist_update(Game& game, State& state) {
 		if (map.find_reachable_fields(game, owner_area, &list, cstep, ffa)) {
 			FCoords target;
 
+			auto is_mountain = [&map, &descriptions](const FCoords& f) {
+				for (const TCoords<FCoords>& t :
+				     {TCoords<FCoords>(f, TriangleIndex::D), TCoords<FCoords>(f, TriangleIndex::R),
+				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::D),
+				      TCoords<FCoords>(map.tl_n(f), TriangleIndex::R),
+				      TCoords<FCoords>(map.tr_n(f), TriangleIndex::D),
+				      TCoords<FCoords>(map.l_n(f), TriangleIndex::R)}) {
+					if (descriptions
+					       .get_terrain_descr((t.t == TriangleIndex::D ? t.node.field->terrain_d() :
+					                                                     t.node.field->terrain_r()))
+					       ->get_is() &
+					    TerrainDescription::Is::kMineable) {
+						return true;
+					}
+				}
+				return false;
+			};
+
 			// is center a mountain piece?
-			bool is_center_mountain = (world.terrain_descr(owner_area.field->terrain_d()).get_is() &
-			                           TerrainDescription::Is::kMineable) |
-			                          (world.terrain_descr(owner_area.field->terrain_r()).get_is() &
-			                           TerrainDescription::Is::kMineable);
+			const bool is_center_mountain = is_mountain(owner_area);
+
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
@@ -2798,10 +2811,7 @@ void Worker::geologist_update(Game& game, State& state) {
 			uint32_t i = game.logic_rand() % n;
 			do {
 				target = map.get_fcoords(list[game.logic_rand() % list.size()]);
-				is_target_mountain = (world.terrain_descr(target.field->terrain_d()).get_is() &
-				                      TerrainDescription::Is::kMineable) |
-				                     (world.terrain_descr(target.field->terrain_r()).get_is() &
-				                      TerrainDescription::Is::kMineable);
+				is_target_mountain = is_mountain(target);
 				if (i == 0) {
 					i = list.size();
 				}
@@ -3086,10 +3096,10 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 			Coords const coord = list[lidx];
 			list.erase(list.begin() + lidx);
 			MapIndex idx = map.get_index(coord, map.get_width());
-			const SeeUnseeNode visible = owner().get_vision(idx);
+			const VisibleState visible = owner().get_vision(idx);
 
 			// If the field is not yet discovered, go there
-			if (visible == SeeUnseeNode::kUnexplored) {
+			if (visible == VisibleState::kUnexplored) {
 				molog(game.get_gametime(), "[scout]: Go to interesting field (%i, %i)\n", coord.x,
 				      coord.y);
 				if (!start_task_movepath(
@@ -3104,8 +3114,8 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 			// Else evaluate for second best target
 			int dist = map.calc_distance(coord, get_position());
 			Time time = owner().fields()[idx].time_node_last_unseen;
-			// time is only valid if visible is 1
-			if (visible != SeeUnseeNode::kPreviouslySeen) {
+			// time is only valid if the field was previously seen but is no longer seen now
+			if (visible != VisibleState::kPreviouslySeen) {
 				time = oldest_time;
 			}
 
@@ -3185,7 +3195,7 @@ void Worker::scout_update(Game& game, State& state) {
 	const std::string& signal = get_signal();
 	molog(game.get_gametime(), "  Update Scout (%i time)\n", state.ivar2);
 
-	if (signal.size()) {
+	if (!signal.empty()) {
 		molog(game.get_gametime(), "[scout]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
@@ -3394,18 +3404,13 @@ Worker::Loader* Worker::create_loader() {
  * Derived classes must override \ref create_loader to make sure
  * the appropriate actual load functions are called.
  */
-MapObject::Loader* Worker::load(EditorGameBase& egbase,
-                                MapObjectLoader& mol,
-                                FileRead& fr,
-                                const TribesLegacyLookupTable& lookup_table,
-                                uint8_t packet_version) {
+MapObject::Loader*
+Worker::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr, uint8_t packet_version) {
 	if (packet_version == kCurrentPacketVersionMapObject) {
 		try {
 			// header has already been read by caller
-			const std::string name = lookup_table.lookup_worker(fr.c_string());
-
-			const WorkerDescr* descr =
-			   egbase.tribes().get_worker_descr(egbase.tribes().safe_worker_index(name));
+			const WorkerDescr* descr = egbase.descriptions().get_worker_descr(
+			   egbase.descriptions().safe_worker_index(fr.c_string()));
 
 			Worker* worker = dynamic_cast<Worker*>(&descr->create_object());
 			std::unique_ptr<Loader> loader(worker->create_loader());

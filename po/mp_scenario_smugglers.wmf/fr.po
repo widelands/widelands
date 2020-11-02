@@ -7,12 +7,12 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Renaud Bouchard, 2015
-# Tubuntu <tubuntu@testimonium.be>, 2015
+# Tubuntu, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
 "PO-Revision-Date: 2018-05-02 13:05+0000\n"
 "Last-Translator: Balkhmogaehild <balkhmogaehild@protonmail.com>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"

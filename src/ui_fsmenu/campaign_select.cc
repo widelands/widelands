@@ -27,19 +27,10 @@
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
-   : FullscreenMenuLoadMapOrGame(),
+FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& fsmm,
+                                                           Campaigns* campvis)
+   : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Campaign")),
      table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-
-     // Main Title
-     title_(this,
-            0,
-            0,
-            0,
-            0,
-            _("Choose a campaign"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
 
      // Campaign description
      campaign_details_(this),
@@ -69,8 +60,6 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 
 void FullscreenMenuCampaignSelect::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
-	title_.set_pos(Vector2i(0, tabley_ / 3));
-	title_.set_size(get_w(), title_.get_h());
 	table_.set_size(tablew_, tableh_);
 	table_.set_pos(Vector2i(tablex_, tabley_));
 	campaign_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
@@ -90,7 +79,7 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 	if (!campaign_data.visible) {
 		return;
 	}
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
 size_t FullscreenMenuCampaignSelect::get_campaign_index() const {
@@ -127,7 +116,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		tableEntry.set_disabled(!campaign_data.visible);
 	}
 
-	if (table_.size()) {
+	if (!table_.empty()) {
 		table_.sort();
 		table_.select(0);
 	}

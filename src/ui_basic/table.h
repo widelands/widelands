@@ -121,6 +121,7 @@ public:
 	void draw(RenderTarget&);
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool handle_key(bool down, SDL_Keysym code);
 };
 
@@ -292,7 +293,10 @@ public:
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+	bool handle_tooltip() override;
 
 private:
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
@@ -312,7 +316,6 @@ private:
 	int total_width_;
 	int32_t lineheight_;
 	const uint32_t headerheight_;
-	const UI::PanelStyle style_;
 	const UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
@@ -334,6 +337,8 @@ private:
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
 	void set_scrollpos(int32_t pos);
+	bool is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, int column_width) const;
+	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };
 
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-08-25 12:24+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-30 05:27+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -45,11 +45,11 @@ msgstr "이 창을 닫기"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:36
 msgid "Welcome to the Widelands Tutorial!"
-msgstr "와이드랜드 자습서에 오신 것을 환영합니다!"
+msgstr "와이드랜드 자습서에 온 것을 환영합니다!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:38
 msgid "Welcome to Widelands!"
-msgstr "Widelands에 오신 것을 환영합니다!"
+msgstr "와이드랜드에 온 것을 환영합니다!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:40
 msgid ""
@@ -163,8 +163,9 @@ msgstr "우리는 벌목꾼의 오두막집을 위한 좋은 장소를 찾아야
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
-"Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr "‘확인’ 단추를 마우스 왼쪽 단추로 눌러서 이 창을 닫으면 방법을 볼 수 있습니다."
+"Left-click the ‘OK’ button to close this window. I'll show you where the "
+"menu is and where to show and hide the building spaces."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
@@ -175,9 +176,9 @@ msgstr "이 창을 마우스 오른쪽 단추로 눌러서 닫을 수 없습니�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
-"Now that I have shown you how to show and hide the building spaces, please "
-"switch them on again so that we can place our first building."
-msgstr "이제 건물 공간을 보여주고 숨기는 방법을 보여드렸으니, 첫번째 건물을 지을 수 있도록 다시켜십시오."
+"Now that I have shown you where to show and hide the building spaces, please"
+" switch them on so that we can place our first building."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"

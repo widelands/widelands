@@ -23,7 +23,7 @@
 
 #include "base/wexception.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -80,15 +80,17 @@ MapGenLandResource::MapGenLandResource(const LuaTable& table, MapGenInfo& map_ge
 	do_assign("wasteland_outer_bobs", &wasteland_outer_bob_category_);
 }
 
-MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table, const World& world, Area const area_type) {
+MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
+                               const Descriptions& descriptions,
+                               Area const area_type) {
 	weight_ = get_positive_int(table, "weight");
 
-	const auto read_terrains = [&table, &world](
+	const auto read_terrains = [&table, &descriptions](
 	                              const std::string& key, std::vector<DescriptionIndex>* list) {
 		const std::vector<std::string> terrains = table.get_table(key)->array_entries<std::string>();
 
 		for (const std::string& terrain : terrains) {
-			const DescriptionIndex tix = world.terrains().get_index(terrain);
+			const DescriptionIndex tix = descriptions.terrains().get_index(terrain);
 			if (tix == INVALID_INDEX) {
 				throw GameDataError("Random Map Generator: Unknown terrain '%s'", terrain.c_str());
 			}
@@ -258,7 +260,7 @@ const MapGenBobCategory* MapGenInfo::get_bob_category(const std::string& bob_cat
 	return &bob_categories_.find(bob_category)->second;
 }
 
-MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
+MapGenInfo::MapGenInfo(const LuaTable& table, const Descriptions& descriptions) {
 	land_weight_valid_ = false;
 	sum_bob_area_weights_valid_ = false;
 
@@ -279,16 +281,16 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 	{
 		std::unique_ptr<LuaTable> areas(table.get_table("areas"));
 
-		const auto read_area = [&world, &areas](const std::string& area_name,
-		                                        const MapGenAreaInfo::Area area_type,
-		                                        std::vector<MapGenAreaInfo>* area_vector) {
+		const auto read_area = [&descriptions, &areas](const std::string& area_name,
+		                                               const MapGenAreaInfo::Area area_type,
+		                                               std::vector<MapGenAreaInfo>* area_vector) {
 			std::unique_ptr<LuaTable> area(areas->get_table(area_name));
 			std::vector<std::unique_ptr<LuaTable>> entries =
 			   area->array_entries<std::unique_ptr<LuaTable>>();
 			for (std::unique_ptr<LuaTable>& entry : entries) {
 				entry->get_string("name");  // name is only for debugging really. Touch it so LuaTable
 				                            // will not complain.
-				area_vector->push_back(MapGenAreaInfo(*entry, world, area_type));
+				area_vector->push_back(MapGenAreaInfo(*entry, descriptions, area_type));
 			}
 		};
 
@@ -308,14 +310,14 @@ MapGenInfo::MapGenInfo(const LuaTable& table, const World& world) {
 			MapGenBobCategory& category = bob_categories_.at(entry->get_string("name"));
 
 			for (size_t jx = 0; jx < category.num_immovables(); jx++) {
-				if (world.get_immovable_index(category.get_immovable(jx).c_str()) ==
+				if (descriptions.immovable_index(category.get_immovable(jx)) ==
 				    Widelands::INVALID_INDEX) {
 					throw wexception("unknown immovable %s", category.get_immovable(jx).c_str());
 				}
 			}
 
 			for (size_t jx = 0; jx < category.num_critters(); jx++) {
-				if (world.critter_index(category.get_critter(jx)) == Widelands::INVALID_INDEX) {
+				if (descriptions.critter_index(category.get_critter(jx)) == Widelands::INVALID_INDEX) {
 					throw wexception("unknown critter %s", category.get_critter(jx).c_str());
 				}
 			}

@@ -24,17 +24,14 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapResourcesPacket::read(FileSystem& fs,
-                              EditorGameBase& egbase,
-                              const WorldLegacyLookupTable& lookup_table) {
+void MapResourcesPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	fr.open(fs, "binary/resource");
 
@@ -49,13 +46,7 @@ void MapResourcesPacket::read(FileSystem& fs,
 			std::map<uint8_t, uint8_t> smap;
 			for (uint8_t i = 0; i < nr_res; ++i) {
 				uint8_t const id = fr.unsigned_16();
-				const std::string resource_name(lookup_table.lookup_resource(fr.c_string()));
-				const DescriptionIndex res = egbase.mutable_world()->load_resource(resource_name);
-				if (res == Widelands::INVALID_INDEX) {
-					throw GameDataError(
-					   "resource '%s' exists in map but not in world", resource_name.c_str());
-				}
-				smap[id] = res;
+				smap[id] = egbase.mutable_descriptions()->load_resource(fr.c_string());
 			}
 
 			for (uint16_t y = 0; y < map->get_height(); ++y) {
@@ -93,13 +84,13 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	// (saved like terrains)
 	// Write the number of resources
 	const Map& map = egbase.map();
-	const World& world = egbase.world();
-	uint8_t const nr_res = world.get_nr_resources();
+	const Descriptions& descriptions = egbase.descriptions();
+	uint8_t const nr_res = descriptions.nr_resources();
 	fw.unsigned_16(nr_res);
 
 	//  write all resources names and their id's
 	for (int32_t i = 0; i < nr_res; ++i) {
-		const ResourceDescription& res = *world.get_resource(i);
+		const ResourceDescription& res = *descriptions.get_resource_descr(i);
 		fw.unsigned_16(i);
 		fw.c_string(res.name().c_str());
 	}

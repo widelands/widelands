@@ -98,6 +98,7 @@ protected:
 WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
                       "ware_statistics",
                       &registry,
                       kPlotWidth + 2 * kSpacing,
@@ -117,7 +118,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	std::fill(active_colors_.begin(), active_colors_.end(), 0);
 
 	//  First, we must decide about the size.
-	main_box_ = new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, 5);
+	main_box_ = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, 5);
 	main_box_->set_border(kSpacing, kSpacing, kSpacing, kSpacing);
 	set_center_panel(main_box_);
 
@@ -191,7 +192,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	display_->set_min_free_vertical_space(400);
 	main_box_->add(display_, UI::Box::Resizing::kFullSize);
 
-	slider_ = new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
+	slider_ = new WuiPlotAreaSlider(main_box_, *plot_production_, 0, 0, kPlotWidth, 45);
 	slider_->changedto.connect([this](const int32_t timescale) { set_time(timescale); });
 	main_box_->add(slider_, UI::Box::Resizing::kFullSize);
 }
@@ -252,8 +253,8 @@ void WareStatisticsMenu::layout() {
 	   std::max(3, AbstractWaresDisplay::calc_hgap(display_->get_extent().w, kPlotWidth)), false);
 	display_->get_desired_size(&w2, &h2);
 
-	main_box_->set_desired_size(
-	   std::max(w2, kPlotWidth) + 2 * kSpacing, h1 + h2 + h3 + text_height(UI::FontStyle::kLabel));
+	main_box_->set_desired_size(std::max(w2, kPlotWidth) + 2 * kSpacing,
+	                            h1 + h2 + h3 + text_height(UI::FontStyle::kWuiLabel));
 	UI::UniqueWindow::layout();
 	layouting = false;
 }

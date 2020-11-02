@@ -22,10 +22,11 @@
 #include <memory>
 
 #include "base/log.h"
+#include "base/math.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/terrain_affinity.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
 #include "logic/player.h"
 #include "sound/note_sound.h"
@@ -120,7 +121,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 				throw GameDataError(
 				   "Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
-		} catch (const GameDataError& e) {
+		} catch (const std::exception& e) {
 			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}
 	}
@@ -176,15 +177,11 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 
 static std::vector<std::pair<std::string /* immo */, std::string /* becomes */>>
    immovable_relations_;
-void ImmovableProgram::postload_immovable_relations(const Tribes& tribes, const World& world) {
+
+void ImmovableProgram::postload_immovable_relations(const Descriptions& descriptions) {
 	for (const auto& pair : immovable_relations_) {
-		DescriptionIndex di = world.get_immovable_index(pair.second);
-		if (di != Widelands::INVALID_INDEX) {
-			const_cast<ImmovableDescr&>(*world.get_immovable_descr(di)).add_became_from(pair.first);
-		} else {
-			tribes.get_mutable_immovable_descr(tribes.safe_immovable_index(pair.second))
-			   ->add_became_from(pair.first);
-		}
+		descriptions.get_mutable_immovable_descr(descriptions.safe_immovable_index(pair.second))
+		   ->add_became_from(pair.first);
 	}
 	immovable_relations_.clear();
 }
@@ -235,7 +232,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 					bob_ = true;
 					type_name_ = item.second;
 				} else if (item.first == "chance") {
-					probability_ = read_percent_to_int(item.second);
+					probability_ = math::read_percent_to_int(item.second);
 				} else {
 					throw GameDataError(
 					   "Unknown argument '%s'. Usage: [bob:]name [chance:<percent>]", argument.c_str());
@@ -250,7 +247,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				log_warn("%s: Deprecated chance in 'transform' program, use 'chance:<percent>' "
 				         "instead.\n",
 				         descr.name().c_str());
-				probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
+				probability_ = (read_positive(item.first, 254) * math::k100PercentAsInt) / 256;
 			} else {
 				type_name_ = argument;
 			}
@@ -270,7 +267,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		if (!bob_) {
 			immovable_relations_.push_back(std::make_pair(descr.name(), type_name_));
 		}
-	} catch (const WException& e) {
+	} catch (const std::exception& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
 }
@@ -279,10 +276,9 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 	if (immovable.apply_growth_delay(game)) {
 		return;
 	}
-	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
+	if (probability_ == 0 || game.logic_rand() % math::k100PercentAsInt < probability_) {
 		Player* player = immovable.get_owner();
 		Coords const c = immovable.get_position();
-		MapObjectDescr::OwnerType owner_type = immovable.descr().owner_type();
 		std::set<PlayerNumber> mfr = immovable.get_marked_for_removal();
 
 		immovable.remove(game);  //  Now immovable is a dangling reference!
@@ -291,7 +287,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 			game.create_ship(c, type_name_, player);
 		} else {
 			Immovable& i = game.create_immovable_with_name(
-			   c, type_name_, owner_type, player, nullptr /* former_building_descr */);
+			   c, type_name_, player, nullptr /* former_building_descr */);
 			for (const PlayerNumber& p : mfr) {
 				i.set_marked_for_removal(p, true);
 			}
@@ -355,15 +351,13 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	const ImmovableDescr& descr = immovable.descr();
 
 	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
-		MapObjectDescr::OwnerType owner_type = descr.owner_type();
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.descriptions().terrains())) {
 		Player* owner = immovable.get_owner();
 		std::set<PlayerNumber> mfr = immovable.get_marked_for_removal();
 
 		immovable.remove(game);  //  Now immovable is a dangling reference!
-
-		Immovable& i = game.create_immovable_with_name(
-		   f, type_name_, owner_type, owner, nullptr /* former_building_descr */);
+		Immovable& i =
+		   game.create_immovable_with_name(f, type_name_, owner, nullptr /* former_building_descr */);
 		for (const PlayerNumber& p : mfr) {
 			i.set_marked_for_removal(p, true);
 		}
@@ -409,12 +403,12 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 	} else {
 		const std::pair<std::string, std::string> item = read_key_value_pair(arguments.front(), ':');
 		if (item.first == "chance") {
-			probability_ = read_percent_to_int(item.second);
+			probability_ = math::read_percent_to_int(item.second);
 		} else if (item.first[0] >= '0' && item.first[0] <= '9') {
 			// TODO(GunChleoc): Savegame compatibility, remove this argument option after v1.0
 			log_warn("%s: Deprecated chance in 'remove' program, use 'chance:<percent>' instead.\n",
 			         descr.name().c_str());
-			probability_ = (read_positive(item.first, 254) * kMaxProbability) / 256;
+			probability_ = (read_positive(item.first, 254) * math::k100PercentAsInt) / 256;
 		} else {
 			throw GameDataError(
 			   "Unknown argument '%s'. Usage: [chance:<percent>]", arguments.front().c_str());
@@ -423,7 +417,7 @@ ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments,
 }
 
 void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) const {
-	if (probability_ == 0 || game.logic_rand() % kMaxProbability < probability_) {
+	if (probability_ == 0 || game.logic_rand() % math::k100PercentAsInt < probability_) {
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 	} else {
 		immovable.program_step(game);
@@ -441,7 +435,7 @@ seed
    :arg percent proximity: The radius within which the immovable will seed is not limited and
       is determined by repeatedly generating a random number and comparing it with the proximity
       :ref:`map_object_programs_datatypes_percent` chance until the comparison fails. The higher
-      this number, the closer the new imovable will be seeded.
+      this number, the closer the new immovable will be seeded.
 
    Finds a random location nearby and creates a new immovable with the given name there with a
    chance depending on *this* immovable's terrain affinity. The chance that such a location will be
@@ -481,12 +475,12 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments,
 		         "'seed=<immovable_name> proximity:<percent>' in %s\n",
 		         descr.name().c_str());
 		type_name_ = arguments.front();
-		probability_ = (read_positive(arguments.at(1), 254) * kMaxProbability) / 256;
+		probability_ = (read_positive(arguments.at(1), 254) * math::k100PercentAsInt) / 256;
 	} else {
 		for (const std::string& argument : arguments) {
 			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 			if (item.first == "proximity") {
-				probability_ = read_percent_to_int(item.second);
+				probability_ = math::read_percent_to_int(item.second);
 			} else if (item.second.empty()) {
 				// TODO(GunChleoc): It would be nice to check if target exists, but we can't guarantee
 				// the load order. Maybe in postload() one day.
@@ -511,14 +505,14 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 	const ImmovableDescr& descr = immovable.descr();
 
 	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
-	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
+	    probability_to_grow(descr.terrain_affinity(), f, map, game.descriptions().terrains())) {
 		// Seed a new tree.
 		MapFringeRegion<> mr(map, Area<>(f, 0));
 		uint32_t fringe_size = 0;
 		do {
 			mr.extend(map);
 			fringe_size += 6;
-		} while (game.logic_rand() % kMaxProbability < probability_);
+		} while (game.logic_rand() % math::k100PercentAsInt < probability_);
 
 		for (uint32_t n = game.logic_rand() % fringe_size; n; --n) {
 			mr.advance(map);
@@ -529,9 +523,9 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
 		    (game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 		       probability_to_grow(
-		          descr.terrain_affinity(), new_location, map, game.world().terrains())) {
-			game.create_immovable_with_name(mr.location(), type_name_, descr.owner_type(),
-			                                nullptr /* owner */, nullptr /* former_building_descr */);
+		          descr.terrain_affinity(), new_location, map, game.descriptions().terrains())) {
+			game.create_immovable_with_name(
+			   mr.location(), type_name_, nullptr /* owner */, nullptr /* former_building_descr */);
 		}
 	}
 
@@ -662,13 +656,13 @@ void ImmovableProgram::ActConstruct::execute(Game& g, Immovable& imm) const {
 		}
 
 		uint32_t randdecay = g.logic_rand() % totaldelivered;
-		for (Buildcost::iterator it = d->delivered.begin(); it != d->delivered.end(); ++it) {
-			if (randdecay < it->second) {
-				it->second--;
+		for (auto& item : d->delivered) {
+			if (randdecay < item.second) {
+				item.second--;
 				break;
 			}
 
-			randdecay -= it->second;
+			randdecay -= item.second;
 		}
 
 		imm.anim_construction_done_ = d->delivered.total();

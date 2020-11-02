@@ -21,7 +21,7 @@ function run_island(plr, island_idx)
    _nplayers_finished_island[island_idx] = rank
 
    local rewards = _finish_rewards[island_idx][rank]
-   send_to_all(
+   send_to_all_inboxes(
       msgs_finished_island[rank]:bformat(plr.name, island_idx + 1) ..
       finished_island_continues:format(format_rewards(rewards))
    )
@@ -50,7 +50,7 @@ function watch_hill()
                castle_field = f
                started_claiming = game.time
                claiming_player = castle_field.immovable.owner
-               send_to_all(player_claims_hill:format(claiming_player.name))
+               send_to_all_inboxes(player_claims_hill:format(claiming_player.name))
                break
             end
          end
@@ -61,25 +61,25 @@ function watch_hill()
          sleep(1049)
          local imm = castle_field.immovable
          if not imm or imm.descr.name ~= "atlanteans_castle" or imm.owner ~= claiming_player then
-            send_to_all(lost_control:format(claiming_player.name))
+            send_to_all_inboxes(lost_control:format(claiming_player.name))
             break
          end
 
          local claimed_for = (game.time - started_claiming) / 1000
          if 5*60 < claimed_for and send_msg == 0 then
-            send_to_all(had_control_for:bformat(claiming_player.name, _"5 minutes"))
+            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _"5 minutes"))
             send_msg = send_msg + 1
          end
          if 10*60 < claimed_for and send_msg == 1 then
-            send_to_all(had_control_for:bformat(claiming_player.name, _"10 minutes"))
+            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _"10 minutes"))
             send_msg = send_msg + 1
          end
          if 15*60 < claimed_for and send_msg == 2 then
-            send_to_all(had_control_for:bformat(claiming_player.name, _"15 minutes"))
+            send_to_all_inboxes(had_control_for:bformat(claiming_player.name, _"15 minutes"))
             send_msg = send_msg + 1
          end
          if 20*60 < claimed_for and send_msg == 3 then
-            send_to_all(player_won:format(claiming_player.name))
+            send_to_all_inboxes(player_won:format(claiming_player.name))
             return
          end
       end

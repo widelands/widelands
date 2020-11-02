@@ -69,7 +69,7 @@ void Carrier::road_update(Game& game, State& state) {
 		signal_handled();
 		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, Duration(250));
-	} else if (signal.size()) {
+	} else if (!signal.empty()) {
 		// Something else happened (probably a location signal)
 		molog(game.get_gametime(), "[road]: Terminated by signal '%s'\n", signal.c_str());
 		return pop_task(game);
@@ -158,7 +158,7 @@ void Carrier::transport_update(Game& game, State& state) {
 		signal_handled();
 		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, Duration(250));
-	} else if (signal.size()) {
+	} else if (!signal.empty()) {
 		molog(game.get_gametime(), "[transport]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
 	}
@@ -590,9 +590,9 @@ void Carrier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 CarrierDescr::CarrierDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           Tribes& tribes,
+                           Descriptions& descriptions,
                            MapObjectType t)
-   : WorkerDescr(init_descname, t, table, tribes) {
+   : WorkerDescr(init_descname, t, table, descriptions) {
 }
 
 /**

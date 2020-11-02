@@ -2,7 +2,7 @@ dirname = "tribes/buildings/productionsites/empire/brewery/"
 
 push_textdomain("scenario_emp04.wmf")
 
-tribes:new_productionsite_type {
+descriptions:new_productionsite_type {
    name = "empire_brewery1",
    descname = pgettext("empire_building", "Brewery"),
    icon = dirname .. "menu.png",

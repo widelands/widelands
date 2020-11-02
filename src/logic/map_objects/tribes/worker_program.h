@@ -21,8 +21,8 @@
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_PROGRAM_H
 
 #include "base/macros.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_program.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/workarea_info.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "scripting/lua_table.h"
@@ -37,7 +37,7 @@ struct WorkerProgram : public MapObjectProgram {
 	WorkerProgram(const std::string& init_name,
 	              const LuaTable& actions_table,
 	              const WorkerDescr& worker,
-	              Tribes& tribes);
+	              Descriptions& descriptions);
 
 	using Actions = std::vector<Worker::Action>;
 	Actions::size_type get_size() const {
@@ -112,7 +112,7 @@ private:
 	void parse_terraform(Worker::Action* act, const std::vector<std::string>& cmd);
 
 	const WorkerDescr& worker_;
-	Tribes& tribes_;
+	Descriptions& descriptions_;
 	Actions actions_;
 	static ParseMap const parsemap_[];
 	std::set<DescriptionIndex> produced_ware_types_;

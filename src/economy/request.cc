@@ -22,6 +22,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
@@ -67,11 +68,11 @@ Request::Request(PlayerImmovable& init_target,
      required_interval_(0),
      last_request_time_(required_time_) {
 	assert(type_ == wwWARE || type_ == wwWORKER);
-	if (w == wwWARE && !init_target.owner().egbase().tribes().ware_exists(index)) {
+	if (w == wwWARE && !init_target.owner().egbase().descriptions().ware_exists(index)) {
 		throw wexception(
 		   "creating ware request with index %u, but the ware for this index doesn't exist", index);
 	}
-	if (w == wwWORKER && !init_target.owner().egbase().tribes().worker_exists(index)) {
+	if (w == wwWORKER && !init_target.owner().egbase().descriptions().worker_exists(index)) {
 		throw wexception(
 		   "creating worker request with index %u, but the worker for this index doesn't exist",
 		   index);
@@ -88,7 +89,7 @@ Request::~Request() {
 	}
 
 	// Cancel all ongoing transfers
-	while (transfers_.size()) {
+	while (!transfers_.empty()) {
 		cancel_transfer(0);
 	}
 }
@@ -104,28 +105,29 @@ constexpr uint16_t kCurrentPacketVersion = 6;
  * might have been initialized. We have to kill them and replace
  * them through the data in the file
  */
-void Request::read(FileRead& fr,
-                   Game& game,
-                   MapObjectLoader& mol,
-                   const TribesLegacyLookupTable& tribes_lookup_table) {
+void Request::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			const TribeDescr& tribe = target_.owner().tribe();
-			char const* const type_name = fr.c_string();
-			DescriptionIndex const wai = tribe.ware_index(tribes_lookup_table.lookup_ware(type_name));
-			if (tribe.has_ware(wai)) {
-				type_ = wwWARE;
-				index_ = wai;
-			} else {
-				DescriptionIndex const woi =
-				   tribe.worker_index(tribes_lookup_table.lookup_worker(type_name));
-				if (tribe.has_worker(woi)) {
-					type_ = wwWORKER;
-					index_ = woi;
-				} else {
-					throw wexception("Request::read: unknown type '%s'.\n", type_name);
+			const std::string wareworker_name = fr.c_string();
+			const std::pair<WareWorker, DescriptionIndex> wareworker =
+			   game.descriptions().load_ware_or_worker(wareworker_name);
+			type_ = wareworker.first;
+			index_ = wareworker.second;
+			// Check that the tribe uses the ware/worker
+			switch (type_) {
+			case WareWorker::wwWARE: {
+				if (!target_.owner().tribe().has_ware(index_)) {
+					throw GameDataError("Request::read: tribe '%s' does not use ware '%s'",
+					                    target_.owner().tribe().name().c_str(), wareworker_name.c_str());
 				}
+			} break;
+			case WareWorker::wwWORKER: {
+				if (!target_.owner().tribe().has_worker(index_)) {
+					throw GameDataError("Request::read: tribe '%s' does not use worker '%s'",
+					                    target_.owner().tribe().name().c_str(), wareworker_name.c_str());
+				}
+			} break;
 			}
 
 			// Overwrite initial economy because our WareWorker type may have changed
@@ -197,12 +199,12 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 	assert(type_ == wwWARE || type_ == wwWORKER);
 	switch (type_) {
 	case wwWARE:
-		assert(game.tribes().ware_exists(index_));
-		fw.c_string(game.tribes().get_ware_descr(index_)->name());
+		assert(game.descriptions().ware_exists(index_));
+		fw.c_string(game.descriptions().get_ware_descr(index_)->name());
 		break;
 	case wwWORKER:
-		assert(game.tribes().worker_exists(index_));
-		fw.c_string(game.tribes().get_worker_descr(index_)->name());
+		assert(game.descriptions().worker_exists(index_));
+		fw.c_string(game.descriptions().get_worker_descr(index_)->name());
 		break;
 	}
 
@@ -273,72 +275,69 @@ Time Request::get_required_time() const {
 	return get_base_required_time(economy_->owner().egbase(), transfers_.size());
 }
 
-#define PRIORITY_MAX_COST 50000
-#define COST_WEIGHT_IN_PRIORITY 1
-#define WAITTIME_WEIGHT_IN_PRIORITY 2
-
 /**
- * Return the request priority used to sort requests or -1 to skip request
+ * Return the request priority. Used only to sort requests from most to least important.
  */
-// TODO(sirver): this is pretty weird design: we ask the building for the
-// priority it assigns to the ware, at the same time, we also adjust the
-// priorities depending on the building type. Move all of this into the
-// building code.
-int32_t Request::get_priority(int32_t cost) const {
-	int MAX_IDLE_PRIORITY = 100;
-	bool is_construction_site = false;
-	int32_t modifier = kPriorityNormal;
+uint32_t Request::get_priority(const int32_t cost) const {
+	assert(cost >= 0);
+	const WarePriority& priority =
+	   (target_building_ ? target_building_->get_priority(get_type(), get_index()) :
+	                       WarePriority::kNormal);
 
-	if (target_building_) {
-		modifier = target_building_->get_priority(get_type(), get_index());
-		if (target_constructionsite_) {
-			is_construction_site = true;
-		} else if (target_warehouse_) {
-			// If there is no expedition at this warehouse, use the default
-			// warehouse calculation. Otherwise we use the default priority for
-			// the ware.
-			if (!target_warehouse_->get_portdock() ||
-			    !target_warehouse_->get_portdock()->expedition_bootstrap()) {
-				modifier =
-				   std::max(1, MAX_IDLE_PRIORITY - cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
-			}
-		}
+	if (WarePriority::kVeryHigh <= priority) {
+		// Always serve requests with the highest priority first,
+		// even if other requests have to wait then.
+		return std::numeric_limits<uint32_t>::max();
+	} else if (priority <= WarePriority::kVeryLow) {
+		// Requests with priority 0 are processed by the
+		// Economy only if there are no other requests.
+		return 0;
 	}
 
-	if (cost > PRIORITY_MAX_COST) {
-		cost = PRIORITY_MAX_COST;
-	}
-
-	// priority is higher if building waits for ware a long time
-	// additional factor - cost to deliver, so nearer building
-	// with same priority will get ware first
-	//  make sure that idle request are lower
-	return MAX_IDLE_PRIORITY +
-	       std::max(
-	          uint32_t(1),
-	          ((economy_->owner().egbase().get_gametime().get() -
-	            (is_construction_site ? get_required_time().get() : get_last_request_time().get())) *
-	              WAITTIME_WEIGHT_IN_PRIORITY +
-	           (PRIORITY_MAX_COST - cost) * COST_WEIGHT_IN_PRIORITY) *
-	             modifier);
+	const uint32_t cur_time = economy_->owner().egbase().get_gametime().get();
+	const uint32_t req_time =
+	   (target_constructionsite_ ? get_required_time().get() : get_last_request_time().get());
+	return
+	   // Linear scaling of request priority depending on
+	   // the building's user-specified ware priority.
+	   priority.to_weighting_factor() *
+	   // Linear scaling of request priority depending on the time
+	   // since the request was last supplied (constructionsites)
+	   // or when the next ware is due (productionsites)
+	   (cur_time > req_time ? cur_time - req_time : 1) *
+	   // Requests with higher costs are preferred to keep the average waiting
+	   // times short. This is capped at an arbitrary max cost of 30 seconds
+	   // gametime to not disadvantage close-by supplies too much.
+	   std::max(1, 30000 - cost);
 }
 
 /**
- * Return the transfer priority, based on the priority set at the destination
+ * Return the transfer priority, based on the priority set at the destination,
+ * normalized on a scale from 0 (lowest) to Flag::kMaxTransferPriority (highest).
  */
-// TODO(sirver): Same comment as for Request::get_priority.
-uint32_t Request::get_transfer_priority() const {
-	uint32_t pri = 0;
-
-	if (target_building_) {
-		pri = target_building_->get_priority(get_type(), get_index());
-		if (target_constructionsite_) {
-			return pri + 3;
-		} else if (target_warehouse_) {
-			return pri - 2;
-		}
+uint32_t Request::get_normalized_transfer_priority() const {
+	if (!target_building_) {
+		return 0;
 	}
-	return pri;
+
+	// Magic numbers for reasonable weighting. Results for the values at the time of writing:
+	//  Priority     Weighting factor      Result of the
+	//              (ware_priority.cc)   calculation below
+	// VeryLow               0                  0
+	// Low                   1                  2
+	// Normal               64                  7
+	// High               4096                 12
+	// VeryHigh         2^32-1                 16
+
+	const WarePriority& priority = target_building_->get_priority(get_type(), get_index());
+	if (WarePriority::kVeryHigh <= priority) {
+		return Flag::kMaxTransferPriority;
+	} else if (priority <= WarePriority::kVeryLow) {
+		return 0;
+	}
+
+	const uint32_t factor = std::log2(priority.to_weighting_factor());
+	return factor + 2 - factor / 6;
 }
 
 /**

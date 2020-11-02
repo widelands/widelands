@@ -29,6 +29,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
+#include "logic/training_wheels.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
@@ -196,6 +197,12 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+	bool acquire_training_wheel_lock(const std::string& objective);
+	void mark_training_wheel_as_solved(const std::string& objective);
+	bool training_wheels_wanted() const {
+		return training_wheels_wanted_;
+	}
+
 	void postload() override;
 
 	void think() override;
@@ -264,7 +271,7 @@ public:
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
 	void send_player_set_ware_priority(
-	   PlayerImmovable&, int32_t type, DescriptionIndex index, int32_t prio, bool is_cs = false);
+	   PlayerImmovable&, WareWorker, DescriptionIndex, const WarePriority&, bool is_cs = false);
 	void send_player_set_input_max_fill(
 	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
@@ -414,6 +421,10 @@ private:
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
+
+	std::unique_ptr<TrainingWheels> training_wheels_;
+	bool training_wheels_wanted_;
+
 	bool replay_;
 };
 

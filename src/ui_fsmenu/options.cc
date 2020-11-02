@@ -76,29 +76,31 @@ constexpr int16_t kPadding = 4;
 FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                              OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
+                UI::WindowStyle::kFsMenu,
                 "options",
-                (fsmm.get_w() - calc_desired_window_width(fsmm)) / 2,
-                (fsmm.get_h() - calc_desired_window_height(fsmm)) / 2,
-                calc_desired_window_width(fsmm),
-                calc_desired_window_height(fsmm),
+                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuOptions),
+                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuOptions),
+                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuOptions),
+                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuOptions),
                 _("Options")),
 
      // Buttons
-     button_box_(this, 0, 0, UI::Box::Horizontal),
-     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
-     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
+     button_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 
      // Tabs
-     tabs_(this, UI::TabPanelStyle::kWuiLight),
+     tabs_(this, UI::TabPanelStyle::kFsMenu),
 
-     box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
-     box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_newgame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_ingame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_interface_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     box_interface_left_(
+        &box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_windows_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_sound_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
      language_dropdown_(&box_interface_left_,
@@ -110,8 +112,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                         24,
                         _("Language"),
                         UI::DropdownType::kTextual,
-                        UI::PanelStyle::kWui,
-                        UI::ButtonStyle::kWuiMenu),
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuMenu),
      resolution_dropdown_(&box_interface_left_,
                           "dropdown_resolution",
                           0,
@@ -121,11 +123,17 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           24,
                           _("Window Size"),
                           UI::DropdownType::kTextual,
-                          UI::PanelStyle::kWui,
-                          UI::ButtonStyle::kWuiMenu),
+                          UI::PanelStyle::kFsMenu,
+                          UI::ButtonStyle::kFsMenuMenu),
 
-     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
-     sdl_cursor_(&box_interface_left_, Vector2i::zero(), _("Use system mouse cursor"), "", 0),
+     inputgrab_(
+        &box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
+     sdl_cursor_(&box_interface_left_,
+                 UI::PanelStyle::kFsMenu,
+                 Vector2i::zero(),
+                 _("Use system mouse cursor"),
+                 "",
+                 0),
      sb_maxfps_(&box_interface_left_,
                 0,
                 0,
@@ -134,16 +142,29 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                 opt.maxfps,
                 0,
                 99,
-                UI::PanelStyle::kWui,
+                UI::PanelStyle::kFsMenu,
                 _("Maximum FPS:")),
-     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
-     snap_win_overlap_only_(
-        &box_windows_, Vector2i::zero(), _("Snap windows only when overlapping"), "", 0),
-     dock_windows_to_edges_(&box_windows_, Vector2i::zero(), _("Dock windows to edges"), "", 0),
-     animate_map_panning_(
-        &box_windows_, Vector2i::zero(), _("Animate automatic map movements"), "", 0),
+     snap_win_overlap_only_(&box_windows_,
+                            UI::PanelStyle::kFsMenu,
+                            Vector2i::zero(),
+                            _("Snap windows only when overlapping"),
+                            "",
+                            0),
+     dock_windows_to_edges_(&box_windows_,
+                            UI::PanelStyle::kFsMenu,
+                            Vector2i::zero(),
+                            _("Dock windows to edges"),
+                            "",
+                            0),
+     animate_map_panning_(&box_windows_,
+                          UI::PanelStyle::kFsMenu,
+                          Vector2i::zero(),
+                          _("Animate automatic map movements"),
+                          "",
+                          0),
 
      sb_dis_panel_(&box_windows_,
                    0,
@@ -153,7 +174,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                    opt.panel_snap_distance,
                    0,
                    99,
-                   UI::PanelStyle::kWui,
+                   UI::PanelStyle::kFsMenu,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -165,12 +186,12 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                     opt.border_snap_distance,
                     0,
                     99,
-                    UI::PanelStyle::kWui,
+                    UI::PanelStyle::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     sound_options_(box_sound_, UI::SliderStyle::kWuiLight),
+     sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
 
      // Saving options
      sb_autosave_(&box_saving_,
@@ -181,7 +202,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                   opt.autosave / 60,
                   0,
                   100,
-                  UI::PanelStyle::kWui,
+                  UI::PanelStyle::kFsMenu,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
                   UI::SpinBox::Type::kBig),
@@ -194,44 +215,83 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           opt.rolling_autosave,
                           1,
                           20,
-                          UI::PanelStyle::kWui,
+                          UI::PanelStyle::kFsMenu,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,
+          UI::PanelStyle::kFsMenu,
           Vector2i::zero(),
           _("Compress widelands data files (maps, replays and savegames)"),
           "",
           0),
      write_syncstreams_(&box_saving_,
+                        UI::PanelStyle::kFsMenu,
                         Vector2i::zero(),
                         _("Write syncstreams in network games to debug desyncs"),
                         "",
                         0),
      // New Game options
-     show_buildhelp_(&box_newgame_, Vector2i::zero(), _("Show Building Spaces")),
-     show_census_(&box_newgame_, Vector2i::zero(), _("Show Census")),
-     show_statistics_(&box_newgame_, Vector2i::zero(), _("Show Statistics")),
-     show_soldier_levels_(&box_newgame_, Vector2i::zero(), _("Show Soldier Levels")),
-     show_buildings_(&box_newgame_, Vector2i::zero(), _("Show Buildings")),
-     show_workarea_overlap_(&box_newgame_, Vector2i::zero(), _("Show Workarea Overlaps")),
+     show_buildhelp_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Building Spaces")),
+     show_census_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Census")),
+     show_statistics_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Statistics")),
+     show_soldier_levels_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Soldier Levels")),
+     show_buildings_(&box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Buildings")),
+     show_workarea_overlap_(
+        &box_newgame_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Workarea Overlaps")),
 
      // In-Game options
-     auto_roadbuild_mode_(
-        &box_ingame_, Vector2i::zero(), _("Start building road after placing a flag")),
-     transparent_chat_(
-        &box_ingame_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
+     auto_roadbuild_mode_(&box_ingame_,
+                          UI::PanelStyle::kFsMenu,
+                          Vector2i::zero(),
+                          _("Start building road after placing a flag")),
+     transparent_chat_(&box_ingame_,
+                       UI::PanelStyle::kFsMenu,
+                       Vector2i::zero(),
+                       _("Show in-game chat with transparent background"),
+                       "",
+                       0),
 
-     /** TRANSLATORS: A watchwindow is a window where you keep watching an object or a map region,*/
-     /** TRANSLATORS: and it also lets you jump to it on the map. */
-     single_watchwin_(&box_ingame_, Vector2i::zero(), _("Use single watchwindow mode")),
-     /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
-     ctrl_zoom_(&box_ingame_, Vector2i::zero(), _("Zoom only when Ctrl is pressed")),
-     game_clock_(&box_ingame_, Vector2i::zero(), _("Display game time in the top left corner")),
-     numpad_diagonalscrolling_(
-        &box_ingame_, Vector2i::zero(), _("Allow diagonal scrolling with the numeric keypad")),
+     single_watchwin_(&box_ingame_,
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i::zero(),
+                      /** TRANSLATORS: A watchwindow is a window where you keep watching an object
+                         or a map region,*/
+                      /** TRANSLATORS: and it also lets you jump to it on the map. */
+                      _("Use single watchwindow mode")),
+     ctrl_zoom_(&box_ingame_,
+                UI::PanelStyle::kFsMenu,
+                Vector2i::zero(),
+                /** TRANSLATORS: This refers to to zooming with the scrollwheel.*/
+                _("Zoom only when Ctrl is pressed")),
+     game_clock_(&box_ingame_,
+                 UI::PanelStyle::kFsMenu,
+                 Vector2i::zero(),
+                 _("Display game time in the top left corner")),
+     numpad_diagonalscrolling_(&box_ingame_,
+                               UI::PanelStyle::kFsMenu,
+                               Vector2i::zero(),
+                               _("Allow diagonal scrolling with the numeric keypad")),
+     training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     training_wheels_(&training_wheels_box_,
+                      UI::PanelStyle::kFsMenu,
+                      Vector2i::zero(),
+                      _("Teach me how to play")),
+     training_wheels_reset_(&training_wheels_box_,
+                            "reset_training_wheels",
+                            0,
+                            0,
+                            0,
+                            0,
+                            UI::ButtonStyle::kFsMenuSecondary,
+                            _("Reset progress")),
      os_(opt) {
+
+	do_not_layout_on_resolution_change();
 
 	// Buttons
 	button_box_.add_inf_space();
@@ -295,13 +355,22 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
+	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
+	training_wheels_box_.add_inf_space();
+	training_wheels_box_.add(&training_wheels_reset_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	training_wheels_box_.add_space(kPadding);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
+	training_wheels_reset_.sigclicked.connect([this]() {
+		training_wheels_reset_.set_enabled(false);
+		Profile training_wheels_profile;
+		training_wheels_profile.write(kTrainingWheelsFile);
+	});
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
-	ok_.sigclicked.connect(
-	   [this]() { end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk); });
+	ok_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOk); });
 
 	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
@@ -376,6 +445,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
+	training_wheels_.set_state(opt.training_wheels);
 
 	// New Game options
 	show_buildhelp_.set_state(opt.display_flags & InteractiveBase::dfShowBuildhelp);
@@ -393,8 +463,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
 void FullscreenMenuOptions::layout() {
 	if (!is_minimal()) {
-		const int16_t butw = get_w() / 5;
-		const int16_t buth = get_h() / 16;
+		const int16_t butw = get_inner_w() / 5;
+		const int16_t buth = get_inner_h() / 16;
 
 		// Buttons
 		cancel_.set_desired_size(butw, buth);
@@ -434,7 +504,7 @@ void FullscreenMenuOptions::layout() {
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
-	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
+	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale.empty());
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
 	// Handle non-standard setups where the locale directory might be missing
@@ -492,7 +562,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {
 		const LanguageEntry& language_entry = entry.second;
-		language_dropdown_.add(language_entry.descname.c_str(), language_entry.localename, nullptr,
+		language_dropdown_.add(language_entry.descname, language_entry.localename, nullptr,
 		                       language_entry.localename == selected_locale, "");
 	}
 }
@@ -504,7 +574,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
  */
 void FullscreenMenuOptions::update_language_stats() {
 	int percent = 100;
-	std::string message = "";
+	std::string message;
 	if (language_dropdown_.has_selection()) {
 		std::string locale = language_dropdown_.get_selected();
 		// Empty locale means try system locale
@@ -565,12 +635,12 @@ void FullscreenMenuOptions::update_language_stats() {
 }
 
 void FullscreenMenuOptions::clicked_apply() {
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kApplyOptions);
+	end_modal<MenuTarget>(MenuTarget::kApplyOptions);
 }
 
 void FullscreenMenuOptions::clicked_cancel() {
 	g_sh->load_config();
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
 bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
@@ -578,10 +648,10 @@ bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+			end_modal<MenuTarget>(MenuTarget::kOk);
 			return true;
 		case SDLK_ESCAPE:
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+			end_modal<MenuTarget>(MenuTarget::kBack);
 			return true;
 		default:
 			break;
@@ -629,6 +699,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
+	os_.training_wheels = training_wheels_.get_state();
 
 	// New Game options
 	int32_t flags = show_buildhelp_.get_state() ? InteractiveBase::dfShowBuildhelp : 0;
@@ -656,8 +727,8 @@ OptionsCtrl::OptionsCtrl(FullscreenMenuMain& mm, Section& s)
 }
 
 void OptionsCtrl::handle_menu() {
-	FullscreenMenuBase::MenuTarget i = opt_dialog_->run<FullscreenMenuBase::MenuTarget>();
-	if (i != FullscreenMenuBase::MenuTarget::kBack) {
+	MenuTarget i = opt_dialog_->run<MenuTarget>();
+	if (i != MenuTarget::kBack) {
 		save_options();
 		g_gr->set_fullscreen(opt_dialog_->get_values().fullscreen);
 		if (opt_dialog_->get_values().maximized) {
@@ -667,7 +738,7 @@ void OptionsCtrl::handle_menu() {
 			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		}
 	}
-	if (i == FullscreenMenuBase::MenuTarget::kApplyOptions) {
+	if (i == MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
 		opt_dialog_.reset(new FullscreenMenuOptions(parent_, options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
@@ -705,6 +776,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
+	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 
 	// New Game options
 	opt.display_flags = opt_section_.get_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
@@ -749,6 +821,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
+	opt_section_.set_bool("training_wheels", opt.training_wheels);
 
 	// New Game options
 	opt_section_.set_int("display_flags", opt.display_flags);

@@ -43,9 +43,10 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const std::string& text,
                                      const Align align,
                                      MultilineTextarea::ScrollMode scroll_mode)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      text_(text),
-     style_(&g_style_manager->font_style(FontStyle::kLabel)),
+     font_style_(&g_style_manager->font_style(
+        style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel)),
      font_scale_(1.0f),
      align_(align),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
@@ -53,20 +54,18 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });
 
-	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
+	scrollbar_.set_singlestepsize(text_height(*font_style_, font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
-
-	set_can_focus(scrollbar_.is_enabled());
 }
 
 void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
-	style_ = &style;
+	font_style_ = &style;
 	recompute();
 }
 void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
-	scrollbar_.set_singlestepsize(text_height(*style_, font_scale_));
+	scrollbar_.set_singlestepsize(text_height(*font_style_, font_scale_));
 	recompute();
 }
 
@@ -128,7 +127,6 @@ void MultilineTextarea::recompute() {
 			break;  // No need to wrap twice.
 		}
 	}
-	set_can_focus(scrollbar_.is_enabled());
 }
 
 /**
@@ -144,7 +142,7 @@ void MultilineTextarea::layout() {
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * style_->size() * font_scale_);
+	scrollbar_.set_pagesize(get_h() - 2 * font_style_->size() * font_scale_);
 }
 
 /**
@@ -194,7 +192,6 @@ void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode
 	scrollmode_ = scroll_mode;
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
 	                          scrollmode_ == ScrollMode::kScrollLogForced);
-	set_can_focus(scrollbar_.is_enabled());
 	layout();
 }
 
@@ -209,7 +206,7 @@ std::string MultilineTextarea::make_richtext() {
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
 
-	FontStyleInfo scaled_style(*style_);
+	FontStyleInfo scaled_style(*font_style_);
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	return as_richtext_paragraph(temp, scaled_style, align_);

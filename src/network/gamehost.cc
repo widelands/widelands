@@ -240,7 +240,7 @@ struct HostChatProvider : public ChatProvider {
 		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
 		c.sender = h->get_local_playername();
-		if (c.msg.size() && *c.msg.begin() == '@') {
+		if (!c.msg.empty() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
 			if (space >= c.msg.size() - 1) {
@@ -301,7 +301,7 @@ struct HostChatProvider : public ChatProvider {
 				if (arg1.empty()) {
 					c.msg = _("Wrong use, should be: /announce <message>");
 				} else {
-					if (arg2.size()) {
+					if (!arg2.empty()) {
 						arg1 += " " + arg2;
 					}
 					c.msg = "HOST ANNOUNCEMENT: " + arg1;
@@ -329,7 +329,7 @@ struct HostChatProvider : public ChatProvider {
 					c.msg = _("Wrong use, should be: /kick <name> <reason>");
 				} else {
 					kickUser = arg1;
-					if (arg2.size()) {
+					if (!arg2.empty()) {
 						kickReason = arg2;
 					} else {
 						kickReason = "No reason given!";
@@ -355,7 +355,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "ack_kick") {
 				if (arg1.empty()) {
 					c.msg = _("Kick acknowledgement cancelled: No name given!");
-				} else if (arg2.size()) {
+				} else if (!arg2.empty()) {
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				} else {
 					if (arg1 == kickUser) {
@@ -506,8 +506,11 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(const std::string& playername, bool internet)
-   : d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+GameHost::GameHost(FullscreenMenuMain& f,
+                   const std::string& playername,
+                   std::vector<Widelands::TribeBasicInfo> tribeinfos,
+                   bool internet)
+   : fsmm_(f), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log_info("[Host]: starting up.\n");
 
 	d->localplayername = playername;
@@ -543,7 +546,9 @@ GameHost::GameHost(const std::string& playername, bool internet)
 	d->syncreport_pending = false;
 	d->syncreport_time = Time(0);
 
-	d->settings.tribes = Widelands::get_all_tribeinfos();
+	assert(!tribeinfos.empty());
+	d->settings.tribes = std::move(tribeinfos);
+
 	set_multiplayer_game_settings();
 	d->settings.playernum = UserSettings::none();
 	d->settings.usernum = 0;
@@ -629,11 +634,12 @@ void GameHost::init_computer_players() {
 
 // TODO(k.halfmann): refactor into smaller functions
 void GameHost::run() {
+	Widelands::Game game;
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(&d->hp, this, d->chat);
-	const FullscreenMenuBase::MenuTarget code = lm.run<FullscreenMenuBase::MenuTarget>();
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
+	const MenuTarget code = lm.run<MenuTarget>();
+	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
@@ -660,7 +666,6 @@ void GameHost::run() {
 	packet.unsigned_8(NETCMD_LAUNCH);
 	broadcast(packet);
 
-	Widelands::Game game;
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	game.set_auto_speed(get_config_bool("auto_speed", false));
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
@@ -1012,7 +1017,7 @@ bool GameHost::can_launch() {
 	if (d->settings.mapname.empty()) {
 		return false;
 	}
-	if (d->settings.players.size() < 1) {
+	if (d->settings.players.empty()) {
 		return false;
 	}
 	if (d->game) {
@@ -1124,6 +1129,8 @@ void GameHost::set_map(const std::string& mapname,
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
 	write_setting_all_players(packet);
 	broadcast(packet);
+	// Map changes are finished here
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	// If possible, offer the map / saved game as transfer
 	// TODO(unknown): not yet able to handle directory type maps / savegames, would involve zipping
@@ -1574,8 +1581,6 @@ void GameHost::write_setting_all_players(SendPacket& packet) {
 	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 		write_setting_player(packet, i);
 	}
-	// Map changes are finished here
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {
@@ -1755,6 +1760,8 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
 	write_setting_all_players(packet);
 	d->net->send(client.sock_id, packet);
+	// Map changes are finished here
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLUSERS);
@@ -2132,7 +2139,6 @@ void GameHost::handle_disconnect(uint32_t const client_num, RecvPacket& r) {
 		std::string arg = r.string();
 		disconnect_client(client_num, reason, false, arg);
 	}
-	return;
 }
 
 void GameHost::handle_ping(Client& client) {
@@ -2146,7 +2152,6 @@ void GameHost::handle_ping(Client& client) {
 	client.playernum = UserSettings::not_connected();
 	d->net->close(client.sock_id);
 	client.sock_id = 0;
-	return;
 }
 
 /** Wait for NETCMD_HELLO and handle unexpected other commands */
@@ -2182,7 +2187,7 @@ void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
 			throw DisconnectException("NO_ACCESS_TO_PLAYER");
 		}
 		std::string tribe = r.string();
-		bool random_tribe = r.unsigned_8() == 1;
+		bool random_tribe = r.unsigned_8();
 		set_player_tribe(num, tribe, random_tribe);
 	}
 }
@@ -2267,7 +2272,7 @@ void GameHost::handle_chat(Client& client, RecvPacket& r) {
 	ChatMessage c(r.string());
 	c.playern = d->settings.users.at(client.usernum).position;
 	c.sender = d->settings.users.at(client.usernum).name;
-	if (c.msg.size() && *c.msg.begin() == '@') {
+	if (!c.msg.empty() && *c.msg.begin() == '@') {
 		// Personal message
 		std::string::size_type const space = c.msg.find(' ');
 		if (space >= c.msg.size() - 1) {

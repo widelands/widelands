@@ -17,7 +17,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "alder_summer_sapling",
    descname = _ "Alder (Sapling)",
    size = "small",
@@ -42,7 +42,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "alder_summer_pole",
    descname = _ "Alder (Pole)",
    size = "small",
@@ -67,7 +67,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "alder_summer_mature",
    descname = _ "Alder (Mature)",
    size = "small",
@@ -92,7 +92,7 @@ wl.World():new_immovable_type{
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "alder_summer_old",
    descname = _ "Alder (Old)",
    species = _ "Alder",
@@ -120,7 +120,7 @@ wl.World():new_immovable_type{
          hotspot = { 23, 59 },
          sound_effect = {
             path = "sound/animals/bird4",
-            priority = 10
+            priority = "10%"
          }
       }
    },

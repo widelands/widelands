@@ -123,7 +123,6 @@ struct BaseListselect : public Panel {
 	}
 
 private:
-	static const int32_t DOUBLE_CLICK_INTERVAL = 500;  // half a second
 	static const int32_t ms_darken_value = -20;
 
 	void set_scrollpos(int32_t);

@@ -3,16 +3,16 @@
 # 
 # Translators:
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2019
+# Jukka Pakarinen, 2016-2020
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Teppo Mäenpää <teppo@runbox.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-24 17:15+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -480,7 +480,7 @@ msgstr "Tuolla jossain päin saartamme on vielä muutamia barbaareja piilossa, m
 msgid ""
 "We have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island. Now we can think about our next steps."
-msgstr ""
+msgstr "Olemme luoneet toimivan talouden, kouluttaneet uusia sotilaita ja häätäneet Barbaarit pois saarelta. Nyt voimme miettiä seuraavia askeliamme."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:273
 msgid "As Time is Running By"

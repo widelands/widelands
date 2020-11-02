@@ -39,9 +39,15 @@
 
 GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                                              GeneralStatisticsMenu::Registry& registry)
-   : UI::UniqueWindow(&parent, "statistics_menu", &registry, 440, 400, _("General Statistics")),
+   : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
+                      "statistics_menu",
+                      &registry,
+                      440,
+                      400,
+                      _("General Statistics")),
      my_registry_(&registry),
-     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 5),
+     box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, 5),
      plot_(&box_,
            0,
            0,
@@ -100,7 +106,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	// Setup Widgets
 	box_.add(&plot_);
 
-	UI::Box* hbox1 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
+	UI::Box* hbox1 = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	uint32_t plr_in_game = 0;
 	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
@@ -109,9 +115,8 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const Image* player_image = playercolor_image(p - 1, "images/players/genstats_player.png");
 		assert(player_image);
-		UI::Button& cb =
-		   *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25, UI::ButtonStyle::kWuiMenu,
-		                   player_image, player->get_name().c_str());
+		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
+		                                 UI::ButtonStyle::kWuiMenu, player_image, player->get_name());
 		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
 		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
 
@@ -124,66 +129,70 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	box_.add(hbox1, UI::Box::Resizing::kFullSize);
 
-	UI::Box* hbox2 = new UI::Box(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1);
+	UI::Box* hbox2 = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
 	UI::Radiobutton* btn;
 
 	const Vector2i zero = Vector2i::zero();
 
-	radiogroup_.add_button(
-	   hbox2, zero, g_image_cache->get("images/wui/stats/genstats_landsize.png"), _("Land"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_landsize.png"), _("Land"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_nrworkers.png"),
 	                       _("Workers"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_nrbuildings.png"),
 	                       _("Buildings"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(
-	   hbox2, zero, g_image_cache->get("images/wui/stats/genstats_nrwares.png"), _("Wares"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_nrwares.png"), _("Wares"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_productivity.png"),
 	                       _("Productivity"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_casualties.png"),
 	                       _("Casualties"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(
-	   hbox2, zero, g_image_cache->get("images/wui/stats/genstats_kills.png"), _("Kills"), &btn);
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
+	                       g_image_cache->get("images/wui/stats/genstats_kills.png"), _("Kills"),
+	                       &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_msites_lost.png"),
 	                       _("Military buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_msites_defeated.png"),
 	                       _("Military buildings defeated"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_civil_blds_lost.png"),
 	                       _("Civilian buildings lost"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
-	radiogroup_.add_button(hbox2, zero,
+	radiogroup_.add_button(hbox2, UI::PanelStyle::kWui, zero,
 	                       g_image_cache->get("images/wui/stats/genstats_militarystrength.png"),
 	                       _("Military"), &btn);
 	hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 
 	if (hook) {
-		radiogroup_.add_button(hbox2, zero, g_image_cache->get(cs_pic), cs_name.c_str(), &btn);
+		radiogroup_.add_button(
+		   hbox2, UI::PanelStyle::kWui, zero, g_image_cache->get(cs_pic), cs_name, &btn);
 		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 

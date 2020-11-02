@@ -821,7 +821,7 @@ public:
 		return 0;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
-		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
+		return std::make_shared<UI::RenderedText>();
 	}
 	bool is_non_mandatory_space() const override {
 		return true;
@@ -1180,8 +1180,8 @@ void TagHandler::make_text_nodes(const std::string& txt,
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(new TextNode(
-					                                              font_cache_, ns, word.c_str())));
+					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(
+					                                              new TextNode(font_cache_, ns, word)));
 				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -1732,7 +1732,7 @@ public:
 	// Handle attributes that are in rt, but not in div.
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
-		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
+		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : false);
 		trim_spaces_ = (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
 		shrink_to_fit_ = shrink_to_fit_ && trim_spaces_;
 	}

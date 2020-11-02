@@ -24,6 +24,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/minimap_renderer.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
@@ -33,14 +34,19 @@
 #include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
 
-MapDetails::MapDetails(
-   Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style)
-   : UI::Panel(parent, x, y, w, h),
+MapDetails::MapDetails(Panel* parent,
+                       int32_t x,
+                       int32_t y,
+                       int32_t w,
+                       int32_t h,
+                       UI::PanelStyle style,
+                       Widelands::EditorGameBase& egbase)
+   : UI::Panel(parent, style, x, y, w, h),
 
      style_(style),
      padding_(4),
-     main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, 0),
-     descr_box_(&main_box_, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     main_box_(this, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
+     descr_box_(&main_box_, style, 0, 0, UI::Box::Vertical, 0, 0, 0),
      name_(""),
      name_label_(&main_box_,
                  0,
@@ -60,10 +66,11 @@ MapDetails::MapDetails(
             "",
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(&descr_box_, 0, 0, 0, 0, nullptr),
-     suggested_teams_box_(new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0)),
+     minimap_icon_(&descr_box_, style, 0, 0, 0, 0, nullptr),
+     suggested_teams_box_(
+        new UI::SuggestedTeamsBox(this, style, 0, 0, UI::Box::Vertical, padding_, 0)),
      last_map_(""),
-     egbase_(nullptr) {
+     egbase_(egbase) {
 
 	minimap_icon_.set_frame(g_style_manager->minimap_icon_frame());
 	descr_.set_handle_mouse(false);
@@ -76,9 +83,6 @@ MapDetails::MapDetails(
 	main_box_.add(&name_label_, UI::Box::Resizing::kFullSize);
 	main_box_.add_space(padding_);
 	main_box_.add(&descr_box_, UI::Box::Resizing::kExpandBoth);
-
-	// Fast initialize world now
-	egbase_.mutable_world(true);
 
 	layout();
 }
@@ -116,7 +120,7 @@ void MapDetails::layout() {
 	descr_box_.set_size(main_box_.get_w(), main_box_.get_h() - name_label_.get_h() - padding_);
 }
 
-bool MapDetails::update(const MapData& mapdata, bool localize_mapname) {
+bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool render_minimap) {
 	clear();
 	name_ = mapdata.name;
 	last_map_ = mapdata.filename;
@@ -193,30 +197,32 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		}
 
 		// Render minimap
-		auto minimap = minimap_cache_.find(last_map_);
-		if (minimap != minimap_cache_.end()) {
-			minimap_icon_.set_icon(minimap->second.get());
-			minimap_icon_.set_visible(true);
-		} else {
-			egbase_.cleanup_for_load();
-			std::unique_ptr<Widelands::MapLoader> ml(
-			   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
-			try {
-				if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
-					minimap_cache_[last_map_] = draw_minimap(
-					   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
-					   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
-					minimap_icon_.set_icon(minimap_cache_.at(last_map_).get());
-					minimap_icon_.set_visible(true);
+		if (render_minimap) {
+			auto minimap = minimap_cache_.find(last_map_);
+			if (minimap != minimap_cache_.end()) {
+				minimap_icon_.set_icon(minimap->second.get());
+				minimap_icon_.set_visible(true);
+			} else {
+				egbase_.cleanup_for_load();
+				std::unique_ptr<Widelands::MapLoader> ml(
+				   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
+				try {
+					if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
+						minimap_cache_[last_map_] = draw_minimap(
+						   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
+						   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);
+						minimap_icon_.set_icon(minimap_cache_.at(last_map_).get());
+						minimap_icon_.set_visible(true);
+					}
+				} catch (const Widelands::GameDataError& e) {
+					// Put error message on top for better visibility
+					description =
+					   (boost::format("%s%s") % as_content(e.what(), style_) % description).str();
+					description =
+					   (boost::format("%s%s") % as_heading(_("Game data error"), style_) % description)
+					      .str();
+					loadable = false;
 				}
-			} catch (const Widelands::GameDataError& e) {
-				// Put error message on top for better visibility
-				description =
-				   (boost::format("%s%s") % as_content(e.what(), style_) % description).str();
-				description =
-				   (boost::format("%s%s") % as_heading(_("Game data error"), style_) % description)
-				      .str();
-				loadable = false;
 			}
 		}
 

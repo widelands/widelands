@@ -26,9 +26,17 @@
 #include "ui_fsmenu/launch_game.h"
 #include "ui_fsmenu/singleplayersetupbox.h"
 
+namespace Widelands {
+class Game;
+}
+
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
+	FullscreenMenuLaunchSPG(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
+	                        Widelands::EditorGameBase& egbase,
+	                        bool preconfigured,
+	                        GameController* = nullptr);
 	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;
@@ -47,6 +55,8 @@ private:
 
 	void update();
 	void enforce_player_names_and_tribes(Widelands::Map& map);
+	const bool preconfigured_;
+	Widelands::EditorGameBase& egbase_;  // Not owned
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

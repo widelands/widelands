@@ -105,7 +105,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    tribes:new_productionsite_type {
+--    descriptions:new_productionsite_type {
 --       name = "atlanteans_well",
 --       descname = pgettext("atlanteans_building", "Well"),
 --       animation_directory = dirname,
@@ -165,7 +165,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
+descriptions:new_productionsite_type {
    name = "atlanteans_armorsmithy",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Armor Smithy"),

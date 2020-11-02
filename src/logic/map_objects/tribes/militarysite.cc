@@ -260,9 +260,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
-	// the old location.
-
-	FormerBuildings former_buildings = military_site_->old_buildings_;
+	// the old location. We need to take a copy.
+	const FormerBuildings former_buildings = military_site_->old_buildings_;
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
@@ -296,8 +295,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
+                                     Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, descriptions),
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
@@ -396,7 +395,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = g_style_manager->color_tag(
+	*s = StyleManager::color_tag(
 	   // Line break to make Codecheck happy.
 	   *s, g_style_manager->building_statistics_style().medium_color());
 }
@@ -1016,8 +1015,9 @@ bool MilitarySite::update_upgrade_requirements() {
 	return false;
 }
 
-const BuildingSettings* MilitarySite::create_building_settings() const {
-	MilitarysiteSettings* settings = new MilitarysiteSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings() const {
+	std::unique_ptr<MilitarysiteSettings> settings(
+	   new MilitarysiteSettings(descr(), owner().tribe()));
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
 	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;

@@ -29,7 +29,6 @@
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
-#include "graphic/style_manager.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -48,7 +47,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       int32_t const h,
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
 	     slot_dropdown_(this,
 	                    (boost::format("dropdown_slot%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
@@ -62,7 +61,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                    UI::ButtonStyle::kFsMenuSecondary),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
-	     name(this, 0, 0, 0, 0),
+	     name(this, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, 0, 0, 0, 0),
 	     settings_(settings),
 	     id_(id),
 	     slot_selection_locked_(false) {
@@ -146,7 +145,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings,
 	                       NetworkPlayerSettingsBackend* const npsb)
-	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
+	   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
@@ -363,6 +362,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Rebuild the tribes dropdown from the server settings. This will keep the host and client UIs
 	/// in sync.
 	void rebuild_tribes_dropdown(const GameSettings& settings) {
+		assert(!settings.tribes.empty());
 		if (tribe_selection_locked_) {
 			return;
 		}
@@ -591,28 +591,30 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
                                              int32_t const,
                                              GameSettingsProvider* const settings,
                                              uint32_t buth)
-   : UI::Box(parent, x, y, UI::Box::Horizontal),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, x, y, UI::Box::Horizontal),
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
-     clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     scrollable_playerbox(&playerbox, 0, 0, UI::Box::Vertical),
+     clientbox(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     playerbox(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     scrollable_playerbox(&playerbox, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      clients_(&clientbox,
+              UI::PanelStyle::kFsMenu,
+              UI::FontStyle::kFsGameSetupHeadings,
               0,
               0,
               0,
               0,
               _("Clients"),
-              UI::Align::kCenter,
-              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              UI::Align::kCenter),
      players_(&playerbox,
+              UI::PanelStyle::kFsMenu,
+              UI::FontStyle::kFsGameSetupHeadings,
               0,
               0,
               0,
               0,
               _("Players"),
-              UI::Align::kCenter,
-              g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
+              UI::Align::kCenter),
      buth_(buth) {
 	clientbox.add(&clients_, Resizing::kAlign, UI::Align::kCenter);
 	clientbox.add_space(3 * kPadding);

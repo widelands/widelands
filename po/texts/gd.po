@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-11 07:14+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"PO-Revision-Date: 2020-10-12 05:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Eadar-theangadairean"
 
 #: ../../data/txts/AUTHORS.lua:28
 msgid "Widelands Development Team"
-msgstr "An sgioba leasachaidh Widelands"
+msgstr "Sgioba leasachaidh Widelands"
 
 #: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"

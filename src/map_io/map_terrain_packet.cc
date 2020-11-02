@@ -24,17 +24,14 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
-#include "map_io/world_legacy_lookup_table.h"
 
 namespace Widelands {
 
 constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapTerrainPacket::read(FileSystem& fs,
-                            EditorGameBase& egbase,
-                            const WorldLegacyLookupTable& lookup_table) {
+void MapTerrainPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 	FileRead fr;
 	fr.open(fs, "binary/terrain");
 
@@ -53,13 +50,7 @@ void MapTerrainPacket::read(FileSystem& fs,
 					throw GameDataError(
 					   "MapTerrainPacket::read: WARNING: Found duplicate terrain id %i.", id);
 				}
-				const std::string terrain_name(lookup_table.lookup_terrain(fr.c_string()));
-				const DescriptionIndex terrain_idx = egbase.mutable_world()->load_terrain(terrain_name);
-				if (terrain_idx == Widelands::INVALID_INDEX) {
-					throw GameDataError(
-					   "Terrain '%s' exists in map, not in world!", terrain_name.c_str());
-				}
-				smap[id] = terrain_idx;
+				smap[id] = egbase.mutable_descriptions()->load_terrain(fr.c_string());
 			}
 
 			MapIndex const max_index = map.max_index();
@@ -85,13 +76,13 @@ void MapTerrainPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map& map = egbase.map();
-	const World& world = egbase.world();
-	DescriptionIndex const nr_terrains = world.terrains().size();
+	const Descriptions& descriptions = egbase.descriptions();
+	DescriptionIndex const nr_terrains = descriptions.terrains().size();
 	fw.unsigned_16(nr_terrains);
 
 	std::map<const char* const, DescriptionIndex> smap;
 	for (DescriptionIndex i = 0; i < nr_terrains; ++i) {
-		const char* const name = world.terrain_descr(i).name().c_str();
+		const char* const name = descriptions.get_terrain_descr(i)->name().c_str();
 		smap[name] = i;
 		fw.unsigned_16(i);
 		fw.c_string(name);
@@ -100,8 +91,8 @@ void MapTerrainPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {
 		Field& f = map[i];
-		fw.unsigned_8(smap[world.terrain_descr(f.terrain_r()).name().c_str()]);
-		fw.unsigned_8(smap[world.terrain_descr(f.terrain_d()).name().c_str()]);
+		fw.unsigned_8(smap[descriptions.get_terrain_descr(f.terrain_r())->name().c_str()]);
+		fw.unsigned_8(smap[descriptions.get_terrain_descr(f.terrain_d())->name().c_str()]);
 	}
 
 	fw.write(fs, "binary/terrain");
