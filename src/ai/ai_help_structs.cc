@@ -378,13 +378,14 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      is_militarysite(false) {
 }
 
-uint8_t BuildableField::count_supported_producers_nearby(Widelands::DescriptionIndex buildingindex) const {
-		assert(buildingindex != Widelands::INVALID_INDEX);
-		auto it = supported_producers_nearby.find(buildingindex);
-		if (it != supported_producers_nearby.end()) {
-			return it->second;
-		}
-		return 0;
+uint8_t
+BuildableField::count_supported_producers_nearby(Widelands::DescriptionIndex buildingindex) const {
+	assert(buildingindex != Widelands::INVALID_INDEX);
+	auto it = supported_producers_nearby.find(buildingindex);
+	if (it != supported_producers_nearby.end()) {
+		return it->second;
+	}
+	return 0;
 }
 
 MineableField::MineableField(const Widelands::FCoords& fc)

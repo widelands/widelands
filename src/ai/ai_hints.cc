@@ -256,12 +256,12 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
 
 	if (table->has_key("supports_production_of")) {
 		log_warn("%s: The 'supports_production_of' key in 'ai_hints' is no longer used",
-		    building_name.c_str());
+		         building_name.c_str());
 	}
 
 	if (table->has_key("requires_supporters")) {
 		log_warn("%s: The 'requires_supporters' key in 'ai_hints' is no longer used",
-		    building_name.c_str());
+		         building_name.c_str());
 	}
 
 	if (table->has_key("collects_ware_from_map")) {
