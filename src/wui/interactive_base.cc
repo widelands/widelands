@@ -1467,9 +1467,14 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 				cheat_mode_enabled_ = false;
 			} else if (code.mod & KMOD_CTRL) {
 				if (chat_provider_) {
+					const std::string msg1 = "This player has enabled the cheating mode!";
 					/** TRANSLATORS: This is a chat message which is automatically sent to all players
 					 * when a player enables cheating mode */
-					chat_provider_->send(_("This player has enabled the cheating mode!"));
+					const std::string msg2 = _("This player has enabled the cheating mode!");
+					chat_provider_->send(msg1);
+					if (msg1 != msg2) {
+						chat_provider_->send(msg2);
+					}
 				}
 				cheat_mode_enabled_ = true;
 			}
@@ -1497,9 +1502,14 @@ void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
 	const std::string cmd = boost::algorithm::join(args, " ");
 
 	if (chat_provider_) {
+		const std::string msg1 = "This player has just used the cheating console!";
 		/** TRANSLATORS: This is a chat message which is automatically sent to all players when a
 		 * player uses the debug console */
-		chat_provider_->send(_("This player has just used the cheating console!"));
+		const std::string msg2 = _("This player has just used the cheating console!");
+		chat_provider_->send(msg1);
+		if (msg1 != msg2) {
+			chat_provider_->send(msg2);
+		}
 	}
 
 	DebugConsole::write("Starting Lua interpretation!");
