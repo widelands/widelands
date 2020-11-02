@@ -239,7 +239,7 @@ jobs:
       run: |
         export ICU_ROOT="$(brew --prefix icu4c)" && \
         export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH";
-        brew install boost libcurl4-openssl-dev ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
+        brew install boost curl ccache glew ninja sdl2 sdl2_image sdl2_mixer sdl2_ttf
     - name: Checkout
       uses: actions/checkout@v2
       with:
