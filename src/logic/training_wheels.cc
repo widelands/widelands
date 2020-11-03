@@ -98,6 +98,21 @@ void TrainingWheels::run_objectives() {
 	scripts_to_run_.clear();
 }
 
+void TrainingWheels::run(const std::string& objective, bool force) {
+	const std::string script_name(objective + ".lua");
+	if ((force || solved_objectives_.count(objective) == 0)) {
+		// Don't run it twice
+		auto it = scripts_to_run_.find(script_name);
+		if (it != scripts_to_run_.end()) {
+			scripts_to_run_.erase(it);
+		}
+		log_info("Manually running training wheel '%s'", script_name.c_str());
+		lua_.run_script(kTrainingWheelsScriptingDir + script_name);
+	} else {
+		log_info("Skipped running training wheel '%s'", script_name.c_str());
+	}
+}
+
 bool TrainingWheels::has_objectives() const {
 	return !scripts_to_run_.empty();
 }
@@ -115,11 +130,16 @@ bool TrainingWheels::acquire_lock(const std::string& objective) {
 		current_objective_ = objective;
 		return true;
 	}
-	return current_objective_ == objective;
+	const bool result = current_objective_ == objective;
+	if (result) {
+		log_dbg("Training wheel '%s' acquired the lock", objective.c_str());
+	}
+	return result;
 }
 
 // TODO(Gunchleoc): Optionally add training wheel name so that it can be put back in the queue
 void TrainingWheels::release_lock() {
+	log_dbg("Training wheel lock released");
 	current_objective_ = "";
 }
 

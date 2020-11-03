@@ -11,6 +11,7 @@ include "scripting/objective_utils.lua"
 include "scripting/richtext_scenarios.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
+include "scripting/training_wheels/utils/lock.lua"
 
 p1 = wl.Game().players[1]
 

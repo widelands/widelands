@@ -33,6 +33,7 @@ function introduction_thread()
 
    campaign_message_box(order_msg_ranger)
    local obj = add_campaign_objective(obj_build_rangers)
+   run_training_wheel_in_scenario(plr, "objectives", true)
 
    -- Try not to interrupt the player actions with a message, so we wait generously
    sleep(50000)

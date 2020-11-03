@@ -174,6 +174,7 @@ end
 function build_environment()
    msg_boxes(first_briefing_messages)
    local o = add_campaign_objective(obj_ensure_build_wares_production)
+   run_training_wheel_in_scenario(p1, "objectives", false)
 
    expand_objective = add_campaign_objective(obj_expand)
 
