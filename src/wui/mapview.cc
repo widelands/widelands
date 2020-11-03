@@ -105,9 +105,8 @@ public:
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		if (t < 0.5f) {
 			return first_.value(t * dt_);
-		} else {
-			return second_.value((t - 0.5f) * dt_);
 		}
+		return second_.value((t - 0.5f) * dt_);
 	}
 
 private:
