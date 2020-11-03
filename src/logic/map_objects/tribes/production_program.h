@@ -59,7 +59,7 @@ struct ProductionProgram : public MapObjectProgram {
 		};
 
 		Action() = default;
-		virtual ~Action();
+		virtual ~Action() = default;
 		virtual void execute(Game&, ProductionSite&) const = 0;
 
 		/**
@@ -165,7 +165,7 @@ struct ProductionProgram : public MapObjectProgram {
 		void execute(Game&, ProductionSite&) const override;
 
 		struct Condition {
-			virtual ~Condition();
+			virtual ~Condition() = default;
 			virtual bool evaluate(const ProductionSite&) const = 0;
 			virtual std::string description(const Descriptions&) const = 0;
 			virtual std::string description_negation(const Descriptions&) const = 0;

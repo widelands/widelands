@@ -407,8 +407,7 @@ struct ScoredShip {
 	}
 	ScoredShip(const ScoredShip&) = default;
 	ScoredShip& operator=(const ScoredShip&) = default;
-	~ScoredShip() {
-	}
+	~ScoredShip() = default;
 
 	// allow deterministic sorting in sets
 	// "smaller" comparison means "better"
@@ -438,8 +437,7 @@ struct PrioritisedPortPair {
 	}
 	PrioritisedPortPair(const PrioritisedPortPair&) = default;
 	PrioritisedPortPair& operator=(const PrioritisedPortPair&) = default;
-	~PrioritisedPortPair() {
-	}
+	~PrioritisedPortPair() = default;
 
 	PortDock* start;      // starting port
 	PortDock* end;        // destination port

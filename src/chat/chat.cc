@@ -19,5 +19,5 @@
 
 #include "chat/chat.h"
 
-ChatProvider::~ChatProvider() {
+ChatMessage::ChatMessage(const std::string& message) : msg(message) {
 }

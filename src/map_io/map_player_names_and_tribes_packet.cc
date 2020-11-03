@@ -30,9 +30,6 @@ namespace Widelands {
 
 constexpr int32_t kCurrentPacketVersion = 2;
 
-MapPlayerNamesAndTribesPacket::~MapPlayerNamesAndTribesPacket() {
-}
-
 /*
  * Read Function
  *
