@@ -411,8 +411,6 @@ struct BuildableField {
 	std::map<Widelands::DescriptionIndex, uint8_t> supported_producers_nearby;
 	// and for rangers, fishbreeders:
 	std::map<std::string, uint8_t> supporters_nearby;
-
-	uint8_t count_supported_producers_nearby(Widelands::DescriptionIndex buildingindex) const;
 };
 
 struct MineableField {

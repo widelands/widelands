@@ -2907,6 +2907,16 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					count_supporters_nearby = bf->supporters_nearby.at(bo.desc->name());
 				}
 
+				// Priorities will be adjusted according to nearby buildings needing support
+				uint8_t supported_producers_nearby_count = 0;
+				for (const auto& supported_building : bo.supported_producers) {
+					assert(supported_building.first != Widelands::INVALID_INDEX);
+					auto it = bf->supported_producers_nearby.find(supported_building.first);
+					if (it != bf->supported_producers_nearby.end()) {
+						supported_producers_nearby_count += it->second;
+					}
+				}
+
 				// this can be only a well (as by now)
 				if (bo.is(BuildingAttribute::kWell)) {
 
@@ -2921,11 +2931,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					prio += bo.primary_priority;
 
 					// keep wells more distant
-					uint8_t supported_producers_nearby_count = 0;
-					for (const auto& supported_building : bo.supported_producers) {
-						supported_producers_nearby_count +=
-						   bf->count_supported_producers_nearby(supported_building.first);
-					}
 					if (supported_producers_nearby_count > 2) {
 						continue;
 					}
@@ -2957,10 +2962,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// consider cutters and rangers nearby
 					prio += 2 * count_supporters_nearby *
 					        std::abs(management_data.get_military_number_at(25));
-					for (const auto& supported_building : bo.supported_producers) {
-						prio -= bf->count_supported_producers_nearby(supported_building.first) *
-						        std::abs(management_data.get_military_number_at(36)) * 3;
-					}
+
+					prio -= supported_producers_nearby_count *
+					        std::abs(management_data.get_military_number_at(36)) * 3;
 
 				} else if (bo.is(BuildingAttribute::kNeedsRocks)) {
 
@@ -2991,9 +2995,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					}
 
 					// to prevent too many quarries on one spot
-					for (const auto& supported_building : bo.supported_producers) {
-						prio = prio - 50 * bf->count_supported_producers_nearby(supported_building.first);
-					}
+					prio = prio - 50 * supported_producers_nearby_count;
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {
 
@@ -3010,10 +3012,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					prio += count_supporters_nearby * 5;
 
-					for (const auto& supported_building : bo.supported_producers) {
-						prio += (bf->critters_nearby * 3) - 8 -
-						        5 * bf->count_supported_producers_nearby(supported_building.first);
-					}
+					prio += (bf->critters_nearby * 3) - 8 - 5 * supported_producers_nearby_count;
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
@@ -3027,10 +3026,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					// Overdue priority here
 					prio += bo.primary_priority;
-
-					for (const auto& supported_building : bo.supported_producers) {
-						prio -= bf->count_supported_producers_nearby(supported_building.first) * 20;
-					}
+					prio -= supported_producers_nearby_count * 20;
 					prio += count_supporters_nearby * 20;
 
 					prio += -5 + bf->fish_nearby *
@@ -3059,24 +3055,20 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						prio -= bf->water_nearby / 5;
 
-						for (const auto& supported_building : bo.supported_producers) {
-							prio += management_data.neuron_pool[67].get_result_safe(
-							           bf->count_supported_producers_nearby(supported_building.first) * 5,
-							           kAbsValue) /
-							        2;
-						}
+						prio += management_data.neuron_pool[67].get_result_safe(
+						           supported_producers_nearby_count * 5, kAbsValue) /
+						        2;
 
 						prio +=
 						   management_data.neuron_pool[49].get_result_safe(bf->trees_nearby, kAbsValue) /
 						   5;
 
-						for (const auto& supported_building : bo.supported_producers) {
-							prio += bf->count_supported_producers_nearby(supported_building.first) * 5 -
-							        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
-							        bf->space_consumers_nearby *
-							           std::abs(management_data.get_military_number_at(102)) / 5 -
-							        bf->rocks_nearby / 3;
-						}
+						prio += supported_producers_nearby_count * 5 -
+						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
+						        bf->space_consumers_nearby *
+						           std::abs(management_data.get_military_number_at(102)) / 5 -
+						        bf->rocks_nearby / 3;
+
 						prio += count_supporters_nearby * 3;
 						// don't block port building spots with trees
 						if (bf->unowned_portspace_vicinity_nearby > 0) {
@@ -3092,12 +3084,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						// This is for a special case this is also supporter, it considers
 						// producers nearby
-						for (const auto& supported_building : bo.supported_producers) {
-							prio += management_data.neuron_pool[51].get_result_safe(
-							           bf->count_supported_producers_nearby(supported_building.first) * 5,
-							           kAbsValue) /
-							        2;
-						}
+						prio += management_data.neuron_pool[51].get_result_safe(
+						           supported_producers_nearby_count * 5, kAbsValue) /
+						        2;
+
 						// now we find out if the supporter is needed depending on output stocklevel
 						// and supported stocklevel
 						const uint32_t combined_stocklevel = (get_stocklevel(bo, gametime));
@@ -3113,9 +3103,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 
 						// taking into account the vicinity
-						for (const auto& supported_building : bo.supported_producers) {
-							prio += bf->count_supported_producers_nearby(supported_building.first) * 10;
-						}
+						prio += supported_producers_nearby_count * 10;
 						prio -= count_supporters_nearby * 15;
 
 						if (bf->enemy_nearby) {  // not close to the enemy
@@ -3158,9 +3146,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 						// taking into account the vicinity
-						for (const auto& supported_building : bo.supported_producers) {
-							prio += bf->count_supported_producers_nearby(supported_building.first) * 10;
-						}
+						prio += supported_producers_nearby_count * 10;
 						prio -= count_supporters_nearby * 8;
 
 						if (bf->enemy_nearby) {  // not close to the enemy
@@ -3204,9 +3190,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 
-						for (const auto& supported_building : bo.supported_producers) {
-							prio += bf->count_supported_producers_nearby(supported_building.first) * 10;
-						}
+						prio += supported_producers_nearby_count * 10;
 						prio -= count_supporters_nearby * 20;
 
 						if (bf->enemy_nearby) {
@@ -3255,10 +3239,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							for (const auto& supported_building : bo.supported_producers) {
-								prio -= bf->count_supported_producers_nearby(supported_building.first) *
-								        std::abs(management_data.get_military_number_at(108)) / 5;
-							}
+							prio -= supported_producers_nearby_count *
+							        std::abs(management_data.get_military_number_at(108)) / 5;
 						}
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
