@@ -760,7 +760,7 @@ void DefaultAI::late_initialization() {
 				                                tribe_->get_building_descr(supported_building_index))));
 			}
 			bo.supported_by_buildings.clear();
-			for (const std::string supporting_building_name : prod.supported_by_productionsites()) {
+			for (const std::string& supporting_building_name : prod.supported_by_productionsites()) {
 				bo.supported_by_buildings.insert(tribe_->building_index(supporting_building_name));
 			}
 
@@ -2962,7 +2962,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// consider cutters and rangers nearby
 					prio += 2 * count_supporters_nearby *
 					        std::abs(management_data.get_military_number_at(25));
-
 					prio -= supported_producers_nearby_count *
 					        std::abs(management_data.get_military_number_at(36)) * 3;
 
