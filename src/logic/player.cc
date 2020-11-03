@@ -198,9 +198,6 @@ Player::Player(EditorGameBase& the_egbase,
 	update_team_players();
 }
 
-Player::~Player() {
-}
-
 void Player::create_default_infrastructure() {
 	if (is_picking_custom_starting_position_) {
 		return;

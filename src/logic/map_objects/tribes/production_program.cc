@@ -212,9 +212,6 @@ TrainingAttribute parse_training_attribute(const std::string& argument) {
 }
 }  // namespace
 
-ProductionProgram::Action::~Action() {
-}
-
 bool ProductionProgram::Action::get_building_work(Game&, ProductionSite&, Worker&) const {
 	return false;
 }
@@ -423,8 +420,6 @@ Examples for ``return=skipped``:
    -- with these wares with another program.
    return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat
 */
-ProductionProgram::ActReturn::Condition::~Condition() {
-}
 
 ProductionProgram::ActReturn::Negation::Negation(const std::vector<std::string>& arguments,
                                                  std::vector<std::string>::const_iterator& begin,
@@ -1816,11 +1811,12 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 
 	const unsigned current_level = ts.checked_soldier_training().level;
 	assert(current_level != INVALID_INDEX);
-	assert(current_level < training_.level);
-	assert(ts.checked_soldier_training().attribute == training_.attribute);
 
 	ps.molog(game.get_gametime(), "  Training soldier's %u (%d to %d)",
 	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
+
+	assert(current_level < training_.level);
+	assert(ts.checked_soldier_training().attribute == training_.attribute);
 
 	bool training_done = false;
 	for (auto it = soldiers.begin(); !training_done; ++it) {
