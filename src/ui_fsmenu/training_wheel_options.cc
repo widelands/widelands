@@ -50,7 +50,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	wrapper_box->add_space(0);
 
-	UI::Box* main_box = new UI::Box(wrapper_box, panel_style, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+	UI::Box* main_box =
+	   new UI::Box(wrapper_box, panel_style, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 	wrapper_box->add(main_box, UI::Box::Resizing::kExpandBoth);
 
 	main_box->add_space(0);
@@ -67,8 +68,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	// Box should scroll if there are many.
 	main_box->add_space(kPadding);
 
-	UI::Box* list_box =
-	   new UI::Box(main_box, panel_style, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, kPadding);
+	UI::Box* list_box = new UI::Box(
+	   main_box, panel_style, 0, 0, UI::Box::Vertical, 0, parent->get_h() * 3 / 4, kPadding);
 	list_box->set_scrolling(true);
 	main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
@@ -88,7 +89,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	main_box->add_space(kPadding);
 
 	// Bottom button row with actions
-	UI::Box* horizontal_box = new UI::Box(main_box, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
+	UI::Box* horizontal_box =
+	   new UI::Box(main_box, panel_style, 0, 0, UI::Box::Horizontal, 0, 0, kPadding);
 	main_box->add(horizontal_box, UI::Box::Resizing::kFullSize);
 
 	horizontal_box->add_space(0);

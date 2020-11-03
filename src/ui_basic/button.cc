@@ -125,10 +125,9 @@ void Button::expand(int w, int h) {
 	if (h == 0) {
 		// Automatically resize for font height and give it a margin.
 		int new_width = get_w();
-		const int new_height =
-		   std::max(text_height(button_style_->enabled().font()),
-		            text_height(button_style_->disabled().font())) +
-		   4 * kButtonImageMargin;
+		const int new_height = std::max(text_height(button_style_->enabled().font()),
+		                                text_height(button_style_->disabled().font())) +
+		                       4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
 			new_width = std::max(text_width(title_, button_style_->enabled().font()),
