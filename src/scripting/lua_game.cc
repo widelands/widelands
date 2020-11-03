@@ -105,7 +105,6 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
 };
 const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, name),
-   PROP_RO(LuaPlayer, number),
    PROP_RO(LuaPlayer, allowed_buildings),
    PROP_RO(LuaPlayer, objectives),
    PROP_RO(LuaPlayer, defeated),
@@ -133,18 +132,6 @@ int LuaPlayer::get_name(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	Widelands::Player& p = get(L, game);
 	lua_pushstring(L, p.get_name());
-	return 1;
-}
-
-/* RST
-   .. attribute:: number
-
-         (RO) The number of this Player on the map.
-*/
-int LuaPlayer::get_number(lua_State* L) {
-	Widelands::Game& game = get_game(L);
-	Widelands::Player& p = get(L, game);
-	lua_pushinteger(L, p.player_number());
 	return 1;
 }
 

@@ -65,7 +65,6 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State* L);
-	int get_number(lua_State* L);
 	int get_allowed_buildings(lua_State* L);
 	int get_objectives(lua_State* L);
 	int get_defeated(lua_State* L);
