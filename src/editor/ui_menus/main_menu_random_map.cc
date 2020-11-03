@@ -105,17 +105,18 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                 panel_style_ == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
                                                        UI::ButtonStyle::kFsMenuSecondary),
      terrains_distribution_(&box_,
-                "terrains_distribution",
-                0,
-                0,
-                box_width_,
-                8,
-                label_height_,
-                _("Terrain Distribution"),
-                UI::DropdownType::kTextual,
-                panel_style_,
-                panel_style_ == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
-                                                       UI::ButtonStyle::kFsMenuSecondary),
+                            "terrains_distribution",
+                            0,
+                            0,
+                            box_width_,
+                            8,
+                            label_height_,
+                            _("Terrain Distribution"),
+                            UI::DropdownType::kTextual,
+                            panel_style_,
+                            panel_style_ == UI::PanelStyle::kWui ?
+                               UI::ButtonStyle::kWuiSecondary :
+                               UI::ButtonStyle::kFsMenuSecondary),
      // Terrain
      waterval_(20),
      landval_(60),
@@ -537,8 +538,7 @@ void MainMenuNewRandomMap::select_terrains_distribution() {
 		}
 
 		wastelandval_ = 100 - sum;
-	}
-	break;
+	} break;
 	}
 
 	assert(waterval_ + landval_ + wastelandval_ + mountainsval_ == 100);
