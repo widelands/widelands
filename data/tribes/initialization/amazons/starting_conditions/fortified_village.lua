@@ -93,7 +93,7 @@ return {
          },
       })
 
-      place_building_in_region(plr, "amazons_dressmaker", sf:region(11), {
+      place_building_in_region(plr, "amazons_dressmakery", sf:region(11), {
          inputs = {
                ironwood = 2,
                balsa = 6,
