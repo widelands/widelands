@@ -1294,7 +1294,7 @@ descriptions:new_tribe {
             purpose = pgettext("amazons_building", "Hunts animals to produce meat. Catches fish in the waters."),
             -- TRANSLATORS: Note helptext for an amazon production site: Hunter-Gatherer's Hut
             note = pgettext("amazons_building", "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the work area."),
-            -- TRANSLATORS: Performance helptext for an amazon production site: Fisher's House, part 2
+            -- TRANSLATORS: Performance helptext for an amazon production site: Hunter-Gatherer's Hut
             performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 34):bformat(34))
 
          }
@@ -1318,7 +1318,7 @@ descriptions:new_tribe {
       {
          name = "amazons_rare_tree_cutters_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Trees Woodcutter's Hut
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Rare Tree Cutter's Hut
             purpose = pgettext("amazons_building", "Harvests rare trees in the surrounding area. Delivers ironwood, balsa and rubber.")
          }
       },
@@ -1501,63 +1501,63 @@ descriptions:new_tribe {
       {
          name = "amazons_patrol_post",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhouse
+            -- TRANSLATORS: Purpose helptext for an amazon military site: Patrol Post
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Guardhouse
+            -- TRANSLATORS: Note helptext for an amazon military site: Patrol Post
             note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_treetop_sentry",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhall
+            -- TRANSLATORS: Purpose helptext for an amazon military site: Treetop Sentry
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Guardhall
+            -- TRANSLATORS: Note helptext for an amazon military site: Treetop Sentry
             note = pgettext("amazons_building", "You can only build this building on top of a tree.")
          }
       },
       {
          name = "amazons_warriors_dwelling",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Small Tower
+            -- TRANSLATORS: Purpose helptext for an amazon military site: Warriors’ Dwelling
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Small Tower
+            -- TRANSLATORS: Note helptext for an amazon military site: Warriors’ Dwelling
             note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_tower",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Tower
+            -- TRANSLATORS: Purpose helptext for an amazon military site: Tower
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Tower
+            -- TRANSLATORS: Note helptext for an amazon military site: Tower
             note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_observation_tower",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: High Tower
+            -- TRANSLATORS: Purpose helptext for an amazon military site: Observation Tower
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: High Tower
+            -- TRANSLATORS: Note helptext for an amazon military site: Observation Tower
             note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_fortress",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Castle
+            -- TRANSLATORS: Purpose helptext for an amazon military site: Fortress
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Castle
+            -- TRANSLATORS: Note helptext for an amazon military site: Fortress
             note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_fortification",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean military site: Castle
+            -- TRANSLATORS: Purpose helptext for an amazon military site: Fortification
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an atlantean military site: Castle
+            -- TRANSLATORS: Note helptext for an amazon military site: Fortification
             note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
@@ -1584,22 +1584,22 @@ descriptions:new_tribe {
       {
          name = "constructionsite",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an atlantean building: Construction Site
+            -- TRANSLATORS: Lore helptext for an amazon building: Construction Site
             lore = pgettext("building", "‘Don’t swear at the builder who is short of building materials.’"),
-            -- TRANSLATORS: Lore author helptext for an atlantean building: Construction Site
+            -- TRANSLATORS: Lore author helptext for an amazon building: Construction Site
             lore_author = pgettext("building", "Proverb widely used for impossible tasks of any kind"),
-            -- TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
+            -- TRANSLATORS: Purpose helptext for an amazon building: Construction Site
             purpose = pgettext("building", "A new building is being built at this construction site.")
          }
       },
       {
          name = "dismantlesite",
          helptexts = {
-            -- TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
+            -- TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
             lore = pgettext("building", "‘New paths will appear when you are willing to tear down the old.’"),
-            -- TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
+            -- TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
             lore_author = pgettext("building", "Proverb"),
-            -- TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
+            -- TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
             purpose = pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
          }
       }
