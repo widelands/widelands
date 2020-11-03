@@ -74,7 +74,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		update();
 	}
 
-	void force_new_dimensions(float, uint32_t standard_element_height) {
+	void force_new_dimensions(uint32_t standard_element_height) {
 		slot_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 	}
 
@@ -333,8 +333,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	/// Whether the client who is running the UI is allowed to change the tribe for this player slot.
 	bool has_tribe_access() const {
 		return settings_->settings().players[id_].state == PlayerSettings::State::kShared ?
-		          settings_->can_change_player_init(id_) :
-		          settings_->can_change_player_tribe(id_);
+                settings_->can_change_player_init(id_) :
+                settings_->can_change_player_tribe(id_);
 	}
 
 	/// This will update the game settings for the tribe or shared_in with the value
@@ -346,8 +346,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_settings = settings_->settings().players[id_];
 		tribe_selection_locked_ = true;
 		tribes_dropdown_.set_disable_style(player_settings.state == PlayerSettings::State::kShared ?
-		                                      UI::ButtonDisableStyle::kPermpressed :
-		                                      UI::ButtonDisableStyle::kFlat);
+                                            UI::ButtonDisableStyle::kPermpressed :
+                                            UI::ButtonDisableStyle::kFlat);
 		if (tribes_dropdown_.has_selection()) {
 			if (player_settings.state == PlayerSettings::State::kShared) {
 				n->set_player_shared(
@@ -554,7 +554,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 	}
 
-	void force_new_dimensions(float /*scale*/, uint32_t height) {
+	void force_new_dimensions(uint32_t height) {
 		player.set_desired_size(height, height);
 		type_dropdown_.set_desired_size(height, height);
 		tribes_dropdown_.set_desired_size(height, height);
@@ -702,8 +702,7 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	}
 }
 
-void MultiPlayerSetupGroup::force_new_dimensions(float scale,
-                                                 uint32_t max_width,
+void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
                                                  uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
@@ -713,10 +712,10 @@ void MultiPlayerSetupGroup::force_new_dimensions(float scale,
 	scrollable_playerbox.set_max_size(max_width / 2, max_height - players_.get_h() - 4 * kPadding);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
-		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
+		multiPlayerClientGroup->force_new_dimensions(standard_element_height);
 	}
 
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
-		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
+		multiPlayerPlayerGroup->force_new_dimensions(standard_element_height);
 	}
 }

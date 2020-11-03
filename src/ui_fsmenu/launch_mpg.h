@@ -43,7 +43,7 @@ public:
 	                        GameController*,
 	                        ChatProvider&,
 	                        Widelands::EditorGameBase& egbase);
-	~FullscreenMenuLaunchMPG() override;
+	~FullscreenMenuLaunchMPG() override = default;
 
 	void think() override;
 	void refresh();

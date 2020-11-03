@@ -41,7 +41,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_playername_(&right_column_box_,
+     label_playername_(&right_column_content_box_,
                        UI::PanelStyle::kFsMenu,
                        UI::FontStyle::kFsMenuLabel,
                        0,
@@ -49,8 +49,8 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
                        0,
                        0,
                        _("Your nickname:")),
-     playername_(&right_column_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     label_hostname_(&right_column_box_,
+     playername_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     label_hostname_(&right_column_content_box_,
                      UI::PanelStyle::kFsMenu,
                      UI::FontStyle::kFsMenuLabel,
                      0,
@@ -59,7 +59,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN(FullscreenMenuMain& fsmm)
                      0,
                      _("Host to connect:")),
 
-     host_box_(&right_column_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     host_box_(&right_column_content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      hostname_(&host_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",

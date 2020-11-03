@@ -144,9 +144,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	}
 }
 
-FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
-}
-
 void FullscreenMenuLaunchMPG::layout() {
 	FullscreenMenuLaunchGame::layout();
 	// hardcode help button because it does not fit in any box, place it in top right corner
@@ -156,7 +153,7 @@ void FullscreenMenuLaunchMPG::layout() {
 	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
 
 	mpsg_.force_new_dimensions(
-	   1.f, left_column_box_.get_w(), left_column_box_.get_h() / 2, standard_height_);
+	   left_column_box_.get_w(), left_column_box_.get_h() / 2, standard_height_);
 
 	// set focus to chat input
 	chat_.focus_edit();
