@@ -54,9 +54,6 @@ BlitProgram::BlitProgram() {
 	u_mask_ = glGetUniformLocation(gl_program_.object(), "u_mask");
 }
 
-BlitProgram::~BlitProgram() {
-}
-
 void BlitProgram::draw(const std::vector<Arguments>& arguments) {
 	glUseProgram(gl_program_.object());
 

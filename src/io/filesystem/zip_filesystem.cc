@@ -143,9 +143,6 @@ ZipFilesystem::ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data,
    : zip_file_(shared_data), basedir_in_zip_file_(basedir_in_zip_file) {
 }
 
-ZipFilesystem::~ZipFilesystem() {
-}
-
 /**
  * Return true if this directory is writable.
  */
@@ -541,9 +538,6 @@ ZipFilesystem::ZipStreamRead::ZipStreamRead(const std::shared_ptr<ZipFile>& shar
    : zip_file_(shared_data) {
 }
 
-ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
-}
-
 size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize) {
 	int copied = unzReadCurrentFile(zip_file_->read_handle(), read_data, bufsize);
 	if (copied < 0) {
@@ -561,9 +555,6 @@ bool ZipFilesystem::ZipStreamRead::end_of_file() const {
 
 ZipFilesystem::ZipStreamWrite::ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data)
    : zip_file_(shared_data) {
-}
-
-ZipFilesystem::ZipStreamWrite::~ZipStreamWrite() {
 }
 
 void ZipFilesystem::ZipStreamWrite::data(const void* const write_data, const size_t size) {

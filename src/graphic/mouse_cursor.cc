@@ -34,9 +34,6 @@ const int default_hotspot_x = 3, default_hotspot_y = 7;
 
 MouseCursor* g_mouse_cursor;
 
-MouseCursor::MouseCursor() {
-}
-
 void MouseCursor::initialize(bool init_use_sdl) {
 	default_cursor_ = g_image_cache->get(default_filename);
 	default_cursor_click_ = g_image_cache->get(default_click_filename);

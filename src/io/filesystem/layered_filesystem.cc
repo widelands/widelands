@@ -30,12 +30,6 @@ LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
 }
 
 /**
- * Free all sub-filesystems
- */
-LayeredFileSystem::~LayeredFileSystem() {
-}
-
-/**
  * Just assume that at least one of our child FSs is writable
  */
 // TODO(unknown): Implement me

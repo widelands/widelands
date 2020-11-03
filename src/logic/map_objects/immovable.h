@@ -203,7 +203,7 @@ public:
 	/// display information about it.
 	explicit Immovable(const ImmovableDescr&,
 	                   const Widelands::BuildingDescr* former_building_descr = nullptr);
-	~Immovable() override;
+	~Immovable() override = default;
 
 	Coords get_position() const {
 		return position_;
@@ -403,7 +403,7 @@ private:
 	// load/save support
 protected:
 	struct Loader : BaseImmovable::Loader {
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 	};

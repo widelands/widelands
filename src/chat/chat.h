@@ -31,8 +31,7 @@
 struct ChatMessage {
 	CAN_BE_SENT_AS_NOTE(NoteId::ChatMessage)
 
-	explicit ChatMessage(const std::string& message) : msg(message) {
-	}
+	explicit ChatMessage(const std::string& message);
 
 	// The (real-)time at which the message was received.
 	time_t time = std::time(nullptr);
@@ -62,7 +61,7 @@ struct ChatMessage {
 // Base classes must broadcast a ChatMessage as notification when a
 // new message is received.
 struct ChatProvider {
-	virtual ~ChatProvider();
+	virtual ~ChatProvider() = default;
 
 	// Send the given chat message. The message may or may not
 	// appear in subsequent calls to \ref get_messages.

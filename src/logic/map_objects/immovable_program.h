@@ -34,7 +34,7 @@ struct ImmovableProgram : public MapObjectProgram {
 	class Action {
 	public:
 		Action() = default;
-		virtual ~Action();
+		virtual ~Action() = default;
 		virtual void execute(Game&, Immovable&) const = 0;
 
 	private:
