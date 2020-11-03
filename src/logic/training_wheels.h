@@ -65,12 +65,25 @@ public:
 	 * @return Whether the training wheel objective acquired the lock
 	 */
 	bool acquire_lock(const std::string& objective);
+
+	/**
+	 * @brief release_lock Releases the current training wheel lock without marking it as solved.
+	 */
+	void release_lock();
+
 	/**
 	 * @brief mark_as_solved Mark the given training wheel objective as solved and release the lock
 	 * @param objective The training wheel objective to be marked as solved
 	 * @param run_some_more Whether to trigger more training wheel scripts when available
 	 */
 	void mark_as_solved(const std::string& objective, bool run_some_more);
+
+	/**
+	 * The same as mark_as_solved without recording it as solved in the config file, so that it will
+	 * run again in a new game but stop blocking other training wheels that depend on it.
+	 */
+	void skip(const std::string& objective, bool run_some_more);
+
 	/**
 	 * @brief mark_as_unsolved Mark the given training wheel objective as no longer solved. Does not
 	 * trigger anything else and does not refresh the information about currently running training
@@ -89,8 +102,13 @@ public:
 	bool has_objectives() const;
 
 	/**
-	 * Returns all idle, running and solved objectives
+	 * @brief current_objective The training wheel that's currently active
+	 * @return A string with the training wheel's name, or empty if none are active
 	 */
+	const std::string& current_objective() const {
+		return current_objective_;
+	}
+
 	std::map<std::string, TrainingWheel> all_objectives() const;
 
 private:
@@ -102,6 +120,8 @@ private:
 	 * @brief write Write configuration to file
 	 */
 	void write();
+
+	void solve(const std::string& objective, bool run_some_more, bool write_to_config);
 
 	// Objective name and its scripting information
 	std::map<std::string, TrainingWheel> idle_objectives_;

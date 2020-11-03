@@ -118,26 +118,19 @@ bool TrainingWheels::acquire_lock(const std::string& objective) {
 	return current_objective_ == objective;
 }
 
+// TODO(Gunchleoc): Optionally add training wheel name so that it can be put back in the queue
+void TrainingWheels::release_lock() {
+	current_objective_ = "";
+}
+
 void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_more) {
 	log_info("Solved training wheel '%s'", objective.c_str());
-	auto it = running_objectives_.find(objective);
-	if (it != running_objectives_.end()) {
-		it->second.solved = true;
-		solved_objectives_.insert(std::make_pair(objective, it->second));
-		running_objectives_.erase(it);
-	} else {
-		solved_objectives_.insert(
-		   std::make_pair(objective, TrainingWheel(true, objective, objective, {})));
-	}
+	solve(objective, run_some_more, true);
+}
 
-	Section& section = profile_.pull_section("global");
-	section.set_bool(objective.c_str(), true);
-	write();
-	current_objective_ = "";
-	if (run_some_more) {
-		load_objectives();
-		run_objectives();
-	}
+void TrainingWheels::skip(const std::string& objective, bool run_some_more) {
+	log_info("Skipping training wheel '%s'", objective.c_str());
+	solve(objective, run_some_more, false);
 }
 
 void TrainingWheels::mark_as_unsolved(const std::string& objective) {
@@ -152,6 +145,29 @@ void TrainingWheels::write() {
 		profile_.write(kTrainingWheelsFile);
 	} catch (const std::exception& e) {
 		log_warn("could not save training wheels: %s\n", e.what());
+	}
+}
+
+void TrainingWheels::solve(const std::string& objective, bool run_some_more, bool write_to_config) {
+	auto it = running_objectives_.find(objective);
+	if (it != running_objectives_.end()) {
+		it->second.solved = true;
+		solved_objectives_.insert(std::make_pair(objective, it->second));
+		running_objectives_.erase(it);
+	} else {
+		solved_objectives_.insert(
+		   std::make_pair(objective, TrainingWheel(true, objective, objective, {})));
+	}
+
+	if (write_to_config) {
+		Section& section = profile_.pull_section("global");
+		section.set_bool(objective.c_str(), true);
+		write();
+	}
+	release_lock();
+	if (run_some_more) {
+		load_objectives();
+		run_objectives();
 	}
 }
 
