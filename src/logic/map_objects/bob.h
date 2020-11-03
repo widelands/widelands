@@ -397,7 +397,7 @@ private:
 protected:
 	struct Loader : public MapObject::Loader {
 	public:
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 		void load_pointers() override;

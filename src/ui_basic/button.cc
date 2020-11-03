@@ -123,9 +123,6 @@ Button::Button  //  for pictorial buttons
    : Button(parent, name, x, y, w, h, init_style, title_image, "", tooltip_text, init_state, mode) {
 }
 
-Button::~Button() {
-}
-
 /**
  * Sets a new picture for the Button.
  */

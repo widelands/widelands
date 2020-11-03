@@ -46,7 +46,7 @@
 class LayeredFileSystem : public FileSystem {
 public:
 	LayeredFileSystem();
-	~LayeredFileSystem() override;
+	~LayeredFileSystem() override = default;
 
 	// Add a new filesystem to the top of the stack. Take ownership of the given
 	// filesystem.
