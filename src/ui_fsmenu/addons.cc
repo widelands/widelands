@@ -82,8 +82,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 		set_center_panel(&box_);
 		center_to_parent();
 	}
-	~ProgressIndicatorWindow() override {
-	}
+	~ProgressIndicatorWindow() override = default;
 
 	void die() override {
 		UI::Window::die();
