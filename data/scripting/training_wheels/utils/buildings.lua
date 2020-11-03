@@ -93,7 +93,7 @@ function find_buildable_field(center_field, player, size, min_radius, max_radius
                   end
                end
                if sufficient_space then
-                     return field
+                  return field
                end
             end
          end

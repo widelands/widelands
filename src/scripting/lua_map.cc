@@ -7159,14 +7159,17 @@ int LuaField::get_has_roads(lua_State* L) {
 	map.get_ln(fc, &neighbor);
 	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_E) != Widelands::RoadSegment::kNone) {
 		lua_pushboolean(L, true);
+		return 1;
 	}
 	map.get_tln(fc, &neighbor);
 	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SE) != Widelands::RoadSegment::kNone) {
 		lua_pushboolean(L, true);
+		return 1;
 	}
 	map.get_trn(fc, &neighbor);
 	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SW) != Widelands::RoadSegment::kNone) {
 		lua_pushboolean(L, true);
+		return 1;
 	}
 	lua_pushboolean(L, false);
 

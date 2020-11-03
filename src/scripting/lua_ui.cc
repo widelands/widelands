@@ -546,7 +546,7 @@ int LuaDropdown::indicate_item(lua_State* L) {
 
 	ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
 
-	return 2;
+	return 0;
 }
 
 /* RST
