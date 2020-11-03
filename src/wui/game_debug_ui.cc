@@ -40,7 +40,7 @@
 MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
                                          const Widelands::EditorGameBase& egbase,
                                          Widelands::MapObject& obj)
-   : UI::Panel(&parent, 0, 0, 350, 200),
+   : UI::Panel(&parent, UI::PanelStyle::kWui, 0, 0, 350, 200),
      egbase_(egbase),
      object_(&obj),
      log_(this,
@@ -69,7 +69,7 @@ Append the string to the log textarea.
 ===============
 */
 void MapObjectDebugPanel::log(const std::string& str) {
-	log_.set_text((log_.get_text() + str).c_str());
+	log_.set_text((log_.get_text() + str));
 }
 
 /*
@@ -282,7 +282,7 @@ void FieldDebugWindow::think() {
 
 	if (str != text_) {
 		// Field properties changed -> update text_
-		ui_field_.set_text(str.c_str());
+		ui_field_.set_text(str);
 		text_ = std::move(str);
 	}
 

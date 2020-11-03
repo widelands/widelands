@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/style_manager.h"
+#include "graphic/styles/font_style.h"
 #include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
@@ -53,20 +53,20 @@ namespace UI {
  */
 struct Textarea : public Panel {
 public:
-	explicit Textarea(
-	   Panel* const parent,
-	   int32_t x,
-	   int32_t y,
-	   uint32_t w,
-	   uint32_t h,
-	   const std::string& text = std::string(),
-	   Align align = UI::Align::kLeft,
-	   const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
-	explicit Textarea(
-	   Panel* parent,
-	   const std::string& text = std::string(),
-	   Align align = UI::Align::kLeft,
-	   const UI::FontStyleInfo& style = g_style_manager->font_style(FontStyle::kLabel));
+	explicit Textarea(Panel* const parent,
+	                  PanelStyle,
+	                  FontStyle,
+	                  int32_t x,
+	                  int32_t y,
+	                  uint32_t w,
+	                  uint32_t h,
+	                  const std::string& text = std::string(),
+	                  Align align = UI::Align::kLeft);
+	explicit Textarea(Panel* parent,
+	                  PanelStyle,
+	                  FontStyle,
+	                  const std::string& text = std::string(),
+	                  Align align = UI::Align::kLeft);
 
 	/**
 	 * If fixed_width > 0, the Textarea will not change its width.
@@ -91,13 +91,14 @@ private:
 	enum class LayoutMode { AutoMove, Layouted };
 
 	Textarea(Panel* const parent,
+	         PanelStyle,
+	         FontStyle,
 	         int32_t x,
 	         int32_t y,
 	         uint32_t w,
 	         uint32_t h,
 	         const std::string& text,
 	         Align align,
-	         const UI::FontStyleInfo& style,
 	         LayoutMode layout_mode);
 
 	void collapse();
@@ -110,7 +111,7 @@ private:
 	std::string text_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	const FontStyleInfo* style_;
+	const FontStyleInfo* font_style_;
 	float font_scale_;
 	int fixed_width_;
 };

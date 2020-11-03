@@ -1,6 +1,7 @@
 wl_library(graphic_styles
   SRCS
     building_statistics_style.h
+    button_style.cc
     button_style.h
     font_style.cc
     font_style.h

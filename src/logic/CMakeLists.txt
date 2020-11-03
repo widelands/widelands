@@ -197,6 +197,20 @@ wl_library(logic_commands
     scripting_lua_table
 )
 
+
+wl_library(logic_training_wheels
+  SRCS
+    training_wheels.cc
+    training_wheels.h
+  DEPENDS
+    base_log
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
+    scripting_lua_table
+    scripting_lua_interface
+)
+
 wl_library(logic
   SRCS
     ai_dna_handler.cc
@@ -218,8 +232,6 @@ wl_library(logic
     save_handler.cc
     save_handler.h
     trade_agreement.h
-    training_wheels.cc
-    training_wheels.h
   # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
@@ -253,6 +265,7 @@ wl_library(logic
     logic_map
     logic_map_objects
     logic_tribe_basic_info
+    logic_training_wheels
     logic_widelands_geometry
     map_io
     map_io_map_loader

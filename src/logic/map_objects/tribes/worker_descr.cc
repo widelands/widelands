@@ -76,7 +76,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 				}
 
 				buildcost_.insert(std::make_pair(key, value));
-			} catch (const WException& e) {
+			} catch (const std::exception& e) {
 				throw GameDataError("[buildcost] \"%s\": %s", key.c_str(), e.what());
 			}
 		}
@@ -119,7 +119,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
    : WorkerDescr(init_descname, MapObjectType::WORKER, table, descriptions) {
 }
 
-WorkerDescr::~WorkerDescr() {
+WorkerDescr::~WorkerDescr() {  // NOLINT
+	                            // WorkerProgram needs this
 }
 
 void WorkerDescr::set_default_target_quantity(int quantity) {

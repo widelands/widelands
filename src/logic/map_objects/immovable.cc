@@ -253,7 +253,7 @@ void ImmovableDescr::add_collected_by(const Descriptions& descriptions,
  * Cleanup
  */
 ImmovableDescr::~ImmovableDescr() {
-	while (programs_.size()) {
+	while (!programs_.empty()) {
 		delete programs_.begin()->second;
 		programs_.erase(programs_.begin());
 	}
@@ -314,9 +314,6 @@ Immovable::Immovable(const ImmovableDescr& imm_descr,
      anim_construction_done_(0),
      program_step_(0),
      growth_delay_(0) {
-}
-
-Immovable::~Immovable() {
 }
 
 BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase&) const {
@@ -811,7 +808,7 @@ PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
  * Cleanup
  */
 PlayerImmovable::~PlayerImmovable() {
-	if (workers_.size()) {
+	if (!workers_.empty()) {
 		log_warn("PlayerImmovable::~PlayerImmovable: %" PRIuS " workers left!\n", workers_.size());
 	}
 }
@@ -928,9 +925,6 @@ void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;
-
-PlayerImmovable::Loader::Loader() {
-}
 
 void PlayerImmovable::Loader::load(FileRead& fr) {
 	BaseImmovable::Loader::load(fr);

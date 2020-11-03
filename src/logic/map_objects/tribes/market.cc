@@ -62,9 +62,6 @@ bool Market::TradeOrder::fulfilled() const {
 Market::Market(const MarketDescr& the_descr) : Building(the_descr) {
 }
 
-Market::~Market() {
-}
-
 void Market::new_trade(const int trade_id,
                        const BillOfMaterials& items,
                        const int num_batches,
@@ -212,14 +209,14 @@ void Market::ensure_wares_queue_exists(int ware_index) {
 	wares_queue_[ware_index]->set_callback(Market::ware_arrived_callback, this);
 }
 
-InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker) {
+InputQueue& Market::inputqueue(DescriptionIndex index, WareWorker ware_worker, const Request* r) {
 	assert(ware_worker == wwWARE);
 	auto it = wares_queue_.find(index);
 	if (it != wares_queue_.end()) {
 		return *it->second;
 	}
 	// The parent will throw an exception.
-	return Building::inputqueue(index, ware_worker);
+	return Building::inputqueue(index, ware_worker, r);
 }
 
 void Market::cleanup(EditorGameBase& egbase) {

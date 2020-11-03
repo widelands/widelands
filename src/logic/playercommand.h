@@ -152,7 +152,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad(const Time&, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
-	~CmdBuildRoad() override;
+	~CmdBuildRoad() override = default;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -177,7 +177,7 @@ struct CmdBuildWaterway : public PlayerCommand {
 	CmdBuildWaterway(const Time&, int32_t, Path&);
 	explicit CmdBuildWaterway(StreamRead&);
 
-	~CmdBuildWaterway() override;
+	~CmdBuildWaterway() override = default;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -522,17 +522,17 @@ struct CmdSetWarePriority : public PlayerCommand {
 	CmdSetWarePriority()
 	   : PlayerCommand(),
 	     serial_(0),
-	     type_(0),
+	     type_(wwWARE),
 	     index_(),
-	     priority_(0),
+	     priority_(WarePriority::kNormal),
 	     is_constructionsite_setting_(false) {
 	}
 	CmdSetWarePriority(const Time& duetime,
 	                   PlayerNumber sender,
 	                   PlayerImmovable&,
-	                   int32_t type,
+	                   WareWorker type,
 	                   DescriptionIndex index,
-	                   int32_t priority,
+	                   const WarePriority& priority,
 	                   bool cs);
 
 	// Write these commands to a file (for savegames)
@@ -550,9 +550,9 @@ struct CmdSetWarePriority : public PlayerCommand {
 
 private:
 	Serial serial_;
-	int32_t type_;  ///< this is always WARE right now
+	WareWorker type_;  ///< this is always wwWARE right now
 	DescriptionIndex index_;
-	int32_t priority_;
+	WarePriority priority_;
 	bool is_constructionsite_setting_;
 };
 

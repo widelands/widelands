@@ -90,7 +90,7 @@ const Tag::ChildList& Tag::children() const {
 }
 
 Tag::~Tag() {
-	while (children_.size()) {
+	while (!children_.empty()) {
 		delete children_.back();
 		children_.pop_back();
 	}
@@ -138,7 +138,7 @@ void Tag::parse_content(TextStream& ts, TagConstraints& tcs, const TagSet& allow
 
 		size_t line = ts.line(), col = ts.col();
 		std::string text = ts.till_any("<");
-		if (text != "") {
+		if (!text.empty()) {
 			if (!tc.text_allowed) {
 				throw SyntaxErrorImpl(
 				   line, col, "no text, as only tags are allowed here", text, ts.peek(100));
@@ -505,9 +505,6 @@ Attributes
 		tc.has_closing_tag = false;
 		tag_constraints_["img"] = tc;
 	}
-}
-
-Parser::~Parser() {
 }
 
 Tag* Parser::parse(std::string text, const TagSet& allowed_tags) {

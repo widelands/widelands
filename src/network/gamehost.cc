@@ -66,8 +66,7 @@
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	explicit HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
 	}
-	~HostGameSettingsProvider() override {
-	}
+	~HostGameSettingsProvider() override = default;
 
 	void set_scenario(bool is_scenario) override {
 		host_->set_scenario(is_scenario);
@@ -241,7 +240,7 @@ struct HostChatProvider : public ChatProvider {
 		ChatMessage c(msg);
 		c.playern = h->get_local_playerposition();
 		c.sender = h->get_local_playername();
-		if (c.msg.size() && *c.msg.begin() == '@') {
+		if (!c.msg.empty() && *c.msg.begin() == '@') {
 			// Personal message
 			std::string::size_type const space = c.msg.find(' ');
 			if (space >= c.msg.size() - 1) {
@@ -302,7 +301,7 @@ struct HostChatProvider : public ChatProvider {
 				if (arg1.empty()) {
 					c.msg = _("Wrong use, should be: /announce <message>");
 				} else {
-					if (arg2.size()) {
+					if (!arg2.empty()) {
 						arg1 += " " + arg2;
 					}
 					c.msg = "HOST ANNOUNCEMENT: " + arg1;
@@ -330,7 +329,7 @@ struct HostChatProvider : public ChatProvider {
 					c.msg = _("Wrong use, should be: /kick <name> <reason>");
 				} else {
 					kickUser = arg1;
-					if (arg2.size()) {
+					if (!arg2.empty()) {
 						kickReason = arg2;
 					} else {
 						kickReason = "No reason given!";
@@ -356,7 +355,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "ack_kick") {
 				if (arg1.empty()) {
 					c.msg = _("Kick acknowledgement cancelled: No name given!");
-				} else if (arg2.size()) {
+				} else if (!arg2.empty()) {
 					c.msg = _("Wrong use, should be: /ack_kick <name>");
 				} else {
 					if (arg1 == kickUser) {
@@ -1087,7 +1086,7 @@ bool GameHost::can_launch() {
 	if (d->settings.mapname.empty()) {
 		return false;
 	}
-	if (d->settings.players.size() < 1) {
+	if (d->settings.players.empty()) {
 		return false;
 	}
 	if (d->game) {
@@ -2348,7 +2347,7 @@ void GameHost::handle_chat(Client& client, RecvPacket& r) {
 	ChatMessage c(r.string());
 	c.playern = d->settings.users.at(client.usernum).position;
 	c.sender = d->settings.users.at(client.usernum).name;
-	if (c.msg.size() && *c.msg.begin() == '@') {
+	if (!c.msg.empty() && *c.msg.begin() == '@') {
 		// Personal message
 		std::string::size_type const space = c.msg.find(' ');
 		if (space >= c.msg.size() - 1) {

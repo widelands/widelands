@@ -127,24 +127,27 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	set_building_descr_for_help(&construction_site->building());
 
 	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
-	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
+	UI::Box& box = *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
-	progress_ = new UI::ProgressBar(&box, 0, 0, UI::ProgressBar::DefaultWidth,
+	progress_ = new UI::ProgressBar(&box, UI::PanelStyle::kWui, 0, 0, UI::ProgressBar::DefaultWidth,
 	                                UI::ProgressBar::DefaultHeight, UI::ProgressBar::Horizontal);
 	progress_->set_total(1 << 16);
 	box.add(progress_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	box.add_space(8);
+	ensure_box_can_hold_input_queues(box);
 
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->nr_dropout_waresqueues(); ++i) {
-		box.add(new InputQueueDisplay(&box, 0, 0, *ibase(), *construction_site,
-		                              *construction_site->get_dropout_waresqueue(i), true, true));
+		box.add(new InputQueueDisplay(&box, *ibase(), *construction_site,
+		                              *construction_site->get_dropout_waresqueue(i), true, false),
+		        UI::Box::Resizing::kFullSize);
 	}
 	for (uint32_t i = 0; i < construction_site->nr_consume_waresqueues(); ++i) {
-		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *ibase(), *construction_site, *construction_site->get_consume_waresqueue(i)));
+		box.add(new InputQueueDisplay(&box, *ibase(), *construction_site,
+		                              *construction_site->get_consume_waresqueue(i), false, true),
+		        UI::Box::Resizing::kFullSize);
 	}
 
 	get_tabs()->add("wares", g_image_cache->get(pic_tab_wares), &box, _("Building materials"));
@@ -155,7 +158,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		// a simplified faksimile of the later building window that contains only
 		// the relevant options.
 		bool nothing_added = false;
-		UI::Box& settings_box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
+		UI::Box& settings_box =
+		   *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 		switch (construction_site->building().type()) {
 		case Widelands::MapObjectType::PRODUCTIONSITE:
 		case Widelands::MapObjectType::TRAININGSITE: {
@@ -164,21 +168,23 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			upcast(const Widelands::ProductionSiteDescr, prodsite, &construction_site->building());
 			assert(prodsite != nullptr);
 			assert(ps->ware_queues.size() == prodsite->input_wares().size());
+			ensure_box_can_hold_input_queues(settings_box);
 			for (const auto& pair : prodsite->input_wares()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWARE, pair.first);
-				settings_box.add(queue);
+				   &settings_box, *ibase(), *construction_site, Widelands::wwWARE, pair.first);
+				settings_box.add(queue, UI::Box::Resizing::kFullSize);
 				cs_ware_queues_.push_back(queue);
 			}
 			assert(ps->worker_queues.size() == prodsite->input_workers().size());
 			for (const auto& pair : prodsite->input_workers()) {
 				InputQueueDisplay* queue = new InputQueueDisplay(
-				   &settings_box, 0, 0, *ibase(), *construction_site, Widelands::wwWORKER, pair.first);
-				settings_box.add(queue);
+				   &settings_box, *ibase(), *construction_site, Widelands::wwWORKER, pair.first);
+				settings_box.add(queue, UI::Box::Resizing::kFullSize);
 				cs_ware_queues_.push_back(queue);
 			}
 			if (upcast(Widelands::TrainingsiteSettings, ts, ps)) {
-				UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
+				UI::Box& soldier_capacity_box =
+				   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				cs_soldier_capacity_decrease_ = new UI::Button(
 				   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
@@ -189,7 +195,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 				   g_image_cache->get(pic_increase_capacity),
 				   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 				cs_soldier_capacity_display_ =
-				   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+				   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui,
+				                    UI::FontStyle::kWuiLabel, "", UI::Align::kCenter);
 				cs_soldier_capacity_decrease_->set_repeating(true);
 				cs_soldier_capacity_increase_->set_repeating(true);
 				cs_soldier_capacity_decrease_->set_enabled(can_act);
@@ -238,7 +245,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 		} break;
 		case Widelands::MapObjectType::MILITARYSITE: {
 			upcast(Widelands::MilitarysiteSettings, ms, construction_site->get_settings());
-			UI::Box& soldier_capacity_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
+			UI::Box& soldier_capacity_box =
+			   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_capacity_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			cs_soldier_capacity_decrease_ = new UI::Button(
 			   &soldier_capacity_box, "decrease", 0, 0, 32, 32, UI::ButtonStyle::kWuiMenu,
@@ -249,7 +257,8 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			   g_image_cache->get(pic_increase_capacity),
 			   _("Increase capacity. Hold down Ctrl to set the capacity to the highest value"));
 			cs_soldier_capacity_display_ =
-			   new UI::Textarea(&soldier_capacity_box, "", UI::Align::kCenter);
+			   new UI::Textarea(&soldier_capacity_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel,
+			                    "", UI::Align::kCenter);
 			cs_soldier_capacity_decrease_->set_repeating(true);
 			cs_soldier_capacity_increase_->set_repeating(true);
 			cs_soldier_capacity_decrease_->set_enabled(can_act);
@@ -279,17 +288,18 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			cs_soldier_capacity_display_->set_fixed_width(kSoldierCapacityDisplayWidth);
 			settings_box.add_space(8);
 
-			UI::Box& soldier_preference_box = *new UI::Box(&settings_box, 0, 0, UI::Box::Horizontal);
+			UI::Box& soldier_preference_box =
+			   *new UI::Box(&settings_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 			settings_box.add(&soldier_preference_box, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			UI::Panel& soldier_preference_panel =
-			   *new UI::Panel(&soldier_preference_box, 0, 0, 64, 32);
+			   *new UI::Panel(&soldier_preference_box, UI::PanelStyle::kWui, 0, 0, 64, 32);
 			soldier_preference_box.add(&soldier_preference_panel);
 			cs_prefer_heroes_rookies_.reset(new UI::Radiogroup());
 			cs_prefer_heroes_rookies_->add_button(
-			   &soldier_preference_panel, Vector2i::zero(),
+			   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i::zero(),
 			   g_image_cache->get("images/wui/buildings/prefer_heroes.png"), _("Prefer heroes"));
 			cs_prefer_heroes_rookies_->add_button(
-			   &soldier_preference_panel, Vector2i(32, 0),
+			   &soldier_preference_panel, UI::PanelStyle::kWui, Vector2i(32, 0),
 			   g_image_cache->get("images/wui/buildings/prefer_rookies.png"), _("Prefer rookies"));
 			cs_prefer_heroes_rookies_->set_state(ms->prefer_heroes ? 0 : 1);
 			if (can_act) {
@@ -310,10 +320,12 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 			upcast(Widelands::WarehouseSettings, ws, construction_site->get_settings());
 			auto add_tab = [this, construction_site, can_act](
 			                  Widelands::WareWorker ww, FakeWaresDisplay** display) {
-				UI::Box& mainbox = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
+				UI::Box& mainbox =
+				   *new UI::Box(get_tabs(), UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 				*display = new FakeWaresDisplay(&mainbox, can_act, *construction_site, ww);
 				mainbox.add(*display, UI::Box::Resizing::kFullSize);
-				UI::Box& buttonsbox = *new UI::Box(&mainbox, 0, 0, UI::Box::Horizontal);
+				UI::Box& buttonsbox =
+				   *new UI::Box(&mainbox, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				mainbox.add(&buttonsbox, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 				mainbox.add_space(15);
 				UI::Button& sp_normal = *new UI::Button(

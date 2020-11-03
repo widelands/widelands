@@ -48,8 +48,15 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
                       _("Client got disconnected")),
      igb_(gb),
      host_(host),
-     box_(this, margin, margin, UI::Box::Vertical, width, get_h() - 2 * margin, vspacing),
-     box_h_(&box_, margin, margin, UI::Box::Horizontal, width, 35, vspacing),
+     box_(this,
+          UI::PanelStyle::kWui,
+          margin,
+          margin,
+          UI::Box::Vertical,
+          width,
+          get_h() - 2 * margin,
+          vspacing),
+     box_h_(&box_, UI::PanelStyle::kWui, margin, margin, UI::Box::Horizontal, width, 35, vspacing),
      text_(&box_,
            0,
            0,
@@ -116,7 +123,7 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	}
 
 	// Set default mode to normal AI
-	type_dropdown_.select(AI::DefaultAI::normal_impl.name.c_str());
+	type_dropdown_.select(AI::DefaultAI::normal_impl.name);
 
 	if (get_usedefaultpos()) {
 		center_to_parent();
@@ -139,7 +146,7 @@ void GameClientDisconnected::clicked_continue() {
 	assert(type_dropdown_.has_selection());
 
 	const std::string selection = type_dropdown_.get_selected();
-	assert(selection != "");
+	assert(!selection.empty());
 
 	set_ai(selection);
 	// Visibility works as a hint that the window was closed by a button click

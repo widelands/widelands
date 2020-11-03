@@ -198,9 +198,6 @@ Player::Player(EditorGameBase& the_egbase,
 	update_team_players();
 }
 
-Player::~Player() {
-}
-
 void Player::create_default_infrastructure() {
 	if (is_picking_custom_starting_position_) {
 		return;
@@ -1716,8 +1713,8 @@ void Player::update_building_statistics(Building& building, NoteImmovable::Owner
 		building_stats_.resize(nr_buildings);
 	}
 
-	std::vector<BuildingStats>& stat = *get_mutable_building_statistics(
-	   egbase().descriptions().building_index(building_name.c_str()));
+	std::vector<BuildingStats>& stat =
+	   *get_mutable_building_statistics(egbase().descriptions().building_index(building_name));
 
 	if (ownership == NoteImmovable::Ownership::GAINED) {
 		BuildingStats new_building;

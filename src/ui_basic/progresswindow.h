@@ -67,7 +67,7 @@ private:
 	VisualizationArray visualizations_;
 	std::string theme_;
 	std::string background_;
-	const UI::ProgressbarStyleInfo& style_;
+	const UI::ProgressbarStyleInfo& progress_style_;
 
 	static std::vector<SDL_Event> event_buffer_;
 	static bool ui_key(bool down, SDL_Keysym code);

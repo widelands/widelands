@@ -61,6 +61,7 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
+#include "logic/training_wheels.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -150,7 +151,8 @@ Game::Game()
 	Economy::initialize_serial();
 }
 
-Game::~Game() {
+Game::~Game() {  // NOLINT
+	              // ReplayWriter needs this
 }
 
 void Game::sync_reset() {
@@ -836,9 +838,9 @@ void Game::send_player_evict_worker(Worker& worker) {
 }
 
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
-                                         int32_t const type,
-                                         DescriptionIndex const index,
-                                         int32_t const prio,
+                                         const WareWorker type,
+                                         const DescriptionIndex index,
+                                         const WarePriority& prio,
                                          bool cs) {
 	send_player_command(new CmdSetWarePriority(
 	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));

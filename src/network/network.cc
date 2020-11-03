@@ -175,9 +175,6 @@ void NetworkTime::receive(const Time& ntime) {
 
 /*** class SendPacket ***/
 
-SendPacket::SendPacket() {
-}
-
 void SendPacket::data(const void* const packet_data, const size_t size) {
 	if (buffer.empty()) {
 		buffer.push_back(0);  //  this will finally be the length of the packet

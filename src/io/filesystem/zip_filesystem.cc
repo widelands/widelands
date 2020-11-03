@@ -143,9 +143,6 @@ ZipFilesystem::ZipFilesystem(const std::shared_ptr<ZipFile>& shared_data,
    : zip_file_(shared_data), basedir_in_zip_file_(basedir_in_zip_file) {
 }
 
-ZipFilesystem::~ZipFilesystem() {
-}
-
 /**
  * Return true if this directory is writable.
  */
@@ -159,7 +156,7 @@ bool ZipFilesystem::is_writable() const {
  * cross-platform way of doing this
  */
 FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
-	assert(path_in.size());  //  prevent invalid read below
+	assert(!path_in.empty());  //  prevent invalid read below
 
 	std::string path = basedir_in_zip_file_;
 	if (*path_in.begin() != '/') {
@@ -196,7 +193,7 @@ FilenameSet ZipFilesystem::list_directory(const std::string& path_in) const {
 		//  TODO(unknown): Something strange is going on with regard to the leading slash!
 		//  This is just an ugly workaround and does not solve the real
 		//  problem (which remains undiscovered)
-		if (('/' + path == filepath || path == filepath || path.length() == 1) && filename.size()) {
+		if (!filename.empty() && ('/' + path == filepath || path == filepath || path.length() == 1)) {
 			results.insert(complete_filename.substr(basedir_in_zip_file_.size()));
 		}
 
@@ -229,7 +226,7 @@ bool ZipFilesystem::file_exists(const std::string& path) const {
 		path_in = path_in.substr(1);
 	}
 
-	assert(path_in.size());
+	assert(!path_in.empty());
 
 	for (;;) {
 		const int32_t success =
@@ -370,7 +367,7 @@ void ZipFilesystem::make_directory(const std::string& dirname) {
 	complete_filename += "/";
 	complete_filename += dirname;
 
-	assert(dirname.size());
+	assert(!dirname.empty());
 	if (*complete_filename.rbegin() != '/') {
 		complete_filename += '/';
 	}
@@ -405,7 +402,7 @@ void ZipFilesystem::set_time_info(tm_zip& time) {
  * \throw FileNotFoundError if the file couldn't be opened.
  */
 void* ZipFilesystem::load(const std::string& fname, size_t& length) {
-	if (!file_exists(fname.c_str()) || is_directory(fname.c_str())) {
+	if (!file_exists(fname) || is_directory(fname)) {
 		throw ZipOperationError(
 		   "ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
 	}
@@ -485,7 +482,7 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, size
 }
 
 StreamRead* ZipFilesystem::open_stream_read(const std::string& fname) {
-	if (!file_exists(fname.c_str()) || is_directory(fname.c_str())) {
+	if (!file_exists(fname) || is_directory(fname)) {
 		throw ZipOperationError(
 		   "ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
 	}
@@ -541,9 +538,6 @@ ZipFilesystem::ZipStreamRead::ZipStreamRead(const std::shared_ptr<ZipFile>& shar
    : zip_file_(shared_data) {
 }
 
-ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
-}
-
 size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize) {
 	int copied = unzReadCurrentFile(zip_file_->read_handle(), read_data, bufsize);
 	if (copied < 0) {
@@ -561,9 +555,6 @@ bool ZipFilesystem::ZipStreamRead::end_of_file() const {
 
 ZipFilesystem::ZipStreamWrite::ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data)
    : zip_file_(shared_data) {
-}
-
-ZipFilesystem::ZipStreamWrite::~ZipStreamWrite() {
 }
 
 void ZipFilesystem::ZipStreamWrite::data(const void* const write_data, const size_t size) {

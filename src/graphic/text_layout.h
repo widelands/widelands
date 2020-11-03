@@ -104,6 +104,7 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 /// Paragraph in menu info texts
 std::string as_content(const std::string& txt, UI::PanelStyle style);
 
-std::string as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey);
+std::string
+as_tooltip_text_with_hotkey(const std::string& text, const std::string& hotkey, UI::PanelStyle);
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

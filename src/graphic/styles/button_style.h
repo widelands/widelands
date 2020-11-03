@@ -37,6 +37,8 @@ enum class ButtonStyle {
 	kWuiBuildingStats
 };
 
+PanelStyle to_panel_style(ButtonStyle);
+
 struct ButtonStyleInfo {
 	ButtonStyleInfo(const UI::TextPanelStyleInfo* init_enabled,
 	                const UI::TextPanelStyleInfo* init_disabled)

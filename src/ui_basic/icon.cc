@@ -25,18 +25,23 @@
 namespace UI {
 
 Icon::Icon(Panel* const parent,
+           PanelStyle s,
            const int32_t x,
            const int32_t y,
            const int32_t w,
            const int32_t h,
            const Image* picture_id)
-   : Panel(parent, x, y, w, h), pic_(picture_id), draw_frame_(false), grey_out_(false) {
+   : Panel(parent, s, x, y, w, h),
+     pic_(picture_id),
+     draw_frame_(false),
+     grey_out_color_(191, 191, 191, 191),
+     grey_out_(false) {
 	set_handle_mouse(false);
 	set_thinks(false);
 }
 
-Icon::Icon(Panel* const parent, const Image* picture_id)
-   : Icon(parent, 0, 0, picture_id->width(), picture_id->height(), picture_id) {
+Icon::Icon(Panel* const parent, PanelStyle s, const Image* picture_id)
+   : Icon(parent, s, 0, 0, picture_id->width(), picture_id->height(), picture_id) {
 }
 
 void Icon::set_icon(const Image* picture_id) {
@@ -69,7 +74,7 @@ void Icon::draw(RenderTarget& dst) {
 		if (grey_out_) {
 			dst.blitrect_scale_monochrome(
 			   Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height), pic_,
-			   Recti(0, 0, pic_->width(), pic_->height()), RGBAColor(191, 191, 191, 191));
+			   Recti(0, 0, pic_->width(), pic_->height()), grey_out_color_);
 		} else {
 			dst.blitrect_scale(Rectf(draw_frame_ ? x + 1 : x, draw_frame_ ? y + 1 : y, width, height),
 			                   pic_, Recti(0, 0, pic_->width(), pic_->height()), 1.,

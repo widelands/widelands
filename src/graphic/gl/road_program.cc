@@ -39,9 +39,6 @@ RoadProgram::RoadProgram() {
 	u_texture_ = glGetUniformLocation(gl_program_.object(), "u_texture");
 }
 
-RoadProgram::~RoadProgram() {
-}
-
 void RoadProgram::add_road(const int renderbuffer_width,
                            const int renderbuffer_height,
                            const FieldsToDraw::Field& start,

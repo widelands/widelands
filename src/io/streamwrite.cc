@@ -23,9 +23,6 @@
 
 #include "base/wexception.h"
 
-StreamWrite::~StreamWrite() {
-}
-
 void StreamWrite::flush() {
 	// no-op as default implementation
 }

@@ -317,15 +317,12 @@ bool MapView::View::view_roughly_near(const View& other) const {
 
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
-   : UI::Panel(parent, x, y, w, h),
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false) {
-}
-
-MapView::~MapView() {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {

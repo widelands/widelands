@@ -39,6 +39,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
+#include "ui_fsmenu/training_wheel_options.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
@@ -85,7 +86,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                 _("Options")),
 
      // Buttons
-     button_box_(this, 0, 0, UI::Box::Horizontal),
+     button_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
      apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
      ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
@@ -93,13 +94,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      // Tabs
      tabs_(this, UI::TabPanelStyle::kFsMenu),
 
-     box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
-     box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_windows_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_sound_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_saving_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_newgame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_ingame_(&tabs_, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_interface_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     box_interface_left_(
+        &box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_windows_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_sound_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
      language_dropdown_(&box_interface_left_,
@@ -275,19 +277,21 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                UI::PanelStyle::kFsMenu,
                                Vector2i::zero(),
                                _("Allow diagonal scrolling with the numeric keypad")),
-     training_wheels_box_(&box_ingame_, 0, 0, UI::Box::Horizontal),
+     training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
                       UI::PanelStyle::kFsMenu,
                       Vector2i::zero(),
                       _("Teach me how to play")),
-     training_wheels_reset_(&training_wheels_box_,
-                            "reset_training_wheels",
-                            0,
-                            0,
-                            0,
-                            0,
-                            UI::ButtonStyle::kFsMenuSecondary,
-                            _("Reset progress")),
+     training_wheels_button_(
+        &training_wheels_box_,
+        "edit_training_wheels",
+        0,
+        0,
+        0,
+        0,
+        UI::ButtonStyle::kFsMenuSecondary,
+        /** TRANSLATORS: Button to bring up a window to edit teaching progress in the Options */
+        _("Progress…")),
      os_(opt) {
 
 	do_not_layout_on_resolution_change();
@@ -354,18 +358,30 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
-	training_wheels_box_.add(&training_wheels_reset_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	training_wheels_box_.add(&training_wheels_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	training_wheels_box_.add_space(kPadding);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
-	training_wheels_reset_.sigclicked.connect([this]() {
-		training_wheels_reset_.set_enabled(false);
-		Profile training_wheels_profile;
-		training_wheels_profile.write(kTrainingWheelsFile);
+
+	training_wheels_.changed.connect(
+	   [this]() { training_wheels_button_.set_enabled(training_wheels_.get_state()); });
+	training_wheels_button_.set_enabled(training_wheels_.get_state());
+	training_wheels_button_.sigclicked.connect([this]() {
+		training_wheels_button_.set_enabled(false);
+		cancel_.set_enabled(false);
+		apply_.set_enabled(false);
+		ok_.set_enabled(false);
+		TrainingWheelOptions training_wheel_options(get_parent());
+		training_wheel_options.run<UI::Panel::Returncodes>();
+		training_wheels_button_.set_enabled(true);
+		cancel_.set_enabled(true);
+		apply_.set_enabled(true);
+		ok_.set_enabled(true);
 	});
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
@@ -503,7 +519,7 @@ void FullscreenMenuOptions::layout() {
 void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
-	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale == "");
+	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale.empty());
 	language_dropdown_.add("English", "en", nullptr, current_locale == "en");
 
 	// Handle non-standard setups where the locale directory might be missing
@@ -561,7 +577,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 	find_selected_locale(&selected_locale, current_locale);
 	for (const auto& entry : entries) {
 		const LanguageEntry& language_entry = entry.second;
-		language_dropdown_.add(language_entry.descname.c_str(), language_entry.localename, nullptr,
+		language_dropdown_.add(language_entry.descname, language_entry.localename, nullptr,
 		                       language_entry.localename == selected_locale, "");
 	}
 }
