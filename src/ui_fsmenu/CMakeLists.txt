@@ -4,6 +4,8 @@ wl_library(ui_fsmenu_options
     addons.h
     options.cc
     options.h
+    training_wheel_options.cc
+    training_wheel_options.h
   DEPENDS
     base_exceptions
     base_i18n
@@ -18,6 +20,7 @@ wl_library(ui_fsmenu_options
     io_profile
     logic_addons
     logic_filesystem_constants
+    logic_training_wheels
     network
     scripting_lua_interface
     scripting_lua_table

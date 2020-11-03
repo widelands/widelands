@@ -173,7 +173,7 @@ private:
 
 	UI::Box training_wheels_box_;
 	UI::Checkbox training_wheels_;
-	UI::Button training_wheels_reset_;
+	UI::Button training_wheels_button_;
 
 	OptionsCtrl::OptionsStruct os_;
 
