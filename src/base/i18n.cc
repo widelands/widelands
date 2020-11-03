@@ -166,8 +166,7 @@ void init_locale() {
 static std::string canonical_addon_locale_dir;
 const std::string& get_addon_locale_dir() {
 	if (canonical_addon_locale_dir.empty()) {
-		canonical_addon_locale_dir =
-		   g_fs->canonicalize_name(homedir + "/" + kAddOnLocaleDir);
+		canonical_addon_locale_dir = g_fs->canonicalize_name(homedir + "/" + kAddOnLocaleDir);
 		assert(!canonical_addon_locale_dir.empty());
 	}
 	return canonical_addon_locale_dir;
