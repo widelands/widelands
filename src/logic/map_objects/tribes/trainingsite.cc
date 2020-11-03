@@ -140,13 +140,15 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 					throw GameDataError("Trainingsite '%s' is trying to call 'train' action without "
 					                    "prior 'checksoldier' action in program '%s'",
 					                    name().c_str(), program.first.c_str());
-				} else if (from_checksoldier.level >= checkme.level) {
+				}
+				if (from_checksoldier.level >= checkme.level) {
 					throw GameDataError(
 					   "Trainingsite '%s' is trying to train a soldier attribute from level "
 					   "%d to %d, but the 'checksoldier' action's level must be lower "
 					   "than the 'train' action's level in program '%s'",
 					   name().c_str(), from_checksoldier.level, checkme.level, program.first.c_str());
-				} else if (from_checksoldier.attribute != checkme.attribute) {
+				}
+				if (from_checksoldier.attribute != checkme.attribute) {
 					throw GameDataError(
 					   "Trainingsite '%s' is trying to train soldier attribute '%s', but 'checksoldier' "
 					   "checked "
