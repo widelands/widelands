@@ -199,6 +199,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	main_box_.add(&hbox_construction_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&hbox_unproductive_, UI::Box::Resizing::kFullSize);
 
+	main_box_.add_space(kMargin);
 	main_box_.add(&label_threshold_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&unproductive_threshold_, UI::Box::Resizing::kFillSpace);
 
