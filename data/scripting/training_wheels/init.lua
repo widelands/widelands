@@ -168,6 +168,11 @@ result = {
       descname = _"Flags",
       dependencies = { "logs", "rocks" }
    },
+   trees = {
+      -- TRANSLATORS: The title of an in-game teaching objective
+      descname = _"Trees",
+      dependencies = { "logs" }
+   },
 }
 
 pop_textdomain()

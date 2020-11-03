@@ -66,6 +66,20 @@ function find_immovable_collector_for_ware(buildings, immovable_attribute, waren
    return nil
 end
 
+-- Find tribe-dependent building type e.g. "trees" will give us a ranger
+function find_immovable_creator(buildings, immovable_attribute)
+   for b_idx, building in ipairs(buildings) do
+      if (building.type_name == "productionsite") then
+         for imm_idx, immovable in ipairs(building.created_immovables) do
+            if immovable:has_attribute(immovable_attribute) then
+               return building
+            end
+         end
+      end
+   end
+   return nil
+end
+
 -- Search a radius for a buildplot with size "small" or "medium" etc.
 -- Tries to find it within min_radius first, then expands the radius by 1 until max_radius is reached
 -- Returns nil if nothing was found, a field otherwise.
@@ -173,6 +187,22 @@ function wait_for_constructionsite_field(buildingname, search_area, reminder_mes
    end
    return target_field
 end
+
+function wait_for_building_field(buildingname, player, reminder_message, seconds)
+   local counter = 0
+   seconds = seconds * 10
+   repeat
+      counter = counter + 1
+      sleep(100)
+   until #player:get_buildings(buildingname) > 0 or counter % seconds == 0
+   if #player:get_buildings(buildingname) < 1 then
+      -- Player did not build the correct building. Remind player to place the building.
+      campaign_message_box(reminder_message)
+      wait_for_building_field(buildingname, player, reminder_message, seconds)
+      close_story_messagebox()
+   end
+end
+
 
 function find_needed_flag_on_road(center_field, player, radius)
    for f_idx, field in ipairs(center_field:region(radius)) do
