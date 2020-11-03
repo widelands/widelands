@@ -74,7 +74,7 @@ descriptions:new_productionsite_type {
             "call=produce_spear_wooden",
             "call=produce_needles",
             "call=produce_spear_stone_tipped",
-            "call=produce_stonebowl",
+            "call=produce_stone_bowl",
             "call=produce_spear_hardened",
          },
       },
@@ -166,15 +166,15 @@ descriptions:new_productionsite_type {
             "produce=needles"
          },
       },
-      produce_stonebowl = {
+      produce_stone_bowl = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
          descname = _"making a stone bowl",
          actions = {
-            "return=skipped unless economy needs stonebowl",
+            "return=skipped unless economy needs stone_bowl",
             "consume=granite",
             "sleep=duration:32s",
             "animate=working duration:35s",
-            "produce=stonebowl"
+            "produce=stone_bowl"
          },
       },
       produce_spear_wooden = {

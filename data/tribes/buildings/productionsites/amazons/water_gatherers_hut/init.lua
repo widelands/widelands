@@ -5,7 +5,7 @@ dirname = path.dirname (__file__)
 descriptions:new_productionsite_type {
    name = "amazons_water_gatherers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("amazons_building", "Water Gatherer's Hut"),
+   descname = pgettext ("amazons_building", "Water Gatherer’s Hut"),
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Water",
       heading = _"Out of Water",
-      message = pgettext ("amazons_building", "The carrier working at this water gatherer's hut can’t find any water in his vicinity."),
+      message = pgettext ("amazons_building", "The carrier working at this water gatherer’s hut can’t find any water in its vicinity."),
       productivity_threshold = 33
    },
 }

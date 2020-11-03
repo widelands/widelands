@@ -46,7 +46,7 @@ init = {
          pick = 2,
          machete = 2,
          spear_wooden = 6,
-         stonebowl = 2,
+         stone_bowl = 2,
          needles = 2,
       },
       workers = {

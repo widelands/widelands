@@ -11,7 +11,7 @@ descriptions:new_worker_type {
 
    buildcost = {
       amazons_carrier = 1,
-      stonebowl = 1
+      stone_bowl = 1
    },
 
    animation_directory = dirname,

@@ -396,7 +396,7 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "stonebowl",
+            name = "stone_bowl",
             default_target_quantity = 1,
             preciousness = 1,
             helptexts = {
@@ -416,7 +416,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Stone Tipped Spear
-                  pgettext("amazons_ware", "This spear has a stone spike. It is produced in a stone carvery and used in a warriors’ gathering – together with food – to train soldiers from attack level 0 to attack level 1.")
+                  pgettext("amazons_ware", "This spear has a stone spike. It is produced in a stone workshop and used in a warriors’ gathering – together with food – to train soldiers from attack level 0 to attack level 1.")
                }
             }
          },
@@ -427,7 +427,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Hardened Spear
-                  pgettext("amazons_ware", "This is a hardened spear with a stone tip. It is produced in a stone carvery and used in a warriors’ gathering – together with food – to train soldiers from attack level 1 to level 2.")
+                  pgettext("amazons_ware", "This is a hardened spear with a stone tip. It is produced in a stone workshop and used in a warriors’ gathering – together with food – to train soldiers from attack level 1 to level 2.")
                }
             }
          },
@@ -642,7 +642,7 @@ descriptions:new_tribe {
             name = "amazons_cassava_farmer",
             helptexts = {
                -- TRANSLATORS: Helptext for an amazon worker: Cassava Farmer
-               purpose = pgettext("amazons_worker", "Grews cassava roots.")
+               purpose = pgettext("amazons_worker", "Grows cassava roots.")
             }
          },
          {
@@ -1293,7 +1293,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Hunter-Gatherer's Hut
             purpose = pgettext("amazons_building", "Hunts animals to produce meat. Catches fish in the waters."),
             -- TRANSLATORS: Note helptext for an amazon production site: Hunter-Gatherer's Hut
-            note = pgettext("amazons_building", "The hunter-gatherer’s house needs animals or fish to hunt or catch within the work area."),
+            note = pgettext("amazons_building", "The hunter-gatherer’s hut needs animals or fish to hunt or catch within the work area."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Fisher's House, part 2
             performance = pgettext("amazons_building", "The hunter-gatherer pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 34):bformat(34))
 
@@ -1368,7 +1368,7 @@ descriptions:new_tribe {
       {
          name = "amazons_stone_workshop",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an amazon production site: Stonecarvery
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Stone Workshop
             purpose = pgettext("amazons_building", "Makes tools and spears for our soldiers.")
          }
       },

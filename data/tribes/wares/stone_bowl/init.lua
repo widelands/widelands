@@ -3,9 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_ware_type {
-   name = "stonebowl",
+   name = "stone_bowl",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Stonebowl"),
+   descname = pgettext("ware", "Stone Bowl"),
    animation_directory = dirname,
    icon = dirname .. "menu.png",
 

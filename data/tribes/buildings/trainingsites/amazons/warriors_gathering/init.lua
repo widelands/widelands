@@ -5,7 +5,7 @@ dirname = path.dirname (__file__)
 descriptions:new_trainingsite_type {
    name = "amazons_warriors_gathering",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("amazons_building", "Warrior's Gathering"),
+   descname = pgettext ("amazons_building", "Warriors’ Gathering"),
    icon = dirname .. "menu.png",
    size = "medium",
 

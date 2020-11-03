@@ -47,7 +47,7 @@ return {
          pick = 2,
          machete = 2,
          spear_wooden = 6,
-         stonebowl = 2,
+         stone_bowl = 2,
          needles = 2,
          },
          workers = {
@@ -80,7 +80,7 @@ return {
          }
       })
 
-      place_building_in_region(player, "amazons_stonecarvery", sf:region(11), {
+      place_building_in_region(player, "amazons_stone_workshop", sf:region(11), {
          inputs = {
             granite = 7,
             log = 6,
