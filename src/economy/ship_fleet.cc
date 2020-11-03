@@ -723,9 +723,6 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 // Changelog of version 4 → 5: Added ShippingSchedule
 constexpr uint8_t kCurrentPacketVersion = 5;
 
-ShipFleet::Loader::Loader() {
-}
-
 void ShipFleet::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);
 

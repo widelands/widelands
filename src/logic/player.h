@@ -73,7 +73,7 @@ public:
 	       uint8_t initialization_index,
 	       const TribeDescr& tribe,
 	       const std::string& name);
-	~Player();
+	~Player() = default;
 
 	void allocate_map();
 

@@ -43,7 +43,7 @@ namespace AI {
  */
 struct ComputerPlayer {
 	ComputerPlayer(Widelands::Game&, const Widelands::PlayerNumber);
-	virtual ~ComputerPlayer();
+	virtual ~ComputerPlayer() = default;
 
 	virtual void think() = 0;
 

@@ -104,7 +104,7 @@ public:
 	        const int32_t y,
 	        const uint32_t w,
 	        const uint32_t h);
-	~MapView() override;
+	~MapView() override = default;
 
 	// Called whenever the view changed, also during automatic animations.
 	boost::signals2::signal<void()> changeview;

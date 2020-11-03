@@ -291,9 +291,6 @@ NearFlag::NearFlag() {
 	to_be_checked = true;
 }
 
-EventTimeQueue::EventTimeQueue() {
-}
-
 void EventTimeQueue::push(const Time& production_time, const uint32_t additional_id) {
 	queue.push_front(std::make_pair(production_time, additional_id));
 }

@@ -98,7 +98,7 @@ public:
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
-	~Button() override;
+	~Button() override = default;
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string&);
