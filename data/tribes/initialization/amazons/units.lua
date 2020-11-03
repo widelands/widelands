@@ -1279,12 +1279,12 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "amazons_junglepreservers_hut",
+         name = "amazons_jungle_preservers_hut",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an amazon production site: Junglepreserver's Hut
+            -- TRANSLATORS: Purpose helptext for an amazon production site: Jungle Preserver's Hut
             purpose = pgettext("amazons_building", "Plants trees in the surrounding area."),
-            -- TRANSLATORS: Note helptext for an amazon production site: Junglepreserver's Hut
-            note = pgettext("amazons_building", "The junglepreserver’s hut needs free space within the work area to plant the trees.")
+            -- TRANSLATORS: Note helptext for an amazon production site: Jungle Preserver's Hut
+            note = pgettext("amazons_building", "The jungle preserver’s hut needs free space within the work area to plant the trees.")
          }
       },
       {

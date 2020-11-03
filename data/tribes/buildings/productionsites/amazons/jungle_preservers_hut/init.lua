@@ -3,9 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_productionsite_type {
-   name = "amazons_junglepreservers_hut",
+   name = "amazons_jungle_preservers_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("amazons_building", "Junglepreserver's Hut"),
+   descname = pgettext("amazons_building", "Jungle Preserver’s Hut"),
    icon = dirname .. "menu.png",
    size = "small",
 
