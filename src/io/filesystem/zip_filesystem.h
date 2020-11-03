@@ -31,7 +31,7 @@
 class ZipFilesystem : public FileSystem {
 public:
 	explicit ZipFilesystem(const std::string&);
-	~ZipFilesystem() override;
+	~ZipFilesystem() override = default;
 
 	bool is_writable() const override;
 
@@ -119,7 +119,7 @@ private:
 
 	struct ZipStreamRead : StreamRead {
 		explicit ZipStreamRead(const std::shared_ptr<ZipFile>& shared_data);
-		~ZipStreamRead() override;
+		~ZipStreamRead() override = default;
 		size_t data(void* data, size_t bufsize) override;
 		bool end_of_file() const override;
 
@@ -129,7 +129,7 @@ private:
 
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(const std::shared_ptr<ZipFile>& shared_data);
-		~ZipStreamWrite() override;
+		~ZipStreamWrite() override = default;
 		void data(const void* const data, size_t size) override;
 
 	private:

@@ -58,7 +58,7 @@ public:
 	}
 	LuaClass() : x(123), prop(246) {
 	}
-	~LuaClass() override;
+	~LuaClass() override = default;
 	explicit LuaClass(lua_State* /* L */) : x(124), prop(248) {
 	}
 	virtual int test(lua_State* L) {
@@ -82,8 +82,7 @@ public:
 	void __unpersist(lua_State* /* L */) override {
 	}
 };
-LuaClass::~LuaClass() {
-}
+
 const char LuaClass::className[] = "Class";
 const MethodType<LuaClass> LuaClass::Methods[] = {
    METHOD(LuaClass, test),
@@ -156,15 +155,12 @@ public:
 		lua_pushint32(L, 2001);
 		return 1;
 	}
-	virtual ~LuaSecond();
+	virtual ~LuaSecond() = default;
 	virtual int multitest(lua_State* L) {
 		lua_pushint32(L, 2002);
 		return 1;
 	}
 };
-
-LuaSecond::~LuaSecond() {
-}
 
 class LuaMultiClass : public LuaClass, public LuaSecond {
 	int z = 0;

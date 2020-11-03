@@ -55,7 +55,6 @@ SUPPRESSED_CHECKS = {
     '[modernize-return-braced-init-list]',
     '[modernize-use-auto]',
     '[modernize-use-emplace]',
-    '[modernize-use-equals-default]',
     '[readability-else-after-return]',
     '[readability-function-size]',
     '[readability-implicit-bool-conversion]',

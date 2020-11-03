@@ -132,9 +132,6 @@ Ship::Ship(const ShipDescr& gdescr)
      capacity_(gdescr.get_default_capacity()) {
 }
 
-Ship::~Ship() {
-}
-
 PortDock* Ship::get_lastdock(EditorGameBase& egbase) const {
 	return lastdock_.get(egbase);
 }

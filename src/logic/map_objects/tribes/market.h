@@ -49,7 +49,7 @@ class Market : public Building {
 	MO_DESCR(MarketDescr)
 public:
 	explicit Market(const MarketDescr& descr);
-	~Market() override;
+	~Market() override = default;
 
 	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
 	void cancel_trade(int trade_id);

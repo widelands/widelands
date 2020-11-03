@@ -318,9 +318,6 @@ Immovable::Immovable(const ImmovableDescr& imm_descr,
      growth_delay_(0) {
 }
 
-Immovable::~Immovable() {
-}
-
 BaseImmovable::PositionList Immovable::get_positions(const EditorGameBase&) const {
 	PositionList rv;
 
@@ -930,9 +927,6 @@ void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 }
 
 constexpr uint8_t kCurrentPacketVersionPlayerImmovable = 1;
-
-PlayerImmovable::Loader::Loader() {
-}
 
 void PlayerImmovable::Loader::load(FileRead& fr) {
 	BaseImmovable::Loader::load(fr);
