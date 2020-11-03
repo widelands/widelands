@@ -37,7 +37,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - amazons
 
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
