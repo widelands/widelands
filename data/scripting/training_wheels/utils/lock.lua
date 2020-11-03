@@ -22,12 +22,6 @@ function training_wheel_name_from_filename(filename)
    return basename:sub(0, #basename - 4)
 end
 
-function run_training_wheel_in_scenario(player, name, force)
-   player:run_training_wheel(name, force)
-   wait_for_lock(player, "ficticious_training_wheel_name")
-   player:release_training_wheel_lock()
-end
-
 -- Detect the interactive player if any
 function get_interactive_player()
    local player_number = wl.Game().interactive_player

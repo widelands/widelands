@@ -10,7 +10,6 @@ include "scripting/richtext_scenarios.lua"
 include "scripting/set.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
-include "scripting/training_wheels/utils/lock.lua"
 
 include "map:scripting/water_rising.lua"
 
