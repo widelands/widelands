@@ -1844,8 +1844,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				consider_productionsite_influence(field, imm_found.coords, bo);
 			} else if (upcast(Widelands::ConstructionSite const, constructionsite, player_immovable)) {
 				const Widelands::BuildingDescr& target_descr = constructionsite->building();
-				BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
-				consider_productionsite_influence(field, imm_found.coords, bo);
+				if (target_descr.type() == Widelands::MapObjectType::PRODUCTIONSITE) {
+					BuildingObserver& bo = get_building_observer(target_descr.name().c_str());
+					consider_productionsite_influence(field, imm_found.coords, bo);
+				}
 			}
 		}
 	}
@@ -6372,15 +6374,13 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 		++field.supported_producers_nearby[supported_building.first];
 	}
 
-	if (bo.type == BuildingObserver::Type::kProductionsite) {
-		const Widelands::ProductionSiteDescr* productionsite =
-		   dynamic_cast<const Widelands::ProductionSiteDescr*>(bo.desc);
-		for (const auto& supported : productionsite->supported_productionsites()) {
-			if (field.supporters_nearby.count(supported) != 1) {
-				field.supporters_nearby[supported] = 0;
-			}
-			++field.supporters_nearby[supported];
+	const Widelands::ProductionSiteDescr* productionsite =
+	   dynamic_cast<const Widelands::ProductionSiteDescr*>(bo.desc);
+	for (const auto& supported : productionsite->supported_productionsites()) {
+		if (field.supporters_nearby.count(supported) != 1) {
+			field.supporters_nearby[supported] = 0;
 		}
+		++field.supporters_nearby[supported];
 	}
 
 	if (bo.is(BuildingAttribute::kRanger)) {
