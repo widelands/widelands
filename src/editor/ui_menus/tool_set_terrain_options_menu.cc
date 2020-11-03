@@ -79,7 +79,8 @@ UI::Checkbox* create_terrain_checkbox(UI::Panel* parent,
 	                               .append(treeinfo);
 
 	std::unique_ptr<const Image>& image = offscreen_images->back();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), image.get(), tooltip);
+	UI::Checkbox* cb =
+	   new UI::Checkbox(parent, UI::PanelStyle::kWui, Vector2i::zero(), image.get(), tooltip);
 	cb->set_desired_size(image->width() + 1, image->height() + 1);
 	return cb;
 }
@@ -99,7 +100,4 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
-}
-
-EditorToolSetTerrainOptionsMenu::~EditorToolSetTerrainOptionsMenu() {
 }

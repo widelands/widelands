@@ -81,13 +81,10 @@ private:
 
 ChatOverlay::ChatOverlay(
    UI::Panel* const parent, int32_t const x, int32_t const y, int32_t const w, int32_t const h)
-   : UI::Panel(parent, x, y, w, h), m(new Impl()) {
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h), m(new Impl()) {
 	m->transparent_ = get_config_bool("transparent_chat", true);
 
 	set_thinks(true);
-}
-
-ChatOverlay::~ChatOverlay() {
 }
 
 void ChatOverlay::set_chat_provider(ChatProvider& chat) {

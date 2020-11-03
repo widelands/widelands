@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "base/i18n.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
@@ -51,22 +52,45 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       100,
                       _("Building Statistics")),
      style_(g_style_manager->building_statistics_style()),
-     main_box_(this, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, kMargin),
      tab_panel_(&main_box_, UI::TabPanelStyle::kWuiDark),
      low_production_(33),
 
-     hbox_owned_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     hbox_construction_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
-     hbox_unproductive_(&main_box_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     hbox_owned_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     hbox_construction_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
+     hbox_unproductive_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
 
-     label_name_(&main_box_, _("(no building selected)"), UI::Align::kCenter),
-     label_owned_(&hbox_owned_, _("Owned:"), UI::Align::kLeft),
-     label_construction_(&hbox_construction_, _("Under construction:"), UI::Align::kLeft),
-     label_unproductive_(&hbox_unproductive_, "" /* text will be set later */, UI::Align::kLeft),
-     label_nr_owned_(&hbox_owned_, "", UI::Align::kRight),
-     label_nr_construction_(&hbox_construction_, "", UI::Align::kRight),
-     label_nr_unproductive_(&hbox_unproductive_, "", UI::Align::kRight),
-     label_threshold_(&main_box_, _("Low productivity threshold:"), UI::Align::kLeft),
+     label_name_(&main_box_,
+                 UI::PanelStyle::kWui,
+                 UI::FontStyle::kWuiLabel,
+                 _("(no building selected)"),
+                 UI::Align::kCenter),
+     label_owned_(&hbox_owned_,
+                  UI::PanelStyle::kWui,
+                  UI::FontStyle::kWuiLabel,
+                  _("Owned:"),
+                  UI::Align::kLeft),
+     label_construction_(&hbox_construction_,
+                         UI::PanelStyle::kWui,
+                         UI::FontStyle::kWuiLabel,
+                         _("Under construction:"),
+                         UI::Align::kLeft),
+     label_unproductive_(&hbox_unproductive_,
+                         UI::PanelStyle::kWui,
+                         UI::FontStyle::kWuiLabel,
+                         "" /* text will be set later */,
+                         UI::Align::kLeft),
+     label_nr_owned_(
+        &hbox_owned_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
+     label_nr_construction_(
+        &hbox_construction_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
+     label_nr_unproductive_(
+        &hbox_unproductive_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, "", UI::Align::kRight),
+     label_threshold_(&main_box_,
+                      UI::PanelStyle::kWui,
+                      UI::FontStyle::kWuiLabel,
+                      _("Low productivity threshold:"),
+                      UI::Align::kLeft),
 
      b_prev_owned_(&hbox_owned_,
                    "previous_owned",
@@ -269,8 +293,8 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	int row_counters[kNoOfBuildingTabs];
 	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
 		int current_column = 0;
-		tabs_[tab_index] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
-		UI::Box* row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
+		tabs_[tab_index] = new UI::Box(&tab_panel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+		UI::Box* row = new UI::Box(tabs_[tab_index], UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 		row_counters[tab_index] = 0;
 
 		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
@@ -283,7 +307,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 			} else if (current_column == kColumns) {
 				tabs_[tab_index]->add(row, UI::Box::Resizing::kFullSize);
 				tabs_[tab_index]->add_space(6);
-				row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
+				row = new UI::Box(tabs_[tab_index], UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				current_column = 0;
 			}
 		}
@@ -402,7 +426,7 @@ void BuildingStatisticsMenu::update_building_list() {
 void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
                                         const Widelands::BuildingDescr& descr,
                                         UI::Box* row) {
-	UI::Box* button_box = new UI::Box(row, 0, 0, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(row, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] =
 	   new UI::Button(button_box, (boost::format("building_button%s") % id).str(), 0, 0,
 	                  kBuildGridCellWidth, kBuildGridCellHeight, UI::ButtonStyle::kWuiBuildingStats,
@@ -413,14 +437,16 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
 	button_box->add(building_buttons_[id]);
 
 	owned_labels_[id] =
-	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter,
-	                    style_.building_statistics_button_font());
+	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	owned_labels_[id]->set_style(style_.building_statistics_button_font());
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
-	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter,
-	                    style_.building_statistics_button_font());
+	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
+	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
+	productivity_labels_[id]->set_style(style_.building_statistics_button_font());
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 

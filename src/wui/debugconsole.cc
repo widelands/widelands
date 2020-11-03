@@ -39,8 +39,7 @@ struct Console : public ChatProvider, public Handler {
 		default_handler = [this](const std::vector<std::string>& str) { cmdErr(str); };
 	}
 
-	~Console() override {
-	}
+	~Console() override = default;
 
 	void cmdHelp(const std::vector<std::string>&) {
 		write("Use 'ls' to list all available commands.");
@@ -113,9 +112,6 @@ ChatProvider* get_chat_provider() {
 
 void write(const std::string& text) {
 	g_console.write(text);
-}
-
-Handler::Handler() {
 }
 
 Handler::~Handler() {

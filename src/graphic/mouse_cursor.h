@@ -37,7 +37,7 @@ class Image;
  */
 class MouseCursor {
 public:
-	MouseCursor();
+	MouseCursor() = default;
 	~MouseCursor();
 
 	// Call initialize before first use

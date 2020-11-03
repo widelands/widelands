@@ -220,8 +220,7 @@ public:
 	explicit RenderNode(const NodeStyle& ns)
 	   : floating_(Floating::kNone), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
-	virtual ~RenderNode() {
-	}
+	virtual ~RenderNode() = default;
 
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
@@ -316,8 +315,7 @@ public:
 	explicit Layout(std::vector<std::shared_ptr<RenderNode>>& all)
 	   : h_(0), idx_(0), all_nodes_(all) {
 	}
-	virtual ~Layout() {
-	}
+	virtual ~Layout() = default;
 
 	uint16_t height() {
 		return h_;
@@ -621,8 +619,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 class TextNode : public RenderNode {
 public:
 	TextNode(FontCache& font, NodeStyle&, const std::string& txt);
-	~TextNode() override {
-	}
+	~TextNode() override = default;
 
 	std::string debug_info() const override {
 		return "'" + txt_ + "'";
@@ -711,8 +708,7 @@ public:
 		w_ = w;
 		check_size();
 	}
-	~FillingTextNode() override {
-	}
+	~FillingTextNode() override = default;
 
 	std::string debug_info() const override {
 		return "ft";
@@ -1120,8 +1116,7 @@ public:
 	     renderer_style_(renderer_style),
 	     fontsets_(fontsets) {
 	}
-	virtual ~TagHandler() {
-	}
+	virtual ~TagHandler() = default;
 
 	virtual void enter() {
 	}
@@ -1794,7 +1789,8 @@ Renderer::Renderer(ImageCache* image_cache,
 	TextureCache* render(const std::string&, uint16_t, const TagSet&);
 }
 
-Renderer::~Renderer() {
+Renderer::~Renderer() {  // NOLINT
+	                      // FontCache, FontHandler and Parser need this
 }
 
 std::shared_ptr<RenderNode>

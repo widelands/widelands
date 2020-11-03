@@ -507,9 +507,6 @@ Attributes
 	}
 }
 
-Parser::~Parser() {
-}
-
 Tag* Parser::parse(std::string text, const TagSet& allowed_tags) {
 	boost::replace_all(text, "\\", "\\\\");  // Prevent crashes with \.
 
