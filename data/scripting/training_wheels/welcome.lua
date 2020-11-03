@@ -11,19 +11,19 @@ local training_wheel_name = training_wheel_name_from_filename(__file__)
 
 run(function()
    sleep(10)
-
-   local player = wl.Game().players[wl.Game().interactive_player]
+   local player = get_interactive_player()
    wait_for_lock(player, training_wheel_name)
 
    push_textdomain("training_wheels")
 
    local welcome_message = {
       title = _"Welcome to Widelands!",
-      h = 160,
+      h = 180,
       w = 360,
       body = (
          li_image("images/logos/wl-ico-64.png", h1(_"Welcome to Widelands!")) ..
-         li_image("images/wui/training_wheels_arrow.png", _"Follow the arrows to learn how to play.")
+         li_image("images/wui/training_wheels_arrow.png", _"Follow the arrows to learn how to play.") ..
+         li("Click ‘OK’ to continue.")
       )
    }
 
