@@ -10,7 +10,7 @@ descriptions:new_productionsite_type {
    size = "small",
 
    enhancement = {
-      name = "amazons_rare_trees_woodcutters_hut",
+      name = "amazons_rare_tree_cutters_hut",
       enhancement_cost = {
          log = 1,
          granite = 1,
