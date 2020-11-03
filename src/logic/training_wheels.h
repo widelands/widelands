@@ -33,6 +33,26 @@ namespace Widelands {
 class TrainingWheels {
 public:
 	/**
+	 * @brief A training wheel's script, display name, solving status and dependencies
+	 */
+	struct TrainingWheel {
+		explicit TrainingWheel(bool init_solved,
+		                       const std::string& key,
+		                       const std::string& init_descname,
+		                       const std::vector<std::string>& init_dependencies)
+		   : solved(init_solved), script(key + ".lua"), descname(init_descname) {
+			for (const std::string& dependency : init_dependencies) {
+				dependencies.insert(dependency);
+			}
+		}
+
+		bool solved;
+		const std::string script;
+		const std::string descname;
+		std::set<std::string> dependencies;
+	};
+
+	/**
 	 * @brief Parses the training wheel scripts defined in data/scripting/training_wheels
 	 * @param lua the game's Lua interface
 	 */
@@ -65,6 +85,13 @@ public:
 	void skip(const std::string& objective, bool run_some_more);
 
 	/**
+	 * @brief mark_as_unsolved Mark the given training wheel objective as no longer solved. Does not
+	 * trigger anything else and does not refresh the information about currently running training
+	 * wheels or training wheels to run.
+	 * @param objective The training wheel objective to be marked as unsolved
+	 */
+	void mark_as_unsolved(const std::string& objective);
+	/**
 	 * @brief run_objectives Trigger all queued training wheel objectives
 	 */
 	void run_objectives();
@@ -82,6 +109,8 @@ public:
 		return current_objective_;
 	}
 
+	std::map<std::string, TrainingWheel> all_objectives() const;
+
 private:
 	/**
 	 * @brief load_objectives Check for training wheel objectives that can be run
@@ -92,31 +121,18 @@ private:
 	 */
 	void write();
 
-	/**
-	 * @brief A training wheel's script and filename
-	 */
-	struct TrainingWheel {
-		explicit TrainingWheel(const std::string& key,
-		                       const std::vector<std::string>& init_dependencies)
-		   : script(key + ".lua") {
-			for (const std::string& dependency : init_dependencies) {
-				dependencies.insert(dependency);
-			}
-		}
-
-		const std::string script;
-		std::set<std::string> dependencies;
-	};
+	void solve(const std::string& objective, bool run_some_more, bool write_to_config);
 
 	// Objective name and its scripting information
 	std::map<std::string, TrainingWheel> idle_objectives_;
-	// Prevent concurrency issues while loading objectives
-	std::set<std::string> running_objectives_;
-	// Remember solved objectives for dependency check
-	std::set<std::string> solved_objectives_;
+	// Prevent concurrency issues while loading objectives, and remember descname for options. Name,
+	// descname
+	std::map<std::string, TrainingWheel> running_objectives_;
+	// Remember solved objectives for dependency check and options. Name, descname
+	std::map<std::string, TrainingWheel> solved_objectives_;
 	// The scripts that had their dependencies met and are waiting to run
 	std::set<std::string> scripts_to_run_;
-	// Mutex Lock for the currently rinnung objective
+	// Mutex Lock for the currently running objective
 	std::string current_objective_;
 	// For reading/writing progress to disk
 	Profile profile_;
