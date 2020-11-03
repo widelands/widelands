@@ -752,7 +752,7 @@ void DefaultAI::late_initialization() {
 			}
 
 			bo.supported_producers.clear();
-			for (const std::string supported_building_name : prod.supported_productionsites()) {
+			for (const std::string& supported_building_name : prod.supported_productionsites()) {
 				Widelands::DescriptionIndex supported_building_index =
 				   tribe_->building_index(supported_building_name);
 				bo.supported_producers.insert(std::make_pair(
