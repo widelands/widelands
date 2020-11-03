@@ -29,12 +29,6 @@
 
 ImageCache* g_image_cache;
 
-ImageCache::ImageCache() {
-}
-
-ImageCache::~ImageCache() {
-}
-
 bool ImageCache::has(const std::string& hash) const {
 	return images_.count(hash);
 }

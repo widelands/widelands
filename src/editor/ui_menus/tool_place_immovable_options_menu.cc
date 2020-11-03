@@ -74,6 +74,3 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 
 	initialization_complete();
 }
-
-EditorToolPlaceImmovableOptionsMenu::~EditorToolPlaceImmovableOptionsMenu() {
-}

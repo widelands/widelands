@@ -435,9 +435,6 @@ void FerryFleet::log_general_info(const EditorGameBase& egbase) const {
 
 constexpr uint8_t kCurrentPacketVersion = 1;
 
-FerryFleet::Loader::Loader() {
-}
-
 void FerryFleet::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);
 

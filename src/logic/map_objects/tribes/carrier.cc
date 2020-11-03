@@ -548,9 +548,6 @@ Load/save support
 */
 constexpr uint8_t kCurrentPacketVersion = 3;
 
-Carrier::Loader::Loader() {
-}
-
 void Carrier::Loader::load(FileRead& fr) {
 	Worker::Loader::load(fr);
 

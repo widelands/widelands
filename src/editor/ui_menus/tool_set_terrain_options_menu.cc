@@ -103,6 +103,3 @@ EditorToolSetTerrainOptionsMenu::EditorToolSetTerrainOptionsMenu(
 
 	initialization_complete();
 }
-
-EditorToolSetTerrainOptionsMenu::~EditorToolSetTerrainOptionsMenu() {
-}

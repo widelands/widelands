@@ -65,8 +65,7 @@
 struct HostGameSettingsProvider : public GameSettingsProvider {
 	explicit HostGameSettingsProvider(GameHost* const init_host) : host_(init_host) {
 	}
-	~HostGameSettingsProvider() override {
-	}
+	~HostGameSettingsProvider() override = default;
 
 	void set_scenario(bool is_scenario) override {
 		host_->set_scenario(is_scenario);

@@ -57,6 +57,3 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 
 	initialization_complete();
 }
-
-EditorToolPlaceCritterOptionsMenu::~EditorToolPlaceCritterOptionsMenu() {
-}

@@ -32,7 +32,7 @@ class GameFactory;
 class LuaEditorInterface : public LuaInterface {
 public:
 	explicit LuaEditorInterface(Widelands::EditorGameBase* g);
-	~LuaEditorInterface() override;
+	~LuaEditorInterface() override = default;
 
 	std::unique_ptr<LuaTable> run_script(const std::string& script) override;
 
@@ -43,7 +43,7 @@ private:
 class LuaGameInterface : public LuaInterface {
 public:
 	explicit LuaGameInterface(Widelands::Game* g);
-	~LuaGameInterface() override;
+	~LuaGameInterface() override = default;
 
 	// Returns a given hook if one is defined, otherwise returns 0
 	std::unique_ptr<LuaTable> get_hook(const std::string& name);

@@ -133,9 +133,6 @@ void CmdQueue::run_queue(const Duration& interval, Time& game_time_var) {
 	assert(final_time == game_time_var);
 }
 
-Command::~Command() {
-}
-
 constexpr uint16_t kCurrentPacketVersion = 1;
 
 /**

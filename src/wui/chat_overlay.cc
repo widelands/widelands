@@ -87,9 +87,6 @@ ChatOverlay::ChatOverlay(
 	set_thinks(true);
 }
 
-ChatOverlay::~ChatOverlay() {
-}
-
 void ChatOverlay::set_chat_provider(ChatProvider& chat) {
 	m->chat_ = &chat;
 	m->recompute();
