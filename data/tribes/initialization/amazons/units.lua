@@ -459,7 +459,7 @@ descriptions:new_tribe {
             preciousness = 3,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an amazon ware: Warriors Coat
+                  -- TRANSLATORS: Helptext for an amazon ware: Warrior's Coat
                   pgettext("amazons_ware", "Ordinary tunics can be decorated and reinforced with gold and wood chunks. Such tunics are the best armor.")
                }
             }
@@ -1376,7 +1376,7 @@ descriptions:new_tribe {
          name = "amazons_dressmakery",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Dressmakery
-            purpose = pgettext("amazons_building", "Sews all dresses, boots and armors for our soldiers.")
+            purpose = pgettext("amazons_building", "Sews all dresses, boots and armor for our soldiers.")
          }
       },
       {
@@ -1513,7 +1513,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhall
             purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: Guardhall
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "You can only build this building on top of a tree.")
          }
       },
       {
