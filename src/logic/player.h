@@ -73,7 +73,7 @@ public:
 	       uint8_t initialization_index,
 	       const TribeDescr& tribe,
 	       const std::string& name);
-	~Player();
+	~Player() = default;
 
 	void allocate_map();
 
@@ -504,6 +504,8 @@ public:
 	void start_or_cancel_expedition(const Warehouse&);
 	void enhance_building(Building*, DescriptionIndex index_of_new_building, bool keep_wares);
 	void dismantle_building(Building*, bool keep_wares);
+
+	bool check_can_build(const BuildingDescr&, const FCoords&) const;
 
 	Economy* create_economy(WareWorker);
 	Economy* create_economy(Serial serial, WareWorker);  // For saveloading only

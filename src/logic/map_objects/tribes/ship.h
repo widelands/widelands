@@ -94,7 +94,7 @@ struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
 	explicit Ship(const ShipDescr& descr);
-	~Ship() override;
+	~Ship() override = default;
 
 	// Returns the fleet the ship is a part of.
 	ShipFleet* get_fleet() const;

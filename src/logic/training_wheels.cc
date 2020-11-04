@@ -43,17 +43,21 @@ TrainingWheels::TrainingWheels(LuaInterface& lua)
 	// Read init file and run
 	Section& section = profile_.pull_section("global");
 	std::unique_ptr<LuaTable> table(lua_.run_script("scripting/training_wheels/init.lua"));
-	std::unique_ptr<LuaTable> dependencies;
+	std::unique_ptr<LuaTable> wheel_table;
 	for (const std::string& key : table->keys<std::string>()) {
-		dependencies = table->get_table(key);
+		wheel_table = table->get_table(key);
 		const bool is_solved = section.get_bool(key.c_str());
 		section.set_bool(key.c_str(), is_solved);
+		std::unique_ptr<LuaTable> dependencies = wheel_table->get_table("dependencies");
 		if (is_solved) {
-			solved_objectives_.insert(key);
-			dependencies->do_not_warn_about_unaccessed_keys();
+			solved_objectives_.insert(
+			   std::make_pair(key, TrainingWheel(true, key, wheel_table->get_string("descname"),
+			                                     dependencies->array_entries<std::string>())));
+			wheel_table->do_not_warn_about_unaccessed_keys();
 		} else {
 			idle_objectives_.insert(
-			   std::make_pair(key, TrainingWheel(key, dependencies->array_entries<std::string>())));
+			   std::make_pair(key, TrainingWheel(false, key, wheel_table->get_string("descname"),
+			                                     dependencies->array_entries<std::string>())));
 		}
 	}
 	write();
@@ -77,8 +81,7 @@ void TrainingWheels::load_objectives() {
 			}
 		}
 		if (dependencies_met) {
-			log_info("Running training wheel '%s'", it->second.script.c_str());
-			running_objectives_.insert(it->first);
+			running_objectives_.insert(std::make_pair(it->first, it->second));
 			scripts_to_run_.insert(it->second.script);
 			it = idle_objectives_.erase(it);
 		} else {
@@ -89,6 +92,7 @@ void TrainingWheels::load_objectives() {
 
 void TrainingWheels::run_objectives() {
 	for (const std::string& runme : scripts_to_run_) {
+		log_info("Running training wheel '%s'", runme.c_str());
 		lua_.run_script(kTrainingWheelsScriptingDir + runme);
 	}
 	scripts_to_run_.clear();
@@ -96,6 +100,14 @@ void TrainingWheels::run_objectives() {
 
 bool TrainingWheels::has_objectives() const {
 	return !scripts_to_run_.empty();
+}
+
+std::map<std::string, TrainingWheels::TrainingWheel> TrainingWheels::all_objectives() const {
+	std::map<std::string, TrainingWheels::TrainingWheel> result;
+	result.insert(idle_objectives_.begin(), idle_objectives_.end());
+	result.insert(running_objectives_.begin(), running_objectives_.end());
+	result.insert(solved_objectives_.begin(), solved_objectives_.end());
+	return result;
 }
 
 bool TrainingWheels::acquire_lock(const std::string& objective) {
@@ -106,17 +118,26 @@ bool TrainingWheels::acquire_lock(const std::string& objective) {
 	return current_objective_ == objective;
 }
 
+// TODO(Gunchleoc): Optionally add training wheel name so that it can be put back in the queue
+void TrainingWheels::release_lock() {
+	current_objective_ = "";
+}
+
 void TrainingWheels::mark_as_solved(const std::string& objective, bool run_some_more) {
 	log_info("Solved training wheel '%s'", objective.c_str());
-	solved_objectives_.insert(objective);
+	solve(objective, run_some_more, true);
+}
+
+void TrainingWheels::skip(const std::string& objective, bool run_some_more) {
+	log_info("Skipping training wheel '%s'", objective.c_str());
+	solve(objective, run_some_more, false);
+}
+
+void TrainingWheels::mark_as_unsolved(const std::string& objective) {
+	log_info("Unsolved training wheel '%s'", objective.c_str());
 	Section& section = profile_.pull_section("global");
-	section.set_bool(objective.c_str(), true);
+	section.set_bool(objective.c_str(), false);
 	write();
-	current_objective_ = "";
-	if (run_some_more) {
-		load_objectives();
-		run_objectives();
-	}
 }
 
 void TrainingWheels::write() {
@@ -124,6 +145,29 @@ void TrainingWheels::write() {
 		profile_.write(kTrainingWheelsFile);
 	} catch (const std::exception& e) {
 		log_warn("could not save training wheels: %s\n", e.what());
+	}
+}
+
+void TrainingWheels::solve(const std::string& objective, bool run_some_more, bool write_to_config) {
+	auto it = running_objectives_.find(objective);
+	if (it != running_objectives_.end()) {
+		it->second.solved = true;
+		solved_objectives_.insert(std::make_pair(objective, it->second));
+		running_objectives_.erase(it);
+	} else {
+		solved_objectives_.insert(
+		   std::make_pair(objective, TrainingWheel(true, objective, objective, {})));
+	}
+
+	if (write_to_config) {
+		Section& section = profile_.pull_section("global");
+		section.set_bool(objective.c_str(), true);
+		write();
+	}
+	release_lock();
+	if (run_some_more) {
+		load_objectives();
+		run_objectives();
 	}
 }
 

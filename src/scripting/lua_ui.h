@@ -141,6 +141,7 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State* L);
+	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
 
 	/*
@@ -148,6 +149,7 @@ public:
 	 */
 	int open(lua_State* L);
 	int highlight_item(lua_State* L);
+	int indicate_item(lua_State* L);
 	int select(lua_State* L);
 
 	/*

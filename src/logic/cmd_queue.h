@@ -65,7 +65,7 @@ constexpr uint32_t kCommandQueueBucketSize = 65536;  // Make this a power of two
 struct Command {
 	explicit Command(const Time& init_duetime) : duetime_(init_duetime) {
 	}
-	virtual ~Command();
+	virtual ~Command() = default;
 
 	virtual void execute(Game&) = 0;
 	virtual QueueCommandTypes id() const = 0;

@@ -35,8 +35,8 @@
 // ownership.
 class ImageCache {
 public:
-	ImageCache();
-	~ImageCache();
+	ImageCache() = default;
+	~ImageCache() = default;
 
 	// Insert the 'image' into the cache and returns a pointer to the inserted
 	// image for convenience.

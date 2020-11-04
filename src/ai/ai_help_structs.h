@@ -316,7 +316,7 @@ struct NearFlag {
 // used to count events within a time frame - duration_ (older ones are
 // stripped with strip_old function)
 struct EventTimeQueue {
-	EventTimeQueue();
+	EventTimeQueue() = default;
 
 	void push(const Time&, uint32_t = std::numeric_limits<uint32_t>::max());
 	uint32_t count(const Time&, uint32_t = std::numeric_limits<uint32_t>::max());

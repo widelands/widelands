@@ -198,9 +198,6 @@ Player::Player(EditorGameBase& the_egbase,
 	update_team_players();
 }
 
-Player::~Player() {
-}
-
 void Player::create_default_infrastructure() {
 	if (is_picking_custom_starting_position_) {
 		return;
@@ -735,6 +732,51 @@ Building& Player::force_csite(Coords const location,
 	   map.get_fcoords(location), player_number_, b_idx, false, former_buildings);
 }
 
+bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) const {
+	if (!descr.is_buildable()) {
+		return false;
+	}
+
+	// Validate build position
+	const Map& map = egbase().map();
+	const FCoords brn = map.br_n(fc);
+	if (!fc.field->is_interior(player_number()) || !brn.field->is_interior(player_number())) {
+		return false;
+	}
+	if (descr.get_size() >= BaseImmovable::BIG &&
+	    !((map.l_n(fc).field->is_interior(player_number())) &&
+	      (map.tr_n(fc).field->is_interior(player_number())) &&
+	      (map.tl_n(fc).field->is_interior(player_number())))) {
+		return false;
+	}
+
+	if (descr.get_built_over_immovable() != INVALID_INDEX &&
+	    !(fc.field->get_immovable() &&
+	      fc.field->get_immovable()->has_attribute(descr.get_built_over_immovable()))) {
+		return false;
+	}
+
+	const NodeCaps buildcaps = descr.get_built_over_immovable() == INVALID_INDEX ?
+	                              get_buildcaps(fc) :
+	                              map.get_max_nodecaps(egbase(), fc);
+	if (descr.get_ismine()) {
+		if (!(buildcaps & BUILDCAPS_MINE)) {
+			return false;
+		}
+	} else {
+		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr.get_size() - BaseImmovable::SMALL + 1) {
+			return false;
+		}
+		if (descr.get_isport() && !(buildcaps & BUILDCAPS_PORT)) {
+			return false;
+		}
+	}
+
+	return (get_buildcaps(brn) & BUILDCAPS_FLAG) ||
+	       (brn.field->get_immovable() &&
+	        brn.field->get_immovable()->descr().type() == MapObjectType::FLAG);
+}
+
 /*
 ===============
 Place a construction site or building, checking that it's legal to do so.
@@ -750,50 +792,9 @@ Building* Player::build(Coords c,
 	}
 
 	const BuildingDescr* descr = egbase().descriptions().get_building_descr(idx);
+	assert(descr);
 
-	if (!descr->is_buildable()) {
-		return nullptr;
-	}
-
-	// Validate build position
-	const Map& map = egbase().map();
-	map.normalize_coords(c);
-	const FCoords fc = map.get_fcoords(c);
-	const FCoords brn = map.br_n(fc);
-	if (!fc.field->is_interior(player_number()) || !brn.field->is_interior(player_number())) {
-		return nullptr;
-	}
-	if (descr->get_size() >= BaseImmovable::BIG &&
-	    !((map.l_n(fc).field->is_interior(player_number())) &&
-	      (map.tr_n(fc).field->is_interior(player_number())) &&
-	      (map.tl_n(fc).field->is_interior(player_number())))) {
-		return nullptr;
-	}
-
-	if (descr->get_built_over_immovable() != INVALID_INDEX &&
-	    !(fc.field->get_immovable() &&
-	      fc.field->get_immovable()->has_attribute(descr->get_built_over_immovable()))) {
-		return nullptr;
-	}
-
-	const NodeCaps buildcaps = descr->get_built_over_immovable() == INVALID_INDEX ?
-	                              get_buildcaps(fc) :
-	                              map.get_max_nodecaps(egbase(), fc);
-	if (descr->get_ismine()) {
-		if (!(buildcaps & BUILDCAPS_MINE)) {
-			return nullptr;
-		}
-	} else {
-		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr->get_size() - BaseImmovable::SMALL + 1) {
-			return nullptr;
-		}
-		if (descr->get_isport() && !(buildcaps & BUILDCAPS_PORT)) {
-			return nullptr;
-		}
-	}
-	if (!(brn.field->get_immovable() &&
-	      brn.field->get_immovable()->descr().type() == MapObjectType::FLAG) &&
-	    !(get_buildcaps(brn) & BUILDCAPS_FLAG)) {
+	if (!check_can_build(*descr, egbase().map().get_fcoords(c))) {
 		return nullptr;
 	}
 

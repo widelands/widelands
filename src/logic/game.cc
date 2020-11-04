@@ -61,6 +61,7 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
+#include "logic/training_wheels.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -150,7 +151,8 @@ Game::Game()
 	Economy::initialize_serial();
 }
 
-Game::~Game() {
+Game::~Game() {  // NOLINT
+	              // ReplayWriter needs this
 }
 
 void Game::sync_reset() {
@@ -372,6 +374,11 @@ void Game::init_savegame(const GameSettings& settings) {
 		win_condition_displayname_ = gpdp.get_win_condition();
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			log_dbg("Training wheel from savegame");
+		}
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -407,6 +414,11 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		win_condition_displayname_ = gpdp.get_win_condition();
 		training_wheels_wanted_ =
 		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			log_dbg("Training wheel from savegame");
+		}
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -440,11 +452,27 @@ bool Game::acquire_training_wheel_lock(const std::string& objective) {
 	}
 	return false;
 }
+void Game::release_training_wheel_lock() {
+	if (training_wheels_ != nullptr) {
+		training_wheels_->release_lock();
+	}
+}
 void Game::mark_training_wheel_as_solved(const std::string& objective) {
 	if (training_wheels_ == nullptr) {
 		training_wheels_.reset(new TrainingWheels(lua()));
 	}
 	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
+}
+void Game::skip_training_wheel(const std::string& objective) {
+	if (training_wheels_ != nullptr) {
+		training_wheels_->skip(objective, training_wheels_wanted_);
+	}
+}
+bool Game::training_wheels_wanted() const {
+	return training_wheels_wanted_;
+}
+std::string Game::active_training_wheel() const {
+	return training_wheels_ ? training_wheels_->current_objective() : "";
 }
 
 /**
@@ -558,7 +586,9 @@ bool Game::run(StartGameType const start_game_type,
 	// We don't run the training wheel objectives in scenarios, but we want the objectives available
 	// for marking them as solved if a scenario teaches the same content.
 	if (training_wheels_wanted_) {
-		training_wheels_.reset(new TrainingWheels(lua()));
+		if (training_wheels_ == nullptr) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+		}
 		if (!training_wheels_->has_objectives()) {
 			// Nothing to do, so let's free the memory
 			training_wheels_.reset(nullptr);
@@ -606,6 +636,7 @@ bool Game::run(StartGameType const start_game_type,
 	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
 	// user switched off the option
 	if (training_wheels_ != nullptr && training_wheels_wanted_) {
+		log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
 		training_wheels_->run_objectives();
 	}
 
