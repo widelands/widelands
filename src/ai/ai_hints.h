@@ -110,7 +110,6 @@ private:
 	const int16_t weak_ai_limit_;
 	const int16_t normal_ai_limit_;
 	int trainingsites_max_percent_;
-	std::set<Widelands::DescriptionIndex> supports_buildings_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };
