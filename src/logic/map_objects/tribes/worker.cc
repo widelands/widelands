@@ -1077,9 +1077,12 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 	if (!(imm && imm->get_size() > BaseImmovable::NONE)) {
 
-		const ResourceDescription* const rdescr =
+		const ResourceDescription* rdescr =
 		   descriptions.get_resource_descr(position.field->get_resources());
 		const TribeDescr& t = owner().tribe();
+		if (rdescr && !t.uses_resource(rdescr->name())) {
+			rdescr = nullptr;
+		}
 		const Immovable& ri = game.create_immovable(
 		   position,
 		   t.get_resource_indicator(
