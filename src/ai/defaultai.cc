@@ -860,8 +860,11 @@ void DefaultAI::late_initialization() {
 			}
 
 			// Some important buildings are identified
-			if (!prod.is_enhanced() && prod.input_wares().empty() && !prod.output_ware_types().empty() && prod.created_immovables().empty() && !prod.collected_immovables().empty()) {
-				// TODO(GunChleoc): We should lose the hard distinction between quarry and lumberjack, so that a building can be both
+			if (!prod.is_enhanced() && prod.input_wares().empty() &&
+			    !prod.output_ware_types().empty() && prod.created_immovables().empty() &&
+			    !prod.collected_immovables().empty()) {
+				// TODO(GunChleoc): We should lose the hard distinction between quarry and lumberjack,
+				// so that a building can be both
 				if (prod.supported_by_productionsites().empty()) {
 					log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
 					bo.set_is(BuildingAttribute::kNeedsRocks);
@@ -915,7 +918,9 @@ void DefaultAI::late_initialization() {
 			}
 
 			// Forester/Ranger
-			if (!prod.is_enhanced() && prod.input_wares().empty() && prod.output_ware_types().empty() && !prod.created_immovables().empty() && prod.collected_immovables().empty()) {
+			if (!prod.is_enhanced() && prod.input_wares().empty() &&
+			    prod.output_ware_types().empty() && !prod.created_immovables().empty() &&
+			    prod.collected_immovables().empty()) {
 				log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
 				bo.set_is(BuildingAttribute::kRanger);
 				/* Buildings detected at the time of writing:
@@ -992,7 +997,8 @@ void DefaultAI::late_initialization() {
 				}
 				/* Buildings detected at the time of writing:
 				 *
-				 *   NOCOM missing: amazons_rare_tree_plantation, amazons_rare_tree_cutters_hut, amazons_hunter_gatherers_hut, amazons_liana_cutters_hut
+				 *   NOCOM missing: amazons_rare_tree_plantation, amazons_rare_tree_cutters_hut,
+				 * amazons_hunter_gatherers_hut, amazons_liana_cutters_hut
 				 *
 				 *   frisians_charcoal_burners_house
 				 *   frisians_collectors_house
@@ -1787,7 +1793,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.trees_nearby = map.find_immovables(
 		   game(),
 		   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
-		   nullptr, Widelands::FindImmovableAttribute(Widelands::MapObjectDescr::get_attribute_id("tree")));
+		   nullptr,
+		   Widelands::FindImmovableAttribute(Widelands::MapObjectDescr::get_attribute_id("tree")));
 
 		// Counting bushes nearby. Only the Frisians have this, so we need to create the attribute if
 		// it doesn't exist.
@@ -4742,10 +4749,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 				continue;
 			}
 			remaining_trees += map.find_immovables(
-					   game(),
-					   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), radius),
-					   nullptr,
-					   Widelands::FindImmovableAttribute(attribute_info.second));
+			   game(),
+			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), radius),
+			   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
 		}
 		if (site.site->get_statistics_percent() >
 		    std::abs(management_data.get_military_number_at(117)) / 2) {
@@ -4816,12 +4822,10 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 				continue;
 			}
 			rocks_in_vicinity += map.find_immovables(
-									 game(),
-									 Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 6),
-									 nullptr,
-									 Widelands::FindImmovableAttribute(attribute_info.second));
+			   game(),
+			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 6),
+			   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
 		}
-
 
 		if (rocks_in_vicinity == 0) {
 			// destruct the building and it's flag (via flag destruction)
@@ -4978,16 +4982,15 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			return false;
 		}
 
-
 		unsigned trees_in_vicinity = 0;
 		for (const auto& attribute_info : site.site->descr().created_attributes()) {
 			if (attribute_info.first != Widelands::MapObjectType::IMMOVABLE) {
 				continue;
 			}
 			trees_in_vicinity += map.find_immovables(
-					   game(), Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 5),
-					   nullptr,
-					   Widelands::FindImmovableAttribute(attribute_info.second));
+			   game(),
+			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 5),
+			   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
 		}
 
 		// stop ranger if enough trees around regardless of policy
