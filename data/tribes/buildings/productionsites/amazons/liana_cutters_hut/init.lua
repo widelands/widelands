@@ -5,7 +5,7 @@ dirname = path.dirname (__file__)
 descriptions:new_productionsite_type {
    name = "amazons_liana_cutters_hut",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("amazons_building", "Liana Cutter's Hut"),
+   descname = pgettext ("amazons_building", "Liana Cutter’s Hut"),
    icon = dirname .. "menu.png",
    size = "small",
 
@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
       -- TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
       title = _"No Trees",
       heading = _"No Tree to Cut Lianas",
-      message = pgettext ("amazons_building", "The liana Cutter working at this site can’t find any tree in his work area. Consider dismantling this liana cutter's hut and rebuilding it somewhere else."),
+      message = pgettext ("amazons_building", "The liana Cutter working at this site can’t find any tree in his work area. Consider dismantling this liana cutter’s hut and rebuilding it somewhere else."),
       productivity_threshold = 33
    },
 }
