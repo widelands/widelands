@@ -744,6 +744,12 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 				/* Buildings detected at the time of writing:
 				 *
+				 *   amazons_rare_tree_plantation -> amazons_liana_cutters_hut
+				 *                                -> amazons_rare_tree_cutters_hut
+				 *                                -> amazons_wilderness_keepers_tent
+				 *
+				 * NODOM missing: amazons_rare_tree_cutters_hut, amazons_woodcutters_hut
+				 *
 				 *   frisians_clay_pit  -> frisians_aqua_farm, frisians_charcoal_burners_house
 				 *   frisians_farm      -> frisians_beekeepers_house
 				 *   frisians_reed_farm -> frisians_beekeepers_house
@@ -873,6 +879,10 @@ void DefaultAI::late_initialization() {
 						bo.set_is(BuildingAttribute::kLumberjack);
 						/* Buildings detected at the time of writing:
 						 *
+						 *   amazons_woodcutters_hut
+						 *
+						 *   NOCOM added: amazons_rare_tree_cutters_hut, amazons_liana_cutters_hut, amazons_wilderness_keepers_tent
+						 *
 						 *   atlanteans_woodcutters_house
 						 *   barbarians_lumberjacks_hut
 						 *   empire_lumberjacks_house
@@ -886,6 +896,7 @@ void DefaultAI::late_initialization() {
 						bo.set_is(BuildingAttribute::kNeedsRocks);
 						/* Buildings detected at the time of writing:
 						 *
+						 *   amazons_stonecutters_hut
 						 *   atlanteans_quarry
 						 *   barbarians_quarry
 						 *   empire_quarry
@@ -917,6 +928,8 @@ void DefaultAI::late_initialization() {
 					bo.set_is(BuildingAttribute::kRanger);
 					/* Buildings detected at the time of writing:
 					 *
+					 *   NOCOM new: amazons_jungle_preservers_hut, amazons_rare_tree_plantation
+					 *
 					 *   atlanteans_foresters_house
 					 *   barbarians_rangers_hut
 					 *   empire_foresters_house
@@ -933,6 +946,8 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kHunter);
 				/* Buildings detected at the time of writing:
 				 *
+				 *   NOCOM new: amazons_hunter_gatherers_hut
+				 *
 				 *   atlanteans_hunters_house
 				 *   barbarians_hunters_hut
 				 *   empire_hunters_house
@@ -948,6 +963,7 @@ void DefaultAI::late_initialization() {
 					bo.set_is(BuildingAttribute::kFisher);
 					/* Buildings detected at the time of writing:
 					 *
+					 *   amazons_hunter_gatherers_hut
 					 *   atlanteans_fishers_house
 					 *   barbarians_fishers_hut
 					 *   empire_fishers_house
@@ -958,6 +974,8 @@ void DefaultAI::late_initialization() {
 					log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
 					bo.set_is(BuildingAttribute::kWell);
 					/* Buildings detected at the time of writing:
+					 *
+					 *   NOCOM missing: amazons_water_gatherers_hut
 					 *
 					 *   atlanteans_well
 					 *   barbarians_well
@@ -980,6 +998,8 @@ void DefaultAI::late_initialization() {
 					   gametime, "AI %d: %s strictly requires supporters", player_number(), bo.name);
 				}
 				/* Buildings detected at the time of writing:
+				 *
+				 *   NOCOM missing: amazons_rare_tree_plantation, amazons_rare_tree_cutters_hut, amazons_hunter_gatherers_hut, amazons_liana_cutters_hut
 				 *
 				 *   frisians_charcoal_burners_house
 				 *   frisians_collectors_house
