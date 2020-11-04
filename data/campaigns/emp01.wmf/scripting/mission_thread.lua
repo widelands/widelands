@@ -56,6 +56,8 @@ function mission_thread()
    while #p1:get_buildings("empire_lumberjacks_house") < 1 do sleep(3249) end
    set_objective_done(o)
 
+   p1:mark_training_wheel_as_solved("logs")
+
    -- Lumberjack is now build
    campaign_message_box(amalea_2)
    p1:allow_buildings{"empire_sawmill"}
@@ -78,6 +80,7 @@ function mission_thread()
    p1:allow_buildings{"empire_quarry"}
    while not check_for_buildings(p1, { empire_quarry = 1 }) do sleep(2434) end
    set_objective_done(o)
+   p1:mark_training_wheel_as_solved("rocks")
 
    -- All buildings done. Got home
    campaign_message_box(saledus_4)

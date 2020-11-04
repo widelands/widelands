@@ -446,8 +446,8 @@ void FieldActionWindow::add_buttons_auto() {
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			if (player_ && ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
-			                (buildcaps & Widelands::BUILDCAPS_MINE))) {
+			if (player_ && ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			                (nodecaps & Widelands::BUILDCAPS_MINE))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 

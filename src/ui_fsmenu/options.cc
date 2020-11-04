@@ -39,6 +39,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
+#include "ui_fsmenu/training_wheel_options.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
@@ -281,14 +282,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                       UI::PanelStyle::kFsMenu,
                       Vector2i::zero(),
                       _("Teach me how to play")),
-     training_wheels_reset_(&training_wheels_box_,
-                            "reset_training_wheels",
-                            0,
-                            0,
-                            0,
-                            0,
-                            UI::ButtonStyle::kFsMenuSecondary,
-                            _("Reset progress")),
+     training_wheels_button_(
+        &training_wheels_box_,
+        "edit_training_wheels",
+        0,
+        0,
+        0,
+        0,
+        UI::ButtonStyle::kFsMenuSecondary,
+        /** TRANSLATORS: Button to bring up a window to edit teaching progress in the Options */
+        _("Progress…")),
      os_(opt) {
 
 	do_not_layout_on_resolution_change();
@@ -355,18 +358,30 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
-	training_wheels_box_.add(&training_wheels_reset_, UI::Box::Resizing::kAlign, UI::Align::kRight);
+	training_wheels_box_.add(&training_wheels_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	training_wheels_box_.add_space(kPadding);
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
-	training_wheels_reset_.sigclicked.connect([this]() {
-		training_wheels_reset_.set_enabled(false);
-		Profile training_wheels_profile;
-		training_wheels_profile.write(kTrainingWheelsFile);
+
+	training_wheels_.changed.connect(
+	   [this]() { training_wheels_button_.set_enabled(training_wheels_.get_state()); });
+	training_wheels_button_.set_enabled(training_wheels_.get_state());
+	training_wheels_button_.sigclicked.connect([this]() {
+		training_wheels_button_.set_enabled(false);
+		cancel_.set_enabled(false);
+		apply_.set_enabled(false);
+		ok_.set_enabled(false);
+		TrainingWheelOptions training_wheel_options(get_parent());
+		training_wheel_options.run<UI::Panel::Returncodes>();
+		training_wheels_button_.set_enabled(true);
+		cancel_.set_enabled(true);
+		apply_.set_enabled(true);
+		ok_.set_enabled(true);
 	});
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });

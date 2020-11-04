@@ -222,7 +222,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 bool loading,
                                 const FormerBuildings& former_buildings) const {
 	DescriptionIndex immovable = INVALID_INDEX;
-	if (built_over_immovable_ != INVALID_INDEX) {
+	if (built_over_immovable_ != INVALID_INDEX && !loading) {
 		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
 			// 'false' means we're building on top of an immovable

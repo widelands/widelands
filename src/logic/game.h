@@ -29,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
-#include "logic/training_wheels.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
@@ -54,6 +53,7 @@ enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
+class TrainingWheels;
 enum class StockPolicy;
 
 enum {
@@ -198,10 +198,11 @@ public:
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
 	bool acquire_training_wheel_lock(const std::string& objective);
+	void release_training_wheel_lock();
 	void mark_training_wheel_as_solved(const std::string& objective);
-	bool training_wheels_wanted() const {
-		return training_wheels_wanted_;
-	}
+	void skip_training_wheel(const std::string& objective);
+	bool training_wheels_wanted() const;
+	std::string active_training_wheel() const;
 
 	void postload() override;
 
