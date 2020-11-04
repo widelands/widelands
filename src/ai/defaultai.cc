@@ -753,8 +753,7 @@ void DefaultAI::late_initialization() {
 				 *     - amazons_woodcutters_hut
 				 *
 				 *   frisians_clay_pit  -> frisians_aqua_farm, frisians_charcoal_burners_house
-				 *   frisians_farm      -> frisians_beekeepers_house
-				 *   frisians_reed_farm -> frisians_beekeepers_house
+				 *   frisians_farm      NOCOM missing
 				 *
 				 * */
 			}
@@ -890,6 +889,9 @@ void DefaultAI::late_initialization() {
 					 *   empire_lumberjacks_house
 					 *   frisians_woodcutters_house
 					 *
+					 *   frisians_fishers_house NOCOM wrong!
+					 *   frisians_collectors_house NOCOM wrong!
+					 *
 					 * */
 				}
 			}
@@ -933,6 +935,8 @@ void DefaultAI::late_initialization() {
 				 *   empire_foresters_house
 				 *   frisians_foresters_house
 				 *
+				 *  NOCOM frisians_berry_farm wrong!
+				 *
 				 * */
 			}
 
@@ -942,7 +946,7 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kHunter);
 				/* Buildings detected at the time of writing:
 				 *
-				 *   amazons_hunter_gatherers_hut
+				 *   amazons_hunter_gatherers_hut NOCOM new
 				 *   atlanteans_hunters_house
 				 *   barbarians_hunters_hut
 				 *   empire_hunters_house
