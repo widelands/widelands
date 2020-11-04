@@ -140,6 +140,10 @@ public:
 		return workers_order_;
 	}
 
+	bool uses_resource(const std::string& name) const {
+		return used_resources_.count(name);
+	}
+
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
 
@@ -187,6 +191,7 @@ private:
 	std::set<DescriptionIndex> immovables_;  // The player immovables
 	std::set<DescriptionIndex> workers_;
 	std::set<DescriptionIndex> wares_;
+	std::set<std::string> used_resources_;
 	ResourceIndicatorSet resource_indicators_;
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
