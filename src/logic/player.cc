@@ -772,7 +772,9 @@ bool Player::check_can_build(const BuildingDescr& descr, const FCoords& fc) cons
 		}
 	}
 
-	return (get_buildcaps(brn) & BUILDCAPS_FLAG) || (brn.field->get_immovable() && brn.field->get_immovable()->descr().type() == MapObjectType::FLAG);
+	return (get_buildcaps(brn) & BUILDCAPS_FLAG) ||
+	       (brn.field->get_immovable() &&
+	        brn.field->get_immovable()->descr().type() == MapObjectType::FLAG);
 }
 
 /*

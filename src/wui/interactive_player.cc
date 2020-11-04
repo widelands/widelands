@@ -556,15 +556,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
 				Widelands::NodeCaps caps;
-				float opacity = f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
+				float opacity =
+				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
 				if (picking_starting_pos) {
-					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() : Widelands::CAPS_NONE;
+					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
+					                                               Widelands::CAPS_NONE;
 				} else if (show_port_space) {
 					caps = f->fcoords.field->maxcaps();
 				} else {
 					caps = plr.get_buildcaps(f->fcoords);
 					if (!(caps & Widelands::BUILDCAPS_SIZEMASK)) {
-						for (const Widelands::BuildingDescr* b : plr.tribe().buildings_built_over_immovables()) {
+						for (const Widelands::BuildingDescr* b :
+						     plr.tribe().buildings_built_over_immovables()) {
 							if (plr.check_can_build(*b, f->fcoords)) {
 								caps = f->fcoords.field->maxcaps();
 								opacity *= 2 * kBuildhelpOpacity;
