@@ -983,22 +983,16 @@ void DefaultAI::late_initialization() {
 				}
 			}
 
-			bo.requires_supporters = !bo.supported_by_buildings.empty();
-			// Exclude basic buildings from strictly requiring supporters. We don't want them to wait
-			// for their supporting buildings before they get built.
+			bo.requires_supporters = bh.requires_supporters();
 			if (bo.requires_supporters) {
-				if (bo.is(BuildingAttribute::kFisher) || bo.is(BuildingAttribute::kHunter) ||
-				    bo.is(BuildingAttribute::kLumberjack) || bo.is(BuildingAttribute::kNeedsRocks) ||
-				    bo.is(BuildingAttribute::kRanger) || bo.is(BuildingAttribute::kWell)) {
-					bo.requires_supporters = false;
-				} else {
-					log_dbg_time(
-					   gametime, "AI %d: %s strictly requires supporters", player_number(), bo.name);
-				}
+				log_dbg_time(
+				   gametime, "AI %d: %s strictly requires supporters\n", player_number(), bo.name);
 				/* Buildings detected at the time of writing:
 				 *
-				 *   NOCOM missing: amazons_rare_tree_plantation, amazons_rare_tree_cutters_hut,
-				 * amazons_hunter_gatherers_hut, amazons_liana_cutters_hut
+				 *   amazons_rare_tree_cutters_hut
+				 *   amazons_hunter_gatherers_hut
+				 *   amazons_liana_cutters_hut
+				 *   amazons_rare_tree_plantation
 				 *
 				 *   frisians_charcoal_burners_house
 				 *   frisians_collectors_house
@@ -1007,7 +1001,6 @@ void DefaultAI::late_initialization() {
 				 *
 				 * */
 			}
-
 			continue;
 		}
 

@@ -212,7 +212,7 @@ Production Sites
     production sites when deciding on the building's location.
 
 **requires_supporters**
-    **DEPRECATED** This building will be built only if a supporter is nearby::
+    This building will be built only if a supporter is nearby::
 
         requires_supporters = true,
 
@@ -250,17 +250,13 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
      normal_ai_limit_(table->has_key("normal_ai_limit") ? table->get_int("normal_ai_limit") : -1),
+     requires_supporters_(
+        table->has_key("requires_supporters") ? table->get_bool("requires_supporters") : false),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    0) {
-
 	if (table->has_key("supports_production_of")) {
 		log_warn("%s: The 'supports_production_of' key in 'ai_hints' is no longer used",
-		         building_name.c_str());
-	}
-
-	if (table->has_key("requires_supporters")) {
-		log_warn("%s: The 'requires_supporters' key in 'ai_hints' is no longer used",
 		         building_name.c_str());
 	}
 

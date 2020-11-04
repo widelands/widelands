@@ -63,6 +63,10 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
+	bool requires_supporters() const {
+		return requires_supporters_;
+	}
+
 	bool is_shipyard() const {
 		return shipyard_;
 	}
@@ -109,6 +113,7 @@ private:
 	const int16_t very_weak_ai_limit_;
 	const int16_t weak_ai_limit_;
 	const int16_t normal_ai_limit_;
+	const bool requires_supporters_;
 	int trainingsites_max_percent_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);

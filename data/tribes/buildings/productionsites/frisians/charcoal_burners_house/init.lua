@@ -42,7 +42,8 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 760
+      prohibited_till = 760,
+      requires_supporters = true,
    },
 
    working_positions = {
