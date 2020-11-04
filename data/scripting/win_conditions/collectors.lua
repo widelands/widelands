@@ -118,6 +118,26 @@ local r = {
          "trident_double", "trident_heavy_double", "shield_steel",
          "shield_advanced", "tabard", "tabard_golden"
        },
+
+      amazons = {
+         gold = 12,
+         spear_wooden = 0,
+         spear_stone_tipped = 1,
+         spear_hardened = 1,
+         helmet_wooden = 1,
+         warriors_coat = 16,
+         tunic = 1,
+         vest_padded = 2,
+         protector_padded = 17,
+         boots_sturdy = 1,
+         boots_swift = 1,
+         boots_hero = 16
+      },
+      amazons_order = {
+         "gold", "spear_wooden", "spear_stone_tipped", "spear_hardened",
+         "helmet_wooden", "warriors_coat", "tunic", "vest_padded",
+         "protector_padded", "boots_sturdy", "boots_swift", "boots_hero"
+       },
    }
 
    -- Calculate the momentary points for a list of players

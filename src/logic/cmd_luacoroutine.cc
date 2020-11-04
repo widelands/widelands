@@ -35,9 +35,6 @@
 
 namespace Widelands {
 
-CmdLuaCoroutine::~CmdLuaCoroutine() {
-}
-
 void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();

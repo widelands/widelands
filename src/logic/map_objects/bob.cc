@@ -1015,9 +1015,6 @@ Load/save support
 
 constexpr uint8_t kCurrentPacketVersion = 1;
 
-Bob::Loader::Loader() {
-}
-
 void Bob::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);
 

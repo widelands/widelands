@@ -44,7 +44,7 @@ public:
 
 	// Returns the (singleton) instance of this class.
 	static BlitProgram& instance();
-	~BlitProgram();
+	~BlitProgram() = default;
 
 	// Draws the rectangle 'gl_src_rect' from the texture with the name
 	// 'gl_texture_image' to 'gl_dest_rect' in the currently bound framebuffer. All

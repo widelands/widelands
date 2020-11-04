@@ -95,13 +95,12 @@ void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapO
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
 	// wise this makes no sense.
-	upcast(Game, g, &egbase);
 	FileRead fr;
-	if (g && fr.try_open(fs, "scripting/globals.dump")) {
+	if (egbase.is_game() && fr.try_open(fs, "scripting/globals.dump")) {
 		try {
 			const uint32_t packet_version = fr.unsigned_32();
 			if (packet_version >= 4 && packet_version <= kCurrentPacketVersion) {
-				upcast(LuaGameInterface, lgi, &g->lua());
+				upcast(LuaGameInterface, lgi, &egbase.lua());
 				signal(SIGABRT, &abort_handler);
 				if (packet_version >= 5) {
 					// TODO(Nordfriese): Savegame compatibility)
@@ -116,6 +115,7 @@ void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapO
 		} catch (const WException& e) {
 			throw GameDataError("scripting: %s", e.what());
 		}
+		fr.close();
 	}
 }
 
@@ -144,7 +144,7 @@ void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 		uint32_t nwritten = little_32(lgi->write_global_env(fw, mos));
 		fw.data(&nwritten, 4, pos);
-
+		fs.ensure_directory_exists("scripting");
 		fw.write(fs, "scripting/globals.dump");
 	}
 }

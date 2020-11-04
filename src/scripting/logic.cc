@@ -74,9 +74,6 @@ LuaEditorInterface::LuaEditorInterface(Widelands::EditorGameBase* g)
 	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "factory");
 }
 
-LuaEditorInterface::~LuaEditorInterface() {
-}
-
 std::unique_ptr<LuaTable> LuaEditorInterface::run_script(const std::string& script) {
 	return run_script_maybe_from_map(lua_state_, script);
 }
@@ -141,9 +138,6 @@ LuaGameInterface::LuaGameInterface(Widelands::Game* g) : factory_(new GameFactor
 	lua_pushlightuserdata(
 	   lua_state_, reinterpret_cast<void*>(dynamic_cast<Factory*>(factory_.get())));
 	lua_setfield(lua_state_, LUA_REGISTRYINDEX, "factory");
-}
-
-LuaGameInterface::~LuaGameInterface() {
 }
 
 std::unique_ptr<LuaCoroutine> LuaGameInterface::read_coroutine(FileRead& fr) {
