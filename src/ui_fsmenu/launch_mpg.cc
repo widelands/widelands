@@ -41,6 +41,7 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
 namespace FsMenu {
+
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow(UI::Panel* parent, GameController* gc, uint32_t w, uint32_t h)
@@ -110,7 +111,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, standard_height_),
+     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, scale_factor * standard_height_),
      chat_(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
      egbase_(egbase) {
 
@@ -153,7 +154,7 @@ void FullscreenMenuLaunchMPG::layout() {
 	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
 
 	mpsg_.force_new_dimensions(
-	   left_column_box_.get_w(), left_column_box_.get_h() / 2, standard_height_);
+	   left_column_box_.get_w(), left_column_box_.get_h() / 2, scale_factor * standard_height_);
 
 	// set focus to chat input
 	chat_.focus_edit();
@@ -180,7 +181,7 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 
 /// Opens a popup window to select a map or saved game
 bool FullscreenMenuLaunchMPG::clicked_select_map() {
-	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_w() / 3, get_h() / 4);
+	MapOrSaveSelectionWindow selection_window(&fsmm_, ctrl_, get_w() / 3, get_h() / 4);
 	auto result = selection_window.run<MenuTarget>();
 	assert(result == MenuTarget::kNormalGame || result == MenuTarget::kScenarioGame ||
 	       result == MenuTarget::kBack);

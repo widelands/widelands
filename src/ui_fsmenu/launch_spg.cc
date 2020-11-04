@@ -34,7 +34,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
                                                  bool preconfigured,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
-     player_setup(&left_column_box_, settings, standard_height_, kPadding),
+     player_setup(&left_column_box_, settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
      egbase_(egbase) {
 
@@ -184,7 +184,7 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 
 void FullscreenMenuLaunchSPG::layout() {
 	FullscreenMenuLaunchGame::layout();
-	player_setup.force_new_dimensions(standard_height_);
+	player_setup.force_new_dimensions(scale_factor * standard_height_);
 }
 
 }  // namespace FsMenu

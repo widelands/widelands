@@ -32,6 +32,7 @@
 class GameController;
 class LuaInterface;
 namespace FsMenu {
+static constexpr double scale_factor = 1.3;
 /**
  * Menu for setting map and mapsettings for single- and multiplayer games.
  */

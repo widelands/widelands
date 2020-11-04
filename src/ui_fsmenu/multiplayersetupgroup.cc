@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include <base/log.h>
 #include <boost/algorithm/string.hpp>
 
 #include "ai/computer_player.h"
