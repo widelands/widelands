@@ -1,4 +1,4 @@
--- Welcome and teach objectives
+-- Teach objectives
 
 include "scripting/coroutine.lua"
 include "scripting/messages.lua"
@@ -13,7 +13,7 @@ run(function()
    sleep(10)
 
    local mapview = wl.ui.MapView()
-   local player = wl.Game().players[wl.Game().interactive_player]
+   local player = get_interactive_player()
    wait_for_lock(player, training_wheel_name)
 
    push_textdomain("training_wheels")
@@ -52,12 +52,19 @@ run(function()
 
    pop_textdomain()
 
-   -- TODO(GunChleoc): This fails when the objective is written and the game saved before completing it, and then the game loaded again.
-   -- We need to add the active training wheel to the savegame data so we won't run it twice.
+   local objectives_from_savegame = player.objectives
+
+   if objectives_from_savegame["obj_initial_close_objectives_window"] then
+      objectives_from_savegame["obj_initial_close_objectives_window"]:remove()
+   end
 
    local o2 = add_campaign_objective(obj_initial_close_objectives_window)
 
    mapview.buttons.objectives:indicate(true)
+
+   if objectives_from_savegame["objectives_message_objective"] then
+      objectives_from_savegame["objectives_message_objective"]:remove()
+   end
 
    local o1 = campaign_message_with_objective(objectives_message, objectives_message_objective, 0)
    set_objective_done(o1)
@@ -69,7 +76,11 @@ run(function()
    sleep (100)
 
    while mapview.windows.objectives do sleep(100) end
-   set_objective_done(o2)
+
+   -- We might still have some indicators and messages boxes left over from unexpected player actions
+   clean_up_message_boxes_and_indicators()
 
    player:mark_training_wheel_as_solved(training_wheel_name)
+
+   set_objective_done(o2)
 end)
