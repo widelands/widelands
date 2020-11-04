@@ -1,0 +1,3 @@
+return {
+   amazons_woodcutter = {},
+}
