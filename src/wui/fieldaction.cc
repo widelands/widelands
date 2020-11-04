@@ -444,8 +444,8 @@ void FieldActionWindow::add_buttons_auto() {
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			if (player_ && ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
-			                (buildcaps & Widelands::BUILDCAPS_MINE))) {
+			if (player_ && ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			                (nodecaps & Widelands::BUILDCAPS_MINE))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
@@ -563,6 +563,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced()) {
 			continue;
 		}
+
+		// TODO(Nordfriese): Use Player::check_can_build to simplify the code
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
 		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(

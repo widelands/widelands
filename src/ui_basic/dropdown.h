@@ -130,6 +130,9 @@ public:
 	/// Set maximum available height in the UI
 	void set_height(int height);
 
+	///  Return the total height (text + spacing) occupied by a single entry.
+	int lineheight() const;
+
 	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
 	/// keyboard navigation.

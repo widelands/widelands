@@ -72,8 +72,12 @@ struct GamePreloadPacket : public GameDataPacket {
 		return gametype_;
 	}
 
+	const std::string& get_active_training_wheel() const {
+		return active_training_wheel_;
+	}
+
 	bool get_training_wheels_wanted() const {
-		return training_wheels_wanted_;
+		return training_wheels_wanted_ || !active_training_wheel_.empty();
 	}
 
 private:
@@ -82,6 +86,7 @@ private:
 	std::string background_;
 	std::string background_theme_;
 	std::string win_condition_;
+	std::string active_training_wheel_;
 	// Initializing everything to make cppcheck happy.
 	bool training_wheels_wanted_ = false;
 	Time gametime_ = Time(0);
