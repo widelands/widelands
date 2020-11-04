@@ -380,6 +380,16 @@ void ConstructionSite::cleanup(EditorGameBase& egbase) {
 			   Notifications::publish(NoteBuilding(s, NoteBuilding::Action::kFinishWarp));
 		   },
 		   false);
+
+	} else if (was_immovable_ && work_completed_ <= 0) {
+		// Reinstate the former immovable
+		for (const auto& pair : old_buildings_) {
+			// 'false' means that this was built on top of an immovable
+			if (!pair.second) {
+				egbase.create_immovable(position_, pair.first, get_owner());
+				break;
+			}
+		}
 	}
 }
 
@@ -546,7 +556,8 @@ bool ConstructionSite::burn_on_destroy() {
 	if (work_completed_ >= work_steps_) {
 		return false;  // completed, so don't burn
 	}
-	return work_completed_ || info_.intermediates.size() < old_buildings_.size();
+	return work_completed_ ||
+	       (!was_immovable_ && info_.intermediates.size() < old_buildings_.size());
 }
 
 void ConstructionSite::add_additional_ware(DescriptionIndex di) {

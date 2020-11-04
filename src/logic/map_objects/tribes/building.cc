@@ -271,7 +271,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 
 bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
 	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-	                size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK)) &&
+	                size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
+	                                                                    fc.field->maxcaps()) &
+	                          Widelands::BUILDCAPS_SIZEMASK)) &&
 	       (built_over_immovable_ == INVALID_INDEX ||
 	        (fc.field->get_immovable() &&
 	         fc.field->get_immovable()->has_attribute(built_over_immovable_)));
