@@ -748,7 +748,9 @@ void DefaultAI::late_initialization() {
 				 *                                -> amazons_rare_tree_cutters_hut
 				 *                                -> amazons_wilderness_keepers_tent
 				 *
-				 * NOCOM missing: amazons_rare_tree_cutters_hut, amazons_woodcutters_hut
+				 *   NOCOM missing, but I think that's correct (they are supported, not supporting):
+				 *     - amazons_rare_tree_cutters_hut
+				 *     - amazons_woodcutters_hut
 				 *
 				 *   frisians_clay_pit  -> frisians_aqua_farm, frisians_charcoal_burners_house
 				 *   frisians_farm      -> frisians_beekeepers_house
@@ -895,7 +897,7 @@ void DefaultAI::late_initialization() {
 			// Woodcutters/Lumberjacks, Quarries and Collectors are a buildings that collect an
 			// immovable attribute and create no immovables themselves
 			if (prod.created_immovables().empty()) {
-				// NOCOM remove hard-coding from the checks
+				// TODO(GunChleoc): remove hard-coding from the checks
 				Widelands::MapObjectDescr::AttributeIndex bush_attribute =
 				   Widelands::MapObjectDescr::get_attribute_id("ripe_bush");
 
