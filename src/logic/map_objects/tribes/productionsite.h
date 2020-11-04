@@ -228,8 +228,8 @@ protected:
 	}
 
 	/// Set that this production site needs to be placed near map objects with the given attribute
-	void add_needed_attribute(
-	   std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+	void
+	add_needed_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
 		needed_attributes_.insert(attribute_info);
 	}
 
