@@ -872,8 +872,8 @@ void DefaultAI::late_initialization() {
 					}
 				}
 				if (produces_construction_material) {
-					// TODO(GunChleoc): We should lose the hard distinction between quarry and lumberjack,
-					// so that a building can be both
+					// TODO(GunChleoc): We should lose the hard distinction between quarry and
+					// lumberjack, so that a building can be both
 					if (prod.supported_by_productionsites().empty()) {
 						log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsRocks);
@@ -936,7 +936,8 @@ void DefaultAI::late_initialization() {
 
 				for (const std::string& supported_name : prod.supported_productionsites()) {
 					const Widelands::ProductionSiteDescr* supported_site =
-							dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(supported_name)));
+					   dynamic_cast<const Widelands::ProductionSiteDescr*>(
+					      tribe_->get_building_descr(tribe_->building_index(supported_name)));
 					for (Widelands::DescriptionIndex output_idx : supported_site->output_ware_types()) {
 						if (tribe_->is_construction_material(output_idx)) {
 							produces_construction_material = true;
