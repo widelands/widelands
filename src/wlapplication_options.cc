@@ -165,11 +165,20 @@ std::string shortcut_string_for(const KeyboardShortcut id) {
 
 	std::string fmt;
 	switch (mods.size()) {
-	case 0: fmt = _("%1$s"); break;
-	case 1: fmt = _("%1$s+%2$s"); break;
-	case 2: fmt = _("%1$s+%2$s+%3$s"); break;
-	case 3: fmt = _("%1$s+%2$s+%3$s+%4$s"); break;
-	default: NEVER_HERE();
+	case 0:
+		fmt = _("%1$s");
+		break;
+	case 1:
+		fmt = _("%1$s+%2$s");
+		break;
+	case 2:
+		fmt = _("%1$s+%2$s+%3$s");
+		break;
+	case 3:
+		fmt = _("%1$s+%2$s+%3$s+%4$s");
+		break;
+	default:
+		NEVER_HERE();
 	}
 	boost::format f(fmt);
 	for (const std::string& m : mods) {
@@ -181,60 +190,109 @@ std::string shortcut_string_for(const KeyboardShortcut id) {
 
 std::string to_string(const KeyboardShortcut id) {
 	switch (id) {
-	case KeyboardShortcut::kMainMenuNew: return _("New Game");
-	case KeyboardShortcut::kMainMenuLoad: return _("Load Game");
-	case KeyboardShortcut::kMainMenuReplay: return _("Watch Replay");
-	case KeyboardShortcut::kMainMenuRandomMatch: return _("New Random Game");
-	case KeyboardShortcut::kMainMenuTutorial: return _("Play Tutorial");
-	case KeyboardShortcut::kMainMenuCampaign: return _("Campaign");
-	case KeyboardShortcut::kMainMenuOptions: return _("Options");
-	case KeyboardShortcut::kMainMenuAbout: return _("About");
-	case KeyboardShortcut::kMainMenuAddons: return _("Add-Ons");
-	case KeyboardShortcut::kMainMenuContinuePlaying: return _("Continue Playing");
-	case KeyboardShortcut::kMainMenuContinueEditing: return _("Continue Editing");
-	case KeyboardShortcut::kMainMenuEditorNew: return _("Editor – New Map");
-	case KeyboardShortcut::kMainMenuEditorLoad: return _("Editor – Load Map");
-	case KeyboardShortcut::kMainMenuEditorRandom: return _("Editor – New Random Map");
-	case KeyboardShortcut::kMainMenuLogin: return _("Internet Login");
-	case KeyboardShortcut::kMainMenuLobby: return _("Online Game Lobby");
-	case KeyboardShortcut::kMainMenuLAN: return _("LAN Game");
-	case KeyboardShortcut::kMainMenuQuit: return _("Exit Widelands");
-	case KeyboardShortcut::kMainMenuSP: return _("Singleplayer");
-	case KeyboardShortcut::kMainMenuMP: return _("Multiplayer");
-	case KeyboardShortcut::kMainMenuE: return _("Editor");
-	case KeyboardShortcut::kGeneralGameBuildhelp: return _("Toggle Buildhelp");
-	case KeyboardShortcut::kGeneralGameMinimap: return _("Toggle Minimap");
+	case KeyboardShortcut::kMainMenuNew:
+		return _("New Game");
+	case KeyboardShortcut::kMainMenuLoad:
+		return _("Load Game");
+	case KeyboardShortcut::kMainMenuReplay:
+		return _("Watch Replay");
+	case KeyboardShortcut::kMainMenuRandomMatch:
+		return _("New Random Game");
+	case KeyboardShortcut::kMainMenuTutorial:
+		return _("Play Tutorial");
+	case KeyboardShortcut::kMainMenuCampaign:
+		return _("Campaign");
+	case KeyboardShortcut::kMainMenuOptions:
+		return _("Options");
+	case KeyboardShortcut::kMainMenuAbout:
+		return _("About");
+	case KeyboardShortcut::kMainMenuAddons:
+		return _("Add-Ons");
+	case KeyboardShortcut::kMainMenuContinuePlaying:
+		return _("Continue Playing");
+	case KeyboardShortcut::kMainMenuContinueEditing:
+		return _("Continue Editing");
+	case KeyboardShortcut::kMainMenuEditorNew:
+		return _("Editor – New Map");
+	case KeyboardShortcut::kMainMenuEditorLoad:
+		return _("Editor – Load Map");
+	case KeyboardShortcut::kMainMenuEditorRandom:
+		return _("Editor – New Random Map");
+	case KeyboardShortcut::kMainMenuLogin:
+		return _("Internet Login");
+	case KeyboardShortcut::kMainMenuLobby:
+		return _("Online Game Lobby");
+	case KeyboardShortcut::kMainMenuLAN:
+		return _("LAN Game");
+	case KeyboardShortcut::kMainMenuQuit:
+		return _("Exit Widelands");
+	case KeyboardShortcut::kMainMenuSP:
+		return _("Singleplayer");
+	case KeyboardShortcut::kMainMenuMP:
+		return _("Multiplayer");
+	case KeyboardShortcut::kMainMenuE:
+		return _("Editor");
+	case KeyboardShortcut::kGeneralGameBuildhelp:
+		return _("Toggle Buildhelp");
+	case KeyboardShortcut::kGeneralGameMinimap:
+		return _("Toggle Minimap");
 	}
 	NEVER_HERE();
 }
 
-#define KEYSYM(x) SDL_Keysym { SDL_GetScancodeFromKey(SDLK_##x), SDLK_##x, 0, 0 }
+#define KEYSYM(x)                                                                                  \
+	SDL_Keysym {                                                                                    \
+		SDL_GetScancodeFromKey(SDLK_##x), SDLK_##x, 0, 0                                             \
+	}
 
 SDL_Keysym get_default_shortcut(const KeyboardShortcut id) {
 	switch (id) {
-	case KeyboardShortcut::kMainMenuNew: return KEYSYM(n);
-	case KeyboardShortcut::kMainMenuLoad: return KEYSYM(l);
-	case KeyboardShortcut::kMainMenuReplay: return KEYSYM(r);
-	case KeyboardShortcut::kMainMenuRandomMatch: return KEYSYM(z);
-	case KeyboardShortcut::kMainMenuTutorial: return KEYSYM(t);
-	case KeyboardShortcut::kMainMenuCampaign: return KEYSYM(h);
-	case KeyboardShortcut::kMainMenuOptions: return KEYSYM(o);
-	case KeyboardShortcut::kMainMenuAbout: return KEYSYM(F1);
-	case KeyboardShortcut::kMainMenuAddons: return KEYSYM(a);
-	case KeyboardShortcut::kMainMenuContinuePlaying: return KEYSYM(c);
-	case KeyboardShortcut::kMainMenuContinueEditing: return KEYSYM(w);
-	case KeyboardShortcut::kMainMenuEditorNew: return KEYSYM(k);
-	case KeyboardShortcut::kMainMenuEditorLoad: return KEYSYM(b);
-	case KeyboardShortcut::kMainMenuEditorRandom: return KEYSYM(y);
-	case KeyboardShortcut::kMainMenuLogin: return KEYSYM(u);
-	case KeyboardShortcut::kMainMenuLobby: return KEYSYM(j);
-	case KeyboardShortcut::kMainMenuLAN: return KEYSYM(p);
-	case KeyboardShortcut::kMainMenuQuit: return KEYSYM(ESCAPE);
-	case KeyboardShortcut::kMainMenuSP: return KEYSYM(s);
-	case KeyboardShortcut::kMainMenuMP: return KEYSYM(m);
-	case KeyboardShortcut::kMainMenuE: return KEYSYM(e);
-	case KeyboardShortcut::kGeneralGameBuildhelp: return KEYSYM(SPACE);
-	case KeyboardShortcut::kGeneralGameMinimap: return KEYSYM(m);
+	case KeyboardShortcut::kMainMenuNew:
+		return KEYSYM(n);
+	case KeyboardShortcut::kMainMenuLoad:
+		return KEYSYM(l);
+	case KeyboardShortcut::kMainMenuReplay:
+		return KEYSYM(r);
+	case KeyboardShortcut::kMainMenuRandomMatch:
+		return KEYSYM(z);
+	case KeyboardShortcut::kMainMenuTutorial:
+		return KEYSYM(t);
+	case KeyboardShortcut::kMainMenuCampaign:
+		return KEYSYM(h);
+	case KeyboardShortcut::kMainMenuOptions:
+		return KEYSYM(o);
+	case KeyboardShortcut::kMainMenuAbout:
+		return KEYSYM(F1);
+	case KeyboardShortcut::kMainMenuAddons:
+		return KEYSYM(a);
+	case KeyboardShortcut::kMainMenuContinuePlaying:
+		return KEYSYM(c);
+	case KeyboardShortcut::kMainMenuContinueEditing:
+		return KEYSYM(w);
+	case KeyboardShortcut::kMainMenuEditorNew:
+		return KEYSYM(k);
+	case KeyboardShortcut::kMainMenuEditorLoad:
+		return KEYSYM(b);
+	case KeyboardShortcut::kMainMenuEditorRandom:
+		return KEYSYM(y);
+	case KeyboardShortcut::kMainMenuLogin:
+		return KEYSYM(u);
+	case KeyboardShortcut::kMainMenuLobby:
+		return KEYSYM(j);
+	case KeyboardShortcut::kMainMenuLAN:
+		return KEYSYM(p);
+	case KeyboardShortcut::kMainMenuQuit:
+		return KEYSYM(ESCAPE);
+	case KeyboardShortcut::kMainMenuSP:
+		return KEYSYM(s);
+	case KeyboardShortcut::kMainMenuMP:
+		return KEYSYM(m);
+	case KeyboardShortcut::kMainMenuE:
+		return KEYSYM(e);
+	case KeyboardShortcut::kGeneralGameBuildhelp:
+		return KEYSYM(SPACE);
+	case KeyboardShortcut::kGeneralGameMinimap:
+		return KEYSYM(m);
 	}
 	NEVER_HERE();
 }
@@ -242,7 +300,8 @@ SDL_Keysym get_default_shortcut(const KeyboardShortcut id) {
 #undef KEYSYM
 
 void init_shortcuts(const bool force_defaults) {
-	for (KeyboardShortcut k = KeyboardShortcut::k__Begin; k <= KeyboardShortcut::k__End; k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+	for (KeyboardShortcut k = KeyboardShortcut::k__Begin; k <= KeyboardShortcut::k__End;
+	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 		shortcuts_[k] = get_default_shortcut(k);
 		if (force_defaults) {
 			write_shortcut(k, shortcuts_.at(k));

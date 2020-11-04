@@ -76,35 +76,41 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 constexpr int16_t kPadding = 4;
 
 struct ShortcutChooser : public UI::Window {
-ShortcutChooser(UI::Window& parent, const KeyboardShortcut c)
-: UI::Window(parent.get_parent(), UI::WindowStyle::kFsMenu, "choose_shortcut",
-                0,
-                0,
-                300,
-                200,
-                to_string(c)),
-                key(get_shortcut(c)) {
-                	UI::Box* box = new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+	ShortcutChooser(UI::Window& parent, const KeyboardShortcut c)
+	   : UI::Window(parent.get_parent(),
+	                UI::WindowStyle::kFsMenu,
+	                "choose_shortcut",
+	                0,
+	                0,
+	                300,
+	                200,
+	                to_string(c)),
+	     key(get_shortcut(c)) {
+		UI::Box* box =
+		   new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 
-                	UI::Button* reset = new UI::Button(box, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
-					reset->sigclicked.connect([this, c]() {
-						key = get_default_shortcut(c);
-						end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-					});
+		UI::Button* reset = new UI::Button(
+		   box, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
+		reset->sigclicked.connect([this, c]() {
+			key = get_default_shortcut(c);
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+		});
 
-                	UI::Button* cancel = new UI::Button(box, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
-					cancel->sigclicked.connect([this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
+		UI::Button* cancel =
+		   new UI::Button(box, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
+		cancel->sigclicked.connect(
+		   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
 
-                	UI::MultilineTextarea* txt = new UI::MultilineTextarea(box, 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
-	                  _("Press the new shortcut or close this window to cancel."),
-	                  UI::Align::kCenter);
+		UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+		   box, 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
+		   _("Press the new shortcut or close this window to cancel."), UI::Align::kCenter);
 
-                	box->add(txt, UI::Box::Resizing::kExpandBoth);
-                	box->add(reset, UI::Box::Resizing::kFullSize);
-                	box->add(cancel, UI::Box::Resizing::kFullSize);
-                	set_center_panel(box);
-                	center_to_parent();
-                }
+		box->add(txt, UI::Box::Resizing::kExpandBoth);
+		box->add(reset, UI::Box::Resizing::kFullSize);
+		box->add(cancel, UI::Box::Resizing::kFullSize);
+		set_center_panel(box);
+		center_to_parent();
+	}
 
 	SDL_Keysym key;
 
@@ -411,14 +417,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	training_wheels_box_.add(&training_wheels_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	training_wheels_box_.add_space(kPadding);
 
-	{ // Shortcuts
+	{  // Shortcuts
 		UI::TabPanel* keyboard_tabs = new UI::TabPanel(&box_keyboard_, UI::TabPanelStyle::kFsMenu);
 
-		UI::Box* keyboard_box_main = new UI::Box(keyboard_tabs, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical,
-				get_inner_w() / 2, get_inner_h() / 2, kPadding);
+		UI::Box* keyboard_box_main =
+		   new UI::Box(keyboard_tabs, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical,
+		               get_inner_w() / 2, get_inner_h() / 2, kPadding);
 		keyboard_box_main->set_scrolling(true);
-		UI::Box* keyboard_box_general = new UI::Box(keyboard_tabs, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical,
-				get_inner_w() / 2, get_inner_h() / 2, kPadding);
+		UI::Box* keyboard_box_general =
+		   new UI::Box(keyboard_tabs, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical,
+		               get_inner_w() / 2, get_inner_h() / 2, kPadding);
 		keyboard_box_general->set_scrolling(true);
 
 		std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
@@ -427,8 +435,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 			return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key)).str();
 		};
 
-		auto add_key = [this, generate_title, &all_keyboard_buttons](UI::Box& box, const KeyboardShortcut key) {
-			UI::Button* b = new UI::Button(&box, std::to_string(static_cast<int>(key)), 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu, generate_title(key));
+		auto add_key = [this, generate_title, &all_keyboard_buttons](
+		                  UI::Box& box, const KeyboardShortcut key) {
+			UI::Button* b = new UI::Button(&box, std::to_string(static_cast<int>(key)), 0, 0, 0, 0,
+			                               UI::ButtonStyle::kFsMenuMenu, generate_title(key));
 			all_keyboard_buttons.emplace(std::make_pair(key, b));
 			box.add(b, UI::Box::Resizing::kFullSize);
 			box.add_space(kPadding);
@@ -441,16 +451,20 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 			});
 		};
 
-		for (KeyboardShortcut k = KeyboardShortcut::kMainMenu__Begin; k <= KeyboardShortcut::kMainMenu__End;
-				k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+		for (KeyboardShortcut k = KeyboardShortcut::kMainMenu__Begin;
+		     k <= KeyboardShortcut::kMainMenu__End;
+		     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 			add_key(*keyboard_box_main, k);
 		}
-		for (KeyboardShortcut k = KeyboardShortcut::kGeneralGame__Begin; k <= KeyboardShortcut::kGeneralGame__End;
-				k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+		for (KeyboardShortcut k = KeyboardShortcut::kGeneralGame__Begin;
+		     k <= KeyboardShortcut::kGeneralGame__End;
+		     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
 			add_key(*keyboard_box_general, k);
 		}
 
-		UI::Button* reset_keys = new UI::Button(&box_keyboard_, "reset_keys", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to defaults"));
+		UI::Button* reset_keys =
+		   new UI::Button(&box_keyboard_, "reset_keys", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+		                  _("Reset to defaults"));
 		reset_keys->sigclicked.connect([all_keyboard_buttons, generate_title]() {
 			init_shortcuts(true);
 			for (auto& pair : all_keyboard_buttons) {
