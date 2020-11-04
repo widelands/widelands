@@ -956,35 +956,40 @@ void DefaultAI::late_initialization() {
 				 * */
 			}
 
-			// wells and fishers
-			if (!prod.get_ismine() && !prod.collected_resources().empty()) {
-				if (bh.needs_water()) {
-					log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kFisher);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   amazons_hunter_gatherers_hut
-					 *   atlanteans_fishers_house
-					 *   barbarians_fishers_hut
-					 *   empire_fishers_house
-					 *   frisians_fishers_house
-					 *
-					 * */
-				} else {
-					log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kWell);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   NOCOM missing: amazons_water_gatherers_hut
-					 *
-					 *   atlanteans_well
-					 *   barbarians_well
-					 *   empire_well
-					 *   frisians_well
-					 *
-					 * */
+			// fishers
+			if (bh.needs_water() && prod.collected_resources().count("resource_fish") == 1) {
+				log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
+				bo.set_is(BuildingAttribute::kFisher);
+				/* Buildings detected at the time of writing:
+				 *
+				 *   amazons_hunter_gatherers_hut
+				 *   atlanteans_fishers_house
+				 *   barbarians_fishers_hut
+				 *   empire_fishers_house
+				 *   frisians_fishers_house
+				 *
+				 * */
+			}
+
+			// wells
+			if (prod.input_wares().empty()) {
+				for (Widelands::DescriptionIndex ware_index : prod.output_ware_types()) {
+					if (tribe_->get_ware_descr(ware_index)->name() == "water") {
+						log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
+						bo.set_is(BuildingAttribute::kWell);
+						/* Buildings detected at the time of writing:
+						 *
+						 *   amazons_water_gatherers_hut
+						 *   atlanteans_well
+						 *   barbarians_well
+						 *   empire_well
+						 *   frisians_well
+						 *
+						 * */
+					}
 				}
 			}
+
 			bo.requires_supporters = !bo.supported_by_buildings.empty();
 			// Exclude basic buildings from strictly requiring supporters. We don't want them to wait
 			// for their supporting buildings before they get built.
