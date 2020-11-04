@@ -835,6 +835,10 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 			descriptions.increase_largest_workarea(pair.first);
 		}
 
+		if (building->get_built_over_immovable() != INVALID_INDEX) {
+			buildings_built_over_immovables_.insert(building);
+		}
+
 		ProductionSiteDescr* productionsite = dynamic_cast<ProductionSiteDescr*>(building);
 		if (productionsite != nullptr) {
 			// List productionsite for use below

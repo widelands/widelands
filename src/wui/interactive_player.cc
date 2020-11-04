@@ -460,6 +460,8 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
+constexpr float kBuildhelpOpacity = 0.3f;
+
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
@@ -553,16 +555,27 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			// Draw build help.
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
-				if (const auto* overlay =
-				       (!show_port_space && picking_starting_pos && !suited_as_starting_pos &&
-				        !buildhelp()) ?
-				          nullptr :
-				          get_buildhelp_overlay(show_port_space ? f->fcoords.field->maxcaps() :
-				                                                  picking_starting_pos ?
-				                                                  f->fcoords.field->nodecaps() :
-				                                                  plr.get_buildcaps(f->fcoords))) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
-					                   f->seeing == Widelands::VisibleState::kVisible ? 1.f : 0.3f);
+				Widelands::NodeCaps caps;
+				float opacity = f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
+				if (picking_starting_pos) {
+					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() : Widelands::CAPS_NONE;
+				} else if (show_port_space) {
+					caps = f->fcoords.field->maxcaps();
+				} else {
+					caps = plr.get_buildcaps(f->fcoords);
+					if (!(caps & Widelands::BUILDCAPS_SIZEMASK)) {
+						for (const Widelands::BuildingDescr* b : plr.tribe().buildings_built_over_immovables()) {
+							if (plr.check_can_build(*b, f->fcoords)) {
+								caps = f->fcoords.field->maxcaps();
+								opacity *= 2 * kBuildhelpOpacity;
+								break;
+							}
+						}
+					}
+				}
+
+				if (const auto* overlay = get_buildhelp_overlay(caps)) {
+					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
 				}
 			}
 
