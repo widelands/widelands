@@ -864,35 +864,41 @@ void DefaultAI::late_initialization() {
 			if (!prod.is_enhanced() && prod.input_wares().empty() &&
 			    !prod.output_ware_types().empty() && prod.created_immovables().empty() &&
 			    !prod.collected_immovables().empty()) {
-				// TODO(GunChleoc): We should lose the hard distinction between quarry and lumberjack,
-				// so that a building can be both
-				if (prod.supported_by_productionsites().empty()) {
-					log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kNeedsRocks);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   amazons_stonecutters_hut
-					 *   atlanteans_quarry
-					 *   barbarians_quarry
-					 *   empire_quarry
-					 *   frisians_quarry
-					 *
-					 * */
-				} else {
-					log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kLumberjack);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   amazons_woodcutters_hut
-					 *   atlanteans_woodcutters_house
-					 *   barbarians_lumberjacks_hut
-					 *   empire_lumberjacks_house
-					 *   frisians_woodcutters_house
-					 *
-					 *   frisians_fishers_house NOCOM wrong!
-					 *   frisians_collectors_house NOCOM wrong!
-					 *
-					 * */
+				bool produces_construction_material = false;
+				for (Widelands::DescriptionIndex output_idx : prod.output_ware_types()) {
+					if (tribe_->is_construction_material(output_idx)) {
+						produces_construction_material = true;
+						break;
+					}
+				}
+				if (produces_construction_material) {
+					// TODO(GunChleoc): We should lose the hard distinction between quarry and lumberjack,
+					// so that a building can be both
+					if (prod.supported_by_productionsites().empty()) {
+						log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
+						bo.set_is(BuildingAttribute::kNeedsRocks);
+						/* Buildings detected at the time of writing:
+						 *
+						 *   amazons_stonecutters_hut
+						 *   atlanteans_quarry
+						 *   barbarians_quarry
+						 *   empire_quarry
+						 *   frisians_quarry
+						 *
+						 * */
+					} else {
+						log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
+						bo.set_is(BuildingAttribute::kLumberjack);
+						/* Buildings detected at the time of writing:
+						 *
+						 *   amazons_woodcutters_hut
+						 *   atlanteans_woodcutters_house
+						 *   barbarians_lumberjacks_hut
+						 *   empire_lumberjacks_house
+						 *   frisians_woodcutters_house
+						 *
+						 * */
+					}
 				}
 			}
 
