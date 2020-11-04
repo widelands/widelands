@@ -1811,11 +1811,12 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 
 	const unsigned current_level = ts.checked_soldier_training().level;
 	assert(current_level != INVALID_INDEX);
-	assert(current_level < training_.level);
-	assert(ts.checked_soldier_training().attribute == training_.attribute);
 
 	ps.molog(game.get_gametime(), "  Training soldier's %u (%d to %d)",
 	         static_cast<unsigned int>(training_.attribute), current_level, training_.level);
+
+	assert(current_level < training_.level);
+	assert(ts.checked_soldier_training().attribute == training_.attribute);
 
 	bool training_done = false;
 	for (auto it = soldiers.begin(); !training_done; ++it) {

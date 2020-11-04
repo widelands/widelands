@@ -90,7 +90,9 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, hide_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
    METHOD(LuaPlayer, acquire_training_wheel_lock),
+   METHOD(LuaPlayer, release_training_wheel_lock),
    METHOD(LuaPlayer, mark_training_wheel_as_solved),
+   METHOD(LuaPlayer, skip_training_wheel),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
    METHOD(LuaPlayer, get_suitability),
@@ -720,10 +722,22 @@ int LuaPlayer::acquire_training_wheel_lock(lua_State* L) {
 	lua_pushboolean(L, success);
 	return 1;
 }
+
+/* RST
+   .. method:: release_training_wheel_lock()
+
+      Mark the current training wheel as no longer active without solving it.
+*/
+// UNTESTED
+int LuaPlayer::release_training_wheel_lock(lua_State* L) {
+	get_game(L).release_training_wheel_lock();
+	return 0;
+}
+
 /* RST
    .. method:: mark_training_wheel_as_solved(name)
 
-      Marks a global training wheel objective as solved.
+      Marks a global training wheel objective as solved. Also releases the lock.
 
       :arg name: name of the training wheel to be marked as solved
       :type name: :class:`string`
@@ -735,6 +749,25 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 	}
 
 	get_game(L).mark_training_wheel_as_solved(luaL_checkstring(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: skip_training_wheel(name)
+
+      Skips the execution of a training wheel and activates the training wheels that depend on it.
+      Also releases the lock.
+
+      :arg name: name of the training wheel to be skipped
+      :type name: :class:`string`
+*/
+// UNTESTED
+int LuaPlayer::skip_training_wheel(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "One argument is required for skip_training_wheel(string)");
+	}
+
+	get_game(L).skip_training_wheel(luaL_checkstring(L, 2));
 	return 0;
 }
 
