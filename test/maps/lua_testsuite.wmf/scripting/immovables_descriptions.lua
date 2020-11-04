@@ -397,7 +397,7 @@ function test_descr:test_immovable_support()
    assert_equal(1, #site_support)
    assert_equal("barbarians_rangers_hut", site_support[1].name)
    assert_equal(0, #site.supported_productionsites)
-   assert_equal(22, #site.collected_immovables) -- Trees in the world
+   assert_equal(34, #site.collected_immovables) -- Trees in the world
    assert_equal(0, #site.created_immovables)
 
    -- Barbarian Quarry has no support
