@@ -109,7 +109,7 @@ run(function()
    end
    target_field:indicate(false)
 
-   while not mapview.windows.field_action and not mapview.windows.field_action.buttons["build_flag"] do
+   while not mapview.windows.field_action or not mapview.windows.field_action.buttons["build_flag"] do
       sleep(100)
    end
    mapview.windows.field_action.buttons["build_flag"]:indicate(true)
