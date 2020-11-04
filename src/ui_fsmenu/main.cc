@@ -238,15 +238,15 @@ void FullscreenMenuMain::set_labels() {
 	editor_.clear();
 
 	singleplayer_.add(
-	   _("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"), "N");
+	   _("New Game"), MenuTarget::kNewGame, nullptr, false, _("Begin a new game"), shortcut_string_for(KeyboardShortcut::kMainMenuNew));
 	singleplayer_.add(_("New Random Game"), MenuTarget::kRandomGame, nullptr, false,
-	                  _("Create a new random match"), "Z");
+	                  _("Create a new random match"), shortcut_string_for(KeyboardShortcut::kMainMenuRandomMatch));
 	singleplayer_.add(
-	   _("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"), "H");
+	   _("Campaigns"), MenuTarget::kCampaign, nullptr, false, _("Play a campaign"), shortcut_string_for(KeyboardShortcut::kMainMenuCampaign));
 	singleplayer_.add(_("Tutorials"), MenuTarget::kTutorial, nullptr, false,
-	                  _("Play one of our beginners’ tutorials"), "T");
+	                  _("Play one of our beginners’ tutorials"), shortcut_string_for(KeyboardShortcut::kMainMenuTutorial));
 	singleplayer_.add(
-	   _("Load Game"), MenuTarget::kLoadGame, nullptr, false, _("Continue a saved game"), "L");
+	   _("Load Game"), MenuTarget::kLoadGame, nullptr, false, _("Continue a saved game"), shortcut_string_for(KeyboardShortcut::kMainMenuLoad));
 
 	// Refresh the Continue tooltip. The SavegameData must be reloaded after
 	// every language switch because it contains localized strings.
@@ -296,23 +296,23 @@ void FullscreenMenuMain::set_labels() {
 			        .as_font_tag(newest_singleplayer->savedatestring))
 			       .str())
 			      .str(),
-			   "C");
+			   shortcut_string_for(KeyboardShortcut::kMainMenuContinuePlaying));
 		}
 	}
 
 	multiplayer_.add(_("Online Game"), MenuTarget::kMetaserver, nullptr, false,
-	                 _("Join the Widelands lobby"), "J");
+	                 _("Join the Widelands lobby"), shortcut_string_for(KeyboardShortcut::kMainMenuLobby));
 	multiplayer_.add(_("Online Game Settings"), MenuTarget::kOnlineGameSettings, nullptr, false,
-	                 _("Log in as a registered user"), "U");
+	                 _("Log in as a registered user"), shortcut_string_for(KeyboardShortcut::kMainMenuLogin));
 	multiplayer_.add(
-	   _("LAN / Direct IP"), MenuTarget::kLan, nullptr, false, _("Play a private online game"), "P");
+	   _("LAN / Direct IP"), MenuTarget::kLan, nullptr, false, _("Play a private online game"), shortcut_string_for(KeyboardShortcut::kMainMenuLAN));
 
 	editor_.add(
-	   _("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"), "K");
+	   _("New Map"), MenuTarget::kEditorNew, nullptr, false, _("Create a new empty map"), shortcut_string_for(KeyboardShortcut::kMainMenuEditorNew));
 	editor_.add(_("Random Map"), MenuTarget::kEditorRandom, nullptr, false,
-	            _("Create a new random map"), "Y");
+	            _("Create a new random map"), shortcut_string_for(KeyboardShortcut::kMainMenuEditorRandom));
 	editor_.add(
-	   _("Load Map"), MenuTarget::kEditorLoad, nullptr, false, _("Edit an existing map"), "B");
+	   _("Load Map"), MenuTarget::kEditorLoad, nullptr, false, _("Edit an existing map"), shortcut_string_for(KeyboardShortcut::kMainMenuEditorLoad));
 
 	{
 		filename_for_continue_editing_ = "";
@@ -353,7 +353,7 @@ void FullscreenMenuMain::set_labels() {
 			                 .as_font_tag(last_edited->first.description))
 			                .str())
 			               .str(),
-			            "W");
+			            shortcut_string_for(KeyboardShortcut::kMainMenuContinueEditing));
 		}
 	}
 
@@ -361,29 +361,29 @@ void FullscreenMenuMain::set_labels() {
 	multiplayer_.set_label(_("Multiplayer…"));
 	editor_.set_label(_("Editor…"));
 	singleplayer_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Begin or load a single-player campaign or free game"), "S", UI::PanelStyle::kFsMenu));
+	   _("Begin or load a single-player campaign or free game"), shortcut_string_for(KeyboardShortcut::kMainMenuSP), UI::PanelStyle::kFsMenu));
 	multiplayer_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Play with your friends over the internet"), "M", UI::PanelStyle::kFsMenu));
+	   _("Play with your friends over the internet"), shortcut_string_for(KeyboardShortcut::kMainMenuMP), UI::PanelStyle::kFsMenu));
 	editor_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Launch the map editor"), "E", UI::PanelStyle::kFsMenu));
+	   as_tooltip_text_with_hotkey(_("Launch the map editor"), shortcut_string_for(KeyboardShortcut::kMainMenuE), UI::PanelStyle::kFsMenu));
 
 	replay_.set_title(_("Watch Replay"));
 	replay_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Watch the replay of an old game"), "R", UI::PanelStyle::kFsMenu));
+	   _("Watch the replay of an old game"), shortcut_string_for(KeyboardShortcut::kMainMenuReplay), UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
 	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
 	   as_tooltip_text_with_hotkey(
-	      "This feature is still under development", "A", UI::PanelStyle::kFsMenu));
+	      "This feature is still under development", shortcut_string_for(KeyboardShortcut::kMainMenuAddons), UI::PanelStyle::kFsMenu));
 	options_.set_title(_("Options"));
 	options_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Technical and game-related settings"), "O", UI::PanelStyle::kFsMenu));
+	   _("Technical and game-related settings"), shortcut_string_for(KeyboardShortcut::kMainMenuOptions), UI::PanelStyle::kFsMenu));
 	about_.set_title(_("About Widelands"));
 	about_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Readme, License, and Credits"), pgettext("hotkey", "F1"), UI::PanelStyle::kFsMenu));
+	   _("Readme, License, and Credits"), shortcut_string_for(KeyboardShortcut::kMainMenuAbout), UI::PanelStyle::kFsMenu));
 	exit_.set_title(_("Exit Widelands"));
 	exit_.set_tooltip(as_tooltip_text_with_hotkey(
-	   _("Quit the game"), pgettext("hotkey", "Esc"), UI::PanelStyle::kFsMenu));
+	   _("Quit the game"), shortcut_string_for(KeyboardShortcut::kMainMenuQuit), UI::PanelStyle::kFsMenu));
 
 	version_.set_text(
 	   /** TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release" */
@@ -422,87 +422,69 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			init_time_ = kNoSplash;
 			fell_through = true;
 		}
-		switch (code.sym) {
-		case SDLK_ESCAPE:
+
+#define CHECK_SHORTCUT(key, returnval) \
+		if (matches_shortcut(KeyboardShortcut::kMainMenu##key, code)) { \
+			end_modal<MenuTarget>(MenuTarget::returnval); \
+			return true; \
+		}
+
+		CHECK_SHORTCUT(New, kNewGame)
+		CHECK_SHORTCUT(Load, kLoadGame)
+		CHECK_SHORTCUT(Replay, kReplay)
+		CHECK_SHORTCUT(Tutorial, kTutorial)
+		CHECK_SHORTCUT(RandomMatch, kRandomGame)
+		CHECK_SHORTCUT(Campaign, kCampaign)
+		CHECK_SHORTCUT(Lobby, kMetaserver)
+		CHECK_SHORTCUT(LAN, kLan)
+		// CHECK_SHORTCUT(Addons, kAddOns)
+		CHECK_SHORTCUT(Options, kOptions)
+		CHECK_SHORTCUT(About, kAbout)
+		CHECK_SHORTCUT(EditorNew, kEditorNew)
+		CHECK_SHORTCUT(EditorRandom, kEditorRandom)
+		CHECK_SHORTCUT(EditorLoad, kEditorLoad)
+#undef CHECK_SHORTCUT
+
+		if (matches_shortcut(KeyboardShortcut::kMainMenuSP, code)) {
+			singleplayer_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuMP, code)) {
+			multiplayer_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuE, code)) {
+			editor_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuQuit, code)) {
 			if (!fell_through) {
 				end_modal<MenuTarget>(MenuTarget::kBack);
 				return true;
 			}
-			break;
-		case SDLK_t:
-			end_modal<MenuTarget>(MenuTarget::kTutorial);
-			return true;
-		case SDLK_c:
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuContinuePlaying, code)) {
 			if (!filename_for_continue_playing_.empty()) {
 				end_modal<MenuTarget>(MenuTarget::kContinueLastsave);
 				return true;
 			}
-			break;
-		case SDLK_w:
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuContinueEditing, code)) {
 			if (!filename_for_continue_editing_.empty()) {
 				end_modal<MenuTarget>(MenuTarget::kEditorContinue);
 				return true;
 			}
-			break;
-		case SDLK_n:
-			end_modal<MenuTarget>(MenuTarget::kNewGame);
-			return true;
-		case SDLK_z:
-			end_modal<MenuTarget>(MenuTarget::kRandomGame);
-			return true;
-		case SDLK_h:
-			end_modal<MenuTarget>(MenuTarget::kCampaign);
-			return true;
-		case SDLK_l:
-			end_modal<MenuTarget>(MenuTarget::kLoadGame);
-			return true;
-		case SDLK_j:
-			end_modal<MenuTarget>(MenuTarget::kMetaserver);
-			return true;
-		case SDLK_u:
+		}
+		if (matches_shortcut(KeyboardShortcut::kMainMenuLogin, code)) {
 			show_internet_login();
 			return true;
-		case SDLK_p:
-			end_modal<MenuTarget>(MenuTarget::kLan);
-			return true;
-		/* case SDLK_a:
-			end_modal<MenuTarget>(MenuTarget::kAddOns);
-			return true; */
-		case SDLK_o:
-			end_modal<MenuTarget>(MenuTarget::kOptions);
-			return true;
-		case SDLK_r:
-			end_modal<MenuTarget>(MenuTarget::kReplay);
-			return true;
-		case SDLK_F1:
-			end_modal<MenuTarget>(MenuTarget::kAbout);
-			return true;
-		case SDLK_k:
-			end_modal<MenuTarget>(MenuTarget::kEditorNew);
-			return true;
-		case SDLK_y:
-			end_modal<MenuTarget>(MenuTarget::kEditorRandom);
-			return true;
-		case SDLK_b:
-			end_modal<MenuTarget>(MenuTarget::kEditorLoad);
-			return true;
-		case SDLK_s:
-			singleplayer_.toggle();
-			return true;
-		case SDLK_m:
-			multiplayer_.toggle();
-			return true;
-		case SDLK_e:
-			editor_.toggle();
-			return true;
-		case SDLK_F3:
+		}
+		if (code.sym == SDLK_F3) {
 			// Easter egg: Press F3 to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
 			                                                         last_image_exchange_time_);
 			return true;
-		default:
-			break;
 		}
 	}
 	return UI::Panel::handle_key(down, code);

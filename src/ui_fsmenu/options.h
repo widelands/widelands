@@ -130,6 +130,7 @@ private:
 	UI::Box box_saving_;
 	UI::Box box_newgame_;
 	UI::Box box_ingame_;
+	UI::Box box_keyboard_;
 
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;

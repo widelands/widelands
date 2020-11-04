@@ -20,6 +20,8 @@
 #ifndef WL_WLAPPLICATION_OPTIONS_H
 #define WL_WLAPPLICATION_OPTIONS_H
 
+#include <SDL_keyboard.h>
+
 #include "io/profile.h"
 
 /*
@@ -73,6 +75,50 @@ void set_config_string(const std::string& name, const std::string& value);
 void set_config_string(const std::string& section,
                        const std::string& name,
                        const std::string& value);
+
+// Keyboard shortcuts. The order in which they are defined here
+// defines the order in which they appear in the options menu.
+enum class KeyboardShortcut : uint16_t {
+	k__Begin = 0,
+
+	kMainMenu__Begin = k__Begin,
+	kMainMenuSP = kMainMenu__Begin,
+	kMainMenuNew,
+	kMainMenuRandomMatch,
+	kMainMenuCampaign,
+	kMainMenuTutorial,
+	kMainMenuLoad,
+	kMainMenuContinuePlaying,
+	kMainMenuMP,
+	kMainMenuLobby,
+	kMainMenuLogin,
+	kMainMenuLAN,
+	kMainMenuE,
+	kMainMenuEditorNew,
+	kMainMenuEditorRandom,
+	kMainMenuEditorLoad,
+	kMainMenuContinueEditing,
+	kMainMenuReplay,
+	kMainMenuOptions,
+	kMainMenuAddons,
+	kMainMenuAbout,
+	kMainMenuQuit,
+	kMainMenu__End = kMainMenuQuit,
+
+	kGeneralGame__Begin = kMainMenu__End + 1,
+	kGeneralGameBuildhelp = kGeneralGame__Begin,
+	kGeneralGameMinimap,
+	kGeneralGame__End = kGeneralGameMinimap,
+
+	k__End = kGeneralGame__End,
+};
+void set_shortcut(KeyboardShortcut, SDL_Keysym);
+SDL_Keysym get_shortcut(KeyboardShortcut);
+SDL_Keysym get_default_shortcut(KeyboardShortcut);
+bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
+void init_shortcuts(bool force_defaults = false);
+std::string to_string(KeyboardShortcut);
+std::string shortcut_string_for(KeyboardShortcut);
 
 /*
  * Sets the directory where to read/write kConfigFile.

@@ -74,6 +74,50 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 }  // namespace
 
 constexpr int16_t kPadding = 4;
+
+struct ShortcutChooser : public UI::Window {
+ShortcutChooser(UI::Window& parent, const KeyboardShortcut c)
+: UI::Window(parent.get_parent(), UI::WindowStyle::kFsMenu, "choose_shortcut",
+                0,
+                0,
+                300,
+                200,
+                to_string(c)),
+                key(get_shortcut(c)) {
+                	UI::Box* box = new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+
+                	UI::Button* reset = new UI::Button(box, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
+					reset->sigclicked.connect([this, c]() {
+						key = get_default_shortcut(c);
+						end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+					});
+
+                	UI::Button* cancel = new UI::Button(box, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
+					cancel->sigclicked.connect([this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
+
+                	UI::MultilineTextarea* txt = new UI::MultilineTextarea(box, 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
+	                  _("Press the new shortcut or close this window to cancel."),
+	                  UI::Align::kCenter);
+
+                	box->add(txt, UI::Box::Resizing::kExpandBoth);
+                	box->add(reset, UI::Box::Resizing::kFullSize);
+                	box->add(cancel, UI::Box::Resizing::kFullSize);
+                	set_center_panel(box);
+                	center_to_parent();
+                }
+
+	SDL_Keysym key;
+
+	bool handle_key(const bool down, const SDL_Keysym code) override {
+		if (!down) {
+			return false;
+		}
+		key = code;
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+		return true;
+	}
+};
+
 FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                              OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
@@ -102,6 +146,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_keyboard_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
      language_dropdown_(&box_interface_left_,
@@ -312,6 +357,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_newgame", _("New Games"), &box_newgame_, "");
 	tabs_.add("options_ingame", _("In-Game"), &box_ingame_, "");
+	tabs_.add("options_keyboard", _("Shortcuts"), &box_keyboard_, "");
 
 	// We want the last active tab when "Apply" was clicked.
 	if (os_.active_tab < tabs_.tabs().size()) {
@@ -364,6 +410,59 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	training_wheels_box_.add_inf_space();
 	training_wheels_box_.add(&training_wheels_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	training_wheels_box_.add_space(kPadding);
+
+	{ // Shortcuts
+		UI::TabPanel* keyboard_tabs = new UI::TabPanel(&box_keyboard_, UI::TabPanelStyle::kFsMenu);
+
+		UI::Box* keyboard_box_main = new UI::Box(keyboard_tabs, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical,
+				get_inner_w() / 2, get_inner_h() / 2, kPadding);
+		keyboard_box_main->set_scrolling(true);
+		UI::Box* keyboard_box_general = new UI::Box(keyboard_tabs, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical,
+				get_inner_w() / 2, get_inner_h() / 2, kPadding);
+		keyboard_box_general->set_scrolling(true);
+
+		std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
+
+		auto generate_title = [](const KeyboardShortcut key) {
+			return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key)).str();
+		};
+
+		auto add_key = [this, generate_title, &all_keyboard_buttons](UI::Box& box, const KeyboardShortcut key) {
+			UI::Button* b = new UI::Button(&box, std::to_string(static_cast<int>(key)), 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu, generate_title(key));
+			all_keyboard_buttons.emplace(std::make_pair(key, b));
+			box.add(b, UI::Box::Resizing::kFullSize);
+			box.add_space(kPadding);
+			b->sigclicked.connect([this, b, key, generate_title]() {
+				ShortcutChooser c(*this, key);
+				if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+					set_shortcut(key, c.key);
+					b->set_title(generate_title(key));
+				}
+			});
+		};
+
+		for (KeyboardShortcut k = KeyboardShortcut::kMainMenu__Begin; k <= KeyboardShortcut::kMainMenu__End;
+				k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+			add_key(*keyboard_box_main, k);
+		}
+		for (KeyboardShortcut k = KeyboardShortcut::kGeneralGame__Begin; k <= KeyboardShortcut::kGeneralGame__End;
+				k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
+			add_key(*keyboard_box_general, k);
+		}
+
+		UI::Button* reset_keys = new UI::Button(&box_keyboard_, "reset_keys", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to defaults"));
+		reset_keys->sigclicked.connect([all_keyboard_buttons, generate_title]() {
+			init_shortcuts(true);
+			for (auto& pair : all_keyboard_buttons) {
+				pair.second->set_title(generate_title(pair.first));
+			}
+		});
+
+		keyboard_tabs->add("main", _("Main Menu"), keyboard_box_main, "");
+		keyboard_tabs->add("main", _("Game – General"), keyboard_box_general, "");
+		box_keyboard_.add(keyboard_tabs, UI::Box::Resizing::kExpandBoth);
+		box_keyboard_.add(reset_keys, UI::Box::Resizing::kFullSize);
+	}
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
