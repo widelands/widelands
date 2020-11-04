@@ -73,7 +73,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	list_box->set_scrolling(true);
 	main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
-	// If some but not all wheels are solved, the Mark/Unmark button should be labelled "Unmark All" instead of "Mark All" initially.
+	// If some but not all wheels are solved, the Mark/Unmark button should be labelled "Unmark All"
+	// instead of "Mark All" initially.
 	bool has_solved = false;
 	bool has_unsolved = false;
 	for (const auto& objective : objectives) {
@@ -172,7 +173,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	// Make all buttons the same width
 	desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()),
-	                                   std::max(desired_width, ok_button->get_w()));
+	                         std::max(desired_width, ok_button->get_w()));
 	cancel_button->set_desired_size(desired_width, cancel_button->get_h());
 	reset_button->set_desired_size(desired_width, reset_button->get_h());
 	mark_unmark_button_->set_desired_size(desired_width, mark_unmark_button_->get_h());
