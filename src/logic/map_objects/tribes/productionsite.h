@@ -98,6 +98,11 @@ public:
 	const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
+	/// Map objects that this production site needs nearby according to attribute
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	needed_attributes() const {
+		return needed_attributes_;
+	}
 	/// Map objects that are collected from the map by this production site according to attribute
 	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	collected_attributes() const {
@@ -139,6 +144,10 @@ public:
 	/// The immovables that this production site needs to collect from the map
 	const std::set<std::string>& collected_immovables() const {
 		return collected_immovables_;
+	}
+	/// Set that this production site makes use of the given immovable nearby
+	void add_needed_immovable(const std::string& immovablename) {
+		needed_immovables_.insert(immovablename);
 	}
 	/// Set that this production site needs to collect the given immovable from the map
 	void add_collected_immovable(const std::string& immovablename) {
@@ -218,6 +227,12 @@ protected:
 		output_worker_types_.insert(index);
 	}
 
+	/// Set that this production site needs to be placed near map objects with the given attribute
+	void add_needed_attribute(
+	   std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+		needed_attributes_.insert(attribute_info);
+	}
+
 	/// Set that this production site needs to collect map objects with the given attribute from the
 	/// map
 	void add_collected_attribute(
@@ -246,12 +261,14 @@ private:
 	BillOfMaterials input_workers_;
 	Output output_ware_types_;
 	Output output_worker_types_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> needed_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
 	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;
+	std::set<std::string> needed_immovables_;
 	std::set<std::string> collected_immovables_;
 	std::set<std::string> created_immovables_;
 	Programs programs_;

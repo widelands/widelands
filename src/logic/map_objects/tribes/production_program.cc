@@ -960,19 +960,22 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		}
 	}
 
-	for (const auto& attribute_info : workerprogram->collected_attributes()) {
+	for (const auto& attribute_info : main_worker_descr.needed_attributes()) {
+		descr->add_needed_attribute(attribute_info);
+	}
+	for (const auto& attribute_info : main_worker_descr.collected_attributes()) {
 		descr->add_collected_attribute(attribute_info);
 	}
-	for (const auto& attribute_info : workerprogram->created_attributes()) {
+	for (const auto& attribute_info : main_worker_descr.created_attributes()) {
 		descr->add_created_attribute(attribute_info);
 	}
-	for (const std::string& resourcename : workerprogram->collected_resources()) {
+	for (const std::string& resourcename : main_worker_descr.collected_resources()) {
 		descr->add_collected_resource(resourcename);
 	}
-	for (const std::string& resourcename : workerprogram->created_resources()) {
+	for (const std::string& resourcename : main_worker_descr.created_resources()) {
 		descr->add_created_resource(resourcename);
 	}
-	for (const std::string& bobname : workerprogram->created_bobs()) {
+	for (const std::string& bobname : main_worker_descr.created_bobs()) {
 		descr->add_created_bob(bobname);
 	}
 }
@@ -1963,7 +1966,7 @@ ProductionProgram::ActConstruct::ActConstruct(const std::vector<std::string>& ar
 	const WorkerDescr& main_worker_descr =
 	   *descriptions.get_worker_descr(descr->working_positions().front().first);
 	for (const auto& attribute_info :
-	     main_worker_descr.get_program(workerprogram)->created_attributes()) {
+	     main_worker_descr.created_attributes()) {
 		descr->add_created_attribute(attribute_info);
 	}
 }

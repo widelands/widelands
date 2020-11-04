@@ -216,6 +216,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 void ProductionSiteDescr::clear_attributes() {
 	created_attributes_.clear();
 	collected_attributes_.clear();
+	needed_attributes_.clear();
 }
 
 /**

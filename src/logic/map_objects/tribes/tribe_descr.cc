@@ -876,7 +876,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 	// Find all attributes that we need to collect from map
 	std::set<MapObjectDescr::AttributeIndex> needed_attributes;
 	for (ProductionSiteDescr* prod : productionsites) {
-		for (const auto& attribinfo : prod->collected_attributes()) {
+		for (const auto& attribinfo : prod->needed_attributes()) {
 			const MapObjectType mapobjecttype = attribinfo.first;
 			const MapObjectDescr::AttributeIndex attribute_id = attribinfo.second;
 			needed_attributes.insert(attribute_id);
@@ -887,7 +887,10 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				for (DescriptionIndex i = 0; i < all_immovables.size(); ++i) {
 					const ImmovableDescr& immovable_descr = all_immovables.get(i);
 					if (immovable_descr.has_attribute(attribute_id)) {
-						prod->add_collected_immovable(immovable_descr.name());
+						prod->add_needed_immovable(immovable_descr.name());
+						if (prod->collected_attributes().count(attribinfo)) {
+							prod->add_collected_immovable(immovable_descr.name());
+						}
 						const_cast<ImmovableDescr&>(immovable_descr)
 						   .add_collected_by(descriptions, prod->name());
 					}

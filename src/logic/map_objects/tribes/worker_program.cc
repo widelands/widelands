@@ -106,7 +106,7 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
  */
 WorkerProgram::WorkerProgram(const std::string& init_name,
                              const LuaTable& actions_table,
-                             const WorkerDescr& worker,
+                             WorkerDescr& worker,
                              Descriptions& descriptions)
    : MapObjectProgram(init_name), worker_(worker), descriptions_(descriptions) {
 
@@ -360,7 +360,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	}
 
 	if (act->iparam2 >= 0) {
-		collected_attributes_.insert(
+		worker_.needed_attributes_.insert(
 		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
 		                  act->iparam2));
 	}
@@ -512,9 +512,9 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 		   NoteMapObjectDescription(act->sparam1, NoteMapObjectDescription::LoadType::kObject));
 		if (act->iparam4 == 1) {
 			// breeds
-			created_resources_.insert(act->sparam1);
+			worker_.created_resources_.insert(act->sparam1);
 		} else {
-			collected_resources_.insert(act->sparam1);
+			worker_.collected_resources_.insert(act->sparam1);
 		}
 	}
 }
@@ -660,6 +660,11 @@ void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std:
 
 	act->function = &Worker::run_callobject;
 	act->sparam1 = cmd[0];
+
+	// TODO(Gunchleoc): We might need to dig into the called object's program too, but this is good enough for now.
+	if (!worker_.needed_attributes_.empty()) {
+		worker_.collected_attributes_.insert(worker_.needed_attributes_.begin(), worker_.needed_attributes_.end());
+	}
 }
 
 /* RST
@@ -738,7 +743,7 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		   NoteMapObjectDescription(attrib_name, NoteMapObjectDescription::LoadType::kAttribute));
 		act->sparamv.push_back(attrib_name);
 		// get_attribute_id will throw a GameDataError if the attribute doesn't exist.
-		created_attributes_.insert(
+		worker_.created_attributes_.insert(
 		   std::make_pair(MapObjectType::IMMOVABLE, ImmovableDescr::get_attribute_id(attrib_name)));
 	}
 }
@@ -782,7 +787,7 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 
 	// Register created bobs
 	for (const std::string& bobname : act->sparamv) {
-		created_bobs_.insert(bobname);
+		worker_.created_bobs_.insert(bobname);
 		Notifications::publish(
 		   NoteMapObjectDescription(bobname, NoteMapObjectDescription::LoadType::kObject));
 	}
@@ -844,6 +849,9 @@ removeobject
 */
 void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
 	act->function = &Worker::run_removeobject;
+	if (!worker_.needed_attributes_.empty()) {
+		worker_.collected_attributes_.insert(worker_.needed_attributes_.begin(), worker_.needed_attributes_.end());
+	}
 }
 
 /* RST
