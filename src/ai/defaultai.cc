@@ -930,20 +930,34 @@ void DefaultAI::late_initialization() {
 			// Forester/Ranger
 			if (!prod.is_enhanced() && prod.input_wares().empty() &&
 			    prod.output_ware_types().empty() && !prod.created_immovables().empty() &&
-			    prod.collected_immovables().empty()) {
-				log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
-				bo.set_is(BuildingAttribute::kRanger);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   amazons_jungle_preservers_hut
-				 *   atlanteans_foresters_house
-				 *   barbarians_rangers_hut
-				 *   empire_foresters_house
-				 *   frisians_foresters_house
-				 *
-				 *  NOCOM frisians_berry_farm wrong!
-				 *
-				 * */
+			    prod.collected_immovables().empty() && !prod.supported_productionsites().empty()) {
+
+				bool produces_construction_material = false;
+
+				for (const std::string& supported_name : prod.supported_productionsites()) {
+					const Widelands::ProductionSiteDescr* supported_site =
+							dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(supported_name)));
+					for (Widelands::DescriptionIndex output_idx : supported_site->output_ware_types()) {
+						if (tribe_->is_construction_material(output_idx)) {
+							produces_construction_material = true;
+							break;
+						}
+					}
+				}
+
+				if (produces_construction_material) {
+					log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
+					bo.set_is(BuildingAttribute::kRanger);
+					/* Buildings detected at the time of writing:
+					 *
+					 *   amazons_jungle_preservers_hut
+					 *   atlanteans_foresters_house
+					 *   barbarians_rangers_hut
+					 *   empire_foresters_house
+					 *   frisians_foresters_house
+					 *
+					 * */
+				}
 			}
 
 			// here we identify hunters
