@@ -114,9 +114,6 @@ public:
 		return created_attributes_;
 	}
 
-	/// We only need the attributes during tribes initialization
-	void clear_attributes();
-
 	/// The resources that this production site needs to collect from the map
 	const std::set<std::string>& collected_resources() const {
 		return collected_resources_;

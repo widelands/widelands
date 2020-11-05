@@ -213,12 +213,6 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
    : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, descriptions) {
 }
 
-void ProductionSiteDescr::clear_attributes() {
-	created_attributes_.clear();
-	collected_attributes_.clear();
-	needed_attributes_.clear();
-}
-
 /**
  * Get the program of the given name.
  */

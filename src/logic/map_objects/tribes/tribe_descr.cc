@@ -971,8 +971,6 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 		}
-		// We're done with this site's attributes, let's get some memory back
-		prod->clear_attributes();
 
 		// Add deduced bobs & immovables
 		for (const std::string& bob_name : deduced_bobs) {

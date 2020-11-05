@@ -360,9 +360,8 @@ struct BuildableField {
 	bool near_border;
 	uint16_t unowned_mines_spots_nearby;
 	uint16_t unowned_iron_mines_nearby;
-	uint8_t trees_nearby;
-	uint8_t bushes_nearby;
-	uint8_t rocks_nearby;
+	// NOCOM
+	std::map<BuildingAttribute, uint8_t> immovables_nearby;
 	int16_t water_nearby;
 	int16_t open_water_nearby;
 	int16_t distant_water;

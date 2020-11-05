@@ -375,6 +375,9 @@ private:
 	// id of iron as resource to identify iron mines in mines_per_type map
 	int32_t iron_resource_id = Widelands::INVALID_INDEX;
 
+	// NOCOM
+	std::map<BuildingAttribute, std::set<Widelands::MapObjectDescr::AttributeIndex>> attributes_;
+
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
 	std::vector<std::string> const armors_and_weapons = {

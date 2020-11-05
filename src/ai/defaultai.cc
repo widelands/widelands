@@ -622,6 +622,8 @@ void DefaultAI::late_initialization() {
 		persistent_data->remaining_basic_buildings.clear();
 	}
 
+	attributes_.clear();
+
 	for (Widelands::DescriptionIndex building_index = 0; building_index < nr_buildings;
 	     ++building_index) {
 		const Widelands::BuildingDescr& bld = *tribe_->get_building_descr(building_index);
@@ -867,14 +869,17 @@ void DefaultAI::late_initialization() {
 			}
 
 			// Some important buildings are identified
-			if (!prod.is_enhanced() && prod.input_wares().empty() &&
+			// NOCOM !prod.is_enhanced() && Removing this adds amazons_rare_tree_cutters_hut
+			if (prod.input_wares().empty() &&
 			    !prod.output_ware_types().empty() && prod.created_immovables().empty() &&
 			    !prod.collected_immovables().empty()) {
 				bool produces_construction_material = false;
+				bool produces_non_construction_material = false;
 				for (Widelands::DescriptionIndex output_idx : prod.output_ware_types()) {
 					if (tribe_->is_construction_material(output_idx)) {
 						produces_construction_material = true;
-						break;
+					} else {
+						produces_non_construction_material = true;
 					}
 				}
 				if (produces_construction_material) {
@@ -892,6 +897,9 @@ void DefaultAI::late_initialization() {
 						 *   frisians_quarry
 						 *
 						 * */
+						for (const auto& attribute : prod.collected_attributes()) {
+							attributes_[BuildingAttribute::kNeedsRocks].insert(attribute.second);
+						}
 					} else {
 						log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kLumberjack);
@@ -904,54 +912,50 @@ void DefaultAI::late_initialization() {
 						 *   frisians_woodcutters_house
 						 *
 						 * */
+						for (const auto& attribute : prod.collected_attributes()) {
+							attributes_[BuildingAttribute::kLumberjack].insert(attribute.second);
+						}
 					}
 				}
-			}
+				if (produces_non_construction_material) {
+					log_dbg_time(
+					   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
+					bo.set_is(BuildingAttribute::kNeedsBerry);
+					/* Buildings detected at the time of writing:
+					 *
+					 *   frisians_collectors_house
+					 *
+					 * */
 
-			// Woodcutters/Lumberjacks, Quarries and Collectors are a buildings that collect an
-			// immovable attribute and create no immovables themselves
-			if (prod.created_immovables().empty()) {
-				// TODO(GunChleoc): remove hard-coding from the checks
-				Widelands::MapObjectDescr::AttributeIndex bush_attribute =
-				   Widelands::MapObjectDescr::get_attribute_id("ripe_bush");
-
-				for (const std::string& immovable_name : prod.collected_immovables()) {
-					const Widelands::ImmovableDescr* immovable_descr =
-					   tribe_->get_immovable_descr(tribe_->immovable_index(immovable_name));
-
-					if (immovable_descr->has_attribute(bush_attribute)) {
-						log_dbg_time(
-						   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
-						bo.set_is(BuildingAttribute::kNeedsBerry);
-						/* Buildings detected at the time of writing:
-						 *
-						 *   frisians_collectors_house
-						 *
-						 * */
-						break;
+					for (const auto& attribute : prod.collected_attributes()) {
+						attributes_[BuildingAttribute::kNeedsBerry].insert(attribute.second);
 					}
 				}
 			}
 
 			// Forester/Ranger
-			if (!prod.is_enhanced() && prod.input_wares().empty() &&
+			// NOCOM we're not getting any amazons_rare_tree_plantation. Do a second loop to define the rangers as any building that supports a lumberjack.
+			// NOCOM !prod.is_enhanced() &&
+			if (prod.input_wares().empty() && prod.collected_immovables().empty() &&
 			    prod.output_ware_types().empty() && !prod.created_immovables().empty() &&
-			    prod.collected_immovables().empty() && !prod.supported_productionsites().empty()) {
+			    !prod.supported_productionsites().empty()) {
 
-				bool produces_construction_material = false;
+				bool supports_construction_material = false;
 
 				for (const std::string& supported_name : prod.supported_productionsites()) {
 					const Widelands::ProductionSiteDescr* supported_site =
 							dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(supported_name)));
+					log_dbg("NOCOM potential ranger %s supports %s", bo.name, supported_name.c_str());
 					for (Widelands::DescriptionIndex output_idx : supported_site->output_ware_types()) {
+						log_dbg(" -> %s", tribe_->get_ware_descr(output_idx)->name().c_str());
 						if (tribe_->is_construction_material(output_idx)) {
-							produces_construction_material = true;
+							supports_construction_material = true;
 							break;
 						}
 					}
 				}
 
-				if (produces_construction_material) {
+				if (supports_construction_material) {
 					log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
 					bo.set_is(BuildingAttribute::kRanger);
 					/* Buildings detected at the time of writing:
@@ -963,6 +967,9 @@ void DefaultAI::late_initialization() {
 					 *   frisians_foresters_house
 					 *
 					 * */
+					for (const auto& attribute : prod.created_attributes()) {
+						attributes_[BuildingAttribute::kRanger].insert(attribute.second);
+					}
 				}
 			}
 
@@ -1793,18 +1800,24 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   map.find_bobs(game(), Widelands::Area<Widelands::FCoords>(field.coords, kProductionArea),
 		                 nullptr, Widelands::FindBobCritter());
 
-		// Rocks are not renewable, we will count them only if previous state is nonzero
-		// TODO(GunChleoc): Get rid of the hard-coded attribute
-		if (field.rocks_nearby > 0) {
-			field.rocks_nearby = map.find_immovables(
-			   game(),
-			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
-			   nullptr,
-			   Widelands::FindImmovableAttribute(
-			      Widelands::MapObjectDescr::get_attribute_id("rocks")));
+		// Counting trees, rocks, berry bushes nearby
+		for (const auto& attribute_info : attributes_) {
+			// Rocks are not renewable, we will count them only if previous state is nonzero
+			if (attribute_info.first == BuildingAttribute::kNeedsRocks && field.immovables_nearby[attribute_info.first] == 0) {
+				continue;
+			}
+			field.immovables_nearby[attribute_info.first] = 0;
+			for (const auto& attribute_index : attribute_info.second) {
+				field.immovables_nearby[attribute_info.first] += map.find_immovables(
+				   game(),
+				   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
+				   nullptr, Widelands::FindImmovableAttribute(attribute_index));
+			}
+		}
 
-			// adding 5 if rocks found
-			field.rocks_nearby = (field.rocks_nearby > 0) ? field.rocks_nearby + 2 : 0;
+		// adding 2 if rocks found
+		if (field.immovables_nearby[BuildingAttribute::kNeedsRocks] > 0) {
+			field.immovables_nearby[BuildingAttribute::kNeedsRocks] += 2;
 		}
 
 		// ground water is not renewable and its amount can only fall, we will count them only if
@@ -1812,22 +1825,6 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		if (field.ground_water > 0) {
 			field.ground_water = field.coords.field->get_resources_amount();
 		}
-
-		// Counting trees nearby
-		// TODO(GunChleoc): Get rid of the hard-coded attributes
-		field.trees_nearby = map.find_immovables(
-		   game(),
-		   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
-		   nullptr,
-		   Widelands::FindImmovableAttribute(Widelands::MapObjectDescr::get_attribute_id("tree")));
-
-		// Counting bushes nearby. Only the Frisians have this, so we need to create the attribute if
-		// it doesn't exist.
-		int32_t const bush_attr = Widelands::MapObjectDescr::get_attribute_id("ripe_bush", true);
-		field.bushes_nearby = map.find_immovables(
-		   game(),
-		   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
-		   nullptr, Widelands::FindImmovableAttribute(bush_attr));
 	}
 
 	// resetting some values
@@ -2114,7 +2111,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		      0;
 		score_parts[25] =
 		   (field.unowned_land_nearby) ?
-		      management_data.neuron_pool[27].get_result_safe(field.trees_nearby / 2, kAbsValue) :
+		      management_data.neuron_pool[27].get_result_safe(std::max(field.immovables_nearby[BuildingAttribute::kLumberjack], field.immovables_nearby[BuildingAttribute::kRanger]) / 2, kAbsValue) :
 		      0;
 
 		if (resource_necessity_water_needed_) {
@@ -2884,6 +2881,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		assert(player_);
 		int32_t const maxsize = player_->get_buildcaps(bf->coords) & Widelands::BUILDCAPS_SIZEMASK;
 
+		uint8_t lumberjack_immovables_nearby = bf->immovables_nearby[BuildingAttribute::kLumberjack];
+		uint8_t ranger_immovables_nearby = bf->immovables_nearby[BuildingAttribute::kRanger];
+
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {
 			if (!bo.buildable(*player_)) {
@@ -2998,13 +2998,13 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio += 5 * std::abs(management_data.get_military_number_at(17));
 					}
 
-					if (bf->trees_nearby < trees_nearby_treshold_ &&
+					if (lumberjack_immovables_nearby < trees_nearby_treshold_ &&
 					    bo.new_building == BuildingNecessity::kAllowed) {
 						continue;
 					}
 
 					prio += std::abs(management_data.get_military_number_at(26)) *
-					        (bf->trees_nearby - trees_nearby_treshold_) / 10;
+					        (lumberjack_immovables_nearby - trees_nearby_treshold_) / 10;
 
 					// consider cutters and rangers nearby
 					prio += 2 * count_supporters_nearby *
@@ -3017,12 +3017,13 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// Quarries are generally to be built everywhere where rocks are
 					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
-					if (bf->rocks_nearby < 1) {
+					const uint8_t rocks_nearby = bf->immovables_nearby[BuildingAttribute::kNeedsRocks];
+					if (rocks_nearby < 1) {
 						continue;
 					}
-					prio += 2 * bf->rocks_nearby;
+					prio += 2 * rocks_nearby;
 
-					if (bf->rocks_nearby > 0 && bf->near_border) {
+					if (rocks_nearby > 0 && bf->near_border) {
 						prio += management_data.get_military_number_at(27) / 2;
 					}
 
@@ -3106,14 +3107,14 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						        2;
 
 						prio +=
-						   management_data.neuron_pool[49].get_result_safe(bf->trees_nearby, kAbsValue) /
+						   management_data.neuron_pool[49].get_result_safe(ranger_immovables_nearby, kAbsValue) /
 						   5;
 
 						prio += supported_producers_nearby_count * 5 -
 						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
 						        bf->space_consumers_nearby *
 						           std::abs(management_data.get_military_number_at(102)) / 5 -
-						        bf->rocks_nearby / 3;
+						        bf->immovables_nearby[BuildingAttribute::kNeedsRocks] / 3;
 
 						prio += count_supporters_nearby * 3;
 						// don't block port building spots with trees
@@ -3123,7 +3124,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						// frisian claypit and frisian farm
 					} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
 						// we dont like trees nearby
-						prio += 1 - bf->trees_nearby / 3;
+						prio += 1 - std::max(lumberjack_immovables_nearby, ranger_immovables_nearby) / 3;
 						// and be far from rangers
 						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
@@ -3174,7 +3175,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						// frisian berry farm
 					} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
 						// we dont like trees nearby
-						prio += 1 - bf->trees_nearby / 4;
+						prio += 1 - std::max(lumberjack_immovables_nearby, ranger_immovables_nearby) / 4;
 						// and be far from rangers
 						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
@@ -3277,7 +3278,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer)) {  // e.g. farms
 							// we dont like trees nearby
-							prio += 1 - bf->trees_nearby / 4;
+							prio += 1 -
+									std::max(bf->immovables_nearby[BuildingAttribute::kLumberjack],
+									bf->immovables_nearby[BuildingAttribute::kRanger]) / 4;
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
@@ -3304,7 +3307,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 						if (bo.is(BuildingAttribute::kNeedsBerry)) {
 							prio += std::abs(management_data.get_military_number_at(13)) *
-							        bf->bushes_nearby / 12;
+							        bf->immovables_nearby[BuildingAttribute::kNeedsBerry] / 12;
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard

@@ -334,16 +334,11 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      near_border(false),
      unowned_mines_spots_nearby(0),
      unowned_iron_mines_nearby(false),
-     trees_nearby(0),
-     bushes_nearby(0),
      // explanation of starting values
      // this is done to save some work for AI (CPU utilization)
      // base rules are:
-     // count of rocks can only decrease, so  amount of rocks
-     // is recalculated only when previous count is positive
      // count of water fields are stable, so if the current count is
      // non-negative, water is not recalculated
-     rocks_nearby(1),
      water_nearby(-1),
      open_water_nearby(-1),
      distant_water(0),
@@ -373,6 +368,12 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      inland(false),
      local_soldier_capacity(0),
      is_militarysite(false) {
+	// explanation of starting values
+	// this is done to save some work for AI (CPU utilization)
+	// base rules are:
+	// count of rocks can only decrease, so  amount of rocks
+	// is recalculated only when previous count is positive
+	immovables_nearby[BuildingAttribute::kNeedsRocks] = 1;
 }
 
 MineableField::MineableField(const Widelands::FCoords& fc)
