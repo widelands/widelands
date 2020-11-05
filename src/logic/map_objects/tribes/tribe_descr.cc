@@ -1028,7 +1028,7 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 			}
 		}
 
-		for (const std::string& item : prod->collected_immovables()) {
+		for (const std::string& item : prod->needed_immovables()) {
 			// Sites that collect immovables and sites of other types that create immovables for them
 			// should overlap each other
 			if (creators.count(item)) {

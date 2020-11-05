@@ -142,6 +142,10 @@ public:
 		created_bobs_.insert(bobname);
 	}
 	/// The immovables that this production site needs to collect from the map
+	const std::set<std::string>& needed_immovables() const {
+		return needed_immovables_;
+	}
+	/// The immovables that this production site needs to collect from the map
 	const std::set<std::string>& collected_immovables() const {
 		return collected_immovables_;
 	}

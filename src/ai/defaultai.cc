@@ -748,12 +748,18 @@ void DefaultAI::late_initialization() {
 				 *                                -> amazons_rare_tree_cutters_hut
 				 *                                -> amazons_wilderness_keepers_tent
 				 *
-				 *   NOCOM missing, but I think that's correct (they are supported, not supporting):
+				 *   NOCOM missing, but I think that's correct (they are supported / lumberjack, not supporting):
 				 *     - amazons_rare_tree_cutters_hut
 				 *     - amazons_woodcutters_hut
 				 *
-				 *   frisians_clay_pit  -> frisians_aqua_farm, frisians_charcoal_burners_house
-				 *   frisians_farm      NOCOM missing
+				 *   frisians_clay_pit -> frisians_aqua_farm
+				 *                     -> frisians_charcoal_burners_house
+				 *                     -> frisians_fishers_house
+				 *
+				 *
+				 *   frisians_farm -> frisians_beekeepers_house
+				 *
+				 *   frisians_reed_farm -> frisians_beekeepers_house NOCOM new
 				 *
 				 * */
 			}
