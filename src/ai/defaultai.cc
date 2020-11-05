@@ -750,7 +750,8 @@ void DefaultAI::late_initialization() {
 				 *                                -> amazons_rare_tree_cutters_hut
 				 *                                -> amazons_wilderness_keepers_tent
 				 *
-				 *   NOCOM missing, but I think that's correct (they are supported / lumberjack, not supporting):
+				 *   NOCOM missing, but I think that's correct (they are supported / lumberjack, not
+				 * supporting):
 				 *     - amazons_rare_tree_cutters_hut
 				 *     - amazons_woodcutters_hut
 				 *
@@ -870,9 +871,8 @@ void DefaultAI::late_initialization() {
 
 			// Some important buildings are identified
 			// NOCOM !prod.is_enhanced() && Removing this adds amazons_rare_tree_cutters_hut
-			if (prod.input_wares().empty() &&
-			    !prod.output_ware_types().empty() && prod.created_immovables().empty() &&
-			    !prod.collected_immovables().empty()) {
+			if (prod.input_wares().empty() && !prod.output_ware_types().empty() &&
+			    prod.created_immovables().empty() && !prod.collected_immovables().empty()) {
 				bool produces_construction_material = false;
 				bool produces_non_construction_material = false;
 				for (Widelands::DescriptionIndex output_idx : prod.output_ware_types()) {
@@ -934,8 +934,8 @@ void DefaultAI::late_initialization() {
 			}
 
 			// Forester/Ranger
-			// NOCOM we're not getting any amazons_rare_tree_plantation. Do a second loop to define the rangers as any building that supports a lumberjack.
-			// NOCOM !prod.is_enhanced() &&
+			// NOCOM we're not getting any amazons_rare_tree_plantation. Do a second loop to define the
+			// rangers as any building that supports a lumberjack. NOCOM !prod.is_enhanced() &&
 			if (prod.input_wares().empty() && prod.collected_immovables().empty() &&
 			    prod.output_ware_types().empty() && !prod.created_immovables().empty() &&
 			    !prod.supported_productionsites().empty()) {
@@ -944,7 +944,8 @@ void DefaultAI::late_initialization() {
 
 				for (const std::string& supported_name : prod.supported_productionsites()) {
 					const Widelands::ProductionSiteDescr* supported_site =
-							dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(supported_name)));
+					   dynamic_cast<const Widelands::ProductionSiteDescr*>(
+					      tribe_->get_building_descr(tribe_->building_index(supported_name)));
 					log_dbg("NOCOM potential ranger %s supports %s", bo.name, supported_name.c_str());
 					for (Widelands::DescriptionIndex output_idx : supported_site->output_ware_types()) {
 						log_dbg(" -> %s", tribe_->get_ware_descr(output_idx)->name().c_str());
@@ -1803,7 +1804,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		// Counting trees, rocks, berry bushes nearby
 		for (const auto& attribute_info : attributes_) {
 			// Rocks are not renewable, we will count them only if previous state is nonzero
-			if (attribute_info.first == BuildingAttribute::kNeedsRocks && field.immovables_nearby[attribute_info.first] == 0) {
+			if (attribute_info.first == BuildingAttribute::kNeedsRocks &&
+			    field.immovables_nearby[attribute_info.first] == 0) {
 				continue;
 			}
 			field.immovables_nearby[attribute_info.first] = 0;
@@ -2109,10 +2111,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   (field.unowned_land_nearby) ?
 		      management_data.neuron_pool[25].get_result_safe(field.water_nearby / 2, kAbsValue) :
 		      0;
-		score_parts[25] =
-		   (field.unowned_land_nearby) ?
-		      management_data.neuron_pool[27].get_result_safe(std::max(field.immovables_nearby[BuildingAttribute::kLumberjack], field.immovables_nearby[BuildingAttribute::kRanger]) / 2, kAbsValue) :
-		      0;
+		score_parts[25] = (field.unowned_land_nearby) ?
+		                     management_data.neuron_pool[27].get_result_safe(
+		                        std::max(field.immovables_nearby[BuildingAttribute::kLumberjack],
+		                                 field.immovables_nearby[BuildingAttribute::kRanger]) /
+		                           2,
+		                        kAbsValue) :
+		                     0;
 
 		if (resource_necessity_water_needed_) {
 			score_parts[26] =
@@ -3106,9 +3111,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						           supported_producers_nearby_count * 5, kAbsValue) /
 						        2;
 
-						prio +=
-						   management_data.neuron_pool[49].get_result_safe(ranger_immovables_nearby, kAbsValue) /
-						   5;
+						prio += management_data.neuron_pool[49].get_result_safe(
+						           ranger_immovables_nearby, kAbsValue) /
+						        5;
 
 						prio += supported_producers_nearby_count * 5 -
 						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
@@ -3278,9 +3283,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer)) {  // e.g. farms
 							// we dont like trees nearby
-							prio += 1 -
-									std::max(bf->immovables_nearby[BuildingAttribute::kLumberjack],
-									bf->immovables_nearby[BuildingAttribute::kRanger]) / 4;
+							prio += 1 - std::max(bf->immovables_nearby[BuildingAttribute::kLumberjack],
+							                     bf->immovables_nearby[BuildingAttribute::kRanger]) /
+							               4;
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
