@@ -826,7 +826,12 @@ void Soldier::start_task_attack(Game& game, Building& building, const bool allow
 	State& state = top_state();
 	state.objvar1 = &building;
 	state.coords = building.get_position();
-	state.ivar2 = allow_conquer ? 0x10 : 0;  // The return state and the allow_conquer flag. The last byte (ivar2 & 0xf) indicates the return state: 0 = default; 1 = go home; 2 = go back in known land. The byte before it (ivar2 & 0xf0) indicates `bool allow_conquer`.
+	state.ivar2 =
+	   allow_conquer ?
+	      0x10 :
+	      0;  // The return state and the allow_conquer flag. The last byte (ivar2 & 0xf) indicates
+	          // the return state: 0 = default; 1 = go home; 2 = go back in known land. The byte
+	          // before it (ivar2 & 0xf0) indicates `bool allow_conquer`.
 	state.ivar3 = 0;  // Counts how often the soldier is blocked in a row
 
 	state.ivar1 |= CF_RETREAT_WHEN_INJURED;

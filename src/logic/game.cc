@@ -907,7 +907,8 @@ void Game::send_player_enemyflagaction(const Flag& flag,
                                        const bool allow_conquer) {
 	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
 		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
-			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
+			send_player_command(
+			   new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
 			break;
 		}
 	}

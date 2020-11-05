@@ -119,7 +119,8 @@ private:
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-	MapObject* pop_soldier_job(Soldier*, bool* stayhome = nullptr, bool* allow_conquer_target = nullptr);
+	MapObject*
+	pop_soldier_job(Soldier*, bool* stayhome = nullptr, bool* allow_conquer_target = nullptr);
 	bool has_soldier_job(Soldier&);
 	bool military_presence_kept(Game&);
 	void notify_player(Game&, bool discovered = false);

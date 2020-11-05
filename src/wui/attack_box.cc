@@ -259,8 +259,9 @@ void AttackBox::init() {
 
 	const Widelands::BaseImmovable* i = map_.get_immovable(*node_coordinates_);
 	if (i && i->descr().type() == Widelands::MapObjectType::MILITARYSITE) {
-		do_not_conquer_.reset(new UI::Checkbox(&mainbox, UI::PanelStyle::kWui, Vector2i(0, 0),
-				_("Destroy target"), _("Destroy the target building instead of conquering it")));
+		do_not_conquer_.reset(
+		   new UI::Checkbox(&mainbox, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
+		                    _("Destroy the target building instead of conquering it")));
 		do_not_conquer_->set_state(false);
 		mainbox.add(do_not_conquer_.get(), UI::Box::Resizing::kFullSize);
 	}

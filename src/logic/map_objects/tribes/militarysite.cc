@@ -192,7 +192,8 @@ void MilitarySite::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) 
 	military_site_->notify_player(game, true);
 }
 
-AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy, const bool allow_conquer) const {
+AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy,
+                                                              const bool allow_conquer) const {
 	Game& game = dynamic_cast<Game&>(military_site_->get_owner()->egbase());
 
 	std::vector<Soldier*> present = military_site_->soldier_control_.present_soldiers();
@@ -914,7 +915,9 @@ void MilitarySite::clear_requirements() {
 	soldier_requirements_ = Requirements();
 }
 
-void MilitarySite::send_attacker(Soldier& soldier, Building& target, const bool allow_conquer_target) {
+void MilitarySite::send_attacker(Soldier& soldier,
+                                 Building& target,
+                                 const bool allow_conquer_target) {
 	if (!is_present(soldier)) {
 		// The soldier may not be present anymore due to having been kicked out. Most of the time
 		// the function calling us will notice this, but there are cornercase where it might not,
@@ -954,7 +957,9 @@ bool MilitarySite::has_soldier_job(Soldier& soldier) {
  * \return the enemy, if any, that the given soldier was scheduled
  * to attack, and remove the job.
  */
-MapObject* MilitarySite::pop_soldier_job(Soldier* const soldier, bool* const stayhome, bool* allow_conquer_target) {
+MapObject* MilitarySite::pop_soldier_job(Soldier* const soldier,
+                                         bool* const stayhome,
+                                         bool* allow_conquer_target) {
 	for (std::vector<SoldierJob>::iterator job_iter = soldierjobs_.begin();
 	     job_iter != soldierjobs_.end(); ++job_iter) {
 		if (job_iter->soldier == soldier) {
