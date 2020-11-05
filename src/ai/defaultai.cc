@@ -624,6 +624,8 @@ void DefaultAI::late_initialization() {
 
 	attributes_.clear();
 
+	std::set<const Widelands::ProductionSiteDescr*> lumberjacks;
+
 	for (Widelands::DescriptionIndex building_index = 0; building_index < nr_buildings;
 	     ++building_index) {
 		const Widelands::BuildingDescr& bld = *tribe_->get_building_descr(building_index);
@@ -915,6 +917,7 @@ void DefaultAI::late_initialization() {
 						for (const auto& attribute : prod.collected_attributes()) {
 							attributes_[BuildingAttribute::kLumberjack].insert(attribute.second);
 						}
+						lumberjacks.insert(&prod);
 					}
 				}
 				if (produces_non_construction_material) {
@@ -929,46 +932,6 @@ void DefaultAI::late_initialization() {
 
 					for (const auto& attribute : prod.collected_attributes()) {
 						attributes_[BuildingAttribute::kNeedsBerry].insert(attribute.second);
-					}
-				}
-			}
-
-			// Forester/Ranger
-			// NOCOM we're not getting any amazons_rare_tree_plantation. Do a second loop to define the rangers as any building that supports a lumberjack.
-			// NOCOM !prod.is_enhanced() &&
-			if (prod.input_wares().empty() && prod.collected_immovables().empty() &&
-			    prod.output_ware_types().empty() && !prod.created_immovables().empty() &&
-			    !prod.supported_productionsites().empty()) {
-
-				bool supports_construction_material = false;
-
-				for (const std::string& supported_name : prod.supported_productionsites()) {
-					const Widelands::ProductionSiteDescr* supported_site =
-							dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(supported_name)));
-					log_dbg("NOCOM potential ranger %s supports %s", bo.name, supported_name.c_str());
-					for (Widelands::DescriptionIndex output_idx : supported_site->output_ware_types()) {
-						log_dbg(" -> %s", tribe_->get_ware_descr(output_idx)->name().c_str());
-						if (tribe_->is_construction_material(output_idx)) {
-							supports_construction_material = true;
-							break;
-						}
-					}
-				}
-
-				if (supports_construction_material) {
-					log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
-					bo.set_is(BuildingAttribute::kRanger);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   amazons_jungle_preservers_hut
-					 *   atlanteans_foresters_house
-					 *   barbarians_rangers_hut
-					 *   empire_foresters_house
-					 *   frisians_foresters_house
-					 *
-					 * */
-					for (const auto& attribute : prod.created_attributes()) {
-						attributes_[BuildingAttribute::kRanger].insert(attribute.second);
 					}
 				}
 			}
@@ -1097,6 +1060,37 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
+	// Forester/Ranger
+	for (BuildingObserver& bo : buildings_) {
+		if (bo.type != BuildingObserver::Type::kProductionsite) {
+			continue;
+		}
+		const Widelands::ProductionSiteDescr* prodsite =
+				dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(bo.name)));
+		for (const std::string& candidate : prodsite->supported_productionsites()) {
+			for (const Widelands::ProductionSiteDescr* lumberjack : lumberjacks) {
+				if (lumberjack->name() == candidate) {
+					log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
+					bo.set_is(BuildingAttribute::kRanger);
+					/* Buildings detected at the time of writing:
+					 *
+					 *   amazons_jungle_preservers_hut
+					 *   amazons_rare_tree_plantation NOCOM new
+					 *   atlanteans_foresters_house
+					 *   barbarians_rangers_hut
+					 *   empire_foresters_house
+					 *   frisians_foresters_house
+					 *
+					 * */
+					for (const auto& attribute : prodsite->created_attributes()) {
+						attributes_[BuildingAttribute::kRanger].insert(attribute.second);
+					}
+				}
+			}
+		}
+	}
+	lumberjacks.clear();
+
 	// NOCOM: Update messages
 
 	// We must verify that some buildings has been identified
@@ -1107,8 +1101,8 @@ void DefaultAI::late_initialization() {
 		         "This is the building that produces the tribe's 'soldier' worker.",
 		         tribe_->name().c_str());
 	}
-	if (count_buildings_with_attribute(BuildingAttribute::kRanger) != 1) {
-		log_warn("The AI needs the tribe '%s' to define 1 type of ranger's building. "
+	if (count_buildings_with_attribute(BuildingAttribute::kRanger) < 1) {
+		log_warn("The AI needs the tribe '%s' to define at least 1 type of ranger's building. "
 		         "This is the building that creates immovables with the attribute 'tree'.",
 		         tribe_->name().c_str());
 	}
@@ -1118,8 +1112,8 @@ void DefaultAI::late_initialization() {
 		         "'needs_water' in its AI hints.",
 		         tribe_->name().c_str());
 	}
-	if (count_buildings_with_attribute(BuildingAttribute::kLumberjack) != 1) {
-		log_warn("The AI needs the tribe '%s' to define 1 type of lumberjack's building. "
+	if (count_buildings_with_attribute(BuildingAttribute::kLumberjack) < 1) {
+		log_warn("The AI needs the tribe '%s' to define at least 1 type of lumberjack's building. "
 		         "This is the building that collects immovables with the attribute 'tree'.",
 		         tribe_->name().c_str());
 	}
