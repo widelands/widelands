@@ -1064,7 +1064,7 @@ void FieldActionWindow::act_attack() {
 		if (attack_box_->count_soldiers() > 0) {
 			upcast(InteractivePlayer const, iaplayer, &ibase());
 			game->send_player_enemyflagaction(
-			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
+			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers(), attack_box_->get_allow_conquer());
 		}
 	}
 	reset_mouse_and_die();

@@ -61,7 +61,7 @@ public:
 		// Returned if the building cannot defend itself any longer.
 		Defenseless
 	};
-	virtual AttackResult attack(Soldier* attacker) const = 0;
+	virtual AttackResult attack(Soldier* attacker, bool allow_conquer) const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(AttackTarget);

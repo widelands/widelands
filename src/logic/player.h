@@ -524,7 +524,7 @@ public:
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
 	void
-	enemyflagaction(const Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
+	enemyflagaction(const Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&, bool allow_conquer);
 
 	uint32_t casualties() const {
 		return casualties_;

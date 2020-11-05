@@ -1245,7 +1245,8 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
 // to attack, so pretending we have more types is pointless.
 void Player::enemyflagaction(const Flag& flag,
                              PlayerNumber const attacker,
-                             const std::vector<Widelands::Soldier*>& soldiers) {
+                             const std::vector<Widelands::Soldier*>& soldiers,
+                             const bool allow_conquer) {
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
 		              attacker, player_number());
@@ -1260,7 +1261,7 @@ void Player::enemyflagaction(const Flag& flag,
 						assert(temp_attacker->get_owner() == this);
 						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
 							assert(ms->get_owner() == this);
-							ms->send_attacker(*temp_attacker, *building);
+							ms->send_attacker(*temp_attacker, *building, allow_conquer);
 						} else {
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand

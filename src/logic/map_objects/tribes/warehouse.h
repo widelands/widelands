@@ -240,7 +240,7 @@ private:
 
 		bool can_be_attacked() const override;
 		void enemy_soldier_approaches(const Soldier&) const override;
-		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*, bool) const override;
 
 	private:
 		Warehouse* const warehouse_;

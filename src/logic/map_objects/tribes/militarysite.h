@@ -89,7 +89,7 @@ public:
 
 	/// Launch the given soldier on an attack towards the given
 	/// target building.
-	void send_attacker(Soldier&, Building&);
+	void send_attacker(Soldier&, Building&, bool allow_conquer_target);
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements(const Requirements&);
@@ -119,7 +119,7 @@ private:
 	static void
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-	MapObject* pop_soldier_job(Soldier*, bool* stayhome = nullptr);
+	MapObject* pop_soldier_job(Soldier*, bool* stayhome = nullptr, bool* allow_conquer_target = nullptr);
 	bool has_soldier_job(Soldier&);
 	bool military_presence_kept(Game&);
 	void notify_player(Game&, bool discovered = false);
@@ -139,7 +139,7 @@ private:
 
 		bool can_be_attacked() const override;
 		void enemy_soldier_approaches(const Soldier&) const override;
-		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*, bool) const override;
 
 	private:
 		MilitarySite* const military_site_;
@@ -181,6 +181,7 @@ private:
 		Soldier* soldier;
 		ObjectPointer enemy;
 		bool stayhome;
+		bool allow_conquer_target;
 	};
 	std::vector<SoldierJob> soldierjobs_;
 	SoldierPreference soldier_preference_;

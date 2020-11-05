@@ -102,7 +102,7 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 	defender.start_task_defense(game, false);
 }
 
-AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const {
+AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy, bool) const {
 	Player* owner = warehouse_->get_owner();
 	Game& game = dynamic_cast<Game&>(owner->egbase());
 	DescriptionIndex const soldier_index = owner->tribe().soldier();
