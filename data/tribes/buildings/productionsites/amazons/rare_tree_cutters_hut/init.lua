@@ -16,9 +16,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "rubber",
-      -- dirty hack to inverse relation between cutter and plantation
-      supports_production_of = { "ironwood" },
       requires_supporters = true,
    },
 

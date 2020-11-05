@@ -33,8 +33,6 @@ descriptions:new_productionsite_type {
    animations = {unoccupied = {hotspot = {48, 50}}},
 
    aihints = {
-      supports_production_of = { "balsa", "rubber", },
-      requires_supporters = true,
       space_consumer = true,
    },
 

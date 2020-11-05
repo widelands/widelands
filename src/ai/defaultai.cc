@@ -623,6 +623,7 @@ void DefaultAI::late_initialization() {
 	}
 
 	attributes_.clear();
+	immovable_attributes_for_building_.clear();
 
 	std::set<const Widelands::ProductionSiteDescr*> lumberjacks;
 
@@ -901,6 +902,7 @@ void DefaultAI::late_initialization() {
 						 * */
 						for (const auto& attribute : prod.collected_attributes()) {
 							attributes_[BuildingAttribute::kNeedsRocks].insert(attribute.second);
+							immovable_attributes_for_building_[bo.name].insert(attribute.second);
 						}
 					} else {
 						log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
@@ -916,6 +918,7 @@ void DefaultAI::late_initialization() {
 						 * */
 						for (const auto& attribute : prod.collected_attributes()) {
 							attributes_[BuildingAttribute::kLumberjack].insert(attribute.second);
+							immovable_attributes_for_building_[bo.name].insert(attribute.second);
 						}
 						lumberjacks.insert(&prod);
 					}
@@ -932,6 +935,7 @@ void DefaultAI::late_initialization() {
 
 					for (const auto& attribute : prod.collected_attributes()) {
 						attributes_[BuildingAttribute::kNeedsBerry].insert(attribute.second);
+						immovable_attributes_for_building_[bo.name].insert(attribute.second);
 					}
 				}
 			}
@@ -1070,7 +1074,7 @@ void DefaultAI::late_initialization() {
 		for (const std::string& candidate : prodsite->supported_productionsites()) {
 			for (const Widelands::ProductionSiteDescr* lumberjack : lumberjacks) {
 				if (lumberjack->name() == candidate) {
-					log_dbg_time(gametime, "AI %d detected ranger: %s", player_number(), bo.name);
+					log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(), bo.name, lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
 					/* Buildings detected at the time of writing:
 					 *
@@ -1084,6 +1088,7 @@ void DefaultAI::late_initialization() {
 					 * */
 					for (const auto& attribute : prodsite->created_attributes()) {
 						attributes_[BuildingAttribute::kRanger].insert(attribute.second);
+						immovable_attributes_for_building_[bo.name].insert(attribute.second);
 					}
 				}
 			}
@@ -1803,6 +1808,17 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			field.immovables_nearby[attribute_info.first] = 0;
 			for (const auto& attribute_index : attribute_info.second) {
 				field.immovables_nearby[attribute_info.first] += map.find_immovables(
+				   game(),
+				   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
+				   nullptr, Widelands::FindImmovableAttribute(attribute_index));
+			}
+		}
+
+		// NOCOM 2 loops are ugly
+		for (const auto& attribute_info : immovable_attributes_for_building_) {
+			field.immovable_attributes_nearby[attribute_info.first] = 0;
+			for (const auto& attribute_index : attribute_info.second) {
+				field.immovable_attributes_nearby[attribute_info.first] += map.find_immovables(
 				   game(),
 				   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
 				   nullptr, Widelands::FindImmovableAttribute(attribute_index));
@@ -2875,9 +2891,6 @@ bool DefaultAI::construct_building(const Time& gametime) {
 		assert(player_);
 		int32_t const maxsize = player_->get_buildcaps(bf->coords) & Widelands::BUILDCAPS_SIZEMASK;
 
-		uint8_t lumberjack_immovables_nearby = bf->immovables_nearby[BuildingAttribute::kLumberjack];
-		uint8_t ranger_immovables_nearby = bf->immovables_nearby[BuildingAttribute::kRanger];
-
 		// For every field test all buildings
 		for (BuildingObserver& bo : buildings_) {
 			if (!bo.buildable(*player_)) {
@@ -2992,13 +3005,13 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio += 5 * std::abs(management_data.get_military_number_at(17));
 					}
 
-					if (lumberjack_immovables_nearby < trees_nearby_treshold_ &&
+					if (bf->immovable_attributes_nearby[bo.name] < trees_nearby_treshold_ &&
 					    bo.new_building == BuildingNecessity::kAllowed) {
 						continue;
 					}
 
 					prio += std::abs(management_data.get_military_number_at(26)) *
-					        (lumberjack_immovables_nearby - trees_nearby_treshold_) / 10;
+					        (bf->immovable_attributes_nearby[bo.name] - trees_nearby_treshold_) / 10;
 
 					// consider cutters and rangers nearby
 					prio += 2 * count_supporters_nearby *
@@ -3011,7 +3024,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// Quarries are generally to be built everywhere where rocks are
 					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
-					const uint8_t rocks_nearby = bf->immovables_nearby[BuildingAttribute::kNeedsRocks];
+					const uint8_t rocks_nearby = bf->immovable_attributes_nearby[bo.name];
 					if (rocks_nearby < 1) {
 						continue;
 					}
@@ -3101,14 +3114,14 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						        2;
 
 						prio +=
-						   management_data.neuron_pool[49].get_result_safe(ranger_immovables_nearby, kAbsValue) /
+						   management_data.neuron_pool[49].get_result_safe(bf->immovable_attributes_nearby[bo.name], kAbsValue) /
 						   5;
 
 						prio += supported_producers_nearby_count * 5 -
 						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
 						        bf->space_consumers_nearby *
 						           std::abs(management_data.get_military_number_at(102)) / 5 -
-						        bf->immovables_nearby[BuildingAttribute::kNeedsRocks] / 3;
+						        bf->immovable_attributes_nearby[bo.name] / 3;
 
 						prio += count_supporters_nearby * 3;
 						// don't block port building spots with trees
@@ -3118,7 +3131,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						// frisian claypit and frisian farm
 					} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
 						// we dont like trees nearby
-						prio += 1 - std::max(lumberjack_immovables_nearby, ranger_immovables_nearby) / 3;
+						// NOCOM sum them all up
+						prio += 1 - bf->immovable_attributes_nearby[bo.name] / 3;
 						// and be far from rangers
 						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
@@ -3169,7 +3183,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						// frisian berry farm
 					} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
 						// we dont like trees nearby
-						prio += 1 - std::max(lumberjack_immovables_nearby, ranger_immovables_nearby) / 4;
+						// NOCOM sum them all up
+						prio += 1 - bf->immovable_attributes_nearby[bo.name] / 4;
 						// and be far from rangers
 						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
@@ -3272,9 +3287,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer)) {  // e.g. farms
 							// we dont like trees nearby
-							prio += 1 -
-									std::max(bf->immovables_nearby[BuildingAttribute::kLumberjack],
-									bf->immovables_nearby[BuildingAttribute::kRanger]) / 4;
+							prio += 1 - bf->immovable_attributes_nearby[bo.name] / 4;
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
@@ -3301,7 +3314,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 						if (bo.is(BuildingAttribute::kNeedsBerry)) {
 							prio += std::abs(management_data.get_military_number_at(13)) *
-							        bf->immovables_nearby[BuildingAttribute::kNeedsBerry] / 12;
+							        bf->immovable_attributes_nearby[bo.name] / 12;
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
