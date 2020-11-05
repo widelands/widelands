@@ -259,8 +259,8 @@ void ParticipantList::update_participant_counts() {
 	}
 	assert(participant_counts_.humans <= static_cast<int16_t>(settings_->users.size()));
 	participant_counts_.ais = 0;
-	for (size_t i = 0; i < settings_->players.size(); ++i) {
-		const PlayerSettings& player = settings_->players[i];
+	for (const PlayerSettings& player : settings_->players) {
+
 		if (player.state != PlayerSettings::State::kComputer) {
 			// Ignore open, shared or human player slots
 			continue;

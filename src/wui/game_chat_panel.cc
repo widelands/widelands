@@ -224,8 +224,9 @@ bool GameChatPanel::try_autocomplete() {
 	static const auto count_equal_chars = [](const std::string& a, const std::string& b) {
 		const size_t len = std::min(a.size(), b.size());
 		for (size_t i = 0; i < len; ++i) {
-			if (std::tolower(a[i]) != std::tolower(b[i]))
+			if (std::tolower(a[i]) != std::tolower(b[i])) {
 				return i;
+			}
 		}
 		return len;
 	};
@@ -258,7 +259,7 @@ bool GameChatPanel::try_autocomplete() {
 	// but that is fixed on the next completition)
 	const int16_t n_humans = chat_.participants_->get_participant_counts().humans;
 	const std::string& local_name = chat_.participants_->get_local_playername();
-	std::string candidate = "";
+	std::string candidate;
 	for (int16_t i = 0; i < n_humans; ++i) {
 		assert(chat_.participants_->get_participant_type(i) != ParticipantList::ParticipantType::kAI);
 		const std::string& name = chat_.participants_->get_participant_name(i);
@@ -341,7 +342,7 @@ void GameChatPanel::unfocus_edit() {
 void GameChatPanel::key_enter() {
 
 	const std::string& str = editbox.text();
-	if (str.size()) {
+	if (!str.empty()) {
 		if (chat_.participants_ != nullptr) {
 			const size_t pos_first_space = str.find(' ');
 
@@ -471,7 +472,7 @@ void GameChatPanel::prepare_recipients() {
  */
 bool GameChatPanel::select_recipient() {
 	// Get the current recipient
-	std::string recipient = "";
+	std::string recipient;
 	const std::string& text = editbox.text();
 	if (!text.empty() && text[0] == '@') {
 		// Get the recipient string including the first space
