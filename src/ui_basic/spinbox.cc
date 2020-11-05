@@ -92,8 +92,8 @@ SpinBox::SpinBox(Panel* const parent,
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
      button_height_(20),
-     padding_(2),
-     number_of_paddings_(type_ == SpinBox::Type::kBig ? 6 : 4) {
+     padding_(0),
+     number_of_paddings_(type_ == SpinBox::Type::kBig ? 4 : 2) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
@@ -274,9 +274,10 @@ void SpinBox::layout() {
 	sbi_->label->set_size(get_w() - unit_width_ - number_of_paddings_ * padding_, 10);
 	if (type_ == SpinBox::Type::kBig) {
 		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_ten_plus->get_w() -
-		                            2 * sbi_->button_minus->get_w() - 2 * padding_);
+		                            2 * sbi_->button_minus->get_w() - number_of_paddings_ * padding_);
 	} else {
-		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_minus->get_w());
+		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_minus->get_w() -
+		                            number_of_paddings_ * padding_);
 	}
 
 	uint32_t box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_height_));
