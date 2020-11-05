@@ -564,6 +564,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 			continue;
 		}
 
+		// TODO(Nordfriese): Use Player::check_can_build to simplify the code
+
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
 		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
 		                                         building_descr->get_built_over_immovable()))) {

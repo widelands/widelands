@@ -48,12 +48,6 @@ descriptions:new_tribe {
       [""] = {
          [0] = "amazons_resi_none",
       },
-      resource_coal = {
-         [100] = "amazons_resi_none",
-      },
-      resource_iron = {
-         [100] = "amazons_resi_none",
-      },
       resource_gold = {
          [10] = "amazons_resi_gold_1",
          [20] = "amazons_resi_gold_2",
@@ -61,9 +55,6 @@ descriptions:new_tribe {
       resource_stones = {
          [10] = "amazons_resi_stones_1",
          [20] = "amazons_resi_stones_2",
-      },
-      resource_water = {
-         [100] = "amazons_resi_water",
       },
    },
 
@@ -1169,13 +1160,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Helptext for an amazon resource indicator: No resources
             purpose = _("There are no resources in the ground here.")
-         }
-      },
-      {
-         name = "amazons_resi_water",
-         helptexts = {
-            -- TRANSLATORS: Helptext for an amazon resource indicator: Water
-            purpose = _("There is water in the ground here.")
          }
       },
       {

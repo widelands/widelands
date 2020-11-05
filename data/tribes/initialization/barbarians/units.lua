@@ -1428,7 +1428,7 @@ descriptions:new_tribe {
          name = "barbarians_barracks",
          helptexts = {
             -- TRANSLATORS: Lore helptext for a barbarian production site: Barracks
-            lore = pgettext("barbarians_building", "‘Don't ask what your tribe can do for you, ask what you can do for your tribe!’"),
+            lore = pgettext("barbarians_building", "‘Don’t ask what your tribe can do for you, ask what you can do for your tribe!’"),
             -- TRANSLATORS: Lore author helptext for a barbarian production site: Barracks
             lore_author = pgettext("barbarians_building", "Famous barbarian recruitment poster"),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Barracks
