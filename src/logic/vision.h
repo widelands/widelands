@@ -41,19 +41,10 @@ enum class VisibleState {
 ///  2      if the player's buildings and workers do not currently see
 ///         the node, but it is visible to the player thanks to team
 ///         vision.
-///  2+2*n  if the player's buildings and workers currently see the node,
+///  2+n    if the player's buildings and workers currently see the node,
 ///         where n is the number of objects that can see the node.
-///  3+2*n  if the node is permanently revealed to the player;
-///         the meaning of n is the same as above and can be zero.
 struct Vision {
 public:
-	explicit Vision(const uint16_t v = 0) : value_{v} {
-	}
-	Vision& operator=(const uint16_t v) {
-		value_ = v;
-		return *this;
-	}
-
 	explicit Vision(const VisibleState vs) {
 		switch (vs) {
 		case VisibleState::kUnexplored:
@@ -67,6 +58,7 @@ public:
 			value_ = 2;
 			break;
 		}
+		override_ = Override::kNormal;
 	}
 	Vision& operator=(const VisibleState vs) {
 		switch (vs) {
@@ -81,29 +73,37 @@ public:
 			value_ = 2;
 			break;
 		}
+		override_ = Override::kNormal;
 		return *this;
 	}
 
-	operator uint16_t() const {
+	uint16_t value() const {
 		return value_;
 	}
 	operator VisibleState() const {
-		switch (value_) {
-		case 0:
+		switch (override_) {
+		case Override::kHidden:
 			return VisibleState::kUnexplored;
-		case 1:
-			return VisibleState::kPreviouslySeen;
-		default:
+		case Override::kRevealed:
 			return VisibleState::kVisible;
+		default:
+			switch (value_) {
+			case 0:
+				return VisibleState::kUnexplored;
+			case 1:
+				return VisibleState::kPreviouslySeen;
+			default:
+				return VisibleState::kVisible;
+			}
 		}
 	}
 
 	bool operator==(const Vision other) const {
-		return value_ == other.value_;
+		return value_ == other.value_ && override_ == other.override_;
 	}
 
 	bool operator!=(const Vision other) const {
-		return value_ != other.value_;
+		return value_ != other.value_ && override_ != other.override_;
 	}
 
 	bool is_explored() const {
@@ -113,35 +113,56 @@ public:
 		return value_ > 1;
 	}
 	bool is_seen_by_us() const {
-		return value_ > 2;
+		return seers() > 0 || is_revealed();
 	}
 	bool is_revealed() const {
-		return value_ > 2 && value_ % 2 == 1;
+		return override_ == Override::kRevealed;
+	}
+	bool is_hidden() const {
+		return override_ == Override::kHidden;
 	}
 	uint16_t seers() const {
-		return value_ > 3 ? (value_ - 2) / 2 : 0;
+		return value_ > 2 ? (value_ - 2) : 0;
 	}
 
 	void increment_seers() {
-		value_ = std::max(value_, uint16_t(2)) + 2;
+		value_ = std::max(value_, uint16_t(2)) + 1;
 	}
 	void decrement_seers() {
 		assert(seers() > 0);
-		value_ -= 2;
+		--value_;
 	}
 	void set_revealed(const bool reveal) {
 		if (reveal == is_revealed()) {
 			return;
 		}
 		if (reveal) {
-			value_ = std::max(value_, uint16_t(2)) + 1;
+			override_ = Override::kRevealed;
 		} else {
-			--value_;
+			override_ = Override::kNormal;
+		}
+		if (value_ < 2) {
+			value_ = 2;
+		}
+	}
+	void set_hidden(const bool hide) {
+		if (hide == is_hidden()) {
+			return;
+		}
+		if (hide) {
+			override_ = Override::kHidden;
+		} else {
+			override_ = Override::kNormal;
+		}
+		if (seers() == 0) {
+			value_ = 0;
 		}
 	}
 
 private:
-	uint16_t value_;
+	enum class Override : uint8_t { kNormal = 0, kHidden = 1, kRevealed = 2 };
+	uint16_t value_ : 14;
+	Override override_ : 2;
 };
 
 }  // namespace Widelands
