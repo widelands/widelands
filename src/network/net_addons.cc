@@ -205,9 +205,10 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		}
 		if (info.file_list.checksums.size() !=
 		    info.file_list.files.size() + info.file_list.locales.size()) {
-			throw wexception("Found %" PRIuS " files and %" PRIuS " locales, but %" PRIuS " checksums",
-			                 info.file_list.files.size(), info.file_list.locales.size(),
-			                 info.file_list.checksums.size());
+			throw wexception("Found %u files and %u locales, but %u checksums",
+			                 static_cast<unsigned>(info.file_list.files.size()),
+			                 static_cast<unsigned>(info.file_list.locales.size()),
+			                 static_cast<unsigned>(info.file_list.checksums.size()));
 		}
 
 		info.verified = next_word(output) == "verified";
