@@ -1070,11 +1070,13 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 		const Widelands::ProductionSiteDescr* prodsite =
-				dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(bo.name)));
+		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
+		      tribe_->get_building_descr(tribe_->building_index(bo.name)));
 		for (const std::string& candidate : prodsite->supported_productionsites()) {
 			for (const Widelands::ProductionSiteDescr* lumberjack : lumberjacks) {
 				if (lumberjack->name() == candidate) {
-					log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(), bo.name, lumberjack->name().c_str());
+					log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(), bo.name,
+					             lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
 					/* Buildings detected at the time of writing:
 					 *
@@ -3117,9 +3119,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						           supported_producers_nearby_count * 5, kAbsValue) /
 						        2;
 
-						prio +=
-						   management_data.neuron_pool[49].get_result_safe(bf->immovable_attributes_nearby[bo.name], kAbsValue) /
-						   5;
+						prio += management_data.neuron_pool[49].get_result_safe(
+						           bf->immovable_attributes_nearby[bo.name], kAbsValue) /
+						        5;
 
 						prio += supported_producers_nearby_count * 5 -
 						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -

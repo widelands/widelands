@@ -377,7 +377,8 @@ private:
 
 	// NOCOM
 	std::map<BuildingAttribute, std::set<Widelands::MapObjectDescr::AttributeIndex>> attributes_;
-	std::map<std::string, std::set<Widelands::MapObjectDescr::AttributeIndex>> immovable_attributes_for_building_;
+	std::map<std::string, std::set<Widelands::MapObjectDescr::AttributeIndex>>
+	   immovable_attributes_for_building_;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
