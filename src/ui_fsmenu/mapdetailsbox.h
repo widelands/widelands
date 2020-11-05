@@ -43,7 +43,9 @@ public:
 	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(const std::function<void()>& action);
 
-	void force_new_dimensions(float scale, uint32_t standard_element_height, uint32_t i);
+	void force_new_dimensions(float scale,
+	                          uint32_t standard_element_width,
+	                          uint32_t standard_element_height);
 
 	// TODO(jmoerschbach): only used by multiplayer screen...
 	void set_map_description_text(const std::string& text);
@@ -60,7 +62,7 @@ private:
 	UI::MultilineTextarea map_description_;
 	UI::SuggestedTeamsBox suggested_teams_box_;
 
-	void show_map_description(Widelands::Map& map, GameSettingsProvider* settings);
+	void show_map_description(const Widelands::Map& map, GameSettingsProvider* settings);
 	void show_map_description_savegame(const GameSettings& game_settings);
 	void show_map_name(const GameSettings& game_settings);
 };

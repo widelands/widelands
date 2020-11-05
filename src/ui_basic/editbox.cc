@@ -53,11 +53,19 @@ bool inline copy_paste_modifier() {
 namespace UI {
 
 struct EditBoxImpl {
+	enum class Mode { kNormal, kSelection };
+
 	explicit EditBoxImpl(const UI::TextPanelStyleInfo& init_style)
 	   : background_style(&init_style.background()),
 	     font_style(&init_style.font()),
 	     margin(init_style.background().margin()),
-	     font_scale(1.0f) {
+	     font_scale(1.0f),
+	     maxLength(1),
+	     caret(0),
+	     selection_end(0),
+	     selection_start(0),
+	     mode(Mode::kNormal),
+	     scrolloffset(0) {
 	}
 
 	/// Background color and texture
@@ -87,8 +95,6 @@ struct EditBoxImpl {
 	/// Initial position of text when selection was started
 	uint32_t selection_start;
 
-	enum class Mode { kNormal, kSelection };
-
 	Mode mode;
 
 	/// Current scrolling offset to the text anchor position, in pixels
@@ -115,11 +121,6 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 
 	// Set alignment to the UI language's principal writing direction
 	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
-	m_->caret = 0;
-	m_->mode = EditBoxImpl::Mode::kNormal;
-	m_->selection_end = 0;
-	m_->selection_start = 0;
-	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
 
