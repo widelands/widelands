@@ -54,7 +54,6 @@ protected:
 	virtual void clicked_back() = 0;
 	virtual bool clicked_select_map() = 0;
 
-	FullscreenMenuMain& fsmm_;
 	LuaInterface* lua_;
 
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this

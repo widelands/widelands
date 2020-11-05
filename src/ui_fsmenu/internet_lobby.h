@@ -67,8 +67,6 @@ private:
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
-	FullscreenMenuMain& fsmm_;
-
 	// Left Column
 	UI::Textarea label_clients_online_;
 	UI::Table<const InternetClient* const> clientsonline_table_;

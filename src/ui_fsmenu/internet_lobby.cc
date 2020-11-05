@@ -51,8 +51,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
    bool registered,
    std::vector<Widelands::TribeBasicInfo>& tribeinfos)
    : TwoColumnsBasicNavigationMenu(fsmm, "metaserver_lobby", _("Metaserver Lobby")),
-     fsmm_(fsmm),
-
      // Left column content
      label_clients_online_(&left_column_box_,
                            UI::PanelStyle::kFsMenu,

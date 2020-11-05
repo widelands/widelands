@@ -27,7 +27,12 @@
 
 namespace FsMenu {
 constexpr int kPadding = 4;
+constexpr double kDefaultColumnWidthFactor = 1.0 / 3;
 
+/**
+ * Base for a menu. Takes care of padding. Use this to freely implement your own layout by adding
+ * your content into header_box and main_box
+ */
 class BaseMenu : public UI::Window {
 public:
 	BaseMenu(FullscreenMenuMain&, const std::string& name, const std::string& title);
@@ -45,14 +50,19 @@ protected:
 
 	UI::Box main_box_, header_box_;
 	uint32_t standard_height_;
+	FullscreenMenuMain& fsmm_;
 };
 
+/**
+ * A Menu which provides a two column layout below the header_box_. Add your content to
+ * TwoColumnsMenu::left_column_box_ and TwoColumnsMenu::right_column_box_
+ */
 class TwoColumnsMenu : public BaseMenu {
 public:
 	TwoColumnsMenu(FullscreenMenuMain&,
 	               const std::string& name,
 	               const std::string& title,
-	               double right_column_width_factor = 1.0 / 3);
+	               double right_column_width_factor = kDefaultColumnWidthFactor);
 	~TwoColumnsMenu() override;
 
 protected:
@@ -66,12 +76,17 @@ private:
 	double right_column_width_factor_;
 };
 
+/**
+ * A two column menu which provides a "Back"-button at the bottom of the right column. Add your
+ * content to TwoColumnsBasicNavigationMenu::left_column_box_ and
+ * TwoColumnsBasicNavigationMenu::right_column_content_box_
+ */
 class TwoColumnsBasicNavigationMenu : public TwoColumnsMenu {
 public:
 	TwoColumnsBasicNavigationMenu(FullscreenMenuMain&,
 	                              const std::string& name,
 	                              const std::string& title,
-	                              double right_column_width_factor = 1.0 / 3);
+	                              double right_column_width_factor = kDefaultColumnWidthFactor);
 	~TwoColumnsBasicNavigationMenu() override;
 
 protected:
@@ -84,13 +99,17 @@ protected:
 
 	UI::Button back_;
 };
-
+/**
+ * A two column menu which provides a "Back"-button and a "Ok"-button at the bottom of the right
+ * column. Add your content to TwoColumnsFullNavigationMenu::left_column_box_ and
+ * TwoColumnsFullNavigationMenu::right_column_content_box_
+ */
 class TwoColumnsFullNavigationMenu : public TwoColumnsBasicNavigationMenu {
 public:
 	TwoColumnsFullNavigationMenu(FullscreenMenuMain&,
 	                             const std::string& name,
 	                             const std::string& title,
-	                             double right_column_width_factor = 1.0 / 3);
+	                             double right_column_width_factor = kDefaultColumnWidthFactor);
 	~TwoColumnsFullNavigationMenu() override;
 
 protected:

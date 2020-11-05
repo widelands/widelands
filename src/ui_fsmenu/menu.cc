@@ -47,7 +47,8 @@ BaseMenu::BaseMenu(FullscreenMenuMain& fsmm, const std::string& name, const std:
         &horizontal_padding_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      main_box_(&vertical_padding_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      header_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     standard_height_(get_h() * 9 / 200) {
+     standard_height_(get_h() * 9 / 200),
+     fsmm_(fsmm) {
 	horizontal_padding_box_.add_space(10 * kPadding);
 	horizontal_padding_box_.add(&vertical_padding_box_, UI::Box::Resizing::kExpandBoth);
 	horizontal_padding_box_.add_space(10 * kPadding);
