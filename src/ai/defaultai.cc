@@ -753,7 +753,8 @@ void DefaultAI::late_initialization() {
 				 *                                -> amazons_rare_tree_cutters_hut
 				 *                                -> amazons_wilderness_keepers_tent
 				 *
-				 *   NOCOM missing, but I think that's correct (they are supported / lumberjack, not supporting):
+				 *   NOCOM missing, but I think that's correct (they are supported / lumberjack, not
+				 * supporting):
 				 *     - amazons_rare_tree_cutters_hut
 				 *     - amazons_woodcutters_hut
 				 *
@@ -873,9 +874,8 @@ void DefaultAI::late_initialization() {
 
 			// Some important buildings are identified
 			// NOCOM !prod.is_enhanced() && Removing this adds amazons_rare_tree_cutters_hut
-			if (prod.input_wares().empty() &&
-			    !prod.output_ware_types().empty() && prod.created_immovables().empty() &&
-			    !prod.collected_immovables().empty()) {
+			if (prod.input_wares().empty() && !prod.output_ware_types().empty() &&
+			    prod.created_immovables().empty() && !prod.collected_immovables().empty()) {
 				bool produces_construction_material = false;
 				bool produces_non_construction_material = false;
 				for (Widelands::DescriptionIndex output_idx : prod.output_ware_types()) {
@@ -1802,7 +1802,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		// Counting trees, rocks, berry bushes nearby
 		for (const auto& attribute_info : attributes_) {
 			// Rocks are not renewable, we will count them only if previous state is nonzero
-			if (attribute_info.first == BuildingAttribute::kNeedsRocks && field.immovables_nearby[attribute_info.first] == 0) {
+			if (attribute_info.first == BuildingAttribute::kNeedsRocks &&
+			    field.immovables_nearby[attribute_info.first] == 0) {
 				continue;
 			}
 			field.immovables_nearby[attribute_info.first] = 0;
@@ -2119,10 +2120,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   (field.unowned_land_nearby) ?
 		      management_data.neuron_pool[25].get_result_safe(field.water_nearby / 2, kAbsValue) :
 		      0;
-		score_parts[25] =
-		   (field.unowned_land_nearby) ?
-		      management_data.neuron_pool[27].get_result_safe(std::max(field.immovables_nearby[BuildingAttribute::kLumberjack], field.immovables_nearby[BuildingAttribute::kRanger]) / 2, kAbsValue) :
-		      0;
+		score_parts[25] = (field.unowned_land_nearby) ?
+		                     management_data.neuron_pool[27].get_result_safe(
+		                        std::max(field.immovables_nearby[BuildingAttribute::kLumberjack],
+		                                 field.immovables_nearby[BuildingAttribute::kRanger]) /
+		                           2,
+		                        kAbsValue) :
+		                     0;
 
 		if (resource_necessity_water_needed_) {
 			score_parts[26] =

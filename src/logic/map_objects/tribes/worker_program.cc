@@ -664,8 +664,7 @@ void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std:
 	// TODO(Gunchleoc): We might need to dig into the called object's program too, but this is good
 	// enough for now.
 	if (!needed_attributes_.empty()) {
-		collected_attributes_.insert(
-		   needed_attributes_.begin(), needed_attributes_.end());
+		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());
 	}
 }
 
@@ -852,8 +851,7 @@ removeobject
 void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
 	act->function = &Worker::run_removeobject;
 	if (!needed_attributes_.empty()) {
-		collected_attributes_.insert(
-		   needed_attributes_.begin(), needed_attributes_.end());
+		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());
 	}
 }
 
