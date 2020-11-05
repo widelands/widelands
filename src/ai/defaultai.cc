@@ -883,8 +883,8 @@ void DefaultAI::late_initialization() {
 					}
 				}
 				if (produces_construction_material) {
-					// TODO(GunChleoc): We should lose the hard distinction between quarry and lumberjack,
-					// so that a building can be both
+					// TODO(GunChleoc): We should lose the hard distinction between quarry and
+					// lumberjack, so that a building can be both
 					if (prod.supported_by_productionsites().empty()) {
 						log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsRocks);
