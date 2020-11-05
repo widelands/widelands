@@ -314,7 +314,7 @@ void init_shortcuts(const bool force_defaults) {
 	Section& s = get_config_section("keyboard");
 	while (Section::Value* v = s.get_next_val()) {
 		char* type;
-		const long i = std::strtol(v->get_name(), &type, 10);
+		const int32_t i = std::strtol(v->get_name(), &type, 10);
 		if (strcmp(type, "sym") == 0) {
 			shortcuts_.at(static_cast<KeyboardShortcut>(i)).sym = v->get_int();
 		} else if (strcmp(type, "mod") == 0) {
