@@ -849,8 +849,8 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 }
 
 bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {
-	EntryRecord& ea = get_record(a);
-	EntryRecord& eb = get_record(b);
+	const EntryRecord& ea = get_record(a);
+	const EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
 bool Table<void*>::handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) {

@@ -44,7 +44,7 @@ enum class TableColumnType { kFixed, kFlexible };
  *    2. a pointer type or
  *    3. uintptr_t.
  */
-template <typename Entry> class Table {
+template <typename Entry> class Table : public Panel {
 public:
 	struct EntryRecord {};
 
@@ -118,11 +118,12 @@ public:
 	std::vector<Recti> focus_overlay_rects();
 
 	// Drawing and event handling
-	void draw(RenderTarget&);
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
-	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool handle_key(bool down, SDL_Keysym code);
+	void draw(RenderTarget&) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 };
 
 template <> class Table<void*> : public Panel {

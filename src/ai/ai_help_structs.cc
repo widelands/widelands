@@ -434,7 +434,7 @@ AiModeBuildings BuildingObserver::aimode_limit_status() const {
 		return AiModeBuildings::kAnotherAllowed;
 	}
 }
-bool BuildingObserver::buildable(Widelands::Player& p) {
+bool BuildingObserver::buildable(const Widelands::Player& p) {
 	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id);
 }
 

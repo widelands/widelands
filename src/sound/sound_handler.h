@@ -30,6 +30,7 @@
 
 #include <SDL_mutex.h>
 
+#include "base/macros.h"
 #include "base/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"
@@ -151,6 +152,8 @@ class SoundHandler {
 public:
 	SoundHandler();
 	~SoundHandler();
+
+	DISALLOW_COPY_AND_ASSIGN(SoundHandler);
 
 	void save_config();
 	void load_config();

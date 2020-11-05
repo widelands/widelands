@@ -197,7 +197,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	Widelands::Player& get_plr(lua_State* L, Widelands::Game& game);
+	Widelands::Player& get_plr(lua_State* L, const Widelands::Game& game);
 	const Widelands::Message& get(lua_State* L, Widelands::Game& game);
 };
 

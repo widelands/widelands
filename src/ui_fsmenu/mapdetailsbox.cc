@@ -214,7 +214,8 @@ void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 	map_name_.set_text(!game_settings.mapname.empty() ? _(game_settings.mapname) : nomap);
 }
 
-void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvider* settings) {
+void MapDetailsBox::show_map_description(const Widelands::Map& map,
+                                         GameSettingsProvider* settings) {
 	set_map_description_text(assemble_infotext_for_map(map, settings->settings()));
 }
 

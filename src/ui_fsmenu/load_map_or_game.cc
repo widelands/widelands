@@ -65,7 +65,7 @@ void FullscreenMenuLoadMapOrGame::layout() {
 	ok_.set_pos(Vector2i(get_inner_w() - right_column_margin_ - butw_, buty_));
 }
 
-int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(UI::Panel& preceding_panel) {
+int32_t FullscreenMenuLoadMapOrGame::get_y_from_preceding(const UI::Panel& preceding_panel) {
 	return preceding_panel.get_y() + preceding_panel.get_h();
 }
 
