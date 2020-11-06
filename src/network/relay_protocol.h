@@ -197,6 +197,7 @@ enum class RelayCommand : uint8_t {
 	 * \li unsigned_8: Seconds since the last kPong has been received by the relay. Capped to max.
 	 * 255ms.
 	 */
+	// TODO(Notabilis): Above documentation is broken. Seconds or Milliseconds? Or something else?
 	kRoundTripTimeResponse = 7,
 	/// \}
 
