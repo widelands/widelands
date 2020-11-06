@@ -368,12 +368,6 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      inland(false),
      local_soldier_capacity(0),
      is_militarysite(false) {
-	// explanation of starting values
-	// this is done to save some work for AI (CPU utilization)
-	// base rules are:
-	// count of rocks can only decrease, so  amount of rocks
-	// is recalculated only when previous count is positive
-	immovables_nearby[BuildingAttribute::kNeedsRocks] = 1;
 }
 
 MineableField::MineableField(const Widelands::FCoords& fc)

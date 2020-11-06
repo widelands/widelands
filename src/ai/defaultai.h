@@ -375,14 +375,14 @@ private:
 	// id of iron as resource to identify iron mines in mines_per_type map
 	int32_t iron_resource_id = Widelands::INVALID_INDEX;
 
-	// NOCOM
-	std::map<BuildingAttribute, std::set<Widelands::MapObjectDescr::AttributeIndex>> attributes_;
-	std::map<std::string, std::set<Widelands::MapObjectDescr::AttributeIndex>> immovable_attributes_for_building_;
+	// Record with immovable attribute is created or collected by which building names and attributes
+	std::map<Widelands::MapObjectDescr::AttributeIndex, std::set<ImmovableAttribute>> buildings_immovable_attributes_;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
+	// TODO(GunChleoc): Get rid of this hard-coding
 	std::vector<std::string> const armors_and_weapons = {
-	   "ax", "armor", "helm", "lance", "trident", "tabard", "shield", "mask", "spear"};
+	   "ax", "armor", "boots", "helm", "lance", "padded", "trident", "tabard", "shield", "mask", "spear", "warrior"};
 
 	// seafaring related
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
