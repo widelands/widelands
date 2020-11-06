@@ -55,6 +55,8 @@ wl_library(ui_fsmenu_main
     main.cc
     main.h
     menu_target.h
+    menu.h
+    menu.cc
   DEPENDS
     base_i18n
     base_random
@@ -71,17 +73,6 @@ wl_library(ui_fsmenu_main
     wui_common_gamedetails
     wui_common_mapdetails
   USES_SDL2
-)
-
-wl_library(ui_fsmenu_loading_common
-  SRCS
-    load_map_or_game.cc
-    load_map_or_game.h
-  DEPENDS
-    base_i18n
-    io_filesystem
-    ui_basic
-    ui_fsmenu_main
 )
 
 wl_library(ui_fsmenu_gameloading
@@ -124,7 +115,6 @@ wl_library(ui_fsmenu_gameloading
     ui_basic
     ui_fsmenu_main
     ui_fsmenu_helpwindow
-    ui_fsmenu_loading_common
     ui_fsmenu_maploading
     widelands_options
     wui_chat_ui
@@ -151,7 +141,6 @@ wl_library(ui_fsmenu_maploading
     base_i18n
     base_log
     graphic_image_cache
-    graphic_fonthandler
     graphic_surface
     graphic_text_layout
     io_filesystem
@@ -165,7 +154,7 @@ wl_library(ui_fsmenu_maploading
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_loading_common
+    ui_fsmenu_main
     wui_common_mapdetails
 )
 
@@ -186,7 +175,7 @@ wl_library(ui_fsmenu_network
     network
     sound
     ui_basic
-    ui_fsmenu_loading_common
+    ui_fsmenu_main
     widelands_options
     wui_chat_ui
 )
