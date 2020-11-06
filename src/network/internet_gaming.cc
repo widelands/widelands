@@ -873,12 +873,11 @@ const std::vector<InternetClient>* InternetGaming::clients() {
 /// ChatProvider: sends a message via the metaserver.
 void InternetGaming::send(const std::string& msg) {
 	// TODO(Notabilis): Messages can get lost when we are temporarily disconnected from the
-	// metaserver,
-	// even when we reconnect again. "Answered" messages like IGPCMD_GAME_CONNECT are resent but chat
-	// messages are not. Resend them after some time when we did not receive the matching IGPCMD_CHAT
-	// command from the server? For global/public messages we could wait for the returned IGPCMD_CHAT
-	// from the metaserver, similar to other commands. What about private messages? Maybe modify the
-	// metaserver to send them back, too?
+	// metaserver, even when we reconnect again. "Answered" messages like IGPCMD_GAME_CONNECT
+	// are resent but chat messages are not. Resend them after some time when we did not receive
+	// the matching IGPCMD_CHAT command from the server? For global/public messages we could wait
+	// for the returned IGPCMD_CHAT from the metaserver, similar to other commands.
+	// What about private messages? Maybe modify the metaserver to send them back, too?
 	if (!logged_in()) {
 		format_and_add_chat(
 		   "", "", true, _("Message could not be sent: You are not connected to the metaserver!"));
@@ -1053,10 +1052,18 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 }
 
 /**
- * Check for vaild username characters.
+ * Check for vaild username characters and make sure it's not "team".
  */
 bool InternetGaming::valid_username(const std::string& username) {
-	return !(username.empty() || username.find_first_not_of(
-	                                "abcdefghijklmnopqrstuvwxyz"
-	                                "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size());
+	if (username.empty() ||
+	    username.find_first_not_of("abcdefghijklmnopqrstuvwxyz"
+	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
+		return false;
+	}
+	// Check whether the username is not "team" without regarding upper/lower case
+	// Note: The memory for the lowercase version must be allocated before calling transform()
+	std::string lowercase = username;
+	std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(),
+	               [](unsigned char c) { return std::tolower(c); });
+	return lowercase != "team";
 }
