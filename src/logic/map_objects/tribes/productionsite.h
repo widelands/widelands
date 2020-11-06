@@ -98,7 +98,8 @@ public:
 	const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
-	/// Map objects that this production site needs nearby according to attribute, without removing them from the map
+	/// Map objects that this production site needs nearby according to attribute, without removing
+	/// them from the map
 	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	needed_attributes() const {
 		return needed_attributes_;

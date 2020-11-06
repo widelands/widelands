@@ -2368,7 +2368,11 @@ void DefaultAI::update_productionsite_stats() {
 	}
 }
 
-unsigned DefaultAI::find_immovables_nearby(const std::set<std::pair<Widelands::MapObjectType, Widelands::MapObjectDescr::AttributeIndex> >& attribute_infos, const Widelands::FCoords& position, const WorkareaInfo& workarea_info) const {
+unsigned DefaultAI::find_immovables_nearby(
+   const std::set<std::pair<Widelands::MapObjectType, Widelands::MapObjectDescr::AttributeIndex>>&
+      attribute_infos,
+   const Widelands::FCoords& position,
+   const WorkareaInfo& workarea_info) const {
 	unsigned result = 0;
 
 	// Get max radius of recursive workarea
@@ -2384,9 +2388,8 @@ unsigned DefaultAI::find_immovables_nearby(const std::set<std::pair<Widelands::M
 			continue;
 		}
 		result += game().map().find_immovables(
-		   game(),
-		   Widelands::Area<Widelands::FCoords>(position, radius),
-		   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
+		   game(), Widelands::Area<Widelands::FCoords>(position, radius), nullptr,
+		   Widelands::FindImmovableAttribute(attribute_info.second));
 	}
 	return result;
 }
@@ -4784,7 +4787,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			return false;
 		}
 
-		unsigned trees_nearby = find_immovables_nearby(site.site->descr().collected_attributes(), map.get_fcoords(site.site->get_position()), site.bo->desc->workarea_info_);
+		unsigned trees_nearby = find_immovables_nearby(site.site->descr().collected_attributes(),
+		                                               map.get_fcoords(site.site->get_position()),
+		                                               site.bo->desc->workarea_info_);
 
 		if (trees_nearby > trees_nearby_treshold_ / 3) {
 			return false;
@@ -4844,7 +4849,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	// Quarry handling
 	if (site.bo->is(BuildingAttribute::kNeedsRocks)) {
 
-		unsigned rocks_nearby = find_immovables_nearby(site.site->descr().collected_attributes(), map.get_fcoords(site.site->get_position()), site.bo->desc->workarea_info_);
+		unsigned rocks_nearby = find_immovables_nearby(site.site->descr().collected_attributes(),
+		                                               map.get_fcoords(site.site->get_position()),
+		                                               site.bo->desc->workarea_info_);
 
 		if (rocks_nearby == 0) {
 			// destruct the building and it's flag (via flag destruction)
@@ -5001,7 +5008,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			return false;
 		}
 
-		unsigned trees_nearby = find_immovables_nearby(site.site->descr().collected_attributes(), map.get_fcoords(site.site->get_position()), site.bo->desc->workarea_info_);
+		unsigned trees_nearby = find_immovables_nearby(site.site->descr().collected_attributes(),
+		                                               map.get_fcoords(site.site->get_position()),
+		                                               site.bo->desc->workarea_info_);
 
 		// stop ranger if enough trees around regardless of policy
 		if (trees_nearby > 25) {

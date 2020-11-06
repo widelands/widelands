@@ -512,7 +512,8 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	bool requires_supporters = false;
-	// For rangers, fishbreeders. The index is the productionsite's one. We remember both for faster retrieval
+	// For rangers, fishbreeders. The index is the productionsite's one. We remember both for faster
+	// retrieval
 	std::map<Widelands::DescriptionIndex, const Widelands::ProductionSiteDescr*> supported_producers;
 
 	// information needed for decision on new building construction
