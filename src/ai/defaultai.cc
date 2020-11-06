@@ -756,7 +756,7 @@ void DefaultAI::late_initialization() {
 				 *
 				 *   frisians_clay_pit -> frisians_aqua_farm
 				 *                     -> frisians_charcoal_burners_house
-				 *                     -> frisians_fishers_house
+				 *                     -> frisians_fishers_house NOCOM missing
 				 *
 				 *
 				 *   frisians_farm -> frisians_beekeepers_house
@@ -991,7 +991,7 @@ void DefaultAI::late_initialization() {
 				 *   amazons_rare_tree_cutters_hut
 				 *   amazons_hunter_gatherers_hut
 				 *   amazons_liana_cutters_hut
-				 *   amazons_rare_tree_plantation
+				 *   amazons_rare_tree_plantation NOCOM hack removed, it's a ranger now
 				 *
 				 *   frisians_charcoal_burners_house
 				 *   frisians_collectors_house
@@ -1073,12 +1073,12 @@ void DefaultAI::late_initialization() {
 					bo.set_is(BuildingAttribute::kRanger);
 					/* Buildings detected at the time of writing:
 					 *
-					 *   amazons_jungle_preservers_hut
-					 *   amazons_rare_tree_plantation NOCOM new
-					 *   atlanteans_foresters_house
-					 *   barbarians_rangers_hut
-					 *   empire_foresters_house
-					 *   frisians_foresters_house
+					 *   amazons_jungle_preservers_hut -> amazons_woodcutters_hut
+					 *   amazons_rare_tree_plantation  -> amazons_rare_tree_cutters_hut NOCOM new
+					 *   atlanteans_foresters_house    -> atlanteans_woodcutters_house
+					 *   barbarians_rangers_hut        -> barbarians_lumberjacks_hut
+					 *   empire_foresters_house        -> empire_lumberjacks_house
+					 *   frisians_foresters_house      -> frisians_woodcutters_house
 					 *
 					 * */
 					for (const auto& attribute : prodsite->created_attributes()) {
