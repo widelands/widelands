@@ -756,8 +756,9 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 /* RST
    .. method:: run_training_wheel(name[, force])
 
-      Trigger running a training wheel while skipping the dependency check.
-      Previously solved training wheels will be ignored if ``force == true``.
+      Trigger running a training wheel. This function will skip the dependency check, so the given
+      training wheel will run even if its preconditions haven't been met. No further training wheels
+      will be triggered. Previously solved training wheels will not be run unless ``force == true``.
 
       .. note:: Intended for use in scenarios only.
 
