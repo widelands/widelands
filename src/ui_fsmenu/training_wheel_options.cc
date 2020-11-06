@@ -137,7 +137,9 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 
 	// Toggle twice to make it expand to both labels
 	int desired_width = mark_unmark_button_->get_w();
+	mark_unmark_button_->expand(0, 0);
 	toggle_mark_unmark_all_button();
+	mark_unmark_button_->expand(0, 0);
 	desired_width = std::max(desired_width, mark_unmark_button_->get_w());
 	toggle_mark_unmark_all_button();
 
@@ -174,6 +176,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	// Make all buttons the same width
 	desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()),
 	                         std::max(desired_width, ok_button->get_w()));
+
 	cancel_button->set_desired_size(desired_width, cancel_button->get_h());
 	reset_button->set_desired_size(desired_width, reset_button->get_h());
 	mark_unmark_button_->set_desired_size(desired_width, mark_unmark_button_->get_h());
@@ -186,5 +189,4 @@ void TrainingWheelOptions::toggle_mark_unmark_all_button() {
 	mark_unmark_state_ = !mark_unmark_state_;
 	/** TRANSLATORS: Button label to mark or unmark all checkboxes in an options window */
 	mark_unmark_button_->set_title(mark_unmark_state_ ? _("Mark All") : _("Unmark All"));
-	mark_unmark_button_->expand(0, 0);
 }
