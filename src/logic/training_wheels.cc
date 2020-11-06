@@ -132,14 +132,14 @@ bool TrainingWheels::acquire_lock(const std::string& objective) {
 	}
 	const bool result = current_objective_ == objective;
 	if (result) {
-		log_dbg("Training wheel '%s' acquired the lock", objective.c_str());
+		log_info("Training wheel '%s' acquired the lock", objective.c_str());
 	}
 	return result;
 }
 
 // TODO(Gunchleoc): Optionally add training wheel name so that it can be put back in the queue
 void TrainingWheels::release_lock() {
-	log_dbg("Training wheel lock released");
+	log_info("Training wheel lock released");
 	current_objective_ = "";
 }
 
