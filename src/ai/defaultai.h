@@ -376,13 +376,15 @@ private:
 	int32_t iron_resource_id = Widelands::INVALID_INDEX;
 
 	// Record with immovable attribute is created or collected by which building names and attributes
-	std::map<Widelands::MapObjectDescr::AttributeIndex, std::set<ImmovableAttribute>> buildings_immovable_attributes_;
+	std::map<Widelands::MapObjectDescr::AttributeIndex, std::set<ImmovableAttribute>>
+	   buildings_immovable_attributes_;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
 	// TODO(GunChleoc): Get rid of this hard-coding
-	std::vector<std::string> const armors_and_weapons = {
-	   "ax", "armor", "boots", "helm", "lance", "padded", "trident", "tabard", "shield", "mask", "spear", "warrior"};
+	std::vector<std::string> const armors_and_weapons = {"ax",     "armor",  "boots",   "helm",
+	                                                     "lance",  "padded", "trident", "tabard",
+	                                                     "shield", "mask",   "spear",   "warrior"};
 
 	// seafaring related
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
