@@ -59,14 +59,16 @@ struct PlayerSettings {
 };
 
 struct UserSettings {
-	// TODO(k.halfman): make this some const instead of calculating this every time
-	static uint8_t none() {
+	// Seems to be used if a user is a spectator but not a player
+	constexpr static uint8_t none() {
 		return std::numeric_limits<uint8_t>::max();
 	}
-	static uint8_t not_connected() {
+	// Seems to be used only in the GameHost when a client connects over the
+	// (low level) network but has not finished its initialization yet
+	constexpr static uint8_t not_connected() {
 		return none() - 1;
 	}
-	static uint8_t highest_playernum() {
+	constexpr static uint8_t highest_playernum() {
 		return not_connected() - 1;
 	}
 
@@ -90,7 +92,7 @@ struct NoteGameSettings {
 	CAN_BE_SENT_AS_NOTE(NoteId::GameSettings)
 
 	enum class Action {
-		kUser,    // A client has picked a different player slot / become an observer
+		kUser,    // A client has picked a different player slot / become a spectator
 		kPlayer,  // A player slot has changed its status (type, tribe etc.)
 		kMap      // A new map/savegame was selected
 	};
@@ -158,7 +160,7 @@ struct GameSettings {
 	/// Savegame slots and certain scenario slots can't be closed
 	bool uncloseable(PlayerSlot slot) const;
 
-	/// Number of player position
+	/// Number of player position of the host player
 	int16_t playernum;
 	/// Number of users entry
 	int8_t usernum;
@@ -181,7 +183,7 @@ struct GameSettings {
 	/// Is a savegame selected for loading?
 	bool savegame;
 
-	// Is all fighting forbidden?
+	/// Is all fighting forbidden?
 	bool peaceful;
 
 	// Whether players may pick their own starting positions

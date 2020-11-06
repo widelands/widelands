@@ -36,6 +36,8 @@ wl_library(network
     network_player_settings_backend.h
     network_protocol.h
     relay_protocol.h
+    participantlist.cc
+    participantlist.h
   USES_BOOST_LIBRARIES
   USES_CURL
   USES_SDL2
@@ -55,6 +57,7 @@ wl_library(network
     logic
     logic_addons
     logic_commands
+    logic_constants
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
