@@ -37,6 +37,7 @@ wl_library(network
     network_protocol.h
     relay_protocol.h
   USES_BOOST_LIBRARIES
+  USES_CURL
   USES_SDL2
   DEPENDS
     ai
@@ -66,5 +67,4 @@ wl_library(network
     widelands_ball_of_mud
     widelands_options
     wui
-  curl
 )

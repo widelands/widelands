@@ -76,12 +76,12 @@ __USES_INCLUDES['USES_OPENGL'] = r'(<glbinding\/\w+\.h>)|(<GL\/glew\.h>)'
 __USES_INCLUDES['USES_ICU'] = r'<unicode\/.+\.h>'
 __USES_INCLUDES['USES_INTL'] = r'"third_party\/gettext\/gettext\.h"'
 __USES_INCLUDES['USES_PNG'] = r'<png\.h>'
+__USES_INCLUDES['USES_CURL'] = r'<curl\/curl\.h>'
 __USES_INCLUDES['USES_SDL2_IMAGE'] = r'<SDL_image\.h>'
 __USES_INCLUDES['USES_SDL2_MIXER'] = r'<SDL_mixer\.h>'
 __USES_INCLUDES['USES_SDL2_TTF'] = r'<SDL_ttf\.h>'
 __USES_INCLUDES['USES_SDL2'] = r'(?!(<SDL_image\.h>|<SDL_mixer\.h>|<SDL_ttf\.h>))(<SDL.+\.h>)'
 __USES_INCLUDES['USES_ZLIB'] = r'"zlib\.h"'
-__USES_INCLUDES['curl'] = r'<curl\/curl\.h>'
 
 
 def extract_uses_includes(srcdir, source):

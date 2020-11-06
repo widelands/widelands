@@ -6,6 +6,7 @@ macro(_parse_common_args ARGS)
     C_LIBRARY # Pure C library. No CXX flags.
     WIN32 # Windows binary/library.
     USES_BOOST_LIBRARIES
+    USES_CURL
     USES_INTL
     USES_OPENGL
     USES_PNG
@@ -122,6 +123,10 @@ macro(_common_compile_tasks)
 
   if(ARG_USES_PNG)
     target_link_libraries(${NAME} PNG::PNG)
+  endif()
+
+  if(ARG_USES_CURL)
+    target_link_libraries(${NAME} curl)
   endif()
 
   if(ARG_USES_SDL2)

@@ -339,8 +339,6 @@ IF (WIN32)
   endif (CMAKE_SIZEOF_VOID_P EQUAL 4)
 endif (WIN32)
 
-SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -lcurl")
-
 # on BSD this must be explicitly linked
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   # Not needed on Debian GNU/kFreeBSD..
