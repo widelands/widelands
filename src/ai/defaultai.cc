@@ -752,7 +752,8 @@ void DefaultAI::late_initialization() {
 				 *                                -> amazons_rare_tree_cutters_hut
 				 *                                -> amazons_wilderness_keepers_tent
 				 *
-				 *   amazons_rare_tree_cutters_hut, amazons_woodcutters_hut NOCOM removed, they are lumberjacks
+				 *   amazons_rare_tree_cutters_hut, amazons_woodcutters_hut NOCOM removed, they are
+				 * lumberjacks
 				 *
 				 *   frisians_clay_pit -> frisians_aqua_farm
 				 *                     -> frisians_charcoal_burners_house
@@ -896,7 +897,8 @@ void DefaultAI::late_initialization() {
 						 *
 						 * */
 						for (const auto& attribute : prod.collected_attributes()) {
-							buildings_immovable_attributes_[attribute.second].insert(ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
+							buildings_immovable_attributes_[attribute.second].insert(
+							   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
 						}
 					} else {
 						log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
@@ -912,7 +914,8 @@ void DefaultAI::late_initialization() {
 						 *
 						 * */
 						for (const auto& attribute : prod.collected_attributes()) {
-							buildings_immovable_attributes_[attribute.second].insert(ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
+							buildings_immovable_attributes_[attribute.second].insert(
+							   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
 						}
 						lumberjacks.insert(&prod);
 					}
@@ -928,7 +931,8 @@ void DefaultAI::late_initialization() {
 					 * */
 
 					for (const auto& attribute : prod.collected_attributes()) {
-						buildings_immovable_attributes_[attribute.second].insert(ImmovableAttribute(bo.name, BuildingAttribute::kNeedsBerry));
+						buildings_immovable_attributes_[attribute.second].insert(
+						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsBerry));
 					}
 				}
 			}
@@ -1082,7 +1086,8 @@ void DefaultAI::late_initialization() {
 					 *
 					 * */
 					for (const auto& attribute : prodsite->created_attributes()) {
-						buildings_immovable_attributes_[attribute.second].insert(ImmovableAttribute(bo.name, BuildingAttribute::kRanger));
+						buildings_immovable_attributes_[attribute.second].insert(
+						   ImmovableAttribute(bo.name, BuildingAttribute::kRanger));
 					}
 				}
 			}
@@ -1112,7 +1117,8 @@ void DefaultAI::late_initialization() {
 
 	if (count_buildings_with_attribute(BuildingAttribute::kFisher) != 1) {
 		log_warn("The AI needs the tribe '%s' to define 1 type of fisher's building. "
-		         "This is the building that collects the map resource 'resource_fish' and has 'needs_water' "
+		         "This is the building that collects the map resource 'resource_fish' and has "
+		         "'needs_water' "
 		         "in its AI hints.",
 		         tribe_->name().c_str());
 	}
@@ -1782,19 +1788,20 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		// Counting trees, rocks, berry bushes nearby
 		for (const auto& attribute_category : buildings_immovable_attributes_) {
 			for (const ImmovableAttribute& attribute_info : attribute_category.second) {
-				// Rocks are not renewable, we will count them only if they were never counted or previous state is nonzero.
-				// This is done to save some work for AI (CPU utilization).
+				// Rocks are not renewable, we will count them only if they were never counted or
+				// previous state is nonzero. This is done to save some work for AI (CPU utilization).
 				if (attribute_info.building_attribute == BuildingAttribute::kNeedsRocks) {
-					auto needs_rocks_it = field.immovables_by_attribute_nearby.find(BuildingAttribute::kNeedsRocks);
-					if (needs_rocks_it != field.immovables_by_attribute_nearby.end() && needs_rocks_it->second == 0) {
+					auto needs_rocks_it =
+					   field.immovables_by_attribute_nearby.find(BuildingAttribute::kNeedsRocks);
+					if (needs_rocks_it != field.immovables_by_attribute_nearby.end() &&
+					    needs_rocks_it->second == 0) {
 						continue;
 					}
 				}
-				const uint8_t amount =
-						map.find_immovables(
-						   game(),
-						   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
-						   nullptr, Widelands::FindImmovableAttribute(attribute_category.first));
+				const uint8_t amount = map.find_immovables(
+				   game(),
+				   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
+				   nullptr, Widelands::FindImmovableAttribute(attribute_category.first));
 
 				field.immovables_by_attribute_nearby[attribute_info.building_attribute] = amount;
 				field.immovables_by_name_nearby[attribute_info.building_name] = amount;
@@ -2096,13 +2103,14 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   (field.unowned_land_nearby) ?
 		      management_data.neuron_pool[25].get_result_safe(field.water_nearby / 2, kAbsValue) :
 		      0;
-		score_parts[25] = (field.unowned_land_nearby) ?
-		                     management_data.neuron_pool[27].get_result_safe(
-		                        std::max(field.immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
-		                                 field.immovables_by_attribute_nearby[BuildingAttribute::kRanger]) /
-		                           2,
-		                        kAbsValue) :
-		                     0;
+		score_parts[25] =
+		   (field.unowned_land_nearby) ?
+		      management_data.neuron_pool[27].get_result_safe(
+		         std::max(field.immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
+		                  field.immovables_by_attribute_nearby[BuildingAttribute::kRanger]) /
+		            2,
+		         kAbsValue) :
+		      0;
 
 		if (resource_necessity_water_needed_) {
 			score_parts[26] =
@@ -3093,9 +3101,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						           supported_producers_nearby_count * 5, kAbsValue) /
 						        2;
 
-						prio +=
-						   management_data.neuron_pool[49].get_result_safe(bf->immovables_by_name_nearby[bo.name], kAbsValue) /
-						   5;
+						prio += management_data.neuron_pool[49].get_result_safe(
+						           bf->immovables_by_name_nearby[bo.name], kAbsValue) /
+						        5;
 
 						prio += supported_producers_nearby_count * 5 -
 						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
@@ -3111,8 +3119,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						// frisian claypit and frisian farm
 					} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
 						// we dont like trees nearby
-						prio += 1 - std::max(bf->immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
-								bf->immovables_by_attribute_nearby[BuildingAttribute::kRanger]) / 3;
+						prio += 1 - std::max(
+						               bf->immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
+						               bf->immovables_by_attribute_nearby[BuildingAttribute::kRanger]) /
+						               3;
 						// and be far from rangers
 						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;
@@ -3163,8 +3173,10 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						// frisian berry farm
 					} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
 						// we dont like trees nearby
-						prio += 1 - std::max(bf->immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
-								bf->immovables_by_attribute_nearby[BuildingAttribute::kRanger]) / 4;
+						prio += 1 - std::max(
+						               bf->immovables_by_attribute_nearby[BuildingAttribute::kLumberjack],
+						               bf->immovables_by_attribute_nearby[BuildingAttribute::kRanger]) /
+						               4;
 						// and be far from rangers
 						prio += 1 - bf->rangers_nearby *
 						               std::abs(management_data.get_military_number_at(102)) / 5;

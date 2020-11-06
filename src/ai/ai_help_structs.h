@@ -341,12 +341,16 @@ struct WalkableSpot {
 
 // For counting immovables by associated building name or category on nearby fields
 struct ImmovableAttribute {
-	explicit ImmovableAttribute(const std::string& init_building_name, BuildingAttribute init_building_attribute):
-		building_name(init_building_name), building_attribute(init_building_attribute) {}
+	explicit ImmovableAttribute(const std::string& init_building_name,
+	                            BuildingAttribute init_building_attribute)
+	   : building_name(init_building_name), building_attribute(init_building_attribute) {
+	}
 
 	bool operator<(const ImmovableAttribute& other) const {
 		// We don't care about the sort order, we just need one so that we can stick it in a set
-		return building_attribute < other.building_attribute || (building_attribute == other.building_attribute && building_name < other.building_name);
+		return building_attribute < other.building_attribute ||
+		       (building_attribute == other.building_attribute &&
+		        building_name < other.building_name);
 	}
 
 	const std::string building_name;
@@ -376,7 +380,8 @@ struct BuildableField {
 	uint16_t unowned_iron_mines_nearby;
 	// Immovables categorized by building name, so we can have multiple lumberjack/ranger types
 	std::map<std::string, uint8_t> immovables_by_name_nearby;
-	// Immovables categorized by building attribute, so other buildings can access the information (.g. space consumers). Also used for the neurons.
+	// Immovables categorized by building attribute, so other buildings can access the information
+	// (.g. space consumers). Also used for the neurons.
 	std::map<BuildingAttribute, uint8_t> immovables_by_attribute_nearby;
 	int16_t water_nearby;
 	int16_t open_water_nearby;
