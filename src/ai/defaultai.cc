@@ -756,7 +756,7 @@ void DefaultAI::late_initialization() {
 				 *
 				 *   frisians_clay_pit -> frisians_aqua_farm
 				 *                     -> frisians_charcoal_burners_house
-				 *                     -> frisians_fishers_house NOCOM missing
+				 *                     -> frisians_fishers_house NOCOM removed, they only fish in water
 				 *
 				 *
 				 *   frisians_farm -> frisians_beekeepers_house
