@@ -1355,28 +1355,28 @@ descriptions:new_tribe {
       {
          name = "wheatfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for a frisian immovable: Wheat field
+            -- TRANSLATORS: Helptext for an empire/barbarian immovable usable by frisians: Wheat field
             purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "cornfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for a frisian immovable: Corn Field
+            -- TRANSLATORS: Helptext for a an atlantean immovable usable by frisians: Corn Field
             purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "blackrootfield_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for a frisian immovable: Blackroot Field
+            -- TRANSLATORS: Helptext for an atlantean immovable usable by frisians: Blackroot Field
             purpose = _("This field is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
       {
          name = "grapevine_medium",
          helptexts = {
-            -- TRANSLATORS: Helptext for a frisian immovable: Grapevine
+            -- TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
             purpose = _("This grapevine is flowering. Honey can be produced from it by a beekeeper.")
          }
       },
@@ -1384,10 +1384,102 @@ descriptions:new_tribe {
       {
          name = "grapevine_ripe",
          helptexts = {
-            -- TRANSLATORS: Helptext for a frisian immovable: Grapevine
+            -- TRANSLATORS: Helptext for an empire immovable usable by frisians: Grapevine
             purpose = _("This grapevine is ready for harvesting.")
          }
-      }
+      },
+      -- non frisian Immovables used by the woodcutter
+      {
+         name = "deadtree7",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
+            purpose = _("The remains of an old tree.")
+         }
+      },
+      {
+         name = "balsa_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by frisians: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
    },
 
    -- The order here also determines the order in lists on screen.
@@ -1534,9 +1626,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Burner's House
             purpose = pgettext("building", "Burns logs into charcoal."),
             -- TRANSLATORS: Note helptext for a frisian production site: Charcoal Burner's House
-            note = pgettext("building", "The charcoal burner's house needs holes in the ground that were dug by a clay pit’s worker nearby to erect charcoal stacks in them."),
+            note = pgettext("building", "The charcoal burner’s house needs holes in the ground that were dug by a clay pit’s worker nearby to erect charcoal stacks in them."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Charcoal Burner's House
-            performance = pgettext("frisians_building", "The charcoal burner's house needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 80):bformat(80))
+            performance = pgettext("frisians_building", "The charcoal burner’s house needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 80):bformat(80))
          }
       },
       {

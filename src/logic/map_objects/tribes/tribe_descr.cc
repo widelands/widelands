@@ -382,19 +382,6 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& descriptio
 		}
 		resource_indicators_[resource] = resis;
 	}
-
-	// Verify the resource indicators
-	for (DescriptionIndex resource_index = 0; resource_index < descriptions.nr_resources();
-	     resource_index++) {
-		const ResourceDescription* res = descriptions.get_resource_descr(resource_index);
-		if (res->detectable()) {
-			// This function will throw an exception if this tribe doesn't have a high enough resource
-			// indicator for this resource
-			get_resource_indicator(res, res->max_amount());
-		}
-	}
-	// For the "none" indicator
-	get_resource_indicator(nullptr, 0);
 }
 
 void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions) {
@@ -837,6 +824,10 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 			descriptions.increase_largest_workarea(pair.first);
 		}
 
+		if (building->get_built_over_immovable() != INVALID_INDEX) {
+			buildings_built_over_immovables_.insert(building);
+		}
+
 		ProductionSiteDescr* productionsite = dynamic_cast<ProductionSiteDescr*>(building);
 		if (productionsite != nullptr) {
 			// List productionsite for use below
@@ -855,8 +846,28 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				assert(has_worker(job.first));
 				descriptions.get_mutable_worker_descr(job.first)->add_employer(index);
 			}
+			// Resource info
+			for (const std::string& r : productionsite->collected_resources()) {
+				used_resources_.insert(r);
+			}
+			for (const std::string& r : productionsite->created_resources()) {
+				used_resources_.insert(r);
+			}
 		}
 	}
+
+	// Now that we have gathered all resources we can use, verify the resource indicators
+	for (DescriptionIndex resource_index = 0; resource_index < descriptions.nr_resources();
+	     resource_index++) {
+		const ResourceDescription* res = descriptions.get_resource_descr(resource_index);
+		if (res->detectable() && uses_resource(res->name())) {
+			// This function will throw an exception if this tribe doesn't
+			// have a high enough resource indicator for this resource
+			get_resource_indicator(res, res->max_amount());
+		}
+	}
+	// For the "none" indicator
+	get_resource_indicator(nullptr, 0);
 
 	const DescriptionMaintainer<ImmovableDescr>& all_immovables = descriptions.immovables();
 

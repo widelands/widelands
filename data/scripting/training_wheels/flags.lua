@@ -108,6 +108,10 @@ run(function()
       wait_for_field_action_tab("roads")
    end
    target_field:indicate(false)
+
+   while not mapview.windows.field_action or not mapview.windows.field_action.buttons["build_flag"] do
+      sleep(100)
+   end
    mapview.windows.field_action.buttons["build_flag"]:indicate(true)
    close_story_messagebox()
    campaign_message_box(msg_click_flag_button)

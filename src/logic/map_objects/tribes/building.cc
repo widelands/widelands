@@ -221,7 +221,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 bool loading,
                                 const FormerBuildings& former_buildings) const {
 	DescriptionIndex immovable = INVALID_INDEX;
-	if (built_over_immovable_ != INVALID_INDEX) {
+	if (built_over_immovable_ != INVALID_INDEX && !loading) {
 		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
 			// 'false' means we're building on top of an immovable
@@ -270,7 +270,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 
 bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
 	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-	                size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK)) &&
+	                size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
+	                                                                    fc.field->maxcaps()) &
+	                          Widelands::BUILDCAPS_SIZEMASK)) &&
 	       (built_over_immovable_ == INVALID_INDEX ||
 	        (fc.field->get_immovable() &&
 	         fc.field->get_immovable()->has_attribute(built_over_immovable_)));
