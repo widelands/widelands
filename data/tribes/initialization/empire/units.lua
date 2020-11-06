@@ -1008,7 +1008,99 @@ descriptions:new_tribe {
             -- TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
             purpose = _("A ship is being constructed at this site.")
          }
-      }
+      },
+      -- non imperial Immovables used by the woodcutter
+      {
+         name = "deadtree7",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
+            purpose = _("The remains of an old tree.")
+         }
+      },
+      {
+         name = "balsa_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
    },
 
    -- The order here also determines the order in lists on screen.
@@ -1063,7 +1155,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an empire production site: Lumberjack's House
-            note = pgettext("empire_building", "The lumberjack's house needs trees to fell within the work area.")
+            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area.")
          }
       },
       {

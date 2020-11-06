@@ -282,7 +282,8 @@ void FullscreenMenuNetSetupLAN::change_playername() {
 	if (!InternetGaming::ref().valid_username(playername_.text())) {
 		playername_.set_warning(true);
 		playername_.set_tooltip(_("Enter a valid nickname. This value may contain only "
-		                          "English letters, numbers, and @ . + - _ characters."));
+		                          "English letters, numbers, and @ . + - _ characters "
+		                          "and must not be \"team\"."));
 		joingame_.set_enabled(false);
 		hostgame_.set_enabled(false);
 		return;

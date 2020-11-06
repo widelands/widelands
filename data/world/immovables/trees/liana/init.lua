@@ -40,6 +40,7 @@ wl.Descriptions():new_immovable_type{
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Liana Tree (Pole)",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -98,6 +99,7 @@ wl.Descriptions():new_immovable_type{
    species = _ "Liana Tree",
    icon = dirname .. "menu.png",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
