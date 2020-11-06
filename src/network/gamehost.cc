@@ -651,7 +651,7 @@ void GameHost::run() {
 	Widelands::Game game;
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
+	FsMenu::FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
 	const MenuTarget code = lm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
