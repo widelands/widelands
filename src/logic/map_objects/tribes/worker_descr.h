@@ -125,36 +125,7 @@ public:
 		return ai_hints_.get();
 	}
 
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
-	needed_attributes() const {
-		return needed_attributes_;
-	}
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
-	collected_attributes() const {
-		return collected_attributes_;
-	}
-	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
-	created_attributes() const {
-		return created_attributes_;
-	}
-	const std::set<std::string>& collected_resources() const {
-		return collected_resources_;
-	}
-	const std::set<std::string>& created_resources() const {
-		return created_resources_;
-	}
-	const std::set<std::string>& created_bobs() const {
-		return created_bobs_;
-	}
-
 protected:
-	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> needed_attributes_;
-	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
-	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	std::set<std::string> collected_resources_;
-	std::set<std::string> created_resources_;
-	std::set<std::string> created_bobs_;
-
 	Programs programs_;
 
 private:

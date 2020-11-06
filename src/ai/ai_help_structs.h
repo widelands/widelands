@@ -381,7 +381,7 @@ struct BuildableField {
 	// Immovables categorized by building name, so we can have multiple lumberjack/ranger types
 	std::map<std::string, uint8_t> immovables_by_name_nearby;
 	// Immovables categorized by building attribute, so other buildings can access the information
-	// (.g. space consumers). Also used for the neurons.
+	// (e.g. space consumers). Also used for the neurons.
 	std::map<BuildingAttribute, uint8_t> immovables_by_attribute_nearby;
 	int16_t water_nearby;
 	int16_t open_water_nearby;
@@ -428,8 +428,9 @@ struct BuildableField {
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
+	// <building index, amount>
 	std::map<Widelands::DescriptionIndex, uint8_t> supported_producers_nearby;
-	// and for rangers, fishbreeders:
+	// and for rangers, fishbreeders: <building name, amount>
 	std::map<std::string, uint8_t> supporters_nearby;
 };
 
@@ -511,8 +512,8 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	bool requires_supporters = false;
+	// For rangers, fishbreeders. The index is the productionsite's one. We remember both for faster retrieval
 	std::map<Widelands::DescriptionIndex, const Widelands::ProductionSiteDescr*> supported_producers;
-	std::set<Widelands::DescriptionIndex> supported_by_buildings;
 
 	// information needed for decision on new building construction
 	int16_t initial_preciousness;

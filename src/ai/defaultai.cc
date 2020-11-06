@@ -624,6 +624,7 @@ void DefaultAI::late_initialization() {
 
 	buildings_immovable_attributes_.clear();
 
+	// Temporarily remember the lumberjacks for speeding up the ranger detection
 	std::set<const Widelands::ProductionSiteDescr*> lumberjacks;
 
 	for (Widelands::DescriptionIndex building_index = 0; building_index < nr_buildings;
@@ -753,7 +754,7 @@ void DefaultAI::late_initialization() {
 				 *                                -> amazons_wilderness_keepers_tent
 				 *
 				 *   amazons_rare_tree_cutters_hut, amazons_woodcutters_hut NOCOM removed, they are
-				 * lumberjacks
+				 *     lumberjacks
 				 *
 				 *   frisians_clay_pit -> frisians_aqua_farm
 				 *                     -> frisians_charcoal_burners_house
@@ -774,10 +775,6 @@ void DefaultAI::late_initialization() {
 				bo.supported_producers.insert(std::make_pair(
 				   supported_building_index, dynamic_cast<const Widelands::ProductionSiteDescr*>(
 				                                tribe_->get_building_descr(supported_building_index))));
-			}
-			bo.supported_by_buildings.clear();
-			for (const std::string& supporting_building_name : prod.supported_by_productionsites()) {
-				bo.supported_by_buildings.insert(tribe_->building_index(supporting_building_name));
 			}
 
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
@@ -1118,8 +1115,7 @@ void DefaultAI::late_initialization() {
 	if (count_buildings_with_attribute(BuildingAttribute::kFisher) != 1) {
 		log_warn("The AI needs the tribe '%s' to define 1 type of fisher's building. "
 		         "This is the building that collects the map resource 'resource_fish' and has "
-		         "'needs_water' "
-		         "in its AI hints.",
+		         "'needs_water' in its AI hints.",
 		         tribe_->name().c_str());
 	}
 
@@ -1798,19 +1794,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 						continue;
 					}
 				}
-				const uint8_t amount = map.find_immovables(
+				uint8_t amount = map.find_immovables(
 				   game(),
 				   Widelands::Area<Widelands::FCoords>(map.get_fcoords(field.coords), kProductionArea),
 				   nullptr, Widelands::FindImmovableAttribute(attribute_category.first));
 
-				field.immovables_by_attribute_nearby[attribute_info.building_attribute] = amount;
-				field.immovables_by_name_nearby[attribute_info.building_name] = amount;
-
 				// adding 2 if rocks found
 				if (attribute_info.building_attribute == BuildingAttribute::kNeedsRocks) {
-					field.immovables_by_attribute_nearby[attribute_info.building_attribute] += 2;
-					field.immovables_by_name_nearby[attribute_info.building_name] += 2;
+					amount += 2;
 				}
+
+				field.immovables_by_attribute_nearby[attribute_info.building_attribute] = amount;
+				field.immovables_by_name_nearby[attribute_info.building_name] = amount;
 			}
 		}
 
@@ -2371,6 +2366,29 @@ void DefaultAI::update_productionsite_stats() {
 			bo.current_stats /= bo.cnt_built - bo.unconnected_count;
 		}
 	}
+}
+
+unsigned DefaultAI::find_immovables_nearby(const std::set<std::pair<Widelands::MapObjectType, Widelands::MapObjectDescr::AttributeIndex> >& attribute_infos, const Widelands::FCoords& position, const WorkareaInfo& workarea_info) const {
+	unsigned result = 0;
+
+	// Get max radius of recursive workarea
+	WorkareaInfo::size_type radius = 0;
+	for (const auto& temp_info : workarea_info) {
+		if (radius < temp_info.first) {
+			radius = temp_info.first;
+		}
+	}
+
+	for (const auto& attribute_info : attribute_infos) {
+		if (attribute_info.first != Widelands::MapObjectType::IMMOVABLE) {
+			continue;
+		}
+		result += game().map().find_immovables(
+		   game(),
+		   Widelands::Area<Widelands::FCoords>(position, radius),
+		   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
+	}
+	return result;
 }
 
 // * Constructs the most needed building
@@ -2941,21 +2959,21 @@ bool DefaultAI::construct_building(const Time& gametime) {
 				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
 
 				// Some productionsites strictly require supporting sites nearby
-				uint8_t count_supporters_nearby = 0;
+				uint8_t number_of_supporters_nearby = 0;
 				if (bo.requires_supporters) {
-					if (bf->supporters_nearby.count(bo.name) != 1) {
+					if (bf->supporters_nearby.count(bo.name) == 0) {
 						continue;
 					}
-					count_supporters_nearby = bf->supporters_nearby.at(bo.desc->name());
+					number_of_supporters_nearby += bf->supporters_nearby.at(bo.desc->name());
 				}
 
 				// Priorities will be adjusted according to nearby buildings needing support
-				uint8_t supported_producers_nearby_count = 0;
+				uint8_t number_of_supported_producers_nearby = 0;
 				for (const auto& supported_building : bo.supported_producers) {
 					assert(supported_building.first != Widelands::INVALID_INDEX);
 					auto it = bf->supported_producers_nearby.find(supported_building.first);
 					if (it != bf->supported_producers_nearby.end()) {
-						supported_producers_nearby_count += it->second;
+						number_of_supported_producers_nearby += it->second;
 					}
 				}
 
@@ -2973,7 +2991,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					prio += bo.primary_priority;
 
 					// keep wells more distant
-					if (supported_producers_nearby_count > 2) {
+					if (number_of_supported_producers_nearby > 2) {
 						continue;
 					}
 
@@ -3002,9 +3020,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					        (bf->immovables_by_name_nearby[bo.name] - trees_nearby_treshold_) / 10;
 
 					// consider cutters and rangers nearby
-					prio += 2 * count_supporters_nearby *
+					prio += 2 * number_of_supporters_nearby *
 					        std::abs(management_data.get_military_number_at(25));
-					prio -= supported_producers_nearby_count *
+					prio -= number_of_supported_producers_nearby *
 					        std::abs(management_data.get_military_number_at(36)) * 3;
 
 				} else if (bo.is(BuildingAttribute::kNeedsRocks)) {
@@ -3037,7 +3055,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					}
 
 					// to prevent too many quarries on one spot
-					prio = prio - 50 * supported_producers_nearby_count;
+					prio = prio - 50 * number_of_supported_producers_nearby;
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {
 
@@ -3052,9 +3070,9 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio += count_supporters_nearby * 5;
+					prio += number_of_supporters_nearby * 5;
 
-					prio += (bf->critters_nearby * 3) - 8 - 5 * supported_producers_nearby_count;
+					prio += (bf->critters_nearby * 3) - 8 - 5 * number_of_supported_producers_nearby;
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
@@ -3068,8 +3086,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 
 					// Overdue priority here
 					prio += bo.primary_priority;
-					prio -= supported_producers_nearby_count * 20;
-					prio += count_supporters_nearby * 20;
+					prio -= number_of_supported_producers_nearby * 20;
+					prio += number_of_supporters_nearby * 20;
 
 					prio += -5 + bf->fish_nearby *
 					                (1 + std::abs(management_data.get_military_number_at(63) / 15));
@@ -3098,20 +3116,20 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						prio -= bf->water_nearby / 5;
 
 						prio += management_data.neuron_pool[67].get_result_safe(
-						           supported_producers_nearby_count * 5, kAbsValue) /
+						           number_of_supported_producers_nearby * 5, kAbsValue) /
 						        2;
 
 						prio += management_data.neuron_pool[49].get_result_safe(
 						           bf->immovables_by_name_nearby[bo.name], kAbsValue) /
 						        5;
 
-						prio += supported_producers_nearby_count * 5 -
+						prio += number_of_supported_producers_nearby * 5 -
 						        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
 						        bf->space_consumers_nearby *
 						           std::abs(management_data.get_military_number_at(102)) / 5 -
 						        bf->immovables_by_name_nearby[bo.name] / 3;
 
-						prio += count_supporters_nearby * 3;
+						prio += number_of_supporters_nearby * 3;
 						// don't block port building spots with trees
 						if (bf->unowned_portspace_vicinity_nearby > 0) {
 							prio -= 500;
@@ -3130,7 +3148,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						// This is for a special case this is also supporter, it considers
 						// producers nearby
 						prio += management_data.neuron_pool[51].get_result_safe(
-						           supported_producers_nearby_count * 5, kAbsValue) /
+						           number_of_supported_producers_nearby * 5, kAbsValue) /
 						        2;
 
 						// now we find out if the supporter is needed depending on output stocklevel
@@ -3148,8 +3166,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 						}
 
 						// taking into account the vicinity
-						prio += supported_producers_nearby_count * 10;
-						prio -= count_supporters_nearby * 15;
+						prio += number_of_supported_producers_nearby * 10;
+						prio -= number_of_supporters_nearby * 15;
 
 						if (bf->enemy_nearby) {  // not close to the enemy
 							prio -= 20;
@@ -3194,8 +3212,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 						// taking into account the vicinity
-						prio += supported_producers_nearby_count * 10;
-						prio -= count_supporters_nearby * 8;
+						prio += number_of_supported_producers_nearby * 10;
+						prio -= number_of_supporters_nearby * 8;
 
 						if (bf->enemy_nearby) {  // not close to the enemy
 							prio -= 20;
@@ -3238,8 +3256,8 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               (40 - current_stocklevel) / 2, kAbsValue);
 						}
 
-						prio += supported_producers_nearby_count * 10;
-						prio -= count_supporters_nearby * 20;
+						prio += number_of_supported_producers_nearby * 10;
+						prio -= number_of_supporters_nearby * 20;
 
 						if (bf->enemy_nearby) {
 							prio -= 20;
@@ -3287,7 +3305,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 							               std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							prio -= supported_producers_nearby_count *
+							prio -= number_of_supported_producers_nearby *
 							        std::abs(management_data.get_military_number_at(108)) / 5;
 						}
 
@@ -3332,7 +3350,7 @@ bool DefaultAI::construct_building(const Time& gametime) {
 					}
 					// This considers supporters nearby
 					prio += management_data.neuron_pool[52].get_result_safe(
-					           count_supporters_nearby * 5, kAbsValue) /
+					           number_of_supporters_nearby * 5, kAbsValue) /
 					        2;
 
 					if (prio <= 0) {
@@ -4512,15 +4530,6 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 		return false;
 	}
 
-	// Get max radius of recursive workarea
-	WorkareaInfo::size_type radius = 0;
-	const WorkareaInfo& workarea_info = site.bo->desc->workarea_info_;
-	for (const auto& temp_info : workarea_info) {
-		if (radius < temp_info.first) {
-			radius = temp_info.first;
-		}
-	}
-
 	const Widelands::Map& map = game().map();
 
 	// First we check if we must release an experienced worker
@@ -4760,7 +4769,7 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	// Lumberjack / Woodcutter handling
 	if (site.bo->is(BuildingAttribute::kLumberjack)) {
 
-		// do not dismantle immediatelly
+		// do not dismantle immediately
 		if ((game().get_gametime() - site.built_time) < Duration(6 * 60 * 1000)) {
 			return false;
 		}
@@ -4770,22 +4779,14 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			return false;
 		}
 
-		unsigned remaining_trees = 0;
-		for (const auto& attribute_info : site.site->descr().collected_attributes()) {
-			if (attribute_info.first != Widelands::MapObjectType::IMMOVABLE) {
-				continue;
-			}
-			remaining_trees += map.find_immovables(
-			   game(),
-			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), radius),
-			   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
-		}
 		if (site.site->get_statistics_percent() >
 		    std::abs(management_data.get_military_number_at(117)) / 2) {
 			return false;
 		}
 
-		if (remaining_trees > trees_nearby_treshold_ / 3) {
+		unsigned trees_nearby = find_immovables_nearby(site.site->descr().collected_attributes(), map.get_fcoords(site.site->get_position()), site.bo->desc->workarea_info_);
+
+		if (trees_nearby > trees_nearby_treshold_ / 3) {
 			return false;
 		}
 
@@ -4843,18 +4844,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	// Quarry handling
 	if (site.bo->is(BuildingAttribute::kNeedsRocks)) {
 
-		unsigned rocks_in_vicinity = 0;
-		for (const auto& attribute_info : site.site->descr().collected_attributes()) {
-			if (attribute_info.first != Widelands::MapObjectType::IMMOVABLE) {
-				continue;
-			}
-			rocks_in_vicinity += map.find_immovables(
-			   game(),
-			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 6),
-			   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
-		}
+		unsigned rocks_nearby = find_immovables_nearby(site.site->descr().collected_attributes(), map.get_fcoords(site.site->get_position()), site.bo->desc->workarea_info_);
 
-		if (rocks_in_vicinity == 0) {
+		if (rocks_nearby == 0) {
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -5009,19 +5001,10 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			return false;
 		}
 
-		unsigned trees_in_vicinity = 0;
-		for (const auto& attribute_info : site.site->descr().created_attributes()) {
-			if (attribute_info.first != Widelands::MapObjectType::IMMOVABLE) {
-				continue;
-			}
-			trees_in_vicinity += map.find_immovables(
-			   game(),
-			   Widelands::Area<Widelands::FCoords>(map.get_fcoords(site.site->get_position()), 5),
-			   nullptr, Widelands::FindImmovableAttribute(attribute_info.second));
-		}
+		unsigned trees_nearby = find_immovables_nearby(site.site->descr().collected_attributes(), map.get_fcoords(site.site->get_position()), site.bo->desc->workarea_info_);
 
 		// stop ranger if enough trees around regardless of policy
-		if (trees_in_vicinity > 25) {
+		if (trees_nearby > 25) {
 			if (!site.site->is_stopped()) {
 				game().send_player_start_stop_building(*site.site);
 			}

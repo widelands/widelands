@@ -174,6 +174,7 @@ private:
 	void update_buildable_field(BuildableField&);
 	void update_mineable_field(MineableField&);
 	void update_productionsite_stats();
+	unsigned find_immovables_nearby(const std::set<std::pair<Widelands::MapObjectType, Widelands::MapObjectDescr::AttributeIndex>>& attribute_infos, const Widelands::FCoords& position, const WorkareaInfo& workarea_info) const;
 
 	// for production sites
 	BuildingNecessity

@@ -98,7 +98,7 @@ public:
 	const Output& output_worker_types() const {
 		return output_worker_types_;
 	}
-	/// Map objects that this production site needs nearby according to attribute
+	/// Map objects that this production site needs nearby according to attribute, without removing them from the map
 	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
 	needed_attributes() const {
 		return needed_attributes_;
@@ -138,7 +138,7 @@ public:
 	void add_created_bob(const std::string& bobname) {
 		created_bobs_.insert(bobname);
 	}
-	/// The immovables that this production site needs to collect from the map
+	/// The immovables that this production site needs to be nearby
 	const std::set<std::string>& needed_immovables() const {
 		return needed_immovables_;
 	}
