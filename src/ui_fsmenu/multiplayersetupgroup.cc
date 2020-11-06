@@ -21,7 +21,6 @@
 
 #include <memory>
 
-#include <base/log.h>
 #include <boost/algorithm/string.hpp>
 
 #include "ai/computer_player.h"
@@ -74,7 +73,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 		update();
 	}
 
-	void force_new_dimensions(float, uint32_t standard_element_height) {
+	void force_new_dimensions(uint32_t standard_element_height) {
 		slot_dropdown_.set_desired_size(standard_element_height, standard_element_height);
 	}
 
@@ -558,7 +557,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		initialization_complete();
 	}
 
-	void force_new_dimensions(float /*scale*/, uint32_t height) {
+	void force_new_dimensions(uint32_t height) {
 		player.set_desired_size(height, height);
 		type_dropdown_.set_desired_size(height, height);
 		tribes_dropdown_.set_desired_size(height, height);
@@ -706,23 +705,20 @@ void MultiPlayerSetupGroup::draw(RenderTarget& dst) {
 	}
 }
 
-void MultiPlayerSetupGroup::force_new_dimensions(float scale,
-                                                 uint32_t max_width,
+void MultiPlayerSetupGroup::force_new_dimensions(uint32_t max_width,
                                                  uint32_t max_height,
                                                  uint32_t standard_element_height) {
 	buth_ = standard_element_height;
-	players_.set_font_scale(scale);
-	clients_.set_font_scale(scale);
 	clientbox.set_min_desired_breadth(max_width / 3);
 	clientbox.set_max_size(max_width / 3, max_height);
 	playerbox.set_max_size(max_width / 2, max_height);
 	scrollable_playerbox.set_max_size(max_width / 2, max_height - players_.get_h() - 4 * kPadding);
 
 	for (auto& multiPlayerClientGroup : multi_player_client_groups) {
-		multiPlayerClientGroup->force_new_dimensions(scale, standard_element_height);
+		multiPlayerClientGroup->force_new_dimensions(standard_element_height);
 	}
 
 	for (auto& multiPlayerPlayerGroup : multi_player_player_groups) {
-		multiPlayerPlayerGroup->force_new_dimensions(scale, standard_element_height);
+		multiPlayerPlayerGroup->force_new_dimensions(standard_element_height);
 	}
 }

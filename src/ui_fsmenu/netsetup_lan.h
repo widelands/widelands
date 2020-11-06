@@ -26,9 +26,9 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/load_map_or_game.h"
-
-class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
+#include "ui_fsmenu/menu.h"
+namespace FsMenu {
+class FullscreenMenuNetSetupLAN : public TwoColumnsBasicNavigationMenu {
 public:
 	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
 
@@ -47,7 +47,7 @@ public:
 	const std::string& get_playername();
 
 protected:
-	void clicked_ok() override;
+	void clicked_ok();
 
 private:
 	void layout() override;
@@ -69,8 +69,6 @@ private:
 	void clicked_hostgame();
 	void clicked_lasthost();
 
-	UI::Box left_column_, right_column_;
-
 	// Left Column
 	UI::Textarea label_opengames_;
 	UI::Table<const NetOpenGame* const> table_;
@@ -87,5 +85,5 @@ private:
 
 	LanGameFinder discovery_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

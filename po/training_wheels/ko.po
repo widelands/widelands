@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-19 15:57+0000\n"
+"POT-Creation-Date: 2020-10-30 06:25+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
 "Last-Translator: ks k, 2020\n"
 "Language-Team: Korean (https://www.transifex.com/widelands/teams/35159/ko/)\n"
@@ -63,13 +63,13 @@ msgstr "건물 단추를 누르십시오..."
 msgid ""
 "…then hold down the ‘Ctrl’ key and click on the flag in front of the target "
 "building."
-msgstr ""
+msgstr "…그런 다음 ‘Ctrl’ 키를 누른 채 대상 건물 앞에 있는 깃발을 누릅니다."
 
 #: ../../data/scripting/training_wheels/logs.lua:129
 msgid ""
 "Click on the flag in front of the building, then on the ‘Build road’ button,"
 " then hold down the ‘Ctrl’ key and click on the indicated flag."
-msgstr ""
+msgstr "건물 앞에 있는 깃발을 누른 다음 '도로 건설' 단추를 누른 다음 'Ctrl' 키를 누른 채 표시된 깃발을 누르십시오."
 
 #: ../../data/scripting/training_wheels/logs.lua:140
 msgid "Well done, we can produce logs now!"
@@ -89,7 +89,7 @@ msgstr "목표 창을 열기"
 msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
-msgstr ""
+msgstr "화살표가 가리키는 단추를 누르거나 '%s'을 눌러 현재 게임의 목표를 확인합니다."
 
 #: ../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"

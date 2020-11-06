@@ -1313,7 +1313,7 @@ void WLApplication::mainmenu() {
 bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 	Widelands::Game game;
 	//  Start UI for the tutorials.
-	FullscreenMenuScenarioSelect select_campaignmap(fsmm);
+	FsMenu::FullscreenMenuScenarioSelect select_campaignmap(fsmm);
 	if (select_campaignmap.run<MenuTarget>() != MenuTarget::kOk) {
 		return false;
 	}
@@ -1359,7 +1359,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 
 		// reinitalise in every run, else graphics look strange
-		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered, tribeinfos);
+		FsMenu::FullscreenMenuInternetLobby ns(fsmm, playername, password, registered, tribeinfos);
 		ns.run<MenuTarget>();
 
 		if (InternetGaming::ref().logged_in()) {
@@ -1371,7 +1371,7 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 	} else {
 		// reinitalise in every run, else graphics look strange
-		FullscreenMenuNetSetupLAN ns(fsmm);
+		FsMenu::FullscreenMenuNetSetupLAN ns(fsmm);
 		const MenuTarget menu_result = ns.run<MenuTarget>();
 		std::string playername = ns.get_playername();
 
@@ -1470,7 +1470,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
 		mbox.run<UI::Panel::Returncodes>();
 		return false;
 	}
-	FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
+	FsMenu::FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
 	code = lgm.run<MenuTarget>();
 	if (code == MenuTarget::kBack) {
 		if (canceled) {
@@ -1536,7 +1536,7 @@ bool WLApplication::load_game(FullscreenMenuMain& fsmm, std::string filename) {
 	SinglePlayerGameSettingsProvider sp;
 
 	if (filename.empty()) {
-		FullscreenMenuLoadGame ssg(fsmm, game, &sp);
+		FsMenu::FullscreenMenuLoadGame ssg(fsmm, game, &sp);
 		if (ssg.run<MenuTarget>() == MenuTarget::kOk) {
 			filename = ssg.filename();
 		} else {
@@ -1571,7 +1571,7 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 
 		size_t campaign_index;
 		{  //  First start UI for selecting the campaign.
-			FullscreenMenuCampaignSelect select_campaign(fsmm, campaign_visibility.get());
+			FsMenu::FullscreenMenuCampaignSelect select_campaign(fsmm, campaign_visibility.get());
 			if (select_campaign.run<MenuTarget>() == MenuTarget::kOk) {
 				campaign_index = select_campaign.get_campaign_index();
 			} else {  //  back was pressed
@@ -1581,7 +1581,7 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 		}
 		//  Then start UI for the selected campaign.
 		CampaignData* campaign_data = campaign_visibility->get_campaign(campaign_index);
-		FullscreenMenuScenarioSelect select_campaignmap(fsmm, campaign_data);
+		FsMenu::FullscreenMenuScenarioSelect select_campaignmap(fsmm, campaign_data);
 		if (select_campaignmap.run<MenuTarget>() == MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
 			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
@@ -1615,7 +1615,7 @@ bool WLApplication::replay(FullscreenMenuMain* fsmm) {
 	if (filename_.empty()) {
 		assert(fsmm);
 		SinglePlayerGameSettingsProvider sp;
-		FullscreenMenuLoadGame rm(*fsmm, game, &sp, true);
+		FsMenu::FullscreenMenuLoadGame rm(*fsmm, game, &sp, true);
 		if (rm.run<MenuTarget>() == MenuTarget::kBack) {
 			return false;
 		}
