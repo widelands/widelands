@@ -301,10 +301,16 @@ public:
 private:
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
+	void reposition_scrollbar();
+	size_t find_resizable_column_idx();
+	int total_columns_width();
+	void adjust_column_sizes(int all_columns_width, size_t resizeable_column_idx);
+	void update_scrollbar_filler();
 
 	struct Column {
 		Button* btn;
 		int width;
+		int original_width;
 		Align alignment;
 		CompareFn compare;
 	};
@@ -330,7 +336,7 @@ private:
 	Columns::size_type sort_column_;
 	bool sort_descending_;
 	// This column will grow/shrink depending on the scrollbar being present
-	size_t flexible_column_;
+	size_t flexible_column_idx_;
 	bool is_multiselect_;
 
 	void header_button_clicked(Columns::size_type);
