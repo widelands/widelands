@@ -1063,11 +1063,13 @@ void DefaultAI::late_initialization() {
 			continue;
 		}
 		const Widelands::ProductionSiteDescr* prodsite =
-				dynamic_cast<const Widelands::ProductionSiteDescr*>(tribe_->get_building_descr(tribe_->building_index(bo.name)));
+		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
+		      tribe_->get_building_descr(tribe_->building_index(bo.name)));
 		for (const std::string& candidate : prodsite->supported_productionsites()) {
 			for (const Widelands::ProductionSiteDescr* lumberjack : lumberjacks) {
 				if (lumberjack->name() == candidate) {
-					log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(), bo.name, lumberjack->name().c_str());
+					log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(), bo.name,
+					             lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
 					/* Buildings detected at the time of writing:
 					 *
