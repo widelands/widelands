@@ -37,7 +37,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      supports_production_of = { "log", "liana" },
       space_consumer = true,
    },
 

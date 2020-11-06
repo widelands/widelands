@@ -22,9 +22,7 @@ descriptions:new_productionsite_type {
       unoccupied = {hotspot = {39, 46}}
    },
 
-   aihints = {
-      collects_ware_from_map = "granite"
-   },
+   aihints = {},
 
    working_positions = {
       amazons_stonecutter = 1

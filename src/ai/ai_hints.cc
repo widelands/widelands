@@ -261,7 +261,8 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
 	}
 
 	if (table->has_key("collects_ware_from_map")) {
-		log_warn("The 'collects_ware_from_map' key in 'ai_hints' is no longer used");
+		log_warn("%s: The 'collects_ware_from_map' key in 'ai_hints' is no longer used",
+				 building_name.c_str());
 	}
 }
 
