@@ -1626,9 +1626,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Charcoal Burner's House
             purpose = pgettext("building", "Burns logs into charcoal."),
             -- TRANSLATORS: Note helptext for a frisian production site: Charcoal Burner's House
-            note = pgettext("building", "The charcoal burner's house needs holes in the ground that were dug by a clay pit’s worker nearby to erect charcoal stacks in them."),
+            note = pgettext("building", "The charcoal burner’s house needs holes in the ground that were dug by a clay pit’s worker nearby to erect charcoal stacks in them."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Charcoal Burner's House
-            performance = pgettext("frisians_building", "The charcoal burner's house needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 80):bformat(80))
+            performance = pgettext("frisians_building", "The charcoal burner’s house needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 80):bformat(80))
          }
       },
       {

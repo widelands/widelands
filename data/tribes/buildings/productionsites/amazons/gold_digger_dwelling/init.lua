@@ -67,7 +67,7 @@ descriptions:new_productionsite_type {
       title = _"No Gold",
       heading = _"Main Gold Vein Exhausted",
       message =
-         pgettext("amazons_building", "This gold digger dwelling's main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
+         pgettext("amazons_building", "This gold digger dwelling’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."),
    },
 }
 

@@ -200,6 +200,7 @@ uint8_t* SendPacket::get_data() const {
 
 	uint32_t const length = buffer.size();
 
+	assert(length >= 2);
 	assert(length < 0x10000);
 
 	// update packet length
