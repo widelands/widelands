@@ -183,6 +183,11 @@ void BaseDropdown::set_height(int height) {
 	layout();
 }
 
+int BaseDropdown::lineheight() const {
+	assert(list_ != nullptr);
+	return list_->get_lineheight();
+}
+
 std::vector<Recti> BaseDropdown::focus_overlay_rects() {
 	return Panel::focus_overlay_rects(2, 2, 0);
 }

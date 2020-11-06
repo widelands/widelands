@@ -2,6 +2,8 @@ wl_library(ui_fsmenu_options
   SRCS
     options.cc
     options.h
+    training_wheel_options.cc
+    training_wheel_options.h
   DEPENDS
     base_exceptions
     base_i18n
@@ -13,6 +15,7 @@ wl_library(ui_fsmenu_options
     graphic_text_layout
     io_filesystem
     logic_filesystem_constants
+    logic_training_wheels
     scripting_lua_interface
     scripting_lua_table
     ui_basic

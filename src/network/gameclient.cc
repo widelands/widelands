@@ -45,6 +45,7 @@
 #include "network/netclientproxy.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_protocol.h"
+#include "network/participantlist.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
@@ -63,6 +64,8 @@ struct GameClientImpl {
 	std::string localplayername;
 
 	std::unique_ptr<NetClientInterface> net;
+
+	std::unique_ptr<ParticipantList> participants;
 
 	/// Currently active modal panel. Receives an end_modal on disconnect
 	UI::Panel* modal;
@@ -235,6 +238,9 @@ GameClient::GameClient(FullscreenMenuMain& fsmm,
 
 	// Get the default win condition script
 	d->settings.win_condition_script = d->settings.win_condition_scripts.front();
+
+	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
+	participants_ = d->participants.get();
 }
 
 GameClient::~GameClient() {
@@ -895,6 +901,9 @@ void GameClient::handle_setting_allplayers(RecvPacket& packet) {
 	}
 	// Map changes are finished here
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
+	if (participants_) {
+		participants_->participants_updated();
+	}
 }
 
 /**
@@ -933,7 +942,7 @@ void GameClient::handle_chat(RecvPacket& packet) {
 	c.playern = packet.signed_16();
 	c.sender = packet.string();
 	c.msg = packet.string();
-	if (packet.unsigned_8()) {
+	if (packet.unsigned_8() != CHATTYPE_PUBLIC) {
 		c.recipient = packet.string();
 	}
 	d->chatmessages.push_back(c);
@@ -996,21 +1005,33 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_SETTING_PLAYER: {
 		uint8_t player = packet.unsigned_8();
 		receive_one_player(player, packet);
+		if (participants_) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_SETTING_ALLUSERS: {
 		d->settings.users.resize(packet.unsigned_8());
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 			receive_one_user(i, packet);
 		}
+		if (participants_) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_SETTING_USER: {
 		uint32_t user = packet.unsigned_32();
 		receive_one_user(user, packet);
+		if (participants_) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_SET_PLAYERNUMBER: {
 		int32_t number = packet.signed_32();
 		d->settings.playernum = number;
 		d->settings.users.at(d->settings.usernum).position = number;
+		if (participants_) {
+			participants_->participants_updated();
+		}
 	} break;
 	case NETCMD_WIN_CONDITION:
 		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
