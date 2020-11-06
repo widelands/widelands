@@ -26,9 +26,11 @@ wl_library(wui_chat_ui
     chat
     graphic
     graphic_fonthandler
+    graphic_image_cache
     graphic_playercolor
     graphic_text
     graphic_text_layout
+    network
     sound
     ui_basic
     widelands_options
