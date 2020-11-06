@@ -43,21 +43,16 @@ const uint8_t kClientUnregistered = 2;
 // 3 was INTERNET_CLIENT_BOT which is not used
 const uint8_t kClientIRC = 4;
 }  // namespace
-
+namespace FsMenu {
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
    FullscreenMenuMain& fsmm,
    std::string& nick,
    std::string& pwd,
    bool registered,
    std::vector<Widelands::TribeBasicInfo>& tribeinfos)
-   : FullscreenMenuLoadMapOrGame(fsmm, _("Metaserver Lobby")),
-     fsmm_(fsmm),
-     // Boxes
-     left_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     right_column_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-
+   : TwoColumnsBasicNavigationMenu(fsmm, "metaserver_lobby", _("Metaserver Lobby")),
      // Left column content
-     label_clients_online_(&left_column_,
+     label_clients_online_(&left_column_box_,
                            UI::PanelStyle::kFsMenu,
                            UI::FontStyle::kFsMenuLabel,
                            0,
@@ -65,11 +60,11 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
                            0,
                            0,
                            _("Clients online:")),
-     clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
+     clientsonline_table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     chat_(&left_column_box_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
      // Right column content
-     label_opengames_(&right_column_,
+     label_opengames_(&right_column_content_box_,
                       UI::PanelStyle::kFsMenu,
                       UI::FontStyle::kFsMenuLabel,
                       0,
@@ -77,8 +72,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
                       0,
                       0,
                       _("Open Games:")),
-     opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     joingame_(&right_column_,
+     opengames_list_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     joingame_(&right_column_content_box_,
                "join_game",
                0,
                0,
@@ -86,7 +81,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
                0,
                UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
-     servername_label_(&right_column_,
+     servername_label_(&right_column_content_box_,
                        UI::PanelStyle::kFsMenu,
                        UI::FontStyle::kFsMenuLabel,
                        0,
@@ -94,8 +89,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
                        0,
                        0,
                        _("Name of your server:")),
-     servername_(&right_column_, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     hostgame_(&right_column_,
+     servername_(&right_column_content_box_, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     hostgame_(&right_column_content_box_,
                "host_game",
                0,
                0,
@@ -111,25 +106,24 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
      is_registered_(registered),
      tribeinfos_(tribeinfos) {
 
-	ok_.set_visible(false);  // We have 2 starting buttons, so we need a different layout here.
 	back_.set_title(_("Leave Lobby"));
 
-	left_column_.set_inner_spacing(padding_);
-	left_column_.add(&label_clients_online_, UI::Box::Resizing::kFullSize);
-	left_column_.add(&clientsonline_table_, UI::Box::Resizing::kExpandBoth);
-	left_column_.add(&chat_, UI::Box::Resizing::kFullSize);
+	left_column_box_.set_inner_spacing(kPadding);
+	left_column_box_.add(&label_clients_online_, UI::Box::Resizing::kFullSize);
+	left_column_box_.add(&clientsonline_table_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
-	right_column_.set_inner_spacing(padding_);
-	right_column_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
-	right_column_.add(&opengames_list_, UI::Box::Resizing::kFullSize);
-	right_column_.add_space(0);
-	right_column_.add(&joingame_, UI::Box::Resizing::kFullSize);
-	right_column_.add_inf_space();
-	right_column_.add(&servername_label_, UI::Box::Resizing::kFullSize);
-	right_column_.add(&servername_, UI::Box::Resizing::kFullSize);
-	right_column_.add_space(0);
-	right_column_.add(&hostgame_, UI::Box::Resizing::kFullSize);
-	right_column_.add_inf_space();
+	right_column_content_box_.set_inner_spacing(kPadding);
+	right_column_content_box_.add(&label_opengames_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&opengames_list_, UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add_space(0);
+	right_column_content_box_.add(&joingame_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_inf_space();
+	right_column_content_box_.add(&servername_label_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&servername_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(0);
+	right_column_content_box_.add(&hostgame_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_inf_space();
 
 	joingame_.sigclicked.connect([this]() { clicked_joingame(); });
 	hostgame_.sigclicked.connect([this]() { clicked_hostgame(); });
@@ -192,35 +186,15 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(
 }
 
 void FullscreenMenuInternetLobby::layout() {
-	FullscreenMenuLoadMapOrGame::layout();
-
-	uint32_t butw = get_inner_w() - right_column_x_ - right_column_margin_;
-	uint32_t buth = text_height(UI::FontStyle::kFsMenuLabel) + 8;
-
-	tabley_ = tabley_ / 2;
-	tableh_ += tabley_;
-
-	left_column_.set_size(tablew_, tableh_);
-	left_column_.set_pos(Vector2i(tablex_, tabley_));
-
-	right_column_.set_size(get_right_column_w(right_column_x_), tableh_ - buth - 4 * padding_);
-	right_column_.set_pos(Vector2i(right_column_x_, tabley_));
-
-	// Chat
-	chat_.set_desired_size(tablew_, tableh_ * 7 / 12);
-
-	// Identical list height
-	opengames_list_.set_desired_size(opengames_list_.get_w(), clientsonline_table_.get_h());
-
-	// Buttons
-	joingame_.set_size(butw, buth);
-	hostgame_.set_size(butw, buth);
-	back_.set_size(butw, buth);
+	TwoColumnsBasicNavigationMenu::layout();
+	joingame_.set_desired_size(0, standard_height_);
+	hostgame_.set_desired_size(0, standard_height_);
+	servername_.set_desired_size(0, standard_height_);
 }
 
 /// think function of the UI (main loop)
 void FullscreenMenuInternetLobby::think() {
-	FullscreenMenuLoadMapOrGame::think();
+	TwoColumnsBasicNavigationMenu::think();
 
 	if (!InternetGaming::ref().error()) {
 
@@ -522,3 +496,4 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		throw;
 	}
 }
+}  // namespace FsMenu

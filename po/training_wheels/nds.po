@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Benedikt Straub <benedikt-straub@web.de>, 2020
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-19 15:57+0000\n"
+"POT-Creation-Date: 2020-10-30 06:25+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2020\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,40 +24,46 @@ msgid ""
 "Click on a small, medium or big building space, then select the building "
 "from the small buildings tab."
 msgstr ""
+"Klick up eene lütte, middelgrote of grote Rüümte tum Bauen un köör dann dat "
+"Huus ut de Listenwessler för de lütten Husen ut."
 
 #: ../../data/scripting/training_wheels/logs.lua:72
 msgid ""
 "Click on a medium or big building space, then select the building from the "
 "medium buildings tab."
 msgstr ""
+"Klick up eene middelgrote of grote Rüümte tum Bauen un köör dann dat Huus ut"
+" de Listenwessler för de middelmatig Husen ut."
 
 #: ../../data/scripting/training_wheels/logs.lua:74
 msgid ""
 "Click on a big building space, then select the building from the big "
 "buildings tab."
 msgstr ""
+"Klick up eene grote Rüümte tum Bauen un köör dann dat Huus ut de "
+"Listenwessler för de groten Husen ut."
 
 #: ../../data/scripting/training_wheels/logs.lua:78
 #: ../../data/scripting/training_wheels/logs.lua:137
 msgid "Logs"
-msgstr ""
+msgstr "Boomstammen"
 
 #: ../../data/scripting/training_wheels/logs.lua:81
 msgid ""
 "You need to supply your tribe with logs. Please build the following "
 "building:"
-msgstr ""
+msgstr "Du muttst dien Volk mit Boomstammen versörgen. Bau bidde deeses Huus:"
 
 #: ../../data/scripting/training_wheels/logs.lua:91
 #: ../../data/scripting/training_wheels/logs.lua:102
 #: ../../data/scripting/training_wheels/logs.lua:113
 #: ../../data/scripting/training_wheels/logs.lua:126
 msgid "Roads"
-msgstr ""
+msgstr "Straten"
 
 #: ../../data/scripting/training_wheels/logs.lua:116
 msgid "Click on the building’s button…"
-msgstr ""
+msgstr "Klick up de Knoop för dat Huus …"
 
 #: ../../data/scripting/training_wheels/logs.lua:118
 msgid ""
@@ -69,16 +79,16 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/logs.lua:140
 msgid "Well done, we can produce logs now!"
-msgstr ""
+msgstr "Hunnert. Nu könen wi Boomstammen produzeren!"
 
 #: ../../data/scripting/training_wheels/objectives.lua:22
 #: ../../data/scripting/training_wheels/objectives.lua:35
 msgid "Objectives"
-msgstr ""
+msgstr "Upgaven"
 
 #: ../../data/scripting/training_wheels/objectives.lua:38
 msgid "Open the Objectives window"
-msgstr ""
+msgstr "Maak dat Upgaven-Fenster op"
 
 #: ../../data/scripting/training_wheels/objectives.lua:39
 #, lua-format
@@ -86,32 +96,38 @@ msgid ""
 "Click on the button that the arrow is pointing to, or press ‘%s’ to see the "
 "current game's objectives."
 msgstr ""
+"Klick up de Knoop, waar de Piel henwiest, of drück »%s«, um de Upgaven in de"
+" stedenwies Speel antokieken."
 
 #: ../../data/scripting/training_wheels/objectives.lua:45
 msgid "Close this window"
-msgstr ""
+msgstr "Maak deeses Fenster to"
 
 #: ../../data/scripting/training_wheels/objectives.lua:47
 msgid "Closing this window"
-msgstr ""
+msgstr "Deeses Fenster tomaken"
 
 #: ../../data/scripting/training_wheels/objectives.lua:48
 msgid ""
 " You can open and close this window by clicking on the ‘Objectives’ button "
 "in the toolbar on the bottom of the screen."
 msgstr ""
+"Du kannst dieses Fenster op- un tomaken, indeem du up de »Upgaven«-Knoop in "
+"de Warktüügbalken an de unnern Rand vun de Billschirm klickst."
 
 #: ../../data/scripting/training_wheels/objectives.lua:49
 msgid ""
 "Like any other window, you can also close the ‘Objectives’ window by right-"
 "clicking on it."
 msgstr ""
+"As elkeen anner Fenster kannst du ok dat »Upgaven«-Fenster tomaken, indeem "
+"du 't mit de rechten Muustast anklickst."
 
 #: ../../data/scripting/training_wheels/welcome.lua:21
 #: ../../data/scripting/training_wheels/welcome.lua:25
 msgid "Welcome to Widelands!"
-msgstr ""
+msgstr "Willkomen in Widelands!"
 
 #: ../../data/scripting/training_wheels/welcome.lua:26
 msgid "Follow the arrows to learn how to play."
-msgstr ""
+msgstr "Folg de Pielen, um to lehren, wo man spöölt."
