@@ -157,7 +157,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							const std::string map_object_name(fr.c_string());
 							const std::string type(fr.c_string());
 							DescriptionIndex oldidx = INVALID_INDEX;
-							if (type == "building") {
+							// TODO(Nordfriese): `type.empty()` is only allowed for
+							// savegame compatibility, disallow after v1.0
+							if (type.empty() || type == "building") {
 								oldidx = building.owner().tribe().safe_building_index(map_object_name);
 							} else if (type == "immovable") {
 								oldidx = building.owner().tribe().immovable_index(map_object_name);
