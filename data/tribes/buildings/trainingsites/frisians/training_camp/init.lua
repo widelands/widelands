@@ -78,7 +78,7 @@ descriptions:new_trainingsite_type {
       food = {
          {"smoked_fish", "smoked_meat"},
          {"beer"},
-         {"bread_frisians"}
+         {"bread_frisians"},
       },
       weapons = {
          "sword_long",

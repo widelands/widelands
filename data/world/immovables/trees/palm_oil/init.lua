@@ -38,6 +38,7 @@ wl.Descriptions():new_immovable_type{
    name = "palm_oil_desert_pole",
    descname = _ "Oil Palm (Pole)",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -94,6 +95,7 @@ wl.Descriptions():new_immovable_type{
    species = _ "Oil Palm",
    icon = dirname .. "menu.png",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
