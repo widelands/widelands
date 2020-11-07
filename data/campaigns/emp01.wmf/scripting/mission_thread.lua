@@ -39,6 +39,8 @@ function mission_thread()
    campaign_message_box(saledus_1)
    p1:allow_buildings{"empire_blockhouse"}
    local o = add_campaign_objective(obj_build_blockhouse)
+   p1:run_training_wheel("objectives", true)
+
    while #p1:get_buildings("empire_blockhouse") < 1 do sleep(3249) end
    set_objective_done(o)
 
