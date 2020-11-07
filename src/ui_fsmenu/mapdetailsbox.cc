@@ -126,9 +126,9 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 // MapDetailsBox implementation
 
-MapDetailsBox::MapDetailsBox(
-   Panel* parent, bool preconfigured, uint32_t, uint32_t standard_element_height, uint32_t padding)
+MapDetailsBox::MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     padding_(padding),
      preconfigured_(preconfigured),
      title_(this,
             UI::PanelStyle::kFsMenu,
@@ -154,8 +154,8 @@ MapDetailsBox::MapDetailsBox(
                  "change_map_or_save",
                  0,
                  0,
-                 standard_element_height,
-                 standard_element_height,
+                 0,
+                 0,
                  UI::ButtonStyle::kFsMenuSecondary,
                  g_image_cache->get("images/wui/menus/toggle_minimap.png"),
                  _("Change map or saved game")),
@@ -169,7 +169,7 @@ MapDetailsBox::MapDetailsBox(
                       UI::Align::kLeft,
                       UI::MultilineTextarea::ScrollMode::kNoScrolling),
      suggested_teams_box_(
-        &content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 4, 0, 0, 0) {
+        &content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, padding, 0, 0, 0) {
 	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
@@ -222,14 +222,11 @@ void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
 	select_map_.sigclicked.connect(action);
 }
 
-void MapDetailsBox::force_new_dimensions(float scale,
-                                         uint32_t standard_element_width,
-                                         uint32_t standard_element_height) {
-	title_.set_font_scale(scale);
-	map_name_.set_font_scale(scale);
-	map_name_.set_fixed_width(standard_element_width - standard_element_height);
-	select_map_.set_desired_size(standard_element_height, standard_element_height);
-	content_box_.set_max_size(standard_element_width, 6 * standard_element_height);
+void MapDetailsBox::force_new_dimensions(uint32_t width, uint32_t height) {
+	map_name_.set_fixed_width(width - height);
+	select_map_.set_desired_size(height, height);
+	content_box_.set_max_size(
+	   width, get_h() - title_.get_h() - title_box_.get_h() - 2 * 3 * padding_);
 }
 
 void MapDetailsBox::set_map_description_text(const std::string& text) {
