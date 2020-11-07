@@ -78,9 +78,9 @@ using Widelands::TCoords;
 InteractiveBase::BuildhelpOverlay::BuildhelpOverlay(const std::string& filename,
                                                     Widelands::Field::BuildHelp index)
    : image(g_image_cache->get(filename)),
-     //  Special case for flag, which has a different formula for hotspot_y.
      hotspot(Vector2i(
         image->width() / 2,
+        //  Special case for flag, which has a different formula for hotspot_y.
         index == Widelands::Field::BuildHelp::kFlag ? image->height() - 1 : image->height() / 2)) {
 }
 

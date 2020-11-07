@@ -97,7 +97,7 @@ run(function()
       teach_placing_constructionsite = true
 
       -- Wait until we find a suitable field near a log producer, then acquire lock.
-      -- The check again if there is still a suitable field and if not, release the lock and try again.
+      -- Then check again if there is still a suitable field and if not, release the lock and try again.
       local function wait_for_starting_conditions(conquering_field, player, starting_conquer_range)
          local result = nil
 

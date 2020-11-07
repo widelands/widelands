@@ -699,12 +699,11 @@ int LuaPlayer::buildhelp(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	Widelands::Player& player = get(L, game);
 
-	uint32_t x = luaL_checkuint32(L, 2);
-	uint32_t y = luaL_checkuint32(L, 3);
+	const uint32_t x = luaL_checkuint32(L, 2);
+	const uint32_t y = luaL_checkuint32(L, 3);
+	const Widelands::NodeCaps caps = player.get_buildcaps(game.map().get_fcoords(Widelands::Coords(x, y)));
 
-	Widelands::NodeCaps caps = player.get_buildcaps(game.map().get_fcoords(Widelands::Coords(x, y)));
-
-	Widelands::Field::BuildHelp buildhelp = Widelands::Field::caps_to_buildhelp(caps);
+	const Widelands::Field::BuildHelp buildhelp = Widelands::Field::caps_to_buildhelp(caps);
 	switch (buildhelp) {
 	case Widelands::Field::BuildHelp::kMine:
 		lua_pushstring(L, "mine");
