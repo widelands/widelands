@@ -112,13 +112,13 @@ public:
 	/// We only need the attributes during tribes initialization
 	void clear_attributes();
 
-	struct MinedResourceInfo {
+	struct CollectedResourceInfo {
 		unsigned max_percent;
 		unsigned depleted_chance;
 	};
 
-	/// The resources that this production site needs to collect from the map, and the max percent it can achieve
-	const std::map<std::string, MinedResourceInfo>& collected_resources() const {
+	/// The resources that this production site needs to collect from the map, the max percent it can achieve, and the chance when depleted
+	const std::map<std::string, CollectedResourceInfo>& collected_resources() const {
 		return collected_resources_;
 	}
 	/// The resources that this production site will place on the map
@@ -241,7 +241,7 @@ protected:
 	}
 	/// Set that this production site needs to collect the given resource from the map
 	void add_collected_resource(const std::string& resource, unsigned max_percent, unsigned depleted_chance) {
-		collected_resources_.insert(std::make_pair(resource, MinedResourceInfo{max_percent, depleted_chance}));
+		collected_resources_.insert(std::make_pair(resource, CollectedResourceInfo{max_percent, depleted_chance}));
 	}
 	/// Set that this production site will place the given resource on the map
 	void add_created_resource(const std::string& resource) {
@@ -258,8 +258,7 @@ private:
 	Output output_worker_types_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	// Resource name, max percent
-	std::map<std::string, MinedResourceInfo> collected_resources_;
+	std::map<std::string, CollectedResourceInfo> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;
