@@ -50,8 +50,8 @@ public:
 	}
 
 protected:
-	virtual void clicked_ok() = 0;
-	virtual void clicked_back() = 0;
+	void clicked_ok() override = 0;
+	void clicked_back() override = 0;
 	virtual bool clicked_select_map() = 0;
 
 	LuaInterface* lua_;
