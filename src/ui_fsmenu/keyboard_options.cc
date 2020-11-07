@@ -80,14 +80,35 @@ struct ShortcutChooser : public UI::Window {
 };
 
 KeyboardOptions::KeyboardOptions(Panel& parent)
-: UI::Window(parent.get_parent(), UI::WindowStyle::kFsMenu, "keyboard_options", 0, 0, parent.get_w() * 3 / 4, parent.get_h() * 3 / 4, _("Edit Keyboard Shortcuts")),
-buttons_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
-tabs_(this, UI::TabPanelStyle::kFsMenu),
-reset_(&buttons_box_, "reset", 0, 0, get_w() / 3, 28, UI::ButtonStyle::kFsMenuSecondary, _("Reset all"), _("Reset all to defaults")),
-ok_(&buttons_box_, "ok", 0, 0, reset_.get_w(), reset_.get_h(), UI::ButtonStyle::kFsMenuPrimary, _("OK")),
-box_mainmenu_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-box_general_game_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding)
-{
+   : UI::Window(parent.get_parent(),
+                UI::WindowStyle::kFsMenu,
+                "keyboard_options",
+                0,
+                0,
+                parent.get_w() * 3 / 4,
+                parent.get_h() * 3 / 4,
+                _("Edit Keyboard Shortcuts")),
+     buttons_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     tabs_(this, UI::TabPanelStyle::kFsMenu),
+     reset_(&buttons_box_,
+            "reset",
+            0,
+            0,
+            get_w() / 3,
+            28,
+            UI::ButtonStyle::kFsMenuSecondary,
+            _("Reset all"),
+            _("Reset all to defaults")),
+     ok_(&buttons_box_,
+         "ok",
+         0,
+         0,
+         reset_.get_w(),
+         reset_.get_h(),
+         UI::ButtonStyle::kFsMenuPrimary,
+         _("OK")),
+     box_mainmenu_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_general_game_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
 	box_mainmenu_.set_scrolling(true);
 	box_general_game_.set_scrolling(true);
 
@@ -113,7 +134,11 @@ box_general_game_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0
 				} else {
 					UI::WLMessageBox warning(
 					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
-					   (boost::format(_("The shortcut you selected (‘%1$s’) is already in use for the following action: ‘%2$s’. Please select a different shortcut or change the conflicting shortcut first.")) % shortcut_string_for(c.key) % to_string(conflict)).str(),
+					   (boost::format(_("The shortcut you selected (‘%1$s’) is already in use for the "
+					                    "following action: ‘%2$s’. Please select a different shortcut "
+					                    "or change the conflicting shortcut first.")) %
+					    shortcut_string_for(c.key) % to_string(conflict))
+					      .str(),
 					   UI::WLMessageBox::MBoxType::kOk);
 					warning.run<UI::Panel::Returncodes>();
 				}

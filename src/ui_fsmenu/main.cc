@@ -445,20 +445,48 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 			}
 			return false;
 		};
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuNew, MenuTarget::kNewGame)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuLoad, MenuTarget::kLoadGame)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplay, MenuTarget::kReplay)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuTutorial, MenuTarget::kTutorial)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuRandomMatch, MenuTarget::kRandomGame)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuCampaign, MenuTarget::kCampaign)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuLobby, MenuTarget::kMetaserver)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuLAN, MenuTarget::kLan)) { return true; }
-		// if (check_match_shortcut(KeyboardShortcut::kMainMenuAddons, MenuTarget::kAddOns)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuOptions, MenuTarget::kOptions)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuAbout, MenuTarget::kAbout)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuEditorNew, MenuTarget::kEditorNew)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuEditorRandom, MenuTarget::kEditorRandom)) { return true; }
-		if (check_match_shortcut(KeyboardShortcut::kMainMenuEditorLoad, MenuTarget::kEditorLoad)) { return true; }
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuNew, MenuTarget::kNewGame)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLoad, MenuTarget::kLoadGame)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuReplay, MenuTarget::kReplay)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuTutorial, MenuTarget::kTutorial)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuRandomMatch, MenuTarget::kRandomGame)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuCampaign, MenuTarget::kCampaign)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLobby, MenuTarget::kMetaserver)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLAN, MenuTarget::kLan)) {
+			return true;
+		}
+		// if (check_match_shortcut(KeyboardShortcut::kMainMenuAddons, MenuTarget::kAddOns)) { return
+		// true; }
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuOptions, MenuTarget::kOptions)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuAbout, MenuTarget::kAbout)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuEditorNew, MenuTarget::kEditorNew)) {
+			return true;
+		}
+		if (check_match_shortcut(
+		       KeyboardShortcut::kMainMenuEditorRandom, MenuTarget::kEditorRandom)) {
+			return true;
+		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuEditorLoad, MenuTarget::kEditorLoad)) {
+			return true;
+		}
 
 		if (matches_shortcut(KeyboardShortcut::kMainMenuSP, code)) {
 			singleplayer_.toggle();

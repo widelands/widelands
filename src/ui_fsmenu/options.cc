@@ -99,8 +99,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
      tabs_(this, UI::TabPanelStyle::kFsMenu),
 
      box_interface_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_interface_hbox_(&box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
-     box_interface_vbox_(&box_interface_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_interface_hbox_(
+        &box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     box_interface_vbox_(
+        &box_interface_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_sound_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
@@ -130,24 +132,15 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
 
-     inputgrab_(
-        &box_interface_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
+     inputgrab_(&box_interface_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
      sdl_cursor_(&box_interface_,
                  UI::PanelStyle::kFsMenu,
                  Vector2i::zero(),
                  _("Use system mouse cursor"),
                  "",
                  0),
-     sb_maxfps_(&box_interface_,
-                0,
-                0,
-                0,
-                0,
-                opt.maxfps,
-                0,
-                99,
-                UI::PanelStyle::kFsMenu,
-                _("Maximum FPS:")),
+     sb_maxfps_(
+        &box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, UI::PanelStyle::kFsMenu, _("Maximum FPS:")),
      translation_info_(&box_interface_hbox_, 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
 
      // Windows options
@@ -194,15 +187,14 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
-     configure_keyboard_(
-        &box_interface_,
-        "configure_keyboard",
-        0,
-        0,
-        0,
-        0,
-        UI::ButtonStyle::kFsMenuSecondary,
-        _("Edit keyboard shortcuts…")),
+     configure_keyboard_(&box_interface_,
+                         "configure_keyboard",
+                         0,
+                         0,
+                         0,
+                         0,
+                         UI::ButtonStyle::kFsMenuSecondary,
+                         _("Edit keyboard shortcuts…")),
 
      // Sound options
      sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
@@ -524,7 +516,9 @@ void FullscreenMenuOptions::layout() {
 		// Interface
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
-		translation_info_.set_size(language_dropdown_.get_w(), language_dropdown_.get_h() + resolution_dropdown_.get_h() + kPadding);
+		translation_info_.set_size(
+		   language_dropdown_.get_w(),
+		   language_dropdown_.get_h() + resolution_dropdown_.get_h() + kPadding);
 		sb_maxfps_.set_unit_width(unit_w);
 		sb_maxfps_.set_desired_size(tab_panel_width, sb_maxfps_.get_h());
 
