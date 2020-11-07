@@ -114,19 +114,23 @@ void Box::set_max_size(int w, int h) {
 void Box::update_desired_size() {
 	int totaldepth = 0;
 	int maxbreadth = mindesiredbreadth_;
+	int spacing = -inner_spacing_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		int depth = 0, breadth = 0;
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
+		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+			spacing += inner_spacing_;
+		}
 		if (breadth > maxbreadth) {
 			maxbreadth = breadth;
 		}
 	}
 
-	if (!items_.empty()) {
-		totaldepth += (items_.size() - 1) * inner_spacing_;
+	if (spacing > 0) {
+		totaldepth += spacing;
 	}
 
 	if (orientation_ == Horizontal) {
@@ -170,15 +174,19 @@ bool Box::handle_key(bool down, SDL_Keysym code) {
 void Box::layout() {
 	// First pass: compute the depth and adjust whether we have a scrollbar
 	int totaldepth = 0;
+	int spacing = -inner_spacing_;
 
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, unused = 0;
 		get_item_desired_size(idx, &depth, &unused);
 		totaldepth += depth;
+		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+			spacing += inner_spacing_;
+		}
 	}
 
-	if (!items_.empty()) {
-		totaldepth += (items_.size() - 1) * inner_spacing_;
+	if (spacing > 0) {
+		totaldepth += spacing;
 	}
 
 	bool needscrollbar = force_scrolling_;
@@ -272,7 +280,9 @@ void Box::update_positions() {
 		}
 
 		totaldepth += depth;
-		totaldepth += inner_spacing_;
+		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+			totaldepth += inner_spacing_;
+		}
 	}
 }
 
