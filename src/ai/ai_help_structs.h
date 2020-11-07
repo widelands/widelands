@@ -480,8 +480,6 @@ struct BuildingObserver {
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
 	Widelands::DescriptionIndex mines;  // type of resource it mines
-	// TODO(GunChleoc): mines_percent is not used anywhere yet
-	uint16_t mines_percent;             // % of res it can mine
 	uint32_t current_stats;
 
 	uint32_t basic_amount;  // basic amount for basic economy as defined in init.lua

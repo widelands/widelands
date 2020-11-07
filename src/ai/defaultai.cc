@@ -768,10 +768,8 @@ void DefaultAI::late_initialization() {
 				if (first_resource_it == collected_resources.end()) {
 					log_warn("AI %d: The mine '%s' does not mine any resources!", player_number(), bo.name);
 					bo.mines = Widelands::INVALID_INDEX;
-					bo.mines_percent = 0;
 				} else {
 					bo.mines = game().descriptions().resource_index(first_resource_it->first);
-					bo.mines_percent = first_resource_it->second.max_percent;
 				}
 
 				// populating mines_per_type map
