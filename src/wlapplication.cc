@@ -1222,7 +1222,7 @@ void WLApplication::mainmenu() {
 				need_to_reset = replay(mm.get());
 				break;
 			case MenuTarget::kOptions: {
-				OptionsCtrl om(*mm, get_config_section());
+				FsMenu::OptionsCtrl om(*mm, get_config_section());
 				mm->set_labels();  // update buttons for new language
 				break;
 			}

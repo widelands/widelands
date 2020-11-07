@@ -1,5 +1,7 @@
 wl_library(ui_fsmenu_options
   SRCS
+    keyboard_options.cc
+    keyboard_options.h
     options.cc
     options.h
     training_wheel_options.cc
