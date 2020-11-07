@@ -76,12 +76,9 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	// If some but not all wheels are solved, the Mark/Unmark button should be labelled "Unmark All"
 	// instead of "Mark All" initially.
 	bool has_solved = false;
-	bool has_unsolved = false;
 	for (const auto& objective : objectives) {
 		if (objective.second.solved) {
 			has_solved = true;
-		} else {
-			has_unsolved = true;
 		}
 		UI::Checkbox* checkbox = new UI::Checkbox(
 		   list_box, UI::PanelStyle::kFsMenu, Vector2i::zero(), objective.second.descname);
@@ -92,7 +89,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 		list_box->add_space(0);
 	}
 
-	mark_unmark_state_ = !(has_solved && has_unsolved);
+	mark_unmark_state_ = !has_solved;
 
 	main_box->add_space(kPadding);
 
