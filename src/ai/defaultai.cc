@@ -762,11 +762,14 @@ void DefaultAI::late_initialization() {
 				// get the resource needed by the mine
 				const auto& collected_resources = prod.collected_resources();
 				if (collected_resources.size() > 1) {
-					log_warn("AI %d: The mine '%s' will mine multiple resources. The AI can't handle this and will simply pick the first one from the list.", player_number(), bo.name);
+					log_warn("AI %d: The mine '%s' will mine multiple resources. The AI can't handle "
+					         "this and will simply pick the first one from the list.",
+					         player_number(), bo.name);
 				}
 				const auto& first_resource_it = collected_resources.begin();
 				if (first_resource_it == collected_resources.end()) {
-					log_warn("AI %d: The mine '%s' does not mine any resources!", player_number(), bo.name);
+					log_warn(
+					   "AI %d: The mine '%s' does not mine any resources!", player_number(), bo.name);
 					bo.mines = Widelands::INVALID_INDEX;
 				} else {
 					bo.mines = game().descriptions().resource_index(first_resource_it->first);

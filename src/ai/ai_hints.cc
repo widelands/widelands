@@ -164,7 +164,8 @@ Production Sites
         mines = "resource_gold",
 
 **mines_percent**
-    **DEPRECATED** The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
+    **DEPRECATED** The percentage that a mine will mine of its resource before it needs enhancing,
+e.g.::
 
         mines_percent = 60,
 
@@ -267,7 +268,8 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string&
 		log_warn("%s: The 'mines' key in 'ai_hints' is no longer used", building_name.c_str());
 	}
 	if (table->has_key("mines_percent")) {
-		log_warn("%s: The 'mines_percent' key in 'ai_hints' is no longer used", building_name.c_str());
+		log_warn(
+		   "%s: The 'mines_percent' key in 'ai_hints' is no longer used", building_name.c_str());
 	}
 }
 
