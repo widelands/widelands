@@ -91,24 +91,23 @@ function find_buildable_field(center_field, player, size, min_radius, max_radius
 
    local function find_buildable_field_helper(center_field, player, size, range)
       for f_idx, field in ipairs(center_field:region(range)) do
-         if player == field.owner and field:has_caps(size) then
+
+         print("Field: " .. field.x .. " " .. field.y)
+         local buildcaps = player:buildcaps(field.x, field.y)
+         print("Buildcaps " .. buildcaps .. " at " .. field.x .. " " .. field.y)
+         if buildcaps == size or (size == "big" and buildcaps == "port") then
+
             local sufficient_space = true
             -- Search around the field's flag position for the space for roads
             for nf_idx, nearby_field in ipairs(field.brn:region(1)) do
-               if player ~= nearby_field.owner or not nearby_field:has_caps("flag") then
+               buildcaps = player:buildcaps(nearby_field.x, nearby_field.y)
+               if buildcaps == "none" then
                   sufficient_space = false
+                  break
                end
             end
             if sufficient_space then
-               -- Ensure the border won't interfere
-               for nf_idx, nearby_field in ipairs(field:region(2)) do
-                  if player ~= nearby_field.owner then
-                     sufficient_space = false
-                  end
-               end
-               if sufficient_space then
-                  return field
-               end
+               return field
             end
          end
       end

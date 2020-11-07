@@ -73,28 +73,6 @@ using Widelands::Map;
 using Widelands::MapObject;
 using Widelands::TCoords;
 
-int caps_to_buildhelp(const Widelands::NodeCaps caps) {
-	if (caps & Widelands::BUILDCAPS_MINE) {
-		return Widelands::Field::Buildhelp_Mine;
-	}
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
-		if (caps & Widelands::BUILDCAPS_PORT) {
-			return Widelands::Field::Buildhelp_Port;
-		}
-		return Widelands::Field::Buildhelp_Big;
-	}
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
-		return Widelands::Field::Buildhelp_Medium;
-	}
-	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
-		return Widelands::Field::Buildhelp_Small;
-	}
-	if (caps & Widelands::BUILDCAPS_FLAG) {
-		return Widelands::Field::Buildhelp_Flag;
-	}
-	return Widelands::Field::Buildhelp_None;
-}
-
 }  // namespace
 
 InteractiveBase::Toolbar::Toolbar(Panel* parent)
@@ -359,7 +337,7 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 
 const InteractiveBase::BuildhelpOverlay*
 InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
-	const int buildhelp_overlay_index = caps_to_buildhelp(caps);
+	const Widelands::Field::BuildhelpIndex buildhelp_overlay_index = Widelands::Field::caps_to_buildhelp(caps);
 	if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
 		return &buildhelp_overlays_[buildhelp_overlay_index];
 	}

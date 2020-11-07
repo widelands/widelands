@@ -70,6 +70,8 @@ struct Field {
 		Buildhelp_None = 6
 	};
 
+	static Field::BuildhelpIndex caps_to_buildhelp(NodeCaps caps);
+
 	using Height = uint8_t;
 	using ResourceAmount = uint8_t;
 
