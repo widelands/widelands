@@ -70,8 +70,9 @@ public:
 
 	/// A build help overlay, i.e. small, big, mine, port ...
 	struct BuildhelpOverlay {
-		const Image* pic = nullptr;
-		Vector2i hotspot = Vector2i::zero();
+		explicit BuildhelpOverlay(const std::string& filename, Widelands::Field::BuildHelp index);
+		const Image* image;
+		const Vector2i hotspot;
 	};
 
 	// Manages all UniqueWindows.
@@ -417,7 +418,7 @@ private:
 	std::unique_ptr<RoadBuildingMode> road_building_mode_;
 
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
+	std::map<Widelands::Field::BuildHelp, BuildhelpOverlay> buildhelp_overlays_;
 
 	bool cheat_mode_enabled_;
 };

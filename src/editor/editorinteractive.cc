@@ -616,7 +616,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			const auto* overlay =
 			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
 			if (overlay != nullptr) {
-				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
+				blit_field_overlay(&dst, field, overlay->image, overlay->hotspot, scale);
 			}
 		}
 

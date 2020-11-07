@@ -23,27 +23,26 @@
 
 namespace Widelands {
 
-
-Field::BuildhelpIndex Field::caps_to_buildhelp(NodeCaps caps) {
+Field::BuildHelp Field::caps_to_buildhelp(NodeCaps caps) {
 	if (caps & Widelands::BUILDCAPS_MINE) {
-		return Field::BuildhelpIndex::Buildhelp_Mine;
+		return Field::BuildHelp::kMine;
 	}
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
 		if (caps & Widelands::BUILDCAPS_PORT) {
-			return Field::BuildhelpIndex::Buildhelp_Port;
+			return Field::BuildHelp::kPort;
 		}
-		return Widelands::Field::BuildhelpIndex::Buildhelp_Big;
+		return Widelands::Field::BuildHelp::kBig;
 	}
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
-		return Field::BuildhelpIndex::Buildhelp_Medium;
+		return Field::BuildHelp::kMedium;
 	}
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
-		return Field::BuildhelpIndex::Buildhelp_Small;
+		return Field::BuildHelp::kSmall;
 	}
 	if (caps & Widelands::BUILDCAPS_FLAG) {
-		return Field::BuildhelpIndex::Buildhelp_Flag;
+		return Field::BuildHelp::kFlag;
 	}
-	return Field::BuildhelpIndex::Buildhelp_None;
+	return Field::BuildHelp::kNone;
 }
 
 /**

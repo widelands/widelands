@@ -75,6 +75,15 @@ using Widelands::TCoords;
 
 }  // namespace
 
+InteractiveBase::BuildhelpOverlay::BuildhelpOverlay(const std::string& filename,
+                                                    Widelands::Field::BuildHelp index)
+   : image(g_image_cache->get(filename)),
+     //  Special case for flag, which has a different formula for hotspot_y.
+     hotspot(Vector2i(
+        image->width() / 2,
+        index == Widelands::Field::BuildHelp::kFlag ? image->height() - 1 : image->height() / 2)) {
+}
+
 InteractiveBase::Toolbar::Toolbar(Panel* parent)
    : UI::Panel(parent, UI::PanelStyle::kWui, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
      box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
@@ -172,35 +181,21 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
      avg_usframetime_(0),
      road_building_mode_(nullptr),
      unique_window_handler_(new UniqueWindowHandler()),
+     buildhelp_overlays_{
+        {Widelands::Field::BuildHelp::kFlag,
+         BuildhelpOverlay("images/wui/overlays/set_flag.png", Widelands::Field::BuildHelp::kFlag)},
+        {Widelands::Field::BuildHelp::kSmall,
+         BuildhelpOverlay("images/wui/overlays/small.png", Widelands::Field::BuildHelp::kSmall)},
+        {Widelands::Field::BuildHelp::kMedium,
+         BuildhelpOverlay("images/wui/overlays/medium.png", Widelands::Field::BuildHelp::kMedium)},
+        {Widelands::Field::BuildHelp::kBig,
+         BuildhelpOverlay("images/wui/overlays/big.png", Widelands::Field::BuildHelp::kBig)},
+        {Widelands::Field::BuildHelp::kMine,
+         BuildhelpOverlay("images/wui/overlays/mine.png", Widelands::Field::BuildHelp::kMine)},
+        {Widelands::Field::BuildHelp::kPort,
+         BuildhelpOverlay("images/wui/overlays/port.png", Widelands::Field::BuildHelp::kPort)},
+     },
      cheat_mode_enabled_(false) {
-
-	// Load the buildhelp icons.
-	{
-		BuildhelpOverlay* buildhelp_overlay = buildhelp_overlays_;
-		const char* filenames[] = {
-		   "images/wui/overlays/set_flag.png", "images/wui/overlays/small.png",
-		   "images/wui/overlays/medium.png",   "images/wui/overlays/big.png",
-		   "images/wui/overlays/mine.png",     "images/wui/overlays/port.png"};
-		const char* const* filename = filenames;
-
-		//  Special case for flag, which has a different formula for hotspot_y.
-		buildhelp_overlay->pic = g_image_cache->get(*filename);
-		buildhelp_overlay->hotspot =
-		   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() - 1);
-
-		const BuildhelpOverlay* const buildhelp_overlays_end =
-		   buildhelp_overlay + Widelands::Field::Buildhelp_None;
-		for (;;) {  // The other buildhelp overlays.
-			++buildhelp_overlay;
-			++filename;
-			if (buildhelp_overlay == buildhelp_overlays_end) {
-				break;
-			}
-			buildhelp_overlay->pic = g_image_cache->get(*filename);
-			buildhelp_overlay->hotspot =
-			   Vector2i(buildhelp_overlay->pic->width() / 2, buildhelp_overlay->pic->height() / 2);
-		}
-	}
 
 	resize_chat_overlay();
 
@@ -337,9 +332,9 @@ void InteractiveBase::mapview_menu_selected(MapviewMenuEntry entry) {
 
 const InteractiveBase::BuildhelpOverlay*
 InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
-	const Widelands::Field::BuildhelpIndex buildhelp_overlay_index = Widelands::Field::caps_to_buildhelp(caps);
-	if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
-		return &buildhelp_overlays_[buildhelp_overlay_index];
+	auto it = buildhelp_overlays_.find(Widelands::Field::caps_to_buildhelp(caps));
+	if (it != buildhelp_overlays_.end()) {
+		return &it->second;
 	}
 	return nullptr;
 }

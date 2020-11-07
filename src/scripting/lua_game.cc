@@ -88,7 +88,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, add_objective),
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
-   METHOD(LuaPlayer, buildcaps),
+   METHOD(LuaPlayer, buildhelp),
    METHOD(LuaPlayer, mark_scenario_as_solved),
    METHOD(LuaPlayer, acquire_training_wheel_lock),
    METHOD(LuaPlayer, release_training_wheel_lock),
@@ -681,7 +681,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: buildcaps(x, y)
+   .. method:: buildhelp(x, y)
 
       Returns the player's buildcaps for a field as they would appear in the building spaces help on
       the map.
@@ -695,7 +695,7 @@ int LuaPlayer::hide_fields(lua_State* L) {
       :returns: :class:`string` One of ``mine``, ``port``, ``big``, ``medium``, ``small``, ``flag``,
         ``none``
 */
-int LuaPlayer::buildcaps(lua_State* L) {
+int LuaPlayer::buildhelp(lua_State* L) {
 	Widelands::Game& game = get_game(L);
 	Widelands::Player& player = get(L, game);
 
@@ -704,24 +704,24 @@ int LuaPlayer::buildcaps(lua_State* L) {
 
 	Widelands::NodeCaps caps = player.get_buildcaps(game.map().get_fcoords(Widelands::Coords(x, y)));
 
-	Widelands::Field::BuildhelpIndex buildhelp = Widelands::Field::caps_to_buildhelp(caps);
+	Widelands::Field::BuildHelp buildhelp = Widelands::Field::caps_to_buildhelp(caps);
 	switch (buildhelp) {
-	case Widelands::Field::BuildhelpIndex::Buildhelp_Mine:
+	case Widelands::Field::BuildHelp::kMine:
 		lua_pushstring(L, "mine");
 		break;
-	case Widelands::Field::BuildhelpIndex::Buildhelp_Port:
+	case Widelands::Field::BuildHelp::kPort:
 		lua_pushstring(L, "port");
 		break;
-	case Widelands::Field::BuildhelpIndex::Buildhelp_Big:
+	case Widelands::Field::BuildHelp::kBig:
 		lua_pushstring(L, "big");
 		break;
-	case Widelands::Field::BuildhelpIndex::Buildhelp_Medium:
+	case Widelands::Field::BuildHelp::kMedium:
 		lua_pushstring(L, "medium");
 		break;
-	case Widelands::Field::BuildhelpIndex::Buildhelp_Small:
+	case Widelands::Field::BuildHelp::kSmall:
 		lua_pushstring(L, "small");
 		break;
-	case Widelands::Field::BuildhelpIndex::Buildhelp_Flag:
+	case Widelands::Field::BuildHelp::kFlag:
 		lua_pushstring(L, "flag");
 		break;
 	default:

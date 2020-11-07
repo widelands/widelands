@@ -91,7 +91,7 @@ public:
 	int add_objective(lua_State* L);
 	int reveal_fields(lua_State* L);
 	int hide_fields(lua_State* L);
-	int buildcaps(lua_State* L);
+	int buildhelp(lua_State* L);
 	int mark_scenario_as_solved(lua_State* L);
 	int acquire_training_wheel_lock(lua_State* L);
 	int release_training_wheel_lock(lua_State* L);

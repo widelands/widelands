@@ -60,17 +60,9 @@ struct Field {
 	friend class Bob;
 	friend struct BaseImmovable;
 
-	enum BuildhelpIndex {
-		Buildhelp_Flag = 0,
-		Buildhelp_Small = 1,
-		Buildhelp_Medium = 2,
-		Buildhelp_Big = 3,
-		Buildhelp_Mine = 4,
-		Buildhelp_Port = 5,
-		Buildhelp_None = 6
-	};
+	enum class BuildHelp { kNone, kFlag, kSmall, kMedium, kBig, kMine, kPort };
 
-	static Field::BuildhelpIndex caps_to_buildhelp(NodeCaps caps);
+	static Field::BuildHelp caps_to_buildhelp(NodeCaps caps);
 
 	using Height = uint8_t;
 	using ResourceAmount = uint8_t;
