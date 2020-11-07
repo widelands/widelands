@@ -92,6 +92,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, acquire_training_wheel_lock),
    METHOD(LuaPlayer, release_training_wheel_lock),
    METHOD(LuaPlayer, mark_training_wheel_as_solved),
+   METHOD(LuaPlayer, run_training_wheel),
    METHOD(LuaPlayer, skip_training_wheel),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
@@ -749,6 +750,32 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 	}
 
 	get_game(L).mark_training_wheel_as_solved(luaL_checkstring(L, 2));
+	return 0;
+}
+
+/* RST
+   .. method:: run_training_wheel(name[, force])
+
+      Trigger running a training wheel. This function will skip the dependency check, so the given
+      training wheel will run even if its preconditions haven't been met. No further training wheels
+      will be triggered. Previously solved training wheels will not be run unless ``force == true``.
+
+      .. note:: Intended for use in scenarios only.
+
+      :arg name: name of the training wheel to be run
+      :type name: :class:`string`
+
+      :arg force: whether it should be run anyway if it was previously solved
+      :type force: :class:`boolean`
+*/
+// UNTESTED
+int LuaPlayer::run_training_wheel(lua_State* L) {
+	if (lua_gettop(L) < 2 || lua_gettop(L) > 3) {
+		report_error(L, "1-2 arguments are required for run_training_wheel(string[, boolean])");
+	}
+
+	const bool force = lua_gettop(L) == 3 && luaL_checkboolean(L, 3);
+	get_game(L).run_training_wheel(luaL_checkstring(L, 2), force);
 	return 0;
 }
 

@@ -37,7 +37,7 @@ class LoadOrSaveGame {
 	friend class FullscreenMenuLoadGame;
 	friend struct GameMainMenuSaveGame;
 
-protected:
+public:
 	/// Choose which type of files to show
 	enum class FileType { kShowAll, kGameMultiPlayer, kGameSinglePlayer, kReplay };
 
@@ -47,7 +47,9 @@ protected:
 	               FileType filetype,
 	               UI::PanelStyle,
 	               UI::WindowStyle,
-	               bool localize_autosave);
+	               bool localize_autosave,
+	               UI::Panel* table_parent = nullptr,
+	               UI::Panel* delete_button_parent = nullptr);
 
 	/// Make cppcheck happy
 	DISALLOW_COPY_AND_ASSIGN(LoadOrSaveGame);
@@ -95,7 +97,6 @@ private:
 	bool compare_save_time(uint32_t, uint32_t) const;
 	bool compare_map_name(uint32_t, uint32_t) const;
 
-	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
 

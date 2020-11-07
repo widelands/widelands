@@ -463,6 +463,12 @@ void Game::mark_training_wheel_as_solved(const std::string& objective) {
 	}
 	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
 }
+void Game::run_training_wheel(const std::string& objective, bool force) {
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
+	}
+	training_wheels_->run(objective, force);
+}
 void Game::skip_training_wheel(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
 		training_wheels_->skip(objective, training_wheels_wanted_);
