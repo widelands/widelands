@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
-"PO-Revision-Date: 2020-10-23 07:56+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-10-30 06:25+0000\n"
+"PO-Revision-Date: 2020-10-31 20:04+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -815,7 +815,7 @@ msgstr "이 밭은 키우고 있습니다."
 #: ../../data/tribes/initialization/empire/units.lua:865
 #: ../../data/tribes/initialization/frisians/units.lua:1171
 msgid "This field is ready for harvesting."
-msgstr "이 밭은 거둘 준비가 되어 있습니다."
+msgstr "이 밭은 거둘 준비가 되었습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
@@ -2259,7 +2259,7 @@ msgstr "이 갈대밭은 자라고 있습니다."
 #: ../../data/tribes/initialization/barbarians/units.lua:859
 #: ../../data/tribes/initialization/frisians/units.lua:1241
 msgid "This reed field is ready for harvesting."
-msgstr "이 갈대밭은 수확할 준비가 되었습니다."
+msgstr "이 갈대밭은 거둘 준비가 되었습니다."
 
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/barbarians/units.lua:914
@@ -4169,7 +4169,7 @@ msgstr "이 포도 넝쿨은 자라고 있습니다."
 #: ../../data/tribes/initialization/empire/units.lua:900
 #: ../../data/tribes/initialization/frisians/units.lua:1388
 msgid "This grapevine is ready for harvesting."
-msgstr "이 포도 넝쿨은 거둬질 준비가 되어있습니다."
+msgstr "이 포도 넝쿨은 거둘 준비가 되었습니다."
 
 #. TRANSLATORS: Helptext for an Empire resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/empire/units.lua:955
@@ -5061,7 +5061,7 @@ msgstr "알려지지 않은 땅을 탐험하십시오."
 #: ../../data/tribes/initialization/frisians/units.lua:1094
 #: ../../data/tribes/initialization/frisians/units.lua:1122
 msgid "This berry bush has just been planted."
-msgstr ""
+msgstr "이 딸기 열매 덤불은 방금 심었습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:905
@@ -5074,7 +5074,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1101
 #: ../../data/tribes/initialization/frisians/units.lua:1129
 msgid "This berry bush is growing."
-msgstr ""
+msgstr "이 딸기 열매 덤불은 자라고 있습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:912
@@ -5088,7 +5088,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1136
 msgid ""
 "This berry bush is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "이 베리 덤불은 꽃이 피고 있습니다. 양봉가가 꿀을 생산할 수 있습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: One of the berry bushes
 #: ../../data/tribes/initialization/frisians/units.lua:919
@@ -5101,7 +5101,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1115
 #: ../../data/tribes/initialization/frisians/units.lua:1143
 msgid "This berry bush is ready for harvesting."
-msgstr ""
+msgstr "이 딸기 열매 덤불은 거두어질 준비가 되었습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a frisian immovable: Wheat field
@@ -5112,7 +5112,7 @@ msgstr ""
 #: ../../data/tribes/initialization/frisians/units.lua:1366
 #: ../../data/tribes/initialization/frisians/units.lua:1373
 msgid "This field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "이 밭은 꽃이 피고 있습니다. 양봉가가 꿀을 생산할 수 있습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1185
@@ -5120,41 +5120,41 @@ msgid ""
 "When claydiggers dig up earth, they leave holes in the ground. These holes "
 "vanish after a while. Aqua farms can use them as ponds to grow fish in them,"
 " whereas charcoal burners erect their charcoal stacks in them."
-msgstr ""
+msgstr "흙을 파는 사람들은 땅을 파낼 때 땅에 구멍을 남깁니다. 이 구멍은 잠시 후 사라집니다. 양어장은 구멍들을 연못으로 사용하여 물고기를 기를 수 있지만 숯 굽는 이들은 자신들의 숯을 쌓아올립니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1192
 msgid ""
 "Fish are maturing in this pond. A fisher working from an aqua farm will be "
 "able to catch them when they are bigger."
-msgstr ""
+msgstr "이 연못에는 물고기가 자라고 있습니다. 양어장에서 일하는 어부는 물고기들이 더 클 때 그들을 잡을 수 있을 것입니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1199
 msgid ""
 "Fish are living in this pond. A fisher working from an aqua farm can catch "
 "them as food."
-msgstr ""
+msgstr "이 연못에는 물고기가 살고 있습니다. 양어장에서 일하는 어부는 물고기들을 식량으로 잡을 수 있습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1206
 msgid ""
 "A charcoal stack is burning in this earthen hole. When it has burnt down, a "
 "charcoal burner will be able to gather coal from it."
-msgstr ""
+msgstr "이 흙구멍에서 숯불이 타고 있습니다. 그것이 타버리면, 숯 가마 장인은 그 속에서 석탄을 모을 수 있을 것입니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Pond
 #: ../../data/tribes/initialization/frisians/units.lua:1213
 msgid ""
 "A charcoal stack, which had been erected in this earthen hole, is ready for "
 "a charcoal burner to gather coal from it."
-msgstr ""
+msgstr "이 흙구멍에 세워진 숯 더미는 숯가마 장인에 의해 석탄을 모을 준비가 되었습니다."
 
 #. TRANSLATORS: Helptext for a frisian immovable: Reed Field
 #: ../../data/tribes/initialization/frisians/units.lua:1234
 msgid ""
 "This reed field is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "이 갈대밭은 꽃이 피고 있습니다. 양봉가가 꿀을 생산할 수 있습니다."
 
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 1
 #: ../../data/tribes/initialization/frisians/units.lua:1296
@@ -5166,7 +5166,7 @@ msgstr "화강암은 기본적인 건축 자재이며 바위 광산으로 파낼
 #: ../../data/tribes/initialization/frisians/units.lua:1380
 msgid ""
 "This grapevine is flowering. Honey can be produced from it by a beekeeper."
-msgstr ""
+msgstr "이 포도 나무는 꽃이 피고 있습니다. 양봉가가 꿀을 생산할 수 있습니다."
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Headquarters
 #: ../../data/tribes/initialization/frisians/units.lua:1400
