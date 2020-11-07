@@ -190,6 +190,7 @@ AddOnInfo preload_addon(const std::string& name) {
 	// Fetch strings from the correct textdomain
 	i18n::AddOnTextdomain addon_textdomain(name);
 	Profile i18n_profile(kAddOnLocaleVersions.c_str());
+	Section* i18n_section = i18n_profile.get_section("global");
 
 	const std::string unlocalized_descname = s.get_safe_string("name");
 	const std::string unlocalized_description = s.get_safe_string("description");
@@ -209,7 +210,7 @@ AddOnInfo preload_addon(const std::string& name) {
 		               return i18n::translate(unlocalized_author);
 	               },
 	               s.get_safe_positive("version"),
-	               i18n_profile.get_safe_section("global").get_positive(name.c_str(), 1),
+	               i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
 	               get_category(s.get_safe_string("category")),
 	               {},
 	               false,
@@ -227,9 +228,6 @@ AddOnInfo preload_addon(const std::string& name) {
 	}
 	if (i.version == 0) {
 		throw wexception("preload_addon (%s): version is 0", name.c_str());
-	}
-	if (i.i18n_version == 0) {
-		throw wexception("preload_addon (%s): i18n_version is 0", name.c_str());
 	}
 
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
