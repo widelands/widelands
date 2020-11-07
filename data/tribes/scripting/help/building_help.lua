@@ -414,8 +414,8 @@ function building_help_general_string(tribe, building_description)
       local number_of_resources = #collected_resources
       if number_of_resources > 0 then
          for i, resource in ipairs(collected_resources) do
-            max_percent = max_percent + resource.max
-            depletion_chance = depletion_chance + resource.chance
+            max_percent = max_percent + resource.yield
+            depletion_chance = depletion_chance + resource.when_empty
          end
          max_percent = max_percent / number_of_resources
          depletion_chance = depletion_chance / number_of_resources
