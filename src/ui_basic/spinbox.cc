@@ -272,8 +272,8 @@ void SpinBox::layout() {
 
 	if (get_w() >= static_cast<int32_t>(unit_width_ + padding_)) {
 		// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself
-		sbi_->label->set_size(get_w() - unit_width_ - padding_, 10);
 		sbi_->label->set_visible(true);
+		sbi_->label->set_size(get_w() - unit_width_ - padding_, 10);
 	} else {
 		// There is no space for the label
 		sbi_->label->set_visible(false);
