@@ -266,7 +266,6 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
 	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
 	terrains_distribution_.add(_("Random"), TerrainDistribution::kRandom);
-	terrains_distribution_.add(_("Custom"), TerrainDistribution::kCustom);
 
 	select_terrains_distribution();
 	terrains_distribution_.selected.connect([this]() { select_terrains_distribution(); });
@@ -390,17 +389,17 @@ static size_t find_dimension_index(int32_t value) {
 void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
 	case ButtonId::kWater:
-		terrains_distribution_.select(TerrainDistribution::kCustom);
+		terrains_distribution_.clear_selection();
 		waterval_ = water_.get_value();
 		normalize_landmass(n);
 		break;
 	case ButtonId::kLand:
-		terrains_distribution_.select(TerrainDistribution::kCustom);
+		terrains_distribution_.clear_selection();
 		landval_ = land_.get_value();
 		normalize_landmass(n);
 		break;
 	case ButtonId::kWasteland:
-		terrains_distribution_.select(TerrainDistribution::kCustom);
+		terrains_distribution_.clear_selection();
 		wastelandval_ = wasteland_.get_value();
 		normalize_landmass(n);
 		break;
@@ -477,8 +476,6 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 
 void MainMenuNewRandomMap::select_terrains_distribution() {
 	switch (terrains_distribution_.get_selected()) {
-	case TerrainDistribution::kCustom:
-		return;
 	case TerrainDistribution::kDefault:
 		waterval_ = 20;
 		landval_ = 55;
@@ -539,6 +536,8 @@ void MainMenuNewRandomMap::select_terrains_distribution() {
 
 		wastelandval_ = 100 - sum;
 	} break;
+	default:
+		NEVER_HERE();
 	}
 
 	assert(waterval_ + landval_ + wastelandval_ + mountainsval_ == 100);
