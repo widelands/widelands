@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "wlapplication_options.h"
 
@@ -106,8 +107,16 @@ box_general_game_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0
 		b->sigclicked.connect([this, b, key, generate_title]() {
 			ShortcutChooser c(*this, key);
 			if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-				set_shortcut(key, c.key);
-				b->set_title(generate_title(key));
+				KeyboardShortcut conflict;
+				if (set_shortcut(key, c.key, &conflict)) {
+					b->set_title(generate_title(key));
+				} else {
+					UI::WLMessageBox warning(
+					   get_parent(), UI::WindowStyle::kFsMenu, _("Keyboard Shortcut Conflict"),
+					   (boost::format(_("The shortcut you selected (‘%1$s’) is already in use for the following action: ‘%2$s’. Please select a different shortcut or change the conflicting shortcut first.")) % shortcut_string_for(c.key) % to_string(conflict)).str(),
+					   UI::WLMessageBox::MBoxType::kOk);
+					warning.run<UI::Panel::Returncodes>();
+				}
 			}
 		});
 	};

@@ -120,12 +120,18 @@ void set_config_string(const std::string& section,
 }
 
 struct KeyboardShortcutInfo {
+	enum class Scope {
+		kMainMenu,
+		kGameAndEditor,
+	};
+
+	const Scope scope;
 	const SDL_Keysym default_shortcut;
 	SDL_Keysym current_shortcut;
 	const std::string internal_name;
 	const std::function<std::string()> descname;
 
-	KeyboardShortcutInfo(const SDL_Keysym& sym, const std::string& n, const std::function<std::string()>& f) : default_shortcut(sym), current_shortcut(sym), internal_name(n), descname(f) {
+	KeyboardShortcutInfo(Scope s, const SDL_Keysym& sym, const std::string& n, const std::function<std::string()>& f) : scope(s), default_shortcut(sym), current_shortcut(sym), internal_name(n), descname(f) {
 	}
 };
 
@@ -134,29 +140,29 @@ static inline SDL_Keysym keysym(const SDL_KeyCode c) {
 }
 
 std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
-	{ KeyboardShortcut::kMainMenuNew, KeyboardShortcutInfo(keysym(SDLK_n), "mainmenu_new", []() { return _("New Game"); }) },
-	{ KeyboardShortcut::kMainMenuLoad, KeyboardShortcutInfo(keysym(SDLK_l), "mainmenu_load", []() { return _("Load Game"); }) },
-	{ KeyboardShortcut::kMainMenuReplay, KeyboardShortcutInfo(keysym(SDLK_r), "mainmenu_replay", []() { return _("Watch Replay"); }) },
-	{ KeyboardShortcut::kMainMenuRandomMatch, KeyboardShortcutInfo(keysym(SDLK_z), "mainmenu_random", []() { return _("New Random Game"); }) },
-	{ KeyboardShortcut::kMainMenuTutorial, KeyboardShortcutInfo(keysym(SDLK_t), "mainmenu_tutorial", []() { return _("Tutorials"); }) },
-	{ KeyboardShortcut::kMainMenuCampaign, KeyboardShortcutInfo(keysym(SDLK_c), "mainmenu_campaign", []() { return _("Campaigns"); }) },
-	{ KeyboardShortcut::kMainMenuSP, KeyboardShortcutInfo(keysym(SDLK_s), "mainmenu_sp", []() { return _("Singleplayer"); }) },
-	{ KeyboardShortcut::kMainMenuMP, KeyboardShortcutInfo(keysym(SDLK_m), "mainmenu_mp", []() { return _("Multiplayer"); }) },
-	{ KeyboardShortcut::kMainMenuE, KeyboardShortcutInfo(keysym(SDLK_e), "mainmenu_e", []() { return _("Editor"); }) },
-	{ KeyboardShortcut::kMainMenuEditorLoad, KeyboardShortcutInfo(keysym(SDLK_b), "mainmenu_editor_load", []() { return _("Editor – Load Map"); }) },
-	{ KeyboardShortcut::kMainMenuEditorNew, KeyboardShortcutInfo(keysym(SDLK_k), "mainmenu_editor_new", []() { return _("Editor – New Map"); }) },
-	{ KeyboardShortcut::kMainMenuEditorRandom, KeyboardShortcutInfo(keysym(SDLK_y), "mainmenu_editor_random", []() { return _("Editor – New Random Map"); }) },
-	{ KeyboardShortcut::kMainMenuContinueEditing, KeyboardShortcutInfo(keysym(SDLK_w), "mainmenu_editor_continue", []() { return _("Continue Editing"); }) },
-	{ KeyboardShortcut::kMainMenuContinuePlaying, KeyboardShortcutInfo(keysym(SDLK_c), "mainmenu_continue", []() { return _("Continue Playing"); }) },
-	{ KeyboardShortcut::kMainMenuQuit, KeyboardShortcutInfo(keysym(SDLK_ESCAPE), "mainmenu_quit", []() { return _("Exit Widelands"); }) },
-	{ KeyboardShortcut::kMainMenuAbout, KeyboardShortcutInfo(keysym(SDLK_F1), "mainmenu_about", []() { return _("About"); }) },
-	{ KeyboardShortcut::kMainMenuAddons, KeyboardShortcutInfo(keysym(SDLK_a), "mainmenu_addons", []() { return _("Add-Ons"); }) },
-	{ KeyboardShortcut::kMainMenuLAN, KeyboardShortcutInfo(keysym(SDLK_p), "mainmenu_lan", []() { return _("LAN / Direct IP"); }) },
-	{ KeyboardShortcut::kMainMenuLobby, KeyboardShortcutInfo(keysym(SDLK_j), "mainmenu_lobby", []() { return _("Metaserver Lobby"); }) },
-	{ KeyboardShortcut::kMainMenuLogin, KeyboardShortcutInfo(keysym(SDLK_u), "mainmenu_login", []() { return _("Internet Login"); }) },
-	{ KeyboardShortcut::kMainMenuOptions, KeyboardShortcutInfo(keysym(SDLK_o), "mainmenu_options", []() { return _("Options"); }) },
-	{ KeyboardShortcut::kGeneralGameBuildhelp, KeyboardShortcutInfo(keysym(SDLK_SPACE), "buildhelp", []() { return _("Toggle Buildhelp"); }) },
-	{ KeyboardShortcut::kGeneralGameMinimap, KeyboardShortcutInfo(keysym(SDLK_m), "minimap", []() { return _("Toggle Minimap"); }) },
+	{ KeyboardShortcut::kMainMenuNew, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_n), "mainmenu_new", []() { return _("New Game"); }) },
+	{ KeyboardShortcut::kMainMenuLoad, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_l), "mainmenu_load", []() { return _("Load Game"); }) },
+	{ KeyboardShortcut::kMainMenuReplay, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_r), "mainmenu_replay", []() { return _("Watch Replay"); }) },
+	{ KeyboardShortcut::kMainMenuRandomMatch, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_z), "mainmenu_random", []() { return _("New Random Game"); }) },
+	{ KeyboardShortcut::kMainMenuTutorial, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_t), "mainmenu_tutorial", []() { return _("Tutorials"); }) },
+	{ KeyboardShortcut::kMainMenuCampaign, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_c), "mainmenu_campaign", []() { return _("Campaigns"); }) },
+	{ KeyboardShortcut::kMainMenuSP, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_s), "mainmenu_sp", []() { return _("Singleplayer"); }) },
+	{ KeyboardShortcut::kMainMenuMP, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_m), "mainmenu_mp", []() { return _("Multiplayer"); }) },
+	{ KeyboardShortcut::kMainMenuE, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_e), "mainmenu_e", []() { return _("Editor"); }) },
+	{ KeyboardShortcut::kMainMenuEditorLoad, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_b), "mainmenu_editor_load", []() { return _("Editor – Load Map"); }) },
+	{ KeyboardShortcut::kMainMenuEditorNew, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_k), "mainmenu_editor_new", []() { return _("Editor – New Map"); }) },
+	{ KeyboardShortcut::kMainMenuEditorRandom, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_y), "mainmenu_editor_random", []() { return _("Editor – New Random Map"); }) },
+	{ KeyboardShortcut::kMainMenuContinueEditing, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_w), "mainmenu_editor_continue", []() { return _("Continue Editing"); }) },
+	{ KeyboardShortcut::kMainMenuContinuePlaying, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_c), "mainmenu_continue", []() { return _("Continue Playing"); }) },
+	{ KeyboardShortcut::kMainMenuQuit, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_ESCAPE), "mainmenu_quit", []() { return _("Exit Widelands"); }) },
+	{ KeyboardShortcut::kMainMenuAbout, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_F1), "mainmenu_about", []() { return _("About"); }) },
+	{ KeyboardShortcut::kMainMenuAddons, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_a), "mainmenu_addons", []() { return _("Add-Ons"); }) },
+	{ KeyboardShortcut::kMainMenuLAN, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_p), "mainmenu_lan", []() { return _("LAN / Direct IP"); }) },
+	{ KeyboardShortcut::kMainMenuLobby, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_j), "mainmenu_lobby", []() { return _("Metaserver Lobby"); }) },
+	{ KeyboardShortcut::kMainMenuLogin, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_u), "mainmenu_login", []() { return _("Internet Login"); }) },
+	{ KeyboardShortcut::kMainMenuOptions, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu, keysym(SDLK_o), "mainmenu_options", []() { return _("Options"); }) },
+	{ KeyboardShortcut::kGeneralGameBuildhelp, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kGameAndEditor, keysym(SDLK_SPACE), "buildhelp", []() { return _("Toggle Buildhelp"); }) },
+	{ KeyboardShortcut::kGeneralGameMinimap, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kGameAndEditor, keysym(SDLK_m), "minimap", []() { return _("Toggle Minimap"); }) },
 };
 
 std::string to_string(const KeyboardShortcut id) {
@@ -171,9 +177,18 @@ static void write_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 	set_config_int("keyboard_sym", shortcuts_.at(id).internal_name, code.sym);
 	set_config_int("keyboard_mod", shortcuts_.at(id).internal_name, code.mod);
 }
-void set_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
+bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShortcut* conflict) {
+	const KeyboardShortcutInfo::Scope& scope = shortcuts_.at(id).scope;
+	for (auto& pair : shortcuts_) {
+		if (pair.first != id && pair.second.scope == scope && matches_shortcut(pair.first, code)) {
+			*conflict = pair.first;
+			return false;
+		}
+	}
+
 	shortcuts_.at(id).current_shortcut = code;
 	write_shortcut(id, code);
+	return true;
 }
 
 SDL_Keysym get_shortcut(const KeyboardShortcut id) {
@@ -197,8 +212,10 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 }
 
 std::string shortcut_string_for(const KeyboardShortcut id) {
-	const SDL_Keysym sym = get_shortcut(id);
+	return shortcut_string_for(get_shortcut(id));
+}
 
+std::string shortcut_string_for(const SDL_Keysym sym) {
 	std::vector<std::string> mods;
 	if (sym.mod & KMOD_CTRL) {
 		mods.push_back(pgettext("hotkey", "Ctrl"));

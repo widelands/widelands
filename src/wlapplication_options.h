@@ -112,12 +112,13 @@ enum class KeyboardShortcut : uint16_t {
 
 	k__End = kGeneralGame__End,
 };
-void set_shortcut(KeyboardShortcut, SDL_Keysym);
+bool set_shortcut(KeyboardShortcut, SDL_Keysym, KeyboardShortcut* conflict);
 SDL_Keysym get_shortcut(KeyboardShortcut);
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 void init_shortcuts(bool force_defaults = false);
 std::string to_string(KeyboardShortcut);
+std::string shortcut_string_for(SDL_Keysym);
 std::string shortcut_string_for(KeyboardShortcut);
 
 /*
