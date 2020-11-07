@@ -771,7 +771,7 @@ void DefaultAI::late_initialization() {
 					bo.mines_percent = 0;
 				} else {
 					bo.mines = game().descriptions().resource_index(first_resource_it->first);
-					bo.mines_percent = first_resource_it->second;
+					bo.mines_percent = first_resource_it->second.max_percent;
 				}
 
 				// populating mines_per_type map

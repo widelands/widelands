@@ -2680,17 +2680,27 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
       this building will collect from the map.
       For example, a Fishers's House will collect the "fish" resource.
 */
+// NOCOM
 int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const auto& resource_info : get()->collected_resources()) {
 		lua_pushint32(L, index++);
+		lua_newtable(L);
+		lua_pushstring(L, "resource");
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
 		   egbase.descriptions().resource_index(resource_info.first));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
+		lua_pushstring(L, "max");
+		lua_pushnumber(L, resource_info.second.max_percent / 100.f);
+		lua_settable(L, -3);
+		lua_pushstring(L, "chance");
+		lua_pushnumber(L, resource_info.second.depleted_chance / 100.f);
+		lua_settable(L, -3);
+		lua_settable(L, -3);
 	}
 	return 1;
 }

@@ -111,8 +111,8 @@ function find_created_collected_matches(creator, collector)
    end
    for i, resource1 in ipairs(collector.collected_resources) do
       for i, resource2 in ipairs(creator.created_resources) do
-         if resource1.name == resource2.name then
-            table.insert(matching_items, resource1)
+         if resource1.resource.name == resource2.name then
+            table.insert(matching_items, resource1.resource)
          end
       end
    end
@@ -158,8 +158,8 @@ function dependencies_collects(tribe, building_description)
       result = result .. item_image(immovable)
    end
    for i, resource in ipairs(building_description.collected_resources) do
-      table.insert(collected_items, resource)
-      result = result .. item_image(find_resource_indicator(tribe, resource))
+      table.insert(collected_items, resource.resource)
+      result = result .. item_image(find_resource_indicator(tribe, resource.resource))
    end
    result = result .. img("images/richtext/arrow-right.png") .. img(building_description.icon_name)
    result = result .. " " .. collected_items[1].descname
@@ -405,8 +405,35 @@ function building_help_general_string(tribe, building_description)
       result = result .. p(_"Text needed")
    end
 
+   local note = ""
+   -- Add mining resource percentage and chance to note
+   if building_description.is_mine then
+      local max_percent = 0
+      local depletion_chance = 0
+      local collected_resources = building_description.collected_resources
+      local number_of_resources = #collected_resources
+      if number_of_resources > 0 then
+         for i, resource in ipairs(collected_resources) do
+            max_percent = max_percent + resource.max
+            depletion_chance = depletion_chance + resource.chance
+         end
+         max_percent = max_percent / number_of_resources
+         depletion_chance = depletion_chance / number_of_resources
+
+         if max_percent < 99.9 then
+            -- TRANSLATORS: Note helptext for a mine.
+            note = note .. p(_("This mine will exploit %1%%% of its resources. From there on out, it will only have a %2%%% chance of finding any more of them."):bformat(max_percent, depletion_chance))
+         else
+            -- TRANSLATORS: Note helptext for a mine.
+            note = note .. p(_("This mine will exploit all of its resources down to the deepest level. But even after having done so, it will still have a %1%%% chance of finding some more of them."):bformat(depletion_chance))
+         end
+      end
+   end
    if helptexts["note"] ~= nil then
-      result = result .. h3(_"Note:") .. p(helptexts["note"])
+      note = note .. p(helptexts["note"])
+   end
+   if note ~= "" then
+      result = result .. h3(_"Note:") .. note
    end
 
    if(building_description.type_name == "productionsite") then
