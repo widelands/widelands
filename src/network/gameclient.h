@@ -49,8 +49,6 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	~GameClient() override;
 
-	DISALLOW_COPY_AND_ASSIGN(GameClient);
-
 	void run();
 
 	// GameController interface
@@ -122,6 +120,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	}
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(GameClient);
+
 	/// for unique backupname
 	std::string backup_file_name(const std::string& path) {
 		return path + "~backup";

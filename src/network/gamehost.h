@@ -51,8 +51,6 @@ struct GameHost : public GameController {
 	         bool internet = false);
 	~GameHost() override;
 
-	DISALLOW_COPY_AND_ASSIGN(GameHost);
-
 	void run();
 	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
@@ -130,6 +128,8 @@ struct GameHost : public GameController {
 	}
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(GameHost);
+
 	void send_system_message_code(const std::string&,
 	                              const std::string& a = "",
 	                              const std::string& b = "",

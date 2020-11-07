@@ -65,7 +65,9 @@ struct EditBoxImpl {
 	     selection_end(0),
 	     selection_start(0),
 	     mode(Mode::kNormal),
-	     scrolloffset(0) {
+	     scrolloffset(0),
+	     // Set alignment to the UI language's principal writing direction
+	     align(UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft) {
 	}
 
 	/// Background color and texture
@@ -119,8 +121,6 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
      warning_(false) {
 	set_thinks(false);
 
-	// Set alignment to the UI language's principal writing direction
-	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
 

@@ -153,8 +153,6 @@ public:
 	SoundHandler();
 	~SoundHandler();
 
-	DISALLOW_COPY_AND_ASSIGN(SoundHandler);
-
 	void save_config();
 	void load_config();
 
@@ -201,6 +199,8 @@ public:
 	int32_t get_max_volume() const;
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(SoundHandler);
+
 	void read_config();
 
 	FxId do_register_fx(SoundType type, const std::string& fx_path);

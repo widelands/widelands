@@ -1023,8 +1023,8 @@ std::string InternetGaming::bool2str(bool b) {
 /// Formats the current time as string in \arg time_str of max \arg length
 void InternetGaming::format_time(char* time_str, uint8_t length) {
 	const time_t now = time(nullptr);
-	// Time format: Www Mmm dd hh:mm:ss yyyy
-	strftime(time_str, length, "%a %b %d %H:%M:%S %Y", gmtime(&now));
+	// Time format: Www Mmm dd yyyy hh:mm:ss
+	strftime(time_str, length, "%a %b %d %Y %H:%M:%S", gmtime(&now));
 }
 
 /// formates a chat message and adds it to the list of chat messages
