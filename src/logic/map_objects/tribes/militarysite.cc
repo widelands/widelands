@@ -250,7 +250,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// we still hold the bigger military presence in that area (e.g. if there
 	// is a fortress one or two points away from our sentry, the fortress has
 	// a higher presence and thus the enemy can just burn down the sentry.
-	if (!get_allow_conquer(enemy->owner().player_number()) || military_site_->military_presence_kept(game)) {
+	if (!get_allow_conquer(enemy->owner().player_number()) ||
+	    military_site_->military_presence_kept(game)) {
 		// Okay we still got the higher military presence, so the attacked
 		// militarysite will be destroyed.
 		military_site_->set_defeating_player(enemy->owner().player_number());
@@ -912,8 +913,7 @@ void MilitarySite::clear_requirements() {
 	soldier_requirements_ = Requirements();
 }
 
-void MilitarySite::send_attacker(Soldier& soldier,
-                                 Building& target) {
+void MilitarySite::send_attacker(Soldier& soldier, Building& target) {
 	if (!is_present(soldier)) {
 		// The soldier may not be present anymore due to having been kicked out. Most of the time
 		// the function calling us will notice this, but there are cornercase where it might not,
@@ -952,8 +952,7 @@ bool MilitarySite::has_soldier_job(Soldier& soldier) {
  * \return the enemy, if any, that the given soldier was scheduled
  * to attack, and remove the job.
  */
-MapObject* MilitarySite::pop_soldier_job(Soldier* const soldier,
-                                         bool* const stayhome) {
+MapObject* MilitarySite::pop_soldier_job(Soldier* const soldier, bool* const stayhome) {
 	for (std::vector<SoldierJob>::iterator job_iter = soldierjobs_.begin();
 	     job_iter != soldierjobs_.end(); ++job_iter) {
 		if (job_iter->soldier == soldier) {

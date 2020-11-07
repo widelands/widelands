@@ -263,7 +263,9 @@ void AttackBox::init() {
 		do_not_conquer_.reset(
 		   new UI::Checkbox(&mainbox, UI::PanelStyle::kWui, Vector2i(0, 0), _("Destroy target"),
 		                    _("Destroy the target building instead of conquering it")));
-		do_not_conquer_->set_state(!dynamic_cast<const Widelands::MilitarySite&>(*i).attack_target()->get_allow_conquer(player_->player_number()));
+		do_not_conquer_->set_state(
+		   !dynamic_cast<const Widelands::MilitarySite&>(*i).attack_target()->get_allow_conquer(
+		      player_->player_number()));
 		mainbox.add(do_not_conquer_.get(), UI::Box::Resizing::kFullSize);
 	}
 
