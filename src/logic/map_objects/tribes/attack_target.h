@@ -40,6 +40,9 @@ public:
 	// Determines whether this building can be attacked right now.
 	virtual bool can_be_attacked() const = 0;
 
+	virtual void set_allow_conquer(PlayerNumber, bool) const = 0;
+	virtual bool get_allow_conquer(PlayerNumber) const = 0;
+
 	// Called by an enemy soldier that enters a node with distance
 	// less than or equal to \ref kMaxProtectionRadius from the building.
 	//
@@ -61,7 +64,7 @@ public:
 		// Returned if the building cannot defend itself any longer.
 		Defenseless
 	};
-	virtual AttackResult attack(Soldier* attacker, bool allow_conquer) const = 0;
+	virtual AttackResult attack(Soldier* attacker) const = 0;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(AttackTarget);

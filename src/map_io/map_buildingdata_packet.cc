@@ -62,7 +62,7 @@ constexpr uint16_t kCurrentPacketVersion = 7;
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
 
@@ -577,6 +577,15 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			militarysite.next_swap_soldiers_time_ = Time(fr);
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8();
 			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8();
+
+			// TODO(Nordfriese): Savegame compatibility
+			if (packet_version >= 7) {
+				for (uint8_t i = fr.unsigned_8(); i; --i) {
+					const PlayerNumber p = fr.unsigned_8();
+					const bool b = fr.unsigned_8();
+					militarysite.attack_target_.allow_conquer_[p] = b;
+				}
+			}
 
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Militarysite", packet_version,
@@ -1224,6 +1233,12 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 	militarysite.next_swap_soldiers_time_.save(fw);
 	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
 	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);
+
+	fw.unsigned_8(militarysite.attack_target_.allow_conquer_.size());
+	for (const auto& pair : militarysite.attack_target_.allow_conquer_) {
+		fw.unsigned_8(pair.first);
+		fw.unsigned_8(pair.second ? 1 : 0);
+	}
 }
 
 void MapBuildingdataPacket::write_productionsite(const ProductionSite& productionsite,

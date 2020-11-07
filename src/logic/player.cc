@@ -1256,12 +1256,13 @@ void Player::enemyflagaction(const Flag& flag,
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
+					attack_target->set_allow_conquer(player_number(), allow_conquer);
 					for (Soldier* temp_attacker : soldiers) {
 						assert(temp_attacker);
 						assert(temp_attacker->get_owner() == this);
 						if (upcast(MilitarySite, ms, temp_attacker->get_location(egbase()))) {
 							assert(ms->get_owner() == this);
-							ms->send_attacker(*temp_attacker, *building, allow_conquer);
+							ms->send_attacker(*temp_attacker, *building);
 						} else {
 							// The soldier may not be in a militarysite anymore if he was kicked out
 							// in the short delay between sending and executing a playercommand

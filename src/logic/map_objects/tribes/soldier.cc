@@ -821,17 +821,12 @@ private:
 Bob::Task const Soldier::taskAttack = {"attack", static_cast<Bob::Ptr>(&Soldier::attack_update),
                                        nullptr, static_cast<Bob::Ptr>(&Soldier::attack_pop), true};
 
-void Soldier::start_task_attack(Game& game, Building& building, const bool allow_conquer) {
+void Soldier::start_task_attack(Game& game, Building& building) {
 	push_task(game, taskAttack);
 	State& state = top_state();
 	state.objvar1 = &building;
 	state.coords = building.get_position();
-	state.ivar2 =
-	   allow_conquer ?
-	      0x10 :
-	      0;  // The return state and the allow_conquer flag. The last byte (ivar2 & 0xf) indicates
-	          // the return state: 0 = default; 1 = go home; 2 = go back in known land. The byte
-	          // before it (ivar2 & 0xf0) indicates `bool allow_conquer`.
+	state.ivar2 = 0;  // The return state 1=go home 2=go back in known land
 	state.ivar3 = 0;  // Counts how often the soldier is blocked in a row
 
 	state.ivar1 |= CF_RETREAT_WHEN_INJURED;
@@ -869,8 +864,8 @@ void Soldier::attack_update(Game& game, State& state) {
 			molog(game.get_gametime(), "[attack] Location destroyed\n");
 			state.ivar3 = 0;
 			signal_handled();
-			if ((state.ivar2 & 0xf) == 0) {
-				state.ivar2 |= 1;
+			if (state.ivar2 == 0) {
+				state.ivar2 = 1;
 			}
 		} else {
 			molog(
@@ -893,13 +888,12 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	// Handle returns
 	const Map& map = game.map();
-	if ((state.ivar2 & 0xf) != 0) {
-		if ((state.ivar2 & 0xf) == 1) {
+	if (state.ivar2 > 0) {
+		if (state.ivar2 == 1) {
 			// Return home
 			if (!location || location->descr().type() != MapObjectType::MILITARYSITE) {
 				molog(game.get_gametime(), "[attack] No more site to go back to\n");
-				state.ivar2 &= 0xf0;
-				state.ivar2 |= 2;
+				state.ivar2 = 2;
 				return schedule_act(game, Duration(10));
 			}
 			Flag& baseflag = location->base_flag();
@@ -914,7 +908,7 @@ void Soldier::attack_update(Game& game, State& state) {
 					molog(game.get_gametime(), "[attack] returned home\n");
 					return pop_task_or_fight(game);
 				}
-				state.ivar2 &= 0xf0;
+				state.ivar2 = 0;
 				return start_task_leavebuilding(game, false);
 			}
 			// Head to home
@@ -933,7 +927,7 @@ void Soldier::attack_update(Game& game, State& state) {
 				return pop_task(game);
 			}
 		}
-		if ((state.ivar2 & 0xf) == 2) {
+		if (state.ivar2 == 2) {
 			// No more home, so return to homeland
 			upcast(Flag, flag, map.get_immovable(get_position()));
 			if (flag && flag->get_owner() == get_owner()) {
@@ -1043,8 +1037,7 @@ void Soldier::attack_update(Game& game, State& state) {
 			}
 		}
 		// Return home
-		state.ivar2 &= 0xf0;
-		state.ivar2 |= 1;
+		state.ivar2 = 1;
 		return schedule_act(game, Duration(10));
 	}
 
@@ -1059,8 +1052,7 @@ void Soldier::attack_update(Game& game, State& state) {
 			                           "and return home!\n");
 			state.coords = Coords::null();
 			state.objvar1 = nullptr;
-			state.ivar2 &= 0xf0;
-			state.ivar2 |= 1;
+			state.ivar2 = 1;
 			return schedule_act(game, Duration(10));
 		}
 	}
@@ -1069,7 +1061,7 @@ void Soldier::attack_update(Game& game, State& state) {
 
 	molog(game.get_gametime(), "[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
-	schedule_act(game, Duration(enemy->attack_target()->attack(this, (state.ivar2 & 0xf0) != 0) ==
+	schedule_act(game, Duration(enemy->attack_target()->attack(this) ==
 	                                  AttackTarget::AttackResult::DefenderLaunched ?
 	                               1000 :
 	                               10));

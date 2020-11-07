@@ -305,7 +305,7 @@ public:
 
 	void set_battle(Game&, Battle*);
 
-	void start_task_attack(Game& game, Building&, bool allow_conquer);
+	void start_task_attack(Game& game, Building&);
 	void start_task_defense(Game& game, bool stayhome);
 	void start_task_battle(Game&);
 	void start_task_move_in_battle(Game&, CombatWalkingDir);

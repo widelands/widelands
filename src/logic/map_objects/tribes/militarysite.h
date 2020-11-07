@@ -89,7 +89,7 @@ public:
 
 	/// Launch the given soldier on an attack towards the given
 	/// target building.
-	void send_attacker(Soldier&, Building&, bool allow_conquer_target);
+	void send_attacker(Soldier&, Building&);
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements(const Requirements&);
@@ -120,7 +120,7 @@ private:
 	request_soldier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	MapObject*
-	pop_soldier_job(Soldier*, bool* stayhome = nullptr, bool* allow_conquer_target = nullptr);
+	pop_soldier_job(Soldier*, bool* stayhome = nullptr);
 	bool has_soldier_job(Soldier&);
 	bool military_presence_kept(Game&);
 	void notify_player(Game&, bool discovered = false);
@@ -140,10 +140,20 @@ private:
 
 		bool can_be_attacked() const override;
 		void enemy_soldier_approaches(const Soldier&) const override;
-		Widelands::AttackTarget::AttackResult attack(Soldier*, bool) const override;
+		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+
+		void set_allow_conquer(PlayerNumber p, bool c) const override {
+			allow_conquer_[p] = c;
+		}
+		bool get_allow_conquer(PlayerNumber p) const override {
+			auto it = allow_conquer_.find(p);
+			return it == allow_conquer_.end() || it->second;
+		}
 
 	private:
+		friend class MapBuildingdataPacket;
 		MilitarySite* const military_site_;
+		mutable std::map<PlayerNumber, bool> allow_conquer_;
 	};
 
 	class SoldierControl : public Widelands::SoldierControl {
@@ -182,7 +192,6 @@ private:
 		Soldier* soldier;
 		ObjectPointer enemy;
 		bool stayhome;
-		bool allow_conquer_target;
 	};
 	std::vector<SoldierJob> soldierjobs_;
 	SoldierPreference soldier_preference_;
