@@ -38,6 +38,8 @@
 #include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
 
+namespace FsMenu {
+
 class AddOnsCtrl;
 struct ProgressIndicatorWindow;
 
@@ -53,6 +55,7 @@ struct InstalledAddOnRow : public UI::Panel {
 
 private:
 	AddOnInfo info_;
+	bool enabled_;
 	UI::Button uninstall_;
 	std::unique_ptr<UI::Button> toggle_enabled_;
 	UI::Icon category_;
@@ -155,5 +158,6 @@ private:
 	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&);
 	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&);
 };
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ADDONS_H

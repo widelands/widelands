@@ -1264,7 +1264,7 @@ void WLApplication::mainmenu() {
 				need_to_reset = replay(mm.get());
 				break;
 			case MenuTarget::kAddOns: {
-				AddOnsCtrl a(*mm);
+				FsMenu::AddOnsCtrl a(*mm);
 				a.run<int>();
 			} break;
 			case MenuTarget::kOptions: {

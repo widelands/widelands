@@ -36,6 +36,8 @@
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
+namespace FsMenu {
+
 constexpr int16_t kRowButtonSize = 32;
 constexpr int16_t kRowButtonSpacing = 4;
 
@@ -50,7 +52,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 	                "progress",
 	                0,
 	                0,
-	                parent->get_w(),
+	                parent->get_inner_w() - 2 * kRowButtonSize,
 	                2 * kRowButtonSize,
 	                title),
 	     die_after_last_action(false),
@@ -1262,6 +1264,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                3 * kRowButtonSize,
                2 * kRowButtonSize + 3 * kRowButtonSpacing),
      info_(info),
+     enabled_(enabled || !kAddOnCategories.at(info.category).can_disable_addons),
      uninstall_(this,
                 "uninstall",
                 0,
@@ -1320,6 +1323,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info); });
 	if (toggle_enabled_) {
 		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
+			enabled_ = !enabled_;
 			for (auto& pair : g_addons) {
 				if (pair.first.internal_name == info.internal_name) {
 					pair.second = !pair.second;
@@ -1369,8 +1373,9 @@ void InstalledAddOnRow::layout() {
 
 void InstalledAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
-	r.brighten_rect(Recti(0, 0, get_w(), get_h()), has_focus() ? -30 : -20);
+	r.brighten_rect(Recti(0, 0, get_w(), get_h()), has_focus() ? enabled_ ? -40 : -30 : enabled_ ? -20 : 0);
 }
+
 void RemoteAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.brighten_rect(Recti(0, 0, get_w(), get_h()), -20);
@@ -1400,9 +1405,9 @@ public:
 	                UI::WindowStyle::kFsMenu,
 	                info.internal_name,
 	                parent.get_x() + kRowButtonSize,
-	                parent.get_y() - kRowButtonSize,
+	                parent.get_y() + kRowButtonSize,
 	                parent.get_inner_w() - 2 * kRowButtonSize,
-	                parent.get_inner_h() + 2 * kRowButtonSize,
+	                parent.get_inner_h() - 2 * kRowButtonSize,
 	                info.descname()),
 	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 	     txt_(&box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
@@ -1738,3 +1743,5 @@ void RemoteAddOnRow::layout() {
 bool RemoteAddOnRow::upgradeable() const {
 	return upgrade_.enabled();
 }
+
+}  // namespace FsMenu
