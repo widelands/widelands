@@ -1043,9 +1043,8 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 				throw wexception("Checksum for '%s' not found", file_to_download.c_str());
 			}
 
-			network_handler_.download_addon_file(
-			   info.internal_name + "/" + file_to_download, checksum,
-			   temp_dir + "/" + file_to_download);
+			network_handler_.download_addon_file(info.internal_name + "/" + file_to_download, checksum,
+			                                     temp_dir + "/" + file_to_download);
 			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
 		};
 		piw.run<UI::Panel::Returncodes>();
