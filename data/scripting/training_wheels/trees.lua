@@ -101,12 +101,12 @@ run(function()
       local function wait_for_starting_conditions(conquering_field, player, starting_conquer_range)
          local result = nil
 
-         -- Ensure we still have a log producer
-         while #player:get_buildings(log_producer.name) < 1 do sleep(1000) end
-         logproducer_field = player:get_buildings(log_producer.name)[1].fields[1]
-
          -- Find a suitable field close to the log producer
          repeat
+            -- Ensure we still have a log producer
+            while #player:get_buildings(log_producer.name) < 1 do sleep(1000) end
+            logproducer_field = player:get_buildings(log_producer.name)[1].fields[1]
+            -- Now find a buildable field
             result = find_buildable_field(logproducer_field, player, tree_planter.size, 0, tree_planter.workarea_radius)
             if result == nil then
                sleep(1000)
@@ -183,17 +183,8 @@ run(function()
       campaign_message_box(msg_trees)
       scroll_to_field(target_field)
 
-      -- Wait for player to activate the small building tab
-      wait_for_field_action_tab("small")
-      mapview.windows.field_action.tabs["small"]:indicate(true)
-      while not mapview.windows.field_action.tabs["small"].active do
-         sleep(100)
-         if not mapview.windows.field_action then
-            mapview:indicate(false)
-         end
-         wait_for_field_action_tab("small")
-         mapview.windows.field_action.tabs["small"]:indicate(true)
-      end
+      -- Wait for player to activate the building tab for the building's size
+      wait_for_field_action_tab_activation(tree_planter.size)
 
       -- Now wait for the constructionsite
       constructionsite_field = wait_for_constructionsite_field(tree_planter.name, constructionsite_search_area, msg_trees, 120)

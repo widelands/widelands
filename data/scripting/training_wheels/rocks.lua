@@ -60,23 +60,9 @@ run(function()
       -- The check again if there is still a suitable field and if not, release the lock and try again.
       local function wait_for_starting_conditions(conquering_field, player, starting_conquer_range)
          local result = nil
-
-         -- Find a suitable field close to some rocks
-         local function find_rocks_field(conquering_field, player, starting_conquer_range)
-            local rocks_fields = find_immovable_fields(conquering_field, "rocks", 2, starting_conquer_range + quarry.workarea_radius / 2)
-            if #rocks_fields > 0 then
-               for f_idx, rocks_field in ipairs(rocks_fields) do
-                  local found_rocks_field = find_buildable_field(rocks_field, player, quarry.size, 1, quarry.workarea_radius - 1)
-                  if found_rocks_field ~= nil then
-                     return found_rocks_field
-                  end
-               end
-            end
-            return nil
-         end
-
          repeat
-            result = find_rocks_field(conquering_field, player, starting_conquer_range)
+         -- Find a suitable field close to some rocks
+            result = find_buildable_field_near_immovable(conquering_field, player, starting_conquer_range, quarry, "rocks")
             if result == nil then
                sleep(1000)
             end
@@ -86,7 +72,7 @@ run(function()
          wait_for_lock(player, training_wheel_name)
 
          -- Check that we still have an appropriate field
-         result = find_rocks_field(conquering_field, player, starting_conquer_range)
+         result = find_buildable_field_near_immovable(conquering_field, player, starting_conquer_range, quarry, "rocks")
          if result == nil then
             -- While we were waiting for the lock, appropriate fields became unavailable.
             -- Release the lock and try again.
@@ -194,16 +180,7 @@ run(function()
       scroll_to_field(target_field)
 
       -- Wait for player to activate the correct building tab
-      wait_for_field_action_tab(quarry.size)
-      mapview.windows.field_action.tabs[quarry.size]:indicate(true)
-      while not mapview.windows.field_action.tabs[quarry.size].active do
-         sleep(100)
-         if not mapview.windows.field_action then
-            mapview:indicate(false)
-         end
-         wait_for_field_action_tab(quarry.size)
-         mapview.windows.field_action.tabs[quarry.size]:indicate(true)
-      end
+      wait_for_field_action_tab_activation(quarry.size)
 
       -- Explain road building before the road building mode blocks us
       if mapview.auto_roadbuilding_mode then

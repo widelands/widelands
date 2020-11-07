@@ -95,16 +95,15 @@ function find_buildable_field(center_field, player, size, min_radius, max_radius
          local buildhelp = player:buildhelp(field.x, field.y)
          if buildhelp == size or (size == "big" and buildhelp == "port") then
 
-            local sufficient_space = true
+            local space_counter = 0
             -- Search around the field's flag position for the space for roads
             for nf_idx, nearby_field in ipairs(field.brn:region(1)) do
                buildhelp = player:buildhelp(nearby_field.x, nearby_field.y)
-               if buildhelp == "none" then
-                  sufficient_space = false
-                  break
+               if buildhelp ~= "none" then
+                  space_counter = space_counter + 1
                end
             end
-            if sufficient_space then
+            if space_counter > 3 then
                return field
             end
          end
@@ -153,6 +152,24 @@ function find_immovable_fields(center_field, immovable_attribute, inner_radius, 
       radius = radius + 1
    until radius == outer_radius
    return found_fields
+end
+
+-- Find field close to an immovable e.g. a tree or rocks
+function find_buildable_field_near_immovable(conquering_field, player, starting_conquer_range, building, immovable_attribute)
+   local immovable_fields = find_immovable_fields(
+                                 conquering_field,
+                                 immovable_attribute,
+                                 2,
+                                 starting_conquer_range + building.workarea_radius - 2)
+   if #immovable_fields > 0 then
+      for f_idx, immovable_field in ipairs(immovable_fields) do
+         local suitable_field = find_buildable_field(immovable_field, player, building.size, 0, building.workarea_radius - 1)
+         if suitable_field ~= nil then
+            return suitable_field
+         end
+      end
+   end
+   return nil
 end
 
 -- We can't list constructionsites directly, so we search a region for it

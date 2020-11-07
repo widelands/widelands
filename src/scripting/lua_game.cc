@@ -724,7 +724,7 @@ int LuaPlayer::buildhelp(lua_State* L) {
 	case Widelands::Field::BuildHelp::kFlag:
 		lua_pushstring(L, "flag");
 		break;
-	default:
+	case Widelands::Field::BuildHelp::kNone:
 		lua_pushstring(L, "none");
 	}
 
