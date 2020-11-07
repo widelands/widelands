@@ -31,6 +31,7 @@
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
 
 // silence warnings triggered by curl.h
@@ -246,6 +247,12 @@ static void check_downloaded_file(const std::string& path, const std::string& ch
 // the files as ZIPs on the server. Similar for translation bundles. Perhaps
 // someone would like to write code to uncompress a downloaded ZIP file some day…
 
+static size_t
+download_addon_file_callback(char* data, size_t, const size_t char_count, FileWrite* fw) {
+	fw->data(data, char_count);
+	return char_count;
+}
+
 void NetAddons::download_addon_file(const std::string& name,
                                     const std::string& checksum,
                                     const std::string& output) {
@@ -255,16 +262,13 @@ void NetAddons::download_addon_file(const std::string& name,
 	   std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/addons/") +
 	   name);
 
-	std::FILE* out_file = std::fopen(output.c_str(), "wb");
-	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION,
-	                 [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
-		                 return std::fwrite(ptr, size, nmemb, stream);
-	                 });
-	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
+	FileWrite fw;
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &download_addon_file_callback);
+	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &fw);
 
 	const CURLcode res = curl_easy_perform(curl_);
 
-	fclose(out_file);
+	fw.write(*g_fs, output);
 
 	if (res != CURLE_OK) {
 		throw wexception("%s: CURL terminated with error code %d", name.c_str(), res);
@@ -281,33 +285,28 @@ std::string NetAddons::download_i18n(const std::string& name,
 	   kTempFileDir + FileSystem::file_separator() + name + ".mo" + kTempFileExtension;
 	g_fs->ensure_directory_exists(temp_dirname);
 
-	const std::string relative_output =
+	const std::string output =
 	   temp_dirname + FileSystem::file_separator() + locale + kTempFileExtension;
-	const std::string canonical_output =
-	   g_fs->canonicalize_name(i18n::get_homedir() + "/" + relative_output);
 
 	set_url_and_timeout(
 	   std::string("https://raw.githubusercontent.com/widelands/wl_addons_server/master/i18n/") +
 	   name + "/" + locale);
 
-	std::FILE* out_file = std::fopen(canonical_output.c_str(), "wb");
-	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION,
-	                 [](void* ptr, size_t size, size_t nmemb, std::FILE* stream) {  // NOLINT
-		                 return std::fwrite(ptr, size, nmemb, stream);
-	                 });
-	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, out_file);
+	FileWrite fw;
+	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &download_addon_file_callback);
+	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &fw);
 
 	const CURLcode res = curl_easy_perform(curl_);
 
-	fclose(out_file);
+	fw.write(*g_fs, output);
 
 	if (res != CURLE_OK) {
 		throw wexception(
 		   "[%s / %s] CURL terminated with error code %d\n", name.c_str(), locale.c_str(), res);
 	}
 
-	check_downloaded_file(relative_output, checksum);
-	return canonical_output;
+	check_downloaded_file(output, checksum);
+	return output;
 }
 
 CLANG_DIAG_ON("-Wdisabled-macro-expansion")

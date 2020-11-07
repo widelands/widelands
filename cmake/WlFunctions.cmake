@@ -126,7 +126,11 @@ macro(_common_compile_tasks)
   endif()
 
   if(ARG_USES_CURL)
-    target_link_libraries(${NAME} curl)
+    if (OPTION_BUILD_WINSTATIC)
+      target_link_libraries(${NAME} "-static" curl unistring idn2 ssh2 ws2_32 psl ssl crypto gdi32 crypt32 wldap32 nghttp2)
+    else()
+      target_link_libraries(${NAME} curl)
+    endif()
   endif()
 
   if(ARG_USES_SDL2)

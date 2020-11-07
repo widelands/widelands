@@ -1014,8 +1014,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 	try {
 		piw.set_message_1((boost::format(_("Downloading ‘%s’…")) % info.descname()).str());
 
-		const std::string temp_dir = g_fs->canonicalize_name(
-		   i18n::get_homedir() + "/" + kTempFileDir + "/" + info.internal_name + kTempFileExtension);
+		const std::string temp_dir = kTempFileDir + "/" + info.internal_name + kTempFileExtension;
 		if (g_fs->file_exists(temp_dir)) {
 			// cleanse outdated cache
 			g_fs->fs_unlink(temp_dir);
@@ -1025,7 +1024,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 			std::string d(temp_dir);
 			d.push_back('/');
 			d += subdir;
-			g_fs->ensure_directory_exists(g_fs->canonicalize_name(d));
+			g_fs->ensure_directory_exists(d);
 		}
 
 		piw.action_params = info.file_list.files;
@@ -1046,7 +1045,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 
 			network_handler_.download_addon_file(
 			   info.internal_name + "/" + file_to_download, checksum,
-			   g_fs->canonicalize_name(temp_dir + "/" + file_to_download));
+			   temp_dir + "/" + file_to_download);
 			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
 		};
 		piw.run<UI::Panel::Returncodes>();

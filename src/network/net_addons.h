@@ -20,8 +20,6 @@
 #ifndef WL_NETWORK_NET_ADDONS_H
 #define WL_NETWORK_NET_ADDONS_H
 
-#define CURL_STATICLIB
-
 #include <set>
 
 #include <curl/curl.h>
