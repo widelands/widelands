@@ -1373,7 +1373,8 @@ void InstalledAddOnRow::layout() {
 
 void InstalledAddOnRow::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
-	r.brighten_rect(Recti(0, 0, get_w(), get_h()), has_focus() ? enabled_ ? -40 : -30 : enabled_ ? -20 : 0);
+	r.brighten_rect(
+	   Recti(0, 0, get_w(), get_h()), has_focus() ? enabled_ ? -40 : -30 : enabled_ ? -20 : 0);
 }
 
 void RemoteAddOnRow::draw(RenderTarget& r) {
