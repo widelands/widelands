@@ -240,15 +240,26 @@ function wait_for_builder_or_building(player, target_field, buildingname, constr
       counter = counter + 1
       if counter % seconds == 0 then
          -- Builder has not arrived, explain road building again and wait for it
-         target_field.brn:indicate(true)
-         close_story_messagebox()
-         campaign_message_box(msg_road_not_connected)
-         scroll_to_field(target_field)
-         while not mapview.is_building_road do sleep(100) end
-         while mapview.is_building_road do sleep(100) end
-         mapview:indicate(false)
+         -- Run as coroutine so we won't block the checks below
+         run(function()
+            target_field.brn:indicate(true)
+            close_story_messagebox()
+            campaign_message_box(msg_road_not_connected)
+            scroll_to_field(target_field)
+            while not mapview.is_building_road do sleep(100) end
+            while mapview.is_building_road do sleep(100) end
+            mapview:indicate(false)
+         end)
       end
       sleep(1000)
+
+      -- A finished building somewhere else is also a success
+      if #player:get_buildings(buildingname) > 0 then
+         target_field:indicate(false)
+         close_story_messagebox()
+         return true
+      end
+
       -- Check that we still have a constructionsite
       target_field = find_constructionsite_field(buildingname, constructionsite_search_area)
       if target_field == nil then
@@ -259,12 +270,6 @@ function wait_for_builder_or_building(player, target_field, buildingname, constr
             return false
          end
       else
-         -- A finished building somewhere else is also a success
-         if #player:get_buildings(buildingname) > 0 then
-            target_field:indicate(false)
-            close_story_messagebox()
-            return true
-         end
          -- Now check for the builder
          for b_idx, bob in ipairs(target_field.bobs) do
             if bob.descr.name == buildername then

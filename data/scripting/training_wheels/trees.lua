@@ -73,11 +73,17 @@ run(function()
 
    pop_textdomain()
 
+   -- Wait for log producer
    wait_for_building_field(log_producer.name, player, log_reminder_message, 180)
-
-   -- Give the lumberjack some time to arrive and cut some trees
-   sleep(30 * 1000)
    local logproducer_field = player:get_buildings(log_producer.name)[1].fields[1]
+
+   -- Give the worker some time to arrive and cut some trees
+   sleep(30 * 1000)
+   -- Ensure that the log producer building is still there
+   repeat
+      wait_for_building_field(log_producer.name, player, log_reminder_message, 180)
+      logproducer_field = player:get_buildings(log_producer.name)[1].fields[1]
+   until logproducer_field ~= nil
 
    -- Check whether we already have a constructionsite from savegame
    local starting_conquer_range = wl.Game():get_building_description(conquering_immovable.descr.name).conquers
