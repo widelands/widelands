@@ -701,7 +701,8 @@ int LuaPlayer::buildhelp(lua_State* L) {
 
 	const uint32_t x = luaL_checkuint32(L, 2);
 	const uint32_t y = luaL_checkuint32(L, 3);
-	const Widelands::NodeCaps caps = player.get_buildcaps(game.map().get_fcoords(Widelands::Coords(x, y)));
+	const Widelands::NodeCaps caps =
+	   player.get_buildcaps(game.map().get_fcoords(Widelands::Coords(x, y)));
 
 	const Widelands::Field::BuildHelp buildhelp = Widelands::Field::caps_to_buildhelp(caps);
 	switch (buildhelp) {
