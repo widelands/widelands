@@ -2716,10 +2716,10 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
 		lua_pushstring(L, "yield");
-		lua_pushnumber(L, resource_info.second.max_percent / 100.f);
+		lua_pushnumber(L, resource_info.second.max_percent / 100.0);
 		lua_settable(L, -3);
 		lua_pushstring(L, "when_empty");
-		lua_pushnumber(L, resource_info.second.depleted_chance / 100.f);
+		lua_pushnumber(L, resource_info.second.depleted_chance / 100.0);
 		lua_settable(L, -3);
 		lua_settable(L, -3);
 	}

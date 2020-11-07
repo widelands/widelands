@@ -165,7 +165,7 @@ Production Sites
 
 **mines_percent**
     **DEPRECATED** The percentage that a mine will mine of its resource before it needs enhancing,
-e.g.::
+    e.g.::
 
         mines_percent = 60,
 
