@@ -34,7 +34,7 @@ enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	explicit BuildingHints(std::unique_ptr<LuaTable>);
+	explicit BuildingHints(std::unique_ptr<LuaTable>, const std::string& building_name);
 	~BuildingHints() {
 	}
 

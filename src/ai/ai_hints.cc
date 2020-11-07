@@ -230,7 +230,7 @@ Production Sites
 
 */
 
-BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
+BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table, const std::string& building_name)
    : needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
@@ -264,10 +264,10 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
 	}
 
 	if (table->has_key("mines")) {
-		log_warn("The 'mines' key in 'ai_hints' is no longer used\n");
+		log_warn("%s: The 'mines' key in 'ai_hints' is no longer used", building_name.c_str());
 	}
 	if (table->has_key("mines_percent")) {
-		log_warn("The 'mines_percent' key in 'ai_hints' is no longer used\n");
+		log_warn("%s: The 'mines_percent' key in 'ai_hints' is no longer used", building_name.c_str());
 	}
 }
 
