@@ -231,8 +231,7 @@ Production Sites
 */
 
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
-   : mines_(Widelands::INVALID_INDEX),
-     needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
+   : needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
      fighting_(table->has_key("fighting") ? table->get_bool("fighting") : false),

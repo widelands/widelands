@@ -112,8 +112,8 @@ public:
 	/// We only need the attributes during tribes initialization
 	void clear_attributes();
 
-	/// The resources that this production site needs to collect from the map
-	const std::set<std::string>& collected_resources() const {
+	/// The resources that this production site needs to collect from the map, and the max percent it can achieve
+	const std::map<std::string, uint8_t>& collected_resources() const {
 		return collected_resources_;
 	}
 	/// The resources that this production site will place on the map
@@ -235,17 +235,12 @@ protected:
 		created_attributes_.insert(attribute_info);
 	}
 	/// Set that this production site needs to collect the given resource from the map
-	void add_collected_resource(const std::string& resource) {
-		collected_resources_.insert(resource);
+	void add_collected_resource(const std::string& resource, uint8_t max_percent) {
+		collected_resources_.insert(std::make_pair(resource, max_percent));
 	}
 	/// Set that this production site will place the given resource on the map
 	void add_created_resource(const std::string& resource) {
 		created_resources_.insert(resource);
-	}
-
-	/// Set AI hints for mined world resource
-	void set_mines(Widelands::DescriptionIndex world_resource, uint8_t mines_percent) {
-		hints_.set_mines(world_resource, mines_percent);
 	}
 
 private:
@@ -258,7 +253,8 @@ private:
 	Output output_worker_types_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	std::set<std::string> collected_resources_;
+	// Resource name, max percent
+	std::map<std::string, uint8_t> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;

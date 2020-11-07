@@ -42,18 +42,6 @@ struct BuildingHints {
 		return supported_production_;
 	}
 
-	void set_mines(Widelands::DescriptionIndex world_resource, uint8_t mines_percent) {
-		mines_ = world_resource;
-		mines_percent_ = mines_percent;
-	}
-
-	Widelands::DescriptionIndex get_mines() const {
-		return mines_;
-	}
-	uint8_t get_mines_percent() const {
-		return mines_percent_;
-	}
-
 	bool get_needs_water() const {
 		return needs_water_;
 	}
@@ -106,8 +94,6 @@ struct BuildingHints {
 	uint8_t trainingsites_max_percent() const;
 
 private:
-	Widelands::DescriptionIndex mines_;
-	uint8_t mines_percent_;
 	const bool needs_water_;
 	const bool space_consumer_;
 	const bool expansion_;

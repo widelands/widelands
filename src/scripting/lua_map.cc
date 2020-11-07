@@ -2684,10 +2684,10 @@ int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (const std::string& resource_name : get()->collected_resources()) {
+	for (const auto& resource_info : get()->collected_resources()) {
 		lua_pushint32(L, index++);
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_name));
+		   egbase.descriptions().resource_index(resource_info.first));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
