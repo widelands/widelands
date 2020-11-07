@@ -139,11 +139,11 @@ struct KeyboardShortcutInfo {
 	}
 };
 
-static inline SDL_Keysym keysym(const SDL_KeyCode c) {
+static inline SDL_Keysym keysym(const SDL_Keycode c) {
 	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, 0, 0};
 }
 
-std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
+static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
    {KeyboardShortcut::kMainMenuNew, KeyboardShortcutInfo(KeyboardShortcutInfo::Scope::kMainMenu,
                                                          keysym(SDLK_n),
                                                          "mainmenu_new",
