@@ -561,7 +561,7 @@ ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base, 
 							all_inputqueues_0 = false;
 						} else {
 							for (const InputQueue* q : ps->inputqueues()) {
-								if (q->get_max_fill() > 0) {
+								if (q->get_max_fill() > 0 && q->get_filled() > 0) {
 									all_inputqueues_0 = false;
 									break;
 								}
