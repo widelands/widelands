@@ -192,7 +192,7 @@ jobs:
         }
         $env:curl = "7.73.0"
         $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/usr/bin;C:/msys64/mingw$env:bits/bin;$env:Path"
-		curl -o curl.zip "https://curl.haxx.se/windows/dl-$env:curl/curl-$env:curl-win$env:bits-mingw.zip"
+        curl -o curl.zip "https://curl.haxx.se/windows/dl-$env:curl/curl-$env:curl-win$env:bits-mingw.zip"
         unzip curl.zip
         mv curl-$env:curl-win$env:bits-mingw/lib/libcurl.a C:/msys64/mingw$env:bits/lib/
     - name: Checkout
