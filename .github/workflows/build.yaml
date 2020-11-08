@@ -181,7 +181,20 @@ jobs:
         } else {
           $env:archname = "i686"
         }
-        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost mingw-w64-$env:archname-curl
+        pacman.exe --noconfirm -S mingw-w64-$env:archname-ninja mingw-w64-$env:archname-SDL2_ttf mingw-w64-$env:archname-SDL2_mixer mingw-w64-$env:archname-SDL2_image mingw-w64-$env:archname-glew mingw-w64-$env:archname-boost mingw-w64-$env:archname-curl unzip
+    - name: Fix CURL
+      # Replace libcurl.a with proper static version
+      run: |
+        if ("${{ matrix.arch }}" -Match "x64") {
+          $env:bits = "64"
+        } else {
+          $env:bits = "32"
+        }
+        $env:curl = "7.73.0"
+        $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/usr/bin;C:/msys64/mingw$env:bits/bin;$env:Path"
+		curl -o curl.zip "https://curl.haxx.se/windows/dl-$env:curl/curl-$env:curl-win$env:bits-mingw.zip"
+        unzip curl.zip
+        mv curl-$env:curl-win$env:bits-mingw/lib/libcurl.a C:/msys64/mingw$env:bits/lib/
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -198,7 +211,7 @@ jobs:
         $env:CXX = "C:/msys64/mingw$env:bits/bin/g++.exe"
         mkdir $env:GITHUB_WORKSPACE\build
         cd $env:GITHUB_WORKSPACE\build
-        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON -DCURL_STATICLIB=ON
+        cmake.exe -G Ninja .. -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_BUILD_TRANSLATIONS=ON -DOPTION_BUILD_TESTS=ON -DOPTION_ASAN=OFF -DUSE_XDG=OFF -DOPTION_BUILD_CODECHECK=OFF -DUSE_FLTO_IF_AVAILABLE=OFF -DCMAKE_JOB_POOLS="linking=1" -DCMAKE_JOB_POOL_LINK=linking -DOPTION_BUILD_WINSTATIC=ON
         cmake.exe --build .
         strip -sv ./src/widelands.exe
     - name: InnoSetup

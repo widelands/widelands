@@ -46,6 +46,12 @@ void NetAddons::init() {
 		return;
 	}
 	curl_ = curl_easy_init();
+
+#ifdef __MINGW32__
+	// mingw with static curl causes some trouble
+	curl_easy_setopt(curl_, CURLOPT_SSL_VERIFYPEER, 0);
+#endif
+
 	if (!curl_) {
 		throw wexception("Unable to initialize CURL");
 	}
