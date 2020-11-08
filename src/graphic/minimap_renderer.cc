@@ -19,6 +19,7 @@
 
 #include "graphic/minimap_renderer.h"
 
+#include <algorithm>
 #include <memory>
 
 #include "economy/flag.h"
@@ -346,16 +347,16 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 }
 
 int scale_map(const Widelands::Map& map, bool zoom) {
-	// The MiniMap can have a maximum size of 600px. If a map is wider than 300px we don't scale.
+	// The MiniMap can have a maximum size of 600px. If a map width or height is greater than 300px we don't scale.
 	// Otherwise we fit as much as possible into a 300px/400px MiniMap window when zoom is disabled.
-	const uint16_t map_w = map.get_width();
-	if (!(map_w > 300)) {
+	const auto max = std::max(map.get_width(), map.get_height());
+	if (max <= 300) {
 		if (zoom) {
-			return (600 - (600 % map_w)) / map_w;
-		} else if (map_w > 150) {
-			return (400 - (400 % map_w)) / map_w;
+			return (600 - (600 % max)) / max;
+		} else if (max > 150) {
+			return (400 - (400 % max)) / max;
 		} else {
-			return (300 - (300 % map_w)) / map_w;
+			return (300 - (300 % max)) / max;
 		}
 	}
 	return 1;
