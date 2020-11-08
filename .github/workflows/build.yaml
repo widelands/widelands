@@ -194,7 +194,7 @@ jobs:
         $env:Path = "C:/msys64/mingw$env:bits/include;C:/msys64/mingw$env:bits/lib;C:/msys64/usr/bin;C:/msys64/mingw$env:bits/bin;$env:Path"
         curl -o curl.zip "https://curl.haxx.se/windows/dl-$env:curl/curl-$env:curl-win$env:bits-mingw.zip"
         unzip curl.zip
-        mv -f curl-$env:curl-win$env:bits-mingw/lib/libcurl.a C:/msys64/mingw$env:bits/lib/
+        mv -Force curl-$env:curl-win$env:bits-mingw/lib/libcurl.a C:/msys64/mingw$env:bits/lib/
     - name: Checkout
       uses: actions/checkout@v2
       with:
