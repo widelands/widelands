@@ -1288,11 +1288,20 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style) {
                                                                 UI::FontStyle::kFsTooltip);
 	}
 
-	constexpr uint32_t kTipWidthMax = 360;
+	constexpr int kTipWidthMax = 360;
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   g_fh->render(text_to_render, kTipWidthMax);
+
 	if (rendered_text->rects.empty()) {
 		return false;
+	}
+
+	// the rendering engine can only adhere to width limitation when there is a whitespace to
+	// introduce a line break. If not, the actual tooltips width exceeds kTipWidthMax. To avoid
+	// unnecessary linebreaks in subsequent string (when it is a formatted string), re-render with
+	// needed width
+	if (rendered_text->width() > kTipWidthMax) {
+		rendered_text = g_fh->render(text_to_render, rendered_text->width());
 	}
 
 	constexpr int kPadding = 4;
