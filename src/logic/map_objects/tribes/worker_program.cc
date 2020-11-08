@@ -800,7 +800,8 @@ void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std:
 		throw wexception("buildferry takes no arguments");
 	}
 	// TODO(GunChleoc): API compatibility - remove after v1.0
-	log_warn("%s: Worker program 'buildferry' is deprecated. Use createbob=TRIBENAME_ferry instead.", worker_.name().c_str());
+	log_warn("%s: Worker program 'buildferry' is deprecated. Use createbob=TRIBENAME_ferry instead.",
+	         worker_.name().c_str());
 	act->function = &Worker::run_buildferry;
 }
 
