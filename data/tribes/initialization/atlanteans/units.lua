@@ -180,6 +180,8 @@
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 --
+--    **scouts_house**:  The internal name of the tribe's scout's hut or house. This unit needs to be defined in the ``buildings`` table too.
+--
 --    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
 --
 --    .. code-block:: lua
@@ -1710,6 +1712,7 @@ descriptions:new_tribe {
    carrier = "atlanteans_carrier",
    carrier2 = "atlanteans_horse",
    geologist = "atlanteans_geologist",
+   scouts_house = "atlanteans_scouts_house",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
    ferry = "atlanteans_ferry",

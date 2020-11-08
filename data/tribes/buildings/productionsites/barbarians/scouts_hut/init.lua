@@ -53,6 +53,13 @@ descriptions:new_productionsite_type {
             "callworker=scout"
          }
       },
+      targeted_scouting = {
+         descname = _"scouting",
+         actions = {
+            "consume=ration",
+            "callworker=targeted_scouting"
+         }
+      },
    },
 }
 

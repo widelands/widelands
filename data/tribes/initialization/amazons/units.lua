@@ -1594,6 +1594,7 @@ descriptions:new_tribe {
    carrier = "amazons_carrier",
    carrier2 = "amazons_tapir",
    geologist = "amazons_geologist",
+   scouts_house = "amazons_scouts_hut",
    soldier = "amazons_soldier",
    ship = "amazons_ship",
    ferry = "amazons_ferry",

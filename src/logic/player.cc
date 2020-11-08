@@ -1062,9 +1062,9 @@ void Player::enhance_or_dismantle(Building* building,
 Perform an action on the given flag.
 ===============
 */
-void Player::flagaction(Flag& flag) {
+void Player::flagaction(Flag& flag, FlagJob::Type t) {
 	if (flag.get_owner() == this) {  //  Additional security check.
-		flag.add_flag_job(dynamic_cast<Game&>(egbase()), tribe().geologist(), "expedition");
+		flag.add_flag_job(dynamic_cast<Game&>(egbase()), t);
 	}
 }
 

@@ -36,6 +36,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
+class ProductionSite;
 struct RSPairStruct;
 struct Route;
 struct Router;
@@ -190,6 +191,9 @@ public:
 	const WareList& get_wares_or_workers() const {
 		return wares_or_workers_;
 	}
+
+	bool has_building(DescriptionIndex) const;
+	ProductionSite* find_closest_occupied_productionsite(const Flag&, DescriptionIndex);
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);

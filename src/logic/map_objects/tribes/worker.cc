@@ -701,20 +701,33 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 	int32_t max_steps = -1;
 
 	// First of all, make sure we're outside
-	if (imm == &dynamic_cast<Building&>(*get_location(game))) {
-		start_task_leavebuilding(game, false);
-		return true;
+	if (upcast(Building, b, get_location(game))) {
+		if (b == imm) {
+			start_task_leavebuilding(game, false);
+			return true;
+		}
 	}
 
 	// Determine the coords we need to walk towards
 	if (action.iparam1 & Action::walkObject) {
-		MapObject* const obj = state.objvar1.get(game);
+		MapObject* obj = state.objvar1.get(game);
 
 		if (obj) {
 			if (upcast(Bob const, bob, obj)) {
 				dest = bob->get_position();
 			} else if (upcast(Immovable const, immovable, obj)) {
 				dest = immovable->get_position();
+			} else if (upcast(Flag, f, obj)) {
+				// Special handling for flags: Go there by road using a Transfer
+				if (f == imm) {
+					// already there – call next program step
+					++state.ivar1;
+					return false;
+				}
+				Transfer* t = new Transfer(game, *this);
+				t->set_destination(*f);
+				start_task_transfer(game, t);
+				return true;  // do not advance program yet
 			} else {
 				throw wexception("MO(%u): [actWalk]: bad object type %s", serial(),
 				                 to_string(obj->descr().type()).c_str());
@@ -1973,8 +1986,8 @@ const Bob::Task Worker::taskReturn = {
 void Worker::start_task_return(Game& game, bool const dropware) {
 	PlayerImmovable* const location = get_location(game);
 
-	if (!location || location->descr().type() < MapObjectType::BUILDING) {
-		throw wexception("MO(%u): start_task_return(): not owned by building", serial());
+	if (!location || (location->descr().type() < MapObjectType::BUILDING && location->descr().type() != MapObjectType::FLAG)) {
+		throw wexception("MO(%u): start_task_return(): not owned by building or flag", serial());
 	}
 
 	push_task(game, taskReturn);
@@ -1991,7 +2004,7 @@ void Worker::return_update(Game& game, State& state) {
 
 	signal_handled();
 
-	Building* location = dynamic_cast<Building*>(get_location(game));
+	PlayerImmovable* location = get_location(game);
 
 	if (!location) {
 		// Usually, this should be caught via the "location" signal above.
@@ -2029,13 +2042,16 @@ void Worker::return_update(Game& game, State& state) {
 					return start_task_move(
 					   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 				}
+			} else if (location == flag) {
+				return pop_task(game);
 			}
 		}
 	}
 
 	// Determine the building's flag and move to it
 
-	if (!start_task_movepath(game, location->base_flag().get_position(), 15,
+	Flag& target_flag = location->descr().type() == MapObjectType::FLAG ? dynamic_cast<Flag&>(*location) : dynamic_cast<Building&>(*location).base_flag();
+	if (!start_task_movepath(game, target_flag.get_position(), 15,
 	                         descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(), "[return]: Failed to return\n");
 		const std::string message =
@@ -2883,6 +2899,7 @@ const Bob::Task Worker::taskScout = {
  * iparam2 = maximum search time (in msecs)
  */
 bool Worker::run_scout(Game& game, State& state, const Action& action) {
+	log_dbg("NOCOM Worker::run_scout");
 	molog(game.get_gametime(), "  Try scouting for %i ms with search in radius of %i\n",
 	      action.iparam2, action.iparam1);
 	if (upcast(ProductionSite, productionsite, get_location(game))) {
@@ -2901,6 +2918,7 @@ bool Worker::run_scout(Game& game, State& state, const Action& action) {
  * If the building location changes, then pop the now-obsolete list of points of interest
  */
 void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
+	log_dbg("NOCOM Worker::prepare_scouts_worklist(%dx%d)", hutpos.x, hutpos.y);
 
 	if (!scouts_worklist.empty()) {
 		if (map.calc_distance(scouts_worklist[0].scoutme, hutpos) != 0) {
@@ -2926,6 +2944,7 @@ void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
  * Check whether it is still interesting (=whether it is still invisible)
  */
 void Worker::check_visible_sites(const Map& map, const Player& player) {
+	log_dbg("NOCOM Worker::check_visible_sites");
 	while (1 < scouts_worklist.size()) {
 		if (scouts_worklist.back().randomwalk) {
 			return;  // Random walk never goes out of fashion.
@@ -2951,6 +2970,7 @@ void Worker::add_sites(Game& game,
                        const Map& map,
                        const Player& player,
                        const std::vector<ImmovableFound>& found_sites) {
+	log_dbg("NOCOM Worker::add_sites");
 
 	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
@@ -3019,6 +3039,7 @@ void Worker::add_sites(Game& game,
  * and the enemy has one of the biggest ones: without scout, the player has no way of attacking.
  */
 void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const time) {
+	log_dbg("NOCOM Worker::start_task_scout");
 	push_task(game, taskScout);
 	State& state = top_state();
 	state.ivar1 = radius;
@@ -3043,6 +3064,8 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	// Some assumptions: When scout starts working, he is located in his hut.
 	// I cannot imagine any situations where this is not the case. However,
 	// such situation could trigger bugs.
+	// – Now he can also be located at an arbitrary flag instead.
+	// But the same code should work fine for that as well.
 	const BaseImmovable* homebase = bobpos.field->get_immovable();
 	assert(nullptr != homebase);
 
@@ -3082,13 +3105,19 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	}
 
 	// first get out
-	push_task(game, taskLeavebuilding);
-	State& stateLeave = top_state();
-	stateLeave.ivar1 = false;
-	stateLeave.objvar1 = &dynamic_cast<Building&>(*get_location(game));
+	if (upcast(Building, b, get_location(game))) {
+		push_task(game, taskLeavebuilding);
+		State& stateLeave = top_state();
+		stateLeave.ivar1 = false;
+		stateLeave.objvar1 = b;
+	// } else {
+		// already outside
+		// schedule_act(game, Duration(10));  // NOCOM
+	}
 }
 
 bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
+	log_dbg("NOCOM Worker::scout_random_walk");
 
 	Coords oldest_coords = get_position();
 
@@ -3162,6 +3191,7 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
  *
  */
 bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat) {
+	log_dbg("NOCOM Worker::scout_lurk_around");
 
 	Coords oldest_coords = get_position();
 
@@ -3205,6 +3235,7 @@ bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceT
 }
 
 void Worker::scout_update(Game& game, State& state) {
+	log_dbg("NOCOM Worker::scout_update");
 	const std::string& signal = get_signal();
 	molog(game.get_gametime(), "  Update Scout (%i time)\n", state.ivar2);
 

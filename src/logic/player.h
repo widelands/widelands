@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "economy/economy.h"
+#include "economy/flag_job.h"
 #include "graphic/color.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/building.h"
@@ -497,7 +498,7 @@ public:
 	Building& force_csite(Coords, DescriptionIndex, const FormerBuildings& = FormerBuildings());
 	Building* build(Coords, DescriptionIndex, bool, FormerBuildings&);
 	void bulldoze(PlayerImmovable&, bool recurse = false);
-	void flagaction(Flag&);
+	void flagaction(Flag&, FlagJob::Type);
 	void start_stop_building(PlayerImmovable&);
 	void military_site_set_soldier_preference(PlayerImmovable&,
 	                                          SoldierPreference soldier_preference);

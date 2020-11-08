@@ -370,6 +370,9 @@ public:
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
+	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
+	bool has_forced_state() const;
+
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
@@ -380,6 +383,7 @@ protected:
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
 		ProgramResult phase;               ///< micro-step index (instruction dependent)
+		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
 		uint32_t flags;                    ///< pfXXX flags
 
 		/**
@@ -423,7 +427,7 @@ protected:
 	                  const Duration& delay = Duration(10),
 	                  ProgramResult phase = ProgramResult::kNone);
 
-	void program_start(Game&, const std::string& program_name);
+	void program_start(Game&, const std::string& program_name, bool force = false, MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 

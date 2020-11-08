@@ -105,6 +105,7 @@ public:
 	DescriptionIndex carrier() const;
 	DescriptionIndex carrier2() const;
 	DescriptionIndex geologist() const;
+	DescriptionIndex scouts_house() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
 	DescriptionIndex ferry() const;
@@ -209,6 +210,7 @@ private:
 	DescriptionIndex ship_;       // The ship that this tribe uses
 	DescriptionIndex ferry_;      // The ferry that this tribe uses
 	DescriptionIndex port_;       // The port that this tribe uses
+	DescriptionIndex scouts_house_;  // This tribe's scout's house/hut
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

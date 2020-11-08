@@ -1572,6 +1572,7 @@ descriptions:new_tribe {
    carrier = "empire_carrier",
    carrier2 = "empire_donkey",
    geologist = "empire_geologist",
+   scouts_house = "empire_scouts_house",
    soldier = "empire_soldier",
    ship = "empire_ship",
    ferry = "empire_ferry",

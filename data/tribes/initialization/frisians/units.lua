@@ -2177,6 +2177,7 @@ descriptions:new_tribe {
    carrier = "frisians_carrier",
    carrier2 = "frisians_reindeer",
    geologist = "frisians_geologist",
+   scouts_house = "frisians_scouts_house",
    soldier = "frisians_soldier",
    ship = "frisians_ship",
    ferry = "frisians_ferry",

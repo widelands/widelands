@@ -24,6 +24,7 @@
 
 #include "base/md5.h"
 #include "base/random.h"
+#include "economy/flag_job.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
@@ -264,7 +265,7 @@ public:
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
 	void send_player_build_waterway(int32_t, Path&);
-	void send_player_flagaction(Flag&);
+	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);

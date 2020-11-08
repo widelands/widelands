@@ -526,6 +526,62 @@ bool Economy::needs_ware_or_worker(DescriptionIndex const ware_or_worker_type) c
 	}
 }
 
+bool Economy::has_building(const DescriptionIndex di) const {
+	const std::string& name = owner().tribe().get_building_descr(di)->name();
+	for (const auto& bld : owner().get_building_statistics(di)) {
+		if (!bld.is_constructionsite) {
+			if (BaseImmovable* i = owner().egbase().map()[bld.pos].get_immovable()) {
+				if (i->descr().name() == name) {
+					if (dynamic_cast<const Building&>(*i).get_economy(type_) == this) {
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+
+ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base, const DescriptionIndex di) {
+	const std::string& name = owner().tribe().get_building_descr(di)->name();
+	ProductionSite* best = nullptr;
+	uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
+	for (const auto& bld : owner().get_building_statistics(di)) {
+		if (!bld.is_constructionsite) {
+			if (BaseImmovable* i = owner().egbase().map()[bld.pos].get_immovable()) {
+				if (i->descr().name() == name) {
+					upcast(ProductionSite, ps, i);
+					assert(ps);
+					if (ps->get_economy(type_) == this && ps->can_start_working()) {
+						// This function is used only by Targeted Scouting code currently.
+						// We also accept stopped buildings, but as a safety check we
+						// ignore buildings whose input queues are set to zero capacity.
+						bool all_inputqueues_0 = true;
+						if (ps->inputqueues().empty()) {
+							all_inputqueues_0 = false;
+						} else {
+							for (const InputQueue* q : ps->inputqueues()) {
+								if (q->get_max_fill() > 0) {
+									all_inputqueues_0 = false;
+									break;
+								}
+							}
+						}
+						if (!all_inputqueues_0) {
+							const uint32_t dist = owner().egbase().map().calc_distance(base.get_position(), ps->get_position());
+							if (dist < closest_dist) {
+								closest_dist = dist;
+								best = ps;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return best;
+}
+
 /**
  * Add e's flags to this economy.
  *
