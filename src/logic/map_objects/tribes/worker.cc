@@ -2899,7 +2899,6 @@ const Bob::Task Worker::taskScout = {
  * iparam2 = maximum search time (in msecs)
  */
 bool Worker::run_scout(Game& game, State& state, const Action& action) {
-	log_dbg("NOCOM Worker::run_scout");
 	molog(game.get_gametime(), "  Try scouting for %i ms with search in radius of %i\n",
 	      action.iparam2, action.iparam1);
 	if (upcast(ProductionSite, productionsite, get_location(game))) {
@@ -2918,7 +2917,6 @@ bool Worker::run_scout(Game& game, State& state, const Action& action) {
  * If the building location changes, then pop the now-obsolete list of points of interest
  */
 void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
-	log_dbg("NOCOM Worker::prepare_scouts_worklist(%dx%d)", hutpos.x, hutpos.y);
 
 	if (!scouts_worklist.empty()) {
 		if (map.calc_distance(scouts_worklist[0].scoutme, hutpos) != 0) {
@@ -2944,7 +2942,6 @@ void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
  * Check whether it is still interesting (=whether it is still invisible)
  */
 void Worker::check_visible_sites(const Map& map, const Player& player) {
-	log_dbg("NOCOM Worker::check_visible_sites");
 	while (1 < scouts_worklist.size()) {
 		if (scouts_worklist.back().randomwalk) {
 			return;  // Random walk never goes out of fashion.
@@ -2970,7 +2967,6 @@ void Worker::add_sites(Game& game,
                        const Map& map,
                        const Player& player,
                        const std::vector<ImmovableFound>& found_sites) {
-	log_dbg("NOCOM Worker::add_sites");
 
 	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
@@ -3039,7 +3035,6 @@ void Worker::add_sites(Game& game,
  * and the enemy has one of the biggest ones: without scout, the player has no way of attacking.
  */
 void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const time) {
-	log_dbg("NOCOM Worker::start_task_scout");
 	push_task(game, taskScout);
 	State& state = top_state();
 	state.ivar1 = radius;
@@ -3110,15 +3105,10 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 		State& stateLeave = top_state();
 		stateLeave.ivar1 = false;
 		stateLeave.objvar1 = b;
-	// } else {
-		// already outside
-		// schedule_act(game, Duration(10));  // NOCOM
 	}
 }
 
 bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
-	log_dbg("NOCOM Worker::scout_random_walk");
-
 	Coords oldest_coords = get_position();
 
 	std::vector<Coords> list;  //< List of interesting points
@@ -3191,8 +3181,6 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
  *
  */
 bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat) {
-	log_dbg("NOCOM Worker::scout_lurk_around");
-
 	Coords oldest_coords = get_position();
 
 	std::vector<Coords> surrounding_places;  // locations near the MS under inspection
@@ -3235,7 +3223,6 @@ bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceT
 }
 
 void Worker::scout_update(Game& game, State& state) {
-	log_dbg("NOCOM Worker::scout_update");
 	const std::string& signal = get_signal();
 	molog(game.get_gametime(), "  Update Scout (%i time)\n", state.ivar2);
 
