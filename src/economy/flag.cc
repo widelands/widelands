@@ -933,10 +933,12 @@ void Flag::act(Game& game, uint32_t) {
 	for (auto it = flag_jobs_.begin(); it != flag_jobs_.end();) {
 		bool erase = false;
 		if (it->type == FlagJob::Type::kScout) {
-			if (ProductionSite* ps = get_economy(wwWORKER)->find_closest_occupied_productionsite(*this, owner().tribe().scouts_house())) {
+			if (ProductionSite* ps = get_economy(wwWORKER)->find_closest_occupied_productionsite(
+			       *this, owner().tribe().scouts_house())) {
 				Worker* worker = ps->working_positions()[0].worker.get(game);
 				assert(worker);
-				if (!worker->top_state().objvar1.is_set() && worker->get_location(game) == ps && !ps->has_forced_state()) {
+				if (!worker->top_state().objvar1.is_set() && worker->get_location(game) == ps &&
+				    !ps->has_forced_state()) {
 					// Success! Tell the productionsite to instruct its worker
 					// to come and scout here the next time he goes to work.
 					ps->set_next_program_override(game, "targeted_scouting", this);
@@ -975,7 +977,8 @@ void Flag::add_flag_job(Game& game, const FlagJob::Type t) {
 	switch (t) {
 	case FlagJob::Type::kGeologist:
 		j.program = "expedition";
-		j.request = new Request(*this, owner().tribe().geologist(), Flag::flag_job_request_callback, wwWORKER);
+		j.request =
+		   new Request(*this, owner().tribe().geologist(), Flag::flag_job_request_callback, wwWORKER);
 		break;
 	case FlagJob::Type::kScout:
 		do_schedule_act(game, Duration(10));

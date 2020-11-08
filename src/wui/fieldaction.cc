@@ -441,13 +441,18 @@ void FieldActionWindow::add_buttons_auto() {
 					add_button(buildbox, "geologist", kImgButtonGeologist,
 					           &FieldActionWindow::act_geologist, _("Send geologist to explore site"));
 
-					const bool enabled = flag->get_economy(Widelands::wwWORKER)->has_building(flag->owner().tribe().scouts_house());
-					add_button(buildbox, "scout", kImgButtonScout,
-					           &FieldActionWindow::act_scout, enabled ? _("Send scout to explore surroundings") :
-					           (boost::format("<rt><p>%s</p><p>%s</p></rt>")
-					           % g_style_manager->font_style(UI::FontStyle::kDisabled).as_font_tag(_("Send scout to explore surroundings"))
-					           % g_style_manager->font_style(UI::FontStyle::kWuiTooltip).as_font_tag(
-					           _("You need to connect this flag to a scout's house before you can send a scout here."))).str(), false, enabled);
+					const bool enabled = flag->get_economy(Widelands::wwWORKER)
+					                        ->has_building(flag->owner().tribe().scouts_house());
+					add_button(buildbox, "scout", kImgButtonScout, &FieldActionWindow::act_scout,
+					           enabled ? _("Send scout to explore surroundings") :
+					                     (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
+					                      g_style_manager->font_style(UI::FontStyle::kDisabled)
+					                         .as_font_tag(_("Send scout to explore surroundings")) %
+					                      g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+					                         .as_font_tag(_("You need to connect this flag to a scout's "
+					                                        "house before you can send a scout here.")))
+					                        .str(),
+					           false, enabled);
 				}
 			}
 		} else {

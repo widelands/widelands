@@ -384,7 +384,7 @@ protected:
 		size_t ip;                         ///< instruction pointer
 		ProgramResult phase;               ///< micro-step index (instruction dependent)
 		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
-		uint32_t flags;                    ///< pfXXX flags
+		uint32_t flags;  ///< pfXXX flags
 
 		/**
 		 * Instruction-dependent additional data.
@@ -427,7 +427,10 @@ protected:
 	                  const Duration& delay = Duration(10),
 	                  ProgramResult phase = ProgramResult::kNone);
 
-	void program_start(Game&, const std::string& program_name, bool force = false, MapObject* extra_data = nullptr);
+	void program_start(Game&,
+	                   const std::string& program_name,
+	                   bool force = false,
+	                   MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 

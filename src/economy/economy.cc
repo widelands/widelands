@@ -542,7 +542,8 @@ bool Economy::has_building(const DescriptionIndex di) const {
 	return false;
 }
 
-ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base, const DescriptionIndex di) {
+ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base,
+                                                              const DescriptionIndex di) {
 	const std::string& name = owner().tribe().get_building_descr(di)->name();
 	ProductionSite* best = nullptr;
 	uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
@@ -568,7 +569,8 @@ ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base, 
 							}
 						}
 						if (!all_inputqueues_0) {
-							const uint32_t dist = owner().egbase().map().calc_distance(base.get_position(), ps->get_position());
+							const uint32_t dist = owner().egbase().map().calc_distance(
+							   base.get_position(), ps->get_position());
 							if (dist < closest_dist) {
 								closest_dist = dist;
 								best = ps;

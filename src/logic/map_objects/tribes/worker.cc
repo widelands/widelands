@@ -1986,7 +1986,8 @@ const Bob::Task Worker::taskReturn = {
 void Worker::start_task_return(Game& game, bool const dropware) {
 	PlayerImmovable* const location = get_location(game);
 
-	if (!location || (location->descr().type() < MapObjectType::BUILDING && location->descr().type() != MapObjectType::FLAG)) {
+	if (!location || (location->descr().type() < MapObjectType::BUILDING &&
+	                  location->descr().type() != MapObjectType::FLAG)) {
 		throw wexception("MO(%u): start_task_return(): not owned by building or flag", serial());
 	}
 
@@ -2050,7 +2051,9 @@ void Worker::return_update(Game& game, State& state) {
 
 	// Determine the building's flag and move to it
 
-	Flag& target_flag = location->descr().type() == MapObjectType::FLAG ? dynamic_cast<Flag&>(*location) : dynamic_cast<Building&>(*location).base_flag();
+	Flag& target_flag = location->descr().type() == MapObjectType::FLAG ?
+	                       dynamic_cast<Flag&>(*location) :
+	                       dynamic_cast<Building&>(*location).base_flag();
 	if (!start_task_movepath(game, target_flag.get_position(), 15,
 	                         descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(), "[return]: Failed to return\n");

@@ -386,10 +386,11 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			capsbuttons->add(debugbtn);
 		}
 
-		if (building->owner().tribe().safe_building_index(building->descr().name()) == building->owner().tribe().scouts_house()) {
-			watch_button_ =
-			   new UI::Button(capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				              g_image_cache->get("images/wui/menus/watch_follow.png"), _("Watch the scout"));
+		if (building->owner().tribe().safe_building_index(building->descr().name()) ==
+		    building->owner().tribe().scouts_house()) {
+			watch_button_ = new UI::Button(
+			   capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
+			   g_image_cache->get("images/wui/menus/watch_follow.png"), _("Watch the scout"));
 			watch_button_->sigclicked.connect([this]() { clicked_watch(); });
 			capsbuttons->add(watch_button_);
 		}

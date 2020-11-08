@@ -183,7 +183,8 @@ void ProductionSiteWindow::think() {
 	}
 
 	if (watch_button_) {
-		watch_button_->set_enabled(production_site->working_positions()[0].worker.get(ibase()->egbase()));
+		watch_button_->set_enabled(
+		   production_site->working_positions()[0].worker.get(ibase()->egbase()));
 	}
 
 	// If we have pending requests, update table each tick.
