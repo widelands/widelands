@@ -27,9 +27,9 @@
 #include "logic/widelands.h"
 
 // Avoid as many includes as possible
-class GameSettings;
-class UserSettings;
-class RGBColor;
+struct GameSettings;
+struct UserSettings;
+struct RGBColor;
 
 namespace Widelands {
 class Game;
