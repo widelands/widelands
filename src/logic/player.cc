@@ -401,6 +401,14 @@ void Player::update_team_players() {
 	update_team_vision_whole_map();
 }
 
+void Player::show_watch_window(Game& game, Bob& b) {
+	if (InteractivePlayer* const iplayer = game.get_ipl()) {
+		if (&iplayer->player() == this) {
+			iplayer->show_watch_window(b);
+		}
+	}
+}
+
 /*
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.

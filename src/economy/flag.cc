@@ -940,6 +940,7 @@ void Flag::act(Game& game, uint32_t) {
 					// Success! Tell the productionsite to instruct its worker
 					// to come and scout here the next time he goes to work.
 					ps->set_next_program_override(game, "targeted_scouting", this);
+					get_owner()->show_watch_window(game, *worker);
 					erase = true;
 				} else {
 					// No scout is in the building just now. Try again a bit later

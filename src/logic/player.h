@@ -104,6 +104,9 @@ public:
 		get_messages()->set_message_status(id, status);
 	}
 
+	// Open a watch window following the given bob, provided that this is the interactive player.
+	void show_watch_window(Game&, Bob&);
+
 	const std::set<Serial>& ships() const;
 	void add_ship(Serial ship);
 	void remove_ship(Serial ship);
