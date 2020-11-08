@@ -20,6 +20,8 @@
 #ifndef WL_ECONOMY_FLAG_JOB_H
 #define WL_ECONOMY_FLAG_JOB_H
 
+#include <string>
+
 namespace Widelands {
 
 class Request;
