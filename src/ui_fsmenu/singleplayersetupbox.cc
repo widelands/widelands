@@ -88,7 +88,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	player_.set_enabled(false);
 	update();
 }
-void SinglePlayerActivePlayerGroup::force_new_dimensions(float, uint32_t standard_element_height) {
+void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_element_height) {
 	player_.set_desired_size(standard_element_height, standard_element_height);
 	player_type_.set_desired_size(standard_element_height, standard_element_height);
 	tribe_.set_desired_size(standard_element_height, standard_element_height);
@@ -168,11 +168,10 @@ void SinglePlayerSetupBox::update() {
 	}
 }
 
-void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
+void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height) {
 	standard_height = standard_element_height;
-	title_.set_font_scale(scale);
 	for (auto& active_player_group : active_player_groups) {
-		active_player_group->force_new_dimensions(scale, standard_element_height);
+		active_player_group->force_new_dimensions(standard_element_height);
 	}
 }
 void SinglePlayerSetupBox::reset() {
