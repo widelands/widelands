@@ -51,7 +51,6 @@ const std::string& get_locale();
 void set_localedir(const std::string&);
 const std::string& get_localedir();
 
-const std::string kAddOnLocaleDir = "addons_i18n";
 const std::string& get_addon_locale_dir();
 
 void set_homedir(const std::string&);

@@ -31,6 +31,7 @@
 #include "base/log.h"
 #include "config.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 
 #ifdef __APPLE__
 #if LIBINTL_VERSION >= 0x001201
