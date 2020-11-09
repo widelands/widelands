@@ -66,8 +66,9 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 	do_not_layout_on_resolution_change();
 
 	layout();
-	initialization_complete();
 	tabs_.load_tab_contents();
+
+	initialization_complete();
 }
 
 bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {

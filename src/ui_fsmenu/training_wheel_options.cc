@@ -170,6 +170,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	ok_button->set_desired_size(desired_width, ok_button->get_h());
 
 	center_to_parent();
+
+	initialization_complete();
 }
 
 void TrainingWheelOptions::toggle_mark_unmark_all_button() {
