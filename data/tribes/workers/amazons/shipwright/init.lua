@@ -30,7 +30,7 @@ descriptions:new_worker_type {
          "findspace=size:swim radius:4",
          "walk=coords",
          "animate=work duration:10s",
-         "buildferry",
+         "createbob=amazons_ferry",
          "return"
       },
    },

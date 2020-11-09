@@ -576,6 +576,15 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 }
 
+void EditBox::set_caret_pos(const size_t pos) {
+	m_->caret = std::min(pos, m_->text.size());
+	check_caret();
+}
+
+size_t EditBox::caret_pos() const {
+	return m_->caret;
+}
+
 void EditBox::highlight_selection(RenderTarget& dst,
                                   const Vector2i& point,
                                   const uint16_t fontheight) {
