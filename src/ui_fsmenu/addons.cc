@@ -894,8 +894,8 @@ static void install_translation(const std::string& temp_locale_path,
 	   FileSystem::fs_filename(temp_locale_path.c_str());                         // nds.mo.tmp
 	const std::string locale = temp_filename.substr(0, temp_filename.find('.'));  // nds
 
-	const std::string new_locale_dir = kAddOnLocaleDir + FileSystem::file_separator() +
-	                                   locale + FileSystem::file_separator() +
+	const std::string new_locale_dir = kAddOnLocaleDir + FileSystem::file_separator() + locale +
+	                                   FileSystem::file_separator() +
 	                                   "LC_MESSAGES";  // addons_i18n/nds/LC_MESSAGES
 	g_fs->ensure_directory_exists(new_locale_dir);
 
@@ -1020,8 +1020,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 	}
 
 	piw.action_params = info.file_list.files;
-	piw.action_when_thinking = [this, &info, &piw,
-	                            temp_dir](const std::string& file_to_download) {
+	piw.action_when_thinking = [this, &info, &piw, temp_dir](const std::string& file_to_download) {
 		try {
 			piw.set_message_2(file_to_download);
 
@@ -1037,7 +1036,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 			}
 
 			network_handler_.download_addon_file(info.internal_name + "/" + file_to_download, checksum,
-				                                 temp_dir + "/" + file_to_download);
+			                                     temp_dir + "/" + file_to_download);
 			piw.progressbar().set_state(piw.progressbar().get_state() + 1);
 		} catch (const std::exception& e) {
 			log_err("download_addon %s: %s", info.internal_name.c_str(), e.what());
@@ -1045,10 +1044,10 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 			UI::WLMessageBox w(
 			   this, UI::WindowStyle::kFsMenu, _("Error"),
 			   (boost::format(
-				   _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
-					 "this add-on will be skipped.\n\nError Message:\n%2$s")) %
-				info.internal_name.c_str() % e.what())
-				  .str(),
+			       _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
+			         "this add-on will be skipped.\n\nError Message:\n%2$s")) %
+			    info.internal_name.c_str() % e.what())
+			      .str(),
 			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 		}
@@ -1073,8 +1072,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 	std::set<std::string> result;
 	piw.die_after_last_action = true;
 	piw.action_params = info.file_list.locales;
-	piw.action_when_thinking = [this, &info, &result,
-	                            &piw](const std::string& locale_to_download) {
+	piw.action_when_thinking = [this, &info, &result, &piw](const std::string& locale_to_download) {
 		try {
 			piw.set_message_2(locale_to_download);
 
@@ -1101,9 +1099,11 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 			piw.end_modal(UI::Panel::Returncodes::kBack);
 			UI::WLMessageBox w(
 			   this, UI::WindowStyle::kFsMenu, _("Error"),
-			   (boost::format(_("The translation files for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations for this add-on will be skipped.\n\nError Message:\n%2$s")) %
-				info.internal_name.c_str() % e.what())
-				  .str(),
+			   (boost::format(_("The translation files for the add-on ‘%1$s’ could not be downloaded "
+			                    "from the server. Installing/upgrading the translations for this "
+			                    "add-on will be skipped.\n\nError Message:\n%2$s")) %
+			    info.internal_name.c_str() % e.what())
+			      .str(),
 			   UI::WLMessageBox::MBoxType::kOk);
 			w.run<UI::Panel::Returncodes>();
 		}
