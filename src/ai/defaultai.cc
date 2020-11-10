@@ -767,11 +767,20 @@ void DefaultAI::late_initialization() {
 
 			if (bo.type == BuildingObserver::Type::kMine) {
 				// get the resource needed by the mine
-				if (bh.get_mines()) {
-					bo.mines = game().descriptions().resource_index(bh.get_mines());
+				const auto& collected_resources = prod.collected_resources();
+				if (collected_resources.size() > 1) {
+					log_warn("AI %d: The mine '%s' will mine multiple resources. The AI can't handle "
+					         "this and will simply pick the first one from the list.",
+					         player_number(), bo.name);
 				}
-
-				bo.mines_percent = bh.get_mines_percent();
+				const auto& first_resource_it = collected_resources.begin();
+				if (first_resource_it == collected_resources.end()) {
+					log_warn(
+					   "AI %d: The mine '%s' does not mine any resources!", player_number(), bo.name);
+					bo.mines = Widelands::INVALID_INDEX;
+				} else {
+					bo.mines = game().descriptions().resource_index(first_resource_it->first);
+				}
 
 				// populating mines_per_type map
 				if (mines_per_type.count(bo.mines) == 0) {

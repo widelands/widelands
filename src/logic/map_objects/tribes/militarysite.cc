@@ -344,9 +344,9 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      nexthealtime_(0),
      soldier_preference_(ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
                                                              SoldierPreference::kRookies),
+     next_swap_soldiers_time_(Time(0)),
      soldier_upgrade_try_(false),
      doing_upgrade_request_(false) {
-	next_swap_soldiers_time_ = Time(0);
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }

@@ -159,7 +159,10 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							const std::string map_object_name(fr.c_string());
 							const std::string type(fr.c_string());
 							DescriptionIndex oldidx = INVALID_INDEX;
-							if (type == "building") {
+
+							// TODO(Nordfriese): `type.empty()` is only allowed for
+							// savegame compatibility, disallow after v1.0
+							if (type.empty() || type == "building") {
 								oldidx = descriptions->load_building(map_object_name);
 							} else if (type == "immovable") {
 								oldidx = descriptions->load_immovable(map_object_name);
@@ -171,7 +174,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 								   type.c_str());
 							}
 							assert(oldidx != INVALID_INDEX);
-							building.old_buildings_.push_back(std::make_pair(oldidx, type == "building"));
+							building.old_buildings_.push_back(std::make_pair(oldidx, type != "immovable"));
 						}
 					} else {
 						while (fr.unsigned_8()) {

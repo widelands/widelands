@@ -50,7 +50,7 @@ namespace {
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(Descriptions& descriptions,
+void parse_working_positions(const Descriptions& descriptions,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {
@@ -827,7 +827,7 @@ void ProductionSite::find_and_start_next_program(Game& game) {
  * \post (Potentially indirect) scheduling for the next step has been done.
  */
 void ProductionSite::program_act(Game& game) {
-	State& state = top_state();
+	const State& state = top_state();
 
 	// 'Stop' of building is considered only when starting
 	// new productions cycle. Otherwise it can lead to consumption

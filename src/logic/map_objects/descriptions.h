@@ -47,7 +47,7 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	Descriptions(LuaInterface* lua);
+	explicit Descriptions(LuaInterface* lua);
 	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;

@@ -239,11 +239,11 @@ bool Slider::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_MINUS:
 		case SDLK_KP_MINUS:
-			set_value(code.mod & KMOD_CTRL ? 0 : get_value() - 1);
+			set_value((code.mod & KMOD_CTRL) ? 0 : get_value() - 1);
 			return true;
 		case SDLK_PLUS:
 		case SDLK_KP_PLUS:
-			set_value(code.mod & KMOD_CTRL ? get_max_value() : get_value() + 1);
+			set_value((code.mod & KMOD_CTRL) ? get_max_value() : get_value() + 1);
 			return true;
 		default:
 			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
