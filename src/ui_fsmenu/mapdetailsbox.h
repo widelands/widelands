@@ -57,7 +57,7 @@ private:
 	UI::MultilineTextarea map_description_;
 	UI::SuggestedTeamsBox suggested_teams_box_;
 
-	void show_map_description(Widelands::Map& map, GameSettingsProvider* settings);
+	void show_map_description(const Widelands::Map& map, GameSettingsProvider* settings);
 	void show_map_description_savegame(const GameSettings& game_settings);
 	void show_map_name(const GameSettings& game_settings);
 };
