@@ -1281,7 +1281,7 @@ void WLApplication::mainmenu() {
 			message += (boost::format(_("Please report this problem to help us improve Widelands. "
 			                            "You will find related messages in the standard output "
 			                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
-			            build_id ( ).c_str() % build_type().c_str())
+			            build_id().c_str() % build_type().c_str())
 			              .str();
 
 			message = (boost::format("%s\n\n%s") % message %
