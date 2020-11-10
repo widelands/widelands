@@ -43,7 +43,7 @@ struct NetGameInfo {
 
 struct NetOpenGame {
 	NetOpenGame() = default;
-	explicit NetOpenGame(NetAddress init_address, NetGameInfo init_info)
+	explicit NetOpenGame(const NetAddress& init_address, const NetGameInfo& init_info)
 	   : address(init_address), info(init_info) {
 	}
 	NetAddress address;
