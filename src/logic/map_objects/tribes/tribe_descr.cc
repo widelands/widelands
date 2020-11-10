@@ -765,7 +765,7 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(Descriptions& descriptions) {
+void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descriptions) {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;
@@ -858,8 +858,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				descriptions.get_mutable_worker_descr(job.first)->add_employer(index);
 			}
 			// Resource info
-			for (const std::string& r : productionsite->collected_resources()) {
-				used_resources_.insert(r);
+			for (const auto& r : productionsite->collected_resources()) {
+				used_resources_.insert(r.first);
 			}
 			for (const std::string& r : productionsite->created_resources()) {
 				used_resources_.insert(r);
@@ -996,8 +996,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		for (const std::string& resource : prod->created_resources()) {
 			add_creator(resource, prod);
 		}
-		for (const std::string& resource : prod->collected_resources()) {
-			add_collector(resource, prod);
+		for (const auto& resource : prod->collected_resources()) {
+			add_collector(resource.first, prod);
 		}
 		for (const std::string& bob : prod->collected_bobs()) {
 			add_collector(bob, prod);
@@ -1072,11 +1072,11 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 		}
-		for (const std::string& item : prod->collected_resources()) {
+		for (const auto& item : prod->collected_resources()) {
 			// Sites that collect resources and sites of other types that create resources for them
 			// should overlap each other
-			if (creators.count(item)) {
-				for (ProductionSiteDescr* creator : creators.at(item)) {
+			if (creators.count(item.first)) {
+				for (ProductionSiteDescr* creator : creators.at(item.first)) {
 					if (creator != prod) {
 						prod->add_supported_by_productionsite(creator->name());
 						creator->add_supports_productionsite(prod->name());
@@ -1084,8 +1084,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 			// Sites that collect resources should not overlap sites that collect the same resource
-			if (collectors.count(item)) {
-				for (const ProductionSiteDescr* collector : collectors.at(item)) {
+			if (collectors.count(item.first)) {
+				for (const ProductionSiteDescr* collector : collectors.at(item.first)) {
 					prod->add_competing_productionsite(collector->name());
 				}
 			}

@@ -244,7 +244,7 @@ void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
 	table_->set_show_filenames(show_filenames);
 }
 
-void LoadOrSaveGame::change_directory_to(std::string& directory) {
+void LoadOrSaveGame::change_directory_to(const std::string& directory) {
 	curdir_ = directory;
 	fill_table();
 }

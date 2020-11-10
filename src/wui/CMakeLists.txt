@@ -102,6 +102,7 @@ wl_library(wui_common_gamedetails
   DEPENDS
     base_i18n
     base_log
+    base_macros
     base_time_string
     game_io
     graphic

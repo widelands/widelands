@@ -2160,7 +2160,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 		}
 	}
 
-	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+	if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		delete supply_;
 		supply_ = nullptr;
 
@@ -2419,7 +2419,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 	}
 
 	// We're back!
-	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+	if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		schedule_incorporate(game);
 		return;
 	}
