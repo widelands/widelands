@@ -82,8 +82,7 @@ bool MapData::compare_names(const MapData& other) {
 	if (localized_name == parent_name() && maptype == MapData::MapType::kDirectory) {
 		return true;
 	}
-	if (other.localized_name == parent_name() &&
-	           other.maptype == MapData::MapType::kDirectory) {
+	if (other.localized_name == parent_name() && other.maptype == MapData::MapType::kDirectory) {
 		return false;
 	}
 
