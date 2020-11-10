@@ -527,8 +527,8 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 		return true;
 	}
 	if (y >= get_y_gap() && y <= static_cast<int32_t>(get_h()) - get_y_gap() &&
-	           x >= get_x_gap() - 2 &&
-	           x < static_cast<int32_t>(get_w()) - get_x_gap() + 2) {  //  click on bar
+	    x >= get_x_gap() - 2 &&
+	    x < static_cast<int32_t>(get_w()) - get_x_gap() + 2) {  //  click on bar
 		bar_pressed(y, get_y_gap());
 		return true;
 	}
