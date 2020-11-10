@@ -66,7 +66,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(InteractiveBase* parent,
                UI::ButtonStyle::kWuiSecondary),
      time_last_thought_(0),
      save_profile_dialog_(nullptr),
-	 egbase_(&parent->egbase()) {
+     egbase_(&parent->egbase()) {
 	set_center_panel(&main_box_);
 
 	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
@@ -815,7 +815,8 @@ void EconomyOptionsWindow::read_targets() {
 			PredefinedTargets t;
 			while (Section::Value* v = section->get_next_val()) {
 				const std::string name(v->get_name());
-				const std::pair<Widelands::WareWorker, Widelands::DescriptionIndex> wareworker = descriptions->load_ware_or_worker(name);
+				const std::pair<Widelands::WareWorker, Widelands::DescriptionIndex> wareworker =
+				   descriptions->load_ware_or_worker(name);
 				assert(wareworker.second != Widelands::INVALID_INDEX);
 				switch (wareworker.first) {
 				case Widelands::WareWorker::wwWARE:

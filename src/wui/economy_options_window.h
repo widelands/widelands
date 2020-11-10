@@ -62,8 +62,10 @@ public:
 	};
 
 	// Create an economy options window for the given flag
-	static void
-	create(InteractiveBase* parent, const Widelands::Flag& flag, Widelands::WareWorker type, bool can_act);
+	static void create(InteractiveBase* parent,
+	                   const Widelands::Flag& flag,
+	                   Widelands::WareWorker type,
+	                   bool can_act);
 	void activate_tab(Widelands::WareWorker type);
 
 	void create_target();
@@ -190,7 +192,7 @@ private:
 	void update_profiles_select(const std::string&);
 
 	SaveProfileWindow* save_profile_dialog_;
-	Widelands::EditorGameBase* egbase_; // Mutable for saveloading
+	Widelands::EditorGameBase* egbase_;  // Mutable for saveloading
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H
