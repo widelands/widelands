@@ -27,6 +27,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/style_manager.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -366,35 +367,62 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
 
-	if (present == stationed) {
-		if (capacity_ > stationed) {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
-			*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
-			      stationed % (capacity_ - stationed))
-			        .str();
-		} else {
-			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
+	// NOCOM slow - cache the results
+	bool had_error = false;
+	const std::string& military_capacity_script = owner().tribe().military_capacity_script();
+	if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
+		try {
+			LuaInterface lua;
+			std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
+				std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+				cr->push_arg(present);
+				cr->push_arg(stationed);
+				cr->push_arg(capacity_);
+				cr->resume();
+				*s = cr->pop_string();
+		} catch (LuaError& err) {
+			log_err("Failed to read soldier capacity for building '%s': %s", descr().name().c_str(), err.what());
+			had_error = true;
 		}
 	} else {
-		if (capacity_ > stationed) {
+		// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v 1.0
+		had_error = true;
+	}
 
-			*s = (boost::format(
-			         /** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			         /** TRANSLATORS: %2% are currently open soldier slots in the building */
-			         /** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
-			         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
-			      present % (stationed - present) % (capacity_ - stationed))
-			        .str();
+	if (had_error) {
+		// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v 1.0
+		// Fall back to tribe-independent strings
+		if (present == stationed) {
+			if (capacity_ > stationed) {
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+				/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
+				*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
+					  stationed % (capacity_ - stationed))
+						.str();
+			} else {
+				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
+				*s = (boost::format(ngettext("%1% soldier", "%1% soldiers", stationed)) % stationed).str();
+			}
 		} else {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
-			      present % (stationed - present))
-			        .str();
+			if (capacity_ > stationed) {
+
+				*s = (boost::format(
+						 /** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+						 /** TRANSLATORS: %2% are currently open soldier slots in the building */
+						 /** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
+						 ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
+					  present % (stationed - present) % (capacity_ - stationed))
+						.str();
+			} else {
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+				/** TRANSLATORS: %2% are currently open soldier slots in the building */
+				*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
+					  present % (stationed - present))
+						.str();
+			}
 		}
 	}
+
 	*s = StyleManager::color_tag(
 	   // Line break to make Codecheck happy.
 	   *s, g_style_manager->building_statistics_style().medium_color());

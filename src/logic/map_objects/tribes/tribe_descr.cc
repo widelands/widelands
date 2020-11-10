@@ -144,6 +144,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
                        const LuaTable* scenario_table)
    : name_(table.get_string("name")),
      descname_(info.descname),
+	 military_capacity_script_(table.has_key<std::string>("military_capacity_script") ? table.get_string("military_capacity_script") : ""),
      descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
@@ -157,6 +158,11 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      initializations_(info.initializations) {
 	log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums");
+
+	if (military_capacity_script_.empty() || !g_fs->file_exists(military_capacity_script_)) {
+		// TODO(GunChleoc): API compatibility - require after v 1.0
+		log_warn("File '%s' for military_capacity_script for tribe '%s' does not exist", military_capacity_script_.c_str(), name().c_str());
+	}
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -510,6 +516,9 @@ const std::string& TribeDescr::name() const {
 }
 const std::string& TribeDescr::descname() const {
 	return descname_;
+}
+const std::string& TribeDescr::military_capacity_script() const {
+	return military_capacity_script_;
 }
 
 size_t TribeDescr::get_nrwares() const {

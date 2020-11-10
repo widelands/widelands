@@ -250,6 +250,45 @@ static int L_pgettext(lua_State* L) {
 	return 1;
 }
 
+
+/* RST
+.. function:: npgettext(msgctxt, msgid, msgid_plural, n)
+
+   A wrapper for the npgettext() function, needed for allowing multiple translations of the same
+   plural string according to context.
+
+   :arg msgctxt: a named context for this string for disambiguation
+   :type msgctxt: :class:`string`
+   :arg msgid: text to translate
+   :type msgid: :class:`string`
+   :arg msgid_plural: text to translate (plural)
+   :type msgid_plural: :class:`string`
+   :arg n: The number of elements.
+   :type n: An unsigned integer.
+
+   :returns: The translated string.
+*/
+// UNTESTED
+static int L_npgettext(lua_State* L) {
+	//  S: msgctxt msgid
+	const char* msgctxt = luaL_checkstring(L, 1);
+	const char* msgid = luaL_checkstring(L, 2);
+	const char* msgid_plural = luaL_checkstring(L, 3);
+	const int32_t n = luaL_checkint32(L, 4);
+	if (n < 0) {
+		report_error(L, "Call to npgettext with negative number %d", n);
+	}
+
+	const std::string td = current_textdomain(L);
+	if (!td.empty()) {
+		lua_pushstring(L, dnpgettext_expr(td.c_str(), msgctxt, msgid, msgid_plural, n));
+	} else {
+		lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
+	}
+	return 1;
+}
+
+
 /* RST
    .. function:: include(script)
 
@@ -304,6 +343,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"include", &L_include},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
+										  {"npgettext", &L_npgettext},
                                           {"set_textdomain", &L_set_textdomain},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},

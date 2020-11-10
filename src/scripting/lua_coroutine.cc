@@ -105,6 +105,11 @@ void LuaCoroutine::push_arg(const std::string& string) {
 	++ninput_args_;
 }
 
+void LuaCoroutine::push_arg(const int number) {
+	lua_pushinteger(lua_state_, number);
+	++ninput_args_;
+}
+
 std::string LuaCoroutine::pop_string() {
 	if (!nreturn_values_) {
 		return "";

@@ -9,6 +9,7 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "empire",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
