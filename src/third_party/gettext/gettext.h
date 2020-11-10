@@ -22,6 +22,12 @@
 #if ENABLE_NLS
 
 /* Get declarations of GNU message catalog functions.  */
+#ifdef __APPLE__
+// Silence third-party warnings
+DIAG_OFF("-Wreserved-id-macro")
+#include <libintl.h>
+DIAG_ON("-Wreserved-id-macro")
+#endif
 #include <libintl.h>
 
 #ifdef __clang__
