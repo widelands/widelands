@@ -530,9 +530,9 @@ void InputQueueDisplay::think() {
 	                                                  "images/ui_basic/scrollbar_left.png"));
 }
 
-static const RGBAColor kPriorityColors[] = {RGBAColor(255, 0, 0, 127), RGBAColor(255, 127, 0, 127),
-                                            RGBAColor(255, 255, 0, 127), RGBAColor(0, 255, 0, 127),
-                                            RGBAColor(0, 127, 255, 127)};
+static const RGBAColor kPriorityColors[] = {RGBAColor(0, 0, 255, 127), RGBAColor(63, 127, 255, 127),
+                                            RGBAColor(255, 255, 0, 127),
+                                            RGBAColor(255, 127, 0, 127), RGBAColor(255, 0, 0, 127)};
 
 void InputQueueDisplay::draw(RenderTarget& r) {
 	// Draw priority indicator
