@@ -47,8 +47,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      mines = "resource_coal",
-      mines_percent = 50,
       prohibited_till = 910
    },
 

@@ -1096,7 +1096,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian warehouse: Warehouse
             lore_author = pgettext("barbarians_building", "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the headquarters in the battle around the heights of Kal’Megarath"),
             -- TRANSLATORS: Purpose helptext for a barbarian warehouse: Warehouse
-            purpose = pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            purpose = pgettext("barbarians_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
       {
@@ -1492,8 +1492,6 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Granite Mine
             purpose = pgettext("barbarians_building", "Carves granite out of the rock in mountain terrain."),
             note = {
-               -- TRANSLATORS: Note helptext for a barbarian production site: Granite Mine
-               pgettext("barbarians_building","This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite."):bformat("5%"),
                -- TRANSLATORS: 'It' is a mine
                pgettext("barbarians_building", "It cannot be enhanced.")
             },
@@ -1512,8 +1510,6 @@ descriptions:new_tribe {
             },
             -- TRANSLATORS: Purpose helptext for production site: Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for production site: Coal Mine
-            note = pgettext("barbarians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal."):bformat("1/3"),
             -- TRANSLATORS: Performance helptext for production site: Coal Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce coal in 32.5 seconds on average.")
          }
@@ -1529,8 +1525,6 @@ descriptions:new_tribe {
             },
             -- TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for production site: Deep Coal Mine
-            note = pgettext("barbarians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal."):bformat("2/3"),
             -- TRANSLATORS: Performance helptext for production site: Deep Coal Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce coal in 19.5 seconds on average.")
          }
@@ -1546,8 +1540,6 @@ descriptions:new_tribe {
             },
             -- TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for production site: Deeper Coal Mine
-            note = pgettext("barbarians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more coal."):bformat("10%"),
             -- TRANSLATORS: Performance helptext for production site: Deeper Coal Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce coal in 14.4 seconds on average.")
          }
@@ -1561,8 +1553,6 @@ descriptions:new_tribe {
             lore_author = pgettext("barbarians_building", "Quote from an anonymous miner."),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Iron Mine
-            note = pgettext("barbarians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore."):bformat("1/3"),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Iron Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce iron ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
          }
@@ -1576,8 +1566,6 @@ descriptions:new_tribe {
             lore_author = pgettext("barbarians_building", "Quote from an anonymous miner."),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Deep Iron Mine
-            note = pgettext("barbarians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore."):bformat("2/3"),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Deep Iron Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce iron ore in 39.5 seconds on average.")
          }
@@ -1591,8 +1579,6 @@ descriptions:new_tribe {
             lore_author = pgettext("barbarians_building", "Quote from an anonymous miner."),
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Deeper Iron Mine
-            note = pgettext("barbarians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more iron ore."):bformat("10%"),
             -- TRANSLATORS: Performance helptext for a barbarian production site: Deeper Iron Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce iron ore in 17.6 seconds on average.")
          }
@@ -1606,8 +1592,6 @@ descriptions:new_tribe {
             lore_author = pgettext("barbarians_building", "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."),
             -- TRANSLATORS: Purpose helptext for production site: Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for production site: Gold Mine
-            note = pgettext("barbarians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore."):bformat("1/3"),
             -- TRANSLATORS: Performance helptext for production site: Gold Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce gold ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
          }
@@ -1621,8 +1605,6 @@ descriptions:new_tribe {
             lore_author = pgettext("barbarians_building", "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."),
             -- TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for production site: Deep Gold Mine
-            note = pgettext("barbarians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore."):bformat("2/3"),
             -- TRANSLATORS: Performance helptext for production site: Deep Gold Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce gold ore in 19.5 seconds on average.")
          }
@@ -1636,8 +1618,6 @@ descriptions:new_tribe {
             lore_author = pgettext("barbarians_building", "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."),
             -- TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for production site: Deeper Gold Mine
-            note = pgettext("barbarians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore."):bformat("10%"),
             -- TRANSLATORS: Performance helptext for production site: Deeper Gold Mine
             performance = pgettext("barbarians_building", "If the food supply is steady, this mine can produce gold ore in 18.5 seconds on average.")
          }
@@ -1692,9 +1672,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Sentry
             lore_author = pgettext("barbarians_building", "Boldreth,<br>about his time as young soldier"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Sentry
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Sentry
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
@@ -1705,9 +1685,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Barrier
             lore_author = pgettext("barbarians_building", "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Barrier
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Barrier
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 
@@ -1719,9 +1699,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Tower
             lore_author = pgettext("barbarians_building", "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
@@ -1732,9 +1712,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Fortress
             lore_author = pgettext("barbarians_building", "Berthron,<br>chief military adviser of Chat’Karuth"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Fortress
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Fortress
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
@@ -1745,9 +1725,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Citadel
             lore_author = pgettext("barbarians_building", "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Citadel
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Citadel
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 
