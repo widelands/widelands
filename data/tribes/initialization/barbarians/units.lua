@@ -1095,7 +1095,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian warehouse: Warehouse
             lore_author = pgettext("barbarians_building", "Berthron, chief military adviser of Chat’Karuth,<br>when they lost the headquarters in the battle around the heights of Kal’Megarath"),
             -- TRANSLATORS: Purpose helptext for a barbarian warehouse: Warehouse
-            purpose = pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            purpose = pgettext("barbarians_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
       {
@@ -1691,9 +1691,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Sentry
             lore_author = pgettext("barbarians_building", "Boldreth,<br>about his time as young soldier"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Sentry
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Sentry
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
@@ -1704,9 +1704,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Barrier
             lore_author = pgettext("barbarians_building", "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Barrier
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Barrier
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 
@@ -1718,9 +1718,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Tower
             lore_author = pgettext("barbarians_building", "Ballad ‘The Battle of Kal’mavrath’ by Hakhor the Bard"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
@@ -1731,9 +1731,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Fortress
             lore_author = pgettext("barbarians_building", "Berthron,<br>chief military adviser of Chat’Karuth"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Fortress
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Fortress
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
@@ -1744,9 +1744,9 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a barbarian military site: Citadel
             lore_author = pgettext("barbarians_building", "Colintan, chief planner of the Citadel of Adlen,<br>at its opening ceremony"),
             -- TRANSLATORS: Purpose helptext for a barbarian military site: Citadel
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("barbarians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a barbarian military site: Citadel
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("barbarians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 
