@@ -24,7 +24,7 @@ jobs:
       run: |
         echo "branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
         git config --global user.name "The Widelands Code Formatting Bot"
-        export ACTOR_NAME=${GITHUB_REPOSITORY%/*}
+        export ACTOR_NAME="${GITHUB_REPOSITORY%/*}"
         if [ "$ACTOR_NAME" == "widelands" ]
         then
           export ACTOR_NAME="bunnybot"
