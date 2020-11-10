@@ -43,7 +43,7 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
---    **military_capacity_script** = File path to the :ref:`military_capacity.lua <lua_tribes_tribes_military_capacity>` file.
+--    **military_capacity_script**: File path to the :ref:`military_capacity.lua <lua_tribes_tribes_military_capacity>` file.
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
 --    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
