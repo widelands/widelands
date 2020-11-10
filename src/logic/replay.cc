@@ -80,8 +80,7 @@ private:
 /**
  * Load the savegame part of the given replay and open the command log.
  */
-ReplayReader::ReplayReader(Game& game, const std::string& filename) {
-	replaytime_ = Time(0);
+ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime_(Time(0)) {
 
 	{
 		GameLoader gl(filename + kSavegameExtension, game);

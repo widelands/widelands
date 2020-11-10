@@ -136,9 +136,8 @@ uint32_t ReplayDeleter::try_to_delete(const std::vector<SavegameData>& to_be_del
 	// Failed deletions aren't a serious problem, we just catch the errors
 	// and keep track to notify the player.
 	uint32_t failed_deletions = 0;
-	bool failed;
 	for (const auto& delete_me : to_be_deleted) {
-		failed = false;
+		bool failed = false;
 		const std::string& file_to_be_deleted = delete_me.filename;
 		try {
 			g_fs->fs_unlink(file_to_be_deleted);

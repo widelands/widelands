@@ -131,7 +131,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 */
 int LuaPlayer::get_name(lua_State* L) {
 	Widelands::Game& game = get_game(L);
-	Widelands::Player& p = get(L, game);
+	const Widelands::Player& p = get(L, game);
 	lua_pushstring(L, p.get_name());
 	return 1;
 }
@@ -146,7 +146,7 @@ int LuaPlayer::get_name(lua_State* L) {
 */
 int LuaPlayer::get_allowed_buildings(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::Player& player = get(L, egbase);
+	const Widelands::Player& player = get(L, egbase);
 
 	lua_newtable(L);
 	for (Widelands::DescriptionIndex i = 0; i < egbase.descriptions().nr_buildings(); ++i) {
@@ -899,7 +899,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 */
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
-	Widelands::Game& game = get_game(L);
+	const Widelands::Game& game = get_game(L);
 	const Widelands::Descriptions& descriptions = game.descriptions();
 
 	const char* name = luaL_checkstring(L, 2);
@@ -1149,7 +1149,7 @@ void LuaObjective::__unpersist(lua_State* L) {
       :attr:`wl.game.Player.objectives` with :attr:`name` as key.
 */
 int LuaObjective::get_name(lua_State* L) {
-	Widelands::Objective& o = get(L, get_game(L));
+	const Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.name().c_str());
 	return 1;
 }
@@ -1159,7 +1159,7 @@ int LuaObjective::get_name(lua_State* L) {
       (RW) The line that is shown in the objectives menu
 */
 int LuaObjective::get_title(lua_State* L) {
-	Widelands::Objective& o = get(L, get_game(L));
+	const Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.descname().c_str());
 	return 1;
 }
@@ -1174,7 +1174,7 @@ int LuaObjective::set_title(lua_State* L) {
       (RW) The complete text of this objective. Can be Widelands Richtext.
 */
 int LuaObjective::get_body(lua_State* L) {
-	Widelands::Objective& o = get(L, get_game(L));
+	const Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.descr().c_str());
 	return 1;
 }
@@ -1189,7 +1189,7 @@ int LuaObjective::set_body(lua_State* L) {
       (RW) is this objective shown in the objectives menu
 */
 int LuaObjective::get_visible(lua_State* L) {
-	Widelands::Objective& o = get(L, get_game(L));
+	const Widelands::Objective& o = get(L, get_game(L));
 	lua_pushboolean(L, o.visible());
 	return 1;
 }
@@ -1208,7 +1208,7 @@ int LuaObjective::set_visible(lua_State* L) {
 
 */
 int LuaObjective::get_done(lua_State* L) {
-	Widelands::Objective& o = get(L, get_game(L));
+	const Widelands::Objective& o = get(L, get_game(L));
 	lua_pushboolean(L, o.done());
 	return 1;
 }
@@ -1432,7 +1432,7 @@ int LuaInboxMessage::__eq(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, Widelands::Game& game) {
+Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, const Widelands::Game& game) {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}
