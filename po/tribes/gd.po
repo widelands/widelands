@@ -1,66 +1,24 @@
 # Widelands PATH/TO/FILE.PO
 # Copyright (C) 2005-2020 Widelands Development Team
+# 
 # Translators:
 # GunChleoc, 2015-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2015
-# GunChleoc <fios@foramnagaidhlig.net>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
 "POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-11-10 12:15+0100\n"
-"Last-Translator: GunChleoc <fios@foramnagaidhlig.net>\n"
-"Language-Team: Fòram na Gàidhlig\n"
-"Language: gd\n"
+"PO-Revision-Date: 2020-10-12 15:27+0000\n"
+"Last-Translator: GunChleoc\n"
+"Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
-"(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Generator: Virtaal 0.7.1\n"
-
-#. TRANSLATORS: NOCOM %1% is the number of soldiers the plural refers to. %2% is the maximum number of soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:10
-msgctxt "barbarians_building"
-msgid "%1% soldier (+%2%)"
-msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1% saighdear (+%2%)"
-msgstr[1] "%1% shaighdear (+%2%)"
-msgstr[2] "%1% saighdearan (+%2%)"
-msgstr[3] "%1% saighdear(+%2%)"
-
-#. TRANSLATORS: Number of soldiers stationed at a militarysite.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:13
-msgctxt "barbarians_building"
-msgid "%1% soldier"
-msgid_plural "%1% soldiers"
-msgstr[0] "%1% saighdear"
-msgstr[1] "%1% shaighdear"
-msgstr[2] "%1% saighdearan"
-msgstr[3] "%1% saighdear"
-
-#. TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:18
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier (+%3%)"
-msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%) saighdear (+%3%)"
-msgstr[1] "%1%(+%2%) shaighdear (+%3%)"
-msgstr[2] "%1%(+%2%) saighdearan (+%3%)"
-msgstr[3] "%1%(+%2%) saighdear (+%3%)"
-
-#. TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently open soldier slots in the building.
-#: ../../data/tribes/initialization/barbarians/military_capacity.lua:21
-msgctxt "barbarians_building"
-msgid "%1%(+%2%) soldier"
-msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%) saighdear"
-msgstr[1] "%1%(+%2%) shaighdear"
-msgstr[2] "%1%(+%2%) saighdearan"
-msgstr[3] "%1%(+%2%) saighdear"
+"Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:114
