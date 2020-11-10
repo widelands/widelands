@@ -171,7 +171,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 								   type.c_str());
 							}
 							assert(oldidx != INVALID_INDEX);
-							building.old_buildings_.push_back(std::make_pair(oldidx, type == "building"));
+							building.old_buildings_.push_back(std::make_pair(oldidx, type != "immovable"));
 						}
 					} else {
 						while (fr.unsigned_8()) {
