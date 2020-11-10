@@ -30,13 +30,14 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "ui_basic/messagebox.h"
+#include "wui/interactive_base.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
 
 constexpr int kDesiredWidth = 216;
 
-EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
+EconomyOptionsWindow::EconomyOptionsWindow(InteractiveBase* parent,
                                            Widelands::Economy* ware_economy,
                                            Widelands::Economy* worker_economy,
                                            Widelands::WareWorker type,
@@ -64,7 +65,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiSecondary),
      time_last_thought_(0),
-     save_profile_dialog_(nullptr) {
+     save_profile_dialog_(nullptr),
+	 egbase_(&parent->egbase()) {
 	set_center_panel(&main_box_);
 
 	tabpanel_.add("wares", g_image_cache->get(pic_tab_wares), ware_panel_, _("Wares"));
@@ -166,7 +168,7 @@ EconomyOptionsWindow::~EconomyOptionsWindow() {
 	}
 }
 
-void EconomyOptionsWindow::create(UI::Panel* parent,
+void EconomyOptionsWindow::create(InteractiveBase* parent,
                                   const Widelands::Flag& flag,
                                   Widelands::WareWorker type,
                                   bool can_act) {
@@ -775,20 +777,20 @@ void EconomyOptionsWindow::save_targets() {
 
 void EconomyOptionsWindow::read_targets() {
 	predefined_targets_.clear();
-	const Widelands::Descriptions& descriptions = player_->egbase().descriptions();
+	Widelands::Descriptions* descriptions = egbase_->mutable_descriptions();
 	const Widelands::TribeDescr& tribe = player_->tribe();
 
 	{
 		PredefinedTargets t;
 		t.undeletable = true;
 		for (Widelands::DescriptionIndex di : tribe.wares()) {
-			const Widelands::WareDescr* descr = descriptions.get_ware_descr(di);
+			const Widelands::WareDescr* descr = descriptions->get_ware_descr(di);
 			if (descr->has_demand_check(tribe.name())) {
 				t.wares.insert(std::make_pair(di, descr->default_target_quantity(tribe.name())));
 			}
 		}
 		for (Widelands::DescriptionIndex di : tribe.workers()) {
-			const Widelands::WorkerDescr* descr = descriptions.get_worker_descr(di);
+			const Widelands::WorkerDescr* descr = descriptions->get_worker_descr(di);
 			if (descr->has_demand_check()) {
 				t.workers.insert(std::make_pair(di, descr->default_target_quantity()));
 			}
@@ -813,13 +815,14 @@ void EconomyOptionsWindow::read_targets() {
 			PredefinedTargets t;
 			while (Section::Value* v = section->get_next_val()) {
 				const std::string name(v->get_name());
-				Widelands::DescriptionIndex di = descriptions.ware_index(name);
-				if (di == Widelands::INVALID_INDEX) {
-					di = descriptions.worker_index(name);
-					assert(di != Widelands::INVALID_INDEX);
-					t.workers.insert(std::make_pair(di, v->get_natural()));
-				} else {
-					t.wares.insert(std::make_pair(di, v->get_natural()));
+				const std::pair<Widelands::WareWorker, Widelands::DescriptionIndex> wareworker = descriptions->load_ware_or_worker(name);
+				assert(wareworker.second != Widelands::INVALID_INDEX);
+				switch (wareworker.first) {
+				case Widelands::WareWorker::wwWARE:
+					t.wares.insert(std::make_pair(wareworker.second, v->get_natural()));
+					break;
+				case Widelands::WareWorker::wwWORKER:
+					t.workers.insert(std::make_pair(wareworker.second, v->get_natural()));
 				}
 			}
 			predefined_targets_.insert(std::make_pair(pair.second, t));

@@ -45,8 +45,9 @@ struct NoteEconomyProfile {
 	CAN_BE_SENT_AS_NOTE(NoteId::EconomyProfile)
 };
 
-struct EconomyOptionsWindow : public UI::Window {
-	EconomyOptionsWindow(UI::Panel* parent,
+class EconomyOptionsWindow : public UI::Window {
+public:
+	EconomyOptionsWindow(InteractiveBase* parent,
 	                     Widelands::Economy* ware_economy,
 	                     Widelands::Economy* worker_economy,
 	                     Widelands::WareWorker type,
@@ -62,7 +63,7 @@ struct EconomyOptionsWindow : public UI::Window {
 
 	// Create an economy options window for the given flag
 	static void
-	create(Panel* parent, const Widelands::Flag& flag, Widelands::WareWorker type, bool can_act);
+	create(InteractiveBase* parent, const Widelands::Flag& flag, Widelands::WareWorker type, bool can_act);
 	void activate_tab(Widelands::WareWorker type);
 
 	void create_target();
@@ -189,6 +190,7 @@ private:
 	void update_profiles_select(const std::string&);
 
 	SaveProfileWindow* save_profile_dialog_;
+	Widelands::EditorGameBase* egbase_; // Mutable for saveloading
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H
