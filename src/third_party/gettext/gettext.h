@@ -27,8 +27,9 @@
 DIAG_OFF("-Wreserved-id-macro")
 #include <libintl.h>
 DIAG_ON("-Wreserved-id-macro")
-#endif
+#else
 #include <libintl.h>
+#endif
 
 #ifdef __clang__
 #pragma clang diagnostic ignored "-Wunknown-pragmas"
