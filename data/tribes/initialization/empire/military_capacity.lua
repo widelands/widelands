@@ -12,10 +12,10 @@ return {
          end
       else
          if capacity > stationed then
-            -- TRANSLATORS: %1% is the Empire number of soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
+            -- TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building
             result = npgettext("empire_building", "%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed):bformat(present, (stationed - present), (capacity - stationed))
          else
-            -- TRANSLATORS: %1% is the Empire number of soldiers the plural refers to. %2% are currently open soldier slots in the building.
+            -- TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2% are currently open soldier slots in the building.
             result = npgettext("empire_building", "%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed):bformat(present, (stationed - present))
          end
       end

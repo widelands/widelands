@@ -373,7 +373,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
 
-	// Use Lua script to generate the capacity string for the given number os stationed and present soldiers.
+	// Use Lua script to generate the capacity string for the given number of stationed and present soldiers.
 	// The index is according to the conditions determined by the caller and ranges [0, kNoOfStatisticsStringCases - 1].
 	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
 		assert(idx < kNoOfStatisticsStringCases);
