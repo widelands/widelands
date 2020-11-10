@@ -3638,8 +3638,8 @@ int LuaWorkerDescription::get_becomes(lua_State* L) {
 */
 int LuaWorkerDescription::get_buildcost(lua_State* L) {
 	lua_newtable(L);
-	int index = 1;
 	if (get()->is_buildable()) {
+		int index = 1;
 		for (const auto& buildcost_pair : get()->buildcost()) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, buildcost_pair.first);
@@ -4497,7 +4497,7 @@ LuaMapObject::get(lua_State* L, Widelands::EditorGameBase& egbase, const std::st
 	}
 	return o;
 }
-Widelands::MapObject* LuaMapObject::get_or_zero(Widelands::EditorGameBase& egbase) {
+Widelands::MapObject* LuaMapObject::get_or_zero(const Widelands::EditorGameBase& egbase) {
 	return ptr_.get(egbase);
 }
 
@@ -7346,8 +7346,7 @@ int LuaField::has_caps(lua_State* L) {
 int LuaField::has_max_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-	lua_pushboolean(
-	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
+	lua_pushboolean(L, check_has_caps(L, query, f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
 }
 
