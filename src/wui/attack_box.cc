@@ -175,7 +175,6 @@ void AttackBox::update_attack(bool action_on_panel) {
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
-	attack_button_->set_enabled(soldiers_slider_->get_value() > 0);
 
 	soldiers_text_->set_text(slider_heading(soldiers_slider_->get_value()));
 

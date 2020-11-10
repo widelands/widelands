@@ -1690,9 +1690,9 @@ void CmdChangeSoldierCapacity::write(FileWrite& fw, EditorGameBase& egbase, MapO
 
 CmdEnemyFlagAction::CmdEnemyFlagAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
-	const uint32_t number_ = des.unsigned_32();
+	const uint32_t number = des.unsigned_32();
 	soldiers_.clear();
-	for (uint32_t i = 0; i < number_; ++i) {
+	for (uint32_t i = 0; i < number; ++i) {
 		soldiers_.push_back(des.unsigned_32());
 	}
 	allow_conquer_ = des.unsigned_8();

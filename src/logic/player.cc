@@ -1250,8 +1250,6 @@ void Player::enemyflagaction(const Flag& flag,
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
 		              attacker, player_number());
-	} else if (soldiers.empty()) {
-		log_warn_time(egbase().get_gametime(), "enemyflagaction: no soldiers given\n");
 	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
