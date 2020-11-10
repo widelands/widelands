@@ -34,20 +34,12 @@ enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	explicit BuildingHints(std::unique_ptr<LuaTable>);
+	explicit BuildingHints(std::unique_ptr<LuaTable>, const std::string& building_name);
 	~BuildingHints() {
 	}
 
 	std::set<std::string> supported_production() const {
 		return supported_production_;
-	}
-
-	bool has_mines() const {
-		return !mines_.empty();
-	}
-
-	char const* get_mines() const {
-		return mines_.c_str();
 	}
 
 	bool get_needs_water() const {
@@ -95,10 +87,6 @@ struct BuildingHints {
 		return forced_after_;
 	}
 
-	uint8_t get_mines_percent() const {
-		return mines_percent_;
-	}
-
 	int16_t get_ai_limit(AiType) const;
 
 	void set_trainingsites_max_percent(int percent);
@@ -106,7 +94,6 @@ struct BuildingHints {
 	uint8_t trainingsites_max_percent() const;
 
 private:
-	const std::string mines_;
 	const bool needs_water_;
 	const bool space_consumer_;
 	const bool expansion_;
@@ -118,7 +105,6 @@ private:
 	const int32_t prohibited_till_;
 	const uint32_t basic_amount_;
 	const int32_t forced_after_;
-	const int8_t mines_percent_;
 	const int16_t very_weak_ai_limit_;
 	const int16_t weak_ai_limit_;
 	const int16_t normal_ai_limit_;

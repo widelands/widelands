@@ -36,6 +36,9 @@
 #include "network/internet_gaming_messages.h"
 #include "network/internet_gaming_protocol.h"
 
+/// Max length of formatted time string
+const uint8_t kTimeFormatLength = 32;
+
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this
 /// will ensure
 /// that only one instance is running at time.
@@ -446,16 +449,17 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			format_and_add_chat("", "", true, _("For reporting bugs, visit:"));
 			format_and_add_chat("", "", true, "https://www.widelands.org/wiki/ReportingBugs/");
 			state_ = LOBBY;
-			// Append UTC time to login message to ease linking between client output and
-			// metaserver logs. The string returned by asctime is terminated by \n
-			const time_t now = time(nullptr);
-			log_info("InternetGaming: Client %s logged in at UTC %s", clientname_.c_str(),
-			         asctime(gmtime(&now)));
+			// Append UTC time to login message to ease linking between
+			// client output and metaserver logs.
+			char time_str[kTimeFormatLength];
+			format_time(time_str, kTimeFormatLength);
+			log_info("InternetGaming: Client %s logged in at UTC %s\n", clientname_.c_str(), time_str);
 			return;
 
 		} else if (cmd == IGPCMD_PWD_OK) {
-			const time_t now = time(nullptr);
-			log_info("InternetGaming: Password check successful at UTC %s", asctime(gmtime(&now)));
+			char time_str[kTimeFormatLength];
+			format_time(time_str, kTimeFormatLength);
+			log_info("InternetGaming: Password check successful at UTC %s\n", time_str);
 			state_ = LOBBY;
 			return;
 
@@ -1014,6 +1018,13 @@ bool InternetGaming::str2bool(const std::string& str) {
 /// \returns a string containing the boolean value \arg b to be send to metaserver
 std::string InternetGaming::bool2str(bool b) {
 	return b ? "true" : "false";
+}
+
+/// Formats the current time as string in \arg time_str of max \arg length
+void InternetGaming::format_time(char* time_str, uint8_t length) {
+	const time_t now = time(nullptr);
+	// Time format: Www Mmm dd yyyy hh:mm:ss
+	strftime(time_str, length, "%a %b %d %Y %H:%M:%S", gmtime(&now));
 }
 
 /// formates a chat message and adds it to the list of chat messages
