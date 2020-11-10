@@ -1063,8 +1063,7 @@ void FieldActionWindow::act_attack() {
 	if (upcast(Building, building, game->map().get_immovable(node_))) {
 		upcast(InteractivePlayer const, iaplayer, &ibase());
 		game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(),
-		                                  attack_box_->soldiers(),
-		                                  attack_box_->get_allow_conquer());
+		                                  attack_box_->soldiers(), attack_box_->get_allow_conquer());
 	}
 	reset_mouse_and_die();
 }
