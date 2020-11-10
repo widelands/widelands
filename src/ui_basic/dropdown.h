@@ -85,6 +85,8 @@ public:
 	/// \return true if an element has been selected from the list
 	bool has_selection() const;
 
+	void clear_selection();
+
 	/// Sets a label that will be prefixed to the currently selected element's name
 	/// and displayed on the display button.
 	void set_label(const std::string& text);
