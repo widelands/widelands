@@ -40,7 +40,7 @@
 
 namespace {
 constexpr size_t kNoOfStatisticsStringCases = 4;
-} // namespace
+}  // namespace
 
 namespace Widelands {
 
@@ -352,8 +352,8 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      next_swap_soldiers_time_(Time(0)),
      soldier_upgrade_try_(false),
      doing_upgrade_request_(false),
-	 // Initialize vector capacity for statistics string cache
-	 statistics_string_cache_(kNoOfStatisticsStringCases) {
+     // Initialize vector capacity for statistics string cache
+     statistics_string_cache_(kNoOfStatisticsStringCases) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
@@ -373,8 +373,9 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
 
-	// Use Lua script to generate the capacity string for the given number of stationed and present soldiers.
-	// The index is according to the conditions determined by the caller and ranges [0, kNoOfStatisticsStringCases - 1].
+	// Use Lua script to generate the capacity string for the given number of stationed and present
+	// soldiers. The index is according to the conditions determined by the caller and ranges [0,
+	// kNoOfStatisticsStringCases - 1].
 	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
 		assert(idx < kNoOfStatisticsStringCases);
 		auto it = statistics_string_cache_[idx].find(pres);
@@ -387,16 +388,17 @@ void MilitarySite::update_statistics_string(std::string* s) {
 				try {
 					LuaInterface lua;
 					std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
-						std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
-						cr->push_arg(pres);
-						cr->push_arg(stat);
-						cr->push_arg(capacity_);
-						cr->resume();
-						std::string new_string = cr->pop_string();
-						statistics_string_cache_[idx].insert(std::make_pair(stat, new_string));
-						return new_string;
+					std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+					cr->push_arg(pres);
+					cr->push_arg(stat);
+					cr->push_arg(capacity_);
+					cr->resume();
+					std::string new_string = cr->pop_string();
+					statistics_string_cache_[idx].insert(std::make_pair(stat, new_string));
+					return new_string;
 				} catch (LuaError& err) {
-					log_err("Failed to read soldier capacity for building '%s': %s", descr().name().c_str(), err.what());
+					log_err("Failed to read soldier capacity for building '%s': %s",
+					        descr().name().c_str(), err.what());
 					return std::string();
 				}
 			}
@@ -404,21 +406,24 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		return std::string();
 	};
 
-	// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v 1.0 and remove fallbacks to tribe-independent strings
+	// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v 1.0 and remove
+	// fallbacks to tribe-independent strings
 	if (present == stationed) {
 		if (capacity_ > stationed) {
 			*s = read_capacity_string(present, stationed, 0);
 			if (s->empty()) {
-				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum number of soldier slots in the building */
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
+				 * number of soldier slots in the building */
 				*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
-					  stationed % (capacity_ - stationed))
-						.str();
+				      stationed % (capacity_ - stationed))
+				        .str();
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 1);
 			if (s->empty()) {
 				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-				*s = (boost::format(ngettext("%1% soldier", "%1% soldiers", stationed)) % stationed).str();
+				*s = (boost::format(ngettext("%1% soldier", "%1% soldiers", stationed)) % stationed)
+				        .str();
 			}
 		}
 	} else {
@@ -426,18 +431,21 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			*s = read_capacity_string(present, stationed, 2);
 			if (s->empty()) {
 				*s = (boost::format(
-						 /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently open soldier slots in the building. %3% is the maximum number of soldier slots in the building */
-						 ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
-					  present % (stationed - present) % (capacity_ - stationed))
-						.str();
+				         /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
+				            currently open soldier slots in the building. %3% is the maximum number of
+				            soldier slots in the building */
+				         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
+				      present % (stationed - present) % (capacity_ - stationed))
+				        .str();
 			}
 		} else {
 			*s = read_capacity_string(present, stationed, 3);
 			if (s->empty()) {
-				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently open soldier slots in the building */
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
+				 * open soldier slots in the building */
 				*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
-					  present % (stationed - present))
-						.str();
+				      present % (stationed - present))
+				        .str();
 			}
 		}
 	}

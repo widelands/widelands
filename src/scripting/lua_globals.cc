@@ -250,7 +250,6 @@ static int L_pgettext(lua_State* L) {
 	return 1;
 }
 
-
 /* RST
 .. function:: npgettext(msgctxt, msgid, msgid_plural, n)
 
@@ -287,7 +286,6 @@ static int L_npgettext(lua_State* L) {
 	}
 	return 1;
 }
-
 
 /* RST
    .. function:: include(script)
@@ -343,7 +341,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"include", &L_include},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
-										  {"npgettext", &L_npgettext},
+                                          {"npgettext", &L_npgettext},
                                           {"set_textdomain", &L_set_textdomain},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
