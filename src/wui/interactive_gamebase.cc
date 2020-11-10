@@ -360,8 +360,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			if (code.sym == SDLK_KP_9 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
 				break;
 			}
-			increase_gamespeed(
-			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
+			increase_gamespeed((code.mod & KMOD_SHIFT) ?
+			                      kSpeedSlow :
+			                      (code.mod & KMOD_CTRL) ? kSpeedFast : kSpeedDefault);
 			return true;
 		case SDLK_PAUSE:
 			if (code.mod & KMOD_SHIFT) {
@@ -375,8 +376,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			if (code.sym == SDLK_KP_3 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
 				break;
 			}
-			decrease_gamespeed(
-			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
+			decrease_gamespeed((code.mod & KMOD_SHIFT) ?
+			                      kSpeedSlow :
+			                      (code.mod & KMOD_CTRL) ? kSpeedFast : kSpeedDefault);
 			return true;
 
 		case SDLK_c:

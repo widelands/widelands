@@ -8,6 +8,7 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "amazons",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {5, 35} },
@@ -1486,16 +1487,16 @@ descriptions:new_tribe {
          name = "amazons_patrol_post",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Patrol Post
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Patrol Post
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_treetop_sentry",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Treetop Sentry
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Treetop Sentry
             note = pgettext("amazons_building", "You can only build this building on top of a tree.")
          }
@@ -1504,45 +1505,45 @@ descriptions:new_tribe {
          name = "amazons_warriors_dwelling",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Warriors’ Dwelling
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Warriors’ Dwelling
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_tower",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_observation_tower",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Observation Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Observation Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_fortress",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Fortress
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Fortress
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "amazons_fortification",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon military site: Fortification
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("amazons_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an amazon military site: Fortification
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("amazons_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 

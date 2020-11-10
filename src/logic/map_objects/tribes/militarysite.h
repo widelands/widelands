@@ -187,6 +187,7 @@ private:
 	Time next_swap_soldiers_time_;
 	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_;
+	std::vector<std::map<int, std::string>> statistics_string_cache_;
 };
 }  // namespace Widelands
 

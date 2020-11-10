@@ -34,7 +34,7 @@ private:
 
 class ReplayLoader : public SavegameLoader {
 public:
-	ReplayLoader(Widelands::Game& game);
+	explicit ReplayLoader(Widelands::Game& game);
 
 private:
 	bool is_valid_gametype(const SavegameData& gamedata) const override;
@@ -43,7 +43,7 @@ private:
 
 class MultiPlayerLoader : public SavegameLoader {
 public:
-	MultiPlayerLoader(Widelands::Game& game);
+	explicit MultiPlayerLoader(Widelands::Game& game);
 
 private:
 	bool is_valid_gametype(const SavegameData& gamedata) const override;
@@ -51,7 +51,7 @@ private:
 
 class SinglePlayerLoader : public SavegameLoader {
 public:
-	SinglePlayerLoader(Widelands::Game& game);
+	explicit SinglePlayerLoader(Widelands::Game& game);
 
 private:
 	bool is_valid_gametype(const SavegameData& gamedata) const override;
@@ -59,7 +59,7 @@ private:
 
 class EverythingLoader : public SavegameLoader {
 public:
-	EverythingLoader(Widelands::Game& game);
+	explicit EverythingLoader(Widelands::Game& game);
 
 private:
 	bool is_valid_gametype(const SavegameData& gamedata) const override;
