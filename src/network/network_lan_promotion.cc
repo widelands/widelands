@@ -178,7 +178,7 @@ bool LanBase::is_open() {
 	return socket_v4.is_open() || socket_v6.is_open();
 }
 
-ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
+size_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
 	assert(buf != nullptr);
 	assert(addr != nullptr);
 	size_t recv_len = 0;
@@ -466,7 +466,7 @@ void LanGameFinder::run() {
 		NetGameInfo info;
 		NetAddress addr;
 
-		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info))) {
+		if (receive(&info, sizeof(info), &addr) < sizeof(info)) {
 			continue;
 		}
 

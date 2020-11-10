@@ -42,7 +42,9 @@
 #include <sys/types.h>
 #endif
 #include <sys/stat.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -454,6 +456,11 @@ template <typename Inserter>
 static void fs_tokenize(const std::string& path, char const filesep, Inserter components) {
 	std::string::size_type pos;   //  start of token
 	std::string::size_type pos2;  //  next filesep character
+
+	if (path.empty()) {
+		// Nothing to do
+		return;
+	}
 
 	// Extract the first path component
 	if (path.front() == filesep) {  // Is this an absolute path?
