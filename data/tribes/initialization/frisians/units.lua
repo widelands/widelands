@@ -1498,7 +1498,7 @@ descriptions:new_tribe {
          name = "frisians_warehouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian warehouse: Warehouse
-            purpose = pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            purpose = pgettext("frisians_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
       {
@@ -1684,7 +1684,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Aqua Farm
             lore_author = pgettext("frisians_building", "The fisherman who invented aqua farming"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Aqua Farm
-            purpose = pgettext("building", "Breeds fish as food for soldiers and miners."),
+            purpose = pgettext("frisians_building", "Breeds fish as food for soldiers and miners."),
             -- TRANSLATORS: Note helptext for a frisian production site: Aqua Farm
             note = pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay pit’s worker nearby to use as fishing ponds.")
          }
@@ -1760,7 +1760,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Small Armor Smithy
             lore_author = pgettext("frisians_building", "A blacksmith pointing out his influence on soldier training"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Small Armor Smithy
-            purpose = pgettext("building", "Produces basic weapons and helmets for the soldiers.")
+            purpose = pgettext("frisians_building", "Produces basic weapons and helmets for the soldiers.")
          }
       },
       {
@@ -1771,7 +1771,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Large Armor Smithy
             lore_author = pgettext("frisians_building", "A master blacksmith refusing to forge anything but the most sophisticated helmets and weapons"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Large Armor Smithy
-            purpose = pgettext("building", "Produces advanced weapons and golden helmets for the soldiers.")
+            purpose = pgettext("frisians_building", "Produces advanced weapons and golden helmets for the soldiers.")
          }
       },
       {
@@ -1819,7 +1819,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Smokery
             lore_author = pgettext("frisians_building", "A smoker explaining his profession"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Smokery
-            purpose = pgettext("building", "Smokes fish and meat using logs. Only smoked meat and fish are good enough to be eaten by miners and soldiers."),
+            purpose = pgettext("frisians_building", "Smokes fish and meat using logs. Only smoked meat and fish are good enough to be eaten by miners and soldiers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Smokery
             performance = pgettext("frisians_building", "The smokery needs %s on average to smoke two fish or two meat."):bformat(ngettext("%d second", "%d seconds", 46):bformat(46))
          }
@@ -1832,7 +1832,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Bakery
             lore_author = pgettext("frisians_building", "A baker"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Bakery
-            purpose = pgettext("building", "Bakes bread out of barley and water to feed miners and soldiers."),
+            purpose = pgettext("frisians_building", "Bakes bread out of barley and water to feed miners and soldiers."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Bakery
             performance = pgettext("frisians_building", "The bakery needs %s on average to produce one loaf of bread."):bformat(ngettext("%d second", "%d seconds", 40):bformat(40))
          }
@@ -1845,7 +1845,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Honey Bread Bakery
             lore_author = pgettext("frisians_building", "A trainer in conversation with a baker"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Honey Bread Bakery
-            purpose = pgettext("building", "Bakes honey bread out of barley, water and honey to feed miners in deep mines and soldiers in advanced training.")
+            purpose = pgettext("frisians_building", "Bakes honey bread out of barley, water and honey to feed miners in deep mines and soldiers in advanced training.")
          }
       },
       {
@@ -1856,7 +1856,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Brewery
             lore_author = pgettext("frisians_building", "A brewer boasting about the importance of his profession"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Brewery
-            purpose = pgettext("building", "Brews beer for miners and soldier training."),
+            purpose = pgettext("frisians_building", "Brews beer for miners and soldier training."),
             -- TRANSLATORS: Performance helptext for a frisian production site: Brewery
             performance = pgettext("frisians_building", "The brewery needs %s on average to brew one mug of beer."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
          }
@@ -1869,7 +1869,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Lore author helptext for a frisian production site: Mead Brewery
             lore_author = pgettext("frisians_building", "Slogan over a mead brewery"),
             -- TRANSLATORS: Purpose helptext for a frisian production site: Mead Brewery
-            purpose = pgettext("building", "Brews beer out of barley and water. It also brews mead, which is beer refined with honey. Mead is consumed by experienced soldiers.")
+            purpose = pgettext("frisians_building", "Brews beer out of barley and water. It also brews mead, which is beer refined with honey. Mead is consumed by experienced soldiers.")
          }
       },
       {
@@ -2061,54 +2061,54 @@ descriptions:new_tribe {
          name = "frisians_wooden_tower",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian military site: Wooden Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("frisians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a frisian military site: Wooden Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("frisians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "frisians_wooden_tower_high",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian military site: High Wooden Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("frisians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a frisian military site: High Wooden Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("frisians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "frisians_sentinel",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian military site: Sentinel
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("frisians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a frisian military site: Sentinel
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("frisians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "frisians_outpost",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian military site: Outpost
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("frisians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a frisian military site: Outpost
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("frisians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "frisians_tower",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian military site: Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("frisians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a frisian military site: Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("frisians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "frisians_fortress",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian military site: Fortress
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("frisians_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for a frisian military site: Fortress
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("frisians_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 
