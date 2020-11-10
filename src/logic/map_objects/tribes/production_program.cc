@@ -967,7 +967,8 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		descr->add_created_attribute(attribute_info);
 	}
 	for (const std::string& resourcename : workerprogram->collected_resources()) {
-		descr->add_collected_resource(resourcename);
+		// Workers always collect 100% of the resource, and then find no more
+		descr->add_collected_resource(resourcename, 100, 0);
 	}
 	for (const std::string& resourcename : workerprogram->created_resources()) {
 		descr->add_created_resource(resourcename);
@@ -1508,7 +1509,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	                                descriptions.get_resource_descr(resource_)->name();
 	descr->workarea_info_[workarea_].insert(description);
 
-	descr->add_collected_resource(arguments.front());
+	descr->add_collected_resource(arguments.front(), max_resources_, depleted_chance_);
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {

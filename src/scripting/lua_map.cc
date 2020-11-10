@@ -2677,20 +2677,51 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
    .. attribute:: collected_resources
 
       (RO) An array with :class:`ResourceDescription` containing the resources that
-      this building will collect from the map.
-      For example, a Fishers's House will collect the "fish" resource.
+      this building will collect from the map, along with the maximum percentage mined and the
+      chance to still find some more after depletion. For example, a Fishers's House will collect:
+
+      .. code-block:: lua
+
+       {
+            {
+               resource = <resource description for fish>,
+               yield = 100,
+               when_empty = 0
+            }
+         }
+
+      and a Barbarian Coal Mine will collect:
+
+      .. code-block:: lua
+
+         {
+            {
+               resource = <resource description for coal>,
+               yield = 33.33,
+               when_empty = 5
+            }
+         }
 */
 int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (const std::string& resource_name : get()->collected_resources()) {
+	for (const auto& resource_info : get()->collected_resources()) {
 		lua_pushint32(L, index++);
+		lua_newtable(L);
+		lua_pushstring(L, "resource");
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_name));
+		   egbase.descriptions().resource_index(resource_info.first));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
+		lua_pushstring(L, "yield");
+		lua_pushnumber(L, resource_info.second.max_percent / 100.0);
+		lua_settable(L, -3);
+		lua_pushstring(L, "when_empty");
+		lua_pushnumber(L, resource_info.second.depleted_chance / 100.0);
+		lua_settable(L, -3);
+		lua_settable(L, -3);
 	}
 	return 1;
 }

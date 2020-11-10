@@ -1944,8 +1944,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Rock Mine
             purpose = pgettext("building", "Digs granite out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Rock Mine
-            note = pgettext("frisians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any granite."):bformat("1/2"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Rock Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the rock mine can produce two blocks of granite in %s on average."):bformat(ngettext("%d second", "%d seconds", 85):bformat(85))
          }
@@ -1955,8 +1953,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Rock Mine
             purpose = pgettext("building", "Digs granite out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Deep Rock Mine
-            note = pgettext("frisians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more granite."):bformat("10%"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Rock Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the deep rock mine can produce three blocks of granite in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
@@ -1966,8 +1962,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Coal Mine
-            note = pgettext("frisians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any coal."):bformat("1/2"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Coal Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the coal mine can produce two pieces of coal in %s on average."):bformat(ngettext("%d second", "%d seconds", 85):bformat(85))
          }
@@ -1977,8 +1971,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
             purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Deep Coal Mine
-            note = pgettext("frisians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more coal."):bformat("10%"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Coal Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the deep coal mine can produce four pieces of coal in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
@@ -1988,8 +1980,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Iron Mine
-            note = pgettext("frisians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any iron ore."):bformat("1/2"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Iron Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the iron mine can produce one piece of iron ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
          }
@@ -1999,8 +1989,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Iron Mine
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Deep Iron Mine
-            note = pgettext("frisians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more iron ore."):bformat("10%"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Iron Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the deep iron mine can produce two pieces of iron ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
@@ -2010,8 +1998,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Gold Mine
-            note = pgettext("frisians_building", "This mine exploits only %s of the resource. From there on out, it will only have a 5%% chance of finding any gold ore."):bformat("1/2"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Gold Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the gold mine can produce one piece of gold ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 65):bformat(65))
          }
@@ -2021,8 +2007,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a frisian production site: Deep Gold Mine
             purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain."),
-            -- TRANSLATORS: Note helptext for a frisian production site: Deep Gold Mine
-            note = pgettext("frisians_building", "This mine exploits all of the resource down to the deepest level. But even after having done so, it will still have a %s chance of finding some more gold ore."):bformat("10%"),
             -- TRANSLATORS: Performance helptext for a frisian production site: Deep Gold Mine
             performance = pgettext("frisians_building", "If the food supply is steady, the deep gold mine can produce two pieces of gold ore in %s on average."):bformat(ngettext("%d second", "%d seconds", 76):bformat(76))
          }
