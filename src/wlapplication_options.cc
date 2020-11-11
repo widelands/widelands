@@ -284,14 +284,16 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 		return false;
 	}
 
-	const bool ctrl1 = code.mod & KMOD_CTRL;
-	const bool shift1 = code.mod & KMOD_SHIFT;
-	const bool alt1 = code.mod & KMOD_ALT;
+	const bool ctrl1 = key.mod & KMOD_CTRL;
+	const bool shift1 = key.mod & KMOD_SHIFT;
+	const bool alt1 = key.mod & KMOD_ALT;
+	const bool gui1 = key.mod & KMOD_GUI;
 	const bool ctrl2 = code.mod & KMOD_CTRL;
 	const bool shift2 = code.mod & KMOD_SHIFT;
 	const bool alt2 = code.mod & KMOD_ALT;
+	const bool gui2 = code.mod & KMOD_GUI;
 
-	return ctrl1 == ctrl2 && shift1 == shift2 && alt1 == alt2;
+	return ctrl1 == ctrl2 && shift1 == shift2 && alt1 == alt2 && gui1 == gui2;
 }
 
 std::string shortcut_string_for(const KeyboardShortcut id) {
@@ -308,6 +310,9 @@ std::string shortcut_string_for(const SDL_Keysym sym) {
 	}
 	if (sym.mod & KMOD_ALT) {
 		mods.push_back(pgettext("hotkey", "Alt"));
+	}
+	if (sym.mod & KMOD_GUI) {
+		mods.push_back(pgettext("hotkey", "GUI"));
 	}
 
 	std::string fmt;

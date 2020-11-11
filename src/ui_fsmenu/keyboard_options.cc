@@ -73,9 +73,22 @@ struct ShortcutChooser : public UI::Window {
 		if (!down) {
 			return false;
 		}
-		key = code;
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-		return true;
+		switch (code.sym) {
+		case SDLK_RCTRL:
+		case SDLK_RSHIFT:
+		case SDLK_RALT:
+		case SDLK_RGUI:
+		case SDLK_LCTRL:
+		case SDLK_LSHIFT:
+		case SDLK_LALT:
+		case SDLK_LGUI:
+			// ignore modifiers
+			return false;
+		default:
+			key = code;
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+			return true;
+		}
 	}
 };
 
