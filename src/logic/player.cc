@@ -659,7 +659,7 @@ Waterway* Player::build_waterway(const Path& path) {
 			return &Waterway::create(egbase(), *start, *end, path);
 		}
 		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
-					  static_cast<unsigned int>(player_number()));
+		              static_cast<unsigned int>(player_number()));
 	} else {
 		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
 		              static_cast<unsigned int>(player_number()));

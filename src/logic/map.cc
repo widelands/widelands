@@ -625,9 +625,9 @@ static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
 	}
 	// shrink, origin preserved
 	return old_coord < split_point ? old_coord :
-									 old_coord < split_point + old_dimension - new_dimension ?
-									 kInvalidCoords :
-									 old_coord + new_dimension - old_dimension;
+	                                 old_coord < split_point + old_dimension - new_dimension ?
+	                                 kInvalidCoords :
+	                                 old_coord + new_dimension - old_dimension;
 }
 
 void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {

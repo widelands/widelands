@@ -630,7 +630,7 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 			return new ProductionProgram::ActReturn::WorkersNeedExperience();
 		}
 		throw GameDataError("Expected not|economy|site|workers after '%s' but found '%s'",
-							(begin - 1)->c_str(), begin->c_str());
+		                    (begin - 1)->c_str(), begin->c_str());
 	} catch (const WException& e) {
 		throw GameDataError("Invalid condition. %s", e.what());
 	}

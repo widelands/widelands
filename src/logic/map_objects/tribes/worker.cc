@@ -2561,9 +2561,9 @@ void Worker::leavebuilding_update(Game& game, State& state) {
 	}
 
 	if (!start_task_movepath(
-		   game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
+	       game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(),
-			  "[leavebuilding]: outside of building, but failed to walk back to flag");
+		      "[leavebuilding]: outside of building, but failed to walk back to flag");
 		set_location(nullptr);
 		return pop_task(game);
 	}

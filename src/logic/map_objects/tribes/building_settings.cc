@@ -183,8 +183,7 @@ BuildingSettings* BuildingSettings::load(const Game& game, const TribeDescr& tri
 			result->read(game, fr);
 			return result;
 		}
-		throw UnhandledVersionError(
-		   "BuildingSettings_load", packet_version, kCurrentPacketVersion);
+		throw UnhandledVersionError("BuildingSettings_load", packet_version, kCurrentPacketVersion);
 	} catch (const WException& e) {
 		throw GameDataError("BuildingSettings_load: %s", e.what());
 	}
