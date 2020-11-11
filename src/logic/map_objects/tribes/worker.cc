@@ -2563,7 +2563,6 @@ void Worker::leavebuilding_update(Game& game, State& state) {
 		set_location(nullptr);
 		return pop_task(game);
 	}
-	return;
 }
 
 void Worker::leavebuilding_pop(Game& game, State& state) {
