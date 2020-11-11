@@ -326,9 +326,8 @@ static int L_npgettext(lua_State* L) {
 		report_error(L, "Call to npgettext with negative number %d", n);
 	}
 
-	const std::string td = current_textdomain(L);
-	if (!td.empty()) {
-		lua_pushstring(L, dnpgettext_expr(td.c_str(), msgctxt, msgid, msgid_plural, n));
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		lua_pushstring(L, dnpgettext_expr(td->first.c_str(), msgctxt, msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
 	}
