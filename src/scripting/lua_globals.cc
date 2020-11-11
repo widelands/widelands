@@ -26,8 +26,12 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "build_info.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "scripting/report_error.h"
@@ -120,8 +124,9 @@ static int L_string_bformat(lua_State* L) {
 
 using TextdomainInfo = std::pair<std::string, bool /* addon */>;
 static std::map<const lua_State*, std::vector<TextdomainInfo>> textdomains;
+
 /* RST
-   .. function:: push_textdomain(domain[, addon = false])
+   .. function:: push_textdomain(domain [, addon=false])
 
       Sets the textdomain for all further calls to :func:`_` until it is reset
       to the previous value using :func:`pop_textdomain`.
@@ -137,6 +142,7 @@ static int L_push_textdomain(lua_State* L) {
 	   std::make_pair(luaL_checkstring(L, 1), lua_gettop(L) > 1 && luaL_checkboolean(L, 2)));
 	return 0;
 }
+
 /* RST
    .. function:: pop_textdomain()
 
@@ -149,6 +155,7 @@ static int L_pop_textdomain(lua_State* L) {
 	textdomains.at(L).pop_back();
 	return 0;
 }
+
 /* RST
    .. function:: set_textdomain(domain)
 
@@ -156,13 +163,53 @@ static int L_pop_textdomain(lua_State* L) {
 */
 // TODO(Nordfriese): Delete after v1.0
 static int L_set_textdomain(lua_State* L) {
+	log_warn("set_textdomain is deprecated, use push_textdomain instead");
 	return L_push_textdomain(L);
 }
 
-static TextdomainInfo current_textdomain(const lua_State* L) {
+static const TextdomainInfo* current_textdomain(const lua_State* L) {
 	const auto it = textdomains.find(L);
-	return it == textdomains.end() || it->second.empty() ? TextdomainInfo("", false) :
-	                                                       it->second.back();
+	return it == textdomains.end() || it->second.empty() ? nullptr : &it->second.back();
+}
+
+constexpr uint16_t kCurrentPacketVersion = 1;
+void read_textdomain_stack(FileRead& fr, const lua_State* L) {
+	{
+		const auto it = textdomains.find(L);
+		if (it != textdomains.end()) {
+			it->second.clear();
+		}
+	}
+
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersion) {
+			for (size_t i = fr.unsigned_32(); i; --i) {
+				const std::string str = fr.string();
+				const bool a = fr.unsigned_8();
+				textdomains[L].push_back(std::make_pair(str, a));
+			}
+		} else {
+			throw Widelands::UnhandledVersionError(
+			   "read_textdomain_stack", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw Widelands::GameDataError("LuaGlobals::read_textdomain_stack: %s", e.what());
+	}
+}
+void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
+	fw.unsigned_16(kCurrentPacketVersion);
+
+	const auto it = textdomains.find(L);
+	if (it == textdomains.end()) {
+		fw.unsigned_32(0);
+	} else {
+		fw.unsigned_32(it->second.size());
+		for (const auto& pair : it->second) {
+			fw.string(pair.first);
+			fw.unsigned_8(pair.second ? 1 : 0);
+		}
+	}
 }
 
 /* RST
@@ -183,16 +230,9 @@ static TextdomainInfo current_textdomain(const lua_State* L) {
       :returns: The translated string.
 */
 static int L__(lua_State* L) {
-	const TextdomainInfo td = current_textdomain(L);
-
-	if (!td.first.empty()) {
-		if (td.second) {
-			i18n::AddOnTextdomain dom(td.first);
-			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
-		} else {
-			i18n::Textdomain dom(td.first);
-			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
-		}
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		i18n::Textdomain dom(td->first);
+		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	} else {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	}
@@ -223,9 +263,8 @@ static int L_ngettext(lua_State* L) {
 		report_error(L, "Call to ngettext with negative number %d", n);
 	}
 
-	const TextdomainInfo td = current_textdomain(L);
-	if (!td.first.empty()) {
-		lua_pushstring(L, dngettext(td.first.c_str(), msgid, msgid_plural, n));
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		lua_pushstring(L, dngettext(td->first.c_str(), msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
 	}
@@ -251,11 +290,46 @@ static int L_pgettext(lua_State* L) {
 	const char* msgctxt = luaL_checkstring(L, 1);
 	const char* msgid = luaL_checkstring(L, 2);
 
-	const TextdomainInfo td = current_textdomain(L);
-	if (!td.first.empty()) {
-		lua_pushstring(L, dpgettext_expr(td.first.c_str(), msgctxt, msgid));
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		lua_pushstring(L, dpgettext_expr(td->first.c_str(), msgctxt, msgid));
 	} else {
 		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
+	}
+	return 1;
+}
+
+/* RST
+.. function:: npgettext(msgctxt, msgid, msgid_plural, n)
+
+   A wrapper for the npgettext() function, needed for allowing multiple translations of the same
+   plural string according to context.
+
+   :arg msgctxt: a named context for this string for disambiguation
+   :type msgctxt: :class:`string`
+   :arg msgid: text to translate
+   :type msgid: :class:`string`
+   :arg msgid_plural: text to translate (plural)
+   :type msgid_plural: :class:`string`
+   :arg n: The number of elements.
+   :type n: An unsigned integer.
+
+   :returns: The translated string.
+*/
+// UNTESTED
+static int L_npgettext(lua_State* L) {
+	//  S: msgctxt msgid
+	const char* msgctxt = luaL_checkstring(L, 1);
+	const char* msgid = luaL_checkstring(L, 2);
+	const char* msgid_plural = luaL_checkstring(L, 3);
+	const int32_t n = luaL_checkint32(L, 4);
+	if (n < 0) {
+		report_error(L, "Call to npgettext with negative number %d", n);
+	}
+
+	if (const TextdomainInfo* td = current_textdomain(L)) {
+		lua_pushstring(L, dnpgettext_expr(td->first.c_str(), msgctxt, msgid, msgid_plural, n));
+	} else {
+		lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
 	}
 	return 1;
 }
@@ -314,6 +388,7 @@ const static struct luaL_Reg globals[] = {{"_", &L__},
                                           {"include", &L_include},
                                           {"ngettext", &L_ngettext},
                                           {"pgettext", &L_pgettext},
+                                          {"npgettext", &L_npgettext},
                                           {"set_textdomain", &L_set_textdomain},
                                           {"push_textdomain", &L_push_textdomain},
                                           {"pop_textdomain", &L_pop_textdomain},
