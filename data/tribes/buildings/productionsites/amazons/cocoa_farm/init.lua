@@ -70,7 +70,7 @@ descriptions:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext("amazons_building", "The cocoa farmer working at this cocoa farm has no cleared soil to plant his seeds."),
+      message = pgettext("amazons_building", "The cocoa farmer working at this cocoa farm has no cleared soil to plant her seeds."),
       productivity_threshold = 20
    },
 }
