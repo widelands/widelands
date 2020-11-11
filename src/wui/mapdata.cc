@@ -81,8 +81,8 @@ bool MapData::compare_names(const MapData& other) {
 	// The parent directory gets special treatment.
 	if (localized_name == parent_name() && maptype == MapData::MapType::kDirectory) {
 		return true;
-	} else if (other.localized_name == parent_name() &&
-	           other.maptype == MapData::MapType::kDirectory) {
+	}
+	if (other.localized_name == parent_name() && other.maptype == MapData::MapType::kDirectory) {
 		return false;
 	}
 
@@ -106,11 +106,14 @@ bool MapData::compare_names(const MapData& other) {
 	}
 
 	// If there is no width, we have a directory - we want them first.
-	if (!width && !other.width) {
+	if (!width) {
+		if (other.width) {
+			return true;
+		}
 		return this_name < other_name;
-	} else if (!width && other.width) {
-		return true;
-	} else if (width && !other.width) {
+	}
+
+	if (!other.width) {
 		return false;
 	}
 	return this_name < other_name;

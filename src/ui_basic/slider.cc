@@ -457,12 +457,12 @@ bool HorizontalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 		//  click on cursor
 		cursor_pressed(x);
 		return true;
-	} else if (y >= 0 && y < get_h() && x >= 0 && x < get_w()) {  //  click on bar
+	}
+	if (y >= 0 && y < get_h() && x >= 0 && x < get_w()) {  //  click on bar
 		bar_pressed(x, get_x_gap());
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 void HorizontalSlider::layout() {
@@ -525,14 +525,14 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 		//  click on cursor
 		cursor_pressed(y);
 		return true;
-	} else if (y >= get_y_gap() && y <= static_cast<int32_t>(get_h()) - get_y_gap() &&
-	           x >= get_x_gap() - 2 &&
-	           x < static_cast<int32_t>(get_w()) - get_x_gap() + 2) {  //  click on bar
+	}
+	if (y >= get_y_gap() && y <= static_cast<int32_t>(get_h()) - get_y_gap() &&
+	    x >= get_x_gap() - 2 &&
+	    x < static_cast<int32_t>(get_w()) - get_x_gap() + 2) {  //  click on bar
 		bar_pressed(y, get_y_gap());
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 DiscreteSlider::DiscreteSlider(Panel* const parent,
