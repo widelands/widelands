@@ -1498,7 +1498,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		}
 		break;
 
-	case HideOrRevealFieldMode::kHide:
+	case HideOrRevealFieldMode::kUnreveal:
 		if (!field.vision.is_revealed()) {
 			break;
 		}
@@ -1525,7 +1525,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		}
 		break;
 
-	case HideOrRevealFieldMode::kHideAndForget:
+	case HideOrRevealFieldMode::kHide:
 		if (field.vision.is_hidden()) {
 			break;
 		}

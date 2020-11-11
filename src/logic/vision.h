@@ -22,7 +22,7 @@
 
 namespace Widelands {
 
-enum class HideOrRevealFieldMode { kHide, kHideAndForget, kReveal };
+enum class HideOrRevealFieldMode { kReveal, kUnreveal, kHide };
 
 /// Simplified vision information reduced to 3 states.
 /// Do not change the order! It is stored in savegames.
@@ -43,6 +43,10 @@ enum class VisibleState {
 ///         vision.
 ///  2+n    if the player's buildings and workers currently see the node,
 ///         where n is the number of objects that can see the node.
+/// The 'override_' enum allows overriding the normal vision mechanism:
+///  kNormal   - no override
+///  kHidden   - the field is always kUnexplored
+///  kRevealed - the field is always kVisible
 struct Vision {
 public:
 	explicit Vision(const VisibleState vs) {
