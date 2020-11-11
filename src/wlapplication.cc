@@ -471,16 +471,26 @@ void WLApplication::run() {
 	} else if (game_type_ == GameType::kReplay) {
 		replay(nullptr);
 	} else if (game_type_ == GameType::kLoadGame) {
+		std::string error_message;
 		Widelands::Game game;
 		game.set_ai_training_mode(get_config_bool("ai_training", false));
 		try {
 			game.run_load_game(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
-			log_err("Game not loaded: Game data error: %s\n", e.what());
+			error_message = e.what();
 		} catch (const std::exception& e) {
-			log_err("Fatal exception: %s\n", e.what());
+			error_message = e.what();
 			emergency_save(game);
-			throw;
+		}
+		if (!error_message.empty()) {
+			messagetitle = _("Game data error");
+			message = (boost::format(_("Widelands could not load the file \"%s\". The file format "
+			                           "seems to be incompatible.")) %
+			           filename_.c_str())
+			             .str();
+			message = message + "\n" + error_message;
+			g_sh->change_music("menu");
+			mainmenu();
 		}
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
@@ -980,7 +990,14 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 
 		// Are we looking at an option at all?
 		if (opt.compare(0, 2, "--")) {
-			throw ParameterError();
+			if (argc == 2) {
+				// Special case of opening a savegame from file browser
+				// try loading argv as file
+				commandline_["loadgame"] = opt;
+				continue;
+			} else {
+				throw ParameterError();
+			}
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}
@@ -1030,19 +1047,22 @@ void WLApplication::handle_commandline_parameters() {
 		datadir_ = commandline_["datadir"];
 		commandline_.erase("datadir");
 	} else {
-		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
-		              INSTALL_DATADIR :
-		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+		if (is_absolute_path(INSTALL_DATADIR)) {
+			// Absolute install dir has precedence
+			datadir_ = INSTALL_DATADIR;
+		} else {
+			datadir_ = get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 #ifdef USE_XDG
-		// Overwrite with first folder found in XDG_DATA_DIRS
-		for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
-			RealFSImpl dir(datadir);
-			if (dir.is_directory(datadir + "/widelands")) {
-				datadir_ = datadir + "/widelands";
-				break;
+			// Overwrite relative dir with first folder found in XDG_DATA_DIRS
+			for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
+				RealFSImpl dir(datadir);
+				if (dir.is_directory(datadir + "/widelands")) {
+					datadir_ = datadir + "/widelands";
+					break;
+				}
 			}
-		}
 #endif
+		}
 	}
 	if (!is_absolute_path(datadir_)) {
 		try {
@@ -1164,10 +1184,7 @@ void WLApplication::handle_commandline_parameters() {
  * Run the main menu
  */
 void WLApplication::mainmenu() {
-	std::string messagetitle;
-	std::string message;
-
-	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
+	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(message.empty()));
 
 	for (;;) {
 		if (!message.empty()) {

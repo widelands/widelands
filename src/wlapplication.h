@@ -272,6 +272,10 @@ private:
 	/// Prevent toggling fullscreen on and off from flickering
 	uint32_t last_resolution_change_;
 
+	/// Content for popup error messagebox
+	std::string messagetitle;
+	std::string message;
+
 	/// Holds this process' one and only instance of WLApplication, if it was
 	/// created already. nullptr otherwise.
 	/// \note This is private on purpose. Read the class documentation.
