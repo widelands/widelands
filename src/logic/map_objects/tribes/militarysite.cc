@@ -1076,7 +1076,10 @@ std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings()
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
 	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	return std::move(settings);
 }
 
 // setters

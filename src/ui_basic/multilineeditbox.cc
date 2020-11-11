@@ -32,8 +32,9 @@ namespace {
 bool inline copy_paste_modifier() {
 #ifdef __APPLE__
 	return (SDL_GetModState() & KMOD_GUI);
-#endif
+#else
 	return (SDL_GetModState() & KMOD_CTRL);
+#endif
 }
 }  // namespace
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
