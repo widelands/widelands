@@ -30,11 +30,7 @@
 
 class MapDetailsBox : public UI::Box {
 public:
-	MapDetailsBox(Panel* parent,
-	              bool preconfigured,
-	              uint32_t standard_element_width,
-	              uint32_t standard_element_height,
-	              uint32_t padding);
+	MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding);
 	~MapDetailsBox() override = default;
 
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
@@ -43,13 +39,14 @@ public:
 	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(const std::function<void()>& action);
 
-	void force_new_dimensions(float scale, uint32_t standard_element_height, uint32_t i);
+	void force_new_dimensions(uint32_t width, uint32_t height);
 
 	// TODO(jmoerschbach): only used by multiplayer screen...
 	void set_map_description_text(const std::string& text);
 	void show_warning(const std::string& text);
 
 private:
+	int padding_;
 	bool preconfigured_;
 
 	UI::Textarea title_;
@@ -60,7 +57,7 @@ private:
 	UI::MultilineTextarea map_description_;
 	UI::SuggestedTeamsBox suggested_teams_box_;
 
-	void show_map_description(Widelands::Map& map, GameSettingsProvider* settings);
+	void show_map_description(const Widelands::Map& map, GameSettingsProvider* settings);
 	void show_map_description_savegame(const GameSettings& game_settings);
 	void show_map_name(const GameSettings& game_settings);
 };

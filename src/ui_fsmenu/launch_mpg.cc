@@ -40,6 +40,7 @@
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
+namespace FsMenu {
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
@@ -103,15 +104,15 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
                   "help",
                   0,
                   0,
-                  standard_element_height_,
-                  standard_element_height_,
+                  standard_height_,
+                  standard_height_,
                   UI::ButtonStyle::kFsMenuSecondary,
                   g_image_cache->get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_),
-     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
+     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, scale_factor * standard_height_),
+     chat_(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
      egbase_(egbase) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
@@ -123,8 +124,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	}
 	ok_.set_enabled(settings_->can_launch());
 
-	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add_space(kPadding);
+	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		if (s.action == NoteGameSettings::Action::kMap) {
@@ -143,18 +145,16 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	}
 }
 
-FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() = default;
-
 void FullscreenMenuLaunchMPG::layout() {
 	FullscreenMenuLaunchGame::layout();
-	// hardcode help button because it does not fit in any box, align it to the map button...
-	help_button_.set_size(standard_element_height_, standard_element_height_);
-	help_button_.set_pos(Vector2i(get_inner_w() - standard_element_height_, 0));
+	// hardcode help button because it does not fit in any box, place it in top right corner
+	help_button_.set_size(standard_height_, standard_height_);
+	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	mpsg_.set_max_size(0, individual_content_box.get_h() / 2);
+	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
 
-	mpsg_.force_new_dimensions(1.f, individual_content_box.get_w(),
-	                           individual_content_box.get_h() / 2, standard_element_height_);
+	mpsg_.force_new_dimensions(
+	   left_column_box_.get_w(), left_column_box_.get_h() / 2, scale_factor * standard_height_);
 
 	// set focus to chat input
 	chat_.focus_edit();
@@ -181,7 +181,7 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 
 /// Opens a popup window to select a map or saved game
 bool FullscreenMenuLaunchMPG::clicked_select_map() {
-	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_w() / 3, get_h() / 4);
+	MapOrSaveSelectionWindow selection_window(&fsmm_, ctrl_, get_w() / 3, get_h() / 4);
 	auto result = selection_window.run<MenuTarget>();
 	assert(result == MenuTarget::kNormalGame || result == MenuTarget::kScenarioGame ||
 	       result == MenuTarget::kBack);
@@ -351,11 +351,9 @@ void FullscreenMenuLaunchMPG::refresh() {
 			// We do not validate the scripts for the client - it's only a label.
 			std::unique_ptr<LuaTable> t = lua_->run_script(settings_->get_win_condition_script());
 			t->do_not_warn_about_unaccessed_keys();
-			if (t) {
-				i18n::Textdomain td("win_conditions");
-				win_condition_dropdown_.set_label(_(t->get_string("name")));
-				win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
-			}
+			i18n::Textdomain td("win_conditions");
+			win_condition_dropdown_.set_label(_(t->get_string("name")));
+			win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
@@ -484,3 +482,4 @@ void FullscreenMenuLaunchMPG::help_clicked() {
 	                              _("Multiplayer Game Setup"));
 	help.run<UI::Panel::Returncodes>();
 }
+}  // namespace FsMenu

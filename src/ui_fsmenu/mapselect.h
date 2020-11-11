@@ -23,18 +23,18 @@
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
-#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/menu.h"
 #include "wui/mapdetails.h"
 #include "wui/maptable.h"
 
 using Widelands::Map;
 class GameController;
 struct GameSettingsProvider;
-
+namespace FsMenu {
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-class FullscreenMenuMapSelect : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuMapSelect : public TwoColumnsFullNavigationMenu {
 public:
 	FullscreenMenuMapSelect(FullscreenMenuMain&,
 	                        GameSettingsProvider*,
@@ -46,12 +46,10 @@ public:
 
 protected:
 	void clicked_ok() override;
-	void entry_selected() override;
-	void fill_table() override;
+	void entry_selected();
+	void fill_table();
 
 private:
-	void layout() override;
-
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);
@@ -62,10 +60,6 @@ private:
 	void tagbox_changed(int32_t, bool);
 	void clear_filter();
 	void rebuild_balancing_dropdown();
-
-	int32_t const checkbox_space_;
-	const int checkbox_padding_;
-	int32_t checkboxes_y_;
 
 	UI::Box checkboxes_;
 
@@ -100,5 +94,5 @@ private:
 
 	bool update_map_details_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_MAPSELECT_H

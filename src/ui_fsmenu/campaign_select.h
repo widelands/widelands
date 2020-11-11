@@ -23,12 +23,13 @@
 #include "ui_basic/table.h"
 #include "ui_fsmenu/campaigndetails.h"
 #include "ui_fsmenu/campaigns.h"
-#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/menu.h"
 
+namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign
  */
-class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
+class FullscreenMenuCampaignSelect : public TwoColumnsFullNavigationMenu {
 public:
 	FullscreenMenuCampaignSelect(FullscreenMenuMain&, Campaigns* campvis);
 
@@ -36,12 +37,10 @@ public:
 
 protected:
 	void clicked_ok() override;
-	void entry_selected() override;
-	void fill_table() override;
+	void entry_selected();
+	void fill_table();
 
 private:
-	void layout() override;
-
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 
@@ -53,5 +52,5 @@ private:
 
 	Campaigns* campaigns_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

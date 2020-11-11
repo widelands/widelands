@@ -52,7 +52,7 @@ struct Duration {
 		if (!is_valid()) {
 			throw wexception("Attempt to divide invalid Duration");
 		}
-		if (d <= 0) {
+		if (d == 0) {
 			throw wexception("Attempt to divide Duration by zero");
 		}
 		value_ /= d;
@@ -84,7 +84,7 @@ struct Duration {
 		if (!is_valid()) {
 			throw wexception("Attempt to divide invalid Duration");
 		}
-		if (d <= 0) {
+		if (d == 0) {
 			throw wexception("Attempt to divide Duration by zero");
 		}
 		return Duration(get() / d);

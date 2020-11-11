@@ -50,8 +50,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      mines = "resource_gold",
-      mines_percent = 30,
       prohibited_till = 1200
    },
 
