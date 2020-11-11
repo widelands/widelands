@@ -141,9 +141,7 @@ public:
 		} else {
 			override_ = Override::kNormal;
 		}
-		if (value_ < 2) {
-			value_ = 2;
-		}
+		value_ = std::max(value_, uint16_t(2));
 	}
 	void set_hidden(const bool hide) {
 		if (hide == is_hidden()) {
