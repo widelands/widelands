@@ -31,13 +31,17 @@ constexpr int8_t kButtonSize = 25;
 static size_t priority_to_index(const Widelands::WarePriority& priority) {
 	if (priority == Widelands::WarePriority::kVeryLow) {
 		return 0;
-	} else if (priority == Widelands::WarePriority::kLow) {
+	}
+	if (priority == Widelands::WarePriority::kLow) {
 		return 1;
-	} else if (priority == Widelands::WarePriority::kNormal) {
+	}
+	if (priority == Widelands::WarePriority::kNormal) {
 		return 2;
-	} else if (priority == Widelands::WarePriority::kHigh) {
+	}
+	if (priority == Widelands::WarePriority::kHigh) {
 		return 3;
-	} else if (priority == Widelands::WarePriority::kVeryHigh) {
+	}
+	if (priority == Widelands::WarePriority::kVeryHigh) {
 		return 4;
 	}
 	// TODO(Nordfriese): For savegame compatibility. Replace with NEVER_HERE() after v1.0

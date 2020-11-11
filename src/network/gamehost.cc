@@ -995,7 +995,6 @@ int32_t GameHost::check_client(const std::string& name) {
 
 	// Search for the client
 	uint16_t i = 0;
-	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
 		const UserSettings& user = d->settings.users.at(i);
 		if (user.position == UserSettings::not_connected()) {
@@ -1007,6 +1006,7 @@ int32_t GameHost::check_client(const std::string& name) {
 		}
 	}
 	if (i < d->settings.users.size()) {
+		uint32_t client = 0;
 		for (; client < d->clients.size(); ++client) {
 			if (d->clients.at(client).usernum == static_cast<int16_t>(i)) {
 				break;
@@ -1461,7 +1461,7 @@ void GameHost::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shar
 		return;
 	}
 
-	PlayerSettings& sharedplr = d->settings.players.at(shared - 1);
+	const PlayerSettings& sharedplr = d->settings.players.at(shared - 1);
 	assert(PlayerSettings::can_be_shared(sharedplr.state));
 	assert(d->settings.is_shared_usable(number, shared));
 
@@ -1613,7 +1613,7 @@ void GameHost::set_paused(bool /* paused */) {
 }
 
 // Send the packet to all properly connected clients
-void GameHost::broadcast(SendPacket& packet) {
+void GameHost::broadcast(const SendPacket& packet) {
 	std::vector<NetHostInterface::ConnectionId> receivers;
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
@@ -2263,7 +2263,7 @@ void GameHost::handle_hello(uint32_t const client_num,
 	welcome_client(client_num, clientname);
 }
 
-void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
+void GameHost::handle_changetribe(const Client& client, RecvPacket& r) {
 	//  Do not be harsh about packets of this type arriving out of order -
 	//  the client might just have had bad luck with the timing.
 	if (!d->game) {
@@ -2278,7 +2278,7 @@ void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
 }
 
 /** Handle changed sharing of clients by users */
-void GameHost::handle_changeshared(Client& client, RecvPacket& r) {
+void GameHost::handle_changeshared(const Client& client, RecvPacket& r) {
 	//  Do not be harsh about packets of this type arriving out of order -
 	//  the client might just have had bad luck with the timing.
 	if (!d->game) {
@@ -2290,7 +2290,7 @@ void GameHost::handle_changeshared(Client& client, RecvPacket& r) {
 	}
 }
 
-void GameHost::handle_changeteam(Client& client, RecvPacket& r) {
+void GameHost::handle_changeteam(const Client& client, RecvPacket& r) {
 	if (!d->game) {
 		uint8_t num = r.unsigned_8();
 		if (num != client.playernum) {
@@ -2300,7 +2300,7 @@ void GameHost::handle_changeteam(Client& client, RecvPacket& r) {
 	}
 }
 
-void GameHost::handle_changeinit(Client& client, RecvPacket& r) {
+void GameHost::handle_changeinit(const Client& client, RecvPacket& r) {
 	if (!d->game) {
 		// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
 		// sending when a player changes slot. So, keeping the access to the client off for now.
@@ -2313,7 +2313,7 @@ void GameHost::handle_changeinit(Client& client, RecvPacket& r) {
 	}
 }
 
-void GameHost::handle_changeposition(Client& client, RecvPacket& r) {
+void GameHost::handle_changeposition(const Client& client, RecvPacket& r) {
 	if (!d->game) {
 		uint8_t const pos = r.unsigned_8();
 		switch_to_player(client.usernum, pos);

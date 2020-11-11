@@ -69,7 +69,8 @@ void GameObjectivesMenu::think() {
 					list.add(obj.descname(), obj);
 				}
 				break;
-			} else if (&list[j] == &obj) {  //  the objective is in our list
+			}
+			if (&list[j] == &obj) {  //  the objective is in our list
 				if (!should_show) {
 					list.remove(j);
 				} else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {

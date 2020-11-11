@@ -376,7 +376,7 @@ private:
 
 	/// A horizontal menu bar embellished with background graphics
 	struct Toolbar : UI::Panel {
-		Toolbar(UI::Panel* parent);
+		explicit Toolbar(UI::Panel* parent);
 
 		/// Sets the actual size and position of the toolbar
 		void finalize();

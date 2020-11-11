@@ -104,6 +104,19 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                 panel_style_,
                 panel_style_ == UI::PanelStyle::kWui ? UI::ButtonStyle::kWuiSecondary :
                                                        UI::ButtonStyle::kFsMenuSecondary),
+     terrains_distribution_(&box_,
+                            "terrains_distribution",
+                            0,
+                            0,
+                            box_width_,
+                            8,
+                            label_height_,
+                            _("Terrain Distribution"),
+                            UI::DropdownType::kTextual,
+                            panel_style_,
+                            panel_style_ == UI::PanelStyle::kWui ?
+                               UI::ButtonStyle::kWuiSecondary :
+                               UI::ButtonStyle::kFsMenuSecondary),
      // Terrain
      waterval_(20),
      landval_(60),
@@ -246,6 +259,19 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	box_.add(&resources_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
 
+	// Terrains Distribution
+
+	terrains_distribution_.add(_("Default"), TerrainDistribution::kDefault, nullptr, true);
+	terrains_distribution_.add(_("Alpine"), TerrainDistribution::kAlpine);
+	terrains_distribution_.add(_("Atoll"), TerrainDistribution::kAtoll);
+	terrains_distribution_.add(_("Wasteland"), TerrainDistribution::kWasteland);
+	terrains_distribution_.add(_("Random"), TerrainDistribution::kRandom);
+
+	select_terrains_distribution();
+	terrains_distribution_.selected.connect([this]() { select_terrains_distribution(); });
+	box_.add(&terrains_distribution_, UI::Box::Resizing::kExpandBoth);
+	box_.add_space(margin_);
+
 	// ---------- Water -----------
 	water_.get_buttons()[0]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
 	water_.get_buttons()[1]->sigclicked.connect([this]() { button_clicked(ButtonId::kWater); });
@@ -273,11 +299,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
 	mountains_box_.add(&mountains_label_);
 
 	// Convince the value label to align with the spinbox labels above
-	mountains_box_.add_space(box_width_ - box_width_ / 6 - mountains_label_.get_w() -
-	                         mountains_.get_w() + margin_ + 3);
-	mountains_.set_fixed_width(box_width_ / 3 - margin_);
+	mountains_box_.add_inf_space();
+	mountains_.set_fixed_width(box_width_ / 3);
 	mountains_box_.add(&mountains_);
-	mountains_box_.set_size(box_width_, mountains_label_.get_h());
 
 	box_.add(&mountains_box_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(margin_);
@@ -367,14 +391,17 @@ static size_t find_dimension_index(int32_t value) {
 void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
 	case ButtonId::kWater:
+		terrains_distribution_.clear_selection();
 		waterval_ = water_.get_value();
 		normalize_landmass(n);
 		break;
 	case ButtonId::kLand:
+		terrains_distribution_.clear_selection();
 		landval_ = land_.get_value();
 		normalize_landmass(n);
 		break;
 	case ButtonId::kWasteland:
+		terrains_distribution_.clear_selection();
 		wastelandval_ = wasteland_.get_value();
 		normalize_landmass(n);
 		break;
@@ -447,6 +474,77 @@ void MainMenuNewRandomMap::normalize_landmass(ButtonId clicked_button) {
 	land_.set_value(landval_);
 	wasteland_.set_value(wastelandval_);
 	mountains_.set_text((boost::format(_("%i %%")) % mountainsval_).str());
+}
+
+void MainMenuNewRandomMap::select_terrains_distribution() {
+	switch (terrains_distribution_.get_selected()) {
+	case TerrainDistribution::kDefault:
+		waterval_ = 20;
+		landval_ = 55;
+		wastelandval_ = 5;
+		mountainsval_ = 20;
+		break;
+	case TerrainDistribution::kAlpine:
+		waterval_ = 10;
+		landval_ = 35;
+		wastelandval_ = 5;
+		mountainsval_ = 50;
+		break;
+	case TerrainDistribution::kAtoll:
+		waterval_ = 50;
+		landval_ = 30;
+		wastelandval_ = 5;
+		mountainsval_ = 15;
+		break;
+	case TerrainDistribution::kWasteland:
+		waterval_ = 15;
+		landval_ = 35;
+		wastelandval_ = 35;
+		mountainsval_ = 15;
+		break;
+	case TerrainDistribution::kRandom: {
+		// Decide the values randomly (within reasonable intervals)
+
+		waterval_ = 5 + 5 * (std::rand() % 7);       // [ 5, 35], NOLINT
+		landval_ = 15 + 5 * (std::rand() % 6);       // [15, 40], NOLINT
+		mountainsval_ = 10 + 5 * (std::rand() % 6);  // [10, 35], NOLINT
+
+		unsigned sum = waterval_ + landval_ + mountainsval_;
+		assert(sum % 5 == 0);
+		assert(sum >= 30);
+		assert(sum <= 110);
+
+		while (sum < 50) {
+			if (landval_ < mountainsval_) {
+				landval_ += 5;
+			} else if (waterval_ < landval_) {
+				waterval_ += 5;
+			} else {
+				mountainsval_ += 5;
+			}
+			sum = waterval_ + landval_ + mountainsval_;
+		}
+
+		while (sum > 100) {
+			if (landval_ > mountainsval_) {
+				landval_ -= 5;
+			} else if (waterval_ > landval_) {
+				waterval_ -= 5;
+			} else {
+				mountainsval_ -= 5;
+			}
+			sum = waterval_ + landval_ + mountainsval_;
+		}
+
+		wastelandval_ = 100 - sum;
+	} break;
+	default:
+		NEVER_HERE();
+	}
+
+	assert(waterval_ + landval_ + wastelandval_ + mountainsval_ == 100);
+	normalize_landmass(ButtonId::kNone);  // update spinboxes
+	nr_edit_box_changed();
 }
 
 bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
@@ -585,6 +683,8 @@ void MainMenuNewRandomMap::id_edit_box_changed() {
 		std::stringstream sstrm;
 		sstrm << map_info.mapNumber;
 		map_number_edit_.set_text(sstrm.str());
+
+		terrains_distribution_.select(TerrainDistribution::kCustom);
 
 		map_size_box_.select_width(map_info.w);
 		map_size_box_.select_height(map_info.h);

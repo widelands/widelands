@@ -219,7 +219,8 @@ static bool allow_muting(const Widelands::BuildingDescr& d) {
 	if (d.type() == Widelands::MapObjectType::MILITARYSITE ||
 	    d.type() == Widelands::MapObjectType::WAREHOUSE) {
 		return true;
-	} else if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
+	}
+	if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
 		return !p->out_of_resource_message().empty() || !p->resource_not_needed_message().empty();
 	}
 	return false;

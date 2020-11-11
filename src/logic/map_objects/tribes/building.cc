@@ -66,7 +66,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhancement_(INVALID_INDEX),
      enhanced_from_(INVALID_INDEX),
      enhanced_building_(false),
-     hints_(table.get_table("aihints")),
+     hints_(table.get_table("aihints"), name()),
      vision_range_(0) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", name().c_str());

@@ -386,7 +386,8 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 	assert(descr.type() != Widelands::MapObjectType::DISMANTLESITE);
 	if (descr.get_ismine()) {
 		return BuildingTab::Mines;
-	} else if (descr.get_isport()) {
+	}
+	if (descr.get_isport()) {
 		return BuildingTab::Ports;
 	} else {
 		switch (descr.get_size()) {

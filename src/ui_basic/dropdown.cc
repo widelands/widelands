@@ -303,6 +303,11 @@ bool BaseDropdown::has_selection() const {
 	return list_->has_selection();
 }
 
+void BaseDropdown::clear_selection() {
+	list_->select(BaseListselect::no_selection_index());
+	update();
+}
+
 uint32_t BaseDropdown::get_selected() const {
 	assert(has_selection());
 	return list_->get_selected();

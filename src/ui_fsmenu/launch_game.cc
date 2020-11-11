@@ -155,19 +155,19 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
 		win_condition_dropdown_.set_label(_("Scenario"));
 		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
 		return true;
-	} else if (settings_->settings().savegame) {
+	}
+	if (settings_->settings().savegame) {
 		win_condition_dropdown_.set_enabled(false);
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
 		win_condition_dropdown_.set_tooltip(
 		   _("The game is a saved game – the win condition was set before."));
 		return true;
-	} else {
-		win_condition_dropdown_.set_enabled(settings_->can_change_map());
-		win_condition_dropdown_.set_label("");
-		win_condition_dropdown_.set_tooltip("");
-		return false;
 	}
+	win_condition_dropdown_.set_enabled(settings_->can_change_map());
+	win_condition_dropdown_.set_label("");
+	win_condition_dropdown_.set_tooltip("");
+	return false;
 }
 
 /**
@@ -201,10 +201,9 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
 			if (t) {
 				break;
-			} else {
-				last_win_condition_ = win_condition_script;
-				t = win_condition_if_valid(last_win_condition_, tags);
 			}
+			last_win_condition_ = win_condition_script;
+			t = win_condition_if_valid(last_win_condition_, tags);
 		}
 
 		// Now fill the dropdown.

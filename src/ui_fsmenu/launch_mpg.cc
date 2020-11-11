@@ -355,11 +355,9 @@ void FullscreenMenuLaunchMPG::refresh() {
 			// We do not validate the scripts for the client - it's only a label.
 			std::unique_ptr<LuaTable> t = lua_->run_script(settings_->get_win_condition_script());
 			t->do_not_warn_about_unaccessed_keys();
-			if (t) {
-				i18n::Textdomain td("win_conditions");
-				win_condition_dropdown_.set_label(_(t->get_string("name")));
-				win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
-			}
+			i18n::Textdomain td("win_conditions");
+			win_condition_dropdown_.set_label(_(t->get_string("name")));
+			win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(

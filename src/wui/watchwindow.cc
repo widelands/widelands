@@ -312,9 +312,9 @@ WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coo
 		}
 		g_watch_window->add_view(coords);
 		return g_watch_window;
-	} else {
-		auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
-		window->add_view(coords);
-		return window;
 	}
+
+	auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
+	window->add_view(coords);
+	return window;
 }

@@ -92,18 +92,18 @@ void MultilineTextarea::recompute() {
 		int height = 0;
 		if (!text_.empty()) {
 			// Ensure we have a text width. Simply overflow if there is no width available.
-			const int text_width = std::max(10, get_eff_w() - 2 * kRichtextMargin);
-			assert(text_width > 0);
+			const int txt_width = std::max(10, get_eff_w() - 2 * kRichtextMargin);
+			assert(txt_width > 0);
 
 			if (!is_richtext(text_)) {
 				text_ = make_richtext();
 			}
 			try {
-				rendered_text_ = UI::g_fh->render(text_, text_width);
+				rendered_text_ = UI::g_fh->render(text_, txt_width);
 			} catch (const std::exception& e) {
 				log_warn("Error rendering richtext: %s. Text is:\n%s\n", e.what(), text_.c_str());
 				text_ = make_richtext();
-				rendered_text_ = UI::g_fh->render(text_, text_width);
+				rendered_text_ = UI::g_fh->render(text_, txt_width);
 			}
 			height = rendered_text_->height();
 		}

@@ -1855,7 +1855,11 @@ void Worker::buildingwork_update(Game& game, State& state) {
  * is finished.
  */
 void Worker::update_task_buildingwork(Game& game) {
-	if (top_state().task == &taskBuildingwork) {
+	// After the worker is evicted and 'taskBuildingwork' is popped from the stack but before
+	// `taskLeavebuilding` is started, there is a brief window of time where this function can
+	// still be called, so we need to take into account that 'state' may be 'nullptr' here.
+	const State* const state = get_state();
+	if (state && state->task == &taskBuildingwork) {
 		send_signal(game, "update");
 	}
 }
@@ -2160,7 +2164,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 		}
 	}
 
-	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+	if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		delete supply_;
 		supply_ = nullptr;
 
@@ -2419,7 +2423,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 	}
 
 	// We're back!
-	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+	if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		schedule_incorporate(game);
 		return;
 	}
