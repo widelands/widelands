@@ -22,6 +22,7 @@
 
 // Make sure that Visual C++ does not bark at __attribute__.
 #ifdef _MSC_VER
+#include <cinttypes>
 #ifndef __attribute__
 #define __attribute__(x)
 #endif
