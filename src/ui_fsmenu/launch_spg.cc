@@ -233,8 +233,7 @@ void LaunchSPG::clicked_ok() {
 		WLApplication::emergency_save(capsule_.menu(), *game_, e.what(), playernumber);
 	}
 
-	capsule_.menu().set_labels();  // Update the Continue button in case a new savegame was created
-	die();
+	return_to_main_menu();
 }
 
 void LaunchSPG::layout() {

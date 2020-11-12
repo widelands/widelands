@@ -51,6 +51,10 @@ private:
 protected:
 	void layout() override;
 
+	// Hides the parent window, deleting this panel immediately.
+	// The main menu's Continue buttons are updated in case a new savegame or map was created.
+	void return_to_main_menu();
+
 	UI::Box main_box_, header_box_;
 	uint32_t standard_height_;
 	MenuCapsule& capsule_;

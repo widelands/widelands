@@ -26,12 +26,15 @@
 #include "graphic/image_cache.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_fsmenu/campaigns.h"
+#include "ui_fsmenu/main.h"
 #include "ui_fsmenu/menu_target.h"
+#include "wlapplication.h"
 
 namespace FsMenu {
 
@@ -165,14 +168,18 @@ bool ScenarioSelect::set_has_selection() {
 }
 
 void ScenarioSelect::clicked_ok() {
-	if (!table_.has_selection()) {
+	if (!table_.has_selection() || !scenarios_data_[table_.get_selected()].playable) {
 		return;
 	}
-	const ScenarioData& scenario_data = scenarios_data_[table_.get_selected()];
-	if (!scenario_data.playable) {
-		return;
+
+	Widelands::Game game;
+	try {
+		game.run_splayer_scenario_direct(get_map(), "");
+	} catch (const std::exception& e) {
+		WLApplication::emergency_save(capsule_.menu(), game, e.what());
 	}
-	end_modal<MenuTarget>(MenuTarget::kOk);
+
+	return_to_main_menu();
 }
 
 void ScenarioSelect::entry_selected() {

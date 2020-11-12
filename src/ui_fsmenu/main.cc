@@ -43,6 +43,7 @@
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/login_box.h"
 #include "ui_fsmenu/options.h"
+#include "ui_fsmenu/scenario_select.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/mapdata.h"
@@ -751,17 +752,21 @@ void MainMenu::action(const MenuTarget t) {
 			try {
 				game.run_load_game(filename_for_continue_playing_, "");
 			} catch (const std::exception& e) {
-				WLApplication::emergency_save(*this, game, e.what(), 1 /* player number not known at this point */);
+				WLApplication::emergency_save(*this, game, e.what());
 			}
 			// Update the Continue button in case a new savegame was created
 			set_labels();
 		}
 		break;
 
+	case MenuTarget::kTutorial:
+		menu_capsule_.clear_content();
+		new ScenarioSelect(menu_capsule_, nullptr);
+		break;
+
 	case MenuTarget::kLoadGame:
 	case MenuTarget::kRandomGame:
 	case MenuTarget::kCampaign:
-	case MenuTarget::kTutorial:
 	case MenuTarget::kLan:
 	case MenuTarget::kMetaserver:
 	case MenuTarget::kOnlineGameSettings:

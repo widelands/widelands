@@ -33,7 +33,7 @@ namespace FsMenu {
 class ScenarioSelect : public TwoColumnsFullNavigationMenu {
 public:
 	// If camp is not set, we'll be loading the tutorials
-	explicit ScenarioSelect(MenuCapsule&, CampaignData* camp = nullptr);
+	explicit ScenarioSelect(MenuCapsule&, CampaignData* camp);
 
 	std::string get_map();
 	uint32_t get_difficulty() const;

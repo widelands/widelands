@@ -58,6 +58,11 @@ BaseMenu::BaseMenu(MenuCapsule& window, const std::string& title)
 BaseMenu::~BaseMenu() {
 }
 
+void BaseMenu::return_to_main_menu() {
+	capsule_.menu().set_labels();
+	capsule_.clear_content();
+}
+
 void BaseMenu::layout() {
 	UI::Panel::layout();
 	horizontal_padding_box_.set_size(get_inner_w(), get_inner_h());

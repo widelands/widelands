@@ -197,7 +197,7 @@ struct WLApplication {
 	bool campaign_game(FsMenu::MainMenu&);
 	bool replay(FsMenu::MainMenu*);
 
-	static void emergency_save(UI::Panel&, Widelands::Game&, const std::string& error, uint8_t);
+	static void emergency_save(UI::Panel&, Widelands::Game&, const std::string& error, uint8_t = 1);
 
 private:
 	WLApplication(int argc, char const* const* argv);
