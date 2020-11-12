@@ -498,7 +498,7 @@ void WLApplication::run() {
 
 		g_sh->change_music("menu", 1000);
 
-		FsMenu::MainMenu m(true);
+		FsMenu::MainMenu m;
 		m.run<int>();
 		// mainmenu();
 	}
@@ -1167,10 +1167,10 @@ void WLApplication::handle_commandline_parameters() {
  * Run the main menu
  */
 void WLApplication::mainmenu() {
-	std::string messagetitle;
+	/* std::string messagetitle;
 	std::string message;
 
-	std::unique_ptr<FsMenu::MainMenu> mm(new FsMenu::MainMenu(true));
+	std::unique_ptr<FsMenu::MainMenu> mm(new FsMenu::MainMenu());
 
 	for (;;) {
 		if (!message.empty()) {
@@ -1258,7 +1258,7 @@ void WLApplication::mainmenu() {
 					EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, file);
 				}
 				break;
-			} */
+			}
 			case FsMenu::MenuTarget::kRandomGame:
 				need_to_reset = new_random_game(*mm);
 				break;
@@ -1298,7 +1298,7 @@ void WLApplication::mainmenu() {
 		if (need_to_reset) {
 			mm.reset(new FsMenu::MainMenu(false));
 		}
-	}
+	} */
 }
 
 /**

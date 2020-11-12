@@ -145,6 +145,20 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
+struct ModalGuard {
+	explicit ModalGuard() : panel_(Panel::modal_) {
+	}
+	~ModalGuard() {
+		Panel::modal_ = panel_;
+		if (panel_) {
+			panel_->become_modal_again();
+		}
+	}
+
+private:
+	Panel* panel_;
+};
+
 /**
  * Enters the event loop; all events will be handled by this panel.
  *
@@ -155,7 +169,7 @@ void Panel::free_children() {
 int Panel::do_run() {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication* const app = WLApplication::get();
-	Panel* const prevmodal = modal_;
+	ModalGuard prevmodal;
 	modal_ = this;
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
@@ -227,9 +241,6 @@ int Panel::do_run() {
 	}
 	end();
 
-	// Done
-	modal_ = prevmodal;
-
 	return return_code_;
 }
 
@@ -250,6 +261,9 @@ void Panel::start() {
  * Called once after the event loop in run() has ended
  */
 void Panel::end() {
+}
+
+void Panel::become_modal_again() {
 }
 
 /**

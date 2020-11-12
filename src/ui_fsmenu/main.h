@@ -37,7 +37,7 @@ namespace FsMenu {
  */
 class MainMenu : public UI::Panel {
 public:
-	explicit MainMenu(bool first_ever_init);
+	explicit MainMenu();
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
@@ -58,6 +58,7 @@ public:
 	void draw_overlay(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
+	void become_modal_again() override;
 
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();

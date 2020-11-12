@@ -89,7 +89,7 @@ int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
 }
 
-MainMenu::MainMenu(bool first_ever_init)
+MainMenu::MainMenu()
    : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
@@ -203,18 +203,19 @@ MainMenu::MainMenu(bool first_ever_init)
 	}
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
 
-	if (first_ever_init) {
-		init_time_ = SDL_GetTicks();
-		set_button_visibility(false);
-	} else {
-		last_image_exchange_time_ = SDL_GetTicks();
-	}
+	init_time_ = SDL_GetTicks();
+	set_button_visibility(false);
 
 	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
 
 	focus();
 	set_labels();
 	layout();
+}
+
+void MainMenu::become_modal_again() {
+	// Ensure the image is not exchanged immediately after returning to the main menu
+	last_image_exchange_time_ = SDL_GetTicks();
 }
 
 using MapEntry = std::pair<MapData, Widelands::MapVersion>;

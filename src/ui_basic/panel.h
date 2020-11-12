@@ -117,6 +117,7 @@ public:
 
 	virtual void start();
 	virtual void end();
+	virtual void become_modal_again();
 
 	// Geometry
 	virtual void set_size(int nw, int nh);
@@ -410,6 +411,8 @@ private:
 	int lborder_, rborder_, tborder_, bborder_;
 	uint8_t border_snap_distance_, panel_snap_distance_;
 	int desired_w_, desired_h_;
+
+	friend struct ModalGuard;
 
 	bool running_;
 	int return_code_;

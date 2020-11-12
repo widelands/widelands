@@ -198,45 +198,57 @@ void LaunchSPG::clicked_ok() {
 		m.run<int>();
 		return;
 	}
-	if (settings_->can_launch() || preconfigured_) {
-		Widelands::PlayerNumber playernumber = 1;
-		upcast(SinglePlayerGameSettingsProvider, sp, settings_.get());
-		assert(sp);
-		try {
-			if (sp->settings().scenario) {  // scenario
-				game_->run_splayer_scenario_direct(sp->get_map(), "");
-			} else {  // normal singleplayer
-				playernumber = sp->settings().playernum + 1;
-				sp->set_win_condition_script(win_condition_dropdown_.get_selected());
-				// Game controller needs the ibase pointer to init the chat
-				game_->set_ibase(new InteractivePlayer(*game_, get_config_section(), playernumber, false));
-				std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(*game_, true, playernumber));
+	if (!settings_->can_launch() && !preconfigured_) {
+		return;
+	}
 
-				std::vector<std::string> tipstexts{"general_game", "singleplayer"};
-				if (sp->has_players_tribe()) {
-					tipstexts.push_back(sp->get_players_tribe());
-				}
-				game_->create_loader_ui(tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
+	capsule_.set_visible(false);
+	Widelands::PlayerNumber playernumber = 1;
+	upcast(SinglePlayerGameSettingsProvider, sp, settings_.get());
+	assert(sp);
+	try {
+		if (sp->settings().scenario) {  // scenario
+			game_->run_splayer_scenario_direct(sp->get_map(), "");
+		} else {  // normal singleplayer
+			playernumber = sp->settings().playernum + 1;
+			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
+			// Game controller needs the ibase pointer to init the chat
+			game_->set_ibase(new InteractivePlayer(*game_, get_config_section(), playernumber, false));
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(*game_, true, playernumber));
 
-				Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
-
-				game_->set_game_controller(ctrl.get());
-				game_->init_newgame(sp->settings());
-				game_->run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			if (sp->has_players_tribe()) {
+				tipstexts.push_back(sp->get_players_tribe());
 			}
-		} catch (const std::exception& e) {
-			log_err("Fatal exception: %s\n", e.what());
-			UI::WLMessageBox m(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Unexpected error during the game"), (boost::format(
-					_("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n\nPlease add this information to your report.\n\nWidelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."))
-					% e.what() % build_id() % build_type()).str(), UI::WLMessageBox::MBoxType::kOk);
-			m.run<int>();
+			game_->create_loader_ui(tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
 
+			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+
+			game_->set_game_controller(ctrl.get());
+			game_->init_newgame(sp->settings());
+			game_->run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+		}
+	} catch (const std::exception& e) {
+		log_err("##############################\n"
+		        "  FATAL EXCEPTION: %s\n \n"
+		        "##############################\n"
+		        "  Please report this problem to help us improve Widelands.\n"
+		        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
+		        "  You are using build %s (%s).\n"
+		        "  Please add this information to your report.\n"
+		        "  If desired, Widelands attempts to create an emergency savegame.\n"
+		        "  It is often – though not always – possible to load it and continue playing.\n"
+		        "##############################", e.what(), build_id().c_str(), build_type().c_str());
+		UI::WLMessageBox m(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Unexpected error during the game"), (boost::format(
+				_("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n\nPlease add this information to your report.\n\nWould you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."))
+				% e.what() % build_id() % build_type()).str(), UI::WLMessageBox::MBoxType::kOkCancel);
+		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(*game_, true, playernumber));
 			game_->set_game_controller(ctrl.get());
 			WLApplication::emergency_save(*game_);
 		}
-		die();
 	}
+	die();
 }
 
 void LaunchSPG::layout() {
