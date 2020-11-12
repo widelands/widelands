@@ -44,11 +44,16 @@ descriptions:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your sentry.",
-      aggressor = _"Your sentry discovered an aggressor.",
-      attack = _"Your sentry is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the sentry.",
-      defeated_you = _"Your soldiers defeated the enemy at the sentry."
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      occupied = pgettext("barbarians_building", "Your soldiers have occupied your sentry."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      aggressor = pgettext("barbarians_building", "Your sentry discovered an aggressor."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      attack = pgettext("barbarians_building", "Your sentry is under attack."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      defeated_enemy = pgettext("barbarians_building", "The enemy defeated your soldiers at the sentry."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      defeated_you = pgettext("barbarians_building", "Your soldiers defeated the enemy at the sentry.")
    },
 }
 

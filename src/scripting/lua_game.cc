@@ -620,9 +620,10 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. The fields will remain
-      visible until they are hidden again. See also :ref:`field_animations` for
-      animated revealing.
+      Make these fields visible for the current player. The fields will remain visible until they
+      are hidden again by :meth:`hide_fields`, even if they are not in vision range of any
+      buildings or workers.
+      See also :ref:`field_animations` for animated revealing.
 
       :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
@@ -648,14 +649,18 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 /* RST
    .. method:: hide_fields(fields[, unexplore = false])
 
-      Make these fields hidden for the current player if they are not
-      seen by a military building. See also :ref:`field_animations` for
-      animated hiding.
+      Undo the effect of :meth:`reveal_fields` on these fields for the current player and
+      optionally completely hide them.
+      See also :ref:`field_animations` for animated hiding.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored.
+      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored
+         and will not be seen by buildings or workers until they are revealed again
+         by :meth:`reveal_fields`.
+         If `false`, They will no longer be permanently visible, but can still be seen by
+         buildings or workers (own or allied), and the player will remember the last seen state.
       :type unexplore: :class:`boolean`
 
       :returns: :const:`nil`
@@ -665,10 +670,9 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::HideOrRevealFieldMode mode =
-	   (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	      Widelands::HideOrRevealFieldMode::kHideAndForget :
-	      Widelands::HideOrRevealFieldMode::kHide;
+	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                                                 Widelands::HideOrRevealFieldMode::kHide :
+	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {

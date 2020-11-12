@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
       -- TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
       title = _"No Trees",
       heading = _"No Tree to Cut Lianas",
-      message = pgettext ("amazons_building", "The liana Cutter working at this site can’t find any tree in his work area. Consider dismantling this liana cutter’s hut and rebuilding it somewhere else."),
+      message = pgettext ("amazons_building", "The liana cutter working at this site can’t find any tree in her work area. You should consider dismantling or destroying the building or building a jungle preserver’s hut."),
       productivity_threshold = 33
    },
 }

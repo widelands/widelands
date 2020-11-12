@@ -38,11 +38,16 @@ descriptions:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your warriors’ delling.",
-      aggressor = _"Your warriors’ dwelling discovered an aggressor.",
-      attack = _"Your warriors’ dwelling is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the warriors’ dwelling.",
-      defeated_you = _"Your soldiers defeated the enemy at the warriors’ dwelling."
+      -- TRANSLATORS: Message sent by an Amazon military site
+      occupied = pgettext("amazons_building", "Your soldiers have occupied your warriors’ delling."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      aggressor = pgettext("amazons_building", "Your warriors’ dwelling discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      attack = pgettext("amazons_building", "Your warriors’ dwelling is under attack."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      defeated_enemy = pgettext("amazons_building", "The enemy defeated your soldiers at the warriors’ dwelling."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      defeated_you = pgettext("amazons_building", "Your soldiers defeated the enemy at the warriors’ dwelling.")
    },
 }
 
