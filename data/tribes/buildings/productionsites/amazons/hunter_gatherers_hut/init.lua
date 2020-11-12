@@ -67,7 +67,7 @@ descriptions:new_productionsite_type {
       -- TRANSLATORS: "Game" means animals that you can hunt
       heading = _"Out of Game and Fish",
       -- TRANSLATORS: "game" means animals that you can hunt
-      message = pgettext("amazons_building", "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any game or fish in his work area."),
+      message = pgettext("amazons_building", "The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any game or fish in her work area."),
       productivity_threshold = 33
    },
 }
