@@ -23,7 +23,7 @@
 #include <memory>
 
 #include "ui_basic/fileview_panel.h"
-#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
 #include "ui_fsmenu/main.h"
 
 namespace FsMenu {
@@ -31,9 +31,9 @@ namespace FsMenu {
 /**
  * "Fullscreen "About" information with tabs
  */
-class About : public UI::Window {
+class About : public UI::UniqueWindow {
 public:
-	explicit About(MainMenu&);
+	explicit About(MainMenu&, UI::UniqueWindow::Registry&);
 	~About() override {
 	}
 

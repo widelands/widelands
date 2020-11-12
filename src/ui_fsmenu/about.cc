@@ -28,12 +28,11 @@
 
 namespace FsMenu {
 
-About::About(MainMenu& fsmm)
-   : UI::Window(&fsmm,
+About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
+   : UI::UniqueWindow(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "about",
-                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuAbout),
-                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuAbout),
+                &r,
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
                 _("About Widelands")),
@@ -67,6 +66,7 @@ About::About(MainMenu& fsmm)
 
 	layout();
 	tabs_.load_tab_contents();
+	center_to_parent();
 }
 
 bool About::handle_key(bool down, SDL_Keysym code) {

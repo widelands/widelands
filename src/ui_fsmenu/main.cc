@@ -210,15 +210,19 @@ MainMenu::MainMenu()
 	set_button_visibility(false);
 
 	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
+	r_about_.open_window = [this]() { new About(*this, r_about_); };
 
 	focus();
 	set_labels();
 	layout();
 }
 
-void MainMenu::become_modal_again() {
-	// Ensure the image is not exchanged immediately after returning to the main menu
-	last_image_exchange_time_ = SDL_GetTicks();
+void MainMenu::become_modal_again(UI::Panel& prevmodal) {
+	if (dynamic_cast<const UI::Window*>(&prevmodal) == nullptr) {
+		// Ensure the image is not exchanged directly after returning to the main menu –
+		// but only after returning from the game or editor and not from the options window.
+		last_image_exchange_time_ = SDL_GetTicks();
+	}
 }
 
 using MapEntry = std::pair<MapData, Widelands::MapVersion>;
@@ -481,7 +485,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			action(MenuTarget::kMetaserver);
 			return true;
 		case SDLK_u:
-			show_internet_login();
+			action(MenuTarget::kOnlineGameSettings);
 			return true;
 		case SDLK_p:
 			action(MenuTarget::kLan);
@@ -718,11 +722,12 @@ void MainMenu::action(const MenuTarget t) {
 		OptionsCtrl o(*this, get_config_section());
 		break;
 	}
-	case MenuTarget::kAbout: {
-		About a(*this);
-		a.run<MenuTarget>();
+	case MenuTarget::kAbout:
+		r_about_.toggle();
 		break;
-	}
+	case MenuTarget::kOnlineGameSettings:
+		r_login_.toggle();
+		break;
 
 	case MenuTarget::kEditorNew:
 		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
@@ -769,14 +774,14 @@ void MainMenu::action(const MenuTarget t) {
 		new CampaignSelect(menu_capsule_);
 		break;
 
+	case MenuTarget::kReplay:
 	case MenuTarget::kLoadGame:
 	case MenuTarget::kRandomGame:
 	case MenuTarget::kLan:
 	case MenuTarget::kMetaserver:
-	case MenuTarget::kOnlineGameSettings:
 	// NOCOM
 	default:
-		NEVER_HERE();
+		throw wexception("Invalid MenuTarget %d", static_cast<int>(t));
 	}
 }
 

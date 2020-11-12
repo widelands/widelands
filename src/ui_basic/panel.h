@@ -117,7 +117,7 @@ public:
 
 	virtual void start();
 	virtual void end();
-	virtual void become_modal_again();
+	virtual void become_modal_again(Panel& prevmodal);
 
 	// Geometry
 	virtual void set_size(int nw, int nh);

@@ -146,17 +146,20 @@ void Panel::free_children() {
 }
 
 struct ModalGuard {
-	explicit ModalGuard() : panel_(Panel::modal_) {
+	explicit ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+		Panel::modal_ = &top_panel_;
 	}
 	~ModalGuard() {
-		Panel::modal_ = panel_;
-		if (panel_) {
-			panel_->become_modal_again();
+		Panel::modal_ = bottom_panel_;
+		if (bottom_panel_) {
+			bottom_panel_->become_modal_again(top_panel_);
 		}
 	}
 
 private:
-	Panel* panel_;
+	Panel* bottom_panel_;
+	Panel& top_panel_;
+	DISALLOW_COPY_AND_ASSIGN(ModalGuard);
 };
 
 /**
@@ -169,8 +172,7 @@ private:
 int Panel::do_run() {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication* const app = WLApplication::get();
-	ModalGuard prevmodal;
-	modal_ = this;
+	ModalGuard prevmodal(*this);
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
 
@@ -263,7 +265,11 @@ void Panel::start() {
 void Panel::end() {
 }
 
-void Panel::become_modal_again() {
+/**
+ * Called when another panel (passed as argument) ends being
+ * modal and returns the modal attribute to this panel
+ */
+void Panel::become_modal_again(Panel&) {
 }
 
 /**

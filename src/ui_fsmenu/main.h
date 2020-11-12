@@ -58,7 +58,7 @@ public:
 	void draw_overlay(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
-	void become_modal_again() override;
+	void become_modal_again(UI::Panel&) override;
 
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
@@ -108,7 +108,7 @@ private:
 	void action(MenuTarget);
 
 	MenuCapsule menu_capsule_;
-	UI::UniqueWindow::Registry r_login_;
+	UI::UniqueWindow::Registry r_login_, r_about_;
 
 	// Values from internet login window
 	std::string nickname_;
