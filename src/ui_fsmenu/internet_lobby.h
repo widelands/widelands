@@ -34,9 +34,9 @@ namespace Widelands {
 struct TribeBasicInfo;
 }
 namespace FsMenu {
-class FullscreenMenuInternetLobby : public TwoColumnsBasicNavigationMenu {
+class InternetLobby : public TwoColumnsBasicNavigationMenu {
 public:
-	FullscreenMenuInternetLobby(FullscreenMenuMain&,
+	InternetLobby(MenuCapsule&,
 	                            std::string&,
 	                            std::string&,
 	                            bool,

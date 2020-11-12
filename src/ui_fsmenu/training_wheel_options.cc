@@ -26,6 +26,8 @@
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 
+namespace FsMenu {
+
 constexpr int kPadding = 4;
 
 TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
@@ -178,3 +180,5 @@ void TrainingWheelOptions::toggle_mark_unmark_all_button() {
 	mark_unmark_button_->set_title(mark_unmark_state_ ? _("Mark All") : _("Unmark All"));
 	mark_unmark_button_->expand(0, 0);
 }
+
+}  // namespace FsMenu

@@ -130,18 +130,18 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
  *  @return true to indicate that run is done.
  */
 bool GameClientImpl::run_map_menu(GameClient* parent) {
-	FsMenu::FullscreenMenuLaunchMPG lgm(
-	   parent->fullscreen_menu_main(), parent, parent, *parent, *game);
+	/* FsMenu::LaunchMPG lgm(
+	   parent->fullscreen_menu_main(), parent, parent, *parent, *game);  // NOCOM
 	modal = &lgm;
-	MenuTarget code = lgm.run<MenuTarget>();
+	const FsMenu::MenuTarget code = lgm.run<FsMenu::MenuTarget>();
 	modal = nullptr;
-	if (code == MenuTarget::kBack) {
+	if (code == FsMenu::MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
 		}
 		return true;
-	}
+	} */
 	return false;
 }
 
@@ -197,7 +197,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game = nullptr;
 }
 
-GameClient::GameClient(FullscreenMenuMain& fsmm,
+GameClient::GameClient(FsMenu::MainMenu& fsmm,
                        const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
@@ -1046,7 +1046,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		if (!d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
-		d->modal->end_modal<MenuTarget>(MenuTarget::kOk);
+		d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kOk);
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();
@@ -1153,7 +1153,7 @@ void GameClient::disconnect(const std::string& reason,
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.
 	if (d->modal) {
-		d->modal->end_modal<MenuTarget>(MenuTarget::kBack);
+		d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kBack);
 	}
 	d->modal = nullptr;
 }

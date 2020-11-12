@@ -25,11 +25,13 @@
 #include "ui_basic/checkbox.h"
 #include "ui_fsmenu/menu.h"
 #include "wui/load_or_save_game.h"
+
 namespace FsMenu {
+
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
-class FullscreenMenuLoadGame : public TwoColumnsFullNavigationMenu {
+class LoadGame : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuLoadGame(FullscreenMenuMain&,
+	LoadGame(MenuCapsule&,
 	                       Widelands::Game&,
 	                       GameSettingsProvider* gsp,
 	                       bool is_replay = false);

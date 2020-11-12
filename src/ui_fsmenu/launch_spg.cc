@@ -27,13 +27,15 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "ui_fsmenu/mapselect.h"
+
 namespace FsMenu {
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
+
+LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  Widelands::EditorGameBase& egbase,
                                                  bool preconfigured,
                                                  GameController* const ctrl)
-   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
+   : LaunchGame(fsmm, settings, ctrl),
      player_setup(&left_column_box_, settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
      egbase_(egbase) {
@@ -55,7 +57,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
  * Select a map as a first step in launching a game, before
  * showing the actual setup menu.
  */
-void FullscreenMenuLaunchSPG::start() {
+void LaunchSPG::start() {
 	if (!preconfigured_ && !clicked_select_map()) {
 		end_modal<MenuTarget>(MenuTarget::kBack);
 	}
@@ -65,13 +67,13 @@ void FullscreenMenuLaunchSPG::start() {
  * Select a map and send all information to the user interface.
  * Returns whether a map has been selected.
  */
-bool FullscreenMenuLaunchSPG::clicked_select_map() {
+bool LaunchSPG::clicked_select_map() {
 	if (preconfigured_ || !settings_->can_change_map()) {
 		return false;
 	}
 
 	set_visible(false);
-	FullscreenMenuMapSelect msm(fsmm_, settings_, nullptr, egbase_);
+	MapSelect msm(capsule_, settings_, nullptr, egbase_);
 	MenuTarget code = msm.run<MenuTarget>();
 	set_visible(true);
 
@@ -101,7 +103,7 @@ bool FullscreenMenuLaunchSPG::clicked_select_map() {
 	return true;
 }
 
-void FullscreenMenuLaunchSPG::update() {
+void LaunchSPG::update() {
 	peaceful_.set_state(settings_->is_peaceful_mode());
 	if (preconfigured_) {
 		map_details.update(settings_, *egbase_.mutable_map());
@@ -122,7 +124,7 @@ void FullscreenMenuLaunchSPG::update() {
 	}
 }
 
-void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& map) {
+void LaunchSPG::enforce_player_names_and_tribes(Widelands::Map& map) {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
@@ -142,11 +144,11 @@ void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& ma
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 }
 
-void FullscreenMenuLaunchSPG::clicked_back() {
+void LaunchSPG::clicked_back() {
 	return end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
-void FullscreenMenuLaunchSPG::win_condition_selected() {
+void LaunchSPG::win_condition_selected() {
 	if (win_condition_dropdown_.has_selection()) {
 		last_win_condition_ = win_condition_dropdown_.get_selected();
 
@@ -157,7 +159,7 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
 	}
 }
 
-void FullscreenMenuLaunchSPG::clicked_ok() {
+void LaunchSPG::clicked_ok() {
 	const std::string filename = settings_->settings().mapfilename;
 	if (!preconfigured_ && !g_fs->file_exists(filename)) {
 		throw WLWarning(_("File not found"),
@@ -182,8 +184,8 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 	}
 }
 
-void FullscreenMenuLaunchSPG::layout() {
-	FullscreenMenuLaunchGame::layout();
+void LaunchSPG::layout() {
+	LaunchGame::layout();
 	player_setup.force_new_dimensions(scale_factor * standard_height_);
 }
 

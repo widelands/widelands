@@ -28,8 +28,11 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
+#include "ui_fsmenu/menu_target.h"
 #include "wui/map_tags.h"
+
 namespace FsMenu {
+
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 // Fix align for table headings & entries and for wordwrap.
 
@@ -37,11 +40,11 @@ constexpr int checkbox_space_ = 20;
 
 using Widelands::WidelandsMapLoader;
 
-FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
+MapSelect::MapSelect(MenuCapsule& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
-   : TwoColumnsFullNavigationMenu(fsmm, "choose_map", _("Choose Map")),
+   : TwoColumnsFullNavigationMenu(fsmm, _("Choose Map")),
      checkboxes_(
         &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
@@ -161,7 +164,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	layout();
 }
 
-void FullscreenMenuMapSelect::think() {
+void MapSelect::think() {
 	TwoColumnsFullNavigationMenu::think();
 
 	if (ctrl_) {
@@ -177,26 +180,26 @@ void FullscreenMenuMapSelect::think() {
 	}
 }
 
-bool FullscreenMenuMapSelect::compare_players(uint32_t rowa, uint32_t rowb) {
+bool MapSelect::compare_players(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_players(maps_data_[table_[rowb]]);
 }
 
-bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb) {
+bool MapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_names(maps_data_[table_[rowb]]);
 }
 
-bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb) {
+bool MapSelect::compare_size(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
 }
 
-MapData const* FullscreenMenuMapSelect::get_map() const {
+MapData const* MapSelect::get_map() const {
 	if (!table_.has_selection()) {
 		return nullptr;
 	}
 	return &maps_data_[table_.get_selected()];
 }
 
-void FullscreenMenuMapSelect::clicked_ok() {
+void MapSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
@@ -216,7 +219,7 @@ void FullscreenMenuMapSelect::clicked_ok() {
 	}
 }
 
-bool FullscreenMenuMapSelect::set_has_selection() {
+bool MapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
 
 	if (!has_selection) {
@@ -226,7 +229,7 @@ bool FullscreenMenuMapSelect::set_has_selection() {
 	return has_selection;
 }
 
-void FullscreenMenuMapSelect::entry_selected() {
+void MapSelect::entry_selected() {
 	if (set_has_selection()) {
 		// Update during think() instead of every keypress
 		update_map_details_ = true;
@@ -249,7 +252,7 @@ void FullscreenMenuMapSelect::entry_selected() {
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
  */
-void FullscreenMenuMapSelect::fill_table() {
+void MapSelect::fill_table() {
 	has_translated_mapname_ = false;
 	bool unspecified_balancing_found = false;
 
@@ -378,7 +381,7 @@ void FullscreenMenuMapSelect::fill_table() {
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
+UI::Checkbox* MapSelect::add_tag_checkbox(UI::Box* box,
                                                         const std::string& tag,
                                                         const std::string& displ_name) {
 	tags_ordered_.push_back(tag);
@@ -395,7 +398,7 @@ UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
 /*
  * One of the tagboxes has changed
  */
-void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
+void MapSelect::tagbox_changed(int32_t id, bool to) {
 	if (to) {
 		req_tags_.insert(id);
 	} else {
@@ -405,7 +408,7 @@ void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
 	fill_table();
 }
 
-void FullscreenMenuMapSelect::clear_filter() {
+void MapSelect::clear_filter() {
 	req_tags_.clear();
 	for (UI::Checkbox* checkbox : tags_checkboxes_) {
 		checkbox->set_state(false);
@@ -417,7 +420,7 @@ void FullscreenMenuMapSelect::clear_filter() {
 	fill_table();
 }
 
-void FullscreenMenuMapSelect::rebuild_balancing_dropdown() {
+void MapSelect::rebuild_balancing_dropdown() {
 	const std::string selected =
 	   balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
 	balancing_tags_dropdown_->clear();

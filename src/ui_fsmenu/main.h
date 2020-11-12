@@ -26,15 +26,18 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+#include "ui_fsmenu/menu.h"
 #include "ui_fsmenu/menu_target.h"
+
+namespace FsMenu {
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  */
-class FullscreenMenuMain : public UI::Panel {
+class MainMenu : public UI::Panel {
 public:
-	explicit FullscreenMenuMain(bool first_ever_init);
+	explicit MainMenu(bool first_ever_init);
 
 	const std::string& get_filename_for_continue_playing() const {
 		return filename_for_continue_playing_;
@@ -108,6 +111,9 @@ private:
 	bool visible_;
 	void set_button_visibility(bool);
 
+	void action(MenuTarget);
+
+	MenuCapsule menu_capsule_;
 	UI::UniqueWindow::Registry r_login_;
 
 	// Values from internet login window
@@ -119,5 +125,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 };
+
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

@@ -73,8 +73,9 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
-constexpr int16_t kPadding = 4;
-FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
+namespace FsMenu {
+
+Options::Options(MainMenu& fsmm,
                                              OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
@@ -476,7 +477,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	layout();
 }
 
-void FullscreenMenuOptions::layout() {
+void Options::layout() {
 	if (!is_minimal()) {
 		const int16_t butw = get_inner_w() / 5;
 		const int16_t buth = get_inner_h() / 16;
@@ -516,7 +517,7 @@ void FullscreenMenuOptions::layout() {
 	UI::Window::layout();
 }
 
-void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
+void Options::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
 	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale.empty());
@@ -587,7 +588,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
  * @param include_system_lang We only want to include the system lang if it matches the Widelands
  * locale.
  */
-void FullscreenMenuOptions::update_language_stats() {
+void Options::update_language_stats() {
 	int percent = 100;
 	std::string message;
 	if (language_dropdown_.has_selection()) {
@@ -649,16 +650,16 @@ void FullscreenMenuOptions::update_language_stats() {
 	   as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
 }
 
-void FullscreenMenuOptions::clicked_apply() {
+void Options::clicked_apply() {
 	end_modal<MenuTarget>(MenuTarget::kApplyOptions);
 }
 
-void FullscreenMenuOptions::clicked_cancel() {
+void Options::clicked_cancel() {
 	g_sh->load_config();
 	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
-bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
+bool Options::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
@@ -675,7 +676,7 @@ bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
-OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
+OptionsCtrl::OptionsStruct Options::get_values() {
 	// Write all data from UI elements
 	// Interface options
 	if (language_dropdown_.has_selection()) {
@@ -733,11 +734,11 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 /**
  * Handles communication between window class and options
  */
-OptionsCtrl::OptionsCtrl(FullscreenMenuMain& mm, Section& s)
+OptionsCtrl::OptionsCtrl(MainMenu& mm, Section& s)
    : opt_section_(s),
      parent_(mm),
      opt_dialog_(
-        std::unique_ptr<FullscreenMenuOptions>(new FullscreenMenuOptions(mm, options_struct(0)))) {
+        std::unique_ptr<Options>(new Options(mm, options_struct(0)))) {
 	handle_menu();
 }
 
@@ -755,7 +756,7 @@ void OptionsCtrl::handle_menu() {
 	}
 	if (i == MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
-		opt_dialog_.reset(new FullscreenMenuOptions(parent_, options_struct(active_tab)));
+		opt_dialog_.reset(new Options(parent_, options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
 	}
 }
@@ -855,3 +856,5 @@ void OptionsCtrl::save_options() {
 	// Now write to file
 	write_config();
 }
+
+}  // namespace FsMenu

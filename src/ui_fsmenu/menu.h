@@ -23,9 +23,12 @@
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "ui_fsmenu/main.h"
 
 namespace FsMenu {
+
+class MainMenu;
+class MenuCapsule;
+
 constexpr int kPadding = 4;
 constexpr double kDefaultColumnWidthFactor = 1.0 / 3;
 
@@ -33,14 +36,10 @@ constexpr double kDefaultColumnWidthFactor = 1.0 / 3;
  * Base for a menu. Takes care of padding. Use this to freely implement your own layout by adding
  * your content into header_box and main_box
  */
-class BaseMenu : public UI::Window {
+class BaseMenu : public UI::Panel {
 public:
-	BaseMenu(FullscreenMenuMain&, const std::string& name, const std::string& title);
+	BaseMenu(MenuCapsule&, const std::string& title);
 	~BaseMenu() override;
-
-	WindowLayoutID window_layout_id() const override {
-		return UI::Window::WindowLayoutID::kFsMenuDefault;
-	}
 
 private:
 	UI::Box horizontal_padding_box_, vertical_padding_box_;
@@ -50,7 +49,7 @@ protected:
 
 	UI::Box main_box_, header_box_;
 	uint32_t standard_height_;
-	FullscreenMenuMain& fsmm_;
+	MenuCapsule& capsule_;
 };
 
 /**
@@ -59,8 +58,7 @@ protected:
  */
 class TwoColumnsMenu : public BaseMenu {
 public:
-	TwoColumnsMenu(FullscreenMenuMain&,
-	               const std::string& name,
+	TwoColumnsMenu(MenuCapsule&,
 	               const std::string& title,
 	               double right_column_width_factor = kDefaultColumnWidthFactor);
 	~TwoColumnsMenu() override;
@@ -83,8 +81,7 @@ private:
  */
 class TwoColumnsBasicNavigationMenu : public TwoColumnsMenu {
 public:
-	TwoColumnsBasicNavigationMenu(FullscreenMenuMain&,
-	                              const std::string& name,
+	TwoColumnsBasicNavigationMenu(MenuCapsule&,
 	                              const std::string& title,
 	                              double right_column_width_factor = kDefaultColumnWidthFactor);
 	~TwoColumnsBasicNavigationMenu() override;
@@ -106,8 +103,7 @@ protected:
  */
 class TwoColumnsFullNavigationMenu : public TwoColumnsBasicNavigationMenu {
 public:
-	TwoColumnsFullNavigationMenu(FullscreenMenuMain&,
-	                             const std::string& name,
+	TwoColumnsFullNavigationMenu(MenuCapsule&,
 	                             const std::string& title,
 	                             double right_column_width_factor = kDefaultColumnWidthFactor);
 	~TwoColumnsFullNavigationMenu() override;
@@ -120,5 +116,37 @@ protected:
 
 	UI::Button ok_;
 };
+
+/**
+ * Singleton class owned by the MainMenu. A MenuCapsule can hold one or more BaseMenus which
+ * are stacked on top of each other so that only the top of the stack is visible to the user.
+ */
+class MenuCapsule : public UI::Window {
+public:
+	explicit MenuCapsule(MainMenu&);
+	~MenuCapsule() override = default;
+
+	UI::Window::WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuDefault;
+	}
+
+	MainMenu& menu() const {
+		return fsmm_;
+	}
+
+	// Remove and free all panels
+	void clear_content();
+
+	void die() override;
+	void on_death(UI::Panel*) override;
+
+	// Should be called only by BaseMenu ctor
+	void add(BaseMenu&, const std::string& title);
+
+private:
+	std::vector<std::pair<BaseMenu*, std::string /* title */>> visible_menus_;
+	MainMenu& fsmm_;
+};
+
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_MENU_H

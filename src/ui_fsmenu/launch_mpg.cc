@@ -40,6 +40,7 @@
 #include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
+
 namespace FsMenu {
 
 /// Simple user interaction window for selecting either map, save or cancel
@@ -93,12 +94,12 @@ private:
 	GameController* ctrl_;
 };
 
-FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
+LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  ChatProvider& chat,
                                                  Widelands::EditorGameBase& egbase)
-   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
+   : LaunchGame(fsmm, settings, ctrl),
 
      help_button_(this,
                   "help",
@@ -145,8 +146,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
 	}
 }
 
-void FullscreenMenuLaunchMPG::layout() {
-	FullscreenMenuLaunchGame::layout();
+void LaunchMPG::layout() {
+	LaunchGame::layout();
 	// hardcode help button because it does not fit in any box, place it in top right corner
 	help_button_.set_size(standard_height_, standard_height_);
 	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
@@ -163,11 +164,11 @@ void FullscreenMenuLaunchMPG::layout() {
 /**
  * back-button has been pressed
  */
-void FullscreenMenuLaunchMPG::clicked_back() {
+void LaunchMPG::clicked_back() {
 	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
-void FullscreenMenuLaunchMPG::win_condition_selected() {
+void LaunchMPG::win_condition_selected() {
 	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
@@ -180,8 +181,8 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 }
 
 /// Opens a popup window to select a map or saved game
-bool FullscreenMenuLaunchMPG::clicked_select_map() {
-	MapOrSaveSelectionWindow selection_window(&fsmm_, ctrl_, get_w() / 3, get_h() / 4);
+bool LaunchMPG::clicked_select_map() {
+	MapOrSaveSelectionWindow selection_window(&capsule_.menu(), ctrl_, get_w() / 3, get_h() / 4);
 	auto result = selection_window.run<MenuTarget>();
 	assert(result == MenuTarget::kNormalGame || result == MenuTarget::kScenarioGame ||
 	       result == MenuTarget::kBack);
@@ -198,13 +199,13 @@ bool FullscreenMenuLaunchMPG::clicked_select_map() {
 /**
  * Select a map and send all information to the user interface.
  */
-void FullscreenMenuLaunchMPG::select_map() {
+void LaunchMPG::select_map() {
 	if (!settings_->can_change_map()) {
 		return;
 	}
 
 	set_visible(false);
-	FullscreenMenuMapSelect msm(fsmm_, settings_, ctrl_, egbase_);
+	MapSelect msm(capsule_, settings_, ctrl_, egbase_);
 	MenuTarget code = msm.run<MenuTarget>();
 	set_visible(true);
 
@@ -226,13 +227,13 @@ void FullscreenMenuLaunchMPG::select_map() {
  * Select a multi player saved game and send all information to the user
  * interface.
  */
-void FullscreenMenuLaunchMPG::select_saved_game() {
+void LaunchMPG::select_saved_game() {
 	if (!settings_->can_change_map()) {
 		return;
 	}
 
 	Widelands::Game game;  // The place all data is saved to.
-	FullscreenMenuLoadGame lsgm(fsmm_, game, settings_);
+	LoadGame lsgm(capsule_, game, settings_);
 	MenuTarget code = lsgm.run<MenuTarget>();
 
 	if (code == MenuTarget::kBack) {
@@ -278,7 +279,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 /**
  * start-button has been pressed
  */
-void FullscreenMenuLaunchMPG::clicked_ok() {
+void LaunchMPG::clicked_ok() {
 	if (!g_fs->file_exists(settings_->settings().mapfilename)) {
 		throw WLWarning(_("File not found"),
 		                _("Widelands tried to start a game with a file that could not be "
@@ -298,7 +299,7 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 	}
 }
 
-void FullscreenMenuLaunchMPG::think() {
+void LaunchMPG::think() {
 	if (ctrl_) {
 		ctrl_->think();
 	}
@@ -310,7 +311,7 @@ void FullscreenMenuLaunchMPG::think() {
 	}
 }
 
-void FullscreenMenuLaunchMPG::map_changed() {
+void LaunchMPG::map_changed() {
 	const GameSettings& settings = settings_->settings();
 	if (!g_fs->file_exists(settings.mapfilename)) {
 		map_details.show_warning(
@@ -335,7 +336,7 @@ void FullscreenMenuLaunchMPG::map_changed() {
  * update the user interface and take care about the visibility of
  * buttons and text.
  */
-void FullscreenMenuLaunchMPG::refresh() {
+void LaunchMPG::refresh() {
 	// TODO(GunChleoc): Investigate what we can handle with NoteGameSettings. Maybe we can get rid of
 	// refresh() and thus think().
 
@@ -376,7 +377,7 @@ void FullscreenMenuLaunchMPG::refresh() {
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void FullscreenMenuLaunchMPG::set_scenario_values() {
+void LaunchMPG::set_scenario_values() {
 	const GameSettings& settings = settings_->settings();
 	if (settings.mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
@@ -408,7 +409,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
 /**
  * load all playerdata from savegame and update UI accordingly
  */
-void FullscreenMenuLaunchMPG::load_previous_playerdata() {
+void LaunchMPG::load_previous_playerdata() {
 	std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(settings_->settings().mapfilename));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
@@ -459,7 +460,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 /**
  * load map information and update the UI
  */
-void FullscreenMenuLaunchMPG::load_map_info() {
+void LaunchMPG::load_map_info() {
 	Widelands::Map map;  // MapLoader needs a place to put its preload data
 
 	std::unique_ptr<Widelands::MapLoader> ml =
@@ -478,8 +479,8 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 }
 
 /// Show help
-void FullscreenMenuLaunchMPG::help_clicked() {
-	UI::FullscreenHelpWindow help(get_parent(), lua_, "txts/help/multiplayer_help.lua",
+void LaunchMPG::help_clicked() {
+	HelpWindow help(get_parent(), lua_, "txts/help/multiplayer_help.lua",
 	                              /** TRANSLATORS: This is a heading for a help window */
 	                              _("Multiplayer Game Setup"));
 	help.run<UI::Panel::Returncodes>();

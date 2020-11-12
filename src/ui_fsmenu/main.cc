@@ -32,14 +32,18 @@
 #include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/login_box.h"
 #include "wlapplication_options.h"
 #include "wui/mapdata.h"
 #include "wui/savegameloader.h"
+
+namespace FsMenu {
 
 constexpr uint32_t kInitialFadeoutDelay = 2500;
 constexpr uint32_t kInitialFadeoutDuration = 4000;
@@ -48,7 +52,7 @@ constexpr uint32_t kImageExchangeDuration = 2500;
 
 constexpr uint32_t kNoSplash = std::numeric_limits<uint32_t>::max();
 
-int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_width(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
 		return std::max(800, get_w() * 4 / 5);
@@ -60,7 +64,7 @@ int16_t FullscreenMenuMain::calc_desired_window_width(const UI::Window::WindowLa
 	}
 }
 
-int16_t FullscreenMenuMain::calc_desired_window_height(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_height(const UI::Window::WindowLayoutID id) {
 	switch (id) {
 	case UI::Window::WindowLayoutID::kFsMenuDefault:
 		return std::max(600, get_h() * 4 / 5);
@@ -73,15 +77,15 @@ int16_t FullscreenMenuMain::calc_desired_window_height(const UI::Window::WindowL
 	}
 }
 
-int16_t FullscreenMenuMain::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_x(const UI::Window::WindowLayoutID id) {
 	return (get_w() - calc_desired_window_width(id)) / 2 - UI::Window::kVerticalBorderThickness;
 }
 
-int16_t FullscreenMenuMain::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
+int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
 }
 
-FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
+MainMenu::MainMenu(bool first_ever_init)
    : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
@@ -152,6 +156,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
      draw_image_(0),
      last_image_(0),
      visible_(true),
+     menu_capsule_(*this),
      auto_log_(false) {
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -159,10 +164,9 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 		   layout();
 	   });
 
-	singleplayer_.selected.connect(
-	   [this]() { end_modal<MenuTarget>(singleplayer_.get_selected()); });
-	multiplayer_.selected.connect([this]() { end_modal<MenuTarget>(multiplayer_.get_selected()); });
-	editor_.selected.connect([this]() { end_modal<MenuTarget>(editor_.get_selected()); });
+	singleplayer_.selected.connect([this]() { action(singleplayer_.get_selected()); });
+	multiplayer_.selected.connect([this]() { action(multiplayer_.get_selected()); });
+	editor_.selected.connect([this]() { action(editor_.get_selected()); });
 	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
 	   end_modal<MenuTarget>(MenuTarget::kAddOns);
@@ -232,7 +236,7 @@ static void find_maps(const std::string& directory, std::vector<MapEntry>& resul
 	}
 }
 
-void FullscreenMenuMain::set_labels() {
+void MainMenu::set_labels() {
 	singleplayer_.clear();
 	multiplayer_.clear();
 	editor_.clear();
@@ -396,7 +400,7 @@ void FullscreenMenuMain::set_labels() {
 	      .str());
 }
 
-void FullscreenMenuMain::set_button_visibility(const bool v) {
+void MainMenu::set_button_visibility(const bool v) {
 	if (visible_ == v) {
 		return;
 	}
@@ -407,7 +411,7 @@ void FullscreenMenuMain::set_button_visibility(const bool v) {
 	version_.set_visible(v);
 }
 
-bool FullscreenMenuMain::handle_mousepress(uint8_t, int32_t, int32_t) {
+bool MainMenu::handle_mousepress(uint8_t, int32_t, int32_t) {
 	if (init_time_ != kNoSplash) {
 		init_time_ = kNoSplash;
 		return true;
@@ -415,7 +419,7 @@ bool FullscreenMenuMain::handle_mousepress(uint8_t, int32_t, int32_t) {
 	return false;
 }
 
-bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
+bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	if (down) {
 		bool fell_through = false;
 		if (init_time_ != kNoSplash) {
@@ -508,7 +512,7 @@ bool FullscreenMenuMain::handle_key(const bool down, const SDL_Keysym code) {
 	return UI::Panel::handle_key(down, code);
 }
 
-inline Rectf FullscreenMenuMain::image_pos(const Image& i) {
+inline Rectf MainMenu::image_pos(const Image& i) {
 	return UI::fit_image(i.width(), i.height(), get_w(), get_h());
 }
 
@@ -518,7 +522,7 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 	   dest, &img, Recti(0, 0, img.width(), img.height()), opacity, BlendMode::UseAlpha);
 }
 
-inline float FullscreenMenuMain::calc_opacity(const uint32_t time) {
+inline float MainMenu::calc_opacity(const uint32_t time) {
 	return last_image_ == draw_image_ ?
 	          1.f :
 	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
@@ -534,7 +538,7 @@ inline float FullscreenMenuMain::calc_opacity(const uint32_t time) {
  * We skip straight to the last phase 4 if we are returning from some other FsMenu screen.
  */
 
-void FullscreenMenuMain::draw(RenderTarget& r) {
+void MainMenu::draw(RenderTarget& r) {
 	UI::Panel::draw(r);
 	r.fill_rect(Recti(0, 0, get_w(), get_h()), RGBAColor(0, 0, 0, 255));
 
@@ -600,7 +604,7 @@ void FullscreenMenuMain::draw(RenderTarget& r) {
 	   title_image_, 1.f);
 }
 
-void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
+void MainMenu::draw_overlay(RenderTarget& r) {
 	if (init_time_ == kNoSplash) {
 		// overlays are needed only during the first three phases
 		return;
@@ -621,13 +625,13 @@ void FullscreenMenuMain::draw_overlay(RenderTarget& r) {
 	}
 }
 
-inline Rectf FullscreenMenuMain::title_pos() {
+inline Rectf MainMenu::title_pos() {
 	const float imgh = box_rect_.y / 3.f;
 	const float imgw = imgh * title_image_.width() / title_image_.height();
 	return Rectf((get_w() - imgw) / 2.f, buth_, imgw, imgh);
 }
 
-void FullscreenMenuMain::layout() {
+void MainMenu::layout() {
 	butw_ = get_inner_w() / 5;
 	buth_ = get_inner_h() / 25;
 	padding_ = buth_ / 3;
@@ -686,15 +690,44 @@ void FullscreenMenuMain::layout() {
 	}
 }
 
+void MainMenu::action(const MenuTarget t) {
+	switch (t) {
+	case MenuTarget::kNewGame: {
+		menu_capsule_.clear_content();
+		// NOCOM memory leaks
+		Widelands::Game* game = new Widelands::Game();
+		SinglePlayerGameSettingsProvider* sp = new SinglePlayerGameSettingsProvider();
+		new LaunchSPG(menu_capsule_, sp, *game, false);
+	}
+	break;
+
+	case MenuTarget::kLoadGame:
+	case MenuTarget::kRandomGame:
+	case MenuTarget::kCampaign:
+	case MenuTarget::kTutorial:
+	case MenuTarget::kContinueLastsave:
+	case MenuTarget::kLan:
+	case MenuTarget::kMetaserver:
+	case MenuTarget::kOnlineGameSettings:
+	case MenuTarget::kEditorNew:
+	case MenuTarget::kEditorRandom:
+	case MenuTarget::kEditorLoad:
+	case MenuTarget::kEditorContinue:
+	// NOCOM
+	default:
+		NEVER_HERE();
+	}
+}
+
 /// called if the user is not registered
-void FullscreenMenuMain::show_internet_login(const bool modal) {
+void MainMenu::show_internet_login(const bool modal) {
 	r_login_.create();
 	if (modal) {
 		r_login_.window->run<int>();
 		r_login_.destroy();
 	}
 }
-void FullscreenMenuMain::internet_login_callback() {
+void MainMenu::internet_login_callback() {
 	if (auto_log_) {
 		auto_log_ = false;
 		internet_login();
@@ -711,7 +744,7 @@ void FullscreenMenuMain::internet_login_callback() {
  *
  * This fullscreen menu ends it's modality.
  */
-void FullscreenMenuMain::internet_login() {
+void MainMenu::internet_login() {
 	nickname_ = get_config_string("nickname", "");
 	password_ = get_config_string("password_sha1", "no_password_set");
 	register_ = get_config_bool("registered", false);
@@ -748,3 +781,5 @@ void FullscreenMenuMain::internet_login() {
 		show_internet_login(true);
 	}
 }
+
+} //  namespace FsMenu

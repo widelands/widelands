@@ -497,7 +497,10 @@ void WLApplication::run() {
 		g_sh->change_music("intro");
 
 		g_sh->change_music("menu", 1000);
-		mainmenu();
+
+		FsMenu::MainMenu m(true);
+		m.run<int>();
+		// mainmenu();
 	}
 
 	g_sh->stop_music(500);
@@ -1167,7 +1170,7 @@ void WLApplication::mainmenu() {
 	std::string messagetitle;
 	std::string message;
 
-	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
+	std::unique_ptr<FsMenu::MainMenu> mm(new FsMenu::MainMenu(true));
 
 	for (;;) {
 		if (!message.empty()) {
@@ -1185,70 +1188,70 @@ void WLApplication::mainmenu() {
 		bool need_to_reset = false;
 
 		try {
-			switch (mm->run<MenuTarget>()) {
-			case MenuTarget::kTutorial:
+			switch (mm->run<FsMenu::MenuTarget>()) {
+			case FsMenu::MenuTarget::kTutorial:
 				need_to_reset = mainmenu_tutorial(*mm);
 				break;
-			case MenuTarget::kNewGame: {
+			case FsMenu::MenuTarget::kNewGame: {
 				need_to_reset = true;
 				Widelands::Game game;
 				SinglePlayerGameSettingsProvider sp;
 				new_game(*mm, game, sp, false);
 				break;
 			}
-			case MenuTarget::kLoadGame:
+			case FsMenu::MenuTarget::kLoadGame:
 				need_to_reset = true;
 				load_game(*mm);
 				break;
-			case MenuTarget::kCampaign:
+			case FsMenu::MenuTarget::kCampaign:
 				need_to_reset = campaign_game(*mm);
 				break;
-			case MenuTarget::kMetaserver:
+			case FsMenu::MenuTarget::kMetaserver:
 				mainmenu_multiplayer(*mm, true);
 				// TODO(Nordfriese): Currently there's no way to tell whether
 				// a game was actually started from mainmenu_multiplayer()
 				need_to_reset = true;
 				break;
-			case MenuTarget::kLan:
+			case FsMenu::MenuTarget::kLan:
 				mainmenu_multiplayer(*mm, false);
 				need_to_reset = true;
 				break;
-			case MenuTarget::kOnlineGameSettings:
+			case FsMenu::MenuTarget::kOnlineGameSettings:
 				mm->show_internet_login();
 				break;
-			case MenuTarget::kReplay:
+			case FsMenu::MenuTarget::kReplay:
 				need_to_reset = replay(mm.get());
 				break;
-			case MenuTarget::kOptions: {
-				OptionsCtrl om(*mm, get_config_section());
+			case FsMenu::MenuTarget::kOptions: {
+				FsMenu::OptionsCtrl om(*mm, get_config_section());
 				mm->set_labels();  // update buttons for new language
 				break;
 			}
-			case MenuTarget::kAbout: {
-				FullscreenMenuAbout ff(*mm);
-				ff.run<MenuTarget>();
+			case FsMenu::MenuTarget::kAbout: {
+				FsMenu::About ff(*mm);
+				ff.run<FsMenu::MenuTarget>();
 				break;
 			}
-			case MenuTarget::kContinueLastsave: {
+			case FsMenu::MenuTarget::kContinueLastsave: {
 				const std::string& file = mm->get_filename_for_continue_playing();
 				if (!file.empty()) {
 					need_to_reset = load_game(*mm, file);
 				}
 				break;
 			}
-			case MenuTarget::kEditorNew:
+			case FsMenu::MenuTarget::kEditorNew:
 				need_to_reset = true;
 				EditorInteractive::run_editor(EditorInteractive::Init::kNew);
 				break;
-			case MenuTarget::kEditorRandom:
+			case FsMenu::MenuTarget::kEditorRandom:
 				need_to_reset = true;
 				EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
 				break;
-			case MenuTarget::kEditorLoad:
+			case FsMenu::MenuTarget::kEditorLoad:
 				need_to_reset = true;
 				EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
 				break;
-			case MenuTarget::kEditorContinue: {
+			case FsMenu::MenuTarget::kEditorContinue: {
 				const std::string& file = mm->get_filename_for_continue_editing();
 				if (!file.empty()) {
 					need_to_reset = true;
@@ -1256,10 +1259,10 @@ void WLApplication::mainmenu() {
 				}
 				break;
 			}
-			case MenuTarget::kRandomGame:
+			case FsMenu::MenuTarget::kRandomGame:
 				need_to_reset = new_random_game(*mm);
 				break;
-			case MenuTarget::kExit:
+			case FsMenu::MenuTarget::kExit:
 			default:
 				return;
 			}
@@ -1293,7 +1296,7 @@ void WLApplication::mainmenu() {
 		}
 #endif
 		if (need_to_reset) {
-			mm.reset(new FullscreenMenuMain(false));
+			mm.reset(new FsMenu::MainMenu(false));
 		}
 	}
 }
@@ -1302,11 +1305,11 @@ void WLApplication::mainmenu() {
  * Handle the "Play Tutorial" menu option:
  * Show tutorial UI, let player select tutorial and run it.
  */
-bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
-	Widelands::Game game;
+bool WLApplication::mainmenu_tutorial(FsMenu::MainMenu& fsmm) {
+	/* Widelands::Game game;
 	//  Start UI for the tutorials.
-	FsMenu::FullscreenMenuScenarioSelect select_campaignmap(fsmm);
-	if (select_campaignmap.run<MenuTarget>() != MenuTarget::kOk) {
+	FsMenu::ScenarioSelect select_campaignmap(fsmm);
+	if (select_campaignmap.run<FsMenu::MenuTarget>() != FsMenu::MenuTarget::kOk) {
 		return false;
 	}
 	try {
@@ -1316,7 +1319,7 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
 		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
-	}
+	} */
 	return true;
 }
 
@@ -1324,8 +1327,8 @@ bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
  * Run the multiplayer menu
  */
 // TODO(Nordfriese): This should return a `bool` to indicate whether a game was started
-void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
-	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+void WLApplication::mainmenu_multiplayer(FsMenu::MainMenu& fsmm, const bool internet) {
+	/* std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	if (tribeinfos.empty()) {
 		UI::WLMessageBox mbox(
 		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
@@ -1351,8 +1354,8 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 
 		// reinitalise in every run, else graphics look strange
-		FsMenu::FullscreenMenuInternetLobby ns(fsmm, playername, password, registered, tribeinfos);
-		ns.run<MenuTarget>();
+		FsMenu::InternetLobby ns(fsmm, playername, password, registered, tribeinfos);
+		ns.run<FsMenu::MenuTarget>();
 
 		if (InternetGaming::ref().logged_in()) {
 			// logout of the metaserver
@@ -1363,17 +1366,17 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 	} else {
 		// reinitalise in every run, else graphics look strange
-		FsMenu::FullscreenMenuNetSetupLAN ns(fsmm);
-		const MenuTarget menu_result = ns.run<MenuTarget>();
+		FsMenu::NetSetupLAN ns(fsmm);
+		const FsMenu::MenuTarget menu_result = ns.run<FsMenu::MenuTarget>();
 		std::string playername = ns.get_playername();
 
 		switch (menu_result) {
-		case MenuTarget::kHostgame: {
+		case FsMenu::MenuTarget::kHostgame: {
 			GameHost netgame(fsmm, playername, tribeinfos);
 			netgame.run();
 			break;
 		}
-		case MenuTarget::kJoingame: {
+		case FsMenu::MenuTarget::kJoingame: {
 			NetAddress addr;
 			if (!ns.get_host_address(&addr)) {
 				UI::WLMessageBox mmb(
@@ -1393,10 +1396,10 @@ void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool in
 		}
 	}
 
-	g_sh->change_music("menu", 1000);
+	g_sh->change_music("menu", 1000); */
 }
 
-bool WLApplication::new_random_game(FullscreenMenuMain& fsmm) {
+bool WLApplication::new_random_game(FsMenu::MainMenu& fsmm) {
 	Widelands::Game game;
 	SinglePlayerGameSettingsProvider sp;
 	UI::UniqueWindow::Registry r;
@@ -1448,12 +1451,12 @@ bool WLApplication::new_random_game(FullscreenMenuMain& fsmm) {
  * \return @c true if a game was played, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::new_game(FullscreenMenuMain& fsmm,
+bool WLApplication::new_game(FsMenu::MainMenu& fsmm,
                              Widelands::Game& game,
                              SinglePlayerGameSettingsProvider& sp,
                              const bool preconfigured,
                              bool* canceled) {
-	MenuTarget code = MenuTarget::kNormalGame;
+	/* FsMenu::MenuTarget code = FsMenu::MenuTarget::kNormalGame;
 	if (sp.settings().tribes.empty()) {
 		UI::WLMessageBox mbox(
 		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
@@ -1462,9 +1465,9 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
 		mbox.run<UI::Panel::Returncodes>();
 		return false;
 	}
-	FsMenu::FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
-	code = lgm.run<MenuTarget>();
-	if (code == MenuTarget::kBack) {
+	FsMenu::LaunchSPG lgm(fsmm, &sp, game, preconfigured);
+	code = lgm.run<FsMenu::MenuTarget>();
+	if (code == FsMenu::MenuTarget::kBack) {
 		if (canceled) {
 			*canceled = true;
 		}
@@ -1476,7 +1479,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 
-	if (code == MenuTarget::kScenarioGame) {  // scenario
+	if (code == FsMenu::MenuTarget::kScenarioGame) {  // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.get_map(), "");
 		} catch (const std::exception& e) {
@@ -1510,7 +1513,7 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
 			emergency_save(game);
 			throw;
 		}
-	}
+	} */
 	return true;
 }
 
@@ -1521,15 +1524,15 @@ bool WLApplication::new_game(FullscreenMenuMain& fsmm,
  * \return @c true if a game was loaded, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::load_game(FullscreenMenuMain& fsmm, std::string filename) {
-	Widelands::Game game;
+bool WLApplication::load_game(FsMenu::MainMenu& fsmm, std::string filename) {
+	/* Widelands::Game game;
 
 	game.set_ai_training_mode(get_config_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
 
 	if (filename.empty()) {
-		FsMenu::FullscreenMenuLoadGame ssg(fsmm, game, &sp);
-		if (ssg.run<MenuTarget>() == MenuTarget::kOk) {
+		FsMenu::LoadGame ssg(fsmm, game, &sp);
+		if (ssg.run<FsMenu::MenuTarget>() == FsMenu::MenuTarget::kOk) {
 			filename = ssg.filename();
 		} else {
 			return false;
@@ -1544,7 +1547,7 @@ bool WLApplication::load_game(FullscreenMenuMain& fsmm, std::string filename) {
 		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
-	}
+	} */
 	return false;  // keep compiler silent.
 }
 
@@ -1555,16 +1558,16 @@ bool WLApplication::load_game(FullscreenMenuMain& fsmm, std::string filename) {
  * \return @c true if a scenario was played, @c false if the player pressed Back
  * or aborted the game setup via some other means.
  */
-bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
-	Widelands::Game game;
+bool WLApplication::campaign_game(FsMenu::MainMenu& fsmm) {
+	/* Widelands::Game game;
 	std::string filename;
 	for (;;) {  // Campaign UI - Loop
 		std::unique_ptr<Campaigns> campaign_visibility(new Campaigns());
 
 		size_t campaign_index;
 		{  //  First start UI for selecting the campaign.
-			FsMenu::FullscreenMenuCampaignSelect select_campaign(fsmm, campaign_visibility.get());
-			if (select_campaign.run<MenuTarget>() == MenuTarget::kOk) {
+			FsMenu::CampaignSelect select_campaign(fsmm, campaign_visibility.get());
+			if (select_campaign.run<FsMenu::MenuTarget>() == FsMenu::MenuTarget::kOk) {
 				campaign_index = select_campaign.get_campaign_index();
 			} else {  //  back was pressed
 				filename = "";
@@ -1573,15 +1576,15 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 		}
 		//  Then start UI for the selected campaign.
 		CampaignData* campaign_data = campaign_visibility->get_campaign(campaign_index);
-		FsMenu::FullscreenMenuScenarioSelect select_campaignmap(fsmm, campaign_data);
-		if (select_campaignmap.run<MenuTarget>() == MenuTarget::kOk) {
+		FsMenu::ScenarioSelect select_campaignmap(fsmm, campaign_data);
+		if (select_campaignmap.run<FsMenu::MenuTarget>() == FsMenu::MenuTarget::kOk) {
 			filename = select_campaignmap.get_map();
 			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
 			break;
 		}
 		// TODO(Nordfriese): There is no way to distinguish whether the user pressed
 		// Back or clicked the Close button. In both cases, `MenuTarget::kBack` is
-		// returned. We want to restart the FullscreenMenuCampaignSelect if the user
+		// returned. We want to restart the CampaignSelect if the user
 		// pressed Back but not if he used the close button.
 	}
 	try {
@@ -1593,29 +1596,29 @@ bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
 		log_err("Fatal exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
-	}
+	} */
 	return false;
 }
 
 /**
  * Show the replay menu and play a replay.
  */
-bool WLApplication::replay(FullscreenMenuMain* fsmm) {
+bool WLApplication::replay(FsMenu::MainMenu* fsmm) {
 	Widelands::Game game;
 
-	std::string map_theme, map_bg;
+	std::string map_theme, map_bg; /*
 	if (filename_.empty()) {
 		assert(fsmm);
 		SinglePlayerGameSettingsProvider sp;
-		FsMenu::FullscreenMenuLoadGame rm(*fsmm, game, &sp, true);
-		if (rm.run<MenuTarget>() == MenuTarget::kBack) {
+		FsMenu::LoadGame rm(*fsmm, game, &sp, true);
+		if (rm.run<FsMenu::MenuTarget>() == FsMenu::MenuTarget::kBack) {
 			return false;
 		}
 
 		filename_ = rm.filename();
 		map_theme = sp.settings().map_theme;
 		map_bg = sp.settings().map_background;
-	}
+	} */
 
 	try {
 		game.create_loader_ui({"general_game"}, true, map_theme, map_bg);

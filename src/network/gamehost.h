@@ -29,9 +29,11 @@
 #include "network/network.h"
 
 struct ChatMessage;
-class FullscreenMenuMain;
 struct GameHostImpl;
 struct Client;
+namespace FsMenu {
+class MainMenu;
+}
 
 /**
  * GameHost manages the lifetime of a network game in which this computer
@@ -44,7 +46,7 @@ struct GameHost : public GameController {
 	/** playernumber 0 identifies the spectators */
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
-	GameHost(FullscreenMenuMain&,
+	GameHost(FsMenu::MainMenu&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
@@ -186,7 +188,7 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
-	FullscreenMenuMain& fsmm_;
+	FsMenu::MainMenu& fsmm_;
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;

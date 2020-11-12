@@ -30,14 +30,14 @@ namespace Widelands {
 class Game;
 }
 namespace FsMenu {
-class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
+class LaunchSPG : public LaunchGame {
 public:
-	FullscreenMenuLaunchSPG(FullscreenMenuMain&,
+	LaunchSPG(MenuCapsule&,
 	                        GameSettingsProvider*,
 	                        Widelands::EditorGameBase& egbase,
 	                        bool preconfigured,
 	                        GameController* = nullptr);
-	~FullscreenMenuLaunchSPG() override = default;
+	~LaunchSPG() override = default;
 
 	void start() override;
 

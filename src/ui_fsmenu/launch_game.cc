@@ -32,12 +32,14 @@
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
+
 namespace FsMenu {
-FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
+
+LaunchGame::LaunchGame(MenuCapsule& fsmm,
                                                    GameSettingsProvider* const settings,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
-   : TwoColumnsFullNavigationMenu(fsmm, "launch_game", _("Launch Game")),
+   : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
      map_details(&right_column_content_box_, preconfigured, kPadding),
 
      configure_game(&right_column_content_box_,
@@ -83,11 +85,11 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
 	layout();
 }
 
-FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
+LaunchGame::~LaunchGame() {
 	delete lua_;
 }
 
-void FullscreenMenuLaunchGame::add_all_widgets() {
+void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&map_details, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(5 * kPadding);
 	right_column_content_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -99,13 +101,13 @@ void FullscreenMenuLaunchGame::add_all_widgets() {
 	right_column_content_box_.add(&custom_starting_positions_);
 }
 
-void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
+void LaunchGame::add_behaviour_to_widgets() {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 
 	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
-void FullscreenMenuLaunchGame::layout() {
+void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
@@ -113,7 +115,7 @@ void FullscreenMenuLaunchGame::layout() {
 	map_details.force_new_dimensions(right_column_width_, standard_height_);
 }
 
-void FullscreenMenuLaunchGame::update_peaceful_mode() {
+void LaunchGame::update_peaceful_mode() {
 	bool forbidden =
 	   peaceful_mode_forbidden_ || settings_->settings().scenario || settings_->settings().savegame;
 	peaceful_.set_enabled(!forbidden && settings_->can_change_map());
@@ -131,7 +133,7 @@ void FullscreenMenuLaunchGame::update_peaceful_mode() {
 	}
 }
 
-void FullscreenMenuLaunchGame::update_custom_starting_positions() {
+void LaunchGame::update_custom_starting_positions() {
 	const bool forbidden = settings_->settings().scenario || settings_->settings().savegame;
 	custom_starting_positions_.set_enabled(!forbidden && settings_->can_change_map());
 	if (forbidden) {
@@ -147,7 +149,7 @@ void FullscreenMenuLaunchGame::update_custom_starting_positions() {
 	}
 }
 
-bool FullscreenMenuLaunchGame::init_win_condition_label() {
+bool LaunchGame::init_win_condition_label() {
 	if (settings_->settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
 		win_condition_dropdown_.set_label(_("Scenario"));
@@ -171,7 +173,7 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
 /**
  * Fill the dropdown with the available win conditions.
  */
-void FullscreenMenuLaunchGame::update_win_conditions() {
+void LaunchGame::update_win_conditions() {
 	if (!init_win_condition_label()) {
 		std::set<std::string> tags;
 		if (!settings_->settings().mapfilename.empty()) {
@@ -187,7 +189,7 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 	}
 }
 
-void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& tags) {
+void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 	win_condition_dropdown_.clear();
 	try {
 		// Make sure that the last win condition is still valid. If not, pick the first one
@@ -232,7 +234,7 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 }
 
 std::unique_ptr<LuaTable>
-FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_condition_script,
+LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
                                                  const std::set<std::string>& tags) const {
 	bool is_usable = true;
 	std::unique_ptr<LuaTable> t;
@@ -259,11 +261,11 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 	return t;
 }
 
-void FullscreenMenuLaunchGame::toggle_peaceful() {
+void LaunchGame::toggle_peaceful() {
 	settings_->set_peaceful_mode(peaceful_.get_state());
 }
 
-void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
+void LaunchGame::toggle_custom_starting_positions() {
 	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
 }
 }  // namespace FsMenu

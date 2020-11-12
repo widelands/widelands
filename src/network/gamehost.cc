@@ -518,7 +518,7 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(FullscreenMenuMain& f,
+GameHost::GameHost(FsMenu::MainMenu& f,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
@@ -651,15 +651,15 @@ void GameHost::run() {
 	Widelands::Game game;
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	FsMenu::FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
-	const MenuTarget code = lm.run<MenuTarget>();
-	if (code == MenuTarget::kBack) {
+	/* FsMenu::LaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);  // NOCOM
+	const FsMenu::MenuTarget code = lm.run<FsMenu::MenuTarget>();
+	if (code == FsMenu::MenuTarget::kBack) {
 		// if this is an internet game, tell the metaserver that client is back in the lobby.
 		if (internet_) {
 			InternetGaming::ref().set_game_done();
 		}
 		return;
-	}
+	} */
 
 	// if this is an internet game, tell the metaserver that the game started
 	if (internet_) {

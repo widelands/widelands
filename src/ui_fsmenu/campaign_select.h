@@ -29,9 +29,9 @@ namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign
  */
-class FullscreenMenuCampaignSelect : public TwoColumnsFullNavigationMenu {
+class CampaignSelect : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuCampaignSelect(FullscreenMenuMain&, Campaigns* campvis);
+	CampaignSelect(MenuCapsule&, Campaigns* campvis);
 
 	size_t get_campaign_index() const;
 

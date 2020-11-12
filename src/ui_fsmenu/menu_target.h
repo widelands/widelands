@@ -22,6 +22,7 @@
 
 #include "ui_basic/panel.h"
 
+namespace FsMenu {
 enum class MenuTarget {
 	kBack = static_cast<int>(UI::Panel::Returncodes::kBack),
 	kOk = static_cast<int>(UI::Panel::Returncodes::kOk),
@@ -61,5 +62,6 @@ enum class MenuTarget {
 	kHostgame,
 	kJoingame
 };
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_MENU_TARGET_H

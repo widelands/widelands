@@ -29,15 +29,15 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/button.h"
 
-namespace UI {
+namespace FsMenu {
 
-FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
+HelpWindow::HelpWindow(UI::Panel* const parent,
                                            LuaInterface* lua,
                                            const std::string& script_path,
                                            const std::string& caption,
                                            uint32_t width,
                                            uint32_t height)
-   : Window(parent,
+   : UI::Window(parent,
             UI::WindowStyle::kFsMenu,
             "help_window",
             0,
@@ -46,15 +46,15 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
             height,
             (boost::format(_("Help: %s")) % caption).str()),
      textarea_(
-        new MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
+        new UI::MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
 
 	// Calculate sizes
 	width = (width == 0) ? g_gr->get_xres() * 3 / 5 : width;
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
-	Button* btn =
-	   new Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
+	UI::Button* btn =
+	   new UI::Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
 
 	btn->sigclicked.connect([this]() { clicked_ok(); });
 	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));
@@ -82,7 +82,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
  *
  * Clicking the right mouse button inside the window acts like pressing Ok.
  */
-bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
+bool HelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
 		clicked_ok();
@@ -91,7 +91,7 @@ bool FullscreenHelpWindow::handle_mousepress(const uint8_t btn, int32_t x, int32
 	return UI::Window::handle_mousepress(btn, x, y);
 }
 
-bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
+bool HelpWindow::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
@@ -105,7 +105,7 @@ bool FullscreenHelpWindow::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
-void FullscreenHelpWindow::clicked_ok() {
+void HelpWindow::clicked_ok() {
 	if (is_modal()) {
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
@@ -115,4 +115,4 @@ void FullscreenHelpWindow::clicked_ok() {
 	}
 }
 
-}  // namespace UI
+}  // namespace FsMenu

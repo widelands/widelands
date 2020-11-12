@@ -38,9 +38,10 @@
 
 #include "base/vector.h"
 
-class FullscreenMenuMain;
 struct SinglePlayerGameSettingsProvider;
-
+namespace FsMenu {
+class MainMenu;
+}
 namespace Widelands {
 class Game;
 }
@@ -179,19 +180,19 @@ struct WLApplication {
 
 	void mainmenu();
 
-	bool mainmenu_tutorial(FullscreenMenuMain&);
+	bool mainmenu_tutorial(FsMenu::MainMenu&);
 	void mainmenu_singleplayer();
-	void mainmenu_multiplayer(FullscreenMenuMain&, bool internet);
+	void mainmenu_multiplayer(FsMenu::MainMenu&, bool internet);
 	void mainmenu_editor();
-	bool new_random_game(FullscreenMenuMain&);
-	bool new_game(FullscreenMenuMain&,
+	bool new_random_game(FsMenu::MainMenu&);
+	bool new_game(FsMenu::MainMenu&,
 	              Widelands::Game&,
 	              SinglePlayerGameSettingsProvider&,
 	              bool preconfigured,
 	              bool* canceled = nullptr);
-	bool load_game(FullscreenMenuMain&, std::string filename = "");
-	bool campaign_game(FullscreenMenuMain&);
-	bool replay(FullscreenMenuMain*);
+	bool load_game(FsMenu::MainMenu&, std::string filename = "");
+	bool campaign_game(FsMenu::MainMenu&);
+	bool replay(FsMenu::MainMenu*);
 
 	static void emergency_save(Widelands::Game&);
 

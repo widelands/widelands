@@ -28,9 +28,9 @@
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/menu.h"
 namespace FsMenu {
-class FullscreenMenuNetSetupLAN : public TwoColumnsBasicNavigationMenu {
+class NetSetupLAN : public TwoColumnsBasicNavigationMenu {
 public:
-	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
+	explicit NetSetupLAN(MenuCapsule&);
 
 	void think() override;
 

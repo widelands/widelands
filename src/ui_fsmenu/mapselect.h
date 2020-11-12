@@ -34,9 +34,9 @@ namespace FsMenu {
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-class FullscreenMenuMapSelect : public TwoColumnsFullNavigationMenu {
+class MapSelect : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuMapSelect(FullscreenMenuMain&,
+	MapSelect(MenuCapsule&,
 	                        GameSettingsProvider*,
 	                        GameController*,
 	                        Widelands::EditorGameBase& egbase);

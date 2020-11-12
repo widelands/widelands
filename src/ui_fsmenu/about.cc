@@ -26,9 +26,9 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-constexpr int16_t kPadding = 4;
+namespace FsMenu {
 
-FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
+About::About(MainMenu& fsmm)
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "about",
@@ -69,7 +69,7 @@ FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
 	tabs_.load_tab_contents();
 }
 
-bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
+bool About::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
@@ -84,9 +84,11 @@ bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
-void FullscreenMenuAbout::layout() {
+void About::layout() {
 	UI::Window::layout();
 	if (!is_minimal()) {
 		box_.set_size(get_inner_w(), get_inner_h());
 	}
 }
+
+}  // namespace FsMenu

@@ -24,13 +24,14 @@
 #include "base/i18n.h"
 #include "wlapplication_options.h"
 #include "wui/gamedetails.h"
+
 namespace FsMenu {
-FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
+
+LoadGame::LoadGame(MenuCapsule& fsmm,
                                                Widelands::Game& g,
                                                GameSettingsProvider* gsp,
                                                bool is_replay)
-   : TwoColumnsFullNavigationMenu(
-        fsmm, "choose_game", is_replay ? _("Choose Replay") : _("Choose Game")),
+   : TwoColumnsFullNavigationMenu(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
      load_or_save_(&right_column_content_box_,
                    g,
                    is_replay ?
@@ -88,11 +89,11 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
 }
-void FullscreenMenuLoadGame::layout() {
+void LoadGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	load_or_save_.delete_button()->set_desired_size(0, standard_height_);
 }
-void FullscreenMenuLoadGame::think() {
+void LoadGame::think() {
 	TwoColumnsFullNavigationMenu::think();
 
 	if (update_game_details_) {
@@ -102,7 +103,7 @@ void FullscreenMenuLoadGame::think() {
 	}
 }
 
-void FullscreenMenuLoadGame::toggle_filenames() {
+void LoadGame::toggle_filenames() {
 	showing_filenames_ = show_filenames_->get_state();
 	set_config_bool("display_replay_filenames", showing_filenames_);
 
@@ -119,7 +120,7 @@ void FullscreenMenuLoadGame::toggle_filenames() {
 	entry_selected();
 }
 
-void FullscreenMenuLoadGame::clicked_ok() {
+void LoadGame::clicked_ok() {
 	if (load_or_save_.table().selections().size() != 1) {
 		return;
 	}
@@ -130,12 +131,12 @@ void FullscreenMenuLoadGame::clicked_ok() {
 	} else {
 		if (gamedata && gamedata->errormessage.empty()) {
 			filename_ = gamedata->filename;
-			end_modal<MenuTarget>(MenuTarget::kOk);
+			die();  // end_modal<MenuTarget>(MenuTarget::kOk);  NOCOM
 		}
 	}
 }
 
-void FullscreenMenuLoadGame::entry_selected() {
+void LoadGame::entry_selected() {
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	if (load_or_save_.has_selection()) {
 		// Update during think() instead of every keypress
@@ -145,16 +146,16 @@ void FullscreenMenuLoadGame::entry_selected() {
 	}
 }
 
-void FullscreenMenuLoadGame::fill_table() {
+void LoadGame::fill_table() {
 	load_or_save_.set_show_filenames(showing_filenames_);
 	load_or_save_.fill_table();
 }
 
-const std::string& FullscreenMenuLoadGame::filename() const {
+const std::string& LoadGame::filename() const {
 	return filename_;
 }
 
-bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
+bool LoadGame::handle_key(bool down, SDL_Keysym code) {
 	if (!down) {
 		return false;
 	}

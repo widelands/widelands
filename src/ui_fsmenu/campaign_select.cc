@@ -22,14 +22,17 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "scripting/lua_table.h"
+#include "ui_fsmenu/menu_target.h"
+
 namespace FsMenu {
+
 /**
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& fsmm,
+CampaignSelect::CampaignSelect(MenuCapsule& fsmm,
                                                            Campaigns* campvis)
-   : TwoColumnsFullNavigationMenu(fsmm, "choose_campaign", _("Choose Campaign")),
+   : TwoColumnsFullNavigationMenu(fsmm, _("Choose Campaign")),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Campaign description
@@ -61,7 +64,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(FullscreenMenuMain& f
 /**
  * OK was clicked, after an entry of campaignlist got selected.
  */
-void FullscreenMenuCampaignSelect::clicked_ok() {
+void CampaignSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
@@ -72,17 +75,17 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
-size_t FullscreenMenuCampaignSelect::get_campaign_index() const {
+size_t CampaignSelect::get_campaign_index() const {
 	return table_.get_selected();
 }
 
-bool FullscreenMenuCampaignSelect::set_has_selection() {
+bool CampaignSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	return has_selection;
 }
 
-void FullscreenMenuCampaignSelect::entry_selected() {
+void CampaignSelect::entry_selected() {
 	if (set_has_selection()) {
 		const CampaignData& campaign_data = *campaigns_->get_campaign(table_.get_selected());
 		ok_.set_enabled(campaign_data.visible);
@@ -93,7 +96,7 @@ void FullscreenMenuCampaignSelect::entry_selected() {
 /**
  * fill the campaign list
  */
-void FullscreenMenuCampaignSelect::fill_table() {
+void CampaignSelect::fill_table() {
 	table_.clear();
 
 	for (size_t i = 0; i < campaigns_->no_of_campaigns(); ++i) {
@@ -113,7 +116,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	set_has_selection();
 }
 
-bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
+bool CampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
 	const CampaignData& r1 = *campaigns_->get_campaign(table_[rowa]);
 	const CampaignData& r2 = *campaigns_->get_campaign(table_[rowb]);
 

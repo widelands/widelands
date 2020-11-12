@@ -26,8 +26,10 @@
 #include "logic/player_end_result.h"
 #include "network/network.h"
 
-class FullscreenMenuMain;
 struct GameClientImpl;
+namespace FsMenu {
+class MainMenu;
+}
 
 /**
  * GameClient manages the lifetime of a network game in which this computer
@@ -40,7 +42,7 @@ struct GameClientImpl;
  * connect locally / via IP.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
-	GameClient(FullscreenMenuMain&,
+	GameClient(FsMenu::MainMenu&,
 	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
@@ -114,7 +116,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
-	FullscreenMenuMain& fullscreen_menu_main() const {
+	FsMenu::MainMenu& fullscreen_menu_main() const {
 		return fsmm_;
 	}
 
@@ -152,7 +154,7 @@ private:
 
 	GameClientImpl* d;
 
-	FullscreenMenuMain& fsmm_;
+	FsMenu::MainMenu& fsmm_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H

@@ -31,17 +31,18 @@
 #include "scripting/lua_table.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_fsmenu/campaigns.h"
+#include "ui_fsmenu/menu_target.h"
+
 namespace FsMenu {
+
 /**
- * FullscreenMenuScenarioSelect UI.
+ * ScenarioSelect UI.
  *
  * Loads a list of all visible maps of selected campaign or all tutorials and
  * lets the user choose one.
  */
-FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& fsmm,
-                                                           CampaignData* camp)
-   : TwoColumnsFullNavigationMenu(
-        fsmm, "choose_scenario", camp ? _("Choose Scenario") : _("Choose Tutorial")),
+ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
+   : TwoColumnsFullNavigationMenu(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
@@ -140,12 +141,12 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& f
 	table_.cancel.connect([this]() { clicked_back(); });
 }
 
-void FullscreenMenuScenarioSelect::layout() {
+void ScenarioSelect::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	scenario_difficulty_.set_desired_size(0, standard_height_);
 }
 
-std::string FullscreenMenuScenarioSelect::get_map() {
+std::string ScenarioSelect::get_map() {
 	if (set_has_selection()) {
 		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" +
 		                                        scenarios_data_.at(table_.get_selected()).path);
@@ -153,17 +154,17 @@ std::string FullscreenMenuScenarioSelect::get_map() {
 	return "";
 }
 
-uint32_t FullscreenMenuScenarioSelect::get_difficulty() const {
+uint32_t ScenarioSelect::get_difficulty() const {
 	return scenario_difficulty_.get_selected();
 }
 
-bool FullscreenMenuScenarioSelect::set_has_selection() {
+bool ScenarioSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	return has_selection;
 }
 
-void FullscreenMenuScenarioSelect::clicked_ok() {
+void ScenarioSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
@@ -174,7 +175,7 @@ void FullscreenMenuScenarioSelect::clicked_ok() {
 	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
-void FullscreenMenuScenarioSelect::entry_selected() {
+void ScenarioSelect::entry_selected() {
 	if (set_has_selection()) {
 		const ScenarioData& scenario_data = scenarios_data_[table_.get_selected()];
 		scenario_details_.update(scenario_data);
@@ -187,7 +188,7 @@ void FullscreenMenuScenarioSelect::entry_selected() {
 /**
  * fill the campaign-map list
  */
-void FullscreenMenuScenarioSelect::fill_table() {
+void ScenarioSelect::fill_table() {
 	if (is_tutorial_) {
 		// Load the tutorials
 		LuaInterface lua;

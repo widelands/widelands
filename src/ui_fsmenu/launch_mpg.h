@@ -36,14 +36,14 @@ namespace FsMenu {
  * games.
  *
  */
-class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
+class LaunchMPG : public LaunchGame {
 public:
-	FullscreenMenuLaunchMPG(FullscreenMenuMain&,
+	LaunchMPG(MenuCapsule&,
 	                        GameSettingsProvider*,
 	                        GameController*,
 	                        ChatProvider&,
 	                        Widelands::EditorGameBase& egbase);
-	~FullscreenMenuLaunchMPG() override = default;
+	~LaunchMPG() override = default;
 
 	void think() override;
 	void refresh();
@@ -67,7 +67,7 @@ private:
 
 	UI::Button help_button_;
 
-	std::unique_ptr<UI::FullscreenHelpWindow> help_;
+	std::unique_ptr<HelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
 	GameChatPanel chat_;
 	Widelands::EditorGameBase& egbase_;  // Not owned

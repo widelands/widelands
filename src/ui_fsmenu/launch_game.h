@@ -31,18 +31,20 @@
 
 class GameController;
 class LuaInterface;
+
 namespace FsMenu {
+
 static constexpr double scale_factor = 1.3;
 /**
  * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public TwoColumnsFullNavigationMenu {
+class LaunchGame : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuLaunchGame(FullscreenMenuMain&,
+	LaunchGame(MenuCapsule&,
 	                         GameSettingsProvider*,
 	                         GameController*,
 	                         bool preconfigured = false);
-	~FullscreenMenuLaunchGame() override;
+	~LaunchGame() override;
 
 	GameSettingsProvider& settings() const {
 		assert(settings_);
@@ -50,8 +52,8 @@ public:
 	}
 
 protected:
-	virtual void clicked_ok() = 0;
-	virtual void clicked_back() = 0;
+	void clicked_ok() override = 0;
+	void clicked_back() override = 0;
 	virtual bool clicked_select_map() = 0;
 
 	LuaInterface* lua_;

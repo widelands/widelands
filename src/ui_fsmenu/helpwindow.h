@@ -26,15 +26,15 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
-namespace UI {
+namespace FsMenu {
 
 /**
  * Shows a help window with an OK button.
  * See data/txts/help/multiplayer_help.lua for an example Lua file.
  */
-class FullscreenHelpWindow : public Window {
+class HelpWindow : public UI::Window {
 public:
-	FullscreenHelpWindow(Panel* parent,
+	HelpWindow(Panel* parent,
 	                     LuaInterface* lua,
 	                     const std::string& script_path,
 	                     const std::string& caption,
@@ -54,9 +54,9 @@ protected:
 	}
 
 private:
-	std::unique_ptr<MultilineTextarea> textarea_;
+	std::unique_ptr<UI::MultilineTextarea> textarea_;
 };
 
-}  // namespace UI
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_HELPWINDOW_H
