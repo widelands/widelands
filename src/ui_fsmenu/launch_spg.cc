@@ -21,24 +21,68 @@
 
 #include <memory>
 
+#include "base/i18n.h"
+#include "base/log.h"
+#include "base/random.h"
+#include "base/time_string.h"
 #include "base/warning.h"
+#include "base/wexception.h"
+#include "build_info.h"
+#include "config.h"
+#include "editor/editorinteractive.h"
+#include "editor/ui_menus/main_menu_random_map.h"
+#include "graphic/default_resolution.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/mouse_cursor.h"
+#include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
-#include "logic/game_controller.h"
-#include "logic/player.h"
+#include "logic/game_data_error.h"
+#include "logic/game_settings.h"
+#include "logic/map.h"
+#include "logic/replay.h"
+#include "logic/replay_game_controller.h"
+#include "logic/single_player_game_controller.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
+#include "network/crypto.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
+#include "network/internet_gaming.h"
+#include "sound/sound_handler.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/about.h"
+#include "ui_fsmenu/campaign_select.h"
+#include "ui_fsmenu/campaigns.h"
+#include "ui_fsmenu/internet_lobby.h"
+#include "ui_fsmenu/loadgame.h"
+#include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
+#include "ui_fsmenu/netsetup_lan.h"
+#include "ui_fsmenu/options.h"
+#include "ui_fsmenu/scenario_select.h"
+#include "wlapplication.h"
+#include "wlapplication_options.h"
+#include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 namespace FsMenu {
 
 LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
-                                                 GameSettingsProvider* const settings,
-                                                 Widelands::EditorGameBase& egbase,
-                                                 bool preconfigured,
-                                                 GameController* const ctrl)
-   : LaunchGame(fsmm, settings, ctrl),
-     player_setup(&left_column_box_, settings, scale_factor * standard_height_, kPadding),
+                                                 GameSettingsProvider& settings,
+                                                 Widelands::Game& g,
+                                                 bool preconfigured)
+   : LaunchGame(fsmm, settings, nullptr),
+     player_setup(&left_column_box_, &settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
-     egbase_(egbase) {
+     game_(&g),
+     initializing_(true) {
 
 	left_column_box_.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	ok_.set_enabled(settings_->can_launch() || preconfigured_);
@@ -50,63 +94,46 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 		update_custom_starting_positions();
 		update();
 		layout();
+	} else {
+		clicked_select_map();
 	}
 }
 
-/**
- * Select a map as a first step in launching a game, before
- * showing the actual setup menu.
- */
-void LaunchSPG::start() {
-	if (!preconfigured_ && !clicked_select_map()) {
-		end_modal<MenuTarget>(MenuTarget::kBack);
+void LaunchSPG::clicked_select_map() {
+	if (!preconfigured_ && settings_->can_change_map()) {
+		new MapSelect(*this, settings_.get(), nullptr, *game_);
 	}
 }
 
-/**
- * Select a map and send all information to the user interface.
- * Returns whether a map has been selected.
- */
-bool LaunchSPG::clicked_select_map() {
-	if (preconfigured_ || !settings_->can_change_map()) {
-		return false;
+void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool scenario) {
+	assert(!preconfigured_ && settings_->can_change_map());
+
+	if (!mapdata) {
+		if (initializing_) {
+			die();
+		}
+		return;
 	}
+	initializing_ = false;
 
-	set_visible(false);
-	MapSelect msm(capsule_, settings_, nullptr, egbase_);
-	MenuTarget code = msm.run<MenuTarget>();
-	set_visible(true);
-
-	if (code == MenuTarget::kBack) {
-		// Set scenario = false, else the menu might crash when back is pressed.
-		settings_->set_scenario(false);
-		return false;  // back was pressed
-	}
-
-	settings_->set_scenario(code == MenuTarget::kScenarioGame);
-
-	const MapData& mapdata = *msm.get_map();
-
+	settings_->set_scenario(scenario);
 	assert(!settings_->settings().tribes.empty());
-
 	settings_->set_map(
-	   mapdata.name, mapdata.filename, mapdata.theme, mapdata.background, mapdata.nrplayers);
+	   mapdata->name, mapdata->filename, mapdata->theme, mapdata->background, mapdata->nrplayers);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	update_win_conditions();
 	update_peaceful_mode();
 	update_custom_starting_positions();
 	update();
-
 	// force layout so all boxes and textareas are forced to update
 	layout();
-	return true;
 }
 
 void LaunchSPG::update() {
 	peaceful_.set_state(settings_->is_peaceful_mode());
 	if (preconfigured_) {
-		map_details.update(settings_, *egbase_.mutable_map());
+		map_details.update(settings_.get(), *game_->mutable_map());
 		ok_.set_enabled(true);
 	} else {
 		Widelands::Map map;  //  MapLoader needs a place to put its preload data
@@ -118,7 +145,7 @@ void LaunchSPG::update() {
 			map_loader->preload_map(true);
 		}
 
-		map_details.update(settings_, map);
+		map_details.update(settings_.get(), map);
 		ok_.set_enabled(settings_->can_launch());
 		enforce_player_names_and_tribes(map);
 	}
@@ -144,10 +171,6 @@ void LaunchSPG::enforce_player_names_and_tribes(const Widelands::Map& map) {
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 }
 
-void LaunchSPG::clicked_back() {
-	return end_modal<MenuTarget>(MenuTarget::kBack);
-}
-
 void LaunchSPG::win_condition_selected() {
 	if (win_condition_dropdown_.has_selection()) {
 		last_win_condition_ = win_condition_dropdown_.get_selected();
@@ -162,25 +185,57 @@ void LaunchSPG::win_condition_selected() {
 void LaunchSPG::clicked_ok() {
 	const std::string filename = settings_->settings().mapfilename;
 	if (!preconfigured_ && !g_fs->file_exists(filename)) {
-		throw WLWarning(_("File not found"),
+		UI::WLMessageBox m(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("File not found"),
+		                (boost::format(
 		                _("Widelands tried to start a game with a file that could not be "
 		                  "found at the given path.\n"
 		                  "The file was: %s\n"
 		                  "If this happens in a network game, the host might have selected "
 		                  "a file that you do not own. Normally, such a file should be sent "
 		                  "from the host to you, but perhaps the transfer was not yet "
-		                  "finished!?!"),
-		                filename.c_str());
+		                  "finished!?!"))
+		                % filename).str(), UI::WLMessageBox::MBoxType::kOk);
+		m.run<int>();
+		return;
 	}
 	if (settings_->can_launch() || preconfigured_) {
-		if (settings_->settings().scenario) {
-			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
-		} else {
-			if (win_condition_dropdown_.has_selection()) {
-				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+		Widelands::PlayerNumber playernumber = 1;
+		upcast(SinglePlayerGameSettingsProvider, sp, settings_.get());
+		assert(sp);
+		try {
+			if (sp->settings().scenario) {  // scenario
+				game_->run_splayer_scenario_direct(sp->get_map(), "");
+			} else {  // normal singleplayer
+				playernumber = sp->settings().playernum + 1;
+				sp->set_win_condition_script(win_condition_dropdown_.get_selected());
+				// Game controller needs the ibase pointer to init the chat
+				game_->set_ibase(new InteractivePlayer(*game_, get_config_section(), playernumber, false));
+				std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(*game_, true, playernumber));
+
+				std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+				if (sp->has_players_tribe()) {
+					tipstexts.push_back(sp->get_players_tribe());
+				}
+				game_->create_loader_ui(tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
+
+				Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+
+				game_->set_game_controller(ctrl.get());
+				game_->init_newgame(sp->settings());
+				game_->run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 			}
-			end_modal<MenuTarget>(MenuTarget::kNormalGame);
+		} catch (const std::exception& e) {
+			log_err("Fatal exception: %s\n", e.what());
+			UI::WLMessageBox m(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Unexpected error during the game"), (boost::format(
+					_("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n\nPlease add this information to your report.\n\nWidelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."))
+					% e.what() % build_id() % build_type()).str(), UI::WLMessageBox::MBoxType::kOk);
+			m.run<int>();
+
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(*game_, true, playernumber));
+			game_->set_game_controller(ctrl.get());
+			WLApplication::emergency_save(*game_);
 		}
+		die();
 	}
 }
 

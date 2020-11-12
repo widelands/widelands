@@ -28,6 +28,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
+#include "ui_fsmenu/launch_game.h"
 #include "ui_fsmenu/menu_target.h"
 #include "wui/map_tags.h"
 
@@ -40,11 +41,12 @@ constexpr int checkbox_space_ = 20;
 
 using Widelands::WidelandsMapLoader;
 
-MapSelect::MapSelect(MenuCapsule& fsmm,
+MapSelect::MapSelect(LaunchGame& lg,
                                                  GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
                                                  Widelands::EditorGameBase& egbase)
-   : TwoColumnsFullNavigationMenu(fsmm, _("Choose Map")),
+   : TwoColumnsFullNavigationMenu(lg.get_capsule(), _("Choose Map")),
+     parent_screen_(lg),
      checkboxes_(
         &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
@@ -201,6 +203,11 @@ MapData const* MapSelect::get_map() const {
 	return &maps_data_[table_.get_selected()];
 }
 
+void MapSelect::clicked_back() {
+	parent_screen_.clicked_select_map_callback(nullptr, false);
+	die();
+}
+
 void MapSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
@@ -213,11 +220,8 @@ void MapSelect::clicked_ok() {
 	} else if (!ok_.enabled()) {
 		return;
 	} else {
-		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
-			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
-		} else {
-			end_modal<MenuTarget>(MenuTarget::kNormalGame);
-		}
+		parent_screen_.clicked_select_map_callback(get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
+		die();
 	}
 }
 

@@ -36,7 +36,7 @@
 namespace FsMenu {
 
 LaunchGame::LaunchGame(MenuCapsule& fsmm,
-                                                   GameSettingsProvider* const settings,
+                                                   GameSettingsProvider& settings,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
    : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
@@ -70,7 +70,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                                 _("Custom starting positions")),
 
      // Variables and objects used in the menu
-     settings_(settings),
+     settings_(&settings),
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false) {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });

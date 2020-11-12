@@ -133,7 +133,7 @@ bool TwoColumnsBasicNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 }
 
 void TwoColumnsBasicNavigationMenu::clicked_back() {
-	end_modal<MenuTarget>(MenuTarget::kBack);
+	die();
 }
 
 TwoColumnsFullNavigationMenu::TwoColumnsFullNavigationMenu(MenuCapsule& fsmm,
@@ -170,10 +170,6 @@ bool TwoColumnsFullNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 	return TwoColumnsBasicNavigationMenu::handle_key(down, code);
 }
 
-void TwoColumnsFullNavigationMenu::clicked_ok() {
-	end_modal<MenuTarget>(MenuTarget::kOk);
-}
-
 MenuCapsule::MenuCapsule(MainMenu& fsmm)
 : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
@@ -185,6 +181,15 @@ MenuCapsule::MenuCapsule(MainMenu& fsmm)
                 ""), fsmm_(fsmm) {
 	set_visible(false);
 	do_not_layout_on_resolution_change();
+}
+
+void MenuCapsule::layout() {
+	UI::Window::layout();
+	if (!is_minimal()) {
+		for (auto& pair : visible_menus_) {
+			pair.first->set_size(get_inner_w(), get_inner_h());
+		}
+	}
 }
 
 void MenuCapsule::die() {
@@ -200,6 +205,7 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 	set_title(title);
 	menu.set_visible(true);
 	set_visible(true);
+	layout();
 }
 
 void MenuCapsule::clear_content() {

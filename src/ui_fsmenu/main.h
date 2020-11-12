@@ -39,13 +39,6 @@ class MainMenu : public UI::Panel {
 public:
 	explicit MainMenu(bool first_ever_init);
 
-	const std::string& get_filename_for_continue_playing() const {
-		return filename_for_continue_playing_;
-	}
-	const std::string& get_filename_for_continue_editing() const {
-		return filename_for_continue_editing_;
-	}
-
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
 	void internet_login();

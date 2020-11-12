@@ -41,6 +41,10 @@ public:
 	BaseMenu(MenuCapsule&, const std::string& title);
 	~BaseMenu() override;
 
+	MenuCapsule& get_capsule() {
+		return capsule_;
+	}
+
 private:
 	UI::Box horizontal_padding_box_, vertical_padding_box_;
 
@@ -110,7 +114,7 @@ public:
 
 protected:
 	void layout() override;
-	virtual void clicked_ok();
+	virtual void clicked_ok() = 0;
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
 
@@ -137,6 +141,7 @@ public:
 	// Remove and free all panels
 	void clear_content();
 
+	void layout() override;
 	void die() override;
 	void on_death(UI::Panel*) override;
 

@@ -27,6 +27,8 @@
 #include "base/i18n.h"
 #include "base/random.h"
 #include "build_info.h"
+#include "editor/editorinteractive.h"
+#include "editor/ui_menus/main_menu_random_map.h"
 #include "graphic/graphic.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -37,8 +39,10 @@
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/about.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/login_box.h"
+#include "ui_fsmenu/options.h"
 #include "wlapplication_options.h"
 #include "wui/mapdata.h"
 #include "wui/savegameloader.h"
@@ -167,13 +171,13 @@ MainMenu::MainMenu(bool first_ever_init)
 	singleplayer_.selected.connect([this]() { action(singleplayer_.get_selected()); });
 	multiplayer_.selected.connect([this]() { action(multiplayer_.get_selected()); });
 	editor_.selected.connect([this]() { action(editor_.get_selected()); });
-	replay_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kReplay); });
+	replay_.sigclicked.connect([this]() { action(MenuTarget::kReplay); });
 	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
-	   end_modal<MenuTarget>(MenuTarget::kAddOns);
+	   action(MenuTarget::kAddOns);
 	}); */
-	options_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOptions); });
-	about_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kAbout); });
-	exit_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kExit); });
+	options_.sigclicked.connect([this]() { action(MenuTarget::kOptions); });
+	about_.sigclicked.connect([this]() { action(MenuTarget::kAbout); });
+	exit_.sigclicked.connect([this]() { action(MenuTarget::kExit); });
 
 	vbox1_.add(&singleplayer_, UI::Box::Resizing::kFullSize);
 	vbox1_.add_inf_space();
@@ -237,6 +241,15 @@ static void find_maps(const std::string& directory, std::vector<MapEntry>& resul
 }
 
 void MainMenu::set_labels() {
+	{  // NOCOM code duplication with IBase
+		Section& global_s = get_config_section();
+		set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
+		set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
+		set_snap_windows_only_when_overlapping(
+		   global_s.get_bool("snap_windows_only_when_overlapping", false));
+		set_dock_windows_to_edges(global_s.get_bool("dock_windows_to_edges", false));
+	}
+
 	singleplayer_.clear();
 	multiplayer_.clear();
 	editor_.clear();
@@ -429,66 +442,66 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_ESCAPE:
 			if (!fell_through) {
-				end_modal<MenuTarget>(MenuTarget::kBack);
+				action(MenuTarget::kExit);
 				return true;
 			}
 			break;
 		case SDLK_t:
-			end_modal<MenuTarget>(MenuTarget::kTutorial);
+			action(MenuTarget::kTutorial);
 			return true;
 		case SDLK_c:
 			if (!filename_for_continue_playing_.empty()) {
-				end_modal<MenuTarget>(MenuTarget::kContinueLastsave);
+				action(MenuTarget::kContinueLastsave);
 				return true;
 			}
 			break;
 		case SDLK_w:
 			if (!filename_for_continue_editing_.empty()) {
-				end_modal<MenuTarget>(MenuTarget::kEditorContinue);
+				action(MenuTarget::kEditorContinue);
 				return true;
 			}
 			break;
 		case SDLK_n:
-			end_modal<MenuTarget>(MenuTarget::kNewGame);
+			action(MenuTarget::kNewGame);
 			return true;
 		case SDLK_z:
-			end_modal<MenuTarget>(MenuTarget::kRandomGame);
+			action(MenuTarget::kRandomGame);
 			return true;
 		case SDLK_h:
-			end_modal<MenuTarget>(MenuTarget::kCampaign);
+			action(MenuTarget::kCampaign);
 			return true;
 		case SDLK_l:
-			end_modal<MenuTarget>(MenuTarget::kLoadGame);
+			action(MenuTarget::kLoadGame);
 			return true;
 		case SDLK_j:
-			end_modal<MenuTarget>(MenuTarget::kMetaserver);
+			action(MenuTarget::kMetaserver);
 			return true;
 		case SDLK_u:
 			show_internet_login();
 			return true;
 		case SDLK_p:
-			end_modal<MenuTarget>(MenuTarget::kLan);
+			action(MenuTarget::kLan);
 			return true;
 		/* case SDLK_a:
-			end_modal<MenuTarget>(MenuTarget::kAddOns);
+			action(MenuTarget::kAddOns);
 			return true; */
 		case SDLK_o:
-			end_modal<MenuTarget>(MenuTarget::kOptions);
+			action(MenuTarget::kOptions);
 			return true;
 		case SDLK_r:
-			end_modal<MenuTarget>(MenuTarget::kReplay);
+			action(MenuTarget::kReplay);
 			return true;
 		case SDLK_F1:
-			end_modal<MenuTarget>(MenuTarget::kAbout);
+			action(MenuTarget::kAbout);
 			return true;
 		case SDLK_k:
-			end_modal<MenuTarget>(MenuTarget::kEditorNew);
+			action(MenuTarget::kEditorNew);
 			return true;
 		case SDLK_y:
-			end_modal<MenuTarget>(MenuTarget::kEditorRandom);
+			action(MenuTarget::kEditorRandom);
 			return true;
 		case SDLK_b:
-			end_modal<MenuTarget>(MenuTarget::kEditorLoad);
+			action(MenuTarget::kEditorLoad);
 			return true;
 		case SDLK_s:
 			singleplayer_.toggle();
@@ -692,14 +705,41 @@ void MainMenu::layout() {
 
 void MainMenu::action(const MenuTarget t) {
 	switch (t) {
-	case MenuTarget::kNewGame: {
-		menu_capsule_.clear_content();
-		// NOCOM memory leaks
-		Widelands::Game* game = new Widelands::Game();
-		SinglePlayerGameSettingsProvider* sp = new SinglePlayerGameSettingsProvider();
-		new LaunchSPG(menu_capsule_, sp, *game, false);
+
+	case MenuTarget::kExit:
+		end_modal<MenuTarget>(MenuTarget::kBack);
+		break;
+
+	case MenuTarget::kOptions: {
+		OptionsCtrl o(*this, get_config_section());
+		break;
 	}
-	break;
+	case MenuTarget::kAbout: {
+		About a(*this);
+		a.run<MenuTarget>();
+		break;
+	}
+
+	case MenuTarget::kEditorNew:
+		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
+		break;
+	case MenuTarget::kEditorRandom:
+		EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
+		break;
+	case MenuTarget::kEditorLoad:
+		EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
+		break;
+	case MenuTarget::kEditorContinue: {
+		if (!filename_for_continue_editing_.empty()) {
+			EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+		}
+		break;
+	}
+
+	case MenuTarget::kNewGame:
+		menu_capsule_.clear_content();
+		new LaunchSPG(menu_capsule_, *new SinglePlayerGameSettingsProvider(), *new Widelands::Game(), false);
+		break;
 
 	case MenuTarget::kLoadGame:
 	case MenuTarget::kRandomGame:
@@ -709,10 +749,6 @@ void MainMenu::action(const MenuTarget t) {
 	case MenuTarget::kLan:
 	case MenuTarget::kMetaserver:
 	case MenuTarget::kOnlineGameSettings:
-	case MenuTarget::kEditorNew:
-	case MenuTarget::kEditorRandom:
-	case MenuTarget::kEditorLoad:
-	case MenuTarget::kEditorContinue:
 	// NOCOM
 	default:
 		NEVER_HERE();
@@ -723,7 +759,7 @@ void MainMenu::action(const MenuTarget t) {
 void MainMenu::show_internet_login(const bool modal) {
 	r_login_.create();
 	if (modal) {
-		r_login_.window->run<int>();
+		r_login_.window->run<MenuTarget>();
 		r_login_.destroy();
 	}
 }
@@ -766,7 +802,7 @@ void MainMenu::internet_login() {
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in()) {
-		end_modal<MenuTarget>(MenuTarget::kMetaserver);
+		action(MenuTarget::kMetaserver);
 	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();

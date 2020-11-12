@@ -31,6 +31,7 @@
 
 class GameController;
 class LuaInterface;
+struct MapData;
 
 namespace FsMenu {
 
@@ -41,7 +42,7 @@ static constexpr double scale_factor = 1.3;
 class LaunchGame : public TwoColumnsFullNavigationMenu {
 public:
 	LaunchGame(MenuCapsule&,
-	                         GameSettingsProvider*,
+	                         GameSettingsProvider&,  // Ownership is taken
 	                         GameController*,
 	                         bool preconfigured = false);
 	~LaunchGame() override;
@@ -51,10 +52,10 @@ public:
 		return *settings_;
 	}
 
+	virtual void clicked_select_map_callback(const MapData*, bool scenario) = 0;
+
 protected:
-	void clicked_ok() override = 0;
-	void clicked_back() override = 0;
-	virtual bool clicked_select_map() = 0;
+	virtual void clicked_select_map() = 0;
 
 	LuaInterface* lua_;
 
@@ -94,7 +95,7 @@ protected:
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
 
-	GameSettingsProvider* settings_;
+	std::unique_ptr<GameSettingsProvider> settings_;
 	GameController* ctrl_;
 
 	bool peaceful_mode_forbidden_;

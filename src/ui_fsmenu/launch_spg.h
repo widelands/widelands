@@ -33,18 +33,16 @@ namespace FsMenu {
 class LaunchSPG : public LaunchGame {
 public:
 	LaunchSPG(MenuCapsule&,
-	                        GameSettingsProvider*,
-	                        Widelands::EditorGameBase& egbase,
-	                        bool preconfigured,
-	                        GameController* = nullptr);
+	                        GameSettingsProvider&,  // Ownership is taken
+	                        Widelands::Game&,       // Ownership is taken
+	                        bool preconfigured);
 	~LaunchSPG() override = default;
 
-	void start() override;
+	void clicked_select_map_callback(const MapData*, bool scenario) override;
 
 protected:
 	void clicked_ok() override;
-	void clicked_back() override;
-	bool clicked_select_map() override;
+	void clicked_select_map() override;
 
 private:
 	void win_condition_selected() override;
@@ -56,7 +54,8 @@ private:
 	void update();
 	void enforce_player_names_and_tribes(const Widelands::Map& map);
 	const bool preconfigured_;
-	Widelands::EditorGameBase& egbase_;  // Not owned
+	std::unique_ptr<Widelands::Game> game_;
+	bool initializing_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

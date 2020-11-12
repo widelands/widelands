@@ -753,6 +753,7 @@ void OptionsCtrl::handle_menu() {
 			g_gr->change_resolution(
 			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		}
+		parent_.set_labels();  // update main menu buttons for new language
 	}
 	if (i == MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;

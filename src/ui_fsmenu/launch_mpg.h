@@ -39,8 +39,8 @@ namespace FsMenu {
 class LaunchMPG : public LaunchGame {
 public:
 	LaunchMPG(MenuCapsule&,
-	                        GameSettingsProvider*,
-	                        GameController*,
+	                        GameSettingsProvider&,
+	                        GameController&,
 	                        ChatProvider&,
 	                        Widelands::EditorGameBase& egbase);
 	~LaunchMPG() override = default;
@@ -48,13 +48,16 @@ public:
 	void think() override;
 	void refresh();
 
+	void clicked_select_map_callback(const MapData*, bool) override {
+		NEVER_HERE();  // NOCOM
+	}
+
 protected:
 	void clicked_ok() override;
-	void clicked_back() override;
 
 private:
 	void layout() override;
-	bool clicked_select_map() override;
+	void clicked_select_map() override;
 	void select_map();
 	void select_saved_game();
 	void win_condition_selected() override;

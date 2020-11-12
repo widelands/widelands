@@ -95,11 +95,11 @@ private:
 };
 
 LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
-                                                 GameSettingsProvider* const settings,
-                                                 GameController* const ctrl,
+                                                 GameSettingsProvider& settings,
+                                                 GameController& ctrl,
                                                  ChatProvider& chat,
                                                  Widelands::EditorGameBase& egbase)
-   : LaunchGame(fsmm, settings, ctrl),
+   : LaunchGame(fsmm, settings, &ctrl),
 
      help_button_(this,
                   "help",
@@ -112,7 +112,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, scale_factor * standard_height_),
+     mpsg_(&left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
      chat_(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
      egbase_(egbase) {
 
@@ -161,13 +161,6 @@ void LaunchMPG::layout() {
 	chat_.focus_edit();
 }
 
-/**
- * back-button has been pressed
- */
-void LaunchMPG::clicked_back() {
-	end_modal<MenuTarget>(MenuTarget::kBack);
-}
-
 void LaunchMPG::win_condition_selected() {
 	if (settings_->can_change_map() && win_condition_dropdown_.has_selection()) {
 		settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
@@ -181,7 +174,7 @@ void LaunchMPG::win_condition_selected() {
 }
 
 /// Opens a popup window to select a map or saved game
-bool LaunchMPG::clicked_select_map() {
+void LaunchMPG::clicked_select_map() {
 	MapOrSaveSelectionWindow selection_window(&capsule_.menu(), ctrl_, get_w() / 3, get_h() / 4);
 	auto result = selection_window.run<MenuTarget>();
 	assert(result == MenuTarget::kNormalGame || result == MenuTarget::kScenarioGame ||
@@ -193,7 +186,7 @@ bool LaunchMPG::clicked_select_map() {
 		select_saved_game();
 	}
 	update_win_conditions();
-	return true;
+	// return true;
 }
 
 /**
@@ -205,7 +198,7 @@ void LaunchMPG::select_map() {
 	}
 
 	set_visible(false);
-	MapSelect msm(capsule_, settings_, ctrl_, egbase_);
+	MapSelect msm(*this, settings_.get(), ctrl_, egbase_);
 	MenuTarget code = msm.run<MenuTarget>();
 	set_visible(true);
 
@@ -233,7 +226,7 @@ void LaunchMPG::select_saved_game() {
 	}
 
 	Widelands::Game game;  // The place all data is saved to.
-	LoadGame lsgm(capsule_, game, settings_);
+	LoadGame lsgm(capsule_, game, settings_.get());
 	MenuTarget code = lsgm.run<MenuTarget>();
 
 	if (code == MenuTarget::kBack) {
@@ -452,7 +445,7 @@ void LaunchMPG::load_previous_playerdata() {
 		settings_->set_player_name(i - 1, player_save_name[i - 1]);
 	}
 
-	map_details.update_from_savegame(settings_);
+	map_details.update_from_savegame(settings_.get());
 }
 
 /**
@@ -473,7 +466,7 @@ void LaunchMPG::load_map_info() {
 		ml->preload_map(true);
 	}
 
-	map_details.update(settings_, map);
+	map_details.update(settings_.get(), map);
 }
 
 /// Show help

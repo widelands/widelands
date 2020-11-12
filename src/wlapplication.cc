@@ -1232,7 +1232,7 @@ void WLApplication::mainmenu() {
 				ff.run<FsMenu::MenuTarget>();
 				break;
 			}
-			case FsMenu::MenuTarget::kContinueLastsave: {
+			/* case FsMenu::MenuTarget::kContinueLastsave: {
 				const std::string& file = mm->get_filename_for_continue_playing();
 				if (!file.empty()) {
 					need_to_reset = load_game(*mm, file);
@@ -1258,7 +1258,7 @@ void WLApplication::mainmenu() {
 					EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, file);
 				}
 				break;
-			}
+			} */
 			case FsMenu::MenuTarget::kRandomGame:
 				need_to_reset = new_random_game(*mm);
 				break;
