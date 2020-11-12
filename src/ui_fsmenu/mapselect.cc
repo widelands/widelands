@@ -106,6 +106,8 @@ MapSelect::MapSelect(MenuCapsule& fsmm,
 	   hbox, "dropdown_team_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
+	/** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"", "Teams of 2"
+	 * etc. */
 	team_tags_dropdown_->add(_("Any Teams"), "");
 	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
 	team_tags_dropdown_->add(localize_tag("1v1"), "1v1");

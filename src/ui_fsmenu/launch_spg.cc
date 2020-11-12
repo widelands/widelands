@@ -124,7 +124,7 @@ void LaunchSPG::update() {
 	}
 }
 
-void LaunchSPG::enforce_player_names_and_tribes(Widelands::Map& map) {
+void LaunchSPG::enforce_player_names_and_tribes(const Widelands::Map& map) {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}

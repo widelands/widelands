@@ -41,7 +41,7 @@ public:
 
 private:
 	struct Entry {
-		explicit Entry(Widelands::TrainingWheels::TrainingWheel init_training_wheel,
+		explicit Entry(const Widelands::TrainingWheels::TrainingWheel& init_training_wheel,
 		               UI::Checkbox* init_checkbox)
 		   : training_wheel(init_training_wheel),
 		     initial_state(init_training_wheel.solved),

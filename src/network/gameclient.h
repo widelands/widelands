@@ -20,6 +20,7 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
+#include "base/macros.h"
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -121,8 +122,10 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	}
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(GameClient);
+
 	/// for unique backupname
-	std::string backup_file_name(std::string& path) {
+	std::string backup_file_name(const std::string& path) {
 		return path + "~backup";
 	}
 

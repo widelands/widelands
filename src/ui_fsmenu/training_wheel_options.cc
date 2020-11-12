@@ -75,9 +75,12 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	list_box->set_scrolling(true);
 	main_box->add(list_box, UI::Box::Resizing::kExpandBoth);
 
+	// If some but not all wheels are solved, the Mark/Unmark button should be labelled "Unmark All"
+	// instead of "Mark All" initially.
+	bool has_solved = false;
 	for (const auto& objective : objectives) {
-		if (!objective.second.solved) {
-			mark_unmark_state_ = true;
+		if (objective.second.solved) {
+			has_solved = true;
 		}
 		UI::Checkbox* checkbox = new UI::Checkbox(
 		   list_box, UI::PanelStyle::kFsMenu, Vector2i::zero(), objective.second.descname);
@@ -87,6 +90,8 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 		   std::make_pair(objective.first, TrainingWheelOptions::Entry(objective.second, checkbox)));
 		list_box->add_space(0);
 	}
+
+	mark_unmark_state_ = !has_solved;
 
 	main_box->add_space(kPadding);
 
@@ -130,7 +135,11 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	horizontal_box->add_space(0);
 
 	// Toggle twice to make it expand to both labels
+	int desired_width = mark_unmark_button_->get_w();
+	mark_unmark_button_->expand(0, 0);
 	toggle_mark_unmark_all_button();
+	mark_unmark_button_->expand(0, 0);
+	desired_width = std::max(desired_width, mark_unmark_button_->get_w());
 	toggle_mark_unmark_all_button();
 
 	mark_unmark_button_->sigclicked.connect([this]() {
@@ -164,8 +173,9 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	wrapper_box->add_space(0);
 
 	// Make all buttons the same width
-	const int desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()),
-	                                   std::max(mark_unmark_button_->get_w(), ok_button->get_w()));
+	desired_width = std::max(std::max(cancel_button->get_w(), reset_button->get_w()),
+	                         std::max(desired_width, ok_button->get_w()));
+
 	cancel_button->set_desired_size(desired_width, cancel_button->get_h());
 	reset_button->set_desired_size(desired_width, reset_button->get_h());
 	mark_unmark_button_->set_desired_size(desired_width, mark_unmark_button_->get_h());
@@ -178,7 +188,6 @@ void TrainingWheelOptions::toggle_mark_unmark_all_button() {
 	mark_unmark_state_ = !mark_unmark_state_;
 	/** TRANSLATORS: Button label to mark or unmark all checkboxes in an options window */
 	mark_unmark_button_->set_title(mark_unmark_state_ ? _("Mark All") : _("Unmark All"));
-	mark_unmark_button_->expand(0, 0);
 }
 
 }  // namespace FsMenu

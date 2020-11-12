@@ -54,7 +54,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	void update();
-	void enforce_player_names_and_tribes(Widelands::Map& map);
+	void enforce_player_names_and_tribes(const Widelands::Map& map);
 	const bool preconfigured_;
 	Widelands::EditorGameBase& egbase_;  // Not owned
 };

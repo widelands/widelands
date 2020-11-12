@@ -332,15 +332,15 @@ Options::Options(MainMenu& fsmm,
 	box_windows_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
 	box_windows_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
 	box_windows_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&sb_dis_panel_);
-	box_windows_.add(&sb_dis_border_);
+	box_windows_.add(&sb_dis_panel_, UI::Box::Resizing::kFullSize);
+	box_windows_.add(&sb_dis_border_, UI::Box::Resizing::kFullSize);
 
 	// Sound
 	box_sound_.add(&sound_options_, UI::Box::Resizing::kFullSize);
 
 	// Saving
-	box_saving_.add(&sb_autosave_);
-	box_saving_.add(&sb_rolling_autosave_);
+	box_saving_.add(&sb_autosave_, UI::Box::Resizing::kFullSize);
+	box_saving_.add(&sb_rolling_autosave_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&write_syncstreams_, UI::Box::Resizing::kFullSize);
 

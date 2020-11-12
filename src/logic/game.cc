@@ -463,6 +463,12 @@ void Game::mark_training_wheel_as_solved(const std::string& objective) {
 	}
 	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
 }
+void Game::run_training_wheel(const std::string& objective, bool force) {
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
+	}
+	training_wheels_->run(objective, force);
+}
 void Game::skip_training_wheel(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
 		training_wheels_->skip(objective, training_wheels_wanted_);
@@ -903,10 +909,12 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       const std::vector<Serial>& soldiers) {
+                                       const std::vector<Serial>& soldiers,
+                                       const bool allow_conquer) {
 	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
 		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
-			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+			send_player_command(
+			   new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
 			break;
 		}
 	}

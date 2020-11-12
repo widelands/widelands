@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "base/macros.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
@@ -129,6 +130,8 @@ struct GameHost : public GameController {
 	}
 
 private:
+	DISALLOW_COPY_AND_ASSIGN(GameHost);
+
 	void send_system_message_code(const std::string&,
 	                              const std::string& a = "",
 	                              const std::string& b = "",
@@ -144,11 +147,11 @@ private:
 	void handle_disconnect(uint32_t client_num, RecvPacket& r);
 	void handle_ping(Client& client);
 	void handle_hello(uint32_t client_num, uint8_t cmd, Client& client, RecvPacket& r);
-	void handle_changetribe(Client& client, RecvPacket& r);
-	void handle_changeshared(Client& client, RecvPacket& r);
-	void handle_changeteam(Client& client, RecvPacket& r);
-	void handle_changeinit(Client& client, RecvPacket& r);
-	void handle_changeposition(Client& client, RecvPacket& r);
+	void handle_changetribe(const Client& client, RecvPacket& r);
+	void handle_changeshared(const Client& client, RecvPacket& r);
+	void handle_changeteam(const Client& client, RecvPacket& r);
+	void handle_changeinit(const Client& client, RecvPacket& r);
+	void handle_changeposition(const Client& client, RecvPacket& r);
 	void handle_nettime(uint32_t client_num, RecvPacket& r);
 	void handle_playercommmand(uint32_t client_num, Client& client, RecvPacket& r);
 	void handle_syncreport(uint32_t client_num, Client& client, RecvPacket& r);
@@ -171,7 +174,7 @@ private:
 	void committed_network_time(const Time& time);
 	void receive_client_time(uint32_t number, const Time& time);
 
-	void broadcast(SendPacket&);
+	void broadcast(const SendPacket&);
 	void write_setting_map(SendPacket&);
 	void write_setting_player(SendPacket&, uint8_t number);
 	void broadcast_setting_player(uint8_t number);

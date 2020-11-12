@@ -62,7 +62,7 @@ constexpr uint16_t kCurrentPacketVersion = 7;
 constexpr uint16_t kCurrentPacketVersionDismantlesite = 1;
 constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
-constexpr uint16_t kCurrentPacketVersionMilitarysite = 6;
+constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
 constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
 
@@ -157,7 +157,9 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							const std::string map_object_name(fr.c_string());
 							const std::string type(fr.c_string());
 							DescriptionIndex oldidx = INVALID_INDEX;
-							if (type == "building") {
+							// TODO(Nordfriese): `type.empty()` is only allowed for
+							// savegame compatibility, disallow after v1.0
+							if (type.empty() || type == "building") {
 								oldidx = building.owner().tribe().safe_building_index(map_object_name);
 							} else if (type == "immovable") {
 								oldidx = building.owner().tribe().immovable_index(map_object_name);
@@ -169,7 +171,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 								   type.c_str());
 							}
 							assert(oldidx != INVALID_INDEX);
-							building.old_buildings_.push_back(std::make_pair(oldidx, type == "building"));
+							building.old_buildings_.push_back(std::make_pair(oldidx, type != "immovable"));
 						}
 					} else {
 						while (fr.unsigned_8()) {
@@ -577,6 +579,15 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			militarysite.next_swap_soldiers_time_ = Time(fr);
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8();
 			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8();
+
+			// TODO(Nordfriese): Savegame compatibility
+			if (packet_version >= 7) {
+				for (uint8_t i = fr.unsigned_8(); i; --i) {
+					const PlayerNumber p = fr.unsigned_8();
+					const bool b = fr.unsigned_8();
+					militarysite.attack_target_.allow_conquer_[p] = b;
+				}
+			}
 
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Militarysite", packet_version,
@@ -1224,6 +1235,12 @@ void MapBuildingdataPacket::write_militarysite(const MilitarySite& militarysite,
 	militarysite.next_swap_soldiers_time_.save(fw);
 	fw.unsigned_8(militarysite.soldier_upgrade_try_ ? 1 : 0);
 	fw.unsigned_8(militarysite.doing_upgrade_request_ ? 1 : 0);
+
+	fw.unsigned_8(militarysite.attack_target_.allow_conquer_.size());
+	for (const auto& pair : militarysite.attack_target_.allow_conquer_) {
+		fw.unsigned_8(pair.first);
+		fw.unsigned_8(pair.second ? 1 : 0);
+	}
 }
 
 void MapBuildingdataPacket::write_productionsite(const ProductionSite& productionsite,
