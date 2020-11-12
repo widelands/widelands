@@ -282,7 +282,7 @@ void GameClient::run() {
 		d->run_game(igb);
 
 	} catch (...) {
-		WLApplication::emergency_save(game);
+		// WLApplication::emergency_save(game);  // NOCOM
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
 		// We will bounce back to the main menu, so we better log out
@@ -1146,9 +1146,9 @@ void GameClient::disconnect(const std::string& reason,
 		mmb.run<UI::Panel::Returncodes>();
 	}
 
-	if (trysave) {
-		WLApplication::emergency_save(*d->game);
-	}
+	/* if (trysave) {
+		WLApplication::emergency_save(*d->game);  // NOCOM
+	} */
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.

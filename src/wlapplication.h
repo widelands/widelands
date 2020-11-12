@@ -42,6 +42,9 @@ struct SinglePlayerGameSettingsProvider;
 namespace FsMenu {
 class MainMenu;
 }
+namespace UI {
+class Panel;
+}
 namespace Widelands {
 class Game;
 }
@@ -194,7 +197,7 @@ struct WLApplication {
 	bool campaign_game(FsMenu::MainMenu&);
 	bool replay(FsMenu::MainMenu*);
 
-	static void emergency_save(Widelands::Game&);
+	static void emergency_save(UI::Panel&, Widelands::Game&, const std::string& error, uint8_t);
 
 private:
 	WLApplication(int argc, char const* const* argv);

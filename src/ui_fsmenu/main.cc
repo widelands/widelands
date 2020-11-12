@@ -43,6 +43,7 @@
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/login_box.h"
 #include "ui_fsmenu/options.h"
+#include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/mapdata.h"
 #include "wui/savegameloader.h"
@@ -742,11 +743,25 @@ void MainMenu::action(const MenuTarget t) {
 		new LaunchSPG(menu_capsule_, *new SinglePlayerGameSettingsProvider(), *new Widelands::Game(), false);
 		break;
 
+	case MenuTarget::kContinueLastsave:
+		if (!filename_for_continue_playing_.empty()) {
+			Widelands::Game game;
+			game.set_ai_training_mode(get_config_bool("ai_training", false));
+			SinglePlayerGameSettingsProvider sp;
+			try {
+				game.run_load_game(filename_for_continue_playing_, "");
+			} catch (const std::exception& e) {
+				WLApplication::emergency_save(*this, game, e.what(), 1 /* player number not known at this point */);
+			}
+			// Update the Continue button in case a new savegame was created
+			set_labels();
+		}
+		break;
+
 	case MenuTarget::kLoadGame:
 	case MenuTarget::kRandomGame:
 	case MenuTarget::kCampaign:
 	case MenuTarget::kTutorial:
-	case MenuTarget::kContinueLastsave:
 	case MenuTarget::kLan:
 	case MenuTarget::kMetaserver:
 	case MenuTarget::kOnlineGameSettings:

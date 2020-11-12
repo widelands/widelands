@@ -749,7 +749,7 @@ void GameHost::run() {
 		clear_computer_players();
 	} catch (const std::exception& e) {
 		log_err("GameHost received FATAL ERROR %s", e.what());
-		WLApplication::emergency_save(game);
+		// WLApplication::emergency_save(game);  // NOCOM
 		clear_computer_players();
 		d->game = nullptr;
 
@@ -2538,7 +2538,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 				if (!forced_pause()) {
 					force_pause();
 				}
-				WLApplication::emergency_save(*d->game);
+				// WLApplication::emergency_save(*d->game);  // NOCOM
 			}
 			// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kWon) {
