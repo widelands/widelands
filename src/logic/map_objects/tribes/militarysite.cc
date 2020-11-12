@@ -255,7 +255,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// we still hold the bigger military presence in that area (e.g. if there
 	// is a fortress one or two points away from our sentry, the fortress has
 	// a higher presence and thus the enemy can just burn down the sentry.
-	if (military_site_->military_presence_kept(game)) {
+	if (!get_allow_conquer(enemy->owner().player_number()) ||
+	    military_site_->military_presence_kept(game)) {
 		// Okay we still got the higher military presence, so the attacked
 		// militarysite will be destroyed.
 		military_site_->set_defeating_player(enemy->owner().player_number());
@@ -849,7 +850,7 @@ void MilitarySite::remove_worker(Worker& w) {
 	Building::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w)) {
-		pop_soldier_job(soldier, nullptr);
+		pop_soldier_job(soldier);
 	}
 
 	update_soldier_request();

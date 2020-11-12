@@ -626,7 +626,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	   enemy_sites[best_target].attack_counter + 1,
 	   (gametime - enemy_sites[best_target].last_time_attacked).get() / 1000);
 
-	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
+	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers, true);
 	assert(player_->is_seeing(
 	   Widelands::Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
