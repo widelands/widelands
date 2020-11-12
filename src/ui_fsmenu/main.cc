@@ -40,6 +40,7 @@
 #include "network/internet_gaming_protocol.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/about.h"
+#include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/login_box.h"
 #include "ui_fsmenu/options.h"
@@ -763,10 +764,13 @@ void MainMenu::action(const MenuTarget t) {
 		menu_capsule_.clear_content();
 		new ScenarioSelect(menu_capsule_, nullptr);
 		break;
+	case MenuTarget::kCampaign:
+		menu_capsule_.clear_content();
+		new CampaignSelect(menu_capsule_);
+		break;
 
 	case MenuTarget::kLoadGame:
 	case MenuTarget::kRandomGame:
-	case MenuTarget::kCampaign:
 	case MenuTarget::kLan:
 	case MenuTarget::kMetaserver:
 	case MenuTarget::kOnlineGameSettings:

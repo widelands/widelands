@@ -157,10 +157,6 @@ std::string ScenarioSelect::get_map() {
 	return "";
 }
 
-uint32_t ScenarioSelect::get_difficulty() const {
-	return scenario_difficulty_.get_selected();
-}
-
 bool ScenarioSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
@@ -172,8 +168,12 @@ void ScenarioSelect::clicked_ok() {
 		return;
 	}
 
+	capsule_.set_visible(false);
 	Widelands::Game game;
 	try {
+		if (scenario_difficulty_.has_selection()) {
+			game.set_scenario_difficulty(scenario_difficulty_.get_selected());
+		}
 		game.run_splayer_scenario_direct(get_map(), "");
 	} catch (const std::exception& e) {
 		WLApplication::emergency_save(capsule_.menu(), game, e.what());

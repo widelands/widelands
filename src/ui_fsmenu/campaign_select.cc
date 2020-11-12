@@ -23,6 +23,7 @@
 #include "base/wexception.h"
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/menu_target.h"
+#include "ui_fsmenu/scenario_select.h"
 
 namespace FsMenu {
 
@@ -30,14 +31,12 @@ namespace FsMenu {
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-CampaignSelect::CampaignSelect(MenuCapsule& fsmm,
-                                                           Campaigns* campvis)
+CampaignSelect::CampaignSelect(MenuCapsule& fsmm)
    : TwoColumnsFullNavigationMenu(fsmm, _("Choose Campaign")),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Campaign description
-     campaign_details_(&right_column_content_box_),
-     campaigns_(campvis) {
+     campaign_details_(&right_column_content_box_) {
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 
@@ -68,15 +67,11 @@ void CampaignSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
-	const CampaignData& campaign_data = *campaigns_->get_campaign(table_.get_selected());
-	if (!campaign_data.visible) {
+	CampaignData* campaign_data = campaigns_.get_campaign(table_.get_selected());
+	if (!campaign_data->visible) {
 		return;
 	}
-	end_modal<MenuTarget>(MenuTarget::kOk);
-}
-
-size_t CampaignSelect::get_campaign_index() const {
-	return table_.get_selected();
+	new ScenarioSelect(capsule_, campaign_data);
 }
 
 bool CampaignSelect::set_has_selection() {
@@ -87,7 +82,7 @@ bool CampaignSelect::set_has_selection() {
 
 void CampaignSelect::entry_selected() {
 	if (set_has_selection()) {
-		const CampaignData& campaign_data = *campaigns_->get_campaign(table_.get_selected());
+		const CampaignData& campaign_data = *campaigns_.get_campaign(table_.get_selected());
 		ok_.set_enabled(campaign_data.visible);
 		campaign_details_.update(campaign_data);
 	}
@@ -99,8 +94,8 @@ void CampaignSelect::entry_selected() {
 void CampaignSelect::fill_table() {
 	table_.clear();
 
-	for (size_t i = 0; i < campaigns_->no_of_campaigns(); ++i) {
-		const CampaignData& campaign_data = *campaigns_->get_campaign(i);
+	for (size_t i = 0; i < campaigns_.no_of_campaigns(); ++i) {
+		const CampaignData& campaign_data = *campaigns_.get_campaign(i);
 
 		UI::Table<uintptr_t const>::EntryRecord& tableEntry = table_.add(i);
 		tableEntry.set_picture(0, campaign_data.difficulty_image);
@@ -117,8 +112,8 @@ void CampaignSelect::fill_table() {
 }
 
 bool CampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
-	const CampaignData& r1 = *campaigns_->get_campaign(table_[rowa]);
-	const CampaignData& r2 = *campaigns_->get_campaign(table_[rowb]);
+	const CampaignData& r1 = *campaigns_.get_campaign(table_[rowa]);
+	const CampaignData& r2 = *campaigns_.get_campaign(table_[rowb]);
 
 	if (r1.difficulty_level < r2.difficulty_level) {
 		return true;

@@ -36,7 +36,6 @@ public:
 	explicit ScenarioSelect(MenuCapsule&, CampaignData* camp);
 
 	std::string get_map();
-	uint32_t get_difficulty() const;
 
 protected:
 	void clicked_ok() override;
