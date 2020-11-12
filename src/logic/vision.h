@@ -162,9 +162,9 @@ public:
 	}
 
 private:
-	enum class Override : uint8_t { kNormal = 0, kHidden = 1, kRevealed = 2 };
+	enum Override : uint8_t { kNormal = 0, kHidden = 1, kRevealed = 2 };
 	uint16_t value_ : 14;
-	Override override_ : 2;
+	uint8_t override_ : 2;  // Not using enum class because it causes a warning in GCC<8.4
 };
 
 }  // namespace Widelands
