@@ -370,9 +370,8 @@ Widelands::Extent AttackBox::ListOfSoldiers::size() const {
 	}
 	if (restricted_row_number_) {
 		return Widelands::Extent(rows, current_size_);
-	} else {
-		return Widelands::Extent(current_size_, rows);
 	}
+	return Widelands::Extent(current_size_, rows);
 }
 
 void AttackBox::ListOfSoldiers::update_desired_size() {

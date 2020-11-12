@@ -214,7 +214,7 @@ public:
 	struct Field {
 		Field()
 		   : military_influence(0),
-		     vision(0),
+		     vision(VisibleState::kUnexplored),
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
 		     r_sw(RoadSegment::kNone),

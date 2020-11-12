@@ -719,7 +719,7 @@ LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
 }
 
 void LuaMapView::__unpersist(lua_State* L) {
-	Widelands::Game& game = get_game(L);
+	const Widelands::Game& game = get_game(L);
 	panel_ = game.get_ibase();
 }
 

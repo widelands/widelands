@@ -91,7 +91,7 @@ descriptions:new_productionsite_type {
       },
       produce_felling_ax = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
-         descname = _"making a felling axe",
+         descname = _"making a felling ax",
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=log granite",
@@ -124,7 +124,7 @@ descriptions:new_productionsite_type {
       },
       produce_kitchen_tools = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
-         descname = _"making kitchen_tools",
+         descname = _"making kitchen tools",
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=log granite",
@@ -190,7 +190,7 @@ descriptions:new_productionsite_type {
       },
       produce_spear_stone_tipped = {
          -- TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because ...
-         descname = _"making a stone tipped spear",
+         descname = _"making a stone-tipped spear",
          actions = {
             "return=skipped unless economy needs spear_stone_tipped",
             "consume=ironwood granite",

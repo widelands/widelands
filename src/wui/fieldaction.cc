@@ -1130,16 +1130,15 @@ void show_field_action(InteractiveBase* const ibase,
 				// We are done, so we close the window.
 				registry->destroy();
 				return;
-			} else {
-				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
-					w.add_buttons_road(false);
-				} else {
-					w.add_buttons_waterway(false);
-				}
-				w.init();
-				return;
 			}
+			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
+			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+				w.add_buttons_road(false);
+			} else {
+				w.add_buttons_waterway(false);
+			}
+			w.init();
+			return;
 		}
 	} else {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);

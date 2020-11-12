@@ -1337,7 +1337,8 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 						map_object_descr = nullptr;
 						FCoords main_coords = map.get_fcoords(building->get_position());
 						Field& field_main = fields_[main_coords.field - &first_map_field];
-						if (field_main.vision != VisibleState::kVisible) {
+						if (field_main.vision != VisibleState::kVisible &&
+						    !field_main.vision.is_hidden()) {
 							rediscover_node(map, main_coords);
 							field_main.time_node_last_unseen = egbase().get_gametime();
 							field_main.vision = Vision(VisibleState::kPreviouslySeen);
@@ -1400,12 +1401,15 @@ void Player::see_node(const MapIndex i) {
 	assert(fields_.get() <= &field);
 	assert(&field < fields_.get() + map.max_index());
 
-	if (!field.vision.is_visible()) {
+	if (!field.vision.is_visible() && !field.vision.is_hidden()) {
 		field.vision = VisibleState::kVisible;
 		rediscover_node(map, map.get_fcoords(map[i]));
 	}
 	field.vision.increment_seers();
 	assert(field.vision.seers() > 0);
+	if (field.vision.is_hidden()) {
+		return;
+	}
 
 	for (PlayerNumber player_number : team_players_) {
 		if (Player* team_player = egbase().get_player(player_number)) {
@@ -1423,6 +1427,9 @@ void Player::unsee_node(MapIndex const i) {
 
 	assert(field.vision.seers() > 0);
 	field.vision.decrement_seers();
+	if (field.vision.is_hidden()) {
+		return;
+	}
 	assert(field.vision.is_visible());
 
 	if (!field.vision.is_seen_by_us()) {
@@ -1474,6 +1481,7 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		if (field.vision.is_revealed()) {
 			break;
 		}
+		field.vision.set_hidden(false);
 		if (!field.vision.is_visible()) {
 			field.vision = VisibleState::kVisible;
 			rediscover_node(map, map.get_fcoords(map[i]));
@@ -1484,12 +1492,13 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 		for (PlayerNumber player_number : team_players_) {
 			if (Player* team_player = egbase().get_player(player_number)) {
 				team_player->force_update_team_vision(i, true);
-				assert(team_player->fields()[i].vision.is_visible());
+				assert(team_player->fields()[i].vision.is_visible() ||
+				       team_player->fields()[i].vision.is_hidden());
 			}
 		}
 		break;
 
-	case HideOrRevealFieldMode::kHide:
+	case HideOrRevealFieldMode::kUnreveal:
 		if (!field.vision.is_revealed()) {
 			break;
 		}
@@ -1509,19 +1518,25 @@ void Player::hide_or_reveal_field(const Coords& coords, HideOrRevealFieldMode mo
 			for (PlayerNumber player_number : team_players_) {
 				if (Player* team_player = egbase().get_player(player_number)) {
 					team_player->force_update_team_vision(i, false);
-					assert(team_player->fields()[i].vision == VisibleState::kPreviouslySeen);
+					assert(team_player->fields()[i].vision == VisibleState::kPreviouslySeen ||
+					       team_player->fields()[i].vision.is_hidden());
 				}
 			}
 		}
 		break;
 
-	case HideOrRevealFieldMode::kHideAndForget:
-		hide_or_reveal_field(coords, HideOrRevealFieldMode::kHide);
-		if (field.vision == VisibleState::kPreviouslySeen) {
-			field.vision = VisibleState::kUnexplored;
+	case HideOrRevealFieldMode::kHide:
+		if (field.vision.is_hidden()) {
+			break;
+		}
+		field.vision.set_hidden(true);
+		for (PlayerNumber player_number : team_players_) {
+			if (Player* team_player = egbase().get_player(player_number)) {
+				team_player->update_team_vision(i);
+			}
 		}
 		assert(!field.vision.is_revealed());
-		assert(field.vision != VisibleState::kPreviouslySeen);
+		assert(field.vision == VisibleState::kUnexplored);
 		break;
 	}
 }
@@ -1530,7 +1545,7 @@ void Player::force_update_team_vision(MapIndex const i, bool visible) {
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
-	if (field.vision.is_seen_by_us()) {
+	if (field.vision.is_seen_by_us() || field.vision.is_hidden()) {
 		return;
 	}
 
@@ -1552,7 +1567,7 @@ void Player::update_team_vision(MapIndex const i) {
 	const Map& map = egbase().map();
 	Field& field = fields_[i];
 
-	if (field.vision.is_seen_by_us()) {
+	if (field.vision.is_seen_by_us() || field.vision.is_hidden()) {
 		return;
 	}
 
@@ -1586,7 +1601,7 @@ void Player::update_team_vision_whole_map() {
 	}
 	const MapIndex max = egbase().map().max_index();
 	for (MapIndex i = 0; i < max; ++i) {
-		if (fields_[i].vision.is_seen_by_us()) {
+		if (fields_[i].vision.is_seen_by_us() || fields_[i].vision.is_hidden()) {
 			continue;
 		}
 		update_team_vision(i);
