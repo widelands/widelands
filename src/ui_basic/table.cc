@@ -49,11 +49,10 @@ Table<void*>::Table(Panel* const parent,
                     uint32_t h,
                     PanelStyle style,
                     TableRows rowtype)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      total_width_(0),
      lineheight_(text_height(g_style_manager->table_style(style).enabled())),
      headerheight_(lineheight_ + 4),
-     style_(style),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
@@ -67,7 +66,7 @@ Table<void*>::Table(Panel* const parent,
      sort_column_(0),
      sort_descending_(rowtype == TableRows::kSingleDescending ||
                       rowtype == TableRows::kMultiDescending),
-     flexible_column_(std::numeric_limits<size_t>::max()),
+     flexible_column_idx_(std::numeric_limits<size_t>::max()),
      is_multiselect_(rowtype == TableRows::kMulti || rowtype == TableRows::kMultiDescending) {
 	set_thinks(false);
 	set_can_focus(true);
@@ -124,13 +123,14 @@ void Table<void*>::add_column(uint32_t const width,
 		const size_t col_index = columns_.size();
 		c.btn->sigclicked.connect([this, col_index]() { header_button_clicked(col_index); });
 		c.width = width;
+		c.original_width = width;
 		c.alignment = alignment;
 		c.compare = [this, col_index](
 		               uint32_t a, uint32_t b) { return default_compare_string(col_index, a, b); };
 		columns_.push_back(c);
 		if (column_type == TableColumnType::kFlexible) {
-			assert(flexible_column_ == std::numeric_limits<size_t>::max());
-			flexible_column_ = col_index;
+			assert(flexible_column_idx_ == std::numeric_limits<size_t>::max());
+			flexible_column_idx_ = col_index;
 		}
 	}
 }
@@ -387,7 +387,7 @@ bool Table<void*>::handle_tooltip() {
 				   UI::g_fh->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
 				if (rendered_text->width() > column_w) {
-					return Panel::draw_tooltip(entry_string);
+					return Panel::draw_tooltip(entry_string, panel_style_);
 				}
 			}
 			column_x += column_w;
@@ -402,8 +402,8 @@ UI::FontStyleInfo& Table<void*>::get_column_fontstyle(const Table<void*>::EntryR
 	return const_cast<FontStyleInfo&>(er.font_style() != nullptr ?
 	                                     *er.font_style() :
 	                                     er.is_disabled() ?
-	                                     g_style_manager->table_style(style_).disabled() :
-	                                     g_style_manager->table_style(style_).enabled());
+	                                     g_style_manager->table_style(panel_style_).disabled() :
+	                                     g_style_manager->table_style(panel_style_).enabled());
 }
 bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
                                const Vector2i& point,
@@ -663,9 +663,8 @@ uint32_t Table<void*>::toggle_entry(uint32_t row) {
 		// Find last selection
 		if (multiselect_.empty()) {
 			return no_selection_index();
-		} else {
-			return *multiselect_.lower_bound(0);
 		}
+		return *multiselect_.lower_bound(0);
 	} else {
 		multiselect_.insert(row);
 		return row;
@@ -738,9 +737,8 @@ void Table<void*>::remove_entry(const void* const entry) {
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 	if (sort_descending_) {
 		return columns_[sort_column_].compare(b, a);
-	} else {
-		return columns_[sort_column_].compare(a, b);
 	}
+	return columns_[sort_column_].compare(a, b);
 }
 
 void Table<void*>::layout() {
@@ -748,53 +746,78 @@ void Table<void*>::layout() {
 		return;
 	}
 
-	// Position and update the scrollbar
+	reposition_scrollbar();
+
+	size_t resizeable_column_idx = find_resizable_column_idx();
+
+	int all_columns_width = total_columns_width();
+
+	if (all_columns_width != get_w()) {
+		adjust_column_sizes(all_columns_width, resizeable_column_idx);
+		update_scrollbar_filler();
+	}
+}
+
+void Table<void*>::reposition_scrollbar() {
 	scrollbar_->set_pos(Vector2i(get_w() - Scrollbar::kSize, headerheight_));
 	scrollbar_->set_size(scrollbar_->get_w(), get_h() - headerheight_);
 	scrollbar_->set_pagesize(get_h() - 2 * get_lineheight() - headerheight_);
 	scrollbar_->set_steps(entry_records_.size() * get_lineheight() - (get_h() - headerheight_ - 2));
+}
+size_t Table<void*>::find_resizable_column_idx() {
 
-	// Find a column to resize
-	size_t resizeable_column = 0;
-	if (flexible_column_ < columns_.size()) {
-		resizeable_column = flexible_column_;
+	if (flexible_column_idx_ < columns_.size()) {
+		return flexible_column_idx_;
 	} else {
 		// Use the widest column
+		size_t widest_column_idx = 0;
 		uint32_t widest_width = columns_[0].width;
 		for (size_t i = 1; i < columns_.size(); ++i) {
 			const uint32_t width = columns_[i].width;
 			if (width > widest_width) {
 				widest_width = width;
-				resizeable_column = i;
+				widest_column_idx = i;
 			}
 		}
+		return widest_column_idx;
 	}
+}
 
-	// Adjust the column sizes.
+int Table<void*>::total_columns_width() {
 	int all_columns_width = scrollbar_->is_enabled() ? scrollbar_->get_w() : 0;
 	for (const auto& column : columns_) {
 		all_columns_width += column.width;
 	}
+	return all_columns_width;
+}
 
-	if (all_columns_width != get_w()) {
-		Column& column = columns_.at(resizeable_column);
-		column.width = std::max(0, column.width + get_w() - all_columns_width);
-		column.btn->set_size(column.width, column.btn->get_h());
+void Table<void*>::adjust_column_sizes(int all_columns_width, size_t resizeable_column_idx) {
+	Column& resizable_col = columns_.at(resizeable_column_idx);
+	resizable_col.width = std::max(0, resizable_col.width + get_w() - all_columns_width);
+	resizable_col.btn->set_size(resizable_col.width, resizable_col.btn->get_h());
 
-		int offset = 0;
-		for (const auto& col : columns_) {
-			col.btn->set_pos(Vector2i(offset, col.btn->get_y()));
-			offset = col.btn->get_x() + col.btn->get_w();
+	int offset = 0;
+	for (size_t i = 0; i < columns_.size(); ++i) {
+		Column& c = columns_.at(i);
+		// make sure all columns which were not intended to be resizable get their original width back
+		if (c.width != c.original_width && i != resizeable_column_idx) {
+			c.width = c.original_width;
+			c.btn->set_size(c.width, c.btn->get_h());
 		}
 
-		if (scrollbar_->is_enabled()) {
-			const UI::Button* last_column_btn = columns_.back().btn;
-			scrollbar_filler_button_->set_pos(
-			   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
-			scrollbar_filler_button_->set_visible(true);
-		} else {
-			scrollbar_filler_button_->set_visible(false);
-		}
+		c.btn->set_pos(Vector2i(offset, c.btn->get_y()));
+		offset = c.btn->get_x() + c.btn->get_w();
+	}
+}
+
+void Table<void*>::update_scrollbar_filler() {
+	if (scrollbar_->is_enabled()) {
+		const UI::Button* last_column_btn = columns_.back().btn;
+		scrollbar_filler_button_->set_pos(
+		   Vector2i(last_column_btn->get_x() + last_column_btn->get_w(), 0));
+		scrollbar_filler_button_->set_visible(true);
+	} else {
+		scrollbar_filler_button_->set_visible(false);
 	}
 }
 
@@ -850,8 +873,8 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 }
 
 bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {
-	EntryRecord& ea = get_record(a);
-	EntryRecord& eb = get_record(b);
+	const EntryRecord& ea = get_record(a);
+	const EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
 bool Table<void*>::handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) {

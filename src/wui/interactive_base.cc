@@ -98,8 +98,8 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 }  // namespace
 
 InteractiveBase::Toolbar::Toolbar(Panel* parent)
-   : UI::Panel(parent, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
-     box(this, 0, 0, UI::Box::Horizontal),
+   : UI::Panel(parent, UI::PanelStyle::kWui, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
+     box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      repeat(0) {
 }
 
@@ -163,7 +163,7 @@ void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
 }
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+   : UI::Panel(nullptr, UI::PanelStyle::kWui, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      chat_provider_(c),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
@@ -537,22 +537,23 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	bool outer = a <= 2 && b <= 2 && c <= 2;
 
 	if (medium) {
-		if (outer && inner) {
-			return 0;
-		} else if (inner) {
-			return 3;
-		} else if (outer) {
+		if (outer) {
+			if (inner) {
+				return 0;
+			}
 			return 1;
-		} else {
-			return 4;
 		}
-	} else if (outer) {
+		if (inner) {
+			return 3;
+		}
+		return 4;
+	}
+	if (outer) {
 		assert(!inner);
 		return 2;
-	} else {
-		assert(inner);
-		return 5;
 	}
+	assert(inner);
+	return 5;
 }
 
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {
@@ -758,7 +759,8 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
 		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
 		       egbase().map().get_waterway_max_length())
-		         .str());
+		         .str(),
+		   UI::PanelStyle::kWui);
 	}
 
 	// This portion of code keeps the speed of game so that FPS are kept within

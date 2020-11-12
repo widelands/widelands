@@ -9,6 +9,7 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "empire",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
@@ -1008,7 +1009,99 @@ descriptions:new_tribe {
             -- TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
             purpose = _("A ship is being constructed at this site.")
          }
-      }
+      },
+      -- non imperial Immovables used by the woodcutter
+      {
+         name = "deadtree7",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
+            purpose = _("The remains of an old tree.")
+         }
+      },
+      {
+         name = "balsa_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Corn Field
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by empire: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
    },
 
    -- The order here also determines the order in lists on screen.
@@ -1036,7 +1129,7 @@ descriptions:new_tribe {
          name = "empire_warehouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
-            purpose = pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            purpose = pgettext("empire_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
       {
@@ -1063,7 +1156,7 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for an empire production site: Lumberjack's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an empire production site: Lumberjack's House
-            note = pgettext("empire_building", "The lumberjack's house needs trees to fell within the work area.")
+            note = pgettext("empire_building", "The lumberjack’s house needs trees to fell within the work area.")
          }
       },
       {
@@ -1372,63 +1465,63 @@ descriptions:new_tribe {
          name = "empire_blockhouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Blockhouse
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Blockhouse
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_sentry",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Sentry
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Sentry
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_outpost",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Outpost
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Outpost
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_barrier",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Barrier
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Barrier
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_tower",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_fortress",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Fortress
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Fortress
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_castle",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Castle
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Castle
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 

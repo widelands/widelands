@@ -87,13 +87,13 @@ SpinBox::SpinBox(Panel* const parent,
                  SpinBox::Type type,
                  int32_t step_size,
                  int32_t big_step_size)
-   : Panel(parent, x, y, std::max(w, unit_w), 0),
+   : Panel(parent, style, x, y, std::max(w, unit_w), 0),
      type_(type),
      sbi_(new SpinBoxImpl),
      unit_width_(unit_w),
      button_height_(20),
      padding_(2),
-     number_of_paddings_(type_ == SpinBox::Type::kBig ? 6 : 4) {
+     number_of_paddings_(type_ == SpinBox::Type::kBig ? 4 : 2) {
 	if (type_ == SpinBox::Type::kValueList) {
 		sbi_->min = 0;
 		sbi_->max = 0;
@@ -106,13 +106,16 @@ SpinBox::SpinBox(Panel* const parent,
 	sbi_->button_style = style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
 	                                                        UI::ButtonStyle::kWuiSecondary;
 
-	box_ = new UI::Box(this, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
+	box_ = new UI::Box(this, style, 0, 0, UI::Box::Horizontal, 0, 0, padding_);
 
 	sbi_->label = new UI::MultilineTextarea(box_, 0, 0, 0, 0, style, label_text, UI::Align::kLeft,
 	                                        UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	box_->add(sbi_->label);
 
-	sbi_->text = new UI::Textarea(box_, "", UI::Align::kCenter);
+	sbi_->text = new UI::Textarea(
+	   box_, style,
+	   style == PanelStyle::kFsMenu ? UI::FontStyle::kFsMenuLabel : UI::FontStyle::kWuiLabel, "",
+	   UI::Align::kCenter);
 
 	bool is_big = type_ == SpinBox::Type::kBig;
 
@@ -254,9 +257,9 @@ void SpinBox::layout() {
 
 	// 40 is an ad hoc width estimate for the MultilineTextarea scrollbar + a bit of text.
 	if (!sbi_->label->get_text().empty() && (get_w() + padding_ + 40) <= unit_width_) {
-		throw wexception("SpinBox: Overall width %d must be bigger than unit width %d + %d * %d + "
-		                 "40 for padding",
-		                 get_w(), unit_width_, number_of_paddings_, padding_);
+		throw wexception("SpinBox: Overall width %d must be bigger than %d (unit width) "
+		                 "+ %d (padding) + 40 (label text)",
+		                 get_w(), unit_width_, padding_);
 	}
 
 	if (unit_width_ < (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_)) {
@@ -267,13 +270,21 @@ void SpinBox::layout() {
 		         (type_ == SpinBox::Type::kBig ? 7 * button_height_ : 3 * button_height_));
 	}
 
-	// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself
-	sbi_->label->set_size(get_w() - unit_width_ - number_of_paddings_ * padding_, 10);
+	if (get_w() >= static_cast<int32_t>(unit_width_ + padding_)) {
+		// 10 is arbitrary, the actual height will be set by the Multilinetextarea itself
+		sbi_->label->set_visible(true);
+		sbi_->label->set_size(get_w() - unit_width_ - padding_, 10);
+	} else {
+		// There is no space for the label
+		sbi_->label->set_visible(false);
+	}
+
 	if (type_ == SpinBox::Type::kBig) {
 		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_ten_plus->get_w() -
-		                            2 * sbi_->button_minus->get_w() - 2 * padding_);
+		                            2 * sbi_->button_minus->get_w() - number_of_paddings_ * padding_);
 	} else {
-		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_minus->get_w());
+		sbi_->text->set_fixed_width(unit_width_ - 2 * sbi_->button_minus->get_w() -
+		                            number_of_paddings_ * padding_);
 	}
 
 	uint32_t box_height = std::max(sbi_->label->get_h(), static_cast<int32_t>(button_height_));
@@ -366,9 +377,8 @@ int32_t SpinBox::get_value() const {
 	if (type_ == SpinBox::Type::kValueList) {
 		if ((sbi_->value >= 0) && (sbi_->values.size() > static_cast<size_t>(sbi_->value))) {
 			return sbi_->values.at(sbi_->value);
-		} else {
-			return -1;
 		}
+		return -1;
 	} else {
 		return sbi_->value;
 	}

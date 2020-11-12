@@ -251,7 +251,7 @@ void ShipFleet::check_merge_economy() {
 		return;
 	}
 
-	Flag& base = ports_[0]->base_flag();
+	const Flag& base = ports_[0]->base_flag();
 	for (uint32_t i = 1; i < ports_.size(); ++i) {
 		// Note: economy of base flag may of course be changed by the merge!
 		Economy::check_merge(base, ports_[i]->base_flag(), wwWARE);
@@ -722,9 +722,6 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 
 // Changelog of version 4 → 5: Added ShippingSchedule
 constexpr uint8_t kCurrentPacketVersion = 5;
-
-ShipFleet::Loader::Loader() {
-}
 
 void ShipFleet::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);

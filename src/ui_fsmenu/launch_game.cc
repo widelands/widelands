@@ -32,71 +32,41 @@
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-
+namespace FsMenu {
 FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                                    GameSettingsProvider* const settings,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
-   : UI::Window(&fsmm,
-                UI::WindowStyle::kFsMenu,
-                "launch_game",
-                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
-                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
-                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
-                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
-                _("Launch Game")),
-     fsmm_(fsmm),
+   : TwoColumnsFullNavigationMenu(fsmm, "launch_game", _("Launch Game")),
+     map_details(&right_column_content_box_, preconfigured, kPadding),
 
-     // Values for alignment and size
-     standard_element_width_(get_w() / 3),
-     standard_element_height_(get_h() * 9 / 200),
-     padding_(4),
-
-     main_box_(this, 0, 0, UI::Box::Vertical),
-     content_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-     individual_content_box(&content_box_, 0, 0, UI::Box::Vertical),
-     map_box_(&content_box_, 0, 0, UI::Box::Vertical),
-     map_details(
-        &map_box_, preconfigured, standard_element_width_, standard_element_height_, padding_),
-
-     configure_game(&map_box_,
+     configure_game(&right_column_content_box_,
+                    UI::PanelStyle::kFsMenu,
+                    UI::FontStyle::kFsGameSetupHeadings,
                     0,
                     0,
                     0,
                     0,
                     _("Configure this game"),
-                    UI::Align::kCenter,
-                    g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     win_condition_dropdown_(&map_box_,
+                    UI::Align::kCenter),
+     win_condition_dropdown_(&right_column_content_box_,
                              "dropdown_wincondition",
                              0,
                              0,
-                             standard_element_width_,
+                             0,
                              10,  // max number of items
-                             standard_element_height_,
+                             standard_height_,
                              "",
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu,
                              UI::ButtonStyle::kFsMenuMenu),
-     peaceful_(&map_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
-     custom_starting_positions_(
-        &map_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Custom starting positions")),
-     ok_(&map_box_,
-         "ok",
-         0,
-         0,
-         standard_element_width_,
-         standard_element_height_,
-         UI::ButtonStyle::kFsMenuPrimary,
-         _("Start game")),
-     back_(&map_box_,
-           "back",
-           0,
-           0,
-           standard_element_width_,
-           standard_element_height_,
-           UI::ButtonStyle::kFsMenuSecondary,
-           _("Back")),
+     peaceful_(
+        &right_column_content_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Peaceful mode")),
+     custom_starting_positions_(&right_column_content_box_,
+                                UI::PanelStyle::kFsMenu,
+                                Vector2i::zero(),
+                                _("Custom starting positions")),
+
      // Variables and objects used in the menu
      settings_(settings),
      ctrl_(ctrl),
@@ -104,10 +74,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
-
-	do_not_layout_on_resolution_change();
+	ok_.set_title(_("Start game"));
 
 	lua_ = new LuaInterface();
 	add_all_widgets();
@@ -120,78 +87,30 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
 }
 
-bool FullscreenMenuLaunchGame::handle_key(bool down, SDL_Keysym code) {
-	if (down) {
-		switch (code.sym) {
-		case SDLK_KP_ENTER:
-		case SDLK_RETURN:
-			clicked_ok();
-			return true;
-		case SDLK_ESCAPE:
-			clicked_back();
-			return true;
-		default:
-			break;
-		}
-	}
-	return UI::Window::handle_key(down, code);
-}
-
 void FullscreenMenuLaunchGame::add_all_widgets() {
-	main_box_.add_space(2 * padding_);
-	main_box_.add(&content_box_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(10 * padding_);
-
-	content_box_.add_space(10 * padding_);
-	content_box_.add(&individual_content_box, UI::Box::Resizing::kExpandBoth);
-	content_box_.add_space(10 * padding_);
-	content_box_.add(&map_box_, UI::Box::Resizing::kFullSize);
-	content_box_.add_space(10 * padding_);
-
-	map_box_.add(&map_details);
-	map_box_.add_space(5 * padding_);
-
-	map_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	map_box_.add_space(3 * padding_);
-	map_box_.add(&win_condition_dropdown_);
-	map_box_.add_space(3 * padding_);
-	map_box_.add(&peaceful_);
-	map_box_.add_space(3 * padding_);
-	map_box_.add(&custom_starting_positions_);
-
-	map_box_.add_inf_space();
-	map_box_.add(&ok_, UI::Box::Resizing::kFullSize);
-	map_box_.add_space(2 * padding_);
-	map_box_.add(&back_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add(&map_details, UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add_space(5 * kPadding);
+	right_column_content_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
+	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&peaceful_);
+	right_column_content_box_.add_space(3 * kPadding);
+	right_column_content_box_.add(&custom_starting_positions_);
 }
 
 void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
-	back_.sigclicked.connect([this]() { clicked_back(); });
 	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
 void FullscreenMenuLaunchGame::layout() {
-	UI::Window::layout();
-	if (is_minimal()) {
-		return;
-	}
+	TwoColumnsFullNavigationMenu::layout();
+	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
-	main_box_.set_size(get_w(), get_h());
-	standard_element_width_ = get_w() / 3;
-	standard_element_height_ = get_h() * 9 / 200;
-
-	ok_.set_desired_size(standard_element_width_, standard_element_height_);
-	back_.set_desired_size(standard_element_width_, standard_element_height_);
-	win_condition_dropdown_.set_desired_size(standard_element_width_, standard_element_height_);
-	custom_starting_positions_.set_desired_size(
-	   standard_element_width_,
-	   // text doesn't fit in one line with some translations
-	   2 * standard_element_height_);
-
-	map_details.force_new_dimensions(1.f, standard_element_width_, standard_element_height_);
+	map_details.set_max_size(0, right_column_box_.get_h() / 2);
+	map_details.force_new_dimensions(right_column_width_, standard_height_);
 }
 
 void FullscreenMenuLaunchGame::update_peaceful_mode() {
@@ -234,19 +153,19 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
 		win_condition_dropdown_.set_label(_("Scenario"));
 		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
 		return true;
-	} else if (settings_->settings().savegame) {
+	}
+	if (settings_->settings().savegame) {
 		win_condition_dropdown_.set_enabled(false);
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
 		win_condition_dropdown_.set_tooltip(
 		   _("The game is a saved game – the win condition was set before."));
 		return true;
-	} else {
-		win_condition_dropdown_.set_enabled(settings_->can_change_map());
-		win_condition_dropdown_.set_label("");
-		win_condition_dropdown_.set_tooltip("");
-		return false;
 	}
+	win_condition_dropdown_.set_enabled(settings_->can_change_map());
+	win_condition_dropdown_.set_label("");
+	win_condition_dropdown_.set_tooltip("");
+	return false;
 }
 
 /**
@@ -280,10 +199,9 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
 			if (t) {
 				break;
-			} else {
-				last_win_condition_ = win_condition_script;
-				t = win_condition_if_valid(last_win_condition_, tags);
 			}
+			last_win_condition_ = win_condition_script;
+			t = win_condition_if_valid(last_win_condition_, tags);
 		}
 
 		// Now fill the dropdown.
@@ -347,3 +265,4 @@ void FullscreenMenuLaunchGame::toggle_peaceful() {
 void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
 	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
 }
+}  // namespace FsMenu

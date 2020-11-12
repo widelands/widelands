@@ -316,7 +316,7 @@ struct NearFlag {
 // used to count events within a time frame - duration_ (older ones are
 // stripped with strip_old function)
 struct EventTimeQueue {
-	EventTimeQueue();
+	EventTimeQueue() = default;
 
 	void push(const Time&, uint32_t = std::numeric_limits<uint32_t>::max());
 	uint32_t count(const Time&, uint32_t = std::numeric_limits<uint32_t>::max());
@@ -447,7 +447,7 @@ struct BuildingObserver {
 
 	int32_t total_count() const;
 	AiModeBuildings aimode_limit_status() const;
-	bool buildable(Widelands::Player& p);
+	bool buildable(const Widelands::Player& p);
 
 	// Convenience functions for is_what
 	bool is(BuildingAttribute) const;
@@ -479,8 +479,7 @@ struct BuildingObserver {
 
 	uint16_t unconnected_count;  // to any warehouse (count of such buildings)
 
-	Widelands::DescriptionIndex mines;  // type of resource it mines_
-	uint16_t mines_percent;             // % of res it can mine
+	Widelands::DescriptionIndex mines;  // type of resource it mines
 	uint32_t current_stats;
 
 	uint32_t basic_amount;  // basic amount for basic economy as defined in init.lua

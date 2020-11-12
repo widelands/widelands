@@ -29,7 +29,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
 #include "logic/trade_agreement.h"
-#include "logic/training_wheels.h"
 #include "scripting/logic.h"
 
 class InteractivePlayer;
@@ -54,6 +53,7 @@ enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
+class TrainingWheels;
 enum class StockPolicy;
 
 enum {
@@ -198,10 +198,13 @@ public:
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
 	bool acquire_training_wheel_lock(const std::string& objective);
+	void release_training_wheel_lock();
 	void mark_training_wheel_as_solved(const std::string& objective);
-	bool training_wheels_wanted() const {
-		return training_wheels_wanted_;
-	}
+	void skip_training_wheel(const std::string& objective);
+	void run_training_wheel(const std::string& objective, bool force);
+
+	bool training_wheels_wanted() const;
+	std::string active_training_wheel() const;
 
 	void postload() override;
 
@@ -277,7 +280,10 @@ public:
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
+	void send_player_enemyflagaction(const Flag&,
+	                                 PlayerNumber,
+	                                 const std::vector<Serial>&,
+	                                 bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
 	void send_player_ship_scouting_direction(const Ship&, WalkingDir);

@@ -33,6 +33,26 @@ namespace Widelands {
 class TrainingWheels {
 public:
 	/**
+	 * @brief A training wheel's script, display name, solving status and dependencies
+	 */
+	struct TrainingWheel {
+		explicit TrainingWheel(bool init_solved,
+		                       const std::string& key,
+		                       const std::string& init_descname,
+		                       const std::vector<std::string>& init_dependencies)
+		   : solved(init_solved), script(key + ".lua"), descname(init_descname) {
+			for (const std::string& dependency : init_dependencies) {
+				dependencies.insert(dependency);
+			}
+		}
+
+		bool solved;
+		const std::string script;
+		const std::string descname;
+		std::set<std::string> dependencies;
+	};
+
+	/**
 	 * @brief Parses the training wheel scripts defined in data/scripting/training_wheels
 	 * @param lua the game's Lua interface
 	 */
@@ -45,21 +65,59 @@ public:
 	 * @return Whether the training wheel objective acquired the lock
 	 */
 	bool acquire_lock(const std::string& objective);
+
+	/**
+	 * @brief release_lock Releases the current training wheel lock without marking it as solved.
+	 */
+	void release_lock();
+
 	/**
 	 * @brief mark_as_solved Mark the given training wheel objective as solved and release the lock
 	 * @param objective The training wheel objective to be marked as solved
 	 * @param run_some_more Whether to trigger more training wheel scripts when available
 	 */
 	void mark_as_solved(const std::string& objective, bool run_some_more);
+
+	/**
+	 * The same as mark_as_solved without recording it as solved in the config file, so that it will
+	 * run again in a new game but stop blocking other training wheels that depend on it.
+	 */
+	void skip(const std::string& objective, bool run_some_more);
+
+	/**
+	 * @brief mark_as_unsolved Mark the given training wheel objective as no longer solved. Does not
+	 * trigger anything else and does not refresh the information about currently running training
+	 * wheels or training wheels to run.
+	 * @param objective The training wheel objective to be marked as unsolved
+	 */
+	void mark_as_unsolved(const std::string& objective);
 	/**
 	 * @brief run_objectives Trigger all queued training wheel objectives
 	 */
 	void run_objectives();
+
+	/**
+	 * @brief run Ignore dependencies and run this objective if it wasn't solved yet.
+	 * @param objective The objective to run
+	 * @param force Run anyway if it was solved previously
+	 */
+	void run(const std::string& objective, bool force);
+
 	/**
 	 * @brief has_objectives See if there are still unsolved objectives
 	 * @return Whether any more training wheels want to run
 	 */
 	bool has_objectives() const;
+
+	/**
+	 * @brief current_objective The training wheel that's currently active
+	 * @return A string with the training wheel's name, or empty if none are active
+	 */
+	const std::string& current_objective() const {
+		return current_objective_;
+	}
+
+	std::map<std::string, TrainingWheel> all_objectives() const;
 
 private:
 	/**
@@ -71,31 +129,18 @@ private:
 	 */
 	void write();
 
-	/**
-	 * @brief A training wheel's script and filename
-	 */
-	struct TrainingWheel {
-		explicit TrainingWheel(const std::string& key,
-		                       const std::vector<std::string>& init_dependencies)
-		   : script(key + ".lua") {
-			for (const std::string& dependency : init_dependencies) {
-				dependencies.insert(dependency);
-			}
-		}
-
-		const std::string script;
-		std::set<std::string> dependencies;
-	};
+	void solve(const std::string& objective, bool run_some_more, bool write_to_config);
 
 	// Objective name and its scripting information
 	std::map<std::string, TrainingWheel> idle_objectives_;
-	// Prevent concurrency issues while loading objectives
-	std::set<std::string> running_objectives_;
-	// Remember solved objectives for dependency check
-	std::set<std::string> solved_objectives_;
+	// Prevent concurrency issues while loading objectives, and remember descname for options. Name,
+	// descname
+	std::map<std::string, TrainingWheel> running_objectives_;
+	// Remember solved objectives for dependency check and options. Name, descname
+	std::map<std::string, TrainingWheel> solved_objectives_;
 	// The scripts that had their dependencies met and are waiting to run
 	std::set<std::string> scripts_to_run_;
-	// Mutex Lock for the currently rinnung objective
+	// Mutex Lock for the currently running objective
 	std::string current_objective_;
 	// For reading/writing progress to disk
 	Profile profile_;

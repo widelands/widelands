@@ -22,6 +22,7 @@
 #include "base/macros.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
 #include "logic/map_objects/tribes/militarysite.h"
@@ -110,12 +111,12 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	toggle_workarea_ = nullptr;
 	avoid_fastclick_ = avoid_fastclick;
 
-	vbox_.reset(new UI::Box(this, 0, 0, UI::Box::Vertical));
+	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
 
 	tabs_ = new UI::TabPanel(vbox_.get(), UI::TabPanelStyle::kWuiLight);
 	vbox_->add(tabs_, UI::Box::Resizing::kFullSize);
 
-	capsbuttons_ = new UI::Box(vbox_.get(), 0, 0, UI::Box::Horizontal);
+	capsbuttons_ = new UI::Box(vbox_.get(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	vbox_->add(capsbuttons_, UI::Box::Resizing::kFullSize);
 
 	// actually create buttons on the first call to think(),
@@ -211,7 +212,8 @@ static bool allow_muting(const Widelands::BuildingDescr& d) {
 	if (d.type() == Widelands::MapObjectType::MILITARYSITE ||
 	    d.type() == Widelands::MapObjectType::WAREHOUSE) {
 		return true;
-	} else if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
+	}
+	if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
 		return !p->out_of_resource_message().empty() || !p->resource_not_needed_message().empty();
 	}
 	return false;
@@ -273,7 +275,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			// enhance/destroy/dismantle buttons are fixed in their position
 			// and not subject to the number of buttons on the right of the
 			// panel.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 		}  // upcast to productionsite
 
@@ -339,7 +341,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (requires_destruction_separator && can_see) {
 			// Need this as well as the infinite space from the can_see section
 			// to ensure there is a separation.
-			UI::Panel* spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			UI::Panel* spacer = new UI::Panel(capsbuttons, UI::PanelStyle::kWui, 0, 0, 17, 34);
 			capsbuttons->add(spacer);
 			capsbuttons->add_inf_space();
 		}

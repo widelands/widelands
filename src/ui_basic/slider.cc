@@ -65,7 +65,13 @@ Slider::Slider(Panel* const parent,
                const int32_t x_gap,
                const int32_t y_gap,
                const int32_t bar_size)
-   : Panel(parent, x, y, w, h, tooltip_text),
+   : Panel(parent,
+           style == SliderStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           x,
+           y,
+           w,
+           h,
+           tooltip_text),
      min_value_(min_value),
      max_value_(max_value),
      value_(value),
@@ -233,11 +239,11 @@ bool Slider::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_MINUS:
 		case SDLK_KP_MINUS:
-			set_value(code.mod & KMOD_CTRL ? 0 : get_value() - 1);
+			set_value((code.mod & KMOD_CTRL) ? 0 : get_value() - 1);
 			return true;
 		case SDLK_PLUS:
 		case SDLK_KP_PLUS:
-			set_value(code.mod & KMOD_CTRL ? get_max_value() : get_value() + 1);
+			set_value((code.mod & KMOD_CTRL) ? get_max_value() : get_value() + 1);
 			return true;
 		default:
 			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
@@ -451,12 +457,12 @@ bool HorizontalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 		//  click on cursor
 		cursor_pressed(x);
 		return true;
-	} else if (y >= 0 && y < get_h() && x >= 0 && x < get_w()) {  //  click on bar
+	}
+	if (y >= 0 && y < get_h() && x >= 0 && x < get_w()) {  //  click on bar
 		bar_pressed(x, get_x_gap());
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 void HorizontalSlider::layout() {
@@ -519,14 +525,14 @@ bool VerticalSlider::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) 
 		//  click on cursor
 		cursor_pressed(y);
 		return true;
-	} else if (y >= get_y_gap() && y <= static_cast<int32_t>(get_h()) - get_y_gap() &&
-	           x >= get_x_gap() - 2 &&
-	           x < static_cast<int32_t>(get_w()) - get_x_gap() + 2) {  //  click on bar
+	}
+	if (y >= get_y_gap() && y <= static_cast<int32_t>(get_h()) - get_y_gap() &&
+	    x >= get_x_gap() - 2 &&
+	    x < static_cast<int32_t>(get_w()) - get_x_gap() + 2) {  //  click on bar
 		bar_pressed(y, get_y_gap());
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 DiscreteSlider::DiscreteSlider(Panel* const parent,
@@ -540,7 +546,13 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const std::string& tooltip_text,
                                const uint32_t cursor_size,
                                const bool enabled)
-   : Panel(parent, x, y, w, h, tooltip_text),
+   : Panel(parent,
+           init_style == SliderStyle::kFsMenu ? PanelStyle::kFsMenu : PanelStyle::kWui,
+           x,
+           y,
+           w,
+           h,
+           tooltip_text),
      style(g_style_manager->slider_style(init_style)),
      slider(this,
             // here, we take into account the h_gap introduced by HorizontalSlider

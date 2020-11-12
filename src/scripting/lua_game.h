@@ -93,7 +93,10 @@ public:
 	int hide_fields(lua_State* L);
 	int mark_scenario_as_solved(lua_State* L);
 	int acquire_training_wheel_lock(lua_State* L);
+	int release_training_wheel_lock(lua_State* L);
 	int mark_training_wheel_as_solved(lua_State* L);
+	int run_training_wheel(lua_State* L);
+	int skip_training_wheel(lua_State* L);
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);
 	int get_suitability(lua_State* L);
@@ -195,7 +198,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	Widelands::Player& get_plr(lua_State* L, Widelands::Game& game);
+	Widelands::Player& get_plr(lua_State* L, const Widelands::Game& game);
 	const Widelands::Message& get(lua_State* L, Widelands::Game& game);
 };
 

@@ -27,18 +27,18 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "ui_fsmenu/mapselect.h"
-
+namespace FsMenu {
 FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
                                                  GameSettingsProvider* const settings,
                                                  Widelands::EditorGameBase& egbase,
                                                  bool preconfigured,
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
-     player_setup(&individual_content_box, settings, standard_element_height_, padding_),
+     player_setup(&left_column_box_, settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
      egbase_(egbase) {
 
-	individual_content_box.add(&player_setup, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	ok_.set_enabled(settings_->can_launch() || preconfigured_);
 
 	if (preconfigured) {
@@ -122,7 +122,7 @@ void FullscreenMenuLaunchSPG::update() {
 	}
 }
 
-void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(Widelands::Map& map) {
+void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(const Widelands::Map& map) {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
@@ -184,8 +184,7 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 
 void FullscreenMenuLaunchSPG::layout() {
 	FullscreenMenuLaunchGame::layout();
-	player_setup.force_new_dimensions(1.f, standard_element_height_);
+	player_setup.force_new_dimensions(scale_factor * standard_height_);
 }
 
-FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
-}
+}  // namespace FsMenu

@@ -39,8 +39,7 @@ GameDetails::GameDetails(Panel* parent,
                          UI::PanelStyle style,
                          Mode mode,
                          Widelands::EditorGameBase& egbase)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
-     style_(style),
+   : UI::Box(parent, style, 0, 0, UI::Box::Vertical),
      mode_(mode),
      padding_(4),
      name_label_(this,
@@ -61,8 +60,8 @@ GameDetails::GameDetails(Panel* parent,
             "",
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     minimap_icon_(this, 0, 0, 0, 0, nullptr),
-     button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)),
+     minimap_icon_(this, style, 0, 0, 0, 0, nullptr),
+     button_box_(new UI::Box(this, style, 0, 0, UI::Box::Vertical)),
      last_game_(""),
      egbase_(egbase) {
 
@@ -89,7 +88,8 @@ void GameDetails::clear() {
 void GameDetails::display(const std::vector<SavegameData>& gamedata) {
 	if (gamedata.empty()) {
 		return;
-	} else if (gamedata.size() > 1) {
+	}
+	if (gamedata.size() > 1) {
 		show(gamedata);
 	} else {
 		show(gamedata[0]);
@@ -121,12 +121,12 @@ void GameDetails::show(const std::vector<SavegameData>& gamedata) {
 	                           "Selected %1% directories and %2%:", number_of_directories)) %
 	    number_of_directories % header_second_part)
 	      .str(),
-	   "", style_, true));
+	   "", panel_style_, true));
 
 	name_label_.set_text(combined_header);
 
 	std::string combined_description =
-	   as_richtext(as_heading_with_content("", name_list, style_, true, true));
+	   as_richtext(as_heading_with_content("", name_list, panel_style_, true, true));
 
 	descr_.set_text(combined_description);
 }
@@ -136,7 +136,7 @@ void GameDetails::show(const SavegameData& gamedata) {
 	last_game_ = gamedata.filename;
 	if (gamedata.is_directory()) {
 		name_label_.set_text(as_richtext(
-		   as_heading_with_content(_("Directory Name:"), gamedata.filename, style_, true)));
+		   as_heading_with_content(_("Directory Name:"), gamedata.filename, panel_style_, true)));
 
 		layout();
 		return;
@@ -144,13 +144,13 @@ void GameDetails::show(const SavegameData& gamedata) {
 
 	if (!gamedata.errormessage.empty()) {
 		name_label_.set_text(as_richtext(
-		   as_heading_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
+		   as_heading_with_content(_("Error:"), gamedata.errormessage, panel_style_, true, true)));
 		layout();
 		return;
 	}
 
 	name_label_.set_text(
-	   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
+	   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, panel_style_, true)));
 
 	show_game_description(gamedata);
 
@@ -167,18 +167,18 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	      /** TRANSLATORS: The current time of a savegame. Shown in the game saving and
 	         loading screens. */
 	      _("Game Time:"),
-	   gamedata.gametime, style_);
+	   gamedata.gametime, panel_style_);
 
 	description = (boost::format("%s%s") % description %
-	               as_heading_with_content(_("Players:"), gamedata.nrplayers, style_))
+	               as_heading_with_content(_("Players:"), gamedata.nrplayers, panel_style_))
 	                 .str();
 
 	description = (boost::format("%s%s") % description %
-	               as_heading_with_content(_("Widelands Version:"), gamedata.version, style_))
+	               as_heading_with_content(_("Widelands Version:"), gamedata.version, panel_style_))
 	                 .str();
 
 	description = (boost::format("%s%s") % description %
-	               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, style_))
+	               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, panel_style_))
 	                 .str();
 
 	std::string filename = gamedata.filename;
@@ -187,7 +187,7 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	filename.erase(0, filename.find('/') + 1);
 	assert(!filename.empty());
 	description = (boost::format("%s%s") % description %
-	               as_heading_with_content(_("Filename:"), filename, style_))
+	               as_heading_with_content(_("Filename:"), filename, panel_style_))
 	                 .str();
 
 	descr_.set_text(as_richtext(description));

@@ -25,6 +25,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/waterway.h"
+#include "graphic/style_manager.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/attack_target.h"
@@ -76,7 +77,8 @@ private:
 };
 
 BuildGrid::BuildGrid(UI::Panel* parent, Widelands::Player* plr, int32_t x, int32_t y, int32_t cols)
-   : UI::IconGrid(parent, x, y, kBuildGridCellSize, kBuildGridCellSize, cols), plr_(plr) {
+   : UI::IconGrid(parent, UI::PanelStyle::kWui, x, y, kBuildGridCellSize, kBuildGridCellSize, cols),
+     plr_(plr) {
 	icon_clicked.connect([this](Widelands::DescriptionIndex i) { click_slot(i); });
 	mouseout.connect([this](Widelands::DescriptionIndex i) { mouseout_slot(i); });
 	mousein.connect([this](Widelands::DescriptionIndex i) { mousein_slot(i); });
@@ -373,7 +375,7 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto() {
 	UI::Box* buildbox = nullptr;
-	UI::Box& watchbox = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+	UI::Box& watchbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	upcast(InteractiveGameBase, igbase, &ibase());
 
@@ -381,13 +383,15 @@ void FieldActionWindow::add_buttons_auto() {
 		// Target immovables for removal by workers
 		if (upcast(const Widelands::Immovable, mo, map_.get_immovable(node_))) {
 			if (mo->is_marked_for_removal(ipl->player_number())) {
-				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+				UI::Box& box =
+				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				add_button(&box, "unmark_for_removal", kImgButtonUnmarkRemoval,
 				           &FieldActionWindow::act_unmark_removal,
 				           _("Marked for removal by a worker – click to unmark"));
 				add_tab("target", kImgTabTarget, &box, _("Immovable Actions"));
 			} else if (suited_for_targeting(ipl->player_number(), ipl->egbase(), *mo)) {
-				UI::Box& box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+				UI::Box& box =
+				   *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 				add_button(&box, "mark_for_removal", kImgButtonMarkRemoval,
 				           &FieldActionWindow::act_mark_removal,
 				           _("Mark this immovable for timely removal by a suited worker"));
@@ -405,7 +409,7 @@ void FieldActionWindow::add_buttons_auto() {
 		const bool can_act = igbase ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
-		buildbox = new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+		buildbox = new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
@@ -440,8 +444,8 @@ void FieldActionWindow::add_buttons_auto() {
 			const int32_t nodecaps = map_.get_max_nodecaps(ibase().egbase(), node_);
 
 			// Add house building
-			if (player_ && ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) ||
-			                (buildcaps & Widelands::BUILDCAPS_MINE))) {
+			if (player_ && ((nodecaps & Widelands::BUILDCAPS_SIZEMASK) ||
+			                (nodecaps & Widelands::BUILDCAPS_MINE))) {
 				add_buttons_build(buildcaps, nodecaps);
 			}
 
@@ -493,7 +497,7 @@ void FieldActionWindow::add_buttons_auto() {
 }
 
 void FieldActionWindow::add_buttons_attack() {
-	UI::Box& a_box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+	UI::Box& a_box = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	if (upcast(Widelands::Building, building, map_.get_immovable(node_))) {
 		if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
@@ -559,6 +563,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced()) {
 			continue;
 		}
+
+		// TODO(Nordfriese): Use Player::check_can_build to simplify the code
 
 		if (building_descr->get_built_over_immovable() != Widelands::INVALID_INDEX &&
 		    !(node_.field->get_immovable() && node_.field->get_immovable()->has_attribute(
@@ -636,7 +642,7 @@ Buttons used during road building: Set flag here and Abort
 ===============
 */
 void FieldActionWindow::add_buttons_road(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -659,7 +665,7 @@ void FieldActionWindow::add_buttons_road(bool flag) {
 }
 
 void FieldActionWindow::add_buttons_waterway(bool flag) {
-	UI::Box& buildbox = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
+	UI::Box& buildbox = *new UI::Box(&tabpanel_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	if (flag) {
 		add_button(&buildbox, "build_flag", kImgButtonBuildFlag, &FieldActionWindow::act_buildflag,
@@ -1055,11 +1061,9 @@ void FieldActionWindow::act_attack() {
 	assert(attack_box_);
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Building, building, game->map().get_immovable(node_))) {
-		if (attack_box_->count_soldiers() > 0) {
-			upcast(InteractivePlayer const, iaplayer, &ibase());
-			game->send_player_enemyflagaction(
-			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
-		}
+		upcast(InteractivePlayer const, iaplayer, &ibase());
+		game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(),
+		                                  attack_box_->soldiers(), attack_box_->get_allow_conquer());
 	}
 	reset_mouse_and_die();
 }
@@ -1126,16 +1130,15 @@ void show_field_action(InteractiveBase* const ibase,
 				// We are done, so we close the window.
 				registry->destroy();
 				return;
-			} else {
-				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
-					w.add_buttons_road(false);
-				} else {
-					w.add_buttons_waterway(false);
-				}
-				w.init();
-				return;
 			}
+			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
+			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+				w.add_buttons_road(false);
+			} else {
+				w.add_buttons_waterway(false);
+			}
+			w.init();
+			return;
 		}
 	} else {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);

@@ -2,6 +2,8 @@ wl_library(ui_fsmenu_options
   SRCS
     options.cc
     options.h
+    training_wheel_options.cc
+    training_wheel_options.h
   DEPENDS
     base_exceptions
     base_i18n
@@ -13,6 +15,7 @@ wl_library(ui_fsmenu_options
     graphic_text_layout
     io_filesystem
     logic_filesystem_constants
+    logic_training_wheels
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -41,14 +44,19 @@ wl_library(ui_fsmenu_helpwindow
 
 wl_library(ui_fsmenu_main
   SRCS
+    login_box.cc
+    login_box.h
     main.cc
     main.h
     menu_target.h
+    menu.h
+    menu.cc
   DEPENDS
     base_i18n
     base_random
     build_info
     graphic
+    graphic_fonthandler
     graphic_text_layout
     logic
     logic_filesystem_constants
@@ -56,21 +64,9 @@ wl_library(ui_fsmenu_main
     network
     ui_basic
     widelands_options
-    wui
     wui_common_gamedetails
     wui_common_mapdetails
   USES_SDL2
-)
-
-wl_library(ui_fsmenu_loading_common
-  SRCS
-    load_map_or_game.cc
-    load_map_or_game.h
-  DEPENDS
-    base_i18n
-    io_filesystem
-    ui_basic
-    ui_fsmenu_main
 )
 
 wl_library(ui_fsmenu_gameloading
@@ -113,7 +109,6 @@ wl_library(ui_fsmenu_gameloading
     ui_basic
     ui_fsmenu_main
     ui_fsmenu_helpwindow
-    ui_fsmenu_loading_common
     ui_fsmenu_maploading
     widelands_options
     wui_chat_ui
@@ -140,7 +135,6 @@ wl_library(ui_fsmenu_maploading
     base_i18n
     base_log
     graphic_image_cache
-    graphic_fonthandler
     graphic_surface
     graphic_text_layout
     io_filesystem
@@ -153,7 +147,7 @@ wl_library(ui_fsmenu_maploading
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_loading_common
+    ui_fsmenu_main
     wui_common_mapdetails
 )
 
@@ -167,13 +161,14 @@ wl_library(ui_fsmenu_network
     base_i18n
     base_random
     build_info
+    graphic
     graphic_image_cache
     graphic_text_layout
     logic_tribe_basic_info
     network
     sound
     ui_basic
-    ui_fsmenu_loading_common
+    ui_fsmenu_main
     widelands_options
     wui_chat_ui
 )

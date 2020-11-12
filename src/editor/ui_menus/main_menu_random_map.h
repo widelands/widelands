@@ -84,7 +84,7 @@ private:
 
 	void set_map_info(Widelands::UniqueRandomMapInfo& map_info) const;
 
-	UI::WindowStyle style_;
+	UI::FontStyle label_style_;
 
 	// UI elements
 	int32_t margin_;
@@ -103,6 +103,10 @@ private:
 	std::vector<std::string> resource_amounts_;
 	uint32_t resource_amount_;
 	UI::Dropdown<size_t> world_, resources_;
+
+	enum class TerrainDistribution { kDefault, kAlpine, kAtoll, kWasteland, kRandom, kCustom };
+	UI::Dropdown<TerrainDistribution> terrains_distribution_;
+	void select_terrains_distribution();
 
 	// Land
 	int32_t waterval_, landval_, wastelandval_, mountainsval_;

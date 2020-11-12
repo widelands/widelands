@@ -39,6 +39,7 @@ struct Statebox : public Panel {
 	 * Pictorial Statebox
 	 */
 	Statebox(Panel* parent,
+	         PanelStyle,
 	         Vector2i,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string());
@@ -82,8 +83,6 @@ private:
 	void layout() override;
 	virtual void button_clicked() = 0;
 
-	PanelStyle style_;
-
 	enum Flags {
 		Is_Highlighted = 0x01,
 		Is_Enabled = 0x02,
@@ -117,10 +116,11 @@ struct Checkbox : public Statebox {
 	 * Text conventions: Sentence case for the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
+	         PanelStyle s,
 	         Vector2i const p,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string())
-	   : Statebox(parent, p, pic, tooltip_text) {
+	   : Statebox(parent, s, p, pic, tooltip_text) {
 	}
 
 	/**

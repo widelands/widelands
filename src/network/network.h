@@ -140,7 +140,7 @@ private:
  * sent over the network.
  */
 struct SendPacket : public StreamWrite {
-	SendPacket();
+	SendPacket() = default;
 
 	void reset();
 

@@ -40,7 +40,7 @@ class StreamRead {
 public:
 	explicit StreamRead() {
 	}
-	virtual ~StreamRead();
+	virtual ~StreamRead() = default;
 
 	/**
 	 * Read a number of bytes from the stream.

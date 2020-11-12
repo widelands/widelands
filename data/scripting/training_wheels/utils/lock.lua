@@ -21,3 +21,14 @@ function training_wheel_name_from_filename(filename)
    local basename = path.basename(filename)
    return basename:sub(0, #basename - 4)
 end
+
+-- Detect the interactive player if any
+function get_interactive_player()
+   local player_number = wl.Game().interactive_player
+   for p_idx, player in ipairs(wl.Game().players) do
+      if player.number == player_number then
+         return player
+      end
+   end
+   return nil
+end

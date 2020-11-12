@@ -50,12 +50,14 @@ FxId Panel::click_fx_ = kNoSoundEffect;
  * Initialize a panel, link it into the parent's queue.
  */
 Panel::Panel(Panel* const nparent,
+             const PanelStyle s,
              const int nx,
              const int ny,
              const int nw,
              const int nh,
              const std::string& tooltip_text)
-   : parent_(nparent),
+   : panel_style_(s),
+     parent_(nparent),
      first_child_(nullptr),
      last_child_(nullptr),
      mousein_child_(nullptr),
@@ -656,7 +658,7 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  * false otherwise.
  */
 bool Panel::handle_tooltip() {
-	return draw_tooltip(tooltip());
+	return draw_tooltip(tooltip(), panel_style_);
 }
 
 // Whether TAB events should be handled by this panel's parent (`false`) or by `this` (`true`)
@@ -1273,7 +1275,7 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(const std::string& text) {
+bool Panel::draw_tooltip(const std::string& text, const PanelStyle style) {
 	if (text.empty()) {
 		return false;
 	}
@@ -1281,28 +1283,44 @@ bool Panel::draw_tooltip(const std::string& text) {
 	RenderTarget& dst = *g_gr->get_render_target();
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_richtext_paragraph(text_to_render, UI::FontStyle::kTooltip);
+		text_to_render = as_richtext_paragraph(text_to_render, style == PanelStyle::kWui ?
+		                                                          UI::FontStyle::kWuiTooltip :
+		                                                          UI::FontStyle::kFsTooltip);
 	}
 
-	constexpr uint32_t kTipWidthMax = 360;
+	constexpr int kTipWidthMax = 360;
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   g_fh->render(text_to_render, kTipWidthMax);
+
 	if (rendered_text->rects.empty()) {
 		return false;
 	}
 
-	const uint16_t tip_width = rendered_text->width() + 4;
-	const uint16_t tip_height = rendered_text->height() + 4;
+	// the rendering engine can only adhere to width limitation when there is a whitespace to
+	// introduce a line break. If not, the actual tooltips width exceeds kTipWidthMax. To avoid
+	// unnecessary linebreaks in subsequent string (when it is a formatted string), re-render with
+	// needed width
+	if (rendered_text->width() > kTipWidthMax) {
+		rendered_text = g_fh->render(text_to_render, rendered_text->width());
+	}
 
-	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, 32), tip_width, tip_height);
+	constexpr int kPadding = 4;
+	constexpr int kCursorHeight = 32;
+	const uint16_t tip_width = rendered_text->width() + kPadding;
+	const uint16_t tip_height = rendered_text->height() + kPadding;
+
+	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, kCursorHeight), tip_width,
+	        tip_height);
 	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
 	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x) {
-		r.x -= 4 + r.w;
+		r.x -= kPadding + r.w;
 	}
 	if (screen_bottom_right.y < tooltip_bottom_right.y) {
-		r.y -= 35 + r.h;
+		r.y -= kCursorHeight + kPadding + r.h;
 	}
+	r.x = std::max(kPadding, r.x);
+	r.y = std::max(kPadding, r.y);
 
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));

@@ -45,6 +45,10 @@ struct NoteDropdown {
 
 /// The narrow textual dropdown omits the extra push button.
 /// Use kPictorialMenu if you want to trigger an action without changing the menu button.
+/// kTextual: Text of selected entry and drop-down arrow
+/// kTextualNarrow: Text of selected entry
+/// kPictorial: Icon of the selected entry
+/// kPictorialMenu: Displays \c label when not enough space (?)
 enum class DropdownType { kTextual, kTextualNarrow, kPictorial, kPictorialMenu, kTextualMenu };
 
 /// Implementation for a dropdown menu that lets the user select a value.
@@ -80,6 +84,8 @@ public:
 
 	/// \return true if an element has been selected from the list
 	bool has_selection() const;
+
+	void clear_selection();
 
 	/// Sets a label that will be prefixed to the currently selected element's name
 	/// and displayed on the display button.
@@ -125,6 +131,9 @@ public:
 
 	/// Set maximum available height in the UI
 	void set_height(int height);
+
+	///  Return the total height (text + spacing) occupied by a single entry.
+	int lineheight() const;
 
 	/// Toggle the list on and off and position the mouse on the button so that the dropdown won't
 	/// close on us. If this is a menu and nothing was selected yet, select the first item for easier
@@ -237,7 +246,8 @@ public:
 	/// \param y                  the y-position within 'parent'
 	/// \param list_w             the dropdown's width
 	/// \param max_list_items     the maximum number of items shown in the list before it starts
-	/// using a scrollbar \param button_dimension   the width of the push button in textual
+	/// using a scrollbar
+	/// \param button_dimension   the width of the push button in textual
 	/// dropdowns. For pictorial dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
@@ -266,7 +276,7 @@ public:
 	                  style,
 	                  button_style) {
 	}
-	~Dropdown() {
+	~Dropdown() override {
 		entry_cache_.clear();
 	}
 

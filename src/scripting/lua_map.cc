@@ -2677,20 +2677,51 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
    .. attribute:: collected_resources
 
       (RO) An array with :class:`ResourceDescription` containing the resources that
-      this building will collect from the map.
-      For example, a Fishers's House will collect the "fish" resource.
+      this building will collect from the map, along with the maximum percentage mined and the
+      chance to still find some more after depletion. For example, a Fishers's House will collect:
+
+      .. code-block:: lua
+
+       {
+            {
+               resource = <resource description for fish>,
+               yield = 100,
+               when_empty = 0
+            }
+         }
+
+      and a Barbarian Coal Mine will collect:
+
+      .. code-block:: lua
+
+         {
+            {
+               resource = <resource description for coal>,
+               yield = 33.33,
+               when_empty = 5
+            }
+         }
 */
 int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (const std::string& resource_name : get()->collected_resources()) {
+	for (const auto& resource_info : get()->collected_resources()) {
 		lua_pushint32(L, index++);
+		lua_newtable(L);
+		lua_pushstring(L, "resource");
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_name));
+		   egbase.descriptions().resource_index(resource_info.first));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
+		lua_pushstring(L, "yield");
+		lua_pushnumber(L, resource_info.second.max_percent / 100.0);
+		lua_settable(L, -3);
+		lua_pushstring(L, "when_empty");
+		lua_pushnumber(L, resource_info.second.depleted_chance / 100.0);
+		lua_settable(L, -3);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
@@ -3607,8 +3638,8 @@ int LuaWorkerDescription::get_becomes(lua_State* L) {
 */
 int LuaWorkerDescription::get_buildcost(lua_State* L) {
 	lua_newtable(L);
-	int index = 1;
 	if (get()->is_buildable()) {
+		int index = 1;
 		for (const auto& buildcost_pair : get()->buildcost()) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, buildcost_pair.first);
@@ -4466,7 +4497,7 @@ LuaMapObject::get(lua_State* L, Widelands::EditorGameBase& egbase, const std::st
 	}
 	return o;
 }
-Widelands::MapObject* LuaMapObject::get_or_zero(Widelands::EditorGameBase& egbase) {
+Widelands::MapObject* LuaMapObject::get_or_zero(const Widelands::EditorGameBase& egbase) {
 	return ptr_.get(egbase);
 }
 
@@ -5635,6 +5666,7 @@ const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
    PROP_RO(LuaProductionSite, valid_inputs),
    PROP_RO(LuaProductionSite, is_stopped),
+   PROP_RO(LuaProductionSite, productivity),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5682,6 +5714,18 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 int LuaProductionSite::get_is_stopped(lua_State* L) {
 	Widelands::ProductionSite* ps = get(L, get_egbase(L));
 	lua_pushboolean(L, ps->is_stopped());
+	return 1;
+}
+
+/* RST
+   .. attribute:: productivity
+
+      (RO) Returns the building's current productivity percentage
+
+      :returns: A number between 0 and 100.
+*/
+int LuaProductionSite::get_productivity(lua_State* L) {
+	lua_pushinteger(L, get(L, get_egbase(L))->get_actual_statistics());
 	return 1;
 }
 
@@ -6756,6 +6800,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
    PROP_RO(LuaField, buildable),
+   PROP_RO(LuaField, has_roads),
    {nullptr, nullptr, nullptr},
 };
 
@@ -7082,6 +7127,8 @@ GET_X_NEIGHBOUR(tln)
 GET_X_NEIGHBOUR(bln)
 GET_X_NEIGHBOUR(brn)
 
+#undef GET_X_NEIGHBOUR
+
 /* RST
    .. attribute:: owner
 
@@ -7110,6 +7157,53 @@ int LuaField::get_buildable(lua_State* L) {
 	   (caps & Widelands::BUILDCAPS_MEDIUM) || (caps & Widelands::BUILDCAPS_BIG) ||
 	   (caps & Widelands::BUILDCAPS_MINE);
 	lua_pushboolean(L, is_buildable);
+	return 1;
+}
+
+/* RST
+   .. attribute:: has_roads
+
+      (RO) Whether any roads lead to the field.
+      Note that waterways are currently treated like roads.
+
+      :returns: ``true`` if any of the 6 directions has a road on it, ``false`` otherwise.
+*/
+int LuaField::get_has_roads(lua_State* L) {
+
+	const Widelands::FCoords& fc = fcoords(L);
+	Widelands::Field* f = fc.field;
+	if (f->get_road(Widelands::WalkingDir::WALK_E) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	if (f->get_road(Widelands::WalkingDir::WALK_SE) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	if (f->get_road(Widelands::WalkingDir::WALK_SW) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+
+	Widelands::FCoords neighbor;
+	const Widelands::Map& map = get_egbase(L).map();
+	map.get_ln(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_E) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	map.get_tln(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SE) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	map.get_trn(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SW) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	lua_pushboolean(L, false);
+
 	return 1;
 }
 
@@ -7252,8 +7346,7 @@ int LuaField::has_caps(lua_State* L) {
 int LuaField::has_max_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-	lua_pushboolean(
-	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
+	lua_pushboolean(L, check_has_caps(L, query, f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
 }
 
