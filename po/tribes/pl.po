@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-06 16:44+0000\n"
-"PO-Revision-Date: 2020-11-06 16:46+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"PO-Revision-Date: 2020-11-10 19:01+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -704,7 +704,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:215
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:44
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:54
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:48
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:48
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:52
@@ -735,7 +735,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:40
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:38
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:78
@@ -984,49 +984,49 @@ msgid "Gold Digger Dwelling"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:54
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:58
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:54
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:76
 msgid "mining gold"
 msgstr "wydobycie złota"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:67
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:82
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:95
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:74
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:106
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:94
 msgid "No Gold"
 msgstr "Brak złota"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:68
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:91
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:107
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:97
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:73
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:95
 msgid "Main Gold Vein Exhausted"
 msgstr "Wyczerpano główną żyłę złota"
 
-#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:70
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:68
 msgctxt "amazons_building"
 msgid ""
 "This gold digger dwelling’s main vein is exhausted. Expect strongly "
@@ -1344,36 +1344,36 @@ msgid "Stone Mine"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:52
-#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:63
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:64
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:105
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:81
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:79
 msgid "mining granite"
 msgstr "wydobycie granitu"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:81
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:122
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:120
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:97
 msgid "No Granite"
 msgstr "Brak granitu"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:82
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:121
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:98
 msgid "Main Granite Vein Exhausted"
 msgstr "Wyczerpano główną żyłę granitu"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:82
 msgctxt "amazons_building"
 msgid ""
 "This stone mine’s main vein is exhausted. Expect strongly diminished returns"
@@ -1571,48 +1571,48 @@ msgid "Coal Mine"
 msgstr "Kopalnia węgla"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:58
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:92
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:102
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:78
 msgid "mining coal"
 msgstr "wydobycie węgla"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:74
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:117
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:96
 msgid "No Coal"
 msgstr "Brak węgla"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:91
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:121
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:118
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:97
 msgid "Main Coal Vein Exhausted"
 msgstr "Wyczerpano główną żyłę węgla"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:98
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1626,26 +1626,26 @@ msgid "Crystal Mine"
 msgstr "Kopalnia kryształów"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:113
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:112
 msgid "mining quartz"
 msgstr "wydobycie kwarcu"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:121
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:120
 msgid "mining diamonds"
 msgstr "wydobycie diamentów"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:155
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:154
 msgid "No Crystals"
 msgstr "Brak kryształów"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:156
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:155
 msgid "Main Crystal Vein Exhausted"
 msgstr "Wyczerpano główną żyłę kryształów"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:158
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:157
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -1760,7 +1760,7 @@ msgctxt "atlanteans_building"
 msgid "Gold Mine"
 msgstr "Kopalnia złota"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:86
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1823,46 +1823,46 @@ msgid "Iron Mine"
 msgstr "Kopalnia rudy żelaza"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:68
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:78
 msgid "mining iron"
 msgstr "wydobycie rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:82
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:75
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:106
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:73
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:96
 msgid "No Iron"
 msgstr "Brak rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:89
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:91
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:74
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:97
 msgid "Main Iron Vein Exhausted"
 msgstr "Wyczerpano główną żyłę rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:90
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2227,8 +2227,8 @@ msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr "Kopalnia węgla"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:90
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2247,7 +2247,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
 msgstr "Głębsza kopalnia węgla"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2310,8 +2310,8 @@ msgctxt "barbarians_building"
 msgid "Gold Mine"
 msgstr "Kopalnia złota"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:90
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2330,7 +2330,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
 msgstr "Głębsza kopalnia złota"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2344,7 +2344,7 @@ msgctxt "barbarians_building"
 msgid "Granite Mine"
 msgstr "Kopalnia granitu"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:86
 msgctxt "barbarians_building"
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
@@ -2402,8 +2402,8 @@ msgctxt "barbarians_building"
 msgid "Iron Mine"
 msgstr "Kopalnia rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:90
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2422,7 +2422,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
 msgstr "Głębsza kopalnia rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:80
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2696,7 +2696,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Kopalnia węgla"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:97
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2709,7 +2709,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Głęboka kopalnia węgla"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2772,7 +2772,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Kopalnia złota"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:96
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2785,7 +2785,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Głęboka kopalnia złota"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2819,7 +2819,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Kopalnia rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:97
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2832,7 +2832,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "Głęboka kopalnia rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2861,25 +2861,25 @@ msgid "Marble Mine"
 msgstr "Kopalnia marmuru"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:89
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:109
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:107
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:64
 msgid "mining marble"
 msgstr "wydobycie marmuru"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:135
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:133
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:82
 msgid "No Marble"
 msgstr "Brak marmuru"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:134
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:83
 msgid "Main Marble Vein Exhausted"
 msgstr "Wyczerpano główną żyłę marmuru"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:138
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -2893,7 +2893,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Głęboka kopalnia marmuru"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:85
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -3314,7 +3314,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "Kopalnia węgla"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:123
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3327,7 +3327,7 @@ msgctxt "frisians_building"
 msgid "Deep Coal Mine"
 msgstr "Głęboka kopalnia węgla"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3427,7 +3427,7 @@ msgctxt "frisians_building"
 msgid "Gold Mine"
 msgstr "Kopalnia złota"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:109
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3440,7 +3440,7 @@ msgctxt "frisians_building"
 msgid "Deep Gold Mine"
 msgstr "Głęboka kopalnia złota"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:97
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3480,7 +3480,7 @@ msgctxt "frisians_building"
 msgid "Iron Mine"
 msgstr "Kopalnia rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:109
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3493,7 +3493,7 @@ msgctxt "frisians_building"
 msgid "Deep Iron Mine"
 msgstr "Głęboka kopalnia rudy żelaza"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3588,7 +3588,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr "Kopalnia kamienia"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:125
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3601,7 +3601,7 @@ msgctxt "frisians_building"
 msgid "Deep Rock Mine"
 msgstr "Głęboka kopalnia kamienia"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3718,7 +3718,7 @@ msgstr ""
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:80
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:260
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:77
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:94
@@ -3778,6 +3778,21 @@ msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
+#. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
+msgctxt "amazons_building"
+msgid "No soldier to train!"
+msgstr ""
+
+#. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
+#. match the current training program
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:238
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
+msgctxt "amazons_building"
+msgid "No soldier found for this training level!"
+msgstr ""
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
 msgctxt "amazons_building"
@@ -3797,34 +3812,50 @@ msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:194
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
 msgctxt "atlanteans_building"
 msgid "Dungeon"
 msgstr "Podziemia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:268
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:279
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "szkolenie ataku żołnierza z poziomu 0 do poziomu 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:282
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:293
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "szkolenie ataku żołnierza z poziomu 1 do poziomu 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:296
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:307
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "szkolenie ataku żołnierza z poziomu 2 do poziomu 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:310
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "szkolenie ataku żołnierza z poziomu 3 do poziomu 4"
+
+#. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
+#. assigned
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:340
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
+msgctxt "atlanteans_building"
+msgid "No soldier to train!"
+msgstr ""
+
+#. TRANSLATORS: Atlantean training site tooltip when none of the present
+#. soldiers match the current training program
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:342
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
+msgctxt "atlanteans_building"
+msgid "No soldier found for this training level!"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -3879,6 +3910,22 @@ msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "szkolenie uniku żołnierza z poziomu 1 do poziomu 2"
+
+#. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
+#. assigned
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:218
+msgctxt "barbarians_building"
+msgid "No soldier to train!"
+msgstr ""
+
+#. TRANSLATORS: Barbarian training site tooltip when none of the present
+#. soldiers match the current training program
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:122
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:220
+msgctxt "barbarians_building"
+msgid "No soldier found for this training level!"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -3946,6 +3993,23 @@ msgstr "Arena"
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "szkolenie uniku żołnierza z poziomu 0 do poziomu 1"
+
+#. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
+msgctxt "empire_building"
+msgid "No soldier to train!"
+msgstr ""
+
+#. TRANSLATORS: Empire training site tooltip when none of the present soldiers
+#. match the current training program
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:113
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
+msgctxt "empire_building"
+msgid "No soldier found for this training level!"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -4048,6 +4112,21 @@ msgstr "szkolenie obrony żołnierza z poziomu 1 do poziomu 2"
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "szkolenie zdrowia żołnierza z poziomu 1 do poziomu 2"
+
+#. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:205
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
+msgctxt "frisians_building"
+msgid "No soldier to train!"
+msgstr ""
+
+#. TRANSLATORS: Frisian training site tooltip when none of the present
+#. soldiers match the current training program
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:207
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
+msgctxt "frisians_building"
+msgid "No soldier found for this training level!"
+msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
@@ -4871,6 +4950,50 @@ msgid ""
 "The people of the amazonian jungle. This tribe is still under development."
 msgstr ""
 
+#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
+#. is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:8
+msgctxt "amazons_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:11
+msgctxt "amazons_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building. %3% is the maximum number
+#. of soldier slots in the building
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:16
+msgctxt "amazons_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:19
+msgctxt "amazons_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:11
@@ -5018,6 +5141,50 @@ msgid ""
 "Atlantis."
 msgstr "Plemię to znane jest z najstarszych opowieści. Synowie i córki Atlantydy."
 
+#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
+#. %2% is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:18
+msgctxt "atlanteans_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
+msgctxt "atlanteans_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building. %3% is the maximum
+#. number of soldier slots in the building
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:26
+msgctxt "atlanteans_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:29
+msgctxt "atlanteans_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:11
 #: ../../data/tribes/initialization/barbarians/starting_conditions/discovery.lua:11
@@ -5060,6 +5227,50 @@ msgstr "Barbarzyńcy"
 msgid "The mighty tribes of the east-lands."
 msgstr "Potężne ludy ze wschodnich ziem."
 
+#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
+#. %2% is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:8
+msgctxt "barbarians_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
+msgctxt "barbarians_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building. %3% is the maximum
+#. number of soldier slots in the building
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:16
+msgctxt "barbarians_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:19
+msgctxt "barbarians_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
 msgid "Empire"
@@ -5069,6 +5280,50 @@ msgstr "Imperium"
 msgid "This is the culture of the Roman Empire."
 msgstr "Oto cywilizacja rzymskiego Imperium."
 
+#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
+#. is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/empire/military_capacity.lua:8
+msgctxt "empire_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/empire/military_capacity.lua:11
+msgctxt "empire_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building. %3% is the maximum number
+#. of soldier slots in the building
+#: ../../data/tribes/initialization/empire/military_capacity.lua:16
+msgctxt "empire_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/empire/military_capacity.lua:19
+msgctxt "empire_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
@@ -5077,6 +5332,50 @@ msgstr "Fryzowie"
 #: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "Mieszkańcy brzegu burzliwego Morza Północnego."
+
+#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
+#. %2% is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:8
+msgctxt "frisians_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:11
+msgctxt "frisians_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building. %3% is the maximum
+#. number of soldier slots in the building
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:16
+msgctxt "frisians_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:19
+msgctxt "frisians_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
