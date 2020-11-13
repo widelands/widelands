@@ -221,7 +221,7 @@ void LaunchSPG::clicked_ok() {
 			game_->run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		}
 	} catch (const std::exception& e) {
-		WLApplication::emergency_save(capsule_.menu(), *game_, e.what(), playernumber);
+		WLApplication::emergency_save(&capsule_.menu(), *game_, e.what(), playernumber);
 	}
 
 	return_to_main_menu();

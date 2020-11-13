@@ -20,7 +20,6 @@
 #include "ui_fsmenu/internet_lobby.h"
 
 #include "base/i18n.h"
-#include "base/log.h"  // NOCOM
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
@@ -110,8 +109,6 @@ InternetLobby::InternetLobby(
      is_registered_(registered),
      tribeinfos_(tribeinfos) {
 
-	log_dbg("NOCOM New InternetLobby – ctor AAA");
-
 	back_.set_title(_("Leave Lobby"));
 
 	left_column_box_.set_inner_spacing(kPadding);
@@ -181,14 +178,10 @@ InternetLobby::InternetLobby(
 	opengames_list_.selected.connect([this](uint32_t) { server_selected(); });
 	opengames_list_.double_clicked.connect([this](uint32_t) { server_doubleclicked(); });
 
-	log_dbg("NOCOM New InternetLobby – ctor BBB");
-
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in()) {
 		connect_to_metaserver();
 	}
-
-	log_dbg("NOCOM New InternetLobby – ctor CCC");
 
 	layout();
 	// set focus to chat input
@@ -196,17 +189,12 @@ InternetLobby::InternetLobby(
 }
 
 InternetLobby::~InternetLobby() {
-	log_dbg("NOCOM InternetLobby dtor AAA");
 	if (InternetGaming::ref().logged_in()) {
-		log_dbg("NOCOM InternetLobby dtor BBB");
 		// logout of the metaserver
 		InternetGaming::ref().logout();
-		log_dbg("NOCOM InternetLobby dtor CCC");
 	} else {
-		log_dbg("NOCOM InternetLobby dtor DDD");
 		// Reset InternetGaming for clean login
 		InternetGaming::ref().reset();
-		log_dbg("NOCOM InternetLobby dtor EEE");
 	}
 }
 

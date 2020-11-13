@@ -632,7 +632,7 @@ void BuildingWindow::toggle_workarea() {
 	} else {
 		show_workarea();
 	}
-	NEVER_HERE();  // NOCOM to test emergency saving
+	NEVER_HERE();  // NOCOM
 }
 
 /**

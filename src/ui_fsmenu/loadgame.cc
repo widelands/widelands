@@ -172,7 +172,7 @@ void LoadGame::clicked_ok() {
 					game_.run_load_game(gamedata->filename, "");
 				}
 			} catch (const std::exception& e) {
-				WLApplication::emergency_save(capsule_.menu(), game_, e.what());
+				WLApplication::emergency_save(&capsule_.menu(), game_, e.what());
 			}
 			return_to_main_menu();
 		}

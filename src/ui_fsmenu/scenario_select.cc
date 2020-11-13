@@ -175,7 +175,7 @@ void ScenarioSelect::clicked_ok() {
 		}
 		game.run_splayer_scenario_direct(get_map(), "");
 	} catch (const std::exception& e) {
-		WLApplication::emergency_save(capsule_.menu(), game, e.what());
+		WLApplication::emergency_save(&capsule_.menu(), game, e.what());
 	}
 
 	return_to_main_menu();

@@ -181,23 +181,7 @@ struct WLApplication {
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 
-	void mainmenu();
-
-	bool mainmenu_tutorial(FsMenu::MainMenu&);
-	void mainmenu_singleplayer();
-	void mainmenu_multiplayer(FsMenu::MainMenu&, bool internet);
-	void mainmenu_editor();
-	bool new_random_game(FsMenu::MainMenu&);
-	bool new_game(FsMenu::MainMenu&,
-	              Widelands::Game&,
-	              SinglePlayerGameSettingsProvider&,
-	              bool preconfigured,
-	              bool* canceled = nullptr);
-	bool load_game(FsMenu::MainMenu&, std::string filename = "");
-	bool campaign_game(FsMenu::MainMenu&);
-	bool replay(FsMenu::MainMenu*);
-
-	static void emergency_save(UI::Panel&, Widelands::Game&, const std::string& error, uint8_t = 1);
+	static void emergency_save(UI::Panel*, Widelands::Game&, const std::string& error, uint8_t player = 1, bool replace_ctrl = true);
 
 private:
 	WLApplication(int argc, char const* const* argv);

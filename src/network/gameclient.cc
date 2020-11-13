@@ -264,7 +264,7 @@ void GameClient::do_run() {
 
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
-		WLApplication::emergency_save(parent, game, e.what());
+		WLApplication::emergency_save(&parent, game, e.what());
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
 		if (d->internet_) {
@@ -1109,29 +1109,10 @@ void GameClient::disconnect(const std::string& reason,
 		d->net->close();
 	}
 
-	bool const trysave = showmsg && d->game;
-
-	if (showmsg && d->modal) {  // can only show a message with a valid modal parent window
-		std::string msg;
-		if (arg.empty()) {
-			msg = NetworkGamingMessages::get_message(reason);
-		} else {
-			msg = NetworkGamingMessages::get_message(reason, arg);
-		}
-
-		if (trysave) {
-			/** TRANSLATORS: %s contains an error message. */
-			msg = (boost::format(_("%s An automatic savegame will be created.")) % msg).str();
-		}
-
-		UI::WLMessageBox mmb(d->modal, UI::WindowStyle::kWui, _("Disconnected from Host"), msg,
-		                     UI::WLMessageBox::MBoxType::kOk);
-		mmb.run<UI::Panel::Returncodes>();
+	if (showmsg && d->game) {
+		// WLApplication::emergency_save(d->modal, *d->game, msg);
+		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() : NetworkGamingMessages::get_message(reason, arg).c_str());
 	}
-
-	/* if (trysave) {
-		WLApplication::emergency_save(*d->game);  // NOCOM
-	} */
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
 	// double free.

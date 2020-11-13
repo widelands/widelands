@@ -755,7 +755,7 @@ void MainMenu::action(const MenuTarget t) {
 			try {
 				game.run_load_game(filename_for_continue_playing_, "");
 			} catch (const std::exception& e) {
-				WLApplication::emergency_save(*this, game, e.what());
+				WLApplication::emergency_save(this, game, e.what());
 			}
 			// Update the Continue button in case a new savegame was created
 			set_labels();

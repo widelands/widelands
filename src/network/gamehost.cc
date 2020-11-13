@@ -749,7 +749,7 @@ void GameHost::run_callback() {
 		clear_computer_players();
 	} catch (const std::exception& e) {
 		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
-		WLApplication::emergency_save(parent, *game_, e.what(), player_number);
+		WLApplication::emergency_save(&parent, *game_, e.what(), player_number);
 		clear_computer_players();
 
 		while (!d->clients.empty()) {
@@ -2526,7 +2526,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 
 	// If the client is linked to a player and it is the client that closes the connection
 	// and the game has already started ...
-	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" && d->game != nullptr) {
+	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" && reason != "SERVER_CRASHED" && d->game != nullptr) {
 		// And the client hasn't lost/won yet ...
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
 			// If not shown yet, show a window and ask the host player what to do
@@ -2536,7 +2536,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 				if (!forced_pause()) {
 					force_pause();
 				}
-				// WLApplication::emergency_save(*d->game);  // NOCOM
+				WLApplication::emergency_save(nullptr, *d->game, reason, 1, false);
 			}
 			// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kWon) {
