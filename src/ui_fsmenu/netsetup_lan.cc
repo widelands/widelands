@@ -202,8 +202,8 @@ void NetSetupLAN::game_doubleclicked(uint32_t) {
 	}
 }
 
-void NetSetupLAN::update_game_info(
-   UI::Table<NetOpenGame const* const>::EntryRecord& er, const NetGameInfo& info) {
+void NetSetupLAN::update_game_info(UI::Table<NetOpenGame const* const>::EntryRecord& er,
+                                   const NetGameInfo& info) {
 	assert(info.hostname[sizeof(info.hostname) - 1] == '\0');
 	er.set_string(0, info.hostname);
 	assert(info.map[sizeof(info.map) - 1] == '\0');
@@ -237,8 +237,8 @@ void NetSetupLAN::game_updated(const NetOpenGame* game) {
 }
 
 void NetSetupLAN::discovery_callback(int32_t const type,
-                                                   NetOpenGame const* const game,
-                                                   void* const userdata) {
+                                     NetOpenGame const* const game,
+                                     void* const userdata) {
 	switch (type) {
 	case LanGameFinder::GameOpened:
 		static_cast<NetSetupLAN*>(userdata)->game_opened(game);
@@ -295,7 +295,8 @@ void NetSetupLAN::clicked_joingame() {
 		return;
 	}
 
-	running_game_.reset(new GameClient(capsule_, std::make_pair(addr, NetAddress()), playername_.text()));
+	running_game_.reset(
+	   new GameClient(capsule_, std::make_pair(addr, NetAddress()), playername_.text()));
 }
 
 void NetSetupLAN::clicked_hostgame() {

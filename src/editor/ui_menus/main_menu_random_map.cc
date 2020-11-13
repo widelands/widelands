@@ -42,13 +42,11 @@ constexpr uint8_t kMaxMapgenPlayers = 8;
 constexpr uint8_t kMargin = 4;
 }  // namespace
 
-MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
-                                           UI::PanelStyle s,
-	                                       const int32_t inner_w,
-                                           const uint32_t w,
-                                           const uint32_t h)
+MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(
+   UI::Panel& parent, UI::PanelStyle s, const int32_t inner_w, const uint32_t w, const uint32_t h)
    : UI::Box(&parent, s, kMargin, kMargin, UI::Box::Vertical, 0, 0, kMargin),
-     label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel : UI::FontStyle::kFsMenuLabel),
+     label_style_(s == UI::PanelStyle::kWui ? UI::FontStyle::kWuiLabel :
+                                              UI::FontStyle::kFsMenuLabel),
      // UI elements
      label_height_(text_height(label_style_) + 2),
      // Size
@@ -190,8 +188,8 @@ MainMenuNewRandomMapPanel::MainMenuNewRandomMapPanel(UI::Panel& parent,
                   0,
                   inner_w - 2 * kMargin - map_id_label_.get_w(),
                   panel_style_),
-ok_button_(nullptr),
-cancel_button_(nullptr) {
+     ok_button_(nullptr),
+     cancel_button_(nullptr) {
 	set_size(inner_w, 50);  // Prevent assert failures
 
 	// ---------- Width + Height ----------
@@ -492,8 +490,8 @@ void MainMenuNewRandomMapPanel::select_terrains_distribution() {
 }
 
 bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbase,
-                                           EditorInteractive* eia,
-                                           SinglePlayerGameSettingsProvider* sp) {
+                                                EditorInteractive* eia,
+                                                SinglePlayerGameSettingsProvider* sp) {
 	if (ok_button_) {
 		ok_button_->set_enabled(false);
 		cancel_button_->set_enabled(false);
@@ -709,12 +707,13 @@ void MainMenuNewRandomMapPanel::set_map_info(Widelands::UniqueRandomMapInfo& map
 }
 
 MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
-	                              UI::UniqueWindow::Registry& r,
-	                              const uint32_t w,
-	                              const uint32_t h)
-   : UI::UniqueWindow(&parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
-   box_(this, panel_style_, 0, 0, UI::Box::Vertical),
-   panel_(box_, UI::PanelStyle::kWui, get_inner_w(), w, h),
+                                           UI::UniqueWindow::Registry& r,
+                                           const uint32_t w,
+                                           const uint32_t h)
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "random_map_menu", &r, 400, 500, _("New Random Map")),
+     box_(this, panel_style_, 0, 0, UI::Box::Vertical),
+     panel_(box_, UI::PanelStyle::kWui, get_inner_w(), w, h),
      button_box_(&box_, panel_style_, 0, 0, UI::Box::Horizontal, 0, 0, kMargin),
      ok_button_(&button_box_,
                 "generate_map",
@@ -729,7 +728,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(UI::Panel& parent,
                     0,
                     0,
                     get_inner_w() / 2 - kMargin,
-                    0, UI::ButtonStyle::kWuiSecondary, _("Cancel")) {
+                    0,
+                    UI::ButtonStyle::kWuiSecondary,
+                    _("Cancel")) {
 	box_.add(&panel_, UI::Box::Resizing::kAlign);
 
 	cancel_button_.sigclicked.connect([this]() { die(); });
@@ -767,4 +768,3 @@ bool MainMenuNewRandomMap::handle_key(bool down, SDL_Keysym code) {
 	}
 	return UI::UniqueWindow::handle_key(down, code);
 }
-

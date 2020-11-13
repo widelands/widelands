@@ -653,7 +653,8 @@ void GameHost::run() {
 	game_.reset(new Widelands::Game());
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	new FsMenu::LaunchMPG(capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
+	new FsMenu::LaunchMPG(
+	   capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
 }
 
 // TODO(k.halfmann): refactor into smaller functions
@@ -737,10 +738,10 @@ void GameHost::run_callback() {
 		check_hung_clients();
 		init_computer_players();
 		game_->run(d->settings.savegame ?
-		            Widelands::Game::StartGameType::kSaveGame :
-		            d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-		                                   Widelands::Game::StartGameType::kMap,
-		         "", false, "nethost");
+		              Widelands::Game::StartGameType::kSaveGame :
+		              d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+		                                     Widelands::Game::StartGameType::kMap,
+		           "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_) {
@@ -2526,7 +2527,8 @@ void GameHost::disconnect_client(uint32_t const client_number,
 
 	// If the client is linked to a player and it is the client that closes the connection
 	// and the game has already started ...
-	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" && reason != "SERVER_CRASHED" && d->game != nullptr) {
+	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" &&
+	    reason != "SERVER_CRASHED" && d->game != nullptr) {
 		// And the client hasn't lost/won yet ...
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
 			// If not shown yet, show a window and ask the host player what to do

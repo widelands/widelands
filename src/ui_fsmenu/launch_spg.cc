@@ -61,9 +61,9 @@
 namespace FsMenu {
 
 LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
-                                                 GameSettingsProvider& settings,
-                                                 Widelands::Game& g,
-                                                 bool preconfigured)
+                     GameSettingsProvider& settings,
+                     Widelands::Game& g,
+                     bool preconfigured)
    : LaunchGame(fsmm, settings, nullptr, preconfigured, false),
      player_setup(&left_column_box_, &settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
@@ -180,16 +180,18 @@ void LaunchSPG::win_condition_selected() {
 void LaunchSPG::clicked_ok() {
 	const std::string filename = settings_.settings().mapfilename;
 	if (!preconfigured_ && !g_fs->file_exists(filename)) {
-		UI::WLMessageBox m(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("File not found"),
-		                (boost::format(
-		                _("Widelands tried to start a game with a file that could not be "
-		                  "found at the given path.\n"
-		                  "The file was: %s\n"
-		                  "If this happens in a network game, the host might have selected "
-		                  "a file that you do not own. Normally, such a file should be sent "
-		                  "from the host to you, but perhaps the transfer was not yet "
-		                  "finished!?!"))
-		                % filename).str(), UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox m(
+		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("File not found"),
+		   (boost::format(_("Widelands tried to start a game with a file that could not be "
+		                    "found at the given path.\n"
+		                    "The file was: %s\n"
+		                    "If this happens in a network game, the host might have selected "
+		                    "a file that you do not own. Normally, such a file should be sent "
+		                    "from the host to you, but perhaps the transfer was not yet "
+		                    "finished!?!")) %
+		    filename)
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<int>();
 		return;
 	}
@@ -210,13 +212,15 @@ void LaunchSPG::clicked_ok() {
 			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
 			// Game controller needs the ibase pointer to init the chat
 			game_.set_ibase(new InteractivePlayer(game_, get_config_section(), playernumber, false));
-			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game_, true, playernumber));
+			std::unique_ptr<GameController> ctrl(
+			   new SinglePlayerGameController(game_, true, playernumber));
 
 			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 			if (sp->has_players_tribe()) {
 				tipstexts.push_back(sp->get_players_tribe());
 			}
-			game_.create_loader_ui(tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
+			game_.create_loader_ui(
+			   tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 

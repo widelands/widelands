@@ -177,7 +177,11 @@ struct WLApplication {
 	// Pump SDL events and dispatch them.
 	void handle_input(InputCallback const*);
 
-	static void emergency_save(UI::Panel*, Widelands::Game&, const std::string& error, uint8_t player = 1, bool replace_ctrl = true);
+	static void emergency_save(UI::Panel*,
+	                           Widelands::Game&,
+	                           const std::string& error,
+	                           uint8_t player = 1,
+	                           bool replace_ctrl = true);
 
 private:
 	WLApplication(int argc, char const* const* argv);

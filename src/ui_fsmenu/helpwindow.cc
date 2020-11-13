@@ -32,19 +32,19 @@
 namespace FsMenu {
 
 HelpWindow::HelpWindow(UI::Panel* const parent,
-                                           LuaInterface* lua,
-                                           const std::string& script_path,
-                                           const std::string& caption,
-                                           uint32_t width,
-                                           uint32_t height)
+                       LuaInterface* lua,
+                       const std::string& script_path,
+                       const std::string& caption,
+                       uint32_t width,
+                       uint32_t height)
    : UI::Window(parent,
-            UI::WindowStyle::kFsMenu,
-            "help_window",
-            0,
-            0,
-            width,
-            height,
-            (boost::format(_("Help: %s")) % caption).str()),
+                UI::WindowStyle::kFsMenu,
+                "help_window",
+                0,
+                0,
+                width,
+                height,
+                (boost::format(_("Help: %s")) % caption).str()),
      textarea_(
         new UI::MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kFsMenu)) {
 	int margin = 5;
@@ -53,8 +53,8 @@ HelpWindow::HelpWindow(UI::Panel* const parent,
 	width = (width == 0) ? g_gr->get_xres() * 3 / 5 : width;
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
-	UI::Button* btn =
-	   new UI::Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
+	UI::Button* btn = new UI::Button(
+	   this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK"));
 
 	btn->sigclicked.connect([this]() { clicked_ok(); });
 	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));

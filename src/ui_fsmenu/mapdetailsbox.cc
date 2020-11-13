@@ -126,7 +126,10 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 // MapDetailsBox implementation
 
-MapDetailsBox::MapDetailsBox(Panel* parent, const bool preconfigured, const uint32_t padding, const bool select_map_dropdown)
+MapDetailsBox::MapDetailsBox(Panel* parent,
+                             const bool preconfigured,
+                             const uint32_t padding,
+                             const bool select_map_dropdown)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      padding_(padding),
      preconfigured_(preconfigured),
@@ -150,18 +153,30 @@ MapDetailsBox::MapDetailsBox(Panel* parent, const bool preconfigured, const uint
                0,
                _("No map selected"),
                UI::Align::kLeft),
-     select_map_button_(select_map_dropdown ? nullptr : new UI::Button(&title_box_,
-                 "change_map",
-                 0,
-                 0,
-                 0,
-                 0,
-                 UI::ButtonStyle::kFsMenuSecondary,
-                 g_image_cache->get("images/wui/menus/toggle_minimap.png"),
-                 _("Change map"))),
+     select_map_button_(select_map_dropdown ?
+                           nullptr :
+                           new UI::Button(&title_box_,
+                                          "change_map",
+                                          0,
+                                          0,
+                                          0,
+                                          0,
+                                          UI::ButtonStyle::kFsMenuSecondary,
+                                          g_image_cache->get("images/wui/menus/toggle_minimap.png"),
+                                          _("Change map"))),
      select_map_dropdown_(select_map_dropdown ? new UI::Dropdown<std::function<void()>>(
-             &title_box_, "change_map_or_save", 0, 0, 50, 3, 20, _("Change map or saved game"),
-	         UI::DropdownType::kPictorialMenu, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary) : nullptr),
+                                                   &title_box_,
+                                                   "change_map_or_save",
+                                                   0,
+                                                   0,
+                                                   50,
+                                                   3,
+                                                   20,
+                                                   _("Change map or saved game"),
+                                                   UI::DropdownType::kPictorialMenu,
+                                                   UI::PanelStyle::kFsMenu,
+                                                   UI::ButtonStyle::kFsMenuSecondary) :
+                                                nullptr),
      map_description_(&content_box_,
                       0,
                       0,
@@ -244,7 +259,9 @@ void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
 	assert(select_map_button_);
 	select_map_button_->sigclicked.connect(action);
 }
-void MapDetailsBox::add_select_map_action(const std::function<void()>& action, const std::string& label, const Image* img) {
+void MapDetailsBox::add_select_map_action(const std::function<void()>& action,
+                                          const std::string& label,
+                                          const Image* img) {
 	assert(select_map_dropdown_);
 	select_map_dropdown_->add(label, action, img);
 }

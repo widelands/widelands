@@ -33,11 +33,11 @@
 namespace FsMenu {
 
 LoadGame::LoadGame(MenuCapsule& fsmm,
-                                               Widelands::Game& g,
-                                               GameSettingsProvider& gsp,
-                                               bool take_ownership_of_game_and_settings,
-                                               bool is_replay,
-                                               const std::function<void(const std::string&)>& callback)
+                   Widelands::Game& g,
+                   GameSettingsProvider& gsp,
+                   bool take_ownership_of_game_and_settings,
+                   bool is_replay,
+                   const std::function<void(const std::string&)>& callback)
    : TwoColumnsFullNavigationMenu(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
      game_(g),
      settings_(gsp),
@@ -48,7 +48,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
                    is_replay ?
                       LoadOrSaveGame::FileType::kReplay :
                       (gsp.settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
-                                                     LoadOrSaveGame::FileType::kGameSinglePlayer),
+                                                    LoadOrSaveGame::FileType::kGameSinglePlayer),
                    UI::PanelStyle::kFsMenu,
                    UI::WindowStyle::kFsMenu,
                    true,
@@ -79,7 +79,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
 		back_.set_tooltip(gsp.settings().multiplayer ? _("Return to the multiplayer game setup") :
-		                                                _("Return to the single player menu"));
+		                                               _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
 
@@ -159,7 +159,8 @@ void LoadGame::clicked_ok() {
 
 			try {
 				if (is_replay_) {
-					game_.create_loader_ui({"general_game"}, true, settings_.settings().map_theme, settings_.settings().map_background);
+					game_.create_loader_ui({"general_game"}, true, settings_.settings().map_theme,
+					                       settings_.settings().map_background);
 
 					game_.set_ibase(new InteractiveSpectator(game_, get_config_section()));
 					game_.set_write_replay(false);

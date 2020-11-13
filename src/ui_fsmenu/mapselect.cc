@@ -41,9 +41,9 @@ constexpr int checkbox_space_ = 20;
 using Widelands::WidelandsMapLoader;
 
 MapSelect::MapSelect(LaunchGame& lg,
-                                                 GameSettingsProvider* const settings,
-                                                 GameController* const ctrl,
-                                                 Widelands::EditorGameBase& egbase)
+                     GameSettingsProvider* const settings,
+                     GameController* const ctrl,
+                     Widelands::EditorGameBase& egbase)
    : TwoColumnsFullNavigationMenu(lg.get_capsule(), _("Choose Map")),
      parent_screen_(lg),
      checkboxes_(
@@ -219,7 +219,8 @@ void MapSelect::clicked_ok() {
 	} else if (!ok_.enabled()) {
 		return;
 	} else {
-		parent_screen_.clicked_select_map_callback(get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
+		parent_screen_.clicked_select_map_callback(
+		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 		die();
 	}
 }
@@ -386,9 +387,8 @@ void MapSelect::fill_table() {
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox* MapSelect::add_tag_checkbox(UI::Box* box,
-                                                        const std::string& tag,
-                                                        const std::string& displ_name) {
+UI::Checkbox*
+MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag, const std::string& displ_name) {
 	tags_ordered_.push_back(tag);
 
 	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), displ_name);

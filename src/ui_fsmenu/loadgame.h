@@ -31,12 +31,13 @@ namespace FsMenu {
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class LoadGame : public TwoColumnsFullNavigationMenu {
 public:
-	LoadGame(MenuCapsule&,
-	                       Widelands::Game&,
-	                       GameSettingsProvider& gsp,
-	                       bool take_ownership_of_game_and_settings,
-	                       bool is_replay,
-	                       const std::function<void(const std::string&)>& = [](const std::string&) {});
+	LoadGame(
+	   MenuCapsule&,
+	   Widelands::Game&,
+	   GameSettingsProvider& gsp,
+	   bool take_ownership_of_game_and_settings,
+	   bool is_replay,
+	   const std::function<void(const std::string&)>& = [](const std::string&) {});
 	~LoadGame() override;
 
 	bool handle_key(bool down, SDL_Keysym code) override;

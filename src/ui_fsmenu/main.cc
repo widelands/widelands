@@ -741,16 +741,19 @@ void MainMenu::action(const MenuTarget t) {
 
 	case MenuTarget::kReplay:
 		menu_capsule_.clear_content();
-		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(), true, true);
+		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(),
+		             true, true);
 		break;
 	case MenuTarget::kLoadGame:
 		menu_capsule_.clear_content();
-		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(), true, false);
+		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(),
+		             true, false);
 		break;
 
 	case MenuTarget::kNewGame:
 		menu_capsule_.clear_content();
-		new LaunchSPG(menu_capsule_, *new SinglePlayerGameSettingsProvider(), *new Widelands::Game(), false);
+		new LaunchSPG(
+		   menu_capsule_, *new SinglePlayerGameSettingsProvider(), *new Widelands::Game(), false);
 		break;
 
 	case MenuTarget::kRandomGame:
@@ -810,8 +813,7 @@ void MainMenu::action(const MenuTarget t) {
 
 		g_sh->change_music("ingame", 1000);
 		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
-		}
-		break;
+	} break;
 
 	case MenuTarget::kEditorNew:
 		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
@@ -827,7 +829,8 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 	case MenuTarget::kEditorContinue: {
 		if (!filename_for_continue_editing_.empty()) {
-			EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+			EditorInteractive::run_editor(
+			   EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
 			set_labels();
 		}
 		break;
@@ -903,4 +906,4 @@ void MainMenu::internet_login(const bool launch_metaserver) {
 	}
 }
 
-} //  namespace FsMenu
+}  //  namespace FsMenu

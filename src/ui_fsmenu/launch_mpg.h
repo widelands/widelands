@@ -38,13 +38,14 @@ namespace FsMenu {
  */
 class LaunchMPG : public LaunchGame {
 public:
-	LaunchMPG(MenuCapsule&,
-	                        GameSettingsProvider&,
-	                        GameController&,
-	                        ChatProvider&,
-	                        Widelands::EditorGameBase& egbase,
-	                        bool game_done_on_cancel,
-	                        const std::function<void()>& callback = []() {});
+	LaunchMPG(
+	   MenuCapsule&,
+	   GameSettingsProvider&,
+	   GameController&,
+	   ChatProvider&,
+	   Widelands::EditorGameBase& egbase,
+	   bool game_done_on_cancel,
+	   const std::function<void()>& callback = []() {});
 	~LaunchMPG() override;
 
 	void think() override;

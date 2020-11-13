@@ -176,14 +176,16 @@ bool TwoColumnsFullNavigationMenu::handle_key(bool down, SDL_Keysym code) {
 }
 
 MenuCapsule::MenuCapsule(MainMenu& fsmm)
-: UI::Window(&fsmm,
+   : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "menu",
                 fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
-                ""), fsmm_(fsmm), should_die_(false) {
+                ""),
+     fsmm_(fsmm),
+     should_die_(false) {
 	set_visible(false);
 	do_not_layout_on_resolution_change();
 }

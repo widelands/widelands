@@ -40,11 +40,7 @@ static constexpr double scale_factor = 1.3;
  */
 class LaunchGame : public TwoColumnsFullNavigationMenu {
 public:
-	LaunchGame(MenuCapsule&,
-	                         GameSettingsProvider&,
-	                         GameController*,
-	                         bool preconfigured,
-	                         bool mpg);
+	LaunchGame(MenuCapsule&, GameSettingsProvider&, GameController*, bool preconfigured, bool mpg);
 	~LaunchGame() override;
 
 	GameSettingsProvider& settings() const {

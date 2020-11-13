@@ -27,9 +27,11 @@
 namespace FsMenu {
 
 RandomGame::RandomGame(MenuCapsule& m)
-: TwoColumnsFullNavigationMenu(m, _("New Random Game")),
-menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64),
-icon_(&right_column_content_box_, UI::PanelStyle::kFsMenu, g_image_cache->get("images/logos/wl-ico-128.png")) {
+   : TwoColumnsFullNavigationMenu(m, _("New Random Game")),
+     menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64),
+     icon_(&right_column_content_box_,
+           UI::PanelStyle::kFsMenu,
+           g_image_cache->get("images/logos/wl-ico-128.png")) {
 	left_column_box_.add_inf_space();
 	left_column_box_.add(&menu_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	left_column_box_.add_inf_space();
@@ -63,8 +65,8 @@ void RandomGame::clicked_ok() {
 		UI::WLMessageBox mbox(
 		   &m, UI::WindowStyle::kFsMenu, _("Map Generation Error"),
 		   _("The random map generator was unable to generate a suitable map. "
-			 "This happens occasionally because the generator is still in beta stage. "
-			 "Please try again with slightly different settings."),
+		     "This happens occasionally because the generator is still in beta stage. "
+		     "Please try again with slightly different settings."),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			die();

@@ -35,11 +35,11 @@ namespace FsMenu {
 class HelpWindow : public UI::Window {
 public:
 	HelpWindow(Panel* parent,
-	                     LuaInterface* lua,
-	                     const std::string& script_path,
-	                     const std::string& caption,
-	                     uint32_t width = 0,
-	                     uint32_t height = 0);
+	           LuaInterface* lua,
+	           const std::string& script_path,
+	           const std::string& caption,
+	           uint32_t width = 0,
+	           uint32_t height = 0);
 
 	bool handle_mousepress(uint8_t btn, int32_t mx, int32_t my) override;
 

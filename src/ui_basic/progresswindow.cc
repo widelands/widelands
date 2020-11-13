@@ -46,7 +46,9 @@ namespace UI {
 
 std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 
-ProgressWindow::ProgressWindow(UI::Panel* p, const std::string& theme, const std::string& background)
+ProgressWindow::ProgressWindow(UI::Panel* p,
+                               const std::string& theme,
+                               const std::string& background)
    : UI::Panel(p, PanelStyle::kFsMenu /* unused */, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme),

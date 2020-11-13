@@ -1167,7 +1167,11 @@ void WLApplication::handle_commandline_parameters() {
 /**
  * Try to save the game instance if possible
  */
-void WLApplication::emergency_save(UI::Panel* panel, Widelands::Game& game, const std::string& error, const uint8_t playernumber, const bool replace_ctrl) {
+void WLApplication::emergency_save(UI::Panel* panel,
+                                   Widelands::Game& game,
+                                   const std::string& error,
+                                   const uint8_t playernumber,
+                                   const bool replace_ctrl) {
 	log_err("##############################\n"
 	        "  FATAL EXCEPTION: %s\n \n"
 	        "##############################\n"
@@ -1177,22 +1181,33 @@ void WLApplication::emergency_save(UI::Panel* panel, Widelands::Game& game, cons
 	        "  Please add this information to your report.\n"
 	        "  If desired, Widelands attempts to create an emergency savegame.\n"
 	        "  It is often – though not always – possible to load it and continue playing.\n"
-	        "##############################", error.c_str(), build_id().c_str(), build_type().c_str());
+	        "##############################",
+	        error.c_str(), build_id().c_str(), build_type().c_str());
 	if (!game.is_loaded()) {
 		return;
 	}
 
 	if (panel) {
-		UI::WLMessageBox m(panel, UI::WindowStyle::kFsMenu, _("Unexpected error during the game"), (boost::format(
-				_("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build %2$s (%3$s).\n\nPlease add this information to your report.\n\nWould you like Widelands to attempt to create an emergency savegame? It is often – though not always – possible to load it and continue playing."))
-				% error % build_id() % build_type()).str(), UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox m(
+		   panel, UI::WindowStyle::kFsMenu, _("Unexpected error during the game"),
+		   (boost::format(
+		       _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
+		         "this problem to help us improve Widelands. You will find related messages in the "
+		         "standard output (stdout.txt on Windows). You are using build %2$s "
+		         "(%3$s).\n\nPlease add this information to your report.\n\nWould you like Widelands "
+		         "to attempt to create an emergency savegame? It is often – though not always – "
+		         "possible to load it and continue playing.")) %
+		    error % build_id() % build_type())
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
 	}
 
 	try {
-		std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, playernumber));
+		std::unique_ptr<GameController> ctrl(
+		   new SinglePlayerGameController(game, true, playernumber));
 		if (replace_ctrl) {
 			game.set_game_controller(ctrl.get());
 		}
@@ -1206,9 +1221,13 @@ void WLApplication::emergency_save(UI::Panel* panel, Widelands::Game& game, cons
 	} catch (const std::exception& e) {
 		log_err("Emergency save failed because: %s", e.what());
 		if (panel) {
-			UI::WLMessageBox m(panel, UI::WindowStyle::kFsMenu, _("Emergency save failed"), (boost::format(
-				_("We are sorry, but Widelands was unable to create an emergency savegame for the following reason:\n\n%s"))
-				% e.what()).str(), UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox m(
+			   panel, UI::WindowStyle::kFsMenu, _("Emergency save failed"),
+			   (boost::format(_("We are sorry, but Widelands was unable to create an emergency "
+			                    "savegame for the following reason:\n\n%s")) %
+			    e.what())
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOk);
 			m.run<UI::Panel::Returncodes>();
 		}
 	}

@@ -75,8 +75,7 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 namespace FsMenu {
 
-Options::Options(MainMenu& fsmm,
-                                             OptionsCtrl::OptionsStruct opt)
+Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "options",
@@ -737,8 +736,7 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 OptionsCtrl::OptionsCtrl(MainMenu& mm, Section& s)
    : opt_section_(s),
      parent_(mm),
-     opt_dialog_(
-        std::unique_ptr<Options>(new Options(mm, options_struct(0)))) {
+     opt_dialog_(std::unique_ptr<Options>(new Options(mm, options_struct(0)))) {
 	handle_menu();
 }
 

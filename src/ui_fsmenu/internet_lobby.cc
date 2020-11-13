@@ -47,12 +47,11 @@ const uint8_t kClientIRC = 4;
 
 namespace FsMenu {
 
-InternetLobby::InternetLobby(
-   MenuCapsule& fsmm,
-   std::string& nick,
-   std::string& pwd,
-   bool registered,
-   const std::vector<Widelands::TribeBasicInfo>& tribeinfos)
+InternetLobby::InternetLobby(MenuCapsule& fsmm,
+                             std::string& nick,
+                             std::string& pwd,
+                             bool registered,
+                             const std::vector<Widelands::TribeBasicInfo>& tribeinfos)
    : TwoColumnsBasicNavigationMenu(fsmm, _("Metaserver Lobby")),
      // Left column content
      label_clients_online_(&left_column_box_,
@@ -450,8 +449,9 @@ void InternetLobby::clicked_joingame() {
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		running_game_.reset(new GameClient(capsule_, ips, InternetGaming::ref().get_local_clientname(), true,
-		                   opengames_list_.get_selected().name));
+		running_game_.reset(new GameClient(capsule_, ips,
+		                                   InternetGaming::ref().get_local_clientname(), true,
+		                                   opengames_list_.get_selected().name));
 	} else {
 		throw wexception("No server selected! That should not happen!");
 	}
@@ -500,6 +500,7 @@ void InternetLobby::clicked_hostgame() {
 	}
 
 	// Start our relay host
-	running_game_.reset(new GameHost(capsule_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true));
+	running_game_.reset(
+	   new GameHost(capsule_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true));
 }
 }  // namespace FsMenu

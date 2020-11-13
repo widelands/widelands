@@ -39,9 +39,9 @@ namespace FsMenu {
 class MapSelect : public TwoColumnsFullNavigationMenu {
 public:
 	MapSelect(LaunchGame&,
-	                        GameSettingsProvider*,
-	                        GameController*,
-	                        Widelands::EditorGameBase& egbase);
+	          GameSettingsProvider*,
+	          GameController*,
+	          Widelands::EditorGameBase& egbase);
 
 	MapData const* get_map() const;
 	void think() override;

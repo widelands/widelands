@@ -33,9 +33,9 @@ namespace FsMenu {
 class LaunchSPG : public LaunchGame {
 public:
 	LaunchSPG(MenuCapsule&,
-	                        GameSettingsProvider&,  // Ownership is taken unless preconfigured
-	                        Widelands::Game&,       // Ownership is taken unless preconfigured
-	                        bool preconfigured);
+	          GameSettingsProvider&,  // Ownership is taken unless preconfigured
+	          Widelands::Game&,       // Ownership is taken unless preconfigured
+	          bool preconfigured);
 	~LaunchSPG() override;
 
 	void clicked_select_map_callback(const MapData*, bool scenario) override;

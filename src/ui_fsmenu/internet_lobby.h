@@ -40,10 +40,10 @@ namespace FsMenu {
 class InternetLobby : public TwoColumnsBasicNavigationMenu {
 public:
 	InternetLobby(MenuCapsule&,
-	                            std::string&,
-	                            std::string&,
-	                            bool,
-	                            const std::vector<Widelands::TribeBasicInfo>& tribeinfos);
+	              std::string&,
+	              std::string&,
+	              bool,
+	              const std::vector<Widelands::TribeBasicInfo>& tribeinfos);
 	~InternetLobby() override;
 
 	void think() override;

@@ -36,10 +36,10 @@
 namespace FsMenu {
 
 LaunchGame::LaunchGame(MenuCapsule& fsmm,
-                                                   GameSettingsProvider& settings,
-                                                   GameController* const ctrl,
-                                                   const bool preconfigured,
-                                                   const bool mpg)
+                       GameSettingsProvider& settings,
+                       GameController* const ctrl,
+                       const bool preconfigured,
+                       const bool mpg)
    : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
      map_details_(&right_column_content_box_, preconfigured, kPadding, mpg),
 
@@ -233,7 +233,7 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 
 std::unique_ptr<LuaTable>
 LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
-                                                 const std::set<std::string>& tags) const {
+                                   const std::set<std::string>& tags) const {
 	bool is_usable = true;
 	std::unique_ptr<LuaTable> t;
 	try {

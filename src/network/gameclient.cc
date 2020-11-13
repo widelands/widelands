@@ -1110,7 +1110,8 @@ void GameClient::disconnect(const std::string& reason,
 
 	if (showmsg && d->game) {
 		// WLApplication::emergency_save(d->modal, *d->game, msg);
-		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() : NetworkGamingMessages::get_message(reason, arg).c_str());
+		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
+		                                     NetworkGamingMessages::get_message(reason, arg).c_str());
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a

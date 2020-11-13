@@ -46,12 +46,12 @@
 namespace FsMenu {
 
 LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
-                                                 GameSettingsProvider& settings,
-                                                 GameController& ctrl,
-                                                 ChatProvider& chat,
-                                                 Widelands::EditorGameBase& egbase,
-                                                 bool game_done_on_cancel,
-                                                 const std::function<void()>& c)
+                     GameSettingsProvider& settings,
+                     GameController& ctrl,
+                     ChatProvider& chat,
+                     Widelands::EditorGameBase& egbase,
+                     bool game_done_on_cancel,
+                     const std::function<void()>& c)
    : LaunchGame(fsmm, settings, &ctrl, false, true),
      callback_(c),
      game_done_on_cancel_(game_done_on_cancel),
@@ -73,13 +73,16 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
-	map_details_.add_select_map_action([this]() { select_map(); }, _("Choose map…"), g_image_cache->get("images/wui/menus/toggle_minimap.png"));
-	map_details_.add_select_map_action([this]() { select_saved_game(); }, _("Choose saved game…"), g_image_cache->get("images/wui/menus/save_game.png"));
+	map_details_.add_select_map_action([this]() { select_map(); }, _("Choose map…"),
+	                                   g_image_cache->get("images/wui/menus/toggle_minimap.png"));
+	map_details_.add_select_map_action([this]() { select_saved_game(); }, _("Choose saved game…"),
+	                                   g_image_cache->get("images/wui/menus/save_game.png"));
 
 	if (settings_.can_change_map()) {
 		map_details_.set_map_description_text(_("Please select a map or saved game."));
 	} else {
-		map_details_.set_map_description_text(_("The host has not yet selected a map or saved game."));
+		map_details_.set_map_description_text(
+		   _("The host has not yet selected a map or saved game."));
 	}
 	ok_.set_enabled(settings_.can_launch());
 
@@ -181,7 +184,7 @@ void LaunchMPG::select_saved_game() {
 			const int nr_players = s.get_safe_int("nr_players");
 
 			settings_.set_map(mapname, filename, s.get_string("theme", ""),
-				               s.get_string("background", ""), nr_players, true);
+			                  s.get_string("background", ""), nr_players, true);
 			map_changed();
 
 			// Check for sendability
@@ -190,11 +193,11 @@ void LaunchMPG::select_saved_game() {
 				UI::WLMessageBox warning(
 				   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("Saved Game is Directory"),
 				   _("WARNING:\n"
-					 "The saved game you selected is a directory."
-					 " This happens if you set the option ‘nozip’ to "
-					 "true or manually unzipped the saved game.\n"
-					 "Widelands is not able to transfer directory structures to the clients,"
-					 " please select another saved game or zip the directories’ content."),
+				     "The saved game you selected is a directory."
+				     " This happens if you set the option ‘nozip’ to "
+				     "true or manually unzipped the saved game.\n"
+				     "Widelands is not able to transfer directory structures to the clients,"
+				     " please select another saved game or zip the directories’ content."),
 				   UI::WLMessageBox::MBoxType::kOk);
 				warning.run<UI::Panel::Returncodes>();
 			}
@@ -408,8 +411,8 @@ void LaunchMPG::load_map_info() {
 /// Show help
 void LaunchMPG::help_clicked() {
 	HelpWindow help(&capsule_.menu(), lua_, "txts/help/multiplayer_help.lua",
-	                              /** TRANSLATORS: This is a heading for a help window */
-	                              _("Multiplayer Game Setup"));
+	                /** TRANSLATORS: This is a heading for a help window */
+	                _("Multiplayer Game Setup"));
 	help.run<UI::Panel::Returncodes>();
 }
 }  // namespace FsMenu
