@@ -139,16 +139,26 @@ function campaign_message_box(message, sleeptime)
    message.w = message.w or 450
 
    if message.position then
+      local window = wl.ui.MapView()
       if string.find(message.position,"top") then
+         message.posx = math.floor((window.width - message.w) / 2)
          -- Set it a bit lover than 0 to prevent overlap with game speed text
          message.posy = 25
-      elseif string.find(message.position,"bottom") then
-         message.posy = 10000
-      end
-      if string.find(message.position,"left") then
+      elseif string.find(message.position, "bottom") then
+         message.posx = math.floor((window.width - message.w) / 2)
+         message.posy = window.height - message.h
+      elseif message.position == "left" then
          message.posx = 0
-      elseif string.find(message.position,"right") then
-         message.posx = 10000
+         message.posy = math.floor((window.height - message.h) / 2)
+      elseif message.position == "right" then
+         message.posx = window.width - message.w
+         message.posy = math.floor((window.height - message.h) / 2)
+      end
+      -- Override the values for combinations like 'bottomleft'
+      if string.find(message.position, "left", 4) then
+         message.posx = 0
+      elseif string.find(message.position, "right", 4) then
+         message.posx = window.width - message.w
       end
    end
 
