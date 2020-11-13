@@ -199,6 +199,7 @@ InternetLobby::~InternetLobby() {
 }
 
 void InternetLobby::layout() {
+	clientsonline_table_.set_desired_size(0, standard_height_);
 	TwoColumnsBasicNavigationMenu::layout();
 	joingame_.set_desired_size(0, standard_height_);
 	hostgame_.set_desired_size(0, standard_height_);
