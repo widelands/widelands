@@ -29,7 +29,7 @@
 
 struct GameClientImpl;
 namespace FsMenu {
-class MainMenu;
+class MenuCapsule;
 }
 
 /**
@@ -43,7 +43,7 @@ class MainMenu;
  * connect locally / via IP.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
-	GameClient(FsMenu::MainMenu&,
+	GameClient(FsMenu::MenuCapsule&,
 	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
@@ -52,6 +52,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	~GameClient() override;
 
 	void run();
+	void run_callback();
 
 	// GameController interface
 	void think() override;
@@ -117,10 +118,6 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
-	FsMenu::MainMenu& fullscreen_menu_main() const {
-		return fsmm_;
-	}
-
 private:
 	DISALLOW_COPY_AND_ASSIGN(GameClient);
 
@@ -157,7 +154,7 @@ private:
 
 	GameClientImpl* d;
 
-	FsMenu::MainMenu& fsmm_;
+	FsMenu::MenuCapsule& capsule_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H

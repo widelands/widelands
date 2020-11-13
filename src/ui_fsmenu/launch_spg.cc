@@ -86,7 +86,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 
 	map_details_.set_select_map_tooltip(_("Change map"));
 	left_column_box_.add(&player_setup, UI::Box::Resizing::kExpandBoth);
-	ok_.set_enabled(settings_->can_launch() || preconfigured_);
+	ok_.set_enabled(settings_.can_launch() || preconfigured_);
 
 	if (preconfigured) {
 		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
@@ -100,14 +100,18 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 	}
 }
 
+LaunchSPG::~LaunchSPG() {
+	delete &settings_;
+}
+
 void LaunchSPG::clicked_select_map() {
-	if (!preconfigured_ && settings_->can_change_map()) {
-		new MapSelect(*this, settings_.get(), nullptr, *game_);
+	if (!preconfigured_ && settings_.can_change_map()) {
+		new MapSelect(*this, &settings_, nullptr, *game_);
 	}
 }
 
 void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool scenario) {
-	assert(!preconfigured_ && settings_->can_change_map());
+	assert(!preconfigured_ && settings_.can_change_map());
 
 	if (!mapdata) {
 		if (initializing_) {
@@ -117,9 +121,9 @@ void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool s
 	}
 	initializing_ = false;
 
-	settings_->set_scenario(scenario);
-	assert(!settings_->settings().tribes.empty());
-	settings_->set_map(
+	settings_.set_scenario(scenario);
+	assert(!settings_.settings().tribes.empty());
+	settings_.set_map(
 	   mapdata->name, mapdata->filename, mapdata->theme, mapdata->background, mapdata->nrplayers);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
@@ -132,41 +136,41 @@ void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool s
 }
 
 void LaunchSPG::update() {
-	peaceful_.set_state(settings_->is_peaceful_mode());
+	peaceful_.set_state(settings_.is_peaceful_mode());
 	if (preconfigured_) {
-		map_details_.update(settings_.get(), *game_->mutable_map());
+		map_details_.update(&settings_, *game_->mutable_map());
 		ok_.set_enabled(true);
 	} else {
 		Widelands::Map map;  //  MapLoader needs a place to put its preload data
 		std::unique_ptr<Widelands::MapLoader> map_loader(
-		   map.get_correct_loader(settings_->settings().mapfilename));
-		map.set_filename(settings_->settings().mapfilename);
+		   map.get_correct_loader(settings_.settings().mapfilename));
+		map.set_filename(settings_.settings().mapfilename);
 		{
 			i18n::Textdomain td("maps");
 			map_loader->preload_map(true);
 		}
 
-		map_details_.update(settings_.get(), map);
-		ok_.set_enabled(settings_->can_launch());
+		map_details_.update(&settings_, map);
+		ok_.set_enabled(settings_.can_launch());
 		enforce_player_names_and_tribes(map);
 	}
 }
 
 void LaunchSPG::enforce_player_names_and_tribes(const Widelands::Map& map) {
-	if (settings_->settings().mapfilename.empty()) {
+	if (settings_.settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
 
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		settings_->set_player_name(i, map.get_scenario_player_name(i + 1));
+		settings_.set_player_name(i, map.get_scenario_player_name(i + 1));
 		const std::string& playertribe = map.get_scenario_player_tribe(i + 1);
 		if (playertribe.empty()) {
 			// Set tribe selection to random
-			settings_->set_player_tribe(i, "", true);
+			settings_.set_player_tribe(i, "", true);
 		} else {
 			// Set tribe selection from map
-			settings_->set_player_tribe(i, playertribe);
+			settings_.set_player_tribe(i, playertribe);
 		}
 	}
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
@@ -184,7 +188,7 @@ void LaunchSPG::win_condition_selected() {
 }
 
 void LaunchSPG::clicked_ok() {
-	const std::string filename = settings_->settings().mapfilename;
+	const std::string filename = settings_.settings().mapfilename;
 	if (!preconfigured_ && !g_fs->file_exists(filename)) {
 		UI::WLMessageBox m(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("File not found"),
 		                (boost::format(
@@ -199,13 +203,13 @@ void LaunchSPG::clicked_ok() {
 		m.run<int>();
 		return;
 	}
-	if (!settings_->can_launch() && !preconfigured_) {
+	if (!settings_.can_launch() && !preconfigured_) {
 		return;
 	}
 
 	capsule_.set_visible(false);
 	Widelands::PlayerNumber playernumber = 1;
-	upcast(SinglePlayerGameSettingsProvider, sp, settings_.get());
+	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
 	assert(sp);
 	game_->set_ai_training_mode(get_config_bool("ai_training", false));
 	try {

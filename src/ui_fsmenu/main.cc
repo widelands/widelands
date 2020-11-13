@@ -38,12 +38,15 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/about.h"
 #include "ui_fsmenu/campaign_select.h"
+#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/login_box.h"
+#include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/scenario_select.h"
 #include "wlapplication.h"
@@ -730,22 +733,6 @@ void MainMenu::action(const MenuTarget t) {
 		r_login_.toggle();
 		break;
 
-	case MenuTarget::kEditorNew:
-		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
-		break;
-	case MenuTarget::kEditorRandom:
-		EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
-		break;
-	case MenuTarget::kEditorLoad:
-		EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
-		break;
-	case MenuTarget::kEditorContinue: {
-		if (!filename_for_continue_editing_.empty()) {
-			EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
-		}
-		break;
-	}
-
 	case MenuTarget::kReplay:
 		menu_capsule_.clear_content();
 		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(), true, true);
@@ -784,9 +771,58 @@ void MainMenu::action(const MenuTarget t) {
 		new CampaignSelect(menu_capsule_);
 		break;
 
-	case MenuTarget::kRandomGame:
 	case MenuTarget::kLan:
-	case MenuTarget::kMetaserver:
+		menu_capsule_.clear_content();
+		g_sh->change_music("ingame", 1000);
+		new NetSetupLAN(menu_capsule_);
+		break;
+	case MenuTarget::kMetaserver: {
+		menu_capsule_.clear_content();
+
+		std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+		if (tribeinfos.empty()) {
+			UI::WLMessageBox mbox(
+			   this, UI::WindowStyle::kFsMenu, _("No tribes found!"),
+			   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+			   UI::WLMessageBox::MBoxType::kOk);
+			mbox.run<UI::Panel::Returncodes>();
+			break;
+		}
+
+		internet_login();
+
+		get_config_string("nickname", nickname_);
+		// Only change the password if we use a registered account
+		if (register_) {
+			get_config_string("password_sha1", password_);
+		}
+
+		g_sh->change_music("ingame", 1000);
+		new InternetLobby(menu_capsule_, nickname_, password_, register_, tribeinfos);
+		}
+		break;
+
+	case MenuTarget::kEditorNew:
+		EditorInteractive::run_editor(EditorInteractive::Init::kNew);
+		set_labels();
+		break;
+	case MenuTarget::kEditorRandom:
+		EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
+		set_labels();
+		break;
+	case MenuTarget::kEditorLoad:
+		EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
+		set_labels();
+		break;
+	case MenuTarget::kEditorContinue: {
+		if (!filename_for_continue_editing_.empty()) {
+			EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, filename_for_continue_editing_);
+			set_labels();
+		}
+		break;
+	}
+
+	case MenuTarget::kRandomGame:
 	// NOCOM
 	default:
 		throw wexception("Invalid MenuTarget %d", static_cast<int>(t));

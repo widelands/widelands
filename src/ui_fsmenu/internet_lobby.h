@@ -41,6 +41,7 @@ public:
 	                            std::string&,
 	                            bool,
 	                            std::vector<Widelands::TribeBasicInfo>& tribeinfos);
+	~InternetLobby() override;
 
 	void think() override;
 

@@ -35,7 +35,8 @@ public:
 	                       Widelands::Game&,
 	                       GameSettingsProvider& gsp,
 	                       bool take_ownership_of_game_and_settings,
-	                       bool is_replay);
+	                       bool is_replay,
+	                       const std::function<void(const std::string&)>& = [](const std::string&) {});
 	~LoadGame() override;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
@@ -56,6 +57,8 @@ private:
 	Widelands::Game& game_;
 	GameSettingsProvider& settings_;
 	bool take_ownership_of_game_and_settings_;
+
+	const std::function<void(const std::string&)>& callback_on_ok_;
 
 	void toggle_filenames();
 

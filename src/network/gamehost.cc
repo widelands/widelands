@@ -518,11 +518,11 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(FsMenu::MainMenu& f,
+GameHost::GameHost(FsMenu::MenuCapsule& c,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : fsmm_(f), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+   : capsule_(c), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log_info("[Host]: starting up.\n");
 
 	d->localplayername = playername;
@@ -572,6 +572,8 @@ GameHost::GameHost(FsMenu::MainMenu& f,
 	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
+
+	run();
 }
 
 GameHost::~GameHost() {
@@ -646,21 +648,15 @@ void GameHost::init_computer_players() {
 	}
 }
 
-// TODO(k.halfmann): refactor into smaller functions
 void GameHost::run() {
-	Widelands::Game game;
+	game_.reset(new Widelands::Game());
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	/* FsMenu::LaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);  // NOCOM
-	const FsMenu::MenuTarget code = lm.run<FsMenu::MenuTarget>();
-	if (code == FsMenu::MenuTarget::kBack) {
-		// if this is an internet game, tell the metaserver that client is back in the lobby.
-		if (internet_) {
-			InternetGaming::ref().set_game_done();
-		}
-		return;
-	} */
+	new FsMenu::LaunchMPG(capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
+}
 
+// TODO(k.halfmann): refactor into smaller functions
+void GameHost::run_callback() {
 	// if this is an internet game, tell the metaserver that the game started
 	if (internet_) {
 		InternetGaming::ref().set_game_playing();
@@ -680,47 +676,50 @@ void GameHost::run() {
 	packet.unsigned_8(NETCMD_LAUNCH);
 	broadcast(packet);
 
-	game.set_ai_training_mode(get_config_bool("ai_training", false));
-	game.set_auto_speed(get_config_bool("auto_speed", false));
-	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game_->set_ai_training_mode(get_config_bool("ai_training", false));
+	game_->set_auto_speed(get_config_bool("auto_speed", false));
+	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
 
+	capsule_.set_visible(false);
+	uint8_t player_number = 1;
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
+		game_->create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-		d->game = &game;
-		game.set_game_controller(this);
+		d->game = game_.get();
+		game_->set_game_controller(this);
 		InteractiveGameBase* igb;
-		uint8_t pn = d->settings.playernum + 1;
-		game.save_handler().set_autosave_filename(
+		player_number = d->settings.playernum + 1;
+		game_->save_handler().set_autosave_filename(
 		   (boost::format("%s_nethost") % kAutosavePrefix).str());
 
 		if (d->settings.savegame) {
 			// Read and broadcast original win condition
-			Widelands::GameLoader gl(d->settings.mapfilename, game);
+			Widelands::GameLoader gl(d->settings.mapfilename, *game_);
 			Widelands::GamePreloadPacket gpdp;
 			gl.preload_game(gpdp);
 
 			set_win_condition_script(gpdp.get_win_condition());
 		}
 
-		if ((pn > 0) && (pn <= UserSettings::highest_playernum())) {
-			igb = new InteractivePlayer(game, get_config_section(), pn, true, &d->chat);
+		if ((player_number > 0) && (player_number <= UserSettings::highest_playernum())) {
+			igb = new InteractivePlayer(*game_, get_config_section(), player_number, true, &d->chat);
 		} else {
-			igb = new InteractiveSpectator(game, get_config_section(), true, &d->chat);
+			igb = new InteractiveSpectator(*game_, get_config_section(), true, &d->chat);
+			player_number = 1;  // for the emergency save later
 		}
-		game.set_ibase(igb);
+		game_->set_ibase(igb);
 
 		if (!d->settings.savegame) {  // new game
-			game.init_newgame(d->settings);
+			game_->init_newgame(d->settings);
 		} else {  // savegame
-			game.init_savegame(d->settings);
+			game_->init_savegame(d->settings);
 		}
-		d->pseudo_networktime = game.get_gametime();
+		d->pseudo_networktime = game_->get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
 		d->last_heartbeat = d->lastframe;
@@ -736,7 +735,7 @@ void GameHost::run() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game.run(d->settings.savegame ?
+		game_->run(d->settings.savegame ?
 		            Widelands::Game::StartGameType::kSaveGame :
 		            d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
 		                                   Widelands::Game::StartGameType::kMap,
@@ -748,10 +747,8 @@ void GameHost::run() {
 		}
 		clear_computer_players();
 	} catch (const std::exception& e) {
-		log_err("GameHost received FATAL ERROR %s", e.what());
-		// WLApplication::emergency_save(game);  // NOCOM
+		WLApplication::emergency_save(capsule_.menu(), *game_, e.what(), player_number);
 		clear_computer_players();
-		d->game = nullptr;
 
 		while (!d->clients.empty()) {
 			disconnect_client(0, "SERVER_CRASHED");
@@ -761,10 +758,10 @@ void GameHost::run() {
 		if (internet_) {
 			InternetGaming::ref().logout("SERVER_CRASHED");
 		}
-
-		throw;
 	}
 	d->game = nullptr;
+	game_.reset();
+	delete this;
 }
 
 void GameHost::think() {

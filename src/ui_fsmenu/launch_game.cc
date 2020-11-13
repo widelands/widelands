@@ -70,7 +70,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                                 _("Custom starting positions")),
 
      // Variables and objects used in the menu
-     settings_(&settings),
+     settings_(settings),
      ctrl_(ctrl),
      peaceful_mode_forbidden_(false) {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
@@ -117,14 +117,14 @@ void LaunchGame::layout() {
 
 void LaunchGame::update_peaceful_mode() {
 	bool forbidden =
-	   peaceful_mode_forbidden_ || settings_->settings().scenario || settings_->settings().savegame;
-	peaceful_.set_enabled(!forbidden && settings_->can_change_map());
+	   peaceful_mode_forbidden_ || settings_.settings().scenario || settings_.settings().savegame;
+	peaceful_.set_enabled(!forbidden && settings_.can_change_map());
 	if (forbidden) {
 		peaceful_.set_state(false);
 	}
-	if (settings_->settings().scenario) {
+	if (settings_.settings().scenario) {
 		peaceful_.set_tooltip(_("The relations between players are set by the scenario"));
-	} else if (settings_->settings().savegame) {
+	} else if (settings_.settings().savegame) {
 		peaceful_.set_tooltip(_("The relations between players are set by the saved game"));
 	} else if (peaceful_mode_forbidden_) {
 		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
@@ -134,14 +134,14 @@ void LaunchGame::update_peaceful_mode() {
 }
 
 void LaunchGame::update_custom_starting_positions() {
-	const bool forbidden = settings_->settings().scenario || settings_->settings().savegame;
-	custom_starting_positions_.set_enabled(!forbidden && settings_->can_change_map());
+	const bool forbidden = settings_.settings().scenario || settings_.settings().savegame;
+	custom_starting_positions_.set_enabled(!forbidden && settings_.can_change_map());
 	if (forbidden) {
 		custom_starting_positions_.set_state(false);
 	}
-	if (settings_->settings().scenario) {
+	if (settings_.settings().scenario) {
 		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
-	} else if (settings_->settings().savegame) {
+	} else if (settings_.settings().savegame) {
 		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
 	} else {
 		custom_starting_positions_.set_tooltip(_(
@@ -150,13 +150,13 @@ void LaunchGame::update_custom_starting_positions() {
 }
 
 bool LaunchGame::init_win_condition_label() {
-	if (settings_->settings().scenario) {
+	if (settings_.settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
 		win_condition_dropdown_.set_label(_("Scenario"));
 		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
 		return true;
 	}
-	if (settings_->settings().savegame) {
+	if (settings_.settings().savegame) {
 		win_condition_dropdown_.set_enabled(false);
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
@@ -164,7 +164,7 @@ bool LaunchGame::init_win_condition_label() {
 		   _("The game is a saved game – the win condition was set before."));
 		return true;
 	}
-	win_condition_dropdown_.set_enabled(settings_->can_change_map());
+	win_condition_dropdown_.set_enabled(settings_.can_change_map());
 	win_condition_dropdown_.set_label("");
 	win_condition_dropdown_.set_tooltip("");
 	return false;
@@ -176,10 +176,10 @@ bool LaunchGame::init_win_condition_label() {
 void LaunchGame::update_win_conditions() {
 	if (!init_win_condition_label()) {
 		std::set<std::string> tags;
-		if (!settings_->settings().mapfilename.empty()) {
+		if (!settings_.settings().mapfilename.empty()) {
 			Widelands::Map map;
 			std::unique_ptr<Widelands::MapLoader> ml =
-			   map.get_correct_loader(settings_->settings().mapfilename);
+			   map.get_correct_loader(settings_.settings().mapfilename);
 			if (ml != nullptr) {
 				ml->preload_map(true);
 				tags = map.get_tags();
@@ -195,10 +195,10 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 		// Make sure that the last win condition is still valid. If not, pick the first one
 		// available.
 		if (last_win_condition_.empty()) {
-			last_win_condition_ = settings_->settings().win_condition_scripts.front();
+			last_win_condition_ = settings_.settings().win_condition_scripts.front();
 		}
 		std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_.settings().win_condition_scripts) {
 			if (t) {
 				break;
 			}
@@ -207,7 +207,7 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 		}
 
 		// Now fill the dropdown.
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_.settings().win_condition_scripts) {
 			try {
 				t = win_condition_if_valid(win_condition_script, tags);
 				if (t) {
@@ -225,7 +225,7 @@ void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 		const std::string error_message =
 		   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
 		                    "could not be loaded.")) %
-		    settings_->settings().mapfilename)
+		    settings_.settings().mapfilename)
 		      .str();
 		win_condition_dropdown_.set_errored(error_message);
 		log_err("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
@@ -261,10 +261,10 @@ LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
 }
 
 void LaunchGame::toggle_peaceful() {
-	settings_->set_peaceful_mode(peaceful_.get_state());
+	settings_.set_peaceful_mode(peaceful_.get_state());
 }
 
 void LaunchGame::toggle_custom_starting_positions() {
-	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
+	settings_.set_custom_starting_positions(custom_starting_positions_.get_state());
 }
 }  // namespace FsMenu

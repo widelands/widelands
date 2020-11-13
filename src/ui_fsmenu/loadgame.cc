@@ -36,11 +36,13 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
                                                Widelands::Game& g,
                                                GameSettingsProvider& gsp,
                                                bool take_ownership_of_game_and_settings,
-                                               bool is_replay)
+                                               bool is_replay,
+                                               const std::function<void(const std::string&)>& callback)
    : TwoColumnsFullNavigationMenu(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
      game_(g),
      settings_(gsp),
      take_ownership_of_game_and_settings_(take_ownership_of_game_and_settings),
+     callback_on_ok_(callback),
      load_or_save_(&right_column_content_box_,
                    g,
                    is_replay ?
@@ -147,6 +149,11 @@ void LoadGame::clicked_ok() {
 		load_or_save_.change_directory_to(gamedata->filename);
 	} else {
 		if (gamedata && gamedata->errormessage.empty()) {
+			if (!take_ownership_of_game_and_settings_) {
+				callback_on_ok_(gamedata->filename);
+				return;
+			}
+
 			capsule_.set_visible(false);
 
 			try {

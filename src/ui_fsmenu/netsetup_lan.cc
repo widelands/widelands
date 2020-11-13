@@ -22,8 +22,12 @@
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "network/constants.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
 #include "network/internet_gaming.h"
 #include "network/network.h"
+#include "ui_basic/messagebox.h"
+#include "ui_fsmenu/main.h"
 #include "ui_fsmenu/menu_target.h"
 #include "wlapplication_options.h"
 
@@ -173,10 +177,6 @@ bool NetSetupLAN::get_host_address(NetAddress* addr) {
 	return false;
 }
 
-const std::string& NetSetupLAN::get_playername() {
-	return playername_.text();
-}
-
 void NetSetupLAN::clicked_ok() {
 	if (hostname_.text().empty()) {
 		clicked_hostgame();
@@ -286,11 +286,31 @@ void NetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
 	set_config_string("lasthost", hostname_.text());
 
-	end_modal<MenuTarget>(MenuTarget::kJoingame);
+	NetAddress addr;
+	if (!get_host_address(&addr)) {
+		UI::WLMessageBox mmb(
+		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("Invalid Address"),
+		   _("The entered hostname or address is invalid and can’t be connected to."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		mmb.run<UI::Panel::Returncodes>();
+		return;
+	}
+
+	new GameClient(capsule_, std::make_pair(addr, NetAddress()), playername_.text());
 }
 
 void NetSetupLAN::clicked_hostgame() {
-	end_modal<MenuTarget>(MenuTarget::kHostgame);
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	if (tribeinfos.empty()) {
+		UI::WLMessageBox mbox(
+		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("No tribes found!"),
+		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+		   UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+		return;
+	}
+
+	new GameHost(capsule_, playername_.text(), tribeinfos);
 }
 
 void NetSetupLAN::clicked_lasthost() {

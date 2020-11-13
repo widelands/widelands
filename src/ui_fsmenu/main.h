@@ -44,16 +44,6 @@ public:
 	void internet_login();
 	void internet_login_callback();
 
-	std::string get_nickname() const {
-		return nickname_;
-	}
-	std::string get_password() const {
-		return password_;
-	}
-	bool registered() const {
-		return register_;
-	}
-
 	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;

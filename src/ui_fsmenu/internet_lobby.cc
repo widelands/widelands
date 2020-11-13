@@ -188,6 +188,16 @@ InternetLobby::InternetLobby(
 	chat_.focus_edit();
 }
 
+InternetLobby::~InternetLobby() {
+	if (InternetGaming::ref().logged_in()) {
+		// logout of the metaserver
+		InternetGaming::ref().logout();
+	} else {
+		// Reset InternetGaming for clean login
+		InternetGaming::ref().reset();
+	}
+}
+
 void InternetLobby::layout() {
 	TwoColumnsBasicNavigationMenu::layout();
 	joingame_.set_desired_size(0, standard_height_);
@@ -439,9 +449,10 @@ void InternetLobby::clicked_joingame() {
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		GameClient netgame(capsule_.menu(), ips, InternetGaming::ref().get_local_clientname(), true,
+		// NOCOM memleak?
+		new GameClient /*netgame*/(capsule_, ips, InternetGaming::ref().get_local_clientname(), true,
 		                   opengames_list_.get_selected().name);
-		netgame.run();
+		// netgame.run();
 	} else {
 		throw wexception("No server selected! That should not happen!");
 	}
@@ -491,8 +502,9 @@ void InternetLobby::clicked_hostgame() {
 		}
 
 		// Start our relay host
-		GameHost netgame(capsule_.menu(), InternetGaming::ref().get_local_clientname(), tribeinfos_, true);
-		netgame.run();
+		// NOCOM memleak?
+		new GameHost /*netgame*/(capsule_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true);
+		// netgame.run();
 	} catch (...) {
 		// Log out before going back to the main menu
 		InternetGaming::ref().logout("SERVER_CRASHED");

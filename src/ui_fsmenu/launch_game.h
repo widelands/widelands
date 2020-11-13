@@ -42,14 +42,13 @@ static constexpr double scale_factor = 1.3;
 class LaunchGame : public TwoColumnsFullNavigationMenu {
 public:
 	LaunchGame(MenuCapsule&,
-	                         GameSettingsProvider&,  // Ownership is taken
+	                         GameSettingsProvider&,
 	                         GameController*,
 	                         bool preconfigured = false);
 	~LaunchGame() override;
 
 	GameSettingsProvider& settings() const {
-		assert(settings_);
-		return *settings_;
+		return settings_;
 	}
 
 	virtual void clicked_select_map_callback(const MapData*, bool scenario) = 0;
@@ -95,7 +94,7 @@ protected:
 	UI::Checkbox peaceful_, custom_starting_positions_;
 	std::string last_win_condition_;
 
-	std::unique_ptr<GameSettingsProvider> settings_;
+	GameSettingsProvider& settings_;
 	GameController* ctrl_;
 
 	bool peaceful_mode_forbidden_;

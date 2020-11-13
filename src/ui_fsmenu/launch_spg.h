@@ -36,7 +36,7 @@ public:
 	                        GameSettingsProvider&,  // Ownership is taken
 	                        Widelands::Game&,       // Ownership is taken
 	                        bool preconfigured);
-	~LaunchSPG() override = default;
+	~LaunchSPG() override;
 
 	void clicked_select_map_callback(const MapData*, bool scenario) override;
 

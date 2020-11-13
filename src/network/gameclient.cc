@@ -101,7 +101,6 @@ struct GameClientImpl {
 	void send_hello();
 	void send_player_command(Widelands::PlayerCommand*);
 
-	bool run_map_menu(GameClient* parent);
 	void run_game(InteractiveGameBase* igb);
 
 	InteractiveGameBase* init_game(GameClient* parent, UI::ProgressWindow&);
@@ -122,27 +121,6 @@ void GameClientImpl::send_player_command(Widelands::PlayerCommand* pc) {
 	s.unsigned_32(game->get_gametime().get());
 	pc->serialize(s);
 	net->send(s);
-}
-
-/**
- * Show and run() the fullscreen menu for setting map and mapsettings.
- *
- *  @return true to indicate that run is done.
- */
-bool GameClientImpl::run_map_menu(GameClient* parent) {
-	/* FsMenu::LaunchMPG lgm(
-	   parent->fullscreen_menu_main(), parent, parent, *parent, *game);  // NOCOM
-	modal = &lgm;
-	const FsMenu::MenuTarget code = lgm.run<FsMenu::MenuTarget>();
-	modal = nullptr;
-	if (code == FsMenu::MenuTarget::kBack) {
-		// if this is an internet game, tell the metaserver that client is back in the lobby.
-		if (internet_) {
-			InternetGaming::ref().set_game_done();
-		}
-		return true;
-	} */
-	return false;
 }
 
 /**
@@ -197,12 +175,12 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	game = nullptr;
 }
 
-GameClient::GameClient(FsMenu::MainMenu& fsmm,
+GameClient::GameClient(FsMenu::MenuCapsule& c,
                        const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
                        const std::string& gamename)
-   : d(new GameClientImpl), fsmm_(fsmm) {
+   : d(new GameClientImpl), capsule_(c) {
 
 	d->internet_ = internet;
 
@@ -241,6 +219,8 @@ GameClient::GameClient(FsMenu::MainMenu& fsmm,
 
 	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
 	participants_ = d->participants.get();
+
+	run();
 }
 
 GameClient::~GameClient() {
@@ -253,22 +233,22 @@ GameClient::~GameClient() {
 }
 
 void GameClient::run() {
-
 	d->send_hello();
 	d->settings.multiplayer = true;
 
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	if (d->run_map_menu(this)) {
-		return;  // did not select a Map ...
-	}
+	new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_, [this]() { run_callback(); });
+}
 
+void GameClient::run_callback() {
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
 	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
+	capsule_.set_visible(false);
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (has_players_tribe()) {
@@ -281,16 +261,16 @@ void GameClient::run() {
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
 		d->run_game(igb);
 
-	} catch (...) {
-		// WLApplication::emergency_save(game);  // NOCOM
+	} catch (const std::exception& e) {
+		WLApplication::emergency_save(capsule_.menu(), game, e.what());
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
-		// We will bounce back to the main menu, so we better log out
 		if (d->internet_) {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
-		throw;
 	}
+
+	delete this;
 }
 
 void GameClient::think() {

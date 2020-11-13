@@ -33,7 +33,7 @@ struct ChatMessage;
 struct GameHostImpl;
 struct Client;
 namespace FsMenu {
-class MainMenu;
+class MenuCapsule;
 }
 
 /**
@@ -47,13 +47,14 @@ struct GameHost : public GameController {
 	/** playernumber 0 identifies the spectators */
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
-	GameHost(FsMenu::MainMenu&,
+	GameHost(FsMenu::MenuCapsule&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
 	~GameHost() override;
 
 	void run();
+	void run_callback();
 	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
 
@@ -191,13 +192,14 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
-	FsMenu::MainMenu& fsmm_;
+	FsMenu::MenuCapsule& capsule_;
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
 	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
 	                     // gamehost.cc
+	std::unique_ptr<Widelands::Game> game_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H

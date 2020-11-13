@@ -41,11 +41,6 @@ public:
 	 */
 	bool get_host_address(NetAddress* addr);
 
-	/**
-	 * \return the name chosen by the player
-	 */
-	const std::string& get_playername();
-
 protected:
 	void clicked_ok();
 

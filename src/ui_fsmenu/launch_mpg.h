@@ -42,15 +42,15 @@ public:
 	                        GameSettingsProvider&,
 	                        GameController&,
 	                        ChatProvider&,
-	                        Widelands::EditorGameBase& egbase);
-	~LaunchMPG() override = default;
+	                        Widelands::EditorGameBase& egbase,
+	                        bool game_done_on_cancel,
+	                        const std::function<void()>& callback);
+	~LaunchMPG() override;
 
 	void think() override;
 	void refresh();
 
-	void clicked_select_map_callback(const MapData*, bool) override {
-		NEVER_HERE();  // NOCOM
-	}
+	void clicked_select_map_callback(const MapData*, bool) override;
 
 protected:
 	void clicked_ok() override;
@@ -68,11 +68,14 @@ private:
 	void help_clicked();
 	void map_changed();
 
+	std::function<void()> callback_;
+	bool game_done_on_cancel_;
+
 	UI::Button help_button_;
 
 	std::unique_ptr<HelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
-	GameChatPanel chat_;
+	std::unique_ptr<GameChatPanel> chat_;
 	Widelands::EditorGameBase& egbase_;  // Not owned
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
