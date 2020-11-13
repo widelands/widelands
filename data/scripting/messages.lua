@@ -155,9 +155,9 @@ function campaign_message_box(message, sleeptime)
          message.posy = math.floor((window.height - message.h) / 2)
       end
       -- Override the values for combinations like 'bottomleft'
-      if string.find(message.position, "left", 4) then
+      if string.find(message.position, "left", 2) then
          message.posx = 0
-      elseif string.find(message.position, "right", 4) then
+      elseif string.find(message.position, "right", 2) then
          message.posx = window.width - message.w
       end
    end
