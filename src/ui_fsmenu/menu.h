@@ -146,6 +146,7 @@ public:
 	void clear_content();
 
 	void layout() override;
+	void think() override;
 	void die() override;
 	void on_death(UI::Panel*) override;
 
@@ -155,6 +156,7 @@ public:
 private:
 	std::vector<std::pair<BaseMenu*, std::string /* title */>> visible_menus_;
 	MainMenu& fsmm_;
+	bool should_die_;
 };
 
 }  // namespace FsMenu

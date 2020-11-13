@@ -52,7 +52,6 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	~GameClient() override;
 
 	void run();
-	void run_callback();
 
 	// GameController interface
 	void think() override;
@@ -125,6 +124,8 @@ private:
 	std::string backup_file_name(const std::string& path) {
 		return path + "~backup";
 	}
+
+	void do_run();
 
 	void sync_report_callback();
 

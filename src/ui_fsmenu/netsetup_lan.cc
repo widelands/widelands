@@ -296,7 +296,7 @@ void NetSetupLAN::clicked_joingame() {
 		return;
 	}
 
-	new GameClient(capsule_, std::make_pair(addr, NetAddress()), playername_.text());
+	running_game_.reset(new GameClient(capsule_, std::make_pair(addr, NetAddress()), playername_.text()));
 }
 
 void NetSetupLAN::clicked_hostgame() {
@@ -310,7 +310,7 @@ void NetSetupLAN::clicked_hostgame() {
 		return;
 	}
 
-	new GameHost(capsule_, playername_.text(), tribeinfos);
+	running_game_.reset(new GameHost(capsule_, playername_.text(), tribeinfos));
 }
 
 void NetSetupLAN::clicked_lasthost() {

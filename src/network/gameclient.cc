@@ -239,10 +239,10 @@ void GameClient::run() {
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_, [this]() { run_callback(); });
+	new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_);
 }
 
-void GameClient::run_callback() {
+void GameClient::do_run() {
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
@@ -270,7 +270,8 @@ void GameClient::run_callback() {
 		}
 	}
 
-	delete this;
+	// Quit
+	capsule_.die();
 }
 
 void GameClient::think() {
@@ -1023,10 +1024,10 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		d->settings.custom_starting_positions = packet.unsigned_8();
 		break;
 	case NETCMD_LAUNCH:
-		if (!d->modal || d->game) {
+		if (d->modal || d->game) {
 			throw DisconnectException("UNEXPECTED_LAUNCH");
 		}
-		d->modal->end_modal<FsMenu::MenuTarget>(FsMenu::MenuTarget::kOk);
+		do_run();
 		break;
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.unsigned_16();

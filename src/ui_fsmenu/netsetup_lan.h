@@ -20,6 +20,9 @@
 #ifndef WL_UI_FSMENU_NETSETUP_LAN_H
 #define WL_UI_FSMENU_NETSETUP_LAN_H
 
+#include <memory>
+
+#include "logic/game_controller.h"
 #include "network/network_lan_promotion.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -63,6 +66,8 @@ private:
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
+
+	std::unique_ptr<GameController> running_game_;
 
 	// Left Column
 	UI::Textarea label_opengames_;

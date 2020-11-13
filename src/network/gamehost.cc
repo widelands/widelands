@@ -761,7 +761,6 @@ void GameHost::run_callback() {
 	}
 	d->game = nullptr;
 	game_.reset();
-	delete this;
 }
 
 void GameHost::think() {

@@ -183,7 +183,7 @@ MenuCapsule::MenuCapsule(MainMenu& fsmm)
                 fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
-                ""), fsmm_(fsmm) {
+                ""), fsmm_(fsmm), should_die_(false) {
 	set_visible(false);
 	do_not_layout_on_resolution_change();
 }
@@ -199,7 +199,18 @@ void MenuCapsule::layout() {
 
 void MenuCapsule::die() {
 	// Never delete us! Only hide the window and its content from the user.
-	clear_content();
+	// Don't do this immediately though because the caller may assume that
+	// we stay around for the rest of the current frame.
+	should_die_ = true;
+}
+
+void MenuCapsule::think() {
+	if (should_die_) {
+		clear_content();
+		should_die_ = false;
+	} else {
+		UI::Window::think();
+	}
 }
 
 void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
@@ -216,10 +227,10 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 void MenuCapsule::clear_content() {
 	set_visible(false);
 	set_title("");
-	for (auto& pair : visible_menus_) {
-		delete pair.first;
+	while (!visible_menus_.empty()) {
+		delete visible_menus_.back().first;
+		visible_menus_.pop_back();
 	}
-	visible_menus_.clear();
 }
 
 void MenuCapsule::on_death(UI::Panel* p) {
