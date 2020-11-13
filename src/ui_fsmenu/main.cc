@@ -876,20 +876,19 @@ void MainMenu::internet_login() {
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in()) {
-		action(MenuTarget::kMetaserver);
-	} else {
-		// something went wrong -> show the error message
-		ChatMessage msg = InternetGaming::ref().get_messages().back();
-		UI::WLMessageBox wmb(
-		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
-		wmb.run<UI::Panel::Returncodes>();
-
-		// Reset InternetGaming and passwort and show internet login again
-		InternetGaming::ref().reset();
-		set_config_string("password_sha1", "no_password_set");
-		auto_log_ = true;
-		show_internet_login(true);
+		return;  // success
 	}
+	// something went wrong -> show the error message
+	ChatMessage msg = InternetGaming::ref().get_messages().back();
+	UI::WLMessageBox wmb(
+	   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+	wmb.run<UI::Panel::Returncodes>();
+
+	// Reset InternetGaming and passwort and show internet login again
+	InternetGaming::ref().reset();
+	set_config_string("password_sha1", "no_password_set");
+	auto_log_ = true;
+	show_internet_login(true);
 }
 
 } //  namespace FsMenu

@@ -20,6 +20,7 @@
 #include "ui_fsmenu/internet_lobby.h"
 
 #include "base/i18n.h"
+#include "base/log.h"  // NOCOM
 #include "base/random.h"
 #include "build_info.h"
 #include "graphic/image_cache.h"
@@ -52,7 +53,7 @@ InternetLobby::InternetLobby(
    std::string& nick,
    std::string& pwd,
    bool registered,
-   std::vector<Widelands::TribeBasicInfo>& tribeinfos)
+   const std::vector<Widelands::TribeBasicInfo>& tribeinfos)
    : TwoColumnsBasicNavigationMenu(fsmm, _("Metaserver Lobby")),
      // Left column content
      label_clients_online_(&left_column_box_,
@@ -108,6 +109,8 @@ InternetLobby::InternetLobby(
      password_(pwd),
      is_registered_(registered),
      tribeinfos_(tribeinfos) {
+
+	log_dbg("NOCOM New InternetLobby – ctor AAA");
 
 	back_.set_title(_("Leave Lobby"));
 
@@ -178,10 +181,14 @@ InternetLobby::InternetLobby(
 	opengames_list_.selected.connect([this](uint32_t) { server_selected(); });
 	opengames_list_.double_clicked.connect([this](uint32_t) { server_doubleclicked(); });
 
+	log_dbg("NOCOM New InternetLobby – ctor BBB");
+
 	// try to connect to the metaserver
 	if (!InternetGaming::ref().error() && !InternetGaming::ref().logged_in()) {
 		connect_to_metaserver();
 	}
+
+	log_dbg("NOCOM New InternetLobby – ctor CCC");
 
 	layout();
 	// set focus to chat input
@@ -189,12 +196,17 @@ InternetLobby::InternetLobby(
 }
 
 InternetLobby::~InternetLobby() {
+	log_dbg("NOCOM InternetLobby dtor AAA");
 	if (InternetGaming::ref().logged_in()) {
+		log_dbg("NOCOM InternetLobby dtor BBB");
 		// logout of the metaserver
 		InternetGaming::ref().logout();
+		log_dbg("NOCOM InternetLobby dtor CCC");
 	} else {
+		log_dbg("NOCOM InternetLobby dtor DDD");
 		// Reset InternetGaming for clean login
 		InternetGaming::ref().reset();
+		log_dbg("NOCOM InternetLobby dtor EEE");
 	}
 }
 
@@ -449,10 +461,8 @@ void InternetLobby::clicked_joingame() {
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		// NOCOM memleak?
-		new GameClient /*netgame*/(capsule_, ips, InternetGaming::ref().get_local_clientname(), true,
-		                   opengames_list_.get_selected().name);
-		// netgame.run();
+		running_game_.reset(new GameClient(capsule_, ips, InternetGaming::ref().get_local_clientname(), true,
+		                   opengames_list_.get_selected().name));
 	} else {
 		throw wexception("No server selected! That should not happen!");
 	}
@@ -489,26 +499,18 @@ void InternetLobby::clicked_hostgame() {
 	// Set up the game
 	InternetGaming::ref().set_local_servername(servername_ui);
 
-	// Start the game
-	try {
+	// Start the game:
 
-		// Tell the metaserver about it
-		InternetGaming::ref().open_game();
+	// Tell the metaserver about it
+	InternetGaming::ref().open_game();
 
-		// Wait for the response with the IPs of the relay server
-		if (!wait_for_ip()) {
-			InternetGaming::ref().set_error();
-			return;
-		}
-
-		// Start our relay host
-		// NOCOM memleak?
-		new GameHost /*netgame*/(capsule_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true);
-		// netgame.run();
-	} catch (...) {
-		// Log out before going back to the main menu
-		InternetGaming::ref().logout("SERVER_CRASHED");
-		throw;
+	// Wait for the response with the IPs of the relay server
+	if (!wait_for_ip()) {
+		InternetGaming::ref().set_error();
+		return;
 	}
+
+	// Start our relay host
+	running_game_.reset(new GameHost(capsule_, InternetGaming::ref().get_local_clientname(), tribeinfos_, true));
 }
 }  // namespace FsMenu

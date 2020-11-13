@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "scripting/lua_table.h"
-#include "ui_fsmenu/menu_target.h"
 #include "ui_fsmenu/scenario_select.h"
 
 namespace FsMenu {

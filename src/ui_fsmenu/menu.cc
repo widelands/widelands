@@ -197,6 +197,12 @@ void MenuCapsule::layout() {
 	}
 }
 
+bool MenuCapsule::handle_key(bool down, SDL_Keysym sym) {
+	UI::Window::handle_key(down, sym);
+	// consume all events to prevent triggering hotkeys by accident
+	return true;
+}
+
 void MenuCapsule::die() {
 	// Never delete us! Only hide the window and its content from the user.
 	// Don't do this immediately though because the caller may assume that

@@ -58,6 +58,7 @@
 #include "network/participantlist.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/main.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -747,7 +748,8 @@ void GameHost::run_callback() {
 		}
 		clear_computer_players();
 	} catch (const std::exception& e) {
-		WLApplication::emergency_save(capsule_.menu(), *game_, e.what(), player_number);
+		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
+		WLApplication::emergency_save(parent, *game_, e.what(), player_number);
 		clear_computer_players();
 
 		while (!d->clients.empty()) {

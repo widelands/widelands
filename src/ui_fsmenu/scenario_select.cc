@@ -33,7 +33,6 @@
 #include "ui_basic/scrollbar.h"
 #include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/main.h"
-#include "ui_fsmenu/menu_target.h"
 #include "wlapplication.h"
 
 namespace FsMenu {

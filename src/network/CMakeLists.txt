@@ -63,7 +63,7 @@ wl_library(network
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu_gameloading
+    ui_fsmenu
     widelands_ball_of_mud
     widelands_options
     wui

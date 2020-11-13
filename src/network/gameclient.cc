@@ -51,6 +51,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/main.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -262,7 +263,8 @@ void GameClient::do_run() {
 		d->run_game(igb);
 
 	} catch (const std::exception& e) {
-		WLApplication::emergency_save(capsule_.menu(), game, e.what());
+		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
+		WLApplication::emergency_save(parent, game, e.what());
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
 		if (d->internet_) {

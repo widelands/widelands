@@ -149,6 +149,7 @@ public:
 	void think() override;
 	void die() override;
 	void on_death(UI::Panel*) override;
+	bool handle_key(bool down, SDL_Keysym) override;
 
 	// Should be called only by BaseMenu ctor
 	void add(BaseMenu&, const std::string& title);

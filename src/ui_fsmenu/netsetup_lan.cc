@@ -28,7 +28,6 @@
 #include "network/network.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/main.h"
-#include "ui_fsmenu/menu_target.h"
 #include "wlapplication_options.h"
 
 namespace FsMenu {

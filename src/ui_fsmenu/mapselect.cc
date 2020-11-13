@@ -29,7 +29,6 @@
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_fsmenu/launch_game.h"
-#include "ui_fsmenu/menu_target.h"
 #include "wui/map_tags.h"
 
 namespace FsMenu {
