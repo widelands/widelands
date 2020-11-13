@@ -33,8 +33,8 @@ namespace FsMenu {
 class LaunchSPG : public LaunchGame {
 public:
 	LaunchSPG(MenuCapsule&,
-	                        GameSettingsProvider&,  // Ownership is taken
-	                        Widelands::Game&,       // Ownership is taken
+	                        GameSettingsProvider&,  // Ownership is taken unless preconfigured
+	                        Widelands::Game&,       // Ownership is taken unless preconfigured
 	                        bool preconfigured);
 	~LaunchSPG() override;
 
@@ -54,7 +54,7 @@ private:
 	void update();
 	void enforce_player_names_and_tribes(const Widelands::Map& map);
 	const bool preconfigured_;
-	std::unique_ptr<Widelands::Game> game_;
+	Widelands::Game& game_;
 	bool initializing_;
 };
 }  // namespace FsMenu

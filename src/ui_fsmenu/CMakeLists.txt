@@ -37,6 +37,8 @@ wl_library(ui_fsmenu
     netsetup_lan.h
     options.cc
     options.h
+    random_game.cc
+    random_game.h
     scenariodetails.cc
     scenariodetails.h
     scenario_select.cc

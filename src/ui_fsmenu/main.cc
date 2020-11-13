@@ -28,7 +28,6 @@
 #include "base/random.h"
 #include "build_info.h"
 #include "editor/editorinteractive.h"
-#include "editor/ui_menus/main_menu_random_map.h"
 #include "graphic/graphic.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
@@ -48,6 +47,7 @@
 #include "ui_fsmenu/login_box.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
+#include "ui_fsmenu/random_game.h"
 #include "ui_fsmenu/scenario_select.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -226,6 +226,11 @@ void MainMenu::become_modal_again(UI::Panel& prevmodal) {
 		// Ensure the image is not exchanged directly after returning to the main menu –
 		// but only after returning from the game or editor and not from the options window.
 		last_image_exchange_time_ = SDL_GetTicks();
+		if (last_image_exchange_time_ > kImageExchangeDuration) {
+			last_image_exchange_time_ -= kImageExchangeDuration;
+		} else {
+			last_image_exchange_time_ = 0;
+		}
 	}
 }
 
@@ -253,7 +258,8 @@ static void find_maps(const std::string& directory, std::vector<MapEntry>& resul
 }
 
 void MainMenu::set_labels() {
-	{  // NOCOM code duplication with IBase
+	{
+		// TODO(Nordfriese): Code duplication, the same code is used in InteractiveBase
 		Section& global_s = get_config_section();
 		set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
 		set_panel_snap_distance(global_s.get_int("panel_snap_distance", 10));
@@ -747,6 +753,11 @@ void MainMenu::action(const MenuTarget t) {
 		new LaunchSPG(menu_capsule_, *new SinglePlayerGameSettingsProvider(), *new Widelands::Game(), false);
 		break;
 
+	case MenuTarget::kRandomGame:
+		menu_capsule_.clear_content();
+		new RandomGame(menu_capsule_);
+		break;
+
 	case MenuTarget::kContinueLastsave:
 		if (!filename_for_continue_playing_.empty()) {
 			Widelands::Game game;
@@ -822,8 +833,6 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 	}
 
-	case MenuTarget::kRandomGame:
-	// NOCOM
 	default:
 		throw wexception("Invalid MenuTarget %d", static_cast<int>(t));
 	}

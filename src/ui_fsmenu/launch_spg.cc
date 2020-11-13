@@ -64,10 +64,10 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
                                                  GameSettingsProvider& settings,
                                                  Widelands::Game& g,
                                                  bool preconfigured)
-   : LaunchGame(fsmm, settings, nullptr),
+   : LaunchGame(fsmm, settings, nullptr, preconfigured),
      player_setup(&left_column_box_, &settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
-     game_(&g),
+     game_(g),
      initializing_(true) {
 
 	map_details_.set_select_map_tooltip(_("Change map"));
@@ -87,12 +87,16 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 }
 
 LaunchSPG::~LaunchSPG() {
-	delete &settings_;
+	if (!preconfigured_) {
+		game_.cleanup_objects();
+		delete &game_;
+		delete &settings_;
+	}
 }
 
 void LaunchSPG::clicked_select_map() {
 	if (!preconfigured_ && settings_.can_change_map()) {
-		new MapSelect(*this, &settings_, nullptr, *game_);
+		new MapSelect(*this, &settings_, nullptr, game_);
 	}
 }
 
@@ -124,7 +128,7 @@ void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool s
 void LaunchSPG::update() {
 	peaceful_.set_state(settings_.is_peaceful_mode());
 	if (preconfigured_) {
-		map_details_.update(&settings_, *game_->mutable_map());
+		map_details_.update(&settings_, *game_.mutable_map());
 		ok_.set_enabled(true);
 	} else {
 		Widelands::Map map;  //  MapLoader needs a place to put its preload data
@@ -197,31 +201,31 @@ void LaunchSPG::clicked_ok() {
 	Widelands::PlayerNumber playernumber = 1;
 	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
 	assert(sp);
-	game_->set_ai_training_mode(get_config_bool("ai_training", false));
+	game_.set_ai_training_mode(get_config_bool("ai_training", false));
 	try {
 		if (sp->settings().scenario) {  // scenario
-			game_->run_splayer_scenario_direct(sp->get_map(), "");
+			game_.run_splayer_scenario_direct(sp->get_map(), "");
 		} else {  // normal singleplayer
 			playernumber = sp->settings().playernum + 1;
 			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
 			// Game controller needs the ibase pointer to init the chat
-			game_->set_ibase(new InteractivePlayer(*game_, get_config_section(), playernumber, false));
-			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(*game_, true, playernumber));
+			game_.set_ibase(new InteractivePlayer(game_, get_config_section(), playernumber, false));
+			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game_, true, playernumber));
 
 			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
 			if (sp->has_players_tribe()) {
 				tipstexts.push_back(sp->get_players_tribe());
 			}
-			game_->create_loader_ui(tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
+			game_.create_loader_ui(tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-			game_->set_game_controller(ctrl.get());
-			game_->init_newgame(sp->settings());
-			game_->run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
+			game_.set_game_controller(ctrl.get());
+			game_.init_newgame(sp->settings());
+			game_.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		}
 	} catch (const std::exception& e) {
-		WLApplication::emergency_save(&capsule_.menu(), *game_, e.what(), playernumber);
+		WLApplication::emergency_save(&capsule_.menu(), game_, e.what(), playernumber);
 	}
 
 	return_to_main_menu();

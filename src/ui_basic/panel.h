@@ -364,6 +364,7 @@ private:
 	virtual void on_death(Panel* p);
 	virtual void on_visibility_changed();
 
+	friend struct ProgressWindow;
 	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);

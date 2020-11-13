@@ -45,6 +45,9 @@ public:
 		return capsule_;
 	}
 
+	virtual void reactivated() {
+	}
+
 private:
 	UI::Box horizontal_padding_box_, vertical_padding_box_;
 

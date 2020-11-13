@@ -41,7 +41,6 @@
 #include "base/log.h"
 #include "base/random.h"
 #include "base/time_string.h"
-#include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
@@ -52,7 +51,6 @@
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -74,16 +72,11 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
-#include "ui_fsmenu/campaign_select.h"
-#include "ui_fsmenu/campaigns.h"
-#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
-#include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
-#include "ui_fsmenu/scenario_select.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -1170,51 +1163,6 @@ void WLApplication::handle_commandline_parameters() {
 		throw ParameterError();  // No message on purpose
 	}
 }
-
-/* bool WLApplication::new_random_game(fsmm) {  // NOCOM
-	Widelands::Game game;
-	SinglePlayerGameSettingsProvider sp;
-	UI::UniqueWindow::Registry r;
-
-	game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
-	EditorInteractive::load_world_units(nullptr, game);
-
-	MainMenuNewRandomMap m(fsmm, UI::WindowStyle::kFsMenu, r, 64, 64);
-	bool need_new_loader = false;
-	for (;;) {
-		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-			// user pressed Cancel
-			return false;
-		}
-		if (need_new_loader) {
-			game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
-			need_new_loader = false;
-		}
-		if (m.do_generate_map(game, nullptr, &sp)) {
-			game.remove_loader_ui();
-			bool canceled = false;
-			const bool result = new_game(fsmm, game, sp, true, &canceled);
-			if (result || !canceled) {
-				return true;
-			}
-			// User pressed Back – show the random map dialog again
-			need_new_loader = true;
-		} else {
-			// no starting positions found
-			UI::WLMessageBox mbox(
-			   &fsmm, UI::WindowStyle::kFsMenu, _("Map Generation Error"),
-			   _("The random map generator was unable to generate a suitable map. "
-			     "This happens occasionally because the generator is still in beta stage. "
-			     "Please try again with slightly different settings."),
-			   UI::WLMessageBox::MBoxType::kOkCancel);
-			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-				return false;
-			}
-		}
-	}
-
-	NEVER_HERE();
-} */
 
 /**
  * Try to save the game instance if possible

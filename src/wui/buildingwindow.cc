@@ -632,7 +632,6 @@ void BuildingWindow::toggle_workarea() {
 	} else {
 		show_workarea();
 	}
-	NEVER_HERE();  // NOCOM
 }
 
 /**

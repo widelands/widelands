@@ -118,7 +118,8 @@ public:
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     bool show_game_tips,
 	                                     const std::string& theme,
-	                                     const std::string& background);
+	                                     const std::string& background,
+	                                     UI::Panel* parent = nullptr);
 
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;

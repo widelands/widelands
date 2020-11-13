@@ -228,6 +228,7 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 	menu.set_visible(true);
 	set_visible(true);
 	layout();
+	menu.focus();
 }
 
 void MenuCapsule::clear_content() {
@@ -250,6 +251,7 @@ void MenuCapsule::on_death(UI::Panel* p) {
 	} else {
 		visible_menus_.back().first->set_visible(true);
 		set_title(visible_menus_.back().second);
+		visible_menus_.back().first->reactivated();
 	}
 }
 

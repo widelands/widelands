@@ -113,7 +113,6 @@ wl_library(widelands_ball_of_mud
     graphic_fonthandler
     graphic_mouse_cursor
     graphic_text
-    graphic_text_layout
     io_filesystem
     logic
     logic_exceptions

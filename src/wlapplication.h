@@ -38,10 +38,6 @@
 
 #include "base/vector.h"
 
-struct SinglePlayerGameSettingsProvider;
-namespace FsMenu {
-class MainMenu;
-}
 namespace UI {
 class Panel;
 }
