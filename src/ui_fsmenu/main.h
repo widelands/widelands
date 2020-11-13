@@ -41,7 +41,6 @@ public:
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
-	void internet_login();
 	void internet_login_callback();
 
 	void draw(RenderTarget&) override;
@@ -99,6 +98,8 @@ private:
 
 	MenuCapsule menu_capsule_;
 	UI::UniqueWindow::Registry r_login_, r_about_;
+
+	void internet_login(bool launch_metaserver);
 
 	// Values from internet login window
 	std::string nickname_;

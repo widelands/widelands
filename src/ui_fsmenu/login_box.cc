@@ -139,12 +139,14 @@ void LoginBox::clicked_ok() {
 			set_config_string("nickname", eb_nickname_.text());
 			set_config_bool("registered", true);
 			fsmm_.internet_login_callback();
+			die();
 		}
 	} else {
 		set_config_string("nickname", eb_nickname_.text());
 		set_config_bool("registered", false);
 		set_config_string("password_sha1", "");
 		fsmm_.internet_login_callback();
+		die();
 	}
 }
 

@@ -55,12 +55,9 @@ enum class MenuTarget {
 	kEditorContinue,
 	kEditorLoad,
 
-	// Launch game
+	// NOCOM used only by LaunchMPG map/save selection applet. Get rid.
 	kNormalGame,
 	kScenarioGame,
-	kMultiPlayerSavegame,
-	kHostgame,
-	kJoingame
 };
 }  // namespace FsMenu
 

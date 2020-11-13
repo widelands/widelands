@@ -789,7 +789,7 @@ void MainMenu::action(const MenuTarget t) {
 			break;
 		}
 
-		internet_login();
+		internet_login(false);
 
 		get_config_string("nickname", nickname_);
 		// Only change the password if we use a registered account
@@ -840,7 +840,7 @@ void MainMenu::show_internet_login(const bool modal) {
 void MainMenu::internet_login_callback() {
 	if (auto_log_) {
 		auto_log_ = false;
-		internet_login();
+		internet_login(true);
 	}
 }
 
@@ -854,7 +854,7 @@ void MainMenu::internet_login_callback() {
  *
  * This fullscreen menu ends it's modality.
  */
-void MainMenu::internet_login() {
+void MainMenu::internet_login(const bool launch_metaserver) {
 	nickname_ = get_config_string("nickname", "");
 	password_ = get_config_string("password_sha1", "no_password_set");
 	register_ = get_config_bool("registered", false);
@@ -876,19 +876,22 @@ void MainMenu::internet_login() {
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in()) {
-		return;  // success
-	}
-	// something went wrong -> show the error message
-	ChatMessage msg = InternetGaming::ref().get_messages().back();
-	UI::WLMessageBox wmb(
-	   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
-	wmb.run<UI::Panel::Returncodes>();
+		if (launch_metaserver) {
+			action(MenuTarget::kMetaserver);
+		}
+	} else {
+		// something went wrong -> show the error message
+		ChatMessage msg = InternetGaming::ref().get_messages().back();
+		UI::WLMessageBox wmb(
+		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
+		wmb.run<UI::Panel::Returncodes>();
 
-	// Reset InternetGaming and passwort and show internet login again
-	InternetGaming::ref().reset();
-	set_config_string("password_sha1", "no_password_set");
-	auto_log_ = true;
-	show_internet_login(true);
+		// Reset InternetGaming and passwort and show internet login again
+		InternetGaming::ref().reset();
+		set_config_string("password_sha1", "no_password_set");
+		auto_log_ = true;
+		show_internet_login(true);
+	}
 }
 
 } //  namespace FsMenu
