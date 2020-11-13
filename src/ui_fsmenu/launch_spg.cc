@@ -64,13 +64,12 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
                                                  GameSettingsProvider& settings,
                                                  Widelands::Game& g,
                                                  bool preconfigured)
-   : LaunchGame(fsmm, settings, nullptr, preconfigured),
+   : LaunchGame(fsmm, settings, nullptr, preconfigured, false),
      player_setup(&left_column_box_, &settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
      game_(g),
      initializing_(true) {
 
-	map_details_.set_select_map_tooltip(_("Change map"));
 	left_column_box_.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	ok_.set_enabled(settings_.can_launch() || preconfigured_);
 
@@ -82,6 +81,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 		update();
 		layout();
 	} else {
+		map_details_.set_select_map_action([this]() { clicked_select_map(); });
 		clicked_select_map();
 	}
 }

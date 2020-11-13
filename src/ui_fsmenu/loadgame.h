@@ -58,7 +58,7 @@ private:
 	GameSettingsProvider& settings_;
 	bool take_ownership_of_game_and_settings_;
 
-	const std::function<void(const std::string&)>& callback_on_ok_;
+	std::function<void(const std::string&)> callback_on_ok_;
 
 	void toggle_filenames();
 

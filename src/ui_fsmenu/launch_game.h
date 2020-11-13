@@ -43,7 +43,8 @@ public:
 	LaunchGame(MenuCapsule&,
 	                         GameSettingsProvider&,
 	                         GameController*,
-	                         bool preconfigured = false);
+	                         bool preconfigured,
+	                         bool mpg);
 	~LaunchGame() override;
 
 	GameSettingsProvider& settings() const {
@@ -53,8 +54,6 @@ public:
 	virtual void clicked_select_map_callback(const MapData*, bool scenario) = 0;
 
 protected:
-	virtual void clicked_select_map() = 0;
-
 	LuaInterface* lua_;
 
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this

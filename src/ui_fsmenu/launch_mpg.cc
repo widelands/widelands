@@ -45,57 +45,6 @@
 
 namespace FsMenu {
 
-/// Simple user interaction window for selecting either map, save or cancel
-struct MapOrSaveSelectionWindow : public UI::Window {
-	MapOrSaveSelectionWindow(UI::Panel* parent, GameController* gc, uint32_t w, uint32_t h)
-	   : Window(parent,
-	            UI::WindowStyle::kFsMenu,
-	            "selection_window",
-	            0,
-	            0,
-	            w,
-	            h,
-	            /** TRANSLATORS: Dialog box title for selecting between map or saved game for new
-	               multiplayer game */
-	            _("Please select")),
-	     ctrl_(gc) {
-		center_to_parent();
-
-		uint32_t y = get_inner_h() / 10;
-		uint32_t space = y;
-		uint32_t butw = get_inner_w() - 2 * space;
-		uint32_t buth = (get_inner_h() - 2 * space) / 5;
-		UI::Button* btn =
-		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
-		                  _("Map"), _("Select a map"));
-		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kNormalGame); });
-
-		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
-		                     UI::ButtonStyle::kFsMenuSecondary,
-		                     /** Translators: This is a button to select a savegame */
-		                     _("Saved Game"), _("Select a saved game"));
-		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kScenarioGame); });
-
-		btn =
-		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
-		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
-		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kBack); });
-	}
-
-	void think() override {
-		if (ctrl_) {
-			ctrl_->think();
-		}
-	}
-
-	void pressedButton(MenuTarget i) {
-		end_modal<MenuTarget>(i);
-	}
-
-private:
-	GameController* ctrl_;
-};
-
 LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                                                  GameSettingsProvider& settings,
                                                  GameController& ctrl,
@@ -103,7 +52,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                                                  Widelands::EditorGameBase& egbase,
                                                  bool game_done_on_cancel,
                                                  const std::function<void()>& c)
-   : LaunchGame(fsmm, settings, &ctrl),
+   : LaunchGame(fsmm, settings, &ctrl, false, true),
      callback_(c),
      game_done_on_cancel_(game_done_on_cancel),
 
@@ -123,6 +72,9 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
      egbase_(egbase) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
+
+	map_details_.add_select_map_action([this]() { select_map(); }, _("Choose map…"), g_image_cache->get("images/wui/menus/toggle_minimap.png"));
+	map_details_.add_select_map_action([this]() { select_saved_game(); }, _("Choose saved game…"), g_image_cache->get("images/wui/menus/save_game.png"));
 
 	if (settings_.can_change_map()) {
 		map_details_.set_map_description_text(_("Please select a map or saved game."));
@@ -144,11 +96,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_.settings().usernum == 0 && settings_.settings().mapname.empty()) {
-		clicked_select_map();
-		// Try to associate the host with the first player
-		if (!settings_.settings().players.empty()) {
-			settings_.set_player_number(0);
-		}
+		map_details_.open_dropdown();
 	}
 }
 
@@ -185,21 +133,6 @@ void LaunchMPG::win_condition_selected() {
 	}
 }
 
-/// Opens a popup window to select a map or saved game
-void LaunchMPG::clicked_select_map() {
-	MapOrSaveSelectionWindow selection_window(&capsule_.menu(), ctrl_, get_w() / 3, get_h() / 4);
-	auto result = selection_window.run<MenuTarget>();
-	assert(result == MenuTarget::kNormalGame || result == MenuTarget::kScenarioGame ||
-	       result == MenuTarget::kBack);
-	if (result == MenuTarget::kNormalGame) {
-		select_map();
-	} else if (result == MenuTarget::kScenarioGame) {
-		select_saved_game();
-	}
-	update_win_conditions();
-	// return true;
-}
-
 /**
  * Select a map and send all information to the user interface.
  */
@@ -220,6 +153,7 @@ void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scena
 	settings_.set_map(map->name, map->filename, map->theme, map->background, map->nrplayers);
 
 	map_changed();
+	update_win_conditions();
 }
 
 /**
@@ -232,7 +166,7 @@ void LaunchMPG::select_saved_game() {
 	}
 
 	Widelands::Game game;  // The place all data is saved to.
-	new LoadGame(capsule_, game, settings_, false, false, [this](const std::string& filename) {
+	new LoadGame(capsule_, game, settings_, false, false, [this](std::string filename) {
 		// Saved game was selected - therefore not a scenario
 		settings_.set_scenario(false);
 
@@ -265,6 +199,7 @@ void LaunchMPG::select_saved_game() {
 				warning.run<UI::Panel::Returncodes>();
 			}
 		}
+		update_win_conditions();
 	});
 }
 
@@ -472,7 +407,7 @@ void LaunchMPG::load_map_info() {
 
 /// Show help
 void LaunchMPG::help_clicked() {
-	HelpWindow help(get_parent(), lua_, "txts/help/multiplayer_help.lua",
+	HelpWindow help(&capsule_.menu(), lua_, "txts/help/multiplayer_help.lua",
 	                              /** TRANSLATORS: This is a heading for a help window */
 	                              _("Multiplayer Game Setup"));
 	help.run<UI::Panel::Returncodes>();

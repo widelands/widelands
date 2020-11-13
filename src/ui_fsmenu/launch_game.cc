@@ -38,9 +38,10 @@ namespace FsMenu {
 LaunchGame::LaunchGame(MenuCapsule& fsmm,
                                                    GameSettingsProvider& settings,
                                                    GameController* const ctrl,
-                                                   const bool preconfigured)
+                                                   const bool preconfigured,
+                                                   const bool mpg)
    : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
-     map_details_(&right_column_content_box_, preconfigured, kPadding),
+     map_details_(&right_column_content_box_, preconfigured, kPadding, mpg),
 
      configure_game(&right_column_content_box_,
                     UI::PanelStyle::kFsMenu,
@@ -104,8 +105,6 @@ void LaunchGame::add_all_widgets() {
 void LaunchGame::add_behaviour_to_widgets() {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
-
-	map_details_.set_select_map_action([this]() { clicked_select_map(); });
 }
 void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();

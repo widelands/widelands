@@ -42,7 +42,7 @@ public:
 
 protected:
 	void clicked_ok() override;
-	void clicked_select_map() override;
+	void clicked_select_map();
 
 private:
 	void win_condition_selected() override;

@@ -24,13 +24,14 @@
 #include "logic/map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "wui/suggested_teams_box.h"
 
 class MapDetailsBox : public UI::Box {
 public:
-	MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding);
+	MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding, bool select_map_dropdown);
 	~MapDetailsBox() override = default;
 
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
@@ -38,7 +39,10 @@ public:
 
 	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(const std::function<void()>& action);
-	void set_select_map_tooltip(const std::string&);
+	/// add an entry to the select map/savegame dropdown
+	void add_select_map_action(const std::function<void()>&, const std::string& label, const Image*);
+
+	void open_dropdown();
 
 	void force_new_dimensions(uint32_t width, uint32_t height);
 
@@ -54,7 +58,8 @@ private:
 	UI::Box title_box_;
 	UI::Box content_box_;
 	UI::Textarea map_name_;
-	UI::Button select_map_;
+	UI::Button* select_map_button_;
+	UI::Dropdown<std::function<void()>>* select_map_dropdown_;
 	UI::MultilineTextarea map_description_;
 	UI::SuggestedTeamsBox suggested_teams_box_;
 

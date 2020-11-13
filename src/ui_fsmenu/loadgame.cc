@@ -151,6 +151,7 @@ void LoadGame::clicked_ok() {
 		if (gamedata && gamedata->errormessage.empty()) {
 			if (!take_ownership_of_game_and_settings_) {
 				callback_on_ok_(gamedata->filename);
+				die();
 				return;
 			}
 
