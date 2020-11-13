@@ -38,6 +38,7 @@ public:
 
 	/// passed callback is called when the select map button is clicked
 	void set_select_map_action(const std::function<void()>& action);
+	void set_select_map_tooltip(const std::string&);
 
 	void force_new_dimensions(uint32_t width, uint32_t height);
 

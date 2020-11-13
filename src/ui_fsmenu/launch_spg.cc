@@ -84,6 +84,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
      game_(&g),
      initializing_(true) {
 
+	map_details_.set_select_map_tooltip(_("Change map"));
 	left_column_box_.add(&player_setup, UI::Box::Resizing::kExpandBoth);
 	ok_.set_enabled(settings_->can_launch() || preconfigured_);
 
@@ -133,7 +134,7 @@ void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool s
 void LaunchSPG::update() {
 	peaceful_.set_state(settings_->is_peaceful_mode());
 	if (preconfigured_) {
-		map_details.update(settings_.get(), *game_->mutable_map());
+		map_details_.update(settings_.get(), *game_->mutable_map());
 		ok_.set_enabled(true);
 	} else {
 		Widelands::Map map;  //  MapLoader needs a place to put its preload data
@@ -145,7 +146,7 @@ void LaunchSPG::update() {
 			map_loader->preload_map(true);
 		}
 
-		map_details.update(settings_.get(), map);
+		map_details_.update(settings_.get(), map);
 		ok_.set_enabled(settings_->can_launch());
 		enforce_player_names_and_tribes(map);
 	}

@@ -219,6 +219,10 @@ void MapDetailsBox::show_map_description(const Widelands::Map& map,
 	set_map_description_text(assemble_infotext_for_map(map, settings->settings()));
 }
 
+void MapDetailsBox::set_select_map_tooltip(const std::string& tt) {
+	select_map_.set_tooltip(tt);
+}
+
 void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
 	select_map_.sigclicked.connect(action);
 }

@@ -119,9 +119,9 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
 	if (settings_->can_change_map()) {
-		map_details.set_map_description_text(_("Please select a map or saved game."));
+		map_details_.set_map_description_text(_("Please select a map or saved game."));
 	} else {
-		map_details.set_map_description_text(_("The host has not yet selected a map or saved game."));
+		map_details_.set_map_description_text(_("The host has not yet selected a map or saved game."));
 	}
 	ok_.set_enabled(settings_->can_launch());
 
@@ -226,8 +226,8 @@ void LaunchMPG::select_saved_game() {
 	}
 
 	Widelands::Game game;  // The place all data is saved to.
-	LoadGame lsgm(capsule_, game, settings_.get());
-	MenuTarget code = lsgm.run<MenuTarget>();
+	LoadGame lsgm(capsule_, game, *settings_, false, false);
+	MenuTarget code = lsgm.run<MenuTarget>();  // NOCOM
 
 	if (code == MenuTarget::kBack) {
 		return;  // back was pressed
@@ -236,7 +236,7 @@ void LaunchMPG::select_saved_game() {
 	// Saved game was selected - therefore not a scenario
 	settings_->set_scenario(false);
 
-	std::string filename = lsgm.filename();
+	std::string filename = /* lsgm.filename(); */ "NOCOM";
 
 	if (g_fs->file_exists(filename)) {
 		// Read the needed data from file "elemental" of the used map.
@@ -307,7 +307,7 @@ void LaunchMPG::think() {
 void LaunchMPG::map_changed() {
 	const GameSettings& settings = settings_->settings();
 	if (!g_fs->file_exists(settings.mapfilename)) {
-		map_details.show_warning(
+		map_details_.show_warning(
 		   _("The selected file can not be found. If it is not automatically transferred to you, "
 		     "please write to the host about this problem."));
 	} else {
@@ -445,7 +445,7 @@ void LaunchMPG::load_previous_playerdata() {
 		settings_->set_player_name(i - 1, player_save_name[i - 1]);
 	}
 
-	map_details.update_from_savegame(settings_.get());
+	map_details_.update_from_savegame(settings_.get());
 }
 
 /**
@@ -466,7 +466,7 @@ void LaunchMPG::load_map_info() {
 		ml->preload_map(true);
 	}
 
-	map_details.update(settings_.get(), map);
+	map_details_.update(settings_.get(), map);
 }
 
 /// Show help

@@ -40,7 +40,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                                                    GameController* const ctrl,
                                                    const bool preconfigured)
    : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
-     map_details(&right_column_content_box_, preconfigured, kPadding),
+     map_details_(&right_column_content_box_, preconfigured, kPadding),
 
      configure_game(&right_column_content_box_,
                     UI::PanelStyle::kFsMenu,
@@ -90,7 +90,7 @@ LaunchGame::~LaunchGame() {
 }
 
 void LaunchGame::add_all_widgets() {
-	right_column_content_box_.add(&map_details, UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(5 * kPadding);
 	right_column_content_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add_space(3 * kPadding);
@@ -105,14 +105,14 @@ void LaunchGame::add_behaviour_to_widgets() {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 
-	map_details.set_select_map_action([this]() { clicked_select_map(); });
+	map_details_.set_select_map_action([this]() { clicked_select_map(); });
 }
 void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
-	map_details.set_max_size(0, right_column_box_.get_h() / 2);
-	map_details.force_new_dimensions(right_column_width_, standard_height_);
+	map_details_.set_max_size(0, right_column_box_.get_h() / 2);
+	map_details_.force_new_dimensions(right_column_width_, standard_height_);
 }
 
 void LaunchGame::update_peaceful_mode() {

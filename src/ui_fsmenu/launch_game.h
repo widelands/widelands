@@ -89,7 +89,7 @@ protected:
 
 	void layout() override;
 
-	MapDetailsBox map_details;
+	MapDetailsBox map_details_;
 	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;

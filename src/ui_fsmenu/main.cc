@@ -42,6 +42,7 @@
 #include "ui_fsmenu/about.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/launch_spg.h"
+#include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/login_box.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/scenario_select.h"
@@ -745,6 +746,15 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 	}
 
+	case MenuTarget::kReplay:
+		menu_capsule_.clear_content();
+		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(), true, true);
+		break;
+	case MenuTarget::kLoadGame:
+		menu_capsule_.clear_content();
+		new LoadGame(menu_capsule_, *new Widelands::Game(), *new SinglePlayerGameSettingsProvider(), true, false);
+		break;
+
 	case MenuTarget::kNewGame:
 		menu_capsule_.clear_content();
 		new LaunchSPG(menu_capsule_, *new SinglePlayerGameSettingsProvider(), *new Widelands::Game(), false);
@@ -774,8 +784,6 @@ void MainMenu::action(const MenuTarget t) {
 		new CampaignSelect(menu_capsule_);
 		break;
 
-	case MenuTarget::kReplay:
-	case MenuTarget::kLoadGame:
 	case MenuTarget::kRandomGame:
 	case MenuTarget::kLan:
 	case MenuTarget::kMetaserver:

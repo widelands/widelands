@@ -22,21 +22,30 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "logic/replay.h"
+#include "logic/replay_game_controller.h"
+#include "ui_fsmenu/main.h"
+#include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/gamedetails.h"
+#include "wui/interactive_spectator.h"
 
 namespace FsMenu {
 
 LoadGame::LoadGame(MenuCapsule& fsmm,
                                                Widelands::Game& g,
-                                               GameSettingsProvider* gsp,
+                                               GameSettingsProvider& gsp,
+                                               bool take_ownership_of_game_and_settings,
                                                bool is_replay)
    : TwoColumnsFullNavigationMenu(fsmm, is_replay ? _("Choose Replay") : _("Choose Game")),
+     game_(g),
+     settings_(gsp),
+     take_ownership_of_game_and_settings_(take_ownership_of_game_and_settings),
      load_or_save_(&right_column_content_box_,
                    g,
                    is_replay ?
                       LoadOrSaveGame::FileType::kReplay :
-                      (gsp->settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
+                      (gsp.settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
                                                      LoadOrSaveGame::FileType::kGameSinglePlayer),
                    UI::PanelStyle::kFsMenu,
                    UI::WindowStyle::kFsMenu,
@@ -67,7 +76,7 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 		back_.set_tooltip(_("Return to the main menu"));
 		ok_.set_tooltip(_("Load this replay"));
 	} else {
-		back_.set_tooltip(gsp->settings().multiplayer ? _("Return to the multiplayer game setup") :
+		back_.set_tooltip(gsp.settings().multiplayer ? _("Return to the multiplayer game setup") :
 		                                                _("Return to the single player menu"));
 		ok_.set_tooltip(_("Load this game"));
 	}
@@ -89,6 +98,14 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
 }
+
+LoadGame::~LoadGame() {
+	if (take_ownership_of_game_and_settings_) {
+		delete &game_;
+		delete &settings_;
+	}
+}
+
 void LoadGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	load_or_save_.delete_button()->set_desired_size(0, standard_height_);
@@ -130,8 +147,27 @@ void LoadGame::clicked_ok() {
 		load_or_save_.change_directory_to(gamedata->filename);
 	} else {
 		if (gamedata && gamedata->errormessage.empty()) {
-			filename_ = gamedata->filename;
-			die();  // end_modal<MenuTarget>(MenuTarget::kOk);  NOCOM
+			capsule_.set_visible(false);
+
+			try {
+				if (is_replay_) {
+					game_.create_loader_ui({"general_game"}, true, settings_.settings().map_theme, settings_.settings().map_background);
+
+					game_.set_ibase(new InteractiveSpectator(game_, get_config_section()));
+					game_.set_write_replay(false);
+
+					ReplayGameController rgc(game_, gamedata->filename);
+					game_.save_handler().set_allow_saving(false);
+
+					game_.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
+
+				} else {
+					game_.run_load_game(gamedata->filename, "");
+				}
+			} catch (const std::exception& e) {
+				WLApplication::emergency_save(capsule_.menu(), game_, e.what());
+			}
+			return_to_main_menu();
 		}
 	}
 }
@@ -149,10 +185,6 @@ void LoadGame::entry_selected() {
 void LoadGame::fill_table() {
 	load_or_save_.set_show_filenames(showing_filenames_);
 	load_or_save_.fill_table();
-}
-
-const std::string& LoadGame::filename() const {
-	return filename_;
 }
 
 bool LoadGame::handle_key(bool down, SDL_Keysym code) {
