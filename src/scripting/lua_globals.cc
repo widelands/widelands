@@ -284,7 +284,6 @@ static int L_ngettext(lua_State* L) {
 
    :returns: The translated string.
 */
-// UNTESTED
 static int L_pgettext(lua_State* L) {
 	//  S: msgctxt msgid
 	const char* msgctxt = luaL_checkstring(L, 1);
@@ -315,7 +314,6 @@ static int L_pgettext(lua_State* L) {
 
    :returns: The translated string.
 */
-// UNTESTED
 static int L_npgettext(lua_State* L) {
 	//  S: msgctxt msgid
 	const char* msgctxt = luaL_checkstring(L, 1);
