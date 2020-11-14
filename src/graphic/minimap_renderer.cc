@@ -347,16 +347,19 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 }
 
 int scale_map(const Widelands::Map& map, bool zoom) {
-	// The MiniMap can have a maximum size of 600px. If a map width or height is greater than 300px we don't scale.
-	// Otherwise we fit as much as possible into a 300px/400px MiniMap window when zoom is disabled.
+	// The MiniMap can have a maximum size of 600px (width or height).
+	// Borders and button height takes 2x20px + 20px. -> 60px
+	// If a map width or height is greater than 270px we don't scale.
+	// Otherwise we fit as much as possible into a 300px or 400px
+	// MiniMap window when zoom is disabled.
 	const auto max = std::max(map.get_width(), map.get_height());
-	if (max <= 300) {
+	if (max <= 270) {
 		if (zoom) {
-			return (600 - (600 % max)) / max;
-		} else if (max > 150) {
-			return (400 - (400 % max)) / max;
+			return (540 - (540 % max)) / max;
+		} else if (max > 135) {
+			return (370 - (370 % max)) / max;
 		} else {
-			return (300 - (300 % max)) / max;
+			return (270 - (270 % max)) / max;
 		}
 	}
 	return 1;
