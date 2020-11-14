@@ -20,7 +20,6 @@
 #include "logic/cmd_queue.h"
 
 #include "base/macros.h"
-#include "base/multithreading.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
