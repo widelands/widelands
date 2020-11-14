@@ -2461,8 +2461,8 @@ void GameHost::handle_system_message(RecvPacket& packet) {
 	const std::string arg2 = packet.string();
 	const std::string arg3 = packet.string();
 	if (code != "CHEAT") {
-		log_err("[Host]: Received system command %s(%s,%s,%s) from client",
-		        code.c_str(), arg1.c_str(), arg2.c_str(), arg3.c_str());
+		log_err("[Host]: Received system command %s(%s,%s,%s) from client", code.c_str(),
+		        arg1.c_str(), arg2.c_str(), arg3.c_str());
 		throw DisconnectException("MALFORMED_COMMANDS");
 	}
 	send_system_message_code(code, arg1, arg2, arg3);
