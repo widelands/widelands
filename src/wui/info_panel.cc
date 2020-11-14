@@ -66,7 +66,7 @@ void MessagePreview::think() {
 
 void MessagePreview::draw(RenderTarget& r) {
 	// NOCOM need better graphic
-	r.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get(std::string(kTemplateDir) + "wui/background.png"), Vector2i(0, 0));
+	r.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get(std::string(kTemplateDir) + "wui/windows/background.png"), Vector2i(0, 0));
 
 	// every second message is highlighted
 	if (owner_.index_of(*this) % 2) {
@@ -87,15 +87,23 @@ void MessagePreview::draw(RenderTarget& r) {
 		r.brighten_rect(Recti((w - fraction) / 2, get_h() - kSpacing, fraction, kSpacing), -64);
 	}
 }
-bool MessagePreview::handle_mousepress(uint8_t b, int32_t x, int32_t y) {
-	if (b == SDL_BUTTON_RIGHT) {
-		// Hide the message
+bool MessagePreview::handle_mousepress(const uint8_t button, int32_t, int32_t) {
+	switch (button) {
+	case SDL_BUTTON_LEFT:  // center view
+		if (message_ && message_->position()) {
+			owner_.ibase_.map_view()->scroll_to_field(message_->position(), MapView::Transition::Smooth);
+		}
+		break;
+	case SDL_BUTTON_MIDDLE:  // hide message
 		owner_.pop_message(*this);
-	} else if (b == SDL_BUTTON_LEFT && message_ && message_->position()) {
-		// Center view
-		owner_.ibase_.map_view()->scroll_to_field(message_->position(), MapView::Transition::Smooth);
-	} else {
-		UI::Textarea::handle_mousepress(b, x, y);
+		break;
+	case SDL_BUTTON_RIGHT: {  // open message menu
+		assert(owner_.iplayer_);
+		owner_.iplayer_->popup_message(id_, *message_);
+		break;
+	}
+	default:
+		break;
 	}
 	// Always consume mousepress
 	return true;
@@ -104,6 +112,7 @@ bool MessagePreview::handle_mousepress(uint8_t b, int32_t x, int32_t y) {
 InfoPanel::InfoPanel(InteractiveBase& ib)
 : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
 ibase_(ib),
+iplayer_(nullptr),  // this function is called from IBase ctor so we can't upcast yet
 on_top_(get_config_bool("toolbar_pos_on_top", false)),
 display_mode_(DisplayMode::kPinned),
 last_mouse_pos_(Vector2i(-1, -1)),
@@ -117,10 +126,10 @@ log_message_subscriber_(Notifications::subscribe<LogMessage>([this](const LogMes
 message_queue_(nullptr),
 last_message_id_(nullptr),
 draw_real_time_(get_config_bool("game_clock", true)) {
-	toggle_mode_.add(_("Pin"), DisplayMode::kPinned, g_image_cache->get(std::string(kTemplateDir) + "wui/window_pin.png"), true);
+	toggle_mode_.add(_("Pin"), DisplayMode::kPinned, g_image_cache->get(std::string(kTemplateDir) + "wui/windows/pin.png"), true);
 	toggle_mode_.add(_("Follow mouse"), DisplayMode::kOnMouse_Visible, g_image_cache->get("images/ui_basic/fsel.png"));
 	toggle_mode_.add(_("Hide"), DisplayMode::kMinimized, g_image_cache->get(std::string(kTemplateDir) +
-			(on_top_ ? "wui/window_minimize.png" : "wui/window_maximize.png")));
+			(on_top_ ? "wui/windows/minimize.png" : "wui/windows/maximize.png")));
 	toggle_mode_.selected.connect([this]() { toggle_mode(); });
 }
 
@@ -315,12 +324,19 @@ void InfoPanel::update_time_speed_string() {
 	text_time_speed_.set_text(f.str());
 }
 
+void InfoPanel::fast_forward_message_queue() {
+	iplayer_ = dynamic_cast<InteractivePlayer*>(&ibase_);
+	assert(iplayer_);
+	last_message_id_.reset(new Widelands::MessageId(iplayer_->player().messages().current_message_id()));
+}
+
 void InfoPanel::think() {
 	if (!last_message_id_) {
 		last_message_id_.reset(new Widelands::MessageId());
-		if (upcast(InteractivePlayer, p, &ibase_)) {
-			message_queue_ = &p->player().messages();
-		}
+		iplayer_ = dynamic_cast<InteractivePlayer*>(&ibase_);
+	}
+	if (iplayer_ && !message_queue_) {
+		message_queue_ = &iplayer_->player().messages();
 	}
 
 	while (message_queue_ && *last_message_id_ != message_queue_->current_message_id()) {
@@ -333,6 +349,7 @@ void InfoPanel::think() {
 		// Refresh real time on every tick
 		update_time_speed_string();
 	}
+
 }
 
 void InfoPanel::layout() {
@@ -382,7 +399,7 @@ void InfoPanel::draw(RenderTarget& r) {
 	}
 
 	const int h = display_mode_ == DisplayMode::kOnMouse_Hidden? kSpacing : MainToolbar::kButtonSize;
-	r.tile(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), g_image_cache->get(std::string(kTemplateDir) + "wui/background.png"), Vector2i(0, 0));
+	r.brighten_rect(Recti(0, on_top_ ? 0 : get_h() - h, get_w(), h), -100);
 
 	r.draw_rect(Recti(0, on_top_ ? h : get_h() - h - 1, get_w(), 1), RGBColor(0, 0, 0));
 }

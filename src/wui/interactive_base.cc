@@ -666,6 +666,10 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 	}
 }
 
+void InteractiveBase::info_panel_fast_forward_message_queue() {
+	info_panel_.fast_forward_message_queue();
+}
+
 /*
 ===============
 Called once per frame by the UI code

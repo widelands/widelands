@@ -184,6 +184,8 @@ public:
 		return &map_view_;
 	}
 
+	void info_panel_fast_forward_message_queue();
+
 	// This function should return true only in EditorInteractive
 	virtual bool omnipotent() const {
 		return cheat_mode_enabled_;

@@ -29,6 +29,7 @@
 
 class InfoPanel;
 class InteractiveBase;
+class InteractivePlayer;
 class MainToolbar;
 
 namespace Widelands {
@@ -74,6 +75,8 @@ public:
 
 	void set_toolbar(MainToolbar&);
 
+	void fast_forward_message_queue();
+
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_mouserelease(uint8_t, int32_t, int32_t) override;
@@ -83,6 +86,7 @@ private:
 	friend class MessagePreview;
 
 	InteractiveBase& ibase_;
+	InteractivePlayer* iplayer_;
 
 	bool on_top_;
 
