@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 test_descr = lunit.TestCase("Tribes descriptions test")
 
 --  =======================================================
