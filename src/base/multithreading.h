@@ -82,14 +82,16 @@ struct NoteThreadSafeFunctionHandled {
 class MutexLock {
 public:
 	// Which mutex to lock. Each entry corresponds to a different mutex.
-	enum class ID { kLogicFrame, kObjects, kCommands, kMessages, kIBaseVisualizations, kI18N };
+	enum class ID : uint32_t { kLogicFrame, kObjects, kCommands, kMessages, kIBaseVisualizations, kI18N };
 
+	static ID create_custom_mutex();
 	explicit MutexLock(ID);
 	explicit MutexLock(ID, const std::function<void()>& run_while_waiting);
 	~MutexLock();
 
 private:
 	ID id_;
+	static ID last_custom_mutex_;
 };
 
 #endif  // end of include guard: WL_BASE_MULTITHREADING_H

@@ -101,8 +101,6 @@ void CmdQueue::run_queue(const Duration& interval, Time& game_time_var) {
 	const Time final_time = game_time_var + interval;
 
 	while (game_time_var < final_time) {
-		MutexLock m(MutexLock::ID::kCommands);
-
 		std::priority_queue<CmdItem>& current_cmds =
 		   cmds_[game_time_var.get() % kCommandQueueBucketSize];
 

@@ -87,11 +87,16 @@ void NoteThreadSafeFunction::instantiate(const std::function<void()>& fn,
 	}
 }
 
-// TODO(Nordfriese): All mutexes are global. If there is a bottleneck in the future where
-// a mutex needs to be locked only on one specific object really, then each object of
-// this class should be given a mutex on its own. Performance! Currently there are no
-// places where one mutex per object would be enough, so this is not implemented yet.
 static std::map<MutexLock::ID, std::recursive_mutex> g_mutex;
+
+MutexLock::ID MutexLock::last_custom_mutex_ = MutexLock::ID::kI18N;
+MutexLock::ID MutexLock::create_custom_mutex() {
+	last_custom_mutex_ = static_cast<MutexLock::ID>(static_cast<uint32_t>(last_custom_mutex_) + 1);
+#ifdef MUTEX_LOCK_DEBUG
+	log_dbg("Create custom mutex #%u.", static_cast<uint32_t>(last_custom_mutex_));
+#endif
+	return last_custom_mutex_;
+}
 
 #ifdef MUTEX_LOCK_DEBUG
 static std::string to_string(MutexLock::ID i) {
@@ -106,8 +111,11 @@ static std::string to_string(MutexLock::ID i) {
 		return "Messages";
 	case MutexLock::ID::kIBaseVisualizations:
 		return "IBaseVisualizations";
+	case MutexLock::ID::kI18N:
+		return "i18n";
+	default:
+		return std::string("Custom lock #") + std::to_string(static_cast<unsigned>(i));
 	}
-	NEVER_HERE();
 }
 #endif
 

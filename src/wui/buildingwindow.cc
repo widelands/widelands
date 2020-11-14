@@ -173,8 +173,6 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 ===============
 */
 void BuildingWindow::think() {
-	MutexLock m(MutexLock::ID::kObjects);
-
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (building == nullptr || !ibase()->can_see(building->owner().player_number())) {
 		die();

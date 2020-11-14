@@ -371,7 +371,10 @@ int Panel::do_run() {
 				assert(!running_);
 			}
 
-			do_think();
+			{
+				MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
+				do_think();
+			}
 
 			check_child_death();
 

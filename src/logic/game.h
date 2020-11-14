@@ -413,6 +413,7 @@ private:
 	RNG rng_;
 
 	CmdQueue cmdqueue_;
+	std::list<PlayerCommand*> pending_player_commands_;
 
 	SaveHandler savehandler_;
 
