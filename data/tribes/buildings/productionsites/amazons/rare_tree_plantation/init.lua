@@ -85,7 +85,7 @@ descriptions:new_productionsite_type {
          -- TODO(hessenfarmer): make this dissapear in building help
          descname = "dummy",
          actions = {
-            "produce=ironwood",
+            "callworker=plant",
          },
       },
    }
