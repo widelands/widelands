@@ -20,7 +20,12 @@
 #include <iostream>
 #include <typeinfo>
 
+#ifdef _MSC_VER
+// Needed to resolve entry point
+#include <SDL.h>
+#else
 #include <unistd.h>
+#endif
 
 #include "base/wexception.h"
 #include "build_info.h"

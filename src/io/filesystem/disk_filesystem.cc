@@ -23,6 +23,8 @@
 #ifdef _WIN32
 #ifdef _MSC_VER
 #include <cstdio>
+#else
+#include <cstdint>
 #endif
 #endif
 #include <cstdlib>
@@ -34,7 +36,7 @@
 #include <dos.h>
 #include <windows.h>
 #ifdef _MSC_VER
-#include <direct.h>
+#include <corecrt_io.h>
 #define S_ISDIR(x) ((x & _S_IFDIR) ? 1 : 0)
 #endif
 #else  // not _WIN32
@@ -85,7 +87,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 #ifdef _WIN32
 	std::string buf;
 	struct _finddata_t c_file;
-	long hFile;
+	intptr_t hFile;
 
 	if (path.size())
 		buf = directory_ + '\\' + path + "\\*";

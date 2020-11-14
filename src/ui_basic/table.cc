@@ -663,9 +663,8 @@ uint32_t Table<void*>::toggle_entry(uint32_t row) {
 		// Find last selection
 		if (multiselect_.empty()) {
 			return no_selection_index();
-		} else {
-			return *multiselect_.lower_bound(0);
 		}
+		return *multiselect_.lower_bound(0);
 	} else {
 		multiselect_.insert(row);
 		return row;
@@ -738,9 +737,8 @@ void Table<void*>::remove_entry(const void* const entry) {
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {
 	if (sort_descending_) {
 		return columns_[sort_column_].compare(b, a);
-	} else {
-		return columns_[sort_column_].compare(a, b);
 	}
+	return columns_[sort_column_].compare(a, b);
 }
 
 void Table<void*>::layout() {
@@ -875,8 +873,8 @@ void Table<void*>::sort(const uint32_t lower_bound, uint32_t upper_bound) {
 }
 
 bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t b) {
-	EntryRecord& ea = get_record(a);
-	EntryRecord& eb = get_record(b);
+	const EntryRecord& ea = get_record(a);
+	const EntryRecord& eb = get_record(b);
 	return ea.get_string(column) < eb.get_string(column);
 }
 bool Table<void*>::handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) {

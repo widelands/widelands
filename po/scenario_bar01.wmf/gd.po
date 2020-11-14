@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016,2019
+# GunChleoc, 2015-2016,2019-2020
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"PO-Revision-Date: 2020-11-11 16:52+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -239,7 +239,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Tha togalaichean nas fheàrr ’s nas motha – a’ gabhail a-steach gach togalach an airm – feumach air stuthan togail nas fheàrr. Chan fhoghainn fiodh simplidh gus an togail – feumaidh cruadhaichear fiodha am fiodh a leasachadh gu fiodh cruaidh an toiseach. Cuimhnich gun tog thu cruadhaichear fiodha mus ruith thu a-mach à fiodh cruaidh oir chan urrainn dhut do ranntair a leudachadh às aonais."
+msgstr "Tha togalaichean nas fheàrr ’s nas motha – a’ gabhail a-steach gach togalach an airm – feumach air stuthan togail nas fheàrr. Chan fhoghainn fiodh simplidh gus an togail – feumaidh cruadhaichear fiodha am fiodh a leasachadh gu fiodh cruaidhichte an toiseach. Cuimhnich gun tog thu cruadhaichear fiodha mus ruith thu a-mach à fiodh cruaidhichte oir chan urrainn dhut do ranntair a leudachadh às aonais."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -255,7 +255,7 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr "Tha togalaichean nas fheàrr feumach air stuthan togail leasaichte eile seach fiodh cruaidh a-mhàin. Is aol-tàthaidh aonan dhiubh a nì loisgeadair aoil a-mach à gaireal, uisge ’s gual."
+msgstr "Tha togalaichean nas fheàrr feumach air stuthan togail leasaichte eile seach fiodh cruaidhichte a-mhàin. Is aol-tàthaidh aonan dhiubh a nì loisgeadair aoil a-mach à gaireal, uisge ’s gual."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
@@ -840,7 +840,7 @@ msgid ""
 "As I just discovered, we are running short on blackwood! We cannot put our "
 "warriors into some crumbling huts, and even less so in times as dangerous as"
 " ours!"
-msgstr "Mhothaich mi gu bheil am fiodh cruaidh gu bhith ruith oirnn! Chan urrainn dha na gaisgich againn fuireach ann an tobhtaichean briste, gu h-àraidh rè ama chunnartaich mar a tha oirnne!"
+msgstr "Mhothaich mi gu bheil am fiodh cruaidhichte gu bhith ruith oirnn! Chan urrainn dha na gaisgich againn fuireach ann an tobhtaichean briste, gu h-àraidh rè ama chunnartaich mar a tha oirnne!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:441

@@ -1061,11 +1061,9 @@ void FieldActionWindow::act_attack() {
 	assert(attack_box_);
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Building, building, game->map().get_immovable(node_))) {
-		if (attack_box_->count_soldiers() > 0) {
-			upcast(InteractivePlayer const, iaplayer, &ibase());
-			game->send_player_enemyflagaction(
-			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
-		}
+		upcast(InteractivePlayer const, iaplayer, &ibase());
+		game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(),
+		                                  attack_box_->soldiers(), attack_box_->get_allow_conquer());
 	}
 	reset_mouse_and_die();
 }
@@ -1132,16 +1130,15 @@ void show_field_action(InteractiveBase* const ibase,
 				// We are done, so we close the window.
 				registry->destroy();
 				return;
-			} else {
-				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
-					w.add_buttons_road(false);
-				} else {
-					w.add_buttons_waterway(false);
-				}
-				w.init();
-				return;
 			}
+			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
+			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+				w.add_buttons_road(false);
+			} else {
+				w.add_buttons_waterway(false);
+			}
+			w.init();
+			return;
 		}
 	} else {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
