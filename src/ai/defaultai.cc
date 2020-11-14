@@ -4564,8 +4564,12 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 
 	bool considering_upgrade = enhancement != Widelands::INVALID_INDEX;
 
-	if (!basic_economy_established && management_data.f_neuron_pool[17].get_position(2)) {
-		considering_upgrade = false;
+	if (considering_upgrade && !basic_economy_established && management_data.f_neuron_pool[17].get_position(2)) {
+		const Widelands::BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+		if (en_bo.basic_amount < 1) {
+			considering_upgrade = false;
+		}
 	}
 
 	// First we check for rare case when input wares are set to 0 but AI is not aware that
@@ -4619,6 +4623,8 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	// then 10 minutes. Otherwise the site must be older then 20 minutes and
 	// gametime > 45 minutes.
 	if (considering_upgrade) {
+		const Widelands::BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
+		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
 		if (site.bo->is(BuildingAttribute::kUpgradeExtends)) {
 			if (gametime < site.built_time + Duration(10 * 60 * 1000)) {
 				considering_upgrade = false;
@@ -4628,6 +4634,9 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 			    gametime < site.built_time + Duration(20 * 60 * 1000)) {
 				considering_upgrade = false;
 			}
+		}
+		if (en_bo.cnt_built < static_cast<int32_t>(en_bo.basic_amount)) {
+			considering_upgrade = true;
 		}
 	}
 
