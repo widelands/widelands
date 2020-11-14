@@ -43,19 +43,27 @@ void MainToolbar::finalize() {
 
 	// Calculate repetition and width
 	repeat_ = 1;
-	int width = imageset_.left->width() + imageset_.center->width() + imageset_.right->width();
+	int width = std::min(imageset_.bottom_left->width(), imageset_.top_left->width()) +
+			std::min(imageset_.bottom_center->width(), imageset_.top_center->width()) +
+			std::min(imageset_.bottom_right->width(), imageset_.top_right->width());
 	while (width < box.get_w()) {
 		++repeat_;
-		width += imageset_.left->width() + imageset_.right->width();
+		width += std::min(imageset_.bottom_left->width(), imageset_.top_left->width()) + std::min(imageset_.bottom_right->width(), imageset_.top_right->width());
 	}
-	width += imageset_.left_corner->width() + imageset_.right_corner->width();
+	width += std::min(imageset_.bottom_left_corner->width(), imageset_.top_left_corner->width()) +
+			std::min(imageset_.bottom_right_corner->width(), imageset_.top_right_corner->width());
 
 	// Find the highest image
-	height = std::max(height, imageset_.left_corner->height());
-	height = std::max(height, imageset_.left->height());
-	height = std::max(height, imageset_.center->height());
-	height = std::max(height, imageset_.right->height());
-	height = std::max(height, imageset_.right_corner->height());
+	height = std::max(height, imageset_.bottom_left_corner->height());
+	height = std::max(height, imageset_.bottom_left->height());
+	height = std::max(height, imageset_.bottom_center->height());
+	height = std::max(height, imageset_.bottom_right->height());
+	height = std::max(height, imageset_.bottom_right_corner->height());
+	height = std::max(height, imageset_.top_left_corner->height());
+	height = std::max(height, imageset_.top_left->height());
+	height = std::max(height, imageset_.top_center->height());
+	height = std::max(height, imageset_.top_right->height());
+	height = std::max(height, imageset_.top_right_corner->height());
 
 	// Set size and position
 	set_size(width, height);
@@ -70,23 +78,29 @@ void MainToolbar::draw(RenderTarget& dst) {
 		return;
 	}
 
+	const Image* lc = on_top ? imageset_.top_left_corner  : imageset_.bottom_left_corner;
+	const Image* l =  on_top ? imageset_.top_left         : imageset_.bottom_left;
+	const Image* m =  on_top ? imageset_.top_center       : imageset_.bottom_center;
+	const Image* r =  on_top ? imageset_.top_right        : imageset_.bottom_right;
+	const Image* rc = on_top ? imageset_.top_right_corner : imageset_.bottom_right_corner;
+
 	int x = 0;
 	// Left corner
-	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.left_corner->height()), imageset_.left_corner);
-	x += imageset_.left_corner->width();
+	dst.blit(Vector2i(x, on_top ? 0 : get_h() - lc->height()), lc);
+	x += lc->width();
 	// Repeat left
 	for (int i = 0; i < repeat_; ++i) {
-		dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.left->height()), imageset_.left);
-		x += imageset_.left->width();
+		dst.blit(Vector2i(x, on_top ? 0 : get_h() - l->height()), l);
+		x += l->width();
 	}
 	// Center
-	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.center->height()), imageset_.center);
-	x += imageset_.center->width();
+	dst.blit(Vector2i(x, on_top ? 0 : get_h() - m->height()), m);
+	x += m->width();
 	// Repeat right
 	for (int i = 0; i < repeat_; ++i) {
-		dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.right->height()), imageset_.right);
-		x += imageset_.right->width();
+		dst.blit(Vector2i(x, on_top ? 0 : get_h() - r->height()), r);
+		x += r->width();
 	}
 	// Right corner
-	dst.blit(Vector2i(x, on_top ? 0 : get_h() - imageset_.right_corner->height()), imageset_.right_corner);
+	dst.blit(Vector2i(x, on_top ? 0 : get_h() - rc->height()), rc);
 }

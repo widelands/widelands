@@ -113,10 +113,10 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
 : UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
 ibase_(ib),
 iplayer_(nullptr),  // this function is called from IBase ctor so we can't upcast yet
-on_top_(get_config_bool("toolbar_pos_on_top", false)),
+on_top_(false),
 display_mode_(DisplayMode::kPinned),
 last_mouse_pos_(Vector2i(-1, -1)),
-toolbar_(nullptr),
+toolbar_(nullptr),  // will be set later by the IBase
 toggle_mode_(this, "mode", 0, 0, MainToolbar::kButtonSize, 8, MainToolbar::kButtonSize, _("Info Panel Visibility"),
                   UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu),
 text_time_speed_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiGameSpeedAndCoordinates, 0, 0, 0, 0, "", UI::Align::kLeft),
@@ -126,11 +126,69 @@ log_message_subscriber_(Notifications::subscribe<LogMessage>([this](const LogMes
 message_queue_(nullptr),
 last_message_id_(nullptr),
 draw_real_time_(get_config_bool("game_clock", true)) {
-	toggle_mode_.add(_("Pin"), DisplayMode::kPinned, g_image_cache->get(std::string(kTemplateDir) + "wui/windows/pin.png"), true);
-	toggle_mode_.add(_("Follow mouse"), DisplayMode::kOnMouse_Visible, g_image_cache->get("images/ui_basic/fsel.png"));
+	int mode = get_config_int("toolbar_pos", 0);
+	on_top_ = mode & DisplayMode::kCmdSwap;
+	if (mode & (DisplayMode::kOnMouse_Visible | DisplayMode::kOnMouse_Hidden)) {
+		display_mode_ = DisplayMode::kOnMouse_Visible;
+	} else if (mode & DisplayMode::kMinimized) {
+		display_mode_ = DisplayMode::kMinimized;
+	} else {
+		display_mode_ = DisplayMode::kPinned;
+	}
+	rebuild_dropdown();
+}
+
+void InfoPanel::rebuild_dropdown() {
+	toggle_mode_.clear();
+
+	toggle_mode_.add(_("Pin"), DisplayMode::kPinned, g_image_cache->get(std::string(kTemplateDir) + "wui/windows/pin.png"), display_mode_ == DisplayMode::kPinned);
+	toggle_mode_.add(_("Follow mouse"), DisplayMode::kOnMouse_Visible, g_image_cache->get("images/ui_basic/fsel.png"),
+			display_mode_ == DisplayMode::kOnMouse_Visible || display_mode_ == DisplayMode::kOnMouse_Hidden);
 	toggle_mode_.add(_("Hide"), DisplayMode::kMinimized, g_image_cache->get(std::string(kTemplateDir) +
-			(on_top_ ? "wui/windows/minimize.png" : "wui/windows/maximize.png")));
-	toggle_mode_.selected.connect([this]() { toggle_mode(); });
+			(on_top_ ? "wui/windows/minimize.png" : "wui/windows/maximize.png")), display_mode_ == DisplayMode::kMinimized);
+
+	toggle_mode_.add(on_top_ ? _("Move panel to bottom") : _("Move panel to top"), DisplayMode::kCmdSwap, g_image_cache->get(std::string(kTemplateDir) +
+			(on_top_ ? "wui/windows/maximize.png" : "wui/windows/minimize.png")));
+
+	toggle_mode_.selected.connect([this]() {
+		update_mode();
+		set_config_int("toolbar_pos", on_top_ ? (display_mode_ | DisplayMode::kCmdSwap) : display_mode_);
+	});
+
+	layout();
+}
+
+void InfoPanel::update_mode() {
+	const DisplayMode d = toggle_mode_.get_selected();
+	if (d == DisplayMode::kCmdSwap) {
+		on_top_ = !on_top_;
+		toolbar_->on_top = on_top_;
+		rebuild_dropdown();
+		return;
+	}
+
+	display_mode_ = d;
+
+	switch (display_mode_) {
+	case DisplayMode::kPinned:
+		set_textareas_visibility(true);
+		break;
+	case DisplayMode::kMinimized:
+		set_textareas_visibility(false);
+		break;
+	case DisplayMode::kOnMouse_Visible:
+		if (is_mouse_over_panel()) {
+			set_textareas_visibility(true);
+		} else {
+			display_mode_ = DisplayMode::kOnMouse_Hidden;
+			set_textareas_visibility(false);
+		}
+		break;
+	default:
+		NEVER_HERE();
+	}
+
+	layout();
 }
 
 void InfoPanel::set_toolbar(MainToolbar& t) {
@@ -167,31 +225,6 @@ void InfoPanel::set_textareas_visibility(bool v) {
 	}
 }
 
-void InfoPanel::toggle_mode() {
-	display_mode_ = toggle_mode_.get_selected();
-
-	switch (display_mode_) {
-	case DisplayMode::kPinned:
-		set_textareas_visibility(true);
-		break;
-	case DisplayMode::kMinimized:
-		set_textareas_visibility(false);
-		break;
-	case DisplayMode::kOnMouse_Visible:
-		if (is_mouse_over_panel()) {
-			set_textareas_visibility(true);
-		} else {
-			display_mode_ = DisplayMode::kOnMouse_Hidden;
-			set_textareas_visibility(false);
-		}
-		break;
-	default:
-		NEVER_HERE();
-	}
-
-	layout();
-}
-
 bool InfoPanel::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t) {
 	last_mouse_pos_ = Vector2i(x, y);
 
@@ -205,18 +238,20 @@ bool InfoPanel::handle_mousemove(uint8_t, int32_t x, int32_t y, int32_t, int32_t
 			display_mode_ = DisplayMode::kOnMouse_Hidden;
 			set_textareas_visibility(false);
 			layout();
+			return false;
 		}
-		return true;
+		return is_mouse_over_panel();
 	case DisplayMode::kOnMouse_Hidden:
 		if (is_mouse_over_panel()) {
 			display_mode_ = DisplayMode::kOnMouse_Visible;
 			set_textareas_visibility(true);
 			layout();
+			return true;
 		}
-		return true;
+		return false;
+	default:
+		NEVER_HERE();
 	}
-
-	NEVER_HERE();
 }
 
 // Consume mouse click/move events on the panel
@@ -384,12 +419,22 @@ void InfoPanel::layout() {
 
 	toolbar_->move_to_top();
 
-	int16_t message_offset = on_top_ ? toolbar_->box.get_h() : 0;
-	for (MessagePreview* m : messages_) {
-		m->move_to_top();
-		m->set_size(w / 3, MainToolbar::kButtonSize);
-		m->set_pos(Vector2i(w / 3, message_offset));
-		message_offset += m->get_h();
+	if (on_top_) {
+		int16_t message_offset = toolbar_->box.get_h();
+		for (MessagePreview* m : messages_) {
+			m->move_to_top();
+			m->set_size(w / 3, MainToolbar::kButtonSize);
+			m->set_pos(Vector2i(w / 3, message_offset));
+			message_offset += m->get_h();
+		}
+	} else {
+		int16_t message_offset = get_h() - toolbar_->box.get_h();
+		for (MessagePreview* m : messages_) {
+			m->move_to_top();
+			m->set_size(w / 3, MainToolbar::kButtonSize);
+			message_offset -= m->get_h();
+			m->set_pos(Vector2i(w / 3, message_offset));
+		}
 	}
 }
 

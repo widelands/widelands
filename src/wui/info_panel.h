@@ -90,9 +90,10 @@ private:
 
 	bool on_top_;
 
-	enum class DisplayMode { kPinned, kMinimized, kOnMouse_Visible, kOnMouse_Hidden };
+	enum DisplayMode { kCmdSwap = 1, kPinned = 2, kMinimized = 4, kOnMouse_Visible = 8, kOnMouse_Hidden = 16 };
 	DisplayMode display_mode_;
-	void toggle_mode();
+	void update_mode();
+	void rebuild_dropdown();
 
 	Vector2i last_mouse_pos_;
 	bool is_mouse_over_panel() const;
