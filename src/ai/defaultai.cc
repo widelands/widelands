@@ -4625,6 +4625,10 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 	if (considering_upgrade) {
 		const Widelands::BuildingDescr& bld = *tribe_->get_building_descr(enhancement);
 		BuildingObserver& en_bo = get_building_observer(bld.name().c_str());
+		Widelands::FCoords f = map.get_fcoords(site.site->get_position());
+		BuildableField bf(f);
+		update_buildable_field(bf);
+		
 		if (site.bo->is(BuildingAttribute::kUpgradeExtends)) {
 			if (gametime < site.built_time + Duration(10 * 60 * 1000)) {
 				considering_upgrade = false;
@@ -4635,8 +4639,13 @@ bool DefaultAI::check_productionsites(const Time& gametime) {
 				considering_upgrade = false;
 			}
 		}
+		// if upgraded building is part of basic economy we allow earlier upgrade
 		if (en_bo.cnt_built < static_cast<int32_t>(en_bo.basic_amount)) {
 			considering_upgrade = true;
+		}
+		// if supporters are required only upgrade if there are any nearby
+		if (en_bo.requires_supporters && bf.supporters_nearby.count(en_bo.name) < 1) {
+			considering_upgrade = false;
 		}
 	}
 
