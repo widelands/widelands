@@ -683,8 +683,8 @@ void Game::think() {
 			const Time new_time = get_gametime() + Duration(1);
 			if (g_verbose) {
 				log_info_time(get_gametime(),
-					          "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
-					          pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
+				              "Increasing a PlayerCommand's duetime from %u to %u (delta %u)",
+				              pc->duetime().get(), new_time.get(), (new_time - pc->duetime()).get());
 			}
 			pc->set_duetime(new_time);
 		}

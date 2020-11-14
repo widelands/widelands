@@ -82,7 +82,14 @@ struct NoteThreadSafeFunctionHandled {
 class MutexLock {
 public:
 	// Which mutex to lock. Each entry corresponds to a different mutex.
-	enum class ID : uint32_t { kLogicFrame, kObjects, kCommands, kMessages, kIBaseVisualizations, kI18N };
+	enum class ID : uint32_t {
+		kLogicFrame,
+		kObjects,
+		kCommands,
+		kMessages,
+		kIBaseVisualizations,
+		kI18N
+	};
 
 	static ID create_custom_mutex();
 	explicit MutexLock(ID);
