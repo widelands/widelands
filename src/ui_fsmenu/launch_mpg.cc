@@ -37,15 +37,24 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/helpwindow.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
+namespace FsMenu {
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow(UI::Panel* parent, GameController* gc, uint32_t w, uint32_t h)
-	   : /** TRANSLATORS: Dialog box title for selecting between map or saved game for new
-	        multiplayer game */
-	     Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
+	   : Window(parent,
+	            UI::WindowStyle::kFsMenu,
+	            "selection_window",
+	            0,
+	            0,
+	            w,
+	            h,
+	            /** TRANSLATORS: Dialog box title for selecting between map or saved game for new
+	               multiplayer game */
+	            _("Please select")),
 	     ctrl_(gc) {
 		center_to_parent();
 
@@ -56,20 +65,18 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button* btn =
 		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
 		                  _("Map"), _("Select a map"));
-		btn->sigclicked.connect(
-		   [this]() { pressedButton(FullscreenMenuBase::MenuTarget::kNormalGame); });
+		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kNormalGame); });
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
 		                     UI::ButtonStyle::kFsMenuSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
-		btn->sigclicked.connect(
-		   [this]() { pressedButton(FullscreenMenuBase::MenuTarget::kScenarioGame); });
+		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kScenarioGame); });
 
 		btn =
 		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
 		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
-		btn->sigclicked.connect([this]() { pressedButton(FullscreenMenuBase::MenuTarget::kBack); });
+		btn->sigclicked.connect([this]() { pressedButton(MenuTarget::kBack); });
 	}
 
 	void think() override {
@@ -78,34 +85,36 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		}
 	}
 
-	void pressedButton(FullscreenMenuBase::MenuTarget i) {
-		end_modal<FullscreenMenuBase::MenuTarget>(i);
+	void pressedButton(MenuTarget i) {
+		end_modal<MenuTarget>(i);
 	}
 
 private:
 	GameController* ctrl_;
 };
 
-FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const settings,
+FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(FullscreenMenuMain& fsmm,
+                                                 GameSettingsProvider* const settings,
                                                  GameController* const ctrl,
-                                                 ChatProvider& chat)
-   : FullscreenMenuLaunchGame(settings, ctrl),
+                                                 ChatProvider& chat,
+                                                 Widelands::EditorGameBase& egbase)
+   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
 
      help_button_(this,
                   "help",
                   0,
                   0,
-                  standard_element_height_,
-                  standard_element_height_,
+                  standard_height_,
+                  standard_height_,
                   UI::ButtonStyle::kFsMenuSecondary,
                   g_image_cache->get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
      help_(nullptr),
 
-     mpsg_(&individual_content_box, 0, 0, 0, 0, settings, standard_element_height_),
-     chat_(&individual_content_box, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu) {
+     mpsg_(&left_column_box_, 0, 0, 0, 0, settings, scale_factor * standard_height_),
+     chat_(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu),
+     egbase_(egbase) {
 
-	title_.set_text(_("Multiplayer Game Setup"));
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
 	if (settings_->can_change_map()) {
@@ -115,8 +124,9 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	}
 	ok_.set_enabled(settings_->can_launch());
 
-	individual_content_box.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
-	individual_content_box.add(&chat_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(&mpsg_, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add_space(kPadding);
+	left_column_box_.add(&chat_, UI::Box::Resizing::kExpandBoth);
 
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& s) {
 		if (s.action == NoteGameSettings::Action::kMap) {
@@ -135,19 +145,16 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	}
 }
 
-FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() = default;
-
 void FullscreenMenuLaunchMPG::layout() {
 	FullscreenMenuLaunchGame::layout();
-	// hardcode help button because it does not fit in any box, align it to the map button...
-	help_button_.set_size(standard_element_height_, standard_element_height_);
-	help_button_.set_pos(
-	   Vector2i(get_w() - 10 * padding_ - standard_element_height_, 10 * padding_));
+	// hardcode help button because it does not fit in any box, place it in top right corner
+	help_button_.set_size(standard_height_, standard_height_);
+	help_button_.set_pos(Vector2i(get_inner_w() - help_button_.get_w(), 0));
 
-	mpsg_.set_max_size(0, individual_content_box.get_h() / 2);
+	mpsg_.set_max_size(0, left_column_box_.get_h() / 2);
 
-	mpsg_.force_new_dimensions(scale_factor(), individual_content_box.get_w(),
-	                           individual_content_box.get_h() / 2, standard_element_height_);
+	mpsg_.force_new_dimensions(
+	   left_column_box_.get_w(), left_column_box_.get_h() / 2, scale_factor * standard_height_);
 
 	// set focus to chat input
 	chat_.focus_edit();
@@ -157,7 +164,7 @@ void FullscreenMenuLaunchMPG::layout() {
  * back-button has been pressed
  */
 void FullscreenMenuLaunchMPG::clicked_back() {
-	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
+	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
 void FullscreenMenuLaunchMPG::win_condition_selected() {
@@ -174,15 +181,14 @@ void FullscreenMenuLaunchMPG::win_condition_selected() {
 
 /// Opens a popup window to select a map or saved game
 bool FullscreenMenuLaunchMPG::clicked_select_map() {
-	MapOrSaveSelectionWindow selection_window(this, ctrl_, get_w() / 3, get_h() / 4);
-	auto result = selection_window.run<FullscreenMenuBase::MenuTarget>();
-	assert(result == FullscreenMenuBase::MenuTarget::kNormalGame ||
-	       result == FullscreenMenuBase::MenuTarget::kScenarioGame ||
-	       result == FullscreenMenuBase::MenuTarget::kBack);
-	if (result == FullscreenMenuBase::MenuTarget::kNormalGame) {
+	MapOrSaveSelectionWindow selection_window(&fsmm_, ctrl_, get_w() / 3, get_h() / 4);
+	auto result = selection_window.run<MenuTarget>();
+	assert(result == MenuTarget::kNormalGame || result == MenuTarget::kScenarioGame ||
+	       result == MenuTarget::kBack);
+	if (result == MenuTarget::kNormalGame) {
 		select_map();
 
-	} else if (result == FullscreenMenuBase::MenuTarget::kScenarioGame) {
+	} else if (result == MenuTarget::kScenarioGame) {
 		select_saved_game();
 	}
 	update_win_conditions();
@@ -197,16 +203,18 @@ void FullscreenMenuLaunchMPG::select_map() {
 		return;
 	}
 
-	FullscreenMenuMapSelect msm(settings_, ctrl_);
-	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
+	set_visible(false);
+	FullscreenMenuMapSelect msm(fsmm_, settings_, ctrl_, egbase_);
+	MenuTarget code = msm.run<MenuTarget>();
+	set_visible(true);
 
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	if (code == MenuTarget::kBack) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		settings_->set_scenario(false);
 		return;
 	}
 
-	settings_->set_scenario(code == FullscreenMenuBase::MenuTarget::kScenarioGame);
+	settings_->set_scenario(code == MenuTarget::kScenarioGame);
 
 	const MapData& mapdata = *msm.get_map();
 	settings_->set_map(
@@ -224,10 +232,10 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 	}
 
 	Widelands::Game game;  // The place all data is saved to.
-	FullscreenMenuLoadGame lsgm(game, settings_);
-	FullscreenMenuBase::MenuTarget code = lsgm.run<FullscreenMenuBase::MenuTarget>();
+	FullscreenMenuLoadGame lsgm(fsmm_, game, settings_);
+	MenuTarget code = lsgm.run<MenuTarget>();
 
-	if (code == FullscreenMenuBase::MenuTarget::kBack) {
+	if (code == MenuTarget::kBack) {
 		return;  // back was pressed
 	}
 
@@ -236,9 +244,9 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 
 	std::string filename = lsgm.filename();
 
-	if (g_fs->file_exists(filename.c_str())) {
+	if (g_fs->file_exists(filename)) {
 		// Read the needed data from file "elemental" of the used map.
-		std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(filename.c_str()));
+		std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(filename));
 		Profile prof;
 		prof.read("map/elemental", nullptr, *l_fs);
 		Section& s = prof.get_safe_section("global");
@@ -254,7 +262,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		if (g_fs->is_directory(filename)) {
 			// Send a warning
 			UI::WLMessageBox warning(
-			   this, _("Saved Game is Directory"),
+			   get_parent(), UI::WindowStyle::kFsMenu, _("Saved Game is Directory"),
 			   _("WARNING:\n"
 			     "The saved game you selected is a directory."
 			     " This happens if you set the option ‘nozip’ to "
@@ -286,7 +294,7 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 		if (win_condition_dropdown_.has_selection()) {
 			settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
 		}
-		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
+		end_modal<MenuTarget>(MenuTarget::kNormalGame);
 	}
 }
 
@@ -343,11 +351,9 @@ void FullscreenMenuLaunchMPG::refresh() {
 			// We do not validate the scripts for the client - it's only a label.
 			std::unique_ptr<LuaTable> t = lua_->run_script(settings_->get_win_condition_script());
 			t->do_not_warn_about_unaccessed_keys();
-			if (t) {
-				i18n::Textdomain td("win_conditions");
-				win_condition_dropdown_.set_label(_(t->get_string("name")));
-				win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
-			}
+			i18n::Textdomain td("win_conditions");
+			win_condition_dropdown_.set_label(_(t->get_string("name")));
+			win_condition_dropdown_.set_tooltip(_(t->get_string("description")));
 		} catch (LuaScriptNotExistingError&) {
 			win_condition_dropdown_.set_label(_("Error"));
 			win_condition_dropdown_.set_tooltip(
@@ -401,8 +407,7 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
  * load all playerdata from savegame and update UI accordingly
  */
 void FullscreenMenuLaunchMPG::load_previous_playerdata() {
-	std::unique_ptr<FileSystem> l_fs(
-	   g_fs->make_sub_file_system(settings_->settings().mapfilename.c_str()));
+	std::unique_ptr<FileSystem> l_fs(g_fs->make_sub_file_system(settings_->settings().mapfilename));
 	Profile prof;
 	prof.read("map/player_names", nullptr, *l_fs);
 
@@ -472,12 +477,9 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 
 /// Show help
 void FullscreenMenuLaunchMPG::help_clicked() {
-	if (help_) {
-		help_->set_visible(true);
-	} else {
-		help_.reset(
-		   new UI::FullscreenHelpWindow(this, lua_, "txts/help/multiplayer_help.lua",
-		                                /** TRANSLATORS: This is a heading for a help window */
-		                                _("Multiplayer Game Setup")));
-	}
+	UI::FullscreenHelpWindow help(get_parent(), lua_, "txts/help/multiplayer_help.lua",
+	                              /** TRANSLATORS: This is a heading for a help window */
+	                              _("Multiplayer Game Setup"));
+	help.run<UI::Panel::Returncodes>();
 }
+}  // namespace FsMenu

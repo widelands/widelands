@@ -48,7 +48,7 @@ template <typename DockT, typename CargosT> struct SchedulingStateT {
 	CargosT load_there;
 	Duration duration_from_previous_location;
 
-	SchedulingStateT(DockT pd, bool exp = false, Duration d = 0)
+	explicit SchedulingStateT(DockT pd, bool exp = false, const Duration& d = Duration(0))
 	   : dock(pd), expedition(exp), duration_from_previous_location(d) {
 	}
 	SchedulingStateT(const SchedulingStateT&) = default;
@@ -62,7 +62,7 @@ using ShipPlan = std::list<SchedulingState>;
 
 struct ShippingSchedule {
 public:
-	ShippingSchedule(ShipFleet&);
+	explicit ShippingSchedule(ShipFleet&);
 	~ShippingSchedule() {
 	}
 
@@ -108,10 +108,10 @@ private:
 	std::map<OPtr<Ship>, ShipPlan> plans_;
 
 	// Absolute gametime of last update
-	uint32_t last_updated_;
+	Time last_updated_;
 	// Absolute gametimes of last recalculation update
 	// (we only perform such updates once in a while because they are very costly)
-	std::map<OPtr<Ship>, uint32_t> last_actual_duration_recalculation_;
+	std::map<OPtr<Ship>, Time> last_actual_duration_recalculation_;
 
 	void start_expedition(Game&, Ship&, PortDock&);
 	bool do_remove_port_from_plan(Game&, PortDock*, Ship&, ShipPlan&);
@@ -120,7 +120,7 @@ private:
 	uint32_t get_free_capacity_at(Game&, Ship&, PortDock&);
 	void load_on_ship(Game&, PrioritisedPortPair&, std::list<PrioritisedPortPair>&);
 	void get_free_capacity_between(Game&,
-	                               Ship&,
+	                               const Ship&,
 	                               ShipPlan&,
 	                               PortDock& start,
 	                               PortDock& end,
@@ -134,7 +134,7 @@ private:
 
 	struct ScheduleLoader {
 		std::map<Serial, std::list<SchedulingStateT<Serial, CargoListLoader>>> plan;
-		std::map<Serial, uint32_t> recalc;
+		std::map<Serial, Time> recalc;
 	};
 	std::unique_ptr<ScheduleLoader> loader_;
 

@@ -48,7 +48,7 @@ class EditorGameBase;
 class MapLoader;
 struct MapGenerator;
 struct PathfieldManager;
-class World;
+class Descriptions;
 
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
@@ -137,7 +137,7 @@ private:
 
 // Helper struct to save certain elemental data of a field without an actual instance of Field
 struct FieldData {
-	FieldData(const Field& f);
+	explicit FieldData(const Field& f);
 
 	std::string immovable;
 	std::list<std::string> bobs;
@@ -260,7 +260,7 @@ public:
 	/***
 	 * Ensures that resources match their adjacent terrains.
 	 */
-	void ensure_resource_consistency(const World&);
+	void ensure_resource_consistency(const Descriptions& descriptions);
 
 	/***
 	 * Recalculates all default resources.
@@ -269,7 +269,7 @@ public:
 	 * the editor. Since there, default resources
 	 * are not shown.
 	 */
-	void recalc_default_resources(const World&);
+	void recalc_default_resources(const Descriptions& descriptions);
 
 	void set_nrplayers(PlayerNumber);
 
@@ -320,6 +320,10 @@ public:
 	}
 	const std::string& get_background_theme() const {
 		return background_theme_;
+	}
+
+	const MapVersion& version() const {
+		return map_version_;
 	}
 
 	using Tags = std::set<std::string>;
@@ -536,7 +540,7 @@ public:
 	 *
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
-	bool is_resource_valid(const Widelands::World&,
+	bool is_resource_valid(const Widelands::Descriptions& descriptions,
 	                       const Widelands::FCoords& c,
 	                       DescriptionIndex curres) const;
 

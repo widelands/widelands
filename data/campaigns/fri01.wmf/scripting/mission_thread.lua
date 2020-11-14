@@ -153,7 +153,7 @@ function stormflood()
       end
       for idx,fields in ipairs(place_ashes) do
          for idy,f in ipairs(fields) do
-            map:place_immovable("ashes", f, "tribes")
+            map:place_immovable("ashes", f)
          end
       end
       x = next_field.x
@@ -208,6 +208,8 @@ function mission_thread()
       "frisians_foresters_house",
       "frisians_reed_farm"}
    local o = add_campaign_objective(obj_build_wood_economy)
+   p1:run_training_wheel("objectives", false)
+
    while not check_for_buildings(p1, {
       frisians_woodcutters_house = 1,
       frisians_foresters_house = 2,

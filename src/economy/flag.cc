@@ -76,7 +76,7 @@ Flag::~Flag() {
 		log_warn("Flag: ouch! building left\n");
 	}
 
-	if (flag_jobs_.size()) {
+	if (!flag_jobs_.empty()) {
 		log_warn("Flag: ouch! flagjobs left\n");
 	}
 
@@ -463,7 +463,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
 
 		Request* req = trans->get_request();
 		if (req) {
-			pi.priority = pi.priority + req->get_transfer_priority();
+			pi.priority = pi.priority + req->get_normalized_transfer_priority();
 		}
 	}
 
@@ -497,12 +497,6 @@ bool Flag::has_pending_ware(Game&, Flag& dest) {
 }
 
 /**
- * Clamp the maximal value of \ref PendingWare::priority.
- * After reaching this value, the pure FIFO approach is applied
- */
-#define MAX_TRANSFER_PRIORITY 16
-
-/**
  * Called by carrier code to indicate that the carrier is moving to pick up an
  * ware. Ware with highest transfer priority is chosen.
  * \return true if an ware is actually waiting for the carrier.
@@ -525,7 +519,7 @@ bool Flag::ack_pickup(Game&, Flag& destflag) {
 			i_pri = i;
 
 			// Increase ware priority, it matters only if the ware has to wait.
-			if (wares_[i].priority < MAX_TRANSFER_PRIORITY) {
+			if (wares_[i].priority < kMaxTransferPriority) {
 				wares_[i].priority++;
 			}
 		}
@@ -545,7 +539,7 @@ bool Flag::ack_pickup(Game&, Flag& destflag) {
  * or kNotFoundAppropriate (carrier will leave empty-handed)
  */
 bool Flag::cancel_pickup(Game& game, Flag& destflag) {
-	int32_t lowest_prio = MAX_TRANSFER_PRIORITY + 1;
+	int32_t lowest_prio = kMaxTransferPriority + 1;
 	int32_t i_pri = -1;
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {
@@ -848,12 +842,16 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		assert(!building_);
 	}
 
-	for (uint8_t i = 0; i < (sizeof(roads_) / sizeof(roads_[0])); ++i) {
-		if (roads_[i]) {
-			roads_[i]->remove(egbase);  //  immediate death
-			assert(!roads_[i]);
+	for (RoadBase* rb : roads_) {
+		if (rb) {
+			rb->remove(egbase);  //  immediate death
 		}
 	}
+#ifndef NDEBUG
+	for (RoadBase* rb : roads_) {
+		assert(!rb);
+	}
+#endif
 
 	if (Economy* e = get_economy(wwWARE)) {
 		e->remove_flag(*this);
@@ -867,7 +865,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
 	PlayerImmovable::cleanup(egbase);
 }
 
-void Flag::draw(uint32_t gametime,
+void Flag::draw(const Time& gametime,
                 const InfoToDraw,
                 const Vector2f& field_on_dst,
                 const Coords& coords,
@@ -880,7 +878,7 @@ void Flag::draw(uint32_t gametime,
 
 	const RGBColor& player_color = owner().get_playercolor();
 	dst->blit_animation(field_on_dst, coords, scale, owner().tribe().flag_animation(),
-	                    gametime - animstart_, &player_color);
+	                    Time((gametime - animstart_).get()), &player_color);
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
 		Vector2f warepos = field_on_dst;
@@ -891,7 +889,7 @@ void Flag::draw(uint32_t gametime,
 			warepos.y -= (6.f + (i - 8.f) * 3.f) * scale;
 		}
 		dst->blit_animation(warepos, Widelands::Coords::null(), scale,
-		                    wares_[i].ware->descr().get_animation("idle", wares_[i].ware), 0,
+		                    wares_[i].ware->descr().get_animation("idle", wares_[i].ware), Time(0),
 		                    &player_color);
 	}
 }

@@ -20,6 +20,7 @@
 #include "ui_fsmenu/mapdetailsbox.h"
 
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "map_io/map_loader.h"
 
 // Helper functions for localizable assembly of info strings
@@ -125,35 +126,36 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 // MapDetailsBox implementation
 
-MapDetailsBox::MapDetailsBox(Panel* parent,
-                             uint32_t,
-                             uint32_t standard_element_height,
-                             uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+MapDetailsBox::MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding)
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     padding_(padding),
+     preconfigured_(preconfigured),
      title_(this,
+            UI::PanelStyle::kFsMenu,
+            UI::FontStyle::kFsGameSetupHeadings,
             0,
             0,
             0,
             0,
             _("Map"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)),
-     title_box_(this, 0, 0, UI::Box::Horizontal),
-     content_box_(this, 0, 0, UI::Box::Vertical),
+            UI::Align::kCenter),
+     title_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     content_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      map_name_(&title_box_,
+               UI::PanelStyle::kFsMenu,
+               UI::FontStyle::kFsMenuLabel,
                0,
                0,
                0,
                0,
                _("No map selected"),
-               UI::Align::kLeft,
-               g_style_manager->font_style(UI::FontStyle::kLabel)),
+               UI::Align::kLeft),
      select_map_(&title_box_,
                  "change_map_or_save",
                  0,
                  0,
-                 standard_element_height,
-                 standard_element_height,
+                 0,
+                 0,
                  UI::ButtonStyle::kFsMenuSecondary,
                  g_image_cache->get("images/wui/menus/toggle_minimap.png"),
                  _("Change map or saved game")),
@@ -166,7 +168,8 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                       "",
                       UI::Align::kLeft,
                       UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     suggested_teams_box_(&content_box_, 0, 0, UI::Box::Vertical, 4, 0, 0, 0) {
+     suggested_teams_box_(
+        &content_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, padding, 0, 0, 0) {
 	content_box_.set_scrolling(true);
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
@@ -180,14 +183,12 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 	content_box_.add_space(3 * padding);
 	content_box_.add(&suggested_teams_box_, UI::Box::Resizing::kExpandBoth);
 }
-MapDetailsBox::~MapDetailsBox() {
-}
 
 void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 	const GameSettings& game_settings = settings->settings();
 
-	select_map_.set_visible(settings->can_change_map());
-	select_map_.set_enabled(settings->can_change_map());
+	select_map_.set_visible(settings->can_change_map() && !preconfigured_);
+	select_map_.set_enabled(settings->can_change_map() && !preconfigured_);
 
 	show_map_description_savegame(game_settings);
 	show_map_name(game_settings);
@@ -198,12 +199,10 @@ void MapDetailsBox::show_map_description_savegame(const GameSettings& game_setti
 }
 
 void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {
-	const GameSettings& game_settings = settings->settings();
+	select_map_.set_visible(settings->can_change_map() && !preconfigured_);
+	select_map_.set_enabled(settings->can_change_map() && !preconfigured_);
 
-	select_map_.set_visible(settings->can_change_map());
-	select_map_.set_enabled(settings->can_change_map());
-
-	show_map_name(game_settings);
+	map_name_.set_text(map.get_name());
 	show_map_description(map, settings);
 	suggested_teams_box_.show(map.get_suggested_teams());
 }
@@ -212,10 +211,11 @@ void MapDetailsBox::show_map_name(const GameSettings& game_settings) {
 	// Translate the map's name
 	const char* nomap = _("(no map)");
 	i18n::Textdomain td("maps");
-	map_name_.set_text(game_settings.mapname.size() != 0 ? _(game_settings.mapname) : nomap);
+	map_name_.set_text(!game_settings.mapname.empty() ? _(game_settings.mapname) : nomap);
 }
 
-void MapDetailsBox::show_map_description(Widelands::Map& map, GameSettingsProvider* settings) {
+void MapDetailsBox::show_map_description(const Widelands::Map& map,
+                                         GameSettingsProvider* settings) {
 	set_map_description_text(assemble_infotext_for_map(map, settings->settings()));
 }
 
@@ -223,18 +223,15 @@ void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
 	select_map_.sigclicked.connect(action);
 }
 
-void MapDetailsBox::force_new_dimensions(float scale,
-                                         uint32_t standard_element_width,
-                                         uint32_t standard_element_height) {
-	title_.set_font_scale(scale);
-	map_name_.set_font_scale(scale);
-	map_name_.set_fixed_width(standard_element_width - standard_element_height);
-	select_map_.set_desired_size(standard_element_height, standard_element_height);
-	content_box_.set_max_size(standard_element_width, 6 * standard_element_height);
+void MapDetailsBox::force_new_dimensions(uint32_t width, uint32_t height) {
+	map_name_.set_fixed_width(width - height);
+	select_map_.set_desired_size(height, height);
+	content_box_.set_max_size(
+	   width, get_h() - title_.get_h() - title_box_.get_h() - 2 * 3 * padding_);
 }
 
 void MapDetailsBox::set_map_description_text(const std::string& text) {
-	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kLabel));
+	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kFsMenuLabel));
 	map_description_.set_text(text);
 }
 void MapDetailsBox::show_warning(const std::string& text) {

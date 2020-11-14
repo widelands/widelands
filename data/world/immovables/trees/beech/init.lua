@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "beech_summer_sapling",
    descname = _ "Beech (Sapling)",
    size = "small",
@@ -29,15 +29,16 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 6, 13 }
+         hotspot = { 5, 12 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "beech_summer_pole",
    descname = _ "Beech (Pole)",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -54,12 +55,12 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 13, 29 }
+         hotspot = { 12, 28 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "beech_summer_mature",
    descname = _ "Beech (Mature)",
    size = "small",
@@ -79,17 +80,18 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 19, 49 }
+         hotspot = { 18, 48 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "beech_summer_old",
    descname = _ "Beech (Old)",
    species = _ "Beech",
    icon = dirname .. "menu.png",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -109,10 +111,10 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 25, 61 },
+         hotspot = { 24, 60 },
          sound_effect = {
             path = "sound/animals/bird6",
-            priority = 10
+            priority = "10%"
          },
       }
    },

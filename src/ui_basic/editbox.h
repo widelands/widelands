@@ -81,6 +81,9 @@ struct EditBox : public Panel {
 		return password_;
 	}
 
+	void set_caret_pos(size_t pos);
+	size_t caret_pos() const;
+
 private:
 	std::unique_ptr<EditBoxImpl> m_;
 

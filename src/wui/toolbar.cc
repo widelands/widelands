@@ -22,8 +22,8 @@
 #include "wui/info_panel.h"
 
 MainToolbar::MainToolbar(InfoPanel& parent)
-   : UI::Panel(&parent, 0, 0, parent.get_inner_w(), parent.get_inner_h()),
-     box(this, 0, 0, UI::Box::Horizontal),
+   : UI::Panel(&parent, UI::PanelStyle::kWui, 0, 0, parent.get_inner_w(), parent.get_inner_h()),
+     box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
      on_top(false),
      draw_background(false),
      repeat_(0) {

@@ -167,7 +167,7 @@ public:
 	 * This interval is merely a hint for the Supply/Request balancing code.
 	 * @param i The interval in ms.
 	 */
-	void set_consume_interval(uint32_t i);
+	void set_consume_interval(const Duration&);
 
 	/**
 	 * Returns the player owning the building containing this queue.
@@ -177,16 +177,17 @@ public:
 		return owner_.owner();
 	}
 
+	bool matches(const Request& r) const {
+		return request_.get() == &r;
+	}
+
 	/**
 	 * Overwrites the state of this class with the read data.
 	 * @param fr A stream to read the data from.
 	 * @param game The game this queue will be part of.
 	 * @param mol The game/map loader that handles the lading. Required to pass to Request::read().
 	 */
-	void read(FileRead& f,
-	          Game& g,
-	          MapObjectLoader& mol,
-	          const TribesLegacyLookupTable& tribes_lookup_table);
+	void read(FileRead& f, Game& g, MapObjectLoader& mol);
 
 	/**
 	 * Writes the state of this class.
@@ -270,7 +271,7 @@ protected:
 	const WareWorker type_;
 
 	/// Time in ms between consumption at full speed.
-	uint32_t consume_interval_;
+	Duration consume_interval_;
 
 	/// The currently pending request.
 	std::unique_ptr<Request> request_;

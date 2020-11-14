@@ -98,13 +98,18 @@ public:
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
-	~Button() override;
+	~Button() override = default;
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string&);
 	const std::string& get_title() const {
 		return title_;
 	}
+
+	// Expand to fit text
+	// If h == 0, automatically resize for font height and give it a margin.
+	// If w == 0 too, automatically resize for text width too.
+	void expand(int w, int h);
 
 	bool enabled() const {
 		return enabled_;
@@ -158,12 +163,14 @@ protected:
 	bool repeating_;
 	const UI::Button::ImageMode image_mode_;
 
+	std::vector<Recti> focus_overlay_rects() override;
+
 	uint32_t time_nextact_;
 
 	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
-	const UI::ButtonStyleInfo* style_;  // Background color and texture. Not owned.
+	const UI::ButtonStyleInfo* button_style_;  // Background color and texture. Not owned.
 };
 
 }  // namespace UI

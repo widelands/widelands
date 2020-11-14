@@ -179,6 +179,12 @@ StyleManager::StyleManager() {
 	add_table_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
 	check_completeness("tables", table_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
+	// Windows
+	element_table = table->get_table("windows");
+	add_window_style(UI::WindowStyle::kFsMenu, *element_table->get_table("fsmenu"));
+	add_window_style(UI::WindowStyle::kWui, *element_table->get_table("wui"));
+	check_completeness("windows", window_styles_.size(), static_cast<size_t>(UI::WindowStyle::kWui));
+
 	// Statistics plot
 	set_statistics_plot_style(*table->get_table("statistics_plot"));
 
@@ -195,8 +201,6 @@ StyleManager::StyleManager() {
 		throw wexception("Font size too small for minimum_font_size, must be at least 1!");
 	}
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
-	window_border_focused_ = read_rgba_color(*table->get_table("window_border_focused"));
-	window_border_unfocused_ = read_rgba_color(*table->get_table("window_border_unfocused"));
 	focused_color_ = read_rgba_color(*table->get_table("background_focused"));
 	semi_focused_color_ = read_rgba_color(*table->get_table("background_semi_focused"));
 	focus_border_thickness_ = table->get_int("focus_border_thickness");
@@ -224,13 +228,17 @@ StyleManager::StyleManager() {
 	add_font_style(
 	   UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
 	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
-	add_font_style(UI::FontStyle::kFsMenuTitle, *element_table, "fsmenu_title");
+	add_font_style(UI::FontStyle::kGameSummaryTitle, *element_table, "game_summary_title");
 	add_font_style(UI::FontStyle::kFsMenuTranslationInfo, *element_table, "fsmenu_translation_info");
 	add_font_style(UI::FontStyle::kDisabled, *element_table, "disabled");
-	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
-	add_font_style(UI::FontStyle::kTooltipHeader, *element_table, "tooltip_header");
-	add_font_style(UI::FontStyle::kTooltipHotkey, *element_table, "tooltip_hotkey");
-	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
+	add_font_style(UI::FontStyle::kFsMenuLabel, *element_table, "label_fs");
+	add_font_style(UI::FontStyle::kWuiLabel, *element_table, "label_wui");
+	add_font_style(UI::FontStyle::kWuiTooltipHeader, *element_table, "tooltip_header_wui");
+	add_font_style(UI::FontStyle::kWuiTooltipHotkey, *element_table, "tooltip_hotkey_wui");
+	add_font_style(UI::FontStyle::kWuiTooltip, *element_table, "tooltip_wui");
+	add_font_style(UI::FontStyle::kFsTooltipHeader, *element_table, "tooltip_header_fs");
+	add_font_style(UI::FontStyle::kFsTooltipHotkey, *element_table, "tooltip_hotkey_fs");
+	add_font_style(UI::FontStyle::kFsTooltip, *element_table, "tooltip_fs");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(
 	   UI::FontStyle::kWuiAttackBoxSliderLabel, *element_table, "wui_attack_box_slider_label");
@@ -241,6 +249,7 @@ StyleManager::StyleManager() {
 	   UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
 	add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
 	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
+	add_font_style(UI::FontStyle::kFsMenuWindowTitle, *element_table, "fs_window_title");
 	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
 	check_completeness(
 	   "fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));
@@ -298,6 +307,11 @@ const UI::TableStyleInfo& StyleManager::table_style(UI::PanelStyle style) const 
 const UI::WareInfoStyleInfo& StyleManager::ware_info_style(UI::WareInfoStyle style) const {
 	assert(ware_info_styles_.count(style) == 1);
 	return *ware_info_styles_.at(style);
+}
+
+const UI::WindowStyleInfo& StyleManager::window_style(UI::WindowStyle style) const {
+	assert(window_styles_.count(style) == 1);
+	return *window_styles_.at(style);
 }
 
 const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
@@ -394,6 +408,20 @@ void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& 
 	             read_rgb_color(*colors_table->get_table("icon_frame")),
 	             read_rgb_color(*colors_table->get_table("icon_background")),
 	             read_rgb_color(*colors_table->get_table("info_background"))))));
+}
+
+void StyleManager::add_window_style(UI::WindowStyle style, const LuaTable& table) {
+	window_styles_.insert(std::make_pair(
+	   style, std::unique_ptr<const UI::WindowStyleInfo>(new UI::WindowStyleInfo(
+	             read_rgba_color(*table.get_table("window_border_focused")),
+	             read_rgba_color(*table.get_table("window_border_unfocused")),
+	             g_image_cache->get(table.get_string("border_top")),
+	             g_image_cache->get(table.get_string("border_bottom")),
+	             g_image_cache->get(table.get_string("border_right")),
+	             g_image_cache->get(table.get_string("border_left")),
+	             g_image_cache->get(table.get_string("background")), table.get_string("button_pin"),
+	             table.get_string("button_unpin"), table.get_string("button_minimize"),
+	             table.get_string("button_unminimize"), table.get_string("button_close")))));
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {

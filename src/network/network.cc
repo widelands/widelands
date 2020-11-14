@@ -83,7 +83,7 @@ bool NetAddress::is_valid() const {
 	return port != 0 && !ip.is_unspecified();
 }
 
-CmdNetCheckSync::CmdNetCheckSync(uint32_t const dt, SyncReportCallback cb)
+CmdNetCheckSync::CmdNetCheckSync(const Time& dt, SyncReportCallback cb)
    : Command(dt), callback_(std::move(cb)) {
 }
 
@@ -92,10 +92,10 @@ void CmdNetCheckSync::execute(Widelands::Game&) {
 }
 
 NetworkTime::NetworkTime() {
-	reset(0);
+	reset(Time(0));
 }
 
-void NetworkTime::reset(int32_t const ntime) {
+void NetworkTime::reset(const Time& ntime) {
 	networktime_ = time_ = ntime;
 	lastframe_ = SDL_GetTicks();
 	latency_ = 0;
@@ -121,7 +121,7 @@ void NetworkTime::think(uint32_t const speed) {
 
 	delta = (delta * speed) / 1000;
 
-	int32_t const behind = networktime_ - time_;
+	int32_t const behind = networktime_.get() - time_.get();
 
 	// Play catch up
 	uint32_t speedup = 0;
@@ -143,23 +143,23 @@ void NetworkTime::think(uint32_t const speed) {
 		delta = behind;
 	}
 
-	time_ += delta;
+	time_.increment(Duration(delta));
 }
 
-int32_t NetworkTime::time() const {
+const Time& NetworkTime::time() const {
 	return time_;
 }
 
-int32_t NetworkTime::networktime() const {
+const Time& NetworkTime::networktime() const {
 	return networktime_;
 }
 
-void NetworkTime::receive(int32_t const ntime) {
+void NetworkTime::receive(const Time& ntime) {
 	if (ntime < networktime_) {
 		throw wexception("NetworkTime: Time appears to be running backwards.");
 	}
 
-	uint32_t const behind = networktime_ - time_;
+	uint32_t const behind = networktime_.get() - time_.get();
 
 	latency_ = behind < latency_ ? behind : ((latency_ * 7) + behind) / 8;
 
@@ -174,9 +174,6 @@ void NetworkTime::receive(int32_t const ntime) {
 }
 
 /*** class SendPacket ***/
-
-SendPacket::SendPacket() {
-}
 
 void SendPacket::data(const void* const packet_data, const size_t size) {
 	if (buffer.empty()) {
@@ -203,6 +200,7 @@ uint8_t* SendPacket::get_data() const {
 
 	uint32_t const length = buffer.size();
 
+	assert(length >= 2);
 	assert(length < 0x10000);
 
 	// update packet length

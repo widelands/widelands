@@ -27,12 +27,13 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
+class ParticipantList;
+
 // A chat message as received in game.
 struct ChatMessage {
 	CAN_BE_SENT_AS_NOTE(NoteId::ChatMessage)
 
-	explicit ChatMessage(const std::string& message) : msg(message) {
-	}
+	explicit ChatMessage(const std::string& message);
 
 	// The (real-)time at which the message was received.
 	time_t time = std::time(nullptr);
@@ -62,7 +63,7 @@ struct ChatMessage {
 // Base classes must broadcast a ChatMessage as notification when a
 // new message is received.
 struct ChatProvider {
-	virtual ~ChatProvider();
+	virtual ~ChatProvider() = default;
 
 	// Send the given chat message. The message may or may not
 	// appear in subsequent calls to \ref get_messages.
@@ -85,6 +86,12 @@ struct ChatProvider {
 	virtual bool has_been_set() const {
 		return false;
 	}
+
+	// Access to user list to chat with. Might be nullptr
+	ParticipantList* participants_ = nullptr;
+
+	// The last recipient a message has been send to
+	std::string last_recipient_;
 };
 
 #endif  // end of include guard:

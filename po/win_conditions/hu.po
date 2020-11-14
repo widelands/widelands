@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
 "PO-Revision-Date: 2020-07-23 07:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
@@ -31,15 +31,15 @@ msgid ""
 "most of them will win the game."
 msgstr "Keress ősi ereklyéket. Ha mind megtalálásra kerül, akkor az a csapat nyer, amelyik a legtöbbet birtokolja."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:18
+#: ../../data/scripting/win_conditions/artifacts.lua:21
 msgid "Artifacts owned"
 msgstr "Birtokolt ereklyék"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:73
+#: ../../data/scripting/win_conditions/artifacts.lua:76
 msgid "No Artifacts"
 msgstr "Nincsenek ereklyék"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:73
+#: ../../data/scripting/win_conditions/artifacts.lua:76
 #, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
@@ -49,38 +49,38 @@ msgstr "Nincsenek ereklyék ezen a térképen. Ennek nem szabadna megtörténnie
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
-#: ../../data/scripting/win_conditions/artifacts.lua:80
+#: ../../data/scripting/win_conditions/artifacts.lua:83
 msgid "Artifact Found"
 msgstr "Ereklye megtalálva"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:81
+#: ../../data/scripting/win_conditions/artifacts.lua:84
 msgid "Your team found a new artifact."
 msgstr "A csapatod megtalált egy új ereklyét."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:85
+#: ../../data/scripting/win_conditions/artifacts.lua:88
 msgid "Artifact Lost"
 msgstr "Ereklye elveszett"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:86
+#: ../../data/scripting/win_conditions/artifacts.lua:89
 msgid "One of your team’s artifacts was stolen by an enemy."
 msgstr "A csapatod egyik ereklyéjét ellopta egy ellenség."
 
 #. TRANSLATORS: Keep this as short as possible.
-#: ../../data/scripting/win_conditions/artifacts.lua:90
+#: ../../data/scripting/win_conditions/artifacts.lua:93
 msgid "Artifact Conquered"
 msgstr "Ereklye megszerezve"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:91
+#: ../../data/scripting/win_conditions/artifacts.lua:94
 msgid "Your team stole an artifact from an enemy."
 msgstr "A csapatod ellopott egy ereklyét egy ellenségtől."
 
-#: ../../data/scripting/win_conditions/artifacts.lua:174
+#: ../../data/scripting/win_conditions/artifacts.lua:177
 msgid "Overview:"
 msgstr "Áttekintés:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:177
-#: ../../data/scripting/win_conditions/artifacts.lua:190
+#: ../../data/scripting/win_conditions/artifacts.lua:180
+#: ../../data/scripting/win_conditions/artifacts.lua:193
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -88,13 +88,13 @@ msgstr[0] "%i ereklyét"
 msgstr[1] "%i ereklyét"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:179
+#: ../../data/scripting/win_conditions/artifacts.lua:182
 msgid "%1$s owns %2$s."
 msgstr "%1$s %2$s birtokol."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:192
+#: ../../data/scripting/win_conditions/artifacts.lua:195
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "A(z) %1$i. csapat (%2$s) %3$s birtokol."
 
@@ -108,33 +108,33 @@ msgid ""
 "highest number of wares at the end of 4 hours wins the game."
 msgstr "Pontokat kapsz raktáraid értékes áruiért. A győztes az a játékos, akinek 4 óra elteltével a legtöbb pontja van."
 
-#: ../../data/scripting/win_conditions/collectors.lua:23
+#: ../../data/scripting/win_conditions/collectors.lua:26
 msgid "Points"
 msgstr "Pontok"
 
-#: ../../data/scripting/win_conditions/collectors.lua:131
+#: ../../data/scripting/win_conditions/collectors.lua:154
 #, lua-format
 msgid "Status for %s"
 msgstr "%s állása"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:144
+#: ../../data/scripting/win_conditions/collectors.lua:167
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:148
+#: ../../data/scripting/win_conditions/collectors.lua:171
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Összesen: %i pont"
 msgstr[1] "Összesen: %i pont"
 
-#: ../../data/scripting/win_conditions/collectors.lua:170
+#: ../../data/scripting/win_conditions/collectors.lua:193
 #, lua-format
 msgid "Status for Team %d"
 msgstr "%d csapat állása"
 
-#: ../../data/scripting/win_conditions/collectors.lua:172
+#: ../../data/scripting/win_conditions/collectors.lua:195
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -180,27 +180,27 @@ msgstr "%1$s birtokolta a szárazföld %2$3.0f%%-át (%3$i / %4$i)."
 
 #. TRANSLATORS: subtext of the territorial statistics hook. Keep it short and
 #. consistent with the translation of the Win condition.
-#: ../../data/scripting/win_conditions/territorial_functions.lua:60
+#: ../../data/scripting/win_conditions/territorial_functions.lua:21
 msgid "Territory percentage"
 msgstr "Terület százaléka"
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:211
+#: ../../data/scripting/win_conditions/territorial_functions.lua:220
 msgid "You own more than half of the map’s area."
 msgstr "Te uralod a játékterület több mint felét."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:212
+#: ../../data/scripting/win_conditions/territorial_functions.lua:221
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Még %i percig tartsad meg a győzelemhez."
 msgstr[1] "Még %i percig tartsad meg a győzelemhez."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:239
+#: ../../data/scripting/win_conditions/territorial_functions.lua:248
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr "%s több, mint a térkép felét birtokolja."
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:240
+#: ../../data/scripting/win_conditions/territorial_functions.lua:249
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
@@ -320,13 +320,13 @@ msgid ""
 "playing. The one with the most trees at that point will win the game."
 msgstr "Erdei manóként szereted a nagy erdőket, így az a dolgod, hogy felségterületeden több fa legyen, mint bármelyik másik játékosén. A játszma 4 óráig tart. Akinek akkor a legtöbb fája van, az nyeri a játékot."
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:22
+#: ../../data/scripting/win_conditions/wood_gnome.lua:25
 msgid "Trees owned"
 msgstr "Birtokolt fák"
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:60
-#: ../../data/scripting/win_conditions/wood_gnome.lua:80
-#: ../../data/scripting/win_conditions/wood_gnome.lua:85
+#: ../../data/scripting/win_conditions/wood_gnome.lua:63
+#: ../../data/scripting/win_conditions/wood_gnome.lua:83
+#: ../../data/scripting/win_conditions/wood_gnome.lua:88
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -334,16 +334,16 @@ msgstr[0] "%i fa"
 msgstr[1] "%i fa"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:63
+#: ../../data/scripting/win_conditions/wood_gnome.lua:66
 msgid "%1$s has %2$s at the moment."
 msgstr "%1$s pillanatnyi eredménye: %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:82
+#: ../../data/scripting/win_conditions/wood_gnome.lua:85
 msgid "%1$s had %2$s."
 msgstr "%1$s eredménye: %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:88
+#: ../../data/scripting/win_conditions/wood_gnome.lua:91
 msgid "The winner is %1$s with %2$s."
 msgstr "A győztes %1$s, eredménye: %2$s."

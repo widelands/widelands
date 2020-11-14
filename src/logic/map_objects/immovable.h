@@ -31,9 +31,6 @@
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
-class TribesLegacyLookupTable;
-class WorldLegacyLookupTable;
-
 namespace Widelands {
 
 class Building;
@@ -43,7 +40,6 @@ class Immovable;
 class Map;
 class TerrainAffinity;
 class Worker;
-class World;
 struct Flag;
 struct ImmovableAction;
 struct ImmovableActionData;
@@ -102,7 +98,7 @@ struct BaseImmovable : public MapObject {
 	// fields a way to only draw themselves once. The 'point_on_dst' determines
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
-	virtual void draw(uint32_t gametime,
+	virtual void draw(const Time& gametime,
 	                  InfoToDraw info_to_draw,
 	                  const Vector2f& point_on_dst,
 	                  const Coords& coords,
@@ -126,16 +122,11 @@ class ImmovableDescr : public MapObjectDescr {
 public:
 	using Programs = std::map<std::string, ImmovableProgram*>;
 
-	/// Common constructor functions for tribes and world.
-	ImmovableDescr(const std::string& init_descname,
-	               const LuaTable&,
-	               MapObjectDescr::OwnerType type,
-	               const std::vector<std::string>& attribs);
-	/// Tribes immovable
+	/// Common constructor for tribes and world.
 	ImmovableDescr(const std::string& init_descname,
 	               const LuaTable&,
 	               const std::vector<std::string>& attribs,
-	               Tribes& tribes);
+	               Descriptions& descriptions);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {
@@ -146,10 +137,6 @@ public:
 	Immovable& create(EditorGameBase&,
 	                  const Coords&,
 	                  const Widelands::BuildingDescr* former_building_descr) const;
-
-	MapObjectDescr::OwnerType owner_type() const {
-		return owner_type_;
-	}
 
 	const Buildcost& buildcost() const {
 		return buildcost_;
@@ -177,7 +164,7 @@ public:
 	const std::set<std::string> collected_by() const {
 		return collected_by_;
 	}
-	void add_collected_by(const World&, const Tribes&, const std::string& prodsite);
+	void add_collected_by(const Descriptions& descriptions, const std::string& prodsite);
 
 	void add_became_from(const std::string& s) {
 		became_from_.insert(s);
@@ -186,9 +173,6 @@ public:
 protected:
 	int32_t size_;
 	Programs programs_;
-
-	/// Whether this ImmovableDescr belongs to a tribe or the world
-	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
 	/// \see ActConstruct
@@ -217,9 +201,9 @@ class Immovable : public BaseImmovable {
 public:
 	/// If this immovable was created by a building, 'former_building_descr' can be set in order to
 	/// display information about it.
-	Immovable(const ImmovableDescr&,
-	          const Widelands::BuildingDescr* former_building_descr = nullptr);
-	~Immovable() override;
+	explicit Immovable(const ImmovableDescr&,
+	                   const Widelands::BuildingDescr* former_building_descr = nullptr);
+	~Immovable() override = default;
 
 	Coords get_position() const {
 		return position_;
@@ -230,16 +214,18 @@ public:
 	bool get_passable() const override;
 	void start_animation(const EditorGameBase&, uint32_t anim);
 
-	void program_step(Game& game, uint32_t const delay = 1) {
-		if (delay)
+	void program_step(Game& game, const Duration& delay = Duration(1)) {
+		assert(delay.is_valid());
+		if (delay.get() > 0) {
 			program_step_ = schedule_act(game, delay);
+		}
 		increment_program_pointer();
 	}
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
@@ -260,7 +246,7 @@ public:
 		return nullptr;
 	}
 
-	void delay_growth(uint32_t ms) {
+	void delay_growth(Duration ms) {
 		growth_delay_ += ms;
 	}
 	bool apply_growth_delay(Game&);
@@ -278,7 +264,7 @@ protected:
 	Coords position_;
 
 	uint32_t anim_;
-	int32_t animstart_;
+	Time animstart_;
 
 	const ImmovableProgram* program_;
 	uint32_t program_ptr_;  ///< index of next instruction to execute
@@ -298,13 +284,13 @@ protected:
 public:
 	uint32_t anim_construction_total_;
 	uint32_t anim_construction_done_;
-	uint32_t program_step_;
+	Time program_step_;
 
 protected:
 #else
 	uint32_t anim_construction_total_;
 	uint32_t anim_construction_done_;
-	uint32_t program_step_;  ///< time of next step
+	Time program_step_;  ///< time of next step
 #endif
 
 	/**
@@ -315,7 +301,7 @@ protected:
 	std::unique_ptr<ImmovableActionData> action_data_;
 
 private:
-	uint32_t growth_delay_;
+	Duration growth_delay_;
 
 	// Load/save support
 protected:
@@ -332,11 +318,7 @@ public:
 	}
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
-	static MapObject::Loader* load(EditorGameBase&,
-	                               MapObjectLoader&,
-	                               FileRead&,
-	                               const WorldLegacyLookupTable& world_lookup_table,
-	                               const TribesLegacyLookupTable& tribes_lookup_table);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 private:
 	/// If this immovable was created by a building, this can be set in order to display information
@@ -344,7 +326,7 @@ private:
 	void set_former_building(const BuildingDescr& building);
 
 	void increment_program_pointer();
-	void draw_construction(uint32_t gametime,
+	void draw_construction(const Time& gametime,
 	                       InfoToDraw info_to_draw,
 	                       const Vector2f& point_on_dst,
 	                       const Widelands::Coords& coords,
@@ -421,7 +403,7 @@ private:
 	// load/save support
 protected:
 	struct Loader : BaseImmovable::Loader {
-		Loader();
+		Loader() = default;
 
 		void load(FileRead&);
 	};

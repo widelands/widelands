@@ -38,7 +38,7 @@ class GameController;
 namespace Widelands {
 
 /// How often are statistics to be sampled.
-constexpr uint32_t kStatisticsSampleTime = 30000;
+constexpr Duration kStatisticsSampleTime = Duration(30 * 1000);
 // See forester_cache_
 constexpr int16_t kInvalidForesterEntry = -1;
 
@@ -53,6 +53,7 @@ enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
+class TrainingWheels;
 enum class StockPolicy;
 
 enum {
@@ -196,6 +197,15 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+	bool acquire_training_wheel_lock(const std::string& objective);
+	void release_training_wheel_lock();
+	void mark_training_wheel_as_solved(const std::string& objective);
+	void skip_training_wheel(const std::string& objective);
+	void run_training_wheel(const std::string& objective, bool force);
+
+	bool training_wheels_wanted() const;
+	std::string active_training_wheel() const;
+
 	void postload() override;
 
 	void think() override;
@@ -208,7 +218,7 @@ public:
 	 * \return \c true if the game is completely loaded and running (or paused)
 	 * or \c false otherwise.
 	 */
-	bool is_loaded() {
+	bool is_loaded() const {
 		return state_ == gs_running;
 	}
 
@@ -264,20 +274,23 @@ public:
 	void send_player_evict_worker(Worker&);
 	void send_player_set_stock_policy(Building&, WareWorker, DescriptionIndex, StockPolicy);
 	void send_player_set_ware_priority(
-	   PlayerImmovable&, int32_t type, DescriptionIndex index, int32_t prio, bool is_cs = false);
+	   PlayerImmovable&, WareWorker, DescriptionIndex, const WarePriority&, bool is_cs = false);
 	void send_player_set_input_max_fill(
 	   PlayerImmovable&, DescriptionIndex index, WareWorker type, uint32_t, bool is_cs = false);
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
+	void send_player_enemyflagaction(const Flag&,
+	                                 PlayerNumber,
+	                                 const std::vector<Serial>&,
+	                                 bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
-	void send_player_ship_scouting_direction(Ship&, WalkingDir);
-	void send_player_ship_construct_port(Ship&, Coords);
-	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
-	void send_player_sink_ship(Ship&);
-	void send_player_cancel_expedition_ship(Ship&);
+	void send_player_ship_scouting_direction(const Ship&, WalkingDir);
+	void send_player_ship_construct_port(const Ship&, Coords);
+	void send_player_ship_explore_island(const Ship&, IslandExploreDirection);
+	void send_player_sink_ship(const Ship&);
+	void send_player_cancel_expedition_ship(const Ship&);
 	void send_player_propose_trade(const Trade& trade);
 	void send_player_toggle_mute(const Building&, bool all);
 
@@ -414,6 +427,10 @@ private:
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
+
+	std::unique_ptr<TrainingWheels> training_wheels_;
+	bool training_wheels_wanted_;
+
 	bool replay_;
 };
 

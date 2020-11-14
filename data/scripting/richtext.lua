@@ -221,6 +221,16 @@ end
 
 
 -- RST
+-- .. function:: fs_color(text)
+--
+--    Returns the given text wrapped in a font tag for the
+--    default color that is used for texts in the main menu.
+function fs_color(text)
+   return "<font color=FFDC00>" .. text .. "</font>"
+end
+
+
+-- RST
 -- .. function:: open_p([attributes = nil])
 --
 --    Returns a paragraph open tag and default font size. Options

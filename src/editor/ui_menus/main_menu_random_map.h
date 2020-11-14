@@ -24,16 +24,19 @@
 #include "editor/ui_menus/map_size_box.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
+class EditorGameBase;
 struct UniqueRandomMapInfo;
-}
+}  // namespace Widelands
 
 class EditorInteractive;
+struct SinglePlayerGameSettingsProvider;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
 }
@@ -44,7 +47,15 @@ template <typename T, typename ID> struct IDButton;
  * things like size, world ....
  */
 struct MainMenuNewRandomMap : public UI::UniqueWindow {
-	explicit MainMenuNewRandomMap(EditorInteractive&, UI::UniqueWindow::Registry&);
+	explicit MainMenuNewRandomMap(UI::Panel& parent,
+	                              UI::WindowStyle,
+	                              UI::UniqueWindow::Registry&,
+	                              uint32_t map_w,
+	                              uint32_t map_h);
+
+	bool do_generate_map(Widelands::EditorGameBase&,
+	                     EditorInteractive*,
+	                     SinglePlayerGameSettingsProvider*);
 
 	enum class ButtonId : uint8_t {
 		kNone,
@@ -52,16 +63,14 @@ struct MainMenuNewRandomMap : public UI::UniqueWindow {
 		kWater,
 		kLand,
 		kWasteland,
-		kResources,
-		kWorld,
 		kIslandMode,
 		kPlayers
 	};
 
+	bool handle_key(bool down, SDL_Keysym) override;
+
 private:
 	void button_clicked(ButtonId);
-	void clicked_create_map();
-	void clicked_cancel();
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
 
@@ -74,6 +83,8 @@ private:
 	void normalize_landmass(MainMenuNewRandomMap::ButtonId clicked_button);
 
 	void set_map_info(Widelands::UniqueRandomMapInfo& map_info) const;
+
+	UI::FontStyle label_style_;
 
 	// UI elements
 	int32_t margin_;
@@ -91,9 +102,11 @@ private:
 	int current_world_;
 	std::vector<std::string> resource_amounts_;
 	uint32_t resource_amount_;
-	UI::Box world_box_, resources_box_;
-	UI::Textarea world_label_, resources_label_;
-	UI::Button world_, resources_;
+	UI::Dropdown<size_t> world_, resources_;
+
+	enum class TerrainDistribution { kDefault, kAlpine, kAtoll, kWasteland, kRandom, kCustom };
+	UI::Dropdown<TerrainDistribution> terrains_distribution_;
+	void select_terrains_distribution();
 
 	// Land
 	int32_t waterval_, landval_, wastelandval_, mountainsval_;
@@ -104,12 +117,12 @@ private:
 	UI::Checkbox island_mode_;
 
 	// Geeky stuff
-	UI::Box map_number_box_;
+	UI::Box map_number_and_id_hbox_, map_number_and_id_vbox_1_, map_number_and_id_vbox_2_;
+
 	uint32_t map_number_;
 	UI::Textarea map_number_label_;
 	UI::EditBox map_number_edit_;
 
-	UI::Box map_id_box_;
 	UI::Textarea map_id_label_;
 	UI::EditBox map_id_edit_;
 

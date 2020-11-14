@@ -23,8 +23,8 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_critter_tool.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/critter.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 
@@ -32,7 +32,8 @@ namespace {
 UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
                                       const Widelands::CritterDescr& critter_descr) {
 	const Image* pic = critter_descr.representative_image();
-	UI::Checkbox* cb = new UI::Checkbox(parent, Vector2i::zero(), pic, critter_descr.descname());
+	UI::Checkbox* cb = new UI::Checkbox(
+	   parent, UI::PanelStyle::kWui, Vector2i::zero(), pic, critter_descr.descname());
 	const int kMinClickableArea = 24;
 	cb->set_desired_size(std::max<int>(pic->width(), kMinClickableArea),
 	                     std::max<int>(pic->height(), kMinClickableArea));
@@ -44,16 +45,13 @@ UI::Checkbox* create_critter_checkbox(UI::Panel* parent,
 EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
    EditorInteractive& parent, EditorPlaceCritterTool& tool, UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 0, 0, _("Animals"), tool) {
-	const Widelands::World& world = parent.egbase().world();
+	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::CritterDescr, EditorPlaceCritterTool>(
-	      this, parent.editor_categories(Widelands::MapObjectType::CRITTER), world.critters(),
+	      this, parent.editor_categories(Widelands::MapObjectType::CRITTER), descriptions.critters(),
 	      [](UI::Panel* cb_parent, const Widelands::CritterDescr& critter_descr) {
 		      return create_critter_checkbox(cb_parent, critter_descr);
 	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
-}
-
-EditorToolPlaceCritterOptionsMenu::~EditorToolPlaceCritterOptionsMenu() {
 }

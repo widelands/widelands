@@ -39,6 +39,7 @@ struct Statebox : public Panel {
 	 * Pictorial Statebox
 	 */
 	Statebox(Panel* parent,
+	         PanelStyle,
 	         Vector2i,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string());
@@ -49,6 +50,7 @@ struct Statebox : public Panel {
 	 * Otherwise, it will take up multiple lines if necessary (automatic height).
 	 */
 	Statebox(Panel* parent,
+	         PanelStyle,
 	         Vector2i,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
@@ -73,6 +75,9 @@ struct Statebox : public Panel {
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousemove(uint8_t, int32_t, int32_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
+
+protected:
+	std::vector<Recti> focus_overlay_rects() override;
 
 private:
 	void layout() override;
@@ -111,10 +116,11 @@ struct Checkbox : public Statebox {
 	 * Text conventions: Sentence case for the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
+	         PanelStyle s,
 	         Vector2i const p,
 	         const Image* pic,
 	         const std::string& tooltip_text = std::string())
-	   : Statebox(parent, p, pic, tooltip_text) {
+	   : Statebox(parent, s, p, pic, tooltip_text) {
 	}
 
 	/**
@@ -126,11 +132,12 @@ struct Checkbox : public Statebox {
 	 * Text conventions: Sentence case both for the 'label_text' and the 'tooltip_text'
 	 */
 	Checkbox(Panel* const parent,
+	         PanelStyle s,
 	         Vector2i const p,
 	         const std::string& label_text,
 	         const std::string& tooltip_text = std::string(),
 	         uint32_t width = 0)
-	   : Statebox(parent, p, label_text, tooltip_text, width) {
+	   : Statebox(parent, s, p, label_text, tooltip_text, width) {
 	}
 
 private:

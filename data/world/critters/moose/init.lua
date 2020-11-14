@@ -2,7 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-wl.World():new_critter_type{
+wl.Descriptions():new_critter_type{
    name = "moose",
    descname = _ "Moose",
    icon = dirname .. "menu.png",
@@ -21,7 +21,7 @@ wl.World():new_critter_type{
          fps = 20,
          sound_effect = {
             path = "sound/animals/moose",
-            priority = 5
+            priority = "5%"
          },
       },
       eating = {

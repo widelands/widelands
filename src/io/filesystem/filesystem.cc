@@ -24,6 +24,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <list>
+#include <string>
 #ifdef _WIN32
 #include <cstdio>
 #endif
@@ -41,7 +42,9 @@
 #include <sys/types.h>
 #endif
 #include <sys/stat.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -154,11 +157,7 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 	}
 #endif
 	assert(root_size < path_size);  //  Otherwise an invalid read happens below.
-	if (path[root_size] != file_separator()) {
-		return false;
-	}
-
-	return true;
+	return path[root_size] == file_separator();
 }
 
 /**
@@ -390,7 +389,7 @@ std::string FileSystem::get_userconfigdir() {
  */
 std::vector<std::string> FileSystem::get_xdgdatadirs() {
 	std::vector<std::string> xdgdatadirs;
-	const char* environment_char;
+	const char* environment_char = nullptr;
 #ifdef HAS_GETENV
 	environment_char = getenv("XDG_DATA_DIRS");
 #endif
@@ -458,8 +457,13 @@ static void fs_tokenize(const std::string& path, char const filesep, Inserter co
 	std::string::size_type pos;   //  start of token
 	std::string::size_type pos2;  //  next filesep character
 
+	if (path.empty()) {
+		// Nothing to do
+		return;
+	}
+
 	// Extract the first path component
-	if (path.find(filesep) == 0) {  // Is this an absolute path?
+	if (path.front() == filesep) {  // Is this an absolute path?
 		pos = 1;
 	} else {  // Relative path
 		pos = 0;
@@ -587,8 +591,12 @@ const char* FileSystem::fs_filename(const char* p) {
 }
 
 std::string FileSystem::fs_dirname(const std::string& full_path) {
-	const std::string filename = fs_filename(full_path.c_str());
-	return full_path.substr(0, full_path.size() - filename.size());
+	std::string filename = fs_filename(full_path.c_str());
+	filename = full_path.substr(0, full_path.size() - filename.size());
+#ifdef _WIN32
+	std::replace(filename.begin(), filename.end(), '\\', '/');
+#endif
+	return filename;
 }
 
 std::string FileSystem::filename_ext(const std::string& f) {

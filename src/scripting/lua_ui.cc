@@ -82,6 +82,7 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
+   METHOD(LuaPanel, indicate),
    {nullptr, nullptr},
 };
 
@@ -284,6 +285,43 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	return 2;
 }
 
+/* RST
+   .. method:: indicate(on)
+
+      Show/Hide an arrow that points to this panel. You can only point to 1 panel at the same time.
+
+      :arg on: Whether to show or hide the arrow
+      :type on: :class:`boolean`
+*/
+// UNTESTED
+int LuaPanel::indicate(lua_State* L) {
+	assert(panel_);
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 boolean");
+	}
+
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	const bool on = luaL_checkboolean(L, -1);
+	if (on) {
+		int x = panel_->get_x() + panel_->get_w();
+		int y = panel_->get_y();
+		UI::Panel* parent = panel_->get_parent();
+		while (parent != nullptr) {
+			x += parent->get_x() + parent->get_lborder();
+			y += parent->get_y() + parent->get_tborder();
+			parent = parent->get_parent();
+		}
+		ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
+	} else {
+		ipl->set_training_wheel_indicator_pos(Vector2i::invalid());
+	}
+	return 2;
+}
+
 /*
  * C Functions
  */
@@ -366,11 +404,13 @@ const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, open),
    METHOD(LuaDropdown, highlight_item),
+   METHOD(LuaDropdown, indicate_item),
    METHOD(LuaDropdown, select),
    {nullptr, nullptr},
 };
 const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
    PROP_RO(LuaDropdown, name),
+   PROP_RO(LuaDropdown, expanded),
    PROP_RO(LuaDropdown, no_of_items),
    {nullptr, nullptr, nullptr},
 };
@@ -382,6 +422,16 @@ const PropertyType<LuaDropdown> LuaDropdown::Properties[] = {
 // Documented in parent Class
 int LuaDropdown::get_name(lua_State* L) {
 	lua_pushstring(L, get()->get_name());
+	return 1;
+}
+
+/* RST
+   .. attribute:: expanded
+
+      (RO) True if the dropdown's list is currently expanded.
+*/
+int LuaDropdown::get_expanded(lua_State* L) {
+	lua_pushboolean(L, get()->is_expanded());
 	return 1;
 }
 
@@ -421,7 +471,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	unsigned int desired_item = luaL_checkuint32(L, -1);
 	if (desired_item < 1 || desired_item > get()->size()) {
 		report_error(L,
-		             "Attempted to highlight item %d on dropdown '%s'. Avaliable range for this "
+		             "Attempted to highlight item %d on dropdown '%s'. Available range for this "
 		             "dropdown is 1-%d.",
 		             desired_item, get()->get_name().c_str(), get()->size());
 	}
@@ -444,6 +494,58 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	for (size_t i = 1; i < desired_item; ++i) {
 		get()->handle_key(true, code);
 	}
+	return 0;
+}
+
+/* RST
+   .. method:: indicate_item(index)
+
+      :arg index: the index of the item to indicate, starting from ``1``
+      :type index: :class:`integer`
+
+      Show an arrow that points to an item in this dropdown. You can only point to 1 panel at the
+      same time.
+*/
+int LuaDropdown::indicate_item(lua_State* L) {
+	assert(panel_);
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 int");
+	}
+
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	size_t desired_item = luaL_checkuint32(L, -1);
+	if (desired_item < 1 || desired_item > get()->size()) {
+		report_error(L,
+		             "Attempted to indicate item %" PRIuS
+		             " on dropdown '%s'. Available range for this "
+		             "dropdown is 1-%d.",
+		             desired_item, get()->get_name().c_str(), get()->size());
+	}
+	log_info(
+	   "Indicating item %" PRIuS " in dropdown '%s'\n", desired_item, get()->get_name().c_str());
+
+	int x = panel_->get_x() + panel_->get_w();
+	int y = panel_->get_y();
+	UI::Panel* parent = panel_->get_parent();
+	while (parent != nullptr) {
+		x += parent->get_x() + parent->get_lborder();
+		y += parent->get_y() + parent->get_tborder();
+		parent = parent->get_parent();
+	}
+
+	// Open the dropdown
+	get()->set_list_visibility(true);
+
+	for (; desired_item <= get()->size(); ++desired_item) {
+		y -= get()->lineheight();
+	}
+
+	ipl->set_training_wheel_indicator_pos(Vector2i(x, y));
+
 	return 0;
 }
 
@@ -602,17 +704,22 @@ const MethodType<LuaMapView> LuaMapView::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaMapView> LuaMapView::Properties[] = {
-   PROP_RO(LuaMapView, average_fps),  PROP_RO(LuaMapView, center_map_pixel),
-   PROP_RW(LuaMapView, buildhelp),    PROP_RW(LuaMapView, census),
-   PROP_RW(LuaMapView, statistics),   PROP_RO(LuaMapView, is_building_road),
-   PROP_RO(LuaMapView, is_animating), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaMapView, average_fps),
+   PROP_RO(LuaMapView, center_map_pixel),
+   PROP_RW(LuaMapView, buildhelp),
+   PROP_RW(LuaMapView, census),
+   PROP_RW(LuaMapView, statistics),
+   PROP_RO(LuaMapView, is_building_road),
+   PROP_RO(LuaMapView, auto_roadbuilding_mode),
+   PROP_RO(LuaMapView, is_animating),
+   {nullptr, nullptr, nullptr},
 };
 
 LuaMapView::LuaMapView(lua_State* L) : LuaPanel(get_egbase(L).get_ibase()) {
 }
 
 void LuaMapView::__unpersist(lua_State* L) {
-	Widelands::Game& game = get_game(L);
+	const Widelands::Game& game = get_game(L);
 	panel_ = game.get_ibase();
 }
 
@@ -702,6 +809,21 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: auto_roadbuild_mode
+
+      (RO) Is the player using automatic road building mode?
+*/
+int LuaMapView::get_auto_roadbuilding_mode(lua_State* L) {
+	InteractivePlayer* ipl = get_game(L).get_ipl();
+	if (ipl == nullptr) {
+		lua_pushboolean(L, false);
+	} else {
+		lua_pushboolean(L, ipl->auto_roadbuild_mode());
+	}
+	return 1;
+}
+
+/* RST
    .. attribute:: is_animating
 
       (RO) True if this MapView is currently panning or zooming.
@@ -710,6 +832,7 @@ int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, get()->map_view()->is_animating());
 	return 1;
 }
+
 /*
  * Lua Functions
  */

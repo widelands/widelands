@@ -28,7 +28,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {
@@ -37,7 +36,6 @@ constexpr uint16_t kCurrentPacketVersion = 26;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
-		std::unique_ptr<TribesLegacyLookupTable> tribes_lookup_table(new TribesLegacyLookupTable());
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
@@ -73,7 +71,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 						}
 					}
 
-					player->read_statistics(fr, packet_version, *tribes_lookup_table);
+					player->read_statistics(fr, packet_version);
 					player->read_remaining_shipnames(fr);
 
 					player->casualties_ = fr.unsigned_32();
@@ -106,7 +104,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 				PlayerEndStatus status;
 				status.player = fr.unsigned_8();
 				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
-				status.time = fr.unsigned_32();
+				status.time = Time(fr);
 				status.info = fr.c_string();
 				manager->set_player_end_status(status);
 			}
@@ -179,7 +177,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 	for (const PlayerEndStatus& status : end_status_list) {
 		fw.unsigned_8(status.player);
 		fw.unsigned_8(static_cast<uint8_t>(status.result));
-		fw.unsigned_32(status.time);
+		status.time.save(fw);
 		fw.c_string(status.info.c_str());
 	}
 

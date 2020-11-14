@@ -2,7 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-wl.World():new_critter_type{
+wl.Descriptions():new_critter_type{
    name = "wolf",
    descname = _ "Wolf",
    icon = dirname .. "menu.png",
@@ -22,7 +22,7 @@ wl.World():new_critter_type{
          sound_effect = {
             -- Sound files with numbers starting from 10 are generating silence.
             path = "sound/animals/wolf",
-            priority = 3
+            priority = "3%"
          },
       },
       eating = {

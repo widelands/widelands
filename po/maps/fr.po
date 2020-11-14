@@ -12,13 +12,13 @@
 # Pierre Salagnac <pierre.salagnac@free.fr>, 2007
 # Renaud Bouchard, 2016-2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
-# Tubuntu <tubuntu@testimonium.be>, 2015
+# Tubuntu, 2015
 # zecas <jjorge@free.fr>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
 "PO-Revision-Date: 2020-09-19 11:58+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"

@@ -33,6 +33,7 @@ inline InteractivePlayer& GameObjectivesMenu::iplayer() const {
 
 GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(parent,
+                      UI::WindowStyle::kWui,
                       "objectives",
                       &registry,
                       580,
@@ -66,7 +67,8 @@ void GameObjectivesMenu::think() {
 					list.add(obj.descname(), obj);
 				}
 				break;
-			} else if (&list[j] == &obj) {  //  the objective is in our list
+			}
+			if (&list[j] == &obj) {  //  the objective is in our list
 				if (!should_show) {
 					list.remove(j);
 				} else if (list[j].descname() != obj.descname() || list[j].descr() != obj.descr()) {
@@ -79,7 +81,7 @@ void GameObjectivesMenu::think() {
 		}
 	}
 	list.sort();
-	if (list.size() && !list.has_selection()) {
+	if (!list.empty() && !list.has_selection()) {
 		list.select(0);
 	}
 }

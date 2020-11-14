@@ -42,8 +42,7 @@ constexpr uint16_t kCurrentPacketVersion = 5;
 void MapRoaddataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
                              bool const skip,
-                             MapObjectLoader& mol,
-                             const TribesLegacyLookupTable& tribes_lookup_table) {
+                             MapObjectLoader& mol) {
 	if (skip) {
 		return;
 	}
@@ -75,7 +74,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
-					road.last_wallet_charge_ = fr.unsigned_32();
+					road.last_wallet_charge_ = Time(fr);
 					road.busy_ = fr.unsigned_8() > 1;
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
@@ -139,7 +138,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 						if (fr.unsigned_8()) {
 							(carrier_request =
 							    new Request(road, 0, Road::request_carrier_callback, wwWORKER))
-							   ->read(fr, game, mol, tribes_lookup_table);
+							   ->read(fr, game, mol);
 						} else {
 							carrier_request = nullptr;
 						}
@@ -194,7 +193,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.unsigned_8(r->owner().player_number());
 
 				fw.unsigned_32(r->wallet_);
-				fw.unsigned_32(r->last_wallet_charge_);
+				r->last_wallet_charge_.save(fw);
 
 				fw.unsigned_8(r->busy_ ? 2 : 1);
 

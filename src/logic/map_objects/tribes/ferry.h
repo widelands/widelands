@@ -33,7 +33,7 @@ struct Coords;
 
 class FerryDescr : public CarrierDescr {
 public:
-	FerryDescr(const std::string& init_descname, const LuaTable& table, Tribes& tribes);
+	FerryDescr(const std::string& init_descname, const LuaTable& table, Descriptions& descriptions);
 	~FerryDescr() override {
 	}
 
@@ -64,7 +64,7 @@ struct Ferry : public Carrier {
 
 	FerryFleet* get_fleet() const;
 
-	Waterway* get_destination(Game& game) const;
+	Waterway* get_destination(const Game& game) const;
 	void set_destination(Game& game, Waterway* ww);
 
 	void init_auto_task(Game& game) override;
@@ -87,7 +87,7 @@ private:
 	void unemployed_update(Game&, State&);
 	void row_update(Game&, State&);
 
-	uint32_t unemployed_since_;
+	Time unemployed_since_;
 
 protected:
 	void cleanup(EditorGameBase&) override;

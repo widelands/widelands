@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_productionsite_type {
+descriptions:new_productionsite_type {
    name = "empire_marblemine",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Marble Mine"),
@@ -47,8 +47,6 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines = "resource_stones",
-      mines_percent = 50,
       prohibited_till = 600,
       basic_amount = 1
    },

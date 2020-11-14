@@ -264,8 +264,8 @@ bool WordWrap::line_fits(const std::string& text, uint32_t safety_margin) const 
 uint32_t WordWrap::width() const {
 	uint32_t calculated_width = 0;
 
-	for (uint32_t line = 0; line < lines_.size(); ++line) {
-		uint32_t linewidth = text_width(lines_[line].text, fontsize_);
+	for (const LineData& line : lines_) {
+		uint32_t linewidth = text_width(line.text, fontsize_);
 		if (linewidth > calculated_width) {
 			calculated_width = linewidth;
 		}
@@ -286,7 +286,7 @@ uint32_t WordWrap::height() const {
  * appears in in the wrapped text, and also the @p pos within that line (as an offset).
  */
 void WordWrap::calc_wrapped_pos(uint32_t caret, uint32_t& line, uint32_t& pos) const {
-	assert(lines_.size());
+	assert(!lines_.empty());
 	assert(lines_[0].start == 0);
 
 	uint32_t min = 0;
@@ -327,7 +327,8 @@ void WordWrap::draw(RenderTarget& dst,
                     bool with_selection,
                     uint32_t selection_start,
                     uint32_t selection_end,
-                    uint32_t scrollbar_position) {
+                    uint32_t scrollbar_position,
+                    const std::string& caret_image_path) {
 	if (lines_.empty()) {
 		return;
 	}
@@ -371,7 +372,7 @@ void WordWrap::draw(RenderTarget& dst,
 			// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 			int caret_x = text_width(line_to_caret, fontsize_);
 
-			const Image* caret_image = g_image_cache->get("images/ui_basic/caret.png");
+			const Image* caret_image = g_image_cache->get(caret_image_path);
 			Vector2i caretpt = Vector2i::zero();
 			caretpt.x = point.x + caret_x - caret_image->width() + kLineMargin;
 			caretpt.y = point.y + (fontheight - caret_image->height()) / 2;

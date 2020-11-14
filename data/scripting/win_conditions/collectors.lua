@@ -118,6 +118,26 @@ local r = {
          "trident_double", "trident_heavy_double", "shield_steel",
          "shield_advanced", "tabard", "tabard_golden"
        },
+
+      amazons = {
+         gold = 12,
+         spear_wooden = 0,
+         spear_stone_tipped = 1,
+         spear_hardened = 1,
+         helmet_wooden = 1,
+         warriors_coat = 16,
+         tunic = 1,
+         vest_padded = 2,
+         protector_padded = 17,
+         boots_sturdy = 1,
+         boots_swift = 1,
+         boots_hero = 16
+      },
+      amazons_order = {
+         "gold", "spear_wooden", "spear_stone_tipped", "spear_hardened",
+         "helmet_wooden", "warriors_coat", "tunic", "vest_padded",
+         "protector_padded", "boots_sturdy", "boots_swift", "boots_hero"
+       },
    }
 
    -- Calculate the momentary points for a list of players
@@ -199,10 +219,10 @@ local r = {
          local lost_or_won = 0
          if (info[2] < win_points) then
             lost_or_won = 0
-            send_message(player, lost_game_over.title, lost_game_over.body, {popup = true})
+            send_to_inbox(player, lost_game_over.title, lost_game_over.body, {popup = true})
          else
             lost_or_won = 1
-            send_message(player, won_game_over.title, won_game_over.body, {popup = true})
+            send_to_inbox(player, won_game_over.title, won_game_over.body, {popup = true})
          end
          if (count_factions(plrs) > 1) then
             if (player.team == 0) then

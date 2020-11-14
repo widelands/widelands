@@ -26,7 +26,7 @@
 
 EditorCategory::EditorCategory(const LuaTable& table,
                                Widelands::MapObjectType type,
-                               Widelands::World& world)
+                               Widelands::Descriptions& descriptions)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      image_file_(table.get_string("picture")),
@@ -43,13 +43,13 @@ EditorCategory::EditorCategory(const LuaTable& table,
 	for (const std::string& item : table.get_table("items")->array_entries<std::string>()) {
 		switch (type) {
 		case Widelands::MapObjectType::CRITTER:
-			items_.push_back(world.load_critter(item));
+			items_.push_back(descriptions.load_critter(item));
 			break;
 		case Widelands::MapObjectType::IMMOVABLE:
-			items_.push_back(world.load_immovable(item));
+			items_.push_back(descriptions.load_immovable(item));
 			break;
 		case Widelands::MapObjectType::TERRAIN:
-			items_.push_back(world.load_terrain(item));
+			items_.push_back(descriptions.load_terrain(item));
 			break;
 		default:
 			NEVER_HERE();

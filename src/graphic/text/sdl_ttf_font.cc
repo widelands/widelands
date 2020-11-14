@@ -85,12 +85,14 @@ std::shared_ptr<const Image> SdlTtfFont::render(const std::string& txt,
 		text_surface = empty_sdl_surface(shadow->w + SHADOW_OFFSET, shadow->h + SHADOW_OFFSET);
 		CLANG_DIAG_OFF("-Wunknown-pragmas")
 		CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
-		SDL_FillRect(text_surface, NULL,
+		SDL_FillRect(text_surface, nullptr,
 		             SDL_MapRGBA(text_surface->format, 255, 255, 255, SDL_ALPHA_TRANSPARENT));
 		CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
 		CLANG_DIAG_ON("-Wunknown-pragmas")
 
 		if (text_surface->format->BitsPerPixel != 32) {
+			SDL_FreeSurface(tsurf);
+			SDL_FreeSurface(shadow);
 			throw RenderError("SDL_TTF did not return a 32 bit surface for shadow text. Giving up!");
 		}
 

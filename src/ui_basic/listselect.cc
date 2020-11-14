@@ -70,7 +70,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const uint32_t h,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
-   : Panel(parent, x, y, w, h),
+   : Panel(parent, style, x, y, w, h),
      widest_text_(0),
      widest_hotkey_(0),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
@@ -299,15 +299,15 @@ int BaseListselect::calculate_desired_width() {
 	}
 
 	// Add up the width
-	int text_width = widest_text_;
+	int txt_width = widest_text_;
 	if (widest_hotkey_ > 0) {
-		text_width += kHotkeyGap;
-		text_width += widest_hotkey_;
+		txt_width += kHotkeyGap;
+		txt_width += widest_hotkey_;
 	}
 
 	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 	const int old_width = get_w();
-	return text_width + picw + 8 + old_width - get_eff_w();
+	return txt_width + picw + 8 + old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
@@ -363,9 +363,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		const int text_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
+		const int txt_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
-		int lineheight = std::max(get_lineheight(), text_height);
+		int lineheight = std::max(get_lineheight(), txt_height);
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
@@ -406,10 +406,10 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > text_height) {
-			point.y += (lineheight_ - text_height) / 2;
+		if (get_lineheight() > txt_height) {
+			point.y += (lineheight_ - txt_height) / 2;
 		} else {
-			point.y -= (text_height - lineheight_) / 2;
+			point.y -= (txt_height - lineheight_) / 2;
 		}
 
 		// Don't draw over the bottom edge
@@ -484,6 +484,10 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 
 		y = (y + scrollpos_) / get_lineheight();
 		if (y < 0 || static_cast<int32_t>(entry_records_.size()) <= y) {
+			if (selection_mode_ == ListselectLayout::kDropdown) {
+				set_visible(false);
+				return true;
+			}
 			return false;
 		}
 		play_click();

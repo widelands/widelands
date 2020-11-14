@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_WAREHOUSE_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
@@ -39,7 +41,7 @@ struct WarehouseSupply;
 
 class WarehouseDescr : public BuildingDescr {
 public:
-	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	WarehouseDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~WarehouseDescr() override {
 	}
 
@@ -202,11 +204,11 @@ public:
 	// Returns the first matching not completely filled waresqueue of the expedition if this is a
 	// port.
 	// Will throw an exception otherwise or if all queues of this type are full.
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 	// Returns the waresqueue of the expedition if this is a port.
 	// Will throw an exception otherwise.
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
 	void log_general_info(const EditorGameBase&) const override;
 
@@ -239,6 +241,12 @@ private:
 		bool can_be_attacked() const override;
 		void enemy_soldier_approaches(const Soldier&) const override;
 		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
+		void set_allow_conquer(PlayerNumber, bool) const override {
+			// Warehouses can never be conquered
+		}
+		bool get_allow_conquer(PlayerNumber) const override {
+			return false;
+		}
 
 	private:
 		Warehouse* const warehouse_;
@@ -282,7 +290,7 @@ private:
 	std::vector<StockPolicy> worker_policy_;
 
 	// Workers who live here at the moment
-	using WorkerList = std::vector<Worker*>;
+	using WorkerList = std::vector<OPtr<Worker>>;
 	using IncorporatedWorkers = std::map<DescriptionIndex, WorkerList>;
 	IncorporatedWorkers incorporated_workers_;
 	std::vector<Time> next_worker_without_cost_spawn_;

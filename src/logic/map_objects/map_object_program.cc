@@ -23,6 +23,7 @@
 #include <regex>
 
 #include "base/log.h"
+#include "base/math.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -124,7 +125,8 @@ const std::string& MapObjectProgram::name() const {
 std::vector<std::string> MapObjectProgram::split_string(const std::string& s,
                                                         const char* const separators) {
 	std::vector<std::string> result;
-	for (std::string::size_type pos = 0, endpos;
+	std::string::size_type endpos;
+	for (std::string::size_type pos = 0;
 	     (pos = s.find_first_not_of(separators, pos)) != std::string::npos; pos = endpos) {
 		endpos = s.find_first_of(separators, pos);
 		result.push_back(s.substr(pos, endpos - pos));
@@ -185,7 +187,7 @@ You can combine these units in descending order as you please. Examples:
 */
 Duration MapObjectProgram::read_duration(const std::string& input, const MapObjectDescr& descr) {
 	// Convert unit part into milliseconds
-	auto as_ms = [](Duration number, const std::string& unit) {
+	auto as_ms = [](uint32_t number, const std::string& unit) {
 		if (unit == "s") {
 			return number * 1000;
 		}
@@ -202,7 +204,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		std::smatch match;
 		std::regex one_unit("^(\\d+)(s|m|ms)$");
 		if (std::regex_search(input, match, one_unit)) {
-			return as_ms(read_positive(match[1], endless()), match[2]);
+			return Duration(as_ms(read_positive(match[1], Duration().get()), match[2]));
 		}
 		std::regex two_units("^(\\d+)(m|s)(\\d+)(s|ms)$");
 		if (std::regex_search(input, match, two_units)) {
@@ -210,15 +212,15 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 				std::string unit(match[2]);
 				throw GameDataError("has duplicate unit '%s'", unit.c_str());
 			}
-			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
-			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
+			const Duration part1(as_ms(read_positive(match[1], Duration().get()), match[2]));
+			const Duration part2(as_ms(read_positive(match[3], Duration().get()), match[4]));
 			return part1 + part2;
 		}
 		std::regex three_units("^(\\d+)(m)(\\d+)(s)(\\d+)(ms)$");
 		if (std::regex_search(input, match, three_units)) {
-			const Duration part1 = as_ms(read_positive(match[1], endless()), match[2]);
-			const Duration part2 = as_ms(read_positive(match[3], endless()), match[4]);
-			const Duration part3 = as_ms(read_positive(match[5], endless()), match[6]);
+			const Duration part1(as_ms(read_positive(match[1], Duration().get()), match[2]));
+			const Duration part2(as_ms(read_positive(match[3], Duration().get()), match[4]));
+			const Duration part3(as_ms(read_positive(match[5], Duration().get()), match[6]));
 			return part1 + part2 + part3;
 		}
 		// TODO(GunChleoc): Compatibility, remove unitless option after v1.0
@@ -226,7 +228,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 		if (std::regex_match(input, without_unit)) {
 			log_warn("Duration '%s' without unit in %s's program is deprecated", input.c_str(),
 			         descr.name().c_str());
-			return read_positive(input, endless());
+			return Duration(read_positive(input, Duration().get()));
 		}
 	} catch (const WException& e) {
 		throw GameDataError(
@@ -238,6 +240,7 @@ Duration MapObjectProgram::read_duration(const std::string& input, const MapObje
 	   input.c_str());
 }
 
+// Percent is implemented in base/math.h so that we can use it in animations too
 /* RST
 
 .. _map_object_programs_datatypes_percent:
@@ -256,27 +259,6 @@ Maximum value is ``100%``. Examples:
 * ``25.13%``
 
 */
-unsigned MapObjectProgram::read_percent_to_int(const std::string& input) {
-	std::smatch match;
-	std::regex re("^(\\d+)([.](\\d{1,2})){0,1}%$");
-	if (std::regex_search(input, match, re)) {
-		// Convert to range
-		uint64_t result =
-		   100U * std::stoul(match[1]) +
-		   (match[3].str().empty() ?
-		       0U :
-		       match[3].str().size() == 1 ? 10U * std::stoul(match[3]) : std::stoul(match[3]));
-
-		if (result > kMaxProbability) {
-			throw GameDataError(
-			   "Given percentage of '%s' is greater than the 100%% allowed", input.c_str());
-		}
-		return result;
-	}
-	throw GameDataError(
-	   "Wrong format for percentage '%s'. Must look like '25%%', '25.4%%' or '25.26%%'.",
-	   input.c_str());
-}
 
 MapObjectProgram::ProgramParseInput
 MapObjectProgram::parse_program_string(const std::string& line) {
@@ -294,7 +276,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 	const std::string key = input.substr(0, idx);
 
 	if (!expected_key.empty()) {
-		if (idx == input.npos) {
+		if (idx == std::string::npos) {
 			throw GameDataError("Empty value in '%s' for separator '%c'\n", input.c_str(), separator);
 		}
 		if (key != expected_key) {
@@ -303,7 +285,7 @@ MapObjectProgram::read_key_value_pair(const std::string& input,
 		}
 	}
 
-	return std::make_pair(key, idx == input.npos ? default_value : input.substr(idx + 1));
+	return std::make_pair(key, idx == std::string::npos ? default_value : input.substr(idx + 1));
 }
 
 /* RST
@@ -352,7 +334,7 @@ actions also have an animation associated with them that will be played instead,
 */
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(
    const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
-	if (arguments.size() < 1 || arguments.size() > 2) {
+	if (arguments.empty() || arguments.size() > 2) {
 		throw GameDataError("Usage: animate=<animation_name> [duration:<duration>]");
 	}
 
@@ -458,13 +440,13 @@ MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments
 
 	const std::pair<std::string, std::string> item = read_key_value_pair(arguments.at(1), ':');
 	if (item.first == "priority") {
-		result.priority = read_percent_to_int(item.second);
+		result.priority = math::read_percent_to_int(item.second);
 	} else if (item.second.empty()) {
 		if (item.first == "allow_multiple") {
 			result.allow_multiple = true;
 		} else {
 			// TODO(GunChleoc): Compatibility, remove this option after v1.0
-			result.priority = (read_positive(arguments.at(1)) * kMaxProbability * 2U) / 256;
+			result.priority = (read_positive(arguments.at(1)) * math::k100PercentAsInt * 2U) / 256;
 			log_warn("Deprecated usage in %s. Please convert playsound's 'priority' option to "
 			         "percentage, like this: "
 			         "playsound=<sound_dir/sound_name> priority:<percent> [allow_multiple]\n",

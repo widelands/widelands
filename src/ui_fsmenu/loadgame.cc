@@ -24,59 +24,39 @@
 #include "base/i18n.h"
 #include "wlapplication_options.h"
 #include "wui/gamedetails.h"
-
-FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
+namespace FsMenu {
+FullscreenMenuLoadGame::FullscreenMenuLoadGame(FullscreenMenuMain& fsmm,
+                                               Widelands::Game& g,
                                                GameSettingsProvider* gsp,
                                                bool is_replay)
-   : FullscreenMenuLoadMapOrGame(),
-
-     main_box_(this, 0, 0, UI::Box::Vertical),
-     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
-
-     // Main title
-     title_(&main_box_,
-            0,
-            0,
-            0,
-            0,
-            is_replay ? _("Choose a replay") : _("Choose a saved game"),
-            UI::Align::kCenter,
-            g_style_manager->font_style(UI::FontStyle::kFsMenuTitle)),
-
-     load_or_save_(&info_box_,
+   : TwoColumnsFullNavigationMenu(
+        fsmm, "choose_game", is_replay ? _("Choose Replay") : _("Choose Game")),
+     load_or_save_(&right_column_content_box_,
                    g,
                    is_replay ?
                       LoadOrSaveGame::FileType::kReplay :
                       (gsp->settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
                                                      LoadOrSaveGame::FileType::kGameSinglePlayer),
                    UI::PanelStyle::kFsMenu,
-                   true),
+                   UI::WindowStyle::kFsMenu,
+                   true,
+                   &left_column_box_,
+                   &right_column_content_box_),
 
      is_replay_(is_replay),
      update_game_details_(false),
      showing_filenames_(false) {
 
-	// Make sure that we have some space to work with.
-	main_box_.set_size(get_w(), get_w());
-
-	main_box_.add_space(padding_);
-	main_box_.add_inf_space();
-	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	main_box_.add_inf_space();
 	if (is_replay_) {
-		show_filenames_ = new UI::Checkbox(&main_box_, Vector2i::zero(), _("Show Filenames"));
-		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
+		show_filenames_ = new UI::Checkbox(
+		   &header_box_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Show Filenames"));
+		header_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
+		header_box_.add_space(5 * kPadding);
 	}
-	main_box_.add_inf_space();
-	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
-	main_box_.add_space(padding_);
 
-	info_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kFullSize);
-	info_box_.add_space(right_column_margin_);
-	info_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kFullSize);
-
-	button_spacer_ = new UI::Panel(load_or_save_.game_details()->button_box(), 0, 0, 0, 0);
-	load_or_save_.game_details()->button_box()->add(button_spacer_);
+	left_column_box_.add(load_or_save_.table_box(), UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add(load_or_save_.game_details(), UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add(load_or_save_.delete_button(), UI::Box::Resizing::kFullSize);
 
 	layout();
 
@@ -108,27 +88,18 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 
 	load_or_save_.table().cancel.connect([this]() { clicked_back(); });
 }
-
+void FullscreenMenuLoadGame::layout() {
+	TwoColumnsFullNavigationMenu::layout();
+	load_or_save_.delete_button()->set_desired_size(0, standard_height_);
+}
 void FullscreenMenuLoadGame::think() {
-	FullscreenMenuLoadMapOrGame::think();
+	TwoColumnsFullNavigationMenu::think();
 
 	if (update_game_details_) {
 		// Call performance heavy draw_minimap function only during think
 		update_game_details_ = false;
 		load_or_save_.entry_selected();
 	}
-}
-
-void FullscreenMenuLoadGame::layout() {
-	FullscreenMenuLoadMapOrGame::layout();
-	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
-	main_box_.set_pos(Vector2i(tablex_, 0));
-	title_.set_font_scale(scale_factor());
-	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
-	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);
-	load_or_save_.table().set_desired_size(tablew_, tableh_);
-	load_or_save_.game_details()->set_max_size(
-	   main_box_.get_w() - tablew_ - right_column_margin_, tableh_);
 }
 
 void FullscreenMenuLoadGame::toggle_filenames() {
@@ -159,7 +130,7 @@ void FullscreenMenuLoadGame::clicked_ok() {
 	} else {
 		if (gamedata && gamedata->errormessage.empty()) {
 			filename_ = gamedata->filename;
-			end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
+			end_modal<MenuTarget>(MenuTarget::kOk);
 		}
 	}
 }
@@ -201,5 +172,6 @@ bool FullscreenMenuLoadGame::handle_key(bool down, SDL_Keysym code) {
 		break;
 	}
 
-	return FullscreenMenuLoadMapOrGame::handle_key(down, code);
+	return TwoColumnsFullNavigationMenu::handle_key(down, code);
 }
+}  // namespace FsMenu

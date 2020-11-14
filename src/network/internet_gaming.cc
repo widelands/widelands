@@ -36,6 +36,9 @@
 #include "network/internet_gaming_messages.h"
 #include "network/internet_gaming_protocol.h"
 
+/// Max length of formatted time string
+const uint8_t kTimeFormatLength = 32;
+
 /// Private constructor by purpose: NEVER call directly. Always call InternetGaming::ref(), this
 /// will ensure
 /// that only one instance is running at time.
@@ -446,16 +449,17 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			format_and_add_chat("", "", true, _("For reporting bugs, visit:"));
 			format_and_add_chat("", "", true, "https://www.widelands.org/wiki/ReportingBugs/");
 			state_ = LOBBY;
-			// Append UTC time to login message to ease linking between client output and
-			// metaserver logs. The string returned by asctime is terminated by \n
-			const time_t now = time(nullptr);
-			log_info("InternetGaming: Client %s logged in at UTC %s", clientname_.c_str(),
-			         asctime(gmtime(&now)));
+			// Append UTC time to login message to ease linking between
+			// client output and metaserver logs.
+			char time_str[kTimeFormatLength];
+			format_time(time_str, kTimeFormatLength);
+			log_info("InternetGaming: Client %s logged in at UTC %s\n", clientname_.c_str(), time_str);
 			return;
 
 		} else if (cmd == IGPCMD_PWD_OK) {
-			const time_t now = time(nullptr);
-			log_info("InternetGaming: Password check successful at UTC %s", asctime(gmtime(&now)));
+			char time_str[kTimeFormatLength];
+			format_time(time_str, kTimeFormatLength);
+			log_info("InternetGaming: Password check successful at UTC %s\n", time_str);
 			state_ = LOBBY;
 			return;
 
@@ -567,7 +571,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			}
 
 			for (InternetGame& old_game : old) {
-				if (old_game.name.size()) {
+				if (!old_game.name.empty()) {
 					format_and_add_chat(
 					   "", "", true,
 					   (boost::format(_("The game %s has been closed")) % old_game.name).str());
@@ -620,7 +624,7 @@ void InternetGaming::handle_packet(RecvPacket& packet, bool relogin_on_error) {
 			          });
 
 			for (InternetClient& client : old) {
-				if (client.name.size()) {
+				if (!client.name.empty()) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
@@ -869,12 +873,11 @@ const std::vector<InternetClient>* InternetGaming::clients() {
 /// ChatProvider: sends a message via the metaserver.
 void InternetGaming::send(const std::string& msg) {
 	// TODO(Notabilis): Messages can get lost when we are temporarily disconnected from the
-	// metaserver,
-	// even when we reconnect again. "Answered" messages like IGPCMD_GAME_CONNECT are resent but chat
-	// messages are not. Resend them after some time when we did not receive the matching IGPCMD_CHAT
-	// command from the server? For global/public messages we could wait for the returned IGPCMD_CHAT
-	// from the metaserver, similar to other commands. What about private messages? Maybe modify the
-	// metaserver to send them back, too?
+	// metaserver, even when we reconnect again. "Answered" messages like IGPCMD_GAME_CONNECT
+	// are resent but chat messages are not. Resend them after some time when we did not receive
+	// the matching IGPCMD_CHAT command from the server? For global/public messages we could wait
+	// for the returned IGPCMD_CHAT from the metaserver, similar to other commands.
+	// What about private messages? Maybe modify the metaserver to send them back, too?
 	if (!logged_in()) {
 		format_and_add_chat(
 		   "", "", true, _("Message could not be sent: You are not connected to the metaserver!"));
@@ -1017,6 +1020,13 @@ std::string InternetGaming::bool2str(bool b) {
 	return b ? "true" : "false";
 }
 
+/// Formats the current time as string in \arg time_str of max \arg length
+void InternetGaming::format_time(char* time_str, uint8_t length) {
+	const time_t now = time(nullptr);
+	// Time format: Www Mmm dd yyyy hh:mm:ss
+	strftime(time_str, length, "%a %b %d %Y %H:%M:%S", gmtime(&now));
+}
+
 /// formates a chat message and adds it to the list of chat messages
 void InternetGaming::format_and_add_chat(const std::string& from,
                                          const std::string& to,
@@ -1030,7 +1040,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 	} else {
 		c.sender = from;
 	}
-	c.playern = system ? -1 : to.size() ? 3 : 7;
+	c.playern = system ? -1 : to.empty() ? 7 : 3;
 	c.recipient = to;
 
 	receive(c);
@@ -1043,7 +1053,7 @@ void InternetGaming::format_and_add_chat(const std::string& from,
 }
 
 /**
- * Check for vaild username characters.
+ * Check for vaild username characters and make sure it's not "team".
  */
 bool InternetGaming::valid_username(const std::string& username) {
 	if (username.empty() ||
@@ -1051,5 +1061,10 @@ bool InternetGaming::valid_username(const std::string& username) {
 	                               "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@.+-_") <= username.size()) {
 		return false;
 	}
-	return true;
+	// Check whether the username is not "team" without regarding upper/lower case
+	// Note: The memory for the lowercase version must be allocated before calling transform()
+	std::string lowercase = username;
+	std::transform(lowercase.begin(), lowercase.end(), lowercase.begin(),
+	               [](unsigned char c) { return std::tolower(c); });
+	return lowercase != "team";
 }

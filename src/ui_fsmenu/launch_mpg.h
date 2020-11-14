@@ -30,7 +30,7 @@
 #include "wui/game_chat_panel.h"
 
 struct ChatProvider;
-
+namespace FsMenu {
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
@@ -38,8 +38,12 @@ struct ChatProvider;
  */
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*, ChatProvider&);
-	~FullscreenMenuLaunchMPG() override;
+	FullscreenMenuLaunchMPG(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
+	                        GameController*,
+	                        ChatProvider&,
+	                        Widelands::EditorGameBase& egbase);
+	~FullscreenMenuLaunchMPG() override = default;
 
 	void think() override;
 	void refresh();
@@ -66,8 +70,9 @@ private:
 	std::unique_ptr<UI::FullscreenHelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
 	GameChatPanel chat_;
+	Widelands::EditorGameBase& egbase_;  // Not owned
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_MPG_H

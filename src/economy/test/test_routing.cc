@@ -68,7 +68,7 @@ public:
 	void get_neighbours(Widelands::WareWorker type, Widelands::RoutingNodeNeighbours&) override;
 
 	// test functionality
-	bool all_members_zeroed();
+	bool all_members_zeroed() const;
 
 private:
 	using Neigbours = std::vector<TestingRoutingNode*>;
@@ -87,7 +87,7 @@ void TestingRoutingNode::get_neighbours(Widelands::WareWorker type,
 		   nb, 1000 * ((type == Widelands::wwWARE) ? 1 + waitcost_ : 1)));
 	}
 }
-bool TestingRoutingNode::all_members_zeroed() {
+bool TestingRoutingNode::all_members_zeroed() const {
 	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware &&
 	                     !mpf_cycle_worker && !mpf_realcost_worker && !mpf_estimate_worker;
 	bool pointers_zero = (mpf_backlink_ware == nullptr) && (mpf_backlink_worker == nullptr);
@@ -116,7 +116,7 @@ public:
 		nodes.insert(nodes.begin(), node);
 	}
 
-	int32_t get_length() {
+	int32_t get_length() const {
 		return nodes.size();
 	}
 
@@ -202,6 +202,9 @@ struct TestingNodeDefaultNodesFixture {
 			nodes.pop_back();
 		}
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(TestingNodeDefaultNodesFixture);
+
 	std::vector<TestingRoutingNode*> nodes;
 	TestingRoutingNode* d0;
 	TestingRoutingNode* d1;
@@ -241,6 +244,9 @@ struct SimpleRouterFixture {
 		delete d0;
 		delete d1;
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(SimpleRouterFixture);
+
 	/**
 	 * Callback for the incredibly rare case that the \ref Router pathfinding
 	 * cycle wraps around.
@@ -395,6 +401,8 @@ struct ComplexRouterFixture {
 			nodes.pop_back();
 		}
 	}
+
+	DISALLOW_COPY_AND_ASSIGN(ComplexRouterFixture);
 
 	/**
 	 * Convenience function

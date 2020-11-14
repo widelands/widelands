@@ -173,7 +173,7 @@ void PortDock::cleanup(EditorGameBase& egbase) {
 
 	Warehouse* wh = nullptr;
 
-	if (egbase.objects().object_still_available(warehouse_)) {
+	if (warehouse_) {
 
 		// We need to remember this for possible recreation of portdock
 		wh = warehouse_;
@@ -252,7 +252,7 @@ void PortDock::add_shippingitem(Game& game, WareInstance& ware) {
  * The given @p ware, which is assumed to be inside the dock, has updated
  * its route.
  */
-void PortDock::update_shippingitem(Game& game, WareInstance& ware) {
+void PortDock::update_shippingitem(Game& game, const WareInstance& ware) {
 	for (auto item_iter = waiting_.begin(); item_iter != waiting_.end(); ++item_iter) {
 
 		if (item_iter->object_.serial() == ware.serial()) {
@@ -276,7 +276,7 @@ void PortDock::add_shippingitem(Game& game, Worker& worker) {
  * The given @p worker, which is assumed to be inside the dock, has
  * updated its route.
  */
-void PortDock::update_shippingitem(Game& game, Worker& worker) {
+void PortDock::update_shippingitem(Game& game, const Worker& worker) {
 	for (auto item_iter = waiting_.begin(); item_iter != waiting_.end(); ++item_iter) {
 
 		if (item_iter->object_.serial() == worker.serial()) {
@@ -400,12 +400,13 @@ uint32_t PortDock::calc_max_priority(const EditorGameBase& egbase, const PortDoc
 				if (ware->get_transfer() && ware->get_transfer()->get_request()) {
 					// I don't know when this shouldn't be true,
 					// but the regression tests assure me that it's possible…
-					priority += ware->get_transfer()->get_request()->get_transfer_priority();
+					priority += ware->get_transfer()->get_request()->get_normalized_transfer_priority();
 				}
 			} else {
 				assert(worker);
 				if (worker->get_transfer() && worker->get_transfer()->get_request()) {
-					priority += worker->get_transfer()->get_request()->get_transfer_priority();
+					priority +=
+					   worker->get_transfer()->get_request()->get_normalized_transfer_priority();
 				}
 			}
 		}
@@ -501,7 +502,7 @@ void PortDock::Loader::load(FileRead& fr, uint8_t /* packet_version */) {
 	if (fr.unsigned_8()) {  // Do we have an expedition?
 		pd.expedition_bootstrap_.reset(new ExpeditionBootstrap(&pd));
 	}
-	pd.expedition_ready_ = (fr.unsigned_8() == 1) ? true : false;
+	pd.expedition_ready_ = fr.unsigned_8();
 }
 
 // During the first loading phase we only loaded the serials.
@@ -512,8 +513,8 @@ void PortDock::Loader::load_pointers() {
 	PortDock& pd = get<PortDock>();
 	pd.warehouse_ = &mol().get<Warehouse>(warehouse_);
 
-	for (uint32_t i = 0; i < waiting_.size(); ++i) {
-		pd.waiting_.push_back(waiting_[i].get(mol()));
+	for (ShippingItem::Loader& item : waiting_) {
+		pd.waiting_.push_back(item.get(mol()));
 	}
 	assert(pd.waiting_.size() == waiting_.size());
 }

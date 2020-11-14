@@ -31,7 +31,7 @@ namespace Widelands {
 
 class MarketDescr : public BuildingDescr {
 public:
-	MarketDescr(const std::string& init_descname, const LuaTable& t, Tribes& tribes);
+	MarketDescr(const std::string& init_descname, const LuaTable& t, Descriptions& descriptions);
 	~MarketDescr() override {
 	}
 
@@ -49,12 +49,12 @@ class Market : public Building {
 	MO_DESCR(MarketDescr)
 public:
 	explicit Market(const MarketDescr& descr);
-	~Market() override;
+	~Market() override = default;
 
 	void new_trade(int trade_id, const BillOfMaterials& items, int num_batches, Serial other_side);
 	void cancel_trade(int trade_id);
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 	void cleanup(EditorGameBase&) override;
 
 	void try_launching_batch(Game* game);
@@ -87,7 +87,7 @@ private:
 	ware_arrived_callback(Game& g, InputQueue* q, DescriptionIndex ware, Worker* worker, void* data);
 
 	void ensure_wares_queue_exists(int ware_index);
-	bool is_ready_to_launch_batch(int trade_id);
+	bool is_ready_to_launch_batch(int trade_id) const;
 	void launch_batch(int trade_id, Game* game);
 
 	std::map<int, TradeOrder> trade_orders_;                  // Key is 'trade_id's.

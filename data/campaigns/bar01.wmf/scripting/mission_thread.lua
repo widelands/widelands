@@ -17,8 +17,8 @@ function introduction_thread()
 
    campaign_message_box(briefing_msg_01)
    -- these buildings are still burning, but only for a while
-   map:place_immovable("destroyed_building",map:get_field(7,41),"tribes")
-   map:place_immovable("destroyed_building",map:get_field(5,52),"tribes")
+   map:place_immovable("destroyed_building", map:get_field(7,41))
+   map:place_immovable("destroyed_building", map:get_field(5,52))
    scroll_to_field(al_thunran)
    reveal_concentric(plr, al_thunran, 8, true, 50)
    campaign_message_box(briefing_msg_02) -- Al'thunran
@@ -33,6 +33,7 @@ function introduction_thread()
 
    campaign_message_box(order_msg_ranger)
    local obj = add_campaign_objective(obj_build_rangers)
+   plr:run_training_wheel("objectives", true)
 
    -- Try not to interrupt the player actions with a message, so we wait generously
    sleep(50000)

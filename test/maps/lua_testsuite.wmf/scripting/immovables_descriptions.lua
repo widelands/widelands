@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 test_descr = lunit.TestCase("Immovable descriptions test")
 function test_descr:test_instantiation_forbidden()
    assert_error("Cannot instantiate", function()
@@ -112,13 +110,6 @@ function test_descr:test_immovable_terrain_affinity()
    assert_equal(aff_alder_sapling["preferred_temperature"], aff_alder_old["preferred_temperature"])
    assert_equal(80, aff_mushroom_red_pole["preferred_temperature"])
    assert_equal(110, aff_umbrella_green_mature["preferred_temperature"])
-end
-
-function test_descr:test_immovable_owner_type()
-   assert_equal("world", egbase:get_immovable_description("bush1").owner_type)
-   assert_equal("tribe", egbase:get_immovable_description("cornfield_ripe").owner_type)
-   assert_equal("world", egbase:get_immovable_description("alder_summer_sapling").owner_type)
-   assert_equal("world", egbase:get_immovable_description("alder_summer_old").owner_type)
 end
 
 function test_descr:test_immovable_size()
@@ -404,7 +395,7 @@ function test_descr:test_immovable_support()
    assert_equal(1, #site_support)
    assert_equal("barbarians_rangers_hut", site_support[1].name)
    assert_equal(0, #site.supported_productionsites)
-   assert_equal(22, #site.collected_immovables) -- Trees in the world
+   assert_equal(34, #site.collected_immovables) -- Trees in the world
    assert_equal(0, #site.created_immovables)
 
    -- Barbarian Quarry has no support

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-11 08:10+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"PO-Revision-Date: 2020-11-11 17:40+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,223 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:8
+msgctxt "amazons_building"
+msgid "Fortification"
+msgstr "Daingneachadh"
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:31
+msgid "Your soldiers have occupied your fortification."
+msgstr "Ghabh na saighdearan agad còmhnaidh san daingneachadh agad."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:32
+msgid "Your fortification discovered an aggressor."
+msgstr "Mhothaich an daingneachadh agad dha dh’ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:33
+msgid "Your fortification is under attack."
+msgstr "Tha an daingneachadh agad fo ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:34
+msgid "The enemy defeated your soldiers at the fortification."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an daingneachadh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortification/init.lua:35
+msgid "Your soldiers defeated the enemy at the fortification."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an daingneachadh."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:8
+msgctxt "amazons_building"
+msgid "Fortress"
+msgstr "Dùn"
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:58
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:70
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:67
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
+msgid "Your soldiers have occupied your fortress."
+msgstr "Ghabh na saighdearan agad còmhnaidh san dùn agad."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:59
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:71
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:68
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
+msgid "Your fortress discovered an aggressor."
+msgstr "Mhothaich an dùn agad dha dh’ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:60
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:72
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:69
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:59
+msgid "Your fortress is under attack."
+msgstr "Tha an dùn agad fo ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:61
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:73
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:70
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
+msgid "The enemy defeated your soldiers at the fortress."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an dùn."
+
+#: ../../data/tribes/buildings/militarysites/amazons/fortress/init.lua:62
+#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:74
+#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:71
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
+msgid "Your soldiers defeated the enemy at the fortress."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an dùn."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:8
+msgctxt "amazons_building"
+msgid "Observation Tower"
+msgstr "Tùr-coimheadachd"
+
+#: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:29
+msgid "Your soldiers have occupied your observation tower."
+msgstr "Ghabh na saighdearan agad còmhnaidh san tùr-coimheadachd agad."
+
+#: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:30
+msgid "Your observation tower discovered an aggressor."
+msgstr "Mhothaich an tùr-coimheadachd agad dha dh’ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:31
+msgid "Your observation tower is under attack."
+msgstr "Tha an tùr-coimheadachd agad fo ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:32
+msgid "The enemy defeated your soldiers at the observation tower."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an tùr-coimheadachd."
+
+#: ../../data/tribes/buildings/militarysites/amazons/observation_tower/init.lua:33
+msgid "Your soldiers defeated the enemy at the observation tower."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an tùr-coimheadachd."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:8
+msgctxt "amazons_building"
+msgid "Patrol Post"
+msgstr "Bothan-cuairteachain"
+
+#: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:38
+msgid "Your soldiers have occupied your patrol post."
+msgstr "Ghabh na saighdearan agad còmhnaidh sa bhothan-chuairteachain agad."
+
+#: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:39
+msgid "Your patrol post discovered an aggressor."
+msgstr "Mhothaich am bothan-cuairteachain agad dha dh’ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:40
+msgid "Your patrol post is under attack."
+msgstr "Tha am bothan-cuairteachain agad fo ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:41
+msgid "The enemy defeated your soldiers at the patrol post."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig a’ bhothan-chuairteachain."
+
+#: ../../data/tribes/buildings/militarysites/amazons/patrol_post/init.lua:42
+msgid "Your soldiers defeated the enemy at the patrol post."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ bhothan-chuairteachain."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:8
+msgctxt "amazons_building"
+msgid "Tower"
+msgstr "Tùr"
+
+#: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:57
+#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:56
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:52
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:47
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
+msgid "Your soldiers have occupied your tower."
+msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
+
+#: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:58
+#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:53
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:48
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:59
+msgid "Your tower discovered an aggressor."
+msgstr "Mhothaich an tùr agad dha dh’ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:59
+#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:58
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:54
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:49
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:60
+msgid "Your tower is under attack."
+msgstr "Tha an tùr agad fo ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:60
+#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:55
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:50
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:61
+msgid "The enemy defeated your soldiers at the tower."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an tùr."
+
+#: ../../data/tribes/buildings/militarysites/amazons/tower/init.lua:61
+#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:60
+#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:56
+#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:51
+#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
+msgid "Your soldiers defeated the enemy at the tower."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an tùr."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:8
+msgctxt "amazons_building"
+msgid "Treetop Sentry"
+msgstr "Craobh-faire"
+
+#: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:40
+msgid "Your soldiers have occupied your treetop sentry."
+msgstr "Ghabh na saighdearan agad còmhnaidh air a’ chraobh-fhaire agad."
+
+#: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:41
+msgid "Your treetop sentry discovered an aggressor."
+msgstr "Mhothaich an craobh-faire agad dha dh’ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:42
+msgid "Your treetop sentry is under attack."
+msgstr "Tha an craobh-faire agad fo ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:43
+msgid "The enemy defeated your soldiers at the treetop sentry."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig a’ chraobh-fhaire."
+
+#: ../../data/tribes/buildings/militarysites/amazons/treetop_sentry/init.lua:44
+msgid "Your soldiers defeated the enemy at the treetop sentry."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ chraobh-fhaire."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:8
+msgctxt "amazons_building"
+msgid "Warriors’ Dwelling"
+msgstr "Fàrdach bhana-ghaisgeach"
+
+#: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:41
+msgid "Your soldiers have occupied your warriors’ delling."
+msgstr "Ghabh na saighdearan agad còmhnaidh san fhàrdach bhana-ghaisgeach agad."
+
+#: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:42
+msgid "Your warriors’ dwelling discovered an aggressor."
+msgstr "Mhothaich am fàrdach bhana-ghaisgeach agad dha dh’ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:43
+msgid "Your warriors’ dwelling is under attack."
+msgstr "Tha am fàrdach bhana-ghaisgeach agad fo ionnsaigh."
+
+#: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:44
+msgid "The enemy defeated your soldiers at the warriors’ dwelling."
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an fhàrdach bhana-ghaisgeach."
+
+#: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:45
+msgid "Your soldiers defeated the enemy at the warriors’ dwelling."
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an fhàrdach bhana-ghaisgeach."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:114
@@ -108,41 +325,6 @@ msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ bhothan-fhaire.
 msgctxt "atlanteans_building"
 msgid "Tower"
 msgstr "Tùr"
-
-#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:56
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:52
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:47
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:58
-msgid "Your soldiers have occupied your tower."
-msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
-
-#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:57
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:53
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:48
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:59
-msgid "Your tower discovered an aggressor."
-msgstr "Mhothaich an tùr agad dha dh’ionnsaigh."
-
-#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:58
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:54
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:49
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:60
-msgid "Your tower is under attack."
-msgstr "Tha an tùr agad fo ionnsaigh."
-
-#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:59
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:55
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:50
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:61
-msgid "The enemy defeated your soldiers at the tower."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an tùr."
-
-#: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:60
-#: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:56
-#: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:51
-#: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:62
-msgid "Your soldiers defeated the enemy at the tower."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an tùr."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:8
@@ -258,36 +440,6 @@ msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig a’ chathair."
 msgctxt "barbarians_building"
 msgid "Fortress"
 msgstr "Dùn"
-
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:70
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:67
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:57
-msgid "Your soldiers have occupied your fortress."
-msgstr "Ghabh na saighdearan agad còmhnaidh san dùn agad."
-
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:71
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:68
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:58
-msgid "Your fortress discovered an aggressor."
-msgstr "Mhothaich an dùn agad dha dh’ionnsaigh."
-
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:72
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:69
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:59
-msgid "Your fortress is under attack."
-msgstr "Tha an dùn agad fo ionnsaigh."
-
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:73
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:70
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:60
-msgid "The enemy defeated your soldiers at the fortress."
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig an dùn."
-
-#: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:74
-#: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:71
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:61
-msgid "Your soldiers defeated the enemy at the fortress."
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig an dùn."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:8
@@ -524,15 +676,29 @@ msgid "Dismantle Site"
 msgstr "’Ga thoirt às a chèile"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:171
-msgctxt "atlanteans_building"
-msgid "Armor Smithy"
-msgstr "Ceàrdach armachd"
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:8
+msgctxt "amazons_building"
+msgid "Cassava Root Cooker"
+msgstr "Taigh a’ chasabha"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:54
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:41
+#: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:46
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:58
+#: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:45
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:32
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:48
+#: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
+#: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:36
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:54
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:39
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:215
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:44
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:54
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:48
 #: ../../data/tribes/buildings/productionsites/atlanteans/ferry_yard/init.lua:48
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:52
@@ -563,7 +729,7 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/ferry_yard/init.lua:47
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:40
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:38
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:78
@@ -595,6 +761,728 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:53
 msgid "working"
 msgstr "obair"
+
+#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
+msgid "baking bread"
+msgstr "aran fhuineadh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:8
+msgctxt "amazons_building"
+msgid "Cassava Root Plantation"
+msgstr "Planntachadh casabha"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:49
+msgid "planting cassava root"
+msgstr "casabha a chur"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:57
+msgid "harvesting cassava root"
+msgstr "casabha a bhuain"
+
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:66
+#: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:71
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:71
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
+msgid "No Fields"
+msgstr "Dìth achaidh"
+
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:67
+#: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:72
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
+msgid "Out of Fields"
+msgstr "Chan eil achadh ann"
+
+#: ../../data/tribes/buildings/productionsites/amazons/cassava_root_plantation/init.lua:68
+msgctxt "amazons_building"
+msgid ""
+"The farmer working at this cassava root plantation has no cleared soil to "
+"plant his seeds."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig a’ phlanntachadh casabha seo sìol."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:8
+msgctxt "amazons_building"
+msgid "Charcoal Kiln"
+msgstr "Sloc guail-fhiodha"
+
+#. TRANSLATORS: Completed/Skipped/Did not start producing charcoal because ...
+#: ../../data/tribes/buildings/productionsites/amazons/charcoal_kiln/init.lua:50
+msgid "producing charcoal"
+msgstr "gual a dhèanamh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:8
+msgctxt "amazons_building"
+msgid "Chocolate Brewery"
+msgstr "Taigh na seòclaide"
+
+#. TRANSLATORS: Completed/Skipped/Did not start brewing chocolate because ...
+#: ../../data/tribes/buildings/productionsites/amazons/chocolate_brewery/init.lua:55
+msgid "brewing chocolate"
+msgstr "seòclaid a tharraing"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:8
+msgctxt "amazons_building"
+msgid "Cocoa Farm"
+msgstr "Tuathanas còco"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:54
+msgid "planting cocoa"
+msgstr "craobh-còco a chur"
+
+#. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
+#: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:62
+msgid "harvesting cocoa"
+msgstr "còco a bhuain"
+
+#: ../../data/tribes/buildings/productionsites/amazons/cocoa_farm/init.lua:73
+msgctxt "amazons_building"
+msgid ""
+"The cocoa farmer working at this cocoa farm has no cleared soil to plant his"
+" seeds."
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig an tuathanas còco seo sìol."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:8
+msgctxt "amazons_building"
+msgid "Dressmakery"
+msgstr "Ceàrdach dhreasaichean"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:73
+msgid "sewing a tunic"
+msgstr "earrasaid fhuaigheal"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:84
+msgid "making a light wooden armor"
+msgstr "armachd fiodha aotrom a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:95
+msgid "making a wooden helmet"
+msgstr "clogaid fiodha a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:106
+msgid "sewing a warriors coat"
+msgstr "còta bana-ghaisgich fhuaigheal"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:117
+msgid "making sturdy boots"
+msgstr "brògan tapaidh a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:128
+msgid "making swift boots"
+msgstr "brògan sgiobalta a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:139
+msgid "making heros boots"
+msgstr "brògan bana-ghaisgich a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:150
+msgid "making a padded vest"
+msgstr "lèine fhillte fhuaigheal"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/dressmakery/init.lua:161
+msgid "making a padded protector"
+msgstr "còta fhillte fhuaigheal"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/ferry_yard/init.lua:8
+msgctxt "amazons_building"
+msgid "Ferry Yard"
+msgstr "Feur-lios"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:8
+msgctxt "amazons_building"
+msgid "Food Preserver"
+msgstr "Grèidheadh bìdh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+#: ../../data/tribes/buildings/productionsites/amazons/food_preserver/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:48
+#: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:67
+msgid "preparing a ration"
+msgstr "greimeag ullachadh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
+msgctxt "amazons_building"
+msgid "Furnace"
+msgstr "Fùirneis"
+
+#. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
+#: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:93
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:117
+msgid "smelting gold"
+msgstr "òr a leaghadh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:8
+msgctxt "amazons_building"
+msgid "Gardening Center"
+msgstr "Ionad gàirneilearachd"
+
+#. TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of
+#. land because ...
+#: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:54
+#: ../../data/tribes/buildings/productionsites/amazons/gardening_center/init.lua:68
+msgid "enhancing the fertility of land"
+msgstr "torrachas na tìre a leasachadh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:8
+msgctxt "amazons_building"
+msgid "Gold Digger Dwelling"
+msgstr "Fàrdach ruamhaire òir"
+
+#. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:58
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:54
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:76
+msgid "mining gold"
+msgstr "òr a thochladh"
+
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:65
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:94
+msgid "No Gold"
+msgstr "Dìth òir"
+
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:73
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:95
+msgid "Main Gold Vein Exhausted"
+msgstr "Tha prìomh-chuisle òir air a caitheamh"
+
+#: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:68
+msgctxt "amazons_building"
+msgid ""
+"This gold digger dwelling’s main vein is exhausted. Expect strongly "
+"diminished returns on investment. You should consider dismantling or "
+"destroying it."
+msgstr "Tha prìomh-chuisle aig fàrdach an ruamhaire òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Hunter-Gatherer’s Hut"
+msgstr "Bothan sealgair ’s cruinniche"
+
+#. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:41
+msgid "gathering"
+msgstr "a chruinneachadh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:49
+msgid "gathering meat"
+msgstr "sitheann a chruinneachadh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:57
+msgid "gathering fish"
+msgstr "iasg a chruinneachadh"
+
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:66
+msgid "No Game, No Fish"
+msgstr "Dìth beathaich"
+
+#. TRANSLATORS: "Game" means animals that you can hunt
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:68
+msgid "Out of Game and Fish"
+msgstr "Chan eil sitheann no iasg ann"
+
+#. TRANSLATORS: "game" means animals that you can hunt
+#: ../../data/tribes/buildings/productionsites/amazons/hunter_gatherers_hut/init.lua:70
+msgctxt "amazons_building"
+msgid ""
+"The hunter-gatherer working out of this hunter-gatherer’s hut can’t find any"
+" game or fish in his work area."
+msgstr "Cha do lorg an sealgair ’s cruinniche a tha ag obair aig a’ bhothan seo iasg no sitheann sam bith taobh a-staigh an raoin-obrach tuilleadh."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Jungle Preserver’s Hut"
+msgstr "Bothan glèidheadair-coille"
+
+#. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
+#: ../../data/tribes/buildings/productionsites/amazons/jungle_preservers_hut/init.lua:51
+#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
+#: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:43
+#: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:53
+msgid "planting trees"
+msgstr "craobh a chur"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Liana Cutter’s Hut"
+msgstr "Bothan eidhne"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
+#: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:41
+msgid "cutting lianas"
+msgstr "eidheann a ghearradh"
+
+#. TRANSLATORS: Short for "No Trees to cut lianas" for clay pits
+#: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:51
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:48
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
+msgid "No Trees"
+msgstr "Dìth chraobhan"
+
+#: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:52
+msgid "No Tree to Cut Lianas"
+msgstr "Chan eil craobh ann airson eidheann a ghearradh uaithe"
+
+#: ../../data/tribes/buildings/productionsites/amazons/liana_cutters_hut/init.lua:53
+msgctxt "amazons_building"
+msgid ""
+"The liana Cutter working at this site can’t find any tree in his work area. "
+"Consider dismantling this liana cutter’s hut and rebuilding it somewhere "
+"else."
+msgstr "Cha do lorg tè nan eidheann a tha ag obair aig a’ bhothan eidhne seo craobh taobh a-staigh an raoin-obrach."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Rare Tree Cutter’s Hut"
+msgstr "Buain chraobhan ainneimh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
+#. because ... (can produce more efficient when supply is good)
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:41
+msgid "harvesting balsa"
+msgstr "balsa a bhuain"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
+#. because ... (can produce more efficient when supply is good)
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:50
+msgid "harvesting rubber"
+msgstr "rubair a bhuain"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
+#. because ... (can produce more efficient when supply is good)
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:59
+msgid "harvesting ironwood"
+msgstr "fiodh cruaidh a bhuain"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:8
+msgctxt "amazons_building"
+msgid "Rare Tree Plantation"
+msgstr "Planntachadh chraobhan ainneamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
+#. because ... (can produce more efficient when supply is good)
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:57
+msgid "planting balsatree"
+msgstr "craobh-balsa a chur"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
+#. because ... (can produce more efficient when supply is good)
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:67
+msgid "planting rubbertree"
+msgstr "craobh-rubair a chur"
+
+#. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
+#. because ... (can produce more efficient when supply is good)
+#: ../../data/tribes/buildings/productionsites/amazons/rare_tree_plantation/init.lua:77
+msgid "planting ironwoodtree"
+msgstr "craobh chruaidh a chur"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:8
+msgctxt "amazons_building"
+msgid "Rope Weaver Booth"
+msgstr "Bùth ròpannan"
+
+#. TRANSLATORS: Completed/Skipped/Did not start weaving cloth because ...
+#: ../../data/tribes/buildings/productionsites/amazons/rope_weaver_booth/init.lua:52
+msgid "making a rope"
+msgstr "ròpa a dhèanamh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Scout’s Hut"
+msgstr "Bothan-rabhadair"
+
+#. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
+#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
+#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:54
+msgid "scouting"
+msgstr "rùrachadh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:8
+msgctxt "amazons_building"
+msgid "Shipyard"
+msgstr "Doca"
+
+#. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:72
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:68
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:71
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
+msgid "constructing a ship"
+msgstr "long a thogail"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:8
+msgctxt "amazons_building"
+msgid "Stone Workshop"
+msgstr "Ceàrdach cloiche"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
+#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:83
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:200
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:123
+msgid "making a shovel"
+msgstr "sluasaid a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:94
+msgid "making a felling axe"
+msgstr "tuagh leagail a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:164
+msgid "making a pick"
+msgstr "piocaid a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:116
+msgid "making a machete"
+msgstr "sgian-choille a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:127
+msgid "making kitchen_tools"
+msgstr "acainnean cidsin a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
+#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:138
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
+#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
+#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:128
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:189
+msgid "making a hammer"
+msgstr "òrd a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:149
+msgid "making a chisel"
+msgstr "sgeilb a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
+#. ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
+msgid "making needles"
+msgstr "snàthadan a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:171
+msgid "making a stone bowl"
+msgstr "bobhla cloiche a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:182
+msgid "making a wooden spear"
+msgstr "sleagh fiodha a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:193
+msgid "making a stone tipped spear"
+msgstr "sleagh le ceann-cloiche a dhèanamh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
+#: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:204
+msgid "making a hardened spear"
+msgstr "sleagh chruaidhichte a dhèanamh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Stonecutter’s Hut"
+msgstr "Bothan tochailteir"
+
+#. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
+msgid "cutting granite"
+msgstr "gaireal a thochladh"
+
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:61
+msgid "No Rocks"
+msgstr "Dìth carraige"
+
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:57
+#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:48
+#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
+msgid "Out of Rocks"
+msgstr "Chan eil carraig ann"
+
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:58
+msgctxt "amazons_building"
+msgid ""
+"The stonecutter working at this stonecutter’s hut can’t find any rocks in "
+"his work area."
+msgstr "Chan urrainn dhan tochailtear a tha ag obair aig a’ bhothan tochailteir seo carraig a lorg taobh a-staigh an raoin-obrach tuilleadh."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:8
+msgctxt "amazons_building"
+msgid "Stone Mine"
+msgstr "Mèinn cloiche"
+
+#. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:50
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:79
+msgid "mining granite"
+msgstr "gaireal a thochladh"
+
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:120
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:97
+msgid "No Granite"
+msgstr "Dìth gaireil"
+
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:121
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:98
+msgid "Main Granite Vein Exhausted"
+msgstr "Tha prìomh-chuisle gaireil air a caitheamh"
+
+#: ../../data/tribes/buildings/productionsites/amazons/stonemine/init.lua:82
+msgctxt "amazons_building"
+msgid ""
+"This stone mine’s main vein is exhausted. Expect strongly diminished returns"
+" on investment. You should consider dismantling or destroying it."
+msgstr "Tha prìomh-chuisle na mèinne cloiche seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a thoirt às a chèile no a mhilleadh."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:8
+msgctxt "amazons_building"
+msgid "Tapir Farm"
+msgstr "Rainse thaipirean"
+
+#. TRANSLATORS: Completed/Skipped/Did not start breeding tapir because ...
+#: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:61
+msgctxt "amazons_building"
+msgid "breeding tapir"
+msgstr "taipir àrachadh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Water Gatherer’s Hut"
+msgstr "Bothan an t-uisge"
+
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:51
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:58
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
+msgid "No Water"
+msgstr "Dìth uisge"
+
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:52
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
+msgid "Out of Water"
+msgstr "Chan eil uisge ann"
+
+#: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:53
+msgctxt "amazons_building"
+msgid ""
+"The carrier working at this water gatherer’s hut can’t find any water in its"
+" vicinity."
+msgstr "Chan urrainn dhan ghiùlanair a tha ag obair aig bothan an t-uisge seo uisge a lorg am fagas tuilleadh."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:8
+msgctxt "amazons_building"
+msgid "Wilderness Keeper’s Tent"
+msgstr "Bothan glèidheadair bheathaichean"
+
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
+msgid "breeding fish"
+msgstr "iasg a thàrmachadh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:59
+msgid "releasing game"
+msgstr "beathach a leigeil mu sgaoil"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:8
+msgctxt "amazons_building"
+msgid "Woodcutter’s Hut"
+msgstr "Bothan buaineadair-fhiodha"
+
+#. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:50
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:39
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:46
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:39
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:52
+msgid "felling trees"
+msgstr "craobh a leagail"
+
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:62
+msgid "Out of Trees"
+msgstr "Chan eil craobhan ann"
+
+#: ../../data/tribes/buildings/productionsites/amazons/woodcutters_hut/init.lua:62
+msgctxt "amazons_building"
+msgid ""
+"The woodcutter working at this woodcutter’s house can’t find any trees in "
+"his work area. You should consider dismantling or destroying the building or"
+" building a forester’s house."
+msgstr "Cha do lorg am buaineadair-fhiodha a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/amazons/youth_gathering/init.lua:8
+msgctxt "amazons_building"
+msgid "Youth Gathering"
+msgstr "Tional na h-òigridh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
+#: ../../data/tribes/buildings/productionsites/amazons/youth_gathering/init.lua:60
+msgctxt "amazons_building"
+msgid "recruiting soldier"
+msgstr "bana-ghaisgeach a thrusadh"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:171
+msgctxt "atlanteans_building"
+msgid "Armor Smithy"
+msgstr "Ceàrdach armachd"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a steel shield because
 #. ...
@@ -649,28 +1537,6 @@ msgstr "freumhagan a chur"
 msgid "harvesting blackroot"
 msgstr "freumhagan a bhuain"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:69
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:72
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
-msgid "No Fields"
-msgstr "Dìth achaidh"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:70
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:74
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:84
-#: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:72
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:102
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
-msgid "Out of Fields"
-msgstr "Chan eil achadh ann"
-
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:71
 msgctxt "atlanteans_building"
 msgid ""
@@ -699,48 +1565,48 @@ msgid "Coal Mine"
 msgstr "Mèinn guail"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:58
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:92
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:102
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:78
 msgid "mining coal"
 msgstr "gual a thochladh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:74
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:117
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:96
 msgid "No Coal"
 msgstr "Dìth guail"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:91
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:121
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:118
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:97
 msgid "Main Coal Vein Exhausted"
 msgstr "Tha prìomh-chuisle guail air a caitheamh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:98
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -753,41 +1619,27 @@ msgctxt "atlanteans_building"
 msgid "Crystal Mine"
 msgstr "Mèinn criostail"
 
-#. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:64
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:105
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:66
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:104
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:81
-msgid "mining granite"
-msgstr "gaireal a thochladh"
-
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:113
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:112
 msgid "mining quartz"
 msgstr "èiteag a thochladh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:94
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:121
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:120
 msgid "mining diamonds"
 msgstr "daoimean a thochladh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:155
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:154
 msgid "No Crystals"
 msgstr "Dìth criostail"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:156
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:155
 msgid "Main Crystal Vein Exhausted"
 msgstr "Tha prìomh-chuisle criostail air a caitheamh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:158
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:157
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -827,12 +1679,6 @@ msgstr "Taigh-aiseig"
 msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
 msgstr "Ionad-àraich èisg"
-
-#. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
-msgid "breeding fish"
-msgstr "iasg a thàrmachadh"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:53
@@ -891,14 +1737,6 @@ msgctxt "atlanteans_building"
 msgid "Forester’s House"
 msgstr "Taigh planntair-choille"
 
-#. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:49
-#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:53
-msgid "planting trees"
-msgstr "craobh a chur"
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/gold_spinning_mill/init.lua:8
 msgctxt "atlanteans_building"
@@ -916,47 +1754,7 @@ msgctxt "atlanteans_building"
 msgid "Gold Mine"
 msgstr "Mèinn òir"
 
-#. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:66
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:60
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:78
-msgid "mining gold"
-msgstr "òr a thochladh"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:82
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:95
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:74
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:106
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:96
-msgid "No Gold"
-msgstr "Dìth òir"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:91
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:107
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:97
-msgid "Main Gold Vein Exhausted"
-msgstr "Tha prìomh-chuisle òir air a caitheamh"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:86
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1019,46 +1817,46 @@ msgid "Iron Mine"
 msgstr "Mèinn iarainn"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:55
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:69
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:57
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:68
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:69
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:78
 msgid "mining iron"
 msgstr "iarann a thochladh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:82
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:90
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:96
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:75
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:106
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:98
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:73
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:96
 msgid "No Iron"
 msgstr "Dìth iarainn"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:89
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:91
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:97
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:74
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:105
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:97
 msgid "Main Iron Vein Exhausted"
 msgstr "Tha prìomh-chuisle iarainn air a caitheamh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:90
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1095,20 +1893,6 @@ msgstr "Cuaraidh"
 msgid "quarrying granite"
 msgstr "gaireal a thochladh"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:54
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:61
-msgid "No Rocks"
-msgstr "Dìth carraige"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
-#: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:62
-msgid "Out of Rocks"
-msgstr "Chan eil carraig ann"
-
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:49
 msgctxt "atlanteans_building"
 msgid ""
@@ -1134,28 +1918,11 @@ msgctxt "atlanteans_building"
 msgid "Scout’s House"
 msgstr "Taigh-rabhadair"
 
-#. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:49
-#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:54
-msgid "scouting"
-msgstr "rùrachadh"
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:8
 msgctxt "atlanteans_building"
 msgid "Shipyard"
 msgstr "Doca"
-
-#. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
-#. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:72
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:72
-msgid "constructing a ship"
-msgstr "long a thogail"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:8
@@ -1174,14 +1941,6 @@ msgstr "Ceàrdach leaghadair"
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:104
 msgid "smelting iron"
 msgstr "iarann a leaghadh"
-
-#. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:88
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:92
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:93
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:117
-msgid "smelting gold"
-msgstr "òr a leaghadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:8
@@ -1244,14 +2003,6 @@ msgstr "clobha teine a dhèanamh"
 msgid "making a fishing net"
 msgstr "lìon-èisg a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:116
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:145
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:128
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:189
-msgid "making a hammer"
-msgstr "òrd a dhèanamh"
-
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:128
 msgid "making a hook pole"
@@ -1269,13 +2020,6 @@ msgstr "bogha seilg a dhèanamh"
 msgid "making milking tongs"
 msgstr "clobha bleoghainn a dhèanamh"
 
-#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:164
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:181
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:164
-msgid "making a pick"
-msgstr "piocaid a dhèanamh"
-
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:176
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:176
@@ -1289,14 +2033,6 @@ msgstr "sàbh a dhèanamh"
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:112
 msgid "making a scythe"
 msgstr "fàl a dhèanamh"
-
-#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:200
-#: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:205
-#: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:200
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:123
-msgid "making a shovel"
-msgstr "sluasaid a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:8
@@ -1363,20 +2099,6 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Tobar"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:55
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:65
-msgid "No Water"
-msgstr "Dìth uisge"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:57
-#: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/well/init.lua:56
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:66
-msgid "Out of Water"
-msgstr "Chan eil uisge ann"
-
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:58
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
@@ -1388,35 +2110,13 @@ msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
 msgstr "Taigh buaineadair-fhiodha"
 
-#. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:39
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:46
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:39
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:52
-msgid "felling trees"
-msgstr "craobh a leagail"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:48
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:55
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:48
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:61
-msgid "No Trees"
-msgstr "Dìth chraobhan"
-
-#: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:49
-#: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:56
-#: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:62
-msgid "Out of Trees"
-msgstr "Chan eil craobhan ann"
-
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:50
 msgctxt "atlanteans_building"
 msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "Cha do lorg an coilltear a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
+msgstr "Cha do lorg am buaineadair-fhiodha a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:8
@@ -1472,16 +2172,6 @@ msgctxt "barbarians_building"
 msgid "Big Inn"
 msgstr "Taigh-seinnse"
 
-#. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:63
-#: ../../data/tribes/buildings/productionsites/barbarians/tavern/init.lua:70
-#: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:48
-#: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:65
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:67
-msgid "preparing a ration"
-msgstr "greimeag ullachadh"
-
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:76
@@ -1531,8 +2221,8 @@ msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr "Mèinn guail"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:100
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:90
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1551,7 +2241,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
 msgstr "Mèinn guail as doimhne"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:80
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1614,8 +2304,8 @@ msgctxt "barbarians_building"
 msgid "Gold Mine"
 msgstr "Mèinn òir"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:90
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1634,7 +2324,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
 msgstr "Mèinn òir as doimhne"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:81
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1648,19 +2338,7 @@ msgctxt "barbarians_building"
 msgid "Granite Mine"
 msgstr "Mèinn gaireil"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:84
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:122
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:99
-msgid "No Granite"
-msgstr "Dìth gaireil"
-
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
-msgid "Main Granite Vein Exhausted"
-msgstr "Tha prìomh-chuisle gaireil air a caitheamh"
-
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:86
 msgctxt "barbarians_building"
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
@@ -1718,8 +2396,8 @@ msgctxt "barbarians_building"
 msgid "Iron Mine"
 msgstr "Mèinn iarainn"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:85
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:90
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1738,7 +2416,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
 msgstr "Mèinn iarainn as doimhne"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:80
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2012,7 +2690,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Mèinn guail"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:97
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2025,7 +2703,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Mèinn guail dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:77
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2088,7 +2766,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Mèinn òir"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:98
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:96
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2101,7 +2779,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Mèinn òir dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:75
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2135,7 +2813,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Mèinn iarainn"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:99
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:97
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2148,7 +2826,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "Mèinn iarainn dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2177,25 +2855,25 @@ msgid "Marble Mine"
 msgstr "Mèinn marmoir"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:89
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:109
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:45
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:58
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:107
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:43
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:64
 msgid "mining marble"
 msgstr "marmor a thogail"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:135
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:133
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:82
 msgid "No Marble"
 msgstr "Dìth marmoir"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:85
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:134
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:83
 msgid "Main Marble Vein Exhausted"
 msgstr "Tha prìomh-chuisle marmoir air a caitheamh"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:138
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:136
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -2209,7 +2887,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Mèinn marmoir dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:85
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -2481,12 +3159,6 @@ msgctxt "frisians_building"
 msgid "Bakery"
 msgstr "Taigh-fuine"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:88
-msgid "baking bread"
-msgstr "aran fhuineadh"
-
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:8
 msgctxt "frisians_building"
@@ -2548,11 +3220,6 @@ msgstr "tuagh leagail a dhèanamh"
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:101
 msgid "forging a pick"
 msgstr "piocaid a dhèanamh"
-
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
-msgid "making needles"
-msgstr "snàthadan a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:8
@@ -2641,7 +3308,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "Mèinn guail"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:123
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:120
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2654,7 +3321,7 @@ msgctxt "frisians_building"
 msgid "Deep Coal Mine"
 msgstr "Mèinn guail dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2754,7 +3421,7 @@ msgctxt "frisians_building"
 msgid "Gold Mine"
 msgstr "Mèinn òir"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:109
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2767,7 +3434,7 @@ msgctxt "frisians_building"
 msgid "Deep Gold Mine"
 msgstr "Mèinn òir dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:99
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:97
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2807,7 +3474,7 @@ msgctxt "frisians_building"
 msgid "Iron Mine"
 msgstr "Mèinn iarainn"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:109
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:107
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2820,7 +3487,7 @@ msgctxt "frisians_building"
 msgid "Deep Iron Mine"
 msgstr "Mèinn iarainn dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:101
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2915,7 +3582,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr "Mèinn cloiche"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:125
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:123
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2928,7 +3595,7 @@ msgctxt "frisians_building"
 msgid "Deep Rock Mine"
 msgstr "Mèinn cloiche dhomhain"
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -3037,13 +3704,15 @@ msgid ""
 msgstr "Cha do lorg an coilltear a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:194
-msgctxt "atlanteans_building"
-msgid "Dungeon"
-msgstr "Toll-dubh"
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:8
+msgctxt "amazons_building"
+msgid "Training Glade"
+msgstr "Blàran-coille"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:260
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:107
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:80
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:271
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:83
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:77
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:94
@@ -3056,28 +3725,131 @@ msgid "sleeping"
 msgstr "cadal"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:268
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:115
+msgctxt "amazons_building"
+msgid "upgrading soldier evade from level 0 to level 1"
+msgstr "teàrnadh bana-ghaisgich àrdachadh o leibheil 0 gu leibheil 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:129
+msgctxt "amazons_building"
+msgid "upgrading soldier evade from level 1 to level 2"
+msgstr "teàrnadh bana-ghaisgich àrdachadh o leibheil 1 gu leibheil 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:143
+msgctxt "amazons_building"
+msgid "upgrading soldier evade from level 2 to level 3"
+msgstr "teàrnadh bana-ghaisgich àrdachadh o leibheil 2 gu leibheil 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:158
+msgctxt "amazons_building"
+msgid "upgrading soldier health from level 0 to level 1"
+msgstr "slàinte bana-ghaisgich àrdachadh o leibheil 0 gu leibheil 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:172
+msgctxt "amazons_building"
+msgid "upgrading soldier health from level 1 to level 2"
+msgstr "slàinte bana-ghaisgich àrdachadh o leibheil 1 gu leibheil 2"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:186
+msgctxt "amazons_building"
+msgid "upgrading soldier health from level 2 to level 3"
+msgstr "slàinte bana-ghaisgich àrdachadh o leibheil 2 gu leibheil 3"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
+msgctxt "amazons_building"
+msgid "upgrading soldier defense from level 0 to level 1"
+msgstr "dìon bana-ghaisgich àrdachadh o leibheil 0 gu leibheil 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
+msgctxt "amazons_building"
+msgid "upgrading soldier defense from level 1 to level 2"
+msgstr "dìon bana-ghaisgich àrdachadh o leibheil 1 gu leibheil 2"
+
+#. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:122
+msgctxt "amazons_building"
+msgid "No soldier to train!"
+msgstr "Chan eil bana-ghaisgich ri oideachadh ann!"
+
+#. TRANSLATORS: Amazon training site tooltip when none of the present soldiers
+#. match the current training program
+#: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:238
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:124
+msgctxt "amazons_building"
+msgid "No soldier found for this training level!"
+msgstr "Cha deach bana-ghaisgich airson an leibheil de dh’oideachadh seo a lorg!"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:8
+msgctxt "amazons_building"
+msgid "Warriors’ Gathering"
+msgstr "Tionail nam bana-ghaisgeach"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
+msgctxt "amazons_building"
+msgid "upgrading soldier attack from level 0 to level 1"
+msgstr "ionnsaigh bana-ghaisgich àrdachadh o leibheil 0 gu leibheil 1"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
+msgctxt "amazons_building"
+msgid "upgrading soldier attack from level 1 to level 2"
+msgstr "ionnsaigh bana-ghaisgich àrdachadh o leibheil 1 gu leibheil 2"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
+msgctxt "atlanteans_building"
+msgid "Dungeon"
+msgstr "Toll-dubh"
+
+#. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:279
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "ionnsaigh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:282
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:293
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "ionnsaigh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:296
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:307
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "ionnsaigh saighdeir àrdachadh o leibheil 2 gu leibheil 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:310
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "ionnsaigh saighdeir àrdachadh o leibheil 3 gu leibheil 4"
+
+#. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
+#. assigned
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:340
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:163
+msgctxt "atlanteans_building"
+msgid "No soldier to train!"
+msgstr "Chan eil bana-ghaisgich ri oideachadh ann!"
+
+#. TRANSLATORS: Atlantean training site tooltip when none of the present
+#. soldiers match the current training program
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:342
+#: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:165
+msgctxt "atlanteans_building"
+msgid "No soldier found for this training level!"
+msgstr "Cha deach bana-ghaisgich airson an leibheil de dh’oideachadh seo a lorg!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:8
@@ -3132,6 +3904,22 @@ msgstr "teàrnadh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr "teàrnadh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
+
+#. TRANSLATORS: Barbarian training site tooltip when it has no soldiers
+#. assigned
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:218
+msgctxt "barbarians_building"
+msgid "No soldier to train!"
+msgstr "Chan eil saighdear ri oideachadh ann!"
+
+#. TRANSLATORS: Barbarian training site tooltip when none of the present
+#. soldiers match the current training program
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:122
+#: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:220
+msgctxt "barbarians_building"
+msgid "No soldier found for this training level!"
+msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:8
@@ -3199,6 +3987,23 @@ msgstr "Raon spòrs"
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr "teàrnadh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
+
+#. TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:111
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:212
+msgctxt "empire_building"
+msgid "No soldier to train!"
+msgstr "Chan eil saighdear ri oideachadh ann!"
+
+#. TRANSLATORS: Empire training site tooltip when none of the present soldiers
+#. match the current training program
+#: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:113
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:87
+#: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:214
+msgctxt "empire_building"
+msgid "No soldier found for this training level!"
+msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:8
@@ -3302,6 +4107,21 @@ msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "slàinte saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
+#. TRANSLATORS: Frisian training site tooltip when it has no soldiers assigned
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:205
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:202
+msgctxt "frisians_building"
+msgid "No soldier to train!"
+msgstr "Chan eil saighdear ri oideachadh ann!"
+
+#. TRANSLATORS: Frisian training site tooltip when none of the present
+#. soldiers match the current training program
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:207
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:204
+msgctxt "frisians_building"
+msgid "No soldier found for this training level!"
+msgstr "Cha deach saighdear airson an leibheil de dh’oideachadh seo a lorg!"
+
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:8
 msgctxt "frisians_building"
@@ -3337,6 +4157,24 @@ msgstr "slàinte saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "dìon saighdeir àrdachadh o leibheil 0 gu leibheil 1"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
+msgctxt "amazons_building"
+msgid "Headquarters"
+msgstr "Prìomh-àras"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/warehouses/amazons/port/init.lua:8
+msgctxt "amazons_building"
+msgid "Port"
+msgstr "Port"
+
+#. TRANSLATORS: This is a building name used in lists of buildings
+#: ../../data/tribes/buildings/warehouses/amazons/warehouse/init.lua:8
+msgctxt "amazons_building"
+msgid "Warehouse"
+msgstr "Taigh-stòrais"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:79
@@ -3417,6 +4255,7 @@ msgctxt "frisians_building"
 msgid "Warehouse"
 msgstr "Taigh-stòrais"
 
+#: ../../data/tribes/economy_profiles/amazons:4
 #: ../../data/tribes/economy_profiles/atlanteans:4
 #: ../../data/tribes/economy_profiles/barbarians:4
 #: ../../data/tribes/economy_profiles/empire:4
@@ -3424,6 +4263,7 @@ msgstr "Taigh-stòrais"
 msgid "Efficiency"
 msgstr "Èifeachdas"
 
+#: ../../data/tribes/economy_profiles/amazons:5
 #: ../../data/tribes/economy_profiles/atlanteans:5
 #: ../../data/tribes/economy_profiles/barbarians:5
 #: ../../data/tribes/economy_profiles/empire:5
@@ -3642,6 +4482,36 @@ msgid "Blackroot Field (tiny)"
 msgstr "Achadh fhreumhagan (beag bìodach)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
+msgctxt "immovable"
+msgid "Cassava Root Field (harvested)"
+msgstr "Achadh casabha (air a bhuain)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/cassavafield/medium/init.lua:8
+msgctxt "immovable"
+msgid "Cassava Root Field (medium)"
+msgstr "Achadh casabha (meadhanach)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/cassavafield/ripe/init.lua:8
+msgctxt "immovable"
+msgid "Cassava Root Field (ripe)"
+msgstr "Achadh casabha (abaich)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/cassavafield/small/init.lua:8
+msgctxt "immovable"
+msgid "Cassava Root Field (small)"
+msgstr "Achadh casabha (beag)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
+msgctxt "immovable"
+msgid "Cassava Root Field (tiny)"
+msgstr "Achadh casabha (beag bìodach)"
+
+#. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (harvested)"
@@ -3756,6 +4626,7 @@ msgid "Reed Field (tiny)"
 msgstr "Achadh feòir (beag bìodach)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/init.lua:8
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:8
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:8
 #: ../../data/tribes/immovables/resi/empire/init.lua:8
@@ -3763,6 +4634,42 @@ msgstr "Achadh feòir (beag bìodach)"
 msgctxt "resource_indicator"
 msgid "No Resources"
 msgstr "Gun stòras"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/init.lua:24
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:77
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:68
+#: ../../data/tribes/immovables/resi/empire/init.lua:68
+#: ../../data/tribes/immovables/resi/frisians/init.lua:77
+msgctxt "resource_indicator"
+msgid "Some Gold"
+msgstr "Beagan òir"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/init.lua:40
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:108
+#: ../../data/tribes/immovables/resi/frisians/init.lua:123
+msgctxt "resource_indicator"
+msgid "Some Granite"
+msgstr "Beagan gaireil"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/init.lua:56
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:169
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:148
+#: ../../data/tribes/immovables/resi/empire/init.lua:148
+#: ../../data/tribes/immovables/resi/frisians/init.lua:169
+msgctxt "resource_indicator"
+msgid "A Lot of Gold"
+msgstr "Mòran òir"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/amazons/init.lua:72
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:188
+#: ../../data/tribes/immovables/resi/frisians/init.lua:215
+msgctxt "resource_indicator"
+msgid "A Lot of Granite"
+msgstr "Mòran gaireil"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:31
@@ -3781,15 +4688,6 @@ msgstr "Uisge"
 msgctxt "resource_indicator"
 msgid "Some Coal"
 msgstr "Beagan guail"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:77
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:68
-#: ../../data/tribes/immovables/resi/empire/init.lua:68
-#: ../../data/tribes/immovables/resi/frisians/init.lua:77
-msgctxt "resource_indicator"
-msgid "Some Gold"
-msgstr "Beagan òir"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:100
@@ -3816,15 +4714,6 @@ msgid "A Lot of Coal"
 msgstr "Mòran guail"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/atlanteans/init.lua:169
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:148
-#: ../../data/tribes/immovables/resi/empire/init.lua:148
-#: ../../data/tribes/immovables/resi/frisians/init.lua:169
-msgctxt "resource_indicator"
-msgid "A Lot of Gold"
-msgstr "Mòran òir"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:192
 #: ../../data/tribes/immovables/resi/barbarians/init.lua:168
 #: ../../data/tribes/immovables/resi/empire/init.lua:168
@@ -3840,20 +4729,6 @@ msgid "A Lot of Crystals"
 msgstr "Mòran chriostalan"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:108
-#: ../../data/tribes/immovables/resi/frisians/init.lua:123
-msgctxt "resource_indicator"
-msgid "Some Granite"
-msgstr "Beagan gaireil"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi/barbarians/init.lua:188
-#: ../../data/tribes/immovables/resi/frisians/init.lua:215
-msgctxt "resource_indicator"
-msgid "A Lot of Granite"
-msgstr "Mòran gaireil"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:108
 msgctxt "resource_indicator"
 msgid "Some Marble"
@@ -3866,6 +4741,7 @@ msgid "A Lot of Marble"
 msgstr "Mòran marmoir"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
+#: ../../data/tribes/immovables/shipconstruction_amazons/init.lua:8
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:8
 #: ../../data/tribes/immovables/shipconstruction_barbarians/init.lua:8
 #: ../../data/tribes/immovables/shipconstruction_empire/init.lua:8
@@ -3873,6 +4749,152 @@ msgstr "Mòran marmoir"
 msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Làrach togail luinge"
+
+#. TRANSLATORS: This is an amazon rare tree.
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/init.lua:80
+#: ../../data/tribes/immovables/trees/balsa/init.lua:158
+#: ../../data/tribes/immovables/trees/balsa/init.lua:236
+#: ../../data/tribes/immovables/trees/balsa/init.lua:314
+msgid "Balsa Tree (Sapling)"
+msgstr "Fiùran balsa"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/init.lua:98
+#: ../../data/tribes/immovables/trees/balsa/init.lua:176
+#: ../../data/tribes/immovables/trees/balsa/init.lua:254
+#: ../../data/tribes/immovables/trees/balsa/init.lua:332
+msgid "Balsa Tree (Pole)"
+msgstr "Craobhag-balsa"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/init.lua:116
+#: ../../data/tribes/immovables/trees/balsa/init.lua:194
+#: ../../data/tribes/immovables/trees/balsa/init.lua:272
+#: ../../data/tribes/immovables/trees/balsa/init.lua:350
+msgid "Balsa Tree (Mature)"
+msgstr "Craobh-balsa inbheach"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/init.lua:134
+#: ../../data/tribes/immovables/trees/balsa/init.lua:212
+#: ../../data/tribes/immovables/trees/balsa/init.lua:290
+#: ../../data/tribes/immovables/trees/balsa/init.lua:368
+msgid "Balsa Tree (Old)"
+msgstr "Seann chraobh-balsa"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/balsa/init.lua:136
+#: ../../data/tribes/immovables/trees/balsa/init.lua:214
+#: ../../data/tribes/immovables/trees/balsa/init.lua:292
+#: ../../data/tribes/immovables/trees/balsa/init.lua:370
+msgid "Balsa Tree"
+msgstr "Craobh-balsa"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/init.lua:8
+msgid "Cocoa Tree (sapling)"
+msgstr "Fiùran còco"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/init.lua:32
+msgid "Cocoa Tree (pole)"
+msgstr "Craobhag-còco"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/init.lua:56
+msgid "Cocoa Tree (mature)"
+msgstr "Craobh-còco inbheach"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/cocoa/init.lua:80
+msgid "Cocoa Tree (old)"
+msgstr "Seann chraobh-còco"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
+msgid "Dead Tree"
+msgstr "Craobh mharbh"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:80
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:158
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:236
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:314
+msgid "Ironwood Tree (Sapling)"
+msgstr "Fiùran cruaidh"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:98
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:176
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:254
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:332
+msgid "Ironwood Tree (Pole)"
+msgstr "Craobhag chruaidh"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:116
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:194
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:272
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:350
+msgid "Ironwood Tree (Mature)"
+msgstr "Craobh chruaidh inbheach"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:134
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:212
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:290
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:368
+msgid "Ironwood Tree (Old)"
+msgstr "Seann chraobh chruaidh"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:136
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:214
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:292
+#: ../../data/tribes/immovables/trees/ironwood/init.lua:370
+msgid "Ironwood Tree"
+msgstr "Craobh chruaidh"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/init.lua:80
+#: ../../data/tribes/immovables/trees/rubber/init.lua:158
+#: ../../data/tribes/immovables/trees/rubber/init.lua:236
+#: ../../data/tribes/immovables/trees/rubber/init.lua:314
+msgid "Rubber Tree (Sapling)"
+msgstr "Fiùran rubair"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/init.lua:98
+#: ../../data/tribes/immovables/trees/rubber/init.lua:176
+#: ../../data/tribes/immovables/trees/rubber/init.lua:254
+#: ../../data/tribes/immovables/trees/rubber/init.lua:332
+msgid "Rubber Tree (Pole)"
+msgstr "Craobhag-rubair"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/init.lua:116
+#: ../../data/tribes/immovables/trees/rubber/init.lua:194
+#: ../../data/tribes/immovables/trees/rubber/init.lua:272
+#: ../../data/tribes/immovables/trees/rubber/init.lua:350
+msgid "Rubber Tree (Mature)"
+msgstr "Craobh-rubair inbheach"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/init.lua:134
+#: ../../data/tribes/immovables/trees/rubber/init.lua:212
+#: ../../data/tribes/immovables/trees/rubber/init.lua:290
+#: ../../data/tribes/immovables/trees/rubber/init.lua:368
+msgid "Rubber Tree (Old)"
+msgstr "Seann chraobh-rubair"
+
+#. TRANSLATORS:  This is an amazon rare tree.
+#: ../../data/tribes/immovables/trees/rubber/init.lua:136
+#: ../../data/tribes/immovables/trees/rubber/init.lua:214
+#: ../../data/tribes/immovables/trees/rubber/init.lua:292
+#: ../../data/tribes/immovables/trees/rubber/init.lua:370
+msgid "Rubber Tree"
+msgstr "Craobh-rubair"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
@@ -3904,12 +4926,203 @@ msgctxt "immovable"
 msgid "Wheat Field (tiny)"
 msgstr "Achadh cruithneachd (beag bìodach)"
 
+#: ../../data/tribes/initialization/amazons/init.lua:11
 #: ../../data/tribes/initialization/atlanteans/init.lua:11
 #: ../../data/tribes/initialization/barbarians/init.lua:10
 #: ../../data/tribes/initialization/empire/init.lua:10
 #: ../../data/tribes/initialization/frisians/init.lua:10
 msgid "The Widelands Development Team"
 msgstr "An sgioba leasachaidh Widelands"
+
+#. TRANSLATORS: This is a tribe name
+#: ../../data/tribes/initialization/amazons/init.lua:13
+msgid "Amazons (experimental)"
+msgstr "Muinntir na h-Amasoin (deuchainneil)"
+
+#: ../../data/tribes/initialization/amazons/init.lua:14
+msgid ""
+"The people of the amazonian jungle. This tribe is still under development."
+msgstr "Tha an sluagh seo a’ fuireach ann an dlùth-choille na h-Amasoin. Tha an treubh seo ’ga leasachadh fhathast."
+
+#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
+#. is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:8
+msgctxt "amazons_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] "%1% ghaisgeach (+%2%)"
+msgstr[1] "%1% ghaisgeach (+%2%)"
+msgstr[2] "%1% gaisgich (+%2%)"
+msgstr[3] "%1% gaisgeach (+%2%)"
+
+#. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:11
+msgctxt "amazons_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] "%1% ghaisgeach"
+msgstr[1] "%1% ghaisgeach"
+msgstr[2] "%1% gaisgich"
+msgstr[3] "%1% gaisgeach"
+
+#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building. %3% is the maximum number
+#. of soldier slots in the building
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:16
+msgctxt "amazons_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] "%1%(+%2%) ghaisgeach (+%3%)"
+msgstr[1] "%1%(+%2%) ghaisgeach (+%3%)"
+msgstr[2] "%1%(+%2%) gaisgich (+%3%)"
+msgstr[3] "%1%(+%2%) gaisgeach (+%3%)"
+
+#. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/amazons/military_capacity.lua:19
+msgctxt "amazons_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] "%1%(+%2%) ghaisgeach"
+msgstr[1] "%1%(+%2%) ghaisgeach"
+msgstr[2] "%1%(+%2%) gaisgich"
+msgstr[3] "%1%(+%2%) gaisgeach"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
+msgid "Fortified Village"
+msgstr "Baile daingnichte"
+
+#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
+#. condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:13
+msgid "Start the game with a fortified military installation"
+msgstr "Tòisich an geama le ionad daingnichte an airm"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
+msgid "Headquarters"
+msgstr "Prìomh-àras"
+
+#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
+msgid "Start the game with your headquarters only"
+msgstr "Tòisich an geama leis a’ phrìomh-àras agad a-mhàin"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:11
+msgid "Poor Hamlet"
+msgstr "Clachan bochd"
+
+#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
+#. condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:13
+msgid ""
+"Start the game with just a warehouse and the bare minimum for bootstrapping "
+"an economy. Warning: the AI can’t successfully start from this."
+msgstr "Tòisich air a’ gheama le taigh-stòrais agus stòras èiginneach airson eaconamaidh a stèidheachadh. Rabhadh: Chan eil an IF comasach air seo."
+
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+msgid "Be careful"
+msgstr "Thoir an aire"
+
+#: ../../data/tribes/initialization/amazons/starting_conditions/poor_hamlet.lua:41
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
+#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
+#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
+#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
+msgid ""
+"You have only one iron for each tool you will need to start your economy. "
+"Make sure no unneeded tool is created."
+msgstr "Chan eil ach aon chnap iarainn agad airson gach acainn a dh’fheumas tu airson an eaconamaidh agad a stèidheachadh. Dèan cinnteach nach dèid acainn a shaothrachadh gun fheum oirre."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:11
+msgid "Struggling Outpost"
+msgstr "Tuineachadh fo èiginn"
+
+#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:13
+msgid ""
+"Start the game with just your headquarters and very few wares for "
+"bootstrapping an economy. Warning: the AI can’t successfully start from "
+"this."
+msgstr "Tòisich air a’ gheama le prìomh-àras agus stòras gann airson eaconamaidh a stèidheachadh. Rabhadh: Chan eil an IF comasach air seo."
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:11
+msgid "Trading Outpost"
+msgstr "Raon malairt"
+
+#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
+#. condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:13
+msgid ""
+"If this player runs low on important wares, they will be replenished for "
+"free"
+msgstr "Nuair a dh’fhàsas batharan cudromach a’ chluicheadair seo gann, thèid an lìontachadh an-asgaidh"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:11
+#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:11
+msgid "Village"
+msgstr "Clachan"
+
+#. TRANSLATORS: This is the tooltip for the "Village" starting condition
+#: ../../data/tribes/initialization/amazons/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:13
+#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:13
+msgid "Start the game with a peaceful village"
+msgstr "Tòisich an geama le clachan sìtheil"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/atlanteans/init.lua:13
@@ -3921,6 +5134,50 @@ msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Tha sinn eòlach air an treubh seo o shean. Seo mic is nigheannan Atlantais."
+
+#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
+#. %2% is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:18
+msgctxt "atlanteans_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] "%1% saighdear (+%2%)"
+msgstr[1] "%1% shaighdear (+%2%)"
+msgstr[2] "%1% saighdearan (+%2%)"
+msgstr[3] "%1% saighdear (+%2%)"
+
+#. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
+msgctxt "atlanteans_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] "%1% saighdear"
+msgstr[1] "%1% shaighdear"
+msgstr[2] "%1% saighdearan"
+msgstr[3] "%1% saighdear"
+
+#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building. %3% is the maximum
+#. number of soldier slots in the building
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:26
+msgctxt "atlanteans_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] "%1%(+%2%) saighdear (+%3%)"
+msgstr[1] "%1%(+%2%) shaighdear (+%3%)"
+msgstr[2] "%1%(+%2%) saighdearan (+%3%)"
+msgstr[3] "%1%(+%2%) saighdear (+%3%)"
+
+#. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/atlanteans/military_capacity.lua:29
+msgctxt "atlanteans_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] "%1%(+%2%) saighdear"
+msgstr[1] "%1%(+%2%) shaighdear"
+msgstr[2] "%1%(+%2%) saighdearan"
+msgstr[3] "%1%(+%2%) saighdear"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:11
@@ -3940,39 +5197,6 @@ msgid ""
 msgstr "Tòisich air a’ gheama le trì longan air a’ chuan agus stòras gann"
 
 #. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:11
-#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:11
-msgid "Fortified Village"
-msgstr "Baile daingnichte"
-
-#. TRANSLATORS: This is the tooltip for the "Fortified Village" starting
-#. condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/fortified_village.lua:13
-#: ../../data/tribes/initialization/barbarians/starting_conditions/fortified_village.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/fortified_village.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/fortified_village.lua:13
-msgid "Start the game with a fortified military installation"
-msgstr "Tòisich an geama le ionad daingnichte an airm"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:11
-#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:11
-msgid "Headquarters"
-msgstr "Prìomh-àras"
-
-#. TRANSLATORS: This is the tooltip for the "Headquarters" starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/headquarters.lua:13
-#: ../../data/tribes/initialization/barbarians/starting_conditions/headquarters.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/headquarters.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/headquarters.lua:13
-msgid "Start the game with your headquarters only"
-msgstr "Tòisich an geama leis a’ phrìomh-àras agad a-mhàin"
-
-#. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/new_world.lua:11
 #: ../../data/tribes/initialization/barbarians/starting_conditions/new_world.lua:11
 #: ../../data/tribes/initialization/empire/starting_conditions/new_world.lua:11
@@ -3988,94 +5212,6 @@ msgstr "Saoghal ùr"
 msgid "Start the game with seven ships full of wares on the ocean"
 msgstr "Tòisich air a’ gheama le seachd longan làn stòrais air a’ chuan"
 
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:11
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:11
-msgid "Poor Hamlet"
-msgstr "Clachan bochd"
-
-#. TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting
-#. condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:13
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:13
-msgid ""
-"Start the game with just a warehouse and the bare minimum for bootstrapping "
-"an economy. Warning: the AI can't successfully start from this"
-msgstr "Tòisich air a’ gheama le taigh-stòrais agus stòras èiginneach airson eaconamaidh a stèidheachadh. Rabhadh: Chan eil an IF comasach air seo"
-
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
-msgid "Be careful"
-msgstr "Thoir an aire"
-
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/poor_hamlet.lua:47
-#: ../../data/tribes/initialization/barbarians/starting_conditions/poor_hamlet.lua:45
-#: ../../data/tribes/initialization/empire/starting_conditions/poor_hamlet.lua:46
-#: ../../data/tribes/initialization/frisians/starting_conditions/poor_hamlet.lua:47
-msgid ""
-"You have only one iron for each tool you will need to start your economy. "
-"Make sure no unneeded tool is created."
-msgstr "Chan eil ach aon chnap iarainn agad airson gach acainn a dh’fheumas tu airson an eaconamaidh agad a stèidheachadh. Dèan cinnteach nach dèid acainn a shaothrachadh gun fheum oirre."
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:11
-#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:11
-msgid "Struggling Outpost"
-msgstr "Tuineachadh fo èiginn"
-
-#. TRANSLATORS: This is the tooltip for the "Hardcore" starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/struggling_outpost.lua:13
-#: ../../data/tribes/initialization/barbarians/starting_conditions/struggling_outpost.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/struggling_outpost.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/struggling_outpost.lua:13
-msgid ""
-"Start the game with just your headquarters and very few wares for "
-"bootstrapping an economy. Warning: the AI can't successfully start from this"
-msgstr "Tòisich air a’ gheama le prìomh-àras agus stòras gann airson eaconamaidh a stèidheachadh. Rabhadh: Chan eil an IF comasach air seo"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:11
-#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:11
-msgid "Trading Outpost"
-msgstr "Raon malairt"
-
-#. TRANSLATORS: This is the tooltip for the "Trading Outpost" starting
-#. condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/trading_outpost.lua:13
-#: ../../data/tribes/initialization/barbarians/starting_conditions/trading_outpost.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/trading_outpost.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/trading_outpost.lua:13
-msgid ""
-"If this player runs low on important wares, they will be replenished for "
-"free"
-msgstr "Nuair a dh’fhàsas batharan cudromach a’ chluicheadair seo gann, thèid an lìontachadh an-asgaidh"
-
-#. TRANSLATORS: This is the name of a starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:11
-#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:11
-#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:11
-#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:11
-msgid "Village"
-msgstr "Clachan"
-
-#. TRANSLATORS: This is the tooltip for the "Village" starting condition
-#: ../../data/tribes/initialization/atlanteans/starting_conditions/village.lua:13
-#: ../../data/tribes/initialization/barbarians/starting_conditions/village.lua:13
-#: ../../data/tribes/initialization/empire/starting_conditions/village.lua:13
-#: ../../data/tribes/initialization/frisians/starting_conditions/village.lua:13
-msgid "Start the game with a peaceful village"
-msgstr "Tòisich an geama le clachan sìtheil"
-
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/barbarians/init.lua:12
 msgid "Barbarians"
@@ -4084,6 +5220,50 @@ msgstr "Na Tùsanaich"
 #: ../../data/tribes/initialization/barbarians/init.lua:13
 msgid "The mighty tribes of the east-lands."
 msgstr "Treubhan cumhachdach an taoibh an ear."
+
+#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
+#. %2% is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:8
+msgctxt "barbarians_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] "%1% saighdear (+%2%)"
+msgstr[1] "%1% shaighdear (+%2%)"
+msgstr[2] "%1% saighdearan (+%2%)"
+msgstr[3] "%1% saighdear (+%2%)"
+
+#. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
+msgctxt "barbarians_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] "%1% saighdear"
+msgstr[1] "%1% shaighdear"
+msgstr[2] "%1% saighdearan"
+msgstr[3] "%1% saighdear"
+
+#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building. %3% is the maximum
+#. number of soldier slots in the building
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:16
+msgctxt "barbarians_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] "%1%(+%2%) saighdear (+%3%)"
+msgstr[1] "%1%(+%2%) shaighdear (+%3%)"
+msgstr[2] "%1%(+%2%) saighdearan (+%3%)"
+msgstr[3] "%1%(+%2%) saighdear (+%3%)"
+
+#. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/barbarians/military_capacity.lua:19
+msgctxt "barbarians_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] "%1%(+%2%) saighdear"
+msgstr[1] "%1%(+%2%) shaighdear"
+msgstr[2] "%1%(+%2%) saighdearan"
+msgstr[3] "%1%(+%2%) saighdear"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -4094,6 +5274,50 @@ msgstr "An Ìmpireachd"
 msgid "This is the culture of the Roman Empire."
 msgstr "Seo cultar na h-Ìmpireachd Ròmanach."
 
+#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
+#. is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/empire/military_capacity.lua:8
+msgctxt "empire_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] "%1% saighdear (+%2%)"
+msgstr[1] "%1% shaighdear (+%2%)"
+msgstr[2] "%1% saighdearan (+%2%)"
+msgstr[3] "%1% saighdear (+%2%)"
+
+#. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/empire/military_capacity.lua:11
+msgctxt "empire_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] "%1% saighdear"
+msgstr[1] "%1% shaighdear"
+msgstr[2] "%1% saighdearan"
+msgstr[3] "%1% saighdear"
+
+#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building. %3% is the maximum number
+#. of soldier slots in the building
+#: ../../data/tribes/initialization/empire/military_capacity.lua:16
+msgctxt "empire_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] "%1%(+%2%) saighdear (+%3%)"
+msgstr[1] "%1%(+%2%) shaighdear (+%3%)"
+msgstr[2] "%1%(+%2%) saighdearan (+%3%)"
+msgstr[3] "%1%(+%2%) saighdear (+%3%)"
+
+#. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
+#. are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/empire/military_capacity.lua:19
+msgctxt "empire_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] "%1%(+%2%) saighdear"
+msgstr[1] "%1%(+%2%) shaighdear"
+msgstr[2] "%1%(+%2%) saighdearan"
+msgstr[3] "%1%(+%2%) saighdear"
+
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
 msgid "Frisians"
@@ -4102,6 +5326,50 @@ msgstr "Na Frìoslannaich"
 #: ../../data/tribes/initialization/frisians/init.lua:13
 msgid "The inhabitants of the rough North Sea shore."
 msgstr "Tha an sluagh seo a’ fuireach air cladach garbh a’ Chuain a Tuath."
+
+#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
+#. %2% is the maximum number of soldier slots in the building.
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:8
+msgctxt "frisians_building"
+msgid "%1% soldier (+%2%)"
+msgid_plural "%1% soldiers (+%2%)"
+msgstr[0] "%1% saighdear (+%2%)"
+msgstr[1] "%1% shaighdear (+%2%)"
+msgstr[2] "%1% saighdearan (+%2%)"
+msgstr[3] "%1% saighdear (+%2%)"
+
+#. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:11
+msgctxt "frisians_building"
+msgid "%1% soldier"
+msgid_plural "%1% soldiers"
+msgstr[0] "%1% saighdear"
+msgstr[1] "%1% shaighdear"
+msgstr[2] "%1% saighdearan"
+msgstr[3] "%1% saighdear"
+
+#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building. %3% is the maximum
+#. number of soldier slots in the building
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:16
+msgctxt "frisians_building"
+msgid "%1%(+%2%) soldier (+%3%)"
+msgid_plural "%1%(+%2%) soldiers (+%3%)"
+msgstr[0] "%1%(+%2%) saighdear (+%3%)"
+msgstr[1] "%1%(+%2%) shaighdear (+%3%)"
+msgstr[2] "%1%(+%2%) saighdearan (+%3%)"
+msgstr[3] "%1%(+%2%) saighdear (+%3%)"
+
+#. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
+#. %2% are currently open soldier slots in the building.
+#: ../../data/tribes/initialization/frisians/military_capacity.lua:19
+msgctxt "frisians_building"
+msgid "%1%(+%2%) soldier"
+msgid_plural "%1%(+%2%) soldiers"
+msgstr[0] "%1%(+%2%) saighdear"
+msgstr[1] "%1%(+%2%) shaighdear"
+msgstr[2] "%1%(+%2%) saighdearan"
+msgstr[3] "%1%(+%2%) saighdear"
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -4139,6 +5407,53 @@ msgstr "Togalaichean"
 msgid "Immovables"
 msgstr "Nithean do-ghluasad"
 
+#. TRANSLATORS: This is the ship's name used in lists of units
+#: ../../data/tribes/ships/amazons/init.lua:8
+msgid "Ship"
+msgstr "Long"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:41
+msgctxt "shipname"
+msgid "Orinoco"
+msgstr "Orinoco"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:43
+msgctxt "shipname"
+msgid "Amazonas"
+msgstr "Amazonas"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:45
+msgctxt "shipname"
+msgid "Abacaxis"
+msgstr "Abacaxis"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:47
+msgctxt "shipname"
+msgid "Anchicaya"
+msgstr "Anchicayá"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:49
+msgctxt "shipname"
+msgid "Guaitara"
+msgstr "Guáitara"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:51
+msgctxt "shipname"
+msgid "Iscuande"
+msgstr "Iscuandé"
+
+#. TRANSLATORS: This Amazonian ship is named after a river
+#: ../../data/tribes/ships/amazons/init.lua:53
+msgctxt "shipname"
+msgid "Putumayo"
+msgstr "Putumayo"
+
 #. TRANSLATORS: This is the Atlanteans' ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:83
 msgctxt "atlanteans_ship"
@@ -4161,7 +5476,7 @@ msgstr "Agait"
 #: ../../data/tribes/ships/atlanteans/init.lua:111
 msgctxt "shipname"
 msgid "Alexandrite"
-msgstr ""
+msgstr "Alastairit"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:113
@@ -4245,7 +5560,7 @@ msgstr "Caiceo"
 #: ../../data/tribes/ships/atlanteans/init.lua:139
 msgctxt "shipname"
 msgid "Cassiterite"
-msgstr ""
+msgstr "Casaiteirit"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:141
@@ -4257,7 +5572,7 @@ msgstr "Sùil-chait"
 #: ../../data/tribes/ships/atlanteans/init.lua:143
 msgctxt "shipname"
 msgid "Citrine"
-msgstr ""
+msgstr "Sitrin"
 
 #. TRANSLATORS: This Atlantean ship is named after an in-game character
 #: ../../data/tribes/ships/atlanteans/init.lua:145
@@ -4341,7 +5656,7 @@ msgstr "Loftomor"
 #: ../../data/tribes/ships/atlanteans/init.lua:171
 msgctxt "shipname"
 msgid "Malachite"
-msgstr ""
+msgstr "Malachait"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:173
@@ -4383,7 +5698,7 @@ msgstr "Nibheis"
 #: ../../data/tribes/ships/atlanteans/init.lua:185
 msgctxt "shipname"
 msgid "Obsidian"
-msgstr ""
+msgstr "Oibsidian"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:187
@@ -4437,7 +5752,7 @@ msgstr "Sidolus"
 #: ../../data/tribes/ships/atlanteans/init.lua:203
 msgctxt "shipname"
 msgid "Sphalerite"
-msgstr ""
+msgstr "Sfalairit"
 
 #. TRANSLATORS: This is an Atlantean ship name
 #: ../../data/tribes/ships/atlanteans/init.lua:205
@@ -4449,7 +5764,7 @@ msgstr "Damhan-allaidh"
 #: ../../data/tribes/ships/atlanteans/init.lua:207
 msgctxt "shipname"
 msgid "Spinel"
-msgstr ""
+msgstr "Spineil"
 
 #. TRANSLATORS: This Atlantean ship is named after a mineral
 #: ../../data/tribes/ships/atlanteans/init.lua:209
@@ -4485,7 +5800,7 @@ msgstr "Tortuga"
 #: ../../data/tribes/ships/atlanteans/init.lua:219
 msgctxt "shipname"
 msgid "Tourmaline"
-msgstr ""
+msgstr "Tùrmailin"
 
 #. TRANSLATORS: This Atlantean ship is named after an island
 #: ../../data/tribes/ships/atlanteans/init.lua:221
@@ -5267,6 +6582,12 @@ msgid "Helmet"
 msgstr "Clogaid"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/armor_wooden/init.lua:8
+msgctxt "ware"
+msgid "Light Wooden Armor"
+msgstr "Armachd fiodha aotrom"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax/init.lua:8
 msgctxt "ware"
 msgid "Ax"
@@ -5301,6 +6622,12 @@ msgstr "Tuagh gheur"
 msgctxt "ware"
 msgid "Warrior’s Ax"
 msgstr "Tuagh-ghaisgich"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/balsa/init.lua:8
+msgctxt "ware"
+msgid "Balsa"
+msgstr "Fiodh-balsa"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/barley/init.lua:8
@@ -5342,7 +6669,31 @@ msgstr "Min-fhreumhaige"
 #: ../../data/tribes/wares/blackwood/init.lua:8
 msgctxt "ware"
 msgid "Blackwood"
-msgstr "Fiodh cruaidh"
+msgstr "Fiodh cruaidhichte"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/boots_hero/init.lua:8
+msgctxt "ware"
+msgid "Hero Boots"
+msgstr "Brògan bana-ghaisgich"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/boots_sturdy/init.lua:8
+msgctxt "ware"
+msgid "Sturdy Boots"
+msgstr "Brògan tapaidh"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/boots_swift/init.lua:8
+msgctxt "ware"
+msgid "Swift Boots"
+msgstr "Brògan sgiobalta"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/bread_amazons/init.lua:8
+msgctxt "ware"
+msgid "Bread"
+msgstr "Aran"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:8
@@ -5387,6 +6738,24 @@ msgid "Buckets"
 msgstr "Peilichean"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/cassavaroot/init.lua:8
+msgctxt "ware"
+msgid "Cassava Root"
+msgstr "Casabha"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/chisel/init.lua:8
+msgctxt "ware"
+msgid "Chisel"
+msgstr "Sgeilb"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/chocolate/init.lua:8
+msgctxt "ware"
+msgid "Chocolate"
+msgstr "Seòclaid"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:8
 msgctxt "ware"
 msgid "Clay"
@@ -5403,6 +6772,12 @@ msgstr "Clò"
 msgctxt "ware"
 msgid "Coal"
 msgstr "Gual"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/cocoa_beans/init.lua:8
+msgctxt "ware"
+msgid "Cocoa Beans"
+msgstr "Còco"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/corn/init.lua:8
@@ -5501,6 +6876,12 @@ msgid "Gold"
 msgstr "Òr"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/gold_dust/init.lua:8
+msgctxt "ware"
+msgid "Gold Dust"
+msgstr "Mìrean òir"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_ore/init.lua:8
 msgctxt "ware"
 msgid "Gold Ore"
@@ -5561,6 +6942,12 @@ msgid "Warhelm"
 msgstr "Clogaid cogaidh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/helmet_wooden/init.lua:8
+msgctxt "ware"
+msgid "Wooden Helmet"
+msgstr "Clogaid fiodha"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey/init.lua:8
 msgctxt "ware"
 msgid "Honey"
@@ -5603,16 +6990,35 @@ msgid "Iron Ore"
 msgstr "Clach-iarainn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/ironwood/init.lua:8
+msgctxt "ware"
+msgid "Ironwood"
+msgstr "Fiodh cruaidh"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:8
 msgctxt "ware"
 msgid "Kitchen Tools"
 msgstr "Acainnean cidsin"
+
+#. TRANSLATORS: This is a ware name used in lists of wares. Used to make
+#. ropes.
+#: ../../data/tribes/wares/liana/init.lua:8
+msgctxt "ware"
+msgid "Liana"
+msgstr "Eidheann"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/log/init.lua:8
 msgctxt "ware"
 msgid "Log"
 msgstr "Fiodh"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/machete/init.lua:8
+msgctxt "ware"
+msgid "Machete"
+msgstr "Sgian-choille"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/marble/init.lua:8
@@ -5669,6 +7075,12 @@ msgid "Planks"
 msgstr "Maide"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/protector_padded/init.lua:8
+msgctxt "ware"
+msgid "Padded Protector"
+msgstr "Còta fillte"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/quartz/init.lua:8
 msgctxt "ware"
 msgid "Quartz"
@@ -5686,6 +7098,18 @@ msgstr "Greimeag"
 msgctxt "ware"
 msgid "Reed"
 msgstr "Feur"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/rope/init.lua:8
+msgctxt "ware"
+msgid "Rope"
+msgstr "Ròpa"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/rubber/init.lua:8
+msgctxt "ware"
+msgid "Rubber"
+msgstr "Rubair"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/saw/init.lua:8
@@ -5760,10 +7184,22 @@ msgid "Advanced Spear"
 msgstr "Sàr-shleagh"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/spear_hardened/init.lua:8
+msgctxt "ware"
+msgid "Hardened Spear"
+msgstr "Sleagh chruaidhichte"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_heavy/init.lua:8
 msgctxt "ware"
 msgid "Heavy Spear"
 msgstr "Sleagh throm"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/spear_stone_tipped/init.lua:8
+msgctxt "ware"
+msgid "Stone-tipped Spear"
+msgstr "Sleagh le ceann-cloiche"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/spear_war/init.lua:8
@@ -5788,6 +7224,12 @@ msgstr "Snàth-sìoda"
 msgctxt "ware"
 msgid "Spidercloth"
 msgstr "Sìoda"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/stone_bowl/init.lua:8
+msgctxt "ware"
+msgid "Stone Bowl"
+msgstr "Bobhla cloiche"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_broad/init.lua:8
@@ -5856,6 +7298,24 @@ msgid "Steel Trident"
 msgstr "Muirgheadh stàilinn"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/tunic/init.lua:8
+msgctxt "ware"
+msgid "Tunic"
+msgstr "Earrasaid"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/vest_padded/init.lua:8
+msgctxt "ware"
+msgid "Padded Vest"
+msgstr "Lèine fhillte"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
+#: ../../data/tribes/wares/warriors_coat/init.lua:8
+msgctxt "ware"
+msgid "Warrior’s Coat"
+msgstr "Còta bana-ghaisgich"
+
+#. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/water/init.lua:8
 msgctxt "ware"
 msgid "Water"
@@ -5878,6 +7338,162 @@ msgstr "Fìon"
 msgctxt "ware"
 msgid "Wool"
 msgstr "Clòimh"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/builder/init.lua:8
+msgctxt "amazons_worker"
+msgid "Builder"
+msgstr "Tè-thogail"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/carrier/init.lua:8
+msgctxt "amazons_worker"
+msgid "Carrier"
+msgstr "Giùlanair"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/cassava_farmer/init.lua:8
+msgctxt "amazons_worker"
+msgid "Cassava Farmer"
+msgstr "Tuathanach-casabha"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/charcoal_burner/init.lua:8
+msgctxt "amazons_worker"
+msgid "Charcoal Burner"
+msgstr "Loisgeadair fiodha"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/cocoa_farmer/init.lua:8
+msgctxt "amazons_worker"
+msgid "Cocoa Farmer"
+msgstr "Tuathanach còco"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/cook/init.lua:8
+msgctxt "amazons_worker"
+msgid "Cook"
+msgstr "Còcaire"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/dressmaker/init.lua:8
+msgctxt "amazons_worker"
+msgid "Dressmaker"
+msgstr "Tè-dhreasaichean"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/ferry/init.lua:8
+msgctxt "amazons_worker"
+msgid "Ferry"
+msgstr "Bàta-aiseig"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/geologist/init.lua:8
+msgctxt "amazons_worker"
+msgid "Geologist"
+msgstr "Clach-eòlaiche"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/gold_digger/init.lua:8
+msgctxt "amazons_worker"
+msgid "Gold Digger"
+msgstr "Ruamhaire òir"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/gold_smelter/init.lua:8
+msgctxt "amazons_worker"
+msgid "Gold Smelter"
+msgstr "Leaghadair òir"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/hunter_gatherer/init.lua:8
+msgctxt "amazons_worker"
+msgid "Hunter-Gatherer"
+msgstr "Sealgair ’s cruinniche"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/jungle_master/init.lua:8
+msgctxt "amazons_worker"
+msgid "Jungle Master"
+msgstr "Maighistir-coille"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/jungle_preserver/init.lua:8
+msgctxt "amazons_worker"
+msgid "Jungle Preserver"
+msgstr "Glèidheadair-coille"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/liana_cutter/init.lua:8
+msgctxt "amazons_worker"
+msgid "Liana Cutter"
+msgstr "Tè nan eidheann"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/scout/init.lua:8
+msgctxt "amazons_worker"
+msgid "Scout"
+msgstr "Rabhadair"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/shipwright/init.lua:8
+msgctxt "amazons_worker"
+msgid "Shipwright"
+msgstr "Saor-luinge"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/soldier/init.lua:20
+msgctxt "amazons_worker"
+msgid "Soldier"
+msgstr "Bana-ghaisgeach"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/stone_carver/init.lua:8
+msgctxt "amazons_worker"
+msgid "Stone Carver"
+msgstr "Snaidheadair"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/stonecutter/init.lua:8
+msgctxt "amazons_worker"
+msgid "Stonecutter"
+msgstr "Tochailtear"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/tapir/init.lua:8
+msgctxt "amazons_worker"
+msgid "Tapir"
+msgstr "Taipir"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/tapir_breeder/init.lua:8
+msgctxt "amazons_worker"
+msgid "Tapir Breeder"
+msgstr "Rainsear thaipirean"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/trainer/init.lua:8
+msgctxt "amazons_worker"
+msgid "Trainer"
+msgstr "Maighstir"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/wilderness_keeper/init.lua:8
+msgctxt "amazons_worker"
+msgid "Wilderness Keeper"
+msgstr "Glèidheadair bheathaichean"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/woodcutter/init.lua:8
+msgctxt "amazons_worker"
+msgid "Woodcutter"
+msgstr "Buaineadair-fiodha"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/amazons/woodcutter_master/init.lua:8
+msgctxt "amazons_worker"
+msgid "Master Woodcutter"
+msgstr "Sàr-bhuaineadair-fiodha"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:89

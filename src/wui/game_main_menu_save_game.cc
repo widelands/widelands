@@ -45,6 +45,7 @@ InteractiveGameBase& GameMainMenuSaveGame::igbase() {
 GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent,
+                      UI::WindowStyle::kWui,
                       "save_game",
                       &registry,
                       parent.get_inner_w() - 40,
@@ -53,20 +54,33 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      // Values for alignment and size
      padding_(4),
 
-     main_box_(this, 0, 0, UI::Box::Vertical),
-     info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
+     main_box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     info_box_(&main_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
 
      load_or_save_(&info_box_,
                    igbase().game(),
                    LoadOrSaveGame::FileType::kShowAll,
                    UI::PanelStyle::kWui,
+                   UI::WindowStyle::kWui,
                    false),
 
-     filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
-     filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
+     filename_box_(load_or_save_.table_box(), UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
+     filename_label_(&filename_box_,
+                     UI::PanelStyle::kWui,
+                     UI::FontStyle::kWuiLabel,
+                     0,
+                     0,
+                     0,
+                     0,
+                     _("Filename:"),
+                     UI::Align::kLeft),
      filename_editbox_(&filename_box_, 0, 0, 0, UI::PanelStyle::kWui),
 
-     buttons_box_(load_or_save_.game_details()->button_box(), 0, 0, UI::Box::Horizontal),
+     buttons_box_(load_or_save_.game_details()->button_box(),
+                  UI::PanelStyle::kWui,
+                  0,
+                  0,
+                  UI::Box::Horizontal),
      cancel_(&buttons_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
      ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
@@ -226,7 +240,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	}
 
 	//  Append directory name.
-	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+	const std::string complete_filename = curdir_ + FileSystem::file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
@@ -234,8 +248,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
-		UI::WLMessageBox mbox(
-		   this, _("Error Saving Game!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox mbox(this, UI::WindowStyle::kWui, _("Error Saving Game!"), s,
+		                      UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return false;
 		}
@@ -269,7 +283,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	// Show player an error message.
 	std::string msg = gsh.localized_formatted_result_message();
-	UI::WLMessageBox mbox(this, _("Error Saving Game!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mbox(
+	   this, UI::WindowStyle::kWui, _("Error Saving Game!"), msg, UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 
 	// If only the backup failed (likely just because of a file lock),

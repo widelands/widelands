@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 60,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_sapling",
    descname = _ "Spruce (Sapling)",
    size = "small",
@@ -29,15 +29,16 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 5, 13 }
+         hotspot = { 4, 12 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_pole",
    descname = _ "Spruce (Pole)",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -54,12 +55,12 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 10, 29 }
+         hotspot = { 9, 28 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_mature",
    descname = _ "Spruce (Mature)",
    size = "small",
@@ -79,17 +80,18 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 13, 49 }
+         hotspot = { 12, 48 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "spruce_summer_old",
    descname = _ "Spruce (Old)",
    species = _ "Spruce",
    icon = dirname .. "menu.png",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -109,10 +111,10 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 16, 60 },
+         hotspot = { 15, 59 },
          sound_effect = {
             path = "sound/animals/bird3",
-            priority = 10
+            priority = "10%"
          },
       }
    },

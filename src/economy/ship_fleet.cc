@@ -251,11 +251,11 @@ void ShipFleet::check_merge_economy() {
 		return;
 	}
 
-	Flag& base = ports_[0]->base_flag();
+	const Flag& base = ports_[0]->base_flag();
 	for (uint32_t i = 1; i < ports_.size(); ++i) {
 		// Note: economy of base flag may of course be changed by the merge!
-		base.get_economy(wwWARE)->check_merge(base, ports_[i]->base_flag(), wwWARE);
-		base.get_economy(wwWORKER)->check_merge(base, ports_[i]->base_flag(), wwWORKER);
+		Economy::check_merge(base, ports_[i]->base_flag(), wwWARE);
+		Economy::check_merge(base, ports_[i]->base_flag(), wwWORKER);
 	}
 }
 
@@ -331,6 +331,7 @@ bool ShipFleet::get_path(const PortDock& start, const PortDock& end, Path& path)
 	const PortPath& pp(portpath_bidir(startidx, endidx, reverse));
 
 	if (pp.cost < 0) {
+		// try filling in pp's data
 		connect_port(get_owner()->egbase(), startidx);
 	}
 
@@ -464,8 +465,8 @@ struct StepEvalFindPorts {
 		return std::max(0, est - 5 * map.calc_cost(0));
 	}
 
-	int32_t
-	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
+	int32_t stepcost(
+	   const Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
 		if (!(to.field->nodecaps() & MOVECAPS_SWIM)) {
 			return -1;
 		}
@@ -570,10 +571,8 @@ void ShipFleet::add_port(EditorGameBase& egbase, PortDock* port) {
 		set_economy(ports_[0]->get_economy(wwWORKER), wwWORKER);
 	} else {
 		if (!ships_.empty()) {
-			ports_[0]->get_economy(wwWARE)->check_merge(
-			   ports_[0]->base_flag(), port->base_flag(), wwWARE);
-			ports_[0]->get_economy(wwWORKER)->check_merge(
-			   ports_[0]->base_flag(), port->base_flag(), wwWORKER);
+			Economy::check_merge(ports_[0]->base_flag(), port->base_flag(), wwWARE);
+			Economy::check_merge(ports_[0]->base_flag(), port->base_flag(), wwWORKER);
 		}
 	}
 
@@ -650,7 +649,7 @@ PortDock* ShipFleet::get_dock(Flag& flag) const {
  *
  * @return the dock, or 0 if not found.
  */
-PortDock* ShipFleet::get_dock(EditorGameBase& egbase, Coords field_coords) const {
+PortDock* ShipFleet::get_dock(const EditorGameBase& egbase, Coords field_coords) const {
 	for (PortDock* temp_port : ports_) {
 		for (Coords tmp_coords : temp_port->get_positions(egbase)) {
 			if (tmp_coords == field_coords) {
@@ -681,7 +680,7 @@ void ShipFleet::update(EditorGameBase& egbase) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		schedule_act(*game, 100);
+		schedule_act(*game, Duration(100));
 		act_pending_ = true;
 	}
 }
@@ -705,7 +704,7 @@ void ShipFleet::act(Game& game, uint32_t) {
 
 	// All the work is done by the schedule
 	const Duration next = schedule_.update(game);
-	if (next < endless()) {
+	if (next.is_valid()) {
 		schedule_act(game, next);
 		act_pending_ = true;
 	}
@@ -723,9 +722,6 @@ void ShipFleet::log_general_info(const EditorGameBase& egbase) const {
 
 // Changelog of version 4 → 5: Added ShippingSchedule
 constexpr uint8_t kCurrentPacketVersion = 5;
-
-ShipFleet::Loader::Loader() {
-}
 
 void ShipFleet::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);

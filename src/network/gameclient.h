@@ -20,12 +20,14 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
+#include "base/macros.h"
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
 #include "network/network.h"
 
+class FullscreenMenuMain;
 struct GameClientImpl;
 
 /**
@@ -39,7 +41,8 @@ struct GameClientImpl;
  * connect locally / via IP.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
-	GameClient(const std::pair<NetAddress, NetAddress>& host,
+	GameClient(FullscreenMenuMain&,
+	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
 	           const std::string& gamename = "");
@@ -51,7 +54,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	// GameController interface
 	void think() override;
 	void send_player_command(Widelands::PlayerCommand*) override;
-	int32_t get_frametime() override;
+	Duration get_frametime() override;
 	GameController::GameType get_game_type() override;
 
 	uint32_t real_speed() override;
@@ -112,9 +115,15 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
+	FullscreenMenuMain& fullscreen_menu_main() const {
+		return fsmm_;
+	}
+
 private:
+	DISALLOW_COPY_AND_ASSIGN(GameClient);
+
 	/// for unique backupname
-	std::string backup_file_name(std::string& path) {
+	std::string backup_file_name(const std::string& path) {
 		return path + "~backup";
 	}
 
@@ -145,6 +154,8 @@ private:
 	                bool showmsg = true);
 
 	GameClientImpl* d;
+
+	FullscreenMenuMain& fsmm_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H

@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "twine_wasteland_sapling",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Twine Tree (Sapling)",
@@ -30,16 +30,17 @@ wl.World():new_immovable_type{
          frames = 5,
          rows = 3,
          columns = 2,
-         hotspot = { 6, 13 }
+         hotspot = { 5, 12 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "twine_wasteland_pole",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Twine Tree (Pole)",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -56,12 +57,12 @@ wl.World():new_immovable_type{
          frames = 5,
          rows = 3,
          columns = 2,
-         hotspot = { 13, 29 }
+         hotspot = { 12, 28 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "twine_wasteland_mature",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Twine Tree (Mature)",
@@ -82,12 +83,12 @@ wl.World():new_immovable_type{
          frames = 5,
          rows = 3,
          columns = 2,
-         hotspot = { 19, 49 }
+         hotspot = { 18, 48 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "twine_wasteland_old",
    -- TRANSLATORS: This is a fictitious tree. Be creative if you want.
    descname = _ "Twine Tree (Old)",
@@ -95,6 +96,7 @@ wl.World():new_immovable_type{
    species = _ "Twine Tree",
    icon = dirname .. "menu.png",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -114,7 +116,7 @@ wl.World():new_immovable_type{
          frames = 5,
          rows = 3,
          columns = 2,
-         hotspot = { 25, 61 }
+         hotspot = { 24, 60 }
       }
    },
 }

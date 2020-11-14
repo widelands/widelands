@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 7;
+constexpr uint16_t kCurrentPacketVersion = 9;
 constexpr const char* kMinimapFilename = "minimap.png";
 
 // Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
@@ -53,12 +53,16 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 		int32_t const packet_version = s.get_int("packet_version");
 
 		if (packet_version >= 6 && packet_version <= kCurrentPacketVersion) {
-			gametime_ = s.get_safe_int("gametime");
+			gametime_ = Time(s.get_safe_int("gametime"));
 			mapname_ = s.get_safe_string("mapname");
 
 			background_ = s.get_safe_string("background");
 			// TODO(Nordfriese): Savegame compatibility
 			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
+			training_wheels_wanted_ =
+			   (packet_version < 8 ? false : s.get_safe_bool("training_wheels"));
+			active_training_wheel_ =
+			   (packet_version < 9 ? "" : s.get_safe_string("active_training_wheel"));
 			player_nr_ = s.get_safe_int("player_nr");
 			win_condition_ = s.get_safe_string("win_condition");
 			number_of_players_ = s.get_safe_int("player_amount");
@@ -85,7 +89,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_int("packet_version", kCurrentPacketVersion);
 
 	//  save some kind of header.
-	s.set_int("gametime", game.get_gametime());
+	s.set_int("gametime", game.get_gametime().get());
 	const Map& map = game.map();
 	s.set_string("mapname", map.get_name());  // Name of map
 
@@ -110,6 +114,8 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_int("gametype", static_cast<int32_t>(game.game_controller() != nullptr ?
 	                                              game.game_controller()->get_game_type() :
 	                                              GameController::GameType::kReplay));
+	s.set_string("active_training_wheel", game.active_training_wheel());
+	s.set_bool("training_wheels", game.training_wheels_wanted());
 
 	prof.write("preload", false, fs);
 

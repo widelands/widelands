@@ -91,15 +91,16 @@ void CmdQueue::enqueue(Command* const cmd) {
 		ci.serial = 0;
 	}
 
-	cmds_[cmd->duetime() % kCommandQueueBucketSize].push(ci);
+	cmds_[cmd->duetime().get() % kCommandQueueBucketSize].push(ci);
 	++ncmds_;
 }
 
-void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
-	uint32_t const final = game_time_var + interval;
+void CmdQueue::run_queue(const Duration& interval, Time& game_time_var) {
+	const Time final_time = game_time_var + interval;
 
-	while (game_time_var < final) {
-		std::priority_queue<CmdItem>& current_cmds = cmds_[game_time_var % kCommandQueueBucketSize];
+	while (game_time_var < final_time) {
+		std::priority_queue<CmdItem>& current_cmds =
+		   cmds_[game_time_var.get() % kCommandQueueBucketSize];
 
 		while (!current_cmds.empty()) {
 			Command& c = *current_cmds.top().cmd;
@@ -114,7 +115,7 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 			if (dynamic_cast<GameLogicCommand*>(&c)) {
 				StreamWrite& ss = game_.syncstream();
 				ss.unsigned_8(SyncEntry::kRunQueue);
-				ss.unsigned_32(c.duetime());
+				ss.unsigned_32(c.duetime().get());
 				ss.unsigned_32(static_cast<uint32_t>(c.id()));
 			}
 
@@ -122,14 +123,10 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 
 			delete &c;
 		}
-		++game_time_var;
+		game_time_var.increment();
 	}
 
-	assert(final - game_time_var == 0);
-	game_time_var = final;
-}
-
-Command::~Command() {
+	assert(final_time == game_time_var);
 }
 
 constexpr uint16_t kCurrentPacketVersion = 1;
@@ -150,7 +147,7 @@ void GameLogicCommand::write(FileWrite& fw,
 
 	// Write duetime
 	assert(egbase.get_gametime() <= duetime());
-	fw.unsigned_32(duetime());
+	duetime().save(fw);
 }
 
 /**
@@ -162,10 +159,10 @@ void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			set_duetime(fr.unsigned_32());
-			uint32_t const gametime = egbase.get_gametime();
+			set_duetime(Time(fr));
+			const Time& gametime = egbase.get_gametime();
 			if (duetime() < gametime) {
-				throw GameDataError("duetime (%i) < gametime (%i)", duetime(), gametime);
+				throw GameDataError("duetime (%i) < gametime (%i)", duetime().get(), gametime.get());
 			}
 		} else {
 			throw UnhandledVersionError("GameLogicCommand", packet_version, kCurrentPacketVersion);

@@ -130,12 +130,13 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
                              const std::string& message,
                              Widelands::MapObject& map_object,
                              const std::string& checkbox)
-   : UI::Window(&parent, "building_action_confirm", 0, 0, 200, 120, windowtitle),
+   : UI::Window(
+        &parent, UI::WindowStyle::kWui, "building_action_confirm", 0, 0, 200, 120, windowtitle),
      object_(&map_object),
      checkbox_(nullptr) {
 	const int padding = 6;
-	UI::Box* main_box = new UI::Box(this, padding, padding, UI::Box::Vertical);
-	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
+	UI::Box* main_box = new UI::Box(this, UI::PanelStyle::kWui, padding, padding, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(main_box, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   main_box, 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
@@ -157,7 +158,7 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
 	if (!checkbox.empty()) {
-		checkbox_ = new UI::Checkbox(main_box, Vector2i(0, 0), checkbox);
+		checkbox_ = new UI::Checkbox(main_box, UI::PanelStyle::kWui, Vector2i(0, 0), checkbox);
 		// tooltip and initial state will be set by the subclass constructor
 		main_box->add_space(padding);
 		main_box->add(checkbox_, UI::Box::Resizing::kFullSize);

@@ -31,7 +31,6 @@
 
 namespace Widelands {
 
-class Request;
 class Soldier;
 class WorkerDescr;
 
@@ -54,12 +53,10 @@ public:
 	ProductionSiteDescr(const std::string& init_descname,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const LuaTable& t,
-	                    Tribes& tribes,
-	                    World& world);
+	                    Descriptions& descriptions);
 
 	Building& create_object() const override;
 
@@ -115,8 +112,14 @@ public:
 	/// We only need the attributes during tribes initialization
 	void clear_attributes();
 
-	/// The resources that this production site needs to collect from the map
-	const std::set<std::string>& collected_resources() const {
+	struct CollectedResourceInfo {
+		unsigned max_percent;
+		unsigned depleted_chance;
+	};
+
+	/// The resources that this production site needs to collect from the map, the max percent it can
+	/// achieve, and the chance when depleted
+	const std::map<std::string, CollectedResourceInfo>& collected_resources() const {
 		return collected_resources_;
 	}
 	/// The resources that this production site will place on the map
@@ -238,8 +241,11 @@ protected:
 		created_attributes_.insert(attribute_info);
 	}
 	/// Set that this production site needs to collect the given resource from the map
-	void add_collected_resource(const std::string& resource) {
-		collected_resources_.insert(resource);
+	void add_collected_resource(const std::string& resource,
+	                            unsigned max_percent,
+	                            unsigned depleted_chance) {
+		collected_resources_.insert(
+		   std::make_pair(resource, CollectedResourceInfo{max_percent, depleted_chance}));
 	}
 	/// Set that this production site will place the given resource on the map
 	void add_created_resource(const std::string& resource) {
@@ -256,7 +262,7 @@ private:
 	Output output_worker_types_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	std::set<std::string> collected_resources_;
+	std::map<std::string, CollectedResourceInfo> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;
@@ -309,7 +315,7 @@ public:
 		   : worker_request(wr), worker(w) {
 		}
 		Request* worker_request;
-		Worker* worker;
+		OPtr<Worker> worker;
 	};
 
 	WorkingPosition const* working_positions() const {
@@ -323,7 +329,7 @@ public:
 
 	// receives the duration of the last period and the result (true if something was produced)
 	// and sets actual_percent_ to new value
-	void update_actual_statistics(uint32_t, bool);
+	void update_actual_statistics(Duration, bool);
 
 	uint8_t get_actual_statistics() {
 		return actual_percent_ / 10;
@@ -340,14 +346,14 @@ public:
 		production_result_ = text;
 	}
 
-	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
+	InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
 	void remove_worker(Worker&) override;
-	bool warp_worker(EditorGameBase&, const WorkerDescr& wd);
+	bool warp_worker(EditorGameBase&, const WorkerDescr& wd, int32_t slot = -1);
 
 	bool fetch_from_flag(Game&) override;
 	bool get_building_work(Game&, Worker&, bool success) override;
@@ -371,7 +377,7 @@ public:
 
 	void set_default_anim(const std::string&);
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void update_statistics_string(std::string* statistics) override;
@@ -422,7 +428,9 @@ protected:
 	/// how long it should take to mine, given the particular circumstances,
 	/// and pass the result to the following animation command, to set the
 	/// duration.
-	void program_step(Game&, uint32_t delay = 10, ProgramResult phase = ProgramResult::kNone);
+	void program_step(Game&,
+	                  const Duration& delay = Duration(10),
+	                  ProgramResult phase = ProgramResult::kNone);
 
 	void program_start(Game&, const std::string& program_name);
 	virtual void program_end(Game&, ProgramResult);
@@ -430,7 +438,7 @@ protected:
 
 	void format_statistics_string();
 	void try_start_working(Game&);
-	void set_post_timer(int32_t const t) {
+	void set_post_timer(const Duration& t) {
 		post_timer_ = t;
 	}
 
@@ -448,10 +456,10 @@ protected:  // TrainingSite must have access to this stuff
 	FailedSkippedPrograms failed_skipped_programs_;
 
 	using Stack = std::vector<State>;
-	Stack stack_;           ///<  program stack
-	bool program_timer_;    ///< execute next instruction based on pointer
-	int32_t program_time_;  ///< timer time
-	int32_t post_timer_;    ///< Time to schedule after ends
+	Stack stack_;          ///<  program stack
+	bool program_timer_;   ///< execute next instruction based on pointer
+	Time program_time_;    ///< timer time
+	Duration post_timer_;  ///< Time to schedule after ends
 
 	BillOfMaterials produced_wares_;
 	BillOfMaterials recruited_workers_;
@@ -460,7 +468,7 @@ protected:  // TrainingSite must have access to this stuff
 	// integer 0-10000000, to be divided by 10000 to get a percent, to avoid float (target range:
 	// 0-100)
 	uint32_t actual_percent_;  // basically this is percent * 10 to avoid floats
-	uint32_t last_program_end_time;
+	Time last_program_end_time;
 	bool is_stopped_;
 	std::string default_anim_;  // normally "idle", "empty", if empty mine.
 

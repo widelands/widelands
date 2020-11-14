@@ -26,10 +26,18 @@
 #include "ui_fsmenu/launch_game.h"
 #include "ui_fsmenu/singleplayersetupbox.h"
 
+namespace Widelands {
+class Game;
+}
+namespace FsMenu {
 class FullscreenMenuLaunchSPG : public FullscreenMenuLaunchGame {
 public:
-	FullscreenMenuLaunchSPG(GameSettingsProvider*, GameController* = nullptr);
-	~FullscreenMenuLaunchSPG() override;
+	FullscreenMenuLaunchSPG(FullscreenMenuMain&,
+	                        GameSettingsProvider*,
+	                        Widelands::EditorGameBase& egbase,
+	                        bool preconfigured,
+	                        GameController* = nullptr);
+	~FullscreenMenuLaunchSPG() override = default;
 
 	void start() override;
 
@@ -46,7 +54,9 @@ private:
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	void update();
-	void enforce_player_names_and_tribes(Widelands::Map& map);
+	void enforce_player_names_and_tribes(const Widelands::Map& map);
+	const bool preconfigured_;
+	Widelands::EditorGameBase& egbase_;  // Not owned
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H

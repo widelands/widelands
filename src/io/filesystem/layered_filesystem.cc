@@ -30,12 +30,6 @@ LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
 }
 
 /**
- * Free all sub-filesystems
- */
-LayeredFileSystem::~LayeredFileSystem() {
-}
-
-/**
  * Just assume that at least one of our child FSs is writable
  */
 // TODO(unknown): Implement me
@@ -65,16 +59,16 @@ FilenameSet LayeredFileSystem::list_directory(const std::string& path) const {
 	// Check home system first
 	if (home_) {
 		files = home_->list_directory(path);
-		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit) {
-			results.insert(*fnit);
+		for (const std::string& file : files) {
+			results.insert(file);
 		}
 	}
 
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it) {
 		files = (*it)->list_directory(path);
 
-		for (FilenameSet::iterator fnit = files.begin(); fnit != files.end(); ++fnit) {
-			results.insert(*fnit);
+		for (const std::string& file : files) {
+			results.insert(file);
 		}
 	}
 	return results;
@@ -142,7 +136,7 @@ void* LayeredFileSystem::load(const std::string& fname, size_t& length) {
  */
 void LayeredFileSystem::write(const std::string& fname,
                               void const* const data,
-                              int32_t const length) {
+                              size_t const length) {
 	if (home_ && home_->is_writable()) {
 		return home_->write(fname, data, length);
 	}

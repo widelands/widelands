@@ -27,7 +27,6 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/widelands_geometry.h"
-#include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
 
@@ -103,7 +102,7 @@ public:
 	void set_location(PlayerImmovable*);
 	void set_economy(Economy*, WareWorker);
 
-	WareInstance* get_carried_ware(EditorGameBase& egbase) {
+	WareInstance* get_carried_ware(const EditorGameBase& egbase) {
 		return carried_ware_.get(egbase);
 	}
 	WareInstance const* get_carried_ware(const EditorGameBase& egbase) const {
@@ -120,6 +119,8 @@ public:
 
 	bool wakeup_flag_capacity(Game&, Flag&);
 	bool wakeup_leave_building(Game&, Building&);
+
+	void set_current_experience(int32_t);
 
 	/// This should be called whenever the worker has done work that he gains
 	/// experience from. It may cause him to change his type so that he becomes
@@ -162,7 +163,7 @@ public:
 
 	void start_task_gowarehouse(Game&);
 	void start_task_dropoff(Game&, WareInstance&);
-	void start_task_releaserecruit(Game&, Worker&);
+	void start_task_releaserecruit(Game&, const Worker&);
 	void start_task_fetchfromflag(Game&);
 
 	bool start_task_waitforcapacity(Game&, Flag&);
@@ -267,7 +268,7 @@ private:
 	// List of places to visit (only if scout), plus a reminder to
 	// occasionally go just somewhere.
 	struct PlaceToScout {
-		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
+		explicit PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
 		}
 		// The variable scoutme should not be accessed when randomwalk is true.
 		// Initializing the scoutme variable with an obviously-wrong value.
@@ -284,8 +285,8 @@ private:
 	void add_sites(Game& game,
 	               const Map& map,
 	               const Player& player,
-	               std::vector<ImmovableFound>& found_sites);
-	bool scout_random_walk(Game& game, const Map& map, State& state);
+	               const std::vector<ImmovableFound>& found_sites);
+	bool scout_random_walk(Game& game, const Map& map, const State& state);
 	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
@@ -322,11 +323,8 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	virtual void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&);
 
-	static MapObject::Loader* load(EditorGameBase&,
-	                               MapObjectLoader&,
-	                               FileRead&,
-	                               const TribesLegacyLookupTable& lookup_table,
-	                               uint8_t packet_version);
+	static MapObject::Loader*
+	load(EditorGameBase&, MapObjectLoader&, FileRead&, uint8_t packet_version);
 };
 }  // namespace Widelands
 

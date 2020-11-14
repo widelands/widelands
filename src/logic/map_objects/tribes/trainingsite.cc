@@ -62,9 +62,8 @@ const uint32_t TrainingSite::training_state_multiplier_ = 12;
  */
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     Tribes& tribes,
-                                     World& world)
-   : ProductionSiteDescr(init_descname, MapObjectType::TRAININGSITE, table, tribes, world),
+                                     Descriptions& descriptions)
+   : ProductionSiteDescr(init_descname, MapObjectType::TRAININGSITE, table, descriptions),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
 
@@ -159,6 +158,15 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 				update_level(from_checksoldier.attribute, from_checksoldier.level);
 			}
 		}
+	}
+
+	if (table.has_key("messages")) {
+		items_table = table.get_table("messages");
+		no_soldier_to_train_message_ = items_table->get_string("no_soldier");
+		no_soldier_for_training_level_message_ = items_table->get_string("no_soldier_for_level");
+	} else {
+		// TODO(GunChleoc): API compatibility - require this after v1.0
+		log_warn("Training site '%s' is lacking its 'messages' table", name().c_str());
 	}
 }
 
@@ -367,7 +375,7 @@ void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
 	soldier.start_task_leavebuilding(game, true);
 
 	// Schedule, so that we can call new soldiers on next act()
-	training_site_->schedule_act(game, 100);
+	training_site_->schedule_act(game, Duration(100));
 	Notifications::publish(
 	   NoteTrainingSiteSoldierTrained(training_site_, training_site_->get_owner()));
 }
@@ -414,14 +422,14 @@ TrainingSite::TrainingSite(const TrainingSiteDescr& d)
 	// overwrite priorities.
 	calc_upgrades();
 	current_upgrade_ = nullptr;
-	set_post_timer(6000);
+	set_post_timer(Duration(6000));
 	training_failure_count_.clear();
 	max_stall_val_ = training_state_multiplier_ * d.get_max_stall();
 	highest_trainee_level_seen_ = 1;
 	latest_trainee_kickout_level_ = 1;
 	latest_trainee_was_kickout_ = false;
 	requesting_weak_trainees_ = false;
-	request_open_since_ = 0;
+	request_open_since_ = Time(0);
 	trainee_general_lower_bound_ = 2;
 	repeated_layoff_ctr_ = 0;
 	repeated_layoff_inc_ = false;
@@ -504,7 +512,7 @@ void TrainingSite::add_worker(Worker& w) {
 		}
 
 		if (upcast(Game, game, &get_owner()->egbase())) {
-			schedule_act(*game, 100);
+			schedule_act(*game, Duration(100));
 		}
 	}
 }
@@ -524,7 +532,7 @@ void TrainingSite::remove_worker(Worker& w) {
 			soldiers_.erase(it);
 
 			if (game) {
-				schedule_act(*game, 100);
+				schedule_act(*game, Duration(100));
 			}
 		}
 	}
@@ -544,7 +552,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 	Game* game = get_owner() ? dynamic_cast<Game*>(&(get_owner()->egbase())) : nullptr;
 	bool rebuild_request = false;
 	bool need_more_soldiers = false;
-	uint32_t dynamic_timeout = acceptance_threshold_timeout;
+	Duration dynamic_timeout = acceptance_threshold_timeout;
 	uint8_t trainee_general_upper_bound = std::numeric_limits<uint8_t>::max() - 1;
 	bool limit_upper_bound = false;
 
@@ -578,7 +586,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 		repeated_layoff_inc_ = true;
 	}
 
-	const uint32_t timeofgame = game ? game->get_gametime() : 0;
+	const Time& timeofgame = game ? game->get_gametime() : Time(0);
 
 	if (did_incorporate && latest_trainee_was_kickout_ != requesting_weak_trainees_) {
 		// If type of desired recruits has been changed, the request is rebuild after incorporate
@@ -730,7 +738,7 @@ void TrainingSite::update_soldier_request(bool did_incorporate) {
 			qr.add(r);
 			soldier_request_->set_requirements(qr);
 			if (game) {
-				schedule_act(*game, 1 + dynamic_timeout);
+				schedule_act(*game, dynamic_timeout + Duration(1));
 			}
 		} else {
 			soldier_request_->set_requirements(r);
@@ -778,17 +786,17 @@ void TrainingSite::request_soldier_callback(Game& game,
 void TrainingSite::drop_unupgradable_soldiers(Game&) {
 	std::vector<Soldier*> droplist;
 
-	for (uint32_t i = 0; i < soldiers_.size(); ++i) {
+	for (Soldier* soldier : soldiers_) {
 		std::vector<Upgrade>::iterator it = upgrades_.begin();
 		for (; it != upgrades_.end(); ++it) {
-			int32_t level = soldiers_[i]->get_level(it->attribute);
+			int32_t level = soldier->get_level(it->attribute);
 			if (level >= it->min && level <= it->max) {
 				break;
 			}
 		}
 
 		if (it == upgrades_.end()) {
-			droplist.push_back(soldiers_[i]);
+			droplist.push_back(soldier);
 		}
 	}
 
@@ -819,8 +827,8 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	Soldier* soldier_to_drop = nullptr;
 	uint8_t highest_soldier_level_seen = 0;
 
-	for (uint32_t i = 0; i < soldiers_.size(); ++i) {
-		uint8_t this_soldier_level = soldiers_[i]->get_level(TrainingAttribute::kTotal);
+	for (Soldier* soldier : soldiers_) {
+		uint8_t this_soldier_level = soldier->get_level(TrainingAttribute::kTotal);
 
 		bool this_soldier_is_safe = false;
 		if (this_soldier_level <= highest_soldier_level_seen) {
@@ -834,7 +842,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 					//  - is below maximum, and
 					//  - is not in a stalled state
 					// Check done separately for each art.
-					int32_t level = soldiers_[i]->get_level(upgrade.attribute);
+					int32_t level = soldier->get_level(upgrade.attribute);
 
 					// Below maximum -check
 					if (level > upgrade.max) {
@@ -862,7 +870,7 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 		}
 		if (!this_soldier_is_safe) {
 			// Make this soldier a kick-out candidate
-			soldier_to_drop = soldiers_[i];
+			soldier_to_drop = soldier;
 			highest_soldier_level_seen = this_soldier_level;
 		}
 	}
@@ -889,8 +897,9 @@ void TrainingSite::drop_stalled_soldiers(Game&) {
 	}
 }
 
-const BuildingSettings* TrainingSite::create_building_settings() const {
-	TrainingsiteSettings* settings = new TrainingsiteSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings() const {
+	std::unique_ptr<TrainingsiteSettings> settings(
+	   new TrainingsiteSettings(descr(), owner().tribe()));
 	settings->apply(*ProductionSite::create_building_settings());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());

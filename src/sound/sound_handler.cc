@@ -186,7 +186,6 @@ void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
 	if (quit_sdl) {
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 	}
-	return;
 }
 
 /**
@@ -219,9 +218,9 @@ void SoundHandler::read_config() {
 	// This is the code that we want to keep
 	for (auto& option : sound_options_) {
 		option.second.volume =
-		   get_config_int("sound", ("volume_" + option.second.name).c_str(), option.second.volume);
+		   get_config_int("sound", "volume_" + option.second.name, option.second.volume);
 		option.second.enabled =
-		   get_config_bool("sound", ("enable_" + option.second.name).c_str(), option.second.enabled);
+		   get_config_bool("sound", "enable_" + option.second.name, option.second.enabled);
 	}
 }
 
@@ -233,10 +232,10 @@ void SoundHandler::save_config() {
 		const bool enabled = option.second.enabled;
 
 		const std::string enable_name = "enable_" + name;
-		set_config_bool("sound", enable_name.c_str(), enabled);
+		set_config_bool("sound", enable_name, enabled);
 
 		const std::string volume_name = "volume_" + name;
-		set_config_int("sound", volume_name.c_str(), volume);
+		set_config_int("sound", volume_name, volume);
 	}
 }
 

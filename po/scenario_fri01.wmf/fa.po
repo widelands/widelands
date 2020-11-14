@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Language-Team: Persian (https://www.transifex.com/widelands/teams/35159/fa/)\n"
 "MIME-Version: 1.0\n"
@@ -866,54 +866,64 @@ msgid ""
 "make haste!"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
 msgid "Soldiers to the port!"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – rising water
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
 #, lua-format
 msgid ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldier on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldier, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgid_plural ""
-"I almost forgot in this haste – wherever we will land, we’ll need soldiers "
-"to secure and expand our new colony. There’s space for up to %d soldiers on "
-"our ship, if nobody minds being all crammed together. Let’s send our best "
-"men to the port when it’s completed, to get ready to embark when we set "
-"sail!"
+"I almost forgot in this haste – wherever we will land, we’ll need some "
+"construction materials to get started, and soldiers to secure and expand our"
+" new colony. Even after loading the expedition, the ship should have enough "
+"free space for a few wares and workers. On top of that, there should be room"
+" for up to %d soldiers, if nobody minds being all crammed together. Let’s "
+"send some building supplies and our best men to the port when it’s "
+"completed, to get ready to embark when we set sail!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
+msgid ""
+"All wares and workers that are loaded onto the expedition as well as some of"
+" the soldiers in the port will be carried over to the next scenario."
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:421
 msgid "Victory"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid "We escaped!"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:424
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:423
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
 msgid "Congratulations"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:425
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:427
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"

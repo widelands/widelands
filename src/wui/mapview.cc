@@ -28,7 +28,7 @@
 #include "graphic/game_renderer.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/map_objects/world/world.h"
+#include "logic/map_objects/descriptions.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -105,9 +105,8 @@ public:
 		const float t = math::clamp(time_ms / dt_, 0.f, 1.f);
 		if (t < 0.5f) {
 			return first_.value(t * dt_);
-		} else {
-			return second_.value((t - 0.5f) * dt_);
 		}
+		return second_.value((t - 0.5f) * dt_);
 	}
 
 private:
@@ -317,15 +316,12 @@ bool MapView::View::view_roughly_near(const View& other) const {
 
 MapView::MapView(
    UI::Panel* parent, const Widelands::Map& map, int32_t x, int32_t y, uint32_t w, uint32_t h)
-   : UI::Panel(parent, x, y, w, h),
+   : UI::Panel(parent, UI::PanelStyle::kWui, x, y, w, h),
      animate_map_panning_(get_config_bool("animate_map_panning", true)),
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false) {
-}
-
-MapView::~MapView() {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
@@ -418,8 +414,8 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
 		fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	}
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(
-	   egbase.get_gametime(), egbase.world(), fields_to_draw_, scale, workarea, grid, player, dst);
+	::draw_terrain(egbase.get_gametime().get(), egbase.descriptions(), fields_to_draw_, scale,
+	               workarea, grid, player, dst);
 	return &fields_to_draw_;
 }
 

@@ -23,7 +23,6 @@
 
 #include "base/i18n.h"
 #include "graphic/playercolor.h"
-#include "graphic/style_manager.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
@@ -33,7 +32,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
                                                              int32_t const h,
                                                              PlayerSlot id,
                                                              GameSettingsProvider* const settings)
-   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      id_(id),
      settings_(settings),
      player_(this,
@@ -89,7 +88,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	player_.set_enabled(false);
 	update();
 }
-void SinglePlayerActivePlayerGroup::force_new_dimensions(float, uint32_t standard_element_height) {
+void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_element_height) {
 	player_.set_desired_size(standard_element_height, standard_element_height);
 	player_type_.set_desired_size(standard_element_height, standard_element_height);
 	tribe_.set_desired_size(standard_element_height, standard_element_height);
@@ -126,18 +125,19 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
                                            uint32_t standard_element_height,
                                            uint32_t padding)
-   : UI::Box(parent, 0, 0, UI::Box::Vertical),
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      settings_(settings),
      standard_height(standard_element_height),
-     scrollable_playerbox(this, 0, 0, UI::Box::Vertical),
+     scrollable_playerbox(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      title_(this,
+            UI::PanelStyle::kFsMenu,
+            UI::FontStyle::kFsGameSetupHeadings,
             0,
             0,
             0,
             0,
             _("Players"),
-            UI::Align::kRight,
-            g_style_manager->font_style(UI::FontStyle::kFsGameSetupHeadings)) {
+            UI::Align::kRight) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
 	add_space(3 * padding);
 	add(&scrollable_playerbox, Resizing::kExpandBoth);
@@ -155,6 +155,8 @@ void SinglePlayerSetupBox::update() {
 	const GameSettings& settings = settings_->settings();
 	const size_t number_of_players = settings.players.size();
 
+	assert(!settings.tribes.empty());
+
 	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
 		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
 		   &scrollable_playerbox, 0, standard_height, i, settings_));
@@ -166,11 +168,10 @@ void SinglePlayerSetupBox::update() {
 	}
 }
 
-void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
+void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height) {
 	standard_height = standard_element_height;
-	title_.set_font_scale(scale);
 	for (auto& active_player_group : active_player_groups) {
-		active_player_group->force_new_dimensions(scale, standard_element_height);
+		active_player_group->force_new_dimensions(standard_element_height);
 	}
 }
 void SinglePlayerSetupBox::reset() {

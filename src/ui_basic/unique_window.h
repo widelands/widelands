@@ -58,12 +58,13 @@ struct UniqueWindow : public Window {
 	};
 
 	UniqueWindow(Panel* parent,
+	             WindowStyle,
 	             const std::string& name,
 	             Registry*,
 	             int32_t w,
 	             int32_t h,
 	             const std::string& title);
-	virtual ~UniqueWindow();
+	~UniqueWindow() override;
 
 	bool get_usedefaultpos() {
 		return usedefaultpos_;

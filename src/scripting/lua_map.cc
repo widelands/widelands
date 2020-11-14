@@ -19,10 +19,12 @@
 
 #include "scripting/lua_map.h"
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
 #include "logic/map_objects/checkstep.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/terrain_affinity.h"
@@ -31,12 +33,10 @@
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/world/critter.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -45,6 +45,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_errors.h"
 #include "scripting/lua_game.h"
+#include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace LuaMaps {
@@ -106,10 +107,11 @@ int wares_or_workers_map_to_lua(lua_State* L,
 	for (const auto& ware_amount : ware_amount_map) {
 		switch (type) {
 		case Widelands::MapObjectType::WORKER:
-			lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(ware_amount.first)->name());
+			lua_pushstring(
+			   L, get_egbase(L).descriptions().get_worker_descr(ware_amount.first)->name());
 			break;
 		case Widelands::MapObjectType::WARE:
-			lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(ware_amount.first)->name());
+			lua_pushstring(L, get_egbase(L).descriptions().get_ware_descr(ware_amount.first)->name());
 			break;
 		default:
 			throw wexception("wares_or_workers_map_to_lua needs a ware or worker");
@@ -146,13 +148,12 @@ struct SoldierMapDescr {
 	                uint8_t init_evade)
 	   : health(init_health), attack(init_attack), defense(init_defense), evade(init_evade) {
 	}
-	SoldierMapDescr() : health(0), attack(0), defense(0), evade(0) {
-	}
+	SoldierMapDescr() = default;
 
-	uint8_t health;
-	uint8_t attack;
-	uint8_t defense;
-	uint8_t evade;
+	uint8_t health = 0;
+	uint8_t attack = 0;
+	uint8_t defense = 0;
+	uint8_t evade = 0;
 
 	bool operator<(const SoldierMapDescr& ot) const {
 		bool equal_health = health == ot.health;
@@ -170,11 +171,8 @@ struct SoldierMapDescr {
 		return health < ot.health;
 	}
 	bool operator==(const SoldierMapDescr& ot) const {
-		if (health == ot.health && attack == ot.attack && defense == ot.defense &&
-		    evade == ot.evade) {
-			return true;
-		}
-		return false;
+		return (health == ot.health && attack == ot.attack && defense == ot.defense &&
+		        evade == ot.evade);
 	}
 };
 
@@ -293,11 +291,12 @@ InputMap parse_set_input_arguments(lua_State* L, const Widelands::TribeDescr& tr
 	return rv;
 }
 
-WaresWorkersMap count_wares_on_flag_(Widelands::Flag& f, const Widelands::Tribes& tribes) {
+WaresWorkersMap count_wares_on_flag_(Widelands::Flag& f,
+                                     const Widelands::Descriptions& descriptions) {
 	WaresWorkersMap rv;
 
 	for (const Widelands::WareInstance* ware : f.get_wares()) {
-		Widelands::DescriptionIndex i = tribes.ware_index(ware->descr().name());
+		Widelands::DescriptionIndex i = descriptions.ware_index(ware->descr().name());
 		if (!rv.count(i)) {
 			rv.insert(Widelands::WareAmount(i, 1));
 		} else {
@@ -308,7 +307,7 @@ WaresWorkersMap count_wares_on_flag_(Widelands::Flag& f, const Widelands::Tribes
 }
 
 // Sort functor to sort the owners claiming a field by their influence.
-static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
+int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
 	return first.second > second.second;
 }
 
@@ -342,7 +341,7 @@ WaresWorkersMap get_valid_workers_for(const Widelands::ProductionSite& ps) {
 int workers_map_to_lua(lua_State* L, const WaresWorkersMap& valid_workers) {
 	lua_newtable(L);
 	for (const WaresWorkersMap::value_type& item : valid_workers) {
-		lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(item.first)->name());
+		lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(item.first)->name());
 		lua_pushuint32(L, item.second);
 		lua_rawset(L, -3);
 	}
@@ -711,12 +710,12 @@ parse_wares_as_bill_of_material(lua_State* L, int table_index, const Widelands::
 }
 
 const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tribename) {
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
-	if (!tribes.tribe_exists(tribename)) {
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	if (!descriptions.tribe_exists(tribename)) {
 		report_error(L, "Tribe '%s' does not exist", tribename.c_str());
 	}
-	return *get_egbase(L).tribes().get_tribe_descr(
-	   get_egbase(L).mutable_tribes()->load_tribe(tribename));
+	return *descriptions.get_tribe_descr(
+	   get_egbase(L).mutable_descriptions()->load_tribe(tribename));
 }
 
 }  // namespace
@@ -1470,29 +1469,26 @@ int LuaMap::find_ocean_fields(lua_State* L) {
 }
 
 /* RST
-   .. method:: place_immovable(name, field, from_where)
+   .. method:: place_immovable(name, field)
 
-      Creates an immovable that is defined by the world (e.g. trees, rocks...)
-      or a tribe (field) on a given field. If there is already an immovable on
+      Creates an immovable on a given field. If there is already an immovable on
       the field, an error is reported.
 
       :arg name: The name of the immovable to create
       :type name: :class:`string`
       :arg field: The immovable is created on this field.
       :type field: :class:`wl.map.Field`
-      :arg from_where: "world" if the immovable is defined in the world,
-         "tribes" if it is defined in the tribes.
-      :type from_where: :class:`string`
 
       :returns: The created immovable.
 */
 int LuaMap::place_immovable(lua_State* const L) {
-	std::string from_where;
 
 	const std::string objname = luaL_checkstring(L, 2);
 	LuaMaps::LuaField* c = *get_user_class<LuaMaps::LuaField>(L, 3);
 	if (lua_gettop(L) > 3 && !lua_isnil(L, 4)) {
-		from_where = luaL_checkstring(L, 4);
+		// TODO(GunChleoc): Compatibility, remove after v1.0
+		log_warn("Found deprecated parameter '%s' in place_immovable call, placing '%s'",
+		         luaL_checkstring(L, 4), objname.c_str());
 	}
 
 	// Check if the map is still free here
@@ -1502,38 +1498,17 @@ int LuaMap::place_immovable(lua_State* const L) {
 		}
 	}
 
-	// The immovable type might not have been loaded yet
+	// Load it, place it, return it
 	try {
-		Notifications::publish(Widelands::NoteMapObjectDescription(
-		   objname, Widelands::NoteMapObjectDescription::LoadType::kObject));
+		Widelands::EditorGameBase& egbase = get_egbase(L);
+		Widelands::DescriptionIndex const imm_idx =
+		   egbase.mutable_descriptions()->load_immovable(objname);
+		Widelands::BaseImmovable* m =
+		   &egbase.create_immovable(c->coords(), imm_idx, nullptr /* owner */);
+		return LuaMaps::upcasted_map_object_to_lua(L, m);
 	} catch (const Widelands::GameDataError&) {
 		report_error(L, "Unknown immovable <%s>", objname.c_str());
 	}
-
-	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::BaseImmovable* m = nullptr;
-	if (from_where == "world") {
-		Widelands::DescriptionIndex const imm_idx = egbase.world().get_immovable_index(objname);
-		if (imm_idx == Widelands::INVALID_INDEX) {
-			report_error(L, "Unknown world immovable <%s>", objname.c_str());
-		}
-
-		m = &egbase.create_immovable(
-		   c->coords(), imm_idx, Widelands::MapObjectDescr::OwnerType::kWorld, nullptr /* owner */);
-	} else if (from_where == "tribes") {
-		Widelands::DescriptionIndex const imm_idx = egbase.tribes().immovable_index(objname);
-		if (imm_idx == Widelands::INVALID_INDEX) {
-			report_error(L, "Unknown tribes immovable <%s>", objname.c_str());
-		}
-
-		m = &egbase.create_immovable(
-		   c->coords(), imm_idx, Widelands::MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
-	} else {
-		report_error(
-		   L, "There are no immovables for <%s>. Use \"world\" or \"tribes\"", from_where.c_str());
-	}
-
-	return LuaMaps::upcasted_map_object_to_lua(L, m);
 }
 
 /* RST
@@ -1660,6 +1635,7 @@ const MethodType<LuaTribeDescription> LuaTribeDescription::Methods[] = {
 };
 const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, buildings),
+   PROP_RO(LuaTribeDescription, builder),
    PROP_RO(LuaTribeDescription, carrier),
    PROP_RO(LuaTribeDescription, carrier2),
    PROP_RO(LuaTribeDescription, ferry),
@@ -1687,8 +1663,8 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 	if (!Widelands::tribe_exists(name)) {
 		report_error(L, "Tribe '%s' does not exist", name.c_str());
 	}
-	set_description_pointer(
-	   get_egbase(L).tribes().get_tribe_descr(get_egbase(L).mutable_tribes()->load_tribe(name)));
+	set_description_pointer(get_egbase(L).descriptions().get_tribe_descr(
+	   get_egbase(L).mutable_descriptions()->load_tribe(name)));
 }
 
 /*
@@ -1716,13 +1692,23 @@ int LuaTribeDescription::get_buildings(lua_State* L) {
 }
 
 /* RST
+   .. attribute:: builder
+
+         (RO) the :class:`string` internal name of the builder type that this tribe uses
+*/
+int LuaTribeDescription::get_builder(lua_State* L) {
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->builder())->name());
+	return 1;
+}
+
+/* RST
    .. attribute:: carrier
 
          (RO) the :class:`string` internal name of the carrier type that this tribe uses
 */
 
 int LuaTribeDescription::get_carrier(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->carrier())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->carrier())->name());
 	return 1;
 }
 
@@ -1734,7 +1720,7 @@ int LuaTribeDescription::get_carrier(lua_State* L) {
 */
 
 int LuaTribeDescription::get_carrier2(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->carrier2())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->carrier2())->name());
 	return 1;
 }
 
@@ -1746,7 +1732,7 @@ int LuaTribeDescription::get_carrier2(lua_State* L) {
 */
 
 int LuaTribeDescription::get_ferry(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->ferry())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->ferry())->name());
 	return 1;
 }
 
@@ -1768,7 +1754,7 @@ int LuaTribeDescription::get_descname(lua_State* L) {
 */
 
 int LuaTribeDescription::get_geologist(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->geologist())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->geologist())->name());
 	return 1;
 }
 
@@ -1831,7 +1817,7 @@ int LuaTribeDescription::get_name(lua_State* L) {
 */
 
 int LuaTribeDescription::get_port(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->port())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_building_descr(get()->port())->name());
 	return 1;
 }
 
@@ -1842,7 +1828,7 @@ int LuaTribeDescription::get_port(lua_State* L) {
 */
 
 int LuaTribeDescription::get_ship(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_ship_descr(get()->ship())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_ship_descr(get()->ship())->name());
 	return 1;
 }
 
@@ -1853,7 +1839,7 @@ int LuaTribeDescription::get_ship(lua_State* L) {
 */
 
 int LuaTribeDescription::get_soldier(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(get()->soldier())->name());
+	lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(get()->soldier())->name());
 	return 1;
 }
 
@@ -1902,7 +1888,8 @@ int LuaTribeDescription::get_workers(lua_State* L) {
 */
 int LuaTribeDescription::has_building(lua_State* L) {
 	const std::string buildingname = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().building_index(buildingname);
+	const Widelands::DescriptionIndex index =
+	   get_egbase(L).descriptions().building_index(buildingname);
 	lua_pushboolean(L, get()->has_building(index));
 	return 1;
 }
@@ -1917,7 +1904,7 @@ int LuaTribeDescription::has_building(lua_State* L) {
 */
 int LuaTribeDescription::has_ware(lua_State* L) {
 	const std::string warename = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(warename);
+	const Widelands::DescriptionIndex index = get_egbase(L).descriptions().ware_index(warename);
 	lua_pushboolean(L, get()->has_ware(index));
 	return 1;
 }
@@ -1932,7 +1919,7 @@ int LuaTribeDescription::has_ware(lua_State* L) {
 */
 int LuaTribeDescription::has_worker(lua_State* L) {
 	const std::string workername = luaL_checkstring(L, 2);
-	const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(workername);
+	const Widelands::DescriptionIndex index = get_egbase(L).descriptions().worker_index(workername);
 	lua_pushboolean(L, get()->has_worker(index));
 	return 1;
 }
@@ -2142,13 +2129,9 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
-   PROP_RO(LuaImmovableDescription, species),
-   PROP_RO(LuaImmovableDescription, buildcost),
-   PROP_RO(LuaImmovableDescription, becomes),
-   PROP_RO(LuaImmovableDescription, terrain_affinity),
-   PROP_RO(LuaImmovableDescription, owner_type),
-   PROP_RO(LuaImmovableDescription, size),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaImmovableDescription, species), PROP_RO(LuaImmovableDescription, buildcost),
+   PROP_RO(LuaImmovableDescription, becomes), PROP_RO(LuaImmovableDescription, terrain_affinity),
+   PROP_RO(LuaImmovableDescription, size),    {nullptr, nullptr, nullptr},
 };
 
 void LuaImmovableDescription::__persist(lua_State* L) {
@@ -2159,15 +2142,9 @@ void LuaImmovableDescription::__persist(lua_State* L) {
 void LuaImmovableDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::World& world = get_egbase(L).world();
-	Widelands::DescriptionIndex idx = world.get_immovable_index(name);
-	if (idx != Widelands::INVALID_INDEX) {
-		set_description_pointer(world.get_immovable_descr(idx));
-	} else {
-		const Widelands::Tribes& tribes = get_egbase(L).tribes();
-		idx = tribes.safe_immovable_index(name);
-		set_description_pointer(tribes.get_immovable_descr(idx));
-	}
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	Widelands::DescriptionIndex idx = descriptions.safe_immovable_index(name);
+	set_description_pointer(descriptions.get_immovable_descr(idx));
 }
 
 /* RST
@@ -2241,25 +2218,6 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: owner_type
-
-         the owner type of this immovable
-
-         (RO) "world" for world immovables and "tribe" for tribe immovables.
-*/
-int LuaImmovableDescription::get_owner_type(lua_State* L) {
-	switch (get()->owner_type()) {
-	case Widelands::MapObjectDescr::OwnerType::kWorld:
-		lua_pushstring(L, "world");
-		break;
-	case Widelands::MapObjectDescr::OwnerType::kTribe:
-		lua_pushstring(L, "tribe");
-		break;
-	}
-	return 1;
-}
-
-/* RST
    .. attribute:: size
 
       (RO) The size of this immovable. Can be either of
@@ -2300,7 +2258,8 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const uint32_t attribute_id = get()->get_attribute_id(luaL_checkstring(L, 2));
+	const uint32_t attribute_id =
+	   Widelands::MapObjectDescr::get_attribute_id(luaL_checkstring(L, 2));
 	lua_pushboolean(L, get()->has_attribute(attribute_id));
 	return 1;
 }
@@ -2374,9 +2333,9 @@ void LuaBuildingDescription::__persist(lua_State* L) {
 void LuaBuildingDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
-	Widelands::DescriptionIndex idx = tribes.safe_building_index(name.c_str());
-	set_description_pointer(tribes.get_building_descr(idx));
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	Widelands::DescriptionIndex idx = descriptions.safe_building_index(name);
+	set_description_pointer(descriptions.get_building_descr(idx));
 }
 
 /*
@@ -2444,8 +2403,9 @@ int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
 		const Widelands::DescriptionIndex& enhanced_from = get()->enhanced_from();
 		Widelands::EditorGameBase& egbase = get_egbase(L);
-		assert(egbase.tribes().building_exists(enhanced_from));
-		return upcasted_map_object_descr_to_lua(L, egbase.tribes().get_building_descr(enhanced_from));
+		assert(egbase.descriptions().building_exists(enhanced_from));
+		return upcasted_map_object_descr_to_lua(
+		   L, egbase.descriptions().get_building_descr(enhanced_from));
 	}
 	lua_pushnil(L);
 	return 0;
@@ -2471,7 +2431,7 @@ int LuaBuildingDescription::get_enhancement(lua_State* L) {
 		return 0;
 	}
 	return upcasted_map_object_descr_to_lua(
-	   L, get_egbase(L).tribes().get_building_descr(enhancement));
+	   L, get_egbase(L).descriptions().get_building_descr(enhancement));
 }
 
 /* RST
@@ -2657,7 +2617,8 @@ int LuaProductionSiteDescription::get_inputs(lua_State* L) {
 	int index = 1;
 	for (const auto& input_ware : get()->input_wares()) {
 		lua_pushint32(L, index++);
-		const Widelands::WareDescr* descr = get_egbase(L).tribes().get_ware_descr(input_ware.first);
+		const Widelands::WareDescr* descr =
+		   get_egbase(L).descriptions().get_ware_descr(input_ware.first);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -2680,7 +2641,8 @@ int LuaProductionSiteDescription::get_collected_bobs(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& critter_name : get()->collected_bobs()) {
 		lua_pushint32(L, index++);
-		const Widelands::CritterDescr* critter = egbase.world().get_critter_descr(critter_name);
+		const Widelands::CritterDescr* critter =
+		   egbase.descriptions().get_critter_descr(critter_name);
 		assert(critter != nullptr);
 		to_lua<LuaMapObjectDescription>(L, new LuaMapObjectDescription(critter));
 		lua_rawset(L, -3);
@@ -2702,12 +2664,8 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& immovable_name : get()->collected_immovables()) {
 		lua_pushint32(L, index++);
-		const Widelands::ImmovableDescr* immovable =
-		   egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
-		if (immovable == nullptr) {
-			immovable =
-			   egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
-		}
+		const Widelands::ImmovableDescr* immovable = egbase.descriptions().get_immovable_descr(
+		   egbase.descriptions().immovable_index(immovable_name));
 		assert(immovable != nullptr);
 		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
 		lua_rawset(L, -3);
@@ -2719,20 +2677,51 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
    .. attribute:: collected_resources
 
       (RO) An array with :class:`ResourceDescription` containing the resources that
-      this building will collect from the map.
-      For example, a Fishers's House will collect the "fish" resource.
+      this building will collect from the map, along with the maximum percentage mined and the
+      chance to still find some more after depletion. For example, a Fishers's House will collect:
+
+      .. code-block:: lua
+
+       {
+            {
+               resource = <resource description for fish>,
+               yield = 100,
+               when_empty = 0
+            }
+         }
+
+      and a Barbarian Coal Mine will collect:
+
+      .. code-block:: lua
+
+         {
+            {
+               resource = <resource description for coal>,
+               yield = 33.33,
+               when_empty = 5
+            }
+         }
 */
 int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (const std::string& resource_name : get()->collected_resources()) {
+	for (const auto& resource_info : get()->collected_resources()) {
 		lua_pushint32(L, index++);
-		const Widelands::ResourceDescription* resource =
-		   egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		lua_newtable(L);
+		lua_pushstring(L, "resource");
+		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
+		   egbase.descriptions().resource_index(resource_info.first));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
+		lua_pushstring(L, "yield");
+		lua_pushnumber(L, resource_info.second.max_percent / 100.0);
+		lua_settable(L, -3);
+		lua_pushstring(L, "when_empty");
+		lua_pushnumber(L, resource_info.second.depleted_chance / 100.0);
+		lua_settable(L, -3);
+		lua_settable(L, -3);
 	}
 	return 1;
 }
@@ -2750,12 +2739,8 @@ int LuaProductionSiteDescription::get_created_immovables(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& immovable_name : get()->created_immovables()) {
 		lua_pushint32(L, index++);
-		const Widelands::ImmovableDescr* immovable =
-		   egbase.world().get_immovable_descr(egbase.world().get_immovable_index(immovable_name));
-		if (immovable == nullptr) {
-			immovable =
-			   egbase.tribes().get_immovable_descr(egbase.tribes().immovable_index(immovable_name));
-		}
+		const Widelands::ImmovableDescr* immovable = egbase.descriptions().get_immovable_descr(
+		   egbase.descriptions().immovable_index(immovable_name));
 		assert(immovable != nullptr);
 		to_lua<LuaImmovableDescription>(L, new LuaImmovableDescription(immovable));
 		lua_rawset(L, -3);
@@ -2776,21 +2761,21 @@ int LuaProductionSiteDescription::get_created_bobs(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& bobname : get()->created_bobs()) {
 		lua_pushint32(L, index++);
-		const Widelands::CritterDescr* critter = egbase.world().get_critter_descr(bobname);
+		const Widelands::CritterDescr* critter = egbase.descriptions().get_critter_descr(bobname);
 		if (critter != nullptr) {
 			to_lua<LuaMapObjectDescription>(
 			   L,
 			   new LuaMapObjectDescription(dynamic_cast<const Widelands::MapObjectDescr*>(critter)));
 		} else {
 			const Widelands::ShipDescr* ship =
-			   egbase.tribes().get_ship_descr(egbase.tribes().ship_index(bobname));
+			   egbase.descriptions().get_ship_descr(egbase.descriptions().ship_index(bobname));
 			if (ship != nullptr) {
 				to_lua<LuaMapObjectDescription>(
 				   L,
 				   new LuaMapObjectDescription(dynamic_cast<const Widelands::MapObjectDescr*>(ship)));
 			} else {
 				const Widelands::WorkerDescr* worker =
-				   egbase.tribes().get_worker_descr(egbase.tribes().worker_index(bobname));
+				   egbase.descriptions().get_worker_descr(egbase.descriptions().worker_index(bobname));
 				if (worker != nullptr) {
 					to_lua<LuaWorkerDescription>(L, new LuaWorkerDescription(worker));
 				} else {
@@ -2816,8 +2801,8 @@ int LuaProductionSiteDescription::get_created_resources(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	for (const std::string& resource_name : get()->created_resources()) {
 		lua_pushint32(L, index++);
-		const Widelands::ResourceDescription* resource =
-		   egbase.world().get_resource(egbase.world().resource_index(resource_name.c_str()));
+		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
+		   egbase.descriptions().resource_index(resource_name));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
@@ -2836,7 +2821,7 @@ int LuaProductionSiteDescription::get_output_ware_types(lua_State* L) {
 	int index = 1;
 	for (const auto& ware_index : get()->output_ware_types()) {
 		lua_pushint32(L, index++);
-		const Widelands::WareDescr* descr = get_egbase(L).tribes().get_ware_descr(ware_index);
+		const Widelands::WareDescr* descr = get_egbase(L).descriptions().get_ware_descr(ware_index);
 		to_lua<LuaWareDescription>(L, new LuaWareDescription(descr));
 		lua_rawset(L, -3);
 	}
@@ -2855,7 +2840,8 @@ int LuaProductionSiteDescription::get_output_worker_types(lua_State* L) {
 	int index = 1;
 	for (const auto& worker_index : get()->output_worker_types()) {
 		lua_pushint32(L, index++);
-		const Widelands::WorkerDescr* descr = get_egbase(L).tribes().get_worker_descr(worker_index);
+		const Widelands::WorkerDescr* descr =
+		   get_egbase(L).descriptions().get_worker_descr(worker_index);
 		to_lua<LuaWorkerDescription>(L, new LuaWorkerDescription(descr));
 		lua_rawset(L, -3);
 	}
@@ -2890,12 +2876,12 @@ int LuaProductionSiteDescription::get_production_programs(lua_State* L) {
 int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	for (const auto& site : get()->supported_productionsites()) {
 		lua_pushint32(L, index++);
 		const Widelands::ProductionSiteDescr* descr =
 		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
-		      tribes.get_building_descr(tribes.safe_building_index(site)));
+		      descriptions.get_building_descr(descriptions.safe_building_index(site)));
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -2913,12 +2899,12 @@ int LuaProductionSiteDescription::get_supported_productionsites(lua_State* L) {
 int LuaProductionSiteDescription::get_supported_by_productionsites(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
+	const Widelands::Descriptions& decriptions = get_egbase(L).descriptions();
 	for (const auto& site : get()->supported_by_productionsites()) {
 		lua_pushint32(L, index++);
 		const Widelands::ProductionSiteDescr* descr =
 		   dynamic_cast<const Widelands::ProductionSiteDescr*>(
-		      tribes.get_building_descr(tribes.safe_building_index(site)));
+		      decriptions.get_building_descr(decriptions.safe_building_index(site)));
 		to_lua<LuaProductionSiteDescription>(L, new LuaProductionSiteDescription(descr));
 		lua_settable(L, -3);
 	}
@@ -2940,7 +2926,7 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
 		while (amount > 0) {
 			lua_pushint32(L, index++);
 			const Widelands::WorkerDescr* descr =
-			   get_egbase(L).tribes().get_worker_descr(positions_pair.first);
+			   get_egbase(L).descriptions().get_worker_descr(positions_pair.first);
 			to_lua<LuaWorkerDescription>(L, new LuaWorkerDescription(descr));
 			lua_settable(L, -3);
 			--amount;
@@ -2971,9 +2957,9 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 			for (const auto& entry : group.first) {
 				const Widelands::DescriptionIndex& index = entry.first;
 				if (entry.second == Widelands::wwWARE) {
-					lua_pushstring(L, get_egbase(L).tribes().get_ware_descr(index)->name());
+					lua_pushstring(L, get_egbase(L).descriptions().get_ware_descr(index)->name());
 				} else {
-					lua_pushstring(L, get_egbase(L).tribes().get_worker_descr(index)->name());
+					lua_pushstring(L, get_egbase(L).descriptions().get_worker_descr(index)->name());
 				}
 				lua_pushuint32(L, group.second);
 				lua_settable(L, -3);
@@ -3451,9 +3437,9 @@ void LuaShipDescription::__persist(lua_State* L) {
 void LuaShipDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
-	Widelands::DescriptionIndex idx = tribes.safe_ship_index(name.c_str());
-	set_description_pointer(tribes.get_ship_descr(idx));
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	Widelands::DescriptionIndex idx = descriptions.safe_ship_index(name);
+	set_description_pointer(descriptions.get_ship_descr(idx));
 }
 
 /*
@@ -3493,9 +3479,9 @@ void LuaWareDescription::__persist(lua_State* L) {
 void LuaWareDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
-	Widelands::DescriptionIndex idx = tribes.safe_ware_index(name.c_str());
-	set_description_pointer(tribes.get_ware_descr(idx));
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	Widelands::DescriptionIndex idx = descriptions.safe_ware_index(name);
+	set_description_pointer(descriptions.get_ware_descr(idx));
 }
 
 /*
@@ -3528,7 +3514,7 @@ int LuaWareDescription::consumers(lua_State* L) {
 		if (tribe.has_building(building_index)) {
 			lua_pushint32(L, index++);
 			upcasted_map_object_descr_to_lua(
-			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			   L, get_egbase(L).descriptions().get_building_descr(building_index));
 			lua_rawset(L, -3);
 		}
 	}
@@ -3545,11 +3531,12 @@ int LuaWareDescription::consumers(lua_State* L) {
 */
 int LuaWareDescription::is_construction_material(lua_State* L) {
 	std::string tribename = luaL_checkstring(L, -1);
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
-	if (tribes.tribe_exists(tribename)) {
-		const Widelands::DescriptionIndex& ware_index = tribes.safe_ware_index(get()->name());
-		int tribeindex = tribes.tribe_index(tribename);
-		lua_pushboolean(L, tribes.get_tribe_descr(tribeindex)->is_construction_material(ware_index));
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	if (descriptions.tribe_exists(tribename)) {
+		const Widelands::DescriptionIndex& ware_index = descriptions.safe_ware_index(get()->name());
+		int tribeindex = descriptions.tribe_index(tribename);
+		lua_pushboolean(
+		   L, descriptions.get_tribe_descr(tribeindex)->is_construction_material(ware_index));
 	} else {
 		lua_pushboolean(L, false);
 	}
@@ -3580,7 +3567,7 @@ int LuaWareDescription::producers(lua_State* L) {
 		if (tribe.has_building(building_index)) {
 			lua_pushint32(L, index++);
 			upcasted_map_object_descr_to_lua(
-			   L, get_egbase(L).tribes().get_building_descr(building_index));
+			   L, get_egbase(L).descriptions().get_building_descr(building_index));
 			lua_rawset(L, -3);
 		}
 	}
@@ -3617,9 +3604,9 @@ void LuaWorkerDescription::__persist(lua_State* L) {
 void LuaWorkerDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::Tribes& tribes = get_egbase(L).tribes();
-	Widelands::DescriptionIndex idx = tribes.safe_worker_index(name.c_str());
-	set_description_pointer(tribes.get_worker_descr(idx));
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	Widelands::DescriptionIndex idx = descriptions.safe_worker_index(name);
+	set_description_pointer(descriptions.get_worker_descr(idx));
 }
 
 /*
@@ -3641,7 +3628,7 @@ int LuaWorkerDescription::get_becomes(lua_State* L) {
 		return 1;
 	}
 	return to_lua<LuaWorkerDescription>(
-	   L, new LuaWorkerDescription(get_egbase(L).tribes().get_worker_descr(becomes_index)));
+	   L, new LuaWorkerDescription(get_egbase(L).descriptions().get_worker_descr(becomes_index)));
 }
 
 /* RST
@@ -3651,8 +3638,8 @@ int LuaWorkerDescription::get_becomes(lua_State* L) {
 */
 int LuaWorkerDescription::get_buildcost(lua_State* L) {
 	lua_newtable(L);
-	int index = 1;
 	if (get()->is_buildable()) {
+		int index = 1;
 		for (const auto& buildcost_pair : get()->buildcost()) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, buildcost_pair.first);
@@ -3674,7 +3661,7 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 	for (const Widelands::DescriptionIndex& building_index : get()->employers()) {
 		lua_pushint32(L, index++);
 		upcasted_map_object_descr_to_lua(
-		   L, get_egbase(L).tribes().get_building_descr(building_index));
+		   L, get_egbase(L).descriptions().get_building_descr(building_index));
 		lua_rawset(L, -3);
 	}
 	return 1;
@@ -3898,9 +3885,9 @@ void LuaResourceDescription::__persist(lua_State* L) {
 void LuaResourceDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	const Widelands::World& world = get_egbase(L).world();
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	const Widelands::ResourceDescription* descr =
-	   world.get_resource(world.safe_resource_index(name));
+	   descriptions.get_resource_descr(descriptions.safe_resource_index(name));
 	set_description_pointer(descr);
 }
 
@@ -4019,7 +4006,7 @@ void LuaTerrainDescription::__persist(lua_State* L) {
 void LuaTerrainDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name)
-	set_description_pointer(get_egbase(L).world().terrain_descr(name));
+	set_description_pointer(get_egbase(L).descriptions().get_terrain_descr(name));
 }
 
 /*
@@ -4059,10 +4046,10 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
 
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
 	Widelands::DescriptionIndex res_index = get()->get_default_resource();
-	const Widelands::World& world = get_egbase(L).world();
-	if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
+	if (res_index != Widelands::kNoResource && res_index < descriptions.nr_resources()) {
 		to_lua<LuaMaps::LuaResourceDescription>(
-		   L, new LuaMaps::LuaResourceDescription(world.get_resource(res_index)));
+		   L, new LuaMaps::LuaResourceDescription(descriptions.get_resource_descr(res_index)));
 	} else {
 		lua_pushnil(L);
 	}
@@ -4131,14 +4118,14 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
 */
 
 int LuaTerrainDescription::get_valid_resources(lua_State* L) {
-	const Widelands::World& world = get_egbase(L).world();
+	const Widelands::Descriptions& descriptions = get_egbase(L).descriptions();
 	lua_newtable(L);
 	int index = 1;
 	for (Widelands::DescriptionIndex res_index : get()->valid_resources()) {
-		if (res_index != Widelands::kNoResource && res_index < world.get_nr_resources()) {
+		if (res_index != Widelands::kNoResource && res_index < descriptions.nr_resources()) {
 			lua_pushint32(L, index++);
 			to_lua<LuaMaps::LuaResourceDescription>(
-			   L, new LuaMaps::LuaResourceDescription(world.get_resource(res_index)));
+			   L, new LuaMaps::LuaResourceDescription(descriptions.get_resource_descr(res_index)));
 			lua_settable(L, -3);
 		}
 	}
@@ -4203,8 +4190,8 @@ int LuaEconomy::target_quantity(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
 	switch (get()->type()) {
 	case Widelands::wwWARE: {
-		const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
-		if (get_egbase(L).tribes().ware_exists(index)) {
+		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().ware_index(wname);
+		if (get_egbase(L).descriptions().ware_exists(index)) {
 			const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
 			lua_pushinteger(L, quantity.permanent);
 		} else {
@@ -4213,8 +4200,8 @@ int LuaEconomy::target_quantity(lua_State* L) {
 		break;
 	}
 	case Widelands::wwWORKER: {
-		const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
-		if (get_egbase(L).tribes().worker_exists(index)) {
+		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().worker_index(wname);
+		if (get_egbase(L).descriptions().worker_exists(index)) {
 			const Widelands::Economy::TargetQuantity& quantity = get()->target_quantity(index);
 			lua_pushinteger(L, quantity.permanent);
 		} else {
@@ -4247,8 +4234,8 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 	const std::string wname = luaL_checkstring(L, 2);
 	switch (get()->type()) {
 	case Widelands::wwWARE: {
-		const Widelands::DescriptionIndex index = get_egbase(L).tribes().ware_index(wname);
-		if (get_egbase(L).tribes().ware_exists(index)) {
+		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().ware_index(wname);
+		if (get_egbase(L).descriptions().ware_exists(index)) {
 			const int quantity = luaL_checkinteger(L, 3);
 			if (quantity < 0) {
 				report_error(L, "Target ware quantity needs to be >= 0 but was '%d'.", quantity);
@@ -4260,8 +4247,8 @@ int LuaEconomy::set_target_quantity(lua_State* L) {
 		break;
 	}
 	case Widelands::wwWORKER: {
-		const Widelands::DescriptionIndex index = get_egbase(L).tribes().worker_index(wname);
-		if (get_egbase(L).tribes().worker_exists(index)) {
+		const Widelands::DescriptionIndex index = get_egbase(L).descriptions().worker_index(wname);
+		if (get_egbase(L).descriptions().worker_exists(index)) {
 			const int quantity = luaL_checkinteger(L, 3);
 			if (quantity < 0) {
 				report_error(L, "Target worker quantity needs to be >= 0 but was '%d'.", quantity);
@@ -4510,7 +4497,7 @@ LuaMapObject::get(lua_State* L, Widelands::EditorGameBase& egbase, const std::st
 	}
 	return o;
 }
-Widelands::MapObject* LuaMapObject::get_or_zero(Widelands::EditorGameBase& egbase) {
+Widelands::MapObject* LuaMapObject::get_or_zero(const Widelands::EditorGameBase& egbase) {
 	return ptr_.get(egbase);
 }
 
@@ -4754,11 +4741,11 @@ int LuaFlag::get_building(lua_State* L) {
 int LuaFlag::set_wares(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Flag* f = get(L, egbase);
-	const Widelands::Tribes& tribes = egbase.tribes();
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
 
 	InputMap setpoints;
 	parse_wares_workers_counted(L, f->owner().tribe(), &setpoints, true);
-	WaresWorkersMap c_wares = count_wares_on_flag_(*f, tribes);
+	WaresWorkersMap c_wares = count_wares_on_flag_(*f, descriptions);
 
 	for (const auto& ware : c_wares) {
 		// all wares currently on the flag without a setpoint should be removed
@@ -4787,7 +4774,7 @@ int LuaFlag::set_wares(lua_State* L) {
 		} else {
 			while (diff < 0) {
 				for (const Widelands::WareInstance* ware : f->get_wares()) {
-					if (tribes.ware_index(ware->descr().name()) == index) {
+					if (descriptions.ware_index(ware->descr().name()) == index) {
 						const_cast<Widelands::WareInstance*>(ware)->remove(egbase);
 						++diff;
 						break;
@@ -4803,7 +4790,7 @@ int LuaFlag::set_wares(lua_State* L) {
 			report_error(L, "Flag has no capacity left!");
 		}
 
-		const Widelands::WareDescr& wd = *tribes.get_ware_descr(ware_to_add.first);
+		const Widelands::WareDescr& wd = *descriptions.get_ware_descr(ware_to_add.first);
 		for (int i = 0; i < ware_to_add.second; i++) {
 			Widelands::WareInstance& ware = *new Widelands::WareInstance(ware_to_add.first, &wd);
 			ware.init(egbase);
@@ -4812,7 +4799,7 @@ int LuaFlag::set_wares(lua_State* L) {
 	}
 
 #ifndef NDEBUG
-	WaresWorkersMap wares_on_flag = count_wares_on_flag_(*f, tribes);
+	WaresWorkersMap wares_on_flag = count_wares_on_flag_(*f, descriptions);
 	for (const auto& sp : setpoints) {
 		if (sp.second > 0) {
 			assert(wares_on_flag.count(sp.first.first) == 1);
@@ -4827,7 +4814,7 @@ int LuaFlag::set_wares(lua_State* L) {
 // Documented in parent Class
 int LuaFlag::get_wares(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	const Widelands::Tribes& tribes = egbase.tribes();
+	const Widelands::Descriptions& descriptions = egbase.descriptions();
 	Widelands::Flag* flag = get(L, egbase);
 	const Widelands::TribeDescr& tribe = flag->owner().tribe();
 
@@ -4836,7 +4823,7 @@ int LuaFlag::get_wares(lua_State* L) {
 	RequestedWareWorker parse_output =
 	   parse_wares_workers_list(L, tribe, &ware_index, &ware_list, true);
 
-	WaresWorkersMap wares = count_wares_on_flag_(*flag, tribes);
+	WaresWorkersMap wares = count_wares_on_flag_(*flag, descriptions);
 
 	// Here we create the output - either a single integer of table of pairs
 	if (ware_index != Widelands::INVALID_INDEX) {
@@ -5679,6 +5666,7 @@ const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
    PROP_RO(LuaProductionSite, valid_inputs),
    PROP_RO(LuaProductionSite, is_stopped),
+   PROP_RO(LuaProductionSite, productivity),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5694,13 +5682,14 @@ int LuaProductionSite::get_valid_inputs(lua_State* L) {
 
 	lua_newtable(L);
 	for (const auto& input_ware : ps->descr().input_wares()) {
-		const Widelands::WareDescr* descr = egbase.tribes().get_ware_descr(input_ware.first);
+		const Widelands::WareDescr* descr = egbase.descriptions().get_ware_descr(input_ware.first);
 		lua_pushstring(L, descr->name());
 		lua_pushuint32(L, input_ware.second);
 		lua_rawset(L, -3);
 	}
 	for (const auto& input_worker : ps->descr().input_workers()) {
-		const Widelands::WorkerDescr* descr = egbase.tribes().get_worker_descr(input_worker.first);
+		const Widelands::WorkerDescr* descr =
+		   egbase.descriptions().get_worker_descr(input_worker.first);
 		lua_pushstring(L, descr->name());
 		lua_pushuint32(L, input_worker.second);
 		lua_rawset(L, -3);
@@ -5725,6 +5714,18 @@ int LuaProductionSite::get_valid_workers(lua_State* L) {
 int LuaProductionSite::get_is_stopped(lua_State* L) {
 	Widelands::ProductionSite* ps = get(L, get_egbase(L));
 	lua_pushboolean(L, ps->is_stopped());
+	return 1;
+}
+
+/* RST
+   .. attribute:: productivity
+
+      (RO) Returns the building's current productivity percentage
+
+      :returns: A number between 0 and 100.
+*/
+int LuaProductionSite::get_productivity(lua_State* L) {
+	lua_pushinteger(L, get(L, get_egbase(L))->get_actual_statistics());
 	return 1;
 }
 
@@ -5754,7 +5755,7 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 			                tribe.get_worker_descr(sp.first.first)->name().c_str(),
 			             ps->descr().name().c_str());
 		}
-		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
+		Widelands::InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second, nullptr);
 		if (sp.second > iq.get_max_size()) {
 			report_error(
 			   L, "Not enough space for %u inputs, only for %i", sp.second, iq.get_max_size());
@@ -5792,7 +5793,7 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 	for (const auto& input : input_set) {
 		uint32_t cnt = 0;
 		if (valid_inputs.count(input)) {
-			cnt = ps->inputqueue(input.first, input.second).get_filled();
+			cnt = ps->inputqueue(input.first, input.second, nullptr).get_filled();
 		}
 
 		if (return_number) {  // this is the only thing the customer wants to know
@@ -6407,7 +6408,7 @@ int LuaShip::get_wares(lua_State* L) {
 	Widelands::Ship* ship = get(L, egbase);
 
 	Widelands::WareInstance* ware = nullptr;
-	std::string filter = "";
+	std::string filter;
 
 	if (lua_gettop(L) > 1) {
 		filter = luaL_checkstring(L, -1);
@@ -6462,7 +6463,7 @@ int LuaShip::get_workers(lua_State* L) {
 	Widelands::Ship* ship = get(L, egbase);
 
 	Widelands::Worker* worker = nullptr;
-	std::string filter = "";
+	std::string filter;
 
 	if (lua_gettop(L) > 1) {
 		filter = luaL_checkstring(L, -1);
@@ -6560,7 +6561,7 @@ int LuaShip::make_expedition(lua_State* L) {
 			uint32_t amount = luaL_checkuint32(L, -1);
 			lua_pop(L, 1);
 			std::string what = luaL_checkstring(L, -1);
-			Widelands::DescriptionIndex index = game->tribes().ware_index(what);
+			Widelands::DescriptionIndex index = game->descriptions().ware_index(what);
 			if (tribe.has_ware(index)) {
 				while (amount > 0) {
 					Widelands::WareInstance& w =
@@ -6772,7 +6773,8 @@ Field
 const char LuaField::className[] = "Field";
 const MethodType<LuaField> LuaField::Methods[] = {
    METHOD(LuaField, __eq),     METHOD(LuaField, __tostring),   METHOD(LuaField, region),
-   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), {nullptr, nullptr},
+   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), METHOD(LuaField, indicate),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, __hash),
@@ -6798,6 +6800,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
    PROP_RO(LuaField, buildable),
+   PROP_RO(LuaField, has_roads),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6925,14 +6928,13 @@ int LuaField::get_viewpoint_y(lua_State* L) {
    .. attribute:: resource
 
       (RW) The name of the resource that is available in this field or
-      :const:`nil`
+      "none"
 
       :see also: :attr:`resource_amount`
 */
 int LuaField::get_resource(lua_State* L) {
-
 	const Widelands::ResourceDescription* rDesc =
-	   get_egbase(L).world().get_resource(fcoords(L).field->get_resources());
+	   get_egbase(L).descriptions().get_resource_descr(fcoords(L).field->get_resources());
 
 	lua_pushstring(L, rDesc ? rDesc->name().c_str() : "none");
 
@@ -6940,7 +6942,7 @@ int LuaField::get_resource(lua_State* L) {
 }
 int LuaField::set_resource(lua_State* L) {
 	auto& egbase = get_egbase(L);
-	Widelands::DescriptionIndex res = egbase.world().resource_index(luaL_checkstring(L, -1));
+	Widelands::DescriptionIndex res = egbase.descriptions().resource_index(luaL_checkstring(L, -1));
 
 	if (res == Widelands::INVALID_INDEX) {
 		report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
@@ -6970,7 +6972,7 @@ int LuaField::set_resource_amount(lua_State* L) {
 	auto c = fcoords(L);
 	Widelands::DescriptionIndex res = c.field->get_resources();
 	auto amount = luaL_checkint32(L, -1);
-	const Widelands::ResourceDescription* resDesc = egbase.world().get_resource(res);
+	const Widelands::ResourceDescription* resDesc = egbase.descriptions().get_resource_descr(res);
 	Widelands::ResourceAmount max_amount = resDesc ? resDesc->max_amount() : 0;
 
 	if (amount < 0 || amount > max_amount) {
@@ -7049,16 +7051,16 @@ int LuaField::get_bobs(lua_State* L) {
       you're done changing terrains.
 */
 int LuaField::get_terr(lua_State* L) {
-	Widelands::TerrainDescription& td =
-	   get_egbase(L).world().terrain_descr(fcoords(L).field->terrain_r());
-	lua_pushstring(L, td.name().c_str());
+	const Widelands::TerrainDescription* td =
+	   get_egbase(L).descriptions().get_terrain_descr(fcoords(L).field->terrain_r());
+	lua_pushstring(L, td->name().c_str());
 	return 1;
 }
 int LuaField::set_terr(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	try {
-		const Widelands::DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		const Widelands::DescriptionIndex td = egbase.mutable_descriptions()->load_terrain(name);
 		egbase.mutable_map()->change_terrain(
 		   egbase, Widelands::TCoords<Widelands::FCoords>(fcoords(L), Widelands::TriangleIndex::R),
 		   td);
@@ -7071,16 +7073,16 @@ int LuaField::set_terr(lua_State* L) {
 }
 
 int LuaField::get_terd(lua_State* L) {
-	Widelands::TerrainDescription& td =
-	   get_egbase(L).world().terrain_descr(fcoords(L).field->terrain_d());
-	lua_pushstring(L, td.name().c_str());
+	const Widelands::TerrainDescription* td =
+	   get_egbase(L).descriptions().get_terrain_descr(fcoords(L).field->terrain_d());
+	lua_pushstring(L, td->name().c_str());
 	return 1;
 }
 int LuaField::set_terd(lua_State* L) {
 	const char* name = luaL_checkstring(L, -1);
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	try {
-		const Widelands::DescriptionIndex td = egbase.mutable_world()->load_terrain(name);
+		const Widelands::DescriptionIndex td = egbase.mutable_descriptions()->load_terrain(name);
 		egbase.mutable_map()->change_terrain(
 		   egbase, Widelands::TCoords<Widelands::FCoords>(fcoords(L), Widelands::TriangleIndex::D),
 		   td);
@@ -7125,6 +7127,8 @@ GET_X_NEIGHBOUR(tln)
 GET_X_NEIGHBOUR(bln)
 GET_X_NEIGHBOUR(brn)
 
+#undef GET_X_NEIGHBOUR
+
 /* RST
    .. attribute:: owner
 
@@ -7153,6 +7157,53 @@ int LuaField::get_buildable(lua_State* L) {
 	   (caps & Widelands::BUILDCAPS_MEDIUM) || (caps & Widelands::BUILDCAPS_BIG) ||
 	   (caps & Widelands::BUILDCAPS_MINE);
 	lua_pushboolean(L, is_buildable);
+	return 1;
+}
+
+/* RST
+   .. attribute:: has_roads
+
+      (RO) Whether any roads lead to the field.
+      Note that waterways are currently treated like roads.
+
+      :returns: ``true`` if any of the 6 directions has a road on it, ``false`` otherwise.
+*/
+int LuaField::get_has_roads(lua_State* L) {
+
+	const Widelands::FCoords& fc = fcoords(L);
+	Widelands::Field* f = fc.field;
+	if (f->get_road(Widelands::WalkingDir::WALK_E) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	if (f->get_road(Widelands::WalkingDir::WALK_SE) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	if (f->get_road(Widelands::WalkingDir::WALK_SW) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+
+	Widelands::FCoords neighbor;
+	const Widelands::Map& map = get_egbase(L).map();
+	map.get_ln(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_E) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	map.get_tln(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SE) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	map.get_trn(fc, &neighbor);
+	if (neighbor.field->get_road(Widelands::WalkingDir::WALK_SW) != Widelands::RoadSegment::kNone) {
+		lua_pushboolean(L, true);
+		return 1;
+	}
+	lua_pushboolean(L, false);
+
 	return 1;
 }
 
@@ -7295,9 +7346,37 @@ int LuaField::has_caps(lua_State* L) {
 int LuaField::has_max_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-	lua_pushboolean(
-	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
+	lua_pushboolean(L, check_has_caps(L, query, f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
+}
+
+/* RST
+   .. method:: indicate(on)
+
+      Show/Hide an arrow that points to this field. You can only point to 1 field at the same time.
+
+      :arg on: Whether to show or hide the arrow
+      :type on: :class:`boolean`
+*/
+// UNTESTED
+int LuaField::indicate(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Expected 1 boolean");
+	}
+
+	InteractivePlayer* ipl = dynamic_cast<InteractivePlayer*>(get_egbase(L).get_ibase());
+	if (ipl == nullptr) {
+		report_error(L, "This can only be called when there's an interactive player");
+	}
+
+	const bool on = luaL_checkboolean(L, -1);
+	if (on) {
+		ipl->set_training_wheel_indicator_field(fcoords(L));
+	} else {
+		ipl->set_training_wheel_indicator_field(
+		   Widelands::FCoords(Widelands::FCoords::null(), nullptr));
+	}
+	return 2;
 }
 
 /*

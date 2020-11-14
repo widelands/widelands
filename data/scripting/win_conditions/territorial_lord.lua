@@ -58,7 +58,7 @@ local r = {
                msg = p(_"Currently no faction owns more than half of the map’s area.")
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-            send_message(player, game_status.title, msg, {popup = show_popup})
+            send_to_inbox(player, game_status.title, msg, {popup = show_popup})
          end
          pop_textdomain()
       end

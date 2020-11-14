@@ -1,6 +1,10 @@
 # Widelands
 
-[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands) [![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands) ![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg) ![Build](https://github.com/widelands/widelands/workflows/Build/badge.svg) [![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
+[![Build Status Travis-CI](https://travis-ci.org/widelands/widelands.svg?branch=master)](https://travis-ci.org/widelands/widelands)
+[![Build Status AppVeyor](https://ci.appveyor.com/api/projects/status/github/widelands/widelands?branch=master&svg=true)](https://ci.appveyor.com/project/widelands-dev/widelands)
+[![Code Quality](https://github.com/widelands/widelands/workflows/Formatting%20your%20code/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3A%22Formatting+your+code%22)
+[![Build](https://github.com/widelands/widelands/workflows/Build/badge.svg)](https://github.com/widelands/widelands/actions?query=workflow%3ABuild)
+[![Mirrored on Launchpad](https://github.com/widelands/widelands/workflows/Launchpad%20Mirror/badge.svg)](https://code.launchpad.net/~widelands-dev/widelands/trunk)
 
 Widelands is a free, open source real-time strategy game with singleplayer campaigns and a multiplayer mode.
 The game was inspired by Settlers II™ (© Bluebyte) but has significantly more variety and depth to it.
@@ -130,6 +134,12 @@ The master branch and open pull requests will be formatted automatically by a Gi
 
 You need to enable *local and third-party actions* in the Actions tab of your fork's settings to enable automatic formatting. If you disable actions, no formatting will take place on your branches.
 
+In order to ensure that our continuous integration suite will work properly for branches in your fork, it is strongly recommened that you create a personal access token for our formatting action:
+1. Create a Personal Access Token in your **profile** (https://github.com/settings/tokens). Select the scope `Repo → public_repo` for the new token. The token's note does not matter (use e.g. "Widelands Formatting Bot"). Copy the token's hash.
+2. Create a secret in your **widelands fork** (`https://github.com/<username>/widelands/settings/secrets`). The secret must be named `WIDELANDS_FORMAT_TOKEN`. Its value must be the hash of the token you just created.
+
+More information about [Personal Access Tokens may be found here](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token). More information about [secrets may be found here](https://docs.github.com/en/free-pro-team@latest/github/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets).
+
 We follow the [Google Styleguide](https://google.github.io/styleguide/cppguide.html).
 
 ### Scenarios
@@ -166,8 +176,10 @@ For helping with issue management, see https://www.widelands.org/wiki/TriagingBu
 | utils | Diverse utilities: Building translations, code formatting, packaging Mac & Windows, ... |
 
 
-## Obtaining Travis and MS-Windows builds
+## Obtaining MacOS and MS-Windows builds and testsuite runs
 
-Travis builds are triggered for all pull requests and for new pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`. This will not work if the branch is in a fork though.
+Travis builds are triggered for all pushes to the `master` branch. If you want to get a build without making a pull request, temporarily add the name of your branch to the `branches` section in `.travis.yml`. This will not work if the branch is in a fork though.
 
 All pushes to master will be built on AppVeyor. Pull request branches are deployed for MS-Windows using a GitHub action. To obtain MS-Windows builds if you do not wish to open a pull request, temporarily add the name of your branch to the `branches` section in `appveyor.yml`. This also does not work for branches in forks.
+
+All pull request branches as well as master are additionally deployed for MacOS, and a testsuite checks them under various compilers. To obtain MacOS builds or testsuite results, temporarily add the name of your branch to the `branches` section in `.github/workflows/build.yaml`. This *does* work for branches in forks as well.

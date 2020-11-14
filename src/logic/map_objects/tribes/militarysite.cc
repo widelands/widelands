@@ -27,6 +27,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/style_manager.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/findbob.h"
@@ -36,6 +37,10 @@
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+
+namespace {
+constexpr size_t kNoOfStatisticsStringCases = 4;
+}  // namespace
 
 namespace Widelands {
 
@@ -250,7 +255,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// we still hold the bigger military presence in that area (e.g. if there
 	// is a fortress one or two points away from our sentry, the fortress has
 	// a higher presence and thus the enemy can just burn down the sentry.
-	if (military_site_->military_presence_kept(game)) {
+	if (!get_allow_conquer(enemy->owner().player_number()) ||
+	    military_site_->military_presence_kept(game)) {
 		// Okay we still got the higher military presence, so the attacked
 		// militarysite will be destroyed.
 		military_site_->set_defeating_player(enemy->owner().player_number());
@@ -260,9 +266,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
-	// the old location.
-
-	FormerBuildings former_buildings = military_site_->old_buildings_;
+	// the old location. We need to take a copy.
+	const FormerBuildings former_buildings = military_site_->old_buildings_;
 
 	// The enemy conquers the building
 	// In fact we do not conquer it, but place a new building of same type at
@@ -296,8 +301,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
+                                     Descriptions& descriptions)
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, descriptions),
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {
@@ -345,9 +350,11 @@ MilitarySite::MilitarySite(const MilitarySiteDescr& ms_descr)
      nexthealtime_(0),
      soldier_preference_(ms_descr.prefers_heroes_at_start_ ? SoldierPreference::kHeroes :
                                                              SoldierPreference::kRookies),
+     next_swap_soldiers_time_(Time(0)),
      soldier_upgrade_try_(false),
-     doing_upgrade_request_(false) {
-	next_swap_soldiers_time_ = 0;
+     doing_upgrade_request_(false),
+     // Initialize vector capacity for statistics string cache
+     statistics_string_cache_(kNoOfStatisticsStringCases) {
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
 }
@@ -367,36 +374,84 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	Quantity present = soldier_control_.present_soldiers().size();
 	Quantity stationed = soldier_control_.stationed_soldiers().size();
 
+	// Use Lua script to generate the capacity string for the given number of stationed and present
+	// soldiers. The index is according to the conditions determined by the caller and ranges [0,
+	// kNoOfStatisticsStringCases - 1].
+	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
+		assert(idx < kNoOfStatisticsStringCases);
+		auto it = statistics_string_cache_[idx].find(pres);
+		if (it != statistics_string_cache_[idx].end()) {
+			return it->second;
+		} else {
+			const std::string& military_capacity_script = owner().tribe().military_capacity_script();
+			// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v1.0
+			if (!military_capacity_script.empty() && g_fs->file_exists(military_capacity_script)) {
+				try {
+					LuaInterface lua;
+					std::unique_ptr<LuaTable> table(lua.run_script(military_capacity_script));
+					std::unique_ptr<LuaCoroutine> cr(table->get_coroutine("func"));
+					cr->push_arg(pres);
+					cr->push_arg(stat);
+					cr->push_arg(capacity_);
+					cr->resume();
+					std::string new_string = cr->pop_string();
+					statistics_string_cache_[idx].insert(std::make_pair(stat, new_string));
+					return new_string;
+				} catch (LuaError& err) {
+					log_err("Failed to read soldier capacity for building '%s': %s",
+					        descr().name().c_str(), err.what());
+					return std::string();
+				}
+			}
+		}
+		return std::string();
+	};
+
+	// TODO(GunChleoc): API compatibility - require file exists in TribeDescr after v 1.0 and remove
+	// fallbacks to tribe-independent strings
 	if (present == stationed) {
 		if (capacity_ > stationed) {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% is the maximum number of soldier slots in the building */
-			*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
-			      stationed % (capacity_ - stationed))
-			        .str();
+			*s = read_capacity_string(present, stationed, 0);
+			if (s->empty()) {
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% is the maximum
+				 * number of soldier slots in the building */
+				*s = (boost::format(ngettext("%1% soldier (+%2%)", "%1% soldiers (+%2%)", stationed)) %
+				      stationed % (capacity_ - stationed))
+				        .str();
+			}
 		} else {
-			/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
-			*s = (boost::format(ngettext("%u soldier", "%u soldiers", stationed)) % stationed).str();
+			*s = read_capacity_string(present, stationed, 1);
+			if (s->empty()) {
+				/** TRANSLATORS: Number of soldiers stationed at a militarysite. */
+				*s = (boost::format(ngettext("%1% soldier", "%1% soldiers", stationed)) % stationed)
+				        .str();
+			}
 		}
 	} else {
 		if (capacity_ > stationed) {
-
-			*s = (boost::format(
-			         /** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			         /** TRANSLATORS: %2% are currently open soldier slots in the building */
-			         /** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
-			         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
-			      present % (stationed - present) % (capacity_ - stationed))
-			        .str();
+			*s = read_capacity_string(present, stationed, 2);
+			if (s->empty()) {
+				*s = (boost::format(
+				         /** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are
+				            currently open soldier slots in the building. %3% is the maximum number of
+				            soldier slots in the building */
+				         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
+				      present % (stationed - present) % (capacity_ - stationed))
+				        .str();
+			}
 		} else {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
-			      present % (stationed - present))
-			        .str();
+			*s = read_capacity_string(present, stationed, 3);
+			if (s->empty()) {
+				/** TRANSLATORS: %1% is the number of soldiers the plural refers to. %2% are currently
+				 * open soldier slots in the building */
+				*s = (boost::format(ngettext("%1%(+%2%) soldier", "%1%(+%2%) soldiers", stationed)) %
+				      present % (stationed - present))
+				        .str();
+			}
 		}
 	}
-	*s = g_style_manager->color_tag(
+
+	*s = StyleManager::color_tag(
 	   // Line break to make Codecheck happy.
 	   *s, g_style_manager->building_statistics_style().medium_color());
 }
@@ -418,9 +473,9 @@ bool MilitarySite::init(EditorGameBase& egbase) {
 	update_soldier_request();
 
 	//  schedule the first healing
-	nexthealtime_ = egbase.get_gametime() + 1000;
+	nexthealtime_ = egbase.get_gametime() + Duration(1000);
 	if (game) {
-		schedule_act(*game, 1000);
+		schedule_act(*game, Duration(1000));
 	}
 	return true;
 }
@@ -723,7 +778,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	Building::act(game, data);
 
-	const int32_t timeofgame = game.get_gametime();
+	const Time& timeofgame = game.get_gametime();
 	if (normal_soldier_request_ && upgrade_soldier_request_) {
 		throw wexception(
 		   "MilitarySite::act: Two soldier requests are ongoing -- should never happen!\n");
@@ -735,7 +790,7 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 
 	// TODO(unknown): I would need two new callbacks, to get rid ot this polling.
 	if (timeofgame > next_swap_soldiers_time_) {
-		next_swap_soldiers_time_ = timeofgame + (soldier_upgrade_try_ ? 20000 : 100000);
+		next_swap_soldiers_time_ = timeofgame + Duration(soldier_upgrade_try_ ? 20000 : 100000);
 		update_soldier_request();
 	}
 
@@ -780,8 +835,8 @@ void MilitarySite::act(Game& game, uint32_t const data) {
 			soldier_to_heal->heal(total_heal);
 		}
 
-		nexthealtime_ = timeofgame + 1000;
-		schedule_act(game, 1000);
+		nexthealtime_ = timeofgame + Duration(1000);
+		schedule_act(game, Duration(1000));
 	}
 }
 
@@ -795,7 +850,7 @@ void MilitarySite::remove_worker(Worker& w) {
 	Building::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w)) {
-		pop_soldier_job(soldier, nullptr);
+		pop_soldier_job(soldier);
 	}
 
 	update_soldier_request();
@@ -873,8 +928,8 @@ bool MilitarySite::military_presence_kept(Game& game) {
 	FCoords const fc = game.map().get_fcoords(get_position());
 	game.map().find_immovables(game, Area<FCoords>(fc, 3), &immovables);
 
-	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		if (upcast(MilitarySite const, militarysite, immovables[i].object)) {
+	for (const ImmovableFound& imm : immovables) {
+		if (upcast(MilitarySite const, militarysite, imm.object)) {
 			if (this != militarysite && &owner() == &militarysite->owner() &&
 			    get_size() <= militarysite->get_size() && militarysite->didconquer_) {
 				return true;
@@ -891,7 +946,8 @@ void MilitarySite::notify_player(Game& game, bool const discovered) {
 	send_message(game, Message::Type::kWarfareUnderAttack,
 	             /** TRANSLATORS: Militarysite is being attacked */
 	             pgettext("building", "Attack!"), descr().icon_filename(), _("You are under attack"),
-	             discovered ? descr().aggressor_str_ : descr().attack_str_, false, 60 * 1000, 5);
+	             discovered ? descr().aggressor_str_ : descr().attack_str_, false,
+	             Duration(60 * 1000), 5);
 }
 
 /*
@@ -1015,8 +1071,9 @@ bool MilitarySite::update_upgrade_requirements() {
 	return false;
 }
 
-const BuildingSettings* MilitarySite::create_building_settings() const {
-	MilitarysiteSettings* settings = new MilitarysiteSettings(descr(), owner().tribe());
+std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings() const {
+	std::unique_ptr<MilitarysiteSettings> settings(
+	   new MilitarysiteSettings(descr(), owner().tribe()));
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
 	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
@@ -1027,6 +1084,6 @@ const BuildingSettings* MilitarySite::create_building_settings() const {
 
 void MilitarySite::set_soldier_preference(SoldierPreference p) {
 	soldier_preference_ = p;
-	next_swap_soldiers_time_ = 0;
+	next_swap_soldiers_time_ = Time(0);
 }
 }  // namespace Widelands

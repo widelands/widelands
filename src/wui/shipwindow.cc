@@ -32,30 +32,31 @@
 #include "wui/interactive_player.h"
 
 namespace {
-static const char pic_goto[] = "images/wui/ship/menu_ship_goto.png";
-static const char pic_destination[] = "images/wui/ship/menu_ship_destination.png";
-static const char pic_sink[] = "images/wui/ship/menu_ship_sink.png";
-static const char pic_debug[] = "images/wui/fieldaction/menu_debug.png";
-static const char pic_cancel_expedition[] = "images/wui/ship/menu_ship_cancel_expedition.png";
-static const char pic_explore_cw[] = "images/wui/ship/ship_explore_island_cw.png";
-static const char pic_explore_ccw[] = "images/wui/ship/ship_explore_island_ccw.png";
-static const char pic_scout_nw[] = "images/wui/ship/ship_scout_nw.png";
-static const char pic_scout_ne[] = "images/wui/ship/ship_scout_ne.png";
-static const char pic_scout_w[] = "images/wui/ship/ship_scout_w.png";
-static const char pic_scout_e[] = "images/wui/ship/ship_scout_e.png";
-static const char pic_scout_sw[] = "images/wui/ship/ship_scout_sw.png";
-static const char pic_scout_se[] = "images/wui/ship/ship_scout_se.png";
-static const char pic_construct_port[] = "images/wui/ship/ship_construct_port_space.png";
+constexpr const char* const kImgGoTo = "images/wui/ship/menu_ship_goto.png";
+constexpr const char* const kImgDestination = "images/wui/ship/menu_ship_destination.png";
+constexpr const char* const kImgSink = "images/wui/ship/menu_ship_sink.png";
+constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
+constexpr const char* const kImgCancelExpedition =
+   "images/wui/ship/menu_ship_cancel_expedition.png";
+constexpr const char* const kImgExploreCW = "images/wui/ship/ship_explore_island_cw.png";
+constexpr const char* const kImgExploreCCW = "images/wui/ship/ship_explore_island_ccw.png";
+constexpr const char* const kImgScoutNW = "images/wui/ship/ship_scout_nw.png";
+constexpr const char* const kImgScoutNE = "images/wui/ship/ship_scout_ne.png";
+constexpr const char* const kImgScoutW = "images/wui/ship/ship_scout_w.png";
+constexpr const char* const kImgScoutE = "images/wui/ship/ship_scout_e.png";
+constexpr const char* const kImgScoutSW = "images/wui/ship/ship_scout_sw.png";
+constexpr const char* const kImgScoutSE = "images/wui/ship/ship_scout_se.png";
+constexpr const char* const kImgConstructPort = "images/wui/ship/ship_construct_port_space.png";
 
 constexpr int kPadding = 5;
 }  // namespace
 
 ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelands::Ship* ship)
-   : UniqueWindow(&ib, "shipwindow", &reg, 0, 0, ship->get_shipname()),
+   : UniqueWindow(&ib, UI::WindowStyle::kWui, "shipwindow", &reg, 0, 0, ship->get_shipname()),
      ibase_(ib),
      ship_(ship),
-     vbox_(this, 0, 0, UI::Box::Vertical),
-     navigation_box_(&vbox_, 0, 0, UI::Box::Vertical) {
+     vbox_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical),
+     navigation_box_(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical) {
 	vbox_.set_inner_spacing(kPadding);
 	assert(ship->get_owner());
 
@@ -64,69 +65,72 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Expedition buttons
-	UI::Box* exp_top = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_top =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_top, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	UI::Box* exp_mid = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_mid =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_mid, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	UI::Box* exp_bot = new UI::Box(&navigation_box_, 0, 0, UI::Box::Horizontal);
+	UI::Box* exp_bot =
+	   new UI::Box(&navigation_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	navigation_box_.add(exp_bot, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	btn_scout_[Widelands::WALK_NW - 1] =
-	   make_button(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
+	   make_button(exp_top, "scnw", _("Scout towards the north west"), kImgScoutNW,
 	               [this]() { act_scout_towards(Widelands::WALK_NW); });
 	exp_top->add(btn_scout_[Widelands::WALK_NW - 1]);
 
 	btn_explore_island_cw_ =
-	   make_button(exp_top, "expcw", _("Explore the island’s coast clockwise"), pic_explore_cw,
+	   make_button(exp_top, "expcw", _("Explore the island’s coast clockwise"), kImgExploreCW,
 	               [this]() { act_explore_island(Widelands::IslandExploreDirection::kClockwise); });
 	exp_top->add(btn_explore_island_cw_);
 
 	btn_scout_[Widelands::WALK_NE - 1] =
-	   make_button(exp_top, "scne", _("Scout towards the north east"), pic_scout_ne,
+	   make_button(exp_top, "scne", _("Scout towards the north east"), kImgScoutNE,
 	               [this]() { act_scout_towards(Widelands::WALK_NE); });
 	exp_top->add(btn_scout_[Widelands::WALK_NE - 1]);
 
 	btn_scout_[Widelands::WALK_W - 1] =
-	   make_button(exp_mid, "scw", _("Scout towards the west"), pic_scout_w,
+	   make_button(exp_mid, "scw", _("Scout towards the west"), kImgScoutW,
 	               [this]() { act_scout_towards(Widelands::WALK_W); });
 	exp_mid->add(btn_scout_[Widelands::WALK_W - 1]);
 
 	btn_construct_port_ =
 	   make_button(exp_mid, "buildport", _("Construct a port at the current location"),
-	               pic_construct_port, [this]() { act_construct_port(); });
+	               kImgConstructPort, [this]() { act_construct_port(); });
 	exp_mid->add(btn_construct_port_);
 
 	btn_scout_[Widelands::WALK_E - 1] =
-	   make_button(exp_mid, "sce", _("Scout towards the east"), pic_scout_e,
+	   make_button(exp_mid, "sce", _("Scout towards the east"), kImgScoutE,
 	               [this]() { act_scout_towards(Widelands::WALK_E); });
 	exp_mid->add(btn_scout_[Widelands::WALK_E - 1]);
 
 	btn_scout_[Widelands::WALK_SW - 1] =
-	   make_button(exp_bot, "scsw", _("Scout towards the south west"), pic_scout_sw,
+	   make_button(exp_bot, "scsw", _("Scout towards the south west"), kImgScoutSW,
 	               [this]() { act_scout_towards(Widelands::WALK_SW); });
 	exp_bot->add(btn_scout_[Widelands::WALK_SW - 1]);
 
 	btn_explore_island_ccw_ = make_button(
-	   exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), pic_explore_ccw,
+	   exp_bot, "expccw", _("Explore the island’s coast counter clockwise"), kImgExploreCCW,
 	   [this]() { act_explore_island(Widelands::IslandExploreDirection::kCounterClockwise); });
 	exp_bot->add(btn_explore_island_ccw_);
 
 	btn_scout_[Widelands::WALK_SE - 1] =
-	   make_button(exp_bot, "scse", _("Scout towards the south east"), pic_scout_se,
+	   make_button(exp_bot, "scse", _("Scout towards the south east"), kImgScoutSE,
 	               [this]() { act_scout_towards(Widelands::WALK_SE); });
 	exp_bot->add(btn_scout_[Widelands::WALK_SE - 1]);
 
 	vbox_.add(&navigation_box_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Bottom buttons
-	UI::Box* buttons = new UI::Box(&vbox_, 0, 0, UI::Box::Horizontal);
+	UI::Box* buttons = new UI::Box(&vbox_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal);
 	vbox_.add(buttons, UI::Box::Resizing::kFullSize);
 
-	btn_sink_ = make_button(buttons, "sink", _("Sink the ship"), pic_sink, [this]() { act_sink(); });
+	btn_sink_ = make_button(buttons, "sink", _("Sink the ship"), kImgSink, [this]() { act_sink(); });
 	buttons->add(btn_sink_);
 
 	btn_cancel_expedition_ =
-	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), pic_cancel_expedition,
+	   make_button(buttons, "cancel_expedition", _("Cancel the Expedition"), kImgCancelExpedition,
 	               [this]() { act_cancel_expedition(); });
 	buttons->add(btn_cancel_expedition_);
 
@@ -134,17 +138,17 @@ ShipWindow::ShipWindow(InteractiveBase& ib, UniqueWindow::Registry& reg, Widelan
 
 	if (ibase_.get_display_flag(InteractiveBase::dfDebug)) {
 		btn_debug_ = make_button(
-		   buttons, "debug", _("Show Debug Window"), pic_debug, [this]() { act_debug(); });
+		   buttons, "debug", _("Show Debug Window"), kImgDebug, [this]() { act_debug(); });
 		btn_debug_->set_enabled(true);
 		buttons->add(btn_debug_);
 	}
 
-	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), pic_destination,
+	btn_destination_ = make_button(buttons, "destination", _("Go to destination"), kImgDestination,
 	                               [this]() { act_destination(); });
 	btn_destination_->set_enabled(false);
 	buttons->add(btn_destination_);
 
-	btn_goto_ = make_button(buttons, "goto", _("Go to ship"), pic_goto, [this]() { act_goto(); });
+	btn_goto_ = make_button(buttons, "goto", _("Go to ship"), kImgGoTo, [this]() { act_goto(); });
 	buttons->add(btn_goto_);
 
 	set_center_panel(&vbox_);
@@ -205,7 +209,7 @@ void ShipWindow::no_port_error_message() {
 	}
 	if (ibase_.can_act(ship->owner().player_number())) {
 		UI::WLMessageBox messagebox(
-		   get_parent(),
+		   get_parent(), UI::WindowStyle::kWui,
 		   /** TRANSLATORS: Window label when an expedition can't be canceled */
 		   _("Cancel Expedition"),
 		   _("This expedition can’t be canceled, because the "

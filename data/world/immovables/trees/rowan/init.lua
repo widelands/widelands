@@ -9,7 +9,7 @@ terrain_affinity = {
    pickiness = 80,
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_sapling",
    descname = _ "Rowan (Sapling)",
    size = "small",
@@ -29,15 +29,16 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 6, 13 }
+         hotspot = { 5, 12 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_pole",
    descname = _ "Rowan (Pole)",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -54,12 +55,12 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 13, 29 }
+         hotspot = { 12, 28 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_mature",
    descname = _ "Rowan (Mature)",
    size = "small",
@@ -82,17 +83,18 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 19, 49 }
+         hotspot = { 18, 48 }
       }
    },
 }
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "rowan_summer_old",
    descname = _ "Rowan (Old)",
    species = _ "Rowan",
    icon = dirname .. "menu.png",
    size = "small",
+
    terrain_affinity = terrain_affinity,
    programs = {
       main = {
@@ -112,10 +114,10 @@ wl.World():new_immovable_type{
          frames = 4,
          rows = 2,
          columns = 2,
-         hotspot = { 24, 60 },
+         hotspot = { 23, 59 },
          sound_effect = {
             path = "sound/animals/bird6",
-            priority = 10
+            priority = "10%"
          },
       }
    },

@@ -83,7 +83,6 @@ private:
 	friend class MessagePreview;
 
 	InteractiveBase& ibase_;
-	const UI::FontStyleInfo& font_;
 
 	bool on_top_;
 

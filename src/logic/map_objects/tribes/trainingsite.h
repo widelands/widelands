@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRAININGSITE_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRAININGSITE_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
@@ -29,14 +31,11 @@ struct TrainingSiteWindow;
 
 namespace Widelands {
 
-class World;
-
 class TrainingSiteDescr : public ProductionSiteDescr {
 public:
 	TrainingSiteDescr(const std::string& init_descname,
 	                  const LuaTable& table,
-	                  Tribes& tribes,
-	                  World& world);
+	                  Descriptions& descriptions);
 	~TrainingSiteDescr() override {
 	}
 
@@ -85,6 +84,14 @@ public:
 	}
 	const std::vector<std::string>& get_weapons_evade() const {
 		return weapons_evade_;
+	}
+
+	const std::string& no_soldier_to_train_message() const {
+		return no_soldier_to_train_message_;
+	}
+
+	const std::string& no_soldier_for_training_level_message() const {
+		return no_soldier_for_training_level_message_;
 	}
 
 private:
@@ -139,6 +146,9 @@ private:
 	std::vector<std::string> weapons_attack_;
 	std::vector<std::string> weapons_defense_;
 	std::vector<std::string> weapons_evade_;
+
+	std::string no_soldier_to_train_message_;
+	std::string no_soldier_for_training_level_message_;
 
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteDescr);
 };
@@ -198,7 +208,7 @@ public:
 	void training_done();
 	ProductionProgram::Action::TrainingParameters checked_soldier_training() const;
 
-	const BuildingSettings* create_building_settings() const override;
+	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
 protected:
 	void program_end(Game&, ProgramResult) override;
@@ -291,10 +301,9 @@ private:
 	bool recent_capacity_increase_;    // If used explicitly asks for more folks
 	const uint8_t kUpperBoundThreshold_ =
 	   3;  // Higher value makes it less likely to get weak soldiers in.
-	const uint32_t acceptance_threshold_timeout =
-	   5555;  // Lower the bar after this many milliseconds.
-	uint32_t
-	   request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
+	const Duration acceptance_threshold_timeout =
+	   Duration(5555);         // Lower the bar after this many milliseconds.
+	Time request_open_since_;  // Time units. If no soldiers appear, threshold is lowered after this.
 	void init_kick_state(const TrainingAttribute&, const TrainingSiteDescr&);
 
 	ProductionProgram::Action::TrainingParameters checked_soldier_training_;

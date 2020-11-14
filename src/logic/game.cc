@@ -61,6 +61,7 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
+#include "logic/training_wheels.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
@@ -145,11 +146,13 @@ Game::Game()
      scenario_difficulty_(kScenarioDifficultyNotSet),
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
+     training_wheels_wanted_(false),
      replay_(false) {
 	Economy::initialize_serial();
 }
 
-Game::~Game() {
+Game::~Game() {  // NOLINT
+	              // ReplayWriter needs this
 }
 
 void Game::sync_reset() {
@@ -212,6 +215,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
                                        const std::string& script_to_run) {
 	// Replays can't handle scenarios
 	set_write_replay(false);
+	training_wheels_wanted_ = false;
 
 	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(mapname));
 	if (!maploader) {
@@ -225,11 +229,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
-	world();
-	tribes();
-
 	// If the map is a scenario with custom tribe entites, load them too.
-	mutable_tribes()->register_scenario_tribes(map().filesystem());
+	mutable_descriptions()->register_scenario_tribes(map().filesystem());
 
 	// We have to create the players here.
 	PlayerNumber const nr_players = map().get_nrplayers();
@@ -239,8 +240,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 		if (tribe.empty()) {
 			log_info_time(
 			   get_gametime(), "Setting random tribe for Player %d\n", static_cast<unsigned int>(p));
-			const DescriptionIndex random = std::rand() % tribes().nrtribes();  // NOLINT
-			tribe = tribes().get_tribe_descr(random)->name();
+			const DescriptionIndex random = std::rand() % descriptions().nr_tribes();  // NOLINT
+			tribe = descriptions().get_tribe_descr(random)->name();
 		}
 		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
@@ -275,12 +276,12 @@ void Game::init_newgame(const GameSettings& settings) {
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
-	std::unique_ptr<MapLoader> maploader(mutable_map()->get_correct_loader(settings.mapfilename));
-	assert(maploader != nullptr);
-	maploader->preload_map(settings.scenario);
-
-	world();
-	tribes();
+	std::unique_ptr<MapLoader> maploader;
+	if (!settings.mapfilename.empty()) {
+		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
+		assert(maploader);
+		maploader->preload_map(settings.scenario);
+	}
 
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
@@ -308,9 +309,16 @@ void Game::init_newgame(const GameSettings& settings) {
 		   ->add_further_starting_position(shared_num.at(n), shared.at(n).initialization_index);
 	}
 
-	maploader->load_map_complete(*this, settings.scenario ?
-	                                       Widelands::MapLoader::LoadType::kScenario :
-	                                       Widelands::MapLoader::LoadType::kGame);
+	if (!settings.mapfilename.empty()) {
+		assert(maploader);
+		maploader->load_map_complete(*this, settings.scenario ?
+		                                       Widelands::MapLoader::LoadType::kScenario :
+		                                       Widelands::MapLoader::LoadType::kGame);
+	} else {
+		// Normally the map loader takes care of this, but if the map was
+		// previously created for us we need to call this manually
+		allocate_player_maps();
+	}
 
 	// Check for win_conditions
 	if (!settings.scenario) {
@@ -341,7 +349,7 @@ void Game::init_newgame(const GameSettings& settings) {
 			cr->resume();
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + Duration(100), std::move(cr)));
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}
@@ -364,6 +372,13 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.preload_game(gpdp);
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			log_dbg("Training wheel from savegame");
+		}
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -397,6 +412,13 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
 		win_condition_displayname_ = gpdp.get_win_condition();
+		training_wheels_wanted_ =
+		   gpdp.get_training_wheels_wanted() && get_config_bool("training_wheels", true);
+		if (training_wheels_wanted_ && !gpdp.get_active_training_wheel().empty()) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+			training_wheels_->acquire_lock(gpdp.get_active_training_wheel());
+			log_dbg("Training wheel from savegame");
+		}
 		if (win_condition_displayname_ == "Scenario") {
 			// Replays can't handle scenarios
 			set_write_replay(false);
@@ -422,6 +444,41 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		ctrl_ = nullptr;
 		throw;
 	}
+}
+
+bool Game::acquire_training_wheel_lock(const std::string& objective) {
+	if (training_wheels_ != nullptr) {
+		return training_wheels_->acquire_lock(objective);
+	}
+	return false;
+}
+void Game::release_training_wheel_lock() {
+	if (training_wheels_ != nullptr) {
+		training_wheels_->release_lock();
+	}
+}
+void Game::mark_training_wheel_as_solved(const std::string& objective) {
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
+	}
+	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
+}
+void Game::run_training_wheel(const std::string& objective, bool force) {
+	if (training_wheels_ == nullptr) {
+		training_wheels_.reset(new TrainingWheels(lua()));
+	}
+	training_wheels_->run(objective, force);
+}
+void Game::skip_training_wheel(const std::string& objective) {
+	if (training_wheels_ != nullptr) {
+		training_wheels_->skip(objective, training_wheels_wanted_);
+	}
+}
+bool Game::training_wheels_wanted() const {
+	return training_wheels_wanted_;
+}
+std::string Game::active_training_wheel() const {
+	return training_wheels_ ? training_wheels_->current_objective() : "";
 }
 
 /**
@@ -462,6 +519,8 @@ bool Game::run(StartGameType const start_game_type,
 	replay_ = replay;
 	postload();
 
+	InteractivePlayer* ipl = get_ipl();
+
 	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
@@ -470,10 +529,13 @@ bool Game::run(StartGameType const start_game_type,
 			iterate_players_existing(p, nr_players, *this, plr) {
 				plr->create_default_infrastructure();
 			}
+			training_wheels_wanted_ =
+			   get_config_bool("training_wheels", true) && ipl && !ipl->is_multiplayer();
 		} else {
 			// Is a scenario!
 			// Replays can't handle scenarios
 			set_write_replay(false);
+			training_wheels_wanted_ = false;
 			iterate_players_existing_novar(p, nr_players, *this) {
 				if (!map().get_starting_pos(p)) {
 					throw WLWarning(_("Missing starting position"),
@@ -486,16 +548,16 @@ bool Game::run(StartGameType const start_game_type,
 			}
 		}
 
-		if (get_ipl()) {
+		if (ipl) {
 			// Scroll map to starting position for new games.
 			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
 			// InteractiveGameBase::start() for multiplayer.
-			get_ipl()->map_view()->scroll_to_field(
-			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
+			ipl->map_view()->scroll_to_field(
+			   map().get_starting_pos(ipl->player_number()), MapView::Transition::Jump);
 		}
 
 		// Prepare the map, set default textures
-		mutable_map()->recalc_default_resources(world());
+		mutable_map()->recalc_default_resources(descriptions());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -519,18 +581,34 @@ bool Game::run(StartGameType const start_game_type,
 		}
 
 		// Queue first statistics calculation
-		enqueue_command(new CmdCalculateStatistics(get_gametime() + 1));
+		enqueue_command(new CmdCalculateStatistics(get_gametime() + Duration(1)));
 	}
 
 	if (!script_to_run.empty() && (start_game_type == StartGameType::kSinglePlayerScenario ||
 	                               start_game_type == StartGameType::kSaveGame)) {
-		enqueue_command(new CmdLuaScript(get_gametime() + 1, script_to_run));
+		enqueue_command(new CmdLuaScript(get_gametime() + Duration(1), script_to_run));
+	}
+
+	// We don't run the training wheel objectives in scenarios, but we want the objectives available
+	// for marking them as solved if a scenario teaches the same content.
+	if (training_wheels_wanted_) {
+		if (training_wheels_ == nullptr) {
+			training_wheels_.reset(new TrainingWheels(lua()));
+		}
+		if (!training_wheels_->has_objectives()) {
+			// Nothing to do, so let's free the memory
+			training_wheels_.reset(nullptr);
+		} else {
+			// Just like with scenarios, replays will desync, so we switch them off.
+			writereplay_ = false;
+		}
 	}
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
-		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
-		                          std::string("_") + prefix_for_replays + kReplayExtension;
+		const std::string fname = kReplayDir + FileSystem::file_separator() +
+		                          std::string(timestring()) + std::string("_") + prefix_for_replays +
+		                          kReplayExtension;
 		if (writereplay_) {
 			log_info_time(get_gametime(), "Starting replay writer\n");
 
@@ -560,6 +638,13 @@ bool Game::run(StartGameType const start_game_type,
 	state_ = gs_running;
 
 	remove_loader_ui();
+
+	// If this is a singleplayer map or non-scenario savegame, put on our training wheels unless the
+	// user switched off the option
+	if (training_wheels_ != nullptr && training_wheels_wanted_) {
+		log_dbg("Running training wheels. Current active is %s", active_training_wheel().c_str());
+		training_wheels_->run_objectives();
+	}
 
 	get_ibase()->run<UI::Panel::Returncodes>();
 
@@ -591,7 +676,7 @@ void Game::think() {
 		// computer and the fps if and when the game is saved - this is very bad
 		// for scenarios and even worse for the regression suite (which relies on
 		// the timings of savings.
-		cmdqueue().run_queue(ctrl_->get_frametime(), get_gametime_pointer());
+		cmdqueue().run_queue(Duration(ctrl_->get_frametime()), get_gametime_pointer());
 
 		// check if autosave is needed
 		savehandler_.think(*this);
@@ -740,7 +825,7 @@ void Game::send_player_dismantle(PlayerImmovable& pi, bool kw) {
 }
 
 void Game::send_player_build(int32_t const pid, const Coords& coords, DescriptionIndex const id) {
-	assert(tribes().building_exists(id));
+	assert(descriptions().building_exists(id));
 	send_player_command(new CmdBuild(get_gametime(), pid, coords, id));
 }
 
@@ -788,9 +873,9 @@ void Game::send_player_evict_worker(Worker& worker) {
 }
 
 void Game::send_player_set_ware_priority(PlayerImmovable& imm,
-                                         int32_t const type,
-                                         DescriptionIndex const index,
-                                         int32_t const prio,
+                                         const WareWorker type,
+                                         const DescriptionIndex index,
+                                         const WarePriority& prio,
                                          bool cs) {
 	send_player_command(new CmdSetWarePriority(
 	   get_gametime(), imm.owner().player_number(), imm, type, index, prio, cs));
@@ -824,36 +909,38 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       const std::vector<Serial>& soldiers) {
+                                       const std::vector<Serial>& soldiers,
+                                       const bool allow_conquer) {
 	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
 		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
-			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
+			send_player_command(
+			   new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
 			break;
 		}
 	}
 }
 
-void Game::send_player_ship_scouting_direction(Ship& ship, WalkingDir direction) {
+void Game::send_player_ship_scouting_direction(const Ship& ship, WalkingDir direction) {
 	send_player_command(new CmdShipScoutDirection(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_ship_construct_port(Ship& ship, Coords coords) {
+void Game::send_player_ship_construct_port(const Ship& ship, Coords coords) {
 	send_player_command(new CmdShipConstructPort(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
-void Game::send_player_ship_explore_island(Ship& ship, IslandExploreDirection direction) {
+void Game::send_player_ship_explore_island(const Ship& ship, IslandExploreDirection direction) {
 	send_player_command(new CmdShipExploreIsland(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
-void Game::send_player_sink_ship(Ship& ship) {
+void Game::send_player_sink_ship(const Ship& ship) {
 	send_player_command(
 	   new CmdShipSink(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
-void Game::send_player_cancel_expedition_ship(Ship& ship) {
+void Game::send_player_cancel_expedition_ship(const Ship& ship) {
 	send_player_command(new CmdShipCancelExpedition(
 	   get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }

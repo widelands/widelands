@@ -72,6 +72,7 @@ public:
 		bool toolbar_pos_on_top;
 		bool numpad_diagonalscrolling;
 		int32_t display_flags;
+		bool training_wheels;
 
 		// Language options
 		std::string language;
@@ -101,6 +102,10 @@ public:
 	OptionsCtrl::OptionsStruct get_values();
 
 	bool handle_key(bool, SDL_Keysym) override;
+
+	WindowLayoutID window_layout_id() const override {
+		return UI::Window::WindowLayoutID::kFsMenuOptions;
+	}
 
 private:
 	void layout() override;
@@ -167,6 +172,10 @@ private:
 	UI::Checkbox game_clock_;
 	UI::Dropdown<bool> toolbar_pos_;
 	UI::Checkbox numpad_diagonalscrolling_;
+
+	UI::Box training_wheels_box_;
+	UI::Checkbox training_wheels_;
+	UI::Button training_wheels_button_;
 
 	OptionsCtrl::OptionsStruct os_;
 

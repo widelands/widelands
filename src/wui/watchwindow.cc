@@ -31,7 +31,7 @@
 #include "wui/interactive_player.h"
 #include "wui/mapviewpixelfunctions.h"
 
-#define REFRESH_TIME 5000
+constexpr Duration kRefreshInterval = Duration(5000);
 
 // Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
@@ -46,7 +46,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          uint32_t const w,
                          uint32_t const h,
                          bool const init_single_window)
-   : UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
+   : UI::Window(&parent, UI::WindowStyle::kWui, "watch", x, y, w, h, _("Watch")),
      parent_(parent),
      map_view_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
@@ -171,7 +171,7 @@ Update the map_view_ if we're tracking something.
 void WatchWindow::think() {
 	UI::Window::think();
 
-	if ((game().get_gametime() - last_visit_) > REFRESH_TIME) {
+	if ((game().get_gametime() - last_visit_) > kRefreshInterval) {
 		last_visit_ = game().get_gametime();
 		next_view();
 		return;
@@ -184,8 +184,7 @@ void WatchWindow::think() {
 
 		// Drop the tracking if it leaves our vision range
 		InteractivePlayer* ipl = game().get_ipl();
-		if (ipl && Widelands::SeeUnseeNode::kUnexplored ==
-		              ipl->player().get_vision(map.get_index(bob->get_position(), map.get_width()))) {
+		if (ipl && !ipl->player().is_seeing(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
 			views_[cur_index_].tracking = nullptr;
 		} else {
@@ -246,8 +245,7 @@ void WatchWindow::do_follow() {
 		//  Find the bob closest to us
 		float closest_dist = 0;
 		Widelands::Bob* closest = nullptr;
-		for (uint32_t i = 0; i < bobs.size(); ++i) {
-			Widelands::Bob* const bob = bobs[i];
+		for (Widelands::Bob* const bob : bobs) {
 			const Vector2f field_position =
 			   MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 			const Vector2f p = bob->calc_drawpos(g, field_position, 1.f);
@@ -312,9 +310,9 @@ WatchWindow* show_watch_window(InteractiveGameBase& parent, const Widelands::Coo
 		}
 		g_watch_window->add_view(coords);
 		return g_watch_window;
-	} else {
-		auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
-		window->add_view(coords);
-		return window;
 	}
+
+	auto* window = new WatchWindow(parent, 250, 150, 200, 200, false);
+	window->add_view(coords);
+	return window;
 }

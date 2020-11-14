@@ -52,9 +52,9 @@
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
@@ -70,7 +70,7 @@
 #include "wui/toolbar.h"
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
-   : InteractiveBase(e, get_config_section()),
+   : InteractiveBase(e, get_config_section(), nullptr),
      need_save_(false),
      realtime_(SDL_GetTicks()),
      is_painting_(false),
@@ -81,8 +81,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                MainToolbar::kButtonSize,
                10,
                MainToolbar::kButtonSize,
-               /** TRANSLATORS: Title for the main menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Main Menu"), pgettext("hotkey", "Esc")),
+               as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Title for the main menu button in the editor */
+                  _("Main Menu"),
+                  pgettext("hotkey", "Esc"),
+                  UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -94,7 +97,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                12,
                MainToolbar::kButtonSize,
                /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Tools"), "T"),
+               as_tooltip_text_with_hotkey(_("Tools"), "T", UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -169,7 +172,11 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
-		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap);
+		MainMenuNewRandomMap m(*this, UI::WindowStyle::kWui, menu_windows_.newrandommap,
+		                       egbase().map().get_width(), egbase().map().get_height());
+		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			m.do_generate_map(egbase(), this, nullptr);
+		}
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
@@ -433,7 +440,7 @@ void EditorInteractive::showhide_menu_selected(ShowHideEntry entry) {
 }
 
 void EditorInteractive::load(const std::string& filename) {
-	assert(filename.size());
+	assert(!filename.empty());
 	assert(egbase().has_loader_ui());
 
 	Widelands::Map* map = egbase().mutable_map();
@@ -479,6 +486,10 @@ void EditorInteractive::start() {
 		// do nothing.
 	}
 	map_changed(MapWas::kReplaced);
+	if (registry_to_open_) {
+		registry_to_open_->create();
+		registry_to_open_ = nullptr;
+	}
 }
 
 /**
@@ -493,7 +504,7 @@ void EditorInteractive::think() {
 
 	realtime_ = SDL_GetTicks();
 
-	egbase().get_gametime_pointer() += realtime_ - lasttime;
+	egbase().get_gametime_pointer().increment(Duration(realtime_ - lasttime));
 }
 
 void EditorInteractive::exit() {
@@ -501,7 +512,7 @@ void EditorInteractive::exit() {
 		if (SDL_GetModState() & KMOD_CTRL) {
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 		} else {
-			UI::WLMessageBox mmb(this, _("Unsaved Map"),
+			UI::WLMessageBox mmb(this, UI::WindowStyle::kWui, _("Unsaved Map"),
 			                     _("The map has not been saved, do you really want to quit?"),
 			                     UI::WLMessageBox::MBoxType::kOkCancel);
 			if (mmb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
@@ -539,7 +550,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 	auto* fields_to_draw = map_view()->draw_terrain(ebase, nullptr, Workareas(), draw_grid_, &dst);
 
 	const float scale = 1.f / map_view()->view().zoom;
-	const uint32_t gametime = ebase.get_gametime();
+	const Time& gametime = ebase.get_gametime();
 
 	// The map provides a mapping from player number to Coords, while we require
 	// the inverse here. We construct this, but this is done on every frame and
@@ -570,7 +581,6 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 	}
 
-	const auto& world = ebase.world();
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 		if (draw_immovables_) {
@@ -592,8 +602,9 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		// Draw resource overlay.
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
-			const std::string& immname =
-			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
+			const std::string& immname = ebase.descriptions()
+			                                .get_resource_descr(field.fcoords.field->get_resources())
+			                                ->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_image_cache->get(immname);
 				blit_field_overlay(
@@ -949,62 +960,90 @@ void EditorInteractive::select_tool(EditorTool& primary, EditorTool::ToolIndex c
 	set_sel_triangles(primary.operates_on_triangles());
 }
 
-void EditorInteractive::run_editor(const std::string& filename, const std::string& script_to_run) {
+void EditorInteractive::run_editor(const EditorInteractive::Init init,
+                                   const std::string& filename,
+                                   const std::string& script_to_run) {
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
-	{
-		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
-		eia.load_world_units();
-		egbase.tribes();
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
+	EditorInteractive::load_world_units(&eia, egbase);
 
-		{
-			if (filename.empty()) {
-				Notifications::publish(UI::NoteLoadingMessage(_("Creating empty map…")));
-				egbase.mutable_map()->create_empty_map(
-				   egbase, 64, 64, 0,
-				   /** TRANSLATORS: Default name for new map */
-				   _("No Name"),
-				   get_config_string("realname",
-				                     /** TRANSLATORS: Map author name when it hasn't been set yet */
-				                     pgettext("author_name", "Unknown")));
-			} else {
-				Notifications::publish(
-				   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
-				eia.load(filename);
-			}
+	if (init == EditorInteractive::Init::kLoadMapDirectly) {
+		if (filename.empty()) {
+			throw wexception("EditorInteractive::run_editor: Empty map file name");
 		}
 
+		Notifications::publish(
+		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
+		eia.load(filename);
+
 		egbase.postload();
-
 		eia.start();
-
 		if (!script_to_run.empty()) {
 			eia.egbase().lua().run_script(script_to_run);
+		}
+	} else {
+		if (!filename.empty()) {
+			throw wexception(
+			   "EditorInteractive::run_editor: Map file name given when none was expected");
+		}
+		if (!script_to_run.empty()) {
+			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
+		}
+
+		Notifications::publish(UI::NoteLoadingMessage(_("Postloading editor…")));
+		egbase.postload();
+
+		egbase.mutable_map()->create_empty_map(
+		   egbase, 64, 64, 0,
+		   /** TRANSLATORS: Default name for new map */
+		   _("No Name"),
+		   get_config_string("realname",
+		                     /** TRANSLATORS: Map author name when it hasn't been set yet */
+		                     pgettext("author_name", "Unknown")));
+
+		switch (init) {
+		case EditorInteractive::Init::kNew:
+			eia.registry_to_open_ = &eia.menu_windows_.newmap;
+			break;
+		case EditorInteractive::Init::kRandom:
+			eia.registry_to_open_ = &eia.menu_windows_.newrandommap;
+			break;
+		case EditorInteractive::Init::kLoad:
+			eia.registry_to_open_ = &eia.menu_windows_.loadmap;
+			break;
+		default:
+			break;
 		}
 	}
 
 	egbase.remove_loader_ui();
 	eia.run<UI::Panel::Returncodes>();
-
 	egbase.cleanup_objects();
 }
 
-void EditorInteractive::load_world_units() {
+void EditorInteractive::load_world_units(EditorInteractive* eia,
+                                         Widelands::EditorGameBase& egbase) {
 	Notifications::publish(UI::NoteLoadingMessage(_("Loading world…")));
-	Widelands::World* world = egbase().mutable_world();
+	Widelands::Descriptions* descriptions = egbase.mutable_descriptions();
 
 	log_info("┏━ Loading world\n");
 	ScopedTimer timer("┗━ took %ums");
 
-	std::unique_ptr<LuaTable> table(egbase().lua().run_script("world/init.lua"));
+	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
-	auto load_category = [this, world](const LuaTable& t, const std::string& key,
-	                                   Widelands::MapObjectType type) {
+	auto load_category = [eia, descriptions](const LuaTable& t, const std::string& key,
+	                                         Widelands::MapObjectType type) {
 		for (const auto& category_table :
 		     t.get_table(key)->array_entries<std::unique_ptr<LuaTable>>()) {
-			editor_categories_[type].push_back(
-			   std::unique_ptr<EditorCategory>(new EditorCategory(*category_table, type, *world)));
+			// Even if we do not have an EditorInteractive, we still need to create the
+			// Category because it will load all the map objects we are interested in
+			std::unique_ptr<EditorCategory> c(
+			   new EditorCategory(*category_table, type, *descriptions));
+			if (eia) {
+				eia->editor_categories_[type].push_back(std::move(c));
+			}
 		}
 	};
 

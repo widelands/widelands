@@ -77,7 +77,7 @@ BillOfMaterials deserialize_bill_of_materials(StreamRead* des) {
 
 /*** class PlayerCommand ***/
 
-PlayerCommand::PlayerCommand(const uint32_t time, const PlayerNumber s)
+PlayerCommand::PlayerCommand(const Time& time, const PlayerNumber s)
    : GameLogicCommand(time), sender_(s), cmdserial_(0) {
 }
 
@@ -87,7 +87,8 @@ void PlayerCommand::write_id_and_sender(StreamWrite& ser) {
 }
 
 PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
-	switch (static_cast<QueueCommandTypes>(des.unsigned_8())) {
+	const uint8_t command_id = des.unsigned_8();
+	switch (static_cast<QueueCommandTypes>(command_id)) {
 	case QueueCommandTypes::kBulldoze:
 		return new CmdBulldoze(des);
 	case QueueCommandTypes::kBuild:
@@ -136,6 +137,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdEvictWorker(des);
 	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
 		return new CmdMilitarySiteSetSoldierPreference(des);
+	case QueueCommandTypes::kToggleMuteMessages:
+		return new CmdToggleMuteMessages(des);
 
 	case QueueCommandTypes::kStartOrCancelExpedition:
 		return new CmdStartOrCancelExpedition(des);
@@ -157,7 +160,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdMarkMapObjectForRemoval(des);
 
 	default:
-		throw wexception("PlayerCommand::deserialize(): Invalid command id encountered");
+		throw wexception("PlayerCommand::deserialize(): Encountered invalid command id: %d",
+		                 static_cast<unsigned>(command_id));
 	}
 }
 
@@ -198,7 +202,9 @@ void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 /*** class Cmd_Bulldoze ***/
 
 CmdBulldoze::CmdBulldoze(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()), serial(des.unsigned_32()), recurse(des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()),
+     serial(des.unsigned_32()),
+     recurse(des.unsigned_8()) {
 }
 
 void CmdBulldoze::execute(Game& game) {
@@ -242,13 +248,13 @@ void CmdBulldoze::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& m
 
 /*** class Cmd_Build ***/
 
-CmdBuild::CmdBuild(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdBuild::CmdBuild(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	bi = des.signed_16();
 	coords = read_coords_32(&des);
 }
 
 void CmdBuild::execute(Game& game) {
-	// Empty former vector since its a new csite.
+	// Empty former_buildings vector since it's a new csite.
 	FormerBuildings former_buildings;
 	game.get_player(sender())->build(coords, bi, true, former_buildings);
 }
@@ -289,7 +295,7 @@ void CmdBuild::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos)
 /*** class Cmd_BuildFlag ***/
 
 CmdBuildFlag::CmdBuildFlag(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()), coords(read_coords_32(&des)) {
+   : PlayerCommand(Time(0), des.unsigned_8()), coords(read_coords_32(&des)) {
 }
 
 void CmdBuildFlag::execute(Game& game) {
@@ -327,7 +333,7 @@ void CmdBuildFlag::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 
 /*** class Cmd_BuildRoad ***/
 
-CmdBuildRoad::CmdBuildRoad(uint32_t t, int32_t p, Path& pa)
+CmdBuildRoad::CmdBuildRoad(const Time& t, int32_t p, Path& pa)
    : PlayerCommand(t, p),
      path(&pa),
      start(pa.get_start()),
@@ -336,7 +342,7 @@ CmdBuildRoad::CmdBuildRoad(uint32_t t, int32_t p, Path& pa)
 }
 
 CmdBuildRoad::CmdBuildRoad(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()),
+   : PlayerCommand(Time(0), des.unsigned_8()),
      // We cannot completely deserialize the path here because we don't have a Map
      path(nullptr),
      start(read_coords_32(&des)),
@@ -345,9 +351,6 @@ CmdBuildRoad::CmdBuildRoad(StreamRead& des)
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
-}
-
-CmdBuildRoad::~CmdBuildRoad() {
 }
 
 void CmdBuildRoad::execute(Game& game) {
@@ -411,7 +414,7 @@ void CmdBuildRoad::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 
 /*** class Cmd_BuildWaterway ***/
 
-CmdBuildWaterway::CmdBuildWaterway(uint32_t t, int32_t p, Path& pa)
+CmdBuildWaterway::CmdBuildWaterway(const Time& t, int32_t p, Path& pa)
    : PlayerCommand(t, p),
      path(&pa),
      start(pa.get_start()),
@@ -420,7 +423,7 @@ CmdBuildWaterway::CmdBuildWaterway(uint32_t t, int32_t p, Path& pa)
 }
 
 CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()),
+   : PlayerCommand(Time(0), des.unsigned_8()),
      // We cannot completely deserialize the path here because we don't have a Map
      path(nullptr),
      start(read_coords_32(&des)),
@@ -429,9 +432,6 @@ CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
 	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		steps[i] = des.unsigned_8();
 	}
-}
-
-CmdBuildWaterway::~CmdBuildWaterway() {
 }
 
 void CmdBuildWaterway::execute(Game& game) {
@@ -494,7 +494,7 @@ void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSav
 }
 
 /*** Cmd_FlagAction ***/
-CmdFlagAction::CmdFlagAction(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdFlagAction::CmdFlagAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	des.unsigned_8();
 	serial = des.unsigned_32();
 }
@@ -541,7 +541,8 @@ void CmdFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 
 /*** Cmd_StartStopBuilding ***/
 
-CmdStartStopBuilding::CmdStartStopBuilding(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdStartStopBuilding::CmdStartStopBuilding(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 }
 
@@ -588,7 +589,7 @@ void CmdStartStopBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 }
 
 CmdMilitarySiteSetSoldierPreference::CmdMilitarySiteSetSoldierPreference(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	preference = static_cast<Widelands::SoldierPreference>(des.unsigned_8());
 }
@@ -647,7 +648,7 @@ void CmdMilitarySiteSetSoldierPreference::read(FileRead& fr,
 /*** Cmd_StartOrCancelExpedition ***/
 
 CmdStartOrCancelExpedition::CmdStartOrCancelExpedition(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 }
 
@@ -695,7 +696,8 @@ void CmdStartOrCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, Ma
 
 /*** Cmd_ExpeditionConfig ***/
 
-CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdExpeditionConfig::CmdExpeditionConfig(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	type = des.unsigned_8() == 0 ? wwWARE : wwWORKER;
 	index = des.unsigned_32();
@@ -749,7 +751,7 @@ void CmdExpeditionConfig::write(FileWrite& fw, EditorGameBase& egbase, MapObject
 
 /*** Cmd_EnhanceBuilding ***/
 
-CmdEnhanceBuilding::CmdEnhanceBuilding(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdEnhanceBuilding::CmdEnhanceBuilding(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	bi_ = des.unsigned_16();
 	keep_wares_ = des.unsigned_8();
@@ -800,7 +802,8 @@ void CmdEnhanceBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 }
 
 /*** Cmd_DismantleBuilding ***/
-CmdDismantleBuilding::CmdDismantleBuilding(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdDismantleBuilding::CmdDismantleBuilding(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	keep_wares_ = des.unsigned_8();
 }
@@ -846,7 +849,7 @@ void CmdDismantleBuilding::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 }
 
 /*** Cmd_EvictWorker ***/
-CmdEvictWorker::CmdEvictWorker(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdEvictWorker::CmdEvictWorker(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 }
 
@@ -889,7 +892,8 @@ void CmdEvictWorker::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 }
 
 /*** Cmd_ShipScoutDirection ***/
-CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdShipScoutDirection::CmdShipScoutDirection(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	dir = static_cast<WalkingDir>(des.unsigned_8());
 }
@@ -951,7 +955,8 @@ void CmdShipScoutDirection::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 }
 
 /*** Cmd_ShipConstructPort ***/
-CmdShipConstructPort::CmdShipConstructPort(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdShipConstructPort::CmdShipConstructPort(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	coords = read_coords_32(&des);
 }
@@ -1009,7 +1014,8 @@ void CmdShipConstructPort::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 }
 
 /*** Cmd_ShipExploreIsland ***/
-CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdShipExploreIsland::CmdShipExploreIsland(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	island_explore_direction = static_cast<IslandExploreDirection>(des.unsigned_8());
 }
@@ -1070,7 +1076,7 @@ void CmdShipExploreIsland::write(FileWrite& fw, EditorGameBase& egbase, MapObjec
 }
 
 /*** Cmd_ShipSink ***/
-CmdShipSink::CmdShipSink(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdShipSink::CmdShipSink(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 }
 
@@ -1114,7 +1120,7 @@ void CmdShipSink::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& m
 
 /*** Cmd_ShipCancelExpedition ***/
 CmdShipCancelExpedition::CmdShipCancelExpedition(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 }
 
@@ -1157,12 +1163,12 @@ void CmdShipCancelExpedition::write(FileWrite& fw, EditorGameBase& egbase, MapOb
 }
 
 /*** class Cmd_SetWarePriority ***/
-CmdSetWarePriority::CmdSetWarePriority(const uint32_t init_duetime,
+CmdSetWarePriority::CmdSetWarePriority(const Time& init_duetime,
                                        const PlayerNumber init_sender,
                                        PlayerImmovable& imm,
-                                       const int32_t init_type,
+                                       const WareWorker init_type,
                                        const DescriptionIndex i,
-                                       const int32_t init_priority,
+                                       const WarePriority& init_priority,
                                        bool cs_setting)
    : PlayerCommand(init_duetime, init_sender),
      serial_(imm.serial()),
@@ -1188,7 +1194,7 @@ void CmdSetWarePriority::execute(Game& game) {
 		}
 	} else if (upcast(Building, psite, mo)) {
 		if (psite->owner().player_number() == sender()) {
-			psite->set_priority(type_, index_, priority_);
+			psite->set_priority(WareWorker(type_), index_, priority_);
 		}
 	}
 }
@@ -1201,9 +1207,9 @@ void CmdSetWarePriority::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	PlayerCommand::write(fw, egbase, mos);
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
-	fw.unsigned_8(type_);
+	fw.unsigned_8(static_cast<uint8_t>(type_));
 	fw.signed_32(index_);
-	fw.signed_32(priority_);
+	priority_.write(fw);
 	fw.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
@@ -1213,9 +1219,9 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 		if (packet_version == kCurrentPacketVersionCmdSetWarePriority) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
-			type_ = fr.unsigned_8();
+			type_ = WareWorker(fr.unsigned_8());
 			index_ = fr.signed_32();
-			priority_ = fr.signed_32();
+			priority_ = WarePriority(fr);
 			is_constructionsite_setting_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
@@ -1228,25 +1234,25 @@ void CmdSetWarePriority::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 }
 
 CmdSetWarePriority::CmdSetWarePriority(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()),
+   : PlayerCommand(Time(0), des.unsigned_8()),
      serial_(des.unsigned_32()),
-     type_(des.unsigned_8()),
+     type_(WareWorker(des.unsigned_8())),
      index_(des.signed_32()),
-     priority_(des.signed_32()),
+     priority_(des),
      is_constructionsite_setting_(des.unsigned_8()) {
 }
 
 void CmdSetWarePriority::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
 	ser.unsigned_32(serial_);
-	ser.unsigned_8(type_);
+	ser.unsigned_8(static_cast<uint8_t>(type_));
 	ser.signed_32(index_);
-	ser.signed_32(priority_);
+	priority_.write(ser);
 	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
 /*** class Cmd_SetWareMaxFill ***/
-CmdSetInputMaxFill::CmdSetInputMaxFill(const uint32_t init_duetime,
+CmdSetInputMaxFill::CmdSetInputMaxFill(const Time& init_duetime,
                                        const PlayerNumber init_sender,
                                        PlayerImmovable& imm,
                                        const DescriptionIndex index,
@@ -1291,7 +1297,13 @@ void CmdSetInputMaxFill::execute(Game& game) {
 		}
 	} else if (upcast(Building, b, mo)) {
 		if (b->owner().player_number() == sender()) {
-			b->inputqueue(index_, type_).set_max_fill(max_fill_);
+			b->inputqueue(index_, type_, nullptr).set_max_fill(max_fill_);
+			if (upcast(Warehouse, wh, b)) {
+				if (PortDock* p = wh->get_portdock()) {
+					// Update in case the expedition was ready previously and now lacks a ware again
+					p->expedition_bootstrap()->check_is_ready(game);
+				}
+			}
 		}
 	}
 }
@@ -1333,7 +1345,7 @@ void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoa
 	}
 }
 
-CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdSetInputMaxFill::CmdSetInputMaxFill(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial_ = des.unsigned_32();
 	index_ = des.signed_32();
 	if (des.unsigned_8() == 0) {
@@ -1354,7 +1366,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 	ser.unsigned_8(is_constructionsite_setting_ ? 1 : 0);
 }
 
-CmdChangeTargetQuantity::CmdChangeTargetQuantity(const uint32_t init_duetime,
+CmdChangeTargetQuantity::CmdChangeTargetQuantity(const Time& init_duetime,
                                                  const PlayerNumber init_sender,
                                                  const uint32_t init_economy,
                                                  const DescriptionIndex init_ware_type)
@@ -1378,7 +1390,9 @@ void CmdChangeTargetQuantity::read(FileRead& fr, EditorGameBase& egbase, MapObje
 }
 
 CmdChangeTargetQuantity::CmdChangeTargetQuantity(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()), economy_(des.unsigned_32()), ware_type_(des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()),
+     economy_(des.unsigned_32()),
+     ware_type_(des.unsigned_8()) {
 }
 
 void CmdChangeTargetQuantity::serialize(StreamWrite& ser) {
@@ -1387,7 +1401,7 @@ void CmdChangeTargetQuantity::serialize(StreamWrite& ser) {
 	ser.unsigned_8(ware_type());
 }
 
-CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
+CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const Time& init_duetime,
                                                    const PlayerNumber init_sender,
                                                    const uint32_t init_economy,
                                                    const DescriptionIndex init_ware_type,
@@ -1398,7 +1412,7 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.descriptions().ware_exists(ware_type())) {
 		player->get_economy(economy())->set_target_quantity(
 		   wwWARE, ware_type(), permanent_, duetime());
 	}
@@ -1440,7 +1454,7 @@ void CmdSetWareTargetQuantity::serialize(StreamWrite& ser) {
 	ser.unsigned_32(permanent_);
 }
 
-CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_duetime,
+CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const Time& init_duetime,
                                                        const PlayerNumber init_sender,
                                                        const uint32_t init_economy,
                                                        const DescriptionIndex init_ware_type,
@@ -1451,7 +1465,7 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.descriptions().worker_exists(ware_type())) {
 		player->get_economy(economy())->set_target_quantity(
 		   wwWORKER, ware_type(), permanent_, duetime());
 	}
@@ -1495,7 +1509,7 @@ void CmdSetWorkerTargetQuantity::serialize(StreamWrite& ser) {
 
 /*** class Cmd_ChangeTrainingOptions ***/
 CmdChangeTrainingOptions::CmdChangeTrainingOptions(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();                                    //  Serial of the building
 	attribute = static_cast<TrainingAttribute>(des.unsigned_8());  //  Attribute to modify
 	value = des.unsigned_16();                                     //  New vale
@@ -1548,7 +1562,7 @@ void CmdChangeTrainingOptions::write(FileWrite& fw, EditorGameBase& egbase, MapO
 
 /*** class Cmd_DropSoldier ***/
 
-CmdDropSoldier::CmdDropSoldier(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdDropSoldier::CmdDropSoldier(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();   //  Serial of the building
 	soldier = des.unsigned_32();  //  Serial of soldier
 }
@@ -1601,7 +1615,7 @@ void CmdDropSoldier::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 /*** Cmd_ChangeSoldierCapacity ***/
 
 CmdChangeSoldierCapacity::CmdChangeSoldierCapacity(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	serial = des.unsigned_32();
 	val = des.signed_16();
 }
@@ -1674,37 +1688,38 @@ void CmdChangeSoldierCapacity::write(FileWrite& fw, EditorGameBase& egbase, MapO
 
 /*** Cmd_EnemyFlagAction ***/
 
-CmdEnemyFlagAction::CmdEnemyFlagAction(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
-	des.unsigned_8();
-	serial = des.unsigned_32();
-	des.unsigned_8();
+CmdEnemyFlagAction::CmdEnemyFlagAction(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
+	serial_ = des.unsigned_32();
 	const uint32_t number = des.unsigned_32();
-	soldiers.clear();
+	soldiers_.clear();
 	for (uint32_t i = 0; i < number; ++i) {
-		soldiers.push_back(des.unsigned_32());
+		soldiers_.push_back(des.unsigned_32());
 	}
+	allow_conquer_ = des.unsigned_8();
 }
 
 void CmdEnemyFlagAction::execute(Game& game) {
 	Player* player = game.get_player(sender());
 
-	if (upcast(Flag, flag, game.objects().get_object(serial))) {
-		log_info_time(game.get_gametime(),
-		              "Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
-		              "number=%" PRIuS "\n",
-		              player->player_number(), flag->owner().player_number(), soldiers.size());
+	if (upcast(Flag, flag, game.objects().get_object(serial_))) {
+		if (g_verbose) {
+			log_info_time(game.get_gametime(),
+			              "Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
+			              "number=%" PRIuS "\n",
+			              player->player_number(), flag->owner().player_number(), soldiers_.size());
+		}
 
 		if (const Building* const building = flag->get_building()) {
 			if (player->is_hostile(flag->owner())) {
 				for (Widelands::Coords& coords : building->get_positions(game)) {
 					if (player->is_seeing(Map::get_index(coords, game.map().get_width()))) {
 						std::vector<Soldier*> result;
-						for (Serial s : soldiers) {
+						for (Serial s : soldiers_) {
 							if (Soldier* soldier = dynamic_cast<Soldier*>(game.objects().get_object(s))) {
 								result.push_back(soldier);
 							}
 						}
-						player->enemyflagaction(*flag, sender(), result);
+						player->enemyflagaction(*flag, sender(), result, allow_conquer_);
 						return;
 					}
 				}
@@ -1718,43 +1733,48 @@ void CmdEnemyFlagAction::execute(Game& game) {
 
 void CmdEnemyFlagAction::serialize(StreamWrite& ser) {
 	write_id_and_sender(ser);
-	ser.unsigned_8(1);
-	ser.unsigned_32(serial);
-	ser.unsigned_8(sender());
-	ser.unsigned_32(soldiers.size());
-	for (Serial s : soldiers) {
+	ser.unsigned_32(serial_);
+	ser.unsigned_32(soldiers_.size());
+	for (Serial s : soldiers_) {
 		ser.unsigned_32(s);
 	}
+	ser.unsigned_8(allow_conquer_ ? 1 : 0);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 4;
+constexpr uint16_t kCurrentPacketVersionCmdEnemyFlagAction = 5;
 
 void CmdEnemyFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
+		// TODO(Nordfriese): Savegame compatibility
 		if (packet_version <= kCurrentPacketVersionCmdEnemyFlagAction && packet_version >= 3) {
 			PlayerCommand::read(fr, egbase, mol);
-			fr.unsigned_8();
-			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
-			fr.unsigned_8();
+			if (packet_version < 5) {
+				fr.unsigned_8();
+			}
+			serial_ = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
+			if (packet_version < 5) {
+				fr.unsigned_8();
+			}
 
-			soldiers.clear();
+			soldiers_.clear();
 			if (packet_version == kCurrentPacketVersionCmdEnemyFlagAction) {
 				const uint32_t number = fr.unsigned_32();
 				for (uint32_t i = 0; i < number; ++i) {
-					soldiers.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
+					soldiers_.push_back(mol.get<Soldier>(fr.unsigned_32()).serial());
 				}
 			} else {
 				const uint8_t number = fr.unsigned_8();
-				upcast(Flag, flag, egbase.objects().get_object(serial));
+				upcast(Flag, flag, egbase.objects().get_object(serial_));
 				assert(flag);
 				std::vector<Soldier*> result;
 				egbase.get_player(sender())->find_attack_soldiers(*flag, &result, number);
 				assert(result.size() == number);
 				for (const auto& s : result) {
-					soldiers.push_back(s->serial());
+					soldiers_.push_back(s->serial());
 				}
 			}
+			allow_conquer_ = packet_version < 5 || fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdEnemyFlagAction", packet_version, kCurrentPacketVersionCmdEnemyFlagAction);
@@ -1769,24 +1789,23 @@ void CmdEnemyFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 	fw.unsigned_16(kCurrentPacketVersionCmdEnemyFlagAction);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-	// Now action
-	fw.unsigned_8(0);
 
 	// Now serial
-	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
+	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 
 	// Now param
-	fw.unsigned_8(sender());
-	fw.unsigned_32(soldiers.size());
-	for (Serial s : soldiers) {
+	fw.unsigned_32(soldiers_.size());
+	for (Serial s : soldiers_) {
 		fw.unsigned_32(mos.get_object_file_index(*egbase.objects().get_object(s)));
 	}
+
+	fw.unsigned_8(allow_conquer_ ? 1 : 0);
 }
 
 /*** struct PlayerMessageCommand ***/
 
 PlayerMessageCommand::PlayerMessageCommand(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()), message_id_(des.unsigned_32()) {
+   : PlayerCommand(Time(0), des.unsigned_8()), message_id_(des.unsigned_32()) {
 }
 
 constexpr uint16_t kCurrentPacketVersionPlayerMessageCommand = 1;
@@ -1840,9 +1859,9 @@ void CmdMessageSetStatusArchived::serialize(StreamWrite& ser) {
 }
 
 /*** struct Cmd_SetStockPolicy ***/
-CmdSetStockPolicy::CmdSetStockPolicy(uint32_t time,
+CmdSetStockPolicy::CmdSetStockPolicy(const Time& time,
                                      PlayerNumber p,
-                                     Building& wh,
+                                     const Building& wh,
                                      bool isworker,
                                      DescriptionIndex ware,
                                      StockPolicy policy)
@@ -1854,7 +1873,7 @@ CmdSetStockPolicy::CmdSetStockPolicy(uint32_t time,
 }
 
 CmdSetStockPolicy::CmdSetStockPolicy()
-   : PlayerCommand(), warehouse_(0), isworker_(false), policy_() {
+   : PlayerCommand(), warehouse_(0), isworker_(false), ware_(0), policy_() {
 }
 
 void CmdSetStockPolicy::execute(Game& game) {
@@ -1878,7 +1897,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 			}
 
 			if (isworker_) {
-				if (!(game.tribes().worker_exists(ware_))) {
+				if (!(game.descriptions().worker_exists(ware_))) {
 					log_warn_time(game.get_gametime(),
 					              "Cmd_SetStockPolicy: sender %u, worker %u does not exist\n", sender(),
 					              ware_);
@@ -1886,7 +1905,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 				}
 				warehouse->set_worker_policy(ware_, policy_);
 			} else {
-				if (!(game.tribes().ware_exists(ware_))) {
+				if (!(game.descriptions().ware_exists(ware_))) {
 					log_warn_time(game.get_gametime(),
 					              "Cmd_SetStockPolicy: sender %u, ware %u does not exist\n", sender(),
 					              ware_);
@@ -1898,7 +1917,7 @@ void CmdSetStockPolicy::execute(Game& game) {
 	}
 }
 
-CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdSetStockPolicy::CmdSetStockPolicy(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	warehouse_ = des.unsigned_32();
 	isworker_ = des.unsigned_8();
 	ware_ = DescriptionIndex(des.unsigned_8());
@@ -1942,7 +1961,7 @@ void CmdSetStockPolicy::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSa
 	fw.unsigned_8(static_cast<uint8_t>(policy_));
 }
 
-CmdProposeTrade::CmdProposeTrade(uint32_t time, PlayerNumber pn, const Trade& trade)
+CmdProposeTrade::CmdProposeTrade(const Time& time, PlayerNumber pn, const Trade& trade)
    : PlayerCommand(time, pn), trade_(trade) {
 }
 
@@ -1983,7 +2002,7 @@ void CmdProposeTrade::execute(Game& game) {
 	game.propose_trade(trade_);
 }
 
-CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdProposeTrade::CmdProposeTrade(StreamRead& des) : PlayerCommand(Time(0), des.unsigned_8()) {
 	trade_.initiator = des.unsigned_32();
 	trade_.receiver = des.unsigned_32();
 	trade_.items_to_send = deserialize_bill_of_materials(&des);
@@ -2018,7 +2037,7 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 void CmdToggleMuteMessages::execute(Game& game) {
 	if (upcast(Building, b, game.objects().get_object(building_))) {
 		if (all_) {
-			const DescriptionIndex di = game.tribes().safe_building_index(b->descr().name());
+			const DescriptionIndex di = game.descriptions().safe_building_index(b->descr().name());
 			b->get_owner()->set_muted(di, !b->owner().is_muted(di));
 		} else {
 			b->set_mute_messages(!b->mute_messages());
@@ -2026,7 +2045,8 @@ void CmdToggleMuteMessages::execute(Game& game) {
 	}
 }
 
-CmdToggleMuteMessages::CmdToggleMuteMessages(StreamRead& des) : PlayerCommand(0, des.unsigned_8()) {
+CmdToggleMuteMessages::CmdToggleMuteMessages(StreamRead& des)
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	building_ = des.unsigned_32();
 	all_ = des.unsigned_8();
 }
@@ -2045,7 +2065,7 @@ void CmdToggleMuteMessages::read(FileRead& fr, EditorGameBase& egbase, MapObject
 		if (packet_version == kCurrentPacketVersionCmdToggleMuteMessages) {
 			PlayerCommand::read(fr, egbase, mol);
 			building_ = fr.unsigned_32();
-			all_ = fr.unsigned_8() ? 1 : 0;
+			all_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError(
 			   "CmdToggleMuteMessages", packet_version, kCurrentPacketVersionCmdToggleMuteMessages);
@@ -2070,7 +2090,7 @@ void CmdMarkMapObjectForRemoval::execute(Game& game) {
 }
 
 CmdMarkMapObjectForRemoval::CmdMarkMapObjectForRemoval(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	object_ = des.unsigned_32();
 	mark_ = des.unsigned_8();
 }
@@ -2089,7 +2109,7 @@ void CmdMarkMapObjectForRemoval::read(FileRead& fr, EditorGameBase& egbase, MapO
 		if (packet_version == kCurrentPacketVersionCmdMarkMapObjectForRemoval) {
 			PlayerCommand::read(fr, egbase, mol);
 			object_ = fr.unsigned_32();
-			mark_ = fr.unsigned_8() ? 1 : 0;
+			mark_ = fr.unsigned_8();
 		} else {
 			throw UnhandledVersionError("CmdMarkMapObjectForRemoval", packet_version,
 			                            kCurrentPacketVersionCmdMarkMapObjectForRemoval);
@@ -2112,7 +2132,7 @@ void CmdPickCustomStartingPosition::execute(Game& game) {
 }
 
 CmdPickCustomStartingPosition::CmdPickCustomStartingPosition(StreamRead& des)
-   : PlayerCommand(0, des.unsigned_8()) {
+   : PlayerCommand(Time(0), des.unsigned_8()) {
 	coords_.x = des.unsigned_16();
 	coords_.y = des.unsigned_16();
 }

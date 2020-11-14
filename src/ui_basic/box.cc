@@ -28,13 +28,14 @@ namespace UI {
  * Initialize an empty box
  */
 Box::Box(Panel* const parent,
+         PanelStyle s,
          int32_t const x,
          int32_t const y,
          uint32_t const orientation,
          int32_t const max_x,
          int32_t const max_y,
          uint32_t const inner_spacing)
-   : Panel(parent, x, y, 0, 0),
+   : Panel(parent, s, x, y, 0, 0),
 
      max_x_(max_x ? max_x : g_gr->get_xres()),
      max_y_(max_y ? max_y : g_gr->get_yres()),
@@ -42,7 +43,6 @@ Box::Box(Panel* const parent,
      scrolling_(false),
      force_scrolling_(false),
      scrollbar_(nullptr),
-     scrollbar_style_(UI::PanelStyle::kFsMenu),
      orientation_(orientation),
      mindesiredbreadth_(0),
      inner_spacing_(inner_spacing) {
@@ -74,11 +74,6 @@ void Box::set_force_scrolling(bool f) {
 		return;
 	}
 	force_scrolling_ = f;
-	update_desired_size();
-}
-
-void Box::set_scrollbar_style(UI::PanelStyle s) {
-	scrollbar_style_ = s;
 	update_desired_size();
 }
 
@@ -119,19 +114,23 @@ void Box::set_max_size(int w, int h) {
 void Box::update_desired_size() {
 	int totaldepth = 0;
 	int maxbreadth = mindesiredbreadth_;
+	int spacing = -inner_spacing_;
 
 	for (uint32_t idx = 0; idx < items_.size(); ++idx) {
 		int depth = 0, breadth = 0;
 		get_item_desired_size(idx, &depth, &breadth);
 
 		totaldepth += depth;
+		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+			spacing += inner_spacing_;
+		}
 		if (breadth > maxbreadth) {
 			maxbreadth = breadth;
 		}
 	}
 
-	if (!items_.empty()) {
-		totaldepth += (items_.size() - 1) * inner_spacing_;
+	if (spacing > 0) {
+		totaldepth += spacing;
 	}
 
 	if (orientation_ == Horizontal) {
@@ -175,15 +174,19 @@ bool Box::handle_key(bool down, SDL_Keysym code) {
 void Box::layout() {
 	// First pass: compute the depth and adjust whether we have a scrollbar
 	int totaldepth = 0;
+	int spacing = -inner_spacing_;
 
 	for (size_t idx = 0; idx < items_.size(); ++idx) {
 		int depth, unused = 0;
 		get_item_desired_size(idx, &depth, &unused);
 		totaldepth += depth;
+		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+			spacing += inner_spacing_;
+		}
 	}
 
-	if (!items_.empty()) {
-		totaldepth += (items_.size() - 1) * inner_spacing_;
+	if (spacing > 0) {
+		totaldepth += spacing;
 	}
 
 	bool needscrollbar = force_scrolling_;
@@ -214,8 +217,8 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(new Scrollbar(
-			   this, sb_x, sb_y, sb_w, sb_h, scrollbar_style_, orientation_ == Horizontal));
+			scrollbar_.reset(
+			   new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, panel_style_, orientation_ == Horizontal));
 			scrollbar_->moved.connect([this](int32_t a) { scrollbar_moved(a); });
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));
@@ -230,8 +233,8 @@ void Box::layout() {
 
 	// Second pass: Count number of infinite spaces
 	int infspace_count = 0;
-	for (size_t idx = 0; idx < items_.size(); ++idx) {
-		if (items_[idx].fillspace) {
+	for (const Item& item : items_) {
+		if (item.fillspace) {
 			infspace_count++;
 		}
 	}
@@ -241,13 +244,13 @@ void Box::layout() {
 	// divide the remaining space by the number of remaining infinite
 	// spaces every time, and not just one.
 	int max_depths = orientation_ == Horizontal ? get_inner_w() : get_inner_h();
-	for (size_t idx = 0; idx < items_.size(); ++idx) {
-		if (items_[idx].fillspace) {
+	for (Item& item : items_) {
+		if (item.fillspace) {
 			assert(infspace_count > 0);
 			// Avoid division by 0
-			items_[idx].assigned_var_depth =
+			item.assigned_var_depth =
 			   std::max(0, (max_depths - totaldepth) / std::max(1, infspace_count));
-			totaldepth += items_[idx].assigned_var_depth;
+			totaldepth += item.assigned_var_depth;
 			infspace_count--;
 		}
 	}
@@ -277,7 +280,9 @@ void Box::update_positions() {
 		}
 
 		totaldepth += depth;
-		totaldepth += inner_spacing_;
+		if (items_[idx].type != Item::ItemPanel || items_[idx].u.panel.panel->is_visible()) {
+			totaldepth += inner_spacing_;
+		}
 	}
 }
 
@@ -305,6 +310,8 @@ void Box::scrollbar_moved(int32_t) {
  *
  */
 void Box::add(Panel* const panel, Resizing resizing, UI::Align const align) {
+	assert(panel->get_parent() == this);
+
 	Item it;
 
 	it.type = Item::ItemPanel;

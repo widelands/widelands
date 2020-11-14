@@ -59,20 +59,21 @@ namespace {
 // Returns the brightness value in [0, 1.] for 'fcoords' at 'gametime' for
 // 'pf'. See 'field_brightness' in fields_to_draw.cc for scale of values.
 float adjusted_field_brightness(const Widelands::FCoords& fcoords,
-                                const uint32_t gametime,
+                                const Time& gametime,
                                 const Widelands::Player::Field& pf) {
-	if (pf.seeing == Widelands::SeeUnseeNode::kUnexplored) {
+	if (pf.vision == Widelands::VisibleState::kUnexplored) {
 		return 0.;
 	}
 
 	uint32_t brightness = 144 + fcoords.field->get_brightness();
 	brightness = std::min<uint32_t>(255, (brightness * 255) / 160);
 
-	if (pf.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
-		static const uint32_t kDecayTimeInMs = 20000;
-		const Widelands::Duration time_ago = gametime - pf.time_node_last_unseen;
+	if (pf.vision == Widelands::VisibleState::kPreviouslySeen) {
+		static const Duration kDecayTimeInMs = Duration(20000);
+		const Duration time_ago = gametime - pf.time_node_last_unseen;
 		if (time_ago < kDecayTimeInMs) {
-			brightness = (brightness * (2 * kDecayTimeInMs - time_ago)) / (2 * kDecayTimeInMs);
+			brightness =
+			   (brightness * (2 * kDecayTimeInMs.get() - time_ago.get())) / (2 * kDecayTimeInMs.get());
 		} else {
 			brightness = brightness / 2;
 		}
@@ -117,46 +118,40 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
 		if (building->type() == Widelands::MapObjectType::CONSTRUCTIONSITE) {
-			player_field.partially_finished_building.constructionsite.draw(
-			   field.rendertarget_pixel, field.fcoords, scale,
-			   (info_to_draw & InfoToDraw::kShowBuildings), field.owner->get_playercolor(), dst);
-		} else if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
-		           // TODO(Nordfriese): `building` can only be nullptr in savegame
-		           // compatibility cases – remove that check after v1.0
-		           player_field.partially_finished_building.dismantlesite.building) {
-			if (info_to_draw & InfoToDraw::kShowBuildings) {
-				dst->blit_animation(
-				   field.rendertarget_pixel, field.fcoords, scale,
-				   player_field.partially_finished_building.dismantlesite.building
-				      ->get_unoccupied_animation(),
-				   0, &field.owner->get_playercolor(), 1.f,
-				   100 -
-				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
-			} else {
-				dst->blit_animation(
-				   field.rendertarget_pixel, field.fcoords, scale,
-				   player_field.partially_finished_building.dismantlesite.building
-				      ->get_unoccupied_animation(),
-				   0, nullptr, Widelands::kBuildingSilhouetteOpacity,
-				   100 -
-				      ((player_field.partially_finished_building.dismantlesite.progress * 100) >> 16));
-			}
-		} else if (info_to_draw & InfoToDraw::kShowBuildings) {
-			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-			                    building->get_unoccupied_animation(), 0,
-			                    &field.owner->get_playercolor());
+			player_field.constructionsite->draw(field.rendertarget_pixel, field.fcoords, scale,
+			                                    (info_to_draw & InfoToDraw::kShowBuildings),
+			                                    field.owner->get_playercolor(), dst);
 		} else {
-			dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-			                    building->get_unoccupied_animation(), 0, nullptr,
-			                    Widelands::kBuildingSilhouetteOpacity);
+			const RGBColor* player_color;
+			float opacity;
+			if (info_to_draw & InfoToDraw::kShowBuildings) {
+				player_color = &field.owner->get_playercolor();
+				opacity = 1.0f;
+			} else {
+				player_color = nullptr;
+				opacity = Widelands::kBuildingSilhouetteOpacity;
+			}
+			if (building->type() == Widelands::MapObjectType::DISMANTLESITE &&
+			    // TODO(Nordfriese): `building` can only be nullptr in savegame
+			    // compatibility cases – remove that check after v1.0
+			    player_field.dismantlesite.building) {
+				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+				                    player_field.dismantlesite.building->get_unoccupied_animation(),
+				                    Time(0), player_color, opacity,
+				                    100 - ((player_field.dismantlesite.progress * 100) >> 16));
+			} else {
+				dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
+				                    building->get_unoccupied_animation(), Time(0), player_color,
+				                    opacity);
+			}
 		}
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale,
-		                    field.owner->tribe().flag_animation(), 0,
+		                    field.owner->tribe().flag_animation(), Time(0),
 		                    &field.owner->get_playercolor());
 	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
-		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, 0,
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, pic, Time(0),
 		                    (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
 	}
 }
@@ -183,7 +178,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary),
-     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")) {
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
+     training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
+     training_wheel_indicator_field_(Widelands::FCoords::null(), nullptr) {
 	add_main_menu();
 
 	toolbar()->add_space(15);
@@ -444,8 +441,9 @@ void InteractivePlayer::think() {
 
 	// Cleanup found port spaces if the ship sailed on or was destroyed
 	for (auto it = expedition_port_spaces_.begin(); it != expedition_port_spaces_.end(); ++it) {
-		if (!egbase().objects().object_still_available(it->first) ||
-		    it->first->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
+		Widelands::Ship* ship = it->first.get(egbase());
+		if (!ship ||
+		    ship->get_ship_state() != Widelands::Ship::ShipStates::kExpeditionPortspaceFound) {
 			expedition_port_spaces_.erase(it);
 			// If another port space also needs removing, we'll take care of it in the next frame
 			return;
@@ -463,6 +461,8 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
+constexpr float kBuildhelpOpacity = 0.3f;
+
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
@@ -471,7 +471,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Widelands::Player& plr = player();
 	const Widelands::EditorGameBase& gbase = egbase();
 	const Widelands::Map& map = gbase.map();
-	const uint32_t gametime = gbase.get_gametime();
+	const Time& gametime = gbase.get_gametime();
 
 	Workareas workareas = get_workarea_overlays(map);
 	FieldsToDraw* fields_to_draw = given_map_view->draw_terrain(gbase, &plr, workareas, false, dst);
@@ -496,24 +496,25 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->road_e = player_field.r_e;
 			f->road_se = player_field.r_se;
 			f->road_sw = player_field.r_sw;
-			f->seeing = player_field.seeing;
-			if (player_field.seeing == Widelands::SeeUnseeNode::kPreviouslySeen) {
+			f->seeing = player_field.vision;
+			if (player_field.vision == Widelands::VisibleState::kPreviouslySeen) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
 		}
 
 		// Add road building overlays if applicable.
-		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
+		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			draw_road_building(*f);
 
-			draw_bridges(dst, f, f->seeing == Widelands::SeeUnseeNode::kVisible ? gametime : 0, scale);
+			draw_bridges(
+			   dst, f, f->seeing == Widelands::VisibleState::kVisible ? gametime : Time(0), scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Draw immovables and bobs.
 			const InfoToDraw info_to_draw = get_info_to_draw(!given_map_view->is_animating());
 
-			if (f->seeing == Widelands::SeeUnseeNode::kVisible) {
+			if (f->seeing == Widelands::VisibleState::kVisible) {
 				draw_immovables_for_visible_field(
 				   gbase, *f, scale, info_to_draw, plr, dst, deferred_coords);
 				draw_bobs_for_visible_field(gbase, *f, scale, info_to_draw, plr, dst);
@@ -551,20 +552,34 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			                   scale);
 		}
 
-		if (f->seeing != Widelands::SeeUnseeNode::kUnexplored) {
+		if (f->seeing != Widelands::VisibleState::kUnexplored) {
 			// Draw build help.
 			const bool show_port_space = has_expedition_port_space(f->fcoords);
 			if (show_port_space || suited_as_starting_pos || buildhelp()) {
-				if (const auto* overlay =
-				       (!show_port_space && picking_starting_pos && !suited_as_starting_pos &&
-				        !buildhelp()) ?
-				          nullptr :
-				          get_buildhelp_overlay(show_port_space ? f->fcoords.field->maxcaps() :
-				                                                  picking_starting_pos ?
-				                                                  f->fcoords.field->nodecaps() :
-				                                                  plr.get_buildcaps(f->fcoords))) {
-					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale,
-					                   f->seeing == Widelands::SeeUnseeNode::kVisible ? 1.f : 0.3f);
+				Widelands::NodeCaps caps;
+				float opacity =
+				   f->seeing == Widelands::VisibleState::kVisible ? 1.f : kBuildhelpOpacity;
+				if (picking_starting_pos) {
+					caps = suited_as_starting_pos || buildhelp() ? f->fcoords.field->nodecaps() :
+					                                               Widelands::CAPS_NONE;
+				} else if (show_port_space) {
+					caps = f->fcoords.field->maxcaps();
+				} else {
+					caps = plr.get_buildcaps(f->fcoords);
+					if (!(caps & Widelands::BUILDCAPS_SIZEMASK)) {
+						for (const Widelands::BuildingDescr* b :
+						     plr.tribe().buildings_built_over_immovables()) {
+							if (plr.check_can_build(*b, f->fcoords)) {
+								caps = f->fcoords.field->maxcaps();
+								opacity *= 2 * kBuildhelpOpacity;
+								break;
+							}
+						}
+					}
+				}
+
+				if (const auto* overlay = get_buildhelp_overlay(caps)) {
+					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale, opacity);
 				}
 			}
 
@@ -584,6 +599,16 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				}
 			}
 		}
+
+		// Blit arrow for training wheel instructions
+		if (training_wheel_indicator_field_ == f->fcoords) {
+			constexpr int kTrainingWheelArrowOffset = 5;
+			blit_field_overlay(
+			   dst, *f, training_wheel_indicator_pic_,
+			   Vector2i(-kTrainingWheelArrowOffset,
+			            training_wheel_indicator_pic_->height() + kTrainingWheelArrowOffset),
+			   scale);
+		}
 	}
 }
 
@@ -591,6 +616,24 @@ void InteractivePlayer::popup_message(Widelands::MessageId const id,
                                       const Widelands::Message& message) {
 	message_menu_.create();
 	dynamic_cast<GameMessageMenu&>(*message_menu_.window).show_new_message(id, message);
+}
+
+void InteractivePlayer::set_training_wheel_indicator_pos(const Vector2i& pos) {
+	constexpr int kTrainingWheelArrowOffset = 5;
+	if (pos == Vector2i::invalid()) {
+		training_wheel_indicator_icon_.reset(nullptr);
+	} else {
+		// We create a new icon every time to paint it on top of the other child panels
+		training_wheel_indicator_icon_.reset(
+		   new UI::Icon(this, UI::PanelStyle::kWui, training_wheel_indicator_pic_));
+		training_wheel_indicator_icon_->set_no_frame();
+		training_wheel_indicator_icon_->set_pos(
+		   Vector2i(pos.x - kTrainingWheelArrowOffset,
+		            pos.y - training_wheel_indicator_icon_->get_h() + kTrainingWheelArrowOffset));
+	}
+}
+void InteractivePlayer::set_training_wheel_indicator_field(const Widelands::FCoords& field) {
+	training_wheel_indicator_field_ = field;
 }
 
 bool InteractivePlayer::can_see(Widelands::PlayerNumber const p) const {
@@ -750,7 +793,7 @@ bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) cons
 	const Widelands::Map& map = egbase().map();
 	const Widelands::Player::Field& player_field =
 	   plr.fields()[map.get_index(coords, map.get_width())];
-	return player_field.seeing == Widelands::SeeUnseeNode::kVisible;
+	return player_field.vision == Widelands::VisibleState::kVisible;
 }
 
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {

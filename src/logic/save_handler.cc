@@ -38,6 +38,7 @@
 
 SaveHandler::SaveHandler()
    : next_save_realtime_(0),
+     last_save_realtime_(0),
      initialized_(false),
      allow_saving_(true),
      save_requested_(false),
@@ -124,7 +125,7 @@ bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
 
 	log_info_time(game.get_gametime(),
 	              "Autosave: %d ms interval elapsed, current gametime: %s, saving...\n",
-	              autosave_interval_in_ms_, gametimestring(game.get_gametime(), true).c_str());
+	              autosave_interval_in_ms_, gametimestring(game.get_gametime().get(), true).c_str());
 
 	game.get_ibase()->log_message(_("Saving game…"));
 
@@ -217,7 +218,7 @@ void SaveHandler::initialize(uint32_t realtime) {
 std::string SaveHandler::create_file_name(const std::string& dir,
                                           const std::string& filename) const {
 	// Append directory name.
-	std::string complete_filename = dir + g_fs->file_separator() + filename;
+	std::string complete_filename = dir + FileSystem::file_separator() + filename;
 	// Trim it for preceding/trailing whitespaces in user input
 	boost::trim(complete_filename);
 

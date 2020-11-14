@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"PO-Revision-Date: 2020-10-23 07:56+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -165,8 +165,9 @@ msgstr "We moeten een mooie plek vinden voor de houthakkershut. Om dit te vergem
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
-"Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr "Klik met de linkermuisknop op de knop ‘OK’ om dit venster te sluiten zodat ik het je kan laten zien."
+"Left-click the ‘OK’ button to close this window. I'll show you where the "
+"menu is and where to show and hide the building spaces."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
@@ -177,9 +178,9 @@ msgstr "Merk op dat je dit venster niet kan sluiten door er met de rechtermuiskn
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
-"Now that I have shown you how to show and hide the building spaces, please "
-"switch them on again so that we can place our first building."
-msgstr "Nu ik je heb laten zien hoe je de bouwlocaties toont en verbergt, moet je ze weer aanzetten zodat we ons eerste gebouw kunnen plaatsen."
+"Now that I have shown you where to show and hide the building spaces, please"
+" switch them on so that we can place our first building."
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"

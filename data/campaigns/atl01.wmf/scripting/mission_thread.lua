@@ -4,7 +4,7 @@
 
 function send_building_lost_message(f)
    local message = building_lost(f.immovable.descr.name)
-   send_message(
+   send_to_inbox(
       p1,
       message.title,
       message.text,
@@ -174,6 +174,7 @@ end
 function build_environment()
    msg_boxes(first_briefing_messages)
    local o = add_campaign_objective(obj_ensure_build_wares_production)
+   p1:run_training_wheel("objectives", false)
 
    expand_objective = add_campaign_objective(obj_expand)
 

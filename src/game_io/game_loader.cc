@@ -64,7 +64,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	ScopedTimer timer("GameLoader::load() took %ums");
 
 	assert(game_.has_loader_ui());
-	auto set_progress_message = [](std::string text, unsigned step) {
+	auto set_progress_message = [](const std::string& text, unsigned step) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   (boost::format(_("Loading game: %1$s (%2$u/%3$d)")) % text % step % 6).str()));
 	};
@@ -91,11 +91,9 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	FileSystem* map_fs = game_.map().filesystem();
 	if (map_fs->file_exists("scripting/tribes")) {
 		log_info("Game: Reading Scenario Tribes ... ");
-		game_.mutable_tribes()->register_scenario_tribes(map_fs);
+		game_.mutable_descriptions()->register_scenario_tribes(map_fs);
 	}
 
-	// This also triggers loading the world and tribes, so we need a newline at the end of the log
-	// output
 	log_info("Game: Reading Player Info ...\n");
 	{
 		GamePlayerInfoPacket p;
@@ -104,7 +102,6 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	log_info("Game: Calling read_complete()\n");
 	map_packet.read_complete(game_);
-	log_info("Game: read_complete took: %ums\n", timer.ms_since_last_query());
 
 	MapObjectLoader* const mol = map_packet.get_map_object_loader();
 

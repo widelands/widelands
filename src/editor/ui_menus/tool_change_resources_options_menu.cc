@@ -25,8 +25,8 @@
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 
 constexpr int kMaxValue = 63;
 
@@ -40,7 +40,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    UI::UniqueWindow::Registry& registry)
    : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources"), increase_tool),
      increase_tool_(increase_tool),
-     box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
+     box_(this, UI::PanelStyle::kWui, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_,
                 0,
                 0,
@@ -65,8 +65,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              _("Set amount to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall),
-     resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
-     cur_selection_(&box_, 0, 0, 0, 0, "", UI::Align::kCenter) {
+     resources_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1),
+     cur_selection_(
+        &box_, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0, 0, 0, "", UI::Align::kCenter) {
 	// Configure spin boxes
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change rseources access keys. **/
@@ -86,10 +87,10 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 
 	// Add resource buttons
 	resources_box_.add_inf_space();
-	const Widelands::World& world = parent.egbase().world();
-	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_resources(); ++i) {
-		const Widelands::ResourceDescription& resource = *world.get_resource(i);
-		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
+	const Widelands::Descriptions& descriptions = parent.egbase().descriptions();
+	for (Widelands::DescriptionIndex i = 0; i < descriptions.nr_resources(); ++i) {
+		const Widelands::ResourceDescription& resource = *descriptions.get_resource_descr(i);
+		radiogroup_.add_button(&resources_box_, UI::PanelStyle::kWui, Vector2i::zero(),
 		                       g_image_cache->get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);
@@ -149,8 +150,11 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
  * Update all the textareas, so that they represent the correct values
  */
 void EditorToolChangeResourcesOptionsMenu::update() {
-	cur_selection_.set_text(
-	   (boost::format(_("Current: %s")) %
-	    eia().egbase().world().get_resource(increase_tool_.set_tool().get_cur_res())->descname())
-	      .str());
+	cur_selection_.set_text((boost::format(_("Current: %s")) %
+	                         eia()
+	                            .egbase()
+	                            .descriptions()
+	                            .get_resource_descr(increase_tool_.set_tool().get_cur_res())
+	                            ->descname())
+	                           .str());
 }

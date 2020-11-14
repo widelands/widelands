@@ -44,7 +44,7 @@ enum class TableColumnType { kFixed, kFlexible };
  *    2. a pointer type or
  *    3. uintptr_t.
  */
-template <typename Entry> class Table {
+template <typename Entry> class Table : public Panel {
 public:
 	struct EntryRecord {};
 
@@ -118,10 +118,12 @@ public:
 	std::vector<Recti> focus_overlay_rects();
 
 	// Drawing and event handling
-	void draw(RenderTarget&);
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
-	bool handle_key(bool down, SDL_Keysym code);
+	void draw(RenderTarget&) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 };
 
 template <> class Table<void*> : public Panel {
@@ -292,15 +294,24 @@ public:
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool
+	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
+	bool handle_tooltip() override;
 
 private:
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
+	void reposition_scrollbar();
+	size_t find_resizable_column_idx();
+	int total_columns_width();
+	void adjust_column_sizes(int all_columns_width, size_t resizeable_column_idx);
+	void update_scrollbar_filler();
 
 	struct Column {
 		Button* btn;
 		int width;
+		int original_width;
 		Align alignment;
 		CompareFn compare;
 	};
@@ -312,7 +323,6 @@ private:
 	int total_width_;
 	int32_t lineheight_;
 	const uint32_t headerheight_;
-	const UI::PanelStyle style_;
 	const UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
@@ -327,13 +337,15 @@ private:
 	Columns::size_type sort_column_;
 	bool sort_descending_;
 	// This column will grow/shrink depending on the scrollbar being present
-	size_t flexible_column_;
+	size_t flexible_column_idx_;
 	bool is_multiselect_;
 
 	void header_button_clicked(Columns::size_type);
 	using EntryRecordVector = std::vector<EntryRecord*>;
 	EntryRecordVector entry_records_;
 	void set_scrollpos(int32_t pos);
+	bool is_mouse_in(const Vector2i& cursor_pos, const Vector2i& point, int column_width) const;
+	FontStyleInfo& get_column_fontstyle(const EntryRecord& er);
 };
 
 template <typename Entry> class Table<const Entry* const> : public Table<void*> {

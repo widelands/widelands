@@ -36,7 +36,7 @@
 namespace Widelands {
 
 namespace {
-constexpr uint32_t kCurrentPacketVersion = 4;
+constexpr uint32_t kCurrentPacketVersion = 5;
 
 // Write all .lua files that exist in the given 'path' in 'map_fs' to the 'target_fs'.
 void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {
@@ -62,7 +62,7 @@ void write_tribes_dir(FileSystem& target_fs, FileSystem* map_fs, const std::stri
 			write_tribes_dir(target_fs, map_fs, file);
 		} else {
 			// Write file
-			const std::string filename(map_fs->fs_filename(file.c_str()));
+			const std::string filename(FileSystem::fs_filename(file.c_str()));
 			// TODO(GunChleoc): Savegame compatibility, forbid "helptexts.lua" after v1.0
 			if (filename == "init.lua" || filename == "register.lua" || filename == "helptexts.lua" ||
 			    boost::ends_with(filename, ".png")) {
@@ -95,14 +95,17 @@ void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapO
 	// Always try to load the global State: even in a normal game, some lua
 	// coroutines could run. But make sure that this is really a game, other
 	// wise this makes no sense.
-	upcast(Game, g, &egbase);
 	FileRead fr;
-	if (g && fr.try_open(fs, "scripting/globals.dump")) {
+	if (egbase.is_game() && fr.try_open(fs, "scripting/globals.dump")) {
 		try {
 			const uint32_t packet_version = fr.unsigned_32();
-			if (packet_version == kCurrentPacketVersion) {
-				upcast(LuaGameInterface, lgi, &g->lua());
+			if (packet_version >= 4 && packet_version <= kCurrentPacketVersion) {
+				upcast(LuaGameInterface, lgi, &egbase.lua());
 				signal(SIGABRT, &abort_handler);
+				if (packet_version >= 5) {
+					// TODO(Nordfriese): Savegame compatibility)
+					lgi->read_textdomain_stack(fr);
+				}
 				lgi->read_global_env(fr, mol, fr.unsigned_32());
 				signal(SIGABRT, SIG_DFL);
 			} else {
@@ -112,6 +115,7 @@ void MapScriptingPacket::read(FileSystem& fs, EditorGameBase& egbase, bool, MapO
 		} catch (const WException& e) {
 			throw GameDataError("scripting: %s", e.what());
 		}
+		fr.close();
 	}
 }
 
@@ -128,15 +132,19 @@ void MapScriptingPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 	// Dump the global environment if this is a game and not in the editor
 	if (upcast(Game, g, &egbase)) {
+		upcast(LuaGameInterface, lgi, &g->lua());
+		assert(lgi);
 		FileWrite fw;
+
 		fw.unsigned_32(kCurrentPacketVersion);
+		lgi->write_textdomain_stack(fw);
+
 		const FileWrite::Pos pos = fw.get_pos();
 		fw.unsigned_32(0);  // N bytes written, follows below
 
-		upcast(LuaGameInterface, lgi, &g->lua());
 		uint32_t nwritten = little_32(lgi->write_global_env(fw, mos));
 		fw.data(&nwritten, 4, pos);
-
+		fs.ensure_directory_exists("scripting");
 		fw.write(fs, "scripting/globals.dump");
 	}
 }

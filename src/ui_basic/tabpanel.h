@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "graphic/styles/font_style.h"
 #include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
@@ -46,8 +47,10 @@ struct Tab : public NamedPanel {
 	 * Text conventions: Title Case for the 'title', Sentence case for the 'gtooltip'
 	 */
 	Tab(TabPanel* parent,
+	    PanelStyle,
 	    size_t id,
 	    int32_t x,
+	    FontStyle,
 	    const std::string& name,
 	    const std::string& title,
 	    const Image* pic,
@@ -122,12 +125,13 @@ struct TabPanel : public Panel {
 	boost::signals2::signal<void()> sigclicked;
 
 	bool handle_key(bool, SDL_Keysym) override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 
 protected:
 	void layout() override;
 	void update_desired_size() override;
 
-	UI::TabPanelStyle style_;
+	UI::TabPanelStyle tab_style_;
 
 	std::vector<Recti> focus_overlay_rects() override;
 

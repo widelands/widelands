@@ -217,11 +217,10 @@ public:
 		kRight,
 		kLeft,
 	};
-	explicit RenderNode(NodeStyle& ns)
+	explicit RenderNode(const NodeStyle& ns)
 	   : floating_(Floating::kNone), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
-	virtual ~RenderNode() {
-	}
+	virtual ~RenderNode() = default;
 
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
@@ -316,8 +315,7 @@ public:
 	explicit Layout(std::vector<std::shared_ptr<RenderNode>>& all)
 	   : h_(0), idx_(0), all_nodes_(all) {
 	}
-	virtual ~Layout() {
-	}
+	virtual ~Layout() = default;
 
 	uint16_t height() {
 		return h_;
@@ -621,8 +619,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 class TextNode : public RenderNode {
 public:
 	TextNode(FontCache& font, NodeStyle&, const std::string& txt);
-	~TextNode() override {
-	}
+	~TextNode() override = default;
 
 	std::string debug_info() const override {
 		return "'" + txt_ + "'";
@@ -711,8 +708,7 @@ public:
 		w_ = w;
 		check_size();
 	}
-	~FillingTextNode() override {
-	}
+	~FillingTextNode() override = default;
 
 	std::string debug_info() const override {
 		return "ft";
@@ -821,7 +817,7 @@ public:
 		return 0;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
-		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
+		return std::make_shared<UI::RenderedText>();
 	}
 	bool is_non_mandatory_space() const override {
 		return true;
@@ -907,7 +903,7 @@ private:
  */
 class DivTagRenderNode : public RenderNode {
 public:
-	explicit DivTagRenderNode(NodeStyle& ns)
+	explicit DivTagRenderNode(const NodeStyle& ns)
 	   : RenderNode(ns),
 	     desired_width_(),
 	     w_(0),
@@ -999,7 +995,7 @@ public:
 	void set_background(const Image* img) {
 		background_image_ = img;
 	}
-	void set_nodes_to_render(std::vector<std::shared_ptr<RenderNode>>& n) {
+	void set_nodes_to_render(const std::vector<std::shared_ptr<RenderNode>>& n) {
 		nodes_to_render_ = n;
 	}
 	void add_reference(int16_t gx, int16_t gy, uint16_t w, uint16_t h, const std::string& s) {
@@ -1103,7 +1099,7 @@ TagHandler* create_taghandler(Tag& tag,
                               NodeStyle& ns,
                               ImageCache* image_cache,
                               RendererStyle& renderer_style,
-                              const UI::FontSets& fontsets);
+                              const UI::FontSets* fontsets);
 
 class TagHandler {
 public:
@@ -1112,7 +1108,7 @@ public:
 	           NodeStyle ns,
 	           ImageCache* image_cache,
 	           RendererStyle& renderer_style,
-	           const UI::FontSets& fontsets)
+	           const UI::FontSets* fontsets)
 	   : tag_(tag),
 	     font_cache_(fc),
 	     nodestyle_(std::move(ns)),
@@ -1120,8 +1116,7 @@ public:
 	     renderer_style_(renderer_style),
 	     fontsets_(fontsets) {
 	}
-	virtual ~TagHandler() {
-	}
+	virtual ~TagHandler() = default;
 
 	virtual void enter() {
 	}
@@ -1138,7 +1133,7 @@ protected:
 	NodeStyle nodestyle_;
 	ImageCache* image_cache_;        // Not owned
 	RendererStyle& renderer_style_;  // Reference to global renderer style in the renderer
-	const UI::FontSets& fontsets_;
+	const UI::FontSets* fontsets_;
 };
 
 void TagHandler::make_text_nodes(const std::string& txt,
@@ -1168,20 +1163,20 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			}
 
 			word = ts.till_any_or_end(" \t\n\r");
-			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
+			ns.fontset = i18n::find_fontset(word.c_str(), *fontsets_);
 			if (!word.empty()) {
 				replace_entities(&word);
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
 					for (const auto& spacer : spacer_nodes) {
-						it = text_nodes.insert(text_nodes.begin(), spacer);
+						text_nodes.insert(text_nodes.begin(), spacer);
 					}
 					if (word_is_bidi) {
 						word = i18n::line2bidi(word.c_str());
 					}
-					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(new TextNode(
-					                                              font_cache_, ns, word.c_str())));
+					it = text_nodes.insert(text_nodes.begin(), std::shared_ptr<RenderNode>(
+					                                              new TextNode(font_cache_, ns, word)));
 				} else {  // Sequences of Latin words go to the right from current position
 					if (it < text_nodes.end()) {
 						++it;
@@ -1211,7 +1206,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 				nodes.push_back(std::shared_ptr<RenderNode>(new WordSpacerNode(font_cache_, ns)));
 			}
 			word = ts.till_any_or_end(" \t\n\r");
-			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
+			ns.fontset = i18n::find_fontset(word.c_str(), *fontsets_);
 			if (!word.empty()) {
 				replace_entities(&word);
 				word = i18n::make_ligatures(word.c_str());
@@ -1245,11 +1240,11 @@ class FontTagHandler : public TagHandler {
 public:
 	FontTagHandler(Tag& tag,
 	               FontCache& fc,
-	               NodeStyle ns,
+	               const NodeStyle& ns,
 	               ImageCache* image_cache,
 	               RendererStyle& init_renderer_style,
-	               const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets) {
+	               const UI::FontSets* fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void enter() override {
@@ -1285,11 +1280,11 @@ class PTagHandler : public TagHandler {
 public:
 	PTagHandler(Tag& tag,
 	            FontCache& fc,
-	            NodeStyle ns,
+	            const NodeStyle& ns,
 	            ImageCache* image_cache,
 	            RendererStyle& init_renderer_style,
-	            const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), indent_(0) {
+	            const UI::FontSets* fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), indent_(0) {
 	}
 
 	void enter() override {
@@ -1341,19 +1336,17 @@ class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(Tag& tag,
 	              FontCache& fc,
-	              NodeStyle ns,
+	              const NodeStyle& ns,
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
-	              const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets),
-	     render_node_(nullptr) {
+	              const UI::FontSets* fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), render_node_(nullptr) {
 	}
 
 	void enter() override {
 		const AttrMap& a = tag_.attrs();
 		RGBColor color;
 		bool use_playercolor = false;
-		double scale = 1.0;
 
 		if (a.has("color")) {
 			color = a["color"].get_color();
@@ -1365,6 +1358,7 @@ public:
 			render_node_.reset(new ImgRenderNode(nodestyle_, representative_image));
 		} else {
 			const std::string image_filename = a["src"].get_string();
+			double scale = 1.0;
 
 			if (a.has("width")) {
 				int width = a["width"].get_int(std::numeric_limits<uint16_t>::max());
@@ -1396,11 +1390,11 @@ class VspaceTagHandler : public TagHandler {
 public:
 	VspaceTagHandler(Tag& tag,
 	                 FontCache& fc,
-	                 NodeStyle ns,
+	                 const NodeStyle& ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
-	                 const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets), space_(0) {
+	                 const UI::FontSets* fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets), space_(0) {
 	}
 
 	void enter() override {
@@ -1421,11 +1415,11 @@ class HspaceTagHandler : public TagHandler {
 public:
 	HspaceTagHandler(Tag& tag,
 	                 FontCache& fc,
-	                 NodeStyle ns,
+	                 const NodeStyle& ns,
 	                 ImageCache* image_cache,
 	                 RendererStyle& init_renderer_style,
-	                 const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets),
+	                 const UI::FontSets* fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     background_image_(nullptr),
 	     space_(0) {
 	}
@@ -1484,11 +1478,11 @@ class BrTagHandler : public TagHandler {
 public:
 	BrTagHandler(Tag& tag,
 	             FontCache& fc,
-	             NodeStyle ns,
+	             const NodeStyle& ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
-	             const UI::FontSets& fontsets)
-	   : TagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets) {
+	             const UI::FontSets* fontsets)
+	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets) {
 	}
 
 	void emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) override {
@@ -1500,10 +1494,10 @@ class DivTagHandler : public TagHandler {
 public:
 	DivTagHandler(Tag& tag,
 	              FontCache& fc,
-	              NodeStyle ns,
+	              const NodeStyle& ns,
 	              ImageCache* image_cache,
 	              RendererStyle& init_renderer_style,
-	              const UI::FontSets& fontsets,
+	              const UI::FontSets* fontsets,
 	              uint16_t max_w = 0,
 	              bool shrink_to_fit = true)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
@@ -1722,18 +1716,18 @@ class RTTagHandler : public DivTagHandler {
 public:
 	RTTagHandler(Tag& tag,
 	             FontCache& fc,
-	             NodeStyle ns,
+	             const NodeStyle& ns,
 	             ImageCache* image_cache,
 	             RendererStyle& init_renderer_style,
-	             const UI::FontSets& fontsets,
+	             const UI::FontSets* fontsets,
 	             uint16_t w)
-	   : DivTagHandler(tag, fc, std::move(ns), image_cache, init_renderer_style, fontsets, w, true) {
+	   : DivTagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets, w, true) {
 	}
 
 	// Handle attributes that are in rt, but not in div.
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
-		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
+		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : false);
 		trim_spaces_ = (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
 		shrink_to_fit_ = shrink_to_fit_ && trim_spaces_;
 	}
@@ -1745,7 +1739,7 @@ TagHandler* create_taghandler(Tag& tag,
                               NodeStyle& ns,
                               ImageCache* image_cache,
                               RendererStyle& renderer_style,
-                              const UI::FontSets& fontsets) {
+                              const UI::FontSets* fontsets) {
 	return new T(tag, fc, ns, image_cache, renderer_style, fontsets);
 }
 using TagHandlerMap = std::map<const std::string,
@@ -1754,14 +1748,14 @@ using TagHandlerMap = std::map<const std::string,
                                                NodeStyle& ns,
                                                ImageCache* image_cache,
                                                RendererStyle& renderer_style,
-                                               const UI::FontSets& fontsets)>;
+                                               const UI::FontSets* fontsets)>;
 
 TagHandler* create_taghandler(Tag& tag,
                               FontCache& fc,
                               NodeStyle& ns,
                               ImageCache* image_cache,
                               RendererStyle& renderer_style,
-                              const UI::FontSets& fontsets) {
+                              const UI::FontSets* fontsets) {
 	static TagHandlerMap map;
 	if (map.empty()) {
 		map["br"] = &create_taghandler<BrTagHandler>;
@@ -1784,7 +1778,7 @@ TagHandler* create_taghandler(Tag& tag,
 
 Renderer::Renderer(ImageCache* image_cache,
                    TextureCache* texture_cache,
-                   const UI::FontSets& fontsets)
+                   const UI::FontSets* fontsets)
    : font_cache_(new FontCache()),
      parser_(new Parser()),
      image_cache_(image_cache),
@@ -1795,7 +1789,8 @@ Renderer::Renderer(ImageCache* image_cache,
 	TextureCache* render(const std::string&, uint16_t, const TagSet&);
 }
 
-Renderer::~Renderer() {
+Renderer::~Renderer() {  // NOLINT
+	                      // FontCache, FontHandler and Parser need this
 }
 
 std::shared_ptr<RenderNode>
@@ -1809,7 +1804,7 @@ Renderer::layout(const std::string& text, uint16_t width, bool is_rtl, const Tag
 	renderer_style_.remaining_width = width;
 	renderer_style_.overall_width = width;
 
-	UI::FontSet const* fontset = fontsets_.get_fontset(i18n::get_locale());
+	UI::FontSet const* fontset = fontsets_->get_fontset(i18n::get_locale());
 
 	NodeStyle default_style = {fontset,
 	                           renderer_style_.font_face,

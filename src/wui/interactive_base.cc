@@ -98,8 +98,9 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 }  // namespace
 
-InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
-   : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
+   : UI::Panel(nullptr, UI::PanelStyle::kWui, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+     chat_provider_(c),
      info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoverlay before the toolbar so it is below
@@ -129,7 +130,8 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      frametime_(0),
      avg_usframetime_(0),
      road_building_mode_(nullptr),
-     unique_window_handler_(new UniqueWindowHandler()) {
+     unique_window_handler_(new UniqueWindowHandler()),
+     cheat_mode_enabled_(false) {
 
 	// Load the buildhelp icons.
 	{
@@ -478,22 +480,23 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	bool outer = a <= 2 && b <= 2 && c <= 2;
 
 	if (medium) {
-		if (outer && inner) {
-			return 0;
-		} else if (inner) {
-			return 3;
-		} else if (outer) {
+		if (outer) {
+			if (inner) {
+				return 0;
+			}
 			return 1;
-		} else {
-			return 4;
 		}
-	} else if (outer) {
+		if (inner) {
+			return 3;
+		}
+		return 4;
+	}
+	if (outer) {
 		assert(!inner);
 		return 2;
-	} else {
-		assert(inner);
-		return 5;
 	}
+	assert(inner);
+	return 5;
 }
 
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {
@@ -693,6 +696,16 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 
 	Game* game = dynamic_cast<Game*>(&egbase());
 
+	if (in_road_building_mode() && tooltip().empty()) {
+		draw_tooltip(
+		   in_road_building_mode(RoadBuildingType::kRoad) ?
+		      (boost::format(_("Road length: %u")) % get_build_road_path().get_nsteps()).str() :
+		      (boost::format(_("Waterway length: %1$u/%2$u")) % get_build_road_path().get_nsteps() %
+		       egbase().map().get_waterway_max_length())
+		         .str(),
+		   UI::PanelStyle::kWui);
+	}
+
 	// This portion of code keeps the speed of game so that FPS are kept within
 	// range 13 - 15, this is used for training of AI
 	if (game != nullptr) {
@@ -728,7 +741,7 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	info_panel_.set_coords_string(node_text);
 
 	// In-game clock and FPS
-	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime(), true) : "");
+	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime().get(), true) : "");
 	info_panel_.set_fps_string(get_display_flag(dfDebug) ? (boost::format("%5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps()).str() : "");
 }
 
@@ -755,7 +768,7 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 
 void InteractiveBase::draw_bridges(RenderTarget* dst,
                                    const FieldsToDraw::Field* f,
-                                   uint32_t gametime,
+                                   const Time& gametime,
                                    float scale) const {
 	if (Widelands::is_bridge_segment(f->road_e)) {
 		dst->blit_animation(f->rendertarget_pixel, f->fcoords, scale,
@@ -785,14 +798,14 @@ void InteractiveBase::mainview_move() {
 
 // Open the minimap or close it if it's open
 void InteractiveBase::toggle_minimap() {
-	if (minimap_registry_.window) {
-		delete minimap_registry_.window;
-	} else {
+	if (!minimap_registry_.window) {
 		minimap_ = new MiniMap(*this, &minimap_registry_);
 		minimap_->warpview.connect([this](const Vector2f& map_pixel) {
 			map_view_.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 		});
 		mainview_move();
+	} else {
+		delete minimap_registry_.window;
 	}
 	rebuild_mapview_menu();
 }
@@ -1362,6 +1375,18 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			GameChatMenu::create_script_console(
 			   this, debugconsole_, *DebugConsole::get_chat_provider());
 			return true;
+		case SDLK_F3:
+			if (cheat_mode_enabled_) {
+				cheat_mode_enabled_ = false;
+			} else if (code.mod & KMOD_CTRL) {
+				if (chat_provider_) {
+					/** TRANSLATORS: This is a chat message which is automatically sent to all players
+					 * when a player enables cheating mode */
+					chat_provider_->send(_("This player has enabled the cheating mode!"));
+				}
+				cheat_mode_enabled_ = true;
+			}
+			break;
 #endif
 		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
 		case SDLK_SPACE:
@@ -1383,6 +1408,12 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
 	const std::string cmd = boost::algorithm::join(args, " ");
+
+	if (chat_provider_) {
+		/** TRANSLATORS: This is a chat message which is automatically sent to all players when a
+		 * player uses the debug console */
+		chat_provider_->send(_("This player has just used the cheating console!"));
+	}
 
 	DebugConsole::write("Starting Lua interpretation!");
 	try {

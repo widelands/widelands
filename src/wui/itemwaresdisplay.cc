@@ -27,14 +27,13 @@
 namespace {
 
 constexpr int kMargin = 4;
-static const uint32_t IWD_HBorder = 10;
-static const uint32_t IWD_VBorder = 10;
-static const uint32_t IWD_DefaultItemsPerRow = 9;
-static const uint32_t IWD_ItemWidth = 14;
-static const uint32_t IWD_ItemHeight = 26;
-static const uint32_t IWD_WorkerBaseline =
-   2;  ///< Offset of anim center from bottom border of item rect
-static const uint32_t IWD_WareBaseLine = -6;
+constexpr unsigned kHBorder = 10;
+constexpr unsigned kVBorder = 10;
+constexpr unsigned kDefaultItemsPerRow = 9;
+constexpr unsigned kItemWidth = 14;
+constexpr unsigned kItemHeight = 26;
+constexpr unsigned kWorkerBaseline = 2;  ///< Offset of anim center from bottom border of item rect
+constexpr unsigned kWareBaseLine = -6;
 
 }  // anonymous namespace
 
@@ -42,10 +41,10 @@ static const uint32_t IWD_WareBaseLine = -6;
  * Create an ItemWaresDisplay with no items and zero capacity.
  */
 ItemWaresDisplay::ItemWaresDisplay(Panel* parent, const Widelands::Player& gplayer)
-   : Panel(parent, 0, 0, 0, 0),
+   : Panel(parent, UI::PanelStyle::kWui, 0, 0, 0, 0),
      player_(gplayer),
      capacity_(0),
-     items_per_row_(IWD_DefaultItemsPerRow) {
+     items_per_row_(kDefaultItemsPerRow) {
 	recalc_desired_size();
 }
 
@@ -73,8 +72,8 @@ void ItemWaresDisplay::recalc_desired_size() {
 	uint32_t nrrows = (capacity_ + items_per_row_ - 1) / items_per_row_;
 	uint32_t rowitems = capacity_ >= items_per_row_ ? items_per_row_ : capacity_;
 
-	set_desired_size(2 * (IWD_HBorder + kMargin) + rowitems * IWD_ItemWidth,
-	                 2 * (IWD_VBorder + kMargin) + nrrows * IWD_ItemHeight);
+	set_desired_size(2 * (kHBorder + kMargin) + rowitems * kItemWidth,
+	                 2 * (kVBorder + kMargin) + nrrows * kItemHeight);
 }
 
 /**
@@ -113,18 +112,18 @@ void ItemWaresDisplay::draw(RenderTarget& dst) {
 		uint32_t row = idx / items_per_row_;
 		uint32_t col = idx % items_per_row_;
 
-		uint32_t x = IWD_HBorder / 2 + col * IWD_ItemWidth + kMargin;
-		uint32_t y = IWD_VBorder + row * IWD_ItemHeight + kMargin;
+		uint32_t x = kHBorder / 2 + col * kItemWidth + kMargin;
+		uint32_t y = kVBorder + row * kItemHeight + kMargin;
 
 		if (it.worker) {
-			y += IWD_WorkerBaseline;
+			y += kWorkerBaseline;
 			constexpr float kZoom = 1.f;
-			dst.blit_animation(Vector2f(x + (IWD_ItemWidth / 2.f), y + (IWD_ItemHeight / 2.f)),
+			dst.blit_animation(Vector2f(x + (kItemWidth / 2.f), y + (kItemHeight / 2.f)),
 			                   Widelands::Coords::null(), kZoom,
-			                   tribe.get_worker_descr(it.index)->main_animation(), 0,
+			                   tribe.get_worker_descr(it.index)->main_animation(), Time(0),
 			                   &player().get_playercolor());
 		} else {
-			y += IWD_WareBaseLine;
+			y += kWareBaseLine;
 			if (tribe.get_ware_descr(it.index)->icon()) {
 				dst.blit(Vector2i(x, y), tribe.get_ware_descr(it.index)->icon());
 			}

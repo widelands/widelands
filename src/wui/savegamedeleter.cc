@@ -9,7 +9,8 @@
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
 
-SavegameDeleter::SavegameDeleter(UI::Panel* parent) : parent_(parent) {
+SavegameDeleter::SavegameDeleter(UI::Panel* parent, UI::WindowStyle s)
+   : parent_(parent), style_(s) {
 }
 
 bool SavegameDeleter::delete_savegames(const std::vector<SavegameData>& to_be_deleted) const {
@@ -30,7 +31,7 @@ bool SavegameDeleter::show_confirmation_window(const std::vector<SavegameData>& 
 	   (boost::format("%s\n%s") % confirmation_window_header % as_filename_list(selections)).str();
 
 	UI::WLMessageBox confirmationBox(
-	   parent_->get_parent()->get_parent(),
+	   parent_->get_parent()->get_parent(), style_,
 	   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"), message,
 	   UI::WLMessageBox::MBoxType::kOkCancel);
 	return confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
@@ -80,8 +81,8 @@ void SavegameDeleter::notify_deletion_failed(const std::vector<SavegameData>& to
 	std::string header = create_header_for_deletion_failed_window(to_be_deleted.size(), no_failed);
 	std::string message = (boost::format("%s\n%s") % header % as_filename_list(to_be_deleted)).str();
 
-	UI::WLMessageBox msgBox(
-	   parent_->get_parent()->get_parent(), caption, message, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox msgBox(parent_->get_parent()->get_parent(), style_, caption, message,
+	                        UI::WLMessageBox::MBoxType::kOk);
 	msgBox.run<UI::Panel::Returncodes>();
 }
 
@@ -89,17 +90,16 @@ std::string SavegameDeleter::create_header_for_deletion_failed_window(size_t no_
                                                                       size_t no_failed) const {
 	if (no_to_be_deleted == 1) {
 		return _("The game could not be deleted.");
-	} else {
-		/** TRANSLATORS: Used with multiple games, 1 game has a separate
-		                        string. DO NOT omit the placeholder in your translation. */
-		return (boost::format(ngettext(
-		           "%d game could not be deleted.", "%d games could not be deleted.", no_failed)) %
-		        no_failed)
-		   .str();
 	}
+	/** TRANSLATORS: Used with multiple games, 1 game has a separate string. DO NOT omit the
+	 * placeholder in your translation. */
+	return (boost::format(ngettext(
+	           "%d game could not be deleted.", "%d games could not be deleted.", no_failed)) %
+	        no_failed)
+	   .str();
 }
 
-ReplayDeleter::ReplayDeleter(UI::Panel* parent) : SavegameDeleter(parent) {
+ReplayDeleter::ReplayDeleter(UI::Panel* parent, UI::WindowStyle s) : SavegameDeleter(parent, s) {
 }
 
 const std::string
@@ -121,23 +121,21 @@ std::string ReplayDeleter::create_header_for_deletion_failed_window(size_t no_to
                                                                     size_t no_failed) const {
 	if (no_to_be_deleted == 1) {
 		return _("The replay could not be deleted.");
-	} else {
-		/** TRANSLATORS: Used with multiple replays, 1 replay has a separate
-		                        string. DO NOT omit the placeholder in your translation. */
-		return (boost::format(ngettext("%d replay could not be deleted.",
-		                               "%d replays could not be deleted.", no_failed)) %
-		        no_failed)
-		   .str();
 	}
+	/** TRANSLATORS: Used with multiple replays, 1 replay has a separate string. DO NOT omit the
+	 * placeholder in your translation. */
+	return (boost::format(ngettext(
+	           "%d replay could not be deleted.", "%d replays could not be deleted.", no_failed)) %
+	        no_failed)
+	   .str();
 }
 
 uint32_t ReplayDeleter::try_to_delete(const std::vector<SavegameData>& to_be_deleted) const {
 	// Failed deletions aren't a serious problem, we just catch the errors
 	// and keep track to notify the player.
 	uint32_t failed_deletions = 0;
-	bool failed;
 	for (const auto& delete_me : to_be_deleted) {
-		failed = false;
+		bool failed = false;
 		const std::string& file_to_be_deleted = delete_me.filename;
 		try {
 			g_fs->fs_unlink(file_to_be_deleted);

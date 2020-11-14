@@ -53,11 +53,21 @@ bool inline copy_paste_modifier() {
 namespace UI {
 
 struct EditBoxImpl {
+	enum class Mode { kNormal, kSelection };
+
 	explicit EditBoxImpl(const UI::TextPanelStyleInfo& init_style)
 	   : background_style(&init_style.background()),
 	     font_style(&init_style.font()),
 	     margin(init_style.background().margin()),
-	     font_scale(1.0f) {
+	     font_scale(1.0f),
+	     maxLength(1),
+	     caret(0),
+	     selection_end(0),
+	     selection_start(0),
+	     mode(Mode::kNormal),
+	     scrolloffset(0),
+	     // Set alignment to the UI language's principal writing direction
+	     align(UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft) {
 	}
 
 	/// Background color and texture
@@ -87,8 +97,6 @@ struct EditBoxImpl {
 	/// Initial position of text when selection was started
 	uint32_t selection_start;
 
-	enum class Mode { kNormal, kSelection };
-
 	Mode mode;
 
 	/// Current scrolling offset to the text anchor position, in pixels
@@ -100,6 +108,7 @@ struct EditBoxImpl {
 
 EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::PanelStyle style)
    : Panel(parent,
+           style,
            x,
            y,
            w,
@@ -112,13 +121,6 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
      warning_(false) {
 	set_thinks(false);
 
-	// Set alignment to the UI language's principal writing direction
-	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
-	m_->caret = 0;
-	m_->mode = EditBoxImpl::Mode::kNormal;
-	m_->selection_end = 0;
-	m_->selection_start = 0;
-	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	set_max_length(std::numeric_limits<int32_t>::max());
 
@@ -126,15 +128,10 @@ EditBox::EditBox(Panel* const parent, int32_t x, int32_t y, uint32_t w, UI::Pane
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_handle_textinput();
-
-	// Initialize history as empty string
-	for (uint8_t i = 0; i < CHAT_HISTORY_SIZE; ++i) {
-		history_[i] = "";
-	}
 }
 
-EditBox::~EditBox() {
-	// place a destructor where the compiler can find the EditBoxImpl destructor
+EditBox::~EditBox() {  // NOLINT
+	                    // place a destructor where the compiler can find the EditBoxImpl destructor
 }
 
 /**
@@ -409,7 +406,7 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 				if (history_position_ > CHAT_HISTORY_SIZE - 2) {
 					history_position_ = CHAT_HISTORY_SIZE - 2;
 				}
-				if (history_[++history_position_].size() > 0) {
+				if (!history_[++history_position_].empty()) {
 					m_->text = history_[history_position_];
 					m_->caret = m_->text.size();
 					check_caret();
@@ -566,7 +563,9 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const uint16_t fontheight = text_height(*m_->font_style, m_->font_scale);
 
-		const Image* caret_image = g_image_cache->get("images/ui_basic/caret.png");
+		const Image* caret_image =
+		   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
+		                                                         "images/ui_basic/caret_fs.png");
 		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
@@ -576,6 +575,15 @@ void EditBox::draw(RenderTarget& dst) {
 			highlight_selection(dst, point, fontheight);
 		}
 	}
+}
+
+void EditBox::set_caret_pos(const size_t pos) {
+	m_->caret = std::min(pos, m_->text.size());
+	check_caret();
+}
+
+size_t EditBox::caret_pos() const {
+	return m_->caret;
 }
 
 void EditBox::highlight_selection(RenderTarget& dst,

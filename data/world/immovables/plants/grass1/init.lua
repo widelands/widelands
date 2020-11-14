@@ -2,7 +2,7 @@ push_textdomain("world")
 
 dirname = path.dirname(__file__)
 
-wl.World():new_immovable_type{
+wl.Descriptions():new_immovable_type{
    name = "grass1",
    descname = _ "Grass",
    size = "none",
@@ -13,7 +13,7 @@ wl.World():new_immovable_type{
          hotspot = { 10, 20 },
          sound_effect = {
             path = "sound/animals/frog",
-            priority = 0.01
+            priority = "0.01%"
          },
       },
    }

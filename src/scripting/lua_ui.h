@@ -85,6 +85,7 @@ public:
 	 * Lua Methods
 	 */
 	int get_descendant_position(lua_State* L);
+	int indicate(lua_State* L);
 
 	/*
 	 * C Methods
@@ -140,6 +141,7 @@ public:
 	 * Properties
 	 */
 	int get_name(lua_State* L);
+	int get_expanded(lua_State* L);
 	int get_no_of_items(lua_State* L);
 
 	/*
@@ -147,6 +149,7 @@ public:
 	 */
 	int open(lua_State* L);
 	int highlight_item(lua_State* L);
+	int indicate_item(lua_State* L);
 	int select(lua_State* L);
 
 	/*
@@ -248,6 +251,7 @@ public:
 	int get_statistics(lua_State* L);
 	int set_statistics(lua_State* L);
 	int get_is_building_road(lua_State* L);
+	int get_auto_roadbuilding_mode(lua_State* L);
 	int get_is_animating(lua_State*);
 
 	/*

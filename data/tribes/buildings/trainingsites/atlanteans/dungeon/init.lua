@@ -64,13 +64,17 @@
 --            },
 --
 --    **soldier defense**
---            *Optional*. Just like ``soldier attack``, but for defense training.
+--        *Optional*. Just like ``soldier attack``, but for defense training.
 --
 --    **soldier health**
---            *Optional*. Just like ``soldier attack``, but for health training.
+--        *Optional*. Just like ``soldier attack``, but for health training.
 --
 --    **soldier evade**
---            *Optional*. Just like ``soldier attack``, but for evade training.
+--        *Optional*. Just like ``soldier attack``, but for evade training.
+--
+--    **messages**
+--        *Mandatory*. A table with translatable production tooltips, containing the
+--        keys ``no_soldier`` and ``no_soldier_for_level``. See example below for details.
 --
 -- For making the UI texts translateable, we also need to push/pop the correct textdomain.
 --
@@ -82,7 +86,7 @@
 --
 --    dirname = path.dirname(__file__)
 --
---    tribes:new_trainingsite_type {
+--    descriptions:new_trainingsite_type {
 --       name = "empire_arena",
 --       descname = pgettext("empire_building", "Arena"),
 --       icon = dirname .. "menu.png",
@@ -179,7 +183,14 @@
 --       },
 --
 --       soldier_capacity = 8,
---       trainer_patience = 8
+--       trainer_patience = 8,
+--
+--       messages = {
+--          -- Make this translatable with pgettext: Empire training site tooltip when it has no soldiers assigned
+--          no_soldier = "No soldier to train!"
+--          -- Make this translatable with pgettext: Empire training site tooltip when none of the present soldiers match the current training program
+--          no_soldier_for_level = "No soldier found for this training level!",
+--       },
 --    }
 --
 --    pop_textdomain()
@@ -188,7 +199,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_trainingsite_type {
+descriptions:new_trainingsite_type {
    name = "atlanteans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "Dungeon"),
@@ -322,7 +333,14 @@ tribes:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 16
+   trainer_patience = 16,
+
+   messages = {
+      -- TRANSLATORS: Atlantean training site tooltip when it has no soldiers assigned
+      no_soldier = pgettext("atlanteans_building", "No soldier to train!"),
+      -- TRANSLATORS: Atlantean training site tooltip when none of the present soldiers match the current training program
+      no_soldier_for_level = pgettext("atlanteans_building", "No soldier found for this training level!"),
+   },
 }
 
 pop_textdomain()

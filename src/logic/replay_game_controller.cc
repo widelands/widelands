@@ -50,7 +50,7 @@ void ReplayGameController::think() {
 
 	frametime = frametime * real_speed() / 1000;
 
-	time_ = game_.get_gametime() + frametime;
+	time_ = game_.get_gametime() + Duration(frametime);
 
 	if (replayreader_) {
 		while (Widelands::Command* const cmd = replayreader_->get_next_command(time_)) {
@@ -68,7 +68,7 @@ void ReplayGameController::send_player_command(Widelands::PlayerCommand*) {
 	throw wexception("Trying to send a player command during replay");
 }
 
-int32_t ReplayGameController::get_frametime() {
+Duration ReplayGameController::get_frametime() {
 	return time_ - game_.get_gametime();
 }
 
@@ -98,7 +98,7 @@ void ReplayGameController::set_paused(bool const paused) {
 
 void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb(game.get_ibase(), _("End of Replay"),
+	UI::WLMessageBox mmb(game.get_ibase(), UI::WindowStyle::kWui, _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
 	                       "if you want to."),

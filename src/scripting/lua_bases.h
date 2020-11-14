@@ -62,7 +62,7 @@ public:
 	 * Lua methods
 	 */
 	int get_immovable_description(lua_State* L);
-	int tribe_immovable_exists(lua_State* L);
+	int immovable_exists(lua_State* L);
 	int get_building_description(lua_State* L);
 	int get_ship_description(lua_State* L);
 	int get_tribe_description(lua_State* L);
@@ -122,7 +122,7 @@ public:
 	/*
 	 * C methods
 	 */
-	Widelands::Player& get(lua_State* L, Widelands::EditorGameBase&);
+	Widelands::Player& get(lua_State* L, const Widelands::EditorGameBase&);
 
 protected:
 	inline Widelands::PlayerNumber player_number() {

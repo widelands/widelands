@@ -28,11 +28,7 @@
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/world/critter_program.h"
 
-class WorldLegacyLookupTable;
-
 namespace Widelands {
-
-class World;
 
 //
 // Description
@@ -42,7 +38,7 @@ public:
 	CritterDescr(const std::string& init_descname,
 	             const LuaTable&,
 	             const std::vector<std::string>& attribs);
-	~CritterDescr() override;
+	~CritterDescr() override = default;
 
 	Bob& create_object() const override;
 
@@ -101,12 +97,11 @@ public:
 
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
-	static MapObject::Loader*
-	load(EditorGameBase&, MapObjectLoader&, FileRead&, const WorldLegacyLookupTable& lookup_table);
+	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
 
 protected:
 	struct Loader : Bob::Loader {
-		Loader();
+		Loader() = default;
 
 		const Task* get_task(const std::string& name) override;
 		const MapObjectProgram* get_program(const std::string& name) override;
@@ -121,7 +116,7 @@ private:
 	static Task const taskRoam;
 	static Task const taskProgram;
 
-	uint32_t creation_time_;
+	Time creation_time_;
 };
 }  // namespace Widelands
 

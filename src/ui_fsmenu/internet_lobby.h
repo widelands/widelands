@@ -27,17 +27,25 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/menu.h"
 #include "wui/game_chat_panel.h"
 
-class FullscreenMenuInternetLobby : public FullscreenMenuLoadMapOrGame {
+namespace Widelands {
+struct TribeBasicInfo;
+}
+namespace FsMenu {
+class FullscreenMenuInternetLobby : public TwoColumnsBasicNavigationMenu {
 public:
-	FullscreenMenuInternetLobby(std::string&, std::string&, bool);
+	FullscreenMenuInternetLobby(FullscreenMenuMain&,
+	                            std::string&,
+	                            std::string&,
+	                            bool,
+	                            std::vector<Widelands::TribeBasicInfo>& tribeinfos);
 
 	void think() override;
 
 protected:
-	void clicked_ok() override;
+	void clicked_ok();
 
 private:
 	void layout() override;
@@ -59,10 +67,6 @@ private:
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
-	UI::Textarea title_;
-
-	UI::Box left_column_, right_column_;
-
 	// Left Column
 	UI::Textarea label_clients_online_;
 	UI::Table<const InternetClient* const> clientsonline_table_;
@@ -83,6 +87,9 @@ private:
 	const std::string nickname_;
 	const std::string password_;
 	bool is_registered_;
-};
 
+	// Tribes check
+	std::vector<Widelands::TribeBasicInfo>& tribeinfos_;
+};
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

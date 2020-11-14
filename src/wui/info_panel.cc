@@ -39,11 +39,10 @@ constexpr uint8_t kMaxMessages = 4;
 constexpr int16_t kMessagePreviewMaxLifetime = 15 * 1000;  // show messages for 15 seconds
 
 MessagePreview::MessagePreview(InfoPanel& i, const std::string& text, const std::string& tooltip)
-: UI::Textarea(&i, 0, 0, 0, 0,
+: UI::Textarea(&i, UI::PanelStyle::kWui, UI::FontStyle::kWuiGameSpeedAndCoordinates, 0, 0, 0, 0,
 			// Surround the text with some whitespaces for padding
 			std::string("   ") + text + "   ",
-			UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft,
-			g_style_manager->font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates)),
+			UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft),
 owner_(i),
 creation_time_(SDL_GetTicks()),
 message_(nullptr),
@@ -103,18 +102,17 @@ bool MessagePreview::handle_mousepress(uint8_t b, int32_t x, int32_t y) {
 }
 
 InfoPanel::InfoPanel(InteractiveBase& ib)
-: UI::Panel(&ib, 0, 0, 0, 0),
+: UI::Panel(&ib, UI::PanelStyle::kWui, 0, 0, 0, 0),
 ibase_(ib),
-font_(g_style_manager->font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates)),
 on_top_(get_config_bool("toolbar_pos_on_top", false)),
 display_mode_(DisplayMode::kPinned),
 last_mouse_pos_(Vector2i(-1, -1)),
 toolbar_(nullptr),
 toggle_mode_(this, "mode", 0, 0, MainToolbar::kButtonSize, 8, MainToolbar::kButtonSize, _("Info Panel Visibility"),
                   UI::DropdownType::kPictorial, UI::PanelStyle::kWui, UI::ButtonStyle::kWuiMenu),
-text_time_speed_(this, 0, 0, 0, 0, "", UI::Align::kLeft, font_),
-text_fps_(this, 0, 0, 0, 0, "", UI::Align::kLeft, font_),
-text_coords_(this, 0, 0, 0, 0, "", UI::Align::kRight, font_),
+text_time_speed_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiGameSpeedAndCoordinates, 0, 0, 0, 0, "", UI::Align::kLeft),
+text_fps_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiGameSpeedAndCoordinates, 0, 0, 0, 0, "", UI::Align::kLeft),
+text_coords_(this, UI::PanelStyle::kWui, UI::FontStyle::kWuiGameSpeedAndCoordinates, 0, 0, 0, 0, "", UI::Align::kRight),
 log_message_subscriber_(Notifications::subscribe<LogMessage>([this](const LogMessage& lm) { log_message(lm.msg); })),
 message_queue_(nullptr),
 last_message_id_(nullptr),
@@ -356,7 +354,7 @@ void InfoPanel::layout() {
 	toolbar_->set_pos(Vector2i((w - toolbar_->get_w()) / 2, on_top_ ? 0 : h - toolbar_->get_h()));
 	toolbar_->box.set_pos(Vector2i((toolbar_->get_w() - toolbar_->box.get_w()) / 2, on_top_ ? 0 : toolbar_->get_h() - toolbar_->box.get_h()));
 
-	const int16_t offset_y = (MainToolbar::kButtonSize - font_.size()) / 4 + kSpacing + (on_top_ ? 0 : get_h() - MainToolbar::kButtonSize);
+	const int16_t offset_y = (MainToolbar::kButtonSize - 20 /* font size estimate */) / 4 + kSpacing + (on_top_ ? 0 : get_h() - MainToolbar::kButtonSize);
 
 	text_coords_.set_size(w / 3, MainToolbar::kButtonSize);
 	text_coords_.set_pos(Vector2i(w - text_coords_.get_w() - kSpacing, offset_y));

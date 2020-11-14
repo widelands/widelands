@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
+descriptions:new_militarysite_type {
    name = "empire_castle",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Castle"),
@@ -24,11 +24,16 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your castle.",
-      aggressor = _"Your castle discovered an aggressor.",
-      attack = _"Your castle is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the castle.",
-      defeated_you = _"Your soldiers defeated the enemy at the castle."
+      -- TRANSLATORS: Message sent by an Empire military site
+      occupied = pgettext("empire_building", "Your soldiers have occupied your castle."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      aggressor = pgettext("empire_building", "Your castle discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      attack = pgettext("empire_building", "Your castle is under attack."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_enemy = pgettext("empire_building", "The enemy defeated your soldiers at the castle."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_you = pgettext("empire_building", "Your soldiers defeated the enemy at the castle.")
    },
 }
 

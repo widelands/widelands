@@ -23,7 +23,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/tool.h"
 
-inline EditorInteractive& EditorToolsizeMenu::eia() {
+inline EditorInteractive& EditorToolsizeMenu::eia() const {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
@@ -32,8 +32,17 @@ inline EditorInteractive& EditorToolsizeMenu::eia() {
  */
 EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
-     textarea_(this, 5, 10, 240, 10, std::string(), UI::Align::kCenter),
+   : UI::UniqueWindow(
+        &parent, UI::WindowStyle::kWui, "toolsize_menu", &registry, 250, 50, _("Tool Size")),
+     textarea_(this,
+               UI::PanelStyle::kWui,
+               UI::FontStyle::kWuiLabel,
+               5,
+               10,
+               240,
+               10,
+               std::string(),
+               UI::Align::kCenter),
      increase_(this,
                "incr",
                get_inner_w() / 2 - 10,

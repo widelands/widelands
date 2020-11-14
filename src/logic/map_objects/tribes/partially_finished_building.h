@@ -25,8 +25,6 @@
 
 namespace Widelands {
 
-class Request;
-
 /*
 PartiallyFinishedBuilding
 ---------------------------
@@ -74,10 +72,12 @@ public:
 	static void
 	request_builder_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
+	void add_worker(Worker&) override;
+
 private:
 	void request_builder(Game&);
 
-	virtual uint32_t build_step_time() const = 0;
+	virtual const Duration& build_step_time() const = 0;
 
 protected:
 	const BuildingDescr* building_;  // type of building that was or will become
@@ -91,7 +91,7 @@ protected:
 	Wares dropout_wares_;  // additional items to drop out immediately
 
 	bool working_;             // true if the builder is currently working
-	uint32_t work_steptime_;   // time when next step is completed
+	Time work_steptime_;       // time when next step is completed
 	uint32_t work_completed_;  // how many steps have we done so far?
 	uint32_t work_steps_;      // how many steps (= wares) until we're done?
 };

@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include "logic/widelands.h"
+#include "base/times.h"
 #include "sound/constants.h"
 
 namespace Widelands {
@@ -43,8 +43,6 @@ struct MapObjectProgram {
 	virtual ~MapObjectProgram() = default;
 
 protected:
-	static constexpr unsigned kMaxProbability = 10000U;
-
 	/// Splits a string by separators.
 	/// \note This ignores empty elements, so do not use this for example to split
 	/// a string with newline characters into lines, because it would ignore empty
@@ -84,13 +82,6 @@ protected:
 	 */
 	static Duration read_duration(const std::string& input, const MapObjectDescr& descr);
 
-	/**
-	 * @brief Reads a percentage
-	 * @param input A percentage in the format 12%, 12.5% or 12.53%.
-	 * @return Scaled precentage as integer, where 100% corresponds to kMaxProbability.
-	 * */
-	static unsigned read_percent_to_int(const std::string& input);
-
 	/// Left-hand and right-hand elements of a line in a program, e.g. parsed from "return=skipped
 	/// unless economy needs meal"
 	struct ProgramParseInput {
@@ -107,7 +98,7 @@ protected:
 		/// Animation ID
 		uint32_t animation = 0;
 		/// Animation duration before the next action will be called by the program.
-		Duration duration = 0;
+		Duration duration = Duration(0);
 	};
 	/// Parses the arguments for an animation action, e.g. { "working", "24000" }. If
 	/// 'is_idle_allowed' == false, throws a GameDataError if the animation is called "idle".

@@ -23,6 +23,8 @@
 #ifdef _WIN32
 #ifdef _MSC_VER
 #include <cstdio>
+#else
+#include <cstdint>
 #endif
 #endif
 #include <cstdlib>
@@ -34,7 +36,7 @@
 #include <dos.h>
 #include <windows.h>
 #ifdef _MSC_VER
-#include <direct.h>
+#include <corecrt_io.h>
 #define S_ISDIR(x) ((x & _S_IFDIR) ? 1 : 0)
 #endif
 #else  // not _WIN32
@@ -85,7 +87,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 #ifdef _WIN32
 	std::string buf;
 	struct _finddata_t c_file;
-	long hFile;
+	intptr_t hFile;
 
 	if (path.size())
 		buf = directory_ + '\\' + path + "\\*";
@@ -123,7 +125,7 @@ FilenameSet RealFSImpl::list_directory(const std::string& path) const {
 	glob_t gl;
 	int32_t ofs;
 
-	if (path.size()) {
+	if (!path.empty()) {
 		if (is_path_absolute(path)) {
 			buf = path + "/*";
 			ofs = 0;
@@ -263,8 +265,8 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 	}
 
 	FilenameSet files = list_directory(file);
-	for (FilenameSet::iterator pname = files.begin(); pname != files.end(); ++pname) {
-		std::string filename = fs_filename(pname->c_str());
+	for (const std::string& unlinkme : files) {
+		std::string filename = fs_filename(unlinkme.c_str());
 		if (filename == "..") {
 			continue;
 		}
@@ -272,10 +274,10 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 			continue;
 		}
 
-		if (is_directory(*pname)) {
-			unlink_directory(*pname);
+		if (is_directory(unlinkme)) {
+			unlink_directory(unlinkme);
 		} else {
-			unlink_file(*pname);
+			unlink_file(unlinkme);
 		}
 	}
 
@@ -441,7 +443,7 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
  */
 void RealFSImpl::write(const std::string& fname,
                        void const* const data,
-                       int32_t const length,
+                       size_t const length,
                        bool append) {
 	std::string fullname;
 

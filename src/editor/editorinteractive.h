@@ -54,7 +54,7 @@ const static std::string kEditorSplashImage = std::string(kTemplateDir) + "loads
 class EditorInteractive : public InteractiveBase {
 public:
 	struct Tools {
-		Tools(const Widelands::Map& map)
+		explicit Tools(const Widelands::Map& map)
 		   : current_pointer(&info),
 		     use_tool(EditorTool::First),
 		     increase_height(decrease_height, set_height),
@@ -93,9 +93,16 @@ public:
 	};
 	explicit EditorInteractive(Widelands::EditorGameBase&);
 
-	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
-	// map and run 'script_to_run' directly after all initialization is done.
-	static void run_editor(const std::string& filename, const std::string& script_to_run);
+	enum class Init {
+		kLoadMapDirectly,  // load the given map file, then run the given script if any
+		kDefault,          // create new empty map
+		kNew,              // show New Map window
+		kRandom,           // show Random Map window
+		kLoad              // show Load Map window
+	};
+	static void run_editor(EditorInteractive::Init,
+	                       const std::string& filename = "",
+	                       const std::string& script_to_run = "");
 
 	void load(const std::string& filename);
 	void cleanup_for_load() override;
@@ -149,6 +156,9 @@ public:
 	/// Access to the editor categories
 	const std::vector<std::unique_ptr<EditorCategory>>&
 	editor_categories(Widelands::MapObjectType type) const;
+
+	/// Ensure all world units have been loaded and fill editor categories
+	static void load_world_units(EditorInteractive*, Widelands::EditorGameBase&);
 
 private:
 	// For referencing the items in mainmenu_
@@ -204,9 +214,6 @@ private:
 	void toggle_bobs();
 	void toggle_grid();
 
-	/// Ensure all world units have been loaded and fill editor categories
-	void load_world_units();
-
 	//  state variables
 	bool need_save_;
 	uint32_t realtime_;
@@ -257,6 +264,8 @@ private:
 	bool draw_immovables_ = true;
 	bool draw_bobs_ = true;
 	bool draw_grid_ = true;
+
+	UI::UniqueWindow::Registry* registry_to_open_ = nullptr;
 };
 
 #endif  // end of include guard: WL_EDITOR_EDITORINTERACTIVE_H

@@ -237,7 +237,7 @@ public:
 
 	//  The next functions are really only needed in games, not in the editor.
 	void schedule_destroy(Game&);
-	uint32_t schedule_act(Game&, uint32_t tdelta, uint32_t data = 0);
+	Time schedule_act(Game&, const Duration& tdelta, uint32_t data = 0);
 	virtual void act(Game&, uint32_t data);
 
 	LogSink* get_logsink() {
@@ -356,7 +356,7 @@ protected:
 	                  const float scale,
 	                  RenderTarget* dst) const;
 
-	void molog(uint32_t gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
+	void molog(const Time& gametime, char const* fmt, ...) const PRINTF_FORMAT(3, 4);
 
 	const MapObjectDescr* descr_;
 	Serial serial_;
@@ -400,8 +400,6 @@ struct ObjectManager {
 	void insert(MapObject*);
 	void remove(MapObject&);
 
-	bool object_still_available(const MapObject* const) const;
-
 	/**
 	 * When saving the map object, ordere matters. Return a vector of all ids
 	 * that are currently available;
@@ -423,6 +421,7 @@ private:
 
 /**
  * Provides a safe pointer to a MapObject
+ * Make sure the MapObject is initialized (has a serial) before using it in ObjectPointer!
  */
 struct ObjectPointer {
 	// Provide default constructor to shut up cppcheck.
@@ -430,11 +429,13 @@ struct ObjectPointer {
 		serial_ = 0;
 	}
 	ObjectPointer(const MapObject* const obj) {
+		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj ? obj->serial_ : 0;
 	}
 	// can use standard copy constructor and assignment operator
 
 	ObjectPointer& operator=(const MapObject* const obj) {
+		assert(obj == nullptr || obj->serial_ != 0);
 		serial_ = obj ? obj->serial_ : 0;
 		return *this;
 	}
@@ -505,9 +506,9 @@ private:
 };
 
 struct CmdDestroyMapObject : public GameLogicCommand {
-	CmdDestroyMapObject() : GameLogicCommand(0), obj_serial(0) {
+	CmdDestroyMapObject() : GameLogicCommand(Time()), obj_serial(0) {
 	}  ///< For savegame loading
-	CmdDestroyMapObject(uint32_t t, MapObject&);
+	CmdDestroyMapObject(const Time&, MapObject&);
 	void execute(Game&) override;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -522,9 +523,9 @@ private:
 };
 
 struct CmdAct : public GameLogicCommand {
-	CmdAct() : GameLogicCommand(0), obj_serial(0), arg(0) {
+	CmdAct() : GameLogicCommand(Time()), obj_serial(0), arg(0) {
 	}  ///< For savegame loading
-	CmdAct(uint32_t t, MapObject&, int32_t a);
+	CmdAct(const Time& t, MapObject&, int32_t a);
 
 	void execute(Game&) override;
 

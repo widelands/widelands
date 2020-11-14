@@ -133,6 +133,7 @@ public:
 	 * Properties
 	 */
 	int get_buildings(lua_State*);
+	int get_builder(lua_State* L);
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
 	int get_ferry(lua_State*);
@@ -250,7 +251,6 @@ public:
 	int get_buildcost(lua_State*);
 	int get_becomes(lua_State*);
 	int get_terrain_affinity(lua_State*);
-	int get_owner_type(lua_State*);
 	int get_size(lua_State*);
 
 	/*
@@ -902,7 +902,7 @@ public:
 	 */
 	Widelands::MapObject*
 	get(lua_State*, Widelands::EditorGameBase&, const std::string& = "MapObject");
-	Widelands::MapObject* get_or_zero(Widelands::EditorGameBase&);
+	Widelands::MapObject* get_or_zero(const Widelands::EditorGameBase&);
 };
 
 class LuaBaseImmovable : public LuaMapObject {
@@ -1202,6 +1202,7 @@ public:
 	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
 	int get_is_stopped(lua_State* L);
+	int get_productivity(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -1467,6 +1468,7 @@ public:
 	int get_claimers(lua_State*);
 	int get_owner(lua_State*);
 	int get_buildable(lua_State*);
+	int get_has_roads(lua_State* L);
 
 	/*
 	 * Lua methods
@@ -1476,6 +1478,7 @@ public:
 	int region(lua_State* L);
 	int has_caps(lua_State*);
 	int has_max_caps(lua_State*);
+	int indicate(lua_State* L);
 
 	/*
 	 * C methods

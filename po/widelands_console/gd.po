@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-10-11 06:41+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"PO-Revision-Date: 2020-11-11 14:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -128,24 +128,29 @@ msgid " --nosound            Starts the game with sound disabled."
 msgstr " --nosound                 Tòisichidh seo an geama leis an fhuaim à comas."
 
 #: ../../src/wlapplication_messages.cc:94
+msgid ""
+" --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
+msgstr " --fail-on-lua-error       Spàrr tuisleadh air Widelands nuair a thachras mearachd Lua."
+
+#: ../../src/wlapplication_messages.cc:96
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr " --nozip                   Na sàbhail faidhlichean nan tasglannan\n                           bìnearaidh zip."
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:98
 msgid ""
 " --editor             Directly starts the Widelands editor.\n"
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr " --editor                  Tòisichidh seo an deasaiche Widelands sa bhad.\n                           'S urrainn dhut =AINM-FAIDHLE a chur ris\n                           gus am mapa air a bheil AINM-FAIDHLE a luchdadh\n                           sa bhad san deasaiche."
 
-#: ../../src/wlapplication_messages.cc:100
+#: ../../src/wlapplication_messages.cc:102
 msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://www.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
 msgstr " --ai_training             Cuiridh seo an comas modh trèanaidh na h-inntinne\n                           fuadain. Faic\n                           https://www.widelands.org/wiki/Ai%20Training/\n                           airson mìneachadh slàn air mar a dh'obraicheas\n                           loidsig trèanaidh na h-IF."
 
-#: ../../src/wlapplication_messages.cc:104
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --auto_speed         In multiplayer games only, this will keep\n"
 "                      adjusting the game speed automatically,\n"
@@ -153,17 +158,17 @@ msgid ""
 "                      --ai_training."
 msgstr " --auto_speed              Ann an geamannan ioma-chluicheadair a-mhàin,\n                           bidh seo a' cur gleus air luathas a' gheama\n                           gu fèin-obrachail a-rèir nam FPS. Tha seo\n                           feumail nuair a chleachdas tu\n                           --ai_training."
 
-#: ../../src/wlapplication_messages.cc:109
+#: ../../src/wlapplication_messages.cc:111
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=AINM-FAIDHLE   Tòisichidh seo am mapa AINM-FAIDHLE sa bhad\n                           mar mhapa cnàmh-sgeòil."
 
-#: ../../src/wlapplication_messages.cc:112
+#: ../../src/wlapplication_messages.cc:114
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=AINM-FAIDHLE   Luchdaichidh seo an geama air a shàbhaladh\n                           AINM-FAIDHLE sa bhad."
 
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:115
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -173,7 +178,7 @@ msgstr " --script=AINM-FAIDHLE     Ruith an sgriobt Lua seo às dèidh an tòise
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:119
+#: ../../src/wlapplication_messages.cc:121
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -181,7 +186,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[true|false]\n                           Co-dhiù an dèid gus nach dèid do chur sa mhodh\n                           togail rathaidean gu fèin-obrachail nuair a bhios\n                           bratach air a chur ann nach eil ceangailte ri rathad."
 
-#: ../../src/wlapplication_messages.cc:125
+#: ../../src/wlapplication_messages.cc:127
 msgid "Graphic options:"
 msgstr "Roghainnean grafaigeachd:"
 
@@ -189,22 +194,22 @@ msgstr "Roghainnean grafaigeachd:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:130
+#: ../../src/wlapplication_messages.cc:132
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[true|false]\n                           Co-dhiù an dèid gus nach dèid an sgrìn slàn a\n                           chleachdadh airson a' gheama."
 
-#: ../../src/wlapplication_messages.cc:134
+#: ../../src/wlapplication_messages.cc:136
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]              Leud na h-uinneige ann am piogsailean."
 
-#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:137
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]              Àirde na h-uinneige ann am piogsailean."
 
-#: ../../src/wlapplication_messages.cc:136
+#: ../../src/wlapplication_messages.cc:138
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]          Reat as motha nam frèamaichean lèirsinneach sa gheama."
 
@@ -212,17 +217,17 @@ msgstr " --maxfps=[5 ...]          Reat as motha nam frèamaichean lèirsinneach
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:143
 msgid "Options for the internal window manager:"
 msgstr "Roghainnean airson manaidsear nan uinneagan taobh a-staigh:"
 
-#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr " --animate_map_panning=[yes|no]\n                           Am bi beòthachadh air gluasadan fèin-obrachail a’ mhapa\n                           gus nach bi."
 
-#: ../../src/wlapplication_messages.cc:145
+#: ../../src/wlapplication_messages.cc:147
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -234,7 +239,7 @@ msgstr " --border_snap_distance=[0 ...]\n                           Gluais uinne
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:153
+#: ../../src/wlapplication_messages.cc:155
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -242,7 +247,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[true|false]\n                           Thoir oir na h-uinneige ri taobh oir na sgrìn\n                           air falbh nuair a bhios oir na h-uinneige ri oir\n                           na sgrìn."
 
-#: ../../src/wlapplication_messages.cc:158
+#: ../../src/wlapplication_messages.cc:160
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -250,7 +255,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                           Gluais uinneag gu oir na panail ma bhios i taobh\n                           a-staigh an astair seo o oir na panail."
 
-#: ../../src/wlapplication_messages.cc:163
+#: ../../src/wlapplication_messages.cc:165
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -258,15 +263,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                           Na gluais uinneag gu oir panail ma bhios i\n                           tar-chòmdaichte leis a' phanail."
 
-#: ../../src/wlapplication_messages.cc:169
+#: ../../src/wlapplication_messages.cc:171
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose                 Cuir teachdaireachdan dì-bhugachaidh briathrach\n                           an comas"
 
-#: ../../src/wlapplication_messages.cc:170
+#: ../../src/wlapplication_messages.cc:172
 msgid " --help               Show this help"
 msgstr " --help                    Seall a' chobhair seo"
 
-#: ../../src/wlapplication_messages.cc:171
+#: ../../src/wlapplication_messages.cc:173
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://www.widelands.org/\n"

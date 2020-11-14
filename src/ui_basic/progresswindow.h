@@ -20,13 +20,14 @@
 #ifndef WL_UI_BASIC_PROGRESSWINDOW_H
 #define WL_UI_BASIC_PROGRESSWINDOW_H
 
+#include <memory>
+
 #include <SDL_events.h>
 
 #include "base/rect.h"
+#include "graphic/note_graphic_resolution_changed.h"
 #include "graphic/styles/progress_bar_style.h"
-#include "ui_basic/fullscreen_window.h"
-
-class RenderTarget;
+#include "ui_basic/panel.h"
 
 namespace UI {
 
@@ -44,7 +45,7 @@ struct IProgressVisualization {
 };
 
 /// Manages a progress window on the screen.
-struct ProgressWindow : public UI::FullscreenWindow {
+struct ProgressWindow : public UI::Panel {
 	explicit ProgressWindow(const std::string& theme, const std::string& background);
 	~ProgressWindow() override;
 
@@ -66,13 +67,16 @@ private:
 	VisualizationArray visualizations_;
 	std::string theme_;
 	std::string background_;
-	const UI::ProgressbarStyleInfo& style_;
+	const UI::ProgressbarStyleInfo& progress_style_;
 
 	static std::vector<SDL_Event> event_buffer_;
 	static bool ui_key(bool down, SDL_Keysym code);
 
 	void draw(RenderTarget&) override;
 	void update(bool repaint);
+
+	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
+	   graphic_resolution_changed_subscriber_;
 };
 }  // namespace UI
 

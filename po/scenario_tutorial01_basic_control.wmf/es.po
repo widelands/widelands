@@ -9,7 +9,7 @@
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiba Gasteiz, 2015
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
-# Madkat Here, 2015-2016
+# Madkat Here, 2015-2016,2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2020
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 # Walter Benkel <tromaster@gmail.com>, 2020
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-10 05:36+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"PO-Revision-Date: 2020-10-25 19:32+0000\n"
+"Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -170,8 +170,9 @@ msgstr "Tenemos que encontrar un lugar agradable para la cabaña del leñador. P
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:80
 msgid ""
-"Left-click the ‘OK’ button to close this window so that I can show you how."
-msgstr "Haga clic izquierdo en el botón 'Aceptar' para cerrar esta ventana así que puede mostrarlo."
+"Left-click the ‘OK’ button to close this window. I'll show you where the "
+"menu is and where to show and hide the building spaces."
+msgstr "Haz clic con el botón izquierdo en el botón \"Aceptar\" para cerrar esta ventana. Te mostraré dónde está el menú y dónde mostrar y ocultar las zonas de construcción."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
@@ -182,9 +183,9 @@ msgstr "Toma en cuenta que no puedes cerrar esta ventana mediante un clic derech
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:91
 msgid ""
-"Now that I have shown you how to show and hide the building spaces, please "
-"switch them on again so that we can place our first building."
-msgstr "Ahora que te enseñé cómo mostrar y ocultar las zonas de construcción, por favor actívalas nuevamente para que podamos situar nuestro primer edificio."
+"Now that I have shown you where to show and hide the building spaces, please"
+" switch them on so that we can place our first building."
+msgstr "Ahora que te he enseñado dónde mostrar y ocultar las zonas de construcción, activalos para que podamos colocar nuestro primer edificio."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"

@@ -43,7 +43,7 @@ namespace AI {
  */
 struct ComputerPlayer {
 	ComputerPlayer(Widelands::Game&, const Widelands::PlayerNumber);
-	virtual ~ComputerPlayer();
+	virtual ~ComputerPlayer() = default;
 
 	virtual void think() = 0;
 
@@ -66,9 +66,9 @@ struct ComputerPlayer {
 		std::string descname;
 		std::string icon_filename;
 		Type type;
-		explicit Implementation(std::string init_name,
-		                        std::string init_descname,
-		                        std::string init_icon_filename,
+		explicit Implementation(const std::string& init_name,
+		                        const std::string& init_descname,
+		                        const std::string& init_icon_filename,
 		                        Type init_type)
 		   : name(init_name),
 		     descname(init_descname),

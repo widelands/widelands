@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
+descriptions:new_militarysite_type {
    name = "atlanteans_tower_high",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("atlanteans_building", "High Tower"),
@@ -25,11 +25,16 @@ tribes:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your high tower.",
-      aggressor = _"Your high tower discovered an aggressor.",
-      attack = _"Your high tower is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the high tower.",
-      defeated_you = _"Your soldiers defeated the enemy at the high tower."
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      occupied = pgettext("atlanteans_building", "Your soldiers have occupied your high tower."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      aggressor = pgettext("atlanteans_building", "Your high tower discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      attack = pgettext("atlanteans_building", "Your high tower is under attack."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      defeated_enemy = pgettext("atlanteans_building", "The enemy defeated your soldiers at the high tower."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      defeated_you = pgettext("atlanteans_building", "Your soldiers defeated the enemy at the high tower.")
    },
 }
 

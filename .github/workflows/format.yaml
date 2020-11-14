@@ -18,19 +18,36 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        persist-credentials: false
     - name: Fetching branch info
       run: |
-        echo "::set-env name=branch::${GITHUB_REF##*/}"
+        echo "branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
         git config --global user.name "The Widelands Code Formatting Bot"
-        git config --global user.email "actions@github.com"
+        export ACTOR_NAME="${GITHUB_REPOSITORY%/*}"
+        if [ "$ACTOR_NAME" == "widelands" ]
+        then
+          export ACTOR_NAME="bunnybot"
+          git config --global user.email "bunnybot@widelands.org"
+        else
+          git config --global user.email "$(git log -1 --format=\"%ae\")"
+        fi
+        export PAT="${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
+        if [ -z "$PAT" ]
+        then
+          export PAT="${{ secrets.GITHUB_TOKEN }}"
+          echo "WARNING: You did not create a personal access token yet. Please do so soon! See https://github.com/widelands/widelands/#code for more information."
+        fi
+        echo "PAT=$PAT" >> $GITHUB_ENV
+        echo "ACTOR_NAME=$ACTOR_NAME" >> $GITHUB_ENV
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         cat <<- EOF > $HOME/.netrc
         machine github.com
-        login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
+        login $ACTOR_NAME
+        password $PAT
         machine api.github.com
-        login $GITHUB_ACTOR
-        password ${{ secrets.GITHUB_TOKEN }}
+        login $ACTOR_NAME
+        password $PAT
         EOF
         chmod 600 $HOME/.netrc
     - name: Installing python
@@ -81,7 +98,7 @@ jobs:
             fi
           fi
         fi
-        echo "::set-env name=COMMIT_MESSAGE::$files"
+        echo "COMMIT_MESSAGE=$files" >> $GITHUB_ENV
     - name: Pushing changes
       run: |
         if [ -z "$COMMIT_MESSAGE" ]
@@ -99,8 +116,9 @@ jobs:
         if [ "$latest" == "${{ github.sha }}" ]
         then
           echo "No remote changes"
+          git remote add push_target https://${ACTOR_NAME}:${PAT}@github.com/${GITHUB_REPOSITORY}.git
           git commit -m "$COMMIT_MESSAGE"
-          git push origin "$branch"
+          git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."
         else
           echo "The remote branch '$branch' ($GITHUB_REF) from '${{ github.repository }}' was updated from '${{ github.sha }}' to '$latest', cancel"

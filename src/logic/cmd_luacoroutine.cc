@@ -35,15 +35,12 @@
 
 namespace Widelands {
 
-CmdLuaCoroutine::~CmdLuaCoroutine() {
-}
-
 void CmdLuaCoroutine::execute(Game& game) {
 	try {
 		int rv = cr_->resume();
 		const uint32_t sleeptime = cr_->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command(new Widelands::CmdLuaCoroutine(sleeptime, std::move(cr_)));
+			game.enqueue_command(new Widelands::CmdLuaCoroutine(Time(sleeptime), std::move(cr_)));
 		} else if (rv == LuaCoroutine::DONE) {
 			cr_.reset();
 		}

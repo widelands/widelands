@@ -36,27 +36,26 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
-#include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/worker.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/player.h"
 
 namespace Widelands {
 
-static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
+static const Duration kBuildingLeaveInterval = Duration(1000);
 /**
  * The contents of 'table' are documented in doc/sphinx/source/lua_tribes_buildings.rst.org
  */
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             Tribes& tribes)
+                             Descriptions& descriptions)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
-     tribes_(tribes),
+     descriptions_(descriptions),
      buildable_(table.has_key("buildcost")),
      can_be_dismantled_(table.has_key("return_on_dismantle")),
      destructible_(table.has_key("destructible") ? table.get_bool("destructible") : true),
@@ -66,7 +65,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhancement_(INVALID_INDEX),
      enhanced_from_(INVALID_INDEX),
      enhanced_building_(false),
-     hints_(table.get_table("aihints")),
+     hints_(table.get_table("aihints"), name()),
      vision_range_(0) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Building %s has no idle animation", name().c_str());
@@ -117,13 +116,13 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			if (enh == name()) {
 				throw wexception("enhancement to same type");
 			}
-			DescriptionIndex const en_i = tribes.load_building(enh);
-			if (tribes_.building_exists(en_i)) {
+			DescriptionIndex const en_i = descriptions.load_building(enh);
+			if (descriptions.building_exists(en_i)) {
 				enhancement_ = en_i;
 
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
-				const BuildingDescr* tmp_enhancement = tribes_.get_building_descr(en_i);
+				const BuildingDescr* tmp_enhancement = descriptions.get_building_descr(en_i);
 				for (auto area : tmp_enhancement->workarea_info_) {
 					std::set<std::string>& strs = workarea_info_[area.first];
 					for (const std::string& str : area.second) {
@@ -141,13 +140,15 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			if (enhancement_name == name()) {
 				throw GameDataError("Building '%s' has enhancement to same type", name().c_str());
 			}
-			DescriptionIndex const enhancement_idx = tribes.load_building(enhancement_name);
-			if (tribes_.building_exists(enhancement_idx)) {
+			DescriptionIndex const enhancement_idx = descriptions.load_building(enhancement_name);
+			if (descriptions.building_exists(enhancement_idx)) {
 				enhancement_ = enhancement_idx;
-				BuildingDescr* enhanced_building = tribes_.get_mutable_building_descr(enhancement_idx);
+				BuildingDescr* enhanced_building =
+				   descriptions.get_mutable_building_descr(enhancement_idx);
 				enhanced_building->set_enhancement_cost(
-				   Buildcost(enhancement_table->get_table("enhancement_cost"), tribes),
-				   Buildcost(enhancement_table->get_table("enhancement_return_on_dismantle"), tribes));
+				   Buildcost(enhancement_table->get_table("enhancement_cost"), descriptions),
+				   Buildcost(
+				      enhancement_table->get_table("enhancement_return_on_dismantle"), descriptions));
 
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
@@ -169,14 +170,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
-		returns_on_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), tribes);
+		returns_on_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), descriptions);
 	}
 	if (table.has_key("buildcost")) {
 		if (!table.has_key("return_on_dismantle")) {
 			throw wexception(
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
 		}
-		buildcost_ = Buildcost(table.get_table("buildcost"), tribes);
+		buildcost_ = Buildcost(table.get_table("buildcost"), descriptions);
 	}
 
 	if (table.has_key("enhancement_cost")) {
@@ -187,8 +188,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                    "\"return_on_dismantle_on_enhanced\"",
 			                    name().c_str());
 		}
-		set_enhancement_cost(Buildcost(table.get_table("enhancement_cost"), tribes),
-		                     Buildcost(table.get_table("return_on_dismantle_on_enhanced"), tribes));
+		set_enhancement_cost(
+		   Buildcost(table.get_table("enhancement_cost"), descriptions),
+		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), descriptions));
 	}
 
 	needs_seafaring_ = false;
@@ -217,20 +219,14 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
                                 Coords const pos,
                                 bool const construct,
                                 bool loading,
-                                FormerBuildings const former_buildings) const {
-	std::pair<DescriptionIndex, std::string> immovable = std::make_pair(INVALID_INDEX, "");
-	if (built_over_immovable_ != INVALID_INDEX) {
+                                const FormerBuildings& former_buildings) const {
+	DescriptionIndex immovable = INVALID_INDEX;
+	if (built_over_immovable_ != INVALID_INDEX && !loading) {
 		bool immovable_previously_found = false;
 		for (const auto& pair : former_buildings) {
-			if (!pair.second.empty()) {
-				const MapObjectDescr* d;
-				if (pair.second == "world") {
-					d = egbase.world().get_immovable_descr(pair.first);
-				} else if (pair.second == "tribe") {
-					d = egbase.tribes().get_immovable_descr(pair.first);
-				} else {
-					throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
-				}
+			// 'false' means we're building on top of an immovable
+			if (!pair.second) {
+				const MapObjectDescr* d = egbase.descriptions().get_immovable_descr(pair.first);
 				if (d->has_attribute(built_over_immovable_)) {
 					immovable_previously_found = true;
 					break;
@@ -244,10 +240,7 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 			    f.field->get_immovable()->has_attribute(built_over_immovable_)) {
 				upcast(const ImmovableDescr, imm, &f.field->get_immovable()->descr());
 				assert(imm);
-				immovable =
-				   imm->owner_type() == MapObjectDescr::OwnerType::kWorld ?
-				      std::make_pair(egbase.world().get_immovable_index(imm->name()), "world") :
-				      std::make_pair(egbase.tribes().safe_immovable_index(imm->name()), "tribe");
+				immovable = egbase.descriptions().immovable_index(imm->name());
 			} else {
 				throw wexception(
 				   "Attempting to build %s at %dx%d – no immovable with required attribute %i found",
@@ -259,9 +252,10 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 	Building& b = construct ? create_constructionsite() : create_object();
 	b.position_ = pos;
 	b.set_owner(owner);
-	if (immovable.first != INVALID_INDEX) {
-		assert(!immovable.second.empty());
-		b.old_buildings_.push_back(immovable);
+	if (immovable != INVALID_INDEX) {
+		// Remember that we're building on top of an immovable so we can put it back if the building
+		// gets removed
+		b.old_buildings_.push_back(std::make_pair(immovable, false));
 	}
 	for (const auto& pair : former_buildings) {
 		b.old_buildings_.push_back(pair);
@@ -276,7 +270,9 @@ Building& BuildingDescr::create(EditorGameBase& egbase,
 
 bool BuildingDescr::suitability(const Map&, const FCoords& fc) const {
 	return (mine_ ? fc.field->nodecaps() & Widelands::BUILDCAPS_MINE :
-	                size_ <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK)) &&
+	                size_ <= ((built_over_immovable_ == INVALID_INDEX ? fc.field->nodecaps() :
+	                                                                    fc.field->maxcaps()) &
+	                          Widelands::BUILDCAPS_SIZEMASK)) &&
 	       (built_over_immovable_ == INVALID_INDEX ||
 	        (fc.field->get_immovable() &&
 	         fc.field->get_immovable()->has_attribute(built_over_immovable_)));
@@ -330,7 +326,7 @@ Create a construction site for this type of building
 */
 Building& BuildingDescr::create_constructionsite() const {
 	BuildingDescr const* const descr =
-	   tribes_.get_building_descr(tribes_.safe_building_index("constructionsite"));
+	   descriptions_.get_building_descr(descriptions_.safe_building_index("constructionsite"));
 	ConstructionSite& csite = dynamic_cast<ConstructionSite&>(descr->create_object());
 	csite.set_building(*this);
 
@@ -438,7 +434,7 @@ uint32_t Building::get_playercaps() const {
 	return caps;
 }
 
-void Building::start_animation(EditorGameBase& egbase, uint32_t const anim) {
+void Building::start_animation(const EditorGameBase& egbase, uint32_t const anim) {
 	anim_ = anim;
 	animstart_ = egbase.get_gametime();
 }
@@ -482,15 +478,10 @@ bool Building::init(EditorGameBase& egbase) {
 	}
 
 	for (const auto& pair : old_buildings_) {
-		if (!pair.second.empty()) {
+		// 'false' means we're building on top of an immovable
+		if (!pair.second) {
 			assert(!was_immovable_);
-			if (pair.second == "world") {
-				was_immovable_ = egbase.world().get_immovable_descr(pair.first);
-			} else if (pair.second == "tribe") {
-				was_immovable_ = egbase.tribes().get_immovable_descr(pair.first);
-			} else {
-				throw wexception("Invalid FormerBuildings type: %s", pair.second.c_str());
-			}
+			was_immovable_ = egbase.descriptions().get_immovable_descr(pair.first);
 			assert(was_immovable_);
 			break;
 		}
@@ -499,7 +490,6 @@ bool Building::init(EditorGameBase& egbase) {
 	// Start the animation
 	start_animation(egbase, descr().get_unoccupied_animation());
 
-	owner_->add_seer(*this);
 	if (descr().type() == MapObjectType::WAREHOUSE) {
 		set_seeing(true);
 	}
@@ -509,8 +499,7 @@ bool Building::init(EditorGameBase& egbase) {
 }
 
 void Building::cleanup(EditorGameBase& egbase) {
-	owner_->remove_seer(
-	   *this, Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
+	set_seeing(false);
 
 	if (defeating_player_) {
 		Player* defeating_player = egbase.get_player(defeating_player_);
@@ -595,9 +584,7 @@ void Building::destroy(EditorGameBase& egbase) {
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire) {
-		egbase.create_immovable_with_name(pos, "destroyed_building",
-		                                  MapObjectDescr::OwnerType::kTribe, building_owner,
-		                                  building_descr);
+		egbase.create_immovable_with_name(pos, "destroyed_building", building_owner, building_descr);
 	}
 }
 
@@ -623,7 +610,7 @@ std::string Building::info_string(const InfoStringFormat& format) {
 	return result;
 }
 
-InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const) {
+InputQueue& Building::inputqueue(DescriptionIndex const wi, WareWorker const, const Request*) {
 	throw wexception("%s (%u) has no InputQueue for %u", descr().name().c_str(), serial(), wi);
 }
 
@@ -659,11 +646,11 @@ bool Building::leave_check_and_wait(Game& game, Worker& w) {
 	}
 
 	// Check time and queue
-	uint32_t const time = game.get_gametime();
+	const Time& time = game.get_gametime();
 
 	if (leave_queue_.empty()) {
 		if (leave_time_ <= time) {
-			leave_time_ = time + BUILDING_LEAVE_INTERVAL;
+			leave_time_ = time + kBuildingLeaveInterval;
 			return true;
 		}
 
@@ -696,7 +683,7 @@ Advance the leave queue.
 ===============
 */
 void Building::act(Game& game, uint32_t const data) {
-	uint32_t const time = game.get_gametime();
+	const Time& time = game.get_gametime();
 
 	if (leave_time_ <= time) {
 		bool wakeup = false;
@@ -711,7 +698,7 @@ void Building::act(Game& game, uint32_t const data) {
 				leave_allow_ = worker;
 
 				if (worker->wakeup_leave_building(game, *this)) {
-					leave_time_ = time + BUILDING_LEAVE_INTERVAL;
+					leave_time_ = time + kBuildingLeaveInterval;
 					wakeup = true;
 					break;
 				}
@@ -745,28 +732,29 @@ bool Building::fetch_from_flag(Game& game) {
 	return false;
 }
 
-void Building::draw(uint32_t gametime,
+void Building::draw(const Time& gametime,
                     const InfoToDraw info_to_draw,
                     const Vector2f& point_on_dst,
                     const Widelands::Coords& coords,
                     const float scale,
                     RenderTarget* dst) {
+	const Time t((gametime - animstart_).get());
+
 	if (was_immovable_) {
 		if (info_to_draw & InfoToDraw::kShowBuildings) {
-			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
-			                    gametime - animstart_, &get_owner()->get_playercolor());
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
+			                    &get_owner()->get_playercolor());
 		} else {
-			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(),
-			                    gametime - animstart_, nullptr, kBuildingSilhouetteOpacity);
+			dst->blit_animation(point_on_dst, coords, scale, was_immovable_->main_animation(), t,
+			                    nullptr, kBuildingSilhouetteOpacity);
 		}
 	}
 
 	if (info_to_draw & InfoToDraw::kShowBuildings) {
-		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_,
-		                    &get_owner()->get_playercolor());
+		dst->blit_animation(point_on_dst, coords, scale, anim_, t, &get_owner()->get_playercolor());
 	} else {
-		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_, nullptr,
-		                    kBuildingSilhouetteOpacity);
+		dst->blit_animation(
+		   point_on_dst, coords, scale, anim_, t, nullptr, kBuildingSilhouetteOpacity);
 	}
 
 	//  door animation?
@@ -790,47 +778,31 @@ void Building::draw_info(const InfoToDraw info_to_draw,
 	             point_on_dst, scale, dst);
 }
 
-int32_t
-Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool adjust) const {
-	int32_t priority = kPriorityNormal;
+const WarePriority& Building::get_priority(const WareWorker type,
+                                           const DescriptionIndex ware_index) const {
 	if (type == wwWARE) {
-		// if priority is defined for specific ware,
-		// combine base priority and ware priority
-		std::map<DescriptionIndex, int32_t>::const_iterator it = ware_priorities_.find(ware_index);
+		const auto it = ware_priorities_.find(ware_index);
 		if (it != ware_priorities_.end()) {
-			priority = adjust ? (priority * it->second / kPriorityNormal) : it->second;
+			return it->second;
 		}
 	}
 
-	return priority;
-}
-
-/**
- * Collect priorities assigned to wares of this building
- * priorities are identified by ware type and index
- */
-void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const {
-	if (ware_priorities_.empty()) {
-		return;
-	}
-	std::map<DescriptionIndex, int32_t>& ware_priorities = p[wwWARE];
-	std::map<DescriptionIndex, int32_t>::const_iterator it;
-	for (it = ware_priorities_.begin(); it != ware_priorities_.end(); ++it) {
-		if (it->second == kPriorityNormal) {
-			continue;
-		}
-		ware_priorities[it->first] = it->second;
-	}
+	return WarePriority::kNormal;
 }
 
 /**
  * Set base priority for this building (applies for all wares)
  */
-void Building::set_priority(int32_t const type,
-                            DescriptionIndex const ware_index,
-                            int32_t const new_priority) {
+void Building::set_priority(const WareWorker type,
+                            const DescriptionIndex ware_index,
+                            const WarePriority& new_priority) {
 	if (type == wwWARE) {
-		ware_priorities_[ware_index] = new_priority;
+		// WarePriority is not default-constructible, so no [] access :(
+		if (ware_priorities_.count(ware_index)) {
+			ware_priorities_.at(ware_index) = new_priority;
+		} else {
+			ware_priorities_.emplace(ware_index, new_priority);
+		}
 	}
 }
 
@@ -845,9 +817,9 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 	      flag_->get_position().y);
 
 	molog(egbase.get_gametime(), "anim: %s\n", descr().get_animation_name(anim_).c_str());
-	molog(egbase.get_gametime(), "animstart: %i\n", animstart_);
+	molog(egbase.get_gametime(), "animstart: %i\n", animstart_.get());
 
-	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_);
+	molog(egbase.get_gametime(), "leave_time: %i\n", leave_time_.get());
 
 	molog(egbase.get_gametime(), "leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF
@@ -856,10 +828,10 @@ void Building::log_general_info(const EditorGameBase& egbase) const {
 }
 
 void Building::add_worker(Worker& worker) {
-	if (get_workers().empty()) {
-		if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
-			set_seeing(true);
-		}
+	// Builders should make partially finished building see, but not finished buildings.
+	// So we prevent builders from seeing here and override this in PartiallyFinishedBuilding.
+	if (owner().tribe().safe_worker_index(worker.descr().name()) != owner().tribe().builder()) {
+		set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
 	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kWorkersChanged));
@@ -890,10 +862,20 @@ void Building::set_soldier_control(SoldierControl* new_soldier_control) {
  * \note Warehouses always see their surroundings; this is handled separately.
  */
 void Building::set_seeing(bool see) {
+	if (see == seeing_) {
+		return;
+	}
+
+	Player* player = get_owner();
+	const Map& map = player->egbase().map();
+
+	if (see) {
+		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	} else {
+		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	}
+
 	seeing_ = see;
-	get_owner()->update_vision(
-	   Area<FCoords>(owner().egbase().map().get_fcoords(get_position()), descr().vision_range()),
-	   see);
 }
 
 /**
@@ -921,9 +903,10 @@ void Building::send_message(Game& game,
                             const std::string& heading,
                             const std::string& description,
                             bool link_to_building_lifetime,
-                            uint32_t throttle_time,
+                            const Duration& throttle_time,
                             uint32_t throttle_radius) {
-	if (mute_messages() || owner().is_muted(game.tribes().safe_building_index(descr().name()))) {
+	if (mute_messages() ||
+	    owner().is_muted(game.descriptions().safe_building_index(descr().name()))) {
 		return;
 	}
 
@@ -935,7 +918,7 @@ void Building::send_message(Game& game,
 	                                         heading, rt_description, get_position(),
 	                                         (link_to_building_lifetime ? serial_ : 0)));
 
-	if (throttle_time) {
+	if (throttle_time.get() > 0) {
 		get_owner()->add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
 	} else {
 		get_owner()->add_message(game, std::move(msg));

@@ -39,10 +39,11 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
                                  int32_t const y,
                                  uint32_t const w,
                                  uint32_t const h)
-   : UI::Window(game->get_ipl(), "story_message_box", x, y, w, h, title.c_str()),
-     main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
-     button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
-     textarea_(&main_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, body),
+   : UI::Window(game->get_ipl(), UI::WindowStyle::kWui, "story_message_box", x, y, w, h, title),
+     main_box_(this, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
+     button_box_(
+        &main_box_, UI::PanelStyle::kWui, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
+     textarea_(&main_box_, 0, 0, 100, 50, UI::PanelStyle::kWui, body),
      ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      desired_speed_(game->game_controller()->desired_speed()),
      game_(game) {
@@ -72,16 +73,27 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	}
 	move_inside_parent();
 	textarea_.focus();
+
+	if (!is_modal()) {
+		resume_game();
+	}
 }
 
 void StoryMessageBox::clicked_ok() {
+	if (is_modal()) {
+		resume_game();
+		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+	} else {
+		die();
+	}
+}
+
+void StoryMessageBox::resume_game() {
 	// Manually force the game to reevaluate its current state, especially time information.
 	game_->game_controller()->think();
 	// Now get the game running again.
 	game_->game_controller()->set_desired_speed(desired_speed_);
 	game_->save_handler().set_allow_saving(true);
-
-	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 bool StoryMessageBox::handle_mousepress(const uint8_t btn, int32_t mx, int32_t my) {

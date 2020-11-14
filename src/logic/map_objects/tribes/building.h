@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H
 
+#include <memory>
+
 #include "ai/ai_hints.h"
 #include "base/macros.h"
 #include "logic/map_objects/buildcost.h"
@@ -35,19 +37,16 @@
 namespace Widelands {
 
 class InputQueue;
-
-constexpr int32_t kPriorityLow = 2;
-constexpr int32_t kPriorityNormal = 4;
-constexpr int32_t kPriorityHigh = 8;
+class Request;
 
 constexpr float kBuildingSilhouetteOpacity = 0.3f;
 
-/* The value "" means that the DescriptionIndex is a normal building, as happens e.g. when enhancing
- * a building. The value "tribe"/"world" means that the DescriptionIndex refers to an immovable of
- * OwnerType kTribe/kWorld, as happens e.g. with amazon treetop sentry. This immovable
- * should therefore always be painted below the building image.
+/* The value 'true' means that the DescriptionIndex is a normal building, as
+ * happens e.g. when enhancing a building. The value 'false' means that the
+ * DescriptionIndex refers to an immovable, as happens e.g. with amazon treetop sentry. This
+ * immovable should therefore always be painted below the building image.
  */
-using FormerBuildings = std::vector<std::pair<DescriptionIndex, std::string>>;
+using FormerBuildings = std::vector<std::pair<DescriptionIndex, bool>>;
 
 /*
  * Common to all buildings!
@@ -57,7 +56,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              Tribes& tribes);
+	              Descriptions& descriptions);
 	~BuildingDescr() override {
 	}
 
@@ -146,7 +145,7 @@ public:
 	                 Coords,
 	                 bool construct,
 	                 bool loading = false,
-	                 FormerBuildings former_buildings = FormerBuildings()) const;
+	                 const FormerBuildings& former_buildings = FormerBuildings()) const;
 
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
@@ -176,7 +175,7 @@ protected:
 private:
 	void set_enhancement_cost(const Buildcost& enhance_cost, const Buildcost& return_enhanced);
 
-	const Tribes& tribes_;
+	const Descriptions& descriptions_;
 	const bool buildable_;     // the player can build this himself
 	bool can_be_dismantled_;   // the player can dismantle this building
 	const bool destructible_;  // the player can destruct this himself
@@ -259,7 +258,11 @@ public:
 	}
 
 	/// \returns the queue for the matching ware or worker type or \throws WException.
-	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker);
+	/// This is usually called when a ware wants to enter the queue that requested it, so
+	/// the Request is passed for disambiguation. This may be nullptr, e.g. when we want
+	/// to get info about a queue. Currently disambiguation is used only by warehouse
+	/// code because expedition bootstraps may have multiple queues for the same item.
+	virtual InputQueue& inputqueue(DescriptionIndex, WareWorker, const Request*);
 
 	virtual bool burn_on_destroy();
 	void destroy(EditorGameBase&) override;
@@ -277,15 +280,8 @@ public:
 	bool leave_check_and_wait(Game&, Worker&);
 	void leave_skip(Game&, Worker&);
 
-	// Get/Set the priority for this waretype for this building. 'type' defines
-	// if this is for a worker or a ware, 'index' is the type of worker or ware.
-	// If 'adjust' is false, the three possible states kPriorityHigh,
-	// kPriorityNormal and kPriorityLow are returned, otherwise numerical
-	// values adjusted to the preciousness of the ware in general are returned.
-	virtual int32_t get_priority(WareWorker type, DescriptionIndex, bool adjust = true) const;
-	void set_priority(int32_t type, DescriptionIndex ware_index, int32_t new_priority);
-
-	void collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const;
+	const WarePriority& get_priority(WareWorker, DescriptionIndex) const;
+	void set_priority(WareWorker, DescriptionIndex, const WarePriority&);
 
 	/**
 	 * The former buildings vector keeps track of all former buildings
@@ -294,7 +290,7 @@ public:
 	 * empty except enhancements. For a dismantle site, the last item will
 	 * be the one being dismantled.
 	 */
-	const FormerBuildings get_former_buildings() {
+	const FormerBuildings& get_former_buildings() {
 		return old_buildings_;
 	}
 
@@ -314,7 +310,7 @@ public:
 	void add_worker(Worker&) override;
 	void remove_worker(Worker&) override;
 
-	virtual const BuildingSettings* create_building_settings() const {
+	virtual std::unique_ptr<const BuildingSettings> create_building_settings() const {
 		return nullptr;
 	}
 
@@ -340,7 +336,7 @@ public:
 	                  const std::string& heading,
 	                  const std::string& description,
 	                  bool link_to_building_lifetime = true,
-	                  uint32_t throttle_time = 0,
+	                  const Duration& throttle_time = Duration(0),
 	                  uint32_t throttle_radius = 0);
 
 	bool mute_messages() const {
@@ -350,7 +346,7 @@ public:
 		mute_messages_ = m;
 	}
 
-	void start_animation(EditorGameBase&, uint32_t anim);
+	void start_animation(const EditorGameBase&, uint32_t anim);
 
 	bool is_seeing() const {
 		return seeing_;
@@ -366,7 +362,7 @@ protected:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
-	void draw(uint32_t gametime,
+	void draw(const Time& gametime,
 	          InfoToDraw info_to_draw,
 	          const Vector2f& point_on_dst,
 	          const Coords& coords,
@@ -383,17 +379,17 @@ protected:
 	Flag* flag_;
 
 	uint32_t anim_;
-	int32_t animstart_;
+	Time animstart_;
 
 	using LeaveQueue = std::vector<OPtr<Worker>>;
 	LeaveQueue leave_queue_;     //  FIFO queue of workers leaving the building
-	uint32_t leave_time_;        //  when to wake the next one from leave queue
+	Time leave_time_;            //  when to wake the next one from leave queue
 	ObjectPointer leave_allow_;  //  worker that is allowed to leave now
 
 	//  The player who has defeated this building.
 	PlayerNumber defeating_player_;
 
-	std::map<DescriptionIndex, int32_t> ware_priorities_;
+	std::map<DescriptionIndex, WarePriority> ware_priorities_;
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool seeing_;

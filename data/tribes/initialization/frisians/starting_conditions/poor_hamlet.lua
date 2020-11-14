@@ -10,7 +10,7 @@ local r = {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Poor Hamlet",
    -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
-   tooltip = _"Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can't successfully start from this",
+   tooltip = _"Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can’t successfully start from this.",
    func =  function(player, shared_in_start)
       local sf = wl.Game().map.player_slots[player.number].starting_field
       if shared_in_start then
@@ -44,7 +44,7 @@ local r = {
       player:conquer(sf, 9)
 
       push_textdomain("tribes")
-      player:send_message(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
+      player:send_to_inbox(_"Be careful", _"You have only one iron for each tool you will need to start your economy. Make sure no unneeded tool is created.")
       pop_textdomain()
 
       check_trees_rocks_poor_hamlet(player, sf, "frisians_warehouse", {granite = 1}, {log = 1, brick = 1, reed = 1, shovel = 1})
