@@ -179,7 +179,6 @@ wl_library(logic_commands
     base_i18n
     base_log
     base_macros
-    base_multithreading
     base_times
     economy # TODO(GunChleoc): Circular dependency
     graphic_text_layout
