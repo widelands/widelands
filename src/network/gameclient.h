@@ -115,6 +115,8 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
+	void send_cheating_info();
+
 	FullscreenMenuMain& fullscreen_menu_main() const {
 		return fsmm_;
 	}

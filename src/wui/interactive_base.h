@@ -322,6 +322,8 @@ protected:
 	UI::UniqueWindow::Registry debugconsole_;
 #endif
 
+	void broadcast_cheating_message();
+
 private:
 	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();

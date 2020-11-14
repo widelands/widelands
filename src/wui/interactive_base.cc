@@ -46,6 +46,8 @@
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry.h"
+#include "network/gameclient.h"
+#include "network/gamehost.h"
 #include "scripting/lua_interface.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
@@ -1451,6 +1453,15 @@ void InteractiveBase::show_ship_window(Widelands::Ship* ship) {
 	registry.create();
 }
 
+void InteractiveBase::broadcast_cheating_message() {
+	if (upcast(GameHost, h, game().game_controller())) {
+		h->send_system_message_code(
+		   "CHEAT", player_number() ? game().player(player_number()).get_name() : "");
+	} else if (upcast(GameClient, c, game().game_controller())) {
+		c->send_cheating_info();
+	}
+}
+
 bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	if (quick_navigation_.handle_key(down, code)) {
 		return true;
@@ -1467,16 +1478,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			if (cheat_mode_enabled_) {
 				cheat_mode_enabled_ = false;
 			} else if (code.mod & KMOD_CTRL) {
-				if (chat_provider_) {
-					const std::string msg1 = "This player has enabled the cheating mode!";
-					/** TRANSLATORS: This is a chat message which is automatically sent to all players
-					 * when a player enables cheating mode */
-					const std::string msg2 = _("This player has enabled the cheating mode!");
-					chat_provider_->send(msg1);
-					if (msg1 != msg2) {
-						chat_provider_->send(msg2);
-					}
-				}
+				broadcast_cheating_message();
 				cheat_mode_enabled_ = true;
 			}
 			break;
@@ -1502,16 +1504,7 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
 	const std::string cmd = boost::algorithm::join(args, " ");
 
-	if (chat_provider_) {
-		const std::string msg1 = "This player has just used the cheating console!";
-		/** TRANSLATORS: This is a chat message which is automatically sent to all players when a
-		 * player uses the debug console */
-		const std::string msg2 = _("This player has just used the cheating console!");
-		chat_provider_->send(msg1);
-		if (msg1 != msg2) {
-			chat_provider_->send(msg2);
-		}
-	}
+	broadcast_cheating_message();
 
 	DebugConsole::write("Starting Lua interpretation!");
 	try {
