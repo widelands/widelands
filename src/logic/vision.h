@@ -164,7 +164,7 @@ public:
 private:
 	enum class Override : uint8_t { kNormal = 0, kHidden = 1, kRevealed = 2 };
 	uint16_t value_ : 14;
-	Override override_ : 2;
+	Vision::Override override_ : 8;
 };
 
 }  // namespace Widelands
