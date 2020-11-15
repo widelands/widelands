@@ -1,5 +1,5 @@
 run(function()
-   game.desired_speed = 30 * 1000
+   game.desired_speed = 5 * 1000
 
     -- placing a ship on coast
    p1:place_ship(map:get_field(8, 8))

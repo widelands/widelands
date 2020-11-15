@@ -1,7 +1,7 @@
 -- Main logic.
 run(function()
    sleep(100)
-   game.desired_speed = 10 * 1000
+   game.desired_speed = 1000
 
    -- Start and immediately cancel an expedition.
    print("---- 1 -----")
