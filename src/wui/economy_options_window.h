@@ -47,7 +47,8 @@ struct NoteEconomyProfile {
 
 class EconomyOptionsWindow : public UI::Window {
 public:
-	EconomyOptionsWindow(InteractiveBase* parent,
+	EconomyOptionsWindow(UI::Panel* parent,
+	                     Widelands::Descriptions* descriptions,
 	                     Widelands::Economy* ware_economy,
 	                     Widelands::Economy* worker_economy,
 	                     Widelands::WareWorker type,
@@ -62,7 +63,8 @@ public:
 	};
 
 	// Create an economy options window for the given flag
-	static void create(InteractiveBase* parent,
+	static void create(UI::Panel* parent,
+	                   Widelands::Descriptions* descriptions,
 	                   const Widelands::Flag& flag,
 	                   Widelands::WareWorker type,
 	                   bool can_act);
@@ -192,7 +194,9 @@ private:
 	void update_profiles_select(const std::string&);
 
 	SaveProfileWindow* save_profile_dialog_;
-	Widelands::EditorGameBase* egbase_;  // Mutable for saveloading
+	// Mutable to allow dynamic loading of the correct ware/worker indices in case an old savegame
+	// has been loaded
+	Widelands::Descriptions* descriptions_;
 };
 
 #endif  // end of include guard: WL_WUI_ECONOMY_OPTIONS_WINDOW_H

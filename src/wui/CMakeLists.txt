@@ -52,7 +52,6 @@ wl_library(wui_economy_options
     notifications
     io_profile
     ui_basic
-    wui
     wui_waresdisplay
 )
 
