@@ -23,8 +23,6 @@
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
-#include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "wui/suggested_teams_box.h"
