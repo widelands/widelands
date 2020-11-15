@@ -1138,7 +1138,10 @@ std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings
 			}
 		}
 	}
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	return std::move(settings);
 }
 
 /// Changes the default anim string to \li anim
