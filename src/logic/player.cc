@@ -1828,8 +1828,9 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 	}
 	if (forbid) {
 		forbid_attack_.emplace(who);
+	} else {
+		forbid_attack_.erase(it);
 	}
-	forbid_attack_.erase(it);
 }
 
 /**
