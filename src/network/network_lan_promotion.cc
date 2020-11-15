@@ -393,10 +393,10 @@ LanGamePromoter::LanGamePromoter() : LanBase(kWidelandsLanPromotionPort) {
 	gameinfo.version = LAN_PROMOTION_PROTOCOL_VERSION;
 	gameinfo.state = LAN_GAME_OPEN;
 
-	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion));
+	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion) - 1);
 	gameinfo.gameversion[sizeof(gameinfo.gameversion) - 1] = '\0';
 
-	strncpy(gameinfo.hostname, boost::asio::ip::host_name().c_str(), sizeof(gameinfo.hostname));
+	strncpy(gameinfo.hostname, boost::asio::ip::host_name().c_str(), sizeof(gameinfo.hostname) - 1);
 	gameinfo.hostname[sizeof(gameinfo.hostname) - 1] = '\0';
 }
 
@@ -435,7 +435,7 @@ void LanGamePromoter::run() {
 }
 
 void LanGamePromoter::set_map(char const* map) {
-	strncpy(gameinfo.map, map, sizeof(gameinfo.map));
+	strncpy(gameinfo.map, map, sizeof(gameinfo.map) - 1);
 	gameinfo.map[sizeof(gameinfo.map) - 1] = '\0';
 
 	needupdate = true;
