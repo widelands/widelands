@@ -392,9 +392,9 @@ Warehouse::Warehouse(const WarehouseDescr& warehouse_descr)
      attack_target_(this),
      soldier_control_(this),
      supply_(new WarehouseSupply(this)),
-     next_military_act_(0),
+     next_military_act_(Time(0)),
+     next_stock_remove_act_(Time(0)),
      portdock_(nullptr) {
-	next_stock_remove_act_ = Time(0);
 	cleanup_in_progress_ = false;
 	set_attack_target(&attack_target_);
 	set_soldier_control(&soldier_control_);
@@ -1447,7 +1447,10 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 		pair.second = get_worker_policy(pair.first);
 	}
 	settings->launch_expedition = portdock_ && portdock_->expedition_started();
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	return std::move(settings);
 }
 
 void Warehouse::log_general_info(const EditorGameBase& egbase) const {

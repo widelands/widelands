@@ -37,11 +37,16 @@ descriptions:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      occupied = _"Your soldiers have occupied your treetop sentry.",
-      aggressor = _"Your treetop sentry discovered an aggressor.",
-      attack = _"Your treetop sentry is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the treetop sentry.",
-      defeated_you = _"Your soldiers defeated the enemy at the treetop sentry."
+      -- TRANSLATORS: Message sent by an Amazon military site
+      occupied = pgettext("amazons_building", "Your soldiers have occupied your treetop sentry."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      aggressor = pgettext("amazons_building", "Your treetop sentry discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      attack = pgettext("amazons_building", "Your treetop sentry is under attack."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      defeated_enemy = pgettext("amazons_building", "The enemy defeated your soldiers at the treetop sentry."),
+      -- TRANSLATORS: Message sent by an Amazon military site
+      defeated_you = pgettext("amazons_building", "Your soldiers defeated the enemy at the treetop sentry.")
    },
 }
 

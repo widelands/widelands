@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-30 06:25+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
 "PO-Revision-Date: 2020-07-23 07:48+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Turkish (http://www.transifex.com/widelands/widelands/language/tr/)\n"
@@ -112,29 +112,29 @@ msgstr "Depolarındaki değerli eşyalar için puan kazanırsın. 4 saat sonunda
 msgid "Points"
 msgstr "Puanlar"
 
-#: ../../data/scripting/win_conditions/collectors.lua:134
+#: ../../data/scripting/win_conditions/collectors.lua:154
 #, lua-format
 msgid "Status for %s"
 msgstr "%s için durum"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:147
+#: ../../data/scripting/win_conditions/collectors.lua:167
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:151
+#: ../../data/scripting/win_conditions/collectors.lua:171
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Toplam %i puan"
 msgstr[1] "Toplam %i puan"
 
-#: ../../data/scripting/win_conditions/collectors.lua:173
+#: ../../data/scripting/win_conditions/collectors.lua:193
 #, lua-format
 msgid "Status for Team %d"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/collectors.lua:175
+#: ../../data/scripting/win_conditions/collectors.lua:195
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

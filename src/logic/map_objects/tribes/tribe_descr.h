@@ -66,6 +66,7 @@ public:
 
 	const std::string& name() const;
 	const std::string& descname() const;
+	const std::string& military_capacity_script() const;
 
 	size_t get_nrwares() const;
 	size_t get_nrworkers() const;
@@ -168,12 +169,13 @@ private:
 	// Make sure that everything is there and that dependencies are calculated
 	void finalize_loading(Descriptions& descriptions);
 	// Helper function to calculate trainingsites proportions for the AI
-	void calculate_trainingsites_proportions(Descriptions& descriptions);
+	void calculate_trainingsites_proportions(const Descriptions& descriptions);
 
 	void process_productionsites(Descriptions& descriptions);
 
 	const std::string name_;
 	const std::string descname_;
+	const std::string military_capacity_script_;
 	const Descriptions& descriptions_;
 
 	uint32_t frontier_animation_id_;

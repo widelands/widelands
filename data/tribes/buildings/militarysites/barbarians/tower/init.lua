@@ -49,11 +49,16 @@ descriptions:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your tower.",
-      aggressor = _"Your tower discovered an aggressor.",
-      attack = _"Your tower is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the tower.",
-      defeated_you = _"Your soldiers defeated the enemy at the tower."
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      occupied = pgettext("barbarians_building", "Your soldiers have occupied your tower."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      aggressor = pgettext("barbarians_building", "Your tower discovered an aggressor."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      attack = pgettext("barbarians_building", "Your tower is under attack."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      defeated_enemy = pgettext("barbarians_building", "The enemy defeated your soldiers at the tower."),
+      -- TRANSLATORS: Message sent by a Barbarian military site
+      defeated_you = pgettext("barbarians_building", "Your soldiers defeated the enemy at the tower.")
    },
 }
 
