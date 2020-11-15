@@ -30,6 +30,7 @@
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
+#include "scripting/lua_globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/lua_root.h"
 #include "scripting/lua_table.h"
@@ -186,6 +187,13 @@ void LuaGameInterface::read_global_env(FileRead& fr,
 
 	// Clean out the garbage before returning.
 	lua_gc(lua_state_, LUA_GCCOLLECT, 0);
+}
+
+void LuaGameInterface::read_textdomain_stack(FileRead& fr) {
+	LuaGlobals::read_textdomain_stack(fr, lua_state_);
+}
+void LuaGameInterface::write_textdomain_stack(FileWrite& fw) {
+	LuaGlobals::write_textdomain_stack(fw, lua_state_);
 }
 
 uint32_t LuaGameInterface::write_global_env(FileWrite& fw, Widelands::MapObjectSaver& mos) {

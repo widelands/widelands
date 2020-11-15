@@ -489,7 +489,8 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 	if (imm->descr().type() == Widelands::MapObjectType::IMMOVABLE) {
 		// Trees, Resource Indicators, fields ...
 		return set_tooltip(imm->descr().descname());
-	} else if (upcast(Widelands::ProductionSite, productionsite, imm)) {
+	}
+	if (upcast(Widelands::ProductionSite, productionsite, imm)) {
 		// No productionsite tips for hostile players
 		if (player == nullptr || !player->is_hostile(*productionsite->get_owner())) {
 			return set_tooltip(

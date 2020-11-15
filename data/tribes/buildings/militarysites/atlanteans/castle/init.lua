@@ -37,11 +37,11 @@
 --        defined like this::
 --
 --            messages = {
---                occupied = _"Your soldiers have occupied your fortress.",
---                aggressor = _"Your fortress discovered an aggressor.",
---                attack = _"Your fortress is under attack.",
---                defeated_enemy = _"The enemy defeated your soldiers at the fortress.",
---                defeated_you = _"Your soldiers defeated the enemy at the fortress."
+--                occupied = pgettext("atlanteans_building", "Your soldiers have occupied your fortress."),
+--                aggressor = pgettext("atlanteans_building", "Your fortress discovered an aggressor."),
+--                attack = pgettext("atlanteans_building", "Your fortress is under attack."),
+--                defeated_enemy = pgettext("atlanteans_building", "The enemy defeated your soldiers at the fortress."),
+--                defeated_you = pgettext("atlanteans_building", "Your soldiers defeated the enemy at the fortress.")
 --            }
 --
 -- For making the UI texts translateable, we also need to push/pop the correct textdomain.
@@ -149,11 +149,16 @@ descriptions:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your castle.",
-      aggressor = _"Your castle discovered an aggressor.",
-      attack = _"Your castle is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the castle.",
-      defeated_you = _"Your soldiers defeated the enemy at the castle."
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      occupied = pgettext("atlanteans_building", "Your soldiers have occupied your castle."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      aggressor = pgettext("atlanteans_building", "Your castle discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      attack = pgettext("atlanteans_building", "Your castle is under attack."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      defeated_enemy = pgettext("atlanteans_building", "The enemy defeated your soldiers at the castle."),
+      -- TRANSLATORS: Message sent by an Atlantean military site
+      defeated_you = pgettext("atlanteans_building", "Your soldiers defeated the enemy at the castle.")
    },
 }
 

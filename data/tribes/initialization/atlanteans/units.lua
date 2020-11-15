@@ -43,6 +43,8 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
+--    **military_capacity_script**: File path to the :ref:`military_capacity.lua <lua_tribes_tribes_military_capacity>` file.
+--
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
 --    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
 --    and may also define ``fps`` (integer frames per second).
@@ -264,6 +266,7 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "atlanteans",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {3, 12} },
