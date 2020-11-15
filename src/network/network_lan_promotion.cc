@@ -65,11 +65,9 @@ int get_ip_version(const boost::asio::ip::udp& version) {
 
 /*** class LanBase ***/
 /**
- * \internal
- * In an ideal world, we would use the same code with boost asio for all three operating systems.
- * Unfortunately, it isn't that easy and we need some platform specific code.
- * For IPv4, windows needs a special case: For Linux and Apple we have to iterate over all assigned
- * IPv4
+ * \internal In an ideal world, we would use the same code with boost asio for all three operating
+ * systems. Unfortunately, it isn't that easy and we need some platform specific code. For IPv4,
+ * windows needs a special case: For Linux and Apple we have to iterate over all assigned IPv4
  * addresses (e.g. 192.168.1.68), transform them to broadcast addresses (e.g. 192.168.1.255) and
  * send our
  * packets to those addresses. For windows, we simply can send to 255.255.255.255.
