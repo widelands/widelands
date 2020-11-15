@@ -126,13 +126,9 @@ static std::string assemble_infotext_for_map(const Widelands::Map& map,
 
 // MapDetailsBox implementation
 
-MapDetailsBox::MapDetailsBox(Panel* parent,
-                             const bool preconfigured,
-                             const uint32_t padding,
-                             const bool select_map_dropdown)
+MapDetailsBox::MapDetailsBox(Panel* parent, const uint32_t padding)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      padding_(padding),
-     preconfigured_(preconfigured),
      title_(this,
             UI::PanelStyle::kFsMenu,
             UI::FontStyle::kFsGameSetupHeadings,
@@ -153,30 +149,6 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
                0,
                _("No map selected"),
                UI::Align::kLeft),
-     select_map_button_(select_map_dropdown ?
-                           nullptr :
-                           new UI::Button(&title_box_,
-                                          "change_map",
-                                          0,
-                                          0,
-                                          0,
-                                          0,
-                                          UI::ButtonStyle::kFsMenuSecondary,
-                                          g_image_cache->get("images/wui/menus/toggle_minimap.png"),
-                                          _("Change map"))),
-     select_map_dropdown_(select_map_dropdown ? new UI::Dropdown<std::function<void()>>(
-                                                   &title_box_,
-                                                   "change_map_or_save",
-                                                   0,
-                                                   0,
-                                                   50,
-                                                   3,
-                                                   20,
-                                                   _("Change map or saved game"),
-                                                   UI::DropdownType::kPictorialMenu,
-                                                   UI::PanelStyle::kFsMenu,
-                                                   UI::ButtonStyle::kFsMenuSecondary) :
-                                                nullptr),
      map_description_(&content_box_,
                       0,
                       0,
@@ -193,13 +165,6 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 	add_space(3 * padding);
 	title_box_.add(&map_name_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	title_box_.add_inf_space();
-	if (select_map_dropdown_) {
-		select_map_dropdown_->set_image(g_image_cache->get("images/wui/menus/toggle_minimap.png"));
-		select_map_dropdown_->selected.connect([this]() { select_map_dropdown_->get_selected()(); });
-		title_box_.add(select_map_dropdown_, UI::Box::Resizing::kAlign, UI::Align::kRight);
-	} else {
-		title_box_.add(select_map_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
-	}
 	add(&title_box_, UI::Box::Resizing::kFullSize);
 	add_space(3 * padding);
 	add(&content_box_, UI::Box::Resizing::kExpandBoth);
@@ -210,16 +175,6 @@ MapDetailsBox::MapDetailsBox(Panel* parent,
 
 void MapDetailsBox::update_from_savegame(GameSettingsProvider* settings) {
 	const GameSettings& game_settings = settings->settings();
-
-	const bool e = settings->can_change_map() && !preconfigured_;
-	if (select_map_button_) {
-		select_map_button_->set_visible(e);
-		select_map_button_->set_enabled(e);
-	} else {
-		select_map_dropdown_->set_visible(e);
-		select_map_dropdown_->set_enabled(e);
-	}
-
 	show_map_description_savegame(game_settings);
 	show_map_name(game_settings);
 }
@@ -229,15 +184,6 @@ void MapDetailsBox::show_map_description_savegame(const GameSettings& game_setti
 }
 
 void MapDetailsBox::update(GameSettingsProvider* settings, Widelands::Map& map) {
-	const bool e = settings->can_change_map() && !preconfigured_;
-	if (select_map_button_) {
-		select_map_button_->set_visible(e);
-		select_map_button_->set_enabled(e);
-	} else {
-		select_map_dropdown_->set_visible(e);
-		select_map_dropdown_->set_enabled(e);
-	}
-
 	map_name_.set_text(map.get_name());
 	show_map_description(map, settings);
 	suggested_teams_box_.show(map.get_suggested_teams());
@@ -255,28 +201,8 @@ void MapDetailsBox::show_map_description(const Widelands::Map& map,
 	set_map_description_text(assemble_infotext_for_map(map, settings->settings()));
 }
 
-void MapDetailsBox::set_select_map_action(const std::function<void()>& action) {
-	assert(select_map_button_);
-	select_map_button_->sigclicked.connect(action);
-}
-void MapDetailsBox::add_select_map_action(const std::function<void()>& action,
-                                          const std::string& label,
-                                          const Image* img) {
-	assert(select_map_dropdown_);
-	select_map_dropdown_->add(label, action, img);
-}
-void MapDetailsBox::open_dropdown() {
-	assert(select_map_dropdown_);
-	select_map_dropdown_->set_list_visibility(true);
-}
-
 void MapDetailsBox::force_new_dimensions(uint32_t width, uint32_t height) {
 	map_name_.set_fixed_width(width - height);
-	if (select_map_button_) {
-		select_map_button_->set_desired_size(height, height);
-	} else {
-		select_map_dropdown_->set_desired_size(height, height);
-	}
 	content_box_.set_max_size(
 	   width, get_h() - title_.get_h() - title_box_.get_h() - 2 * 3 * padding_);
 }

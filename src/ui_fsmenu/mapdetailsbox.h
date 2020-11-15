@@ -31,18 +31,11 @@
 
 class MapDetailsBox : public UI::Box {
 public:
-	MapDetailsBox(Panel* parent, bool preconfigured, uint32_t padding, bool select_map_dropdown);
+	MapDetailsBox(Panel* parent, uint32_t padding);
 	~MapDetailsBox() override = default;
 
 	void update(GameSettingsProvider* settings, Widelands::Map& map);
 	void update_from_savegame(GameSettingsProvider* settings);
-
-	/// passed callback is called when the select map button is clicked
-	void set_select_map_action(const std::function<void()>& action);
-	/// add an entry to the select map/savegame dropdown
-	void add_select_map_action(const std::function<void()>&, const std::string& label, const Image*);
-
-	void open_dropdown();
 
 	void force_new_dimensions(uint32_t width, uint32_t height);
 
@@ -52,14 +45,11 @@ public:
 
 private:
 	int padding_;
-	bool preconfigured_;
 
 	UI::Textarea title_;
 	UI::Box title_box_;
 	UI::Box content_box_;
 	UI::Textarea map_name_;
-	UI::Button* select_map_button_;
-	UI::Dropdown<std::function<void()>>* select_map_dropdown_;
 	UI::MultilineTextarea map_description_;
 	UI::SuggestedTeamsBox suggested_teams_box_;
 

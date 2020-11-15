@@ -41,7 +41,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                        const bool preconfigured,
                        const bool mpg)
    : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
-     map_details_(&right_column_content_box_, preconfigured, kPadding, mpg),
+     map_details_(&right_column_content_box_, kPadding),
 
      configure_game(&right_column_content_box_,
                     UI::PanelStyle::kFsMenu,
@@ -69,6 +69,22 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                                 UI::PanelStyle::kFsMenu,
                                 Vector2i::zero(),
                                 _("Custom starting positions")),
+     choose_map_(settings.can_change_map() && !preconfigured ? new UI::Button(&right_column_content_box_,
+                                          "choose_map",
+                                          0,
+                                          0,
+                                          0,
+                                          ok_.get_h(),
+                                          UI::ButtonStyle::kFsMenuSecondary,
+                                          _("Change map…")) : nullptr),
+     choose_savegame_(mpg && settings.can_change_map() && !preconfigured ? new UI::Button(&right_column_content_box_,
+                                          "choose_savegame",
+                                          0,
+                                          0,
+                                          0,
+                                          ok_.get_h(),
+                                          UI::ButtonStyle::kFsMenuSecondary,
+                                          _("Change saved game…")) : nullptr),
 
      // Variables and objects used in the menu
      settings_(settings),
@@ -77,6 +93,12 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
+	if (choose_map_) {
+		choose_map_->sigclicked.connect([this]() { clicked_select_map(); });
+	}
+	if (choose_savegame_) {
+		choose_savegame_->sigclicked.connect([this]() { clicked_select_savegame(); });
+	}
 	ok_.set_title(_("Start game"));
 
 	lua_ = new LuaInterface();
@@ -97,9 +119,17 @@ void LaunchGame::add_all_widgets() {
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
-	right_column_content_box_.add(&peaceful_);
+	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
-	right_column_content_box_.add(&custom_starting_positions_);
+	right_column_content_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
+	if (choose_map_) {
+		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add(choose_map_, UI::Box::Resizing::kFullSize);
+	}
+	if (choose_savegame_) {
+		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add(choose_savegame_, UI::Box::Resizing::kFullSize);
+	}
 }
 
 void LaunchGame::add_behaviour_to_widgets() {
@@ -110,7 +140,7 @@ void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
-	map_details_.set_max_size(0, right_column_box_.get_h() / 2);
+	map_details_.set_max_size(0, right_column_box_.get_h() / 3);
 	map_details_.force_new_dimensions(right_column_width_, standard_height_);
 }
 

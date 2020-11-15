@@ -81,7 +81,6 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
 		update();
 		layout();
 	} else {
-		map_details_.set_select_map_action([this]() { clicked_select_map(); });
 		clicked_select_map();
 	}
 }

@@ -52,6 +52,9 @@ public:
 protected:
 	LuaInterface* lua_;
 
+	virtual void clicked_select_map() = 0;
+	virtual void clicked_select_savegame() = 0;
+
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this
 	/// is a scenario or a savegame.
 	/// Creates a blank label/tooltip and returns 'false' otherwise.
@@ -86,6 +89,8 @@ protected:
 	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
+	UI::Button* choose_map_;
+	UI::Button* choose_savegame_;
 	std::string last_win_condition_;
 
 	GameSettingsProvider& settings_;

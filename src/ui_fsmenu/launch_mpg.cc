@@ -73,11 +73,6 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
-	map_details_.add_select_map_action([this]() { select_map(); }, _("Choose map…"),
-	                                   g_image_cache->get("images/wui/menus/toggle_minimap.png"));
-	map_details_.add_select_map_action([this]() { select_saved_game(); }, _("Choose saved game…"),
-	                                   g_image_cache->get("images/wui/menus/save_game.png"));
-
 	if (settings_.can_change_map()) {
 		map_details_.set_map_description_text(_("Please select a map or saved game."));
 	} else {
@@ -96,11 +91,6 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 		}
 	});
 	layout();
-
-	// If we are the host, open the map or save selection menu at startup
-	if (settings_.settings().usernum == 0 && settings_.settings().mapname.empty()) {
-		map_details_.open_dropdown();
-	}
 }
 
 LaunchMPG::~LaunchMPG() {
@@ -139,7 +129,7 @@ void LaunchMPG::win_condition_selected() {
 /**
  * Select a map and send all information to the user interface.
  */
-void LaunchMPG::select_map() {
+void LaunchMPG::clicked_select_map() {
 	if (settings_.can_change_map()) {
 		new MapSelect(*this, &settings_, ctrl_, egbase_);
 	}
@@ -163,7 +153,7 @@ void LaunchMPG::clicked_select_map_callback(const MapData* map, const bool scena
  * Select a multi player saved game and send all information to the user
  * interface.
  */
-void LaunchMPG::select_saved_game() {
+void LaunchMPG::clicked_select_savegame() {
 	if (!settings_.can_change_map()) {
 		return;
 	}

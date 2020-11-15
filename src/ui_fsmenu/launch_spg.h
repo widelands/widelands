@@ -42,7 +42,10 @@ public:
 
 protected:
 	void clicked_ok() override;
-	void clicked_select_map();
+	void clicked_select_map() override;
+	void clicked_select_savegame() override {
+		NEVER_HERE();  // not available in singleplayer
+	}
 
 private:
 	void win_condition_selected() override;
