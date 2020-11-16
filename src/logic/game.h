@@ -281,7 +281,10 @@ public:
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
+	void send_player_enemyflagaction(const Flag&,
+	                                 PlayerNumber,
+	                                 const std::vector<Serial>&,
+	                                 bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
 	void send_player_ship_scouting_direction(const Ship&, WalkingDir);

@@ -156,7 +156,14 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 20
+   trainer_patience = 20,
+
+   messages = {
+      -- TRANSLATORS: Atlantean training site tooltip when it has no soldiers assigned
+      no_soldier = pgettext("atlanteans_building", "No soldier to train!"),
+      -- TRANSLATORS: Atlantean training site tooltip when none of the present soldiers match the current training program
+      no_soldier_for_level = pgettext("atlanteans_building", "No soldier found for this training level!"),
+   },
 }
 
 pop_textdomain()

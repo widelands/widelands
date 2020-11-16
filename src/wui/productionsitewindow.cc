@@ -339,8 +339,6 @@ void ProductionSiteWindow::worker_table_dropdown_clicked() {
 	assert(worker_type_->has_selection());
 	const Widelands::DescriptionIndex selected = worker_type_->get_selected();
 
-	const std::vector<std::pair<Widelands::DescriptionIndex, Widelands::Quantity>>
-	   working_positions = ps->descr().working_positions();
 	const size_t selected_index = worker_table_->get_selected();
 	Widelands::Worker* worker =
 	   ps->working_positions()[selected_index].worker.get(ibase()->egbase());

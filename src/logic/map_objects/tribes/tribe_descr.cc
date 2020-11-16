@@ -144,6 +144,9 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
                        const LuaTable* scenario_table)
    : name_(table.get_string("name")),
      descname_(info.descname),
+     military_capacity_script_(table.has_key<std::string>("military_capacity_script") ?
+                                  table.get_string("military_capacity_script") :
+                                  ""),
      descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
@@ -158,6 +161,12 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      initializations_(info.initializations) {
 	log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums");
+
+	if (military_capacity_script_.empty() || !g_fs->file_exists(military_capacity_script_)) {
+		// TODO(GunChleoc): API compatibility - require after v 1.0
+		log_warn("File '%s' for military_capacity_script for tribe '%s' does not exist",
+		         military_capacity_script_.c_str(), name().c_str());
+	}
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -515,6 +524,9 @@ const std::string& TribeDescr::name() const {
 const std::string& TribeDescr::descname() const {
 	return descname_;
 }
+const std::string& TribeDescr::military_capacity_script() const {
+	return military_capacity_script_;
+}
 
 size_t TribeDescr::get_nrwares() const {
 	return wares_.size();
@@ -776,7 +788,7 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(Descriptions& descriptions) {
+void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descriptions) {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;
@@ -869,8 +881,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				descriptions.get_mutable_worker_descr(job.first)->add_employer(index);
 			}
 			// Resource info
-			for (const std::string& r : productionsite->collected_resources()) {
-				used_resources_.insert(r);
+			for (const auto& r : productionsite->collected_resources()) {
+				used_resources_.insert(r.first);
 			}
 			for (const std::string& r : productionsite->created_resources()) {
 				used_resources_.insert(r);
@@ -1007,8 +1019,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		for (const std::string& resource : prod->created_resources()) {
 			add_creator(resource, prod);
 		}
-		for (const std::string& resource : prod->collected_resources()) {
-			add_collector(resource, prod);
+		for (const auto& resource : prod->collected_resources()) {
+			add_collector(resource.first, prod);
 		}
 		for (const std::string& bob : prod->collected_bobs()) {
 			add_collector(bob, prod);
@@ -1083,11 +1095,11 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 		}
-		for (const std::string& item : prod->collected_resources()) {
+		for (const auto& item : prod->collected_resources()) {
 			// Sites that collect resources and sites of other types that create resources for them
 			// should overlap each other
-			if (creators.count(item)) {
-				for (ProductionSiteDescr* creator : creators.at(item)) {
+			if (creators.count(item.first)) {
+				for (ProductionSiteDescr* creator : creators.at(item.first)) {
 					if (creator != prod) {
 						prod->add_supported_by_productionsite(creator->name());
 						creator->add_supports_productionsite(prod->name());
@@ -1095,8 +1107,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 			// Sites that collect resources should not overlap sites that collect the same resource
-			if (collectors.count(item)) {
-				for (const ProductionSiteDescr* collector : collectors.at(item)) {
+			if (collectors.count(item.first)) {
+				for (const ProductionSiteDescr* collector : collectors.at(item.first)) {
 					prod->add_competing_productionsite(collector->name());
 				}
 			}

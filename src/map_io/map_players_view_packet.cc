@@ -44,7 +44,8 @@ constexpr uint16_t kCurrentPacketVersion = 5;
 enum class SavedVisionState {
 	kNone = '0',            // Neither of the below states
 	kPreviouslySeen = 'P',  // Previously seen, unseen now
-	kRevealed = 'R'         // Explicitly revealed
+	kRevealed = 'R',        // Explicitly revealed
+	kHidden = 'H'           // Explicitly hidden
 };
 
 inline bool from_unsigned(unsigned value) {
@@ -138,6 +139,9 @@ void MapPlayersViewPacket::read(FileSystem& fs, EditorGameBase& egbase) {
 						} else if (saved_vision == SavedVisionState::kRevealed) {
 							f.vision.set_revealed(true);
 							assert(f.vision.is_revealed());
+						} else if (saved_vision == SavedVisionState::kHidden) {
+							f.vision.set_hidden(true);
+							assert(f.vision.is_hidden());
 						}
 					}
 
@@ -503,6 +507,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 				const Player::Field& f = player->fields_[m];
 				oss << static_cast<char>(f.vision.is_revealed() ?
 				                            SavedVisionState::kRevealed :
+				                            f.vision.is_hidden() ?
+				                            SavedVisionState::kHidden :
 				                            f.vision == VisibleState::kPreviouslySeen ?
 				                            SavedVisionState::kPreviouslySeen :
 				                            SavedVisionState::kNone);
@@ -523,6 +529,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			const Player::Field& f = player->fields_[upper_bound];
 			oss << static_cast<char>(f.vision.is_revealed() ?
 			                            SavedVisionState::kRevealed :
+			                            f.vision.is_hidden() ?
+			                            SavedVisionState::kHidden :
 			                            f.vision == VisibleState::kPreviouslySeen ?
 			                            SavedVisionState::kPreviouslySeen :
 			                            SavedVisionState::kNone);

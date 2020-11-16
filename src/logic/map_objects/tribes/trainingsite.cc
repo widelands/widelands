@@ -159,6 +159,15 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 			}
 		}
 	}
+
+	if (table.has_key("messages")) {
+		items_table = table.get_table("messages");
+		no_soldier_to_train_message_ = items_table->get_string("no_soldier");
+		no_soldier_for_training_level_message_ = items_table->get_string("no_soldier_for_level");
+	} else {
+		// TODO(GunChleoc): API compatibility - require this after v1.0
+		log_warn("Training site '%s' is lacking its 'messages' table", name().c_str());
+	}
 }
 
 /**
@@ -894,7 +903,10 @@ std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings()
 	settings->apply(*ProductionSite::create_building_settings());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	return std::move(settings);
 }
 
 /**

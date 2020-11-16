@@ -38,11 +38,16 @@ descriptions:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      occupied = _"Your soldiers have occupied your barrier.",
-      aggressor = _"Your barrier discovered an aggressor.",
-      attack = _"Your barrier is under attack.",
-      defeated_enemy = _"The enemy defeated your soldiers at the barrier.",
-      defeated_you = _"Your soldiers defeated the enemy at the barrier."
+      -- TRANSLATORS: Message sent by an Empire military site
+      occupied = pgettext("empire_building", "Your soldiers have occupied your barrier."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      aggressor = pgettext("empire_building", "Your barrier discovered an aggressor."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      attack = pgettext("empire_building", "Your barrier is under attack."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_enemy = pgettext("empire_building", "The enemy defeated your soldiers at the barrier."),
+      -- TRANSLATORS: Message sent by an Empire military site
+      defeated_you = pgettext("empire_building", "Your soldiers defeated the enemy at the barrier.")
    },
 }
 

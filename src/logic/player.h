@@ -218,7 +218,7 @@ public:
 	struct Field {
 		Field()
 		   : military_influence(0),
-		     vision(0),
+		     vision(VisibleState::kUnexplored),
 		     r_e(RoadSegment::kNone),
 		     r_se(RoadSegment::kNone),
 		     r_sw(RoadSegment::kNone),
@@ -527,8 +527,10 @@ public:
 	uint32_t find_attack_soldiers(const Flag&,
 	                              std::vector<Soldier*>* soldiers = nullptr,
 	                              uint32_t max = std::numeric_limits<uint32_t>::max());
-	void
-	enemyflagaction(const Flag&, PlayerNumber attacker, const std::vector<Widelands::Soldier*>&);
+	void enemyflagaction(const Flag&,
+	                     PlayerNumber attacker,
+	                     const std::vector<Widelands::Soldier*>&,
+	                     bool allow_conquer);
 
 	uint32_t casualties() const {
 		return casualties_;

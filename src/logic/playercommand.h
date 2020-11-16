@@ -758,10 +758,10 @@ private:
 };
 
 struct CmdEnemyFlagAction : public PlayerCommand {
-	CmdEnemyFlagAction() : PlayerCommand(), serial(0) {
+	CmdEnemyFlagAction() : PlayerCommand(), serial_(0), allow_conquer_(true) {
 	}  // For savegame loading
-	CmdEnemyFlagAction(const Time& t, int32_t p, const Flag& f, const std::vector<Serial>& s)
-	   : PlayerCommand(t, p), serial(f.serial()), soldiers(s) {
+	CmdEnemyFlagAction(const Time& t, int32_t p, const Flag& f, const std::vector<Serial>& s, bool c)
+	   : PlayerCommand(t, p), serial_(f.serial()), soldiers_(s), allow_conquer_(c) {
 	}
 
 	// Write these commands to a file (for savegames)
@@ -778,8 +778,9 @@ struct CmdEnemyFlagAction : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial;
-	std::vector<Serial> soldiers;
+	Serial serial_;
+	std::vector<Serial> soldiers_;
+	bool allow_conquer_;
 };
 
 /// Abstract base for commands about a message.

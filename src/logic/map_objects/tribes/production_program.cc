@@ -967,7 +967,8 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		descr->add_created_attribute(attribute_info);
 	}
 	for (const std::string& resourcename : workerprogram->collected_resources()) {
-		descr->add_collected_resource(resourcename);
+		// Workers always collect 100% of the resource, and then find no more
+		descr->add_collected_resource(resourcename, 100, 0);
 	}
 	for (const std::string& resourcename : workerprogram->created_resources()) {
 		descr->add_created_resource(resourcename);
@@ -1511,7 +1512,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	                                descriptions.get_resource_descr(resource_)->name();
 	descr->workarea_info_[workarea_].insert(description);
 
-	descr->add_collected_resource(arguments.front());
+	descr->add_collected_resource(arguments.front(), max_resources_, depleted_chance_);
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
@@ -1703,8 +1704,11 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	const SoldierControl* ctrl = ps.soldier_control();
 	assert(ctrl != nullptr);
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
+
+	upcast(TrainingSite, ts, &ps);
+
 	if (soldiers.empty()) {
-		ps.set_production_result(_("No soldier to train!"));
+		ps.set_production_result(ts->descr().no_soldier_to_train_message());
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
 	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %d)\n",
@@ -1713,7 +1717,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
-			ps.set_production_result(_("No soldier found for this training level!"));
+			ps.set_production_result(ts->descr().no_soldier_for_training_level_message());
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 
@@ -1737,7 +1741,6 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	}
 	ps.molog(game.get_gametime(), "    okay\n");  // okay, do nothing
 
-	upcast(TrainingSite, ts, &ps);
 	ts->training_attempted(training_.attribute, training_.level);
 
 	ps.molog(game.get_gametime(), "  Check done!\n");
