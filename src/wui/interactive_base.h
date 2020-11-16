@@ -396,9 +396,6 @@ private:
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
-	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
-	// delete it.
-	MiniMap* minimap_;
 	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 

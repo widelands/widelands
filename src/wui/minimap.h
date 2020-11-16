@@ -39,6 +39,10 @@ public:
 		                    MiniMapLayer::Road | MiniMapLayer::Building),
 		     minimap_type(MiniMapType::kStaticViewWindow) {
 		}
+
+		MiniMap* get_window() const {
+			return dynamic_cast<MiniMap*>(window);
+		}
 	};
 
 	MiniMap(InteractiveBase& parent, Registry*);
