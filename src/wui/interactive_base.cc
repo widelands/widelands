@@ -913,7 +913,7 @@ void InteractiveBase::hide_minimap() {
 }
 
 void InteractiveBase::resize_minimap() {
-	if (minimap_) {
+	if (minimap_registry_.window != nullptr) {
 		minimap_->check_boundaries();
 	}
 }
