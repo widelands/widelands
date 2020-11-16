@@ -230,6 +230,7 @@ protected:
 	                               bool bind_default_toggle = false);
 
 	void hide_minimap();
+	void resize_minimap();
 
 	void mainview_move();
 

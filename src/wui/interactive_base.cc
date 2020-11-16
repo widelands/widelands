@@ -912,6 +912,12 @@ void InteractiveBase::hide_minimap() {
 	minimap_registry_.destroy();
 }
 
+void InteractiveBase::resize_minimap() {
+	if (minimap_) {
+		minimap_->check_boundaries();
+	}
+}
+
 /*
 ===============
 Return display flags (dfXXX) that modify the view of the map.

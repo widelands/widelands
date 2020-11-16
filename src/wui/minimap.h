@@ -48,6 +48,7 @@ public:
 	void set_view(const Rectf& rect) {
 		view_.set_view(rect);
 	}
+	void check_boundaries();
 
 private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
@@ -56,7 +57,6 @@ private:
 	void toggle(MiniMapLayer);
 	void update_button_permpressed();
 	void resize();
-	void check_boundaries();
 
 	/**
 	 * MiniMap::View is the panel that represents the pure representation of the
