@@ -43,9 +43,10 @@ constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
 bool inline copy_paste_modifier() {
 #ifdef __APPLE__
-	return SDL_GetModState() & KMOD_GUI;
+	return (SDL_GetModState() & KMOD_GUI);
+#else
+	return (SDL_GetModState() & KMOD_CTRL);
 #endif
-	return SDL_GetModState() & KMOD_CTRL;
 }
 
 }  // namespace

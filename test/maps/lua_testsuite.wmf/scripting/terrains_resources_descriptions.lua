@@ -1,5 +1,3 @@
-set_textdomain("tribes")
-
 test_terrains_resource_descr = lunit.TestCase("Terrains and resources descriptions test")
 
 --  =======================================================

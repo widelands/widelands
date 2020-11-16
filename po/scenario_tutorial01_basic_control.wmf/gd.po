@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-06 16:44+0000\n"
-"PO-Revision-Date: 2020-10-23 07:56+0000\n"
+"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"PO-Revision-Date: 2020-11-11 14:46+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -164,7 +164,7 @@ msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Se
 msgid ""
 "Left-click the ‘OK’ button to close this window. I'll show you where the "
 "menu is and where to show and hide the building spaces."
-msgstr ""
+msgstr "Dèan briogadh clì air a’ phutan “Ceart ma-thà” a dhùnadh na h-uinneige seo. Seallaidh mi dhut far a bheil an clàr-taice agus mar a sheallas agus a dh’fhalaicheas tu na h-ionadan togail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:81
 msgid ""
@@ -177,7 +177,7 @@ msgstr "Thoir an aire nach urrainn dhut an uinneag seo a dhùnadh le briogadh de
 msgid ""
 "Now that I have shown you where to show and hide the building spaces, please"
 " switch them on so that we can place our first building."
-msgstr ""
+msgstr "Nise on a sheall mi dhut càite an nochd is falaich tu na h-ionadan togail, nochd iad ach an urrainn dhuinn a’ chiad togalach againn a chur ann."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:100
 msgid "Lumberjack’s Spot"

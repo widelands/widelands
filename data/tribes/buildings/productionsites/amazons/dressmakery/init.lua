@@ -103,7 +103,7 @@ descriptions:new_productionsite_type {
       },
       produce_warriors_coat = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-         descname = _"sewing a warriors coat",
+         descname = _"sewing a warrior’s coat",
          actions = {
             "return=skipped unless economy needs warriors_coat",
             "consume=ironwood balsa:2 rubber gold",
@@ -136,7 +136,7 @@ descriptions:new_productionsite_type {
       },
       produce_boots_hero = {
          -- TRANSLATORS: Completed/Skipped/Did not start making a fishing net because ...
-         descname = _"making heros boots",
+         descname = _"making hero boots",
          actions = {
             "return=skipped unless economy needs boots_hero",
             "consume=rubber:3 gold",
