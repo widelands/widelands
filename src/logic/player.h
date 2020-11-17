@@ -630,6 +630,13 @@ public:
 		allow_additional_expedition_items_ = allow;
 	}
 
+	void set_hidden_from_general_statistics(bool hide) {
+		hidden_from_general_statistics_ = hide;
+	}
+	bool is_hidden_from_general_statistics() const {
+		return hidden_from_general_statistics_;
+	}
+
 private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
@@ -725,6 +732,8 @@ private:
 	bool is_picking_custom_starting_position_;
 
 	bool allow_additional_expedition_items_;
+
+	bool hidden_from_general_statistics_;
 
 	FxId message_fx_;
 	FxId attack_fx_;

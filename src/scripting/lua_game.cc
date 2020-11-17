@@ -116,6 +116,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, tribe),
    PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
+   PROP_RW(LuaPlayer, hidden_from_general_statistics),
    {nullptr, nullptr, nullptr},
 };
 
@@ -295,6 +296,21 @@ int LuaPlayer::get_allow_additional_expedition_items(lua_State* L) {
 }
 int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
 	get(L, get_egbase(L)).set_allow_additional_expedition_items(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/* RST
+   .. attribute:: hidden_from_general_statistics
+
+      (RW) Whether this player's existance and statistics are not
+      disclosed to other players in the general statistics menu.
+*/
+int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
+	lua_pushboolean(L, get(L, get_egbase(L)).is_hidden_from_general_statistics());
+	return 1;
+}
+int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
+	get(L, get_egbase(L)).set_hidden_from_general_statistics(luaL_checkboolean(L, -1));
 	return 0;
 }
 

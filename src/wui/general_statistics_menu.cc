@@ -108,11 +108,22 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	UI::Box* hbox1 = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
-	uint32_t plr_in_game = 0;
 	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
-	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
+
+	bool show_all_players = true;
+	const Widelands::Player* self = nullptr;
+	if (upcast(InteractivePlayer, ipl, &parent)) {
+		show_all_players = ipl->player().see_all() || ipl->omnipotent();
+		self = &ipl->player();
+	}
 
 	iterate_players_existing_const(p, nr_players, game, player) {
+		if (player != self && !show_all_players && player->is_hidden_from_general_statistics()) {
+			// Hide player from stats
+			cbs_[p - 1] = nullptr;
+			continue;
+		}
+
 		const Image* player_image = playercolor_image(p - 1, "images/players/genstats_player.png");
 		assert(player_image);
 		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
@@ -215,7 +226,7 @@ GeneralStatisticsMenu::~GeneralStatisticsMenu() {
 		Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game) {
 			my_registry_->selected_players[p - 1] =
-			   cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
+			   cbs_[p - 1] && cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
 		}
 	}
 }
