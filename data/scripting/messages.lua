@@ -141,24 +141,18 @@ function campaign_message_box(message, sleeptime)
    if message.position then
       local window = wl.ui.MapView()
       if string.find(message.position,"top") then
-         message.posx = math.floor((window.width - message.w) / 2)
-         -- Set it a bit lower than 0 to prevent overlap with top texts
          message.posy = 25
       elseif string.find(message.position, "bottom") then
-         message.posx = math.floor((window.width - message.w) / 2)
          message.posy = window.height - message.h
-      elseif message.position == "left" then
-         message.posx = 0
-         message.posy = math.floor((window.height - message.h) / 2)
-      elseif message.position == "right" then
-         message.posx = window.width - message.w
+      else
          message.posy = math.floor((window.height - message.h) / 2)
       end
-      -- Override the values for combinations like 'bottomleft'
-      if string.find(message.position, "left", 2) then
+      if string.find(message.position, "left") then
          message.posx = 0
-      elseif string.find(message.position, "right", 2) then
+      elseif string.find(message.position, "right") then
          message.posx = window.width - message.w
+      else
+         message.posx = math.floor((window.width - message.w) / 2)
       end
    end
 
