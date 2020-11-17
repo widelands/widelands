@@ -477,18 +477,22 @@ void WLApplication::run() {
 		try {
 			game.run_load_game(filename_, script_to_run_);
 		} catch (const Widelands::GameDataError& e) {
-			error_message = e.what();
-		} catch (const std::exception& e) {
-			error_message = e.what();
-			emergency_save(game);
-		}
-		if (!error_message.empty()) {
 			messagetitle = _("Game data error");
 			message = (boost::format(_("Widelands could not load the file \"%s\". The file format "
 			                           "seems to be incompatible.")) %
 			           filename_.c_str())
 			             .str();
-			message = message + "\n" + error_message;
+			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
+			g_sh->change_music("menu");
+			mainmenu();
+		} catch (const std::exception& e) {
+			emergency_save(game);
+
+			messagetitle = _("File system error");
+			message =
+			   (boost::format(_("Widelands could not find the file \"%s\".")) % filename_.c_str())
+			      .str();
+			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			g_sh->change_music("menu");
 			mainmenu();
 		}
