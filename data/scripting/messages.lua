@@ -141,6 +141,7 @@ function campaign_message_box(message, sleeptime)
    if message.position then
       local window = wl.ui.MapView()
       if string.find(message.position,"top") then
+         -- Set it a bit lower than 0 to prevent overlap with top texts
          message.posy = 25
       elseif string.find(message.position, "bottom") then
          message.posy = window.height - message.h
