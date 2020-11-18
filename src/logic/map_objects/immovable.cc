@@ -95,7 +95,9 @@ void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
 	}
 
 	// Needed so players can update partially visible buildings' vision.
-	Notifications::publish(NoteFieldTerrainChanged{f, map->get_index(f)});
+	if (get_size() >= BIG) {
+		Notifications::publish(NoteFieldTerrainChanged{f, map->get_index(f)});
+	}
 }
 
 /**
@@ -119,7 +121,9 @@ void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
 	assert(f.field->immovable == this);
 
 	// Needed so players can update partially visible buildings' vision.
-	Notifications::publish(NoteFieldTerrainChanged{f, map->get_index(f)});
+	if (get_size() >= BIG) {
+		Notifications::publish(NoteFieldTerrainChanged{f, map->get_index(f)});
+	}
 
 	f.field->immovable = nullptr;
 	egbase.inform_players_about_immovable(f.field - &(*map)[0], nullptr);
