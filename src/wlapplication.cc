@@ -991,14 +991,13 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 
 		// Are we looking at an option at all?
 		if (opt.compare(0, 2, "--")) {
-			if (argc == 2) {
+			if (argc == 2 && 0 == opt.compare(opt.size() - kSavegameExtension.size(),
+			                                  kSavegameExtension.size(), kSavegameExtension)) {
 				// Special case of opening a savegame from file browser
-				// try loading argv as file
 				commandline_["loadgame"] = opt;
 				continue;
-			} else {
-				throw ParameterError();
 			}
+			throw ParameterError();
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
 		}

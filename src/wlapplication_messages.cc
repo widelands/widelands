@@ -39,7 +39,8 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	                .str()
 	          << endl
 	          << endl;
-	std::cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << endl << endl;
+	std::cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << endl;
+	std::cout << _("       widelands <save.wgf>") << endl << endl;
 	std::cout << _("Options:") << endl << endl;
 	std::cout << _(" --<config-entry-name>=value overwrites any config file setting") << endl
 	          << _("                      Note: New value will be written to config file") << endl
@@ -170,6 +171,11 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl;
 	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
 	std::cout << _(" --help               Show this help") << endl << endl;
+	std::cout << _(" <save.wgf>           Directly loads the savegame <save.wgf>. Useful for\n"
+	               "                      .wgf file extension association. Does not work with\n"
+	               "                      other options. Also see --loadgame.")
+	          << endl
+	          << endl;
 	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
 	               "        https://www.widelands.org/\n\n"
 	               "Hope you enjoy this game!")
