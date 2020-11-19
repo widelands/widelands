@@ -44,6 +44,7 @@ public:
 	   GameController&,
 	   ChatProvider&,
 	   Widelands::EditorGameBase& egbase,
+	   std::unique_ptr<GameController>& delete_on_cancel,
 	   bool game_done_on_cancel,
 	   const std::function<void()>& callback = []() {});
 	~LaunchMPG() override;
@@ -70,6 +71,7 @@ private:
 
 	std::function<void()> callback_;
 	bool game_done_on_cancel_;
+	std::unique_ptr<GameController>& delete_on_cancel_;
 
 	UI::Button help_button_;
 

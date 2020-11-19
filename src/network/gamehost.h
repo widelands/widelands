@@ -48,12 +48,13 @@ struct GameHost : public GameController {
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
 	GameHost(FsMenu::MenuCapsule&,
+	         std::unique_ptr<GameController>&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
 	~GameHost() override;
 
-	void run();
+	void run(std::unique_ptr<GameController>&);
 	void run_callback();
 	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();

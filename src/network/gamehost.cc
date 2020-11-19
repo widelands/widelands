@@ -520,6 +520,7 @@ struct GameHostImpl {
 };
 
 GameHost::GameHost(FsMenu::MenuCapsule& c,
+                   std::unique_ptr<GameController>& ptr,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
@@ -574,7 +575,7 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
 
-	run();
+	run(ptr);
 }
 
 GameHost::~GameHost() {
@@ -649,12 +650,12 @@ void GameHost::init_computer_players() {
 	}
 }
 
-void GameHost::run() {
+void GameHost::run(std::unique_ptr<GameController>& ptr) {
 	game_.reset(new Widelands::Game());
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 	new FsMenu::LaunchMPG(
-	   capsule_, d->hp, *this, d->chat, *game_, internet_, [this]() { run_callback(); });
+	   capsule_, d->hp, *this, d->chat, *game_, ptr, internet_, [this]() { run_callback(); });
 }
 
 // TODO(k.halfmann): refactor into smaller functions

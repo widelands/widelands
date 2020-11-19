@@ -20,6 +20,8 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "chat/chat.h"
 #include "logic/game_controller.h"
@@ -44,6 +46,7 @@ class MenuCapsule;
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(FsMenu::MenuCapsule&,
+	           std::unique_ptr<GameController>&,
 	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
@@ -51,7 +54,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	~GameClient() override;
 
-	void run();
+	void run(std::unique_ptr<GameController>&);
 
 	// GameController interface
 	void think() override;

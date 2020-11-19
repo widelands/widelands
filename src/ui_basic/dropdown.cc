@@ -142,8 +142,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 		push_button_->sigclicked.connect([this]() { toggle_list(); });
 	}
 	button_box_.set_size(w, get_h());
-	list_->clicked.connect([this]() { set_value(); });
-	list_->clicked.connect([this]() { toggle_list(); });
+	list_->clicked.connect([this]() { set_value(); close(); });
 
 	if (push_button_) {
 		push_button_->set_can_focus(false);

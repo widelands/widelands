@@ -50,11 +50,13 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                      GameController& ctrl,
                      ChatProvider& chat,
                      Widelands::EditorGameBase& egbase,
+                     std::unique_ptr<GameController>& delete_on_cancel,
                      bool game_done_on_cancel,
                      const std::function<void()>& c)
    : LaunchGame(fsmm, settings, &ctrl, false, true),
      callback_(c),
      game_done_on_cancel_(game_done_on_cancel),
+     delete_on_cancel_(delete_on_cancel),
 
      help_button_(this,
                   "help",
@@ -97,6 +99,8 @@ LaunchMPG::~LaunchMPG() {
 	if (game_done_on_cancel_) {
 		InternetGaming::ref().set_game_done();
 	}
+	chat_.reset();  // do this early to avoid heap-use-after-free
+	delete_on_cancel_.reset();
 }
 
 void LaunchMPG::layout() {

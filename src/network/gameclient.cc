@@ -176,6 +176,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 }
 
 GameClient::GameClient(FsMenu::MenuCapsule& c,
+                       std::unique_ptr<GameController>& ptr,
                        const std::pair<NetAddress, NetAddress>& host,
                        const std::string& playername,
                        bool internet,
@@ -220,7 +221,7 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
 	participants_ = d->participants.get();
 
-	run();
+	run(ptr);
 }
 
 GameClient::~GameClient() {
@@ -232,14 +233,14 @@ GameClient::~GameClient() {
 	delete d;
 }
 
-void GameClient::run() {
+void GameClient::run(std::unique_ptr<GameController>& ptr) {
 	d->send_hello();
 	d->settings.multiplayer = true;
 
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
 
-	new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, d->internet_);
+	new FsMenu::LaunchMPG(capsule_, *this, *this, *this, *d->game, ptr, d->internet_);
 }
 
 void GameClient::do_run() {
