@@ -1245,16 +1245,16 @@ uint32_t Player::find_attack_soldiers(const Flag& flag,
 // to attack, so pretending we have more types is pointless.
 void Player::enemyflagaction(const Flag& flag,
                              PlayerNumber const attacker,
-                             const std::vector<Widelands::Soldier*>& soldiers) {
+                             const std::vector<Widelands::Soldier*>& soldiers,
+                             const bool allow_conquer) {
 	if (attacker != player_number()) {
 		log_warn_time(egbase().get_gametime(), "Player (%d) is not the sender of an attack (%d)\n",
 		              attacker, player_number());
-	} else if (soldiers.empty()) {
-		log_warn_time(egbase().get_gametime(), "enemyflagaction: no soldiers given\n");
 	} else if (is_hostile(flag.owner())) {
 		if (Building* const building = flag.get_building()) {
 			if (const AttackTarget* attack_target = building->attack_target()) {
 				if (attack_target->can_be_attacked()) {
+					attack_target->set_allow_conquer(player_number(), allow_conquer);
 					for (Soldier* temp_attacker : soldiers) {
 						assert(temp_attacker);
 						assert(temp_attacker->get_owner() == this);

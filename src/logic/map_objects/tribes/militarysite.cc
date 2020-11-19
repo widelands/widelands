@@ -255,7 +255,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// we still hold the bigger military presence in that area (e.g. if there
 	// is a fortress one or two points away from our sentry, the fortress has
 	// a higher presence and thus the enemy can just burn down the sentry.
-	if (military_site_->military_presence_kept(game)) {
+	if (!get_allow_conquer(enemy->owner().player_number()) ||
+	    military_site_->military_presence_kept(game)) {
 		// Okay we still got the higher military presence, so the attacked
 		// militarysite will be destroyed.
 		military_site_->set_defeating_player(enemy->owner().player_number());
@@ -849,7 +850,7 @@ void MilitarySite::remove_worker(Worker& w) {
 	Building::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w)) {
-		pop_soldier_job(soldier, nullptr);
+		pop_soldier_job(soldier);
 	}
 
 	update_soldier_request();
@@ -1076,7 +1077,11 @@ std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings()
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
 	settings->prefer_heroes = soldier_preference_ == SoldierPreference::kHeroes;
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	// On modern compilers a simple 'return settings;' would've been fine.
+	return std::unique_ptr<const BuildingSettings>(std::move(settings));
 }
 
 // setters

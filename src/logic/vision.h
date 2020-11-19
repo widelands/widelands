@@ -44,9 +44,9 @@ enum class VisibleState {
 ///  2+n    if the player's buildings and workers currently see the node,
 ///         where n is the number of objects that can see the node.
 /// The 'override_' enum allows overriding the normal vision mechanism:
-///  kNormal   - no override
-///  kHidden   - the field is always kUnexplored
-///  kRevealed - the field is always kVisible
+///  kNoOverride - no override
+///  kHidden     - the field is always kUnexplored
+///  kRevealed   - the field is always kVisible
 struct Vision {
 public:
 	explicit Vision(const VisibleState vs) {
@@ -62,7 +62,7 @@ public:
 			value_ = 2;
 			break;
 		}
-		override_ = Override::kNormal;
+		override_ = static_cast<uint8_t>(Override::kNoOverride);
 	}
 	Vision& operator=(const VisibleState vs) {
 		switch (vs) {
@@ -77,7 +77,7 @@ public:
 			value_ = 2;
 			break;
 		}
-		override_ = Override::kNormal;
+		override_ = static_cast<uint8_t>(Override::kNoOverride);
 		return *this;
 	}
 
@@ -85,7 +85,7 @@ public:
 		return value_;
 	}
 	operator VisibleState() const {
-		switch (override_) {
+		switch (static_cast<Override>(override_)) {
 		case Override::kHidden:
 			return VisibleState::kUnexplored;
 		case Override::kRevealed:
@@ -120,10 +120,10 @@ public:
 		return seers() > 0 || is_revealed();
 	}
 	bool is_revealed() const {
-		return override_ == Override::kRevealed;
+		return static_cast<Override>(override_) == Override::kRevealed;
 	}
 	bool is_hidden() const {
-		return override_ == Override::kHidden;
+		return static_cast<Override>(override_) == Override::kHidden;
 	}
 	uint16_t seers() const {
 		return value_ > 2 ? (value_ - 2) : 0;
@@ -141,9 +141,9 @@ public:
 			return;
 		}
 		if (reveal) {
-			override_ = Override::kRevealed;
+			override_ = static_cast<uint8_t>(Override::kRevealed);
 		} else {
-			override_ = Override::kNormal;
+			override_ = static_cast<uint8_t>(Override::kNoOverride);
 		}
 		value_ = std::max(value_, uint16_t(2));
 	}
@@ -152,9 +152,9 @@ public:
 			return;
 		}
 		if (hide) {
-			override_ = Override::kHidden;
+			override_ = static_cast<uint8_t>(Override::kHidden);
 		} else {
-			override_ = Override::kNormal;
+			override_ = static_cast<uint8_t>(Override::kNoOverride);
 		}
 		if (seers() == 0) {
 			value_ = 0;
@@ -162,9 +162,10 @@ public:
 	}
 
 private:
-	enum class Override : uint8_t { kNormal = 0, kHidden = 1, kRevealed = 2 };
+	enum class Override : uint8_t { kNoOverride = 0, kHidden = 1, kRevealed = 2 };
 	uint16_t value_ : 14;
-	Override override_ : 2;
+	// Not using the Override type for the variable because it causes a warning in GCC<8.4
+	uint8_t override_ : 2;
 };
 
 }  // namespace Widelands
