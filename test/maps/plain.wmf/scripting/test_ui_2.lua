@@ -151,17 +151,17 @@ end
 
 function test_tabs()
    mv:click(map:get_field(23, 29))
-   sleep(2000)
+   sleep(5000)
    assert_equal(5, _cnt_TABPANEL(mv.windows.field_action.tabs))
 end
 function test_active()
    mv:click(map:get_field(23, 29))
-   sleep(2000)
+   sleep(5000)
    assert_equal(true, mv.windows.field_action.tabs.big.active)
 end
 function test_activate()
    mv:click(map:get_field(23, 29))
-   sleep(2000)
+   sleep(5000)
    mv.windows.field_action.tabs.small:click()
    sleep(2000)
    assert_equal(true, mv.windows.field_action.tabs.small.active)
@@ -179,7 +179,7 @@ end
 
 function test_click2()
    mv:click(map:get_field(23,29))
-   sleep(2000)
+   sleep(5000)
    assert_not_nil(mv.windows.field_action)
 end
 
