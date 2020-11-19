@@ -55,7 +55,7 @@ descriptions:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Rocks",
       heading = _"Out of Rocks",
-      message = pgettext("amazons_building", "The stonecutter working at this stonecutter’s hut can’t find any rocks in his work area."),
+      message = pgettext("amazons_building", "The stonecutter working at this stonecutter’s hut can’t find any rocks in her work area."),
    },
 }
 

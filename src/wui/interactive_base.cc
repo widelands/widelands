@@ -537,22 +537,23 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	bool outer = a <= 2 && b <= 2 && c <= 2;
 
 	if (medium) {
-		if (outer && inner) {
-			return 0;
-		} else if (inner) {
-			return 3;
-		} else if (outer) {
+		if (outer) {
+			if (inner) {
+				return 0;
+			}
 			return 1;
-		} else {
-			return 4;
 		}
-	} else if (outer) {
+		if (inner) {
+			return 3;
+		}
+		return 4;
+	}
+	if (outer) {
 		assert(!inner);
 		return 2;
-	} else {
-		assert(inner);
-		return 5;
 	}
+	assert(inner);
+	return 5;
 }
 
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) {

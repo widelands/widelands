@@ -47,11 +47,13 @@ wl_library(scripting_coroutine
     lua_coroutine.h
   DEPENDS
     io_fileread
+    logic_exceptions
     scripting_base
     scripting_errors
     # TODO(sirver): Cyclic dependency. introduce a seam so that logic can
     # push/pull new parameters to coroutines.
     scripting_logic
+    scripting_lua_interface
 )
 
 wl_library(scripting_lua_interface
@@ -68,8 +70,11 @@ wl_library(scripting_lua_interface
   DEPENDS
     base_i18n
     base_macros
+    base_log
     build_info
+    io_fileread
     io_filesystem
+    logic_exceptions
     scripting_base
     scripting_errors
     scripting_lua_table

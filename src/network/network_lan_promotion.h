@@ -43,7 +43,7 @@ struct NetGameInfo {
 
 struct NetOpenGame {
 	NetOpenGame() = default;
-	explicit NetOpenGame(NetAddress init_address, NetGameInfo init_info)
+	explicit NetOpenGame(const NetAddress& init_address, const NetGameInfo& init_info)
 	   : address(init_address), info(init_info) {
 	}
 	NetAddress address;
@@ -90,7 +90,7 @@ protected:
 	 * \return How many bytes have been written to \c buf. If 0 is returned there either was no data
 	 *         available (check before with avail()) or there was some error (check with is_open())
 	 */
-	ssize_t receive(void* buf, size_t len, NetAddress* addr);
+	size_t receive(void* buf, size_t len, NetAddress* addr);
 
 	/**
 	 * Sends data to a specified address.

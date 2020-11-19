@@ -46,9 +46,7 @@ descriptions:new_productionsite_type {
       }
    },
 
-   aihints = {
-      mines = "resource_gold",
-   },
+   aihints = {},
 
    working_positions = {
       frisians_miner = 1,
