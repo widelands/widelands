@@ -297,13 +297,12 @@ void NetSetupLAN::clicked_joingame() {
 	}
 
 	try {
-		running_game_.reset(
-		   new GameClient(capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.text()));
+		running_game_.reset(new GameClient(
+		   capsule_, running_game_, std::make_pair(addr, NetAddress()), playername_.text()));
 	} catch (const std::exception& e) {
 		running_game_.reset();
-		UI::WLMessageBox mbox(
-		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
-		   e.what(), UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
+		                      e.what(), UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return;
 	}
@@ -324,9 +323,8 @@ void NetSetupLAN::clicked_hostgame() {
 		running_game_.reset(new GameHost(capsule_, running_game_, playername_.text(), tribeinfos));
 	} catch (const std::exception& e) {
 		running_game_.reset();
-		UI::WLMessageBox mbox(
-		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
-		   e.what(), UI::WLMessageBox::MBoxType::kOk);
+		UI::WLMessageBox mbox(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Network Error"),
+		                      e.what(), UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return;
 	}
