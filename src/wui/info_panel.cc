@@ -64,14 +64,21 @@ MessagePreview::MessagePreview(InfoPanel& i, const Widelands::Message& m, Widela
 	id_ = id;
 }
 
+inline bool MessagePreview::message_still_exists() const {
+	return owner_.message_queue_->count(id_.value());
+}
+
 void MessagePreview::think() {
-	if (!owner_.message_queue_->count(id_.value()) ||
-	    SDL_GetTicks() - creation_time_ > kMessagePreviewMaxLifetime) {
+	if (!message_still_exists() || SDL_GetTicks() - creation_time_ > kMessagePreviewMaxLifetime) {
 		owner_.pop_message(*this);
 	}
 }
 
 void MessagePreview::draw(RenderTarget& r) {
+	if (!message_still_exists()) {
+		return;
+	}
+
 	r.tile(Recti(0, 0, get_w(), get_h()),
 	       g_image_cache->get(std::string(kTemplateDir) + "wui/windows/background.png"),
 	       Vector2i(0, 0));
@@ -432,9 +439,10 @@ void InfoPanel::think() {
 
 	while (message_queue_ && *last_message_id_ != message_queue_->current_message_id()) {
 		*last_message_id_ = Widelands::MessageId(last_message_id_->value() + 1);
-		assert(message_queue_->count(last_message_id_->value()));
-		push_message(
-		   *new MessagePreview(*this, *(*message_queue_)[*last_message_id_], *last_message_id_));
+		if (message_queue_->count(last_message_id_->value())) {
+			push_message(
+			   *new MessagePreview(*this, *(*message_queue_)[*last_message_id_], *last_message_id_));
+		}
 	}
 
 	if (draw_real_time_) {

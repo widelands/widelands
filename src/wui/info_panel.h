@@ -52,6 +52,8 @@ private:
 	InfoPanel& owner_;
 	uint32_t creation_time_;
 
+	bool message_still_exists() const;
+
 	const Widelands::Message* message_;
 	Widelands::MessageId id_;
 };
