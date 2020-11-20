@@ -1450,7 +1450,8 @@ std::unique_ptr<const BuildingSettings> Warehouse::create_building_settings() co
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.
-	return std::move(settings);
+	// On modern compilers a simple 'return settings;' would've been fine.
+	return std::unique_ptr<const BuildingSettings>(std::move(settings));
 }
 
 void Warehouse::log_general_info(const EditorGameBase& egbase) const {
