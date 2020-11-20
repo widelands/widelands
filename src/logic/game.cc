@@ -433,6 +433,8 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		gl.load_game();
 	}
 
+	postload_addons();
+
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
