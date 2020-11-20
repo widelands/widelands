@@ -655,10 +655,9 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
-	} else {
-		if (upcast(ProductionSite, productionsite, get_location(game))) {
-			productionsite->unnotify_player();
-		}
+	}
+	if (upcast(ProductionSite, productionsite, get_location(game))) {
+		productionsite->unnotify_player();
 	}
 
 	// Pick a location at random
@@ -1624,7 +1623,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 		}
 
 		return start_task_leavebuilding(game, true);
-	} else if (upcast(Flag, flag, location)) {
+	}
+	if (upcast(Flag, flag, location)) {
 		if (upcast(Building, nextbuild, nextstep)) {  //  Flag to Building
 			if (&nextbuild->base_flag() != location) {
 				throw wexception(
@@ -1633,7 +1633,8 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 			return start_task_move(
 			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
-		} else if (upcast(Flag, nextflag, nextstep)) {  //  Flag to Flag
+		}
+		if (upcast(Flag, nextflag, nextstep)) {  //  Flag to Flag
 			Road& road = *flag->get_road(*nextflag);
 
 			Path path(road.get_path());
@@ -2029,10 +2030,9 @@ void Worker::return_update(Game& game, State& state) {
 				if (location && location->descr().type() == MapObjectType::DISMANTLESITE) {
 					set_location(nullptr);
 					return pop_task(game);
-				} else {
-					return start_task_move(
-					   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 				}
+				return start_task_move(
+				   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 			}
 		}
 	}
@@ -2549,25 +2549,23 @@ void Worker::leavebuilding_update(Game& game, State& state) {
 
 		return start_task_move(
 		   game, WALK_SE, descr().get_right_walk_anims(does_carry_ware(), this), true);
-	} else {
-		const Coords& flagpos = baseflag.get_position();
+	}
+	const Coords& flagpos = baseflag.get_position();
 
-		if (state.ivar1) {
-			set_location(&baseflag);
-		}
+	if (state.ivar1) {
+		set_location(&baseflag);
+	}
 
-		if (get_position() == flagpos) {
-			return pop_task(game);
-		}
+	if (get_position() == flagpos) {
+		return pop_task(game);
+	}
 
-		if (!start_task_movepath(
-		       game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
-			molog(game.get_gametime(),
-			      "[leavebuilding]: outside of building, but failed to walk back to flag");
-			set_location(nullptr);
-			return pop_task(game);
-		}
-		return;
+	if (!start_task_movepath(
+	       game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
+		molog(game.get_gametime(),
+		      "[leavebuilding]: outside of building, but failed to walk back to flag");
+		set_location(nullptr);
+		return pop_task(game);
 	}
 }
 
@@ -2933,16 +2931,15 @@ void Worker::check_visible_sites(const Map& map, const Player& player) {
 	while (1 < scouts_worklist.size()) {
 		if (scouts_worklist.back().randomwalk) {
 			return;  // Random walk never goes out of fashion.
+		}
+		MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
+		if (player.is_seeing(mt)) {
+			// The military site is now visible. Either player
+			// has acquired possession of more military sites
+			// of own, or own folks are nearby.
+			scouts_worklist.pop_back();
 		} else {
-			MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
-			if (player.is_seeing(mt)) {
-				// The military site is now visible. Either player
-				// has acquired possession of more military sites
-				// of own, or own folks are nearby.
-				scouts_worklist.pop_back();
-			} else {
-				return;
-			}
+			return;
 		}
 	}
 }
@@ -3123,9 +3120,8 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 				       game, coord, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 					molog(game.get_gametime(), "[scout]: failed to reach destination\n");
 					return false;
-				} else {
-					return true;  // start_task_movepath was successfull.
 				}
+				return true;  // start_task_movepath was successful.
 			}
 
 			// Else evaluate for second best target
@@ -3152,9 +3148,8 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 			       game, oldest_coords, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 				molog(game.get_gametime(), "[scout]: Failed to reach destination\n");
 				return false;  // If failed go home
-			} else {
-				return true;  // Start task movepath success.
 			}
+			return true;  // Start task movepath success.
 		}
 	}
 	// No reachable fields found.
@@ -3198,9 +3193,8 @@ bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceT
 					       game, coord, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 						molog(game.get_gametime(), "[scout]: failed to reach destination (x)\n");
 						return false;
-					} else {
-						return true;  // start_task_movepath was successfull.
 					}
+					return true;  // start_task_movepath was successful.
 				}
 			}
 		}
