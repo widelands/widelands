@@ -1092,6 +1092,10 @@ void EditorInteractive::map_changed(const MapWas& action) {
 
 	case MapWas::kGloballyMutated:
 		break;
+
+	case MapWas::kResized:
+		resize_minimap();
+		break;
 	}
 }
 

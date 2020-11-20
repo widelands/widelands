@@ -573,7 +573,8 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
 			if (SoldierPreference::kHeroes == soldier_preference_ && old_level >= new_level) {
 				return false;
-			} else if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
+			}
+			if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
 				return false;
 			}
 		}
@@ -873,7 +874,8 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
 			if (upcast(Building, building, enemy)) {
 				soldier->start_task_attack(game, *building);
 				return true;
-			} else if (upcast(Soldier, opponent, enemy)) {
+			}
+			if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->get_battle()) {
 					soldier->start_task_defense(game, stayhome);
 					if (stayhome) {
@@ -1080,7 +1082,8 @@ std::unique_ptr<const BuildingSettings> MilitarySite::create_building_settings()
 	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
 	// have been copied despite being returned by name, due to its not matching the function return
 	// type. Call 'std::move' explicitly to avoid copying on older compilers.
-	return std::move(settings);
+	// On modern compilers a simple 'return settings;' would've been fine.
+	return std::unique_ptr<const BuildingSettings>(std::move(settings));
 }
 
 // setters

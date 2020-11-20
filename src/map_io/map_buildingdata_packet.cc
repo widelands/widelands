@@ -64,7 +64,7 @@ constexpr uint16_t kCurrentPacketVersionConstructionsite = 4;
 constexpr uint16_t kCurrentPacketPFBuilding = 2;
 constexpr uint16_t kCurrentPacketVersionMilitarysite = 7;
 constexpr uint16_t kCurrentPacketVersionProductionsite = 9;
-constexpr uint16_t kCurrentPacketVersionTrainingsite = 6;
+constexpr uint16_t kCurrentPacketVersionTrainingsite = 7;
 
 void MapBuildingdataPacket::read(FileSystem& fs,
                                  EditorGameBase& egbase,
@@ -826,7 +826,7 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
                                               MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionTrainingsite) {
+		if (packet_version >= 6 && packet_version <= kCurrentPacketVersionTrainingsite) {
 
 			read_productionsite(trainingsite, fr, game, mol);
 
@@ -899,6 +899,13 @@ void MapBuildingdataPacket::read_trainingsite(TrainingSite& trainingsite,
 			assert(16 > somebits);
 			trainingsite.repeated_layoff_ctr_ = fr.unsigned_8();
 			trainingsite.request_open_since_ = Time(fr);
+
+			// TODO(Niektory): Savegame compatibility
+			if (packet_version >= 7) {
+				trainingsite.checked_soldier_training_.attribute =
+				   static_cast<TrainingAttribute>(fr.unsigned_8());
+				trainingsite.checked_soldier_training_.level = fr.unsigned_8();
+			}
 		} else {
 			throw UnhandledVersionError("MapBuildingdataPacket - Trainingsite", packet_version,
 			                            kCurrentPacketVersionTrainingsite);
@@ -1400,6 +1407,9 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	fw.unsigned_8(somebits);
 	fw.unsigned_8(trainingsite.repeated_layoff_ctr_);
 	trainingsite.request_open_since_.save(fw);
+
+	fw.unsigned_8(static_cast<uint8_t>(trainingsite.checked_soldier_training_.attribute));
+	fw.unsigned_8(trainingsite.checked_soldier_training_.level);
 
 	// DONE
 }
