@@ -736,7 +736,7 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	}
 
 	// Node information
-	std::string node_text("");
+	std::string node_text;
 	if (game == nullptr || get_display_flag(dfDebug)) {
 		// Blit node information in the editor, and in debug mode also for games
 		static boost::format node_format("(%i, %i, %i)");
