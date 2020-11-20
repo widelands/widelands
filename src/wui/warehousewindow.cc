@@ -188,7 +188,8 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 	buttons->add(b);
 
 	b->sigclicked.connect([this, &ib, &wh, type]() {
-		EconomyOptionsWindow::create(&ib, wh.base_flag(), type, can_act_);
+		EconomyOptionsWindow::create(
+		   &ib, ib.egbase().mutable_descriptions(), wh.base_flag(), type, can_act_);
 	});
 }
 
