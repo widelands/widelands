@@ -414,7 +414,8 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_.box, name, 0, 0, MainToolbar::kButtonSize, MainToolbar::kButtonSize, UI::ButtonStyle::kWuiPrimary,
+	   new UI::Button(&toolbar_.box, name, 0, 0, MainToolbar::kButtonSize, MainToolbar::kButtonSize,
+	                  UI::ButtonStyle::kWuiPrimary,
 	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
 	if (window) {
@@ -746,7 +747,11 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 
 	// In-game clock and FPS
 	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime().get(), true) : "");
-	info_panel_.set_fps_string(get_display_flag(dfDebug) ? (boost::format("%5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps()).str() : "");
+	info_panel_.set_fps_string(
+	   get_display_flag(dfDebug) ?
+	      (boost::format("%5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps())
+	         .str() :
+	      "");
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,

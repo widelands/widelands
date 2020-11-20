@@ -27,7 +27,7 @@ MainToolbar::MainToolbar(InfoPanel& parent)
      on_top(false),
      draw_background(false),
      repeat_(0) {
-     parent.set_toolbar(*this);
+	parent.set_toolbar(*this);
 }
 
 void MainToolbar::change_imageset(const ToolbarImageset& images) {
@@ -44,14 +44,15 @@ void MainToolbar::finalize() {
 	// Calculate repetition and width
 	repeat_ = 1;
 	int width = std::min(imageset_.bottom_left->width(), imageset_.top_left->width()) +
-			std::min(imageset_.bottom_center->width(), imageset_.top_center->width()) +
-			std::min(imageset_.bottom_right->width(), imageset_.top_right->width());
+	            std::min(imageset_.bottom_center->width(), imageset_.top_center->width()) +
+	            std::min(imageset_.bottom_right->width(), imageset_.top_right->width());
 	while (width < box.get_w()) {
 		++repeat_;
-		width += std::min(imageset_.bottom_left->width(), imageset_.top_left->width()) + std::min(imageset_.bottom_right->width(), imageset_.top_right->width());
+		width += std::min(imageset_.bottom_left->width(), imageset_.top_left->width()) +
+		         std::min(imageset_.bottom_right->width(), imageset_.top_right->width());
 	}
 	width += std::min(imageset_.bottom_left_corner->width(), imageset_.top_left_corner->width()) +
-			std::min(imageset_.bottom_right_corner->width(), imageset_.top_right_corner->width());
+	         std::min(imageset_.bottom_right_corner->width(), imageset_.top_right_corner->width());
 
 	// Find the highest image
 	height = std::max(height, imageset_.bottom_left_corner->height());
@@ -78,10 +79,10 @@ void MainToolbar::draw(RenderTarget& dst) {
 		return;
 	}
 
-	const Image* lc = on_top ? imageset_.top_left_corner  : imageset_.bottom_left_corner;
-	const Image* l =  on_top ? imageset_.top_left         : imageset_.bottom_left;
-	const Image* m =  on_top ? imageset_.top_center       : imageset_.bottom_center;
-	const Image* r =  on_top ? imageset_.top_right        : imageset_.bottom_right;
+	const Image* lc = on_top ? imageset_.top_left_corner : imageset_.bottom_left_corner;
+	const Image* l = on_top ? imageset_.top_left : imageset_.bottom_left;
+	const Image* m = on_top ? imageset_.top_center : imageset_.bottom_center;
+	const Image* r = on_top ? imageset_.top_right : imageset_.bottom_right;
 	const Image* rc = on_top ? imageset_.top_right_corner : imageset_.bottom_right_corner;
 
 	int x = 0;

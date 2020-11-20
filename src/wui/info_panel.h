@@ -35,7 +35,7 @@ class MainToolbar;
 namespace Widelands {
 struct Message;
 struct MessageQueue;
-}
+}  // namespace Widelands
 
 class MessagePreview : public UI::Textarea {
 public:
@@ -90,7 +90,13 @@ private:
 
 	bool on_top_;
 
-	enum DisplayMode { kCmdSwap = 1, kPinned = 2, kMinimized = 4, kOnMouse_Visible = 8, kOnMouse_Hidden = 16 };
+	enum DisplayMode {
+		kCmdSwap = 1,
+		kPinned = 2,
+		kMinimized = 4,
+		kOnMouse_Visible = 8,
+		kOnMouse_Hidden = 16
+	};
 	DisplayMode display_mode_;
 	void update_mode();
 	void rebuild_dropdown();
