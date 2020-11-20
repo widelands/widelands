@@ -424,10 +424,8 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& game) {
 
 			// If we are here, all needs are satisfied
 			return true;
-
-		} else {
-			throw wexception("Building, index: %d, needs no workers!\n", targetSite);
 		}
+		throw wexception("Building, index: %d, needs no workers!\n", targetSite);
 	} else {
 		throw wexception("No such building, index: %d\n", targetSite);
 	}

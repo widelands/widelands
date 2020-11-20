@@ -573,7 +573,8 @@ bool MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldi
 			int32_t new_level = newguy->get_level(TrainingAttribute::kTotal);
 			if (SoldierPreference::kHeroes == soldier_preference_ && old_level >= new_level) {
 				return false;
-			} else if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
+			}
+			if (SoldierPreference::kRookies == soldier_preference_ && old_level <= new_level) {
 				return false;
 			}
 		}
@@ -873,7 +874,8 @@ bool MilitarySite::get_building_work(Game& game, Worker& worker, bool) {
 			if (upcast(Building, building, enemy)) {
 				soldier->start_task_attack(game, *building);
 				return true;
-			} else if (upcast(Soldier, opponent, enemy)) {
+			}
+			if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->get_battle()) {
 					soldier->start_task_defense(game, stayhome);
 					if (stayhome) {

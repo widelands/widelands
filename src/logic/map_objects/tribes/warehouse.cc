@@ -1367,11 +1367,7 @@ StockPolicy Warehouse::get_worker_policy(DescriptionIndex ware) const {
 }
 
 StockPolicy Warehouse::get_stock_policy(WareWorker waretype, DescriptionIndex wareindex) const {
-	if (waretype == wwWORKER) {
-		return get_worker_policy(wareindex);
-	} else {
-		return get_ware_policy(wareindex);
-	}
+	return waretype == wwWORKER ? get_worker_policy(wareindex) : get_ware_policy(wareindex);
 }
 
 void Warehouse::set_ware_policy(DescriptionIndex ware, StockPolicy policy) {
