@@ -144,11 +144,7 @@ public:
 	// all tools should be reset. Otherwise, something else happened that
 	// requires the UI to be completely recalculated, for example the origin of
 	// the map has changed.
-	enum class MapWas {
-		kGloballyMutated,
-		kReplaced,
-		kResized
-	};
+	enum class MapWas { kGloballyMutated, kReplaced, kResized };
 	void map_changed(const MapWas& action);
 
 	// Access to the tools.
