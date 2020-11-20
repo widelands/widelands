@@ -280,6 +280,8 @@ private:
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;
 
+	std::unordered_map<Serial, std::unordered_map<Serial, int32_t>> cached_costs_;
+
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
 }  // namespace Widelands

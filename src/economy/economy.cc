@@ -302,6 +302,11 @@ void Economy::remove_flag(Flag& flag) {
  * This is called from the merge code.
  */
 void Economy::do_remove_flag(Flag& flag) {
+	for (auto& cost_group : cached_costs_) {
+		cost_group.second.erase(flag.serial());
+	}
+	cached_costs_.erase(flag.serial());
+
 	flag.set_economy(nullptr, type_);
 
 	// fast remove
@@ -614,6 +619,7 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 	Route* best_route = nullptr;
 	int32_t best_cost = -1;
 	Flag& target_flag = req.target_flag();
+	auto target_it = cached_costs_.find(target_flag.serial());
 
 	available_supplies_.clear();
 
@@ -636,7 +642,20 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		const Widelands::Coords provider_position =
 		   supp.get_position(game)->base_flag().get_position();
 
-		const uint32_t dist = game.map().calc_distance(target_flag.get_position(), provider_position);
+		// If this pair of flags is in the cache we'll get a more useful cost estimate.
+		uint32_t dist = 0;
+		if (target_it != cached_costs_.end()) {
+			const auto source_it =
+			   target_it->second.find(supp.get_position(game)->base_flag().serial());
+			if (source_it != target_it->second.end()) {
+				dist = source_it->second;
+			}
+		}
+		if (dist == 0) {
+		// We want cache misses to be sorted after cache hits, so we add a penalty to them
+			dist = game.map().calc_distance(target_flag.get_position(), provider_position)
+		           + std::numeric_limits<uint32_t>::max() / 2;
+		}
 
 		UniqueDistance ud = {dist, supp.get_position(game)->serial(), provider};
 
@@ -649,11 +668,12 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 	// Now available supplies have been sorted by distance to requestor
 	for (auto& supplypair : available_supplies_) {
 		Supply& supp = *supplypair.second;
+		Flag& source_flag = supp.get_position(game)->base_flag();
 
 		Route* const route = best_route != &buf_route0 ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
 
-		if (!find_route(supp.get_position(game)->base_flag(), target_flag, route, best_cost)) {
+		if (!find_route(source_flag, target_flag, route, best_cost)) {
 			if (!best_route) {
 				log_err_time(
 				   game.get_gametime(),
@@ -663,18 +683,35 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 				// To help to debug this a bit:
 				log_err_time(game.get_gametime(),
 				             " ... ware/worker at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
-				             supp.get_position(game)->base_flag().get_position().x,
-				             supp.get_position(game)->base_flag().get_position().y,
+				             source_flag.get_position().x,
+				             source_flag.get_position().y,
 				             target_flag.get_position().x, target_flag.get_position().y,
 				             type_ == wwWARE ?
 				                game.descriptions().get_ware_descr(req.get_index())->name().c_str() :
 				                game.descriptions().get_worker_descr(req.get_index())->name().c_str());
 			}
+
+			// We don't know the exact cost, but we do know it's larger than best_cost,
+			// so increase it if a smaller one was cached.
+			if (target_it != cached_costs_.end()) {
+				const auto source_it = target_it->second.find(source_flag.serial());
+				if (source_it != target_it->second.end()) {
+					source_it->second = std::max(source_it->second, best_cost + 1);
+				}
+			}
+
 			continue;
 		}
 		best_supply = &supp;
 		best_route = route;
 		best_cost = route->get_totalcost();
+
+		if (target_it == cached_costs_.end()) {
+			target_it = cached_costs_.insert(
+			            {target_flag.serial(), {{source_flag.serial(), best_cost}}}).first;
+		} else {
+			target_it->second[source_flag.serial()] = best_cost;
+		}
 	}
 
 	if (!best_route) {
