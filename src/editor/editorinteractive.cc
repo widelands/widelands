@@ -1049,6 +1049,9 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	ScopedTimer timer("┗━ took %ums");
 
 	if (eia) {
+		// In order to ensure that items created by add-ons are properly
+		// removed from the editor's object selection menus, we clear
+		// and repopulate these menus every time the world is reloaded.
 		eia->editor_categories_.clear();
 	}
 

@@ -556,7 +556,10 @@ bool MainMenuNewRandomMap::do_generate_map(Widelands::EditorGameBase& egbase,
 
 	Widelands::Map* map = egbase.mutable_map();
 
-	// TODO(Nordfriese): Perhaps support add-ons in the future? For now we just disable them all
+	// TODO(Nordfriese): Perhaps support add-ons in the future?
+	// Any new units defined by add-ons can not be taken into account when generating a
+	// map currently. And if add-ons modify the default units, they may no longer satisfy
+	// the map generator's assumptions. It is probably safer to just disable them all.
 
 	if (eia) {
 		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
