@@ -184,7 +184,7 @@ Player::Player(EditorGameBase& the_egbase,
 	// Subscribe to NoteFieldTerrainChanged.
 	field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>(
 	   [this](const NoteFieldTerrainChanged& note) {
-		   if (is_seeing(note.map_index)) {
+		   if (fields_[note.map_index].vision == VisibleState::kVisible) {
 			   rediscover_node(egbase().map(), note.fc);
 		   }
 	   });
