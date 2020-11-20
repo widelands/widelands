@@ -233,6 +233,7 @@ protected:
 	                               bool bind_default_toggle = false);
 
 	void hide_minimap();
+	void resize_minimap();
 
 	void mainview_move();
 
@@ -381,9 +382,6 @@ private:
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
-	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
-	// delete it.
-	MiniMap* minimap_;
 	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 

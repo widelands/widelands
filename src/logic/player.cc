@@ -588,10 +588,9 @@ Road* Player::build_road(const Path& path) {
 				}
 			}
 			return &Road::create(egbase(), *start, *end, path);
-		} else {
-			log_warn_time(
-			   egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
 		}
+		log_warn_time(
+		   egbase().get_gametime(), "%i: building road, missed end flag\n", player_number());
 	} else {
 		log_warn_time(
 		   egbase().get_gametime(), "%i: building road, missed start flag\n", player_number());
@@ -658,10 +657,9 @@ Waterway* Player::build_waterway(const Path& path) {
 				}
 			}
 			return &Waterway::create(egbase(), *start, *end, path);
-		} else {
-			log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
-			              static_cast<unsigned int>(player_number()));
 		}
+		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing end flag\n",
+		              static_cast<unsigned int>(player_number()));
 	} else {
 		log_warn_time(egbase().get_gametime(), "%i: building waterway aborted, missing start flag\n",
 		              static_cast<unsigned int>(player_number()));
@@ -800,9 +798,8 @@ Building* Player::build(Coords c,
 
 	if (constructionsite) {
 		return &egbase().warp_constructionsite(c, player_number_, idx, false, former_buildings);
-	} else {
-		return &descr->create(egbase(), this, c, false, false, former_buildings);
 	}
+	return &descr->create(egbase(), this, c, false, false, former_buildings);
 }
 
 /*
@@ -1843,7 +1840,8 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 	const auto it = forbid_attack_.find(who);
 	if (forbid ^ (it == forbid_attack_.end())) {
 		return;
-	} else if (forbid) {
+	}
+	if (forbid) {
 		forbid_attack_.emplace(who);
 	} else {
 		forbid_attack_.erase(it);
