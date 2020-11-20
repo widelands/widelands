@@ -147,6 +147,7 @@ public:
 	enum class MapWas {
 		kGloballyMutated,
 		kReplaced,
+		kResized
 	};
 	void map_changed(const MapWas& action);
 
