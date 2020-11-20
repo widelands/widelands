@@ -65,7 +65,6 @@ void MessagePreview::think() {
 }
 
 void MessagePreview::draw(RenderTarget& r) {
-	// NOCOM need better graphic
 	r.tile(Recti(0, 0, get_w(), get_h()), g_image_cache->get(std::string(kTemplateDir) + "wui/windows/background.png"), Vector2i(0, 0));
 
 	// every second message is highlighted
