@@ -664,7 +664,9 @@ int LuaDescriptions::modify_unit(lua_State* L) {
  ==========================================================
  */
 
-void LuaDescriptions::do_modify_resource(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_resource(lua_State* L,
+                                         const std::string& unit_name,
+                                         const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::ResourceDescription& resource_descr =
@@ -673,12 +675,13 @@ void LuaDescriptions::do_modify_resource(lua_State* L, const std::string& unit_n
 	if (property == "max_amount") {
 		resource_descr.set_max_amount(luaL_checkuint32(L, 5));
 	} else {
-		report_error(
-		   L, "modify_unit not supported yet for resource property '%s'", property.c_str());
+		report_error(L, "modify_unit not supported yet for resource property '%s'", property.c_str());
 	}
 }
 
-void LuaDescriptions::do_modify_tribe(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_tribe(lua_State* L,
+                                      const std::string& unit_name,
+                                      const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::TribeDescr& tribe_descr =
@@ -746,7 +749,9 @@ void LuaDescriptions::do_modify_tribe(lua_State* L, const std::string& unit_name
 	}
 }
 
-void LuaDescriptions::do_modify_worker(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_worker(lua_State* L,
+                                       const std::string& unit_name,
+                                       const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::WorkerDescr& worker_descr =
@@ -765,12 +770,13 @@ void LuaDescriptions::do_modify_worker(lua_State* L, const std::string& unit_nam
 			report_error(L, "modify_unit - worker - programs: invalid command '%s'", cmd.c_str());
 		}
 	} else {
-		report_error(
-		   L, "modify_unit not supported yet for worker property '%s'", property.c_str());
+		report_error(L, "modify_unit not supported yet for worker property '%s'", property.c_str());
 	}
 }
 
-void LuaDescriptions::do_modify_productionsite(lua_State* L, const std::string& unit_name, const std::string& property) {
+void LuaDescriptions::do_modify_productionsite(lua_State* L,
+                                               const std::string& unit_name,
+                                               const std::string& property) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Descriptions& descrs = *egbase.mutable_descriptions();
 	Widelands::ProductionSiteDescr& psdescr = dynamic_cast<Widelands::ProductionSiteDescr&>(
@@ -839,8 +845,7 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L, const std::string& 
 			report_error(L, "modify_unit - productionsite - input - remove_worker: %s not found",
 			             input_name.c_str());
 		} else {
-			report_error(
-			   L, "modify_unit - productionsite - input: invalid command '%s'", cmd.c_str());
+			report_error(L, "modify_unit - productionsite - input: invalid command '%s'", cmd.c_str());
 		}
 	} else if (property == "programs") {
 		const std::string cmd = luaL_checkstring(L, 5);
