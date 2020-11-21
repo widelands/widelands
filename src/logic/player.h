@@ -514,6 +514,8 @@ public:
 	Economy* get_economy(Widelands::Serial serial) const;
 	bool has_economy(Widelands::Serial serial) const;
 
+	Quantity get_total_economy_target(WareWorker, DescriptionIndex) const;
+
 	uint32_t get_current_produced_statistics(uint8_t);
 
 	// Military stuff

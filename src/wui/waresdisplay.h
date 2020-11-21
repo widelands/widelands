@@ -109,6 +109,9 @@ protected:
 	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
 	void draw(RenderTarget&) override;
 	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
+	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) {
+		return RGBAColor(0, 0, 0, 0);
+	}
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList*>;
@@ -175,11 +178,25 @@ public:
 	void remove_all_warelists();
 
 protected:
+	uint32_t amount_of(Widelands::DescriptionIndex);
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList*>;
 	WareListVector warelists_;
+};
+
+class StockMenuWaresDisplay : public WaresDisplay {
+public:
+	StockMenuWaresDisplay(UI::Panel* const parent,
+	                      int32_t x,
+	                      int32_t y,
+	                      const Widelands::Player&,
+	                      Widelands::WareWorker type);
+
+protected:
+	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
+	const Widelands::Player& player_;
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,

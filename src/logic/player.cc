@@ -1605,6 +1605,20 @@ void Player::update_team_vision_whole_map() {
 	}
 }
 
+Quantity Player::get_total_economy_target(const WareWorker ww, const DescriptionIndex di) const {
+	Quantity total = 0;
+	for (const auto& economy : economies()) {
+		if (economy.second->type() == ww && !economy.second->warehouses().empty()) {
+			const auto& t = economy.second->target_quantity(di);
+			if (t.permanent == kEconomyTargetInfinity) {
+				return kEconomyTargetInfinity;
+			}
+			total += t.permanent;
+		}
+	}
+	return total;
+}
+
 /**
  * Called by Game::think to sample statistics data in regular intervals.
  */

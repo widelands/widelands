@@ -37,19 +37,19 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
 	set_center_panel(tabs);
 
-	all_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
+	all_wares_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWARE);
 	tabs->add("total_wares", g_image_cache->get(pic_tab_wares), all_wares_, _("Wares (total)"));
 
-	all_workers_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
+	all_workers_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWORKER);
 	tabs->add(
 	   "workers_total", g_image_cache->get(pic_tab_workers), all_workers_, _("Workers (total)"));
 
-	warehouse_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
+	warehouse_wares_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWARE);
 	tabs->add("wares_in_warehouses", g_image_cache->get(pic_tab_wares_warehouse), warehouse_wares_,
 	          _("Wares in warehouses"));
 
 	warehouse_workers_ =
-	   new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
+	   new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWORKER);
 	tabs->add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 
