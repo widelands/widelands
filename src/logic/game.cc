@@ -431,9 +431,11 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
 		gl.load_game();
-	}
 
-	postload_addons();
+		if (!gl.did_postload_addons()) {
+			postload_addons();
+		}
+	}
 
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);

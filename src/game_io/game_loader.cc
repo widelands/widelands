@@ -41,7 +41,7 @@
 namespace Widelands {
 
 GameLoader::GameLoader(const std::string& path, Game& game)
-   : fs_(*g_fs->make_sub_file_system(path)), game_(game) {
+   : fs_(*g_fs->make_sub_file_system(path)), game_(game), did_postload_addons_(false) {
 }
 
 GameLoader::~GameLoader() {
@@ -127,6 +127,7 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 			// *before* loading any ware statistics. Do this when we next break
 			// savegame compatibility completely.
 			game_.load_all_tribes();
+			did_postload_addons_ = true;
 			game_.postload_addons();
 		}
 	}
