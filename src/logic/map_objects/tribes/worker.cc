@@ -2045,7 +2045,10 @@ void Worker::return_update(Game& game, State& state) {
 					set_location(nullptr);
 					return pop_task(game);
 				}
-			} else if (location == flag) {
+				return start_task_move(
+				   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
+			}
+			if (location == flag) {
 				return pop_task(game);
 			}
 		}
