@@ -48,8 +48,7 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	tabs->add("wares_in_warehouses", g_image_cache->get(pic_tab_wares_warehouse), warehouse_wares_,
 	          _("Wares in warehouses"));
 
-	warehouse_workers_ =
-	   new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWORKER);
+	warehouse_workers_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWORKER);
 	tabs->add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 

@@ -442,7 +442,8 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 
 	const Vector2i p = ware_position(id);
 	dst.blit(p, style.icon_background_image());
-	dst.fill_rect(Recti(p.x, p.y, w, style.icon_background_image()->height()), draw_ware_background_overlay(id), BlendMode::Default);
+	dst.fill_rect(Recti(p.x, p.y, w, style.icon_background_image()->height()),
+	              draw_ware_background_overlay(id), BlendMode::Default);
 
 	const Image* icon = type_ == Widelands::wwWORKER ? tribe_.get_worker_descr(id)->icon() :
 	                                                   tribe_.get_ware_descr(id)->icon();
@@ -508,14 +509,15 @@ WaresDisplay::WaresDisplay(UI::Panel* const parent,
 }
 
 StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
-	                                         const int32_t x,
-	                                         const int32_t y,
-	                                         const Widelands::Player& p,
-	                                         const Widelands::WareWorker type)
+                                             const int32_t x,
+                                             const int32_t y,
+                                             const Widelands::Player& p,
+                                             const Widelands::WareWorker type)
    : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p) {
 }
 
-RGBAColor StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::DescriptionIndex di) {
+RGBAColor
+StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::DescriptionIndex di) {
 	if (get_type() == Widelands::wwWARE) {
 		if (!player_.tribe().get_ware_descr(di)->has_demand_check(player_.tribe().name())) {
 			return WaresDisplay::draw_ware_background_overlay(di);
@@ -528,9 +530,11 @@ RGBAColor StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::D
 
 	const uint32_t amount = amount_of(di);
 	const uint32_t target = player_.get_total_economy_target(get_type(), di);
-	const RGBColor& color = amount < target ? g_style_manager->building_statistics_style().low_color() :
-			amount > target ? g_style_manager->building_statistics_style().high_color() :
-			g_style_manager->building_statistics_style().medium_color();
+	const RGBColor& color = amount < target ?
+	                           g_style_manager->building_statistics_style().low_color() :
+	                           amount > target ?
+	                           g_style_manager->building_statistics_style().high_color() :
+	                           g_style_manager->building_statistics_style().medium_color();
 	return RGBAColor(color.r, color.g, color.b, 50);
 }
 
