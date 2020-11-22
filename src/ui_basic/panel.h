@@ -326,7 +326,7 @@ protected:
 
 	static void play_click();
 
-	static bool draw_tooltip(const std::string& text, PanelStyle);
+	static bool draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
@@ -418,6 +418,9 @@ private:
 	static Panel* modal_;
 	static Panel* mousegrab_;
 	static Panel* mousein_;
+	static Panel* tooltip_panel_;
+	static Vector2i tooltip_fixed_pos_;
+	static Recti tooltip_fixed_rect_;
 	static bool allow_user_input_;
 
 	static FxId click_fx_;

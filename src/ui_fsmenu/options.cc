@@ -145,6 +145,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                 99,
                 UI::PanelStyle::kFsMenu,
                 _("Maximum FPS:")),
+     tooltip_accessibility_mode_(&box_interface_left_,
+                                 UI::PanelStyle::kFsMenu,
+                                 Vector2i::zero(),
+                                 _("Accessibility mode for tooltips")),
      translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
@@ -330,6 +334,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_interface_left_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sb_maxfps_);
+	box_interface_left_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	// Windows
 	box_windows_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
@@ -448,6 +453,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
 	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
+	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
 
 	// Windows options
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
@@ -699,6 +705,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.inputgrab = inputgrab_.get_state();
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
+	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
 	// Windows options
 	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();
@@ -777,6 +784,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
+	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
 
 	// Windows options
 	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);
@@ -823,6 +831,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("inputgrab", opt.inputgrab);
 	opt_section_.set_int("maxfps", opt.maxfps);
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
+	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
 
 	// Windows options
 	opt_section_.set_bool("snap_windows_only_when_overlapping", opt.snap_win_overlap_only);
