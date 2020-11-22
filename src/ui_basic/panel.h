@@ -326,7 +326,8 @@ protected:
 
 	static void play_click();
 
-	static bool draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
+	static bool
+	draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 

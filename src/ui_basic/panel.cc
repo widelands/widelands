@@ -980,7 +980,8 @@ void Panel::do_mousein(bool const inside) {
 	}
 
 	if (tooltip_accessibility_mode()) {
-		if (inside && tooltip_panel_ != this && (!tooltip_panel_ || tooltip_fixed_pos_ == Vector2i::invalid()) && !tooltip().empty()) {
+		if (inside && tooltip_panel_ != this &&
+		    (!tooltip_panel_ || tooltip_fixed_pos_ == Vector2i::invalid()) && !tooltip().empty()) {
 			tooltip_panel_ = this;
 			tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
 		} else if (!inside && tooltip_panel_ == this && tooltip_fixed_pos_ == Vector2i::invalid()) {
@@ -1220,7 +1221,8 @@ bool Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
 
 	if (tooltip_panel_ && tooltip_fixed_pos_ != Vector2i::invalid()) {
 		const bool inside = tooltip_fixed_rect_.x < x && tooltip_fixed_rect_.y < y &&
-				tooltip_fixed_rect_.x + tooltip_fixed_rect_.w > x && tooltip_fixed_rect_.y + tooltip_fixed_rect_.h > y;
+		                    tooltip_fixed_rect_.x + tooltip_fixed_rect_.w > x &&
+		                    tooltip_fixed_rect_.y + tooltip_fixed_rect_.h > y;
 		tooltip_fixed_pos_ = Vector2i::invalid();
 		if (inside) {
 			return true;
