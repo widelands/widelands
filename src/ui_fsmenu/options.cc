@@ -277,6 +277,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                UI::PanelStyle::kFsMenu,
                                Vector2i::zero(),
                                _("Allow diagonal scrolling with the numeric keypad")),
+     edge_scrolling_(&box_ingame_,
+                             UI::PanelStyle::kFsMenu,
+                             Vector2i::zero(),
+                             _("Scroll when the mouse cursor is near the screen edge")),
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
                       UI::PanelStyle::kFsMenu,
@@ -358,6 +362,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
@@ -460,6 +465,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
+	edge_scrolling_.set_state(opt.edge_scrolling);
 	training_wheels_.set_state(opt.training_wheels);
 
 	// New Game options
@@ -714,6 +720,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
+	os_.edge_scrolling = edge_scrolling_.get_state();
 	os_.training_wheels = training_wheels_.get_state();
 
 	// New Game options
@@ -791,6 +798,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
+	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 
 	// New Game options
@@ -836,6 +844,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
+	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
 
 	// New Game options
