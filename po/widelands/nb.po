@@ -3,6 +3,8 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Per-Henrik Kvalnes <perhenrik.kvalnes@gmail.com, 2020
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
@@ -103,11 +105,11 @@ msgstr "Status"
 
 #: ../../data/scripting/messages.lua:227
 msgid "New Objective"
-msgstr ""
+msgstr "Nytt oppdrag"
 
 #: ../../data/scripting/messages.lua:229
 msgid "New Objectives"
-msgstr ""
+msgstr "Nye oppdrag"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
@@ -1064,7 +1066,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:638
 #: ../../src/ui_fsmenu/main.cc:312
 msgid "Random Map"
-msgstr ""
+msgstr "Tilfeldig kart"
 
 #. * TRANSLATORS: This is shown after a random map has been created in the
 #. editor.
@@ -1086,7 +1088,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:641
 msgid ""
 "This map was generated automatically by the Widelands Random Map Generator."
-msgstr ""
+msgstr "Dette kartet var automatisk generert av Wideland sin tilfeldigkart-generator"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:652
 #: ../../src/wui/game_summary.cc:112
@@ -1103,7 +1105,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:75
 #: ../../src/wui/gamedetails.cc:189
 msgid "Filename:"
-msgstr ""
+msgstr "Filnavn:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:32
@@ -2947,7 +2949,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/about.cc:39 ../../src/ui_fsmenu/main.cc:381
 msgid "About Widelands"
-msgstr ""
+msgstr "Om Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:50 ../../src/ui_fsmenu/about.cc:55
 msgid "Lua Error"
@@ -3316,7 +3318,7 @@ msgstr "Vennligst skriv inn passordet ditt!"
 
 #: ../../src/ui_fsmenu/main.cc:241
 msgid "Begin a new game"
-msgstr ""
+msgstr "Start et nytt spill"
 
 #: ../../src/ui_fsmenu/main.cc:241
 msgid "New Game"
@@ -3324,11 +3326,11 @@ msgstr "Nytt spill"
 
 #: ../../src/ui_fsmenu/main.cc:242
 msgid "New Random Game"
-msgstr ""
+msgstr "Nytt tilfeldig spill"
 
 #: ../../src/ui_fsmenu/main.cc:243
 msgid "Create a new random match"
-msgstr ""
+msgstr "Lag en ny tilfeldig kamp"
 
 #: ../../src/ui_fsmenu/main.cc:245
 msgid "Campaigns"
@@ -3336,11 +3338,11 @@ msgstr "Kampanjer"
 
 #: ../../src/ui_fsmenu/main.cc:245
 msgid "Play a campaign"
-msgstr ""
+msgstr "Spill en kampanje"
 
 #: ../../src/ui_fsmenu/main.cc:246
 msgid "Tutorials"
-msgstr ""
+msgstr "Opplæring"
 
 #: ../../src/ui_fsmenu/main.cc:247
 msgid "Play one of our beginners’ tutorials"
@@ -3439,11 +3441,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:360
 msgid "Single Player…"
-msgstr ""
+msgstr "Enspiller"
 
 #: ../../src/ui_fsmenu/main.cc:361
 msgid "Multiplayer…"
-msgstr ""
+msgstr "Flerspiller"
 
 #: ../../src/ui_fsmenu/main.cc:362
 msgid "Editor…"
@@ -3451,15 +3453,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:364
 msgid "Begin or load a single-player campaign or free game"
-msgstr ""
+msgstr "Start eller last et enspiller kampanje eller spill"
 
 #: ../../src/ui_fsmenu/main.cc:366
 msgid "Play with your friends over the internet"
-msgstr ""
+msgstr "Spill med dine venner over internett"
 
 #: ../../src/ui_fsmenu/main.cc:368
 msgid "Launch the map editor"
-msgstr ""
+msgstr "Start karteditoren"
 
 #: ../../src/ui_fsmenu/main.cc:370
 msgid "Watch Replay"
@@ -3471,7 +3473,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:374
 msgid "Add-Ons"
-msgstr ""
+msgstr "Tillegg"
 
 #: ../../src/ui_fsmenu/main.cc:378 ../../src/ui_fsmenu/options.cc:86
 msgid "Options"
@@ -3488,15 +3490,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:383
 msgid "Readme, License, and Credits"
-msgstr ""
+msgstr "Les-meg, lisens og rulletekst"
 
 #: ../../src/ui_fsmenu/main.cc:384
 msgid "Exit Widelands"
-msgstr ""
+msgstr "Avslutt Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:386
 msgid "Quit the game"
-msgstr ""
+msgstr "Avslutt spillet"
 
 #. * TRANSLATORS: %1$s = version string, %2%s = "Debug" or "Release"
 #: ../../src/ui_fsmenu/main.cc:390
@@ -5736,14 +5738,14 @@ msgstr ""
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:167
 msgid "SP = Single Player"
-msgstr ""
+msgstr "Enspiller"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/savegametable.cc:171 ../../src/wui/savegametable.cc:231
 msgid "MP = Multiplayer"
-msgstr ""
+msgstr "Flerspiller"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
@@ -5969,7 +5971,7 @@ msgstr ""
 #: ../../src/wui/sound_options.cc:136
 msgctxt "sound_options"
 msgid "Music"
-msgstr ""
+msgstr "Musikk"
 
 #: ../../src/wui/sound_options.cc:138
 msgctxt "sound_options"
