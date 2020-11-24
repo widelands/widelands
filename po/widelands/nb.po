@@ -3346,11 +3346,11 @@ msgstr "Opplæring"
 
 #: ../../src/ui_fsmenu/main.cc:247
 msgid "Play one of our beginners’ tutorials"
-msgstr ""
+msgstr "Spill et opplæringsspill"
 
 #: ../../src/ui_fsmenu/main.cc:249
 msgid "Continue a saved game"
-msgstr ""
+msgstr "Fortsett et spill som er lagret"
 
 #: ../../src/ui_fsmenu/main.cc:249
 msgid "Load Game"
@@ -3481,7 +3481,7 @@ msgstr "Innstillinger"
 
 #: ../../src/ui_fsmenu/main.cc:380
 msgid "Technical and game-related settings"
-msgstr ""
+msgstr "Tekniske og spill-relaterte innstillinger"
 
 #: ../../src/ui_fsmenu/main.cc:383
 msgctxt "hotkey"
@@ -3727,19 +3727,19 @@ msgstr "Språk"
 
 #: ../../src/ui_fsmenu/options.cc:125
 msgid "Window Size"
-msgstr ""
+msgstr "Vindustørrelse"
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Grab Input"
-msgstr ""
+msgstr "Overstyr innput"
 
 #: ../../src/ui_fsmenu/options.cc:135
 msgid "Use system mouse cursor"
-msgstr ""
+msgstr "Bruk systemets musepeker"
 
 #: ../../src/ui_fsmenu/options.cc:147
 msgid "Maximum FPS:"
-msgstr ""
+msgstr "Maksimum BPS:"
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Snap windows only when overlapping"
@@ -3763,19 +3763,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Save game automatically every:"
-msgstr ""
+msgstr "Lagre spill automatisk hver:"
 
 #: ../../src/ui_fsmenu/options.cc:220
 msgid "Maximum number of autosave files:"
-msgstr ""
+msgstr "Maksimum antall auto-lagrede spill:"
 
 #: ../../src/ui_fsmenu/options.cc:227
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr ""
+msgstr "Komprimer Wideland datafiler (kart, repriser og lagrede spill)"
 
 #: ../../src/ui_fsmenu/options.cc:233
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr ""
+msgstr "Skriv 'syncstreams' i nettverksspill for å debugge asynkronheter"
 
 #: ../../src/ui_fsmenu/options.cc:239
 #: ../../src/wui/interactive_gamebase.cc:190
@@ -3834,7 +3834,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:284
 msgid "Teach me how to play"
-msgstr ""
+msgstr "Vis meg hvordan å spille spillet"
 
 #. * TRANSLATORS: Button to bring up a window to edit teaching progress in the
 #. Options
@@ -3844,27 +3844,27 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:309
 msgid "Interface"
-msgstr ""
+msgstr "Grensesnitt"
 
 #: ../../src/ui_fsmenu/options.cc:310
 msgid "Windows"
-msgstr ""
+msgstr "Vinduer"
 
 #: ../../src/ui_fsmenu/options.cc:311
 msgid "Sound"
-msgstr ""
+msgstr "Lyd"
 
 #: ../../src/ui_fsmenu/options.cc:312
 msgid "Saving"
-msgstr ""
+msgstr "Lagring"
 
 #: ../../src/ui_fsmenu/options.cc:313
 msgid "New Games"
-msgstr ""
+msgstr "Nye spillere"
 
 #: ../../src/ui_fsmenu/options.cc:314
 msgid "In-Game"
-msgstr ""
+msgstr "I spillet"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:391
@@ -5976,28 +5976,28 @@ msgstr "Musikk"
 #: ../../src/wui/sound_options.cc:138
 msgctxt "sound_options"
 msgid "Chat Messages"
-msgstr ""
+msgstr "Chatmeldinger"
 
 #: ../../src/wui/sound_options.cc:141
 msgctxt "sound_options"
 msgid "Game Messages"
-msgstr ""
+msgstr "Spillmeldinger"
 
 #: ../../src/wui/sound_options.cc:145
 msgctxt "sound_options"
 msgid "User Interface"
-msgstr ""
+msgstr "Brukergrensesnitt"
 
 #: ../../src/wui/sound_options.cc:148
 msgctxt "sound_options"
 msgid "Ambient Sounds"
-msgstr ""
+msgstr "Bakgrunnslyder"
 
 #: ../../src/wui/sound_options.cc:161
 msgid ""
 "Sound is disabled either due to a problem with the sound driver, or because "
 "it was switched off at the command line."
-msgstr ""
+msgstr "Lyden er slått av enten på grunna av et problem med lyd-driver, eller fordi den var slått av i kommandolinjen."
 
 #: ../../src/wui/stock_menu.cc:41
 msgid "Wares (total)"
