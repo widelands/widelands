@@ -2641,23 +2641,23 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:1038
 msgctxt "chat_sender"
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Det er ingen bruker med dette navnet logget inn."
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr ""
+msgstr "Spillet fins ikke mer, kanskje det akkurat ble lukket."
 
 #: ../../src/network/internet_gaming_messages.cc:46
 msgid "Wrong password, please try again."
-msgstr ""
+msgstr "Feil passord, prøv igjen."
 
 #: ../../src/network/internet_gaming_messages.cc:47
 msgid "You have been temporarily banned from online gaming."
-msgstr ""
+msgstr "Du har blitt kastet ut midlertidig fra å spille online."
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid "The protocol version you are using is not supported!"
@@ -2850,7 +2850,7 @@ msgstr "Klient «%1$s» svarte ikke på mer enn %2$s."
 
 #: ../../src/network/network_lan_promotion.cc:364
 msgid "Failed to use the local network!"
-msgstr ""
+msgstr "Kan ikke bruke lokalt nettverk (LAN)!"
 
 #. * TRANSLATORS: %s is a list of alternative ports with "or"
 #: ../../src/network/network_lan_promotion.cc:366
@@ -2874,17 +2874,17 @@ msgstr ""
 #: ../../src/ui_basic/dropdown.cc:341 ../../src/ui_basic/dropdown.cc:343
 #: ../../src/ui_fsmenu/launch_mpg.cc:358
 msgid "Error"
-msgstr ""
+msgstr "Feil"
 
 #. * TRANSLATORS: Selection in Dropdown menus.
 #: ../../src/ui_basic/dropdown.cc:401
 msgctxt "dropdown"
 msgid "Not Selected"
-msgstr ""
+msgstr "Ikke valgt"
 
 #: ../../src/ui_basic/progresswindow.cc:62
 msgid "Loading…"
-msgstr ""
+msgstr "Laster…"
 
 #: ../../src/ui_basic/spinbox.cc:129
 msgid "Decrease the value"
@@ -3017,7 +3017,7 @@ msgstr "Klienter:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:74
 msgid "Open Games:"
-msgstr ""
+msgstr "Åpne spill:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:83
 #: ../../src/ui_fsmenu/netsetup_lan.cc:81
@@ -3070,7 +3070,7 @@ msgstr "Spill"
 #: ../../src/ui_fsmenu/internet_lobby.cc:403
 #, c-format
 msgid "The game %s is already running. Please choose a different name."
-msgstr ""
+msgstr "Spillet %s kjører allerede. Velg et annet navn."
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:417
 msgid ""
@@ -3081,7 +3081,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:420
 msgid "Connection Timed Out"
-msgstr ""
+msgstr "Koblingen ble avbrutt"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
@@ -3157,7 +3157,7 @@ msgstr "Seiersvilkår er satt av scenariet"
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:448
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:280
 msgid "Saved Game"
-msgstr ""
+msgstr "Lagret spill"
 
 #: ../../src/ui_fsmenu/launch_game.cc:161
 msgid "The game is a saved game – the win condition was set before."
@@ -3195,7 +3195,7 @@ msgstr "Vis hjelp-vinduet"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:121
 msgid "Please select a map or saved game."
-msgstr ""
+msgstr "Velg et kart eller lagret spill."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:123
 msgid "The host has not yet selected a map or saved game."
@@ -3203,7 +3203,7 @@ msgstr "Verten har ikke valgt et kart eller lagret spill enda."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:265
 msgid "Saved Game is Directory"
-msgstr ""
+msgstr "Lagre spillet i denne mappen"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:266
 msgid ""
@@ -3242,44 +3242,44 @@ msgstr "Oppsett for flerspiller"
 
 #: ../../src/ui_fsmenu/loadgame.cc:33
 msgid "Choose Game"
-msgstr ""
+msgstr "Velg spill"
 
 #: ../../src/ui_fsmenu/loadgame.cc:33
 msgid "Choose Replay"
-msgstr ""
+msgstr "Velg reprise"
 
 #: ../../src/ui_fsmenu/loadgame.cc:52
 msgid "Show Filenames"
-msgstr ""
+msgstr "Vis filnavn"
 
 #: ../../src/ui_fsmenu/loadgame.cc:67
 msgid "Load this replay"
-msgstr ""
+msgstr "Last denne reprisen"
 
 #: ../../src/ui_fsmenu/loadgame.cc:69 ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Return to the multiplayer game setup"
-msgstr ""
+msgstr "Tilbake til flerspilleroppsettet"
 
 #: ../../src/ui_fsmenu/loadgame.cc:70 ../../src/ui_fsmenu/mapselect.cc:61
 msgid "Return to the single player menu"
-msgstr ""
+msgstr "Tilbake til enspillermenyen"
 
 #: ../../src/ui_fsmenu/loadgame.cc:71
 msgid "Load this game"
-msgstr ""
+msgstr "Last dette spillet"
 
 #: ../../src/ui_fsmenu/login_box.cc:37 ../../src/ui_fsmenu/main.cc:305
 msgid "Online Game Settings"
-msgstr ""
+msgstr "Online spillinnstillinger"
 
 #: ../../src/ui_fsmenu/login_box.cc:44
 #: ../../src/wui/economy_options_window.cc:658
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: ../../src/ui_fsmenu/login_box.cc:50
 msgid "Log in to a registered account."
-msgstr ""
+msgstr "Logg inn med en registrert konto."
 
 #: ../../src/ui_fsmenu/login_box.cc:51
 msgid "Nickname:"
@@ -3390,7 +3390,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:303
 msgid "Online Game"
-msgstr ""
+msgstr "Online Spill"
 
 #: ../../src/ui_fsmenu/main.cc:304
 msgid "Join the Widelands lobby"
@@ -3453,7 +3453,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:364
 msgid "Begin or load a single-player campaign or free game"
-msgstr "Start eller last et enspiller kampanje eller spill"
+msgstr "Start eller last en enspiller-kampanje eller et frittstående spill"
 
 #: ../../src/ui_fsmenu/main.cc:366
 msgid "Play with your friends over the internet"
