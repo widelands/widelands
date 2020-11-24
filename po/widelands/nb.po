@@ -594,11 +594,11 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:1027
 msgid "Loading world…"
-msgstr ""
+msgstr "Laster verden…"
 
 #: ../../src/editor/map_generator.cc:750
 msgid "Random Player"
-msgstr ""
+msgstr "Tilfeldig spiller"
 
 #: ../../src/editor/tools/info_tool.cc:43
 msgid "Field Information"
@@ -789,7 +789,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:73
 #: ../../src/wui/mapdata.cc:163
 msgid "Multiplayer Scenarios"
-msgstr ""
+msgstr "Flerspiller scenarioer"
 
 #. * TRANSLATORS: Directory name for downloaded maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:75
@@ -902,7 +902,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:375
 msgid "Tags:"
-msgstr ""
+msgstr "Merkelapper:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:387
 msgctxt "map_theme"
@@ -936,7 +936,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:453
 #: ../../src/wui/mapdetails.cc:182
 msgid "Tags"
-msgstr ""
+msgstr "Merkelapper"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:455
 msgid "Teams"
@@ -3374,12 +3374,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:106
 #, c-format
 msgid "Players: %s"
-msgstr ""
+msgstr "Spillere: %s"
 
 #: ../../src/ui_fsmenu/main.cc:289
 #, c-format
 msgid "Gametime: %s"
-msgstr ""
+msgstr "Spilletid: %s"
 
 #. * TRANSLATORS: Information about when a game was saved, e.g. 'Saved: Today,
 #. 10:30'
@@ -3572,7 +3572,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Official & Unofficial"
-msgstr ""
+msgstr "Offisielle og Uoffisielle"
 
 #. * TRANSLATORS: Filter entry in map selection. Other entries are "Free for
 #. all"", "Teams of 2"
@@ -3583,7 +3583,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:426
 msgid "Balanced & Unbalanced"
-msgstr ""
+msgstr "Balansert og ubalansert"
 
 #: ../../src/ui_fsmenu/mapselect.cc:431
 msgctxt "balancing"
@@ -4228,23 +4228,23 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:338
 msgid "Small buildings"
-msgstr ""
+msgstr "Små bygninger"
 
 #: ../../src/wui/building_statistics_menu.cc:340
 msgid "Medium buildings"
-msgstr ""
+msgstr "Medium bygninger"
 
 #: ../../src/wui/building_statistics_menu.cc:342
 msgid "Big buildings"
-msgstr ""
+msgstr "Store bygninger"
 
 #: ../../src/wui/building_statistics_menu.cc:344
 msgid "Mines"
-msgstr ""
+msgstr "Gruver"
 
 #: ../../src/wui/building_statistics_menu.cc:346
 msgid "Ports"
-msgstr ""
+msgstr "Havner"
 
 #: ../../src/wui/building_statistics_menu.cc:700
 msgid "Low productivity:"
@@ -4667,11 +4667,11 @@ msgstr "Feilsøkingsfelt"
 #. * TRANSLATORS: Window label when "Exit game" has been pressed
 #: ../../src/wui/game_exit_confirm_box.cc:29
 msgid "Exit Game Confirmation"
-msgstr ""
+msgstr "Avslutt spillet"
 
 #: ../../src/wui/game_exit_confirm_box.cc:30
 msgid "Are you sure you wish to exit this game?"
-msgstr ""
+msgstr "Er du sikker på at du ønsker å avslutte dette spillet?"
 
 #. * TRANSLATORS: An entry in the game's main menu
 #: ../../src/wui/game_main_menu_save_game.cc:53
@@ -5242,7 +5242,7 @@ msgstr "Statistikk"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/interactive_player.cc:281 ../../src/wui/map_tags.cc:38
 msgid "Seafaring"
-msgstr ""
+msgstr "Sjøfaring"
 
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:287
@@ -5306,17 +5306,17 @@ msgstr ""
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:30
 msgid "Official"
-msgstr ""
+msgstr "Offisielle"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:32
 msgid "Unofficial"
-msgstr ""
+msgstr "Uoffisielle"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:34
 msgid "Balanced"
-msgstr ""
+msgstr "Balansert"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:36
@@ -5326,12 +5326,12 @@ msgstr "Ubalansert"
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:40
 msgid "Ferries"
-msgstr ""
+msgstr "Ferger"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:42
 msgid "Artifacts"
-msgstr ""
+msgstr "Artefakter"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:46
@@ -5392,17 +5392,17 @@ msgstr ""
 #: ../../src/wui/mapdetails.cc:156
 #, c-format
 msgid "The name of this map in your language: %s"
-msgstr ""
+msgstr "Navn på dette kartet i ditt språk: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
 #: ../../src/wui/mapdetails.cc:194
 msgid "Hint"
-msgstr ""
+msgstr "Hint"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/wui/maptable.cc:32
 msgid "Pl."
-msgstr ""
+msgstr "Sp."
 
 #: ../../src/wui/maptable.cc:33 ../../src/wui/maptable.cc:62
 msgid "Filename"
@@ -5410,7 +5410,7 @@ msgstr ""
 
 #: ../../src/wui/maptable.cc:33
 msgid "The name of the map or scenario"
-msgstr ""
+msgstr "Navnet på kartet eller scenarioet"
 
 #: ../../src/wui/maptable.cc:35
 msgid "Size"
