@@ -130,22 +130,22 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:318
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:201
 msgid "No AI"
-msgstr ""
+msgstr "Ingen KI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:95
 msgid "Normal AI"
-msgstr ""
+msgstr "Normal KI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:110
 msgid "Weak AI"
-msgstr ""
+msgstr "Svak KI"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/defaultai.h:125
 msgid "Very Weak AI"
-msgstr ""
+msgstr "Veldig svak KI"
 
 #. * TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably
@@ -354,7 +354,7 @@ msgstr "Kartinnstillinger"
 #. * TRANSLATORS: An entry in the editor's main menu
 #: ../../src/editor/editorinteractive.cc:208
 msgid "Exit Editor"
-msgstr ""
+msgstr "Avslutt editor"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:244
@@ -370,7 +370,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:253
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:87
 msgid "Random height"
-msgstr ""
+msgstr "Tilfeldig høyde"
 
 #. * TRANSLATORS: Tooltip for the random height tool in the editor
 #: ../../src/editor/editorinteractive.cc:256
@@ -732,7 +732,7 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:209
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:504
 msgid "Size: %1% x %2%"
-msgstr ""
+msgstr "Størrelse %1% x %2%"
 
 #: ../../src/editor/tools/info_tool.cc:214
 #, c-format
@@ -741,24 +741,24 @@ msgstr "Spillere: %u"
 
 #: ../../src/editor/tools/info_tool.cc:217
 msgid "Players: –"
-msgstr ""
+msgstr "Spillere: -"
 
 #: ../../src/editor/tools/info_tool.cc:221
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Forfatter: %s"
 
 #: ../../src/editor/tools/info_tool.cc:223 ../../src/ui_fsmenu/main.cc:351
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:111
 #, c-format
 msgid "Description: %s"
-msgstr ""
+msgstr "Beskrivelse: %s"
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
 #, c-format
 msgid "Current: %s …"
-msgstr ""
+msgstr "Valgte: %s …"
 
 #. * TRANSLATORS: Help text in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:179
@@ -890,7 +890,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:357
 msgid "Authors:"
-msgstr ""
+msgstr "Forfattere:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:362
 msgid "Description:"
@@ -940,7 +940,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:455
 msgid "Teams"
-msgstr ""
+msgstr "Lag"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:487
 #, c-format
@@ -984,27 +984,27 @@ msgstr "Høy"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:90
 msgid "Climate"
-msgstr ""
+msgstr "Klima"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:114
 msgid "Terrain Distribution"
-msgstr ""
+msgstr "Landskapsdistribusjon"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:134
 msgid "Water:"
-msgstr ""
+msgstr "Vann:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:147
 msgid "Land:"
-msgstr ""
+msgstr "Land:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:160
 msgid "Wasteland:"
-msgstr ""
+msgstr "Økdemark:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:165
 msgid "Mountains:"
-msgstr ""
+msgstr "Fjell:"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:173
@@ -1016,11 +1016,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:175
 msgid "Island mode"
-msgstr ""
+msgstr "Øymodus"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:183
 msgid "Random number:"
-msgstr ""
+msgstr "Tilfeldig tall:"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:190
 msgid "Map ID:"
@@ -1033,31 +1033,31 @@ msgstr "Generer kart"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:234
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:268
 msgid "Random"
-msgstr ""
+msgstr "Tilfeldig"
 
 #. * TRANSLATORS: A campaign difficulty
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:264
 #: ../../src/ui_fsmenu/campaigns.cc:53
 msgid "Default"
-msgstr ""
+msgstr "Normal"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:265
 msgid "Alpine"
-msgstr ""
+msgstr "Alpin"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:266
 msgid "Atoll"
-msgstr ""
+msgstr "Atoll"
 
 #. * TRANSLATORS: A world name for the random map generator in the editor
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:267
 #: ../../src/logic/map.cc:61
 msgid "Wasteland"
-msgstr ""
+msgstr "Ødemark"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:581
 msgid "Generating random map…"
-msgstr ""
+msgstr "Genererer tilfeldig kart…"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
@@ -1161,18 +1161,18 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/map_size_box.cc:39
 msgid "Width"
-msgstr ""
+msgstr "Bredde"
 
 #: ../../src/editor/ui_menus/map_size_box.cc:51
 msgid "Height"
-msgstr ""
+msgstr "Høyde"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
 #. recommended number of players
 #: ../../src/editor/ui_menus/player_menu.cc:54
 msgid "Too Many Players"
-msgstr ""
+msgstr "For mange spillere"
 
 #. * TRANSLATORS: Info text in editor player menu when a player has selected
 #. more than the
@@ -1364,7 +1364,7 @@ msgstr ""
 
 #: ../../src/game_io/game_loader.cc:116 ../../src/game_io/game_saver.cc:91
 msgid "AI"
-msgstr ""
+msgstr "KI"
 
 #: ../../src/game_io/game_loader.cc:123 ../../src/game_io/game_saver.cc:98
 msgid "Command queue"
@@ -1505,7 +1505,7 @@ msgstr ""
 #: ../../src/logic/editor_game_base.cc:226
 #, c-format
 msgid "Creating player %d…"
-msgstr ""
+msgstr "Lager spiller %d…"
 
 #: ../../src/logic/editor_game_base.cc:492
 msgid "Cleaning up for loading: Map objects (1/3)"
@@ -2915,8 +2915,8 @@ msgstr[1] ""
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d piksel"
+msgstr[1] "%d piksler"
 
 #. * TRANSLATORS: A spinbox unit
 #: ../../src/ui_basic/spinbox.cc:407
@@ -2933,19 +2933,19 @@ msgstr "Lukk"
 
 #: ../../src/ui_basic/window.cc:166
 msgid "Minimize"
-msgstr ""
+msgstr "Minimer"
 
 #: ../../src/ui_basic/window.cc:166
 msgid "Restore"
-msgstr ""
+msgstr "Gjenopprett"
 
 #: ../../src/ui_basic/window.cc:171
 msgid "Pin"
-msgstr ""
+msgstr "Fest"
 
 #: ../../src/ui_basic/window.cc:171
 msgid "Unpin"
-msgstr ""
+msgstr "Løsne"
 
 #: ../../src/ui_fsmenu/about.cc:39 ../../src/ui_fsmenu/main.cc:381
 msgid "About Widelands"
@@ -2953,46 +2953,46 @@ msgstr "Om Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:50 ../../src/ui_fsmenu/about.cc:55
 msgid "Lua Error"
-msgstr ""
+msgstr "Lua-feil"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:32
 msgid "Choose Campaign"
-msgstr ""
+msgstr "Velg kampanje"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:38
 #: ../../src/ui_fsmenu/loadgame.cc:66
 #: ../../src/ui_fsmenu/scenario_select.cc:101
 msgid "Return to the main menu"
-msgstr ""
+msgstr "Gå tilbake til hovedmeny"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:39
 msgid "Play this campaign"
-msgstr ""
+msgstr "Spill denne kampanjen"
 
 #. * TRANSLATORS: Campaign difficulty table header
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 msgid "Diff."
-msgstr ""
+msgstr "V.g."
 
 #. * TRANSLATORS: Header for campaign difficulty
 #: ../../src/ui_fsmenu/campaign_select.cc:47
 #: ../../src/ui_fsmenu/campaigndetails.cc:63
 #: ../../src/ui_fsmenu/scenario_select.cc:65
 msgid "Difficulty"
-msgstr ""
+msgstr "Vanskelighetsgrad"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 msgid "Tribe Name"
-msgstr ""
+msgstr "Stammenavn"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:50
 msgid "Campaign Name"
-msgstr ""
+msgstr "Kampanjenavn"
 
 #. * TRANSLATORS: Header for campaign name
 #: ../../src/ui_fsmenu/campaigndetails.cc:49
 msgid "Campaign"
-msgstr ""
+msgstr "Kampanje"
 
 #. * TRANSLATORS: Header for campaign description
 #: ../../src/ui_fsmenu/campaigndetails.cc:71
@@ -3000,7 +3000,7 @@ msgstr ""
 #: ../../src/wui/savegametable.cc:132 ../../src/wui/savegametable.cc:184
 #: ../../src/wui/savegametable.cc:244
 msgid "Description"
-msgstr ""
+msgstr "Beskrivelse"
 
 #: ../../src/ui_fsmenu/helpwindow.cc:47 ../../src/wui/helpwindow.cc:45
 #, c-format
@@ -3034,7 +3034,7 @@ msgstr "Åpne et nytt spill"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:109
 msgid "Leave Lobby"
-msgstr ""
+msgstr "Gå ut av lobby"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:159
 msgid "User Status"
@@ -3056,12 +3056,12 @@ msgstr "Ikke registrert"
 #: ../../src/ui_fsmenu/internet_lobby.cc:166
 msgctxt "player"
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #. * TRANSLATORS: Widelands version
 #: ../../src/ui_fsmenu/internet_lobby.cc:168
 msgid "Version"
-msgstr ""
+msgstr "Versjon"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:170
 msgid "Game"
@@ -3092,19 +3092,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:40
 msgid "Launch Game"
-msgstr ""
+msgstr "Start spill"
 
 #: ../../src/ui_fsmenu/launch_game.cc:50
 msgid "Configure this game"
-msgstr ""
+msgstr "Konfigurer spillregler"
 
 #: ../../src/ui_fsmenu/launch_game.cc:64
 msgid "Peaceful mode"
-msgstr ""
+msgstr "Fredfull modus"
 
 #: ../../src/ui_fsmenu/launch_game.cc:68
 msgid "Custom starting positions"
-msgstr ""
+msgstr "Velg startposisjon selv"
 
 #: ../../src/ui_fsmenu/launch_game.cc:77
 msgid "Start game"
@@ -3112,11 +3112,11 @@ msgstr "Start spillet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:124
 msgid "The relations between players are set by the scenario"
-msgstr ""
+msgstr "Relasjonen mellom spillere er satt av scenarioet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:126
 msgid "The relations between players are set by the saved game"
-msgstr ""
+msgstr "Relasjonen mellom spillerne er satt av det lagrede spillet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:128
 msgid "The selected win condition does not allow peaceful matches"
@@ -3124,15 +3124,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:130
 msgid "Forbid fighting between players"
-msgstr ""
+msgstr "Forby slåssing mellom spillere"
 
 #: ../../src/ui_fsmenu/launch_game.cc:141
 msgid "The starting positions are set by the scenario"
-msgstr ""
+msgstr "Startposisjonene er satt av scenarioet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:143
 msgid "The starting positions are set by the saved game"
-msgstr ""
+msgstr "Startposisjonene er satt av det lagrede spillet"
 
 #: ../../src/ui_fsmenu/launch_game.cc:146
 msgid ""
@@ -3342,7 +3342,7 @@ msgstr "Spill en kampanje"
 
 #: ../../src/ui_fsmenu/main.cc:246
 msgid "Tutorials"
-msgstr "Opplæring"
+msgstr "Veiledninger"
 
 #: ../../src/ui_fsmenu/main.cc:247
 msgid "Play one of our beginners’ tutorials"
@@ -3481,7 +3481,7 @@ msgstr "Innstillinger"
 
 #: ../../src/ui_fsmenu/main.cc:380
 msgid "Technical and game-related settings"
-msgstr "Tekniske og spill-relaterte innstillinger"
+msgstr "Tekniske- og spillrelaterte innstillinger"
 
 #: ../../src/ui_fsmenu/main.cc:383
 msgctxt "hotkey"
@@ -3535,20 +3535,20 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:96
 msgid "Map Details"
-msgstr ""
+msgstr "Kartdetaljer"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:96
 msgid "Scenario Details"
-msgstr ""
+msgstr "Scenario-detaljer"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:118
 #, c-format
 msgid "Hint: %s"
-msgstr ""
+msgstr "Hint: %s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:151
 msgid "No map selected"
-msgstr ""
+msgstr "Ingen kart er valgt"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:161
 msgid "Change map or saved game"
@@ -3621,7 +3621,7 @@ msgstr "Lag"
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:174
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:175
 msgid "Random AI"
-msgstr ""
+msgstr "Tilfeldig KI"
 
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:288
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:290
@@ -3731,7 +3731,7 @@ msgstr "Vindustørrelse"
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Grab Input"
-msgstr "Overstyr innput"
+msgstr "Overstyr innputt"
 
 #: ../../src/ui_fsmenu/options.cc:135
 msgid "Use system mouse cursor"
@@ -3751,15 +3751,15 @@ msgstr "Fest vinduer til sidene"
 
 #: ../../src/ui_fsmenu/options.cc:166
 msgid "Animate automatic map movements"
-msgstr ""
+msgstr "Animer automatiske kartbevegelser"
 
 #: ../../src/ui_fsmenu/options.cc:179
 msgid "Distance for windows to snap to other panels:"
-msgstr ""
+msgstr "Distanse for vinduer for å koble seg på paneler:"
 
 #: ../../src/ui_fsmenu/options.cc:191
 msgid "Distance for windows to snap to borders:"
-msgstr ""
+msgstr "Distanse for vinduer for å koble seg til rammer:"
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Save game automatically every:"
@@ -3780,29 +3780,29 @@ msgstr "Skriv 'syncstreams' i nettverksspill for å debugge asynkronheter"
 #: ../../src/ui_fsmenu/options.cc:239
 #: ../../src/wui/interactive_gamebase.cc:190
 msgid "Show Census"
-msgstr ""
+msgstr "Vis tellinger"
 
 #: ../../src/ui_fsmenu/options.cc:241
 #: ../../src/wui/interactive_gamebase.cc:198
 msgid "Show Statistics"
-msgstr ""
+msgstr "Vis statistikk"
 
 #: ../../src/ui_fsmenu/options.cc:243
 #: ../../src/wui/interactive_gamebase.cc:206
 msgid "Show Soldier Levels"
-msgstr ""
+msgstr "Vis level på soldater"
 
 #: ../../src/ui_fsmenu/options.cc:244
 #: ../../src/wui/interactive_gamebase.cc:215
 msgid "Show Buildings"
-msgstr ""
+msgstr "Vis bygninger"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
 #: ../../src/ui_fsmenu/options.cc:246 ../../src/wui/interactive_player.cc:351
 msgid "Show Workarea Overlaps"
-msgstr ""
+msgstr "Vis arbeidsområdeoverlapp"
 
 #: ../../src/ui_fsmenu/options.cc:252
 msgid "Start building road after placing a flag"
@@ -3810,7 +3810,7 @@ msgstr "Start veibygging automatisk når at flagg blir plassert"
 
 #: ../../src/ui_fsmenu/options.cc:256
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Vis chaten i spillet med transparent bakgrunn"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
@@ -3826,11 +3826,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:275
 msgid "Display game time in the top left corner"
-msgstr ""
+msgstr "Vis spilletid i øverste venstre hjørne"
 
 #: ../../src/ui_fsmenu/options.cc:279
 msgid "Allow diagonal scrolling with the numeric keypad"
-msgstr ""
+msgstr "Tillat diagonal scrolling med den numeriske keypaden"
 
 #: ../../src/ui_fsmenu/options.cc:284
 msgid "Teach me how to play"
@@ -3840,7 +3840,7 @@ msgstr "Vis meg hvordan å spille spillet"
 #. Options
 #: ../../src/ui_fsmenu/options.cc:294
 msgid "Progress…"
-msgstr ""
+msgstr "Progresjon..."
 
 #: ../../src/ui_fsmenu/options.cc:309
 msgid "Interface"
@@ -3899,33 +3899,33 @@ msgstr ""
 #. * TRANSLATORS: %1% = language name, %2% = percentage
 #: ../../src/ui_fsmenu/options.cc:629
 msgid "The translation into %1% is %2%%% complete."
-msgstr ""
+msgstr "Denne oversettelsen til %1% er %2%%% ferdig."
 
 #: ../../src/ui_fsmenu/options.cc:643
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr ""
+msgstr "Hvis du ønsker å  hjelpe oss å oversette, vennligst besøk %s"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:44
 msgid "Choose Scenario"
-msgstr ""
+msgstr "Velg scenario"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:44
 msgid "Choose Tutorial"
-msgstr ""
+msgstr "Velg veiledning"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:82
 msgid "Pick a tutorial from the list, then hit “OK”."
-msgstr ""
+msgstr "Velg en veiledning fra listen, så trykk “OK”."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:84
 msgid ""
 "You can see a description of the currently selected tutorial on the right."
-msgstr ""
+msgstr "Du kan se en beskrivelse på valgte veileder på høyresiden."
 
 #: ../../src/ui_fsmenu/scenario_select.cc:102
 msgid "Return to campaign selection"
-msgstr ""
+msgstr "Gå tilbake til kampanjevalg"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:103
 msgid "Play this scenario"
@@ -3933,23 +3933,23 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenario_select.cc:103
 msgid "Play this tutorial"
-msgstr ""
+msgstr "Spill denne veilederen"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:124
 msgid "The order in which the tutorials should be played"
-msgstr ""
+msgstr "Rekkefølgen veilederne bør spilles"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:125
 msgid "Tutorial Name"
-msgstr ""
+msgstr "Veiledernavn"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:127
 msgid "The number of this scenario in the campaign"
-msgstr ""
+msgstr "Nummer på dette scenario i kampanjen"
 
 #: ../../src/ui_fsmenu/scenario_select.cc:128
 msgid "Scenario Name"
-msgstr ""
+msgstr "Scenarionavn"
 
 #. * TRANSLATORS: Campaign scenario number table header
 #: ../../src/ui_fsmenu/scenario_select.cc:132
@@ -3963,13 +3963,13 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/scenariodetails.cc:48
 msgid "Tutorial"
-msgstr ""
+msgstr "Veileder"
 
 #. * TRANSLATORS: Label in map details if there is 1 author
 #. * TRANSLATORS: Label in campaign scenario details if there is 1 author
 #: ../../src/ui_fsmenu/scenariodetails.cc:57 ../../src/wui/mapdetails.cc:168
 msgid "Author"
-msgstr ""
+msgstr "Forfatter"
 
 #. * TRANSLATORS: Label in map details if there is more than 1 author. If you
 #. need plural
@@ -3979,38 +3979,38 @@ msgstr ""
 #. you need plural forms here, please let us know.
 #: ../../src/ui_fsmenu/scenariodetails.cc:60 ../../src/wui/mapdetails.cc:171
 msgid "Authors"
-msgstr ""
+msgstr "Forfattere"
 
 #. * TRANSLATORS: This is the "name" of the single player
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:178
 msgid "You"
-msgstr ""
+msgstr "Du"
 
 #. * TRANSLATORS: Window Title in Options
 #: ../../src/ui_fsmenu/training_wheel_options.cc:40
 msgctxt "teaching_progress"
 msgid "Edit Teaching Progress"
-msgstr ""
+msgstr "Endre læringsprosessen"
 
 #. * TRANSLATORS: Title above a list
 #: ../../src/ui_fsmenu/training_wheel_options.cc:63
 msgctxt "teaching_progress"
 msgid "Teaching objectives"
-msgstr ""
+msgstr "Læringsmål"
 
 #: ../../src/ui_fsmenu/training_wheel_options.cc:117
 msgid "Reset"
-msgstr ""
+msgstr "Tilbakestill"
 
 #. * TRANSLATORS: Button label to mark or unmark all checkboxes in an options
 #. window
 #: ../../src/ui_fsmenu/training_wheel_options.cc:188
 msgid "Mark All"
-msgstr ""
+msgstr "Velg alle"
 
 #: ../../src/ui_fsmenu/training_wheel_options.cc:188
 msgid "Unmark All"
-msgstr ""
+msgstr "Fjern alle"
 
 #: ../../src/wlapplication.cc:1272 ../../src/wui/mapdetails.cc:222
 msgid "Game data error"
@@ -4905,7 +4905,7 @@ msgstr "Poeng"
 
 #: ../../src/wui/game_summary.cc:304
 msgid "Team Score"
-msgstr ""
+msgstr "Lagscore"
 
 #. * TRANSLATORS: This is the second part of "Selected %1%
 #. directory/directories and %2%"
@@ -5172,7 +5172,7 @@ msgstr ""
 #. * buildings are greyed out
 #: ../../src/wui/interactive_gamebase.cc:214
 msgid "Hide Buildings"
-msgstr ""
+msgstr "Skjul bygninger"
 
 #: ../../src/wui/interactive_gamebase.cc:261
 msgid "Speed +"
@@ -5414,11 +5414,11 @@ msgstr ""
 
 #: ../../src/wui/maptable.cc:35
 msgid "Size"
-msgstr ""
+msgstr "Størrelse"
 
 #: ../../src/wui/maptable.cc:35
 msgid "The size of the map (Width x Height)"
-msgstr ""
+msgstr "Størrelsen på kartet (Bredde x Høyde)"
 
 #: ../../src/wui/maptable.cc:66
 msgid "Map Name"
