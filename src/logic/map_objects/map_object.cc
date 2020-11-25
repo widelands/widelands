@@ -180,9 +180,8 @@ void ObjectManager::cleanup(EditorGameBase& egbase) {
 			}
 			if (it == objects_.end()) {
 				break;
-			} else {
-				it->second->remove(egbase);
 			}
+			it->second->remove(egbase);
 		}
 	}
 	while (!objects_.empty()) {
@@ -498,11 +497,10 @@ MapObjectDescr::AttributeIndex MapObjectDescr::get_attribute_id(const std::strin
 
 	if (!add_if_not_exists) {
 		throw GameDataError("get_attribute_id: attribute '%s' not found!\n", name.c_str());
-	} else {
-		AttributeIndex attribute_id = attribute_names_.size();
-		attribute_names_[name] = attribute_id;
-		return attribute_id;
 	}
+	AttributeIndex attribute_id = attribute_names_.size();
+	attribute_names_[name] = attribute_id;
+	return attribute_id;
 }
 
 void MapObjectDescr::set_helptexts(const std::string& tribename,
@@ -656,9 +654,8 @@ Time MapObject::schedule_act(Game& game, const Duration& tdelta, uint32_t const 
 		game.cmdqueue().enqueue(new CmdAct(time, *this, data));
 
 		return time;
-	} else {
-		return Time();
 	}
+	return Time();
 }
 
 /**

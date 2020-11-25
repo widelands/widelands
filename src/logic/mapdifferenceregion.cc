@@ -30,16 +30,15 @@ template <> bool MapDifferenceRegion<Area<FCoords>>::advance(const Map& map) {
 		map.get_neighbour(area_, direction_, &area_);
 		--remaining_in_edge_;
 		return true;
-	} else {
-		if (!passed_corner_) {
-			passed_corner_ = true;
-			--direction_;
-			if (!direction_) {
-				direction_ = 6;
-			}
-			remaining_in_edge_ = area_.radius;
-			return advance(map);
+	}
+	if (!passed_corner_) {
+		passed_corner_ = true;
+		--direction_;
+		if (!direction_) {
+			direction_ = 6;
 		}
+		remaining_in_edge_ = area_.radius;
+		return advance(map);
 	}
 	return false;
 }

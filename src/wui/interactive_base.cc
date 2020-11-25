@@ -911,16 +911,18 @@ void InteractiveBase::draw_bridges(RenderTarget* dst,
 }
 
 void InteractiveBase::mainview_move() {
-	if (minimap_registry_.window) {
-		minimap_->set_view(map_view_.view_area().rect());
+	if (MiniMap* const minimap = minimap_registry_.get_window()) {
+		minimap->set_view(map_view_.view_area().rect());
 	}
 }
 
 // Open the minimap or close it if it's open
 void InteractiveBase::toggle_minimap() {
 	if (!minimap_registry_.window) {
-		minimap_ = new MiniMap(*this, &minimap_registry_);
-		minimap_->warpview.connect([this](const Vector2f& map_pixel) {
+		// Don't store the MiniMap pointer, we can access it via 'minimap_registry_.get_window()'.
+		// A MiniMap is a UniqueWindow, its parent will delete it.
+		new MiniMap(*this, &minimap_registry_);
+		minimap_registry_.get_window()->warpview.connect([this](const Vector2f& map_pixel) {
 			map_view_.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 		});
 		mainview_move();
@@ -943,6 +945,12 @@ void InteractiveBase::set_landmark(size_t key, const MapView::View& landmark_vie
  */
 void InteractiveBase::hide_minimap() {
 	minimap_registry_.destroy();
+}
+
+void InteractiveBase::resize_minimap() {
+	if (MiniMap* const minimap = minimap_registry_.get_window()) {
+		minimap->check_boundaries();
+	}
 }
 
 /*

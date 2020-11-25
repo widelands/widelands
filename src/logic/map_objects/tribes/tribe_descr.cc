@@ -696,7 +696,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	for (const auto& resi : list->second) {
 		if (resi.first < amount) {
 			continue;
-		} else if (lowest < amount || resi.first < lowest) {
+		}
+		if (lowest < amount || resi.first < lowest) {
 			lowest = resi.first;
 		}
 	}

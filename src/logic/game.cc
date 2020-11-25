@@ -292,7 +292,8 @@ void Game::init_newgame(const GameSettings& settings) {
 		if (playersettings.state == PlayerSettings::State::kClosed ||
 		    playersettings.state == PlayerSettings::State::kOpen) {
 			continue;
-		} else if (playersettings.state == PlayerSettings::State::kShared) {
+		}
+		if (playersettings.state == PlayerSettings::State::kShared) {
 			shared.push_back(playersettings);
 			shared_num.push_back(i + 1);
 			continue;
