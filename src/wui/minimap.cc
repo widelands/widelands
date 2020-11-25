@@ -238,7 +238,7 @@ void MiniMap::toggle(MiniMapLayer const button) {
 void MiniMap::resize() {
 	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
 	// Read number of rows after the zoom.
-	const auto rows = number_of_button_rows();
+	const uint32_t rows = number_of_button_rows();
 	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
 	button_terrn.set_size(but_w(), but_h());
