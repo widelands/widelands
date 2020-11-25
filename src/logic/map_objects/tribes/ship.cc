@@ -577,33 +577,32 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				state.ivar1 = 1;
 				return start_task_move(
 				   game, expedition_->scouting_direction, descr().get_sail_anims(), false);
-			} else {
-				// The ship got the command to scout around an island, but is not close to any island
-				// Most likely the command was send as the ship was on an exploration and just leaving
-				// the island - therefore we try to find the island again.
-				FCoords position = get_position();
-				for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-					FCoords neighbour = map.get_neighbour(position, dir);
-					for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur) {
-						if (!(map.get_neighbour(neighbour, sur).field->nodecaps() & MOVECAPS_SWIM)) {
-							// Okay we found the next coast, so now the ship should go there.
-							// However, we do neither save the position as starting position, nor do we
-							// save
-							// the direction we currently go. So the ship can start exploring normally
-							state.ivar1 = 1;
-							return start_task_move(game, dir, descr().get_sail_anims(), false);
-						}
+			}
+			// The ship got the command to scout around an island, but is not close to any island
+			// Most likely the command was send as the ship was on an exploration and just leaving
+			// the island - therefore we try to find the island again.
+			FCoords position = get_position();
+			for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+				FCoords neighbour = map.get_neighbour(position, dir);
+				for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur) {
+					if (!(map.get_neighbour(neighbour, sur).field->nodecaps() & MOVECAPS_SWIM)) {
+						// Okay we found the next coast, so now the ship should go there.
+						// However, we do neither save the position as starting position, nor do we
+						// save
+						// the direction we currently go. So the ship can start exploring normally
+						state.ivar1 = 1;
+						return start_task_move(game, dir, descr().get_sail_anims(), false);
 					}
 				}
-				// if we are here, it seems something really strange happend.
-				log_warn_time(game.get_gametime(),
-				              "ship %s was not able to start exploration. Entering WAIT mode.",
-				              shipname_.c_str());
-				set_ship_state_and_notify(
-				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
-				start_task_idle(game, descr().main_animation(), kShipInterval);
-				return;
 			}
+			// if we are here, it seems something really strange happend.
+			log_warn_time(game.get_gametime(),
+			              "ship %s was not able to start exploration. Entering WAIT mode.",
+			              shipname_.c_str());
+			set_ship_state_and_notify(
+			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
+			start_task_idle(game, descr().main_animation(), kShipInterval);
+			return;
 		} else {  // scouting towards a specific direction
 			if (exp_dir_swimmable(expedition_->scouting_direction)) {
 				// the scouting direction is still free to move
@@ -778,11 +777,10 @@ uint32_t Ship::calculate_sea_route(EditorGameBase& egbase, PortDock& pd, Path* f
 			if (finalpath) {
 				astar.pathto(cur, *finalpath);
 				return finalpath->get_nsteps();
-			} else {
-				Path path;
-				astar.pathto(cur, path);
-				return path.get_nsteps();
 			}
+			Path path;
+			astar.pathto(cur, path);
+			return path.get_nsteps();
 		}
 	}
 
@@ -802,18 +800,16 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 	if (distance < std::numeric_limits<uint32_t>::max()) {
 		start_task_movepath(game, path, descr().get_sail_anims());
 		return;
-	} else {
-		log_warn_time(
-		   game.get_gametime(),
-		   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
-		   get_position().x, get_position().y, pd.get_positions(game)[0].x,
-		   pd.get_positions(game)[0].y);
-		// This should not happen, but in theory there could be some inconstinency
-		// I (tiborb) failed to invoke this situation when testing so
-		// I am not sure if following line behaves allright
-		get_fleet()->update(game);
-		start_task_idle(game, descr().main_animation(), kFleetInterval.get());
 	}
+	log_warn_time(
+	   game.get_gametime(),
+	   "start_task_movedock: Failed to find a path: ship at %3dx%3d to port at: %3dx%3d\n",
+	   get_position().x, get_position().y, pd.get_positions(game)[0].x, pd.get_positions(game)[0].y);
+	// This should not happen, but in theory there could be some inconstinency
+	// I (tiborb) failed to invoke this situation when testing so
+	// I am not sure if following line behaves allright
+	get_fleet()->update(game);
+	start_task_idle(game, descr().main_animation(), kFleetInterval.get());
 }
 
 /// Prepare everything for the coming exploration
