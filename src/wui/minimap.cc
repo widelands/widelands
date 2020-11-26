@@ -246,11 +246,14 @@ void MiniMap::resize() {
 	button_owner.set_size(but_w(), but_h());
 	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h()));
 	button_flags.set_size(but_w(), but_h());
-	button_roads.set_pos(Vector2i(but_w() * (3 - 3 * (rows - 1)), view_.get_h()+but_h() * (rows - 1)));
+	button_roads.set_pos(
+	   Vector2i(but_w() * (3 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_roads.set_size(but_w(), but_h());
-	button_bldns.set_pos(Vector2i(but_w() * (4 - 3 * (rows - 1)), view_.get_h()+but_h() * (rows - 1)));
+	button_bldns.set_pos(
+	   Vector2i(but_w() * (4 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_bldns.set_size(but_w(), but_h());
-	button_zoom.set_pos(Vector2i(but_w() * (5 - 3 * (rows - 1)), view_.get_h()+but_h() * (rows - 1)));
+	button_zoom.set_pos(
+	   Vector2i(but_w() * (5 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_zoom.set_size(but_w(), but_h());
 	button_zoom.set_enabled(view_.can_zoom());
 
