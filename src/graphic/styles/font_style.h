@@ -38,6 +38,7 @@ enum class FontStyle {
 	kFsMenuInfoPanelParagraph,
 	kFsMenuIntro,
 	kFsMenuTranslationInfo,
+	kItalic,
 	kDisabled,
 	kFsMenuLabel,
 	kWuiLabel,
