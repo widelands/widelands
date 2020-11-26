@@ -113,6 +113,7 @@ wl_library(wui_common_gamedetails
     graphic_text_layout
     io_filesystem
     logic
+    logic_addons
     logic_constants
     logic_filesystem_constants
     logic_game_controller
@@ -141,6 +142,7 @@ wl_library(wui_common_mapdetails
     io_filesystem
     logic
     logic_exceptions
+    logic_filesystem_constants
     logic_game_settings
     logic_map
     map_io_map_loader

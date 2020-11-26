@@ -45,6 +45,7 @@ enum class NoteId : uint32_t {
 	GameSettings,
 	MapOptions,
 	MapObjectDescription,
+	MapObjectDescriptionTypeCheck,
 	LoadingMessage,
 	Panel
 };

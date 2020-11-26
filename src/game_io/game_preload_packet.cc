@@ -19,8 +19,10 @@
 
 #include "game_io/game_preload_packet.h"
 
+#include <cstdlib>
 #include <memory>
 
+#include "base/log.h"
 #include "build_info.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
@@ -41,6 +43,8 @@ constexpr const char* kMinimapFilename = "minimap.png";
 // Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
 std::string GamePreloadPacket::get_localized_win_condition() const {
 	const std::string result = _(win_condition_);
+	// TODO(Nordfriese): If the win condition is defined in an add-on, we should store that
+	// add-on's textdomain in the file and use it instead for retrieving the translation
 	i18n::Textdomain td("win_conditions");
 	return _(result);
 }
@@ -72,6 +76,25 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			}
 			savetimestamp_ = static_cast<time_t>(s.get_natural("savetimestamp"));
 			gametype_ = static_cast<GameController::GameType>(s.get_natural("gametype"));
+
+			required_addons_.clear();
+			for (std::string addons = s.get_string("addons", ""); !addons.empty();) {
+				const size_t commapos = addons.find(',');
+				const std::string substring = addons.substr(0, commapos);
+				const size_t colonpos = addons.find(':');
+				if (colonpos == std::string::npos) {
+					log_warn(
+					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+				} else {
+					const std::string version = substring.substr(colonpos + 1);
+					required_addons_.push_back(std::make_pair(
+					   substring.substr(0, colonpos), std::strtol(version.c_str(), nullptr, 10)));
+				}
+				if (commapos == std::string::npos) {
+					break;
+				}
+				addons = addons.substr(commapos + 1);
+			}
 		} else {
 			throw UnhandledVersionError("GamePreloadPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -116,6 +139,18 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	                                              GameController::GameType::kReplay));
 	s.set_string("active_training_wheel", game.active_training_wheel());
 	s.set_bool("training_wheels", game.training_wheels_wanted());
+
+	std::string addons;
+	for (const AddOnInfo& addon : game.enabled_addons()) {
+		if (addon.category == AddOnCategory::kTribes || addon.category == AddOnCategory::kWorld ||
+		    addon.category == AddOnCategory::kScript) {
+			if (!addons.empty()) {
+				addons += ',';
+			}
+			addons += addon.internal_name + ':' + std::to_string(static_cast<unsigned>(addon.version));
+		}
+	}
+	s.set_string("addons", addons);
 
 	prof.write("preload", false, fs);
 

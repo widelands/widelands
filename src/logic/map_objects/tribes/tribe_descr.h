@@ -77,6 +77,11 @@ public:
 	const std::set<DescriptionIndex>& immovables() const;
 	const ResourceIndicatorSet& resource_indicators() const;
 
+	std::set<DescriptionIndex>& mutable_wares();
+	std::set<DescriptionIndex>& mutable_workers();
+	std::set<DescriptionIndex>& mutable_buildings();
+	std::set<DescriptionIndex>& mutable_immovables();
+
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
 	bool has_worker(const DescriptionIndex& index) const;
@@ -136,8 +141,14 @@ public:
 	const WaresOrder& wares_order() const {
 		return wares_order_;
 	}
+	WaresOrder& mutable_wares_order() {
+		return wares_order_;
+	}
 
 	const WaresOrder& workers_order() const {
+		return workers_order_;
+	}
+	WaresOrder& mutable_workers_order() {
 		return workers_order_;
 	}
 
@@ -151,6 +162,13 @@ public:
 
 	// The custom toolbar imageset if any. Can be nullptr.
 	ToolbarImageset* toolbar_image_set() const;
+
+	// Read helptext from Lua table
+	void load_helptexts(MapObjectDescr*, const LuaTable&);
+
+	// Make sure that everything is there and that dependencies are calculated.
+	// This needs to be called exactly once during postloading.
+	void finalize_loading(Descriptions& descriptions);
 
 private:
 	// Helper functions for loading everything in the constructor
@@ -166,8 +184,6 @@ private:
 	// Helper function for adding a special building type (port etc.)
 	DescriptionIndex add_special_building(const std::string& buildingname,
 	                                      Descriptions& descriptions);
-	// Make sure that everything is there and that dependencies are calculated
-	void finalize_loading(Descriptions& descriptions);
 	// Helper function to calculate trainingsites proportions for the AI
 	void calculate_trainingsites_proportions(const Descriptions& descriptions);
 

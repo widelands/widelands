@@ -93,6 +93,7 @@ void SavegameLoader::add_general_information(SavegameData& gamedata,
 	gamedata.version = gpdp.get_version();
 	gamedata.wincondition = gpdp.get_localized_win_condition();
 	gamedata.minimap_path = gpdp.get_minimap_path();
+	gamedata.required_addons = gpdp.required_addons();
 }
 
 void SavegameLoader::add_error_info(SavegameData& gamedata, std::string errormessage) const {
