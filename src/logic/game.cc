@@ -44,6 +44,7 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
+#include "logic/addons.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
@@ -223,7 +224,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	}
 
 	// Need to do this first so we can set the theme and background.
-	maploader->preload_map(true);
+	maploader->preload_map(true, &enabled_addons());
 
 	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 
@@ -269,7 +270,6 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 /**
  * Initialize the game based on the given settings.
- *
  */
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
@@ -280,7 +280,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	if (!settings.mapfilename.empty()) {
 		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
 		assert(maploader);
-		maploader->preload_map(settings.scenario);
+		maploader->preload_map(settings.scenario, &enabled_addons());
 	}
 
 	std::vector<PlayerSettings> shared;
@@ -399,6 +399,8 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
+	enabled_addons().clear();  // will be loaded later
+
 	int8_t player_nr;
 
 	{
@@ -429,6 +431,10 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
 		gl.load_game();
+
+		if (!gl.did_postload_addons()) {
+			postload_addons();
+		}
 	}
 
 	// Store the filename for further saves
@@ -523,6 +529,7 @@ bool Game::run(StartGameType const start_game_type,
 	InteractivePlayer* ipl = get_ipl();
 
 	if (start_game_type != StartGameType::kSaveGame) {
+		postload_addons();
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */
@@ -579,6 +586,16 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
 		} else if (start_game_type == StartGameType::kMultiPlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
+		} else {
+			// Run all selected add-on scripts (not in scenarios)
+			for (const AddOnInfo& addon : enabled_addons()) {
+				if (addon.category == AddOnCategory::kScript) {
+					enqueue_command(new CmdLuaScript(
+					   get_gametime() + Duration(1), kAddOnDir + FileSystem::file_separator() +
+					                                    addon.internal_name +
+					                                    FileSystem::file_separator() + "init.lua"));
+				}
+			}
 		}
 
 		// Queue first statistics calculation

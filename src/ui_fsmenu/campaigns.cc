@@ -25,6 +25,7 @@
 #include "graphic/image_cache.h"
 #include "io/filesystem/filesystem.h"
 #include "io/profile.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "scripting/lua_interface.h"
@@ -55,78 +56,89 @@ Campaigns::Campaigns() {
 
 	// Now load the campaign info
 	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
-
-	// Read difficulty images
-	std::unique_ptr<LuaTable> difficulties_table(table->get_table("difficulties"));
-	std::vector<std::pair<const std::string, const Image*>> difficulty_levels;
-	for (const auto& difficulty_level_table :
-	     difficulties_table->array_entries<std::unique_ptr<LuaTable>>()) {
-		difficulty_levels.push_back(
-		   std::make_pair(_(difficulty_level_table->get_string("descname")),
-		                  g_image_cache->get(difficulty_level_table->get_string("image"))));
+	std::vector<std::string> campaign_config_scripts = {"campaigns/campaigns.lua"};
+	for (const auto& pair : g_addons) {
+		if (pair.first.category == AddOnCategory::kCampaign) {
+			campaign_config_scripts.push_back(kAddOnDir + FileSystem::file_separator() +
+			                                  pair.first.internal_name + FileSystem::file_separator() +
+			                                  "campaigns.lua");
+		}
 	}
+	for (const std::string& script : campaign_config_scripts) {
+		std::unique_ptr<LuaTable> table(lua.run_script(script));
 
-	// Read the campaigns themselves
-	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
-
-	for (const auto& campaign_table : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
-		CampaignData* campaign_data = new CampaignData();
-		campaign_data->descname = _(campaign_table->get_string("descname"));
-		campaign_data->tribename =
-		   Widelands::get_tribeinfo(campaign_table->get_string("tribe")).descname;
-		campaign_data->description = _(campaign_table->get_string("description"));
-		if (campaign_table->has_key("prerequisites")) {
-			for (const std::string& prerequisite :
-			     campaign_table->get_table("prerequisites")->array_entries<std::string>()) {
-				campaign_data->prerequisites.insert(prerequisite);
-			}
-		}
-		if (campaign_table->has_key("difficulties")) {
-			for (const std::string& d :
-			     campaign_table->get_table("difficulties")->array_entries<std::string>()) {
-				campaign_data->difficulties.push_back(d);
-			}
-			assert(campaign_table->has_key("default_difficulty"));
-			campaign_data->default_difficulty =
-			   get_positive_int(*campaign_table, "default_difficulty");
-		} else {
-			assert(!campaign_table->has_key("default_difficulty"));
-			campaign_data->difficulties.push_back(default_difficulty_name);
-			campaign_data->default_difficulty = 1;
+		// Read difficulty images
+		std::unique_ptr<LuaTable> difficulties_table(table->get_table("difficulties"));
+		std::vector<std::pair<const std::string, const Image*>> difficulty_levels;
+		for (const auto& difficulty_level_table :
+		     difficulties_table->array_entries<std::unique_ptr<LuaTable>>()) {
+			difficulty_levels.push_back(
+			   std::make_pair(_(difficulty_level_table->get_string("descname")),
+			                  g_image_cache->get(difficulty_level_table->get_string("image"))));
 		}
 
-		campaign_data->visible = false;
+		// Read the campaigns themselves
+		std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
 
-		// Collect difficulty information
-		std::unique_ptr<LuaTable> difficulty_table(campaign_table->get_table("difficulty"));
-		campaign_data->difficulty_level = difficulty_table->get_int("level");
-		campaign_data->difficulty_image =
-		   difficulty_levels.at(campaign_data->difficulty_level - 1).second;
-		campaign_data->difficulty_description =
-		   difficulty_levels.at(campaign_data->difficulty_level - 1).first;
-		const std::string difficulty_description = _(difficulty_table->get_string("description"));
-		if (!difficulty_description.empty()) {
+		for (const auto& campaign_table :
+		     campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
+			CampaignData* campaign_data = new CampaignData();
+			campaign_data->descname = _(campaign_table->get_string("descname"));
+			campaign_data->tribename =
+			   Widelands::get_tribeinfo(campaign_table->get_string("tribe")).descname;
+			campaign_data->description = _(campaign_table->get_string("description"));
+			if (campaign_table->has_key("prerequisites")) {
+				for (const std::string& prerequisite :
+				     campaign_table->get_table("prerequisites")->array_entries<std::string>()) {
+					campaign_data->prerequisites.insert(prerequisite);
+				}
+			}
+			if (campaign_table->has_key("difficulties")) {
+				for (const std::string& d :
+				     campaign_table->get_table("difficulties")->array_entries<std::string>()) {
+					campaign_data->difficulties.push_back(d);
+				}
+				assert(campaign_table->has_key("default_difficulty"));
+				campaign_data->default_difficulty =
+				   get_positive_int(*campaign_table, "default_difficulty");
+			} else {
+				assert(!campaign_table->has_key("default_difficulty"));
+				campaign_data->difficulties.push_back(default_difficulty_name);
+				campaign_data->default_difficulty = 1;
+			}
+
+			campaign_data->visible = false;
+
+			// Collect difficulty information
+			std::unique_ptr<LuaTable> difficulty_table(campaign_table->get_table("difficulty"));
+			campaign_data->difficulty_level = difficulty_table->get_int("level");
+			campaign_data->difficulty_image =
+			   difficulty_levels.at(campaign_data->difficulty_level - 1).second;
 			campaign_data->difficulty_description =
-			   i18n::join_sentences(campaign_data->difficulty_description, difficulty_description);
-		}
-
-		// Scenarios
-		std::unique_ptr<LuaTable> scenarios_table(campaign_table->get_table("scenarios"));
-		for (const std::string& path : scenarios_table->array_entries<std::string>()) {
-			ScenarioData* scenario_data = new ScenarioData();
-			scenario_data->path = path;
-			if (campvis_scenarios.get_bool(scenario_data->path.c_str(), false)) {
-				solved_scenarios_.insert(scenario_data->path);
+			   difficulty_levels.at(campaign_data->difficulty_level - 1).first;
+			const std::string difficulty_description = _(difficulty_table->get_string("description"));
+			if (!difficulty_description.empty()) {
+				campaign_data->difficulty_description =
+				   i18n::join_sentences(campaign_data->difficulty_description, difficulty_description);
 			}
 
-			scenario_data->is_tutorial = false;
-			scenario_data->playable = scenario_data->path != "dummy.wmf";
-			scenario_data->visible = false;
-			campaign_data->scenarios.push_back(std::unique_ptr<ScenarioData>(scenario_data));
-		}
+			// Scenarios
+			std::unique_ptr<LuaTable> scenarios_table(campaign_table->get_table("scenarios"));
+			for (const std::string& path : scenarios_table->array_entries<std::string>()) {
+				ScenarioData* scenario_data = new ScenarioData();
+				scenario_data->path = path;
+				if (campvis_scenarios.get_bool(scenario_data->path.c_str(), false)) {
+					solved_scenarios_.insert(scenario_data->path);
+				}
 
-		campaigns_.push_back(std::unique_ptr<CampaignData>(campaign_data));
+				scenario_data->is_tutorial = false;
+				scenario_data->playable = scenario_data->path != "dummy.wmf";
+				scenario_data->visible = false;
+				campaign_data->scenarios.push_back(std::unique_ptr<ScenarioData>(scenario_data));
+			}
+
+			campaigns_.push_back(std::unique_ptr<CampaignData>(campaign_data));
+		}
 	}
 
 	// Finally, calculate the visibility
