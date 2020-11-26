@@ -124,12 +124,12 @@ private:
 
 AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
    : UI::UniqueWindow(&fsmm,
-                UI::WindowStyle::kFsMenu,
-                "addons",
-                &reg,
-                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
-                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
-                _("Add-On Manager")),
+                      UI::WindowStyle::kFsMenu,
+                      "addons",
+                      &reg,
+                      fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
+                      fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
+                      _("Add-On Manager")),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      warn_requirements_(
