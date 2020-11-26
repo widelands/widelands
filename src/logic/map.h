@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "economy/itransport_cost_calculator.h"
+#include "logic/addons.h"
 #include "logic/field.h"
 #include "logic/map_objects/findimmovable.h"
 #include "logic/map_objects/tribes/wareworker.h"
@@ -610,6 +611,10 @@ public:
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
 
+	const AddOnRequirements& required_addons() const {
+		return required_addons_;
+	}
+
 protected:
 	/// Calculate map compatibility information for the website if it wasn't defined in the map
 	/// packet. If is_post_one_world is true, this map wasn't created for a specific world (Widelands
@@ -681,6 +686,8 @@ private:
 	std::set<FCoords> valuable_fields_;
 
 	MapVersion map_version_;
+
+	AddOnRequirements required_addons_;
 };
 
 /*

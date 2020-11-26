@@ -1,5 +1,7 @@
 wl_library(ui_fsmenu_options
   SRCS
+    addons.cc
+    addons.h
     keyboard_options.cc
     keyboard_options.h
     options.cc
@@ -12,12 +14,16 @@ wl_library(ui_fsmenu_options
     base_log
     graphic
     graphic_fonthandler
+    graphic_image_cache
     graphic_mouse_cursor
     graphic_text
     graphic_text_layout
     io_filesystem
+    io_profile
+    logic_addons
     logic_filesystem_constants
     logic_training_wheels
+    network
     scripting_lua_interface
     scripting_lua_table
     ui_basic
@@ -141,6 +147,7 @@ wl_library(ui_fsmenu_maploading
     graphic_text_layout
     io_filesystem
     io_profile
+    logic_addons
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings

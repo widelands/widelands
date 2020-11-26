@@ -19,8 +19,11 @@
 
 #include "map_io/map_elemental_packet.h"
 
+#include <cstdlib>
+
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -65,6 +68,25 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					boost::trim(tn);
 					map->add_tag(tn);
 				}
+			}
+
+			map->required_addons_.clear();
+			for (std::string addons = s.get_string("addons", ""); !addons.empty();) {
+				const size_t commapos = addons.find(',');
+				const std::string substring = addons.substr(0, commapos);
+				const size_t colonpos = addons.find(':');
+				if (colonpos == std::string::npos) {
+					log_warn(
+					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+				} else {
+					const std::string version = substring.substr(colonpos + 1);
+					map->required_addons_.push_back(std::make_pair(
+					   substring.substr(0, colonpos), std::strtol(version.c_str(), nullptr, 10)));
+				}
+				if (commapos == std::string::npos) {
+					break;
+				}
+				addons = addons.substr(commapos + 1);
 			}
 
 			// Get suggested teams
@@ -148,6 +170,17 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 		global_section.set_string("theme", map.get_background_theme());
 	}
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
+
+	std::string addons;
+	for (const AddOnInfo& addon : egbase.enabled_addons()) {
+		if (addon.category == AddOnCategory::kWorld) {
+			if (!addons.empty()) {
+				addons += ',';
+			}
+			addons += addon.internal_name + ':' + std::to_string(static_cast<unsigned>(addon.version));
+		}
+	}
+	global_section.set_string("addons", addons);
 
 	int counter = 0;
 	for (Widelands::SuggestedTeamLineup lineup : map.get_suggested_teams()) {

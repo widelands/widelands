@@ -91,6 +91,12 @@ public:
 	const BillOfMaterials& input_workers() const {
 		return input_workers_;
 	}
+	BillOfMaterials& mutable_input_wares() {
+		return input_wares_;
+	}
+	BillOfMaterials& mutable_input_workers() {
+		return input_workers_;
+	}
 	using Output = std::set<DescriptionIndex>;
 	const Output& output_ware_types() const {
 		return output_ware_types_;
@@ -162,6 +168,9 @@ public:
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs& programs() const {
+		return programs_;
+	}
+	Programs& mutable_programs() {
 		return programs_;
 	}
 

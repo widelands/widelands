@@ -293,13 +293,14 @@ uint32_t BuildingDescr::get_unoccupied_animation() const {
 bool BuildingDescr::is_useful_on_map(bool seafaring_allowed, bool waterways_allowed) const {
 	if (needs_seafaring_ && needs_waterways_) {
 		return seafaring_allowed || waterways_allowed;
-	} else if (needs_seafaring_) {
-		return seafaring_allowed;
-	} else if (needs_waterways_) {
-		return waterways_allowed;
-	} else {
-		return true;
 	}
+	if (needs_seafaring_) {
+		return seafaring_allowed;
+	}
+	if (needs_waterways_) {
+		return waterways_allowed;
+	}
+	return true;
 }
 
 /**

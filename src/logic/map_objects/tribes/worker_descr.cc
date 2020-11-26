@@ -70,7 +70,8 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					                    "\"%s=%d\".\nEmpty buildcost tables are allowed if you wish to "
 					                    "have an amount of 0.",
 					                    key.c_str(), value);
-				} else if (value > 255) {
+				}
+				if (value > 255) {
 					throw GameDataError("Buildcost: Ware/Worker count needs to be <= 255 in \"%s=%d\".",
 					                    key.c_str(), value);
 				}
