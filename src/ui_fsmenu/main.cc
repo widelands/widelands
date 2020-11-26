@@ -381,9 +381,9 @@ void FullscreenMenuMain::set_labels() {
 	   UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
-	addons_.set_tooltip(
-	   as_tooltip_text_with_hotkey(_("Install and manage add-ons"),
-	   shortcut_string_for(KeyboardShortcut::kMainMenuAddons), UI::PanelStyle::kFsMenu));
+	addons_.set_tooltip(as_tooltip_text_with_hotkey(
+	   _("Install and manage add-ons"), shortcut_string_for(KeyboardShortcut::kMainMenuAddons),
+	   UI::PanelStyle::kFsMenu));
 	options_.set_title(_("Options"));
 	options_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Technical and game-related settings"),
