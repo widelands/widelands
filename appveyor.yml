@@ -33,7 +33,7 @@ install:
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-curl mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glew\""
   # Fix CURL
-  - cmd: "bash --login -c \"curl -Lo curl.zip \\\"https://curl.haxx.se/windows/dl-%CURL_VERSION%/curl-%CURL_VERSION%-win%BITS%-mingw.zip\\\" && unzip curl.zip && mv -Force curl-%CURL_VERSION%-win%BITS%-mingw/lib/libcurl.a C:/msys64/mingw%BITS%/lib/\""
+  - cmd: "bash --login -c \"curl -Lo curl.zip \\\"https://curl.haxx.se/windows/dl-%CURL_VERSION%/curl-%CURL_VERSION%-win%BITS%-mingw.zip\\\" && unzip curl.zip && mv --force curl-%CURL_VERSION%-win%BITS%-mingw/lib/libcurl.a C:/msys64/mingw%BITS%/lib/\""
 
 shallow_clone: false
 
