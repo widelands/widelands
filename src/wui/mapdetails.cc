@@ -185,6 +185,12 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		                 .str();
 
 		description =
+		   (boost::format("%s%s") % description %
+		    as_heading_with_content(
+		       _("Add-Ons:"), check_requirements(mapdata.required_addons), style_, false, true))
+		      .str();
+
+		description =
 		   (boost::format("%s%s") % description % as_heading(_("Description"), style_)).str();
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.description, style_)).str();
@@ -207,7 +213,7 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 				std::unique_ptr<Widelands::MapLoader> ml(
 				   egbase_.mutable_map()->get_correct_loader(mapdata.filename));
 				try {
-					if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
+					if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
 						minimap_cache_[last_map_] = draw_minimap(
 						   egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 						   MiniMapLayer::Terrain | MiniMapLayer::StartingPositions | MiniMapLayer::Owner);

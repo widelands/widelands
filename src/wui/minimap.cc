@@ -123,10 +123,12 @@ destructor
 ===============
 */
 inline uint32_t MiniMap::number_of_buttons_per_row() const {
-	return 6;
+	// Six buttons need at least 120 pixels.
+	return view_.get_w() < 120 ? 3 : 6;
 }
 inline uint32_t MiniMap::number_of_button_rows() const {
-	return 1;
+	// Use two rows if there are less than 120 pixels available.
+	return view_.get_w() < 120 ? 2 : 1;
 }
 inline uint32_t MiniMap::but_w() const {
 	return view_.get_w() / number_of_buttons_per_row();
@@ -235,18 +237,23 @@ void MiniMap::toggle(MiniMapLayer const button) {
 
 void MiniMap::resize() {
 	view_.set_zoom(*view_.minimap_layers_ & MiniMapLayer::Zoom2);
-	set_inner_size(view_.get_w(), view_.get_h() + number_of_button_rows() * but_h());
+	// Read number of rows after the zoom.
+	const uint32_t rows = number_of_button_rows();
+	set_inner_size(view_.get_w(), view_.get_h() + rows * but_h());
 	button_terrn.set_pos(Vector2i(but_w() * 0, view_.get_h()));
 	button_terrn.set_size(but_w(), but_h());
 	button_owner.set_pos(Vector2i(but_w() * 1, view_.get_h()));
 	button_owner.set_size(but_w(), but_h());
 	button_flags.set_pos(Vector2i(but_w() * 2, view_.get_h()));
 	button_flags.set_size(but_w(), but_h());
-	button_roads.set_pos(Vector2i(but_w() * 3, view_.get_h()));
+	button_roads.set_pos(
+	   Vector2i(but_w() * (3 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_roads.set_size(but_w(), but_h());
-	button_bldns.set_pos(Vector2i(but_w() * 4, view_.get_h()));
+	button_bldns.set_pos(
+	   Vector2i(but_w() * (4 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_bldns.set_size(but_w(), but_h());
-	button_zoom.set_pos(Vector2i(but_w() * 5, view_.get_h()));
+	button_zoom.set_pos(
+	   Vector2i(but_w() * (5 - 3 * (rows - 1)), view_.get_h() + but_h() * (rows - 1)));
 	button_zoom.set_size(but_w(), but_h());
 	button_zoom.set_enabled(view_.can_zoom());
 

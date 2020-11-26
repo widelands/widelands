@@ -14,6 +14,8 @@ wl_library(network
     gameclient.h
     gamehost.cc
     gamehost.h
+    net_addons.cc
+    net_addons.h
     netclient_interface.h
     netclient.cc
     netclient.h
@@ -37,6 +39,7 @@ wl_library(network
     participantlist.cc
     participantlist.h
   USES_BOOST_LIBRARIES
+  USES_CURL
   USES_SDL2
   DEPENDS
     ai
@@ -53,6 +56,7 @@ wl_library(network
     io_filesystem
     io_stream
     logic
+    logic_addons
     logic_commands
     logic_constants
     logic_filesystem_constants
