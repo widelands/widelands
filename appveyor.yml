@@ -40,7 +40,6 @@ shallow_clone: false
 branches:
   only:
     - master
-    - curl_appveyor
 
 build_script:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
