@@ -10,6 +10,7 @@ descriptions:new_productionsite_type {
    size = "small",
 
    buildcost = {
+      brick = 1,
       granite = 1,
       log = 1,
       reed = 1
