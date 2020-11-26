@@ -115,6 +115,7 @@ wl_library(widelands_ball_of_mud
     graphic_text
     io_filesystem
     logic
+    logic_addons
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller

@@ -309,7 +309,7 @@ void LaunchMPG::set_scenario_values() {
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data
 	std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(settings.mapfilename));
 	map.set_filename(settings.mapfilename);
-	ml->preload_map(true);
+	ml->preload_map(true, nullptr);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	if (settings.players.size() != nrplayers) {
 		// Due to asynchronous notifications, the client can crash when an update is missing and the
@@ -396,7 +396,7 @@ void LaunchMPG::load_map_info() {
 	map.set_filename(settings_.settings().mapfilename);
 	{
 		i18n::Textdomain td("maps");
-		ml->preload_map(true);
+		ml->preload_map(true, nullptr);
 	}
 
 	map_details_.update(&settings_, map);

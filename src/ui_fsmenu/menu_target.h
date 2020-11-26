@@ -35,6 +35,7 @@ enum class MenuTarget {
 	kContinueLastsave,
 	kReplay,
 	kOptions,
+	kAddOns,
 	kAbout,
 	kExit,
 

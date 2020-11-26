@@ -40,6 +40,7 @@
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/about.h"
+#include "ui_fsmenu/addons.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/launch_spg.h"
@@ -179,9 +180,7 @@ MainMenu::MainMenu()
 	multiplayer_.selected.connect([this]() { action(multiplayer_.get_selected()); });
 	editor_.selected.connect([this]() { action(editor_.get_selected()); });
 	replay_.sigclicked.connect([this]() { action(MenuTarget::kReplay); });
-	/* addons_.sigclicked.connect([this]() {  // Not yet implemented
-	   action(MenuTarget::kAddOns);
-	}); */
+	addons_.sigclicked.connect([this]() { action(MenuTarget::kAddOns); });
 	options_.sigclicked.connect([this]() { action(MenuTarget::kOptions); });
 	about_.sigclicked.connect([this]() { action(MenuTarget::kAbout); });
 	exit_.sigclicked.connect([this]() { action(MenuTarget::kExit); });
@@ -202,8 +201,6 @@ MainMenu::MainMenu()
 	vbox2_.add_inf_space();
 	vbox2_.add(&exit_, UI::Box::Resizing::kFullSize);
 
-	addons_.set_enabled(false);  // Not yet implemented
-
 	for (const std::string& img :
 	     g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/mainmenu")) {
 		images_.push_back(img);
@@ -215,6 +212,7 @@ MainMenu::MainMenu()
 
 	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
 	r_about_.open_window = [this]() { new About(*this, r_about_); };
+	r_addons_.open_window = [this]() { new AddOnsCtrl(*this, r_about_); };
 
 	focus();
 	set_labels();
@@ -242,7 +240,7 @@ static void find_maps(const std::string& directory, std::vector<MapEntry>& resul
 		if (ml) {
 			try {
 				map.set_filename(file);
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
 					results.push_back(MapEntry(
 					   MapData(map, file, MapData::MapType::kNormal, MapData::DisplayType::kFilenames),
@@ -407,9 +405,8 @@ void MainMenu::set_labels() {
 	   _("Watch the replay of an old game"), "R", UI::PanelStyle::kFsMenu));
 
 	addons_.set_title(_("Add-Ons"));
-	addons_.set_tooltip(  // TODO(Nordfriese): Replace with purpose text or add _() markup
-	   as_tooltip_text_with_hotkey(
-	      "This feature is still under development", "A", UI::PanelStyle::kFsMenu));
+	addons_.set_tooltip(
+	   as_tooltip_text_with_hotkey(_("Install and manage add-ons"), "A", UI::PanelStyle::kFsMenu));
 	options_.set_title(_("Options"));
 	options_.set_tooltip(as_tooltip_text_with_hotkey(
 	   _("Technical and game-related settings"), "O", UI::PanelStyle::kFsMenu));
@@ -500,9 +497,9 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		case SDLK_p:
 			action(MenuTarget::kLan);
 			return true;
-		/* case SDLK_a:
+		case SDLK_a:
 			action(MenuTarget::kAddOns);
-			return true; */
+			return true;
 		case SDLK_o:
 			action(MenuTarget::kOptions);
 			return true;
@@ -732,6 +729,9 @@ void MainMenu::action(const MenuTarget t) {
 		OptionsCtrl o(*this, get_config_section());
 		break;
 	}
+	case MenuTarget::kAddOns:
+		r_addons_.toggle();
+		break;
 	case MenuTarget::kAbout:
 		r_about_.toggle();
 		break;

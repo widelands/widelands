@@ -97,7 +97,7 @@ private:
 	void action(MenuTarget);
 
 	MenuCapsule menu_capsule_;
-	UI::UniqueWindow::Registry r_login_, r_about_;
+	UI::UniqueWindow::Registry r_login_, r_about_, r_addons_;
 
 	void internet_login(bool launch_metaserver);
 

@@ -79,12 +79,31 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
      loading_message_subscriber_(Notifications::subscribe<UI::NoteLoadingMessage>(
         [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); })),
      tmp_fs_(nullptr) {
+
+	init_addons(false);
+
+	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
+	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
+
 	// Ensure descriptions are registered
 	descriptions();
 }
 
 EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
+}
+
+static inline bool addon_initially_enabled(AddOnCategory c) {
+	return c == AddOnCategory::kTribes || c == AddOnCategory::kWorld || c == AddOnCategory::kScript;
+}
+void EditorGameBase::init_addons(bool world_only) {
+	enabled_addons_.clear();
+	for (const auto& pair : g_addons) {
+		if (pair.second && (world_only ? pair.first.category == AddOnCategory::kWorld :
+		                                 addon_initially_enabled(pair.first.category))) {
+			enabled_addons_.push_back(pair.first);
+		}
+	}
 }
 
 /**
@@ -185,6 +204,10 @@ void EditorGameBase::think() {
 	// by a given number of milliseconds
 }
 
+void EditorGameBase::delete_world_and_tribes() {
+	descriptions_.reset(nullptr);
+}
+
 const Descriptions& EditorGameBase::descriptions() const {
 	// Const casts are evil, but this is essentially lazy evaluation and the
 	// caller should really not modify this.
@@ -198,7 +221,7 @@ Descriptions* EditorGameBase::mutable_descriptions() {
 		// to descriptions through this method already.
 		ScopedTimer timer("Registering the descriptions took %ums");
 		assert(lua_);
-		descriptions_.reset(new Descriptions(lua_.get()));
+		descriptions_.reset(new Descriptions(lua_.get(), enabled_addons_));
 	}
 	return descriptions_.get();
 }
@@ -278,6 +301,30 @@ void EditorGameBase::allocate_player_maps() {
 void EditorGameBase::postload() {
 	create_tempfile_and_save_mapdata(FileSystem::ZIP);
 	assert(descriptions_);
+}
+
+void EditorGameBase::postload_addons() {
+	Notifications::publish(UI::NoteLoadingMessage(_("Postloading world and tribes…")));
+
+	assert(lua_);
+	assert(descriptions_);
+
+	for (const AddOnInfo& info : enabled_addons_) {
+		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
+			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
+			                         FileSystem::file_separator() + "postload.lua");
+			if (g_fs->file_exists(script)) {
+				log_info("Running postload script for add-on %s", info.internal_name.c_str());
+				lua_->run_script(script);
+			}
+		}
+	}
+
+	// Postload all tribes. We can do this only now to ensure that any changes
+	// made by add-ons are taken into account when computing dependency chains.
+	for (DescriptionIndex i = 0; i < descriptions_->nr_tribes(); ++i) {
+		descriptions_->get_mutable_tribe_descr(i)->finalize_loading(*descriptions_);
+	}
 }
 
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,

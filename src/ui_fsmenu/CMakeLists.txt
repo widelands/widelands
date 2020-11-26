@@ -2,6 +2,8 @@ wl_library(ui_fsmenu
   SRCS
     about.cc
     about.h
+    addons.cc
+    addons.h
     campaigndetails.cc
     campaigndetails.h
     campaigns.cc
@@ -68,6 +70,7 @@ wl_library(ui_fsmenu
     io_filesystem
     io_profile
     logic
+    logic_addons
     logic_filesystem_constants
     logic_game_settings
     logic_game_controller
