@@ -1472,6 +1472,8 @@ public:
 		box_.add(&ok_, UI::Box::Resizing::kFullSize);
 		box_.add_space(kRowButtonSpacing);
 		box_.set_size(get_inner_w(), get_inner_h());
+
+		initialization_complete();
 	}
 
 private:
