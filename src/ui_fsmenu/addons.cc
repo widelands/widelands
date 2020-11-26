@@ -880,6 +880,14 @@ void AddOnsCtrl::layout() {
 	UI::Window::layout();
 }
 
+inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
+	UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Note"),
+		(boost::format(
+		_("Please restart Widelands before you use the add-on ‘%s’, otherwise you may experience graphical glitches.")) %
+		name.c_str()).str(), UI::WLMessageBox::MBoxType::kOk);
+	w.run<UI::Panel::Returncodes>();
+}
+
 static void install_translation(const std::string& temp_locale_path,
                                 const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
@@ -919,6 +927,7 @@ static void install_translation(const std::string& temp_locale_path,
 // TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's
 // requirements
 void AddOnsCtrl::install(const AddOnInfo& remote) {
+	{
 	ProgressIndicatorWindow piw(this, remote.descname());
 
 	g_fs->ensure_directory_exists(kAddOnDir);
@@ -954,11 +963,16 @@ void AddOnsCtrl::install(const AddOnInfo& remote) {
 		install_translation(temp_locale_path, remote.internal_name);
 	}
 
-	g_addons.push_back(std::make_pair(preload_addon(remote.internal_name), true));
+	g_addons.push_back(std::make_pair(preload_addon(remote.internal_name), remote.category != AddOnCategory::kWorld));
+	}
+	if (remote.category == AddOnCategory::kWorld) {
+		inform_about_restart(remote.descname());
+	}
 }
 
 // Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
 void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
+	{
 	ProgressIndicatorWindow piw(this, remote.descname());
 
 	piw.progressbar().set_total(remote.file_list.locales.size() +
@@ -994,9 +1008,14 @@ void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
 		install_translation(temp_locale_path, remote.internal_name);
 	}
 
+	}
 	for (auto& pair : g_addons) {
 		if (pair.first.internal_name == remote.internal_name) {
 			pair.first = preload_addon(remote.internal_name);
+			if (remote.category == AddOnCategory::kWorld) {
+				pair.second = false;
+				inform_about_restart(remote.descname());
+			}
 			return;
 		}
 	}
