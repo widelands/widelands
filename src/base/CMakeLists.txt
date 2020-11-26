@@ -33,6 +33,8 @@ wl_library(base_i18n
     base_log
     base_macros
     base_multithreading
+    io_filesystem
+    logic_filesystem_constants
     third_party_gettext
 )
 

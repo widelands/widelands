@@ -456,7 +456,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				Widelands::Map map;
 				std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(settings.mapfilename);
 				if (ml) {
-					ml->preload_map(true);
+					ml->preload_map(true, nullptr);
 					tags = map.get_tags();
 				}
 			}

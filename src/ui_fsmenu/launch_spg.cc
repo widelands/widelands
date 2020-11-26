@@ -115,7 +115,7 @@ void FullscreenMenuLaunchSPG::update() {
 		map.set_filename(settings_->settings().mapfilename);
 		{
 			i18n::Textdomain td("maps");
-			map_loader->preload_map(true);
+			map_loader->preload_map(true, nullptr);
 		}
 
 		map_details.update(settings_, map);

@@ -42,15 +42,28 @@ namespace i18n {
 char const* translate(char const*) __attribute__((format_arg(1)));
 char const* translate(const std::string&);
 
-void grab_textdomain(const std::string&);
+void grab_textdomain(const std::string&, const char* localedir);
 void release_textdomain();
+
+void init_locale();
+void set_locale(const std::string&);
+const std::string& get_locale();
+
+void set_localedir(const std::string&);
+const std::string& get_localedir();
+
+const std::string& get_addon_locale_dir();
+
+void set_homedir(const std::string&);
+const std::string& get_homedir();
 
 /// Create an object of this type to grab a textdomain and make sure that it is
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct Textdomain {
+	// For all common purposes
 	explicit Textdomain(const std::string& name) : lock_(MutexLock::ID::kI18N) {
-		grab_textdomain(name);
+		grab_textdomain(name, get_localedir().c_str());
 	}
 	~Textdomain() {
 		release_textdomain();
@@ -59,13 +72,18 @@ struct Textdomain {
 private:
 	MutexLock lock_;
 };
+struct AddOnTextdomain {
+	// For strings defined in an add-on
+	explicit AddOnTextdomain(const std::string& addon) : lock_(MutexLock::ID::kI18N) {
+		grab_textdomain(addon, get_addon_locale_dir().c_str());
+	}
+	~AddOnTextdomain() {
+		release_textdomain();
+	}
 
-void init_locale();
-void set_locale(const std::string&);
-const std::string& get_locale();
-
-void set_localedir(const std::string&);
-const std::string& get_localedir();
+private:
+	MutexLock lock_;
+};
 
 enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };
 /**
