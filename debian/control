@@ -16,6 +16,7 @@ Build-Depends: debhelper (>= 9),
   libboost-regex-dev,
   libboost-system-dev,
   libboost-test-dev,
+  libcurl4-openssl-dev
   libglew-dev,
   libpng-dev,
   libsdl2-dev,
