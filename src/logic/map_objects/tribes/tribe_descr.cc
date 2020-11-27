@@ -852,6 +852,10 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		BuildingDescr* building = descriptions_.get_mutable_building_descr(index);
 		assert(building != nullptr);
 
+		if (building->type() != MapObjectType::CONSTRUCTIONSITE && building->type() != MapObjectType::DISMANTLESITE) {
+			building->set_owning_tribe(name());
+		}
+
 		// Calculate largest possible workarea radius
 		for (const auto& pair : building->workarea_info()) {
 			descriptions.increase_largest_workarea(pair.first);
