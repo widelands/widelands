@@ -584,7 +584,7 @@ void AddOnsCtrl::refresh_remotes() {
 			                .str();
 		             },
 		             [bug]() { return bug; },
-		             0,
+		             {},
 		             0,
 		             AddOnCategory::kNone,
 		             {},
@@ -718,8 +718,8 @@ void AddOnsCtrl::rebuild() {
 		if (0 < index++) {
 			browse_addons_box_.add_space(kRowButtonSize);
 		}
-		uint32_t installed = kNotInstalled;
-		uint32_t installed_i18n = kNotInstalled;
+		AddOnVersion installed;
+		uint32_t installed_i18n = 0;
 		for (const auto& pair : g_addons) {
 			if (pair.first.internal_name == a.internal_name) {
 				installed = pair.first.version;
@@ -1127,10 +1127,10 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 		   (boost::format(_("Are you certain that you want to uninstall this add-on?\n\n"
 		                    "%1$s\n"
 		                    "by %2$s\n"
-		                    "Version %3$u\n"
+		                    "Version %3$s\n"
 		                    "Category: %4$s\n"
 		                    "%5$s\n")) %
-		    info.descname() % info.author() % info.version %
+		    info.descname() % info.author() % version_to_string(info.version) %
 		    kAddOnCategories.at(info.category).descname() % info.description())
 		      .str(),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
@@ -1281,7 +1281,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               0,
               0,
               0,
-              std::to_string(info.version),
+              version_to_string(info.version),
               UI::Align::kCenter),
      txt_(this,
           0,
@@ -1326,8 +1326,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 	   (boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(
-	   /** TRANSLATORS: (MajorVersion).(MinorVersion) */
-	   (boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
+	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
+	   (boost::format(_("Version: %1$s+%2$u")) % version_to_string(info.version) % info.i18n_version).str());
 	set_can_focus(true);
 	layout();
 }
@@ -1435,8 +1435,8 @@ public:
 			           .as_font_tag(time_string(comment.timestamp));
 			text += "<br>";
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$u:")) %
-			                         comment.username % comment.version)
+			           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$s:")) %
+			                         comment.username % version_to_string(comment.version))
 			                           .str());
 			text += "<br>";
 			text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -1481,7 +1481,7 @@ private:
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                                AddOnsCtrl* ctrl,
                                const AddOnInfo& info,
-                               uint32_t installed_version,
+                               const AddOnVersion& installed_version,
                                uint32_t installed_i18n_version)
    : UI::Panel(parent, UI::PanelStyle::kFsMenu, 0, 0, 3 * kRowButtonSize, 4 * kRowButtonSize),
      info_(info),
@@ -1534,7 +1534,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               0,
               0,
               0,
-              std::to_string(info.version),
+              version_to_string(info.version),
               UI::Align::kCenter),
      bottom_row_left_(this,
                       UI::PanelStyle::kFsMenu,
@@ -1586,9 +1586,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
               .as_font_tag(info.description()))
              .str()),
-     full_upgrade_possible_(installed_version < info.version) {
+     full_upgrade_possible_(compare_versions(installed_version, info.version)) {
 
-	assert(installed_version <= info.version);
+	assert(installed_version == info.version || compare_versions(installed_version, info.version));
 	assert(installed_i18n_version <= info.i18n_version);
 
 	interact_.sigclicked.connect([ctrl, info]() {
@@ -1605,11 +1605,11 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "%1$s\n"
 			                    "by %2$s\n"
 			                    "%3$s\n"
-			                    "Version %4$u\n"
+			                    "Version %4$s\n"
 			                    "Category: %5$s\n"
 			                    "%6$s\n")) %
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
-			    info.version % kAddOnCategories.at(info.category).descname() % info.description())
+			    version_to_string(info.version) % kAddOnCategories.at(info.category).descname() % info.description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1627,12 +1627,12 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "%1$s\n"
 			                    "by %2$s\n"
 			                    "%3$s\n"
-			                    "Installed version: %4$u\n"
-			                    "Available version: %5$u\n"
+			                    "Installed version: %4$s\n"
+			                    "Available version: %5$s\n"
 			                    "Category: %6$s\n"
 			                    "%7$s\n")) %
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
-			    installed_version % info.version % kAddOnCategories.at(info.category).descname() %
+			    version_to_string(installed_version) % version_to_string(info.version) % kAddOnCategories.at(info.category).descname() %
 			    info.description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
@@ -1648,7 +1648,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		upgrade_.set_enabled(false);
 		uninstall_.set_enabled(false);
 		interact_.set_enabled(false);
-	} else if (installed_version == kNotInstalled) {
+	} else if (installed_version.empty()) {
 		uninstall_.set_enabled(false);
 		upgrade_.set_enabled(false);
 	} else {
@@ -1663,8 +1663,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	category_.set_tooltip(
 	   (boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
 	version_.set_tooltip(
-	   /** TRANSLATORS: (MajorVersion).(MinorVersion) */
-	   (boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
+	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
+	   (boost::format(_("Version: %1$s+%2$u")) % version_to_string(info.version) % info.i18n_version).str());
 	verified_.set_tooltip(
 	   info.internal_name.empty() ?
 	      _("Error") :

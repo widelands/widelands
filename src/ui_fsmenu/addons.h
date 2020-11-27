@@ -66,7 +66,7 @@ struct RemoteAddOnRow : public UI::Panel {
 	RemoteAddOnRow(Panel*,
 	               AddOnsCtrl*,
 	               const AddOnInfo&,
-	               uint32_t installed_version,
+	               const AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {
 	}

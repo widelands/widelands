@@ -51,19 +51,23 @@ struct AddOnCategoryInfo {
 	bool can_disable_addons;
 };
 
-constexpr uint32_t kNotInstalled = 0;
-
-// Required add-ons for an add-on, map, or savegame with the recommended version
-using AddOnRequirements = std::vector<std::pair<std::string, uint32_t>>;
-
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
 struct AddOnFileList {
 	std::vector<std::string> directories, files, locales, checksums;
 };
 
+using AddOnVersion = std::vector<uint32_t>;
+std::string version_to_string(const AddOnVersion&, bool localize = true);
+AddOnVersion string_to_version(std::string);
+// Returns true if and only if version b is newer than version a
+bool compare_versions(const AddOnVersion& a, const AddOnVersion& b);
+
+// Required add-ons for an add-on, map, or savegame with the recommended version
+using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
+
 struct AddOnComment {
 	std::string username, message;
-	uint32_t version;  // The version on which the user commented
+	AddOnVersion version;  // The version on which the user commented
 	std::time_t timestamp;
 };
 
@@ -74,7 +78,7 @@ struct AddOnInfo {
 	std::function<std::string()> description;  // "This add-on is a really cool feature."
 	std::function<std::string()> author;       // "The Widelands Bunnybot"
 
-	uint32_t version;       // Add-on version
+	AddOnVersion version;   // Add-on version (e.g. 1.2.3)
 	uint32_t i18n_version;  // (see doc/sphinx/source/add-ons.rst)
 
 	AddOnCategory category;
