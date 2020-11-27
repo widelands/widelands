@@ -196,17 +196,15 @@ void BuildingDescr::set_enhancement(Descriptions& descriptions, LuaTable& enhanc
 	}
 	DescriptionIndex const enhancement_idx = descriptions.load_building(enhancement_name);
 	if (!descriptions.building_exists(enhancement_idx)) {
-		throw GameDataError("'%s' has enhancement to unknown building '%s'", name().c_str(),
-		                    enhancement_name.c_str());
+		throw GameDataError(
+		   "'%s' has enhancement to unknown building '%s'", name().c_str(), enhancement_name.c_str());
 	}
 
 	enhancement_ = enhancement_idx;
-	BuildingDescr* enhanced_building =
-	   descriptions.get_mutable_building_descr(enhancement_idx);
+	BuildingDescr* enhanced_building = descriptions.get_mutable_building_descr(enhancement_idx);
 	enhanced_building->set_enhancement_cost(
 	   Buildcost(enhancement_table.get_table("enhancement_cost"), descriptions),
-	   Buildcost(
-	      enhancement_table.get_table("enhancement_return_on_dismantle"), descriptions));
+	   Buildcost(enhancement_table.get_table("enhancement_return_on_dismantle"), descriptions));
 
 	// Merge the enhancements workarea info into this building's workarea info
 	for (auto area : enhanced_building->workarea_info_) {
@@ -219,7 +217,9 @@ void BuildingDescr::set_enhancement(Descriptions& descriptions, LuaTable& enhanc
 
 void BuildingDescr::set_owning_tribe(const std::string& t) {
 	if (!owning_tribe_.empty()) {
-		throw GameDataError("Building %s already belongs to tribe %s; cannot belong to tribe %s as well", name().c_str(), owning_tribe_.c_str(), t.c_str());
+		throw GameDataError(
+		   "Building %s already belongs to tribe %s; cannot belong to tribe %s as well",
+		   name().c_str(), owning_tribe_.c_str(), t.c_str());
 	}
 	owning_tribe_ = t;
 }

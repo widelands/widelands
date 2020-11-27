@@ -852,7 +852,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		BuildingDescr* building = descriptions_.get_mutable_building_descr(index);
 		assert(building != nullptr);
 
-		if (building->type() != MapObjectType::CONSTRUCTIONSITE && building->type() != MapObjectType::DISMANTLESITE) {
+		if (building->type() != MapObjectType::CONSTRUCTIONSITE &&
+		    building->type() != MapObjectType::DISMANTLESITE) {
 			building->set_owning_tribe(name());
 		}
 
