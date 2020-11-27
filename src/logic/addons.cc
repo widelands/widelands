@@ -125,9 +125,10 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 					        version_to_string(a.second.second) % version_to_string(a.second.first))
 					          .str();
 				} else {
-					list = (boost::format(_("%1$s, %2$s (expected version %3$s, found %4$s)")) % list %
-					        a.first % version_to_string(a.second.second) % version_to_string(a.second.first))
-					          .str();
+					list =
+					   (boost::format(_("%1$s, %2$s (expected version %3$s, found %4$s)")) % list %
+					    a.first % version_to_string(a.second.second) % version_to_string(a.second.first))
+					      .str();
 				}
 			}
 			return (boost::format(ngettext("%1$u add-on with wrong version: %2$s",
@@ -160,9 +161,10 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 				}
 			}
 			for (const auto& a : addons_wrong_version) {
-				list = (boost::format(_("%1$s, %2$s (expected version %3$s, found %4$s)")) % list %
-				        a.first % version_to_string(a.second.second) % version_to_string(a.second.first))
-				          .str();
+				list =
+				   (boost::format(_("%1$s, %2$s (expected version %3$s, found %4$s)")) % list %
+				    a.first % version_to_string(a.second.second) % version_to_string(a.second.first))
+				      .str();
 			}
 			return (boost::format(_("%1$s and %2$s: %3$s")) %
 			        (boost::format(ngettext(
@@ -188,9 +190,9 @@ std::string check_requirements(const AddOnRequirements& required_addons) {
 	}
 	std::string result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result =
-		   (boost::format(_("%1$s<br>· %2$s (version %3$s)")) % result % pair.first % version_to_string(pair.second))
-		      .str();
+		result = (boost::format(_("%1$s<br>· %2$s (version %3$s)")) % result % pair.first %
+		          version_to_string(pair.second))
+		            .str();
 	}
 	return result;
 }

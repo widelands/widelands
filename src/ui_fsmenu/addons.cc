@@ -1327,7 +1327,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	   (boost::format(_("Version: %1$s+%2$u")) % version_to_string(info.version) % info.i18n_version).str());
+	   (boost::format(_("Version: %1$s+%2$u")) % version_to_string(info.version) % info.i18n_version)
+	      .str());
 	set_can_focus(true);
 	layout();
 }
@@ -1609,7 +1610,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Category: %5$s\n"
 			                    "%6$s\n")) %
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
-			    version_to_string(info.version) % kAddOnCategories.at(info.category).descname() % info.description())
+			    version_to_string(info.version) % kAddOnCategories.at(info.category).descname() %
+			    info.description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1632,8 +1634,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "Category: %6$s\n"
 			                    "%7$s\n")) %
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
-			    version_to_string(installed_version) % version_to_string(info.version) % kAddOnCategories.at(info.category).descname() %
-			    info.description())
+			    version_to_string(installed_version) % version_to_string(info.version) %
+			    kAddOnCategories.at(info.category).descname() % info.description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1664,7 +1666,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	   (boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
 	version_.set_tooltip(
 	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	   (boost::format(_("Version: %1$s+%2$u")) % version_to_string(info.version) % info.i18n_version).str());
+	   (boost::format(_("Version: %1$s+%2$u")) % version_to_string(info.version) % info.i18n_version)
+	      .str());
 	verified_.set_tooltip(
 	   info.internal_name.empty() ?
 	      _("Error") :

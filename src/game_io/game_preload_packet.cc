@@ -87,8 +87,8 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
-					required_addons_.push_back(std::make_pair(
-					   substring.substr(0, colonpos), string_to_version(version)));
+					required_addons_.push_back(
+					   std::make_pair(substring.substr(0, colonpos), string_to_version(version)));
 				}
 				if (commapos == std::string::npos) {
 					break;
