@@ -76,11 +76,11 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:175
 msgid "Not enough space"
-msgstr ""
+msgstr "Ikke nok plass"
 
 #: ../../data/scripting/infrastructure.lua:247
 msgid "No rocks nearby"
-msgstr ""
+msgstr "Ingen stein i nærheten"
 
 #: ../../data/scripting/infrastructure.lua:247
 msgid ""
@@ -90,13 +90,15 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:252
 msgid "No trees nearby"
-msgstr ""
+msgstr "Ingen trær i nærheten"
 
 #: ../../data/scripting/infrastructure.lua:252
 msgid ""
 "There are no trees near to your starting position. Therefore, you receive "
 "extra resources for bootstrapping your economy."
 msgstr ""
+"Det er ingen trær i nærheten av din startposisjon. Derfor før du "
+"ekstra ressurser for å sette i gang økonomien din."
 
 #: ../../data/scripting/messages.lua:53 ../../data/scripting/messages.lua:55
 #: ../../src/wui/game_message_menu.cc:71 ../../src/wui/game_summary.cc:114
@@ -289,7 +291,7 @@ msgstr "Verktøy"
 #: ../../src/editor/editorinteractive.cc:112
 #: ../../src/wui/interactive_gamebase.cc:73
 msgid "Show / Hide"
-msgstr ""
+msgstr "Vis / Skjul"
 
 #: ../../src/editor/editorinteractive.cc:125
 msgid "Tool size"
@@ -395,12 +397,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:62
 #: ../../src/logic/map_objects/tribes/tribe_descr.cc:182
 msgid "Immovables"
-msgstr "Uflyttbare"
+msgstr "Faste installasjoner"
 
 #. * TRANSLATORS: Tooltip for the immovables tool in the editor
 #: ../../src/editor/editorinteractive.cc:275
 msgid "Add or remove immovables"
-msgstr ""
+msgstr "Legge till eller fjern faste installasjoner"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:281
@@ -411,7 +413,7 @@ msgstr "Dyr"
 #. * TRANSLATORS: Tooltip for the animals tool in the editor
 #: ../../src/editor/editorinteractive.cc:284
 msgid "Add or remove animals"
-msgstr ""
+msgstr "Legg til eller fjern dyr"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:291
@@ -426,7 +428,7 @@ msgstr "Ressurser"
 #. * TRANSLATORS: Tooltip for the resources tool in the editor
 #: ../../src/editor/editorinteractive.cc:294
 msgid "Set or change resources"
-msgstr ""
+msgstr "Set eller endre ressurser"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:297
@@ -448,7 +450,7 @@ msgstr "Spillere"
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:309
 msgid "Set number of players and their names, tribes and starting positions"
-msgstr ""
+msgstr "Sett antall spillere, deres navn, stammer og startposisjoner"
 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:312
@@ -631,7 +633,7 @@ msgstr "stor"
 #. * TRANSLATORS: Editor terrain property: space for a flag
 #: ../../src/editor/tools/info_tool.cc:78
 msgid "flag"
-msgstr ""
+msgstr "flagg"
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
 #: ../../src/editor/tools/info_tool.cc:82
@@ -648,13 +650,13 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:74
 msgid "walkable"
-msgstr ""
+msgstr "gåbar"
 
 #. * TRANSLATORS: Editor terrain property: units can swim on this terrain
 #. (fish, ships)
 #: ../../src/editor/tools/info_tool.cc:94
 msgid "swimmable"
-msgstr ""
+msgstr "svømbar"
 
 #: ../../src/editor/tools/info_tool.cc:97
 #, c-format
@@ -674,7 +676,7 @@ msgstr "Eid av: —"
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
-msgstr ""
+msgstr "Navn: %s"
 
 #. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
 #. unreachable and
@@ -683,32 +685,32 @@ msgstr ""
 #: ../../src/editor/tools/info_tool.cc:129
 #, c-format
 msgid "Is: %s"
-msgstr ""
+msgstr "Er: %s"
 
 #. * TRANSLATORS: Heading for immovables and animals in editor info tool
 #: ../../src/editor/tools/info_tool.cc:139
 msgid "Objects"
-msgstr ""
+msgstr "Objekter"
 
 #: ../../src/editor/tools/info_tool.cc:142
 #, c-format
 msgid "Immovable: %s"
-msgstr ""
+msgstr "Ikke flyttbar: %s"
 
 #: ../../src/editor/tools/info_tool.cc:172
 #, c-format
 msgid "Animals: %s"
-msgstr ""
+msgstr "Dyr: %s"
 
 #: ../../src/editor/tools/info_tool.cc:178
 #, c-format
 msgid "Workers: %s"
-msgstr ""
+msgstr "Arbeiderer: %s"
 
 #: ../../src/editor/tools/info_tool.cc:184
 #, c-format
 msgid "Ships: %s"
-msgstr ""
+msgstr "Skip: %s"
 
 #: ../../src/editor/tools/info_tool.cc:197
 msgctxt "resources"
@@ -727,7 +729,7 @@ msgstr "Kart"
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
-msgstr ""
+msgstr "Navn: %s"
 
 #: ../../src/editor/tools/info_tool.cc:209
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:504
@@ -783,7 +785,7 @@ msgstr "Feil!"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:275
 #: ../../src/wui/mapdata.cc:166
 msgid "My Maps"
-msgstr ""
+msgstr "Mine kart"
 
 #. * TRANSLATORS: Directory name for MP Scenarios in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:73
@@ -795,19 +797,19 @@ msgstr "Flerspiller scenarioer"
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:75
 #: ../../src/wui/mapdata.cc:169
 msgid "Downloaded Maps"
-msgstr ""
+msgstr "Nedlastede kart"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:78
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:275
 #, c-format
 msgid "Current directory: %s"
-msgstr ""
+msgstr "Nåværende katalog: %s"
 
 #. * TRANSLATORS: "Display: Original/Localized map/file names"
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:66
 msgid "Display"
-msgstr ""
+msgstr "Visning"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:248
@@ -836,15 +838,15 @@ msgstr "Avbryt"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:105
 msgid "File names"
-msgstr ""
+msgstr "Filnavn"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:106
 msgid "Map names"
-msgstr ""
+msgstr "Kartnavn"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:106
 msgid "Original map names"
-msgstr ""
+msgstr "Originale kartnavn"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
 msgid "Translated map names"
@@ -852,7 +854,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:51
 msgid "Click player to remove"
-msgstr ""
+msgstr "Klikk på spiller for å fjerne"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:61
 #: ../../src/wui/economy_options_window.cc:660
@@ -870,7 +872,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:114
 msgid "Add a player to this team"
-msgstr ""
+msgstr "Legg til spillere til dette laget"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:320
 msgid "Theme"
@@ -886,7 +888,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:352
 msgid "Map name:"
-msgstr ""
+msgstr "Kartnavn:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:357
 msgid "Authors:"
@@ -916,7 +918,7 @@ msgstr ""
 #. * TRANSLATORS: Map Options: Waterways are disabled
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:407
 msgid "Disabled"
-msgstr ""
+msgstr "Avslått"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:427
 #, c-format
@@ -927,11 +929,11 @@ msgstr[1] "%u Spillere"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:430
 msgid "Suggested Teams:"
-msgstr ""
+msgstr "Foreslåtte lag:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:451
 msgid "Main Options"
-msgstr ""
+msgstr "Hovedinnstillinger"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:453
 #: ../../src/wui/mapdetails.cc:182
@@ -1110,7 +1112,7 @@ msgstr "Filnavn:"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:77
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:32
 msgid "Make Directory"
-msgstr "Opprett mappe"
+msgstr "Opprett katalog"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:158
@@ -1125,12 +1127,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:168
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:183
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "Feil ved oppretting av katalog!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:182
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Feil ved oppretting av katalog '%s'."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:306
 #: ../../src/wui/game_main_menu_save_game.cc:248
@@ -1145,11 +1147,11 @@ msgstr "Feil ved lagring av kart!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:339
 msgid "Saving the map…"
-msgstr ""
+msgstr "Lagrer kartet…"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:357
 msgid "Map saved"
-msgstr ""
+msgstr "Kart lagret"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:52
 msgid "Enter Directory Name:"
@@ -1157,7 +1159,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:107
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "Denne utvidelsen er reservert!"
 
 #: ../../src/editor/ui_menus/map_size_box.cc:39
 msgid "Width"
@@ -1188,11 +1190,11 @@ msgstr ""
 #. for testing purposes. Are you sure that you want more than 8 players?'
 #: ../../src/editor/ui_menus/player_menu.cc:75
 msgid "Do not remind me again"
-msgstr ""
+msgstr "Ikke påminn meg igjen"
 
 #: ../../src/editor/ui_menus/player_menu.cc:79
 msgid "Abort"
-msgstr ""
+msgstr "Avbryt"
 
 #: ../../src/editor/ui_menus/player_menu.cc:131
 msgid "Player Options"
@@ -1704,11 +1706,11 @@ msgstr[1] ""
 #: ../../src/logic/map_objects/tribes/militarysite.cc:947
 msgctxt "building"
 msgid "Attack!"
-msgstr ""
+msgstr "Angrep!"
 
 #: ../../src/logic/map_objects/tribes/militarysite.cc:947
 msgid "You are under attack"
-msgstr ""
+msgstr "Du er under angrep"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the ware
@@ -1716,7 +1718,7 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:457
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr ""
+msgstr "økonomien trenger flere varer '%s'"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn't need the
@@ -1732,14 +1734,14 @@ msgstr ""
 #: ../../src/logic/map_objects/tribes/production_program.cc:479
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr ""
+msgstr "økonomien trenger arbeideren '%s'"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker '%s'
 #: ../../src/logic/map_objects/tribes/production_program.cc:489
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr ""
+msgstr "økonomien trenger ikke arbeideren '%s'"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
@@ -2225,11 +2227,11 @@ msgstr ""
 #: ../../src/map_io/map_saver.cc:238
 #: ../../src/map_io/widelands_map_loader.cc:358
 msgid "Win condition"
-msgstr ""
+msgstr "Vinnertilstand"
 
 #: ../../src/map_io/map_saver.cc:247
 msgid "Flag details"
-msgstr ""
+msgstr "Flaggdetaljer"
 
 #: ../../src/map_io/map_saver.cc:256
 msgid "Road and waterway details"
@@ -3203,7 +3205,7 @@ msgstr "Verten har ikke valgt et kart eller lagret spill enda."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:265
 msgid "Saved Game is Directory"
-msgstr "Lagre spillet i denne mappen"
+msgstr "Lagre spillet i denne katalogen"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:266
 msgid ""
@@ -3358,17 +3360,17 @@ msgstr "Last spill"
 
 #: ../../src/ui_fsmenu/main.cc:268
 msgid "Continue Playing"
-msgstr ""
+msgstr "Forsett å spille"
 
 #: ../../src/ui_fsmenu/main.cc:277
 #, c-format
 msgid "Map: %s"
-msgstr ""
+msgstr "Kart: %s"
 
 #: ../../src/ui_fsmenu/main.cc:281
 #, c-format
 msgid "Win Condition: %s"
-msgstr ""
+msgstr "Vinnertilstand: %s"
 
 #: ../../src/ui_fsmenu/main.cc:285 ../../src/ui_fsmenu/main.cc:347
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:106
@@ -3422,17 +3424,17 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:330
 msgid "Continue Editing"
-msgstr ""
+msgstr "Forsett å endre"
 
 #: ../../src/ui_fsmenu/main.cc:337
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Navn: %s"
 
 #: ../../src/ui_fsmenu/main.cc:341 ../../src/ui_fsmenu/mapdetailsbox.cc:100
 #, c-format
 msgid "Size: %s"
-msgstr ""
+msgstr "Størrelse: %s"
 
 #: ../../src/ui_fsmenu/main.cc:343 ../../src/ui_fsmenu/mapdetailsbox.cc:103
 #, c-format
@@ -3568,7 +3570,7 @@ msgstr "Vis alle kart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:76
 msgid "Show original map names"
-msgstr ""
+msgstr "Vis orginalkart navn"
 
 #: ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Official & Unofficial"
@@ -3822,7 +3824,7 @@ msgstr ""
 #. * TRANSLATORS: This refers to to zooming with the scrollwheel.
 #: ../../src/ui_fsmenu/options.cc:271
 msgid "Zoom only when Ctrl is pressed"
-msgstr ""
+msgstr "Zoom bare når Ctrl er hold nede"
 
 #: ../../src/ui_fsmenu/options.cc:275
 msgid "Display game time in the top left corner"
@@ -4116,7 +4118,7 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:400
 msgid "Cancel expedition?"
-msgstr ""
+msgstr "Avbryte ekspedisjonen?"
 
 #: ../../src/wui/actionconfirm.cc:401
 msgid "Do you really want to cancel the active expedition?"
@@ -4143,6 +4145,7 @@ msgstr "Antall soldater"
 msgid ""
 "Send more soldiers. Hold down Ctrl to send as many soldiers as possible"
 msgstr ""
+"Send flere soldater. Hold ned Ctrl fro å sende så mange soldater du kan"
 
 #: ../../src/wui/attack_box.cc:215
 msgid "Start attack"
@@ -4150,11 +4153,11 @@ msgstr "Start angrep"
 
 #: ../../src/wui/attack_box.cc:229
 msgid "Attackers:"
-msgstr ""
+msgstr "Angripere:"
 
 #: ../../src/wui/attack_box.cc:235
 msgid "Click on a soldier to remove him from the list of attackers"
-msgstr ""
+msgstr "Klikk på en soldat for å fjerne han fra listen av angripere"
 
 #: ../../src/wui/attack_box.cc:237
 msgid "Hold down Ctrl to remove all soldiers from the list"
@@ -4167,15 +4170,15 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:246
 msgid "Not attacking:"
-msgstr ""
+msgstr "Angriper ikke:"
 
 #: ../../src/wui/attack_box.cc:251
 msgid "Click on a soldier to add him to the list of attackers"
-msgstr ""
+msgstr "Klikk på en soldat for å legge han til listen med angripere"
 
 #: ../../src/wui/attack_box.cc:253
 msgid "Hold down Ctrl to add all soldiers to the list"
-msgstr ""
+msgstr "Hold ned CTRL for å legge soldater til listen"
 
 #: ../../src/wui/attack_box.cc:254
 msgid "Hold down Shift to add all soldiers up to the one you’re pointing at"
@@ -4949,11 +4952,11 @@ msgstr "Spilltid:"
 
 #: ../../src/wui/gamedetails.cc:176
 msgid "Widelands Version:"
-msgstr ""
+msgstr "Widelandversion:"
 
 #: ../../src/wui/gamedetails.cc:180
 msgid "Win Condition:"
-msgstr ""
+msgstr "Vinnertilstand"
 
 #: ../../src/wui/general_statistics_menu.cc:48
 msgid "General Statistics"
@@ -5043,42 +5046,42 @@ msgstr ""
 #. option explanation
 #: ../../src/wui/inputqueuedisplay.cc:137
 msgid "Hold down Ctrl to allow none of this ware"
-msgstr ""
+msgstr "Hold nede CTRL for å ikke tillate denne varen"
 
 #: ../../src/wui/inputqueuedisplay.cc:190
 msgid "Remove ware"
-msgstr ""
+msgstr "Fjern vare"
 
 #: ../../src/wui/inputqueuedisplay.cc:199
 msgid "Add ware"
-msgstr ""
+msgstr "Legg til vare"
 
 #: ../../src/wui/inputqueuedisplay.cc:528
 msgid "Hide controls"
-msgstr ""
+msgstr "Skjul kontroller"
 
 #: ../../src/wui/inputqueuedisplay.cc:528
 msgid "Show controls"
-msgstr ""
+msgstr "Vis kontroller"
 
 #. * TRANSLATORS: Title for the map view menu button in the game
 #: ../../src/wui/interactive_base.cc:180
 msgid "Map View"
-msgstr ""
+msgstr "Kartvisning"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:316
 msgid "Hide Minimap"
-msgstr ""
+msgstr "Skjul minikart"
 
 #: ../../src/wui/interactive_base.cc:316
 msgid "Show Minimap"
-msgstr ""
+msgstr "Hvis minikart"
 
 #. * TRANSLATORS: An entry in the game's map view menu
 #: ../../src/wui/interactive_base.cc:321
 msgid "Zoom +"
-msgstr ""
+msgstr "Zoom +"
 
 #: ../../src/wui/interactive_base.cc:323
 msgctxt "hotkey"
@@ -5137,7 +5140,7 @@ msgstr "PAUSE"
 #. options o increase/decrease the gamespeed, and to pause the game
 #: ../../src/wui/interactive_gamebase.cc:101
 msgid "Game Speed"
-msgstr ""
+msgstr "Spillets hurtighet"
 
 #. * TRANSLATORS: Tooltip for Script Console in the game's main menu
 #: ../../src/wui/interactive_gamebase.cc:119
@@ -5160,13 +5163,13 @@ msgstr ""
 #. * building statistics are shown
 #: ../../src/wui/interactive_gamebase.cc:197
 msgid "Hide Statistics"
-msgstr ""
+msgstr "Skjul statistikk"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * level information is shown above soldiers' heads
 #: ../../src/wui/interactive_gamebase.cc:205
 msgid "Hide Soldier Levels"
-msgstr ""
+msgstr "Skjul soldatnivå"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. * buildings are greyed out
@@ -5176,12 +5179,12 @@ msgstr "Skjul bygninger"
 
 #: ../../src/wui/interactive_gamebase.cc:261
 msgid "Speed +"
-msgstr ""
+msgstr "Hastighet +"
 
 #. * TRANSLATORS: Tooltip for Speed + in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:264
 msgid "Increase the game speed"
-msgstr ""
+msgstr "Øk hastigheten på spillet"
 
 #: ../../src/wui/interactive_gamebase.cc:264
 msgctxt "hotkey"
@@ -5190,12 +5193,12 @@ msgstr ""
 
 #: ../../src/wui/interactive_gamebase.cc:266
 msgid "Speed -"
-msgstr ""
+msgstr "Hastighet -"
 
 #. * TRANSLATORS: Tooltip for Speed - in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:269
 msgid "Decrease the game speed"
-msgstr ""
+msgstr "Sett ned hastigheten på spillet"
 
 #: ../../src/wui/interactive_gamebase.cc:269
 msgctxt "hotkey"
@@ -5204,27 +5207,27 @@ msgstr ""
 
 #: ../../src/wui/interactive_gamebase.cc:273
 msgid "Resume"
-msgstr ""
+msgstr "Forsett"
 
 #: ../../src/wui/interactive_gamebase.cc:276
 #: ../../src/wui/interactive_gamebase.cc:281
 msgctxt "hotkey"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:276
 msgid "Resume the Game"
-msgstr ""
+msgstr "Forsett spillet"
 
 #: ../../src/wui/interactive_gamebase.cc:278
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #. * TRANSLATORS: Tooltip for Pause in the game's game speed menu
 #: ../../src/wui/interactive_gamebase.cc:281
 msgid "Pause the Game"
-msgstr ""
+msgstr "Sett spillet på pause"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
 #: ../../src/wui/interactive_gamebase.cc:455
@@ -5259,14 +5262,14 @@ msgstr "Lager"
 #. * TRANSLATORS: An entry in the game's statistics menu
 #: ../../src/wui/interactive_player.cc:305
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #. * TRANSLATORS: An entry in the game's show/hide menu to toggle whether
 #. workarea overlaps
 #. * are highlighted
 #: ../../src/wui/interactive_player.cc:348
 msgid "Hide Workarea Overlaps"
-msgstr ""
+msgstr "Skjul overlappende arbeidsområder"
 
 #: ../../src/wui/interactive_player.cc:354
 msgid ""
@@ -5289,19 +5292,19 @@ msgstr ""
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:154
 msgid "Delete this game"
-msgstr ""
+msgstr "Slett dette spillet"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
 #: ../../src/wui/load_or_save_game.cc:159
 msgid "Delete these replays"
-msgstr ""
+msgstr "Slett disse reprisene"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has
 #. selected multiple files
 #: ../../src/wui/load_or_save_game.cc:162
 msgid "Delete these games"
-msgstr ""
+msgstr "Slett disse spillene"
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/wui/map_tags.cc:30
@@ -5489,24 +5492,24 @@ msgstr ""
 
 #: ../../src/wui/portdockwaresdisplay.cc:100
 msgid "(Empty)"
-msgstr ""
+msgstr "(Tom)"
 
 #. * TRANSLATORS: Tooltip for a ware that is present in the building
 #: ../../src/wui/portdockwaresdisplay.cc:150
 msgid "Present"
-msgstr ""
+msgstr "Tilstede"
 
 #. * TRANSLATORS: Tooltip for a ware that is neither present in the
 #. building nor being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:154
 msgid "Missing"
-msgstr ""
+msgstr "Manglende"
 
 #. * TRANSLATORS: Tooltip for a ware that is not present in the
 #. building, but already being transported there
 #: ../../src/wui/portdockwaresdisplay.cc:157
 msgid "Coming"
-msgstr ""
+msgstr "Kommer"
 
 #: ../../src/wui/productionsitewindow.cc:114
 msgid "Exp"
@@ -5539,15 +5542,15 @@ msgstr "(ledig)"
 
 #: ../../src/wui/savegamedeleter.cc:35
 msgid "Confirm Deleting File"
-msgstr ""
+msgstr "Bekreft sletting av fil"
 
 #: ../../src/wui/savegamedeleter.cc:35
 msgid "Confirm Deleting Files"
-msgstr ""
+msgstr "Bekreft sletting av filer"
 
 #: ../../src/wui/savegamedeleter.cc:43
 msgid "Do you really want to delete this game?"
-msgstr ""
+msgstr "Vil du virkelig slette dette spillet?"
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate
 #. string. DO NOT omit the placeholder in your translation.
@@ -5560,15 +5563,15 @@ msgstr[1] ""
 
 #: ../../src/wui/savegamedeleter.cc:80
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "Feil ved sletting av fil!"
 
 #: ../../src/wui/savegamedeleter.cc:80
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "Feil sletting av filer!"
 
 #: ../../src/wui/savegamedeleter.cc:92
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "Dette spillet kunne ikke bli sletta."
 
 #: ../../src/wui/savegamedeleter.cc:97
 #, c-format
@@ -5579,7 +5582,7 @@ msgstr[1] ""
 
 #: ../../src/wui/savegamedeleter.cc:110
 msgid "Do you really want to delete this replay?"
-msgstr ""
+msgstr "Vil du virkelig slette denne reprisen?"
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a
 #. separate string. DO NOT omit the placeholder in your translation.
@@ -5592,7 +5595,7 @@ msgstr[1] ""
 
 #: ../../src/wui/savegamedeleter.cc:124
 msgid "The replay could not be deleted."
-msgstr ""
+msgstr "Denne reprisen kunne ikke slettes."
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate
 #. string. DO NOT omit the placeholder in your translation.
@@ -5614,35 +5617,35 @@ msgstr ""
 #. * TRANSLATORS: This text is on a separate line with an error message below
 #: ../../src/wui/savegameloader.cc:106
 msgid "Error message:"
-msgstr ""
+msgstr "Feilmelding:"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
 #: ../../src/wui/savegameloader.cc:136
 msgid "Today, %1%:%2%"
-msgstr ""
+msgstr "I dag, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
 #: ../../src/wui/savegameloader.cc:141
 msgid "saved today at %1%:%2%"
-msgstr ""
+msgstr "lagret i dag %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
 #: ../../src/wui/savegameloader.cc:154
 msgid "Yesterday, %1%:%2%"
-msgstr ""
+msgstr "I går, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
 #: ../../src/wui/savegameloader.cc:159
 msgid "saved yesterday at %1%:%2%"
-msgstr ""
+msgstr "lagret igår %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -5712,12 +5715,12 @@ msgstr ""
 #: ../../src/wui/savegametable.cc:131 ../../src/wui/savegametable.cc:159
 #: ../../src/wui/savegametable.cc:223
 msgid "Save Date"
-msgstr ""
+msgstr "Lagret dato"
 
 #: ../../src/wui/savegametable.cc:131 ../../src/wui/savegametable.cc:159
 #: ../../src/wui/savegametable.cc:223
 msgid "The date this game was saved"
-msgstr ""
+msgstr "Dato dette spillet var lagret"
 
 #: ../../src/wui/savegametable.cc:133 ../../src/wui/savegametable.cc:185
 #: ../../src/wui/savegametable.cc:245
@@ -5725,13 +5728,15 @@ msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
 msgstr ""
+"Filnavnet dette spillet var lagret under følget av kartets navn, eller "
+"kartets navn etterfulgt av siste oppdrag fullført."
 
 #. * TRANSLATORS: Tooltip header for the "Mode" column when choosing a
 #. game/replay to
 #. load.
 #: ../../src/wui/savegametable.cc:163 ../../src/wui/savegametable.cc:227
 msgid "Game Mode"
-msgstr ""
+msgstr "Spillmodus"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
@@ -5763,7 +5768,7 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain if you need to use an abbreviation.
 #: ../../src/wui/savegametable.cc:183 ../../src/wui/savegametable.cc:243
 msgid "Mode"
-msgstr ""
+msgstr "Modus"
 
 #: ../../src/wui/savegametable.cc:203
 msgctxt "mapname_gametime"
@@ -5772,30 +5777,30 @@ msgstr ""
 
 #: ../../src/wui/savegametable.cc:211
 msgid "Filename: Map name (start of replay)"
-msgstr ""
+msgstr "Filnavn: Kartnavn (starten på reprise)"
 
 #: ../../src/wui/savegametable.cc:212
 msgid "Map name (start of replay)"
-msgstr ""
+msgstr "Kartnavn (starten på reprise)"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:49
 msgid "Seafaring Statistics"
-msgstr ""
+msgstr "Sjøfaringsstatistikk"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:125
 msgid "Watch the selected ship"
-msgstr ""
+msgstr "Følg det valgte skipet"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:137
 msgid "Open the selected ship’s window"
-msgstr ""
+msgstr "Åpne det valgte skipets vindu"
 
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:142
 msgid "Go to the selected ship and open its window"
-msgstr ""
+msgstr "Gå til det valgte skipet og åpne vinduet"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:143
 msgctxt "hotkey"
@@ -5805,47 +5810,47 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the seafaring statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:156
 msgid "Center the map on the selected ship"
-msgstr ""
+msgstr "Sentrer kartet på det valgte skipet"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:199
 msgctxt "ship"
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: ../../src/wui/seafaring_statistics_menu.cc:200
 msgctxt "ship"
 msgid "Status"
-msgstr ""
+msgstr "Sttus"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:550
 msgid "Show all ships"
-msgstr ""
+msgstr "Vis alle skip"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:558
 msgid "Show empty ships"
-msgstr ""
+msgstr "Vis tomme skip"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:561
 msgid "Show ships shipping wares and workers"
-msgstr ""
+msgstr "Vis skip som frakter varer og arbeidere"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:565
 msgid "Show waiting expeditions"
-msgstr ""
+msgstr "Vis ventende ekspedisjoner"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:568
 msgid "Show scouting expeditions"
-msgstr ""
+msgstr "Vis speiderturer"
 
 #. * TRANSLATORS: Tooltip in the ship statistics window
 #: ../../src/wui/seafaring_statistics_menu.cc:571
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr ""
+msgstr "Vis ekspedisjoner som har funnet havner eller fundamenter en koloni"
 
 #: ../../src/wui/shipwindow.cc:79
 msgid "Scout towards the north west"
@@ -5940,11 +5945,11 @@ msgstr ""
 
 #: ../../src/wui/soldier_statistics_menu.cc:109
 msgid "Overview"
-msgstr ""
+msgstr "Oversikt"
 
 #: ../../src/wui/soldier_statistics_menu.cc:183
 msgid "By Attribute"
-msgstr ""
+msgstr "Etter attributter"
 
 #: ../../src/wui/soldier_statistics_menu.cc:216
 #: ../../src/wui/soldier_statistics_menu.cc:222
@@ -6038,23 +6043,23 @@ msgstr "Forbruk"
 
 #: ../../src/wui/ware_statistics_menu.cc:148
 msgid "Economy health"
-msgstr ""
+msgstr "Økonomiens helse"
 
 #: ../../src/wui/warehousewindow.cc:155
 msgid "Remove 10 wares"
-msgstr ""
+msgstr "Fjern 10 varer"
 
 #: ../../src/wui/warehousewindow.cc:162
 msgid "Remove a ware"
-msgstr ""
+msgstr "Fjern en vare"
 
 #: ../../src/wui/warehousewindow.cc:169
 msgid "Add a ware"
-msgstr ""
+msgstr "Legg til en vare"
 
 #: ../../src/wui/warehousewindow.cc:176
 msgid "Add 10 wares"
-msgstr ""
+msgstr "Legg til 10 varer"
 
 #: ../../src/wui/warehousewindow.cc:187
 msgid "Configure this building’s economy"
@@ -6062,11 +6067,11 @@ msgstr ""
 
 #: ../../src/wui/warehousewindow.cc:269
 msgid "Wares waiting to be shipped"
-msgstr ""
+msgstr "Varer som venter på å bli fraktet"
 
 #: ../../src/wui/warehousewindow.cc:272
 msgid "Workers waiting to embark"
-msgstr ""
+msgstr "Arbeidere som venter på å stige ombord"
 
 #: ../../src/wui/warehousewindow.cc:277
 msgid "Expedition"
@@ -6100,4 +6105,4 @@ msgstr "Følg"
 
 #: ../../src/wui/watchwindow.cc:62
 msgid "Center the main view on this"
-msgstr ""
+msgstr "Sentrer hovedvisningen på denne"
