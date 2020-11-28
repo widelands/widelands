@@ -1,0 +1,1748 @@
+descriptions = wl.Descriptions()
+
+image_dirname = path.dirname(__file__) .. "images/"
+
+push_textdomain("tribes_encyclopedia")
+
+-- For formatting time strings
+include "tribes/scripting/help/time_strings.lua"
+
+descriptions:new_tribe {
+   name = "europeans",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
+   animation_directory = image_dirname,
+   animations = {
+      frontier = { hotspot = {1, 19} },
+      flag = { hotspot = {14, 38}, fps = 10 },
+      bridge_normal_e = { hotspot = {-2, 12} },
+      bridge_busy_e = { hotspot = {-2, 12} },
+      bridge_normal_se = { hotspot = {5, 2} },
+      bridge_busy_se = { hotspot = {5, 2} },
+      bridge_normal_sw = { hotspot = {36, 3} },
+      bridge_busy_sw = { hotspot = {36, 3} }
+   },
+
+   bridge_height = 8,
+
+   -- Image file paths for this tribe's road and waterway textures
+   roads = {
+      busy = {
+         image_dirname .. "roadt_busy.png",
+      },
+      normal = {
+         image_dirname .. "roadt_normal_00.png",
+         image_dirname .. "roadt_normal_01.png",
+         image_dirname .. "roadt_normal_02.png",
+      },
+      waterway = {
+         image_dirname .. "waterway_0.png",
+      },
+   },
+
+   resource_indicators = {
+      [""] = {
+         [0] = "europeans_resi_none",
+      },
+      resource_coal = {
+         [10] = "europeans_resi_coal_1",
+         [20] = "europeans_resi_coal_2",
+      },
+      resource_iron = {
+         [10] = "europeans_resi_iron_1",
+         [20] = "europeans_resi_iron_2",
+      },
+      resource_gold = {
+         [10] = "europeans_resi_gold_1",
+         [20] = "europeans_resi_gold_2",
+      },
+      resource_stones = {
+         [10] = "europeans_resi_stones_1",
+         [20] = "europeans_resi_stones_2",
+      },
+      resource_water = {
+         [100] = "europeans_resi_water",
+      },
+   },
+
+   -- Wares positions in wares windows.
+   -- This also gives us the information which wares the tribe uses.
+   -- Each subtable is a column in the wares windows.
+   wares_order = {
+      {
+         -- Building Materials 1
+         {
+            name = "log",
+            default_target_quantity = 32,
+            preciousness = 32,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Log, part 1
+                  pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Log, part 2
+                  pgettext("europeans_ware", "Europeans lumberjacks fell the trees; foresters take care of the supply of trees. Logs are also used by the charcoal kiln, the shipyard and the sawmill.")
+               }
+            }
+         },
+         {
+            name = "planks",
+            default_target_quantity = 16,
+            preciousness = 28,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Planks, part 1
+                  pgettext("ware", "Planks are an important building material."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Planks, part 2
+                  pgettext("europeans_ware", "They are produced out of logs by the sawmill."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Planks, part 3
+                  pgettext("europeans_ware", "They are also used by the tool smithy and weapon smithy.")
+               }
+            }
+         },
+         {
+            name = "reed",
+            default_target_quantity = 32,
+            preciousness = 24,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Reed, part 1
+                  pgettext("ware", "Reed are an important building material."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Reed, part 2
+                  pgettext("europeans_ware", "They are produced by reed yard."),
+               }
+            }
+         },
+         {
+            name = "wool",
+            default_target_quantity = 16,
+            preciousness = 8,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Wool
+               purpose = pgettext("europeans_ware", "Wool is the hair of sheep. Weaving mills use it to make armor.")
+            }
+         },
+         {
+            name = "spider_silk",
+            default_target_quantity = 32,
+            preciousness = 24,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Wool
+               purpose = pgettext("europeans_ware", "Spidersilk is produced by spiderfarm. Weaving mills use it to make spidercloth and tabard.")
+            }
+         },
+         {
+            name = "spidercloth",
+            default_target_quantity = 32,
+            preciousness = 24,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Cloth
+               purpose = pgettext("europeans_ware", "Spidercloth is needed to build several buildings. It is also consumed in the tool smithy.")
+            }
+         }
+         
+      },
+      {
+         -- Building Materials 1
+         {
+            name = "granite",
+            default_target_quantity = 16,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 1
+                  pgettext("ware", "Granite is a basic building material."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 2
+                  pgettext("europeans_ware", "The europeans produces granite blocks in quarries.")
+               }
+            }
+         },
+         {
+            name = "grout",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 1
+                  pgettext("ware", "Grout is a basic building material."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 2
+                  pgettext("europeans_ware", "The europeans produces grout in stonemason huts out of granite and water.")
+               }
+            }
+         },
+         {
+            name = "clay",
+            default_target_quantity = 4,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 1
+                  pgettext("ware", "Clay is needed to make bricks."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 2
+                  pgettext("europeans_ware", "The europeans gets clay from claydiggers house.")
+               }
+            }
+         },
+         {
+            name = "brick",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 1
+                  pgettext("ware", "Bricks is a basic building material."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Granite, part 2
+                  pgettext("europeans_ware", "The europeans produces bricks in stonemason huts out of clay, granite and water.")
+               }
+            }
+         },
+         {
+            name = "marble",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Marble
+               purpose = pgettext("europeans_ware", "Marble is the beautiful stone which is cut out of the mountains or produced in a quarry. Marble is used as a building material and gets chiseled into marble columns in the stonemason’s house.")
+            }
+         },
+         {
+            name = "marble_column",
+            default_target_quantity = 32,
+            preciousness = 8,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Marble Column
+               purpose = pgettext("europeans_ware", "Marble columns represent the high culture of the europeans, so they are needed for nearly every larger building. They are produced out of marble at a stonemason’s house.")
+            }
+         },
+      },
+         {
+            name = "quartz",
+            default_target_quantity = 16,
+            preciousness = 8,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Quartz
+               purpose = pgettext("europeans_ware", "These transparent quartz gems are used to build some exclusive buildings. They are produced in a crystal quarry.")
+            }
+         },
+         {
+            name = "diamond",
+            default_target_quantity = 16,
+            preciousness = 8,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Diamond
+               purpose = pgettext("europeans_ware", "These wonderful diamonds are used to build some exclusive buildings. They are mined in a deep coal mine.")
+            }
+         },
+      {
+         -- Food 1
+         {
+            name = "fish",
+            default_target_quantity = 16,
+            preciousness = 16,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Fish
+               purpose = pgettext("europeans_ware", "Fish is one of the biggest food resources of the Europeans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts.")
+            }
+         },
+         {
+            name = "smoked_fish",
+            default_target_quantity = 32,
+            preciousness = 32,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Smoked Fish
+               purpose = pgettext("europeans_ware", "As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible.")
+            }
+         },
+         {
+            name = "meat",
+            default_target_quantity = 16,
+            preciousness = 16,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
+                  pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
+                  -- TRANSLATORS: Helptext for an atlantean ware: Meat, part 2
+                  pgettext("europeans_ware", "Meat has to be smoked in a smokery before being delivered to mines and training sites.")
+               }
+            }
+         },
+         {
+            name = "smoked_meat",
+            default_target_quantity = 32,
+            preciousness = 32,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Smoked Meat
+               purpose = pgettext("europeans_ware", "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites where the miners and soldiers prepare a nutritious lunch for themselves.")
+            }
+         },
+         {
+            name = "corn",
+            default_target_quantity = 16,
+            preciousness = 24,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Corn
+               purpose = pgettext("europeans_ware", "This corn is processed in the mill into fine cornmeal that every baker needs for a good bread. Also spider farms need to be provided with corn.")
+            }
+         },
+         {
+            name = "cornmeal",
+            default_target_quantity = 16,
+            preciousness = 16,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Cornmeal
+               purpose = pgettext("europeans_ware", "Cornmeal is produced in a mill out of corn and is one of three parts of the bread produced in bakeries.")
+            }
+         },
+         {
+            name = "rye",
+            default_target_quantity = 16,
+            preciousness = 16,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Wheat, part 1
+                  pgettext("ware", "Rye is essential for survival."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Wheat, part 2
+                  pgettext("europeans_ware", "Wheat is produced by farms and used by mills.")
+               }
+            }
+         },
+         {
+            name = "wheat",
+            default_target_quantity = 16,
+            preciousness = 16,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Wheat, part 1
+                  pgettext("ware", "Wheat is essential for survival."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Wheat, part 2
+                  pgettext("europeans_ware", "Wheat is produced by farms and used by mills. Sheep farms also need to be supplied with wheat.")
+               }
+            }
+         },
+         {
+            name = "flour",
+            default_target_quantity = 16,
+            preciousness = 16,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Flour
+               purpose = pgettext("europeans_ware", "Flour is produced by the mill out of rye and wheat and is needed in the bakery to produce the tasty europeans bread.")
+            }
+         },
+         {
+            name = "europeans_bread",
+            default_target_quantity = 32,
+            preciousness = 24,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Bread
+               purpose = pgettext("europeans_ware", "The bakers of the europeans make really tasty bread out of flour and water. Bread is consumed in mines and at the training sites.")
+            }
+         }
+      },
+      {
+         -- Food 2
+            name = "water",
+            default_target_quantity = 32,
+            preciousness = 16,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Water, part 1
+                  pgettext("ware", "Water is the essence of life!"),
+                  -- TRANSLATORS: Helptext for an europeans ware: Water, part 2
+                  pgettext("europeans_ware", "Water is used by fishbreeder, gamekeeper, by all farms, and in the bakery and the brewery. The spider farm and the sheep farm need to be supplied with water.")
+               }
+            }
+         },
+         {
+            name = "barley",
+            default_target_quantity = 16,
+            preciousness = 24,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a frisian ware: Barley
+               purpose = pgettext("europeans_ware", "Barley is a slow-growing grain that is used for brewing beer.")
+            }
+         },
+         {
+            name = "beer",
+            default_target_quantity = 32,
+            preciousness = 16,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Beer
+               purpose = pgettext("europeans_ware", "This beer is produced in a brewery out of barley and water. It is consumed in trainingssites.")
+            }
+         },
+         {
+            name = "beer_strong",
+            default_target_quantity = 32,
+            preciousness = 16,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Beer
+               purpose = pgettext("europeans_ware", "This strong beer is produced in a brewery out of barley and water. It is consumed in trainingssites.")
+            }
+         },
+         {
+            name = "grape",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Grape
+               purpose = pgettext("europeans_ware", "These grapes are the base for a tasty wine. They are harvested in a vineyard and processed in a winery.")
+            }
+         },
+         {
+            name = "wine",
+            default_target_quantity = 32,
+            preciousness = 8,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Wine
+               purpose = pgettext("europeans_ware", "This tasty wine is drunk by soldiers to train in colosseum. It is produced in a winery.")
+            }
+         },
+         {
+            name = "fruit",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a frisian ware: Fruit
+               purpose = pgettext("europeans_ware", "Fruit are berries gathered from berry bushes by a fruit collector. They are used to brew mead.")
+            }
+         },
+         {
+            name = "honey",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a frisian ware: Honey
+               purpose = pgettext("europeans_ware", "Honey is produced by bees belonging to a beekeeper. It is used to brew mead.")
+            }
+         },
+         {
+            name = "mead",
+            default_target_quantity = 32,
+            preciousness = 8,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a frisian ware: Mead
+               purpose = pgettext("europeans_ware", "Mead is produced by breweries. Soldiers drink mead during advanced training.")
+            }
+         },
+      },
+      {
+         -- Mining
+         {
+            name = "coal",
+            default_target_quantity = 32,
+            preciousness = 32,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Coal, part 1
+                  pgettext("ware", "Coal is mined in coal mines or produced out of logs by a charcoal kiln."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Coal, part 2
+                  pgettext("europeans_ware", "The fires of the europeans smelting works, armor smithies and weapon smithies are usually fed with coal.")
+               }
+            }
+         },
+         {
+            name = "ore",
+            default_target_quantity = 32,
+            preciousness = 16,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Iron Ore, part 1
+                  pgettext("default_ware", "Ore is mined in ore mines."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Iron Ore, part 2
+                  pgettext("europeans_ware", "It is smelted in a smelting works to retrieve all the metals.")
+               }
+            }
+         },
+         {
+            name = "scrap_iron",
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a frisian ware: Scrap Iron
+               purpose = pgettext("europeans_ware", "Discarded weapons and armor can be recycled in a recycling center to produce new tools, weapon and armor.")
+            }
+         },
+         {
+            name = "iron",
+            default_target_quantity = 32,
+            preciousness = 8,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Iron, part 1
+                  pgettext("ware", "Iron is smelted out of ores."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Iron, part 2
+                  pgettext("europeans_ware", "It is produced by the smelting works. Weapons, armor and tools are made of iron.")
+               }
+            }
+         },
+         {
+            name = "scrap_metal_mixed",
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a frisian ware: Scrap metal (mixed)
+               purpose = pgettext("europeans_ware", "Discarded weapons and armor can be recycled in a recycling center to produce new tools, weapon and armor.")
+            }
+         },
+         {
+            name = "gold",
+            default_target_quantity = 32,
+            preciousness = 8,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Gold, part 1
+                  pgettext("ware", "Gold is the most valuable of all metals, and it is smelted out of ore."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Gold, part 2
+                  pgettext("europeans_ware", "It is produced by the smelting works. Armor and weapons are embellished with gold in the armor smithy and the weapon smithy.")
+               }
+            }
+         }
+      },
+      {
+         -- Tools
+         {
+            name = "pick",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Pick
+               purpose = pgettext("europeans_ware", "Picks are used by stonemasons and miners. They are produced by the toolsmith.")
+            }
+         },
+         {
+            name = "felling_ax",
+            default_target_quantity = 3,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Felling Ax, part 1
+                  pgettext("ware", "The felling ax is the tool to chop down trees."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Felling Ax, part 2
+                  pgettext("europeans_ware", "Felling axes are used by lumberjacks and produced by the toolsmithy.")
+               }
+            }
+         },
+         {
+            name = "saw",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Saw
+               purpose = pgettext("europeans_ware", "This saw is needed by the carpenter. It is produced by the toolsmith.")
+            }
+         },
+         {
+            name = "shovel",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Shovel, part 1
+                  pgettext("ware", "Shovels are needed for the proper handling of plants."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Shovel, part 2
+                  pgettext("europeans_ware", "Therefore the forester and the vine farmer use them. They are produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "hammer",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Hammer, part 1
+                  pgettext("ware", "The hammer is an essential tool."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Hammer, part 2
+                  pgettext("europeans_ware", "Geologists, builders, weaponsmiths and armorsmiths all need a hammer. Make sure you’ve always got some in reserve! They are produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "fishing_rod",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Fishing Rod, part 1
+                  pgettext("ware", "Fishing rods are needed by fishers to catch fish."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Fishing Rod, part 2
+                  pgettext("europeans_ware", "They are produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "hunting_spear",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Hunting Spear, part 1
+                  pgettext("ware", "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Hunting Spear, part 2
+                  pgettext("europeans_ware", "They are produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "scythe",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Scythe, part 1
+                  pgettext("ware", "The scythe is the tool of the farmers."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Scythe, part 2
+                  pgettext("europeans_ware", "Scythes are produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "bread_paddle",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Bread Paddle, part 1
+                  pgettext("ware", "The bread paddle is the tool of the baker, each baker needs one."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Bread Paddle, part 2
+                  pgettext("europeans_ware", "Bread paddles are produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "basket",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Basket
+               purpose = pgettext("europeans_ware", "This basket is needed by the vine farmer for harvesting the grapes. It is produced by the toolsmith.")
+            }
+         },
+         {
+            name = "kitchen_tools",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Kitchen Tools
+               purpose = pgettext("europeans_ware", "Kitchen tools are needed for preparing rations and meals. They are produced in a toolsmithy and used in taverns and inns.")
+            }
+         },
+         {
+            name = "fire_tongs",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Fire Tongs, part 1
+                  pgettext("ware", "Fire tongs are the tools for smelting ores."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Fire Tongs, part 2
+                  pgettext("europeans_ware", "They are used in the smelting works and produced by the toolsmith.")
+               }
+            }
+         }
+      },
+      {
+         -- Weapons & Armor
+         {
+            name = "spear_wooden",
+            default_target_quantity = 30,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Wooden Spear
+               purpose = pgettext("europeans_ware", "This wooden spear is the basic weapon in the europeans military system. It is produced in the weapon smithy. In combination with a helmet, it is the equipment to fit out young soldiers.")
+            }
+         },
+         {
+            name = "spear",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Spear
+               purpose = pgettext("europeans_ware", "This spear has an iron spike. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 0 to attack level 1.")
+            }
+         },
+         {
+            name = "spear_advanced",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Advanced Spear
+               purpose = pgettext("europeans_ware", "This is an advanced spear with a steel tip. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 1 to level 2.")
+            }
+         },
+         {
+            name = "spear_heavy",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Heavy Spear
+               purpose = pgettext("europeans_ware", "This is a strong spear with a steel-tip and a little blade. It is produced in the weapon smithy and used in the training camp – together with food – train soldiers from attack level 2 to level 3.")
+            }
+         },
+         {
+            name = "spear_war",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: War Spear
+               purpose = pgettext("europeans_ware", "This is the best and sharpest weapon the europeans weaponsmith creates for the soldiers. It is used in the training camp – together with food – to train soldiers from attack level 3 to level 4.")
+            }
+         },
+         {
+            name = "armor_helmet",
+            default_target_quantity = 30,
+            preciousness = 2,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Helmet
+               purpose = pgettext("europeans_ware", "The helmet is the basic defense of a warrior. It is produced in an armor smithy. In combination with a wooden spear, it is the equipment to fit out young soldiers. Helmets are also used in training camps – together with food – to train soldiers from health level 0 to level 1.")
+            }
+         },
+         {
+            name = "armor",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Armor
+               purpose = pgettext("europeans_ware", "Basic armor for europeans soldiers. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 1 to level 2.")
+            }
+         },
+         {
+            name = "armor_chain",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Chain Armor
+               purpose = pgettext("europeans_ware", "The chain armor is a medium armor for europeans soldiers. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 2 to level 3.")
+            }
+         },
+         {
+            name = "armor_gilded",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Gilded Armor
+               purpose = pgettext("europeans_ware", "The gilded armor is the strongest armor an europeans soldier can have. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 3 to level 4.")
+            }
+         }
+      }
+   },
+   -- Workers positions in workers windows.
+   -- This also gives us the information which workers the tribe uses.
+   -- Each subtable is a column in the workers windows.
+   workers_order = {
+      {
+         -- Carriers
+         {
+            name = "europeans_carrier",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Carries items along your roads.")
+            }
+         },
+         {
+            name = "europeans_ferry",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Ferry
+               purpose = pgettext("europeans_worker", "Ships wares across narrow rivers.")
+            }
+         },
+         {
+            name = "europeans_donkey",
+            default_target_quantity = 10,
+            preciousness = 2,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Donkey
+               purpose = pgettext("europeans_worker", "Donkeys help to carry items along busy roads. They are reared in a donkey farm.")
+            }
+         },
+         {
+            name = "europeans_donkeybreeder",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Donkey Breeder
+               purpose = pgettext("europeans_worker", "Breeds cute and helpful donkeys for adding them to the transportation system.")
+            }
+         }
+      },
+      {
+         -- Building Materials
+         {
+            name = "europeans_stonemason",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Stonemason
+               purpose = pgettext("europeans_worker", "Cuts blocks of granite and marble out of rocks in the vicinity.")
+            }
+         },
+         {
+            name = "europeans_carpenter",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carpenter
+               purpose = pgettext("europeans_worker", "Works in the sawmill.")
+            }
+         },
+         {
+            name = "europeans_lumberjack",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Lumberjack
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_forester",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Forester
+               purpose = pgettext("europeans_worker", "Plants trees.")
+            }
+         },
+         {
+            name = "europeans_builder",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Builder
+               purpose = pgettext("europeans_worker", "Works at construction sites to raise new buildings.")
+            }
+         },
+         {
+            name = "europeans_shepherd",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Shepherd
+               purpose = pgettext("europeans_worker", "Keeping sheep.")
+            }
+         },
+         {
+            name = "europeans_weaver",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Weaver
+               purpose = pgettext("europeans_worker", "Produces cloth for ships and soldiers.")
+            }
+         },
+         {
+            name = "europeans_shipwright",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Shipwright
+               purpose = pgettext("europeans_worker", "Works at the shipyard and constructs new ships.")
+            }
+         }
+      },
+      {
+         -- Food
+         {
+            name = "europeans_fisher",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Fisher
+               purpose = pgettext("europeans_worker", "Catches fish in the sea.")
+            }
+         },
+         {
+            name = "europeans_hunter",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Hunter
+               purpose = pgettext("europeans_worker", "The hunter brings fresh, raw meat to the colonists.")
+            }
+         },
+         {
+            name = "europeans_farmer",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Farmer
+               purpose = pgettext("europeans_worker", "Plants fields.")
+            }
+         },
+         {
+            name = "europeans_miller",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Miller
+               purpose = pgettext("europeans_worker", "Grinds wheat to produce flour.")
+            }
+         },
+         {
+            name = "europeans_baker",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Baker
+               purpose = pgettext("europeans_worker", "Bakes bread for workers.")
+            }
+         },
+         {
+            name = "europeans_brewer",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Brewer
+               purpose = pgettext("europeans_worker", "Produces beer.")
+            }
+         },
+         {
+            name = "europeans_vinefarmer",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Vine Farmer
+               purpose = pgettext("europeans_worker", "Grows grapevines.")
+            }
+         },
+         {
+            name = "europeans_vintner",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Vintner
+               purpose = pgettext("europeans_worker", "Produces wine.")
+            }
+         },
+         {
+            name = "europeans_pigbreeder",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Pig Breeder
+               purpose = pgettext("europeans_worker", "Breeds pigs.")
+            }
+         },
+         {
+            name = "europeans_innkeeper",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Innkeeper
+               purpose = pgettext("europeans_worker", "Produces food for miners.")
+            }
+         }
+      },
+      {
+         -- Mining
+         {
+            name = "europeans_geologist",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Geologist
+               purpose = pgettext("europeans_worker", "Discovers resources for mining.")
+            }
+         },
+         {
+            name = "europeans_miner",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Miner
+               purpose = pgettext("europeans_worker", "Works deep in the mines to obtain coal, iron, gold or marble.")
+            }
+         },
+         {
+            name = "europeans_miner_master",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Master Miner
+               purpose = pgettext("europeans_worker", "Works deep in the mines to obtain coal, iron, gold or marble.")
+            }
+         },
+         {
+            name = "europeans_charcoal_burner",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Charcoal Burner
+               purpose = pgettext("europeans_worker", "Burns coal.")
+            }
+         },
+         {
+            name = "europeans_smelter",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Smelter
+               purpose = pgettext("europeans_worker", "Smelts ores into metal.")
+            }
+         }
+      },
+      {
+         -- Tools
+         {
+            name = "europeans_toolsmith",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Toolsmith
+               purpose = pgettext("europeans_worker", "Produces tools for the workers.")
+            }
+         }
+      },
+      {
+         -- Military
+         {
+            name = "europeans_recruit",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Recruit
+               purpose = pgettext("europeans_worker", "Eager to become a soldier and defend his tribe!")
+            }
+         },
+         {
+            name = "europeans_soldier",
+            default_target_quantity = 10,
+            preciousness = 5,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Soldier
+               purpose = pgettext("europeans_worker", "Defend and Conquer!")
+            }
+         },
+         {
+            name = "europeans_trainer",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Trainer
+               purpose = pgettext("europeans_worker", "Trains the soldiers.")
+            }
+         },
+         {
+            name = "europeans_weaponsmith",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Weaponsmith
+               purpose = pgettext("europeans_worker", "Produces weapons for the soldiers.")
+            }
+         },
+         {
+            name = "europeans_armorsmith",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Armorsmith
+               purpose = pgettext("europeans_worker", "Produces armor for the soldiers.")
+            }
+         },
+         {
+            name = "europeans_scout",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Scout
+               purpose = pgettext("europeans_worker", "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion.")
+               -- (c) WiHack Team 02.01.2010
+            }
+         }
+      }
+   },
+
+   immovables = {
+      {
+         name = "ashes",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Ashes
+            purpose = _("The remains of a destroyed building.")
+         }
+      },
+      {
+         name = "destroyed_building",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Destroyed Building
+            purpose = _("The remains of a destroyed building.")
+         }
+      },
+      {
+         name = "wheatfield_tiny",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Wheat field
+            purpose = _("This field has just been planted.")
+         }
+      },
+      {
+         name = "wheatfield_small",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Wheat field
+            purpose = _("This field is growing.")
+         }
+      },
+      {
+         name = "wheatfield_medium",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Wheat field
+            purpose = _("This field is growing.")
+         }
+      },
+      {
+         name = "wheatfield_ripe",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Wheat field
+            purpose = _("This field is ready for harvesting.")
+         }
+      },
+      {
+         name = "wheatfield_harvested",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Wheat field
+            purpose = _("This field has been harvested.")
+         }
+      },
+      {
+         name = "grapevine_tiny",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Grapevine
+            purpose = _("This grapevine has just been planted.")
+         }
+      },
+      {
+         name = "grapevine_small",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Grapevine
+            purpose = _("This grapevine is growing.")
+         }
+      },
+      {
+         name = "grapevine_medium",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Grapevine
+            purpose = _("This grapevine is growing.")
+         }
+      },
+      {
+         name = "grapevine_ripe",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Grapevine
+            purpose = _("This grapevine is ready for harvesting.")
+         }
+      },
+      {
+         name = "europeans_resi_none",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans resource indicator: No resources
+            purpose = _("There are no resources in the ground here.")
+         }
+      },
+      {
+         name = "europeans_resi_water",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans resource indicator: Water
+            purpose = _("There is water in the ground here that can be pulled up by a well.")
+         }
+      },
+      {
+         name = "europeans_resi_coal_1",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Coal, part 1
+               _("Coal veins contain coal that can be dug up by coal mines."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Coal, part 2
+               _("There is only a little bit of coal here.")
+            }
+         }
+      },
+      {
+         name = "europeans_resi_iron_1",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Iron, part 1
+               _("Iron veins contain iron ore that can be dug up by iron mines."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Iron, part 2
+               _("There is only a little bit of iron here.")
+            }
+         }
+      },
+      {
+         name = "europeans_resi_gold_1",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Gold, part 1
+               _("Gold veins contain gold ore that can be dug up by gold mines."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Gold, part 2
+               _("There is only a little bit of gold here.")
+            }
+         }
+      },
+      {
+         name = "europeans_resi_stones_1",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Stones, part 1
+               _("Marble is a basic building material and can be dug up by a marble mine. You will also get granite from the mine."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Stones, part 2
+               _("There is only a little bit of marble here.")
+            }
+         }
+      },
+      {
+         name = "europeans_resi_coal_2",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Coal, part 1
+               _("Coal veins contain coal that can be dug up by coal mines."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Coal, part 2
+               _("There is a lot of coal here.")
+            }
+         }
+      },
+      {
+         name = "europeans_resi_iron_2",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Iron, part 1
+               _("Iron veins contain iron ore that can be dug up by iron mines."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Iron, part 2
+               _("There is a lot of iron here.")
+            }
+         }
+      },
+      {
+         name = "europeans_resi_gold_2",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Gold, part 1
+               _("Gold veins contain gold ore that can be dug up by gold mines."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Gold, part 2
+               _("There is a lot of gold here.")
+            }
+         }
+      },
+      {
+         name = "europeans_resi_stones_2",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Stones, part 1
+               _("Marble is a basic building material and can be dug up by a marble mine. You will also get granite from the mine."),
+               -- TRANSLATORS: Helptext for an europeans resource indicator: Stones, part 2
+               _("There is a lot of marble here.")
+            }
+         }
+      },
+      {
+         name = "europeans_shipconstruction",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: Ship Under Construction
+            purpose = _("A ship is being constructed at this site.")
+         }
+      },
+      -- non imperial Immovables used by the woodcutter
+      {
+         name = "deadtree7",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Dead Tree
+            purpose = _("The remains of an old tree.")
+         }
+      },
+      {
+         name = "balsa_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "balsa_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Balsa Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "ironwood_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Ironwood Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_black_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_desert_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Corn Field
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+      {
+         name = "rubber_winter_amazons_old",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an amazon immovable usable by europeans: Rubber Tree
+            purpose = _("This tree is only planted by the amazon tribe but can be harvested for logs.")
+         }
+      },
+   },
+
+   -- The order here also determines the order in lists on screen.
+   buildings = {
+      -- Warehouses
+      {
+         name = "europeans_headquarters",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans warehouse: Headquarters
+            purpose = pgettext("europeans_building", "Accommodation for your people. Also stores your wares and tools."),
+            -- TRANSLATORS: Note helptext for an europeans warehouse: Headquarters
+            note = pgettext("europeans_building", "The headquarters is your main building.")
+         }
+      },
+      {
+         name = "europeans_headquarters_shipwreck",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans warehouse: Headquarters Shipwreck
+            purpose = pgettext("europeans_building", "Although this ship ran aground, it still serves as accommodation for your people. It also stores your wares and tools."),
+            -- TRANSLATORS: Note helptext for an europeans warehouse: Headquarters Shipwreck
+            note = pgettext("europeans_building", "The headquarters shipwreck is your main building.")
+         }
+      },
+      {
+         name = "europeans_warehouse",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans warehouse: Warehouse
+            purpose = pgettext("europeans_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+         }
+      },
+      {
+         name = "europeans_port",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans warehouse: Port
+            purpose = pgettext("europeans_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+         }
+      },
+
+      -- Small
+      {
+         name = "europeans_quarry",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Quarry
+            purpose = pgettext("europeans_building", "Cuts blocks of granite and marble out of rocks in the vicinity."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Quarry
+            note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area.")
+         }
+      },
+      {
+         name = "europeans_lumberjacks_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Lumberjack's House
+            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Lumberjack's House
+            note = pgettext("europeans_building", "The lumberjack’s house needs trees to fell within the work area.")
+         }
+      },
+      {
+         name = "europeans_foresters_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Forester's House
+            purpose = pgettext("building", "Plants trees in the surrounding area."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Forester's House
+            note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
+         }
+      },
+      {
+         name = "europeans_fishers_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Fisher's House
+            purpose = pgettext("europeans_building", "Fishes on the coast near the fisher’s house."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Fisher's House
+            note = pgettext("europeans_building", "The fisher’s house needs water full of fish within the work area.")
+         }
+      },
+      {
+         name = "europeans_hunters_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Hunter's House
+            purpose = pgettext("building", "Hunts animals to produce meat."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Hunter's House
+            note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
+         }
+      },
+      {
+         name = "europeans_well",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Well
+            purpose = pgettext("building", "Draws water out of the deep.")
+         }
+      },
+      {
+         name = "europeans_scouts_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Scout's House
+            purpose = pgettext("building", "Explores unknown territory.")
+         }
+      },
+
+      -- Medium
+      {
+         name = "europeans_stonemasons_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Stonemason's House
+            purpose = pgettext("europeans_building", "Carves marble columns out of marble.")
+         }
+      },
+      {
+         name = "europeans_sawmill",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
+            purpose = pgettext("building", "Saws logs to produce planks.")
+         }
+      },
+      {
+         name = "europeans_mill",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
+            purpose = pgettext("building", "Grinds wheat to produce flour."),
+            -- TRANSLATORS: Performance helptext for an europeans production site: Mill
+            performance = pgettext("europeans_building", "The miller needs %1% on average to grind wheat into a sack of flour."):bformat(format_seconds(19))
+         }
+      },
+      {
+         name = "europeans_bakery",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Bakery
+            purpose = pgettext("europeans_building", "Bakes bread for soldiers and miners alike."),
+            -- TRANSLATORS: Performance helptext for an europeans production site: Bakery
+            performance = pgettext("europeans_building", "The baker needs %1% on average to bake a loaf of bread."):bformat(format_seconds(34))
+         }
+      },
+      {
+         name = "europeans_brewery",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Brewery
+            purpose = pgettext("building", "Produces beer to keep the miners strong and happy."),
+            -- TRANSLATORS: Performance helptext for an europeans production site: Brewery
+            performance = pgettext("europeans_building", "The brewer needs %1% on average to brew a vat of beer."):bformat(format_minutes_seconds(1, 5))
+         }
+      },
+      {
+         name = "europeans_vineyard",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Vineyard
+            purpose = pgettext("europeans_building", "Plants grapevines and harvests grapes.")
+         }
+      },
+      {
+         name = "europeans_winery",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Winery
+            purpose = pgettext("europeans_building", "Produces wine.")
+         }
+      },
+      {
+         name = "europeans_tavern",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Tavern
+            purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
+            -- TRANSLATORS: Performance helptext for an europeans production site: Tavern
+            performance = pgettext("europeans_building", "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(36))
+         }
+      },
+      {
+         name = "europeans_inn",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Inn
+            purpose = pgettext("europeans_building", "Prepares rations for scouts and rations and snacks to feed the miners in all mines."),
+            -- TRANSLATORS: Performance helptext for an europeans production site: Inn
+            performance = pgettext("europeans_building", "The innkeeper needs %1% on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs %2% on average to prepare one ration or one meal."):bformat(format_minutes_seconds(1, 25), format_seconds(48))
+         }
+      },
+      {
+         name = "europeans_charcoal_kiln",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Charcoal Kiln
+            purpose = pgettext("building", "Burns logs into charcoal.")
+         }
+      },
+      {
+         name = "europeans_smelting_works",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
+            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
+         }
+      },
+      {
+         name = "europeans_toolsmithy",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need.")
+         }
+      },
+      {
+         name = "europeans_armorsmithy",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Armor Smithy
+            purpose = pgettext("europeans_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp.")
+         }
+      },
+      {
+         name = "europeans_barracks",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Barracks
+            purpose = pgettext("europeans_building", "Equips recruits and trains them as soldiers.")
+         }
+      },
+
+      -- Big
+      {
+         name = "europeans_donkeyfarm",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Donkey Farm
+            purpose = pgettext("europeans_building", "Breeds cute and helpful donkeys for adding them to the transportation system.")
+         }
+      },
+      {
+         name = "europeans_farm",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Farm
+            purpose = pgettext("building", "Sows and harvests wheat."),
+            -- TRANSLATORS: Performance helptext for an europeans production site: Farm
+            performance = pgettext("europeans_building", "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 20))
+         }
+      },
+      {
+         name = "europeans_piggery",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Piggery
+            purpose = pgettext("europeans_building", "Breeds pigs for their meat."),
+            -- TRANSLATORS: Performance helptext for an europeans production site: Piggery
+            performance = pgettext("europeans_building", "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_minutes(1))
+         }
+      },
+      {
+         name = "europeans_sheepfarm",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Sheep Farm
+            purpose = pgettext("europeans_building", "Keeps sheep for their wool.")
+         }
+      },
+      {
+         name = "europeans_weaving_mill",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Weaving Mill
+            purpose = pgettext("europeans_building", "Weaves cloth out of wool.")
+         }
+      },
+      {
+         name = "europeans_weaponsmithy",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Weapon Smithy
+            purpose = pgettext("europeans_building", "Forges spears to equip the soldiers and to train their attack in the training camp.")
+         }
+      },
+
+      -- Mines
+      {
+         name = "europeans_marblemine",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans production site: Marble Mine
+               pgettext("europeans_building", "Carves marble and granite out of the rock in mountain terrain.")
+            }
+         }
+      },
+      {
+         name = "europeans_marblemine_deep",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Marble Mine
+            purpose = pgettext("europeans_building", "Carves marble and granite out of the rock in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_coalmine",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_coalmine_deep",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
+         }
+      },
+      {
+         name = "europeans_ironmine",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_ironmine_deep",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine_deep",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+
+      -- Training Sites
+      {
+         name = "europeans_arena",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Arena, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Evade’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Arena, part 2
+               pgettext("europeans_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
+            },
+            -- TRANSLATORS: Note helptext for an europeans training site: Arena
+            note = pgettext("europeans_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+         }
+      },
+      {
+         name = "europeans_colosseum",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Colosseum, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Evade’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Colosseum, part 2
+               pgettext("europeans_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
+            },
+            -- TRANSLATORS: Note helptext for an europeans training site: Colosseum
+            note = pgettext("europeans_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+         }
+      },
+      {
+         name = "europeans_trainingcamp",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Training Camp, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Attack’ and in ‘Health’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Training Camp, part 2
+               pgettext("europeans_building", "Equips the soldiers with all necessary weapons and armor parts.")
+            },
+            -- TRANSLATORS: Note helptext for an europeans training site: Training Camp
+            note = pgettext("europeans_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
+         }
+      },
+
+      -- Military Sites
+      {
+         name = "europeans_blockhouse",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Blockhouse
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Blockhouse
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_sentry",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Sentry
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Sentry
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_outpost",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Outpost
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Outpost
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_barrier",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Barrier
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Barrier
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_tower",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Tower
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Tower
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_fortress",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Fortress
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Fortress
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_castle",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Castle
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Castle
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+
+      -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
+      {
+         name = "europeans_ferry_yard",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Ferry Yard
+            purpose = pgettext("building", "Builds ferries."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Ferry Yard
+            note = pgettext("building", "Needs water nearby.")
+         }
+      },
+      {
+         name = "europeans_shipyard",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Shipyard
+            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+         }
+      },
+
+      -- Partially Finished Buildings - these are the same 2 buildings for all tribes
+      {
+         name = "constructionsite",
+         helptexts = {
+            -- TRANSLATORS: Lore helptext for an europeans building: Construction Site
+            lore = pgettext("building", "‘Don’t swear at the builder who is short of building materials.’"),
+            -- TRANSLATORS: Lore author helptext for an europeans building: Construction Site
+            lore_author = pgettext("building", "Proverb widely used for impossible tasks of any kind"),
+            -- TRANSLATORS: Purpose helptext for an europeans building: Construction Site
+            purpose = pgettext("building", "A new building is being built at this construction site.")
+         }
+      },
+      {
+         name = "dismantlesite",
+         helptexts = {
+            -- TRANSLATORS: Lore helptext for an europeans building: Dismantle Site
+            lore = pgettext("building", "‘New paths will appear when you are willing to tear down the old.’"),
+            -- TRANSLATORS: Lore author helptext for an europeans building: Dismantle Site
+            lore_author = pgettext("building", "Proverb"),
+            -- TRANSLATORS: Purpose helptext for an europeans building: Dismantle Site
+            purpose = pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+         }
+      }
+   },
+
+   -- Special types
+   builder = "europeans_builder",
+   carrier = "europeans_carrier1",
+   carrier2 = "europeans_carrier2",
+   geologist = "europeans_geologist",
+   soldier = "europeans_soldier",
+   ship = "europeans_ship",
+   ferry = "europeans_ferry",
+   port = "europeans_port",
+}
+
+pop_textdomain()
