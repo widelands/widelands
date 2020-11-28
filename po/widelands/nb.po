@@ -3133,7 +3133,7 @@ msgstr "Skriv 'syncstreams' i nettverksspill for å debugge asynkronheter"
 #: ../../src/ui_fsmenu/options.cc:239
 #: ../../src/wui/interactive_gamebase.cc:190
 msgid "Show Census"
-msgstr "Vis tellinger"
+msgstr "Vis informasjon"
 
 #: ../../src/ui_fsmenu/options.cc:241
 #: ../../src/wui/interactive_gamebase.cc:198
