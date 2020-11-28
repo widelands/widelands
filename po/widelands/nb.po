@@ -550,10 +550,15 @@ msgstr "Vis ressurser"
 
 #: ../../src/editor/editorinteractive.cc:452
 msgid "Unsupported Format"
-msgstr "Supportert format"
+msgstr "Usupportert format"
 
 #: ../../src/editor/editorinteractive.cc:453
-msgstr ""
+#, c-format
+msgid ""
+"Widelands could not load the file \"%s\". The file format seems to be "
+"incompatible."
+msgstr "Widelands kunne ikke laste filen \"%s\". Filen ser ut til å ikke være kompatibel."
+
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/player_menu.cc:158
@@ -4474,7 +4479,7 @@ msgstr ""
 #. * when a player enables cheating mode
 #: ../../src/wui/interactive_base.cc:1472
 msgid "This player has enabled the cheating mode!"
-msgstr ""Denne spilleren har slått på juksing!
+msgstr "Denne spilleren har slått på juksing!"
 
 #. * TRANSLATORS: This is a chat message which is automatically sent to all
 #. players when a
