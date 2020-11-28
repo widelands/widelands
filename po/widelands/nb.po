@@ -455,7 +455,7 @@ msgstr "Sett antall spillere, deres navn, stammer og startposisjoner"
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:312
 msgid "Map origin"
-msgstr ""
+msgstr "Kartets origo"
 
 #. * TRANSLATORS: Tooltip for the map origin tool in the editor
 #: ../../src/editor/editorinteractive.cc:315
@@ -467,7 +467,7 @@ msgstr "Velg posisjonen som skal ha koordinatene (0,0). Dette blir det øverste 
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:322
 msgid "Map size"
-msgstr ""
+msgstr "Kart størrelse"
 
 #. * TRANSLATORS: Tooltip for the map size tool in the editor
 #: ../../src/editor/editorinteractive.cc:325
@@ -477,12 +477,12 @@ msgstr ""
 #. * TRANSLATORS: An entry in the editor's tool menu
 #: ../../src/editor/editorinteractive.cc:328
 msgid "Information"
-msgstr ""
+msgstr "Informasjon"
 
 #. * TRANSLATORS: Tooltip for the map information tool in the editor
 #: ../../src/editor/editorinteractive.cc:331
 msgid "Click on a field to show information about it"
-msgstr ""
+msgstr "Klikk på et felt for å se informasjonen om det"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. building spaces are
@@ -493,13 +493,13 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/wui/interactive_gamebase.cc:183
 msgid "Hide Building Spaces"
-msgstr ""
+msgstr "Skjul plasser å bygge"
 
 #: ../../src/editor/editorinteractive.cc:392
 #: ../../src/ui_fsmenu/options.cc:238
 #: ../../src/wui/interactive_gamebase.cc:183
 msgid "Show Building Spaces"
-msgstr ""
+msgstr "Vis plasser å bygge"
 
 #: ../../src/editor/editorinteractive.cc:395
 #: ../../src/wui/interactive_gamebase.cc:186
@@ -511,697 +511,48 @@ msgstr ""
 #. the map grid is shown
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Hide Grid"
-msgstr ""
+msgstr "Skjul rutenett"
 
 #: ../../src/editor/editorinteractive.cc:399
 msgid "Show Grid"
-msgstr ""
+msgstr "Vis rutenett"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. immovables (trees,
 #. * rocks etc.) are shown
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Hide Immovables"
-msgstr ""
+msgstr "Skul uflyttbare gjenstander"
 
 #: ../../src/editor/editorinteractive.cc:404
 msgid "Show Immovables"
-msgstr ""
+msgstr "Vis uflyttbare gjenstander"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. animals are shown
 #: ../../src/editor/editorinteractive.cc:409
 msgid "Hide Animals"
-msgstr ""
+msgstr "Skjul dyr"
 
 #: ../../src/editor/editorinteractive.cc:409
 msgid "Show Animals"
-msgstr ""
+msgstr "Vis dyr"
 
 #. * TRANSLATORS: An entry in the editor's show/hide menu to toggle whether
 #. resources are shown
 #: ../../src/editor/editorinteractive.cc:413
 msgid "Hide Resources"
-msgstr ""
+msgstr "Skjul ressurser"
 
 #: ../../src/editor/editorinteractive.cc:413
 msgid "Show Resources"
-msgstr ""
+msgstr "Vis ressurser"
 
 #: ../../src/editor/editorinteractive.cc:452
 msgid "Unsupported Format"
-msgstr ""
+msgstr "Supportert format"
 
 #: ../../src/editor/editorinteractive.cc:453
-#, c-format
-msgid ""
-"Widelands could not load the file \"%s\". The file format seems to be "
-"incompatible."
-msgstr "Widelands kunne ikke laste filen «%s». Filformatet ser ikke ut til å være kompatibelt."
-
-#: ../../src/editor/editorinteractive.cc:514
-msgid "Unsaved Map"
-msgstr "Ulagret kart"
-
-#: ../../src/editor/editorinteractive.cc:515
-msgid "The map has not been saved, do you really want to quit?"
-msgstr "Kartet har ikke blitt lagret, vil du virkelig avslutte?"
-
-#: ../../src/editor/editorinteractive.cc:977
-#, c-format
-msgid "Loading map “%s”…"
-msgstr ""
-
-#: ../../src/editor/editorinteractive.cc:994
-msgid "Postloading editor…"
-msgstr ""
-
-#. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:1000
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:106
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:578
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:139
-#: ../../src/logic/map.h:232 ../../src/wui/mapdata.cc:47
-msgid "No Name"
-msgstr "Uten navn"
-
-#. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:1003
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:107
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:579
-#: ../../src/logic/map.h:233
-msgctxt "author_name"
-msgid "Unknown"
-msgstr ""
-
-#: ../../src/editor/editorinteractive.cc:1027
-msgid "Loading world…"
-msgstr "Laster verden…"
-
-#: ../../src/editor/map_generator.cc:750
-msgid "Random Player"
-msgstr "Tilfeldig spiller"
-
-#: ../../src/editor/tools/info_tool.cc:43
-msgid "Field Information"
-msgstr "Feltinformasjon"
-
-#: ../../src/editor/tools/info_tool.cc:50
-msgid "Node"
-msgstr ""
-
-#: ../../src/editor/tools/info_tool.cc:52
-#, c-format
-msgid "Coordinates: (%1$i, %2$i)"
-msgstr "Koordinater: (%1$i, %2$i)"
-
-#. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/info_tool.cc:61
-msgid "small"
-msgstr "liten"
-
-#. * TRANSLATORS: Editor terrain property: medium building plot
-#: ../../src/editor/tools/info_tool.cc:66
-msgid "medium"
-msgstr "mellomstor"
-
-#. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/info_tool.cc:70
-msgid "big"
-msgstr "stor"
-
-#. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/info_tool.cc:78
-msgid "flag"
-msgstr "flagg"
-
-#. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/info_tool.cc:82
-msgid "mine"
-msgstr "gruve"
-
-#. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/info_tool.cc:86
-msgid "port"
-msgstr ""
-
-#. * TRANSLATORS: Editor terrain property: units can walk on this terrain
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/info_tool.cc:90
-#: ../../src/logic/map_objects/world/terrain_description.cc:74
-msgid "walkable"
-msgstr "gåbar"
-
-#. * TRANSLATORS: Editor terrain property: units can swim on this terrain
-#. (fish, ships)
-#: ../../src/editor/tools/info_tool.cc:94
-msgid "swimmable"
-msgstr "svømbar"
-
-#: ../../src/editor/tools/info_tool.cc:97
-#, c-format
-msgid "Caps: %s"
-msgstr ""
-
-#: ../../src/editor/tools/info_tool.cc:104
-#, c-format
-msgid "Owned by: Player %u"
-msgstr "Eid av: Spiller %u"
-
-#: ../../src/editor/tools/info_tool.cc:108
-msgid "Owned by: —"
-msgstr "Eid av: —"
-
-#: ../../src/editor/tools/info_tool.cc:119
-#, c-format
-msgctxt "terrain_name"
-msgid "Name: %s"
-msgstr "Navn: %s"
-
-#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
-#. unreachable and
-#. * unwalkable". You can also translate this as "Category: %s" or "Property:
-#. %s"
-#: ../../src/editor/tools/info_tool.cc:129
-#, c-format
-msgid "Is: %s"
-msgstr "Er: %s"
-
-#. * TRANSLATORS: Heading for immovables and animals in editor info tool
-#: ../../src/editor/tools/info_tool.cc:139
-msgid "Objects"
-msgstr "Objekter"
-
-#: ../../src/editor/tools/info_tool.cc:142
-#, c-format
-msgid "Immovable: %s"
-msgstr "Ikke flyttbar: %s"
-
-#: ../../src/editor/tools/info_tool.cc:172
-#, c-format
-msgid "Animals: %s"
-msgstr "Dyr: %s"
-
-#: ../../src/editor/tools/info_tool.cc:178
-#, c-format
-msgid "Workers: %s"
-msgstr "Arbeiderer: %s"
-
-#: ../../src/editor/tools/info_tool.cc:184
-#, c-format
-msgid "Ships: %s"
-msgstr "Skip: %s"
-
-#: ../../src/editor/tools/info_tool.cc:197
-msgctxt "resources"
-msgid "%1%x %2%"
-msgstr ""
-
-#: ../../src/editor/tools/info_tool.cc:204
-#: ../../src/ui_fsmenu/launch_mpg.cc:67
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:140
-#: ../../src/ui_fsmenu/netsetup_lan.cc:124 ../../src/wui/mapdetails.cc:139
-#: ../../src/wui/minimap.cc:137
-msgid "Map"
-msgstr "Kart"
-
-#: ../../src/editor/tools/info_tool.cc:206
-#, c-format
-msgctxt "map_name"
-msgid "Name: %s"
-msgstr "Navn: %s"
-
-#: ../../src/editor/tools/info_tool.cc:209
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:504
-msgid "Size: %1% x %2%"
-msgstr "Størrelse %1% x %2%"
-
-#: ../../src/editor/tools/info_tool.cc:214
-#, c-format
-msgid "Players: %u"
-msgstr "Spillere: %u"
-
-#: ../../src/editor/tools/info_tool.cc:217
-msgid "Players: –"
-msgstr "Spillere: -"
-
-#: ../../src/editor/tools/info_tool.cc:221
-#, c-format
-msgid "Author: %s"
-msgstr "Forfatter: %s"
-
-#: ../../src/editor/tools/info_tool.cc:223 ../../src/ui_fsmenu/main.cc:351
-#: ../../src/ui_fsmenu/mapdetailsbox.cc:111
-#, c-format
-msgid "Description: %s"
-msgstr "Beskrivelse: %s"
-
-#. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:176
-#, c-format
-msgid "Current: %s …"
-msgstr "Valgte: %s …"
-
-#. * TRANSLATORS: Help text in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:179
-msgid "Click to select an item. Use the Ctrl key to select multiple items."
-msgstr ""
-
-#. * TRANSLATORS: %s are the currently selected items in an editor tool
-#: ../../src/editor/ui_menus/categorized_item_selection_menu.h:182
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:153
-#, c-format
-msgid "Current: %s"
-msgstr ""
-
-#: ../../src/editor/ui_menus/help.cc:39 ../../src/ui_fsmenu/login_box.cc:234
-#: ../../src/ui_fsmenu/main.cc:741 ../../src/wui/encyclopedia_window.cc:143
-#: ../../src/wui/tribal_encyclopedia.cc:56
-msgid "Error!"
-msgstr "Feil!"
-
-#. * TRANSLATORS: Directory name for user maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:71
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:275
-#: ../../src/wui/mapdata.cc:166
-msgid "My Maps"
-msgstr "Mine kart"
-
-#. * TRANSLATORS: Directory name for MP Scenarios in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:73
-#: ../../src/wui/mapdata.cc:163
-msgid "Multiplayer Scenarios"
-msgstr "Flerspiller scenarioer"
-
-#. * TRANSLATORS: Directory name for downloaded maps in map selection
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:75
-#: ../../src/wui/mapdata.cc:169
-msgid "Downloaded Maps"
-msgstr "Nedlastede kart"
-
-#. * TRANSLATORS: The folder that a file will be saved to.
-#: ../../src/editor/ui_menus/main_menu_load_map.cc:78
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:275
-#, c-format
-msgid "Current directory: %s"
-msgstr "Nåværende katalog: %s"
-
-#. * TRANSLATORS: "Display: Original/Localized map/file names"
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:66
-msgid "Display"
-msgstr "Visning"
-
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:77
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:248
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
-#: ../../src/editor/ui_menus/player_menu.cc:78
-#: ../../src/ui_basic/messagebox.cc:99 ../../src/ui_fsmenu/helpwindow.cc:57
-#: ../../src/ui_fsmenu/menu.cc:153 ../../src/ui_fsmenu/options.cc:92
-#: ../../src/ui_fsmenu/training_wheel_options.cc:152
-#: ../../src/wui/game_main_menu_save_game.cc:85
-#: ../../src/wui/story_message_box.cc:47
-msgid "OK"
-msgstr "Ok"
-
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:78
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:256
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:69
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:216
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:69
-#: ../../src/ui_basic/messagebox.cc:108 ../../src/ui_fsmenu/launch_mpg.cc:78
-#: ../../src/ui_fsmenu/login_box.cc:46 ../../src/ui_fsmenu/options.cc:90
-#: ../../src/ui_fsmenu/training_wheel_options.cc:106
-#: ../../src/wui/economy_options_window.cc:659
-#: ../../src/wui/game_main_menu_save_game.cc:84
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:105
-msgid "File names"
-msgstr "Filnavn"
-
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:106
-msgid "Map names"
-msgstr "Kartnavn"
-
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:106
-msgid "Original map names"
-msgstr "Originale kartnavn"
-
-#: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:110
-msgid "Translated map names"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:51
-msgid "Click player to remove"
-msgstr "Klikk på spiller for å fjerne"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:61
-#: ../../src/wui/economy_options_window.cc:660
-#: ../../src/wui/load_or_save_game.cc:52
-msgid "Delete"
-msgstr "Slett"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:62
-msgid "Delete this suggested team lineup"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:108
-msgid "+"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:114
-msgid "Add a player to this team"
-msgstr "Legg til spillere til dette laget"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:320
-msgid "Theme"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:331
-msgid "Add lineup"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:332
-msgid "Add another suggested team lineup"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:352
-msgid "Map name:"
-msgstr "Kartnavn:"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:357
-msgid "Authors:"
-msgstr "Forfattere:"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:362
-msgid "Description:"
-msgstr "Beskrivelse:"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:367
-msgid "Hint (optional):"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:375
-msgid "Tags:"
-msgstr "Merkelapper:"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:387
-msgctxt "map_theme"
-msgid "(none)"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:396
-msgid "Waterway length limit:"
-msgstr ""
-
-#. * TRANSLATORS: Map Options: Waterways are disabled
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:407
-msgid "Disabled"
-msgstr "Avslått"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:427
-#, c-format
-msgid "%u Player"
-msgid_plural "%u Players"
-msgstr[0] "%u Spiller"
-msgstr[1] "%u Spillere"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:430
-msgid "Suggested Teams:"
-msgstr "Foreslåtte lag:"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:451
-msgid "Main Options"
-msgstr "Hovedinnstillinger"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:453
-#: ../../src/wui/mapdetails.cc:182
-msgid "Tags"
-msgstr "Merkelapper"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:455
-msgid "Teams"
-msgstr "Lag"
-
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:487
-#, c-format
-msgid "It is not recommended to permit waterway lengths greater than %u"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:61
-msgid "Create Map"
-msgstr "Lag kart"
-
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:75
-msgid "Terrain:"
-msgstr "Terreng:"
-
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:101
-msgid "Creating empty map…"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:69
-#: ../../src/wui/gamedetails.cc:172
-msgid "Players:"
-msgstr "Spillere:"
-
-#. * TRANSLATORS: Amount of resources in the random map generator in the
-#. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:76
-msgid "Low"
-msgstr "Lav"
-
-#. * TRANSLATORS: Amount of resources in the random map generator in the
-#. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:78
-msgid "Medium"
-msgstr "Mellomstor"
-
-#. * TRANSLATORS: Amount of resources in the random map generator in the
-#. editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:80
-msgid "High"
-msgstr "Høy"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:90
-msgid "Climate"
-msgstr "Klima"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:114
-msgid "Terrain Distribution"
-msgstr "Landskapsdistribusjon"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:134
-msgid "Water:"
-msgstr "Vann:"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:147
-msgid "Land:"
-msgstr "Land:"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:160
-msgid "Wasteland:"
-msgstr "Økdemark:"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:165
-msgid "Mountains:"
-msgstr "Fjell:"
-
-#. * TRANSLATORS: A spinbox unit
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:173
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:474
-#: ../../src/ui_basic/spinbox.cc:410
-#, c-format
-msgid "%i %%"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:175
-msgid "Island mode"
-msgstr "Øymodus"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:183
-msgid "Random number:"
-msgstr "Tilfeldig tall:"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:190
-msgid "Map ID:"
-msgstr "Kart ID:"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:207
-msgid "Generate Map"
-msgstr "Generer kart"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:234
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:268
-msgid "Random"
-msgstr "Tilfeldig"
-
-#. * TRANSLATORS: A campaign difficulty
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:264
-#: ../../src/ui_fsmenu/campaigns.cc:53
-msgid "Default"
-msgstr "Normal"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:265
-msgid "Alpine"
-msgstr "Alpin"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:266
-msgid "Atoll"
-msgstr "Atoll"
-
-#. * TRANSLATORS: A world name for the random map generator in the editor
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:267
-#: ../../src/logic/map.cc:61
-msgid "Wasteland"
-msgstr "Ødemark"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:581
-msgid "Generating random map…"
-msgstr "Genererer tilfeldig kart…"
-
-#. * TRANSLATORS: Window title. This is shown after a random map has been
-#. created in the
-#. editor.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:621
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:638
-#: ../../src/ui_fsmenu/main.cc:312
-msgid "Random Map"
-msgstr "Tilfeldig kart"
-
-#. * TRANSLATORS: This is shown after a random map has been created in the
-#. editor.
-#. * TRANSLATORS: You don't need to be literal with your translation,
-#. * TRANSLATORS: as long as the user understands that he needs to check the
-#. player
-#. positions.
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:626
-msgid ""
-"The map has been generated. Please double-check the player starting "
-"positions to make sure that your carriers won’t drown, or be stuck on an "
-"island or on top of a mountain."
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:639
-msgid "The Widelands Random Map Generator"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:641
-msgid ""
-"This map was generated automatically by the Widelands Random Map Generator."
-msgstr "Dette kartet var automatisk generert av Wideland sin tilfeldigkart-generator"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:652
-#: ../../src/wui/game_summary.cc:112
-msgid "Player"
-msgstr "Spiller"
-
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:653
-#: ../../src/network/gamehost.cc:1716
-#, c-format
-msgid "Computer %u"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:68
-#: ../../src/wui/game_main_menu_save_game.cc:75
-#: ../../src/wui/gamedetails.cc:189
-msgid "Filename:"
-msgstr "Filnavn:"
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:77
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:32
-msgid "Make Directory"
-msgstr "Opprett katalog"
-
-#. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:158
-#: ../../src/ui_fsmenu/internet_lobby.cc:469
-msgid "unnamed"
-msgstr "navnløs"
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:167
-msgid "A file or directory with that name already exists."
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:168
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:183
-msgid "Error Creating Directory!"
-msgstr "Feil ved oppretting av katalog!"
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:182
-#, c-format
-msgid "Error while creating directory ‘%s’."
-msgstr "Feil ved oppretting av katalog '%s'."
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:306
-#: ../../src/wui/game_main_menu_save_game.cc:248
-#, c-format
-msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr "En fil med navnet «%s» finnes allerede. Overskrive?"
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:309
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:364
-msgid "Error Saving Map!"
-msgstr "Feil ved lagring av kart!"
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:339
-msgid "Saving the map…"
-msgstr "Lagrer kartet…"
-
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:357
-msgid "Map saved"
-msgstr "Kart lagret"
-
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:52
-msgid "Enter Directory Name:"
-msgstr ""
-
-#: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:107
-msgid "This extension is reserved!"
-msgstr "Denne utvidelsen er reservert!"
-
-#: ../../src/editor/ui_menus/map_size_box.cc:39
-msgid "Width"
-msgstr "Bredde"
-
-#: ../../src/editor/ui_menus/map_size_box.cc:51
-msgid "Height"
-msgstr "Høyde"
-
-#. * TRANSLATORS: Window title in the editor when a player has selected more
-#. than the
-#. recommended number of players
-#: ../../src/editor/ui_menus/player_menu.cc:54
-msgid "Too Many Players"
-msgstr "For mange spillere"
-
-#. * TRANSLATORS: Info text in editor player menu when a player has selected
-#. more than the
-#. recommended number of players. Choice is made by OK/Abort.
-#: ../../src/editor/ui_menus/player_menu.cc:65
-msgid ""
-"We do not recommend setting more than 8 players except for testing purposes."
-" Are you sure that you want more than 8 players?"
-msgstr ""
-
-#. * TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8
-#. players except
-#. for testing purposes. Are you sure that you want more than 8 players?'
-#: ../../src/editor/ui_menus/player_menu.cc:75
-msgid "Do not remind me again"
-msgstr "Ikke påminn meg igjen"
-
-#: ../../src/editor/ui_menus/player_menu.cc:79
-msgid "Abort"
-msgstr "Avbryt"
-
-#: ../../src/editor/ui_menus/player_menu.cc:131
-msgid "Player Options"
-msgstr "Spillerinnstillinger"
-
-#: ../../src/editor/ui_menus/player_menu.cc:140 ../../src/wui/maptable.cc:32
-msgid "Number of players"
 msgstr ""
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
@@ -1231,19 +582,19 @@ msgstr "Stamme"
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:95
 msgctxt "tribe"
 msgid "Random"
-msgstr ""
+msgstr "Tilfeldig"
 
 #: ../../src/editor/ui_menus/player_menu.cc:195
 #: ../../src/ui_fsmenu/multiplayersetupgroup.cc:401
 #: ../../src/ui_fsmenu/singleplayerdropdown.cc:97
 msgid "The tribe will be selected at random"
-msgstr ""
+msgstr "Stammen blir valgt tilfeldig"
 
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
 #: ../../src/editor/ui_menus/player_menu.cc:212
 msgid "Set this player’s starting position"
-msgstr ""
+msgstr "Sett spillerens startposisjon"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:32
 msgid "Height Tools Options"
@@ -1251,12 +602,12 @@ msgstr "Høyde Verktøy valg"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:44
 msgid "Increase/Decrease height by:"
-msgstr ""
+msgstr "Øk/minsk høyde med:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:56
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:69
 msgid "Set height to:"
-msgstr ""
+msgstr "Set høyde til:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:61
@@ -2222,7 +1573,7 @@ msgstr ""
 #: ../../src/map_io/map_saver.cc:229
 #: ../../src/map_io/widelands_map_loader.cc:202
 msgid "Map objects"
-msgstr ""
+msgstr "Kartobjekter"
 
 #: ../../src/map_io/map_saver.cc:238
 #: ../../src/map_io/widelands_map_loader.cc:358
@@ -3388,7 +2739,7 @@ msgstr "Spilletid: %s"
 #: ../../src/ui_fsmenu/main.cc:294
 #, c-format
 msgid "Saved: %s"
-msgstr ""
+msgstr "Lagret: %s"
 
 #: ../../src/ui_fsmenu/main.cc:303
 msgid "Online Game"
@@ -3408,15 +2759,15 @@ msgstr "Lokalt nettverk (LAN) / Direkte IP"
 
 #: ../../src/ui_fsmenu/main.cc:308
 msgid "Play a private online game"
-msgstr ""
+msgstr "Spill et privat onlinespill"
 
 #: ../../src/ui_fsmenu/main.cc:311
 msgid "Create a new empty map"
-msgstr ""
+msgstr "Lag et nytt tomt kart"
 
 #: ../../src/ui_fsmenu/main.cc:313
 msgid "Create a new random map"
-msgstr ""
+msgstr "Lag et nytt tilfeldig kart"
 
 #: ../../src/ui_fsmenu/main.cc:315
 msgid "Edit an existing map"
@@ -3522,18 +2873,18 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:47
 msgid "Saved Players"
-msgstr ""
+msgstr "Lagrede spillere"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:54
 #, c-format
 msgid "Player %u: –"
-msgstr ""
+msgstr "Spiller %u: -"
 
 #. * TRANSLATORS: "Player 1 (Barbarians): Playername"
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:77
 #, c-format
 msgid "Player %1$u (%2$s): %3$s"
-msgstr ""
+msgstr "Spiller %1$u (%2$s): %3$s"
 
 #: ../../src/ui_fsmenu/mapdetailsbox.cc:96
 msgid "Map Details"
@@ -3562,7 +2913,7 @@ msgstr "(intet kart)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:44
 msgid "Choose Map"
-msgstr ""
+msgstr "Velg kart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:74
 msgid "Show all maps"
@@ -3590,7 +2941,7 @@ msgstr "Balansert og ubalansert"
 #: ../../src/ui_fsmenu/mapselect.cc:431
 msgctxt "balancing"
 msgid "Unspecified"
-msgstr ""
+msgstr "Uspesifisert"
 
 #: ../../src/ui_fsmenu/menu.cc:112
 msgid "Back"
@@ -4221,7 +3572,7 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:132
 #: ../../src/wui/building_statistics_menu.cc:151
 msgid "Show next building"
-msgstr ""
+msgstr "Vis neste bygging"
 
 #: ../../src/wui/building_statistics_menu.cc:207
 msgid ""
@@ -4731,7 +4082,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:573
 msgid "Show all messages"
-msgstr ""
+msgstr "Vis alle meldinger"
 
 #: ../../src/wui/game_message_menu.cc:583
 #: ../../src/wui/seafaring_statistics_menu.cc:558
@@ -4742,7 +4093,7 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in the messages window
 #: ../../src/wui/game_message_menu.cc:583
 msgid "Show geologists' messages only"
-msgstr ""
+msgstr "Vis bare geologens meldinger"
 
 #: ../../src/wui/game_message_menu.cc:586
 #: ../../src/wui/seafaring_statistics_menu.cc:561
@@ -5123,14 +4474,14 @@ msgstr ""
 #. * when a player enables cheating mode
 #: ../../src/wui/interactive_base.cc:1472
 msgid "This player has enabled the cheating mode!"
-msgstr ""
+msgstr ""Denne spilleren har slått på juksing!
 
 #. * TRANSLATORS: This is a chat message which is automatically sent to all
 #. players when a
 #. * player uses the debug console
 #: ../../src/wui/interactive_base.cc:1502
 msgid "This player has just used the cheating console!"
-msgstr ""
+msgstr "Denne spilleren har nettopp opprettet en konsoll for å jukse i!"
 
 #: ../../src/wui/interactive_gamebase.cc:50
 msgid "PAUSE"
@@ -5409,7 +4760,7 @@ msgstr "Sp."
 
 #: ../../src/wui/maptable.cc:33 ../../src/wui/maptable.cc:62
 msgid "Filename"
-msgstr ""
+msgstr "Filnavn"
 
 #: ../../src/wui/maptable.cc:33
 msgid "The name of the map or scenario"
@@ -5468,19 +4819,19 @@ msgstr[1] ""
 #: ../../src/wui/plot_area.cc:125
 msgctxt "unit_generic"
 msgid "days"
-msgstr ""
+msgstr "dager"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:128
 msgctxt "unit_generic"
 msgid "hours"
-msgstr ""
+msgstr "timer"
 
 #. * TRANSLATORS: Generic unit label. Used in statistics.
 #: ../../src/wui/plot_area.cc:131
 msgctxt "unit_generic"
 msgid "minutes"
-msgstr ""
+msgstr "minutter"
 
 #: ../../src/wui/plot_area.cc:360
 msgid "game"
@@ -5761,7 +5112,7 @@ msgstr ""
 
 #: ../../src/wui/savegametable.cc:177 ../../src/wui/savegametable.cc:237
 msgid "Numbers are the number of players."
-msgstr ""
+msgstr "Tallet er spillets antall spillere."
 
 #. * TRANSLATORS: Game Mode table column when choosing a game/replay to load.
 #. * TRANSLATORS: Keep this to 5 letters maximum.
