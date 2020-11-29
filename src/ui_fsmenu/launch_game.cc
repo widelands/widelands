@@ -179,7 +179,7 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 			std::unique_ptr<Widelands::MapLoader> ml =
 			   map.get_correct_loader(settings_->settings().mapfilename);
 			if (ml != nullptr) {
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 				tags = map.get_tags();
 			}
 		}
@@ -209,10 +209,17 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 			try {
 				t = win_condition_if_valid(win_condition_script, tags);
 				if (t) {
-					i18n::Textdomain td("win_conditions");
-					win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script, nullptr,
-					                            win_condition_script == last_win_condition_,
-					                            t->get_string("description"));
+					if (t->has_key("textdomain")) {
+						i18n::AddOnTextdomain td(t->get_string("textdomain"));
+						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script,
+						                            nullptr, win_condition_script == last_win_condition_,
+						                            t->get_string("description"));
+					} else {
+						i18n::Textdomain td("win_conditions");
+						win_condition_dropdown_.add(_(t->get_string("name")), win_condition_script,
+						                            nullptr, win_condition_script == last_win_condition_,
+						                            t->get_string("description"));
+					}
 				}
 			} catch (LuaTableKeyError& e) {
 				log_err("Launch Game: Error loading win condition: %s %s\n",
