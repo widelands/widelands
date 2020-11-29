@@ -2,27 +2,24 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_immovable_type {
-   msgctxt = "immovable",
+descriptions:new_immovable_type {
    name = "ryefield_small",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext("immovable", "Rye Field (small)"),
+   descname = pgettext("immovable", "rye Field (small)"),
    icon = dirname .. "menu.png",
    size = "small",
-   helptext_script = dirname .. "helptexts.lua",
-   attributes = { "field" },
    programs = {
-      program = {
-         "animate=idle 225000",
+      main = {
+         "animate=idle duration:45s",
          "transform=ryefield_medium",
       }
    },
+
    animations = {
       idle = {
-         directory = dirname,
-         basename = "idle",
-         hotspot = {21, 25}
-      }
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 31, 24 },
+      },
    }
 }
 

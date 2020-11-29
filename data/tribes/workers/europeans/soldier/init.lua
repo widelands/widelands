@@ -191,7 +191,7 @@ all_levels_eur = {
 --
 --    With "die_w_0" and "die_w_1" being members of the "animations" table.
 
-tribes:new_soldier_type {
+descriptions:new_soldier_type {
    msgctxt = "europeans_worker",
    name = "europeans_soldier",
    -- TRANSLATORS: This is a worker name used in lists of workers

@@ -2,24 +2,32 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-animations = {}
-add_animation(animations, "idle", dirname, "idle", {13, 24}, 10)
-add_directional_animation(animations, "walk", dirname, "walk", {8, 25}, 10)
-add_directional_animation(animations, "walkload", dirname, "walkload", {8, 25}, 10)
-
-tribes:new_carrier_type {
-   msgctxt = "europeans_worker",
-   --msgctxt = msgctxt,
+descriptions:new_carrier_type {
    name = "europeans_carrier",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext("europeans_worker", "Carrier"),
-   helptext_script = dirname .. "helptexts.lua",
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
    buildcost = {}, -- This will give the worker the property "buildable"
 
-   animations = animations,
+   animations = {
+      idle = {
+         hotspot = { 7, 22 },
+         fps = 10
+      },
+      walk = {
+         hotspot = { 7, 20 },
+         fps = 10,
+         directional = true
+      },
+      walkload = {
+         hotspot = { 8, 22 },
+         fps = 10,
+         directional = true
+      }
+   },
 }
 
 pop_textdomain()
