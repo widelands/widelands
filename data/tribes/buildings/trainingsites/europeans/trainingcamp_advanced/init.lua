@@ -11,18 +11,22 @@ tribes:new_trainingsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
    
-   enhancement_cost = {
-      marble_column = 2,
+   buildcost = {
+      planks = 6,
+      spidercloth = 4,
+      brick = 4,
+      grout = 4,
+      marble_column = 3,
       quartz = 2,
-      diamond = 2,
-      gold = 2
+      diamond = 2
    },
-   
-   return_on_dismantle_on_enhanced = {
-      marble = 2,
+   return_on_dismantle = {
+      log = 4,
+      spidercloth = 2,
+      granite = 3,
+      marble = 3,
       quartz = 2,
-      diamond = 2,
-      gold = 2
+      diamond = 2
    },
    
    animations = {

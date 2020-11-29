@@ -188,7 +188,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an europeans ware: Granite, part 1
-                  pgettext("ware", "Bricks is a basic building material."),
+                  pgettext("ware", "Brick is a basic building material."),
                   -- TRANSLATORS: Helptext for an europeans ware: Granite, part 2
                   pgettext("europeans_ware", "The europeans produces bricks in stonemason huts out of clay, granite and water.")
                }
@@ -1808,6 +1808,24 @@ descriptions:new_tribe {
 
       -- Military Sites
       {
+         name = "europeans_guardhouse",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Blockhouse
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Blockhouse
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_tower_small",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Blockhouse
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Blockhouse
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
          name = "europeans_blockhouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans military site: Blockhouse
@@ -1826,6 +1844,15 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "europeans_barrier",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Barrier
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Barrier
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
          name = "europeans_outpost",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans military site: Outpost
@@ -1835,7 +1862,7 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "europeans_barrier",
+         name = "europeans_advanced_barrier",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans military site: Barrier
             purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
@@ -1853,11 +1880,20 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "europeans_fortress",
+         name = "europeans_tower_high",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans military site: Fortress
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Tower
             purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
-            -- TRANSLATORS: Note helptext for an europeans military site: Fortress
+            -- TRANSLATORS: Note helptext for an europeans military site: Tower
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_advanced_tower",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Tower
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Tower
             note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
@@ -1870,6 +1906,24 @@ descriptions:new_tribe {
             note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
+      {
+         name = "europeans_fortress",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Fortress
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Fortress
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      },
+      {
+         name = "europeans_advanced_castle",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans military site: Castle
+            purpose = pgettext("europeans_building", "Garrisons soldiers to expand your territory."),
+            -- TRANSLATORS: Note helptext for an europeans military site: Castle
+            note = pgettext("europeans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+         }
+      }
 
       -- Seafaring/Ferry Sites - these are only displayed on seafaring/ferry maps
       {

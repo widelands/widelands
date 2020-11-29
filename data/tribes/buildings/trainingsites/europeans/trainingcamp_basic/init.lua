@@ -11,23 +11,20 @@ tribes:new_trainingsite_type {
    icon = dirname .. "menu.png",
    size = "medium",
    
-   enhancement = "europeans_trainingscamp_advanced",
-
    buildcost = {
       planks = 6,
       spidercloth = 4,
       brick = 4,
       grout = 4,
-      quartz = 2,
-      diamond = 2
+      quartz = 1,
+      diamond = 1
    },
    return_on_dismantle = {
       log = 4,
       spidercloth = 2,
       granite = 3,
       quartz = 1,
-      diamond = 1,
-      scrap_metal_mixed = 2
+      diamond = 1
    },
 
    animations = {
