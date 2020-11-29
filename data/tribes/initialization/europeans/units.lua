@@ -867,9 +867,25 @@ descriptions:new_tribe {
    -- Each subtable is a column in the workers windows.
    workers_order = {
       {
-         -- Carriers
+         -- Basic Workers
          {
             name = "europeans_carrier",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Carries items along your roads.")
+            }
+         },
+         {
+            name = "europeans_carrier_1",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Carries items along your roads.")
+            }
+         },
+         {
+            name = "europeans_carrier_2",
+            default_target_quantity = 16,
+            preciousness = 4,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
                purpose = pgettext("europeans_worker", "Carries items along your roads.")
@@ -883,24 +899,22 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "europeans_donkey",
-            default_target_quantity = 10,
-            preciousness = 2,
+            name = "europeans_builder",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Donkey
-               purpose = pgettext("europeans_worker", "Donkeys help to carry items along busy roads. They are reared in a donkey farm.")
+               -- TRANSLATORS: Helptext for an europeans worker: Builder
+               purpose = pgettext("europeans_worker", "Works at construction sites to raise new buildings.")
             }
          },
          {
-            name = "europeans_donkeybreeder",
+            name = "europeans_geologist",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Donkey Breeder
-               purpose = pgettext("europeans_worker", "Breeds cute and helpful donkeys for adding them to the transportation system.")
+               -- TRANSLATORS: Helptext for an europeans worker: Geologist
+               purpose = pgettext("europeans_worker", "Discovers resources for mining.")
             }
-         }
+         },
       },
       {
-         -- Building Materials
+         -- Collectors
          {
             name = "europeans_stonemason",
             helptexts = {
@@ -927,13 +941,6 @@ descriptions:new_tribe {
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Forester
                purpose = pgettext("europeans_worker", "Plants trees.")
-            }
-         },
-         {
-            name = "europeans_builder",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Builder
-               purpose = pgettext("europeans_worker", "Works at construction sites to raise new buildings.")
             }
          },
          {
@@ -1034,13 +1041,6 @@ descriptions:new_tribe {
       {
          -- Mining
          {
-            name = "europeans_geologist",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Geologist
-               purpose = pgettext("europeans_worker", "Discovers resources for mining.")
-            }
-         },
-         {
             name = "europeans_miner",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Miner
@@ -1090,8 +1090,8 @@ descriptions:new_tribe {
          },
          {
             name = "europeans_soldier",
-            default_target_quantity = 10,
-            preciousness = 5,
+            default_target_quantity = 16,
+            preciousness = 4,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Soldier
                purpose = pgettext("europeans_worker", "Defend and Conquer!")
@@ -1420,15 +1420,6 @@ descriptions:new_tribe {
             purpose = pgettext("europeans_building", "Accommodation for your people. Also stores your wares and tools."),
             -- TRANSLATORS: Note helptext for an europeans warehouse: Headquarters
             note = pgettext("europeans_building", "The headquarters is your main building.")
-         }
-      },
-      {
-         name = "europeans_headquarters_shipwreck",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans warehouse: Headquarters Shipwreck
-            purpose = pgettext("europeans_building", "Although this ship ran aground, it still serves as accommodation for your people. It also stores your wares and tools."),
-            -- TRANSLATORS: Note helptext for an europeans warehouse: Headquarters Shipwreck
-            note = pgettext("europeans_building", "The headquarters shipwreck is your main building.")
          }
       },
       {
