@@ -253,6 +253,7 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 		for (const InternetGame& game : *games) {
 			if (game.connectable == INTERNET_GAME_SETUP && game.build_id == localbuildid) {
 				// only clients with the same build number are displayed
+				// TODO(Nordfriese): Include information about the add-ons used by the host
 				opengames_list_.add(richtext_escape(game.name), game,
 				                    g_image_cache->get("images/ui_basic/continue.png"), false,
 				                    game.build_id);

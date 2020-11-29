@@ -227,6 +227,7 @@ void Box::layout() {
 		scrollbar_->set_steps(totaldepth - pagesize);
 		scrollbar_->set_singlestepsize(Scrollbar::kSize);
 		scrollbar_->set_pagesize(pagesize);
+		scrollbar_->set_force_draw(force_scrolling_);
 	} else {
 		scrollbar_.reset();
 	}

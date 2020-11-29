@@ -4,6 +4,7 @@
 #include <string>
 
 #include "io/filesystem/filesystem.h"
+#include "logic/addons.h"
 #include "logic/game_controller.h"
 #include "logic/widelands.h"
 
@@ -39,6 +40,8 @@ public:
 	time_t savetimestamp;
 	/// Single payer, nethost, netclient or replay
 	GameController::GameType gametype;
+
+	AddOnRequirements required_addons;
 
 	SavegameData();
 	explicit SavegameData(const std::string& filename);
