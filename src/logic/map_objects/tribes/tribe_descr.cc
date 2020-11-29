@@ -87,10 +87,11 @@ void walk_immovables(Widelands::DescriptionIndex index,
 	}
 }
 
-// Read helptext from Lua table
-void load_helptexts(Widelands::MapObjectDescr* descr,
-                    const LuaTable& table,
-                    const std::string& tribe_name) {
+}  // namespace
+
+namespace Widelands {
+
+void TribeDescr::load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table) {
 	std::map<std::string, std::string> helptexts;
 	if (table.has_key("helptexts")) {
 		std::unique_ptr<LuaTable> helptext_table = table.get_table("helptexts");
@@ -128,11 +129,8 @@ void load_helptexts(Widelands::MapObjectDescr* descr,
 	} else {
 		log_warn("No helptext defined for '%s'", descr->name().c_str());
 	}
-	descr->set_helptexts(tribe_name, helptexts);
+	descr->set_helptexts(name(), helptexts);
 }
-}  // namespace
-
-namespace Widelands {
 
 /**
  * The contents of 'table' are documented in
@@ -213,7 +211,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
-		finalize_loading(descriptions);
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
@@ -346,7 +343,7 @@ void TribeDescr::load_wares(const LuaTable& table, Descriptions& descriptions) {
 				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
 
 				// Add helptexts
-				load_helptexts(ware_descr, *ware_table, name());
+				load_helptexts(ware_descr, *ware_table);
 
 				// Add to tribe
 				wares_.insert(wareindex);
@@ -372,7 +369,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& descriptio
 			}
 			immovables_.insert(index);
 			// Add helptext
-			load_helptexts(descriptions.get_mutable_immovable_descr(index), *immovable_table, name());
+			load_helptexts(descriptions.get_mutable_immovable_descr(index), *immovable_table);
 
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
@@ -425,7 +422,7 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 				}
 
 				// Add helptexts
-				load_helptexts(worker_descr, *worker_table, name());
+				load_helptexts(worker_descr, *worker_table);
 
 				// Add to tribe
 				workers_.insert(workerindex);
@@ -477,7 +474,7 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 			BuildingDescr* building_descr = descriptions.get_mutable_building_descr(index);
 
 			// Add helptexts
-			load_helptexts(building_descr, *building_table, name());
+			load_helptexts(building_descr, *building_table);
 
 			// Register at enhanced building
 			const DescriptionIndex& enhancement = building_descr->enhancement();
@@ -541,10 +538,22 @@ const std::set<DescriptionIndex>& TribeDescr::buildings() const {
 const std::set<DescriptionIndex>& TribeDescr::wares() const {
 	return wares_;
 }
+std::set<DescriptionIndex>& TribeDescr::mutable_wares() {
+	return wares_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_workers() {
+	return workers_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_buildings() {
+	return buildings_;
+}
 const std::set<DescriptionIndex>& TribeDescr::workers() const {
 	return workers_;
 }
 const std::set<DescriptionIndex>& TribeDescr::immovables() const {
+	return immovables_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_immovables() {
 	return immovables_;
 }
 const ResourceIndicatorSet& TribeDescr::resource_indicators() const {

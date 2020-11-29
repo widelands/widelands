@@ -24,6 +24,8 @@
 #include <string>
 
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
+#include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player_end_result.h"
 #include "logic/widelands.h"
@@ -130,6 +132,19 @@ struct GameSettings {
 				win_condition_scripts.push_back(filename);
 			} else {
 				throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
+			}
+		}
+		for (const auto& pair : g_addons) {
+			if (pair.first.category == AddOnCategory::kWinCondition) {
+				const std::string filename = kAddOnDir + g_fs->file_separator() +
+				                             pair.first.internal_name + g_fs->file_separator() +
+				                             "init.lua";
+				if (g_fs->file_exists(filename)) {
+					win_condition_scripts.push_back(filename);
+				} else {
+					throw wexception(
+					   "Add-on win condition file \"%s\" does not exist", filename.c_str());
+				}
 			}
 		}
 	}
