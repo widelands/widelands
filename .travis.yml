@@ -17,9 +17,16 @@ jobs:
 language: cpp
 
 script:
-  # Install dependencies
+  # Install dependencies (this can take a looooong time...)
   - travis_wait 60 brew update
-  - travis_wait 60 brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
+  - travis_wait 60 brew install ccache
+  - travis_wait 60 brew install glew
+  - travis_wait 60 brew install sdl2
+  - travis_wait 60 brew install sdl2_image
+  - travis_wait 60 brew install sdl2_mixer
+  - travis_wait 60 brew install sdl2_ttf
+  - travis_wait 60 brew install curl
+  - travis_wait 60 brew install icu4c
   # icu4c cannot be forced
   - export ICU_ROOT="$(brew --prefix icu4c)"
   # Add ccache and gettext to the PATH variable
