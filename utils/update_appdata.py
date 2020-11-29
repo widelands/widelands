@@ -183,6 +183,6 @@ subprocess.run(['appstreamcli', 'validate', appdata_filepath])
 
 # Validate desktop file. We don't get return codes, so we have to parse it
 desktop_result = subprocess.run(['desktop-file-validate', desktop_filepath],
-                capture_output=True)
+                                capture_output=True)
 
 sys.exit(desktop_result.returncode)
