@@ -40,13 +40,15 @@ public:
 	explicit DescriptionManager(LuaInterface* lua);
 	~DescriptionManager() = default;
 
+	enum class RegistryCaller { kDefault, kScenario, kTribeAddon, kWorldAddon };
 	/// Search a directory for 'register.lua' files and register their 'init.lua' scripts
-	void register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario);
+	void register_directory(const std::string& dirname, FileSystem* filesystem, RegistryCaller);
 	/// Map a map object description's name to its init script so that we can load it when we want
 	/// it.
 	void register_description(const std::string& description_name,
 	                          const std::string& script_path,
-	                          const std::vector<std::string>& attributes);
+	                          const std::vector<std::string>& attributes,
+	                          RegistryCaller);
 	/// Map a scenario's map object description's name to its init script so that we can load it when
 	/// we want it.
 	void register_scenario_description(FileSystem* filesystem,
@@ -68,6 +70,17 @@ public:
 	/// Mark a description as having been loaded
 	void mark_loading_done(const std::string& description_name);
 
+	struct NoteMapObjectDescriptionTypeCheck {
+		CAN_BE_SENT_AS_NOTE(NoteId::MapObjectDescriptionTypeCheck)
+
+		const std::string description_name;
+		const RegistryCaller caller;
+
+		NoteMapObjectDescriptionTypeCheck(const std::string& n, RegistryCaller c)
+		   : description_name(n), caller(c) {
+		}
+	};
+
 private:
 	/// Load a description on demand via notification
 	void load_description_on_demand(const std::string& description_name, bool allow_failure);
@@ -77,11 +90,13 @@ private:
 
 	struct RegisteredObject {
 		explicit RegisteredObject(const std::string& init_script_path,
-		                          const std::vector<std::string>& init_attributes)
-		   : script_path(init_script_path), attributes(init_attributes) {
+		                          const std::vector<std::string>& init_attributes,
+		                          RegistryCaller c)
+		   : script_path(init_script_path), attributes(init_attributes), caller(c) {
 		}
 		const std::string script_path;
 		const std::vector<std::string> attributes;
+		const RegistryCaller caller;
 	};
 
 	/// A list of all available map object descriptions as <name, init script path>

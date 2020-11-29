@@ -145,10 +145,22 @@ void FullscreenMenuScenarioSelect::layout() {
 	scenario_difficulty_.set_desired_size(0, standard_height_);
 }
 
+// Resolves the add-on prefix into a usable path or prefixes the path with the campaign directory
+static std::string resolve_and_fix_cross_file(const std::string& path) {
+	const size_t colonpos = path.find(':');
+	if (colonpos == std::string::npos) {
+		// normal case
+		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + path);
+	} else {
+		// add-on
+		return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
+		                                        path.substr(colonpos + 1));
+	}
+}
+
 std::string FullscreenMenuScenarioSelect::get_map() {
 	if (set_has_selection()) {
-		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" +
-		                                        scenarios_data_.at(table_.get_selected()).path);
+		return resolve_and_fix_cross_file(scenarios_data_.at(table_.get_selected()).path);
 	}
 	return "";
 }
@@ -215,8 +227,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 	for (size_t i = 0; i < scenarios_data_.size(); ++i) {
 		// Get details info from maps
 		ScenarioData* scenario_data = &scenarios_data_.at(i);
-		const std::string full_path =
-		   g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + scenario_data->path);
+		const std::string full_path = resolve_and_fix_cross_file(scenario_data->path);
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(full_path));
 		if (!ml) {
@@ -225,7 +236,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		}
 
 		map.set_filename(full_path);
-		ml->preload_map(true);
+		ml->preload_map(true, nullptr);
 
 		{
 			i18n::Textdomain td("maps");
