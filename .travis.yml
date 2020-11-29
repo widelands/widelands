@@ -18,8 +18,8 @@ language: cpp
 
 script:
   # Install dependencies
-  - travis_wait brew update
-  - travis_wait brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
+  - travis_wait 60 brew update
+  - travis_wait 60 brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
   # icu4c cannot be forced
   - export ICU_ROOT="$(brew --prefix icu4c)"
   # Add ccache and gettext to the PATH variable
