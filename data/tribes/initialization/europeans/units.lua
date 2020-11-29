@@ -1718,16 +1718,69 @@ descriptions:new_tribe {
 
       -- Training Sites
       {
+         name = "europeans_guardhall",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Guardhall, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Health’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Guardhall, part 2
+               pgettext("europeans_building", "Equips the soldiers with all necessary armor parts.")
+            },
+         }
+      },
+      {
+         name = "europeans_dungeon",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Dungeon, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Defense’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Dungeon, part 2
+               pgettext("europeans_building", "Equips the soldiers with all necessary parts.")
+            },
+         }
+      },
+      {
+         name = "europeans_trainingscamp_basic",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Basic Training Camp, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Attack’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Basic Training Camp, part 2
+               pgettext("europeans_building", "Equips the soldiers with all necessary weapons.")
+            },
+         }
+      },
+      {
+         name = "europeans_trainingscamp_advanced",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Advanced Training Camp, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Attack’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Advanced Training Camp, part 2
+               pgettext("europeans_building", "Equips the soldiers with all necessary weapons.")
+            },
+         }
+      },
+      {
+         name = "europeans_labyrinth",
+         helptexts = {
+            purpose = {
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Labyrinth, part 1
+               pgettext("europeans_building", "Trains soldiers in ‘Evade’."),
+               -- TRANSLATORS: Purpose helptext for an europeans training site: Labyrinth, part 2
+               pgettext("europeans_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
+            },
+         }
+      },
+      {
          name = "europeans_arena",
          helptexts = {
             purpose = {
                -- TRANSLATORS: Purpose helptext for an europeans training site: Arena, part 1
-               pgettext("europeans_building", "Trains soldiers in ‘Evade’."),
+               pgettext("europeans_building", "Trains soldiers in ‘Evade’, in ‘Health’ and in ‘Defense’."),
                -- TRANSLATORS: Purpose helptext for an europeans training site: Arena, part 2
                pgettext("europeans_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
             },
-            -- TRANSLATORS: Note helptext for an europeans training site: Arena
-            note = pgettext("europeans_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
          }
       },
       {
@@ -1735,25 +1788,21 @@ descriptions:new_tribe {
          helptexts = {
             purpose = {
                -- TRANSLATORS: Purpose helptext for an europeans training site: Colosseum, part 1
-               pgettext("europeans_building", "Trains soldiers in ‘Evade’."),
+               pgettext("europeans_building", "Trains soldiers in ‘Evade’, in ‘Health’, in ‘Defense’ and in ‘Attack’."),
                -- TRANSLATORS: Purpose helptext for an europeans training site: Colosseum, part 2
                pgettext("europeans_building", "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.")
             },
-            -- TRANSLATORS: Note helptext for an europeans training site: Colosseum
-            note = pgettext("europeans_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
          }
       },
       {
-         name = "europeans_trainingcamp",
+         name = "europeans_trainingscamp_big",
          helptexts = {
             purpose = {
                -- TRANSLATORS: Purpose helptext for an europeans training site: Training Camp, part 1
-               pgettext("europeans_building", "Trains soldiers in ‘Attack’ and in ‘Health’."),
+               pgettext("europeans_building", "Trains soldiers in ‘Attack’ and in ‘Defense’."),
                -- TRANSLATORS: Purpose helptext for an europeans training site: Training Camp, part 2
                pgettext("europeans_building", "Equips the soldiers with all necessary weapons and armor parts.")
             },
-            -- TRANSLATORS: Note helptext for an europeans training site: Training Camp
-            note = pgettext("europeans_building", "Imperial soldiers cannot be trained in ‘Defense’ and will remain at the level with which they came.")
          }
       },
 
