@@ -117,14 +117,14 @@ for translation_filename in translation_files:
             # .desktop
             generic_names += 'GenericName[' + \
                 lang_code + ']=' + generic_name + '\n'
-        if translation.has_key('name'):
+        if 'name' in translation:
             desktop_name = translation['name']
             if desktop_name != desktop_name_en:
                 # .desktop
                 desktop_names += 'Name[' + \
                     lang_code + ']=' + desktop_name + '\n'
         # appdata.xml
-        if translation.has_key('name') and translation['name'] != name_en:
+        if 'name' in translation and translation['name'] != name_en:
             names += "  <name xml:lang=\"" + lang_code + \
                 "\">" + translation['name'] + '</name>\n'
         if translation['description'] != descriptions_en:  # appdata.xml
