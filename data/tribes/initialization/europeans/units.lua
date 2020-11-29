@@ -378,24 +378,6 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "grape",
-            default_target_quantity = 16,
-            preciousness = 4,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Grape
-               purpose = pgettext("europeans_ware", "These grapes are the base for a tasty wine. They are harvested in a vineyard and processed in a winery.")
-            }
-         },
-         {
-            name = "wine",
-            default_target_quantity = 32,
-            preciousness = 8,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Wine
-               purpose = pgettext("europeans_ware", "This tasty wine is drunk by soldiers to train in colosseum. It is produced in a winery.")
-            }
-         },
-         {
             name = "fruit",
             default_target_quantity = 16,
             preciousness = 4,
@@ -422,6 +404,24 @@ descriptions:new_tribe {
                purpose = pgettext("europeans_ware", "Mead is produced by breweries. Soldiers drink mead during advanced training.")
             }
          },
+         {
+            name = "grape",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Grape
+               purpose = pgettext("europeans_ware", "These grapes are the base for a tasty wine. They are harvested in a vineyard and processed in a winery.")
+            }
+         },
+         {
+            name = "wine",
+            default_target_quantity = 32,
+            preciousness = 8,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Wine
+               purpose = pgettext("europeans_ware", "This tasty wine is drunk by soldiers to train in colosseum. It is produced in a winery.")
+            }
+         }
       },
       {
          -- Mining
@@ -495,54 +495,10 @@ descriptions:new_tribe {
          }
       },
       {
-         -- Tools
-         {
-            name = "pick",
-            default_target_quantity = 2,
-            preciousness = 1,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Pick
-               purpose = pgettext("europeans_ware", "Picks are used by stonemasons and miners. They are produced by the toolsmith.")
-            }
-         },
-         {
-            name = "felling_ax",
-            default_target_quantity = 3,
-            preciousness = 1,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an europeans ware: Felling Ax, part 1
-                  pgettext("ware", "The felling ax is the tool to chop down trees."),
-                  -- TRANSLATORS: Helptext for an europeans ware: Felling Ax, part 2
-                  pgettext("europeans_ware", "Felling axes are used by lumberjacks and produced by the toolsmithy.")
-               }
-            }
-         },
-         {
-            name = "saw",
-            default_target_quantity = 1,
-            preciousness = 0,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Saw
-               purpose = pgettext("europeans_ware", "This saw is needed by the carpenter. It is produced by the toolsmith.")
-            }
-         },
-         {
-            name = "shovel",
-            default_target_quantity = 1,
-            preciousness = 0,
-            helptexts = {
-               purpose = {
-                  -- TRANSLATORS: Helptext for an europeans ware: Shovel, part 1
-                  pgettext("ware", "Shovels are needed for the proper handling of plants."),
-                  -- TRANSLATORS: Helptext for an europeans ware: Shovel, part 2
-                  pgettext("europeans_ware", "Therefore the forester and the vine farmer use them. They are produced by the toolsmith.")
-               }
-            }
-         },
+         -- Tools 1
          {
             name = "hammer",
-            default_target_quantity = 2,
+            default_target_quantity = 4,
             preciousness = 1,
             helptexts = {
                purpose = {
@@ -554,34 +510,85 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "fishing_rod",
-            default_target_quantity = 1,
-            preciousness = 0,
+            name = "saw",
+            default_target_quantity = 4,
+            preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an europeans ware: Fishing Rod, part 1
-                  pgettext("ware", "Fishing rods are needed by fishers to catch fish."),
-                  -- TRANSLATORS: Helptext for an europeans ware: Fishing Rod, part 2
-                  pgettext("europeans_ware", "They are produced by the toolsmith.")
+                   -- TRANSLATORS: Helptext for an europeans ware: Saw, part 1
+                   pgettext("ware", "The saw is an essential tool."),
+                   -- TRANSLATORS: Helptext for an europeans ware: Saw, part 2
+                   pgettext("europeans_ware", "This saw is needed by the woodcutter and the carpenter. It is produced by the toolsmith.")
+                }
+            }
+         },
+         {
+            name = "felling_ax",
+            default_target_quantity = 4,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Felling Ax, part 1
+                  pgettext("ware", "The felling ax is the tool to chop down trees."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Felling Ax, part 2
+                  pgettext("europeans_ware", "Felling axes are used by lumberjacks and produced by the toolsmithy.")
                }
             }
          },
          {
-            name = "hunting_spear",
-            default_target_quantity = 1,
-            preciousness = 0,
+            name = "pick",
+            default_target_quantity = 4,
+            preciousness = 1,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an europeans ware: Hunting Spear, part 1
-                  pgettext("ware", "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."),
-                  -- TRANSLATORS: Helptext for an europeans ware: Hunting Spear, part 2
-                  pgettext("europeans_ware", "They are produced by the toolsmith.")
+                   -- TRANSLATORS: Helptext for an europeans ware: Pick, part 1
+                   pgettext("ware", "The pick is an essential tool."),
+                   -- TRANSLATORS: Helptext for an europeans ware: Pick, part 2
+                   pgettext("europeans_ware", "Picks are used by stonemasons and miners. They are produced by the toolsmith.")
+                }
+            }
+         },
+         {
+            name = "shovel",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Shovel, part 1
+                  pgettext("ware", "Shovels are needed for the proper handling of plants."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Shovel, part 2
+                  pgettext("europeans_ware", "Therefore the forester and the vine farmer use them. They are produced by the toolsmith.")
                }
             }
          },
+         {
+            name = "fire_tongs",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Fire Tongs, part 1
+                  pgettext("ware", "Fire tongs are the tools for smelting ores."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Fire Tongs, part 2
+                  pgettext("europeans_ware", "They are used in the smelting works and produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "needles",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a europeans ware: Needles
+               purpose = pgettext("europeans_ware", "Needles are used by seamstresses to sew cloth.")
+            }
+         }
+      },
+      {
+         -- Tools 2
          {
             name = "scythe",
-            default_target_quantity = 1,
+            default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
                purpose = {
@@ -594,7 +601,7 @@ descriptions:new_tribe {
          },
          {
             name = "bread_paddle",
-            default_target_quantity = 1,
+            default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
                purpose = {
@@ -606,100 +613,104 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "basket",
-            default_target_quantity = 1,
+            name = "milking_tongs",
+            default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Basket
-               purpose = pgettext("europeans_ware", "This basket is needed by the vine farmer for harvesting the grapes. It is produced by the toolsmith.")
+               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
+               purpose = pgettext("europeans_ware", "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith.")
             }
          },
          {
-            name = "kitchen_tools",
-            default_target_quantity = 1,
+            name = "fishing_net",
+            default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Kitchen Tools
-               purpose = pgettext("europeans_ware", "Kitchen tools are needed for preparing rations and meals. They are produced in a toolsmithy and used in taverns and inns.")
+               -- TRANSLATORS: Helptext for an europeans ware: Fishing Net
+               purpose = pgettext("europeans_ware", "The fishing net is used by the fisher and produced by the toolsmith.")
             }
          },
          {
-            name = "fire_tongs",
-            default_target_quantity = 1,
+            name = "fishing_rod",
+            default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an europeans ware: Fire Tongs, part 1
-                  pgettext("ware", "Fire tongs are the tools for smelting ores."),
-                  -- TRANSLATORS: Helptext for an europeans ware: Fire Tongs, part 2
-                  pgettext("europeans_ware", "They are used in the smelting works and produced by the toolsmith.")
+                  -- TRANSLATORS: Helptext for an europeans ware: Fishing Rod, part 1
+                  pgettext("ware", "Fishing rods are needed by fishers to catch fish."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Fishing Rod, part 2
+                  pgettext("europeans_ware", "They are produced by the toolsmith.")
                }
+            }
+         },
+         {
+            name = "hunting_bow",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Hunting Bow
+               purpose = pgettext("europeans_ware", "This bow is used by the hunter. It is produced by the toolsmith.")
+            }
+         },
+         {
+            name = "hunting_spear",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               purpose = {
+                  -- TRANSLATORS: Helptext for an europeans ware: Hunting Spear, part 1
+                  pgettext("ware", "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters."),
+                  -- TRANSLATORS: Helptext for an europeans ware: Hunting Spear, part 2
+                  pgettext("europeans_ware", "They are produced by the toolsmith.")
+               }
+            }
+         },
+         {
+            name = "hook_pole",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Hook Pole
+               purpose = pgettext("europeans_ware", "This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith.")
+            }
+         },
+         {
+            name = "basket",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Basket
+               purpose = pgettext("europeans_ware", "This basket is needed by the farmer for harvesting the fruits and grapes and needed by gamekeeper. It is produced by the toolsmith.")
+            }
+         },
+         {
+            name = "buckets",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Buckets
+               purpose = pgettext("europeans_ware", "Big buckets for the fish breeder – produced by the toolsmith.")
             }
          }
       },
       {
-         -- Weapons & Armor
-         {
-            name = "spear_wooden",
-            default_target_quantity = 30,
-            preciousness = 1,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Wooden Spear
-               purpose = pgettext("europeans_ware", "This wooden spear is the basic weapon in the europeans military system. It is produced in the weapon smithy. In combination with a helmet, it is the equipment to fit out young soldiers.")
-            }
-         },
-         {
-            name = "spear",
-            default_target_quantity = 1,
-            preciousness = 0,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Spear
-               purpose = pgettext("europeans_ware", "This spear has an iron spike. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 0 to attack level 1.")
-            }
-         },
-         {
-            name = "spear_advanced",
-            default_target_quantity = 1,
-            preciousness = 1,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Advanced Spear
-               purpose = pgettext("europeans_ware", "This is an advanced spear with a steel tip. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 1 to level 2.")
-            }
-         },
-         {
-            name = "spear_heavy",
-            default_target_quantity = 1,
-            preciousness = 1,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Heavy Spear
-               purpose = pgettext("europeans_ware", "This is a strong spear with a steel-tip and a little blade. It is produced in the weapon smithy and used in the training camp – together with food – train soldiers from attack level 2 to level 3.")
-            }
-         },
-         {
-            name = "spear_war",
-            default_target_quantity = 1,
-            preciousness = 1,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: War Spear
-               purpose = pgettext("europeans_ware", "This is the best and sharpest weapon the europeans weaponsmith creates for the soldiers. It is used in the training camp – together with food – to train soldiers from attack level 3 to level 4.")
-            }
-         },
-         {
-            name = "armor_helmet",
-            default_target_quantity = 30,
-            preciousness = 2,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Helmet
-               purpose = pgettext("europeans_ware", "The helmet is the basic defense of a warrior. It is produced in an armor smithy. In combination with a wooden spear, it is the equipment to fit out young soldiers. Helmets are also used in training camps – together with food – to train soldiers from health level 0 to level 1.")
-            }
-         },
+         -- Armor
          {
             name = "armor",
-            default_target_quantity = 1,
+            default_target_quantity = 16,
             preciousness = 0,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Armor
-               purpose = pgettext("europeans_ware", "Basic armor for europeans soldiers. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 1 to level 2.")
+               purpose = pgettext("europeans_ware", "Basic armor for europeans soldiers. It is produced in the weaving mill. In combination with wooden speer, it is the equipment to fit out young soldiers.")
+            }
+         },
+         {
+            name = "tabard",
+            default_target_quantity = 16,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Tabard
+               purpose = pgettext("europeans_ware", "Basic tabard for europeans soldiers. It is produced in the weaving mill. In combination with wooden speer, it is the equipment to fit out young soldiers.")
             }
          },
          {
@@ -708,19 +719,148 @@ descriptions:new_tribe {
             preciousness = 0,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Chain Armor
-               purpose = pgettext("europeans_ware", "The chain armor is a medium armor for europeans soldiers. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 2 to level 3.")
+               purpose = pgettext("europeans_ware", "The chain armor is a medium armor for europeans soldiers. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 0 to level 1.")
+            }
+         },
+         {
+            name = "armor_helmet",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Helmet
+               purpose = pgettext("europeans_ware", "The helmet is the medium armor of a soldier. It is produced in an armor smithy. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 1 to level 2.")
+            }
+         },
+         {
+            name = "helmet_mask",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Helmet Mask
+               purpose = pgettext("europeans_ware", "The mask is the medium armor of a soldier. It is produced in an armor smithy. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 2 to level 3.")
             }
          },
          {
             name = "armor_gilded",
             default_target_quantity = 1,
-            preciousness = 1,
+            preciousness = 0,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Gilded Armor
-               purpose = pgettext("europeans_ware", "The gilded armor is the strongest armor an europeans soldier can have. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 3 to level 4.")
+               purpose = pgettext("europeans_ware", "The gilded armor is an advanced armor of a soldier. It is produced in the armor smithy and used in the training camp – together with food – to train soldiers from health level 3 to level 4.")
+            }
+         },
+         {
+            name = "tabard_golden",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Golden Tabard
+               purpose = pgettext("europeans_ware", "The golden tabard is an advanced armor of a soldier. It is produced in an armor smithy. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 3 to level 4.")
+            }
+         },
+         {
+            name = "helmet_golden",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Golden Helmet
+               purpose = pgettext("europeans_ware", "The golden helmet is an advanced armor of a soldier. It is produced in an armor smithy. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 4 to level 5.")
+            }
+         },
+         {
+            name = "helmet_warhelm",
+            default_target_quantity = 1,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Warhelm
+               purpose = pgettext("europeans_ware", "The warhelm is the strongest armor an europeans soldier can have. It is produced in an armor smithy. It is produced in an armor smithy and used in a training camp – together with food – to train soldiers from health level 5 to level 6.")
             }
          }
-      }
+      },
+      {
+         -- Weapons and Shields
+         {
+            name = "spear_wooden",
+            default_target_quantity = 32,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Wooden Spear
+               purpose = pgettext("europeans_ware", "This wooden spear is the basic weapon in the europeans military system. It is produced in the tool smithy. In combination with armor or tabard, it is the equipment to fit out young soldiers.")
+            }
+         },
+         {
+            name = "spear_advanced",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Advanced Spear
+               purpose = pgettext("europeans_ware", "This is a advanced spear with a steel tip. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 0 to level 1.")
+            }
+         },
+         {
+            name = "ax_broad",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Broad Ax
+               purpose = pgettext("europeans_ware", "This is an broad ax. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 1 to level 2.")
+            }
+         },
+         {
+            name = "trident_steel",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Steel Trident
+               purpose = pgettext("europeans_ware", "This is a advanced trident with a steel tip. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 2 to level 3.")
+            }
+         },
+         {
+            name = "sword_broad",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Broad Sword
+               purpose = pgettext("europeans_ware", "This is a broad sword. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 3 to level 4.")
+            }
+         },
+         {
+            name = "ax_warriors",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Warrior Ax
+               purpose = pgettext("europeans_ware", "This is a an warriors ax. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 4 to level 5.")
+            }
+         },
+         {
+            name = "trident_heavy_double",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Heavy Double Trident
+               purpose = pgettext("europeans_ware", "This is a heavy double trident. It is produced in a weapon smithy and used in a training camp – together with food – to train soldiers from attack level 5 to level 6.")
+            }
+         },
+         {
+            name = "shield_steel",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Steel Shield
+               purpose = pgettext("europeans_ware", "This steel shield is produced in the armor smithy and used in the dungeon – together with food – to train soldiers from defense level 0 to level 3.")
+            }
+         },
+         {
+            name = "shield_advanced",
+            default_target_quantity = 1,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Advanced Shield
+               purpose = pgettext("europeans_ware", "These advanced shields are used by the best soldiers of the Europeans. They are produced in the armor smithy and used in the big trainingscamp – together with food – to train soldiers from defense level 3 to level 6.")
+            }
+         }
+       }
    },
    -- Workers positions in workers windows.
    -- This also gives us the information which workers the tribe uses.
