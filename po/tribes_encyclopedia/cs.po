@@ -7,13 +7,14 @@
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
+# Ondřej Itřech <vasa5@centrum.cz>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-10 18:58+0000\n"
-"PO-Revision-Date: 2020-11-10 19:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-11-13 06:12+0000\n"
+"PO-Revision-Date: 2020-11-29 08:55+0000\n"
+"Last-Translator: Ondřej Itřech <vasa5@centrum.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -963,7 +964,7 @@ msgctxt "amazons_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Tady najdou tvé dělnice a bojovnice přístřeší. Také se zde uchovává tvé zboží a nářadí."
 
 #. TRANSLATORS: Purpose helptext for an amazon warehouse: Port
 #: ../../data/tribes/initialization/amazons/units.lua:1242
@@ -2398,7 +2399,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Tady najdou tví dělníci a vojáci přístřeší. Také se zde uchovává tvé zboží a nářadí."
 
 #. TRANSLATORS: Purpose helptext for an atlantean warehouse: Port
 #: ../../data/tribes/initialization/atlanteans/units.lua:1353
@@ -2723,7 +2724,7 @@ msgstr "Spřádá pavoučí látku pro budovy, plachty lodí a vesty pro výcvik
 #: ../../data/tribes/initialization/atlanteans/units.lua:1563
 msgctxt "atlanteans_building"
 msgid "Carves precious stones out of the rock in mountain terrain."
-msgstr "Řeže cenné kameny ze skal v horském terénu."
+msgstr "Dobývá drahé kameny ze skal v horském terénu."
 
 #. TRANSLATORS: Purpose helptext for a frisian production site: Coal Mine
 #. TRANSLATORS: Purpose helptext for a frisian production site: Deep Coal Mine
@@ -3543,7 +3544,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Tady najdou tví dělníci a vojáci přístřeší. Také se zde uchovává tvé zboží a nářadí."
 
 #. TRANSLATORS: Lore helptext for a barbarian warehouse: Port
 #: ../../data/tribes/initialization/barbarians/units.lua:1106
@@ -3734,7 +3735,7 @@ msgstr "Lovec si odpočine %s než půjde znovu pracovat."
 msgctxt "barbarians_building"
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
-msgstr ""
+msgstr "\"Miluje zvěř a rád ji chová,<br>stejně jako mi ji rádi jíme a vaříme.\""
 
 #. TRANSLATORS: Lore author helptext for a barbarian production site:
 #. Gamekeeper's Hut
@@ -4328,7 +4329,7 @@ msgstr "Ten samý člověk o týden později připravil všech 244 žulových bl
 #: ../../data/tribes/initialization/barbarians/units.lua:1493
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
-msgstr "Vyřezává žulu ze skal v horském terénu."
+msgstr "Dobývá žulu ze skal v horském terénu."
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/initialization/barbarians/units.lua:1496
@@ -5344,7 +5345,7 @@ msgctxt "empire_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Tady najdou tví dělníci a vojáci přístřeší. Také se zde uchovává tvé zboží a nářadí."
 
 #. TRANSLATORS: Purpose helptext for an empire warehouse: Port
 #: ../../data/tribes/initialization/empire/units.lua:1139
@@ -5404,7 +5405,7 @@ msgstr "Domek lovce potřebuje zvěř ve svém okolí."
 #: ../../data/tribes/initialization/empire/units.lua:1209
 msgctxt "empire_building"
 msgid "Carves marble columns out of marble."
-msgstr "Vyřezává mramorové sloupy z mramoru."
+msgstr "Řeže mramorové sloupy z mramoru."
 
 #. TRANSLATORS: Purpose helptext for an empire production site: Mill
 #: ../../data/tribes/initialization/empire/units.lua:1223
@@ -5538,7 +5539,7 @@ msgstr "Kove kopí pro vojáky a k výcviku jejich útoku ve výcvikovém tábo�
 #: ../../data/tribes/initialization/empire/units.lua:1376
 msgctxt "empire_building"
 msgid "Carves marble and granite out of the rock in mountain terrain."
-msgstr "Vyřezává mramor a žulu  ze skal v horském terénu."
+msgstr "Dobývá mramor a žulu ze skal v horském terénu."
 
 #. TRANSLATORS: Purpose helptext for an empire training site: Arena, part 1
 #. TRANSLATORS: Purpose helptext for an empire training site: Colosseum, part
@@ -5623,7 +5624,7 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Pokud máš nedostatek vojáků pro obsazení nové vojenské budovy, použij tlačítko s šipkou dolů pro snížení kapacity. Můžeš také kliknou na ikonu vojáka a poslat ho tak z budovy pryč."
 
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 2
 #: ../../data/tribes/initialization/frisians/units.lua:88
@@ -6358,7 +6359,7 @@ msgctxt "frisians_building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
 " tools."
-msgstr ""
+msgstr "Tady najdou tví dělníci a vojáci přístřeší. Také se zde uchovává tvé zboží a nářadí."
 
 #. TRANSLATORS: Purpose helptext for a frisian warehouse: Port
 #: ../../data/tribes/initialization/frisians/units.lua:1509
@@ -7497,7 +7498,7 @@ msgstr "Účel:"
 msgid ""
 "This mine will exploit %1%%% of its resources. From there on out, it will "
 "only have a %2%%% chance of finding any more of them."
-msgstr ""
+msgstr "Tento důl vytěží pouze%1%%% svých dostupných zdrojů. Poté bude mít jen%2%%%šanci, že najde nějaké další suroviny."
 
 #. TRANSLATORS: Note helptext for a mine.
 #: ../../data/tribes/scripting/help/building_help.lua:428
@@ -7505,7 +7506,7 @@ msgid ""
 "This mine will exploit all of its resources down to the deepest level. But "
 "even after having done so, it will still have a %1%%% chance of finding some"
 " more of them."
-msgstr ""
+msgstr "Tento důl vytěží všechny své dostupné zdroje. Poté, co se tak stane, bude mít stále %1%%% šanci, že najde i přesto nějaké další suroviny."
 
 #: ../../data/tribes/scripting/help/building_help.lua:436
 #: ../../data/tribes/scripting/help/building_help.lua:656
@@ -7700,13 +7701,13 @@ msgstr "%s nebo lepší"
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool 1 worker uses
 #: ../../data/tribes/scripting/help/building_help.lua:859
 msgid "Worker uses:"
-msgstr ""
+msgstr "Dělník používá:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool more than 1 worker
 #. uses
 #: ../../data/tribes/scripting/help/building_help.lua:862
 msgid "Workers use:"
-msgstr ""
+msgstr "Dělníci používají:"
 
 #. TRANSLATORS: Performance helptext for a building - it hasn't been written
 #. yet.
@@ -7865,7 +7866,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:46
 msgid "Increase game speed by 10x"
-msgstr ""
+msgstr "Zvýšení násobku rychlosti hry o 10"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -7876,11 +7877,11 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Decrease game speed by 10x"
-msgstr ""
+msgstr "Snížení násobku rychlosti hry o 10"
 
 #: ../../data/tribes/scripting/help/controls.lua:50
 msgid "Increase game speed by 0.25x"
-msgstr ""
+msgstr "Zvýšení násobku rychlosti hry o 0,25"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -7891,7 +7892,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Decrease game speed by 0.25x"
-msgstr ""
+msgstr "Snížení násobku rychlosti hry o 0,25"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -7924,17 +7925,17 @@ msgstr "Přepnout statistiky"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'l'
 #: ../../data/tribes/scripting/help/controls.lua:60
 msgid "Toggle soldier health bars and level icons"
-msgstr ""
+msgstr "Přepnout ukazatele zdraví a úrovně vojáků"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'u'
 #: ../../data/tribes/scripting/help/controls.lua:62
 msgid "Toggle building visibility"
-msgstr ""
+msgstr "Přepnout dohled budovy"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'w'
 #: ../../data/tribes/scripting/help/controls.lua:64
 msgid "Toggle workarea overlap indicators"
-msgstr ""
+msgstr "Přepnout překryv pracovního pokrytí"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
 #: ../../data/tribes/scripting/help/controls.lua:68
@@ -7965,45 +7966,45 @@ msgstr "Přepnout statistiky budov"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'x'
 #: ../../data/tribes/scripting/help/controls.lua:78
 msgid "Toggle soldier statistics"
-msgstr ""
+msgstr "Přepnout vojenské statistiky"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'e'
 #: ../../data/tribes/scripting/help/controls.lua:80
 msgid "Toggle seafaring statistics"
-msgstr ""
+msgstr "Přepnout statistiky lodí"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgctxt "hotkey"
 msgid "Arrow keys"
-msgstr ""
+msgstr "Tlačítka šipek"
 
 #: ../../data/tribes/scripting/help/controls.lua:82
 msgid "Move the map"
-msgstr ""
+msgstr "Pohyb na mapě"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgctxt "hotkey"
 msgid "Ctrl + Arrow keys"
-msgstr ""
+msgstr "Ctrl + tlačítka šipek"
 
 #: ../../data/tribes/scripting/help/controls.lua:84
 msgid "Move the map fast"
-msgstr ""
+msgstr "Rychlý pohyb na mapě"
 
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgid "Move the map slowly"
-msgstr ""
+msgstr "Pomalý pohyb na mapě"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:86
 msgctxt "hotkey"
 msgid "Shift + Arrow keys"
-msgstr ""
+msgstr "Shift + tlačítka šipek"
 
 #: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Center main mapview on starting location"
@@ -8041,22 +8042,22 @@ msgstr "Jít na předchozí zapamatovanou pozici"
 #: ../../data/tribes/scripting/help/controls.lua:93
 msgctxt "hotkey"
 msgid ", (comma)"
-msgstr ""
+msgstr ", (čárka)"
 
 #: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Go to previous location"
-msgstr ""
+msgstr "Jít na předchozí pozici"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/tribes/scripting/help/controls.lua:95
 msgctxt "hotkey"
 msgid ". (period)"
-msgstr ""
+msgstr ". (tečka)"
 
 #: ../../data/tribes/scripting/help/controls.lua:95
 msgid "Go to next location"
-msgstr ""
+msgstr "Jít na následující pozici"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -8202,51 +8203,51 @@ msgstr "Delete"
 #. TRANSLATORS: Heading in "Controls" help
 #: ../../data/tribes/scripting/help/controls.lua:131
 msgid "Ship Statistics"
-msgstr ""
+msgstr "Statistika lodí"
 
 #: ../../data/tribes/scripting/help/controls.lua:134
 msgid "Show all ships"
-msgstr ""
+msgstr "Zobrazit všechny lodě"
 
 #: ../../data/tribes/scripting/help/controls.lua:136
 msgid "Show idle ships"
-msgstr ""
+msgstr "Zobrazit nevyužité lodě"
 
 #: ../../data/tribes/scripting/help/controls.lua:138
 msgid "Show ships shipping wares and workers"
-msgstr ""
+msgstr "Zobrazit lodě převážející zboží a dělníky"
 
 #: ../../data/tribes/scripting/help/controls.lua:140
 msgid "Show waiting expeditions"
-msgstr ""
+msgstr "Zobrazit čekající výpravy"
 
 #: ../../data/tribes/scripting/help/controls.lua:142
 msgid "Show scouting expeditions"
-msgstr ""
+msgstr "Zobrazit probíhající výpravy"
 
 #: ../../data/tribes/scripting/help/controls.lua:144
 msgid "Show expeditions that have found a port space or are founding a colony"
-msgstr ""
+msgstr "Zobrazit výpravy, které našly místo pro přístav, nebo zakládají kolonii"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:146
 msgid "Center the map on the selected ship"
-msgstr ""
+msgstr "Vycentruj mapu na vybranou loď"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:148
 msgid "Open the selected ship’s window"
-msgstr ""
+msgstr "Otevřít okno vybrané lodě"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:150
 msgid "Go to the selected ship and open its window"
-msgstr ""
+msgstr "Přemístit se k vybrané lodi a otevřít její okno"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:152
 msgid "Watch the selected ship"
-msgstr ""
+msgstr "Sledovat vybranou loď"
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../data/tribes/scripting/help/format_help.lua:54
@@ -8350,7 +8351,7 @@ msgstr "Budovy"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "Pevné předměty"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -8374,7 +8375,7 @@ msgstr "Císařství"
 
 #: ../../data/tribes/scripting/help/tips.lua:62
 msgid "Frisians"
-msgstr ""
+msgstr "Frísané"
 
 #: ../../data/tribes/scripting/help/tips.lua:67
 msgid "Single Player"
@@ -8394,36 +8395,36 @@ msgstr "Výrobce"
 #. TRANSLATORS: Ware Encyclopedia: 1 ware produced by a productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:120
 msgid "Ware produced:"
-msgstr ""
+msgstr "Vyráběné zboží:"
 
 #. TRANSLATORS: Ware Encyclopedia: More than 1 ware produced by a
 #. productionsite
 #: ../../data/tribes/scripting/help/ware_help.lua:123
 msgid "Wares produced:"
-msgstr ""
+msgstr "Vyráběná zboží:"
 
 #. TRANSLATORS: Ware Encyclopedia: Heading for 1 building and / or worker that
 #. consumes a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:185
 msgid "Consumer"
-msgstr ""
+msgstr "Spotřebitel"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
 #: ../../data/tribes/scripting/help/ware_help.lua:188
 msgid "Consumers"
-msgstr ""
+msgstr "Spotřebitelé"
 
 #. TRANSLATORS: Worker Encyclopedia: 1 worker recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
-msgstr ""
+msgstr "Požadovaný dělník:"
 
 #. TRANSLATORS: Worker Encyclopedia: More than 1 worker recruited by a
 #. productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:82
 msgid "Workers recruited:"
-msgstr ""
+msgstr "Požadovaní dělníci:"
 
 #. TRANSLATORS: Worker Encyclopedia: Heading for 1 building where a worker can
 #. work
@@ -8431,7 +8432,7 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:112
 msgctxt "workerhelp_one_building"
 msgid "Works at"
-msgstr ""
+msgstr "Pracovní místo:"
 
 #. TRANSLATORS: Worker Encyclopedia: A list of more than 1 building where a
 #. worker can work
@@ -8439,19 +8440,19 @@ msgstr ""
 #: ../../data/tribes/scripting/help/worker_help.lua:116
 msgctxt "workerhelp_multiple_buildings"
 msgid "Works at"
-msgstr ""
+msgstr "Pracovní místa:"
 
 #. TRANSLATORS: You can also translate this as 'additional workplace'
 #: ../../data/tribes/scripting/help/worker_help.lua:132
 msgctxt "workerhelp_one_building"
 msgid "Can also work at"
-msgstr ""
+msgstr "Další možné pracovní místo:"
 
 #. TRANSLATORS: You can also translate this as 'additional workplaces'
 #: ../../data/tribes/scripting/help/worker_help.lua:136
 msgctxt "workerhelp_multiple_buildings"
 msgid "Can also work at"
-msgstr ""
+msgstr "Další možná pracovní místa:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:181
