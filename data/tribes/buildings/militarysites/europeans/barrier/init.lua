@@ -14,12 +14,12 @@ descriptions:new_militarysite_type {
         enhancement_cost = {
             planks = 2,
             brick = 2,
-            grout = 2
+            grout = 2,
             marble_column = 1,
             quartz = 1,
             diamond = 1
         },
-        return_on_dismantle_on_enhanced = {
+        enhancement_return_on_dismantle = {
             log = 2,
             granite = 2,
             marble = 1,

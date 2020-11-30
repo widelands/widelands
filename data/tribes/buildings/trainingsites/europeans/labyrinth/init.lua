@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_trainingsite_type {
+descriptions:new_trainingsite_type {
    msgctxt = "europeans_building",
    name = "europeans_labyrinth",
    -- TRANSLATORS: This is a building name used in lists of buildings
@@ -11,7 +11,25 @@ tribes:new_trainingsite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
-   enhancement = "europeans_arena",
+   enhancement = {
+        name = "europeans_arena",
+        enhancement_cost = {
+          planks = 6,
+          brick = 4,
+          grout = 4,
+          marble_column = 4,
+          quartz = 3,
+          diamond = 3
+        },
+        enhancement_return_on_dismantle = {
+          log = 5,
+          granite = 3,
+          marble = 3,
+          quartz = 2,
+          diamond = 2,
+          scrap_metal_mixed = 2
+        },
+   },
 
    buildcost = {
       planks = 10,

@@ -891,186 +891,39 @@ descriptions:new_tribe {
             }
          },
          {
+            name = "europeans_shipwright",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Shipwright
+               purpose = pgettext("europeans_worker", "Works at the shipyard and constructs new ships.")
+            }
+         },
+         {
             name = "europeans_geologist",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Geologist
                purpose = pgettext("europeans_worker", "Discovers resources for mining.")
             }
          },
-      },
-      {
-         -- Collectors
          {
-            name = "europeans_stonemason",
+            name = "europeans_scout",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Stonemason
-               purpose = pgettext("europeans_worker", "Cuts blocks of granite and marble out of rocks in the vicinity.")
+               -- TRANSLATORS: Helptext for an europeans worker: Scout
+               purpose = pgettext("europeans_worker", "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion.")
+               -- (c) WiHack Team 02.01.2010
             }
          },
-         {
-            name = "europeans_carpenter",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carpenter
-               purpose = pgettext("europeans_worker", "Works in the sawmill.")
-            }
-         },
-         {
-            name = "europeans_lumberjack",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Lumberjack
-               purpose = pgettext("europeans_worker", "Fells trees.")
-            }
-         },
-         {
-            name = "europeans_forester",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Forester
-               purpose = pgettext("europeans_worker", "Plants trees.")
-            }
-         },
-         {
-            name = "europeans_shepherd",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Shepherd
-               purpose = pgettext("europeans_worker", "Keeping sheep.")
-            }
-         },
-         {
-            name = "europeans_weaver",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Weaver
-               purpose = pgettext("europeans_worker", "Produces cloth for ships and soldiers.")
-            }
-         },
-         {
-            name = "europeans_shipwright",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Shipwright
-               purpose = pgettext("europeans_worker", "Works at the shipyard and constructs new ships.")
-            }
-         }
-      },
-      {
-         -- Food
-         {
-            name = "europeans_fisher",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Fisher
-               purpose = pgettext("europeans_worker", "Catches fish in the sea.")
-            }
-         },
-         {
-            name = "europeans_hunter",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Hunter
-               purpose = pgettext("europeans_worker", "The hunter brings fresh, raw meat to the colonists.")
-            }
-         },
-         {
-            name = "europeans_farmer",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Farmer
-               purpose = pgettext("europeans_worker", "Plants fields.")
-            }
-         },
-         {
-            name = "europeans_miller",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Miller
-               purpose = pgettext("europeans_worker", "Grinds wheat to produce flour.")
-            }
-         },
-         {
-            name = "europeans_baker",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Baker
-               purpose = pgettext("europeans_worker", "Bakes bread for workers.")
-            }
-         },
-         {
-            name = "europeans_brewer",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Brewer
-               purpose = pgettext("europeans_worker", "Produces beer.")
-            }
-         },
-         {
-            name = "europeans_vinefarmer",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Vine Farmer
-               purpose = pgettext("europeans_worker", "Grows grapevines.")
-            }
-         },
-         {
-            name = "europeans_vintner",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Vintner
-               purpose = pgettext("europeans_worker", "Produces wine.")
-            }
-         },
-         {
-            name = "europeans_pigbreeder",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Pig Breeder
-               purpose = pgettext("europeans_worker", "Breeds pigs.")
-            }
-         },
-         {
-            name = "europeans_innkeeper",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Innkeeper
-               purpose = pgettext("europeans_worker", "Produces food for miners.")
-            }
-         }
-      },
-      {
-         -- Mining
-         {
-            name = "europeans_miner",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Miner
-               purpose = pgettext("europeans_worker", "Works deep in the mines to obtain coal, iron, gold or marble.")
-            }
-         },
-         {
-            name = "europeans_miner_master",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Master Miner
-               purpose = pgettext("europeans_worker", "Works deep in the mines to obtain coal, iron, gold or marble.")
-            }
-         },
-         {
-            name = "europeans_charcoal_burner",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Charcoal Burner
-               purpose = pgettext("europeans_worker", "Burns coal.")
-            }
-         },
-         {
-            name = "europeans_smelter",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Smelter
-               purpose = pgettext("europeans_worker", "Smelts ores into metal.")
-            }
-         }
-      },
-      {
-         -- Tools
-         {
-            name = "europeans_toolsmith",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Toolsmith
-               purpose = pgettext("europeans_worker", "Produces tools for the workers.")
-            }
-         }
-      },
-      {
-         -- Military
          {
             name = "europeans_recruit",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Recruit
                purpose = pgettext("europeans_worker", "Eager to become a soldier and defend his tribe!")
+            }
+         },
+         {
+            name = "europeans_trainer",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Trainer
+               purpose = pgettext("europeans_worker", "Trains the soldiers.")
             }
          },
          {
@@ -1082,35 +935,22 @@ descriptions:new_tribe {
                purpose = pgettext("europeans_worker", "Defend and Conquer!")
             }
          },
-         {
-            name = "europeans_trainer",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Trainer
-               purpose = pgettext("europeans_worker", "Trains the soldiers.")
-            }
-         },
-         {
-            name = "europeans_weaponsmith",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Weaponsmith
-               purpose = pgettext("europeans_worker", "Produces weapons for the soldiers.")
-            }
-         },
-         {
-            name = "europeans_armorsmith",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Armorsmith
-               purpose = pgettext("europeans_worker", "Produces armor for the soldiers.")
-            }
-         },
-         {
-            name = "europeans_scout",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Scout
-               purpose = pgettext("europeans_worker", "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion.")
-               -- (c) WiHack Team 02.01.2010
-            }
-         }
+
+      },
+      {
+         -- Collectors
+      },
+      {
+         -- Food
+      },
+      {
+         -- Mining
+      },
+      {
+         -- Tools
+      },
+      {
+         -- Military
       }
    },
 
@@ -1843,283 +1683,12 @@ descriptions:new_tribe {
       },
 
       -- Small
-      {
-         name = "europeans_quarry",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Quarry
-            purpose = pgettext("europeans_building", "Cuts blocks of granite and marble out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for an europeans production site: Quarry
-            note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area.")
-         }
-      },
-      {
-         name = "europeans_lumberjacks_house",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Lumberjack's House
-            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
-            -- TRANSLATORS: Note helptext for an europeans production site: Lumberjack's House
-            note = pgettext("europeans_building", "The lumberjack’s house needs trees to fell within the work area.")
-         }
-      },
-      {
-         name = "europeans_foresters_house",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Forester's House
-            purpose = pgettext("building", "Plants trees in the surrounding area."),
-            -- TRANSLATORS: Note helptext for an europeans production site: Forester's House
-            note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
-         }
-      },
-      {
-         name = "europeans_fishers_house",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Fisher's House
-            purpose = pgettext("europeans_building", "Fishes on the coast near the fisher’s house."),
-            -- TRANSLATORS: Note helptext for an europeans production site: Fisher's House
-            note = pgettext("europeans_building", "The fisher’s house needs water full of fish within the work area.")
-         }
-      },
-      {
-         name = "europeans_hunters_house",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Hunter's House
-            purpose = pgettext("building", "Hunts animals to produce meat."),
-            -- TRANSLATORS: Note helptext for an europeans production site: Hunter's House
-            note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
-         }
-      },
-      {
-         name = "europeans_well",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
-         }
-      },
-      {
-         name = "europeans_scouts_house",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Scout's House
-            purpose = pgettext("building", "Explores unknown territory.")
-         }
-      },
 
       -- Medium
-      {
-         name = "europeans_stonemasons_house",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Stonemason's House
-            purpose = pgettext("europeans_building", "Carves marble columns out of marble.")
-         }
-      },
-      {
-         name = "europeans_sawmill",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
-            purpose = pgettext("building", "Saws logs to produce planks.")
-         }
-      },
-      {
-         name = "europeans_mill",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
-            purpose = pgettext("building", "Grinds wheat to produce flour."),
-            -- TRANSLATORS: Performance helptext for an europeans production site: Mill
-            performance = pgettext("europeans_building", "The miller needs %1% on average to grind wheat into a sack of flour."):bformat(format_seconds(19))
-         }
-      },
-      {
-         name = "europeans_bakery",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Bakery
-            purpose = pgettext("europeans_building", "Bakes bread for soldiers and miners alike."),
-            -- TRANSLATORS: Performance helptext for an europeans production site: Bakery
-            performance = pgettext("europeans_building", "The baker needs %1% on average to bake a loaf of bread."):bformat(format_seconds(34))
-         }
-      },
-      {
-         name = "europeans_brewery",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Brewery
-            purpose = pgettext("building", "Produces beer to keep the miners strong and happy."),
-            -- TRANSLATORS: Performance helptext for an europeans production site: Brewery
-            performance = pgettext("europeans_building", "The brewer needs %1% on average to brew a vat of beer."):bformat(format_minutes_seconds(1, 5))
-         }
-      },
-      {
-         name = "europeans_vineyard",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Vineyard
-            purpose = pgettext("europeans_building", "Plants grapevines and harvests grapes.")
-         }
-      },
-      {
-         name = "europeans_winery",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Winery
-            purpose = pgettext("europeans_building", "Produces wine.")
-         }
-      },
-      {
-         name = "europeans_tavern",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Tavern
-            purpose = pgettext("building", "Prepares rations to feed the scouts and miners."),
-            -- TRANSLATORS: Performance helptext for an europeans production site: Tavern
-            performance = pgettext("europeans_building", "The innkeeper needs %1% on average to prepare a ration."):bformat(format_seconds(36))
-         }
-      },
-      {
-         name = "europeans_inn",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Inn
-            purpose = pgettext("europeans_building", "Prepares rations for scouts and rations and snacks to feed the miners in all mines."),
-            -- TRANSLATORS: Performance helptext for an europeans production site: Inn
-            performance = pgettext("europeans_building", "The innkeeper needs %1% on average to prepare a ration and a meal. If the economy doesn’t need both, the innkeeper needs %2% on average to prepare one ration or one meal."):bformat(format_minutes_seconds(1, 25), format_seconds(48))
-         }
-      },
-      {
-         name = "europeans_charcoal_kiln",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
-         }
-      },
-      {
-         name = "europeans_smelting_works",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
-            purpose = pgettext("building", "Smelts iron ore into iron and gold ore into gold.")
-         }
-      },
-      {
-         name = "europeans_toolsmithy",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
-         }
-      },
-      {
-         name = "europeans_armorsmithy",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Armor Smithy
-            purpose = pgettext("europeans_building", "Forges armor and helmets that are used for training soldiers’ health in the training camp.")
-         }
-      },
-      {
-         name = "europeans_barracks",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Barracks
-            purpose = pgettext("europeans_building", "Equips recruits and trains them as soldiers.")
-         }
-      },
 
       -- Big
-      {
-         name = "europeans_donkeyfarm",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Donkey Farm
-            purpose = pgettext("europeans_building", "Breeds cute and helpful donkeys for adding them to the transportation system.")
-         }
-      },
-      {
-         name = "europeans_farm",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Farm
-            purpose = pgettext("building", "Sows and harvests wheat."),
-            -- TRANSLATORS: Performance helptext for an europeans production site: Farm
-            performance = pgettext("europeans_building", "The farmer needs %1% on average to sow and harvest a sheaf of wheat."):bformat(format_minutes_seconds(1, 20))
-         }
-      },
-      {
-         name = "europeans_piggery",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Piggery
-            purpose = pgettext("europeans_building", "Breeds pigs for their meat."),
-            -- TRANSLATORS: Performance helptext for an europeans production site: Piggery
-            performance = pgettext("europeans_building", "The pig breeder needs %1% on average to raise and slaughter a pig."):bformat(format_minutes(1))
-         }
-      },
-      {
-         name = "europeans_sheepfarm",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Sheep Farm
-            purpose = pgettext("europeans_building", "Keeps sheep for their wool.")
-         }
-      },
-      {
-         name = "europeans_weaving_mill",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Weaving Mill
-            purpose = pgettext("europeans_building", "Weaves cloth out of wool.")
-         }
-      },
-      {
-         name = "europeans_weaponsmithy",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Weapon Smithy
-            purpose = pgettext("europeans_building", "Forges spears to equip the soldiers and to train their attack in the training camp.")
-         }
-      },
 
       -- Mines
-      {
-         name = "europeans_marblemine",
-         helptexts = {
-            purpose = {
-               -- TRANSLATORS: Purpose helptext for an europeans production site: Marble Mine
-               pgettext("europeans_building", "Carves marble and granite out of the rock in mountain terrain.")
-            }
-         }
-      },
-      {
-         name = "europeans_marblemine_deep",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Marble Mine
-            purpose = pgettext("europeans_building", "Carves marble and granite out of the rock in mountain terrain.")
-         }
-      },
-      {
-         name = "europeans_coalmine",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
-         }
-      },
-      {
-         name = "europeans_coalmine_deep",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain."),
-         }
-      },
-      {
-         name = "europeans_ironmine",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         }
-      },
-      {
-         name = "europeans_ironmine_deep",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         }
-      },
-      {
-         name = "europeans_goldmine",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         }
-      },
-      {
-         name = "europeans_goldmine_deep",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         }
-      },
 
       -- Training Sites
       {

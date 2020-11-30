@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
+descriptions:new_militarysite_type {
    msgctxt = "europeans_building",
    name = "europeans_tower_high",
    -- TRANSLATORS: This is a building name used in lists of buildings
@@ -22,7 +22,7 @@ tribes:new_militarysite_type {
             quartz = 2,
             diamond = 2
         },
-        return_on_dismantle_on_enhanced = {
+        enhancement_return_on_dismantle = {
             log = 2,
             granite = 2,
             marble = 2,

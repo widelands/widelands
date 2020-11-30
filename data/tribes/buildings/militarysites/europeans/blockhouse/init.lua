@@ -2,7 +2,7 @@ push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
 
-tribes:new_militarysite_type {
+descriptions:new_militarysite_type {
    msgctxt = "europeans_building",
    name = "europeans_blockhouse",
    -- TRANSLATORS: This is a building name used in lists of buildings
@@ -13,7 +13,7 @@ tribes:new_militarysite_type {
    vision_range = 14,
    
    enhancement = {
-        name = "europeans_blockhouse",
+        name = "europeans_sentry",
         enhancement_cost = {
             planks = 1,
             brick = 1,
@@ -21,7 +21,7 @@ tribes:new_militarysite_type {
             quartz = 1,
             diamond = 1
         },
-        return_on_dismantle_on_enhanced = {
+        enhancement_return_on_dismantle = {
             log = 1,
             granite = 1,
             quartz = 1,
