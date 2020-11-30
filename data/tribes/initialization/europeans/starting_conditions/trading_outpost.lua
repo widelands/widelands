@@ -4,7 +4,7 @@
 
 include "scripting/infrastructure.lua"
 
-set_textdomain("tribes")
+push_textdomain("tribes")
 
 return {
    -- TRANSLATORS: This is the name of a starting condition

@@ -3,11 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_productionsite_type {
-   msgctxt = "europeans_building",
    name = "europeans_shipyard",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("europeans_building", "Shipyard"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    map_check = {"seafaring"},
@@ -53,10 +51,6 @@ descriptions:new_productionsite_type {
       prohibited_till = 3600
    },
 
-   indicate_workarea_overlaps = {
-      europeans_shipyard = false,
-   },
-
    working_positions = {
       europeans_shipwright = 1
    },
@@ -68,7 +62,7 @@ descriptions:new_productionsite_type {
    },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
@@ -84,15 +78,15 @@ descriptions:new_productionsite_type {
             "return=skipped when not site has log",
             "return=skipped when not site has planks",
             "return=skipped when not site has spidercloth",
-            "sleep=10000",
-            "construct=atlanteans_shipconstruction buildship 6",
-            "sleep=10000",
+            "sleep=duration:10s",
+            "construct=europeans_shipconstruction worker:buildship radius:6",
+            "sleep=duration:10s",
          }
       },
       ship_preparation = {
          descname = _"working",
          actions = {
-            "animate=working 35000",
+            "animate=working duration:35s",
          }
       },
    },

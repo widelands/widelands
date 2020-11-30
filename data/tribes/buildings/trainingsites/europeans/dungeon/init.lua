@@ -3,11 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_trainingsite_type {
-   msgctxt = "europeans_building",
    name = "europeans_dungeon",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("europeans_building", "Dungeon"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -52,21 +50,13 @@ descriptions:new_trainingsite_type {
       { name = "smoked_meat", amount = 6 },
       { name = "shield_steel", amount = 4 }
    },
-   outputs = {
-      "europeans_soldier",
-      "scrap_iron",
-   },
    
    ["soldier defense"] = {
-      min_level = 0,
-      max_level = 2,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"europeans_bread"}
       },
-      weapons = {
-         "shield_steel"
-      }
+      weapons = {"shield_steel"}
    },
 
    programs = {
@@ -74,8 +64,8 @@ descriptions:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
-            "checksoldier=soldier defense 9" -- dummy check to get sleep rated as skipped - else it will change statistics
+            "sleep=duration:5s",
+            "return=skipped",
          }
       },  
       upgrade_soldier_defense_0 = {
@@ -83,11 +73,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 0 to level 1"),
          actions = {
             "return=skipped when economy needs shield_steel",
-            "checksoldier=soldier defense 0", -- Fails when aren't any soldier of level 0 defense
-            "sleep=90000",
-            "checksoldier=soldier defense 0", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier:defense level:0", -- Fails when aren't any soldier of level 0 defense
+            "sleep=duration:90s",
+            "checksoldier=soldier:defense level:0", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat shield_steel",
-            "train=soldier defense 0 1",
+            "train=soldier:defense level:1",
             "produce=scrap_iron"
          }
       },
@@ -95,22 +85,22 @@ descriptions:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("europeans_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
-            "checksoldier=soldier defense 1", -- Fails when aren't any soldier of level 0 defense
-            "sleep=90000",
-            "checksoldier=soldier defense 1", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier:defense level:1", -- Fails when aren't any soldier of level 0 defense
+            "sleep=duration:90s",
+            "checksoldier=soldier:defense level:1", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat",
-            "train=soldier defense 1 2"
+            "train=soldier:defense level:2"
          }
       },
       upgrade_soldier_defense_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("europeans_building", "upgrading soldier defense from level 2 to level 3"),
          actions = {
-            "checksoldier=soldier defense 2", -- Fails when aren't any soldier of level 0 defense
-            "sleep=90000",
-            "checksoldier=soldier defense 2", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier:defense level:2", -- Fails when aren't any soldier of level 0 defense
+            "sleep=duration:90s",
+            "checksoldier=soldier:defense level:2", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat",
-            "train=soldier defense 2 3"
+            "train=soldier:defense level:3"
          }
       },
    },

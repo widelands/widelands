@@ -3,11 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_trainingsite_type {
-   msgctxt = "europeans_building",
    name = "europeans_trainingscamp_big",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("europeans_building", "Big Trainingscamp"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -57,41 +55,29 @@ descriptions:new_trainingsite_type {
       { name = "ax_warriors", amount = 4 },
       { name = "trident_heavy_double", amount = 4 },
    },
-   outputs = {
-      "empire_soldier",
-      "scrap_metal_mixed",
-   },
 
    ["soldier defense"] = {
-      min_level = 3,
-      max_level = 5,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"europeans_bread"}
       },
-      weapons = {
-        "shield_advanced"
-      }
+      weapons = {"shield_advanced"}
    },
 
    ["soldier attack"] = {
-      min_level = 4,
-      max_level = 5,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"europeans_bread"}
       },
-      weapons = {
-         "ax_warriors", "trident_heavy_double"
-      }
+      weapons = {"ax_warriors", "trident_heavy_double"}
    },
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
-            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "sleep=duration:5s",
+            "return=skipped",
          }
       },
       upgrade_soldier_defense_3 = {
@@ -99,11 +85,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 3 to level 4"),
          actions = {
             "return=skipped when economy needs shield_advanced",
-            "checksoldier=soldier defense 3", -- Fails when aren't any soldier of level 0 defense
-            "sleep=60000",
-            "checksoldier=soldier defense 3", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier:defense level:3", -- Fails when aren't any soldier of level 0 defense
+            "sleep=duration:60s",
+            "checksoldier=soldier:defense level:3", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
-            "train=soldier defense 3 4",
+            "train=soldier:defense level:4",
             "produce=scrap_metal_mixed"
          }
       },
@@ -112,11 +98,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 4 to level 5"),
          actions = {
             "return=skipped when economy needs shield_advanced",
-            "checksoldier=soldier defense 4", -- Fails when aren't any soldier of level 0 defense
-            "sleep=60000",
-            "checksoldier=soldier defense 4", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier:defense level:4", -- Fails when aren't any soldier of level 0 defense
+            "sleep=duration:60s",
+            "checksoldier=soldier:defense level:4", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
-            "train=soldier defense 4 5",
+            "train=soldier:defense level:5",
             "produce=scrap_metal_mixed"
          }
       },
@@ -125,11 +111,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 5 to level 6"),
          actions = {
             "return=skipped when economy needs shield_advanced",
-            "checksoldier=soldier defense 5", -- Fails when aren't any soldier of level 0 defense
-            "sleep=60000",
-            "checksoldier=soldier defense 5", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier:defense level:5", -- Fails when aren't any soldier of level 0 defense
+            "sleep=duration:60s",
+            "checksoldier=soldier:defense level:5", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
-            "train=soldier defense 5 6",
+            "train=soldier:defense level:6",
             "produce=scrap_metal_mixed"
          }
       },
@@ -138,11 +124,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
             "return=skipped when economy needs ax_warriors",
-            "checksoldier=soldier attack 4",
-            "sleep=60000",
-            "checksoldier=soldier attack 4",
+            "checksoldier=soldier:attack level:4",
+            "sleep=duration:60s",
+            "checksoldier=soldier:attack level:4",
             "consume=europeans_bread smoked_fish,smoked_meat ax_warriors",
-            "train=soldier attack 4 5",
+            "train=soldier:attack level:5",
             "produce=scrap_metal_mixed:2"
          }
       },
@@ -151,11 +137,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier attack from level 5 to level 6"),
          actions = {
             "return=skipped when economy needs trident_heavy_double",
-            "checksoldier=soldier attack 5",
-            "sleep=60000",
-            "checksoldier=soldier attack 5",
+            "checksoldier=soldier:attack level:5",
+            "sleep=duration:60s",
+            "checksoldier=soldier:attack level:5",
             "consume=europeans_bread smoked_fish,smoked_meat trident_heavy_double",
-            "train=soldier attack 5 6",
+            "train=soldier:attack level:6",
             "produce=scrap_metal_mixed:2"
          }
       },

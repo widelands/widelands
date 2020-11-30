@@ -1686,24 +1686,6 @@ descriptions:new_tribe {
 
       -- Medium
       {
-         name = "europeans_ferry_yard",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Ferry Yard
-            purpose = pgettext("building", "Builds ships."),
-            -- TRANSLATORS: Note helptext for an europeans production site: Ferry Yard
-            note = pgettext("building", "Needs water nearby.")
-         }
-      },
-      {
-         name = "europeans_ship_yard",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Ship Yard
-            purpose = pgettext("building", "Builds ferries."),
-            -- TRANSLATORS: Note helptext for an europeans production site: Ship Yard
-            note = pgettext("building", "Needs water nearby.")
-         }
-      },
-      {
          name = "europeans_barracks",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire production site: Barracks

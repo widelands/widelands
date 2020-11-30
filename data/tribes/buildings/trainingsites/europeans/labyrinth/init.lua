@@ -3,11 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_trainingsite_type {
-   msgctxt = "europeans_building",
    name = "europeans_labyrinth",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("europeans_building", "Labyrinth"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
@@ -72,17 +70,12 @@ descriptions:new_trainingsite_type {
       { name = "beer", amount = 6 },
       { name = "mead", amount = 6 }
    },
-   outputs = {
-      "europeans_soldier"
-   },
 
    ["soldier evade"] = {
-      min_level = 0,
-      max_level = 1,
       food = {
-         {"smoked_fish", "smoked_meat"},
-       {"europeans_bread"},
-       {"beer", "mead"}
+        {"smoked_fish", "smoked_meat"},
+        {"europeans_bread"},
+        {"beer", "mead"}
       }
    },
 
@@ -91,8 +84,8 @@ descriptions:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
-            "checksoldier=soldier evade 9" -- dummy check to get sleep rated as skipped - else it will change statistics
+            "sleep=duration:5s",
+            "return=skipped",
          }
       },
       upgrade_soldier_evade_0 = {
@@ -100,11 +93,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
             "return=skipped when economy needs beer",
-            "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
-            "sleep=90000",
-            "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
+            "sleep=duration:90s",
+            "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
             "consume=europeans_bread smoked_fish,smoked_meat beer:3",
-            "train=soldier evade 0 1"
+            "train=soldier:evade level:1"
          }
       },
       upgrade_soldier_evade_1 = {
@@ -112,11 +105,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
             "return=skipped when economy needs mead",
-            "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
-            "sleep=90000",
-            "checksoldier=soldier evade 1", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier:evade level:1", -- Fails when aren't any soldier of level 1 evade
+            "sleep=duration:90s",
+            "checksoldier=soldier:evade level:1", -- Because the soldier can be expelled by the player
             "consume=europeans_bread:2 smoked_fish,smoked_meat:2 mead:3",
-            "train=soldier evade 1 2"
+            "train=soldier:evade level:2"
          }
       },
    },

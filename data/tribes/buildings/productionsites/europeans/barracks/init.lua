@@ -3,11 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_productionsite_type {
-   msgctxt = "europeans_building",
    name = "europeans_barracks",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("europeans_building", "Barracks"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
 
@@ -60,21 +58,18 @@ descriptions:new_productionsite_type {
       { name = "armor", amount = 4 },
       { name = "tabard", amount = 4 }
    },
-   outputs = {
-      "europeans_soldier",
-   },
 
    programs = {
-      work = {
+      main = {
          -- TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
          descname = pgettext("atlanteans_building", "recruiting soldier"),
          actions = {
             "return=skipped unless economy needs europeans_soldier",
-            "sleep=30000",
+            "sleep=duration:30s",
             "return=skipped when not site has spear_wooden",
             "return=skipped when not site has armor and not site has tabard",
             "consume=armor,tabard spear_wooden europeans_recruit",
-            "animate=working 30000",
+            "animate=working duration:30s",
             "recruit=europeans_soldier"
          }
       },

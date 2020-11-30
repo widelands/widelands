@@ -3,11 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_trainingsite_type {
-   msgctxt = "europeans_building",
    name = "europeans_trainingscamp_basic",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("europeans_building", "Basic Trainingscamp"),
-   helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
    
@@ -57,29 +55,22 @@ descriptions:new_trainingsite_type {
       { name = "ax_broad", amount = 2 }
    },
 
-   outputs = {
-      "europeans_soldier",
-      "scrap_iron"
-   },
 
    ["soldier attack"] = {
-      min_level = 0,
-      max_level = 1,
       food = {
          {"smoked_fish", "smoked_meat"},
          {"europeans_bread"}
       },
-      weapons = {
-         "spear_advanced", "ax_broad"
-      }
+      weapons = {"spear_advanced", "ax_broad"}
    },
+   
    programs = {
       sleep = {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=5000",
-            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "sleep=duration:5s",
+            "return=skipped",
          }
       },
       upgrade_soldier_attack_0 = {
@@ -87,11 +78,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
             "return=skipped when economy needs spear",
-            "checksoldier=soldier attack 0",
-            "sleep=90000",
-            "checksoldier=soldier attack 0",
+            "checksoldier=soldier:attack level:0",
+            "sleep=duration:90s",
+            "checksoldier=soldier:attack level:0",
             "consume=europeans_bread smoked_fish,smoked_meat spear_advanced",
-            "train=soldier attack 0 1",
+            "train=soldier:attack level:1",
             "produce=scrap_iron"
          }
       },
@@ -100,11 +91,11 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
             "return=skipped when economy needs spear_advanced",
-            "checksoldier=soldier attack 1",
-            "sleep=90000",
-            "checksoldier=soldier attack 1",
+            "checksoldier=soldier:attack level:1",
+            "sleep=duration:90s",
+            "checksoldier=soldier:attack level:1",
             "consume=europeans_bread smoked_fish,smoked_meat ax_broad",
-            "train=soldier attack 1 2",
+            "train=soldier:attack level:2",
             "produce=scrap_iron"
          }
       },
