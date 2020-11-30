@@ -1683,6 +1683,27 @@ descriptions:new_tribe {
       },
 
       -- Small
+      {
+         name = "europeans_well_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            purpose = pgettext("building", "Draws water out of the deep.")
+         }
+      },
+      {
+         name = "europeans_well_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            purpose = pgettext("building", "Draws water out of the deep.")
+         }
+      },
+      {
+         name = "europeans_well_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            purpose = pgettext("building", "Draws water out of the deep.")
+         }
+      },
 
       -- Medium
       {
