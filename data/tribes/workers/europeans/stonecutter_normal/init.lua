@@ -19,8 +19,8 @@ descriptions:new_worker_type {
       cut_granite = {
          "findobject=attrib:rocks radius:8",
          "walk=object",
-         "playsound=sound/europeans/cutting/stonecutter priority:50% allow_multiple",
-         "animate=hacking duration:15s000ms",
+         "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
+         "animate=hacking duration:15s",
          "callobject=shrink",
          "createware=granite",
          "return"
@@ -28,8 +28,8 @@ descriptions:new_worker_type {
       cut_marble = {
          "findobject=attrib:rocks radius:8",
          "walk=object",
-         "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
-         "animate=hack duration:15s000ms",
+         "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
+         "animate=hacking duration:15s",
          "callobject=shrink",
          "createware=marble",
          "return"

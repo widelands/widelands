@@ -29,7 +29,7 @@ descriptions:new_worker_type {
       fish_in_pond = {
          "findobject=attrib:pond_mature radius:6",
          "walk=object",
-         "animate=fishing duration:12s",
+         "animate=fish duration:12s",
          "callobject=fall_dry",
          "createware=fish",
          "return"

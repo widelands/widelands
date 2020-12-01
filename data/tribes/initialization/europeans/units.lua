@@ -590,7 +590,7 @@ descriptions:new_tribe {
             preciousness = 1,
             helptexts = {
                -- TRANSLATORS: Helptext for a europeans ware: Needles
-               purpose = pgettext("europeans_ware", "Needles are used by seamstresses to sew cloth.")
+               purpose = pgettext("europeans_ware", "Needles are used by armorsmithy to produce armor.")
             }
          }
       },

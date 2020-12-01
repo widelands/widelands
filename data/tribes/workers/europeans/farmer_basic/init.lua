@@ -54,7 +54,7 @@ descriptions:new_worker_type {
          "findspace=size:any radius:2 space",
          "walk=coords",
          "animate=plant duration:10s",
-         "plant=attrib:seed_grape",
+         "plant=attrib:seed_grapes",
          "animate=plant duration:10s",
          "return"
       },
@@ -93,7 +93,7 @@ descriptions:new_worker_type {
          "return"
       },
       harvest_berrybush = {
-         "findobject=attrib:ripe_berrybush radius:2",
+         "findobject=attrib:ripe_bush radius:2",
          "walk=object",
          "playsound=sound/farm/scythe priority:70% allow_multiple",
          "animate=harvest duration:10s",
@@ -123,7 +123,7 @@ descriptions:new_worker_type {
          "return"
       },
       harvest_grape = {
-         "findobject=attrib:ripe_grape radius:2",
+         "findobject=attrib:ripe_grapes radius:2",
          "walk=object",
          "playsound=sound/farm/scythe priority:70% allow_multiple",
          "animate=harvest duration:10s",

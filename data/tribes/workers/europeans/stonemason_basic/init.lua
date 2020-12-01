@@ -3,9 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_worker_type {
-   name = "europeans_stonecutter_basic",
+   name = "europeans_stonemason_basic",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("europeans_worker", "Basic Stonecutter"),
+   descname = pgettext("europeans_worker", "Basic Stonemason"),
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,

@@ -3,9 +3,9 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_worker_type {
-   name = "europeans_stonecutter_normal",
+   name = "europeans_stonemason_normal",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext("europeans_worker", "Normal Stonecutter"),
+   descname = pgettext("europeans_worker", "Normal Stonemason"),
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
@@ -21,8 +21,8 @@ descriptions:new_worker_type {
       cut_granite = {
          "findobject=attrib:rocks radius:8",
          "walk=object",
-         "playsound=sound/europeans/cutting/stonecutter priority:50% allow_multiple",
-         "animate=hacking duration:15s000ms",
+         "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
+         "animate=hacking duration:15s",
          "callobject=shrink",
          "createware=granite",
          "return"
@@ -30,8 +30,8 @@ descriptions:new_worker_type {
       cut_marble = {
          "findobject=attrib:rocks radius:8",
          "walk=object",
-         "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
-         "animate=hack duration:15s000ms",
+         "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
+         "animate=hacking duration:15s",
          "callobject=shrink",
          "createware=marble",
          "return"

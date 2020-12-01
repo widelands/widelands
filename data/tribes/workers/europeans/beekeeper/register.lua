@@ -1,3 +1,3 @@
 return {
-   frisians_beekeeper = {},
+   europeans_beekeeper = {},
 }

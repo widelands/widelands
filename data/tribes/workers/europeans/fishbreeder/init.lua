@@ -26,7 +26,7 @@ descriptions:new_worker_type {
       breed_in_pond = {
          "findobject=attrib:pond_dry radius:8",
          "walk=object",
-         "animate=release duration:2s",
+         "animate=freeing duration:2s",
          "callobject=with_fish",
          "return"
       }

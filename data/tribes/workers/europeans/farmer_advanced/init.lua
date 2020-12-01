@@ -54,7 +54,7 @@ descriptions:new_worker_type {
          "findspace=size:any radius:4 space",
          "walk=coords",
          "animate=plant duration:6s",
-         "plant=attrib:seed_grape",
+         "plant=attrib:seed_grapes",
          "animate=plant duration:6s",
          "return"
       },
@@ -93,7 +93,7 @@ descriptions:new_worker_type {
          "return"
       },
       harvest_berrybush = {
-         "findobject=attrib:ripe_berrybush radius:4",
+         "findobject=attrib:ripe_bush radius:4",
          "walk=object",
          "playsound=sound/farm/scythe priority:70% allow_multiple",
          "animate=harvest duration:6s",
@@ -123,7 +123,7 @@ descriptions:new_worker_type {
          "return"
       },
       harvest_grape = {
-         "findobject=attrib:ripe_grape radius:4",
+         "findobject=attrib:ripe_grapes radius:4",
          "walk=object",
          "playsound=sound/farm/scythe priority:70% allow_multiple",
          "animate=harvest duration:6s",
@@ -168,17 +168,17 @@ descriptions:new_worker_type {
       idle = {
          hotspot = { 10, 23 }
       },
-      planting = {
+      plant = {
          basename = "plant",
          hotspot = { 14, 25 },
          fps = 10
       },
-      harvesting = {
+      harvest = {
          basename = "harvest",
          hotspot = { 19, 24 },
          fps = 10
       },
-      gathering = {
+      gather = {
          basename = "gather",
          hotspot = { 10, 23 },
          fps = 5

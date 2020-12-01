@@ -19,7 +19,7 @@ descriptions:new_worker_type {
       harvest = {
          "findobject=attrib:tree radius:14",
          "walk=object",
-         "playsound=sound/europeans/saw/sawing priority:80% allow_multiple",
+         "playsound=sound/atlanteans/saw/sawing priority:80% allow_multiple",
          "animate=sawing duration:12s",
          "playsound=sound/woodcutting/tree_falling priority:100%",
          "callobject=fall",
