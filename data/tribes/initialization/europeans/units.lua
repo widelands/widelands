@@ -2112,12 +2112,66 @@ descriptions:new_tribe {
             purpose = pgettext("building", "Draws water out of the deep.")
          }
       },
+      {
+         name = "europeans_lumberjacks_house_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s Hut
+            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
+            -- TRANSLATORS: Note helptext for a barbarian production site: Lumberjack_s Hut
+            note = pgettext("europeans_building", "The lumberjack’s hut needs trees to fell within the work area."),
+         }
+      },
+      {
+         name = "europeans_lumberjacks_house_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Woodcutter's House
+            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
+            -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
+            note = pgettext("europeans_building", "The woodcutter’s house needs trees to fell within the work area.")
+         }
+      },
+      {
+         name = "europeans_lumberjacks_house_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Lumberjack's House
+            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Lumberjack's House
+            note = pgettext("europeans_building", "The lumberjack’s house needs trees to fell within the work area.")
+         }
+      },
+      {
+         name = "europeans_foresters_house_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
+            purpose = pgettext("building", "Plants trees in the surrounding area."),
+            -- TRANSLATORS: Note helptext for a barbarian production site: Ranger's Hut
+            note = pgettext("europeans_building", "The ranger’s hut needs free space within the work area to plant the trees."),
+         }
+      },
+      {
+         name = "europeans_foresters_house_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Forester's House
+            purpose = pgettext("building", "Plants trees in the surrounding area."),
+            -- TRANSLATORS: Note helptext for an atlantean production site: Forester's House
+            note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
+         }
+      },
+      {
+         name = "europeans_foresters_house_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Forester's House
+            purpose = pgettext("building", "Plants trees in the surrounding area."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Forester's House
+            note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
+         }
+      },
 
       -- Medium
       {
          name = "europeans_barracks",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an empire production site: Barracks
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Barracks
             purpose = pgettext("europeans_building", "Equips recruits and trains them as soldiers.")
          }
       },
