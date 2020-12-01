@@ -1318,21 +1318,21 @@ descriptions:new_tribe {
             name = "europeans_smoker_basic",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Smoking fish and meat.")
             }
          },
          {
             name = "europeans_smoker_normal",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Smoking fish and meat.")
             }
          },
          {
             name = "europeans_smoker_advanced",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Smoking fish and meat.")
             }
          }
       },
