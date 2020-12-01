@@ -563,6 +563,15 @@ descriptions:new_tribe {
             }
          },
          {
+            name = "buckets",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an atlantean ware: Buckets
+               purpose = pgettext("europeans_ware", "Big buckets for the forester and the fish breeder – produced by the toolsmith.")
+            }
+         },
+         {
             name = "fire_tongs",
             default_target_quantity = 2,
             preciousness = 1,
@@ -682,15 +691,6 @@ descriptions:new_tribe {
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Basket
                purpose = pgettext("europeans_ware", "This basket is needed by the farmer for harvesting the fruits and grapes and needed by gamekeeper. It is produced by the toolsmith.")
-            }
-         },
-         {
-            name = "buckets",
-            default_target_quantity = 2,
-            preciousness = 0,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Buckets
-               purpose = pgettext("europeans_ware", "Big buckets for the fish breeder – produced by the toolsmith.")
             }
          }
       },
