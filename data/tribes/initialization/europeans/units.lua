@@ -1165,87 +1165,45 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "europeans_fishbreeder_basic",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
-            }
-         },
-         {
-            name = "europeans_fishbreeder_normal",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
-            }
-         },
-         {
-            name = "europeans_fishbreeder_advanced",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
-            }
-         },
-         {
             name = "europeans_hunter_basic",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "The hunter brings fresh, raw meat to the colonists.")
             }
          },
          {
             name = "europeans_hunter_normal",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "The hunter brings fresh, raw meat to the colonists.")
             }
          },
          {
             name = "europeans_hunter_advanced",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "The hunter brings fresh, raw meat to the colonists.")
             }
          },
          {
-            name = "europeans_gamekeeper_basic",
+            name = "europeans_fishbreeder",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Breeds fish in pond and in the sea.")
             }
          },
          {
-            name = "europeans_gamekeeper_normal",
+            name = "europeans_gamekeeper",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "The gamekeeper makes sure that the natural population of animals never drops too low.")
             }
          },
          {
-            name = "europeans_gamekeeper_advanced",
+            name = "europeans_beekeeper",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
-            }
-         },
-         {
-            name = "europeans_beekeeper_basic",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
-            }
-         },
-         {
-            name = "europeans_beekeeper_normal",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
-            }
-         },
-         {
-            name = "europeans_beekeeper_advanced",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Lets bees swarm over flowers, then gathers the honey.")
             }
          }
       },
