@@ -891,6 +891,403 @@ descriptions:new_tribe {
             }
          },
          {
+            name = "europeans_carpenter_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_carpenter_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_carpenter_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_charcoal_burner_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_charcoal_burner_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_charcoal_burner_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+      },
+      {
+         -- Collectors, Supporters and Producer (Build Material)
+         {
+            name = "europeans_lumberjack_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_lumberjack_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_lumberjack_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_forester_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Plant trees.")
+            }
+         },
+         {
+            name = "europeans_forester_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Plant trees.")
+            }
+         },
+         {
+            name = "europeans_forester_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Plant trees.")
+            }
+         },
+         {
+            name = "europeans_claydigger",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_stonecutter_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_stonecutter_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_stonecutter_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_stonemason_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_stonemason_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_stonemason_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         }
+      },
+      {
+         -- Collectors and Supporters 2 (Food)
+         {
+            name = "europeans_farmer_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_farmer_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_farmer_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_fisher_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_fisher_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_fisher_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_fishbreeder_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_fishbreeder_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_fishbreeder_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_hunter_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_hunter_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_hunter_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_gamekeeper_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_gamekeeper_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_gamekeeper_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         }
+      },
+      {
+         -- Basic Production (Build Material and Food)
+         {
+            name = "europeans_breeder_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_breeder_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_breeder_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_miller_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_miller_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_miller_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_baker_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_baker_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_baker_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smoker_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smoker_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smoker_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         }
+      },
+      {
+         -- Mining, Smelting and Military
+         {
+            name = "europeans_miner_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_miner_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_miner_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smelter_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smelter_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smelter_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smith_basic",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smith_normal",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
+            name = "europeans_smith_advanced",
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               purpose = pgettext("europeans_worker", "Fells trees.")
+            }
+         },
+         {
             name = "europeans_shipwright",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Shipwright
@@ -935,22 +1332,6 @@ descriptions:new_tribe {
                purpose = pgettext("europeans_worker", "Defend and Conquer!")
             }
          },
-
-      },
-      {
-         -- Collectors
-      },
-      {
-         -- Food
-      },
-      {
-         -- Mining
-      },
-      {
-         -- Tools
-      },
-      {
-         -- Military
       }
    },
 
