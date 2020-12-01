@@ -894,44 +894,44 @@ descriptions:new_tribe {
             name = "europeans_carpenter_basic",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carpenter / Sawyer
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Produces planks out of log.")
             }
          },
          {
             name = "europeans_carpenter_normal",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carpenter / Sawyer
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Produces planks out of log.")
             }
          },
          {
             name = "europeans_carpenter_advanced",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carpenter / Sawyer
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Produces planks out of log.")
             }
          },
          {
             name = "europeans_charcoal_burner_basic",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Charcoal Burner
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Produces charcoal out of log.")
             }
          },
          {
             name = "europeans_charcoal_burner_normal",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Charcoal Burner
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Produces charcoal out of log.")
             }
          },
          {
             name = "europeans_charcoal_burner_advanced",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Charcoal Burner
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Produces charcoal out of log or old planks.")
             }
-         },
+         }
       },
       {
          -- Collectors, Supporters and Producer (Build Material)
