@@ -16,7 +16,7 @@ descriptions:new_worker_type {
    },
 
    programs = {
-      fish = {
+      fish_in_sea = {
          "findspace=size:any radius:8 resource:resource_fish",
          "walk=coords",
          "playsound=sound/fisher/fisher_throw_net priority:50% allow_multiple",

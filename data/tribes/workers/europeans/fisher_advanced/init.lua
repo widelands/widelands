@@ -15,7 +15,7 @@ descriptions:new_worker_type {
    },
 
    programs = {
-      fish = {
+      fish_in_sea = {
          "findspace=size:any radius:10 resource:resource_fish",
          "walk=coords",
          "mine=resource_fish radius:1",

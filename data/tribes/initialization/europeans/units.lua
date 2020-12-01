@@ -1147,21 +1147,21 @@ descriptions:new_tribe {
             name = "europeans_fisher_basic",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Catches fish in the sea or in pond.")
             }
          },
          {
             name = "europeans_fisher_normal",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Catches fish in the sea or in pond.")
             }
          },
          {
             name = "europeans_fisher_advanced",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               purpose = pgettext("europeans_worker", "Catches fish in the sea or in pond.")
             }
          },
          {
