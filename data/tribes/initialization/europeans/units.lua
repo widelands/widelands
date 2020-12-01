@@ -1254,84 +1254,84 @@ descriptions:new_tribe {
          {
             name = "europeans_miller_basic",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Miller
+               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour and corn to cornmeal")
             }
          },
          {
             name = "europeans_miller_normal",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Miller
+               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour and corn to cornmeal")
             }
          },
          {
             name = "europeans_miller_advanced",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Miller
+               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour and corn to cornmeal" )
             }
          },
          {
             name = "europeans_baker_basic",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Baker
+               purpose = pgettext("europeans_worker", "Produce bread out of water, flour and cornmeal.")
             }
          },
          {
             name = "europeans_baker_normal",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Baker
+               purpose = pgettext("europeans_worker", "Produce bread out of water, flour and cornmeal.")
             }
          },
          {
             name = "europeans_baker_advanced",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Baker
+               purpose = pgettext("europeans_worker", "Produce bread out of water, flour and cornmeal.")
             }
          },
          {
             name = "europeans_brewer_basic",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Brewer
+               purpose = pgettext("europeans_worker", "Brewing beer and mead.")
             }
          },
          {
             name = "europeans_brewer_normal",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Brewer
+               purpose = pgettext("europeans_worker", "Brewing beer and mead.")
             }
          },
          {
             name = "europeans_brewer_advanced",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
-               purpose = pgettext("europeans_worker", "Fells trees.")
+               -- TRANSLATORS: Helptext for an europeans worker: Brewer
+               purpose = pgettext("europeans_worker", "Brewing beer and mead. Produces wine.")
             }
          },
          {
             name = "europeans_smoker_basic",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               -- TRANSLATORS: Helptext for an europeans worker: Smoker
                purpose = pgettext("europeans_worker", "Smoking fish and meat.")
             }
          },
          {
             name = "europeans_smoker_normal",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               -- TRANSLATORS: Helptext for an europeans worker: Smoker
                purpose = pgettext("europeans_worker", "Smoking fish and meat.")
             }
          },
          {
             name = "europeans_smoker_advanced",
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Carrier
+               -- TRANSLATORS: Helptext for an europeans worker: Smoker
                purpose = pgettext("europeans_worker", "Smoking fish and meat.")
             }
          }
