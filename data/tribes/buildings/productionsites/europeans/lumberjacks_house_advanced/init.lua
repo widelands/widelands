@@ -17,7 +17,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "log"
    },
 
    working_positions = {

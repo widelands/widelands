@@ -31,8 +31,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      space_consumer = true,
-      supports_production_of = { "log" },
+      space_consumer = true
    },
 
    working_positions = {

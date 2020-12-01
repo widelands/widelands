@@ -3,14 +3,14 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_productionsite_type {
-   name = "europeans_lumberjacks_house_normal",
+   name = "europeans_fishers_house_normal",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("europeans_building", "Normal Lumberjacks House"),
+   descname = pgettext("europeans_building", "Normal Fisher’s House"),
    icon = dirname .. "menu.png",
    size = "small",
-   
+
    enhancement = {
-        name = "europeans_lumberjacks_house_advanced",
+        name = "europeans_fishers_house_advanced",
         enhancement_cost = {
           marble_column = 1,
           quartz = 1,
@@ -26,34 +26,35 @@ descriptions:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 37, 44 },
+         hotspot = { 34, 42 },
       },
    },
 
    aihints = {
+      needs_water = true
    },
 
    working_positions = {
-      europeans_lumberjack_normal = 1
+      europeans_fisher_normal = 1
    },
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
-         descname = _"felling trees",
+         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
+         descname = _"fishing",
          actions = {
-            "return=skipped unless economy needs log",
-            "callworker=harvest",
-            "sleep=duration:15s"
+            "return=skipped unless economy needs fish",
+            "callworker=fish",
+            "sleep=duration:20s"
          }
       },
+
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Trees",
-      heading = _"Out of Trees",
-      message = pgettext("europeans_building", "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."),
-      productivity_threshold = 60
+      title = _"No Fish",
+      heading = _"Out of Fish",
+      message = pgettext("europeans_building", "The fisher working out of this fisher’s house can’t find any fish in his work area. Remember that you can increase the number of existing fish by building a fish breeder’s house."),
    },
 }
 

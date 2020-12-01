@@ -2166,6 +2166,65 @@ descriptions:new_tribe {
             note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
          }
       },
+      
+      {
+         name = "europeans_fishers_house_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Fisher's Hut
+            purpose = pgettext("europeans_building", "Fishes on the coast near the fisher’s hut."),
+            -- TRANSLATORS: Note helptext for production site: Fisher's Hut
+            note = pgettext("europeans_building", "The fisher’s hut needs water full of fish within the work area."),
+         }
+      },
+      {
+         name = "europeans_fishers_house_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fisher's House
+            purpose = pgettext("europeans_building", "Fishes on the coast near the fisher’s house."),
+            note = {
+               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 1
+               pgettext("europeans_building", "The fisher’s house needs water full of fish within the work area."),
+               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 2
+               pgettext("europeans_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
+            }
+         }
+      },
+      {
+         name = "europeans_fishers_house_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Fisher's House
+            purpose = pgettext("europeans_building", "Fishes on the coast near the fisher’s house."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Fisher's House
+            note = pgettext("europeans_building", "The fisher’s house needs water full of fish within the work area.")
+         }
+      },
+      {
+         name = "europeans_hunters_house_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
+            purpose = pgettext("building", "Hunts animals to produce meat."),
+            -- TRANSLATORS: Note helptext for a barbarian production site: Hunter's Hut
+            note = pgettext("europeans_building", "The hunter’s hut needs animals to hunt within the work area."),
+         }
+      },
+      {
+         name = "europeans_hunters_house_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's House
+            purpose = pgettext("building", "Hunts animals to produce meat."),
+            -- TRANSLATORS: Note helptext for an atlantean production site: Hunter's House
+            note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
+         }
+      },
+      {
+         name = "europeans_hunters_house_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Hunter's House
+            purpose = pgettext("building", "Hunts animals to produce meat."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Hunter's House
+            note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
+         }
+      },
 
       -- Medium
       {
