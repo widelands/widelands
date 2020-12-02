@@ -2407,15 +2407,15 @@ descriptions:new_tribe {
             --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
          --}
       --},
+      {
+         name = "europeans_ironmine_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
       --{
-         --name = "europeans_ironmine_basic",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for a europeans production site: Iron Mine
-            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_ironmine_basic_deep",
+         --name = "europeans_ironmine_level_1",
          --helptexts = {
             ---- TRANSLATORS: Purpose helptext for a europeans production site: Deep Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
