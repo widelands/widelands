@@ -2193,7 +2193,13 @@ descriptions:new_tribe {
             note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area.")
          }
       },
-      
+      {
+         name = "europeans_clay_pit",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Clay Pit
+            purpose = pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks.")
+         }
+      },
       {
          name = "europeans_fishers_house_basic",
          helptexts = {
@@ -2254,6 +2260,15 @@ descriptions:new_tribe {
       },
 
       -- Medium
+      {
+         name = "europeans_reed_yard",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Reed Yard
+            purpose = pgettext("europeans_building", "Cultivates reed that serves two different purposes for the Europeans tribe."),
+            -- TRANSLATORS: Note helptext for a barbarian production site: Reed Yard
+            note = pgettext("europeans_building", "Reed is the traditional material for roofing, and it is woven into the extremely durable rope that they use for their ships’ sails."),
+         }
+      },
       {
          name = "europeans_sawmill_basic",
          helptexts = {

@@ -75,7 +75,7 @@ descriptions:new_productionsite_type {
       title = _"No Water",
       heading = _"Out of Water",
       message = pgettext("europeans_building", "The carrier working at this well can’t find any water in his well."),
-      productivity_threshold = 45
+      productivity_threshold = 33
    },
 }
 
