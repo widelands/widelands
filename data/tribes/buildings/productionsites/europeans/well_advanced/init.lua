@@ -33,10 +33,10 @@ descriptions:new_productionsite_type {
          descname = _"working",
          actions = {
             "return=skipped unless economy needs water",
-            "sleep=duration:20s",
+            "sleep=duration:10s",
             "animate=working duration:20s",
-            "mine=resource_water radius:4 yield:100% when_empty:90%",
-            "produce=water:3"
+            "mine=resource_water radius:4 yield:100% when_empty:99%",
+            "produce=water:4"
          }
       },
    },
@@ -45,7 +45,7 @@ descriptions:new_productionsite_type {
       title = _"No Water",
       heading = _"Out of Water",
       message = pgettext("europeans_building", "The carrier working at this well can’t find any water in his well."),
-      productivity_threshold = 10
+      productivity_threshold = 1
    },
 }
 

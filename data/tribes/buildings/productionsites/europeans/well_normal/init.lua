@@ -47,9 +47,9 @@ descriptions:new_productionsite_type {
          descname = _"working",
          actions = {
             "return=skipped unless economy needs water",
-            "sleep=duration:20s",
+            "sleep=duration:10s",
             "animate=working duration:20s",
-            "mine=resource_water radius:2 yield:100% when_empty:70%",
+            "mine=resource_water radius:2 yield:100% when_empty:75%",
             "produce=water:2"
          }
       },

@@ -31,7 +31,8 @@ descriptions:new_productionsite_type {
 
    aihints = {
       needs_water = true,
-      supports_production_of = { "fish" }
+      supports_production_of = { "fish" },
+      basic_amount = 1
    },
 
    working_positions = {
