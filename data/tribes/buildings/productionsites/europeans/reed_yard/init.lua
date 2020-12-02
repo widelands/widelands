@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
          descname = _"planting reed",
          actions = {
             "consume=water:2",
-            "callworker=plant",
+            "callworker=plant_reed",
             "sleep=duration:8s" -- orig sleep=duration:20s but gardener animation was increased by 2sec
          }
       },
@@ -61,7 +61,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _"harvesting reed",
          actions = {
-            "callworker=harvest",
+            "callworker=harvest_reed",
             "sleep=duration:3s"
          }
       },

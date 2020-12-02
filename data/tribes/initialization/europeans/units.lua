@@ -1026,13 +1026,6 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "europeans_claydigger",
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans worker: Claydigger
-               purpose = pgettext("europeans_worker", "Makes clay out of mud and water.")
-            }
-         },
-         {
             name = "europeans_stonecutter_basic",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Stonecutter

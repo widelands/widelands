@@ -23,6 +23,10 @@ descriptions:new_productionsite_type {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 34, 42 },
       },
+      working = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 34, 42 },
+      },
    },
 
    aihints = {
@@ -31,8 +35,7 @@ descriptions:new_productionsite_type {
    },
 
    working_positions = {
-      europeans_claydigger = 1
-      europeans_fishbreeder = 1,
+      europeans_fishbreeder = 2
    },
 
    inputs = {
