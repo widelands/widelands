@@ -86,7 +86,7 @@ descriptions:new_productionsite_type {
          descname = _"smoking meat",
          actions = {
             -- time total: 50
-            "return=skipped4unless economy needs smoked_meat",
+            "return=skipped unless economy needs smoked_meat",
             "consume=meat:2 log",
             "animate=working duration:20s",
             "sleep=duration:20s",

@@ -2321,24 +2321,24 @@ descriptions:new_tribe {
          }
       },
       {
-         name = "europeans_smelting_works_basic",
+         name = "europeans_bakery_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a europeans production site: Smelting Works
-            purpose = pgettext("building", "Smelts ore into iron.")
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Bakery
+            purpose = pgettext("europeans_building", "Bakes pitta bread for soldiers and miners alike."),
          }
       },
       {
-         name = "europeans_smelting_works_normal",
+         name = "europeans_bakery_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
-            purpose = pgettext("building", "Smelts ore into iron and gold.")
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Bakery
+            purpose = pgettext("europeans_building", "Bakes bread to feed the scouts and miners and to train soldiers.")
          }
       },
       {
-         name = "europeans_smelting_works_advanced",
+         name = "europeans_bakery_advanced",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
-            purpose = pgettext("building", "Smelts ore into iron and gold. Recycles scrap metal.")
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Bakery
+            purpose = pgettext("europeans_building", "Bakes bread for soldiers and miners alike."),
          }
       },
       {
@@ -2360,6 +2360,27 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Smokery
             purpose = pgettext("europeans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers.")
+         }
+      },
+      {
+         name = "europeans_smelting_works_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Smelting Works
+            purpose = pgettext("building", "Smelts ore into iron.")
+         }
+      },
+      {
+         name = "europeans_smelting_works_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
+            purpose = pgettext("building", "Smelts ore into iron and gold.")
+         }
+      },
+      {
+         name = "europeans_smelting_works_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
+            purpose = pgettext("building", "Smelts ore into iron and gold. Recycles scrap metal.")
          }
       },
       {
