@@ -2115,9 +2115,9 @@ descriptions:new_tribe {
       {
          name = "europeans_lumberjacks_house_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a barbarian production site: Lumberjack_s Hut
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Lumberjack_s Hut
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Lumberjack_s Hut
+            -- TRANSLATORS: Note helptext for a europeans production site: Lumberjack_s Hut
             note = pgettext("europeans_building", "The lumberjack’s hut needs trees to fell within the work area."),
          }
       },
@@ -2142,9 +2142,9 @@ descriptions:new_tribe {
       {
          name = "europeans_foresters_house_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a barbarian production site: Ranger's Hut
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Ranger's Hut
             purpose = pgettext("building", "Plants trees in the surrounding area."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Ranger's Hut
+            -- TRANSLATORS: Note helptext for a europeans production site: Ranger's Hut
             note = pgettext("europeans_building", "The ranger’s hut needs free space within the work area to plant the trees."),
          }
       },
@@ -2169,9 +2169,9 @@ descriptions:new_tribe {
       {
          name = "europeans_quarry_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a barbarian production site: Quarry
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Quarry
             purpose = pgettext("europeans_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Quarry
+            -- TRANSLATORS: Note helptext for a europeans production site: Quarry
             note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area."),
          }
       },
@@ -2228,9 +2228,9 @@ descriptions:new_tribe {
       {
          name = "europeans_hunters_house_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a barbarian production site: Hunter's Hut
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Hunter's Hut
             purpose = pgettext("building", "Hunts animals to produce meat."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Hunter's Hut
+            -- TRANSLATORS: Note helptext for a europeans production site: Hunter's Hut
             note = pgettext("europeans_building", "The hunter’s hut needs animals to hunt within the work area."),
          }
       },
@@ -2278,30 +2278,30 @@ descriptions:new_tribe {
       {
          name = "europeans_charcoal_kiln_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal Kiln
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Charcoal Kiln
             purpose = pgettext("building", "Burns logs into charcoal.")
          }
       },
       {
          name = "europeans_charcoal_kiln_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal Kiln
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Charcoal Kiln
             purpose = pgettext("building", "Burns logs into charcoal.")
          }
       },
       {
          name = "europeans_charcoal_kiln_advanced",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Charcoal Kiln
             purpose = pgettext("building", "Burns logs into charcoal.")
          }
       },
       {
          name = "europeans_lime_kiln",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a barbarian production site: Lime Kiln
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Lime Kiln
             purpose = pgettext("europeans_building", "Processes clay and granite to make bricks and ‘grout’, a substance that solidifies and so reinforces masonry."),
-            -- TRANSLATORS: Note helptext for a barbarian production site: Lime Kiln
+            -- TRANSLATORS: Note helptext for a europeans production site: Lime Kiln
             note = pgettext("europeans_building", "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."),
          }
       },
@@ -2310,6 +2310,27 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Stonemason's House
             purpose = pgettext("europeans_building", "Carves marble columns out of marble.")
+         }
+      },
+      {
+         name = "europeans_smelting_works_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Smelting Works
+            purpose = pgettext("building", "Smelts ore into iron.")
+         }
+      },
+      {
+         name = "europeans_smelting_works_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
+            purpose = pgettext("building", "Smelts ore into iron and gold.")
+         }
+      },
+      {
+         name = "europeans_smelting_works_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
+            purpose = pgettext("building", "Smelts ore into iron and gold. Recycles scrap metal.")
          }
       },
       {
@@ -2324,21 +2345,21 @@ descriptions:new_tribe {
       {
          name = "europeans_weaving_mill_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for a barbarian production site: Weaving Mill
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Weaving Mill
             purpose = pgettext("europeans_building", "Weaves spider cloth out of spider silk.")
          }
       },
       {
          name = "europeans_weaving_mill_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Weaving Mill
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Weaving Mill
             purpose = pgettext("europeans_building", "Weaves spidercloth for buildings and ships’ sails, and tabards to equip and train the soldiers.")
          }
       },
       {
          name = "europeans_weaving_mill_advanced",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an empire production site: Weaving Mill
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Weaving Mill
             purpose = pgettext("europeans_building", "Weaves tabard and armor out of wool and silk.")
          }
       },
@@ -2389,21 +2410,21 @@ descriptions:new_tribe {
       --{
          --name = "europeans_ironmine_basic",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
+            ---- TRANSLATORS: Purpose helptext for a europeans production site: Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          --}
       --},
       --{
          --name = "europeans_ironmine_basic_deep",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron Mine
+            ---- TRANSLATORS: Purpose helptext for a europeans production site: Deep Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          --}
       --},
       --{
          --name = "europeans_ironmine_basic_deeper",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron Mine
+            ---- TRANSLATORS: Purpose helptext for a europeans production site: Deeper Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          --}
       --},
