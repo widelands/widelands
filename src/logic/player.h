@@ -626,11 +626,11 @@ public:
 	bool additional_expedition_items_allowed() const {
 		return allow_additional_expedition_items_;
 	}
-	void set_allow_additional_expedition_items(bool allow) {
+	void set_allow_additional_expedition_items(const bool allow) {
 		allow_additional_expedition_items_ = allow;
 	}
 
-	void set_hidden_from_general_statistics(bool hide) {
+	void set_hidden_from_general_statistics(const bool hide) {
 		hidden_from_general_statistics_ = hide;
 	}
 	bool is_hidden_from_general_statistics() const {

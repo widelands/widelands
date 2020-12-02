@@ -302,7 +302,7 @@ int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
 /* RST
    .. attribute:: hidden_from_general_statistics
 
-      (RW) Whether this player's existance and statistics are not
+      (RW) Whether this player's existence and statistics are not
       disclosed to other players in the general statistics menu.
 */
 int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
