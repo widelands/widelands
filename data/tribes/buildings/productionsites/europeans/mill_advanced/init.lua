@@ -30,7 +30,7 @@ descriptions:new_productionsite_type {
 
    inputs = {
       { name = "corn", amount = 6 },
-      { name = "rye", amount = 4 }
+      { name = "rye", amount = 4 },
       { name = "wheat", amount = 4 }
    },
 

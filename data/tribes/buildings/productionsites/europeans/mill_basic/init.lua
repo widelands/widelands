@@ -63,18 +63,24 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=produce_cornmeal"
+         }
+      },
+      produce_cornmeal = {
+         -- TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
          descname = _"grinding corn",
          actions = {
             "return=skipped unless economy needs cornmeal",
-            "return=skipped when economy needs corn",
-            "sleep=duration:10s",
-            "consume=corn:3",
-            "playsound=sound/mill/mill_turning 240",
-            "animate=working duration:30s",
-            "produce=cornmeal:3"
-         },
-      },
+            "sleep=duration:3s500ms",
+            "consume=corn:2",
+            "playsound=sound/mill/mill_turning priority:85% allow_multiple",
+            "animate=working duration:15s",
+            "produce=cornmeal:2"
+         }
+      }
    },
 }
 

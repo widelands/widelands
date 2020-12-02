@@ -7,7 +7,7 @@ descriptions:new_productionsite_type {
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("europeans_building", "Advanced Weaving Mill"),
    icon = dirname .. "menu.png",
-   size = "medium",
+   size = "big",
 
    animations = {
       idle = {

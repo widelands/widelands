@@ -2324,28 +2324,28 @@ descriptions:new_tribe {
          name = "europeans_mill_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
-            purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal."),
+            purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal.")
          }
       },
       {
          name = "europeans_mill_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
-            purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour."),
+            purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour.")
          }
       },
       {
          name = "europeans_mill_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
-            purpose = pgettext("building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour."),
+            purpose = pgettext("building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour.")
          }
       },
       {
          name = "europeans_bakery_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Bakery
-            purpose = pgettext("europeans_building", "Bakes pitta bread for soldiers and miners alike."),
+            purpose = pgettext("europeans_building", "Bakes pitta bread for soldiers and miners alike.")
          }
       },
       {
@@ -2359,7 +2359,7 @@ descriptions:new_tribe {
          name = "europeans_bakery_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Bakery
-            purpose = pgettext("europeans_building", "Bakes bread for soldiers and miners alike."),
+            purpose = pgettext("europeans_building", "Bakes bread for soldiers and miners alike.")
          }
       },
       {
