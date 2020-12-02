@@ -2342,6 +2342,27 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "europeans_smokery_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smokery
+            purpose = pgettext("europeans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers.")
+         }
+      },
+      {
+         name = "europeans_smokery_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smokery
+            purpose = pgettext("europeans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers.")
+         }
+      },
+      {
+         name = "europeans_smokery_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Smokery
+            purpose = pgettext("europeans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers.")
+         }
+      },
+      {
          name = "europeans_barracks",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Barracks
