@@ -68,7 +68,7 @@ descriptions:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=mixing_grout",
-            "call=burning_bricks"
+            "call=burning_bricks",
          }
       },
       mixing_grout = {

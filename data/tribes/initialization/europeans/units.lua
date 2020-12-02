@@ -1000,7 +1000,10 @@ descriptions:new_tribe {
                -- TRANSLATORS: Helptext for an europeans worker: Carpenter / Sawyer
                purpose = pgettext("europeans_worker", "Produces planks out of log.")
             }
-         },
+         }
+      },
+      {
+         -- Collectors and Producer (Clay and Stone)
          {
             name = "europeans_charcoal_burner_basic",
             helptexts = {
@@ -1021,10 +1024,7 @@ descriptions:new_tribe {
                -- TRANSLATORS: Helptext for an europeans worker: Charcoal Burner
                purpose = pgettext("europeans_worker", "Produces charcoal out of log or old planks.")
             }
-         }
-      },
-      {
-         -- Collectors and Producer (Clay and Stone)
+         },
          {
             name = "europeans_claydigger",
             helptexts = {
@@ -2281,13 +2281,13 @@ descriptions:new_tribe {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Lime Kiln
             purpose = pgettext("barbarians_building", "Processes clay and granite to make bricks and ‘grout’, a substance that solidifies and so reinforces masonry."),
             -- TRANSLATORS: Note helptext for a barbarian production site: Lime Kiln
-            note = pgettext("barbarians_building", "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."),
+            note = pgettext("europeans_building", "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."),
          }
       },
       {
-         name = "empire_stonemasons_house",
+         name = "europeans_stonemasons_house",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an empire production site: Stonemason's House
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Stonemason's House
             purpose = pgettext("europeans_building", "Carves marble columns out of marble.")
          }
       },
@@ -2324,16 +2324,16 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "empire_coalmine",
+         --name = "europeans_coalmine",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
             --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
          --}
       --},
       --{
-         --name = "empire_coalmine_deep",
+         --name = "europeans_coalmine_deep",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Deep Coal Mine
             --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
          --}
       --},
@@ -2366,16 +2366,16 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "empire_ironmine",
+         --name = "europeans_ironmine",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          --}
       --},
       --{
-         --name = "empire_ironmine_deep",
+         --name = "europeans_ironmine_deep",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Deep Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          --}
       --},
@@ -2408,16 +2408,16 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "empire_goldmine",
+         --name = "europeans_goldmine",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
             --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          --}
       --},
       --{
-         --name = "empire_goldmine_deep",
+         --name = "europeans_goldmine_deep",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Deep Gold Mine
             --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          --}
       --},

@@ -24,7 +24,7 @@ descriptions:new_productionsite_type {
    },
 
    working_positions = {
-      europeans_stonemason_advanced = 1
+      europeans_stonemason_normal = 1
    },
 
    inputs = {
@@ -42,7 +42,7 @@ descriptions:new_productionsite_type {
          actions = {
             "call=mixing_grout",
             "call=burning_bricks",
-            "call=sculpting_marble_column"
+            "call=sculpting_marble_column",
          }
       },
       mixing_grout = {
