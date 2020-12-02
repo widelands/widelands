@@ -225,7 +225,7 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
 
         # Add generated translation if necessary
         for key in transifex_glossary.keys():
-            if transifex_glossary[key].translation == '' and extracted_glossary.has_key(key):
+            if transifex_glossary[key].translation == '' and key in extracted_glossary:
                 extracted_entry = extracted_glossary[key]
                 if extracted_entry.translation != '':
                     transifex_entry = transifex_glossary[key]
@@ -252,7 +252,7 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
             glossary = glossaries[locale]
             translation = ''
             translation_comment = ''
-            if glossary.has_key(key):
+            if key in glossary:
                 translation = glossary[key].translation.replace('"', '""')
                 translation_comment = glossary[
                     key].translation_comment.replace('"', '""')
