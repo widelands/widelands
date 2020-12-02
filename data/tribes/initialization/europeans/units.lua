@@ -2321,6 +2321,27 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "europeans_mill_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
+            purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal."),
+         }
+      },
+      {
+         name = "europeans_mill_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
+            purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour."),
+         }
+      },
+      {
+         name = "europeans_mill_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
+            purpose = pgettext("building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour."),
+         }
+      },
+      {
          name = "europeans_bakery_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Bakery
