@@ -217,7 +217,7 @@ descriptions:new_tribe {
             default_target_quantity = 16,
             preciousness = 8,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Quartz
+               -- TRANSLATORS: Helptext for an europeans ware: Quartz
                purpose = pgettext("europeans_ware", "These transparent quartz gems are used to build some exclusive buildings. They are produced in a crystal quarry.")
             }
          },
@@ -226,7 +226,7 @@ descriptions:new_tribe {
             default_target_quantity = 16,
             preciousness = 8,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Diamond
+               -- TRANSLATORS: Helptext for an europeans ware: Diamond
                purpose = pgettext("europeans_ware", "These wonderful diamonds are used to build some exclusive buildings. They are mined in a deep coal mine.")
             }
          },
@@ -238,7 +238,7 @@ descriptions:new_tribe {
             default_target_quantity = 16,
             preciousness = 16,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Fish
+               -- TRANSLATORS: Helptext for an europeans ware: Fish
                purpose = pgettext("europeans_ware", "Fish is one of the biggest food resources of the Europeans. It has to be smoked in a smokery before being delivered to mines, training sites and scouts.")
             }
          },
@@ -247,8 +247,8 @@ descriptions:new_tribe {
             default_target_quantity = 32,
             preciousness = 32,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Smoked Fish
-               purpose = pgettext("europeans_ware", "As no Atlantean likes raw fish, smoking it in a smokery is the most common way to make it edible.")
+               -- TRANSLATORS: Helptext for an europeans ware: Smoked Fish
+               purpose = pgettext("europeans_ware", "As no europeans likes raw fish, smoking it in a smokery is the most common way to make it edible.")
             }
          },
          {
@@ -257,9 +257,9 @@ descriptions:new_tribe {
             preciousness = 16,
             helptexts = {
                purpose = {
-                  -- TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
+                  -- TRANSLATORS: Helptext for an europeans ware: Meat, part 1
                   pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
-                  -- TRANSLATORS: Helptext for an atlantean ware: Meat, part 2
+                  -- TRANSLATORS: Helptext for an europeans ware: Meat, part 2
                   pgettext("europeans_ware", "Meat has to be smoked in a smokery before being delivered to mines and training sites.")
                }
             }
@@ -269,7 +269,7 @@ descriptions:new_tribe {
             default_target_quantity = 32,
             preciousness = 32,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Smoked Meat
+               -- TRANSLATORS: Helptext for an europeans ware: Smoked Meat
                purpose = pgettext("europeans_ware", "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites where the miners and soldiers prepare a nutritious lunch for themselves.")
             }
          },
@@ -278,7 +278,7 @@ descriptions:new_tribe {
             default_target_quantity = 16,
             preciousness = 24,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Corn
+               -- TRANSLATORS: Helptext for an europeans ware: Corn
                purpose = pgettext("europeans_ware", "This corn is processed in the mill into fine cornmeal that every baker needs for a good bread. Also spider farms need to be provided with corn.")
             }
          },
@@ -287,7 +287,7 @@ descriptions:new_tribe {
             default_target_quantity = 16,
             preciousness = 16,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Cornmeal
+               -- TRANSLATORS: Helptext for an europeans ware: Cornmeal
                purpose = pgettext("europeans_ware", "Cornmeal is produced in a mill out of corn and is one of three parts of the bread produced in bakeries.")
             }
          },
@@ -567,7 +567,7 @@ descriptions:new_tribe {
             default_target_quantity = 4,
             preciousness = 1,
             helptexts = {
-               -- TRANSLATORS: Helptext for an atlantean ware: Buckets
+               -- TRANSLATORS: Helptext for an europeans ware: Buckets
                purpose = pgettext("europeans_ware", "Big buckets for the forester, the claydigger, and the fish breeder – produced by the toolsmith.")
             }
          },
@@ -2094,21 +2094,21 @@ descriptions:new_tribe {
       {
          name = "europeans_well_basic",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Well
             purpose = pgettext("building", "Draws water out of the deep.")
          }
       },
       {
          name = "europeans_well_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Well
             purpose = pgettext("building", "Draws water out of the deep.")
          }
       },
       {
          name = "europeans_well_advanced",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Well
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Well
             purpose = pgettext("building", "Draws water out of the deep.")
          }
       },
@@ -2124,9 +2124,9 @@ descriptions:new_tribe {
       {
          name = "europeans_lumberjacks_house_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Woodcutter's House
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Woodcutter's House
             purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Woodcutter's House
+            -- TRANSLATORS: Note helptext for an europeans production site: Woodcutter's House
             note = pgettext("europeans_building", "The woodcutter’s house needs trees to fell within the work area.")
          }
       },
@@ -2151,9 +2151,9 @@ descriptions:new_tribe {
       {
          name = "europeans_foresters_house_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Forester's House
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Forester's House
             purpose = pgettext("building", "Plants trees in the surrounding area."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Forester's House
+            -- TRANSLATORS: Note helptext for an europeans production site: Forester's House
             note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
          }
       },
@@ -2178,9 +2178,9 @@ descriptions:new_tribe {
       {
          name = "europeans_quarry_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Quarry
             purpose = pgettext("europeans_building", "Cuts blocks of granite out of rocks in the vicinity."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Quarry
+            -- TRANSLATORS: Note helptext for an europeans production site: Quarry
             note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area.")
          }
       },
@@ -2206,12 +2206,12 @@ descriptions:new_tribe {
       {
          name = "europeans_fishers_house_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Fisher's House
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Fisher's House
             purpose = pgettext("europeans_building", "Fishes on the coast near the fisher’s house."),
             note = {
-               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 1
+               -- TRANSLATORS: Note helptext for an europeans production site: Fisher's House, part 1
                pgettext("europeans_building", "The fisher’s house needs water full of fish within the work area."),
-               -- TRANSLATORS: Note helptext for an atlantean production site: Fisher's House, part 2
+               -- TRANSLATORS: Note helptext for an europeans production site: Fisher's House, part 2
                pgettext("europeans_building", "Build a fish breeder’s house close to the fisher’s house to make sure that you don’t run out of fish.")
             }
          }
@@ -2237,9 +2237,9 @@ descriptions:new_tribe {
       {
          name = "europeans_hunters_house_normal",
          helptexts = {
-            -- TRANSLATORS: Purpose helptext for an atlantean production site: Hunter's House
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Hunter's House
             purpose = pgettext("building", "Hunts animals to produce meat."),
-            -- TRANSLATORS: Note helptext for an atlantean production site: Hunter's House
+            -- TRANSLATORS: Note helptext for an europeans production site: Hunter's House
             note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
          }
       },
@@ -2254,6 +2254,27 @@ descriptions:new_tribe {
       },
 
       -- Medium
+      {
+         name = "europeans_sawmill_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
+            purpose = pgettext("building", "Saws logs to produce planks.")
+         }
+      },
+      {
+         name = "europeans_sawmill_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
+            purpose = pgettext("building", "Saws logs to produce planks.")
+         }
+      },
+      {
+         name = "europeans_sawmill_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
+            purpose = pgettext("building", "Saws logs to produce planks.")
+         }
+      },
       {
          name = "europeans_barracks",
          helptexts = {
@@ -2301,9 +2322,9 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "atlanteans_coalmine",
+         --name = "europeanss_coalmine",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
             --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
          --}
       --},
@@ -2343,9 +2364,9 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "atlanteans_ironmine",
+         --name = "europeanss_ironmine",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          --}
       --},
@@ -2385,9 +2406,9 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "atlanteans_goldmine",
+         --name = "europeanss_goldmine",
          --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
+            ---- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
             --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
          --}
       --},
