@@ -234,7 +234,7 @@ protected:
 	void shutdown_hardware();
 
 	void parse_commandline(int argc, char const * const * argv);
-	void handle_commandline_parameters() throw (Parameter_error);
+	void handle_commandline_parameters();
 
 	void setup_searchpaths(std::string argv0);
 	void setup_homedir();

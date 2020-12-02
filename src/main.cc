@@ -45,53 +45,6 @@ using std::flush;
  */
 int main(int argc, char * argv[])
 {
-
-#ifndef WIN32
-	// if Widelands is called as dedicated server, Widelands should be forked and started as daemon
-	bool dedicated = false;
-	bool daemon    = false;
-	for (int i = 1; i < argc && !(daemon && dedicated); ++i) {
-		std::string opt = argv[i];
-
-		// At least a size of 8 is needed for --daemon, --dedicated is even longer
-		if (opt.size() < 8)
-			continue;
-
-		std::string::size_type const pos = opt.find('=');
-		if (pos == std::string::npos) { //  if no equals sign found
-			if (opt == "--daemon")
-				daemon    = true;
-		} else {
-			opt.erase(pos, opt.size() - pos);
-			if (opt == "--dedicated")
-				dedicated = true;
-		}
-	}
-	if (daemon && dedicated) {
-		pid_t pid;
-		if ((pid = fork()) < 0) {
-			perror("fork() failed");
-			exit(2);
-		}
-		if (pid == 0) {
-			setsid();
-
-			close(STDIN_FILENO);
-			close(STDOUT_FILENO);
-			close(STDERR_FILENO);
-
-			open("/dev/null", O_RDWR);
-			dup(STDIN_FILENO);
-			dup(STDIN_FILENO);
-			// from now on, it's a daemon
-			openlog("FREELINE", LOG_PID, LOG_DAEMON);
-		} else {
-			printf("Child has PID %i.\n", pid);
-			return 0;
-		}
-	}
-#endif
-
 	WLApplication * g_app = 0;
 	try {
 		g_app = WLApplication::get(argc, const_cast<char const * *>(argv));
