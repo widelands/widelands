@@ -38,8 +38,8 @@ descriptions:new_worker_type {
          "findobject=attrib:rocks radius:10",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
-         "animate=hack duration:12s500ms",
-         "mine=resource_stone radius:1",
+         "animate=hacking duration:12s500ms",
+         "mine=resource_stones radius:1",
          "createware=granite",
          "return"
       },
@@ -47,8 +47,8 @@ descriptions:new_worker_type {
          "findobject=attrib:rocks radius:10",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
-         "animate=hack duration:12s500ms",
-         "mine=resource_stone radius:1",
+         "animate=hacking duration:12s500ms",
+         "mine=resource_stones radius:1",
          "createware=marble",
          "return"
       }

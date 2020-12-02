@@ -39,7 +39,7 @@ descriptions:new_worker_type {
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hack duration:17s500ms",
-         "mine=resource_stone radius:1",
+         "mine=resource_stones radius:1",
          "createware=granite",
          "return"
       },
@@ -48,7 +48,7 @@ descriptions:new_worker_type {
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hack duration:17s500ms",
-         "mine=resource_stone radius:1",
+         "mine=resource_stones radius:1",
          "createware=marble",
          "return"
       }
