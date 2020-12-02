@@ -50,7 +50,7 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs log",
             "consume=log:10",
             "sleep=duration:30s",
-            "animate=working duration:2m00s", -- Charcoal fires will burn for some days in real life
+            "animate=working duration:2m", -- Charcoal fires will burn for some days in real life
             "produce=coal:4"
          }
       },
@@ -62,7 +62,7 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs planks",
             "consume=planks:5",
             "sleep=duration:30s",
-            "animate=working duration:2m00s", -- Charcoal fires will burn for some days in real life
+            "animate=working duration:2m", -- Charcoal fires will burn for some days in real life
             "produce=coal:2"
          }
       },
