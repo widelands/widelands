@@ -39,6 +39,10 @@ descriptions:new_productionsite_type {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 62, 48 },
+      },
+      working = {
+         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         hotspot = { 62, 48 },
       }
    },
 
@@ -60,6 +64,7 @@ descriptions:new_productionsite_type {
          descname = _"sawing logs",
          actions = {
             "return=skipped unless economy needs planks",
+            "return=skipped when economy needs log",
             "sleep=duration:20s",
             "return=skipped when not site has log:4",
             "consume=log:4",

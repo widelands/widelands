@@ -52,7 +52,9 @@ descriptions:new_productionsite_type {
          descname = _"sawing logs",
          actions = {
             "return=skipped unless economy needs planks",
+            "return=skipped when economy needs log",
             "consume=log:4",
+            "return=skipped when not site has log:4",
             "sleep=duration:16s", -- Much faster than barbarians' wood hardener
             "playsound=sound/atlanteans/saw/benchsaw priority:50% allow_multiple",
             "animate=working duration:30s", -- Much faster than barbarians' wood hardener

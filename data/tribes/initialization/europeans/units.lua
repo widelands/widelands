@@ -2322,7 +2322,7 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "europeanss_coalmine",
+         --name = "europeans_coalmine",
          --helptexts = {
             ---- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
             --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
@@ -2364,7 +2364,7 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "europeanss_ironmine",
+         --name = "europeans_ironmine",
          --helptexts = {
             ---- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
             --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
@@ -2406,7 +2406,7 @@ descriptions:new_tribe {
          --}
       --},
       --{
-         --name = "europeanss_goldmine",
+         --name = "europeans_goldmine",
          --helptexts = {
             ---- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
             --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
