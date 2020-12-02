@@ -1,3 +1,3 @@
 return {
-   barbarians_smelting_works = {},
+   europeans_smelting_works_basic = {},
 }
