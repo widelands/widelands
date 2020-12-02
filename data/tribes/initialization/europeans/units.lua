@@ -2276,6 +2276,21 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "europeans_lime_kiln",
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Lime Kiln
+            purpose = pgettext("barbarians_building", "Processes clay and granite to make bricks and ‘grout’, a substance that solidifies and so reinforces masonry."),
+            -- TRANSLATORS: Note helptext for a barbarian production site: Lime Kiln
+            note = pgettext("barbarians_building", "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."),
+         }
+      },
+      {
+         name = "empire_stonemasons_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Stonemason's House
+            purpose = pgettext("europeans_building", "Carves marble columns out of marble.")
+         }
+      },
+      {
          name = "europeans_barracks",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Barracks
