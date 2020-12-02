@@ -5,7 +5,7 @@ dirname = path.dirname (__file__)
 descriptions:new_worker_type {
    name = "europeans_smoker_advanced",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext ("europeans_worker", "AdvancedSmoker"),
+   descname = pgettext ("europeans_worker", "Advanced Smoker"),
    icon = dirname .. "menu.png",
    vision_range = 2,
 

@@ -2276,10 +2276,31 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "europeans_charcoal_kiln_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Charcoal Kiln
+            purpose = pgettext("building", "Burns logs into charcoal.")
+         }
+      },
+      {
+         name = "europeans_charcoal_kiln_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Charcoal Kiln
+            purpose = pgettext("building", "Burns logs into charcoal.")
+         }
+      },
+      {
+         name = "europeans_charcoal_kiln_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an empire production site: Charcoal Kiln
+            purpose = pgettext("building", "Burns logs into charcoal.")
+         }
+      },
+      {
          name = "europeans_lime_kiln",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a barbarian production site: Lime Kiln
-            purpose = pgettext("barbarians_building", "Processes clay and granite to make bricks and ‘grout’, a substance that solidifies and so reinforces masonry."),
+            purpose = pgettext("europeans_building", "Processes clay and granite to make bricks and ‘grout’, a substance that solidifies and so reinforces masonry."),
             -- TRANSLATORS: Note helptext for a barbarian production site: Lime Kiln
             note = pgettext("europeans_building", "The lime kiln’s output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites."),
          }
