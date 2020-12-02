@@ -3,14 +3,14 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_productionsite_type {
-   name = "europeans_fishers_house_basic",
+   name = "europeans_quarry_basic",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("europeans_building", "Basic Fisher’s Hut"),
+   descname = pgettext("europeans_building", "Basic Quarry"),
    icon = dirname .. "menu.png",
    size = "small",
 
    enhancement = {
-        name = "europeans_fishers_house_normal",
+        name = "europeans_quarry_normal",
         enhancement_cost = {
           brick = 1,
           grout = 1,
@@ -31,46 +31,46 @@ descriptions:new_productionsite_type {
       log = 2
    },
 
+
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 39, 52 },
+         hotspot = { 45, 48 },
       },
       build = {
          pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 39, 52 },
+         hotspot = { 45, 48 },
       },
       unoccupied = {
          pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 39, 52 },
+         hotspot = { 45, 48 },
       },
    },
 
    aihints = {
-      collects_ware_from_map = "fish",
-      needs_water = true
+      collects_ware_from_map = "granite"
    },
 
    working_positions = {
-      europeans_fisher_basic = 1
+      europeans_stonecutter_basic = 1
    },
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-         descname = _"fishing",
+         -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
+         descname = _"quarrying granite",
          actions = {
-            "return=skipped unless economy needs fish",
-            "callworker=fish_in_sea",
-            "sleep=duration:24s"
+            "callworker=cut_granite",
+            "sleep=duration:17s500ms"
          }
       },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fish",
-      heading = _"Out of Fish",
-      message = pgettext("europeans_building", "The fisher working out of this fisher’s hut can’t find any fish in his work area."),
+      title = _"No Rocks",
+      heading = _"Out of Rocks",
+      message = pgettext("europeans_building", "The stonemason working at this quarry can’t find any rocks in his work area."),
+      productivity_threshold = 75
    },
 }
 

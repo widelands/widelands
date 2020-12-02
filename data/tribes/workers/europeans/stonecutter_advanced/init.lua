@@ -33,6 +33,24 @@ descriptions:new_worker_type {
          "callobject=shrink",
          "createware=marble",
          "return"
+      },
+      mine_granite = {
+         "findobject=attrib:rocks radius:10",
+         "walk=object",
+         "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
+         "animate=hack duration:12s500ms",
+         "mine=resource_stone radius:1",
+         "createware=granite",
+         "return"
+      },
+      mine_marble = {
+         "findobject=attrib:rocks radius:10",
+         "walk=object",
+         "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
+         "animate=hack duration:12s500ms",
+         "mine=resource_stone radius:1",
+         "createware=marble",
+         "return"
       }
    },
 

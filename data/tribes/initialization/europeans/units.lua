@@ -2166,6 +2166,33 @@ descriptions:new_tribe {
             note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
          }
       },
+      {
+         name = "europeans_quarry_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Quarry
+            purpose = pgettext("europeans_building", "Cuts raw pieces of granite out of rocks in the vicinity."),
+            -- TRANSLATORS: Note helptext for a barbarian production site: Quarry
+            note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area."),
+         }
+      },
+      {
+         name = "europeans_quarry_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Quarry
+            purpose = pgettext("europeans_building", "Cuts blocks of granite out of rocks in the vicinity."),
+            -- TRANSLATORS: Note helptext for an atlantean production site: Quarry
+            note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area.")
+         }
+      },
+      {
+         name = "europeans_quarry_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Quarry
+            purpose = pgettext("europeans_building", "Cuts blocks of granite and marble out of rocks in the vicinity."),
+            -- TRANSLATORS: Note helptext for an europeans production site: Quarry
+            note = pgettext("europeans_building", "The quarry needs rocks to cut within the work area.")
+         }
+      },
       
       {
          name = "europeans_fishers_house_basic",

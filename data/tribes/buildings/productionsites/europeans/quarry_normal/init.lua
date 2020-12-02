@@ -3,14 +3,14 @@ push_textdomain("tribes")
 dirname = path.dirname(__file__)
 
 descriptions:new_productionsite_type {
-   name = "europeans_fishers_house_normal",
+   name = "europeans_quarry_normal",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("europeans_building", "Normal Fisher’s House"),
+   descname = pgettext("europeans_building", "Normal Quarry"),
    icon = dirname .. "menu.png",
    size = "small",
 
    enhancement = {
-        name = "europeans_fishers_house_advanced",
+        name = "europeans_quarry_advanced",
         enhancement_cost = {
           marble_column = 1,
           quartz = 1,
@@ -26,35 +26,34 @@ descriptions:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 34, 42 },
+         hotspot = { 40, 45 },
       },
    },
 
    aihints = {
-      needs_water = true
    },
 
    working_positions = {
-      europeans_fisher_normal = 1
+      europeans_stonecutter_normal = 1
    },
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-         descname = _"fishing",
+         -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
+         descname = _"mining granite",
          actions = {
-            "return=skipped unless economy needs fish",
-            "callworker=fish_in_sea",
-            "sleep=duration:20s"
+            "return=skipped unless economy needs granite",
+            "callworker=mine_granite",
+            "sleep=duration:16s"
          }
       },
-
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fish",
-      heading = _"Out of Fish",
-      message = pgettext("europeans_building", "The fisher working out of this fisher’s house can’t find any fish in his work area. Remember that you can increase the number of existing fish by building a fish breeder’s house."),
+      title = _"No Rocks",
+      heading = _"Out of Rocks",
+      message = pgettext("europeans_building", "The stonecutter working at this quarry can’t find any rocks in his work area."),
+      productivity_threshold = 75
    },
 }
 

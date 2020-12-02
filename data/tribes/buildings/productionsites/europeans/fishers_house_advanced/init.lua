@@ -30,7 +30,7 @@ descriptions:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "return=skipped unless economy needs fish",
-            "callworker=fish",
+            "callworker=fish_in_sea",
             "sleep=duration:16s"
          }
       },
