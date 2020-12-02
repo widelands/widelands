@@ -35,7 +35,7 @@ descriptions:new_worker_type {
          "return"
       },
       mine_granite = {
-         "findobject=attrib:rocks radius:6",
+         "findspace=size:any radius:6 resource:resource_stones",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hack duration:17s500ms",
@@ -44,7 +44,7 @@ descriptions:new_worker_type {
          "return"
       },
       mine_marble = {
-         "findobject=attrib:rocks radius:6",
+         "findspace=size:any radius:6 resource:resource_stones",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hack duration:17s500ms",

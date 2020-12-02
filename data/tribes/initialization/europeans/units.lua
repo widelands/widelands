@@ -2265,6 +2265,132 @@ descriptions:new_tribe {
       -- Big
 
       -- Mines
+      --{
+         --name = "barbarians_coalmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for production site: Coal Mine
+            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_coalmine_deep",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
+            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_coalmine_deeper",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
+            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "empire_coalmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an empire production site: Coal Mine
+            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "empire_coalmine_deep",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an empire production site: Deep Coal Mine
+            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "atlanteans_coalmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an atlantean production site: Coal Mine
+            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_ironmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for a barbarian production site: Iron Mine
+            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_ironmine_deep",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for a barbarian production site: Deep Iron Mine
+            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_ironmine_deeper",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for a barbarian production site: Deeper Iron Mine
+            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "empire_ironmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an empire production site: Iron Mine
+            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "empire_ironmine_deep",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an empire production site: Deep Iron Mine
+            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "atlanteans_ironmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an atlantean production site: Iron Mine
+            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_goldmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for production site: Gold Mine
+            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_goldmine_deep",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
+            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "barbarians_goldmine_deeper",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
+            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "empire_goldmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an empire production site: Gold Mine
+            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "empire_goldmine_deep",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an empire production site: Deep Gold Mine
+            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         --}
+      --},
+      --{
+         --name = "atlanteans_goldmine",
+         --helptexts = {
+            ---- TRANSLATORS: Purpose helptext for an atlantean production site: Gold Mine
+            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         --}
+      --},
 
       -- Training Sites
       {
