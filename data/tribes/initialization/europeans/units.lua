@@ -2258,6 +2258,15 @@ descriptions:new_tribe {
             purpose = pgettext("europeans_building", "Releases animals into the wild to steady the meat production."),
          }
       },
+      {
+         name = "europeans_beekeepers_house",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a frisian production site: Beekeeper's House
+            purpose = pgettext("europeans_building", "Keeps bees and lets them swarm over flowering fields to produce honey."),
+            -- TRANSLATORS: Note helptext for a frisian production site: Beekeeper's House
+            note = pgettext("europeans_building", "Needs medium-sized fields (barley, rye, wheat, reed, corn or blackroot) or bushes (berry bushes or grapevines) nearby."),
+         }
+      },
 
       -- Medium
       {
