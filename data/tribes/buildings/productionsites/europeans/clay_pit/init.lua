@@ -11,11 +11,11 @@ descriptions:new_productionsite_type {
 
    buildcost = {
       planks = 2,
-      granite = 2
+      reed = 2,
+      granite = 1
    },
    return_on_dismantle = {
-      log = 2,
-      granite = 1
+      log = 2
    },
 
    animations = {
@@ -72,6 +72,8 @@ descriptions:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
+            "return=skipped when economy needs water",
+            "consume=water",
             "callworker=breed_in_pond",
             "sleep=duration:12s500ms"
          }
@@ -81,6 +83,8 @@ descriptions:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
+            "return=skipped when economy needs water",
+            "consume=water",
             "callworker=breed_in_sea",
             "sleep=duration:12s500ms"
          }

@@ -2251,6 +2251,13 @@ descriptions:new_tribe {
             note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
          }
       },
+      {
+         name = "europeans_gamekeepers_hut",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Gamekeeper's Hut
+            purpose = pgettext("europeans_building", "Releases animals into the wild to steady the meat production."),
+         }
+      },
 
       -- Medium
       {

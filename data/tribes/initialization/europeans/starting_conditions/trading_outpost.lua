@@ -24,45 +24,30 @@ return {
          wares = {
             water = 128,
             log = 64,
-            planks = 40,
-            spidercloth = 40,
-            granite = 64,
+            planks = 32,
+            spidercloth = 32,
             reed = 32,
+            granite = 64,
             grout = 32,
             brick = 32,
             marble = 16,
-            diamond = 8,
-            quartz = 8,
-            ore = 16,
-            coal = 16,
-            iron = 8,
-            basket = 10,
-            buckets = 4,
+            diamond = 16,
+            quartz = 16,
+            hammer = 10,
+            saw = 10,
+            shovel = 10,
+            buckets = 10,
+            felling_ax = 8,
+            pick = 8,
+            fire_tongs = 2,
             scythe = 4,
          },
          workers = {
-            europeans_builder = 10,
-            europeans_carrier = 40,
-            europeans_geologist = 4,
-            europeans_miner = 4,
-            europeans_stonemason = 2,
-            europeans_stonecutter = 2,
-            europeans_toolsmith = 2,
-            europeans_trainer = 3,
-            europeans_lumberjack = 3,
-            europeans_woodcutter = 3,
-            europeans_ranger = 3,
-            europeans_forester = 3,
-            europeans_sawyer = 2,
-            europeans_fisher = 2,
-            europeans_hunter = 2,
-            europeans_smoker = 1,
-            europeans_miller = 1,
-            europeans_baker = 1,
-            europeans_spiderbreeder = 1,
-            europeans_weaver = 1,
+             europeans_carrier = 32,
+             europeans_builder = 8,
+             europeans_geologist = 2,
+             europeans_trainer = 4,
          },
-         -- Max health: 2, Max attack: 4, Max defense: 2, Max evade: 2
          soldiers = {
             [{0,0,0,0}] = 25,
             [{1,0,0,1}] = 5,
@@ -70,7 +55,7 @@ return {
          }
       })
 
-      place_building_in_region(plr, "europeans_well_basic", sf:region(4), {
+      place_building_in_region(plr, "europeans_well_advanced", sf:region(6), {
       })
 
       -- Get all warehouse types
