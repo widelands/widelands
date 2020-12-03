@@ -2414,6 +2414,20 @@ descriptions:new_tribe {
 
       -- Big
       {
+         name = "europeans_spiderfarm",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Spider Farm
+            purpose = pgettext("building", "Breeds spiders for silk.")
+         }
+      },
+      {
+         name = "europeans_sheepfarm",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Sheep Farm
+            purpose = pgettext("europeans_building", "Keeps sheep for their wool.")
+         }
+      },
+      {
          name = "europeans_weaving_mill_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Weaving Mill
