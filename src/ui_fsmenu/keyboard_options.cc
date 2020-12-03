@@ -31,8 +31,8 @@ namespace FsMenu {
 constexpr int16_t kPadding = 4;
 
 struct ShortcutChooser : public UI::Window {
-	ShortcutChooser(UI::Window& parent, const KeyboardShortcut c)
-	   : UI::Window(parent.get_parent(),
+	ShortcutChooser(UI::Panel& parent, const KeyboardShortcut c)
+	   : UI::Window(&parent,
 	                UI::WindowStyle::kFsMenu,
 	                "choose_shortcut",
 	                0,
@@ -41,22 +41,22 @@ struct ShortcutChooser : public UI::Window {
 	                200,
 	                to_string(c)),
 	     key(get_shortcut(c)) {
-		UI::Box* box =
+		UI::Box* const box =
 		   new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
 
-		UI::Button* reset = new UI::Button(
+		UI::Button* const reset = new UI::Button(
 		   box, "reset", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Reset to default"));
 		reset->sigclicked.connect([this, c]() {
 			key = get_default_shortcut(c);
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 		});
 
-		UI::Button* cancel =
+		UI::Button* const cancel =
 		   new UI::Button(box, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel"));
 		cancel->sigclicked.connect(
 		   [this]() { end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack); });
 
-		UI::MultilineTextarea* txt = new UI::MultilineTextarea(
+		UI::MultilineTextarea* const txt = new UI::MultilineTextarea(
 		   box, 0, 0, 200, 100, UI::PanelStyle::kFsMenu,
 		   _("Press the new shortcut or close this window to cancel."), UI::Align::kCenter);
 
@@ -139,7 +139,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		box.add(b, UI::Box::Resizing::kFullSize);
 		box.add_space(kPadding);
 		b->sigclicked.connect([this, b, key, generate_title]() {
-			ShortcutChooser c(*this, key);
+			ShortcutChooser c(*get_parent(), key);
 			if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 				KeyboardShortcut conflict;
 				if (set_shortcut(key, c.key, &conflict)) {
