@@ -165,7 +165,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			// converted correctly, and if it wasn't we replace the period with a comma.
 			const size_t len = word.length() + 1;
 			char buffer[16];
-			std::snprintf(buffer, len, "%f", info.average_rating);  // NOLINT
+			std::snprintf(buffer, len, "%f", static_cast<double>(info.average_rating));
 			if (word != buffer) {
 				const size_t pos = word.find('.');
 				if (pos == std::string::npos) {
@@ -173,7 +173,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 				}
 				word.at(pos) = ',';
 				info.average_rating = std::strtof(word.c_str(), nullptr);
-				std::snprintf(buffer, len, "%f", info.average_rating);  // NOLINT
+				std::snprintf(buffer, len, "%f", static_cast<double>(info.average_rating));
 				if (word != buffer) {
 					throw wexception(
 					   "Floating point conversion: Only period and comma as decimal points supported");

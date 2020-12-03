@@ -131,7 +131,6 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
                 fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
                 fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
                 _("Add-On Manager")),
-     fsmm_(fsmm),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      warn_requirements_(
