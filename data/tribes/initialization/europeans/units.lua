@@ -2384,6 +2384,34 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "europeans_brewery_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Brewery
+            purpose = pgettext("building", "Produces beer to keep the miners strong and happy.")
+         }
+      },
+      {
+         name = "europeans_brewery_normal",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Brewery
+            purpose = pgettext("building", "Produces beer and mead to keep the miners strong and happy.")
+         }
+      },
+      {
+         name = "europeans_brewery_advanced",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Brewery
+            purpose = pgettext("building", "Produces beer, mead and strong_beer for trainingssites."),
+         }
+      },
+      {
+         name = "europeans_brewery_winery",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Winery
+            purpose = pgettext("europeans_building", "Produces mead and wine.")
+         }
+      },
+      {
          name = "europeans_smelting_works_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Smelting Works
