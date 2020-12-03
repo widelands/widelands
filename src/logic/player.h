@@ -630,9 +630,7 @@ public:
 		allow_additional_expedition_items_ = allow;
 	}
 
-	void set_hidden_from_general_statistics(const bool hide) {
-		hidden_from_general_statistics_ = hide;
-	}
+	void set_hidden_from_general_statistics(bool);
 	bool is_hidden_from_general_statistics() const {
 		return hidden_from_general_statistics_;
 	}
@@ -740,6 +738,20 @@ private:
 	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
+};
+
+struct NotePlayerDetailsEvent {
+	CAN_BE_SENT_AS_NOTE(NoteId::PlayerDetailsEvent)
+
+	enum class Event {
+		kGeneralStatisticsVisibilityChanged
+	};
+
+	const Event event;
+	Player& player;
+
+	NotePlayerDetailsEvent(const Event e, Player& p) : event(e), player(p) {
+	}
 };
 
 void find_former_buildings(const Descriptions& descriptions,
