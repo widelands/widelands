@@ -743,9 +743,7 @@ private:
 struct NotePlayerDetailsEvent {
 	CAN_BE_SENT_AS_NOTE(NoteId::PlayerDetailsEvent)
 
-	enum class Event {
-		kGeneralStatisticsVisibilityChanged
-	};
+	enum class Event { kGeneralStatisticsVisibilityChanged };
 
 	const Event event;
 	Player& player;

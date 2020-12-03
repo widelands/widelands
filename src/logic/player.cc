@@ -1851,7 +1851,8 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 
 void Player::set_hidden_from_general_statistics(const bool hide) {
 	hidden_from_general_statistics_ = hide;
-	Notifications::publish(NotePlayerDetailsEvent(NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged, *this));
+	Notifications::publish(NotePlayerDetailsEvent(
+	   NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged, *this));
 }
 
 /**

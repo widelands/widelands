@@ -57,12 +57,14 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
            WuiPlotArea::Plotmode::kAbsolute),
      selected_information_(0),
      game_(*parent.get_game()),
-     subscriber_(Notifications::subscribe<Widelands::NotePlayerDetailsEvent>([this](const Widelands::NotePlayerDetailsEvent& note) {
-     	if (note.event == Widelands::NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged) {
-     		save_state_to_registry();
-     		create_player_buttons();
-     	}
-     })) {
+     subscriber_(Notifications::subscribe<Widelands::NotePlayerDetailsEvent>(
+        [this](const Widelands::NotePlayerDetailsEvent& note) {
+	        if (note.event ==
+	            Widelands::NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged) {
+		        save_state_to_registry();
+		        create_player_buttons();
+	        }
+        })) {
 	assert(my_registry_);
 
 	selected_information_ = my_registry_->selected_information;
@@ -226,11 +228,11 @@ void GeneralStatisticsMenu::create_player_buttons() {
 		show_or_hide_plot(p, my_registry_->selected_players[p - 1]);
 
 		player_buttons_box_.add(&cb, UI::Box::Resizing::kFillSpace);
-	} else {  //  player nr p does not exist
-	   cbs_[p - 1] = nullptr;
-	   show_or_hide_plot(p, false);
 	}
-
+	else {  //  player nr p does not exist
+		cbs_[p - 1] = nullptr;
+		show_or_hide_plot(p, false);
+	}
 }
 
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
