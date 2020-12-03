@@ -13,7 +13,7 @@ descriptions:new_productionsite_type {
       name = "europeans_brewery_winery",
       enhancement_cost = {
           planks = 1,
-          marble_colum = 1,
+          marble_column = 1,
           quartz = 1,
           diamond = 1
       },
