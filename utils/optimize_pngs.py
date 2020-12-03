@@ -128,15 +128,13 @@ def main():
     args = parse_args()
 
     # The filter function returns an iterator only, so we stick the results into a list for iterating multiple times.
-    tools = []
-    for tool in filter(lambda t: t.found, [
-            # This tool is destroying deadtree5 after it was cropped
-            # Tool('optipng', '-q -zc1-9 -zm1-9 -zs0-3 -f0-5', True),
-            Tool('advdef', '-z4', True),
-            Tool('advpng', '-z4', True),
-            Tool('pngcrush', '-reduce -brute'),
-    ]):
-        tools.append(tool)
+    tools = list(filter(lambda t: t.found, [
+        # This tool is destroying deadtree5 after it was cropped
+        # Tool('optipng', '-q -zc1-9 -zm1-9 -zs0-3 -f0-5', True),
+        Tool('advdef', '-z4', True),
+        Tool('advpng', '-z4', True),
+        Tool('pngcrush', '-reduce -brute'),
+    ]))
 
     pngs = collect_pngs(args.directory, args.prefix)
 
