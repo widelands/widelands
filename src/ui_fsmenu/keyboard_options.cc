@@ -32,14 +32,8 @@ constexpr int16_t kPadding = 4;
 
 struct ShortcutChooser : public UI::Window {
 	ShortcutChooser(UI::Panel& parent, const KeyboardShortcut c)
-	   : UI::Window(&parent,
-	                UI::WindowStyle::kFsMenu,
-	                "choose_shortcut",
-	                0,
-	                0,
-	                300,
-	                200,
-	                to_string(c)),
+	   : UI::Window(
+	        &parent, UI::WindowStyle::kFsMenu, "choose_shortcut", 0, 0, 300, 200, to_string(c)),
 	     key(get_shortcut(c)) {
 		UI::Box* const box =
 		   new UI::Box(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
