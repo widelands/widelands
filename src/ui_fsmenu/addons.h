@@ -112,8 +112,6 @@ protected:
 	void think() override;
 
 private:
-	FullscreenMenuMain& fsmm_;
-
 	enum class AddOnSortingCriteria {
 		kNameABC,
 		kNameCBA,
