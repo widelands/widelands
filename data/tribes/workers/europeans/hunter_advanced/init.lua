@@ -10,10 +10,6 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      hunting_bow = 1
-   },
    programs = {
       hunt = {
          "findobject=type:bob radius:18 attrib:eatable",

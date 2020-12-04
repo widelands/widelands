@@ -10,8 +10,13 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   experience = 16,
+   becomes = "europeans_charcoal_burner_normal",
+
    buildcost = {
-      europeans_carrier = 1
+      europeans_carrier = 1,
+      shovel = 1,
+      buckets = 1
    },
 
    animations = {

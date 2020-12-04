@@ -10,14 +10,6 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      shovel = 1,
-      buckets = 1,
-      scythe = 1,
-      basket = 1
-   },
-
    programs = {
       plant_barley = {
          "findspace=size:any radius:4 space",

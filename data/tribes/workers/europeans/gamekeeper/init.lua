@@ -11,7 +11,8 @@ descriptions:new_worker_type {
    vision_range = 2,
 
    buildcost = {
-      europeans_carrier = 1
+      europeans_carrier = 1,
+      basket = 1
    },
 
    programs = {

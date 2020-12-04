@@ -10,11 +10,6 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      bread_paddle = 1
-   },
-
    animations = {
       idle = {
          hotspot = { 5, 26 }

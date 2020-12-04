@@ -10,10 +10,8 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      hunting_bow = 1
-   },
+   experience = 24,
+   becomes = "europeans_hunter_advanced",
 
    programs = {
       hunt = {

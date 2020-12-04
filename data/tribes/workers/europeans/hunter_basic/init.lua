@@ -10,9 +10,13 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   experience = 16,
+   becomes = "europeans_hunter_normal",
+
    buildcost = {
       europeans_carrier = 1,
-      hunting_spear = 1
+      hunting_spear = 1,
+      hunting_bow = 1
    },
 
    programs = {

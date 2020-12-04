@@ -9,6 +9,9 @@ descriptions:new_worker_type {
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
+   
+   experience = 16,
+   becomes = "europeans_baker_normal",
 
    buildcost = {
       europeans_carrier = 1,

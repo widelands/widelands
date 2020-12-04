@@ -10,9 +10,13 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   experience = 16,
+   becomes = "europeans_lumberjack_normal",
+
    buildcost = {
       europeans_carrier = 1,
-      felling_ax = 1
+      felling_ax = 1,
+      saw = 1
    },
 
    programs = {

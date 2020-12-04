@@ -10,12 +10,6 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      buckets = 1,
-      shovel = 1
-   },
-
    programs = {
       plant = {
          "findspace=size:any radius:12 avoid:field saplingsearches:12",

@@ -10,11 +10,9 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      needles = 1
-   },
-
+   experience = 24,
+   becomes = "europeans_weaver_advanced",
+   
    animations = {
       idle = {
          hotspot = { 2, 22 }

@@ -10,11 +10,6 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      pick = 1
-   },
-
    programs = {
       cut_granite = {
          "findobject=attrib:rocks radius:10",

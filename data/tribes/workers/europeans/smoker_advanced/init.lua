@@ -10,11 +10,6 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      hook_pole = 1
-   },
-
    ware_hotspot = {0, 20},
 
    spritesheets = {

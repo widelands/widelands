@@ -10,6 +10,9 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   experience = 16,
+   becomes = "europeans_farmer_normal",
+
    buildcost = {
       europeans_carrier = 1,
       shovel = 1,

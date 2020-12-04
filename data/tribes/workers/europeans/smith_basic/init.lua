@@ -10,6 +10,9 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
+   experience = 16,
+   becomes = "europeans_smith_normal",
+
    buildcost = {
       europeans_carrier = 1,
       hammer = 1,

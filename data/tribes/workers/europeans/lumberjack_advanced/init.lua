@@ -10,11 +10,6 @@ descriptions:new_worker_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   buildcost = {
-      europeans_carrier = 1,
-      felling_ax = 1
-   },
-
    programs = {
       harvest = {
          "findobject=attrib:tree radius:18",

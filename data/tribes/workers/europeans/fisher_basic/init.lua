@@ -9,10 +9,14 @@ descriptions:new_worker_type {
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
+   
+   experience = 16,
+   becomes = "europeans_fisher_normal",
 
    buildcost = {
       europeans_carrier = 1,
-      fishing_rod = 1
+      fishing_rod = 1,
+      fishing_net = 1
    },
 
    programs = {
