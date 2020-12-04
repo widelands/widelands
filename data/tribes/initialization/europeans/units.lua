@@ -583,13 +583,31 @@ descriptions:new_tribe {
                   pgettext("europeans_ware", "They are used in the smelting works and smithies and produced by the toolsmith.")
                }
             }
+         },
+         {
+            name = "milking_tongs",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
+               purpose = pgettext("europeans_ware", "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith.")
+            }
+         },
+         {
+            name = "needles",
+            default_target_quantity = 2,
+            preciousness = 1,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
+               purpose = pgettext("europeans_ware", "Needöes are used by weaver.")
+            }
          }
       },
       {
          -- Tools 2
          {
             name = "scythe",
-            default_target_quantity = 2,
+            default_target_quantity = 4,
             preciousness = 0,
             helptexts = {
                purpose = {
@@ -602,29 +620,11 @@ descriptions:new_tribe {
          },
          {
             name = "basket",
-            default_target_quantity = 2,
+            default_target_quantity = 4,
             preciousness = 0,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Basket
                purpose = pgettext("europeans_ware", "This basket is needed by the farmer for harvesting the fruits and grapes and needed by miller and by gamekeeper. It is produced by the toolsmith.")
-            }
-         },
-         {
-            name = "milking_tongs",
-            default_target_quantity = 2,
-            preciousness = 0,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
-               purpose = pgettext("europeans_ware", "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith.")
-            }
-         },
-         {
-            name = "needles",
-            default_target_quantity = 2,
-            preciousness = 0,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
-               purpose = pgettext("europeans_ware", "Needöes are used by weaver.")
             }
          },
          {
