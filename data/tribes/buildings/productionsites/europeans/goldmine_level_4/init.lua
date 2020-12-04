@@ -22,6 +22,22 @@ descriptions:new_productionsite_type {
       }
    },
 
+   animations = {
+      idle = {
+         pictures = path.list_files(dirname .. "idle_??.png"),
+         hotspot = { 49, 61 },
+      },
+      working = {
+         pictures = path.list_files(dirname .. "working_??.png"),
+         hotspot = { 49, 61 },
+         fps = 10
+      },
+      empty = {
+         pictures = path.list_files(dirname .. "empty_??.png"),
+         hotspot = { 49, 61 },
+      },
+   },
+   
    aihints = {},
 
    working_positions = {
