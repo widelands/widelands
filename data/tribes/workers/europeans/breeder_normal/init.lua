@@ -12,6 +12,11 @@ descriptions:new_worker_type {
 
    experience = 24,
    becomes = "europeans_breeder_advanced",
+   
+   buildcost = {
+      europeans_carrier = 1,
+      milking_tongs = 1
+   },
 
    animations = {
       idle = {
