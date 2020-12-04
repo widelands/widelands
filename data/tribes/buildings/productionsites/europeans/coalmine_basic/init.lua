@@ -87,7 +87,7 @@ descriptions:new_productionsite_type {
          -- just a dummy program to fix encyclopedia
          descname = "encyclopedia",
          actions = {
-            "consume=ration",
+            "consume=smoked_fish,smoked_meat europeans_bread beer",
             "produce=coal:2",
          }
       },
