@@ -6,7 +6,7 @@ The Widelands add-on system is still under development. In particular, Widelands
 Structure
 ---------
 
-An add-on is a directory (never a zip-compressed file!) with the extension ``*.wad``. Add-ons have to be placed in the ``addons`` subdirectory of the home directory to be found by the game.
+An add-on is a directory (never a zip-compressed file!) with the extension ``*.wad``. Add-ons have to be placed in the ``addons`` subdirectory of the Widelands home directory to be found by the game.
 
 The ``addons`` File
 -------------------
@@ -67,9 +67,9 @@ If the add-on introduces one or more new tribes, it will additionally need to co
 
 world
 ~~~~~
-A script that modifies world units, namely terrains, critter, or resources. You can modify existing units and create new ones.
+A script that modifies world units, namely terrains, critters, immovables, or resources. You can modify existing units and create new ones.
 
-The structure of world add-ons is identical to the structure of tribe add-ons (``register.lua`` files, ``init.lua`` files, optional ``preload.lua`` and/or ``postload.lua``; no ``tribes.lua`` though).
+The structure of world add-ons is identical to the structure of tribe add-ons (``register.lua`` files, ``init.lua`` files, optional ``preload.lua`` and/or ``postload.lua``; no ``tribes`` directory though).
 
 Additionally, a world add-on has to contain a script called ``editor.lua`` which will be used to expose any new types to the editor interface. For details see the official editor init script ``data/world/init.lua``. Note that this script needs to be present even if no new units are added.
 
