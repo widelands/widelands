@@ -8,6 +8,20 @@ descriptions:new_productionsite_type {
    descname = pgettext("europeans_building", "Farm Level 2"),
    icon = dirname .. "menu.png",
    size = "big",
+   
+   enhancement = {
+        name = "europeans_farm_level_3",
+        enhancement_cost = {
+          marble_column = 3,
+          quartz = 1,
+          diamond = 1
+        },
+        enhancement_return_on_dismantle = {
+          marble = 3,
+          quartz = 1,
+          diamond = 1
+        },
+   },
 
    animations = {
       idle = {

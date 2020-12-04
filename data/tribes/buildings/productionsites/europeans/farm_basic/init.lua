@@ -9,6 +9,32 @@ descriptions:new_productionsite_type {
    icon = dirname .. "menu.png",
    size = "big",
 
+   enhancement = {
+        name = "europeans_farm_level_1",
+        enhancement_cost = {
+          planks = 1,
+          brick = 1,
+          grout = 1,
+          spidercloth = 2,
+          quartz = 1
+        },
+        enhancement_return_on_dismantle = {
+          granite = 1,
+          quartz = 1,
+        },
+   },
+
+   buildcost = {
+      planks = 4,
+      reed = 3,
+      brick = 2,
+      grout = 2
+   },
+   return_on_dismantle = {
+      log = 3,
+      granite = 2
+   },
+
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
