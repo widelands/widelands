@@ -37,7 +37,6 @@ descriptions:new_productionsite_type {
    },
 
    working_positions = {
-      europeans_breeder_normal = 1,
       europeans_breeder_advanced = 1
    },
 
