@@ -379,15 +379,6 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "fruit",
-            default_target_quantity = 16,
-            preciousness = 4,
-            helptexts = {
-               -- TRANSLATORS: Helptext for a frisian ware: Fruit
-               purpose = pgettext("europeans_ware", "Fruit are berries gathered from berry bushes by a fruit collector. They are used to brew mead.")
-            }
-         },
-         {
             name = "honey",
             default_target_quantity = 16,
             preciousness = 4,
@@ -403,6 +394,15 @@ descriptions:new_tribe {
             helptexts = {
                -- TRANSLATORS: Helptext for a frisian ware: Mead
                purpose = pgettext("europeans_ware", "Mead is produced by breweries. Soldiers drink mead during advanced training.")
+            }
+         },
+         {
+            name = "fruit",
+            default_target_quantity = 16,
+            preciousness = 4,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a frisian ware: Fruit
+               purpose = pgettext("europeans_ware", "Fruit are berries gathered from berry bushes by a fruit collector. They are used to brew fruit wine.")
             }
          },
          {

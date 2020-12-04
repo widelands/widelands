@@ -31,6 +31,7 @@ descriptions:new_productionsite_type {
       { name = "water", amount = 12 },
       { name = "barley", amount = 10 },
       { name = "honey", amount = 6 },
+      { name = "fruit", amount = 8 },
       { name = "grape", amount = 8 }
    },
 
@@ -61,7 +62,7 @@ descriptions:new_productionsite_type {
       },
       brew_mead = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-         descname = _"brewing beer",
+         descname = _"brewing mead",
          actions = {
             "return=skipped unless economy needs mead",
             "return=skipped when economy needs water",
@@ -93,11 +94,11 @@ descriptions:new_productionsite_type {
          actions = {
             -- Grapes are only needed for wine, so no need to check if wine is needed
             "return=skipped unless economy needs wine",
-            "consume=grape:4",
+            "consume=water fruit grape:4",
             "sleep=duration:60s",
             "playsound=sound/empire/winebubble priority:40% allow_multiple",
             "animate=working duration:60s",
-            "produce=wine:2"
+            "produce=wine:3"
          }
       },
    },

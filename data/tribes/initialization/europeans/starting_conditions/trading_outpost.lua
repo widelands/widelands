@@ -41,6 +41,7 @@ return {
             pick = 8,
             fire_tongs = 2,
             scythe = 4,
+            basket = 4,
          },
          workers = {
              europeans_carrier = 32,

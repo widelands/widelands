@@ -75,7 +75,7 @@ descriptions:new_productionsite_type {
       },
       brew_mead = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
-         descname = _"brewing beer",
+         descname = _"brewing mead",
          actions = {
             "return=skipped unless economy needs mead",
             "return=skipped when economy needs water",
