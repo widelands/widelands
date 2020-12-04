@@ -42,7 +42,6 @@ descriptions:new_worker_type {
 
    spritesheets = {
       dig = {
-         directory = dirname,
          basename = "dig",
          fps = 20,
          frames = 10,

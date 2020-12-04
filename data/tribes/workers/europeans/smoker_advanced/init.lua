@@ -6,6 +6,7 @@ descriptions:new_worker_type {
    name = "europeans_smoker_advanced",
    -- TRANSLATORS: This is a worker name used in lists of workers
    descname = pgettext ("europeans_worker", "Advanced Smoker"),
+   animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
 
@@ -18,7 +19,6 @@ descriptions:new_worker_type {
 
    spritesheets = {
       walk = {
-         directory = dirname,
          basename = "walk",
          fps = 15,
          frames = 10,
@@ -28,7 +28,6 @@ descriptions:new_worker_type {
          hotspot = {10, 23}
       },
       walkload = {
-         directory = dirname,
          basename = "walkload",
          fps = 15,
          frames = 10,
@@ -40,7 +39,6 @@ descriptions:new_worker_type {
    },
    animations = {
       idle = {
-         directory = dirname,
          basename = "idle",
          hotspot = {8, 23}
       },
