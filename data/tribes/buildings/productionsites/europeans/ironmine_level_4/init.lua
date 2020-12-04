@@ -79,7 +79,7 @@ descriptions:new_productionsite_type {
          descname = _"mining quartz",
          actions = {
             "animate=working duration:30s",
-            "mine=resource_gold radius:10 yield:100% when_empty:25% experience_on_fail:10%",
+            "mine=resource_iron radius:10 yield:100% when_empty:25% experience_on_fail:10%",
             "produce=quartz",
          }
       },
