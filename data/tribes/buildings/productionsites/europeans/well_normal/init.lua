@@ -46,11 +46,15 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "sleep=duration:10s",
+            "animate=working duration:10s",
+            "mine=resource_water radius:2 yield:100% when_empty:75%",
+            "produce=water"
             "return=skipped unless economy needs water",
             "sleep=duration:10s",
-            "animate=working duration:20s",
+            "animate=working duration:10s",
             "mine=resource_water radius:2 yield:100% when_empty:75%",
-            "produce=water:2"
+            "produce=water"
          }
       },
    },
