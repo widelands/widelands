@@ -247,7 +247,7 @@ void GeneralStatisticsMenu::save_state_to_registry() {
 		Widelands::PlayerNumber const nr_players = game_.map().get_nrplayers();
 		iterate_players_existing_novar(p, nr_players, game_) {
 			my_registry_->selected_players[p - 1] =
-			   cbs_[p - 1] && cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
+			   !cbs_[p - 1] || cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
 		}
 	}
 }
