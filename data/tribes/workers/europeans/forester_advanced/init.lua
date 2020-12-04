@@ -19,7 +19,18 @@ descriptions:new_worker_type {
          "plant=attrib:tree_sapling",
          "animate=water duration:2s",
          "return"
-      }
+      },
+      check = {
+         "findspace=size:any radius:12 terraform",
+      },
+      terraform = {
+         "findspace=size:any radius:12 terraform",
+         "walk=coords",
+         "animate=dig duration:2s",
+         "terraform",
+         "animate=dig duration:2s",
+         "return"
+      },
    },
 
    animations = {
