@@ -6,6 +6,8 @@ push_textdomain("tribes_encyclopedia")
 
 -- For formatting time strings
 include "tribes/scripting/help/time_strings.lua"
+-- For debug mode
+include "data/scripting/debug.lua"
 
 descriptions:new_tribe {
    name = "europeans",
@@ -2088,28 +2090,28 @@ descriptions:new_tribe {
          name = "europeans_well_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
+            purpose = pgettext("europeans_building", "Draws water out of the deep.")
          }
       },
       {
          name = "europeans_well_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
+            purpose = pgettext("europeans_building", "Draws water out of the deep.")
          }
       },
       {
          name = "europeans_well_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Well
-            purpose = pgettext("building", "Draws water out of the deep.")
+            purpose = pgettext("europeans_building", "Draws water out of the deep.")
          }
       },
       {
          name = "europeans_lumberjacks_house_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Lumberjack_s Hut
-            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
+            purpose = pgettext("europeans_building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for a europeans production site: Lumberjack_s Hut
             note = pgettext("europeans_building", "The lumberjack’s hut needs trees to fell within the work area."),
          }
@@ -2118,7 +2120,7 @@ descriptions:new_tribe {
          name = "europeans_lumberjacks_house_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Woodcutter's House
-            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
+            purpose = pgettext("europeans_building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an europeans production site: Woodcutter's House
             note = pgettext("europeans_building", "The woodcutter’s house needs trees to fell within the work area.")
          }
@@ -2127,7 +2129,7 @@ descriptions:new_tribe {
          name = "europeans_lumberjacks_house_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Lumberjack's House
-            purpose = pgettext("building", "Fells trees in the surrounding area and processes them into logs."),
+            purpose = pgettext("europeans_building", "Fells trees in the surrounding area and processes them into logs."),
             -- TRANSLATORS: Note helptext for an europeans production site: Lumberjack's House
             note = pgettext("europeans_building", "The lumberjack’s house needs trees to fell within the work area.")
          }
@@ -2136,7 +2138,7 @@ descriptions:new_tribe {
          name = "europeans_foresters_house_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Ranger's Hut
-            purpose = pgettext("building", "Plants trees in the surrounding area."),
+            purpose = pgettext("europeans_building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for a europeans production site: Ranger's Hut
             note = pgettext("europeans_building", "The ranger’s hut needs free space within the work area to plant the trees."),
          }
@@ -2145,7 +2147,7 @@ descriptions:new_tribe {
          name = "europeans_foresters_house_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Forester's House
-            purpose = pgettext("building", "Plants trees in the surrounding area."),
+            purpose = pgettext("europeans_building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an europeans production site: Forester's House
             note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
          }
@@ -2154,7 +2156,7 @@ descriptions:new_tribe {
          name = "europeans_foresters_house_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Forester's House
-            purpose = pgettext("building", "Plants trees in the surrounding area."),
+            purpose = pgettext("europeans_building", "Plants trees in the surrounding area."),
             -- TRANSLATORS: Note helptext for an europeans production site: Forester's House
             note = pgettext("europeans_building", "The forester’s house needs free space within the work area to plant the trees.")
          }
@@ -2190,7 +2192,7 @@ descriptions:new_tribe {
          name = "europeans_clay_pit",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Clay Pit
-            purpose = pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks.")
+            purpose = pgettext("europeans_building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks.")
          }
       },
       {
@@ -2228,7 +2230,7 @@ descriptions:new_tribe {
          name = "europeans_hunters_house_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Hunter's Hut
-            purpose = pgettext("building", "Hunts animals to produce meat."),
+            purpose = pgettext("europeans_building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for a europeans production site: Hunter's Hut
             note = pgettext("europeans_building", "The hunter’s hut needs animals to hunt within the work area."),
          }
@@ -2237,7 +2239,7 @@ descriptions:new_tribe {
          name = "europeans_hunters_house_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Hunter's House
-            purpose = pgettext("building", "Hunts animals to produce meat."),
+            purpose = pgettext("europeans_building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for an europeans production site: Hunter's House
             note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
          }
@@ -2246,7 +2248,7 @@ descriptions:new_tribe {
          name = "europeans_hunters_house_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Hunter's House
-            purpose = pgettext("building", "Hunts animals to produce meat."),
+            purpose = pgettext("europeans_building", "Hunts animals to produce meat."),
             -- TRANSLATORS: Note helptext for an europeans production site: Hunter's House
             note = pgettext("europeans_building", "The hunter’s house needs animals to hunt within the work area.")
          }
@@ -2282,42 +2284,42 @@ descriptions:new_tribe {
          name = "europeans_sawmill_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
-            purpose = pgettext("building", "Saws logs to produce planks.")
+            purpose = pgettext("europeans_building", "Saws logs to produce planks.")
          }
       },
       {
          name = "europeans_sawmill_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
-            purpose = pgettext("building", "Saws logs to produce planks.")
+            purpose = pgettext("europeans_building", "Saws logs to produce planks.")
          }
       },
       {
          name = "europeans_sawmill_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Sawmill
-            purpose = pgettext("building", "Saws logs to produce planks.")
+            purpose = pgettext("europeans_building", "Saws logs to produce planks.")
          }
       },
       {
          name = "europeans_charcoal_kiln_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            purpose = pgettext("europeans_building", "Burns logs into charcoal.")
          }
       },
       {
          name = "europeans_charcoal_kiln_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            purpose = pgettext("europeans_building", "Burns logs into charcoal.")
          }
       },
       {
          name = "europeans_charcoal_kiln_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Charcoal Kiln
-            purpose = pgettext("building", "Burns logs into charcoal.")
+            purpose = pgettext("europeans_building", "Burns logs into charcoal.")
          }
       },
       {
@@ -2354,7 +2356,7 @@ descriptions:new_tribe {
          name = "europeans_mill_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
-            purpose = pgettext("building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour.")
+            purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour.")
          }
       },
       {
@@ -2403,21 +2405,21 @@ descriptions:new_tribe {
          name = "europeans_brewery_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Brewery
-            purpose = pgettext("building", "Produces beer to keep the miners strong and happy.")
+            purpose = pgettext("europeans_building", "Produces beer to keep the miners strong and happy.")
          }
       },
       {
          name = "europeans_brewery_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Brewery
-            purpose = pgettext("building", "Produces beer and mead to keep the miners strong and happy.")
+            purpose = pgettext("europeans_building", "Produces beer and mead to keep the miners strong and happy.")
          }
       },
       {
          name = "europeans_brewery_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Brewery
-            purpose = pgettext("building", "Produces beer, mead and strong_beer for trainingssites."),
+            purpose = pgettext("europeans_building", "Produces beer, mead and strong_beer for trainingssites."),
          }
       },
       {
@@ -2431,91 +2433,91 @@ descriptions:new_tribe {
          name = "europeans_smelting_works_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Smelting Works
-            purpose = pgettext("building", "Smelts ore into iron.")
+            purpose = pgettext("europeans_building", "Smelts ore into iron.")
          }
       },
       {
          name = "europeans_smelting_works_normal",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
-            purpose = pgettext("building", "Smelts ore into iron and gold.")
+            purpose = pgettext("europeans_building", "Smelts ore into iron and gold.")
          }
       },
       {
          name = "europeans_smelting_works_advanced",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
-            purpose = pgettext("building", "Smelts ore into iron and gold. Recycles scrap metal.")
+            purpose = pgettext("europeans_building", "Smelts ore into iron and gold. Recycles scrap metal.")
          }
       },
       {
          name = "europeans_smithy_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need.")
          }
       },
       {
          name = "europeans_smithy_level_1",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need.")
          }
       },
       {
          name = "europeans_smithy_level_2",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need.")
          }
       },
       {
          name = "europeans_smithy_level_3",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need.")
          }
       },
       {
          name = "europeans_smithy_level_4",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
          }
       },
       {
          name = "europeans_smithy_level_5",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
          }
       },
       {
          name = "europeans_smithy_level_6",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
          }
       },
       {
          name = "europeans_smithy_level_7",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
          }
       },
       {
          name = "europeans_smithy_level_8",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
          }
       },
       {
          name = "europeans_smithy_level_9",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
-            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+            purpose = pgettext("europeans_building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
          }
       },
       {
@@ -2528,10 +2530,38 @@ descriptions:new_tribe {
 
       -- Big
       {
+         name = "europeans_farm_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Farm
+            purpose = pgettext("europeans_building", "Sows and harvests corn, rye and wheat."),
+         }
+      },
+      {
+         name = "europeans_farm_level_1",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Farm
+            purpose = pgettext("europeans_building", "Sows and harvests barley, corn, rye and wheat."),
+         }
+      },
+      {
+         name = "europeans_farm_level_2",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Blackroot Farm
+            purpose = pgettext("europeans_building", "Sows and harvests barley, corn, rye and wheat."),
+         }
+      },
+      {
+         name = "europeans_farm_level_3",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Blackroot Farm
+            purpose = pgettext("europeans_building", "Sows and harvests barley, corn, fruit, grape, rye and wheat."),
+         }
+      },
+      {
          name = "europeans_spiderfarm",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Spider Farm
-            purpose = pgettext("building", "Breeds spiders for silk.")
+            purpose = pgettext("europeans_building", "Breeds spiders for silk.")
          }
       },
       {
@@ -2568,126 +2598,126 @@ descriptions:new_tribe {
          name = "europeans_coalmine_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for production site: Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs coal out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_coalmine_level_1",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs coal out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_coalmine_level_2",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs coal out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_coalmine_level_3",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs coal out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_coalmine_level_4",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs coal out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_coalmine_level_5",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
-            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs coal out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_ironmine_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_ironmine_level_1",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Deep Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_ironmine_level_2",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Deeper Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_ironmine_level_3",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_ironmine_level_4",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_ironmine_level_5",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
-            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_goldmine_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for production site: Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs gold ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_goldmine_level_1",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs gold ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_goldmine_level_2",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs gold ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_goldmine_level_3",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs gold ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_goldmine_level_4",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs gold ore out of the ground in mountain terrain.")
          }
       },
       {
          name = "europeans_goldmine_level_5",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
-            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+            purpose = pgettext("europeans_building", "Digs gold ore out of the ground in mountain terrain.")
          }
       },
 
@@ -2905,16 +2935,16 @@ descriptions:new_tribe {
          name = "europeans_ferry_yard",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Ferry Yard
-            purpose = pgettext("building", "Builds ferries."),
+            purpose = pgettext("europeans_building", "Builds ferries."),
             -- TRANSLATORS: Note helptext for an europeans production site: Ferry Yard
-            note = pgettext("building", "Needs water nearby.")
+            note = pgettext("europeans_building", "Needs water nearby.")
          }
       },
       {
          name = "europeans_shipyard",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Shipyard
-            purpose = pgettext("building", "Constructs ships that are used for overseas colonization and for trading between ports.")
+            purpose = pgettext("europeans_building", "Constructs ships that are used for overseas colonization and for trading between ports.")
          }
       },
 
@@ -2923,22 +2953,22 @@ descriptions:new_tribe {
          name = "constructionsite",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an europeans building: Construction Site
-            lore = pgettext("building", "‘Don’t swear at the builder who is short of building materials.’"),
+            lore = pgettext("europeans_building", "‘Don’t swear at the builder who is short of building materials.’"),
             -- TRANSLATORS: Lore author helptext for an europeans building: Construction Site
-            lore_author = pgettext("building", "Proverb widely used for impossible tasks of any kind"),
+            lore_author = pgettext("europeans_building", "Proverb widely used for impossible tasks of any kind"),
             -- TRANSLATORS: Purpose helptext for an europeans building: Construction Site
-            purpose = pgettext("building", "A new building is being built at this construction site.")
+            purpose = pgettext("europeans_building", "A new building is being built at this construction site.")
          }
       },
       {
          name = "dismantlesite",
          helptexts = {
             -- TRANSLATORS: Lore helptext for an europeans building: Dismantle Site
-            lore = pgettext("building", "‘New paths will appear when you are willing to tear down the old.’"),
+            lore = pgettext("europeans_building", "‘New paths will appear when you are willing to tear down the old.’"),
             -- TRANSLATORS: Lore author helptext for an europeans building: Dismantle Site
-            lore_author = pgettext("building", "Proverb"),
+            lore_author = pgettext("europeans_building", "Proverb"),
             -- TRANSLATORS: Purpose helptext for an europeans building: Dismantle Site
-            purpose = pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+            purpose = pgettext("europeans_building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
          }
       }
    },
