@@ -6,8 +6,6 @@ push_textdomain("tribes_encyclopedia")
 
 -- For formatting time strings
 include "tribes/scripting/help/time_strings.lua"
--- For debug mode
-include "data/scripting/debug.lua"
 
 descriptions:new_tribe {
    name = "europeans",
