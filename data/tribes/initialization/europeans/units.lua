@@ -2564,48 +2564,48 @@ descriptions:new_tribe {
       },
 
       -- Mines
-      --{
-         --name = "europeans_coalmine_basic",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for production site: Coal Mine
-            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_coalmine_basic_deep",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
-            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_coalmine_basic_deeper",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
-            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_coalmine_normal",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
-            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_coalmine_normal_deep",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Deep Coal Mine
-            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_coalmine_advanced",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
-            --purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
-         --}
-      --},
+      {
+         name = "europeans_coalmine_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_coalmine_level_1",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Deep Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_coalmine_level_2",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Deeper Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_coalmine_level_3",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_coalmine_level_4",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_coalmine_level_5",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Coal Mine
+            purpose = pgettext("building", "Digs coal out of the ground in mountain terrain.")
+         }
+      },
       {
          name = "europeans_ironmine_basic",
          helptexts = {
@@ -2613,83 +2613,83 @@ descriptions:new_tribe {
             purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
          }
       },
-      --{
-         --name = "europeans_ironmine_level_1",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for a europeans production site: Deep Iron Mine
-            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_ironmine_basic_deeper",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for a europeans production site: Deeper Iron Mine
-            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_ironmine_normal",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
-            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_ironmine_normal_deep",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Deep Iron Mine
-            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_ironmine_advanced",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
-            --purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_goldmine_basic",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for production site: Gold Mine
-            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_goldmine_basic_deep",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
-            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_goldmine_basic_deeper",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
-            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_goldmine_normal",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
-            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_goldmine_normal_deep",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Deep Gold Mine
-            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         --}
-      --},
-      --{
-         --name = "europeans_goldmine_advanced",
-         --helptexts = {
-            ---- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
-            --purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
-         --}
-      --},
+      {
+         name = "europeans_ironmine_level_1",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Deep Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_ironmine_level_2",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a europeans production site: Deeper Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_ironmine_level_3",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_ironmine_level_4",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_ironmine_level_5",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Iron Mine
+            purpose = pgettext("building", "Digs iron ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine_level_1",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Deep Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine_level_2",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for production site: Deeper Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine_level_3",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine_level_4",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Deep Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
+      {
+         name = "europeans_goldmine_level_5",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an europeans production site: Gold Mine
+            purpose = pgettext("building", "Digs gold ore out of the ground in mountain terrain.")
+         }
+      },
 
       -- Training Sites
       {
