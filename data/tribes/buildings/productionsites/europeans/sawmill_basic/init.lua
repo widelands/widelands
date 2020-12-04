@@ -64,12 +64,18 @@ descriptions:new_productionsite_type {
          descname = _"sawing logs",
          actions = {
             "return=skipped unless economy needs planks",
-            "return=skipped when economy needs log",
+            "return=skipped when not site has log:2",
+            "consume=log:2",
             "sleep=duration:20s",
+            "playsound=sound/atlanteans/saw/benchsaw priority:50% allow_multiple",
+            "animate=working duration:20s",
+            "produce=planks",
+            "return=skipped when economy needs log",
             "return=skipped when not site has log:4",
             "consume=log:4",
+            "sleep=duration:20s",
             "playsound=sound/atlanteans/saw/benchsaw priority:50% allow_multiple",
-            "animate=working duration:40s",
+            "animate=working duration:30s",
             "produce=planks:3"
          }
       },

@@ -37,12 +37,18 @@ descriptions:new_productionsite_type {
          descname = _"sawing logs",
          actions = {
             "return=skipped unless economy needs planks",
-            "return=skipped when economy needs log",
-            "consume=log:4",
-            "return=skipped when not site has log:4",
-            "sleep=duration:12s", -- Much faster than barbarians' wood hardener
+            "return=skipped when not site has log:2",
+            "consume=log:2",
+            "sleep=duration:10s",
             "playsound=sound/sawmill/sawmill priority:40% allow_multiple",
-            "animate=working duration:20s", -- Much faster than barbarians' wood hardener
+            "animate=working duration:5s",
+            "produce=planks",
+            "return=skipped when economy needs log",
+            "return=skipped when not site has log:4",
+            "consume=log:4",
+            "sleep=duration:10s",
+            "playsound=sound/sawmill/sawmill priority:40% allow_multiple",
+            "animate=working duration:15s",
             "produce=planks:3"
          }
       },

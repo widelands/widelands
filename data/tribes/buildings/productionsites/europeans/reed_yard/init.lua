@@ -44,6 +44,10 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "return=skipped unless economy needs reed",
+            "call=plant",
+            "call=harvest",
+            "return=skipped when economy needs water",
             "call=plant",
             "call=harvest",
          }
@@ -52,11 +56,9 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _"planting reed",
          actions = {
-            "return=skipped unless economy needs reed",
-            "return=skipped when economy needs water",
-            "consume=water:2",
+            "consume=water",
             "callworker=plant_reed",
-            "sleep=duration:8s" -- orig sleep=duration:20s but gardener animation was increased by 2sec
+            "sleep=duration:8s"
          }
       },
       harvest = {
