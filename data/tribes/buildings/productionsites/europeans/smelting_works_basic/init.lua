@@ -27,11 +27,11 @@ descriptions:new_productionsite_type {
    buildcost = {
       planks = 3,
       reed = 2,
-      granite = 1
+      granite = 2
    },
    return_on_dismantle = {
       log = 2,
-      granite = 1
+      granite = 2
    },
 
    animations = {

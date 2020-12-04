@@ -68,7 +68,7 @@ descriptions:new_productionsite_type {
             "sleep=duration:20s",
             "return=skipped when not site has log:4",
             "consume=log:4",
-            "playsound=sound/atlanteans/saw/benchsaw 192",
+            "playsound=sound/atlanteans/saw/benchsaw priority:50% allow_multiple",
             "animate=working duration:40s",
             "produce=planks:3"
          }

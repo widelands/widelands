@@ -80,7 +80,7 @@ descriptions:new_productionsite_type {
             "consume=marble:3",
             "sleep=duration:30s",
             "playsound=sound/stonecutting/stonemason priority:50% allow_multiple",
-            "animate=working duration:30",
+            "animate=working duration:30s",
             "produce=marble_column:2"
          }
       }

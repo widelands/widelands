@@ -583,15 +583,6 @@ descriptions:new_tribe {
                   pgettext("europeans_ware", "They are used in the smelting works and smithies and produced by the toolsmith.")
                }
             }
-         },
-         {
-            name = "needles",
-            default_target_quantity = 2,
-            preciousness = 1,
-            helptexts = {
-               -- TRANSLATORS: Helptext for a europeans ware: Needles
-               purpose = pgettext("europeans_ware", "Needles are used by armorsmithy to produce armor.")
-            }
          }
       },
       {
@@ -610,6 +601,33 @@ descriptions:new_tribe {
             }
          },
          {
+            name = "basket",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Basket
+               purpose = pgettext("europeans_ware", "This basket is needed by the farmer for harvesting the fruits and grapes and needed by miller and by gamekeeper. It is produced by the toolsmith.")
+            }
+         },
+         {
+            name = "milking_tongs",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
+               purpose = pgettext("europeans_ware", "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith.")
+            }
+         },
+         {
+            name = "needles",
+            default_target_quantity = 2,
+            preciousness = 0,
+            helptexts = {
+               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
+               purpose = pgettext("europeans_ware", "Needöes are used by weaver.")
+            }
+         },
+         {
             name = "bread_paddle",
             default_target_quantity = 2,
             preciousness = 0,
@@ -620,15 +638,6 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an europeans ware: Bread Paddle, part 2
                   pgettext("europeans_ware", "Bread paddles are produced by the toolsmith.")
                }
-            }
-         },
-         {
-            name = "milking_tongs",
-            default_target_quantity = 2,
-            preciousness = 0,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Milking Tongs
-               purpose = pgettext("europeans_ware", "Milking tongs are used by the spider breeder to milk the spiders. They are produced by the toolsmith.")
             }
          },
          {
@@ -682,15 +691,6 @@ descriptions:new_tribe {
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Hook Pole
                purpose = pgettext("europeans_ware", "This hook pole is used by the smoker to suspend all the meat and fish from the top of the smokery. It is created by the toolsmith.")
-            }
-         },
-         {
-            name = "basket",
-            default_target_quantity = 2,
-            preciousness = 0,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Basket
-               purpose = pgettext("europeans_ware", "This basket is needed by the farmer for harvesting the fruits and grapes and needed by gamekeeper. It is produced by the toolsmith.")
             }
          }
       },
@@ -2446,6 +2446,76 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Smelting Works
             purpose = pgettext("building", "Smelts ore into iron and gold. Recycles scrap metal.")
+         }
+      },
+      {
+         name = "europeans_smithy_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_1",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_2",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_3",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_4",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_5",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_6",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_7",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_8",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
+         }
+      },
+      {
+         name = "europeans_smithy_level_9",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for an atlantean production site: Toolsmithy
+            purpose = pgettext("building", "Forges all the tools that your workers need. Produces armor and weapons, too.")
          }
       },
       {
