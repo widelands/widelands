@@ -73,7 +73,7 @@ descriptions:new_productionsite_type {
          descname = _"mining gold",
          actions = {
             "animate=working duration:20s",
-            "mine=resource_gold radius:6 yield:60% when_empty:15% experience_on_fail:10%",
+            "mine=resource_gold radius:4 yield:60% when_empty:15% experience_on_fail:10%",
             "produce=ore",
          }
       },
