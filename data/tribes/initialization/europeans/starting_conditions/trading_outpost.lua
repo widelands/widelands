@@ -7,57 +7,71 @@ include "scripting/infrastructure.lua"
 push_textdomain("tribes")
 
 return {
-   -- TRANSLATORS: This is the name of a starting condition
-   descname = _"Trading Outpost",
-   -- TRANSLATORS: This is the tooltip for the "Trading Outpost" starting condition
-   tooltip = _"If this player runs low on important wares, they will be replenished for free",
-   func =  function(plr, shared_in_start)
+    -- TRANSLATORS: This is the name of a starting condition
+    descname = _"Trading Outpost",
+    -- TRANSLATORS: This is the tooltip for the "Trading Outpost" starting condition
+    tooltip = _"If this player runs low on important wares, they will be replenished for free",
+    func =  function(plr, shared_in_start)
 
-      local sf = wl.Game().map.player_slots[plr.number].starting_field
-      if shared_in_start then
-         sf = shared_in_start
-      else
-         plr:allow_workers("all")
-      end
+    local sf = wl.Game().map.player_slots[plr.number].starting_field
+    if shared_in_start then
+     sf = shared_in_start
+    else
+     plr:allow_workers("all")
+    end
 
-      prefilled_buildings(plr, { "europeans_headquarters", sf.x, sf.y,
-         wares = {
+    prefilled_buildings(plr, { "europeans_headquarters", sf.x, sf.y,
+        wares = {
             water = 128,
             log = 64,
             planks = 32,
             spidercloth = 32,
+            spider_silk = 32,
             reed = 32,
+            coal = 64,
             granite = 64,
             grout = 32,
             brick = 32,
             marble = 16,
             diamond = 16,
             quartz = 16,
-            hammer = 10,
-            saw = 10,
-            shovel = 10,
-            buckets = 10,
-            felling_ax = 8,
-            pick = 8,
-            fire_tongs = 2,
-            scythe = 4,
-            basket = 4,
-         },
-         workers = {
-             europeans_carrier = 32,
-             europeans_builder = 8,
-             europeans_geologist = 2,
-             europeans_trainer = 4,
-         },
-         soldiers = {
+            ore = 16,
+        },
+        workers = {
+            europeans_carrier = 32,
+            europeans_builder = 8,
+            europeans_geologist = 2,
+            europeans_trainer = 4,
+            europeans_lumberjack_basic = 4,
+            europeans_forester_basic = 2,
+            europeans_carpenter_basic = 2,
+            europeans_stonecutter_basic = 2,
+            europeans_stonemason_basic = 2,
+            europeans_hunter_basic = 2,
+            europeans_fisher_basic = 2,
+            europeans_fishbreeder = 2,
+            europeans_farmer_basic = 4,
+            europeans_miller_basic = 1,
+            europeans_baker_basic = 1,
+            europeans_smoker_basic = 1,
+            europeans_brewer_basic = 1,
+            europeans_breeder_normal = 1,
+            europeans_weaver_basic = 1,
+            europeans_charcoal_burner_basic = 1,
+            europeans_miner_basic = 6,
+            europeans_smelter_basic = 1,
+            europeans_smith_basic = 2,
+            europeans_shipwright = 2,
+        },
+        soldiers = {
             [{0,0,0,0}] = 25,
             [{1,0,0,1}] = 5,
             [{1,1,0,0}] = 5,
-         }
+        }
       })
 
-      place_building_in_region(plr, "europeans_well_advanced", sf:region(6), {
-      })
+    place_building_in_region(plr, "europeans_well_advanced", sf:region(6), {
+    })
 
       -- Get all warehouse types
       local warehouse_types = {}
