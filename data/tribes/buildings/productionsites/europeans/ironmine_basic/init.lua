@@ -79,7 +79,7 @@ descriptions:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:10s",
-            "mine=resource_iron radius:2 yield:20% when_empty:5% experience_on_fail:10%",
+            "mine=resource_iron radius:4 yield:20% when_empty:5% experience_on_fail:10%",
             "produce=ore",
          }
       },
