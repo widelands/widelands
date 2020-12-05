@@ -67,8 +67,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
-            "sleep=duration:25s",
             "return=skipped unless economy needs spidercloth",
+            "sleep=duration:25s",
             "consume=spider_silk:2",
             "playsound=sound/barbarians/weaver priority:90%",
             "animate=working duration:20s",

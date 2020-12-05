@@ -46,7 +46,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
          descname = _"planting trees",
          actions = {
-            "return=skipped when economy needs water",
             "consume=water",
             "callworker=plant",
             "sleep=duration:12s"
@@ -56,7 +55,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start enhancing the fertility of land because ...
          descname = _"enhancing the fertility of land",
          actions = {
-            "return=skipped when economy needs water",
             "consume=water:2",
             "callworker=terraform",
             "sleep=duration:10s"
