@@ -62,7 +62,8 @@ Section::Value::Value(const std::string& nname, const char* const nval)
 	set_string(nval);
 }
 
-Section::Value::Value(const Section::Value& o) : used_(o.used_), translate_(o.translate_), name_(o.name_) {
+Section::Value::Value(const Section::Value& o)
+   : used_(o.used_), translate_(o.translate_), name_(o.name_) {
 	set_string(o.value_.get());
 }
 
@@ -150,12 +151,12 @@ Vector2i Section::Value::get_point() const {
 		throw wexception("%s: '%s' is not a Vector2i", get_name(), get_untranslated_string());
 	}
 	if (x > std::numeric_limits<int32_t>::max()) {
-		throw wexception("%s: '%s' x coordinate too large (> %d)", get_name(), get_untranslated_string(),
-		                 std::numeric_limits<int32_t>::max());
+		throw wexception("%s: '%s' x coordinate too large (> %d)", get_name(),
+		                 get_untranslated_string(), std::numeric_limits<int32_t>::max());
 	}
 	if (y > std::numeric_limits<int32_t>::max()) {
-		throw wexception("%s: '%s' y coordinate too large (> %d)", get_name(), get_untranslated_string(),
-		                 std::numeric_limits<int32_t>::max());
+		throw wexception("%s: '%s' y coordinate too large (> %d)", get_name(),
+		                 get_untranslated_string(), std::numeric_limits<int32_t>::max());
 	}
 	return Vector2i(x, y);
 }
@@ -888,7 +889,8 @@ void Profile::write(char const* const filename,
 					tempstr += '"';
 				}
 
-				fw.print_f("%s=%s\"%s\"\n", temp_value.get_name(), temp_value.get_translate() ? "_" : "", tempstr.c_str());
+				fw.print_f("%s=%s\"%s\"\n", temp_value.get_name(),
+				           temp_value.get_translate() ? "_" : "", tempstr.c_str());
 			} else {
 				fw.print_f("%s=\n", temp_value.get_name());
 			}
