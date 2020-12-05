@@ -46,7 +46,7 @@ descriptions:new_worker_type {
          "mine=resource_stones radius:1",
          "createware=marble",
          "return"
-      }.
+      },
       mine_quartz = {
          "findspace=size:any radius:10 resource:resource_stones",
          "walk=object",
@@ -64,7 +64,7 @@ descriptions:new_worker_type {
          "mine=resource_stones radius:1",
          "createware=diamond",
          "return"
-      }
+      },
    },
 
    animations = {
