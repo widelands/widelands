@@ -62,7 +62,9 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fish",
             "callworker=fish_in_sea",
-            "sleep=duration:24s"
+            "sleep=duration:12s",
+            "callworker=fish_in_pond",
+            "sleep=duration:12s"
          }
       },
    },
