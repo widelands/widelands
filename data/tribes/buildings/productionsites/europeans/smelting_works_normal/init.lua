@@ -61,24 +61,30 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
-            "return=skipped when economy needs coal",
             "return=skipped unless economy needs iron",
-            "consume=ore:2 coal:2",
-            "sleep=duration:25s",
-            "playsound=sound/metal/fizzle priority:15% allow_multiple",
+            "consume=ore coal",
+            "sleep=duration:20s",
+            "playsound=sound/metal/fizzle priority:20% allow_multiple",
+            "animate=working duration:25s",
+            "playsound=sound/metal/ironping priority:60%",
+            "produce=iron",
+            "return=skipped when economy needs coal",
+            "consume=ore:3 coal:3",
+            "sleep=duration:20s",
+            "playsound=sound/metal/fizzle priority:20% allow_multiple",
             "animate=working duration:35s",
             "playsound=sound/metal/ironping priority:60%",
-            "produce=iron:2"
+            "produce=iron:3",
          }
       },
       smelt_iron_2 = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
-            "return=skipped when economy needs coal",
             "return=skipped unless economy needs iron",
+            "return=skipped when economy needs coal",
             "consume=ore:2 coal:2",
-            "sleep=duration:25s",
+            "sleep=duration:20s",
             "playsound=sound/metal/fizzle priority:15% allow_multiple",
             "animate=working duration:35s",
             "playsound=sound/metal/ironping priority:60%",
@@ -89,10 +95,10 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
          descname = _"smelting gold",
          actions = {
-            "return=skipped when economy needs coal",
             "return=skipped unless economy needs gold",
+            "return=skipped when economy needs coal",
             "consume=ore:2 coal:2",
-            "sleep=duration:25s",
+            "sleep=duration:20s",
             "playsound=sound/metal/fizzle priority:15% allow_multiple",
             "animate=working duration:35s",
             "playsound=sound/metal/goldping priority:60%",

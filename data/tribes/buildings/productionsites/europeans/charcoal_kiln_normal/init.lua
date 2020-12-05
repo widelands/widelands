@@ -51,11 +51,15 @@ descriptions:new_productionsite_type {
          descname = _"producing coal",
          actions = {
             "return=skipped unless economy needs coal",
-            "return=skipped when economy needs log",
-            "consume=log:8",
+            "consume=log:3",
             "sleep=duration:30s",
-            "animate=working duration:2m", -- Charcoal fires will burn for some days in real life
-            "produce=coal:3"
+            "animate=working duration:1m20s",
+            "produce=coal",
+            "return=skipped when economy needs log",
+            "consume=log:9",
+            "sleep=duration:30s",
+            "animate=working duration:2m30s",
+            "produce=coal:4",
          }
       },
 

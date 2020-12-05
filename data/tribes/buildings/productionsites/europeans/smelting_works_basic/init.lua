@@ -70,14 +70,20 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
-            "return=skipped when economy needs coal",
             "return=skipped unless economy needs iron",
-            "consume=coal:4 ore:4",
-            "sleep=duration:45s",
-            "playsound=sound/metal/furnace priority:50% allow_multiple",
-            "animate=working duration:45s",
+            "consume=ore coal",
+            "sleep=duration:25s",
+            "playsound=sound/metal/fizzle priority:20% allow_multiple",
+            "animate=working duration:25s",
             "playsound=sound/metal/ironping priority:60%",
-            "produce=iron:3"
+            "produce=iron",
+            "return=skipped when economy needs coal",
+            "consume=ore:3 coal:3",
+            "sleep=duration:25s",
+            "playsound=sound/metal/fizzle priority:20% allow_multiple",
+            "animate=working duration:35s",
+            "playsound=sound/metal/ironping priority:60%",
+            "produce=iron:3",
          }
       },
    },
