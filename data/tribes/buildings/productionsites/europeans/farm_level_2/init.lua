@@ -35,7 +35,8 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      space_consumer = true
+      space_consumer = true,
+      prohibited_till = 1800
    },
 
    working_positions = {

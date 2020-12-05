@@ -34,7 +34,9 @@ descriptions:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      prohibited_till = 900
+   },
 
    working_positions = {
       europeans_brewer_normal = 1

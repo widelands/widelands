@@ -35,6 +35,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
+      prohibited_till = 6300
    },
 
    working_positions = {

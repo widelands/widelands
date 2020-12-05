@@ -35,6 +35,7 @@ descriptions:new_productionsite_type {
 
    aihints = {
       supports_production_of = { "meat" },
+      prohibited_till = 3600
    },
 
    working_positions = {
