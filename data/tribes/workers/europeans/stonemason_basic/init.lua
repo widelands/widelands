@@ -30,15 +30,6 @@ descriptions:new_worker_type {
          "callobject=shrink",
          "createware=granite",
          "return"
-      },
-      cut_marble = {
-         "findobject=attrib:rocks radius:6",
-         "walk=object",
-         "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
-         "animate=hack duration:17s500ms",
-         "callobject=shrink",
-         "createware=marble",
-         "return"
       }
    },
 

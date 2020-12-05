@@ -39,12 +39,31 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
-         -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"mining granite",
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
          actions = {
-            "return=skipped unless economy needs granite",
-            "callworker=mine_granite",
-            "sleep=duration:16s"
+            "call=cut_granite on failure fail",
+            "call=cut_granite on failure fail",
+            "call=cut_marble on failure fail", -- This will find marble 2 out of 6 times
+            "call=cut_granite on failure fail",
+            "call=cut_granite on failure fail",
+            "call=cut_marble on failure fail", -- This will find marble 2 out of 6 times
+         }
+      },
+      cut_granite = {
+         -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
+         descname = _"quarrying granite",
+         actions = {
+            "callworker=cut_granite",
+            "sleep=duration:15s"
+         }
+      },
+      cut_marble = {
+         -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
+         descname = _"quarrying marble",
+         actions = {
+            "callworker=cut_marble",
+            "sleep=duration:15s"
          }
       },
    },

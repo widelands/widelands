@@ -30,25 +30,43 @@ descriptions:new_productionsite_type {
          actions = {
             "call=mine_granite on failure fail",
             "call=mine_granite on failure fail",
-            "call=mine_marble on failure fail", -- This will find marble 2 out of 6 times
+            "call=mine_marble on failure fail", -- This will find marble 2 out of 8 times
+            "call=mine_quartz on failure fail", -- This will find quartz 1 out of 8 times
             "call=mine_granite on failure fail",
             "call=mine_granite on failure fail",
-            "call=mine_marble on failure fail", -- This will find marble 2 out of 6 times
+            "call=mine_marble on failure fail", -- This will find marble 2 out of 8 times
+            "call=mine_diamond on failure fail", -- This will find diamond 1 out of 8 times
          }
       },
       mine_granite = {
-         -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-         descname = _"quarrying granite",
+         -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
+         descname = _"mining granite",
          actions = {
             "callworker=mine_granite",
             "sleep=duration:15s"
          }
       },
       mine_marble = {
-         -- TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
-         descname = _"quarrying marble",
+         -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
+         descname = _"mining marble",
          actions = {
             "callworker=mine_marble",
+            "sleep=duration:15s"
+         }
+      },
+      mine_quartz = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
+         descname = _"mining quartz",
+         actions = {
+            "callworker=mine_quartz",
+            "sleep=duration:15s"
+         }
+      },
+      mine_diamond = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining diamond because ...
+         descname = _"mining diamond",
+         actions = {
+            "callworker=mine_diamond",
             "sleep=duration:15s"
          }
       },

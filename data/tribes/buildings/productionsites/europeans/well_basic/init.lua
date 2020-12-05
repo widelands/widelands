@@ -49,7 +49,7 @@ descriptions:new_productionsite_type {
 
    aihints = {
       collects_ware_from_map = "water",
-      basic_amount = 3
+      basic_amount = 5
    },
 
    working_positions = {
