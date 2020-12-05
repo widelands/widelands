@@ -30,6 +30,9 @@ descriptions:new_worker_type {
          "createware=fish",
          "return"
       },
+      check_pond = {
+         "findobject=attrib:pond_mature radius:6",
+      },
       fish_in_pond = {
          "findobject=attrib:pond_mature radius:6",
          "walk=object",

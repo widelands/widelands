@@ -49,8 +49,10 @@ descriptions:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=making_clay",
-            "call=fish_breeding_in_pond",
+            "callworker=check_sea",
             "call=fish_breeding_in_sea",
+            "callworker=check_pond",
+            "call=fish_breeding_in_pond",
          }
       },
       making_clay = {

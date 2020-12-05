@@ -24,6 +24,9 @@ descriptions:new_worker_type {
          "plant=attrib:pond_dry",
          "return"
       },
+      check_pond = {
+         "findobject=attrib:pond_dry radius:6",
+      },
       breed_in_pond = {
          "findobject=attrib:pond_dry radius:6",
          "walk=object",
@@ -31,10 +34,13 @@ descriptions:new_worker_type {
          "callobject=with_fish",
          "return"
       },
+      check_sea = {
+         "findspace=size:any radius:8 breed resource:resource_fish",
+      },
       breed_in_sea = {
          "findspace=size:any radius:8 breed resource:resource_fish",
          "walk=coords",
-         "animate=freeing duration:12s", -- Play a freeing animation
+         "animate=freeing duration:12s",
          "breed=resource_fish radius:1",
          "return"
       }

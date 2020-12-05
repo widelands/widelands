@@ -60,11 +60,28 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
+            "call=fishing_in_sea",
+            "call=fishing_in_sea",
+            "callworker=check_pond",
+            "call=fishing_in_pond",
+         }
+      },
+      fishing_in_sea = {
+         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
+         descname = _"fishing in sea",
+         actions = {
             "return=skipped unless economy needs fish",
             "callworker=fish_in_sea",
             "sleep=duration:12s",
+         }
+      },
+      fishing_in_pond = {
+         -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
+         descname = _"fishing in pond",
+         actions = {
+            "return=skipped unless economy needs fish",
             "callworker=fish_in_pond",
-            "sleep=duration:12s"
+            "sleep=duration:12s",
          }
       },
    },
