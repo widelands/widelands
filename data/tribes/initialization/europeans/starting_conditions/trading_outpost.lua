@@ -39,7 +39,7 @@ return {
         },
         workers = {
             europeans_carrier = 32,
-            europeans_builder = 8,
+            europeans_builder = 10,
             europeans_geologist = 2,
             europeans_trainer = 4,
             europeans_lumberjack_basic = 4,
