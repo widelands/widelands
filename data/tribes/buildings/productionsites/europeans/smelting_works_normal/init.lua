@@ -52,13 +52,13 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=smelt_iron",
+            "call=smelt_iron_basic",
             "call=smelt_gold",
-            "call=smelt_iron_2",
+            "call=smelt_iron",
          }
       },
       -- 2 identical programs for iron to prevent unnecessary skipping penalty
-      smelt_iron = {
+      smelt_iron_basic = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
@@ -69,16 +69,9 @@ descriptions:new_productionsite_type {
             "animate=working duration:25s",
             "playsound=sound/metal/ironping priority:60%",
             "produce=iron",
-            "return=skipped when economy needs coal",
-            "consume=ore:3 coal:3",
-            "sleep=duration:20s",
-            "playsound=sound/metal/fizzle priority:20% allow_multiple",
-            "animate=working duration:35s",
-            "playsound=sound/metal/ironping priority:60%",
-            "produce=iron:3",
          }
       },
-      smelt_iron_2 = {
+      smelt_iron = {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {

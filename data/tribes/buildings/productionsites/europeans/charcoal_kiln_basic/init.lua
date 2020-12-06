@@ -63,14 +63,29 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=burn_log_basic",
+            "call=burn_log",
+         }
+      },
+      burn_log_basic = {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
          descname = _"producing coal",
          actions = {
             "return=skipped unless economy needs coal",
             "consume=log:3",
             "sleep=duration:30s",
-            "animate=working duration:1m30s",
-            "produce=coal",
+            "animate=working duration:1m10s",
+            "produce=coal"
+         }
+      },
+      burn_log = {
+         -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
+         descname = _"producing coal",
+         actions = {
+            "return=skipped unless economy needs coal",
             "return=skipped when economy needs log",
             "consume=log:6",
             "sleep=duration:30s",

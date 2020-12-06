@@ -56,7 +56,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recyling iron because ...
          descname = _"recycling iron",
          actions = {
-            "return=skipped when economy needs coal",
             "return=skipped unless economy needs iron",
             "consume=scrap_iron:2 coal:2",
             "sleep=duration:15s",
@@ -70,7 +69,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recyling gold because ...
          descname = _"recycling iron and gold",
          actions = {
-            "return=skipped when economy needs coal",
             "return=skipped unless economy needs gold",
             "consume=scrap_metal_mixed:3 coal:3",
             "sleep=duration:15s",

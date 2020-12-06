@@ -42,12 +42,14 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=mixing_grout_basic",
+            "call=burning_bricks_basic",
             "call=mixing_grout",
             "call=burning_bricks",
             "call=sculpting_marble_column",
          }
       },
-      mixing_grout = {
+      mixing_grout_basic = {
          -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
          descname = _"mixing grout",
          actions = {
@@ -60,6 +62,14 @@ descriptions:new_productionsite_type {
             "playsound=sound/barbarians/mortar priority:60%",
             "sleep=duration:3s",
             "produce=grout",
+         }
+      },
+      mixing_grout = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
+         descname = _"mixing grout",
+         actions = {
+            "return=skipped unless economy needs grout",
+            "return=skipped when economy needs granite",
             "return=skipped when economy needs coal",
             "return=skipped when economy needs water",
             "consume=coal:2 granite:3 water:3",
@@ -71,7 +81,7 @@ descriptions:new_productionsite_type {
             "produce=grout:3"
          }
       },
-      burning_bricks = {
+      burning_bricks_basic = {
          -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
          descname = _"burning bricks",
          actions = {
@@ -83,6 +93,14 @@ descriptions:new_productionsite_type {
             "animate=working duration:15s",
             "sleep=duration:3s",
             "produce=brick",
+         },
+      },
+      burning_bricks = {
+         -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
+         descname = _"burning bricks",
+         actions = {
+            "return=skipped unless economy needs brick",
+            "return=skipped when economy needs granite",
             "return=skipped when economy needs coal",
             "consume=coal:2 granite clay:3",
             "sleep=duration:30s",
@@ -97,14 +115,15 @@ descriptions:new_productionsite_type {
          descname = _"sculpting a marble column",
          actions = {
             "return=skipped unless economy needs marble_column",
-            "consume=marble:2",
-            "sleep=duration:30s",
-            "playsound=sound/stonecutting/stonemason priority:50% allow_multiple",
-            "animate=working duration:20s",
-            "produce=marble_column",
             "return=skipped when economy needs marble",
             "consume=marble:3",
-            "sleep=duration:30s",
+            "sleep=duration:15s",
+            "playsound=sound/stonecutting/stonemason priority:50% allow_multiple",
+            "animate=working duration:30s",
+            "produce=marble_column:2",
+            "sleep=duration:10s",
+            "consume=marble:3",
+            "sleep=duration:15s",
             "playsound=sound/stonecutting/stonemason priority:50% allow_multiple",
             "animate=working duration:30s",
             "produce=marble_column:2"

@@ -103,12 +103,20 @@ return {
          local wh = warehouses[idx]
          local added = 0
 
-         if wh:get_wares("coal") < 24 then
-            wh:set_wares("coal", wh:get_wares("coal") + 4)
+         if wh:get_wares("log") < 12 then
+            wh:set_wares("log", wh:get_wares("log") + 2)
             added = added + 1
          end
-         if wh:get_wares("ore") < 24 then
-            wh:set_wares("ore", wh:get_wares("ore") + 4)
+         if wh:get_wares("water") < 12 then
+            wh:set_wares("water", wh:get_wares("water") + 2)
+            added = added + 1
+         end
+         if wh:get_wares("coal") < 12 then
+            wh:set_wares("coal", wh:get_wares("coal") + 2)
+            added = added + 1
+         end
+         if wh:get_wares("ore") < 12 then
+            wh:set_wares("ore", wh:get_wares("ore") + 2)
             added = added + 1
          end
          if wh:get_wares("granite") < 12 then
@@ -119,52 +127,16 @@ return {
             wh:set_wares("clay", wh:get_wares("clay") + 2)
             added = added + 1
          end
-         if wh:get_wares("marble") < 12 then
-            wh:set_wares("marble", wh:get_wares("marble") + 2)
+         if wh:get_wares("marble") < 6 then
+            wh:set_wares("marble", wh:get_wares("marble") + 1)
             added = added + 1
          end
-         if wh:get_wares("quartz") < 12 then
-            wh:set_wares("quartz", wh:get_wares("quartz") + 2)
+         if wh:get_wares("quartz") < 4 then
+            wh:set_wares("quartz", wh:get_wares("quartz") + 1)
             added = added + 1
          end
-         if wh:get_wares("diamond") < 12 then
-            wh:set_wares("diamond", wh:get_wares("diamond") + 2)
-            added = added + 1
-         end
-         if wh:get_wares("log") < 12 then
-            wh:set_wares("log", wh:get_wares("log") + 2)
-            added = added + 1
-         end
-         if wh:get_wares("reed") < 12 then
-            wh:set_wares("reed", wh:get_wares("reed") + 2)
-            added = added + 1
-         end
-         if wh:get_wares("water") < 12 then
-            wh:set_wares("water", wh:get_wares("water") + 2)
-            added = added + 1
-         end
-         if wh:get_wares("hammer") < 1 then
-            wh:set_wares("hammer", wh:get_wares("hammer") + 1)
-            added = added + 1
-         end
-         if wh:get_wares("felling_ax") < 1 then
-            wh:set_wares("felling_ax", wh:get_wares("felling_ax") + 1)
-            added = added + 1
-         end
-         if wh:get_wares("saw") < 1 then
-            wh:set_wares("saw", wh:get_wares("saw") + 1)
-            added = added + 1
-         end
-         if wh:get_wares("shovel") < 1 then
-            wh:set_wares("shovel", wh:get_wares("shovel") + 1)
-            added = added + 1
-         end
-         if wh:get_wares("pick") < 1 then
-            wh:set_wares("pick", wh:get_wares("pick") + 1)
-            added = added + 1
-         end
-         if wh:get_wares("fire_tongs") < 1 then
-            wh:set_wares("fire_tongs", wh:get_wares("fire_tongs") + 1)
+         if wh:get_wares("diamond") < 4 then
+            wh:set_wares("diamond", wh:get_wares("diamond") + 1)
             added = added + 1
          end
          if (added > 0) then

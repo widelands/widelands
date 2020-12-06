@@ -38,12 +38,12 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=burn_log_basic",
             "call=burn_log",
             "call=burn_planks",
-            "call=burn_log",
          }
       },
-      burn_log = {
+      burn_log_basic = {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
          descname = _"producing coal",
          actions = {
@@ -51,7 +51,14 @@ descriptions:new_productionsite_type {
             "consume=log:3",
             "sleep=duration:30s",
             "animate=working duration:1m10s",
-            "produce=coal",
+            "produce=coal"
+         }
+      },
+      burn_log = {
+         -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
+         descname = _"producing coal",
+         actions = {
+            "return=skipped unless economy needs coal",
             "return=skipped when economy needs log",
             "consume=log:12",
             "sleep=duration:30s",

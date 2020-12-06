@@ -30,12 +30,12 @@ init = {
             reed = 32,
             coal = 64,
             granite = 64,
+            ore = 32,
             grout = 32,
             brick = 32,
             marble = 16,
             diamond = 16,
             quartz = 16,
-            ore = 16,
         },
         workers = {
             europeans_carrier = 32,
