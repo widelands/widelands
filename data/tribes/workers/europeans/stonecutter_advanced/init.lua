@@ -12,7 +12,7 @@ descriptions:new_worker_type {
 
    programs = {
       cut_granite = {
-         "findobject=attrib:rocks radius:10",
+         "findobject=attrib:rocks radius:12",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
          "animate=hacking duration:12s500ms",
@@ -21,7 +21,7 @@ descriptions:new_worker_type {
          "return"
       },
       cut_marble = {
-         "findobject=attrib:rocks radius:10",
+         "findobject=attrib:rocks radius:12",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
          "animate=hacking duration:12s500ms",
@@ -30,8 +30,8 @@ descriptions:new_worker_type {
          "return"
       },
       mine_granite = {
-         "findspace=size:any radius:10 resource:resource_stones",
-         "walk=object",
+         "findspace=size:any radius:12 resource:resource_stones",
+         "walk=coords",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hacking duration:12s500ms",
          "mine=resource_stones radius:1",
@@ -39,8 +39,8 @@ descriptions:new_worker_type {
          "return"
       },
       mine_marble = {
-         "findspace=size:any radius:10 resource:resource_stones",
-         "walk=object",
+         "findspace=size:any radius:12 resource:resource_stones",
+         "walk=coords",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hacking duration:12s500ms",
          "mine=resource_stones radius:1",
@@ -48,8 +48,8 @@ descriptions:new_worker_type {
          "return"
       },
       mine_quartz = {
-         "findspace=size:any radius:10 resource:resource_stones",
-         "walk=object",
+         "findspace=size:any radius:12 resource:resource_stones",
+         "walk=coords",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hacking duration:12s500ms",
          "mine=resource_stones radius:1",
@@ -57,8 +57,8 @@ descriptions:new_worker_type {
          "return"
       },
       mine_diamond = {
-         "findspace=size:any radius:10 resource:resource_stones",
-         "walk=object",
+         "findspace=size:any radius:12 resource:resource_stones",
+         "walk=coords",
          "playsound=sound/stonecutting/stonecutter priority:50% allow_multiple",
          "animate=hacking duration:12s500ms",
          "mine=resource_stones radius:1",

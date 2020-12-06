@@ -12,7 +12,7 @@ descriptions:new_worker_type {
 
    programs = {
       cut_granite = {
-         "findobject=attrib:rocks radius:10",
+         "findobject=attrib:rocks radius:12",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
          "animate=hacking duration:12s500ms",
@@ -21,7 +21,7 @@ descriptions:new_worker_type {
          "return"
       },
       cut_marble = {
-         "findobject=attrib:rocks radius:10",
+         "findobject=attrib:rocks radius:12",
          "walk=object",
          "playsound=sound/stonecutting/stonecutter priority:70% allow_multiple",
          "animate=hacking duration:12s500ms",

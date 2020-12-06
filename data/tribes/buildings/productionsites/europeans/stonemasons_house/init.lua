@@ -44,9 +44,9 @@ descriptions:new_productionsite_type {
          actions = {
             "call=mixing_grout_basic",
             "call=burning_bricks_basic",
+            "call=sculpting_marble_column",
             "call=mixing_grout",
             "call=burning_bricks",
-            "call=sculpting_marble_column",
          }
       },
       mixing_grout_basic = {
