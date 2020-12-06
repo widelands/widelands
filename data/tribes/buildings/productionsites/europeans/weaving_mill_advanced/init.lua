@@ -47,29 +47,39 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=produce_spidercloth_basic",
             "call=produce_spidercloth",
             "call=produce_tabard",
             "call=produce_armor"
+         }
+      },
+      produce_spidercloth_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
+         descname = _"weaving",
+         actions = {
+            "sleep=duration:20s",
+            "consume=spider_silk",
+            "playsound=sound/mill/weaving priority:90%",
+            "animate=working duration:20s",
+            "produce=spidercloth"
          }
       },
       produce_spidercloth = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because ...
          descname = _"weaving spidercloth",
          actions = {
-            -- time total: 40 + 3.6
             "return=skipped unless economy needs spidercloth",
-            "consume=spider_silk:2",
+            "consume=spider_silk:3",
             "sleep=duration:20s",
             "playsound=sound/mill/weaving priority:90%",
             "animate=working duration:20s",
-            "produce=spidercloth:2"
+            "produce=spidercloth:3"
          }
       },
       produce_tabard = {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
          descname = _"tailoring a tabard",
          actions = {
-            -- time total: 40 + 3.6
             "return=skipped unless economy needs tabard",
             "consume=spider_silk",
             "sleep=duration:20s",
@@ -83,12 +93,12 @@ descriptions:new_productionsite_type {
          descname = _"weaving",
          actions = {
             "return=skipped unless economy needs armor",
-            "consume=wool",
+            "consume=wool:2",
             "sleep=duration:20s",
             "playsound=sound/mill/weaving priority:90%",
-            "animate=working duration:15s", -- Unsure of balancing CW
+            "animate=working duration:15s",
             "sleep=duration:5s",
-            "produce=armor"
+            "produce=armor:2"
          }
       },
    },

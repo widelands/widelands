@@ -29,9 +29,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start hunting because ...
          descname = _"hunting",
          actions = {
-            "return=skipped unless economy needs meat",
             "callworker=hunt",
-            "sleep=duration:16s"
+            "sleep=duration:32s"
          }
       },
    },

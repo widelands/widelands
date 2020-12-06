@@ -58,6 +58,24 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=brew_beer_basic",
+            "call=brew_beer",
+         }
+      },
+      brew_beer_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
+         descname = _"brewing beer",
+         actions = {
+            "consume=water barley",
+            "sleep=duration:80s",
+            "animate=working duration:60s",
+            "produce=beer"
+         }
+      },
+      brew_beer = {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
@@ -65,7 +83,7 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "consume=water:3 barley:3",
             "sleep=duration:80s",
-            "animate=working duration:80s",
+            "animate=working duration:60s",
             "produce=beer:3"
          }
       },

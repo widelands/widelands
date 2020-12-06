@@ -48,10 +48,31 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=produce_wool_basic",
+            "call=produce_wool"
+         }
+      },
+      produce_wool_basic = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-         descname = _"breeding sheep",
+         descname = _"produce wool",
+         actions = {
+            "consume=water wheat",
+            "sleep=duration:25s",
+            "playsound=sound/farm/sheep priority:50% allow_multiple",
+            "animate=working duration:35s",
+            "produce=wool"
+         }
+      },
+      produce_wool = {
+         -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
+         descname = _"produce wool",
          actions = {
             "return=skipped unless economy needs wool",
+            "return=skipped when economy needs water",
+            "return=skipped when economy needs wheat",
             "consume=water:2 wheat:2",
             "sleep=duration:25s",
             "playsound=sound/farm/sheep priority:50% allow_multiple",

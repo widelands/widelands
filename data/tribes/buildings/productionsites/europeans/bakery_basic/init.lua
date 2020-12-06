@@ -65,16 +65,35 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=baking_bread_basic",
+            "call=baking_bread",
+         }
+      },
+      baking_bread_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
+         descname = pgettext("europeans_building", "baking pitta bread"),
+         actions = {
+            "consume=water cornmeal",
+            "sleep=duration:40s",
+            "animate=working duration:30s",
+            "produce=europeans_bread"
+         }
+      },
+      baking_bread = {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = pgettext("europeans_building", "baking pitta bread"),
          actions = {
             "return=skipped unless economy needs europeans_bread",
-            "consume=water:3 cornmeal:3",
+            "return=skipped when economy needs water",
+            "consume=water:4 cornmeal:4",
             "sleep=duration:20s",
             "animate=working duration:30s",
-            "produce=europeans_bread",
+            "produce=europeans_bread:2",
             "animate=working duration:30s",
-            "produce=europeans_bread"
+            "produce=europeans_bread:2"
          }
       },
    },

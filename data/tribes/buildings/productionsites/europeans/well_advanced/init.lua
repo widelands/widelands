@@ -35,12 +35,7 @@ descriptions:new_productionsite_type {
             "sleep=duration:10s",
             "animate=working duration:10s",
             "mine=resource_water radius:4 yield:100% when_empty:99%",
-            "produce=water",
-            "return=skipped unless economy needs water",
-            "sleep=duration:10s",
-            "animate=working duration:20s",
-            "mine=resource_water radius:4 yield:100% when_empty:99%",
-            "produce=water:3"
+            "produce=water"
          }
       },
    },

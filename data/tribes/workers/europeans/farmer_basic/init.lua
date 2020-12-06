@@ -15,8 +15,6 @@ descriptions:new_worker_type {
 
    buildcost = {
       europeans_carrier = 1,
-      shovel = 1,
-      buckets = 1,
       scythe = 1,
       basket = 1
    },

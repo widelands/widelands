@@ -74,7 +74,7 @@ descriptions:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
-            "return=skipped when economy needs water",
+            "return=skipped when economy needs clay and site has water",
             "consume=water",
             "callworker=breed_in_pond",
             "sleep=duration:12s500ms"
@@ -84,9 +84,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
-            "return=skipped unless economy needs fish",
-            "return=skipped when economy needs water",
-            "consume=water",
+            "return=skipped when economy needs clay and site has water",
             "callworker=breed_in_sea",
             "sleep=duration:12s500ms"
          }

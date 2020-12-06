@@ -61,7 +61,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
-            "return=skipped unless economy needs fish",
             "call=fishing_in_sea"
          }
       },
@@ -70,7 +69,7 @@ descriptions:new_productionsite_type {
          descname = _"fishing in sea",
          actions = {
             "callworker=fish_in_sea",
-            "sleep=duration:24s",
+            "sleep=duration:48s",
          }
       },
    },

@@ -53,9 +53,20 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=brew_beer_basic",
             "call=brew_beer",
             "call=brew_mead",
             "call=brew_strong_beer"
+         }
+      },
+      brew_beer_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
+         descname = _"brewing beer",
+         actions = {
+            "consume=water barley",
+            "sleep=duration:60s",
+            "animate=working duration:60s",
+            "produce=beer"
          }
       },
       brew_beer = {

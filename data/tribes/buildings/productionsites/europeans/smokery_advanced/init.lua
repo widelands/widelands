@@ -39,59 +39,55 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=smoke_fish_basic",
+            "call=smoke_meat_basic",
             "call=smoke_fish",
             "call=smoke_meat",
-            "call=smoke_fish_2",
-            "call=smoke_meat_2",
+         }
+      },
+      smoke_fish_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
+         descname = _"smoking fish",
+         actions = {
+            "consume=fish log",
+            "animate=working duration:20s",
+            "sleep=duration:20s",
+            "produce=smoked_fish"
+         }
+      },
+      smoke_meat_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
+         descname = _"smoking meat",
+         actions = {
+            "return=skipped unless economy needs smoked_meat",
+            "consume=meat log",
+            "animate=working duration:20s",
+            "sleep=duration:20s",
+            "produce=smoked_meat"
          }
       },
       smoke_meat = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
          descname = _"smoking meat",
          actions = {
-            -- time total: 40
             "return=skipped unless economy needs smoked_meat",
-            "consume=meat:2 log",
+            "return=skipped when economy needs log",
+            "consume=meat:3 log:2",
             "animate=working duration:20s",
             "sleep=duration:20s",
-            "produce=smoked_meat:2"
+            "produce=smoked_meat:3"
          }
       },
-      -- 2 identical programs for fish to prevent unnecessary skipping penalty
       smoke_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
          descname = _"smoking fish",
          actions = {
-            -- time total: 40
             "return=skipped unless economy needs smoked_fish",
-            "consume=fish:2 log",
+            "return=skipped when economy needs log",
+            "consume=fish:3 log:2",
             "animate=working duration:20s",
             "sleep=duration:20s",
-            "produce=smoked_fish:2"
-         }
-      },
-      smoke_fish_2 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-         descname = _"smoking fish",
-         actions = {
-            -- time total: 40
-            "return=skipped unless economy needs smoked_fish",
-            "consume=fish:2 log",
-            "animate=working duration:20s",
-            "sleep=duration:20s",
-            "produce=smoked_fish:2"
-         }
-      },
-      smoke_meat_2 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
-         descname = _"smoking meat",
-         actions = {
-            -- time total: 50
-            "return=skipped unless economy needs smoked_meat",
-            "consume=meat:2 log",
-            "animate=working duration:20s",
-            "sleep=duration:20s",
-            "produce=smoked_meat:2"
+            "produce=smoked_fish:3"
          }
       },
    },

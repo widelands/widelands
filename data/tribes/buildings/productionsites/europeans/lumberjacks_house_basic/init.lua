@@ -60,7 +60,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
          descname = _"felling trees",
          actions = {
-            "return=skipped unless economy needs log",
             "callworker=harvest",
             "sleep=duration:18s",
             "produce=log"

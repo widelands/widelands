@@ -64,15 +64,34 @@ descriptions:new_productionsite_type {
 
    programs = {
       main = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
+         actions = {
+            "call=produce_spidercloth_basic",
+            "call=produce_spidercloth"
+         }
+      },
+      produce_spidercloth_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
+         descname = _"weaving",
+         actions = {
+            "sleep=duration:25s",
+            "consume=spider_silk",
+            "playsound=sound/barbarians/weaver priority:90%",
+            "animate=working duration:20s",
+            "produce=spidercloth"
+         }
+      },
+      produce_spidercloth = {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
             "return=skipped unless economy needs spidercloth",
             "sleep=duration:25s",
-            "consume=spider_silk:2",
+            "consume=spider_silk:3",
             "playsound=sound/barbarians/weaver priority:90%",
             "animate=working duration:20s",
-            "produce=spidercloth:2"
+            "produce=spidercloth:3"
          }
       },
    },

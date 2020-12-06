@@ -51,7 +51,27 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=produce_spidersilk_basic",
+            "call=produce_spidersilk"
+         }
+      },
+      produce_spidersilk_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"produce spider silk",
+         actions = {
+            "consume=corn water",
+            "sleep=duration:25s",
+            "animate=working duration:35s",
+            "produce=spider_silk"
+         }
+      },
+      produce_spidersilk = {
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"produce spider silk",
+         actions = {
             "return=skipped unless economy needs spider_silk",
+            "return=skipped when economy needs water",
+            "return=skipped when economy needs corn",
             "consume=corn:2 water:2",
             "sleep=duration:25s",
             "animate=working duration:35s",
