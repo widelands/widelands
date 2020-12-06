@@ -31,7 +31,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs log",
             "callworker=harvest",
-            "sleep=duration:12s"
+            "sleep=duration:12s",
+            "produce=log"
          }
       },
    },

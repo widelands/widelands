@@ -499,7 +499,7 @@ descriptions:new_tribe {
          -- Tools 1
          {
             name = "hammer",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
                purpose = {
@@ -512,7 +512,7 @@ descriptions:new_tribe {
          },
          {
             name = "saw",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
                purpose = {
@@ -525,7 +525,7 @@ descriptions:new_tribe {
          },
          {
             name = "felling_ax",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
                purpose = {
@@ -538,7 +538,7 @@ descriptions:new_tribe {
          },
          {
             name = "pick",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
                purpose = {
@@ -551,7 +551,7 @@ descriptions:new_tribe {
          },
          {
             name = "shovel",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
                purpose = {
@@ -564,7 +564,7 @@ descriptions:new_tribe {
          },
          {
             name = "buckets",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Buckets
@@ -573,7 +573,7 @@ descriptions:new_tribe {
          },
          {
             name = "fire_tongs",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 1,
             helptexts = {
                purpose = {
@@ -607,7 +607,7 @@ descriptions:new_tribe {
          -- Tools 2
          {
             name = "scythe",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
                purpose = {
@@ -620,7 +620,7 @@ descriptions:new_tribe {
          },
          {
             name = "basket",
-            default_target_quantity = 4,
+            default_target_quantity = 2,
             preciousness = 0,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Basket
