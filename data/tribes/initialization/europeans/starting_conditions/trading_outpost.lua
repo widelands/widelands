@@ -33,8 +33,8 @@ return {
             grout = 32,
             brick = 32,
             marble = 16,
-            diamond = 16,
             quartz = 16,
+            diamond = 16,
             ore = 16,
         },
         workers = {

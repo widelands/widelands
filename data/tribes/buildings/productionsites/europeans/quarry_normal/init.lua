@@ -12,14 +12,15 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_quarry_advanced",
         enhancement_cost = {
-          marble_column = 1,
-          quartz = 1,
-          diamond = 1
+          planks = 1,
+          brick = 1,
+          grout = 1,
+          marble_column = 1
         },
         enhancement_return_on_dismantle = {
-          marble = 1,
-          quartz = 1,
-          diamond = 1
+          log = 1,
+          granite = 1,
+          marble = 1
         },
    },
 

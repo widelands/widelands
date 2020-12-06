@@ -33,9 +33,9 @@ init = {
             ore = 32,
             grout = 32,
             brick = 32,
-            marble = 16,
+            marble = 32,
+            quartz = 32,
             diamond = 16,
-            quartz = 16,
         },
         workers = {
             europeans_carrier = 32,
