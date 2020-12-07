@@ -83,12 +83,7 @@ descriptions:new_productionsite_type {
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
-            "consume=ore coal",
-            "sleep=duration:15s",
-            "playsound=sound/metal/fizzle priority:20% allow_multiple",
-            "animate=working duration:25s",
-            "playsound=sound/metal/ironping priority:60%",
-            "produce=iron",
+            "return=skipped when economy needs gold",
             "return=skipped when economy needs coal",
             "consume=ore:3 coal:3",
             "sleep=duration:15s",
@@ -103,7 +98,7 @@ descriptions:new_productionsite_type {
          descname = _"smelting gold",
          actions = {
             "return=skipped unless economy needs gold",
-            "return=skipped when economy needs coal",
+            "return=skipped when economy needs iron",
             "consume=ore:2 coal:2",
             "sleep=duration:15s",
             "playsound=sound/metal/fizzle priority:20% allow_multiple",
