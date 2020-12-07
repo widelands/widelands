@@ -90,7 +90,8 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 		while (p->get_parent()) {
 			p = p->get_parent();
 		}
-		UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color, &kPlayerColors[id_]);
+		UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color,
+		                   &kPlayerColors[id_]);
 		if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			settings_->set_player_color(id_, c.get_color());
 			update();
@@ -108,7 +109,8 @@ void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_eleme
 }
 
 inline const Image* SinglePlayerActivePlayerGroup::menu_image() {
-	return playercolor_image(settings_->settings().players[id_].color, "images/players/player_position_menu.png");
+	return playercolor_image(
+	   settings_->settings().players[id_].color, "images/players/player_position_menu.png");
 }
 
 void SinglePlayerActivePlayerGroup::update() {

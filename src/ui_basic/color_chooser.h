@@ -32,7 +32,10 @@ struct ColorChooserImpl;
 
 class ColorChooser : public Window {
 public:
-	ColorChooser(Panel* parent, WindowStyle, const RGBColor& init_color, const RGBColor* default_color);
+	ColorChooser(Panel* parent,
+	             WindowStyle,
+	             const RGBColor& init_color,
+	             const RGBColor* default_color);
 
 	void set_color(const RGBColor&);
 	const RGBColor& get_color() const {

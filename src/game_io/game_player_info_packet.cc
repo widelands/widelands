@@ -53,16 +53,20 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					}
 
 					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
-					const uint8_t playercolor_r = packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].r;
-					const uint8_t playercolor_g = packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].g;
-					const uint8_t playercolor_b = packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].b;
+					const uint8_t playercolor_r =
+					   packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].r;
+					const uint8_t playercolor_g =
+					   packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].g;
+					const uint8_t playercolor_b =
+					   packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].b;
 
 					Widelands::TeamNumber team = fr.unsigned_8();
 					char const* const tribe_name = fr.c_string();
 
 					std::string const name = fr.c_string();
 
-					game.add_player(plnum, 0, RGBColor(playercolor_r, playercolor_g, playercolor_b), tribe_name, name, team);
+					game.add_player(plnum, 0, RGBColor(playercolor_r, playercolor_g, playercolor_b),
+					                tribe_name, name, team);
 					Player* player = game.get_player(plnum);
 					player->set_see_all(see_all);
 

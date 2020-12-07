@@ -109,7 +109,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 			    settings.players.at(slot).state == PlayerSettings::State::kOpen) {
 				slot_dropdown_.add(
 				   (boost::format(_("Player %u")) % static_cast<unsigned int>(slot + 1)).str(), slot,
-				   playercolor_image(settings.players[slot].color, "images/players/genstats_player.png"),
+				   playercolor_image(
+				      settings.players[slot].color, "images/players/genstats_player.png"),
 				   slot == user_setting.position);
 			}
 		}
@@ -156,7 +157,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	            h,
 	            h,
 	            UI::ButtonStyle::kFsMenuSecondary,
-	            playercolor_image(settings_->settings().players[id].color, "images/players/player_position_menu.png"),
+	            playercolor_image(settings_->settings().players[id].color,
+	                              "images/players/player_position_menu.png"),
 	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
 	            UI::Button::VisualState::kFlat),
 	     type_dropdown_(this,
@@ -377,8 +379,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 						continue;
 					}
 
-					const Image* player_image =
-					   playercolor_image(settings.players[i].color, "images/players/player_position_menu.png");
+					const Image* player_image = playercolor_image(
+					   settings.players[i].color, "images/players/player_position_menu.png");
 					assert(player_image);
 					const std::string player_name =
 					   /** TRANSLATORS: This is an option in multiplayer setup for sharing
@@ -495,7 +497,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		while (p->get_parent()) {
 			p = p->get_parent();
 		}
-		UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color, &kPlayerColors[id_]);
+		UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color,
+		                   &kPlayerColors[id_]);
 		if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			n->set_player_color(id_, c.get_color());
 		}
@@ -540,7 +543,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 
 		const PlayerSettings& player_setting = settings.players[id_];
 		player.set_tooltip(player_setting.name);
-		player.set_pic(playercolor_image(player_setting.color, "images/players/player_position_menu.png"));
+		player.set_pic(
+		   playercolor_image(player_setting.color, "images/players/player_position_menu.png"));
 		// whether we can change a slot's color follows the same rules as whether we can change a team
 		player.set_enabled(settings_->can_change_player_team(id_));
 

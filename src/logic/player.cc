@@ -136,7 +136,7 @@ void find_former_buildings(const Descriptions& descriptions,
 Player::Player(EditorGameBase& the_egbase,
                PlayerNumber const plnum,
                uint8_t const initialization_index,
-	           const RGBColor& pc,
+               const RGBColor& pc,
                const TribeDescr& tribe_descr,
                const std::string& name)
    : egbase_(the_egbase),

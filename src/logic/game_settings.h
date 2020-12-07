@@ -23,8 +23,8 @@
 #include <memory>
 #include <string>
 
-#include "io/filesystem/layered_filesystem.h"
 #include "graphic/color.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"

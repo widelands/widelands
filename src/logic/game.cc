@@ -298,8 +298,8 @@ void Game::init_newgame(const GameSettings& settings) {
 			continue;
 		}
 
-		add_player(i + 1, playersettings.initialization_index, playersettings.color, playersettings.tribe,
-		           playersettings.name, playersettings.team);
+		add_player(i + 1, playersettings.initialization_index, playersettings.color,
+		           playersettings.tribe, playersettings.name, playersettings.team);
 		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 

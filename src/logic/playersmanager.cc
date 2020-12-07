@@ -60,7 +60,7 @@ void PlayersManager::remove_player(PlayerNumber plnum) {
 
 Player* PlayersManager::add_player(PlayerNumber const player_number,
                                    uint8_t const initialization_index,
-	                               const RGBColor& pc,
+                                   const RGBColor& pc,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {

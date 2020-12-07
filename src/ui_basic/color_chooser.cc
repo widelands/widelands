@@ -36,13 +36,14 @@ constexpr int16_t kSidebarWidth = 16;
 struct ColorChooserImpl : public Panel {
 
 	ColorChooserImpl(Panel& parent, PanelStyle s, ColorChooser& c)
-	: Panel(&parent, s, 0, 0, kMainDimension + kSpacing + kSidebarWidth, kMainDimension), chooser_(c),
-			selector_(*g_image_cache->get("images/ui_basic/fsel.png")),
-			texture_left_(kMainDimension, kMainDimension),
-			texture_right_(1, kMainDimension),
-			texture_left_r_(0),
-			texture_right_g_(0),
-			texture_right_b_(0) {
+	   : Panel(&parent, s, 0, 0, kMainDimension + kSpacing + kSidebarWidth, kMainDimension),
+	     chooser_(c),
+	     selector_(*g_image_cache->get("images/ui_basic/fsel.png")),
+	     texture_left_(kMainDimension, kMainDimension),
+	     texture_right_(1, kMainDimension),
+	     texture_left_r_(0),
+	     texture_right_g_(0),
+	     texture_right_b_(0) {
 		update_texture_left();
 		update_texture_right();
 	}
@@ -53,7 +54,8 @@ struct ColorChooserImpl : public Panel {
 		if (chooser_.get_color().r != texture_left_r_) {
 			update_texture_left();
 		}
-		if (chooser_.get_color().g != texture_right_g_ || chooser_.get_color().b != texture_right_b_) {
+		if (chooser_.get_color().g != texture_right_g_ ||
+		    chooser_.get_color().b != texture_right_b_) {
 			update_texture_right();
 		}
 
@@ -62,14 +64,23 @@ struct ColorChooserImpl : public Panel {
 			dst.blit(Vector2i(kMainDimension + kSpacing + i, 0), &texture_right_);
 		}
 
-		dst.blit(Vector2i(chooser_.get_color().g - selector_.width() / 2, chooser_.get_color().b - selector_.height() / 2), &selector_);
-		dst.blit(Vector2i(kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2, chooser_.get_color().r - selector_.height() / 2), &selector_);
+		dst.blit(Vector2i(chooser_.get_color().g - selector_.width() / 2,
+		                  chooser_.get_color().b - selector_.height() / 2),
+		         &selector_);
+		dst.blit(Vector2i(kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
+		                  chooser_.get_color().r - selector_.height() / 2),
+		         &selector_);
 		const Vector2i mousepos = get_mouse_position();
 		if (mousepos.y >= 0 && mousepos.y < kMainDimension && mousepos.x >= 0) {
 			if (mousepos.x < kMainDimension) {
-				dst.blit(Vector2i(mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2), &selector_);
-			} else if (mousepos.x >= kMainDimension + kSpacing && mousepos.x < kMainDimension + kSpacing + kSidebarWidth) {
-				dst.blit(Vector2i(kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2, mousepos.y - selector_.height() / 2), &selector_);
+				dst.blit(
+				   Vector2i(mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2),
+				   &selector_);
+			} else if (mousepos.x >= kMainDimension + kSpacing &&
+			           mousepos.x < kMainDimension + kSpacing + kSidebarWidth) {
+				dst.blit(Vector2i(kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
+				                  mousepos.y - selector_.height() / 2),
+				         &selector_);
 			}
 		}
 	}
@@ -120,30 +131,98 @@ private:
 		}
 		texture_right_.unlock(Texture::UnlockMode::Unlock_Update);
 	}
-
 };
 
 static inline const Image* preview(const RGBColor& c) {
 	return playercolor_image(c, "images/players/player_position.png");
 }
 
-ColorChooser::ColorChooser(Panel* parent, const WindowStyle s, const RGBColor& init_color, const RGBColor* default_color)
-: Window(parent, s, "choose_color", 0, 0, 0, 0, _("Choose Color…")),
-current_(init_color),
-main_box_(this, panel_style_, 0, 0, Box::Vertical),
-hbox_(&main_box_, panel_style_, 0, 0, Box::Horizontal),
-buttonsbox_(&main_box_, panel_style_, 0, 0, Box::Horizontal),
-vbox_(&hbox_, panel_style_, 0, 0, Box::Vertical),
-button_ok_(&buttonsbox_, "ok", 0, 0, 30, 0, s == WindowStyle::kWui ? ButtonStyle::kWuiPrimary : ButtonStyle::kFsMenuPrimary, _("OK")),
-button_cancel_(&buttonsbox_, "cancel", 0, 0, 30, 0, s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary, _("Cancel")),
-button_init_(&buttonsbox_, "initial_color", 0, 0, 30, 0, s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary, _("Initial Color")),
-button_default_(default_color ? new Button(
-	&buttonsbox_, "default_color", 0, 0, 30, 0, s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary, _("Default Color")) : nullptr),
-spin_r_(&vbox_, 0, 0, 300, 200, init_color.r, 0, 255, panel_style_, _("Red"), SpinBox::Units::kNone, SpinBox::Type::kBig),
-spin_g_(&vbox_, 0, 0, 300, 200, init_color.g, 0, 255, panel_style_, _("Green"), SpinBox::Units::kNone, SpinBox::Type::kBig),
-spin_b_(&vbox_, 0, 0, 300, 200, init_color.b, 0, 255, panel_style_, _("Blue"), SpinBox::Units::kNone, SpinBox::Type::kBig),
-interactive_pane_(*new ColorChooserImpl(hbox_, panel_style_, *this)),
-icon_(&vbox_, panel_style_, 0, 0, kMainDimension / 2, kMainDimension / 2, preview(init_color)) {
+ColorChooser::ColorChooser(Panel* parent,
+                           const WindowStyle s,
+                           const RGBColor& init_color,
+                           const RGBColor* default_color)
+   : Window(parent, s, "choose_color", 0, 0, 0, 0, _("Choose Color…")),
+     current_(init_color),
+     main_box_(this, panel_style_, 0, 0, Box::Vertical),
+     hbox_(&main_box_, panel_style_, 0, 0, Box::Horizontal),
+     buttonsbox_(&main_box_, panel_style_, 0, 0, Box::Horizontal),
+     vbox_(&hbox_, panel_style_, 0, 0, Box::Vertical),
+     button_ok_(&buttonsbox_,
+                "ok",
+                0,
+                0,
+                30,
+                0,
+                s == WindowStyle::kWui ? ButtonStyle::kWuiPrimary : ButtonStyle::kFsMenuPrimary,
+                _("OK")),
+     button_cancel_(
+        &buttonsbox_,
+        "cancel",
+        0,
+        0,
+        30,
+        0,
+        s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
+        _("Cancel")),
+     button_init_(
+        &buttonsbox_,
+        "initial_color",
+        0,
+        0,
+        30,
+        0,
+        s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
+        _("Initial Color")),
+     button_default_(default_color ?
+                        new Button(&buttonsbox_,
+                                   "default_color",
+                                   0,
+                                   0,
+                                   30,
+                                   0,
+                                   s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary :
+                                                            ButtonStyle::kFsMenuSecondary,
+                                   _("Default Color")) :
+                        nullptr),
+     spin_r_(&vbox_,
+             0,
+             0,
+             300,
+             200,
+             init_color.r,
+             0,
+             255,
+             panel_style_,
+             _("Red"),
+             SpinBox::Units::kNone,
+             SpinBox::Type::kBig),
+     spin_g_(&vbox_,
+             0,
+             0,
+             300,
+             200,
+             init_color.g,
+             0,
+             255,
+             panel_style_,
+             _("Green"),
+             SpinBox::Units::kNone,
+             SpinBox::Type::kBig),
+     spin_b_(&vbox_,
+             0,
+             0,
+             300,
+             200,
+             init_color.b,
+             0,
+             255,
+             panel_style_,
+             _("Blue"),
+             SpinBox::Units::kNone,
+             SpinBox::Type::kBig),
+     interactive_pane_(*new ColorChooserImpl(hbox_, panel_style_, *this)),
+     icon_(
+        &vbox_, panel_style_, 0, 0, kMainDimension / 2, kMainDimension / 2, preview(init_color)) {
 	buttonsbox_.add_space(kSpacing);
 	buttonsbox_.add(&button_cancel_, UI::Box::Resizing::kExpandBoth);
 	buttonsbox_.add_space(kSpacing);
@@ -157,12 +236,20 @@ icon_(&vbox_, panel_style_, 0, 0, kMainDimension / 2, kMainDimension / 2, previe
 	buttonsbox_.add(&button_ok_, UI::Box::Resizing::kExpandBoth);
 	buttonsbox_.add_space(kSpacing);
 
-	button_ok_.sigclicked.connect([this]() { end_modal<Panel::Returncodes>(Panel::Returncodes::kOk); });
-	button_cancel_.sigclicked.connect([this]() { end_modal<Panel::Returncodes>(Panel::Returncodes::kBack); });
+	button_ok_.sigclicked.connect(
+	   [this]() { end_modal<Panel::Returncodes>(Panel::Returncodes::kOk); });
+	button_cancel_.sigclicked.connect(
+	   [this]() { end_modal<Panel::Returncodes>(Panel::Returncodes::kBack); });
 	button_init_.sigclicked.connect([this, init_color]() { set_color(init_color); });
-	spin_r_.changed.connect([this]() { set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value())); });
-	spin_g_.changed.connect([this]() { set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value())); });
-	spin_b_.changed.connect([this]() { set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value())); });
+	spin_r_.changed.connect([this]() {
+		set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value()));
+	});
+	spin_g_.changed.connect([this]() {
+		set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value()));
+	});
+	spin_b_.changed.connect([this]() {
+		set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value()));
+	});
 
 	vbox_.add(&spin_r_);
 	vbox_.add_space(kSpacing);

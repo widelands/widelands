@@ -242,7 +242,7 @@ void EditorGameBase::remove_player(PlayerNumber plnum) {
 /// @see PlayerManager class
 Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    uint8_t const initialization_index,
-	                               const RGBColor& pc,
+                                   const RGBColor& pc,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
