@@ -75,10 +75,10 @@ descriptions:new_productionsite_type {
          descname = _"grinding corn",
          actions = {
             "return=skipped unless economy needs cornmeal",
-            "sleep=duration:3s500ms",
+            "sleep=duration:45s",
             "consume=corn:2",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
-            "animate=working duration:15s",
+            "animate=working duration:45s",
             "produce=cornmeal:2"
          }
       }

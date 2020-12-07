@@ -63,8 +63,8 @@ descriptions:new_productionsite_type {
          descname = pgettext("europeans_building", "baking pitta bread"),
          actions = {
             "consume=water cornmeal flour",
-            "sleep=duration:40s",
-            "animate=working duration:25s",
+            "sleep=duration:45s",
+            "animate=working duration:45s",
             "produce=europeans_bread"
          }
       },
@@ -75,10 +75,10 @@ descriptions:new_productionsite_type {
             "return=skipped unless economy needs europeans_bread",
             "return=skipped when economy needs water",
             "consume=water:4 cornmeal:2 flour:2",
-            "sleep=duration:20s",
-            "animate=working duration:25s",
+            "sleep=duration:30s",
+            "animate=working duration:30s",
             "produce=europeans_bread:2",
-            "animate=working duration:25s",
+            "animate=working duration:30s",
             "produce=europeans_bread:2"
          }
       },

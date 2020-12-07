@@ -57,10 +57,10 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
-            "sleep=duration:20s",
+            "sleep=duration:60s",
             "consume=spider_silk",
             "playsound=sound/mill/weaving priority:90%",
-            "animate=working duration:20s",
+            "animate=working duration:30s",
             "produce=spidercloth"
          }
       },
@@ -70,9 +70,9 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs spidercloth",
             "consume=spider_silk:3",
-            "sleep=duration:20s",
+            "sleep=duration:30s",
             "playsound=sound/mill/weaving priority:90%",
-            "animate=working duration:20s",
+            "animate=working duration:30s",
             "produce=spidercloth:3"
          }
       },
@@ -82,9 +82,9 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs tabard",
             "consume=spider_silk",
-            "sleep=duration:20s",
+            "sleep=duration:30s",
             "playsound=sound/mill/weaving priority:90%",
-            "animate=working duration:20s",
+            "animate=working duration:30s",
             "produce=tabard"
          }
       },
@@ -94,9 +94,9 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs armor",
             "consume=wool:2",
-            "sleep=duration:20s",
+            "sleep=duration:30s",
             "playsound=sound/mill/weaving priority:90%",
-            "animate=working duration:15s",
+            "animate=working duration:30s",
             "sleep=duration:5s",
             "produce=armor:2"
          }

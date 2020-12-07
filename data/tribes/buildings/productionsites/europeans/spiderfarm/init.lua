@@ -60,8 +60,8 @@ descriptions:new_productionsite_type {
          descname = _"produce spider silk",
          actions = {
             "consume=corn water",
-            "sleep=duration:25s",
-            "animate=working duration:35s",
+            "sleep=duration:60s",
+            "animate=working duration:60s",
             "produce=spider_silk"
          }
       },
@@ -73,8 +73,8 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "return=skipped when economy needs corn",
             "consume=corn:2 water:2",
-            "sleep=duration:25s",
-            "animate=working duration:35s",
+            "sleep=duration:60s",
+            "animate=working duration:60s",
             "produce=spider_silk:2"
          }
       },

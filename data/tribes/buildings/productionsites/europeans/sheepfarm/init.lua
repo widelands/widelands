@@ -60,9 +60,9 @@ descriptions:new_productionsite_type {
          descname = _"produce wool",
          actions = {
             "consume=water wheat",
-            "sleep=duration:25s",
+            "sleep=duration:60s",
             "playsound=sound/farm/sheep priority:50% allow_multiple",
-            "animate=working duration:35s",
+            "animate=working duration:60s",
             "produce=wool"
          }
       },
@@ -74,9 +74,9 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "return=skipped when economy needs wheat",
             "consume=water:2 wheat:2",
-            "sleep=duration:25s",
+            "sleep=duration:60s",
             "playsound=sound/farm/sheep priority:50% allow_multiple",
-            "animate=working duration:35s",
+            "animate=working duration:60s",
             "produce=wool:2"
          }
       },

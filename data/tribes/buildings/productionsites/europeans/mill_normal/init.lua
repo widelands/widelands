@@ -65,10 +65,10 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped when site has rye and economy needs flour and not economy needs cornmeal",
             "return=skipped unless economy needs cornmeal",
-            "sleep=duration:3s500ms",
+            "sleep=duration:25s",
             "consume=corn:2",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
-            "animate=working duration:15s",
+            "animate=working duration:35s",
             "produce=cornmeal:2"
          }
       },
@@ -79,9 +79,9 @@ descriptions:new_productionsite_type {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
             "return=skipped when site has corn and economy needs cornmeal and not economy needs flour",
             "consume=wheat:2 rye:2",
-            "sleep=duration:3s500ms",
+            "sleep=duration:25s",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
-            "animate=working duration:15s",
+            "animate=working duration:35s",
             "produce=flour:3"
          }
       },

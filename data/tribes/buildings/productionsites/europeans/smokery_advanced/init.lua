@@ -50,8 +50,8 @@ descriptions:new_productionsite_type {
          descname = _"smoking fish",
          actions = {
             "consume=fish log",
-            "animate=working duration:20s",
-            "sleep=duration:20s",
+            "animate=working duration:30s",
+            "sleep=duration:30s",
             "produce=smoked_fish"
          }
       },
@@ -61,8 +61,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs smoked_meat",
             "consume=meat log",
-            "animate=working duration:20s",
-            "sleep=duration:20s",
+            "animate=working duration:30s",
+            "sleep=duration:30s",
             "produce=smoked_meat"
          }
       },
@@ -73,8 +73,8 @@ descriptions:new_productionsite_type {
             "return=skipped unless economy needs smoked_meat",
             "return=skipped when economy needs log",
             "consume=meat:3 log:2",
-            "animate=working duration:20s",
-            "sleep=duration:20s",
+            "animate=working duration:30s",
+            "sleep=duration:30s",
             "produce=smoked_meat:3"
          }
       },
@@ -85,8 +85,8 @@ descriptions:new_productionsite_type {
             "return=skipped unless economy needs smoked_fish",
             "return=skipped when economy needs log",
             "consume=fish:3 log:2",
-            "animate=working duration:20s",
-            "sleep=duration:20s",
+            "animate=working duration:30s",
+            "sleep=duration:30s",
             "produce=smoked_fish:3"
          }
       },
