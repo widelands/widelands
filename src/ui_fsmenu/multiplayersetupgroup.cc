@@ -209,8 +209,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     type_selection_locked_(false),
 	     tribe_selection_locked_(false),
 	     init_selection_locked_(false),
-	     team_selection_locked_(false),
-	     color_selection_locked_(false) {
+	     team_selection_locked_(false) {
 
 		player.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		type_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
@@ -490,9 +489,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team_selection_locked_ = false;
 	}
 
-	/// This will update the team settings with the value currently selected in the teams dropdown.
 	void set_color() {
-		color_selection_locked_ = true;
 		Panel* p = this;
 		while (p->get_parent()) {
 			p = p->get_parent();
@@ -502,7 +499,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			n->set_player_color(id_, c.get_color());
 		}
-		color_selection_locked_ = false;
 	}
 
 	/// Rebuild the team dropdown from the server settings. This will keep the host and client UIs in
@@ -602,7 +598,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	bool tribe_selection_locked_;
 	bool init_selection_locked_;
 	bool team_selection_locked_;
-	bool color_selection_locked_;
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
