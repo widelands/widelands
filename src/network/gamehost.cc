@@ -1184,6 +1184,7 @@ void GameHost::set_map(const std::string& mapname,
 		player.random_tribe = false;
 		player.initialization_index = 0;
 		player.team = 0;
+		player.color = kPlayerColors[oldplayers];
 		player.ai = "";
 		player.random_ai = false;
 		player.closeable = false;
