@@ -212,7 +212,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start making milking tongs because ...
          descname = _"making needles",
          actions = {
-            "return=skipped unless economy needs milking_tongs",
+            "return=skipped unless economy needs needles",
             "consume=iron",
             "sleep=duration:20s",
             "playsound=sound/smiths/toolsmith priority:50% allow_multiple",
