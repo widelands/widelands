@@ -463,7 +463,7 @@ void EditorInteractive::load(const std::string& filename) {
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
 			egbase().add_player(
-			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
+			   p, 0, kPlayerColors[p - 1], map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 		}
 	}
 

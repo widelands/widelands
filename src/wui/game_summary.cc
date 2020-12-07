@@ -200,7 +200,7 @@ void GameSummaryScreen::fill_data() {
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
 		const Image* player_image =
-		   playercolor_image(pes.player - 1, "images/players/genstats_player.png");
+		   playercolor_image(game_.player(pes.player).get_playercolor(), "images/players/genstats_player.png");
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team

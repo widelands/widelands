@@ -158,6 +158,16 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		}
 	}
 
+	void set_player_color(const uint8_t number, const RGBColor& col) override {
+		if (number >= host_->settings().players.size()) {
+			return;
+		}
+		if (number == settings().playernum ||
+		    settings().players.at(number).state == PlayerSettings::State::kComputer) {
+			host_->set_player_color(number, col);
+		}
+	}
+
 	void set_player_closeable(uint8_t number, bool closeable) override {
 		if (number >= host_->settings().players.size()) {
 			return;
@@ -1567,6 +1577,14 @@ void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	broadcast_setting_player(number);
 }
 
+void GameHost::set_player_color(const uint8_t number, const RGBColor& col) {
+	if (number >= d->settings.players.size()) {
+		return;
+	}
+	d->settings.players.at(number).color = col;
+	broadcast_setting_player(number);
+}
+
 void GameHost::set_multiplayer_game_settings() {
 	d->settings.scenario = false;
 	d->settings.multiplayer = true;
@@ -1634,6 +1652,9 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 	packet.unsigned_8(player.random_ai ? 1 : 0);
 	packet.unsigned_8(player.team);
 	packet.unsigned_8(player.shared_in);
+	packet.unsigned_8(player.color.r);
+	packet.unsigned_8(player.color.g);
+	packet.unsigned_8(player.color.b);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
@@ -2290,6 +2311,19 @@ void GameHost::handle_changeteam(const Client& client, RecvPacket& r) {
 	}
 }
 
+void GameHost::handle_changecolor(const Client& client, RecvPacket& packet) {
+	if (!d->game) {
+		const uint8_t num = packet.unsigned_8();
+		if (num != client.playernum) {
+			throw DisconnectException("NO_ACCESS_TO_PLAYER");
+		}
+		const uint8_t r = packet.unsigned_8();
+		const uint8_t g = packet.unsigned_8();
+		const uint8_t b = packet.unsigned_8();
+		set_player_color(num, RGBColor(r, g, b));
+	}
+}
+
 void GameHost::handle_changeinit(const Client& client, RecvPacket& r) {
 	if (!d->game) {
 		// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
@@ -2416,6 +2450,8 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 		return handle_changeshared(client, r);
 	case NETCMD_SETTING_CHANGETEAM:
 		return handle_changeteam(client, r);
+	case NETCMD_SETTING_CHANGECOLOR:
+		return handle_changecolor(client, r);
 	case NETCMD_SETTING_CHANGEINIT:
 		return handle_changeinit(client, r);
 	case NETCMD_SETTING_CHANGEPOSITION:

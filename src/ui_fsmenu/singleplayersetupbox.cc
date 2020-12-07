@@ -26,6 +26,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
+#include "ui_basic/color_chooser.h"
 
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
                                                              int32_t const,
@@ -42,7 +43,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
              h,
              h,
              UI::ButtonStyle::kFsMenuSecondary,
-             playercolor_image(id, "images/players/player_position_menu.png"),
+             menu_image(),
              (boost::format(_("Player %u")) % static_cast<unsigned>(id_ + 1)).str(),
              UI::Button::VisualState::kFlat),
      player_type_(this,
@@ -84,8 +85,18 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	add(start_type.get_dropdown(), UI::Box::Resizing::kExpandBoth);
 	add(teams_.get_dropdown());
 
-	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
-	player_.set_enabled(false);
+	player_.sigclicked.connect([this]() {
+		Panel* p = this;
+		while (p->get_parent()) {
+			p = p->get_parent();
+		}
+		UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color, &kPlayerColors[id_]);
+		if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			settings_->set_player_color(id_, c.get_color());
+			update();
+		}
+	});
+
 	update();
 }
 void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_element_height) {
@@ -96,13 +107,18 @@ void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_eleme
 	teams_.set_desired_size(standard_element_height, standard_element_height);
 }
 
+inline const Image* SinglePlayerActivePlayerGroup::menu_image() {
+	return playercolor_image(settings_->settings().players[id_].color, "images/players/player_position_menu.png");
+}
+
 void SinglePlayerActivePlayerGroup::update() {
 	const GameSettings& settings = settings_->settings();
 
 	player_type_.rebuild();
 
 	const PlayerSettings& player_setting = settings.players[id_];
-	player_.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
+	player_.set_pic(menu_image());
+	player_.set_tooltip(player_setting.name);
 	if (player_setting.state == PlayerSettings::State::kClosed ||
 	    player_setting.state == PlayerSettings::State::kOpen) {
 

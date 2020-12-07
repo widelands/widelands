@@ -24,6 +24,7 @@
 #include <string>
 
 #include "io/filesystem/layered_filesystem.h"
+#include "graphic/color.h"
 #include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -53,6 +54,7 @@ struct PlayerSettings {
 	bool random_tribe;
 	std::string ai; /**< Preferred AI provider for this player */
 	bool random_ai;
+	RGBColor color;
 	Widelands::TeamNumber team;
 	bool closeable;     // only used in multiplayer scenario maps
 	uint8_t shared_in;  // the number of the player that uses this player's starting position
@@ -243,6 +245,7 @@ struct GameSettingsProvider {
 	virtual void set_player(uint8_t number, const PlayerSettings&) = 0;
 	virtual void set_player_number(uint8_t number) = 0;
 	virtual void set_player_team(uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void set_player_color(uint8_t number, const RGBColor&) = 0;
 	virtual void set_player_closeable(uint8_t number, bool closeable) = 0;
 	virtual void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) = 0;
 	virtual void set_win_condition_script(const std::string& wc) = 0;
