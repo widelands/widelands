@@ -72,12 +72,14 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=plant_corn_basic",
             "call=plant_corn",
             "call=plant_wheat",
             "call=harvest_corn",
             "call=plant_rye",
             "call=harvest_wheat",
             "call=harvest_rye",
+            "call=harvest_corn_basic",
          }
       },
       plant_barley = {
@@ -90,6 +92,16 @@ descriptions:new_productionsite_type {
             "callworker=plant_barley",
             "animate=working duration:6s",
             "sleep=duration:5s"
+         }
+      },
+      plant_corn_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
+         descname = _"planting corn",
+         actions = {
+            "consume=water",
+            "callworker=plant_corn",
+            "animate=working duration:10s",
+            "sleep=duration:10s"
          }
       },
       plant_corn = {
@@ -136,6 +148,15 @@ descriptions:new_productionsite_type {
             "callworker=harvest_barley",
             "animate=working duration:6s",
             "sleep=duration:4s"
+         }
+      },
+      harvest_corn_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
+         descname = _"harvesting corn",
+         actions = {
+            "callworker=harvest_corn",
+            "animate=working duration:10s",
+            "sleep=duration:10s"
          }
       },
       harvest_corn = {
