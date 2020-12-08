@@ -1043,6 +1043,7 @@ public:
 	 */
 	int set_wares(lua_State*);
 	int get_wares(lua_State*);
+	int get_distance(lua_State*);
 
 	/*
 	 * C Methods

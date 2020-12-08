@@ -4642,6 +4642,7 @@ const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
    METHOD(LuaFlag, set_wares),
    METHOD(LuaFlag, get_wares),
+   METHOD(LuaFlag, get_distance),
    {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
@@ -4852,6 +4853,37 @@ int LuaFlag::get_wares(lua_State* L) {
 		}
 	}
 
+	return 1;
+}
+
+/* RST
+   .. method:: get_distance(flag)
+
+      Returns the distance of the specified flag from this flag by roads and/or ships,
+      or `nil` of the flag cannot be reached. More precisely, this is the time that a worker
+      will need to get from this flag to the other flag using roads.
+
+      Note that the distance from A to B is not necessarily equal to the distance from B to A.
+
+      :arg flag: The flag to find.
+      :type flag: :class:`Flag`
+
+      :returns: The distance of the flags in walking time or `nil` if no path exists
+*/
+int LuaFlag::get_distance(lua_State* L) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Flag* f1 = get(L, egbase);
+	Widelands::Flag* f2 = (*get_user_class<LuaMaps::LuaFlag>(L, 2))->get(L, egbase);
+	if (f1->get_economy(Widelands::wwWORKER) == f2->get_economy(Widelands::wwWORKER)) {
+		Widelands::Route r;
+		if (f1->get_economy(Widelands::wwWORKER)->find_route(*f1, *f2, &r)) {
+			lua_pushint32(L, r.get_totalcost());
+		} else {
+			report_error(L, "Unable to discover the walking-time between two flags within one economy!");
+		}
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 

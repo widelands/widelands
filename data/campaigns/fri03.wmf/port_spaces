@@ -1,0 +1,15 @@
+# Automatically created by Widelands bzr8851[fri03] (Release)
+
+[global]
+packet_version="1"
+number_of_port_spaces="8"
+
+[port_spaces]
+0="20 32"
+1="20 162"
+2="4 235"
+3="42 243"
+4="50 310"
+5="16 402"
+6="6 461"
+7="1 467"
