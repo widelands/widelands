@@ -879,6 +879,16 @@ void AddOnsCtrl::layout() {
 	UI::Window::layout();
 }
 
+inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
+	UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Note"),
+	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
+	                                    "otherwise you may experience graphical glitches.")) %
+	                    name.c_str())
+	                      .str(),
+	                   UI::WLMessageBox::MBoxType::kOk);
+	w.run<UI::Panel::Returncodes>();
+}
+
 static void install_translation(const std::string& temp_locale_path,
                                 const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
@@ -918,84 +928,97 @@ static void install_translation(const std::string& temp_locale_path,
 // TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's
 // requirements
 void AddOnsCtrl::install(const AddOnInfo& remote) {
-	ProgressIndicatorWindow piw(this, remote.descname());
-
-	g_fs->ensure_directory_exists(kAddOnDir);
-
-	piw.progressbar().set_total(remote.file_list.files.size() + remote.file_list.locales.size());
-
-	const std::string path = download_addon(piw, remote);
-
-	if (path.empty()) {
-		// downloading failed
-		return;
-	}
-
-	// Install the add-on
 	{
-		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote.internal_name;
+		ProgressIndicatorWindow piw(this, remote.descname());
 
-		assert(g_fs->is_directory(path));
-		if (g_fs->file_exists(new_path)) {
-			// erase leftovers from manual uninstallations
-			g_fs->fs_unlink(new_path);
-		}
-		assert(!g_fs->file_exists(new_path));
-
-		g_fs->fs_rename(path, new_path);
-
-		assert(!g_fs->file_exists(path));
-		assert(g_fs->is_directory(new_path));
-	}
-
-	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
-		install_translation(temp_locale_path, remote.internal_name);
-	}
-
-	g_addons.push_back(std::make_pair(preload_addon(remote.internal_name), true));
-}
-
-// Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
-void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
-	ProgressIndicatorWindow piw(this, remote.descname());
-
-	piw.progressbar().set_total(remote.file_list.locales.size() +
-	                            (full_upgrade ? remote.file_list.files.size() : 0));
-
-	if (full_upgrade) {
 		g_fs->ensure_directory_exists(kAddOnDir);
 
+		piw.progressbar().set_total(remote.file_list.files.size() + remote.file_list.locales.size());
+
 		const std::string path = download_addon(piw, remote);
+
 		if (path.empty()) {
 			// downloading failed
 			return;
 		}
 
-		// Upgrade the add-on
-		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote.internal_name;
+		// Install the add-on
+		{
+			const std::string new_path =
+			   kAddOnDir + FileSystem::file_separator() + remote.internal_name;
 
-		assert(g_fs->is_directory(path));
-		assert(g_fs->is_directory(new_path));
+			assert(g_fs->is_directory(path));
+			if (g_fs->file_exists(new_path)) {
+				// erase leftovers from manual uninstallations
+				g_fs->fs_unlink(new_path);
+			}
+			assert(!g_fs->file_exists(new_path));
 
-		g_fs->fs_unlink(new_path);  // Uninstall the old version…
+			g_fs->fs_rename(path, new_path);
 
-		assert(!g_fs->file_exists(new_path));
+			assert(!g_fs->file_exists(path));
+			assert(g_fs->is_directory(new_path));
+		}
 
-		g_fs->fs_rename(path, new_path);  // …and replace with the new one.
+		// Now download the translations
+		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+			install_translation(temp_locale_path, remote.internal_name);
+		}
 
-		assert(g_fs->is_directory(new_path));
-		assert(!g_fs->file_exists(path));
+		g_addons.push_back(std::make_pair(
+		   preload_addon(remote.internal_name), remote.category != AddOnCategory::kWorld));
 	}
-
-	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
-		install_translation(temp_locale_path, remote.internal_name);
+	if (remote.category == AddOnCategory::kWorld) {
+		inform_about_restart(remote.descname());
 	}
+}
 
+// Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
+void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
+	{
+		ProgressIndicatorWindow piw(this, remote.descname());
+
+		piw.progressbar().set_total(remote.file_list.locales.size() +
+		                            (full_upgrade ? remote.file_list.files.size() : 0));
+
+		if (full_upgrade) {
+			g_fs->ensure_directory_exists(kAddOnDir);
+
+			const std::string path = download_addon(piw, remote);
+			if (path.empty()) {
+				// downloading failed
+				return;
+			}
+
+			// Upgrade the add-on
+			const std::string new_path =
+			   kAddOnDir + FileSystem::file_separator() + remote.internal_name;
+
+			assert(g_fs->is_directory(path));
+			assert(g_fs->is_directory(new_path));
+
+			g_fs->fs_unlink(new_path);  // Uninstall the old version…
+
+			assert(!g_fs->file_exists(new_path));
+
+			g_fs->fs_rename(path, new_path);  // …and replace with the new one.
+
+			assert(g_fs->is_directory(new_path));
+			assert(!g_fs->file_exists(path));
+		}
+
+		// Now download the translations
+		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+			install_translation(temp_locale_path, remote.internal_name);
+		}
+	}
 	for (auto& pair : g_addons) {
 		if (pair.first.internal_name == remote.internal_name) {
 			pair.first = preload_addon(remote.internal_name);
+			if (remote.category == AddOnCategory::kWorld) {
+				pair.second = false;
+				inform_about_restart(remote.descname());
+			}
 			return;
 		}
 	}
