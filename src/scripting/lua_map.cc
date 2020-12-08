@@ -4879,7 +4879,8 @@ int LuaFlag::get_distance(lua_State* L) {
 		if (f1->get_economy(Widelands::wwWORKER)->find_route(*f1, *f2, &r)) {
 			lua_pushint32(L, r.get_totalcost());
 		} else {
-			report_error(L, "Unable to discover the walking-time between two flags within one economy!");
+			report_error(
+			   L, "Unable to discover the walking-time between two flags within one economy!");
 		}
 	} else {
 		lua_pushnil(L);
