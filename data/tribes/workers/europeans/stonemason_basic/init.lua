@@ -17,8 +17,7 @@ descriptions:new_worker_type {
       europeans_carrier = 1,
       pick = 1,
       shovel = 1,
-      buckets = 1,
-      saw = 1
+      buckets = 1
    },
 
    programs = {

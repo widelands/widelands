@@ -12,6 +12,12 @@ descriptions:new_worker_type {
 
    experience = 24,
    becomes = "europeans_smelter_advanced",
+   
+   buildcost = {
+      europeans_carrier = 1,
+      fire_tongs = 1,
+      shovel = 1
+   },
 
    animations = {
       idle = {

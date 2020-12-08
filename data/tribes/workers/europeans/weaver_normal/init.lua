@@ -13,6 +13,11 @@ descriptions:new_worker_type {
    experience = 24,
    becomes = "europeans_weaver_advanced",
    
+   buildcost = {
+      europeans_carrier = 1,
+      needles = 2
+   },
+   
    animations = {
       idle = {
          hotspot = { 2, 22 }

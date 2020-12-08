@@ -12,6 +12,11 @@ descriptions:new_worker_type {
 
    experience = 24,
    becomes = "europeans_smoker_advanced",
+   
+   buildcost = {
+      europeans_carrier = 1,
+      hook_pole = 2
+   },
 
    animations = {
       idle = {

@@ -12,6 +12,13 @@ descriptions:new_worker_type {
 
    experience = 24,
    becomes = "europeans_smith_advanced",
+   
+   buildcost = {
+      europeans_carrier = 1,
+      hammer = 2,
+      fire_tongs = 1,
+      saw = 1
+   },
 
    animations = {
       idle = {

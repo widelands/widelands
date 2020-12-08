@@ -12,6 +12,13 @@ descriptions:new_worker_type {
 
    experience = 24,
    becomes = "europeans_charcoal_burner_advanced",
+   
+   buildcost = {
+      europeans_carrier = 1,
+      shovel = 1,
+      buckets = 1,
+      hook_pole = 1
+   },
 
    animations = {
       idle = {

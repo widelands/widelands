@@ -9,6 +9,12 @@ descriptions:new_worker_type {
    animation_directory = dirname,
    icon = dirname .. "menu.png",
    vision_range = 2,
+   
+   buildcost = {
+      europeans_carrier = 1,
+      fire_tongs = 2,
+      shovel = 1
+   },
 
    animations = {
       idle = {

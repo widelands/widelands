@@ -12,6 +12,12 @@ descriptions:new_worker_type {
 
    experience = 24,
    becomes = "europeans_miller_advanced",
+   
+   buildcost = {
+      europeans_carrier = 1,
+      basket = 1,
+      buckets = 1
+   },
 
    animations = {
       idle = {

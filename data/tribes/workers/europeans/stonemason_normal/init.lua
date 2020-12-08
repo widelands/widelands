@@ -12,6 +12,13 @@ descriptions:new_worker_type {
 
    experience = 24,
    becomes = "europeans_stonemason_advanced",
+   
+   buildcost = {
+      europeans_carrier = 1,
+      pick = 1,
+      shovel = 1,
+      buckets = 1
+   },
 
    programs = {
       cut_granite = {
