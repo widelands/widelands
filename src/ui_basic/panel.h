@@ -288,9 +288,7 @@ public:
 		return allow_user_input_;
 	}
 
-	void set_tooltip(const std::string& text) {
-		tooltip_ = text;
-	}
+	void set_tooltip(const std::string&);
 	const std::string& tooltip() const {
 		return tooltip_;
 	}
@@ -298,7 +296,12 @@ public:
 	virtual void die();
 	static void register_click();
 
-	virtual bool tooltip_accessibility_mode() const;
+	// overridden by InteractiveBase
+	virtual bool extended_tooltip_accessibility_mode() const {
+		return false;
+	}
+
+	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
 
 protected:
 	// This panel will never receive keypresses (do_key), instead

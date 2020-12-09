@@ -205,8 +205,8 @@ public:
 		return 0;
 	}
 
-	bool tooltip_accessibility_mode() const override {
-		return false;
+	bool extended_tooltip_accessibility_mode() const override {
+		return true;
 	}
 
 	UI::Box* toolbar() {

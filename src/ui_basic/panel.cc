@@ -49,7 +49,7 @@ Recti Panel::tooltip_fixed_rect_ = Recti(0, 0, 0, 0);
 bool Panel::allow_user_input_ = true;
 FxId Panel::click_fx_ = kNoSoundEffect;
 
-inline bool Panel::tooltip_accessibility_mode() const {
+inline static bool tooltip_accessibility_mode() {
 	return get_config_bool("tooltip_accessibility_mode", false);
 }
 
@@ -939,6 +939,28 @@ void Panel::do_draw(RenderTarget& dst) {
 	}
 
 	dst.set_window(outerrc, outerofs);
+}
+
+void Panel::set_tooltip(const std::string& text) {
+	if (tooltip_ == text) {
+		return;
+	}
+
+	tooltip_ = text;
+
+	if (!text.empty() && extended_tooltip_accessibility_mode() && tooltip_accessibility_mode()) {
+		tooltip_panel_ = this;
+		tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
+	}
+}
+
+void Panel::find_all_children_at(const int16_t x, const int16_t y, std::vector<Panel*>& result) const {
+	for (Panel* child = first_child_; child; child = child->next_) {
+		if (child->get_x() <= x && child->get_y() <= y && child->get_x() + child->get_w() > x && child->get_y() + child->get_h() > y) {
+			result.push_back(child);
+			child->find_all_children_at(x - child->get_x(), y - child->get_y(), result);
+		}
+	}
 }
 
 /**

@@ -31,7 +31,6 @@
 #include "logic/map_objects/descriptions.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/interactive_base.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
@@ -323,7 +322,7 @@ MapView::MapView(
      view_(),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false),
-     edge_scrolling_(get_config_bool("edge_scrolling", false)),
+     edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ && get_config_bool("edge_scrolling", false)),
      is_scrolling_x_(0),
      is_scrolling_y_(0) {
 }
@@ -553,11 +552,17 @@ bool MapView::handle_mousemove(
 void MapView::think() {
 	UI::Panel::think();
 	if (!dragging_ && (is_scrolling_x_ != 0 || is_scrolling_y_ != 0)) {
-		InteractiveBase& ibase = dynamic_cast<InteractiveBase&>(*get_parent());
-		const Vector2i mouse = ibase.toolbar()->get_mouse_position();
-		if (mouse.x >= 0 && mouse.y >= 0 && mouse.x <= ibase.toolbar()->get_w() &&
-		    mouse.y <= ibase.toolbar()->get_h()) {
-			return;  // mouse over toolbar
+		// We should be a child of the IBase
+		assert(get_parent());
+		assert(!get_parent()->get_parent());
+
+		const Vector2i mouse = get_parent()->get_mouse_position();
+		std::vector<UI::Panel*> all_children_at_mouse;
+		get_parent()->find_all_children_at(mouse.x, mouse.y, all_children_at_mouse);
+		assert(!all_children_at_mouse.empty());  // At least we should be there
+		if (all_children_at_mouse.size() > 1) {
+			// Mouse is over another panel
+			return;
 		}
 
 		const int16_t speed =
