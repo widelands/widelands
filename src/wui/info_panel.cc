@@ -490,17 +490,17 @@ void InfoPanel::layout() {
 		int16_t message_offset = toolbar_->box.get_h();
 		for (MessagePreview* m : messages_) {
 			m->move_to_top();
-			m->set_size(w / 3, MainToolbar::kButtonSize);
-			m->set_pos(Vector2i(w / 3, message_offset));
+			m->set_size(toolbar_->box.get_w(), MainToolbar::kButtonSize);
+			m->set_pos(Vector2i((get_w() - m->get_w()) / 2, message_offset));
 			message_offset += m->get_h();
 		}
 	} else {
 		int16_t message_offset = get_h() - toolbar_->box.get_h();
 		for (MessagePreview* m : messages_) {
 			m->move_to_top();
-			m->set_size(w / 3, MainToolbar::kButtonSize);
+			m->set_size(toolbar_->box.get_w(), MainToolbar::kButtonSize);
 			message_offset -= m->get_h();
-			m->set_pos(Vector2i(w / 3, message_offset));
+			m->set_pos(Vector2i((get_w() - m->get_w()) / 2, message_offset));
 		}
 	}
 }
