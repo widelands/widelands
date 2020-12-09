@@ -6,14 +6,14 @@
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
-# Ondřej Itřech <vasa5@centrum.cz>, 2020
+# Ondřej Itřech, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-13 06:12+0000\n"
-"PO-Revision-Date: 2020-11-29 10:23+0000\n"
-"Last-Translator: Ondřej Itřech <vasa5@centrum.cz>\n"
+"POT-Creation-Date: 2020-11-29 22:44+0000\n"
+"PO-Revision-Date: 2020-12-09 12:22+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -54,22 +54,22 @@ msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami, cvičiš
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr "Snadné"
+msgstr "Snadné."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr "Střední"
+msgstr "Střední."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr "Těžké"
+msgstr "Těžké."
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr "Náročné"
+msgstr "Náročné."
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
@@ -97,7 +97,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "Když zemřel Chat’Karuth, byl to už starý muž, otec tří silných ctižádostivých synů a vojevůdce armády, která se mohla rovnat jakémukoliv nepříteli, který by chtěl ohrozit prastaré lesy. Ačkoliv ke konci vlády Chat’Karutha vybral svého nejstaršího syna Throna jako svého nástupce a vojevůdce kmene, rozhodnutí zanechalo zbylé dva bratry nespokojené. Starý vojevůdce to předvídal. Tak, jak mu jeho otec radil, opustil Thron hlavní město Al’thunranu, domov Korunního stolce hájů, a stáhl své vojáky do vysokých kopců, kde pohřbil tělo svého otce. Tam také přísahal bohům a duši svého otce, že se vrátí, aby obnovil řád. Zatímco jeho bratři rozdmýchávali slepou válku proti Thronovi a několika jeho vojákům, které nechal hlídat hranice Al’thunranu, mladý vojevůdce hledal způsob, jak sjednotit ctižádostivé bratry a přimět kmeny k opětovnému sjednocení pod společnou vlajku."
+msgstr ""
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -240,7 +240,7 @@ msgstr "Po tom, co se Lutius a jeho muži vrátili domů, musí čelit faktu, ž
 
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Ničivý bouřlivý příliv"
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -249,7 +249,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "V roce 1362 byl klidný a mírumilovný život obyvatel Severních fríských ostrovů přerušen největším bouřlivým přílivem v lidské historii: Záplava svatého Marcela. Zůstává otázkou, byla tato bouře dílem náhody, nebo znamením toho, že Bůh už žádné Frísany na ostrově Laněnés nechce?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -265,7 +265,7 @@ msgstr "Ledové uvítání"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Rýbaud a jeho kmen dorazili na Sever. Ale jejich příjezd do zamrzlých stepí a sněhem pokrytých hor není zrovna přívětivý…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 msgid "Basic Control"
@@ -330,16 +330,16 @@ msgid ""
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Velké pozemky jsou vzácné na těchto malých ostrovech. Jako první na nich stav velké budovy. Občas budeš potřebovat velkou vojenskou budovy aby jsi se dostal na další ostrov. UI se moc dobře nepovede."
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+#: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
 msgstr ""
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautiful land. Try every player!"
+#: ../../data/maps/Astoria_2.R.wmf/elemental:9
+msgid "pbuczny@gmail.com – edited by Nordfriese"
 msgstr ""
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:9
-msgid "pbuczny@gmail.com – edited by Nordfriese"
+#: ../../data/maps/Astoria_2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
 msgstr ""
 
 #: ../../data/maps/Atoll.wmf/elemental:8
@@ -372,16 +372,16 @@ msgid ""
 "another confrontation."
 msgstr "Ať už jen z nejbláznivějších výstřelků přírody, nebo výtvor šíleného (ale hravého) boha, toto podivné bojiště očekává dva soupeře, aby na něm změřili své síly."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:8
+#: ../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
 msgstr "Ostrov komety"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:9
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
+#: ../../data/maps/Comet_Island.wmf/elemental:9
+#: ../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
-msgstr "Nasenbaer - upraveno králem_odnikud"
+msgstr "Nasenbaer – upravil king_of_nowhere"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:10
+#: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
 "A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
 " you have not seen any reason to sail there, but yesterday a big fireball "
@@ -390,7 +390,7 @@ msgid ""
 "of this island before other tribes will follow."
 msgstr "Několik mil od pobřeží Gerionu leží malý, nepojmenovaný ostrov. Dosud neexistoval důvod, proč se tam vypravit - až do včerejška, kdy se z oblohy snesla obrovská ohnivá koule a dopadla doprostřed ostrova. Je to snad znamení bohů? Věříš že ano a doufáš, že na tomto ostrově tvůj kmen nalezne jeho bohatství dříve, než jej objeví ostatní."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:11
+#: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
@@ -408,21 +408,21 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Před dávnými dobami spadl do pohoří meteor. Nyní se kráter opět zabydluje a dva kmeny bojují o nerostné bohatství."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Překračování horizontu"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
-msgstr ""
+msgstr "Kristin – upravil 3plus4i"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Zmocni se lodi a pluj k horizontu."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
-msgstr ""
+msgstr "Za výherní podmínky \"Autokrat\" nelze tuto mapu vyhrát."
 
 #: ../../data/maps/Desert_Tournament.wmf/elemental:8
 msgid "Desert Tournament"
@@ -435,20 +435,20 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Čtyři kmeny bojují se svými nejbližšími sousedy o dobytí zlaté hory, která v sobě skrývá neskutečné bohatství. Budou však dva přeživší kmeny schopné se o bohatství rozumně rozdělit?"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+#: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
-msgstr ""
+msgstr "Dolomity 3.0"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:10
+#: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
 "reasonable reconstruction of the area delimited by Cortina d'Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death with your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "Pohoří Dolomity, alpský drahokam, bylo pro svou nedotčenou krásu prohlášeno světovým kulturním dědictvím. Tato mapa je věrnou a zároveň herně plnohodnotnou napodobeninou oblasti ohraničené Cortinou d'Ampezzo na severovýchodě a Canazei na jihozápadě. Když už se máš postavit svým nepřátelům v souboji na smrt, tak ať je to alespoň někde, kde je pěkně."
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:11
+#: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
 "The mountains have an abundance of flat ground. Unfortunately, most of it is"
 " vertical – use the little building space you have wisely. A fortress at the"
@@ -479,27 +479,27 @@ msgstr ""
 msgid "v0.2"
 msgstr ""
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:10
+#: ../../data/maps/Europa.wmf/elemental:8
+msgid "Europa 1.2"
+msgstr "Evropa 1.2"
+
+#: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
-msgstr ""
+msgstr "Velká mapa Evropy. Modrý = Švédsko, Červený = Itálie, Žlutý = Španělsko, Zelený = Turecko, Černý = Rusko, Oranžový = Anglie, Fialový = Francie, Bílý = Polsko"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:8
-msgid "Europa 1.1"
-msgstr ""
-
-#: ../../data/maps/Fellowships_v2.wmf/elemental:8
+#: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
 msgstr "Družnost"
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:10
+#: ../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
 msgstr "Lodě jsou tvými nejlepšími přáteli. Startovní pozice jsou si podobné, takže mapa by měla být férová."
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:11
+#: ../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
@@ -560,21 +560,21 @@ msgid ""
 "sources. III: Each mountain contains only one resource."
 msgstr "I: Vodu lze nalézt podél řeky. II: Sněhuláci označují vodní zdroje. III: Každá hora obsahuje pouze jednu surovinu."
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:8
+#: ../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
 msgstr "Úplněk"
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:10
+#: ../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
 msgstr "Ať už je to slunovrat nebo měsíční nemoc, něco žene tyto kmeny k jejich poslednímu utrpení."
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
+#: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
 msgstr "Ledovcové pleso"
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
+#: ../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
@@ -615,11 +615,11 @@ msgid ""
 "neighbor has begun to expand."
 msgstr "Po staletí jste žili se sousedním kmenem z nedalekého ostrova v míru. Ale pokojné časy právě končí - tví sousedé začínají rozšiřovat své hranice."
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
 msgstr "Králové a královny"
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
@@ -637,15 +637,15 @@ msgid ""
 "two hostile tribes have arrived at its shores…"
 msgstr "Toto jezero, v hloubi nejstaršího lesa, je již dlouhou dobu známo svou krásou a přímo idilickým klidem. Jeho klidné vody se nyní zčeřily, když dva znepřátelené kmeny dorazily k jeho břehům..."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
+#: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
 msgstr "Poslední pevnost"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
+#: ../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
 msgstr "Další barbar - upraveno králem_odnikud"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
+#: ../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
@@ -658,7 +658,7 @@ msgid ""
 "living space is also a hard and small place to live."
 msgstr "Rozmarní bohové nevyslyšeli naše modlitby. Místo toho sílící sluneční svit zahřívá Zemi tisícinásobně, rozpouští ledovce a lidé se skryli pod zem. Ale nyní – vysoko v majestátních horách, na posledním kousku země, se ukrývají dva přeživší kmeny. I přesto, že se bohové smilovali a klima se začalo opět ochlazovat, voda stále stoupá a stoupá. Na poslední bezpečné místo - do nejvyšších hor, kde množství zlata a místo stačí stěží pro přežití jednoho kmene - vedou dvě stezky. Ale pamatuj, buď opatrný... život na tomto posledním malém kousku země bude tvrdý."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+#: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
 msgstr "Nezapomeň se starat o své zásoby dřeva, budeš je potřebovat."
 
@@ -672,14 +672,14 @@ msgid ""
 "all over the map."
 msgstr "Čtyři kmeny bojují o nadvládu v nehostinné oblasti. Suroviny jsou roztroušené po celé mapě."
 
-#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+#: ../../data/maps/Long_long_way.wmf/elemental:8
+msgid "Long, long way v2"
+msgstr "Dlouhá, dlouhá cesta v2"
+
+#: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
-msgstr ""
-
-#: ../../data/maps/Long, long v2.wmf/elemental:8 way
-msgid "Long, long way v2"
 msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
@@ -715,11 +715,11 @@ msgid ""
 "maze, and what can be found inside?"
 msgstr "Vše se soustředí na dvě základní otázky: Kdo stvořil toto neuvěřitelně rozlehlé bludiště a co se skrývá uvnitř?"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+#: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
-msgstr ""
+msgstr "Žádné kovy - výzva v2"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+#: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
 " find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
@@ -856,17 +856,17 @@ msgid ""
 " no other way but to occupy the land of your enemies."
 msgstr "Další podivný test bohů. Vypadá to, že na druhou stranu ostrova nevede jiná cesta, než podmanit si země svých nepřátel."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:8
+#: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
 msgstr "Nil"
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:10
+#: ../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr "Řeka vždy poskytovala potravu i dopravu. Tentokrát bude o vládu nad touto zemí válčit osm říší."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:11
+#: ../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
@@ -920,11 +920,11 @@ msgstr "Mohutné pohoří rozděluje tuto zemi do tří úrodných nížin. Pře
 msgid "Water can be found around the lakes."
 msgstr "Vodu lze naléz v okolí jezer."
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:8
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
 msgstr "V jednotě je síla"
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:10
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
 "The four mighty harbors of the Craw Islands have been trading their goods "
 "among each other for ages. All of them needed resources that they could not "
@@ -949,11 +949,11 @@ msgid ""
 " explore enough resources to compete with its opponents."
 msgstr "V okolí tří velkých sopek, zve šestice malebných ostrovů osadníky začít jejich nový život. Pouště a rychle rostoucí les už čeká na prozkoumání. Ale pouze tím, že se staneš námořní velmocí, má šanci tvůj kmen získat dostatek surovin aby se mohl měřit se svými soky."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
 msgstr "Dvojtá laguna"
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
@@ -962,7 +962,7 @@ msgid ""
 " well-known reason."
 msgstr "Když první vítr zafokal a první duny byly zformovány na těchto zapomenutých lagunách, nikdo nečekal, že zde, na tomto bohem opuštěném místě a ze stejného důvodu, skončí dva kmeny, zoufale prahnoucí po surovinách na ukončení jejich nekonečné války."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
