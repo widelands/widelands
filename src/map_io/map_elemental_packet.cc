@@ -48,6 +48,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->set_nrplayers(s.get_int("nr_players"));
 			map->set_name(s.get_string("name"));
 			map->set_author(s.get_string("author"));
+			map->set_localize_author(s.get_val("author")->get_translate());
 			map->set_description(s.get_string("descr"));
 			map->set_hint(s.get_string("hint", ""));
 			map->set_background(s.get_string("background", ""));
@@ -159,10 +160,14 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_int("map_w", map.get_width());
 	global_section.set_int("map_h", map.get_height());
 	global_section.set_int("nr_players", nr_players);
-	global_section.set_string("name", map.get_name());
-	global_section.set_string("author", map.get_author());
-	global_section.set_string("descr", map.get_description());
-	global_section.set_string("hint", map.get_hint());
+	global_section.set_translated_string("name", map.get_name());
+	if (map.get_localize_author()) {
+		global_section.set_translated_string("author", map.get_author());
+	} else {
+		global_section.set_string("author", map.get_author());
+	}
+	global_section.set_translated_string("descr", map.get_description());
+	global_section.set_translated_string("hint", map.get_hint());
 	if (!map.get_background().empty()) {
 		global_section.set_string("background", map.get_background());
 	}
