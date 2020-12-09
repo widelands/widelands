@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-10 18:58+0000\n"
-"PO-Revision-Date: 2020-09-29 19:36+0000\n"
+"POT-Creation-Date: 2020-11-29 22:44+0000\n"
+"PO-Revision-Date: 2020-11-30 09:34+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -330,17 +330,17 @@ msgid ""
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Up deesen lütten Insels gifft 't kuum Rüümte för grote Husen. Daar sallst du daarher grote Husen bauen. Mitunner bruukst du grote Soldateree-Boen, um de anner Insel to faten to kriegen. Künstelk Spelers könen hier nich good spölen."
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+#: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
 msgstr "Astoria 2.R"
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautiful land. Try every player!"
-msgstr "Langes Wirtschaft-Speel in ewigsmojer Kuntrei. Probeer elkeen Speler ut!"
-
-#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+#: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
 msgstr "pbuczny@gmail.com – vun Nordfriese bewarkt"
+
+#: ../../data/maps/Astoria_2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr "Langes Wirtschaft-Speel in ewigsmojer Kuntrei. Probeer elkeen Speler ut!"
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -372,16 +372,16 @@ msgid ""
 "another confrontation."
 msgstr "Is dat eene bannig wunnerlike Kuntrei, de de Natuur daar schafft hett, of de Erfindung vun eenem dördreihten (un Speele-süchtigen) Gott? Wo ok immer: deeser komiske Slachtenring wacht up nejen Stried tüsken twee Feinden."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:8
+#: ../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
 msgstr "Steernsnuppen-Insel"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:9
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
+#: ../../data/maps/Comet_Island.wmf/elemental:9
+#: ../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
 msgstr "Nasenbaer – vun king_of_nowhere bewarkt"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:10
+#: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
 "A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
 " you have not seen any reason to sail there, but yesterday a big fireball "
@@ -390,7 +390,7 @@ msgid ""
 "of this island before other tribes will follow."
 msgstr "Een paar Mielen vör de Gerion-Küst liggt eene lütte Insel sünner Naam. Bit nu hest du keenen Grund sehn, daarhen to seilen, aver güstern is een groter Füürball ut de Himmel komen un in siener Midde landt. Is dat een Teken vun de Gotten? Du gloovst, dat dat so is, un du hoopst, dat dien Volk de Schatt vun deeser Insel finnt, ehr anner Völker nakomen."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:11
+#: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
@@ -408,19 +408,19 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Lang nadeem een Steern in een paar Bargen fallen is, blöömt dat Leven in de Döle. Twee Völker strieden nu um de rieken Mineraale."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Över de Kimm"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
 msgstr "Kristin – vun 3plus4i bewarkt"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Rüst dien Schipp ut un seil tum Kimm."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr "Deese Kaart kann mit de Upgaav tum Winnen »Dwingelant« nich wunnen worden."
 
@@ -435,11 +435,11 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Veer Völker fechten mit hör anner Naber, um as eerster de Barg vull Gold to raken, wat Riekdoom tum nich Utmeten verspreckt. Aver könen de twee Överlevers de Mineraale klook delen?"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+#: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
 msgstr "Dolomiten 3.0"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:10
+#: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
@@ -448,7 +448,7 @@ msgid ""
 " to the death with your enemies, it may as well be in a beautiful place."
 msgstr "De Dolomiten, de Kroon vun de Alpen, sünd för hör unbannig Mooigheid eene Weltarve-Stee. Deese Kaart is so genau as mit Verstand mögelk na de Kuntrei baut, wat im Noordoost vun Cortina d’Ampezzo un im Südwest vun Canazei begrenzt word. Wenn du mit dienen Feinden bit tum Dood kämpen muttst, kannst du dat tominnst an eener ewigsmojen Stee doon."
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:11
+#: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
 "The mountains have an abundance of flat ground. Unfortunately, most of it is"
 " vertical – use the little building space you have wisely. A fortress at the"
@@ -479,27 +479,27 @@ msgstr "Glieke Anfangs-Steden för all dree Spelers."
 msgid "v0.2"
 msgstr "v0.2"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:10
+#: ../../data/maps/Europa.wmf/elemental:8
+msgid "Europa 1.2"
+msgstr "Europa 1.2"
+
+#: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr "Eene bannig grote Europa-Kaart. Blau = Sweden, Rood = Italien, Geel = Spaanjen, Gröön = Türkeei, Swart = Russland, Geelrood = Engelland, Lila = Frankriek, Witt = Polen"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:8
-msgid "Europa 1.1"
-msgstr "Europa 1.1"
-
-#: ../../data/maps/Fellowships_v2.wmf/elemental:8
+#: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
 msgstr "Mannskuppen"
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:10
+#: ../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
 msgstr "Schippen sünd dien bester Fründ. De Anfangssteden sünd haast gliek, de Kaart is gerecht."
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:11
+#: ../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
@@ -560,21 +560,21 @@ msgid ""
 "sources. III: Each mountain contains only one resource."
 msgstr "I: Water kann am Stroom funnen worden. II: Sneeikeerls wiesen anner Water-Quellen. III: Elkeen Barg hett blot een Mineraal."
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:8
+#: ../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
 msgstr "Lechtmaan"
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:10
+#: ../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
 msgstr "Weer 't dat leste Sünnverdüüstern of eene Maanphase – elkeenwat drifft deese Völkers to hör lesten Proov."
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
+#: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
 msgstr "Meer im Ies"
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
+#: ../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
@@ -615,11 +615,11 @@ msgid ""
 "neighbor has begun to expand."
 msgstr "Hunnerte Jahren hebbt ji mit de anner Volk up de Naberinsel freedsam tosamenleven. Deeser Free is nu to Enn – dien Naber begünnt, sien Gewest to vergrotern."
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
 msgstr "Königen un Königinnen"
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
@@ -637,15 +637,15 @@ msgid ""
 "two hostile tribes have arrived at its shores…"
 msgstr "Deeses Meer, deep in de steenollsen Walden, weer lange Tied för siene Mooigheid un  hagelke Stillte bekennt. Aber sien Hilligdoom is nu stöört worden, as twee Völker, nanner feindelk, an siener Küst ankomen sünd …"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
+#: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
 msgstr "Leste Festung"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
+#: ../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
 msgstr "Another Barbarian – vun king_of_nowhere bewarkt"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
+#: ../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
@@ -658,7 +658,7 @@ msgid ""
 "living space is also a hard and small place to live."
 msgstr "De Gotten hebben uns' Gebeden minnacht. Dat Sünnenlücht is mehr un mehr worden un hett de Eer dusend maal heter maakt un de Iesfelden smulten un de Lüü in de Deepten vun de See smeten. Aver nu – hoog in de machtigen Bargen, up de lesten Land-Steden – sünd twee Överlevers-Völker unnerkropen. De Gotten weren barmhartig un dat Weer is weer koller worden, aver dat Water word doch alltied hoger. Up de allerleste seker Stee – de hoogste Bargkopp, waar de Menge an Gold un de Rüümte tum Leven blot för een Volk langen – föhren blot twee Padden. Un vergeet nich, pass up … deese leste Rümte tum Leven is eene sware un lütte Stee tum Leven."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+#: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
 msgstr "Pass up diene Holtversörgung up, du bruukst se vun Nood."
 
@@ -672,15 +672,15 @@ msgid ""
 "all over the map."
 msgstr "Veer Völker strieden um de Heerskupp in eener düllen Kuntrei. Mineraale sünd över de hele Kaart verstreit."
 
-#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+#: ../../data/maps/Long_long_way.wmf/elemental:8
+msgid "Long, long way v2"
+msgstr "Wieder, wieder Weg v2"
+
+#: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
 msgstr ">Waar is dat? Dusend Mielen vun hier.< [Porgy un Bess] Du muttst wied, wied gahn, um all de Inseln intonehmen. Vööl Glück!"
-
-#: ../../data/maps/Long, long v2.wmf/elemental:8 way
-msgid "Long, long way v2"
-msgstr "Wieder, wieder Weg v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -715,11 +715,11 @@ msgid ""
 "maze, and what can be found inside?"
 msgstr "'t gifft hier twee grote Fragen: Well hett deesen unbannig groten Dwaalweg baut, un wat kann man daar drin finnen?"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+#: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
 msgstr "Rutfödderung sünner Metallen v2"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+#: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
 " find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
@@ -856,17 +856,17 @@ msgid ""
 " no other way but to occupy the land of your enemies."
 msgstr "Noch een komisker Test vun de Gotten. Um to de anner Sied to komen, gifft 't wull keen anner Weg as dat Land vun dienen Feinden to besetten."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:8
+#: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
 msgstr "De Nil"
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:10
+#: ../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr "De Fluss hett alltieden Spiesen un Gespreken brocht. Deeses Maal kämpen acht Rieken, um deeses Land to kuntrolleren."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:11
+#: ../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
@@ -920,11 +920,11 @@ msgstr "Machtige Bargen trennen deese Kuntrei in dree früchtbare Leegden. Aver 
 msgid "Water can be found around the lakes."
 msgstr "Water kann bi de Meren funnen worden."
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:8
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
 msgstr "Mitnanner sünd wi stark"
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:10
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
 "The four mighty harbors of the Craw Islands have been trading their goods "
 "among each other for ages. All of them needed resources that they could not "
@@ -949,11 +949,11 @@ msgid ""
 " explore enough resources to compete with its opponents."
 msgstr "Dicht bi dree groten Füürbargen laden sess feine Insels Lüde in, een nejes Leven to begünnen. Sandlannen un een Wald, wat fell wasst, wachten, dat man se finnt. Aver blot as Seefahrt-Meister kann dien Volk genoog Mineraale kriegen, um mit sienen Feinden klaartoworden."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
 msgstr "Twennel-Meren"
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
@@ -962,7 +962,7 @@ msgid ""
 " well-known reason."
 msgstr "As de Wind tonohmen hett un de eersten Dünen in deesen verlaten Twennel-Meren bildt hett, daar hett sik nüms vörstellen könen, dat twee Völkers, wat vertwiefelt na mehr Mineralen söken, um hör ewig Krieg antodrieven, in deeser vergetten Stee to de glieken Tied ankomen – un woll för de glieken, good bekennten Grund."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."

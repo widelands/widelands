@@ -2,15 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # 
 # Translators:
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2020
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2017,2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-10 18:58+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-11-29 22:44+0000\n"
+"PO-Revision-Date: 2020-11-22 07:54+0000\n"
+"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr "Vahtitupa"
 msgid ""
 "Build a blockhouse at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
-msgstr "Rakenna vahtitalo punaiselle talokuvakkeelle metsän itälaidalla ja oikealla puolella sinun väliaikaista päämajaa."
+msgstr "Rakenna vahtitupa punaiselle talokuvakkeelle metsän itälaidalla. (väliaikaisen päämajasi oikealla puolella)"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Build a lumberjack’s house"
@@ -44,7 +45,7 @@ msgstr "Puunhakkaajan mökki"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Rakenna puunhakkaajan mökki punaisella tasokuvakkeella, etelässä sinun väliaikaisesta päämajasta."
+msgstr "Rakenna puunhakkaajan mökki punaiselle talokuvakkeelle, väliaikaisesta päämajastasi etelään."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
@@ -58,7 +59,7 @@ msgstr "Kaksi puunhakkaajan mökkiä ja saha"
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
-msgstr "Rakenna kaksi puunhakkaajan mökkiä lisää ja saha, sitä mukaa kun niille on riittävästi tilaa."
+msgstr "Rakenna vielä kaksi puunhakkaajan mökkiä ja saha, sitä mukaa kun niille on riittävästi tilaa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:52
 msgid "Build a forester’s house"
@@ -66,7 +67,7 @@ msgstr "Rakenna metsänhoitajan mökki"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Forester’s House"
-msgstr "Metsänhoitajan Mökki"
+msgstr "Metsänhoitajan mökki"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:55
 msgid ""
@@ -84,11 +85,11 @@ msgstr "Kivilouhos"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr "Rakenna kivilouhos etelään leikataksesi irti graniittia ja marmoria kivikosta."
+msgstr "Rakenna kivilouhos etelään louhiaksesi graniittia ja marmoria kivikosta."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr "Niitä voidaan käyttää myöhempiin rakennuksiin."
+msgstr "Niitä voimme hyödyntää myöhemmissä rakennusprojekteissamme."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
@@ -107,7 +108,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Mitä onkaan käynyt Keisarikunnalle? Kysyn tämän kysymyksen tosissani - miksi kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa vastaan, joka aluksi tekeytyi ystävällisiksi ja sitten hyökkäsi armeijani kimppuun yön pimeydessä?"
+msgstr "Mitä onkaan tapahtunut Keisarikunnallemme? Kysynpä vain – miksi kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa vastaan, joka aluksi tekeytyi ystäväksemme ja sitten hyökkäsi armeijani kimppuun yön pimeydessä?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -117,7 +118,7 @@ msgid ""
 "forest. Soon, we met a Barbarian tribe, which at first was friendly. A few "
 "of my men even traded with them and their children came to us, to admire our"
 " clean and tidy uniforms and weapons."
-msgstr "Minut ja 150 hengen armeijani oli määrätty partioimaan pohjoisella rajavyöhykkeellä, joka koostuu kauniista ja ikivanhoista metsästä lähellä Galdin-vuoria. Pian kohtasimme barbaariheimon, joka ensi alkuun vaikutti ystävälliseltä. Muutamat miehistäni kävivät kauppaa heidän kanssaan ja heidän lapsensa tulivat luoksemme ihailemaan siistejä ja puhtaita asepukujamme ja aseitamme."
+msgstr "Minut ja 150 hengen armeijani oli määrätty partioimaan pohjoisella rajavyöhykkeellä, joka sijaitsee kauniissa ja ikivanhassa metsässä lähellä Galdin-vuoria. Pian kohtasimme barbaariheimon, joka ensi alkuun vaikutti ystävälliseltä. Muutamat miehistäni kävivät kauppaa heidän kanssaan ja heidän lapsensa tulivat luoksemme ihailemaan siistejä ja puhtaita asepukujamme ja aseitamme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:84
@@ -128,7 +129,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Mutta viidentenä yönämme tällä alueella he hyökkäsivät kimppuumme ilman syytä. Menetin liudan hyviä miehiä ja jouduin itse vangiksi. He veivät minut päällikkönsä luokse - hän sylki päälleni, pilkkasi minua ja käski meidän jättää nämä maat ikuisesti taaksemme. Hän ei ollut kiinnostunut uusista maista eikä halunnut meidän maitamme, vaan kertoi minulle että TÄMÄ metsä oli heidän maataan ja että se pysyisi heillä kunnes aaveet veisivät viimeisenkin hänen väestään!"
+msgstr "Mutta viidentenä yönämme he hyökkäsivät kimppuumme ilman syytä. Menetin liudan hyviä miehiä ja jouduin itse vangiksi. He veivät minut päällikkönsä luokse - hän sylki päälleni, pilkkasi minua ja käski meidän jättää nämä maat ikuisesti taaksemme. Hän ei ollut kiinnostunut uusista maista eikä halunnut meidän maitamme, vaan kertoi minulle että TÄMÄ metsä oli heidän maataan ja että se pysyisi heillä kunnes henget veisivät viimeisenkin hänen väestään!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -146,7 +147,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr "En vieläkään nähnyt keinoa pyyhkiä pois häpeääni taistelematta barbaareja vastaan. Siksi lähdin Fremilistä laivalla löytääkseni itselleni uuden maailman ja uuden elämän jossakin etelässä. Nyt purjehdin Perl lahdella mukanani perheeni, joitakin ystäviäni ja muutama parhaista sotilaistani."
+msgstr "En vieläkään löytänyt keinoa päästä häpeästäni taistelematta barbaareja vastaan. Siksi lähdin Fremilistä laivalla löytääkseni itselleni uuden maailman ja uuden elämän jossakin etelässä. Nyt purjehdin Perl-lahdella mukanani perheeni, joitakin ystäviäni ja muutama parhaista sotilaistani."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:96
 msgid "The Rough Sea"
@@ -159,14 +160,14 @@ msgid ""
 "Nature was against us and drove us into a dark, wild storm. I really don’t "
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
-msgstr "Näyttää siltä, että Perl lahteen purjehtiminen oli yksi suurimmista virheistämme. Luonto oli meitä vastaan ja ajoi meidät pimeään, villiin myrskyyn. En todellakaan tiedä, montako tuntia sitten aallot alkoivat nousta korkeammalle kuin laivamme kansi - olisi itsemurha nousta kannelle."
+msgstr "Näyttää siltä, että Perl-lahdelle purjehtiminen oli yksi suurimmista virheistämme. Luonto oli meitä vastaan ja ajoi meidät synkkään, hurjaan myrskyyn. En todellakaan tiedä, montako tuntia sitten aallot alkoivat nousta korkeammalle kuin laivamme kansi - mutta olisi itsemurha nousta kannelle."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
-msgstr "Laivamme on pahoin vaurioitunut ja vettä virtaa sisään koko ajan enemmän. Voimme kiittää jumalia, jos selviämme tästä mustasta yöstä hengissä."
+msgstr "Laivamme on pahoin vaurioitunut ja vettä virtaa sisään koko ajan enemmän. Voimme kiittää Jumalia jos selviämme hengissä tästä kaameasta yöstä."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:108
 msgid "Survivors"
@@ -175,7 +176,7 @@ msgstr "Selviytyjät"
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:111
 msgid "Finally, the Gods were with us!"
-msgstr "Lopulta, Jumalat olivat kanssamme!"
+msgstr "Mutta lopulta, Jumalat olivat puolellamme!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:114
@@ -183,7 +184,7 @@ msgid ""
 "We landed on an unknown coast and found peaceful rest under the palm trees "
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
-msgstr "Rantauduimme tuntemattomalle rannikolle ja löysimme rauhallisen leposijan rannan palmupuiden alta. Mutta sitä saa mitä tilaa. Totuus on: kun heräsin tänä aamuna, en nähnyt muuta kuin hiekkaa ympärillämme."
+msgstr "Rantauduimme tuntemattomalle rannikolle ja löysimme rauhallisen leposijan palmujen alta. Mutta siihen ne hyvät puolet sitten jäävätkin: kun heräsin tänä aamuna, en nähnyt mitään muuta kuin hiekkaa ympärillämme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:117
