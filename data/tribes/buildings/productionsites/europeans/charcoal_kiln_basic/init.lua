@@ -74,7 +74,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
          descname = _"producing coal",
          actions = {
-            "return=skipped unless economy needs coal",
+            "return=skipped when not site has log:3",
             "consume=log:3",
             "sleep=duration:30s",
             "animate=working duration:1m10s",
