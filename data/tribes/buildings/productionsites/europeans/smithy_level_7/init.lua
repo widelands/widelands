@@ -411,7 +411,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
          descname = _"forging a suit of gilded armor",
          actions = {
-            "return=skipped unless economy needs armor_gilded",
+            "return=skipped unless economy needs tabard_golden",
             "consume=spidercloth coal iron:2 gold",
             "sleep=duration:20s",
             "animate=working duration:30s",
