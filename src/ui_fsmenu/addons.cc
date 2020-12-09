@@ -1306,9 +1306,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               0,
               0,
               /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	          (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
-	           info.i18n_version)
-	             .str(),
+              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
+               info.i18n_version)
+                 .str(),
               UI::Align::kCenter),
      txt_(this,
           0,
@@ -1567,9 +1567,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               0,
               0,
               /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
-	          (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
-	           info.i18n_version)
-	             .str(),
+              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
+               info.i18n_version)
+                 .str(),
               UI::Align::kCenter),
      bottom_row_left_(this,
                       UI::PanelStyle::kFsMenu,
