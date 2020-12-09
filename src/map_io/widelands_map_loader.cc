@@ -72,7 +72,8 @@ WidelandsMapLoader::~WidelandsMapLoader() {  // NOLINT
  * Preloads a map so that the map class returns valid data for all it's
  * get_info() functions (width, nrplayers..)
  */
-int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOns::AddOnInfo>* addons) {
+int32_t WidelandsMapLoader::preload_map(bool const scenario,
+                                        std::vector<AddOns::AddOnInfo>* addons) {
 	assert(get_state() != State::kLoaded);
 
 	map_.cleanup();
@@ -141,7 +142,8 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario, std::vector<AddOns:
 	return 0;
 }
 
-int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase, std::vector<AddOns::AddOnInfo>* a) {
+int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase,
+                                                std::vector<AddOns::AddOnInfo>* a) {
 	preload_map(false, a);
 
 	// Ensure add-ons are handled correctly

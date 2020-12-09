@@ -74,7 +74,8 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInf
 
 	assert(lua_);
 	for (const AddOns::AddOnInfo& info : addons) {
-		if (info.category == AddOns::AddOnCategory::kWorld || info.category == AddOns::AddOnCategory::kTribes) {
+		if (info.category == AddOns::AddOnCategory::kWorld ||
+		    info.category == AddOns::AddOnCategory::kTribes) {
 			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
 			                         FileSystem::file_separator() + "preload.lua");
 			if (g_fs->file_exists(script)) {

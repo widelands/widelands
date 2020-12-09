@@ -87,8 +87,8 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
-					required_addons_.push_back(
-					   std::make_pair(substring.substr(0, colonpos), AddOns::string_to_version(version)));
+					required_addons_.push_back(std::make_pair(
+					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
 				}
 				if (commapos == std::string::npos) {
 					break;
@@ -142,7 +142,8 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 
 	std::string addons;
 	for (const AddOns::AddOnInfo& addon : game.enabled_addons()) {
-		if (addon.category == AddOns::AddOnCategory::kTribes || addon.category == AddOns::AddOnCategory::kWorld ||
+		if (addon.category == AddOns::AddOnCategory::kTribes ||
+		    addon.category == AddOns::AddOnCategory::kWorld ||
 		    addon.category == AddOns::AddOnCategory::kScript) {
 			if (!addons.empty()) {
 				addons += ',';

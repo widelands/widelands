@@ -94,7 +94,8 @@ EditorGameBase::~EditorGameBase() {
 }
 
 static inline bool addon_initially_enabled(AddOns::AddOnCategory c) {
-	return c == AddOns::AddOnCategory::kTribes || c == AddOns::AddOnCategory::kWorld || c == AddOns::AddOnCategory::kScript;
+	return c == AddOns::AddOnCategory::kTribes || c == AddOns::AddOnCategory::kWorld ||
+	       c == AddOns::AddOnCategory::kScript;
 }
 void EditorGameBase::init_addons(bool world_only) {
 	enabled_addons_.clear();
@@ -310,7 +311,8 @@ void EditorGameBase::postload_addons() {
 	assert(descriptions_);
 
 	for (const AddOns::AddOnInfo& info : enabled_addons_) {
-		if (info.category == AddOns::AddOnCategory::kWorld || info.category == AddOns::AddOnCategory::kTribes) {
+		if (info.category == AddOns::AddOnCategory::kWorld ||
+		    info.category == AddOns::AddOnCategory::kTribes) {
 			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
 			                         FileSystem::file_separator() + "postload.lua");
 			if (g_fs->file_exists(script)) {
