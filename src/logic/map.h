@@ -611,7 +611,7 @@ public:
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
 
-	const AddOnRequirements& required_addons() const {
+	const AddOns::AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
@@ -687,7 +687,7 @@ private:
 
 	MapVersion map_version_;
 
-	AddOnRequirements required_addons_;
+	AddOns::AddOnRequirements required_addons_;
 };
 
 /*

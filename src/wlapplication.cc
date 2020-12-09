@@ -426,8 +426,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 					path += name;
 					if (g_fs->file_exists(path)) {
 						found.insert(name);
-						g_addons.push_back(
-						   std::make_pair(preload_addon(name), substring.substr(colonpos) == ":true"));
+						AddOns::g_addons.push_back(
+						   std::make_pair(AddOns::preload_addon(name), substring.substr(colonpos) == ":true"));
 					} else {
 						log_warn("Not loading add-on '%s' (not found)\n", name.c_str());
 					}
@@ -442,7 +442,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 			std::string addon_name(FileSystem::fs_filename(name.c_str()));
 			if (!found.count(addon_name) &&
 			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
-				g_addons.push_back(std::make_pair(preload_addon(addon_name), false));
+				AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(addon_name), false));
 			}
 		}
 	}

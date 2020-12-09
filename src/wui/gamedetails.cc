@@ -185,7 +185,7 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	description =
 	   (boost::format("%s%s") % description %
 	    as_heading_with_content(
-	       _("Add-Ons:"), check_requirements(gamedata.required_addons), panel_style_, false, true))
+	       _("Add-Ons:"), AddOns::check_requirements(gamedata.required_addons), panel_style_, false, true))
 	      .str();
 
 	std::string filename = gamedata.filename;

@@ -50,7 +50,7 @@
 #include "sound/sound_handler.h"
 
 namespace Widelands {
-Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addons)
+Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>& addons)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
@@ -73,8 +73,8 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 	// very early than to risk crashes because it was done too late…
 
 	assert(lua_);
-	for (const AddOnInfo& info : addons) {
-		if (info.category == AddOnCategory::kWorld || info.category == AddOnCategory::kTribes) {
+	for (const AddOns::AddOnInfo& info : addons) {
+		if (info.category == AddOns::AddOnCategory::kWorld || info.category == AddOns::AddOnCategory::kTribes) {
 			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
 			                         FileSystem::file_separator() + "preload.lua");
 			if (g_fs->file_exists(script)) {
@@ -84,12 +84,12 @@ Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>& addo
 		}
 	}
 
-	for (const AddOnInfo& info : addons) {
-		if (info.category == AddOnCategory::kWorld) {
+	for (const AddOns::AddOnInfo& info : addons) {
+		if (info.category == AddOns::AddOnCategory::kWorld) {
 			description_manager_->register_directory(
 			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
 			   DescriptionManager::RegistryCaller::kWorldAddon);
-		} else if (info.category == AddOnCategory::kTribes) {
+		} else if (info.category == AddOns::AddOnCategory::kTribes) {
 			description_manager_->register_directory(
 			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
 			   DescriptionManager::RegistryCaller::kTribeAddon);

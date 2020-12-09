@@ -26,6 +26,8 @@
 #include <string>
 #include <vector>
 
+namespace AddOns {
+
 enum class AddOnCategory {
 	kNone,
 	kWorld,
@@ -59,8 +61,8 @@ struct AddOnFileList {
 using AddOnVersion = std::vector<uint32_t>;
 std::string version_to_string(const AddOnVersion&, bool localize = true);
 AddOnVersion string_to_version(std::string);
-// Returns true if and only if version b is newer than version a
-bool compare_versions(const AddOnVersion& a, const AddOnVersion& b);
+// Returns true if and only if version `compare` is newer than version `base`
+bool is_newer_version(const AddOnVersion& base, const AddOnVersion& compare);
 
 // Required add-ons for an add-on, map, or savegame with the recommended version
 using AddOnRequirements = std::vector<std::pair<std::string, AddOnVersion>>;
@@ -115,5 +117,7 @@ std::string check_requirements(const AddOnRequirements&);
 unsigned count_all_dependencies(const std::string&, const std::map<std::string, AddOnState>&);
 
 AddOnInfo preload_addon(const std::string&);
+
+}  // namespace AddOns
 
 #endif  // end of include guard: WL_LOGIC_ADDONS_H

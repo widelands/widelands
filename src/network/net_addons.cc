@@ -34,6 +34,8 @@
 #include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
 
+namespace AddOns {
+
 // silence warnings triggered by curl.h
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
@@ -316,3 +318,5 @@ std::string NetAddons::download_i18n(const std::string& name,
 }
 
 CLANG_DIAG_ON("-Wdisabled-macro-expansion")
+
+}  // namespace AddOns

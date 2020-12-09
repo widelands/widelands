@@ -31,6 +31,8 @@
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 
+namespace AddOns {
+
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
     AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
@@ -83,7 +85,8 @@ AddOnVersion string_to_version(std::string input) {
 	}
 	NEVER_HERE();
 }
-bool compare_versions(const AddOnVersion& a, const AddOnVersion& b) {
+
+bool is_newer_version(const AddOnVersion& a, const AddOnVersion& b) {
 	const size_t s_a = a.size();
 	const size_t s_b = b.size();
 	for (size_t i = 0; i < s_a && i < s_b; ++i) {
@@ -283,3 +286,5 @@ AddOnInfo preload_addon(const std::string& name) {
 
 	return i;
 }
+
+}  // namespace AddOns
