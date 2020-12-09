@@ -235,9 +235,9 @@ AddOnInfo preload_addon(const std::string& name) {
 	Profile i18n_profile(kAddOnLocaleVersions.c_str());
 	Section* i18n_section = i18n_profile.get_section("global");
 
-	const std::string unlocalized_descname = s.get_safe_string("name");
-	const std::string unlocalized_description = s.get_safe_string("description");
-	const std::string unlocalized_author = s.get_safe_string("author");
+	const std::string unlocalized_descname = s.get_safe_untranslated_string("name");
+	const std::string unlocalized_description = s.get_safe_untranslated_string("description");
+	const std::string unlocalized_author = s.get_safe_untranslated_string("author");
 
 	AddOnInfo i = {name,
 	               [name, unlocalized_descname]() {
