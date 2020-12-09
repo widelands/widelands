@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Ondřej Itřech <vasa5@centrum.cz>, 2020
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"POT-Creation-Date: 2020-11-13 06:12+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: Ondřej Itřech <vasa5@centrum.cz>, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -284,6 +288,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Jako všichni Frísané stavíme své domy převážně z cihel. Vylepšujeme je "
+"pomocí klád a žuly. Střechy jsou samozřejmě pokryty došky z rákosu. Nic "
+"neochrání proti dešti lépe."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -292,6 +299,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"Měli bychom si zajistit produkci dřeva. Zdá se, že stromy nerostou na tomto "
+"ostrově zrovna nejlépe. Bude lepší pokud postavíme nejméně dva domky pro "
+"lesníky a jeden pro dřevorubce."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156

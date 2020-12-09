@@ -32,6 +32,7 @@
 #include "game_io/game_player_info_packet.h"
 #include "game_io/game_preload_packet.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
@@ -40,7 +41,7 @@
 namespace Widelands {
 
 GameLoader::GameLoader(const std::string& path, Game& game)
-   : fs_(*g_fs->make_sub_file_system(path)), game_(game) {
+   : fs_(*g_fs->make_sub_file_system(path)), game_(game), did_postload_addons_(false) {
 }
 
 GameLoader::~GameLoader() {
@@ -70,9 +71,65 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	};
 	set_progress_message(_("Elemental data"), 1);
 	log_info("Game: Reading Preload Data ... ");
+	GamePreloadPacket preload;
+	preload.read(fs_, game_);
+
+	// Now that the preload data was read, we apply the add-ons.
+	// Note: Only world- and tribes-type add-ons are saved in savegames because those are the
+	// only ones where it makes a difference whether they are enabled during loading or not.
 	{
-		GamePreloadPacket p;
-		p.read(fs_, game_);
+		const std::vector<AddOnInfo> old_enabled_addons = game_.enabled_addons();
+		game_.enabled_addons().clear();
+		for (const auto& requirement : preload.required_addons()) {
+			bool found = false;
+			for (auto& pair : g_addons) {
+				if (pair.first.internal_name == requirement.first) {
+					found = true;
+					if (pair.first.version != requirement.second) {
+						log_warn(
+						   "Savegame requires add-on '%s' at version %u but version %u is installed. "
+						   "They might be compatible, but this is not necessarily the case.\n",
+						   requirement.first.c_str(), requirement.second, pair.first.version);
+					}
+					assert(pair.first.category == AddOnCategory::kWorld ||
+					       pair.first.category == AddOnCategory::kTribes ||
+					       pair.first.category == AddOnCategory::kScript);
+					game_.enabled_addons().push_back(pair.first);
+					break;
+				}
+			}
+			if (!found) {
+				throw GameDataError("Add-on '%s' (version %u) required but not installed",
+				                    requirement.first.c_str(), requirement.second);
+			}
+		}
+
+		// Actually apply changes – but only if anything did change, otherwise this may crash
+		bool addons_changed = old_enabled_addons.size() != game_.enabled_addons().size();
+		if (!addons_changed) {
+			for (size_t i = 0; i < old_enabled_addons.size(); ++i) {
+				if (old_enabled_addons[i].internal_name != game_.enabled_addons()[i].internal_name) {
+					addons_changed = true;
+					break;
+				}
+			}
+		}
+		if (addons_changed) {
+			game_.delete_world_and_tribes();
+			game_.descriptions();
+
+			// TODO(Nordfriese): This needs to be done here already to prevent the
+			// GamePlayerInfoPacket from crashing in the case that we are loading
+			// a savegame and any player's tribe is receiving a new ware from an
+			// add-on's postload.lua. It would be much better to load only the
+			// tribes that are being played, but this would require rewriting
+			// the GamePlayerInfoPacket so that we know *all* tribes in the game
+			// *before* loading any ware statistics. Do this when we next break
+			// savegame compatibility completely.
+			game_.load_all_tribes();
+			did_postload_addons_ = true;
+			game_.postload_addons();
+		}
 	}
 
 	log_info("Game: Reading Game Class Data ... ");

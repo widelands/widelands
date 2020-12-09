@@ -6,13 +6,14 @@
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
+# Ondřej Itřech <vasa5@centrum.cz>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-10 18:58+0000\n"
-"PO-Revision-Date: 2020-09-11 11:59+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-11-13 06:12+0000\n"
+"PO-Revision-Date: 2020-11-29 10:23+0000\n"
+"Last-Translator: Ondřej Itřech <vasa5@centrum.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,32 +54,32 @@ msgstr "Tento tutoriál vysvětluje zacházení s vojenskými budovami, cvičiš
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:14
 msgid "Easy."
-msgstr ""
+msgstr "Snadné"
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:20
 msgid "Medium."
-msgstr ""
+msgstr "Střední"
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:25
 msgid "Hard."
-msgstr ""
+msgstr "Těžké"
 
 #. TRANSLATORS: The difficulty level of a campaign
 #: ../../data/campaigns/campaigns.lua:30
 msgid "Challenging."
-msgstr ""
+msgstr "Náročné"
 
 #. TRANSLATORS: The name of a Barbarian campaign
 #: ../../data/campaigns/campaigns.lua:43
 msgid "The Second Empire"
-msgstr ""
+msgstr "Druhé císařství"
 
 #. TRANSLATORS: A short description of a campaign
 #: ../../data/campaigns/campaigns.lua:49
 msgid "Introduces the Barbarians."
-msgstr ""
+msgstr "Představení Barbarů"
 
 #. TRANSLATORS: A long description of a campaign
 #: ../../data/campaigns/campaigns.lua:52
@@ -96,7 +97,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr ""
+msgstr "Když zemřel Chat’Karuth, byl to už starý muž, otec tří silných ctižádostivých synů a vojevůdce armády, která se mohla rovnat jakémukoliv nepříteli, který by chtěl ohrozit prastaré lesy. Ačkoliv ke konci vlády Chat’Karutha vybral svého nejstaršího syna Throna jako svého nástupce a vojevůdce kmene, rozhodnutí zanechalo zbylé dva bratry nespokojené. Starý vojevůdce to předvídal. Tak, jak mu jeho otec radil, opustil Thron hlavní město Al’thunranu, domov Korunního stolce hájů, a stáhl své vojáky do vysokých kopců, kde pohřbil tělo svého otce. Tam také přísahal bohům a duši svého otce, že se vrátí, aby obnovil řád. Zatímco jeho bratři rozdmýchávali slepou válku proti Thronovi a několika jeho vojákům, které nechal hlídat hranice Al’thunranu, mladý vojevůdce hledal způsob, jak sjednotit ctižádostivé bratry a přimět kmeny k opětovnému sjednocení pod společnou vlajku."
 
 #. TRANSLATORS: The name of an Empire campaign
 #: ../../data/campaigns/campaigns.lua:70
@@ -289,13 +290,13 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 msgid "Seafaring"
-msgstr "Námořní plavba"
+msgstr "Mořeplavba"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:10
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports, and how to use ferries and waterways."
-msgstr ""
+msgstr "V tomto tutoriálu se seznámíš s mořeplavbou, to znamená, jak používat lodě a přístavy a také jak využít převoznictví a vodní cesty."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 msgid "Economy"
@@ -541,7 +542,7 @@ msgstr "Čtyři hrady"
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr "Skvěle chránění v jejich mohutných pevnostech, čtyři po moci bažící vojevůdci spolu bojují o nadvládu na těmito zeměmi..."
+msgstr "Dobře chráněni ve svých mocných pevnostech, čtyři po moci bažící vojevůdci spřádají své plány k ovládnutí daných zemí…"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
@@ -588,7 +589,7 @@ msgstr "Zlatý poloostrov"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr "Dvě říše se předhánějí v hledání pokladu legendárního poloostrovu..."
+msgstr "Dvě říše se předhánějí v hledání pokladu legendárního poloostrova…"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
