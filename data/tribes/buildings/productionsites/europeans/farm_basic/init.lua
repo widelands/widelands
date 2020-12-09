@@ -56,6 +56,7 @@ descriptions:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
+      supports_production_of = { "honey" },
       basic_amount = 1
    },
 

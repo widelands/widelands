@@ -28,6 +28,8 @@ descriptions:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
+      supports_seafaring = true
+      supports_production_of = { "honey" },
       basic_amount = 2
    },
 
@@ -44,12 +46,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "return=skipped unless economy needs reed",
             "call=plant",
-            "call=harvest",
-            "return=skipped when economy needs water",
-            "call=plant",
-            "call=harvest",
+            "call=harvest"
          }
       },
       plant = {
@@ -65,7 +63,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _"harvesting reed",
          actions = {
-            "return=skipped unless economy needs reed",
             "callworker=harvest_reed",
             "sleep=duration:3s"
          }
