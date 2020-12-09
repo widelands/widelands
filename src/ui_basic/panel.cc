@@ -954,9 +954,12 @@ void Panel::set_tooltip(const std::string& text) {
 	}
 }
 
-void Panel::find_all_children_at(const int16_t x, const int16_t y, std::vector<Panel*>& result) const {
+void Panel::find_all_children_at(const int16_t x,
+                                 const int16_t y,
+                                 std::vector<Panel*>& result) const {
 	for (Panel* child = first_child_; child; child = child->next_) {
-		if (child->get_x() <= x && child->get_y() <= y && child->get_x() + child->get_w() > x && child->get_y() + child->get_h() > y) {
+		if (child->get_x() <= x && child->get_y() <= y && child->get_x() + child->get_w() > x &&
+		    child->get_y() + child->get_h() > y) {
 			result.push_back(child);
 			child->find_all_children_at(x - child->get_x(), y - child->get_y(), result);
 		}

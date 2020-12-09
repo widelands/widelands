@@ -322,7 +322,8 @@ MapView::MapView(
      view_(),
      last_mouse_pos_(Vector2i::zero()),
      dragging_(false),
-     edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ && get_config_bool("edge_scrolling", false)),
+     edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ &&
+                     get_config_bool("edge_scrolling", false)),
      is_scrolling_x_(0),
      is_scrolling_y_(0) {
 }
