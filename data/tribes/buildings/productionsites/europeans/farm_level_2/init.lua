@@ -84,8 +84,8 @@ descriptions:new_productionsite_type {
          actions = {
             "consume=water",
             "callworker=plant_corn",
-            "animate=working duration:10s",
-            "sleep=duration:10s"
+            "animate=working duration:5s",
+            "sleep=duration:5s"
          }
       },
       plant_corn = {
@@ -139,8 +139,8 @@ descriptions:new_productionsite_type {
          descname = _"harvesting corn",
          actions = {
             "callworker=harvest_corn",
-            "animate=working duration:10s",
-            "sleep=duration:10s"
+            "animate=working duration:5s",
+            "sleep=duration:5s"
          }
       },
       harvest_corn = {
