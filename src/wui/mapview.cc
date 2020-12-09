@@ -31,6 +31,7 @@
 #include "logic/map_objects/descriptions.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
+#include "wui/interactive_base.h"
 #include "wui/mapviewpixelfunctions.h"
 
 namespace {
@@ -552,6 +553,12 @@ bool MapView::handle_mousemove(
 void MapView::think() {
 	UI::Panel::think();
 	if (!dragging_ && (is_scrolling_x_ != 0 || is_scrolling_y_ != 0)) {
+		InteractiveBase& ibase = dynamic_cast<InteractiveBase&>(*get_parent());
+		const Vector2i mouse = ibase.toolbar()->get_mouse_position();
+		if (mouse.x >= 0 && mouse.y >= 0 && mouse.x <= ibase.toolbar()->get_w() && mouse.y <= ibase.toolbar()->get_h()) {
+			return;  // mouse over toolbar
+		}
+
 		const int16_t speed =
 		   (SDL_GetModState() & KMOD_CTRL) ?
 		      kEdgeScrollingSpeedFast :

@@ -205,6 +205,14 @@ public:
 		return 0;
 	}
 
+	bool tooltip_accessibility_mode() const override {
+		return false;
+	}
+
+	UI::Box* toolbar() {
+		return &toolbar_.box;
+	}
+
 protected:
 	// For referencing the items in mapviewmenu_
 	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom };
@@ -273,10 +281,6 @@ protected:
 
 	ChatOverlay* chat_overlay() {
 		return chat_overlay_;
-	}
-
-	UI::Box* toolbar() {
-		return &toolbar_.box;
 	}
 
 	// Returns the information which overlay text should currently be drawn.

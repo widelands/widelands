@@ -49,7 +49,7 @@ Recti Panel::tooltip_fixed_rect_ = Recti(0, 0, 0, 0);
 bool Panel::allow_user_input_ = true;
 FxId Panel::click_fx_ = kNoSoundEffect;
 
-static inline bool tooltip_accessibility_mode() {
+inline bool Panel::tooltip_accessibility_mode() const {
 	return get_config_bool("tooltip_accessibility_mode", false);
 }
 

@@ -298,6 +298,8 @@ public:
 	virtual void die();
 	static void register_click();
 
+	virtual bool tooltip_accessibility_mode() const;
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
