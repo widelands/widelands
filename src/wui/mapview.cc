@@ -555,7 +555,8 @@ void MapView::think() {
 	if (!dragging_ && (is_scrolling_x_ != 0 || is_scrolling_y_ != 0)) {
 		InteractiveBase& ibase = dynamic_cast<InteractiveBase&>(*get_parent());
 		const Vector2i mouse = ibase.toolbar()->get_mouse_position();
-		if (mouse.x >= 0 && mouse.y >= 0 && mouse.x <= ibase.toolbar()->get_w() && mouse.y <= ibase.toolbar()->get_h()) {
+		if (mouse.x >= 0 && mouse.y >= 0 && mouse.x <= ibase.toolbar()->get_w() &&
+		    mouse.y <= ibase.toolbar()->get_h()) {
 			return;  // mouse over toolbar
 		}
 
