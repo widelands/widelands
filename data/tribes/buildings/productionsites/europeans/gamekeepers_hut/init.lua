@@ -51,7 +51,6 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "return=skipped unless economy needs meat",
             "return=skipped when economy needs water",
             "consume=water",
             "callworker=release",
