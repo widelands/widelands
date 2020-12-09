@@ -28,7 +28,7 @@ descriptions:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      supports_seafaring = true
+      supports_seafaring = true,
       supports_production_of = { "honey" },
       basic_amount = 2
    },
