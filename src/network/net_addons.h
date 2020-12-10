@@ -28,6 +28,8 @@
 
 #include "logic/addons.h"
 
+namespace AddOns {
+
 // The add-on related networking functions defined here use the CURL lib.
 // Pro: I created a functional dummy server with no knowledge of the metaserver backend ;)
 // Con: Additional dependency – this is the only place in our code where libcurl is used
@@ -63,5 +65,7 @@ private:
 
 	CURL* curl_;
 };
+
+}  // namespace AddOns
 
 #endif  // end of include guard: WL_NETWORK_NET_ADDONS_H

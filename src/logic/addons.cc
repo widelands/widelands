@@ -31,6 +31,8 @@
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
 
+namespace AddOns {
+
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
     AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png", false}},
@@ -56,9 +58,48 @@ const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
 
+std::string version_to_string(const AddOnVersion& version, const bool localize) {
+	std::string s;
+	for (uint32_t v : version) {
+		if (s.empty()) {
+			s = std::to_string(v);
+		} else if (localize) {
+			s = (boost::format(_("%1$s.%2$u")) % s % v).str();
+		} else {
+			s += '.';
+			s += std::to_string(v);
+		}
+	}
+	return s;
+}
+AddOnVersion string_to_version(std::string input) {
+	AddOnVersion result;
+	for (;;) {
+		const size_t pos = input.find('.');
+		if (pos == std::string::npos) {
+			result.push_back(std::stol(input));
+			return result;
+		}
+		result.push_back(std::stol(input.substr(0, pos)));
+		input = input.substr(pos + 1);
+	}
+	NEVER_HERE();
+}
+
+bool is_newer_version(const AddOnVersion& a, const AddOnVersion& b) {
+	const size_t s_a = a.size();
+	const size_t s_b = b.size();
+	for (size_t i = 0; i < s_a && i < s_b; ++i) {
+		if (a[i] != b[i]) {
+			return a[i] < b[i];
+		}
+	}
+	return s_a < s_b;
+}
+
 static std::string check_requirements_conflicts(const AddOnRequirements& required_addons) {
 	std::set<std::string> addons_missing;
-	std::map<std::string, std::pair<uint16_t, uint16_t>> addons_wrong_version;
+	std::map<std::string, std::pair<AddOnVersion, AddOnVersion>> addons_wrong_version;
 	for (const auto& requirement : required_addons) {
 		bool found = false;
 		for (const auto& pair : g_addons) {
@@ -83,13 +124,14 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 			std::string list;
 			for (const auto& a : addons_wrong_version) {
 				if (list.empty()) {
-					list = (boost::format(_("%1$s (expected version %2$u, found %3$u)")) % a.first %
-					        a.second.second % a.second.first)
+					list = (boost::format(_("%1$s (expected version %2$s, found %3$s)")) % a.first %
+					        version_to_string(a.second.second) % version_to_string(a.second.first))
 					          .str();
 				} else {
-					list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)")) % list %
-					        a.first % a.second.second % a.second.first)
-					          .str();
+					list =
+					   (boost::format(_("%1$s, %2$s (expected version %3$s, found %4$s)")) % list %
+					    a.first % version_to_string(a.second.second) % version_to_string(a.second.first))
+					      .str();
 				}
 			}
 			return (boost::format(ngettext("%1$u add-on with wrong version: %2$s",
@@ -122,9 +164,10 @@ static std::string check_requirements_conflicts(const AddOnRequirements& require
 				}
 			}
 			for (const auto& a : addons_wrong_version) {
-				list = (boost::format(_("%1$s, %2$s (expected version %3$u, found %4$u)")) % list %
-				        a.first % a.second.second % a.second.first)
-				          .str();
+				list =
+				   (boost::format(_("%1$s, %2$s (expected version %3$s, found %4$s)")) % list %
+				    a.first % version_to_string(a.second.second) % version_to_string(a.second.first))
+				      .str();
 			}
 			return (boost::format(_("%1$s and %2$s: %3$s")) %
 			        (boost::format(ngettext(
@@ -150,9 +193,9 @@ std::string check_requirements(const AddOnRequirements& required_addons) {
 	}
 	std::string result = check_requirements_conflicts(required_addons);
 	for (const auto& pair : required_addons) {
-		result =
-		   (boost::format(_("%1$s<br>· %2$s (version %3$u)")) % result % pair.first % pair.second)
-		      .str();
+		result = (boost::format(_("%1$s<br>· %2$s (version %3$s)")) % result % pair.first %
+		          version_to_string(pair.second))
+		            .str();
 	}
 	return result;
 }
@@ -192,9 +235,9 @@ AddOnInfo preload_addon(const std::string& name) {
 	Profile i18n_profile(kAddOnLocaleVersions.c_str());
 	Section* i18n_section = i18n_profile.get_section("global");
 
-	const std::string unlocalized_descname = s.get_safe_string("name");
-	const std::string unlocalized_description = s.get_safe_string("description");
-	const std::string unlocalized_author = s.get_safe_string("author");
+	const std::string unlocalized_descname = s.get_safe_untranslated_string("name");
+	const std::string unlocalized_description = s.get_safe_untranslated_string("description");
+	const std::string unlocalized_author = s.get_safe_untranslated_string("author");
 
 	AddOnInfo i = {name,
 	               [name, unlocalized_descname]() {
@@ -209,7 +252,7 @@ AddOnInfo preload_addon(const std::string& name) {
 		               i18n::AddOnTextdomain td(name);
 		               return i18n::translate(unlocalized_author);
 	               },
-	               s.get_safe_positive("version"),
+	               string_to_version(s.get_safe_string("version")),
 	               i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
 	               get_category(s.get_safe_string("category")),
 	               {},
@@ -226,8 +269,8 @@ AddOnInfo preload_addon(const std::string& name) {
 	if (i.category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());
 	}
-	if (i.version == 0) {
-		throw wexception("preload_addon (%s): version is 0", name.c_str());
+	if (i.version.empty()) {
+		throw wexception("preload_addon (%s): version string is empty", name.c_str());
 	}
 
 	for (std::string req(s.get_safe_string("requires")); !req.empty();) {
@@ -243,3 +286,5 @@ AddOnInfo preload_addon(const std::string& name) {
 
 	return i;
 }
+
+}  // namespace AddOns

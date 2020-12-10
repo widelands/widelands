@@ -13,30 +13,22 @@ The ``addons`` File
 
 An add-on contains a plain-text ini-style file called ``addons`` with the following entries in the ``global`` section:
 
-* ``name``: The untranslated name of the add-on
-* ``description``: The untranslated long description
-* ``author``: The add-on’s author(s) untranslated name(s)
+* ``name``: The name of the add-on
+* ``description``: The long description
+* ``author``: The add-on’s author(s) name(s)
 * ``version``: The version number (1 for new add-ons)
 * ``category``: One of "tribes", "world", "script", "maps", "campaign", "win_condition", "starting_condition", "theme"
 * ``requires``: A comma-separated list of the filenames of add-ons required by this add-on.
 
-Optional additional entries that are required to make the name, description and/or author translatable:
-
-* ``i18n_name``: Identical to ``name`` but marked for translation with '_'
-* ``i18n_description``: Identical to ``description`` but marked for translation with '_'
-* ``i18n_author``: Identical to ``author`` but marked for translation with '_'
-
-Only ``name``, ``description`` and ``author`` can be marked for translation. They may also contain richtext tags.
+The entries for ``name``, ``description`` and ``author`` can optionally be marked for translation with '_'. They may also contain richtext tags.
 
 Example:
 
 .. code-block:: ini
 
    [global]
-   name="Fishy"
-   i18n_name=_"Fishy"
-   description="Adds the highest amount of fish to every map node that can hold fish."
-   i18n_description=_"Adds the highest amount of fish to every map node that can hold fish."
+   name=_"Fishy"
+   description=_"Adds the highest amount of fish to every map node that can hold fish."
    author="Nordfriese"
    version="1"
    category="script"
