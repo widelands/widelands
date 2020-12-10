@@ -23,3 +23,17 @@ function wait_for_field_action_tab(name)
       sleep(100)
    end
 end
+
+function wait_for_field_action_tab_activation(name)
+   local mapview = wl.ui.MapView()
+   wait_for_field_action_tab(name)
+   mapview.windows.field_action.tabs[name]:indicate(true)
+   while not mapview.windows.field_action.tabs[name].active do
+      if not mapview.windows.field_action then
+         mapview:indicate(false)
+      end
+      sleep(100)
+      wait_for_field_action_tab(name)
+      mapview.windows.field_action.tabs[name]:indicate(true)
+   end
+end

@@ -66,6 +66,20 @@ function find_immovable_collector_for_ware(buildings, immovable_attribute, waren
    return nil
 end
 
+-- Find tribe-dependent building type e.g. "trees" will give us a ranger
+function find_immovable_creator(buildings, immovable_attribute)
+   for b_idx, building in ipairs(buildings) do
+      if (building.type_name == "productionsite") then
+         for imm_idx, immovable in ipairs(building.created_immovables) do
+            if immovable:has_attribute(immovable_attribute) then
+               return building
+            end
+         end
+      end
+   end
+   return nil
+end
+
 -- Search a radius for a buildplot with size "small" or "medium" etc.
 -- Tries to find it within min_radius first, then expands the radius by 1 until max_radius is reached
 -- Returns nil if nothing was found, a field otherwise.
@@ -77,24 +91,20 @@ function find_buildable_field(center_field, player, size, min_radius, max_radius
 
    local function find_buildable_field_helper(center_field, player, size, range)
       for f_idx, field in ipairs(center_field:region(range)) do
-         if player == field.owner and field:has_caps(size) then
-            local sufficient_space = true
+
+         local buildhelp = player:buildhelp(field.x, field.y)
+         if buildhelp == size or (size == "big" and buildhelp == "port") then
+
+            local space_counter = 0
             -- Search around the field's flag position for the space for roads
             for nf_idx, nearby_field in ipairs(field.brn:region(1)) do
-               if player ~= nearby_field.owner or not nearby_field:has_caps("flag") then
-                  sufficient_space = false
+               buildhelp = player:buildhelp(nearby_field.x, nearby_field.y)
+               if buildhelp ~= "none" then
+                  space_counter = space_counter + 1
                end
             end
-            if sufficient_space then
-               -- Ensure the border won't interfere
-               for nf_idx, nearby_field in ipairs(field:region(2)) do
-                  if player ~= nearby_field.owner then
-                     sufficient_space = false
-                  end
-               end
-               if sufficient_space then
-                  return field
-               end
+            if space_counter > 3 then
+               return field
             end
          end
       end
@@ -144,6 +154,24 @@ function find_immovable_fields(center_field, immovable_attribute, inner_radius, 
    return found_fields
 end
 
+-- Find field close to an immovable e.g. a tree or rocks
+function find_buildable_field_near_immovable(conquering_field, player, starting_conquer_range, building, immovable_attribute)
+   local immovable_fields = find_immovable_fields(
+                                 conquering_field,
+                                 immovable_attribute,
+                                 2,
+                                 starting_conquer_range + building.workarea_radius - 2)
+   if #immovable_fields > 0 then
+      for f_idx, immovable_field in ipairs(immovable_fields) do
+         local suitable_field = find_buildable_field(immovable_field, player, building.size, 0, building.workarea_radius - 1)
+         if suitable_field ~= nil then
+            return suitable_field
+         end
+      end
+   end
+   return nil
+end
+
 -- We can't list constructionsites directly, so we search a region for it
 function find_constructionsite_field(buildingname, search_area)
    for f_idx, field in ipairs(search_area) do
@@ -173,6 +201,22 @@ function wait_for_constructionsite_field(buildingname, search_area, reminder_mes
    end
    return target_field
 end
+
+function wait_for_building_field(buildingname, player, reminder_message, seconds)
+   local counter = 0
+   seconds = seconds * 10
+   repeat
+      counter = counter + 1
+      sleep(100)
+   until #player:get_buildings(buildingname) > 0 or counter % seconds == 0
+   if #player:get_buildings(buildingname) < 1 then
+      -- Player did not build the correct building. Remind player to place the building.
+      campaign_message_box(reminder_message)
+      wait_for_building_field(buildingname, player, reminder_message, seconds)
+      close_story_messagebox()
+   end
+end
+
 
 function find_needed_flag_on_road(center_field, player, radius)
    for f_idx, field in ipairs(center_field:region(radius)) do
@@ -213,15 +257,26 @@ function wait_for_builder_or_building(player, target_field, buildingname, constr
       counter = counter + 1
       if counter % seconds == 0 then
          -- Builder has not arrived, explain road building again and wait for it
-         target_field.brn:indicate(true)
-         close_story_messagebox()
-         campaign_message_box(msg_road_not_connected)
-         scroll_to_field(target_field)
-         while not mapview.is_building_road do sleep(100) end
-         while mapview.is_building_road do sleep(100) end
-         mapview:indicate(false)
+         -- Run as coroutine so we won't block the checks below
+         run(function()
+            target_field.brn:indicate(true)
+            close_story_messagebox()
+            campaign_message_box(msg_road_not_connected)
+            scroll_to_field(target_field)
+            while not mapview.is_building_road do sleep(100) end
+            while mapview.is_building_road do sleep(100) end
+            mapview:indicate(false)
+         end)
       end
       sleep(1000)
+
+      -- A finished building somewhere else is also a success
+      if #player:get_buildings(buildingname) > 0 then
+         target_field:indicate(false)
+         close_story_messagebox()
+         return true
+      end
+
       -- Check that we still have a constructionsite
       target_field = find_constructionsite_field(buildingname, constructionsite_search_area)
       if target_field == nil then
@@ -232,12 +287,6 @@ function wait_for_builder_or_building(player, target_field, buildingname, constr
             return false
          end
       else
-         -- A finished building somewhere else is also a success
-         if #player:get_buildings(buildingname) > 0 then
-            target_field:indicate(false)
-            close_story_messagebox()
-            return true
-         end
          -- Now check for the builder
          for b_idx, bob in ipairs(target_field.bobs) do
             if bob.descr.name == buildername then

@@ -23,6 +23,28 @@
 
 namespace Widelands {
 
+Field::BuildHelp Field::caps_to_buildhelp(NodeCaps caps) {
+	if (caps & Widelands::BUILDCAPS_MINE) {
+		return Field::BuildHelp::kMine;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG) {
+		if (caps & Widelands::BUILDCAPS_PORT) {
+			return Field::BuildHelp::kPort;
+		}
+		return Widelands::Field::BuildHelp::kBig;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM) {
+		return Field::BuildHelp::kMedium;
+	}
+	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL) {
+		return Field::BuildHelp::kSmall;
+	}
+	if (caps & Widelands::BUILDCAPS_FLAG) {
+		return Field::BuildHelp::kFlag;
+	}
+	return Field::BuildHelp::kNone;
+}
+
 /**
  * Set the field's brightness based upon the slopes.
  * Slopes are calulated as this field's height - neighbour's height.

@@ -88,6 +88,7 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, add_objective),
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
+   METHOD(LuaPlayer, buildhelp),
    METHOD(LuaPlayer, mark_scenario_as_solved),
    METHOD(LuaPlayer, acquire_training_wheel_lock),
    METHOD(LuaPlayer, release_training_wheel_lock),
@@ -681,6 +682,57 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	}
 
 	return 0;
+}
+
+/* RST
+   .. method:: buildhelp(x, y)
+
+      Returns the player's buildcaps for a field as they would appear in the building spaces help on
+      the map.
+
+      :arg x: X-coordinate of the field to check
+      :type x: :class:`unsigned int`
+
+      :arg y: Y-coordinate of the field to check
+      :type y: :class:`unsigned int`
+
+      :returns: :class:`string` One of ``mine``, ``port``, ``big``, ``medium``, ``small``, ``flag``,
+        ``none``
+*/
+int LuaPlayer::buildhelp(lua_State* L) {
+	Widelands::Game& game = get_game(L);
+	Widelands::Player& player = get(L, game);
+
+	const uint32_t x = luaL_checkuint32(L, 2);
+	const uint32_t y = luaL_checkuint32(L, 3);
+	const Widelands::NodeCaps caps =
+	   player.get_buildcaps(game.map().get_fcoords(Widelands::Coords(x, y)));
+
+	const Widelands::Field::BuildHelp buildhelp = Widelands::Field::caps_to_buildhelp(caps);
+	switch (buildhelp) {
+	case Widelands::Field::BuildHelp::kMine:
+		lua_pushstring(L, "mine");
+		break;
+	case Widelands::Field::BuildHelp::kPort:
+		lua_pushstring(L, "port");
+		break;
+	case Widelands::Field::BuildHelp::kBig:
+		lua_pushstring(L, "big");
+		break;
+	case Widelands::Field::BuildHelp::kMedium:
+		lua_pushstring(L, "medium");
+		break;
+	case Widelands::Field::BuildHelp::kSmall:
+		lua_pushstring(L, "small");
+		break;
+	case Widelands::Field::BuildHelp::kFlag:
+		lua_pushstring(L, "flag");
+		break;
+	case Widelands::Field::BuildHelp::kNone:
+		lua_pushstring(L, "none");
+	}
+
+	return 1;
 }
 
 /* RST

@@ -160,13 +160,18 @@ result = {
    },
    rocks = {
       -- TRANSLATORS: The title of an in-game teaching objective
-      descname = _"Rocks",
+      descname = _"Rocks & Roads",
       dependencies = { "objectives" }
    },
    flags = {
       -- TRANSLATORS: The title of an in-game teaching objective
       descname = _"Flags",
       dependencies = { "logs", "rocks" }
+   },
+   trees = {
+      -- TRANSLATORS: The title of an in-game teaching objective
+      descname = _"Trees",
+      dependencies = { "logs" }
    },
 }
 
