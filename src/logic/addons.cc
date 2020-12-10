@@ -223,6 +223,22 @@ AddOnCategory get_category(const std::string& name) {
 	throw wexception("Invalid add-on category '%s'", name.c_str());
 }
 
+uint32_t AddOnInfo::number_of_votes() const {
+	uint32_t v = 0;
+	for (const auto& pair : votes) {
+		v += pair.second;
+	}
+	return v;
+}
+double AddOnInfo::average_rating() const {
+	uint32_t v = 0, sum = 0;
+	for (const auto& pair : votes) {
+		sum += pair.first * pair.second;
+		v += pair.second;
+	}
+	return v ? static_cast<double>(sum) / v : 0;
+}
+
 AddOnInfo preload_addon(const std::string& name) {
 	std::unique_ptr<FileSystem> fs(
 	   g_fs->make_sub_file_system(kAddOnDir + FileSystem::file_separator() + name));
@@ -257,13 +273,12 @@ AddOnInfo preload_addon(const std::string& name) {
 	               get_category(s.get_safe_string("category")),
 	               {},
 	               false,
-	               {{}, {}, {}, {}},
+	               {{}, {}, {}, {}, {}},
 	               0,
 	               "",
 	               0,
 	               0,
-	               0,
-	               0.f,
+	               {},
 	               {}};
 
 	if (i.category == AddOnCategory::kNone) {

@@ -53,6 +53,10 @@ public:
 	}
 	void set_total(uint32_t);
 
+	void set_show_percent(bool p) {
+		show_percent_ = p;
+	}
+
 protected:
 	void draw(RenderTarget&) override;
 
@@ -61,6 +65,7 @@ private:
 	uint32_t state_;  ///< state_ is [0..total_]
 	uint32_t total_;  ///< maximum progress
 	const UI::ProgressbarStyleInfo& progress_style_;
+	bool show_percent_;
 };
 }  // namespace UI
 

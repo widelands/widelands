@@ -588,13 +588,12 @@ void AddOnsCtrl::refresh_remotes() {
 		   AddOns::AddOnCategory::kNone,
 		   {},
 		   false,
-		   {{}, {}, {}, {}},
+		   {{}, {}, {}, {}, {}},
 		   0,
 		   bug,
 		   std::time(nullptr),
 		   0,
-		   0,
-		   0.f,
+		   {},
 		   {}}};
 	}
 	rebuild();
@@ -686,27 +685,27 @@ void AddOnsCtrl::rebuild() {
 				return a.upload_timestamp > b.upload_timestamp;
 
 			case AddOnSortingCriteria::kLowestRating:
-				if (a.votes == 0) {
+				if (a.number_of_votes() == 0) {
 					// Add-ons without votes should always end up
 					// below any others when sorting by rating
 					return false;
-				} else if (b.votes == 0) {
+				} else if (b.number_of_votes() == 0) {
 					return true;
-				} else if (std::abs(a.average_rating - b.average_rating) < 0.01f) {
+				} else if (std::abs(a.average_rating() - b.average_rating()) < 0.01f) {
 					// ambiguity – always choose the one with more votes
-					return a.votes > b.votes;
+					return a.number_of_votes() > b.number_of_votes();
 				} else {
-					return a.average_rating < b.average_rating;
+					return a.average_rating() < b.average_rating();
 				}
 			case AddOnSortingCriteria::kHighestRating:
-				if (a.votes == 0) {
+				if (a.number_of_votes() == 0) {
 					return false;
-				} else if (b.votes == 0) {
+				} else if (b.number_of_votes() == 0) {
 					return true;
-				} else if (std::abs(a.average_rating - b.average_rating) < 0.01f) {
-					return a.votes > b.votes;
+				} else if (std::abs(a.average_rating() - b.average_rating()) < 0.01f) {
+					return a.number_of_votes() > b.number_of_votes();
 				} else {
-					return a.average_rating > b.average_rating;
+					return a.average_rating() > b.average_rating();
 				}
 			}
 			NEVER_HERE();
@@ -1414,7 +1413,7 @@ static std::string filesize_string(const uint32_t bytes) {
 	}
 }
 
-struct RemoteInteractionWindow : public UI::Window {
+class RemoteInteractionWindow : public UI::Window {
 public:
 	RemoteInteractionWindow(AddOnsCtrl& parent, const AddOns::AddOnInfo& info)
 	   : UI::Window(parent.get_parent(),
@@ -1425,32 +1424,45 @@ public:
 	                parent.get_inner_w() - 2 * kRowButtonSize,
 	                parent.get_inner_h() - 2 * kRowButtonSize,
 	                info.descname()),
-	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	     txt_(&box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
-	     voting_(&box_,
-	             "voting",
-	             0,
-	             0,
-	             0,
-	             11,
-	             kRowButtonSize - kRowButtonSpacing,
-	             _("Your vote"),
-	             UI::DropdownType::kTextual,
-	             UI::PanelStyle::kFsMenu,
-	             UI::ButtonStyle::kFsMenuSecondary),
-	     comment_(new UI::MultilineEditbox(&box_, 0, 0, get_inner_w(), 80, UI::PanelStyle::kFsMenu)),
+	     parent_(parent),
+	     info_(info),
+	     current_screenshot_(0),
+	     nr_screenshots_(info.file_list.screenshots.size()),
+
+	     main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     tabs_(&main_box_, UI::TabPanelStyle::kFsMenu),
+	     box_comments_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     box_screenies_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     box_screenies_buttons_(&box_screenies_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     box_votes_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+	     voting_stats_(&box_votes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+	     txt_(&box_comments_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
+	     screenshot_(&box_screenies_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, nullptr),
+	     comment_(new UI::MultilineEditbox(&box_comments_, 0, 0, get_inner_w(), 80, UI::PanelStyle::kFsMenu)),
+	     own_voting_(&box_votes_, "voting", 0, 0, 0, 11,
+	             kRowButtonSize - kRowButtonSpacing, _("Your vote"),
+	             UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
+	     screenshot_stats_(&box_screenies_buttons_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
+	     voting_stats_summary_(&box_votes_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
+	     screenshot_next_(
+	        &box_screenies_buttons_, "next_screenshot", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_right.png")),
+	     screenshot_prev_(
+	        &box_screenies_buttons_, "next_screenshot", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_left.png")),
 	     submit_(
-	        &box_, "submit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Submit comment")),
-	     ok_(&box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
-		std::string text = "<rt><p>";
-		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
-		           .as_font_tag((
-		              info.votes ?
+	        &box_comments_, "submit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Submit comment")),
+	     ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
+
+		const std::string voting_summary = 
+		              info.number_of_votes() ?
 		                 (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-		                                         "Average rating: %1$.3f (%2$u votes)", info.votes)) %
-		                  info.average_rating % info.votes)
+		                                         "Average rating: %1$.3f (%2$u votes)", info.number_of_votes())) %
+		                  info.average_rating() % info.number_of_votes())
 		                    .str() :
-		                 _("No votes yet")));
+		                 _("No votes yet");
+		voting_stats_summary_.set_text(voting_summary);
+
+		std::string text = "<rt><p>";
+		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag((voting_summary));
 		text += "</p><vspace gap=32><p>";
 		text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
 		           .as_font_tag(info.user_comments.empty() ?
@@ -1480,33 +1492,137 @@ public:
 		comment_->set_text("Writing comments and rating add-ons is not yet implemented.");
 		ok_.sigclicked.connect([this]() { end_modal(UI::Panel::Returncodes::kBack); });
 
-		voting_.add(_("Not voted"), 0, nullptr, true);
+		own_voting_.add(_("Not voted"), 0, nullptr, true);
 		for (unsigned i = 1; i <= 10; ++i) {
-			voting_.add(std::to_string(i), i);
+			own_voting_.add(std::to_string(i), i);
 		}
-
-		// not yet implemented
-		voting_.set_enabled(false);
+		// TODO(Nordfriese): Support for comments and votings needs to be implemented
+		// on the server-side before we can implement it in Widelands as well
+		own_voting_.set_tooltip("Not yet implemented");
+		own_voting_.set_enabled(false);
 		submit_.set_enabled(false);
 
-		box_.add(&txt_, UI::Box::Resizing::kExpandBoth);
-		box_.add_space(kRowButtonSpacing);
-		box_.add(&voting_, UI::Box::Resizing::kFullSize);
-		box_.add_space(kRowButtonSpacing);
-		box_.add(comment_, UI::Box::Resizing::kFullSize);
-		box_.add(&submit_, UI::Box::Resizing::kFullSize);
-		box_.add_space(kRowButtonSpacing);
-		box_.add(&ok_, UI::Box::Resizing::kFullSize);
-		box_.add_space(kRowButtonSpacing);
-		box_.set_size(get_inner_w(), get_inner_h());
+		box_screenies_buttons_.add(&screenshot_prev_, UI::Box::Resizing::kFullSize);
+		box_screenies_buttons_.add(&screenshot_stats_, UI::Box::Resizing::kExpandBoth);
+		box_screenies_buttons_.add(&screenshot_next_, UI::Box::Resizing::kFullSize);
+
+		box_screenies_.add(&screenshot_, UI::Box::Resizing::kExpandBoth);
+		box_screenies_.add_space(kRowButtonSpacing);
+		box_screenies_.add(&box_screenies_buttons_, UI::Box::Resizing::kFullSize);
+
+		box_comments_.add(&txt_, UI::Box::Resizing::kExpandBoth);
+		box_comments_.add_space(kRowButtonSpacing);
+		box_comments_.add(comment_, UI::Box::Resizing::kFullSize);
+		box_comments_.add_space(kRowButtonSpacing);
+		box_comments_.add(&submit_, UI::Box::Resizing::kFullSize);
+
+		voting_stats_.add_inf_space();
+		uint32_t most_votes = 1;
+		for (const auto& pair : info_.votes) {
+			most_votes = std::max(most_votes, pair.second);
+		}
+		for (unsigned vote = 1; vote <= AddOns::kMaxRating; ++vote) {
+			const auto it = info_.votes.find(vote);
+			const uint32_t nr_votes = it == info_.votes.end() ? 0 : it->second;
+
+			UI::Box* box = new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
+			UI::ProgressBar* bar = new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, UI::ProgressBar::Vertical);
+			bar->set_total(most_votes);
+			bar->set_state(nr_votes);
+			bar->set_show_percent(false);
+
+			UI::Textarea* label = new UI::Textarea(box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, std::to_string(vote), UI::Align::kCenter);
+
+			box->add(bar, UI::Box::Resizing::kExpandBoth);
+			box->add_space(kRowButtonSpacing);
+			box->add(label, UI::Box::Resizing::kFullSize);
+			voting_stats_.add(box, UI::Box::Resizing::kExpandBoth);
+			voting_stats_.add_inf_space();
+		}
+
+		box_votes_.add(&voting_stats_summary_, UI::Box::Resizing::kFullSize);
+		box_votes_.add_space(kRowButtonSpacing);
+		box_votes_.add(&voting_stats_, UI::Box::Resizing::kExpandBoth);
+		box_votes_.add_space(kRowButtonSpacing);
+		box_votes_.add(&own_voting_, UI::Box::Resizing::kFullSize);
+		box_votes_.add_space(kRowButtonSpacing);
+
+		tabs_.add("comments", _("Comments"), &box_comments_);
+		tabs_.add("screenshota", _("Screenshots"), &box_screenies_);
+		tabs_.add("votes", _("Votes"), &box_votes_);
+
+		main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
+		main_box_.add_space(kRowButtonSpacing);
+		main_box_.add(&ok_, UI::Box::Resizing::kFullSize);
+
+		screenshot_next_.set_enabled(nr_screenshots_ > 1);
+		screenshot_prev_.set_enabled(nr_screenshots_ > 1);
+		screenshot_cache_.resize(nr_screenshots_, nullptr);
+		screenshot_next_.sigclicked.connect([this]() { next_screenshot(1); });
+		screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
+		tabs_.sigclicked.connect([this]() {
+			if (tabs_.active() == 1) {
+				next_screenshot(0);
+			}
+		});
+
+		main_box_.set_size(get_inner_w(), get_inner_h());
 	}
 
 private:
-	UI::Box box_;
+	void next_screenshot(int8_t delta) {
+		if (!nr_screenshots_) {
+			screenshot_stats_.set_text(_("No screenshots"));
+			return;
+		}
+
+		while (delta < 0) {
+			delta += nr_screenshots_;
+		}
+		current_screenshot_ += delta;
+		current_screenshot_ %= nr_screenshots_;
+		assert(current_screenshot_ < static_cast<int32_t>(screenshot_cache_.size()));
+
+		screenshot_stats_.set_text((boost::format(_("%1$u / %2$u")) % (current_screenshot_ + 1) % nr_screenshots_).str());
+
+		if (screenshot_cache_[current_screenshot_]) {
+			return;
+		}
+
+		const Image* image = nullptr;
+		const std::string screenie = parent_.net().download_screenshot(info_.internal_name, info_.file_list.screenshots[current_screenshot_]);
+		if (!screenie.empty()) {
+			image = g_image_cache->get(screenie);
+			g_fs->fs_unlink(screenie);
+		}
+
+		if (image) {
+			screenshot_.set_icon(image);
+			screenshot_.set_tooltip("");
+			screenshot_cache_[current_screenshot_] = image;
+		} else {
+			screenshot_.set_icon(g_image_cache->get("images/ui_basic/stop.png"));
+			screenshot_.set_handle_mouse(true);
+			screenshot_.set_tooltip(_("This screenshot could not be fetched from the server due to an error."));
+		}
+	}
+
+	AddOnsCtrl& parent_;
+	const AddOns::AddOnInfo& info_;
+	int32_t current_screenshot_, nr_screenshots_;
+	std::vector<const Image*> screenshot_cache_;
+
+	UI::Box main_box_;
+	UI::TabPanel tabs_;
+	UI::Box box_comments_, box_screenies_, box_screenies_buttons_, box_votes_, voting_stats_;
+
 	UI::MultilineTextarea txt_;
-	UI::Dropdown<uint8_t> voting_;
+	UI::Icon screenshot_;
+
 	UI::MultilineEditbox* comment_;
-	UI::Button submit_, ok_;
+	UI::Dropdown<uint8_t> own_voting_;
+	UI::Textarea screenshot_stats_, voting_stats_summary_;
+	UI::Button screenshot_next_, screenshot_prev_, submit_, ok_;
 };
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
@@ -1594,7 +1710,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments */
                _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u")) %
             filesize_string(info.total_file_size) % info.download_count %
-            (info.votes ? (boost::format("%.2f") % info.average_rating).str() : "–") %
+            (info.number_of_votes() ? (boost::format("%.2f") % info.average_rating()).str() : "–") %
             info.user_comments.size())
               .str(),
         UI::Align::kRight),
@@ -1724,10 +1840,10 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	       (boost::format(ngettext("%u download", "%u downloads", info.download_count)) %
 	        info.download_count)
 	          .str() %
-	       (info.votes ?
+	       (info.number_of_votes() ?
 	           (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                   "Average rating: %1$.3f (%2$u votes)", info.votes)) %
-	            info.average_rating % info.votes)
+	                                   "Average rating: %1$.3f (%2$u votes)", info.number_of_votes())) %
+	            info.average_rating() % info.number_of_votes())
 	              .str() :
 	           _("No votes yet")) %
 	       (boost::format(ngettext("%u comment", "%u comments", info.user_comments.size())) %

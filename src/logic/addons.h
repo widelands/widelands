@@ -55,7 +55,7 @@ struct AddOnCategoryInfo {
 
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
 struct AddOnFileList {
-	std::vector<std::string> directories, files, locales, checksums;
+	std::vector<std::string> directories, files, locales, checksums, screenshots;
 };
 
 using AddOnVersion = std::vector<uint32_t>;
@@ -72,6 +72,8 @@ struct AddOnComment {
 	AddOnVersion version;  // The version on which the user commented
 	std::time_t timestamp;
 };
+
+constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
 	std::string internal_name;  // "cool_feature.wad"
@@ -98,9 +100,11 @@ struct AddOnInfo {
 	// TODO(Nordfriese): These are not yet implemented on the server-side
 	std::time_t upload_timestamp;  // date and time when this version was uploaded
 	uint32_t download_count;       // total times downloaded
-	uint32_t votes;                // total number of votes
-	float average_rating;          // average rating between 1.0 and 10.0 (0 if no votes)
+	std::map<uint8_t /* rating 1..10 */, uint32_t /* number of votes */> votes;  // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
+
+	uint32_t number_of_votes() const;
+	double average_rating() const;
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
