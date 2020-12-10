@@ -41,7 +41,7 @@ public:
 	/// Single payer, nethost, netclient or replay
 	GameController::GameType gametype;
 
-	AddOnRequirements required_addons;
+	AddOns::AddOnRequirements required_addons;
 
 	SavegameData();
 	explicit SavegameData(const std::string& filename);

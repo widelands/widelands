@@ -102,6 +102,7 @@ public:
 	DescriptionIndex becomes() const {
 		return becomes_;
 	}
+	void set_becomes(Descriptions&, const std::string&);
 	DescriptionIndex worker_index() const;
 	bool can_act_as(DescriptionIndex) const;
 
