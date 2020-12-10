@@ -88,7 +88,8 @@ refresh_remotes_callback(char* received_data, size_t, const size_t char_count, s
 }
 
 static inline std::string get_addons_server_name() {
-	return std::string("https://raw.githubusercontent.com/") + get_config_string("addon_server", "widelands/wl_addons_server/master") + "/";
+	return std::string("https://raw.githubusercontent.com/") +
+	       get_config_string("addon_server", "widelands/wl_addons_server/master") + "/";
 }
 
 constexpr unsigned kCurrentListVersion = 2;

@@ -101,7 +101,8 @@ struct AddOnInfo {
 	// TODO(Nordfriese): These are not yet implemented on the server-side
 	std::time_t upload_timestamp;  // date and time when this version was uploaded
 	uint32_t download_count;       // total times downloaded
-	std::map<uint8_t /* rating 1..10 */, uint32_t /* number of votes */> votes;  // total number of votes for each of the ratings 1-10
+	std::map<uint8_t /* rating 1..10 */, uint32_t /* number of votes */>
+	   votes;  // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
 
 	uint32_t number_of_votes() const;

@@ -1439,24 +1439,66 @@ public:
 	     voting_stats_(&box_votes_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 	     txt_(&box_comments_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft),
 	     screenshot_(&box_screenies_, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, nullptr),
-	     comment_(new UI::MultilineEditbox(&box_comments_, 0, 0, get_inner_w(), 80, UI::PanelStyle::kFsMenu)),
-	     own_voting_(&box_votes_, "voting", 0, 0, 0, 11,
-	             kRowButtonSize - kRowButtonSpacing, _("Your vote"),
-	             UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary),
-	     screenshot_stats_(&box_screenies_buttons_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
-	     screenshot_descr_(&box_screenies_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
-	     voting_stats_summary_(&box_votes_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, info.number_of_votes() ?
-		                 (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-		                                         "Average rating: %1$.3f (%2$u votes)", info.number_of_votes())) %
-		                  info.average_rating() % info.number_of_votes())
-		                    .str() :
-		                 _("No votes yet"), UI::Align::kCenter),
-	     screenshot_next_(&box_screenies_buttons_, "next_screenshot", 0, 0, 48, 24, UI::ButtonStyle::kFsMenuSecondary,
-	     		g_image_cache->get("images/ui_basic/scrollbar_right.png"), _("Next screenshot")),
-	     screenshot_prev_(&box_screenies_buttons_, "prev_screenshot", 0, 0, 48, 24, UI::ButtonStyle::kFsMenuSecondary,
-	     		g_image_cache->get("images/ui_basic/scrollbar_left.png"), _("Previous screenshot")),
-	     submit_(
-	        &box_comments_, "submit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Submit comment")),
+	     comment_(new UI::MultilineEditbox(
+	        &box_comments_, 0, 0, get_inner_w(), 80, UI::PanelStyle::kFsMenu)),
+	     own_voting_(&box_votes_,
+	                 "voting",
+	                 0,
+	                 0,
+	                 0,
+	                 11,
+	                 kRowButtonSize - kRowButtonSpacing,
+	                 _("Your vote"),
+	                 UI::DropdownType::kTextual,
+	                 UI::PanelStyle::kFsMenu,
+	                 UI::ButtonStyle::kFsMenuSecondary),
+	     screenshot_stats_(&box_screenies_buttons_,
+	                       UI::PanelStyle::kFsMenu,
+	                       UI::FontStyle::kFsMenuLabel,
+	                       "",
+	                       UI::Align::kCenter),
+	     screenshot_descr_(&box_screenies_,
+	                       UI::PanelStyle::kFsMenu,
+	                       UI::FontStyle::kFsMenuLabel,
+	                       "",
+	                       UI::Align::kCenter),
+	     voting_stats_summary_(&box_votes_,
+	                           UI::PanelStyle::kFsMenu,
+	                           UI::FontStyle::kFsMenuLabel,
+	                           info.number_of_votes() ?
+	                              (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                                                      "Average rating: %1$.3f (%2$u votes)",
+	                                                      info.number_of_votes())) %
+	                               info.average_rating() % info.number_of_votes())
+	                                 .str() :
+	                              _("No votes yet"),
+	                           UI::Align::kCenter),
+	     screenshot_next_(&box_screenies_buttons_,
+	                      "next_screenshot",
+	                      0,
+	                      0,
+	                      48,
+	                      24,
+	                      UI::ButtonStyle::kFsMenuSecondary,
+	                      g_image_cache->get("images/ui_basic/scrollbar_right.png"),
+	                      _("Next screenshot")),
+	     screenshot_prev_(&box_screenies_buttons_,
+	                      "prev_screenshot",
+	                      0,
+	                      0,
+	                      48,
+	                      24,
+	                      UI::ButtonStyle::kFsMenuSecondary,
+	                      g_image_cache->get("images/ui_basic/scrollbar_left.png"),
+	                      _("Previous screenshot")),
+	     submit_(&box_comments_,
+	             "submit",
+	             0,
+	             0,
+	             0,
+	             0,
+	             UI::ButtonStyle::kFsMenuSecondary,
+	             _("Submit comment")),
 	     ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
 
 		std::string text = "<rt><p>";
@@ -1524,13 +1566,17 @@ public:
 			const auto it = info_.votes.find(vote);
 			const uint32_t nr_votes = it == info_.votes.end() ? 0 : it->second;
 
-			UI::Box* box = new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
-			UI::ProgressBar* bar = new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, UI::ProgressBar::Vertical);
+			UI::Box* box =
+			   new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
+			UI::ProgressBar* bar = new UI::ProgressBar(
+			   box, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, UI::ProgressBar::Vertical);
 			bar->set_total(most_votes);
 			bar->set_state(nr_votes);
 			bar->set_show_percent(false);
 
-			UI::Textarea* label = new UI::Textarea(box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, std::to_string(vote), UI::Align::kCenter);
+			UI::Textarea* label =
+			   new UI::Textarea(box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel,
+			                    std::to_string(vote), UI::Align::kCenter);
 
 			box->add(bar, UI::Box::Resizing::kExpandBoth);
 			box->add_space(kRowButtonSpacing);
@@ -1546,10 +1592,13 @@ public:
 		box_votes_.add(&own_voting_, UI::Box::Resizing::kFullSize);
 		box_votes_.add_space(kRowButtonSpacing);
 
-		tabs_.add("comments", (boost::format(_("Comments (%u)")) % info_.user_comments.size()).str(), &box_comments_);
+		tabs_.add("comments", (boost::format(_("Comments (%u)")) % info_.user_comments.size()).str(),
+		          &box_comments_);
 
 		if (nr_screenshots_) {
-			tabs_.add("screenshots", (boost::format(_("Screenshots (%u)")) % info_.screenshots.size()).str(), &box_screenies_);
+			tabs_.add("screenshots",
+			          (boost::format(_("Screenshots (%u)")) % info_.screenshots.size()).str(),
+			          &box_screenies_);
 			tabs_.sigclicked.connect([this]() {
 				if (tabs_.active() == 1) {
 					next_screenshot(0);
@@ -1559,7 +1608,8 @@ public:
 			box_screenies_.set_visible(false);
 		}
 
-		tabs_.add("votes", (boost::format(_("Votes (%u)")) % info_.number_of_votes()).str(), &box_votes_);
+		tabs_.add(
+		   "votes", (boost::format(_("Votes (%u)")) % info_.number_of_votes()).str(), &box_votes_);
 
 		main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 		main_box_.add_space(kRowButtonSpacing);
@@ -1587,7 +1637,8 @@ private:
 		auto it = info_.screenshots.begin();
 		std::advance(it, current_screenshot_);
 
-		screenshot_stats_.set_text((boost::format(_("%1$u / %2$u")) % (current_screenshot_ + 1) % nr_screenshots_).str());
+		screenshot_stats_.set_text(
+		   (boost::format(_("%1$u / %2$u")) % (current_screenshot_ + 1) % nr_screenshots_).str());
 		screenshot_descr_.set_text(it->second);
 		screenshot_.set_tooltip("");
 
@@ -1597,7 +1648,8 @@ private:
 		}
 
 		const Image* image = nullptr;
-		const std::string screenie = parent_.net().download_screenshot(info_.internal_name, it->first);
+		const std::string screenie =
+		   parent_.net().download_screenshot(info_.internal_name, it->first);
 		if (!screenie.empty()) {
 			image = g_image_cache->get(screenie);
 			g_fs->fs_unlink(screenie);
@@ -1609,7 +1661,8 @@ private:
 		} else {
 			screenshot_.set_icon(g_image_cache->get("images/ui_basic/stop.png"));
 			screenshot_.set_handle_mouse(true);
-			screenshot_.set_tooltip(_("This screenshot could not be fetched from the server due to an error."));
+			screenshot_.set_tooltip(
+			   _("This screenshot could not be fetched from the server due to an error."));
 		}
 	}
 
@@ -1713,7 +1766,8 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
         info.internal_name.empty() ?
            "" :
            (boost::format(
-               /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments · Number of screenshots */
+               /** TRANSLATORS: Filesize · Download count · Average rating · Number of comments ·
+                  Number of screenshots */
                _("%1$s   ⬇ %2$u   ★ %3$s   “” %4$u   ▣ %5$u")) %
             filesize_string(info.total_file_size) % info.download_count %
             (info.number_of_votes() ? (boost::format("%.2f") % info.average_rating()).str() : "–") %
@@ -1846,12 +1900,12 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 	       (boost::format(ngettext("%u download", "%u downloads", info.download_count)) %
 	        info.download_count)
 	          .str() %
-	       (info.number_of_votes() ?
-	           (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
-	                                   "Average rating: %1$.3f (%2$u votes)", info.number_of_votes())) %
-	            info.average_rating() % info.number_of_votes())
-	              .str() :
-	           _("No votes yet")) %
+	       (info.number_of_votes() ? (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
+	                                                         "Average rating: %1$.3f (%2$u votes)",
+	                                                         info.number_of_votes())) %
+	                                  info.average_rating() % info.number_of_votes())
+	                                    .str() :
+	                                 _("No votes yet")) %
 	       (boost::format(ngettext("%u comment", "%u comments", info.user_comments.size())) %
 	        info.user_comments.size()) %
 	       (boost::format(ngettext("%u screenshot", "%u screenshots", info.screenshots.size())) %
