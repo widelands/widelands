@@ -8,7 +8,7 @@ addons:
       - libboost-regex-dev
       - libboost-system-dev
       - libboost-test-dev
-      - libcurl4-openssl-dev
+      - libcurl4-gnutls-dev
       - libglew-dev
       - libicu-dev
       - libpng-dev
