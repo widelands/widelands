@@ -976,7 +976,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 
 	// We need to disable non-world add-ons in the editor
 	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
-		if (it->category != AddOnCategory::kWorld) {
+		if (it->category != AddOns::AddOnCategory::kWorld) {
 			it = egbase.enabled_addons().erase(it);
 		} else {
 			++it;
@@ -1090,8 +1090,8 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	log_info("┃    Resources");
 	load_resources(*table);
 
-	for (const AddOnInfo& info : egbase.enabled_addons()) {
-		if (info.category == AddOnCategory::kWorld) {
+	for (const AddOns::AddOnInfo& info : egbase.enabled_addons()) {
+		if (info.category == AddOns::AddOnCategory::kWorld) {
 			log_info("┃    Add-On ‘%s’", info.internal_name.c_str());
 			table = egbase.lua().run_script(kAddOnDir + '/' + info.internal_name + "/editor.lua");
 			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);

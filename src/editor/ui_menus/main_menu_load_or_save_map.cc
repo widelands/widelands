@@ -169,8 +169,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		// In the toplevel directory we also need to include add-on maps –
 		// but only in the load screen, not in the save screen!
 		if (include_addon_maps_) {
-			for (auto& addon : g_addons) {
-				if (addon.first.category == AddOnCategory::kMaps) {
+			for (auto& addon : AddOns::g_addons) {
+				if (addon.first.category == AddOns::AddOnCategory::kMaps) {
 					for (const std::string& mapname : g_fs->list_directory(
 					        kAddOnDir + FileSystem::file_separator() + addon.first.internal_name)) {
 						files.insert(mapname);

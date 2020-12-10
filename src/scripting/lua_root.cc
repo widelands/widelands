@@ -759,6 +759,8 @@ void LuaDescriptions::do_modify_worker(lua_State* L,
 
 	if (property == "experience") {
 		worker_descr.set_needed_experience(luaL_checkuint32(L, 5));
+	} else if (property == "becomes") {
+		worker_descr.set_becomes(descrs, luaL_checkstring(L, 5));
 	} else if (property == "programs") {
 		const std::string cmd = luaL_checkstring(L, 5);
 		const std::string prog_name = luaL_checkstring(L, 6);
@@ -858,6 +860,9 @@ void LuaDescriptions::do_modify_productionsite(lua_State* L,
 			report_error(
 			   L, "modify_unit - productionsite - programs: invalid command '%s'", cmd.c_str());
 		}
+	} else if (property == "enhancement") {
+		std::unique_ptr<LuaTable> tbl(new LuaTable(L));
+		psdescr.set_enhancement(descrs, *tbl);
 	} else {
 		report_error(
 		   L, "modify_unit not supported yet for productionsite property '%s'", property.c_str());
