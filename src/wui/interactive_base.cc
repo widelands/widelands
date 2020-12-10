@@ -751,8 +751,10 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 	   get_display_flag(dfDebug) ?
 	      (boost::format("%5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps())
 	         .str() :
-	      "", get_display_flag(dfDebug) ? (boost::format("%.1f / %.1f") % (1000.0 / frametime_) % average_fps())
-	         .str() : "");
+	      "",
+	   get_display_flag(dfDebug) ?
+	      (boost::format("%.1f / %.1f") % (1000.0 / frametime_) % average_fps()).str() :
+	      "");
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,
