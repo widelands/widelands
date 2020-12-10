@@ -184,11 +184,11 @@ bool MapDetails::update(const MapData& mapdata, bool localize_mapname, bool rend
 		               as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
 		                 .str();
 
-		description =
-		   (boost::format("%s%s") % description %
-		    as_heading_with_content(
-		       _("Add-Ons:"), check_requirements(mapdata.required_addons), style_, false, true))
-		      .str();
+		description = (boost::format("%s%s") % description %
+		               as_heading_with_content(_("Add-Ons:"),
+		                                       AddOns::check_requirements(mapdata.required_addons),
+		                                       style_, false, true))
+		                 .str();
 
 		description =
 		   (boost::format("%s%s") % description % as_heading(_("Description"), style_)).str();

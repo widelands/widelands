@@ -88,7 +88,7 @@ struct GamePreloadPacket : public GameDataPacket {
 	 * and players can not influence the world of existing maps.
 	 * Tribes add-ons however are selected when starting a new game.
 	 */
-	const AddOnRequirements& required_addons() const {
+	const AddOns::AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
@@ -116,7 +116,7 @@ private:
 	time_t savetimestamp_ = 0;
 	GameController::GameType gametype_ = GameController::GameType::kUndefined;
 	// Required add-ons with the recommended version
-	AddOnRequirements required_addons_;
+	AddOns::AddOnRequirements required_addons_;
 };
 }  // namespace Widelands
 
