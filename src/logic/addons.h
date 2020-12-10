@@ -55,7 +55,7 @@ struct AddOnCategoryInfo {
 
 // TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
 struct AddOnFileList {
-	std::vector<std::string> directories, files, locales, checksums, screenshots;
+	std::vector<std::string> directories, files, locales, checksums;
 };
 
 using AddOnVersion = std::vector<uint32_t>;
@@ -93,6 +93,7 @@ struct AddOnInfo {
 	bool verified;  // Only valid for Remote add-ons
 
 	AddOnFileList file_list;  // Get rid of this ASAP
+	std::map<std::string /* name */, std::string /* description */> screenshots;
 
 	uint32_t total_file_size;     // total size of all files, in bytes
 	std::string upload_username;  // who uploaded (may be different from author)

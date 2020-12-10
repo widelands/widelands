@@ -204,7 +204,9 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			                 static_cast<unsigned>(info.file_list.checksums.size()));
 		}
 		for (size_t screenies = next_number(output); screenies; --screenies) {
-			info.file_list.screenshots.push_back(next_word(output));
+			const std::string s_name = next_word(output);
+			const std::string s_descr = next_word(output);
+			info.screenshots[s_name] = s_descr;
 		}
 
 		info.verified = next_word(output) == "verified";
