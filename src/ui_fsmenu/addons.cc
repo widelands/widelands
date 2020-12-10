@@ -1445,14 +1445,14 @@ public:
 	     screenshot_stats_(&box_screenies_buttons_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
 	     voting_stats_summary_(&box_votes_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel, "", UI::Align::kCenter),
 	     screenshot_next_(
-	        &box_screenies_buttons_, "next_screenshot", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_right.png")),
+	        &box_screenies_buttons_, "next_screenshot", 0, 0, 48, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_right.png")),
 	     screenshot_prev_(
-	        &box_screenies_buttons_, "next_screenshot", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_left.png")),
+	        &box_screenies_buttons_, "next_screenshot", 0, 0, 48, 24, UI::ButtonStyle::kFsMenuSecondary, g_image_cache->get("images/ui_basic/scrollbar_left.png")),
 	     submit_(
 	        &box_comments_, "submit", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Submit comment")),
 	     ok_(&main_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
 
-		const std::string voting_summary = 
+		const std::string voting_summary =
 		              info.number_of_votes() ?
 		                 (boost::format(ngettext("Average rating: %1$.3f (%2$u vote)",
 		                                         "Average rating: %1$.3f (%2$u votes)", info.number_of_votes())) %
@@ -1548,7 +1548,18 @@ public:
 		box_votes_.add_space(kRowButtonSpacing);
 
 		tabs_.add("comments", _("Comments"), &box_comments_);
-		tabs_.add("screenshota", _("Screenshots"), &box_screenies_);
+
+		if (nr_screenshots_) {
+			tabs_.add("screenshota", _("Screenshots"), &box_screenies_);
+			tabs_.sigclicked.connect([this]() {
+				if (tabs_.active() == 1) {
+					next_screenshot(0);
+				}
+			});
+		} else {
+			box_screenies_.set_visible(false);
+		}
+
 		tabs_.add("votes", _("Votes"), &box_votes_);
 
 		main_box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
@@ -1560,22 +1571,13 @@ public:
 		screenshot_cache_.resize(nr_screenshots_, nullptr);
 		screenshot_next_.sigclicked.connect([this]() { next_screenshot(1); });
 		screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
-		tabs_.sigclicked.connect([this]() {
-			if (tabs_.active() == 1) {
-				next_screenshot(0);
-			}
-		});
 
 		main_box_.set_size(get_inner_w(), get_inner_h());
 	}
 
 private:
 	void next_screenshot(int8_t delta) {
-		if (!nr_screenshots_) {
-			screenshot_stats_.set_text(_("No screenshots"));
-			return;
-		}
-
+		assert(nr_screenshots_ > 0);
 		while (delta < 0) {
 			delta += nr_screenshots_;
 		}
@@ -1584,8 +1586,10 @@ private:
 		assert(current_screenshot_ < static_cast<int32_t>(screenshot_cache_.size()));
 
 		screenshot_stats_.set_text((boost::format(_("%1$u / %2$u")) % (current_screenshot_ + 1) % nr_screenshots_).str());
+		screenshot_.set_tooltip("");
 
 		if (screenshot_cache_[current_screenshot_]) {
+			screenshot_.set_icon(screenshot_cache_[current_screenshot_]);
 			return;
 		}
 
@@ -1598,7 +1602,6 @@ private:
 
 		if (image) {
 			screenshot_.set_icon(image);
-			screenshot_.set_tooltip("");
 			screenshot_cache_[current_screenshot_] = image;
 		} else {
 			screenshot_.set_icon(g_image_cache->get("images/ui_basic/stop.png"));
