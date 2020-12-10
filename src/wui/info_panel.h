@@ -39,8 +39,8 @@ struct MessageQueue;
 
 class MessagePreview : public UI::Textarea {
 public:
-	MessagePreview(InfoPanel&, const Widelands::Message&, Widelands::MessageId);
-	MessagePreview(InfoPanel&, const std::string& text, const std::string& tooltip);
+	MessagePreview(InfoPanel*, const Widelands::Message*, Widelands::MessageId);
+	MessagePreview(InfoPanel*, const std::string& text, const std::string& tooltip);
 	~MessagePreview() override {
 	}
 
@@ -67,7 +67,7 @@ public:
 	// Update the text area without relayouting
 	void set_time_string(const std::string&);
 	void set_speed_string(const std::string&);
-	void set_fps_string(const std::string&);
+	void set_fps_string(const std::string& long_string, const std::string& short_string);
 	void set_coords_string(const std::string&);
 
 	void log_message(const std::string&);
@@ -115,9 +115,9 @@ private:
 	UI::Textarea text_time_speed_, text_fps_, text_coords_;
 
 	std::list<MessagePreview*> messages_;
-	size_t index_of(const MessagePreview&) const;
-	void pop_message(MessagePreview&);
-	void push_message(MessagePreview&);
+	size_t index_of(const MessagePreview*) const;
+	void pop_message(MessagePreview*);
+	void push_message(MessagePreview*);
 	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 	const Widelands::MessageQueue* message_queue_;
 	std::unique_ptr<Widelands::MessageId> last_message_id_;

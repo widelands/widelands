@@ -38,8 +38,8 @@ constexpr uint8_t kMaxMessages = 4;
 
 constexpr int16_t kMessagePreviewMaxLifetime = 15 * 1000;  // show messages for 15 seconds
 
-MessagePreview::MessagePreview(InfoPanel& i, const std::string& text, const std::string& tooltip)
-   : UI::Textarea(&i,
+MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std::string& tooltip)
+   : UI::Textarea(i,
                   UI::PanelStyle::kWui,
                   UI::FontStyle::kWuiGameSpeedAndCoordinates,
                   0,
@@ -49,7 +49,7 @@ MessagePreview::MessagePreview(InfoPanel& i, const std::string& text, const std:
                   // Surround the text with some whitespaces for padding
                   std::string("   ") + text + "   ",
                   UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft),
-     owner_(i),
+     owner_(*i),
      creation_time_(SDL_GetTicks()),
      message_(nullptr),
      id_() {
@@ -58,9 +58,9 @@ MessagePreview::MessagePreview(InfoPanel& i, const std::string& text, const std:
 	set_tooltip(tooltip);
 }
 
-MessagePreview::MessagePreview(InfoPanel& i, const Widelands::Message& m, Widelands::MessageId id)
-   : MessagePreview(i, m.title(), as_message(m.heading(), m.body())) {
-	message_ = &m;
+MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widelands::MessageId id)
+   : MessagePreview(i, m->title(), as_message(m->heading(), m->body())) {
+	message_ = m;
 	id_ = id;
 }
 
@@ -70,7 +70,7 @@ inline bool MessagePreview::message_still_exists() const {
 
 void MessagePreview::think() {
 	if (!message_still_exists() || SDL_GetTicks() - creation_time_ > kMessagePreviewMaxLifetime) {
-		owner_.pop_message(*this);
+		owner_.pop_message(this);
 	}
 }
 
@@ -84,7 +84,7 @@ void MessagePreview::draw(RenderTarget& r) {
 	       Vector2i(0, 0));
 
 	// every second message is highlighted
-	if (owner_.index_of(*this) % 2) {
+	if (owner_.index_of(this) % 2) {
 		r.brighten_rect(Recti(0, 0, get_w(), get_h()), 16);
 	}
 
@@ -113,7 +113,7 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t, int32_t) {
 		}
 		break;
 	case SDL_BUTTON_MIDDLE:  // hide message
-		owner_.pop_message(*this);
+		owner_.pop_message(this);
 		break;
 	case SDL_BUTTON_RIGHT: {  // open message menu
 		assert(owner_.iplayer_);
@@ -178,6 +178,7 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
      message_queue_(nullptr),
      last_message_id_(nullptr),
      draw_real_time_(get_config_bool("game_clock", true)) {
+	text_fps_.set_handle_mouse(true);
 	int mode = get_config_int("toolbar_pos", 0);
 	on_top_ = mode & DisplayMode::kCmdSwap;
 	if (mode & (DisplayMode::kOnMouse_Visible | DisplayMode::kOnMouse_Hidden)) {
@@ -326,10 +327,10 @@ bool InfoPanel::handle_mouserelease(uint8_t, int32_t x, int32_t y) {
 	return is_mouse_over_panel();
 }
 
-size_t InfoPanel::index_of(const MessagePreview& mp) const {
+size_t InfoPanel::index_of(const MessagePreview* mp) const {
 	size_t i = 0;
 	for (const MessagePreview* m : messages_) {
-		if (m == &mp) {
+		if (m == mp) {
 			return i;
 		}
 		++i;
@@ -338,14 +339,14 @@ size_t InfoPanel::index_of(const MessagePreview& mp) const {
 }
 
 void InfoPanel::log_message(const std::string& message) {
-	push_message(*new MessagePreview(*this, message, ""));
+	push_message(new MessagePreview(this, message, ""));
 }
 
-void InfoPanel::pop_message(MessagePreview& m) {
-	m.set_visible(false);
-	m.die();
+void InfoPanel::pop_message(MessagePreview* m) {
+	m->set_visible(false);
+	m->die();
 	for (auto it = messages_.begin(); it != messages_.end(); ++it) {
-		if (*it == &m) {
+		if (*it == m) {
 			messages_.erase(it);
 			layout();
 			return;
@@ -354,18 +355,26 @@ void InfoPanel::pop_message(MessagePreview& m) {
 	NEVER_HERE();
 }
 
-void InfoPanel::push_message(MessagePreview& message) {
-	messages_.push_back(&message);
+void InfoPanel::push_message(MessagePreview* message) {
+	messages_.push_back(message);
 
 	if (messages_.size() > kMaxMessages) {
-		pop_message(*messages_.front());
+		pop_message(messages_.front());
 	}
 
 	layout();
 }
 
-void InfoPanel::set_fps_string(const std::string& t) {
-	text_fps_.set_text(t);
+void InfoPanel::set_fps_string(const std::string& long_string, const std::string& short_string) {
+	if (get_w() < 970) {
+		// The FPS string overlaps with the coords string at low resolution.
+		// Therefore only show it if the available width exceeds an arbitrary threshold.
+		text_fps_.set_text(short_string);
+		text_fps_.set_tooltip(long_string);
+	} else {
+		text_fps_.set_text(long_string);
+		text_fps_.set_tooltip("");
+	}
 }
 void InfoPanel::set_coords_string(const std::string& t) {
 	text_coords_.set_text(t);
@@ -390,7 +399,6 @@ void InfoPanel::update_time_speed_string() {
 	}
 
 	std::vector<std::string*> non_empty;
-	std::string format;
 	for (std::string* s : {&time_string_, &realtime, &speed_string_}) {
 		if (!s->empty()) {
 			non_empty.push_back(s);
@@ -406,9 +414,11 @@ void InfoPanel::update_time_speed_string() {
 		text_time_speed_.set_text(*non_empty.back());
 		return;
 	case 2:
+		/** TRANSLATORS: (Gametime · Realtime) or (Gametime · Gamespeed) or (Realtime · Gamespeed) */
 		f = boost::format(_("%1$s · %2$s"));
 		break;
 	case 3:
+		/** TRANSLATORS: Gametime · Realtime · Gamespeed */
 		f = boost::format(_("%1$s · %2$s · %3$s"));
 		break;
 	default:
@@ -441,7 +451,7 @@ void InfoPanel::think() {
 		*last_message_id_ = Widelands::MessageId(last_message_id_->value() + 1);
 		if (message_queue_->count(last_message_id_->value())) {
 			push_message(
-			   *new MessagePreview(*this, *(*message_queue_)[*last_message_id_], *last_message_id_));
+			   new MessagePreview(this, (*message_queue_)[*last_message_id_], *last_message_id_));
 		}
 	}
 
