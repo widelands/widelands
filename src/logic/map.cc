@@ -136,6 +136,7 @@ Map::Map()
      scenario_types_(NO_SCENARIO),
      width_(0),
      height_(0),
+     localize_author_(false),
      pathfieldmgr_(new PathfieldManager),
      allows_seafaring_(false),
      waterway_max_length_(0) {
@@ -511,6 +512,7 @@ void Map::create_empty_map(const EditorGameBase& egbase,
 	set_size(w, h);
 	set_name(name);
 	set_author(author);
+	set_localize_author(false);  // no author i18n markup by default
 	set_description(description);
 	set_nrplayers(0);
 	{
@@ -612,21 +614,22 @@ static inline int32_t resize_coordinates_conversion(const int32_t old_coord,
 	if (new_dimension == old_dimension) {
 		// trivial
 		return old_coord;
-	} else if (new_dimension > old_dimension) {
+	}
+	if (new_dimension > old_dimension) {
 		// enlarge
 		return old_coord > split_point ? old_coord + new_dimension - old_dimension : old_coord;
-	} else if (split_point > new_dimension) {
+	}
+	if (split_point > new_dimension) {
 		// shrink, origin deleted
 		return (old_coord >= split_point || old_coord < split_point - new_dimension) ?
 		          kInvalidCoords :
 		          old_coord - split_point + new_dimension;
-	} else {
-		// shrink, origin preserved
-		return old_coord < split_point ? old_coord :
-		                                 old_coord < split_point + old_dimension - new_dimension ?
-		                                 kInvalidCoords :
-		                                 old_coord + new_dimension - old_dimension;
 	}
+	// shrink, origin preserved
+	return old_coord < split_point ? old_coord :
+	                                 old_coord < split_point + old_dimension - new_dimension ?
+	                                 kInvalidCoords :
+	                                 old_coord + new_dimension - old_dimension;
 }
 
 void Map::resize(EditorGameBase& egbase, const Coords split, const int32_t w, const int32_t h) {
@@ -969,6 +972,10 @@ void Map::set_filename(const std::string& filename) {
 
 void Map::set_author(const std::string& author) {
 	author_ = author;
+}
+
+void Map::set_localize_author(const bool l) {
+	localize_author_ = l;
 }
 
 void Map::set_name(const std::string& name) {

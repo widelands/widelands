@@ -51,6 +51,7 @@
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
+#include "logic/addons.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_type.h"
@@ -453,7 +454,9 @@ void EditorInteractive::load(const std::string& filename) {
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 		   filename.c_str());
 	}
-	ml->preload_map(true);
+	ml->preload_map(true, &egbase().enabled_addons());
+
+	EditorInteractive::load_world_units(this, egbase());
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
@@ -472,7 +475,11 @@ void EditorInteractive::load(const std::string& filename) {
 void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
+	// TODO(Nordfriese): …and then we can get rid of delete_world_and_tribes() as well
 	egbase().cleanup_for_load();
+	// This is needed so add-ons are configured correctly if current
+	// and previous map had different world add-on settings
+	egbase().delete_world_and_tribes();
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -965,6 +972,16 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
+
+	// We need to disable non-world add-ons in the editor
+	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
+		if (it->category != AddOns::AddOnCategory::kWorld) {
+			it = egbase.enabled_addons().erase(it);
+		} else {
+			++it;
+		}
+	}
+
 	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 	EditorInteractive::load_world_units(&eia, egbase);
 
@@ -977,6 +994,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
 		eia.load(filename);
 
+		egbase.postload_addons();
 		egbase.postload();
 		eia.start();
 		if (!script_to_run.empty()) {
@@ -991,7 +1009,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
 		}
 
-		Notifications::publish(UI::NoteLoadingMessage(_("Postloading editor…")));
+		egbase.postload_addons();
 		egbase.postload();
 
 		egbase.mutable_map()->create_empty_map(
@@ -1030,6 +1048,13 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	log_info("┏━ Loading world\n");
 	ScopedTimer timer("┗━ took %ums");
 
+	if (eia) {
+		// In order to ensure that items created by add-ons are properly
+		// removed from the editor's object selection menus, we clear
+		// and repopulate these menus every time the world is reloaded.
+		eia->editor_categories_.clear();
+	}
+
 	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
 	auto load_category = [eia, descriptions](const LuaTable& t, const std::string& key,
@@ -1045,6 +1070,12 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 			}
 		}
 	};
+	auto load_resources = [](const LuaTable& t) {
+		for (const std::string& item : t.get_table("resources")->array_entries<std::string>()) {
+			Notifications::publish(Widelands::NoteMapObjectDescription(
+			   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+		}
+	};
 
 	log_info("┃    Critters");
 	load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
@@ -1056,9 +1087,17 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
 
 	log_info("┃    Resources");
-	for (const std::string& item : table->get_table("resources")->array_entries<std::string>()) {
-		Notifications::publish(Widelands::NoteMapObjectDescription(
-		   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
+	load_resources(*table);
+
+	for (const AddOns::AddOnInfo& info : egbase.enabled_addons()) {
+		if (info.category == AddOns::AddOnCategory::kWorld) {
+			log_info("┃    Add-On ‘%s’", info.internal_name.c_str());
+			table = egbase.lua().run_script(kAddOnDir + '/' + info.internal_name + "/editor.lua");
+			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
+			load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
+			load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
+			load_resources(*table);
+		}
 	}
 }
 
@@ -1091,6 +1130,10 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		break;
 
 	case MapWas::kGloballyMutated:
+		break;
+
+	case MapWas::kResized:
+		resize_minimap();
 		break;
 	}
 }

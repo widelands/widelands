@@ -56,6 +56,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -74,6 +75,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
+#include "ui_fsmenu/addons.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/internet_lobby.h"
@@ -280,6 +282,8 @@ void WLApplication::setup_homedir() {
 #else
 	set_config_directory(homedir_);
 #endif
+
+	i18n::set_homedir(homedir_);
 }
 
 WLApplication* WLApplication::the_singleton = nullptr;
@@ -403,6 +407,45 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", "intro");
 	g_sh->register_songs("music", "menu");
 	g_sh->register_songs("music", "ingame");
+
+	if (g_fs->is_directory(kAddOnDir)) {
+		std::set<std::string> found;
+		for (std::string desired_addons = get_config_string("addons", ""); !desired_addons.empty();) {
+			const size_t commapos = desired_addons.find(',');
+			const std::string substring = desired_addons.substr(0, commapos);
+			const size_t colonpos = desired_addons.find(':');
+			if (colonpos == std::string::npos) {
+				log_warn("Ignoring malformed add-ons config substring '%s'\n", substring.c_str());
+			} else {
+				const std::string name = substring.substr(0, colonpos);
+				if (name.find(kAddOnExtension) != name.length() - kAddOnExtension.length()) {
+					log_warn("Not loading add-on '%s' (wrong file name extension)\n", name.c_str());
+				} else {
+					std::string path(kAddOnDir);
+					path += FileSystem::file_separator();
+					path += name;
+					if (g_fs->file_exists(path)) {
+						found.insert(name);
+						AddOns::g_addons.push_back(std::make_pair(
+						   AddOns::preload_addon(name), substring.substr(colonpos) == ":true"));
+					} else {
+						log_warn("Not loading add-on '%s' (not found)\n", name.c_str());
+					}
+				}
+			}
+			if (commapos == std::string::npos) {
+				break;
+			}
+			desired_addons = desired_addons.substr(commapos + 1);
+		}
+		for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
+			std::string addon_name(FileSystem::fs_filename(name.c_str()));
+			if (!found.count(addon_name) &&
+			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
+				AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(addon_name), false));
+			}
+		}
+	}
 
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to
@@ -873,6 +916,7 @@ bool WLApplication::init_settings() {
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	get_config_bool("display_replay_filenames", false);
 	get_config_bool("editor_player_menu_warn_too_many_players", false);
+	get_config_string("addons", "");
 	// Undocumented, on command line, appears in game options
 	get_config_bool("sound", "enable_ambient", true);
 	get_config_bool("sound", "enable_chat", true);
@@ -929,7 +973,7 @@ void WLApplication::init_language() {
 
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-	i18n::grab_textdomain("widelands");
+	i18n::grab_textdomain("widelands", i18n::get_localedir().c_str());
 
 	// Set locale corresponding to selected language
 	std::string language = get_config_string("language", "");
@@ -1236,6 +1280,10 @@ void WLApplication::mainmenu(std::string messagetitle, std::string message) {
 			case MenuTarget::kReplay:
 				need_to_reset = replay(mm.get());
 				break;
+			case MenuTarget::kAddOns: {
+				FsMenu::AddOnsCtrl a(*mm);
+				a.run<int>();
+			} break;
 			case MenuTarget::kOptions: {
 				OptionsCtrl om(*mm, get_config_section());
 				mm->set_labels();  // update buttons for new language

@@ -106,6 +106,9 @@ public:
 		pinned_ = p;
 		update_toolbar_buttons();
 	}
+	Button* get_button_pin() {
+		return button_pin_;
+	}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;

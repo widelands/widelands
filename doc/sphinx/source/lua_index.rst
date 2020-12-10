@@ -10,5 +10,6 @@ Contents:
    tutorial
    reference
    roadmap
+   add-ons
    wlrichtext
    implementation

@@ -215,6 +215,7 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
 	add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
 	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
+	add_font_style(UI::FontStyle::kItalic, *element_table, "italic");
 	add_font_style(
 	   UI::FontStyle::kFsGameSetupHeadings, *element_table, "fsmenu_game_setup_headings");
 	add_font_style(

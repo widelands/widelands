@@ -23,6 +23,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "logic/addons.h"
 #include "logic/map.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/building.h"
@@ -108,7 +109,11 @@ public:
 	void load_all_tribes();
 	void allocate_player_maps();
 	virtual void postload();
+	void postload_addons();
 	virtual void cleanup_for_load();
+	void delete_world_and_tribes();
+
+	void init_addons(bool world_only);
 
 	/// Create a new loader UI and register which type of gametips to select from.
 	/// If 'show_game_tips' is true, game tips will be shown immediately.
@@ -210,6 +215,13 @@ public:
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
+	std::vector<AddOns::AddOnInfo>& enabled_addons() {
+		return enabled_addons_;
+	}
+	const std::vector<AddOns::AddOnInfo>& enabled_addons() const {
+		return enabled_addons_;
+	}
+
 private:
 	/// Common function for create_critter and create_ship.
 	Bob& create_bob(Coords, const BobDescr&, Player* owner = nullptr);
@@ -277,6 +289,8 @@ private:
 	/// a temporary file (in a special dir) is created for such data.
 	std::unique_ptr<FileSystem> tmp_fs_;
 	void delete_tempfile();
+
+	std::vector<AddOns::AddOnInfo> enabled_addons_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };
