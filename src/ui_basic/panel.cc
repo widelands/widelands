@@ -948,9 +948,14 @@ void Panel::set_tooltip(const std::string& text) {
 
 	tooltip_ = text;
 
-	if (!text.empty() && extended_tooltip_accessibility_mode() && tooltip_accessibility_mode()) {
-		tooltip_panel_ = this;
-		tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
+	if (extended_tooltip_accessibility_mode() && tooltip_accessibility_mode()) {
+		if (text.empty() && tooltip_panel_ == this) {
+			tooltip_panel_ = nullptr;
+			tooltip_fixed_pos_ = Vector2i::invalid();
+		} else if (!text.empty()) {
+			tooltip_panel_ = this;
+			tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
+		}
 	}
 }
 
