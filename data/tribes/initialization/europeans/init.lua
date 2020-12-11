@@ -5,7 +5,7 @@ dirname = path.dirname(__file__)
 push_textdomain("tribes")
 
 local r = {
-   -- Basic information for the Empire tribe
+   -- Basic information for the Europeans tribe
    name = "europeans",
    author = _"Mark McWire",
    -- TRANSLATORS: This is a tribe name

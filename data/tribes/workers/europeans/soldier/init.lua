@@ -1,7 +1,6 @@
 push_textdomain("tribes")
 
 dirname = path.dirname(__file__)
-level_indicator = dirname .. "/level_indicator/"
 
 animations = {
    idle = {
@@ -86,7 +85,8 @@ descriptions:new_soldier_type {
    vision_range = 2,
 
    animations = animations,
-
+   level_indicator = dirname,
+   
    -- Battle attributes - initial values and per level increase
    health = {
       max_level = 6,

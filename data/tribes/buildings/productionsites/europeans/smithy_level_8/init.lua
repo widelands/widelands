@@ -421,7 +421,7 @@ descriptions:new_productionsite_type {
             "consume=spidercloth coal iron:2 gold",
             "sleep=duration:10s",
             "animate=working duration:30s",
-            "produce=armor_gilded"
+            "produce=tabard_golden"
          }
       },
       produce_armor_gilded = {
