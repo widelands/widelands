@@ -1499,7 +1499,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return map_view_.handle_key(down, code);
+	if (map_view_.handle_key(down, code)) {
+		return true;
+	}
+	return UI::Panel::handle_key(down, code);
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
