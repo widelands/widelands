@@ -692,7 +692,7 @@ void AddOnsCtrl::rebuild() {
 					return false;
 				} else if (b.number_of_votes() == 0) {
 					return true;
-				} else if (std::abs(a.average_rating() - b.average_rating()) < 0.01f) {
+				} else if (std::abs(a.average_rating() - b.average_rating()) < 0.01) {
 					// ambiguity – always choose the one with more votes
 					return a.number_of_votes() > b.number_of_votes();
 				} else {
@@ -703,7 +703,7 @@ void AddOnsCtrl::rebuild() {
 					return false;
 				} else if (b.number_of_votes() == 0) {
 					return true;
-				} else if (std::abs(a.average_rating() - b.average_rating()) < 0.01f) {
+				} else if (std::abs(a.average_rating() - b.average_rating()) < 0.01) {
 					return a.number_of_votes() > b.number_of_votes();
 				} else {
 					return a.average_rating() > b.average_rating();
