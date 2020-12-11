@@ -124,6 +124,10 @@ WorkerDescr::~WorkerDescr() {  // NOLINT
 	                            // WorkerProgram needs this
 }
 
+void WorkerDescr::set_becomes(Descriptions& d, const std::string& become) {
+	becomes_ = d.load_worker(become);
+}
+
 void WorkerDescr::set_default_target_quantity(int quantity) {
 	if (quantity < 0) {
 		throw GameDataError(

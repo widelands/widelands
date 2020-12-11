@@ -83,7 +83,7 @@ public:
 	std::set<std::string> tags;
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;
-	AddOnRequirements required_addons;
+	AddOns::AddOnRequirements required_addons;
 };
 
 #endif  // end of include guard: WL_WUI_MAPDATA_H

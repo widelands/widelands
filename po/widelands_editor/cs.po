@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
+# Ondřej Itřech, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-10 18:58+0000\n"
-"PO-Revision-Date: 2020-09-04 08:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-11-29 22:44+0000\n"
+"PO-Revision-Date: 2020-12-02 11:38+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgstr "Nápověda"
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgctxt "hotkey"
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
@@ -196,13 +197,13 @@ msgstr "Suroviny"
 #. TRANSLATORS: A header in the editor help if there is 1 valid resource
 #: ../../data/scripting/editor/terrain_help.lua:25
 msgid "Valid Resource:"
-msgstr ""
+msgstr "Platný zdroj:"
 
 #. TRANSLATORS: A header in the editor help if there is more than 1 valid
 #. resource
 #: ../../data/scripting/editor/terrain_help.lua:28
 msgid "Valid Resources:"
-msgstr ""
+msgstr "Platné zdroje:"
 
 #: ../../data/scripting/editor/terrain_help.lua:39
 msgid "Default:"
@@ -228,7 +229,7 @@ msgstr "Zde stromy neporostou."
 #: ../../data/scripting/editor/tree_tooltip.lua:22
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: A header in the editor help. Terrains preferred by a type of
 #. tree.

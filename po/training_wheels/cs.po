@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2020 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Ondřej Itřech, 2020
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-10 18:58+0000\n"
+"POT-Creation-Date: 2020-11-29 22:44+0000\n"
 "PO-Revision-Date: 2020-10-19 15:32+0000\n"
+"Last-Translator: Ondřej Itřech, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +25,7 @@ msgstr ""
 #: ../../data/scripting/training_wheels/building_spaces.lua:49
 #: ../../data/scripting/training_wheels/init.lua:153
 msgid "Building Spaces"
-msgstr ""
+msgstr "Stavební místa"
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:31
 msgid "We will want to place buildings so that we can produce wares."
@@ -37,7 +41,7 @@ msgstr ""
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:44
 msgid "Select ‘Show Building Spaces’."
-msgstr ""
+msgstr "Vyber \"Zobrazit stavební místa\""
 
 #: ../../data/scripting/training_wheels/building_spaces.lua:54
 msgid "Now we can see where it is possible to place buildings and flags."
