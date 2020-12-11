@@ -44,17 +44,17 @@ class AddOnsCtrl;
 struct ProgressIndicatorWindow;
 
 struct InstalledAddOnRow : public UI::Panel {
-	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOnInfo&, bool enabled);
+	InstalledAddOnRow(Panel*, AddOnsCtrl*, const AddOns::AddOnInfo&, bool enabled);
 	~InstalledAddOnRow() override {
 	}
-	const AddOnInfo& info() const {
+	const AddOns::AddOnInfo& info() const {
 		return info_;
 	}
 	void layout() override;
 	void draw(RenderTarget&) override;
 
 private:
-	AddOnInfo info_;
+	AddOns::AddOnInfo info_;
 	bool enabled_;
 	UI::Button uninstall_;
 	std::unique_ptr<UI::Button> toggle_enabled_;
@@ -65,14 +65,14 @@ private:
 struct RemoteAddOnRow : public UI::Panel {
 	RemoteAddOnRow(Panel*,
 	               AddOnsCtrl*,
-	               const AddOnInfo&,
-	               uint32_t installed_version,
+	               const AddOns::AddOnInfo&,
+	               const AddOns::AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {
 	}
 	void layout() override;
 	void draw(RenderTarget&) override;
-	const AddOnInfo& info() const {
+	const AddOns::AddOnInfo& info() const {
 		return info_;
 	}
 	bool upgradeable() const;
@@ -81,7 +81,7 @@ struct RemoteAddOnRow : public UI::Panel {
 	}
 
 private:
-	AddOnInfo info_;
+	AddOns::AddOnInfo info_;
 	UI::Button install_, upgrade_, uninstall_, interact_;
 	UI::Icon category_, verified_;
 	UI::Textarea version_, bottom_row_left_, bottom_row_right_;
@@ -98,8 +98,8 @@ public:
 	void rebuild();
 	void update_dependency_errors();
 
-	void install(const AddOnInfo&);
-	void upgrade(const AddOnInfo&, bool full_upgrade);
+	void install(const AddOns::AddOnInfo&);
+	void upgrade(const AddOns::AddOnInfo&, bool full_upgrade);
 
 	bool handle_key(bool, SDL_Keysym) override;
 
@@ -131,7 +131,7 @@ private:
 	   installed_addons_buttons_box_, installed_addons_box_, browse_addons_outer_wrapper_,
 	   browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_buttons_inner_box_1_,
 	   browse_addons_buttons_inner_box_2_, browse_addons_box_;
-	std::map<AddOnCategory, UI::Checkbox*> filter_category_;
+	std::map<AddOns::AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
 	UI::EditBox filter_name_;
 	UI::Checkbox filter_verified_;
@@ -139,22 +139,22 @@ private:
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_, move_top_,
 	   move_up_, move_down_, move_bottom_;
 
-	void category_filter_changed(AddOnCategory);
+	void category_filter_changed(AddOns::AddOnCategory);
 	void check_enable_move_buttons();
-	const AddOnInfo& selected_installed_addon() const;
-	void focus_installed_addon_row(const AddOnInfo&);
+	const AddOns::AddOnInfo& selected_installed_addon() const;
+	void focus_installed_addon_row(const AddOns::AddOnInfo&);
 
 	void autofix_dependencies();
 
-	NetAddons network_handler_;
+	AddOns::NetAddons network_handler_;
 
-	std::vector<AddOnInfo> remotes_;
+	std::vector<AddOns::AddOnInfo> remotes_;
 	void refresh_remotes();
 
-	bool matches_filter(const AddOnInfo&);
+	bool matches_filter(const AddOns::AddOnInfo&);
 
-	std::string download_addon(ProgressIndicatorWindow&, const AddOnInfo&);
-	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOnInfo&);
+	std::string download_addon(ProgressIndicatorWindow&, const AddOns::AddOnInfo&);
+	std::set<std::string> download_i18n(ProgressIndicatorWindow&, const AddOns::AddOnInfo&);
 
 	void inform_about_restart(const std::string&);
 };
