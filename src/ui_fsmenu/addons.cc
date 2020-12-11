@@ -479,6 +479,8 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
 
+	do_not_layout_on_resolution_change();
+
 	refresh_remotes();
 }
 
