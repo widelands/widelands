@@ -76,7 +76,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs armor_chain",
             "checksoldier=soldier:health level:0", -- Fails when aren't any soldier of level 0 health
-            "sleep=duration:90s",
+            "sleep=duration:30s",
             "checksoldier=soldier:health level:0", -- Because the soldier can be expelled by the player
             "consume=europeans_bread smoked_fish,smoked_meat armor_chain",
             "train=soldier:health level:1",
@@ -89,7 +89,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs armor_helmet and economy needs helmet",
             "checksoldier=soldier:health level:1", -- Fails when aren't any soldier of level 0 health
-            "sleep=duration:90s",
+            "sleep=duration:30s",
             "checksoldier=soldier:health level:1", -- Because the soldier can be expelled by the player
             "consume=europeans_bread smoked_fish,smoked_meat armor_helmet",
             "train=soldier:health level:2",
@@ -102,7 +102,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs helmet_mask",
             "checksoldier=soldier:health level:2", -- Fails when aren't any soldier of level 0 health
-            "sleep=duration:90s",
+            "sleep=duration:30s",
             "checksoldier=soldier:health level:2", -- Because the soldier can be expelled by the player
             "consume=europeans_bread smoked_fish,smoked_meat helmet_mask",
             "train=soldier:health level:3",

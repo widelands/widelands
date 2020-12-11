@@ -80,7 +80,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs trident_steel",
             "checksoldier=soldier:attack level:2",
-            "sleep=duration:70s",
+            "sleep=duration:45s",
             "checksoldier=soldier:attack level:2",
             "consume=europeans_bread smoked_fish,smoked_meat trident_steel",
             "train=soldier:attack level:3",
@@ -93,7 +93,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs trident_double",
             "checksoldier=soldier:attack level:3",
-            "sleep=duration:70s",
+            "sleep=duration:45s",
             "checksoldier=soldier:attack level:3",
             "consume=europeans_bread smoked_fish,smoked_meat sword_broad",
             "train=soldier:attack level:4",

@@ -205,7 +205,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs shield_advanced",
             "checksoldier=soldier:defense level:3", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:60s",
+            "sleep=duration:45s",
             "checksoldier=soldier:defense level:3", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
             "train=soldier:defense level:4",
@@ -217,7 +217,7 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 4 to level 5"),
          actions = {
             "checksoldier=soldier:defense level:4", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:60s",
+            "sleep=duration:45s",
             "checksoldier=soldier:defense level:4", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat",
             "train=soldier:defense level:5"
@@ -228,7 +228,7 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 5 to level 6"),
          actions = {
             "checksoldier=soldier:defense level:5", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:60s",
+            "sleep=duration:45s",
             "checksoldier=soldier:defense level:5", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat",
             "train=soldier:defense level:6"
@@ -240,7 +240,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs ax_warriors",
             "checksoldier=soldier:attack level:4",
-            "sleep=duration:60s",
+            "sleep=duration:45s",
             "checksoldier=soldier:attack level:4",
             "consume=europeans_bread smoked_fish,smoked_meat ax_warriors",
             "train=soldier:attack level:5",
@@ -253,7 +253,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs trident_heavy_double",
             "checksoldier=soldier:attack level:5",
-            "sleep=duration:60s",
+            "sleep=duration:45s",
             "checksoldier=soldier:attack level:5",
             "consume=europeans_bread smoked_fish,smoked_meat trident_heavy_double",
             "train=soldier:attack level:6",

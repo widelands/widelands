@@ -74,7 +74,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs shield_steel",
             "checksoldier=soldier:defense level:0", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:90s",
+            "sleep=duration:45s",
             "checksoldier=soldier:defense level:0", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat shield_steel",
             "train=soldier:defense level:1",
@@ -86,7 +86,7 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
             "checksoldier=soldier:defense level:1", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:90s",
+            "sleep=duration:45s",
             "checksoldier=soldier:defense level:1", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat",
             "train=soldier:defense level:2"
@@ -97,7 +97,7 @@ descriptions:new_trainingsite_type {
          descname = pgettext("europeans_building", "upgrading soldier defense from level 2 to level 3"),
          actions = {
             "checksoldier=soldier:defense level:2", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:90s",
+            "sleep=duration:45s",
             "checksoldier=soldier:defense level:2", -- Because the soldier can be expulsed by the player
             "consume=europeans_bread smoked_fish,smoked_meat",
             "train=soldier:defense level:3"

@@ -94,7 +94,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs beer",
             "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
-            "sleep=duration:90s",
+            "sleep=duration:60s",
             "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
             "consume=europeans_bread smoked_fish,smoked_meat beer:3",
             "train=soldier:evade level:1"
@@ -106,7 +106,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs mead",
             "checksoldier=soldier:evade level:1", -- Fails when aren't any soldier of level 1 evade
-            "sleep=duration:90s",
+            "sleep=duration:60s",
             "checksoldier=soldier:evade level:1", -- Because the soldier can be expelled by the player
             "consume=europeans_bread:2 smoked_fish,smoked_meat:2 mead:3",
             "train=soldier:evade level:2"

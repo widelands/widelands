@@ -79,7 +79,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs spear",
             "checksoldier=soldier:attack level:0",
-            "sleep=duration:90s",
+            "sleep=duration:45s",
             "checksoldier=soldier:attack level:0",
             "consume=europeans_bread smoked_fish,smoked_meat spear_advanced",
             "train=soldier:attack level:1",
@@ -92,7 +92,7 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs spear_advanced",
             "checksoldier=soldier:attack level:1",
-            "sleep=duration:90s",
+            "sleep=duration:45s",
             "checksoldier=soldier:attack level:1",
             "consume=europeans_bread smoked_fish,smoked_meat ax_broad",
             "train=soldier:attack level:2",
