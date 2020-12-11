@@ -12,12 +12,12 @@ descriptions:new_tribe {
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {5, 35} },
-      bridge_normal_e = { hotspot = {-2, 11} },
-      bridge_busy_e = { hotspot = {-2, 11} },
-      bridge_normal_se = { hotspot = {5, 2} },
-      bridge_busy_se = { hotspot = {5, 2} },
-      bridge_normal_sw = { hotspot = {36, 6} },
-      bridge_busy_sw = { hotspot = {36, 3} }
+      bridge_normal_e =  { hotspot = {-1, 15}},
+      bridge_busy_e =    { hotspot = {-1, 15}},
+      bridge_normal_se = { hotspot = {5, 4}},
+      bridge_busy_se =   { hotspot = {5, 4}},
+      bridge_normal_sw = { hotspot = {40, 1}},
+      bridge_busy_sw =   { hotspot = {40, 1}}
    },
    spritesheets = {
       flag = {
@@ -29,7 +29,7 @@ descriptions:new_tribe {
       }
    },
 
-   bridge_height = 8,
+   bridge_height = 6,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {
