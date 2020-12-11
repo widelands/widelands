@@ -67,7 +67,7 @@ public:
 	// Update the text area without relayouting
 	void set_time_string(const std::string&);
 	void set_speed_string(const std::string&);
-	void set_fps_string(const std::string& long_string, const std::string& short_string);
+	void set_fps_string(bool show, double fps, double average);
 	void set_coords_string(const std::string&);
 
 	void log_message(const std::string&);

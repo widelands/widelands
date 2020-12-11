@@ -747,14 +747,7 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 
 	// In-game clock and FPS
 	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime().get(), true) : "");
-	info_panel_.set_fps_string(
-	   get_display_flag(dfDebug) ?
-	      (boost::format("%5.1f fps (avg: %5.1f fps)") % (1000.0 / frametime_) % average_fps())
-	         .str() :
-	      "",
-	   get_display_flag(dfDebug) ?
-	      (boost::format("%.1f / %.1f") % (1000.0 / frametime_) % average_fps()).str() :
-	      "");
+	info_panel_.set_fps_string(get_display_flag(dfDebug), 1000.0 / frametime_, average_fps());
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,

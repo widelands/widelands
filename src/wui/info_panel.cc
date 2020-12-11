@@ -365,15 +365,21 @@ void InfoPanel::push_message(MessagePreview* message) {
 	layout();
 }
 
-void InfoPanel::set_fps_string(const std::string& long_string, const std::string& short_string) {
-	if (get_w() < 970) {
-		// The FPS string overlaps with the coords string at low resolution.
-		// Therefore only show it if the available width exceeds an arbitrary threshold.
-		text_fps_.set_text(short_string);
-		text_fps_.set_tooltip(long_string);
-	} else {
-		text_fps_.set_text(long_string);
+void InfoPanel::set_fps_string(const bool show, const double fps, const double average) {
+	if (!show) {
+		text_fps_.set_text("");
 		text_fps_.set_tooltip("");
+	} else {
+		const std::string text = (boost::format("%5.1f fps (avg: %5.1f fps)") % fps % average).str();
+		// The FPS string overlaps with the coords string at low resolution.
+		// Therefore abbreviate it if the available width is less than an arbitrary threshold.
+		if (get_w() < 970) {
+			text_fps_.set_text((boost::format("%.1f / %.1f") % fps % average).str());
+			text_fps_.set_tooltip(text);
+		} else {
+			text_fps_.set_text(text);
+			text_fps_.set_tooltip("");
+		}
 	}
 }
 void InfoPanel::set_coords_string(const std::string& t) {
