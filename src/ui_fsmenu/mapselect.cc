@@ -282,8 +282,8 @@ void MapSelect::fill_table() {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
 	} else {
 		// In the toplevel directory we also need to include add-on maps
-		for (auto& addon : g_addons) {
-			if (addon.first.category == AddOnCategory::kMaps) {
+		for (auto& addon : AddOns::g_addons) {
+			if (addon.first.category == AddOns::AddOnCategory::kMaps) {
 				for (const std::string& mapname : g_fs->list_directory(
 				        kAddOnDir + FileSystem::file_separator() + addon.first.internal_name)) {
 					files.insert(mapname);

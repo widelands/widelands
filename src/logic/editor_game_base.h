@@ -218,10 +218,10 @@ public:
 
 	void create_tempfile_and_save_mapdata(FileSystem::Type type);
 
-	std::vector<AddOnInfo>& enabled_addons() {
+	std::vector<AddOns::AddOnInfo>& enabled_addons() {
 		return enabled_addons_;
 	}
-	const std::vector<AddOnInfo>& enabled_addons() const {
+	const std::vector<AddOns::AddOnInfo>& enabled_addons() const {
 		return enabled_addons_;
 	}
 
@@ -293,7 +293,7 @@ private:
 	std::unique_ptr<FileSystem> tmp_fs_;
 	void delete_tempfile();
 
-	std::vector<AddOnInfo> enabled_addons_;
+	std::vector<AddOns::AddOnInfo> enabled_addons_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

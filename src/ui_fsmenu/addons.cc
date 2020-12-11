@@ -303,8 +303,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	filter_name_.set_tooltip(_("Filter add-ons by name"));
 	{
 		uint8_t index = 0;
-		for (const auto& pair : kAddOnCategories) {
-			if (pair.first == AddOnCategory::kNone) {
+		for (const auto& pair : AddOns::kAddOnCategories) {
+			if (pair.first == AddOns::AddOnCategory::kNone) {
 				continue;
 			}
 			UI::Checkbox* c = new UI::Checkbox(
@@ -359,7 +359,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		filter_reset_.set_enabled(false);
 	});
 	upgrade_all_.sigclicked.connect([this]() {
-		std::vector<std::pair<AddOnInfo, bool /* full upgrade */>> upgrades;
+		std::vector<std::pair<AddOns::AddOnInfo, bool /* full upgrade */>> upgrades;
 		bool all_verified = true;
 		size_t nr_full_updates = 0;
 		for (const RemoteAddOnRow* r : browse_) {
@@ -402,52 +402,52 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	});
 
 	move_up_.sigclicked.connect([this]() {
-		const AddOnInfo info = selected_installed_addon();
-		auto it = g_addons.begin();
+		const AddOns::AddOnInfo info = selected_installed_addon();
+		auto it = AddOns::g_addons.begin();
 		while (it->first.internal_name != info.internal_name) {
 			++it;
 		}
 		const bool state = it->second;
-		it = g_addons.erase(it);
+		it = AddOns::g_addons.erase(it);
 		--it;
-		g_addons.insert(it, std::make_pair(info, state));
+		AddOns::g_addons.insert(it, std::make_pair(info, state));
 		rebuild();
 		focus_installed_addon_row(info);
 	});
 	move_down_.sigclicked.connect([this]() {
-		const AddOnInfo info = selected_installed_addon();
-		auto it = g_addons.begin();
+		const AddOns::AddOnInfo info = selected_installed_addon();
+		auto it = AddOns::g_addons.begin();
 		while (it->first.internal_name != info.internal_name) {
 			++it;
 		}
 		const bool state = it->second;
-		it = g_addons.erase(it);
+		it = AddOns::g_addons.erase(it);
 		++it;
-		g_addons.insert(it, std::make_pair(info, state));
+		AddOns::g_addons.insert(it, std::make_pair(info, state));
 		rebuild();
 		focus_installed_addon_row(info);
 	});
 	move_top_.sigclicked.connect([this]() {
-		const AddOnInfo info = selected_installed_addon();
-		auto it = g_addons.begin();
+		const AddOns::AddOnInfo info = selected_installed_addon();
+		auto it = AddOns::g_addons.begin();
 		while (it->first.internal_name != info.internal_name) {
 			++it;
 		}
 		const bool state = it->second;
-		it = g_addons.erase(it);
-		g_addons.insert(g_addons.begin(), std::make_pair(info, state));
+		it = AddOns::g_addons.erase(it);
+		AddOns::g_addons.insert(AddOns::g_addons.begin(), std::make_pair(info, state));
 		rebuild();
 		focus_installed_addon_row(info);
 	});
 	move_bottom_.sigclicked.connect([this]() {
-		const AddOnInfo info = selected_installed_addon();
-		auto it = g_addons.begin();
+		const AddOns::AddOnInfo info = selected_installed_addon();
+		auto it = AddOns::g_addons.begin();
 		while (it->first.internal_name != info.internal_name) {
 			++it;
 		}
 		const bool state = it->second;
-		it = g_addons.erase(it);
-		g_addons.push_back(std::make_pair(info, state));
+		it = AddOns::g_addons.erase(it);
+		AddOns::g_addons.push_back(std::make_pair(info, state));
 		rebuild();
 		focus_installed_addon_row(info);
 	});
@@ -484,7 +484,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 
 AddOnsCtrl::~AddOnsCtrl() {
 	std::string text;
-	for (const auto& pair : g_addons) {
+	for (const auto& pair : AddOns::g_addons) {
 		if (!text.empty()) {
 			text += ',';
 		}
@@ -494,10 +494,10 @@ AddOnsCtrl::~AddOnsCtrl() {
 	write_config();
 }
 
-inline const AddOnInfo& AddOnsCtrl::selected_installed_addon() const {
+inline const AddOns::AddOnInfo& AddOnsCtrl::selected_installed_addon() const {
 	return dynamic_cast<InstalledAddOnRow&>(*installed_addons_box_.focused_child()).info();
 }
-void AddOnsCtrl::focus_installed_addon_row(const AddOnInfo& info) {
+void AddOnsCtrl::focus_installed_addon_row(const AddOns::AddOnInfo& info) {
 	for (UI::Panel* p = installed_addons_box_.get_first_child(); p; p = p->get_next_sibling()) {
 		if (dynamic_cast<InstalledAddOnRow&>(*p).info().internal_name == info.internal_name) {
 			p->focus();
@@ -513,7 +513,7 @@ void AddOnsCtrl::think() {
 }
 
 static bool category_filter_changing = false;
-void AddOnsCtrl::category_filter_changed(const AddOnCategory which) {
+void AddOnsCtrl::category_filter_changed(const AddOns::AddOnCategory which) {
 	// protect against recursion
 	if (category_filter_changing) {
 		return;
@@ -539,12 +539,12 @@ void AddOnsCtrl::check_enable_move_buttons() {
 		b->set_enabled(enable_move_buttons);
 	}
 	if (enable_move_buttons) {
-		const AddOnInfo& sel = selected_installed_addon();
-		if (sel.internal_name == g_addons.begin()->first.internal_name) {
+		const AddOns::AddOnInfo& sel = selected_installed_addon();
+		if (sel.internal_name == AddOns::g_addons.begin()->first.internal_name) {
 			move_top_.set_enabled(false);
 			move_up_.set_enabled(false);
 		}
-		if (sel.internal_name == g_addons.back().first.internal_name) {
+		if (sel.internal_name == AddOns::g_addons.back().first.internal_name) {
 			move_down_.set_enabled(false);
 			move_bottom_.set_enabled(false);
 		}
@@ -573,34 +573,34 @@ void AddOnsCtrl::refresh_remotes() {
 		std::string error = e.what();
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
 		const std::string bug = _("a networking bug");
-		remotes_ = {
-		   AddOnInfo{"",
-		             []() { return _("Server Connection Error"); },
-		             [error]() {
-			             return (boost::format(_("Unable to fetch the list of available add-ons from "
-			                                     "the server!<br>Error Message: %s")) %
-			                     error)
-			                .str();
-		             },
-		             [bug]() { return bug; },
-		             0,
-		             0,
-		             AddOnCategory::kNone,
-		             {},
-		             false,
-		             {{}, {}, {}, {}},
-		             0,
-		             bug,
-		             std::time(nullptr),
-		             0,
-		             0,
-		             0.f,
-		             {}}};
+		remotes_ = {AddOns::AddOnInfo{
+		   "",
+		   []() { return _("Server Connection Error"); },
+		   [error]() {
+			   return (boost::format(_("Unable to fetch the list of available add-ons from "
+			                           "the server!<br>Error Message: %s")) %
+			           error)
+			      .str();
+		   },
+		   [bug]() { return bug; },
+		   {},
+		   0,
+		   AddOns::AddOnCategory::kNone,
+		   {},
+		   false,
+		   {{}, {}, {}, {}},
+		   0,
+		   bug,
+		   std::time(nullptr),
+		   0,
+		   0,
+		   0.f,
+		   {}}};
 	}
 	rebuild();
 }
 
-bool AddOnsCtrl::matches_filter(const AddOnInfo& info) {
+bool AddOnsCtrl::matches_filter(const AddOns::AddOnInfo& info) {
 	if (info.internal_name.empty()) {
 		// always show error messages
 		return true;
@@ -648,7 +648,7 @@ void AddOnsCtrl::rebuild() {
 	assert(browse_addons_box_.get_nritems() == 0);
 
 	size_t index = 0;
-	for (const auto& pair : g_addons) {
+	for (const auto& pair : AddOns::g_addons) {
 		if (index > 0) {
 			installed_addons_box_.add_space(kRowButtonSize);
 		}
@@ -660,15 +660,15 @@ void AddOnsCtrl::rebuild() {
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
 
 	index = 0;
-	std::list<AddOnInfo> remotes_to_show;
-	for (const AddOnInfo& a : remotes_) {
+	std::list<AddOns::AddOnInfo> remotes_to_show;
+	for (const AddOns::AddOnInfo& a : remotes_) {
 		if (matches_filter(a)) {
 			remotes_to_show.push_back(a);
 		}
 	}
 	{
 		const AddOnSortingCriteria sort_by = sort_order_.get_selected();
-		remotes_to_show.sort([sort_by](const AddOnInfo& a, const AddOnInfo& b) {
+		remotes_to_show.sort([sort_by](const AddOns::AddOnInfo& a, const AddOns::AddOnInfo& b) {
 			switch (sort_by) {
 			case AddOnSortingCriteria::kNameABC:
 				return a.descname().compare(b.descname()) < 0;
@@ -713,13 +713,13 @@ void AddOnsCtrl::rebuild() {
 		});
 	}
 	std::vector<std::string> has_upgrades;
-	for (const AddOnInfo& a : remotes_to_show) {
+	for (const AddOns::AddOnInfo& a : remotes_to_show) {
 		if (0 < index++) {
 			browse_addons_box_.add_space(kRowButtonSize);
 		}
-		uint32_t installed = kNotInstalled;
-		uint32_t installed_i18n = kNotInstalled;
-		for (const auto& pair : g_addons) {
+		AddOns::AddOnVersion installed;
+		uint32_t installed_i18n = 0;
+		for (const auto& pair : AddOns::g_addons) {
 			if (pair.first.internal_name == a.internal_name) {
 				installed = pair.first.version;
 				installed_i18n = pair.first.i18n_version;
@@ -765,15 +765,15 @@ void AddOnsCtrl::rebuild() {
 
 void AddOnsCtrl::update_dependency_errors() {
 	std::vector<std::string> warn_requirements;
-	for (auto addon = g_addons.begin(); addon != g_addons.end(); ++addon) {
-		if (!addon->second && kAddOnCategories.at(addon->first.category).can_disable_addons) {
+	for (auto addon = AddOns::g_addons.begin(); addon != AddOns::g_addons.end(); ++addon) {
+		if (!addon->second && AddOns::kAddOnCategories.at(addon->first.category).can_disable_addons) {
 			// Disabled, so we don't care about dependencies
 			continue;
 		}
 		for (const std::string& requirement : addon->first.requirements) {
-			std::vector<AddOnState>::iterator search_result = g_addons.end();
+			std::vector<AddOns::AddOnState>::iterator search_result = AddOns::g_addons.end();
 			bool too_late = false;
-			for (auto search = g_addons.begin(); search != g_addons.end(); ++search) {
+			for (auto search = AddOns::g_addons.begin(); search != AddOns::g_addons.end(); ++search) {
 				if (search->first.internal_name == requirement) {
 					search_result = search;
 					break;
@@ -783,14 +783,14 @@ void AddOnsCtrl::update_dependency_errors() {
 					too_late = true;
 				}
 			}
-			if (search_result == g_addons.end()) {
+			if (search_result == AddOns::g_addons.end()) {
 				warn_requirements.push_back(
 				   (boost::format(_("· ‘%1$s’ requires ‘%2$s’ which could not be found")) %
 				    addon->first.descname() % requirement)
 				      .str());
 			} else {
 				if (!search_result->second &&
-				    kAddOnCategories.at(search_result->first.category).can_disable_addons) {
+				    AddOns::kAddOnCategories.at(search_result->first.category).can_disable_addons) {
 					warn_requirements.push_back(
 					   (boost::format(_("· ‘%1$s’ requires ‘%2$s’ which is disabled")) %
 					    addon->first.descname() % search_result->first.descname())
@@ -812,7 +812,7 @@ void AddOnsCtrl::update_dependency_errors() {
 				}
 				// check if `previous_requirement` comes before `requirement`
 				std::string prev_descname;
-				for (const AddOnState& a : g_addons) {
+				for (const AddOns::AddOnState& a : AddOns::g_addons) {
 					if (a.first.internal_name == previous_requirement) {
 						prev_descname = a.first.descname();
 						break;
@@ -879,6 +879,16 @@ void AddOnsCtrl::layout() {
 	UI::Window::layout();
 }
 
+inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
+	UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Note"),
+	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
+	                                    "otherwise you may experience graphical glitches.")) %
+	                    name.c_str())
+	                      .str(),
+	                   UI::WLMessageBox::MBoxType::kOk);
+	w.run<UI::Panel::Returncodes>();
+}
+
 static void install_translation(const std::string& temp_locale_path,
                                 const std::string& addon_name) {
 	assert(g_fs->file_exists(temp_locale_path));
@@ -917,92 +927,106 @@ static void install_translation(const std::string& temp_locale_path,
 
 // TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's
 // requirements
-void AddOnsCtrl::install(const AddOnInfo& remote) {
-	ProgressIndicatorWindow piw(this, remote.descname());
-
-	g_fs->ensure_directory_exists(kAddOnDir);
-
-	piw.progressbar().set_total(remote.file_list.files.size() + remote.file_list.locales.size());
-
-	const std::string path = download_addon(piw, remote);
-
-	if (path.empty()) {
-		// downloading failed
-		return;
-	}
-
-	// Install the add-on
+void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 	{
-		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote.internal_name;
+		ProgressIndicatorWindow piw(this, remote.descname());
 
-		assert(g_fs->is_directory(path));
-		if (g_fs->file_exists(new_path)) {
-			// erase leftovers from manual uninstallations
-			g_fs->fs_unlink(new_path);
-		}
-		assert(!g_fs->file_exists(new_path));
-
-		g_fs->fs_rename(path, new_path);
-
-		assert(!g_fs->file_exists(path));
-		assert(g_fs->is_directory(new_path));
-	}
-
-	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
-		install_translation(temp_locale_path, remote.internal_name);
-	}
-
-	g_addons.push_back(std::make_pair(preload_addon(remote.internal_name), true));
-}
-
-// Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
-void AddOnsCtrl::upgrade(const AddOnInfo& remote, const bool full_upgrade) {
-	ProgressIndicatorWindow piw(this, remote.descname());
-
-	piw.progressbar().set_total(remote.file_list.locales.size() +
-	                            (full_upgrade ? remote.file_list.files.size() : 0));
-
-	if (full_upgrade) {
 		g_fs->ensure_directory_exists(kAddOnDir);
 
+		piw.progressbar().set_total(remote.file_list.files.size() + remote.file_list.locales.size());
+
 		const std::string path = download_addon(piw, remote);
+
 		if (path.empty()) {
 			// downloading failed
 			return;
 		}
 
-		// Upgrade the add-on
-		const std::string new_path = kAddOnDir + FileSystem::file_separator() + remote.internal_name;
+		// Install the add-on
+		{
+			const std::string new_path =
+			   kAddOnDir + FileSystem::file_separator() + remote.internal_name;
 
-		assert(g_fs->is_directory(path));
-		assert(g_fs->is_directory(new_path));
+			assert(g_fs->is_directory(path));
+			if (g_fs->file_exists(new_path)) {
+				// erase leftovers from manual uninstallations
+				g_fs->fs_unlink(new_path);
+			}
+			assert(!g_fs->file_exists(new_path));
 
-		g_fs->fs_unlink(new_path);  // Uninstall the old version…
+			g_fs->fs_rename(path, new_path);
 
-		assert(!g_fs->file_exists(new_path));
+			assert(!g_fs->file_exists(path));
+			assert(g_fs->is_directory(new_path));
+		}
 
-		g_fs->fs_rename(path, new_path);  // …and replace with the new one.
+		// Now download the translations
+		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+			install_translation(temp_locale_path, remote.internal_name);
+		}
 
-		assert(g_fs->is_directory(new_path));
-		assert(!g_fs->file_exists(path));
+		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name),
+		                                          remote.category != AddOns::AddOnCategory::kWorld));
 	}
-
-	// Now download the translations
-	for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
-		install_translation(temp_locale_path, remote.internal_name);
+	if (remote.category == AddOns::AddOnCategory::kWorld) {
+		inform_about_restart(remote.descname());
 	}
+}
 
-	for (auto& pair : g_addons) {
+// Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
+void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrade) {
+	{
+		ProgressIndicatorWindow piw(this, remote.descname());
+
+		piw.progressbar().set_total(remote.file_list.locales.size() +
+		                            (full_upgrade ? remote.file_list.files.size() : 0));
+
+		if (full_upgrade) {
+			g_fs->ensure_directory_exists(kAddOnDir);
+
+			const std::string path = download_addon(piw, remote);
+			if (path.empty()) {
+				// downloading failed
+				return;
+			}
+
+			// Upgrade the add-on
+			const std::string new_path =
+			   kAddOnDir + FileSystem::file_separator() + remote.internal_name;
+
+			assert(g_fs->is_directory(path));
+			assert(g_fs->is_directory(new_path));
+
+			g_fs->fs_unlink(new_path);  // Uninstall the old version…
+
+			assert(!g_fs->file_exists(new_path));
+
+			g_fs->fs_rename(path, new_path);  // …and replace with the new one.
+
+			assert(g_fs->is_directory(new_path));
+			assert(!g_fs->file_exists(path));
+		}
+
+		// Now download the translations
+		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
+			install_translation(temp_locale_path, remote.internal_name);
+		}
+	}
+	for (auto& pair : AddOns::g_addons) {
 		if (pair.first.internal_name == remote.internal_name) {
-			pair.first = preload_addon(remote.internal_name);
+			pair.first = AddOns::preload_addon(remote.internal_name);
+			if (remote.category == AddOns::AddOnCategory::kWorld) {
+				pair.second = false;
+				inform_about_restart(remote.descname());
+			}
 			return;
 		}
 	}
 	NEVER_HERE();
 }
 
-std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOnInfo& info) {
+std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw,
+                                       const AddOns::AddOnInfo& info) {
 	piw.set_message_1((boost::format(_("Downloading ‘%s’…")) % info.descname()).str());
 
 	const std::string temp_dir = kTempFileDir + "/" + info.internal_name + kTempFileExtension;
@@ -1055,7 +1079,7 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw, const AddOn
 }
 
 std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
-                                                const AddOnInfo& info) {
+                                                const AddOns::AddOnInfo& info) {
 	piw.set_message_1(
 	   (boost::format(_("Downloading translations for ‘%s’…")) % info.descname()).str());
 
@@ -1119,18 +1143,18 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 	return result;
 }
 
-static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
+static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   ctrl, UI::WindowStyle::kFsMenu, _("Uninstall"),
 		   (boost::format(_("Are you certain that you want to uninstall this add-on?\n\n"
 		                    "%1$s\n"
 		                    "by %2$s\n"
-		                    "Version %3$u\n"
+		                    "Version %3$s\n"
 		                    "Category: %4$s\n"
 		                    "%5$s\n")) %
-		    info.descname() % info.author() % info.version %
-		    kAddOnCategories.at(info.category).descname() % info.description())
+		    info.descname() % info.author() % AddOns::version_to_string(info.version) %
+		    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
 		      .str(),
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1147,9 +1171,9 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOnInfo& info) {
 		                FileSystem::file_separator() + info.internal_name + ".mo");
 	}
 
-	for (auto it = g_addons.begin(); it != g_addons.end(); ++it) {
+	for (auto it = AddOns::g_addons.begin(); it != AddOns::g_addons.end(); ++it) {
 		if (it->first.internal_name == info.internal_name) {
-			g_addons.erase(it);
+			AddOns::g_addons.erase(it);
 			return ctrl->rebuild();
 		}
 	}
@@ -1166,13 +1190,13 @@ void AddOnsCtrl::autofix_dependencies() {
 
 // Step 1: Enable all dependencies
 step1:
-	for (const AddOnState& addon_to_fix : g_addons) {
+	for (const AddOns::AddOnState& addon_to_fix : AddOns::g_addons) {
 		if (addon_to_fix.second ||
-		    !kAddOnCategories.at(addon_to_fix.first.category).can_disable_addons) {
+		    !AddOns::kAddOnCategories.at(addon_to_fix.first.category).can_disable_addons) {
 			bool anything_changed = false;
 			bool found = false;
 			for (const std::string& requirement : addon_to_fix.first.requirements) {
-				for (AddOnState& a : g_addons) {
+				for (AddOns::AddOnState& a : AddOns::g_addons) {
 					if (a.first.internal_name == requirement) {
 						found = true;
 						if (!a.second) {
@@ -1196,7 +1220,7 @@ step1:
 	// Step 2: Download missing add-ons
 	for (const std::string& addon_to_install : missing_requirements) {
 		bool found = false;
-		for (const AddOnInfo& info : remotes_) {
+		for (const AddOns::AddOnInfo& info : remotes_) {
 			if (info.internal_name == addon_to_install) {
 				install(info);
 				found = true;
@@ -1215,22 +1239,22 @@ step1:
 	}
 
 	// Step 3: Get all add-ons into the correct order
-	std::map<std::string, AddOnState> all_addons;
+	std::map<std::string, AddOns::AddOnState> all_addons;
 
-	for (const AddOnState& aos : g_addons) {
+	for (const AddOns::AddOnState& aos : AddOns::g_addons) {
 		all_addons[aos.first.internal_name] = aos;
 	}
 
-	std::multimap<unsigned /* number of dependencies */, AddOnState> addons_tree;
+	std::multimap<unsigned /* number of dependencies */, AddOns::AddOnState> addons_tree;
 	for (const auto& pair : all_addons) {
 		addons_tree.emplace(
 		   std::make_pair(count_all_dependencies(pair.first, all_addons), pair.second));
 	}
 	// The addons_tree now contains a list of all add-ons sorted by number
 	// of (direct plus indirect) dependencies
-	g_addons.clear();
+	AddOns::g_addons.clear();
 	for (const auto& pair : addons_tree) {
-		g_addons.push_back(AddOnState(pair.second));
+		AddOns::g_addons.push_back(AddOns::AddOnState(pair.second));
 	}
 
 	rebuild();
@@ -1238,7 +1262,7 @@ step1:
 
 InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                      AddOnsCtrl* ctrl,
-                                     const AddOnInfo& info,
+                                     const AddOns::AddOnInfo& info,
                                      bool enabled)
    : UI::Panel(parent,
                UI::PanelStyle::kFsMenu,
@@ -1247,7 +1271,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                3 * kRowButtonSize,
                2 * kRowButtonSize + 3 * kRowButtonSpacing),
      info_(info),
-     enabled_(enabled || !kAddOnCategories.at(info.category).can_disable_addons),
+     enabled_(enabled || !AddOns::kAddOnCategories.at(info.category).can_disable_addons),
      uninstall_(this,
                 "uninstall",
                 0,
@@ -1258,7 +1282,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                 g_image_cache->get("images/wui/menus/exit.png"),
                 _("Uninstall")),
      toggle_enabled_(
-        kAddOnCategories.at(info.category).can_disable_addons ?
+        AddOns::kAddOnCategories.at(info.category).can_disable_addons ?
            new UI::Button(this,
                           "on-off",
                           0,
@@ -1271,8 +1295,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                           enabled ? _("Disable") : _("Enable"),
                           UI::Button::VisualState::kFlat) :
            nullptr),
-     category_(
-        this, UI::PanelStyle::kFsMenu, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
+     category_(this,
+               UI::PanelStyle::kFsMenu,
+               g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
      version_(this,
               UI::PanelStyle::kFsMenu,
               UI::FontStyle::kFsMenuInfoPanelHeading,
@@ -1280,7 +1305,10 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               0,
               0,
               0,
-              std::to_string(info.version),
+              /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
+              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
+               info.i18n_version)
+                 .str(),
               UI::Align::kCenter),
      txt_(this,
           0,
@@ -1307,7 +1335,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 	if (toggle_enabled_) {
 		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
 			enabled_ = !enabled_;
-			for (auto& pair : g_addons) {
+			for (auto& pair : AddOns::g_addons) {
 				if (pair.first.internal_name == info.internal_name) {
 					pair.second = !pair.second;
 					toggle_enabled_->set_pic(
@@ -1322,34 +1350,38 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 	}
 	category_.set_handle_mouse(true);
 	category_.set_tooltip(
-	   (boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
+	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info.category).descname())
+	      .str());
 	version_.set_handle_mouse(true);
 	version_.set_tooltip(
-	   /** TRANSLATORS: (MajorVersion).(MinorVersion) */
-	   (boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
+	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
+	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info.version) %
+	    info.i18n_version)
+	      .str());
 	set_can_focus(true);
 	layout();
 }
 
 void InstalledAddOnRow::layout() {
 	UI::Panel::layout();
-	if (get_w() <= 2 * kRowButtonSize + 2 * kRowButtonSpacing) {
+	if (get_w() <= 3 * kRowButtonSize) {
 		// size not yet set
 		return;
 	}
 	set_desired_size(get_w(), 2 * kRowButtonSize + 3 * kRowButtonSpacing);
-	for (UI::Panel* p : std::vector<UI::Panel*>{&uninstall_, &category_, &version_}) {
-		p->set_size(kRowButtonSize, kRowButtonSize);
-	}
+
+	uninstall_.set_size(kRowButtonSize, kRowButtonSize);
+	category_.set_size(kRowButtonSize, kRowButtonSize);
+	version_.set_size(3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize);
 	if (toggle_enabled_) {
 		toggle_enabled_->set_size(kRowButtonSize, kRowButtonSize);
-		toggle_enabled_->set_pos(Vector2i(get_w() - kRowButtonSize, 0));
+		toggle_enabled_->set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
 	}
-	category_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
-	version_.set_pos(Vector2i(
-	   get_w() - 2 * kRowButtonSize - kRowButtonSpacing, kRowButtonSize + 3 * kRowButtonSpacing));
-	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, kRowButtonSize + 3 * kRowButtonSpacing));
-	txt_.set_size(get_w() - 2 * kRowButtonSize - 2 * kRowButtonSpacing,
+	category_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 0));
+	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
+	version_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing,
+	                          kRowButtonSize + 3 * kRowButtonSpacing));
+	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing),
 	              2 * kRowButtonSize + 3 * kRowButtonSpacing);
 	txt_.set_pos(Vector2i(0, 0));
 }
@@ -1384,7 +1416,7 @@ static std::string filesize_string(const uint32_t bytes) {
 
 struct RemoteInteractionWindow : public UI::Window {
 public:
-	RemoteInteractionWindow(AddOnsCtrl& parent, const AddOnInfo& info)
+	RemoteInteractionWindow(AddOnsCtrl& parent, const AddOns::AddOnInfo& info)
 	   : UI::Window(parent.get_parent(),
 	                UI::WindowStyle::kFsMenu,
 	                info.internal_name,
@@ -1434,8 +1466,8 @@ public:
 			           .as_font_tag(time_string(comment.timestamp));
 			text += "<br>";
 			text += g_style_manager->font_style(UI::FontStyle::kItalic)
-			           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$u:")) %
-			                         comment.username % comment.version)
+			           .as_font_tag((boost::format(_("‘%1$s’ commented on version %2$s:")) %
+			                         comment.username % AddOns::version_to_string(comment.version))
 			                           .str());
 			text += "<br>";
 			text += g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -1479,8 +1511,8 @@ private:
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                                AddOnsCtrl* ctrl,
-                               const AddOnInfo& info,
-                               uint32_t installed_version,
+                               const AddOns::AddOnInfo& info,
+                               const AddOns::AddOnVersion& installed_version,
                                uint32_t installed_i18n_version)
    : UI::Panel(parent, UI::PanelStyle::kFsMenu, 0, 0, 3 * kRowButtonSize, 4 * kRowButtonSize),
      info_(info),
@@ -1520,8 +1552,9 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                UI::ButtonStyle::kFsMenuSecondary,
                "…",
                _("Comments and Votes")),
-     category_(
-        this, UI::PanelStyle::kFsMenu, g_image_cache->get(kAddOnCategories.at(info.category).icon)),
+     category_(this,
+               UI::PanelStyle::kFsMenu,
+               g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
      verified_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(info.verified ? "images/ui_basic/list_selected.png" :
@@ -1533,7 +1566,10 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               0,
               0,
               0,
-              std::to_string(info.version),
+              /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
+              (boost::format(_("%1$s+%2$u")) % AddOns::version_to_string(info.version) %
+               info.i18n_version)
+                 .str(),
               UI::Align::kCenter),
      bottom_row_left_(this,
                       UI::PanelStyle::kFsMenu,
@@ -1585,9 +1621,10 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
               .as_font_tag(info.description()))
              .str()),
-     full_upgrade_possible_(installed_version < info.version) {
+     full_upgrade_possible_(AddOns::is_newer_version(installed_version, info.version)) {
 
-	assert(installed_version <= info.version);
+	assert(installed_version == info.version ||
+	       AddOns::is_newer_version(installed_version, info.version));
 	assert(installed_i18n_version <= info.i18n_version);
 
 	interact_.sigclicked.connect([ctrl, info]() {
@@ -1604,11 +1641,12 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "%1$s\n"
 			                    "by %2$s\n"
 			                    "%3$s\n"
-			                    "Version %4$u\n"
+			                    "Version %4$s\n"
 			                    "Category: %5$s\n"
 			                    "%6$s\n")) %
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
-			    info.version % kAddOnCategories.at(info.category).descname() % info.description())
+			    AddOns::version_to_string(info.version) %
+			    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1626,13 +1664,14 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 			                    "%1$s\n"
 			                    "by %2$s\n"
 			                    "%3$s\n"
-			                    "Installed version: %4$u\n"
-			                    "Available version: %5$u\n"
+			                    "Installed version: %4$s\n"
+			                    "Available version: %5$s\n"
 			                    "Category: %6$s\n"
 			                    "%7$s\n")) %
 			    info.descname() % info.author() % (info.verified ? _("Verified") : _("NOT VERIFIED")) %
-			    installed_version % info.version % kAddOnCategories.at(info.category).descname() %
-			    info.description())
+			    AddOns::version_to_string(installed_version) %
+			    AddOns::version_to_string(info.version) %
+			    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
 			      .str(),
 			   UI::WLMessageBox::MBoxType::kOkCancel);
 			if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
@@ -1647,7 +1686,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		upgrade_.set_enabled(false);
 		uninstall_.set_enabled(false);
 		interact_.set_enabled(false);
-	} else if (installed_version == kNotInstalled) {
+	} else if (installed_version.empty()) {
 		uninstall_.set_enabled(false);
 		upgrade_.set_enabled(false);
 	} else {
@@ -1660,10 +1699,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		p->set_handle_mouse(true);
 	}
 	category_.set_tooltip(
-	   (boost::format(_("Category: %s")) % kAddOnCategories.at(info.category).descname()).str());
+	   (boost::format(_("Category: %s")) % AddOns::kAddOnCategories.at(info.category).descname())
+	      .str());
 	version_.set_tooltip(
-	   /** TRANSLATORS: (MajorVersion).(MinorVersion) */
-	   (boost::format(_("Version: %1$u.%2$u")) % info.version % info.i18n_version).str());
+	   /** TRANSLATORS: (MajorVersion)+(MinorVersion) */
+	   (boost::format(_("Version: %1$s+%2$u")) % AddOns::version_to_string(info.version) %
+	    info.i18n_version)
+	      .str());
 	verified_.set_tooltip(
 	   info.internal_name.empty() ?
 	      _("Error") :
@@ -1698,7 +1740,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 
 void RemoteAddOnRow::layout() {
 	UI::Panel::layout();
-	if (get_w() <= 2 * kRowButtonSize + 2 * kRowButtonSpacing) {
+	if (get_w() <= 3 * kRowButtonSize) {
 		// size not yet set
 		return;
 	}
@@ -1707,21 +1749,27 @@ void RemoteAddOnRow::layout() {
 	        &install_, &uninstall_, &interact_, &upgrade_, &category_, &version_, &verified_}) {
 		p->set_size(kRowButtonSize, kRowButtonSize);
 	}
+	version_.set_size(
+	   3 * kRowButtonSize + 2 * kRowButtonSpacing, kRowButtonSize - kRowButtonSpacing);
+	version_.set_pos(Vector2i(
+	   get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, kRowButtonSize + kRowButtonSpacing));
+	uninstall_.set_pos(Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 0));
+	upgrade_.set_pos(Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 0));
 	install_.set_pos(Vector2i(get_w() - kRowButtonSize, 0));
-	upgrade_.set_pos(Vector2i(get_w() - kRowButtonSize, kRowButtonSize));
-	uninstall_.set_pos(Vector2i(get_w() - kRowButtonSize, 2 * kRowButtonSize));
-	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 3 * kRowButtonSize));
-	category_.set_pos(Vector2i(get_w() - kRowButtonSize * 2 - kRowButtonSpacing, 0));
-	version_.set_pos(Vector2i(get_w() - kRowButtonSize * 2 - kRowButtonSpacing, kRowButtonSize));
+	interact_.set_pos(Vector2i(get_w() - kRowButtonSize, 2 * kRowButtonSize));
+	category_.set_pos(
+	   Vector2i(get_w() - 3 * kRowButtonSize - 2 * kRowButtonSpacing, 2 * kRowButtonSize));
 	verified_.set_pos(
-	   Vector2i(get_w() - kRowButtonSize * 2 - kRowButtonSpacing, 2 * kRowButtonSize));
-	txt_.set_size(get_w() - 2 * kRowButtonSize - 2 * kRowButtonSpacing, 3 * kRowButtonSize);
+	   Vector2i(get_w() - 2 * kRowButtonSize - kRowButtonSpacing, 2 * kRowButtonSize));
+	txt_.set_size(get_w() - 3 * (kRowButtonSize + kRowButtonSpacing), 3 * kRowButtonSize);
 	txt_.set_pos(Vector2i(0, 0));
-	bottom_row_left_.set_size(get_w() / 2 - kRowButtonSize, kRowButtonSize - 2 * kRowButtonSpacing);
+	bottom_row_left_.set_size(
+	   get_w() / 2 - kRowButtonSpacing, kRowButtonSize - 2 * kRowButtonSpacing);
 	bottom_row_right_.set_size(get_w() / 2 - kRowButtonSpacing, bottom_row_left_.get_h());
-	bottom_row_left_.set_pos(Vector2i(0, 4 * kRowButtonSize - bottom_row_left_.get_h()));
-	bottom_row_right_.set_pos(
-	   Vector2i(bottom_row_left_.get_w(), 4 * kRowButtonSize - bottom_row_right_.get_h()));
+	bottom_row_left_.set_pos(
+	   Vector2i(kRowButtonSpacing, 4 * kRowButtonSize - bottom_row_left_.get_h()));
+	bottom_row_right_.set_pos(Vector2i(bottom_row_left_.get_x() + bottom_row_left_.get_w(),
+	                                   4 * kRowButtonSize - bottom_row_right_.get_h()));
 }
 
 bool RemoteAddOnRow::upgradeable() const {
