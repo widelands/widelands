@@ -208,6 +208,10 @@ public:
 		return 0;
 	}
 
+	bool extended_tooltip_accessibility_mode() const override {
+		return true;
+	}
+
 protected:
 	// For referencing the items in mapviewmenu_
 	enum class MapviewMenuEntry { kMinimap, kIncreaseZoom, kDecreaseZoom, kResetZoom };

@@ -145,6 +145,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                 99,
                 UI::PanelStyle::kFsMenu,
                 _("Maximum FPS:")),
+     tooltip_accessibility_mode_(&box_interface_left_,
+                                 UI::PanelStyle::kFsMenu,
+                                 Vector2i::zero(),
+                                 _("Accessibility mode for tooltips")),
      translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
@@ -277,6 +281,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                                UI::PanelStyle::kFsMenu,
                                Vector2i::zero(),
                                _("Allow diagonal scrolling with the numeric keypad")),
+     edge_scrolling_(&box_ingame_,
+                     UI::PanelStyle::kFsMenu,
+                     Vector2i::zero(),
+                     _("Scroll when the mouse cursor is near the screen edge")),
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
                       UI::PanelStyle::kFsMenu,
@@ -326,6 +334,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_interface_left_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sb_maxfps_);
+	box_interface_left_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	// Windows
 	box_windows_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
@@ -358,6 +367,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
+	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
@@ -443,6 +453,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 
 	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
+	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
 
 	// Windows options
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
@@ -460,6 +471,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
+	edge_scrolling_.set_state(opt.edge_scrolling);
 	training_wheels_.set_state(opt.training_wheels);
 
 	// New Game options
@@ -693,6 +705,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.inputgrab = inputgrab_.get_state();
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
+	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
 	// Windows options
 	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();
@@ -714,6 +727,7 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
+	os_.edge_scrolling = edge_scrolling_.get_state();
 	os_.training_wheels = training_wheels_.get_state();
 
 	// New Game options
@@ -770,6 +784,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
+	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
 
 	// Windows options
 	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);
@@ -791,6 +806,7 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
+	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 
 	// New Game options
@@ -815,6 +831,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("inputgrab", opt.inputgrab);
 	opt_section_.set_int("maxfps", opt.maxfps);
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
+	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
 
 	// Windows options
 	opt_section_.set_bool("snap_windows_only_when_overlapping", opt.snap_win_overlap_only);
@@ -836,6 +853,7 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
+	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
 
 	// New Game options

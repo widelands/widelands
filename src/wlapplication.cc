@@ -881,6 +881,8 @@ bool WLApplication::init_settings() {
 	get_config_bool("game_clock", true);
 	get_config_int("toolbar_pos", 0);
 	get_config_bool("numpad_diagonalscrolling", false);
+	get_config_bool("edge_scrolling", false);
+	get_config_bool("tooltip_accessibility_mode", false);
 	get_config_bool("training_wheels", true);
 	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);
