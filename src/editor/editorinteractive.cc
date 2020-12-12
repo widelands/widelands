@@ -68,6 +68,7 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
+#include "wui/toolbar.h"
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section(), nullptr),
@@ -78,9 +79,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_main",
                0,
                0,
-               34U,
+               MainToolbar::kButtonSize,
                10,
-               34U,
+               MainToolbar::kButtonSize,
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
@@ -93,9 +94,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_tools",
                0,
                0,
-               34U,
+               MainToolbar::kButtonSize,
                12,
-               34U,
+               MainToolbar::kButtonSize,
                /** TRANSLATORS: Title for the tool menu button in the editor */
                as_tooltip_text_with_hotkey(_("Tools"), "T", UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
@@ -105,9 +106,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   34U,
+                   MainToolbar::kButtonSize,
                    10,
-                   34U,
+                   MainToolbar::kButtonSize,
                    /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
                       building spaces, animals, immovables, resources */
                    _("Show / Hide"),
