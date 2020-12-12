@@ -231,8 +231,13 @@ void write_textdomain_stack(FileWrite& fw, const lua_State* L) {
 */
 static int L__(lua_State* L) {
 	if (const TextdomainInfo* td = current_textdomain(L)) {
-		i18n::Textdomain dom(td->first);
-		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		if (td->second) {
+			i18n::AddOnTextdomain dom(td->first);
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		} else {
+			i18n::Textdomain dom(td->first);
+			lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+		}
 	} else {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	}

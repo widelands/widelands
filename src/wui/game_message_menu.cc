@@ -246,11 +246,24 @@ void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Mess
 	}
 
 	assert(iplayer().player().messages()[id] == &message);
-	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
 	if ((mode == Mode::kArchive) != (status == Message::Status::kArchived)) {
 		toggle_mode();
 	}
+
+	if (auto* entry = list->find(id.value())) {
+		const uintptr_t e = reinterpret_cast<uintptr_t>(entry->entry());
+		for (uint32_t i = 0; i < list->size(); ++i) {
+			if (e == (*list)[i]) {
+				list->clear_selections();
+				list->scroll_to_item(i);
+				list->select(i);
+				return;
+			}
+		}
+		NEVER_HERE();
+	}
+
 	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value());
 	update_record(te, message);
 	list->sort();

@@ -429,13 +429,15 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		}
 
 		player_nr = gpdp.get_player_nr();
-		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
+		InteractivePlayer* ipl = new InteractivePlayer(*this, get_config_section(), player_nr, false);
+		set_ibase(ipl);
 
 		gl.load_game();
 
 		if (!gl.did_postload_addons()) {
 			postload_addons();
 		}
+		ipl->info_panel_fast_forward_message_queue();
 	}
 
 	// Store the filename for further saves
@@ -589,8 +591,8 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
 		} else {
 			// Run all selected add-on scripts (not in scenarios)
-			for (const AddOnInfo& addon : enabled_addons()) {
-				if (addon.category == AddOnCategory::kScript) {
+			for (const AddOns::AddOnInfo& addon : enabled_addons()) {
+				if (addon.category == AddOns::AddOnCategory::kScript) {
 					enqueue_command(new CmdLuaScript(
 					   get_gametime() + Duration(1), kAddOnDir + FileSystem::file_separator() +
 					                                    addon.internal_name +

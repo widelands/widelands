@@ -429,8 +429,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 					path += name;
 					if (g_fs->file_exists(path)) {
 						found.insert(name);
-						g_addons.push_back(
-						   std::make_pair(preload_addon(name), substring.substr(colonpos) == ":true"));
+						AddOns::g_addons.push_back(std::make_pair(
+						   AddOns::preload_addon(name), substring.substr(colonpos) == ":true"));
 					} else {
 						log_warn("Not loading add-on '%s' (not found)\n", name.c_str());
 					}
@@ -445,7 +445,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 			std::string addon_name(FileSystem::fs_filename(name.c_str()));
 			if (!found.count(addon_name) &&
 			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
-				g_addons.push_back(std::make_pair(preload_addon(addon_name), false));
+				AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(addon_name), false));
 			}
 		}
 	}
@@ -887,7 +887,10 @@ bool WLApplication::init_settings() {
 	get_config_bool("single_watchwin", false);
 	get_config_bool("ctrl_zoom", false);
 	get_config_bool("game_clock", true);
+	get_config_int("toolbar_pos", 0);
 	get_config_bool("numpad_diagonalscrolling", false);
+	get_config_bool("edge_scrolling", false);
+	get_config_bool("tooltip_accessibility_mode", false);
 	get_config_bool("training_wheels", true);
 	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);

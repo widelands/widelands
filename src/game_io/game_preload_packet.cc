@@ -89,7 +89,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 				} else {
 					const std::string version = substring.substr(colonpos + 1);
 					required_addons_.push_back(std::make_pair(
-					   substring.substr(0, colonpos), std::strtol(version.c_str(), nullptr, 10)));
+					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
 				}
 				if (commapos == std::string::npos) {
 					break;
@@ -142,13 +142,14 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	s.set_bool("training_wheels", game.training_wheels_wanted());
 
 	std::string addons;
-	for (const AddOnInfo& addon : game.enabled_addons()) {
-		if (addon.category == AddOnCategory::kTribes || addon.category == AddOnCategory::kWorld ||
-		    addon.category == AddOnCategory::kScript) {
+	for (const AddOns::AddOnInfo& addon : game.enabled_addons()) {
+		if (addon.category == AddOns::AddOnCategory::kTribes ||
+		    addon.category == AddOns::AddOnCategory::kWorld ||
+		    addon.category == AddOns::AddOnCategory::kScript) {
 			if (!addons.empty()) {
 				addons += ',';
 			}
-			addons += addon.internal_name + ':' + std::to_string(static_cast<unsigned>(addon.version));
+			addons += addon.internal_name + ':' + AddOns::version_to_string(addon.version, false);
 		}
 	}
 	s.set_string("addons", addons);

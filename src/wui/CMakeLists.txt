@@ -251,6 +251,8 @@ wl_library(wui
     general_statistics_menu.h
     helpwindow.cc
     helpwindow.h
+    info_panel.cc
+    info_panel.h
     inputqueuedisplay.cc
     inputqueuedisplay.h
     interactive_base.cc
@@ -288,6 +290,8 @@ wl_library(wui
     stock_menu.h
     story_message_box.cc
     story_message_box.h
+    toolbar.cc
+    toolbar.h
     trainingsitewindow.cc
     trainingsitewindow.h
     tribal_encyclopedia.cc
