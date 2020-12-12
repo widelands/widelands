@@ -47,6 +47,7 @@
 #include "wui/seafaring_statistics_menu.h"
 #include "wui/soldier_statistics_menu.h"
 #include "wui/stock_menu.h"
+#include "wui/toolbar.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
 
@@ -169,9 +170,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      "dropdown_menu_statistics",
                      0,
                      0,
-                     34U,
+                     MainToolbar::kButtonSize,
                      10,
-                     34U,
+                     MainToolbar::kButtonSize,
                      /** TRANSLATORS: Title for the statistics menu button in the game */
                      _("Statistics"),
                      UI::DropdownType::kPictorialMenu,

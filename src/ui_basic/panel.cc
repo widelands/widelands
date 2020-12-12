@@ -39,12 +39,19 @@ namespace UI {
 Panel* Panel::modal_ = nullptr;
 Panel* Panel::mousegrab_ = nullptr;
 Panel* Panel::mousein_ = nullptr;
+Panel* Panel::tooltip_panel_ = nullptr;
+Vector2i Panel::tooltip_fixed_pos_ = Vector2i::invalid();
+Recti Panel::tooltip_fixed_rect_ = Recti(0, 0, 0, 0);
 
 // The following variable can be set to false. If so, all mouse and keyboard
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::allow_user_input_ = true;
 FxId Panel::click_fx_ = kNoSoundEffect;
+
+inline static bool tooltip_accessibility_mode() {
+	return get_config_bool("tooltip_accessibility_mode", false);
+}
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -102,6 +109,9 @@ Panel::~Panel() {
 	}
 	if (mousein_ == this) {
 		mousein_ = nullptr;
+	}
+	if (tooltip_panel_ == this) {
+		tooltip_panel_ = nullptr;
 	}
 
 	// Free children
@@ -635,6 +645,12 @@ bool Panel::handle_key(bool down, SDL_Keysym code) {
 		switch (code.sym) {
 		case SDLK_TAB:
 			return handle_tab_pressed(SDL_GetModState() & KMOD_SHIFT);
+		case SDLK_F2:
+			if (tooltip_panel_) {
+				tooltip_fixed_pos_ = Vector2i::invalid();
+				return true;
+			}
+			break;
 		case SDLK_ESCAPE:
 			if (parent_ && parent_->focus_ == this && get_can_focus()) {
 				parent_->focus_ = nullptr;
@@ -925,6 +941,36 @@ void Panel::do_draw(RenderTarget& dst) {
 	dst.set_window(outerrc, outerofs);
 }
 
+void Panel::set_tooltip(const std::string& text) {
+	if (tooltip_ == text) {
+		return;
+	}
+
+	tooltip_ = text;
+
+	if (extended_tooltip_accessibility_mode() && tooltip_accessibility_mode()) {
+		if (text.empty() && tooltip_panel_ == this) {
+			tooltip_panel_ = nullptr;
+			tooltip_fixed_pos_ = Vector2i::invalid();
+		} else if (!text.empty()) {
+			tooltip_panel_ = this;
+			tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
+		}
+	}
+}
+
+void Panel::find_all_children_at(const int16_t x,
+                                 const int16_t y,
+                                 std::vector<Panel*>& result) const {
+	for (Panel* child = first_child_; child; child = child->next_) {
+		if (child->get_x() <= x && child->get_y() <= y && child->get_x() + child->get_w() > x &&
+		    child->get_y() + child->get_h() > y) {
+			result.push_back(child);
+			child->find_all_children_at(x - child->get_x(), y - child->get_y(), result);
+		}
+	}
+}
+
 /**
  * Returns the child panel that receives mouse events at the given location.
  * Starts the search with child (which should usually be set to first_child_) and
@@ -962,6 +1008,17 @@ void Panel::do_mousein(bool const inside) {
 		mousein_child_->do_mousein(false);
 		mousein_child_ = nullptr;
 	}
+
+	if (tooltip_accessibility_mode()) {
+		if (inside && tooltip_panel_ != this &&
+		    (!tooltip_panel_ || tooltip_fixed_pos_ == Vector2i::invalid()) && !tooltip().empty()) {
+			tooltip_panel_ = this;
+			tooltip_fixed_pos_ = WLApplication::get()->get_mouse_position();
+		} else if (!inside && tooltip_panel_ == this && tooltip_fixed_pos_ == Vector2i::invalid()) {
+			tooltip_panel_ = nullptr;
+		}
+	}
+
 	handle_mousein(inside);
 }
 
@@ -1078,6 +1135,8 @@ bool Panel::do_key(bool const down, SDL_Keysym const code) {
 		case SDLK_RIGHT:
 		case SDLK_UP:
 		case SDLK_DOWN:
+		case SDLK_F2:
+		case SDLK_F3:
 		case SDLK_LCTRL:
 		case SDLK_RCTRL:
 		case SDLK_LALT:
@@ -1105,6 +1164,14 @@ bool Panel::do_tooltip() {
 	if (mousein_child_ && mousein_child_->do_tooltip()) {
 		return true;
 	}
+
+	if (tooltip_accessibility_mode()) {
+		if (tooltip_panel_ && tooltip_fixed_pos_ != Vector2i::invalid()) {
+			draw_tooltip(tooltip_panel_->tooltip(), tooltip_panel_->panel_style_, tooltip_fixed_pos_);
+		}
+		return true;
+	}
+
 	return handle_tooltip();
 }
 
@@ -1180,6 +1247,16 @@ Panel* Panel::ui_trackmouse(int32_t& x, int32_t& y) {
 bool Panel::ui_mousepress(const uint8_t button, int32_t x, int32_t y) {
 	if (!allow_user_input_) {
 		return true;
+	}
+
+	if (tooltip_panel_ && tooltip_fixed_pos_ != Vector2i::invalid()) {
+		const bool inside = tooltip_fixed_rect_.x < x && tooltip_fixed_rect_.y < y &&
+		                    tooltip_fixed_rect_.x + tooltip_fixed_rect_.w > x &&
+		                    tooltip_fixed_rect_.y + tooltip_fixed_rect_.h > y;
+		tooltip_fixed_pos_ = Vector2i::invalid();
+		if (inside) {
+			return true;
+		}
 	}
 
 	Panel* const p = ui_trackmouse(x, y);
@@ -1275,7 +1352,8 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(const std::string& text, const PanelStyle style) {
+// static
+bool Panel::draw_tooltip(const std::string& text, const PanelStyle style, Vector2i pos) {
 	if (text.empty()) {
 		return false;
 	}
@@ -1309,22 +1387,24 @@ bool Panel::draw_tooltip(const std::string& text, const PanelStyle style) {
 	const uint16_t tip_width = rendered_text->width() + kPadding;
 	const uint16_t tip_height = rendered_text->height() + kPadding;
 
-	Recti r(WLApplication::get()->get_mouse_position() + Vector2i(2, kCursorHeight), tip_width,
-	        tip_height);
-	const Vector2i tooltip_bottom_right = r.opposite_of_origin();
+	if (pos == Vector2i::invalid()) {
+		pos = WLApplication::get()->get_mouse_position();
+	}
+	tooltip_fixed_rect_ = Recti(pos + Vector2i(2, kCursorHeight), tip_width, tip_height);
+	const Vector2i tooltip_bottom_right = tooltip_fixed_rect_.opposite_of_origin();
 	const Vector2i screen_bottom_right(g_gr->get_xres(), g_gr->get_yres());
 	if (screen_bottom_right.x < tooltip_bottom_right.x) {
-		r.x -= kPadding + r.w;
+		tooltip_fixed_rect_.x -= kPadding + tooltip_fixed_rect_.w;
 	}
 	if (screen_bottom_right.y < tooltip_bottom_right.y) {
-		r.y -= kCursorHeight + kPadding + r.h;
+		tooltip_fixed_rect_.y -= kCursorHeight + kPadding + tooltip_fixed_rect_.h;
 	}
-	r.x = std::max(kPadding, r.x);
-	r.y = std::max(kPadding, r.y);
+	tooltip_fixed_rect_.x = std::max(kPadding, tooltip_fixed_rect_.x);
+	tooltip_fixed_rect_.y = std::max(kPadding, tooltip_fixed_rect_.y);
 
-	dst.fill_rect(r, RGBColor(63, 52, 34));
-	dst.draw_rect(r, RGBColor(0, 0, 0));
-	rendered_text->draw(dst, r.origin() + Vector2i(2, 2));
+	dst.fill_rect(tooltip_fixed_rect_, RGBColor(63, 52, 34));
+	dst.draw_rect(tooltip_fixed_rect_, RGBColor(0, 0, 0));
+	rendered_text->draw(dst, tooltip_fixed_rect_.origin() + Vector2i(2, 2));
 	return true;
 }
 }  // namespace UI
