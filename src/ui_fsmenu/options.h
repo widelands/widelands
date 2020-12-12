@@ -73,6 +73,8 @@ public:
 		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
+		bool edge_scrolling;
+		bool tooltip_accessibility_mode;
 		int32_t display_flags;
 		bool training_wheels;
 
@@ -140,6 +142,7 @@ private:
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
+	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
 
 	// Windows options
@@ -173,6 +176,7 @@ private:
 	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
+	UI::Checkbox edge_scrolling_;
 
 	UI::Box training_wheels_box_;
 	UI::Checkbox training_wheels_;
