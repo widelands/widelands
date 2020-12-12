@@ -57,9 +57,7 @@ descriptions:new_productionsite_type {
    },
 
    inputs = {
-      { name = "smoked_fish", amount = 2 },
-      { name = "smoked_meat", amount = 2 },
-      { name = "europeans_bread", amount = 4 },
+      { name = "ration", amount = 4 },
       { name = "beer", amount = 4 }
    },
 
@@ -69,7 +67,7 @@ descriptions:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "return=skipped unless economy needs ore",
-            "consume=smoked_fish,smoked_meat europeans_bread beer",
+            "consume=ration beer",
             "sleep=duration:40s",
             "call=mine_produce",
             "call=mine_produce",
@@ -87,7 +85,7 @@ descriptions:new_productionsite_type {
          -- just a dummy program to fix encyclopedia
          descname = "encyclopedia",
          actions = {
-            "consume=smoked_fish,smoked_meat europeans_bread beer",
+            "consume=ration beer",
             "produce=ore:2",
          }
       },

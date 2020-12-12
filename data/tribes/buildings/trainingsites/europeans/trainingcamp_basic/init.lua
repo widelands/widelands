@@ -48,9 +48,7 @@ descriptions:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "europeans_bread", amount = 16 },
-      { name = "smoked_fish", amount = 8 },
-      { name = "smoked_meat", amount = 8 },
+      { name = "ration", amount = 12 },
       { name = "spear_advanced", amount = 2 },
       { name = "ax_broad", amount = 2 }
    },
@@ -58,8 +56,7 @@ descriptions:new_trainingsite_type {
 
    ["soldier attack"] = {
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"europeans_bread"}
+         {"ration"}
       },
       weapons = {"spear_advanced", "ax_broad"}
    },
@@ -81,7 +78,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:attack level:0",
             "sleep=duration:45s",
             "checksoldier=soldier:attack level:0",
-            "consume=europeans_bread smoked_fish,smoked_meat spear_advanced",
+            "consume=ration spear_advanced",
             "train=soldier:attack level:1",
             "produce=scrap_iron"
          }
@@ -94,7 +91,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:attack level:1",
             "sleep=duration:45s",
             "checksoldier=soldier:attack level:1",
-            "consume=europeans_bread smoked_fish,smoked_meat ax_broad",
+            "consume=ration ax_broad",
             "train=soldier:attack level:2",
             "produce=scrap_iron"
          }

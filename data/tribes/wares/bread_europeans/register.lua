@@ -1,3 +1,0 @@
-return {
-   europeans_bread = {},
-}

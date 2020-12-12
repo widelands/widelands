@@ -41,6 +41,17 @@ function forbid_building(plr_number, bld_name)
     player:forbid_buildings(bld_name)
 end
 
+function force_expedition(plr_number)
+    local game = wl.Game()
+    local player = game.players[plr_number]
+    local tribe = player.tribe
+    local ports = player:get_buildings(tribe.name .. "_port")
+    
+    for i, port in ipairs(ports) do
+        port:start_expedition()
+    end
+end
+
 function remove_object(startx, starty)
    local game = wl.Game()
    local map = game.map

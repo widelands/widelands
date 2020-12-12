@@ -58,16 +58,14 @@ descriptions:new_trainingsite_type {
 
    ["soldier defense"] = {
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"europeans_bread"}
+         {"meal"}
       },
       weapons = {"shield_advanced"}
    },
 
    ["soldier attack"] = {
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"europeans_bread"}
+         {"meal"}
       },
       weapons = {"ax_warriors", "trident_heavy_double"}
    },
@@ -76,7 +74,7 @@ descriptions:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
          descname = _"sleeping",
          actions = {
-            "sleep=duration:5s",
+            "sleep=dumeal:5s",
             "return=skipped",
          }
       },
@@ -86,9 +84,9 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs shield_advanced",
             "checksoldier=soldier:defense level:3", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:45s",
+            "sleep=dumeal:45s",
             "checksoldier=soldier:defense level:3", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
+            "consume=meal shield_advanced",
             "train=soldier:defense level:4",
             "produce=scrap_metal_mixed"
          }
@@ -99,9 +97,9 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs shield_advanced",
             "checksoldier=soldier:defense level:4", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:45s",
+            "sleep=dumeal:45s",
             "checksoldier=soldier:defense level:4", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
+            "consume=meal shield_advanced",
             "train=soldier:defense level:5",
             "produce=scrap_metal_mixed"
          }
@@ -112,9 +110,9 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs shield_advanced",
             "checksoldier=soldier:defense level:5", -- Fails when aren't any soldier of level 0 defense
-            "sleep=duration:45s",
+            "sleep=dumeal:45s",
             "checksoldier=soldier:defense level:5", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
+            "consume=meal shield_advanced",
             "train=soldier:defense level:6",
             "produce=scrap_metal_mixed"
          }
@@ -125,9 +123,9 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs ax_warriors",
             "checksoldier=soldier:attack level:4",
-            "sleep=duration:45s",
+            "sleep=dumeal:45s",
             "checksoldier=soldier:attack level:4",
-            "consume=europeans_bread smoked_fish,smoked_meat ax_warriors",
+            "consume=meal ax_warriors",
             "train=soldier:attack level:5",
             "produce=scrap_metal_mixed:2"
          }
@@ -138,9 +136,9 @@ descriptions:new_trainingsite_type {
          actions = {
             "return=skipped when economy needs trident_heavy_double",
             "checksoldier=soldier:attack level:5",
-            "sleep=duration:45s",
+            "sleep=dumeal:45s",
             "checksoldier=soldier:attack level:5",
-            "consume=europeans_bread smoked_fish,smoked_meat trident_heavy_double",
+            "consume=meal trident_heavy_double",
             "train=soldier:attack level:6",
             "produce=scrap_metal_mixed:2"
          }

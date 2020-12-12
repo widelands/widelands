@@ -28,9 +28,7 @@ descriptions:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "europeans_bread", amount = 12 },
-      { name = "smoked_fish", amount = 6 },
-      { name = "smoked_meat", amount = 6 },
+      { name = "meal", amount = 12 },
       { name = "beer", amount = 6 },
       { name = "mead", amount = 6 },
       { name = "beer_strong", amount = 6 },
@@ -47,32 +45,28 @@ descriptions:new_trainingsite_type {
 
    ["soldier evade"] = {
       food = {
-        {"smoked_fish", "smoked_meat"},
-        {"europeans_bread"},
+        {"meal"},
         {"beer", "mead", "beer_strong", "wine"}
       }
    },
    
    ["soldier health"] = {
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"europeans_bread"}
+         {"meal"}
       },
       weapons = {"tabard_golden", "armor_gilded", "helmet_golden", "helmet_warhelm"}
    },
    
    ["soldier defense"] = {
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"europeans_bread"}
+         {"meal"}
       },
       weapons = {"shield_advanced"}
    },
 
    ["soldier attack"] = {
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"europeans_bread"}
+         {"meal"}
       },
       weapons = {"ax_warriors", "trident_heavy_double"}
    },
@@ -94,7 +88,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread smoked_fish,smoked_meat beer:3",
+            "consume=meal beer:3",
             "train=soldier:evade level:1"
          }
       },
@@ -106,7 +100,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:1", -- Fails when aren't any soldier of level 1 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:1", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread:2 smoked_fish,smoked_meat:2 mead:3",
+            "consume=meal:2 mead:3",
             "train=soldier:evade level:2"
          }
       },
@@ -118,7 +112,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:2", -- Fails when aren't any soldier of level 0 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:2", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread smoked_fish,smoked_meat beer_strong:3",
+            "consume=meal beer_strong:3",
             "train=soldier:evade level:3"
          }
       },
@@ -130,7 +124,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:3", -- Fails when aren't any soldier of level 1 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:3", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread:2 smoked_fish,smoked_meat:2 wine:3",
+            "consume=meal:2 wine:3",
             "train=soldier:evade level:4"
          }
       },
@@ -143,7 +137,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:4", -- Fails when aren't any soldier of level 1 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:4", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread:2 smoked_fish,smoked_meat:2 beer:3 mead:3",
+            "consume=meal:2 beer:3 mead:3",
             "train=soldier:evade level:5"
          }
       },
@@ -156,7 +150,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:5", -- Fails when aren't any soldier of level 1 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:5", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread:2 smoked_fish,smoked_meat:2 beer_strong:3 wine:3",
+            "consume=meal:2 beer_strong:3 wine:3",
             "train=soldier:evade level:6"
          }
       },
@@ -168,7 +162,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:health level:3", -- Fails when aren't any soldier of level 0 health
             "sleep=duration:30s",
             "checksoldier=soldier:health level:3", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread smoked_fish,smoked_meat armor_gilded,tabard_golden",
+            "consume=meal armor_gilded,tabard_golden",
             "train=soldier:health level:4",
             "produce=scrap_metal_mixed"
          }
@@ -181,7 +175,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:health level:4", -- Fails when aren't any soldier of level 0 health
             "sleep=duration:30s",
             "checksoldier=soldier:health level:4", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread smoked_fish,smoked_meat helmet_golden",
+            "consume=meal helmet_golden",
             "train=soldier:health level:5",
             "produce=scrap_metal_mixed"
          }
@@ -194,7 +188,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:health level:5", -- Fails when aren't any soldier of level 0 health
             "sleep=duration:30s",
             "checksoldier=soldier:health level:5", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread smoked_fish,smoked_meat helmet_warhelm",
+            "consume=meal helmet_warhelm",
             "train=soldier:health level:6",
             "produce=scrap_metal_mixed"
          }
@@ -207,7 +201,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:defense level:3", -- Fails when aren't any soldier of level 0 defense
             "sleep=duration:45s",
             "checksoldier=soldier:defense level:3", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat shield_advanced",
+            "consume=meal shield_advanced",
             "train=soldier:defense level:4",
             "produce=scrap_metal_mixed"
          }
@@ -219,7 +213,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:defense level:4", -- Fails when aren't any soldier of level 0 defense
             "sleep=duration:45s",
             "checksoldier=soldier:defense level:4", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat",
+            "consume=meal",
             "train=soldier:defense level:5"
          }
       },
@@ -230,7 +224,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:defense level:5", -- Fails when aren't any soldier of level 0 defense
             "sleep=duration:45s",
             "checksoldier=soldier:defense level:5", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat",
+            "consume=meal",
             "train=soldier:defense level:6"
          }
       },
@@ -242,7 +236,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:attack level:4",
             "sleep=duration:45s",
             "checksoldier=soldier:attack level:4",
-            "consume=europeans_bread smoked_fish,smoked_meat ax_warriors",
+            "consume=meal ax_warriors",
             "train=soldier:attack level:5",
             "produce=scrap_metal_mixed:2"
          }
@@ -255,7 +249,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:attack level:5",
             "sleep=duration:45s",
             "checksoldier=soldier:attack level:5",
-            "consume=europeans_bread smoked_fish,smoked_meat trident_heavy_double",
+            "consume=meal trident_heavy_double",
             "train=soldier:attack level:6",
             "produce=scrap_metal_mixed:2"
          }

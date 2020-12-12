@@ -243,15 +243,6 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "smoked_fish",
-            default_target_quantity = 32,
-            preciousness = 32,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Smoked Fish
-               purpose = pgettext("europeans_ware", "As no europeans likes raw fish, smoking it in a smokery is the most common way to make it edible.")
-            }
-         },
-         {
             name = "meat",
             default_target_quantity = 16,
             preciousness = 16,
@@ -262,15 +253,6 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an europeans ware: Meat, part 2
                   pgettext("europeans_ware", "Meat has to be smoked in a smokery before being delivered to mines and training sites.")
                }
-            }
-         },
-         {
-            name = "smoked_meat",
-            default_target_quantity = 32,
-            preciousness = 32,
-            helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Smoked Meat
-               purpose = pgettext("europeans_ware", "Smoked meat is made out of meat in a smokery. It is delivered to the mines and training sites where the miners and soldiers prepare a nutritious lunch for themselves.")
             }
          },
          {
@@ -327,12 +309,34 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "europeans_bread",
+            name = "ration",
             default_target_quantity = 32,
-            preciousness = 24,
+            preciousness = 32,
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Bread
-               purpose = pgettext("europeans_ware", "The bakers of the europeans make really tasty bread out of flour and water. Bread is consumed in mines and at the training sites.")
+               purpose = {
+                  -- TRANSLATORS: Helptext for a barbarian ware: Ration, part 1
+                  pgettext("ware", "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
+                  -- TRANSLATORS: Helptext for a barbarian ware: Ration, part 2
+                  pgettext("europeans_ware", "Rations are produced in a tavern, an inn or a big inn out of fish or meat or pitta bread.")
+               }
+            }
+         },
+         {
+            name = "snack",
+            default_target_quantity = 32,
+            preciousness = 32,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a barbarian ware: Snack
+               purpose = pgettext("europeans_ware", "A bigger morsel than the ration to provide miners in deep mines.")
+            }
+         },
+         {
+            name = "meal",
+            default_target_quantity = 32,
+            preciousness = 32,
+            helptexts = {
+               -- TRANSLATORS: Helptext for a barbarian ware: Meal
+               purpose = pgettext("europeans_ware", "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. This substantial food is exactly what workers in a deeper mine need.")
             }
          }
       },
@@ -2355,48 +2359,6 @@ descriptions:new_tribe {
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Mill
             purpose = pgettext("europeans_building", "Grinds corn to produce cornmeal. Grinds wheat and rye to produce mixed flour.")
-         }
-      },
-      {
-         name = "europeans_bakery_basic",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for a europeans production site: Bakery
-            purpose = pgettext("europeans_building", "Bakes pitta bread for soldiers and miners alike.")
-         }
-      },
-      {
-         name = "europeans_bakery_normal",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Bakery
-            purpose = pgettext("europeans_building", "Bakes bread to feed the scouts and miners and to train soldiers.")
-         }
-      },
-      {
-         name = "europeans_bakery_advanced",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Bakery
-            purpose = pgettext("europeans_building", "Bakes bread for soldiers and miners alike.")
-         }
-      },
-      {
-         name = "europeans_smokery_basic",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Smokery
-            purpose = pgettext("europeans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers.")
-         }
-      },
-      {
-         name = "europeans_smokery_normal",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Smokery
-            purpose = pgettext("europeans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers.")
-         }
-      },
-      {
-         name = "europeans_smokery_advanced",
-         helptexts = {
-            -- TRANSLATORS: Purpose helptext for an europeans production site: Smokery
-            purpose = pgettext("europeans_building", "Smokes meat and fish to feed the scouts and miners and to train soldiers.")
          }
       },
       {

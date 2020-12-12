@@ -45,16 +45,13 @@ descriptions:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "europeans_bread", amount = 12 },
-      { name = "smoked_fish", amount = 6 },
-      { name = "smoked_meat", amount = 6 },
+      { name = "ration", amount = 12 },
       { name = "shield_steel", amount = 4 }
    },
    
    ["soldier defense"] = {
       food = {
-         {"smoked_fish", "smoked_meat"},
-         {"europeans_bread"}
+         {"ration"}
       },
       weapons = {"shield_steel"}
    },
@@ -76,7 +73,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:defense level:0", -- Fails when aren't any soldier of level 0 defense
             "sleep=duration:45s",
             "checksoldier=soldier:defense level:0", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat shield_steel",
+            "consume=ration shield_steel",
             "train=soldier:defense level:1",
             "produce=scrap_iron"
          }
@@ -88,7 +85,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:defense level:1", -- Fails when aren't any soldier of level 0 defense
             "sleep=duration:45s",
             "checksoldier=soldier:defense level:1", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat",
+            "consume=ration",
             "train=soldier:defense level:2"
          }
       },
@@ -99,7 +96,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:defense level:2", -- Fails when aren't any soldier of level 0 defense
             "sleep=duration:45s",
             "checksoldier=soldier:defense level:2", -- Because the soldier can be expulsed by the player
-            "consume=europeans_bread smoked_fish,smoked_meat",
+            "consume=ration",
             "train=soldier:defense level:3"
          }
       },

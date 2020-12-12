@@ -64,17 +64,14 @@ descriptions:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "europeans_bread", amount = 12 },
-      { name = "smoked_fish", amount = 6 },
-      { name = "smoked_meat", amount = 6 },
+      { name = "ration", amount = 12 },
       { name = "beer", amount = 6 },
       { name = "mead", amount = 6 }
    },
 
    ["soldier evade"] = {
       food = {
-        {"smoked_fish", "smoked_meat"},
-        {"europeans_bread"},
+        {"ration"},
         {"beer", "mead"}
       }
    },
@@ -96,7 +93,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:0", -- Fails when aren't any soldier of level 0 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:0", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread smoked_fish,smoked_meat beer:3",
+            "consume=ration beer:3",
             "train=soldier:evade level:1"
          }
       },
@@ -108,7 +105,7 @@ descriptions:new_trainingsite_type {
             "checksoldier=soldier:evade level:1", -- Fails when aren't any soldier of level 1 evade
             "sleep=duration:60s",
             "checksoldier=soldier:evade level:1", -- Because the soldier can be expelled by the player
-            "consume=europeans_bread:2 smoked_fish,smoked_meat:2 mead:3",
+            "consume=ration:2 mead:3",
             "train=soldier:evade level:2"
          }
       },
