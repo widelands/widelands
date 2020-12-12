@@ -321,7 +321,11 @@ MapView::MapView(
      map_(map),
      view_(),
      last_mouse_pos_(Vector2i::zero()),
-     dragging_(false) {
+     dragging_(false),
+     edge_scrolling_(parent && !parent->get_parent() /* not in watch windows */ &&
+                     get_config_bool("edge_scrolling", false)),
+     is_scrolling_x_(0),
+     is_scrolling_y_(0) {
 }
 
 Vector2f MapView::to_panel(const Vector2f& map_pixel) const {
@@ -516,6 +520,11 @@ bool MapView::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 	return false;
 }
 
+constexpr int16_t kEdgeScrollingMargin = 40;
+constexpr int16_t kEdgeScrollingSpeedSlow = 2;
+constexpr int16_t kEdgeScrollingSpeedNormal = 20;
+constexpr int16_t kEdgeScrollingSpeedFast = 80;
+
 bool MapView::handle_mousemove(
    uint8_t const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	last_mouse_pos_.x = x;
@@ -529,8 +538,41 @@ bool MapView::handle_mousemove(
 		}
 	}
 
+	is_scrolling_x_ = edge_scrolling_ ?
+	                     x < kEdgeScrollingMargin ? -1 : x > get_w() - kEdgeScrollingMargin ? 1 : 0 :
+	                     0;
+	is_scrolling_y_ = edge_scrolling_ ?
+	                     y < kEdgeScrollingMargin ? -1 : y > get_h() - kEdgeScrollingMargin ? 1 : 0 :
+	                     0;
+
 	track_sel(Vector2i(x, y));
+
 	return false;
+}
+
+void MapView::think() {
+	UI::Panel::think();
+	if (!dragging_ && (is_scrolling_x_ != 0 || is_scrolling_y_ != 0)) {
+		// We should be a child of the IBase
+		assert(get_parent());
+		assert(!get_parent()->get_parent());
+
+		const Vector2i mouse = get_parent()->get_mouse_position();
+		std::vector<UI::Panel*> all_children_at_mouse;
+		get_parent()->find_all_children_at(mouse.x, mouse.y, all_children_at_mouse);
+		assert(all_children_at_mouse.size() >
+		       1);  // At least we and the info panel overlay should be there
+		if (all_children_at_mouse.size() > 2) {
+			// Mouse is over another panel
+			return;
+		}
+
+		const int16_t speed =
+		   (SDL_GetModState() & KMOD_CTRL) ?
+		      kEdgeScrollingSpeedFast :
+		      (SDL_GetModState() & KMOD_SHIFT) ? kEdgeScrollingSpeedSlow : kEdgeScrollingSpeedNormal;
+		pan_by(Vector2i(is_scrolling_x_ * speed, is_scrolling_y_ * speed), Transition::Jump);
+	}
 }
 
 bool MapView::handle_mousewheel(uint32_t which, int32_t /* x */, int32_t y) {

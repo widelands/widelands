@@ -34,6 +34,8 @@
 #include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
 
+namespace AddOns {
+
 // silence warnings triggered by curl.h
 CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
@@ -129,7 +131,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	};
 	auto next_number = [next_word](std::string& str) {
 		const std::string word = next_word(str);
-		return std::strtol(word.c_str(), nullptr, 10);
+		return std::strtoll(word.c_str(), nullptr, 10);
 	};
 
 	const uint16_t list_version = next_number(output);
@@ -165,7 +167,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			// converted correctly, and if it wasn't we replace the period with a comma.
 			const size_t len = word.length() + 1;
 			char buffer[16];
-			std::snprintf(buffer, len, "%f", info.average_rating);  // NOLINT
+			std::snprintf(buffer, len, "%f", static_cast<double>(info.average_rating));
 			if (word != buffer) {
 				const size_t pos = word.find('.');
 				if (pos == std::string::npos) {
@@ -173,7 +175,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 				}
 				word.at(pos) = ',';
 				info.average_rating = std::strtof(word.c_str(), nullptr);
-				std::snprintf(buffer, len, "%f", info.average_rating);  // NOLINT
+				std::snprintf(buffer, len, "%f", static_cast<double>(info.average_rating));
 				if (word != buffer) {
 					throw wexception(
 					   "Floating point conversion: Only period and comma as decimal points supported");
@@ -183,12 +185,12 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		for (size_t comments = next_number(output); comments; --comments) {
 			const std::string name = next_word(output);
 			const std::string msg = next_word(output);
-			const uint32_t v = next_number(output);
+			const std::string v = next_word(output);
 			const uint32_t t = next_number(output);
-			info.user_comments.push_back(AddOnComment{name, msg, v, t});
+			info.user_comments.push_back(AddOnComment{name, msg, string_to_version(v), t});
 		}
 
-		info.version = next_number(output);
+		info.version = string_to_version(next_word(output));
 		info.i18n_version = next_number(output);
 		info.total_file_size = next_number(output);
 
@@ -316,3 +318,5 @@ std::string NetAddons::download_i18n(const std::string& name,
 }
 
 CLANG_DIAG_ON("-Wdisabled-macro-expansion")
+
+}  // namespace AddOns

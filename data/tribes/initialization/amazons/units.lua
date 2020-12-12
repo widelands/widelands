@@ -73,7 +73,7 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Log, part 1
                   pgettext("ware", "Logs are an important basic building material. They are produced by felling trees."),
                   -- TRANSLATORS: Helptext for an amazon ware: Log, part 2
-                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. They are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
+                  pgettext("amazons_ware", "Amazon woodcutters fell trees and jungle preservers will plant them. The resulting logs are used by the stone carver. The charcoal kiln also needs logs to produce charcoal.")
                }
             }
          },
@@ -164,7 +164,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Cassava Root
-                  pgettext("amazons_ware", "Cassava roots are a special kind of root produced at cassava farms. The Amazons like their strong taste for making bread and they also feed their tapirs with them.")
+                  pgettext("amazons_ware", "Cassava roots are a special kind of root produced at cassava root plantations. The Amazons like their strong taste for making bread and they also feed their tapirs with them.")
                }
             }
          },
@@ -174,7 +174,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
-                  pgettext("amazons_ware", "Cocoa beans are gathered from cocoa bushes by a cocoa farmer. They are used for producing chocolate.")
+                  pgettext("amazons_ware", "Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used for producing chocolate.")
                }
             }
          },
@@ -1600,14 +1600,6 @@ descriptions:new_tribe {
    ship = "amazons_ship",
    ferry = "amazons_ferry",
    port = "amazons_port",
-
-   toolbar = {
-      left_corner = image_dirname .. "toolbar_left_corner.png",
-      left = image_dirname .. "toolbar_left.png",
-      center = image_dirname .. "toolbar_center.png",
-      right = image_dirname .. "toolbar_right.png",
-      right_corner = image_dirname .. "toolbar_right_corner.png"
-   }
 }
 
 pop_textdomain()
