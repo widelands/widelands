@@ -560,7 +560,8 @@ void MapView::think() {
 		const Vector2i mouse = get_parent()->get_mouse_position();
 		std::vector<UI::Panel*> all_children_at_mouse;
 		get_parent()->find_all_children_at(mouse.x, mouse.y, all_children_at_mouse);
-		assert(all_children_at_mouse.size() > 1);  // At least we and the info panel overlay should be there
+		assert(all_children_at_mouse.size() >
+		       1);  // At least we and the info panel overlay should be there
 		if (all_children_at_mouse.size() > 2) {
 			// Mouse is over another panel
 			return;
