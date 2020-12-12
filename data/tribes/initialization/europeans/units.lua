@@ -2362,6 +2362,69 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "europeans_tavern_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
+            purpose = pgettext("building", "Prepares rations to feed the scouts and miners.")
+         }
+      },
+      {
+         name = "europeans_tavern_level_1",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
+            purpose = pgettext("building", "Prepares rations to feed the scouts and miners.")
+         }
+      },
+      {
+         name = "europeans_tavern_level_2",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Tavern
+            purpose = pgettext("building", "Prepares rations to feed the scouts and miners.")
+         }
+      },
+      {
+         name = "europeans_tavern_level_3",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Inn
+            purpose = pgettext("building", "Prepares rations and snacks to feed the miners in the basic and deep mines.")
+         }
+      },
+      {
+         name = "europeans_tavern_level_4",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Inn
+            purpose = pgettext("building", "Prepares rations and snacks to feed the miners in the basic and deep mines.")
+         }
+      },
+      {
+         name = "europeans_tavern_level_5",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Inn
+            purpose = pgettext("building", "Prepares rations and snacks to feed the miners in the basic and deep mines.")
+         }
+      },
+      {
+         name = "europeans_inn_basic",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Big Inn
+            purpose = pgettext("europeans_building", "Prepares rations, snacks and meals to feed all miners.")
+         }
+      },
+      {
+         name = "europeans_inn_level_1",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Big Inn
+            purpose = pgettext("europeans_building", "Prepares rations, snacks and meals to feed all miners.")
+         }
+      },
+      {
+         name = "europeans_inn_level_2",
+         helptexts = {
+            -- TRANSLATORS: Purpose helptext for a barbarian production site: Big Inn
+            purpose = pgettext("europeans_building", "Prepares rations, snacks and meals to feed all miners.")
+         }
+      },
+      {
          name = "europeans_brewery_basic",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for a europeans production site: Brewery
