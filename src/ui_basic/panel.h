@@ -288,15 +288,20 @@ public:
 		return allow_user_input_;
 	}
 
-	void set_tooltip(const std::string& text) {
-		tooltip_ = text;
-	}
+	void set_tooltip(const std::string&);
 	const std::string& tooltip() const {
 		return tooltip_;
 	}
 
 	virtual void die();
 	static void register_click();
+
+	// overridden by InteractiveBase
+	virtual bool extended_tooltip_accessibility_mode() const {
+		return false;
+	}
+
+	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
@@ -326,7 +331,8 @@ protected:
 
 	static void play_click();
 
-	static bool draw_tooltip(const std::string& text, PanelStyle);
+	static bool
+	draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
@@ -418,6 +424,9 @@ private:
 	static Panel* modal_;
 	static Panel* mousegrab_;
 	static Panel* mousein_;
+	static Panel* tooltip_panel_;
+	static Vector2i tooltip_fixed_pos_;
+	static Recti tooltip_fixed_rect_;
 	static bool allow_user_input_;
 
 	static FxId click_fx_;
