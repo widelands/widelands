@@ -49,8 +49,8 @@ descriptions:new_productionsite_type {
    },
 
    inputs = {
-      { name = "ration", amount = 8 },
-      { name = "beer", amount = 8 }
+      { name = "ration", amount = 6 },
+      { name = "beer", amount = 6 }
    },
 
    programs = {
