@@ -24,12 +24,12 @@ return {
         wares = {
             water = 128,
             log = 64,
-            planks = 32,
-            spidercloth = 32,
-            spider_silk = 32,
-            reed = 32,
-            coal = 64,
             granite = 64,
+            planks = 32,
+            coal = 32,
+            spider_silk = 32,
+            spidercloth = 32,
+            reed = 32,
             grout = 32,
             brick = 32,
             marble = 16,
@@ -40,7 +40,8 @@ return {
         workers = {
             europeans_carrier = 32,
             europeans_builder = 10,
-            europeans_geologist = 2,
+            europeans_farmer_basic = 8,
+            europeans_miner_basic = 6,
             europeans_trainer = 4,
             europeans_lumberjack_basic = 4,
             europeans_forester_basic = 2,
@@ -50,22 +51,25 @@ return {
             europeans_hunter_basic = 2,
             europeans_fisher_basic = 2,
             europeans_fishbreeder = 2,
-            europeans_farmer_basic = 4,
-            europeans_miller_basic = 1,
-            europeans_baker_basic = 1,
-            europeans_smoker_basic = 1,
-            europeans_brewer_basic = 1,
-            europeans_breeder_normal = 1,
-            europeans_weaver_basic = 1,
-            europeans_charcoal_burner_basic = 1,
-            europeans_miner_basic = 6,
-            europeans_smelter_basic = 1,
             europeans_smith_basic = 2,
             europeans_shipwright = 2,
+            europeans_miller_basic = 2,
+            europeans_baker_basic = 2,
+            europeans_smoker_basic = 2,
+            europeans_brewer_basic = 2,
+            europeans_breeder_normal = 2,
+            europeans_weaver_basic = 2,
+            europeans_charcoal_burner_basic = 2,
+            europeans_smelter_basic = 2,
+            europeans_geologist = 1
         },
         soldiers = {
-            [{0,0,0,0}] = 25,
+            [{0,0,0,0}] = 10,
+            [{0,0,1,1}] = 5,
+            [{0,1,0,1}] = 5,
+            [{0,1,1,0}] = 5,
             [{1,0,0,1}] = 5,
+            [{1,0,1,0}] = 5,
             [{1,1,0,0}] = 5,
         }
       })
@@ -102,40 +106,31 @@ return {
 
          local wh = warehouses[idx]
          local added = 0
-
-         if wh:get_wares("log") < 12 then
-            wh:set_wares("log", wh:get_wares("log") + 2)
-            added = added + 1
-         end
-         if wh:get_wares("water") < 12 then
+         if wh:get_wares("water") < 2 then
             wh:set_wares("water", wh:get_wares("water") + 2)
             added = added + 1
          end
-         if wh:get_wares("coal") < 12 then
-            wh:set_wares("coal", wh:get_wares("coal") + 2)
+         if wh:get_wares("log") < 2 then
+            wh:set_wares("log", wh:get_wares("log") + 2)
             added = added + 1
          end
-         if wh:get_wares("ore") < 12 then
-            wh:set_wares("ore", wh:get_wares("ore") + 2)
-            added = added + 1
-         end
-         if wh:get_wares("granite") < 12 then
+         if wh:get_wares("granite") < 2 then
             wh:set_wares("granite", wh:get_wares("granite") + 2)
             added = added + 1
          end
-         if wh:get_wares("clay") < 12 then
-            wh:set_wares("clay", wh:get_wares("clay") + 2)
+         if wh:get_wares("marble") < 2 then
+            wh:set_wares("marble", wh:get_wares("marble") + 2)
             added = added + 1
          end
-         if wh:get_wares("marble") < 6 then
-            wh:set_wares("marble", wh:get_wares("marble") + 1)
+         if wh:get_wares("ore") < 2 then
+            wh:set_wares("ore", wh:get_wares("ore") + 2)
             added = added + 1
          end
-         if wh:get_wares("quartz") < 4 then
+         if wh:get_wares("quartz") < 1 then
             wh:set_wares("quartz", wh:get_wares("quartz") + 1)
             added = added + 1
          end
-         if wh:get_wares("diamond") < 4 then
+         if wh:get_wares("diamond") < 1 then
             wh:set_wares("diamond", wh:get_wares("diamond") + 1)
             added = added + 1
          end

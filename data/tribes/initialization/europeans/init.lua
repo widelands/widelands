@@ -1,4 +1,4 @@
--- This file contains the basic information for the Empire tribe that is
+-- This file contains the basic information for the Europeans tribe that is
 -- needed before a game is loaded or the editor has been started.
 
 dirname = path.dirname(__file__)
@@ -16,9 +16,9 @@ local r = {
 
    starting_conditions = {
       dirname .. "starting_conditions/headquarters.lua";
-      --dirname .. "starting_conditions/fortified_village.lua";
-      --dirname .. "starting_conditions/trading_outpost.lua";
+      dirname .. "starting_conditions/trading_outpost.lua";
       --dirname .. "starting_conditions/village.lua";
+      --dirname .. "starting_conditions/fortified_village.lua";
       --dirname .. "starting_conditions/poor_hamlet.lua";
       --dirname .. "starting_conditions/struggling_outpost.lua";
       --dirname .. "starting_conditions/discovery.lua";

@@ -78,8 +78,10 @@ descriptions:new_productionsite_type {
             "call=plant_wheat",
             "call=harvest_corn",
             "call=plant_rye",
+            "call=plant_barley",
             "call=harvest_wheat",
             "call=harvest_rye",
+            "call=harvest_barley",
             "call=harvest_corn_basic",
          }
       },
