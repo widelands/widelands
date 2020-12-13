@@ -70,7 +70,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 900
+      prohibited_till = 1800
    },
 
    working_positions = {
