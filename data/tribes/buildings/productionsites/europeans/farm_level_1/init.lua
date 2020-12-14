@@ -12,14 +12,13 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_farm_level_2",
         enhancement_cost = {
-          planks = 1,
-          brick = 1,
-          grout = 1,
-          spidercloth = 1,
+          brick = 3,
+          grout = 3,
+          spidercloth = 3,
           quartz = 1
         },
         enhancement_return_on_dismantle = {
-          granite = 1,
+          granite = 3,
           quartz = 1,
         },
    },
@@ -38,7 +37,7 @@ descriptions:new_productionsite_type {
    aihints = {
       space_consumer = true,
       supports_production_of = { "honey" },
-      prohibited_till = 900
+      prohibited_till = 1800
    },
 
    working_positions = {

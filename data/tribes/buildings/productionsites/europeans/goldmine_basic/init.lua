@@ -12,13 +12,12 @@ descriptions:new_productionsite_type {
    enhancement = {
       name = "europeans_goldmine_level_1",
       enhancement_cost = {
-      log = 2,
-      planks = 1,
-      reed = 1
-      
+        log = 2,
+        planks = 1,
+        reed = 1
       },
       enhancement_return_on_dismantle = {
-         log = 1
+        log = 1
       }
    },
 
@@ -28,7 +27,7 @@ descriptions:new_productionsite_type {
       reed = 2
    },
    return_on_dismantle = {
-      log = 4
+      log = 2
    },
 
    animations = {

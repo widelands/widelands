@@ -12,27 +12,25 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_mill_normal",
         enhancement_cost = {
-          planks = 2,
-          brick = 1,
-          grout = 1,
+          brick = 2,
+          grout = 2,
           spidercloth = 2,
           quartz = 1
         },
         enhancement_return_on_dismantle = {
-          granite = 1,
+          granite = 2,
           quartz = 1,
         },
    },
 
    buildcost = {
-      reed = 2,
-      planks = 4,
-      brick = 2,
-      grout = 2
+      reed = 3,
+      planks = 3,
+      granite = 1
    },
    return_on_dismantle = {
-      log = 4,
-      granite = 2
+      log = 3,
+      granite = 1
    },
 
    animations = {

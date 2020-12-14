@@ -12,23 +12,24 @@ descriptions:new_productionsite_type {
    enhancement = {
       name = "europeans_brewery_normal",
       enhancement_cost = {
-          planks = 2,
-          reed = 2,
-          granite = 1
+          spidercloth = 2,
+          brick = 2,
+          grout = 2,
+          quartz = 1
       },
       enhancement_return_on_dismantle = {
-          log = 2,
-          granite = 1
+          granite = 2,
+          quartz = 1
       }
    },
 
    buildcost = {
-      planks = 2,
-      reed = 2,
+      planks = 3,
+      reed = 3,
       granite = 1
    },
    return_on_dismantle = {
-      log = 2,
+      log = 3,
       granite = 1
    },
 

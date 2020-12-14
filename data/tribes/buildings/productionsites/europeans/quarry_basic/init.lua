@@ -15,8 +15,7 @@ descriptions:new_productionsite_type {
           planks = 1,
           brick = 1,
           grout = 1,
-          spidercloth = 1,
-          reed = 1
+          spidercloth = 1
         },
         enhancement_return_on_dismantle = {
           log = 1,

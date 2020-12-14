@@ -11,13 +11,13 @@ descriptions:new_productionsite_type {
 
    buildcost = {
       planks = 4,
-      reed = 3,
+      reed = 4,
       brick = 2,
       grout = 2,
       marble_column = 2
    },
    return_on_dismantle = {
-      log = 3,
+      log = 4,
       granite = 2,
       marble = 2
    },

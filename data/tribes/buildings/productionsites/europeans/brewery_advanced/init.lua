@@ -12,14 +12,12 @@ descriptions:new_productionsite_type {
    enhancement = {
       name = "europeans_brewery_winery",
       enhancement_cost = {
-          planks = 1,
-          marble_column = 1,
+          marble_column = 2,
           quartz = 1,
           diamond = 1
       },
       enhancement_return_on_dismantle = {
-          log = 1,
-          marble = 1,
+          marble = 2,
           quartz = 1,
           diamond = 1
       }
@@ -37,7 +35,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 1800
+      prohibited_till = 3600
    },
 
    working_positions = {

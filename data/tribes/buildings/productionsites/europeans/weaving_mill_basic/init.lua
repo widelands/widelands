@@ -12,7 +12,6 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_weaving_mill_normal",
         enhancement_cost = {
-          planks = 3,
           brick = 3,
           grout = 3,
           spidercloth = 3,

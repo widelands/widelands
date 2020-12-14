@@ -14,8 +14,7 @@ descriptions:new_productionsite_type {
       enhancement_cost = {
          planks = 1,
          brick = 1,
-         grout = 1,
-         reed = 1
+         grout = 1
       },
       enhancement_return_on_dismantle = {
          log = 1,

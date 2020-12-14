@@ -10,12 +10,12 @@ descriptions:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      planks = 4,
+      planks = 2,
       brick = 2,
       grout = 2
    },
    return_on_dismantle = {
-      log = 4,
+      log = 2,
       granite = 2
    },
 

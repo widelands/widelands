@@ -12,7 +12,6 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_mill_advanced",
         enhancement_cost = {
-          spidercloth = 2,
           marble_column = 2,
           quartz = 1,
           diamond = 1

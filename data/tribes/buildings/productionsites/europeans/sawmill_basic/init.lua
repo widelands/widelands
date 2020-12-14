@@ -12,7 +12,6 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_sawmill_normal",
         enhancement_cost = {
-          planks = 2,
           brick = 2,
           grout = 2,
           spidercloth = 2,
@@ -25,12 +24,12 @@ descriptions:new_productionsite_type {
    },
 
    buildcost = {
-      log = 3,
-      reed = 2,
+      planks = 3,
+      reed = 3,
       granite = 1
    },
    return_on_dismantle = {
-      log = 2,
+      log = 3,
       granite = 1
    },
 

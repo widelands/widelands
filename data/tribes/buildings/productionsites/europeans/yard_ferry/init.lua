@@ -12,14 +12,15 @@ descriptions:new_productionsite_type {
 
    buildcost = {
       planks = 3,
-      granite = 3,
+      grout = 3,
+      brick = 3,
+      reed = 2,
       spidercloth = 2,
       quartz = 1
    },
    return_on_dismantle = {
-      log = 2,
-      granite = 2,
-      spidercloth = 1,
+      log = 3,
+      granite = 3,
       quartz = 1
    },
 

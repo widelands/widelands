@@ -12,12 +12,14 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_well_normal",
         enhancement_cost = {
+          planks = 1,
           brick = 1,
           grout = 1,
           spidercloth = 1,
           quartz = 1
         },
         enhancement_return_on_dismantle = {
+          log = 1,
           granite = 1,
           quartz = 1,
         },
@@ -25,11 +27,10 @@ descriptions:new_productionsite_type {
 
    buildcost = {
       planks = 2,
-      granite = 1
+      reed = 2
    },
    return_on_dismantle = {
-      log = 2,
-      granite = 1
+      log = 2
    },
 
    animations = {

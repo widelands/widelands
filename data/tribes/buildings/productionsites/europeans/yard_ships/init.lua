@@ -16,14 +16,16 @@ descriptions:new_productionsite_type {
       spidercloth = 4,
       brick = 3,
       grout = 3,
-      quartz = 2
+      quartz = 1,
+      diamond = 1
    },
    return_on_dismantle = {
       log = 4,
       reed = 2,
       spidercloth = 2,
       granite = 3,
-      quartz = 2
+      quartz = 1,
+      diamond = 1
    },
 
    animations = {

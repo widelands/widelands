@@ -12,26 +12,24 @@ descriptions:new_productionsite_type {
    enhancement = {
         name = "europeans_farm_level_1",
         enhancement_cost = {
-          planks = 1,
-          brick = 1,
-          grout = 1,
-          spidercloth = 2,
+          brick = 3,
+          grout = 3,
+          spidercloth = 3,
           quartz = 1
         },
         enhancement_return_on_dismantle = {
-          granite = 1,
+          granite = 3,
           quartz = 1,
         },
    },
 
    buildcost = {
       planks = 4,
-      reed = 3,
-      brick = 2,
-      grout = 2
+      reed = 4,
+      granite = 2
    },
    return_on_dismantle = {
-      log = 3,
+      log = 4,
       granite = 2
    },
 
