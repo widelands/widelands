@@ -1,11 +1,12 @@
-# Automatically created by Widelands bzr8851[fri03] (Release)
+# Automatically created by Widelands 1.0~git25094[1b15d25@fri-03-new] (Debug)
 
 [global]
 map_source_url=
 map_release=
 map_creator_version="bzr8851[fri03]"
 map_version_major="0"
-map_version_minor="1"
-map_version_timestamp="1538578734"
+map_version_minor="2"
+map_version_timestamp="1607948203"
 packet_version="1"
 packet_compatibility="1"
+needs_widelands_version_after="20"

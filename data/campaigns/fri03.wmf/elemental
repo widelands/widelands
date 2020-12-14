@@ -1,4 +1,4 @@
-# Automatically created by Widelands bzr8851[fri03] (Release)
+# Automatically created by Widelands 1.0~git25094[1b15d25@fri-03-new] (Debug)
 
 [global]
 packet_version="1"
@@ -11,3 +11,4 @@ descr=_"Reebaud and his tribe are living happily in the North. Meanwhile, the co
 hint=
 background="campaigns/fri03.wmf/pics/background.jpg"
 tags="seafaring,unbalanced"
+addons=

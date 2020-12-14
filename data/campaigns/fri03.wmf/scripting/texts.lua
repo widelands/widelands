@@ -186,23 +186,23 @@ atl_7 = {
 }
 
 port_3 = {
-   title = _"In the Desert",
+   title = _"In the Ice Desert",
    body=henneke(_"The next island",
       -- TRANSLATORS: Henneke Lembeck – Port Space 3
-      _([[A desert?! I thought it was eternal winter in the North!]])),
+      _([[We seem to be getting closer to the North. A desert of ice! I did not know such a thing even exists. But I doubt anybody could live here; I fear we will not discover anything useful on this island.]])),
 }
 port_4 = {
-   title = _"In the Desert",
+   title = _"In the Ice Desert",
    body=claus(_"The next island",
       -- TRANSLATORS: Claus Lembeck – Port Space 4
       _([[It doesn’t matter. Let’s just find the next port space quickly, so we can continue our journey.]]))
       .. new_objectives(obj_north),
 }
 port_5 = {
-   title = _"In the Desert",
+   title = _"In the Ice Desert",
    body=claus(_"Port space found",
       -- TRANSLATORS: Claus Lembeck – Port Space 5
-      _([[We have found a port space on this island. Now we can leave this mysterious desert and continue sailing.]]))
+      _([[We have found a port space on the island. Now we can leave this cold and bleak ice desert and continue sailing.]]))
       .. new_objectives(obj_north),
 }
 port_6 = {

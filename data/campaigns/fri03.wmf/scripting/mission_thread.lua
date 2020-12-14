@@ -127,14 +127,14 @@ function mission_thread()
    scroll_to_field(map.player_slots[2].starting_field)
    campaign_message_box(atl_7)
 
-   -- Wait for the player to build a port on the Desert Island
+   -- Wait for the player to build a port on the Ice-Desert Island
    while not (port_desert_s.immovable and port_desert_s.immovable.descr.name == "frisians_port") do sleep(2341) end
    scroll_to_field(port_desert_s)
    sleep(1000)
    campaign_message_box(port_3)
    campaign_message_box(port_4)
 
-   -- Wait for the player to find the other port space on the Desert Island
+   -- Wait for the player to find the other port space on the Ice-Desert Island
    while port_desert_n.owner ~= p1 do sleep(2341) end
    p1:conquer(port_desert_n, 4)
    scroll_to_field(port_desert_n)
