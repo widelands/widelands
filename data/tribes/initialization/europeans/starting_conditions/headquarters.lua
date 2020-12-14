@@ -69,5 +69,5 @@ init = {
    })
 end
 }
-
+pop_textdomain()
 return init
