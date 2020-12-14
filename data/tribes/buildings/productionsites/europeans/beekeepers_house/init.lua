@@ -32,7 +32,7 @@ descriptions:new_productionsite_type {
    aihints = {
       collects_ware_from_map = "honey",
       requires_supporters = true,
-      prohibited_till = 1800
+      prohibited_till = 3600
    },
 
    working_positions = {

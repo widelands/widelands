@@ -32,7 +32,7 @@ descriptions:new_productionsite_type {
 
    aihints = {
       needs_water = true,
-      prohibited_till = 3600
+      prohibited_till = 7200
    },
 
    working_positions = {
