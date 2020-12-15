@@ -47,8 +47,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      collects_ware_from_map = "meat",
-      prohibited_till = 1800
+      collects_ware_from_map = "meat"
    },
 
    working_positions = {

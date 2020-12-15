@@ -30,7 +30,7 @@ descriptions:new_productionsite_type {
       space_consumer = true,
       supports_seafaring = true,
       supports_production_of = { "honey" },
-      basic_amount = 2
+      basic_amount = 1
    },
 
    working_positions = {

@@ -46,7 +46,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-        basic_amount = 2,
+        basic_amount = 1,
         supports_seafaring = true
    },
 
