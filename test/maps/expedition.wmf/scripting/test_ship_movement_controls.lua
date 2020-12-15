@@ -35,7 +35,7 @@ run(function()
    --starting prepartion for expedition
    assert(not port.expedition_in_progress)
    port:start_expedition()
-   sleep (1000)
+   sleep (5000)
    assert(port.expedition_in_progress)
    assert(ships[1])
 
