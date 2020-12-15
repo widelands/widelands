@@ -55,8 +55,8 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
 			                                         script_table->get_string("tooltip"), tags));
 		}
-		for (const auto& pair : g_addons) {
-			if (pair.first.category == AddOnCategory::kStartingCondition) {
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.category == AddOns::AddOnCategory::kStartingCondition) {
 				const std::string script_path = kAddOnDir + FileSystem::file_separator() +
 				                                pair.first.internal_name +
 				                                FileSystem::file_separator() + name + ".lua";
@@ -102,8 +102,8 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
 
-	for (const auto& pair : g_addons) {
-		if (pair.first.category == AddOnCategory::kTribes && pair.second) {
+	for (const auto& pair : AddOns::g_addons) {
+		if (pair.first.category == AddOns::AddOnCategory::kTribes && pair.second) {
 			const std::string dirname = kAddOnDir + FileSystem::file_separator() +
 			                            pair.first.internal_name + FileSystem::file_separator() +
 			                            "tribes";
