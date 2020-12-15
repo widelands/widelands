@@ -39,8 +39,8 @@ return {
         },
         workers = {
             europeans_carrier = 32,
+            europeans_farmer_basic = 16,
             europeans_builder = 10,
-            europeans_farmer_basic = 8,
             europeans_miner_basic = 6,
             europeans_trainer = 4,
             europeans_lumberjack_basic = 4,

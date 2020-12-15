@@ -22,8 +22,8 @@ init = {
 
    prefilled_buildings(plr, { "europeans_headquarters", sf.x, sf.y,
         wares = {
-            water = 256,
-            log = 256,
+            water = 1024,
+            log = 512,
             granite = 64,
             planks = 48,
             reed = 48,
@@ -36,8 +36,8 @@ init = {
         },
         workers = {
             europeans_carrier = 32,
+            europeans_farmer_basic = 16,
             europeans_builder = 10,
-            europeans_farmer_basic = 8,
             europeans_miner_basic = 6,
             europeans_trainer = 4,
             europeans_lumberjack_basic = 4,
