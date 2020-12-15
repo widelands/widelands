@@ -63,8 +63,8 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "consume=water",
             "callworker=plant_barley",
-            "animate=working duration:3s",
-            "sleep=duration:2s"
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       plant_berrybush = {
@@ -75,8 +75,8 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "consume=water:2",
             "callworker=plant_berrybush",
-            "animate=working duration:3s",
-            "sleep=duration:2s"
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       plant_corn_basic = {
@@ -97,8 +97,8 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "consume=water",
             "callworker=plant_corn",
-            "animate=working duration:3s",
-            "sleep=duration:2s"
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       plant_grape = {
@@ -109,8 +109,8 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "consume=water:2",
             "callworker=plant_grape",
-            "animate=working duration:3s",
-            "sleep=duration:2s"
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       plant_rye = {
@@ -121,8 +121,8 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "consume=water",
             "callworker=plant_rye",
-            "animate=working duration:3s",
-            "sleep=duration:2s"
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       plant_wheat = {
@@ -133,8 +133,8 @@ descriptions:new_productionsite_type {
             "return=skipped when economy needs water",
             "consume=water",
             "callworker=plant_wheat",
-            "animate=working duration:3s",
-            "sleep=duration:2s"
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       harvest_barley = {
@@ -143,7 +143,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs barley",
             "callworker=harvest_barley",
-            "animate=working duration:3s",
+            "animate=working duration:4s",
             "sleep=duration:1s"
          }
       },
@@ -153,7 +153,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fruit",
             "callworker=harvest_berrybush",
-            "animate=working duration:3s",
+            "animate=working duration:4s",
             "sleep=duration:1s"
          }
       },
@@ -172,7 +172,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs corn",
             "callworker=harvest_corn",
-            "animate=working duration:3s",
+            "animate=working duration:4s",
             "sleep=duration:1s"
          }
       },
@@ -182,7 +182,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs grape",
             "callworker=harvest_grape",
-            "animate=working duration:3s",
+            "animate=working duration:4s",
             "sleep=duration:1s"
          }
       },
@@ -192,7 +192,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs rye",
             "callworker=harvest_rye",
-            "animate=working duration:3s",
+            "animate=working duration:4s",
             "sleep=duration:1s"
          }
       },
@@ -202,7 +202,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs wheat",
             "callworker=harvest_wheat",
-            "animate=working duration:3s",
+            "animate=working duration:4s",
             "sleep=duration:1s"
          }
       },

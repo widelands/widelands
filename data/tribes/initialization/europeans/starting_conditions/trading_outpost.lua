@@ -35,7 +35,7 @@ return {
             marble = 16,
             quartz = 16,
             diamond = 16,
-            ore = 16,
+            iron = 16,
         },
         workers = {
             europeans_carrier = 32,

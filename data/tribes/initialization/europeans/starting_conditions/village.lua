@@ -29,10 +29,10 @@ init = {
             reed = 48,
             corn = 32,
             coal = 32,
-            ore = 32,
             marble = 16,
             quartz = 16,
             diamond = 16,
+            iron = 16,
         },
         workers = {
             europeans_carrier = 32,

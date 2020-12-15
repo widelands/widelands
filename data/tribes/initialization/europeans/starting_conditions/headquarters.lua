@@ -30,12 +30,12 @@ init = {
             reed = 48,
             spider_silk = 32,
             spidercloth = 32,
-            ore = 32,
             grout = 32,
             brick = 32,
             marble = 32,
             quartz = 32,
             diamond = 16,
+            iron = 16,
         },
         workers = {
             europeans_carrier = 32,

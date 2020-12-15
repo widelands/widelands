@@ -72,10 +72,13 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs barley",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs corn",
+            "return=skipped when economy needs rye",
+            "return=skipped when economy needs wheat",
             "consume=water",
             "callworker=plant_barley",
-            "animate=working duration:5s",
-            "sleep=duration:4s"
+            "animate=working duration:6s",
+            "sleep=duration:3s"
          }
       },
       plant_corn_basic = {
@@ -94,10 +97,13 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs corn",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs barley",
+            "return=skipped when economy needs rye",
+            "return=skipped when economy needs wheat",
             "consume=water",
             "callworker=plant_corn",
-            "animate=working duration:5s",
-            "sleep=duration:4s"
+            "animate=working duration:6s",
+            "sleep=duration:3s"
          }
       },
       plant_rye = {
@@ -106,10 +112,13 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs rye",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs barley",
+            "return=skipped when economy needs corn",
+            "return=skipped when economy needs wheat",
             "consume=water",
             "callworker=plant_rye",
-            "animate=working duration:5s",
-            "sleep=duration:4s"
+            "animate=working duration:6s",
+            "sleep=duration:3s"
          }
       },
       plant_wheat = {
@@ -118,10 +127,13 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs wheat",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs barley",
+            "return=skipped when economy needs corn",
+            "return=skipped when economy needs rye",
             "consume=water",
             "callworker=plant_wheat",
-            "animate=working duration:5s",
-            "sleep=duration:4s"
+            "animate=working duration:6s",
+            "sleep=duration:3s"
          }
       },
       harvest_barley = {
@@ -129,8 +141,11 @@ descriptions:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "return=skipped unless economy needs barley",
+            "return=skipped when economy needs corn",
+            "return=skipped when economy needs rye",
+            "return=skipped when economy needs wheat",
             "callworker=harvest_barley",
-            "animate=working duration:5s",
+            "animate=working duration:6s",
             "sleep=duration:3s"
          }
       },
@@ -148,8 +163,11 @@ descriptions:new_productionsite_type {
          descname = _"harvesting corn",
          actions = {
             "return=skipped unless economy needs corn",
+            "return=skipped when economy needs barley",
+            "return=skipped when economy needs rye",
+            "return=skipped when economy needs wheat",
             "callworker=harvest_corn",
-            "animate=working duration:5s",
+            "animate=working duration:6s",
             "sleep=duration:3s"
          }
       },
@@ -158,8 +176,11 @@ descriptions:new_productionsite_type {
          descname = _"harvesting rye",
          actions = {
             "return=skipped unless economy needs rye",
+            "return=skipped when economy needs barley",
+            "return=skipped when economy needs corn",
+            "return=skipped when economy needs wheat",
             "callworker=harvest_rye",
-            "animate=working duration:5s",
+            "animate=working duration:6s",
             "sleep=duration:3s"
          }
       },
@@ -168,8 +189,11 @@ descriptions:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "return=skipped unless economy needs wheat",
+            "return=skipped when economy needs barley",
+            "return=skipped when economy needs corn",
+            "return=skipped when economy needs rye",
             "callworker=harvest_wheat",
-            "animate=working duration:5s",
+            "animate=working duration:6s",
             "sleep=duration:3s"
          }
       },
