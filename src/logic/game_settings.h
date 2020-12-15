@@ -136,8 +136,8 @@ struct GameSettings {
 				throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
 			}
 		}
-		for (const auto& pair : g_addons) {
-			if (pair.first.category == AddOnCategory::kWinCondition) {
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.category == AddOns::AddOnCategory::kWinCondition) {
 				const std::string filename = kAddOnDir + g_fs->file_separator() +
 				                             pair.first.internal_name + g_fs->file_separator() +
 				                             "init.lua";

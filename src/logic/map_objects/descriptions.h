@@ -47,7 +47,7 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	explicit Descriptions(LuaInterface* lua, const std::vector<AddOnInfo>&);
+	explicit Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>&);
 	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;

@@ -68,6 +68,7 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
+#include "wui/toolbar.h"
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section(), nullptr),
@@ -78,9 +79,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_main",
                0,
                0,
-               34U,
+               MainToolbar::kButtonSize,
                10,
-               34U,
+               MainToolbar::kButtonSize,
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
@@ -93,9 +94,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_tools",
                0,
                0,
-               34U,
+               MainToolbar::kButtonSize,
                12,
-               34U,
+               MainToolbar::kButtonSize,
                /** TRANSLATORS: Title for the tool menu button in the editor */
                as_tooltip_text_with_hotkey(_("Tools"), "T", UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
@@ -105,9 +106,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   34U,
+                   MainToolbar::kButtonSize,
                    10,
-                   34U,
+                   MainToolbar::kButtonSize,
                    /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
                       building spaces, animals, immovables, resources */
                    _("Show / Hide"),
@@ -975,7 +976,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 
 	// We need to disable non-world add-ons in the editor
 	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
-		if (it->category != AddOnCategory::kWorld) {
+		if (it->category != AddOns::AddOnCategory::kWorld) {
 			it = egbase.enabled_addons().erase(it);
 		} else {
 			++it;
@@ -1089,8 +1090,8 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	log_info("┃    Resources");
 	load_resources(*table);
 
-	for (const AddOnInfo& info : egbase.enabled_addons()) {
-		if (info.category == AddOnCategory::kWorld) {
+	for (const AddOns::AddOnInfo& info : egbase.enabled_addons()) {
+		if (info.category == AddOns::AddOnCategory::kWorld) {
 			log_info("┃    Add-On ‘%s’", info.internal_name.c_str());
 			table = egbase.lua().run_script(kAddOnDir + '/' + info.internal_name + "/editor.lua");
 			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
