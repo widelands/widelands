@@ -30,7 +30,8 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 14400
+      prohibited_till = 14400,
+      supports_seafaring = true
    },
 
    working_positions = {
