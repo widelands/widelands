@@ -26,6 +26,7 @@ init = {
             log = 256,
             granite = 64,
             corn = 32,
+            coal = 32,
             ore = 32,
             marble = 16,
             quartz = 16,

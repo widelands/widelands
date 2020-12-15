@@ -196,7 +196,7 @@ descriptions:new_tribe {
          },
          {
             name = "marble",
-            default_target_quantity = 16,
+            default_target_quantity = 8,
             preciousness = 4,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Marble
