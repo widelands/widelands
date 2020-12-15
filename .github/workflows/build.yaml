@@ -243,13 +243,10 @@ jobs:
         config:
           - release
           - debug
-        system:
-          - macos-10.15
-          - macos-10.13
         compiler:
           - clang
-    name: ${{ matrix.system }} ${{ matrix.config }} ${{ matrix.compiler }}
-    runs-on: ${{ matrix.system }}
+    name: MacOS ${{ matrix.config }} ${{ matrix.compiler }}
+    runs-on: macOS-latest
     steps:
     - name: Installing dependencies
       run: |
@@ -274,5 +271,5 @@ jobs:
     - name: Uploading DMG
       uses: actions/upload-artifact@v2
       with:
-        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} ${{ matrix.system }} AppImage
+        name: Widelands ${{ matrix.config }} ${{ matrix.compiler }} MacOS 10.5 AppImage
         path: ${{ github.workspace }}/Widelands-${{ github.sha }}-${{ matrix.config }}-${{ matrix.compiler }}.dmg
