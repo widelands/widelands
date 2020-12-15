@@ -1599,14 +1599,6 @@ descriptions:new_tribe {
    ship = "amazons_ship",
    ferry = "amazons_ferry",
    port = "amazons_port",
-
-   toolbar = {
-      left_corner = image_dirname .. "toolbar_left_corner.png",
-      left = image_dirname .. "toolbar_left.png",
-      center = image_dirname .. "toolbar_center.png",
-      right = image_dirname .. "toolbar_right.png",
-      right_corner = image_dirname .. "toolbar_right_corner.png"
-   }
 }
 
 pop_textdomain()
