@@ -217,7 +217,8 @@ void GeneralStatisticsMenu::create_player_buttons() {
 			continue;
 		}
 
-		const Image* player_image = playercolor_image(player->get_playercolor(), "images/players/genstats_player.png");
+		const Image* player_image =
+		   playercolor_image(player->get_playercolor(), "images/players/genstats_player.png");
 		assert(player_image);
 		UI::Button& cb = *new UI::Button(&player_buttons_box_, "playerbutton", 0, 0, 25, 25,
 		                                 UI::ButtonStyle::kWuiMenu, player_image, player->get_name());
