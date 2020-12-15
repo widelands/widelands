@@ -35,6 +35,15 @@ obj_north = {
    ),
 }
 
+obj_debris_quarry = {
+   name = "debris_quarry",
+   title=_"Remove the debris",
+   number = 1,
+   body = objective_text(_"Build a Debris Quarry",
+      li(_[[Remove the debris between the two ports by building a debris quarry.]])
+   ),
+}
+
 obj_atl = {
    name = "atl",
    title=_"Destroy Angadthur’s Palace",
@@ -128,8 +137,11 @@ port_1 = {
    title = _"Port Space Found",
    body=claus(_"One step closer to the North",
       -- TRANSLATORS: Claus Lembeck – Port Space 1
-      _([[My soldiers report they have found a port space! Now we need to build a port and a shipyard and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]]))
-      .. new_objectives(obj_north),
+      _([[My soldiers report they have found a port space! Now we need to build a port and a shipyard and start an expedition. Of course, we’ll have to build a complete seafaring economy first, with a shipyard and a weaving mill. But don’t waste too much time perfecting our economy – all that matters is that we get to the North soon.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Claus Lembeck – Port Space 1
+      _([[Would you believe it, but the port space is right next to the place from which we started our search, but there is a narrow strip of debris making it necessary to take a long detour. We should build a debris quarry to remove this debris.]]))
+      .. new_objectives(obj_north, obj_debris_quarry),
 }
 port_2 = {
    title = _"A Strange Island",
@@ -292,7 +304,7 @@ victory_pay = {
 }
 timeout_1 = {
    title = _"You Have Lost",
-   body=claus(_"Goodbye!",
+   body=iniucundus(_"Goodbye!",
       -- TRANSLATORS: M. C. Iniucundus – victory
       _([[You have taken too long. We must set sail now, and then the storm will not permit you to leave this island. I am sorry for you, but the weather doesn’t wait. Goodbye.]]))
       .. objective_text(_"You Have Lost",

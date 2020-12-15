@@ -13,6 +13,9 @@ end
 
 function mission_thread()
 
+   p2.hidden_from_general_statistics = true
+   p3.hidden_from_general_statistics = true
+
    scroll_to_field(map.player_slots[1].starting_field)
    include "map:scripting/starting_conditions.lua"
 
@@ -72,11 +75,26 @@ function mission_thread()
       end
    end
    p1:conquer(port_south, 4)
-   for i,f in pairs(obstacles_1) do
-      f.immovable:remove()
-   end
+   p1:allow_buildings({"frisians_debris_quarry"})
    scroll_to_field(port_south)
    campaign_message_box(port_1)
+   run(function()
+      local o_debris = add_campaign_objective(obj_debris_quarry)
+      while true do
+         local all_debris_gone = true
+         for i,f in pairs(obstacles_1) do
+            if f.immovable and f.immovable.descr.name == "debris00" then
+               all_debris_gone = false
+               break
+            end
+         end
+         if all_debris_gone then
+            set_objective_done(o_debris)
+            return
+         end
+         sleep(5000)
+      end
+   end)
 
    -- Wait for the player to build a port on the Volcano Island
    while not (port_volcano.immovable and port_volcano.immovable.descr.name == "frisians_port") do sleep(2341) end
@@ -110,6 +128,7 @@ function mission_thread()
          end
       end
    end
+   p2.hidden_from_general_statistics = false
    scroll_to_field(see_other)
    sleep(1000)
    campaign_message_box(atl_1)
@@ -175,6 +194,7 @@ function mission_thread()
       end
    end
    set_objective_done(o_north)
+   p3.hidden_from_general_statistics = false
    scroll_to_field(see_other)
    sleep(1000)
    local cost = {100, 200, 300}
@@ -245,7 +265,7 @@ function mission_thread()
             campaign_message_box(victory_pay)
          end
          p1:mark_scenario_as_solved("fri03.wmf")
-         -- END OF MISSION 4
+         -- END OF MISSION 3
          return
       end
    end

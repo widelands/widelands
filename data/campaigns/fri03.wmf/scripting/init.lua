@@ -1,7 +1,7 @@
 -- =======================================================================
 --                         Frisian Campaign Mission 3
 -- =======================================================================
-set_textdomain("scenario_fri03.wmf")
+push_textdomain("scenario_fri03.wmf")
 
 include "scripting/coroutine.lua"
 include "scripting/objective_utils.lua"

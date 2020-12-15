@@ -12,6 +12,7 @@ end
 --                                 Player 1
 -- =======================================================================
 p1:allow_buildings("all")
+p1:forbid_buildings({"frisians_debris_quarry"})
 hq = p1:place_building("frisians_port", map.player_slots[1].starting_field, false, true)
 hq:set_wares {
    log = 40,
