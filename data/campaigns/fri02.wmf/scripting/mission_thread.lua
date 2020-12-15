@@ -59,6 +59,8 @@ function expand_south()
    campaign_message_box(supply_murilius_3)
    campaign_message_box(supply_murilius_4)
    campaign_message_box(supply_murilius_5)
+   p2.hidden_from_general_statistics = false
+   p3.hidden_from_general_statistics = false
    local placed = false
    local radius = 0
    while not placed do
@@ -318,6 +320,9 @@ function victory()
 end
 
 function mission_thread()
+
+   p2.hidden_from_general_statistics = true
+   p3.hidden_from_general_statistics = true
 
    campaign_message_box(intro_1)
    p3:conquer(p1_start, 8)
