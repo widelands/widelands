@@ -1728,7 +1728,6 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		}
 	}
 
-
 	if (ismine) {
 		*ismine = (cnt_mineable == 6);
 	}
