@@ -24,7 +24,7 @@ descriptions:new_militarysite_type {
 
    max_soldiers = 4,
    heal_per_second = 120,
-   conquers = 6,
+   conquers = 7,
    prefer_heroes = true,
 
    messages = {
