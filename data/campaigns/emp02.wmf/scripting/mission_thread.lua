@@ -219,6 +219,7 @@ function barbarians_thread()
       wl.Game().map:get_field(60, 48):region(6)
    )
    p1:reveal_fields(barbarians)
+   p2.hidden_from_general_statistics = false
    run(function() sleep(5000) p1:hide_fields(barbarians) end)
    wait_for_roadbuilding_and_scroll(wl.Game().map:get_field(59, 55))
 
