@@ -192,6 +192,7 @@ end
 
 function mission_thread()
 
+   p2.hidden_from_general_statistics = true
    --Introduction
    sleep(1000)
    campaign_message_box(intro_1)
@@ -339,6 +340,7 @@ function mission_thread()
    campaign_message_box(enemies_3)
    scroll_to_field(expansion_mark)
    p1:hide_fields(map.player_slots[2].starting_field:region(6))
+   p2.hidden_from_general_statistics = false
    sleep(1000)
 
    -- Start training
