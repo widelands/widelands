@@ -1662,6 +1662,41 @@ descriptions:new_tribe {
          }
       },
       {
+         name = "blackrootfield_tiny",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: blackroot field
+            purpose = _("This field has just been planted.")
+         }
+      },
+      {
+         name = "blackrootfield_small",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: blackroot field
+            purpose = _("This field is growing.")
+         }
+      },
+      {
+         name = "blackrootfield_medium",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: blackroot field
+            purpose = _("This field is growing.")
+         }
+      },
+      {
+         name = "blackrootfield_ripe",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: blackroot field
+            purpose = _("This field is ready for harvesting.")
+         }
+      },
+      {
+         name = "blackrootfield_harvested",
+         helptexts = {
+            -- TRANSLATORS: Helptext for an europeans immovable: blackroot field
+            purpose = _("This field has been harvested.")
+         }
+      },
+      {
          name = "cornfield_tiny",
          helptexts = {
             -- TRANSLATORS: Helptext for an europeans immovable: corn field
@@ -2570,14 +2605,14 @@ descriptions:new_tribe {
          name = "europeans_farm_level_2",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Blackroot Farm
-            purpose = pgettext("europeans_building", "Sows and harvests barley, corn, rye and wheat."),
+            purpose = pgettext("europeans_building", "Sows and harvests barley, blackroot, corn, rye and wheat."),
          }
       },
       {
          name = "europeans_farm_level_3",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an europeans production site: Blackroot Farm
-            purpose = pgettext("europeans_building", "Sows and harvests barley, corn, fruit, grape, rye and wheat."),
+            purpose = pgettext("europeans_building", "Sows and harvests barley, blackroot, corn, fruit, grape, rye and wheat."),
          }
       },
       {
