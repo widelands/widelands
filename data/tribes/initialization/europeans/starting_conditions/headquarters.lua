@@ -28,6 +28,7 @@ init = {
             coal = 64,
             planks = 48,
             reed = 48,
+            iron = 32,
             spider_silk = 32,
             spidercloth = 32,
             grout = 32,
@@ -35,7 +36,6 @@ init = {
             marble = 32,
             quartz = 32,
             diamond = 16,
-            iron = 16,
         },
         workers = {
             europeans_carrier = 32,
