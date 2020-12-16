@@ -282,6 +282,7 @@ public:
 
 	void set_filename(const std::string& filename);
 	void set_author(const std::string& author);
+	void set_localize_author(bool);
 	void set_name(const std::string& name);
 	void set_description(const std::string& description);
 	void set_hint(const std::string& hint);
@@ -306,6 +307,9 @@ public:
 	}
 	const std::string& get_author() const {
 		return author_;
+	}
+	bool get_localize_author() const {
+		return localize_author_;
 	}
 	const std::string& get_name() const {
 		return name_;
@@ -611,7 +615,7 @@ public:
 	uint32_t get_waterway_max_length() const;
 	void set_waterway_max_length(uint32_t max_length);
 
-	const AddOnRequirements& required_addons() const {
+	const AddOns::AddOnRequirements& required_addons() const {
 		return required_addons_;
 	}
 
@@ -654,6 +658,7 @@ private:
 	int16_t height_;
 	std::string filename_;
 	std::string author_;
+	bool localize_author_;
 	std::string name_;
 	std::string description_;
 	std::string hint_;
@@ -687,7 +692,7 @@ private:
 
 	MapVersion map_version_;
 
-	AddOnRequirements required_addons_;
+	AddOns::AddOnRequirements required_addons_;
 };
 
 /*

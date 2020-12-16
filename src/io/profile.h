@@ -74,20 +74,30 @@ public:
 		uint32_t get_natural() const;
 		uint32_t get_positive() const;
 		bool get_bool() const;
-		char const* get_string() const {
-			return value_.get();
-		}
-		char* get_string() {
-			return value_.get();
-		}
+		char const* get_string() const;
 		Vector2i get_point() const;
 
+		char const* get_untranslated_string() const {
+			return value_.get();
+		}
+		char* get_untranslated_string() {
+			return value_.get();
+		}
+
 		void set_string(char const*);
+
+		bool get_translate() const {
+			return translate_;
+		}
+		void set_translate(const bool t) {
+			translate_ = t;
+		}
 
 		friend void swap(Value& first, Value& second);
 
 	private:
 		bool used_;
+		bool translate_;
 		std::string name_;
 		std::unique_ptr<char[]> value_;
 
@@ -127,6 +137,7 @@ public:
 	uint32_t get_safe_natural(char const* name);
 	uint32_t get_safe_positive(char const* name);
 	bool get_safe_bool(const char* name);
+	const char* get_safe_untranslated_string(const char* name);
 	const char* get_safe_string(const char* name);
 	const char* get_safe_string(const std::string& name);
 
@@ -144,6 +155,15 @@ public:
 	}
 	void set_string_duplicate(char const* const name, const std::string& value) {
 		set_string_duplicate(name, value.c_str());
+	}
+
+	void set_translated_string(char const* name, char const* value);
+	void set_translated_string_duplicate(char const* name, char const* value);
+	void set_translated_string(char const* const name, const std::string& value) {
+		set_translated_string(name, value.c_str());
+	}
+	void set_translated_string_duplicate(char const* const name, const std::string& value) {
+		set_translated_string_duplicate(name, value.c_str());
 	}
 
 	/// If a Value with this name already exists, update it with the given

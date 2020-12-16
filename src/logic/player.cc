@@ -154,6 +154,7 @@ Player::Player(EditorGameBase& the_egbase,
      fields_(nullptr),
      is_picking_custom_starting_position_(false),
      allow_additional_expedition_items_(true),
+     hidden_from_general_statistics_(false),
      message_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/message")),
      attack_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack")),
      occupied_fx_(SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied")) {
@@ -1860,6 +1861,12 @@ void Player::set_attack_forbidden(PlayerNumber who, bool forbid) {
 	} else {
 		forbid_attack_.erase(it);
 	}
+}
+
+void Player::set_hidden_from_general_statistics(const bool hide) {
+	hidden_from_general_statistics_ = hide;
+	Notifications::publish(NotePlayerDetailsEvent(
+	   NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged, *this));
 }
 
 /**
