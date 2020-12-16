@@ -265,12 +265,12 @@ descriptions:new_tribe {
             }
          },
          {
-            name = "cornmeal",
+            name = "blackroot",
             default_target_quantity = 16,
-            preciousness = 16,
+            preciousness = 24,
             helptexts = {
-               -- TRANSLATORS: Helptext for an europeans ware: Cornmeal
-               purpose = pgettext("europeans_ware", "Cornmeal is produced in a mill out of corn and is one of three parts of the bread produced in bakeries.")
+               -- TRANSLATORS: Helptext for an atlantean ware: Blackroot
+               purpose = pgettext("europeans_ware", "Blackroots are a special kind of root. Also sheep farms need to be provided with corn.")
             }
          },
          {

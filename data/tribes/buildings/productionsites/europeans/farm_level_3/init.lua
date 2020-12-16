@@ -39,20 +39,20 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_corn_basic",
             "call=plant_berrybush",
             "call=plant_grape",
+            "call=plant_blackroot",
             "call=plant_corn",
             "call=plant_wheat",
             "call=plant_rye",
             "call=plant_barley",
+            "call=harvest_blackroot",
             "call=harvest_corn",
             "call=harvest_wheat",
             "call=harvest_rye",
             "call=harvest_barley",
             "call=harvest_berry",
             "call=harvest_grape",
-            "call=harvest_corn_basic",
          }
       },
       plant_barley = {
@@ -61,6 +61,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs barley",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "consume=water",
             "callworker=plant_barley",
             "animate=working duration:4s",
@@ -79,14 +81,18 @@ descriptions:new_productionsite_type {
             "sleep=duration:1s"
          }
       },
-      plant_corn_basic = {
+      plant_blackroot = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
          descname = _"planting corn",
          actions = {
+            "return=skipped unless economy needs blackroot",
+            "return=skipped when economy needs water",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "consume=water",
-            "callworker=plant_corn",
-            "animate=working duration:5s",
-            "sleep=duration:5s"
+            "callworker=plant_blackroot",
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       plant_corn = {
@@ -95,6 +101,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs corn",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "consume=water",
             "callworker=plant_corn",
             "animate=working duration:4s",
@@ -119,6 +127,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs rye",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "consume=water",
             "callworker=plant_rye",
             "animate=working duration:4s",
@@ -131,6 +141,8 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs wheat",
             "return=skipped when economy needs water",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "consume=water",
             "callworker=plant_wheat",
             "animate=working duration:4s",
@@ -142,6 +154,8 @@ descriptions:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "return=skipped unless economy needs barley",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "callworker=harvest_barley",
             "animate=working duration:4s",
             "sleep=duration:1s"
@@ -157,13 +171,16 @@ descriptions:new_productionsite_type {
             "sleep=duration:1s"
          }
       },
-      harvest_corn_basic = {
+      harvest_blackroot = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
          descname = _"harvesting corn",
          actions = {
-            "callworker=harvest_corn",
-            "animate=working duration:5s",
-            "sleep=duration:5s"
+            "return=skipped unless economy needs blackroot",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
+            "callworker=harvest_blackroot",
+            "animate=working duration:4s",
+            "sleep=duration:1s"
          }
       },
       harvest_corn = {
@@ -171,6 +188,8 @@ descriptions:new_productionsite_type {
          descname = _"harvesting corn",
          actions = {
             "return=skipped unless economy needs corn",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "callworker=harvest_corn",
             "animate=working duration:4s",
             "sleep=duration:1s"
@@ -191,6 +210,8 @@ descriptions:new_productionsite_type {
          descname = _"harvesting rye",
          actions = {
             "return=skipped unless economy needs rye",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "callworker=harvest_rye",
             "animate=working duration:4s",
             "sleep=duration:1s"
@@ -201,6 +222,8 @@ descriptions:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "return=skipped unless economy needs wheat",
+            "return=skipped when economy needs fruit",
+            "return=skipped when economy needs grape",
             "callworker=harvest_wheat",
             "animate=working duration:4s",
             "sleep=duration:1s"

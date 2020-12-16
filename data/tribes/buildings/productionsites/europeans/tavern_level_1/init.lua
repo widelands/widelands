@@ -48,7 +48,7 @@ descriptions:new_productionsite_type {
 
    inputs = {
       { name = "water", amount = 6 },
-      { name = "cornmeal", amount = 6 },
+      { name = "flour", amount = 6 },
       { name = "fish", amount = 4 },
       { name = "meat", amount = 4 }
    },
@@ -67,7 +67,7 @@ descriptions:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
             "sleep=duration:40s",
-            "consume=water cornmeal fish,meat",
+            "consume=water flour fish,meat",
             "animate=working duration:40s",
             "produce=ration"
          }
@@ -79,7 +79,7 @@ descriptions:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "return=skipped when economy needs water",
             "sleep=duration:55s",
-            "consume=water:2 cornmeal:2 fish,meat:2",
+            "consume=water:2 flour:2 fish,meat:2",
             "animate=working duration:55s",
             "produce=ration:2"
          }

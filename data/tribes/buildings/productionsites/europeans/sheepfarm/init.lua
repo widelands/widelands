@@ -43,7 +43,7 @@ descriptions:new_productionsite_type {
 
    inputs = {
       { name = "water", amount = 6 },
-      { name = "wheat", amount = 6 }
+      { name = "blackroot", amount = 6 }
    },
 
    programs = {
@@ -59,7 +59,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
          descname = _"produce wool",
          actions = {
-            "consume=water wheat",
+            "consume=water blackroot",
             "sleep=duration:60s",
             "playsound=sound/farm/sheep priority:50% allow_multiple",
             "animate=working duration:60s",
@@ -72,8 +72,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs wool",
             "return=skipped when economy needs water",
-            "return=skipped when economy needs wheat",
-            "consume=water:2 wheat:2",
+            "consume=water:2 blackroot:2",
             "sleep=duration:60s",
             "playsound=sound/farm/sheep priority:50% allow_multiple",
             "animate=working duration:60s",

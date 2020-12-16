@@ -76,9 +76,8 @@ descriptions:new_productionsite_type {
    },
 
    inputs = {
-      { name = "corn", amount = 6 },
-      { name = "rye", amount = 4 },
-      { name = "wheat", amount = 4 }
+      { name = "rye", amount = 6 },
+      { name = "wheat", amount = 6 }
    },
 
    programs = {
@@ -86,19 +85,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=produce_cornmeal",
-         }
-      },
-      produce_cornmeal = {
-         -- TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
-         descname = _"grinding corn",
-         actions = {
-            "return=skipped unless economy needs cornmeal",
-            "sleep=duration:45s",
-            "consume=corn:2",
-            "playsound=sound/mill/mill_turning priority:85% allow_multiple",
-            "animate=working duration:45s",
-            "produce=cornmeal:2"
+            "call=produce_mixed_flour",
          }
       },
       produce_mixed_flour = {
@@ -106,7 +93,6 @@ descriptions:new_productionsite_type {
          descname = _"grinding rye and wheat",
          actions = {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
-            "return=skipped when site has corn and economy needs cornmeal and not economy needs flour",
             "consume=wheat:2 rye:2",
             "sleep=duration:45s",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
