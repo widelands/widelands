@@ -67,34 +67,33 @@ init = {
             [{0,0,0,0}] = 32,
       }
    })
+   place_building_in_region(plr, "europeans_smithy_basic", sf:region(6), {
+        inputs = {planks = 4, iron = 4},
+   })
+   place_building_in_region(plr, "europeans_smelting_works_normal", sf:region(8), {
+        inputs = {coal = 8, ore = 8},
+   })
+   place_building_in_region(plr, "europeans_charcoal_kiln_normal", sf:region(8), {
+        inputs = {log = 12},
+   })
+   place_building_in_region(plr, "europeans_sawmill_normal", sf:region(8), {
+        inputs = {log = 8},
+   })
+   place_building_in_region(plr, "europeans_stonemasons_house", sf:region(8), {
+        inputs = {marble = 8, granite = 8, clay = 6, water = 6, coal = 6},
+   })
+   place_building_in_region(plr, "europeans_weaving_mill_normal", sf:region(12), {
+        inputs = {spider_silk = 8},
+   })
+   place_building_in_region(plr, "europeans_spiderfarm", sf:region(12), {
+        inputs = {water = 6, corn = 6},
+   })
    place_building_in_region(plr, "europeans_reed_yard", sf:region(12), {
         inputs = {water = 6},
    })
    place_building_in_region(plr, "europeans_well_normal", sf:region(12), {
    })
-   place_building_in_region(plr, "europeans_weaving_mill_basic", sf:region(10), {
-        inputs = {spider_silk = 8},
-   })
-   place_building_in_region(plr, "europeans_spiderfarm", sf:region(10), {
-        inputs = {water = 6, corn = 6},
-   })
-   place_building_in_region(plr, "europeans_charcoal_kiln_basic", sf:region(8), {
-        inputs = {log = 12},
-   })
-   place_building_in_region(plr, "europeans_lime_kiln", sf:region(8), {
-        inputs = {granite = 8, clay = 6, water = 6, coal = 6},
-   })
-   place_building_in_region(plr, "europeans_sawmill_basic", sf:region(8), {
-        inputs = {log = 8},
-   })
-   place_building_in_region(plr, "europeans_smelting_works_basic", sf:region(6), {
-        inputs = {coal = 8, ore = 8},
-   })
-   place_building_in_region(plr, "europeans_smithy_basic", sf:region(6), {
-        inputs = {planks = 4, iron = 4},
-   })
-
-   
+  
 end
 }
 pop_textdomain()
