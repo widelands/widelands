@@ -1728,13 +1728,11 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		}
 	}
 
-	if (cnt_mineable == 6) {
-		if (ismine) {
-			*ismine = true;
-		}
-		return BaseImmovable::SMALL;
+
+	if (ismine) {
+		*ismine = (cnt_mineable == 6);
 	}
-	if (cnt_mineable || cnt_walkable) {
+	if ((cnt_mineable && cnt_mineable < 6) || cnt_walkable) {
 		return BaseImmovable::NONE;
 	}
 
@@ -1759,9 +1757,6 @@ int Map::calc_buildsize(const EditorGameBase& egbase,
 		}
 	}
 
-	if (ismine) {
-		*ismine = false;
-	}
 	return buildsize;
 }
 
