@@ -261,7 +261,7 @@ descriptions:new_tribe {
             preciousness = 24,
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans ware: Corn
-               purpose = pgettext("europeans_ware", "This corn is processed in the mill into fine cornmeal that every baker needs for a good bread. Also spider farms need to be provided with corn.")
+               purpose = pgettext("europeans_ware", "Spider farms need to be provided with corn.")
             }
          },
          {
@@ -270,7 +270,7 @@ descriptions:new_tribe {
             preciousness = 24,
             helptexts = {
                -- TRANSLATORS: Helptext for an atlantean ware: Blackroot
-               purpose = pgettext("europeans_ware", "Blackroots are a special kind of root. Also sheep farms need to be provided with corn.")
+               purpose = pgettext("europeans_ware", "Blackroots are a special kind of root. Sheep farms need to be provided with corn.")
             }
          },
          {
@@ -1210,21 +1210,21 @@ descriptions:new_tribe {
             name = "europeans_miller_basic",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Miller
-               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour and corn to cornmeal")
+               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour.")
             }
          },
          {
             name = "europeans_miller_normal",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Miller
-               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour and corn to cornmeal")
+               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour.")
             }
          },
          {
             name = "europeans_miller_advanced",
             helptexts = {
                -- TRANSLATORS: Helptext for an europeans worker: Miller
-               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour and corn to cornmeal" )
+               purpose = pgettext("europeans_worker", "Grind rye and wheat to mixed flour." )
             }
          },
          {

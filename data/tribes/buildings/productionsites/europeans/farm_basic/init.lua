@@ -96,6 +96,7 @@ descriptions:new_productionsite_type {
          descname = _"planting rye",
          actions = {
             "return=skipped unless economy needs rye",
+            "return=skipped when economy needs barley",
             "return=skipped when economy needs water",
             "consume=water",
             "callworker=plant_rye",
@@ -108,6 +109,7 @@ descriptions:new_productionsite_type {
          descname = _"planting wheat",
          actions = {
             "return=skipped unless economy needs wheat",
+            "return=skipped when economy needs barley",
             "return=skipped when economy needs water",
             "consume=water",
             "callworker=plant_wheat",
@@ -130,6 +132,7 @@ descriptions:new_productionsite_type {
          descname = _"harvesting rye",
          actions = {
             "return=skipped unless economy needs rye",
+            "return=skipped when economy needs barley",
             "callworker=harvest_rye",
             "animate=working duration:6s",
             "sleep=duration:5s"
@@ -140,6 +143,7 @@ descriptions:new_productionsite_type {
          descname = _"harvesting wheat",
          actions = {
             "return=skipped unless economy needs wheat",
+            "return=skipped when economy needs barley",
             "callworker=harvest_wheat",
             "animate=working duration:6s",
             "sleep=duration:5s"

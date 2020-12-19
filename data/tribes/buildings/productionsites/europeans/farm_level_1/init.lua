@@ -108,7 +108,6 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs wheat",
             "return=skipped when economy needs water",
-            "return=skipped when economy needs water",
             "return=skipped when economy needs corn",
             "consume=water",
             "callworker=plant_wheat",

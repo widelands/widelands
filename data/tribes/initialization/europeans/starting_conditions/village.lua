@@ -22,11 +22,11 @@ init = {
 
    prefilled_buildings(plr, { "europeans_headquarters", sf.x, sf.y,
         wares = {
-            water = 1024,
-            log = 512,
+            water = 256,
+            log = 256,
             granite = 64,
-            planks = 48,
-            reed = 48,
+            planks = 64,
+            reed = 64,
             iron = 32,
             corn = 32,
             coal = 32,
