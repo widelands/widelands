@@ -25,6 +25,7 @@ addons:
       - sdl2_mixer
       - sdl2_ttf
       - icu4c
+    update: true
 
 before_script:
   - >
