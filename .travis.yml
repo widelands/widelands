@@ -1,35 +1,12 @@
 os: osx
 osx_image: xcode10.1
 
-addons:
-  apt:
-    packages:
-      - libboost-dev
-      - libboost-regex-dev
-      - libboost-system-dev
-      - libboost-test-dev
-      - libcurl4-gnutls-dev
-      - libglew-dev
-      - libicu-dev
-      - libpng-dev
-      - libsdl2-dev
-      - libsdl2-image-dev
-      - libsdl2-mixer-dev
-      - libsdl2-ttf-dev
-      - zlib1g-dev
-  homebrew:
-    packages:
-      - ccache
-      - glew
-      - sdl2
-      - sdl2_image
-      - sdl2_mixer
-      - sdl2_ttf
-      - icu4c
-    update: true
-
 before_install:
+  - brew update
+  
+install:
   - travis_wait 30 brew install cmake
+  - brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
 
 before_script:
   - >
