@@ -19,6 +19,7 @@ addons:
       - zlib1g-dev
   homebrew:
     packages:
+      - ccache
       - glew
       - sdl2
       - sdl2_image
@@ -32,13 +33,15 @@ before_script:
     if [ "$TRAVIS_OS_NAME" = osx ]; then \
       # icu4c cannot be forced
       export ICU_ROOT="$(brew --prefix icu4c)" && \
-      # add gettext to the PATH variable
-      export PATH="/usr/local/opt/gettext/bin:$PATH"; \
+      # add ccache and brew to the PATH variable
+      export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH"; \
     fi
 
 branches:
   only:
     - master
+
+cache: ccache
 
 jobs:
     - name: "RELEASE: Xcode 10.1"
@@ -46,6 +49,9 @@ jobs:
 
     - name: "DEBUG: Xcode 10.1"
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
+  # allow failure until we have a proper fix
+  allow_failures:
+    - os: osx
 
 language: cpp
 
