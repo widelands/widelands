@@ -44,15 +44,12 @@ branches:
 cache: ccache
 
 jobs:
+  allow_failures:
     - name: "RELEASE: Xcode 10.1"
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
 
     - name: "DEBUG: Xcode 10.1"
       env: BUILD_TYPE=Debug BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
-      
-    allow_failures:
-      - name: "DEBUG: Xcode 10.1"
-      - name: "RELEASE: Xcode 10.1"
 
 language: cpp
 
