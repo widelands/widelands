@@ -28,6 +28,9 @@ addons:
       - icu4c
     update: true
 
+before_install:
+  - travis_wait 30 brew install cmake
+
 before_script:
   - >
     if [ "$TRAVIS_OS_NAME" = osx ]; then \
@@ -44,7 +47,6 @@ branches:
 cache: ccache
 
 jobs:
-  allow_failures:
     - name: "RELEASE: Xcode 10.1"
       env: BUILD_TYPE=Release BUILD_TRANSLATIONS=ON BUILD_WEBSITE_TOOLS=ON
 
