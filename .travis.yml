@@ -1,12 +1,8 @@
 os: osx
 osx_image: xcode10.1
-
-before_install:
-  - brew update
   
 install:
-  - travis_wait 30 brew upgrade cmake
-  - brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
+  - HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
 
 before_script:
   - >
