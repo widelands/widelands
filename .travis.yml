@@ -13,6 +13,7 @@ before_script:
       # add ccache and gettext to the PATH variable
       export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH" && \
       # Fix opengl path
+      mkdir -p /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks && \
       ln -s /System/Library/Frameworks/OpenGL.framework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/OpenGL.framework; \
     fi
 
