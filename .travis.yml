@@ -1,6 +1,9 @@
 os: osx
 osx_image: xcode10.1
   
+before_install:
+  - find /usr -name libintl* -print 2>/dev/null
+  
 install:
   - HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
 
@@ -9,7 +12,7 @@ before_script:
     if [ "$TRAVIS_OS_NAME" = osx ]; then \
       # icu4c cannot be forced
       export ICU_ROOT="$(brew --prefix icu4c)" && \
-      # add ccache and brew to the PATH variable
+      # add ccache and gettext to the PATH variable
       export PATH="/usr/local/opt/ccache/libexec:/usr/local/opt/gettext/bin:$PATH"; \
     fi
 
