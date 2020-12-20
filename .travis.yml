@@ -1,12 +1,9 @@
 os: osx
 osx_image: xcode10.1
   
-env:
-  - HOMEBREW_NO_AUTO_UPDATE=1
-  
 install:
-  - brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
   - brew unlink gettext && brew link --force gettext
+  - HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache glew sdl2 sdl2_image sdl2_mixer sdl2_ttf icu4c
 
 before_script:
   - >
