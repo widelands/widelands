@@ -34,7 +34,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -53,11 +52,13 @@
 #include "wui/dismantlesitewindow.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
+#include "wui/info_panel.h"
 #include "wui/logmessage.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
 #include "wui/shipwindow.h"
+#include "wui/toolbar.h"
 #include "wui/trainingsitewindow.h"
 #include "wui/unique_window_handler.h"
 #include "wui/warehousewindow.h"
@@ -97,85 +98,21 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 }  // namespace
 
-InteractiveBase::Toolbar::Toolbar(Panel* parent)
-   : UI::Panel(parent, UI::PanelStyle::kWui, 0, 0, parent->get_inner_w(), parent->get_inner_h()),
-     box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal),
-     repeat(0) {
-}
-
-void InteractiveBase::Toolbar::change_imageset(const ToolbarImageset& images) {
-	imageset = images;
-	finalize();
-}
-
-void InteractiveBase::Toolbar::finalize() {
-	// Set box size and get minimum height
-	int box_width, height;
-	box.get_desired_size(&box_width, &height);
-	box.set_size(box_width, height);
-
-	// Calculate repetition and width
-	repeat = 1;
-	int width = imageset.left->width() + imageset.center->width() + imageset.right->width();
-	while (width < box.get_w()) {
-		++repeat;
-		width += imageset.left->width() + imageset.right->width();
-	}
-	width += imageset.left_corner->width() + imageset.right_corner->width();
-
-	// Find the highest image
-	height = std::max(height, imageset.left_corner->height());
-	height = std::max(height, imageset.left->height());
-	height = std::max(height, imageset.center->height());
-	height = std::max(height, imageset.right->height());
-	height = std::max(height, imageset.right_corner->height());
-
-	// Set size and position
-	set_size(width, height);
-	set_pos(
-	   Vector2i((get_parent()->get_inner_w() - width) >> 1, get_parent()->get_inner_h() - height));
-	box.set_pos(Vector2i((get_w() - box.get_w()) / 2, get_h() - box.get_h()));
-
-	// Notify dropdowns
-	box.position_changed();
-}
-
-void InteractiveBase::Toolbar::draw(RenderTarget& dst) {
-	int x = 0;
-	// Left corner
-	dst.blit(Vector2i(x, get_h() - imageset.left_corner->height()), imageset.left_corner);
-	x += imageset.left_corner->width();
-	// Repeat left
-	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - imageset.left->height()), imageset.left);
-		x += imageset.left->width();
-	}
-	// Center
-	dst.blit(Vector2i(x, get_h() - imageset.center->height()), imageset.center);
-	x += imageset.center->width();
-	// Repeat right
-	for (int i = 0; i < repeat; ++i) {
-		dst.blit(Vector2i(x, get_h() - imageset.right->height()), imageset.right);
-		x += imageset.right->width();
-	}
-	// Right corner
-	dst.blit(Vector2i(x, get_h() - imageset.right_corner->height()), imageset.right_corner);
-}
-
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, ChatProvider* c)
    : UI::Panel(nullptr, UI::PanelStyle::kWui, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      chat_provider_(c),
+     info_panel_(*new InfoPanel(*this)),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     // Initialize chatoveraly before the toolbar so it is below
+     // Initialize chatoverlay before the toolbar so it is below
      chat_overlay_(new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
-     toolbar_(this),
+     toolbar_(*new MainToolbar(info_panel_)),
      mapviewmenu_(toolbar(),
                   "dropdown_menu_mapview",
                   0,
                   0,
-                  34U,
+                  MainToolbar::kButtonSize,
                   10,
-                  34U,
+                  MainToolbar::kButtonSize,
                   /** TRANSLATORS: Title for the map view menu button in the game */
                   _("Map View"),
                   UI::DropdownType::kPictorialMenu,
@@ -225,6 +162,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 	}
 
 	resize_chat_overlay();
+	info_panel_.move_to_top();
 
 	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 	   [this](const GraphicResolutionChanged& message) {
@@ -232,6 +170,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s, 
 		   map_view_.set_size(message.new_width, message.new_height);
 		   resize_chat_overlay();
 		   finalize_toolbar();
+		   info_panel_.layout();
 		   mainview_move();
 	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>(
@@ -292,6 +231,10 @@ InteractiveBase::~InteractiveBase() {
 	if (road_building_mode_) {
 		abort_build_road();
 	}
+}
+
+UI::Box* InteractiveBase::toolbar() {
+	return &toolbar_.box;
 }
 
 void InteractiveBase::add_mapview_menu(MiniMapType minimap_type) {
@@ -471,7 +414,8 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
 	UI::Button* button =
-	   new UI::Button(&toolbar_.box, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
+	   new UI::Button(&toolbar_.box, name, 0, 0, MainToolbar::kButtonSize, MainToolbar::kButtonSize,
+	                  UI::ButtonStyle::kWuiPrimary,
 	                  g_image_cache->get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.box.add(button);
 	if (window) {
@@ -723,6 +667,10 @@ void InteractiveBase::draw_road_building(FieldsToDraw::Field& field) {
 	}
 }
 
+void InteractiveBase::info_panel_fast_forward_message_queue() {
+	info_panel_.fast_forward_message_queue();
+}
+
 /*
 ===============
 Called once per frame by the UI code
@@ -743,7 +691,7 @@ double InteractiveBase::average_fps() const {
 Draw debug overlay when appropriate.
 ===============
 */
-void InteractiveBase::draw_overlay(RenderTarget& dst) {
+void InteractiveBase::draw_overlay(RenderTarget&) {
 	// Timing
 	uint32_t curframe = SDL_GetTicks();
 
@@ -789,47 +737,17 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 	// Node information
 	std::string node_text;
-	if (game == nullptr) {
-		// Always blit node information in the editor
+	if (game == nullptr || get_display_flag(dfDebug)) {
+		// Blit node information in the editor, and in debug mode also for games
 		static boost::format node_format("(%i, %i, %i)");
 		const int32_t height = egbase().map()[sel_.pos.node].get_height();
 		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
-	} else if (get_display_flag(dfDebug)) {
-		// Blit node information for games in debug mode - we're not interested in the height
-		static boost::format node_format("(%i, %i)");
-		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
 	}
-	if (!node_text.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-		   as_richtext_paragraph(node_text, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-		rendered_text->draw(
-		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
-	}
+	info_panel_.set_coords_string(node_text);
 
 	// In-game clock and FPS
-	if ((game != nullptr) && get_config_bool("game_clock", true)) {
-		// Blit in-game clock
-		const std::string gametime(gametimestring(egbase().get_gametime().get(), true));
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-		   as_richtext_paragraph(gametime, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-		rendered_text->draw(dst, Vector2i(5, 5));
-
-		// Blit FPS when playing a game in debug mode
-		if (get_display_flag(dfDebug)) {
-			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph((fps_format % (1000.0 / frametime_) % average_fps()).str(),
-			                         UI::FontStyle::kWuiGameSpeedAndCoordinates));
-			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
-		}
-	}
-
-	if (cheat_mode_enabled_) {
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-		   as_richtext_paragraph("‹‹‹ CHEAT MODE ENABLED ›››", UI::FontStyle::kFsMenuIntro));
-		rendered_text->draw(
-		   dst, Vector2i((get_w() - rendered_text->width()) / 2, 2.5f * rendered_text->height()));
-	}
+	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime().get(), true) : "");
+	info_panel_.set_fps_string(get_display_flag(dfDebug), 1000.0 / frametime_, average_fps());
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,
@@ -1257,8 +1175,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 
 // Repositions the chat overlay
 void InteractiveBase::resize_chat_overlay() {
-	// 34 is the button height of the bottom menu
-	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - 34);
+	chat_overlay_->set_size(get_w() / 2, get_h() - 25 - MainToolbar::kButtonSize);
 	chat_overlay_->recompute();
 }
 
@@ -1499,7 +1416,10 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 		}
 	}
 
-	return map_view_.handle_key(down, code);
+	if (map_view_.handle_key(down, code)) {
+		return true;
+	}
+	return UI::Panel::handle_key(down, code);
 }
 
 void InteractiveBase::cmd_lua(const std::vector<std::string>& args) {
