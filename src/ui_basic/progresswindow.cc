@@ -107,7 +107,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string& file_name) {
 	if (file_name.empty() || !g_fs->file_exists(file_name)) {
-		std::string dir = std::string(kTemplateDir) + "loadscreens/gameloading/";
+		std::string dir = template_dir() + "loadscreens/gameloading/";
 		if (theme_.empty()) {
 			// choose random theme
 			const std::set<std::string> dirs = g_fs->list_directory(dir);

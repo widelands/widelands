@@ -30,6 +30,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -126,6 +127,17 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
+     theme_dropdown_(&box_interface_left_,
+                        "dropdown_theme",
+                        0,
+                        0,
+                        100,  // 100 is arbitrary, will be resized in layout().
+                        50,
+                        24,
+                        _("UI Theme"),
+                        UI::DropdownType::kTextual,
+                        UI::PanelStyle::kFsMenu,
+                        UI::ButtonStyle::kFsMenuMenu),
 
      inputgrab_(
         &box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
@@ -331,6 +343,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	box_interface_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 	box_interface_left_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_left_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sb_maxfps_);
@@ -449,6 +462,17 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 		   /** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
 		   (boost::format(_("%1% x %2%")) % cur_win_res_x % cur_win_res_y).str(), entry, nullptr,
 		   true);
+	}
+
+	for (const std::string& theme : g_fs->list_directory("templates")) {
+		const std::string descname = (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
+		theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
+	}
+	for (auto& addon : AddOns::g_addons) {
+		if (addon.first.category == AddOns::AddOnCategory::kTheme) {
+			const std::string path = kAddOnDir + '/' + addon.first.internal_name + '/';
+			theme_dropdown_.add(addon.first.descname(), path, nullptr, path == template_dir());
+		}
 	}
 
 	inputgrab_.set_state(opt.inputgrab);
@@ -693,6 +717,9 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	if (language_dropdown_.has_selection()) {
 		os_.language = language_dropdown_.get_selected();
 	}
+	if (theme_dropdown_.has_selection()) {
+		os_.theme = theme_dropdown_.get_selected();
+	}
 	if (resolution_dropdown_.has_selection()) {
 		const int res_index = resolution_dropdown_.get_selected();
 		os_.fullscreen = res_index == kDropdownFullscreen;
@@ -815,6 +842,8 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	// Language options
 	opt.language = opt_section_.get_string("language", "");
 
+	opt.theme = opt_section_.get_string("theme", "");
+
 	// Last tab for reloading the options menu
 	opt.active_tab = active_tab;
 	return opt;
@@ -862,9 +891,12 @@ void OptionsCtrl::save_options() {
 	// Language options
 	opt_section_.set_string("language", opt.language);
 
+	opt_section_.set_string("theme", opt.theme);
+
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
+	set_template_dir(opt.theme);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 
 	// Sound options

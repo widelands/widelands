@@ -109,7 +109,7 @@ The add-on needs to contain one or more scripts called ``<tribename>.lua`` which
 
 theme
 ~~~~~
-A UI theme. This type of add-on is not implemented yet.
+A UI theme. See the official theme at ``data/templates/default/`` for details about the the required directory structure and the keys in the ``init.lua`` file.
 
 
 Restrictions

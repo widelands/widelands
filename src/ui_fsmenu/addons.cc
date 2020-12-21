@@ -1162,6 +1162,11 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info) {
 		}
 	}
 
+	if (info.category == AddOns::AddOnCategory::kTheme && template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
+		// When uninstalling the active theme, fall back to default theme
+		set_template_dir("");
+	}
+
 	// Delete the add-on…
 	g_fs->fs_unlink(kAddOnDir + FileSystem::file_separator() + info.internal_name);
 
@@ -1622,10 +1627,6 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               .as_font_tag(info.description()))
              .str()),
      full_upgrade_possible_(AddOns::is_newer_version(installed_version, info.version)) {
-
-	assert(installed_version == info.version ||
-	       AddOns::is_newer_version(installed_version, info.version));
-	assert(installed_i18n_version <= info.i18n_version);
 
 	interact_.sigclicked.connect([ctrl, info]() {
 		RemoteInteractionWindow m(*ctrl, info);

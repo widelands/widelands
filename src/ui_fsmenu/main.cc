@@ -145,8 +145,8 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
                 0,
                 "",
                 UI::Align::kCenter),
-     splashscreen_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/splash.jpg")),
-     title_image_(*g_image_cache->get(std::string(kTemplateDir) + "loadscreens/logo.png")),
+     splashscreen_(*g_image_cache->get(template_dir() + "loadscreens/splash.jpg")),
+     title_image_(*g_image_cache->get(template_dir() + "loadscreens/logo.png")),
      init_time_(kNoSplash),
      last_image_exchange_time_(0),
      draw_image_(0),
@@ -188,7 +188,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	vbox2_.add(&exit_, UI::Box::Resizing::kFullSize);
 
 	for (const std::string& img :
-	     g_fs->list_directory(std::string(kTemplateDir) + "loadscreens/mainmenu")) {
+	     g_fs->list_directory(template_dir() + "loadscreens/mainmenu")) {
 		images_.push_back(img);
 	}
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
