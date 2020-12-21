@@ -7,13 +7,14 @@
 # Markus7cz <markus7cz@gmail.com>, 2010
 # Matej Svrcek <mmatej@yahoo.com>, 2015-2016
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
+# Ondřej Itřech, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-12-09 12:40+0000\n"
+"PO-Revision-Date: 2020-12-18 15:52+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -213,7 +214,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "Když už se kovou zbraně, můžeme naverbovat nové vojáky. Na to je ale třeba dopravit lehké trojzubce a vesty do kasáren. Rekruti přijdou ze skladiště, každý obdrží jeden trojzubec a vestu, základní trénink a stanou se z nich vojáci."
+msgstr "Teď, když se kovají zbraně, můžeme naverbovat nové vojáky. Na to je potřeba dopravit lehké trojzubce a tabardy do kasáren. Ze skladu tam přichází rekruti, každý obdrží jeden trojzubec, jednu vestu a základní trénink, a tak se z nich stanou vojáci."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
