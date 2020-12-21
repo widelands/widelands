@@ -544,8 +544,6 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 	const Widelands::TribeDescr& tribe = player_->tribe();
 
-	fastclick_ = false;
-
 	for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
 		const Widelands::BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		BuildGrid** ppgrid;
@@ -621,6 +619,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 		// Add it to the grid
 		(*ppgrid)->add(building_index);
+		fastclick_ = false;
 	}
 
 	// Add all necessary tabs

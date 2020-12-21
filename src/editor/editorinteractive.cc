@@ -1130,6 +1130,7 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		set_sel_pos(Widelands::NodeAndTriangle<>{
 		   Widelands::Coords(0, 0),
 		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)});
+		resize_minimap();
 		break;
 
 	case MapWas::kGloballyMutated:
