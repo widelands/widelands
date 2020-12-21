@@ -7,14 +7,15 @@
 # Anton Khabarov <2233009@gmail.com>, 2018
 # Олег Шевченко <olegrock@gmail.com>, 2019
 # Viktor S <awsswa59@gmail.com>, 2019
+# Карима Бекмаметова, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
+"POT-Creation-Date: 2020-12-09 12:40+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>, 2019\n"
+"Last-Translator: Карима Бекмаметова, 2020\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -652,6 +653,9 @@ msgid ""
 "least three lumberjacks’ houses and two quarries. Be sure to have dismantled"
 " all of the unproductive buildings though."
 msgstr ""
+"Прежде всего, нам нужно больше строительных материалов. Поэтому мы должны "
+"построить по крайней мере три домика дровосеков и две каменоломни. "
+"Убедитесь, что демонтировали все непроизводительные здания."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
