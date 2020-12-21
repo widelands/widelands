@@ -128,16 +128,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
      theme_dropdown_(&box_interface_left_,
-                        "dropdown_theme",
-                        0,
-                        0,
-                        100,  // 100 is arbitrary, will be resized in layout().
-                        50,
-                        24,
-                        _("UI Theme"),
-                        UI::DropdownType::kTextual,
-                        UI::PanelStyle::kFsMenu,
-                        UI::ButtonStyle::kFsMenuMenu),
+                     "dropdown_theme",
+                     0,
+                     0,
+                     100,  // 100 is arbitrary, will be resized in layout().
+                     50,
+                     24,
+                     _("UI Theme"),
+                     UI::DropdownType::kTextual,
+                     UI::PanelStyle::kFsMenu,
+                     UI::ButtonStyle::kFsMenuMenu),
 
      inputgrab_(
         &box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
@@ -465,7 +465,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
 	}
 
 	for (const std::string& theme : g_fs->list_directory("templates")) {
-		const std::string descname = (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
+		const std::string descname =
+		   (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
 		theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
 	}
 	for (auto& addon : AddOns::g_addons) {

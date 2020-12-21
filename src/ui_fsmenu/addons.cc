@@ -1162,7 +1162,8 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info) {
 		}
 	}
 
-	if (info.category == AddOns::AddOnCategory::kTheme && template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
+	if (info.category == AddOns::AddOnCategory::kTheme &&
+	    template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
 		// When uninstalling the active theme, fall back to default theme
 		set_template_dir("");
 	}

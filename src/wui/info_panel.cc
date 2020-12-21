@@ -80,8 +80,7 @@ void MessagePreview::draw(RenderTarget& r) {
 	}
 
 	r.tile(Recti(0, 0, get_w(), get_h()),
-	       g_image_cache->get(template_dir() + "wui/windows/background.png"),
-	       Vector2i(0, 0));
+	       g_image_cache->get(template_dir() + "wui/windows/background.png"), Vector2i(0, 0));
 
 	// every second message is highlighted
 	if (owner_.index_of(this) % 2) {
@@ -202,16 +201,15 @@ void InfoPanel::rebuild_dropdown() {
 	                 g_image_cache->get("images/ui_basic/fsel.png"),
 	                 display_mode_ == DisplayMode::kOnMouse_Visible ||
 	                    display_mode_ == DisplayMode::kOnMouse_Hidden);
-	toggle_mode_.add(
-	   _("Hide"), DisplayMode::kMinimized,
-	   g_image_cache->get(template_dir() +
-	                      (on_top_ ? "wui/windows/minimize.png" : "wui/windows/maximize.png")),
-	   display_mode_ == DisplayMode::kMinimized);
+	toggle_mode_.add(_("Hide"), DisplayMode::kMinimized,
+	                 g_image_cache->get(template_dir() + (on_top_ ? "wui/windows/minimize.png" :
+	                                                                "wui/windows/maximize.png")),
+	                 display_mode_ == DisplayMode::kMinimized);
 
-	toggle_mode_.add(
-	   on_top_ ? _("Move panel to bottom") : _("Move panel to top"), DisplayMode::kCmdSwap,
-	   g_image_cache->get(template_dir() +
-	                      (on_top_ ? "wui/windows/maximize.png" : "wui/windows/minimize.png")));
+	toggle_mode_.add(on_top_ ? _("Move panel to bottom") : _("Move panel to top"),
+	                 DisplayMode::kCmdSwap,
+	                 g_image_cache->get(template_dir() + (on_top_ ? "wui/windows/maximize.png" :
+	                                                                "wui/windows/minimize.png")));
 
 	toggle_mode_.selected.connect([this]() {
 		update_mode();

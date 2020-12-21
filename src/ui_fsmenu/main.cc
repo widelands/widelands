@@ -187,8 +187,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	vbox2_.add_inf_space();
 	vbox2_.add(&exit_, UI::Box::Resizing::kFullSize);
 
-	for (const std::string& img :
-	     g_fs->list_directory(template_dir() + "loadscreens/mainmenu")) {
+	for (const std::string& img : g_fs->list_directory(template_dir() + "loadscreens/mainmenu")) {
 		images_.push_back(img);
 	}
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT

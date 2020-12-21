@@ -50,7 +50,8 @@ void set_template_dir(std::string dir) {
 		if (dir == kDefaultTemplate) {
 			throw wexception("Default template directory '%s' does not exist!", dir.c_str());
 		}
-		log_warn("set_template_dir: template directory '%s' does not exist, using default template", dir.c_str());
+		log_warn("set_template_dir: template directory '%s' does not exist, using default template",
+		         dir.c_str());
 		dir = kDefaultTemplate;
 	}
 
