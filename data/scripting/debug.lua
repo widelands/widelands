@@ -3,7 +3,7 @@
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
-set_textdomain("tribes")
+push_textdomain("tribes")
 
 function observer_mode(plr_number)
     local game = wl.Game()
@@ -493,3 +493,5 @@ function cheat_soldiers(plr_number)
       end
    end
 end
+
+pop_textdomain()
