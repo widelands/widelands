@@ -24,8 +24,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
-"PO-Revision-Date: 2020-11-30 19:34+0000\n"
+"POT-Creation-Date: 2020-12-09 12:40+0000\n"
+"PO-Revision-Date: 2020-12-09 12:53+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -655,8 +655,8 @@ msgstr "Mine"
 msgid "port"
 msgstr "Hafen"
 
-#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
+#. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/editor/tools/info_tool.cc:90
 #: ../../src/logic/map_objects/world/terrain_description.cc:74
 msgid "walkable"
@@ -840,8 +840,8 @@ msgstr "Anzeige"
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:248
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:61
 #: ../../src/editor/ui_menus/player_menu.cc:78
-#: ../../src/ui_basic/messagebox.cc:99 ../../src/ui_fsmenu/addons.cc:219
-#: ../../src/ui_fsmenu/addons.cc:1413 ../../src/ui_fsmenu/helpwindow.cc:57
+#: ../../src/ui_basic/messagebox.cc:99 ../../src/ui_fsmenu/addons.cc:218
+#: ../../src/ui_fsmenu/addons.cc:1435 ../../src/ui_fsmenu/helpwindow.cc:57
 #: ../../src/ui_fsmenu/menu.cc:153 ../../src/ui_fsmenu/options.cc:92
 #: ../../src/ui_fsmenu/training_wheel_options.cc:152
 #: ../../src/wui/game_main_menu_save_game.cc:85
@@ -1532,9 +1532,9 @@ msgid "off"
 msgstr "off"
 
 #: ../../src/logic/addons.cc:36 ../../src/ui_basic/dropdown.cc:341
-#: ../../src/ui_basic/dropdown.cc:343 ../../src/ui_fsmenu/addons.cc:1045
-#: ../../src/ui_fsmenu/addons.cc:1101 ../../src/ui_fsmenu/addons.cc:1209
-#: ../../src/ui_fsmenu/addons.cc:1670 ../../src/ui_fsmenu/launch_mpg.cc:358
+#: ../../src/ui_basic/dropdown.cc:343 ../../src/ui_fsmenu/addons.cc:1067
+#: ../../src/ui_fsmenu/addons.cc:1123 ../../src/ui_fsmenu/addons.cc:1231
+#: ../../src/ui_fsmenu/addons.cc:1692 ../../src/ui_fsmenu/launch_mpg.cc:358
 msgid "Error"
 msgstr "Fehler"
 
@@ -3096,230 +3096,241 @@ msgstr "Lua Fehler"
 msgid "Add-On Manager"
 msgstr "Erweiterungsverwaltung"
 
-#: ../../src/ui_fsmenu/addons.cc:173
+#: ../../src/ui_fsmenu/addons.cc:172
 msgid "Verified only"
 msgstr "Nur verifizierte"
 
-#: ../../src/ui_fsmenu/addons.cc:174
+#: ../../src/ui_fsmenu/addons.cc:173
 msgid "Show only verified add-ons in the Browse tab"
 msgstr "Zeige nur verifizierte Erweiterungen im Durchsuchen Reiter"
 
-#: ../../src/ui_fsmenu/addons.cc:182
+#: ../../src/ui_fsmenu/addons.cc:181
 msgid "Sort by"
 msgstr "Sortieren nach"
 
-#: ../../src/ui_fsmenu/addons.cc:193
+#: ../../src/ui_fsmenu/addons.cc:192
 #: ../../src/ui_fsmenu/training_wheel_options.cc:117
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: ../../src/ui_fsmenu/addons.cc:194
+#: ../../src/ui_fsmenu/addons.cc:193
 msgid "Reset the filters"
 msgstr "Die Filter zurücksetzen"
 
-#: ../../src/ui_fsmenu/addons.cc:210
+#: ../../src/ui_fsmenu/addons.cc:209
 msgid "Refresh"
 msgstr "Neu laden"
 
-#: ../../src/ui_fsmenu/addons.cc:211
+#: ../../src/ui_fsmenu/addons.cc:210
 msgid "Refresh the list of add-ons available from the server"
 msgstr "Lade die Liste der verfügbaren Erweiterungen erneut vom Server"
 
-#: ../../src/ui_fsmenu/addons.cc:227
+#: ../../src/ui_fsmenu/addons.cc:226
 msgid "Fix dependencies…"
 msgstr "Löse Abhängigkeiten auf…"
 
-#: ../../src/ui_fsmenu/addons.cc:228
+#: ../../src/ui_fsmenu/addons.cc:227
 msgid "Try to automatically fix the dependency errors"
 msgstr "Versuche die Fehler in den Abhängkeiten automatisch zu beheben"
 
-#: ../../src/ui_fsmenu/addons.cc:237
+#: ../../src/ui_fsmenu/addons.cc:236
 msgid "Move selected add-on to top"
 msgstr "Schiebe die gewählte Erweiterung an die Spitze"
 
-#: ../../src/ui_fsmenu/addons.cc:246
+#: ../../src/ui_fsmenu/addons.cc:245
 msgid "Move selected add-on one step up"
 msgstr "Schiebe die gewählte Erweiterung eine Position nach oben"
 
-#: ../../src/ui_fsmenu/addons.cc:255
+#: ../../src/ui_fsmenu/addons.cc:254
 msgid "Move selected add-on one step down"
 msgstr "Schiebe die gewählte Erweiterung eine Position nach unten"
 
-#: ../../src/ui_fsmenu/addons.cc:264
+#: ../../src/ui_fsmenu/addons.cc:263
 msgid "Move selected add-on to bottom"
 msgstr "Schiebe die gewählte Erweiterung ans Ende"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name
-#: ../../src/ui_fsmenu/addons.cc:288
+#: ../../src/ui_fsmenu/addons.cc:287
 msgid "Name"
 msgstr "Name"
 
 #. * TRANSLATORS: Sort add-ons alphabetically by name (inverted)
-#: ../../src/ui_fsmenu/addons.cc:290
+#: ../../src/ui_fsmenu/addons.cc:289
 msgid "Name (descending)"
 msgstr "Name (absteigend)"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:292
+#: ../../src/ui_fsmenu/addons.cc:291
 msgid "Best average rating"
 msgstr "Beste durchschnittliche Bewertung"
 
 #. * TRANSLATORS: Sort add-ons by average rating
-#: ../../src/ui_fsmenu/addons.cc:294
+#: ../../src/ui_fsmenu/addons.cc:293
 msgid "Worst average rating"
 msgstr "Schlechteste durchschnittliche Bewertung"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:296
+#: ../../src/ui_fsmenu/addons.cc:295
 msgid "Most often downloaded"
 msgstr "Am Meisten heruntergeladen"
 
 #. * TRANSLATORS: Sort add-ons by how often they were downloaded
-#: ../../src/ui_fsmenu/addons.cc:298
+#: ../../src/ui_fsmenu/addons.cc:297
 msgid "Least often downloaded"
 msgstr "Am Wenigsten heruntergeladen"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:300
+#: ../../src/ui_fsmenu/addons.cc:299
 msgid "Oldest"
 msgstr "Älteste"
 
 #. * TRANSLATORS: Sort add-ons by upload date/time
-#: ../../src/ui_fsmenu/addons.cc:302
+#: ../../src/ui_fsmenu/addons.cc:301
 msgid "Newest"
 msgstr "Neueste"
 
-#: ../../src/ui_fsmenu/addons.cc:305
+#: ../../src/ui_fsmenu/addons.cc:304
 msgid "Filter add-ons by name"
 msgstr "Filtere Erweiterungen nach Namen"
 
-#: ../../src/ui_fsmenu/addons.cc:315
+#: ../../src/ui_fsmenu/addons.cc:314
 #, c-format
 msgid "Toggle category ‘%s’"
 msgstr "Kategorie ‘%s’ umschalten"
 
-#: ../../src/ui_fsmenu/addons.cc:381
+#: ../../src/ui_fsmenu/addons.cc:380
 #, c-format
 msgid "Are you certain that you want to upgrade this %u add-on?\n"
 msgid_plural "Are you certain that you want to upgrade these %u add-ons?\n"
 msgstr[0] "Möchtest du diese %u Erweiterung wirklich aktualisieren?\n"
 msgstr[1] "Möchtest du diese %u Erweiterungen wirklich aktualisieren?\n"
 
-#: ../../src/ui_fsmenu/addons.cc:389
+#: ../../src/ui_fsmenu/addons.cc:388
 #, c-format
 msgid ""
 "\n"
 "· %1$s (%2$s) by %3$s"
 msgstr "\n· %1$s (%2$s) von %3$s"
 
-#: ../../src/ui_fsmenu/addons.cc:390 ../../src/ui_fsmenu/addons.cc:1611
-#: ../../src/ui_fsmenu/addons.cc:1634
+#: ../../src/ui_fsmenu/addons.cc:389 ../../src/ui_fsmenu/addons.cc:1633
+#: ../../src/ui_fsmenu/addons.cc:1656
 msgid "NOT VERIFIED"
 msgstr "NICHT VERIFIZIERT"
 
-#: ../../src/ui_fsmenu/addons.cc:390
+#: ../../src/ui_fsmenu/addons.cc:389
 msgid "verified"
 msgstr "verifiziert"
 
-#: ../../src/ui_fsmenu/addons.cc:394
+#: ../../src/ui_fsmenu/addons.cc:393
 msgid "Upgrade All"
 msgstr "Alle aktualisieren"
 
 #. * TRANSLATORS: This will be inserted into the string "Server Connection
 #. Error <br> by %s"
-#: ../../src/ui_fsmenu/addons.cc:576
+#: ../../src/ui_fsmenu/addons.cc:575
 msgid "a networking bug"
 msgstr "ein Netzwerkfehler"
 
-#: ../../src/ui_fsmenu/addons.cc:579
+#: ../../src/ui_fsmenu/addons.cc:578
 msgid "Server Connection Error"
 msgstr "Serververbindungsfehler"
 
-#: ../../src/ui_fsmenu/addons.cc:581
+#: ../../src/ui_fsmenu/addons.cc:580
 #, c-format
 msgid ""
 "Unable to fetch the list of available add-ons from the server!<br>Error "
 "Message: %s"
 msgstr "Die Liste verfügbarer Erweiterungen kann nicht from Server geladen werden!<br>Fehlermeldung: %s"
 
-#: ../../src/ui_fsmenu/addons.cc:661
+#: ../../src/ui_fsmenu/addons.cc:660
 #, c-format
 msgid "Installed (%u)"
 msgstr "Installiert (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:738
+#: ../../src/ui_fsmenu/addons.cc:737
 #, c-format
 msgid "Browse (%u)"
 msgstr "Durchsuchen (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:748
+#: ../../src/ui_fsmenu/addons.cc:747
 #, c-format
 msgid "Upgrade all (%u)"
 msgstr "Alle aktualisieren (%u)"
 
-#: ../../src/ui_fsmenu/addons.cc:751
+#: ../../src/ui_fsmenu/addons.cc:750
 msgid "No upgrades are available for your installed add-ons"
 msgstr "Keine Aktualisierungen für installierte Erweiterungen verfügbar"
 
-#: ../../src/ui_fsmenu/addons.cc:754
+#: ../../src/ui_fsmenu/addons.cc:753
 #, c-format
 msgid "Upgrade the following %u add-on:"
 msgstr "Aktualisiere die folgende %u Erweiterung:"
 
-#: ../../src/ui_fsmenu/addons.cc:755
+#: ../../src/ui_fsmenu/addons.cc:754
 #, c-format
 msgid "Upgrade the following %u add-ons:"
 msgstr "Aktualisiere die folgenden %u Erweiterungen:"
 
-#: ../../src/ui_fsmenu/addons.cc:760
+#: ../../src/ui_fsmenu/addons.cc:759
 #, c-format
 msgid "· %s"
 msgstr "· %s"
 
-#: ../../src/ui_fsmenu/addons.cc:789
+#: ../../src/ui_fsmenu/addons.cc:788
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which could not be found"
 msgstr "· ‘%1$s’ benötigt ‘%2$s’, welche nicht gefunden wurde"
 
-#: ../../src/ui_fsmenu/addons.cc:796
+#: ../../src/ui_fsmenu/addons.cc:795
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is disabled"
 msgstr "· ‘%1$s’ benötigt ‘%2$s’, welche deaktiviert ist"
 
-#: ../../src/ui_fsmenu/addons.cc:803
+#: ../../src/ui_fsmenu/addons.cc:802
 #, c-format
 msgid "· ‘%1$s’ requires ‘%2$s’ which is listed below the requiring add-on"
 msgstr "· ‘%1$s’ benötigt ‘%2$s’, welche unter der anfordernden Erweiterung aufgeführt ist"
 
-#: ../../src/ui_fsmenu/addons.cc:823
+#: ../../src/ui_fsmenu/addons.cc:822
 #, c-format
 msgid ""
 "· ‘%1$s’ requires first ‘%2$s’ and then ‘%3$s’, but they are listed in the "
 "wrong order"
 msgstr "· ‘%1$s’ benötigt zuerst ‘%2$s’ und dann ‘%3$s’, aber sie sind in der falschen Reihenfolge aufgeführt"
 
-#: ../../src/ui_fsmenu/addons.cc:849
+#: ../../src/ui_fsmenu/addons.cc:848
 #, c-format
 msgid "%u Dependency Error"
 msgstr "%u Fehler in den Abhängigkeiten"
 
-#: ../../src/ui_fsmenu/addons.cc:849
+#: ../../src/ui_fsmenu/addons.cc:848
 #, c-format
 msgid "%u Dependency Errors"
 msgstr "%u Fehler in den Abhängigkeiten"
 
-#: ../../src/ui_fsmenu/addons.cc:854
+#: ../../src/ui_fsmenu/addons.cc:853
 msgid ""
 "Add-Ons with dependency errors may work incorrectly or prevent games and "
 "maps from loading."
 msgstr "Erweiterungen mit Fehlern in den Abhängigkeiten können fehlerhaft funktionieren oder das Laden von Spielen und Karten verhindern."
 
-#: ../../src/ui_fsmenu/addons.cc:1007
+#: ../../src/ui_fsmenu/addons.cc:883
+msgid "Note"
+msgstr "Hinweis"
+
+#: ../../src/ui_fsmenu/addons.cc:884
+#, c-format
+msgid ""
+"Please restart Widelands before you use the add-on ‘%s’, otherwise you may "
+"experience graphical glitches."
+msgstr "Bitte starte Widelands neu bevor du die Erweiterung  ‘%s’ verwendest. Anderenfalls kann es zu grafischen Fehlern kommen. "
+
+#: ../../src/ui_fsmenu/addons.cc:1029
 #, c-format
 msgid "Downloading ‘%s’…"
 msgstr "Lade ‘%s’ herunter…"
 
-#: ../../src/ui_fsmenu/addons.cc:1047
+#: ../../src/ui_fsmenu/addons.cc:1069
 #, c-format
 msgid ""
 "The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading this add-on will be skipped.\n"
@@ -3328,12 +3339,12 @@ msgid ""
 "%2$s"
 msgstr "Die Erweiterung ‘%1$s’ konnte nicht heruntergeladen werden. Die Installation/Aktualisierung der Erweiterung wird übersprungen.\n\nFehlermeldung:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1061
+#: ../../src/ui_fsmenu/addons.cc:1083
 #, c-format
 msgid "Downloading translations for ‘%s’…"
 msgstr "Lade die Übersetzungen für ‘%s’ herunter…"
 
-#: ../../src/ui_fsmenu/addons.cc:1102
+#: ../../src/ui_fsmenu/addons.cc:1124
 #, c-format
 msgid ""
 "The translation files for the add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading the translations for this add-on will be skipped.\n"
@@ -3342,12 +3353,12 @@ msgid ""
 "%2$s"
 msgstr "Die Übersetzungsdateien für die Erweiterung ‘%1$s’ konnten nicht heruntergeladen werden. Die Installation/Aktualisierung der Erweiterung wird übersprungen.\n\nFehlermeldung:\n%2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1126 ../../src/ui_fsmenu/addons.cc:1260
-#: ../../src/ui_fsmenu/addons.cc:1514
+#: ../../src/ui_fsmenu/addons.cc:1148 ../../src/ui_fsmenu/addons.cc:1282
+#: ../../src/ui_fsmenu/addons.cc:1536
 msgid "Uninstall"
 msgstr "Deinstallieren"
 
-#: ../../src/ui_fsmenu/addons.cc:1127
+#: ../../src/ui_fsmenu/addons.cc:1149
 #, c-format
 msgid ""
 "Are you certain that you want to uninstall this add-on?\n"
@@ -3359,131 +3370,131 @@ msgid ""
 "%5$s\n"
 msgstr "Möchtest du wirklich diese Erweiterung deinstallieren?\n\n%1$s\nvon %2$s\nVersion %3$u\nKategorie: %4$s\n%5$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:1210
+#: ../../src/ui_fsmenu/addons.cc:1232
 #, c-format
 msgid "The required add-on ‘%s’ could not be found on the server."
 msgstr "Die benötigte Erweiterung ‘%s’ wurde nicht auf dem Server gefunden."
 
-#: ../../src/ui_fsmenu/addons.cc:1272 ../../src/ui_fsmenu/addons.cc:1317
+#: ../../src/ui_fsmenu/addons.cc:1294 ../../src/ui_fsmenu/addons.cc:1339
 msgid "Disable"
 msgstr "Deaktivieren"
 
-#: ../../src/ui_fsmenu/addons.cc:1272 ../../src/ui_fsmenu/addons.cc:1317
+#: ../../src/ui_fsmenu/addons.cc:1294 ../../src/ui_fsmenu/addons.cc:1339
 msgid "Enable"
 msgstr "Aktivieren"
 
 #. * TRANSLATORS: Add-On localized name as header (Add-On internal name in
 #. italics)
-#: ../../src/ui_fsmenu/addons.cc:1295 ../../src/ui_fsmenu/addons.cc:1574
+#: ../../src/ui_fsmenu/addons.cc:1317 ../../src/ui_fsmenu/addons.cc:1596
 #, c-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: ../../src/ui_fsmenu/addons.cc:1299 ../../src/ui_fsmenu/addons.cc:1578
+#: ../../src/ui_fsmenu/addons.cc:1321 ../../src/ui_fsmenu/addons.cc:1600
 #, c-format
 msgid "(%s)"
 msgstr "(%s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1302 ../../src/ui_fsmenu/addons.cc:1582
+#: ../../src/ui_fsmenu/addons.cc:1324 ../../src/ui_fsmenu/addons.cc:1604
 #, c-format
 msgid "by %s"
 msgstr "von %s"
 
-#: ../../src/ui_fsmenu/addons.cc:1326 ../../src/ui_fsmenu/addons.cc:1664
+#: ../../src/ui_fsmenu/addons.cc:1348 ../../src/ui_fsmenu/addons.cc:1686
 #, c-format
 msgid "Category: %s"
 msgstr "Kategorie: %s"
 
 #. * TRANSLATORS: (MajorVersion).(MinorVersion)
-#: ../../src/ui_fsmenu/addons.cc:1330 ../../src/ui_fsmenu/addons.cc:1667
+#: ../../src/ui_fsmenu/addons.cc:1352 ../../src/ui_fsmenu/addons.cc:1689
 #, c-format
 msgid "Version: %1$u.%2$u"
 msgstr "Version: %1$u.%2$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1376
+#: ../../src/ui_fsmenu/addons.cc:1398
 #, c-format
 msgid "%.2f GB"
 msgstr "%.2f GB"
 
-#: ../../src/ui_fsmenu/addons.cc:1378
+#: ../../src/ui_fsmenu/addons.cc:1400
 #, c-format
 msgid "%.2f MB"
 msgstr "%.2f MB"
 
-#: ../../src/ui_fsmenu/addons.cc:1380
+#: ../../src/ui_fsmenu/addons.cc:1402
 #, c-format
 msgid "%.2f kB"
 msgstr "%.2f kB"
 
-#: ../../src/ui_fsmenu/addons.cc:1382
+#: ../../src/ui_fsmenu/addons.cc:1404
 #, c-format
 msgid "%u bytes"
 msgstr "%u bytes"
 
-#: ../../src/ui_fsmenu/addons.cc:1406
+#: ../../src/ui_fsmenu/addons.cc:1428
 msgid "Your vote"
 msgstr "Deine Bewertung"
 
-#: ../../src/ui_fsmenu/addons.cc:1412
+#: ../../src/ui_fsmenu/addons.cc:1434
 msgid "Submit comment"
 msgstr "Kommentar abschicken"
 
-#: ../../src/ui_fsmenu/addons.cc:1418 ../../src/ui_fsmenu/addons.cc:1687
+#: ../../src/ui_fsmenu/addons.cc:1440 ../../src/ui_fsmenu/addons.cc:1709
 #, c-format
 msgid "Average rating: %1$.3f (%2$u vote)"
 msgid_plural "Average rating: %1$.3f (%2$u votes)"
 msgstr[0] "Durchschnittliche Bewertung: %1$.3f (%2$u Bewertung)"
 msgstr[1] "Durchschnittliche Bewertung: %1$.3f (%2$u Bewertungen)"
 
-#: ../../src/ui_fsmenu/addons.cc:1422 ../../src/ui_fsmenu/addons.cc:1691
+#: ../../src/ui_fsmenu/addons.cc:1444 ../../src/ui_fsmenu/addons.cc:1713
 msgid "No votes yet"
 msgstr "Noch keine Bewertungen"
 
-#: ../../src/ui_fsmenu/addons.cc:1426
+#: ../../src/ui_fsmenu/addons.cc:1448
 msgid "No comments yet."
 msgstr "Noch keine Kommentare"
 
-#: ../../src/ui_fsmenu/addons.cc:1428
+#: ../../src/ui_fsmenu/addons.cc:1450
 #, c-format
 msgid "%u comment:"
 msgid_plural "%u comments:"
 msgstr[0] "%u Kommentar:"
 msgstr[1] "%u Kommentare:"
 
-#: ../../src/ui_fsmenu/addons.cc:1438
+#: ../../src/ui_fsmenu/addons.cc:1460
 #, c-format
 msgid "‘%1$s’ commented on version %2$u:"
 msgstr "‘%1$s’ kommentierte zu Version %2$u:"
 
-#: ../../src/ui_fsmenu/addons.cc:1452
+#: ../../src/ui_fsmenu/addons.cc:1474
 msgid "Not voted"
 msgstr "Nicht bewertet"
 
-#: ../../src/ui_fsmenu/addons.cc:1496 ../../src/ui_fsmenu/addons.cc:1603
+#: ../../src/ui_fsmenu/addons.cc:1518 ../../src/ui_fsmenu/addons.cc:1625
 msgid "Install"
 msgstr "Installieren"
 
-#: ../../src/ui_fsmenu/addons.cc:1505 ../../src/ui_fsmenu/addons.cc:1625
+#: ../../src/ui_fsmenu/addons.cc:1527 ../../src/ui_fsmenu/addons.cc:1647
 msgid "Upgrade"
 msgstr "Aktualisieren"
 
-#: ../../src/ui_fsmenu/addons.cc:1523
+#: ../../src/ui_fsmenu/addons.cc:1545
 msgid "Comments and Votes"
 msgstr "Kommentare und Bewertungen"
 
 #. * TRANSLATORS: Filesize · Download count · Average rating · Number of
 #. comments
-#: ../../src/ui_fsmenu/addons.cc:1560
+#: ../../src/ui_fsmenu/addons.cc:1582
 #, c-format
 msgid "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"
 msgstr "%1$s   ⬇ %2$u   ★ %3$s   “” %4$u"
 
-#: ../../src/ui_fsmenu/addons.cc:1583
+#: ../../src/ui_fsmenu/addons.cc:1605
 #, c-format
 msgid "by %1$s (uploaded by %2$s)"
 msgstr "von %1$s (hochgeladen von %2$s)"
 
-#: ../../src/ui_fsmenu/addons.cc:1604
+#: ../../src/ui_fsmenu/addons.cc:1626
 #, c-format
 msgid ""
 "Are you certain that you want to install this add-on?\n"
@@ -3496,11 +3507,11 @@ msgid ""
 "%6$s\n"
 msgstr "Möchtest du wirklich diese Erweiterung installieren?\n\n%1$s\nvon %2$s\n%3$s\nVersion %4$u\nKategorie: %5$s\n%6$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:1611 ../../src/ui_fsmenu/addons.cc:1634
+#: ../../src/ui_fsmenu/addons.cc:1633 ../../src/ui_fsmenu/addons.cc:1656
 msgid "Verified"
 msgstr "Verifiziert"
 
-#: ../../src/ui_fsmenu/addons.cc:1626
+#: ../../src/ui_fsmenu/addons.cc:1648
 #, c-format
 msgid ""
 "Are you certain that you want to upgrade this add-on?\n"
@@ -3514,31 +3525,31 @@ msgid ""
 "%7$s\n"
 msgstr "Möchtest du wirklich diese Erweiterung aktualisieren?\n\n%1$s\nvon %2$s\n%3$s\nInstallierte Version: %4$u\nVerfügbare Version: %5$u\nKategorie: %6$s\n%7$s\n"
 
-#: ../../src/ui_fsmenu/addons.cc:1672
+#: ../../src/ui_fsmenu/addons.cc:1694
 msgid "Verified by the Widelands Development Team"
 msgstr "Verifiziert vom Widelands-Entwicklungsteam"
 
-#: ../../src/ui_fsmenu/addons.cc:1673
+#: ../../src/ui_fsmenu/addons.cc:1695
 msgid ""
 "This add-on was not checked by the Widelands Development Team yet. We cannot"
 " guarantee that it does not contain harmful or offensive content."
 msgstr "Diese Erweiterung wurde noch nicht durch das Widelands-Entwicklungsteam geprüft. Wir können nicht garantieren, dass kein schädlicher oder anstößiger Inhalt enthalten ist."
 
-#: ../../src/ui_fsmenu/addons.cc:1680
+#: ../../src/ui_fsmenu/addons.cc:1702
 #, c-format
 msgid "Total size: %u byte"
 msgid_plural "Total size: %u bytes"
 msgstr[0] "Gesamtgröße: %u byte"
 msgstr[1] "Gesamtgröße: %ubytes"
 
-#: ../../src/ui_fsmenu/addons.cc:1683
+#: ../../src/ui_fsmenu/addons.cc:1705
 #, c-format
 msgid "%u download"
 msgid_plural "%u downloads"
 msgstr[0] "%u mal heruntergeladen"
 msgstr[1] "%u mal heruntergeladen"
 
-#: ../../src/ui_fsmenu/addons.cc:1692
+#: ../../src/ui_fsmenu/addons.cc:1714
 #, c-format
 msgid "%u comment"
 msgid_plural "%u comments"
