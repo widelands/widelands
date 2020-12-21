@@ -65,7 +65,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 }
 
 inline bool MessagePreview::message_still_exists() const {
-	return owner_.message_queue_->count(id_.value());
+	return !owner_.message_queue_ || owner_.message_queue_->count(id_.value());
 }
 
 void MessagePreview::think() {
@@ -116,8 +116,9 @@ bool MessagePreview::handle_mousepress(const uint8_t button, int32_t, int32_t) {
 		owner_.pop_message(this);
 		break;
 	case SDL_BUTTON_RIGHT: {  // open message menu
-		assert(owner_.iplayer_);
-		owner_.iplayer_->popup_message(id_, *message_);
+		if (owner_.iplayer_ && message_) {
+			owner_.iplayer_->popup_message(id_, *message_);
+		}
 		break;
 	}
 	default:
