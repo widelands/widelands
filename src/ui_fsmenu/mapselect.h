@@ -46,8 +46,6 @@ public:
 	MapData const* get_map() const;
 	void think() override;
 
-	boost::signals2::signal<void()> on_ok, on_back;
-
 protected:
 	void clicked_ok() override;
 	void clicked_back() override;
