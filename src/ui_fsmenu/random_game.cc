@@ -59,7 +59,7 @@ void RandomGame::clicked_ok() {
 	game_.cleanup_objects();
 	if (menu_.do_generate_map(game_, nullptr, &settings_)) {
 		game_.remove_loader_ui();
-		new LaunchSPG(capsule_, settings_, game_, true);
+		new LaunchSPG(capsule_, settings_, game_, nullptr, false);
 	} else {
 		MainMenu& m = capsule_.menu();
 		UI::WLMessageBox mbox(

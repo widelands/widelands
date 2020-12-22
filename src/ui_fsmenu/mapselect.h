@@ -33,15 +33,19 @@ struct GameSettingsProvider;
 
 namespace FsMenu {
 
+class LaunchMPG;
+
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
 class MapSelect : public TwoColumnsFullNavigationMenu {
 public:
-	MapSelect(LaunchGame&,
+	MapSelect(MenuCapsule&,
+	          LaunchMPG* /* nullptr for single player */,
 	          GameSettingsProvider*,
 	          GameController*,
-	          Widelands::EditorGameBase& egbase);
+	          Widelands::Game&);
+	~MapSelect() override;
 
 	MapData const* get_map() const;
 	void think() override;
@@ -57,7 +61,7 @@ private:
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);
 
-	LaunchGame& parent_screen_;
+	LaunchMPG* parent_screen_;
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
@@ -76,6 +80,7 @@ private:
 	const std::string basedir_;
 	std::string curdir_;
 
+	Widelands::Game& game_;
 	GameSettingsProvider* settings_;
 	GameController* ctrl_;
 

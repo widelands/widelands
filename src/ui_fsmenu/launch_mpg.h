@@ -30,7 +30,13 @@
 #include "wui/game_chat_panel.h"
 
 struct ChatProvider;
+struct MapData;
+namespace Widelands {
+class Game;
+}
+
 namespace FsMenu {
+
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player
  * games.
@@ -43,7 +49,7 @@ public:
 	   GameSettingsProvider&,
 	   GameController&,
 	   ChatProvider&,
-	   Widelands::EditorGameBase& egbase,
+	   Widelands::Game&,
 	   std::unique_ptr<GameController>& delete_on_cancel,
 	   bool game_done_on_cancel,
 	   const std::function<void()>& callback = []() {});
@@ -52,7 +58,7 @@ public:
 	void think() override;
 	void refresh();
 
-	void clicked_select_map_callback(const MapData*, bool) override;
+	void clicked_select_map_callback(const MapData*, bool);
 
 protected:
 	void clicked_ok() override;
@@ -78,7 +84,7 @@ private:
 	std::unique_ptr<HelpWindow> help_;
 	MultiPlayerSetupGroup mpsg_;
 	std::unique_ptr<GameChatPanel> chat_;
-	Widelands::EditorGameBase& egbase_;  // Not owned
+	Widelands::Game& game_;  // Not owned
 
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
