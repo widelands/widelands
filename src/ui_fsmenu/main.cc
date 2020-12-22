@@ -719,6 +719,10 @@ void MainMenu::layout() {
 }
 
 void MainMenu::action(const MenuTarget t) {
+	singleplayer_.set_list_visibility(false);
+	multiplayer_.set_list_visibility(false);
+	editor_.set_list_visibility(false);
+
 	switch (t) {
 
 	case MenuTarget::kExit:
