@@ -31,7 +31,8 @@ RandomGame::RandomGame(MenuCapsule& m)
      menu_(left_column_box_, UI::PanelStyle::kFsMenu, 350, 64, 64),
      icon_(&right_column_content_box_,
            UI::PanelStyle::kFsMenu,
-           g_image_cache->get("images/logos/wl-ico-128.png")) {
+           g_image_cache->get("images/logos/wl-ico-128.png")),
+     progress_window_(nullptr) {
 	left_column_box_.add_inf_space();
 	left_column_box_.add(&menu_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	left_column_box_.add_inf_space();
@@ -42,7 +43,10 @@ RandomGame::RandomGame(MenuCapsule& m)
 	right_column_content_box_.add_inf_space();
 
 	reactivated();
+	assert(progress_window_);
+	progress_window_->set_visible(true);
 	EditorInteractive::load_world_units(nullptr, game_);
+	progress_window_->set_visible(false);
 
 	layout();
 }
@@ -52,15 +56,30 @@ RandomGame::~RandomGame() {
 }
 
 void RandomGame::reactivated() {
-	game_.create_loader_ui({"general_game", "singleplayer"}, false, "", "", this);
+	if (!progress_window_) {
+		progress_window_ = &game_.create_loader_ui({"general_game", "singleplayer"}, false, "", "", &capsule_);
+		progress_window_->set_visible(false);
+	}
+}
+
+void RandomGame::layout() {
+	TwoColumnsFullNavigationMenu::layout();
+	if (progress_window_) {
+		progress_window_->set_size(capsule_.get_inner_w(), capsule_.get_inner_h());
+	}
 }
 
 void RandomGame::clicked_ok() {
+	assert(progress_window_);
+	progress_window_->set_visible(true);
 	game_.cleanup_objects();
+
 	if (menu_.do_generate_map(game_, nullptr, &settings_)) {
 		game_.remove_loader_ui();
+		progress_window_ = nullptr;
 		new LaunchSPG(capsule_, settings_, game_, nullptr, false);
 	} else {
+		progress_window_->set_visible(false);
 		MainMenu& m = capsule_.menu();
 		UI::WLMessageBox mbox(
 		   &m, UI::WindowStyle::kFsMenu, _("Map Generation Error"),

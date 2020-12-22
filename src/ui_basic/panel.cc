@@ -172,6 +172,35 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ModalGuard);
 };
 
+Panel& Panel::get_topmost_forefather() {
+	Panel* forefather = this;
+	while (forefather->parent_ != nullptr) {
+		forefather = forefather->parent_;
+	}
+	return *forefather;
+}
+
+void Panel::do_redraw_now() {
+	Panel& ff = get_topmost_forefather();
+	RenderTarget& rt = *g_gr->get_render_target();
+
+	ff.do_draw(rt);
+
+	if (g_mouse_cursor->is_visible()) {
+		WLApplication* const app = WLApplication::get();
+		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+		g_mouse_cursor->draw(rt, app->get_mouse_position());
+
+		if (is_modal()) {
+			do_tooltip();
+		} else {
+			ff.do_tooltip();
+		}
+	}
+
+	g_gr->refresh();
+}
+
 /**
  * Enters the event loop; all events will be handled by this panel.
  *
@@ -185,11 +214,6 @@ int Panel::do_run() {
 	ModalGuard prevmodal(*this);
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
-
-	Panel* forefather = this;
-	while (forefather->parent_ != nullptr) {
-		forefather = forefather->parent_;
-	}
 
 	// Loop
 	running_ = true;
@@ -230,19 +254,7 @@ int Panel::do_run() {
 		}
 
 		if (start_time >= next_draw_time) {
-			RenderTarget& rt = *g_gr->get_render_target();
-			forefather->do_draw(rt);
-			if (g_mouse_cursor->is_visible()) {
-				g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-				g_mouse_cursor->draw(rt, app->get_mouse_position());
-				if (is_modal()) {
-					do_tooltip();
-				} else {
-					forefather->do_tooltip();
-				}
-			}
-
-			g_gr->refresh();
+			do_redraw_now();
 			next_draw_time = start_time + draw_delay;
 		}
 
