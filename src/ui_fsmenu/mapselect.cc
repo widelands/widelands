@@ -42,7 +42,8 @@ constexpr int checkbox_space_ = 20;
 
 using Widelands::WidelandsMapLoader;
 
-MapSelect::MapSelect(MenuCapsule& m, LaunchMPG* mpg,
+MapSelect::MapSelect(MenuCapsule& m,
+                     LaunchMPG* mpg,
                      GameSettingsProvider* const settings,
                      GameController* const ctrl,
                      Widelands::Game& g)
@@ -236,7 +237,8 @@ void MapSelect::clicked_ok() {
 		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 		die();
 	} else {
-		new LaunchSPG(get_capsule(), *settings_, game_, get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
+		new LaunchSPG(get_capsule(), *settings_, game_, get_map(),
+		              maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 	}
 }
 

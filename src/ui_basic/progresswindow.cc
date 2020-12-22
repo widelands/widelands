@@ -49,7 +49,12 @@ std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 ProgressWindow::ProgressWindow(UI::Panel* p,
                                const std::string& theme,
                                const std::string& background)
-   : UI::Panel(p, PanelStyle::kFsMenu /* unused */, 0, 0, p ? p->get_inner_w() : g_gr->get_xres(), p ? p->get_inner_h() : g_gr->get_yres()),
+   : UI::Panel(p,
+               PanelStyle::kFsMenu /* unused */,
+               0,
+               0,
+               p ? p->get_inner_w() : g_gr->get_xres(),
+               p ? p->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme),
      progress_style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
@@ -108,7 +113,9 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	rt.fill_rect(label_rectangle_, progress_style_.medium_color());
 
 	if (progress_message_) {
-		progress_message_->draw(rt, Vector2i(label_center_.x, label_center_.y - progress_message_->height() / 2), UI::Align::kCenter);
+		progress_message_->draw(
+		   rt, Vector2i(label_center_.x, label_center_.y - progress_message_->height() / 2),
+		   UI::Align::kCenter);
 	}
 
 	for (IProgressVisualization* visualization : visualizations_) {
@@ -160,8 +167,7 @@ void ProgressWindow::step(const std::string& description) {
 	InputCallback input_callback = {nullptr, nullptr, nullptr, ui_key, nullptr, nullptr};
 	WLApplication::get()->handle_input(&input_callback);
 
-	progress_message_ =
-	   UI::g_fh->render(as_richtext_paragraph(description, progress_style_.font()));
+	progress_message_ = UI::g_fh->render(as_richtext_paragraph(description, progress_style_.font()));
 
 	do_redraw_now();
 }

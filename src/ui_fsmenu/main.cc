@@ -756,7 +756,8 @@ void MainMenu::action(const MenuTarget t) {
 
 	case MenuTarget::kNewGame:
 		menu_capsule_.clear_content();
-		new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr, *new Widelands::Game());
+		new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr,
+		              *new Widelands::Game());
 		break;
 
 	case MenuTarget::kRandomGame:

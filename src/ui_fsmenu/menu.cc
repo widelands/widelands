@@ -273,18 +273,21 @@ void MenuCapsule::add(BaseMenu& menu, const std::string& title) {
 		visible_menus_.back().panel->set_visible(false);
 	}
 
-	UI::Button* button = new UI::Button(&box_, title, 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu, title, (boost::format(_("Back to ‘%s’")) % title).str());
+	UI::Button* button = new UI::Button(&box_, title, 0, 0, 0, 0, UI::ButtonStyle::kFsMenuMenu,
+	                                    title, (boost::format(_("Back to ‘%s’")) % title).str());
 	UI::Panel* spacer1 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, 0, 0, kPadding, kPadding);
 	UI::Panel* spacer2 = new UI::Panel(&box_, UI::PanelStyle::kFsMenu, 0, 0, kPadding, kPadding);
 	UI::Panel* icon;
 	if (visible_menus_.empty()) {
 		UI::Button* b = new UI::Button(&box_, title, 0, 0, 30, 30, UI::ButtonStyle::kFsMenuMenu,
-				g_image_cache->get("images/ui_basic/list_first_entry.png"), _("Close window"), UI::Button::VisualState::kFlat);
+		                               g_image_cache->get("images/ui_basic/list_first_entry.png"),
+		                               _("Close window"), UI::Button::VisualState::kFlat);
 		b->sigclicked.connect([this]() { die(); });
 		icon = b;
 		spacer1->set_visible(false);
 	} else {
-		icon = new UI::Icon(&box_, UI::PanelStyle::kFsMenu, g_image_cache->get("images/ui_basic/scrollbar_right.png"));
+		icon = new UI::Icon(
+		   &box_, UI::PanelStyle::kFsMenu, g_image_cache->get("images/ui_basic/scrollbar_right.png"));
 	}
 
 	visible_menus_.push_back(Entry{title, &menu, button, icon, spacer1, spacer2});
