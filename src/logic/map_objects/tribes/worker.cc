@@ -1004,7 +1004,7 @@ bool Worker::run_terraform(Game& game, State& state, const Action&) {
 	if (triangles.empty()) {
 		send_signal(game, "fail");
 		pop_task(game);
-		return false;
+		return true;
 	}
 	assert(game.mutable_map());
 	auto it = triangles.begin();
