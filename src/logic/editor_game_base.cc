@@ -332,9 +332,10 @@ void EditorGameBase::postload_addons() {
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
                                                      bool show_game_tips,
                                                      const std::string& theme,
-                                                     const std::string& background) {
+                                                     const std::string& background,
+                                                     UI::Panel* parent) {
 	assert(!has_loader_ui());
-	loader_ui_.reset(new UI::ProgressWindow(theme, background));
+	loader_ui_.reset(new UI::ProgressWindow(parent, theme, background));
 	registered_game_tips_ = tipstexts;
 	if (show_game_tips) {
 		game_tips_.reset(registered_game_tips_.empty() ?

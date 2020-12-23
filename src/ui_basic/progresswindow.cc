@@ -46,8 +46,10 @@ namespace UI {
 
 std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 
-ProgressWindow::ProgressWindow(const std::string& theme, const std::string& background)
-   : UI::Panel(nullptr, PanelStyle::kFsMenu /* unused */, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+ProgressWindow::ProgressWindow(UI::Panel* p,
+                               const std::string& theme,
+                               const std::string& background)
+   : UI::Panel(p, PanelStyle::kFsMenu /* unused */, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme),
      progress_style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
@@ -56,6 +58,8 @@ ProgressWindow::ProgressWindow(const std::string& theme, const std::string& back
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.new_width, message.new_height);
 	   });
+
+	set_visible(false);  // prevent being drawn where we're not wanted
 
 	event_buffer_.clear();
 	set_background(background);
