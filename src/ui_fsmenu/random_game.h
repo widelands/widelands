@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2020 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,38 +17,34 @@
  *
  */
 
-#ifndef WL_UI_FSMENU_CAMPAIGN_SELECT_H
-#define WL_UI_FSMENU_CAMPAIGN_SELECT_H
+#ifndef WL_UI_FSMENU_RANDOM_GAME_H
+#define WL_UI_FSMENU_RANDOM_GAME_H
 
-#include "ui_basic/table.h"
-#include "ui_fsmenu/campaigndetails.h"
-#include "ui_fsmenu/campaigns.h"
+#include <memory>
+
+#include "editor/ui_menus/main_menu_random_map.h"
+#include "logic/game.h"
+#include "logic/single_player_game_settings_provider.h"
+#include "ui_basic/icon.h"
 #include "ui_fsmenu/menu.h"
 
 namespace FsMenu {
-/*
- * Fullscreen Menu for selecting a campaign
- */
-class CampaignSelect : public TwoColumnsFullNavigationMenu {
-public:
-	explicit CampaignSelect(MenuCapsule&);
 
-protected:
+class RandomGame : public TwoColumnsFullNavigationMenu {
+public:
+	explicit RandomGame(MenuCapsule&);
+	~RandomGame() override;
+
 	void clicked_ok() override;
-	void entry_selected();
-	void fill_table();
+	void reactivated() override;
 
 private:
-	/// Updates buttons and text labels and returns whether a table entry is selected.
-	bool set_has_selection();
-
-	bool compare_difficulty(uint32_t, uint32_t);
-
-	UI::Table<uintptr_t const> table_;
-
-	CampaignDetails campaign_details_;
-
-	Campaigns campaigns_;
+	MainMenuNewRandomMapPanel menu_;
+	Widelands::Game game_;
+	SinglePlayerGameSettingsProvider settings_;
+	UI::Icon icon_;
 };
+
 }  // namespace FsMenu
-#endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H
+
+#endif  // WL_UI_FSMENU_RANDOM_GAME_H
