@@ -59,9 +59,6 @@ BaseMenu::BaseMenu(MenuCapsule& window, const std::string& title)
 	capsule_.add(*this, title);
 }
 
-BaseMenu::~BaseMenu() {
-}
-
 void BaseMenu::return_to_main_menu() {
 	capsule_.menu().set_labels();
 	capsule_.clear_content();
@@ -90,8 +87,6 @@ TwoColumnsMenu::TwoColumnsMenu(MenuCapsule& fsmm,
 	content_box_.add_space(5 * kPadding);
 	content_box_.add(&right_column_box_, UI::Box::Resizing::kFullSize);
 }
-TwoColumnsMenu::~TwoColumnsMenu() {
-}
 
 void TwoColumnsMenu::layout() {
 	BaseMenu::layout();
@@ -118,9 +113,6 @@ TwoColumnsBasicNavigationMenu::TwoColumnsBasicNavigationMenu(MenuCapsule& fsmm,
 	button_box_.add(&back_, UI::Box::Resizing::kFillSpace);
 
 	back_.sigclicked.connect([this]() { clicked_back(); });
-}
-
-TwoColumnsBasicNavigationMenu::~TwoColumnsBasicNavigationMenu() {
 }
 
 void TwoColumnsBasicNavigationMenu::layout() {

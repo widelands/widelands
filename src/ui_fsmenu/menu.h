@@ -39,7 +39,6 @@ constexpr double kDefaultColumnWidthFactor = 1.0 / 3;
 class BaseMenu : public UI::Panel {
 public:
 	BaseMenu(MenuCapsule&, const std::string& title);
-	~BaseMenu() override;
 
 	MenuCapsule& get_capsule() {
 		return capsule_;
@@ -72,7 +71,6 @@ public:
 	TwoColumnsMenu(MenuCapsule&,
 	               const std::string& title,
 	               double right_column_width_factor = kDefaultColumnWidthFactor);
-	~TwoColumnsMenu() override;
 
 protected:
 	void layout() override;
@@ -95,7 +93,6 @@ public:
 	TwoColumnsBasicNavigationMenu(MenuCapsule&,
 	                              const std::string& title,
 	                              double right_column_width_factor = kDefaultColumnWidthFactor);
-	~TwoColumnsBasicNavigationMenu() override;
 
 protected:
 	void layout() override;
