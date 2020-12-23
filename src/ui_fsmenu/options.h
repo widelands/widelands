@@ -38,7 +38,7 @@ class Section;
 
 namespace FsMenu {
 
-class FullscreenMenuOptions;
+class Options;
 
 class OptionsCtrl {
 public:
@@ -85,24 +85,24 @@ public:
 		uint32_t active_tab;
 	};
 
-	explicit OptionsCtrl(FullscreenMenuMain&, Section&);
+	explicit OptionsCtrl(MainMenu&, Section&);
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
 
 private:
 	Section& opt_section_;
-	FullscreenMenuMain& parent_;
-	std::unique_ptr<FullscreenMenuOptions> opt_dialog_;
+	MainMenu& parent_;
+	std::unique_ptr<Options> opt_dialog_;
 };
 
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class FullscreenMenuOptions : public UI::Window {
+class Options : public UI::Window {
 public:
-	explicit FullscreenMenuOptions(FullscreenMenuMain&, OptionsCtrl::OptionsStruct opt);
+	explicit Options(MainMenu&, OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
 
 	bool handle_key(bool, SDL_Keysym) override;

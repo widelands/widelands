@@ -173,11 +173,8 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
-		MainMenuNewRandomMap m(*this, UI::WindowStyle::kWui, menu_windows_.newrandommap,
-		                       egbase().map().get_width(), egbase().map().get_height());
-		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-			m.do_generate_map(egbase(), this, nullptr);
-		}
+		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap, egbase().map().get_width(),
+		                         egbase().map().get_height());
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
