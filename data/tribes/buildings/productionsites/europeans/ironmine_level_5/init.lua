@@ -54,7 +54,7 @@ descriptions:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:35s",
-            "mine=resource_iron radius:12 yield:100% when_empty:30% experience_on_fail:10%",
+            "mine=resource_iron radius:12 yield:100% when_empty:25% experience_on_fail:10%",
             "produce=ore",
          }
       },
@@ -62,7 +62,7 @@ descriptions:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             "animate=working duration:35s",
-            "mine=resource_iron radius:12 yield:100% when_empty:30% experience_on_fail:10%",
+            "mine=resource_iron radius:12 yield:100% when_empty:25% experience_on_fail:10%",
             "produce=quartz",
          }
       },

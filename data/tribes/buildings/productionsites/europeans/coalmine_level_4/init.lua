@@ -68,7 +68,7 @@ descriptions:new_productionsite_type {
          descname = _"mining coal",
          actions = {
             "animate=working duration:30s",
-            "mine=resource_coal radius:8 yield:100% when_empty:25% experience_on_fail:10%",
+            "mine=resource_coal radius:8 yield:90% when_empty:20% experience_on_fail:10%",
             "produce=coal",
          }
       },
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
          descname = _"mining diamond",
          actions = {
             "animate=working duration:30s",
-            "mine=resource_coal radius:8 yield:100% when_empty:25% experience_on_fail:10%",
+            "mine=resource_coal radius:8 yield:90% when_empty:20% experience_on_fail:10%",
             "produce=diamond",
          }
       },

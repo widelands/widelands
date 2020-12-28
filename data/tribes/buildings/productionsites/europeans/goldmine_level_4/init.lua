@@ -68,7 +68,7 @@ descriptions:new_productionsite_type {
          descname = _"mining gold",
          actions = {
             "animate=working duration:30s",
-            "mine=resource_gold radius:8 yield:100% when_empty:25% experience_on_fail:10%",
+            "mine=resource_gold radius:8 yield:90% when_empty:20% experience_on_fail:10%",
             "produce=ore",
          }
       },
@@ -76,7 +76,7 @@ descriptions:new_productionsite_type {
          descname = _"mining quartz",
          actions = {
             "animate=working duration:30s",
-            "mine=resource_gold radius:8 yield:100% when_empty:25% experience_on_fail:10%",
+            "mine=resource_gold radius:8 yield:90% when_empty:20% experience_on_fail:10%",
             "produce=quartz",
          }
       },
