@@ -21,25 +21,32 @@
 
 #include <memory>
 
-#include "base/warning.h"
+#include "base/wexception.h"
 #include "logic/game.h"
-#include "logic/game_controller.h"
-#include "logic/player.h"
+#include "logic/single_player_game_controller.h"
+#include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
+#include "ui_basic/messagebox.h"
+#include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
+#include "wlapplication.h"
+#include "wlapplication_options.h"
+#include "wui/interactive_player.h"
+
 namespace FsMenu {
-FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
-                                                 GameSettingsProvider* const settings,
-                                                 Widelands::EditorGameBase& egbase,
-                                                 bool preconfigured,
-                                                 GameController* const ctrl)
-   : FullscreenMenuLaunchGame(fsmm, settings, ctrl),
-     player_setup(&left_column_box_, settings, scale_factor * standard_height_, kPadding),
+
+LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
+                     GameSettingsProvider& settings,
+                     Widelands::Game& g,
+                     bool preconfigured)
+   : LaunchGame(fsmm, settings, nullptr, preconfigured, false),
+     player_setup(&left_column_box_, &settings, scale_factor * standard_height_, kPadding),
      preconfigured_(preconfigured),
-     egbase_(egbase) {
+     game_(g),
+     initializing_(true) {
 
 	left_column_box_.add(&player_setup, UI::Box::Resizing::kExpandBoth);
-	ok_.set_enabled(settings_->can_launch() || preconfigured_);
+	ok_.set_enabled(settings_.can_launch() || preconfigured_);
 
 	if (preconfigured) {
 		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
@@ -48,105 +55,92 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(FullscreenMenuMain& fsmm,
 		update_custom_starting_positions();
 		update();
 		layout();
+	} else {
+		clicked_select_map();
 	}
 }
 
-/**
- * Select a map as a first step in launching a game, before
- * showing the actual setup menu.
- */
-void FullscreenMenuLaunchSPG::start() {
-	if (!preconfigured_ && !clicked_select_map()) {
-		end_modal<MenuTarget>(MenuTarget::kBack);
+LaunchSPG::~LaunchSPG() {
+	if (!preconfigured_) {
+		game_.cleanup_objects();
+		delete &game_;
+		delete &settings_;
 	}
 }
 
-/**
- * Select a map and send all information to the user interface.
- * Returns whether a map has been selected.
- */
-bool FullscreenMenuLaunchSPG::clicked_select_map() {
-	if (preconfigured_ || !settings_->can_change_map()) {
-		return false;
+void LaunchSPG::clicked_select_map() {
+	if (!preconfigured_ && settings_.can_change_map()) {
+		new MapSelect(*this, &settings_, nullptr, game_);
 	}
+}
 
-	set_visible(false);
-	FullscreenMenuMapSelect msm(fsmm_, settings_, nullptr, egbase_);
-	MenuTarget code = msm.run<MenuTarget>();
-	set_visible(true);
+void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool scenario) {
+	assert(!preconfigured_ && settings_.can_change_map());
 
-	if (code == MenuTarget::kBack) {
-		// Set scenario = false, else the menu might crash when back is pressed.
-		settings_->set_scenario(false);
-		return false;  // back was pressed
+	if (!mapdata) {
+		if (initializing_) {
+			die();
+		}
+		return;
 	}
+	initializing_ = false;
 
-	settings_->set_scenario(code == MenuTarget::kScenarioGame);
-
-	const MapData& mapdata = *msm.get_map();
-
-	assert(!settings_->settings().tribes.empty());
-
-	settings_->set_map(
-	   mapdata.name, mapdata.filename, mapdata.theme, mapdata.background, mapdata.nrplayers);
+	settings_.set_scenario(scenario);
+	assert(!settings_.settings().tribes.empty());
+	settings_.set_map(
+	   mapdata->name, mapdata->filename, mapdata->theme, mapdata->background, mapdata->nrplayers);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	update_win_conditions();
 	update_peaceful_mode();
 	update_custom_starting_positions();
 	update();
-
 	// force layout so all boxes and textareas are forced to update
 	layout();
-	return true;
 }
 
-void FullscreenMenuLaunchSPG::update() {
-	peaceful_.set_state(settings_->is_peaceful_mode());
+void LaunchSPG::update() {
+	peaceful_.set_state(settings_.is_peaceful_mode());
 	if (preconfigured_) {
-		map_details.update(settings_, *egbase_.mutable_map());
+		map_details_.update(&settings_, *game_.mutable_map());
 		ok_.set_enabled(true);
 	} else {
 		Widelands::Map map;  //  MapLoader needs a place to put its preload data
 		std::unique_ptr<Widelands::MapLoader> map_loader(
-		   map.get_correct_loader(settings_->settings().mapfilename));
-		map.set_filename(settings_->settings().mapfilename);
+		   map.get_correct_loader(settings_.settings().mapfilename));
+		map.set_filename(settings_.settings().mapfilename);
 		{
 			i18n::Textdomain td("maps");
 			map_loader->preload_map(true, nullptr);
 		}
 
-		map_details.update(settings_, map);
-		ok_.set_enabled(settings_->can_launch());
+		map_details_.update(&settings_, map);
+		ok_.set_enabled(settings_.can_launch());
 		enforce_player_names_and_tribes(map);
 	}
 }
 
-void FullscreenMenuLaunchSPG::enforce_player_names_and_tribes(const Widelands::Map& map) {
-	if (settings_->settings().mapfilename.empty()) {
+void LaunchSPG::enforce_player_names_and_tribes(const Widelands::Map& map) {
+	if (settings_.settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
 
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
-		settings_->set_player_name(i, map.get_scenario_player_name(i + 1));
+		settings_.set_player_name(i, map.get_scenario_player_name(i + 1));
 		const std::string& playertribe = map.get_scenario_player_tribe(i + 1);
 		if (playertribe.empty()) {
 			// Set tribe selection to random
-			settings_->set_player_tribe(i, "", true);
+			settings_.set_player_tribe(i, "", true);
 		} else {
 			// Set tribe selection from map
-			settings_->set_player_tribe(i, playertribe);
+			settings_.set_player_tribe(i, playertribe);
 		}
 	}
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer));
 }
 
-void FullscreenMenuLaunchSPG::clicked_back() {
-	return end_modal<MenuTarget>(MenuTarget::kBack);
-}
-
-void FullscreenMenuLaunchSPG::win_condition_selected() {
+void LaunchSPG::win_condition_selected() {
 	if (win_condition_dropdown_.has_selection()) {
 		last_win_condition_ = win_condition_dropdown_.get_selected();
 
@@ -157,33 +151,66 @@ void FullscreenMenuLaunchSPG::win_condition_selected() {
 	}
 }
 
-void FullscreenMenuLaunchSPG::clicked_ok() {
-	const std::string filename = settings_->settings().mapfilename;
+void LaunchSPG::clicked_ok() {
+	const std::string filename = settings_.settings().mapfilename;
 	if (!preconfigured_ && !g_fs->file_exists(filename)) {
-		throw WLWarning(_("File not found"),
-		                _("Widelands tried to start a game with a file that could not be "
-		                  "found at the given path.\n"
-		                  "The file was: %s\n"
-		                  "If this happens in a network game, the host might have selected "
-		                  "a file that you do not own. Normally, such a file should be sent "
-		                  "from the host to you, but perhaps the transfer was not yet "
-		                  "finished!?!"),
-		                filename.c_str());
+		UI::WLMessageBox m(
+		   &capsule_.menu(), UI::WindowStyle::kFsMenu, _("File not found"),
+		   (boost::format(_("Widelands tried to start a game with a file that could not be "
+		                    "found at the given path.\n"
+		                    "The file was: %s\n"
+		                    "If this happens in a network game, the host might have selected "
+		                    "a file that you do not own. Normally, such a file should be sent "
+		                    "from the host to you, but perhaps the transfer was not yet "
+		                    "finished!?!")) %
+		    filename)
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<int>();
+		return;
 	}
-	if (settings_->can_launch() || preconfigured_) {
-		if (settings_->settings().scenario) {
-			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
-		} else {
-			if (win_condition_dropdown_.has_selection()) {
-				settings_->set_win_condition_script(win_condition_dropdown_.get_selected());
+	if (!settings_.can_launch() && !preconfigured_) {
+		return;
+	}
+
+	capsule_.set_visible(false);
+	Widelands::PlayerNumber playernumber = 1;
+	upcast(SinglePlayerGameSettingsProvider, sp, &settings_);
+	assert(sp);
+	game_.set_ai_training_mode(get_config_bool("ai_training", false));
+	try {
+		if (sp->settings().scenario) {  // scenario
+			game_.run_splayer_scenario_direct(sp->get_map(), "");
+		} else {  // normal singleplayer
+			playernumber = sp->settings().playernum + 1;
+			sp->set_win_condition_script(win_condition_dropdown_.get_selected());
+			// Game controller needs the ibase pointer to init the chat
+			game_.set_ibase(new InteractivePlayer(game_, get_config_section(), playernumber, false));
+			std::unique_ptr<GameController> ctrl(
+			   new SinglePlayerGameController(game_, true, playernumber));
+
+			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
+			if (sp->has_players_tribe()) {
+				tipstexts.push_back(sp->get_players_tribe());
 			}
-			end_modal<MenuTarget>(MenuTarget::kNormalGame);
+			game_.create_loader_ui(
+			   tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
+
+			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
+
+			game_.set_game_controller(ctrl.get());
+			game_.init_newgame(sp->settings());
+			game_.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
 		}
+	} catch (const std::exception& e) {
+		WLApplication::emergency_save(&capsule_.menu(), game_, e.what(), playernumber);
 	}
+
+	return_to_main_menu();
 }
 
-void FullscreenMenuLaunchSPG::layout() {
-	FullscreenMenuLaunchGame::layout();
+void LaunchSPG::layout() {
+	LaunchGame::layout();
 	player_setup.force_new_dimensions(scale_factor * standard_height_);
 }
 

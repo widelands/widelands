@@ -90,9 +90,9 @@ private:
 	const bool full_upgrade_possible_;
 };
 
-class AddOnsCtrl : public UI::Window {
+class AddOnsCtrl : public UI::UniqueWindow {
 public:
-	AddOnsCtrl(FullscreenMenuMain&);
+	AddOnsCtrl(MainMenu&, UI::UniqueWindow::Registry&);
 	~AddOnsCtrl() override;
 
 	void rebuild();
