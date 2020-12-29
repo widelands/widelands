@@ -25,17 +25,20 @@
 #include "ui_basic/checkbox.h"
 #include "ui_fsmenu/menu.h"
 #include "wui/load_or_save_game.h"
-namespace FsMenu {
-/// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
-class FullscreenMenuLoadGame : public TwoColumnsFullNavigationMenu {
-public:
-	FullscreenMenuLoadGame(FullscreenMenuMain&,
-	                       Widelands::Game&,
-	                       GameSettingsProvider* gsp,
-	                       bool is_replay = false);
 
-	/// The currently selected filename
-	const std::string& filename() const;
+namespace FsMenu {
+
+/// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
+class LoadGame : public TwoColumnsFullNavigationMenu {
+public:
+	LoadGame(
+	   MenuCapsule&,
+	   Widelands::Game&,
+	   GameSettingsProvider& gsp,
+	   bool take_ownership_of_game_and_settings,
+	   bool is_replay,
+	   const std::function<void(const std::string&)>& = [](const std::string&) {});
+	~LoadGame() override;
 
 	bool handle_key(bool down, SDL_Keysym code) override;
 	void think() override;
@@ -52,10 +55,15 @@ protected:
 	void fill_table();
 
 private:
+	Widelands::Game& game_;
+	GameSettingsProvider& settings_;
+	bool take_ownership_of_game_and_settings_;
+
+	std::function<void(const std::string&)> callback_on_ok_;
+
 	void toggle_filenames();
 
 	LoadOrSaveGame load_or_save_;
-	std::string filename_;
 
 	bool is_replay_;
 	bool update_game_details_;
