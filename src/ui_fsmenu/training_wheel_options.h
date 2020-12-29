@@ -29,6 +29,8 @@
 
 class LuaInterface;
 
+namespace FsMenu {
+
 /**
  * @brief The TrainingWheelOptions class presents buttons to the user to reset the progress for
  * individual training wheels.
@@ -59,5 +61,7 @@ private:
 	UI::Button* mark_unmark_button_;
 	bool mark_unmark_state_;
 };
+
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
