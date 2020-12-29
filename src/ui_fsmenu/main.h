@@ -37,7 +37,7 @@ namespace FsMenu {
  */
 class MainMenu : public UI::Panel {
 public:
-	explicit MainMenu();
+	explicit MainMenu(std::string messagetitle = "", std::string errormessage = "");
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);

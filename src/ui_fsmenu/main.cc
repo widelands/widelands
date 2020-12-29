@@ -97,7 +97,7 @@ int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
 }
 
-MainMenu::MainMenu()
+MainMenu::MainMenu(std::string messagetitle, std::string errormessage)
    : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
@@ -207,8 +207,8 @@ MainMenu::MainMenu()
 	}
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
 
-	init_time_ = SDL_GetTicks();
-	set_button_visibility(false);
+	
+
 
 	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
 	r_about_.open_window = [this]() { new About(*this, r_about_); };
@@ -217,6 +217,14 @@ MainMenu::MainMenu()
 	focus();
 	set_labels();
 	layout();
+	
+	if (!messagetitle.empty() && !errormessage.empty()) {
+		UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, messagetitle, richtext_escape(errormessage), UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+		mmb.run<UI::Panel::Returncodes>();
+	} else {
+		init_time_ = SDL_GetTicks();
+		set_button_visibility(false);
+	}
 }
 
 void MainMenu::become_modal_again(UI::Panel& prevmodal) {
