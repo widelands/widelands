@@ -97,7 +97,7 @@ int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
 }
 
-MainMenu::MainMenu(bool skip_init)
+MainMenu::MainMenu(const bool skip_init)
    : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),

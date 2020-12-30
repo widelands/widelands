@@ -37,7 +37,7 @@ namespace FsMenu {
  */
 class MainMenu : public UI::Panel {
 public:
-	explicit MainMenu(bool skip_init = false);
+	explicit MainMenu(const bool skip_init = false);
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);

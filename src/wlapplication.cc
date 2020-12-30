@@ -540,6 +540,7 @@ void WLApplication::run() {
 		g_sh->change_music("menu");
 		FsMenu::MainMenu m(true);
 		if (!message.empty()) {
+			log_err("%s\n", message.c_str());
 			m.show_messagebox(title, message);
 		}
 		m.run<int>();
