@@ -52,7 +52,7 @@ public:
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
 
-	void show_messagebox(std::string messagetitle, std::string errormessage);
+	void show_messagebox(const std::string &messagetitle, const std::string &errormessage);
 
 	int16_t calc_desired_window_x(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_y(UI::Window::WindowLayoutID);

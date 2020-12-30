@@ -221,7 +221,7 @@ MainMenu::MainMenu(bool skip_init)
 	layout();
 }
 
-void MainMenu::show_messagebox(std::string messagetitle, std::string errormessage) {
+void MainMenu::show_messagebox(const std::string& messagetitle, const std::string& errormessage) {
 	UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, messagetitle, richtext_escape(errormessage),
 	                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 	mmb.run<UI::Panel::Returncodes>();
