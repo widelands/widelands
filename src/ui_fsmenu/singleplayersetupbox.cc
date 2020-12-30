@@ -102,8 +102,8 @@ void SinglePlayerActivePlayerGroup::choose_color() {
 		p = p->get_parent();
 	}
 
-	UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color,
-	                   &kPlayerColors[id_]);
+	UI::ColorChooser c(
+	   p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color, &kPlayerColors[id_]);
 	if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		settings_->set_player_color(id_, c.get_color());
 		update();

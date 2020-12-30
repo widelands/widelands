@@ -117,17 +117,21 @@ private:
 		dst.blit(Vector2i(x, y), &selector_);
 	}
 	inline void draw_selection_cursors(RenderTarget& dst) {
-		do_draw_cursor(dst, chooser_.get_color().g - selector_.width() / 2, chooser_.get_color().b - selector_.height() / 2);
-		do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2, chooser_.get_color().r - selector_.height() / 2);
+		do_draw_cursor(dst, chooser_.get_color().g - selector_.width() / 2,
+		               chooser_.get_color().b - selector_.height() / 2);
+		do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
+		               chooser_.get_color().r - selector_.height() / 2);
 	}
 	void draw_mouse_cursors(RenderTarget& dst) {
 		const Vector2i mousepos = get_mouse_position();
 		if (mousepos.y >= 0 && mousepos.y < kMainDimension && mousepos.x >= 0) {
 			if (mousepos.x < kMainDimension) {
-				do_draw_cursor(dst, mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2);
+				do_draw_cursor(
+				   dst, mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2);
 			} else if (mousepos.x >= kMainDimension + kSpacing &&
 			           mousepos.x < kMainDimension + kSpacing + kSidebarWidth) {
-				do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2, mousepos.y - selector_.height() / 2);
+				do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
+				               mousepos.y - selector_.height() / 2);
 			}
 		}
 	}
