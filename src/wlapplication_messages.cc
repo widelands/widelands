@@ -172,10 +172,11 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl;
 	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
 	std::cout << _(" --help               Show this help") << endl << endl;
-	std::cout << _(" <save.wgf>/<replay.wrpl> \n"
-				   "                      Directly loads the given savegame or replay. Useful for\n"
-				   "                      .wgf/.wrpl file extension association. Does not work with\n"
-				   "                      other options. Also see --loadgame/--replay.")
+	std::cout
+	   << _(" <save.wgf>/<replay.wrpl> \n"
+	        "                      Directly loads the given savegame or replay. Useful for\n"
+	        "                      .wgf/.wrpl file extension association. Does not work with\n"
+	        "                      other options. Also see --loadgame/--replay.")
 	   << endl
 	   << endl;
 	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
