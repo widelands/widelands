@@ -1238,7 +1238,8 @@ void WLApplication::emergency_save(UI::Panel* panel,
 		         "standard output (stdout.txt on Windows). You are using build %2$s "
 		         "(%3$s).\nPlease add this information to your report.")) %
 		    error % build_id() % build_type())
-		      .str(), UI::WLMessageBox::MBoxType::kOk);
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOk);
 		m.run<UI::Panel::Returncodes>();
 		return;
 	}

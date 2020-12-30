@@ -167,7 +167,8 @@ void SinglePlayerSetupBox::update() {
 	}
 }
 
-void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height, int32_t max_size) {
+void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height,
+                                                int32_t max_size) {
 	standard_height_ = standard_element_height;
 	for (auto& active_player_group : active_player_groups_) {
 		active_player_group->force_new_dimensions(standard_element_height);
