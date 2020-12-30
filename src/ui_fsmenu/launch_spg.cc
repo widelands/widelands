@@ -41,7 +41,7 @@ LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
                      const MapData* mapdata,
                      const bool scenario)
    : LaunchGame(fsmm, settings, nullptr, !mapdata, false),
-     player_setup_(&left_column_box_, &settings, scale_factor * standard_height_, kPadding),
+     player_setup_(&left_column_box_, &settings, scale_factor * standard_height_),
      preconfigured_(!mapdata),
      game_(g) {
 
@@ -175,7 +175,7 @@ void LaunchSPG::clicked_ok() {
 
 void LaunchSPG::layout() {
 	LaunchGame::layout();
-	player_setup_.force_new_dimensions(scale_factor * standard_height_);
+	player_setup_.force_new_dimensions(scale_factor * standard_height_, left_column_box_.get_inner_h());
 }
 
 }  // namespace FsMenu

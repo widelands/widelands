@@ -123,12 +123,11 @@ void SinglePlayerActivePlayerGroup::update() {
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
-                                           uint32_t standard_element_height,
-                                           uint32_t padding)
+                                           uint32_t standard_element_height)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      settings_(settings),
-     standard_height(standard_element_height),
-     scrollable_playerbox(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     standard_height_(standard_element_height),
+     scrollable_playerbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      title_(this,
             UI::PanelStyle::kFsMenu,
             UI::FontStyle::kFsGameSetupHeadings,
@@ -139,9 +138,9 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
             _("Players"),
             UI::Align::kRight) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
-	add_space(3 * padding);
-	add(&scrollable_playerbox, Resizing::kExpandBoth);
-	scrollable_playerbox.set_scrolling(true);
+	add_space(title_.get_h());
+	add(&scrollable_playerbox_, Resizing::kExpandBoth);
+	scrollable_playerbox_.set_scrolling(true);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
 			reset();
@@ -157,26 +156,27 @@ void SinglePlayerSetupBox::update() {
 
 	assert(!settings.tribes.empty());
 
-	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
-		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
-		   &scrollable_playerbox, 0, standard_height, i, settings_));
-		scrollable_playerbox.add(active_player_groups.at(i), Resizing::kFullSize);
+	for (PlayerSlot i = active_player_groups_.size(); i < number_of_players; ++i) {
+		active_player_groups_.push_back(new SinglePlayerActivePlayerGroup(
+		   &scrollable_playerbox_, 0, standard_height_, i, settings_));
+		scrollable_playerbox_.add(active_player_groups_.at(i), Resizing::kFullSize);
 	}
 
-	for (auto& p : active_player_groups) {
+	for (auto& p : active_player_groups_) {
 		p->update();
 	}
 }
 
-void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height) {
-	standard_height = standard_element_height;
-	for (auto& active_player_group : active_player_groups) {
+void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height, int32_t max_size) {
+	standard_height_ = standard_element_height;
+	for (auto& active_player_group : active_player_groups_) {
 		active_player_group->force_new_dimensions(standard_element_height);
 	}
+	scrollable_playerbox_.set_max_size(get_inner_w(), max_size - 2 * title_.get_h());
 }
 void SinglePlayerSetupBox::reset() {
-	for (auto& p : active_player_groups) {
+	for (auto& p : active_player_groups_) {
 		p->die();
 	}
-	active_player_groups.clear();
+	active_player_groups_.clear();
 }
