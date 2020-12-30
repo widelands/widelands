@@ -507,7 +507,7 @@ void WLApplication::run() {
 		Widelands::Game game;
 		std::string title, message;
 		try {
-		  if (game_type_ == GameType::kReplay) {	  
+			if (game_type_ == GameType::kReplay) {
 				std::string map_theme, map_bg;
 				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
 				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
@@ -517,20 +517,31 @@ void WLApplication::run() {
 				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
 			} else {
 				game.set_ai_training_mode(get_config_bool("ai_training", false));
-				game.run_load_game(filename_, script_to_run_);		
+				game.run_load_game(filename_, script_to_run_);
 			}
 		} catch (const Widelands::GameDataError& e) {
-			message = (boost::format(_("Widelands could not load the file \"%s\". The file format seems to be incompatible.")) % filename_.c_str()).str();
+			message = (boost::format(_("Widelands could not load the file \"%s\". The file format "
+			                           "seems to be incompatible.")) %
+			           filename_.c_str())
+			             .str();
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			title = _("Game data error");
-		} catch (const std::exception& e) {
-			emergency_save(nullptr, game, e.what());
-			message = (boost::format(_("Widelands could not find the file \"%s\".")) % filename_.c_str()).str();
+		} catch (const FileNotFoundError& e) {
+			message =
+			   (boost::format(_("Widelands could not find the file \"%s\".")) % filename_.c_str())
+			      .str();
 			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
 			title = _("File system error");
+		} catch (const std::exception& e) {
+			emergency_save(nullptr, game, e.what());
+			message = e.what();
+			title = _("Error message:");
 		}
 		g_sh->change_music("menu");
-		FsMenu::MainMenu m(title, message);
+		FsMenu::MainMenu m(true);
+		if (!message.empty()) {
+			m.show_messagebox(title, message);
+		}
 		m.run<int>();
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
@@ -1037,12 +1048,12 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 		if (opt.compare(0, 2, "--")) {
 			if (argc == 2) {
 				// Special case of opening a savegame or replay from file browser
-				if(0 == opt.compare(opt.size() - kSavegameExtension.size(),
-			                                  kSavegameExtension.size(), kSavegameExtension)) {
+				if (0 == opt.compare(opt.size() - kSavegameExtension.size(), kSavegameExtension.size(),
+				                     kSavegameExtension)) {
 					commandline_["loadgame"] = opt;
 					continue;
 				} else if (0 == opt.compare(opt.size() - kReplayExtension.size(),
-											kReplayExtension.size(), kReplayExtension)) {
+				                            kReplayExtension.size(), kReplayExtension)) {
 					commandline_["replay"] = opt;
 					continue;
 				}

@@ -239,7 +239,7 @@ FileSystem* LayeredFileSystem::make_sub_file_system(const std::string& dirname) 
 	try {
 		return &FileSystem::create(canonicalize_name(dirname));
 	} catch (const FileError&) {
-		throw wexception(
+		throw FileNotFoundError(
 		   "LayeredFileSystem: unable to create sub filesystem for existing directory: %s",
 		   paths_error_message(dirname).c_str());
 	}

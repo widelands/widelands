@@ -97,7 +97,7 @@ int16_t MainMenu::calc_desired_window_y(const UI::Window::WindowLayoutID id) {
 	return (get_h() - calc_desired_window_height(id)) / 2 - UI::Window::kTopBorderThickness;
 }
 
-MainMenu::MainMenu(std::string messagetitle, std::string errormessage)
+MainMenu::MainMenu(bool skip_init)
    : UI::Panel(nullptr, UI::PanelStyle::kFsMenu, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      box_rect_(0, 0, 0, 0),
      butw_(get_w() * 7 / 20),
@@ -207,8 +207,10 @@ MainMenu::MainMenu(std::string messagetitle, std::string errormessage)
 	}
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
 
-	
-
+	if (!skip_init) {
+		init_time_ = SDL_GetTicks();
+		set_button_visibility(false);
+	}
 
 	r_login_.open_window = [this]() { new LoginBox(*this, r_login_); };
 	r_about_.open_window = [this]() { new About(*this, r_about_); };
@@ -217,14 +219,12 @@ MainMenu::MainMenu(std::string messagetitle, std::string errormessage)
 	focus();
 	set_labels();
 	layout();
-	
-	if (!messagetitle.empty() && !errormessage.empty()) {
-		UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, messagetitle, richtext_escape(errormessage), UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
-		mmb.run<UI::Panel::Returncodes>();
-	} else {
-		init_time_ = SDL_GetTicks();
-		set_button_visibility(false);
-	}
+}
+
+void MainMenu::show_messagebox(std::string messagetitle, std::string errormessage) {
+	UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, messagetitle, richtext_escape(errormessage),
+	                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+	mmb.run<UI::Panel::Returncodes>();
 }
 
 void MainMenu::become_modal_again(UI::Panel& prevmodal) {
@@ -539,7 +539,7 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			// Easter egg: Press F3 to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
-			                                                         last_image_exchange_time_);
+                                                                  last_image_exchange_time_);
 			return true;
 		default:
 			break;
@@ -560,8 +560,8 @@ do_draw_image(RenderTarget& r, const Rectf& dest, const Image& img, const float 
 
 inline float MainMenu::calc_opacity(const uint32_t time) {
 	return last_image_ == draw_image_ ?
-	          1.f :
-	          std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
+             1.f :
+             std::max(0.f, std::min(1.f, static_cast<float>(time - last_image_exchange_time_) /
 	                                         kImageExchangeDuration));
 }
 
@@ -649,9 +649,9 @@ void MainMenu::draw_overlay(RenderTarget& r) {
 
 	if (time - init_time_ < kInitialFadeoutDelay + kInitialFadeoutDuration) {
 		const float opacity = time - init_time_ > kInitialFadeoutDelay ?
-		                         1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
+                               1.f - static_cast<float>(time - init_time_ - kInitialFadeoutDelay) /
 		                                  kInitialFadeoutDuration :
-		                         1.f;
+                               1.f;
 		do_draw_image(r, image_pos(splashscreen_), splashscreen_, opacity);
 	} else {
 		const unsigned opacity =
@@ -807,11 +807,8 @@ void MainMenu::action(const MenuTarget t) {
 
 		std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 		if (tribeinfos.empty()) {
-			UI::WLMessageBox mbox(
-			   this, UI::WindowStyle::kFsMenu, _("No tribes found!"),
-			   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
-			   UI::WLMessageBox::MBoxType::kOk);
-			mbox.run<UI::Panel::Returncodes>();
+			show_messagebox(_("No tribes found!"),
+			                _("No tribes found in data/tribes/initialization/[tribename]/init.lua."));
 			break;
 		}
 
@@ -906,9 +903,7 @@ void MainMenu::internet_login(const bool launch_metaserver) {
 	} else {
 		// something went wrong -> show the error message
 		ChatMessage msg = InternetGaming::ref().get_messages().back();
-		UI::WLMessageBox wmb(
-		   this, UI::WindowStyle::kFsMenu, _("Error!"), msg.msg, UI::WLMessageBox::MBoxType::kOk);
-		wmb.run<UI::Panel::Returncodes>();
+		show_messagebox(_("Error!"), msg.msg);
 
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();

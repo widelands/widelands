@@ -37,7 +37,7 @@ namespace FsMenu {
  */
 class MainMenu : public UI::Panel {
 public:
-	explicit MainMenu(std::string messagetitle = "", std::string errormessage = "");
+	explicit MainMenu(bool skip_init = false);
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
@@ -51,6 +51,8 @@ public:
 
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
+
+	void show_messagebox(std::string messagetitle, std::string errormessage);
 
 	int16_t calc_desired_window_x(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_y(UI::Window::WindowLayoutID);
