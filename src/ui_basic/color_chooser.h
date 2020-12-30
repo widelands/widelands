@@ -53,6 +53,8 @@ private:
 	SpinBox spin_r_, spin_g_, spin_b_;
 	ColorChooserImpl& interactive_pane_;
 	Icon icon_;
+
+	void set_color_from_spinners();
 };
 
 }  // namespace UI

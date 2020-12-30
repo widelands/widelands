@@ -51,7 +51,8 @@ private:
 	SinglePlayerStartTypeDropdown start_type;
 	SinglePlayerTeamDropdown teams_;
 
-	const Image* menu_image();
+	void choose_color();
+	const Image* playercolor_image();
 };
 
 class SinglePlayerSetupBox : public UI::Box {

@@ -224,6 +224,7 @@ struct GameSettingsProvider {
 	virtual bool can_change_player_tribe(uint8_t number) = 0;
 	virtual bool can_change_player_init(uint8_t number) = 0;
 	virtual bool can_change_player_team(uint8_t number) = 0;
+	virtual bool can_change_player_color(uint8_t number);
 
 	virtual bool can_launch() = 0;
 

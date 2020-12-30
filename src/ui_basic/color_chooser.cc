@@ -32,6 +32,7 @@ namespace UI {
 constexpr int16_t kSpacing = 4;
 constexpr int16_t kMainDimension = 256;
 constexpr int16_t kSidebarWidth = 16;
+constexpr int16_t kButtonSize = 30;
 
 struct ColorChooserImpl : public Panel {
 
@@ -59,30 +60,10 @@ struct ColorChooserImpl : public Panel {
 			update_texture_right();
 		}
 
-		dst.blit(Vector2i(0, 0), &texture_left_);
-		for (uint8_t i = 0; i < kSidebarWidth; ++i) {
-			dst.blit(Vector2i(kMainDimension + kSpacing + i, 0), &texture_right_);
-		}
+		draw_textures(dst);
 
-		dst.blit(Vector2i(chooser_.get_color().g - selector_.width() / 2,
-		                  chooser_.get_color().b - selector_.height() / 2),
-		         &selector_);
-		dst.blit(Vector2i(kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
-		                  chooser_.get_color().r - selector_.height() / 2),
-		         &selector_);
-		const Vector2i mousepos = get_mouse_position();
-		if (mousepos.y >= 0 && mousepos.y < kMainDimension && mousepos.x >= 0) {
-			if (mousepos.x < kMainDimension) {
-				dst.blit(
-				   Vector2i(mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2),
-				   &selector_);
-			} else if (mousepos.x >= kMainDimension + kSpacing &&
-			           mousepos.x < kMainDimension + kSpacing + kSidebarWidth) {
-				dst.blit(Vector2i(kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
-				                  mousepos.y - selector_.height() / 2),
-				         &selector_);
-			}
-		}
+		draw_selection_cursors(dst);
+		draw_mouse_cursors(dst);
 	}
 
 	RGBColor color_at(const int32_t x, const int32_t y) {
@@ -131,6 +112,31 @@ private:
 		}
 		texture_right_.unlock(Texture::UnlockMode::Unlock_Update);
 	}
+
+	inline void do_draw_cursor(RenderTarget& dst, int x, int y) {
+		dst.blit(Vector2i(x, y), &selector_);
+	}
+	inline void draw_selection_cursors(RenderTarget& dst) {
+		do_draw_cursor(dst, chooser_.get_color().g - selector_.width() / 2, chooser_.get_color().b - selector_.height() / 2);
+		do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2, chooser_.get_color().r - selector_.height() / 2);
+	}
+	void draw_mouse_cursors(RenderTarget& dst) {
+		const Vector2i mousepos = get_mouse_position();
+		if (mousepos.y >= 0 && mousepos.y < kMainDimension && mousepos.x >= 0) {
+			if (mousepos.x < kMainDimension) {
+				do_draw_cursor(dst, mousepos.x - selector_.width() / 2, mousepos.y - selector_.height() / 2);
+			} else if (mousepos.x >= kMainDimension + kSpacing &&
+			           mousepos.x < kMainDimension + kSpacing + kSidebarWidth) {
+				do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2, mousepos.y - selector_.height() / 2);
+			}
+		}
+	}
+	void draw_textures(RenderTarget& dst) {
+		dst.blit(Vector2i(0, 0), &texture_left_);
+		for (uint8_t i = 0; i < kSidebarWidth; ++i) {
+			dst.blit(Vector2i(kMainDimension + kSpacing + i, 0), &texture_right_);
+		}
+	}
 };
 
 static inline const Image* preview(const RGBColor& c) {
@@ -151,7 +157,7 @@ ColorChooser::ColorChooser(Panel* parent,
                 "ok",
                 0,
                 0,
-                30,
+                kButtonSize,
                 0,
                 s == WindowStyle::kWui ? ButtonStyle::kWuiPrimary : ButtonStyle::kFsMenuPrimary,
                 _("OK")),
@@ -160,7 +166,7 @@ ColorChooser::ColorChooser(Panel* parent,
         "cancel",
         0,
         0,
-        30,
+        kButtonSize,
         0,
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         _("Cancel")),
@@ -169,7 +175,7 @@ ColorChooser::ColorChooser(Panel* parent,
         "initial_color",
         0,
         0,
-        30,
+        kButtonSize,
         0,
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         _("Initial Color")),
@@ -178,7 +184,7 @@ ColorChooser::ColorChooser(Panel* parent,
                                    "default_color",
                                    0,
                                    0,
-                                   30,
+                                   kButtonSize,
                                    0,
                                    s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary :
                                                             ButtonStyle::kFsMenuSecondary,
@@ -241,15 +247,9 @@ ColorChooser::ColorChooser(Panel* parent,
 	button_cancel_.sigclicked.connect(
 	   [this]() { end_modal<Panel::Returncodes>(Panel::Returncodes::kBack); });
 	button_init_.sigclicked.connect([this, init_color]() { set_color(init_color); });
-	spin_r_.changed.connect([this]() {
-		set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value()));
-	});
-	spin_g_.changed.connect([this]() {
-		set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value()));
-	});
-	spin_b_.changed.connect([this]() {
-		set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value()));
-	});
+	spin_r_.changed.connect([this]() { set_color_from_spinners(); });
+	spin_g_.changed.connect([this]() { set_color_from_spinners(); });
+	spin_b_.changed.connect([this]() { set_color_from_spinners(); });
 
 	vbox_.add(&spin_r_);
 	vbox_.add_space(kSpacing);
@@ -277,6 +277,10 @@ ColorChooser::ColorChooser(Panel* parent,
 
 	set_center_panel(&main_box_);
 	center_to_parent();
+}
+
+void ColorChooser::set_color_from_spinners() {
+	set_color(RGBColor(spin_r_.get_value(), spin_g_.get_value(), spin_b_.get_value()));
 }
 
 void ColorChooser::set_color(const RGBColor& color) {

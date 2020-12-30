@@ -159,8 +159,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	            UI::ButtonStyle::kFsMenuSecondary,
 	            playercolor_image(settings_->settings().players[id].color,
 	                              "images/players/player_position_menu.png"),
-	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
-	            UI::Button::VisualState::kFlat),
+	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str()),
 	     type_dropdown_(this,
 	                    (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
@@ -211,7 +210,6 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     init_selection_locked_(false),
 	     team_selection_locked_(false) {
 
-		player.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		type_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		tribes_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
@@ -541,8 +539,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		player.set_tooltip(player_setting.name);
 		player.set_pic(
 		   playercolor_image(player_setting.color, "images/players/player_position_menu.png"));
-		// whether we can change a slot's color follows the same rules as whether we can change a team
-		player.set_enabled(settings_->can_change_player_team(id_));
+		player.set_enabled(settings_->can_change_player_color(id_));
 
 		rebuild_type_dropdown(settings);
 		set_visible(true);
