@@ -117,6 +117,7 @@ public:
 
 	virtual void start();
 	virtual void end();
+	virtual void become_modal_again(Panel& prevmodal);
 
 	// Geometry
 	virtual void set_size(int nw, int nh);
@@ -369,6 +370,7 @@ private:
 	virtual void on_death(Panel* p);
 	virtual void on_visibility_changed();
 
+	friend struct ProgressWindow;
 	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);
@@ -416,6 +418,8 @@ private:
 	int lborder_, rborder_, tborder_, bborder_;
 	uint8_t border_snap_distance_, panel_snap_distance_;
 	int desired_w_, desired_h_;
+
+	friend struct ModalGuard;
 
 	bool running_;
 	int return_code_;
