@@ -19,6 +19,8 @@
 
 #include "logic/replay.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/md5.h"
 #include "base/random.h"
