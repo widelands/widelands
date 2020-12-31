@@ -537,13 +537,13 @@ void WLApplication::run() {
 			message = e.what();
 			title = _("Error message:");
 		}
-		g_sh->change_music("menu");
-		FsMenu::MainMenu m(true);
 		if (!message.empty()) {
-			log_err("%s\n", message.c_str());
+			g_sh->change_music("menu");
+			FsMenu::MainMenu m(true);
 			m.show_messagebox(title, message);
+			log_err("%s\n", message.c_str());
+			m.run<int>();
 		}
-		m.run<int>();
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
 		try {
