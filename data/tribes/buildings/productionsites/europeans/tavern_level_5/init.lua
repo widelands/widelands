@@ -64,6 +64,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
+            "return=skipped when economy needs ration",
+            "return=skipped when economy needs snack",
             "sleep=duration:30s",
             "consume=water flour fish,meat",
             "animate=working duration:30s",
@@ -86,6 +88,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
          descname = _"preparing a snack",
          actions = {
+            "return=skipped when economy needs ration",
+            "return=skipped when economy needs snack",
             "sleep=duration:35s",
             "consume=water:2 flour:2 fish,meat:2",
             "animate=working duration:35s",
