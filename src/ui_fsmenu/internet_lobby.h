@@ -20,6 +20,9 @@
 #ifndef WL_UI_FSMENU_INTERNET_LOBBY_H
 #define WL_UI_FSMENU_INTERNET_LOBBY_H
 
+#include <memory>
+
+#include "logic/game_controller.h"
 #include "network/internet_gaming.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -34,13 +37,14 @@ namespace Widelands {
 struct TribeBasicInfo;
 }
 namespace FsMenu {
-class FullscreenMenuInternetLobby : public TwoColumnsBasicNavigationMenu {
+class InternetLobby : public TwoColumnsBasicNavigationMenu {
 public:
-	FullscreenMenuInternetLobby(FullscreenMenuMain&,
-	                            std::string&,
-	                            std::string&,
-	                            bool,
-	                            std::vector<Widelands::TribeBasicInfo>& tribeinfos);
+	InternetLobby(MenuCapsule&,
+	              std::string&,
+	              std::string&,
+	              bool,
+	              const std::vector<Widelands::TribeBasicInfo>& tribeinfos);
+	~InternetLobby() override;
 
 	void think() override;
 
@@ -67,6 +71,8 @@ private:
 	uint8_t convert_clienttype(const std::string&);
 	bool compare_clienttype(unsigned int rowa, unsigned int rowb);
 
+	std::unique_ptr<GameController> running_game_;
+
 	// Left Column
 	UI::Textarea label_clients_online_;
 	UI::Table<const InternetClient* const> clientsonline_table_;
@@ -89,7 +95,7 @@ private:
 	bool is_registered_;
 
 	// Tribes check
-	std::vector<Widelands::TribeBasicInfo>& tribeinfos_;
+	std::vector<Widelands::TribeBasicInfo> tribeinfos_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_INTERNET_LOBBY_H

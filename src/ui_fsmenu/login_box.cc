@@ -30,9 +30,11 @@
 #include "ui_fsmenu/main.h"
 #include "wlapplication_options.h"
 
+namespace FsMenu {
+
 constexpr int8_t kMargin = 6;
 
-LoginBox::LoginBox(FullscreenMenuMain& parent, UI::UniqueWindow::Registry& r)
+LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kFsMenu, "login_box", &r, 500, 290, _("Online Game Settings")),
      fsmm_(parent),
@@ -137,12 +139,14 @@ void LoginBox::clicked_ok() {
 			set_config_string("nickname", eb_nickname_.text());
 			set_config_bool("registered", true);
 			fsmm_.internet_login_callback();
+			die();
 		}
 	} else {
 		set_config_string("nickname", eb_nickname_.text());
 		set_config_bool("registered", false);
 		set_config_string("password_sha1", "");
 		fsmm_.internet_login_callback();
+		die();
 	}
 }
 
@@ -250,3 +254,5 @@ bool LoginBox::check_password() {
 	InternetGaming::ref().logout();
 	return true;
 }
+
+}  // namespace FsMenu

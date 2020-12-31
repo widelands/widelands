@@ -30,22 +30,27 @@
 using Widelands::Map;
 class GameController;
 struct GameSettingsProvider;
+
 namespace FsMenu {
+
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu
  */
-class FullscreenMenuMapSelect : public TwoColumnsFullNavigationMenu {
+class MapSelect : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuMapSelect(FullscreenMenuMain&,
-	                        GameSettingsProvider*,
-	                        GameController*,
-	                        Widelands::EditorGameBase& egbase);
+	MapSelect(LaunchGame&,
+	          GameSettingsProvider*,
+	          GameController*,
+	          Widelands::EditorGameBase& egbase);
 
 	MapData const* get_map() const;
 	void think() override;
 
+	boost::signals2::signal<void()> on_ok, on_back;
+
 protected:
 	void clicked_ok() override;
+	void clicked_back() override;
 	void entry_selected();
 	void fill_table();
 
@@ -53,6 +58,8 @@ private:
 	bool compare_players(uint32_t, uint32_t);
 	bool compare_mapnames(uint32_t, uint32_t);
 	bool compare_size(uint32_t, uint32_t);
+
+	LaunchGame& parent_screen_;
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
