@@ -267,9 +267,9 @@ function destroy_all_buildings(plr_number, buildingname)
    local player = game.players[plr_number]
 
    for i, tplr in ipairs(game.players) do
-       for i, building in ipairs(tplr.tribe.buildings) do
-          if building.type_name == buildingname or building.name == buildingname then
-             for i, building in ipairs(player:get_buildings(building.name)) do
+       for i, tbuilding in ipairs(tplr.tribe.buildings) do
+          for i, building in ipairs(player:get_buildings(tbuilding.name)) do
+             if building.type_name == buildingname or building.name == buildingname or tplr.tribe.name == buildingname then
                 building:destroy()
              end
           end
