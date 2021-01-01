@@ -207,7 +207,10 @@ void NetSetupLAN::update_game_info(UI::Table<NetOpenGame const* const>::EntryRec
 	assert(info.hostname[sizeof(info.hostname) - 1] == '\0');
 	er.set_string(0, info.hostname);
 	assert(info.map[sizeof(info.map) - 1] == '\0');
-	er.set_string(1, info.map);
+	{
+		i18n::Textdomain td("maps");
+		er.set_string(1, info.map[0] ? i18n::translate(info.map) : "");
+	}
 
 	er.set_disabled(info.state != LAN_GAME_OPEN);
 	switch (info.state) {
