@@ -55,6 +55,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	set_player_tribe(uint8_t const number, const std::string& tribe, bool random_tribe) override;
 	void set_player_init(uint8_t const number, uint8_t const index) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
+	void set_player_color(uint8_t number, const RGBColor&) override;
 	void set_player_closeable(uint8_t, bool) override;
 	void set_player_shared(PlayerSlot, Widelands::PlayerNumber) override;
 	void set_player_name(uint8_t const number, const std::string& name) override;
