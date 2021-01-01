@@ -97,6 +97,10 @@ public:
 
 	void free_children();
 
+	bool is_dying() const {
+		return flags_ & pf_die;
+	}
+
 	// Modal
 	enum class Returncodes { kBack, kOk };
 
