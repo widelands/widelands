@@ -65,7 +65,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped when economy needs beer",
             "return=skipped when economy needs mead",
-            "return=skipped when economy needs strong_beer",
+            "return=skipped when economy needs beer_strong",
             "consume=water barley",
             "sleep=duration:60s",
             "animate=working duration:60s",
