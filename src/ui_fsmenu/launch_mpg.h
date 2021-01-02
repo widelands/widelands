@@ -65,8 +65,8 @@ protected:
 
 private:
 	void layout() override;
-	void clicked_select_map();
-	void clicked_select_savegame();
+	void clicked_select_map() override;
+	void clicked_select_savegame() override;
 	void win_condition_selected() override;
 
 	void set_scenario_values();

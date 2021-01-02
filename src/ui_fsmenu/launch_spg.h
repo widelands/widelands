@@ -40,6 +40,7 @@ public:
 	          Widelands::Game&,
 	          const MapData* /* nullptr for preconfigured games */,
 	          bool scenario);
+	~LaunchSPG() = default;
 
 protected:
 	void clicked_ok() override;

@@ -46,20 +46,20 @@ namespace UI {
 
 std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 
-ProgressWindow::ProgressWindow(UI::Panel* p,
+ProgressWindow::ProgressWindow(UI::Panel* parent,
                                const std::string& theme,
                                const std::string& background)
-   : UI::Panel(p,
+   : UI::Panel(parent,
                PanelStyle::kFsMenu /* unused */,
                0,
                0,
-               p ? p->get_inner_w() : g_gr->get_xres(),
-               p ? p->get_inner_h() : g_gr->get_yres()),
+               parent ? parent->get_inner_w() : g_gr->get_xres(),
+               parent ? parent->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme),
      progress_style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
 
-	if (!p) {
+	if (!parent) {
 		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
 		   [this](const GraphicResolutionChanged& message) {
 			   set_size(message.new_width, message.new_height);
