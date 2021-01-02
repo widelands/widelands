@@ -71,6 +71,7 @@ public:
 	Player(EditorGameBase&,
 	       PlayerNumber,
 	       uint8_t initialization_index,
+	       const RGBColor&,
 	       const TribeDescr& tribe,
 	       const std::string& name);
 	~Player() = default;
@@ -119,11 +120,15 @@ public:
 	TeamNumber team_number() const {
 		return team_number_;
 	}
-	const RGBColor& get_playercolor() const {
-		return kPlayerColors[player_number_ - 1];
-	}
 	const TribeDescr& tribe() const {
 		return tribe_;
+	}
+
+	const RGBColor& get_playercolor() const {
+		return playercolor_;
+	}
+	void set_playercolor(const RGBColor& c) {
+		playercolor_ = c;
 	}
 
 	const std::string& get_name() const {
@@ -656,6 +661,7 @@ private:
 	uint8_t initialization_index_;
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
+	RGBColor playercolor_;
 	TeamNumber team_number_;
 	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
 	bool see_all_;

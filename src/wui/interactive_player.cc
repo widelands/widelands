@@ -399,7 +399,7 @@ void InteractivePlayer::think() {
 
 	if (player().is_picking_custom_starting_position()) {
 		set_sel_picture(
-		   playercolor_image(player_number() - 1, "images/players/player_position_menu.png"));
+		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
 	}
 
 	if (flag_to_connect_) {
