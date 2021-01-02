@@ -45,11 +45,12 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
          descname = _"sawing logs",
          actions = {
+            "return=skipped when economy needs planks",
             "return=skipped when not site has log:2",
             "consume=log:2",
-            "sleep=duration:10s",
+            "sleep=duration:30s",
             "playsound=sound/atlanteans/saw/benchsaw priority:50% allow_multiple",
-            "animate=working duration:5s", 
+            "animate=working duration:30s", 
             "produce=planks"
          }
       },

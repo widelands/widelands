@@ -58,10 +58,13 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving because ...
          descname = _"weaving",
          actions = {
+            "return=skipped when economy needs spidercloth",
+            "return=skipped when economy needs tabard",
+            "return=skipped when economy needs armor",
             "sleep=duration:60s",
             "consume=spider_silk",
             "playsound=sound/mill/weaving priority:90%",
-            "animate=working duration:30s",
+            "animate=working duration:60s",
             "produce=spidercloth"
          }
       },

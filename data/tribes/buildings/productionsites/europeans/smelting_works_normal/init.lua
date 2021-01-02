@@ -62,7 +62,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start smelting iron because ...
          descname = _"smelting iron",
          actions = {
-            "return=skipped unless economy needs iron",
+            "return=skipped when economy needs iron",
+            "return=skipped when economy needs gold",
             "consume=ore coal",
             "sleep=duration:20s",
             "playsound=sound/metal/fizzle priority:20% allow_multiple",

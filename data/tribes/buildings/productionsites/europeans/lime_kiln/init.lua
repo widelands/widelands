@@ -77,6 +77,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mixing grout because ...
          descname = _"mixing grout",
          actions = {
+            "return=skipped when economy needs brick",
+            "return=skipped when economy needs grout",
             "return=skipped when economy needs granite",
             "consume=coal granite water",
             "sleep=duration:40s",
@@ -108,6 +110,8 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
          descname = _"burning bricks",
          actions = {
+            "return=skipped when economy needs brick",
+            "return=skipped when economy needs grout",
             "return=skipped when economy needs granite",
             "consume=coal granite clay",
             "sleep=duration:40s",
