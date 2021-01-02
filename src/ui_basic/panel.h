@@ -97,6 +97,9 @@ public:
 
 	void free_children();
 
+	// Checks whether this panel will be deleted in the next think cycle.
+	// This check is used to stop panels from thinking and performing other
+	// activities to prevent undesired side-effects.
 	bool is_dying() const {
 		return flags_ & pf_die;
 	}
