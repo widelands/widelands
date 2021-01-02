@@ -214,8 +214,8 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 }
 
 void EditBox::set_caret_to_cursor_pos(int32_t x) {
-	int textWidth = text_width(m_->text, *m_->font_style, m_->font_scale);
-	double x_relative = static_cast<double>(x - 2 * kMarginX - m_->scrolloffset) / textWidth;
+	int text_width = text_width(m_->text, *m_->font_style, m_->font_scale);
+	double x_relative = static_cast<double>(x - 2 * kMarginX - m_->scrolloffset) / text_width;
 	int index = x_relative * m_->text.size();
 	if (x_relative > 1) {
 		set_caret_pos(m_->text.size());
@@ -578,7 +578,7 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const Image* caret_image =
 		   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
-		                                                         "images/ui_basic/caret_fs.png");
+                                                               "images/ui_basic/caret_fs.png");
 		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
