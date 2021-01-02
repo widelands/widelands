@@ -50,6 +50,9 @@ private:
 	SinglePlayerTribeDropdown tribe_;
 	SinglePlayerStartTypeDropdown start_type;
 	SinglePlayerTeamDropdown teams_;
+
+	void choose_color();
+	const Image* playercolor_image();
 };
 
 class SinglePlayerSetupBox : public UI::Box {

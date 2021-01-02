@@ -503,29 +503,46 @@ void WLApplication::run() {
 			EditorInteractive::run_editor(
 			   EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
 		}
-	} else if (game_type_ == GameType::kReplay) {
+	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
 		Widelands::Game game;
-
-		std::string map_theme, map_bg;
+		std::string title, message;
 		try {
-			game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
-			game.set_ibase(new InteractiveSpectator(game, get_config_section()));
-			game.set_write_replay(false);
-			ReplayGameController rgc(game, filename_);
-			game.save_handler().set_allow_saving(false);
-			game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
-		} catch (const std::exception& e) {
-			emergency_save(nullptr, game, e.what());
-		}
-	} else if (game_type_ == GameType::kLoadGame) {
-		Widelands::Game game;
-		game.set_ai_training_mode(get_config_bool("ai_training", false));
-		try {
-			game.run_load_game(filename_, script_to_run_);
+			if (game_type_ == GameType::kReplay) {
+				std::string map_theme, map_bg;
+				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
+				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
+				game.set_write_replay(false);
+				ReplayGameController rgc(game, filename_);
+				game.save_handler().set_allow_saving(false);
+				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
+			} else {
+				game.set_ai_training_mode(get_config_bool("ai_training", false));
+				game.run_load_game(filename_, script_to_run_);
+			}
 		} catch (const Widelands::GameDataError& e) {
-			log_err("Game not loaded: Game data error: %s\n", e.what());
+			message = (boost::format(_("Widelands could not load the file \"%s\". The file format "
+			                           "seems to be incompatible.")) %
+			           filename_.c_str())
+			             .str();
+			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
+			title = _("Game data error");
+		} catch (const FileNotFoundError& e) {
+			message =
+			   (boost::format(_("Widelands could not find the file \"%s\".")) % filename_.c_str())
+			      .str();
+			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
+			title = _("File system error");
 		} catch (const std::exception& e) {
 			emergency_save(nullptr, game, e.what());
+			message = e.what();
+			title = _("Error message:");
+		}
+		if (!message.empty()) {
+			g_sh->change_music("menu");
+			FsMenu::MainMenu m(true);
+			m.show_messagebox(title, message);
+			log_err("%s\n", message.c_str());
+			m.run<int>();
 		}
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
@@ -1030,6 +1047,18 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 
 		// Are we looking at an option at all?
 		if (opt.compare(0, 2, "--")) {
+			if (argc == 2) {
+				// Special case of opening a savegame or replay from file browser
+				if (0 == opt.compare(opt.size() - kSavegameExtension.size(), kSavegameExtension.size(),
+				                     kSavegameExtension)) {
+					commandline_["loadgame"] = opt;
+					continue;
+				} else if (0 == opt.compare(opt.size() - kReplayExtension.size(),
+				                            kReplayExtension.size(), kReplayExtension)) {
+					commandline_["replay"] = opt;
+					continue;
+				}
+			}
 			throw ParameterError();
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
@@ -1080,19 +1109,22 @@ void WLApplication::handle_commandline_parameters() {
 		datadir_ = commandline_["datadir"];
 		commandline_.erase("datadir");
 	} else {
-		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
-		              INSTALL_DATADIR :
-		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+		if (is_absolute_path(INSTALL_DATADIR)) {
+			// Absolute install dir has precedence
+			datadir_ = INSTALL_DATADIR;
+		} else {
+			datadir_ = get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 #ifdef USE_XDG
-		// Overwrite with first folder found in XDG_DATA_DIRS
-		for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
-			RealFSImpl dir(datadir);
-			if (dir.is_directory(datadir + "/widelands")) {
-				datadir_ = datadir + "/widelands";
-				break;
+			// Overwrite relative dir with first folder found in XDG_DATA_DIRS
+			for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
+				RealFSImpl dir(datadir);
+				if (dir.is_directory(datadir + "/widelands")) {
+					datadir_ = datadir + "/widelands";
+					break;
+				}
 			}
-		}
 #endif
+		}
 	}
 	if (!is_absolute_path(datadir_)) {
 		try {

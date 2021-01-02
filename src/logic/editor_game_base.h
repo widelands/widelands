@@ -100,6 +100,7 @@ public:
 	void remove_player(PlayerNumber);
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
+	                   const RGBColor&,
 	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);

@@ -583,8 +583,20 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
+	// No longer think when we are about to die
+	if (is_dying()) {
+		return;
+	}
+
 	if (thinks()) {
 		think();
+
+		// think() may have called die().
+		// When we are deleted, our children will be deleted as well, so they are
+		// effectively dying as well and should not continue to think either.
+		if (is_dying()) {
+			return;
+		}
 	}
 
 	for (Panel* child = first_child_; child; child = child->next_) {
