@@ -19,12 +19,15 @@
 
 #include "logic/replay.h"
 
+#include <memory>
+
 #include "base/log.h"
 #include "base/md5.h"
 #include "base/random.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -90,7 +93,13 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) : replaytime
 		gl.load_game();
 	}
 
-	cmdlog_ = g_fs->open_stream_read(filename);
+	if (!g_fs->file_exists(filename)) {
+		// Try locating file in a distinct fs
+		std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(FileSystem::fs_dirname(filename)));
+		cmdlog_ = fs->open_stream_read(FileSystem::fs_filename(filename.c_str()));
+	} else {
+		cmdlog_ = g_fs->open_stream_read(filename);
+	}
 
 	try {
 		const uint32_t magic = cmdlog_->unsigned_32();
