@@ -214,8 +214,8 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 }
 
 void EditBox::set_caret_to_cursor_pos(int32_t x) {
-	int text_width = text_width(m_->text, *m_->font_style, m_->font_scale);
-	double x_relative = static_cast<double>(x - 2 * kMarginX - m_->scrolloffset) / text_width;
+	int text_w = text_width(m_->text, *m_->font_style, m_->font_scale);
+	double x_relative = static_cast<double>(x - 2 * kMarginX - m_->scrolloffset) / text_w;
 	int index = x_relative * m_->text.size();
 	if (x_relative > 1) {
 		set_caret_pos(m_->text.size());
