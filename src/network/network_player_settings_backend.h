@@ -33,6 +33,7 @@ struct NetworkPlayerSettingsBackend {
 	void set_player_tribe(PlayerSlot id, const std::string& tribename);
 	void set_player_init(PlayerSlot id, uint8_t initialization_index);
 	void set_player_team(PlayerSlot id, Widelands::TeamNumber team);
+	void set_player_color(PlayerSlot id, const RGBColor& team);
 
 	GameSettingsProvider* const s;
 };
