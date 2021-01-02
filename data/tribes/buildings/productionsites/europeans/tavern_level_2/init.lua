@@ -66,9 +66,9 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
-            "sleep=duration:35s",
+            "sleep=duration:60s",
             "consume=water flour fish,meat",
-            "animate=working duration:35s",
+            "animate=working duration:60s",
             "produce=ration"
          }
       },

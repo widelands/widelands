@@ -39,7 +39,21 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=produce_mixed_flour_basic",
             "call=produce_mixed_flour",
+         }
+      },
+      produce_mixed_flour_basic = {
+         -- TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
+         descname = _"grinding rye and wheat",
+         actions = {
+            -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
+            "return=skipped when economy needs flour",
+            "sleep=duration:45s",
+            "consume=wheat rye",
+            "playsound=sound/mill/mill_turning priority:85% allow_multiple",
+            "animate=working duration:45s",
+            "produce=flour"
          }
       },
       produce_mixed_flour = {
@@ -47,8 +61,9 @@ descriptions:new_productionsite_type {
          descname = _"grinding rye and wheat",
          actions = {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.
-            "consume=wheat:4 rye:4",
+            "return=skipped unless economy needs flour",
             "sleep=duration:45s",
+            "consume=wheat:4 rye:4",
             "playsound=sound/mill/mill_turning priority:85% allow_multiple",
             "animate=working duration:45s",
             "produce=flour:7"

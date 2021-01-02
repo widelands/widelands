@@ -70,6 +70,7 @@ descriptions:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
+            "return=skipped when economy needs beer",
             "consume=water barley",
             "sleep=duration:80s",
             "animate=working duration:60s",
