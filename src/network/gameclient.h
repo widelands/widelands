@@ -102,6 +102,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
 	void set_player_number(uint8_t number) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
+	void set_player_color(uint8_t number, const RGBColor&) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;

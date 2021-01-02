@@ -91,6 +91,7 @@ struct GameHost : public GameController {
 	void set_player(uint8_t number, const PlayerSettings&);
 	void set_player_number(uint8_t number);
 	void set_player_team(uint8_t number, Widelands::TeamNumber team);
+	void set_player_color(uint8_t number, const RGBColor&);
 	void set_player_closeable(uint8_t number, bool closeable);
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared);
 	void switch_to_player(uint32_t user, uint8_t number);
@@ -153,6 +154,7 @@ private:
 	void handle_changetribe(const Client& client, RecvPacket& r);
 	void handle_changeshared(const Client& client, RecvPacket& r);
 	void handle_changeteam(const Client& client, RecvPacket& r);
+	void handle_changecolor(const Client& client, RecvPacket& r);
 	void handle_changeinit(const Client& client, RecvPacket& r);
 	void handle_changeposition(const Client& client, RecvPacket& r);
 	void handle_nettime(uint32_t client_num, RecvPacket& r);

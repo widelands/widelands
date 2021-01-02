@@ -418,6 +418,20 @@ void GameClient::set_player_tribe(uint8_t number,
 	d->net->send(s);
 }
 
+void GameClient::set_player_color(const uint8_t number, const RGBColor& c) {
+	if ((number != d->settings.playernum)) {
+		return;
+	}
+
+	SendPacket s;
+	s.unsigned_8(NETCMD_SETTING_CHANGECOLOR);
+	s.unsigned_8(number);
+	s.unsigned_8(c.r);
+	s.unsigned_8(c.g);
+	s.unsigned_8(c.b);
+	d->net->send(s);
+}
+
 void GameClient::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	if ((number != d->settings.playernum)) {
 		return;
@@ -559,6 +573,9 @@ void GameClient::receive_one_player(uint8_t const number, StreamRead& packet) {
 	player.random_ai = packet.unsigned_8();
 	player.team = packet.unsigned_8();
 	player.shared_in = packet.unsigned_8();
+	player.color.r = packet.unsigned_8();
+	player.color.g = packet.unsigned_8();
+	player.color.b = packet.unsigned_8();
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
