@@ -100,34 +100,46 @@ private:
 
 	RGBColor left_color(const uint16_t val1, const uint16_t val2) const {
 		switch (sidebar_attribute_) {
-		case ColorAttribute::kRed: return RGBColor(texture_cache_r_, val1, val2);
-		case ColorAttribute::kGreen: return RGBColor(val1, texture_cache_g_, val2);
-		case ColorAttribute::kBlue: return RGBColor(val1, val2, texture_cache_b_);
+		case ColorAttribute::kRed:
+			return RGBColor(texture_cache_r_, val1, val2);
+		case ColorAttribute::kGreen:
+			return RGBColor(val1, texture_cache_g_, val2);
+		case ColorAttribute::kBlue:
+			return RGBColor(val1, val2, texture_cache_b_);
 		}
 		NEVER_HERE();
 	}
 	RGBColor right_color(const uint16_t val) const {
 		switch (sidebar_attribute_) {
-		case ColorAttribute::kRed: return RGBColor(val, texture_cache_g_, texture_cache_b_);
-		case ColorAttribute::kGreen: return RGBColor(texture_cache_r_, val, texture_cache_b_);
-		case ColorAttribute::kBlue: return RGBColor(texture_cache_r_, texture_cache_g_, val);
+		case ColorAttribute::kRed:
+			return RGBColor(val, texture_cache_g_, texture_cache_b_);
+		case ColorAttribute::kGreen:
+			return RGBColor(texture_cache_r_, val, texture_cache_b_);
+		case ColorAttribute::kBlue:
+			return RGBColor(texture_cache_r_, texture_cache_g_, val);
 		}
 		NEVER_HERE();
 	}
 
 	RGBColor left_color_at(const uint16_t x, const uint16_t y) {
 		switch (sidebar_attribute_) {
-		case ColorAttribute::kRed: return RGBColor(chooser_.get_color().r, x, y);
-		case ColorAttribute::kGreen: return RGBColor(x, chooser_.get_color().g, y);
-		case ColorAttribute::kBlue: return RGBColor(x, y, chooser_.get_color().b);
+		case ColorAttribute::kRed:
+			return RGBColor(chooser_.get_color().r, x, y);
+		case ColorAttribute::kGreen:
+			return RGBColor(x, chooser_.get_color().g, y);
+		case ColorAttribute::kBlue:
+			return RGBColor(x, y, chooser_.get_color().b);
 		}
 		NEVER_HERE();
 	}
 	RGBColor right_color_at(const uint16_t y) {
 		switch (sidebar_attribute_) {
-		case ColorAttribute::kRed: return RGBColor(y, chooser_.get_color().g, chooser_.get_color().b);
-		case ColorAttribute::kGreen: return RGBColor(chooser_.get_color().r, y, chooser_.get_color().b);
-		case ColorAttribute::kBlue: return RGBColor(chooser_.get_color().r, chooser_.get_color().g, y);
+		case ColorAttribute::kRed:
+			return RGBColor(y, chooser_.get_color().g, chooser_.get_color().b);
+		case ColorAttribute::kGreen:
+			return RGBColor(chooser_.get_color().r, y, chooser_.get_color().b);
+		case ColorAttribute::kBlue:
+			return RGBColor(chooser_.get_color().r, chooser_.get_color().g, y);
 		}
 		NEVER_HERE();
 	}
@@ -176,7 +188,7 @@ private:
 		}
 		do_draw_cursor(dst, x - selector_.width() / 2, y - selector_.height() / 2);
 		do_draw_cursor(dst, kMainDimension + kSpacing + (kSidebarWidth - selector_.width()) / 2,
-			           a - selector_.height() / 2);
+		               a - selector_.height() / 2);
 	}
 	void draw_mouse_cursors(RenderTarget& dst) {
 		const Vector2i mousepos = get_mouse_position();
@@ -244,36 +256,33 @@ ColorChooser::ColorChooser(Panel* parent,
         0,
         s == WindowStyle::kWui ? ButtonStyle::kWuiSecondary : ButtonStyle::kFsMenuSecondary,
         _("Initial Color")),
-     button_r_(
-        &box_r_,
-        "button_r",
-        0,
-        0,
-        kButtonSize,
-        kButtonSize,
-        s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-        /** TRANSLATORS: First letter of the word "Red" */
-        _("R")),
-     button_g_(
-        &box_g_,
-        "button_g",
-        0,
-        0,
-        kButtonSize,
-        kButtonSize,
-        s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-        /** TRANSLATORS: First letter of the word "Green" */
-        _("G")),
-     button_b_(
-        &box_b_,
-        "button_b",
-        0,
-        0,
-        kButtonSize,
-        kButtonSize,
-        s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-        /** TRANSLATORS: First letter of the word "Blue" */
-        _("B")),
+     button_r_(&box_r_,
+               "button_r",
+               0,
+               0,
+               kButtonSize,
+               kButtonSize,
+               s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+               /** TRANSLATORS: First letter of the word "Red" */
+               _("R")),
+     button_g_(&box_g_,
+               "button_g",
+               0,
+               0,
+               kButtonSize,
+               kButtonSize,
+               s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+               /** TRANSLATORS: First letter of the word "Green" */
+               _("G")),
+     button_b_(&box_b_,
+               "button_b",
+               0,
+               0,
+               kButtonSize,
+               kButtonSize,
+               s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+               /** TRANSLATORS: First letter of the word "Blue" */
+               _("B")),
      button_default_(default_color ?
                         new Button(&buttonsbox_,
                                    "default_color",
@@ -322,8 +331,7 @@ ColorChooser::ColorChooser(Panel* parent,
              SpinBox::Units::kNone,
              SpinBox::Type::kBig),
      interactive_pane_(*new ColorChooserImpl(hbox_, panel_style_, *this)),
-     icon_(
-        &vbox_, panel_style_, preview(init_color)) {
+     icon_(&vbox_, panel_style_, preview(init_color)) {
 	buttonsbox_.add_space(kSpacing);
 	buttonsbox_.add(&button_cancel_, UI::Box::Resizing::kExpandBoth);
 	buttonsbox_.add_space(kSpacing);
@@ -355,14 +363,10 @@ ColorChooser::ColorChooser(Panel* parent,
 
 	for (unsigned i = 0; i < kMaxPlayers; ++i) {
 		UI::Box* box = i < kMaxPlayers / 2 ? &palette1_ : &palette2_;
-		palette_[i] = new Button(box,
-                                   "palette_" + std::to_string(i),
-                                   0,
-                                   0,
-                                   kButtonSize,
-                                   kButtonSize,
-                                   s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-                                   playercolor_image(kPlayerColors[i], "images/ui_basic/square.png"));
+		palette_[i] =
+		   new Button(box, "palette_" + std::to_string(i), 0, 0, kButtonSize, kButtonSize,
+		              s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+		              playercolor_image(kPlayerColors[i], "images/ui_basic/square.png"));
 
 		if (i != 0 && i != kMaxPlayers / 2) {
 			box->add_space(kSpacing);
