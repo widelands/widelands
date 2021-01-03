@@ -20,6 +20,7 @@
 #ifndef WL_UI_BASIC_COLOR_CHOOSER_H
 #define WL_UI_BASIC_COLOR_CHOOSER_H
 
+#include "graphic/playercolor.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icon.h"
@@ -29,6 +30,8 @@
 namespace UI {
 
 struct ColorChooserImpl;
+
+enum class ColorAttribute { kRed, kGreen, kBlue };
 
 class ColorChooser : public Window {
 public:
@@ -45,16 +48,16 @@ public:
 private:
 	RGBColor current_;
 
-	Box main_box_, hbox_, buttonsbox_, vbox_;
-	Button button_ok_;
-	Button button_cancel_;
-	Button button_init_;
+	Box main_box_, hbox_, buttonsbox_, vbox_, box_r_, box_g_, box_b_, palette1_, palette2_;
+	Button button_ok_, button_cancel_, button_init_, button_r_, button_g_, button_b_;
+	Button* palette_[kMaxPlayers];
 	Button* button_default_;
 	SpinBox spin_r_, spin_g_, spin_b_;
 	ColorChooserImpl& interactive_pane_;
 	Icon icon_;
 
 	void set_color_from_spinners();
+	void set_sidebar_attribute(ColorAttribute);
 };
 
 }  // namespace UI
