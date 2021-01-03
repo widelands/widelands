@@ -1251,7 +1251,7 @@ void WLApplication::emergency_save(UI::Panel* panel,
                                    const uint8_t playernumber,
                                    const bool replace_ctrl) {
 	log_err("##############################\n"
-	        "  FATAL EXCEPTION: %s\n \n"
+	        "  FATAL EXCEPTION: %s\n"
 	        "##############################\n"
 	        "  Please report this problem to help us improve Widelands.\n"
 	        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
@@ -1262,6 +1262,17 @@ void WLApplication::emergency_save(UI::Panel* panel,
 	        "##############################",
 	        error.c_str(), build_id().c_str(), build_type().c_str());
 	if (!game.is_loaded()) {
+		UI::WLMessageBox m(
+		   panel, UI::WindowStyle::kFsMenu, _("Error"),
+		   (boost::format(
+		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		         "this problem to help us improve Widelands. You will find related messages in the "
+		         "standard output (stdout.txt on Windows). You are using build %2$s "
+		         "(%3$s).\nPlease add this information to your report.")) %
+		    error % build_id() % build_type())
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
 		return;
 	}
 

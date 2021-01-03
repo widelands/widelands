@@ -25,10 +25,12 @@
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
-#include "ui_fsmenu/launch_game.h"
+#include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/launch_spg.h"
 #include "wui/map_tags.h"
 
 namespace FsMenu {
@@ -40,19 +42,21 @@ constexpr int checkbox_space_ = 20;
 
 using Widelands::WidelandsMapLoader;
 
-MapSelect::MapSelect(LaunchGame& lg,
+MapSelect::MapSelect(MenuCapsule& m,
+                     LaunchMPG* mpg,
                      GameSettingsProvider* const settings,
                      GameController* const ctrl,
-                     Widelands::EditorGameBase& egbase)
-   : TwoColumnsFullNavigationMenu(lg.get_capsule(), _("Choose Map")),
-     parent_screen_(lg),
+                     Widelands::Game& g)
+   : TwoColumnsFullNavigationMenu(m, _("Choose Map")),
+     parent_screen_(mpg),
      checkboxes_(
         &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
      table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
-     map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, egbase),
+     map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, g),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
+     game_(g),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
@@ -167,6 +171,14 @@ MapSelect::MapSelect(LaunchGame& lg,
 	layout();
 }
 
+MapSelect::~MapSelect() {
+	if (!parent_screen_) {
+		game_.cleanup_objects();
+		delete &game_;
+		delete settings_;
+	}
+}
+
 void MapSelect::think() {
 	TwoColumnsFullNavigationMenu::think();
 
@@ -203,7 +215,9 @@ MapData const* MapSelect::get_map() const {
 }
 
 void MapSelect::clicked_back() {
-	parent_screen_.clicked_select_map_callback(nullptr, false);
+	if (parent_screen_) {
+		parent_screen_->clicked_select_map_callback(nullptr, false);
+	}
 	die();
 }
 
@@ -218,10 +232,13 @@ void MapSelect::clicked_ok() {
 		fill_table();
 	} else if (!ok_.enabled()) {
 		return;
-	} else {
-		parent_screen_.clicked_select_map_callback(
+	} else if (parent_screen_) {
+		parent_screen_->clicked_select_map_callback(
 		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 		die();
+	} else {
+		new LaunchSPG(get_capsule(), *settings_, game_, get_map(),
+		              maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 	}
 }
 
