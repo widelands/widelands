@@ -105,7 +105,8 @@ private:
 	void delete_selected_text();
 	void copy_selected_text();
 	void set_caret_to_cursor_pos(int32_t x);
-	int bla(int32_t x, int index) const;
+	int calculate_text_width(int index) const;
+	int approximate_cursor(int32_t x, int text_w, int index) const;
 };
 }  // namespace UI
 
