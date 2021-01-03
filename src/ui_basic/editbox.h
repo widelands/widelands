@@ -105,6 +105,7 @@ private:
 	void delete_selected_text();
 	void copy_selected_text();
 	void set_caret_to_cursor_pos(int32_t x);
+	int bla(int32_t x, int index) const;
 };
 }  // namespace UI
 

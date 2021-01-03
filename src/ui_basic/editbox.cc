@@ -23,6 +23,7 @@
 
 #include <SDL_clipboard.h>
 #include <SDL_mouse.h>
+#include <base/log.h>
 
 #include "base/utf8.h"
 #include "graphic/color.h"
@@ -214,14 +215,54 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 }
 
 void EditBox::set_caret_to_cursor_pos(int32_t x) {
+	if (x <= 2 * kMarginX) {
+		set_caret_pos(0);
+		return;
+	}
+
 	int text_w = text_width(m_->text, *m_->font_style, m_->font_scale);
+	if (text_w <= 0) {
+		set_caret_to_cursor_pos(0);
+		return;
+	}
+
 	double x_relative = static_cast<double>(x - 2 * kMarginX - m_->scrolloffset) / text_w;
-	int index = x_relative * m_->text.size();
 	if (x_relative > 1) {
 		set_caret_pos(m_->text.size());
-	} else {
-		set_caret_pos(index);
+		return;
 	}
+
+	// initial guess of index which works well if all characters would have same width
+	int index = x_relative * m_->text.size();
+
+	// mouse coordinate x=0 means leftmost spot in editbox but text starts with margin -> adjust
+	x -= kMarginX;
+	text_w =
+	   text_width(m_->text.substr(0, index), *m_->font_style, m_->font_scale) + m_->scrolloffset;
+	;
+
+	log_dbg("initial index: %d => %s: text_w: %d, x: %d", index, m_->text.substr(0, index).c_str(),
+	        text_w, x);
+
+	// approximate using the first guess as start and increasing/decreasing text
+	static constexpr int error = 4;
+	if (x > text_w) {
+		while (x - text_w > error) {
+			text_w = bla(x, ++index);
+		}
+	} else if (x < text_w) {
+		while (text_w - x > error) {
+			text_w = bla(x, --index);
+		}
+	}
+
+	set_caret_pos(index);
+}
+int EditBox::bla(int32_t x, int index) const {
+	std::string prefix = m_->text.substr(0, index);
+	int prefix_width = text_width(prefix, *m_->font_style, m_->font_scale) + m_->scrolloffset;
+	log_dbg("%s, %d, %d", prefix.c_str(), prefix_width, x);
+	return prefix_width;
 }
 
 /**
