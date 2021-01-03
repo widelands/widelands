@@ -149,6 +149,9 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		const std::string descname = next_word(output);
 		const std::string descr = next_word(output);
 		const std::string author = next_word(output);
+		info.unlocalized_descname = descname;
+		info.unlocalized_description = descr;
+		info.unlocalized_author = author;
 		info.descname = [descname]() { return descname; };
 		info.description = [descr]() { return descr; };
 		info.author = [author]() { return author; };

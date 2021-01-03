@@ -66,6 +66,7 @@ wl_library(ui_fsmenu_main
     graphic_text_layout
     logic
     logic_filesystem_constants
+    logic_map
     map_io_map_loader
     network
     ui_basic

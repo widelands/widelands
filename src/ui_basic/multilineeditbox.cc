@@ -160,6 +160,11 @@ void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
 	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
+void MultilineEditbox::layout() {
+	Panel::layout();
+	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+}
+
 /**
  * Return the text currently stored by the editbox.
  */

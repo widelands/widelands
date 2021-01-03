@@ -165,7 +165,20 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
                         UI::Box::Vertical,
                         kHugeSize,
                         kHugeSize),
+     packager_box_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     packager_box_left_(&packager_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     packager_box_right_(&packager_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     packager_box_left_buttons_(&packager_box_left_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     packager_box_right_subbox1_(&packager_box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     packager_box_right_subbox2_(&packager_box_right_subbox1_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     packager_box_right_subbox3_(&packager_box_right_subbox1_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     packager_box_right_subbox4_(&packager_box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     packager_box_right_subbox5_(&packager_box_right_subbox4_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      filter_name_(&browse_addons_buttons_inner_box_1_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     packager_name_(&packager_box_right_subbox3_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     packager_author_(&packager_box_right_subbox3_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     packager_version_(&packager_box_right_subbox3_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     packager_descr_(*new UI::MultilineEditbox(&packager_box_right_subbox3_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu)),
      filter_verified_(&browse_addons_buttons_inner_box_2_,
                       UI::PanelStyle::kFsMenu,
                       Vector2i(0, 0),
@@ -260,7 +273,63 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
                   kRowButtonSize,
                   UI::ButtonStyle::kFsMenuSecondary,
                   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"),
-                  _("Move selected add-on to bottom")) {
+                  _("Move selected add-on to bottom")),
+     packager_addon_new_(&packager_box_left_buttons_,
+                  "addon_new",
+                  0,
+                  0,
+                  kRowButtonSize,
+                  kRowButtonSize,
+                  UI::ButtonStyle::kFsMenuSecondary,
+                  "+",
+                  _("New add-on")),
+     packager_addon_delete_(&packager_box_left_buttons_,
+                  "addon_delete",
+                  0,
+                  0,
+                  kRowButtonSize,
+                  kRowButtonSize,
+                  UI::ButtonStyle::kFsMenuSecondary,
+                  "–",
+                  _("Delete this add-on")),
+     packager_save_changes_(&packager_box_right_,
+                  "packager_save",
+                  0,
+                  0,
+                  kRowButtonSize,
+                  kRowButtonSize,
+                  UI::ButtonStyle::kFsMenuSecondary,
+                  _("Save changes")),
+     packager_map_add_(&packager_box_right_subbox5_,
+                  "packager_map_add",
+                  0,
+                  0,
+                  kRowButtonSize,
+                  kRowButtonSize,
+                  UI::ButtonStyle::kFsMenuSecondary,
+                  "+",
+                  _("Add selected map")),
+     packager_map_add_dir_(&packager_box_right_subbox5_,
+                  "packager_map_add_dir",
+                  0,
+                  0,
+                  kRowButtonSize,
+                  kRowButtonSize,
+                  UI::ButtonStyle::kFsMenuSecondary,
+                  "*",
+                  _("Create subdirectory")),
+     packager_map_delete_(&packager_box_right_subbox5_,
+                  "packager_map_delete",
+                  0,
+                  0,
+                  kRowButtonSize,
+                  kRowButtonSize,
+                  UI::ButtonStyle::kFsMenuSecondary,
+                  "–",
+                  _("Remove selected map or directory")),
+     packager_addons_(&packager_box_left_, 0, 0, 300, 0, UI::PanelStyle::kFsMenu),
+     packager_dirstruct_(&packager_box_right_subbox4_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu),
+     packager_my_maps_(&packager_box_right_subbox4_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu) {
 	installed_addons_buttons_box_.add(&move_top_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
 	installed_addons_buttons_box_.add(&move_up_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -278,10 +347,107 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	browse_addons_outer_wrapper_.add_space(2 * kRowButtonSpacing);
 	browse_addons_outer_wrapper_.add(&browse_addons_inner_wrapper_, UI::Box::Resizing::kExpandBoth);
 
+	packager_box_left_buttons_.add_inf_space();
+	packager_box_left_buttons_.add(&packager_addon_new_);
+	packager_box_left_buttons_.add_inf_space();
+	packager_box_left_buttons_.add(&packager_addon_delete_);
+	packager_box_left_buttons_.add_inf_space();
+
+	packager_box_right_subbox3_.add(&packager_name_, UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox3_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox3_.add(&packager_author_, UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox3_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox3_.add(&packager_version_, UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox3_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox3_.add(&packager_descr_, UI::Box::Resizing::kFullSize);
+
+	packager_box_right_subbox2_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox2_.add(new UI::Textarea(&packager_box_right_subbox2_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	           _("Name:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox2_.add_space(3 * kRowButtonSpacing);
+	packager_box_right_subbox2_.add(new UI::Textarea(&packager_box_right_subbox2_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	           _("Author:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox2_.add_space(3 * kRowButtonSpacing);
+	packager_box_right_subbox2_.add(new UI::Textarea(&packager_box_right_subbox2_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	           _("Version:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox2_.add_space(3 * kRowButtonSpacing);
+	packager_box_right_subbox2_.add(new UI::Textarea(&packager_box_right_subbox2_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	           _("Description:"), UI::Align::kRight), UI::Box::Resizing::kFullSize);
+
+	packager_box_right_subbox1_.add(&packager_box_right_subbox2_, UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox1_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox1_.add(&packager_box_right_subbox3_, UI::Box::Resizing::kExpandBoth);
+
+	packager_box_right_subbox5_.add_inf_space();
+	packager_box_right_subbox5_.add(&packager_map_add_);
+	packager_box_right_subbox5_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox5_.add(&packager_map_delete_);
+	packager_box_right_subbox5_.add_inf_space();
+	packager_box_right_subbox5_.add(&packager_map_add_dir_);
+	packager_box_right_subbox5_.add_inf_space();
+
+	packager_box_right_subbox4_.add(&packager_dirstruct_, UI::Box::Resizing::kExpandBoth);
+	packager_box_right_subbox4_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox4_.add(&packager_box_right_subbox5_, UI::Box::Resizing::kFullSize);
+	packager_box_right_subbox4_.add_space(kRowButtonSpacing);
+	packager_box_right_subbox4_.add(&packager_my_maps_, UI::Box::Resizing::kExpandBoth);
+
+	packager_box_right_.add(&packager_box_right_subbox1_, UI::Box::Resizing::kFullSize);
+	packager_box_right_.add_space(kRowButtonSpacing);
+	packager_box_right_.add(&packager_box_right_subbox4_, UI::Box::Resizing::kExpandBoth);
+	packager_box_right_.add_space(kRowButtonSpacing);
+	packager_box_right_.add(&packager_save_changes_, UI::Box::Resizing::kFullSize);
+
+	packager_box_left_.add(&packager_addons_, UI::Box::Resizing::kExpandBoth);
+	packager_box_left_.add_space(kRowButtonSpacing);
+	packager_box_left_.add(&packager_box_left_buttons_, UI::Box::Resizing::kFullSize);
+
+	packager_box_.add(&packager_box_left_, UI::Box::Resizing::kFullSize);
+	packager_box_.add_space(kRowButtonSpacing);
+	packager_box_.add(&packager_box_right_, UI::Box::Resizing::kExpandBoth);
+
+	{
+		std::vector<FullscreenMenuMain::MapEntry> v;
+		FullscreenMenuMain::find_maps("maps/My_Maps", v);
+		for (const FullscreenMenuMain::MapEntry& entry : v) {
+			packager_my_maps_.add(entry.first.localized_name, entry.first.filename, nullptr, false,
+				(boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
+			             g_style_manager->font_style(UI::FontStyle::kFsTooltipHeader)
+			                .as_font_tag(entry.first.filename) %
+			             (boost::format(_("Name: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(entry.first.localized_name))
+			                .str() %
+			             (boost::format(_("Size: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag((boost::format(_("%1$u×%2$u")) % entry.first.width %
+			                               entry.first.height)
+			                                 .str()))
+			                .str() %
+			             (boost::format(_("Players: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(std::to_string(entry.first.nrplayers)))
+			                .str() %
+			             (boost::format(_("Description: %s")) %
+			              g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+			                 .as_font_tag(entry.first.description))
+			                .str())
+			               .str()
+			);
+		}
+	}
+
+	packager_map_add_.set_enabled(false);
+	packager_my_maps_.selected.connect([this](uint32_t) { packager_map_add_.set_enabled(true); });
+	packager_map_delete_.set_enabled(false);
+	packager_dirstruct_.selected.connect([this](uint32_t i) { packager_map_delete_.set_enabled(i > 0); });
+	packager_addons_.selected.connect([this](uint32_t) { packager_addon_selected(); });
+
 	installed_addons_inner_wrapper_.add(&installed_addons_box_, UI::Box::Resizing::kExpandBoth);
 	browse_addons_inner_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", "", &installed_addons_outer_wrapper_);
 	tabs_.add("all", "", &browse_addons_outer_wrapper_);
+	tabs_.add("package", _("Packaging Tools"), &packager_box_);
 
 	/** TRANSLATORS: Sort add-ons alphabetically by name */
 	sort_order_.add(_("Name"), AddOnSortingCriteria::kNameABC);
@@ -566,22 +732,76 @@ bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
+void AddOnsCtrl::packager_addon_selected() {
+	const AddOns::AddOnInfo* selected = nullptr;
+	if (packager_addons_.has_selection()) {
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.internal_name == packager_addons_.get_selected()) {
+				selected = &pair.first;
+				break;
+			}
+		}
+	}
+
+	packager_save_changes_.set_enabled(selected);
+	packager_addon_delete_.set_enabled(selected);
+	packager_box_right_subbox1_.set_visible(false);
+	packager_box_right_subbox4_.set_visible(false);
+
+	if (!selected) {
+		return;
+	}
+
+	packager_box_right_subbox1_.set_visible(true);
+	packager_name_.set_text(selected->unlocalized_descname);
+	packager_descr_.set_text(selected->unlocalized_description);
+	packager_author_.set_text(selected->unlocalized_author);
+	packager_version_.set_text(AddOns::version_to_string(selected->version, false));
+
+	if (selected->category != AddOns::AddOnCategory::kMaps) {
+		return;
+	}
+
+	packager_box_right_subbox4_.set_visible(true);
+	packager_dirstruct_.clear();
+	packager_dirstruct_.add(_("<Add-On>"), "", g_image_cache->get("images/ui_basic/ls_wlscenario.png"), false, _("Top-level directory"));
+	recursively_build_add_on_tree(kAddOnDir + FileSystem::file_separator() + selected->internal_name, 1);
+}
+
+void AddOnsCtrl::recursively_build_add_on_tree(const std::string& dir, const uint32_t level) {
+	Widelands::Map map;
+	for (const std::string& file : g_fs->list_directory(dir)) {
+		std::string descname = FileSystem::fs_filename(file.c_str());
+		for (uint32_t i = 0; i < level; ++i) {
+			descname = (boost::format(_("  %s")) % descname).str();
+		}
+		descname = (boost::format(_("· %s")) % descname).str();
+
+		if (FileSystem::filename_ext(file) == kWidelandsMapExtension) {
+			packager_dirstruct_.add(descname, file, g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, FileSystem::fs_filename(file.c_str()));
+		} else if (g_fs->is_directory(file)) {
+			packager_dirstruct_.add(descname, file, g_image_cache->get("images/ui_basic/ls_dir.png"), false, FileSystem::fs_filename(file.c_str()));
+			recursively_build_add_on_tree(file, level + 1);
+		}
+	}
+}
+
 void AddOnsCtrl::refresh_remotes() {
 	try {
 		remotes_ = network_handler_.refresh_remotes();
 	} catch (const std::exception& e) {
-		std::string error = e.what();
+		const std::string title = _("Server Connection Error");
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
 		const std::string bug = _("a networking bug");
+		const std::string err = (boost::format(_("Unable to fetch the list of available add-ons from "
+			                           "the server!<br>Error Message: %s")) % e.what()).str();
 		remotes_ = {AddOns::AddOnInfo{
 		   "",
-		   []() { return _("Server Connection Error"); },
-		   [error]() {
-			   return (boost::format(_("Unable to fetch the list of available add-ons from "
-			                           "the server!<br>Error Message: %s")) %
-			           error)
-			      .str();
-		   },
+		   title,
+		   err,
+		   bug,
+		   [title]() { return title; },
+		   [err]() { return err; },
 		   [bug]() { return bug; },
 		   {},
 		   0,
@@ -646,6 +866,8 @@ void AddOnsCtrl::rebuild() {
 	browse_.clear();
 	assert(installed_addons_box_.get_nritems() == 0);
 	assert(browse_addons_box_.get_nritems() == 0);
+	packager_addons_.clear();
+	packager_addon_selected();
 
 	size_t index = 0;
 	for (const auto& pair : AddOns::g_addons) {
@@ -655,6 +877,7 @@ void AddOnsCtrl::rebuild() {
 		InstalledAddOnRow* i =
 		   new InstalledAddOnRow(&installed_addons_box_, this, pair.first, pair.second);
 		installed_addons_box_.add(i, UI::Box::Resizing::kFullSize);
+		packager_addons_.add(pair.first.descname(), pair.first.internal_name, g_image_cache->get(AddOns::kAddOnCategories.at(pair.first.category).icon));
 		++index;
 	}
 	tabs_.tabs()[0]->set_title((boost::format(_("Installed (%u)")) % index).str());
@@ -1622,10 +1845,6 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               .as_font_tag(info.description()))
              .str()),
      full_upgrade_possible_(AddOns::is_newer_version(installed_version, info.version)) {
-
-	assert(installed_version == info.version ||
-	       AddOns::is_newer_version(installed_version, info.version));
-	assert(installed_i18n_version <= info.i18n_version);
 
 	interact_.sigclicked.connect([ctrl, info]() {
 		RemoteInteractionWindow m(*ctrl, info);

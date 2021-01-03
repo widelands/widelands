@@ -38,7 +38,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/login_box.h"
 #include "wlapplication_options.h"
-#include "wui/mapdata.h"
 #include "wui/savegameloader.h"
 
 constexpr uint32_t kInitialFadeoutDelay = 2500;
@@ -207,8 +206,7 @@ FullscreenMenuMain::FullscreenMenuMain(bool first_ever_init)
 	layout();
 }
 
-using MapEntry = std::pair<MapData, Widelands::MapVersion>;
-static void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
+void FullscreenMenuMain::find_maps(const std::string& directory, std::vector<MapEntry>& results) {
 	Widelands::Map map;
 	for (const std::string& file : g_fs->list_directory(directory)) {
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);

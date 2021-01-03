@@ -31,6 +31,7 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/multilineeditbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/tabpanel.h"
@@ -130,14 +131,20 @@ private:
 	UI::Box installed_addons_outer_wrapper_, installed_addons_inner_wrapper_,
 	   installed_addons_buttons_box_, installed_addons_box_, browse_addons_outer_wrapper_,
 	   browse_addons_inner_wrapper_, browse_addons_buttons_box_, browse_addons_buttons_inner_box_1_,
-	   browse_addons_buttons_inner_box_2_, browse_addons_box_;
+	   browse_addons_buttons_inner_box_2_, browse_addons_box_, packager_box_, packager_box_left_, packager_box_right_, packager_box_left_buttons_,
+	   packager_box_right_subbox1_, packager_box_right_subbox2_, packager_box_right_subbox3_, packager_box_right_subbox4_, packager_box_right_subbox5_;
 	std::map<AddOns::AddOnCategory, UI::Checkbox*> filter_category_;
 	std::vector<RemoteAddOnRow*> browse_;
-	UI::EditBox filter_name_;
+	UI::EditBox filter_name_, packager_name_, packager_author_, packager_version_;
+	UI::MultilineEditbox& packager_descr_;
 	UI::Checkbox filter_verified_;
 	UI::Dropdown<AddOnSortingCriteria> sort_order_;
 	UI::Button filter_reset_, upgrade_all_, refresh_, ok_, autofix_dependencies_, move_top_,
-	   move_up_, move_down_, move_bottom_;
+	   move_up_, move_down_, move_bottom_, packager_addon_new_, packager_addon_delete_, packager_save_changes_, packager_map_add_, packager_map_add_dir_, packager_map_delete_;
+	UI::Listselect<std::string> packager_addons_, packager_dirstruct_, packager_my_maps_;
+
+	void packager_addon_selected();
+	void recursively_build_add_on_tree(const std::string& dir, uint32_t level);
 
 	void category_filter_changed(AddOns::AddOnCategory);
 	void check_enable_move_buttons();
