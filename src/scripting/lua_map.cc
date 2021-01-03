@@ -720,16 +720,22 @@ const Widelands::TribeDescr& get_tribe_descr(lua_State* L, const std::string& tr
 
 std::string soldier_preference_to_string(const Widelands::SoldierPreference p) {
 	switch (p) {
-	case Widelands::SoldierPreference::kHeroes: return "heroes";
-	case Widelands::SoldierPreference::kRookies: return "rookies";
+	case Widelands::SoldierPreference::kHeroes:
+		return "heroes";
+	case Widelands::SoldierPreference::kRookies:
+		return "rookies";
 	}
 	NEVER_HERE();
 }
 
 Widelands::SoldierPreference string_to_soldier_preference(const std::string& p) {
-	if (p == "heroes") { return Widelands::SoldierPreference::kHeroes; }
-	else if (p == "rookies") { return Widelands::SoldierPreference::kRookies; }
-	else { throw wexception("Invalid soldier preference '%s'", p.c_str()); }
+	if (p == "heroes") {
+		return Widelands::SoldierPreference::kHeroes;
+	} else if (p == "rookies") {
+		return Widelands::SoldierPreference::kRookies;
+	} else {
+		throw wexception("Invalid soldier preference '%s'", p.c_str());
+	}
 }
 
 // Transforms the given warehouse policy to a string which is used by the lua code
@@ -766,19 +772,32 @@ Widelands::StockPolicy string_to_wh_policy(lua_State* L, uint32_t index) {
 }
 
 Widelands::WarePriority string_to_priority(const std::string& p) {
-	if (p == "normal") { return Widelands::WarePriority::kNormal; }
-	else if (p == "low") { return Widelands::WarePriority::kLow; }
-	else if (p == "very_low") { return Widelands::WarePriority::kVeryLow; }
-	else if (p == "high") { return Widelands::WarePriority::kHigh; }
-	else if (p == "very_high") { return Widelands::WarePriority::kVeryHigh; }
-	else { throw wexception("Invalid ware priority '%s'", p.c_str()); }
+	if (p == "normal") {
+		return Widelands::WarePriority::kNormal;
+	} else if (p == "low") {
+		return Widelands::WarePriority::kLow;
+	} else if (p == "very_low") {
+		return Widelands::WarePriority::kVeryLow;
+	} else if (p == "high") {
+		return Widelands::WarePriority::kHigh;
+	} else if (p == "very_high") {
+		return Widelands::WarePriority::kVeryHigh;
+	} else {
+		throw wexception("Invalid ware priority '%s'", p.c_str());
+	}
 }
 std::string priority_to_string(const Widelands::WarePriority priority) {
-	if (priority == Widelands::WarePriority::kVeryLow) { return "very_low"; }
-	else if (priority == Widelands::WarePriority::kLow) { return "low"; }
-	else if (priority == Widelands::WarePriority::kHigh) { return "high"; }
-	else if (priority == Widelands::WarePriority::kVeryHigh) { return "very_high"; }
-	else if (priority == Widelands::WarePriority::kNormal) { return "normal"; }
+	if (priority == Widelands::WarePriority::kVeryLow) {
+		return "very_low";
+	} else if (priority == Widelands::WarePriority::kLow) {
+		return "low";
+	} else if (priority == Widelands::WarePriority::kHigh) {
+		return "high";
+	} else if (priority == Widelands::WarePriority::kVeryHigh) {
+		return "very_high";
+	} else if (priority == Widelands::WarePriority::kNormal) {
+		return "normal";
+	}
 	NEVER_HERE();
 }
 
@@ -5316,7 +5335,7 @@ int LuaConstructionSite::set_has_builder(lua_State* L) {
 			cs.builder_ = nullptr;
 			cs.set_seeing(false);
 			if (upcast(Widelands::Game, g, &egbase)) {
-			cs.request_builder(*g);
+				cs.request_builder(*g);
 			}
 		}
 	} else if (arg) {
@@ -5344,7 +5363,9 @@ int LuaConstructionSite::set_has_builder(lua_State* L) {
 int LuaConstructionSite::get_setting_launch_expedition(lua_State* L) {
 	if (upcast(Widelands::WarehouseSettings, ws, get(L, get_egbase(L))->get_settings())) {
 		lua_pushboolean(L, ws->launch_expedition);
-	} else { lua_pushnil(L); }
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 int LuaConstructionSite::set_setting_launch_expedition(lua_State* L) {
@@ -5364,8 +5385,10 @@ int LuaConstructionSite::set_setting_launch_expedition(lua_State* L) {
 */
 int LuaConstructionSite::get_setting_stopped(lua_State* L) {
 	if (upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings())) {
-	lua_pushboolean(L, ps->stopped);
-	} else { lua_pushnil(L); }
+		lua_pushboolean(L, ps->stopped);
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 int LuaConstructionSite::set_setting_stopped(lua_State* L) {
@@ -5385,8 +5408,13 @@ int LuaConstructionSite::set_setting_stopped(lua_State* L) {
 */
 int LuaConstructionSite::get_setting_soldier_preference(lua_State* L) {
 	if (upcast(Widelands::MilitarysiteSettings, ms, get(L, get_egbase(L))->get_settings())) {
-		lua_pushstring(L, soldier_preference_to_string(ms->prefer_heroes ? Widelands::SoldierPreference::kHeroes : Widelands::SoldierPreference::kRookies).c_str());
-	} else { lua_pushnil(L); }
+		lua_pushstring(
+		   L, soldier_preference_to_string(ms->prefer_heroes ? Widelands::SoldierPreference::kHeroes :
+		                                                       Widelands::SoldierPreference::kRookies)
+		         .c_str());
+	} else {
+		lua_pushnil(L);
+	}
 	return 1;
 }
 int LuaConstructionSite::set_setting_soldier_preference(lua_State* L) {
@@ -5395,7 +5423,8 @@ int LuaConstructionSite::set_setting_soldier_preference(lua_State* L) {
 		report_error(L, "This constructionsite will not become a militarysite");
 	}
 	try {
-		ms->prefer_heroes = string_to_soldier_preference(luaL_checkstring(L, -1)) == Widelands::SoldierPreference::kHeroes;
+		ms->prefer_heroes = string_to_soldier_preference(luaL_checkstring(L, -1)) ==
+		                    Widelands::SoldierPreference::kHeroes;
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -5454,8 +5483,8 @@ int LuaConstructionSite::get_priority(lua_State* L) {
 		}
 		NEVER_HERE();
 	}
-	lua_pushstring(L, priority_to_string(
-	                     get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
+	lua_pushstring(
+	   L, priority_to_string(get(L, get_egbase(L))->get_priority(Widelands::wwWARE, item)));
 	return 1;
 }
 int LuaConstructionSite::set_priority(lua_State* L) {
@@ -5479,20 +5508,19 @@ int LuaConstructionSite::set_priority(lua_State* L) {
 		NEVER_HERE();
 	}
 	try {
-	get(L, get_egbase(L))
-	   ->set_priority(
-	      Widelands::wwWARE, item, string_to_priority(luaL_checkstring(L, 3)));
-				} catch (const WException& e) {
-					report_error(L, "%s", e.what());
-				}
+		get(L, get_egbase(L))
+		   ->set_priority(Widelands::wwWARE, item, string_to_priority(luaL_checkstring(L, 3)));
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
 	return 0;
 }
 int LuaConstructionSite::get_desired_fill(lua_State* L) {
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ?
-	                                            get_egbase(L).descriptions().safe_ware_index(itemname) :
-	                                            get_egbase(L).descriptions().safe_worker_index(itemname);
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
 	if (lua_gettop(L) > 2 && luaL_checkboolean(L, 3)) {
 		upcast(const Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		if (!ps) {
@@ -5506,17 +5534,18 @@ int LuaConstructionSite::get_desired_fill(lua_State* L) {
 		}
 		NEVER_HERE();
 	}
-	lua_pushuint32(L, get(L, get_egbase(L))
-	                     ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
-	                     .get_max_fill());
+	lua_pushuint32(
+	   L, get(L, get_egbase(L))
+	         ->inputqueue(item, is_ware ? Widelands::wwWARE : Widelands::wwWORKER, nullptr)
+	         .get_max_fill());
 	return 1;
 }
 int LuaConstructionSite::set_desired_fill(lua_State* L) {
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ?
-	                                            get_egbase(L).descriptions().safe_ware_index(itemname) :
-	                                            get_egbase(L).descriptions().safe_worker_index(itemname);
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
 	if (lua_gettop(L) > 3 && luaL_checkboolean(L, 4)) {
 		upcast(Widelands::ProductionsiteSettings, ps, get(L, get_egbase(L))->get_settings());
 		if (!ps) {
@@ -5550,11 +5579,11 @@ int LuaConstructionSite::get_setting_warehouse_policy(lua_State* L) {
 	}
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ?
-	                                            get_egbase(L).descriptions().safe_ware_index(itemname) :
-	                                            get_egbase(L).descriptions().safe_worker_index(itemname);
-	wh_policy_to_string(L, is_ware ? ws->ware_preferences.at(item) :
-	                                                 ws->worker_preferences.at(item));
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
+	wh_policy_to_string(
+	   L, is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item));
 	return 1;
 }
 /* RST
@@ -5571,11 +5600,11 @@ int LuaConstructionSite::set_setting_warehouse_policy(lua_State* L) {
 	}
 	const std::string itemname = luaL_checkstring(L, 2);
 	const bool is_ware = get_egbase(L).descriptions().ware_exists(itemname);
-	const Widelands::DescriptionIndex item = is_ware ?
-	                                            get_egbase(L).descriptions().safe_ware_index(itemname) :
-	                                            get_egbase(L).descriptions().safe_worker_index(itemname);
-		(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
-		   string_to_wh_policy(L, 3);
+	const Widelands::DescriptionIndex item =
+	   is_ware ? get_egbase(L).descriptions().safe_ware_index(itemname) :
+	             get_egbase(L).descriptions().safe_worker_index(itemname);
+	(is_ware ? ws->ware_preferences.at(item) : ws->worker_preferences.at(item)) =
+	   string_to_wh_policy(L, 3);
 	return 0;
 }
 
@@ -5633,7 +5662,7 @@ int LuaDismantleSite::set_has_builder(lua_State* L) {
 			cs.builder_ = nullptr;
 			cs.set_seeing(false);
 			if (upcast(Widelands::Game, g, &egbase)) {
-			cs.request_builder(*g);
+				cs.request_builder(*g);
 			}
 		}
 	} else if (arg) {
@@ -6312,20 +6341,22 @@ int LuaProductionSite::toggle_start_stop(lua_State* L) {
 
 // documented in parent class
 int LuaProductionSite::get_priority(lua_State* L) {
-	lua_pushstring(L, priority_to_string(
-	                     get(L, get_egbase(L))
-	                        ->get_priority(Widelands::wwWARE, get_egbase(L).descriptions().safe_ware_index(
-	                                                             luaL_checkstring(L, 2)))));
+	lua_pushstring(
+	   L, priority_to_string(
+	         get(L, get_egbase(L))
+	            ->get_priority(Widelands::wwWARE, get_egbase(L).descriptions().safe_ware_index(
+	                                                 luaL_checkstring(L, 2)))));
 	return 1;
 }
-int LuaProductionSite::set_priority(lua_State* L) { try {
-	get(L, get_egbase(L))
-	   ->set_priority(Widelands::wwWARE,
-	                  get_egbase(L).descriptions().safe_ware_index(luaL_checkstring(L, 2)),
-	                  string_to_priority(luaL_checkstring(L, 3)));
-				} catch (const WException& e) {
-					report_error(L, "%s", e.what());
-				}
+int LuaProductionSite::set_priority(lua_State* L) {
+	try {
+		get(L, get_egbase(L))
+		   ->set_priority(Widelands::wwWARE,
+		                  get_egbase(L).descriptions().safe_ware_index(luaL_checkstring(L, 2)),
+		                  string_to_priority(luaL_checkstring(L, 3)));
+	} catch (const WException& e) {
+		report_error(L, "%s", e.what());
+	}
 	return 0;
 }
 int LuaProductionSite::get_desired_fill(lua_State* L) {
@@ -6513,12 +6544,14 @@ int LuaMilitarySite::get_capacity(lua_State* L) {
       (RW) "heroes" if this site prefers heroes; "rookies" otherwise.
 */
 int LuaMilitarySite::get_soldier_preference(lua_State* L) {
-	lua_pushstring(L, soldier_preference_to_string(get(L, get_egbase(L))->get_soldier_preference()).c_str());
+	lua_pushstring(
+	   L, soldier_preference_to_string(get(L, get_egbase(L))->get_soldier_preference()).c_str());
 	return 1;
 }
 int LuaMilitarySite::set_soldier_preference(lua_State* L) {
 	try {
-		get(L, get_egbase(L))->set_soldier_preference(string_to_soldier_preference(luaL_checkstring(L, -1)));
+		get(L, get_egbase(L))
+		   ->set_soldier_preference(string_to_soldier_preference(luaL_checkstring(L, -1)));
 	} catch (const WException& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -7253,8 +7286,8 @@ const MethodType<LuaSoldier> LuaSoldier::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaSoldier> LuaSoldier::Properties[] = {
-   PROP_RO(LuaSoldier, attack_level), PROP_RO(LuaSoldier, defense_level),
-   PROP_RO(LuaSoldier, health_level), PROP_RO(LuaSoldier, evade_level),
+   PROP_RO(LuaSoldier, attack_level),   PROP_RO(LuaSoldier, defense_level),
+   PROP_RO(LuaSoldier, health_level),   PROP_RO(LuaSoldier, evade_level),
    PROP_RW(LuaSoldier, current_health), {nullptr, nullptr, nullptr},
 };
 
