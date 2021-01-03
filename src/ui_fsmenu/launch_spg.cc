@@ -38,64 +38,28 @@ namespace FsMenu {
 LaunchSPG::LaunchSPG(MenuCapsule& fsmm,
                      GameSettingsProvider& settings,
                      Widelands::Game& g,
-                     bool preconfigured)
-   : LaunchGame(fsmm, settings, nullptr, preconfigured, false),
-     player_setup(&left_column_box_, &settings, scale_factor * standard_height_, kPadding),
-     preconfigured_(preconfigured),
-     game_(g),
-     initializing_(true) {
+                     const MapData* mapdata,
+                     const bool scenario)
+   : LaunchGame(fsmm, settings, nullptr, !mapdata, false),
+     player_setup_(&left_column_box_, &settings, scale_factor * standard_height_),
+     preconfigured_(!mapdata),
+     game_(g) {
 
-	left_column_box_.add(&player_setup, UI::Box::Resizing::kExpandBoth);
+	left_column_box_.add(&player_setup_, UI::Box::Resizing::kExpandBoth);
 	ok_.set_enabled(settings_.can_launch() || preconfigured_);
 
-	if (preconfigured) {
-		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
-		update_win_conditions();
-		update_peaceful_mode();
-		update_custom_starting_positions();
-		update();
-		layout();
-	} else {
-		clicked_select_map();
-	}
-}
-
-LaunchSPG::~LaunchSPG() {
-	if (!preconfigured_) {
-		game_.cleanup_objects();
-		delete &game_;
-		delete &settings_;
-	}
-}
-
-void LaunchSPG::clicked_select_map() {
-	if (!preconfigured_ && settings_.can_change_map()) {
-		new MapSelect(*this, &settings_, nullptr, game_);
-	}
-}
-
-void LaunchSPG::clicked_select_map_callback(const MapData* mapdata, const bool scenario) {
-	assert(!preconfigured_ && settings_.can_change_map());
-
-	if (!mapdata) {
-		if (initializing_) {
-			die();
-		}
-		return;
-	}
-	initializing_ = false;
-
 	settings_.set_scenario(scenario);
-	assert(!settings_.settings().tribes.empty());
-	settings_.set_map(
-	   mapdata->name, mapdata->filename, mapdata->theme, mapdata->background, mapdata->nrplayers);
+	if (!preconfigured_) {
+		assert(!settings_.settings().tribes.empty());
+		settings_.set_map(
+		   mapdata->name, mapdata->filename, mapdata->theme, mapdata->background, mapdata->nrplayers);
+	}
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 
 	update_win_conditions();
 	update_peaceful_mode();
 	update_custom_starting_positions();
 	update();
-	// force layout so all boxes and textareas are forced to update
 	layout();
 }
 
@@ -211,7 +175,8 @@ void LaunchSPG::clicked_ok() {
 
 void LaunchSPG::layout() {
 	LaunchGame::layout();
-	player_setup.force_new_dimensions(scale_factor * standard_height_);
+	player_setup_.force_new_dimensions(
+	   scale_factor * standard_height_, left_column_box_.get_inner_h());
 }
 
 }  // namespace FsMenu
