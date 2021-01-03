@@ -185,7 +185,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Bread
-                  pgettext("amazons_ware", "This tasty bread is made in cookeries out of cassava root and water. It is the basic ingredient of a ration that is made by a food preserver. Soldiers like it too.")
+                  pgettext("amazons_ware", "This tasty bread is made in cassava root cookeries out of cassava root and water. It is the basic ingredient of a ration that is made by a food preserver. Soldiers like it too.")
                }
             }
          },
@@ -206,7 +206,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Fish
-                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Fish is one of the two major food resources of the Amazons. It is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -216,9 +216,9 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Meat, part 1
-                  pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunters."),
+                  pgettext("ware", "Meat contains a lot of energy, and it is obtained from wild game taken by hunter-gatherers."),
                   -- TRANSLATORS: Helptext for an amazon ware: Meat, part 2
-                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the miners. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
+                  pgettext("amazons_ware", "Meat is used by the food preserver to prepare rations for the workers digging for gold dust and granite. It is also consumed at the training sites (training glade and warriors’ gathering) and for recruiting new soldiers.")
                }
             }
          },
@@ -229,7 +229,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Ration, part 1
-                  pgettext("amazons_ware", "A small bite to keep miners strong and working. The scout also consumes rations on his scouting trips."),
+                  pgettext("amazons_ware", "A small bite to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on his scouting trips."),
                   -- TRANSLATORS: Helptext for an amazon ware: Ration, part 2
                   pgettext("amazons_ware", "Rations are produced by the food preserver out of fish or meat and bread. They are dried using a charcoal fire.")
                }
@@ -348,7 +348,7 @@ descriptions:new_tribe {
                   -- TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 1
                   pgettext("amazons_ware", "This spear is the basic weapon in the Amazon military system. It is produced by the stone carver. In combination with a tunic, it is the equipment to fit out young soldiers."),
                   -- TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
-                  pgettext("amazons_ware", "It is used by the amazon hunters as well.")
+                  pgettext("amazons_ware", "It is used by the amazon hunter-gatherers as well.")
                }
             }
          },
@@ -1393,7 +1393,7 @@ descriptions:new_tribe {
          name = "amazons_food_preserver",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon production site: Food Preserver
-            purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and miners."),
+            purpose = pgettext("amazons_building", "Prepares rations to feed the scouts and the workers digging for gold dust and granite."),
             -- TRANSLATORS: Performance helptext for an amazon production site: Food Preserver
             performance = pgettext("amazons_building", "The food preserver can produce one ration in %s on average if the supply is steady."):bformat(ngettext("%d second", "%d seconds", 17):bformat(17))
          }

@@ -56,6 +56,7 @@ descriptions:new_productionsite_type {
       title = _"No Rocks",
       heading = _"Out of Rocks",
       message = pgettext("amazons_building", "The stonecutter working at this stonecutter’s hut can’t find any rocks in her work area."),
+      productivity_threshold = 75
    },
 }
 
