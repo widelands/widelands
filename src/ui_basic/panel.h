@@ -311,6 +311,8 @@ public:
 
 	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
 
+	Panel& get_topmost_forefather();
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -353,6 +355,11 @@ protected:
 	std::vector<Recti> focus_overlay_rects(int off_x, int off_y, int strength_diff);
 
 	const PanelStyle panel_style_;
+
+	// Never call this function, except when you need Widelands to stay responsive
+	// during a costly operation and you can guarantee that it will not interfere
+	// with the "normal" graphics refreshing done periodically from `Panel::do_run`.
+	void do_redraw_now();
 
 private:
 	bool handles_mouse() const {
