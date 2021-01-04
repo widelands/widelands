@@ -83,8 +83,6 @@ LoadGame::LoadGame(MenuCapsule& fsmm,
 		ok_.set_tooltip(_("Load this game"));
 	}
 
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	load_or_save_.table().selected.connect([this](unsigned) { entry_selected(); });
 	load_or_save_.table().double_clicked.connect([this](unsigned) { clicked_ok(); });
 
