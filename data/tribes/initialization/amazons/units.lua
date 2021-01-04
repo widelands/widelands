@@ -229,7 +229,7 @@ descriptions:new_tribe {
             helptexts = {
                purpose = {
                   -- TRANSLATORS: Helptext for an amazon ware: Ration, part 1
-                  pgettext("amazons_ware", "A small bite to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on his scouting trips."),
+                  pgettext("amazons_ware", "A small bite to keep the workers digging for gold dust and granite strong and working. The scout also consumes rations on her scouting trips."),
                   -- TRANSLATORS: Helptext for an amazon ware: Ration, part 2
                   pgettext("amazons_ware", "Rations are produced by the food preserver out of fish or meat and bread. They are dried using a charcoal fire.")
                }
