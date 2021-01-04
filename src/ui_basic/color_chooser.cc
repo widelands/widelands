@@ -411,11 +411,12 @@ ColorChooser::ColorChooser(Panel* parent,
 void ColorChooser::create_palette_button(const unsigned index) {
 	UI::Box* box = index < kMaxPlayers / 2 ? &palette_box_1_ : &palette_box_2_;
 
-	palette_buttons_[index] =
-	   new Button(box, "palette_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
-	              panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-	              playercolor_image(kPlayerColors[index], "images/ui_basic/square.png"));
-	palette_buttons_[index]->sigclicked.connect([this, index]() { set_color(kPlayerColors[index]); });
+	palette_buttons_[index] = new Button(
+	   box, "palette_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
+	   panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+	   playercolor_image(kPlayerColors[index], "images/ui_basic/square.png"));
+	palette_buttons_[index]->sigclicked.connect(
+	   [this, index]() { set_color(kPlayerColors[index]); });
 
 	if (index != 0 && index != kMaxPlayers / 2) {
 		box->add_space(kSpacing);
