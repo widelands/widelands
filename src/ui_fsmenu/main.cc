@@ -43,9 +43,9 @@
 #include "ui_fsmenu/addons.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/internet_lobby.h"
-#include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/login_box.h"
+#include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/random_game.h"
@@ -786,8 +786,8 @@ void MainMenu::action(const MenuTarget t) {
 
 	case MenuTarget::kNewGame:
 		menu_capsule_.clear_content();
-		new LaunchSPG(
-		   menu_capsule_, *new SinglePlayerGameSettingsProvider(), *new Widelands::Game(), false);
+		new MapSelect(menu_capsule_, nullptr, new SinglePlayerGameSettingsProvider(), nullptr,
+		              *new Widelands::Game());
 		break;
 
 	case MenuTarget::kRandomGame:

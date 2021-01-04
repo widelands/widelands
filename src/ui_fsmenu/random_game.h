@@ -26,6 +26,7 @@
 #include "logic/game.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "ui_basic/icon.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/menu.h"
 
 namespace FsMenu {
@@ -37,12 +38,14 @@ public:
 
 	void clicked_ok() override;
 	void reactivated() override;
+	void layout() override;
 
 private:
 	MainMenuNewRandomMapPanel menu_;
 	Widelands::Game game_;
 	SinglePlayerGameSettingsProvider settings_;
 	UI::Icon icon_;
+	UI::ProgressWindow* progress_window_;  // not owned
 };
 
 }  // namespace FsMenu
