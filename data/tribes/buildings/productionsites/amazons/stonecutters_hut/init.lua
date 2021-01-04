@@ -33,23 +33,13 @@ descriptions:new_productionsite_type {
    programs = {
       main = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = _"working",
-         actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
-            "call=mine_stone",
-         },
-      },
-      mine_stone = {
-         -- TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
          descname = _"cutting granite",
          actions = {
-           -- This order is on purpose so that the productivity
-           -- drops fast once all rocks are gone.
             "callworker=cut_granite",
             "sleep=duration:10s"
-         }
+         },
       },
+
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
