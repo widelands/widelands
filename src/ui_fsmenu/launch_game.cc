@@ -69,7 +69,7 @@ LaunchGame::LaunchGame(MenuCapsule& fsmm,
                                 UI::PanelStyle::kFsMenu,
                                 Vector2i::zero(),
                                 _("Custom starting positions")),
-     choose_map_(settings.can_change_map() && !preconfigured ?
+     choose_map_(mpg && settings.can_change_map() && !preconfigured ?
                     new UI::Button(&right_column_content_box_,
                                    "choose_map",
                                    0,

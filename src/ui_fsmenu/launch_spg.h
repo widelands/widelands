@@ -26,23 +26,27 @@
 #include "ui_fsmenu/launch_game.h"
 #include "ui_fsmenu/singleplayersetupbox.h"
 
+struct MapData;
 namespace Widelands {
 class Game;
 }
+
 namespace FsMenu {
+
 class LaunchSPG : public LaunchGame {
 public:
 	LaunchSPG(MenuCapsule&,
-	          GameSettingsProvider&,  // Ownership is taken unless preconfigured
-	          Widelands::Game&,       // Ownership is taken unless preconfigured
-	          bool preconfigured);
-	~LaunchSPG() override;
-
-	void clicked_select_map_callback(const MapData*, bool scenario) override;
+	          GameSettingsProvider&,
+	          Widelands::Game&,
+	          const MapData* /* nullptr for preconfigured games */,
+	          bool scenario);
+	~LaunchSPG() override = default;
 
 protected:
 	void clicked_ok() override;
-	void clicked_select_map() override;
+	void clicked_select_map() override {
+		NEVER_HERE();  // not available in singleplayer
+	}
 	void clicked_select_savegame() override {
 		NEVER_HERE();  // not available in singleplayer
 	}
@@ -51,14 +55,13 @@ private:
 	void win_condition_selected() override;
 	void layout() override;
 
-	SinglePlayerSetupBox player_setup;
+	SinglePlayerSetupBox player_setup_;
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 
 	void update();
 	void enforce_player_names_and_tribes(const Widelands::Map& map);
 	const bool preconfigured_;
 	Widelands::Game& game_;
-	bool initializing_;
 };
 }  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H
