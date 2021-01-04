@@ -150,7 +150,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
-	     player(this,
+	     player_(this,
 	            "player",
 	            0,
 	            0,
@@ -214,14 +214,15 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		tribes_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		team_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 
 		type_dropdown_.selected.connect([this]() { set_type(); });
 		tribes_dropdown_.selected.connect([this]() { set_tribe_or_shared_in(); });
 		init_dropdown_.selected.connect([this]() { set_init(); });
 		team_dropdown_.selected.connect([this]() { set_team(); });
-		player.sigclicked.connect([this]() { set_color(); });
+		player_.sigclicked.connect([this]() { set_color(); });
 
-		add(&player);
+		add(&player_);
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
 		add(&init_dropdown_, UI::Box::Resizing::kExpandBoth);
@@ -536,10 +537,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 
 		const PlayerSettings& player_setting = settings.players[id_];
-		player.set_tooltip(player_setting.name);
-		player.set_pic(
+		player_.set_tooltip(player_setting.name);
+		player_.set_pic(
 		   playercolor_image(player_setting.color, "images/players/player_position_menu.png"));
-		player.set_enabled(settings_->can_change_player_color(id_));
+		player_.set_enabled(settings_->can_change_player_color(id_));
 
 		rebuild_type_dropdown(settings);
 		set_visible(true);
@@ -570,7 +571,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	void force_new_dimensions(uint32_t height) {
-		player.set_desired_size(height, height);
+		player_.set_desired_size(height, height);
 		type_dropdown_.set_desired_size(height, height);
 		tribes_dropdown_.set_desired_size(height, height);
 		team_dropdown_.set_desired_size(height, height);
@@ -581,7 +582,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	NetworkPlayerSettingsBackend* const n;
 	PlayerSlot const id_;
 
-	UI::Button player;
+	UI::Button player_;
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
 	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.
