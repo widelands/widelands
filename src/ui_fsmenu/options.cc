@@ -897,8 +897,9 @@ void OptionsCtrl::save_options() {
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
-	set_template_dir(opt.theme);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
+	set_template_dir(opt.theme);
+	parent_.get_topmost_forefather().template_directory_changed();
 
 	// Sound options
 	g_sh->save_config();

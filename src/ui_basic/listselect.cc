@@ -79,11 +79,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     table_style_(g_style_manager->table_style(style)),
-     background_style_(selection_mode == ListselectLayout::kDropdown ?
-                          g_style_manager->dropdown_style(style) :
-                          nullptr),
-     lineheight_(text_height(table_style_.enabled()) + kMargin),
+     lineheight_(text_height(table_style().enabled()) + kMargin),
      notify_on_delete_(nullptr) {
 	set_thinks(false);
 
@@ -111,6 +107,15 @@ BaseListselect::~BaseListselect() {
 	if (notify_on_delete_) {
 		notify_on_delete_->notify_list_deleted();
 	}
+}
+
+inline const UI::TableStyleInfo& BaseListselect::table_style() const {
+	return g_style_manager->table_style(panel_style_);
+}
+inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
+	return selection_mode_ == ListselectLayout::kDropdown ?
+                          g_style_manager->dropdown_style(panel_style_) :
+                          nullptr;
 }
 
 /**
@@ -142,7 +147,7 @@ void BaseListselect::add(const std::string& name,
                          bool const sel,
                          const std::string& tooltip_text,
                          const std::string& hotkey) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style_);
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style());
 
 	int entry_height = lineheight_;
 	if (pic) {
@@ -339,8 +344,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
-	if (background_style_ != nullptr) {
-		draw_background(dst, *background_style_);
+	if (const UI::PanelStyleInfo* s = background_style()) {
+		draw_background(dst, *s);
 	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {

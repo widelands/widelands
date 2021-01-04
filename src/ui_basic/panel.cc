@@ -571,6 +571,13 @@ void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleI
 	}
 }
 
+void Panel::template_directory_changed() {
+	update_template();
+	for (Panel* child = first_child_; child; child = child->next_) {
+		child->update_template();
+	}
+}
+
 /**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.

@@ -1166,6 +1166,7 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info) {
 	    template_dir() == (kAddOnDir + '/' + info.internal_name + '/')) {
 		// When uninstalling the active theme, fall back to default theme
 		set_template_dir("");
+		ctrl->get_topmost_forefather().template_directory_changed();
 	}
 
 	// Delete the add-on…
