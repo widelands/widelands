@@ -7,13 +7,14 @@
 # GunChleoc, 2014
 # GunChleoc, 2014
 # Milan Fašina <matrix17@seznam.cz>, 2016
+# Ondřej Itřech, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-09 12:40+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-12-22 23:27+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +35,7 @@ msgstr "Postav chatu lesníka vedle každé chaty dřevorubce."
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr "Stromy, jak už to tak chodí, rostou pomalu. Aby si měl dost kmenů, je potřeba postavit lesníky."
+msgstr "Stromy, jak už to tak chodí, rostou pomalu. Aby bylo dost klád, je potřeba postavit lesníky."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:30
 msgid "Expand north-east and build a quarry"
@@ -78,7 +79,7 @@ msgstr "K tomu je třeba umístit vlajku na úbočí hory na východě (na horna
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "some coal"
-msgstr ""
+msgstr "něco málo uhlí"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid "a lot of coal"
@@ -86,7 +87,7 @@ msgstr "hodně uhlí"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "some iron"
-msgstr ""
+msgstr "něco málo železa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:47
 msgid "a lot of iron"
@@ -94,7 +95,7 @@ msgstr "hodně železa"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:48
 msgid "some gold"
-msgstr ""
+msgstr "něco málo zlata"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:49
 msgid "a lot of gold"
@@ -102,7 +103,7 @@ msgstr "hodně zlata"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:50
 msgid "some granite"
-msgstr ""
+msgstr "něco málo žuly"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:51
 msgid "a lot of granite"
@@ -231,7 +232,7 @@ msgstr "Samozřejmě, že můžeš rozšířit všechny doly na hlubinné okamž
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 msgid "Build a wood hardener"
-msgstr "Postav tesaře"
+msgstr "Postav lakýrnu dřeva"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:100
 msgid ""
@@ -240,7 +241,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr "Větší a lepší budovy - včetně všech vojenských - vyžadují lepší stavební materiály. Nejdou postavit jen z kmenů - kmeny musí tesař vytvrdit na tvrzené dřevo. Vždy pamatuj, že musíš postavit tesařství předtím, než ti dojde tvrzené dřevo, protože bez něj nelze expandovat."
+msgstr "Větší a lepší budovy – včetně všech vojenských – vyžadují lepší stavební materiály. Nejdou postavit z obyčejných klád – ty musí lakýrník vyztužit na tvrzené dřevo. Vždy pamatuj, že musíš postavit lakýrnu dřeva předtím, než ti dojde tvrzené dřevo, protože bez něj nemůžeš rozšiřovat své území."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:106
 msgid "Build a lime kiln and coal economy"
@@ -277,7 +278,7 @@ msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr "Uhlí lze získat postavením milíře na dřevené uhlí nebo dolu na uhlí. Pálení kmenů na dřevěné uhlí je zdlouhavé. Milíř na dřevěné uhlí by si měl stavět jen v případě, že došlo všechno uhlí."
+msgstr "Uhlí lze získat postavením milíře na dřevené uhlí nebo dolu na uhlí. Pálení klád na dřevěné uhlí je zdlouhavé. Milíř na dřevěné uhlí je vhodné stavět jen v případě, když už uhlí není k dispozici."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
@@ -846,7 +847,7 @@ msgstr "Právě jsem zjistil, že nám dochází tvrzené dřevo! Naši bojovní
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:441
 msgid "We need a wood hardener, and we need one now!"
-msgstr "Potřebujeme tesaře a to hned!"
+msgstr "Potřebujeme lakýrníka a to hned!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:447
 msgid "Boldreth smiles…"

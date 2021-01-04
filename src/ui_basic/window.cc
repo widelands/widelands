@@ -193,7 +193,7 @@ void Window::set_title(const std::string& text) {
  * the inner size of the window.
  */
 void Window::set_center_panel(Panel* panel) {
-	assert(panel->get_parent() == this);
+	assert(!panel || panel->get_parent() == this);
 
 	center_panel_ = panel;
 	update_desired_size();

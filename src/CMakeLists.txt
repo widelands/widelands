@@ -114,7 +114,6 @@ wl_library(widelands_ball_of_mud
     graphic_fonthandler
     graphic_mouse_cursor
     graphic_text
-    graphic_text_layout
     io_filesystem
     logic
     logic_addons
@@ -128,12 +127,7 @@ wl_library(widelands_ball_of_mud
     network
     sound
     ui_basic
-    ui_fsmenu_gameloading
-    ui_fsmenu_main
-    ui_fsmenu_maploading
-    ui_fsmenu_misc
-    ui_fsmenu_network
-    ui_fsmenu_options
+    ui_fsmenu
     widelands_options
     wui
 )

@@ -36,7 +36,9 @@
 namespace UI {
 struct ProgressWindow;
 }
-class FullscreenMenuLaunchGame;
+namespace FsMenu {
+class LaunchGame;
+}
 class InteractiveBase;
 class InteractiveGameBase;  // TODO(GunChleoc): Get rid
 
@@ -68,7 +70,7 @@ struct NoteFieldPossession {
 class EditorGameBase {
 public:
 	friend class InteractiveBase;
-	friend class FullscreenMenuLaunchGame;
+	friend class LaunchGame;
 	friend struct GameClassPacket;
 
 	explicit EditorGameBase(LuaInterface* lua);
@@ -98,6 +100,7 @@ public:
 	void remove_player(PlayerNumber);
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
+	                   const RGBColor&,
 	                   const std::string& tribe,
 	                   const std::string& name,
 	                   TeamNumber team = 0);
@@ -121,7 +124,8 @@ public:
 	UI::ProgressWindow& create_loader_ui(const std::vector<std::string>& tipstexts,
 	                                     bool show_game_tips,
 	                                     const std::string& theme,
-	                                     const std::string& background);
+	                                     const std::string& background,
+	                                     UI::Panel* parent = nullptr);
 
 	/// Set step text for the current loader UI if it's not nullptr.
 	void step_loader_ui(const std::string& text) const;

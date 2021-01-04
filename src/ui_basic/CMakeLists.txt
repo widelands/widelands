@@ -15,6 +15,8 @@ wl_library(ui_basic
     button.h
     checkbox.cc
     checkbox.h
+    color_chooser.cc
+    color_chooser.h
     dropdown.cc
     dropdown.h
     editbox.cc
@@ -74,6 +76,7 @@ wl_library(ui_basic
     graphic_functions
     graphic_image_cache
     graphic_mouse_cursor
+    graphic_playercolor
     graphic_styles
     graphic_surface
     graphic_text

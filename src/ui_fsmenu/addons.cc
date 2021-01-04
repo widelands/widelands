@@ -124,15 +124,14 @@ private:
 	UI::ProgressBar progress_;
 };
 
-AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
-   : UI::Window(&fsmm,
-                UI::WindowStyle::kFsMenu,
-                "addons",
-                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuDefault),
-                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuDefault),
-                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
-                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
-                _("Add-On Manager")),
+AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
+   : UI::UniqueWindow(&fsmm,
+                      UI::WindowStyle::kFsMenu,
+                      "addons",
+                      &reg,
+                      fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
+                      fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault),
+                      _("Add-On Manager")),
      main_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      buttons_box_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      warn_requirements_(
@@ -345,7 +344,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	});
 	sort_order_.selected.connect([this]() { rebuild(); });
 
-	ok_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kBack); });
+	ok_.sigclicked.connect([this]() { die(); });
 	refresh_.sigclicked.connect([this]() {
 		refresh_remotes();
 		tabs_.activate(1);
@@ -481,6 +480,7 @@ AddOnsCtrl::AddOnsCtrl(FullscreenMenuMain& fsmm)
 	installed_addons_inner_wrapper_.set_force_scrolling(true);
 	browse_addons_inner_wrapper_.set_force_scrolling(true);
 
+	center_to_parent();
 	refresh_remotes();
 }
 
@@ -559,7 +559,7 @@ bool AddOnsCtrl::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 		case SDLK_ESCAPE:
-			end_modal<MenuTarget>(MenuTarget::kBack);
+			die();
 			return true;
 		default:
 			break;

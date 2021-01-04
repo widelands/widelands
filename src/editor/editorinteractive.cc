@@ -175,11 +175,8 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
-		MainMenuNewRandomMap m(*this, UI::WindowStyle::kWui, menu_windows_.newrandommap,
-		                       egbase().map().get_width(), egbase().map().get_height());
-		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-			m.do_generate_map(egbase(), this, nullptr);
-		}
+		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap, egbase().map().get_width(),
+		                         egbase().map().get_height());
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
@@ -465,8 +462,8 @@ void EditorInteractive::load(const std::string& filename) {
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
-			egbase().add_player(
-			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
+			egbase().add_player(p, 0, kPlayerColors[p - 1], map->get_scenario_player_tribe(p),
+			                    map->get_scenario_player_name(p));
 		}
 	}
 

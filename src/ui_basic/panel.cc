@@ -236,21 +236,40 @@ void Panel::handle_notes() {
 	}
 }
 
-Panel& Panel::get_forefather() {
-	Panel* p = this;
-	while (p->get_parent()) {
-		p = p->get_parent();
+struct ModalGuard {
+	explicit ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+		Panel::modal_ = &top_panel_;
 	}
-	return *p;
+	~ModalGuard() {
+		Panel::modal_ = bottom_panel_;
+		if (bottom_panel_) {
+			bottom_panel_->become_modal_again(top_panel_);
+		}
+	}
+
+private:
+	Panel* bottom_panel_;
+	Panel& top_panel_;
+	DISALLOW_COPY_AND_ASSIGN(ModalGuard);
+};
+
+Panel& Panel::get_topmost_forefather() {
+	Panel* forefather = this;
+	while (forefather->parent_ != nullptr) {
+		forefather = forefather->parent_;
+	}
+	return *forefather;
 }
 
-void Panel::do_update_graphics(const std::string& message) {
+void Panel::do_redraw_now(const std::string& message) {
+	assert(is_initializer_thread());
+
+	Panel& ff = get_topmost_forefather();
 	RenderTarget& rt = *g_gr->get_render_target();
-	Panel& forefather = get_forefather();
 
 	{
 		MutexLock m(MutexLock::ID::kObjects, [this]() { handle_notes(); });
-		forefather.do_draw(rt);
+		ff.do_draw(rt);
 	}
 
 	if (!message.empty()) {
@@ -266,16 +285,14 @@ void Panel::do_update_graphics(const std::string& message) {
 	}
 
 	if (g_mouse_cursor->is_visible()) {
-		const WLApplication& app = *WLApplication::get();
-		g_mouse_cursor->change_cursor(app.is_mouse_pressed());
-		g_mouse_cursor->draw(rt, app.get_mouse_position());
+		WLApplication* const app = WLApplication::get();
+		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+		g_mouse_cursor->draw(rt, app->get_mouse_position());
 
-		if (message.empty()) {
-			if (is_modal()) {
-				do_tooltip();
-			} else {
-				forefather.do_tooltip();
-			}
+		if (is_modal()) {
+			do_tooltip();
+		} else {
+			ff.do_tooltip();
 		}
 	}
 
@@ -289,7 +306,7 @@ void Panel::stay_responsive() {
 	}
 
 	handle_notes();
-	do_update_graphics(_("Please wait…"));
+	do_redraw_now(_("Please wait…"));
 }
 
 void Panel::wait_for_current_logic_frame() {
@@ -328,8 +345,7 @@ int Panel::do_run() {
 
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication* const app = WLApplication::get();
-	Panel* const prevmodal = modal_;
-	modal_ = this;
+	ModalGuard prevmodal(*this);
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
 
@@ -389,7 +405,7 @@ int Panel::do_run() {
 			check_child_death();
 
 			if (is_initializer) {
-				do_update_graphics("");
+				do_redraw_now();
 			}
 
 			next_time = start_time + draw_delay;
@@ -413,7 +429,7 @@ int Panel::do_run() {
 			handle_notes();
 
 			if (is_initializer) {
-				do_update_graphics(_("Game ending – please wait…"));
+				do_redraw_now(_("Game ending – please wait…"));
 			}
 
 			next_time = start_time + draw_delay;
@@ -431,9 +447,6 @@ int Panel::do_run() {
 
 	// Panel-specific post-running code
 	end();
-
-	// Done
-	modal_ = prevmodal;
 
 	return return_code_;
 }
@@ -455,6 +468,13 @@ void Panel::start() {
  * Called once after the event loop in run() has ended
  */
 void Panel::end() {
+}
+
+/**
+ * Called when another panel (passed as argument) ends being
+ * modal and returns the modal attribute to this panel
+ */
+void Panel::become_modal_again(Panel&) {
 }
 
 /**
@@ -746,12 +766,20 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
-	if (!initialized_ || (flags_ & pf_die)) {
+	// No longer think when we are about to die
+	if (is_dying() || !initialized_) {
 		return;
 	}
 
 	if (thinks()) {
 		think();
+
+		// think() may have called die().
+		// When we are deleted, our children will be deleted as well, so they are
+		// effectively dying as well and should not continue to think either.
+		if (is_dying()) {
+			return;
+		}
 	}
 
 	// think() may have called die()

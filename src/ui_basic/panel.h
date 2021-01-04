@@ -103,6 +103,13 @@ public:
 
 	void free_children();
 
+	// Checks whether this panel will be deleted in the next think cycle.
+	// This check is used to stop panels from thinking and performing other
+	// activities to prevent undesired side-effects.
+	bool is_dying() const {
+		return flags_ & pf_die;
+	}
+
 	// Modal
 	enum class Returncodes { kBack, kOk };
 
@@ -123,6 +130,7 @@ public:
 
 	virtual void start();
 	virtual void end();
+	virtual void become_modal_again(Panel& prevmodal);
 
 	// Geometry
 	virtual void set_size(int nw, int nh);
@@ -328,6 +336,8 @@ public:
 
 	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
 
+	Panel& get_topmost_forefather();
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -378,6 +388,15 @@ protected:
 
 	const PanelStyle panel_style_;
 
+	/** Never call this function, except when you need Widelands to stay responsive
+	 *  during a costly operation and you can guarantee that it will not interfere
+	 *  with the "normal" graphics refreshing done periodically from `Panel::do_run`.
+	 *  If the argument is not empty, the screen will be greyed out with the
+	 *  provided message to the user drawn in the screen center.
+	 *  May be called only by the initializer thread.
+	 */
+	void do_redraw_now(const std::string& message_to_display = std::string());
+
 private:
 	bool initialized_;
 
@@ -403,6 +422,7 @@ private:
 	virtual void on_death(Panel* p);
 	virtual void on_visibility_changed();
 
+	friend struct ProgressWindow;
 	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);
@@ -451,6 +471,8 @@ private:
 	uint8_t border_snap_distance_, panel_snap_distance_;
 	int desired_w_, desired_h_;
 
+	friend struct ModalGuard;
+
 	bool running_;
 	int return_code_;
 
@@ -474,7 +496,6 @@ private:
 	void handle_notes();
 	std::list<NoteThreadSafeFunction> notes_;
 	std::set<uint32_t> handled_notes_;
-	void do_update_graphics(const std::string&);
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

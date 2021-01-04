@@ -56,6 +56,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const std::string& text, const std:
 	set_thinks(true);
 	set_handle_mouse(true);
 	set_tooltip(tooltip);
+	initialization_complete();
 }
 
 MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widelands::MessageId id)
