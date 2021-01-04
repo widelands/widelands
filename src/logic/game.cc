@@ -388,6 +388,8 @@ void Game::init_savegame(const GameSettings& settings) {
 		gl.load_game(settings.multiplayer);
 
 		if (!gl.did_postload_addons()) {
+			// Discover the links between resources and geologist flags,
+			// dependencies of productionsites etc.
 			postload_addons();
 		}
 
