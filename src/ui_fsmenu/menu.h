@@ -39,7 +39,6 @@ constexpr double kDefaultColumnWidthFactor = 1.0 / 3;
 class BaseMenu : public UI::Panel {
 public:
 	BaseMenu(MenuCapsule&, const std::string& title);
-	~BaseMenu() override;
 
 	MenuCapsule& get_capsule() {
 		return capsule_;
@@ -72,7 +71,6 @@ public:
 	TwoColumnsMenu(MenuCapsule&,
 	               const std::string& title,
 	               double right_column_width_factor = kDefaultColumnWidthFactor);
-	~TwoColumnsMenu() override;
 
 protected:
 	void layout() override;
@@ -95,7 +93,6 @@ public:
 	TwoColumnsBasicNavigationMenu(MenuCapsule&,
 	                              const std::string& title,
 	                              double right_column_width_factor = kDefaultColumnWidthFactor);
-	~TwoColumnsBasicNavigationMenu() override;
 
 protected:
 	void layout() override;
@@ -154,11 +151,25 @@ public:
 	void on_death(UI::Panel*) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 
+	void draw(RenderTarget&) override;
+
 	// Should be called only by BaseMenu ctor
 	void add(BaseMenu&, const std::string& title);
 
 private:
-	std::vector<std::pair<BaseMenu*, std::string /* title */>> visible_menus_;
+	struct Entry {
+		std::string title;
+
+		BaseMenu* panel;
+		UI::Button* button;
+		UI::Panel* icon;
+		UI::Panel* spacer1;
+		UI::Panel* spacer2;
+
+		void cleanup(bool all);
+	};
+	UI::Box box_;
+	std::vector<Entry> visible_menus_;
 	MainMenu& fsmm_;
 	bool should_die_;
 };
