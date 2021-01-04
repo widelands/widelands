@@ -30,7 +30,6 @@
 
 class GameController;
 class LuaInterface;
-struct MapData;
 
 namespace FsMenu {
 
@@ -46,8 +45,6 @@ public:
 	GameSettingsProvider& settings() const {
 		return settings_;
 	}
-
-	virtual void clicked_select_map_callback(const MapData*, bool scenario) = 0;
 
 protected:
 	LuaInterface* lua_;
