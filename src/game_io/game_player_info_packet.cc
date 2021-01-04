@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 27;
+constexpr uint16_t kCurrentPacketVersion = 28;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -54,11 +54,11 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 
 					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
 					const uint8_t playercolor_r =
-					   packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].r;
+					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].r;
 					const uint8_t playercolor_g =
-					   packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].g;
+					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].g;
 					const uint8_t playercolor_b =
-					   packet_version >= 27 ? fr.unsigned_8() : kPlayerColors[i - 1].b;
+					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].b;
 
 					Widelands::TeamNumber team = fr.unsigned_8();
 					char const* const tribe_name = fr.c_string();
