@@ -786,7 +786,7 @@ Widelands::WarePriority string_to_priority(const std::string& p) {
 		throw wexception("Invalid ware priority '%s'", p.c_str());
 	}
 }
-std::string priority_to_string(const Widelands::WarePriority priority) {
+std::string priority_to_string(const Widelands::WarePriority& priority) {
 	if (priority == Widelands::WarePriority::kVeryLow) {
 		return "very_low";
 	} else if (priority == Widelands::WarePriority::kLow) {
