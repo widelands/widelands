@@ -49,7 +49,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                      GameSettingsProvider& settings,
                      GameController& ctrl,
                      ChatProvider& chat,
-                     Widelands::EditorGameBase& egbase,
+                     Widelands::Game& g,
                      std::unique_ptr<GameController>& delete_on_cancel,
                      bool game_done_on_cancel,
                      const std::function<void()>& c)
@@ -71,7 +71,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 
      mpsg_(&left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
      chat_(new GameChatPanel(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)),
-     egbase_(egbase) {
+     game_(g) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
@@ -135,7 +135,7 @@ void LaunchMPG::win_condition_selected() {
  */
 void LaunchMPG::clicked_select_map() {
 	if (settings_.can_change_map()) {
-		new MapSelect(*this, &settings_, ctrl_, egbase_);
+		new MapSelect(get_capsule(), this, &settings_, ctrl_, game_);
 	}
 }
 
