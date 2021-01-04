@@ -27,6 +27,7 @@
 #include "base/rect.h"
 #include "graphic/note_graphic_resolution_changed.h"
 #include "graphic/styles/progress_bar_style.h"
+#include "graphic/text/rendered_text.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -68,12 +69,12 @@ private:
 	std::string theme_;
 	std::string background_;
 	const UI::ProgressbarStyleInfo& progress_style_;
+	std::shared_ptr<const UI::RenderedText> progress_message_;
 
 	static std::vector<SDL_Event> event_buffer_;
 	static bool ui_key(bool down, SDL_Keysym code);
 
 	void draw(RenderTarget&) override;
-	void update(bool repaint);
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;

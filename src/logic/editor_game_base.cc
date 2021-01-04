@@ -82,9 +82,6 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 
 	init_addons(false);
 
-	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
-	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
-
 	// Ensure descriptions are registered
 	descriptions();
 }
