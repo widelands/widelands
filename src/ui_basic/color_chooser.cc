@@ -228,8 +228,8 @@ ColorChooser::ColorChooser(Panel* parent,
      box_r_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
      box_g_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
      box_b_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
-     palette1_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
-     palette2_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
+     palette_box_1_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
+     palette_box_2_(&vbox_, panel_style_, 0, 0, Box::Horizontal),
      button_ok_(&buttonsbox_,
                 "ok",
                 0,
@@ -362,17 +362,7 @@ ColorChooser::ColorChooser(Panel* parent,
 	spin_b_.changed.connect([this]() { set_color_from_spinners(); });
 
 	for (unsigned i = 0; i < kMaxPlayers; ++i) {
-		UI::Box* box = i < kMaxPlayers / 2 ? &palette1_ : &palette2_;
-		palette_[i] =
-		   new Button(box, "palette_" + std::to_string(i), 0, 0, kButtonSize, kButtonSize,
-		              s == WindowStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
-		              playercolor_image(kPlayerColors[i], "images/ui_basic/square.png"));
-
-		if (i != 0 && i != kMaxPlayers / 2) {
-			box->add_space(kSpacing);
-		}
-		box->add(palette_[i]);
-		palette_[i]->sigclicked.connect([this, i]() { set_color(kPlayerColors[i]); });
+		create_palette_button(i);
 	}
 
 	box_r_.add(&button_r_);
@@ -395,9 +385,9 @@ ColorChooser::ColorChooser(Panel* parent,
 	vbox_.add_inf_space();
 	vbox_.add(&icon_, UI::Box::Resizing::kAlign, Align::kCenter);
 	vbox_.add_inf_space();
-	vbox_.add(&palette1_, UI::Box::Resizing::kAlign, Align::kCenter);
+	vbox_.add(&palette_box_1_, UI::Box::Resizing::kAlign, Align::kCenter);
 	vbox_.add_space(kSpacing);
-	vbox_.add(&palette2_, UI::Box::Resizing::kAlign, Align::kCenter);
+	vbox_.add(&palette_box_2_, UI::Box::Resizing::kAlign, Align::kCenter);
 
 	hbox_.add_space(kSpacing);
 	hbox_.add(&interactive_pane_);
@@ -416,6 +406,21 @@ ColorChooser::ColorChooser(Panel* parent,
 
 	set_center_panel(&main_box_);
 	center_to_parent();
+}
+
+void ColorChooser::create_palette_button(const unsigned index) {
+	UI::Box* box = index < kMaxPlayers / 2 ? &palette_box_1_ : &palette_box_2_;
+
+	palette_buttons_[index] =
+	   new Button(box, "palette_" + std::to_string(index), 0, 0, kButtonSize, kButtonSize,
+	              panel_style_ == PanelStyle::kWui ? ButtonStyle::kWuiMenu : ButtonStyle::kFsMenuMenu,
+	              playercolor_image(kPlayerColors[index], "images/ui_basic/square.png"));
+	palette_buttons_[index]->sigclicked.connect([this, index]() { set_color(kPlayerColors[index]); });
+
+	if (index != 0 && index != kMaxPlayers / 2) {
+		box->add_space(kSpacing);
+	}
+	box->add(palette_buttons_[index]);
 }
 
 void ColorChooser::set_color_from_spinners() {
