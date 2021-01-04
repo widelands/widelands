@@ -170,7 +170,8 @@ void ProgressWindow::step(const std::string& description) {
 	InputCallback input_callback = {nullptr, nullptr, nullptr, ui_key, nullptr, nullptr};
 	WLApplication::get()->handle_input(&input_callback);
 
-	progress_message_ = UI::g_fh->render(as_richtext_paragraph(description, progress_style().font()));
+	progress_message_ =
+	   UI::g_fh->render(as_richtext_paragraph(description, progress_style().font()));
 
 	do_redraw_now();
 }

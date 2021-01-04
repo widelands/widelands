@@ -114,8 +114,8 @@ inline const UI::TableStyleInfo& BaseListselect::table_style() const {
 }
 inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
 	return selection_mode_ == ListselectLayout::kDropdown ?
-                          g_style_manager->dropdown_style(panel_style_) :
-                          nullptr;
+	          g_style_manager->dropdown_style(panel_style_) :
+	          nullptr;
 }
 
 /**
