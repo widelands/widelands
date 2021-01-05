@@ -40,6 +40,7 @@ struct ColorChooserImpl : public Panel {
 	     chooser_(c),
 	     sidebar_attribute_(ColorAttribute::kRed),
 	     selector_(*g_image_cache->get("images/ui_basic/fsel.png")),
+	     dragging_(false),
 	     texture_left_(kMainDimension, kMainDimension),
 	     texture_right_(1, kMainDimension),
 	     texture_cache_r_(0),
@@ -82,21 +83,42 @@ struct ColorChooserImpl : public Panel {
 		return chooser_.get_color();
 	}
 
+	bool handle_mouserelease(const uint8_t btn, const int32_t x, const int32_t y) override {
+		if (btn == SDL_BUTTON_LEFT) {
+			dragging_ = false;
+			return true;
+		}
+		return Panel::handle_mouserelease(btn, x, y);
+	}
 	bool handle_mousepress(const uint8_t btn, const int32_t x, const int32_t y) override {
 		if (btn == SDL_BUTTON_LEFT) {
-			chooser_.set_color(color_at(x, y));
+			dragging_ = true;
+			set_color_at_mouse(x, y);
 			return true;
 		}
 		return Panel::handle_mousepress(btn, x, y);
+	}
+	bool handle_mousemove(
+	   const uint8_t s, const int32_t x, const int32_t y, int32_t dx, int32_t dy) override {
+		if (dragging_) {
+			set_color_at_mouse(x, y);
+			return true;
+		}
+		return Panel::handle_mousemove(s, x, y, dx, dy);
 	}
 
 private:
 	ColorChooser& chooser_;
 	ColorAttribute sidebar_attribute_;
 	const Image& selector_;
+	bool dragging_;
 
 	Texture texture_left_, texture_right_;
 	uint8_t texture_cache_r_, texture_cache_g_, texture_cache_b_;
+
+	inline void set_color_at_mouse(const int32_t x, const int32_t y) {
+		chooser_.set_color(color_at(x, y));
+	}
 
 	RGBColor left_color(const uint16_t val1, const uint16_t val2) const {
 		switch (sidebar_attribute_) {
@@ -442,6 +464,14 @@ void ColorChooser::set_color(const RGBColor& color) {
 	spin_b_.set_value(color.b);
 	icon_.set_frame(color);
 	icon_.set_icon(preview(color));
+}
+
+bool ColorChooser::handle_key(const bool down, const SDL_Keysym code) {
+	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
+		end_modal<Panel::Returncodes>(Panel::Returncodes::kOk);
+		return true;
+	}
+	return Window::handle_key(down, code);
 }
 
 }  // namespace UI
