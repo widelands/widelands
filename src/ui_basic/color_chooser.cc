@@ -98,7 +98,8 @@ struct ColorChooserImpl : public Panel {
 		}
 		return Panel::handle_mousepress(btn, x, y);
 	}
-	bool handle_mousemove(const uint8_t s, const int32_t x, const int32_t y, int32_t dx, int32_t dy) {
+	bool
+	handle_mousemove(const uint8_t s, const int32_t x, const int32_t y, int32_t dx, int32_t dy) {
 		if (dragging_) {
 			set_color_at_mouse(x, y);
 			return true;
