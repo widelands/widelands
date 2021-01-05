@@ -386,6 +386,13 @@ void Game::init_savegame(const GameSettings& settings) {
 		}
 
 		gl.load_game(settings.multiplayer);
+
+		if (!gl.did_postload_addons()) {
+			// Discover the links between resources and geologist flags,
+			// dependencies of productionsites etc.
+			postload_addons();
+		}
+
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
 			const PlayerSettings& playersettings = settings.players[i];

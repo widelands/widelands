@@ -304,6 +304,9 @@ public:
 	virtual void die();
 	static void register_click();
 
+	// Notify this panel's parent of our death, then immediately delete us.
+	void do_delete();
+
 	// overridden by InteractiveBase
 	virtual bool extended_tooltip_accessibility_mode() const {
 		return false;
