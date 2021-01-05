@@ -49,7 +49,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
                      GameSettingsProvider& settings,
                      GameController& ctrl,
                      ChatProvider& chat,
-                     Widelands::EditorGameBase& egbase,
+                     Widelands::Game& g,
                      std::unique_ptr<GameController>& delete_on_cancel,
                      bool game_done_on_cancel,
                      const std::function<void()>& c)
@@ -71,7 +71,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
 
      mpsg_(&left_column_box_, 0, 0, 0, 0, &settings, scale_factor * standard_height_),
      chat_(new GameChatPanel(&left_column_box_, 0, 0, 0, 0, chat, UI::PanelStyle::kFsMenu)),
-     egbase_(egbase) {
+     game_(g) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
 
@@ -115,7 +115,9 @@ void LaunchMPG::layout() {
 	   left_column_box_.get_w(), left_column_box_.get_h() / 2, scale_factor * standard_height_);
 
 	// set focus to chat input
-	chat_->focus_edit();
+	if (chat_) {
+		chat_->focus_edit();
+	}
 }
 
 void LaunchMPG::win_condition_selected() {
@@ -135,7 +137,7 @@ void LaunchMPG::win_condition_selected() {
  */
 void LaunchMPG::clicked_select_map() {
 	if (settings_.can_change_map()) {
-		new MapSelect(*this, &settings_, ctrl_, egbase_);
+		new MapSelect(get_capsule(), this, &settings_, ctrl_, game_);
 	}
 }
 
@@ -219,7 +221,12 @@ void LaunchMPG::clicked_ok() {
 		if (win_condition_dropdown_.has_selection()) {
 			settings_.set_win_condition_script(win_condition_dropdown_.get_selected());
 		}
-		chat_.reset();  // avoid heap-use-after-free because callback_() will delete the chat provider
+
+		// Avoid heap-use-after-free because callback_() will delete the
+		// chat provider. Do this in a slightly roundabout way to ensure
+		// that the panel hierarchy will notice the chat panel's death.
+		chat_.release()->do_delete();
+
 		callback_();
 		return_to_main_menu();
 	}
@@ -232,7 +239,7 @@ void LaunchMPG::think() {
 	refresh();
 
 	// unfocus chat window when other UI element has focus
-	if (!chat_->has_focus()) {
+	if (chat_ && !chat_->has_focus()) {
 		chat_->unfocus_edit();
 	}
 }
