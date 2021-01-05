@@ -337,7 +337,10 @@ size_t InfoPanel::index_of(const MessagePreview* mp) const {
 		}
 		++i;
 	}
-	NEVER_HERE();
+
+	// Not found. Does not happen except in a race condition after message
+	// preview deletion, in which case the result is not of importance.
+	return 0;
 }
 
 void InfoPanel::log_message(const std::string& message) {
