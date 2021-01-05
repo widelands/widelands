@@ -1099,6 +1099,13 @@ void Panel::register_click() {
 	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
 }
 
+void Panel::do_delete() {
+	if (parent_) {
+		parent_->on_death(this);
+	}
+	delete this;
+}
+
 /**
  * Recursively walk the panel tree, killing panels that are marked for death
  * using die().
@@ -1110,10 +1117,7 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
-			if (p->parent_) {
-				p->parent_->on_death(p);
-			}
-			delete p;
+			p->do_delete();
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();

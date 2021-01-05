@@ -84,6 +84,7 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	add(start_type.get_dropdown(), UI::Box::Resizing::kExpandBoth);
 	add(teams_.get_dropdown());
 
+	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 	player_.sigclicked.connect([this]() { choose_color(); });
 
 	update();
@@ -123,6 +124,7 @@ void SinglePlayerActivePlayerGroup::update() {
 	const PlayerSettings& player_setting = settings.players[id_];
 	player_.set_pic(playercolor_image());
 	player_.set_tooltip(player_setting.name);
+	player_.set_enabled(player_setting.state != PlayerSettings::State::kClosed);
 	if (player_setting.state == PlayerSettings::State::kClosed ||
 	    player_setting.state == PlayerSettings::State::kOpen) {
 

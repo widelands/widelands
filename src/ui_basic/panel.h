@@ -327,7 +327,8 @@ public:
 	 */
 	void initialization_complete();
 
-	Panel& get_forefather();
+	// Notify this panel's parent of our death, then immediately delete us.
+	void do_delete();
 
 	// overridden by InteractiveBase
 	virtual bool extended_tooltip_accessibility_mode() const {
