@@ -594,7 +594,8 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 			// Check that the starting positions are not too close
 			for (unsigned i = 1; i <= nr_players && result; ++i) {
 				for (unsigned j = 1; j < i && result; ++j) {
-					result &= (map->calc_distance(map->get_starting_pos(i), map->get_starting_pos(j)) > Widelands::kMinSpaceAroundPlayers);
+					result &= (map->calc_distance(map->get_starting_pos(i), map->get_starting_pos(j)) >
+					           Widelands::kMinSpaceAroundPlayers);
 				}
 			}
 		}
