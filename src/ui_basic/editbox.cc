@@ -253,7 +253,7 @@ int EditBox::approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) cons
 			text_w = calculate_text_width(--approx_caret_pos);
 		}
 	}
-	return approx_caret_pos;
+	return snap_to_char(approx_caret_pos);
 }
 int EditBox::calculate_text_width(int pos) const {
 	std::string prefix = m_->text.substr(0, snap_to_char(pos));
@@ -615,7 +615,7 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const Image* caret_image =
 		   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
-		                                                         "images/ui_basic/caret_fs.png");
+                                                               "images/ui_basic/caret_fs.png");
 		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
