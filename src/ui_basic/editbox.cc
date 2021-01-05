@@ -213,51 +213,50 @@ bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 	return false;
 }
 
-void EditBox::set_caret_to_cursor_pos(int32_t x) {
-	if (x <= 2 * kMarginX) {
+void EditBox::set_caret_to_cursor_pos(int32_t cursor_pos_x) {
+	if (m_->text.empty() || cursor_pos_x <= kMarginX) {
 		set_caret_pos(0);
 		return;
 	}
 
 	int text_w = text_width(m_->text, *m_->font_style, m_->font_scale);
-	if (text_w <= 0) {
-		set_caret_pos(0);
-		return;
-	}
 
-	double x_relative = static_cast<double>(x - 2 * kMarginX - m_->scrolloffset) / text_w;
+	// mouse coordinate cursor_pos_x=0 means leftmost spot in editbox but text starts with margin ->
+	// adjust
+	cursor_pos_x -= kMarginX;
+
+	double x_relative = static_cast<double>(cursor_pos_x - m_->scrolloffset) / text_w;
 	if (x_relative > 1) {
 		set_caret_pos(m_->text.size());
 		return;
 	}
 
-	// initial guess of index which works well already if all characters would be of same width
-	int index = x_relative * m_->text.size();
+	// initial guess of approx_caret_pos which works well already if all characters would be of same
+	// width
+	int approx_caret_pos = x_relative * m_->text.size();
 
-	// mouse coordinate x=0 means leftmost spot in editbox but text starts with margin -> adjust
-	x -= kMarginX;
-	text_w = calculate_text_width(index);
+	approx_caret_pos = approximate_cursor(cursor_pos_x, approx_caret_pos);
 
-	index = approximate_cursor(x, text_w, index);
-
-	set_caret_pos(index);
+	set_caret_pos(approx_caret_pos);
 }
-int EditBox::approximate_cursor(int32_t x, int text_w, int index) const {
+int EditBox::approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const {
 	static constexpr int error = 4;
-	// approximate using the first guess as start and increasing/decreasing text
-	if (x > text_w) {
-		while (x - text_w > error) {
-			text_w = calculate_text_width(++index);
+
+	// approximate using the first guess as start and increasing/decreasing text until error is small
+	int text_w = calculate_text_width(approx_caret_pos);
+	if (cursor_pos_x > text_w) {
+		while (cursor_pos_x - text_w > error) {
+			text_w = calculate_text_width(++approx_caret_pos);
 		}
-	} else if (x < text_w) {
-		while (text_w - x > error) {
-			text_w = calculate_text_width(--index);
+	} else if (cursor_pos_x < text_w) {
+		while (text_w - cursor_pos_x > error) {
+			text_w = calculate_text_width(--approx_caret_pos);
 		}
 	}
-	return index;
+	return approx_caret_pos;
 }
-int EditBox::calculate_text_width(int index) const {
-	std::string prefix = m_->text.substr(0, snap_to_char(index));
+int EditBox::calculate_text_width(int pos) const {
+	std::string prefix = m_->text.substr(0, snap_to_char(pos));
 	int prefix_width = text_width(prefix, *m_->font_style, m_->font_scale) + m_->scrolloffset;
 	return prefix_width;
 }

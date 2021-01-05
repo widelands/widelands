@@ -104,9 +104,9 @@ private:
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 	void delete_selected_text();
 	void copy_selected_text();
-	void set_caret_to_cursor_pos(int32_t x);
-	int calculate_text_width(int index) const;
-	int approximate_cursor(int32_t x, int text_w, int index) const;
+	void set_caret_to_cursor_pos(int32_t cursor_pos_x);
+	int calculate_text_width(int pos) const;
+	int approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const;
 };
 }  // namespace UI
 
