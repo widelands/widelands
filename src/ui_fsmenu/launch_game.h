@@ -25,36 +25,32 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapdetailsbox.h"
 #include "ui_fsmenu/menu.h"
 
 class GameController;
 class LuaInterface;
+
 namespace FsMenu {
+
 static constexpr double scale_factor = 1.3;
 /**
  * Menu for setting map and mapsettings for single- and multiplayer games.
  */
-class FullscreenMenuLaunchGame : public TwoColumnsFullNavigationMenu {
+class LaunchGame : public TwoColumnsFullNavigationMenu {
 public:
-	FullscreenMenuLaunchGame(FullscreenMenuMain&,
-	                         GameSettingsProvider*,
-	                         GameController*,
-	                         bool preconfigured = false);
-	~FullscreenMenuLaunchGame() override;
+	LaunchGame(MenuCapsule&, GameSettingsProvider&, GameController*, bool preconfigured, bool mpg);
+	~LaunchGame() override;
 
 	GameSettingsProvider& settings() const {
-		assert(settings_);
-		return *settings_;
+		return settings_;
 	}
 
 protected:
-	void clicked_ok() override = 0;
-	void clicked_back() override = 0;
-	virtual bool clicked_select_map() = 0;
-
 	LuaInterface* lua_;
+
+	virtual void clicked_select_map() = 0;
+	virtual void clicked_select_savegame() = 0;
 
 	/// Initializes the label and tooltip for the win condition dropdown and returns 'true' if this
 	/// is a scenario or a savegame.
@@ -86,13 +82,15 @@ protected:
 
 	void layout() override;
 
-	MapDetailsBox map_details;
+	MapDetailsBox map_details_;
 	UI::Textarea configure_game;
 	UI::Dropdown<std::string> win_condition_dropdown_;
 	UI::Checkbox peaceful_, custom_starting_positions_;
+	UI::Button* choose_map_;
+	UI::Button* choose_savegame_;
 	std::string last_win_condition_;
 
-	GameSettingsProvider* settings_;
+	GameSettingsProvider& settings_;
 	GameController* ctrl_;
 
 	bool peaceful_mode_forbidden_;

@@ -71,6 +71,7 @@ public:
 	Player(EditorGameBase&,
 	       PlayerNumber,
 	       uint8_t initialization_index,
+	       const RGBColor&,
 	       const TribeDescr& tribe,
 	       const std::string& name);
 	~Player() = default;
@@ -119,11 +120,15 @@ public:
 	TeamNumber team_number() const {
 		return team_number_;
 	}
-	const RGBColor& get_playercolor() const {
-		return kPlayerColors[player_number_ - 1];
-	}
 	const TribeDescr& tribe() const {
 		return tribe_;
+	}
+
+	const RGBColor& get_playercolor() const {
+		return playercolor_;
+	}
+	void set_playercolor(const RGBColor& c) {
+		playercolor_ = c;
 	}
 
 	const std::string& get_name() const {
@@ -626,8 +631,13 @@ public:
 	bool additional_expedition_items_allowed() const {
 		return allow_additional_expedition_items_;
 	}
-	void set_allow_additional_expedition_items(bool allow) {
+	void set_allow_additional_expedition_items(const bool allow) {
 		allow_additional_expedition_items_ = allow;
+	}
+
+	void set_hidden_from_general_statistics(bool);
+	bool is_hidden_from_general_statistics() const {
+		return hidden_from_general_statistics_;
 	}
 
 private:
@@ -651,6 +661,7 @@ private:
 	uint8_t initialization_index_;
 	std::vector<uint8_t> further_initializations_;   // used in shared kingdom mode
 	std::vector<uint8_t> further_shared_in_player_;  //  ''  ''   ''     ''     ''
+	RGBColor playercolor_;
 	TeamNumber team_number_;
 	std::set<PlayerNumber> team_players_;  // this player's allies, not including this player
 	bool see_all_;
@@ -726,11 +737,25 @@ private:
 
 	bool allow_additional_expedition_items_;
 
+	bool hidden_from_general_statistics_;
+
 	FxId message_fx_;
 	FxId attack_fx_;
 	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
+};
+
+struct NotePlayerDetailsEvent {
+	CAN_BE_SENT_AS_NOTE(NoteId::PlayerDetailsEvent)
+
+	enum class Event { kGeneralStatisticsVisibilityChanged };
+
+	const Event event;
+	Player& player;
+
+	NotePlayerDetailsEvent(const Event e, Player& p) : event(e), player(p) {
+	}
 };
 
 void find_former_buildings(const Descriptions& descriptions,

@@ -244,7 +244,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 			const DescriptionIndex random = std::rand() % descriptions().nr_tribes();  // NOLINT
 			tribe = descriptions().get_tribe_descr(random)->name();
 		}
-		add_player(p, 0, tribe, map().get_scenario_player_name(p));
+		add_player(p, 0, kPlayerColors[p - 1], tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
@@ -298,8 +298,8 @@ void Game::init_newgame(const GameSettings& settings) {
 			continue;
 		}
 
-		add_player(i + 1, playersettings.initialization_index, playersettings.tribe,
-		           playersettings.name, playersettings.team);
+		add_player(i + 1, playersettings.initialization_index, playersettings.color,
+		           playersettings.tribe, playersettings.name, playersettings.team);
 		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 
@@ -386,6 +386,13 @@ void Game::init_savegame(const GameSettings& settings) {
 		}
 
 		gl.load_game(settings.multiplayer);
+
+		if (!gl.did_postload_addons()) {
+			// Discover the links between resources and geologist flags,
+			// dependencies of productionsites etc.
+			postload_addons();
+		}
+
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
 			const PlayerSettings& playersettings = settings.players[i];

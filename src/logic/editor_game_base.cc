@@ -82,9 +82,6 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 
 	init_addons(false);
 
-	loading_message_subscriber_ = Notifications::subscribe<UI::NoteLoadingMessage>(
-	   [this](const UI::NoteLoadingMessage& note) { step_loader_ui(note.message); });
-
 	// Ensure descriptions are registered
 	descriptions();
 }
@@ -243,12 +240,13 @@ void EditorGameBase::remove_player(PlayerNumber plnum) {
 /// @see PlayerManager class
 Player* EditorGameBase::add_player(PlayerNumber const player_number,
                                    uint8_t const initialization_index,
+                                   const RGBColor& pc,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
 	Notifications::publish(UI::NoteLoadingMessage(
 	   (boost::format(_("Creating player %d…")) % static_cast<unsigned int>(player_number)).str()));
-	return player_manager_->add_player(player_number, initialization_index, tribe, name, team);
+	return player_manager_->add_player(player_number, initialization_index, pc, tribe, name, team);
 }
 
 Player* EditorGameBase::get_player(const int32_t n) const {
@@ -332,9 +330,10 @@ void EditorGameBase::postload_addons() {
 UI::ProgressWindow& EditorGameBase::create_loader_ui(const std::vector<std::string>& tipstexts,
                                                      bool show_game_tips,
                                                      const std::string& theme,
-                                                     const std::string& background) {
+                                                     const std::string& background,
+                                                     UI::Panel* parent) {
 	assert(!has_loader_ui());
-	loader_ui_.reset(new UI::ProgressWindow(theme, background));
+	loader_ui_.reset(new UI::ProgressWindow(parent, theme, background));
 	registered_game_tips_ = tipstexts;
 	if (show_game_tips) {
 		game_tips_.reset(registered_game_tips_.empty() ?

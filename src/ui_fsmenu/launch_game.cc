@@ -32,13 +32,16 @@
 #include "scripting/lua_table.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
+
 namespace FsMenu {
-FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
-                                                   GameSettingsProvider* const settings,
-                                                   GameController* const ctrl,
-                                                   const bool preconfigured)
-   : TwoColumnsFullNavigationMenu(fsmm, "launch_game", _("Launch Game")),
-     map_details(&right_column_content_box_, preconfigured, kPadding),
+
+LaunchGame::LaunchGame(MenuCapsule& fsmm,
+                       GameSettingsProvider& settings,
+                       GameController* const ctrl,
+                       const bool preconfigured,
+                       const bool mpg)
+   : TwoColumnsFullNavigationMenu(fsmm, _("Launch Game")),
+     map_details_(&right_column_content_box_, kPadding),
 
      configure_game(&right_column_content_box_,
                     UI::PanelStyle::kFsMenu,
@@ -66,6 +69,26 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
                                 UI::PanelStyle::kFsMenu,
                                 Vector2i::zero(),
                                 _("Custom starting positions")),
+     choose_map_(mpg && settings.can_change_map() && !preconfigured ?
+                    new UI::Button(&right_column_content_box_,
+                                   "choose_map",
+                                   0,
+                                   0,
+                                   0,
+                                   ok_.get_h(),
+                                   UI::ButtonStyle::kFsMenuSecondary,
+                                   _("Change map…")) :
+                    nullptr),
+     choose_savegame_(mpg && settings.can_change_map() && !preconfigured ?
+                         new UI::Button(&right_column_content_box_,
+                                        "choose_savegame",
+                                        0,
+                                        0,
+                                        0,
+                                        ok_.get_h(),
+                                        UI::ButtonStyle::kFsMenuSecondary,
+                                        _("Change saved game…")) :
+                         nullptr),
 
      // Variables and objects used in the menu
      settings_(settings),
@@ -74,6 +97,12 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
 	custom_starting_positions_.changed.connect([this]() { toggle_custom_starting_positions(); });
+	if (choose_map_) {
+		choose_map_->sigclicked.connect([this]() { clicked_select_map(); });
+	}
+	if (choose_savegame_) {
+		choose_savegame_->sigclicked.connect([this]() { clicked_select_savegame(); });
+	}
 	ok_.set_title(_("Start game"));
 
 	lua_ = new LuaInterface();
@@ -83,46 +112,52 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(FullscreenMenuMain& fsmm,
 	layout();
 }
 
-FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
+LaunchGame::~LaunchGame() {
 	delete lua_;
 }
 
-void FullscreenMenuLaunchGame::add_all_widgets() {
-	right_column_content_box_.add(&map_details, UI::Box::Resizing::kExpandBoth);
+void LaunchGame::add_all_widgets() {
+	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
 	right_column_content_box_.add_space(5 * kPadding);
 	right_column_content_box_.add(&configure_game, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	right_column_content_box_.add_space(3 * kPadding);
 	right_column_content_box_.add(&win_condition_dropdown_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
-	right_column_content_box_.add(&peaceful_);
+	right_column_content_box_.add(&peaceful_, UI::Box::Resizing::kFullSize);
 	right_column_content_box_.add_space(3 * kPadding);
-	right_column_content_box_.add(&custom_starting_positions_);
+	right_column_content_box_.add(&custom_starting_positions_, UI::Box::Resizing::kFullSize);
+	if (choose_map_) {
+		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add(choose_map_, UI::Box::Resizing::kFullSize);
+	}
+	if (choose_savegame_) {
+		right_column_content_box_.add_space(3 * kPadding);
+		right_column_content_box_.add(choose_savegame_, UI::Box::Resizing::kFullSize);
+	}
 }
 
-void FullscreenMenuLaunchGame::add_behaviour_to_widgets() {
+void LaunchGame::add_behaviour_to_widgets() {
 	win_condition_dropdown_.selected.connect([this]() { win_condition_selected(); });
 	peaceful_.changed.connect([this]() { toggle_peaceful(); });
-
-	map_details.set_select_map_action([this]() { clicked_select_map(); });
 }
-void FullscreenMenuLaunchGame::layout() {
+void LaunchGame::layout() {
 	TwoColumnsFullNavigationMenu::layout();
 	win_condition_dropdown_.set_desired_size(0, standard_height_);
 
-	map_details.set_max_size(0, right_column_box_.get_h() / 2);
-	map_details.force_new_dimensions(right_column_width_, standard_height_);
+	map_details_.set_max_size(0, right_column_box_.get_h() / 3);
+	map_details_.force_new_dimensions(right_column_width_, standard_height_);
 }
 
-void FullscreenMenuLaunchGame::update_peaceful_mode() {
+void LaunchGame::update_peaceful_mode() {
 	bool forbidden =
-	   peaceful_mode_forbidden_ || settings_->settings().scenario || settings_->settings().savegame;
-	peaceful_.set_enabled(!forbidden && settings_->can_change_map());
+	   peaceful_mode_forbidden_ || settings_.settings().scenario || settings_.settings().savegame;
+	peaceful_.set_enabled(!forbidden && settings_.can_change_map());
 	if (forbidden) {
 		peaceful_.set_state(false);
 	}
-	if (settings_->settings().scenario) {
+	if (settings_.settings().scenario) {
 		peaceful_.set_tooltip(_("The relations between players are set by the scenario"));
-	} else if (settings_->settings().savegame) {
+	} else if (settings_.settings().savegame) {
 		peaceful_.set_tooltip(_("The relations between players are set by the saved game"));
 	} else if (peaceful_mode_forbidden_) {
 		peaceful_.set_tooltip(_("The selected win condition does not allow peaceful matches"));
@@ -131,15 +166,15 @@ void FullscreenMenuLaunchGame::update_peaceful_mode() {
 	}
 }
 
-void FullscreenMenuLaunchGame::update_custom_starting_positions() {
-	const bool forbidden = settings_->settings().scenario || settings_->settings().savegame;
-	custom_starting_positions_.set_enabled(!forbidden && settings_->can_change_map());
+void LaunchGame::update_custom_starting_positions() {
+	const bool forbidden = settings_.settings().scenario || settings_.settings().savegame;
+	custom_starting_positions_.set_enabled(!forbidden && settings_.can_change_map());
 	if (forbidden) {
 		custom_starting_positions_.set_state(false);
 	}
-	if (settings_->settings().scenario) {
+	if (settings_.settings().scenario) {
 		custom_starting_positions_.set_tooltip(_("The starting positions are set by the scenario"));
-	} else if (settings_->settings().savegame) {
+	} else if (settings_.settings().savegame) {
 		custom_starting_positions_.set_tooltip(_("The starting positions are set by the saved game"));
 	} else {
 		custom_starting_positions_.set_tooltip(_(
@@ -147,14 +182,14 @@ void FullscreenMenuLaunchGame::update_custom_starting_positions() {
 	}
 }
 
-bool FullscreenMenuLaunchGame::init_win_condition_label() {
-	if (settings_->settings().scenario) {
+bool LaunchGame::init_win_condition_label() {
+	if (settings_.settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
 		win_condition_dropdown_.set_label(_("Scenario"));
 		win_condition_dropdown_.set_tooltip(_("Win condition is set through the scenario"));
 		return true;
 	}
-	if (settings_->settings().savegame) {
+	if (settings_.settings().savegame) {
 		win_condition_dropdown_.set_enabled(false);
 		/** Translators: This is a game type */
 		win_condition_dropdown_.set_label(_("Saved Game"));
@@ -162,7 +197,7 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
 		   _("The game is a saved game – the win condition was set before."));
 		return true;
 	}
-	win_condition_dropdown_.set_enabled(settings_->can_change_map());
+	win_condition_dropdown_.set_enabled(settings_.can_change_map());
 	win_condition_dropdown_.set_label("");
 	win_condition_dropdown_.set_tooltip("");
 	return false;
@@ -171,13 +206,13 @@ bool FullscreenMenuLaunchGame::init_win_condition_label() {
 /**
  * Fill the dropdown with the available win conditions.
  */
-void FullscreenMenuLaunchGame::update_win_conditions() {
+void LaunchGame::update_win_conditions() {
 	if (!init_win_condition_label()) {
 		std::set<std::string> tags;
-		if (!settings_->settings().mapfilename.empty()) {
+		if (!settings_.settings().mapfilename.empty()) {
 			Widelands::Map map;
 			std::unique_ptr<Widelands::MapLoader> ml =
-			   map.get_correct_loader(settings_->settings().mapfilename);
+			   map.get_correct_loader(settings_.settings().mapfilename);
 			if (ml != nullptr) {
 				ml->preload_map(true, nullptr);
 				tags = map.get_tags();
@@ -187,16 +222,16 @@ void FullscreenMenuLaunchGame::update_win_conditions() {
 	}
 }
 
-void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& tags) {
+void LaunchGame::load_win_conditions(const std::set<std::string>& tags) {
 	win_condition_dropdown_.clear();
 	try {
 		// Make sure that the last win condition is still valid. If not, pick the first one
 		// available.
 		if (last_win_condition_.empty()) {
-			last_win_condition_ = settings_->settings().win_condition_scripts.front();
+			last_win_condition_ = settings_.settings().win_condition_scripts.front();
 		}
 		std::unique_ptr<LuaTable> t = win_condition_if_valid(last_win_condition_, tags);
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_.settings().win_condition_scripts) {
 			if (t) {
 				break;
 			}
@@ -205,7 +240,7 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		}
 
 		// Now fill the dropdown.
-		for (const std::string& win_condition_script : settings_->settings().win_condition_scripts) {
+		for (const std::string& win_condition_script : settings_.settings().win_condition_scripts) {
 			try {
 				t = win_condition_if_valid(win_condition_script, tags);
 				if (t) {
@@ -230,7 +265,7 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		const std::string error_message =
 		   (boost::format(_("Unable to determine valid win conditions because the map '%s' "
 		                    "could not be loaded.")) %
-		    settings_->settings().mapfilename)
+		    settings_.settings().mapfilename)
 		      .str();
 		win_condition_dropdown_.set_errored(error_message);
 		log_err("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
@@ -238,8 +273,8 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 }
 
 std::unique_ptr<LuaTable>
-FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_condition_script,
-                                                 const std::set<std::string>& tags) const {
+LaunchGame::win_condition_if_valid(const std::string& win_condition_script,
+                                   const std::set<std::string>& tags) const {
 	bool is_usable = true;
 	std::unique_ptr<LuaTable> t;
 	try {
@@ -265,11 +300,11 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 	return t;
 }
 
-void FullscreenMenuLaunchGame::toggle_peaceful() {
-	settings_->set_peaceful_mode(peaceful_.get_state());
+void LaunchGame::toggle_peaceful() {
+	settings_.set_peaceful_mode(peaceful_.get_state());
 }
 
-void FullscreenMenuLaunchGame::toggle_custom_starting_positions() {
-	settings_->set_custom_starting_positions(custom_starting_positions_.get_state());
+void LaunchGame::toggle_custom_starting_positions() {
+	settings_.set_custom_starting_positions(custom_starting_positions_.get_state());
 }
 }  // namespace FsMenu

@@ -27,46 +27,34 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+#include "ui_fsmenu/menu.h"
 #include "ui_fsmenu/menu_target.h"
 #include "wui/mapdata.h"
+
+namespace FsMenu {
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  */
-class FullscreenMenuMain : public UI::Panel {
+class MainMenu : public UI::Panel {
 public:
-	explicit FullscreenMenuMain(bool first_ever_init);
-
-	const std::string& get_filename_for_continue_playing() const {
-		return filename_for_continue_playing_;
-	}
-	const std::string& get_filename_for_continue_editing() const {
-		return filename_for_continue_editing_;
-	}
+	explicit MainMenu(const bool skip_init = false);
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
-	void internet_login();
 	void internet_login_callback();
-
-	std::string get_nickname() const {
-		return nickname_;
-	}
-	std::string get_password() const {
-		return password_;
-	}
-	bool registered() const {
-		return register_;
-	}
 
 	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
+	void become_modal_again(UI::Panel&) override;
 
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
+
+	void show_messagebox(const std::string& messagetitle, const std::string& errormessage);
 
 	int16_t calc_desired_window_x(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_y(UI::Window::WindowLayoutID);
@@ -113,7 +101,12 @@ private:
 	bool visible_;
 	void set_button_visibility(bool);
 
-	UI::UniqueWindow::Registry r_login_;
+	void action(MenuTarget);
+
+	MenuCapsule menu_capsule_;
+	UI::UniqueWindow::Registry r_login_, r_about_, r_addons_;
+
+	void internet_login(bool launch_metaserver);
 
 	// Values from internet login window
 	std::string nickname_;
@@ -124,5 +117,7 @@ private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 };
+
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

@@ -155,6 +155,52 @@ void Panel::free_children() {
 	first_child_ = nullptr;
 }
 
+struct ModalGuard {
+	explicit ModalGuard(Panel& p) : bottom_panel_(Panel::modal_), top_panel_(p) {
+		Panel::modal_ = &top_panel_;
+	}
+	~ModalGuard() {
+		Panel::modal_ = bottom_panel_;
+		if (bottom_panel_) {
+			bottom_panel_->become_modal_again(top_panel_);
+		}
+	}
+
+private:
+	Panel* bottom_panel_;
+	Panel& top_panel_;
+	DISALLOW_COPY_AND_ASSIGN(ModalGuard);
+};
+
+Panel& Panel::get_topmost_forefather() {
+	Panel* forefather = this;
+	while (forefather->parent_ != nullptr) {
+		forefather = forefather->parent_;
+	}
+	return *forefather;
+}
+
+void Panel::do_redraw_now() {
+	Panel& ff = get_topmost_forefather();
+	RenderTarget& rt = *g_gr->get_render_target();
+
+	ff.do_draw(rt);
+
+	if (g_mouse_cursor->is_visible()) {
+		WLApplication* const app = WLApplication::get();
+		g_mouse_cursor->change_cursor(app->is_mouse_pressed());
+		g_mouse_cursor->draw(rt, app->get_mouse_position());
+
+		if (is_modal()) {
+			do_tooltip();
+		} else {
+			ff.do_tooltip();
+		}
+	}
+
+	g_gr->refresh();
+}
+
 /**
  * Enters the event loop; all events will be handled by this panel.
  *
@@ -165,15 +211,9 @@ void Panel::free_children() {
 int Panel::do_run() {
 	// TODO(sirver): the main loop should not be in UI, but in WLApplication.
 	WLApplication* const app = WLApplication::get();
-	Panel* const prevmodal = modal_;
-	modal_ = this;
+	ModalGuard prevmodal(*this);
 	mousegrab_ = nullptr;        // good ol' paranoia
 	app->set_mouse_lock(false);  // more paranoia :-)
-
-	Panel* forefather = this;
-	while (forefather->parent_ != nullptr) {
-		forefather = forefather->parent_;
-	}
 
 	// Loop
 	running_ = true;
@@ -214,19 +254,7 @@ int Panel::do_run() {
 		}
 
 		if (start_time >= next_draw_time) {
-			RenderTarget& rt = *g_gr->get_render_target();
-			forefather->do_draw(rt);
-			if (g_mouse_cursor->is_visible()) {
-				g_mouse_cursor->change_cursor(app->is_mouse_pressed());
-				g_mouse_cursor->draw(rt, app->get_mouse_position());
-				if (is_modal()) {
-					do_tooltip();
-				} else {
-					forefather->do_tooltip();
-				}
-			}
-
-			g_gr->refresh();
+			do_redraw_now();
 			next_draw_time = start_time + draw_delay;
 		}
 
@@ -236,9 +264,6 @@ int Panel::do_run() {
 		}
 	}
 	end();
-
-	// Done
-	modal_ = prevmodal;
 
 	return return_code_;
 }
@@ -260,6 +285,13 @@ void Panel::start() {
  * Called once after the event loop in run() has ended
  */
 void Panel::end() {
+}
+
+/**
+ * Called when another panel (passed as argument) ends being
+ * modal and returns the modal attribute to this panel
+ */
+void Panel::become_modal_again(Panel&) {
 }
 
 /**
@@ -551,8 +583,20 @@ void Panel::think() {
  * (grand-)children for which set_thinks(false) has not been called.
  */
 void Panel::do_think() {
+	// No longer think when we are about to die
+	if (is_dying()) {
+		return;
+	}
+
 	if (thinks()) {
 		think();
+
+		// think() may have called die().
+		// When we are deleted, our children will be deleted as well, so they are
+		// effectively dying as well and should not continue to think either.
+		if (is_dying()) {
+			return;
+		}
 	}
 
 	for (Panel* child = first_child_; child; child = child->next_) {
@@ -864,6 +908,13 @@ void Panel::register_click() {
 	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
 }
 
+void Panel::do_delete() {
+	if (parent_) {
+		parent_->on_death(this);
+	}
+	delete this;
+}
+
 /**
  * Recursively walk the panel tree, killing panels that are marked for death
  * using die().
@@ -875,10 +926,7 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
-			if (p->parent_) {
-				p->parent_->on_death(p);
-			}
-			delete p;
+			p->do_delete();
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();

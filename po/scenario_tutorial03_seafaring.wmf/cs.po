@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
-"PO-Revision-Date: 2020-12-09 01:15+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-12-18 20:05+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,11 @@ msgstr "Vítej zpět. V tomto tutoriálu se naučíš nejdůležitější věci 
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr "Ale nejdřív ti dám přehled o tvém území: zde na jihu, máš hospodářství, kde nalezneš skoro všechno, co potřebuješ."
+msgstr "Ale nejdřív mi dovol ukázat ti tvé území: zde na jihu máš hospodářské budovy. Najdeš tu téměř vše, co potřebuješ."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid "The Northern Part"
-msgstr "Severní Část"
+msgstr "Severní část"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:26
 msgid ""
@@ -130,7 +130,7 @@ msgstr "Vždy potřebuješ přístav, když chceš převážet suroviny lodí."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:63
 msgid "Build a port next to your castle, on the blue port space icon."
-msgstr "Postav přístav vedle svého hradu, na místě modré ikony přístavu."
+msgstr "Postav přístav vedle svého hradu na místě modré ikony přístavu."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:64
 msgid ""
@@ -179,14 +179,14 @@ msgstr "Lodě staví loděnice, je to středně velká budova."
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:86
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr "Postav loděnici poblíž pobřeží v jižní části tvého území."
+msgstr "Postav loděnici poblíž pobřeží v jižní části svého území."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr "Loděnice je střední budova. Přestože může být postavena kdekoli na mapě, loďař pracuje pouze, když je blízko vody a na pobřeží nejsou žádné stromy nebo cesty."
+msgstr "Loděnice je středně velkou budovou. Přestože může být postavena kdekoli na mapě, loďař pracuje pouze tehdy, když je blízko vody a na pobřeží nejsou žádné stromy nebo cesty."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:95
 msgid "Waiting for the ships"
@@ -197,7 +197,7 @@ msgid ""
 "Very good. Your shipyard is finished and your shipwright immediately started"
 " working. For the construction of ships, he needs logs, planks and "
 "spidercloth, which will be transported to the shipyard."
-msgstr "Výborně. Tvá loděnice je postavená a tvůj loďař začal ihned pracovat. Na stavbu lodí potřebuje kmeny, prkna a pavoučí látku. Tyto suroviny budou do loděnice průběžně nošeny."
+msgstr "Výborně. Tvá loděnice je postavená a tvůj loďař začal ihned pracovat. Na stavbu lodí potřebuje klády, prkna a pavoučí látku. Tyto suroviny budou do loděnice průběžně nošeny."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:97
 msgid ""
@@ -249,7 +249,7 @@ msgid ""
 "You need to stop your shipyard when you have enough ships. Otherwise, your "
 "shipwright will consume all your logs and spidercloth, producing dozens of "
 "ships."
-msgstr "Musíš zastavit loděnici, jakmile máš dost lodí. Jinak tvůj loďař spotřebuje všechny tvé kmeny a pavoučí látku na výrobou spousty lodí."
+msgstr "Musíš zastavit loděnici, jakmile máš dost lodí. Jinak tvůj loďař spotřebuje všechny tvé klády a pavoučí látku na výrobu spousty lodí."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:122
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:325
@@ -490,7 +490,7 @@ msgid ""
 "It will take some time for your shipyard to build some ships. While we’re "
 "waiting for them, there is another way of water-based transport I would like"
 " to teach you."
-msgstr "Naší loděnici to zabere nějaký čas než postaví pár lodí. Zatímco budme čekat, je tu ještě jeden druh vodní přepravy, který bych tě rád naučil."
+msgstr "Naší loděnici to zabere nějaký čas, než postaví pár lodí. Zatímco budme čekat, je tu ještě jeden druh vodní přepravy, který bych tě rád naučil."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:233
 msgid ""
@@ -524,7 +524,7 @@ msgid ""
 " Ferries are built in ferry yards, one rowboat costs two logs and one piece "
 "of cloth and is quickly constructed. A ferry yard is a medium-sized building"
 " that needs to be built close to the shore."
-msgstr "Přívozy se staví v převoznictvích. Na výrobu jednoho člunu jsou potřeba dva kmeny a látka a výroba je velmi rychlá. Převoznictví je středně velká budova, kterou je nutné postavit blízko při pobřeží."
+msgstr "Přívozy se staví v převoznictvích. Na výrobu jednoho člunu jsou potřeba dvě klády a látka a výroba je velmi rychlá. Převoznictví je středně velká budova, kterou je nutné postavit blízko při pobřeží."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:248
 msgid "Let’s build a ferry yard close to the shore before we will continue."
@@ -682,7 +682,7 @@ msgstr "Gratuluji"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:335
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr "Naučil ses vše, co jsi se měl o lodích a přívozech naučit!"
+msgstr "Naučil ses vše, co ses měl o lodích a přívozech naučit!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid ""

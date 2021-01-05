@@ -46,16 +46,25 @@ namespace UI {
 
 std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 
-ProgressWindow::ProgressWindow(const std::string& theme, const std::string& background)
-   : UI::Panel(nullptr, PanelStyle::kFsMenu /* unused */, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+ProgressWindow::ProgressWindow(UI::Panel* parent,
+                               const std::string& theme,
+                               const std::string& background)
+   : UI::Panel(parent,
+               PanelStyle::kFsMenu /* unused */,
+               0,
+               0,
+               parent ? parent->get_inner_w() : g_gr->get_xres(),
+               parent ? parent->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
      theme_(theme),
      progress_style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
 
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.new_width, message.new_height);
-	   });
+	if (!parent) {
+		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+		   [this](const GraphicResolutionChanged& message) {
+			   set_size(message.new_width, message.new_height);
+		   });
+	}
 
 	event_buffer_.clear();
 	set_background(background);
@@ -102,6 +111,16 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse
 	// the Progressbar class.
 	rt.fill_rect(label_rectangle_, progress_style_.medium_color());
+
+	if (progress_message_) {
+		progress_message_->draw(
+		   rt, Vector2i(label_center_.x, label_center_.y - progress_message_->height() / 2),
+		   UI::Align::kCenter);
+	}
+
+	for (IProgressVisualization* visualization : visualizations_) {
+		visualization->update(true);  // game tips etc
+	}
 }
 
 /// Set a picture to render in the background
@@ -126,7 +145,7 @@ void ProgressWindow::set_background(const std::string& file_name) {
 	} else {
 		background_ = file_name;
 	}
-	draw(*g_gr->get_render_target());
+	do_redraw_now();
 }
 
 /// Callback function: Buffer keypress events to be replayed after the loading is over.
@@ -148,23 +167,9 @@ void ProgressWindow::step(const std::string& description) {
 	InputCallback input_callback = {nullptr, nullptr, nullptr, ui_key, nullptr, nullptr};
 	WLApplication::get()->handle_input(&input_callback);
 
-	RenderTarget& rt = *g_gr->get_render_target();
-	// always repaint the background first
-	draw(rt);
+	progress_message_ = UI::g_fh->render(as_richtext_paragraph(description, progress_style_.font()));
 
-	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(description, progress_style_.font()));
-	UI::center_vertically(rendered_text->height(), &label_center_);
-	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
-
-	update(true);
-}
-
-void ProgressWindow::update(bool const repaint) {
-	for (IProgressVisualization* visualization : visualizations_) {
-		visualization->update(repaint);  //  let visualizations do their work
-	}
-	g_gr->refresh();
+	do_redraw_now();
 }
 
 /// Register additional visualization (tips/hints, animation, etc)

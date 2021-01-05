@@ -32,6 +32,7 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "ui_basic/button.h"
+#include "ui_basic/color_chooser.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -108,7 +109,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 			    settings.players.at(slot).state == PlayerSettings::State::kOpen) {
 				slot_dropdown_.add(
 				   (boost::format(_("Player %u")) % static_cast<unsigned int>(slot + 1)).str(), slot,
-				   playercolor_image(slot, "images/players/genstats_player.png"),
+				   playercolor_image(
+				      settings.players[slot].color, "images/players/genstats_player.png"),
 				   slot == user_setting.position);
 			}
 		}
@@ -148,16 +150,16 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     settings_(settings),
 	     n(npsb),
 	     id_(id),
-	     player(this,
-	            "player",
-	            0,
-	            0,
-	            h,
-	            h,
-	            UI::ButtonStyle::kFsMenuSecondary,
-	            playercolor_image(id, "images/players/player_position_menu.png"),
-	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
-	            UI::Button::VisualState::kFlat),
+	     player_(this,
+	             "player",
+	             0,
+	             0,
+	             h,
+	             h,
+	             UI::ButtonStyle::kFsMenuSecondary,
+	             playercolor_image(settings_->settings().players[id].color,
+	                               "images/players/player_position_menu.png"),
+	             (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str()),
 	     type_dropdown_(this,
 	                    (boost::format("dropdown_type%d") % static_cast<unsigned int>(id)).str(),
 	                    0,
@@ -208,20 +210,19 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	     init_selection_locked_(false),
 	     team_selection_locked_(false) {
 
-		player.set_disable_style(UI::ButtonDisableStyle::kFlat);
-		player.set_enabled(false);
-
 		type_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		tribes_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		init_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 		team_dropdown_.set_disable_style(UI::ButtonDisableStyle::kFlat);
+		player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
 
 		type_dropdown_.selected.connect([this]() { set_type(); });
 		tribes_dropdown_.selected.connect([this]() { set_tribe_or_shared_in(); });
 		init_dropdown_.selected.connect([this]() { set_init(); });
 		team_dropdown_.selected.connect([this]() { set_team(); });
+		player_.sigclicked.connect([this]() { set_color(); });
 
-		add(&player);
+		add(&player_);
 		add(&type_dropdown_);
 		add(&tribes_dropdown_);
 		add(&init_dropdown_, UI::Box::Resizing::kExpandBoth);
@@ -376,8 +377,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 						continue;
 					}
 
-					const Image* player_image =
-					   playercolor_image(i, "images/players/player_position_menu.png");
+					const Image* player_image = playercolor_image(
+					   settings.players[i].color, "images/players/player_position_menu.png");
 					assert(player_image);
 					const std::string player_name =
 					   /** TRANSLATORS: This is an option in multiplayer setup for sharing
@@ -487,6 +488,18 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		team_selection_locked_ = false;
 	}
 
+	void set_color() {
+		Panel* p = this;
+		while (p->get_parent()) {
+			p = p->get_parent();
+		}
+		UI::ColorChooser c(p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color,
+		                   &kPlayerColors[id_]);
+		if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			n->set_player_color(id_, c.get_color());
+		}
+	}
+
 	/// Rebuild the team dropdown from the server settings. This will keep the host and client UIs in
 	/// sync.
 	void rebuild_team_dropdown(const GameSettings& settings) {
@@ -524,7 +537,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		}
 
 		const PlayerSettings& player_setting = settings.players[id_];
-		player.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
+		player_.set_tooltip(player_setting.name);
+		player_.set_pic(
+		   playercolor_image(player_setting.color, "images/players/player_position_menu.png"));
+		player_.set_enabled(settings_->can_change_player_color(id_));
+
 		rebuild_type_dropdown(settings);
 		set_visible(true);
 
@@ -554,7 +571,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	}
 
 	void force_new_dimensions(uint32_t height) {
-		player.set_desired_size(height, height);
+		player_.set_desired_size(height, height);
 		type_dropdown_.set_desired_size(height, height);
 		tribes_dropdown_.set_desired_size(height, height);
 		team_dropdown_.set_desired_size(height, height);
@@ -565,7 +582,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	NetworkPlayerSettingsBackend* const n;
 	PlayerSlot const id_;
 
-	UI::Button player;
+	UI::Button player_;
 	UI::Dropdown<std::string>
 	   type_dropdown_;  /// Select who owns the slot (human, AI, open, closed, shared-in).
 	UI::Dropdown<std::string> tribes_dropdown_;  /// Select the tribe or shared_in player.

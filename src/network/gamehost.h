@@ -30,9 +30,11 @@
 #include "network/network.h"
 
 struct ChatMessage;
-class FullscreenMenuMain;
 struct GameHostImpl;
 struct Client;
+namespace FsMenu {
+class MenuCapsule;
+}
 
 /**
  * GameHost manages the lifetime of a network game in which this computer
@@ -45,13 +47,15 @@ struct GameHost : public GameController {
 	/** playernumber 0 identifies the spectators */
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
-	GameHost(FullscreenMenuMain&,
+	GameHost(FsMenu::MenuCapsule&,
+	         std::unique_ptr<GameController>&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
 	~GameHost() override;
 
-	void run();
+	void run(std::unique_ptr<GameController>&);
+	void run_callback();
 	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
 
@@ -87,6 +91,7 @@ struct GameHost : public GameController {
 	void set_player(uint8_t number, const PlayerSettings&);
 	void set_player_number(uint8_t number);
 	void set_player_team(uint8_t number, Widelands::TeamNumber team);
+	void set_player_color(uint8_t number, const RGBColor&);
 	void set_player_closeable(uint8_t number, bool closeable);
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared);
 	void switch_to_player(uint32_t user, uint8_t number);
@@ -148,6 +153,7 @@ private:
 	void handle_changetribe(const Client& client, RecvPacket& r);
 	void handle_changeshared(const Client& client, RecvPacket& r);
 	void handle_changeteam(const Client& client, RecvPacket& r);
+	void handle_changecolor(const Client& client, RecvPacket& r);
 	void handle_changeinit(const Client& client, RecvPacket& r);
 	void handle_changeposition(const Client& client, RecvPacket& r);
 	void handle_nettime(uint32_t client_num, RecvPacket& r);
@@ -189,13 +195,14 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
-	FullscreenMenuMain& fsmm_;
+	FsMenu::MenuCapsule& capsule_;
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
 	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
 	                     // gamehost.cc
+	std::unique_ptr<Widelands::Game> game_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H

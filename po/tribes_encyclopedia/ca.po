@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
-"PO-Revision-Date: 2020-12-08 11:12+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-12-12 19:03+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -20,11 +20,11 @@ msgstr ""
 "Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Log, part 1
 #. TRANSLATORS: Helptext for an empire ware: Log, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Log, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Log, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Log, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:74
 #: ../../data/tribes/initialization/atlanteans/units.lua:348
 #: ../../data/tribes/initialization/barbarians/units.lua:99
@@ -40,16 +40,16 @@ msgstr "Els troncs són un dels materials de construcció fonamentals. S'obtenen
 #: ../../data/tribes/initialization/amazons/units.lua:76
 msgctxt "amazons_ware"
 msgid ""
-"Amazon woodcutters fell trees and jungle preservers will plant them. They "
-"are used by the stone carver. The charcoal kiln also needs logs to produce "
-"charcoal."
-msgstr ""
+"Amazon woodcutters fell trees and jungle preservers will plant them. The "
+"resulting logs are used by the stone carver. The charcoal kiln also needs "
+"logs to produce charcoal."
+msgstr "Les llenyataires amazones tallen arbres i les conservadores de la jungla en planten. Els troncs els fan servir els tallistes. El kiln de carbó també en necessita per produir carbó."
 
-#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Granite, part 1
 #. TRANSLATORS: Helptext for an empire ware: Granite, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Granite, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Granite, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Granite, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:87
 #: ../../data/tribes/initialization/atlanteans/units.lua:336
 #: ../../data/tribes/initialization/barbarians/units.lua:87
@@ -65,7 +65,7 @@ msgctxt "amazons_ware"
 msgid ""
 "The Amazons use granite for making tools and weapons as well. It is produced"
 " by the stonecutters and in stone mines."
-msgstr ""
+msgstr "Les amazones usen granit per fer eines i armes. El produeixen les pedreres a les mines de pedra."
 
 #. TRANSLATORS: Helptext for an amazon ware: Balsa
 #: ../../data/tribes/initialization/amazons/units.lua:100
@@ -73,7 +73,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Balsa wood is an important building material. It is also used to make light "
 "armor. Balsa trees are cut by an experienced woodcutter."
-msgstr ""
+msgstr "La fusta balsa és un material de construcció important. També s'usa per construir armadures lleugeres. Els arbres balsa els poden tallar llenyataires expertes."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ironwood
 #: ../../data/tribes/initialization/amazons/units.lua:111
@@ -81,7 +81,7 @@ msgctxt "amazons_ware"
 msgid ""
 "This very hard wood is as hard as iron and it is used for several buildings,"
 " tools and weapons. It is cut by a very experienced woodcutter."
-msgstr ""
+msgstr "Aquesta fusta és dura com el ferro i s'empra per fer edificis, eines i armes. Només la poden taller els llenyataires amb experiència."
 
 #. TRANSLATORS: Helptext for an amazon ware: Rubber
 #: ../../data/tribes/initialization/amazons/units.lua:122
@@ -89,7 +89,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber is important for making warriors’ armor and shoes. Rubber trees are "
 "collected by experienced woodcutters."
-msgstr ""
+msgstr "El cautxú és important per fer armadures i calçat pels guerrers. S'obté dels arbres de cautxú gràcies als llenyataires amb experiència."
 
 #. TRANSLATORS: Helptext for an amazon ware: Liana
 #: ../../data/tribes/initialization/amazons/units.lua:132
@@ -103,13 +103,13 @@ msgctxt "amazons_ware"
 msgid ""
 "This rope is made out of lianas. It is used for armor dresses and to "
 "construct buildings and ships."
-msgstr ""
+msgstr "Les cordes es fabriquen amb lianes. S'usa per a les armadures i per construir edificis i vaixells."
 
-#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Water, part 1
 #. TRANSLATORS: Helptext for an empire ware: Water, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Water, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Water, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Water, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:155
 #: ../../data/tribes/initialization/atlanteans/units.lua:434
 #: ../../data/tribes/initialization/barbarians/units.lua:169
@@ -125,24 +125,24 @@ msgctxt "amazons_ware"
 msgid ""
 "Water is used by the cassava root cooker, the chocolate brewery, the gold "
 "digger and the tapir farm."
-msgstr ""
+msgstr "L'aigua s'usa als forns de tapioca, a les fermentadores de xocolata i a les granges de tapirs. També n'usen les excavadores d'or."
 
 #. TRANSLATORS: Helptext for an amazon ware: Cassava Root
 #: ../../data/tribes/initialization/amazons/units.lua:167
 msgctxt "amazons_ware"
 msgid ""
-"Cassava roots are a special kind of root produced at cassava farms. The "
-"Amazons like their strong taste for making bread and they also feed their "
-"tapirs with them."
-msgstr ""
+"Cassava roots are a special kind of root produced at cassava root "
+"plantations. The Amazons like their strong taste for making bread and they "
+"also feed their tapirs with them."
+msgstr "La tapioca són unes arrels especials produïdes a les plantacions de mandioca. A les amazones els agrada els seu gust fort per fer-ne pa i també per alimentar els tapirs."
 
 #. TRANSLATORS: Helptext for an amazon ware: Cocoa Beans
 #: ../../data/tribes/initialization/amazons/units.lua:177
 msgctxt "amazons_ware"
 msgid ""
-"Cocoa beans are gathered from cocoa bushes by a cocoa farmer. They are used "
+"Cocoa beans are gathered from cocoa trees by a cocoa farmer. They are used "
 "for producing chocolate."
-msgstr "Els grans de cacau es recullen dels arbustos de cacau pel cultivador de cacau. S'usen per produir xocolata."
+msgstr "Els grans de cacau es recullen dels arbres de cacau pel cultivador de cacau. S'usen per produir xocolata."
 
 #. TRANSLATORS: Helptext for an amazon ware: Bread
 #: ../../data/tribes/initialization/amazons/units.lua:188
@@ -151,14 +151,14 @@ msgid ""
 "This tasty bread is made in cookeries out of cassava root and water. It is "
 "the basic ingredient of a ration that is made by a food preserver. Soldiers "
 "like it too."
-msgstr ""
+msgstr "Aquest pa saborós es fa als forns de tapioca amb les arrels de la mandioca i d'aigua. És l'ingredient bàsic de les racions que preparen les conservadores de menjar. A les soldades també els agrada."
 
 #. TRANSLATORS: Helptext for an amazon ware: Chocolate
 #: ../../data/tribes/initialization/amazons/units.lua:199
 msgctxt "amazons_ware"
 msgid ""
 "Chocolate is produced by chocolate breweries and used to train soldiers."
-msgstr "La xocolata es produeix a les fermentadores de xocolata i s'usa per entrenar soldats."
+msgstr "La xocolata es produeix a les fermentadores de xocolata i s'usa per entrenar soldades."
 
 #. TRANSLATORS: Helptext for an amazon ware: Fish
 #: ../../data/tribes/initialization/amazons/units.lua:209
@@ -168,13 +168,13 @@ msgid ""
 "the food preserver to prepare rations for the miners. It is also consumed at"
 " the training sites (training glade and warriors’ gathering) and for "
 "recruiting new soldiers."
-msgstr ""
+msgstr "El peix és una de les dues fonts alimentàries de les amazones. L'usa la conservadora de menjar per preparar racions per les mineres. També es consumeix als llocs d'entrenament (als clars d'entrenament i als punts de trobada dels guerrers) i per reclutar soldades."
 
-#. TRANSLATORS: Helptext for an amazon ware: Meat, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Meat, part 1
 #. TRANSLATORS: Helptext for an empire ware: Meat, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Meat, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Meat, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Meat, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:219
 #: ../../data/tribes/initialization/atlanteans/units.lua:413
 #: ../../data/tribes/initialization/barbarians/units.lua:157
@@ -193,7 +193,7 @@ msgid ""
 "Meat is used by the food preserver to prepare rations for the miners. It is "
 "also consumed at the training sites (training glade and warriors’ gathering)"
 " and for recruiting new soldiers."
-msgstr ""
+msgstr "La carn l'usa la conservadora de menjar per preparar racions pels miners. També es consumeix als llocs d'entrenament (als clars d'entrenament i als punts de trobada dels guerrers) i per reclutar soldats."
 
 #. TRANSLATORS: Helptext for an amazon ware: Ration, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:232
@@ -209,7 +209,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Rations are produced by the food preserver out of fish or meat and bread. "
 "They are dried using a charcoal fire."
-msgstr ""
+msgstr "Les conservadores de menjar produeixen racions a partir de peix o carn i pa. Es sequen al foc del carbó."
 
 #. TRANSLATORS: Helptext for an amazon ware: Gold Dust, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:248
@@ -245,7 +245,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Charcoal produced out of logs by a charcoal burner. The Amazons use charcoal"
 " for drying their food and for smelting gold."
-msgstr ""
+msgstr "El carbó es pot produir amb troncs gràcies a les carboneres. Les amazones produeixen carbó per assecar el seu menjar i fondre or."
 
 #. TRANSLATORS: Helptext for an amazon ware: Pick
 #: ../../data/tribes/initialization/amazons/units.lua:288
@@ -253,10 +253,10 @@ msgctxt "amazons_ware"
 msgid "Picks are used by stonecutters to cut granite from rocks or in mines."
 msgstr "Els pics l'usen els tallistes per tallar granit a les mines i a les roques de l'exterior."
 
-#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for an empire ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Felling Ax, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Felling Ax, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Felling Ax, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:299
 #: ../../data/tribes/initialization/barbarians/units.lua:332
 #: ../../data/tribes/initialization/empire/units.lua:349
@@ -271,11 +271,11 @@ msgctxt "amazons_ware"
 msgid "It is used by a woodcutter and produced by the stone carver."
 msgstr "L'usa el llenyataire i el produeix el tallista."
 
-#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Shovel, part 1
 #. TRANSLATORS: Helptext for an empire ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Shovel, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Shovel, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Shovel, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:312
 #: ../../data/tribes/initialization/atlanteans/units.lua:597
 #: ../../data/tribes/initialization/barbarians/units.lua:345
@@ -291,13 +291,13 @@ msgctxt "amazons_ware"
 msgid ""
 "Therefore the jungle preservers, the cassava farmers and the cocoa farmers "
 "use them. They are produced by the stone carver."
-msgstr ""
+msgstr "Per això, l'usen les conservadores de la jungla, les cultivadores de mandioca i les cultivadores de cacau. Les produeixen els tallistes."
 
-#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an atlantean ware: Hammer, part 1
 #. TRANSLATORS: Helptext for an empire ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a frisian ware: Hammer, part 1
 #. TRANSLATORS: Helptext for a barbarian ware: Hammer, part 1
+#. TRANSLATORS: Helptext for an amazon ware: Hammer, part 1
 #: ../../data/tribes/initialization/amazons/units.lua:325
 #: ../../data/tribes/initialization/atlanteans/units.lua:610
 #: ../../data/tribes/initialization/barbarians/units.lua:358
@@ -314,7 +314,7 @@ msgid ""
 "Geologists, builders, shipwrights and stone carvers all need a hammer. Make "
 "sure you’ve always got some in reserve! They are produced by the stone "
 "carver."
-msgstr ""
+msgstr "Les geòlogues, constructores, mestres d'aixa i tallistes necessiten un martell. Assegureu-vos que en teniu de reserva! Els produeixen les tallistes."
 
 #. TRANSLATORS: Helptext for an amazon ware: Machete
 #: ../../data/tribes/initialization/amazons/units.lua:338
@@ -329,7 +329,7 @@ msgid ""
 "This spear is the basic weapon in the Amazon military system. It is produced"
 " by the stone carver. In combination with a tunic, it is the equipment to "
 "fit out young soldiers."
-msgstr "Aquesta llança és l'arma bàsica del sistema militar de les amazones. Les produeix el tallista i, juntament amb una túnica, és l'equipament dels soldats novells."
+msgstr "Aquesta llança és l'arma bàsica del sistema militar de les amazones. Les produeix el tallista i, juntament amb una túnica, és l'equipament de les soldades novells."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Spear, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:351
@@ -349,7 +349,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Stone carvers need a chisel. Make sure you’ve always got some in reserve! "
 "They are produced by the stone carvers themselves."
-msgstr ""
+msgstr "Els tallistes necessiten un cisell. Assegureu-vos que sempre en teniu de reserva! Els produeixen els mateixos tallistes."
 
 #. TRANSLATORS: Helptext for an amazon ware: Kitchen Tools
 #: ../../data/tribes/initialization/amazons/units.lua:375
@@ -358,7 +358,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, baking cassava bread and "
 "brewing chocolate. Be sure to have a stone carver to produce this basic "
 "tool."
-msgstr ""
+msgstr "Les eines de cuina són necessàries per preparar racions, fornejar el pa de tapioca i fermentar xocolata. Assegureu-vos de tenir un tallista que pugui produir aquesta eina bàsica."
 
 #. TRANSLATORS: Helptext for an amazon ware: Needles
 #: ../../data/tribes/initialization/amazons/units.lua:386
@@ -366,7 +366,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Needles are used by dressmakers to make dresses, boots and armor for the "
 "soldiers."
-msgstr ""
+msgstr "Les sastresses necessiten agulles per fer vestits, calçat i armadures per a les soldades."
 
 #. TRANSLATORS: Helptext for an amazon ware: Stone Bowl
 #: ../../data/tribes/initialization/amazons/units.lua:397
@@ -381,7 +381,7 @@ msgid ""
 "This spear has a stone spike. It is produced in a stone workshop and used in"
 " a warriors’ gathering – together with food – to train soldiers from attack "
 "level 0 to attack level 1."
-msgstr ""
+msgstr "Aquestes llances tenen una punta de pedra. Són produïdes al taller de pedra i s'empren en els punts de trobada de guerrers juntament amb menjar per entrenar el nivell d'atac de les soldades de nivell 0 a nivell 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Hardened Spear
 #: ../../data/tribes/initialization/amazons/units.lua:422
@@ -390,7 +390,7 @@ msgid ""
 "This is a hardened spear with a stone tip. It is produced in a stone "
 "workshop and used in a warriors’ gathering – together with food – to train "
 "soldiers from attack level 1 to level 2."
-msgstr ""
+msgstr "Aquesta llança endurida té una punta de pedra. Es produeix al taller de pedra i s'usa als punts de trobada de guerrers juntament amb menjar per entrenar l'atac de les soldades de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wooden Armor
 #: ../../data/tribes/initialization/amazons/units.lua:433
@@ -399,7 +399,7 @@ msgid ""
 "This light wooden armor is a basic piece of armor for the Amazons’ soldiers."
 " It is produced by a dressmaker and used in a training glade – together with"
 " food – to train soldiers from health level 0 to level 1."
-msgstr ""
+msgstr "Les armadures lleugeres de fusta són una peça bàsica de l'armadura de les soldades amazones. Les produeixen les sastresses i s'usen en els camps d'entrenament juntament amb menjar per entrenar la salut de les soldades de nivell 0 a nivell 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Wodden Helmet
 #: ../../data/tribes/initialization/amazons/units.lua:444
@@ -408,7 +408,7 @@ msgid ""
 "A wooden helmet is a basic piece of equipment for protecting soldiers. It is"
 " produced by the dressmaker and used to train soldiers from health level 1 "
 "to level 2."
-msgstr ""
+msgstr "Els cascos de fusta són una peça d'equipament bàsic per protegir les soldades. Els produeixen les sastresses i s'usen per entrenar la salut de les soldades de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Warrior's Coat
 #: ../../data/tribes/initialization/amazons/units.lua:455
@@ -424,7 +424,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Rubber can be bound into a tunic, which is used as basic armor. All new "
 "soldiers are clothed in a tunic."
-msgstr ""
+msgstr "El cautxú es pot afegir a les túniques, que són una armadura bàsica. Totes les soldades porten túniques. "
 
 #. TRANSLATORS: Helptext for an amazon ware: Padded Vest
 #: ../../data/tribes/initialization/amazons/units.lua:477
@@ -432,7 +432,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Padded vests are light but durable armor. They are produced by the "
 "dressmaker and used to train soldiers’ defence from level 0 to level 1."
-msgstr ""
+msgstr "Les armilles encoixinades són lleugeres però també són una armadura duradora. Les produeixen les sastresses i s'usen per entrenar la defensa de les soldades de nivell 0 a nivell 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Padded Protector
 #: ../../data/tribes/initialization/amazons/units.lua:488
@@ -440,7 +440,7 @@ msgctxt "amazons_ware"
 msgid ""
 "Padded protectors are strong and durable armor. They are produced by the "
 "dressmaker and used to train soldiers’ defence from level 1 to level 2."
-msgstr ""
+msgstr "Els protectors encoixinats són una armadura forta i duradora. Les produeixen les sastresses i s'usen per entrenar la defensa de les soldades de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Sturdy Boots
 #: ../../data/tribes/initialization/amazons/units.lua:499
@@ -449,7 +449,7 @@ msgid ""
 "Sturdy boots are excellent footwear for soldiers to be quicker on their "
 "feet. They are produced by the dressmaker and used to train soldiers’ evade "
 "from level 0 to level 1."
-msgstr ""
+msgstr "Les botes robustes són un calçat excel·lent per moure's més ràpid. Les produeixen les sastresses i s'usen per entrenar l'evasió de les soldades de nivell 0 a nivell 1."
 
 #. TRANSLATORS: Helptext for an amazon ware: Swift Boots
 #: ../../data/tribes/initialization/amazons/units.lua:510
@@ -458,7 +458,7 @@ msgid ""
 "Swift boots are light and durable footwear for soldiers to be quicker on "
 "their feet. They are produced by the dressmaker and used to train soldiers’ "
 "evade from level 1 to level 2."
-msgstr ""
+msgstr "Les botes lleugeres són un calçat de les soldades perquè puguin moure's més ràpid. Les produeixen les sastresses i s'usen per entrenar l'evasió de les soldades de nivell 1 a nivell 2."
 
 #. TRANSLATORS: Helptext for an amazon ware: Hero Boots
 #: ../../data/tribes/initialization/amazons/units.lua:521
@@ -510,7 +510,7 @@ msgstr "Tala arbres."
 #: ../../data/tribes/initialization/amazons/units.lua:585
 msgctxt "amazons_worker"
 msgid "Harvests special trees: ironwood, rubber and balsa."
-msgstr ""
+msgstr "Aconsegueix materials especials dels arbres: fusta dura, cautxú i fusta balsa."
 
 #. TRANSLATORS: Helptext for an amazon worker: Jungle Preserver
 #: ../../data/tribes/initialization/amazons/units.lua:592
@@ -584,7 +584,7 @@ msgctxt "amazons_worker"
 msgid ""
 "Works hard in the gold dwellings in mountains to obtain gold by washing it "
 "from gravel."
-msgstr ""
+msgstr "Treballa durament a les muntanyes per obtenir or rentant-lo i separant-lo de la grava."
 
 #. TRANSLATORS: Helptext for an amazon worker: Charcoal Burner
 #: ../../data/tribes/initialization/amazons/units.lua:682
@@ -628,8 +628,6 @@ msgctxt "amazons_worker"
 msgid "Explores unknown territory."
 msgstr "Explora territoris desconeguts."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
-#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an atlantean immovable: Ashes
 #. TRANSLATORS: Helptext for an atlantean immovable: Destroyed Building
 #. TRANSLATORS: Helptext for an empire immovable: Ashes
@@ -638,6 +636,8 @@ msgstr "Explora territoris desconeguts."
 #. TRANSLATORS: Helptext for a frisian immovable: Destroyed Building
 #. TRANSLATORS: Helptext for a barbarian immovable: Ashes
 #. TRANSLATORS: Helptext for a barbarian immovable: Destroyed Building
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
+#. TRANSLATORS: Helptext for an amazon immovable: Destroyed Building
 #: ../../data/tribes/initialization/amazons/units.lua:743
 #: ../../data/tribes/initialization/amazons/units.lua:750
 #: ../../data/tribes/initialization/atlanteans/units.lua:1047
@@ -651,13 +651,13 @@ msgstr "Explora territoris desconeguts."
 msgid "The remains of a destroyed building."
 msgstr "Les restes d'un edifici destruït."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #. TRANSLATORS: Helptext for an amazon immovable usable by atlanteans: Dead
 #. Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by empire: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by frisians: Dead Tree
 #. TRANSLATORS: Helptext for an amazon immovable usable by barbarians: Dead
 #. Tree
+#. TRANSLATORS: Helptext for an amazon immovable: Ashes
 #: ../../data/tribes/initialization/amazons/units.lua:757
 #: ../../data/tribes/initialization/atlanteans/units.lua:1241
 #: ../../data/tribes/initialization/barbarians/units.lua:977
@@ -740,7 +740,7 @@ msgstr "El cebil ja ha crescut suficient perquè un mestre llenyataire el tali p
 #: ../../data/tribes/initialization/amazons/units.lua:1044
 #: ../../data/tribes/initialization/amazons/units.lua:1072
 msgid "This rubber tree has just been planted."
-msgstr ""
+msgstr "Aquest arbre de cautxú acaba de plantar-se."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Rubber Tree Pole
 #: ../../data/tribes/initialization/amazons/units.lua:995
@@ -768,12 +768,12 @@ msgid ""
 "Other tribes can harvest it for normal logs."
 msgstr "Un mestre llenyataire ja pot treure cautxú d'aquest arbre. Les altres cultures el poden tallar per tal d'aconseguir troncs."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1100
 #: ../../data/tribes/initialization/atlanteans/units.lua:1054
 #: ../../data/tribes/initialization/atlanteans/units.lua:1089
@@ -783,12 +783,12 @@ msgstr "Un mestre llenyataire ja pot treure cautxú d'aquest arbre. Les altres c
 msgid "This field has just been planted."
 msgstr "Aquest camp acaba de plantar-se."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1107
 #: ../../data/tribes/initialization/amazons/units.lua:1114
 #: ../../data/tribes/initialization/atlanteans/units.lua:1061
@@ -803,12 +803,12 @@ msgstr "Aquest camp acaba de plantar-se."
 msgid "This field is growing."
 msgstr "El camp està creixent."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1121
 #: ../../data/tribes/initialization/atlanteans/units.lua:1075
 #: ../../data/tribes/initialization/atlanteans/units.lua:1110
@@ -818,12 +818,12 @@ msgstr "El camp està creixent."
 msgid "This field is ready for harvesting."
 msgstr "Ja es pot fer la collita d'aquest camp."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Blackroot Field
 #. TRANSLATORS: Helptext for an atlantean immovable: Corn Field
 #. TRANSLATORS: Helptext for an empire immovable: Wheat field
 #. TRANSLATORS: Helptext for a frisian immovable: Barley Field
 #. TRANSLATORS: Helptext for a barbarian immovable: Wheat field
+#. TRANSLATORS: Helptext for an amazon immovable: Cassava Root Field
 #: ../../data/tribes/initialization/amazons/units.lua:1128
 #: ../../data/tribes/initialization/atlanteans/units.lua:1082
 #: ../../data/tribes/initialization/atlanteans/units.lua:1117
@@ -846,18 +846,18 @@ msgstr "L'arbre de cacau està creixent."
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Mature
 #: ../../data/tribes/initialization/amazons/units.lua:1149
 msgid "This cocoa tree is fully grown."
-msgstr ""
+msgstr "L'arbre de cacau ja ha crescut suficient."
 
 #. TRANSLATORS: Helptext for an amazon immovable: Cocoa Tree Old
 #: ../../data/tribes/initialization/amazons/units.lua:1156
 msgid "The beans on this cocoa tree are ready for harvesting."
-msgstr ""
+msgstr "Ja es poden recollir els grans de cacau de l'arbre."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #. TRANSLATORS: Helptext for an atlantean resource indicator: No resources
 #. TRANSLATORS: Helptext for an empire resource indicator: No resources
 #. TRANSLATORS: Helptext for a frisian resource indicator: No resources
 #. TRANSLATORS: Helptext for a barbarian resource indicator: No resources
+#. TRANSLATORS: Helptext for an amazon resource indicator: No resources
 #: ../../data/tribes/initialization/amazons/units.lua:1163
 #: ../../data/tribes/initialization/atlanteans/units.lua:1131
 #: ../../data/tribes/initialization/barbarians/units.lua:867
@@ -873,11 +873,11 @@ msgid ""
 "dwellings."
 msgstr "Els filons d'or contenen mineral d'or que els excavadors poden rentar i separar de la grava."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1173
 #: ../../data/tribes/initialization/atlanteans/units.lua:1170
 #: ../../data/tribes/initialization/barbarians/units.lua:906
@@ -893,9 +893,9 @@ msgid ""
 "Granite is a basic building material and can be dug up by a stone mine."
 msgstr "El granit és un material de construcció que s'ha de tallar amb una mina de pedres."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1184
 #: ../../data/tribes/initialization/barbarians/units.lua:917
 #: ../../data/tribes/initialization/frisians/units.lua:1299
@@ -909,11 +909,11 @@ msgid ""
 "digger dwellings."
 msgstr "Els filons d'or contenen mineral d'or que els excavadors poden rentar i separar de la grava."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an atlantean resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for an empire resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a frisian resource indicator: Gold, part 2
 #. TRANSLATORS: Helptext for a barbarian resource indicator: Gold, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Gold, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1195
 #: ../../data/tribes/initialization/atlanteans/units.lua:1214
 #: ../../data/tribes/initialization/barbarians/units.lua:950
@@ -922,20 +922,20 @@ msgstr "Els filons d'or contenen mineral d'or que els excavadors poden rentar i 
 msgid "There is a lot of gold here."
 msgstr "Aquí hi ha molt or."
 
-#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Frisian resource indicator: Stones, part 2
 #. TRANSLATORS: Helptext for a Barbarian resource indicator: Stones, part 2
+#. TRANSLATORS: Helptext for an amazon resource indicator: Stones, part 2
 #: ../../data/tribes/initialization/amazons/units.lua:1206
 #: ../../data/tribes/initialization/barbarians/units.lua:961
 #: ../../data/tribes/initialization/frisians/units.lua:1343
 msgid "There is a lot of granite here."
 msgstr "Aquí hi ha molt granit."
 
-#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an atlantean immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for an empire immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a frisian immovable: Ship Under Construction
 #. TRANSLATORS: Helptext for a barbarian immovable: Ship Under Construction
+#. TRANSLATORS: Helptext for an amazon immovable: Ship Under Construction
 #: ../../data/tribes/initialization/amazons/units.lua:1214
 #: ../../data/tribes/initialization/atlanteans/units.lua:1233
 #: ../../data/tribes/initialization/barbarians/units.lua:969
@@ -1012,7 +1012,7 @@ msgctxt "amazons_building"
 msgid ""
 "The jungle preserver’s hut needs free space within the work area to plant "
 "the trees."
-msgstr ""
+msgstr "La cabana de la conservadora de la jungla necessita espais lliures dins l'àrea de treball per plantar arbres."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Hunter-
 #. Gatherer's Hut
@@ -1138,7 +1138,7 @@ msgstr "Tala arbres rars de l'àrea del voltant. Aconsegueix fusta dura, fusta b
 #: ../../data/tribes/initialization/amazons/units.lua:1314
 msgctxt "amazons_building"
 msgid "Breeds fish and game to renew food resources."
-msgstr ""
+msgstr "Cria peixos i animals per renovar els recursos alimentaris."
 
 #. TRANSLATORS: Note helptext for an amazon production site: Wilderness
 #. Keeper's Tent
@@ -1230,7 +1230,7 @@ msgstr "Forneja pa de tapioca."
 #: ../../data/tribes/initialization/amazons/units.lua:1387
 msgctxt "amazons_building"
 msgid "Brews chocolate for soldier training."
-msgstr ""
+msgstr "Fermenta xocolata per entrenar soldats."
 
 #. TRANSLATORS: Performance helptext for an amazon production site: Chocolate
 #. Brewery
@@ -1255,7 +1255,7 @@ msgctxt "amazons_building"
 msgid ""
 "The food preserver can produce one ration in %s on average if the supply is "
 "steady."
-msgstr ""
+msgstr "La conservadora de menjar pot produir una ració cada %s de mitjana si té els subministraments adequats."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Youth
 #. Gathering
@@ -1270,7 +1270,7 @@ msgstr "Equipa i entrena els reclutes per convertir-los en soldats."
 #, lua-format
 msgctxt "amazons_building"
 msgid "The youth gathering needs %s on average to recruit one soldier."
-msgstr ""
+msgstr "El punt d'allistament necessita %s de mitjana per reclutar un soldat."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Gardening
 #. Center
@@ -1317,7 +1317,7 @@ msgstr "Cultiva cacau per fer després begudes de xocolata."
 #: ../../data/tribes/initialization/amazons/units.lua:1443
 msgctxt "amazons_building"
 msgid "Chocolate is essential for training amazon soldiers."
-msgstr "La xocolata és essencial per entrenar les soldats amazones."
+msgstr "La xocolata és essencial per entrenar les soldades amazones."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Stone Mine
 #: ../../data/tribes/initialization/amazons/units.lua:1452
@@ -1332,7 +1332,7 @@ msgctxt "amazons_building"
 msgid ""
 "The stone mine can produce one slab of granite in %s on average if the "
 "supply with rations is steady and the mine is not worn out."
-msgstr ""
+msgstr "La mina de pedra pot produir un bloc de granit cada %s de mitjana si té els subministraments adequats."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Gold Digger
 #. Dwelling
@@ -1348,13 +1348,13 @@ msgctxt "amazons_building"
 msgid ""
 "Trains soldiers in Attack up to level 2. Equips the soldiers with all "
 "necessary weapons."
-msgstr "Entrena els soldats en atac fins al nivell 2. També els equipa amb les armes necessàries."
+msgstr "Entrena les soldades en atac fins al nivell 2. També els equipa amb les armes necessàries."
 
 #. TRANSLATORS: Note helptext for an amazon training site: Warriors’ Gathering
 #: ../../data/tribes/initialization/amazons/units.lua:1472
 msgctxt "amazons_building"
 msgid "Amazon soldiers need chocolate to train properly."
-msgstr "Les soldats amazones necessiten xocolata per entrenar-se."
+msgstr "Les soldades amazones necessiten xocolata per entrenar-se."
 
 #. TRANSLATORS: Purpose helptext for an amazon training site: Training Glade
 #: ../../data/tribes/initialization/amazons/units.lua:1479
@@ -1368,7 +1368,7 @@ msgstr "Entrena els soldats en evasió, defensa i salut. Equipa els soldats amb 
 #: ../../data/tribes/initialization/amazons/units.lua:1481
 msgctxt "amazons_building"
 msgid "Amazon soldiers need chocolate to train their soldiers properly."
-msgstr "Les soldats amazones necessiten xocolata per entrenar-se."
+msgstr "Les soldades amazones necessiten xocolata per entrenar-se."
 
 #. TRANSLATORS: Purpose helptext for an amazon military site: Patrol Post
 #. TRANSLATORS: Purpose helptext for an amazon military site: Treetop Sentry
@@ -1413,7 +1413,7 @@ msgstr "Si disposeu de pocs soldats per ocupar els edificis militars nous, cliqu
 #: ../../data/tribes/initialization/amazons/units.lua:1501
 msgctxt "amazons_building"
 msgid "You can only build this building on top of a tree."
-msgstr ""
+msgstr "Només podeu construir aquest arbre a la part superior d'un arbre."
 
 #. TRANSLATORS: Purpose helptext for an amazon production site: Ferry Yard
 #: ../../data/tribes/initialization/amazons/units.lua:1555
@@ -1435,11 +1435,11 @@ msgid ""
 "between ports."
 msgstr "Construeix vaixells per comerciar i per a la colonització per la via marítima a través de ports."
 
-#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Lore helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Lore helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1573
 #: ../../data/tribes/initialization/atlanteans/units.lua:1691
 #: ../../data/tribes/initialization/barbarians/units.lua:1774
@@ -1449,13 +1449,13 @@ msgctxt "building"
 msgid "‘Don’t swear at the builder who is short of building materials.’"
 msgstr "«No maldiguis el constructor que ha fet curt amb els materials de construcció»."
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Construction
 #. Site
 #. TRANSLATORS: Lore author helptext for an empire building: Construction Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Construction Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Construction
 #. Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1575
 #: ../../data/tribes/initialization/atlanteans/units.lua:1693
 #: ../../data/tribes/initialization/barbarians/units.lua:1776
@@ -1465,11 +1465,11 @@ msgctxt "building"
 msgid "Proverb widely used for impossible tasks of any kind"
 msgstr "Proverbi usat per tasques impossibles de qualsevol mena"
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Construction Site
 #. TRANSLATORS: Purpose helptext for an empire building: Construction Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Construction Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Construction Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Construction Site
 #: ../../data/tribes/initialization/amazons/units.lua:1577
 #: ../../data/tribes/initialization/atlanteans/units.lua:1695
 #: ../../data/tribes/initialization/barbarians/units.lua:1778
@@ -1479,11 +1479,11 @@ msgctxt "building"
 msgid "A new building is being built at this construction site."
 msgstr "En aquest lloc s'està construint un nou edifici."
 
-#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1584
 #: ../../data/tribes/initialization/atlanteans/units.lua:1702
 #: ../../data/tribes/initialization/barbarians/units.lua:1785
@@ -1493,11 +1493,11 @@ msgctxt "building"
 msgid "‘New paths will appear when you are willing to tear down the old.’"
 msgstr "«Quan intentis destruir un camí, n'apareixeran de nous»."
 
-#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Lore author helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Lore author helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1586
 #: ../../data/tribes/initialization/atlanteans/units.lua:1704
 #: ../../data/tribes/initialization/barbarians/units.lua:1787
@@ -1507,11 +1507,11 @@ msgctxt "building"
 msgid "Proverb"
 msgstr "Proverbi"
 
-#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an atlantean building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for an empire building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a frisian building: Dismantle Site
 #. TRANSLATORS: Purpose helptext for a barbarian building: Dismantle Site
+#. TRANSLATORS: Purpose helptext for an amazon building: Dismantle Site
 #: ../../data/tribes/initialization/amazons/units.lua:1588
 #: ../../data/tribes/initialization/atlanteans/units.lua:1706
 #: ../../data/tribes/initialization/barbarians/units.lua:1789
@@ -7013,7 +7013,7 @@ msgstr "Un flequer"
 #: ../../data/tribes/initialization/frisians/units.lua:1836
 msgctxt "frisians_building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
-msgstr ""
+msgstr "Forneja pa a partir de civada i aigua per alimentar miners i soldats."
 
 #. TRANSLATORS: Performance helptext for a frisian production site: Bakery
 #: ../../data/tribes/initialization/frisians/units.lua:1838
@@ -7492,7 +7492,7 @@ msgstr "Finalitat de l'edifici:"
 msgid ""
 "This mine will exploit %1%%% of its resources. From there on out, it will "
 "only have a %2%%% chance of finding any more of them."
-msgstr ""
+msgstr "Aquesta mina explota només el %1% %% dels seus recursos. A partir de llavors, només tindrà una probabilitat de %2% %% de trobar-ne més. "
 
 #. TRANSLATORS: Note helptext for a mine.
 #: ../../data/tribes/scripting/help/building_help.lua:428
@@ -7500,7 +7500,7 @@ msgid ""
 "This mine will exploit all of its resources down to the deepest level. But "
 "even after having done so, it will still have a %1%%% chance of finding some"
 " more of them."
-msgstr ""
+msgstr "Aquesta mina explotarà tots els seus recursos a fons. Fins i tot un cop ho hagi fet, encara tindrà una probabilitat de trobar més minerals de %1% %%."
 
 #: ../../data/tribes/scripting/help/building_help.lua:436
 #: ../../data/tribes/scripting/help/building_help.lua:656
@@ -8377,8 +8377,8 @@ msgstr "Un jugador"
 msgid "Multiplayer"
 msgstr "Multijugador"
 
-#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
+#. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
 #: ../../data/tribes/scripting/help/ware_help.lua:50
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"

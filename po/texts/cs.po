@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
-"PO-Revision-Date: 2020-12-04 07:22+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-12-18 20:04+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -524,7 +524,7 @@ msgstr "Dohlížej na své rybáře a postav domek porybného. Když se vyčerpa
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr "Nikdy nezapomeň postavit domek lesníka a dřevorubce, aby ti nedošly kmeny."
+msgstr "Nikdy nezapomeň postavit domek lesníka a dřevorubce, aby ti nedošly klády."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
@@ -542,7 +542,7 @@ msgstr "Pozorně sleduj své rybáře. Když se vyčerpají zásoby ryb v jejich
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr "Vždy postav chaty pro lesníka a hajného, aby ti nedošly kmeny nebo zvěřina."
+msgstr "Vždy postav chaty lesníka a hajného, aby bylo kde těžit klády a lovit divokou zvěř."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 #: ../../data/txts/tips/frisians.lua:12
@@ -623,7 +623,7 @@ msgstr "Velkou budovu můžeš umístit na jakýkoliv uzel, kde lze umístit st�
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly kmeny."
+msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly klády."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
@@ -638,7 +638,7 @@ msgstr ""
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly kmeny."
+msgstr "Nikdy nezapomeň postavit domek lesníka, aby ti nedošly klády."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

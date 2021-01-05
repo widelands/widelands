@@ -11,6 +11,7 @@
 # Viktor S <awsswa59@gmail.com>, 2019-2020
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # 6da4f49c4b78e697e34b24b2a66289f5, 2016
+# Карима Бекмаметова, 2020
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018-2019
 # 66c17387c1d6640720971b8ab706da27_0feead1, 2015
@@ -18,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-12-11 13:13+0000\n"
+"Last-Translator: Карима Бекмаметова\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -169,7 +170,7 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well. For the "
 "best productivity, build it on a spot where your geologists have found a "
 "water source."
-msgstr "Другой путь производства пайков – переработка различных видов еды, которые поставляются рыбаками и фермерами. Пшеница с ферм и вода, должны быть доставлены в пекарню, чтобы пекарь мог приготовить что-нибудь съедобное. Вы можете получить воду построив колодец на участке. Для лучшей производительности постройте его там, где ваши геологи нашли источник воды."
+msgstr "Другой путь производства пайков – переработка различных видов еды, которые поставляются рыбаками и фермерами. Пшеница с ферм и вода должны быть доставлены в пекарню, чтобы пекарь мог приготовить что-нибудь съедобное. Вы можете получить воду, построив колодец на участке. Для лучшей производительности постройте его там, где ваши геологи нашли источник воды."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:76
 msgid "Refine your mined resources"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-11-29 22:44+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Ondřej Itřech, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -38,7 +38,7 @@ msgid ""
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
 "Postav alespoň jeden domek dřevorubce a dva domky lesníka a začni s těžbou "
-"kmenů, dále postav rákosovou farmu a začni pěstovat rákosí."
+"klád, dále postav rákosovou farmu a začni pěstovat rákosí."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:33
 msgid "Start producing bricks"
@@ -53,8 +53,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
-"Postav cihlárnu, důl na uhlí, kamenný důl a také jámový výkop, abys zajistil"
-" výrobu cihel."
+"Postav cihlárnu, důl na uhlí, kamenný důl a také jámový výkop, aby byla "
+"zajištěna výroba cihel."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:41
 msgid "Gather building materials"
@@ -71,7 +71,7 @@ msgstr "Nahromaď stavební materiál ve své hlavní budově. Získej alespoň:
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
-msgstr "30 kmenů"
+msgstr "30 klád"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid "30 × Granite"
@@ -222,8 +222,8 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
-"Postav přístav, tkalcovnu a loděnici, pak zahaj výpravu, abys unikl, než "
-"záplavová vlna potopí tento ostrov."
+"Postav přístav, tkalcovnu a loděnici, pak zahaj výpravu. Musíš uniknout, než"
+" záplavová vlna potopí tento ostrov."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid ""
@@ -239,9 +239,9 @@ msgid ""
 " reload the scenario from the backup savegame automatically created for you "
 "shortly before you reached the enemy’s headquarters."
 msgstr ""
-"Pokud jsi se nestihl dobře připravit, abys to zvládl, můžeš z uložených her "
-"načíst automaticky uloženou zálohu scénáře, která byla uložena nedlouho "
-"předtím, než jsi dobyl hlavní budovu nepřítele."
+"Pokud přípravy nejdou podle plánu a úkol se nedaří zvládnout, vždy můžeš z "
+"uložených her načíst automaticky uloženou zálohu scénáře, která byla "
+"vytvořena nedlouho předtím, než byla dobyta hlavní budova nepřítele."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -261,7 +261,7 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
-"Buď vítán na krásném ostrově Laněnés! Já jsem Rýbaud, kmenový vůdce tohoto "
+"Vítej na krásném ostrově Laněnés! Já jsem Rýbaud, kmenový vůdce tohoto "
 "nedotčeného ostrova."
 
 #. TRANSLATORS: Reebaud – Introduction 1. Schauenburg and Holstein are
@@ -332,7 +332,7 @@ msgid ""
 " one for a woodcutter."
 msgstr ""
 "Měli bychom si zajistit produkci dřeva. Zdá se, že stromy nerostou na tomto "
-"ostrově zrovna nejlépe. Bude lepší pokud postavíme nejméně dva domky pro "
+"ostrově zrovna nejlépe. Bude lepší, pokud postavíme nejméně dva domky pro "
 "lesníky a jeden pro dřevorubce."
 
 #. TRANSLATORS: Hauke – Introduction 3
@@ -343,10 +343,10 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing reed fields."
 msgstr ""
-"Také bude dobré neodkádat příliš stavbu rákosové farmy. Ta potřebuje na svou"
-" stavbu samotné rákosí, takže si musíme dávat pozor, abychom ho měli dost na"
-" udržení vlastní produkce. Pěstování rákosí je nenáročné, jak je jednou "
-"farma postavená, pěstitel rákosí jíž nic dalšího k jeho pěstování "
+"Také bude dobré neodkládat příliš stavbu rákosové farmy. Ta potřebuje na "
+"svou stavbu samotné rákosí, takže si musíme dávat pozor, abychom ho měli "
+"dost na zahájení vlastní produkce. Pěstování rákosí je nenáročné, jak je "
+"jednou farma postavená, pěstitel rákosí jíž nic dalšího k jeho pěstování "
 "nepotřebuje."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
@@ -413,8 +413,8 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
-"Daří se nám dobře. Všechen stavební materiál máme zajištěn. Počkejme než se "
-"nám trochu nahromadí. Mohli bychom ještě rozšířit naše území o kousek dál, "
+"Daří se nám dobře. Všechen stavební materiál máme zajištěn. Počkejme, než se"
+" nám trochu nahromadí. Mohli bychom ještě rozšířit své území o kousek dál, "
 "abychom se podívali, co jiného nám ještě tento ostrov může nabídnout."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
@@ -444,8 +444,8 @@ msgid ""
 "You should assign the new reed farm the highest priority for reed in the "
 "construction site window."
 msgstr ""
-"Měl bys u nově budované rákosové farmy nastavit v okně stavby nejvyšší "
-"prioritu pro dodávku rákosí."
+"Je vhodné u nově budované rákosové farmy nastavit v okně stavby nejvyšší "
+"prioritu dodávce rákosí."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
@@ -464,8 +464,8 @@ msgid ""
 "wells to supply them with water."
 msgstr ""
 "Náš cihlář si stěžuje, že už nějakou dobu nemá dost cihlářské hlíny. To "
-"znamená omezení výroby cihel a to je pro nás výrazným zpomalením. Bude dobré"
-" postavit ještě jeden, nebo dva další jámové výkopy a studny, aby je "
+"znamená omezení výroby cihel a to je pro nás výrazným zpomalením. Bude "
+"dobré, postavit ještě jeden nebo dva další jámové výkopy a studny, aby je "
 "zásobovaly vodou."
 
 #. TRANSLATORS: Hauke – no clay
@@ -508,7 +508,7 @@ msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
-"Měl bys v okně stavby nové cihlárny nastavit nejvyšší prioritu na dodání "
+"Je vhodné v okně stavby nové cihlárny nastavit nejvyšší prioritu dodání "
 "cihel na stavbu."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
@@ -611,10 +611,10 @@ msgid ""
 "farming."
 msgstr ""
 "Velká výčepna potřebuje lepší sortiment jídla. Postav proto pekárnu a "
-"pivovar, k nim pak dva, nebo tři statky na pěstování ječmene. Buď si vědom "
-"toho, že ječmen roste velmi pomalu. Proto těchto pár statků nebude dost, až "
-"bude poptávka po chlebu a pivu. Měli bychom zvětšovat území dostatečně "
-"rychle, abychom měli dost místa pro naše hospodářství."
+"pivovar, k nim pak dva nebo tři statky na pěstování ječmene. Počítej s tím, "
+"že ječmen roste velmi pomalu. Proto těchto pár statků nebude dost, až bude "
+"poptávka po chlebu a pivu. Měli bychom zvětšovat území dostatečně rychle, "
+"abychom měli dost místa pro naše hospodářství."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:239
@@ -684,9 +684,9 @@ msgid ""
 "all honorable warriors."
 msgstr ""
 "Tyto zbraně nám mohou posloužit jako výbava pro pár nových vojáků. Snad tu "
-"nenarazíme na nepřítele, ale vždy je lepší být raději připravený. Noví "
-"vojáci získávají vybavení v kasárnách, konkrétně dostanou krátký meč a "
-"kožich, stejnokroj všech udatných bojovníků."
+"nenarazíme na nepřítele, ale vždy je lepší se raději připravit. Noví vojáci "
+"získávají vybavení v kasárnách, konkrétně dostanou krátký meč a kožich, "
+"stejnokroj všech udatných bojovníků."
 
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
@@ -1179,6 +1179,6 @@ msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
-"Ukončil jsi misi. Můžeš se přesunout do dalšího scénáře, pokud nám chceš "
+"Mise je splněna. Můžeš se přesunout do dalšího scénáře, pokud nám chceš "
 "pomoci budovat nový domov někde dál, mimo pomstychtivou spravedlnost tohoto "
 "falešného boha…"
