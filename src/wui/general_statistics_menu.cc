@@ -74,7 +74,12 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 
 	// Setup plot data
 	const Widelands::Game::GeneralStatsVector& genstats = game_.get_general_statistics();
-	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size = genstats.size();
+	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size =
+	   game_.map().get_nrplayers();
+	if (genstats.size() != general_statistics_size) {
+		// Create first data point
+		game_.sample_statistics();
+	}
 
 	// Is there a hook dataset?
 	ndatasets_ = NR_BASE_DATASETS;
