@@ -212,7 +212,7 @@ void EditBox::set_caret_to_cursor_pos(int32_t cursor_pos_x) {
 		return;
 	}
 
-	int text_w = text_width(m_->text, *m_->font_style, m_->font_scale);
+	int text_w = text_width(m_->text, m_->font_style(), m_->font_scale);
 
 	// mouse coordinate cursor_pos_x=0 means leftmost spot in editbox but text starts with margin ->
 	// adjust
@@ -250,7 +250,7 @@ int EditBox::approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) cons
 }
 int EditBox::calculate_text_width(int pos) const {
 	std::string prefix = m_->text.substr(0, snap_to_char(pos));
-	int prefix_width = text_width(prefix, *m_->font_style, m_->font_scale) + m_->scrolloffset;
+	int prefix_width = text_width(prefix, m_->font_style(), m_->font_scale) + m_->scrolloffset;
 	return prefix_width;
 }
 
@@ -608,7 +608,7 @@ void EditBox::draw(RenderTarget& dst) {
 
 		const Image* caret_image =
 		   g_image_cache->get(panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
-		                                                         "images/ui_basic/caret_fs.png");
+                                                               "images/ui_basic/caret_fs.png");
 		Vector2i caretpt = Vector2i::zero();
 		caretpt.x = point.x + m_->scrolloffset + caret_x - caret_image->width() + kLineMargin;
 		caretpt.y = point.y + (fontheight - caret_image->height()) / 2;
