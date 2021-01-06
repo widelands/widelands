@@ -76,7 +76,8 @@ const Image& load_safe_template_image(const std::string& path) {
 	try {
 		return *g_image_cache->get(template_dir() + path);
 	} catch (const ImageNotFound& error) {
-		log_warn("Template image '%s' not found, using fallback image (%s)", path.c_str(), error.what());
+		log_warn(
+		   "Template image '%s' not found, using fallback image (%s)", path.c_str(), error.what());
 		return *g_image_cache->get("images/novalue.png");
 	}
 }
