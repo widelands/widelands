@@ -45,6 +45,8 @@ public:
 		return current_;
 	}
 
+	bool handle_key(bool down, SDL_Keysym) override;
+
 private:
 	RGBColor current_;
 
