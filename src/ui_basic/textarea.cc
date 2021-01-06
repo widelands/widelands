@@ -41,7 +41,8 @@ Textarea::Textarea(Panel* parent,
      layoutmode_(layout_mode),
      align_(align),
      text_(text),
-     font_style_(&g_style_manager->font_style(style)) {
+     font_style_(style),
+     font_style_override_(nullptr) {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
@@ -66,8 +67,17 @@ Textarea::Textarea(
    : Textarea(parent, s, style, 0, 0, 0, 0, text, align, LayoutMode::Layouted) {
 }
 
-void Textarea::set_style(const FontStyleInfo& style) {
-	font_style_ = &style;
+inline const FontStyleInfo& Textarea::font_style() const {
+	return font_style_override_ ? *font_style_override_ : g_style_manager->font_style(font_style_);
+}
+
+void Textarea::set_style(const FontStyle style) {
+	font_style_ = style;
+	font_style_override_ = nullptr;
+	update();
+}
+void Textarea::set_style_override(const FontStyleInfo& style) {
+	font_style_override_ = &style;
 	update();
 }
 
@@ -81,7 +91,7 @@ void Textarea::update() {
 		collapse();  // collapse() implicitly updates the size and position
 	}
 
-	FontStyleInfo scaled_style(*font_style_);
+	FontStyleInfo scaled_style(font_style());
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	rendered_text_ = autofit_text(richtext_escape(text_), scaled_style, fixed_width_);
@@ -195,7 +205,7 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = text_height(*font_style_, font_scale_);
+			h = text_height(font_style(), font_scale_);
 		}
 	}
 	set_desired_size(w, h);
