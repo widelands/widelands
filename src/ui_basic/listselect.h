@@ -157,8 +157,10 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
-	const UI::TableStyleInfo& table_style_;
-	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+
+	const UI::TableStyleInfo& table_style() const;
+	const UI::PanelStyleInfo* background_style() const;  // Background color and texture
+
 	int lineheight_;
 	std::string current_tooltip_;
 
