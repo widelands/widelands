@@ -58,7 +58,7 @@ Slider::Slider(Panel* const parent,
                const int32_t min_value,
                const int32_t max_value,
                const int32_t value,
-               SliderStyle style,
+               const SliderStyle style,
                const std::string& tooltip_text,
                const uint32_t cursor_size,
                const bool enabled,
@@ -79,7 +79,7 @@ Slider::Slider(Panel* const parent,
      highlighted_(false),
      pressed_(false),
      enabled_(enabled),
-     cursor_style_(&g_style_manager->slider_style(style).background()),
+     cursor_style_(style),
      x_gap_(x_gap),
      y_gap_(y_gap),
      bar_size_(bar_size),
@@ -88,6 +88,10 @@ Slider::Slider(Panel* const parent,
 	set_thinks(false);
 	set_can_focus(enabled_);
 	calculate_cursor_position();
+}
+
+inline const UI::PanelStyleInfo& Slider::cursor_style() const {
+	return g_style_manager->slider_style(cursor_style_).background();
 }
 
 void Slider::set_value(int32_t new_value) {
@@ -160,7 +164,7 @@ void Slider::draw_cursor(
 	RGBColor black(0, 0, 0);
 	const Recti background_rect(x, y, w, h);
 
-	draw_background(dst, background_rect, *cursor_style_);
+	draw_background(dst, background_rect, cursor_style());
 
 	if (highlighted_) {
 		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);
@@ -542,7 +546,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
                                const uint32_t h,
                                const std::vector<std::string>& labels_in,
                                uint32_t init_value,
-                               SliderStyle init_style,
+                               const SliderStyle init_style,
                                const std::string& tooltip_text,
                                const uint32_t cursor_size,
                                const bool enabled)
@@ -553,13 +557,13 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
            w,
            h,
            tooltip_text),
-     style(g_style_manager->slider_style(init_style)),
+     style_(init_style),
      slider(this,
             // here, we take into account the h_gap introduced by HorizontalSlider
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,
             w - (w / labels_in.size()) + cursor_size,
-            h - text_height(style.font()) - 2,
+            h - text_height(style().font()) - 2,
             0,
             labels_in.size() - 1,
             init_value,
@@ -570,6 +574,10 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
      labels(labels_in) {
 	slider.changed.connect(changed);
 	slider.changedto.connect(changedto);
+}
+
+inline const UI::TextPanelStyleInfo& DiscreteSlider::style() const {
+	return g_style_manager->slider_style(style_);
 }
 
 /**
@@ -585,7 +593,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh->render(as_richtext_paragraph(labels[i], style.font()));
+		   UI::g_fh->render(as_richtext_paragraph(labels[i], style().font()));
 		rendered_text->draw(
 		   dst, Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), UI::Align::kCenter);
 	}
@@ -603,7 +611,7 @@ void DiscreteSlider::layout() {
 	assert(!labels.empty());
 	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
 	slider.set_size(
-	   w - (w / labels.size()) + slider.cursor_size_, h - text_height(style.font()) + 2);
+	   w - (w / labels.size()) + slider.cursor_size_, h - text_height(style().font()) + 2);
 	Panel::layout();
 }
 }  // namespace UI

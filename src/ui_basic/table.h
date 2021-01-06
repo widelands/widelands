@@ -21,9 +21,11 @@
 #define WL_UI_BASIC_TABLE_H
 
 #include <functional>
+#include <memory>
 #include <set>
 
 #include "graphic/align.h"
+#include "graphic/style_manager.h"
 #include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
@@ -141,12 +143,12 @@ public:
 			return entry_;
 		}
 
-		void set_font_style(const UI::FontStyleInfo& style) {
-			font_style_ = &style;
+		void set_font_style(const FontStyle style) {
+			font_style_.reset(new FontStyle(style));
 		}
 
 		const UI::FontStyleInfo* font_style() const {
-			return font_style_;
+			return font_style_ ? &g_style_manager->font_style(*font_style_) : nullptr;
 		}
 
 		bool is_disabled() const {
@@ -159,7 +161,7 @@ public:
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		const UI::FontStyleInfo* font_style_;
+		std::unique_ptr<UI::FontStyle> font_style_;
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;

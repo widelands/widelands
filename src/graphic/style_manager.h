@@ -35,7 +35,8 @@
 #include "graphic/styles/window_style.h"
 #include "scripting/lua_table.h"
 
-constexpr const char* const kTemplateDir = "templates/default/";
+const std::string& template_dir();
+void set_template_dir(std::string);
 
 class StyleManager {
 public:

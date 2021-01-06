@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
-#include "graphic/style_manager.h"
 #include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
@@ -116,7 +115,7 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
 		b_login_.set_enabled(false);
 	} else {
 		eb_password_.set_can_focus(false);
-		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
+		ta_password_.set_style(UI::FontStyle::kDisabled);
 	}
 
 	eb_nickname_.focus();
@@ -181,11 +180,11 @@ bool LoginBox::handle_key(bool down, SDL_Keysym code) {
 
 void LoginBox::clicked_register() {
 	if (cb_register_.get_state()) {
-		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
+		ta_password_.set_style(UI::FontStyle::kDisabled);
 		eb_password_.set_can_focus(false);
 		eb_password_.set_text("");
 	} else {
-		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kFsMenuLabel));
+		ta_password_.set_style(UI::FontStyle::kFsMenuLabel);
 		eb_password_.set_can_focus(true);
 		eb_password_.focus();
 	}
