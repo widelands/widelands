@@ -571,6 +571,13 @@ void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleI
 	}
 }
 
+void Panel::template_directory_changed() {
+	update_template();
+	for (Panel* child = first_child_; child; child = child->next_) {
+		child->update_template();
+	}
+}
+
 /**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
@@ -908,6 +915,13 @@ void Panel::register_click() {
 	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
 }
 
+void Panel::do_delete() {
+	if (parent_) {
+		parent_->on_death(this);
+	}
+	delete this;
+}
+
 /**
  * Recursively walk the panel tree, killing panels that are marked for death
  * using die().
@@ -919,10 +933,7 @@ void Panel::check_child_death() {
 		next = p->next_;
 
 		if (p->flags_ & pf_die) {
-			if (p->parent_) {
-				p->parent_->on_death(p);
-			}
-			delete p;
+			p->do_delete();
 			p = nullptr;
 		} else if (p->flags_ & pf_child_die) {
 			p->check_child_death();

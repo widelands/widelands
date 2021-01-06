@@ -508,7 +508,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	// the map generator's assumptions. It is probably safer to just disable them all.
 
 	if (eia) {
-		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
+		egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
 		eia->cleanup_for_load();
 
 		egbase.enabled_addons().clear();

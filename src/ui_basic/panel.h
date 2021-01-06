@@ -304,6 +304,9 @@ public:
 	virtual void die();
 	static void register_click();
 
+	// Notify this panel's parent of our death, then immediately delete us.
+	void do_delete();
+
 	// overridden by InteractiveBase
 	virtual bool extended_tooltip_accessibility_mode() const {
 		return false;
@@ -312,6 +315,9 @@ public:
 	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
 
 	Panel& get_topmost_forefather();
+
+	// Call this on the topmost panel after you changed the template directory
+	void template_directory_changed();
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
@@ -345,6 +351,10 @@ protected:
 	draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
+
+	// called after the template directory was changed
+	virtual void update_template() {
+	}
 
 	virtual Panel* get_open_dropdown();
 
