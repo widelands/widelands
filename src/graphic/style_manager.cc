@@ -25,6 +25,7 @@
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
+#include "graphic/image_io.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
@@ -68,6 +69,15 @@ void set_template_dir(std::string dir) {
 	} else {
 		g_style_manager = new StyleManager();
 		g_style_managers[g_template_dir] = std::unique_ptr<StyleManager>(g_style_manager);
+	}
+}
+
+const Image& load_safe_template_image(const std::string& path) {
+	try {
+		return *g_image_cache->get(template_dir() + path);
+	} catch (const ImageNotFound& error) {
+		log_warn("Template image '%s' not found, using fallback image (%s)", path.c_str(), error.what());
+		return *g_image_cache->get("images/novalue.png");
 	}
 }
 

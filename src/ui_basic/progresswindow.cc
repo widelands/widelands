@@ -28,6 +28,7 @@
 #include <SDL_events.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -139,12 +140,20 @@ void ProgressWindow::set_background(const std::string& file_name) {
 		} else if (g_fs->is_directory(dir + theme_)) {
 			dir += theme_;
 		} else {
-			throw wexception("Invalid ProgressWindow theme '%s'", theme_.c_str());
+			log_warn("Theme '%s' not found, using fallback image", theme_.c_str());
+			background_ = "images/logos/wl-ico-128.png";
+			return do_redraw_now();
 		}
+
 		const std::set<std::string> images = g_fs->list_directory(dir);
-		auto it = images.begin();
-		std::advance(it, std::rand() % images.size());  // NOLINT
-		background_ = *it;
+		if (images.empty()) {
+			log_warn("No backgrounds found for theme '%s', using fallback image", theme_.c_str());
+			background_ = "images/logos/wl-ico-128.png";
+		} else {
+			auto it = images.begin();
+			std::advance(it, std::rand() % images.size());  // NOLINT
+			background_ = *it;
+		}
 	} else {
 		background_ = file_name;
 	}
