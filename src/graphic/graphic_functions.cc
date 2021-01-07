@@ -13,8 +13,7 @@ constexpr int kTextPadding = 48;
 void draw_game_tip(const std::string& text, unsigned opacity) {
 	RenderTarget& rt = *g_gr->get_render_target();
 
-	const Image* pic_background =
-	   g_image_cache->get(std::string(kTemplateDir) + "loadscreens/gametips.png");
+	const Image* pic_background = g_image_cache->get(template_dir() + "loadscreens/gametips.png");
 	const int w = pic_background->width();
 	const int h = pic_background->height();
 	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);

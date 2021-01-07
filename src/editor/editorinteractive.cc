@@ -50,6 +50,7 @@
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "logic/addons.h"
 #include "logic/map.h"
@@ -69,6 +70,10 @@
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
 #include "wui/toolbar.h"
+
+std::string editor_splash_image() {
+	return template_dir() + "loadscreens/editor.jpg";
+}
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section(), nullptr),
@@ -982,7 +987,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 		}
 	}
 
-	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
+	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
 	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {

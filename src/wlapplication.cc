@@ -51,6 +51,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
@@ -451,6 +452,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
+
+	set_template_dir(get_config_string("theme", ""));
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();
@@ -893,6 +896,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("animate_map_panning", false);
 	get_config_bool("write_syncstreams", false);
 	get_config_bool("nozip", false);
+	get_config_string("theme", "");
 	get_config_int("xres", 0);
 	get_config_int("yres", 0);
 	get_config_int("border_snap_distance", 0);

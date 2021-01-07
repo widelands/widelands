@@ -339,6 +339,9 @@ public:
 
 	Panel& get_topmost_forefather();
 
+	// Call this on the topmost panel after you changed the template directory
+	void template_directory_changed();
+
 protected:
 	// This panel will never receive keypresses (do_key), instead
 	// textinput will be passed on (do_textinput).
@@ -371,6 +374,10 @@ protected:
 	draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
+
+	// called after the template directory was changed
+	virtual void update_template() {
+	}
 
 	virtual Panel* get_open_dropdown();
 

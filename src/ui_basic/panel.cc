@@ -278,7 +278,7 @@ void Panel::do_redraw_now(const std::string& message) {
 		// handle input, and we gray out the user interface to indicate this.
 
 		rt.tile(Recti(0, 0, g_gr->get_xres(), g_gr->get_yres()),
-		        g_image_cache->get(std::string(kTemplateDir) + "loadscreens/ending.png"),
+		        g_image_cache->get(template_dir() + "loadscreens/ending.png"),
 		        Vector2i(0, 0));
 
 		draw_game_tip(message, 2);
@@ -751,6 +751,13 @@ void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleI
 	}
 	if (info.color() != RGBAColor(0, 0, 0, 0)) {
 		dst.fill_rect(rect, info.color(), BlendMode::UseAlpha);
+	}
+}
+
+void Panel::template_directory_changed() {
+	update_template();
+	for (Panel* child = first_child_; child; child = child->next_) {
+		child->update_template();
 	}
 }
 
