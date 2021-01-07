@@ -83,9 +83,9 @@ void RandomGame::clicked_ok() {
 		progress_window_->set_visible(false);
 		MainMenu& m = capsule_.menu();
 		m.show_messagebox(_("Map Generation Error"),
-		   _("The random map generator was unable to generate a suitable map. "
-		     "This happens occasionally because the generator is still in beta stage. "
-		     "Please try again with slightly different settings."));
+		                  _("The random map generator was unable to generate a suitable map. "
+		                    "This happens occasionally because the generator is still in beta stage. "
+		                    "Please try again with slightly different settings."));
 	}
 }
 
