@@ -37,7 +37,7 @@ enum class AddOnCategory {
 	kCampaign,
 	kWinCondition,
 	kStartingCondition,
-	kTheme  // not yet implemented
+	kTheme
 };
 
 // Note: Below you will see some lines like `std::function<std::string()> descname`.
