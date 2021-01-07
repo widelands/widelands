@@ -52,6 +52,7 @@ public:
 		bool inputgrab;
 		uint32_t maxfps;
 		bool sdl_cursor;
+		std::string theme;
 
 		// Windows options
 		bool snap_win_overlap_only;
@@ -137,6 +138,7 @@ private:
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<int> resolution_dropdown_;
+	UI::Dropdown<std::string> theme_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;

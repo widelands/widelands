@@ -39,7 +39,7 @@ descriptions:new_militarysite_type {
 
    messages = {
       -- TRANSLATORS: Message sent by an Amazon military site
-      occupied = pgettext("amazons_building", "Your soldiers have occupied your warriors’ delling."),
+      occupied = pgettext("amazons_building", "Your soldiers have occupied your warriors’ dwelling."),
       -- TRANSLATORS: Message sent by an Amazon military site
       aggressor = pgettext("amazons_building", "Your warriors’ dwelling discovered an aggressor."),
       -- TRANSLATORS: Message sent by an Amazon military site
