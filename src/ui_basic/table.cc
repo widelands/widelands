@@ -26,7 +26,6 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"

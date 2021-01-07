@@ -208,10 +208,10 @@ void MapDetailsBox::force_new_dimensions(uint32_t width, uint32_t height) {
 }
 
 void MapDetailsBox::set_map_description_text(const std::string& text) {
-	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kFsMenuLabel));
+	map_description_.set_style(UI::FontStyle::kFsMenuLabel);
 	map_description_.set_text(text);
 }
 void MapDetailsBox::show_warning(const std::string& text) {
-	map_description_.set_style(g_style_manager->font_style(UI::FontStyle::kWarning));
+	map_description_.set_style(UI::FontStyle::kWarning);
 	map_description_.set_text(text);
 }
