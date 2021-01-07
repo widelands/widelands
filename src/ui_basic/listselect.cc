@@ -33,6 +33,7 @@
 
 constexpr int kMargin = 2;
 constexpr int kHotkeyGap = 16;
+constexpr int kIndentStrength = 20;
 
 namespace UI {
 
@@ -41,6 +42,7 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
                                          const Image* init_pic,
                                          const std::string& tooltip_text,
                                          const std::string& hotkey_text,
+                                         const unsigned i,
                                          const TableStyleInfo& style)
    : name(init_name),
      entry_(init_entry),
@@ -48,7 +50,8 @@ BaseListselect::EntryRecord::EntryRecord(const std::string& init_name,
      tooltip(tooltip_text),
      name_alignment(i18n::has_rtl_character(init_name.c_str(), 20) ? Align::kRight : Align::kLeft),
      hotkey_alignment(i18n::has_rtl_character(hotkey_text.c_str(), 20) ? Align::kRight :
-                                                                         Align::kLeft) {
+                                                                         Align::kLeft),
+     indent(i) {
 	rendered_name = UI::g_fh->render(as_richtext_paragraph(richtext_escape(name), style.enabled()));
 	rendered_hotkey =
 	   UI::g_fh->render(as_richtext_paragraph(richtext_escape(hotkey_text), style.hotkey()));
@@ -146,8 +149,9 @@ void BaseListselect::add(const std::string& name,
                          const Image* pic,
                          bool const sel,
                          const std::string& tooltip_text,
-                         const std::string& hotkey) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style());
+                         const std::string& hotkey,
+                         const unsigned indent) {
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, indent, table_style());
 
 	int entry_height = lineheight_;
 	if (pic) {
@@ -293,7 +297,7 @@ int BaseListselect::calculate_desired_width() {
 	widest_text_ = 0;
 	widest_hotkey_ = 0;
 	for (const EntryRecord* er : entry_records_) {
-		const int current_text_width = er->rendered_name->width();
+		const int current_text_width = er->rendered_name->width() + (er->indent * kIndentStrength);
 		if (current_text_width > widest_text_) {
 			widest_text_ = current_text_width;
 		}
@@ -405,7 +409,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent : kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
 		}
@@ -432,9 +436,11 @@ void BaseListselect::draw(RenderTarget& dst) {
 			} else if (widest_hotkey_ > 0) {
 				text_point.x += widest_hotkey_ + kHotkeyGap;
 			}
+			text_point.x -= kIndentStrength * er.indent;
 		} else {
 			hotkey_point.x = maxw - widest_hotkey_;
 			text_point.x += picw;
+			text_point.x += kIndentStrength * er.indent;
 		}
 
 		// Position the text and hotkey according to their alignment

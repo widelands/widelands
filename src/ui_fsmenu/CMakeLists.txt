@@ -4,6 +4,8 @@ wl_library(ui_fsmenu
     about.h
     addons.cc
     addons.h
+    addons_packager.cc
+    addons_packager.h
     campaigndetails.cc
     campaigndetails.h
     campaigns.cc
@@ -30,7 +32,6 @@ wl_library(ui_fsmenu
     mapselect.h
     main.cc
     main.h
-    menu_target.h
     menu.h
     menu.cc
     multiplayersetupgroup.cc
