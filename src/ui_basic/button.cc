@@ -61,7 +61,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     button_style_(&g_style_manager->button_style(init_style)) {
+     button_style_(init_style) {
 	set_thinks(false);
 	set_can_focus(enabled_);
 }
@@ -125,13 +125,13 @@ void Button::expand(int w, int h) {
 	if (h == 0) {
 		// Automatically resize for font height and give it a margin.
 		int new_width = get_w();
-		const int new_height = std::max(text_height(button_style_->enabled().font()),
-		                                text_height(button_style_->disabled().font())) +
+		const int new_height = std::max(text_height(button_style().enabled().font()),
+		                                text_height(button_style().disabled().font())) +
 		                       4 * kButtonImageMargin;
 		if (w == 0) {
 			// Automatically resize for text width too.
-			new_width = std::max(text_width(title_, button_style_->enabled().font()),
-			                     text_width(title_, button_style_->disabled().font())) +
+			new_width = std::max(text_width(title_, button_style().enabled().font()),
+			                     text_width(title_, button_style().disabled().font())) +
 			            8 * kButtonImageMargin;
 		}
 		set_desired_size(new_width, new_height);
@@ -192,7 +192,7 @@ void Button::draw(RenderTarget& dst) {
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
 	const UI::TextPanelStyleInfo& style_to_use =
-	   is_monochrome ? button_style_->disabled() : button_style_->enabled();
+	   is_monochrome ? button_style().disabled() : button_style().enabled();
 
 	// Draw the background
 	draw_background(dst, style_to_use.background());
@@ -401,7 +401,11 @@ void Button::set_perm_pressed(bool pressed) {
 }
 
 void Button::set_style(UI::ButtonStyle bstyle) {
-	button_style_ = &g_style_manager->button_style(bstyle);
+	button_style_ = bstyle;
+}
+
+inline const UI::ButtonStyleInfo& Button::button_style() const {
+	return g_style_manager->button_style(button_style_);
 }
 
 void Button::toggle() {
