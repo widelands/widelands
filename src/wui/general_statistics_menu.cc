@@ -94,7 +94,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	for (Widelands::Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
-		const RGBColor& color = kPlayerColors[i];
+		const RGBColor& color = parent.game().player(i + 1).get_playercolor();
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
 		plot_.register_plot_data(i * ndatasets_ + 2, &genstats[i].nr_buildings, color);
