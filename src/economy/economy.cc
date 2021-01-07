@@ -582,8 +582,8 @@ ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base,
 					upcast(ProductionSite, ps, i);
 					assert(ps);
 					if (check_building(*ps)) {
-						const uint32_t dist = owner().egbase().map().calc_distance(
-						   base.get_position(), ps->get_position());
+						const uint32_t dist =
+						   owner().egbase().map().calc_distance(base.get_position(), ps->get_position());
 						if (dist < closest_dist) {
 							closest_dist = dist;
 							best = ps;

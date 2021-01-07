@@ -201,7 +201,8 @@ public:
 	 * buildings with all inputqueues set to zero capacity are ignored.
 	 * If no matching site is found, nullptr is returned.
 	 */
-	ProductionSite* find_closest_occupied_productionsite(const Flag&, DescriptionIndex, bool check_inputqueues);
+	ProductionSite*
+	find_closest_occupied_productionsite(const Flag&, DescriptionIndex, bool check_inputqueues);
 
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
