@@ -128,8 +128,12 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
      tab_style_(style),
      active_(0),
      highlight_(kNotFound),
-     background_style_(g_style_manager->tabpanel_style(style)) {
+     background_style_(style) {
 	set_can_focus(true);
+}
+
+inline const UI::PanelStyleInfo& TabPanel::background_style() const {
+	return *g_style_manager->tabpanel_style(background_style_);
 }
 
 std::vector<Recti> TabPanel::focus_overlay_rects() {
@@ -383,10 +387,10 @@ void TabPanel::draw(RenderTarget& dst) {
 
 	draw_background(
 	   dst, Recti(0, 0, tabs_.back()->get_x() + tabs_.back()->get_w(), kTabPanelButtonHeight - 2),
-	   *background_style_);
+	   background_style());
 	draw_background(
 	   dst, Recti(0, kTabPanelButtonHeight - 2, get_w(), get_h() - kTabPanelButtonHeight + 2),
-	   *background_style_);
+	   background_style());
 
 	// Draw the buttons
 	RGBColor black(0, 0, 0);
