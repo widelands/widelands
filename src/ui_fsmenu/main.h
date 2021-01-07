@@ -59,6 +59,9 @@ public:
 	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
 
+protected:
+	void update_template() override;
+
 private:
 	void layout() override;
 
@@ -81,8 +84,8 @@ private:
 
 	std::string filename_for_continue_playing_, filename_for_continue_editing_;
 
-	const Image& splashscreen_;
-	const Image& title_image_;
+	const Image* splashscreen_;
+	const Image* title_image_;
 
 	uint32_t init_time_;
 

@@ -330,12 +330,12 @@ void InternetLobby::fill_client_list(const std::vector<InternetClient>* clients)
 				break;
 			case kClientSuperuser:
 				pic = g_image_cache->get("images/wui/overlays/road_building_green.png");
-				er.set_font_style(g_style_manager->font_style(UI::FontStyle::kFsGameSetupSuperuser));
+				er.set_font_style(UI::FontStyle::kFsGameSetupSuperuser);
 				er.set_picture(0, pic);
 				break;
 			case kClientIRC:
 				// No icon for IRC users
-				er.set_font_style(g_style_manager->font_style(UI::FontStyle::kFsGameSetupIrcClient));
+				er.set_font_style(UI::FontStyle::kFsGameSetupIrcClient);
 				continue;
 			default:
 				continue;
