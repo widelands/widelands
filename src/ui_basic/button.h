@@ -170,7 +170,8 @@ protected:
 	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
-	const UI::ButtonStyleInfo* button_style_;  // Background color and texture. Not owned.
+	UI::ButtonStyle button_style_;  // Background color and texture.
+	const UI::ButtonStyleInfo& button_style() const;
 };
 
 }  // namespace UI

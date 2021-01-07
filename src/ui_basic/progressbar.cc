@@ -41,7 +41,11 @@ ProgressBar::ProgressBar(Panel* const parent,
      orientation_(orientation),
      state_(0),
      total_(100),
-     progress_style_(g_style_manager->progressbar_style(style)) {
+     progress_style_(style) {
+}
+
+inline const UI::ProgressbarStyleInfo& ProgressBar::progress_style() const {
+	return g_style_manager->progressbar_style(progress_style_);
 }
 
 /**
@@ -70,9 +74,9 @@ void ProgressBar::draw(RenderTarget& dst) {
 	assert(0 <= fraction);
 	assert(fraction <= 1);
 
-	const RGBColor& color = fraction <= 0.33f ? progress_style_.low_color() :
-	                                            fraction <= 0.67f ? progress_style_.medium_color() :
-	                                                                progress_style_.high_color();
+	const RGBColor& color = fraction <= 0.33f ? progress_style().low_color() :
+	                                            fraction <= 0.67f ? progress_style().medium_color() :
+	                                                                progress_style().high_color();
 
 	// Draw the actual bar
 	if (orientation_ == Horizontal) {
@@ -90,7 +94,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 
 	// Print the state in percent without decimal points.
 	std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(as_richtext_paragraph(
-	   (boost::format("%u%%") % floorf(fraction * 100.f)).str(), progress_style_.font()));
+	   (boost::format("%u%%") % floorf(fraction * 100.f)).str(), progress_style().font()));
 	Vector2i pos(get_w() / 2, get_h() / 2);
 	UI::center_vertically(rendered_text->height(), &pos);
 	rendered_text->draw(dst, pos, UI::Align::kCenter);
