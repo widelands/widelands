@@ -349,7 +349,7 @@ IF (WIN32)
     add_definitions(-D_WIN32_WINNT=0x0601 -DWIN32_LEAN_AND_MEAN -D__STDC_FORMAT_MACROS -DNOMINMAX)
     # Needed for minizip
     add_definitions(-Dor=|| -Dand=&& -Dnot=!)
-    set(SDL_EXTRA_LIBS libcharset)
+    set(SDL_EXTRA_LIBS charset)
     if (OPTION_BUILD_WINSTATIC)
       if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         wl_add_flag(TARGET_COMPILE_FLAGS "/MTd")
