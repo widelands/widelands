@@ -508,7 +508,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	// the map generator's assumptions. It is probably safer to just disable them all.
 
 	if (eia) {
-		egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
+		egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
 		eia->cleanup_for_load();
 
 		egbase.enabled_addons().clear();
@@ -564,7 +564,7 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 	}
 	log_info("\n");
 
-	const bool result = gen.create_random_map();
+	bool result = gen.create_random_map();
 
 	egbase.create_tempfile_and_save_mapdata(FileSystem::ZIP);
 
@@ -589,10 +589,20 @@ bool MainMenuNewRandomMapPanel::do_generate_map(Widelands::EditorGameBase& egbas
 		   UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 	} else {
+		const unsigned nr_players = map->get_nrplayers();
+		if (result) {
+			// Check that the starting positions are not too close
+			for (unsigned i = 1; i <= nr_players && result; ++i) {
+				for (unsigned j = 1; j < i && result; ++j) {
+					result &= (map->calc_distance(map->get_starting_pos(i), map->get_starting_pos(j)) >
+					           Widelands::kMinSpaceAroundPlayers);
+				}
+			}
+		}
+
 		if (result) {
 			// Initialize with some good default values
 
-			const unsigned nr_players = map->get_nrplayers();
 			const unsigned plnum = std::rand() % nr_players;  // NOLINT
 
 			map->set_name(_("Random Map"));

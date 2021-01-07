@@ -56,8 +56,7 @@ ProgressWindow::ProgressWindow(UI::Panel* parent,
                parent ? parent->get_inner_w() : g_gr->get_xres(),
                parent ? parent->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
-     theme_(theme),
-     progress_style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
+     theme_(theme) {
 
 	if (!parent) {
 		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
@@ -81,6 +80,10 @@ ProgressWindow::~ProgressWindow() {
 	}
 }
 
+inline const UI::ProgressbarStyleInfo& ProgressWindow::progress_style() const {
+	return g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu);
+}
+
 void ProgressWindow::draw(RenderTarget& rt) {
 	{  // Center and downscale background image
 		const Image& bg = *g_image_cache->get(background_);
@@ -94,7 +97,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * kProgressStatusPositionY / 100;
 
-	const uint32_t h = text_height(progress_style_.font());
+	const uint32_t h = text_height(progress_style().font());
 
 	label_rectangle_.x = get_w() / 6;
 	label_rectangle_.w = get_w() * 2 / 3;
@@ -107,10 +110,10 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * kProgressStatusBorderX;
 	border_rect.h += 2 * kProgressStatusBorderY;
 
-	rt.draw_rect(border_rect, progress_style_.font().color());
+	rt.draw_rect(border_rect, progress_style().font().color());
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse
 	// the Progressbar class.
-	rt.fill_rect(label_rectangle_, progress_style_.medium_color());
+	rt.fill_rect(label_rectangle_, progress_style().medium_color());
 
 	if (progress_message_) {
 		progress_message_->draw(
@@ -126,7 +129,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string& file_name) {
 	if (file_name.empty() || !g_fs->file_exists(file_name)) {
-		std::string dir = std::string(kTemplateDir) + "loadscreens/gameloading/";
+		std::string dir = template_dir() + "loadscreens/gameloading/";
 		if (theme_.empty()) {
 			// choose random theme
 			const std::set<std::string> dirs = g_fs->list_directory(dir);
@@ -167,7 +170,8 @@ void ProgressWindow::step(const std::string& description) {
 	InputCallback input_callback = {nullptr, nullptr, nullptr, ui_key, nullptr, nullptr};
 	WLApplication::get()->handle_input(&input_callback);
 
-	progress_message_ = UI::g_fh->render(as_richtext_paragraph(description, progress_style_.font()));
+	progress_message_ =
+	   UI::g_fh->render(as_richtext_paragraph(description, progress_style().font()));
 
 	do_redraw_now();
 }

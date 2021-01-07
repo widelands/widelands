@@ -102,9 +102,10 @@ private:
 	uint32_t time_nextact_;
 	int32_t knob_grabdelta_;  ///< only while pressed_ == Knob
 
-	const Image* pic_minus_;                  ///< left/up
-	const Image* pic_plus_;                   ///< right/down
-	const UI::PanelStyleInfo* button_style_;  // Background color and texture. Not owned.
+	const Image* pic_minus_;  ///< left/up
+	const Image* pic_plus_;   ///< right/down
+
+	const UI::PanelStyleInfo& button_style() const;  // Background color and texture.
 };
 }  // namespace UI
 
