@@ -933,8 +933,9 @@ void Flag::act(Game& game, uint32_t) {
 	for (auto it = flag_jobs_.begin(); it != flag_jobs_.end();) {
 		bool erase = false;
 		if (it->type == FlagJob::Type::kScout) {
-			if (ProductionSite* ps = get_economy(wwWORKER)->find_closest_occupied_productionsite(
-			       *this, owner().tribe().scouts_house())) {
+			ProductionSite* ps = get_economy(wwWORKER)->find_closest_occupied_productionsite(
+			       *this, owner().tribe().scouts_house(), true);
+			if (ps) {
 				Worker* worker = ps->working_positions()[0].worker.get(game);
 				assert(worker);
 				if (!worker->top_state().objvar1.is_set() && worker->get_location(game) == ps &&

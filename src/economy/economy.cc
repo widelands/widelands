@@ -543,38 +543,50 @@ bool Economy::has_building(const DescriptionIndex di) const {
 }
 
 ProductionSite* Economy::find_closest_occupied_productionsite(const Flag& base,
-                                                              const DescriptionIndex di) {
+                                                              const DescriptionIndex di,
+                                                              const bool check_inputqueues) {
 	const std::string& name = owner().tribe().get_building_descr(di)->name();
 	ProductionSite* best = nullptr;
 	uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
+
+	auto check_building = [this, check_inputqueues](const ProductionSite& ps) {
+		// We are only interested in buildings in this road network
+		if (ps.get_economy(type_) != this) {
+			return false;
+		}
+		// Ignore unoccupied buildings
+		if (!ps.can_start_working()) {
+			return false;
+		}
+
+		if (!check_inputqueues || ps.inputqueues().empty()) {
+			// If the caller is not interested in the input queues
+			// (or if there are none) we are satisfied.
+			return true;
+		}
+
+		for (const InputQueue* q : ps.inputqueues()) {
+			if (q->get_max_fill() > 0 && q->get_filled() > 0) {
+				// At least one input queue is filled → success
+				return true;
+			}
+		}
+		// All queues are empty
+		return false;
+	};
+
 	for (const auto& bld : owner().get_building_statistics(di)) {
 		if (!bld.is_constructionsite) {
 			if (BaseImmovable* i = owner().egbase().map()[bld.pos].get_immovable()) {
 				if (i->descr().name() == name) {
 					upcast(ProductionSite, ps, i);
 					assert(ps);
-					if (ps->get_economy(type_) == this && ps->can_start_working()) {
-						// This function is used only by Targeted Scouting code currently.
-						// We also accept stopped buildings, but as a safety check we
-						// ignore buildings whose input queues are set to zero capacity.
-						bool all_inputqueues_0 = true;
-						if (ps->inputqueues().empty()) {
-							all_inputqueues_0 = false;
-						} else {
-							for (const InputQueue* q : ps->inputqueues()) {
-								if (q->get_max_fill() > 0 && q->get_filled() > 0) {
-									all_inputqueues_0 = false;
-									break;
-								}
-							}
-						}
-						if (!all_inputqueues_0) {
-							const uint32_t dist = owner().egbase().map().calc_distance(
-							   base.get_position(), ps->get_position());
-							if (dist < closest_dist) {
-								closest_dist = dist;
-								best = ps;
-							}
+					if (check_building(*ps)) {
+						const uint32_t dist = owner().egbase().map().calc_distance(
+						   base.get_position(), ps->get_position());
+						if (dist < closest_dist) {
+							closest_dist = dist;
+							best = ps;
 						}
 					}
 				}

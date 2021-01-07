@@ -388,7 +388,12 @@ public:
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
+	// This function forces the productionsite to interrupt whatever it is doing ASAP,
+	// and start the specified program immediately afterwards. If that program expects
+	// some extra data, this data needs to be provided as the third parameter.
 	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
+	// Returns `true` if `set_next_program_override()` has been called recently
+	// and the force-started program has not terminated yet.
 	bool has_forced_state() const;
 
 protected:
