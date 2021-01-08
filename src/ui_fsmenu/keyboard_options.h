@@ -33,6 +33,8 @@ public:
 
 	void layout() override;
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 private:
 	// TabPanels with scrolling content boxes do not layout properly
 	// as box children. Therefore no main box here.

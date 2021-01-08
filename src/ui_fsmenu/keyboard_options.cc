@@ -185,6 +185,14 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	center_to_parent();
 }
 
+bool KeyboardOptions::handle_key(bool down, SDL_Keysym code) {
+	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
+		die();
+		return true;
+	}
+	return UI::Window::handle_key(down, code);
+}
+
 void KeyboardOptions::layout() {
 	if (!is_minimal()) {
 		int w, h;
