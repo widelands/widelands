@@ -54,9 +54,11 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	tabs->add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 
-	UI::Checkbox* solid_icon_backgrounds = new UI::Checkbox(main_box, UI::PanelStyle::kWui, Vector2i::zero(),
-			/** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with the same background color. Very little space is available. */
-			_("Monochrome"));
+	UI::Checkbox* solid_icon_backgrounds =
+	   new UI::Checkbox(main_box, UI::PanelStyle::kWui, Vector2i::zero(),
+	                    /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
+	                       drawn with the same background color. Very little space is available. */
+	                    _("Monochrome"));
 	solid_icon_backgrounds->changedto.connect([this](const bool b) {
 		all_wares_->set_solid_icon_backgrounds(b);
 		all_workers_->set_solid_icon_backgrounds(b);
