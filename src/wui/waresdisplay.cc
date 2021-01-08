@@ -513,11 +513,14 @@ StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
                                              const int32_t y,
                                              const Widelands::Player& p,
                                              const Widelands::WareWorker type)
-   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p) {
+   : WaresDisplay(parent, x, y, p.tribe(), type, false), player_(p), solid_icon_backgrounds_(false) {
 }
 
 RGBAColor
 StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::DescriptionIndex di) {
+	if (solid_icon_backgrounds_) {
+		return WaresDisplay::draw_ware_background_overlay(di);
+	}
 	if (get_type() == Widelands::wwWARE) {
 		if (!player_.tribe().get_ware_descr(di)->has_demand_check(player_.tribe().name())) {
 			return WaresDisplay::draw_ware_background_overlay(di);
@@ -535,7 +538,7 @@ StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::Description
 	                           amount > target ?
 	                           g_style_manager->building_statistics_style().high_color() :
 	                           g_style_manager->building_statistics_style().medium_color();
-	return RGBAColor(color.r, color.g, color.b, 50);
+	return RGBAColor(color.r, color.g, color.b, 80);
 }
 
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::DescriptionIndex /* ware */) {

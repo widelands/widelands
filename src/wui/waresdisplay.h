@@ -194,9 +194,14 @@ public:
 	                      const Widelands::Player&,
 	                      Widelands::WareWorker type);
 
+	void set_solid_icon_backgrounds(const bool s) {
+		solid_icon_backgrounds_ = s;
+	}
+
 protected:
 	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
 	const Widelands::Player& player_;
+	bool solid_icon_backgrounds_;
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
