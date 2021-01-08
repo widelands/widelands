@@ -1369,7 +1369,7 @@ void WLApplication::cleanup_ai_files() {
 /**
  * Delete old temp files that might still lurk around (game crashes etc.)
  */
-void WLApplication::cleanup_temp_files( ) {
+void WLApplication::cleanup_temp_files() {
 	for (const std::string& filename : g_fs->filter_directory(
 	        kTempFileDir,
 	        [](const std::string& fn) { return boost::ends_with(fn, kTempFileExtension); })) {
