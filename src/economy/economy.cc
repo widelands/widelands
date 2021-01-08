@@ -542,7 +542,8 @@ bool Economy::has_building(const DescriptionIndex di) const {
 	return false;
 }
 
-bool Economy::check_building_can_start_working(const ProductionSite& ps, const bool check_inputqueues) {
+bool Economy::check_building_can_start_working(const ProductionSite& ps,
+                                               const bool check_inputqueues) {
 	// We are only interested in buildings in this road network
 	if (ps.get_economy(type_) != this) {
 		return false;
