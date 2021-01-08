@@ -293,6 +293,9 @@ private:
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;
 
+	// Helper function for `find_closest_occupied_productionsite()`
+	bool check_building_can_start_working(const ProductionSite&, bool check_inputqueues);
+
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
 }  // namespace Widelands
