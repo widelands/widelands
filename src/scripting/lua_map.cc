@@ -4996,7 +4996,7 @@ int LuaFlag::get_wares(lua_State* L) {
 */
 int LuaFlag::send_geologist(lua_State* L) {
 	Widelands::Flag& f = *get(L, get_egbase(L));
-	f.get_owner()->flagaction(f);
+	f.get_owner()->flagaction(f, Widelands::FlagJob::Type::kGeologist);
 	return 0;
 }
 
