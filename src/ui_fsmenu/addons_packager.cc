@@ -696,12 +696,16 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 void AddOnsPackager::clicked_ok() {
 	if (!addons_with_changes_.empty()) {
 		std::string msg = (boost::format(ngettext(
-		   // Comments to fix codecheck false-positive
-		   "If you quit the packager now, all changes to the  following %u add-on will be discarded.",
-		   // Comments to fix codecheck false-positive
-		   "If you quit the packager now, all changes to the following %u add-ons will be discarded.",
-		   // Comments to fix codecheck false-positive
-		   addons_with_changes_.size())) % addons_with_changes_.size()).str();
+		                      // Comments to fix codecheck false-positive
+		                      "If you quit the packager now, all changes to the  following %u add-on "
+		                      "will be discarded.",
+		                      // Comments to fix codecheck false-positive
+		                      "If you quit the packager now, all changes to the following %u add-ons "
+		                      "will be discarded.",
+		                      // Comments to fix codecheck false-positive
+		                      addons_with_changes_.size())) %
+		                   addons_with_changes_.size())
+		                     .str();
 		for (const auto& str : addons_with_changes_) {
 			msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 		}
