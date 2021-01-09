@@ -848,7 +848,9 @@ static void do_recursively_create_filesystem_structure(const std::string& dir,
 		if (source_path.size() >= addon_basedir.size() &&
 		    source_path.compare(0, addon_basedir.size(), addon_basedir) == 0) {
 			assert(!backup_basedir.empty());
-			source_path = backup_basedir + source_path.substr(addon_basedir.size());
+			std::string temp = source_path.substr(addon_basedir.size());
+			source_path = backup_basedir;
+			source_path += temp;
 		}
 		assert(source_path.size() > kWidelandsMapExtension.size());
 		assert(source_path.compare(source_path.size() - kWidelandsMapExtension.size(),
