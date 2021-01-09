@@ -50,6 +50,8 @@ public:
 
 	virtual void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) = 0;
 
+	void show_watch_window(Widelands::Bob&);
+
 	bool try_show_ship_window();
 	bool is_multiplayer() {
 		return multiplayer_;
