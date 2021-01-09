@@ -491,7 +491,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	});
 
 	launch_packager_.sigclicked.connect([this, &fsmm]() {
-		AddOnsPackager a(fsmm, *this);
+		AddOnsPackager a(fsmm);
 		a.run<int>();
 
 		// Perhaps add-ons were created or deleted

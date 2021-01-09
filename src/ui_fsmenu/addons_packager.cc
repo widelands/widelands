@@ -32,8 +32,8 @@ namespace FsMenu {
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
 
-struct NewAddOnDialog : public UI::Window {
-	explicit NewAddOnDialog(UI::Panel& parent) : UI::Window(&parent, UI::WindowStyle::kFsMenu, "enter_name", 0, 0, 0, 0, _("Enter Name")),
+struct NewAddOnOrDirectoryDialog : public UI::Window {
+	explicit NewAddOnOrDirectoryDialog(UI::Panel& parent, const bool is_addon) : UI::Window(&parent, UI::WindowStyle::kFsMenu, "enter_name", 0, 0, 0, 0, _("Enter Name")),
 	box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 	buttonsbox_(&box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
 	editbox_(*new UI::EditBox(&box_, 0, 0, 200, UI::PanelStyle::kFsMenu)),
@@ -58,9 +58,11 @@ struct NewAddOnDialog : public UI::Window {
 				category_.add(pair.second.descname(), pair.first, g_image_cache->get(pair.second.icon), pair.first == AddOns::AddOnCategory::kMaps);
 			}
 		}
+		category_.set_visible(is_addon);
 
 		box_.add(new UI::Textarea(&box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-	           _("Enter the name for the new add-on.")), UI::Box::Resizing::kFullSize);
+	           is_addon ? _("Enter the name for the new add-on.") :
+	           _("Enter the name for the new directory.")), UI::Box::Resizing::kFullSize);
 		box_.add_space(kSpacing);
 		box_.add(&editbox_, UI::Box::Resizing::kFullSize);
 		box_.add_space(kSpacing);
@@ -100,7 +102,7 @@ private:
 	UI::Button ok_, cancel_;
 };
 
-AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
+AddOnsPackager::AddOnsPackager(MainMenu& parent)
 : UI::Window(&parent, UI::WindowStyle::kFsMenu, "addons_packager", 0, 0,
 		parent.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuDefault),
 		parent.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuDefault), _("Add-Ons Packager")),
@@ -308,9 +310,9 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	addons_.selected.connect([this](uint32_t) { addon_selected(); });
 	addon_new_.sigclicked.connect([this]() { clicked_new_addon(); });
 	addon_delete_.sigclicked.connect([this]() { clicked_delete_addon(); });
-	map_add_.sigclicked.connect([this]() { clicked_add_map(); });
-	map_add_dir_.sigclicked.connect([this]() { clicked_add_dir(); });
-	map_delete_.sigclicked.connect([this]() { clicked_delete_map_or_dir(); });
+	map_add_.sigclicked.connect([this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddMap); });
+	map_add_dir_.sigclicked.connect([this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddDir); });
+	map_delete_.sigclicked.connect([this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kDeleteMapOrDir); });
 	discard_changes_.sigclicked.connect([this]() { clicked_discard_changes(); });
 	write_changes_.sigclicked.connect([this]() { clicked_write_changes(); });
 	ok_.sigclicked.connect([this]() { clicked_ok(); });
@@ -379,16 +381,20 @@ void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 	addon_selected();
 }
 
-void AddOnsPackager::addon_selected() {
-	MutableAddOn* selected = nullptr;
-	if (addons_.has_selection()) {
-		for (auto& pair : mutable_addons_) {
-			if (pair.first == addons_.get_selected()) {
-				selected = &pair.second;
-				break;
-			}
+MutableAddOn* AddOnsPackager::get_selected() {
+	if (!addons_.has_selection()) {
+		return nullptr;
+	}
+	for (auto& pair : mutable_addons_) {
+		if (pair.first == addons_.get_selected()) {
+			return &pair.second;
 		}
 	}
+	NEVER_HERE();
+}
+
+void AddOnsPackager::addon_selected() {
+	MutableAddOn* selected = get_selected();
 
 	addon_delete_.set_enabled(selected);
 	box_right_subbox1_.set_visible(false);
@@ -415,23 +421,44 @@ void AddOnsPackager::addon_selected() {
 	rebuild_dirstruct(*selected);
 }
 
-void AddOnsPackager::rebuild_dirstruct(MutableAddOn& a) {
+void AddOnsPackager::rebuild_dirstruct(MutableAddOn& a, const std::vector<std::string>& select) {
 	const std::string path = kAddOnDir + FileSystem::file_separator() + a.internal_name;
+
 	dirstruct_.clear();
-	dirstruct_.add(_("<Add-On>"), path, g_image_cache->get("images/ui_basic/ls_wlscenario.png"), false, _("Top-level directory"));
-	do_recursively_rebuild_dirstruct(a.tree, 1, path);
+	dirstruct_to_tree_map_.clear();
+
+	std::vector<std::string> toplevel_entry;
+	dirstruct_to_tree_map_.push_back(toplevel_entry);
+
+	dirstruct_.add(a.internal_name, path, g_image_cache->get("images/ui_basic/ls_wlscenario.png"), toplevel_entry == select, _("Top-level directory"));
+	do_recursively_rebuild_dirstruct(a.tree, 1, path, toplevel_entry, select);
 }
 
-void AddOnsPackager::do_recursively_rebuild_dirstruct(const MutableAddOn::DirectoryTree& tree, const unsigned level, const std::string& path) {
+void AddOnsPackager::do_recursively_rebuild_dirstruct(
+													const MutableAddOn::DirectoryTree& tree,
+													const unsigned level,
+													const std::string& path,
+													const std::vector<std::string>& map_path,
+													const std::vector<std::string>& select)
+{
 	for (const auto& pair : tree.subdirectories) {
+		std::vector<std::string> entry = map_path;
+		entry.push_back(pair.first);
+		dirstruct_to_tree_map_.push_back(entry);
+
 		const std::string subdir = path + FileSystem::file_separator() + pair.first;
-		dirstruct_.add(pair.first, subdir, g_image_cache->get("images/ui_basic/ls_dir.png"), false, pair.first, "", level);
-		do_recursively_rebuild_dirstruct(pair.second, level + 1, subdir);
+		dirstruct_.add(pair.first, subdir, g_image_cache->get("images/ui_basic/ls_dir.png"), entry == select, pair.first, "", level);
+
+		do_recursively_rebuild_dirstruct(pair.second, level + 1, subdir, entry, select);
 	}
 
 	for (const auto& pair : tree.maps) {
+		std::vector<std::string> entry = map_path;
+		entry.push_back(pair.first);
+		dirstruct_to_tree_map_.push_back(entry);
+
 		dirstruct_.add(pair.first, path + FileSystem::file_separator() + pair.first,
-				g_image_cache->get("images/ui_basic/ls_wlmap.png"), false, pair.first, "", level);
+				g_image_cache->get("images/ui_basic/ls_wlmap.png"), entry == select, pair.first, "", level);
 	}
 }
 
@@ -453,7 +480,7 @@ void AddOnsPackager::current_addon_edited() {
 }
 
 void AddOnsPackager::clicked_new_addon() {
-	NewAddOnDialog n(*get_parent());
+	NewAddOnOrDirectoryDialog n(*get_parent(), true);
 	for (;;) {
 		if (n.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
@@ -492,7 +519,7 @@ void AddOnsPackager::clicked_new_addon() {
 void AddOnsPackager::clicked_delete_addon() {
 	const std::string& name = addons_.get_selected();
 
-	UI::WLMessageBox m(this, UI::WindowStyle::kFsMenu, _("Delete Add-on"), (boost::format(_("Do you really want to delete the add-on ‘%s’?")) % name).str(),
+	UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Delete Add-on"), (boost::format(_("Do you really want to delete the add-on ‘%s’?")) % name).str(),
 	                     UI::WLMessageBox::MBoxType::kOkCancel);
 	if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 		return;
@@ -506,16 +533,82 @@ void AddOnsPackager::clicked_delete_addon() {
 	rebuild_addon_list("");
 }
 
-void AddOnsPackager::clicked_add_map() {
-	// NOCOM
-}
+void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action) {
+	MutableAddOn* m = get_selected();
+	assert(m);
+	assert(m->category == AddOns::AddOnCategory::kMaps);
 
-void AddOnsPackager::clicked_add_dir() {
-	// NOCOM
-}
+	MutableAddOn::DirectoryTree* tree = &m->tree;
+	MutableAddOn::DirectoryTree* tree_parent = nullptr;
+	std::vector<std::string> select = dirstruct_to_tree_map_[dirstruct_.selection_index()];
 
-void AddOnsPackager::clicked_delete_map_or_dir() {
-	// NOCOM
+	std::string selected_map;
+	if (!select.empty() && select.back().size() >= kWidelandsMapExtension.size() && select.back().substr(select.back().size() - kWidelandsMapExtension.size()) == kWidelandsMapExtension) {
+		// Last entry is a map – pop it, we care only about directories here
+		selected_map = select.back();
+		select.pop_back();
+	}
+	for (const std::string& s : select) {
+		tree_parent = tree;
+		tree = &tree->subdirectories.at(s);
+	}
+
+	switch (action) {
+	case ModifyAction::kAddMap: {
+		const std::string& map = my_maps_.get_selected();
+		const std::string filename = FileSystem::fs_filename(map.c_str());
+		tree->maps[filename] = map;
+		select.push_back(filename);
+	} break;
+	case ModifyAction::kAddDir: {
+		NewAddOnOrDirectoryDialog n(*get_parent(), false);
+		for (;;) {
+			if (n.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+				return;
+			}
+
+			std::string name = n.text();
+
+			if (name.empty() || !FileSystem::is_legal_filename(name) ||
+					(name.size() >= kWidelandsMapExtension.size() && name.substr(name.size() - kWidelandsMapExtension.size()) == kWidelandsMapExtension)) {
+				main_menu_.show_messagebox(_("Invalid Name"), _("This name is invalid, please choose a different name."));
+				continue;
+			}
+
+			if (tree->subdirectories.find(name) != tree->subdirectories.end()) {
+				main_menu_.show_messagebox(_("Invalid Name"), _("A directory with this name already exists."));
+				continue;
+			}
+
+			tree->subdirectories[name] = MutableAddOn::DirectoryTree();
+			select.push_back(name);
+			break;
+		}
+	} break;
+	case ModifyAction::kDeleteMapOrDir: {
+		assert(!selected_map.empty() || !select.empty());
+
+		UI::WLMessageBox mbox(get_parent(), UI::WindowStyle::kFsMenu, _("Delete"),
+			selected_map.empty() ? (boost::format(_("Do you really want to delete the directory ‘%s’ and all its contents?")) % select.back()).str() :
+			(boost::format(_("Do you really want to delete the map ‘%s’?")) % selected_map).str(), UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
+		if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+			return;
+		}
+
+		if (selected_map.empty()) {
+			assert(tree_parent);
+			auto it = tree_parent->subdirectories.find(select.back());
+			assert(it != tree_parent->subdirectories.end());
+			tree_parent->subdirectories.erase(it);
+		} else {
+			auto it = tree->maps.find(selected_map);
+			assert(it != tree->maps.end());
+			tree->maps.erase(it);
+		}
+	} break;
+	}
+
+	rebuild_dirstruct(*m, select);
 }
 
 void AddOnsPackager::clicked_ok() {
@@ -528,7 +621,7 @@ void AddOnsPackager::clicked_ok() {
 			msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 		}
 
-		UI::WLMessageBox m(this, UI::WindowStyle::kFsMenu, _("Quit Packager"), msg, UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
+		UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Quit Packager"), msg, UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 			return;
 		}
@@ -547,7 +640,7 @@ void AddOnsPackager::clicked_discard_changes() {
 		msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 	}
 
-	UI::WLMessageBox m(this, UI::WindowStyle::kFsMenu, _("Discard Changes"), msg, UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
+	UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Discard Changes"), msg, UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 	if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		initialize_mutable_addons();
 	}
@@ -564,7 +657,7 @@ void AddOnsPackager::clicked_write_changes() {
 		msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 	}
 
-	UI::WLMessageBox m(this, UI::WindowStyle::kFsMenu, _("Confirm Saving"), msg, UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
+	UI::WLMessageBox m(get_parent(), UI::WindowStyle::kFsMenu, _("Confirm Saving"), msg, UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
 	if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 		std::set<std::string> errors;
 		for (const auto& pair : addons_with_changes_) {

@@ -20,8 +20,10 @@
 #ifndef WL_UI_FSMENU_ADDONS_PACKAGER_H
 #define WL_UI_FSMENU_ADDONS_PACKAGER_H
 
+#include "logic/addons.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
-#include "ui_fsmenu/addons.h"
+#include "ui_fsmenu/main.h"
 
 namespace FsMenu {
 
@@ -40,7 +42,7 @@ struct MutableAddOn {
 
 class AddOnsPackager : public UI::Window {
 public:
-	explicit AddOnsPackager(MainMenu&, AddOnsCtrl&);
+	explicit AddOnsPackager(MainMenu&);
 
 	WindowLayoutID window_layout_id() const override {
 		return UI::Window::WindowLayoutID::kFsMenuDefault;
@@ -63,11 +65,16 @@ private:
 	void initialize_mutable_addons();
 	void recursively_initialize_tree_from_disk(const std::string& dir, MutableAddOn::DirectoryTree&);
 
+	MutableAddOn* get_selected();
+
 	void rebuild_addon_list(const std::string& select);
 	void addon_selected();
-	void rebuild_dirstruct(MutableAddOn&);
+	void rebuild_dirstruct(MutableAddOn&, const std::vector<std::string>& select = {});
+	// To keep track of which selection index in `dirstruct_`
+	// refers to which point of the file system hierarchy:
+	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
 
-	void do_recursively_rebuild_dirstruct(const MutableAddOn::DirectoryTree&, unsigned level, const std::string& path);
+	void do_recursively_rebuild_dirstruct(const MutableAddOn::DirectoryTree&, unsigned level, const std::string& path, const std::vector<std::string>& map_path, const std::vector<std::string>& select);
 
 	std::map<std::string, bool /* delete this add-on */> addons_with_changes_;
 
@@ -78,11 +85,10 @@ private:
 		write_changes_.set_enabled(!addons_with_changes_.empty());
 	}
 
+	enum class ModifyAction { kAddMap, kAddDir, kDeleteMapOrDir };
+	void clicked_add_or_delete_map_or_dir(ModifyAction);
 	void clicked_new_addon();
 	void clicked_delete_addon();
-	void clicked_add_map();
-	void clicked_add_dir();
-	void clicked_delete_map_or_dir();
 	void clicked_discard_changes();
 	void clicked_write_changes();
 	void clicked_ok();
