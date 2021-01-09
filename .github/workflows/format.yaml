@@ -61,6 +61,8 @@ jobs:
         pip install pyformat
         # Use clang-format 10 as default until we choose to migrate to 11
         sudo update-alternatives --remove-all clang
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
         sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
     - name: Invoking fix_formatting.py
       run: python3 ./utils/fix_formatting.py
