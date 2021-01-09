@@ -123,6 +123,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	button_box_.add_inf_space();
 
 	display_mode_.selected.connect([this]() { fill_table(); });
+	table_.cancel.connect([this]() { die(); });
 
 	move_to_top();
 }

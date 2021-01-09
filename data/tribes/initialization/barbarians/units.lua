@@ -1796,6 +1796,7 @@ descriptions:new_tribe {
    carrier = "barbarians_carrier",
    carrier2 = "barbarians_ox",
    geologist = "barbarians_geologist",
+   scouts_house = "barbarians_scouts_hut",
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
    ferry = "barbarians_ferry",
