@@ -12,6 +12,7 @@ wl_library(economy
     ferry_fleet.h
     flag.cc
     flag.h
+    flag_job.h
     idleworkersupply.cc
     idleworkersupply.h
     iroute.h
