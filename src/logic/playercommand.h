@@ -197,10 +197,10 @@ private:
 };
 
 struct CmdFlagAction : public PlayerCommand {
-	CmdFlagAction() : PlayerCommand(), serial(0) {
+	CmdFlagAction() : PlayerCommand(), serial_(0), type_(FlagJob::Type::kGeologist) {
 	}  // For savegame loading
-	CmdFlagAction(const Time& t, const int32_t p, const Flag& f)
-	   : PlayerCommand(t, p), serial(f.serial()) {
+	CmdFlagAction(const Time& t, const int32_t p, const Flag& f, FlagJob::Type y)
+	   : PlayerCommand(t, p), serial_(f.serial()), type_(y) {
 	}
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
@@ -216,7 +216,8 @@ struct CmdFlagAction : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 private:
-	Serial serial;
+	Serial serial_;
+	FlagJob::Type type_;
 };
 
 struct CmdStartStopBuilding : public PlayerCommand {

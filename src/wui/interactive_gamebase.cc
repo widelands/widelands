@@ -42,6 +42,7 @@
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
 #include "wui/toolbar.h"
+#include "wui/watchwindow.h"
 
 namespace {
 
@@ -436,6 +437,11 @@ Widelands::Game* InteractiveGameBase::get_game() const {
 
 Widelands::Game& InteractiveGameBase::game() const {
 	return dynamic_cast<Widelands::Game&>(egbase());
+}
+
+void InteractiveGameBase::show_watch_window(Widelands::Bob& b) {
+	WatchWindow* window = ::show_watch_window(*this, b.get_position());
+	window->follow(&b);
 }
 
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {

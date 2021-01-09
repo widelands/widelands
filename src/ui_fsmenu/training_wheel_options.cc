@@ -156,17 +156,7 @@ TrainingWheelOptions::TrainingWheelOptions(Panel* parent)
 	horizontal_box->add_inf_space();
 	horizontal_box->add_space(0);
 
-	ok_button->sigclicked.connect([this]() {
-		for (const auto& checkboxinfo : checkboxes_) {
-			const bool solve = checkboxinfo.second.checkbox->get_state();
-			if (solve) {
-				training_wheels_->mark_as_solved(checkboxinfo.first, false);
-			} else {
-				training_wheels_->mark_as_unsolved(checkboxinfo.first);
-			}
-		}
-		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
-	});
+	ok_button->sigclicked.connect([this]() { clicked_ok(); });
 
 	main_box->add_space(0);
 
@@ -188,6 +178,35 @@ void TrainingWheelOptions::toggle_mark_unmark_all_button() {
 	mark_unmark_state_ = !mark_unmark_state_;
 	/** TRANSLATORS: Button label to mark or unmark all checkboxes in an options window */
 	mark_unmark_button_->set_title(mark_unmark_state_ ? _("Mark All") : _("Unmark All"));
+}
+
+void TrainingWheelOptions::clicked_ok() {
+	for (const auto& checkboxinfo : checkboxes_) {
+		const bool solve = checkboxinfo.second.checkbox->get_state();
+		if (solve) {
+			training_wheels_->mark_as_solved(checkboxinfo.first, false);
+		} else {
+			training_wheels_->mark_as_unsolved(checkboxinfo.first);
+		}
+	}
+	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
+}
+
+bool TrainingWheelOptions::handle_key(bool down, SDL_Keysym code) {
+	if (down) {
+		switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			clicked_ok();
+			return true;
+		case SDLK_ESCAPE:
+			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
+			return true;
+		default:
+			break;
+		}
+	}
+	return UI::Window::handle_key(down, code);
 }
 
 }  // namespace FsMenu
