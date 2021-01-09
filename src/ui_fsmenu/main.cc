@@ -464,6 +464,11 @@ bool MainMenu::handle_mousepress(uint8_t, int32_t, int32_t) {
 }
 
 bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
+	// Forward all keys to the open window if there is one
+	if (menu_capsule_.is_visible() && menu_capsule_.handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		bool fell_through = false;
 		if (init_time_ != kNoSplash) {
