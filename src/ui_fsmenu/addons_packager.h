@@ -27,7 +27,8 @@
 
 namespace FsMenu {
 
-// Holds abstract information about add-ons, designed to be changed quickly and later written to disk
+// Holds abstract information about add-ons, designed to be changed quickly and later written to
+// disk
 struct MutableAddOn {
 	std::string internal_name, descname, description, author, version;
 	AddOns::AddOnCategory category;
@@ -54,11 +55,13 @@ public:
 private:
 	MainMenu& main_menu_;
 
-	UI::Box main_box_, box_left_, box_right_, box_left_buttons_,
-	   box_right_subbox1_, box_right_subbox2_, box_right_subbox3_, box_right_subbox4_, box_right_subbox5_, box_right_subbox6_, box_right_buttonsbox_, box_right_bottombox_;
+	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox1_,
+	   box_right_subbox2_, box_right_subbox3_, box_right_subbox4_, box_right_subbox5_,
+	   box_right_subbox6_, box_right_buttonsbox_, box_right_bottombox_;
 	UI::EditBox name_, author_, version_;
 	UI::MultilineEditbox& descr_;
-	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_, map_add_, map_add_dir_, map_delete_;
+	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_, map_add_,
+	   map_add_dir_, map_delete_;
 	UI::Listselect<std::string> addons_, dirstruct_, my_maps_;
 
 	std::map<std::string /* internal name */, MutableAddOn> mutable_addons_;
@@ -74,7 +77,11 @@ private:
 	// refers to which point of the file system hierarchy:
 	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
 
-	void do_recursively_rebuild_dirstruct(const MutableAddOn::DirectoryTree&, unsigned level, const std::string& path, const std::vector<std::string>& map_path, const std::vector<std::string>& select);
+	void do_recursively_rebuild_dirstruct(const MutableAddOn::DirectoryTree&,
+	                                      unsigned level,
+	                                      const std::string& path,
+	                                      const std::vector<std::string>& map_path,
+	                                      const std::vector<std::string>& select);
 
 	std::map<std::string, bool /* delete this add-on */> addons_with_changes_;
 

@@ -263,39 +263,54 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"),
                   _("Move selected add-on to bottom")),
      launch_packager_(&dev_box_,
-                  "packager",
-                  0,
-                  0,
-                  0,
-                  0,
-                  UI::ButtonStyle::kFsMenuSecondary,
-                  _("Launch the add-ons packager…")) {
+                      "packager",
+                      0,
+                      0,
+                      0,
+                      0,
+                      UI::ButtonStyle::kFsMenuSecondary,
+                      _("Launch the add-ons packager…")) {
 
-	dev_box_.add(new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
-	           _("Tools for Add-Ons Developers"), UI::Align::kCenter), UI::Box::Resizing::kFullSize);
+	dev_box_.add(
+	   new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Tools for Add-Ons Developers"), UI::Align::kCenter),
+	   UI::Box::Resizing::kFullSize);
 	dev_box_.add_space(kRowButtonSize);
 	{
-		UI::MultilineTextarea* m = new UI::MultilineTextarea(&dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-			"", UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		UI::MultilineTextarea* m = new UI::MultilineTextarea(
+		   &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 		m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
-		m->set_text(_("The interactive add-ons packager allows you to create, edit, and delete add-ons. You can bundle maps designed with the Widelands Map Editor as an add-on using the graphical interface and share them with other players, without having to write a single line of code."));
+		m->set_text(_("The interactive add-ons packager allows you to create, edit, and delete "
+		              "add-ons. You can bundle maps designed with the Widelands Map Editor as an "
+		              "add-on using the graphical interface and share them with other players, "
+		              "without having to write a single line of code."));
 		dev_box_.add(m, UI::Box::Resizing::kFullSize);
 	}
 	dev_box_.add_space(kRowButtonSpacing);
 	dev_box_.add(&launch_packager_);
 	dev_box_.add_space(kRowButtonSize);
-	dev_box_.add(new UI::MultilineTextarea(&dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-			(boost::format("<rt><p>%1$s</p><vspace gap=32><p>%2$s</p></rt>")
-				% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag((boost::format(
-				_("Uploading add-ons to the server from within Widelands is not implemented yet. To upload your add-ons, please zip the add-on directory in your file browser, then open our add-on submission website %s in your browser and attach the zip file."))
-				% "<font underline=true>https://www.widelands.org/forum/topic/5073/</font>"
-				).str())
-				% g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag((boost::format(
-				_("For more information regarding how to develop and package your own add-ons, please visit %s."))
-				% "<font underline=true>https://www.widelands.org/documentation/add-ons/</font>"
-				).str())
-			).str(),
-			UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling), UI::Box::Resizing::kFullSize);
+	dev_box_.add(
+	   new UI::MultilineTextarea(
+	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      (boost::format("<rt><p>%1$s</p><vspace gap=32><p>%2$s</p></rt>") %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             (boost::format(_("Uploading add-ons to the server from within Widelands is not "
+	                              "implemented yet. To upload your add-ons, please zip the add-on "
+	                              "directory in your file browser, then open our add-on submission "
+	                              "website %s in your browser and attach the zip file.")) %
+	              "<font underline=true>https://www.widelands.org/forum/topic/5073/</font>")
+	                .str()) %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             (boost::format(_("For more information regarding how to develop and package your "
+	                              "own add-ons, please visit %s.")) %
+	              "<font underline=true>https://www.widelands.org/documentation/add-ons/</font>")
+	                .str()))
+	         .str(),
+	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
 
 	installed_addons_buttons_box_.add(&move_top_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
@@ -620,28 +635,29 @@ void AddOnsCtrl::refresh_remotes() {
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
 		const std::string bug = _("a networking bug");
 		const std::string err = (boost::format(_("Unable to fetch the list of available add-ons from "
-			                           "the server!<br>Error Message: %s")) % e.what()).str();
-		remotes_ = {AddOns::AddOnInfo{
-		   "",
-		   title,
-		   err,
-		   bug,
-		   [title]() { return title; },
-		   [err]() { return err; },
-		   [bug]() { return bug; },
-		   {},
-		   0,
-		   AddOns::AddOnCategory::kNone,
-		   {},
-		   false,
-		   {{}, {}, {}, {}},
-		   0,
-		   bug,
-		   std::time(nullptr),
-		   0,
-		   0,
-		   0.f,
-		   {}}};
+		                                         "the server!<br>Error Message: %s")) %
+		                         e.what())
+		                           .str();
+		remotes_ = {AddOns::AddOnInfo{"",
+		                              title,
+		                              err,
+		                              bug,
+		                              [title]() { return title; },
+		                              [err]() { return err; },
+		                              [bug]() { return bug; },
+		                              {},
+		                              0,
+		                              AddOns::AddOnCategory::kNone,
+		                              {},
+		                              false,
+		                              {{}, {}, {}, {}},
+		                              0,
+		                              bug,
+		                              std::time(nullptr),
+		                              0,
+		                              0,
+		                              0.f,
+		                              {}}};
 	}
 	rebuild();
 }

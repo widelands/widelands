@@ -189,7 +189,8 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	         const std::string& hotkey = std::string(),
 	         const unsigned indent = 0) {
 		entry_cache_.push_back(value);
-		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey, indent);
+		BaseListselect::add(
+		   name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey, indent);
 	}
 
 	const Entry& operator[](uint32_t const i) const {

@@ -409,7 +409,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent : kIndentStrength * er.indent + 1,
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ?
+			                     get_eff_w() - er.pic->width() - 1 - kIndentStrength * er.indent :
+			                     kIndentStrength * er.indent + 1,
 			                  y + (lineheight_ - er.pic->height()) / 2),
 			         er.pic);
 		}
