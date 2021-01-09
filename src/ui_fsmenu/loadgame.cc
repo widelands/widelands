@@ -22,8 +22,10 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "build_info.h"
 #include "logic/replay.h"
 #include "logic/replay_game_controller.h"
+#include "ui_basic/messagebox.h"
 #include "ui_fsmenu/main.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -151,6 +153,15 @@ void LoadGame::clicked_ok() {
 				callback_on_ok_(gamedata->filename);
 				die();
 				return;
+			}
+
+			if (is_replay_ && gamedata->version != build_id()) {
+				UI::WLMessageBox w(&capsule_.menu(), UI::WindowStyle::kFsMenu, _("Version Mismatch"),
+				_("This replay was created with a different Widelands version. It might be compatible, but will more likely desync or even fail to load.\n\nPlease do not report any bugs that occur while watching this replay.\n\nDo you want to load the replay anyway?"),
+							       UI::WLMessageBox::MBoxType::kOkCancel);
+				if (w.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
+					return;
+				}
 			}
 
 			capsule_.set_visible(false);
