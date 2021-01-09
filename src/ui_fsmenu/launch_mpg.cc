@@ -74,6 +74,7 @@ LaunchMPG::LaunchMPG(MenuCapsule& fsmm,
      game_(g) {
 
 	help_button_.sigclicked.connect([this]() { help_clicked(); });
+	chat_->aborted.connect([this]() { die(); });
 
 	if (settings_.can_change_map()) {
 		map_details_.set_map_description_text(_("Please select a map or saved game."));

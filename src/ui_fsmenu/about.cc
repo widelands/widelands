@@ -76,7 +76,7 @@ bool About::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 		case SDLK_ESCAPE:
-			end_modal<MenuTarget>(MenuTarget::kBack);
+			die();
 			return true;
 		default:
 			break;

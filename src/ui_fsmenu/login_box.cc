@@ -122,6 +122,8 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
 
 	eb_nickname_.cancel.connect([this]() { clicked_back(); });
 	eb_password_.cancel.connect([this]() { clicked_back(); });
+	eb_nickname_.ok.connect([this]() { clicked_ok(); });
+	eb_password_.ok.connect([this]() { clicked_ok(); });
 
 	initialization_complete();
 }

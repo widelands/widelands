@@ -231,6 +231,12 @@ void MenuCapsule::draw(RenderTarget& r) {
 }
 
 bool MenuCapsule::handle_key(bool down, SDL_Keysym sym) {
+	if (!visible_menus_.empty()) {
+		if (visible_menus_.back().panel->handle_key(down, sym)) {
+			return true;
+		}
+	}
+
 	UI::Window::handle_key(down, sym);
 	// consume all events to prevent triggering hotkeys by accident
 	return true;
