@@ -19,13 +19,19 @@
 
 #include "ui_fsmenu/addons_packager.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
+#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/filewrite.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
+#include "map_io/map_elemental_packet.h"
 #include "ui_basic/messagebox.h"
+#include "wlapplication.h"
 
 namespace FsMenu {
 
@@ -493,7 +499,7 @@ void AddOnsPackager::clicked_new_addon() {
 			continue;
 		}
 
-		if (name.size() <= kAddOnExtension.size() || name.substr(name.size() - kAddOnExtension.size()) != kAddOnExtension) {
+		if (name.size() <= kAddOnExtension.size() || name.compare(name.size() - kAddOnExtension.size(), kAddOnExtension.size(), kAddOnExtension) != 0) {
 			// Ensure add-on names always end with '.wad'
 			name += kAddOnExtension;
 			// The name was legal before, so it should be so still
@@ -502,6 +508,11 @@ void AddOnsPackager::clicked_new_addon() {
 
 		if (mutable_addons_.find(name) != mutable_addons_.end()) {
 			main_menu_.show_messagebox(_("Invalid Name"), _("An add-on with this internal name already exists."));
+			continue;
+		}
+		if (addons_with_changes_.find(name) != addons_with_changes_.end()) {
+			main_menu_.show_messagebox(_("Invalid Name"),
+					_("An add-on with this internal name was deleted recently. Please commit your changes before using this name again."));
 			continue;
 		}
 
@@ -543,7 +554,7 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 	std::vector<std::string> select = dirstruct_to_tree_map_[dirstruct_.selection_index()];
 
 	std::string selected_map;
-	if (!select.empty() && select.back().size() >= kWidelandsMapExtension.size() && select.back().substr(select.back().size() - kWidelandsMapExtension.size()) == kWidelandsMapExtension) {
+	if (!select.empty() && select.back().size() >= kWidelandsMapExtension.size() && select.back().compare(select.back().size() - kWidelandsMapExtension.size(), kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0) {
 		// Last entry is a map – pop it, we care only about directories here
 		selected_map = select.back();
 		select.pop_back();
@@ -570,7 +581,7 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 			std::string name = n.text();
 
 			if (name.empty() || !FileSystem::is_legal_filename(name) ||
-					(name.size() >= kWidelandsMapExtension.size() && name.substr(name.size() - kWidelandsMapExtension.size()) == kWidelandsMapExtension)) {
+					(name.size() >= kWidelandsMapExtension.size() && name.compare(name.size() - kWidelandsMapExtension.size(), kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0)) {
 				main_menu_.show_messagebox(_("Invalid Name"), _("This name is invalid, please choose a different name."));
 				continue;
 			}
@@ -608,6 +619,8 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 	} break;
 	}
 
+	addons_with_changes_[m->internal_name] = false;
+	check_for_unsaved_changes();
 	rebuild_dirstruct(*m, select);
 }
 
@@ -680,6 +693,75 @@ void AddOnsPackager::clicked_write_changes() {
 		for (const std::string& e : errors) {
 			addons_with_changes_[e] = false;
 		}
+		check_for_unsaved_changes();
+
+		// Update the global catalogue
+		WLApplication::initialize_g_addons();
+	}
+}
+
+static void parse_map_requirements(const MutableAddOn::DirectoryTree& tree, std::vector<std::string>& req) {
+	for (const auto& pair : tree.subdirectories) {
+		parse_map_requirements(pair.second, req);
+	}
+
+	// Place to save temp data
+	Widelands::Map map;
+	Widelands::MapElementalPacket packet;
+
+	for (const auto& pair : tree.maps) {
+		std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(pair.second));
+		assert(fs);
+
+		packet.pre_read(*fs, &map);
+
+		for (const auto& r : map.required_addons()) {
+			if (std::find(req.begin(), req.end(), r.first) == req.end()) {
+				req.push_back(r.first);
+			}
+		}
+	}
+}
+
+static void do_recursively_copy_file_or_directory(const std::string& source, const std::string& dest) {
+	if (g_fs->is_directory(source)) {
+		g_fs->ensure_directory_exists(dest);
+		for (const std::string& file : g_fs->list_directory(source)) {
+			do_recursively_copy_file_or_directory(file, dest + FileSystem::file_separator() + FileSystem::fs_filename(file.c_str()));
+		}
+	} else {
+		FileRead fr;
+		fr.open(*g_fs, source);
+		const size_t bytes = fr.get_size();
+		std::unique_ptr<char[]> data(new char[bytes]);
+		fr.data_complete(data.get(), bytes);
+
+		FileWrite fw;
+		fw.data(data.get(), bytes);
+		fw.write(*g_fs, dest);
+	}
+}
+
+static void do_recursively_create_filesystem_structure(const std::string& dir, const MutableAddOn::DirectoryTree& tree, const std::string& addon_basedir, const std::string& backup_basedir) {
+	// Dirs
+	for (const auto& pair : tree.subdirectories) {
+		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
+		g_fs->ensure_directory_exists(subdir);
+		do_recursively_create_filesystem_structure(subdir, pair.second, addon_basedir, backup_basedir);
+	}
+
+	// Maps
+	for (const auto& pair : tree.maps) {
+		// If the filepath starts with the add-on's path, we need to use the backup instead
+		std::string source_path = pair.second;
+		if (source_path.size() >= addon_basedir.size() && source_path.compare(0, addon_basedir.size(), addon_basedir) == 0) {
+			assert(!backup_basedir.empty());
+			source_path = backup_basedir + source_path.substr(addon_basedir.size());
+		}
+		assert(source_path.size() > kWidelandsMapExtension.size());
+		assert(source_path.compare(source_path.size() - kWidelandsMapExtension.size(), kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0);
+
+		do_recursively_copy_file_or_directory(source_path, dir + FileSystem::file_separator() + pair.first);
 	}
 }
 
@@ -701,31 +783,55 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 
 	const bool is_map = m.category == AddOns::AddOnCategory::kMaps;
 	const std::string directory = kAddOnDir + FileSystem::file_separator() + m.internal_name;
-	const bool dir_exists = g_fs->file_exists(directory);
+	bool dir_exists = g_fs->file_exists(directory);
 	const std::string profile_path = directory + FileSystem::file_separator() + kAddOnMainFile;
 
-	// Step 1: If the add-on exists on disk already and our add-on is of type Map Set,
-	// make a backup copy of the whole original add-on in ~/.widelands/temp, then
-	// delete the original add-on directory and create it anew.
-	if (is_map && dir_exists) {
-		// NOCOM create backup and delete original
+	// Step 1: Gather the requirements of all contained maps
+	std::string requires;
+	if (is_map) {
+		std::vector<std::string> req;
+		try {
+			parse_map_requirements(m.tree, req);
+		} catch (const WException& e) {
+			main_menu_.show_messagebox(_("Invalid Map File"),
+					(boost::format(_("The add-on ‘%1$s’ can not be saved because a map file is invalid.\n\nError message:\n%2$s"))
+					% addon % e.what()).str());
+			return false;
+		}
+		if (const size_t nr = req.size()) {
+			requires = req[0];
+			for (size_t i = 1; i < nr; ++i) {
+				requires += ',';
+				requires += req[i];
+			}
+		}
 	}
 
-	// Step 2: Create the `addon` file.
+	// Step 2: If the add-on exists on disk already and our add-on is of type Map Set,
+	// make a backup copy of the whole original add-on in ~/.widelands/temp, then
+	// delete the original add-on directory and create it anew.
+	std::string backup_path;
+	if (is_map && dir_exists) {
+		backup_path = kTempFileDir + FileSystem::file_separator() + m.internal_name + kTempFileExtension;
+		if (g_fs->file_exists(backup_path)) {
+			g_fs->fs_unlink(backup_path);
+		}
+		g_fs->fs_rename(directory, backup_path);
+		dir_exists = false;
+	}
+
+	// Step 3: Create the `addon` file.
 	// · If our add-on is not a map set, we need to read the original `addon` file (if it
 	//   exists) to determine the requirements. Then write the file, and we are done.
 	// · For maps, we need to gather the information regarding the maps' required add-ons
 	//   before writing the profile so we can generate the correct `requires` string.
 	g_fs->ensure_directory_exists(directory);
-	std::string requires;
-	if (is_map) {
-		// NOCOM parse requirements
-	}
 	// Write profile
 	{
 		Profile p;
 		if (dir_exists && !is_map) {
 			p.read(profile_path.c_str());
+			requires = p.get_safe_section("global").get_safe_string("requires");
 		}
 		Section& s = p.create_section("global");
 
@@ -734,20 +840,22 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 		s.set_translated_string("author", m.author);
 		s.set_string("version", m.version);
 		s.set_string("category", AddOns::kAddOnCategories.at(m.category).internal_name);
-		if (dir_exists && !is_map) {
-			s.set_string("requires", requires);
-		}
+		s.set_string("requires", requires);
 
 		p.write(profile_path.c_str(), false);
 	}
 
-	// Map Sets only:
-	// · Step 3: Create the directory structure
-	// · Step 4: Copy the maps
-	// · Step 5: Delete the backup (if it exists)
+	if (!is_map) {
+		return true;
+	}
 
-	// NOCOM
-	NEVER_HERE();
+	// Step 4: Create the directory structure and copy the maps
+	do_recursively_create_filesystem_structure(directory, m.tree, directory, backup_path);
+
+	// Step 5: Delete the backup (if it existed)
+	if (!backup_path.empty()) {
+		g_fs->fs_unlink(backup_path);
+	}
 
 	return true;
 }

@@ -401,44 +401,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", "menu");
 	g_sh->register_songs("music", "ingame");
 
-	if (g_fs->is_directory(kAddOnDir)) {
-		std::set<std::string> found;
-		for (std::string desired_addons = get_config_string("addons", ""); !desired_addons.empty();) {
-			const size_t commapos = desired_addons.find(',');
-			const std::string substring = desired_addons.substr(0, commapos);
-			const size_t colonpos = desired_addons.find(':');
-			if (colonpos == std::string::npos) {
-				log_warn("Ignoring malformed add-ons config substring '%s'\n", substring.c_str());
-			} else {
-				const std::string name = substring.substr(0, colonpos);
-				if (name.find(kAddOnExtension) != name.length() - kAddOnExtension.length()) {
-					log_warn("Not loading add-on '%s' (wrong file name extension)\n", name.c_str());
-				} else {
-					std::string path(kAddOnDir);
-					path += FileSystem::file_separator();
-					path += name;
-					if (g_fs->file_exists(path)) {
-						found.insert(name);
-						AddOns::g_addons.push_back(std::make_pair(
-						   AddOns::preload_addon(name), substring.substr(colonpos) == ":true"));
-					} else {
-						log_warn("Not loading add-on '%s' (not found)\n", name.c_str());
-					}
-				}
-			}
-			if (commapos == std::string::npos) {
-				break;
-			}
-			desired_addons = desired_addons.substr(commapos + 1);
-		}
-		for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
-			std::string addon_name(FileSystem::fs_filename(name.c_str()));
-			if (!found.count(addon_name) &&
-			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
-				AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(addon_name), false));
-			}
-		}
-	}
+	initialize_g_addons();
 
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to
@@ -489,6 +452,48 @@ WLApplication::~WLApplication() {
 	}
 
 	SDL_Quit();
+}
+
+void WLApplication::initialize_g_addons() {
+	AddOns::g_addons.clear();
+	if (g_fs->is_directory(kAddOnDir)) {
+		std::set<std::string> found;
+		for (std::string desired_addons = get_config_string("addons", ""); !desired_addons.empty();) {
+			const size_t commapos = desired_addons.find(',');
+			const std::string substring = desired_addons.substr(0, commapos);
+			const size_t colonpos = desired_addons.find(':');
+			if (colonpos == std::string::npos) {
+				log_warn("Ignoring malformed add-ons config substring '%s'\n", substring.c_str());
+			} else {
+				const std::string name = substring.substr(0, colonpos);
+				if (name.find(kAddOnExtension) != name.length() - kAddOnExtension.length()) {
+					log_warn("Not loading add-on '%s' (wrong file name extension)\n", name.c_str());
+				} else {
+					std::string path(kAddOnDir);
+					path += FileSystem::file_separator();
+					path += name;
+					if (g_fs->file_exists(path)) {
+						found.insert(name);
+						AddOns::g_addons.push_back(std::make_pair(
+						   AddOns::preload_addon(name), substring.substr(colonpos) == ":true"));
+					} else {
+						log_warn("Not loading add-on '%s' (not found)\n", name.c_str());
+					}
+				}
+			}
+			if (commapos == std::string::npos) {
+				break;
+			}
+			desired_addons = desired_addons.substr(commapos + 1);
+		}
+		for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
+			std::string addon_name(FileSystem::fs_filename(name.c_str()));
+			if (!found.count(addon_name) &&
+			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
+				AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(addon_name), false));
+			}
+		}
+	}
 }
 
 /**

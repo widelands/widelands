@@ -137,6 +137,8 @@ struct WLApplication {
 
 	void run();
 
+	static void initialize_g_addons();
+
 	/// \warning true if an external entity wants us to quit
 	bool should_die() const {
 		return should_die_;

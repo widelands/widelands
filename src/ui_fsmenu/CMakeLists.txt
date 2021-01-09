@@ -68,6 +68,7 @@ wl_library(ui_fsmenu
     graphic_surface
     graphic_text
     graphic_text_layout
+    io_fileread
     io_filesystem
     io_profile
     logic
@@ -79,6 +80,7 @@ wl_library(ui_fsmenu
     logic_single_player_game_settings
     logic_training_wheels
     logic_tribe_basic_info
+    map_io
     map_io_map_loader
     network
     scripting_coroutine
