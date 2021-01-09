@@ -36,6 +36,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
+class ProductionSite;
 struct RSPairStruct;
 struct Route;
 struct Router;
@@ -191,6 +192,18 @@ public:
 		return wares_or_workers_;
 	}
 
+	// Checks whether this economy contains a building of the specified type
+	bool has_building(DescriptionIndex) const;
+	/**
+	 * Of all occupied ProductionSites of the specified type in this economy,
+	 * find the one that is closest to the specified flag and return it.
+	 * Stopped buildings are also accepted. If `check_inputqueues` is `true`,
+	 * buildings with all inputqueues set to zero capacity are ignored.
+	 * If no matching site is found, nullptr is returned.
+	 */
+	ProductionSite*
+	find_closest_occupied_productionsite(const Flag&, DescriptionIndex, bool check_inputqueues);
+
 	///< called by \ref Cmd_Call_Economy_Balance
 	void balance(uint32_t timerid);
 
@@ -279,6 +292,9 @@ private:
 
 	// 'list' of unique providers
 	std::map<UniqueDistance, Supply*> available_supplies_;
+
+	// Helper function for `find_closest_occupied_productionsite()`
+	bool check_building_can_start_working(const ProductionSite&, bool check_inputqueues);
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
