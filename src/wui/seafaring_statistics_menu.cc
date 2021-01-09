@@ -29,7 +29,6 @@
 #include "ui_basic/box.h"
 #include "wui/interactive_player.h"
 #include "wui/shipwindow.h"
-#include "wui/watchwindow.h"
 
 inline InteractivePlayer& SeafaringStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -483,9 +482,7 @@ void SeafaringStatisticsMenu::center_view() {
 
 void SeafaringStatisticsMenu::watch_ship() {
 	if (table_.has_selection()) {
-		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
-		WatchWindow* window = show_watch_window(iplayer(), ship->get_position());
-		window->follow(ship);
+		iplayer().show_watch_window(*serial_to_ship(table_.get_selected()));
 	}
 }
 
