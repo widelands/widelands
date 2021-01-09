@@ -37,6 +37,7 @@ protected:
 	void think() override;
 	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 	void evict_worker();
+	void clicked_watch() override;
 
 private:
 	void update_worker_table(Widelands::ProductionSite* production_site);

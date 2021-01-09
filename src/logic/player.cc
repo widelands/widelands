@@ -404,6 +404,14 @@ void Player::update_team_players() {
 	update_team_vision_whole_map();
 }
 
+void Player::show_watch_window(Game& game, Bob& b) {
+	if (InteractivePlayer* const iplayer = game.get_ipl()) {
+		if (&iplayer->player() == this) {
+			iplayer->show_watch_window(b);
+		}
+	}
+}
+
 /*
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
@@ -1062,9 +1070,9 @@ void Player::enhance_or_dismantle(Building* building,
 Perform an action on the given flag.
 ===============
 */
-void Player::flagaction(Flag& flag) {
+void Player::flagaction(Flag& flag, FlagJob::Type t) {
 	if (flag.get_owner() == this) {  //  Additional security check.
-		flag.add_flag_job(dynamic_cast<Game&>(egbase()), tribe().geologist(), "expedition");
+		flag.add_flag_job(dynamic_cast<Game&>(egbase()), t);
 	}
 }
 
