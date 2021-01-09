@@ -38,6 +38,11 @@
 const std::string& template_dir();
 void set_template_dir(std::string);
 
+// Load the specified image. If it does not exist,
+// print a warning and use a fallback image.
+// `path` is relative to the template directory.
+const Image& load_safe_template_image(const std::string& path);
+
 class StyleManager {
 public:
 	// Only create after ImageCache has been initialized.
