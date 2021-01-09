@@ -131,7 +131,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 void ProgressWindow::set_background(const std::string& file_name) {
 	if (file_name.empty() || !g_fs->file_exists(file_name)) {
 		std::string dir = template_dir() + "loadscreens/gameloading/";
-		if (theme_.empty()) {
+		if (theme_.empty() && g_fs->is_directory(dir)) {
 			// choose random theme
 			const std::set<std::string> dirs = g_fs->list_directory(dir);
 			auto it = dirs.begin();

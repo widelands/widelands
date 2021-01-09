@@ -79,8 +79,6 @@ Required Files
 **loadscreens/editor.png**
     The splash screen shown when starting the map editor.
 
-If any of the above images is missing, a fallback image will be used.
-
 **loadscreens/mainmenu/**
     Any number of images that will be used as backgrounds for the main menu. If more than one
     image is present, they will be exchanged in frequent intervals. If no images are found,
@@ -92,6 +90,8 @@ If any of the above images is missing, a fallback image will be used.
     a random image from the subdirectory corresponding to the map's theme will be used as
     background image for the loading screen. If a theme contains no images, the Widelands logo
     will be used as background instead.
+
+If any of the above images or directories is missing, a fallback image will be used.
 
 **wui/** and **fsmenu/**
     These directories contain images for UI elements for items in the game and editor ('wui') and

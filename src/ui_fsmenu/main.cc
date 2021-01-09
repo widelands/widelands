@@ -229,7 +229,7 @@ void MainMenu::update_template() {
 	}
 	if (images_.empty()) {
 		log_warn("No main menu backgrounds found, using fallback image");
-		images_.push_back(template_dir() + "loadscreens/splash.jpg");
+		images_.push_back("images/logos/wl-ico-128.png");
 	}
 
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
