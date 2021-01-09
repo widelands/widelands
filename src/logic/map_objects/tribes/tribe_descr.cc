@@ -155,6 +155,7 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      ship_(Widelands::INVALID_INDEX),
      ferry_(Widelands::INVALID_INDEX),
      port_(Widelands::INVALID_INDEX),
+     scouts_house_(Widelands::INVALID_INDEX),
      initializations_(info.initializations) {
 	log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums");
@@ -505,6 +506,9 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 	if (table.has_key("port")) {
 		port_ = add_special_building(table.get_string("port"), descriptions);
 	}
+	if (table.has_key("scouts_house")) {
+		scouts_house_ = add_special_building(table.get_string("scouts_house"), descriptions);
+	}
 }
 
 /**
@@ -638,6 +642,10 @@ DescriptionIndex TribeDescr::ship() const {
 DescriptionIndex TribeDescr::port() const {
 	assert(descriptions_.building_exists(port_));
 	return port_;
+}
+DescriptionIndex TribeDescr::scouts_house() const {
+	assert(descriptions_.building_exists(scouts_house_));
+	return scouts_house_;
 }
 DescriptionIndex TribeDescr::ferry() const {
 	assert(descriptions_.worker_exists(ferry_));
@@ -777,6 +785,9 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 	}
 	if (port_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special building 'port' not defined");
+	}
+	if (scouts_house_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special building 'scouts_house' not defined");
 	}
 	if (ship_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special unit 'ship' not defined");
