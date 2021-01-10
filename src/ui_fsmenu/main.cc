@@ -25,6 +25,7 @@
 #include <SDL_timer.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/random.h"
 #include "build_info.h"
 #include "editor/editorinteractive.h"
@@ -219,12 +220,16 @@ MainMenu::MainMenu(const bool skip_init)
 void MainMenu::update_template() {
 	UI::Panel::update_template();
 
-	splashscreen_ = g_image_cache->get(template_dir() + "loadscreens/splash.jpg");
-	title_image_ = g_image_cache->get(template_dir() + "loadscreens/logo.png");
+	splashscreen_ = &load_safe_template_image("loadscreens/splash.jpg");
+	title_image_ = &load_safe_template_image("loadscreens/logo.png");
 
 	images_.clear();
 	for (const std::string& img : g_fs->list_directory(template_dir() + "loadscreens/mainmenu")) {
 		images_.push_back(img);
+	}
+	if (images_.empty()) {
+		log_warn("No main menu backgrounds found, using fallback image");
+		images_.push_back("images/logos/wl-ico-128.png");
 	}
 
 	last_image_ = draw_image_ = std::rand() % images_.size();  // NOLINT
@@ -466,6 +471,11 @@ bool MainMenu::handle_mousepress(uint8_t, int32_t, int32_t) {
 }
 
 bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
+	// Forward all keys to the open window if there is one
+	if (menu_capsule_.is_visible() && menu_capsule_.handle_key(down, code)) {
+		return true;
+	}
+
 	if (down) {
 		bool fell_through = false;
 		if (init_time_ != kNoSplash) {
@@ -611,9 +621,11 @@ void MainMenu::draw(RenderTarget& r) {
 	assert(time >= last_image_exchange_time_);
 	if (time - last_image_exchange_time_ > kImageExchangeInterval) {
 		last_image_ = draw_image_;
-		do {
-			draw_image_ = std::rand() % images_.size();  // NOLINT
-		} while (draw_image_ == last_image_);
+		if (images_.size() > 1) {
+			do {
+				draw_image_ = std::rand() % images_.size();  // NOLINT
+			} while (draw_image_ == last_image_);
+		}
 		last_image_exchange_time_ = time;
 	}
 

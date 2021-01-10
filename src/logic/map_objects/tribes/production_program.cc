@@ -993,6 +993,9 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 	ProductionSite::State& state = psite.top_state();
 	if (state.phase == ProgramResult::kNone) {
 		worker.start_task_program(game, program());
+		if (state.flags & ProductionSite::State::StateFlags::kStateFlagHasExtraData) {
+			worker.top_state().objvar1 = state.objvar;
+		}
 		state.phase = ProgramResult::kFailed;
 		return true;
 	}

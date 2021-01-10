@@ -39,6 +39,8 @@ class TrainingWheelOptions : public UI::Window {
 public:
 	explicit TrainingWheelOptions(Panel* parent);
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 private:
 	struct Entry {
 		explicit Entry(const Widelands::TrainingWheels::TrainingWheel& init_training_wheel,
@@ -51,6 +53,8 @@ private:
 		const bool initial_state;
 		UI::Checkbox* checkbox;
 	};
+
+	void clicked_ok();
 
 	void toggle_mark_unmark_all_button();
 
