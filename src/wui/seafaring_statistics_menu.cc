@@ -210,16 +210,16 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 			   switch (note.action) {
 			   case Widelands::NoteShip::Action::kDestinationChanged:
 			   case Widelands::NoteShip::Action::kWaitingForCommand:
+			   case Widelands::NoteShip::Action::kNoPortLeft:
 			   case Widelands::NoteShip::Action::kGained:
 				   assert(note.ship != nullptr);
 				   update_ship(*note.ship);
-				   break;
+				   return;
 			   case Widelands::NoteShip::Action::kLost:
 				   remove_ship(note.ship->serial());
-				   break;
-			   default:
-				   NEVER_HERE();
+				   return;
 			   }
+			   NEVER_HERE();
 		   }
 	   });
 
