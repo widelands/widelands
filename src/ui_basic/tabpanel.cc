@@ -62,35 +62,13 @@ Tab::Tab(TabPanel* const tab_parent,
      parent(tab_parent),
      id(tab_id),
      pic(init_pic),
-     font_style_(style),
      rendered_title(nullptr),
      tooltip(tooltip_text),
      panel(contents) {
-	set_title(init_title);
-}
-
-void Tab::set_title(const std::string& init_title) {
-	if (init_title.empty()) {
-		rendered_title = nullptr;
-	} else {
-		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, font_style_));
-		const int16_t old_w = get_w();
+	if (!init_title.empty()) {
+		rendered_title = UI::g_fh->render(as_richtext_paragraph(init_title, style));
 		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
 		         kTabPanelButtonHeight);
-		const int16_t new_w = get_w();
-		if (old_w == new_w) {
-			return;
-		}
-		TabPanel& t = dynamic_cast<TabPanel&>(*get_parent());
-		bool found_self = false;
-		for (Tab* tab : t.tabs()) {
-			if (tab == this) {
-				assert(!found_self);
-				found_self = true;
-			} else if (found_self) {
-				tab->set_pos(Vector2i(tab->get_x() + new_w - old_w, tab->get_y()));
-			}
-		}
 	}
 }
 
@@ -128,12 +106,8 @@ TabPanel::TabPanel(Panel* const parent, UI::TabPanelStyle style)
      tab_style_(style),
      active_(0),
      highlight_(kNotFound),
-     background_style_(style) {
+     background_style_(g_style_manager->tabpanel_style(style)) {
 	set_can_focus(true);
-}
-
-inline const UI::PanelStyleInfo& TabPanel::background_style() const {
-	return *g_style_manager->tabpanel_style(background_style_);
 }
 
 std::vector<Recti> TabPanel::focus_overlay_rects() {
@@ -387,10 +361,10 @@ void TabPanel::draw(RenderTarget& dst) {
 
 	draw_background(
 	   dst, Recti(0, 0, tabs_.back()->get_x() + tabs_.back()->get_w(), kTabPanelButtonHeight - 2),
-	   background_style());
+	   *background_style_);
 	draw_background(
 	   dst, Recti(0, kTabPanelButtonHeight - 2, get_w(), get_h() - kTabPanelButtonHeight + 2),
-	   background_style());
+	   *background_style_);
 
 	// Draw the buttons
 	RGBColor black(0, 0, 0);

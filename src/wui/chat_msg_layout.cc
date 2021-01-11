@@ -61,19 +61,21 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 			                  (boost::format("%s @%s: ") % sender_escaped % recipient_escaped).str()) +
 			   g_style_manager->font_style(UI::FontStyle::kChatWhisper).as_font_tag(sanitized);
 		} else {
-			message = as_playercolor(
-			             chat_message.playern,
-			             ((boost::format("@%s: %s") % recipient_escaped % sender_escaped).str())) +
-			          g_style_manager->font_style(UI::FontStyle::kChatWhisper)
-			             .as_font_tag(sanitized.substr(3));
+			message = message =
+			   as_playercolor(
+			      chat_message.playern,
+			      ((boost::format("@%s: %s") % recipient_escaped % sender_escaped).str())) +
+			   g_style_manager->font_style(UI::FontStyle::kChatWhisper)
+			      .as_font_tag(sanitized.substr(3));
 		}
 	} else {
 		// Normal messages handling
 		if (!sanitized.compare(0, 3, "/me")) {
-			message = as_playercolor(chat_message.playern,
-			                         (chat_message.sender.empty() ? "***" : sender_escaped)) +
-			          g_style_manager->font_style(UI::FontStyle::kChatMessage)
-			             .as_font_tag(sanitized.substr(3));
+			message = message =
+			   as_playercolor(
+			      chat_message.playern, (chat_message.sender.empty() ? "***" : sender_escaped)) +
+			   g_style_manager->font_style(UI::FontStyle::kChatMessage)
+			      .as_font_tag(sanitized.substr(3));
 		} else if (!chat_message.sender.empty()) {
 			const std::string sender_formatted =
 			   as_playercolor(chat_message.playern, (boost::format("%s:") % sender_escaped).str());

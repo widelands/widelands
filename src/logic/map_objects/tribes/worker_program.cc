@@ -360,7 +360,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	}
 
 	if (act->iparam2 >= 0) {
-		collected_attributes_.insert(
+		needed_attributes_.insert(
 		   std::make_pair(act->sparam1 == "immovable" ? MapObjectType::IMMOVABLE : MapObjectType::BOB,
 		                  act->iparam2));
 	}
@@ -660,6 +660,12 @@ void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std:
 
 	act->function = &Worker::run_callobject;
 	act->sparam1 = cmd[0];
+
+	// TODO(Gunchleoc): We might need to dig into the called object's program too, but this is good
+	// enough for now.
+	if (!needed_attributes_.empty()) {
+		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());
+	}
 }
 
 /* RST
@@ -799,9 +805,6 @@ void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std:
 	if (cmd.size() > 1) {
 		throw wexception("buildferry takes no arguments");
 	}
-	// TODO(GunChleoc): API compatibility - remove after v1.0
-	log_warn("%s: Worker program 'buildferry' is deprecated. Use createbob=TRIBENAME_ferry instead.",
-	         worker_.name().c_str());
 	act->function = &Worker::run_buildferry;
 }
 
@@ -847,6 +850,9 @@ removeobject
 */
 void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
 	act->function = &Worker::run_removeobject;
+	if (!needed_attributes_.empty()) {
+		collected_attributes_.insert(needed_attributes_.begin(), needed_attributes_.end());
+	}
 }
 
 /* RST

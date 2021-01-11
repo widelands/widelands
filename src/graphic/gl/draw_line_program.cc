@@ -20,7 +20,6 @@
 #include "graphic/gl/draw_line_program.h"
 
 #include <cassert>
-#include <iterator>
 
 // static
 DrawLineProgram& DrawLineProgram::instance() {

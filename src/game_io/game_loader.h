@@ -40,14 +40,9 @@ struct GameLoader {
 	int32_t preload_game(GamePreloadPacket&);
 	int32_t load_game(bool multiplayer = false);
 
-	bool did_postload_addons() const {
-		return did_postload_addons_;
-	}
-
 private:
 	FileSystem& fs_;
 	Game& game_;
-	bool did_postload_addons_;
 };
 }  // namespace Widelands
 

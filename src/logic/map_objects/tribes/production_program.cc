@@ -199,18 +199,16 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(
 TrainingAttribute parse_training_attribute(const std::string& argument) {
 	if (argument == "health") {
 		return TrainingAttribute::kHealth;
-	}
-	if (argument == "attack") {
+	} else if (argument == "attack") {
 		return TrainingAttribute::kAttack;
-	}
-	if (argument == "defense") {
+	} else if (argument == "defense") {
 		return TrainingAttribute::kDefense;
-	}
-	if (argument == "evade") {
+	} else if (argument == "evade") {
 		return TrainingAttribute::kEvade;
+	} else {
+		throw GameDataError(
+		   "Expected health|attack|defense|evade after 'soldier' but found '%s'", argument.c_str());
 	}
-	throw GameDataError(
-	   "Expected health|attack|defense|evade after 'soldier' but found '%s'", argument.c_str());
 }
 }  // namespace
 
@@ -605,20 +603,17 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 	try {
 		if (match_and_skip(arguments, begin, "not")) {
 			return new ActReturn::Negation(arguments, begin, end, descr, descriptions);
-		}
-		if (match_and_skip(arguments, begin, "economy")) {
+		} else if (match_and_skip(arguments, begin, "economy")) {
 			if (!match_and_skip(arguments, begin, "needs")) {
 				throw GameDataError("Expected 'needs' after 'economy' but found '%s'", begin->c_str());
 			}
 			return create_economy_condition(*begin, descr, descriptions);
-		}
-		if (match_and_skip(arguments, begin, "site")) {
+		} else if (match_and_skip(arguments, begin, "site")) {
 			if (!match_and_skip(arguments, begin, "has")) {
 				throw GameDataError("Expected 'has' after 'site' but found '%s'", begin->c_str());
 			}
 			return new ProductionProgram::ActReturn::SiteHas(begin, end, descr, descriptions);
-		}
-		if (match_and_skip(arguments, begin, "workers")) {
+		} else if (match_and_skip(arguments, begin, "workers")) {
 			if (!match_and_skip(arguments, begin, "need")) {
 				throw GameDataError(
 				   "Expected 'need experience' after 'workers' but found '%s'", begin->c_str());
@@ -628,9 +623,10 @@ ProductionProgram::ActReturn::create_condition(const std::vector<std::string>& a
 				   "Expected 'experience' after 'workers need' but found '%s'", begin->c_str());
 			}
 			return new ProductionProgram::ActReturn::WorkersNeedExperience();
+		} else {
+			throw GameDataError("Expected not|economy|site|workers after '%s' but found '%s'",
+			                    (begin - 1)->c_str(), begin->c_str());
 		}
-		throw GameDataError("Expected not|economy|site|workers after '%s' but found '%s'",
-		                    (begin - 1)->c_str(), begin->c_str());
 	} catch (const WException& e) {
 		throw GameDataError("Invalid condition. %s", e.what());
 	}
@@ -964,6 +960,9 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		}
 	}
 
+	for (const auto& attribute_info : workerprogram->needed_attributes()) {
+		descr->add_needed_attribute(attribute_info);
+	}
 	for (const auto& attribute_info : workerprogram->collected_attributes()) {
 		descr->add_collected_attribute(attribute_info);
 	}
@@ -971,8 +970,7 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		descr->add_created_attribute(attribute_info);
 	}
 	for (const std::string& resourcename : workerprogram->collected_resources()) {
-		// Workers always collect 100% of the resource, and then find no more
-		descr->add_collected_resource(resourcename, 100, 0);
+		descr->add_collected_resource(resourcename);
 	}
 	for (const std::string& resourcename : workerprogram->created_resources()) {
 		descr->add_created_resource(resourcename);
@@ -993,14 +991,12 @@ bool ProductionProgram::ActCallWorker::get_building_work(Game& game,
 	ProductionSite::State& state = psite.top_state();
 	if (state.phase == ProgramResult::kNone) {
 		worker.start_task_program(game, program());
-		if (state.flags & ProductionSite::State::StateFlags::kStateFlagHasExtraData) {
-			worker.top_state().objvar1 = state.objvar;
-		}
 		state.phase = ProgramResult::kFailed;
 		return true;
+	} else {
+		psite.program_step(game);
+		return false;
 	}
-	psite.program_step(game);
-	return false;
 }
 
 void ProductionProgram::ActCallWorker::building_work_failed(Game& game,
@@ -1243,20 +1239,20 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 			ps.set_production_result(result_string);
 		}
 		return ps.program_end(game, ProgramResult::kFailed);
-	}
-	//  we fulfilled all consumption requirements
-	for (size_t i = 0; i < inputqueues.size(); ++i) {
-		if (uint8_t const q = consumption_quantities[i]) {
-			assert(q <= inputqueues[i]->get_filled());
-			inputqueues[i]->set_filled(inputqueues[i]->get_filled() - q);
+	} else {  //  we fulfilled all consumption requirements
+		for (size_t i = 0; i < inputqueues.size(); ++i) {
+			if (uint8_t const q = consumption_quantities[i]) {
+				assert(q <= inputqueues[i]->get_filled());
+				inputqueues[i]->set_filled(inputqueues[i]->get_filled() - q);
 
-			// Update consumption statistics
-			if (inputqueues[i]->get_type() == wwWARE) {
-				ps.get_owner()->ware_consumed(inputqueues[i]->get_index(), q);
+				// Update consumption statistics
+				if (inputqueues[i]->get_type() == wwWARE) {
+					ps.get_owner()->ware_consumed(inputqueues[i]->get_index(), q);
+				}
 			}
 		}
+		return ps.program_step(game);
 	}
-	return ps.program_step(game);
 }
 
 /* RST
@@ -1515,7 +1511,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
 	                                descriptions.get_resource_descr(resource_)->name();
 	descr->workarea_info_[workarea_].insert(description);
 
-	descr->add_collected_resource(arguments.front(), max_resources_, depleted_chance_);
+	descr->add_collected_resource(arguments.front());
 }
 
 void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
@@ -1707,11 +1703,8 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	const SoldierControl* ctrl = ps.soldier_control();
 	assert(ctrl != nullptr);
 	const std::vector<Soldier*> soldiers = ctrl->present_soldiers();
-
-	upcast(TrainingSite, ts, &ps);
-
 	if (soldiers.empty()) {
-		ps.set_production_result(ts->descr().no_soldier_to_train_message());
+		ps.set_production_result(_("No soldier to train!"));
 		return ps.program_end(game, ProgramResult::kSkipped);
 	}
 	ps.molog(game.get_gametime(), "  Checking soldier (%u) level %d)\n",
@@ -1720,7 +1713,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	const std::vector<Soldier*>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier*>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
-			ps.set_production_result(ts->descr().no_soldier_for_training_level_message());
+			ps.set_production_result(_("No soldier found for this training level!"));
 			return ps.program_end(game, ProgramResult::kSkipped);
 		}
 
@@ -1744,6 +1737,7 @@ void ProductionProgram::ActCheckSoldier::execute(Game& game, ProductionSite& ps)
 	}
 	ps.molog(game.get_gametime(), "    okay\n");  // okay, do nothing
 
+	upcast(TrainingSite, ts, &ps);
 	ts->training_attempted(training_.attribute, training_.level);
 
 	ps.molog(game.get_gametime(), "  Check done!\n");

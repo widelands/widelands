@@ -30,8 +30,6 @@
 
 #include "base/log.h"
 #include "config.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "logic/filesystem_constants.h"
 
 #ifdef __APPLE__
 #if LIBINTL_VERSION >= 0x001201
@@ -60,7 +58,6 @@ std::vector<std::pair<std::string, std::string>> textdomains;
 std::string env_locale;
 std::string locale;
 std::string localedir;
-std::string homedir;
 
 }  // namespace
 
@@ -86,14 +83,6 @@ const std::string& get_localedir() {
 	return localedir;
 }
 
-void set_homedir(const std::string& dname) {
-	homedir = dname;
-}
-
-const std::string& get_homedir() {
-	return homedir;
-}
-
 /**
  * Grab a given TextDomain. If a new one is grabbed, it is pushed on the stack.
  * On release, it is dropped and the previous one is re-grabbed instead.
@@ -102,8 +91,9 @@ const std::string& get_homedir() {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(const std::string& domain, const char* ldir) {
+void grab_textdomain(const std::string& domain) {
 	char const* const dom = domain.c_str();
+	char const* const ldir = localedir.c_str();
 
 	bindtextdomain(dom, ldir);
 	bind_textdomain_codeset(dom, "UTF-8");
@@ -162,15 +152,6 @@ void init_locale() {
 	SETLOCALE(LC_ALL, "C");
 	SETLOCALE(LC_MESSAGES, "");
 #endif
-}
-
-static std::string canonical_addon_locale_dir;
-const std::string& get_addon_locale_dir() {
-	if (canonical_addon_locale_dir.empty()) {
-		canonical_addon_locale_dir = g_fs->canonicalize_name(homedir + "/" + kAddOnLocaleDir);
-		assert(!canonical_addon_locale_dir.empty());
-	}
-	return canonical_addon_locale_dir;
 }
 
 /**

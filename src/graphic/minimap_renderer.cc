@@ -19,7 +19,6 @@
 
 #include "graphic/minimap_renderer.h"
 
-#include <algorithm>
 #include <memory>
 
 #include "economy/flag.h"
@@ -82,9 +81,10 @@ inline RGBColor calc_minimap_color(const Widelands::EditorGameBase& egbase,
 		if (layers & MiniMapLayer::StartingPositions) {
 			const Widelands::Map& map = egbase.map();
 			Widelands::Coords starting_pos;
+			uint32_t dist;
 			for (uint32_t p = 1; p <= map.get_nrplayers(); p++) {
 				starting_pos = map.get_starting_pos(p);
-				uint32_t dist = map.calc_distance(f, starting_pos);
+				dist = map.calc_distance(f, starting_pos);
 				if (dist < 9) {
 					color = dist == 0 ? kWhite : blend_color(color, kPlayerColors[p - 1]);
 					break;
@@ -346,19 +346,16 @@ std::unique_ptr<Texture> draw_minimap_final(const Texture& input_texture,
 }
 
 int scale_map(const Widelands::Map& map, bool zoom) {
-	// The MiniMap can have a maximum size of 600px (width or height).
-	// Borders and button height takes 2x20px + 20px. -> 60px
-	// If a map width or height is greater than 270px we don't scale.
-	// Otherwise we fit as much as possible into a 300px or 400px
-	// MiniMap window when zoom is disabled.
-	const auto max = std::max(map.get_width(), map.get_height());
-	if (max <= 270) {
+	// The MiniMap can have a maximum size of 600px. If a map is wider than 300px we don't scale.
+	// Otherwise we fit as much as possible into a 300px/400px MiniMap window when zoom is disabled.
+	const uint16_t map_w = map.get_width();
+	if (!(map_w > 300)) {
 		if (zoom) {
-			return 540 / max;
-		} else if (max > 135) {
-			return 370 / max;
+			return (600 - (600 % map_w)) / map_w;
+		} else if (map_w > 150) {
+			return (400 - (400 % map_w)) / map_w;
 		} else {
-			return 270 / max;
+			return (300 - (300 % map_w)) / map_w;
 		}
 	}
 	return 1;

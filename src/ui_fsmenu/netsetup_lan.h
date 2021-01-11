@@ -20,20 +20,17 @@
 #ifndef WL_UI_FSMENU_NETSETUP_LAN_H
 #define WL_UI_FSMENU_NETSETUP_LAN_H
 
-#include <memory>
-
-#include "logic/game_controller.h"
 #include "network/network_lan_promotion.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/menu.h"
-namespace FsMenu {
-class NetSetupLAN : public TwoColumnsBasicNavigationMenu {
+#include "ui_fsmenu/load_map_or_game.h"
+
+class FullscreenMenuNetSetupLAN : public FullscreenMenuLoadMapOrGame {
 public:
-	explicit NetSetupLAN(MenuCapsule&);
+	explicit FullscreenMenuNetSetupLAN(FullscreenMenuMain&);
 
 	void think() override;
 
@@ -44,8 +41,13 @@ public:
 	 */
 	bool get_host_address(NetAddress* addr);
 
+	/**
+	 * \return the name chosen by the player
+	 */
+	const std::string& get_playername();
+
 protected:
-	void clicked_ok();
+	void clicked_ok() override;
 
 private:
 	void layout() override;
@@ -67,7 +69,7 @@ private:
 	void clicked_hostgame();
 	void clicked_lasthost();
 
-	std::unique_ptr<GameController> running_game_;
+	UI::Box left_column_, right_column_;
 
 	// Left Column
 	UI::Textarea label_opengames_;
@@ -85,5 +87,5 @@ private:
 
 	LanGameFinder discovery_;
 };
-}  // namespace FsMenu
+
 #endif  // end of include guard: WL_UI_FSMENU_NETSETUP_LAN_H

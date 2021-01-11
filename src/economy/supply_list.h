@@ -46,7 +46,7 @@ struct SupplyList {
 		return *supplies_[idx];
 	}
 
-	bool have_supplies(const Game& game, const Request&);
+	bool have_supplies(Game& game, const Request&);
 
 private:
 	using Supplies = std::vector<Supply*>;

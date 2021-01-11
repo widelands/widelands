@@ -102,7 +102,6 @@ public:
 	DescriptionIndex becomes() const {
 		return becomes_;
 	}
-	void set_becomes(Descriptions&, const std::string&);
 	DescriptionIndex worker_index() const;
 	bool can_act_as(DescriptionIndex) const;
 
@@ -120,24 +119,17 @@ public:
 	const Programs& programs() const {
 		return programs_;
 	}
-	Programs& mutable_programs() {
-		return programs_;
-	}
 
 	/// AI hints for this worker type. Can be nullptr.
 	const AI::WareWorkerHints* ai_hints() const {
 		return ai_hints_.get();
 	}
 
-	void set_needed_experience(int32_t x) {
-		needed_experience_ = x;
-	}
-
 protected:
 	Programs programs_;
 
 private:
-	Vector2i ware_hotspot_;
+	const Vector2i ware_hotspot_;
 
 	DirAnimations walk_anims_;
 	DirAnimations walkload_anims_;
@@ -150,18 +142,17 @@ private:
 	 * Type that this worker can become, i.e. level up to, or INVALID_INDEX if the worker cannot
 	 * level up.
 	 */
-	DescriptionIndex becomes_;
+	const DescriptionIndex becomes_;
 
 	/**
 	 * Number of experience points required for leveling up,
 	 * or INVALID_INDEX if the worker cannot level up.
 	 */
-	int32_t needed_experience_;
+	const int32_t needed_experience_;
 
 	/// Buildings where this worker can work
 	std::set<DescriptionIndex> employers_;
 
-private:
 	// Hints for the AI
 	std::unique_ptr<AI::WareWorkerHints> ai_hints_;
 

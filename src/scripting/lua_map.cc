@@ -2258,7 +2258,7 @@ int LuaImmovableDescription::has_attribute(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
 	}
-	const uint32_t attribute_id =
+	const Widelands::MapObjectDescr::AttributeIndex attribute_id =
 	   Widelands::MapObjectDescr::get_attribute_id(luaL_checkstring(L, 2));
 	lua_pushboolean(L, get()->has_attribute(attribute_id));
 	return 1;
@@ -2677,51 +2677,20 @@ int LuaProductionSiteDescription::get_collected_immovables(lua_State* L) {
    .. attribute:: collected_resources
 
       (RO) An array with :class:`ResourceDescription` containing the resources that
-      this building will collect from the map, along with the maximum percentage mined and the
-      chance to still find some more after depletion. For example, a Fishers's House will collect:
-
-      .. code-block:: lua
-
-       {
-            {
-               resource = <resource description for fish>,
-               yield = 100,
-               when_empty = 0
-            }
-         }
-
-      and a Barbarian Coal Mine will collect:
-
-      .. code-block:: lua
-
-         {
-            {
-               resource = <resource description for coal>,
-               yield = 33.33,
-               when_empty = 5
-            }
-         }
+      this building will collect from the map.
+      For example, a Fishers's House will collect the "fish" resource.
 */
 int LuaProductionSiteDescription::get_collected_resources(lua_State* L) {
 	lua_newtable(L);
 	int index = 1;
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	for (const auto& resource_info : get()->collected_resources()) {
+	for (const std::string& resource_name : get()->collected_resources()) {
 		lua_pushint32(L, index++);
-		lua_newtable(L);
-		lua_pushstring(L, "resource");
 		const Widelands::ResourceDescription* resource = egbase.descriptions().get_resource_descr(
-		   egbase.descriptions().resource_index(resource_info.first));
+		   egbase.descriptions().resource_index(resource_name));
 		assert(resource != nullptr);
 		to_lua<LuaResourceDescription>(L, new LuaResourceDescription(resource));
 		lua_rawset(L, -3);
-		lua_pushstring(L, "yield");
-		lua_pushnumber(L, resource_info.second.max_percent / 100.0);
-		lua_settable(L, -3);
-		lua_pushstring(L, "when_empty");
-		lua_pushnumber(L, resource_info.second.depleted_chance / 100.0);
-		lua_settable(L, -3);
-		lua_settable(L, -3);
 	}
 	return 1;
 }
@@ -3638,8 +3607,8 @@ int LuaWorkerDescription::get_becomes(lua_State* L) {
 */
 int LuaWorkerDescription::get_buildcost(lua_State* L) {
 	lua_newtable(L);
+	int index = 1;
 	if (get()->is_buildable()) {
-		int index = 1;
 		for (const auto& buildcost_pair : get()->buildcost()) {
 			lua_pushint32(L, index++);
 			lua_pushstring(L, buildcost_pair.first);
@@ -4497,7 +4466,7 @@ LuaMapObject::get(lua_State* L, Widelands::EditorGameBase& egbase, const std::st
 	}
 	return o;
 }
-Widelands::MapObject* LuaMapObject::get_or_zero(const Widelands::EditorGameBase& egbase) {
+Widelands::MapObject* LuaMapObject::get_or_zero(Widelands::EditorGameBase& egbase) {
 	return ptr_.get(egbase);
 }
 
@@ -7346,7 +7315,8 @@ int LuaField::has_caps(lua_State* L) {
 int LuaField::has_max_caps(lua_State* L) {
 	const Widelands::FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-	lua_pushboolean(L, check_has_caps(L, query, f, f.field->maxcaps(), get_egbase(L).map()));
+	lua_pushboolean(
+	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
 }
 

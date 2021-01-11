@@ -141,18 +141,8 @@ private:
 		void enemy_soldier_approaches(const Soldier&) const override;
 		Widelands::AttackTarget::AttackResult attack(Soldier*) const override;
 
-		void set_allow_conquer(PlayerNumber p, bool c) const override {
-			allow_conquer_[p] = c;
-		}
-		bool get_allow_conquer(PlayerNumber p) const override {
-			auto it = allow_conquer_.find(p);
-			return it == allow_conquer_.end() || it->second;
-		}
-
 	private:
-		friend class MapBuildingdataPacket;
 		MilitarySite* const military_site_;
-		mutable std::map<PlayerNumber, bool> allow_conquer_;
 	};
 
 	class SoldierControl : public Widelands::SoldierControl {
@@ -197,7 +187,6 @@ private:
 	Time next_swap_soldiers_time_;
 	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_;
-	std::vector<std::map<int, std::string>> statistics_string_cache_;
 };
 }  // namespace Widelands
 

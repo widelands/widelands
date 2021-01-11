@@ -35,8 +35,6 @@ int32_t EditorResizeTool::handle_click_impl(const Widelands::NodeAndTriangle<>& 
 	map->normalize_coords(sel.triangle.node);
 	eia.set_sel_pos(sel);
 
-	eia.map_changed(EditorInteractive::MapWas::kResized);
-
 	return 0;
 }
 
@@ -51,8 +49,6 @@ int32_t EditorResizeTool::handle_undo_impl(const Widelands::NodeAndTriangle<Wide
 	map->normalize_coords(sel.node);
 	map->normalize_coords(sel.triangle.node);
 	eia.set_sel_pos(sel);
-
-	eia.map_changed(EditorInteractive::MapWas::kResized);
 
 	return 0;
 }

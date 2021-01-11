@@ -31,17 +31,13 @@ constexpr int8_t kButtonSize = 25;
 static size_t priority_to_index(const Widelands::WarePriority& priority) {
 	if (priority == Widelands::WarePriority::kVeryLow) {
 		return 0;
-	}
-	if (priority == Widelands::WarePriority::kLow) {
+	} else if (priority == Widelands::WarePriority::kLow) {
 		return 1;
-	}
-	if (priority == Widelands::WarePriority::kNormal) {
+	} else if (priority == Widelands::WarePriority::kNormal) {
 		return 2;
-	}
-	if (priority == Widelands::WarePriority::kHigh) {
+	} else if (priority == Widelands::WarePriority::kHigh) {
 		return 3;
-	}
-	if (priority == Widelands::WarePriority::kVeryHigh) {
+	} else if (priority == Widelands::WarePriority::kVeryHigh) {
 		return 4;
 	}
 	// TODO(Nordfriese): For savegame compatibility. Replace with NEVER_HERE() after v1.0
@@ -534,9 +530,9 @@ void InputQueueDisplay::think() {
 	                                                  "images/ui_basic/scrollbar_left.png"));
 }
 
-static const RGBAColor kPriorityColors[] = {RGBAColor(0, 0, 255, 127), RGBAColor(63, 127, 255, 127),
-                                            RGBAColor(255, 255, 0, 127),
-                                            RGBAColor(255, 127, 0, 127), RGBAColor(255, 0, 0, 127)};
+static const RGBAColor kPriorityColors[] = {RGBAColor(255, 0, 0, 127), RGBAColor(255, 127, 0, 127),
+                                            RGBAColor(255, 255, 0, 127), RGBAColor(0, 255, 0, 127),
+                                            RGBAColor(0, 127, 255, 127)};
 
 void InputQueueDisplay::draw(RenderTarget& r) {
 	// Draw priority indicator

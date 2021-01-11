@@ -32,6 +32,7 @@ descriptions:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
+      prohibited_till = 220,
       very_weak_ai_limit = 2,
       weak_ai_limit = 3,
    },
@@ -70,7 +71,7 @@ descriptions:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext("amazons_building", "The cocoa farmer working at this cocoa farm has no cleared soil to plant her seeds."),
+      message = pgettext("amazons_building", "The cocoa farmer working at this cocoa farm has no cleared soil to plant his seeds."),
       productivity_threshold = 20
    },
 }

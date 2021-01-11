@@ -58,7 +58,6 @@
 #include "network/participantlist.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
-#include "ui_fsmenu/main.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
@@ -156,16 +155,6 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number == settings().playernum ||
 		    settings().players.at(number).state == PlayerSettings::State::kComputer) {
 			host_->set_player_team(number, team);
-		}
-	}
-
-	void set_player_color(const uint8_t number, const RGBColor& col) override {
-		if (number >= host_->settings().players.size()) {
-			return;
-		}
-		if (number == settings().playernum ||
-		    settings().players.at(number).state == PlayerSettings::State::kComputer) {
-			host_->set_player_color(number, col);
 		}
 	}
 
@@ -529,12 +518,11 @@ struct GameHostImpl {
 	}
 };
 
-GameHost::GameHost(FsMenu::MenuCapsule& c,
-                   std::unique_ptr<GameController>& ptr,
+GameHost::GameHost(FullscreenMenuMain& f,
                    const std::string& playername,
                    std::vector<Widelands::TribeBasicInfo> tribeinfos,
                    bool internet)
-   : capsule_(c), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
+   : fsmm_(f), d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log_info("[Host]: starting up.\n");
 
 	d->localplayername = playername;
@@ -584,8 +572,6 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
 	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
-
-	run(ptr);
 }
 
 GameHost::~GameHost() {
@@ -660,16 +646,21 @@ void GameHost::init_computer_players() {
 	}
 }
 
-void GameHost::run(std::unique_ptr<GameController>& ptr) {
-	game_.reset(new Widelands::Game());
+// TODO(k.halfmann): refactor into smaller functions
+void GameHost::run() {
+	Widelands::Game game;
 	// Fill the list of possible system messages
 	NetworkGamingMessages::fill_map();
-	new FsMenu::LaunchMPG(
-	   capsule_, d->hp, *this, d->chat, *game_, ptr, internet_, [this]() { run_callback(); });
-}
+	FullscreenMenuLaunchMPG lm(fsmm_, &d->hp, this, d->chat, game);
+	const MenuTarget code = lm.run<MenuTarget>();
+	if (code == MenuTarget::kBack) {
+		// if this is an internet game, tell the metaserver that client is back in the lobby.
+		if (internet_) {
+			InternetGaming::ref().set_game_done();
+		}
+		return;
+	}
 
-// TODO(k.halfmann): refactor into smaller functions
-void GameHost::run_callback() {
 	// if this is an internet game, tell the metaserver that the game started
 	if (internet_) {
 		InternetGaming::ref().set_game_playing();
@@ -689,50 +680,47 @@ void GameHost::run_callback() {
 	packet.unsigned_8(NETCMD_LAUNCH);
 	broadcast(packet);
 
-	game_->set_ai_training_mode(get_config_bool("ai_training", false));
-	game_->set_auto_speed(get_config_bool("auto_speed", false));
-	game_->set_write_syncstream(get_config_bool("write_syncstreams", true));
+	game.set_ai_training_mode(get_config_bool("ai_training", false));
+	game.set_auto_speed(get_config_bool("auto_speed", false));
+	game.set_write_syncstream(get_config_bool("write_syncstreams", true));
 
-	capsule_.set_visible(false);
-	uint8_t player_number = 1;
 	try {
 		std::vector<std::string> tipstexts{"general_game", "multiplayer"};
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		game_->create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
+		game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
-		d->game = game_.get();
-		game_->set_game_controller(this);
+		d->game = &game;
+		game.set_game_controller(this);
 		InteractiveGameBase* igb;
-		player_number = d->settings.playernum + 1;
-		game_->save_handler().set_autosave_filename(
+		uint8_t pn = d->settings.playernum + 1;
+		game.save_handler().set_autosave_filename(
 		   (boost::format("%s_nethost") % kAutosavePrefix).str());
 
 		if (d->settings.savegame) {
 			// Read and broadcast original win condition
-			Widelands::GameLoader gl(d->settings.mapfilename, *game_);
+			Widelands::GameLoader gl(d->settings.mapfilename, game);
 			Widelands::GamePreloadPacket gpdp;
 			gl.preload_game(gpdp);
 
 			set_win_condition_script(gpdp.get_win_condition());
 		}
 
-		if ((player_number > 0) && (player_number <= UserSettings::highest_playernum())) {
-			igb = new InteractivePlayer(*game_, get_config_section(), player_number, true, &d->chat);
+		if ((pn > 0) && (pn <= UserSettings::highest_playernum())) {
+			igb = new InteractivePlayer(game, get_config_section(), pn, true, &d->chat);
 		} else {
-			igb = new InteractiveSpectator(*game_, get_config_section(), true, &d->chat);
-			player_number = 1;  // for the emergency save later
+			igb = new InteractiveSpectator(game, get_config_section(), true, &d->chat);
 		}
-		game_->set_ibase(igb);
+		game.set_ibase(igb);
 
 		if (!d->settings.savegame) {  // new game
-			game_->init_newgame(d->settings);
+			game.init_newgame(d->settings);
 		} else {  // savegame
-			game_->init_savegame(d->settings);
+			game.init_savegame(d->settings);
 		}
-		d->pseudo_networktime = game_->get_gametime();
+		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = SDL_GetTicks();
 		d->last_heartbeat = d->lastframe;
@@ -748,11 +736,11 @@ void GameHost::run_callback() {
 		// wait mode when there are no clients
 		check_hung_clients();
 		init_computer_players();
-		game_->run(d->settings.savegame ?
-		              Widelands::Game::StartGameType::kSaveGame :
-		              d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
-		                                     Widelands::Game::StartGameType::kMap,
-		           "", false, "nethost");
+		game.run(d->settings.savegame ?
+		            Widelands::Game::StartGameType::kSaveGame :
+		            d->settings.scenario ? Widelands::Game::StartGameType::kMultiPlayerScenario :
+		                                   Widelands::Game::StartGameType::kMap,
+		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_) {
@@ -760,9 +748,10 @@ void GameHost::run_callback() {
 		}
 		clear_computer_players();
 	} catch (const std::exception& e) {
-		FsMenu::MainMenu& parent = capsule_.menu();  // make includes script happy
-		WLApplication::emergency_save(&parent, *game_, e.what(), player_number);
+		log_err("GameHost received FATAL ERROR %s", e.what());
+		WLApplication::emergency_save(game);
 		clear_computer_players();
+		d->game = nullptr;
 
 		while (!d->clients.empty()) {
 			disconnect_client(0, "SERVER_CRASHED");
@@ -772,9 +761,10 @@ void GameHost::run_callback() {
 		if (internet_) {
 			InternetGaming::ref().logout("SERVER_CRASHED");
 		}
+
+		throw;
 	}
 	d->game = nullptr;
-	game_.reset();
 }
 
 void GameHost::think() {
@@ -995,6 +985,7 @@ int32_t GameHost::check_client(const std::string& name) {
 
 	// Search for the client
 	uint16_t i = 0;
+	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
 		const UserSettings& user = d->settings.users.at(i);
 		if (user.position == UserSettings::not_connected()) {
@@ -1006,7 +997,6 @@ int32_t GameHost::check_client(const std::string& name) {
 		}
 	}
 	if (i < d->settings.users.size()) {
-		uint32_t client = 0;
 		for (; client < d->clients.size(); ++client) {
 			if (d->clients.at(client).usernum == static_cast<int16_t>(i)) {
 				break;
@@ -1184,7 +1174,6 @@ void GameHost::set_map(const std::string& mapname,
 		player.random_tribe = false;
 		player.initialization_index = 0;
 		player.team = 0;
-		player.color = kPlayerColors[oldplayers];
 		player.ai = "";
 		player.random_ai = false;
 		player.closeable = false;
@@ -1462,7 +1451,7 @@ void GameHost::set_player_shared(PlayerSlot number, Widelands::PlayerNumber shar
 		return;
 	}
 
-	const PlayerSettings& sharedplr = d->settings.players.at(shared - 1);
+	PlayerSettings& sharedplr = d->settings.players.at(shared - 1);
 	assert(PlayerSettings::can_be_shared(sharedplr.state));
 	assert(d->settings.is_shared_usable(number, shared));
 
@@ -1578,14 +1567,6 @@ void GameHost::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	broadcast_setting_player(number);
 }
 
-void GameHost::set_player_color(const uint8_t number, const RGBColor& col) {
-	if (number >= d->settings.players.size()) {
-		return;
-	}
-	d->settings.players.at(number).color = col;
-	broadcast_setting_player(number);
-}
-
 void GameHost::set_multiplayer_game_settings() {
 	d->settings.scenario = false;
 	d->settings.multiplayer = true;
@@ -1622,7 +1603,7 @@ void GameHost::set_paused(bool /* paused */) {
 }
 
 // Send the packet to all properly connected clients
-void GameHost::broadcast(const SendPacket& packet) {
+void GameHost::broadcast(SendPacket& packet) {
 	std::vector<NetHostInterface::ConnectionId> receivers;
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
@@ -1653,9 +1634,6 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 	packet.unsigned_8(player.random_ai ? 1 : 0);
 	packet.unsigned_8(player.team);
 	packet.unsigned_8(player.shared_in);
-	packet.unsigned_8(player.color.r);
-	packet.unsigned_8(player.color.g);
-	packet.unsigned_8(player.color.b);
 	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, number));
 }
 
@@ -2275,7 +2253,7 @@ void GameHost::handle_hello(uint32_t const client_num,
 	welcome_client(client_num, clientname);
 }
 
-void GameHost::handle_changetribe(const Client& client, RecvPacket& r) {
+void GameHost::handle_changetribe(Client& client, RecvPacket& r) {
 	//  Do not be harsh about packets of this type arriving out of order -
 	//  the client might just have had bad luck with the timing.
 	if (!d->game) {
@@ -2290,7 +2268,7 @@ void GameHost::handle_changetribe(const Client& client, RecvPacket& r) {
 }
 
 /** Handle changed sharing of clients by users */
-void GameHost::handle_changeshared(const Client& client, RecvPacket& r) {
+void GameHost::handle_changeshared(Client& client, RecvPacket& r) {
 	//  Do not be harsh about packets of this type arriving out of order -
 	//  the client might just have had bad luck with the timing.
 	if (!d->game) {
@@ -2302,7 +2280,7 @@ void GameHost::handle_changeshared(const Client& client, RecvPacket& r) {
 	}
 }
 
-void GameHost::handle_changeteam(const Client& client, RecvPacket& r) {
+void GameHost::handle_changeteam(Client& client, RecvPacket& r) {
 	if (!d->game) {
 		uint8_t num = r.unsigned_8();
 		if (num != client.playernum) {
@@ -2312,20 +2290,7 @@ void GameHost::handle_changeteam(const Client& client, RecvPacket& r) {
 	}
 }
 
-void GameHost::handle_changecolor(const Client& client, RecvPacket& packet) {
-	if (!d->game) {
-		const uint8_t num = packet.unsigned_8();
-		if (num != client.playernum) {
-			throw DisconnectException("NO_ACCESS_TO_PLAYER");
-		}
-		const uint8_t r = packet.unsigned_8();
-		const uint8_t g = packet.unsigned_8();
-		const uint8_t b = packet.unsigned_8();
-		set_player_color(num, RGBColor(r, g, b));
-	}
-}
-
-void GameHost::handle_changeinit(const Client& client, RecvPacket& r) {
+void GameHost::handle_changeinit(Client& client, RecvPacket& r) {
 	if (!d->game) {
 		// TODO(GunChleoc): For some nebulous reason, we don't receive the num that the client is
 		// sending when a player changes slot. So, keeping the access to the client off for now.
@@ -2338,7 +2303,7 @@ void GameHost::handle_changeinit(const Client& client, RecvPacket& r) {
 	}
 }
 
-void GameHost::handle_changeposition(const Client& client, RecvPacket& r) {
+void GameHost::handle_changeposition(Client& client, RecvPacket& r) {
 	if (!d->game) {
 		uint8_t const pos = r.unsigned_8();
 		switch_to_player(client.usernum, pos);
@@ -2451,8 +2416,6 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 		return handle_changeshared(client, r);
 	case NETCMD_SETTING_CHANGETEAM:
 		return handle_changeteam(client, r);
-	case NETCMD_SETTING_CHANGECOLOR:
-		return handle_changecolor(client, r);
 	case NETCMD_SETTING_CHANGEINIT:
 		return handle_changeinit(client, r);
 	case NETCMD_SETTING_CHANGEPOSITION:
@@ -2565,8 +2528,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 
 	// If the client is linked to a player and it is the client that closes the connection
 	// and the game has already started ...
-	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" &&
-	    reason != "SERVER_CRASHED" && d->game != nullptr) {
+	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" && d->game != nullptr) {
 		// And the client hasn't lost/won yet ...
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
 			// If not shown yet, show a window and ask the host player what to do
@@ -2576,7 +2538,7 @@ void GameHost::disconnect_client(uint32_t const client_number,
 				if (!forced_pause()) {
 					force_pause();
 				}
-				WLApplication::emergency_save(nullptr, *d->game, reason, 1, false);
+				WLApplication::emergency_save(*d->game);
 			}
 			// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kWon) {

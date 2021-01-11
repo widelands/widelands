@@ -45,7 +45,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, style, x, y, w, h),
      text_(text),
-     font_style_(style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel),
+     font_style_(&g_style_manager->font_style(
+        style == UI::PanelStyle::kFsMenu ? FontStyle::kFsMenuLabel : FontStyle::kWuiLabel)),
      font_scale_(1.0f),
      align_(align),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
@@ -53,21 +54,18 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 	scrollbar_.moved.connect([this](int32_t a) { scrollpos_changed(a); });
 
-	scrollbar_.set_singlestepsize(text_height(font_style(), font_scale_));
+	scrollbar_.set_singlestepsize(text_height(*font_style_, font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
 }
 
-inline const FontStyleInfo& MultilineTextarea::font_style() const {
-	return g_style_manager->font_style(font_style_);
-}
-void MultilineTextarea::set_style(const FontStyle style) {
-	font_style_ = style;
+void MultilineTextarea::set_style(const UI::FontStyleInfo& style) {
+	font_style_ = &style;
 	recompute();
 }
 void MultilineTextarea::set_font_scale(float scale) {
 	font_scale_ = scale;
-	scrollbar_.set_singlestepsize(text_height(font_style(), font_scale_));
+	scrollbar_.set_singlestepsize(text_height(*font_style_, font_scale_));
 	recompute();
 }
 
@@ -94,18 +92,18 @@ void MultilineTextarea::recompute() {
 		int height = 0;
 		if (!text_.empty()) {
 			// Ensure we have a text width. Simply overflow if there is no width available.
-			const int txt_width = std::max(10, get_eff_w() - 2 * kRichtextMargin);
-			assert(txt_width > 0);
+			const int text_width = std::max(10, get_eff_w() - 2 * kRichtextMargin);
+			assert(text_width > 0);
 
 			if (!is_richtext(text_)) {
 				text_ = make_richtext();
 			}
 			try {
-				rendered_text_ = UI::g_fh->render(text_, txt_width);
+				rendered_text_ = UI::g_fh->render(text_, text_width);
 			} catch (const std::exception& e) {
 				log_warn("Error rendering richtext: %s. Text is:\n%s\n", e.what(), text_.c_str());
 				text_ = make_richtext();
-				rendered_text_ = UI::g_fh->render(text_, txt_width);
+				rendered_text_ = UI::g_fh->render(text_, text_width);
 			}
 			height = rendered_text_->height();
 		}
@@ -144,7 +142,7 @@ void MultilineTextarea::layout() {
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * font_style().size() * font_scale_);
+	scrollbar_.set_pagesize(get_h() - 2 * font_style_->size() * font_scale_);
 }
 
 /**
@@ -208,7 +206,7 @@ std::string MultilineTextarea::make_richtext() {
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
 
-	FontStyleInfo scaled_style(font_style());
+	FontStyleInfo scaled_style(*font_style_);
 	scaled_style.set_size(std::max(g_style_manager->minimum_font_size(),
 	                               static_cast<int>(std::ceil(scaled_style.size() * font_scale_))));
 	return as_richtext_paragraph(temp, scaled_style, align_);

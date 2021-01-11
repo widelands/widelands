@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "graphic/styles/font_style.h"
 #include "ui_basic/panel.h"
 
 #define CHAT_HISTORY_SIZE 5
@@ -51,6 +52,8 @@ struct EditBox : public Panel {
 	void set_text(const std::string&);
 	void set_max_length(int);
 	void set_font_scale(float scale);
+	void set_font_style(const UI::FontStyleInfo& style);
+	void set_font_style_and_margin(const UI::FontStyleInfo& style, int margin);
 
 	void activate_history(bool activate) {
 		history_active_ = activate;
@@ -94,16 +97,13 @@ private:
 	std::string history_[CHAT_HISTORY_SIZE];
 	bool password_;
 	bool warning_;
-	uint32_t snap_to_char(uint32_t cursor) const;
+	uint32_t snap_to_char(uint32_t cursor);
 	void select_until(uint32_t end) const;
 	uint32_t next_char(uint32_t cursor) const;
 	uint32_t prev_char(uint32_t cursor) const;
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 	void delete_selected_text();
 	void copy_selected_text();
-	void set_caret_to_cursor_pos(int32_t cursor_pos_x);
-	int calculate_text_width(int pos) const;
-	int approximate_cursor(int32_t cursor_pos_x, int approx_caret_pos) const;
 };
 }  // namespace UI
 

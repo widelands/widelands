@@ -56,7 +56,6 @@ public:
 	void push_arg(const Widelands::Player*);
 	void push_arg(const Widelands::Coords&);
 	void push_arg(const std::string&);
-	void push_arg(int);
 
 	// Accesses the returned values from the run of the coroutine.
 	uint32_t pop_uint32();

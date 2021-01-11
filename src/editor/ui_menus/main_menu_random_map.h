@@ -41,10 +41,17 @@ namespace UI {
 template <typename T, typename ID> struct IDButton;
 }
 
-class MainMenuNewRandomMapPanel : public UI::Box {
-public:
-	explicit MainMenuNewRandomMapPanel(
-	   UI::Panel& parent, UI::PanelStyle, int32_t inner_w, uint32_t map_w, uint32_t map_h);
+/**
+ * This is the new map selection menu. It offers
+ * the user to choose the new world and a few other
+ * things like size, world ....
+ */
+struct MainMenuNewRandomMap : public UI::UniqueWindow {
+	explicit MainMenuNewRandomMap(UI::Panel& parent,
+	                              UI::WindowStyle,
+	                              UI::UniqueWindow::Registry&,
+	                              uint32_t map_w,
+	                              uint32_t map_h);
 
 	bool do_generate_map(Widelands::EditorGameBase&,
 	                     EditorInteractive*,
@@ -60,10 +67,7 @@ public:
 		kPlayers
 	};
 
-	void set_buttons(UI::Button& o, UI::Button& c) {
-		ok_button_ = &o;
-		cancel_button_ = &c;
-	}
+	bool handle_key(bool down, SDL_Keysym) override;
 
 private:
 	void button_clicked(ButtonId);
@@ -76,14 +80,17 @@ private:
 	//                        This function makes sure that after the normalization,
 	//                        the value related to the button will still be set
 	//                        as requested by the user.
-	void normalize_landmass(MainMenuNewRandomMapPanel::ButtonId clicked_button);
+	void normalize_landmass(MainMenuNewRandomMap::ButtonId clicked_button);
 
 	void set_map_info(Widelands::UniqueRandomMapInfo& map_info) const;
 
 	UI::FontStyle label_style_;
 
 	// UI elements
+	int32_t margin_;
+	int32_t box_width_;
 	int32_t label_height_;
+	UI::Box box_;
 
 	// Size
 	MapSizeBox map_size_box_;
@@ -96,10 +103,6 @@ private:
 	std::vector<std::string> resource_amounts_;
 	uint32_t resource_amount_;
 	UI::Dropdown<size_t> world_, resources_;
-
-	enum class TerrainDistribution { kDefault, kAlpine, kAtoll, kWasteland, kRandom, kCustom };
-	UI::Dropdown<TerrainDistribution> terrains_distribution_;
-	void select_terrains_distribution();
 
 	// Land
 	int32_t waterval_, landval_, wastelandval_, mountainsval_;
@@ -119,29 +122,10 @@ private:
 	UI::Textarea map_id_label_;
 	UI::EditBox map_id_edit_;
 
-	UI::Button* ok_button_;
-	UI::Button* cancel_button_;
-
-	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMapPanel);
-};
-
-class MainMenuNewRandomMap : public UI::UniqueWindow {
-public:
-	explicit MainMenuNewRandomMap(UI::Panel& parent,
-	                              UI::UniqueWindow::Registry&,
-	                              uint32_t map_w,
-	                              uint32_t map_h);
-
-	bool handle_key(bool down, SDL_Keysym) override;
-
-private:
-	UI::Box box_;
-	MainMenuNewRandomMapPanel panel_;
-
 	// Buttons
 	UI::Box button_box_;
 	UI::Button ok_button_, cancel_button_;
-	void clicked_ok();
+
 	DISALLOW_COPY_AND_ASSIGN(MainMenuNewRandomMap);
 };
 

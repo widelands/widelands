@@ -74,8 +74,7 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 			if (row_ > hollow_area_.radius) {
 				phase_ = Phase::kNone;
 				return true;  // early out
-			}
-			if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius) {
+			} else if (phase_ == Phase::kLower && row_ > hollow_area_.hole_radius) {
 				phase_ = Phase::kBottom;
 			}
 

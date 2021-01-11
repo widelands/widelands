@@ -33,8 +33,7 @@ descriptions:new_productionsite_type {
    animations = {unoccupied = {hotspot = {48, 50}}},
 
    aihints = {
-      supports_production_of = { "balsa", "rubber", },
-      requires_supporters = true,
+      basic_amount = 2,
       space_consumer = true,
    },
 
@@ -54,7 +53,7 @@ descriptions:new_productionsite_type {
       },
       plant_balsa = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"planting balsa tree",
+         descname = _"planting balsatree",
          actions = {
             -- time total: xx
             "return=skipped unless economy needs balsa",
@@ -64,7 +63,7 @@ descriptions:new_productionsite_type {
       },
       plant_rubber = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"planting rubber tree",
+         descname = _"planting rubbertree",
          actions = {
             -- time total: xx
             "return=skipped unless economy needs rubber",
@@ -74,7 +73,7 @@ descriptions:new_productionsite_type {
       },
       plant_ironwood = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"planting ironwood tree",
+         descname = _"planting ironwoodtree",
          actions = {
             -- time total: xx
             "return=skipped unless economy needs ironwood",
@@ -82,14 +81,14 @@ descriptions:new_productionsite_type {
             "sleep=duration:13s"
          },
       },
-      dummy = {
-         -- dirty hack to make the relation to cutter inverse due to the cutter being an upgraded building
-         -- TODO(hessenfarmer): make this dissapear in building help
-         descname = "dummy",
-         actions = {
-            "produce=ironwood",
-         },
-      },
+      -- dummy = {
+         -- -- dirty hack to make the relation to cutter inverse due to the cutter being an upgraded building
+         -- -- TODO(hessenfarmer): make this dissapear in building help
+         -- descname = "dummy",
+         -- actions = {
+            -- "callworker=plant",
+         -- },
+      -- },
    }
 }
 

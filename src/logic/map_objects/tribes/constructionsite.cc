@@ -606,16 +606,17 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			                       (work_steptime_ - game.get_gametime()).get());
 			builder_idle_ = false;
 			return true;
-		}
-		// TODO(fweber): cause "construction sounds" to be played -
-		// perhaps dependent on kind of construction?
+		} else {
+			// TODO(fweber): cause "construction sounds" to be played -
+			// perhaps dependent on kind of construction?
 
-		++work_completed_;
-		if (work_completed_ >= work_steps_) {
-			schedule_destroy(game);
-		}
+			++work_completed_;
+			if (work_completed_ >= work_steps_) {
+				schedule_destroy(game);
+			}
 
-		working_ = false;
+			working_ = false;
+		}
 	}
 
 	// Fetch wares from flag

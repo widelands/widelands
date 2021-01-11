@@ -70,12 +70,6 @@ void ScenarioDetails::update(const ScenarioData& scenariodata) {
 		               as_content(scenariodata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
 
-		// Do we want to show add-on conflicts info for campaigns or scenarios?
-		// The official ones don't use add-ons, and add-on campaigns will tell users
-		// in the add-on manager if there are dependency problems.
-		// Plus, ScenarioData currently does not preload the scenario map, so fetching
-		// add-ons info there would introduce additional complexity.
-
 		description = (boost::format("<rt>%s</rt>") % description).str();
 		descr_.set_text(description);
 	} else {

@@ -21,66 +21,12 @@
 
 #include <memory>
 
-#include "base/log.h"
 #include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/image_cache.h"
-#include "graphic/image_io.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 
-constexpr const char* const kDefaultTemplate = "templates/default/";
-static std::string g_template_dir;
-static std::map<std::string, std::unique_ptr<StyleManager>> g_style_managers;
-StyleManager* g_style_manager(nullptr);  // points to an entry in `g_style_managers`
-
-const std::string& template_dir() {
-	return g_template_dir;
-}
-void set_template_dir(std::string dir) {
-	if (dir.empty()) {
-		// Empty string means "use default"
-		dir = kDefaultTemplate;
-	}
-
-	if (dir.back() != '/') {
-		dir += '/';
-	}
-
-	if (!g_fs->is_directory(dir)) {
-		if (dir == kDefaultTemplate) {
-			throw wexception("Default template directory '%s' does not exist!", dir.c_str());
-		}
-		log_warn("set_template_dir: template directory '%s' does not exist, using default template",
-		         dir.c_str());
-		dir = kDefaultTemplate;
-	}
-
-	if (g_template_dir == dir) {
-		// nothing to do
-		return;
-	}
-
-	g_template_dir = dir;
-
-	auto it = g_style_managers.find(g_template_dir);
-	if (it != g_style_managers.end()) {
-		g_style_manager = it->second.get();
-	} else {
-		g_style_manager = new StyleManager();
-		g_style_managers[g_template_dir] = std::unique_ptr<StyleManager>(g_style_manager);
-	}
-}
-
-const Image& load_safe_template_image(const std::string& path) {
-	try {
-		return *g_image_cache->get(template_dir() + path);
-	} catch (const ImageNotFound& error) {
-		log_warn(
-		   "Template image '%s' not found, using fallback image (%s)", path.c_str(), error.what());
-		return *g_image_cache->get("images/novalue.png");
-	}
-}
+StyleManager* g_style_manager;
 
 namespace {
 // Read RGB(A) color from LuaTable
@@ -156,7 +102,7 @@ StyleManager::StyleManager() {
 
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(
-	   lua.run_script((boost::format("%1%init.lua") % template_dir()).str()));
+	   lua.run_script((boost::format("%1%init.lua") % kTemplateDir).str()));
 
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
@@ -269,7 +215,6 @@ StyleManager::StyleManager() {
 	add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
 	add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
 	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
-	add_font_style(UI::FontStyle::kItalic, *element_table, "italic");
 	add_font_style(
 	   UI::FontStyle::kFsGameSetupHeadings, *element_table, "fsmenu_game_setup_headings");
 	add_font_style(

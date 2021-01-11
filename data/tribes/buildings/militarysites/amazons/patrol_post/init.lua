@@ -35,16 +35,11 @@ descriptions:new_militarysite_type {
    prefer_heroes = false,
 
    messages = {
-      -- TRANSLATORS: Message sent by an Amazon military site
-      occupied = pgettext("amazons_building", "Your soldiers have occupied your patrol post."),
-      -- TRANSLATORS: Message sent by an Amazon military site
-      aggressor = pgettext("amazons_building", "Your patrol post discovered an aggressor."),
-      -- TRANSLATORS: Message sent by an Amazon military site
-      attack = pgettext("amazons_building", "Your patrol post is under attack."),
-      -- TRANSLATORS: Message sent by an Amazon military site
-      defeated_enemy = pgettext("amazons_building", "The enemy defeated your soldiers at the patrol post."),
-      -- TRANSLATORS: Message sent by an Amazon military site
-      defeated_you = pgettext("amazons_building", "Your soldiers defeated the enemy at the patrol post.")
+      occupied = _"Your soldiers have occupied your patrol post.",
+      aggressor = _"Your patrol post discovered an aggressor.",
+      attack = _"Your patrol post is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the patrol post.",
+      defeated_you = _"Your soldiers defeated the enemy at the patrol post."
    },
 }
 pop_textdomain()

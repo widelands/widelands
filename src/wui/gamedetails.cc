@@ -32,7 +32,6 @@
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "map_io/map_loader.h"
 
@@ -89,8 +88,7 @@ void GameDetails::clear() {
 void GameDetails::display(const std::vector<SavegameData>& gamedata) {
 	if (gamedata.empty()) {
 		return;
-	}
-	if (gamedata.size() > 1) {
+	} else if (gamedata.size() > 1) {
 		show(gamedata);
 	} else {
 		show(gamedata[0]);
@@ -182,12 +180,6 @@ void GameDetails::show_game_description(const SavegameData& gamedata) {
 	               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, panel_style_))
 	                 .str();
 
-	description =
-	   (boost::format("%s%s") % description %
-	    as_heading_with_content(_("Add-Ons:"), AddOns::check_requirements(gamedata.required_addons),
-	                            panel_style_, false, true))
-	      .str();
-
 	std::string filename = gamedata.filename;
 	// Remove first directory from filename. This will be the save/ or replays/ folder
 	assert(filename.find('/') != std::string::npos);
@@ -225,7 +217,7 @@ void GameDetails::show_minimap(const SavegameData& gamedata) {
 			filename.append(kSavegameExtension);
 			std::unique_ptr<Widelands::MapLoader> ml(
 			   egbase_.mutable_map()->get_correct_loader(filename));
-			if (ml.get() && 0 == ml->load_map_for_render(egbase_, &egbase_.enabled_addons())) {
+			if (ml.get() && 0 == ml->load_map_for_render(egbase_)) {
 				minimap_cache_[gamedata.filename] =
 				   draw_minimap(egbase_, nullptr, Rectf(), MiniMapType::kStaticMap,
 				                MiniMapLayer::Terrain | MiniMapLayer::StartingPositions);

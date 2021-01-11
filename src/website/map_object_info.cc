@@ -241,7 +241,7 @@ void add_tribe_info(const Widelands::TribeBasicInfo& tribe_info, JSON::Element* 
 	json_tribe->add_string("icon", tribe_info.icon);
 }
 
-void write_tribes(const Widelands::EditorGameBase& egbase, FileSystem* out_filesystem) {
+void write_tribes(Widelands::EditorGameBase& egbase, FileSystem* out_filesystem) {
 	std::unique_ptr<JSON::Element> json(new JSON::Element());
 	JSON::Array* json_tribes_array = json->add_array("tribes");
 

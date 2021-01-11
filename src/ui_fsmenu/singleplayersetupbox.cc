@@ -26,7 +26,6 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "ui_basic/color_chooser.h"
 
 SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const parent,
                                                              int32_t const,
@@ -43,8 +42,9 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
              h,
              h,
              UI::ButtonStyle::kFsMenuSecondary,
-             playercolor_image(),
-             (boost::format(_("Player %u")) % static_cast<unsigned>(id_ + 1)).str()),
+             playercolor_image(id, "images/players/player_position_menu.png"),
+             (boost::format(_("Player %u")) % static_cast<unsigned>(id_ + 1)).str(),
+             UI::Button::VisualState::kFlat),
      player_type_(this,
                   (boost::format("dropdown_type%d") % static_cast<unsigned>(id)).str(),
                   0,
@@ -85,35 +85,15 @@ SinglePlayerActivePlayerGroup::SinglePlayerActivePlayerGroup(UI::Panel* const pa
 	add(teams_.get_dropdown());
 
 	player_.set_disable_style(UI::ButtonDisableStyle::kFlat);
-	player_.sigclicked.connect([this]() { choose_color(); });
-
+	player_.set_enabled(false);
 	update();
 }
-void SinglePlayerActivePlayerGroup::force_new_dimensions(uint32_t standard_element_height) {
+void SinglePlayerActivePlayerGroup::force_new_dimensions(float, uint32_t standard_element_height) {
 	player_.set_desired_size(standard_element_height, standard_element_height);
 	player_type_.set_desired_size(standard_element_height, standard_element_height);
 	tribe_.set_desired_size(standard_element_height, standard_element_height);
 	start_type.set_desired_size(8 * standard_element_height, standard_element_height);
 	teams_.set_desired_size(standard_element_height, standard_element_height);
-}
-
-void SinglePlayerActivePlayerGroup::choose_color() {
-	Panel* p = this;
-	while (p->get_parent()) {
-		p = p->get_parent();
-	}
-
-	UI::ColorChooser c(
-	   p, UI::WindowStyle::kFsMenu, settings_->settings().players[id_].color, &kPlayerColors[id_]);
-	if (c.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		settings_->set_player_color(id_, c.get_color());
-		update();
-	}
-}
-
-inline const Image* SinglePlayerActivePlayerGroup::playercolor_image() {
-	return ::playercolor_image(
-	   settings_->settings().players[id_].color, "images/players/player_position_menu.png");
 }
 
 void SinglePlayerActivePlayerGroup::update() {
@@ -122,9 +102,7 @@ void SinglePlayerActivePlayerGroup::update() {
 	player_type_.rebuild();
 
 	const PlayerSettings& player_setting = settings.players[id_];
-	player_.set_pic(playercolor_image());
-	player_.set_tooltip(player_setting.name);
-	player_.set_enabled(player_setting.state != PlayerSettings::State::kClosed);
+	player_.set_tooltip(player_setting.name.empty() ? "" : player_setting.name);
 	if (player_setting.state == PlayerSettings::State::kClosed ||
 	    player_setting.state == PlayerSettings::State::kOpen) {
 
@@ -145,11 +123,12 @@ void SinglePlayerActivePlayerGroup::update() {
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
                                            GameSettingsProvider* const settings,
-                                           uint32_t standard_element_height)
+                                           uint32_t standard_element_height,
+                                           uint32_t padding)
    : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      settings_(settings),
-     standard_height_(standard_element_height),
-     scrollable_playerbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     standard_height(standard_element_height),
+     scrollable_playerbox(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      title_(this,
             UI::PanelStyle::kFsMenu,
             UI::FontStyle::kFsGameSetupHeadings,
@@ -160,9 +139,9 @@ SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
             _("Players"),
             UI::Align::kRight) {
 	add(&title_, Resizing::kAlign, UI::Align::kCenter);
-	add_space(title_.get_h());
-	add(&scrollable_playerbox_, Resizing::kExpandBoth);
-	scrollable_playerbox_.set_scrolling(true);
+	add_space(3 * padding);
+	add(&scrollable_playerbox, Resizing::kExpandBoth);
+	scrollable_playerbox.set_scrolling(true);
 	subscriber_ = Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& n) {
 		if (n.action == NoteGameSettings::Action::kMap) {
 			reset();
@@ -178,28 +157,27 @@ void SinglePlayerSetupBox::update() {
 
 	assert(!settings.tribes.empty());
 
-	for (PlayerSlot i = active_player_groups_.size(); i < number_of_players; ++i) {
-		active_player_groups_.push_back(new SinglePlayerActivePlayerGroup(
-		   &scrollable_playerbox_, 0, standard_height_, i, settings_));
-		scrollable_playerbox_.add(active_player_groups_.at(i), Resizing::kFullSize);
+	for (PlayerSlot i = active_player_groups.size(); i < number_of_players; ++i) {
+		active_player_groups.push_back(new SinglePlayerActivePlayerGroup(
+		   &scrollable_playerbox, 0, standard_height, i, settings_));
+		scrollable_playerbox.add(active_player_groups.at(i), Resizing::kFullSize);
 	}
 
-	for (auto& p : active_player_groups_) {
+	for (auto& p : active_player_groups) {
 		p->update();
 	}
 }
 
-void SinglePlayerSetupBox::force_new_dimensions(uint32_t standard_element_height,
-                                                int32_t max_size) {
-	standard_height_ = standard_element_height;
-	for (auto& active_player_group : active_player_groups_) {
-		active_player_group->force_new_dimensions(standard_element_height);
+void SinglePlayerSetupBox::force_new_dimensions(float scale, uint32_t standard_element_height) {
+	standard_height = standard_element_height;
+	title_.set_font_scale(scale);
+	for (auto& active_player_group : active_player_groups) {
+		active_player_group->force_new_dimensions(scale, standard_element_height);
 	}
-	scrollable_playerbox_.set_max_size(get_inner_w(), max_size - 2 * title_.get_h());
 }
 void SinglePlayerSetupBox::reset() {
-	for (auto& p : active_player_groups_) {
+	for (auto& p : active_player_groups) {
 		p->die();
 	}
-	active_player_groups_.clear();
+	active_player_groups.clear();
 }

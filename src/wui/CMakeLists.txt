@@ -101,7 +101,6 @@ wl_library(wui_common_gamedetails
   DEPENDS
     base_i18n
     base_log
-    base_macros
     base_time_string
     game_io
     graphic
@@ -113,7 +112,6 @@ wl_library(wui_common_gamedetails
     graphic_text_layout
     io_filesystem
     logic
-    logic_addons
     logic_constants
     logic_filesystem_constants
     logic_game_controller
@@ -142,7 +140,6 @@ wl_library(wui_common_mapdetails
     io_filesystem
     logic
     logic_exceptions
-    logic_filesystem_constants
     logic_game_settings
     logic_map
     map_io_map_loader
@@ -253,8 +250,6 @@ wl_library(wui
     general_statistics_menu.h
     helpwindow.cc
     helpwindow.h
-    info_panel.cc
-    info_panel.h
     inputqueuedisplay.cc
     inputqueuedisplay.h
     interactive_base.cc
@@ -292,8 +287,6 @@ wl_library(wui
     stock_menu.h
     story_message_box.cc
     story_message_box.h
-    toolbar.cc
-    toolbar.h
     trainingsitewindow.cc
     trainingsitewindow.h
     tribal_encyclopedia.cc

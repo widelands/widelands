@@ -22,6 +22,7 @@
 
 #include <memory>
 
+#include "graphic/toolbar_imageset.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -36,8 +37,6 @@
 #include "wui/minimap.h"
 #include "wui/quicknavigation.h"
 
-class InfoPanel;
-class MainToolbar;
 class UniqueWindowHandler;
 
 struct WorkareaPreview {
@@ -184,8 +183,6 @@ public:
 		return &map_view_;
 	}
 
-	void info_panel_fast_forward_message_queue();
-
 	// This function should return true only in EditorInteractive
 	virtual bool omnipotent() const {
 		return cheat_mode_enabled_;
@@ -206,10 +203,6 @@ public:
 	}
 	virtual Widelands::PlayerNumber player_number() const {
 		return 0;
-	}
-
-	bool extended_tooltip_accessibility_mode() const override {
-		return true;
 	}
 
 protected:
@@ -237,7 +230,6 @@ protected:
 	                               bool bind_default_toggle = false);
 
 	void hide_minimap();
-	void resize_minimap();
 
 	void mainview_move();
 
@@ -282,7 +274,9 @@ protected:
 		return chat_overlay_;
 	}
 
-	UI::Box* toolbar();
+	UI::Box* toolbar() {
+		return &toolbar_.box;
+	}
 
 	// Returns the information which overlay text should currently be drawn.
 	// Returns InfoToDraw::kNone if not 'show'
@@ -327,8 +321,6 @@ protected:
 #ifndef NDEBUG  //  only in debug builds
 	UI::UniqueWindow::Registry debugconsole_;
 #endif
-
-	InfoPanel& info_panel_;
 
 private:
 	void play_sound_effect(const NoteSound& note) const;
@@ -382,10 +374,30 @@ private:
 	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 
-	MainToolbar& toolbar_;
+	/// A horizontal menu bar embellished with background graphics
+	struct Toolbar : UI::Panel {
+		Toolbar(UI::Panel* parent);
+
+		/// Sets the actual size and position of the toolbar
+		void finalize();
+		void draw(RenderTarget& dst) override;
+		void change_imageset(const ToolbarImageset& images);
+
+		/// A row of buttons and dropdown menus
+		UI::Box box;
+
+	private:
+		/// The set of background images
+		ToolbarImageset imageset;
+		/// How often the left and right images get repeated, calculated from the width of the box
+		int repeat;
+	} toolbar_;
 
 	// Map View menu on the toolbar
 	UI::Dropdown<MapviewMenuEntry> mapviewmenu_;
+	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will
+	// delete it.
+	MiniMap* minimap_;
 	MiniMap::Registry minimap_registry_;
 	QuickNavigation quick_navigation_;
 

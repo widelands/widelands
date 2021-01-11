@@ -51,10 +51,10 @@ descriptions:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "fish", amount = 6 },
-      { name = "meat", amount = 6 },
-      { name = "amazons_bread", amount = 5 },
-      { name = "chocolate", amount = 5 },
+      { name = "fish", amount = 5 },
+      { name = "meat", amount = 5 },
+      { name = "amazons_bread", amount = 6 },
+      { name = "chocolate", amount = 6 },
       { name = "boots_sturdy", amount = 2 },
       { name = "boots_swift", amount = 2 },
       { name = "boots_hero", amount = 2 },
@@ -229,14 +229,7 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 6,
-   trainer_patience = 11,
-
-   messages = {
-      -- TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
-      no_soldier = pgettext("amazons_building", "No soldier to train!"),
-      -- TRANSLATORS: Amazon training site tooltip when none of the present soldiers match the current training program
-      no_soldier_for_level = pgettext("amazons_building", "No soldier found for this training level!"),
-   },
+   trainer_patience = 11
 }
 
 pop_textdomain()

@@ -84,12 +84,13 @@ void Carrier::road_update(Game& game, State& state) {
 		if (state.ivar1) {
 			state.ivar1 = 0;
 			return start_task_transport(game, promised_pickup_to_);
-		}
-		// Short delay before we move to pick up
-		state.ivar1 = 1;
+		} else {
+			// Short delay before we move to pick up
+			state.ivar1 = 1;
 
-		set_animation(game, descr().get_animation("idle", this));
-		return schedule_act(game, Duration(50));
+			set_animation(game, descr().get_animation("idle", this));
+			return schedule_act(game, Duration(50));
+		}
 	}
 
 	RoadBase& road = dynamic_cast<RoadBase&>(*get_location(game));
@@ -110,8 +111,9 @@ void Carrier::road_update(Game& game, State& state) {
 		r.charge_wallet(game);
 		// if road still promoted then schedule demotion, otherwise go fully idle waiting until signal
 		return r.is_busy() ? schedule_act(game, Duration((r.wallet() + 2) * 500)) : skip_act();
+	} else {
+		skip_act();
 	}
-	skip_act();
 }
 
 /**
@@ -211,8 +213,7 @@ void Carrier::deliver_to_building(Game& game, State& state) {
 
 	if (pos && pos->descr().type() == Widelands::MapObjectType::FLAG) {
 		return pop_task(game);  //  we are done
-	}
-	if (upcast(Building, building, pos)) {
+	} else if (upcast(Building, building, pos)) {
 		// Drop all wares addressed to this building
 		while (WareInstance* const ware = get_carried_ware(game)) {
 			// If the building has disappeared and immediately been replaced
@@ -269,9 +270,10 @@ void Carrier::pickup_from_flag(Game& game, const State& state) {
 
 			set_animation(game, descr().get_animation("idle", this));
 			return schedule_act(game, Duration(20));
+		} else {
+			molog(game.get_gametime(), "[Carrier]: Nothing suitable on flag.\n");
+			return pop_task(game);
 		}
-		molog(game.get_gametime(), "[Carrier]: Nothing suitable on flag.\n");
-		return pop_task(game);
 	}
 }
 
@@ -318,8 +320,9 @@ void Carrier::drop_ware(Game& game, State& state) {
 
 		set_animation(game, descr().get_animation("idle", this));
 		return schedule_act(game, Duration(20));
+	} else {
+		return pop_task(game);
 	}
-	return pop_task(game);
 }
 
 /**
@@ -358,8 +361,7 @@ bool Carrier::swap_or_wait(Game& game, State& state) {
 		// All is well, we already acked a ware that we can pick up
 		// from this flag
 		return false;
-	}
-	if (flag.has_pending_ware(game, otherflag)) {
+	} else if (flag.has_pending_ware(game, otherflag)) {
 		if (!flag.ack_pickup(game, otherflag)) {
 			throw wexception(
 			   "MO(%u): transport: overload exchange: flag %u is fucked up", serial(), flag.serial());
@@ -367,11 +369,10 @@ bool Carrier::swap_or_wait(Game& game, State& state) {
 
 		promised_pickup_to_ = state.ivar1 ^ 1;
 		return false;
-	}
-
-	if (!start_task_walktoflag(game, state.ivar1 ^ 1, true)) {
+	} else if (!start_task_walktoflag(game, state.ivar1 ^ 1, true)) {
 		start_task_waitforcapacity(game, flag);  //  wait one node away
 	}
+
 	return true;
 }
 

@@ -79,7 +79,11 @@ BaseListselect::BaseListselect(Panel* const parent,
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     lineheight_(text_height(table_style().enabled()) + kMargin),
+     table_style_(g_style_manager->table_style(style)),
+     background_style_(selection_mode == ListselectLayout::kDropdown ?
+                          g_style_manager->dropdown_style(style) :
+                          nullptr),
+     lineheight_(text_height(table_style_.enabled()) + kMargin),
      notify_on_delete_(nullptr) {
 	set_thinks(false);
 
@@ -107,15 +111,6 @@ BaseListselect::~BaseListselect() {
 	if (notify_on_delete_) {
 		notify_on_delete_->notify_list_deleted();
 	}
-}
-
-inline const UI::TableStyleInfo& BaseListselect::table_style() const {
-	return g_style_manager->table_style(panel_style_);
-}
-inline const UI::PanelStyleInfo* BaseListselect::background_style() const {
-	return selection_mode_ == ListselectLayout::kDropdown ?
-	          g_style_manager->dropdown_style(panel_style_) :
-	          nullptr;
 }
 
 /**
@@ -147,7 +142,7 @@ void BaseListselect::add(const std::string& name,
                          bool const sel,
                          const std::string& tooltip_text,
                          const std::string& hotkey) {
-	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style());
+	EntryRecord* er = new EntryRecord(name, entry, pic, tooltip_text, hotkey, table_style_);
 
 	int entry_height = lineheight_;
 	if (pic) {
@@ -304,15 +299,15 @@ int BaseListselect::calculate_desired_width() {
 	}
 
 	// Add up the width
-	int txt_width = widest_text_;
+	int text_width = widest_text_;
 	if (widest_hotkey_ > 0) {
-		txt_width += kHotkeyGap;
-		txt_width += widest_hotkey_;
+		text_width += kHotkeyGap;
+		text_width += widest_hotkey_;
 	}
 
 	const int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 	const int old_width = get_w();
-	return txt_width + picw + 8 + old_width - get_eff_w();
+	return text_width + picw + 8 + old_width - get_eff_w();
 }
 
 void BaseListselect::layout() {
@@ -344,8 +339,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
-	if (const UI::PanelStyleInfo* s = background_style()) {
-		draw_background(dst, *s);
+	if (background_style_ != nullptr) {
+		draw_background(dst, *background_style_);
 	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {
@@ -368,9 +363,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 		assert(eff_h < std::numeric_limits<int32_t>::max());
 
 		const EntryRecord& er = *entry_records_[idx];
-		const int txt_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
+		const int text_height = std::max(er.rendered_name->height(), er.rendered_hotkey->height());
 
-		int lineheight = std::max(get_lineheight(), txt_height);
+		int lineheight = std::max(get_lineheight(), text_height);
 
 		// Don't draw over the bottom edge
 		lineheight = std::min(eff_h - y, lineheight);
@@ -411,10 +406,10 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Fix vertical position for mixed font heights
-		if (get_lineheight() > txt_height) {
-			point.y += (lineheight_ - txt_height) / 2;
+		if (get_lineheight() > text_height) {
+			point.y += (lineheight_ - text_height) / 2;
 		} else {
-			point.y -= (txt_height - lineheight_) / 2;
+			point.y -= (text_height - lineheight_) / 2;
 		}
 
 		// Don't draw over the bottom edge
@@ -492,8 +487,9 @@ bool BaseListselect::handle_mousepress(const uint8_t btn, int32_t, int32_t y) {
 			if (selection_mode_ == ListselectLayout::kDropdown) {
 				set_visible(false);
 				return true;
+			} else {
+				return false;
 			}
-			return false;
 		}
 		play_click();
 		select(y);

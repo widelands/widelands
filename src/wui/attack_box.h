@@ -27,7 +27,6 @@
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
-#include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
 
@@ -53,10 +52,6 @@ struct AttackBox : public UI::Box {
 
 	UI::Button* get_attack_button() const {
 		return attack_button_.get();
-	}
-
-	bool get_allow_conquer() const {
-		return do_not_conquer_ && !do_not_conquer_->get_state();
 	}
 
 private:
@@ -157,7 +152,6 @@ private:
 	std::unique_ptr<ListOfSoldiers> attacking_soldiers_;
 	std::unique_ptr<ListOfSoldiers> remaining_soldiers_;
 	std::unique_ptr<UI::Button> attack_button_;
-	std::unique_ptr<UI::Checkbox> do_not_conquer_;
 
 	/// The last time the information in this Panel got updated
 	Time lastupdate_;

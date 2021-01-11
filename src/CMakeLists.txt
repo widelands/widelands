@@ -33,20 +33,11 @@ if (WIN32)
 	configure_file (${CMAKE_CURRENT_SOURCE_DIR}/../utils/win32/widelands.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/widelands.rc)
 	message (STATUS "Configured windows resource file")
 	set(WIN32_ICON_O ${CMAKE_CURRENT_BINARY_DIR}/wl_icon.o)
-	if(MSVC)
-		ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
-			COMMAND rc
-				/fo ${WIN32_ICON_O}
-				${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
-		)	
-	else()
-		ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
-			COMMAND ${MINGW_PREFIX}windres
-				-o${WIN32_ICON_O}
-				-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
-		)
-	endif()
-	
+	ADD_CUSTOM_COMMAND(OUTPUT ${WIN32_ICON_O}
+		COMMAND ${MINGW_PREFIX}windres
+			-o${WIN32_ICON_O}
+			-i${CMAKE_CURRENT_BINARY_DIR}/widelands.rc
+  )
   wl_binary(widelands
     WIN32
     SRCS
@@ -113,9 +104,9 @@ wl_library(widelands_ball_of_mud
     graphic_fonthandler
     graphic_mouse_cursor
     graphic_text
+    graphic_text_layout
     io_filesystem
     logic
-    logic_addons
     logic_exceptions
     logic_filesystem_constants
     logic_game_controller
@@ -126,7 +117,12 @@ wl_library(widelands_ball_of_mud
     network
     sound
     ui_basic
-    ui_fsmenu
+    ui_fsmenu_gameloading
+    ui_fsmenu_main
+    ui_fsmenu_maploading
+    ui_fsmenu_misc
+    ui_fsmenu_network
+    ui_fsmenu_options
     widelands_options
     wui
 )

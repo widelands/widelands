@@ -626,7 +626,7 @@ bool DefaultAI::check_enemy_sites(const Time& gametime) {
 	   enemy_sites[best_target].attack_counter + 1,
 	   (gametime - enemy_sites[best_target].last_time_attacked).get() / 1000);
 
-	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers, true);
+	game().send_player_enemyflagaction(*flag, player_number(), attacking_soldiers);
 	assert(player_->is_seeing(
 	   Widelands::Map::get_index(flag->get_building()->get_position(), map.get_width())));
 	attackers_count_ += attackers;
@@ -738,9 +738,7 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 		return true;
 	}
 
-	// reducing ware queues
-	// - for armours and weapons to 1
-	// - for others to 6
+	// reducing ware queues for armours and weapons to 1
 	for (Widelands::InputQueue* queue : tso.site->inputqueues()) {
 
 		if (queue->get_type() != Widelands::wwWARE) {
@@ -814,7 +812,7 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 			             player_statistics.get_old_visible_enemies_power(gametime)) ?
 			               1 :
 			               0;
-			inputs[2] = (mines_.size() < 3) ? -1 : 0;
+			inputs[2] = (mines_.size() > 2) ? 1 : 0;
 			inputs[3] = (mines_per_type[iron_resource_id].total_count() == 0) ? -1 : 0;
 			inputs[4] = (player_statistics.get_player_power(pn) * 2 >
 			             player_statistics.get_visible_enemies_power(gametime)) ?
@@ -889,6 +887,8 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 				                1 :
 				                0;
 			}
+			inputs[24] = (shortage < 2) ? 1 : 0;
+			inputs[25] = (shortage < 1) ? 1 : 0;
 
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {

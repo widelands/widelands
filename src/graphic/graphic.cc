@@ -40,6 +40,7 @@
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
+#include "graphic/style_manager.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -139,6 +140,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	g_image_cache->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
+	g_style_manager = new StyleManager();
 }
 
 Graphic::~Graphic() {
@@ -146,6 +148,8 @@ Graphic::~Graphic() {
 	g_animation_manager = nullptr;
 	delete g_image_cache;
 	g_image_cache = nullptr;
+	delete g_style_manager;
+	g_style_manager = nullptr;
 	if (sdl_window_) {
 		SDL_DestroyWindow(sdl_window_);
 		sdl_window_ = nullptr;

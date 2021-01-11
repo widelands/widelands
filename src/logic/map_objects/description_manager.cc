@@ -52,14 +52,14 @@ DescriptionManager::DescriptionManager(LuaInterface* lua) : lua_(lua) {
 /// Walk given directory and register descriptions
 void DescriptionManager::register_directory(const std::string& dirname,
                                             FileSystem* filesystem,
-                                            const RegistryCaller caller) {
+                                            bool is_scenario) {
 	FilenameSet files = filesystem->list_directory(dirname);
 	for (const std::string& file : files) {
 		if (filesystem->is_directory(file)) {
-			register_directory(file, filesystem, caller);
+			register_directory(file, filesystem, is_scenario);
 		} else {
 			if (strcmp(FileSystem::fs_filename(file.c_str()), "register.lua") == 0) {
-				if (caller == RegistryCaller::kScenario) {
+				if (is_scenario) {
 					std::unique_ptr<LuaTable> names_table = lua_->run_script("map:" + file);
 					for (const std::string& object_name : names_table->keys<std::string>()) {
 						const std::vector<std::string> attributes =
@@ -75,7 +75,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 						const std::vector<std::string> attributes =
 						   names_table->get_table(object_name)->array_entries<std::string>();
 						register_description(
-						   object_name, FileSystem::fs_dirname(file) + "init.lua", attributes, caller);
+						   object_name, FileSystem::fs_dirname(file) + "init.lua", attributes);
 						register_attributes(attributes, object_name);
 					}
 				}
@@ -86,8 +86,7 @@ void DescriptionManager::register_directory(const std::string& dirname,
 
 void DescriptionManager::register_description(const std::string& description_name,
                                               const std::string& script_path,
-                                              const std::vector<std::string>& attributes,
-                                              const RegistryCaller caller) {
+                                              const std::vector<std::string>& attributes) {
 	if (registered_descriptions_.count(description_name) == 1) {
 		throw GameDataError(
 		   "DescriptionManager::register_description: Attempt to register description\n"
@@ -108,7 +107,7 @@ void DescriptionManager::register_description(const std::string& description_nam
 	}
 
 	registered_descriptions_.insert(
-	   std::make_pair(description_name, RegisteredObject(script_path, attributes, caller)));
+	   std::make_pair(description_name, RegisteredObject(script_path, attributes)));
 }
 
 void DescriptionManager::register_scenario_description(FileSystem* filesystem,
@@ -134,9 +133,8 @@ void DescriptionManager::register_scenario_description(FileSystem* filesystem,
 		   description_name.c_str(), script_path.c_str());
 	}
 
-	registered_scenario_descriptions_.insert(std::make_pair(
-	   description_name,
-	   RegisteredObject("map:" + script_path, attributes, RegistryCaller::kScenario)));
+	registered_scenario_descriptions_.insert(
+	   std::make_pair(description_name, RegisteredObject("map:" + script_path, attributes)));
 }
 
 void DescriptionManager::load_description(const std::string& description_name) {
@@ -152,29 +150,25 @@ void DescriptionManager::load_description(const std::string& description_name) {
 		   description_name.c_str());
 	}
 
-	// Load it - scenario descriptions take precedence
-	const RegisteredObject* object = nullptr;
+	std::string object_script;
 
-	if (registered_scenario_descriptions_.count(description_name)) {
-		object = &registered_scenario_descriptions_.at(description_name);
-	} else if (registered_descriptions_.count(description_name)) {
-		object = &registered_descriptions_.at(description_name);
+	// Load it - scenario descriptions take precedence
+	if (registered_scenario_descriptions_.count(description_name) == 1) {
+		object_script = registered_scenario_descriptions_.at(description_name).script_path;
+	} else if (registered_descriptions_.count(description_name) == 1) {
+		object_script = registered_descriptions_.at(description_name).script_path;
 	} else {
 		throw GameDataError("DescriptionManager::load_description: Object '%s' was not registered",
 		                    description_name.c_str());
 	}
-	assert(object);
 
 	// Protect against circular dependencies when 1 script file has multiple descriptions in it
-	if (descriptions_being_loaded_.count(object->script_path) == 1) {
+	if (descriptions_being_loaded_.count(object_script) == 1) {
 		return;
 	}
-	descriptions_being_loaded_.insert(object->script_path);
-	lua_->run_script(object->script_path);
-	descriptions_being_loaded_.erase(descriptions_being_loaded_.find(object->script_path));
-
-	// Ensure that resources are not created by tribes add-ons, wares not by world add-ons, etc
-	Notifications::publish(NoteMapObjectDescriptionTypeCheck(description_name, object->caller));
+	descriptions_being_loaded_.insert(object_script);
+	lua_->run_script(object_script);
+	descriptions_being_loaded_.erase(descriptions_being_loaded_.find(object_script));
 }
 
 const std::vector<std::string>&

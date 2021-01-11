@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 26,
+	NETWORK_PROTOCOL_VERSION = 25,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -444,17 +444,6 @@ enum : uint8_t {
 	 * \li uint8_t: 1 if custom_starting_positions mode is enabled, 0 otherwise
 	 */
 	NETCMD_CUSTOM_STARTING_POSITIONS = 34,
-
-	/**
-	 * During game setup, this is sent by the client to indicate that the
-	 * client wants to change their color.
-	 *
-	 * \li unsigned_8: number of the player
-	 * \li unsigned_8: r
-	 * \li unsigned_8: g
-	 * \li unsigned_8: b
-	 */
-	NETCMD_SETTING_CHANGECOLOR = 35,
 
 	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability

@@ -22,29 +22,17 @@
 #include "graphic/image_cache.h"
 
 ToolbarImageset::ToolbarImageset()
-   : bottom_left_corner(g_image_cache->get("images/wui/toolbar/left_corner.png")),
-     bottom_left(g_image_cache->get("images/wui/toolbar/left.png")),
-     bottom_center(g_image_cache->get("images/wui/toolbar/center.png")),
-     bottom_right(g_image_cache->get("images/wui/toolbar/right.png")),
-     bottom_right_corner(g_image_cache->get("images/wui/toolbar/right_corner.png")),
-
-     top_left_corner(g_image_cache->get("images/wui/toolbar/left_corner_inv.png")),
-     top_left(g_image_cache->get("images/wui/toolbar/left_inv.png")),
-     top_center(g_image_cache->get("images/wui/toolbar/center_inv.png")),
-     top_right(g_image_cache->get("images/wui/toolbar/right_inv.png")),
-     top_right_corner(g_image_cache->get("images/wui/toolbar/right_corner_inv.png")) {
+   : left_corner(g_image_cache->get("images/wui/toolbar/left_corner.png")),
+     left(g_image_cache->get("images/wui/toolbar/left.png")),
+     center(g_image_cache->get("images/wui/toolbar/center.png")),
+     right(g_image_cache->get("images/wui/toolbar/right.png")),
+     right_corner(g_image_cache->get("images/wui/toolbar/right_corner.png")) {
 }
 
 ToolbarImageset::ToolbarImageset(const LuaTable& table)
-   : bottom_left_corner(g_image_cache->get(table.get_string("bottom_left_corner"))),
-     bottom_left(g_image_cache->get(table.get_string("bottom_left"))),
-     bottom_center(g_image_cache->get(table.get_string("bottom_center"))),
-     bottom_right(g_image_cache->get(table.get_string("bottom_right"))),
-     bottom_right_corner(g_image_cache->get(table.get_string("bottom_right_corner"))),
-
-     top_left_corner(g_image_cache->get(table.get_string("top_left_corner"))),
-     top_left(g_image_cache->get(table.get_string("top_left"))),
-     top_center(g_image_cache->get(table.get_string("top_center"))),
-     top_right(g_image_cache->get(table.get_string("top_right"))),
-     top_right_corner(g_image_cache->get(table.get_string("top_right_corner"))) {
+   : left_corner(g_image_cache->get(table.get_string("left_corner"))),
+     left(g_image_cache->get(table.get_string("left"))),
+     center(g_image_cache->get(table.get_string("center"))),
+     right(g_image_cache->get(table.get_string("right"))),
+     right_corner(g_image_cache->get(table.get_string("right_corner"))) {
 }

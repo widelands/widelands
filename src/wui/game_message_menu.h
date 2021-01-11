@@ -37,11 +37,10 @@ class InteractivePlayer;
 struct GameMessageMenu : public UI::UniqueWindow {
 	GameMessageMenu(InteractivePlayer&, UI::UniqueWindow::Registry&);
 
-	/* Shows a newly created message. If the message is not in the list already (the
-	 * message was added to the queue after the last time think() was executed), it
-	 * will be added to the beginning of the list. Toggles to inbox and autoselects
-	 * the new entry unless the user is currently multiselecting messages.
-	 */
+	/// Shows a newly created message. Assumes that the message is not yet in
+	/// the list (the message was added to the queue after the last time think()
+	/// was executed. Toggles to inbox and autoselects the new entry unless the user
+	/// is currently multiselecting messages.
 	void show_new_message(Widelands::MessageId, const Widelands::Message&);
 
 	enum class Mode { kInbox, kArchive };

@@ -4,7 +4,6 @@
 #include <string>
 
 #include "io/filesystem/filesystem.h"
-#include "logic/addons.h"
 #include "logic/game_controller.h"
 #include "logic/widelands.h"
 
@@ -41,10 +40,8 @@ public:
 	/// Single payer, nethost, netclient or replay
 	GameController::GameType gametype;
 
-	AddOns::AddOnRequirements required_addons;
-
 	SavegameData();
-	explicit SavegameData(const std::string& filename);
+	SavegameData(const std::string& filename);
 	SavegameData(const std::string& filename, const SavegameType& type);
 	static SavegameData create_parent_dir(const std::string& current_dir);
 	static SavegameData create_sub_dir(const std::string& directory);

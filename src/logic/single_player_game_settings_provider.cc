@@ -24,7 +24,6 @@
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/playercolor.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 
 SinglePlayerGameSettingsProvider::SinglePlayerGameSettingsProvider() {
@@ -109,7 +108,6 @@ void SinglePlayerGameSettingsProvider::set_map(const std::string& mapname,
 		player.initialization_index = 0;
 		player.name = (boost::format(_("Player %u")) % (player_nr + 1)).str();
 		player.team = 0;
-		player.color = kPlayerColors[player_nr];
 		// Set default computerplayer ai type
 		if (player.state == PlayerSettings::State::kComputer) {
 			const AI::ComputerPlayer::ImplementationVector& impls =
@@ -226,12 +224,6 @@ void SinglePlayerGameSettingsProvider::set_player_init(uint8_t const number, uin
 void SinglePlayerGameSettingsProvider::set_player_team(uint8_t number, Widelands::TeamNumber team) {
 	if (number < s.players.size()) {
 		s.players[number].team = team;
-	}
-}
-
-void SinglePlayerGameSettingsProvider::set_player_color(const uint8_t number, const RGBColor& c) {
-	if (number < s.players.size()) {
-		s.players[number].color = c;
 	}
 }
 

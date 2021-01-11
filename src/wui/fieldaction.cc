@@ -182,7 +182,6 @@ public:
 	void building_icon_mouse_out(Widelands::DescriptionIndex);
 	void building_icon_mouse_in(Widelands::DescriptionIndex);
 	void act_geologist();
-	void act_scout();
 	void act_mark_removal();
 	void act_unmark_removal();
 	void act_attack();  /// Launch the attack
@@ -200,8 +199,7 @@ private:
 	                       const char* picname,
 	                       void (FieldActionWindow::*fn)(),
 	                       const std::string& tooltip_text,
-	                       bool repeating = false,
-	                       bool enabled = true);
+	                       bool repeating = false);
 	void reset_mouse_and_die();
 
 	void clear_overlapping_workareas();
@@ -248,7 +246,6 @@ constexpr const char* const kImgButtonWatchField = "images/wui/fieldaction/menu_
 constexpr const char* const kImgDebug = "images/wui/fieldaction/menu_debug.png";
 constexpr const char* const kImgButtonAbort = "images/wui/menu_abort.png";
 constexpr const char* const kImgButtonGeologist = "images/wui/fieldaction/menu_geologist.png";
-constexpr const char* const kImgButtonScout = "images/wui/menus/watch_follow.png";
 constexpr const char* const kImgButtonMarkRemoval = "images/wui/fieldaction/menu_mark_removal.png";
 constexpr const char* const kImgButtonUnmarkRemoval =
    "images/wui/fieldaction/menu_unmark_removal.png";
@@ -440,19 +437,6 @@ void FieldActionWindow::add_buttons_auto() {
 				if (can_act) {
 					add_button(buildbox, "geologist", kImgButtonGeologist,
 					           &FieldActionWindow::act_geologist, _("Send geologist to explore site"));
-
-					const bool enabled = flag->get_economy(Widelands::wwWORKER)
-					                        ->has_building(flag->owner().tribe().scouts_house());
-					add_button(buildbox, "scout", kImgButtonScout, &FieldActionWindow::act_scout,
-					           enabled ? _("Send scout to explore surroundings") :
-					                     (boost::format("<rt><p>%s</p><p>%s</p></rt>") %
-					                      g_style_manager->font_style(UI::FontStyle::kDisabled)
-					                         .as_font_tag(_("Send scout to explore surroundings")) %
-					                      g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-					                         .as_font_tag(_("You need to connect this flag to a scout's "
-					                                        "house before you can send a scout here.")))
-					                        .str(),
-					           false, enabled);
 				}
 			}
 		} else {
@@ -558,6 +542,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 	const Widelands::TribeDescr& tribe = player_->tribe();
 
+	fastclick_ = false;
+
 	for (const Widelands::DescriptionIndex& building_index : tribe.buildings()) {
 		const Widelands::BuildingDescr* building_descr = tribe.get_building_descr(building_index);
 		BuildGrid** ppgrid;
@@ -633,7 +619,6 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps, int32_t max_nodecap
 
 		// Add it to the grid
 		(*ppgrid)->add(building_index);
-		fastclick_ = false;
 	}
 
 	// Add all necessary tabs
@@ -714,12 +699,10 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           const char* const picname,
                                           void (FieldActionWindow::*fn)(),
                                           const std::string& tooltip_text,
-                                          bool repeating,
-                                          bool enabled) {
+                                          bool repeating) {
 	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
 	                                     g_image_cache->get(picname), tooltip_text);
 	button.sigclicked.connect([this, fn]() { (this->*fn)(); });
-	button.set_enabled(enabled);
 	button.set_repeating(repeating);
 	box->add(&button);
 
@@ -785,8 +768,7 @@ void FieldActionWindow::act_configure_economy() {
 		if (upcast(InteractiveGameBase, igbase, &ibase())) {
 			Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
 			const bool can_act = igbase->can_act(ware_economy->owner().player_number());
-			EconomyOptionsWindow::create(get_parent(), igbase->egbase().mutable_descriptions(), *flag,
-			                             Widelands::WareWorker::wwWARE, can_act);
+			EconomyOptionsWindow::create(&ibase(), *flag, Widelands::WareWorker::wwWARE, can_act);
 		}
 	}
 	die();
@@ -1041,20 +1023,13 @@ void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex
 
 /*
 ===============
-Call a geologist or scout on this flag.
+Call a geologist on this flag.
 ===============
 */
 void FieldActionWindow::act_geologist() {
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Widelands::Flag, flag, game->map().get_immovable(node_))) {
-		game->send_player_flagaction(*flag, Widelands::FlagJob::Type::kGeologist);
-	}
-	reset_mouse_and_die();
-}
-void FieldActionWindow::act_scout() {
-	upcast(Game, game, &ibase().egbase());
-	if (upcast(Widelands::Flag, flag, game->map().get_immovable(node_))) {
-		game->send_player_flagaction(*flag, Widelands::FlagJob::Type::kScout);
+		game->send_player_flagaction(*flag);
 	}
 	reset_mouse_and_die();
 }
@@ -1086,9 +1061,11 @@ void FieldActionWindow::act_attack() {
 	assert(attack_box_);
 	upcast(Game, game, &ibase().egbase());
 	if (upcast(Building, building, game->map().get_immovable(node_))) {
-		upcast(InteractivePlayer const, iaplayer, &ibase());
-		game->send_player_enemyflagaction(building->base_flag(), iaplayer->player_number(),
-		                                  attack_box_->soldiers(), attack_box_->get_allow_conquer());
+		if (attack_box_->count_soldiers() > 0) {
+			upcast(InteractivePlayer const, iaplayer, &ibase());
+			game->send_player_enemyflagaction(
+			   building->base_flag(), iaplayer->player_number(), attack_box_->soldiers());
+		}
 	}
 	reset_mouse_and_die();
 }
@@ -1155,15 +1132,16 @@ void show_field_action(InteractiveBase* const ibase,
 				// We are done, so we close the window.
 				registry->destroy();
 				return;
-			}
-			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-			if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
-				w.add_buttons_road(false);
 			} else {
-				w.add_buttons_waterway(false);
+				FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
+				if (ibase->in_road_building_mode(RoadBuildingType::kRoad)) {
+					w.add_buttons_road(false);
+				} else {
+					w.add_buttons_waterway(false);
+				}
+				w.init();
+				return;
 			}
-			w.init();
-			return;
 		}
 	} else {
 		FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);

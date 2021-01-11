@@ -17,11 +17,6 @@ descriptions:new_worker_type {
       scout = {
          "scout=radius:15 duration:1m15s",
          "return"
-      },
-      targeted_scouting = {
-         "walk=object",
-         "scout=radius:15 duration:1m15s",
-         "return"
       }
    },
 

@@ -26,16 +26,17 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
-namespace FsMenu {
+constexpr int16_t kPadding = 4;
 
-About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
-   : UI::UniqueWindow(&fsmm,
-                      UI::WindowStyle::kFsMenu,
-                      "about",
-                      &r,
-                      fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
-                      fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
-                      _("About Widelands")),
+FullscreenMenuAbout::FullscreenMenuAbout(FullscreenMenuMain& fsmm)
+   : UI::Window(&fsmm,
+                UI::WindowStyle::kFsMenu,
+                "about",
+                fsmm.calc_desired_window_x(UI::Window::WindowLayoutID::kFsMenuAbout),
+                fsmm.calc_desired_window_y(UI::Window::WindowLayoutID::kFsMenuAbout),
+                fsmm.calc_desired_window_width(UI::Window::WindowLayoutID::kFsMenuAbout),
+                fsmm.calc_desired_window_height(UI::Window::WindowLayoutID::kFsMenuAbout),
+                _("About Widelands")),
      box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      tabs_(&box_, UI::TabPanelStyle::kFsMenu),
      close_(&box_, "close", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("Close")) {
@@ -55,7 +56,7 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 		log_err("%s", err.what());
 	}
 
-	close_.sigclicked.connect([this]() { die(); });
+	close_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kBack); });
 
 	box_.add(&tabs_, UI::Box::Resizing::kExpandBoth);
 	box_.add_space(kPadding);
@@ -66,16 +67,15 @@ About::About(MainMenu& fsmm, UI::UniqueWindow::Registry& r)
 
 	layout();
 	tabs_.load_tab_contents();
-	center_to_parent();
 }
 
-bool About::handle_key(bool down, SDL_Keysym code) {
+bool FullscreenMenuAbout::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 		case SDLK_ESCAPE:
-			die();
+			end_modal<MenuTarget>(MenuTarget::kBack);
 			return true;
 		default:
 			break;
@@ -84,11 +84,9 @@ bool About::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
-void About::layout() {
+void FullscreenMenuAbout::layout() {
 	UI::Window::layout();
 	if (!is_minimal()) {
 		box_.set_size(get_inner_w(), get_inner_h());
 	}
 }
-
-}  // namespace FsMenu

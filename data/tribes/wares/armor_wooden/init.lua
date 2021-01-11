@@ -8,8 +8,12 @@ descriptions:new_ware_type {
    descname = pgettext("ware", "Light Wooden Armor"),
    icon = dirname .. "menu.png",
 
-   animation_directory = dirname,
-   animations = { idle = { hotspot = {6, 8}}}
+   animations = {
+      idle = {
+         pictures = path.list_files(dirname .. "idle.png"),
+         hotspot = { 3, 11 },
+      },
+   }
 }
 
 pop_textdomain()

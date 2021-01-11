@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler.h"
+#include "graphic/style_manager.h"
 #include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "network/internet_gaming_protocol.h"
@@ -29,11 +30,9 @@
 #include "ui_fsmenu/main.h"
 #include "wlapplication_options.h"
 
-namespace FsMenu {
-
 constexpr int8_t kMargin = 6;
 
-LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
+LoginBox::LoginBox(FullscreenMenuMain& parent, UI::UniqueWindow::Registry& r)
    : UI::UniqueWindow(
         &parent, UI::WindowStyle::kFsMenu, "login_box", &r, 500, 290, _("Online Game Settings")),
      fsmm_(parent),
@@ -115,15 +114,13 @@ LoginBox::LoginBox(MainMenu& parent, UI::UniqueWindow::Registry& r)
 		b_login_.set_enabled(false);
 	} else {
 		eb_password_.set_can_focus(false);
-		ta_password_.set_style(UI::FontStyle::kDisabled);
+		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
 	}
 
 	eb_nickname_.focus();
 
 	eb_nickname_.cancel.connect([this]() { clicked_back(); });
 	eb_password_.cancel.connect([this]() { clicked_back(); });
-	eb_nickname_.ok.connect([this]() { clicked_ok(); });
-	eb_password_.ok.connect([this]() { clicked_ok(); });
 }
 
 /// think function of the UI (main loop)
@@ -140,14 +137,12 @@ void LoginBox::clicked_ok() {
 			set_config_string("nickname", eb_nickname_.text());
 			set_config_bool("registered", true);
 			fsmm_.internet_login_callback();
-			die();
 		}
 	} else {
 		set_config_string("nickname", eb_nickname_.text());
 		set_config_bool("registered", false);
 		set_config_string("password_sha1", "");
 		fsmm_.internet_login_callback();
-		die();
 	}
 }
 
@@ -182,11 +177,11 @@ bool LoginBox::handle_key(bool down, SDL_Keysym code) {
 
 void LoginBox::clicked_register() {
 	if (cb_register_.get_state()) {
-		ta_password_.set_style(UI::FontStyle::kDisabled);
+		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kDisabled));
 		eb_password_.set_can_focus(false);
 		eb_password_.set_text("");
 	} else {
-		ta_password_.set_style(UI::FontStyle::kFsMenuLabel);
+		ta_password_.set_style(g_style_manager->font_style(UI::FontStyle::kFsMenuLabel));
 		eb_password_.set_can_focus(true);
 		eb_password_.focus();
 	}
@@ -255,5 +250,3 @@ bool LoginBox::check_password() {
 	InternetGaming::ref().logout();
 	return true;
 }
-
-}  // namespace FsMenu

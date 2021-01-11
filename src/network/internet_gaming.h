@@ -221,8 +221,6 @@ private:
 	bool str2bool(const std::string&);
 	std::string bool2str(bool);
 
-	void format_time(char* time_str, uint8_t length);
-
 	/**
 	 * Does the real work of the login.
 	 * \param relogin Whether this is a relogin. Only difference is that

@@ -30,7 +30,6 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -74,9 +73,9 @@ void find_selected_locale(std::string* selected_locale, const std::string& curre
 
 }  // namespace
 
-namespace FsMenu {
-
-Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
+constexpr int16_t kPadding = 4;
+FullscreenMenuOptions::FullscreenMenuOptions(FullscreenMenuMain& fsmm,
+                                             OptionsCtrl::OptionsStruct opt)
    : UI::Window(&fsmm,
                 UI::WindowStyle::kFsMenu,
                 "options",
@@ -127,17 +126,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
-     theme_dropdown_(&box_interface_left_,
-                     "dropdown_theme",
-                     0,
-                     0,
-                     100,  // 100 is arbitrary, will be resized in layout().
-                     50,
-                     24,
-                     _("UI Theme"),
-                     UI::DropdownType::kTextual,
-                     UI::PanelStyle::kFsMenu,
-                     UI::ButtonStyle::kFsMenuMenu),
 
      inputgrab_(
         &box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
@@ -157,10 +145,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                 99,
                 UI::PanelStyle::kFsMenu,
                 _("Maximum FPS:")),
-     tooltip_accessibility_mode_(&box_interface_left_,
-                                 UI::PanelStyle::kFsMenu,
-                                 Vector2i::zero(),
-                                 _("Accessibility mode for tooltips")),
      translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
@@ -288,15 +272,11 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      game_clock_(&box_ingame_,
                  UI::PanelStyle::kFsMenu,
                  Vector2i::zero(),
-                 _("Display system time in the info panel")),
+                 _("Display game time in the top left corner")),
      numpad_diagonalscrolling_(&box_ingame_,
                                UI::PanelStyle::kFsMenu,
                                Vector2i::zero(),
                                _("Allow diagonal scrolling with the numeric keypad")),
-     edge_scrolling_(&box_ingame_,
-                     UI::PanelStyle::kFsMenu,
-                     Vector2i::zero(),
-                     _("Scroll when the mouse cursor is near the screen edge")),
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
                       UI::PanelStyle::kFsMenu,
@@ -343,25 +323,23 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_interface_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 	box_interface_left_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
-	box_interface_left_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
 	box_interface_left_.add(&sb_maxfps_);
-	box_interface_left_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
 
 	// Windows
 	box_windows_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
 	box_windows_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
 	box_windows_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&sb_dis_panel_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&sb_dis_border_, UI::Box::Resizing::kFullSize);
+	box_windows_.add(&sb_dis_panel_);
+	box_windows_.add(&sb_dis_border_);
 
 	// Sound
 	box_sound_.add(&sound_options_, UI::Box::Resizing::kFullSize);
 
 	// Saving
-	box_saving_.add(&sb_autosave_, UI::Box::Resizing::kFullSize);
-	box_saving_.add(&sb_rolling_autosave_, UI::Box::Resizing::kFullSize);
+	box_saving_.add(&sb_autosave_);
+	box_saving_.add(&sb_rolling_autosave_);
 	box_saving_.add(&zip_, UI::Box::Resizing::kFullSize);
 	box_saving_.add(&write_syncstreams_, UI::Box::Resizing::kFullSize);
 
@@ -380,7 +358,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&ctrl_zoom_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&game_clock_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
-	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add_space(kPadding);
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
@@ -464,21 +441,8 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 		   true);
 	}
 
-	for (const std::string& theme : g_fs->list_directory("templates")) {
-		const std::string descname =
-		   (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
-		theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
-	}
-	for (auto& addon : AddOns::g_addons) {
-		if (addon.first.category == AddOns::AddOnCategory::kTheme) {
-			const std::string path = kAddOnDir + '/' + addon.first.internal_name + '/';
-			theme_dropdown_.add(addon.first.descname(), path, nullptr, path == template_dir());
-		}
-	}
-
 	inputgrab_.set_state(opt.inputgrab);
 	sdl_cursor_.set_state(opt.sdl_cursor);
-	tooltip_accessibility_mode_.set_state(opt.tooltip_accessibility_mode);
 
 	// Windows options
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
@@ -496,7 +460,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	ctrl_zoom_.set_state(opt.ctrl_zoom);
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
-	edge_scrolling_.set_state(opt.edge_scrolling);
 	training_wheels_.set_state(opt.training_wheels);
 
 	// New Game options
@@ -513,7 +476,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	layout();
 }
 
-void Options::layout() {
+void FullscreenMenuOptions::layout() {
 	if (!is_minimal()) {
 		const int16_t butw = get_inner_w() / 5;
 		const int16_t buth = get_inner_h() / 16;
@@ -553,7 +516,7 @@ void Options::layout() {
 	UI::Window::layout();
 }
 
-void Options::add_languages_to_list(const std::string& current_locale) {
+void FullscreenMenuOptions::add_languages_to_list(const std::string& current_locale) {
 
 	// We want these two entries on top - the most likely user's choice and the default.
 	language_dropdown_.add(_("Try system language"), "", nullptr, current_locale.empty());
@@ -624,7 +587,7 @@ void Options::add_languages_to_list(const std::string& current_locale) {
  * @param include_system_lang We only want to include the system lang if it matches the Widelands
  * locale.
  */
-void Options::update_language_stats() {
+void FullscreenMenuOptions::update_language_stats() {
 	int percent = 100;
 	std::string message;
 	if (language_dropdown_.has_selection()) {
@@ -686,16 +649,16 @@ void Options::update_language_stats() {
 	   as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
 }
 
-void Options::clicked_apply() {
+void FullscreenMenuOptions::clicked_apply() {
 	end_modal<MenuTarget>(MenuTarget::kApplyOptions);
 }
 
-void Options::clicked_cancel() {
+void FullscreenMenuOptions::clicked_cancel() {
 	g_sh->load_config();
 	end_modal<MenuTarget>(MenuTarget::kBack);
 }
 
-bool Options::handle_key(bool down, SDL_Keysym code) {
+bool FullscreenMenuOptions::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
@@ -712,14 +675,11 @@ bool Options::handle_key(bool down, SDL_Keysym code) {
 	return UI::Window::handle_key(down, code);
 }
 
-OptionsCtrl::OptionsStruct Options::get_values() {
+OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	// Write all data from UI elements
 	// Interface options
 	if (language_dropdown_.has_selection()) {
 		os_.language = language_dropdown_.get_selected();
-	}
-	if (theme_dropdown_.has_selection()) {
-		os_.theme = theme_dropdown_.get_selected();
 	}
 	if (resolution_dropdown_.has_selection()) {
 		const int res_index = resolution_dropdown_.get_selected();
@@ -733,7 +693,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.inputgrab = inputgrab_.get_state();
 	os_.sdl_cursor = sdl_cursor_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
-	os_.tooltip_accessibility_mode = tooltip_accessibility_mode_.get_state();
 
 	// Windows options
 	os_.snap_win_overlap_only = snap_win_overlap_only_.get_state();
@@ -755,7 +714,6 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.ctrl_zoom = ctrl_zoom_.get_state();
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
-	os_.edge_scrolling = edge_scrolling_.get_state();
 	os_.training_wheels = training_wheels_.get_state();
 
 	// New Game options
@@ -775,10 +733,11 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 /**
  * Handles communication between window class and options
  */
-OptionsCtrl::OptionsCtrl(MainMenu& mm, Section& s)
+OptionsCtrl::OptionsCtrl(FullscreenMenuMain& mm, Section& s)
    : opt_section_(s),
      parent_(mm),
-     opt_dialog_(std::unique_ptr<Options>(new Options(mm, options_struct(0)))) {
+     opt_dialog_(
+        std::unique_ptr<FullscreenMenuOptions>(new FullscreenMenuOptions(mm, options_struct(0)))) {
 	handle_menu();
 }
 
@@ -793,11 +752,10 @@ void OptionsCtrl::handle_menu() {
 			g_gr->change_resolution(
 			   opt_dialog_->get_values().xres, opt_dialog_->get_values().yres, true);
 		}
-		parent_.set_labels();  // update main menu buttons for new language
 	}
 	if (i == MenuTarget::kApplyOptions) {
 		uint32_t active_tab = opt_dialog_->get_values().active_tab;
-		opt_dialog_.reset(new Options(parent_, options_struct(active_tab)));
+		opt_dialog_.reset(new FullscreenMenuOptions(parent_, options_struct(active_tab)));
 		handle_menu();  // Restart general options menu
 	}
 }
@@ -812,7 +770,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
 	opt.sdl_cursor = opt_section_.get_bool("sdl_cursor", true);
-	opt.tooltip_accessibility_mode = opt_section_.get_bool("tooltip_accessibility_mode", false);
 
 	// Windows options
 	opt.snap_win_overlap_only = opt_section_.get_bool("snap_windows_only_when_overlapping", false);
@@ -834,7 +791,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.ctrl_zoom = opt_section_.get_bool("ctrl_zoom", false);
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
-	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
 
 	// New Game options
@@ -842,8 +798,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 
 	// Language options
 	opt.language = opt_section_.get_string("language", "");
-
-	opt.theme = opt_section_.get_string("theme", "");
 
 	// Last tab for reloading the options menu
 	opt.active_tab = active_tab;
@@ -861,7 +815,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("inputgrab", opt.inputgrab);
 	opt_section_.set_int("maxfps", opt.maxfps);
 	opt_section_.set_bool("sdl_cursor", opt.sdl_cursor);
-	opt_section_.set_bool("tooltip_accessibility_mode", opt.tooltip_accessibility_mode);
 
 	// Windows options
 	opt_section_.set_bool("snap_windows_only_when_overlapping", opt.snap_win_overlap_only);
@@ -883,7 +836,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("ctrl_zoom", opt.ctrl_zoom);
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
-	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
 
 	// New Game options
@@ -892,14 +844,10 @@ void OptionsCtrl::save_options() {
 	// Language options
 	opt_section_.set_string("language", opt.language);
 
-	opt_section_.set_string("theme", opt.theme);
-
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	g_mouse_cursor->set_use_sdl(opt_dialog_->get_values().sdl_cursor);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
-	set_template_dir(opt.theme);
-	parent_.get_topmost_forefather().template_directory_changed();
 
 	// Sound options
 	g_sh->save_config();
@@ -907,5 +855,3 @@ void OptionsCtrl::save_options() {
 	// Now write to file
 	write_config();
 }
-
-}  // namespace FsMenu

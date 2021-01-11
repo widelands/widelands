@@ -57,8 +57,6 @@ public:
 	// Input output for the global game state.
 	void read_global_env(FileRead&, Widelands::MapObjectLoader&, uint32_t);
 	uint32_t write_global_env(FileWrite&, Widelands::MapObjectSaver&);
-	void read_textdomain_stack(FileRead&);
-	void write_textdomain_stack(FileWrite&);
 
 private:
 	std::unique_ptr<GameFactory> factory_;

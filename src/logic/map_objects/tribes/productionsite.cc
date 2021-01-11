@@ -50,7 +50,7 @@ namespace {
 // Parses the descriptions of the working positions from 'items_table' and
 // fills in 'working_positions'. Throws an error if the table contains invalid
 // values.
-void parse_working_positions(const Descriptions& descriptions,
+void parse_working_positions(Descriptions& descriptions,
                              LuaTable* items_table,
                              BillOfMaterials* working_positions) {
 	for (const std::string& worker_name : items_table->keys<std::string>()) {
@@ -205,32 +205,12 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		         "removed.\n",
 		         name().c_str());
 	}
-
-	// Verify that any map resource collected is valid
-	if (!hints().collects_ware_from_map().empty()) {
-		if (!(descriptions.ware_exists(hints().collects_ware_from_map()))) {
-			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
-			                    name().c_str(), hints().collects_ware_from_map().c_str());
-		}
-		const DescriptionIndex collects_index =
-		   descriptions.load_ware(hints().collects_ware_from_map());
-		if (!is_output_ware_type(collects_index)) {
-			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
-			                    "listed in the building's output",
-			                    name().c_str(), hints().collects_ware_from_map().c_str());
-		}
-	}
 }
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
                                          Descriptions& descriptions)
    : ProductionSiteDescr(init_descname, MapObjectType::PRODUCTIONSITE, table, descriptions) {
-}
-
-void ProductionSiteDescr::clear_attributes() {
-	created_attributes_.clear();
-	collected_attributes_.clear();
 }
 
 /**
@@ -424,8 +404,10 @@ bool ProductionSite::has_workers(DescriptionIndex targetSite, Game& game) {
 
 			// If we are here, all needs are satisfied
 			return true;
+
+		} else {
+			throw wexception("Building, index: %d, needs no workers!\n", targetSite);
 		}
-		throw wexception("Building, index: %d, needs no workers!\n", targetSite);
 	} else {
 		throw wexception("No such building, index: %d\n", targetSite);
 	}
@@ -795,21 +777,6 @@ void ProductionSite::act(Game& game, uint32_t const data) {
 	}
 }
 
-void ProductionSite::set_next_program_override(Game& game,
-                                               const std::string& name,
-                                               MapObject* extra_data) {
-	program_start(game, name, true, extra_data);
-}
-
-bool ProductionSite::has_forced_state() const {
-	for (const State& s : stack_) {
-		if (s.flags & State::StateFlags::kStateFlagIgnoreStopped) {
-			return true;
-		}
-	}
-	return false;
-}
-
 void ProductionSite::find_and_start_next_program(Game& game) {
 	program_start(game, MapObjectProgram::kMainProgram);
 }
@@ -821,13 +788,12 @@ void ProductionSite::find_and_start_next_program(Game& game) {
  * \post (Potentially indirect) scheduling for the next step has been done.
  */
 void ProductionSite::program_act(Game& game) {
-	const State& state = top_state();
+	State& state = top_state();
 
 	// 'Stop' of building is considered only when starting
 	// new productions cycle. Otherwise it can lead to consumption
 	// of input wares without producing anything
-	if (is_stopped_ && state.ip == 0 &&
-	    !(state.flags & State::StateFlags::kStateFlagIgnoreStopped)) {
+	if (is_stopped_ && state.ip == 0) {
 		program_end(game, ProgramResult::kFailed);
 		program_timer_ = true;
 		program_time_ = schedule_act(game, Duration(20000));
@@ -1015,23 +981,12 @@ void ProductionSite::program_step(Game& game, const Duration& delay, ProgramResu
 /**
  * Push the given program onto the stack and schedule acting.
  */
-void ProductionSite::program_start(Game& game,
-                                   const std::string& program_name,
-                                   bool force,
-                                   MapObject* extra_data) {
+void ProductionSite::program_start(Game& game, const std::string& program_name) {
 	State state;
 
 	state.program = descr().get_program(program_name);
 	state.ip = 0;
 	state.phase = ProgramResult::kNone;
-	state.objvar = extra_data;
-
-	if (force) {
-		state.flags |= State::StateFlags::kStateFlagIgnoreStopped;
-	}
-	if (extra_data) {
-		state.flags |= State::StateFlags::kStateFlagHasExtraData;
-	}
 
 	stack_.push_back(state);
 
@@ -1165,11 +1120,7 @@ std::unique_ptr<const BuildingSettings> ProductionSite::create_building_settings
 			}
 		}
 	}
-	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
-	// have been copied despite being returned by name, due to its not matching the function return
-	// type. Call 'std::move' explicitly to avoid copying on older compilers.
-	// On modern compilers a simple 'return settings;' would've been fine.
-	return std::unique_ptr<const BuildingSettings>(std::move(settings));
+	return settings;
 }
 
 /// Changes the default anim string to \li anim

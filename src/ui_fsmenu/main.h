@@ -26,41 +26,50 @@
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "ui_fsmenu/menu.h"
 #include "ui_fsmenu/menu_target.h"
-
-namespace FsMenu {
 
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
  */
-class MainMenu : public UI::Panel {
+class FullscreenMenuMain : public UI::Panel {
 public:
-	explicit MainMenu(const bool skip_init = false);
+	explicit FullscreenMenuMain(bool first_ever_init);
+
+	const std::string& get_filename_for_continue_playing() const {
+		return filename_for_continue_playing_;
+	}
+	const std::string& get_filename_for_continue_editing() const {
+		return filename_for_continue_editing_;
+	}
 
 	// Internet login stuff
 	void show_internet_login(bool modal = false);
+	void internet_login();
 	void internet_login_callback();
+
+	std::string get_nickname() const {
+		return nickname_;
+	}
+	std::string get_password() const {
+		return password_;
+	}
+	bool registered() const {
+		return register_;
+	}
 
 	void draw(RenderTarget&) override;
 	void draw_overlay(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 	bool handle_key(bool, SDL_Keysym) override;
-	void become_modal_again(UI::Panel&) override;
 
 	// Set the labels for all buttons etc. This needs to be called after language switching.
 	void set_labels();
-
-	void show_messagebox(const std::string& messagetitle, const std::string& errormessage);
 
 	int16_t calc_desired_window_x(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_y(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
-
-protected:
-	void update_template() override;
 
 private:
 	void layout() override;
@@ -84,8 +93,8 @@ private:
 
 	std::string filename_for_continue_playing_, filename_for_continue_editing_;
 
-	const Image* splashscreen_;
-	const Image* title_image_;
+	const Image& splashscreen_;
+	const Image& title_image_;
 
 	uint32_t init_time_;
 
@@ -99,12 +108,7 @@ private:
 	bool visible_;
 	void set_button_visibility(bool);
 
-	void action(MenuTarget);
-
-	MenuCapsule menu_capsule_;
-	UI::UniqueWindow::Registry r_login_, r_about_, r_addons_;
-
-	void internet_login(bool launch_metaserver);
+	UI::UniqueWindow::Registry r_login_;
 
 	// Values from internet login window
 	std::string nickname_;
@@ -115,7 +119,5 @@ private:
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
 };
-
-}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_MAIN_H

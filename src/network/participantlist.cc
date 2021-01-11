@@ -177,11 +177,7 @@ bool ParticipantList::is_ingame() const {
 	return (game_ != nullptr);
 }
 
-#ifdef NDEBUG
-uint8_t ParticipantList::get_participant_rtt(int16_t) const {
-#else
 uint8_t ParticipantList::get_participant_rtt(int16_t participant) const {
-#endif
 	assert(participant < participant_counts_.humans);
 	// TODO(Notabilis): Implement this function ... and all the Ping-stuff that belongs to it
 	// - Maybe show two RTTs per player: To the host and to the netrelay

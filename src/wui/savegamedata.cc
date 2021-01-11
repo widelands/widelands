@@ -11,8 +11,7 @@ SavegameData::SavegameData()
    : gametime(""),
      nrplayers("0"),
      savetimestamp(0),
-     gametype(GameController::GameType::kSingleplayer),
-     type_(SavegameType::kSavegame) {
+     gametype(GameController::GameType::kSingleplayer) {
 }
 
 SavegameData::SavegameData(const std::string& fname)

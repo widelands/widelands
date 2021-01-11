@@ -25,7 +25,9 @@ descriptions:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      mines = "resource_coal"
+   },
 
    working_positions = {
       empire_miner = 1,

@@ -95,14 +95,6 @@ public:
 	 * @brief run_objectives Trigger all queued training wheel objectives
 	 */
 	void run_objectives();
-
-	/**
-	 * @brief run Ignore dependencies and run this objective if it wasn't solved yet.
-	 * @param objective The objective to run
-	 * @param force Run anyway if it was solved previously
-	 */
-	void run(const std::string& objective, bool force);
-
 	/**
 	 * @brief has_objectives See if there are still unsolved objectives
 	 * @return Whether any more training wheels want to run

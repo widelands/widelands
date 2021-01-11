@@ -71,7 +71,7 @@ private:
 
 struct MapGenerator {
 
-	MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase);
+	MapGenerator(Map& map, UniqueRandomMapInfo& mapInfo, EditorGameBase& egbase);
 
 	// Returns true if everything went well and all players have a good starting position
 	bool create_random_map();

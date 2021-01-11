@@ -65,9 +65,11 @@ int get_ip_version(const boost::asio::ip::udp& version) {
 
 /*** class LanBase ***/
 /**
- * \internal In an ideal world, we would use the same code with boost asio for all three operating
- * systems. Unfortunately, it isn't that easy and we need some platform specific code. For IPv4,
- * windows needs a special case: For Linux and Apple we have to iterate over all assigned IPv4
+ * \internal
+ * In an ideal world, we would use the same code with boost asio for all three operating systems.
+ * Unfortunately, it isn't that easy and we need some platform specific code.
+ * For IPv4, windows needs a special case: For Linux and Apple we have to iterate over all assigned
+ * IPv4
  * addresses (e.g. 192.168.1.68), transform them to broadcast addresses (e.g. 192.168.1.255) and
  * send our
  * packets to those addresses. For windows, we simply can send to 255.255.255.255.
@@ -176,7 +178,7 @@ bool LanBase::is_open() {
 	return socket_v4.is_open() || socket_v6.is_open();
 }
 
-size_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
+ssize_t LanBase::receive(void* const buf, size_t const len, NetAddress* addr) {
 	assert(buf != nullptr);
 	assert(addr != nullptr);
 	size_t recv_len = 0;
@@ -391,10 +393,10 @@ LanGamePromoter::LanGamePromoter() : LanBase(kWidelandsLanPromotionPort) {
 	gameinfo.version = LAN_PROMOTION_PROTOCOL_VERSION;
 	gameinfo.state = LAN_GAME_OPEN;
 
-	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion) - 1);
+	strncpy(gameinfo.gameversion, build_id().c_str(), sizeof(gameinfo.gameversion));
 	gameinfo.gameversion[sizeof(gameinfo.gameversion) - 1] = '\0';
 
-	strncpy(gameinfo.hostname, boost::asio::ip::host_name().c_str(), sizeof(gameinfo.hostname) - 1);
+	strncpy(gameinfo.hostname, boost::asio::ip::host_name().c_str(), sizeof(gameinfo.hostname));
 	gameinfo.hostname[sizeof(gameinfo.hostname) - 1] = '\0';
 }
 
@@ -433,7 +435,7 @@ void LanGamePromoter::run() {
 }
 
 void LanGamePromoter::set_map(char const* map) {
-	strncpy(gameinfo.map, map, sizeof(gameinfo.map) - 1);
+	strncpy(gameinfo.map, map, sizeof(gameinfo.map));
 	gameinfo.map[sizeof(gameinfo.map) - 1] = '\0';
 
 	needupdate = true;
@@ -464,7 +466,7 @@ void LanGameFinder::run() {
 		NetGameInfo info;
 		NetAddress addr;
 
-		if (receive(&info, sizeof(info), &addr) < sizeof(info)) {
+		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info))) {
 			continue;
 		}
 

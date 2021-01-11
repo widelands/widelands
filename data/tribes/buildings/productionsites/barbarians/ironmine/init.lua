@@ -50,7 +50,9 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 1000
+      mines = "resource_iron",
+      prohibited_till = 1000,
+      mines_percent = 30
    },
 
    working_positions = {

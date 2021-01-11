@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "base/macros.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
@@ -30,11 +29,9 @@
 #include "network/network.h"
 
 struct ChatMessage;
+class FullscreenMenuMain;
 struct GameHostImpl;
 struct Client;
-namespace FsMenu {
-class MenuCapsule;
-}
 
 /**
  * GameHost manages the lifetime of a network game in which this computer
@@ -47,15 +44,13 @@ struct GameHost : public GameController {
 	/** playernumber 0 identifies the spectators */
 	static constexpr uint8_t kSpectatorPlayerNum = 0;
 
-	GameHost(FsMenu::MenuCapsule&,
-	         std::unique_ptr<GameController>&,
+	GameHost(FullscreenMenuMain&,
 	         const std::string& playername,
 	         std::vector<Widelands::TribeBasicInfo> tribeinfos,
 	         bool internet = false);
 	~GameHost() override;
 
-	void run(std::unique_ptr<GameController>&);
-	void run_callback();
+	void run();
 	const std::string& get_local_playername() const;
 	int16_t get_local_playerposition();
 
@@ -91,7 +86,6 @@ struct GameHost : public GameController {
 	void set_player(uint8_t number, const PlayerSettings&);
 	void set_player_number(uint8_t number);
 	void set_player_team(uint8_t number, Widelands::TeamNumber team);
-	void set_player_color(uint8_t number, const RGBColor&);
 	void set_player_closeable(uint8_t number, bool closeable);
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared);
 	void switch_to_player(uint32_t user, uint8_t number);
@@ -133,8 +127,6 @@ struct GameHost : public GameController {
 	}
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(GameHost);
-
 	void send_system_message_code(const std::string&,
 	                              const std::string& a = "",
 	                              const std::string& b = "",
@@ -150,12 +142,11 @@ private:
 	void handle_disconnect(uint32_t client_num, RecvPacket& r);
 	void handle_ping(Client& client);
 	void handle_hello(uint32_t client_num, uint8_t cmd, Client& client, RecvPacket& r);
-	void handle_changetribe(const Client& client, RecvPacket& r);
-	void handle_changeshared(const Client& client, RecvPacket& r);
-	void handle_changeteam(const Client& client, RecvPacket& r);
-	void handle_changecolor(const Client& client, RecvPacket& r);
-	void handle_changeinit(const Client& client, RecvPacket& r);
-	void handle_changeposition(const Client& client, RecvPacket& r);
+	void handle_changetribe(Client& client, RecvPacket& r);
+	void handle_changeshared(Client& client, RecvPacket& r);
+	void handle_changeteam(Client& client, RecvPacket& r);
+	void handle_changeinit(Client& client, RecvPacket& r);
+	void handle_changeposition(Client& client, RecvPacket& r);
 	void handle_nettime(uint32_t client_num, RecvPacket& r);
 	void handle_playercommmand(uint32_t client_num, Client& client, RecvPacket& r);
 	void handle_syncreport(uint32_t client_num, Client& client, RecvPacket& r);
@@ -178,7 +169,7 @@ private:
 	void committed_network_time(const Time& time);
 	void receive_client_time(uint32_t number, const Time& time);
 
-	void broadcast(const SendPacket&);
+	void broadcast(SendPacket&);
 	void write_setting_map(SendPacket&);
 	void write_setting_player(SendPacket&, uint8_t number);
 	void broadcast_setting_player(uint8_t number);
@@ -195,14 +186,13 @@ private:
 	                       const std::string& arg = "");
 	void reaper();
 
-	FsMenu::MenuCapsule& capsule_;
+	FullscreenMenuMain& fsmm_;
 
 	std::unique_ptr<NetTransferFile> file_;
 	GameHostImpl* d;
 	bool internet_;
 	bool forced_pause_;  // triggered by the forcePause host chat command, see HostChatProvider in
 	                     // gamehost.cc
-	std::unique_ptr<Widelands::Game> game_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H

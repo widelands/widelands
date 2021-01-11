@@ -24,10 +24,6 @@ VERSION
 # QT Creator settings
 CMakeLists.txt.user*
 
-# Visual Studio settings
-/.vs
-CMakeSettings.json
-
 # Validation checks
 po_validation
 clang-tidy.log

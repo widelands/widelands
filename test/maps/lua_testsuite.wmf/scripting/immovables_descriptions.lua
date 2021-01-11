@@ -1,3 +1,5 @@
+set_textdomain("tribes")
+
 test_descr = lunit.TestCase("Immovable descriptions test")
 function test_descr:test_instantiation_forbidden()
    assert_error("Cannot instantiate", function()

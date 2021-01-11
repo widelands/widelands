@@ -24,8 +24,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/addons.h"
-#include "logic/filesystem_constants.h"
 #include "logic/game_data_error.h"
 #include "scripting/lua_interface.h"
 
@@ -55,28 +53,6 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
 			                                         script_table->get_string("tooltip"), tags));
 		}
-		for (const auto& pair : AddOns::g_addons) {
-			if (pair.first.category == AddOns::AddOnCategory::kStartingCondition) {
-				const std::string script_path = kAddOnDir + FileSystem::file_separator() +
-				                                pair.first.internal_name +
-				                                FileSystem::file_separator() + name + ".lua";
-				if (!g_fs->file_exists(script_path)) {
-					continue;
-				}
-				std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
-				script_table->do_not_warn_about_unaccessed_keys();
-				std::set<std::string> tags;
-				if (script_table->has_key("map_tags")) {
-					std::unique_ptr<LuaTable> t = script_table->get_table("map_tags");
-					for (int key : t->keys<int>()) {
-						tags.insert(t->get_string(key));
-					}
-				}
-				initializations.push_back(Initialization(script_path,
-				                                         script_table->get_string("descname"),
-				                                         script_table->get_string("tooltip"), tags));
-			}
-		}
 	} catch (const WException& e) {
 		throw Widelands::GameDataError(
 		   "reading basic info for tribe \"%s\": %s", name.c_str(), e.what());
@@ -86,7 +62,6 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 std::vector<TribeBasicInfo> get_all_tribeinfos() {
 	std::vector<TribeBasicInfo> tribeinfos;
 	LuaInterface lua;
-
 	if (g_fs->is_directory("tribes/initialization")) {
 		FilenameSet dirs = g_fs->list_directory("tribes/initialization");
 		for (const std::string& dir : dirs) {
@@ -97,27 +72,9 @@ std::vector<TribeBasicInfo> get_all_tribeinfos() {
 			}
 		}
 	}
-
 	if (tribeinfos.empty()) {
 		log_err("No tribe infos found at 'tribes/initialization/<tribename>/init.lua'");
 	}
-
-	for (const auto& pair : AddOns::g_addons) {
-		if (pair.first.category == AddOns::AddOnCategory::kTribes && pair.second) {
-			const std::string dirname = kAddOnDir + FileSystem::file_separator() +
-			                            pair.first.internal_name + FileSystem::file_separator() +
-			                            "tribes";
-			if (g_fs->is_directory(dirname)) {
-				for (const std::string& tribe : g_fs->list_directory(dirname)) {
-					const std::string script_path = tribe + FileSystem::file_separator() + "init.lua";
-					if (g_fs->file_exists(script_path)) {
-						tribeinfos.push_back(Widelands::TribeBasicInfo(lua.run_script(script_path)));
-					}
-				}
-			}
-		}
-	}
-
 	return tribeinfos;
 }
 

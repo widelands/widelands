@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import subprocess
+from subprocess import call, Popen, PIPE
 import codecs
 import json
 import os.path
@@ -117,14 +117,14 @@ for translation_filename in translation_files:
             # .desktop
             generic_names += 'GenericName[' + \
                 lang_code + ']=' + generic_name + '\n'
-        if 'name' in translation:
+        if translation.has_key('name'):
             desktop_name = translation['name']
             if desktop_name != desktop_name_en:
                 # .desktop
                 desktop_names += 'Name[' + \
                     lang_code + ']=' + desktop_name + '\n'
         # appdata.xml
-        if 'name' in translation and translation['name'] != name_en:
+        if translation.has_key('name') and translation['name'] != name_en:
             names += "  <name xml:lang=\"" + lang_code + \
                 "\">" + translation['name'] + '</name>\n'
         if translation['description'] != descriptions_en:  # appdata.xml
@@ -160,15 +160,16 @@ dest_file.write(appdata)
 dest_file.close()
 
 print('- Writing .desktop')
+input_file = open(desktop_input_filename, 'r')
 desktop = ''
 
-with open(desktop_input_filename, 'r', encoding='utf-8') as input_file:
-    for line in input_file:
-        if line.strip() != 'GENERIC_NAME_COMMENT_HOOK':
-            desktop += line
-        else:
-            desktop += desktop_names + generic_names + comments
+for line in input_file:
+    if line.strip() != 'GENERIC_NAME_COMMENT_HOOK':
+        desktop += line
+    else:
+        desktop += desktop_names + generic_names + comments
 
+input_file.close()
 
 desktop_filepath = base_path + '/xdg/org.widelands.Widelands.desktop'
 dest_file = codecs.open(desktop_filepath, encoding='utf-8', mode='w')
@@ -179,10 +180,12 @@ print('Done!')
 
 
 # Validata Appdata
-subprocess.run(['appstreamcli', 'validate', appdata_filepath])
+call(['appstreamcli', 'validate', appdata_filepath])
 
 # Validate desktop file. We don't get return codes, so we have to parse it
-desktop_result = subprocess.run(['desktop-file-validate', desktop_filepath],
-                                capture_output=True)
-
-sys.exit(desktop_result.returncode)
+process = Popen(['desktop-file-validate', desktop_filepath],
+                stderr=PIPE, stdout=PIPE, stdin=PIPE)
+desktop_result = process.communicate()
+if desktop_result[0] != '':
+    print(desktop_result[0])
+    sys.exit(1)

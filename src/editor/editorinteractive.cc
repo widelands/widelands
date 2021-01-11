@@ -50,9 +50,7 @@
 #include "editor/ui_menus/toolsize_menu.h"
 #include "graphic/mouse_cursor.h"
 #include "graphic/playercolor.h"
-#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
-#include "logic/addons.h"
 #include "logic/map.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/map_object_type.h"
@@ -69,11 +67,6 @@
 #include "ui_basic/progresswindow.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
-#include "wui/toolbar.h"
-
-std::string editor_splash_image() {
-	return template_dir() + "loadscreens/editor.jpg";
-}
 
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, get_config_section(), nullptr),
@@ -84,9 +77,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_main",
                0,
                0,
-               MainToolbar::kButtonSize,
+               34U,
                10,
-               MainToolbar::kButtonSize,
+               34U,
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
@@ -99,9 +92,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                "dropdown_menu_tools",
                0,
                0,
-               MainToolbar::kButtonSize,
+               34U,
                12,
-               MainToolbar::kButtonSize,
+               34U,
                /** TRANSLATORS: Title for the tool menu button in the editor */
                as_tooltip_text_with_hotkey(_("Tools"), "T", UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
@@ -111,9 +104,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   MainToolbar::kButtonSize,
+                   34U,
                    10,
-                   MainToolbar::kButtonSize,
+                   34U,
                    /** TRANSLATORS: Title for a menu button in the editor. This menu will show/hide
                       building spaces, animals, immovables, resources */
                    _("Show / Hide"),
@@ -178,8 +171,11 @@ void EditorInteractive::add_main_menu() {
 	              g_image_cache->get("images/wui/editor/menus/new_map.png"));
 
 	menu_windows_.newrandommap.open_window = [this] {
-		new MainMenuNewRandomMap(*this, menu_windows_.newrandommap, egbase().map().get_width(),
-		                         egbase().map().get_height());
+		MainMenuNewRandomMap m(*this, UI::WindowStyle::kWui, menu_windows_.newrandommap,
+		                       egbase().map().get_width(), egbase().map().get_height());
+		if (m.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			m.do_generate_map(egbase(), this, nullptr);
+		}
 	};
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("New Random Map"), MainMenuEntry::kNewRandomMap,
@@ -457,16 +453,14 @@ void EditorInteractive::load(const std::string& filename) {
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 		   filename.c_str());
 	}
-	ml->preload_map(true, &egbase().enabled_addons());
-
-	EditorInteractive::load_world_units(this, egbase());
+	ml->preload_map(true);
 
 	// Create the players. TODO(SirVer): this must be managed better
 	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
-			egbase().add_player(p, 0, kPlayerColors[p - 1], map->get_scenario_player_tribe(p),
-			                    map->get_scenario_player_name(p));
+			egbase().add_player(
+			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 		}
 	}
 
@@ -478,11 +472,7 @@ void EditorInteractive::load(const std::string& filename) {
 void EditorInteractive::cleanup_for_load() {
 	// TODO(unknown): get rid of cleanup_for_load, it tends to be very messy
 	// Instead, delete and re-create the egbase.
-	// TODO(Nordfriese): …and then we can get rid of delete_world_and_tribes() as well
 	egbase().cleanup_for_load();
-	// This is needed so add-ons are configured correctly if current
-	// and previous map had different world add-on settings
-	egbase().delete_world_and_tribes();
 }
 
 /// Called just before the editor starts, after postload, init and gfxload.
@@ -975,17 +965,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 	Widelands::EditorGameBase egbase(nullptr);
 	EditorInteractive& eia = *new EditorInteractive(egbase);
 	egbase.set_ibase(&eia);  // TODO(unknown): get rid of this
-
-	// We need to disable non-world add-ons in the editor
-	for (auto it = egbase.enabled_addons().begin(); it != egbase.enabled_addons().end();) {
-		if (it->category != AddOns::AddOnCategory::kWorld) {
-			it = egbase.enabled_addons().erase(it);
-		} else {
-			++it;
-		}
-	}
-
-	egbase.create_loader_ui({"editor"}, true, "", editor_splash_image());
+	egbase.create_loader_ui({"editor"}, true, "", kEditorSplashImage);
 	EditorInteractive::load_world_units(&eia, egbase);
 
 	if (init == EditorInteractive::Init::kLoadMapDirectly) {
@@ -997,7 +977,6 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 		   UI::NoteLoadingMessage((boost::format(_("Loading map “%s”…")) % filename).str()));
 		eia.load(filename);
 
-		egbase.postload_addons();
 		egbase.postload();
 		eia.start();
 		if (!script_to_run.empty()) {
@@ -1012,7 +991,7 @@ void EditorInteractive::run_editor(const EditorInteractive::Init init,
 			throw wexception("EditorInteractive::run_editor: Script given when none was expected");
 		}
 
-		egbase.postload_addons();
+		Notifications::publish(UI::NoteLoadingMessage(_("Postloading editor…")));
 		egbase.postload();
 
 		egbase.mutable_map()->create_empty_map(
@@ -1051,13 +1030,6 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	log_info("┏━ Loading world\n");
 	ScopedTimer timer("┗━ took %ums");
 
-	if (eia) {
-		// In order to ensure that items created by add-ons are properly
-		// removed from the editor's object selection menus, we clear
-		// and repopulate these menus every time the world is reloaded.
-		eia->editor_categories_.clear();
-	}
-
 	std::unique_ptr<LuaTable> table(egbase.lua().run_script("world/init.lua"));
 
 	auto load_category = [eia, descriptions](const LuaTable& t, const std::string& key,
@@ -1073,12 +1045,6 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 			}
 		}
 	};
-	auto load_resources = [](const LuaTable& t) {
-		for (const std::string& item : t.get_table("resources")->array_entries<std::string>()) {
-			Notifications::publish(Widelands::NoteMapObjectDescription(
-			   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
-		}
-	};
 
 	log_info("┃    Critters");
 	load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
@@ -1090,17 +1056,9 @@ void EditorInteractive::load_world_units(EditorInteractive* eia,
 	load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
 
 	log_info("┃    Resources");
-	load_resources(*table);
-
-	for (const AddOns::AddOnInfo& info : egbase.enabled_addons()) {
-		if (info.category == AddOns::AddOnCategory::kWorld) {
-			log_info("┃    Add-On ‘%s’", info.internal_name.c_str());
-			table = egbase.lua().run_script(kAddOnDir + '/' + info.internal_name + "/editor.lua");
-			load_category(*table, "critters", Widelands::MapObjectType::CRITTER);
-			load_category(*table, "immovables", Widelands::MapObjectType::IMMOVABLE);
-			load_category(*table, "terrains", Widelands::MapObjectType::TERRAIN);
-			load_resources(*table);
-		}
+	for (const std::string& item : table->get_table("resources")->array_entries<std::string>()) {
+		Notifications::publish(Widelands::NoteMapObjectDescription(
+		   item, Widelands::NoteMapObjectDescription::LoadType::kObject));
 	}
 }
 
@@ -1130,14 +1088,9 @@ void EditorInteractive::map_changed(const MapWas& action) {
 		set_sel_pos(Widelands::NodeAndTriangle<>{
 		   Widelands::Coords(0, 0),
 		   Widelands::TCoords<>(Widelands::Coords(0, 0), Widelands::TriangleIndex::D)});
-		resize_minimap();
 		break;
 
 	case MapWas::kGloballyMutated:
-		break;
-
-	case MapWas::kResized:
-		resize_minimap();
 		break;
 	}
 }

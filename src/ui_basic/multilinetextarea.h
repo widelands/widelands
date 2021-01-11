@@ -65,7 +65,7 @@ struct MultilineTextarea : public Panel {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
-	void set_style(FontStyle);
+	void set_style(const FontStyleInfo& style);
 	void set_font_scale(float scale);
 
 	// Drawing and event handlers
@@ -93,8 +93,7 @@ private:
 
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	FontStyle font_style_;
-	const FontStyleInfo& font_style() const;
+	const FontStyleInfo* font_style_;
 	float font_scale_;
 
 	const Align align_;

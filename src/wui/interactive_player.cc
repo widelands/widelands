@@ -47,7 +47,6 @@
 #include "wui/seafaring_statistics_menu.h"
 #include "wui/soldier_statistics_menu.h"
 #include "wui/stock_menu.h"
-#include "wui/toolbar.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
 
@@ -170,9 +169,9 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      "dropdown_menu_statistics",
                      0,
                      0,
-                     MainToolbar::kButtonSize,
+                     34U,
                      10,
-                     MainToolbar::kButtonSize,
+                     34U,
                      /** TRANSLATORS: Title for the statistics menu button in the game */
                      _("Statistics"),
                      UI::DropdownType::kPictorialMenu,
@@ -399,7 +398,7 @@ void InteractivePlayer::think() {
 
 	if (player().is_picking_custom_starting_position()) {
 		set_sel_picture(
-		   playercolor_image(player().get_playercolor(), "images/players/player_position_menu.png"));
+		   playercolor_image(player_number() - 1, "images/players/player_position_menu.png"));
 	}
 
 	if (flag_to_connect_) {

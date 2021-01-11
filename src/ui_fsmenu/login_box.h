@@ -28,12 +28,10 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-namespace FsMenu {
-
-class MainMenu;
+class FullscreenMenuMain;
 
 struct LoginBox : public UI::UniqueWindow {
-	explicit LoginBox(MainMenu&, UI::UniqueWindow::Registry&);
+	explicit LoginBox(FullscreenMenuMain&, UI::UniqueWindow::Registry&);
 
 	void think() override;
 
@@ -58,7 +56,7 @@ private:
 	void verify_input();
 	bool check_password();
 
-	MainMenu& fsmm_;
+	FullscreenMenuMain& fsmm_;
 
 	UI::Box main_box_, hbox_, buttons_box_, vbox1_, vbox2_;
 	UI::Button b_login_, b_cancel_;
@@ -67,7 +65,5 @@ private:
 	UI::Textarea ta_nickname_, ta_password_;
 	UI::MultilineTextarea register_account_;
 };
-
-}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_LOGIN_BOX_H

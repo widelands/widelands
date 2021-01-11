@@ -138,8 +138,7 @@ SoldierDescr::SoldierDescr(const std::string& init_descname,
 				if (dir_name == "range") {
 					range.reset(new SoldierLevelRange(*range_table->get_table(dir_name)));
 					continue;
-				}
-				if (dir_name == "sw") {
+				} else if (dir_name == "sw") {
 					dir = WALK_SW;
 				} else if (dir_name == "se") {
 					dir = WALK_SE;
@@ -923,9 +922,10 @@ void Soldier::attack_update(Game& game, State& state) {
 			                        descr().get_right_walk_anims(does_carry_ware(), this), false, -1,
 			                        state.ivar3 > kBockCountIsStuck)) {
 				return;
+			} else {
+				molog(game.get_gametime(), "[attack] failed to return home\n");
+				return pop_task(game);
 			}
-			molog(game.get_gametime(), "[attack] failed to return home\n");
-			return pop_task(game);
 		}
 		if (state.ivar2 == 2) {
 			// No more home, so return to homeland
@@ -966,9 +966,10 @@ void Soldier::attack_update(Game& game, State& state) {
 			                        4,  // use larger persist when returning home
 			                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 				return;
+			} else {
+				molog(game.get_gametime(), "[attack] failed to return to own land\n");
+				return pop_task(game);
 			}
-			molog(game.get_gametime(), "[attack] failed to return to own land\n");
-			return pop_task(game);
 		}
 	}
 
@@ -1046,13 +1047,14 @@ void Soldier::attack_update(Game& game, State& state) {
 		if (start_task_movepath(game, enemy->base_flag().get_position(), 3,
 		                        descr().get_right_walk_anims(does_carry_ware(), this))) {
 			return;
+		} else {
+			molog(game.get_gametime(), "[attack] failed to move towards building flag, cancel attack "
+			                           "and return home!\n");
+			state.coords = Coords::null();
+			state.objvar1 = nullptr;
+			state.ivar2 = 1;
+			return schedule_act(game, Duration(10));
 		}
-		molog(game.get_gametime(), "[attack] failed to move towards building flag, cancel attack "
-		                           "and return home!\n");
-		state.coords = Coords::null();
-		state.objvar1 = nullptr;
-		state.ivar2 = 1;
-		return schedule_act(game, Duration(10));
 	}
 
 	assert(enemy->attack_target() != nullptr);
@@ -1304,10 +1306,11 @@ void Soldier::defense_update(Game& game, State& state) {
 		                        descr().get_right_walk_anims(does_carry_ware(), this), false, 1)) {
 			molog(game.get_gametime(), "[defense] move towards soldier %u\n", target.s->serial());
 			return;
+		} else {
+			molog(game.get_gametime(), "[defense] failed to move towards attacking soldier %u\n",
+			      target.s->serial());
+			targets.pop_back();
 		}
-		molog(game.get_gametime(), "[defense] failed to move towards attacking soldier %u\n",
-		      target.s->serial());
-		targets.pop_back();
 	}
 	// If the enemy is not in our land, wait
 	return start_task_idle(game, descr().get_animation("idle", this), 250);
@@ -1372,10 +1375,11 @@ void Soldier::move_in_battle_update(Game& game, State&) {
 			break;
 		}
 		return pop_task(game);
+	} else {
+		//  Only end the task once we've actually completed the step
+		// Ignore signals until then
+		return schedule_act(game, combat_walkend_ - game.get_gametime());
 	}
-	//  Only end the task once we've actually completed the step
-	// Ignore signals until then
-	return schedule_act(game, combat_walkend_ - game.get_gametime());
 }
 
 /**
@@ -1412,8 +1416,7 @@ void Soldier::battle_update(Game& game, State&) {
 		if (signal == "blocked") {
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle", this), 5000);
-		}
-		if (signal == "location" || signal == "battle" || signal == "wakeup") {
+		} else if (signal == "location" || signal == "battle" || signal == "wakeup") {
 			signal_handled();
 		} else {
 			molog(game.get_gametime(), "[battle] interrupted by unexpected signal '%s'\n",
@@ -1456,10 +1459,11 @@ void Soldier::battle_update(Game& game, State&) {
 			molog(game.get_gametime(), "[battle] stay_home, so reverse roles\n");
 			new Battle(game, battle_->second(), battle_->first());
 			return skip_act();  //  we will get a signal via set_battle()
-		}
-		if (combat_walking_ != CD_COMBAT_E) {
-			opponent.send_signal(game, "wakeup");
-			return start_task_move_in_battle(game, CD_WALK_E);
+		} else {
+			if (combat_walking_ != CD_COMBAT_E) {
+				opponent.send_signal(game, "wakeup");
+				return start_task_move_in_battle(game, CD_WALK_E);
+			}
 		}
 	} else {
 		if (opponent.stay_home() && (this == battle_->second())) {
@@ -1487,40 +1491,42 @@ void Soldier::battle_update(Game& game, State&) {
 					      "[battle] player %u's soldier started task_movepath to (%i,%i)\n",
 					      owner().player_number(), dest.x, dest.y);
 					return;
-				}
-				BaseImmovable const* const immovable_position = get_position().field->get_immovable();
-				BaseImmovable const* const immovable_dest = map[dest].get_immovable();
+				} else {
+					BaseImmovable const* const immovable_position =
+					   get_position().field->get_immovable();
+					BaseImmovable const* const immovable_dest = map[dest].get_immovable();
 
-				const std::string messagetext =
-				   (boost::format("The game engine has encountered a logic error. The %s "
-				                  "#%u of player %u could not find a way from (%i, %i) "
-				                  "(with %s immovable) to the opponent (%s #%u of player "
-				                  "%u) at (%i, %i) (with %s immovable). The %s will now "
-				                  "desert (but will not be executed). Strange things may "
-				                  "happen. No solution for this problem has been "
-				                  "implemented yet. (bug #536066) (The game has been "
-				                  "paused.)") %
-				    descr().descname().c_str() % serial() %
-				    static_cast<unsigned int>(owner().player_number()) % get_position().x %
-				    get_position().y %
-				    (immovable_position ? immovable_position->descr().descname().c_str() : ("no")) %
-				    opponent.descr().descname().c_str() % opponent.serial() %
-				    static_cast<unsigned int>(opponent.owner().player_number()) % dest.x % dest.y %
-				    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no")) %
-				    descr().descname().c_str())
-				      .str();
-				get_owner()->add_message(
-				   game, std::unique_ptr<Message>(
-				            new Message(Message::Type::kGameLogic, game.get_gametime(),
-				                        descr().descname(), "images/ui_basic/menu_help.png",
-				                        _("Logic error"), messagetext, get_position(), serial_)));
-				opponent.get_owner()->add_message(
-				   game, std::unique_ptr<Message>(new Message(
-				            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
-				            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
-				            opponent.get_position(), serial_)));
-				game.game_controller()->set_desired_speed(0);
-				return pop_task(game);
+					const std::string messagetext =
+					   (boost::format("The game engine has encountered a logic error. The %s "
+					                  "#%u of player %u could not find a way from (%i, %i) "
+					                  "(with %s immovable) to the opponent (%s #%u of player "
+					                  "%u) at (%i, %i) (with %s immovable). The %s will now "
+					                  "desert (but will not be executed). Strange things may "
+					                  "happen. No solution for this problem has been "
+					                  "implemented yet. (bug #536066) (The game has been "
+					                  "paused.)") %
+					    descr().descname().c_str() % serial() %
+					    static_cast<unsigned int>(owner().player_number()) % get_position().x %
+					    get_position().y %
+					    (immovable_position ? immovable_position->descr().descname().c_str() : ("no")) %
+					    opponent.descr().descname().c_str() % opponent.serial() %
+					    static_cast<unsigned int>(opponent.owner().player_number()) % dest.x % dest.y %
+					    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no")) %
+					    descr().descname().c_str())
+					      .str();
+					get_owner()->add_message(
+					   game, std::unique_ptr<Message>(
+					            new Message(Message::Type::kGameLogic, game.get_gametime(),
+					                        descr().descname(), "images/ui_basic/menu_help.png",
+					                        _("Logic error"), messagetext, get_position(), serial_)));
+					opponent.get_owner()->add_message(
+					   game, std::unique_ptr<Message>(new Message(
+					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
+					            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
+					            opponent.get_position(), serial_)));
+					game.game_controller()->set_desired_speed(0);
+					return pop_task(game);
+				}
 			}
 		} else {
 			assert(opponent.get_position() == get_position());
@@ -1673,11 +1679,12 @@ bool Soldier::check_node_blocked(Game& game, const FCoords& field, bool const co
 		}
 
 		return true;
+	} else {
+		if (commit) {
+			send_space_signals(game);
+		}
+		return false;
 	}
-	if (commit) {
-		send_space_signals(game);
-	}
-	return false;
 }
 
 /**

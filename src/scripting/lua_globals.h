@@ -22,16 +22,9 @@
 
 #include "scripting/lua.h"
 
-class FileRead;
-class FileWrite;
-
 namespace LuaGlobals {
 
 void luaopen_globals(lua_State*);
-
-void read_textdomain_stack(FileRead&, const lua_State*);
-void write_textdomain_stack(FileWrite&, const lua_State*);
-
-}  // namespace LuaGlobals
+}
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_GLOBALS_H

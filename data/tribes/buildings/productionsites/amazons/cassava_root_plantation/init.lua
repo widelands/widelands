@@ -65,7 +65,7 @@ descriptions:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext ("amazons_building", "The farmer working at this cassava root plantation has no cleared soil to plant her seeds."),
+      message = pgettext ("amazons_building", "The farmer working at this cassava root plantation has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }

@@ -123,8 +123,7 @@ private:
 	bool pressed_;      //  the cursor is pressed
 	bool enabled_;      //  enabled widget
 
-	const UI::SliderStyle cursor_style_;  // Cursor color and texture. Not owned.
-	const UI::PanelStyleInfo& cursor_style() const;
+	const UI::PanelStyleInfo* cursor_style_;  // Cursor color and texture. Not owned.
 
 protected:
 	int32_t x_gap_;  //  draw positions
@@ -244,8 +243,7 @@ protected:
 
 private:
 	// We need the style to initialize the slider, so it has to come first.
-	const UI::SliderStyle style_;
-	const UI::TextPanelStyleInfo& style() const;
+	const UI::TextPanelStyleInfo& style;
 
 protected:
 	HorizontalSlider slider;

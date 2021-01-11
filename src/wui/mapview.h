@@ -188,7 +188,6 @@ public:
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym code) override;
-	void think() override;
 
 private:
 	void stop_dragging();
@@ -217,9 +216,6 @@ private:
 	View view_;
 	Vector2i last_mouse_pos_;
 	bool dragging_;
-
-	bool edge_scrolling_;
-	int8_t is_scrolling_x_, is_scrolling_y_;
 
 	// The queue of plans to execute as animations.
 	std::deque<std::deque<TimestampedView>> view_plans_;

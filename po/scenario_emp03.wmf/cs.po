@@ -5,15 +5,14 @@
 # Translators:
 # GunChleoc, 2018
 # Milan Fašina <matrix17@seznam.cz>, 2018
-# Ondřej Itřech, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Ondřej Itřech, 2020\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2018\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +33,7 @@ msgid ""
 "Build an outpost at the yellow house symbol to the east of your provisional "
 "headquarters."
 msgstr ""
-"Postav hlásku na symbolu žlutého domku na východ od tvé provizorní hlavní "
+"Postav hlásku na symbolu žlutého domku na východ od tvé provizorní Hlavní "
 "budovy."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:54
@@ -50,8 +49,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
-"Postav lom poblíž početných skal, abys udělal prostor pro budovy a získal "
-"cenné suroviny."
+"Postav lom poblíž opuštěných kamenů, abys uvolnil prostor pro budovy a "
+"získal cenné suroviny."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -68,7 +67,7 @@ msgid ""
 "material supply chain."
 msgstr ""
 "Postav domek dřevorubce, pilu a domek kameníka, jakmile pro ně bude dostatek"
-" místa. Tím si zajistíš dodávku základního stavebního materiálu."
+" místa. Tím dokončíš výrobní proces všech stavebních materiálů."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:72
 msgid "Lower the demand for marble columns to 4"
@@ -83,15 +82,13 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
-"Sniž poptávku po mramorových sloupech v nastavení hospodářství na 4. To "
-"pomůže pošetřit nějaký mramor na stavbu budov."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid ""
 "Remember that you can access the economy settings by clicking on any flag."
 msgstr ""
-"Připomínám, že do menu nastavení hospodářství se dostaneš kliknutím na "
-"libovolnou vlajku."
+"Pamatuj, že do menu nastavení hospodářství se dostaneš klikem na libovolnou "
+"vlajku."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:82
 msgid "Find a port space on the small island"
@@ -99,11 +96,11 @@ msgstr "Najdi místo pro přístav na malém ostrově"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:84
 msgid "Port Space"
-msgstr "Místo pro přístav"
+msgstr "Místo na přístav"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:85
 msgid "Search for a port space in order to regain access to the sea."
-msgstr "Hledej místo pro přístav, které ti umožní získat přístup k moři."
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:91
 msgid "Build a port and a shipyard on the Island"
@@ -115,7 +112,7 @@ msgstr "Lodní hospodářství"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:94
 msgid "Build a port to set sail from this island."
-msgstr "Postav přístav a zahaj plavbu z ostrova."
+msgstr "Postav přístav a odpluj z ostrovu."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:95
 msgid "Build a shipyard to produce the ships to sail on."
@@ -123,18 +120,16 @@ msgstr "Postav loděnici na stavbu lodí na plavbu."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:100
 msgid "Produce wheat"
-msgstr "Pěstuj pšenici"
+msgstr "Vyrábí pšenici"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Wheat Production"
-msgstr "Pěstování pšenice"
+msgstr "Produkce pšenice"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:103
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
-"Vypěstuj alespoň 50 snopů pšenice, aby se mohla mohla rozběhnout produkce "
-"vlny."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:109
 msgid "Produce cloth for building our first ship"
@@ -142,15 +137,13 @@ msgstr "Vyrob látku na stavbu naší první lodi."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Cloth Production"
-msgstr "Výroba látky"
+msgstr "Produkce látky"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr ""
-"Nyní použij vypěstovanou pšenici k získání alespoň 50 balíků vlny, z které "
-"bude možné vyrobit látku na stavbu lodě."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:118
 msgid "Build 2 ports on distant islands"
@@ -160,27 +153,23 @@ msgstr "Postav 2 přístavy na odlehlých ostrovech"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:121
 msgid "Build two Expedition Ports"
-msgstr "Postav dva přístavy pomocí výprav"
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:122
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr ""
-"Prozkoumej ostrov na jihu. Pomocí výpravy na něm postav přístav a zkus na "
-"něm následně najít nějaké nerostné zdroje."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
-"Pošli loď na sever a snaž se získat nějaké informace o Barbarech. Zkus na "
-"tamním ostrově postavit přístav a opevnit ho hláskou."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:129
 msgid "Produce gold to send out expeditions"
-msgstr "Získej zlato potřebné pro vyslání výprav"
+msgstr "Vyrob zlato, abys mohl vyslat výpravu"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Gold Production"
@@ -190,8 +179,6 @@ msgstr "Produkce zlata"
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
-"Vyrob alespoň 6 cihel zlata, které bude možné použít pro další kolonizaci "
-"tvého okolí."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:138
 msgid "Defeat the Barbarians"
@@ -203,11 +190,11 @@ msgstr "Poraž nepřítele"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:141
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr "Osvoboď tuto část světa od barbarského jha"
+msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:147
 msgid "Explore further and build ports"
-msgstr "Pokračuj v průzkumu a postav další přístavy"
+msgstr "Pokračuj v průzkumu a postav přístavy"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore Additional Islands and Search for Port Spaces"
@@ -217,7 +204,6 @@ msgstr "Prozkoumej další ostrovy a hledej místa pro přístavy"
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
 msgstr ""
-"Objevuj další země ve svém okolí a postav tolik přístavů, kolik bude možné."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:157
@@ -246,8 +232,6 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
-"Postav výcvikový tábor, několik kasáren a arénu, nebo koloseum k výcviku "
-"vojáků."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:182
 msgid "The Journey Home"
@@ -260,7 +244,7 @@ msgstr "Cesta domů"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:619
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid "Diary of Lutius"
-msgstr "Lutiův deník"
+msgstr "Lutiusův denník"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:185
@@ -550,7 +534,7 @@ msgid ""
 "is complete, so we can begin to harvest logs and make planks out of them."
 msgstr ""
 "Zjistil jsem, že stavba domku dřevorubce a pily je dokončena, takže můžeme "
-"začít těžit klády a řezat z nich prkna."
+"začít těžit kmeny a řezat z nich prkna."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:326

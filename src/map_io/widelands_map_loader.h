@@ -39,9 +39,9 @@ struct WidelandsMapLoader : public MapLoader {
 	WidelandsMapLoader(FileSystem* fs, Map*);
 	~WidelandsMapLoader() override;
 
-	int32_t preload_map(bool, std::vector<AddOns::AddOnInfo>*) override;
+	int32_t preload_map(bool) override;
 	int32_t load_map_complete(EditorGameBase&, MapLoader::LoadType load_type) override;
-	int32_t load_map_for_render(EditorGameBase&, std::vector<AddOns::AddOnInfo>*) override;
+	int32_t load_map_for_render(EditorGameBase&) override;
 
 	MapObjectLoader* get_map_object_loader() {
 		return mol_.get();

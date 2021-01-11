@@ -62,12 +62,8 @@ int main(int argc, char** argv) {
 			return 1;
 		}
 
-		ml->preload_map(true, nullptr);
-		if (!map->required_addons().empty()) {
-			log_err("This map depends on add-ons!\n");
-			return 1;
-		}
-		ml->load_map_for_render(egbase, nullptr);
+		ml->preload_map(true);
+		ml->load_map_for_render(egbase);
 
 		std::unique_ptr<Texture> minimap(
 		   draw_minimap(egbase, nullptr, Rectf(), MiniMapType::kStaticMap, MiniMapLayer::Terrain));

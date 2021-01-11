@@ -27,14 +27,12 @@
 #include "graphic/font_handler.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/addons.h"
 #include "map_io/widelands_map_loader.h"
 
 MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
                                              Registry& registry,
                                              const std::string& name,
                                              const std::string& title,
-                                             bool addons,
                                              bool show_empty_dirs,
                                              const std::string& basedir)
    : UI::UniqueWindow(
@@ -53,10 +51,9 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
         &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
 
      table_(&table_box_, 0, 0, 200, 200, UI::PanelStyle::kWui),
-     egbase_(nullptr),
      map_details_box_(
         &table_and_details_box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, padding_),
-     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, egbase_),
+     map_details_(&map_details_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, parent.egbase()),
 
      display_mode_(&table_box_,
                    "display_mode",
@@ -81,8 +78,7 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
 
      // Options
-     basedir_(basedir),
-     include_addon_maps_(addons) {
+     basedir_(basedir) {
 
 	g_fs->ensure_directory_exists(basedir_);
 	curdir_ = basedir_;
@@ -123,7 +119,6 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	button_box_.add_inf_space();
 
 	display_mode_.selected.connect([this]() { fill_table(); });
-	table_.cancel.connect([this]() { die(); });
 
 	move_to_top();
 }
@@ -163,22 +158,8 @@ void MainMenuLoadOrSaveMap::fill_table() {
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
-	} else {
-		if (files.empty()) {
-			maps_data_.push_back(MapData::create_empty_dir(curdir_));
-		}
-		// In the toplevel directory we also need to include add-on maps –
-		// but only in the load screen, not in the save screen!
-		if (include_addon_maps_) {
-			for (auto& addon : AddOns::g_addons) {
-				if (addon.first.category == AddOns::AddOnCategory::kMaps) {
-					for (const std::string& mapname : g_fs->list_directory(
-					        kAddOnDir + FileSystem::file_separator() + addon.first.internal_name)) {
-						files.insert(mapname);
-					}
-				}
-			}
-		}
+	} else if (files.empty()) {
+		maps_data_.push_back(MapData::create_empty_dir(curdir_));
 	}
 
 	const MapData::DisplayType display_type = display_mode_.get_selected();
@@ -190,7 +171,7 @@ void MainMenuLoadOrSaveMap::fill_table() {
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(mapfilename);
 		if (ml != nullptr) {
 			try {
-				ml->preload_map(true, nullptr);
+				ml->preload_map(true);
 
 				if (!map.get_width() || !map.get_height()) {
 					continue;

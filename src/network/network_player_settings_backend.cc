@@ -90,11 +90,3 @@ void NetworkPlayerSettingsBackend::set_player_team(PlayerSlot id, Widelands::Tea
 	}
 	s->set_player_team(id, team);
 }
-
-/// Sets the colo for the player slot
-void NetworkPlayerSettingsBackend::set_player_color(PlayerSlot id, const RGBColor& c) {
-	if (id >= s->settings().players.size()) {
-		return;
-	}
-	s->set_player_color(id, c);
-}

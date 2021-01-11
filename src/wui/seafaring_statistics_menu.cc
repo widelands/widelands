@@ -29,6 +29,7 @@
 #include "ui_basic/box.h"
 #include "wui/interactive_player.h"
 #include "wui/shipwindow.h"
+#include "wui/watchwindow.h"
 
 inline InteractivePlayer& SeafaringStatisticsMenu::iplayer() const {
 	return dynamic_cast<InteractivePlayer&>(*get_parent());
@@ -210,16 +211,16 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 			   switch (note.action) {
 			   case Widelands::NoteShip::Action::kDestinationChanged:
 			   case Widelands::NoteShip::Action::kWaitingForCommand:
-			   case Widelands::NoteShip::Action::kNoPortLeft:
 			   case Widelands::NoteShip::Action::kGained:
 				   assert(note.ship != nullptr);
 				   update_ship(*note.ship);
-				   return;
+				   break;
 			   case Widelands::NoteShip::Action::kLost:
 				   remove_ship(note.ship->serial());
-				   return;
+				   break;
+			   default:
+				   NEVER_HERE();
 			   }
-			   NEVER_HERE();
 		   }
 	   });
 }
@@ -482,7 +483,9 @@ void SeafaringStatisticsMenu::center_view() {
 
 void SeafaringStatisticsMenu::watch_ship() {
 	if (table_.has_selection()) {
-		iplayer().show_watch_window(*serial_to_ship(table_.get_selected()));
+		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
+		WatchWindow* window = show_watch_window(iplayer(), ship->get_position());
+		window->follow(ship);
 	}
 }
 

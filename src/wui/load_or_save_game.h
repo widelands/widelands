@@ -22,7 +22,6 @@
 
 #include <memory>
 
-#include "base/macros.h"
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
@@ -34,10 +33,10 @@
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
-	friend class LoadGame;
+	friend class FullscreenMenuLoadGame;
 	friend struct GameMainMenuSaveGame;
 
-public:
+protected:
 	/// Choose which type of files to show
 	enum class FileType { kShowAll, kGameMultiPlayer, kGameSinglePlayer, kReplay };
 
@@ -47,12 +46,7 @@ public:
 	               FileType filetype,
 	               UI::PanelStyle,
 	               UI::WindowStyle,
-	               bool localize_autosave,
-	               UI::Panel* table_parent = nullptr,
-	               UI::Panel* delete_button_parent = nullptr);
-
-	/// Make cppcheck happy
-	DISALLOW_COPY_AND_ASSIGN(LoadOrSaveGame);
+	               bool localize_autosave);
 
 	/// Update gamedetails and tooltips and return information about the current selection
 	std::unique_ptr<SavegameData> entry_selected();
@@ -87,7 +81,7 @@ public:
 	/// Show confirmation window and delete the selected file(s)
 	void clicked_delete();
 
-	void change_directory_to(const std::string& directory);
+	void change_directory_to(std::string& directory);
 
 private:
 	/// Returns the savegame for the table entry at 'index'
@@ -97,6 +91,7 @@ private:
 	bool compare_save_time(uint32_t, uint32_t) const;
 	bool compare_map_name(uint32_t, uint32_t) const;
 
+	UI::Panel* parent_;
 	UI::Box* table_box_;
 	FileType filetype_;
 

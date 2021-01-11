@@ -34,11 +34,8 @@
 #include "ui_fsmenu/main.h"
 #include "wui/sound_options.h"
 
+class FullscreenMenuOptions;
 class Section;
-
-namespace FsMenu {
-
-class Options;
 
 class OptionsCtrl {
 public:
@@ -52,7 +49,6 @@ public:
 		bool inputgrab;
 		uint32_t maxfps;
 		bool sdl_cursor;
-		std::string theme;
 
 		// Windows options
 		bool snap_win_overlap_only;
@@ -74,8 +70,6 @@ public:
 		bool ctrl_zoom;
 		bool game_clock;
 		bool numpad_diagonalscrolling;
-		bool edge_scrolling;
-		bool tooltip_accessibility_mode;
 		int32_t display_flags;
 		bool training_wheels;
 
@@ -86,24 +80,24 @@ public:
 		uint32_t active_tab;
 	};
 
-	explicit OptionsCtrl(MainMenu&, Section&);
+	explicit OptionsCtrl(FullscreenMenuMain&, Section&);
 	void handle_menu();
 	OptionsCtrl::OptionsStruct options_struct(uint32_t active_tab);
 	void save_options();
 
 private:
 	Section& opt_section_;
-	MainMenu& parent_;
-	std::unique_ptr<Options> opt_dialog_;
+	FullscreenMenuMain& parent_;
+	std::unique_ptr<FullscreenMenuOptions> opt_dialog_;
 };
 
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-class Options : public UI::Window {
+class FullscreenMenuOptions : public UI::Window {
 public:
-	explicit Options(MainMenu&, OptionsCtrl::OptionsStruct opt);
+	explicit FullscreenMenuOptions(FullscreenMenuMain&, OptionsCtrl::OptionsStruct opt);
 	OptionsCtrl::OptionsStruct get_values();
 
 	bool handle_key(bool, SDL_Keysym) override;
@@ -140,11 +134,9 @@ private:
 	// Interface options
 	UI::Dropdown<std::string> language_dropdown_;
 	UI::Dropdown<int> resolution_dropdown_;
-	UI::Dropdown<std::string> theme_dropdown_;
 	UI::Checkbox inputgrab_;
 	UI::Checkbox sdl_cursor_;
 	UI::SpinBox sb_maxfps_;
-	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
 
 	// Windows options
@@ -178,7 +170,6 @@ private:
 	UI::Checkbox ctrl_zoom_;
 	UI::Checkbox game_clock_;
 	UI::Checkbox numpad_diagonalscrolling_;
-	UI::Checkbox edge_scrolling_;
 
 	UI::Box training_wheels_box_;
 	UI::Checkbox training_wheels_;
@@ -208,7 +199,5 @@ private:
 	};
 	std::map<std::string, LanguageEntry> language_entries_;
 };
-
-}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

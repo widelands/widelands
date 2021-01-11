@@ -26,27 +26,24 @@
 #include "graphic/image_cache.h"
 #include "io/profile.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "map_io/widelands_map_loader.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_fsmenu/campaigns.h"
-#include "ui_fsmenu/main.h"
-#include "wlapplication.h"
-
-namespace FsMenu {
 
 /**
- * ScenarioSelect UI.
+ * FullscreenMenuScenarioSelect UI.
  *
  * Loads a list of all visible maps of selected campaign or all tutorials and
  * lets the user choose one.
  */
-ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
-   : TwoColumnsFullNavigationMenu(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
+FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(FullscreenMenuMain& fsmm,
+                                                           CampaignData* camp)
+   : FullscreenMenuLoadMapOrGame(fsmm, camp ? _("Choose Scenario") : _("Choose Tutorial")),
      is_tutorial_(camp == nullptr),
-     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
+     header_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
 
      subtitle_(&header_box_,
                0,
@@ -57,8 +54,8 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
                "",
                UI::Align::kCenter,
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     scenario_details_(&right_column_content_box_),
-     scenario_difficulty_header_(&right_column_content_box_,
+     scenario_details_(this),
+     scenario_difficulty_header_(this,
                                  UI::PanelStyle::kFsMenu,
                                  UI::FontStyle::kFsMenuInfoPanelHeading,
                                  0,
@@ -67,13 +64,13 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
                                  0,
                                  is_tutorial_ ? "" : _("Difficulty"),
                                  UI::Align::kLeft),
-     scenario_difficulty_(&right_column_content_box_,
+     scenario_difficulty_(this,
                           "scenario_difficulty",
                           0,
                           0,
-                          0,
+                          200,
                           8,
-                          standard_height_,
+                          24,
                           "",
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
@@ -91,20 +88,20 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
 		   (boost::format("%s — %s") % campaign_->tribename % campaign_->descname).str());
 	}
 
-	header_box_.add(&subtitle_, UI::Box::Resizing::kExpandBoth);
-	header_box_.add_space(10 * kPadding);
-
-	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
-
-	right_column_content_box_.add(&scenario_details_, UI::Box::Resizing::kExpandBoth);
-	right_column_content_box_.add(
-	   &scenario_difficulty_header_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
-	right_column_content_box_.add(&scenario_difficulty_, UI::Box::Resizing::kFullSize);
+	header_box_.add_inf_space();
+	header_box_.add_inf_space();
+	header_box_.add_inf_space();
+	header_box_.add(&subtitle_, UI::Box::Resizing::kFullSize);
+	header_box_.add_inf_space();
+	header_box_.add_inf_space();
+	header_box_.add_inf_space();
 
 	back_.set_tooltip(is_tutorial_ ? _("Return to the main menu") :
 	                                 _("Return to campaign selection"));
 	ok_.set_tooltip(is_tutorial_ ? _("Play this tutorial") : _("Play this scenario"));
 
+	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	back_.sigclicked.connect([this]() { clicked_back(); });
 	table_.selected.connect([this](unsigned) { entry_selected(); });
 	table_.double_clicked.connect([this](unsigned) { clicked_ok(); });
 
@@ -143,57 +140,53 @@ ScenarioSelect::ScenarioSelect(MenuCapsule& fsmm, CampaignData* camp)
 	table_.cancel.connect([this]() { clicked_back(); });
 }
 
-void ScenarioSelect::layout() {
-	TwoColumnsFullNavigationMenu::layout();
-	scenario_difficulty_.set_desired_size(0, standard_height_);
+void FullscreenMenuScenarioSelect::layout() {
+	FullscreenMenuLoadMapOrGame::layout();
+	header_box_.set_size(get_inner_w(), tabley_);
+	table_.set_size(tablew_, tableh_);
+	table_.set_pos(Vector2i(tablex_, tabley_));
+	scenario_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
+	scenario_details_.set_pos(Vector2i(right_column_x_, tabley_));
+	scenario_difficulty_.set_size(get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
+	scenario_difficulty_.set_pos(
+	   Vector2i(right_column_x_, ok_.get_y() - padding_ - scenario_difficulty_.get_h()));
+	scenario_difficulty_header_.set_size(
+	   get_right_column_w(right_column_x_), scenario_difficulty_.get_h());
+	scenario_difficulty_header_.set_pos(Vector2i(
+	   right_column_x_,
+	   ok_.get_y() - padding_ - scenario_difficulty_.get_h() - scenario_difficulty_header_.get_h()));
 }
 
-// Resolves the add-on prefix into a usable path or prefixes the path with the campaign directory
-static std::string resolve_and_fix_cross_file(const std::string& path) {
-	const size_t colonpos = path.find(':');
-	if (colonpos == std::string::npos) {
-		// normal case
-		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + path);
-	} else {
-		// add-on
-		return g_fs->FileSystem::fix_cross_file(kAddOnDir + "/" + path.substr(0, colonpos) + "/" +
-		                                        path.substr(colonpos + 1));
-	}
-}
-
-std::string ScenarioSelect::get_map() {
+std::string FullscreenMenuScenarioSelect::get_map() {
 	if (set_has_selection()) {
-		return resolve_and_fix_cross_file(scenarios_data_.at(table_.get_selected()).path);
+		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" +
+		                                        scenarios_data_.at(table_.get_selected()).path);
 	}
 	return "";
 }
 
-bool ScenarioSelect::set_has_selection() {
+uint32_t FullscreenMenuScenarioSelect::get_difficulty() const {
+	return scenario_difficulty_.get_selected();
+}
+
+bool FullscreenMenuScenarioSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	return has_selection;
 }
 
-void ScenarioSelect::clicked_ok() {
-	if (!table_.has_selection() || !scenarios_data_[table_.get_selected()].playable) {
+void FullscreenMenuScenarioSelect::clicked_ok() {
+	if (!table_.has_selection()) {
 		return;
 	}
-
-	capsule_.set_visible(false);
-	Widelands::Game game;
-	try {
-		if (scenario_difficulty_.has_selection()) {
-			game.set_scenario_difficulty(scenario_difficulty_.get_selected());
-		}
-		game.run_splayer_scenario_direct(get_map(), "");
-	} catch (const std::exception& e) {
-		WLApplication::emergency_save(&capsule_.menu(), game, e.what());
+	const ScenarioData& scenario_data = scenarios_data_[table_.get_selected()];
+	if (!scenario_data.playable) {
+		return;
 	}
-
-	return_to_main_menu();
+	end_modal<MenuTarget>(MenuTarget::kOk);
 }
 
-void ScenarioSelect::entry_selected() {
+void FullscreenMenuScenarioSelect::entry_selected() {
 	if (set_has_selection()) {
 		const ScenarioData& scenario_data = scenarios_data_[table_.get_selected()];
 		scenario_details_.update(scenario_data);
@@ -206,7 +199,7 @@ void ScenarioSelect::entry_selected() {
 /**
  * fill the campaign-map list
  */
-void ScenarioSelect::fill_table() {
+void FullscreenMenuScenarioSelect::fill_table() {
 	if (is_tutorial_) {
 		// Load the tutorials
 		LuaInterface lua;
@@ -234,7 +227,8 @@ void ScenarioSelect::fill_table() {
 	for (size_t i = 0; i < scenarios_data_.size(); ++i) {
 		// Get details info from maps
 		ScenarioData* scenario_data = &scenarios_data_.at(i);
-		const std::string full_path = resolve_and_fix_cross_file(scenario_data->path);
+		const std::string full_path =
+		   g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + scenario_data->path);
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(full_path));
 		if (!ml) {
@@ -243,7 +237,7 @@ void ScenarioSelect::fill_table() {
 		}
 
 		map.set_filename(full_path);
-		ml->preload_map(true, nullptr);
+		ml->preload_map(true);
 
 		{
 			i18n::Textdomain td("maps");
@@ -265,4 +259,3 @@ void ScenarioSelect::fill_table() {
 	}
 	entry_selected();
 }
-}  // namespace FsMenu

@@ -67,7 +67,7 @@ public:
 		 * \note The Peeker instance does not own the given connection. It is the responsible of the
 		 *       caller to make sure the given instance stays valid.
 		 */
-		explicit Peeker(BufferedConnection* conn);
+		Peeker(BufferedConnection* conn);
 
 		/**
 		 * Checks whether a relay command can be read from the buffer.

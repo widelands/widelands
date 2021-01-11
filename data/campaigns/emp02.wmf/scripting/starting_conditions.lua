@@ -70,7 +70,6 @@ prefilled_buildings(p1,
 -- =======================================================================
 --                                 Player 2
 -- =======================================================================
-p2.hidden_from_general_statistics = true
 p2:forbid_buildings("all")
 p2:allow_buildings{
    "barbarians_bakery",

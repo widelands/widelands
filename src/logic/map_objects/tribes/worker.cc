@@ -655,9 +655,10 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
-	}
-	if (upcast(ProductionSite, productionsite, get_location(game))) {
-		productionsite->unnotify_player();
+	} else {
+		if (upcast(ProductionSite, productionsite, get_location(game))) {
+			productionsite->unnotify_player();
+		}
 	}
 
 	// Pick a location at random
@@ -700,33 +701,20 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 	int32_t max_steps = -1;
 
 	// First of all, make sure we're outside
-	if (upcast(Building, b, get_location(game))) {
-		if (b == imm) {
-			start_task_leavebuilding(game, false);
-			return true;
-		}
+	if (imm == &dynamic_cast<Building&>(*get_location(game))) {
+		start_task_leavebuilding(game, false);
+		return true;
 	}
 
 	// Determine the coords we need to walk towards
 	if (action.iparam1 & Action::walkObject) {
-		MapObject* obj = state.objvar1.get(game);
+		MapObject* const obj = state.objvar1.get(game);
 
 		if (obj) {
 			if (upcast(Bob const, bob, obj)) {
 				dest = bob->get_position();
 			} else if (upcast(Immovable const, immovable, obj)) {
 				dest = immovable->get_position();
-			} else if (upcast(Flag, f, obj)) {
-				// Special handling for flags: Go there by road using a Transfer
-				if (f == imm) {
-					// already there – call next program step
-					++state.ivar1;
-					return false;
-				}
-				Transfer* t = new Transfer(game, *this);
-				t->set_destination(*f);
-				start_task_transfer(game, t);
-				return true;  // do not advance program yet
 			} else {
 				throw wexception("MO(%u): [actWalk]: bad object type %s", serial(),
 				                 to_string(obj->descr().type()).c_str());
@@ -1636,8 +1624,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 		}
 
 		return start_task_leavebuilding(game, true);
-	}
-	if (upcast(Flag, flag, location)) {
+	} else if (upcast(Flag, flag, location)) {
 		if (upcast(Building, nextbuild, nextstep)) {  //  Flag to Building
 			if (&nextbuild->base_flag() != location) {
 				throw wexception(
@@ -1646,8 +1633,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 			return start_task_move(
 			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
-		}
-		if (upcast(Flag, nextflag, nextstep)) {  //  Flag to Flag
+		} else if (upcast(Flag, nextflag, nextstep)) {  //  Flag to Flag
 			Road& road = *flag->get_road(*nextflag);
 
 			Path path(road.get_path());
@@ -1869,11 +1855,7 @@ void Worker::buildingwork_update(Game& game, State& state) {
  * is finished.
  */
 void Worker::update_task_buildingwork(Game& game) {
-	// After the worker is evicted and 'taskBuildingwork' is popped from the stack but before
-	// `taskLeavebuilding` is started, there is a brief window of time where this function can
-	// still be called, so we need to take into account that 'state' may be 'nullptr' here.
-	const State* const state = get_state();
-	if (state && state->task == &taskBuildingwork) {
+	if (top_state().task == &taskBuildingwork) {
 		send_signal(game, "update");
 	}
 }
@@ -1991,9 +1973,8 @@ const Bob::Task Worker::taskReturn = {
 void Worker::start_task_return(Game& game, bool const dropware) {
 	PlayerImmovable* const location = get_location(game);
 
-	if (!location || (location->descr().type() < MapObjectType::BUILDING &&
-	                  location->descr().type() != MapObjectType::FLAG)) {
-		throw wexception("MO(%u): start_task_return(): not owned by building or flag", serial());
+	if (!location || location->descr().type() < MapObjectType::BUILDING) {
+		throw wexception("MO(%u): start_task_return(): not owned by building", serial());
 	}
 
 	push_task(game, taskReturn);
@@ -2010,7 +1991,7 @@ void Worker::return_update(Game& game, State& state) {
 
 	signal_handled();
 
-	PlayerImmovable* location = get_location(game);
+	Building* location = dynamic_cast<Building*>(get_location(game));
 
 	if (!location) {
 		// Usually, this should be caught via the "location" signal above.
@@ -2044,22 +2025,17 @@ void Worker::return_update(Game& game, State& state) {
 				if (location && location->descr().type() == MapObjectType::DISMANTLESITE) {
 					set_location(nullptr);
 					return pop_task(game);
+				} else {
+					return start_task_move(
+					   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
 				}
-				return start_task_move(
-				   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware(), this), true);
-			}
-			if (location == flag) {
-				return pop_task(game);
 			}
 		}
 	}
 
 	// Determine the building's flag and move to it
 
-	Flag& target_flag = location->descr().type() == MapObjectType::FLAG ?
-	                       dynamic_cast<Flag&>(*location) :
-	                       dynamic_cast<Building&>(*location).base_flag();
-	if (!start_task_movepath(game, target_flag.get_position(), 15,
+	if (!start_task_movepath(game, location->base_flag().get_position(), 15,
 	                         descr().get_right_walk_anims(does_carry_ware(), this))) {
 		molog(game.get_gametime(), "[return]: Failed to return\n");
 		const std::string message =
@@ -2184,7 +2160,7 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 		}
 	}
 
-	if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		delete supply_;
 		supply_ = nullptr;
 
@@ -2443,7 +2419,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 	}
 
 	// We're back!
-	if (location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
+	if (location && location->descr().type() == Widelands::MapObjectType::WAREHOUSE) {
 		schedule_incorporate(game);
 		return;
 	}
@@ -2569,23 +2545,25 @@ void Worker::leavebuilding_update(Game& game, State& state) {
 
 		return start_task_move(
 		   game, WALK_SE, descr().get_right_walk_anims(does_carry_ware(), this), true);
-	}
-	const Coords& flagpos = baseflag.get_position();
+	} else {
+		const Coords& flagpos = baseflag.get_position();
 
-	if (state.ivar1) {
-		set_location(&baseflag);
-	}
+		if (state.ivar1) {
+			set_location(&baseflag);
+		}
 
-	if (get_position() == flagpos) {
-		return pop_task(game);
-	}
+		if (get_position() == flagpos) {
+			return pop_task(game);
+		}
 
-	if (!start_task_movepath(
-	       game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
-		molog(game.get_gametime(),
-		      "[leavebuilding]: outside of building, but failed to walk back to flag");
-		set_location(nullptr);
-		return pop_task(game);
+		if (!start_task_movepath(
+		       game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
+			molog(game.get_gametime(),
+			      "[leavebuilding]: outside of building, but failed to walk back to flag");
+			set_location(nullptr);
+			return pop_task(game);
+		}
+		return;
 	}
 }
 
@@ -2951,15 +2929,16 @@ void Worker::check_visible_sites(const Map& map, const Player& player) {
 	while (1 < scouts_worklist.size()) {
 		if (scouts_worklist.back().randomwalk) {
 			return;  // Random walk never goes out of fashion.
-		}
-		MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
-		if (player.is_seeing(mt)) {
-			// The military site is now visible. Either player
-			// has acquired possession of more military sites
-			// of own, or own folks are nearby.
-			scouts_worklist.pop_back();
 		} else {
-			return;
+			MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
+			if (player.is_seeing(mt)) {
+				// The military site is now visible. Either player
+				// has acquired possession of more military sites
+				// of own, or own folks are nearby.
+				scouts_worklist.pop_back();
+			} else {
+				return;
+			}
 		}
 	}
 }
@@ -3064,8 +3043,6 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	// Some assumptions: When scout starts working, he is located in his hut.
 	// I cannot imagine any situations where this is not the case. However,
 	// such situation could trigger bugs.
-	// – Now he can also be located at an arbitrary flag instead.
-	// But the same code should work fine for that as well.
 	const BaseImmovable* homebase = bobpos.field->get_immovable();
 	assert(nullptr != homebase);
 
@@ -3105,15 +3082,14 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	}
 
 	// first get out
-	if (upcast(Building, b, get_location(game))) {
-		push_task(game, taskLeavebuilding);
-		State& stateLeave = top_state();
-		stateLeave.ivar1 = false;
-		stateLeave.objvar1 = b;
-	}
+	push_task(game, taskLeavebuilding);
+	State& stateLeave = top_state();
+	stateLeave.ivar1 = false;
+	stateLeave.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
 bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
+
 	Coords oldest_coords = get_position();
 
 	std::vector<Coords> list;  //< List of interesting points
@@ -3143,8 +3119,9 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 				       game, coord, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 					molog(game.get_gametime(), "[scout]: failed to reach destination\n");
 					return false;
+				} else {
+					return true;  // start_task_movepath was successfull.
 				}
-				return true;  // start_task_movepath was successful.
 			}
 
 			// Else evaluate for second best target
@@ -3171,8 +3148,9 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
 			       game, oldest_coords, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 				molog(game.get_gametime(), "[scout]: Failed to reach destination\n");
 				return false;  // If failed go home
+			} else {
+				return true;  // Start task movepath success.
 			}
-			return true;  // Start task movepath success.
 		}
 	}
 	// No reachable fields found.
@@ -3184,6 +3162,7 @@ bool Worker::scout_random_walk(Game& game, const Map& map, const State& state) {
  *
  */
 bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat) {
+
 	Coords oldest_coords = get_position();
 
 	std::vector<Coords> surrounding_places;  // locations near the MS under inspection
@@ -3215,8 +3194,9 @@ bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceT
 					       game, coord, 0, descr().get_right_walk_anims(does_carry_ware(), this))) {
 						molog(game.get_gametime(), "[scout]: failed to reach destination (x)\n");
 						return false;
+					} else {
+						return true;  // start_task_movepath was successfull.
 					}
-					return true;  // start_task_movepath was successful.
 				}
 			}
 		}

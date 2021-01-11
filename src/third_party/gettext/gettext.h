@@ -22,35 +22,7 @@
 #if ENABLE_NLS
 
 /* Get declarations of GNU message catalog functions.  */
-#ifdef __APPLE__
-// Silence third-party warnings
-
-/* Macros for disabling Clang warnings and errors
- * From https://svn.boost.org/trac/boost/wiki/Guidelines/WarningsGuidelines and
- * slightly modified.
- */
-#ifdef __clang__
-#define CLANG_DIAG_DO_PRAGMA(x) _Pragma(#x)
-// _Pragma is unary operator  #pragma ("")
-#define CLANG_DIAG_PRAGMA(x) CLANG_DIAG_DO_PRAGMA(clang diagnostic x)
-#define CLANG_DIAG_OFF(x)                                                                          \
-	CLANG_DIAG_PRAGMA(push)                                                                         \
-	CLANG_DIAG_PRAGMA(ignored x)
-// For example: #pragma clang diagnostic ignored "-Wno-unused-variable"
-#define CLANG_DIAG_ON(x) CLANG_DIAG_PRAGMA(pop)
-// For example: #pragma clang diagnostic warning "-Wno-unused-variable"
-#else  // Ensure these macros do nothing for other compilers.
-#define CLANG_DIAG_OFF(x)
-#define CLANG_DIAG_ON(x)
-#define CLANG_DIAG_PRAGMA(x)
-#endif
-
-CLANG_DIAG_OFF("-Wreserved-id-macro")
 #include <libintl.h>
-CLANG_DIAG_ON("-Wreserved-id-macro")
-#else
-#include <libintl.h>
-#endif
 
 #ifdef __clang__
 #pragma clang diagnostic ignored "-Wunknown-pragmas"

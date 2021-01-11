@@ -52,13 +52,6 @@ descriptions:new_productionsite_type {
             "callworker=scout"
          }
       },
-      targeted_scouting = {
-         descname = _"scouting",
-         actions = {
-            "consume=smoked_fish,atlanteans_bread",
-            "callworker=targeted_scouting"
-         }
-      },
    },
 }
 

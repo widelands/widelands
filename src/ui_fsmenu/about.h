@@ -23,18 +23,16 @@
 #include <memory>
 
 #include "ui_basic/fileview_panel.h"
-#include "ui_basic/unique_window.h"
+#include "ui_basic/window.h"
 #include "ui_fsmenu/main.h"
-
-namespace FsMenu {
 
 /**
  * "Fullscreen "About" information with tabs
  */
-class About : public UI::UniqueWindow {
+class FullscreenMenuAbout : public UI::Window {
 public:
-	explicit About(MainMenu&, UI::UniqueWindow::Registry&);
-	~About() override {
+	explicit FullscreenMenuAbout(FullscreenMenuMain&);
+	~FullscreenMenuAbout() override {
 	}
 
 	WindowLayoutID window_layout_id() const override {
@@ -51,7 +49,5 @@ private:
 	UI::FileViewPanel tabs_;
 	UI::Button close_;
 };
-
-}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_ABOUT_H

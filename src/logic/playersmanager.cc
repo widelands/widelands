@@ -60,7 +60,6 @@ void PlayersManager::remove_player(PlayerNumber plnum) {
 
 Player* PlayersManager::add_player(PlayerNumber const player_number,
                                    uint8_t const initialization_index,
-                                   const RGBColor& pc,
                                    const std::string& tribe,
                                    const std::string& name,
                                    TeamNumber team) {
@@ -76,7 +75,7 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 	}
 
 	const DescriptionIndex tribe_index = egbase_.mutable_descriptions()->load_tribe(tribe);
-	p = new Player(egbase_, player_number, initialization_index, pc,
+	p = new Player(egbase_, player_number, initialization_index,
 	               *egbase_.descriptions().get_tribe_descr(tribe_index), name);
 
 	p->set_team_number(team);

@@ -21,11 +21,9 @@
 #define WL_UI_BASIC_TABLE_H
 
 #include <functional>
-#include <memory>
 #include <set>
 
 #include "graphic/align.h"
-#include "graphic/style_manager.h"
 #include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
@@ -46,7 +44,7 @@ enum class TableColumnType { kFixed, kFlexible };
  *    2. a pointer type or
  *    3. uintptr_t.
  */
-template <typename Entry> class Table : public Panel {
+template <typename Entry> class Table {
 public:
 	struct EntryRecord {};
 
@@ -120,12 +118,11 @@ public:
 	std::vector<Recti> focus_overlay_rects();
 
 	// Drawing and event handling
-	void draw(RenderTarget&) override;
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
-	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
-	bool
-	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
-	bool handle_key(bool down, SDL_Keysym code) override;
+	void draw(RenderTarget&);
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
+	bool handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool handle_key(bool down, SDL_Keysym code);
 };
 
 template <> class Table<void*> : public Panel {
@@ -143,12 +140,12 @@ public:
 			return entry_;
 		}
 
-		void set_font_style(const FontStyle style) {
-			font_style_.reset(new FontStyle(style));
+		void set_font_style(const UI::FontStyleInfo& style) {
+			font_style_ = &style;
 		}
 
 		const UI::FontStyleInfo* font_style() const {
-			return font_style_ ? &g_style_manager->font_style(*font_style_) : nullptr;
+			return font_style_;
 		}
 
 		bool is_disabled() const {
@@ -161,7 +158,7 @@ public:
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		std::unique_ptr<UI::FontStyle> font_style_;
+		const UI::FontStyleInfo* font_style_;
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
@@ -304,16 +301,10 @@ public:
 private:
 	bool default_compare_string(uint32_t column, uint32_t a, uint32_t b);
 	bool sort_helper(uint32_t a, uint32_t b);
-	void reposition_scrollbar();
-	size_t find_resizable_column_idx();
-	int total_columns_width();
-	void adjust_column_sizes(int all_columns_width, size_t resizeable_column_idx);
-	void update_scrollbar_filler();
 
 	struct Column {
 		Button* btn;
 		int width;
-		int original_width;
 		Align alignment;
 		CompareFn compare;
 	};
@@ -339,7 +330,7 @@ private:
 	Columns::size_type sort_column_;
 	bool sort_descending_;
 	// This column will grow/shrink depending on the scrollbar being present
-	size_t flexible_column_idx_;
+	size_t flexible_column_;
 	bool is_multiselect_;
 
 	void header_button_clicked(Columns::size_type);

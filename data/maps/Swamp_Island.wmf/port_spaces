@@ -1,8 +1,7 @@
-# Automatically created by Widelands 1.0~git25090[91caec3@master] (Debug)
+# Automatically created by Widelands bzr7905[trunk] (Debug)
 
 [global]
 packet_version="1"
-waterway_max_length="0"
 number_of_port_spaces="14"
 
 [port_spaces]

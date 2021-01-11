@@ -30,7 +30,6 @@
 
 #include <SDL_mutex.h>
 
-#include "base/macros.h"
 #include "base/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"
@@ -199,8 +198,6 @@ public:
 	int32_t get_max_volume() const;
 
 private:
-	DISALLOW_COPY_AND_ASSIGN(SoundHandler);
-
 	void read_config();
 
 	FxId do_register_fx(SoundType type, const std::string& fx_path);

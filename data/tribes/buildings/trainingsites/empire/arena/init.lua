@@ -104,14 +104,7 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 8,
-   trainer_patience = 8,
-
-   messages = {
-      -- TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
-      no_soldier = pgettext("empire_building", "No soldier to train!"),
-      -- TRANSLATORS: Empire training site tooltip when none of the present soldiers match the current training program
-      no_soldier_for_level = pgettext("empire_building", "No soldier found for this training level!"),
-   },
+   trainer_patience = 8
 }
 
 pop_textdomain()

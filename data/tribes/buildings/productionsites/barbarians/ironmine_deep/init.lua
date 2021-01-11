@@ -40,7 +40,10 @@ descriptions:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      mines = "resource_iron",
+      mines_percent = 60
+   },
 
    working_positions = {
       barbarians_miner = 1,

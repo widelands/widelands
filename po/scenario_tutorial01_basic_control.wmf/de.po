@@ -9,7 +9,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # 11432e78848bb4940138532ffe479e21, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
-# Hybrid Dog, 2016
+# ‮ <ovvv@web.de>, 2016
 # Raymond Vetter, 2018
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
 # Elisabeth Jäger, 2015-2016
@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"POT-Creation-Date: 2020-10-23 05:30+0000\n"
 "PO-Revision-Date: 2020-10-23 20:20+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"

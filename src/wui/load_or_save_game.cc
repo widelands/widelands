@@ -28,10 +28,9 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                FileType filetype,
                                UI::PanelStyle style,
                                UI::WindowStyle ws,
-                               bool localize_autosave,
-                               UI::Panel* table_parent,
-                               UI::Panel* delete_button_parent)
-   : table_box_(new UI::Box(table_parent ? table_parent : parent, style, 0, 0, UI::Box::Vertical)),
+                               bool localize_autosave)
+   : parent_(parent),
+     table_box_(new UI::Box(parent, style, 0, 0, UI::Box::Vertical)),
      filetype_(filetype),
 
      // Savegame description
@@ -40,40 +39,39 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
         style,
         filetype == FileType::kReplay ? GameDetails::Mode::kReplay : GameDetails::Mode::kSavegame,
         g),
-     delete_(
-        new UI::Button(delete_button_parent ? delete_button_parent : game_details()->button_box(),
-                       "delete",
-                       0,
-                       0,
-                       0,
-                       0,
-                       style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
-                                                          UI::ButtonStyle::kWuiSecondary,
-                       _("Delete"))),
+     delete_(new UI::Button(game_details()->button_box(),
+                            "delete",
+                            0,
+                            0,
+                            0,
+                            0,
+                            style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                               UI::ButtonStyle::kWuiSecondary,
+                            _("Delete"))),
      basedir_(filetype_ == FileType::kReplay ? kReplayDir : kSaveDir),
      curdir_(basedir_),
      game_(g) {
 	switch (filetype_) {
 	case FileType::kReplay:
 		table_ = new SavegameTableReplay(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new ReplayDeleter(parent, ws));
+		savegame_deleter_.reset(new ReplayDeleter(parent_, ws));
 		savegame_loader_.reset(new ReplayLoader(g));
 		break;
 	case FileType::kGameSinglePlayer:
 		table_ = new SavegameTableSinglePlayer(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
+		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
 		savegame_loader_.reset((new SinglePlayerLoader(g)));
 		break;
 	case FileType::kGameMultiPlayer:
 		table_ = new SavegameTableMultiplayer(table_box_, style, localize_autosave);
-		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
+		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
 		savegame_loader_.reset(new MultiPlayerLoader(g));
 		break;
 	case FileType::kShowAll:
 		table_ = new SavegameTableMultiplayer(
 		   table_box_, style, localize_autosave);  // wrong? showAll = save window -> "accidental"
 		                                           // same table as multiplayer
-		savegame_deleter_.reset(new SavegameDeleter(parent, ws));
+		savegame_deleter_.reset(new SavegameDeleter(parent_, ws));
 		savegame_loader_.reset(new EverythingLoader(g));
 		break;
 	}
@@ -85,9 +83,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 	                           [this](uint32_t a, uint32_t b) { return compare_map_name(a, b); });
 
 	table_box_->add(table_, UI::Box::Resizing::kExpandBoth);
-	if (!delete_button_parent) {
-		game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
-	}
+	game_details_.button_box()->add(delete_, UI::Box::Resizing::kAlign, UI::Align::kLeft);
 	delete_->set_enabled(false);
 	delete_->sigclicked.connect([this] { clicked_delete(); });
 
@@ -244,7 +240,7 @@ void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
 	table_->set_show_filenames(show_filenames);
 }
 
-void LoadOrSaveGame::change_directory_to(const std::string& directory) {
+void LoadOrSaveGame::change_directory_to(std::string& directory) {
 	curdir_ = directory;
 	fill_table();
 }

@@ -170,7 +170,7 @@ void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
 	fr.unsigned_32();  // unused, was base_priority which is unused. Remove after b20.
 
 	const TribeDescr& tribe = building.owner().tribe();
-	Widelands::DescriptionIndex ware_type;
+	Widelands::DescriptionIndex ware_type = INVALID_INDEX;
 	// read ware type
 	while (0xff != (ware_type = fr.unsigned_8())) {
 		// read count of priorities assigned for this ware type

@@ -91,18 +91,18 @@ public:
 	const BillOfMaterials& input_workers() const {
 		return input_workers_;
 	}
-	BillOfMaterials& mutable_input_wares() {
-		return input_wares_;
-	}
-	BillOfMaterials& mutable_input_workers() {
-		return input_workers_;
-	}
 	using Output = std::set<DescriptionIndex>;
 	const Output& output_ware_types() const {
 		return output_ware_types_;
 	}
 	const Output& output_worker_types() const {
 		return output_worker_types_;
+	}
+	/// Map objects that this production site needs nearby according to attribute, without removing
+	/// them from the map
+	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
+	needed_attributes() const {
+		return needed_attributes_;
 	}
 	/// Map objects that are collected from the map by this production site according to attribute
 	const std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>>&
@@ -115,17 +115,8 @@ public:
 		return created_attributes_;
 	}
 
-	/// We only need the attributes during tribes initialization
-	void clear_attributes();
-
-	struct CollectedResourceInfo {
-		unsigned max_percent;
-		unsigned depleted_chance;
-	};
-
-	/// The resources that this production site needs to collect from the map, the max percent it can
-	/// achieve, and the chance when depleted
-	const std::map<std::string, CollectedResourceInfo>& collected_resources() const {
+	/// The resources that this production site needs to collect from the map
+	const std::set<std::string>& collected_resources() const {
 		return collected_resources_;
 	}
 	/// The resources that this production site will place on the map
@@ -148,9 +139,17 @@ public:
 	void add_created_bob(const std::string& bobname) {
 		created_bobs_.insert(bobname);
 	}
+	/// The immovables that this production site needs to be nearby
+	const std::set<std::string>& needed_immovables() const {
+		return needed_immovables_;
+	}
 	/// The immovables that this production site needs to collect from the map
 	const std::set<std::string>& collected_immovables() const {
 		return collected_immovables_;
+	}
+	/// Set that this production site makes use of the given immovable nearby
+	void add_needed_immovable(const std::string& immovablename) {
+		needed_immovables_.insert(immovablename);
 	}
 	/// Set that this production site needs to collect the given immovable from the map
 	void add_collected_immovable(const std::string& immovablename) {
@@ -168,9 +167,6 @@ public:
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs& programs() const {
-		return programs_;
-	}
-	Programs& mutable_programs() {
 		return programs_;
 	}
 
@@ -224,11 +220,6 @@ public:
 	std::set<std::string> supported_by_productionsites() const {
 		return supported_by_productionsites_;
 	}
-	/// Returns whether this production site needs map resources or objects that are created by a
-	/// different production site.
-	bool needs_supporters() const {
-		return !supported_by_productionsites_.empty();
-	}
 
 protected:
 	void add_output_ware_type(DescriptionIndex index) {
@@ -236,6 +227,12 @@ protected:
 	}
 	void add_output_worker_type(DescriptionIndex index) {
 		output_worker_types_.insert(index);
+	}
+
+	/// Set that this production site needs to be placed near map objects with the given attribute
+	void
+	add_needed_attribute(std::pair<MapObjectType, MapObjectDescr::AttributeIndex> attribute_info) {
+		needed_attributes_.insert(attribute_info);
 	}
 
 	/// Set that this production site needs to collect map objects with the given attribute from the
@@ -250,11 +247,8 @@ protected:
 		created_attributes_.insert(attribute_info);
 	}
 	/// Set that this production site needs to collect the given resource from the map
-	void add_collected_resource(const std::string& resource,
-	                            unsigned max_percent,
-	                            unsigned depleted_chance) {
-		collected_resources_.insert(
-		   std::make_pair(resource, CollectedResourceInfo{max_percent, depleted_chance}));
+	void add_collected_resource(const std::string& resource) {
+		collected_resources_.insert(resource);
 	}
 	/// Set that this production site will place the given resource on the map
 	void add_created_resource(const std::string& resource) {
@@ -269,12 +263,14 @@ private:
 	BillOfMaterials input_workers_;
 	Output output_ware_types_;
 	Output output_worker_types_;
+	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> needed_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	std::map<std::string, CollectedResourceInfo> collected_resources_;
+	std::set<std::string> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;
+	std::set<std::string> needed_immovables_;
 	std::set<std::string> collected_immovables_;
 	std::set<std::string> created_immovables_;
 	Programs programs_;
@@ -388,14 +384,6 @@ public:
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
-	// This function forces the productionsite to interrupt whatever it is doing ASAP,
-	// and start the specified program immediately afterwards. If that program expects
-	// some extra data, this data needs to be provided as the third parameter.
-	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
-	// Returns `true` if `set_next_program_override()` has been called recently
-	// and the force-started program has not terminated yet.
-	bool has_forced_state() const;
-
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
@@ -406,8 +394,7 @@ protected:
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
 		ProgramResult phase;               ///< micro-step index (instruction dependent)
-		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
-		uint32_t flags;  ///< pfXXX flags
+		uint32_t flags;                    ///< pfXXX flags
 
 		/**
 		 * Instruction-dependent additional data.
@@ -450,10 +437,7 @@ protected:
 	                  const Duration& delay = Duration(10),
 	                  ProgramResult phase = ProgramResult::kNone);
 
-	void program_start(Game&,
-	                   const std::string& program_name,
-	                   bool force = false,
-	                   MapObject* extra_data = nullptr);
+	void program_start(Game&, const std::string& program_name);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 

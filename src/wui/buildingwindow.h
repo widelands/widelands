@@ -86,10 +86,6 @@ protected:
 	void act_enhance(Widelands::DescriptionIndex, bool is_csite);
 	void clicked_goto();
 	void act_mute(bool all);
-	virtual void clicked_watch() {
-		// overridden by ProductionsiteWindow
-		NEVER_HERE();
-	}
 
 	Widelands::Game* const game_;
 
@@ -98,8 +94,6 @@ protected:
 	void set_building_descr_for_help(const Widelands::BuildingDescr* d) {
 		building_descr_for_help_ = d;
 	}
-
-	UI::Button* watch_button_;
 
 private:
 	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);

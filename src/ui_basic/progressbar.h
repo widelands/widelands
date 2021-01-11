@@ -60,8 +60,7 @@ private:
 	uint32_t orientation_;
 	uint32_t state_;  ///< state_ is [0..total_]
 	uint32_t total_;  ///< maximum progress
-	const UI::PanelStyle progress_style_;
-	const UI::ProgressbarStyleInfo& progress_style() const;
+	const UI::ProgressbarStyleInfo& progress_style_;
 };
 }  // namespace UI
 

@@ -92,7 +92,6 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, acquire_training_wheel_lock),
    METHOD(LuaPlayer, release_training_wheel_lock),
    METHOD(LuaPlayer, mark_training_wheel_as_solved),
-   METHOD(LuaPlayer, run_training_wheel),
    METHOD(LuaPlayer, skip_training_wheel),
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
@@ -116,7 +115,6 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
    PROP_RO(LuaPlayer, tribe),
    PROP_RW(LuaPlayer, see_all),
    PROP_RW(LuaPlayer, allow_additional_expedition_items),
-   PROP_RW(LuaPlayer, hidden_from_general_statistics),
    {nullptr, nullptr, nullptr},
 };
 
@@ -132,7 +130,7 @@ const PropertyType<LuaPlayer> LuaPlayer::Properties[] = {
 */
 int LuaPlayer::get_name(lua_State* L) {
 	Widelands::Game& game = get_game(L);
-	const Widelands::Player& p = get(L, game);
+	Widelands::Player& p = get(L, game);
 	lua_pushstring(L, p.get_name());
 	return 1;
 }
@@ -147,7 +145,7 @@ int LuaPlayer::get_name(lua_State* L) {
 */
 int LuaPlayer::get_allowed_buildings(lua_State* L) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
-	const Widelands::Player& player = get(L, egbase);
+	Widelands::Player& player = get(L, egbase);
 
 	lua_newtable(L);
 	for (Widelands::DescriptionIndex i = 0; i < egbase.descriptions().nr_buildings(); ++i) {
@@ -296,21 +294,6 @@ int LuaPlayer::get_allow_additional_expedition_items(lua_State* L) {
 }
 int LuaPlayer::set_allow_additional_expedition_items(lua_State* L) {
 	get(L, get_egbase(L)).set_allow_additional_expedition_items(luaL_checkboolean(L, -1));
-	return 0;
-}
-
-/* RST
-   .. attribute:: hidden_from_general_statistics
-
-      (RW) Whether this player's existence and statistics are not
-      disclosed to other players in the general statistics menu.
-*/
-int LuaPlayer::get_hidden_from_general_statistics(lua_State* L) {
-	lua_pushboolean(L, get(L, get_egbase(L)).is_hidden_from_general_statistics());
-	return 1;
-}
-int LuaPlayer::set_hidden_from_general_statistics(lua_State* L) {
-	get(L, get_egbase(L)).set_hidden_from_general_statistics(luaL_checkboolean(L, -1));
 	return 0;
 }
 
@@ -636,10 +619,9 @@ int LuaPlayer::add_objective(lua_State* L) {
 /* RST
    .. method:: reveal_fields(fields)
 
-      Make these fields visible for the current player. The fields will remain visible until they
-      are hidden again by :meth:`hide_fields`, even if they are not in vision range of any
-      buildings or workers.
-      See also :ref:`field_animations` for animated revealing.
+      Make these fields visible for the current player. The fields will remain
+      visible until they are hidden again. See also :ref:`field_animations` for
+      animated revealing.
 
       :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
@@ -665,18 +647,14 @@ int LuaPlayer::reveal_fields(lua_State* L) {
 /* RST
    .. method:: hide_fields(fields[, unexplore = false])
 
-      Undo the effect of :meth:`reveal_fields` on these fields for the current player and
-      optionally completely hide them.
-      See also :ref:`field_animations` for animated hiding.
+      Make these fields hidden for the current player if they are not
+      seen by a military building. See also :ref:`field_animations` for
+      animated hiding.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored
-         and will not be seen by buildings or workers until they are revealed again
-         by :meth:`reveal_fields`.
-         If `false`, They will no longer be permanently visible, but can still be seen by
-         buildings or workers (own or allied), and the player will remember the last seen state.
+      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored.
       :type unexplore: :class:`boolean`
 
       :returns: :const:`nil`
@@ -686,9 +664,10 @@ int LuaPlayer::hide_fields(lua_State* L) {
 	Widelands::Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const Widelands::HideOrRevealFieldMode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
-	                                                 Widelands::HideOrRevealFieldMode::kHide :
-	                                                 Widelands::HideOrRevealFieldMode::kUnreveal;
+	const Widelands::HideOrRevealFieldMode mode =
+	   (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	      Widelands::HideOrRevealFieldMode::kHideAndForget :
+	      Widelands::HideOrRevealFieldMode::kHide;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
@@ -770,32 +749,6 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 	}
 
 	get_game(L).mark_training_wheel_as_solved(luaL_checkstring(L, 2));
-	return 0;
-}
-
-/* RST
-   .. method:: run_training_wheel(name[, force])
-
-      Trigger running a training wheel. This function will skip the dependency check, so the given
-      training wheel will run even if its preconditions haven't been met. No further training wheels
-      will be triggered. Previously solved training wheels will not be run unless ``force == true``.
-
-      .. note:: Intended for use in scenarios only.
-
-      :arg name: name of the training wheel to be run
-      :type name: :class:`string`
-
-      :arg force: whether it should be run anyway if it was previously solved
-      :type force: :class:`boolean`
-*/
-// UNTESTED
-int LuaPlayer::run_training_wheel(lua_State* L) {
-	if (lua_gettop(L) < 2 || lua_gettop(L) > 3) {
-		report_error(L, "1-2 arguments are required for run_training_wheel(string[, boolean])");
-	}
-
-	const bool force = lua_gettop(L) == 3 && luaL_checkboolean(L, 3);
-	get_game(L).run_training_wheel(luaL_checkstring(L, 2), force);
 	return 0;
 }
 
@@ -919,7 +872,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
 */
 // UNTESTED
 int LuaPlayer::get_suitability(lua_State* L) {
-	const Widelands::Game& game = get_game(L);
+	Widelands::Game& game = get_game(L);
 	const Widelands::Descriptions& descriptions = game.descriptions();
 
 	const char* name = luaL_checkstring(L, 2);
@@ -1169,7 +1122,7 @@ void LuaObjective::__unpersist(lua_State* L) {
       :attr:`wl.game.Player.objectives` with :attr:`name` as key.
 */
 int LuaObjective::get_name(lua_State* L) {
-	const Widelands::Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.name().c_str());
 	return 1;
 }
@@ -1179,7 +1132,7 @@ int LuaObjective::get_name(lua_State* L) {
       (RW) The line that is shown in the objectives menu
 */
 int LuaObjective::get_title(lua_State* L) {
-	const Widelands::Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.descname().c_str());
 	return 1;
 }
@@ -1194,7 +1147,7 @@ int LuaObjective::set_title(lua_State* L) {
       (RW) The complete text of this objective. Can be Widelands Richtext.
 */
 int LuaObjective::get_body(lua_State* L) {
-	const Widelands::Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushstring(L, o.descr().c_str());
 	return 1;
 }
@@ -1209,7 +1162,7 @@ int LuaObjective::set_body(lua_State* L) {
       (RW) is this objective shown in the objectives menu
 */
 int LuaObjective::get_visible(lua_State* L) {
-	const Widelands::Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushboolean(L, o.visible());
 	return 1;
 }
@@ -1228,7 +1181,7 @@ int LuaObjective::set_visible(lua_State* L) {
 
 */
 int LuaObjective::get_done(lua_State* L) {
-	const Widelands::Objective& o = get(L, get_game(L));
+	Widelands::Objective& o = get(L, get_game(L));
 	lua_pushboolean(L, o.done());
 	return 1;
 }
@@ -1452,7 +1405,7 @@ int LuaInboxMessage::__eq(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, const Widelands::Game& game) {
+Widelands::Player& LuaInboxMessage::get_plr(lua_State* L, Widelands::Game& game) {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}

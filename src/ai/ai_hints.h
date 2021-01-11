@@ -38,11 +38,15 @@ struct BuildingHints {
 	~BuildingHints() {
 	}
 
-	std::set<std::string> supported_production() const {
-		return supported_production_;
+	bool has_mines() const {
+		return !mines_.empty();
 	}
 
-	bool get_needs_water() const {
+	char const* get_mines() const {
+		return mines_.c_str();
+	}
+
+	bool needs_water() const {
 		return needs_water_;
 	}
 
@@ -71,10 +75,6 @@ struct BuildingHints {
 		return supports_seafaring_;
 	}
 
-	const std::string& collects_ware_from_map() const {
-		return collects_ware_from_map_;
-	}
-
 	uint32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
@@ -87,6 +87,10 @@ struct BuildingHints {
 		return forced_after_;
 	}
 
+	uint8_t get_mines_percent() const {
+		return mines_percent_;
+	}
+
 	int16_t get_ai_limit(AiType) const;
 
 	void set_trainingsites_max_percent(int percent);
@@ -94,6 +98,7 @@ struct BuildingHints {
 	uint8_t trainingsites_max_percent() const;
 
 private:
+	const std::string mines_;
 	const bool needs_water_;
 	const bool space_consumer_;
 	const bool expansion_;
@@ -101,16 +106,15 @@ private:
 	const bool mountain_conqueror_;
 	const bool shipyard_;
 	const bool supports_seafaring_;
-	const std::string collects_ware_from_map_;
 	const int32_t prohibited_till_;
 	const uint32_t basic_amount_;
 	const int32_t forced_after_;
+	const int8_t mines_percent_;
 	const int16_t very_weak_ai_limit_;
 	const int16_t weak_ai_limit_;
 	const int16_t normal_ai_limit_;
 	const bool requires_supporters_;
 	int trainingsites_max_percent_;
-	std::set<std::string> supported_production_;
 
 	DISALLOW_COPY_AND_ASSIGN(BuildingHints);
 };

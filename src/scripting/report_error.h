@@ -26,7 +26,7 @@
 void report_error(lua_State*, const char*, ...)
    __attribute__((__format__(__printf__, 2, 3), noreturn));
 #else
-[[noreturn]] void report_error(lua_State*, const char*, ...);
+[[noreturn]] void report_error(lua_State*, const char*, ...)
 #endif
 
 #endif  // end of include guard: WL_SCRIPTING_REPORT_ERROR_H

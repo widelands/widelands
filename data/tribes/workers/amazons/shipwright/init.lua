@@ -30,7 +30,7 @@ descriptions:new_worker_type {
          "findspace=size:swim radius:4",
          "walk=coords",
          "animate=work duration:10s",
-         "createbob=amazons_ferry",
+         "buildferry",
          "return"
       },
    },
@@ -69,7 +69,7 @@ descriptions:new_worker_type {
          rows = 8,
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 64
+            priority = "50%"
          }
       },
    },

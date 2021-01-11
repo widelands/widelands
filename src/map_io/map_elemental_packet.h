@@ -21,7 +21,6 @@
 #define WL_MAP_IO_MAP_ELEMENTAL_PACKET_H
 
 #include <string>
-#include <vector>
 
 #include "map_io/map_data_packet.h"
 

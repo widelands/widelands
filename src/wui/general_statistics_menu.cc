@@ -26,6 +26,7 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/warelist.h"
+#include "logic/player.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/button.h"
@@ -47,7 +48,6 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
                       _("General Statistics")),
      my_registry_(&registry),
      box_(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical, 0, 0, 5),
-     player_buttons_box_(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1),
      plot_(&box_,
            0,
            0,
@@ -55,16 +55,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
            PLOT_HEIGHT,
            Widelands::kStatisticsSampleTime.get(),
            WuiPlotArea::Plotmode::kAbsolute),
-     selected_information_(0),
-     game_(*parent.get_game()),
-     subscriber_(Notifications::subscribe<Widelands::NotePlayerDetailsEvent>(
-        [this](const Widelands::NotePlayerDetailsEvent& note) {
-	        if (note.event ==
-	            Widelands::NotePlayerDetailsEvent::Event::kGeneralStatisticsVisibilityChanged) {
-		        save_state_to_registry();
-		        create_player_buttons();
-	        }
-        })) {
+     selected_information_(0) {
 	assert(my_registry_);
 
 	selected_information_ = my_registry_->selected_information;
@@ -73,17 +64,13 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	box_.set_border(5, 5, 5, 5);
 
 	// Setup plot data
-	const Widelands::Game::GeneralStatsVector& genstats = game_.get_general_statistics();
-	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size =
-	   game_.map().get_nrplayers();
-	if (genstats.size() != general_statistics_size) {
-		// Create first data point
-		game_.sample_statistics();
-	}
+	Widelands::Game& game = *parent.get_game();
+	const Widelands::Game::GeneralStatsVector& genstats = game.get_general_statistics();
+	const Widelands::Game::GeneralStatsVector::size_type general_statistics_size = genstats.size();
 
 	// Is there a hook dataset?
 	ndatasets_ = NR_BASE_DATASETS;
-	std::unique_ptr<LuaTable> hook = game_.lua().get_hook("custom_statistic");
+	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
 		i18n::Textdomain td("win_conditions");
@@ -94,11 +81,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	}
 
 	for (Widelands::Game::GeneralStatsVector::size_type i = 0; i < general_statistics_size; ++i) {
-		const Widelands::Player* p = parent.game().get_player(i + 1);
-		const RGBColor& color = p ? p->get_playercolor() :
-		                            // The plot is always invisible if this player doesn't
-		                            // exist, but we need to assign a color anyway
-		                           kPlayerColors[i];
+		const RGBColor& color = kPlayerColors[i];
 		plot_.register_plot_data(i * ndatasets_ + 0, &genstats[i].land_size, color);
 		plot_.register_plot_data(i * ndatasets_ + 1, &genstats[i].nr_workers, color);
 		plot_.register_plot_data(i * ndatasets_ + 2, &genstats[i].nr_buildings, color);
@@ -113,7 +96,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		if (hook) {
 			plot_.register_plot_data(i * ndatasets_ + 11, &genstats[i].custom_statistic, color);
 		}
-		if (game_.get_player(i + 1)) {  // Show area plot
+		if (game.get_player(i + 1)) {  // Show area plot
 			plot_.show_plot(i * ndatasets_ + selected_information_, my_registry_->selected_players[i]);
 		}
 	}
@@ -123,8 +106,28 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	// Setup Widgets
 	box_.add(&plot_);
 
-	create_player_buttons();
-	box_.add(&player_buttons_box_, UI::Box::Resizing::kFullSize);
+	UI::Box* hbox1 = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1);
+
+	uint32_t plr_in_game = 0;
+	Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
+	iterate_players_existing_novar(p, nr_players, game)++ plr_in_game;
+
+	iterate_players_existing_const(p, nr_players, game, player) {
+		const Image* player_image = playercolor_image(p - 1, "images/players/genstats_player.png");
+		assert(player_image);
+		UI::Button& cb = *new UI::Button(hbox1, "playerbutton", 0, 0, 25, 25,
+		                                 UI::ButtonStyle::kWuiMenu, player_image, player->get_name());
+		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
+		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
+
+		cbs_[p - 1] = &cb;
+
+		hbox1->add(&cb, UI::Box::Resizing::kFillSpace);
+	}
+	else  //  player nr p does not exist
+	   cbs_[p - 1] = nullptr;
+
+	box_.add(hbox1, UI::Box::Resizing::kFullSize);
 
 	UI::Box* hbox2 = new UI::Box(&box_, UI::PanelStyle::kWui, 0, 0, UI::Box::Horizontal, 0, 0, 1);
 
@@ -203,61 +206,16 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 	box_.add(slider, UI::Box::Resizing::kFullSize);
 }
 
-void GeneralStatisticsMenu::create_player_buttons() {
-	// Delete existing buttons, if any
-	player_buttons_box_.clear();
-	player_buttons_box_.free_children();
-
-	Widelands::PlayerNumber const nr_players = game_.map().get_nrplayers();
-
-	bool show_all_players = true;
-	const Widelands::Player* self = nullptr;
-	if (upcast(InteractivePlayer, ipl, get_parent())) {
-		show_all_players = ipl->player().see_all() || ipl->omnipotent();
-		self = &ipl->player();
-	}
-
-	iterate_players_existing_const(p, nr_players, game_, player) {
-		if (player != self && !show_all_players && player->is_hidden_from_general_statistics()) {
-			// Hide player from stats
-			cbs_[p - 1] = nullptr;
-			// Also hide the plot for this player if it was previously visible
-			show_or_hide_plot(p, false);
-			continue;
-		}
-
-		const Image* player_image =
-		   playercolor_image(player->get_playercolor(), "images/players/genstats_player.png");
-		assert(player_image);
-		UI::Button& cb = *new UI::Button(&player_buttons_box_, "playerbutton", 0, 0, 25, 25,
-		                                 UI::ButtonStyle::kWuiMenu, player_image, player->get_name());
-		cb.sigclicked.connect([this, p]() { cb_changed_to(p); });
-		cb.set_perm_pressed(my_registry_->selected_players[p - 1]);
-
-		cbs_[p - 1] = &cb;
-		show_or_hide_plot(p, my_registry_->selected_players[p - 1]);
-
-		player_buttons_box_.add(&cb, UI::Box::Resizing::kFillSpace);
-	}
-	else {  //  player nr p does not exist
-		cbs_[p - 1] = nullptr;
-		show_or_hide_plot(p, false);
-	}
-}
-
 GeneralStatisticsMenu::~GeneralStatisticsMenu() {
-	save_state_to_registry();
-}
-
-void GeneralStatisticsMenu::save_state_to_registry() {
-	if (game_.is_loaded()) {
+	Widelands::Game& game = dynamic_cast<InteractiveGameBase&>(*get_parent()).game();
+	if (game.is_loaded()) {
 		// Save information for recreation, if window is reopened
 		my_registry_->selected_information = selected_information_;
 		my_registry_->time = plot_.get_time();
-		Widelands::PlayerNumber const nr_players = game_.map().get_nrplayers();
-		iterate_players_existing_novar(p, nr_players, game_) {
+		Widelands::PlayerNumber const nr_players = game.map().get_nrplayers();
+		iterate_players_existing_novar(p, nr_players, game) {
 			my_registry_->selected_players[p - 1] =
-			   !cbs_[p - 1] || cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
+			   cbs_[p - 1]->style() == UI::Button::VisualState::kPermpressed;
 		}
 	}
 }
@@ -268,18 +226,16 @@ void GeneralStatisticsMenu::save_state_to_registry() {
 void GeneralStatisticsMenu::cb_changed_to(int32_t const id) {
 	// This represents our player number
 	cbs_[id - 1]->toggle();
-	show_or_hide_plot(id, cbs_[id - 1]->style() == UI::Button::VisualState::kPermpressed);
-}
-
-void GeneralStatisticsMenu::show_or_hide_plot(const int32_t id, const bool show) {
-	plot_.show_plot((id - 1) * ndatasets_ + selected_information_, show);
+	plot_.show_plot((id - 1) * ndatasets_ + selected_information_,
+	                cbs_[id - 1]->style() == UI::Button::VisualState::kPermpressed);
 }
 
 /*
  * The radiogroup has changed
  */
 void GeneralStatisticsMenu::radiogroup_changed(int32_t const id) {
-	size_t const statistics_size = game_.get_general_statistics().size();
+	size_t const statistics_size =
+	   dynamic_cast<InteractiveGameBase&>(*get_parent()).game().get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i) {
 		if (cbs_[i]) {
 			plot_.show_plot(

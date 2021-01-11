@@ -27,7 +27,6 @@ wl_library(sound
   DEPENDS
     base_i18n
     base_log
-    base_macros
     base_random
     io_fileread
     io_filesystem

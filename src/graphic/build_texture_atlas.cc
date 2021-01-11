@@ -119,10 +119,6 @@ build_texture_atlas(const int max_size,
 	// For UI elements mostly, but we get more than we need really.
 	find_images("images", &all_images, &first_atlas_images);
 
-	// New terrains defined by world add-ons need to be in the same texture atlas
-	// as all other terrains. So we just put all add-on images into this atlas…
-	find_images("addons", &all_images, &first_atlas_images);
-
 	auto first_texture_atlas = pack_images(first_atlas_images, max_size, textures_in_atlas);
 	if (first_texture_atlas.size() != 1) {
 		throw wexception("Not all images that should fit in the first texture atlas did actually "

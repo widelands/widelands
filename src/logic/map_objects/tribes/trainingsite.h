@@ -86,14 +86,6 @@ public:
 		return weapons_evade_;
 	}
 
-	const std::string& no_soldier_to_train_message() const {
-		return no_soldier_to_train_message_;
-	}
-
-	const std::string& no_soldier_for_training_level_message() const {
-		return no_soldier_for_training_level_message_;
-	}
-
 private:
 	// Read the table to add needed food and weapons for training a property.
 	// Properties are health, attack, defense, and evade.
@@ -146,9 +138,6 @@ private:
 	std::vector<std::string> weapons_attack_;
 	std::vector<std::string> weapons_defense_;
 	std::vector<std::string> weapons_evade_;
-
-	std::string no_soldier_to_train_message_;
-	std::string no_soldier_for_training_level_message_;
 
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteDescr);
 };

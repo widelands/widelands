@@ -104,7 +104,6 @@ wl_library(editor
     graphic_text_layout
     io_filesystem
     logic
-    logic_addons
     logic_constants
     logic_exceptions
     logic_filesystem_constants

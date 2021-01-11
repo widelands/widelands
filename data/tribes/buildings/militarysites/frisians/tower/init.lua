@@ -55,16 +55,11 @@ descriptions:new_militarysite_type {
    prefer_heroes = true,
 
    messages = {
-      -- TRANSLATORS: Message sent by a Frisian military site
-      occupied = pgettext("frisians_building", "Your soldiers have occupied your tower."),
-      -- TRANSLATORS: Message sent by a Frisian military site
-      aggressor = pgettext("frisians_building", "Your tower discovered an aggressor."),
-      -- TRANSLATORS: Message sent by a Frisian military site
-      attack = pgettext("frisians_building", "Your tower is under attack."),
-      -- TRANSLATORS: Message sent by a Frisian military site
-      defeated_enemy = pgettext("frisians_building", "The enemy defeated your soldiers at the tower."),
-      -- TRANSLATORS: Message sent by a Frisian military site
-      defeated_you = pgettext("frisians_building", "Your soldiers defeated the enemy at the tower.")
+      occupied = _"Your soldiers have occupied your tower.",
+      aggressor = _"Your tower discovered an aggressor.",
+      attack = _"Your tower is under attack.",
+      defeated_enemy = _"The enemy defeated your soldiers at the tower.",
+      defeated_you = _"Your soldiers defeated the enemy at the tower."
    },
 }
 

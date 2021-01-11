@@ -28,7 +28,9 @@ descriptions:new_productionsite_type {
       },
    },
 
-   aihints = {},
+   aihints = {
+      mines = "resource_gold",
+   },
 
    working_positions = {
       barbarians_miner = 1,

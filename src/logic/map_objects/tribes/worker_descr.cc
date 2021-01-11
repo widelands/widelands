@@ -70,8 +70,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					                    "\"%s=%d\".\nEmpty buildcost tables are allowed if you wish to "
 					                    "have an amount of 0.",
 					                    key.c_str(), value);
-				}
-				if (value > 255) {
+				} else if (value > 255) {
 					throw GameDataError("Buildcost: Ware/Worker count needs to be <= 255 in \"%s=%d\".",
 					                    key.c_str(), value);
 				}
@@ -122,10 +121,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 WorkerDescr::~WorkerDescr() {  // NOLINT
 	                            // WorkerProgram needs this
-}
-
-void WorkerDescr::set_becomes(Descriptions& d, const std::string& become) {
-	becomes_ = d.load_worker(become);
 }
 
 void WorkerDescr::set_default_target_quantity(int quantity) {

@@ -41,7 +41,7 @@ struct GameChatPanel : public UI::Panel {
 	              ChatProvider&,
 	              UI::PanelStyle style);
 
-	~GameChatPanel() override;
+	virtual ~GameChatPanel();
 
 	// Signal is called when a message has been sent by the user.
 	boost::signals2::signal<void()> sent;

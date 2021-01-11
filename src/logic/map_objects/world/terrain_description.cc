@@ -148,8 +148,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, Descriptions& desc
 	frame_length_ = kFrameLength;
 	if (texture_paths_.empty()) {
 		throw GameDataError("Terrain %s has no images.", name_.c_str());
-	}
-	if (texture_paths_.size() == 1) {
+	} else if (texture_paths_.size() == 1) {
 		if (table.has_key("fps")) {
 			throw GameDataError("Terrain %s with one images must not have fps.", name_.c_str());
 		}

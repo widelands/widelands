@@ -109,7 +109,6 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	capscache_ = 0;
 	caps_setup_ = false;
 	toggle_workarea_ = nullptr;
-	watch_button_ = nullptr;
 	avoid_fastclick_ = avoid_fastclick;
 
 	vbox_.reset(new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical));
@@ -213,8 +212,7 @@ static bool allow_muting(const Widelands::BuildingDescr& d) {
 	if (d.type() == Widelands::MapObjectType::MILITARYSITE ||
 	    d.type() == Widelands::MapObjectType::WAREHOUSE) {
 		return true;
-	}
-	if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
+	} else if (upcast(const Widelands::ProductionSiteDescr, p, &d)) {
 		return !p->out_of_resource_message().empty() || !p->resource_not_needed_message().empty();
 	}
 	return false;
@@ -385,15 +383,6 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			                  g_image_cache->get(kImgDebug), _("Show Debug Window"));
 			debugbtn->sigclicked.connect([this]() { act_debug(); });
 			capsbuttons->add(debugbtn);
-		}
-
-		if (building->owner().tribe().safe_building_index(building->descr().name()) ==
-		    building->owner().tribe().scouts_house()) {
-			watch_button_ = new UI::Button(
-			   capsbuttons, "goto", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			   g_image_cache->get("images/wui/menus/watch_follow.png"), _("Watch the scout"));
-			watch_button_->sigclicked.connect([this]() { clicked_watch(); });
-			capsbuttons->add(watch_button_);
 		}
 
 		UI::Button* gotobtn =

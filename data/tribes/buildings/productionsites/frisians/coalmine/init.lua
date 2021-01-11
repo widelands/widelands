@@ -73,7 +73,10 @@ descriptions:new_productionsite_type {
       }
    },
 
-   aihints = {},
+   aihints = {
+      mines = "resource_coal",
+      mines_percent = 50,
+   },
 
    working_positions = {
       frisians_miner = 1

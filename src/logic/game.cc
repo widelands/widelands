@@ -44,7 +44,6 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
-#include "logic/addons.h"
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
@@ -224,7 +223,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	}
 
 	// Need to do this first so we can set the theme and background.
-	maploader->preload_map(true, &enabled_addons());
+	maploader->preload_map(true);
 
 	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
 
@@ -244,7 +243,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 			const DescriptionIndex random = std::rand() % descriptions().nr_tribes();  // NOLINT
 			tribe = descriptions().get_tribe_descr(random)->name();
 		}
-		add_player(p, 0, kPlayerColors[p - 1], tribe, map().get_scenario_player_name(p));
+		add_player(p, 0, tribe, map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
 	win_condition_displayname_ = "Scenario";
@@ -270,6 +269,7 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 
 /**
  * Initialize the game based on the given settings.
+ *
  */
 void Game::init_newgame(const GameSettings& settings) {
 	assert(has_loader_ui());
@@ -280,7 +280,7 @@ void Game::init_newgame(const GameSettings& settings) {
 	if (!settings.mapfilename.empty()) {
 		maploader = mutable_map()->get_correct_loader(settings.mapfilename);
 		assert(maploader);
-		maploader->preload_map(settings.scenario, &enabled_addons());
+		maploader->preload_map(settings.scenario);
 	}
 
 	std::vector<PlayerSettings> shared;
@@ -291,15 +291,14 @@ void Game::init_newgame(const GameSettings& settings) {
 		if (playersettings.state == PlayerSettings::State::kClosed ||
 		    playersettings.state == PlayerSettings::State::kOpen) {
 			continue;
-		}
-		if (playersettings.state == PlayerSettings::State::kShared) {
+		} else if (playersettings.state == PlayerSettings::State::kShared) {
 			shared.push_back(playersettings);
 			shared_num.push_back(i + 1);
 			continue;
 		}
 
-		add_player(i + 1, playersettings.initialization_index, playersettings.color,
-		           playersettings.tribe, playersettings.name, playersettings.team);
+		add_player(i + 1, playersettings.initialization_index, playersettings.tribe,
+		           playersettings.name, playersettings.team);
 		get_player(i + 1)->set_ai(playersettings.ai);
 	}
 
@@ -386,13 +385,6 @@ void Game::init_savegame(const GameSettings& settings) {
 		}
 
 		gl.load_game(settings.multiplayer);
-
-		if (!gl.did_postload_addons()) {
-			// Discover the links between resources and geologist flags,
-			// dependencies of productionsites etc.
-			postload_addons();
-		}
-
 		// Players might have selected a different AI type
 		for (uint8_t i = 0; i < settings.players.size(); ++i) {
 			const PlayerSettings& playersettings = settings.players[i];
@@ -406,8 +398,6 @@ void Game::init_savegame(const GameSettings& settings) {
 }
 
 bool Game::run_load_game(const std::string& filename, const std::string& script_to_run) {
-	enabled_addons().clear();  // will be loaded later
-
 	int8_t player_nr;
 
 	{
@@ -435,15 +425,9 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		}
 
 		player_nr = gpdp.get_player_nr();
-		InteractivePlayer* ipl = new InteractivePlayer(*this, get_config_section(), player_nr, false);
-		set_ibase(ipl);
+		set_ibase(new InteractivePlayer(*this, get_config_section(), player_nr, false));
 
 		gl.load_game();
-
-		if (!gl.did_postload_addons()) {
-			postload_addons();
-		}
-		ipl->info_panel_fast_forward_message_queue();
 	}
 
 	// Store the filename for further saves
@@ -478,12 +462,6 @@ void Game::mark_training_wheel_as_solved(const std::string& objective) {
 		training_wheels_.reset(new TrainingWheels(lua()));
 	}
 	training_wheels_->mark_as_solved(objective, training_wheels_wanted_);
-}
-void Game::run_training_wheel(const std::string& objective, bool force) {
-	if (training_wheels_ == nullptr) {
-		training_wheels_.reset(new TrainingWheels(lua()));
-	}
-	training_wheels_->run(objective, force);
 }
 void Game::skip_training_wheel(const std::string& objective) {
 	if (training_wheels_ != nullptr) {
@@ -538,7 +516,6 @@ bool Game::run(StartGameType const start_game_type,
 	InteractivePlayer* ipl = get_ipl();
 
 	if (start_game_type != StartGameType::kSaveGame) {
-		postload_addons();
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */
@@ -595,16 +572,6 @@ bool Game::run(StartGameType const start_game_type,
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/init.lua"));
 		} else if (start_game_type == StartGameType::kMultiPlayerScenario) {
 			enqueue_command(new CmdLuaScript(get_gametime(), "map:scripting/multiplayer_init.lua"));
-		} else {
-			// Run all selected add-on scripts (not in scenarios)
-			for (const AddOns::AddOnInfo& addon : enabled_addons()) {
-				if (addon.category == AddOns::AddOnCategory::kScript) {
-					enqueue_command(new CmdLuaScript(
-					   get_gametime() + Duration(1), kAddOnDir + FileSystem::file_separator() +
-					                                    addon.internal_name +
-					                                    FileSystem::file_separator() + "init.lua"));
-				}
-			}
 		}
 
 		// Queue first statistics calculation
@@ -868,8 +835,8 @@ void Game::send_player_build_waterway(int32_t pid, Path& path) {
 	send_player_command(new CmdBuildWaterway(get_gametime(), pid, path));
 }
 
-void Game::send_player_flagaction(Flag& flag, FlagJob::Type t) {
-	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag, t));
+void Game::send_player_flagaction(Flag& flag) {
+	send_player_command(new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
 }
 
 void Game::send_player_start_stop_building(Building& building) {
@@ -936,12 +903,10 @@ void Game::send_player_change_soldier_capacity(Building& b, int32_t const val) {
 
 void Game::send_player_enemyflagaction(const Flag& flag,
                                        PlayerNumber const who_attacks,
-                                       const std::vector<Serial>& soldiers,
-                                       const bool allow_conquer) {
+                                       const std::vector<Serial>& soldiers) {
 	for (Widelands::Coords& coords : flag.get_building()->get_positions(*this)) {
 		if (player(who_attacks).is_seeing(Map::get_index(coords, map().get_width()))) {
-			send_player_command(
-			   new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers, allow_conquer));
+			send_player_command(new CmdEnemyFlagAction(get_gametime(), who_attacks, flag, soldiers));
 			break;
 		}
 	}

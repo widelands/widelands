@@ -31,7 +31,7 @@ struct NoteLoadingMessage {
 
 	const std::string message;
 
-	explicit NoteLoadingMessage(const std::string& init_message) : message(init_message) {
+	NoteLoadingMessage(const std::string& init_message) : message(init_message) {
 	}
 };
 }  // namespace UI

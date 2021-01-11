@@ -9,7 +9,6 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "empire",
-   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {1, 19} },
@@ -1129,7 +1128,7 @@ descriptions:new_tribe {
          name = "empire_warehouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire warehouse: Warehouse
-            purpose = pgettext("empire_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            purpose = pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
       {
@@ -1465,63 +1464,63 @@ descriptions:new_tribe {
          name = "empire_blockhouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Blockhouse
-            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Blockhouse
-            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_sentry",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Sentry
-            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Sentry
-            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_outpost",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Outpost
-            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Outpost
-            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_barrier",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Barrier
-            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Barrier
-            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_tower",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Tower
-            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Tower
-            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_fortress",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Fortress
-            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Fortress
-            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "empire_castle",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an empire military site: Castle
-            purpose = pgettext("empire_building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an empire military site: Castle
-            note = pgettext("empire_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 
@@ -1573,7 +1572,6 @@ descriptions:new_tribe {
    carrier = "empire_carrier",
    carrier2 = "empire_donkey",
    geologist = "empire_geologist",
-   scouts_house = "empire_scouts_house",
    soldier = "empire_soldier",
    ship = "empire_ship",
    ferry = "empire_ferry",

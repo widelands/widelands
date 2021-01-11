@@ -672,8 +672,9 @@ ImmovableActionData*
 ImmovableActionData::load(FileRead& fr, const Immovable& imm, const std::string& name) {
 	if (name == "construct") {
 		return ActConstructData::load(fr, imm);
+	} else {
+		log_err("ImmovableActionData::load: type %s not known", name.c_str());
+		return nullptr;
 	}
-	log_err("ImmovableActionData::load: type %s not known", name.c_str());
-	return nullptr;
 }
 }  // namespace Widelands

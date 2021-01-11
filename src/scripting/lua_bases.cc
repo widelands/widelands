@@ -1039,7 +1039,7 @@ int LuaPlayerBase::get_wares(lua_State* L) {
  C METHODS
  ==========================================================
  */
-Widelands::Player& LuaPlayerBase::get(lua_State* L, const Widelands::EditorGameBase& egbase) {
+Widelands::Player& LuaPlayerBase::get(lua_State* L, Widelands::EditorGameBase& egbase) {
 	if (player_number_ > kMaxPlayers) {
 		report_error(L, "Illegal player number %i", player_number_);
 	}
