@@ -87,10 +87,11 @@ void walk_immovables(Widelands::DescriptionIndex index,
 	}
 }
 
-// Read helptext from Lua table
-void load_helptexts(Widelands::MapObjectDescr* descr,
-                    const LuaTable& table,
-                    const std::string& tribe_name) {
+}  // namespace
+
+namespace Widelands {
+
+void TribeDescr::load_helptexts(Widelands::MapObjectDescr* descr, const LuaTable& table) {
 	std::map<std::string, std::string> helptexts;
 	if (table.has_key("helptexts")) {
 		std::unique_ptr<LuaTable> helptext_table = table.get_table("helptexts");
@@ -128,11 +129,8 @@ void load_helptexts(Widelands::MapObjectDescr* descr,
 	} else {
 		log_warn("No helptext defined for '%s'", descr->name().c_str());
 	}
-	descr->set_helptexts(tribe_name, helptexts);
+	descr->set_helptexts(name(), helptexts);
 }
-}  // namespace
-
-namespace Widelands {
 
 /**
  * The contents of 'table' are documented in
@@ -144,6 +142,9 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
                        const LuaTable* scenario_table)
    : name_(table.get_string("name")),
      descname_(info.descname),
+     military_capacity_script_(table.has_key<std::string>("military_capacity_script") ?
+                                  table.get_string("military_capacity_script") :
+                                  ""),
      descriptions_(descriptions),
      bridge_height_(table.get_int("bridge_height")),
      builder_(Widelands::INVALID_INDEX),
@@ -154,9 +155,16 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
      ship_(Widelands::INVALID_INDEX),
      ferry_(Widelands::INVALID_INDEX),
      port_(Widelands::INVALID_INDEX),
+     scouts_house_(Widelands::INVALID_INDEX),
      initializations_(info.initializations) {
 	log_info("┏━ Loading %s", name_.c_str());
 	ScopedTimer timer("┗━ took %ums");
+
+	if (military_capacity_script_.empty() || !g_fs->file_exists(military_capacity_script_)) {
+		// TODO(GunChleoc): API compatibility - require after v 1.0
+		log_warn("File '%s' for military_capacity_script for tribe '%s' does not exist",
+		         military_capacity_script_.c_str(), name().c_str());
+	}
 
 	auto set_progress_message = [this](const std::string& str, int i) {
 		Notifications::publish(UI::NoteLoadingMessage(
@@ -203,7 +211,6 @@ TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
 		if (table.has_key<std::string>("toolbar")) {
 			toolbar_image_set_.reset(new ToolbarImageset(*table.get_table("toolbar")));
 		}
-		finalize_loading(descriptions);
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
@@ -336,7 +343,7 @@ void TribeDescr::load_wares(const LuaTable& table, Descriptions& descriptions) {
 				ware_descr->set_preciousness(name(), ware_table->get_int("preciousness"));
 
 				// Add helptexts
-				load_helptexts(ware_descr, *ware_table, name());
+				load_helptexts(ware_descr, *ware_table);
 
 				// Add to tribe
 				wares_.insert(wareindex);
@@ -362,7 +369,7 @@ void TribeDescr::load_immovables(const LuaTable& table, Descriptions& descriptio
 			}
 			immovables_.insert(index);
 			// Add helptext
-			load_helptexts(descriptions.get_mutable_immovable_descr(index), *immovable_table, name());
+			load_helptexts(descriptions.get_mutable_immovable_descr(index), *immovable_table);
 
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
@@ -415,7 +422,7 @@ void TribeDescr::load_workers(const LuaTable& table, Descriptions& descriptions)
 				}
 
 				// Add helptexts
-				load_helptexts(worker_descr, *worker_table, name());
+				load_helptexts(worker_descr, *worker_table);
 
 				// Add to tribe
 				workers_.insert(workerindex);
@@ -467,7 +474,7 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 			BuildingDescr* building_descr = descriptions.get_mutable_building_descr(index);
 
 			// Add helptexts
-			load_helptexts(building_descr, *building_table, name());
+			load_helptexts(building_descr, *building_table);
 
 			// Register at enhanced building
 			const DescriptionIndex& enhancement = building_descr->enhancement();
@@ -499,6 +506,9 @@ void TribeDescr::load_buildings(const LuaTable& table, Descriptions& description
 	if (table.has_key("port")) {
 		port_ = add_special_building(table.get_string("port"), descriptions);
 	}
+	if (table.has_key("scouts_house")) {
+		scouts_house_ = add_special_building(table.get_string("scouts_house"), descriptions);
+	}
 }
 
 /**
@@ -510,6 +520,9 @@ const std::string& TribeDescr::name() const {
 }
 const std::string& TribeDescr::descname() const {
 	return descname_;
+}
+const std::string& TribeDescr::military_capacity_script() const {
+	return military_capacity_script_;
 }
 
 size_t TribeDescr::get_nrwares() const {
@@ -525,10 +538,22 @@ const std::set<DescriptionIndex>& TribeDescr::buildings() const {
 const std::set<DescriptionIndex>& TribeDescr::wares() const {
 	return wares_;
 }
+std::set<DescriptionIndex>& TribeDescr::mutable_wares() {
+	return wares_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_workers() {
+	return workers_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_buildings() {
+	return buildings_;
+}
 const std::set<DescriptionIndex>& TribeDescr::workers() const {
 	return workers_;
 }
 const std::set<DescriptionIndex>& TribeDescr::immovables() const {
+	return immovables_;
+}
+std::set<DescriptionIndex>& TribeDescr::mutable_immovables() {
 	return immovables_;
 }
 const ResourceIndicatorSet& TribeDescr::resource_indicators() const {
@@ -618,6 +643,10 @@ DescriptionIndex TribeDescr::port() const {
 	assert(descriptions_.building_exists(port_));
 	return port_;
 }
+DescriptionIndex TribeDescr::scouts_house() const {
+	assert(descriptions_.building_exists(scouts_house_));
+	return scouts_house_;
+}
 DescriptionIndex TribeDescr::ferry() const {
 	assert(descriptions_.worker_exists(ferry_));
 	return ferry_;
@@ -684,7 +713,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	for (const auto& resi : list->second) {
 		if (resi.first < amount) {
 			continue;
-		} else if (lowest < amount || resi.first < lowest) {
+		}
+		if (lowest < amount || resi.first < lowest) {
 			lowest = resi.first;
 		}
 	}
@@ -756,6 +786,9 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 	if (port_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special building 'port' not defined");
 	}
+	if (scouts_house_ == Widelands::INVALID_INDEX) {
+		throw GameDataError("special building 'scouts_house' not defined");
+	}
 	if (ship_ == Widelands::INVALID_INDEX) {
 		throw GameDataError("special unit 'ship' not defined");
 	}
@@ -765,7 +798,7 @@ void TribeDescr::finalize_loading(Descriptions& descriptions) {
 }
 
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-void TribeDescr::calculate_trainingsites_proportions(Descriptions& descriptions) {
+void TribeDescr::calculate_trainingsites_proportions(const Descriptions& descriptions) {
 	unsigned int trainingsites_without_percent = 0;
 	int used_percent = 0;
 	std::vector<BuildingDescr*> traingsites_with_percent;
@@ -830,6 +863,11 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		BuildingDescr* building = descriptions_.get_mutable_building_descr(index);
 		assert(building != nullptr);
 
+		if (building->type() != MapObjectType::CONSTRUCTIONSITE &&
+		    building->type() != MapObjectType::DISMANTLESITE) {
+			building->set_owning_tribe(name());
+		}
+
 		// Calculate largest possible workarea radius
 		for (const auto& pair : building->workarea_info()) {
 			descriptions.increase_largest_workarea(pair.first);
@@ -858,8 +896,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				descriptions.get_mutable_worker_descr(job.first)->add_employer(index);
 			}
 			// Resource info
-			for (const std::string& r : productionsite->collected_resources()) {
-				used_resources_.insert(r);
+			for (const auto& r : productionsite->collected_resources()) {
+				used_resources_.insert(r.first);
 			}
 			for (const std::string& r : productionsite->created_resources()) {
 				used_resources_.insert(r);
@@ -997,8 +1035,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 		for (const std::string& resource : prod->created_resources()) {
 			add_creator(resource, prod);
 		}
-		for (const std::string& resource : prod->collected_resources()) {
-			add_collector(resource, prod);
+		for (const auto& resource : prod->collected_resources()) {
+			add_collector(resource.first, prod);
 		}
 		for (const std::string& bob : prod->collected_bobs()) {
 			add_collector(bob, prod);
@@ -1073,11 +1111,11 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 		}
-		for (const std::string& item : prod->collected_resources()) {
+		for (const auto& item : prod->collected_resources()) {
 			// Sites that collect resources and sites of other types that create resources for them
 			// should overlap each other
-			if (creators.count(item)) {
-				for (ProductionSiteDescr* creator : creators.at(item)) {
+			if (creators.count(item.first)) {
+				for (ProductionSiteDescr* creator : creators.at(item.first)) {
 					if (creator != prod) {
 						prod->add_supported_by_productionsite(creator->name());
 						creator->add_supports_productionsite(prod->name());
@@ -1085,8 +1123,8 @@ void TribeDescr::process_productionsites(Descriptions& descriptions) {
 				}
 			}
 			// Sites that collect resources should not overlap sites that collect the same resource
-			if (collectors.count(item)) {
-				for (const ProductionSiteDescr* collector : collectors.at(item)) {
+			if (collectors.count(item.first)) {
+				for (const ProductionSiteDescr* collector : collectors.at(item.first)) {
 					prod->add_competing_productionsite(collector->name());
 				}
 			}

@@ -39,7 +39,10 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/game_summary.h"
+#include "wui/info_panel.h"
 #include "wui/interactive_player.h"
+#include "wui/toolbar.h"
+#include "wui/watchwindow.h"
 
 namespace {
 
@@ -65,9 +68,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                    "dropdown_menu_showhide",
                    0,
                    0,
-                   34U,
+                   MainToolbar::kButtonSize,
                    10,
-                   34U,
+                   MainToolbar::kButtonSize,
                    /** TRANSLATORS: Title for a menu button in the game. This menu will show/hide
                       building spaces, census, statistics */
                    _("Show / Hide"),
@@ -78,9 +81,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                "dropdown_menu_main",
                0,
                0,
-               34U,
+               MainToolbar::kButtonSize,
                10,
-               34U,
+               MainToolbar::kButtonSize,
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the game */
                   _("Main Menu"),
@@ -93,9 +96,9 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
                     "dropdown_menu_gamespeed",
                     0,
                     0,
-                    34U,
+                    MainToolbar::kButtonSize,
                     10,
-                    34U,
+                    MainToolbar::kButtonSize,
                     /** TRANSLATORS: Title for a menu button in the game. This menu will show
                        options o increase/decrease the gamespeed, and to pause the game */
                     _("Game Speed"),
@@ -360,8 +363,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			if (code.sym == SDLK_KP_9 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
 				break;
 			}
-			increase_gamespeed(
-			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
+			increase_gamespeed((code.mod & KMOD_SHIFT) ?
+			                      kSpeedSlow :
+			                      (code.mod & KMOD_CTRL) ? kSpeedFast : kSpeedDefault);
 			return true;
 		case SDLK_PAUSE:
 			if (code.mod & KMOD_SHIFT) {
@@ -375,8 +379,9 @@ bool InteractiveGameBase::handle_key(bool down, SDL_Keysym code) {
 			if (code.sym == SDLK_KP_3 && ((code.mod & KMOD_NUM) || numpad_diagonalscrolling)) {
 				break;
 			}
-			decrease_gamespeed(
-			   code.mod & KMOD_SHIFT ? kSpeedSlow : code.mod & KMOD_CTRL ? kSpeedFast : kSpeedDefault);
+			decrease_gamespeed((code.mod & KMOD_SHIFT) ?
+			                      kSpeedSlow :
+			                      (code.mod & KMOD_CTRL) ? kSpeedFast : kSpeedDefault);
 			return true;
 
 		case SDLK_c:
@@ -434,6 +439,11 @@ Widelands::Game& InteractiveGameBase::game() const {
 	return dynamic_cast<Widelands::Game&>(egbase());
 }
 
+void InteractiveGameBase::show_watch_window(Widelands::Bob& b) {
+	WatchWindow* window = ::show_watch_window(*this, b.get_position());
+	window->follow(&b);
+}
+
 void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 	InteractiveBase::draw_overlay(dst);
 
@@ -455,11 +465,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 			                .str();
 		}
 
-		if (!game_speed.empty()) {
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
-			   as_richtext_paragraph(game_speed, UI::FontStyle::kWuiGameSpeedAndCoordinates));
-			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
-		}
+		info_panel_.set_speed_string(game_speed);
 	}
 }
 
@@ -487,7 +493,8 @@ void InteractiveGameBase::set_sel_pos(Widelands::NodeAndTriangle<> const center)
 	if (imm->descr().type() == Widelands::MapObjectType::IMMOVABLE) {
 		// Trees, Resource Indicators, fields ...
 		return set_tooltip(imm->descr().descname());
-	} else if (upcast(Widelands::ProductionSite, productionsite, imm)) {
+	}
+	if (upcast(Widelands::ProductionSite, productionsite, imm)) {
 		// No productionsite tips for hostile players
 		if (player == nullptr || !player->is_hostile(*productionsite->get_owner())) {
 			return set_tooltip(

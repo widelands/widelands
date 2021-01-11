@@ -20,14 +20,19 @@
 #ifndef WL_NETWORK_GAMECLIENT_H
 #define WL_NETWORK_GAMECLIENT_H
 
+#include <memory>
+
+#include "base/macros.h"
 #include "chat/chat.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
 #include "network/network.h"
 
-class FullscreenMenuMain;
 struct GameClientImpl;
+namespace FsMenu {
+class MenuCapsule;
+}
 
 /**
  * GameClient manages the lifetime of a network game in which this computer
@@ -40,7 +45,8 @@ struct GameClientImpl;
  * connect locally / via IP.
  */
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
-	GameClient(FullscreenMenuMain&,
+	GameClient(FsMenu::MenuCapsule&,
+	           std::unique_ptr<GameController>&,
 	           const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
 	           bool internet = false,
@@ -48,7 +54,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 
 	~GameClient() override;
 
-	void run();
+	void run(std::unique_ptr<GameController>&);
 
 	// GameController interface
 	void think() override;
@@ -96,6 +102,7 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
 	void set_player_number(uint8_t number) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
+	void set_player_color(uint8_t number, const RGBColor&) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;
@@ -114,15 +121,15 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 		return true;
 	}
 
-	FullscreenMenuMain& fullscreen_menu_main() const {
-		return fsmm_;
-	}
-
 private:
+	DISALLOW_COPY_AND_ASSIGN(GameClient);
+
 	/// for unique backupname
-	std::string backup_file_name(std::string& path) {
+	std::string backup_file_name(const std::string& path) {
 		return path + "~backup";
 	}
+
+	void do_run();
 
 	void sync_report_callback();
 
@@ -152,7 +159,7 @@ private:
 
 	GameClientImpl* d;
 
-	FullscreenMenuMain& fsmm_;
+	FsMenu::MenuCapsule& capsule_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMECLIENT_H

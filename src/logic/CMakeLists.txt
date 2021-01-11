@@ -30,9 +30,12 @@ wl_library(logic_game_settings
     game_settings.h
     player_end_result.h
   DEPENDS
+    graphic_color
     io_filesystem
+    logic_addons
     logic_constants
     logic_exceptions
+    logic_filesystem_constants
     logic_tribe_basic_info
     notifications
     scripting_lua_interface
@@ -47,6 +50,7 @@ wl_library(logic_single_player_game_settings
     ai
     base_exceptions
     base_i18n
+    graphic_playercolor
     logic_game_settings
     logic_tribe_basic_info
 )
@@ -81,6 +85,19 @@ wl_library(logic_filesystem_constants
   SRCS
     filesystem_constants.h
     filesystem_constants.cc
+)
+
+wl_library(logic_addons
+  SRCS
+    addons.cc
+    addons.h
+  DEPENDS
+    base_i18n
+    base_exceptions
+    base_log
+    io_filesystem
+    io_profile
+    logic_filesystem_constants
 )
 
 wl_library(logic_objectives
@@ -143,6 +160,7 @@ wl_library(logic_map
     io_fileread
     io_filesystem
     logic
+    logic_addons
     logic_constants
     logic_exceptions
     logic_filesystem_constants
@@ -255,6 +273,7 @@ wl_library(logic
     io_filesystem
     io_profile
     io_stream
+    logic_addons
     logic_commands
     logic_constants
     logic_exceptions

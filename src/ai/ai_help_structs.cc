@@ -378,9 +378,8 @@ MineableField::MineableField(const Widelands::FCoords& fc)
      same_mine_fields_nearby(0) {
 }
 
-EconomyObserver::EconomyObserver(Widelands::Economy& e) : economy(e) {
-	dismantle_grace_time = Time();
-	fields_block_last_time = Time(0);
+EconomyObserver::EconomyObserver(Widelands::Economy& e)
+   : economy(e), dismantle_grace_time(Time()), fields_block_last_time(Time(0)) {
 }
 
 int32_t BuildingObserver::total_count() const {
@@ -409,7 +408,7 @@ AiModeBuildings BuildingObserver::aimode_limit_status() const {
 		return AiModeBuildings::kAnotherAllowed;
 	}
 }
-bool BuildingObserver::buildable(Widelands::Player& p) {
+bool BuildingObserver::buildable(const Widelands::Player& p) {
 	return is(BuildingAttribute::kBuildable) && p.is_building_type_allowed(id);
 }
 
@@ -1023,10 +1022,10 @@ PlayersStrengths::PlayerStat::PlayerStat(Widelands::TeamNumber tc,
      old_players_power(op),
      old60_players_power(o60p),
      players_casualities(cs),
+     last_time_seen(Time()),
      players_land(land),
      old_players_land(oland),
      old60_players_land(o60l) {
-	last_time_seen = Time();
 }
 
 // Inserting/updating data

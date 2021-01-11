@@ -229,7 +229,14 @@ descriptions:new_trainingsite_type {
    },
 
    soldier_capacity = 6,
-   trainer_patience = 11
+   trainer_patience = 11,
+
+   messages = {
+      -- TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
+      no_soldier = pgettext("amazons_building", "No soldier to train!"),
+      -- TRANSLATORS: Amazon training site tooltip when none of the present soldiers match the current training program
+      no_soldier_for_level = pgettext("amazons_building", "No soldier found for this training level!"),
+   },
 }
 
 pop_textdomain()

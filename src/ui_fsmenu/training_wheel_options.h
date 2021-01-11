@@ -29,6 +29,8 @@
 
 class LuaInterface;
 
+namespace FsMenu {
+
 /**
  * @brief The TrainingWheelOptions class presents buttons to the user to reset the progress for
  * individual training wheels.
@@ -37,9 +39,11 @@ class TrainingWheelOptions : public UI::Window {
 public:
 	explicit TrainingWheelOptions(Panel* parent);
 
+	bool handle_key(bool, SDL_Keysym) override;
+
 private:
 	struct Entry {
-		explicit Entry(Widelands::TrainingWheels::TrainingWheel init_training_wheel,
+		explicit Entry(const Widelands::TrainingWheels::TrainingWheel& init_training_wheel,
 		               UI::Checkbox* init_checkbox)
 		   : training_wheel(init_training_wheel),
 		     initial_state(init_training_wheel.solved),
@@ -50,6 +54,8 @@ private:
 		UI::Checkbox* checkbox;
 	};
 
+	void clicked_ok();
+
 	void toggle_mark_unmark_all_button();
 
 	std::unique_ptr<LuaInterface> lua_;
@@ -59,5 +65,7 @@ private:
 	UI::Button* mark_unmark_button_;
 	bool mark_unmark_state_;
 };
+
+}  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H

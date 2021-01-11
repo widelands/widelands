@@ -31,9 +31,10 @@
 namespace {
 bool inline copy_paste_modifier() {
 #ifdef __APPLE__
-	return SDL_GetModState() & KMOD_GUI;
+	return (SDL_GetModState() & KMOD_GUI);
+#else
+	return (SDL_GetModState() & KMOD_CTRL);
 #endif
-	return SDL_GetModState() & KMOD_CTRL;
 }
 }  // namespace
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
@@ -47,7 +48,10 @@ struct MultilineEditbox::Data {
 	std::string text;
 
 	/// Background color and texture + font style
-	const UI::TextPanelStyleInfo& style;
+	PanelStyle style;
+	inline const UI::TextPanelStyleInfo& get_style() const {
+		return g_style_manager->editbox_style(style);
+	}
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
@@ -74,7 +78,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&, const TextPanelStyleInfo& style);
+	explicit Data(MultilineEditbox&);
 	void refresh_ww();
 
 	void update();
@@ -101,30 +105,30 @@ private:
  * Initialize an editbox that supports multiline strings.
  */
 MultilineEditbox::MultilineEditbox(
-   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : Panel(parent, style, x, y, w, h), d_(new Data(*this, g_style_manager->editbox_style(style))) {
+   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const UI::PanelStyle style)
+   : Panel(parent, style, x, y, w, h), d_(new Data(*this)) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
 	set_handle_textinput();
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& init_style)
+MultilineEditbox::Data::Data(MultilineEditbox& o)
    : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), o.panel_style_),
-     style(init_style),
+     style(o.panel_style_),
      cursor_pos(0),
      caret_image_path(o.panel_style_ == PanelStyle::kWui ? "images/ui_basic/caret_wui.png" :
                                                            "images/ui_basic/caret_fs.png"),
-     lineheight(text_height(style.font())),
+     lineheight(text_height(get_style().font())),
      maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
                           g_gr->max_texture_size_for_font_rendering() /
-                          (text_height(style.font()) * text_height(style.font())),
+                          (text_height(get_style().font()) * text_height(get_style().font())),
                        std::numeric_limits<int32_t>::max())),
      mode(Mode::kNormal),
      selection_start(0),
      selection_end(0),
      ww_valid(false),
-     ww(style.font().size(), style.font().color(), o.get_w()),
+     ww(get_style().font().size(), get_style().font().color(), o.get_w()),
      owner(o) {
 	scrollbar.moved.connect([&o](int32_t a) { o.scrollpos_changed(a); });
 
@@ -569,7 +573,7 @@ void MultilineEditbox::focus(bool topcaller) {
  * Redraw the Editbox
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
-	draw_background(dst, d_->style.background());
+	draw_background(dst, d_->get_style().background());
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {

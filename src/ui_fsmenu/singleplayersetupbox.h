@@ -40,7 +40,7 @@ public:
 	                              GameSettingsProvider* const settings);
 
 	void update();
-	void force_new_dimensions(float scale, uint32_t standard_element_height);
+	void force_new_dimensions(uint32_t standard_element_height);
 
 private:
 	PlayerSlot id_;
@@ -50,6 +50,9 @@ private:
 	SinglePlayerTribeDropdown tribe_;
 	SinglePlayerStartTypeDropdown start_type;
 	SinglePlayerTeamDropdown teams_;
+
+	void choose_color();
+	const Image* playercolor_image();
 };
 
 class SinglePlayerSetupBox : public UI::Box {
@@ -57,17 +60,16 @@ class SinglePlayerSetupBox : public UI::Box {
 public:
 	SinglePlayerSetupBox(UI::Panel* const parent,
 	                     GameSettingsProvider* const settings,
-	                     uint32_t standard_element_height,
-	                     uint32_t padding);
+	                     uint32_t standard_element_height);
 
-	void force_new_dimensions(float scale, uint32_t standard_element_height);
+	void force_new_dimensions(uint32_t standard_element_height, int32_t max_size);
 
 private:
 	GameSettingsProvider* const settings_;
-	uint32_t standard_height;
-	UI::Box scrollable_playerbox;
+	uint32_t standard_height_;
+	UI::Box scrollable_playerbox_;
 	UI::Textarea title_;
-	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups;  // not owned
+	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups_;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 	void update();
 	void reset();

@@ -23,7 +23,10 @@
 #include <memory>
 #include <string>
 
+#include "graphic/color.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
+#include "logic/filesystem_constants.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player_end_result.h"
 #include "logic/widelands.h"
@@ -51,6 +54,7 @@ struct PlayerSettings {
 	bool random_tribe;
 	std::string ai; /**< Preferred AI provider for this player */
 	bool random_ai;
+	RGBColor color;
 	Widelands::TeamNumber team;
 	bool closeable;     // only used in multiplayer scenario maps
 	uint8_t shared_in;  // the number of the player that uses this player's starting position
@@ -132,6 +136,19 @@ struct GameSettings {
 				throw wexception("Win condition file \"%s\" does not exist", filename.c_str());
 			}
 		}
+		for (const auto& pair : AddOns::g_addons) {
+			if (pair.first.category == AddOns::AddOnCategory::kWinCondition) {
+				const std::string filename = kAddOnDir + g_fs->file_separator() +
+				                             pair.first.internal_name + g_fs->file_separator() +
+				                             "init.lua";
+				if (g_fs->file_exists(filename)) {
+					win_condition_scripts.push_back(filename);
+				} else {
+					throw wexception(
+					   "Add-on win condition file \"%s\" does not exist", filename.c_str());
+				}
+			}
+		}
 	}
 
 	/// Returns the basic preload info for a tribe.
@@ -207,6 +224,7 @@ struct GameSettingsProvider {
 	virtual bool can_change_player_tribe(uint8_t number) = 0;
 	virtual bool can_change_player_init(uint8_t number) = 0;
 	virtual bool can_change_player_team(uint8_t number) = 0;
+	virtual bool can_change_player_color(uint8_t number);
 
 	virtual bool can_launch() = 0;
 
@@ -228,6 +246,7 @@ struct GameSettingsProvider {
 	virtual void set_player(uint8_t number, const PlayerSettings&) = 0;
 	virtual void set_player_number(uint8_t number) = 0;
 	virtual void set_player_team(uint8_t number, Widelands::TeamNumber team) = 0;
+	virtual void set_player_color(uint8_t number, const RGBColor&) = 0;
 	virtual void set_player_closeable(uint8_t number, bool closeable) = 0;
 	virtual void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) = 0;
 	virtual void set_win_condition_script(const std::string& wc) = 0;

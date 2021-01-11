@@ -20,8 +20,11 @@
 #ifndef WL_GAME_IO_GAME_PRELOAD_PACKET_H
 #define WL_GAME_IO_GAME_PRELOAD_PACKET_H
 
+#include <vector>
+
 #include "base/times.h"
 #include "game_io/game_data_packet.h"
+#include "logic/addons.h"
 #include "logic/game_controller.h"
 
 namespace Widelands {
@@ -72,6 +75,23 @@ struct GamePreloadPacket : public GameDataPacket {
 		return gametype_;
 	}
 
+	/* NOTE: Info about enabled *world* add-ons is saved in the Map by MapElemental
+	 * packet, and additionally info about enabled *tribes and world* add-ons is
+	 * saved in the GamePreload packet.
+	 * On game loading, the game loader will dis- or enable *tribe and world* add-ons
+	 * as requested by the GamePreload packet. That packet is also used to display
+	 * compatibility warnings in the game loading screens.
+	 * The add-on info stored in the Map(Elemental packet) is ignored during loading.
+	 * The map selection screens in main menu and editor will need to take care
+	 * to use the info stored there to dis- and enable *world* add-ons as required.
+	 * As a side effect, the choice of *world* add-ons is left to the map maker,
+	 * and players can not influence the world of existing maps.
+	 * Tribes add-ons however are selected when starting a new game.
+	 */
+	const AddOns::AddOnRequirements& required_addons() const {
+		return required_addons_;
+	}
+
 	const std::string& get_active_training_wheel() const {
 		return active_training_wheel_;
 	}
@@ -95,6 +115,8 @@ private:
 	std::string version_;
 	time_t savetimestamp_ = 0;
 	GameController::GameType gametype_ = GameController::GameType::kUndefined;
+	// Required add-ons with the recommended version
+	AddOns::AddOnRequirements required_addons_;
 };
 }  // namespace Widelands
 

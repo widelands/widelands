@@ -33,8 +33,6 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
-      mines = "resource_stones",
-      mines_percent = 100,
       prohibited_till = 630
    },
 

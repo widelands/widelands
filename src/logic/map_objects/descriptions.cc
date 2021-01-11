@@ -24,6 +24,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/descriptions_compatibility_table.h"
 #include "logic/map_objects/immovable.h"
@@ -49,7 +50,7 @@
 #include "sound/sound_handler.h"
 
 namespace Widelands {
-Descriptions::Descriptions(LuaInterface* lua)
+Descriptions::Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>& addons)
    : critters_(new DescriptionMaintainer<CritterDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      terrains_(new DescriptionMaintainer<TerrainDescription>()),
@@ -63,13 +64,44 @@ Descriptions::Descriptions(LuaInterface* lua)
      largest_workarea_(0),
      scenario_tribes_(nullptr),
      tribes_have_been_registered_(false),
+     subscriber_(Notifications::subscribe<DescriptionManager::NoteMapObjectDescriptionTypeCheck>(
+        [this](DescriptionManager::NoteMapObjectDescriptionTypeCheck note) { check(note); })),
      lua_(lua),
      description_manager_(new DescriptionManager(lua)) {
+
+	// Immediately preload and register all add-on units. Better to do this
+	// very early than to risk crashes because it was done too late…
+
+	assert(lua_);
+	for (const AddOns::AddOnInfo& info : addons) {
+		if (info.category == AddOns::AddOnCategory::kWorld ||
+		    info.category == AddOns::AddOnCategory::kTribes) {
+			const std::string script(kAddOnDir + FileSystem::file_separator() + info.internal_name +
+			                         FileSystem::file_separator() + "preload.lua");
+			if (g_fs->file_exists(script)) {
+				log_info("Running preload script for add-on %s", info.internal_name.c_str());
+				lua_->run_script(script);
+			}
+		}
+	}
+
+	for (const AddOns::AddOnInfo& info : addons) {
+		if (info.category == AddOns::AddOnCategory::kWorld) {
+			description_manager_->register_directory(
+			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
+			   DescriptionManager::RegistryCaller::kWorldAddon);
+		} else if (info.category == AddOns::AddOnCategory::kTribes) {
+			description_manager_->register_directory(
+			   kAddOnDir + FileSystem::file_separator() + info.internal_name, g_fs,
+			   DescriptionManager::RegistryCaller::kTribeAddon);
+		}
+	}
 
 	// Register tribe names. Tribes have no attributes.
 	std::vector<std::string> attributes;
 	for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
-		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes);
+		description_manager_->register_description(tribeinfo.name, tribeinfo.script, attributes,
+		                                           DescriptionManager::RegistryCaller::kDefault);
 		if (!attributes.empty()) {
 			throw GameDataError("Tribes can't have attributes - please remove all attributes in "
 			                    "'register.lua' for tribe '%s'.",
@@ -78,7 +110,8 @@ Descriptions::Descriptions(LuaInterface* lua)
 	}
 
 	// Walk world directory and register objects
-	description_manager_->register_directory("world", g_fs, false);
+	description_manager_->register_directory(
+	   "world", g_fs, DescriptionManager::RegistryCaller::kDefault);
 
 	// We register tribes on demand in load_tribe for performance reasons
 }
@@ -97,6 +130,9 @@ const DescriptionMaintainer<ImmovableDescr>& Descriptions::immovables() const {
 }
 const DescriptionMaintainer<TerrainDescription>& Descriptions::terrains() const {
 	return *terrains_;
+}
+const DescriptionMaintainer<WorkerDescr>& Descriptions::workers() const {
+	return *workers_;
 }
 
 size_t Descriptions::nr_buildings() const {
@@ -295,9 +331,12 @@ ImmovableDescr* Descriptions::get_mutable_immovable_descr(DescriptionIndex index
 	return immovables_->get_mutable(index);
 }
 
-const ResourceDescription* Descriptions::get_resource_descr(DescriptionIndex const index) const {
+ResourceDescription* Descriptions::get_mutable_resource_descr(DescriptionIndex const index) const {
 	assert(index < resources_->size() || index == Widelands::kNoResource);
 	return resources_->get_mutable(index);
+}
+const ResourceDescription* Descriptions::get_resource_descr(DescriptionIndex const index) const {
+	return get_mutable_resource_descr(index);
 }
 
 const ShipDescr* Descriptions::get_ship_descr(DescriptionIndex index) const {
@@ -329,6 +368,9 @@ WorkerDescr* Descriptions::get_mutable_worker_descr(DescriptionIndex index) cons
 const TribeDescr* Descriptions::get_tribe_descr(DescriptionIndex index) const {
 	return tribes_->get_mutable(index);
 }
+TribeDescr* Descriptions::get_mutable_tribe_descr(DescriptionIndex index) const {
+	return tribes_->get_mutable(index);
+}
 
 // ************************ Loading *************************
 
@@ -340,7 +382,8 @@ void Descriptions::register_scenario_tribes(FileSystem* filesystem) {
 		if (filesystem->file_exists("scripting/tribes/init.lua")) {
 			scenario_tribes_ = lua_->run_script("map:scripting/tribes/init.lua");
 		}
-		description_manager_->register_directory("scripting/tribes", filesystem, true);
+		description_manager_->register_directory(
+		   "scripting/tribes", filesystem, DescriptionManager::RegistryCaller::kScenario);
 	}
 }
 
@@ -447,7 +490,8 @@ DescriptionIndex Descriptions::load_tribe(const std::string& tribename) {
 		// Register tribes on demand for better performance during mapselect, for the editor and for
 		// the website tools
 		if (!tribes_have_been_registered_) {
-			description_manager_->register_directory("tribes", g_fs, false);
+			description_manager_->register_directory(
+			   "tribes", g_fs, DescriptionManager::RegistryCaller::kDefault);
 			tribes_have_been_registered_ = true;
 		}
 		description_manager_->load_description(tribename);
@@ -560,4 +604,33 @@ void Descriptions::set_old_world_name(const std::string& name) {
 		   std::unique_ptr<DescriptionsCompatibilityTable>(new OneWorldLegacyLookupTable(name));
 	}
 }
+
+#define CHECK_FACTORY(addon, unit_type)                                                            \
+	if (unit_type##_index(note.description_name) != INVALID_INDEX) {                                \
+		throw GameDataError(#addon " add-ons must not define " #unit_type "s (offending unit: %s)",  \
+		                    note.description_name.c_str());                                          \
+	}
+
+void Descriptions::check(const DescriptionManager::NoteMapObjectDescriptionTypeCheck& note) const {
+	switch (note.caller) {
+	case DescriptionManager::RegistryCaller::kTribeAddon:
+		CHECK_FACTORY(Tribe, critter)
+		CHECK_FACTORY(Tribe, terrain)
+		CHECK_FACTORY(Tribe, resource)
+		break;
+	case DescriptionManager::RegistryCaller::kWorldAddon:
+		CHECK_FACTORY(World, tribe)
+		CHECK_FACTORY(World, ware)
+		CHECK_FACTORY(World, worker)
+		CHECK_FACTORY(World, building)
+		CHECK_FACTORY(World, ship)
+		break;
+	default:
+		// Scenarios and official scripts may load anything
+		break;
+	}
+}
+
+#undef CHECK_FACTORY
+
 }  // namespace Widelands

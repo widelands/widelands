@@ -97,6 +97,13 @@ public:
 
 	void free_children();
 
+	// Checks whether this panel will be deleted in the next think cycle.
+	// This check is used to stop panels from thinking and performing other
+	// activities to prevent undesired side-effects.
+	bool is_dying() const {
+		return flags_ & pf_die;
+	}
+
 	// Modal
 	enum class Returncodes { kBack, kOk };
 
@@ -117,6 +124,7 @@ public:
 
 	virtual void start();
 	virtual void end();
+	virtual void become_modal_again(Panel& prevmodal);
 
 	// Geometry
 	virtual void set_size(int nw, int nh);
@@ -288,15 +296,28 @@ public:
 		return allow_user_input_;
 	}
 
-	void set_tooltip(const std::string& text) {
-		tooltip_ = text;
-	}
+	void set_tooltip(const std::string&);
 	const std::string& tooltip() const {
 		return tooltip_;
 	}
 
 	virtual void die();
 	static void register_click();
+
+	// Notify this panel's parent of our death, then immediately delete us.
+	void do_delete();
+
+	// overridden by InteractiveBase
+	virtual bool extended_tooltip_accessibility_mode() const {
+		return false;
+	}
+
+	void find_all_children_at(int16_t x, int16_t y, std::vector<Panel*>& result) const;
+
+	Panel& get_topmost_forefather();
+
+	// Call this on the topmost panel after you changed the template directory
+	void template_directory_changed();
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
@@ -326,9 +347,14 @@ protected:
 
 	static void play_click();
 
-	static bool draw_tooltip(const std::string& text, PanelStyle);
+	static bool
+	draw_tooltip(const std::string& text, PanelStyle, Vector2i pos = Vector2i::invalid());
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
+
+	// called after the template directory was changed
+	virtual void update_template() {
+	}
 
 	virtual Panel* get_open_dropdown();
 
@@ -339,6 +365,11 @@ protected:
 	std::vector<Recti> focus_overlay_rects(int off_x, int off_y, int strength_diff);
 
 	const PanelStyle panel_style_;
+
+	// Never call this function, except when you need Widelands to stay responsive
+	// during a costly operation and you can guarantee that it will not interfere
+	// with the "normal" graphics refreshing done periodically from `Panel::do_run`.
+	void do_redraw_now();
 
 private:
 	bool handles_mouse() const {
@@ -363,6 +394,7 @@ private:
 	virtual void on_death(Panel* p);
 	virtual void on_visibility_changed();
 
+	friend struct ProgressWindow;
 	friend class Window;
 	void do_draw(RenderTarget&);
 	void do_draw_inner(RenderTarget&);
@@ -411,6 +443,8 @@ private:
 	uint8_t border_snap_distance_, panel_snap_distance_;
 	int desired_w_, desired_h_;
 
+	friend struct ModalGuard;
+
 	bool running_;
 	int return_code_;
 
@@ -418,6 +452,9 @@ private:
 	static Panel* modal_;
 	static Panel* mousegrab_;
 	static Panel* mousein_;
+	static Panel* tooltip_panel_;
+	static Vector2i tooltip_fixed_pos_;
+	static Recti tooltip_fixed_rect_;
 	static bool allow_user_input_;
 
 	static FxId click_fx_;

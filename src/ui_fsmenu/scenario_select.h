@@ -20,29 +20,27 @@
 #ifndef WL_UI_FSMENU_SCENARIO_SELECT_H
 #define WL_UI_FSMENU_SCENARIO_SELECT_H
 
-#include "ui_basic/box.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-#include "ui_fsmenu/load_map_or_game.h"
+#include "ui_fsmenu/menu.h"
 #include "ui_fsmenu/scenariodetails.h"
-
+namespace FsMenu {
 /*
  * Fullscreen Menu for selecting a campaign or tutorial scenario
  */
-class FullscreenMenuScenarioSelect : public FullscreenMenuLoadMapOrGame {
+class ScenarioSelect : public TwoColumnsFullNavigationMenu {
 public:
 	// If camp is not set, we'll be loading the tutorials
-	explicit FullscreenMenuScenarioSelect(FullscreenMenuMain&, CampaignData* camp = nullptr);
+	explicit ScenarioSelect(MenuCapsule&, CampaignData* camp);
 
 	std::string get_map();
-	uint32_t get_difficulty() const;
 
 protected:
 	void clicked_ok() override;
-	void entry_selected() override;
-	void fill_table() override;
+	void entry_selected();
+	void fill_table();
 
 private:
 	void layout() override;
@@ -53,8 +51,6 @@ private:
 	bool is_tutorial_;
 	UI::Table<uintptr_t const> table_;
 
-	UI::Box header_box_;
-
 	UI::MultilineTextarea subtitle_;
 	ScenarioDetails scenario_details_;
 	UI::Textarea scenario_difficulty_header_;
@@ -64,5 +60,5 @@ private:
 
 	std::vector<ScenarioData> scenarios_data_;
 };
-
+}  // namespace FsMenu
 #endif  // end of include guard: WL_UI_FSMENU_SCENARIO_SELECT_H

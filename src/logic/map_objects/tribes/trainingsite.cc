@@ -140,13 +140,15 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 					throw GameDataError("Trainingsite '%s' is trying to call 'train' action without "
 					                    "prior 'checksoldier' action in program '%s'",
 					                    name().c_str(), program.first.c_str());
-				} else if (from_checksoldier.level >= checkme.level) {
+				}
+				if (from_checksoldier.level >= checkme.level) {
 					throw GameDataError(
 					   "Trainingsite '%s' is trying to train a soldier attribute from level "
 					   "%d to %d, but the 'checksoldier' action's level must be lower "
 					   "than the 'train' action's level in program '%s'",
 					   name().c_str(), from_checksoldier.level, checkme.level, program.first.c_str());
-				} else if (from_checksoldier.attribute != checkme.attribute) {
+				}
+				if (from_checksoldier.attribute != checkme.attribute) {
 					throw GameDataError(
 					   "Trainingsite '%s' is trying to train soldier attribute '%s', but 'checksoldier' "
 					   "checked "
@@ -158,6 +160,15 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 				update_level(from_checksoldier.attribute, from_checksoldier.level);
 			}
 		}
+	}
+
+	if (table.has_key("messages")) {
+		items_table = table.get_table("messages");
+		no_soldier_to_train_message_ = items_table->get_string("no_soldier");
+		no_soldier_for_training_level_message_ = items_table->get_string("no_soldier_for_level");
+	} else {
+		// TODO(GunChleoc): API compatibility - require this after v1.0
+		log_warn("Training site '%s' is lacking its 'messages' table", name().c_str());
 	}
 }
 
@@ -894,7 +905,11 @@ std::unique_ptr<const BuildingSettings> TrainingSite::create_building_settings()
 	settings->apply(*ProductionSite::create_building_settings());
 	settings->desired_capacity =
 	   std::min(settings->max_capacity, soldier_control_.soldier_capacity());
-	return settings;
+	// Prior to the resolution of a defect report against ISO C++11, local variable 'settings' would
+	// have been copied despite being returned by name, due to its not matching the function return
+	// type. Call 'std::move' explicitly to avoid copying on older compilers.
+	// On modern compilers a simple 'return settings;' would've been fine.
+	return std::unique_ptr<const BuildingSettings>(std::move(settings));
 }
 
 /**

@@ -23,39 +23,40 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
+#include "ui_fsmenu/launch_mpg.h"
+#include "ui_fsmenu/launch_spg.h"
 #include "wui/map_tags.h"
+
+namespace FsMenu {
 
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
 // Fix align for table headings & entries and for wordwrap.
 
+constexpr int checkbox_space_ = 20;
+
 using Widelands::WidelandsMapLoader;
 
-FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
-                                                 GameSettingsProvider* const settings,
-                                                 GameController* const ctrl,
-                                                 Widelands::EditorGameBase& egbase)
-   : FullscreenMenuLoadMapOrGame(fsmm, _("Choose Map")),
-     checkbox_space_(20),
-     // Less padding for big fonts; space is tight.
-     checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
-     checkboxes_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
-     map_details_(this,
-                  right_column_x_,
-                  tabley_,
-                  get_right_column_w(right_column_x_),
-                  tableh_ - buth_ - 4 * padding_,
-                  UI::PanelStyle::kFsMenu,
-                  egbase),
+MapSelect::MapSelect(MenuCapsule& m,
+                     LaunchMPG* mpg,
+                     GameSettingsProvider* const settings,
+                     GameController* const ctrl,
+                     Widelands::Game& g)
+   : TwoColumnsFullNavigationMenu(m, _("Choose Map")),
+     parent_screen_(mpg),
+     checkboxes_(
+        &header_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, 2 * kPadding),
+     table_(&left_column_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     map_details_(&right_column_content_box_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu, g),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
+     game_(g),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false),
@@ -68,8 +69,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 		back_.set_tooltip(_("Return to the single player menu"));
 	}
 
-	back_.sigclicked.connect([this]() { clicked_back(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
 	table_.selected.connect([this](uint32_t) { entry_selected(); });
 	table_.double_clicked.connect([this](uint32_t) { clicked_ok(); });
 	table_.set_column_compare(0, [this](uint32_t a, uint32_t b) { return compare_players(a, b); });
@@ -112,6 +111,8 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	   hbox, "dropdown_team_tags", 0, 0, 200, 50, 24, "", UI::DropdownType::kTextual,
 	   UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuMenu);
 	team_tags_dropdown_->set_autoexpand_display_button();
+	/** TRANSLATORS: Filter entry in map selection. Other entries are "Free for all"", "Teams of 2"
+	 * etc. */
 	team_tags_dropdown_->add(_("Any Teams"), "");
 	team_tags_dropdown_->add(localize_tag("ffa"), "ffa");
 	team_tags_dropdown_->add(localize_tag("1v1"), "1v1");
@@ -162,22 +163,24 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(FullscreenMenuMain& fsmm,
 	team_tags_dropdown_->selected.connect([this] { fill_table(); });
 	show_all_maps_->sigclicked.connect([this] { clear_filter(); });
 
+	header_box_.add(&checkboxes_, UI::Box::Resizing::kExpandBoth);
+	header_box_.add_space(2 * kPadding);
+	left_column_box_.add(&table_, UI::Box::Resizing::kExpandBoth);
+	right_column_content_box_.add(&map_details_, UI::Box::Resizing::kExpandBoth);
+
 	layout();
 }
 
-void FullscreenMenuMapSelect::layout() {
-	FullscreenMenuLoadMapOrGame::layout();
-	checkboxes_y_ = tabley_ - 3 * (team_tags_dropdown_->get_h() + checkbox_padding_) - 2 * padding_;
-	checkboxes_.set_pos(Vector2i(tablex_, checkboxes_y_));
-	checkboxes_.set_size(get_inner_w() - 2 * tablex_, tabley_ - checkboxes_y_);
-	table_.set_size(tablew_, tableh_);
-	table_.set_pos(Vector2i(tablex_, tabley_));
-	map_details_.set_size(get_right_column_w(right_column_x_), tableh_ - buth_ - 4 * padding_);
-	map_details_.set_pos(Vector2i(right_column_x_, tabley_));
+MapSelect::~MapSelect() {
+	if (!parent_screen_) {
+		game_.cleanup_objects();
+		delete &game_;
+		delete settings_;
+	}
 }
 
-void FullscreenMenuMapSelect::think() {
-	FullscreenMenuLoadMapOrGame::think();
+void MapSelect::think() {
+	TwoColumnsFullNavigationMenu::think();
 
 	if (ctrl_) {
 		ctrl_->think();
@@ -192,26 +195,33 @@ void FullscreenMenuMapSelect::think() {
 	}
 }
 
-bool FullscreenMenuMapSelect::compare_players(uint32_t rowa, uint32_t rowb) {
+bool MapSelect::compare_players(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_players(maps_data_[table_[rowb]]);
 }
 
-bool FullscreenMenuMapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb) {
+bool MapSelect::compare_mapnames(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_names(maps_data_[table_[rowb]]);
 }
 
-bool FullscreenMenuMapSelect::compare_size(uint32_t rowa, uint32_t rowb) {
+bool MapSelect::compare_size(uint32_t rowa, uint32_t rowb) {
 	return maps_data_[table_[rowa]].compare_size(maps_data_[table_[rowb]]);
 }
 
-MapData const* FullscreenMenuMapSelect::get_map() const {
+MapData const* MapSelect::get_map() const {
 	if (!table_.has_selection()) {
 		return nullptr;
 	}
 	return &maps_data_[table_.get_selected()];
 }
 
-void FullscreenMenuMapSelect::clicked_ok() {
+void MapSelect::clicked_back() {
+	if (parent_screen_) {
+		parent_screen_->clicked_select_map_callback(nullptr, false);
+	}
+	die();
+}
+
+void MapSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
@@ -222,16 +232,17 @@ void FullscreenMenuMapSelect::clicked_ok() {
 		fill_table();
 	} else if (!ok_.enabled()) {
 		return;
+	} else if (parent_screen_) {
+		parent_screen_->clicked_select_map_callback(
+		   get_map(), maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
+		die();
 	} else {
-		if (maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario) {
-			end_modal<MenuTarget>(MenuTarget::kScenarioGame);
-		} else {
-			end_modal<MenuTarget>(MenuTarget::kNormalGame);
-		}
+		new LaunchSPG(get_capsule(), *settings_, game_, get_map(),
+		              maps_data_[table_.get_selected()].maptype == MapData::MapType::kScenario);
 	}
 }
 
-bool FullscreenMenuMapSelect::set_has_selection() {
+bool MapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
 
 	if (!has_selection) {
@@ -241,7 +252,7 @@ bool FullscreenMenuMapSelect::set_has_selection() {
 	return has_selection;
 }
 
-void FullscreenMenuMapSelect::entry_selected() {
+void MapSelect::entry_selected() {
 	if (set_has_selection()) {
 		// Update during think() instead of every keypress
 		update_map_details_ = true;
@@ -264,7 +275,7 @@ void FullscreenMenuMapSelect::entry_selected() {
  * to move further up. If the user moves down into subdirectories, we insert an
  * entry to move back up.
  */
-void FullscreenMenuMapSelect::fill_table() {
+void MapSelect::fill_table() {
 	has_translated_mapname_ = false;
 	bool unspecified_balancing_found = false;
 
@@ -286,6 +297,16 @@ void FullscreenMenuMapSelect::fill_table() {
 	// about the absolute filesystem top!) we manually add ".."
 	if (curdir_ != basedir_) {
 		maps_data_.push_back(MapData::create_parent_dir(curdir_));
+	} else {
+		// In the toplevel directory we also need to include add-on maps
+		for (auto& addon : AddOns::g_addons) {
+			if (addon.first.category == AddOns::AddOnCategory::kMaps) {
+				for (const std::string& mapname : g_fs->list_directory(
+				        kAddOnDir + FileSystem::file_separator() + addon.first.internal_name)) {
+					files.insert(mapname);
+				}
+			}
+		}
 	}
 
 	Widelands::Map map;  //  MapLoader needs a place to put its preload data
@@ -296,7 +317,7 @@ void FullscreenMenuMapSelect::fill_table() {
 		if (ml != nullptr) {
 			try {
 				map.set_filename(mapfilename);
-				ml->preload_map(true);
+				ml->preload_map(true, nullptr);
 
 				if (!map.get_width() || !map.get_height()) {
 					continue;
@@ -393,9 +414,8 @@ void FullscreenMenuMapSelect::fill_table() {
 /*
  * Add a tag to the checkboxes
  */
-UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
-                                                        const std::string& tag,
-                                                        const std::string& displ_name) {
+UI::Checkbox*
+MapSelect::add_tag_checkbox(UI::Box* box, const std::string& tag, const std::string& displ_name) {
 	tags_ordered_.push_back(tag);
 
 	UI::Checkbox* cb = new UI::Checkbox(box, UI::PanelStyle::kFsMenu, Vector2i::zero(), displ_name);
@@ -410,7 +430,7 @@ UI::Checkbox* FullscreenMenuMapSelect::add_tag_checkbox(UI::Box* box,
 /*
  * One of the tagboxes has changed
  */
-void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
+void MapSelect::tagbox_changed(int32_t id, bool to) {
 	if (to) {
 		req_tags_.insert(id);
 	} else {
@@ -420,7 +440,7 @@ void FullscreenMenuMapSelect::tagbox_changed(int32_t id, bool to) {
 	fill_table();
 }
 
-void FullscreenMenuMapSelect::clear_filter() {
+void MapSelect::clear_filter() {
 	req_tags_.clear();
 	for (UI::Checkbox* checkbox : tags_checkboxes_) {
 		checkbox->set_state(false);
@@ -432,7 +452,7 @@ void FullscreenMenuMapSelect::clear_filter() {
 	fill_table();
 }
 
-void FullscreenMenuMapSelect::rebuild_balancing_dropdown() {
+void MapSelect::rebuild_balancing_dropdown() {
 	const std::string selected =
 	   balancing_tags_dropdown_->has_selection() ? balancing_tags_dropdown_->get_selected() : "";
 	balancing_tags_dropdown_->clear();
@@ -448,3 +468,4 @@ void FullscreenMenuMapSelect::rebuild_balancing_dropdown() {
 		fill_table();
 	}
 }
+}  // namespace FsMenu

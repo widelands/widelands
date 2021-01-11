@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
-"PO-Revision-Date: 2020-09-11 11:59+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-11-29 22:45+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -328,17 +328,17 @@ msgid ""
 "expand all the way to the next island. The AI will perform poorly."
 msgstr "Store bygninger er sjældne på disse små øer. Prioriter konstruktion af store bygninger på dem. Nogle gange skal du bruge store militære bygninger for at udvide hele vejen til den næste ø. Den kunstige intelligens vil fungere dårligt."
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:8
+#: ../../data/maps/Astoria_2.R.wmf/elemental:8
 msgid "Astoria 2.R"
 msgstr "Astoria 2.R"
 
-#: ../../data/maps/Astoria 2.R.wmf/elemental:10
-msgid "Long, economic play in beautiful land. Try every player!"
-msgstr ""
-
-#: ../../data/maps/Astoria 2.R.wmf/elemental:9
+#: ../../data/maps/Astoria_2.R.wmf/elemental:9
 msgid "pbuczny@gmail.com – edited by Nordfriese"
 msgstr "pbuczny@gmail.com – redigeret af Nordfriese"
+
+#: ../../data/maps/Astoria_2.R.wmf/elemental:10
+msgid "Long, economic play in beautiful land. Try every player!"
+msgstr ""
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -370,16 +370,16 @@ msgid ""
 "another confrontation."
 msgstr "Uanset om det er en af naturens mærkeligste indretninger eller bare en gal guds kreation (og en spilsulten), så venter denne slagmark på to modstandere for endnu en konfrontation."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:8
+#: ../../data/maps/Comet_Island.wmf/elemental:8
 msgid "Comet Island"
 msgstr "Kometøen"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:9
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:9
+#: ../../data/maps/Comet_Island.wmf/elemental:9
+#: ../../data/maps/Glacier_Lake.wmf/elemental:9
 msgid "Nasenbaer – edited by king_of_nowhere"
 msgstr "Nasenbaer - redigeret af konge_af_intet"
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:10
+#: ../../data/maps/Comet_Island.wmf/elemental:10
 msgid ""
 "A few miles in front of Gerion Coast lies a small unnamed island. Until now,"
 " you have not seen any reason to sail there, but yesterday a big fireball "
@@ -388,7 +388,7 @@ msgid ""
 "of this island before other tribes will follow."
 msgstr "Nogle få kilometer foran Gerionkysten ligger en lille unavngivet ø. Indtil nu har du ikke set nogen grund til at sejle hertid, men i går kom en stor ildkugle fra himlen, som landede her i dets centrum. Er det et tegn fra guderne? Det tror du det er, og du håber, at din stamme vil finde denne ø's rigdomme før andre stammer følger efter."
 
-#: ../../data/maps/Comet_Island_v2.wmf/elemental:11
+#: ../../data/maps/Comet_Island.wmf/elemental:11
 msgid ""
 "Red player is close to the ores, but has little fertile terrain. Yellow "
 "player has plenty of good land, but must move far from his starting position"
@@ -406,19 +406,19 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Lang tid efter at en meteor styrtede ned i et par bjerge, blomstrer livet nu i krateret. To stammer bekæmper nu hinanden for at få fat på disse ressourcer."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Krydser horisonten"
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:9
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:9
 msgid "Kristin – edited by 3plus4i"
 msgstr ""
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Bemand dit skib og sejl ud mod horisonten."
 
-#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:11
+#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:11
 msgid "This map is not winnable with the ‘Autocrat’ win condition."
 msgstr ""
 
@@ -433,11 +433,11 @@ msgid ""
 "remaining ones share the resources wisely?"
 msgstr "Fire stammer kæmper mod deres nærmeste nabo om at være den første som når guldbjerget, som lover ufattelige rigdomme. Men kan de to tilbageværende dele ressourcerne klogt?"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:8
+#: ../../data/maps/Dolomites.wmf/elemental:8
 msgid "Dolomites 3.0"
 msgstr "Dolomitterne 3.0"
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:10
+#: ../../data/maps/Dolomites.wmf/elemental:10
 msgid ""
 "The jewel of the alps, the dolomites mountain range has been declared a "
 "world heritage site for its pristine beauty. This map is an as-faithful-as-"
@@ -446,7 +446,7 @@ msgid ""
 " to the death with your enemies, it may as well be in a beautiful place."
 msgstr "Juvelen i Alperne, bjergkæden Dolomitterne er blevet erklæret opført på UNESCOs verdensarvsliste for sin skønhed. Dette kort er en så nøjagtig som det kan lade sig gøre rekonstruktion af området afgrænset af Cortina d'Ampezzo i nordøst og Canazei i sydvest. Hvis du bliver udfordret i en duel til døden mod dine fjender, så kan det ligeså godt være på et smukt sted."
 
-#: ../../data/maps/Dolomites_v3.wmf/elemental:11
+#: ../../data/maps/Dolomites.wmf/elemental:11
 msgid ""
 "The mountains have an abundance of flat ground. Unfortunately, most of it is"
 " vertical – use the little building space you have wisely. A fortress at the"
@@ -477,27 +477,27 @@ msgstr "Ens startbetingelser for tre spillere."
 msgid "v0.2"
 msgstr "v0.2"
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:10
+#: ../../data/maps/Europa.wmf/elemental:8
+msgid "Europa 1.2"
+msgstr ""
+
+#: ../../data/maps/Europa.wmf/elemental:10
 msgid ""
 "A huge Europe map. Blue = Sweden, Red = Italy, Yellow = Spain, Green = "
 "Turkey, Black = Russia, Orange = England, Purple = France, White = Poland"
 msgstr ""
 
-#: ../../data/maps/Europa 1.1.wmf/elemental:8
-msgid "Europa 1.1"
-msgstr "Europa 1.1"
-
-#: ../../data/maps/Fellowships_v2.wmf/elemental:8
+#: ../../data/maps/Fellowships.wmf/elemental:8
 msgid "Fellowships"
 msgstr "Fællesskaber"
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:10
+#: ../../data/maps/Fellowships.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
 msgstr "Skibe er dine bedste følgesvende. Startpositioner er de samme, så kortet bør være fair."
 
-#: ../../data/maps/Fellowships_v2.wmf/elemental:11
+#: ../../data/maps/Fellowships.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
@@ -558,21 +558,21 @@ msgid ""
 "sources. III: Each mountain contains only one resource."
 msgstr "I: Vand kan findes langs floden. II: Snemænd markerer yderligere vandressourcer. III: Hvert bjerg indeholder kun en ressource."
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:8
+#: ../../data/maps/Full_Moon.wmf/elemental:8
 msgid "Full Moon"
 msgstr "Fuldmåne"
 
-#: ../../data/maps/Full_Moon_v2.wmf/elemental:10
+#: ../../data/maps/Full_Moon.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
 msgstr "Uanset om det er den nyeste solhverv, eller månesyge, så bevæger noget disse stammer mod deres endelige prøvelser."
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
+#: ../../data/maps/Glacier_Lake.wmf/elemental:8
 msgid "Glacier Lake"
 msgstr "Gletsjersø"
 
-#: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
+#: ../../data/maps/Glacier_Lake.wmf/elemental:10
 msgid ""
 "Your tribe has dwelt on this beautiful and lonely glacier lake for a long "
 "time. No one disturbed you and the resources were sufficient for your whole "
@@ -613,11 +613,11 @@ msgid ""
 "neighbor has begun to expand."
 msgstr "I århundrede har i levet fredeligt side om side med den anden stamme på naboøen. Denne fred ser ud til at være forbid - din nabo er begyndt at ekspandere."
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:8
 msgid "Kings and Queens"
 msgstr "Konger og dronninger"
 
-#: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
+#: ../../data/maps/Kings_and_Queens.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
@@ -635,15 +635,15 @@ msgid ""
 "two hostile tribes have arrived at its shores…"
 msgstr "Denne sø, dybt inde i de gamle skove, har i lang tid været kendt for sin skønhed og idylliske fred. Dette fristed er dog nu forstyrret, da to fjendtlige stammer er ankommet ved søens bredder ..."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
+#: ../../data/maps/Last_Bastion.wmf/elemental:8
 msgid "Last Bastion"
 msgstr "Sidste bastion"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
+#: ../../data/maps/Last_Bastion.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
 msgstr "Endnu en barbar - redigeret af konge_af_intet"
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
+#: ../../data/maps/Last_Bastion.wmf/elemental:10
 msgid ""
 "The whimsical Gods didn’t answer our prayers. Instead, the increasing "
 "sunlight heated up the Earth a thousandfold and melted glaciers and people "
@@ -656,7 +656,7 @@ msgid ""
 "living space is also a hard and small place to live."
 msgstr "De lunefulde guder besvarede ikke vores bønner. I stedet varmede det stigende sollys jorden op tusindfold og smeltede gletsjere og folk faldt i dybet. Men nu - højt oppe i de majestætiske bjerge, på den sidste klump jord - har to overlevende stammer søgt ly. Selvom guderne viste barmhjertighed og klimaet derfor blev køligere igen, stiger vandet stadig. Inde på det sidste sikkert sted - den højeste bjergkæde, hvor mængden af guld og plads til at leve alene er tilstrækkelig for en stamme - fører kun to modstående veje. Men husk, vær forsigtig ... dette sidste levested er også et hårdt og lille sted at bo."
 
-#: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
+#: ../../data/maps/Last_Bastion.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
 msgstr "Husk at sørge for leverancen af træ, du får brug for træet."
 
@@ -670,15 +670,15 @@ msgid ""
 "all over the map."
 msgstr "Fire stammer kæmper om dominans i et øde område. Ressourcerne er spredt ud over hele kortet."
 
-#: ../../data/maps/Long, long v2.wmf/elemental:10 way
+#: ../../data/maps/Long_long_way.wmf/elemental:8
+msgid "Long, long way v2"
+msgstr "Lang, lang vej v2"
+
+#: ../../data/maps/Long_long_way.wmf/elemental:10
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
 msgstr ">Hvor det? Tusind kilometer herfra.< [Porgy og Bess] Du har en lang, lang vej foran dig for at erobre alle øerne. Held og lykke!"
-
-#: ../../data/maps/Long, long v2.wmf/elemental:8 way
-msgid "Long, long way v2"
-msgstr "Lang, lang vej v2"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -713,11 +713,11 @@ msgid ""
 "maze, and what can be found inside?"
 msgstr "Der hænger to spørgsmål i luften: Hvem skabte denne utrolige store labyrint, og hvad kan findes inden i den?"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:8
+#: ../../data/maps/No_metal_challenge.wmf/elemental:8
 msgid "No metal challenge v2"
 msgstr "Ingen metal udfordring v2"
 
-#: ../../data/maps/No challenge metal v2.wmf/elemental:10
+#: ../../data/maps/No_metal_challenge.wmf/elemental:10
 msgid ""
 "This map is intended as a solo challenge for those very skilled players that"
 " find 1 vs 6 against the AI too easy. Blue player has no metal (except a bit"
@@ -854,17 +854,17 @@ msgid ""
 " no other way but to occupy the land of your enemies."
 msgstr "Endnu en mærkelig test fra guderne. For at nå den anden side, er der ikke nogen anden måde end at besætte dine fjenders land."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:8
+#: ../../data/maps/The_Nile.wmf/elemental:8
 msgid "The Nile"
 msgstr "Nilen"
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:10
+#: ../../data/maps/The_Nile.wmf/elemental:10
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr "Floden har altid sørget for mad og kommunikation. Denne gang vil otte imperier kæmpe om kontrollen over denne ø."
 
-#: ../../data/maps/The_Nile_v2.wmf/elemental:11
+#: ../../data/maps/The_Nile.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
@@ -918,11 +918,11 @@ msgstr "Mægtige bjerge dele dette land i tre frugtbare dale. Men en sti forbind
 msgid "Water can be found around the lakes."
 msgstr "Vand kan findes omkring søerne."
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:8
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
 msgstr "Sammen er vi stærke"
 
-#: ../../data/maps/Together_We're_Strong.wmf/elemental:10
+#: ../../data/maps/Together_We_re_Strong.wmf/elemental:10
 msgid ""
 "The four mighty harbors of the Craw Islands have been trading their goods "
 "among each other for ages. All of them needed resources that they could not "
@@ -947,11 +947,11 @@ msgid ""
 " explore enough resources to compete with its opponents."
 msgstr "I nærheden af tre store vulkaner, inviterer seks dejlige øer bosættere sig til at starte et nyt liv. Ørkener og en hurtigt voksende skov vente på at blive opdaget. Men kun ved at blive en sømagt vil din stamme kunne udnytte nok ressourcer til at konkurrere med dens modstandere."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:8
 msgid "Twin Lagoons"
 msgstr "Tvillinglaguner"
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:10
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
 "twin lagoons, nobody could have expected that two tribes that are "
@@ -960,7 +960,7 @@ msgid ""
 " well-known reason."
 msgstr "Når vinden svulmede op, og de første klitter blev dannet på disse forladte tvillingelaguner, kunne ingen have forventet, at to stammer, der desperat søger efter flere ressourcer til at støtte deres uendelige igangværende krige ville ende i dette glemte sted på samme tid, og af samme velkendte grund."
 
-#: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:11
+#: ../../data/maps/Twin_Lagoons.wmf/elemental:11
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."

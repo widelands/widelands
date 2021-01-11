@@ -28,6 +28,7 @@
 #include <SDL_events.h>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -46,16 +47,24 @@ namespace UI {
 
 std::vector<SDL_Event> ProgressWindow::event_buffer_ = {};
 
-ProgressWindow::ProgressWindow(const std::string& theme, const std::string& background)
-   : UI::Panel(nullptr, PanelStyle::kFsMenu /* unused */, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
+ProgressWindow::ProgressWindow(UI::Panel* parent,
+                               const std::string& theme,
+                               const std::string& background)
+   : UI::Panel(parent,
+               PanelStyle::kFsMenu /* unused */,
+               0,
+               0,
+               parent ? parent->get_inner_w() : g_gr->get_xres(),
+               parent ? parent->get_inner_h() : g_gr->get_yres()),
      label_center_(Vector2i::zero()),
-     theme_(theme),
-     progress_style_(g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu)) {
+     theme_(theme) {
 
-	graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
-	   [this](const GraphicResolutionChanged& message) {
-		   set_size(message.new_width, message.new_height);
-	   });
+	if (!parent) {
+		graphic_resolution_changed_subscriber_ = Notifications::subscribe<GraphicResolutionChanged>(
+		   [this](const GraphicResolutionChanged& message) {
+			   set_size(message.new_width, message.new_height);
+		   });
+	}
 
 	event_buffer_.clear();
 	set_background(background);
@@ -72,6 +81,10 @@ ProgressWindow::~ProgressWindow() {
 	}
 }
 
+inline const UI::ProgressbarStyleInfo& ProgressWindow::progress_style() const {
+	return g_style_manager->progressbar_style(UI::PanelStyle::kFsMenu);
+}
+
 void ProgressWindow::draw(RenderTarget& rt) {
 	{  // Center and downscale background image
 		const Image& bg = *g_image_cache->get(background_);
@@ -85,7 +98,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	label_center_.x = get_w() / 2;
 	label_center_.y = get_h() * kProgressStatusPositionY / 100;
 
-	const uint32_t h = text_height(progress_style_.font());
+	const uint32_t h = text_height(progress_style().font());
 
 	label_rectangle_.x = get_w() / 6;
 	label_rectangle_.w = get_w() * 2 / 3;
@@ -98,17 +111,27 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * kProgressStatusBorderX;
 	border_rect.h += 2 * kProgressStatusBorderY;
 
-	rt.draw_rect(border_rect, progress_style_.font().color());
+	rt.draw_rect(border_rect, progress_style().font().color());
 	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse
 	// the Progressbar class.
-	rt.fill_rect(label_rectangle_, progress_style_.medium_color());
+	rt.fill_rect(label_rectangle_, progress_style().medium_color());
+
+	if (progress_message_) {
+		progress_message_->draw(
+		   rt, Vector2i(label_center_.x, label_center_.y - progress_message_->height() / 2),
+		   UI::Align::kCenter);
+	}
+
+	for (IProgressVisualization* visualization : visualizations_) {
+		visualization->update(true);  // game tips etc
+	}
 }
 
 /// Set a picture to render in the background
 void ProgressWindow::set_background(const std::string& file_name) {
 	if (file_name.empty() || !g_fs->file_exists(file_name)) {
-		std::string dir = std::string(kTemplateDir) + "loadscreens/gameloading/";
-		if (theme_.empty()) {
+		std::string dir = template_dir() + "loadscreens/gameloading/";
+		if (theme_.empty() && g_fs->is_directory(dir)) {
 			// choose random theme
 			const std::set<std::string> dirs = g_fs->list_directory(dir);
 			auto it = dirs.begin();
@@ -117,16 +140,24 @@ void ProgressWindow::set_background(const std::string& file_name) {
 		} else if (g_fs->is_directory(dir + theme_)) {
 			dir += theme_;
 		} else {
-			throw wexception("Invalid ProgressWindow theme '%s'", theme_.c_str());
+			log_warn("Theme '%s' not found, using fallback image", theme_.c_str());
+			background_ = "images/logos/wl-ico-128.png";
+			return do_redraw_now();
 		}
+
 		const std::set<std::string> images = g_fs->list_directory(dir);
-		auto it = images.begin();
-		std::advance(it, std::rand() % images.size());  // NOLINT
-		background_ = *it;
+		if (images.empty()) {
+			log_warn("No backgrounds found for theme '%s', using fallback image", theme_.c_str());
+			background_ = "images/logos/wl-ico-128.png";
+		} else {
+			auto it = images.begin();
+			std::advance(it, std::rand() % images.size());  // NOLINT
+			background_ = *it;
+		}
 	} else {
 		background_ = file_name;
 	}
-	draw(*g_gr->get_render_target());
+	do_redraw_now();
 }
 
 /// Callback function: Buffer keypress events to be replayed after the loading is over.
@@ -148,23 +179,10 @@ void ProgressWindow::step(const std::string& description) {
 	InputCallback input_callback = {nullptr, nullptr, nullptr, ui_key, nullptr, nullptr};
 	WLApplication::get()->handle_input(&input_callback);
 
-	RenderTarget& rt = *g_gr->get_render_target();
-	// always repaint the background first
-	draw(rt);
+	progress_message_ =
+	   UI::g_fh->render(as_richtext_paragraph(description, progress_style().font()));
 
-	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh->render(as_richtext_paragraph(description, progress_style_.font()));
-	UI::center_vertically(rendered_text->height(), &label_center_);
-	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
-
-	update(true);
-}
-
-void ProgressWindow::update(bool const repaint) {
-	for (IProgressVisualization* visualization : visualizations_) {
-		visualization->update(repaint);  //  let visualizations do their work
-	}
-	g_gr->refresh();
+	do_redraw_now();
 }
 
 /// Register additional visualization (tips/hints, animation, etc)

@@ -106,6 +106,9 @@ public:
 		pinned_ = p;
 		update_toolbar_buttons();
 	}
+	Button* get_button_pin() {
+		return button_pin_;
+	}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -142,8 +145,8 @@ protected:
 	}
 
 	const WindowStyle window_style_;
-	const WindowStyleInfo& window_style_info_;
-	const FontStyleInfo& title_style_;
+	const WindowStyleInfo& window_style_info() const;
+	const FontStyleInfo& title_style() const;
 
 private:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note);

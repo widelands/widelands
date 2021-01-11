@@ -23,6 +23,15 @@ jobs:
     - name: Fetching branch info
       run: |
         echo "branch=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        git config --global user.name "The Widelands Code Formatting Bot"
+        export ACTOR_NAME="${GITHUB_REPOSITORY%/*}"
+        if [ "$ACTOR_NAME" == "widelands" ]
+        then
+          export ACTOR_NAME="bunnybot"
+          git config --global user.email "bunnybot@widelands.org"
+        else
+          git config --global user.email "$(git log -1 --format=\"%ae\")"
+        fi
         export PAT="${{ secrets.WIDELANDS_FORMAT_TOKEN }}"
         if [ -z "$PAT" ]
         then
@@ -30,15 +39,14 @@ jobs:
           echo "WARNING: You did not create a personal access token yet. Please do so soon! See https://github.com/widelands/widelands/#code for more information."
         fi
         echo "PAT=$PAT" >> $GITHUB_ENV
-        git config --global user.name "The Widelands Code Formatting Bot"
-        git config --global user.email "$(git log -1 --format=\"%ae\")"
+        echo "ACTOR_NAME=$ACTOR_NAME" >> $GITHUB_ENV
         # copied from https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
         cat <<- EOF > $HOME/.netrc
         machine github.com
-        login $GITHUB_ACTOR
+        login $ACTOR_NAME
         password $PAT
         machine api.github.com
-        login $GITHUB_ACTOR
+        login $ACTOR_NAME
         password $PAT
         EOF
         chmod 600 $HOME/.netrc
@@ -49,8 +57,13 @@ jobs:
     - name: Installing formatting tools
       run: |
         sudo apt-get update
-        sudo apt-get install clang-format
+        sudo apt-get install clang-format-10
         pip install pyformat
+        # Use clang-format 10 as default until we choose to migrate to 11
+        sudo update-alternatives --remove-all clang
+        sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-10 100
+        sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-10 100
+        sudo update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-10 100
     - name: Invoking fix_formatting.py
       run: python3 ./utils/fix_formatting.py
     - name: Gathering changes
@@ -108,7 +121,7 @@ jobs:
         if [ "$latest" == "${{ github.sha }}" ]
         then
           echo "No remote changes"
-          git remote add push_target https://${GITHUB_ACTOR}:$PAT@github.com/${GITHUB_REPOSITORY}.git
+          git remote add push_target https://${ACTOR_NAME}:${PAT}@github.com/${GITHUB_REPOSITORY}.git
           git commit -m "$COMMIT_MESSAGE"
           git push push_target "$branch"
           echo "Changes were successfully pushed to $branch at ${{ github.repository }}. Don't forget to run 'git pull' before pushing to the branch again."

@@ -24,6 +24,7 @@
 
 #include "base/md5.h"
 #include "base/random.h"
+#include "economy/flag_job.h"
 #include "io/streamwrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
@@ -201,6 +202,8 @@ public:
 	void release_training_wheel_lock();
 	void mark_training_wheel_as_solved(const std::string& objective);
 	void skip_training_wheel(const std::string& objective);
+	void run_training_wheel(const std::string& objective, bool force);
+
 	bool training_wheels_wanted() const;
 	std::string active_training_wheel() const;
 
@@ -262,7 +265,7 @@ public:
 	void send_player_build_flag(int32_t, const Coords&);
 	void send_player_build_road(int32_t, Path&);
 	void send_player_build_waterway(int32_t, Path&);
-	void send_player_flagaction(Flag&);
+	void send_player_flagaction(Flag&, FlagJob::Type);
 	void send_player_start_stop_building(Building&);
 	void send_player_militarysite_set_soldier_preference(Building&, SoldierPreference preference);
 	void send_player_start_or_cancel_expedition(Building&);
@@ -278,7 +281,10 @@ public:
 	void send_player_change_training_options(TrainingSite&, TrainingAttribute, int32_t);
 	void send_player_drop_soldier(Building&, int32_t);
 	void send_player_change_soldier_capacity(Building&, int32_t);
-	void send_player_enemyflagaction(const Flag&, PlayerNumber, const std::vector<Serial>&);
+	void send_player_enemyflagaction(const Flag&,
+	                                 PlayerNumber,
+	                                 const std::vector<Serial>&,
+	                                 bool allow_conquer);
 	void send_player_mark_object_for_removal(PlayerNumber, Immovable&, bool);
 
 	void send_player_ship_scouting_direction(const Ship&, WalkingDir);

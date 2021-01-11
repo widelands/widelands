@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: GunChleoc, 2020\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -22,7 +22,7 @@ msgstr ""
 #. TRANSLATORS: Message title for a piece of information
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:32
 msgid "Note"
-msgstr ""
+msgstr "An aire"
 
 #: ../../data/campaigns/fri02.wmf/scripting/init.lua:33
 msgid ""
@@ -297,6 +297,9 @@ msgid ""
 "I began to believe the journey would never end. I have no idea how long we "
 "were at sea, tossed about by envious storms… it must have been months."
 msgstr ""
+"Shaoilinn nach digeadh an triall gu ceann gu bràth tuilleadh. Chan eil sgot "
+"agam dè cho fada ’s a tha sinn air a bhith air a’ mhuir agus na gailleannan "
+"farmadach oirnn… fad iomadh mìos gun teagamh."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130

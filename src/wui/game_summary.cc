@@ -158,15 +158,19 @@ bool GameSummaryScreen::compare_status(const uint32_t index1, const uint32_t ind
 	if (p1.result == p2.result) {
 		// We want to use the time as tie-breaker: The first player to lose sorts last
 		return p1.time > p2.time;
-	} else if (p1.result == Widelands::PlayerEndResult::kWon) {
+	}
+	if (p1.result == Widelands::PlayerEndResult::kWon) {
 		// Winners sort first
 		return true;
-	} else if (p1.result == Widelands::PlayerEndResult::kResigned) {
+	}
+	if (p1.result == Widelands::PlayerEndResult::kResigned) {
 		// Resigned players sort last
 		return false;
-	} else if (p2.result == Widelands::PlayerEndResult::kWon) {
+	}
+	if (p2.result == Widelands::PlayerEndResult::kWon) {
 		return false;
-	} else if (p2.result == Widelands::PlayerEndResult::kResigned) {
+	}
+	if (p2.result == Widelands::PlayerEndResult::kResigned) {
 		return true;
 	}
 
@@ -195,8 +199,8 @@ void GameSummaryScreen::fill_data() {
 		Widelands::Player* p = game_.get_player(pes.player);
 		UI::Table<uintptr_t const>::EntryRecord& te = players_table_->add(i);
 		// Player name & pic
-		const Image* player_image =
-		   playercolor_image(pes.player - 1, "images/players/genstats_player.png");
+		const Image* player_image = playercolor_image(
+		   game_.player(pes.player).get_playercolor(), "images/players/genstats_player.png");
 		assert(player_image);
 		te.set_picture(0, player_image, p->get_name());
 		// Team

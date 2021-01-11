@@ -41,7 +41,6 @@
 #include "base/log.h"
 #include "base/random.h"
 #include "base/time_string.h"
-#include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "config.h"
@@ -51,11 +50,12 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/mouse_cursor.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_layout.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/addons.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -74,16 +74,11 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/about.h"
-#include "ui_fsmenu/campaign_select.h"
-#include "ui_fsmenu/campaigns.h"
-#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/launch_spg.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
-#include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
-#include "ui_fsmenu/scenario_select.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -280,6 +275,8 @@ void WLApplication::setup_homedir() {
 #else
 	set_config_directory(homedir_);
 #endif
+
+	i18n::set_homedir(homedir_);
 }
 
 WLApplication* WLApplication::the_singleton = nullptr;
@@ -404,6 +401,45 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sh->register_songs("music", "menu");
 	g_sh->register_songs("music", "ingame");
 
+	if (g_fs->is_directory(kAddOnDir)) {
+		std::set<std::string> found;
+		for (std::string desired_addons = get_config_string("addons", ""); !desired_addons.empty();) {
+			const size_t commapos = desired_addons.find(',');
+			const std::string substring = desired_addons.substr(0, commapos);
+			const size_t colonpos = desired_addons.find(':');
+			if (colonpos == std::string::npos) {
+				log_warn("Ignoring malformed add-ons config substring '%s'\n", substring.c_str());
+			} else {
+				const std::string name = substring.substr(0, colonpos);
+				if (name.find(kAddOnExtension) != name.length() - kAddOnExtension.length()) {
+					log_warn("Not loading add-on '%s' (wrong file name extension)\n", name.c_str());
+				} else {
+					std::string path(kAddOnDir);
+					path += FileSystem::file_separator();
+					path += name;
+					if (g_fs->file_exists(path)) {
+						found.insert(name);
+						AddOns::g_addons.push_back(std::make_pair(
+						   AddOns::preload_addon(name), substring.substr(colonpos) == ":true"));
+					} else {
+						log_warn("Not loading add-on '%s' (not found)\n", name.c_str());
+					}
+				}
+			}
+			if (commapos == std::string::npos) {
+				break;
+			}
+			desired_addons = desired_addons.substr(commapos + 1);
+		}
+		for (const std::string& name : g_fs->list_directory(kAddOnDir)) {
+			std::string addon_name(FileSystem::fs_filename(name.c_str()));
+			if (!found.count(addon_name) &&
+			    addon_name.find(kAddOnExtension) == addon_name.length() - kAddOnExtension.length()) {
+				AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(addon_name), false));
+			}
+		}
+	}
+
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to
 	// register it once.
@@ -413,6 +449,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	// seed random number generator used for random tribe selection
 	std::srand(time(nullptr));
+
+	set_template_dir(get_config_string("theme", ""));
 
 	// Make sure we didn't forget to read any global option
 	check_config_used();
@@ -468,19 +506,46 @@ void WLApplication::run() {
 			EditorInteractive::run_editor(
 			   EditorInteractive::Init::kLoadMapDirectly, filename_, script_to_run_);
 		}
-	} else if (game_type_ == GameType::kReplay) {
-		replay(nullptr);
-	} else if (game_type_ == GameType::kLoadGame) {
+	} else if (game_type_ == GameType::kReplay || game_type_ == GameType::kLoadGame) {
 		Widelands::Game game;
-		game.set_ai_training_mode(get_config_bool("ai_training", false));
+		std::string title, message;
 		try {
-			game.run_load_game(filename_, script_to_run_);
+			if (game_type_ == GameType::kReplay) {
+				std::string map_theme, map_bg;
+				game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
+				game.set_ibase(new InteractiveSpectator(game, get_config_section()));
+				game.set_write_replay(false);
+				ReplayGameController rgc(game, filename_);
+				game.save_handler().set_allow_saving(false);
+				game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
+			} else {
+				game.set_ai_training_mode(get_config_bool("ai_training", false));
+				game.run_load_game(filename_, script_to_run_);
+			}
 		} catch (const Widelands::GameDataError& e) {
-			log_err("Game not loaded: Game data error: %s\n", e.what());
+			message = (boost::format(_("Widelands could not load the file \"%s\". The file format "
+			                           "seems to be incompatible.")) %
+			           filename_.c_str())
+			             .str();
+			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
+			title = _("Game data error");
+		} catch (const FileNotFoundError& e) {
+			message =
+			   (boost::format(_("Widelands could not find the file \"%s\".")) % filename_.c_str())
+			      .str();
+			message = message + "\n\n" + _("Error message:") + "\n" + e.what();
+			title = _("File system error");
 		} catch (const std::exception& e) {
-			log_err("Fatal exception: %s\n", e.what());
-			emergency_save(game);
-			throw;
+			emergency_save(nullptr, game, e.what());
+			message = e.what();
+			title = _("Error message:");
+		}
+		if (!message.empty()) {
+			g_sh->change_music("menu");
+			FsMenu::MainMenu m(true);
+			m.show_messagebox(title, message);
+			log_err("%s\n", message.c_str());
+			m.run<int>();
 		}
 	} else if (game_type_ == GameType::kScenario) {
 		Widelands::Game game;
@@ -490,14 +555,15 @@ void WLApplication::run() {
 			log_err("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception& e) {
 			log_err("Fatal exception: %s\n", e.what());
-			emergency_save(game);
-			throw;
+			emergency_save(nullptr, game, e.what());
 		}
 	} else {
 		g_sh->change_music("intro");
 
 		g_sh->change_music("menu", 1000);
-		mainmenu();
+
+		FsMenu::MainMenu m;
+		m.run<int>();
 	}
 
 	g_sh->stop_music(500);
@@ -822,6 +888,7 @@ bool WLApplication::init_settings() {
 	get_config_bool("animate_map_panning", false);
 	get_config_bool("write_syncstreams", false);
 	get_config_bool("nozip", false);
+	get_config_string("theme", "");
 	get_config_int("xres", 0);
 	get_config_int("yres", 0);
 	get_config_int("border_snap_distance", 0);
@@ -836,7 +903,10 @@ bool WLApplication::init_settings() {
 	get_config_bool("single_watchwin", false);
 	get_config_bool("ctrl_zoom", false);
 	get_config_bool("game_clock", true);
+	get_config_int("toolbar_pos", 0);
 	get_config_bool("numpad_diagonalscrolling", false);
+	get_config_bool("edge_scrolling", false);
+	get_config_bool("tooltip_accessibility_mode", false);
 	get_config_bool("training_wheels", true);
 	get_config_bool("inputgrab", false);
 	get_config_bool("transparent_chat", false);
@@ -862,6 +932,7 @@ bool WLApplication::init_settings() {
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	get_config_bool("display_replay_filenames", false);
 	get_config_bool("editor_player_menu_warn_too_many_players", false);
+	get_config_string("addons", "");
 	// Undocumented, on command line, appears in game options
 	get_config_bool("sound", "enable_ambient", true);
 	get_config_bool("sound", "enable_chat", true);
@@ -918,7 +989,7 @@ void WLApplication::init_language() {
 
 	// Initialize locale and grab "widelands" textdomain
 	i18n::init_locale();
-	i18n::grab_textdomain("widelands");
+	i18n::grab_textdomain("widelands", i18n::get_localedir().c_str());
 
 	// Set locale corresponding to selected language
 	std::string language = get_config_string("language", "");
@@ -980,6 +1051,18 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
 
 		// Are we looking at an option at all?
 		if (opt.compare(0, 2, "--")) {
+			if (argc == 2) {
+				// Special case of opening a savegame or replay from file browser
+				if (0 == opt.compare(opt.size() - kSavegameExtension.size(), kSavegameExtension.size(),
+				                     kSavegameExtension)) {
+					commandline_["loadgame"] = opt;
+					continue;
+				} else if (0 == opt.compare(opt.size() - kReplayExtension.size(),
+				                            kReplayExtension.size(), kReplayExtension)) {
+					commandline_["replay"] = opt;
+					continue;
+				}
+			}
 			throw ParameterError();
 		} else {
 			opt.erase(0, 2);  //  yes. remove the leading "--", just for cosmetics
@@ -1030,19 +1113,22 @@ void WLApplication::handle_commandline_parameters() {
 		datadir_ = commandline_["datadir"];
 		commandline_.erase("datadir");
 	} else {
-		datadir_ = is_absolute_path(INSTALL_DATADIR) ?
-		              INSTALL_DATADIR :
-		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
+		if (is_absolute_path(INSTALL_DATADIR)) {
+			// Absolute install dir has precedence
+			datadir_ = INSTALL_DATADIR;
+		} else {
+			datadir_ = get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 #ifdef USE_XDG
-		// Overwrite with first folder found in XDG_DATA_DIRS
-		for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
-			RealFSImpl dir(datadir);
-			if (dir.is_directory(datadir + "/widelands")) {
-				datadir_ = datadir + "/widelands";
-				break;
+			// Overwrite relative dir with first folder found in XDG_DATA_DIRS
+			for (const auto& datadir : FileSystem::get_xdgdatadirs()) {
+				RealFSImpl dir(datadir);
+				if (dir.is_directory(datadir + "/widelands")) {
+					datadir_ = datadir + "/widelands";
+					break;
+				}
 			}
-		}
 #endif
+		}
 	}
 	if (!is_absolute_path(datadir_)) {
 		try {
@@ -1161,498 +1247,81 @@ void WLApplication::handle_commandline_parameters() {
 }
 
 /**
- * Run the main menu
+ * Try to save the game instance if possible
  */
-void WLApplication::mainmenu() {
-	std::string messagetitle;
-	std::string message;
-
-	std::unique_ptr<FullscreenMenuMain> mm(new FullscreenMenuMain(true));
-
-	for (;;) {
-		if (!message.empty()) {
-			log_err("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
-
-			UI::WLMessageBox mmb(mm.get(), UI::WindowStyle::kFsMenu, messagetitle,
-			                     richtext_escape(message), UI::WLMessageBox::MBoxType::kOk,
-			                     UI::Align::kLeft);
-			mmb.run<UI::Panel::Returncodes>();
-
-			message.clear();
-			messagetitle.clear();
-		}
-
-		bool need_to_reset = false;
-
-		try {
-			switch (mm->run<MenuTarget>()) {
-			case MenuTarget::kTutorial:
-				need_to_reset = mainmenu_tutorial(*mm);
-				break;
-			case MenuTarget::kNewGame: {
-				need_to_reset = true;
-				Widelands::Game game;
-				SinglePlayerGameSettingsProvider sp;
-				new_game(*mm, game, sp, false);
-				break;
-			}
-			case MenuTarget::kLoadGame:
-				need_to_reset = true;
-				load_game(*mm);
-				break;
-			case MenuTarget::kCampaign:
-				need_to_reset = campaign_game(*mm);
-				break;
-			case MenuTarget::kMetaserver:
-				mainmenu_multiplayer(*mm, true);
-				// TODO(Nordfriese): Currently there's no way to tell whether
-				// a game was actually started from mainmenu_multiplayer()
-				need_to_reset = true;
-				break;
-			case MenuTarget::kLan:
-				mainmenu_multiplayer(*mm, false);
-				need_to_reset = true;
-				break;
-			case MenuTarget::kOnlineGameSettings:
-				mm->show_internet_login();
-				break;
-			case MenuTarget::kReplay:
-				need_to_reset = replay(mm.get());
-				break;
-			case MenuTarget::kOptions: {
-				OptionsCtrl om(*mm, get_config_section());
-				mm->set_labels();  // update buttons for new language
-				break;
-			}
-			case MenuTarget::kAbout: {
-				FullscreenMenuAbout ff(*mm);
-				ff.run<MenuTarget>();
-				break;
-			}
-			case MenuTarget::kContinueLastsave: {
-				const std::string& file = mm->get_filename_for_continue_playing();
-				if (!file.empty()) {
-					need_to_reset = load_game(*mm, file);
-				}
-				break;
-			}
-			case MenuTarget::kEditorNew:
-				need_to_reset = true;
-				EditorInteractive::run_editor(EditorInteractive::Init::kNew);
-				break;
-			case MenuTarget::kEditorRandom:
-				need_to_reset = true;
-				EditorInteractive::run_editor(EditorInteractive::Init::kRandom);
-				break;
-			case MenuTarget::kEditorLoad:
-				need_to_reset = true;
-				EditorInteractive::run_editor(EditorInteractive::Init::kLoad);
-				break;
-			case MenuTarget::kEditorContinue: {
-				const std::string& file = mm->get_filename_for_continue_editing();
-				if (!file.empty()) {
-					need_to_reset = true;
-					EditorInteractive::run_editor(EditorInteractive::Init::kLoadMapDirectly, file);
-				}
-				break;
-			}
-			case MenuTarget::kRandomGame:
-				need_to_reset = new_random_game(*mm);
-				break;
-			case MenuTarget::kExit:
-			default:
-				return;
-			}
-		} catch (const WLWarning& e) {
-			need_to_reset = true;
-			messagetitle = (boost::format("Warning: %s") % e.title()).str();
-			message = e.what();
-		} catch (const Widelands::GameDataError& e) {
-			need_to_reset = true;
-			messagetitle = _("Game data error");
-			message = e.what();
-		}
-#ifdef NDEBUG
-		catch (const std::exception& e) {
-			need_to_reset = true;
-			messagetitle = "Unexpected error during the game";
-			message = e.what();
-			message += "\n\n";
-			message += (boost::format(_("Please report this problem to help us improve Widelands. "
-			                            "You will find related messages in the standard output "
-			                            "(stdout.txt on Windows). You are using build %1$s (%2$s).")) %
-			            build_id().c_str() % build_type().c_str())
-			              .str();
-
-			message = (boost::format("%s\n\n%s") % message %
-			           _("Please add this information to your report.\n\n"
-			             "Widelands attempts to create a savegame when errors occur "
-			             "during the game. It is often – though not always – possible "
-			             "to load it and continue playing."))
-			             .str();
-		}
-#endif
-		if (need_to_reset) {
-			mm.reset(new FullscreenMenuMain(false));
-		}
-	}
-}
-
-/**
- * Handle the "Play Tutorial" menu option:
- * Show tutorial UI, let player select tutorial and run it.
- */
-bool WLApplication::mainmenu_tutorial(FullscreenMenuMain& fsmm) {
-	Widelands::Game game;
-	//  Start UI for the tutorials.
-	FullscreenMenuScenarioSelect select_campaignmap(fsmm);
-	if (select_campaignmap.run<MenuTarget>() != MenuTarget::kOk) {
-		return false;
-	}
-	try {
-		// Load selected tutorial-map-file
-		game.run_splayer_scenario_direct(select_campaignmap.get_map(), "");
-	} catch (const std::exception& e) {
-		log_err("Fatal exception: %s\n", e.what());
-		emergency_save(game);
-		throw;
-	}
-	return true;
-}
-
-/**
- * Run the multiplayer menu
- */
-// TODO(Nordfriese): This should return a `bool` to indicate whether a game was started
-void WLApplication::mainmenu_multiplayer(FullscreenMenuMain& fsmm, const bool internet) {
-	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
-	if (tribeinfos.empty()) {
-		UI::WLMessageBox mbox(
-		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
-		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
+void WLApplication::emergency_save(UI::Panel* panel,
+                                   Widelands::Game& game,
+                                   const std::string& error,
+                                   const uint8_t playernumber,
+                                   const bool replace_ctrl) {
+	log_err("##############################\n"
+	        "  FATAL EXCEPTION: %s\n"
+	        "##############################\n"
+	        "  Please report this problem to help us improve Widelands.\n"
+	        "  You will find related messages in the standard output (stdout.txt on Windows).\n"
+	        "  You are using build %s (%s).\n"
+	        "  Please add this information to your report.\n"
+	        "  If desired, Widelands attempts to create an emergency savegame.\n"
+	        "  It is often – though not always – possible to load it and continue playing.\n"
+	        "##############################",
+	        error.c_str(), build_id().c_str(), build_type().c_str());
+	if (!game.is_loaded()) {
+		UI::WLMessageBox m(
+		   panel, UI::WindowStyle::kFsMenu, _("Error"),
+		   (boost::format(
+		       _("An error has occured. The error message is:\n\n%1$s\n\nPlease report "
+		         "this problem to help us improve Widelands. You will find related messages in the "
+		         "standard output (stdout.txt on Windows). You are using build %2$s "
+		         "(%3$s).\nPlease add this information to your report.")) %
+		    error % build_id() % build_type())
+		      .str(),
 		   UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
+		m.run<UI::Panel::Returncodes>();
 		return;
 	}
 
-	g_sh->change_music("ingame", 1000);
-
-	if (internet) {
-		fsmm.internet_login();
-
-		std::string playername = fsmm.get_nickname();
-		std::string password(fsmm.get_password());
-		bool registered = fsmm.registered();
-
-		get_config_string("nickname", playername);
-		// Only change the password if we use a registered account
-		if (registered) {
-			get_config_string("password_sha1", password);
-		}
-
-		// reinitalise in every run, else graphics look strange
-		FullscreenMenuInternetLobby ns(fsmm, playername, password, registered, tribeinfos);
-		ns.run<MenuTarget>();
-
-		if (InternetGaming::ref().logged_in()) {
-			// logout of the metaserver
-			InternetGaming::ref().logout();
-		} else {
-			// Reset InternetGaming for clean login
-			InternetGaming::ref().reset();
-		}
-	} else {
-		// reinitalise in every run, else graphics look strange
-		FullscreenMenuNetSetupLAN ns(fsmm);
-		const MenuTarget menu_result = ns.run<MenuTarget>();
-		std::string playername = ns.get_playername();
-
-		switch (menu_result) {
-		case MenuTarget::kHostgame: {
-			GameHost netgame(fsmm, playername, tribeinfos);
-			netgame.run();
-			break;
-		}
-		case MenuTarget::kJoingame: {
-			NetAddress addr;
-			if (!ns.get_host_address(&addr)) {
-				UI::WLMessageBox mmb(
-				   &ns, UI::WindowStyle::kFsMenu, _("Invalid Address"),
-				   _("The entered hostname or address is invalid and can’t be connected to."),
-				   UI::WLMessageBox::MBoxType::kOk);
-				mmb.run<UI::Panel::Returncodes>();
-				break;
-			}
-
-			GameClient netgame(fsmm, std::make_pair(addr, NetAddress()), playername);
-			netgame.run();
-			break;
-		}
-		default:
-			break;
-		}
-	}
-
-	g_sh->change_music("menu", 1000);
-}
-
-bool WLApplication::new_random_game(FullscreenMenuMain& fsmm) {
-	Widelands::Game game;
-	SinglePlayerGameSettingsProvider sp;
-	UI::UniqueWindow::Registry r;
-
-	game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
-	EditorInteractive::load_world_units(nullptr, game);
-
-	MainMenuNewRandomMap m(fsmm, UI::WindowStyle::kFsMenu, r, 64, 64);
-	bool need_new_loader = false;
-	for (;;) {
+	if (panel) {
+		UI::WLMessageBox m(
+		   panel, UI::WindowStyle::kFsMenu, _("Unexpected error during the game"),
+		   (boost::format(
+		       _("An error occured during the game. The error message is:\n\n%1$s\n\nPlease report "
+		         "this problem to help us improve Widelands. You will find related messages in the "
+		         "standard output (stdout.txt on Windows). You are using build %2$s "
+		         "(%3$s).\n\nPlease add this information to your report.\n\nWould you like Widelands "
+		         "to attempt to create an emergency savegame? It is often – though not always – "
+		         "possible to load it and continue playing.")) %
+		    error % build_id() % build_type())
+		      .str(),
+		   UI::WLMessageBox::MBoxType::kOkCancel);
 		if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-			// user pressed Cancel
-			return false;
-		}
-		if (need_new_loader) {
-			game.create_loader_ui({"general_game", "singleplayer"}, false, "", "");
-			need_new_loader = false;
-		}
-		if (m.do_generate_map(game, nullptr, &sp)) {
-			game.remove_loader_ui();
-			bool canceled = false;
-			const bool result = new_game(fsmm, game, sp, true, &canceled);
-			if (result || !canceled) {
-				return true;
-			}
-			// User pressed Back – show the random map dialog again
-			need_new_loader = true;
-		} else {
-			// no starting positions found
-			UI::WLMessageBox mbox(
-			   &fsmm, UI::WindowStyle::kFsMenu, _("Map Generation Error"),
-			   _("The random map generator was unable to generate a suitable map. "
-			     "This happens occasionally because the generator is still in beta stage. "
-			     "Please try again with slightly different settings."),
-			   UI::WLMessageBox::MBoxType::kOkCancel);
-			if (mbox.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
-				return false;
-			}
+			return;
 		}
 	}
 
-	NEVER_HERE();
-}
-
-/**
- * Handle the "New game" menu option: Configure a single player game and
- * run it.
- *
- * \return @c true if a game was played, @c false if the player pressed Back
- * or aborted the game setup via some other means.
- */
-bool WLApplication::new_game(FullscreenMenuMain& fsmm,
-                             Widelands::Game& game,
-                             SinglePlayerGameSettingsProvider& sp,
-                             const bool preconfigured,
-                             bool* canceled) {
-	MenuTarget code = MenuTarget::kNormalGame;
-	if (sp.settings().tribes.empty()) {
-		UI::WLMessageBox mbox(
-		   &fsmm, UI::WindowStyle::kWui, _("No tribes found!"),
-		   _("No tribes found in data/tribes/initialization/[tribename]/init.lua."),
-		   UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
-		return false;
-	}
-	FullscreenMenuLaunchSPG lgm(fsmm, &sp, game, preconfigured);
-	code = lgm.run<MenuTarget>();
-	if (code == MenuTarget::kBack) {
-		if (canceled) {
-			*canceled = true;
-		}
-		return false;
-	}
-
-	const std::string map_theme = lgm.settings().settings().map_theme;
-	const std::string map_bg = lgm.settings().settings().map_background;
-
-	game.set_ai_training_mode(get_config_bool("ai_training", false));
-
-	if (code == MenuTarget::kScenarioGame) {  // scenario
-		try {
-			game.run_splayer_scenario_direct(sp.get_map(), "");
-		} catch (const std::exception& e) {
-			log_err("Fatal exception: %s\n", e.what());
-			emergency_save(game);
-			throw;
-		}
-	} else {  // normal singleplayer
-		uint8_t const pn = sp.settings().playernum + 1;
-		try {
-			// Game controller needs the ibase pointer to init
-			// the chat
-			game.set_ibase(new InteractivePlayer(game, get_config_section(), pn, false));
-			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
-
-			std::vector<std::string> tipstexts{"general_game", "singleplayer"};
-			if (sp.has_players_tribe()) {
-				tipstexts.push_back(sp.get_players_tribe());
-			}
-			game.create_loader_ui(tipstexts, false, map_theme, map_bg);
-
-			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
-
+	try {
+		std::unique_ptr<GameController> ctrl(
+		   new SinglePlayerGameController(game, true, playernumber));
+		if (replace_ctrl) {
 			game.set_game_controller(ctrl.get());
-			game.init_newgame(sp.settings());
-			game.run(Widelands::Game::StartGameType::kMap, "", false, "single_player");
-		} catch (const std::exception& e) {
-			log_err("Fatal exception: %s\n", e.what());
-			std::unique_ptr<GameController> ctrl(new SinglePlayerGameController(game, true, pn));
-			game.set_game_controller(ctrl.get());
-			emergency_save(game);
-			throw;
 		}
-	}
-	return true;
-}
 
-/**
- * Handle the "Load game" menu option:
- * Configure a single player game, care about player position and run it.
- *
- * \return @c true if a game was loaded, @c false if the player pressed Back
- * or aborted the game setup via some other means.
- */
-bool WLApplication::load_game(FullscreenMenuMain& fsmm, std::string filename) {
-	Widelands::Game game;
-
-	game.set_ai_training_mode(get_config_bool("ai_training", false));
-	SinglePlayerGameSettingsProvider sp;
-
-	if (filename.empty()) {
-		FullscreenMenuLoadGame ssg(fsmm, game, &sp);
-		if (ssg.run<MenuTarget>() == MenuTarget::kOk) {
-			filename = ssg.filename();
-		} else {
-			return false;
-		}
-	}
-
-	try {
-		if (game.run_load_game(filename, "")) {
-			return true;
+		SaveHandler& save_handler = game.save_handler();
+		std::string e;
+		if (!save_handler.save_game(
+		       game, save_handler.create_file_name(kSaveDir, timestring()), &e)) {
+			throw wexception("Save handler returned error: %s", e.c_str());
 		}
 	} catch (const std::exception& e) {
-		log_err("Fatal exception: %s\n", e.what());
-		emergency_save(game);
-		throw;
-	}
-	return false;  // keep compiler silent.
-}
-
-/**
- * Handle the "Campaign" menu option:
- * Show campaign UI, let player select scenario and run it.
- *
- * \return @c true if a scenario was played, @c false if the player pressed Back
- * or aborted the game setup via some other means.
- */
-bool WLApplication::campaign_game(FullscreenMenuMain& fsmm) {
-	Widelands::Game game;
-	std::string filename;
-	for (;;) {  // Campaign UI - Loop
-		std::unique_ptr<Campaigns> campaign_visibility(new Campaigns());
-
-		size_t campaign_index;
-		{  //  First start UI for selecting the campaign.
-			FullscreenMenuCampaignSelect select_campaign(fsmm, campaign_visibility.get());
-			if (select_campaign.run<MenuTarget>() == MenuTarget::kOk) {
-				campaign_index = select_campaign.get_campaign_index();
-			} else {  //  back was pressed
-				filename = "";
-				break;
-			}
-		}
-		//  Then start UI for the selected campaign.
-		CampaignData* campaign_data = campaign_visibility->get_campaign(campaign_index);
-		FullscreenMenuScenarioSelect select_campaignmap(fsmm, campaign_data);
-		if (select_campaignmap.run<MenuTarget>() == MenuTarget::kOk) {
-			filename = select_campaignmap.get_map();
-			game.set_scenario_difficulty(select_campaignmap.get_difficulty());
-			break;
-		}
-		// TODO(Nordfriese): There is no way to distinguish whether the user pressed
-		// Back or clicked the Close button. In both cases, `MenuTarget::kBack` is
-		// returned. We want to restart the FullscreenMenuCampaignSelect if the user
-		// pressed Back but not if he used the close button.
-	}
-	try {
-		// Load selected campaign-map-file
-		if (!filename.empty()) {
-			return game.run_splayer_scenario_direct(filename, "");
-		}
-	} catch (const std::exception& e) {
-		log_err("Fatal exception: %s\n", e.what());
-		emergency_save(game);
-		throw;
-	}
-	return false;
-}
-
-/**
- * Show the replay menu and play a replay.
- */
-bool WLApplication::replay(FullscreenMenuMain* fsmm) {
-	Widelands::Game game;
-
-	std::string map_theme, map_bg;
-	if (filename_.empty()) {
-		assert(fsmm);
-		SinglePlayerGameSettingsProvider sp;
-		FullscreenMenuLoadGame rm(*fsmm, game, &sp, true);
-		if (rm.run<MenuTarget>() == MenuTarget::kBack) {
-			return false;
-		}
-
-		filename_ = rm.filename();
-		map_theme = sp.settings().map_theme;
-		map_bg = sp.settings().map_background;
-	}
-
-	try {
-		game.create_loader_ui({"general_game"}, true, map_theme, map_bg);
-
-		game.set_ibase(new InteractiveSpectator(game, get_config_section()));
-		game.set_write_replay(false);
-		ReplayGameController rgc(game, filename_);
-
-		game.save_handler().set_allow_saving(false);
-
-		game.run(Widelands::Game::StartGameType::kSaveGame, "", true, "replay");
-	} catch (const std::exception& e) {
-		log_err("Fatal Exception: %s\n", e.what());
-		emergency_save(game);
-		filename_.clear();
-		throw;
-	}
-	filename_.clear();
-	return true;
-}
-
-/**
- * Try to save the game instance if possible
- */
-void WLApplication::emergency_save(Widelands::Game& game) {
-	log_err("FATAL ERROR - game crashed. Attempting emergency save.\n");
-	if (game.is_loaded()) {
-		try {
-			SaveHandler& save_handler = game.save_handler();
-			std::string error;
-			if (!save_handler.save_game(
-			       game, save_handler.create_file_name(kSaveDir, timestring()), &error)) {
-				log_err("Emergency save failed: %s\n", error.c_str());
-			}
-		} catch (...) {
-			log_err("Emergency save failed");
-			throw;
+		log_err("Emergency save failed because: %s", e.what());
+		if (panel) {
+			UI::WLMessageBox m(
+			   panel, UI::WindowStyle::kFsMenu, _("Emergency save failed"),
+			   (boost::format(_("We are sorry, but Widelands was unable to create an emergency "
+			                    "savegame for the following reason:\n\n%s")) %
+			    e.what())
+			      .str(),
+			   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
 		}
 	}
 }

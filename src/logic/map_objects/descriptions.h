@@ -24,6 +24,7 @@
 
 #include "base/macros.h"
 #include "io/filesystem/filesystem.h"
+#include "logic/addons.h"
 #include "logic/map_objects/description_maintainer.h"
 #include "logic/map_objects/description_manager.h"
 #include "logic/map_objects/map_object_type.h"
@@ -46,12 +47,13 @@ class WorkerDescr;
 
 class Descriptions {
 public:
-	Descriptions(LuaInterface* lua);
+	explicit Descriptions(LuaInterface* lua, const std::vector<AddOns::AddOnInfo>&);
 	~Descriptions();
 
 	const DescriptionMaintainer<CritterDescr>& critters() const;
 	const DescriptionMaintainer<TerrainDescription>& terrains() const;
 	const DescriptionMaintainer<ImmovableDescr>& immovables() const;
+	const DescriptionMaintainer<WorkerDescr>& workers() const;
 
 	size_t nr_buildings() const;
 	size_t nr_critters() const;
@@ -117,6 +119,7 @@ public:
 	const ImmovableDescr* get_immovable_descr(DescriptionIndex index) const;
 	ImmovableDescr* get_mutable_immovable_descr(DescriptionIndex index) const;
 	const ResourceDescription* get_resource_descr(DescriptionIndex index) const;
+	ResourceDescription* get_mutable_resource_descr(DescriptionIndex index) const;
 	const ShipDescr* get_ship_descr(DescriptionIndex index) const;
 	const TerrainDescription* get_terrain_descr(DescriptionIndex index) const;
 	const TerrainDescription* get_terrain_descr(const std::string& name) const;
@@ -125,6 +128,7 @@ public:
 	const WorkerDescr* get_worker_descr(DescriptionIndex index) const;
 	WorkerDescr* get_mutable_worker_descr(DescriptionIndex index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex index) const;
+	TribeDescr* get_mutable_tribe_descr(DescriptionIndex index) const;
 
 	// ************************ Loading *************************
 
@@ -199,6 +203,10 @@ private:
 	/// Custom scenario tribes
 	std::unique_ptr<LuaTable> scenario_tribes_;
 	bool tribes_have_been_registered_;
+
+	std::unique_ptr<Notifications::Subscriber<DescriptionManager::NoteMapObjectDescriptionTypeCheck>>
+	   subscriber_;
+	void check(const DescriptionManager::NoteMapObjectDescriptionTypeCheck&) const;
 
 	LuaInterface* lua_;  // Not owned
 	std::unique_ptr<DescriptionManager> description_manager_;

@@ -39,7 +39,8 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Widelands::Descriptions& d
 		if (value < 1) {
 			throw GameDataError("Ware count needs to be > 0.\nEmpty buildcost "
 			                    "tables are allowed if you wish to have an amount of 0.");
-		} else if (value > 255) {
+		}
+		if (value > 255) {
 			throw GameDataError("Ware count needs to be <= 255.");
 		}
 

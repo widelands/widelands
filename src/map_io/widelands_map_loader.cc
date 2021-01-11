@@ -72,15 +72,51 @@ WidelandsMapLoader::~WidelandsMapLoader() {  // NOLINT
  * Preloads a map so that the map class returns valid data for all it's
  * get_info() functions (width, nrplayers..)
  */
-int32_t WidelandsMapLoader::preload_map(bool const scenario) {
+int32_t WidelandsMapLoader::preload_map(bool const scenario,
+                                        std::vector<AddOns::AddOnInfo>* addons) {
 	assert(get_state() != State::kLoaded);
 
 	map_.cleanup();
 
 	{
-		MapElementalPacket mp;
-		mp.pre_read(*fs_, &map_);
-		old_world_name_ = mp.old_world_name();
+		MapElementalPacket elemental_data_packet;
+		elemental_data_packet.pre_read(*fs_, &map_);
+		old_world_name_ = elemental_data_packet.old_world_name();
+
+		if (addons) {
+			// first, clear all world add-ons…
+			for (auto it = addons->begin(); it != addons->end();) {
+				if (it->category == AddOns::AddOnCategory::kWorld) {
+					it = addons->erase(it);
+				} else {
+					++it;
+				}
+			}
+			// …and now enable the ones we want
+			for (const auto& requirement : map_.required_addons()) {
+				bool found = false;
+				for (auto& pair : AddOns::g_addons) {
+					if (pair.first.internal_name == requirement.first) {
+						found = true;
+						if (pair.first.version != requirement.second) {
+							log_warn("Map requires add-on '%s' at version %s but version %s is installed. "
+							         "They might be compatible, but this is not necessarily the case.\n",
+							         requirement.first.c_str(),
+							         AddOns::version_to_string(requirement.second).c_str(),
+							         AddOns::version_to_string(pair.first.version).c_str());
+						}
+						assert(pair.first.category == AddOns::AddOnCategory::kWorld);
+						addons->push_back(pair.first);
+						break;
+					}
+				}
+				if (!found) {
+					throw GameDataError("Add-on '%s' (version %s) required but not installed",
+					                    requirement.first.c_str(),
+					                    AddOns::version_to_string(requirement.second).c_str());
+				}
+			}
+		}
 	}
 	{
 		MapVersionPacket version_packet;
@@ -106,8 +142,13 @@ int32_t WidelandsMapLoader::preload_map(bool const scenario) {
 	return 0;
 }
 
-int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase) {
-	preload_map(false);
+int32_t WidelandsMapLoader::load_map_for_render(EditorGameBase& egbase,
+                                                std::vector<AddOns::AddOnInfo>* a) {
+	preload_map(false, a);
+
+	// Ensure add-ons are handled correctly
+	egbase.delete_world_and_tribes();
+	egbase.descriptions();
 
 	std::string timer_message = "WidelandsMapLoader::load_map_for_render() for '";
 	timer_message += map_.get_name();
@@ -146,13 +187,13 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 	const bool is_game = load_type == MapLoader::LoadType::kGame;
 	const bool is_editor = load_type == MapLoader::LoadType::kEditor;
 
-	preload_map(!is_game);
+	preload_map(!is_game, nullptr /* add-ons have been loaded previously by the caller */);
 	map_.set_size(map_.width_, map_.height_);
 	mol_.reset(new MapObjectLoader());
 
 	// MANDATORY PACKETS
 	// PRELOAD DATA BEGIN
-	auto set_progress_message = [is_editor](std::string text, unsigned step) {
+	auto set_progress_message = [is_editor](const std::string& text, unsigned step) {
 		Notifications::publish(UI::NoteLoadingMessage(
 		   (boost::format(_("Loading map: %1$s (%2$u/%3$d)")) % text % step % (is_editor ? 9 : 23))
 		      .str()));

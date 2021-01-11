@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
-"PO-Revision-Date: 2020-10-23 07:56+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-11-11 14:49+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,7 @@ msgstr " --nosound                 Tòisichidh seo an geama leis an fhuaim à co
 #: ../../src/wlapplication_messages.cc:94
 msgid ""
 " --fail-on-lua-error  Force Widelands to crash when a Lua error occurs."
-msgstr ""
+msgstr " --fail-on-lua-error       Spàrr tuisleadh air Widelands nuair a thachras mearachd Lua."
 
 #: ../../src/wlapplication_messages.cc:96
 msgid " --nozip              Do not save files as binary zip archives."

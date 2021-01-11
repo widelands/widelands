@@ -5,13 +5,14 @@
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
+# Ondřej Itřech, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-12-21 21:25+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +46,7 @@ msgstr "Domek dřevorubce"
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
-msgstr "Postav domek dřevorubce na symbolu červeného domku, jižně od tvé provizorní hlavní budovy."
+msgstr "Postav domek dřevorubce na symbolu červeného domku jižně od tvé provizorní hlavní budovy."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "Build 2 lumberjack’s houses and a sawmill"
@@ -85,11 +86,11 @@ msgstr "Lom"
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:64
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr "Postav lom na jihu aby si mohl natěžil nějakou tu žulu a mramor ze skal."
+msgstr "Postav na jihu lom, aby ze skal těžil mramor a žulu."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "These might be used for future buildings."
-msgstr "Později budou užitečné při stavbě budov."
+msgstr "Později je můžeme potřebovat na stavbu budov."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
@@ -108,7 +109,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Co se to stalo s naším Císařstvím? Musím se sám sebe ptát - Proč mi Císař zakázal zakročit proti té bestii, těm barbarům, kteří se k nám chovali jako přátelé a pak zaútočili v noci na mou armádu?"
+msgstr "Je to ještě naše Císařství? Opravdu mi to hlava nebere. Proč mi můj císař zakázal bojovat proti tomu zrůdnému barbarskému kmeni, který se nejprave choval jako pokojný spojenec, aby pak za nejtemnější noci přepadl mou armádu?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:81
@@ -289,7 +290,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr "Mám pro tebe zprávu o našem dřevorubci, který dnes začal pracovat. Asi by byl dobrý nápad nějaký čas počkat, než vyčistí místo pro stavbu dvou a více domků dřevorubce, abychom mohli těžit kmeny rychleji."
+msgstr "Dostal jsem zprávu, že náš první dřevorubec začal dnes s prací. Možná bude dobré, chvíli počkat, než vymýtí dost místa pro stavbu dalších dvou, nebo více domků dřevorubce, abychom mohli klády těžit rychleji."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:171
@@ -298,7 +299,7 @@ msgid ""
 "turn them into planks, which are needed by every ship and every bigger "
 "building too. So we should build a sawmill – as soon as we have enough space"
 " for this."
-msgstr "Bohužel kmeny jako takové jsou pro opravu naší lodi nepoužitelné - potřebujeme je rozřezat na prkna, která jsou třeba pro každou loď i větší budovu. Proto by jsme měli postavit pilu - hned, jak pro ni bude dostatek místa."
+msgstr "Bohužel klády jsou pro opravu naší lodi nepoužitelné – potřebujeme z nich nadělat prkna, kterých je třeba pro každou loď i větší budovu. Proto bychom měli postavit pilu – a to hned, jak pro ni budeme mít dost místa."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:178
 msgid "Amalea comes in…"
@@ -314,7 +315,7 @@ msgstr "Jsou tu dvě důležité věci, o kterých bych s tebou rád mluvil... P
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into planks."
-msgstr "Všiml jsem si, že stavba pily je dokončena. Můžeme tedy začít řezat kmeny, které dřevorubci v lese těží."
+msgstr "Všiml jsem si, že stavba pily je dokončena. Můžeme tedy začít zpracovávat klády, které těží v lese dřevorubci, na prkna."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:186

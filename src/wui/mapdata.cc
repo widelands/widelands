@@ -22,6 +22,7 @@
 #include <boost/format.hpp>
 
 #include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 
 MapData::MapData(const std::string& init_filename,
                  const std::string& init_localized_name,
@@ -56,6 +57,7 @@ MapData::MapData(const Widelands::Map& map,
 	}
 	description = map.get_description().empty() ? "" : _(map.get_description());
 	hint = map.get_hint().empty() ? "" : _(map.get_hint());
+	required_addons = map.required_addons();
 	theme = map.get_background_theme();
 	background = map.get_background();
 	nrplayers = map.get_nrplayers();
@@ -81,8 +83,8 @@ bool MapData::compare_names(const MapData& other) {
 	// The parent directory gets special treatment.
 	if (localized_name == parent_name() && maptype == MapData::MapType::kDirectory) {
 		return true;
-	} else if (other.localized_name == parent_name() &&
-	           other.maptype == MapData::MapType::kDirectory) {
+	}
+	if (other.localized_name == parent_name() && other.maptype == MapData::MapType::kDirectory) {
 		return false;
 	}
 
@@ -106,11 +108,14 @@ bool MapData::compare_names(const MapData& other) {
 	}
 
 	// If there is no width, we have a directory - we want them first.
-	if (!width && !other.width) {
+	if (!width) {
+		if (other.width) {
+			return true;
+		}
 		return this_name < other_name;
-	} else if (!width && other.width) {
-		return true;
-	} else if (width && !other.width) {
+	}
+
+	if (!other.width) {
 		return false;
 	}
 	return this_name < other_name;
@@ -139,6 +144,17 @@ MapData MapData::create_parent_dir(const std::string& current_dir) {
 	if (!filename.empty()) {
 		// fs_dirname always returns a directory with a separator at the end.
 		filename.pop_back();
+
+		// If the parent is an add-on, use the maps directory as parent instead.
+		// Whether this is the case is determined by checking whether the parent
+		// directory's parent is the add-ons directory.
+		std::string parent = FileSystem::fs_dirname(filename);
+		if (!parent.empty()) {
+			parent.pop_back();
+			if (parent == kAddOnDir) {
+				filename = kMapsDir;
+			}
+		}
 	}
 	return MapData(filename, parent_name());
 }

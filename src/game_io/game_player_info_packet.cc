@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 26;
+constexpr uint16_t kCurrentPacketVersion = 28;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -52,12 +52,21 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 						   "player number (%i) is out of range (1 .. %u)", plnum, kMaxPlayers);
 					}
 
+					// TODO(Nordfriese): Savegame compatibility, remove after v1.0
+					const uint8_t playercolor_r =
+					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].r;
+					const uint8_t playercolor_g =
+					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].g;
+					const uint8_t playercolor_b =
+					   packet_version >= 28 ? fr.unsigned_8() : kPlayerColors[i - 1].b;
+
 					Widelands::TeamNumber team = fr.unsigned_8();
 					char const* const tribe_name = fr.c_string();
 
 					std::string const name = fr.c_string();
 
-					game.add_player(plnum, 0, tribe_name, name, team);
+					game.add_player(plnum, 0, RGBColor(playercolor_r, playercolor_g, playercolor_b),
+					                tribe_name, name, team);
 					Player* player = game.get_player(plnum);
 					player->set_see_all(see_all);
 
@@ -93,6 +102,9 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					}
 					if (packet_version >= 26) {
 						player->allow_additional_expedition_items_ = fr.unsigned_8();
+					}
+					if (packet_version >= 27) {
+						player->hidden_from_general_statistics_ = fr.unsigned_8();
 					}
 				}
 			}
@@ -132,6 +144,9 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 		fw.unsigned_8(plr->see_all_);
 
 		fw.unsigned_8(plr->player_number_);
+		fw.unsigned_8(plr->get_playercolor().r);
+		fw.unsigned_8(plr->get_playercolor().g);
+		fw.unsigned_8(plr->get_playercolor().b);
 		fw.unsigned_8(plr->team_number());
 
 		fw.c_string(plr->tribe().name().c_str());
@@ -165,6 +180,7 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 		fw.unsigned_8(plr->is_picking_custom_starting_position() ? 1 : 0);
 		fw.unsigned_8(plr->initialization_index_);
 		fw.unsigned_8(plr->allow_additional_expedition_items_ ? 1 : 0);
+		fw.unsigned_8(plr->hidden_from_general_statistics_ ? 1 : 0);
 	}
 	else {
 		fw.unsigned_8(0);  //  Player is NOT in game.

@@ -43,6 +43,8 @@
 --
 --    **name**: A string containing the internal name of the tribe.
 --
+--    **military_capacity_script**: File path to the :ref:`military_capacity.lua <lua_tribes_tribes_military_capacity>` file.
+--
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``.
 --    Each animation needs the parameter ``hotspot`` (2 integer coordinates),
 --    and may also define ``fps`` (integer frames per second).
@@ -180,6 +182,8 @@
 --
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 --
+--    **scouts_house**:  The internal name of the tribe's scout's hut or house. This unit needs to be defined in the ``buildings`` table too.
+--
 --    **toolbar**: *Optional*. Replace the default toolbar images with these custom images. Example:
 --
 --    .. code-block:: lua
@@ -264,6 +268,7 @@ include "tribes/scripting/help/time_strings.lua"
 
 descriptions:new_tribe {
    name = "atlanteans",
+   military_capacity_script = path.dirname(__file__) .. "military_capacity.lua",
    animation_directory = image_dirname,
    animations = {
       frontier = { hotspot = {3, 12} },
@@ -1340,7 +1345,7 @@ descriptions:new_tribe {
          name = "atlanteans_warehouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean warehouse: Warehouse
-            purpose = pgettext("building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
+            purpose = pgettext("atlanteans_building", "Your workers and soldiers will find shelter here. Also stores your wares and tools.")
          }
       },
       {
@@ -1611,54 +1616,54 @@ descriptions:new_tribe {
          name = "atlanteans_guardhouse",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhouse
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: Guardhouse
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "atlanteans_guardhall",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Guardhall
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: Guardhall
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "atlanteans_tower_small",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Small Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: Small Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "atlanteans_tower",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "atlanteans_tower_high",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: High Tower
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: High Tower
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
       {
          name = "atlanteans_castle",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an atlantean military site: Castle
-            purpose = pgettext("building", "Garrisons soldiers to expand your territory."),
+            purpose = pgettext("atlanteans_building", "Garrisons soldiers to expand your territory."),
             -- TRANSLATORS: Note helptext for an atlantean military site: Castle
-            note = pgettext("building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
+            note = pgettext("atlanteans_building", "If you’re low on soldiers to occupy new military sites, use the downward arrow button to decrease the capacity. You can also click on a soldier to send him away.")
          }
       },
 
@@ -1710,6 +1715,7 @@ descriptions:new_tribe {
    carrier = "atlanteans_carrier",
    carrier2 = "atlanteans_horse",
    geologist = "atlanteans_geologist",
+   scouts_house = "atlanteans_scouts_house",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
    ferry = "atlanteans_ferry",

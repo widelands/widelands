@@ -4,13 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
 # GunChleoc, 2014
+# Yuri Laskowski <yurinikolai00@gmail.com>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
-"PO-Revision-Date: 2017-09-23 20:46+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-10-30 23:05+0000\n"
+"Last-Translator: Yuri Laskowski <yurinikolai00@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/widelands/widelands/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +43,7 @@ msgstr "Regras"
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:6
 msgid "Smugglers"
@@ -53,7 +54,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr ""
+msgstr "Contrabandistas é um mapa divertido para 4 jogadores. Você e seu aliado começam na diagonal um do outro em uma ilha simétrica. Há vários túneis de contrabando nesta ilha, cada um com um ponto de recepção e envio."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""
@@ -61,7 +62,7 @@ msgid ""
 "sending/receiving spot while your team mate has to build one on the "
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds."
-msgstr ""
+msgstr "Para estabelecer uma rota de contrabando, você precisa construir um armazém em um ponto de envio ou recebimento enquanto seu colega de equipe deve construir outro no ponto de recebimento/envio correspondente. Um produto será então transportado a cada 10 segundos."
 
 #. TRANSLATORS: %s = '<number> points'
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:12

@@ -4,7 +4,7 @@
 # Translators:
 # Facundo Gomez <facundogomez15@gmail.com>, 2019
 # Gastón <gastbr@gmail.com>, 2016
-# Thadah D. Denyse <juchuf@gmail.com>, 2018
+# Gontzal M. Pujana <juchuf@gmail.com>, 2018
 # Madkat Here, 2015,2020
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
 # X Bello <xbello@gmail.com>, 2020
@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
 "PO-Revision-Date: 2020-10-25 18:49+0000\n"
 "Last-Translator: Madkat Here\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"

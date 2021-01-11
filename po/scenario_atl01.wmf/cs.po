@@ -7,13 +7,14 @@
 # Markus7cz <markus7cz@gmail.com>, 2010
 # Matej Svrcek <mmatej@yahoo.com>, 2015-2016
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
+# Ondřej Itřech, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-10-23 05:30+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"PO-Revision-Date: 2020-12-21 17:36+0000\n"
+"Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +44,7 @@ msgstr "Postav dva domky dřevorubce"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Build two forester’s houses"
-msgstr "Postav dva domy lesníka"
+msgstr "Postav dva domky lesníka"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a sawmill"
@@ -55,22 +56,22 @@ msgstr "Rozšiřuj své území a prozkoumávej"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "Expand and Explore"
-msgstr "Ovládni a prozkoumej"
+msgstr "Rozšiř své území a prozkoumej okolí"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr "Tento ostrov je obrovský a dokud si nebudeme jisti že jsme tu sami, nemůžeme polevit. Prozkoumat a ovládnout jej, je jediný způsob, jak nás ochránit před hrozbami pocházejícími z ostrova i z Atlantidy."
+msgstr "Tento ostrov je obrovský a dokud si nebudeme jisti, že jsme tu sami, nemůžeme polevit. Prozkoumat a ovládnout jej je jediný způsob, jak nás ochránit před hrozbami pocházejícími z ostrova i z Atlantidy."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:46
 msgid "Build military sites to expand your territory"
-msgstr "Postav vojenské základny pro rozšíření svého území"
+msgstr "Postav vojenské budovy a zvětši své území"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:52
 msgid "Establish a solid food production"
-msgstr "Vybuduj spolehlivou produkci potravin"
+msgstr "Zajisti spolehlivou produkci potravin"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:54
 msgid "Food Production"
@@ -82,7 +83,7 @@ msgid ""
 "well working food environment by building at least one farm, one blackroot "
 "farm and a mill. The two kinds of flour together with water from a well will"
 " be baked into bread in a bakery, so build a bakery and a well, too."
-msgstr "Jídlo je velmi důležité pro doly a cvičiště. Vybuduj fungující potravinářský průmysl postavením nejméně jednoho obilné pole, jedné pěstírny rozrazilu a mlýna. Z mouky spolu s drceným rozrazilem a vodou ze studny vyrobí v pekárně pekaři chutný chleba, takže postav i pekárnu a studnu."
+msgstr "Jídlo je velmi důležité pro doly a vojenská cvičiště. Postavením nejméně jednoho statku, jedné pěstírny rozrazilu a mlýna zajistíš vhodné prostředí pro jeho výrobu. Z mouky, drceného rozrazilu a vody ze studny se pak v pekárně peče chléb. Postav proto také pekárnu a studnu."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:56
 msgid ""
@@ -96,11 +97,11 @@ msgstr "Další dvě důležité potraviny jsou uzené ryby a uzené maso. Syrov
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Build a farm and a blackroot farm"
-msgstr "Postav obilné pole a pěstírnu rozrazilu"
+msgstr "Postav statek a pěstírnu rozrazilu"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid "Build a mill to make cornmeal and blackroot flour"
-msgstr "Postav mlýn aby se mohla mlít kukuřičná mouka a drtit rozrazil"
+msgstr "Postav mlýn, aby se mohla mlít kukuřičná mouka a drtit rozrazil"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:59
 msgid "Build a well"
@@ -108,11 +109,11 @@ msgstr "Postav studnu"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:60
 msgid "Build a bakery to bake bread from cornmeal, blackroot flour and water"
-msgstr "Postav pekárnu, aby se mohl péci chleba z kukuřičné mouky, drceného rozrazilu a vody"
+msgstr "Postav pekárnu, aby pekla chléb z kukuřičné mouky, drceného rozrazilu a vody"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:61
 msgid "Build a hunter’s house to get raw meat"
-msgstr "Postav domek lovce, který zajistí dodávku syrového masa"
+msgstr "Postav domek lovce, aby dodával syrové maso"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:62
 msgid "Build a fisher’s house close to water to get raw fish"
@@ -122,7 +123,7 @@ msgstr "Postav blízko vody domek rybáře, který bude dodávat syrové ryby"
 msgid ""
 "Build a fish breeder’s house close to the fisher to make sure the fish do "
 "not die out"
-msgstr "Postav blízko domku rybáře i domek porybného, který zajistí že ryby nevyhynou"
+msgstr "Postav blízko domku rybáře i domek porybného, který zajistí, že rybář všechny ryby nevyloví."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build two smokeries to smoke raw meat and fish"
@@ -143,7 +144,7 @@ msgid ""
 "tabards are the uniforms of soldiers. The weaving mill needs gold thread and"
 " spider silk as raw material. Spider silk is produced by the spider farm, "
 "while gold thread is produced by the gold spinning mill out of gold."
-msgstr "Tkalci vyrábí pavoučí látku a vesty v tkalcovně. Pavoučí látka je potřeba také při stavbě některých budov a výrobě dalších látek, zatímco vesty slouží jako uniformy vojáků. Tkalcovna potřebuje zlatou přízi a pavoučí hedvábí. Pavoučí hedvábí se vyrábí na pavoučí farmě, zatímco zlatá příze se přede ze zlata v budově tkalce zlata."
+msgstr "Tkalci vyrábí pavoučí látku a tabardy v tkalcovně. Pavoučí látka je potřeba při stavbě některých budov a výrobě oděvů. Tabardy pak slouží za uniformy vojákům. Tkalcovna potřebuje zlatou přízi a pavoučí hedvábí. Pavoučí hedvábí se vyrábí na pavoučí farmě, zatímco zlatá příze se přede ze zlata v přádelně zlata."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:74
 msgid "Build a weaving mill"
@@ -155,7 +156,7 @@ msgstr "Postav pavoučí farmu"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:76
 msgid "Build a gold spinning mill"
-msgstr "Postav tkalce zlata"
+msgstr "Postav přádelnu zlata"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:82
 msgid "Build industry and mines"
@@ -171,14 +172,14 @@ msgid ""
 "mine will dig for quartz and diamonds – all of them are precious materials "
 "and very rarely found. It will produce a lot of granite while searching for "
 "them."
-msgstr "Železná ruda, zlatá ruda a uhlí se těží v příslušných dolech. V dole na křišťál lze těžit křemen a diamanty - jsou to velmi cenné materiály a proto se nachází jen zřídka. Jejich hledání obvykle vyprodukuje mnoho kamene."
+msgstr "Železná ruda, zlatá ruda a uhlí se těží v příslušných dolech. V dole na křišťál lze těžit křemen a diamanty. Obě dvě suroviny jsou velmi cenným materiálem, a proto se nachází jen zřídka. Při jejich hledání se vyprodukuje mnoho žuly."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:86
 msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr "Rudu je nutné nejprve roztavit ve slévárně než ji lze použít. Takto zpracovaný materiál se poté používá ve zbrojířství, platnéřství a v dílně."
+msgstr "Rudu je nutné nejprve roztavit ve slévárně, než ji lze použít. Zpracovaný materiál se poté používá ve zbrojířství, platnéřství a v dílně."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:87
 msgid ""
@@ -213,7 +214,7 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr "Když už se kovou zbraně, můžeme naverbovat nové vojáky. Na to je ale třeba dopravit lehké trojzubce a vesty do kasáren. Rekruti přijdou ze skladiště, každý obdrží jeden trojzubec a vestu, základní trénink a stanou se z nich vojáci."
+msgstr "Teď, když se kovají zbraně, můžeme naverbovat nové vojáky. Na to je potřeba dopravit lehké trojzubce a tabardy do kasáren. Ze skladu tam přichází rekruti, každý obdrží jeden trojzubec, jeden tabard a základní trénink, a tak se z nich stanou vojáci."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:106
 msgid "Build training sites for soldiers"
@@ -229,7 +230,7 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr "Podobně jako u ostatních kmenů, i u Atlanťanů lze vycvičit vojáky: v kobkách se cvičí útok - hlavní vlastnost Atlanťanů - a v labyrintu odrážení, zdraví a obrana. K výcviku lepších vojáků ve cvičištích se používají věci, které vytváří tvé hospodářství."
+msgstr "Podobně jako u ostatních kmenů, i u Atlanťanů lze cvičit vojáky. V kobkách se cvičí útok, hlavní vlastnost Atlanťanů, a v labyrintu úhyb, zdraví a obrana. K výcviku vojáků se na těchto dvou cvičištích používají produkty tvého hospodářství."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Build a dungeon and a labyrinth"
@@ -249,7 +250,7 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "Jak se síť cest prodlužuje a komplikuje, měl bys zapojit koně, kteří pomohou nosičům s přepravou surovin. Koně se chovají ve stájích, kde potřebují vodu a kukuřici. Další skladiště také odlehčí přepravnímu systému a zabrání jeho kolapsu."
+msgstr "Jak se síť cest prodlužuje a stává se více spletitou, je vhodné zapojit koně, kteří pomohou nosičům s přepravou. Koně se chovají ve stájích, kde potřebují vodu a kukuřici. Další skladiště také odlehčí přepravní síti a zabrání jejímu zahlcení."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
@@ -272,7 +273,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "Na samém vrcholku ostrova je jezero. Vybudujte v jeho vodách 3 lodě a možná budete schopna zachránit své lidi až bude ostrov zcela pohlcen hladinou oceánu."
+msgstr "Na vrcholu ostrova je jezero. Vybuduj v jeho vodách tři lodě, snad tak budeš moci zachránit  svůj lid, předtím než bude ostrov zcela pohlcen oceánem."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
@@ -294,7 +295,7 @@ msgid ""
 "human to be empowered by the sea god Lutas to breathe above sea level – and "
 "the wise clerics, who provided the link to Lutas – they prospered and became"
 " civilized."
-msgstr "Na skrytém a v moři ztraceném ostrově Atlantida sídlil odjakživa kmen hrdých lidí. Po mnoho pokolení jim vládl rod krále Ajanthula - prvního člověka, kterého bůh moří Lutas obdařil schopností dýchat i nad hladino muoře - a řád moudrých kněží, kteří zprostředkovávali kontakt s Lutasem. Kmen lidí se rozvíjel a prosperoval."
+msgstr "Na skrytém a v moři ztraceném ostrově Atlantida sídlil od dávných věků kmen hrdých lidí. Po mnoho pokolení jim vládl rod prvního člověka, kterého bůh moří Lutas obdařil schopností dýchat nad hladinou moře, rod krále Ajanthula. A s ním vládli moudří duchovní, kteří hlásali slovo Luta. Díky němu bohatli a jejich společenská prestiž rostla."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:148
@@ -305,11 +306,11 @@ msgid ""
 "began looking for a cure for death even though most clerics warned him "
 "against it. Some said that endless life was only for the gods and that to "
 "seek for it was forbidden."
-msgstr "Tento příběh začal během vlády krále Askandora, 43-tého potomka krále Ajanthula. Byl dobrým králem a vládl Atlantidě s moudrostí a prozíravostí. S přibývajícím věkem však přišel strach ze smrti a král, přestože jej mnozí kněží varovali, začal hledat lék proti smrti. Někteří říkali, že věčný život je vyhrazen samotným bohům a usilovat o něj je zapovězeno."
+msgstr "Tento příběh začal během vlády krále Askandora, 43. potomka krále Ajanthula. Byl dobrým králem a vládl Atlantidě s moudrostí a prozíravostí. S přibývajícím věkem však přišel strach ze smrti a král, přestože jej mnozí kněží varovali, začal hledat lék proti smrti. Někteří říkali, že věčný život je vyhrazen samotným bohům a usilovat o něj je zapovězeno."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:152
 msgid "Disgraced Before the God"
-msgstr "Zostuzeni před Bohem"
+msgstr "V boží nemilosti"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:154
 msgid "The God’s Punishment"
@@ -322,7 +323,7 @@ msgid ""
 "During the nights, they went crazy and were full of fear. It was not long "
 "before the horse breeder Xydra figured out what was wrong with them: the sea"
 " level in front of their stable was rising with ever increasing speed."
-msgstr "Všechno vypadalo, že je jak má být. Pouze koně byli neklidní a vycítili, že něco není v pořádku. Po nocích jankovitě vyváděli a vystrašeně ržáli. Netrvalo dlouho a chovatel koní Xydra přišel na to, co zvířata tak děsí: stoupání hladiny moře před jejich stájemi každým dnem viditelně zrychlovalo."
+msgstr "Vše vypadalo, že je, jak má být. Pouze koně byli neklidní a vycítili, že něco není v pořádku. Po nocích jankovitě vyváděli a vystrašeně ržáli. Netrvalo dlouho a chovatel koní Xydra přišel na to, co ty nebohé tvory tak děsí. Hladina moře před jejich stájemi stoupala a tempo se každým dnem viditelně zrychlovalo."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:158
@@ -332,7 +333,7 @@ msgid ""
 " of the boldness of their king. He decided to withdraw the rights that were "
 "granted to King Ajanthul and his children. And so, he called them back below"
 " the sea again."
-msgstr "Kněží se ponořili do hlubokých meditací a důvod stoupající vody byl zanedlouho nalezen a oznámen: bůh Lutas ztratil víru ve své Atlanťany kvůli pýše a zpupnosti jejich krále. Rozhodl se odebrat jim výsady, které byly uděleny králi Ajanthulovi a jeho potomkům. A proto je opět volá zpět pod vodní hladinu."
+msgstr "Kněží se ponořili do hlubokých meditací a důvod stoupající vody byl zanedlouho nalezen a oznámen. Bůh Lutas ztratil víru ve své Atlanťany kvůli pýše a zpupnosti jejich krále. Rozhodl se odebrat jim výsady, které byly uděleny králi Ajanthulovi a jeho potomkům. A proto je opět volá zpět pod vodní hladinu."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:162
 msgid "Uproar and Confusion"
@@ -359,7 +360,7 @@ msgid ""
 "situation, she convinced herself that to soothe the god, an offer of great "
 "personal value was needed. So she offered him her most beloved: her husband,"
 " the father of her only child."
-msgstr "Jundlina, poslední králova dcera a nejvyšší kněžka boha, byla ze všech kněží nejodhodlanější. Protože ani nespočet obětních rituálů situaci nijak nezměnil, přesvědčila sama sebe, že k usmíření boha bude zapotřebí oběť vysoké osobní hodnoty. Proto mu nabídla jednoho ze svých nejbližších: svého manžela, otce svého jediného dítěte."
+msgstr "Jundlina, poslední králova dcera a nejvyšší kněžka boha, byla ze všech kněží nejodhodlanější. Protože ani nespočet obětních rituálů situaci nijak nezměnil, přesvědčila sama sebe, že k usmíření boha bude zapotřebí oběť vysoké osobní hodnoty. Proto mu nabídla jednoho ze svých nejmilovanějších, svého manžela, otce svého jediného dítěte."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:170
@@ -371,7 +372,7 @@ msgid ""
 "she set the temple on fire and stole a ship to flee from the god’s influence"
 " over Atlantis. This small group started praying to Satul, the fire god and "
 "the worst enemy of Lutas."
-msgstr "Ale ani tento děsivý skutek nezměnil vůli boha a voda dál stoupala. Pološílená z pocitu viny, bolesti a hněvu, se Jundlina rozhodla pro kacířství: potají shromáždila obyčejné lidi, kteří vzdorovali rozhodnutí kněžského řádu pokorně přijmout vůli svého boha. Společně se svými lidmi zapálila chrám a ukradli loď, aby unikli na ní z Atlantidy před hněvem svého bývalého boha. Tato malá skupinka začala uctívat Satula, boha ohně, největšího nepřítele boha Lutase."
+msgstr "Ale ani to neobměkčilo boha a voda stoupala dál. Téměř nepříčetná z pocitu viny, bolesti a hněvu, se Jundlina rozhodla pro kacířství. Potají shromáždila obyčejné lidi, kteří nebyli smířeni s rozhodnutím duchovních pokorně přijmout vůli svého boha. Společně s nimi zapálila chrám a ukradla loď, aby na ní unikli z Atlantidy, pryč z vlivu boha. Tato malá skupinka začala uctívat Satula, boha ohně a největšího nepřítele boha Luta."
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:172
@@ -382,7 +383,7 @@ msgstr "A tak zanechali umírající Atlantidu za sebou a vydali se na výpravu 
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:179
 msgid "The Princess’ Memoir"
-msgstr "Paměti princezny"
+msgstr "Princezniny paměti"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:180
 msgid "Jundlina Writes Down Her Memories"
@@ -396,7 +397,7 @@ msgid ""
 "smashed our ship. Now, we are out of his reach. One day later, we sighted an"
 " island which seems to have one of these fire spitting mountains on it. I "
 "deemed this a sign from the fire god and we landed on its shore."
-msgstr "Opustili jsme Atlantidu a odpluli na východ. Šestého dne jsme vpluli do zakázaného moře, aniž bychom zaznamenali známky pronásledování a ani Lutas nám neroztříštil loď. Nyní jsme již mimo jeho dosah. O den později jsme na obzoru uviděli ostrov, který na kterém je jedna z těch hor chrlících oheň. Pokládám to za šťastné znamení od ohnivého boha, proto jsme se na ostrově vylodili."
+msgstr "Opustili jsme Atlantidu a odpluli na východ. Šestého dne jsme vpluli do zakázaného moře, aniž bychom zaznamenali známky pronásledování a ani Lutas nám neroztříštil loď. Nyní jsme již mimo jeho dosah. O den později jsme na obzoru uviděli ostrov, na kterém, jak se zdá, je jedna z těch hor, co plivou oheň. Považuji to za znamení od ohnivého boha, a proto jsme se na břehu tohoto ostrova vylodili."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:185
@@ -407,7 +408,7 @@ msgid ""
 " on Atlantis. I hope they will withstand the next rain. At least, the towers"
 " will warn us if a ship from Atlantis follows us and if the island is "
 "inhabited, we will see attackers a long time before they arrive."
-msgstr "Minulé dva týdny jsme strávili budováním dvou věží na hoře blízko místa kde jsme se vylodili a samozřejmě i sídla pro nás všechny. V naší skupině jsou velmi talentovaní stavitelé - přesto budovy zcela neodpovídají zpracování, na které jsme zvyklí z Atlantidy. Doufám, že přečkají příští déšť. Věže nás alespoň mohou varovat kdyby se blížila loď z Atlantidy, nebo je-li ostrov obydlený, uvidíme útočníky dlouho před tím, než k nám dorazí."
+msgstr "Poslední dva týdny jsme strávili budováním dvou věží na hoře blízko místa, kde jsme se vylodili. Samozřejmě tu pro nás všechny stavíme i sídlo. V naší skupině jsou velmi talentovaní stavitelé, přesto budovy zcela neodpovídají zpracování, na které jsme zvyklí z Atlantidy. Doufám, že přečkají příští déšť. Když už nic jiného, věže nás alespoň budou varovat, kdyby se blížila loď z Atlantidy. Nebo, je-li ostrov obydlený, uvidíme útočníky dlouho před tím, než k nám dorazí."
 
 #. TRANSLATORS: Jundlina - Diary
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:188
@@ -416,7 +417,7 @@ msgid ""
 "it a home. I reckon we need to establish a sustainable economy and to "
 "explore our surroundings. I called for specialists and will follow their "
 "advice."
-msgstr "Na tento ostrov jsme dorazili v pořádku. Dalším krokem bude tento ostrov zabydlet. Počítám, že musíme vybudovat soběstačnou ekonomiku a prozkoumat naše okolí. Povolala jsem specialisty a budu se řídit jejich radami."
+msgstr "Na tento ostrov jsme dorazili v pořádku. Dalším krokem bude se na tomto ostrově dobře zabydlet. Hádám, že musíme vybudovat udržitelné hospodářství a prozkoumat své okolí. Povolala jsem odborníky a budu se řídit jejich radami."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:191
 msgid "Loftomor and Sidolus Arrive"
@@ -461,7 +462,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Nechť vás Satul hřeje, Jundlino! Nejdůležitější věcí při budování osady jsou stavební materiály. Jsou zde nějaké stromy, takže bychom měli začít postavením domků pro dřevorubce a samozřejmě i pro lesníky, abychom si stromy úplně nevykáceli. A nesmíme zapomenout ani na pilu, protože většinu budov nelze postavit jen z kmenů. Odolnější budovy potřebují také kámen, ale toho je zde na severovýchodě spousta - stačí postavit lom a moji kameníci se ihned mohou pustit do práce."
+msgstr "Nechť vás Satul hřeje, Jundlino! To nejdůležitější při zakládání osady je stavební materiál. Tady máme nějaké stromy, takže bychom měli začít stavbou domků dřevorubců a samozřejmě také lesníků, aby nám stromy nedošly. A nesmíme zapomenout ani na pilu, protože většinu budov nelze postavit pouze za pomoci klád. Odolnější budovy potřebují také žulu, ale té máme na severovýchod odtud spoustu. Stačí postavit lom a moji kameníci se mohou ihned pustit do práce."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:204
 msgid "Sidolus Speaks"
@@ -475,7 +476,7 @@ msgid ""
 "swiftly. I will not feel safe on this island as long as we have not seen all"
 " its shores. I brought plenty of good men from Atlantis. The military might "
 "is available. We only need some housing to live in."
-msgstr "Nechť vás Satul hřeje, Jundlino! Plně souhlasím s Loftomorovým návrhem. Potřebujeme zásobu stavebního materiálu, protože musíme rychle rozšiřovat svá území. Dokud neprozkoumáme celé pobřeží ostrova, nebudu se zde na ostrově cítit v bezpečí. Přivedl jsem z Atlantidy spoustu dobrých mužů. Vojenskou sílu máme k dispozici, jediné co potřebujeme, jsou budovy ve kterých budeme přebývat."
+msgstr "Nechť vás Satul hřeje, Jundlino! Plně souhlasím s Loftomorovým návrhem. Potřebujeme zásobu stavebního materiálu, protože musíme rychle rozšiřovat svá území. Dokud neprozkoumáme celé pobřeží ostrova, nebudu se zde cítit v bezpečí. Přivedl jsem z Atlantidy spoustu dobrých mužů. Vojenskou sílu máme k dispozici, jediné, co potřebujeme, jsou budovy, ve kterých budeme přebývat."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:214
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:254
@@ -494,7 +495,7 @@ msgid ""
 "that everybody is working well together. Now, there are other pressing "
 "matters. I called Colionder, my personal cook, before me to get his help "
 "with sorting some things out."
-msgstr "Infrastruktura je vybudována a strávila jsem několik dní ujišťováním, že vše pracuje tak jak má. Nyní vyvstaly další naléhavé problémy. Přivolala jsem Coliondera, svého osobního kuchaře, aby mi pomohl dát tyto problémy do pořádku."
+msgstr "Infrastruktura je vybudována a strávila jsem několik dní ujišťováním se, že vše pracuje, tak jak má. Nyní vyvstaly další naléhavé problémy. Předvolala jsem Coliondera, svého osobního kuchaře, aby mi pomohl, dát tyto problémy do pořádku."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:220
 msgid "Colionder Arrives"
@@ -537,7 +538,7 @@ msgid ""
 "food is something deeply ingrained in us Atlanteans – it is a ceremony that "
 "we just need for our well-being. So I guess we cannot take this away from "
 "the individuals completely."
-msgstr "Ach, ale to nebude možné jen tak změnit. Konzumace doma připraveného jídla je něco, co je zakořeněno hluboko v nás Atlanťanech - je to něco jako obřad, který má pevné místo v našem životě. Takže myslím, že to lidem nemůžeme jen  tak z ničeho nic odepřít."
+msgstr "Ach, ale to nebude možné jen tak změnit. Konzumace doma připraveného jídla je něco, co je zakořeněno hluboko v nás Atlanťanech. Je to něco jako obřad, který má pevné místo v našem životě. Takže myslím, že to lidem nemůžeme jen tak z ničeho nic odepřít."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -547,7 +548,7 @@ msgid ""
 "the bread is tedious and boring; I feel a more industrial approach would be "
 "helpful here. I for one would love to just have fresh bread delivered to my "
 "house every day."
-msgstr "Ale můžeme zkusit kompromisní řešení: pro mne je příprava chleba namáhavá práce. Drcení rozrazilu, mletí kukuřice a pečení chleba je zdlouhavé a nudné. Myslím, že průmyslový přístup by byl v tomto případě vhodnější. Líbilo by se mi, dostat každý den čerstvý chleba až domů."
+msgstr "Ale můžeme zkusit kompromisní řešení. Pro mne je příprava chleba namáhavá práce. Drcení rozrazilu, mletí kukuřice a pečení chleba je zdlouhavé a nudné. Myslím, že průmyslový přístup by byl v tomto případě vhodnější. Líbilo by se mi, dostat každý den čerstvý chléb až domů."
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:241
@@ -558,7 +559,7 @@ msgid ""
 "building where the side effects do not matter? I think those two things "
 "would be accepted by the people and would reduce the cooking time without "
 "taking away the ritual."
-msgstr "Aaaa ještě důležitější: uzení ryb a masa pro konzervaci a zlepšení chuti je příšerné. Můj dům je plný kouře a smrdí potom ještě týdny. Nemyslíš, že by bylo vhodné pro uzení mít zvláštní budovu, kde by ten zápach tolik nevadil? Myslím, že by se to lidem líbilo a zkrátilo by to dobu přípravy bez ztráty šizení procesu výroby."
+msgstr "Á ještě důležitější, uzení ryb a masa pro konzervaci a zlepšení chuti je příšerné. Můj dům je plný kouře a smrdí potom ještě týdny. Nemyslíte, že by bylo vhodné mít na uzení zvláštní budovu, kde by ten zápach tolik nevadil? Myslím, že tyto dvě věci by lidé přijali a zkrátily by dobu přípravy bez toho, aby byly narušeny naše zvyky."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:244
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:245
@@ -594,7 +595,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Ať ti Satul požehná, Jundlino. Jmenuji se Opol a jsem vrchní tkadlec cechu, co opustil Atlantidu a Luta s tebou. Přicházím ale se smutnou zprávou: došla nám pavoučí látka. Ve skladišti už nemáme ani kousek. Možná by si mohla pomoci trochu tkalcovskému cechu a nechat postavit tkalcovnu a pavoučí farmu? Pavoucí předou to nejjemnější hedvábí a z něj umíme upříst tu nejjemnější látku."
+msgstr "Nechť Vás Satul hřeje, Jundlino. Jmenuji se Opol a jsem vrchní tkadlec cechu, který s vámi opustil Atlantidu a boha Luta. Přicházím se vskutku politováníhodnou zprávou. Došla nám pavoučí látka. Ve skladišti už nemáme ani kousek. Nemohla byste trochu pomoci tkalcovskému cechu zorganizováním stavby tkalcovny a pavoučí farmy? Pavouci poskytují to nejjemnější hedvábné předivo a my z něj vyrobíme tu nejjemnější pavoučí látku."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -602,7 +603,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr "Výměnou za vaši pomoc vám nabízíme dodávky vest pro mladé vojáky a zlatých vest pro důstojníky vaší armády. Pokud se chystáte posílit armádu, budete vybavení pro vojáky potřebovat."
+msgstr "Výměnou nabízíme dodávky tabardů pro mladé vojáky a zlatých tabardů pro důstojníky. Jistě je budete potřebovat, jakmile budete chtít rekrutovat nové vojáky."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:275
@@ -611,7 +612,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr "Ať tě Satul hřeje též, Opole. Chtěla jsem pozdržet výrobu pavoučích látek, ale chápu tvé naléhání. Tvůj návrh mi přijde příměřený, postavíme tedy tkalcovnu a pavoučí farmu. Nechám také postavit tkalce zlata, aby se zlaté vesty, zlaté jen nejmenovaly."
+msgstr "Nechť Satul hřeje i tebe, Opole. Chtěla jsem pozdržet výrobu pavoučích látek, ale chápu tvé naléhání. Tvůj návrh mi přijde příměřený, postavíme tedy tkalcovnu a pavoučí farmu. Nechám také postavit přádelnu zlata, aby zlaté tabardy nebyly zlaté jen podle jména."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:282
 msgid "Opol Seeks Out Jundlina"
@@ -624,7 +625,7 @@ msgid ""
 "spider farm buildings are complete and are starting their work at this very "
 "moment. The weavers’ guild is very grateful for your support and we will "
 "stand by our word and deliver the first tabard very soon."
-msgstr "Ať tě Satul zahřeje, Jundlino! Tkalcovna, tkadlec zlata a pavoučí farma jsou hotové a v této chvíli spouští výrobu. Cech tkalců je ti velmi vděčen za tvou podporu a dostojíme svému slovu a ty brzy obdržíš první vesty."
+msgstr "Nechť Vás Satul hřeje, Jundlino! Tkalcovna, přádelna zlata a pavoučí farma jsou hotové a v této chvíli spouští výrobu. Cech tkalců je vám velmi vděčen za vaši podporu. Dostojíme svému slovu a vy brzy obdržíte první tabard."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:291
@@ -646,7 +647,7 @@ msgid ""
 "find an ample supply of those commodities, we could start producing weapons "
 "and tools; this would help enormously. Of course, we would need smelters, a "
 "weapon smithy, an armor smithy and a toolsmithy. And maybe even more."
-msgstr "Nechť vás hřeje Satul, Jundlino. Zvážila jste možnost těžby nerostných surovin v okolních horách? Začíná nám docházet křemen i diamanty na stavbu našich budov. Také bychom potřebovali více železa, zlata a hlavně uhlí. Pokud bychom objevili dostatečnou zásobu těchto surovin, mohli bychom začít vyrábět zbraně a nástroje, což by nám neuvěřitelně pomohlo. Samozřejmě potřebujeme i slévárnu, zbrojířství, platnéřství a dílnu. A možná dokonce i další výrobny."
+msgstr "Nechť vás hřeje Satul, Jundlino. Zvážila jste možnost těžby nerostných surovin v okolních horách? Začínájí nám docházet křemen i diamanty na stavbu našich budov. Také bychom potřebovali více železa, zlata a hlavně uhlí. Pokud bychom objevili dostatečně velká ložiska těchto surovin, mohli bychom začít vyrábět zbraně a nástroje, což by nám výrazně pomohlo. Samozřejmě potřebujeme i slévárnu, zbrojířství, platnéřství a dílnu. A možná ani to ještě není vše."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:305
 msgid "Jundlina Nods"
@@ -669,14 +670,14 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "Obdržel jsem zprávu, že náš těžební průmysl začal vyrábět. Teď, když koveme zbraně, pošlu dopis Sidolusovi, abych ho informoval, že je čas postavit kasárna a začít verbovat vojáky."
+msgstr "Obdržela jsem zprávu, že náš těžební průmysl už běží. Teď, když kováme zbraně, pošlu dopis Sidolusovi, abych ho informovala, že je čas postavit kasárna a začít verbovat vojáky."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
 msgid ""
 "Today I saw the first recruits gathering in front of the new barracks. If "
 "everything goes well, they should receive their training soon."
-msgstr "Dnes jsem viděl, jak se první rekruti shromažďují před kasárnami. Pokud vše půjde dobře, brzy by měli nastoupit do výcviku."
+msgstr "Dnes jsem viděla, jak se první rekruti shromažďují před kasárnami. Pokud vše půjde dobře, brzy by měli projít výcvikem."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina Summons Sidolus"
@@ -684,7 +685,7 @@ msgstr "Jundlina povolává Sidola"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is Angry"
-msgstr "Jundlina je rozzlobená"
+msgstr "Jundlina se zlobí"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
@@ -708,7 +709,7 @@ msgid ""
 "would keep them occupied and focused on their duties. I would need a dungeon"
 " and a labyrinth for them. I have the plans ready, but I guess they won’t "
 "come cheap."
-msgstr "Souhlasí s vámi a již jsem původce problémů přísně potrestal. Ale je velmi těžké udržet mezi mužstvo v klidu - nudí se a nemají nic na práci. Rád bych zintenzivnil jejich výcvik. Myslím že větší rutina a více drilu by je udržely zaměstnané a soustředěné na povinnosti. Potřebuji pro ně kobky a labyrint. Už mám dokonce připravené plány, ale obávám se, že jejich výstavba nebude nejlevnější."
+msgstr "Souhlasím s vámi a již jsem původce problémů přísně potrestal. Ale je velmi těžké udržet mužstvo v klidu. Nudí se a nemají nic na práci. Rád bych rozšířil jejich výcvik. Myslím, že více úkolů by je udrželo zaměstnané a soustředěné na povinnosti. Potřebuji pro ně kobky a labyrint. Už mám dokonce připravené plány, ale obávám se, že jejich výstavba nebude nejlevnější."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:348
@@ -717,7 +718,7 @@ msgid ""
 " shall get your buildings. But note that I will not tolerate any rogue "
 "soldier; if similar things happen again, I will make you responsible for "
 "them. Dismissed."
-msgstr "Nebojím se nákladů ani práce, pokud to udrží lidi na uzdě. Dostaneš své budovy. Ale pamatuj si, že nebudu tolerovat žádné odpadlické vojáky; pokud se podobná věc stane ještě jednou, poneseš za ni plnou odpovědnost. Odchod."
+msgstr "Nebojím se nákladů ani práce, pokud to udrží tvé lidi na uzdě. Dostaneš své budovy. Ale pamatuj si, že nebudu tolerovat žádné hrubé vojáky. Mělo by se něco podobného ještě opakovat, poneseš za to plnou zodpovědnost. Jdi."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:355
 msgid "Jundlina Received a Letter"
@@ -731,7 +732,7 @@ msgid ""
 "will start its work soon. I am looking forward to tomorrow; I am very "
 "interested in how our soldiers are trained, and I wonder if the additional "
 "workload will keep them from bullying the civilian population."
-msgstr "Dostala jsem pozvání od Sidola. Zítra bude první den výcviku v nově dokončeném labyrintu. Kobky jsou také dokončeny a brzy se v nich začne trénovat. Nemůžu se dočkat zítřka; těším se na naše vojáky a jejich výcvik a bude mě zajímat, jestli jim další výcvik vyžene z hlavy další otravování civilistů."
+msgstr "Dostala jsem pozvání od Sidola. Zítra bude první den výcviku v nově dokončeném labyrintu. Kobky jsou také dokončeny a brzy se v nich začne trénovat. Nemůžu se dočkat zítřka. Způsob výcviku našich vojáků mě velmi zajímá. Jsem zvědavá, jestli jim další výcvik vyžene z hlavy to bavení se ponižováním civilního obyvatelstva."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:364
 msgid "Jundlina Considers the Economy"
@@ -751,7 +752,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "Dalším způsobem jak ulehčit dopravě je postavit skladiště. Když jsme nyní osídlili horu, vypadá jako dobrý nápad postavit skladiště na plošině - tím odpadne nutnost všechno přepravovat nahoru a dolů po strmých svazích."
+msgstr "Dalším způsobem jak ulehčit dopravě je postavit skladiště. Když jsme nyní zabrali horu, zdá se být rozumné, postavit skladiště na plošině a vyhnout se tak tomu, aby se muselo vše přepravovat nahoru a dolů po strmých svazích."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
 msgid "A Dangerous Discovery"
@@ -771,7 +772,7 @@ msgid ""
 " building is crude, the assemblage is sloppy. But the materials are very "
 "enduring: the wood used for it seemed to have been burned in a strange way "
 "before it was used as building material – it is hard as stone."
-msgstr "Našli jsme starou budovu, zničenou a spálenou plameny. Ten nález mě velmi znepokojil. Takovou budovu jsem totiž ještě nikdy neviděla. Zcela určitě není navržena žádným z Atlantských architektů. Budova je celá hrubá a její provedení je lajdácké. Ale materiály jsou obdivuhodně trvanlivé: použité dřevo vypadá, že bylo zvláštně opáleno v ohni předtím, než jej použili jako stavební materiál - je tvrdé jako kámen."
+msgstr "Našli jsme starou budovu, zničenou a spálenou plameny. Ten nález mě velmi znepokojil. Takovou budovu jsem totiž ještě nikdy neviděla. Zcela určitě není navržena žádným z Atlantských architektů. Budova je celá hrubá a její provedení je lajdácké. Ale materiály jsou obdivuhodně trvanlivé. Použité dřevo vypadá, že bylo zvláštně opáleno v ohni, předtím než jej použili jako stavební materiál. Je tvrdé jako kámen."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:388
@@ -780,7 +781,7 @@ msgid ""
 "they then? They work with fire, are they praying to Satul too? Are they "
 "friends or foe? And why is the building burned down? Has this island seen "
 "war? Is a war being waged on it right now?"
-msgstr "Skoro se bojím se domyslet důsledky. Jsou na tomto ostrově i jiní? Kde tedy jsou? Pracují s ohněm, uctívají tedy také Satula? A jsou to nepřátelé nebo přátelé? A proč byla budova spálena? Zažil tento ostrov válku? Nebo dokonce  probíhá válka právě nyní?"
+msgstr "Skoro se bojím domyslet důsledky. Jsou na tomto ostrově i jiní lidé? Kde tedy jsou? Pracují s ohněm, uctívají tedy také Satula? A jsou to nepřátelé, nebo přátelé? A proč byla budova spálena? Zažil tento ostrov válku? Nebo tu snad probíhá válka právě nyní?"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:391
@@ -792,11 +793,11 @@ msgstr "Nutně potřebujeme vybudovat větší armádu. Pokud jsou na ostrově n
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Another Building"
-msgstr "Další budova"
+msgstr "Další stavba"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:400
 msgid "Jundlina is Worried"
-msgstr "Jundlina je ustarané"
+msgstr "Jundlina je ustaraná"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
@@ -821,7 +822,7 @@ msgid ""
 "no trace of this old economy to be found. I am starting to relax, but I will"
 " not let our guard down as we continue to explore this beautiful island. But"
 " without obvious dangers, I am feeling very much at home here already."
-msgstr "A ještě další z těchto budov. Nyní víme, že kmen, který je postavil, tento ostrov kdysi zcela ovládal. Ale těchto potenciálních nepřátel se už neobávám. Už o tomto ostrově víme tak mnoho a přitom jsme ani náznakem nenarazili na fungující část tohoto starého hospodářství. Začínám se uklidňovat, ale to neznamená, že by stráže mohly polevit v ostražitosti, zatímco budeme tento krásný ostrov dále zkoumat. Ale bez přímého ohrožení se tu začínám cítit jako doma."
+msgstr "A ještě další z těchto budov. Nyní víme, že kmen, který je postavil, tento ostrov kdysi zcela ovládal. Ale potenciálních nepřátel se už neobávám. Už o tomto ostrově víme tak mnoho a přitom jsme ani náznakem nenarazili na fungující část tohoto starého společenství. Začínám se uklidňovat, ale to neznamená, že by stráže během našeho dalšího prozkoumávání ostrova mohly polevit v ostražitosti. Bez viditelného ohrožení se tu však již teď cítím jako doma."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:424
 msgid "The Water is Rising!"
@@ -847,7 +848,7 @@ msgid ""
 " invented a new kind of ship: smaller than those we are used to, but much "
 "sturdier. If we build them correctly, I am confident that we can sail a much"
 " longer distance with them and maybe escape from Lutas’ influence."
-msgstr "Nechť vás Satul hřeje, Jundlino. Jmenuji se Ostur a jsem stavitel lodí. Vynalezl jsem nový typ lodě: sice menší než ty, které jsme používali dosud, ale mnohem odolnější. Pokud je postavíme správně, jsem si jistý, že s nimi můžeme doplout mnohem dál, možná dokonce i uniknout z Lutasova vlivu."
+msgstr "Nechť vás Satul hřeje, Jundlino. Jmenuji se Ostur a jsem stavitel lodí. Vynalezl jsem nový typ lodě. Sice je menší než ty, které jsme používali dosud, ale mnohem odolnější. Pokud je postavíme správně, jsem si jistý, že s nimi můžeme doplout mnohem dál, možná dokonce i uniknout z Lutasova vlivu."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
@@ -855,7 +856,7 @@ msgid ""
 "Ostur, we have no time. The water rises too fast, and if we build the ships "
 "on the shore they will vanish in the sea before they can float. I fear we "
 "are doomed!"
-msgstr "Osture, nemáme čas. Voda stoupá moc rychle a kdybychom stavěli lodě na pobřeží, zmizí pod vodou dříve, než budou schopné plavby. Bojím se že jsme ztraceni!"
+msgstr "Osture, nemáme čas. Voda stoupá moc rychle a kdybychom stavěli lodě na pobřeží, zmizí pod vodou dříve, než budou schopné plavby. Bojím se, že jsme ztraceni!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:444
 msgid "Ostur Seems Confident"
@@ -868,14 +869,14 @@ msgid ""
 " at the top of the mountain. I suggest we build the ships in this lake and "
 "wait until the island drowns beneath us. Then we can sail away. It is a bold"
 " plan, but I think it could work."
-msgstr "Jeden můj přítel prozkoumal ostrov na vlastní pěst a pověděl mi o velkém jezeře na vrcholku hory. Navrhuji abychom u jezera postavili lodě a počkali dokud se s námi ostrov neponoří. Potom můžeme odplout. Je to smělý plán, ale myslím, že může vyjít."
+msgstr "Jeden můj přítel prozkoumal ostrov na vlastní pěst a pověděl mi o velkém jezeře na vrcholu hory. Navrhuji, abychom u jezera postavili lodě a počkali, dokud se ostrov pod námi neponoří. Potom můžeme odplout. Je to smělý plán, ale myslím, že může vyjít."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid ""
 "Your red hair is a signal from the fire god. I will trust you and support "
 "your plan. Our survival lies in your hands now, Ostur."
-msgstr "Tvé rudé vlasy jsou znamením ohnivého boha. Věřím ti a podpořím tvůj plán. Naše přežití máš nyní ve svých rukou, Osture."
+msgstr "Tvé rusé vlasy jsou znamením ohnivého boha. Věřím ti a podpořím tvůj plán. Naše přežití máš nyní ve svých rukou, Osture."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:462
@@ -884,7 +885,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "Nyní rychle, potřebujeme dům pro Ostura hned vedle jezera a také potřebujeme prkna, kmeny a pavoučí látku pro stavbu. Zapomeňte na všechno ostatní, potřebujeme všechny suroviny na vrcholku hory dříve, než naše skladiště pohltí moře."
+msgstr "A teď honem, potřebujeme dům pro Ostura hned vedle jezera a musíme tam dopravit prkna, klády a pavoučí látku pro stavbu. Zapomeň teď na vše ostatní, potřebujeme všechny suroviny na vrcholku hory, dříve než naše skladiště pohltí moře."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
 msgid "Jundlina is Relieved"
@@ -898,14 +899,14 @@ msgid ""
 "some wares too. And this rescue came just in time: Lutas is about to swallow"
 " the rest of this island, the water rises faster by the hour. But we can "
 "make our escape now and start over in some country farther away…"
-msgstr "Chvála Satulovi! Ostur, náš mladý lodník, to dokázal. Máme tři lodě - a neviděl jsem ještě bytelnější - s dostatkem místa pro nás i nějaké ty suroviny. Záchrana přišla na poslední chvíli: Lutas se chystá spolknout i zbytek ostrova, vody stoupají každou hodinu rychleji. Ale teď už se nám podaří uprchnout a začít znova v nějaké vzdálené zemi..."
+msgstr "Chvála Satulovi! Ostur, náš mladý lodník, to dokázal. Máme tři lodě, a pevnější jsem ještě neviděla, s dostatkem místa pro nás i nějaké ty suroviny. Záchrana přišla na poslední chvíli. Lutas se chystá spolknout i zbytek ostrova, vody stoupají každou hodinou rychleji. Ale teď už se nám podaří uprchnout a začít znova v nějaké vzdálené zemi..."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:475
 msgid ""
 "I expect a long journey, but we will find the land of Satul in the end. This"
 " is what I promised my people. And myself."
-msgstr "Před námi je dlouhá cesta, ale na jejím konci najdeme Satulovu zemi. To jsem mým lidem slíbila. I sobě."
+msgstr "Očekávám dlouhou cesta, ale na jejím konci najdeme Satulovu zemi. To jsem slíbila, svým lidem i sobě."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:476
 msgid "Congratulations"
@@ -915,7 +916,7 @@ msgstr "Gratuluji"
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for as"
 " long as you like."
-msgstr "Vyhrál jsi tuto misi. Můžeš přejít k další misí, nebo pokračovat v této tak dlouho jak jen chceš."
+msgstr "Tvá mise byla úspěšná. Můžeš přejít k další misi, nebo pokračovat v této tak dlouho, jak jen chceš."
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
@@ -926,4 +927,4 @@ msgstr "Budova ztracena!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:486
 msgid "We lost a building to the ocean!"
-msgstr "Budova se zřítila do oceánu!"
+msgstr "Budovu pohltil oceán!"

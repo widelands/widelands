@@ -91,6 +91,12 @@ public:
 	const BillOfMaterials& input_workers() const {
 		return input_workers_;
 	}
+	BillOfMaterials& mutable_input_wares() {
+		return input_wares_;
+	}
+	BillOfMaterials& mutable_input_workers() {
+		return input_workers_;
+	}
 	using Output = std::set<DescriptionIndex>;
 	const Output& output_ware_types() const {
 		return output_ware_types_;
@@ -115,8 +121,17 @@ public:
 		return created_attributes_;
 	}
 
-	/// The resources that this production site needs to collect from the map
-	const std::set<std::string>& collected_resources() const {
+	/// We only need the attributes during tribes initialization
+	void clear_attributes();
+
+	struct CollectedResourceInfo {
+		unsigned max_percent;
+		unsigned depleted_chance;
+	};
+
+	/// The resources that this production site needs to collect from the map, the max percent it can
+	/// achieve, and the chance when depleted
+	const std::map<std::string, CollectedResourceInfo>& collected_resources() const {
 		return collected_resources_;
 	}
 	/// The resources that this production site will place on the map
@@ -167,6 +182,9 @@ public:
 	const ProductionProgram* get_program(const std::string&) const;
 	using Programs = std::map<std::string, std::unique_ptr<ProductionProgram>>;
 	const Programs& programs() const {
+		return programs_;
+	}
+	Programs& mutable_programs() {
 		return programs_;
 	}
 
@@ -247,8 +265,11 @@ protected:
 		created_attributes_.insert(attribute_info);
 	}
 	/// Set that this production site needs to collect the given resource from the map
-	void add_collected_resource(const std::string& resource) {
-		collected_resources_.insert(resource);
+	void add_collected_resource(const std::string& resource,
+	                            unsigned max_percent,
+	                            unsigned depleted_chance) {
+		collected_resources_.insert(
+		   std::make_pair(resource, CollectedResourceInfo{max_percent, depleted_chance}));
 	}
 	/// Set that this production site will place the given resource on the map
 	void add_created_resource(const std::string& resource) {
@@ -266,7 +287,7 @@ private:
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> needed_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> collected_attributes_;
 	std::set<std::pair<MapObjectType, MapObjectDescr::AttributeIndex>> created_attributes_;
-	std::set<std::string> collected_resources_;
+	std::map<std::string, CollectedResourceInfo> collected_resources_;
 	std::set<std::string> created_resources_;
 	std::set<std::string> collected_bobs_;
 	std::set<std::string> created_bobs_;
@@ -384,6 +405,14 @@ public:
 
 	std::unique_ptr<const BuildingSettings> create_building_settings() const override;
 
+	// This function forces the productionsite to interrupt whatever it is doing ASAP,
+	// and start the specified program immediately afterwards. If that program expects
+	// some extra data, this data needs to be provided as the third parameter.
+	void set_next_program_override(Game&, const std::string&, MapObject* extra_data);
+	// Returns `true` if `set_next_program_override()` has been called recently
+	// and the force-started program has not terminated yet.
+	bool has_forced_state() const;
+
 protected:
 	void update_statistics_string(std::string* statistics) override;
 
@@ -394,7 +423,8 @@ protected:
 		const ProductionProgram* program;  ///< currently running program
 		size_t ip;                         ///< instruction pointer
 		ProgramResult phase;               ///< micro-step index (instruction dependent)
-		uint32_t flags;                    ///< pfXXX flags
+		enum StateFlags : uint32_t { kStateFlagIgnoreStopped = 1, kStateFlagHasExtraData = 2 };
+		uint32_t flags;  ///< pfXXX flags
 
 		/**
 		 * Instruction-dependent additional data.
@@ -437,7 +467,10 @@ protected:
 	                  const Duration& delay = Duration(10),
 	                  ProgramResult phase = ProgramResult::kNone);
 
-	void program_start(Game&, const std::string& program_name);
+	void program_start(Game&,
+	                   const std::string& program_name,
+	                   bool force = false,
+	                   MapObject* extra_data = nullptr);
 	virtual void program_end(Game&, ProgramResult);
 	virtual void train_workers(Game&);
 

@@ -19,8 +19,11 @@
 
 #include "map_io/map_elemental_packet.h"
 
+#include <cstdlib>
+
 #include <boost/algorithm/string.hpp>
 
+#include "base/log.h"
 #include "io/profile.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -45,6 +48,7 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 			map->set_nrplayers(s.get_int("nr_players"));
 			map->set_name(s.get_string("name"));
 			map->set_author(s.get_string("author"));
+			map->set_localize_author(s.get_val("author")->get_translate());
 			map->set_description(s.get_string("descr"));
 			map->set_hint(s.get_string("hint", ""));
 			map->set_background(s.get_string("background", ""));
@@ -65,6 +69,25 @@ void MapElementalPacket::pre_read(FileSystem& fs, Map* map) {
 					boost::trim(tn);
 					map->add_tag(tn);
 				}
+			}
+
+			map->required_addons_.clear();
+			for (std::string addons = s.get_string("addons", ""); !addons.empty();) {
+				const size_t commapos = addons.find(',');
+				const std::string substring = addons.substr(0, commapos);
+				const size_t colonpos = addons.find(':');
+				if (colonpos == std::string::npos) {
+					log_warn(
+					   "Ignoring malformed add-on requirement substring '%s'\n", substring.c_str());
+				} else {
+					const std::string version = substring.substr(colonpos + 1);
+					map->required_addons_.push_back(std::make_pair(
+					   substring.substr(0, colonpos), AddOns::string_to_version(version)));
+				}
+				if (commapos == std::string::npos) {
+					break;
+				}
+				addons = addons.substr(commapos + 1);
 			}
 
 			// Get suggested teams
@@ -137,10 +160,14 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 	global_section.set_int("map_w", map.get_width());
 	global_section.set_int("map_h", map.get_height());
 	global_section.set_int("nr_players", nr_players);
-	global_section.set_string("name", map.get_name());
-	global_section.set_string("author", map.get_author());
-	global_section.set_string("descr", map.get_description());
-	global_section.set_string("hint", map.get_hint());
+	global_section.set_translated_string("name", map.get_name());
+	if (map.get_localize_author()) {
+		global_section.set_translated_string("author", map.get_author());
+	} else {
+		global_section.set_string("author", map.get_author());
+	}
+	global_section.set_translated_string("descr", map.get_description());
+	global_section.set_translated_string("hint", map.get_hint());
 	if (!map.get_background().empty()) {
 		global_section.set_string("background", map.get_background());
 	}
@@ -148,6 +175,17 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 		global_section.set_string("theme", map.get_background_theme());
 	}
 	global_section.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
+
+	std::string addons;
+	for (const AddOns::AddOnInfo& addon : egbase.enabled_addons()) {
+		if (addon.category == AddOns::AddOnCategory::kWorld) {
+			if (!addons.empty()) {
+				addons += ',';
+			}
+			addons += addon.internal_name + ':' + AddOns::version_to_string(addon.version, false);
+		}
+	}
+	global_section.set_string("addons", addons);
 
 	int counter = 0;
 	for (Widelands::SuggestedTeamLineup lineup : map.get_suggested_teams()) {

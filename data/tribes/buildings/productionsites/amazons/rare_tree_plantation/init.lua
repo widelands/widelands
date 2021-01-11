@@ -53,7 +53,7 @@ descriptions:new_productionsite_type {
       },
       plant_balsa = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"planting balsatree",
+         descname = _"planting balsa tree",
          actions = {
             -- time total: xx
             "return=skipped unless economy needs balsa",
@@ -63,7 +63,7 @@ descriptions:new_productionsite_type {
       },
       plant_rubber = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"planting rubbertree",
+         descname = _"planting rubber tree",
          actions = {
             -- time total: xx
             "return=skipped unless economy needs rubber",
@@ -73,7 +73,7 @@ descriptions:new_productionsite_type {
       },
       plant_ironwood = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"planting ironwoodtree",
+         descname = _"planting ironwood tree",
          actions = {
             -- time total: xx
             "return=skipped unless economy needs ironwood",

@@ -10,6 +10,7 @@ descriptions:new_productionsite_type {
    size = "small",
 
    buildcost = {
+      brick = 1,
       granite = 1,
       log = 1,
       reed = 1
@@ -56,6 +57,13 @@ descriptions:new_productionsite_type {
             "consume=ration",
             "sleep=duration:30s",
             "callworker=scout"
+         }
+      },
+      targeted_scouting = {
+         descname = _"scouting",
+         actions = {
+            "consume=ration",
+            "callworker=targeted_scouting"
          }
       },
    },

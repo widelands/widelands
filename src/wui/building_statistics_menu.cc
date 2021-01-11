@@ -34,6 +34,7 @@ constexpr int kMargin = 5;
 constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
 constexpr int kLabelHeight = 18;
+constexpr int kSpinboxWidth = 4 * kBuildGridCellWidth;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
 constexpr Duration kUpdateTimeInGametimeMs = Duration(1000);  //  1 second, gametime
@@ -152,8 +153,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      unproductive_threshold_(&main_box_,
                              0,
                              0,
-                             kWindowWidth,
-                             kWindowWidth - kBuildGridCellWidth,
+                             kSpinboxWidth,
+                             kSpinboxWidth,
                              low_production_,
                              0,
                              100,
@@ -199,9 +200,9 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	main_box_.add(&hbox_construction_, UI::Box::Resizing::kFullSize);
 	main_box_.add(&hbox_unproductive_, UI::Box::Resizing::kFullSize);
 
-	main_box_.add_space(2 * kMargin);
-	main_box_.add(&label_threshold_, UI::Box::Resizing::kFullSize);
-	main_box_.add(&unproductive_threshold_, UI::Box::Resizing::kFillSpace);
+	main_box_.add_space(kMargin);
+	main_box_.add(&label_threshold_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	main_box_.add(&unproductive_threshold_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	unproductive_threshold_.set_tooltip(_("Buildings will be considered unproductive if their "
 	                                      "productivity falls below this percentage"));
@@ -383,7 +384,8 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 	assert(descr.type() != Widelands::MapObjectType::DISMANTLESITE);
 	if (descr.get_ismine()) {
 		return BuildingTab::Mines;
-	} else if (descr.get_isport()) {
+	}
+	if (descr.get_isport()) {
 		return BuildingTab::Ports;
 	} else {
 		switch (descr.get_size()) {
@@ -440,14 +442,14 @@ void BuildingStatisticsMenu::add_button(Widelands::DescriptionIndex id,
 	owned_labels_[id] =
 	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
 	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
-	owned_labels_[id]->set_style(style_.building_statistics_button_font());
+	owned_labels_[id]->set_style_override(style_.building_statistics_button_font());
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
 	   new UI::Textarea(button_box, UI::PanelStyle::kWui, UI::FontStyle::kWuiLabel, 0, 0,
 	                    kBuildGridCellWidth, kLabelHeight, "", UI::Align::kCenter);
-	productivity_labels_[id]->set_style(style_.building_statistics_button_font());
+	productivity_labels_[id]->set_style_override(style_.building_statistics_button_font());
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 
@@ -696,7 +698,7 @@ void BuildingStatisticsMenu::update() {
 				b_next_unproductive_.set_enabled(nr_unproductive > 0);
 				b_prev_unproductive_.set_enabled(nr_unproductive > 0);
 				hbox_unproductive_.set_visible(true);
-				label_unproductive_.set_text(_("Low Productivity:"));
+				label_unproductive_.set_text(_("Low productivity:"));
 			}
 		} else if (building.type() == Widelands::MapObjectType::MILITARYSITE) {
 			if (nr_owned) {
@@ -717,7 +719,7 @@ void BuildingStatisticsMenu::update() {
 				b_prev_unproductive_.set_enabled(total_soldier_capacity > total_stationed_soldiers);
 				hbox_unproductive_.set_visible(true);
 				/** TRANSLATORS: Label for number of buildings that are waiting for soldiers */
-				label_unproductive_.set_text(_("Lacking Soldiers:"));
+				label_unproductive_.set_text(_("Lacking soldiers:"));
 			}
 		}
 
@@ -756,7 +758,7 @@ void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
                                            const RGBColor& color) {
 	UI::FontStyleInfo style(style_.building_statistics_button_font());
 	style.set_color(color);
-	textarea->set_style(style);
+	textarea->set_style_override(style);
 	textarea->set_text(text);
 	textarea->set_visible(true);
 }
