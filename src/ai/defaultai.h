@@ -387,9 +387,9 @@ private:
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
 	// TODO(GunChleoc): Get rid of this hard-coding
-	std::vector<std::string> const armors_and_weapons = {"ax", "armor", "boots", "garment", "helm",
-	                                                     "padded", "sword", "trident", "tabard",
-	                                                     "shield", "mask", "spear", "warrior"};
+	std::vector<std::string> const armors_and_weapons = {
+	   "ax",      "armor",  "boots",  "garment", "helm",  "padded", "sword",
+	   "trident", "tabard", "shield", "mask",    "spear", "warrior"};
 
 	// seafaring related
 	enum { kReprioritize, kStopShipyard, kStapShipyard };
