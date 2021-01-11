@@ -9,7 +9,7 @@ descriptions:new_ware_type {
    icon = dirname .. "menu.png",
 
    animation_directory = dirname,
-   animations = { idle = { hotspot = { 4, 3 }}},
+   animations = { idle = { hotspot = {6, 5}}},
 }
 
 pop_textdomain()
