@@ -776,7 +776,7 @@ void DefaultAI::late_initialization() {
 				   supported_building_index, dynamic_cast<const Widelands::ProductionSiteDescr*>(
 				                                tribe_->get_building_descr(supported_building_index))));
 			}
-			// TODO(hessenfarmer): we need to fiind a solution for AMAzons here as they do not mine iron
+			// TODO(hessenfarmer): we need to find a solution for Amazons here as they do not mine iron
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
 				throw wexception(
@@ -7211,7 +7211,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		   static_cast<uint32_t>(mines_.size()),
 		   static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
 	}
-	if (true) {  // NOLINT
+	if (false) {  // NOLINT
 		log_dbg_time(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
 		             "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
 		             "stock", "targ.");
