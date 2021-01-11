@@ -33,6 +33,7 @@ descriptions:new_productionsite_type {
    animations = {unoccupied = {hotspot = {48, 50}}},
 
    aihints = {
+      basic_amount = 2,
       space_consumer = true,
    },
 
@@ -80,14 +81,14 @@ descriptions:new_productionsite_type {
             "sleep=duration:13s"
          },
       },
-      dummy = {
-         -- dirty hack to make the relation to cutter inverse due to the cutter being an upgraded building
-         -- TODO(hessenfarmer): make this dissapear in building help
-         descname = "dummy",
-         actions = {
-            "callworker=plant",
-         },
-      },
+      -- dummy = {
+         -- -- dirty hack to make the relation to cutter inverse due to the cutter being an upgraded building
+         -- -- TODO(hessenfarmer): make this dissapear in building help
+         -- descname = "dummy",
+         -- actions = {
+            -- "callworker=plant",
+         -- },
+      -- },
    }
 }
 

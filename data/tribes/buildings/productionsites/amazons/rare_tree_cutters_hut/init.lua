@@ -16,6 +16,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
+      basic_amount = 1,
       requires_supporters = true,
    },
 

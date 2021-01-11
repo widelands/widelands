@@ -430,6 +430,8 @@ struct BuildableField {
 	std::vector<uint8_t> producers_nearby;
 	// <building index, amount>
 	std::map<Widelands::DescriptionIndex, uint8_t> supported_producers_nearby;
+	// <building index, amount>
+	std::map<Widelands::DescriptionIndex, uint8_t> buildings_nearby;
 	// and for rangers, fishbreeders: <building name, amount>
 	std::map<std::string, uint8_t> supporters_nearby;
 };

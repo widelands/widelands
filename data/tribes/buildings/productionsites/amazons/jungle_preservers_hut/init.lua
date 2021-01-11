@@ -37,6 +37,7 @@ descriptions:new_productionsite_type {
    },
 
    aihints = {
+      basic_amount = 1,
       space_consumer = true,
    },
 

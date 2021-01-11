@@ -32,6 +32,7 @@ descriptions:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
+      prohibited_till = 220,
       very_weak_ai_limit = 2,
       weak_ai_limit = 3,
    },
