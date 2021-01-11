@@ -25,7 +25,6 @@
 #include "logic/message_id.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "wui/logmessage.h"
 
 class InfoPanel;
 class InteractiveBase;
@@ -118,7 +117,6 @@ private:
 	size_t index_of(const MessagePreview*) const;
 	void pop_message(MessagePreview*);
 	void push_message(MessagePreview*);
-	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 	const Widelands::MessageQueue* message_queue_;
 	std::unique_ptr<Widelands::MessageId> last_message_id_;
 

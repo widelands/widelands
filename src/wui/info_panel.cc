@@ -65,7 +65,7 @@ MessagePreview::MessagePreview(InfoPanel* i, const Widelands::Message* m, Widela
 }
 
 inline bool MessagePreview::message_still_exists() const {
-	return !owner_.message_queue_ || owner_.message_queue_->count(id_.value());
+	return !id_ || !owner_.message_queue_ || owner_.message_queue_->count(id_.value());
 }
 
 void MessagePreview::think() {
@@ -173,8 +173,6 @@ InfoPanel::InfoPanel(InteractiveBase& ib)
                   0,
                   "",
                   UI::Align::kRight),
-     log_message_subscriber_(Notifications::subscribe<LogMessage>(
-        [this](const LogMessage& lm) { log_message(lm.msg); })),
      message_queue_(nullptr),
      last_message_id_(nullptr),
      draw_real_time_(get_config_bool("game_clock", true)) {
