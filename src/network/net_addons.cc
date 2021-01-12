@@ -163,8 +163,8 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 
 		info.upload_timestamp = next_number(output);
 		info.download_count = next_number(output);
-		for (uint8_t vote = 0; vote < kMaxRating; ++vote) {
-			info.votes[vote] = next_number(output);
+		for (uint32_t& vote : info.votes) {
+			vote = next_number(output);
 		}
 
 		for (size_t comments = next_number(output); comments; --comments) {

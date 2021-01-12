@@ -1574,7 +1574,7 @@ public:
 			UI::Box* box =
 			   new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
 			UI::ProgressBar* bar = new UI::ProgressBar(
-			   box, UI::PanelStyle::kFsMenu, 0, 0, 2 * kRowButtonSize, 0, UI::ProgressBar::Vertical);
+			   box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0, UI::ProgressBar::Vertical);
 			bar->set_total(most_votes);
 			bar->set_state(info_.votes[vote - 1]);
 			bar->set_show_percent(false);
@@ -1583,9 +1583,9 @@ public:
 			   new UI::Textarea(box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel,
 			                    std::to_string(vote), UI::Align::kCenter);
 
-			box->add(bar, UI::Box::Resizing::kFillSpace);
+			box->add(bar, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 			box->add_space(kRowButtonSpacing);
-			box->add(label, UI::Box::Resizing::kFullSize);
+			box->add(label, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 			voting_stats_.add(box, UI::Box::Resizing::kExpandBoth);
 			voting_stats_.add_inf_space();
 		}
@@ -1626,6 +1626,14 @@ public:
 		screenshot_next_.sigclicked.connect([this]() { next_screenshot(1); });
 		screenshot_prev_.sigclicked.connect([this]() { next_screenshot(-1); });
 
+		main_box_.set_size(get_inner_w(), get_inner_h());
+	}
+
+	void on_resolution_changed_note(const GraphicResolutionChanged& note) override {
+		UI::Window::on_resolution_changed_note(note);
+
+		set_size(parent_.get_inner_w() - 2 * kRowButtonSize, parent_.get_inner_h() - 2 * kRowButtonSize);
+		set_pos(Vector2i(parent_.get_x() + kRowButtonSize, parent_.get_y() + kRowButtonSize));
 		main_box_.set_size(get_inner_w(), get_inner_h());
 	}
 
