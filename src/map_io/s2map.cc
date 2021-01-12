@@ -573,6 +573,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//   owner == 4 -> grey
 	//   owner == 6 -> green
 	//   owner == 6 -> orange
+	// TODO(hessenfarmer): this comment is not correct section 6 determines how the values of section 5
+	// are to be interpreted. Solution is working more the less though
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section) {
 		throw wexception("Section 6 (Ways) not found");
@@ -698,6 +700,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//  0x49-4f == iron 1-7
 	//  0x41-47 == coal 1-7
 	//  0x59-5f == granite 1-7
+	// fish and ground water are ignored here as they are infinite in S2 and not in widelands
+	// fish an water are defaulted per terrain in widelands game, so it is safe to ignore them
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section) {
 		throw wexception("Section 12 (Resources) not found");
