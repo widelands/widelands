@@ -724,7 +724,7 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 				res = "resource_gold";
 				amount = value & 7;
 				break;
-			case 0x59:
+			case 0x58:
 				res = "resource_stones";
 				amount = value & 7;
 				break;
