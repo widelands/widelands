@@ -747,25 +747,6 @@ void DefaultAI::late_initialization() {
 					log_dbg_time(gametime, "  -> %s", supp.c_str());
 				}
 				bo.set_is(BuildingAttribute::kSupportingProducer);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   amazons_rare_tree_plantation -> amazons_liana_cutters_hut
-				 *                                -> amazons_rare_tree_cutters_hut
-				 *                                -> amazons_wilderness_keepers_tent
-				 *
-				 *   amazons_rare_tree_cutters_hut, amazons_woodcutters_hut NOCOM removed, they are
-				 *     lumberjacks
-				 *
-				 *   frisians_clay_pit -> frisians_aqua_farm
-				 *                     -> frisians_charcoal_burners_house
-				 *                     -> frisians_fishers_house NOCOM removed, they only fish in water
-				 *
-				 *
-				 *   frisians_farm -> frisians_beekeepers_house
-				 *
-				 *   frisians_reed_farm -> frisians_beekeepers_house NOCOM new
-				 *
-				 * */
 			}
 
 			bo.supported_producers.clear();
@@ -776,7 +757,7 @@ void DefaultAI::late_initialization() {
 				   supported_building_index, dynamic_cast<const Widelands::ProductionSiteDescr*>(
 				                                tribe_->get_building_descr(supported_building_index))));
 			}
-			// TODO(hessenfarmer): we need to fiind a solution for AMAzons here as they do not mine
+			// TODO(hessenfarmer): we need to find a solution for amazons here as they do not mine
 			// iron
 			iron_resource_id = game().descriptions().resource_index("resource_iron");
 			if (iron_resource_id == Widelands::INVALID_INDEX) {
@@ -894,15 +875,6 @@ void DefaultAI::late_initialization() {
 					if (prod.supported_by_productionsites().empty()) {
 						log_dbg_time(gametime, "AI %d detected quarry: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kNeedsRocks);
-						/* Buildings detected at the time of writing:
-						 *
-						 *   amazons_stonecutters_hut
-						 *   atlanteans_quarry
-						 *   barbarians_quarry
-						 *   empire_quarry
-						 *   frisians_quarry
-						 *
-						 * */
 						for (const auto& attribute : prod.collected_attributes()) {
 							buildings_immovable_attributes_[attribute.second].insert(
 							   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsRocks));
@@ -910,16 +882,6 @@ void DefaultAI::late_initialization() {
 					} else {
 						log_dbg_time(gametime, "AI %d detected lumberjack: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kLumberjack);
-						/* Buildings detected at the time of writing:
-						 *
-						 *   amazons_rare_tree_cutters_hut NOCOM new, used to be kSupportingProducer
-						 *   amazons_woodcutters_hut
-						 *   atlanteans_woodcutters_house
-						 *   barbarians_lumberjacks_hut
-						 *   empire_lumberjacks_house
-						 *   frisians_woodcutters_house
-						 *
-						 * */
 						for (const auto& attribute : prod.collected_attributes()) {
 							buildings_immovable_attributes_[attribute.second].insert(
 							   ImmovableAttribute(bo.name, BuildingAttribute::kLumberjack));
@@ -931,12 +893,6 @@ void DefaultAI::late_initialization() {
 					log_dbg_time(
 					   gametime, "AI %d detected berry collector: %s", player_number(), bo.name);
 					bo.set_is(BuildingAttribute::kNeedsBerry);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   frisians_collectors_house
-					 *
-					 * */
-
 					for (const auto& attribute : prod.collected_attributes()) {
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kNeedsBerry));
@@ -948,30 +904,12 @@ void DefaultAI::late_initialization() {
 			if (!prod.collected_bobs().empty()) {
 				log_dbg_time(gametime, "AI %d detected hunter: %s", player_number(), bo.name);
 				bo.set_is(BuildingAttribute::kHunter);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   amazons_hunter_gatherers_hut NOCOM new
-				 *   atlanteans_hunters_house
-				 *   barbarians_hunters_hut
-				 *   empire_hunters_house
-				 *   frisians_hunters_house
-				 *
-				 * */
 			}
 
 			// fishers
 			if (bh.needs_water() && prod.collected_resources().count("resource_fish") == 1) {
 				log_dbg_time(gametime, "AI %d detected fisher: %s", player_number(), bo.name);
 				bo.set_is(BuildingAttribute::kFisher);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   amazons_hunter_gatherers_hut
-				 *   atlanteans_fishers_house
-				 *   barbarians_fishers_hut
-				 *   empire_fishers_house
-				 *   frisians_fishers_house
-				 *
-				 * */
 			}
 
 			// wells
@@ -980,15 +918,6 @@ void DefaultAI::late_initialization() {
 					if (tribe_->get_ware_descr(ware_index)->name() == "water") {
 						log_dbg_time(gametime, "AI %d detected well: %s", player_number(), bo.name);
 						bo.set_is(BuildingAttribute::kWell);
-						/* Buildings detected at the time of writing:
-						 *
-						 *   amazons_water_gatherers_hut
-						 *   atlanteans_well
-						 *   barbarians_well
-						 *   empire_well
-						 *   frisians_well
-						 *
-						 * */
 					}
 				}
 			}
@@ -997,19 +926,6 @@ void DefaultAI::late_initialization() {
 			if (bo.requires_supporters) {
 				log_dbg_time(
 				   gametime, "AI %d: %s strictly requires supporters\n", player_number(), bo.name);
-				/* Buildings detected at the time of writing:
-				 *
-				 *   amazons_rare_tree_cutters_hut
-				 *   amazons_hunter_gatherers_hut
-				 *   amazons_liana_cutters_hut
-				 *   amazons_rare_tree_plantation NOCOM hack removed, it's a ranger now
-				 *
-				 *   frisians_charcoal_burners_house
-				 *   frisians_collectors_house
-				 *   frisians_beekeepers_house
-				 *   frisians_aqua_farm
-				 *
-				 * */
 			}
 			continue;
 		}
@@ -1083,19 +999,6 @@ void DefaultAI::late_initialization() {
 					log_dbg_time(gametime, "AI %d detected ranger: %s -> %s", player_number(), bo.name,
 					             lumberjack->name().c_str());
 					bo.set_is(BuildingAttribute::kRanger);
-					/* Buildings detected at the time of writing:
-					 *
-					 *   amazons_rare_tree_plantation  -> amazons_liana_cutters_hut
-					 *                                 -> amazons_rare_tree_cutters_hut
-					 *                                 -> amazons_wilderness_keepers_tent
-					 *   amazons_jungle_preservers_hut -> amazons_woodcutters_hut
-					 *   amazons_rare_tree_plantation  -> amazons_rare_tree_cutters_hut NOCOM new
-					 *   atlanteans_foresters_house    -> atlanteans_woodcutters_house
-					 *   barbarians_rangers_hut        -> barbarians_lumberjacks_hut
-					 *   empire_foresters_house        -> empire_lumberjacks_house
-					 *   frisians_foresters_house      -> frisians_woodcutters_house
-					 *
-					 * */
 					for (const auto& attribute : prodsite->created_attributes()) {
 						buildings_immovable_attributes_[attribute.second].insert(
 						   ImmovableAttribute(bo.name, BuildingAttribute::kRanger));
@@ -7223,7 +7126,7 @@ void DefaultAI::print_stats(const Time& gametime) {
 		   static_cast<uint32_t>(mines_.size()),
 		   static_cast<uint32_t>(warehousesites.size() - num_ports), num_ports);
 	}
-	if (true) {  // NOLINT
+	if (false) {  // NOLINT
 		log_dbg_time(gametime, " %1s %-30s   %5s(perf)  %6s %6s %6s %8s %5s %5s %5s %5s\n", "T",
 		             "Buildings", "work.", "const.", "unocc.", "uncon.", "needed", "prec.", "pprio",
 		             "stock", "targ.");
