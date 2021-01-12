@@ -573,8 +573,8 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	//   owner == 4 -> grey
 	//   owner == 6 -> green
 	//   owner == 6 -> orange
-	// TODO(hessenfarmer): this comment is not correct section 6 determines how the values of section 5
-	// are to be interpreted. Solution is working more the less though
+	// TODO(hessenfarmer): this comment is not correct section 6 determines how the values of section
+	// 5 are to be interpreted. Solution is working more the less though
 	section = load_s2mf_section(fr, mapwidth, mapheight);
 	if (!section) {
 		throw wexception("Section 6 (Ways) not found");
