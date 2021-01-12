@@ -1573,8 +1573,9 @@ public:
 		for (unsigned vote = 1; vote <= AddOns::kMaxRating; ++vote) {
 			UI::Box* box =
 			   new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
-			UI::ProgressBar* bar = new UI::ProgressBar(
-			   box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0, UI::ProgressBar::Vertical);
+			UI::ProgressBar* bar =
+			   new UI::ProgressBar(box, UI::PanelStyle::kFsMenu, 0, 0, kRowButtonSize * 3 / 2, 0,
+			                       UI::ProgressBar::Vertical);
 			bar->set_total(most_votes);
 			bar->set_state(info_.votes[vote - 1]);
 			bar->set_show_percent(false);
@@ -1632,7 +1633,8 @@ public:
 	void on_resolution_changed_note(const GraphicResolutionChanged& note) override {
 		UI::Window::on_resolution_changed_note(note);
 
-		set_size(parent_.get_inner_w() - 2 * kRowButtonSize, parent_.get_inner_h() - 2 * kRowButtonSize);
+		set_size(
+		   parent_.get_inner_w() - 2 * kRowButtonSize, parent_.get_inner_h() - 2 * kRowButtonSize);
 		set_pos(Vector2i(parent_.get_x() + kRowButtonSize, parent_.get_y() + kRowButtonSize));
 		main_box_.set_size(get_inner_w(), get_inner_h());
 	}
