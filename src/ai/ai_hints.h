@@ -38,11 +38,7 @@ struct BuildingHints {
 	~BuildingHints() {
 	}
 
-	std::set<std::string> supported_production() const {
-		return supported_production_;
-	}
-
-	bool get_needs_water() const {
+	bool needs_water() const {
 		return needs_water_;
 	}
 
