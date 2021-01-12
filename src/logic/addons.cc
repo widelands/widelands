@@ -224,19 +224,19 @@ AddOnCategory get_category(const std::string& name) {
 }
 
 uint32_t AddOnInfo::number_of_votes() const {
-	uint32_t v = 0;
-	for (const auto& pair : votes) {
-		v += pair.second;
+	uint32_t total = 0;
+	for (uint32_t v : votes) {
+		total += v;
 	}
-	return v;
+	return total;
 }
 double AddOnInfo::average_rating() const {
-	uint32_t v = 0, sum = 0;
-	for (const auto& pair : votes) {
-		sum += pair.first * pair.second;
-		v += pair.second;
+	double total = 0, sum = 0;
+	for (uint8_t i = 1; i <= kMaxRating; ++i) {
+		total += votes[i - 1];
+		sum += votes[i - 1] * i;
 	}
-	return v ? static_cast<double>(sum) / v : 0;
+	return (total > 0) ? (sum / total) : 0;
 }
 
 AddOnInfo preload_addon(const std::string& name) {

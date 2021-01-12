@@ -1567,26 +1567,23 @@ public:
 
 		voting_stats_.add_inf_space();
 		uint32_t most_votes = 1;
-		for (const auto& pair : info_.votes) {
-			most_votes = std::max(most_votes, pair.second);
+		for (uint32_t v : info_.votes) {
+			most_votes = std::max(most_votes, v);
 		}
 		for (unsigned vote = 1; vote <= AddOns::kMaxRating; ++vote) {
-			const auto it = info_.votes.find(vote);
-			const uint32_t nr_votes = it == info_.votes.end() ? 0 : it->second;
-
 			UI::Box* box =
 			   new UI::Box(&voting_stats_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical);
 			UI::ProgressBar* bar = new UI::ProgressBar(
-			   box, UI::PanelStyle::kFsMenu, 0, 0, 0, 0, UI::ProgressBar::Vertical);
+			   box, UI::PanelStyle::kFsMenu, 0, 0, 2 * kRowButtonSize, 0, UI::ProgressBar::Vertical);
 			bar->set_total(most_votes);
-			bar->set_state(nr_votes);
+			bar->set_state(info_.votes[vote - 1]);
 			bar->set_show_percent(false);
 
 			UI::Textarea* label =
 			   new UI::Textarea(box, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuLabel,
 			                    std::to_string(vote), UI::Align::kCenter);
 
-			box->add(bar, UI::Box::Resizing::kExpandBoth);
+			box->add(bar, UI::Box::Resizing::kFillSpace);
 			box->add_space(kRowButtonSpacing);
 			box->add(label, UI::Box::Resizing::kFullSize);
 			voting_stats_.add(box, UI::Box::Resizing::kExpandBoth);
@@ -1633,13 +1630,14 @@ public:
 	}
 
 private:
+	static std::map<std::pair<std::string /* add-on */, std::string /* screenshot */>, std::string /* image path */> downloaded_screenshots_cache_;
+
 	void next_screenshot(int8_t delta) {
 		assert(nr_screenshots_ > 0);
 		while (delta < 0) {
 			delta += nr_screenshots_;
 		}
-		current_screenshot_ += delta;
-		current_screenshot_ %= nr_screenshots_;
+		current_screenshot_ = (current_screenshot_ + delta) % nr_screenshots_;
 		assert(current_screenshot_ < static_cast<int32_t>(screenshot_cache_.size()));
 
 		auto it = info_.screenshots.begin();
@@ -1656,11 +1654,17 @@ private:
 		}
 
 		const Image* image = nullptr;
-		const std::string screenie =
-		   parent_.net().download_screenshot(info_.internal_name, it->first);
-		if (!screenie.empty()) {
-			image = g_image_cache->get(screenie);
-			g_fs->fs_unlink(screenie);
+		const std::pair<std::string, std::string> cache_key(info_.internal_name, it->first);
+		auto cached = downloaded_screenshots_cache_.find(cache_key);
+		if (cached == downloaded_screenshots_cache_.end()) {
+			const std::string screenie =
+			   parent_.net().download_screenshot(cache_key.first, cache_key.second);
+			downloaded_screenshots_cache_[cache_key] = screenie;
+			if (!screenie.empty()) {
+				image = g_image_cache->get(screenie);
+			}
+		} else if (!cached->second.empty()) {
+			image = g_image_cache->get(cached->second);
 		}
 
 		if (image) {
@@ -1691,6 +1695,7 @@ private:
 	UI::Textarea screenshot_stats_, screenshot_descr_, voting_stats_summary_;
 	UI::Button screenshot_next_, screenshot_prev_, submit_, ok_;
 };
+std::map<std::pair<std::string, std::string>, std::string> RemoteInteractionWindow::downloaded_screenshots_cache_;
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                                AddOnsCtrl* ctrl,
