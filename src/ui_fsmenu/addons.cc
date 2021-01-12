@@ -1630,7 +1630,9 @@ public:
 	}
 
 private:
-	static std::map<std::pair<std::string /* add-on */, std::string /* screenshot */>, std::string /* image path */> downloaded_screenshots_cache_;
+	static std::map<std::pair<std::string /* add-on */, std::string /* screenshot */>,
+	                std::string /* image path */>
+	   downloaded_screenshots_cache_;
 
 	void next_screenshot(int8_t delta) {
 		assert(nr_screenshots_ > 0);
@@ -1695,7 +1697,8 @@ private:
 	UI::Textarea screenshot_stats_, screenshot_descr_, voting_stats_summary_;
 	UI::Button screenshot_next_, screenshot_prev_, submit_, ok_;
 };
-std::map<std::pair<std::string, std::string>, std::string> RemoteInteractionWindow::downloaded_screenshots_cache_;
+std::map<std::pair<std::string, std::string>, std::string>
+   RemoteInteractionWindow::downloaded_screenshots_cache_;
 
 RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
                                AddOnsCtrl* ctrl,
