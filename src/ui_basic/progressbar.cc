@@ -41,7 +41,8 @@ ProgressBar::ProgressBar(Panel* const parent,
      orientation_(orientation),
      state_(0),
      total_(100),
-     progress_style_(style) {
+     progress_style_(style),
+     show_percent_(true) {
 }
 
 inline const UI::ProgressbarStyleInfo& ProgressBar::progress_style() const {
@@ -94,7 +95,9 @@ void ProgressBar::draw(RenderTarget& dst) {
 
 	// Print the state in percent without decimal points.
 	std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(as_richtext_paragraph(
-	   (boost::format("%u%%") % floorf(fraction * 100.f)).str(), progress_style().font()));
+	   show_percent_ ? (boost::format("%u%%") % floorf(fraction * 100.f)).str() :
+	                   std::to_string(state_),
+	   progress_style().font()));
 	Vector2i pos(get_w() / 2, get_h() / 2);
 	UI::center_vertically(rendered_text->height(), &pos);
 	rendered_text->draw(dst, pos, UI::Align::kCenter);
