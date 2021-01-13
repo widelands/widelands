@@ -56,6 +56,9 @@ struct NetAddons {
 	std::string
 	download_i18n(const std::string& addon, const std::string& checksum, const std::string& locale);
 
+	// Download the given screenshot for the given add-on
+	std::string download_screenshot(const std::string& addon, const std::string& screenie);
+
 private:
 	// Open the connection if it was not open yet; throws an error if this fails
 	void init();

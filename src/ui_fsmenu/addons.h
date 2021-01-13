@@ -107,6 +107,10 @@ public:
 		return UI::Window::WindowLayoutID::kFsMenuDefault;
 	}
 
+	AddOns::NetAddons& net() {
+		return network_handler_;
+	}
+
 protected:
 	void layout() override;
 	void think() override;
