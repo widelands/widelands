@@ -73,6 +73,8 @@ struct AddOnComment {
 	std::time_t timestamp;
 };
 
+constexpr uint8_t kMaxRating = 10;
+
 struct AddOnInfo {
 	std::string internal_name;  // "cool_feature.wad"
 
@@ -91,6 +93,7 @@ struct AddOnInfo {
 	bool verified;  // Only valid for Remote add-ons
 
 	AddOnFileList file_list;  // Get rid of this ASAP
+	std::map<std::string /* name */, std::string /* description */> screenshots;
 
 	uint32_t total_file_size;     // total size of all files, in bytes
 	std::string upload_username;  // who uploaded (may be different from author)
@@ -98,9 +101,11 @@ struct AddOnInfo {
 	// TODO(Nordfriese): These are not yet implemented on the server-side
 	std::time_t upload_timestamp;  // date and time when this version was uploaded
 	uint32_t download_count;       // total times downloaded
-	uint32_t votes;                // total number of votes
-	float average_rating;          // average rating between 1.0 and 10.0 (0 if no votes)
+	uint32_t votes[kMaxRating];    // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
+
+	uint32_t number_of_votes() const;
+	double average_rating() const;
 };
 
 // Sorted list of all add-ons mapped to whether they are currently enabled
