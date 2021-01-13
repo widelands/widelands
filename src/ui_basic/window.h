@@ -148,9 +148,9 @@ protected:
 	const WindowStyleInfo& window_style_info() const;
 	const FontStyleInfo& title_style() const;
 
-private:
-	void on_resolution_changed_note(const GraphicResolutionChanged& note);
+	virtual void on_resolution_changed_note(const GraphicResolutionChanged& note);
 
+private:
 	bool is_minimal_;
 	uint32_t oldh_;  // if it is minimized, this is the old height
 	bool dragging_;
