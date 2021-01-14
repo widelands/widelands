@@ -226,7 +226,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	// Need to do this first so we can set the theme and background.
 	maploader->preload_map(true, &enabled_addons());
 
-	create_loader_ui({"general_game"}, false /* no game tips in scenarios */, map().get_background_theme(), map().get_background());
+	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
+	                 map().get_background_theme(), map().get_background());
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
