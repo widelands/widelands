@@ -17,8 +17,6 @@ p2 = game.players[2] -- Angadthur               – Atlantean King
 p3 = game.players[3] -- Marcus Caius Iniucundus – Imperial Legate
 difficulty = wl.Game().scenario_difficulty
 
-p1.allow_additional_expedition_items = false
-
 port_south = map:get_field(6, 461)
 port_volcano = map:get_field(16, 402)
 port_desert_s = map:get_field(42, 243)
