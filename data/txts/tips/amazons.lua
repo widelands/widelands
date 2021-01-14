@@ -5,7 +5,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Rare woods are the backbone of an amazon economy. Build rare tree plantations to plant this special trees.",
+      text = _"Rare woods are the backbone of an amazon economy. Build rare tree plantations to plant these special trees.",
       seconds = 7
    },
    {
