@@ -78,7 +78,6 @@ descriptions:new_immovable_type {
    name = "cocoa_tree_old",
    -- TRANSLATORS:  This is an amazon rare tree.
    descname = _ "Cocoa Tree (old)",
-   species = _ "Cocoa Tree",
    size = "small",
    icon = dirname .. "menu_old.png",
    programs = {
