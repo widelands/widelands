@@ -48,7 +48,7 @@ descriptions:new_worker_type {
          rows = 8,
          sound_effect = {
             path = "sound/hammering/hammering",
-            priority = 64
+            priority = "50%"
          }
       },
    },
