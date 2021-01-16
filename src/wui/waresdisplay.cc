@@ -515,7 +515,7 @@ StockMenuWaresDisplay::StockMenuWaresDisplay(UI::Panel* const parent,
                                              const Widelands::WareWorker type)
    : WaresDisplay(parent, x, y, p.tribe(), type, false),
      player_(p),
-     solid_icon_backgrounds_(false) {
+     solid_icon_backgrounds_(true) {
 }
 
 RGBAColor

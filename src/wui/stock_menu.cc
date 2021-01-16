@@ -21,6 +21,7 @@
 
 #include "base/i18n.h"
 #include "economy/economy.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
 #include "ui_basic/checkbox.h"
@@ -54,16 +55,28 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	tabs->add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
 
+	auto color_tag = [](const RGBColor& c, const std::string& text1, const std::string& text2) {
+		return (boost::format(_("%1$s %2$s")) % (boost::format("<font color=%s>%s</font>") % c.hex_value() % text1).str() % text2).str();
+	};
+	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
 	UI::Checkbox* solid_icon_backgrounds =
 	   new UI::Checkbox(main_box, UI::PanelStyle::kWui, Vector2i::zero(),
-	                    /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are
-	                       drawn with the same background color. Very little space is available. */
-	                    _("Monochrome"));
+	                    /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with different background colors; each icon's color indicates whether the stock is higher or lower than the economy target setting. Very little space is available. */
+	                    _("Evaluate"), (boost::format("<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>")
+	                    		% g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader).as_font_tag(
+		                    		_("Compare stocked amounts to economy target quantities"))
+		                    	% g_style_manager->font_style(UI::FontStyle::kWuiTooltip).as_font_tag(color_tag(colors.low_color(),
+		                    			_("Red:"), _("Stock is lower than the target")))
+		                    	% g_style_manager->font_style(UI::FontStyle::kWuiTooltip).as_font_tag(color_tag(colors.medium_color(),
+		                    			_("Yellow:"), _("Stock is equal to the target")))
+		                    	% g_style_manager->font_style(UI::FontStyle::kWuiTooltip).as_font_tag(color_tag(colors.high_color(),
+		                    			_("Green:"), _("Stock is higher than the target")))
+	                		).str());
 	solid_icon_backgrounds->changedto.connect([this](const bool b) {
-		all_wares_->set_solid_icon_backgrounds(b);
-		all_workers_->set_solid_icon_backgrounds(b);
-		warehouse_wares_->set_solid_icon_backgrounds(b);
-		warehouse_workers_->set_solid_icon_backgrounds(b);
+		all_wares_->set_solid_icon_backgrounds(!b);
+		all_workers_->set_solid_icon_backgrounds(!b);
+		warehouse_wares_->set_solid_icon_backgrounds(!b);
+		warehouse_workers_->set_solid_icon_backgrounds(!b);
 	});
 
 	main_box->add(tabs, UI::Box::Resizing::kExpandBoth);
