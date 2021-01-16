@@ -5,6 +5,11 @@ function get_general_tips()
    return tips
 end
 
+function get_amazon_tips()
+   include "txts/tips/amazons.lua"
+   return tips
+end
+
 function get_atlantean_tips()
    include "txts/tips/atlanteans.lua"
    return tips
@@ -49,7 +54,10 @@ return {
       local text = h2(_"General")
       text = text .. format_tips(get_general_tips())
 
-      if (tribename == "atlanteans") then
+      if (tribename == "amazons") then
+         text = text .. h2(_"Amazons")
+         text = text .. format_tips(get_amazon_tips())
+      elseif (tribename == "atlanteans") then
          text = text .. h2(_"Atlanteans")
          text = text .. format_tips(get_atlantean_tips())
       elseif (tribename == "barbarians") then
