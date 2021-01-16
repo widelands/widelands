@@ -3,15 +3,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"POT-Creation-Date: 2020-12-24 07:25+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
-"Last-Translator: Ondřej Itřech, 2020\n"
+"Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -320,7 +320,7 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
-"Jako všichni Frísané stavíme své domy převážně z cihel. Vylepšujeme je "
+"Jako všichni Frísové stavíme své domy převážně z cihel. Vylepšujeme je "
 "pomocí klád a žuly. Střechy jsou samozřejmě pokryty došky z rákosu. Nic "
 "neochrání proti dešti lépe."
 
