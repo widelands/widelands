@@ -7,13 +7,13 @@
 # Markus7cz <markus7cz@gmail.com>, 2010
 # Matej Svrcek <mmatej@yahoo.com>, 2015-2016
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
-"PO-Revision-Date: 2020-12-21 17:36+0000\n"
+"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"PO-Revision-Date: 2021-01-02 23:38+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -238,11 +238,11 @@ msgstr "Postav kobky a labyrint"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:116
 msgid "Build a warehouse and a horse farm"
-msgstr "Postav skladiště a stáje"
+msgstr "Postav sklad a stáje"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Warehouse and Horse Farm"
-msgstr "Skladiště a stáje"
+msgstr "Sklad a stáje"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:119
 msgid ""
@@ -250,11 +250,11 @@ msgid ""
 "horses to help out your carriers. Horses are bred at horse farms using water"
 " and corn. A warehouse will also help to ensure that your transportation "
 "system does not collapse."
-msgstr "Jak se síť cest prodlužuje a stává se více spletitou, je vhodné zapojit koně, kteří pomohou nosičům s přepravou. Koně se chovají ve stájích, kde potřebují vodu a kukuřici. Další skladiště také odlehčí přepravní síti a zabrání jejímu zahlcení."
+msgstr "Jak se síť cest prodlužuje a stává se více spletitou, je vhodné zapojit koně, kteří pomohou nosičům s přepravou. Koně se chovají ve stájích, kde potřebují vodu a kukuřici. Další sklad také odlehčí přepravní síti a zabrání jejímu zahlcení."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build a warehouse"
-msgstr "Postav skladiště"
+msgstr "Postav sklad"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid "Build a horse farm"
@@ -273,7 +273,7 @@ msgid ""
 "There is a lake at the top of the island. Build three ships in these waters "
 "and you might be able to rescue your people before the island is swallowed "
 "completely by the ocean."
-msgstr "Na vrcholu ostrova je jezero. Vybuduj v jeho vodách tři lodě, snad tak budeš moci zachránit  svůj lid, předtím než bude ostrov zcela pohlcen oceánem."
+msgstr "Na vrcholu ostrova je jezero. Vybuduj v jeho vodách tři lodě, snad tak budeš moci zachránit svůj lid, předtím než bude ostrov zcela pohlcen oceánem."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a shipyard close to the lake to start building ships"
@@ -595,7 +595,7 @@ msgid ""
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving mill and a spider farm? The spiders deliver the finest"
 " silk and we will produce the finest spidercloth from it."
-msgstr "Nechť Vás Satul hřeje, Jundlino. Jmenuji se Opol a jsem vrchní tkadlec cechu, který s vámi opustil Atlantidu a boha Luta. Přicházím se vskutku politováníhodnou zprávou. Došla nám pavoučí látka. Ve skladišti už nemáme ani kousek. Nemohla byste trochu pomoci tkalcovskému cechu zorganizováním stavby tkalcovny a pavoučí farmy? Pavouci poskytují to nejjemnější hedvábné předivo a my z něj vyrobíme tu nejjemnější pavoučí látku."
+msgstr "Nechť Vás Satul hřeje, Jundlino. Jmenuji se Opol a jsem vrchní tkadlec cechu, který s vámi opustil Atlantidu a boha Luta. Přicházím se vskutku politováníhodnou zprávou. Došla nám pavoučí látka. Ve skladu už nemáme ani kousek. Nemohla byste trochu pomoci tkalcovskému cechu zorganizováním stavby tkalcovny a pavoučí farmy? Pavouci poskytují to nejjemnější hedvábné předivo a my z něj vyrobíme tu nejjemnější pavoučí látku."
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -670,7 +670,7 @@ msgid ""
 "I have received word that our mining industry started working. Now that we "
 "are forging weapons, I will send a letter to Sidolus informing him that it’s"
 " time to build a barracks and start recruiting soldiers."
-msgstr "Obdržela jsem zprávu, že náš těžební průmysl už běží. Teď, když kováme zbraně, pošlu dopis Sidolusovi, abych ho informovala, že je čas postavit kasárna a začít verbovat vojáky."
+msgstr "Obdržela jsem zprávu, že náš těžební průmysl už běží. Teď, když kováme zbraně, pošlu dopis Sidolovi, abych ho informovala, že je čas postavit kasárna a začít verbovat vojáky."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:327
@@ -752,7 +752,7 @@ msgid ""
 "Another way to take load from our roads is to build warehouses. We have "
 "claimed the mountain now, it seems a good idea to have a warehouse on the "
 "plateau to avoid having to transport everything up and down the slopes."
-msgstr "Dalším způsobem jak ulehčit dopravě je postavit skladiště. Když jsme nyní zabrali horu, zdá se být rozumné, postavit skladiště na plošině a vyhnout se tak tomu, aby se muselo vše přepravovat nahoru a dolů po strmých svazích."
+msgstr "Dalším způsobem jak ulehčit dopravě je postavit sklad. Když jsme nyní zabrali horu, zdá se být rozumné, postavit sklad na plošině a vyhnout se tak tomu, aby se muselo vše přepravovat nahoru a dolů po strmých svazích."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:382
 msgid "A Dangerous Discovery"
@@ -885,7 +885,7 @@ msgid ""
 "logs and spidercloth for the construction there. Forget about everything "
 "else, we need those wares on top of the mountain before our warehouses are "
 "all swallowed by the sea."
-msgstr "A teď honem, potřebujeme dům pro Ostura hned vedle jezera a musíme tam dopravit prkna, klády a pavoučí látku pro stavbu. Zapomeň teď na vše ostatní, potřebujeme všechny suroviny na vrcholku hory, dříve než naše skladiště pohltí moře."
+msgstr "A teď honem, potřebujeme dům pro Ostura hned vedle jezera a musíme tam dopravit prkna, klády a pavoučí látku pro stavbu. Zapomeň teď na vše ostatní, potřebujeme všechny suroviny na vrcholku hory, dříve než náš sklad pohltí moře."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:469
 msgid "Jundlina is Relieved"
