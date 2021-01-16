@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
+"POT-Creation-Date: 2020-12-24 07:25+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Ondřej Itřech, 2020\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -98,11 +98,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:50
 msgid "Build an aqua farm"
-msgstr "Postav vodní statek"
+msgstr "Postav rybí sádka"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr "Postav vodní statek a začni s chovem ryb"
+msgstr "Postav rybí sádka a začni s chovem ryb"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:53
 msgid ""
@@ -110,10 +110,9 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
-"Postav vodní statek na chov ryb. Vodní statek potřebuje jámy, které "
-"zůstávají v okolí jámového výkopu, aby z nich mohl rybář udělat rybníčky pro"
-" ryby. Jen rybář, který pracuje na vodním statku, může lovit ryby z těchto "
-"rybníčků."
+"Postav rybí sádka na chov ryb. Rybí sádka potřebuje jámy, které zůstávají v "
+"okolí jámového výkopu, aby z nich mohl rybář udělat rybníčky pro ryby. Jen "
+"rybář, který pracuje na rybí sádce, může lovit ryby z těchto rybníčků."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:58
 msgid "Decide whether you want to cooperate with the Empire"
@@ -597,7 +596,7 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
-"Skvělá práce. Založili jsme vodní statek a naše těžba je nyní stabilní. Ale "
+"Skvělá práce. Založili jsme rybí sádka a naše těžba je nyní stabilní. Ale "
 "horníci mi tvrdí, že zdroje se tenčí a doly by brzy mohly být zcela prázdné."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
