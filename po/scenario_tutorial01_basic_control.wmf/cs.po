@@ -7,13 +7,13 @@
 # GunChleoc, 2014
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Milan Fašina <matrix17@seznam.cz>, 2016-2018
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
-"PO-Revision-Date: 2020-12-21 20:52+0000\n"
+"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"PO-Revision-Date: 2021-01-05 17:17+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -143,7 +143,7 @@ msgid ""
 "the Atlanteans and the Frisians. All tribes have a different economy, "
 "strength and weaknesses, but the general gameplay is the same for all. We "
 "will play the Barbarians for now."
-msgstr "Ve hře Widelands jsou čtyři různé kmeny: Barbaři, Císařství, Atlanťané a Frísané. Všechny se liší ve fungování hospodářství a svých silných a slabých stránkách, ale princip hry je u všech stejný. Teď budeme hrát za Barbary."
+msgstr "Ve hře Widelands jsou čtyři různé kmeny: Barbaři, Císařství, Atlanťané a Frísové. Všechny se liší ve fungování hospodářství a svých silných a slabých stránkách, ale princip hry je u všech stejný. Teď budeme hrát za Barbary."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -804,7 +804,7 @@ msgstr "Archivuj své příchozí zprávy"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:530
 msgid "Archive all your messages in your inbox now."
-msgstr "Archivuj všechny své zprávy ve své poště."
+msgstr "Archivuj všechny své přijaté zprávy."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:531
 msgid ""

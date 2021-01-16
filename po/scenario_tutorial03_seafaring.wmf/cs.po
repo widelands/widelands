@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
-"PO-Revision-Date: 2020-12-18 20:05+0000\n"
+"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"PO-Revision-Date: 2020-12-31 19:11+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr "Zde v severní části, máš pouze důl na zlato a skladiště. Ačkoliv jsou tví horníci dobře zásobeni jídlem, nemáš žádný způsob, jak přepravit zlatou rudu do slévárny na jihu."
+msgstr "Zde v severní části, máš pouze důl na zlato a sklad. Ačkoliv jsou tví horníci dobře zásobeni jídlem, nemáš žádný způsob, jak přepravit zlatou rudu do slévárny na jihu."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:27
 msgid ""
@@ -62,7 +62,7 @@ msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr "Ale nechci na tebe spěchat, zrovna jsi dorazil a nejspíš by sis rád blíže prohlédl i svoji osadu. Já si teď taky dám na chvili pauzu, ale brzy se vrátím."
+msgstr "Ale nechci na tebe spěchat. Tvá cesta sem byla jistě náročná a nejspíš si chceš blíže prohlédnout i svoji osadu. Já si teď taky vezmu na chvíli volno, ale brzy se vrátím."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:37
@@ -83,7 +83,7 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr "Navíc přístavy umožňují přepravu surovin na lodích. Když klikneš na přístav, který už máš, všimneš si dvou záložek: \"Suroviny čekající na doručení\" a \"Dělníci čekající na nalodění\". Čekají na loď, která je dopraví do jiného přístavu. V současné době tu žádný další není, protože jsme zatím druhý nepostavili. Tak to změňme!"
+msgstr "Co víc, přístavy umožňují přepravu surovin pomocí lodí. Když klikneš na přístav, který už máš, všimneš si dvou záložek navíc: \"Suroviny čekající na doručení\" a \"Dělníci čekající na nalodění\". Zde zobrazené čeká na loď na přepravu do jiného přístavu. V tuto chvíli tam ale nic k přepravě nenajdeme, protože jsme zatím žádný druhý přístav nepostavili. Tak to změňme!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:47
 msgid "Building ports"
@@ -114,7 +114,7 @@ msgstr "Místa, kde se dá postavit přístav, jsou určena návrhářem mapy, t
 msgid ""
 "You might already have noticed that you have such an icon next to your "
 "castle."
-msgstr "Možná sis všiml, že jednu takovou ikonu máš hned vedle svého hradu."
+msgstr "Možná neušlo tvé pozornosti, že jednu takovou ikonu máš hned vedle svého hradu."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:59
 msgid "Build a port"
@@ -143,7 +143,7 @@ msgstr "Přístavy se staví stejně jako normální budovy, ale lze je stavět 
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr "Ačkoliv se přístavy chovají jako skladiště, neměl bys jich stavět více, než je nutné. Stojí křemen, diamanty a zlato, což je dělá celkem drahé."
+msgstr "I když se přístavy chovají jako sklady, není dobré jich stavět více, než je nutné. Stojí křemen, diamanty a zlato, což je dělá značně drahými."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:72
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:93
@@ -269,21 +269,21 @@ msgstr "Nemáme dostatek železa"
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr "Druhá loď možná ještě není dostavena, ale máme naléhavý problém."
+msgstr "Druhá loď možná ještě není dostavěna, ale máme naléhavý problém."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:136
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr "Jak sis určitě již všiml, v horách na západě není žádné železo. Máme spoustu uhlí a zlaté rudy, ale bez železné rudy nemůžeme vyrábět nástroje."
+msgstr "Jak je vidět, v horách na západě není žádné železo. Máme spoustu uhlí a zlaté rudy, ale bez železné rudy nemůžeme vyrábět nástroje."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:137
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr "Přestože to může trvat dlouho, být drahé a neobejde se to bez nebezpečí – kdo ví, jaké příšery v moři žijí – nevidím jinou možnost, než že musíme podnikout výpravu na neznámá moře."
+msgstr "Přestože to může trvat dlouho, být drahé a neobejde se to bez nebezpečí, kdo ví, jaké příšery v moři žijí, nevidím jinou možnost, než že budeme muset podnikout výpravu do neznámých mořských končin."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:145
@@ -413,7 +413,7 @@ msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr "Se svou výpravou jsi dosáhl úspěšného konce a založil jsi novou kolonii. Poslal jsem pár geologů – už ohlásili, že našli železnou rudu."
+msgstr "Díky tvému vedení dosáhla výprava úspěšného konce a nová kolonie je založena. Poslal jsem pár geologů, už ohlásili, že našli železnou rudu."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:199
 msgid ""
@@ -421,7 +421,7 @@ msgid ""
 "ships and how to send out an expedition. Remember that expeditions are "
 "sometimes the fastest way to reach essential resources – and sometimes the "
 "only one."
-msgstr "Už jsi se naučil o mořeplavectví v podstatě všechno: jak postavit přístav, loď a jak zahájit výpravu. Pamatuj, že výpravy jsou často nejrychlejší cestou jak získat potřebné suroviny – a někdy dokonce jedinou."
+msgstr "Už umíš o mořeplavectví v podstatě všechno: jak postavit přístav, loď a jak zahájit výpravu. Pamatuj, že výpravy jsou často nejrychlejší cestou, jak získat potřebné suroviny, a někdy dokonce jedinou."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:200
 msgid ""
@@ -429,7 +429,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr "Chtěl bych tě ale varovat. Přístavy jsou jako hlavní budovy. Může na ně zaútočit nepřítel, který je poblíž. Zatímco tvá hlavní budova má vojáky, kteří ji brání, tvůj nově postavený přístav je nemá. Neměl bys ho proto stavět poblíž nepřítele."
+msgstr "Chtěl bych tě ale varovat. Přístavy jsou jako hlavní budovy. Může na ně zaútočit nepřítel, který je poblíž. Zatímco tvá hlavní budova má vojáky, kteří ji brání, tvůj nově postavený přístav je nemá. Není proto dobré, stavět ho poblíž nepřítele."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:201
 msgid ""
@@ -646,7 +646,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr "Nikdy nezapomeň, čluny jsou příliš malé na přepravu dělníků. Můžeš je použít na zkrácení přepravy zboží v rámci svého území, ale nikdy si pomocí nich nemůžeš přičlenit území byť i již ovládané, na které se nedostaneš ani cestou a ani lodí. Nikdy neruš všechny cesty mezi dvěma oblastmi spojenými vodní cestou, aniž bys počítal s tím, že žádný z tvých dělníků nebude muset přejít z jedné části do druhé."
+msgstr "Nikdy nezapomeň, čluny jsou příliš malé na přepravu dělníků. Můžeš je použít na zkrácení přepravy zboží v rámci svého území, ale nikdy si pomocí nich nemůžeš přičlenit území byť i již ovládané, na které se nedostaneš ani cestou a ani lodí. Nikdy neruš všechny cesty mezi dvěma oblastmi spojenými vodní cestou, aniž počítáš s tím, že žádný z tvých dělníků nebude muset přecházet z jedné části do druhé."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:314
 msgid ""
@@ -682,13 +682,13 @@ msgstr "Gratuluji"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:335
 msgid "You have learnt all there is to learn about ships and ferries!"
-msgstr "Naučil ses vše, co ses měl o lodích a přívozech naučit!"
+msgstr "Umíš vše, co jsem tě chtěl o lodích a přívozech naučit!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:336
 msgid ""
 "There is also another island where you can build a port if you wish to try "
 "launching another expedition."
-msgstr "Ještě je tu další ostrov, na kterém lze zbudovat přístav, pokud by sis rád zkusil vyslání další výpravy."
+msgstr "Ještě je tu další ostrov, na kterém lze zbudovat přístav, pokud si chceš zkusit vyslání další výpravy."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:337
 msgid ""
