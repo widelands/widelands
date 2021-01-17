@@ -18,20 +18,22 @@ descriptions:new_productionsite_type {
       rope = 1,
    },
 
-   animations = {
+   animation_directory = dirname,
+   animations = { unoccupied = {hotspot = {71, 49}}},
+   spritesheets = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {103, 101},
+         hotspot = {71, 49},
          fps = 10,
+         frames = 10,
+         columns = 5,
+         rows = 2
       },
       working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {103, 101},
-         fps = 10,
-      },
-      unoccupied = {
-         pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {103, 74},
+         hotspot = {71, 49},
+         fps = 15,
+         frames = 30,
+         columns = 6,
+         rows = 5
       },
    },
 
