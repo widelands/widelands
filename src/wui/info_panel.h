@@ -47,6 +47,10 @@ public:
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 
+	bool is_system_message() const {
+		return !message_;
+	}
+
 private:
 	InfoPanel& owner_;
 	uint32_t creation_time_;
