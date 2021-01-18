@@ -326,7 +326,7 @@ end
 --
 --    :arg max_time:    The time maximum game time in minutes
 function notification_remaining_time(max_time, remaining_time)
-   local show_popup = false;
+   local show_popup = false
    if (wl.Game().time == 100) then
      -- Show status at start of the game
      -- Execution time is set in logic/game.cc::init_newgame
