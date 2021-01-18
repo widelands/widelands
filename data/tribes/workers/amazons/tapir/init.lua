@@ -10,31 +10,30 @@ descriptions:new_carrier_type {
    vision_range = 2,
 
    animation_directory = dirname,
-   ware_hotspot = { 0, 18 },
    spritesheets = {
       walkload = {
          basename = "walk",
-         fps = 20,
-         frames = 20,
+         fps = 10,
+         frames = 10,
          columns = 5,
-         rows = 4,
+         rows = 2,
          directional = true,
-         hotspot = {15, 31}
+         hotspot = {20, 20}
       },
       walk = {
-         fps = 20,
-         frames = 20,
+         fps = 10,
+         frames = 10,
          columns = 5,
-         rows = 4,
+         rows = 2,
          directional = true,
-         hotspot = {15, 31}
+         hotspot = {20, 20}
       },
       idle = {
-         fps = 20,
-         frames = 20,
+         fps = 10,
+         frames = 10,
          columns = 5,
-         rows = 4,
-         hotspot = {22, 15}
+         rows = 2,
+         hotspot = {14, 22}
       },
    },
 }
