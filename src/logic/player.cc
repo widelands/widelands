@@ -1961,7 +1961,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	assert(tribe().wares().size() >= nr_wares);
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats = [nr_entries](StatisticsMap* stats, const DescriptionIndex ware_index,
+	const auto parse_stats = [&nr_entries](StatisticsMap* stats, const DescriptionIndex ware_index,
 	                                      const std::string& stats_string,
 	                                      const std::string& description) {
 		if (!stats_string.empty()) {
