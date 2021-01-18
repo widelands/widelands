@@ -523,7 +523,9 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 	}
 
 	// Indicate trend over the last 5 minutes
-	const std::vector<uint32_t>& history = get_type() == Widelands::wwWARE ? *player_.get_ware_stock_statistics(di) : *player_.get_worker_stock_statistics(di);
+	const std::vector<uint32_t>& history = get_type() == Widelands::wwWARE ?
+	                                          *player_.get_ware_stock_statistics(di) :
+	                                          *player_.get_worker_stock_statistics(di);
 	const size_t nr_entries = history.size();
 
 	if (!nr_entries) {
@@ -532,14 +534,17 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 	}
 
 	const size_t kSampleEntriesForTrend = 5 * 60 * 1000 / Widelands::kStatisticsSampleTime.get();
-	const uint32_t last_amount = history[nr_entries < kSampleEntriesForTrend ? nr_entries - 1 : nr_entries - kSampleEntriesForTrend];
+	const uint32_t last_amount =
+	   history[nr_entries < kSampleEntriesForTrend ? nr_entries - 1 :
+	                                                 nr_entries - kSampleEntriesForTrend];
 	const uint32_t current_amount = amount_of(di);
 
 	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
-	const std::string indicator =
-		current_amount < last_amount ? StyleManager::color_tag(_("↓"), colors.low_color()) :
-		current_amount > last_amount ? StyleManager::color_tag(_("↑"), colors.high_color()) :
-		StyleManager::color_tag(_("="), colors.medium_color());
+	const std::string indicator = current_amount < last_amount ?
+	                                 StyleManager::color_tag(_("↓"), colors.low_color()) :
+	                                 current_amount > last_amount ?
+	                                 StyleManager::color_tag(_("↑"), colors.high_color()) :
+	                                 StyleManager::color_tag(_("="), colors.medium_color());
 	return (boost::format(_("%1$s%2$s")) % text % indicator).str();
 }
 

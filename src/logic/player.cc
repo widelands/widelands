@@ -1737,7 +1737,8 @@ const std::vector<uint32_t>* Player::get_ware_stock_statistics(DescriptionIndex 
 	return &ware_stocks_.at(ware);
 }
 
-const std::vector<uint32_t>* Player::get_worker_stock_statistics(DescriptionIndex const worker) const {
+const std::vector<uint32_t>*
+Player::get_worker_stock_statistics(DescriptionIndex const worker) const {
 	assert(tribe().has_worker(worker));
 	return &worker_stocks_.at(worker);
 }
@@ -1962,8 +1963,8 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
 	const auto parse_stats = [&nr_entries](StatisticsMap* stats, const DescriptionIndex ware_index,
-	                                      const std::string& stats_string,
-	                                      const std::string& description) {
+	                                       const std::string& stats_string,
+	                                       const std::string& description) {
 		if (!stats_string.empty()) {
 			std::vector<std::string> stats_vector;
 			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
@@ -2069,8 +2070,9 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 			const DescriptionIndex idx = egbase().mutable_descriptions()->load_worker(name);
 			parse_stats(&worker_stocks_, idx, stats_string, "worker_stock");
 		} catch (const GameDataError&) {
-			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown worker name %s",
-			              player_number(), name.c_str());
+			log_warn_time(egbase().get_gametime(),
+			              "Player %u stock statistics: unknown worker name %s", player_number(),
+			              name.c_str());
 			continue;
 		}
 	}
