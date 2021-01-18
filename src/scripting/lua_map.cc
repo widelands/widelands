@@ -23,6 +23,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
+#include "economy/waterway.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/descriptions.h"
 #include "logic/map_objects/findimmovable.h"
@@ -858,7 +859,7 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const Widelands::MapObjectDes
  * Lua. We use this so that scripters always work with the highest class
  * object available.
  */
-#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(*dynamic_cast<Widelands::k*>(mo)))
+#define CAST_TO_LUA(k) to_lua<Lua##k>(L, new Lua##k(dynamic_cast<Widelands::k&>(*mo)))
 int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 	if (!mo) {
 		return 0;
@@ -889,10 +890,10 @@ int upcasted_map_object_to_lua(lua_State* L, Widelands::MapObject* mo) {
 		return CAST_TO_LUA(Road);
 	case Widelands::MapObjectType::WATERWAY:
 		// TODO(Nordfriese): not yet implemented
-		return CAST_TO_LUA(Road);
+		return to_lua<LuaRoad>(L, new LuaRoad(dynamic_cast<Widelands::Waterway&>(*mo)));
 	case Widelands::MapObjectType::ROADBASE:
 		// TODO(Nordfriese): not yet implemented
-		return CAST_TO_LUA(Road);
+		return to_lua<LuaRoad>(L, new LuaRoad(dynamic_cast<Widelands::RoadBase&>(*mo)));
 	case Widelands::MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
 
