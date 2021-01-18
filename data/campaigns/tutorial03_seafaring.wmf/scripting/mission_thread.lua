@@ -96,7 +96,7 @@ function expedition()
       while not successful do
          local idx = math.random(#fields)
          f = fields[idx]
-         if ((f.resource == "iron") and not f.immovable) then
+         if ((f.resource == "resource_iron") and not f.immovable) then
             map:place_immovable("atlanteans_resi_iron_2", f)
             successful = true
          end
