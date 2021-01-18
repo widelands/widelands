@@ -584,6 +584,7 @@ public:
 	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex const) const;
 
 	void init_statistics();
 	void read_statistics(FileRead&, uint16_t packet_version);
@@ -718,7 +719,7 @@ private:
 	 * life of the game, indexed as
 	 * ware_stocks_[ware_id][time_index]
 	 */
-	StatisticsMap ware_stocks_;
+	StatisticsMap ware_stocks_, worker_stocks_;
 
 	std::set<DescriptionIndex> muted_building_types_;
 

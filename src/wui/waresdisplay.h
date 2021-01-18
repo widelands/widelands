@@ -200,6 +200,8 @@ public:
 
 protected:
 	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
+	std::string info_for_ware(Widelands::DescriptionIndex) override;
+
 	const Widelands::Player& player_;
 	bool solid_icon_backgrounds_;
 };

@@ -56,9 +56,7 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	          warehouse_workers_, _("Workers in warehouses"));
 
 	auto color_tag = [](const RGBColor& c, const std::string& text1, const std::string& text2) {
-		return (boost::format(_("%1$s %2$s")) %
-		        (boost::format("<font color=%s>%s</font>") % c.hex_value() % text1).str() % text2)
-		   .str();
+		return (boost::format(_("%1$s %2$s")) % StyleManager::color_tag(text1, c) % text2).str();
 	};
 	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
 	UI::Checkbox* solid_icon_backgrounds = new UI::Checkbox(

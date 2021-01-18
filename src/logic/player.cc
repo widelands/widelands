@@ -1639,19 +1639,28 @@ void Player::sample_statistics() {
 	assert(ware_productions_.size() == tribe().wares().size());
 	assert(ware_consumptions_.size() == tribe().wares().size());
 	assert(ware_stocks_.size() == tribe().wares().size());
+	assert(worker_stocks_.size() == tribe().workers().size());
 
 	// Calculate stocks
-	std::map<DescriptionIndex, Quantity> stocks;
+	std::map<DescriptionIndex, Quantity> ware_stocks, worker_stocks;
 	for (DescriptionIndex idx : tribe().wares()) {
-		stocks.insert(std::make_pair(idx, 0U));
+		ware_stocks.insert(std::make_pair(idx, 0U));
+	}
+	for (DescriptionIndex idx : tribe().workers()) {
+		worker_stocks.insert(std::make_pair(idx, 0U));
 	}
 
 	for (const auto& economy : economies()) {
-		if (economy.second->type() == wwWARE) {
-			for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
+		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
+			if (economy.second->type() == wwWARE) {
 				const Widelands::WareList& wares = warehouse->get_wares();
 				for (DescriptionIndex idx : tribe().wares()) {
-					stocks.at(idx) += wares.stock(idx);
+					ware_stocks.at(idx) += wares.stock(idx);
+				}
+			} else {
+				const Widelands::WareList& workers = warehouse->get_workers();
+				for (DescriptionIndex idx : tribe().workers()) {
+					worker_stocks.at(idx) += workers.stock(idx);
 				}
 			}
 		}
@@ -1665,7 +1674,10 @@ void Player::sample_statistics() {
 		ware_consumptions_.at(idx).push_back(current_consumed_statistics_.at(idx));
 		current_consumed_statistics_.at(idx) = 0;
 
-		ware_stocks_.at(idx).push_back(stocks.at(idx));
+		ware_stocks_.at(idx).push_back(ware_stocks.at(idx));
+	}
+	for (DescriptionIndex idx : tribe().workers()) {
+		worker_stocks_.at(idx).push_back(worker_stocks.at(idx));
 	}
 }
 
@@ -1723,6 +1735,11 @@ Player::get_ware_consumption_statistics(DescriptionIndex const ware) const {
 const std::vector<uint32_t>* Player::get_ware_stock_statistics(DescriptionIndex const ware) const {
 	assert(tribe().has_ware(ware));
 	return &ware_stocks_.at(ware);
+}
+
+const std::vector<uint32_t>* Player::get_worker_stock_statistics(DescriptionIndex const worker) const {
+	assert(tribe().has_worker(worker));
+	return &worker_stocks_.at(worker);
 }
 
 const Player::BuildingStatsVector&
@@ -1919,6 +1936,7 @@ void Player::init_statistics() {
 	ware_consumptions_.clear();
 	ware_productions_.clear();
 	ware_stocks_.clear();
+	worker_stocks_.clear();
 
 	for (DescriptionIndex ware_index : tribe().wares()) {
 		current_produced_statistics_.insert(std::make_pair(ware_index, 0U));
@@ -1927,6 +1945,9 @@ void Player::init_statistics() {
 		ware_productions_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
 		ware_stocks_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
 	}
+	for (DescriptionIndex di : tribe().workers()) {
+		worker_stocks_.insert(std::make_pair(di, std::vector<Quantity>()));
+	}
 }
 
 /**
@@ -1934,7 +1955,7 @@ void Player::init_statistics() {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) {
+void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -2008,7 +2029,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) 
 		}
 	}
 
-	// Read stock statistics
+	// Read ware stock statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
 	assert(tribe().wares().size() >= nr_wares);
@@ -2023,7 +2044,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) 
 		const std::string& stats_string = fr.c_string();
 		try {
 			const DescriptionIndex idx = egbase().mutable_descriptions()->load_ware(name);
-			parse_stats(&ware_stocks_, idx, stats_string, "stock");
+			parse_stats(&ware_stocks_, idx, stats_string, "ware_stock");
 		} catch (const GameDataError&) {
 			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown ware name %s",
 			              player_number(), name.c_str());
@@ -2031,7 +2052,30 @@ void Player::read_statistics(FileRead& fr, const uint16_t /* packet_version */) 
 		}
 	}
 
-	// All statistics should have the same size
+	// Read worker stock statistics
+	// TODO(Nordfriese): Savegame compatibility
+	uint16_t nr_workers = packet_version >= 29 ? fr.unsigned_16() : 0;
+	nr_entries = packet_version >= 29 ? fr.unsigned_16() : 0;
+	assert(tribe().workers().size() >= nr_workers);
+
+	for (DescriptionIndex idx : tribe().workers()) {
+		worker_stocks_[idx].resize(nr_entries);
+	}
+
+	for (uint16_t i = 0; i < nr_workers; ++i) {
+		const std::string name = fr.c_string();
+		const std::string& stats_string = fr.c_string();
+		try {
+			const DescriptionIndex idx = egbase().mutable_descriptions()->load_worker(name);
+			parse_stats(&worker_stocks_, idx, stats_string, "worker_stock");
+		} catch (const GameDataError&) {
+			log_warn_time(egbase().get_gametime(), "Player %u stock statistics: unknown worker name %s",
+			              player_number(), name.c_str());
+			continue;
+		}
+	}
+
+	// All statistics (except worker stock) should have the same size
 	assert(ware_productions_.size() == ware_consumptions_.size());
 	assert(ware_productions_.begin()->second.size() == ware_consumptions_.begin()->second.size());
 
@@ -2069,7 +2113,9 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	const Descriptions& descriptions = egbase().descriptions();
 	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
+	const std::set<DescriptionIndex>& tribe_workers = tribe().workers();
 	const size_t nr_wares = tribe_wares.size();
+	const size_t nr_workers = tribe_workers.size();
 
 	// Write produce statistics
 	fw.unsigned_16(nr_wares);
@@ -2091,13 +2137,22 @@ void Player::write_statistics(FileWrite& fw) const {
 		write_stats(ware_consumptions_, ware_index);
 	}
 
-	// Write stock statistics
+	// Write ware stock statistics
 	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_stocks_.begin()->second.size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(descriptions.get_ware_descr(ware_index)->name());
 		write_stats(ware_stocks_, ware_index);
+	}
+
+	// Write worker stock statistics
+	fw.unsigned_16(nr_workers);
+	fw.unsigned_16(worker_stocks_.begin()->second.size());
+
+	for (const DescriptionIndex worker_index : tribe_workers) {
+		fw.c_string(descriptions.get_worker_descr(worker_index)->name());
+		write_stats(worker_stocks_, worker_index);
 	}
 }
 
