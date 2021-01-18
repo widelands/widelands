@@ -470,7 +470,23 @@ bool MainMenu::handle_mousepress(uint8_t, int32_t, int32_t) {
 
 bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 	// Forward all keys to the open window if there is one
-	if (menu_capsule_.is_visible() && menu_capsule_.handle_key(down, code)) {
+	bool has_open_window = false;
+	for (UI::UniqueWindow::Registry* r : {&r_login_, &r_about_, &r_addons_}) {
+		if (r->window) {
+			has_open_window = true;
+			if (r->window->handle_key(down, code)) {
+				return true;
+			}
+		}
+	}
+	if (menu_capsule_.is_visible()) {
+		has_open_window = true;
+		if (menu_capsule_.handle_key(down, code)) {
+			return true;
+		}
+	}
+	if (has_open_window) {
+		// If any window is open, block all keypresses to prevent accidentally triggering hotkeys
 		return true;
 	}
 
