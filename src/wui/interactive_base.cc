@@ -53,7 +53,6 @@
 #include "wui/game_chat_menu.h"
 #include "wui/game_debug_ui.h"
 #include "wui/info_panel.h"
-#include "wui/logmessage.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/militarysitewindow.h"
 #include "wui/minimap.h"
@@ -1132,11 +1131,7 @@ Widelands::CoordPath InteractiveBase::get_build_road_path() const {
 }
 
 void InteractiveBase::log_message(const std::string& message) const {
-	// Send to linked receivers
-	LogMessage lm;
-	lm.msg = message;
-	lm.time = time(nullptr);
-	Notifications::publish(lm);
+	info_panel_.log_message(message);
 }
 
 /**
