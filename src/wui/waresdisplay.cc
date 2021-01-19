@@ -541,10 +541,10 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 
 	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
 	const std::string indicator = current_amount < last_amount ?
-	                                 StyleManager::color_tag(_("↓"), colors.low_color()) :
+	                                 StyleManager::color_tag(_("↓"), colors.alternative_low_color()) :
 	                                 current_amount > last_amount ?
-	                                 StyleManager::color_tag(_("↑"), colors.high_color()) :
-	                                 StyleManager::color_tag(_("="), colors.medium_color());
+	                                 StyleManager::color_tag(_("↑"), colors.alternative_high_color()) :
+	                                 StyleManager::color_tag(_("="), colors.alternative_medium_color());
 	return (boost::format(_("%1$s%2$s")) % text % indicator).str();
 }
 
@@ -566,10 +566,10 @@ StockMenuWaresDisplay::draw_ware_background_overlay(const Widelands::Description
 	const uint32_t amount = amount_of(di);
 	const uint32_t target = player_.get_total_economy_target(get_type(), di);
 	const RGBColor& color = amount < target ?
-	                           g_style_manager->building_statistics_style().low_color() :
+	                           g_style_manager->building_statistics_style().alternative_low_color() :
 	                           amount > target ?
-	                           g_style_manager->building_statistics_style().high_color() :
-	                           g_style_manager->building_statistics_style().medium_color();
+	                           g_style_manager->building_statistics_style().alternative_high_color() :
+	                           g_style_manager->building_statistics_style().alternative_medium_color();
 	return RGBAColor(color.r, color.g, color.b, 80);
 }
 

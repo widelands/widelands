@@ -187,7 +187,7 @@ The ``statistics_plot`` table contains two subtables ``colors`` and ``fonts``. T
 building statistics
 ~~~~~~~~~~~~~~~~~~~
 
-The ``building statistics`` table contains two font definition tables ``census_font`` and ``statistics_font`` which will be used for the in-game census and statistics strings shown over buildings; a table ``colors`` with five RGB colors ``low``, ``medium``, and ``high`` (for production sites), ``construction`` (for objects under construction), and ``neutral`` (e.g. for military sites' soldier string); and a table ``statistics_window`` with an integer value ``editbox_margin`` to override the padding of editboxes and a table ``fonts`` with two :ref:`font definition tables<theme_fonts>` ``button_font`` (for buttons) and ``details_font`` (for other texts).
+The ``building statistics`` table contains two font definition tables ``census_font`` and ``statistics_font`` which will be used for the in-game census and statistics strings shown over buildings; a table ``colors`` with five RGB colors ``low``, ``medium``, and ``high`` (for production sites), ``low_alt``, ``medium_alt``, and ``high_alt`` (alternative colors for situations where more contrast is required), ``construction`` (for objects under construction), and ``neutral`` (e.g. for military sites' soldier string); and a table ``statistics_window`` with an integer value ``editbox_margin`` to override the padding of editboxes and a table ``fonts`` with two :ref:`font definition tables<theme_fonts>` ``button_font`` (for buttons) and ``details_font`` (for other texts).
 
 progress bars
 ~~~~~~~~~~~~~
