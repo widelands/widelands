@@ -69,14 +69,14 @@ StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registr
 	    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
 	       .as_font_tag(_("Compare stocked amounts to economy target quantities")) %
 	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-	       .as_font_tag(
-	          color_tag(colors.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) %
+	       .as_font_tag(color_tag(
+	          colors.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) %
 	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-	       .as_font_tag(
-	          color_tag(colors.alternative_medium_color(), _("Yellow:"), _("Stock is equal to the target"))) %
+	       .as_font_tag(color_tag(
+	          colors.alternative_medium_color(), _("Yellow:"), _("Stock is equal to the target"))) %
 	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
-	       .as_font_tag(
-	          color_tag(colors.alternative_high_color(), _("Green:"), _("Stock is higher than the target"))))
+	       .as_font_tag(color_tag(
+	          colors.alternative_high_color(), _("Green:"), _("Stock is higher than the target"))))
 	      .str());
 	solid_icon_backgrounds->changedto.connect([this](const bool b) {
 		all_wares_->set_solid_icon_backgrounds(!b);
