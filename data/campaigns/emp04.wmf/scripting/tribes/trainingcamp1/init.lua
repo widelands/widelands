@@ -171,7 +171,7 @@ descriptions:new_trainingsite_type {
 
    soldier_capacity = 2,
    trainer_patience = 12,
-   
+
    messages = {
       -- TRANSLATORS: Empire training site tooltip when it has no soldiers assigned
       no_soldier = pgettext("empire_building", "No soldier to train!"),
