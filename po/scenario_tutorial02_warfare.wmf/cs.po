@@ -6,13 +6,13 @@
 # GunChleoc, 2014
 # Matej Svrcek <mmatej@yahoo.com>, 2015
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-18 16:43+0000\n"
-"PO-Revision-Date: 2020-12-23 15:09+0000\n"
+"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"PO-Revision-Date: 2021-01-02 22:57+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgid ""
 " from a warehouse (or your headquarters) to the barracks where they will "
 "receive some basic training and become soldiers. Basic Barbarian soldiers do"
 " not use armor, they only need an ax."
-msgstr "Nové vojáky získáš jinak než běžné dělníky. Ze skladiště (nebo z hlavní budovy) ti do kasáren přijdou rekruti. V kasárnách projdou základním výcvikem a stanou se vojáky. Základní barbarský voják nemá zbroj, potřebuje pouze sekeru."
+msgstr "Nové vojáky získáš jinak než běžné dělníky. Ze skladu (nebo z hlavní budovy) ti do kasáren přijdou rekruti. V kasárnách projdou základním výcvikem a stanou se vojáky. Základní barbarský voják nemá zbroj, potřebuje pouze sekeru."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:40
 msgid ""
@@ -198,7 +198,7 @@ msgstr "Už jsou doručovány i potřebné suroviny. K úspěšnému výcviku bu
 msgid ""
 "For more information, you can have a look at the building’s help window, "
 "accessible via the question mark in every building’s window."
-msgstr "Více informací lze najít v nápovědě stavby, která je přístupná přes otazník v každém okně stavby."
+msgstr "Pro více informací se lze podívat do nápovědy k dané budově, která je přístupná přes tlačítko s otazníkem v okně každé budovy."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:91
 msgid ""
@@ -348,7 +348,7 @@ msgstr "Výborně! Chata průzkumníka je postavená, zatímco je průzkumník n
 msgid ""
 "First of all, he will need to take some food with him on his scouting trips."
 " Fortunately, we have some rations in our warehouse."
-msgstr "Za prvé na svou výpravu bude potřebovat něco k jídlu. Naštěstí máme ve skladu nějaké příděly."
+msgstr "Za prvé na svou výpravu bude potřebovat něco k jídlu. Naštěstí máme ve skladu nějaké malé porce jídla."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:158
 msgid ""
@@ -476,7 +476,7 @@ msgid ""
 "The third number indicates the missing soldiers. From the eight soldiers (1 "
 "+ 5 + 2) you wish to have here, two may have died. They will be replaced by "
 "new soldiers from your warehouse, if possible."
-msgstr "Třetí číslo ukazuje počet chybějících vojáků. Z osmi vojáků (1 + 5 + 2), kteří zde mohou pobývat, dva možná zemřeli. Budou nahrazeni novými z tvého skladiště, pokud je to možné."
+msgstr "Třetí číslo ukazuje počet chybějících vojáků. Z osmi vojáků (1 + 5 + 2), kteří zde mohou pobývat, dva možná zemřeli. Budou nahrazeni novými z tvého skladu, pokud to bude možné."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:211
 msgid "Dismantle your sentry"
