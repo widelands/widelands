@@ -34,7 +34,6 @@ wl_library(wui_chat_ui
     sound
     ui_basic
     widelands_options
-    wui
 )
 
 wl_library(wui_economy_options
@@ -267,7 +266,6 @@ wl_library(wui
     interactive_spectator.h
     itemwaresdisplay.cc
     itemwaresdisplay.h
-    logmessage.h
     militarysitewindow.cc
     militarysitewindow.h
     minimap.cc
@@ -345,7 +343,6 @@ wl_library(wui
     logic_widelands_geometry
     network
     note_sound
-    notifications
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
