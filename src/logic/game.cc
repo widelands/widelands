@@ -538,8 +538,11 @@ bool Game::run(StartGameType const start_game_type,
 
 	InteractivePlayer* ipl = get_ipl();
 
-	if (start_game_type != StartGameType::kSaveGame) {
+	if (replay || start_game_type != StartGameType::kSaveGame) {
 		postload_addons();
+	}
+
+	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */
