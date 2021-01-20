@@ -257,7 +257,8 @@ void InteractiveBase::rebuild_mapview_menu() {
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
-	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "", "M");
+	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
+	                 shortcut_string_for(KeyboardShortcut::kGeneralGameMinimap));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
@@ -1397,16 +1398,18 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 #endif
 		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
-		case SDLK_SPACE:
-			toggle_buildhelp();
-			return true;
-		case SDLK_m:
-			toggle_minimap();
-			return true;
 		case SDLK_TAB:
 			toolbar()->focus();
 			return true;
 		default:
+			if (matches_shortcut(KeyboardShortcut::kGeneralGameBuildhelp, code)) {
+				toggle_buildhelp();
+				return true;
+			}
+			if (matches_shortcut(KeyboardShortcut::kGeneralGameMinimap, code)) {
+				toggle_minimap();
+				return true;
+			}
 			break;
 		}
 	}
