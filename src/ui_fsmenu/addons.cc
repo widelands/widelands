@@ -301,7 +301,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		str += "</font>";
 		return str;
 	};
-	dev_box_.add(new UI::MultilineTextarea(
+	dev_box_.add(
+	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      (boost::format("<rt><p>%1$s</p></rt>") %
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
@@ -316,7 +317,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	auto add_button = [this](const std::string& url) {
-		UI::Button* b = new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy Link"));
+		UI::Button* b = new UI::Button(
+		   &dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy Link"));
 		// TODO(Nordfriese): Replace with `SDL_OpenURL` when we drop support for SDL versions
 		// older than 2.0.14. This will open the link directly in the web browser.
 		b->sigclicked.connect([url]() { SDL_SetClipboardText(url.c_str()); });
@@ -324,7 +326,8 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	};
 	add_button(kSubmitAddOnsURL);
 	dev_box_.add_space(kRowButtonSize);
-	dev_box_.add(new UI::MultilineTextarea(
+	dev_box_.add(
+	   new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
 	      (boost::format("<rt><p>%1$s</p></rt>") %
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
