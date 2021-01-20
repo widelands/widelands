@@ -302,9 +302,6 @@ std::string shortcut_string_for(const KeyboardShortcut id) {
 
 std::string shortcut_string_for(const SDL_Keysym sym) {
 	std::vector<std::string> mods;
-	if (sym.mod & KMOD_CTRL) {
-		mods.push_back(pgettext("hotkey", "Ctrl"));
-	}
 	if (sym.mod & KMOD_SHIFT) {
 		mods.push_back(pgettext("hotkey", "Shift"));
 	}
@@ -314,30 +311,15 @@ std::string shortcut_string_for(const SDL_Keysym sym) {
 	if (sym.mod & KMOD_GUI) {
 		mods.push_back(pgettext("hotkey", "GUI"));
 	}
+	if (sym.mod & KMOD_CTRL) {
+		mods.push_back(pgettext("hotkey", "Ctrl"));
+	}
 
-	std::string fmt;
-	switch (mods.size()) {
-	case 0:
-		fmt = _("%1$s");
-		break;
-	case 1:
-		fmt = _("%1$s+%2$s");
-		break;
-	case 2:
-		fmt = _("%1$s+%2$s+%3$s");
-		break;
-	case 3:
-		fmt = _("%1$s+%2$s+%3$s+%4$s");
-		break;
-	default:
-		NEVER_HERE();
-	}
-	boost::format f(fmt);
+	std::string result = SDL_GetKeyName(sym.sym);
 	for (const std::string& m : mods) {
-		f % m;
+		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
 	}
-	f % SDL_GetKeyName(sym.sym);
-	return f.str();
+	return result;
 }
 
 void init_shortcuts(const bool force_defaults) {
