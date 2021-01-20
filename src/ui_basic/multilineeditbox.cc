@@ -188,7 +188,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
 	}
 
-	d_->set_cursor_pos(0);
+	d_->set_cursor_pos(d_->text.size());
 	d_->update();
 	d_->scroll_cursor_into_view();
 
