@@ -419,7 +419,7 @@ return {
          low = productivity_colors["low"],
          medium = productivity_colors["medium"],
          high = productivity_colors["high"],
-         low_alt = {247, 80, 80},
+         low_alt = {200, 100, 100},
          medium_alt = {230, 230, 10},
          high_alt = {50, 225, 50},
       }
