@@ -522,6 +522,13 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 		return text;
 	}
 
+	const uint32_t current_amount = amount_of(di);
+	if (current_amount >= 1000) {
+		// Not enough space to show an indicator.
+		// This only happens with very large amounts where the trend is not super-important anyway…
+		return text;
+	}
+
 	// Indicate trend over the last 5 minutes
 	const std::vector<uint32_t>& history = get_type() == Widelands::wwWARE ?
 	                                          *player_.get_ware_stock_statistics(di) :
@@ -537,7 +544,6 @@ std::string StockMenuWaresDisplay::info_for_ware(const Widelands::DescriptionInd
 	const uint32_t last_amount =
 	   history[nr_entries < kSampleEntriesForTrend ? nr_entries - 1 :
 	                                                 nr_entries - kSampleEntriesForTrend];
-	const uint32_t current_amount = amount_of(di);
 
 	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
 	const std::string indicator =
