@@ -362,7 +362,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent)
 	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kDeleteMapOrDir); });
 	discard_changes_.sigclicked.connect([this]() { clicked_discard_changes(); });
 	write_changes_.sigclicked.connect([this]() { clicked_write_changes(); });
-	ok_.sigclicked.connect([this]() { clicked_ok(); });
+	ok_.sigclicked.connect([this]() { die(); });
 
 	name_.changed.connect([this]() { current_addon_edited(); });
 	author_.changed.connect([this]() { current_addon_edited(); });
@@ -377,7 +377,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent)
 
 bool AddOnsPackager::handle_key(const bool down, const SDL_Keysym code) {
 	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
-		clicked_ok();
+		die();
 		return true;
 	}
 	return Window::handle_key(down, code);
@@ -574,7 +574,7 @@ void AddOnsPackager::clicked_new_addon() {
 		mutable_addons_[name] = MutableAddOn{
 		   // These default strings are not localized because these editboxes are meant to be
 		   // filled out in English. We will add localization markup to the resulting config file.
-		   name, "Unnamed", "No description", "Nobody", "1.0.0", n.category(), {{}, {}}};
+		   name, n.text(), "No description", "Nobody", "1.0.0", n.category(), {{}, {}}};
 		addons_with_changes_[name] = false;
 		check_for_unsaved_changes();
 		rebuild_addon_list(name);
@@ -693,11 +693,11 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 	rebuild_dirstruct(*m, select);
 }
 
-void AddOnsPackager::clicked_ok() {
+void AddOnsPackager::die() {
 	if (!addons_with_changes_.empty()) {
 		std::string msg = (boost::format(ngettext(
 		                      // Comments to fix codecheck false-positive
-		                      "If you quit the packager now, all changes to the  following %u add-on "
+		                      "If you quit the packager now, all changes to the following %u add-on "
 		                      "will be discarded.",
 		                      // Comments to fix codecheck false-positive
 		                      "If you quit the packager now, all changes to the following %u add-ons "
@@ -716,7 +716,8 @@ void AddOnsPackager::clicked_ok() {
 			return;
 		}
 	}
-	die();
+
+	UI::Window::die();
 }
 
 void AddOnsPackager::clicked_discard_changes() {

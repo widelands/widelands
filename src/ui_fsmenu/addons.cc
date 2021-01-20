@@ -23,6 +23,8 @@
 #include <iomanip>
 #include <memory>
 
+#include <SDL_clipboard.h>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/image_cache.h"
@@ -41,6 +43,9 @@ namespace FsMenu {
 
 constexpr int16_t kRowButtonSize = 32;
 constexpr int16_t kRowButtonSpacing = 4;
+
+constexpr const char* const kSubmitAddOnsURL = "https://www.widelands.org/forum/topic/5073/";
+constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
 
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
 // so we can and need to allow somewhat larger dimensions.
@@ -290,27 +295,48 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	dev_box_.add_space(kRowButtonSpacing);
 	dev_box_.add(&launch_packager_);
 	dev_box_.add_space(kRowButtonSize);
-	dev_box_.add(
-	   new UI::MultilineTextarea(
+	auto underline_tag = [](const std::string& text) {
+		std::string str = "<font underline=true>";
+		str += text;
+		str += "</font>";
+		return str;
+	};
+	dev_box_.add(new UI::MultilineTextarea(
 	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
-	      (boost::format("<rt><p>%1$s</p><vspace gap=32><p>%2$s</p></rt>") %
+	      (boost::format("<rt><p>%1$s</p></rt>") %
 	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
 	          .as_font_tag(
 	             (boost::format(_("Uploading add-ons to the server from within Widelands is not "
 	                              "implemented yet. To upload your add-ons, please zip the add-on "
 	                              "directory in your file browser, then open our add-on submission "
 	                              "website %s in your browser and attach the zip file.")) %
-	              "<font underline=true>https://www.widelands.org/forum/topic/5073/</font>")
-	                .str()) %
-	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
-	          .as_font_tag(
-	             (boost::format(_("For more information regarding how to develop and package your "
-	                              "own add-ons, please visit %s.")) %
-	              "<font underline=true>https://www.widelands.org/documentation/add-ons/</font>")
+	              underline_tag(kSubmitAddOnsURL))
 	                .str()))
 	         .str(),
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
+	auto add_button = [this](const std::string& url) {
+		UI::Button* b = new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy Link"));
+		// TODO(Nordfriese): Replace with `SDL_OpenURL` when we drop support for SDL versions
+		// older than 2.0.14. This will open the link directly in the web browser.
+		b->sigclicked.connect([url]() { SDL_SetClipboardText(url.c_str()); });
+		dev_box_.add(b);
+	};
+	add_button(kSubmitAddOnsURL);
+	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add(new UI::MultilineTextarea(
+	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      (boost::format("<rt><p>%1$s</p></rt>") %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             (boost::format(_("For more information regarding how to develop and package your "
+	                              "own add-ons, please visit %s.")) %
+	              underline_tag(kDocumentationURL))
+	                .str()))
+	         .str(),
+	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
+	add_button(kDocumentationURL);
 
 	installed_addons_buttons_box_.add(&move_top_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	installed_addons_buttons_box_.add_space(kRowButtonSpacing);

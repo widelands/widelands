@@ -50,6 +50,7 @@ public:
 	}
 
 	void layout() override;
+	void die() override;
 	bool handle_key(const bool down, const SDL_Keysym code) override;
 
 private:
@@ -98,7 +99,6 @@ private:
 	void clicked_delete_addon();
 	void clicked_discard_changes();
 	void clicked_write_changes();
-	void clicked_ok();
 	bool do_write_addon_to_disk(const std::string& addon);
 
 	bool update_in_progress_;
