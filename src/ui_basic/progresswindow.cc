@@ -123,7 +123,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	}
 
 	for (IProgressVisualization* visualization : visualizations_) {
-		visualization->update(true);  // game tips etc
+		visualization->update(rt, Recti(0, 0, get_inner_w(), get_inner_h()));  // game tips etc
 	}
 }
 
