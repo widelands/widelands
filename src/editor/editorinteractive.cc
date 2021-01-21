@@ -103,8 +103,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
         MainToolbar::kButtonSize,
         12,
         MainToolbar::kButtonSize,
-        /** TRANSLATORS: Title for the tool menu button in the editor */
         as_tooltip_text_with_hotkey(
+           /** TRANSLATORS: Title for the tool menu button in the editor */
            _("Tools"), shortcut_string_for(KeyboardShortcut::kEditorTools), UI::PanelStyle::kWui),
         UI::DropdownType::kPictorialMenu,
         UI::PanelStyle::kWui,

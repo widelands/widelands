@@ -144,7 +144,7 @@ struct KeyboardShortcutInfo {
 	}
 };
 
-static inline SDL_Keysym keysym(const SDL_Keycode c, unsigned short mod = 0) {
+static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
 	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
 }
 
