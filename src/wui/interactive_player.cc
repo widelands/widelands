@@ -199,16 +199,28 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button("wui/menus/objectives", "objectives", as_tooltip_text_with_hotkey(_("Objectives"), shortcut_string_for(KeyboardShortcut::kInGameObjectives), UI::PanelStyle::kWui), &objectives_, true);
+	add_toolbar_button("wui/menus/objectives", "objectives",
+	                   as_tooltip_text_with_hotkey(
+	                      _("Objectives"), shortcut_string_for(KeyboardShortcut::kInGameObjectives),
+	                      UI::PanelStyle::kWui),
+	                   &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
 
 	toggle_message_menu_ =
-	   add_toolbar_button("wui/menus/message_old", "messages", as_tooltip_text_with_hotkey(_("Messages"), shortcut_string_for(KeyboardShortcut::kInGameMessages), UI::PanelStyle::kWui), &message_menu_, true);
+	   add_toolbar_button("wui/menus/message_old", "messages",
+	                      as_tooltip_text_with_hotkey(
+	                         _("Messages"), shortcut_string_for(KeyboardShortcut::kInGameMessages),
+	                         UI::PanelStyle::kWui),
+	                      &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help", as_tooltip_text_with_hotkey(_("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia), UI::PanelStyle::kWui), &encyclopedia_, true);
+	add_toolbar_button("ui_basic/menu_help", "help",
+	                   as_tooltip_text_with_hotkey(
+	                      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia),
+	                      UI::PanelStyle::kWui),
+	                   &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};
@@ -293,7 +305,8 @@ void InteractivePlayer::rebuild_statistics_menu() {
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "", shortcut_string_for(KeyboardShortcut::kInGameStatsStock));
+	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "",
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsStock));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
@@ -302,7 +315,8 @@ void InteractivePlayer::rebuild_statistics_menu() {
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
-	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "", shortcut_string_for(KeyboardShortcut::kInGameStatsWares));
+	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "",
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsWares));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
@@ -354,7 +368,8 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
-	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas));
+	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
+	   shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas));
 
 	showhidemenu_.select(last_selection);
 }
@@ -438,7 +453,9 @@ void InteractivePlayer::think() {
 			      .str();
 		}
 		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
-		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages), UI::PanelStyle::kWui));
+		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
+		   msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages),
+		   UI::PanelStyle::kWui));
 	}
 
 	// Cleanup found port spaces if the ship sailed on or was destroyed
@@ -729,7 +746,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kInGameStatsSeafaring, code) && game().map().allows_seafaring()) {
+		if (matches_shortcut(KeyboardShortcut::kInGameStatsSeafaring, code) &&
+		    game().map().allows_seafaring()) {
 			if (menu_windows_.stats_seafaring.window == nullptr) {
 				new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
 			} else {
@@ -742,7 +760,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 		if (matches_shortcut(KeyboardShortcut::kInGameScrollToHQ, code)) {
-			map_view()->scroll_to_field(game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
+			map_view()->scroll_to_field(
+			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
 		}
 	}

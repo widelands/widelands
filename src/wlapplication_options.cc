@@ -157,10 +157,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                           keysym(SDLK_l),
                                                           "mainmenu_load",
                                                           []() { return _("Load Game"); })},
-   {KeyboardShortcut::kMainMenuReplay, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
-                                                            keysym(SDLK_r),
-                                                            "mainmenu_replay",
-                                                            []() { return _("Watch Replay"); })},
+   {KeyboardShortcut::kMainMenuReplay,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
+                         keysym(SDLK_r),
+                         "mainmenu_replay",
+                         []() { return _("Watch Replay"); })},
    {KeyboardShortcut::kMainMenuRandomMatch,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                          keysym(SDLK_z),
@@ -221,10 +222,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                            keysym(SDLK_F1),
                                                            "mainmenu_about",
                                                            []() { return _("About"); })},
-   {KeyboardShortcut::kMainMenuAddons, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
-                                                            keysym(SDLK_a),
-                                                            "mainmenu_addons",
-                                                            []() { return _("Add-Ons"); })},
+   {KeyboardShortcut::kMainMenuAddons,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
+                         keysym(SDLK_a),
+                         "mainmenu_addons",
+                         []() { return _("Add-Ons"); })},
    {KeyboardShortcut::kMainMenuLAN, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
                                                          keysym(SDLK_p),
                                                          "mainmenu_lan",
@@ -237,10 +239,11 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                            keysym(SDLK_u),
                                                            "mainmenu_login",
                                                            []() { return _("Internet Login"); })},
-   {KeyboardShortcut::kMainMenuOptions, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
-                                                             keysym(SDLK_o),
-                                                             "mainmenu_options",
-                                                             []() { return _("Options"); })},
+   {KeyboardShortcut::kMainMenuOptions,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
+                         keysym(SDLK_o),
+                         "mainmenu_options",
+                         []() { return _("Options"); })},
 
    {KeyboardShortcut::kCommonBuildhelp,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
@@ -293,46 +296,38 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          "quicknav_prev",
                          []() { return _("Jump to Previous Location"); })},
 
-   {KeyboardShortcut::kEditorMenu,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_h),
-                         "editor_menu",
-                         []() { return _("Menu"); })},
-   {KeyboardShortcut::kEditorSave,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_s, KMOD_CTRL),
-                         "editor_save",
-                         []() { return _("Save Map"); })},
-   {KeyboardShortcut::kEditorLoad,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_l, KMOD_CTRL),
-                         "editor_load",
-                         []() { return _("Load Map"); })},
-   {KeyboardShortcut::kEditorUndo,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_z, KMOD_CTRL),
-                         "editor_undo",
-                         []() { return _("Undo"); })},
-   {KeyboardShortcut::kEditorRedo,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_y, KMOD_CTRL),
-                         "editor_redo",
-                         []() { return _("Redo"); })},
-   {KeyboardShortcut::kEditorTools,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_t),
-                         "editor_tools",
-                         []() { return _("Tools"); })},
-   {KeyboardShortcut::kEditorInfo,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_i),
-                         "editor_info",
-                         []() { return _("Info Tool"); })},
-   {KeyboardShortcut::kEditorPlayers,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_p),
-                         "editor_players",
-                         []() { return _("Players Menu"); })},
+   {KeyboardShortcut::kEditorMenu, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                        keysym(SDLK_h),
+                                                        "editor_menu",
+                                                        []() { return _("Menu"); })},
+   {KeyboardShortcut::kEditorSave, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                        keysym(SDLK_s, KMOD_CTRL),
+                                                        "editor_save",
+                                                        []() { return _("Save Map"); })},
+   {KeyboardShortcut::kEditorLoad, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                        keysym(SDLK_l, KMOD_CTRL),
+                                                        "editor_load",
+                                                        []() { return _("Load Map"); })},
+   {KeyboardShortcut::kEditorUndo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                        keysym(SDLK_z, KMOD_CTRL),
+                                                        "editor_undo",
+                                                        []() { return _("Undo"); })},
+   {KeyboardShortcut::kEditorRedo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                        keysym(SDLK_y, KMOD_CTRL),
+                                                        "editor_redo",
+                                                        []() { return _("Redo"); })},
+   {KeyboardShortcut::kEditorTools, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                         keysym(SDLK_t),
+                                                         "editor_tools",
+                                                         []() { return _("Tools"); })},
+   {KeyboardShortcut::kEditorInfo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                        keysym(SDLK_i),
+                                                        "editor_info",
+                                                        []() { return _("Info Tool"); })},
+   {KeyboardShortcut::kEditorPlayers, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
+                                                           keysym(SDLK_p),
+                                                           "editor_players",
+                                                           []() { return _("Players Menu"); })},
    {KeyboardShortcut::kEditorShowhideGrid,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
                          keysym(SDLK_g),
@@ -409,16 +404,14 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_e),
                          "game_stats_seafaring",
                          []() { return _("Seafaring Statistics"); })},
-   {KeyboardShortcut::kInGameObjectives,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_o),
-                         "game_objectives",
-                         []() { return _("Objectives"); })},
-   {KeyboardShortcut::kInGameMessages,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_n),
-                         "game_messages",
-                         []() { return _("Messages"); })},
+   {KeyboardShortcut::kInGameObjectives, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                              keysym(SDLK_o),
+                                                              "game_objectives",
+                                                              []() { return _("Objectives"); })},
+   {KeyboardShortcut::kInGameMessages, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                            keysym(SDLK_n),
+                                                            "game_messages",
+                                                            []() { return _("Messages"); })},
    {KeyboardShortcut::kInGameSpeedDown,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_PAGEDOWN),
@@ -454,26 +447,23 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_PAUSE, KMOD_SHIFT),
                          "game_speed_reset",
                          []() { return _("Reset Game Speed"); })},
-   {KeyboardShortcut::kInGamePause,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_PAUSE),
-                         "game_pause",
-                         []() { return _("Pause"); })},
+   {KeyboardShortcut::kInGamePause, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                         keysym(SDLK_PAUSE),
+                                                         "game_pause",
+                                                         []() { return _("Pause"); })},
    {KeyboardShortcut::kInGameScrollToHQ,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_HOME),
                          "game_hq",
                          []() { return _("Scroll to Starting Field"); })},
-   {KeyboardShortcut::kInGameChat,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_RETURN),
-                         "game_chat",
-                         []() { return _("Chat"); })},
-   {KeyboardShortcut::kInGameSave,
-    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_s, KMOD_CTRL),
-                         "game_save",
-                         []() { return _("Save Game"); })},
+   {KeyboardShortcut::kInGameChat, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_RETURN),
+                                                        "game_chat",
+                                                        []() { return _("Chat"); })},
+   {KeyboardShortcut::kInGameSave, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_s, KMOD_CTRL),
+                                                        "game_save",
+                                                        []() { return _("Save Game"); })},
 };
 
 std::string to_string(const KeyboardShortcut id) {
@@ -489,8 +479,10 @@ static void write_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 	set_config_int("keyboard_mod", shortcuts_.at(id).internal_name, code.mod);
 }
 
-static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes, const KeyboardShortcutInfo& k) {
-	if (scopes.count(KeyboardShortcutInfo::Scope::kGlobal) || k.scopes.count(KeyboardShortcutInfo::Scope::kGlobal)) {
+static bool shared_scope(const std::set<KeyboardShortcutInfo::Scope>& scopes,
+                         const KeyboardShortcutInfo& k) {
+	if (scopes.count(KeyboardShortcutInfo::Scope::kGlobal) ||
+	    k.scopes.count(KeyboardShortcutInfo::Scope::kGlobal)) {
 		return true;
 	}
 
@@ -506,7 +498,8 @@ bool set_shortcut(const KeyboardShortcut id, const SDL_Keysym code, KeyboardShor
 	const std::set<KeyboardShortcutInfo::Scope>& scopes = shortcuts_.at(id).scopes;
 
 	for (auto& pair : shortcuts_) {
-		if (pair.first != id && shared_scope(scopes, pair.second) && matches_shortcut(pair.first, code)) {
+		if (pair.first != id && shared_scope(scopes, pair.second) &&
+		    matches_shortcut(pair.first, code)) {
 			*conflict = pair.first;
 			return false;
 		}
@@ -522,19 +515,11 @@ SDL_Keysym get_shortcut(const KeyboardShortcut id) {
 }
 
 static const std::map<SDL_Keycode, SDL_Keycode> kNumpadIdentifications = {
-	{SDLK_KP_9, SDLK_PAGEUP},
-	{SDLK_KP_8, SDLK_UP},
-	{SDLK_KP_7, SDLK_HOME},
-	{SDLK_KP_6, SDLK_RIGHT},
-	{SDLK_KP_4, SDLK_LEFT},
-	{SDLK_KP_3, SDLK_PAGEDOWN},
-	{SDLK_KP_2, SDLK_DOWN},
-	{SDLK_KP_1, SDLK_END},
-	{SDLK_KP_0, SDLK_INSERT},
-	{SDLK_KP_PERIOD, SDLK_DELETE},
-	{SDLK_KP_ENTER, SDLK_RETURN},
-	{SDLK_KP_MINUS, SDLK_MINUS},
-	{SDLK_KP_PLUS, SDLK_PLUS},
+   {SDLK_KP_9, SDLK_PAGEUP},      {SDLK_KP_8, SDLK_UP},         {SDLK_KP_7, SDLK_HOME},
+   {SDLK_KP_6, SDLK_RIGHT},       {SDLK_KP_4, SDLK_LEFT},       {SDLK_KP_3, SDLK_PAGEDOWN},
+   {SDLK_KP_2, SDLK_DOWN},        {SDLK_KP_1, SDLK_END},        {SDLK_KP_0, SDLK_INSERT},
+   {SDLK_KP_PERIOD, SDLK_DELETE}, {SDLK_KP_ENTER, SDLK_RETURN}, {SDLK_KP_MINUS, SDLK_MINUS},
+   {SDLK_KP_PLUS, SDLK_PLUS},
 };
 
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
@@ -582,7 +567,8 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	}
 
 	for (const auto& pair : kNumpadIdentifications) {
-		if ((code == pair.first && key.sym == pair.second) || (code == pair.second && key.sym == pair.first)) {
+		if ((code == pair.first && key.sym == pair.second) ||
+		    (code == pair.second && key.sym == pair.first)) {
 			return true;
 		}
 	}

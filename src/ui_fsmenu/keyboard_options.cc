@@ -117,7 +117,8 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
 	auto generate_title = [](const KeyboardShortcut key) {
-		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key, false)).str();
+		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key, false))
+		   .str();
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -148,15 +149,19 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		});
 	};
 
-#define CREATE_TAB(name, title) { \
-	UI::Box* b = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding); \
-	b->set_force_scrolling(true); \
-	for (KeyboardShortcut k = KeyboardShortcut::k##name##__Begin; k <= KeyboardShortcut::k##name##__End; k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) { \
-		add_key(*b, k); \
-	} \
-	tabs_.add(#name, title, b, ""); \
-	boxes_.push_back(b); \
-}
+#define CREATE_TAB(name, title)                                                                    \
+	{                                                                                               \
+		UI::Box* b =                                                                                 \
+		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);    \
+		b->set_force_scrolling(true);                                                                \
+		for (KeyboardShortcut k = KeyboardShortcut::k##name##__Begin;                                \
+		     k <= KeyboardShortcut::k##name##__End;                                                  \
+		     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {                      \
+			add_key(*b, k);                                                                           \
+		}                                                                                            \
+		tabs_.add(#name, title, b, "");                                                              \
+		boxes_.push_back(b);                                                                         \
+	}
 
 	CREATE_TAB(Common, _("General"))
 	CREATE_TAB(MainMenu, _("Main Menu"))
