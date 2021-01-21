@@ -158,7 +158,7 @@ void LaunchSPG::clicked_ok() {
 				tipstexts.push_back(sp->get_players_tribe());
 			}
 			game_.create_loader_ui(
-			   tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
+			   tipstexts, true, sp->settings().map_theme, sp->settings().map_background);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 

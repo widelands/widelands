@@ -42,7 +42,7 @@ prefilled_buildings(p1,
 for x=7, 42 do
    for y=10, 50 do
       local field = map:get_field(x,y)
-      if field.resource == "fish" or field.resource == "water" then
+      if field.resource == "resource_fish" or field.resource == "resource_water" then
          field.resource_amount = 0
       end
    end
@@ -77,7 +77,7 @@ place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 10)})
 place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 18)})
 
 -- Mines
-place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 14)})
+place_building_in_region(p1, "empire_ironmine", {map:get_field(32, 14)})
 place_building_in_region(p1, "empire_coalmine", {map:get_field(24, 45)})
 place_building_in_region(p1, "empire_coalmine", {map:get_field(31, 48)})
 place_building_in_region(p1, "empire_goldmine", sf:region(25))

@@ -37,7 +37,10 @@ struct BuildingStatisticsStyleInfo {
 	                                     const RGBColor& init_neutral_color,
 	                                     const RGBColor& init_low_color,
 	                                     const RGBColor& init_medium_color,
-	                                     const RGBColor& init_high_color)
+	                                     const RGBColor& init_high_color,
+	                                     const RGBColor& init_alt_low_color,
+	                                     const RGBColor& init_alt_medium_color,
+	                                     const RGBColor& init_alt_high_color)
 	   : building_statistics_button_font_(init_building_statistics_button_font),
 	     building_statistics_details_font_(init_building_statistics_details_font),
 	     editbox_margin_(init_editbox_margin),
@@ -47,7 +50,10 @@ struct BuildingStatisticsStyleInfo {
 	     neutral_color_(init_neutral_color),
 	     low_color_(init_low_color),
 	     medium_color_(init_medium_color),
-	     high_color_(init_high_color) {
+	     high_color_(init_high_color),
+	     alternative_low_color_(init_alt_low_color),
+	     alternative_medium_color_(init_alt_medium_color),
+	     alternative_high_color_(init_alt_high_color) {
 	}
 
 	const UI::FontStyleInfo& building_statistics_button_font() const {
@@ -81,6 +87,15 @@ struct BuildingStatisticsStyleInfo {
 	const RGBColor& high_color() const {
 		return high_color_;
 	}
+	const RGBColor& alternative_low_color() const {
+		return alternative_low_color_;
+	}
+	const RGBColor& alternative_medium_color() const {
+		return alternative_medium_color_;
+	}
+	const RGBColor& alternative_high_color() const {
+		return alternative_high_color_;
+	}
 
 private:
 	std::unique_ptr<const UI::FontStyleInfo> building_statistics_button_font_;
@@ -93,6 +108,9 @@ private:
 	const RGBColor low_color_;
 	const RGBColor medium_color_;
 	const RGBColor high_color_;
+	const RGBColor alternative_low_color_;
+	const RGBColor alternative_medium_color_;
+	const RGBColor alternative_high_color_;
 };
 
 }  // namespace UI
