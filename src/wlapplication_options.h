@@ -114,7 +114,9 @@ enum class KeyboardShortcut : uint16_t {
 	kCommonZoomIn,
 	kCommonZoomOut,
 	kCommonZoomReset,
-	kCommon__End = kCommonZoomReset,
+	kCommonQuicknavPrev,
+	kCommonQuicknavNext,
+	kCommon__End = kCommonQuicknavNext,
 
 	kEditor__Begin = kCommon__End + 1,
 	kEditorMenu = kEditor__Begin,
@@ -133,15 +135,6 @@ enum class KeyboardShortcut : uint16_t {
 
 	kInGame__Begin = kEditor__End + 1,
 	kInGameSave = kInGame__Begin,
-	kInGamePause,
-	kInGameSpeedUp,
-	kInGameSpeedUpSlow,
-	kInGameSpeedUpFast,
-	kInGameSpeedDown,
-	kInGameSpeedDownSlow,
-	kInGameSpeedDownFast,
-	kInGameSpeedReset,
-	kInGameScrollToHQ,
 	kInGameChat,
 	kInGameMessages,
 	kInGameObjectives,
@@ -156,7 +149,16 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameStatsStock,
 	kInGameStatsSoldiers,
 	kInGameStatsSeafaring,
-	kInGame__End = kInGameStatsSeafaring,
+	kInGamePause,
+	kInGameSpeedUp,
+	kInGameSpeedUpSlow,
+	kInGameSpeedUpFast,
+	kInGameSpeedDown,
+	kInGameSpeedDownSlow,
+	kInGameSpeedDownFast,
+	kInGameSpeedReset,
+	kInGameScrollToHQ,
+	kInGame__End = kInGameScrollToHQ,
 
 	k__End = kInGame__End
 };
@@ -167,8 +169,8 @@ bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
 void init_shortcuts(bool force_defaults = false);
 std::string to_string(KeyboardShortcut);
-std::string shortcut_string_for(SDL_Keysym);
-std::string shortcut_string_for(KeyboardShortcut);
+std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
+std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 
 /*
  * Sets the directory where to read/write kConfigFile.

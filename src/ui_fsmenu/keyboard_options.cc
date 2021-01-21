@@ -117,7 +117,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
 	auto generate_title = [](const KeyboardShortcut key) {
-		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key)).str();
+		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key, false)).str();
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -139,9 +139,9 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					   (boost::format(_("The shortcut you selected (‘%1$s’) is already in use for the "
 					                    "following action: ‘%2$s’. Please select a different shortcut "
 					                    "or change the conflicting shortcut first.")) %
-					    shortcut_string_for(c.key) % to_string(conflict))
+					    shortcut_string_for(c.key, false) % to_string(conflict))
 					      .str(),
-					   UI::WLMessageBox::MBoxType::kOk);
+					   UI::WLMessageBox::MBoxType::kOk, UI::Align::kCenter, true);
 					warning.run<UI::Panel::Returncodes>();
 				}
 			}
@@ -150,7 +150,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 
 #define CREATE_TAB(name, title) { \
 	UI::Box* b = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding); \
-	b->set_scrolling(true); \
+	b->set_force_scrolling(true); \
 	for (KeyboardShortcut k = KeyboardShortcut::k##name##__Begin; k <= KeyboardShortcut::k##name##__End; k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) { \
 		add_key(*b, k); \
 	} \

@@ -19,6 +19,8 @@
 
 #include "wui/quicknavigation.h"
 
+#include "wlapplication_options.h"
+
 QuickNavigation::QuickNavigation(MapView* map_view)
    : map_view_(map_view), location_jumping_started_(false) {
 	map_view->changeview.connect([this] { view_changed(); });
@@ -82,12 +84,12 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		} else if (landmarks_[which].set) {
 			map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
 		}
-	} else if (key.sym == SDLK_COMMA && !previous_locations_.empty()) {
+	} else if (matches_shortcut(KeyboardShortcut::kCommonQuicknavPrev, key) && !previous_locations_.empty()) {
 		// go to previous location
 		insert_if_applicable(next_locations_);
 		map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
 		previous_locations_.pop_back();
-	} else if (key.sym == SDLK_PERIOD && !next_locations_.empty()) {
+	} else if (matches_shortcut(KeyboardShortcut::kCommonQuicknavNext, key) && !next_locations_.empty()) {
 		// go to next location
 		insert_if_applicable(previous_locations_);
 		map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);

@@ -282,6 +282,16 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_0, KMOD_CTRL),
                          "zoom_reset",
                          []() { return _("Reset Zoom"); })},
+   {KeyboardShortcut::kCommonQuicknavNext,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
+                         keysym(SDLK_PERIOD),
+                         "quicknav_next",
+                         []() { return _("Jump to Next Location"); })},
+   {KeyboardShortcut::kCommonQuicknavPrev,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
+                         keysym(SDLK_COMMA),
+                         "quicknav_prev",
+                         []() { return _("Jump to Previous Location"); })},
 
    {KeyboardShortcut::kEditorMenu,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
@@ -453,7 +463,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_HOME),
                          "game_hq",
-                         []() { return _("Scroll To Starting Field"); })},
+                         []() { return _("Scroll to Starting Field"); })},
    {KeyboardShortcut::kInGameChat,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
                          keysym(SDLK_RETURN),
@@ -530,7 +540,7 @@ static const std::map<SDL_Keycode, SDL_Keycode> kNumpadIdentifications = {
 bool matches_shortcut(const KeyboardShortcut id, const SDL_Keysym code) {
 	return matches_shortcut(id, code.sym, code.mod);
 }
-bool matches_shortcut(const KeyboardShortcut id, SDL_Keycode code, const int mod) {
+bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const int mod) {
 	const SDL_Keysym key = get_shortcut(id);
 
 	const bool ctrl1 = key.mod & KMOD_CTRL;
@@ -553,10 +563,22 @@ bool matches_shortcut(const KeyboardShortcut id, SDL_Keycode code, const int mod
 	// Some extra checks so we can identify keypad keys with their "normal" equivalents,
 	// e.g. pressing '+' or numpad_'+' should always have the same effect
 
-	if ((mod & KMOD_NUM) && ((key.sym >= SDLK_KP_0 && key.sym <= SDLK_KP_9) || (code >= SDLK_KP_0 && code <= SDLK_KP_9))) {
-		// If numlock is on and a number was pressed, only compare the entered number value
-		return (code >= SDLK_KP_0 && code <= SDLK_KP_9 && code == key.sym + SDLK_KP_0 - SDLK_0)
-			|| (code >= SDLK_0 && code <= SDLK_9 && code == key.sym + SDLK_0 - SDLK_KP_0);
+	if (mod & KMOD_NUM) {
+		// If numlock is on and a number was pressed, only compare the entered number value.
+		// Annoyingly, there seems to be no strict rule whether the SDLK_ constants are
+		// ranged 0,1,…,9 or 1,…,9,0 so we have to treat 0 as a special case.
+		if (code == SDLK_KP_0) {
+			return key.sym == SDLK_0;
+		}
+		if (code == SDLK_0) {
+			return key.sym == SDLK_KP_0;
+		}
+		if (code >= SDLK_1 && code <= SDLK_9) {
+			return key.sym == code + SDLK_KP_1 - SDLK_1;
+		}
+		if (code >= SDLK_KP_1 && code <= SDLK_KP_9) {
+			return key.sym == code + SDLK_1 - SDLK_KP_1;
+		}
 	}
 
 	for (const auto& pair : kNumpadIdentifications) {
@@ -568,11 +590,11 @@ bool matches_shortcut(const KeyboardShortcut id, SDL_Keycode code, const int mod
 	return false;
 }
 
-std::string shortcut_string_for(const KeyboardShortcut id) {
-	return shortcut_string_for(get_shortcut(id));
+std::string shortcut_string_for(const KeyboardShortcut id, const bool rt_escape) {
+	return shortcut_string_for(get_shortcut(id), rt_escape);
 }
 
-std::string shortcut_string_for(const SDL_Keysym sym) {
+std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 	std::vector<std::string> mods;
 	if (sym.mod & KMOD_SHIFT) {
 		mods.push_back(pgettext("hotkey", "Shift"));
@@ -592,7 +614,7 @@ std::string shortcut_string_for(const SDL_Keysym sym) {
 		result = (boost::format(_("%1$s+%2$s")) % m % result).str();
 	}
 
-	return richtext_escape(result);
+	return rt_escape ? richtext_escape(result) : result;
 }
 
 void init_shortcuts(const bool force_defaults) {
