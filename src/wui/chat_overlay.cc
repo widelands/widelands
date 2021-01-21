@@ -25,12 +25,10 @@
 #include "chat/chat.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "graphic/style_manager.h"
 #include "graphic/text/rt_errors.h"
 #include "sound/sound_handler.h"
 #include "wlapplication_options.h"
 #include "wui/chat_msg_layout.h"
-#include "wui/logmessage.h"
 
 /**
  * Time, in seconds, that chat messages are shown in the overlay.
@@ -50,22 +48,13 @@ struct ChatOverlay::Impl {
 	/// Layouted message list
 	std::string all_text_;
 
-	/// Log messages
-	std::vector<LogMessage> log_messages_;
-
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 
 	FxId new_message_;
 
 	Impl()
 	   : chat_message_subscriber_(
 	        Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recompute(); })),
-	     log_message_subscriber_(
-	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
-		        log_messages_.push_back(note);
-		        recompute();
-	        })),
 	     new_message_(SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat")) {
 	}
 
@@ -115,50 +104,22 @@ void ChatOverlay::Impl::recompute() {
 
 	havemessages_ = false;
 
-	// Parse the chat message list as well as the log message list
-	// and display them in chronological order
+	// Parse the chat message list and display them in chronological order
 	int32_t chat_idx = has_chat_provider() ? chat_->get_messages().size() - 1 : -1;
-	int32_t log_idx = log_messages_.empty() ? -1 : log_messages_.size() - 1;
 	std::string richtext;
 
-	while ((chat_idx >= 0 || log_idx >= 0)) {
-		if (chat_idx < 0 ||
-		    (log_idx >= 0 && chat_->get_messages()[chat_idx].time < log_messages_[log_idx].time)) {
-			// Log message is more recent
-			oldest_ = log_messages_[log_idx].time;
-			// Do some richtext formatting here
-			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext =
-				   (boost::format("<p>%s</p>") % g_style_manager->font_style(UI::FontStyle::kChatServer)
-				                                    .as_font_tag(log_messages_[log_idx].msg))
-				      .str();
-			}
-			log_idx--;
-		} else if (log_idx < 0 || (chat_idx >= 0 && chat_->get_messages()[chat_idx].time >=
-		                                               log_messages_[log_idx].time)) {
-			// Chat message is more recent
-			oldest_ = chat_->get_messages()[chat_idx].time;
-			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = format_as_richtext(chat_->get_messages()[chat_idx]).append(richtext);
-			}
-			if (!chat_->sound_off() && sound_played_ < oldest_) {
-				g_sh->play_fx(SoundType::kChat, new_message_);
-				sound_played_ = oldest_;
-			}
-			chat_idx--;
-		} else {
-			NEVER_HERE();
+	while (chat_idx >= 0) {
+		// Chat message is more recent
+		oldest_ = chat_->get_messages()[chat_idx].time;
+		if (now - oldest_ < CHAT_DISPLAY_TIME) {
+			richtext = format_as_richtext(chat_->get_messages()[chat_idx]).append(richtext);
 		}
+		if (!chat_->sound_off() && sound_played_ < oldest_) {
+			g_sh->play_fx(SoundType::kChat, new_message_);
+			sound_played_ = oldest_;
+		}
+		chat_idx--;
 		havemessages_ = true;
-	}
-
-	// Parse log messages to clear old ones
-	while (!log_messages_.empty()) {
-		if (log_messages_.front().time < now - CHAT_DISPLAY_TIME) {
-			log_messages_.erase(log_messages_.begin());
-		} else {
-			break;
-		}
 	}
 
 	if (havemessages_) {
