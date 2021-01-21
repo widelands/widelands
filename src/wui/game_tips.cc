@@ -37,11 +37,11 @@
 constexpr int kTextPadding = 48;
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
-   : lastUpdated_(0),
-     updateAfter_(0),
+   : last_updated_(0),
+     update_after_(0),
      progressWindow_(progressWindow),
      registered_(false),
-     lastTip_(0) {
+     last_tip_(0) {
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
@@ -53,7 +53,7 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
 		// add visualization only if any tips are loaded
 		progressWindow_.add_visualization(this);
 		registered_ = true;
-		lastTip_ = tips_.size();
+		last_tip_ = tips_.size();
 	}
 }
 
@@ -80,21 +80,19 @@ void GameTips::load_tips(const std::string& name) {
 	}
 }
 
-void GameTips::update(bool repaint) {
+void GameTips::update(RenderTarget& rt, const Recti& bounds) {
 	uint32_t ticks = SDL_GetTicks();
-	if (ticks >= (lastUpdated_ + updateAfter_)) {
+	if (ticks >= (last_updated_ + update_after_)) {
 		const uint32_t next = std::rand() % tips_.size();  // NOLINT
-		if (next == lastTip_) {
-			lastTip_ = (next + 1) % tips_.size();
+		if (next == last_tip_) {
+			last_tip_ = (next + 1) % tips_.size();
 		} else {
-			lastTip_ = next;
+			last_tip_ = next;
 		}
-		show_tip(next);
-		lastUpdated_ = SDL_GetTicks();
-		updateAfter_ = tips_[next].interval * 1000;
-	} else if (repaint) {
-		show_tip(lastTip_);
+		last_updated_ = SDL_GetTicks();
+		update_after_ = tips_[next].interval * 1000;
 	}
+	show_tip(rt, bounds, last_tip_);
 }
 
 void GameTips::stop() {
@@ -104,18 +102,16 @@ void GameTips::stop() {
 	}
 }
 
-void GameTips::show_tip(int32_t index) {
-	RenderTarget& rt = *g_gr->get_render_target();
-
+void GameTips::show_tip(RenderTarget& rt, const Recti& bounds, int32_t index) {
 	const Image& pic_background = load_safe_template_image("loadscreens/gametips.png");
 	const int w = pic_background.width();
 	const int h = pic_background.height();
-	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
+	Vector2i pt(bounds.x + (bounds.w - w) / 2, bounds.y + (bounds.h - h) / 2);
 	rt.blit(pt, &pic_background);
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_game_tip(tips_[index].text), w - 2 * kTextPadding);
-	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
-	              (g_gr->get_yres() - rendered_text->height()) / 2);
+	pt = Vector2i(bounds.x + (bounds.w - rendered_text->width()) / 2,
+	              bounds.y + (bounds.h - rendered_text->height()) / 2);
 	rendered_text->draw(rt, pt);
 }

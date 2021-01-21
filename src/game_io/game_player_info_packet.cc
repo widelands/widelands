@@ -32,7 +32,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 28;
+constexpr uint16_t kCurrentPacketVersion = 29;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {

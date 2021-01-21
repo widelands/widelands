@@ -14,6 +14,8 @@ wl_library(ui_fsmenu
     helpwindow.h
     internet_lobby.cc
     internet_lobby.h
+    keyboard_options.cc
+    keyboard_options.h
     launch_game.cc
     launch_game.h
     launch_mpg.cc

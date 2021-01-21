@@ -256,7 +256,7 @@ void GameClient::do_run() {
 			tipstexts.push_back(get_players_tribe());
 		}
 		UI::ProgressWindow& loader_ui =
-		   game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
+		   game.create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);
