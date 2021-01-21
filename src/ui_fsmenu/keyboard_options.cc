@@ -113,12 +113,7 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
          reset_.get_w(),
          reset_.get_h(),
          UI::ButtonStyle::kFsMenuPrimary,
-         _("OK")),
-     box_mainmenu_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_general_game_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
-	box_mainmenu_.set_scrolling(true);
-	box_general_game_.set_scrolling(true);
-
+         _("OK")) {
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
 	auto generate_title = [](const KeyboardShortcut key) {
@@ -153,16 +148,22 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		});
 	};
 
-	for (KeyboardShortcut k = KeyboardShortcut::kMainMenu__Begin;
-	     k <= KeyboardShortcut::kMainMenu__End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
-		add_key(box_mainmenu_, k);
-	}
-	for (KeyboardShortcut k = KeyboardShortcut::kGeneralGame__Begin;
-	     k <= KeyboardShortcut::kGeneralGame__End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
-		add_key(box_general_game_, k);
-	}
+#define CREATE_TAB(name, title) { \
+	UI::Box* b = new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding); \
+	b->set_scrolling(true); \
+	for (KeyboardShortcut k = KeyboardShortcut::k##name##__Begin; k <= KeyboardShortcut::k##name##__End; k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) { \
+		add_key(*b, k); \
+	} \
+	tabs_.add(#name, title, b, ""); \
+	boxes_.push_back(b); \
+}
+
+	CREATE_TAB(Common, _("General"))
+	CREATE_TAB(MainMenu, _("Main Menu"))
+	CREATE_TAB(InGame, _("Game"))
+	CREATE_TAB(Editor, _("Editor"))
+
+#undef CREATE_TAB
 
 	buttons_box_.add_inf_space();
 	buttons_box_.add(&reset_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -177,9 +178,6 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		}
 	});
 	ok_.sigclicked.connect([this]() { die(); });
-
-	tabs_.add("main", _("Main Menu"), &box_mainmenu_, "");
-	tabs_.add("general", _("Game – General"), &box_general_game_, "");
 
 	layout();
 	center_to_parent();
@@ -200,6 +198,9 @@ void KeyboardOptions::layout() {
 		buttons_box_.set_size(get_inner_w(), h);
 		buttons_box_.set_pos(Vector2i(0, get_inner_h() - h));
 		tabs_.set_size(get_inner_w(), get_inner_h() - h - kPadding);
+		for (UI::Box* b : boxes_) {
+			b->set_max_size(tabs_.get_inner_w(), tabs_.get_inner_h());
+		}
 	}
 	UI::Window::layout();
 }

@@ -41,7 +41,7 @@ private:
 	UI::Box buttons_box_;
 	UI::TabPanel tabs_;
 	UI::Button reset_, ok_;
-	UI::Box box_mainmenu_, box_general_game_;
+	std::vector<UI::Box*> boxes_;
 };
 }  // namespace FsMenu
 

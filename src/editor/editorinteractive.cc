@@ -90,7 +90,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                as_tooltip_text_with_hotkey(
                   /** TRANSLATORS: Title for the main menu button in the editor */
                   _("Main Menu"),
-                  pgettext("hotkey", "Esc"),
+                  shortcut_string_for(KeyboardShortcut::kEditorMenu),
                   UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
@@ -103,7 +103,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
                12,
                MainToolbar::kButtonSize,
                /** TRANSLATORS: Title for the tool menu button in the editor */
-               as_tooltip_text_with_hotkey(_("Tools"), "T", UI::PanelStyle::kWui),
+               as_tooltip_text_with_hotkey(_("Tools"), shortcut_string_for(KeyboardShortcut::kEditorTools), UI::PanelStyle::kWui),
                UI::DropdownType::kPictorialMenu,
                UI::PanelStyle::kWui,
                UI::ButtonStyle::kWuiPrimary),
@@ -141,8 +141,8 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	undo_ = add_toolbar_button("wui/editor/menus/undo", "undo", _("Undo"));
-	redo_ = add_toolbar_button("wui/editor/menus/redo", "redo", _("Redo"));
+	undo_ = add_toolbar_button("wui/editor/menus/undo", "undo", as_tooltip_text_with_hotkey(_("Undo"), shortcut_string_for(KeyboardShortcut::kEditorUndo), UI::PanelStyle::kWui));
+	redo_ = add_toolbar_button("wui/editor/menus/redo", "redo", as_tooltip_text_with_hotkey(_("Redo"), shortcut_string_for(KeyboardShortcut::kEditorRedo), UI::PanelStyle::kWui));
 
 	history_.reset(new EditorHistory(*undo_, *redo_));
 
@@ -151,7 +151,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &menu_windows_.help, true);
+	add_toolbar_button("ui_basic/menu_help", "help", as_tooltip_text_with_hotkey(_("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia), UI::PanelStyle::kWui), &menu_windows_.help, true);
 	menu_windows_.help.open_window = [this] {
 		new EditorHelp(*this, menu_windows_.help, &egbase().lua());
 	};
@@ -191,7 +191,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Load Map"), MainMenuEntry::kLoadMap,
 	              g_image_cache->get("images/wui/editor/menus/load_map.png"), false, "",
-	              pgettext("hotkey", "Ctrl+L"));
+	              shortcut_string_for(KeyboardShortcut::kEditorLoad));
 
 	menu_windows_.savemap.open_window = [this] {
 		new MainMenuSaveMap(*this, menu_windows_.savemap, menu_windows_.mapoptions);
@@ -199,7 +199,7 @@ void EditorInteractive::add_main_menu() {
 	/** TRANSLATORS: An entry in the editor's main menu */
 	mainmenu_.add(_("Save Map"), MainMenuEntry::kSaveMap,
 	              g_image_cache->get("images/wui/editor/menus/save_map.png"), false, "",
-	              pgettext("hotkey", "Ctrl+S"));
+	              shortcut_string_for(KeyboardShortcut::kEditorSave));
 
 	menu_windows_.mapoptions.open_window = [this] {
 		new MainMenuMapOptions(*this, menu_windows_.mapoptions);
@@ -310,7 +310,7 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Players"), ToolMenuEntry::kPlayers,
 	              g_image_cache->get("images/wui/editor/tools/players.png"), false,
 	              /** TRANSLATORS: Tooltip for the map size tool in the editor */
-	              _("Set number of players and their names, tribes and starting positions"), "P");
+	              _("Set number of players and their names, tribes and starting positions"), shortcut_string_for(KeyboardShortcut::kEditorPlayers));
 
 	/** TRANSLATORS: An entry in the editor's tool menu */
 	toolmenu_.add(_("Map origin"), ToolMenuEntry::kMapOrigin,
@@ -332,7 +332,7 @@ void EditorInteractive::add_tool_menu() {
 	toolmenu_.add(_("Information"), ToolMenuEntry::kFieldInfo,
 	              g_image_cache->get("images/wui/editor/fsel_editor_info.png"), false,
 	              /** TRANSLATORS: Tooltip for the map information tool in the editor */
-	              _("Click on a field to show information about it"), "I");
+	              _("Click on a field to show information about it"), shortcut_string_for(KeyboardShortcut::kEditorInfo));
 	toolmenu_.selected.connect([this] { tool_menu_selected(toolmenu_.get_selected()); });
 	toolbar()->add(&toolmenu_);
 }
@@ -396,27 +396,27 @@ void EditorInteractive::rebuild_showhide_menu() {
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
-	                  shortcut_string_for(KeyboardShortcut::kGeneralGameBuildhelp));
+	                  shortcut_string_for(KeyboardShortcut::kCommonBuildhelp));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */
 	showhidemenu_.add(draw_grid_ ? _("Hide Grid") : _("Show Grid"), ShowHideEntry::kGrid,
-	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "", "G");
+	                  g_image_cache->get("images/wui/menus/menu_toggle_grid.png"), false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideGrid));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether immovables (trees,
 	 * rocks etc.) are shown */
 	showhidemenu_.add(draw_immovables_ ? _("Hide Immovables") : _("Show Immovables"),
 	                  ShowHideEntry::kImmovables,
-	                  g_image_cache->get("images/wui/menus/toggle_immovables.png"));
+	                  g_image_cache->get("images/wui/menus/toggle_immovables.png"), false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideImmovables));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether animals are shown */
 	showhidemenu_.add(draw_bobs_ ? _("Hide Animals") : _("Show Animals"), ShowHideEntry::kAnimals,
-	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"));
+	                  g_image_cache->get("images/wui/menus/toggle_bobs.png"), false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideCritters));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether resources are shown */
 	showhidemenu_.add(draw_resources_ ? _("Hide Resources") : _("Show Resources"),
 	                  ShowHideEntry::kResources,
-	                  g_image_cache->get("images/wui/menus/toggle_resources.png"));
+	                  g_image_cache->get("images/wui/menus/toggle_resources.png"), false, "", shortcut_string_for(KeyboardShortcut::kEditorShowhideResources));
 
 	showhidemenu_.select(last_selection);
 }
@@ -736,117 +736,75 @@ void EditorInteractive::toggle_grid() {
 
 bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		switch (code.sym) {
-		// Sel radius
-		case SDLK_KP_1:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_1:
-			if (code.mod & (KMOD_CTRL)) {
-				toggle_buildhelp();
-			} else {
-				set_sel_radius_and_update_menu(0);
-			}
+		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
+			menu_windows_.help.toggle();
 			return true;
-
-		case SDLK_KP_2:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_2:
-			if (code.mod & (KMOD_CTRL)) {
-				toggle_immovables();
-			} else {
-				set_sel_radius_and_update_menu(1);
-			}
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorMenu, code)) {
+			mainmenu_.toggle();
 			return true;
-
-		case SDLK_KP_3:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_3:
-			if (code.mod & (KMOD_CTRL)) {
-				toggle_bobs();
-			} else {
-				set_sel_radius_and_update_menu(2);
-			}
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorSave, code)) {
+			menu_windows_.savemap.toggle();
 			return true;
-
-		case SDLK_KP_4:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_4:
-			if (code.mod & (KMOD_CTRL)) {
-				toggle_resources();
-			} else {
-				set_sel_radius_and_update_menu(3);
-			}
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorLoad, code)) {
+			menu_windows_.loadmap.toggle();
 			return true;
-
-		case SDLK_KP_5:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_5:
-			set_sel_radius_and_update_menu(4);
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorTools, code)) {
+			toolmenu_.toggle();
 			return true;
-
-		case SDLK_KP_6:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_6:
-			set_sel_radius_and_update_menu(5);
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorInfo, code)) {
+			select_tool(tools_->info, EditorTool::First);
 			return true;
-
-		case SDLK_KP_7:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_7:
-			set_sel_radius_and_update_menu(6);
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorPlayers, code)) {
+			tool_windows_.players.toggle();
 			return true;
-
-		case SDLK_KP_8:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_8:
-			set_sel_radius_and_update_menu(7);
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorShowhideGrid, code)) {
+			toggle_grid();
 			return true;
-
-		case SDLK_KP_9:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_9:
-			set_sel_radius_and_update_menu(8);
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorShowhideCritters, code)) {
+			toggle_bobs();
 			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorShowhideImmovables, code)) {
+			toggle_immovables();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorShowhideResources, code)) {
+			toggle_resources();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorUndo, code)) {
+			history_->undo_action();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kEditorRedo, code)) {
+			history_->redo_action();
+			return true;
+		}
 
-		case SDLK_KP_0:
-			if (!(code.mod & KMOD_NUM)) {
-				break;
+		if (code.mod == 0) {
+			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
+				set_sel_radius_and_update_menu(code.sym - SDLK_1);
+				return true;
 			}
-			FALLS_THROUGH;
-		case SDLK_0:
-			if (!(code.mod & KMOD_CTRL)) {
+			if ((code.mod & KMOD_NUM) && code.sym >= SDLK_KP_1 && code.sym <= SDLK_KP_9) {
+				set_sel_radius_and_update_menu(code.sym - SDLK_KP_1);
+				return true;
+			}
+			if (code.sym == SDLK_0 || ((code.mod & KMOD_NUM) && code.sym == SDLK_KP_0)) {
 				set_sel_radius_and_update_menu(9);
 				return true;
 			}
-			break;
+		}
 
+		switch (code.sym) {
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
 			if (tools_->use_tool == EditorTool::First) {
@@ -865,55 +823,6 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 
-		case SDLK_g:
-			toggle_grid();
-			return true;
-
-		case SDLK_h:
-			mainmenu_.toggle();
-			return true;
-
-		case SDLK_i:
-			select_tool(tools_->info, EditorTool::First);
-			return true;
-
-		case SDLK_l:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				menu_windows_.loadmap.toggle();
-			}
-			return true;
-
-		case SDLK_p:
-			tool_windows_.players.toggle();
-			return true;
-
-		case SDLK_s:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				menu_windows_.savemap.toggle();
-			}
-			return true;
-
-		case SDLK_t:
-			toolmenu_.toggle();
-			return true;
-
-		case SDLK_y:
-			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				history_->redo_action();
-			}
-			return true;
-
-		case SDLK_z:
-			if ((code.mod & (KMOD_LCTRL | KMOD_RCTRL)) && (code.mod & (KMOD_LSHIFT | KMOD_RSHIFT))) {
-				history_->redo_action();
-			} else if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				history_->undo_action();
-			}
-			return true;
-
-		case SDLK_F1:
-			menu_windows_.help.toggle();
-			return true;
 		case SDLK_ESCAPE:
 			mainmenu_.toggle();
 			return true;
@@ -939,6 +848,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			break;
 		}
 	}
+
 	return InteractiveBase::handle_key(down, code);
 }
 
