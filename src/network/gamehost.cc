@@ -700,7 +700,7 @@ void GameHost::run_callback() {
 		if (d->hp.has_players_tribe()) {
 			tipstexts.push_back(d->hp.get_players_tribe());
 		}
-		game_->create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
+		game_->create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
 		Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 
 		d->game = game_.get();

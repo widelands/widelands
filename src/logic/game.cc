@@ -226,7 +226,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	// Need to do this first so we can set the theme and background.
 	maploader->preload_map(true, &enabled_addons());
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
+	                 map().get_background_theme(), map().get_background());
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -417,7 +418,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		// Need to do this first so we can set the theme and background
 		gl.preload_game(gpdp);
 
-		create_loader_ui({"general_game", "singleplayer"}, false, gpdp.get_background_theme(),
+		create_loader_ui({"general_game", "singleplayer"}, true, gpdp.get_background_theme(),
 		                 gpdp.get_background());
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -537,8 +538,11 @@ bool Game::run(StartGameType const start_game_type,
 
 	InteractivePlayer* ipl = get_ipl();
 
-	if (start_game_type != StartGameType::kSaveGame) {
+	if (replay || start_game_type != StartGameType::kSaveGame) {
 		postload_addons();
+	}
+
+	if (start_game_type != StartGameType::kSaveGame) {
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == StartGameType::kMap) {
 			/** TRANSLATORS: All players (plural) */

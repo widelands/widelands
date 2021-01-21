@@ -27,7 +27,7 @@ struct GameTips : public UI::IProgressVisualization {
 	GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>&);
 	~GameTips() override;
 
-	void update(bool repaint) override;
+	void update(RenderTarget&, const Recti& bounds) override;
 	void stop() override;
 
 private:
@@ -36,13 +36,13 @@ private:
 		int32_t interval;
 	};
 	void load_tips(const std::string& name);
-	void show_tip(int32_t index);
+	void show_tip(RenderTarget&, const Recti& bounds, int32_t index);
 
-	uint32_t lastUpdated_;
-	uint32_t updateAfter_;
+	uint32_t last_updated_;
+	uint32_t update_after_;
 	UI::ProgressWindow& progressWindow_;
 	bool registered_;
-	uint32_t lastTip_;
+	uint32_t last_tip_;
 
 	std::vector<Tip> tips_;
 };
