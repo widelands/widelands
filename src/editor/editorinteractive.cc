@@ -398,7 +398,7 @@ void EditorInteractive::rebuild_showhide_menu() {
 	showhidemenu_.add(buildhelp() ? _("Hide Building Spaces") : _("Show Building Spaces"),
 	                  ShowHideEntry::kBuildingSpaces,
 	                  g_image_cache->get("images/wui/menus/toggle_buildhelp.png"), false, "",
-	                  pgettext("hotkey", "Space"));
+	                  shortcut_string_for(KeyboardShortcut::kGeneralGameBuildhelp));
 
 	/** TRANSLATORS: An entry in the editor's show/hide menu to toggle whether the map grid is shown
 	 */

@@ -22,6 +22,8 @@
 
 #include <string>
 
-void draw_game_tip(const std::string&, unsigned opacity = 1);
+#include "graphic/rendertarget.h"
+
+void draw_game_tip(RenderTarget& rt, const Recti& bounds, const std::string&, unsigned opacity = 1);
 
 #endif  // end of include guard: WL_GRAPHIC_GRAPHIC_FUNCTIONS_H

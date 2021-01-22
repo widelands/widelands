@@ -31,11 +31,11 @@
 #include "scripting/lua_table.h"
 
 GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>& names)
-   : lastUpdated_(0),
-     updateAfter_(0),
+   : last_updated_(0),
+     update_after_(0),
      progressWindow_(progressWindow),
      registered_(false),
-     lastTip_(0) {
+     last_tip_(0) {
 	// Loading the "texts" locale for translating the tips
 	i18n::Textdomain textdomain("texts");
 
@@ -47,7 +47,7 @@ GameTips::GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::st
 		// add visualization only if any tips are loaded
 		progressWindow_.add_visualization(this);
 		registered_ = true;
-		lastTip_ = tips_.size();
+		last_tip_ = tips_.size();
 	}
 }
 
@@ -74,21 +74,19 @@ void GameTips::load_tips(const std::string& name) {
 	}
 }
 
-void GameTips::update(bool repaint) {
+void GameTips::update(RenderTarget& rt, const Recti& bounds) {
 	uint32_t ticks = SDL_GetTicks();
-	if (ticks >= (lastUpdated_ + updateAfter_)) {
+	if (ticks >= (last_updated_ + update_after_)) {
 		const uint32_t next = std::rand() % tips_.size();  // NOLINT
-		if (next == lastTip_) {
-			lastTip_ = (next + 1) % tips_.size();
+		if (next == last_tip_) {
+			last_tip_ = (next + 1) % tips_.size();
 		} else {
-			lastTip_ = next;
+			last_tip_ = next;
 		}
-		show_tip(next);
-		lastUpdated_ = SDL_GetTicks();
-		updateAfter_ = tips_[next].interval * 1000;
-	} else if (repaint) {
-		show_tip(lastTip_);
+		last_updated_ = SDL_GetTicks();
+		update_after_ = tips_[next].interval * 1000;
 	}
+	show_tip(rt, bounds, last_tip_);
 }
 
 void GameTips::stop() {
@@ -98,6 +96,6 @@ void GameTips::stop() {
 	}
 }
 
-void GameTips::show_tip(const int32_t index) {
-	draw_game_tip(tips_[index].text);
+void GameTips::show_tip(RenderTarget& rt, const Recti& bounds, int32_t index) {
+	draw_game_tip(rt, bounds, tips_[index].text);
 }

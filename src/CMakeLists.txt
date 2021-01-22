@@ -137,10 +137,12 @@ wl_library(widelands_options
     wlapplication_options.cc
     wlapplication_options.h
   DEPENDS
+    base_i18n
     base_log
     io_filesystem
     io_profile
     logic_filesystem_constants
+  USES_SDL2
 )
 
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")

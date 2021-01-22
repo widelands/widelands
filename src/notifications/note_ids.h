@@ -27,7 +27,6 @@
 // one place.
 enum class NoteId : uint32_t {
 	ChatMessage,
-	LogMessage,
 	Immovable,
 	ConstructionsiteEnhanced,
 	FieldPossession,

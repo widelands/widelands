@@ -953,6 +953,8 @@ bool WLApplication::init_settings() {
 	get_config_int("sound", "volume_message", 128);
 	get_config_int("sound", "volume_music", 64);
 	get_config_int("sound", "volume_ui", 128);
+	// Keyboard shortcuts
+	init_shortcuts();
 	// KLUDGE!
 
 	int64_t last_start = get_config_int("last_start", 0);

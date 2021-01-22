@@ -4,19 +4,16 @@
 
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
 constexpr int kTextPadding = 48;
 
-void draw_game_tip(const std::string& text, unsigned opacity) {
-	RenderTarget& rt = *g_gr->get_render_target();
-
+void draw_game_tip(RenderTarget& rt, const Recti& bounds, const std::string& text, unsigned opacity) {
 	const Image& pic_background = load_safe_template_image("loadscreens/gametips.png");
 	const int w = pic_background.width();
 	const int h = pic_background.height();
-	Vector2i pt((g_gr->get_xres() - w) / 2, (g_gr->get_yres() - h) / 2);
+	Vector2i pt(bounds.x + (bounds.w - w) / 2, bounds.y + (bounds.h - h) / 2);
 
 	for (; opacity; --opacity) {
 		rt.blit(pt, &pic_background);
@@ -24,7 +21,7 @@ void draw_game_tip(const std::string& text, unsigned opacity) {
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh->render(as_game_tip(text), w - 2 * kTextPadding);
-	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
-	              (g_gr->get_yres() - rendered_text->height()) / 2);
+	pt = Vector2i(bounds.x + (bounds.w - rendered_text->width()) / 2,
+	              bounds.y + (bounds.h - rendered_text->height()) / 2);
 	rendered_text->draw(rt, pt);
 }

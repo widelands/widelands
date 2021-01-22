@@ -21,8 +21,10 @@
 
 #include "base/i18n.h"
 #include "economy/economy.h"
+#include "graphic/style_manager.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/player.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/interactive_player.h"
 
@@ -34,24 +36,58 @@ static const char pic_tab_workers_warehouse[] = "images/wui/stats/menu_tab_worke
 StockMenu::StockMenu(InteractivePlayer& plr, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&plr, UI::WindowStyle::kWui, "stock_menu", &registry, 480, 640, _("Stock")),
      player_(plr) {
-	UI::TabPanel* tabs = new UI::TabPanel(this, UI::TabPanelStyle::kWuiDark);
-	set_center_panel(tabs);
+	UI::Box* main_box = new UI::Box(this, UI::PanelStyle::kWui, 0, 0, UI::Box::Vertical);
+	set_center_panel(main_box);
+	UI::TabPanel* tabs = new UI::TabPanel(main_box, UI::TabPanelStyle::kWuiDark);
 
-	all_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
+	all_wares_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWARE);
 	tabs->add("total_wares", g_image_cache->get(pic_tab_wares), all_wares_, _("Wares (total)"));
 
-	all_workers_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
+	all_workers_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWORKER);
 	tabs->add(
 	   "workers_total", g_image_cache->get(pic_tab_workers), all_workers_, _("Workers (total)"));
 
-	warehouse_wares_ = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
+	warehouse_wares_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWARE);
 	tabs->add("wares_in_warehouses", g_image_cache->get(pic_tab_wares_warehouse), warehouse_wares_,
 	          _("Wares in warehouses"));
 
-	warehouse_workers_ =
-	   new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
+	warehouse_workers_ = new StockMenuWaresDisplay(tabs, 0, 0, plr.player(), Widelands::wwWORKER);
 	tabs->add("workers_in_warehouses", g_image_cache->get(pic_tab_workers_warehouse),
 	          warehouse_workers_, _("Workers in warehouses"));
+
+	auto color_tag = [](const RGBColor& c, const std::string& text1, const std::string& text2) {
+		return (boost::format(_("%1$s %2$s")) % StyleManager::color_tag(text1, c) % text2).str();
+	};
+	const UI::BuildingStatisticsStyleInfo& colors = g_style_manager->building_statistics_style();
+	UI::Checkbox* solid_icon_backgrounds = new UI::Checkbox(
+	   main_box, UI::PanelStyle::kWui, Vector2i::zero(),
+	   /** TRANSLATORS: If this checkbox is ticked, all icons in the stock menu are drawn with
+	      different background colors; each icon's color indicates whether the stock is higher or
+	      lower than the economy target setting. Very little space is available. */
+	   _("Evaluate"),
+	   (boost::format("<rt><p>%s</p><p>%s<br>%s<br>%s</p></rt>") %
+	    g_style_manager->font_style(UI::FontStyle::kWuiTooltipHeader)
+	       .as_font_tag(_("Compare stocked amounts to economy target quantities")) %
+	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+	       .as_font_tag(color_tag(
+	          colors.alternative_low_color(), _("Red:"), _("Stock is lower than the target"))) %
+	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+	       .as_font_tag(color_tag(
+	          colors.alternative_medium_color(), _("Yellow:"), _("Stock is equal to the target"))) %
+	    g_style_manager->font_style(UI::FontStyle::kWuiTooltip)
+	       .as_font_tag(color_tag(
+	          colors.alternative_high_color(), _("Green:"), _("Stock is higher than the target"))))
+	      .str());
+	solid_icon_backgrounds->changedto.connect([this](const bool b) {
+		all_wares_->set_solid_icon_backgrounds(!b);
+		all_workers_->set_solid_icon_backgrounds(!b);
+		warehouse_wares_->set_solid_icon_backgrounds(!b);
+		warehouse_workers_->set_solid_icon_backgrounds(!b);
+	});
+
+	main_box->add(tabs, UI::Box::Resizing::kExpandBoth);
+	main_box->set_max_size(tabs->get_w(), plr.get_h());
+	main_box->add(solid_icon_backgrounds, UI::Box::Resizing::kFullSize);
 
 	// Preselect the wares_in_warehouses tab
 	tabs->activate(2);

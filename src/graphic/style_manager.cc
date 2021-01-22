@@ -450,7 +450,10 @@ void StyleManager::set_building_statistics_style(const LuaTable& table) {
 	   read_rgb_color(*colors_table->get_table("neutral")),
 	   read_rgb_color(*colors_table->get_table("low")),
 	   read_rgb_color(*colors_table->get_table("medium")),
-	   read_rgb_color(*colors_table->get_table("high"))));
+	   read_rgb_color(*colors_table->get_table("high")),
+	   read_rgb_color(*colors_table->get_table("low_alt")),
+	   read_rgb_color(*colors_table->get_table("medium_alt")),
+	   read_rgb_color(*colors_table->get_table("high_alt"))));
 }
 
 void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table) {
