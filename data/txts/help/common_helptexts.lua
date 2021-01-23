@@ -67,3 +67,22 @@ function help_toggle_minimap_hotkey()
    pop_textdomain()
    return r
 end
+
+function help_set_landmarks_hotkeys()
+   push_textdomain("texts")
+   local r = wl.ui.get_shortcut("game_quicknav_set_1")
+   for i=2,9 do
+      r = _("%1% / %2%"):bformat(r, wl.ui.get_shortcut("game_quicknav_set_" .. i))
+   end
+   pop_textdomain()
+   return r
+end
+function help_goto_landmarks_hotkeys()
+   push_textdomain("texts")
+   local r = wl.ui.get_shortcut("game_quicknav_goto_1")
+   for i=2,9 do
+      r = _("%1% / %2%"):bformat(r, wl.ui.get_shortcut("game_quicknav_goto_" .. i))
+   end
+   pop_textdomain()
+   return r
+end

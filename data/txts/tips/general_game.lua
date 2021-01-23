@@ -1,4 +1,5 @@
 include "scripting/richtext.lua"
+include "txts/help/common_helptexts.lua"
 
 push_textdomain("texts")
 tips = {
@@ -40,8 +41,7 @@ tips = {
       seconds = 6
    },
    {
-      -- NOCOM
-      text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(pgettext("hotkey", "Ctrl + (1-9)"), pgettext("hotkey", "1-9")),
+      text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(help_set_landmarks_hotkeys(), help_goto_landmarks_hotkeys()),
       seconds = 4
    },
    {

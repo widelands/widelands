@@ -87,9 +87,8 @@ local r = {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(wl.ui.get_shortcut("game_hq")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               -- NOCOM
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + 1-9")), _"Remember current location") ..
-               dl(help_format_hotkey(pgettext("hotkey", "1-9")), _"Go to previously remembered location") ..
+               dl(help_format_hotkey(help_set_landmarks_hotkeys()), _"Remember current location") ..
+               dl(help_format_hotkey(help_goto_landmarks_hotkeys()), _"Go to previously remembered location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(wl.ui.get_shortcut("quicknav_prev")), _"Go to previous location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
