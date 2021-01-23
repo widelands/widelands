@@ -181,7 +181,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          []() { return _("Tutorials"); })},
    {KeyboardShortcut::kMainMenuCampaign,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
-                         keysym(SDLK_c),
+                         keysym(SDLK_h),
                          "mainmenu_campaign",
                          []() { return _("Campaigns"); })},
    {KeyboardShortcut::kMainMenuSP, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kMainMenu},
@@ -413,7 +413,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          []() { return _("Toggle Overlapping Workareas"); })},
    {KeyboardShortcut::kInGameStatsGeneral,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_g),
+                         keysym(SDLK_a),
                          "game_stats_general",
                          []() { return _("General Statistics"); })},
    {KeyboardShortcut::kInGameStatsWares,
@@ -442,7 +442,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          "game_stats_seafaring",
                          []() { return _("Seafaring Statistics"); })},
    {KeyboardShortcut::kInGameObjectives, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                                                              keysym(SDLK_o),
+                                                              keysym(SDLK_t),
                                                               "game_objectives",
                                                               []() { return _("Objectives"); })},
    {KeyboardShortcut::kInGameMessages, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
@@ -501,6 +501,74 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         keysym(SDLK_s, kDefaultCtrlModifier),
                                                         "game_save",
                                                         []() { return _("Save Game"); })},
+   {KeyboardShortcut::kInGameMessagesGoto, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_g),
+                                                        "game_msg_goto",
+                                                        []() { return _("Messages: Go to Location"); })},
+   {KeyboardShortcut::kInGameMessagesFilterAll, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_0, KMOD_ALT),
+                                                        "game_msg_filter_all",
+                                                        []() { return _("Messages: Show "); })},
+   {KeyboardShortcut::kInGameMessagesFilterGeologists, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_1, KMOD_ALT),
+                                                        "game_msg_filter_geo",
+                                                        []() { return _("Messages: Show Geologists’ Messages"); })},
+   {KeyboardShortcut::kInGameMessagesFilterEconomy, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_2, KMOD_ALT),
+                                                        "game_msg_filter_eco",
+                                                        []() { return _("Messages: Show Economy Messages"); })},
+   {KeyboardShortcut::kInGameMessagesFilterSeafaring, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_3, KMOD_ALT),
+                                                        "game_msg_filter_seafaring",
+                                                        []() { return _("Messages: Show Seafaring Messages"); })},
+   {KeyboardShortcut::kInGameMessagesFilterWarfare, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_4, KMOD_ALT),
+                                                        "game_msg_filter_warfare",
+                                                        []() { return _("Messages: Show Military Messages"); })},
+   {KeyboardShortcut::kInGameMessagesFilterScenario, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_5, KMOD_ALT),
+                                                        "game_msg_filter_scenario",
+                                                        []() { return _("Messages: Show Scenario Messages"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsGotoShip, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_j),
+                                                        "game_sfstats_goto",
+                                                        []() { return _("Seafaring: Go to Ship"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsWatchShip, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_f),
+                                                        "game_sfstats_watch",
+                                                        []() { return _("Seafaring: Watch Ship"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsOpenShipWindow, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_o),
+                                                        "game_sfstats_open",
+                                                        []() { return _("Seafaring: Open Ship Window"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsOpenShipWindowAndGoto, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_o, kDefaultCtrlModifier),
+                                                        "game_sfstats_open_goto",
+                                                        []() { return _("Seafaring: Open Ship Window And Go to Ship"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterAll, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_0, KMOD_SHIFT),
+                                                        "game_sfstats_filter_all",
+                                                        []() { return _("Seafaring: Show All Ships"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterIdle, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_1, KMOD_SHIFT),
+                                                        "game_sfstats_filter_idle",
+                                                        []() { return _("Seafaring: Show Idle Ships"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterShipping, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_2, KMOD_SHIFT),
+                                                        "game_sfstats_filter_ship",
+                                                        []() { return _("Seafaring: Show Transport Ships"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterExpWait, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_3, KMOD_SHIFT),
+                                                        "game_sfstats_filter_wait",
+                                                        []() { return _("Seafaring: Show Waiting Expeditions"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterExpScout, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_4, KMOD_SHIFT),
+                                                        "game_sfstats_filter_scout",
+                                                        []() { return _("Seafaring: Show Scouting Expeditions"); })},
+   {KeyboardShortcut::kInGameSeafaringstatsFilterExpPortspace, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
+                                                        keysym(SDLK_5, KMOD_SHIFT),
+                                                        "game_sfstats_filter_port",
+                                                        []() { return _("Seafaring: Show Expeditions with Port Spaces"); })},
 #define QUICKNAV(i) \
    {KeyboardShortcut::kInGameQuicknavSet##i, \
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, \
@@ -673,6 +741,20 @@ void init_shortcuts(const bool force_defaults) {
 			write_shortcut(k, shortcuts_.at(k).current_shortcut);
 		}
 	}
+
+#ifndef NDEBUG
+	// check that the default hotkeys don't conflict with each other
+	for (auto& a : shortcuts_) {
+		for (auto& b : shortcuts_) {
+			if (a.first != b.first && shared_scope(a.second.scopes, b.second) && matches_shortcut(a.first, b.second.default_shortcut)) {
+				log_warn("The default shortcuts for %s and %s (%s, %s) collide",
+					a.second.internal_name.c_str(), b.second.internal_name.c_str(), shortcut_string_for(a.first, false).c_str(),
+					shortcut_string_for(b.first, false).c_str());
+			}
+		}
+	}
+#endif
+
 	if (force_defaults) {
 		return;
 	}
