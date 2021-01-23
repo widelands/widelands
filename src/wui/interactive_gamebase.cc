@@ -119,7 +119,7 @@ void InteractiveGameBase::add_main_menu() {
 	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
 	              g_image_cache->get("images/wui/menus/lua.png"), false,
 	              /** TRANSLATORS: Tooltip for Script Console in the game's main menu */
-	              "", pgettext("hotkey", "F6"));
+	              "", pgettext("hotkey", "Ctrl+Shift+Space"));
 #endif
 
 	menu_windows_.sound_options.open_window = [this] {

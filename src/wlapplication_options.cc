@@ -144,6 +144,13 @@ struct KeyboardShortcutInfo {
 	}
 };
 
+// Use Cmd instead of Ctrl for default shortcuts on MacOS
+#ifdef __APPLE__
+constexpr uint16_t kDefaultCtrlModifier = KMOD_GUI;
+#else
+constexpr uint16_t kDefaultCtrlModifier = KMOD_CTRL;
+#endif
+
 static inline SDL_Keysym keysym(const SDL_Keycode c, uint16_t mod = 0) {
 	return SDL_Keysym{SDL_GetScancodeFromKey(c), c, mod, 0};
 }
@@ -260,9 +267,39 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          keysym(SDLK_F1),
                          "encyclopedia",
                          []() { return _("Encyclopedia"); })},
+   {KeyboardShortcut::kCommonTextCut,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_x, kDefaultCtrlModifier),
+                         "cut",
+                         []() { return _("Cut Text"); })},
+   {KeyboardShortcut::kCommonTextCopy,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_c, kDefaultCtrlModifier),
+                         "copy",
+                         []() { return _("Copy Text"); })},
+   {KeyboardShortcut::kCommonTextPaste,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_v, kDefaultCtrlModifier),
+                         "paste",
+                         []() { return _("Paste Text"); })},
+   {KeyboardShortcut::kCommonSelectAll,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_a, kDefaultCtrlModifier),
+                         "selectall",
+                         []() { return _("Select All"); })},
+   {KeyboardShortcut::kCommonDeleteItem,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_DELETE),
+                         "delete",
+                         []() { return _("Delete Item"); })},
+   {KeyboardShortcut::kCommonTooltipAccessibilityMode,
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
+                         keysym(SDLK_F2),
+                         "tt_access_mode",
+                         []() { return _("Tooltip Accessibility Mode Key"); })},
    {KeyboardShortcut::kCommonFullscreen,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGlobal},
-                         keysym(SDLK_f, KMOD_CTRL),
+                         keysym(SDLK_f, kDefaultCtrlModifier),
                          "fullscreen",
                          []() { return _("Toggle Fullscreen"); })},
    {KeyboardShortcut::kCommonScreenshot,
@@ -272,17 +309,17 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          []() { return _("Take Screenshot"); })},
    {KeyboardShortcut::kCommonZoomIn,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_PLUS, KMOD_CTRL),
+                         keysym(SDLK_PLUS, kDefaultCtrlModifier),
                          "zoom_in",
                          []() { return _("Zoom In"); })},
    {KeyboardShortcut::kCommonZoomOut,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_MINUS, KMOD_CTRL),
+                         keysym(SDLK_MINUS, kDefaultCtrlModifier),
                          "zoom_out",
                          []() { return _("Zoom Out"); })},
    {KeyboardShortcut::kCommonZoomReset,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame, KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_0, KMOD_CTRL),
+                         keysym(SDLK_0, kDefaultCtrlModifier),
                          "zoom_reset",
                          []() { return _("Reset Zoom"); })},
    {KeyboardShortcut::kCommonQuicknavNext,
@@ -301,19 +338,19 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         "editor_menu",
                                                         []() { return _("Menu"); })},
    {KeyboardShortcut::kEditorSave, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                                                        keysym(SDLK_s, KMOD_CTRL),
+                                                        keysym(SDLK_s, kDefaultCtrlModifier),
                                                         "editor_save",
                                                         []() { return _("Save Map"); })},
    {KeyboardShortcut::kEditorLoad, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                                                        keysym(SDLK_l, KMOD_CTRL),
+                                                        keysym(SDLK_l, kDefaultCtrlModifier),
                                                         "editor_load",
                                                         []() { return _("Load Map"); })},
    {KeyboardShortcut::kEditorUndo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                                                        keysym(SDLK_z, KMOD_CTRL),
+                                                        keysym(SDLK_z, kDefaultCtrlModifier),
                                                         "editor_undo",
                                                         []() { return _("Undo"); })},
    {KeyboardShortcut::kEditorRedo, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                                                        keysym(SDLK_y, KMOD_CTRL),
+                                                        keysym(SDLK_y, kDefaultCtrlModifier),
                                                         "editor_redo",
                                                         []() { return _("Redo"); })},
    {KeyboardShortcut::kEditorTools, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
@@ -335,17 +372,17 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          []() { return _("Toggle Grid"); })},
    {KeyboardShortcut::kEditorShowhideImmovables,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_2, KMOD_CTRL),
+                         keysym(SDLK_2, kDefaultCtrlModifier),
                          "editor_showhide_immovables",
                          []() { return _("Toggle Immovables"); })},
    {KeyboardShortcut::kEditorShowhideCritters,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_3, KMOD_CTRL),
+                         keysym(SDLK_3, kDefaultCtrlModifier),
                          "editor_showhide_critters",
                          []() { return _("Toggle Critters"); })},
    {KeyboardShortcut::kEditorShowhideResources,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kEditor},
-                         keysym(SDLK_4, KMOD_CTRL),
+                         keysym(SDLK_4, kDefaultCtrlModifier),
                          "editor_showhide_resources",
                          []() { return _("Toggle Resources"); })},
 
@@ -424,7 +461,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          []() { return _("Decrease Game Speed by 0.25×"); })},
    {KeyboardShortcut::kInGameSpeedDownFast,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_PAGEDOWN, KMOD_CTRL),
+                         keysym(SDLK_PAGEDOWN, kDefaultCtrlModifier),
                          "game_speed_down_fast",
                          []() { return _("Decrease Game Speed by 10×"); })},
    {KeyboardShortcut::kInGameSpeedUp,
@@ -439,7 +476,7 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                          []() { return _("Increase Game Speed by 0.25×"); })},
    {KeyboardShortcut::kInGameSpeedUpFast,
     KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                         keysym(SDLK_PAGEUP, KMOD_CTRL),
+                         keysym(SDLK_PAGEUP, kDefaultCtrlModifier),
                          "game_speed_up_fast",
                          []() { return _("Increase Game Speed by 10×"); })},
    {KeyboardShortcut::kInGameSpeedReset,
@@ -461,9 +498,30 @@ static std::map<KeyboardShortcut, KeyboardShortcutInfo> shortcuts_ = {
                                                         "game_chat",
                                                         []() { return _("Chat"); })},
    {KeyboardShortcut::kInGameSave, KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame},
-                                                        keysym(SDLK_s, KMOD_CTRL),
+                                                        keysym(SDLK_s, kDefaultCtrlModifier),
                                                         "game_save",
                                                         []() { return _("Save Game"); })},
+#define QUICKNAV(i) \
+   {KeyboardShortcut::kInGameQuicknavSet##i, \
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, \
+                         keysym(SDLK_##i, kDefaultCtrlModifier), \
+                         "game_quicknav_set_" #i, \
+                         []() { return (boost::format(_("Set Landmark #%d")) % i).str(); })}, \
+   {KeyboardShortcut::kInGameQuicknavGoto##i, \
+    KeyboardShortcutInfo({KeyboardShortcutInfo::Scope::kGame}, \
+                         keysym(SDLK_##i), \
+                         "game_quicknav_goto_" #i, \
+                         []() { return (boost::format(_("Go To Landmark #%d")) % i).str(); })}
+	QUICKNAV(1),
+	QUICKNAV(2),
+	QUICKNAV(3),
+	QUICKNAV(4),
+	QUICKNAV(5),
+	QUICKNAV(6),
+	QUICKNAV(7),
+	QUICKNAV(8),
+	QUICKNAV(9),
+#undef QUICKNAV
 };
 
 std::string to_string(const KeyboardShortcut id) {

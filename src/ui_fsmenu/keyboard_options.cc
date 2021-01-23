@@ -67,7 +67,10 @@ struct ShortcutChooser : public UI::Window {
 		if (!down) {
 			return false;
 		}
+
 		switch (code.sym) {
+
+		// Ignore modifiers
 		case SDLK_RCTRL:
 		case SDLK_RSHIFT:
 		case SDLK_RALT:
@@ -76,8 +79,21 @@ struct ShortcutChooser : public UI::Window {
 		case SDLK_LSHIFT:
 		case SDLK_LALT:
 		case SDLK_LGUI:
-			// ignore modifiers
 			return false;
+
+		// Also ignore reserved system keys
+		case SDLK_RETURN:
+		case SDLK_KP_ENTER:
+		case SDLK_SPACE:
+		case SDLK_ESCAPE:
+		case SDLK_UP:
+		case SDLK_DOWN:
+		case SDLK_LEFT:
+		case SDLK_RIGHT:
+		case SDLK_BACKSPACE:
+		case SDLK_TAB:
+			return false;
+
 		default:
 			key = code;
 			end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);

@@ -595,8 +595,8 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 			show_internet_login();
 			return true;
 		}
-		if (code.sym == SDLK_F3) {
-			// Easter egg: Press F3 to exchange the background immediately :-)
+		if (code.sym == SDLK_BACKSPACE && (code.mod & (KMOD_CTRL | KMOD_SHIFT))) {
+			// Easter egg: Press Ctrl/Shift+Backspace to exchange the background immediately :-)
 			last_image_exchange_time_ -=
 			   (last_image_exchange_time_ > kImageExchangeInterval ? kImageExchangeInterval :
 			                                                         last_image_exchange_time_);
