@@ -127,13 +127,14 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	   g_image_cache->get("images/wui/messages/message_archived.png"), _("Show Archive"));
 	togglemodebtn_->sigclicked.connect([this]() { toggle_mode(); });
 
-	centerviewbtn_ =
-	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
-	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
-	                  g_image_cache->get("images/wui/menus/goto.png"),
-	                  as_tooltip_text_with_hotkey(
-	                     /** TRANSLATORS: Tooltip in the messages window */
-	                     _("Center main mapview on location"), shortcut_string_for(KeyboardShortcut::kInGameMessagesGoto), UI::PanelStyle::kWui));
+	centerviewbtn_ = new UI::Button(
+	   this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
+	   archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
+	   g_image_cache->get("images/wui/menus/goto.png"),
+	   as_tooltip_text_with_hotkey(
+	      /** TRANSLATORS: Tooltip in the messages window */
+	      _("Center main mapview on location"),
+	      shortcut_string_for(KeyboardShortcut::kInGameMessagesGoto), UI::PanelStyle::kWui));
 	centerviewbtn_->sigclicked.connect([this]() { center_view(); });
 	centerviewbtn_->set_enabled(false);
 
@@ -522,7 +523,8 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 		/** TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey */
 		button.set_tooltip(as_tooltip_text_with_hotkey(
 		   /** TRANSLATORS: Tooltip in the messages window */
-		   _("Show all messages"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll), UI::PanelStyle::kWui));
+		   _("Show all messages"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterAll),
+		   UI::PanelStyle::kWui));
 	}
 }
 
@@ -532,19 +534,25 @@ void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
 void GameMessageMenu::set_filter_messages_tooltips() {
 	geologistsbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show geologists' messages only"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterGeologists), UI::PanelStyle::kWui));
+	   _("Show geologists' messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterGeologists),
+	   UI::PanelStyle::kWui));
 	economybtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show economy messages only"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy), UI::PanelStyle::kWui));
+	   _("Show economy messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterEconomy), UI::PanelStyle::kWui));
 	seafaringbtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show seafaring messages only"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring), UI::PanelStyle::kWui));
+	   _("Show seafaring messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterSeafaring), UI::PanelStyle::kWui));
 	warfarebtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show warfare messages only"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare), UI::PanelStyle::kWui));
+	   _("Show warfare messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterWarfare), UI::PanelStyle::kWui));
 	scenariobtn_->set_tooltip(as_tooltip_text_with_hotkey(
 	   /** TRANSLATORS: Tooltip in the messages window */
-	   _("Show scenario messages only"), shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario), UI::PanelStyle::kWui));
+	   _("Show scenario messages only"),
+	   shortcut_string_for(KeyboardShortcut::kInGameMessagesFilterScenario), UI::PanelStyle::kWui));
 }
 
 /**
@@ -640,6 +648,7 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		}
 		break;
 	}
-	archivebtn_->set_tooltip(
-	   as_tooltip_text_with_hotkey(button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem), UI::PanelStyle::kWui));
+	archivebtn_->set_tooltip(as_tooltip_text_with_hotkey(
+	   button_tooltip, shortcut_string_for(KeyboardShortcut::kCommonDeleteItem),
+	   UI::PanelStyle::kWui));
 }

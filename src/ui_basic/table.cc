@@ -419,7 +419,8 @@ bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
  */
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
-		if (is_multiselect_ && !empty() && matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
+		if (is_multiselect_ && !empty() &&
+		    matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
 			multiselect_.clear();
 			for (uint32_t i = 0; i < size(); ++i) {
 				toggle_entry(i);

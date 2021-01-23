@@ -61,11 +61,11 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		return false;
 	}
 
-#define CHECK_LANDMARK(i) \
-if (matches_shortcut(KeyboardShortcut::kInGameQuicknavSet##i, key)) { \
-	set_landmark(i - 1, current_); \
-	return true; \
-}
+#define CHECK_LANDMARK(i)                                                                          \
+	if (matches_shortcut(KeyboardShortcut::kInGameQuicknavSet##i, key)) {                           \
+		set_landmark(i - 1, current_);                                                               \
+		return true;                                                                                 \
+	}
 	CHECK_LANDMARK(1)
 	CHECK_LANDMARK(2)
 	CHECK_LANDMARK(3)
@@ -77,11 +77,11 @@ if (matches_shortcut(KeyboardShortcut::kInGameQuicknavSet##i, key)) { \
 	CHECK_LANDMARK(9)
 #undef CHECK_LANDMARK
 
-#define CHECK_LANDMARK(i) \
-if (matches_shortcut(KeyboardShortcut::kInGameQuicknavGoto##i, key)) { \
-	map_view_->set_view(landmarks_[i - 1].view, MapView::Transition::Smooth); \
-	return true; \
-}
+#define CHECK_LANDMARK(i)                                                                          \
+	if (matches_shortcut(KeyboardShortcut::kInGameQuicknavGoto##i, key)) {                          \
+		map_view_->set_view(landmarks_[i - 1].view, MapView::Transition::Smooth);                    \
+		return true;                                                                                 \
+	}
 	CHECK_LANDMARK(1)
 	CHECK_LANDMARK(2)
 	CHECK_LANDMARK(3)
@@ -94,15 +94,14 @@ if (matches_shortcut(KeyboardShortcut::kInGameQuicknavGoto##i, key)) { \
 #undef CHECK_LANDMARK
 
 	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavPrev, key) &&
-	           !previous_locations_.empty()) {
+	    !previous_locations_.empty()) {
 		// go to previous location
 		insert_if_applicable(next_locations_);
 		map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
 		previous_locations_.pop_back();
 		return true;
 	}
-	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavNext, key) &&
-	           !next_locations_.empty()) {
+	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavNext, key) && !next_locations_.empty()) {
 		// go to next location
 		insert_if_applicable(previous_locations_);
 		map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);

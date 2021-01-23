@@ -269,11 +269,13 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 			handle_textinput(SDL_GetClipboardText());
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) && d_->mode == Data::Mode::kSelection) {
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) &&
+		    d_->mode == Data::Mode::kSelection) {
 			copy_selected_text();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) && d_->mode == Data::Mode::kSelection) {
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) &&
+		    d_->mode == Data::Mode::kSelection) {
 			copy_selected_text();
 			delete_selected_text();
 			return true;

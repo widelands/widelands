@@ -747,7 +747,8 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 
 	// In-game clock and FPS
 	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime().get(), true) : "");
-	info_panel_.set_fps_string(get_display_flag(dfDebug), cheat_mode_enabled_, 1000.0 / frametime_, average_fps());
+	info_panel_.set_fps_string(
+	   get_display_flag(dfDebug), cheat_mode_enabled_, 1000.0 / frametime_, average_fps());
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,

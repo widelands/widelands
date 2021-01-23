@@ -261,11 +261,13 @@ bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 			handle_textinput(SDL_GetClipboardText());
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) && m_->mode == EditBoxImpl::Mode::kSelection) {
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) &&
+		    m_->mode == EditBoxImpl::Mode::kSelection) {
 			copy_selected_text();
 			return true;
 		}
-		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) && m_->mode == EditBoxImpl::Mode::kSelection) {
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) &&
+		    m_->mode == EditBoxImpl::Mode::kSelection) {
 			copy_selected_text();
 			delete_selected_text();
 			return true;

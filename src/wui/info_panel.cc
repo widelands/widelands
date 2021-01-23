@@ -369,7 +369,10 @@ void InfoPanel::push_message(MessagePreview* message) {
 	layout();
 }
 
-void InfoPanel::set_fps_string(const bool show, const bool cheating, const double fps, const double average) {
+void InfoPanel::set_fps_string(const bool show,
+                               const bool cheating,
+                               const double fps,
+                               const double average) {
 	if (!show && !cheating) {
 		text_fps_.set_text("");
 		text_fps_.set_tooltip("");
