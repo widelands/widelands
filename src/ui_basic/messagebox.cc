@@ -36,7 +36,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
                            const std::string& caption,
                            const std::string& text,
                            const MBoxType type,
-                           Align align)
+                           Align align,
+                           const bool needs_richtext_escape)
    : Window(parent, s, "message_box", 0, 0, 20, 20, caption), type_(type) {
 	// Calculate textarea dimensions depending on text size
 	const int outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
@@ -56,16 +57,18 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	const int margin = 5;
 	int width, height = 0;
 	{
-		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth);
+		std::shared_ptr<const UI::RenderedText> temp_rendered_text = g_fh->render(
+		   as_richtext_paragraph(needs_richtext_escape ? richtext_escape(text) : text, font_style),
+		   maxwidth);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}
 
 	// Stupid heuristic to avoid excessively long lines
 	if (height < 2 * text_height(font_style)) {
-		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
-		   g_fh->render(as_richtext_paragraph(text, font_style), maxwidth / 2);
+		std::shared_ptr<const UI::RenderedText> temp_rendered_text = g_fh->render(
+		   as_richtext_paragraph(needs_richtext_escape ? richtext_escape(text) : text, font_style),
+		   maxwidth / 2);
 		width = temp_rendered_text->width();
 		height = temp_rendered_text->height();
 	}

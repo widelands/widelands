@@ -105,21 +105,72 @@ enum class KeyboardShortcut : uint16_t {
 	kMainMenuQuit,
 	kMainMenu__End = kMainMenuQuit,
 
-	kGeneralGame__Begin = kMainMenu__End + 1,
-	kGeneralGameBuildhelp = kGeneralGame__Begin,
-	kGeneralGameMinimap,
-	kGeneralGame__End = kGeneralGameMinimap,
+	kCommon__Begin = kMainMenu__End + 1,
+	kCommonFullscreen = kCommon__Begin,
+	kCommonScreenshot,
+	kCommonEncyclopedia,
+	kCommonBuildhelp,
+	kCommonMinimap,
+	kCommonZoomIn,
+	kCommonZoomOut,
+	kCommonZoomReset,
+	kCommonQuicknavPrev,
+	kCommonQuicknavNext,
+	kCommon__End = kCommonQuicknavNext,
 
-	k__End = kGeneralGame__End,
+	kEditor__Begin = kCommon__End + 1,
+	kEditorMenu = kEditor__Begin,
+	kEditorSave,
+	kEditorLoad,
+	kEditorUndo,
+	kEditorRedo,
+	kEditorTools,
+	kEditorInfo,
+	kEditorPlayers,
+	kEditorShowhideGrid,
+	kEditorShowhideImmovables,
+	kEditorShowhideCritters,
+	kEditorShowhideResources,
+	kEditor__End = kEditorShowhideResources,
+
+	kInGame__Begin = kEditor__End + 1,
+	kInGameSave = kInGame__Begin,
+	kInGameChat,
+	kInGameMessages,
+	kInGameObjectives,
+	kInGameShowhideCensus,
+	kInGameShowhideStats,
+	kInGameShowhideSoldiers,
+	kInGameShowhideBuildings,
+	kInGameShowhideWorkareas,
+	kInGameStatsGeneral,
+	kInGameStatsWares,
+	kInGameStatsBuildings,
+	kInGameStatsStock,
+	kInGameStatsSoldiers,
+	kInGameStatsSeafaring,
+	kInGamePause,
+	kInGameSpeedUp,
+	kInGameSpeedUpSlow,
+	kInGameSpeedUpFast,
+	kInGameSpeedDown,
+	kInGameSpeedDownSlow,
+	kInGameSpeedDownFast,
+	kInGameSpeedReset,
+	kInGameScrollToHQ,
+	kInGame__End = kInGameScrollToHQ,
+
+	k__End = kInGame__End
 };
 bool set_shortcut(KeyboardShortcut, SDL_Keysym, KeyboardShortcut* conflict);
 SDL_Keysym get_shortcut(KeyboardShortcut);
 SDL_Keysym get_default_shortcut(KeyboardShortcut);
 bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
+bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
 void init_shortcuts(bool force_defaults = false);
 std::string to_string(KeyboardShortcut);
-std::string shortcut_string_for(SDL_Keysym);
-std::string shortcut_string_for(KeyboardShortcut);
+std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
+std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 
 /*
  * Sets the directory where to read/write kConfigFile.
