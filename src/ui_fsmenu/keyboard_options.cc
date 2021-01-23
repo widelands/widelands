@@ -149,26 +149,23 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		});
 	};
 
-#define CREATE_TAB(name, title)                                                                    \
-	{                                                                                               \
-		UI::Box* b =                                                                                 \
-		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);    \
-		b->set_force_scrolling(true);                                                                \
-		for (KeyboardShortcut k = KeyboardShortcut::k##name##__Begin;                                \
-		     k <= KeyboardShortcut::k##name##__End;                                                  \
-		     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {                      \
-			add_key(*b, k);                                                                           \
-		}                                                                                            \
-		tabs_.add(#name, title, b, "");                                                              \
-		boxes_.push_back(b);                                                                         \
-	}
-
-	CREATE_TAB(Common, _("General"))
-	CREATE_TAB(MainMenu, _("Main Menu"))
-	CREATE_TAB(InGame, _("Game"))
-	CREATE_TAB(Editor, _("Editor"))
-
-#undef CREATE_TAB
+	auto create_tab = [this, add_key](const std::string& title, const KeyboardShortcut shortcut_start, const KeyboardShortcut shortcut_end) {
+		const uint16_t s1 = static_cast<uint16_t>(shortcut_start);
+		const uint16_t s2 = static_cast<uint16_t>(shortcut_end);
+		assert(s1 < s2);
+		UI::Box* b =
+		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		b->set_force_scrolling(true);
+		for (uint16_t k = s1; k <= s2; ++k) {
+			add_key(*b, static_cast<KeyboardShortcut>(k));
+		}
+		tabs_.add(title, title, b, "");
+		boxes_.push_back(b);
+	};
+	create_tab(_("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End);
+	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End);
+	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
+	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End);
 
 	buttons_box_.add_inf_space();
 	buttons_box_.add(&reset_, UI::Box::Resizing::kAlign, UI::Align::kCenter);

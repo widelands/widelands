@@ -589,7 +589,11 @@ std::string shortcut_string_for(const SDL_Keysym sym, const bool rt_escape) {
 		mods.push_back(pgettext("hotkey", "Alt"));
 	}
 	if (sym.mod & KMOD_GUI) {
+#ifdef __APPLE__
+		mods.push_back(pgettext("hotkey", "Cmd"));
+#else
 		mods.push_back(pgettext("hotkey", "GUI"));
+#endif
 	}
 	if (sym.mod & KMOD_CTRL) {
 		mods.push_back(pgettext("hotkey", "Ctrl"));
