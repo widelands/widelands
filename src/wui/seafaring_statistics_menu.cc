@@ -120,8 +120,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                kButtonSize,
                UI::ButtonStyle::kWuiPrimary,
                g_image_cache->get("images/wui/menus/watch_follow.png"),
-               /** TRANSLATORS: Tooltip in the seafaring statistics window */
                as_tooltip_text_with_hotkey(
+                  /** TRANSLATORS: Tooltip in the seafaring statistics window */
                   _("Watch the selected ship"),
                   shortcut_string_for(KeyboardShortcut::kInGameSeafaringstatsWatchShip),
                   UI::PanelStyle::kWui)),
