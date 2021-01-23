@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -258,22 +258,22 @@ void InteractiveBase::rebuild_mapview_menu() {
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
 	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kGeneralGameMinimap));
+	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
-	                 pgettext("hotkey", "Ctrl++"));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
-	                 pgettext("hotkey", "Ctrl+0"));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
-	                 pgettext("hotkey", "Ctrl+-"));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut));
 
 	mapviewmenu_.select(last_selection);
 }
@@ -1402,11 +1402,11 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 			toolbar()->focus();
 			return true;
 		default:
-			if (matches_shortcut(KeyboardShortcut::kGeneralGameBuildhelp, code)) {
+			if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
 				toggle_buildhelp();
 				return true;
 			}
-			if (matches_shortcut(KeyboardShortcut::kGeneralGameMinimap, code)) {
+			if (matches_shortcut(KeyboardShortcut::kCommonMinimap, code)) {
 				toggle_minimap();
 				return true;
 			}

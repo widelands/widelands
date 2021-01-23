@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -113,16 +113,12 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
          reset_.get_w(),
          reset_.get_h(),
          UI::ButtonStyle::kFsMenuPrimary,
-         _("OK")),
-     box_mainmenu_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_general_game_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding) {
-	box_mainmenu_.set_scrolling(true);
-	box_general_game_.set_scrolling(true);
-
+         _("OK")) {
 	std::map<KeyboardShortcut, UI::Button*> all_keyboard_buttons;
 
 	auto generate_title = [](const KeyboardShortcut key) {
-		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key)).str();
+		return (boost::format(_("%1$s: %2$s")) % to_string(key) % shortcut_string_for(key, false))
+		   .str();
 	};
 
 	auto add_key = [this, generate_title, &all_keyboard_buttons](
@@ -144,25 +140,34 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 					   (boost::format(_("The shortcut you selected (‘%1$s’) is already in use for the "
 					                    "following action: ‘%2$s’. Please select a different shortcut "
 					                    "or change the conflicting shortcut first.")) %
-					    shortcut_string_for(c.key) % to_string(conflict))
+					    shortcut_string_for(c.key, false) % to_string(conflict))
 					      .str(),
-					   UI::WLMessageBox::MBoxType::kOk);
+					   UI::WLMessageBox::MBoxType::kOk, UI::Align::kCenter, true);
 					warning.run<UI::Panel::Returncodes>();
 				}
 			}
 		});
 	};
 
-	for (KeyboardShortcut k = KeyboardShortcut::kMainMenu__Begin;
-	     k <= KeyboardShortcut::kMainMenu__End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
-		add_key(box_mainmenu_, k);
-	}
-	for (KeyboardShortcut k = KeyboardShortcut::kGeneralGame__Begin;
-	     k <= KeyboardShortcut::kGeneralGame__End;
-	     k = static_cast<KeyboardShortcut>(static_cast<uint16_t>(k) + 1)) {
-		add_key(box_general_game_, k);
-	}
+	auto create_tab = [this, add_key](const std::string& title,
+	                                  const KeyboardShortcut shortcut_start,
+	                                  const KeyboardShortcut shortcut_end) {
+		const uint16_t s1 = static_cast<uint16_t>(shortcut_start);
+		const uint16_t s2 = static_cast<uint16_t>(shortcut_end);
+		assert(s1 < s2);
+		UI::Box* b =
+		   new UI::Box(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding);
+		b->set_force_scrolling(true);
+		for (uint16_t k = s1; k <= s2; ++k) {
+			add_key(*b, static_cast<KeyboardShortcut>(k));
+		}
+		tabs_.add(title, title, b, "");
+		boxes_.push_back(b);
+	};
+	create_tab(_("General"), KeyboardShortcut::kCommon__Begin, KeyboardShortcut::kCommon__End);
+	create_tab(_("Main Menu"), KeyboardShortcut::kMainMenu__Begin, KeyboardShortcut::kMainMenu__End);
+	create_tab(_("Game"), KeyboardShortcut::kInGame__Begin, KeyboardShortcut::kInGame__End);
+	create_tab(_("Editor"), KeyboardShortcut::kEditor__Begin, KeyboardShortcut::kEditor__End);
 
 	buttons_box_.add_inf_space();
 	buttons_box_.add(&reset_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -177,9 +182,6 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		}
 	});
 	ok_.sigclicked.connect([this]() { die(); });
-
-	tabs_.add("main", _("Main Menu"), &box_mainmenu_, "");
-	tabs_.add("general", _("Game – General"), &box_general_game_, "");
 
 	layout();
 	center_to_parent();
@@ -200,6 +202,9 @@ void KeyboardOptions::layout() {
 		buttons_box_.set_size(get_inner_w(), h);
 		buttons_box_.set_pos(Vector2i(0, get_inner_h() - h));
 		tabs_.set_size(get_inner_w(), get_inner_h() - h - kPadding);
+		for (UI::Box* b : boxes_) {
+			b->set_max_size(tabs_.get_inner_w(), tabs_.get_inner_h());
+		}
 	}
 	UI::Window::layout();
 }
