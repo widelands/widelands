@@ -28,6 +28,7 @@
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
+#include "wlapplication_options.h"
 #include "wui/interactive_player.h"
 
 namespace LuaUi {
@@ -1040,8 +1041,27 @@ static int L_get_user_input_allowed(lua_State* L) {
 	return 1;
 }
 
+/* RST
+.. method:: get_shortcut(name)
+
+   Returns the keyboard shortcut with the given name.
+
+   :returns: The human-readable and localized shortcut.
+   :rtype: :class:`string`
+*/
+static int L_get_shortcut(lua_State* L) {
+	const std::string name = luaL_checkstring(L, -1);
+	try {
+		lua_pushstring(L, shortcut_string_for(shortcut_from_string(name), false).c_str());
+	} catch (const WException& e) {
+		report_error(L, "Unable to query shortcut for '%s': %s", name.c_str(), e.what());
+	}
+	return 1;
+}
+
 const static struct luaL_Reg wlui[] = {{"set_user_input_allowed", &L_set_user_input_allowed},
                                        {"get_user_input_allowed", &L_get_user_input_allowed},
+                                       {"get_shortcut", &L_get_shortcut},
                                        {nullptr, nullptr}};
 
 void luaopen_wlui(lua_State* L) {

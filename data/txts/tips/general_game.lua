@@ -36,10 +36,11 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Manage your messages more efficiently: press ‘N’ for News to access the messages window, then use ‘G’ for Go To, and the Delete key to archive messages.",
+      text = _"Manage your messages more efficiently: press ‘%1$s’ for News to access the messages window, then use ‘%2$s’ for Go To, and the ‘%3$s’ key to archive messages.":bformat(wl.ui.get_shortcut("game_messages"), wl.ui.get_shortcut("game_msg_goto"), wl.ui.get_shortcut("delete")),
       seconds = 6
    },
    {
+      -- NOCOM
       text = _"Press %1% to store important locations, then press %2% to recall them.":bformat(pgettext("hotkey", "Ctrl + (1-9)"), pgettext("hotkey", "1-9")),
       seconds = 4
    },
@@ -56,7 +57,7 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Press I to quickly toggle the display of your stock inventory.",
+      text = _"Press ‘%s’ to quickly toggle the display of your stock inventory.":bformat(wl.ui.get_shortcut("game_stats_stock")),
       seconds = 4
    },
    {
@@ -68,15 +69,24 @@ tips = {
       seconds = 7
    },
    {
-      text = _"Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom.":bformat(pgettext("hotkey", "Ctrl + (+/-)"), pgettext("hotkey", "Ctrl + 0")),
+      text = _"Zoom in/out with the mouse wheel or %1%/%2%. Press %3% to reset the zoom.":bformat(
+         wl.ui.get_shortcut("zoom_in"),
+         wl.ui.get_shortcut("zoom_out"),
+         wl.ui.get_shortcut("zoom_reset")),
       seconds = 3
    },
    {
-      text = _"Use the ‘,’ (comma) and ‘.’ (period) keys to quickly jump between recently visited locations.",
+      text = _"Use the ‘%1$s’ and ‘%2$s’ keys to quickly jump between recently visited locations.":bformat(wl.ui.get_shortcut("quicknav_prev"), wl.ui.get_shortcut("quicknav_next")),
       seconds = 3
    },
    {
-      text = _"Speed up or slow down the game with %1%. Use %2% for rapid change, %3% will adjust speed smoothly.":bformat(pgettext("hotkey", "Page Up/Page Down"), pgettext("hotkey", "Ctrl + (Page Up/Page Down)"), pgettext("hotkey", "Shift + (Page Up/Page Down)")),
+      text = _"Speed up or slow down the game with %1%/%2%. Use %3%/%4% for rapid change; %5%/%6% will adjust speed smoothly.":bformat(
+         wl.ui.get_shortcut("game_speed_up"),
+         wl.ui.get_shortcut("game_speed_down"),
+         wl.ui.get_shortcut("game_speed_up_fast"),
+         wl.ui.get_shortcut("game_speed_down_fast"),
+         wl.ui.get_shortcut("game_speed_up_slow"),
+         wl.ui.get_shortcut("game_speed_down_slow")),
       seconds = 7
    },
    {

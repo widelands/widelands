@@ -25,6 +25,7 @@
 #include "scripting/lua_globals.h"
 #include "scripting/lua_path.h"
 #include "scripting/lua_table.h"
+#include "scripting/lua_ui.h"
 #include "scripting/run_script.h"
 
 namespace {
@@ -78,6 +79,9 @@ LuaInterface::LuaInterface() {
 
 	lua_newtable(lua_state_);
 	lua_setglobal(lua_state_, "hooks");
+
+	// Game tips need this to access hotkeys.
+	LuaUi::luaopen_wlui(lua_state_);
 }
 
 LuaInterface::~LuaInterface() {

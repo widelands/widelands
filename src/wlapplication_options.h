@@ -210,6 +210,7 @@ bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
 void init_shortcuts(bool force_defaults = false);
 std::string to_string(KeyboardShortcut);
+KeyboardShortcut shortcut_from_string(const std::string&);
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 

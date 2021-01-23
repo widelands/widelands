@@ -50,7 +50,7 @@ obj_open_building_stats = {
       li(_[[Open the building statistics window for an overview over the buildings you have.]]) ..
       li_image("images/wui/menus/statistics.png", _[[First, you will have to open the ‘Statistics’ menu at the bottom of the screen.]]) ..
       li_image("images/wui/menus/statistics_buildings.png", _[[Afterwards, choose ‘Buildings’.]]) ..
-      li_arrow(_[[You can also use the hotkey ‘b’.]])
+      li_arrow(_[[You can also use the hotkey ‘%s’.]]:bformat(wl.ui.get_shortcut("game_stats_buildings")))
    )
 }
 building_stats = {
@@ -124,7 +124,7 @@ obj_open_inventory = {
       p(_[[The stock window gives you an overview over the wares you currently have.]]) ..
       li_image("images/wui/menus/statistics.png", _[[First, you will have to open the ‘Statistics’ menu at the bottom of the screen.]]) ..
       li_image("images/wui/menus/statistics_stock.png", _[[Afterwards, choose ‘Stock’.]]) ..
-      li_arrow(_[[You can also use the hotkey ‘i’ (as in ‘inventory’) to access this window quickly.]])
+      li_arrow(_[[You can also use the hotkey ‘%s’ to access this window quickly.]]:bformat(wl.ui.get_shortcut("game_stats_stock")))
    )
 }
 inventory1 = {

@@ -702,6 +702,15 @@ bool matches_shortcut(const KeyboardShortcut id, const SDL_Keycode code, const i
 	return false;
 }
 
+KeyboardShortcut shortcut_from_string(const std::string& name) {
+	for (const auto& pair : shortcuts_) {
+		if (pair.second.internal_name == name) {
+			return pair.first;
+		}
+	}
+	throw wexception("Shortcut '%s' does not exist", name.c_str());
+}
+
 std::string shortcut_string_for(const KeyboardShortcut id, const bool rt_escape) {
 	return shortcut_string_for(get_shortcut(id), rt_escape);
 }

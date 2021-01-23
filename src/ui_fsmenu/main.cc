@@ -581,13 +581,13 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuContinuePlaying, code)) {
 			if (!filename_for_continue_playing_.empty()) {
-				end_modal<MenuTarget>(MenuTarget::kContinueLastsave);
+				action(MenuTarget::kContinueLastsave);
 				return true;
 			}
 		}
 		if (matches_shortcut(KeyboardShortcut::kMainMenuContinueEditing, code)) {
 			if (!filename_for_continue_editing_.empty()) {
-				end_modal<MenuTarget>(MenuTarget::kEditorContinue);
+				action(MenuTarget::kEditorContinue);
 				return true;
 			}
 		}
