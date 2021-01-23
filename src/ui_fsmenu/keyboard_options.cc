@@ -149,7 +149,9 @@ KeyboardOptions::KeyboardOptions(Panel& parent)
 		});
 	};
 
-	auto create_tab = [this, add_key](const std::string& title, const KeyboardShortcut shortcut_start, const KeyboardShortcut shortcut_end) {
+	auto create_tab = [this, add_key](const std::string& title,
+	                                  const KeyboardShortcut shortcut_start,
+	                                  const KeyboardShortcut shortcut_end) {
 		const uint16_t s1 = static_cast<uint16_t>(shortcut_start);
 		const uint16_t s2 = static_cast<uint16_t>(shortcut_end);
 		assert(s1 < s2);
