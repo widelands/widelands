@@ -61,37 +61,23 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		return false;
 	}
 
-#define CHECK_LANDMARK(i)                                                                          \
-	if (matches_shortcut(KeyboardShortcut::kInGameQuicknavSet##i, key)) {                           \
-		set_landmark(i - 1, current_);                                                               \
-		return true;                                                                                 \
+	auto check_landmark = [this, key](const uint8_t i) {
+		// This function assumes that the shortcut entries are ordered Set1,Goto1,Set2,Goto2,Set3,Goto3,etc
+		if (matches_shortcut(static_cast<KeyboardShortcut>(static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i), key)) {
+			set_landmark(i, current_);
+			return true;
+		}
+		if (matches_shortcut(static_cast<KeyboardShortcut>(static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i), key)) {
+			map_view_->set_view(landmarks_[i].view, MapView::Transition::Smooth);
+			return true;
+		}
+		return false;
+	};
+	for (uint8_t i = 0; i < 9; ++i) {
+		if (check_landmark(i)) {
+			return true;
+		}
 	}
-	CHECK_LANDMARK(1)
-	CHECK_LANDMARK(2)
-	CHECK_LANDMARK(3)
-	CHECK_LANDMARK(4)
-	CHECK_LANDMARK(5)
-	CHECK_LANDMARK(6)
-	CHECK_LANDMARK(7)
-	CHECK_LANDMARK(8)
-	CHECK_LANDMARK(9)
-#undef CHECK_LANDMARK
-
-#define CHECK_LANDMARK(i)                                                                          \
-	if (matches_shortcut(KeyboardShortcut::kInGameQuicknavGoto##i, key)) {                          \
-		map_view_->set_view(landmarks_[i - 1].view, MapView::Transition::Smooth);                    \
-		return true;                                                                                 \
-	}
-	CHECK_LANDMARK(1)
-	CHECK_LANDMARK(2)
-	CHECK_LANDMARK(3)
-	CHECK_LANDMARK(4)
-	CHECK_LANDMARK(5)
-	CHECK_LANDMARK(6)
-	CHECK_LANDMARK(7)
-	CHECK_LANDMARK(8)
-	CHECK_LANDMARK(9)
-#undef CHECK_LANDMARK
 
 	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavPrev, key) &&
 	    !previous_locations_.empty()) {
