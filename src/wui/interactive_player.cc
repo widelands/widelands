@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "game_io/game_loader.h"
 #include "graphic/game_renderer.h"
 #include "graphic/mouse_cursor.h"
+#include "graphic/text_layout.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"
@@ -39,6 +40,7 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "ui_basic/unique_window.h"
+#include "wlapplication_options.h"
 #include "wui/building_statistics_menu.h"
 #include "wui/debugconsole.h"
 #include "wui/fieldaction.h"
@@ -198,16 +200,28 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 
 	add_statistics_menu();
 
-	add_toolbar_button("wui/menus/objectives", "objectives", _("Objectives"), &objectives_, true);
+	add_toolbar_button("wui/menus/objectives", "objectives",
+	                   as_tooltip_text_with_hotkey(
+	                      _("Objectives"), shortcut_string_for(KeyboardShortcut::kInGameObjectives),
+	                      UI::PanelStyle::kWui),
+	                   &objectives_, true);
 	objectives_.open_window = [this] { new GameObjectivesMenu(this, objectives_); };
 
 	toggle_message_menu_ =
-	   add_toolbar_button("wui/menus/message_old", "messages", _("Messages"), &message_menu_, true);
+	   add_toolbar_button("wui/menus/message_old", "messages",
+	                      as_tooltip_text_with_hotkey(
+	                         _("Messages"), shortcut_string_for(KeyboardShortcut::kInGameMessages),
+	                         UI::PanelStyle::kWui),
+	                      &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
 	toolbar()->add_space(15);
 
-	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &encyclopedia_, true);
+	add_toolbar_button("ui_basic/menu_help", "help",
+	                   as_tooltip_text_with_hotkey(
+	                      _("Help"), shortcut_string_for(KeyboardShortcut::kCommonEncyclopedia),
+	                      UI::PanelStyle::kWui),
+	                   &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};
@@ -284,31 +298,33 @@ void InteractivePlayer::rebuild_statistics_menu() {
 		/** TRANSLATORS: An entry in the game's statistics menu */
 		statisticsmenu_.add(_("Seafaring"), StatisticsMenuEntry::kSeafaring,
 		                    g_image_cache->get("images/wui/menus/statistics_seafaring.png"), false,
-		                    "", "E");
+		                    "", shortcut_string_for(KeyboardShortcut::kInGameStatsSeafaring));
 	}
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Soldiers"), StatisticsMenuEntry::kSoldiers,
 	                    g_image_cache->get("images/wui/menus/toggle_soldier_levels.png"), false, "",
-	                    "X");
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsSoldiers));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Stock"), StatisticsMenuEntry::kStock,
-	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "", "I");
+	                    g_image_cache->get("images/wui/menus/statistics_stock.png"), false, "",
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsStock));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Buildings"), StatisticsMenuEntry::kBuildings,
 	                    g_image_cache->get("images/wui/menus/statistics_buildings.png"), false, "",
-	                    "B");
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsBuildings));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("Wares"), StatisticsMenuEntry::kWare,
-	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "", "P");
+	                    g_image_cache->get("images/wui/menus/statistics_wares.png"), false, "",
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsWares));
 
 	/** TRANSLATORS: An entry in the game's statistics menu */
 	statisticsmenu_.add(_("General"), StatisticsMenuEntry::kGeneral,
 	                    g_image_cache->get("images/wui/menus/statistics_general.png"), false, "",
-	                    "G");
+	                    shortcut_string_for(KeyboardShortcut::kInGameStatsGeneral));
 
 	statisticsmenu_.select(last_selection);
 }
@@ -355,7 +371,8 @@ void InteractivePlayer::rebuild_showhide_menu() {
 	      _("Show Workarea Overlaps"),
 	   ShowHideEntry::kWorkareaOverlap,
 	   g_image_cache->get("images/wui/menus/show_workarea_overlap.png"), false,
-	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"), "W");
+	   _("Toggle whether overlapping workareas are indicated when placing a constructionsite"),
+	   shortcut_string_for(KeyboardShortcut::kInGameShowhideWorkareas));
 
 	showhidemenu_.select(last_selection);
 }
@@ -441,7 +458,9 @@ void InteractivePlayer::think() {
 			      .str();
 		}
 		toggle_message_menu_->set_pic(g_image_cache->get(msg_icon));
-		toggle_message_menu_->set_tooltip(msg_tooltip);
+		toggle_message_menu_->set_tooltip(as_tooltip_text_with_hotkey(
+		   msg_tooltip, shortcut_string_for(KeyboardShortcut::kInGameMessages),
+		   UI::PanelStyle::kWui));
 	}
 
 	// Cleanup found port spaces if the ship sailed on or was destroyed
@@ -699,70 +718,59 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
  */
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		switch (code.sym) {
-
-		case SDLK_i:
-			menu_windows_.stats_stock.toggle();
-			return true;
-
-		case SDLK_n:
-			message_menu_.toggle();
-			return true;
-
-		case SDLK_o:
-			objectives_.toggle();
-			return true;
-
-		case SDLK_p:
-			menu_windows_.stats_wares.toggle();
-			return true;
-
-		case SDLK_F1:
+		if (matches_shortcut(KeyboardShortcut::kCommonEncyclopedia, code)) {
 			encyclopedia_.toggle();
 			return true;
-
-		case SDLK_b:
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameStatsStock, code)) {
+			menu_windows_.stats_stock.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameStatsWares, code)) {
+			menu_windows_.stats_wares.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameMessages, code)) {
+			message_menu_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameObjectives, code)) {
+			objectives_.toggle();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameStatsBuildings, code)) {
 			if (menu_windows_.stats_buildings.window == nullptr) {
 				new BuildingStatisticsMenu(*this, menu_windows_.stats_buildings);
 			} else {
 				menu_windows_.stats_buildings.toggle();
 			}
 			return true;
-
-		case SDLK_x:
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameStatsSoldiers, code)) {
 			if (menu_windows_.stats_soldiers.window == nullptr) {
 				new SoldierStatisticsMenu(*this, menu_windows_.stats_soldiers);
 			} else {
 				menu_windows_.stats_soldiers.toggle();
 			}
 			return true;
-
-		case SDLK_e:
-			if (game().map().allows_seafaring()) {
-				if (menu_windows_.stats_seafaring.window == nullptr) {
-					new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
-				} else {
-					menu_windows_.stats_seafaring.toggle();
-				}
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameStatsSeafaring, code) &&
+		    game().map().allows_seafaring()) {
+			if (menu_windows_.stats_seafaring.window == nullptr) {
+				new SeafaringStatisticsMenu(*this, menu_windows_.stats_seafaring);
+			} else {
+				menu_windows_.stats_seafaring.toggle();
 			}
 			return true;
-
-		case SDLK_w:
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameShowhideWorkareas, code)) {
 			set_display_flag(dfShowWorkareaOverlap, !get_display_flag(dfShowWorkareaOverlap));
 			return true;
-
-		case SDLK_KP_5:
-			if (code.mod & KMOD_NUM) {
-				break;
-			}
-			FALLS_THROUGH;
-		case SDLK_HOME:
+		}
+		if (matches_shortcut(KeyboardShortcut::kInGameScrollToHQ, code)) {
 			map_view()->scroll_to_field(
 			   game().map().get_starting_pos(player_number_), MapView::Transition::Smooth);
 			return true;
-
-		default:
-			break;
 		}
 	}
 

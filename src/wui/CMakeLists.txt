@@ -154,6 +154,7 @@ wl_library(wui_quicknavigation
     quicknavigation.cc
     quicknavigation.h
   DEPENDS
+    widelands_options
     wui_mapview
 )
 

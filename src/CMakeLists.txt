@@ -139,6 +139,7 @@ wl_library(widelands_options
   DEPENDS
     base_i18n
     base_log
+    graphic_text_layout
     io_filesystem
     io_profile
     logic_filesystem_constants

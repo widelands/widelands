@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2020 by the Widelands Development Team
+ * Copyright (C) 2006-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -634,47 +634,42 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 	return true;
 }
 
-bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifiers) {
-	if (down) {
-		const bool ctrl = (modifiers & KMOD_LCTRL) || (modifiers & KMOD_RCTRL);
-		switch (keycode) {
-		case SDLK_F11:
-			// Takes a screenshot.
-			if (ctrl) {
-				if (g_fs->disk_space() < kMinimumDiskSpace) {
-					log_warn("Omitting screenshot because diskspace is lower than %lluMB\n",
-					         kMinimumDiskSpace / (1000 * 1000));
-					break;
-				}
-				g_fs->ensure_directory_exists(kScreenshotsDir);
-				for (uint32_t nr = 0; nr < 10000; ++nr) {
-					const std::string filename =
-					   (boost::format("%s/shot%04u.png") % kScreenshotsDir % nr).str();
-					if (g_fs->file_exists(filename)) {
-						continue;
-					}
-					g_gr->screenshot(filename);
-					break;
-				}
-			}
-			return true;
-
-		case SDLK_f: {
-			// Toggle fullscreen
-			const uint32_t time = SDL_GetTicks();
-			if ((time - last_resolution_change_ > 250) && (ctrl)) {
-				last_resolution_change_ = time;
-				bool value = !g_gr->fullscreen();
-				g_gr->set_fullscreen(value);
-				set_config_bool("fullscreen", value);
-			}
-			return true;
-		}
-
-		default:
-			break;
-		}
+bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, const int modifiers) {
+	if (!down) {
+		return false;
 	}
+
+	if (matches_shortcut(KeyboardShortcut::kCommonScreenshot, keycode, modifiers)) {
+		if (g_fs->disk_space() < kMinimumDiskSpace) {
+			log_warn("Omitting screenshot because diskspace is lower than %lluMB\n",
+			         kMinimumDiskSpace / (1000 * 1000));
+		} else {
+			g_fs->ensure_directory_exists(kScreenshotsDir);
+			for (uint32_t nr = 0; nr < 10000; ++nr) {
+				const std::string filename =
+				   (boost::format("%s/shot%04u.png") % kScreenshotsDir % nr).str();
+				if (g_fs->file_exists(filename)) {
+					continue;
+				}
+				g_gr->screenshot(filename);
+				return true;
+			}
+			log_warn("Omitting screenshot because 10000 screenshots are already present");
+		}
+		return true;
+	}
+
+	if (matches_shortcut(KeyboardShortcut::kCommonFullscreen, keycode, modifiers)) {
+		const uint32_t time = SDL_GetTicks();
+		if ((time - last_resolution_change_ > 250)) {
+			last_resolution_change_ = time;
+			const bool value = !g_gr->fullscreen();
+			g_gr->set_fullscreen(value);
+			set_config_bool("fullscreen", value);
+		}
+		return true;
+	}
+
 	return false;
 }
 
