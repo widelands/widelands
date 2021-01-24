@@ -62,12 +62,18 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 	}
 
 	auto check_landmark = [this, key](const uint8_t i) {
-		// This function assumes that the shortcut entries are ordered Set1,Goto1,Set2,Goto2,Set3,Goto3,etc
-		if (matches_shortcut(static_cast<KeyboardShortcut>(static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i), key)) {
+		// This function assumes that the shortcut entries are ordered
+		// Set1,Goto1,Set2,Goto2,Set3,Goto3,etc
+		if (matches_shortcut(static_cast<KeyboardShortcut>(
+		                        static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
+		                     key)) {
 			set_landmark(i, current_);
 			return true;
 		}
-		if (matches_shortcut(static_cast<KeyboardShortcut>(static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i), key)) {
+		if (matches_shortcut(
+		       static_cast<KeyboardShortcut>(
+		          static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
+		       key)) {
 			map_view_->set_view(landmarks_[i].view, MapView::Transition::Smooth);
 			return true;
 		}
