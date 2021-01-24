@@ -19,6 +19,8 @@
 
 #include "wui/quicknavigation.h"
 
+#include "wlapplication_options.h"
+
 QuickNavigation::QuickNavigation(MapView* map_view)
    : map_view_(map_view), location_jumping_started_(false) {
 	map_view->changeview.connect([this] { view_changed(); });
@@ -59,42 +61,45 @@ bool QuickNavigation::handle_key(bool down, SDL_Keysym key) {
 		return false;
 	}
 
-	if (key.sym >= SDLK_1 && key.sym <= SDLK_9) {
-		int which = key.sym - SDLK_1;
-		assert(which >= 0);
-		assert(which < kQuicknavSlots);
+	auto check_landmark = [this, key](const uint8_t i) {
+		// This function assumes that the shortcut entries are ordered
+		// Set1,Goto1,Set2,Goto2,Set3,Goto3,etc
+		if (matches_shortcut(static_cast<KeyboardShortcut>(
+		                        static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavSet1) + 2 * i),
+		                     key)) {
+			set_landmark(i, current_);
+			return true;
+		}
+		if (matches_shortcut(
+		       static_cast<KeyboardShortcut>(
+		          static_cast<uint16_t>(KeyboardShortcut::kInGameQuicknavGoto1) + 2 * i),
+		       key)) {
+			map_view_->set_view(landmarks_[i].view, MapView::Transition::Smooth);
+			return true;
+		}
+		return false;
+	};
+	for (uint8_t i = 0; i < 9; ++i) {
+		if (check_landmark(i)) {
+			return true;
+		}
+	}
 
-		if (key.mod & KMOD_CTRL) {
-			set_landmark(which, current_);
-		} else if (landmarks_[which].set) {
-			map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
-		}
-	} else if (key.sym >= SDLK_KP_1 && key.sym <= SDLK_KP_9) {
-		if (!(key.mod & KMOD_NUM)) {
-			return false;
-		}
-		int which = key.sym - SDLK_KP_1;
-		assert(which >= 0);
-		assert(which < kQuicknavSlots);
-
-		if (key.mod & KMOD_CTRL) {
-			set_landmark(which, current_);
-		} else if (landmarks_[which].set) {
-			map_view_->set_view(landmarks_[which].view, MapView::Transition::Smooth);
-		}
-	} else if (key.sym == SDLK_COMMA && !previous_locations_.empty()) {
+	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavPrev, key) &&
+	    !previous_locations_.empty()) {
 		// go to previous location
 		insert_if_applicable(next_locations_);
 		map_view_->set_view(previous_locations_.back(), MapView::Transition::Smooth);
 		previous_locations_.pop_back();
-	} else if (key.sym == SDLK_PERIOD && !next_locations_.empty()) {
+		return true;
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonQuicknavNext, key) && !next_locations_.empty()) {
 		// go to next location
 		insert_if_applicable(previous_locations_);
 		map_view_->set_view(next_locations_.back(), MapView::Transition::Smooth);
 		next_locations_.pop_back();
-	} else {
-		return false;
+		return true;
 	}
 
-	return true;
+	return false;
 }

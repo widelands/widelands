@@ -712,35 +712,21 @@ bool MapView::handle_key(bool down, SDL_Keysym code) {
 	if (scroll_map()) {
 		return true;
 	}
-	if (!(code.mod & KMOD_CTRL)) {
-		return false;
-	}
 
-	switch (code.sym) {
-	case SDLK_KP_PLUS:
-	case SDLK_PLUS:
-	case SDLK_EQUALS:
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomIn, code)) {
 		increase_zoom();
 		return true;
-
-	case SDLK_KP_MINUS:
-	case SDLK_MINUS:
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomOut, code)) {
 		decrease_zoom();
 		return true;
-
-	case SDLK_KP_0:
-		if (!(code.mod & KMOD_NUM)) {
-			return false;
-		}
-		FALLS_THROUGH;
-	case SDLK_0:
+	}
+	if (matches_shortcut(KeyboardShortcut::kCommonZoomReset, code)) {
 		reset_zoom();
 		return true;
-
-	default:
-		return false;
 	}
-	NEVER_HERE();
+
+	return false;
 }
 
 MapView::TimestampedView MapView::animation_target_view() const {

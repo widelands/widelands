@@ -45,7 +45,7 @@ function help_toggle_building_spaces_hotkey()
    push_textdomain("texts")
    local r =
       -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-      dl(help_format_hotkey(pgettext("hotkey", "Space")), _"Toggle building spaces")
+      dl(help_format_hotkey(wl.ui.get_shortcut("buildhelp")), _"Toggle building spaces")
    pop_textdomain()
    return r
 end
@@ -54,7 +54,7 @@ function help_toggle_fullscreen_hotkey()
    push_textdomain("texts")
    local r =
       -- TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
-      dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F")), _"Toggle fullscreen (if supported by the OS)")
+      dl(help_format_hotkey(wl.ui.get_shortcut("fullscreen")), _"Toggle fullscreen (if supported by the OS)")
    pop_textdomain()
    return r
 end
@@ -63,7 +63,26 @@ function help_toggle_minimap_hotkey()
    push_textdomain("texts")
    local r =
       -- TRANSLATORS: This is an access key combination. The hotkey is 'm'
-      dl(help_format_hotkey("M"), _"Toggle minimap")
+      dl(help_format_hotkey(wl.ui.get_shortcut("minimap")), _"Toggle minimap")
+   pop_textdomain()
+   return r
+end
+
+function help_set_landmarks_hotkeys()
+   push_textdomain("texts")
+   local r = wl.ui.get_shortcut("game_quicknav_set_1")
+   for i=2,9 do
+      r = _("%1% / %2%"):bformat(r, wl.ui.get_shortcut("game_quicknav_set_" .. i))
+   end
+   pop_textdomain()
+   return r
+end
+function help_goto_landmarks_hotkeys()
+   push_textdomain("texts")
+   local r = wl.ui.get_shortcut("game_quicknav_goto_1")
+   for i=2,9 do
+      r = _("%1% / %2%"):bformat(r, wl.ui.get_shortcut("game_quicknav_goto_" .. i))
+   end
    pop_textdomain()
    return r
 end

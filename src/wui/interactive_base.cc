@@ -258,22 +258,22 @@ void InteractiveBase::rebuild_mapview_menu() {
 	mapviewmenu_.add(minimap_registry_.window != nullptr ? _("Hide Minimap") : _("Show Minimap"),
 	                 MapviewMenuEntry::kMinimap,
 	                 g_image_cache->get("images/wui/menus/toggle_minimap.png"), false, "",
-	                 shortcut_string_for(KeyboardShortcut::kGeneralGameMinimap));
+	                 shortcut_string_for(KeyboardShortcut::kCommonMinimap));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom +"), MapviewMenuEntry::kIncreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_increase.png"), false, "",
-	                 pgettext("hotkey", "Ctrl++"));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomIn));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Reset zoom"), MapviewMenuEntry::kResetZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_reset.png"), false, "",
-	                 pgettext("hotkey", "Ctrl+0"));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomReset));
 
 	/** TRANSLATORS: An entry in the game's map view menu */
 	mapviewmenu_.add(_("Zoom -"), MapviewMenuEntry::kDecreaseZoom,
 	                 g_image_cache->get("images/wui/menus/zoom_decrease.png"), false, "",
-	                 pgettext("hotkey", "Ctrl+-"));
+	                 shortcut_string_for(KeyboardShortcut::kCommonZoomOut));
 
 	mapviewmenu_.select(last_selection);
 }
@@ -747,7 +747,8 @@ void InteractiveBase::draw_overlay(RenderTarget&) {
 
 	// In-game clock and FPS
 	info_panel_.set_time_string(game ? gametimestring(egbase().get_gametime().get(), true) : "");
-	info_panel_.set_fps_string(get_display_flag(dfDebug), 1000.0 / frametime_, average_fps());
+	info_panel_.set_fps_string(
+	   get_display_flag(dfDebug), cheat_mode_enabled_, 1000.0 / frametime_, average_fps());
 }
 
 void InteractiveBase::blit_overlay(RenderTarget* dst,
@@ -1378,38 +1379,44 @@ bool InteractiveBase::handle_key(bool const down, SDL_Keysym const code) {
 	}
 
 	if (down) {
+		if (matches_shortcut(KeyboardShortcut::kCommonBuildhelp, code)) {
+			toggle_buildhelp();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonMinimap, code)) {
+			toggle_minimap();
+			return true;
+		}
+
 		switch (code.sym) {
 #ifndef NDEBUG  //  only in debug builds
-		case SDLK_F6:
-			GameChatMenu::create_script_console(
-			   this, debugconsole_, *DebugConsole::get_chat_provider());
-			return true;
-		case SDLK_F3:
-			if (cheat_mode_enabled_) {
-				cheat_mode_enabled_ = false;
-			} else if (code.mod & KMOD_CTRL) {
-				if (chat_provider_) {
-					/** TRANSLATORS: This is a chat message which is automatically sent to all players
-					 * when a player enables cheating mode */
-					chat_provider_->send(_("This player has enabled the cheating mode!"));
+		case SDLK_SPACE:
+			if ((code.mod & KMOD_CTRL) && (code.mod & KMOD_SHIFT)) {
+				GameChatMenu::create_script_console(
+				   this, debugconsole_, *DebugConsole::get_chat_provider());
+				return true;
+			}
+			break;
+		case SDLK_BACKSPACE:
+			if ((code.mod & KMOD_CTRL) && (code.mod & KMOD_SHIFT)) {
+				if (cheat_mode_enabled_) {
+					cheat_mode_enabled_ = false;
+				} else {
+					if (chat_provider_) {
+						/** TRANSLATORS: This is a chat message which is automatically sent to all players
+						 * when a player enables cheating mode */
+						chat_provider_->send(_("This player has enabled the cheating mode!"));
+					}
+					cheat_mode_enabled_ = true;
 				}
-				cheat_mode_enabled_ = true;
+				return true;
 			}
 			break;
 #endif
-		// Common shortcuts for InteractivePlayer, InteractiveSpectator and EditorInteractive
 		case SDLK_TAB:
 			toolbar()->focus();
 			return true;
 		default:
-			if (matches_shortcut(KeyboardShortcut::kGeneralGameBuildhelp, code)) {
-				toggle_buildhelp();
-				return true;
-			}
-			if (matches_shortcut(KeyboardShortcut::kGeneralGameMinimap, code)) {
-				toggle_minimap();
-				return true;
-			}
 			break;
 		}
 	}

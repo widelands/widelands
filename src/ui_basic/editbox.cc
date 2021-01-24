@@ -34,21 +34,13 @@
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 // TODO(GunChleoc): Arabic: Fix positioning for Arabic
 
 namespace {
-
 constexpr int kMarginX = 4;
 constexpr int kLineMargin = 1;
-bool inline copy_paste_modifier() {
-#ifdef __APPLE__
-	return (SDL_GetModState() & KMOD_GUI);
-#else
-	return (SDL_GetModState() & KMOD_CTRL);
-#endif
-}
-
 }  // namespace
 
 namespace UI {
@@ -262,37 +254,32 @@ int EditBox::calculate_text_width(int pos) const {
 // real unicode.
 bool EditBox::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
-		switch (code.sym) {
-		case SDLK_v:
-			if (copy_paste_modifier() && SDL_HasClipboardText()) {
-				if (m_->mode == EditBoxImpl::Mode::kSelection) {
-					delete_selected_text();
-				}
-				handle_textinput(SDL_GetClipboardText());
-				return true;
-			}
-			return false;
-		case SDLK_c:
-			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
-				copy_selected_text();
-				return true;
-			}
-			return false;
-
-		case SDLK_a:
-			if (copy_paste_modifier()) {
-				m_->selection_start = 0;
-				m_->selection_end = m_->text.size();
-				m_->mode = EditBoxImpl::Mode::kSelection;
-				return true;
-			}
-			return false;
-		case SDLK_x:
-			if (copy_paste_modifier() && m_->mode == EditBoxImpl::Mode::kSelection) {
-				copy_selected_text();
+		if (matches_shortcut(KeyboardShortcut::kCommonTextPaste, code) && SDL_HasClipboardText()) {
+			if (m_->mode == EditBoxImpl::Mode::kSelection) {
 				delete_selected_text();
 			}
-			return false;
+			handle_textinput(SDL_GetClipboardText());
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCopy, code) &&
+		    m_->mode == EditBoxImpl::Mode::kSelection) {
+			copy_selected_text();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonTextCut, code) &&
+		    m_->mode == EditBoxImpl::Mode::kSelection) {
+			copy_selected_text();
+			delete_selected_text();
+			return true;
+		}
+		if (matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
+			m_->selection_start = 0;
+			m_->selection_end = m_->text.size();
+			m_->mode = EditBoxImpl::Mode::kSelection;
+			return true;
+		}
+
+		switch (code.sym) {
 		case SDLK_ESCAPE:
 			cancel();
 			return true;

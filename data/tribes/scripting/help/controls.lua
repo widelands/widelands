@@ -27,7 +27,7 @@ local r = {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Shift + Click")), pgettext("table_control", "Select a range of entries")) ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + A")), pgettext("table_control", "Select all entries"))) ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("selectall")), pgettext("table_control", "Select all entries"))) ..
 
          h2(_"Road Control") ..
          p(
@@ -39,45 +39,45 @@ local r = {
          h2(_"Keyboard Shortcuts") ..
             p(
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Page Up")), _"Increase game speed") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_up")), _"Increase game speed") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Page Down")), _"Decrease game speed") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_down")), _"Decrease game speed") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Page Up")), _"Increase game speed by 10x") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_up_fast")), _"Increase game speed by 10x") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Page Down")), _"Decrease game speed by 10x") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_down_fast")), _"Decrease game speed by 10x") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Shift + Page Up")), _"Increase game speed by 0.25x") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_up_slow")), _"Increase game speed by 0.25x") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Shift + Page Down")), _"Decrease game speed by 0.25x") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_speed_down_slow")), _"Decrease game speed by 0.25x") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Pause")), _"Pause the game") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_pause")), _"Pause the game") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'c'
-               dl(help_format_hotkey("C"), _"Toggle census") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_census")), _"Toggle census") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 's'
-               dl(help_format_hotkey("S"), _"Toggle statistics") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_stats")), _"Toggle statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'l'
-               dl(help_format_hotkey("L"), _"Toggle soldier health bars and level icons") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_soldiers")), _"Toggle soldier health bars and level icons") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'u'
-               dl(help_format_hotkey("U"), _"Toggle building visibility") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_buildings")), _"Toggle building visibility") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'w'
-               dl(help_format_hotkey("W"), _"Toggle workarea overlap indicators") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_showhide_workareas")), _"Toggle workarea overlap indicators") ..
                toggle_minimap_hotkey ..
                toggle_building_spaces_hotkey ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'o'
-               dl(help_format_hotkey("O"), _"Toggle objectives") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_objectives")), _"Toggle objectives") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'n'
-               dl(help_format_hotkey("N"), _"Toggle messages (‘news’)") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_messages")), _"Toggle messages (‘news’)") ..
                -- TRANSLATORS: This is an access key combination.
-               dl(help_format_hotkey("F1"), _"Tribal Encyclopedia") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("encyclopedia")), _"Tribal Encyclopedia") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'i'
-               dl(help_format_hotkey("I"), _"Toggle stock inventory") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_stock")), _"Toggle stock inventory") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'b'
-               dl(help_format_hotkey("B"), _"Toggle building statistics") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_buildings")), _"Toggle building statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'x'
-               dl(help_format_hotkey("X"), _"Toggle soldier statistics") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_soldiers")), _"Toggle soldier statistics") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'e'
-               dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_stats_seafaring")), _"Toggle seafaring statistics") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Arrow keys")), _"Move the map") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
@@ -85,71 +85,71 @@ local r = {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Shift + Arrow keys")), _"Move the map slowly") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_hq")), _"Center main mapview on starting location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + 1-9")), _"Remember current location") ..
-               dl(help_format_hotkey(pgettext("hotkey", "1-9")), _"Go to previously remembered location") ..
+               dl(help_format_hotkey(help_set_landmarks_hotkeys()), _"Remember current location") ..
+               dl(help_format_hotkey(help_goto_landmarks_hotkeys()), _"Go to previously remembered location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", ", (comma)")), _"Go to previous location") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("quicknav_prev")), _"Go to previous location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", ". (period)")), _"Go to next location") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("quicknav_next")), _"Go to next location") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + +")), _"Increase zoom") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("zoom_in")), _"Increase zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + -")), _"Decrease zoom") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("zoom_out")), _"Decrease zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + 0")), _"Reset zoom") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("zoom_reset")), _"Reset zoom") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + F11")), _"Take a screenshot") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("screenshot")), _"Take a screenshot") ..
                toggle_fullscreen_hotkey ..
                -- TRANSLATORS: This is an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "F6")), _"Show the debug console (only in debug-builds)")
+               dl(help_format_hotkey(pgettext("hotkey", "Ctrl + Shift + Space")), _"Show the debug console (only in debug-builds)")
          ) ..
 
          -- TRANSLATORS: Heading in "Controls" help
          h2(_"Message Window") ..
          p(
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 0")), _"Show all messages") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_msg_filter_all")), _"Show all messages") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 1")), _"Show geologists’ messages only") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_msg_filter_geo")), _"Show geologists’ messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 2")), _"Show economy messages only") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_msg_filter_eco")), _"Show economy messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 3")), _"Show seafaring messages only") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_msg_filter_seafaring")), _"Show seafaring messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 4")), _"Show warfare messages only") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_msg_filter_warfare")), _"Show warfare messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 5")), _"Show scenario messages only") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_msg_filter_scenario")), _"Show scenario messages only") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("G"), _"Jump to the location corresponding to the current message") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_msg_goto")), _"Jump to the location corresponding to the current message") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
-               dl(help_format_hotkey(pgettext("hotkey", "Delete")), _"Archive/Restore the current message")
+               dl(help_format_hotkey(wl.ui.get_shortcut("delete")), _"Archive/Restore the current message")
           ) ..
 
          -- TRANSLATORS: Heading in "Controls" help
          h2(_"Ship Statistics") ..
          p(
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 0")), _"Show all ships") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_filter_all")), _"Show all ships") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 1")), _"Show idle ships") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_filter_idle")), _"Show idle ships") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 2")), _"Show ships shipping wares and workers") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_filter_ship")), _"Show ships shipping wares and workers") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 3")), _"Show waiting expeditions") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_filter_wait")), _"Show waiting expeditions") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 4")), _"Show scouting expeditions") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_filter_scout")), _"Show scouting expeditions") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 5")), _"Show expeditions that have found a port space or are founding a colony") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_filter_port")), _"Show expeditions that have found a port space or are founding a colony") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("G"), _"Center the map on the selected ship") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_goto")), _"Center the map on the selected ship") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("O"), _"Open the selected ship’s window") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_open")), _"Open the selected ship’s window") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("CTRL + O"), _"Go to the selected ship and open its window") ..
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_open_goto")), _"Go to the selected ship and open its window") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("W"), _"Watch the selected ship")
+               dl(help_format_hotkey(wl.ui.get_shortcut("game_sfstats_watch")), _"Watch the selected ship")
          )
 }
 pop_textdomain()
