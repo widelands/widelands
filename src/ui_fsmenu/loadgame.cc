@@ -212,20 +212,10 @@ bool LoadGame::handle_key(bool down, SDL_Keysym code) {
 	if (!down) {
 		return false;
 	}
-
-	switch (code.sym) {
-	case SDLK_KP_PERIOD:
-		if (code.mod & KMOD_NUM) {
-			break;
-		}
-		FALLS_THROUGH;
-	case SDLK_DELETE:
+	if (matches_shortcut(KeyboardShortcut::kCommonDeleteItem, code)) {
 		load_or_save_.clicked_delete();
 		return true;
-	default:
-		break;
 	}
-
 	return TwoColumnsFullNavigationMenu::handle_key(down, code);
 }
 }  // namespace FsMenu

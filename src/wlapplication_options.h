@@ -108,6 +108,12 @@ enum class KeyboardShortcut : uint16_t {
 	kCommon__Begin = kMainMenu__End + 1,
 	kCommonFullscreen = kCommon__Begin,
 	kCommonScreenshot,
+	kCommonTextCut,
+	kCommonTextCopy,
+	kCommonTextPaste,
+	kCommonSelectAll,
+	kCommonDeleteItem,
+	kCommonTooltipAccessibilityMode,
 	kCommonEncyclopedia,
 	kCommonBuildhelp,
 	kCommonMinimap,
@@ -158,7 +164,42 @@ enum class KeyboardShortcut : uint16_t {
 	kInGameSpeedDownFast,
 	kInGameSpeedReset,
 	kInGameScrollToHQ,
-	kInGame__End = kInGameScrollToHQ,
+	kInGameMessagesGoto,
+	kInGameMessagesFilterAll,
+	kInGameMessagesFilterGeologists,
+	kInGameMessagesFilterEconomy,
+	kInGameMessagesFilterSeafaring,
+	kInGameMessagesFilterWarfare,
+	kInGameMessagesFilterScenario,
+	kInGameSeafaringstatsGotoShip,
+	kInGameSeafaringstatsWatchShip,
+	kInGameSeafaringstatsOpenShipWindow,
+	kInGameSeafaringstatsOpenShipWindowAndGoto,
+	kInGameSeafaringstatsFilterAll,
+	kInGameSeafaringstatsFilterIdle,
+	kInGameSeafaringstatsFilterShipping,
+	kInGameSeafaringstatsFilterExpWait,
+	kInGameSeafaringstatsFilterExpScout,
+	kInGameSeafaringstatsFilterExpPortspace,
+	kInGameQuicknavSet1,
+	kInGameQuicknavGoto1,
+	kInGameQuicknavSet2,
+	kInGameQuicknavGoto2,
+	kInGameQuicknavSet3,
+	kInGameQuicknavGoto3,
+	kInGameQuicknavSet4,
+	kInGameQuicknavGoto4,
+	kInGameQuicknavSet5,
+	kInGameQuicknavGoto5,
+	kInGameQuicknavSet6,
+	kInGameQuicknavGoto6,
+	kInGameQuicknavSet7,
+	kInGameQuicknavGoto7,
+	kInGameQuicknavSet8,
+	kInGameQuicknavGoto8,
+	kInGameQuicknavSet9,
+	kInGameQuicknavGoto9,
+	kInGame__End = kInGameQuicknavGoto9,
 
 	k__End = kInGame__End
 };
@@ -169,6 +210,7 @@ bool matches_shortcut(KeyboardShortcut, SDL_Keysym);
 bool matches_shortcut(KeyboardShortcut, SDL_Keycode, int modifiers);
 void init_shortcuts(bool force_defaults = false);
 std::string to_string(KeyboardShortcut);
+KeyboardShortcut shortcut_from_string(const std::string&);
 std::string shortcut_string_for(SDL_Keysym, bool rt_escape = true);
 std::string shortcut_string_for(KeyboardShortcut, bool rt_escape = true);
 

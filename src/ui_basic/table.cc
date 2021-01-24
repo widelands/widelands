@@ -31,6 +31,7 @@
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "ui_basic/mouse_constants.h"
+#include "wlapplication_options.h"
 
 namespace UI {
 
@@ -418,6 +419,17 @@ bool Table<void*>::is_mouse_in(const Vector2i& cursor_pos,
  */
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
+		if (is_multiselect_ && !empty() &&
+		    matches_shortcut(KeyboardShortcut::kCommonSelectAll, code)) {
+			multiselect_.clear();
+			for (uint32_t i = 0; i < size(); ++i) {
+				toggle_entry(i);
+			}
+			selection_ = 0;
+			selected(0);
+			return true;
+		}
+
 		switch (code.sym) {
 		case SDLK_ESCAPE:
 			cancel();
@@ -434,17 +446,6 @@ bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 			}
 			return true;
 
-		case SDLK_a:
-			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
-				multiselect_.clear();
-				for (uint32_t i = 0; i < size(); ++i) {
-					toggle_entry(i);
-				}
-				selection_ = 0;
-				selected(0);
-				return true;
-			}
-			break;
 		case SDLK_KP_8:
 			if (code.mod & KMOD_NUM) {
 				break;

@@ -693,15 +693,14 @@ bool Panel::handle_mousemove(const uint8_t, int32_t, int32_t, int32_t, int32_t) 
 
 bool Panel::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
+		if (tooltip_panel_ &&
+		    matches_shortcut(KeyboardShortcut::kCommonTooltipAccessibilityMode, code)) {
+			tooltip_fixed_pos_ = Vector2i::invalid();
+			return true;
+		}
 		switch (code.sym) {
 		case SDLK_TAB:
 			return handle_tab_pressed(SDL_GetModState() & KMOD_SHIFT);
-		case SDLK_F2:
-			if (tooltip_panel_) {
-				tooltip_fixed_pos_ = Vector2i::invalid();
-				return true;
-			}
-			break;
 		case SDLK_ESCAPE:
 			if (parent_ && parent_->focus_ == this && get_can_focus()) {
 				parent_->focus_ = nullptr;
