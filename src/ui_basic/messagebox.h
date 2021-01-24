@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,8 @@ struct WLMessageBox : public Window {
 	             const std::string& caption,
 	             const std::string& text,
 	             MBoxType,
-	             Align = UI::Align::kCenter);
+	             Align = UI::Align::kCenter,
+	             bool needs_richtext_escape = false);
 
 	boost::signals2::signal<void()> ok;
 	boost::signals2::signal<void()> cancel;

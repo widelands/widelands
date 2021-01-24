@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -369,15 +369,21 @@ void InfoPanel::push_message(MessagePreview* message) {
 	layout();
 }
 
-void InfoPanel::set_fps_string(const bool show, const double fps, const double average) {
-	if (!show) {
+void InfoPanel::set_fps_string(const bool show,
+                               const bool cheating,
+                               const double fps,
+                               const double average) {
+	if (!show && !cheating) {
 		text_fps_.set_text("");
 		text_fps_.set_tooltip("");
 	} else {
 		const std::string text = (boost::format("%5.1f fps (avg: %5.1f fps)") % fps % average).str();
 		// The FPS string overlaps with the coords string at low resolution.
 		// Therefore abbreviate it if the available width is less than an arbitrary threshold.
-		if (get_w() < 970) {
+		if (cheating) {
+			text_fps_.set_text(_("Cheat mode enabled"));
+			text_fps_.set_tooltip(text);
+		} else if (get_w() < 970) {
 			text_fps_.set_text((boost::format("%.1f / %.1f") % fps % average).str());
 			text_fps_.set_tooltip(text);
 		} else {
