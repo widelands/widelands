@@ -808,7 +808,7 @@ bool EditorInteractive::handle_key(bool const down, SDL_Keysym const code) {
 			return true;
 		}
 
-		if (code.mod == 0) {
+		if (!(code.mod & ~KMOD_NUM)) {
 			if (code.sym >= SDLK_1 && code.sym <= SDLK_9) {
 				set_sel_radius_and_update_menu(code.sym - SDLK_1);
 				return true;

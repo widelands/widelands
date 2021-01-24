@@ -198,6 +198,10 @@ void GameMainMenuSaveGame::die() {
 
 bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
+		if (matches_shortcut(KeyboardShortcut::kCommonDeleteItem, code)) {
+			load_or_save_.clicked_delete();
+			return true;
+		}
 		switch (code.sym) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
@@ -205,9 +209,6 @@ bool GameMainMenuSaveGame::handle_key(bool down, SDL_Keysym code) {
 			return true;
 		case SDLK_ESCAPE:
 			die();
-			return true;
-		case SDLK_DELETE:
-			load_or_save_.clicked_delete();
 			return true;
 		default:
 			break;  // not handled
