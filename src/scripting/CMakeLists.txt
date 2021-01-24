@@ -77,6 +77,7 @@ wl_library(scripting_lua_interface
     logic_exceptions
     scripting_base
     scripting_errors
+    scripting_logic
     scripting_lua_table
     scripting_luna
 )

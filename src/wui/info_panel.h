@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ public:
 	// Update the text area without relayouting
 	void set_time_string(const std::string&);
 	void set_speed_string(const std::string&);
-	void set_fps_string(bool show, double fps, double average);
+	void set_fps_string(bool show, bool cheating, double fps, double average);
 	void set_coords_string(const std::string&);
 
 	void log_message(const std::string&);
