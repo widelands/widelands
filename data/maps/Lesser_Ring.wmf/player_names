@@ -1,52 +1,52 @@
-# Automatically created by Widelands 1.0~git24808[f59d577@1482_nodecapsmaths] (Release)
+# Automatically created by Widelands 1.0~git25123[e32d698@master] (Release)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Harado"
+name=
 tribe=
 ai=
 closeable="false"
 
 [player_2]
-name="Semor"
+name=
 tribe=
 ai=
 closeable="false"
 
 [player_3]
-name="Rekis"
+name=
 tribe=
 ai=
 closeable="false"
 
 [player_4]
-name="Kal’Lak"
+name=
 tribe=
 ai=
 closeable="false"
 
 [player_5]
-name="Zimok"
+name=
 tribe=
 ai=
 closeable="false"
 
 [player_6]
-name="Meodor"
+name=
 tribe=
 ai=
 closeable="false"
 
 [player_7]
-name="Tohrwen"
+name=
 tribe=
 ai=
 closeable="false"
 
 [player_8]
-name="Yanviar"
+name=
 tribe=
 ai=
 closeable="false"
