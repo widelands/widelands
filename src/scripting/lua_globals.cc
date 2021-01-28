@@ -269,6 +269,7 @@ static int L_ngettext(lua_State* L) {
 	}
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
+		i18n::Textdomain dom(td->first);
 		lua_pushstring(L, dngettext(td->first.c_str(), msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, ngettext(msgid, msgid_plural, n));
@@ -295,6 +296,7 @@ static int L_pgettext(lua_State* L) {
 	const char* msgid = luaL_checkstring(L, 2);
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
+		i18n::Textdomain dom(td->first);
 		lua_pushstring(L, dpgettext_expr(td->first.c_str(), msgctxt, msgid));
 	} else {
 		lua_pushstring(L, pgettext_expr(msgctxt, msgid));
@@ -330,6 +332,7 @@ static int L_npgettext(lua_State* L) {
 	}
 
 	if (const TextdomainInfo* td = current_textdomain(L)) {
+		i18n::Textdomain dom(td->first);
 		lua_pushstring(L, dnpgettext_expr(td->first.c_str(), msgctxt, msgid, msgid_plural, n));
 	} else {
 		lua_pushstring(L, npgettext_expr(msgctxt, msgid, msgid_plural, n));
