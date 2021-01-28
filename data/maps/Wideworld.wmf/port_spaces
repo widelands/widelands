@@ -1,7 +1,8 @@
-# Automatically created by Widelands bzr7905[trunk] (Debug)
+# Automatically created by Widelands 1.0~git25124[86b440b@master] (Release)
 
 [global]
 packet_version="1"
+waterway_max_length="0"
 number_of_port_spaces="33"
 
 [port_spaces]
@@ -20,7 +21,7 @@ number_of_port_spaces="33"
 12="82 94"
 13="277 117"
 14="381 122"
-15="344 125"
+15="345 125"
 16="38 147"
 17="75 147"
 18="244 161"
@@ -28,7 +29,7 @@ number_of_port_spaces="33"
 20="160 170"
 21="353 177"
 22="296 178"
-23="353 186"
+23="354 186"
 24="70 206"
 25="181 209"
 26="36 222"

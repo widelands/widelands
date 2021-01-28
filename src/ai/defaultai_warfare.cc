@@ -780,15 +780,17 @@ bool DefaultAI::check_trainingsites(const Time& gametime) {
 		// minutes)
 		// we can accept also shortage up to 3
 		int32_t shortage = 0;
+		bool inputs_are_substitutes = false;
 		for (Widelands::InputQueue* queue : tso.site->inputqueues()) {
 			if (queue->get_type() != Widelands::wwWARE) {
 				continue;
 			}
 			if (tso.bo->substitute_inputs.count(queue->get_index()) > 0) {
+				inputs_are_substitutes = true;
 				filled += queue->get_filled();
 			}
 		}
-		if (filled < 5) {
+		if (filled < 5 && inputs_are_substitutes) {
 			shortage += 5 - filled;
 		}
 
