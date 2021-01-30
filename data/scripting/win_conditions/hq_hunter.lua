@@ -26,7 +26,7 @@ local r = {
         -- set the objective with the game type for all players
         broadcast_objective("win_condition", wc_descname, wc_desc)
 
-        -- Iterate all players, if one has lost his Headquarters, destroy all remaing Warehouses and ports, 
+        -- Iterate all players, if one has lost his Headquarters, destroy all remaing Warehouses and ports,
         -- remove him from the list, send him a defeated message and give him full vision
         repeat
             sleep(5000)
