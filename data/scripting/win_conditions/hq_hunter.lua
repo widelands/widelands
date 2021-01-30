@@ -15,7 +15,7 @@ local wc_name = "HQ Hunter"
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("HQ Hunter")
 local wc_version = 2
-local wc_desc = _ "The tribe or team that can destroy all other headquarters wins the game!"
+local wc_desc = _ "The tribe or team that can destroy all other headquarters wins the game!. This wincondition does not work with the following starting conditions: Poor Hamlet, Fortified Village, Discovery and New World."
 local r = {
     name = wc_name,
     description = wc_desc,
