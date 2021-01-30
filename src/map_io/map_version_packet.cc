@@ -70,10 +70,12 @@ void MapVersionPacket::pre_read(FileSystem& fs, Map* map, bool skip, bool is_pos
 			map->map_version_.map_version_timestamp = ts;
 
 			if (globv.has_val("minimum_required_widelands_version")) {
-				map->map_version_.minimum_required_widelands_version = globv.get_safe_string("minimum_required_widelands_version");
+				map->map_version_.minimum_required_widelands_version =
+				   globv.get_safe_string("minimum_required_widelands_version");
 			} else if (globv.has_val("needs_widelands_version_after")) {
 				map->map_version_.minimum_required_widelands_version = "build ";
-				map->map_version_.minimum_required_widelands_version += std::to_string(globv.get_safe_int("needs_widelands_version_after") + 1);
+				map->map_version_.minimum_required_widelands_version +=
+				   std::to_string(globv.get_safe_int("needs_widelands_version_after") + 1);
 			}
 			map->calculate_minimum_required_widelands_version(is_post_one_world);
 		} else {
