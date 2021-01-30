@@ -70,7 +70,11 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          buildings = {}
          -- wait for updated building statistics
          sleep(1000)
-         -- collect the constructionsites a player has
+         -- first sink all ships a player still has
+         for idx,s in ipairs(array_combine(p:get_ships())) do
+            s:destroy()
+         end
+         -- now collect the constructionsites a player has
          for id,b in pairs(buildallowed) do
             buildings = array_combine(buildings, p:get_constructionsites(id))
          end
@@ -80,7 +84,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
             sleep(200)
          end
          buildings = {}
-         -- collect the buildings a player has
+         -- last collect all buildings a player has
          for id,b in pairs(buildallowed) do
             buildings = array_combine(buildings, p:get_buildings(id))
          end
@@ -93,11 +97,8 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          end
          for idx,b in ipairs(milsites) do
             b:destroy()
-            sleep(300)
-         end
-         -- sink all ships a player still has
-         for idx,s in ipairs(array_combine(p:get_ships())) do
-            s:destroy()
+            -- add some delay to the destruction for dramaturgical reason
+            sleep(400)
          end
          p.see_all = 1
          if (wc_name and wc_ver) then
