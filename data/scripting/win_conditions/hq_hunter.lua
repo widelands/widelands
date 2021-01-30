@@ -33,9 +33,9 @@ local r = {
             -- checkk if a player still has a Headquarters
             for idx,p in ipairs(plrs) do
                 if (
-                    #p:get_buildings("barbarians_headquarters") + 
-                    #p:get_buildings("atlanteans_headquarters") + 
-                    #p:get_buildings("empire_headquarters") + 
+                    #p:get_buildings("barbarians_headquarters") +
+                    #p:get_buildings("atlanteans_headquarters") +
+                    #p:get_buildings("empire_headquarters") +
                     #p:get_buildings("frisians_headquarters") +
                     #p:get_buildings("amazons_headquarters")
                 ) == 0 then
