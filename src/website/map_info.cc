@@ -89,7 +89,7 @@ int main(int argc, char** argv) {
 			json->add_int("width", map->get_width());
 			json->add_int("height", map->get_height());
 			json->add_int("nr_players", map->get_nrplayers());
-			json->add_int("needs_widelands_version_after", map->needs_widelands_version_after());
+			json->add_string("minimum_required_widelands_version", map->minimum_required_widelands_version());
 
 			const std::string world_name =
 			   dynamic_cast<Widelands::WidelandsMapLoader*>(ml.get())->old_world_name();

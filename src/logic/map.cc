@@ -835,18 +835,18 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	pathfieldmgr_->set_size(field_size);
 }
 
-int Map::needs_widelands_version_after() const {
-	return map_version_.needs_widelands_version_after;
+const std::string& Map::minimum_required_widelands_version() const {
+	return map_version_.minimum_required_widelands_version;
 }
 
-void Map::calculate_needs_widelands_version_after(bool is_post_one_world) {
-	if (map_version_.needs_widelands_version_after == 0) {
+void Map::calculate_minimum_required_widelands_version(bool is_post_one_world) {
+	if (map_version_.minimum_required_widelands_version.empty()) {
 		if (nrplayers_ > 8) {
 			// We introduced support for 16 players after Build 19
-			map_version_.needs_widelands_version_after = 19;
+			map_version_.minimum_required_widelands_version = "build 20";
 		} else if (is_post_one_world) {
 			// We merged the worlds in the engine after Build 18
-			map_version_.needs_widelands_version_after = 18;
+			map_version_.minimum_required_widelands_version = "build 19";
 		}
 	}
 }
