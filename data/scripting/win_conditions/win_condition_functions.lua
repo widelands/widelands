@@ -66,6 +66,39 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          win_conditions__initially_without_warehouse[idx] = p.defeated
       elseif p.defeated and not win_conditions__initially_without_warehouse[idx] then
          p:send_to_inbox(heading, msg)
+         buildallowed = p.allowed_buildings
+         buildings = {}
+         -- wait for updated building statistics
+         sleep(1000)
+         -- collect the constructionsites a player has
+         for id,b in pairs(buildallowed) do
+            buildings = array_combine(buildings, p:get_constructionsites(id))
+         end
+         -- destroy all identified constructionsites a player still has
+         for idx,b in ipairs(buildings) do
+            b:destroy()
+            sleep(200)
+         end
+         buildings = {}
+         -- collect the buildings a player has
+         for id,b in pairs(buildallowed) do
+            buildings = array_combine(buildings, p:get_buildings(id))
+         end
+         -- destroy all militarysites a player still has
+         milsites = {}
+         for idx,b in ipairs(buildings) do
+            if b.descr.type_name == "militarysite" then
+               table.insert(milsites, b)
+            end
+         end
+         for idx,b in ipairs(milsites) do
+            b:destroy()
+            sleep(300)
+         end
+         -- sink all ships a player still has
+         for idx,s in ipairs(array_combine(p:get_ships())) do
+            s:destroy()
+         end
          p.see_all = 1
          if (wc_name and wc_ver) then
             wl.game.report_result(p, 0, make_extra_data(p, wc_name, wc_ver))
