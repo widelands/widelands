@@ -1098,21 +1098,6 @@ int LuaPlayer::allow_forbid_buildings(lua_State* L, bool allow) {
 	return 0;
 }
 
-/* RST
-   .. method:: do_get_buildings(which[, csites = false])
-
-      which can be either a single name or an array of names. In the first case, the
-      method returns an array of all buildings or constructionsites that the player has
-      of this kind (returns buildings or constructionsites dependent on csites). If which
-      is an array, the function returns a table of (name,array of buildings) pairs.
-
-      :type which: name of constructionsites building or array of building names
-      :rtype which: :class:`string` or :class:`array`
-      :type csites: whether to return constructionsites
-      :rtype which: :class:`boolean`
-      :returns: information about the players constructionsites
-      :rtype: :class:`array` or :class:`table`
-*/
 int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
 	Widelands::EditorGameBase& egbase = get_egbase(L);
 	Widelands::Player& p = get(L, egbase);
