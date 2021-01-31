@@ -1148,7 +1148,7 @@ int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
 		}
 
 		for (const auto& stats : vec) {
-			if (csites && stats.is_constructionsite) {
+			if (csites ^ stats.is_constructionsite) {
 				continue;
 			}
 

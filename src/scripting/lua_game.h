@@ -117,7 +117,7 @@ private:
 	                         const Widelands::TribeDescr&,
 	                         std::vector<Widelands::DescriptionIndex>&);
 	int allow_forbid_buildings(lua_State* L, bool);
-	int do_get_buildings(lua_State* L, const bool csites)
+	int do_get_buildings(lua_State* L, const bool csites);
 };
 
 class LuaObjective : public LuaGameModuleClass {
