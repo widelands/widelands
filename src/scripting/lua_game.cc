@@ -841,6 +841,8 @@ int LuaPlayer::get_ships(lua_State* L) {
 	return 1;
 }
 
+
+
 /* RST
    .. method:: get_buildings(which)
 
@@ -855,52 +857,7 @@ int LuaPlayer::get_ships(lua_State* L) {
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_buildings(lua_State* L) {
-	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::Player& p = get(L, egbase);
-
-	// if only one string, convert to array so that we can use
-	// parse_building_list
-	bool return_array = true;
-	if (lua_isstring(L, -1)) {
-		const char* name = luaL_checkstring(L, -1);
-		lua_pop(L, 1);
-		lua_newtable(L);
-		lua_pushuint32(L, 1);
-		lua_pushstring(L, name);
-		lua_rawset(L, -3);
-		return_array = false;
-	}
-
-	std::vector<Widelands::DescriptionIndex> houses;
-	parse_building_list(L, p.tribe(), houses);
-
-	lua_newtable(L);
-
-	uint32_t cidx = 1;
-	for (const Widelands::DescriptionIndex& house : houses) {
-		const std::vector<Widelands::Player::BuildingStats>& vec = p.get_building_statistics(house);
-
-		if (return_array) {
-			lua_pushstring(L, p.tribe().get_building_descr(house)->name());
-			lua_newtable(L);
-			cidx = 1;
-		}
-
-		for (const auto& stats : vec) {
-			if (stats.is_constructionsite) {
-				continue;
-			}
-
-			lua_pushuint32(L, cidx++);
-			LuaMaps::upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
-			lua_rawset(L, -3);
-		}
-
-		if (return_array) {
-			lua_rawset(L, -3);
-		}
-	}
-	return 1;
+	return do_get_buildings(L, false);
 }
 
 /* RST
@@ -917,52 +874,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
       :rtype: :class:`array` or :class:`table`
 */
 int LuaPlayer::get_constructionsites(lua_State* L) {
-	Widelands::EditorGameBase& egbase = get_egbase(L);
-	Widelands::Player& p = get(L, egbase);
-
-	// if only one string, convert to array so that we can use
-	// parse_building_list
-	bool return_array = true;
-	if (lua_isstring(L, -1)) {
-		const char* name = luaL_checkstring(L, -1);
-		lua_pop(L, 1);
-		lua_newtable(L);
-		lua_pushuint32(L, 1);
-		lua_pushstring(L, name);
-		lua_rawset(L, -3);
-		return_array = false;
-	}
-
-	std::vector<Widelands::DescriptionIndex> houses;
-	parse_building_list(L, p.tribe(), houses);
-
-	lua_newtable(L);
-
-	uint32_t cidx = 1;
-	for (const Widelands::DescriptionIndex& house : houses) {
-		const std::vector<Widelands::Player::BuildingStats>& vec = p.get_building_statistics(house);
-
-		if (return_array) {
-			lua_pushstring(L, p.tribe().get_building_descr(house)->name());
-			lua_newtable(L);
-			cidx = 1;
-		}
-
-		for (const auto& stats : vec) {
-			if (!stats.is_constructionsite) {
-				continue;
-			}
-
-			lua_pushuint32(L, cidx++);
-			LuaMaps::upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
-			lua_rawset(L, -3);
-		}
-
-		if (return_array) {
-			lua_rawset(L, -3);
-		}
-	}
-	return 1;
+	return do_get_buildings(L, true);
 }
 
 /* RST
@@ -1186,6 +1098,70 @@ int LuaPlayer::allow_forbid_buildings(lua_State* L, bool allow) {
 		p.allow_building_type(house, allow);
 	}
 	return 0;
+}
+
+/* RST
+   .. method:: do_get_buildings(which[, csites = false])
+
+      which can be either a single name or an array of names. In the first case, the
+      method returns an array of all buildings or constructionsites that the player has
+      of this kind (returns buildings or constructionsites dependent on csites). If which
+      is an array, the function returns a table of (name,array of buildings) pairs.
+
+      :type which: name of constructionsites building or array of building names
+      :rtype which: :class:`string` or :class:`array`
+      :type csites: whether to return constructionsites
+      :rtype which: :class:`boolean`
+      :returns: information about the players constructionsites
+      :rtype: :class:`array` or :class:`table`
+*/
+int LuaPlayer::do_get_buildings(lua_State* L, const bool csites) {
+	Widelands::EditorGameBase& egbase = get_egbase(L);
+	Widelands::Player& p = get(L, egbase);
+
+	// if only one string, convert to array so that we can use
+	// parse_building_list
+	bool return_array = true;
+	if (lua_isstring(L, -1)) {
+		const char* name = luaL_checkstring(L, -1);
+		lua_pop(L, 1);
+		lua_newtable(L);
+		lua_pushuint32(L, 1);
+		lua_pushstring(L, name);
+		lua_rawset(L, -3);
+		return_array = false;
+	}
+
+	std::vector<Widelands::DescriptionIndex> houses;
+	parse_building_list(L, p.tribe(), houses);
+
+	lua_newtable(L);
+
+	uint32_t cidx = 1;
+	for (const Widelands::DescriptionIndex& house : houses) {
+		const std::vector<Widelands::Player::BuildingStats>& vec = p.get_building_statistics(house);
+
+		if (return_array) {
+			lua_pushstring(L, p.tribe().get_building_descr(house)->name());
+			lua_newtable(L);
+			cidx = 1;
+		}
+
+		for (const auto& stats : vec) {
+			if (csites && stats.is_constructionsite) {
+				continue;
+			}
+
+			lua_pushuint32(L, cidx++);
+			LuaMaps::upcasted_map_object_to_lua(L, egbase.map()[stats.pos].get_immovable());
+			lua_rawset(L, -3);
+		}
+
+		if (return_array) {
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
 }
 
 /* RST
