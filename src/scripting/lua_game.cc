@@ -841,8 +841,6 @@ int LuaPlayer::get_ships(lua_State* L) {
 	return 1;
 }
 
-
-
 /* RST
    .. method:: get_buildings(which)
 
