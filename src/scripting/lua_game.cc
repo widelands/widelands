@@ -907,7 +907,7 @@ int LuaPlayer::get_buildings(lua_State* L) {
    .. method:: get_constructionsites(which)
 
       which can be either a single name or an array of names. In the first
-      case, the method returns an array of all Constructionssites that the player has
+      case, the method returns an array of all constructionsites that the player has
       of this kind. If which is an array, the function returns a table of
       (name,array of buildings) pairs.
 
