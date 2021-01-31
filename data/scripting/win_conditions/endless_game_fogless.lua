@@ -1,9 +1,6 @@
 -- =======================================================================
---                    An endless game without fog of war
+--          An endless game without rules and without fog of war
 -- =======================================================================
-
-include "scripting/coroutine.lua" -- for sleep
-include "scripting/win_conditions/win_condition_functions.lua"
 
 push_textdomain("win_conditions")
 
@@ -13,7 +10,7 @@ local wc_name = "Endless Game (no fog)"
 -- This needs to be exactly like wc_name, but localized, because wc_name
 -- will be used as the key to fetch the translation in C++
 local wc_descname = _("Endless Game (no fog)")
-local wc_desc = _ "This is an endless game. Fog of war is disabled."
+local wc_desc = _ "This is an endless game without rules. Fog of war is disabled."
 local wc_version = 1
 local r = {
    name = wc_name,
@@ -40,13 +37,6 @@ local r = {
          plr:reveal_fields(fields)
       end
       fields = nil
-
-      -- Iterate all players, if one is defeated, remove him
-      -- from the list, send him a defeated message and give him full vision
-      repeat
-         sleep(5000)
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
-      until count_factions(plrs) < 1
 
    end
 }

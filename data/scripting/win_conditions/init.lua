@@ -11,5 +11,4 @@ return {
    dirname .. "endless_game.lua",
    dirname .. "endless_game_fogless.lua",
    dirname .. "hq_hunter.lua",
-   dirname .. "no_rules.lua",
 }
