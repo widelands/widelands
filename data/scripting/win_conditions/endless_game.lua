@@ -2,6 +2,7 @@
 --                         An endless game without rules
 -- =======================================================================
 
+include "scripting/win_conditions/win_condition_functions.lua"
 
 push_textdomain("win_conditions")
 
