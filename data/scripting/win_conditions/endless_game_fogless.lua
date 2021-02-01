@@ -2,6 +2,8 @@
 --          An endless game without rules and without fog of war
 -- =======================================================================
 
+include "scripting/win_conditions/win_condition_functions.lua"
+
 push_textdomain("win_conditions")
 
 include "scripting/win_conditions/win_condition_texts.lua"
