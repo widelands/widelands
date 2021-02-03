@@ -323,7 +323,9 @@ Quantity TrainingSite::SoldierControl::soldier_capacity() const {
 void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());
-	assert(training_site_->capacity_ != capacity);
+	if (training_site_->capacity_ == capacity) {
+		return;  // Nothing to do
+	}
 	// Said in github issue #3869 discussion:
 	//
 	// > the problem will always be if the capacity of a training site will be

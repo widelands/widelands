@@ -264,6 +264,10 @@ public:
 	unsigned get_current_health() const {
 		return current_health_;
 	}
+	void set_current_health(const unsigned h) {
+		current_health_ = h;
+	}
+
 	unsigned get_retreat_health() const {
 		return retreat_health_;
 	}
