@@ -83,9 +83,10 @@ Quantity MilitarySite::SoldierControl::soldier_capacity() const {
 void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());
-	assert(military_site_->capacity_ != capacity);
-	military_site_->capacity_ = capacity;
-	military_site_->update_soldier_request();
+	if (military_site_->capacity_ != capacity) {
+		military_site_->capacity_ = capacity;
+		military_site_->update_soldier_request();
+	}
 }
 
 void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
