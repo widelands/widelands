@@ -23,6 +23,11 @@
 #include "economy/wares_queue.h"
 #include "logic/map_objects/tribes/building.h"
 
+namespace LuaMaps {
+class LuaConstructionSite;
+class LuaDismantleSite;
+}  // namespace LuaMaps
+
 namespace Widelands {
 
 /*
@@ -35,6 +40,8 @@ dismantlesites.
 class PartiallyFinishedBuilding : public Building {
 	friend class MapBuildingdataPacket;
 	friend struct MapBuildingPacket;
+	friend class LuaMaps::LuaConstructionSite;
+	friend class LuaMaps::LuaDismantleSite;
 
 public:
 	explicit PartiallyFinishedBuilding(const BuildingDescr& building_descr);
