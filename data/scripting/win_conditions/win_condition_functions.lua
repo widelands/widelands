@@ -85,6 +85,7 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          end
          buildings = {}
          -- last collect all buildings a player has
+         sleep(1000)
          for id,b in pairs(buildallowed) do
             buildings = array_combine(buildings, p:get_buildings(id))
          end
