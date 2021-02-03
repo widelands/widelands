@@ -1011,6 +1011,7 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int dismantle(lua_State* L);
 
 	/*
 	 * C Methods
@@ -1044,6 +1045,7 @@ public:
 	int set_wares(lua_State*);
 	int get_wares(lua_State*);
 	int get_distance(lua_State*);
+	int send_geologist(lua_State*);
 
 	/*
 	 * C Methods
@@ -1106,6 +1108,51 @@ public:
 	 * Properties
 	 */
 	int get_building(lua_State*);
+	int get_has_builder(lua_State*);
+	int set_has_builder(lua_State*);
+	int get_setting_soldier_capacity(lua_State*);
+	int set_setting_soldier_capacity(lua_State*);
+	int get_setting_soldier_preference(lua_State*);
+	int set_setting_soldier_preference(lua_State*);
+	int get_setting_launch_expedition(lua_State*);
+	int set_setting_launch_expedition(lua_State*);
+	int get_setting_stopped(lua_State*);
+	int set_setting_stopped(lua_State*);
+
+	/*
+	 * Lua Methods
+	 */
+	int get_priority(lua_State*);
+	int set_priority(lua_State*);
+	int get_desired_fill(lua_State*);
+	int set_desired_fill(lua_State*);
+	int get_setting_warehouse_policy(lua_State*);
+	int set_setting_warehouse_policy(lua_State*);
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(ConstructionSite)
+};
+
+class LuaDismantleSite : public LuaBuilding {
+public:
+	LUNA_CLASS_HEAD(LuaDismantleSite);
+
+	LuaDismantleSite() {
+	}
+	explicit LuaDismantleSite(Widelands::DismantleSite& mo) : LuaBuilding(mo) {
+	}
+	explicit LuaDismantleSite(lua_State* L) : LuaBuilding(L) {
+	}
+	~LuaDismantleSite() override {
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_has_builder(lua_State*);
+	int set_has_builder(lua_State*);
 
 	/*
 	 * Lua Methods
@@ -1114,7 +1161,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(ConstructionSite)
+	CASTED_GET(DismantleSite)
 };
 
 class LuaWarehouse : public LuaBuilding {
@@ -1213,6 +1260,10 @@ public:
 	int set_inputs(lua_State* L);
 	int set_workers(lua_State* L);
 	int toggle_start_stop(lua_State* L);
+	int get_priority(lua_State*);
+	int set_priority(lua_State*);
+	int get_desired_fill(lua_State*);
+	int set_desired_fill(lua_State*);
 
 	/*
 	 * C Methods
@@ -1241,6 +1292,10 @@ public:
 	 * Properties
 	 */
 	int get_max_soldiers(lua_State*);
+	int get_soldier_preference(lua_State*);
+	int set_soldier_preference(lua_State*);
+	int get_capacity(lua_State*);
+	int set_capacity(lua_State*);
 
 	/*
 	 * Lua Methods
@@ -1271,6 +1326,8 @@ public:
 	 * Properties
 	 */
 	int get_max_soldiers(lua_State*);
+	int get_capacity(lua_State*);
+	int set_capacity(lua_State*);
 
 	/*
 	 * Lua Methods
@@ -1362,6 +1419,8 @@ public:
 	int get_defense_level(lua_State*);
 	int get_health_level(lua_State*);
 	int get_evade_level(lua_State*);
+	int get_current_health(lua_State*);
+	int set_current_health(lua_State*);
 
 	/*
 	 * Lua methods
