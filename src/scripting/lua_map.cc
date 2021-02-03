@@ -4774,11 +4774,8 @@ Flag
 */
 const char LuaFlag::className[] = "Flag";
 const MethodType<LuaFlag> LuaFlag::Methods[] = {
-   METHOD(LuaFlag, set_wares),
-   METHOD(LuaFlag, get_wares),
-   METHOD(LuaFlag, get_distance),
-   METHOD(LuaFlag, send_geologist),
-   {nullptr, nullptr},
+   METHOD(LuaFlag, set_wares),      METHOD(LuaFlag, get_wares), METHOD(LuaFlag, get_distance),
+   METHOD(LuaFlag, send_geologist), {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    PROP_RO(LuaFlag, ware_economy), PROP_RO(LuaFlag, worker_economy), PROP_RO(LuaFlag, roads),
