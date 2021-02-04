@@ -27,6 +27,8 @@
 
 namespace FsMenu {
 
+class AddOnsCtrl;
+
 // Holds abstract information about add-ons, designed to be changed quickly and later written to
 // disk
 struct MutableAddOn {
@@ -43,7 +45,7 @@ struct MutableAddOn {
 
 class AddOnsPackager : public UI::Window {
 public:
-	explicit AddOnsPackager(MainMenu&);
+	explicit AddOnsPackager(MainMenu&, AddOnsCtrl&);
 
 	WindowLayoutID window_layout_id() const override {
 		return UI::Window::WindowLayoutID::kFsMenuDefault;
@@ -55,10 +57,11 @@ public:
 
 private:
 	MainMenu& main_menu_;
+	AddOnsCtrl& ctrl_;
 
-	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox1_,
-	   box_right_subbox2_, box_right_subbox3_, box_right_subbox4_, box_right_subbox5_,
-	   box_right_subbox6_, box_right_buttonsbox_, box_right_bottombox_;
+	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox_header_hbox_,
+	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_, box_right_subbox_maps_dirstruct_hbox_, box_right_subbox_dirstruct_,
+	   box_right_subbox_maps_list_, box_right_buttonsbox_, box_right_bottombox_;
 	UI::EditBox name_, author_, version_;
 	UI::MultilineEditbox& descr_;
 	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_, map_add_,

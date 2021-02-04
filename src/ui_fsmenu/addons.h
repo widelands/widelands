@@ -111,6 +111,10 @@ public:
 		return network_handler_;
 	}
 
+	const std::vector<AddOns::AddOnInfo>& get_remotes() const {
+		return remotes_;
+	}
+
 protected:
 	void layout() override;
 	void think() override;

@@ -23,7 +23,7 @@
 #include <iomanip>
 #include <memory>
 
-#include <SDL_clipboard.h>
+#include <SDL.h>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -318,10 +318,21 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	   UI::Box::Resizing::kFullSize);
 	auto add_button = [this](const std::string& url) {
 		UI::Button* b = new UI::Button(
-		   &dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Copy Link"));
-		// TODO(Nordfriese): Replace with `SDL_OpenURL` when we drop support for SDL versions
-		// older than 2.0.14. This will open the link directly in the web browser.
-		b->sigclicked.connect([url]() { SDL_SetClipboardText(url.c_str()); });
+		   &dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+#if SDL_VERSION_ATLEAST(2, 0, 14)
+		   _("Open Link")
+#else
+		   _("Copy Link")
+#endif
+		   );
+		b->sigclicked.connect([url]() {
+#if SDL_VERSION_ATLEAST(2, 0, 14)
+			// UNTESTED
+			SDL_OpenURL(url.c_str());
+#else
+			SDL_SetClipboardText(url.c_str());
+#endif
+		});
 		dev_box_.add(b);
 	};
 	add_button(kSubmitAddOnsURL);
@@ -535,7 +546,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	});
 
 	launch_packager_.sigclicked.connect([this, &fsmm]() {
-		AddOnsPackager a(fsmm);
+		AddOnsPackager a(fsmm, *this);
 		a.run<int>();
 
 		// Perhaps add-ons were created or deleted
