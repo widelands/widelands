@@ -30,7 +30,10 @@ namespace UI {
 /** A compact modal dialog with a caption, an editbox and optionally morw widgets. */
 class TextPrompt : public UI::Window {
 public:
-	explicit TextPrompt(UI::Panel& parent, UI::WindowStyle, const std::string& title, const std::string& text);
+	explicit TextPrompt(UI::Panel& parent,
+	                    UI::WindowStyle,
+	                    const std::string& title,
+	                    const std::string& text);
 	~TextPrompt() override = default;
 
 	const std::string& text() const {

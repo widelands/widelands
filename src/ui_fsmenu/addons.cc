@@ -317,12 +317,12 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	   UI::Box::Resizing::kFullSize);
 	auto add_button = [this](const std::string& url) {
-		UI::Button* b = new UI::Button(
-		   &dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+		UI::Button* b =
+		   new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
 #if SDL_VERSION_ATLEAST(2, 0, 14)
-		   _("Open Link")
+		                  _("Open Link")
 #else
-		   _("Copy Link")
+		                  _("Copy Link")
 #endif
 		   );
 		b->sigclicked.connect([url]() {

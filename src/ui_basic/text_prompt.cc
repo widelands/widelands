@@ -27,7 +27,10 @@ namespace UI {
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
 
-TextPrompt::TextPrompt(UI::Panel& parent, const UI::WindowStyle s, const std::string& title, const std::string& text)
+TextPrompt::TextPrompt(UI::Panel& parent,
+                       const UI::WindowStyle s,
+                       const std::string& title,
+                       const std::string& text)
    : UI::Window(&parent, s, "text_prompt", 0, 0, 0, 0, title),
      box_(this, panel_style_, 0, 0, UI::Box::Vertical),
      content_box_(&box_, panel_style_, 0, 0, UI::Box::Vertical),
@@ -39,7 +42,8 @@ TextPrompt::TextPrompt(UI::Panel& parent, const UI::WindowStyle s, const std::st
          0,
          kButtonSize,
          kButtonSize,
-         s == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuPrimary : UI::ButtonStyle::kWuiPrimary,
+         s == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuPrimary :
+                                         UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(&buttonsbox_,
              "cancel",
@@ -47,14 +51,18 @@ TextPrompt::TextPrompt(UI::Panel& parent, const UI::WindowStyle s, const std::st
              0,
              kButtonSize,
              kButtonSize,
-             s == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary,
+             s == UI::WindowStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                             UI::ButtonStyle::kWuiSecondary,
              _("Cancel")) {
 	buttonsbox_.add(&cancel_, UI::Box::Resizing::kExpandBoth);
 	buttonsbox_.add_space(kSpacing);
 	buttonsbox_.add(&ok_, UI::Box::Resizing::kExpandBoth);
 
 	box_.add(
-	   new UI::Textarea(&box_, panel_style_, s == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading : UI::FontStyle::kWuiInfoPanelHeading, text),
+	   new UI::Textarea(&box_, panel_style_,
+	                    s == UI::WindowStyle::kFsMenu ? UI::FontStyle::kFsMenuInfoPanelHeading :
+	                                                    UI::FontStyle::kWuiInfoPanelHeading,
+	                    text),
 	   UI::Box::Resizing::kFullSize);
 	box_.add_space(kSpacing);
 	box_.add(&editbox_, UI::Box::Resizing::kFullSize);

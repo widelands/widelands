@@ -56,18 +56,24 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
      box_right_(&main_box_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_left_buttons_(&box_left_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      box_right_subbox_header_hbox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_right_subbox_header_box_left_(&box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_subbox_header_box_right_(&box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_subbox_maps_dirstruct_hbox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     box_right_subbox_dirstruct_(&box_right_subbox_maps_dirstruct_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_subbox_maps_list_(&box_right_subbox_maps_dirstruct_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_right_buttonsbox_(&box_right_subbox_maps_dirstruct_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_right_subbox_header_box_left_(
+        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_right_subbox_header_box_right_(
+        &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_right_subbox_maps_dirstruct_hbox_(
+        &box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     box_right_subbox_dirstruct_(
+        &box_right_subbox_maps_dirstruct_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_right_subbox_maps_list_(
+        &box_right_subbox_maps_dirstruct_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_right_buttonsbox_(
+        &box_right_subbox_maps_dirstruct_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_right_bottombox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      name_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
      author_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
      version_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     descr_(
-        *new UI::MultilineEditbox(&box_right_subbox_header_box_right_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu)),
+     descr_(*new UI::MultilineEditbox(
+        &box_right_subbox_header_box_right_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu)),
      addon_new_(&box_left_buttons_,
                 "addon_new",
                 0,
@@ -172,14 +178,17 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Version:"), UI::Align::kRight),
 	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_box_left_.add_space(3 * kSpacing);
-	box_right_subbox_header_box_left_.add(new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
-	                                        UI::FontStyle::kFsMenuInfoPanelHeading,
-	                                        _("Description:"), UI::Align::kRight),
-	                       UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_box_left_.add(
+	   new UI::Textarea(&box_right_subbox_header_box_left_, UI::PanelStyle::kFsMenu,
+	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Description:"),
+	                    UI::Align::kRight),
+	   UI::Box::Resizing::kFullSize);
 
-	box_right_subbox_header_hbox_.add(&box_right_subbox_header_box_left_, UI::Box::Resizing::kFullSize);
+	box_right_subbox_header_hbox_.add(
+	   &box_right_subbox_header_box_left_, UI::Box::Resizing::kFullSize);
 	box_right_subbox_header_hbox_.add_space(kSpacing);
-	box_right_subbox_header_hbox_.add(&box_right_subbox_header_box_right_, UI::Box::Resizing::kExpandBoth);
+	box_right_subbox_header_hbox_.add(
+	   &box_right_subbox_header_box_right_, UI::Box::Resizing::kExpandBoth);
 
 	box_right_buttonsbox_.add_inf_space();
 	box_right_buttonsbox_.add(&map_add_);
@@ -189,10 +198,11 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	box_right_buttonsbox_.add(&map_add_dir_);
 	box_right_buttonsbox_.add_inf_space();
 
-	box_right_subbox_dirstruct_.add(new UI::Textarea(&box_right_subbox_dirstruct_, UI::PanelStyle::kFsMenu,
-	                                        UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
-	                                        UI::Align::kCenter),
-	                       UI::Box::Resizing::kFullSize);
+	box_right_subbox_dirstruct_.add(
+	   new UI::Textarea(&box_right_subbox_dirstruct_, UI::PanelStyle::kFsMenu,
+	                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
+	                    UI::Align::kCenter),
+	   UI::Box::Resizing::kFullSize);
 	box_right_subbox_dirstruct_.add_space(kSpacing);
 	box_right_subbox_dirstruct_.add(&dirstruct_, UI::Box::Resizing::kExpandBoth);
 
@@ -203,11 +213,13 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	box_right_subbox_maps_list_.add_space(kSpacing);
 	box_right_subbox_maps_list_.add(&my_maps_, UI::Box::Resizing::kExpandBoth);
 
-	box_right_subbox_maps_dirstruct_hbox_.add(&box_right_subbox_dirstruct_, UI::Box::Resizing::kExpandBoth);
+	box_right_subbox_maps_dirstruct_hbox_.add(
+	   &box_right_subbox_dirstruct_, UI::Box::Resizing::kExpandBoth);
 	box_right_subbox_maps_dirstruct_hbox_.add_space(kSpacing);
 	box_right_subbox_maps_dirstruct_hbox_.add(&box_right_buttonsbox_, UI::Box::Resizing::kFullSize);
 	box_right_subbox_maps_dirstruct_hbox_.add_space(kSpacing);
-	box_right_subbox_maps_dirstruct_hbox_.add(&box_right_subbox_maps_list_, UI::Box::Resizing::kExpandBoth);
+	box_right_subbox_maps_dirstruct_hbox_.add(
+	   &box_right_subbox_maps_list_, UI::Box::Resizing::kExpandBoth);
 
 	box_right_bottombox_.add(&discard_changes_, UI::Box::Resizing::kExpandBoth);
 	box_right_bottombox_.add_space(kSpacing);
@@ -448,22 +460,15 @@ void AddOnsPackager::current_addon_edited() {
 }
 
 void AddOnsPackager::clicked_new_addon() {
-	UI::TextPrompt n(main_menu_, UI::WindowStyle::kFsMenu, _("New Add-On"), _("Enter the name for the new add-on."));
-	UI::Dropdown<AddOns::AddOnCategory> category(&n.content_box(),
-	               "category",
-	               0,
-	               0,
-	               50,
-	               12,
-	               kButtonSize,
-	               _("Category"),
-	               UI::DropdownType::kTextual,
-	               UI::PanelStyle::kFsMenu,
-	               UI::ButtonStyle::kFsMenuSecondary);
+	UI::TextPrompt n(main_menu_, UI::WindowStyle::kFsMenu, _("New Add-On"),
+	                 _("Enter the name for the new add-on."));
+	UI::Dropdown<AddOns::AddOnCategory> category(
+	   &n.content_box(), "category", 0, 0, 50, 12, kButtonSize, _("Category"),
+	   UI::DropdownType::kTextual, UI::PanelStyle::kFsMenu, UI::ButtonStyle::kFsMenuSecondary);
 	for (const auto& pair : AddOns::kAddOnCategories) {
 		if (pair.first != AddOns::AddOnCategory::kNone) {
 			category.add(pair.second.descname(), pair.first, g_image_cache->get(pair.second.icon),
-			              pair.first == AddOns::AddOnCategory::kMaps);
+			             pair.first == AddOns::AddOnCategory::kMaps);
 		}
 	}
 	n.content_box().add(&category, UI::Box::Resizing::kFullSize);
@@ -526,10 +531,12 @@ void AddOnsPackager::clicked_delete_addon() {
 
 	UI::WLMessageBox m(
 	   get_parent(), UI::WindowStyle::kFsMenu, _("Delete Add-on"),
-	   (boost::format(
-	   	is_remote ? _("Do you really want to delete the add-on ‘%s’?")
-	   	: _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this add-on can not be downloaded again from the server.")
-	   ) % name).str(),
+	   (boost::format(is_remote ?
+	                     _("Do you really want to delete the add-on ‘%s’?") :
+	                     _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
+	                       "add-on can not be downloaded again from the server.")) %
+	    name)
+	      .str(),
 	   UI::WLMessageBox::MBoxType::kOkCancel);
 	if (m.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 		return;
@@ -573,7 +580,8 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 		select.push_back(filename);
 	} break;
 	case ModifyAction::kAddDir: {
-		UI::TextPrompt n(main_menu_, UI::WindowStyle::kFsMenu, _("New Directory"), _("Enter the name for the new directory."));
+		UI::TextPrompt n(main_menu_, UI::WindowStyle::kFsMenu, _("New Directory"),
+		                 _("Enter the name for the new directory."));
 		for (;;) {
 			if (n.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk) {
 				return;

@@ -60,7 +60,8 @@ private:
 	AddOnsCtrl& ctrl_;
 
 	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox_header_hbox_,
-	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_, box_right_subbox_maps_dirstruct_hbox_, box_right_subbox_dirstruct_,
+	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_,
+	   box_right_subbox_maps_dirstruct_hbox_, box_right_subbox_dirstruct_,
 	   box_right_subbox_maps_list_, box_right_buttonsbox_, box_right_bottombox_;
 	UI::EditBox name_, author_, version_;
 	UI::MultilineEditbox& descr_;
