@@ -225,7 +225,6 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
  * Find the starting byte of the next character
  */
 uint32_t MultilineEditbox::Data::next_char(uint32_t cursor) {
-	assert(cursor <= text.size());
 
 	if (cursor >= text.size()) {
 		return cursor;
