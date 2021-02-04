@@ -28,28 +28,28 @@ local r = {
 
       -- Iterate all players, if one has lost his Headquarters, destroy all remaing Warehouses and ports,
       -- remove him from the list, send him a defeated message and give him full vision
+      sleep(1000)
+      check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
       repeat
          sleep(5000)
          -- check if a player still has a Headquarters
-         warehouses_and_ports = {}
-         headquarters = {}
          for idx, p in ipairs(plrs) do
+            warehouses_and_ports = {}
+            headquarters = {}
             for j, building in ipairs(p.tribe.buildings) do
                if building.type_name == "warehouse" then
                   if building.conquers == 0 or building.is_port then
-                     table.insert(warehouses_and_ports, building.name)
+                     warehouses_and_ports = array_combine(warehouses_and_ports, p:get_buildings(building.name))
                   else
                      table.insert(headquarters, building.name)
                   end
                end
             end
             if #p:get_buildings(headquarters) == 0 then
-               sites = {}
                for idx,b in ipairs(warehouses_and_ports) do
-                  sites = array_combine(sites, p:get_buildings(b))
-               end
-               for idx,b in ipairs(sites) do
-                  b:destroy()
+                  if b then
+                     b:destroy()
+                  end
                end
             end
          end
