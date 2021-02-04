@@ -188,6 +188,7 @@ local r = {
          end
       end
       -- Team points
+      push_textdomain("win_conditions")
       for idx, team in ipairs(teams) do
          local points, pstat = _calc_points(team)
          local message = h1((_"Status for Team %d"):format(idx))
@@ -195,6 +196,7 @@ local r = {
             .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
          msg = msg .. vspace(8) .. message
       end
+      pop_textdomain()
 
       broadcast(plrs, game_status.title, msg, {popup = show_popup})
    end
