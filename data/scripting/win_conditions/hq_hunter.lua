@@ -41,11 +41,11 @@ local r = {
                   if building.conquers == 0 or building.is_port then
                      warehouses_and_ports = array_combine(warehouses_and_ports, p:get_buildings(building.name))
                   else
-                     table.insert(headquarters, building.name)
+                     headquarters = array_combine(headquarters, p:get_buildings(building.name))
                   end
                end
             end
-            if #p:get_buildings(headquarters) == 0 then
+            if #headquarters == 0 then
                for idx,b in ipairs(warehouses_and_ports) do
                   if b then
                      b:destroy()
