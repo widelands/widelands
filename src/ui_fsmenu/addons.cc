@@ -1258,22 +1258,20 @@ static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const boo
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   ctrl, UI::WindowStyle::kFsMenu, _("Uninstall"),
-		   (boost::format(
-		   local ?
-		   _("Are you certain that you want to uninstall this add-on?\n\n"
-		                    "%1$s\n"
-		                    "by %2$s\n"
-		                    "Version %3$s\n"
-		                    "Category: %4$s\n"
-		                    "%5$s\n\n"
-		                    "Note that this add-on can not be downloaded again from the server.")
-		   :
-		   _("Are you certain that you want to uninstall this add-on?\n\n"
-		                    "%1$s\n"
-		                    "by %2$s\n"
-		                    "Version %3$s\n"
-		                    "Category: %4$s\n"
-		                    "%5$s")) %
+		   (boost::format(local ?
+		                     _("Are you certain that you want to uninstall this add-on?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "Version %3$s\n"
+		                       "Category: %4$s\n"
+		                       "%5$s\n\n"
+		                       "Note that this add-on can not be downloaded again from the server.") :
+		                     _("Are you certain that you want to uninstall this add-on?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "Version %3$s\n"
+		                       "Category: %4$s\n"
+		                       "%5$s")) %
 		    info.descname() % info.author() % AddOns::version_to_string(info.version) %
 		    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
 		      .str(),
@@ -1459,7 +1457,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               .as_font_tag(info.description()))
              .str()) {
 
-	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info, !ctrl->is_remote(info.internal_name)); });
+	uninstall_.sigclicked.connect(
+	   [ctrl, info]() { uninstall(ctrl, info, !ctrl->is_remote(info.internal_name)); });
 	if (toggle_enabled_) {
 		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
 			enabled_ = !enabled_;
