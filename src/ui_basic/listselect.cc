@@ -241,7 +241,7 @@ void BaseListselect::select(const uint32_t i) {
  * selection
  */
 bool BaseListselect::has_selection() const {
-	return selection_ != no_selection_index();
+	return get_selected() != no_selection_index();
 }
 
 /**
