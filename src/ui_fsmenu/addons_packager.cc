@@ -360,16 +360,8 @@ void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 	addon_selected();
 }
 
-MutableAddOn* AddOnsPackager::get_selected() {
-	if (!addons_.has_selection()) {
-		return nullptr;
-	}
-	for (auto& pair : mutable_addons_) {
-		if (pair.first == addons_.get_selected()) {
-			return &pair.second;
-		}
-	}
-	NEVER_HERE();
+inline MutableAddOn* AddOnsPackager::get_selected() {
+	return addons_.has_selection() ? &mutable_addons_.at(addons_.get_selected()) : nullptr;
 }
 
 void AddOnsPackager::addon_selected() {
@@ -520,18 +512,9 @@ void AddOnsPackager::clicked_new_addon() {
 
 void AddOnsPackager::clicked_delete_addon() {
 	const std::string& name = addons_.get_selected();
-
-	bool is_remote = false;
-	for (const AddOns::AddOnInfo& r : ctrl_.get_remotes()) {
-		if (r.internal_name == name) {
-			is_remote = true;
-			break;
-		}
-	}
-
 	UI::WLMessageBox m(
 	   get_parent(), UI::WindowStyle::kFsMenu, _("Delete Add-on"),
-	   (boost::format(is_remote ?
+	   (boost::format(ctrl_.is_remote(name) ?
 	                     _("Do you really want to delete the add-on ‘%s’?") :
 	                     _("Do you really want to delete the local add-on ‘%s’?\n\nNote that this "
 	                       "add-on can not be downloaded again from the server.")) %
@@ -578,7 +561,8 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 		const std::string filename = FileSystem::fs_filename(map.c_str());
 		tree->maps[filename] = map;
 		select.push_back(filename);
-	} break;
+		break;
+	}
 	case ModifyAction::kAddDir: {
 		UI::TextPrompt n(main_menu_, UI::WindowStyle::kFsMenu, _("New Directory"),
 		                 _("Enter the name for the new directory."));
@@ -608,7 +592,8 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 			select.push_back(name);
 			break;
 		}
-	} break;
+		break;
+	}
 	case ModifyAction::kDeleteMapOrDir: {
 		assert(!selected_map.empty() || !select.empty());
 
@@ -635,7 +620,8 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 			assert(it != tree->maps.end());
 			tree->maps.erase(it);
 		}
-	} break;
+		break;
+	}
 	}
 
 	addons_with_changes_[m->internal_name] = false;

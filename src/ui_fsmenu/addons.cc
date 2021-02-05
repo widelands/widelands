@@ -327,7 +327,6 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		   );
 		b->sigclicked.connect([url]() {
 #if SDL_VERSION_ATLEAST(2, 0, 14)
-			// UNTESTED
 			SDL_OpenURL(url.c_str());
 #else
 			SDL_SetClipboardText(url.c_str());
@@ -982,6 +981,15 @@ void AddOnsCtrl::layout() {
 	UI::Window::layout();
 }
 
+bool AddOnsCtrl::is_remote(const std::string& name) const {
+	for (const AddOns::AddOnInfo& r : remotes_) {
+		if (r.internal_name == name) {
+			return true;
+		}
+	}
+	return false;
+}
+
 inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
 	UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Note"),
 	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
@@ -1246,16 +1254,26 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 	return result;
 }
 
-static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info) {
+static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const bool local) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   ctrl, UI::WindowStyle::kFsMenu, _("Uninstall"),
-		   (boost::format(_("Are you certain that you want to uninstall this add-on?\n\n"
+		   (boost::format(
+		   local ?
+		   _("Are you certain that you want to uninstall this add-on?\n\n"
 		                    "%1$s\n"
 		                    "by %2$s\n"
 		                    "Version %3$s\n"
 		                    "Category: %4$s\n"
-		                    "%5$s\n")) %
+		                    "%5$s\n\n"
+		                    "Note that this add-on can not be downloaded again from the server.")
+		   :
+		   _("Are you certain that you want to uninstall this add-on?\n\n"
+		                    "%1$s\n"
+		                    "by %2$s\n"
+		                    "Version %3$s\n"
+		                    "Category: %4$s\n"
+		                    "%5$s")) %
 		    info.descname() % info.author() % AddOns::version_to_string(info.version) %
 		    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
 		      .str(),
@@ -1441,7 +1459,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               .as_font_tag(info.description()))
              .str()) {
 
-	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info); });
+	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info, !ctrl->is_remote(info.internal_name)); });
 	if (toggle_enabled_) {
 		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
 			enabled_ = !enabled_;
@@ -1931,7 +1949,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		RemoteInteractionWindow m(*ctrl, info);
 		m.run<UI::Panel::Returncodes>();
 	});
-	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info); });
+	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info, false); });
 	install_.sigclicked.connect([ctrl, info]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {

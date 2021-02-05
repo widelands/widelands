@@ -114,6 +114,7 @@ public:
 	const std::vector<AddOns::AddOnInfo>& get_remotes() const {
 		return remotes_;
 	}
+	bool is_remote(const std::string& name) const;
 
 protected:
 	void layout() override;
