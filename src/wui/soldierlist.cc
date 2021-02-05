@@ -426,7 +426,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 			button = button->next_button();
 		}
 
-		soldier_preference_.set_state(ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes ? 1 : 0, false);
+		soldier_preference_.set_state(
+		   ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes ? 1 : 0, false);
 		if (can_act) {
 			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
