@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -226,7 +226,8 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	// Need to do this first so we can set the theme and background.
 	maploader->preload_map(true, &enabled_addons());
 
-	create_loader_ui({"general_game"}, false, map().get_background_theme(), map().get_background());
+	create_loader_ui({"general_game"}, false /* no game tips in scenarios */,
+	                 map().get_background_theme(), map().get_background());
 
 	Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 
@@ -417,7 +418,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
 		// Need to do this first so we can set the theme and background
 		gl.preload_game(gpdp);
 
-		create_loader_ui({"general_game", "singleplayer"}, false, gpdp.get_background_theme(),
+		create_loader_ui({"general_game", "singleplayer"}, true, gpdp.get_background_theme(),
 		                 gpdp.get_background());
 		Notifications::publish(UI::NoteLoadingMessage(_("Preloading map…")));
 

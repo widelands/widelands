@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 by the Widelands Development Team
+ * Copyright (C) 2020-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "logic/message_id.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
-#include "wui/logmessage.h"
 
 class InfoPanel;
 class InteractiveBase;
@@ -48,6 +47,10 @@ public:
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t, int32_t, int32_t) override;
 
+	bool is_system_message() const {
+		return !message_;
+	}
+
 private:
 	InfoPanel& owner_;
 	uint32_t creation_time_;
@@ -67,7 +70,7 @@ public:
 	// Update the text area without relayouting
 	void set_time_string(const std::string&);
 	void set_speed_string(const std::string&);
-	void set_fps_string(bool show, double fps, double average);
+	void set_fps_string(bool show, bool cheating, double fps, double average);
 	void set_coords_string(const std::string&);
 
 	void log_message(const std::string&);
@@ -118,7 +121,6 @@ private:
 	size_t index_of(const MessagePreview*) const;
 	void pop_message(MessagePreview*);
 	void push_message(MessagePreview*);
-	std::unique_ptr<Notifications::Subscriber<LogMessage>> log_message_subscriber_;
 	const Widelands::MessageQueue* message_queue_;
 	std::unique_ptr<Widelands::MessageId> last_message_id_;
 

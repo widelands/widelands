@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,9 +83,10 @@ Quantity MilitarySite::SoldierControl::soldier_capacity() const {
 void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());
-	assert(military_site_->capacity_ != capacity);
-	military_site_->capacity_ = capacity;
-	military_site_->update_soldier_request();
+	if (military_site_->capacity_ != capacity) {
+		military_site_->capacity_ = capacity;
+		military_site_->update_soldier_request();
+	}
 }
 
 void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {

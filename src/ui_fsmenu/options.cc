@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,7 @@
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
+#include "ui_fsmenu/keyboard_options.h"
 #include "ui_fsmenu/training_wheel_options.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
@@ -95,17 +96,18 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
      // Tabs
      tabs_(this, UI::TabPanelStyle::kFsMenu),
 
-     box_interface_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
-     box_interface_left_(
-        &box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
-     box_windows_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_interface_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
+     box_interface_hbox_(
+        &box_interface_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal, 0, 0, kPadding),
+     box_interface_vbox_(
+        &box_interface_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_sound_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_saving_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_newgame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
      box_ingame_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, 0, 0, kPadding),
 
      // Interface options
-     language_dropdown_(&box_interface_left_,
+     language_dropdown_(&box_interface_vbox_,
                         "dropdown_language",
                         0,
                         0,
@@ -116,7 +118,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                         UI::DropdownType::kTextual,
                         UI::PanelStyle::kFsMenu,
                         UI::ButtonStyle::kFsMenuMenu),
-     resolution_dropdown_(&box_interface_left_,
+     resolution_dropdown_(&box_interface_vbox_,
                           "dropdown_resolution",
                           0,
                           0,
@@ -127,7 +129,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                           UI::DropdownType::kTextual,
                           UI::PanelStyle::kFsMenu,
                           UI::ButtonStyle::kFsMenuMenu),
-     theme_dropdown_(&box_interface_left_,
+     theme_dropdown_(&box_interface_vbox_,
                      "dropdown_theme",
                      0,
                      0,
@@ -139,51 +141,42 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                      UI::PanelStyle::kFsMenu,
                      UI::ButtonStyle::kFsMenuMenu),
 
-     inputgrab_(
-        &box_interface_left_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
-     sdl_cursor_(&box_interface_left_,
+     inputgrab_(&box_interface_, UI::PanelStyle::kFsMenu, Vector2i::zero(), _("Grab Input"), "", 0),
+     sdl_cursor_(&box_interface_,
                  UI::PanelStyle::kFsMenu,
                  Vector2i::zero(),
                  _("Use system mouse cursor"),
                  "",
                  0),
-     sb_maxfps_(&box_interface_left_,
-                0,
-                0,
-                0,
-                0,
-                opt.maxfps,
-                0,
-                99,
-                UI::PanelStyle::kFsMenu,
-                _("Maximum FPS:")),
-     tooltip_accessibility_mode_(&box_interface_left_,
+     sb_maxfps_(
+        &box_interface_, 0, 0, 0, 0, opt.maxfps, 0, 99, UI::PanelStyle::kFsMenu, _("Maximum FPS:")),
+     tooltip_accessibility_mode_(&box_interface_,
                                  UI::PanelStyle::kFsMenu,
                                  Vector2i::zero(),
                                  _("Accessibility mode for tooltips")),
-     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
+     translation_info_(&box_interface_hbox_, 0, 0, 100, 20, UI::PanelStyle::kFsMenu),
 
      // Windows options
-     snap_win_overlap_only_(&box_windows_,
+     snap_win_overlap_only_(&box_interface_,
                             UI::PanelStyle::kFsMenu,
                             Vector2i::zero(),
                             _("Snap windows only when overlapping"),
                             "",
                             0),
-     dock_windows_to_edges_(&box_windows_,
+     dock_windows_to_edges_(&box_interface_,
                             UI::PanelStyle::kFsMenu,
                             Vector2i::zero(),
                             _("Dock windows to edges"),
                             "",
                             0),
-     animate_map_panning_(&box_windows_,
+     animate_map_panning_(&box_interface_,
                           UI::PanelStyle::kFsMenu,
                           Vector2i::zero(),
                           _("Animate automatic map movements"),
                           "",
                           0),
 
-     sb_dis_panel_(&box_windows_,
+     sb_dis_panel_(&box_interface_,
                    0,
                    0,
                    0,
@@ -195,7 +188,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
-     sb_dis_border_(&box_windows_,
+     sb_dis_border_(&box_interface_,
                     0,
                     0,
                     0,
@@ -206,6 +199,15 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                     UI::PanelStyle::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
+
+     configure_keyboard_(&box_interface_,
+                         "configure_keyboard",
+                         0,
+                         0,
+                         0,
+                         0,
+                         UI::ButtonStyle::kFsMenuSecondary,
+                         _("Edit keyboard shortcuts…")),
 
      // Sound options
      sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
@@ -327,7 +329,6 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
-	tabs_.add("options_windows", _("Windows"), &box_windows_, "");
 	tabs_.add("options_sound", _("Sound"), &box_sound_, "");
 	tabs_.add("options_saving", _("Saving"), &box_saving_, "");
 	tabs_.add("options_newgame", _("New Games"), &box_newgame_, "");
@@ -339,22 +340,24 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	}
 
 	// Interface
-	box_interface_.add(&box_interface_left_);
-	box_interface_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
-	box_interface_left_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
-	box_interface_left_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
-	box_interface_left_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
-	box_interface_left_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
-	box_interface_left_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
-	box_interface_left_.add(&sb_maxfps_);
-	box_interface_left_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
+	box_interface_vbox_.add(&language_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_vbox_.add(&resolution_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_vbox_.add(&theme_dropdown_, UI::Box::Resizing::kFullSize);
+	box_interface_hbox_.add(&box_interface_vbox_, UI::Box::Resizing::kExpandBoth);
+	box_interface_hbox_.add(&translation_info_, UI::Box::Resizing::kExpandBoth);
 
-	// Windows
-	box_windows_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&sb_dis_panel_, UI::Box::Resizing::kFullSize);
-	box_windows_.add(&sb_dis_border_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&box_interface_hbox_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&inputgrab_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&sdl_cursor_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&sb_maxfps_);
+	box_interface_.add(&tooltip_accessibility_mode_, UI::Box::Resizing::kFullSize);
+
+	box_interface_.add(&snap_win_overlap_only_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&dock_windows_to_edges_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&animate_map_panning_, UI::Box::Resizing::kFullSize);
+	box_interface_.add(&sb_dis_panel_);
+	box_interface_.add(&sb_dis_border_);
+	box_interface_.add(&configure_keyboard_);
 
 	// Sound
 	box_sound_.add(&sound_options_, UI::Box::Resizing::kFullSize);
@@ -390,6 +393,19 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
+
+	configure_keyboard_.sigclicked.connect([this]() {
+		configure_keyboard_.set_enabled(false);
+		cancel_.set_enabled(false);
+		apply_.set_enabled(false);
+		ok_.set_enabled(false);
+		KeyboardOptions o(*this);
+		o.run<UI::Panel::Returncodes>();
+		configure_keyboard_.set_enabled(true);
+		cancel_.set_enabled(true);
+		apply_.set_enabled(true);
+		ok_.set_enabled(true);
+	});
 
 	training_wheels_.changed.connect(
 	   [this]() { training_wheels_button_.set_enabled(training_wheels_.get_state()); });
@@ -529,19 +545,20 @@ void Options::layout() {
 		tabs_.set_size(get_inner_w(), get_inner_h() - buth - 2 * kPadding);
 
 		const int tab_panel_width = get_inner_w() - 2 * kPadding;
-		const int column_width = tab_panel_width / 2;
+		const int unit_w = tab_panel_width / 3;
 
 		// Interface
-		box_interface_left_.set_desired_size(column_width + kPadding, tabs_.get_inner_h());
 		language_dropdown_.set_height(tabs_.get_h() - language_dropdown_.get_y() - buth -
 		                              3 * kPadding);
-		sb_maxfps_.set_unit_width(column_width / 2);
-		sb_maxfps_.set_desired_size(column_width, sb_maxfps_.get_h());
+		translation_info_.set_size(
+		   language_dropdown_.get_w(),
+		   language_dropdown_.get_h() + resolution_dropdown_.get_h() + kPadding);
+		sb_maxfps_.set_unit_width(unit_w);
+		sb_maxfps_.set_desired_size(tab_panel_width, sb_maxfps_.get_h());
 
-		// Windows options
-		sb_dis_panel_.set_unit_width(200);
+		sb_dis_panel_.set_unit_width(unit_w);
 		sb_dis_panel_.set_desired_size(tab_panel_width, sb_dis_panel_.get_h());
-		sb_dis_border_.set_unit_width(200);
+		sb_dis_border_.set_unit_width(unit_w);
 		sb_dis_border_.set_desired_size(tab_panel_width, sb_dis_border_.get_h());
 
 		// Saving options

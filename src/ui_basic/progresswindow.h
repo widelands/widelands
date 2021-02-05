@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,7 @@ namespace UI {
 /// Manages a progress window on the screen.
 struct IProgressVisualization {
 	/// perform any visualizations as needed
-	/// if repaint is true, ensure previously painted areas are visible
-	virtual void update(bool repaint) = 0;
+	virtual void update(RenderTarget&, const Recti& bounds) = 0;
 
 	/// Progress Window is closing, unregister and cleanup
 	virtual void stop() = 0;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -264,6 +264,10 @@ public:
 	unsigned get_current_health() const {
 		return current_health_;
 	}
+	void set_current_health(const unsigned h) {
+		current_health_ = h;
+	}
+
 	unsigned get_retreat_health() const {
 		return retreat_health_;
 	}

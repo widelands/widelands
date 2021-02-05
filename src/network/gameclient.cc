@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2020 by the Widelands Development Team
+ * Copyright (C) 2008-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -256,7 +256,7 @@ void GameClient::do_run() {
 			tipstexts.push_back(get_players_tribe());
 		}
 		UI::ProgressWindow& loader_ui =
-		   game.create_loader_ui(tipstexts, false, d->settings.map_theme, d->settings.map_background);
+		   game.create_loader_ui(tipstexts, true, d->settings.map_theme, d->settings.map_background);
 
 		d->game = &game;
 		InteractiveGameBase* igb = d->init_game(this, loader_ui);

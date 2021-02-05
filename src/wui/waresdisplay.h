@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2020 by the Widelands Development Team
+ * Copyright (C) 2003-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,6 +109,9 @@ protected:
 	virtual Vector2i ware_position(Widelands::DescriptionIndex) const;
 	void draw(RenderTarget&) override;
 	virtual void draw_ware(RenderTarget&, Widelands::DescriptionIndex);
+	virtual RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) {
+		return RGBAColor(0, 0, 0, 0);
+	}
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList*>;
@@ -175,11 +178,32 @@ public:
 	void remove_all_warelists();
 
 protected:
+	uint32_t amount_of(Widelands::DescriptionIndex);
 	std::string info_for_ware(Widelands::DescriptionIndex) override;
 
 private:
 	using WareListVector = std::vector<const Widelands::WareList*>;
 	WareListVector warelists_;
+};
+
+class StockMenuWaresDisplay : public WaresDisplay {
+public:
+	StockMenuWaresDisplay(UI::Panel* const parent,
+	                      int32_t x,
+	                      int32_t y,
+	                      const Widelands::Player&,
+	                      Widelands::WareWorker type);
+
+	void set_solid_icon_backgrounds(const bool s) {
+		solid_icon_backgrounds_ = s;
+	}
+
+protected:
+	RGBAColor draw_ware_background_overlay(Widelands::DescriptionIndex) override;
+	std::string info_for_ware(Widelands::DescriptionIndex) override;
+
+	const Widelands::Player& player_;
+	bool solid_icon_backgrounds_;
 };
 
 std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,

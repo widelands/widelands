@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -523,6 +523,8 @@ public:
 	Economy* get_economy(Widelands::Serial serial) const;
 	bool has_economy(Widelands::Serial serial) const;
 
+	Quantity get_total_economy_target(WareWorker, DescriptionIndex) const;
+
 	uint32_t get_current_produced_statistics(uint8_t);
 
 	// Military stuff
@@ -582,6 +584,7 @@ public:
 	std::vector<uint32_t> const* get_ware_consumption_statistics(DescriptionIndex const) const;
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
+	std::vector<uint32_t> const* get_worker_stock_statistics(DescriptionIndex const) const;
 
 	void init_statistics();
 	void read_statistics(FileRead&, uint16_t packet_version);
@@ -716,7 +719,7 @@ private:
 	 * life of the game, indexed as
 	 * ware_stocks_[ware_id][time_index]
 	 */
-	StatisticsMap ware_stocks_;
+	StatisticsMap ware_stocks_, worker_stocks_;
 
 	std::set<DescriptionIndex> muted_building_types_;
 

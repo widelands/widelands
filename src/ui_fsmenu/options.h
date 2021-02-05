@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -129,9 +129,7 @@ private:
 
 	// UI elements
 	UI::TabPanel tabs_;
-	UI::Box box_interface_;
-	UI::Box box_interface_left_;
-	UI::Box box_windows_;
+	UI::Box box_interface_, box_interface_hbox_, box_interface_vbox_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
 	UI::Box box_newgame_;
@@ -147,12 +145,13 @@ private:
 	UI::Checkbox tooltip_accessibility_mode_;
 	UI::MultilineTextarea translation_info_;
 
-	// Windows options
 	UI::Checkbox snap_win_overlap_only_;
 	UI::Checkbox dock_windows_to_edges_;
 	UI::Checkbox animate_map_panning_;
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
+
+	UI::Button configure_keyboard_;
 
 	// Sound options
 	SoundOptions sound_options_;

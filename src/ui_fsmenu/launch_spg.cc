@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2020 by the Widelands Development Team
+ * Copyright (C) 2002-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,7 +158,7 @@ void LaunchSPG::clicked_ok() {
 				tipstexts.push_back(sp->get_players_tribe());
 			}
 			game_.create_loader_ui(
-			   tipstexts, false, sp->settings().map_theme, sp->settings().map_background);
+			   tipstexts, true, sp->settings().map_theme, sp->settings().map_background);
 
 			Notifications::publish(UI::NoteLoadingMessage(_("Preparing game…")));
 

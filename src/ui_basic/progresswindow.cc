@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 by the Widelands Development Team
+ * Copyright (C) 2007-2021 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,7 +123,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	}
 
 	for (IProgressVisualization* visualization : visualizations_) {
-		visualization->update(true);  // game tips etc
+		visualization->update(rt, Recti(0, 0, get_inner_w(), get_inner_h()));  // game tips etc
 	}
 }
 
