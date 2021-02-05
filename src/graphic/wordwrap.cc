@@ -281,6 +281,22 @@ uint32_t WordWrap::height() const {
 	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
 }
 
+uint32_t WordWrap::line_index(int32_t y) const {
+	return std::min(size_t((y - 2 * kLineMargin) / text_height(fontsize_)), lines_.size() - 1);
+}
+uint32_t WordWrap::offset_of_line_at(int32_t y) const {
+	return line_offset(line_index(y));
+}
+std::string WordWrap::text_of_line_at(int32_t y) const {
+	size_t line_idx = line_index(y);
+	line_idx = std::min(line_idx, lines_.size() - 1);
+	return lines_[line_idx].text;
+}
+
+int WordWrap::text_width_of(std::string& text) const {
+	return text_width(text, fontsize_);
+}
+
 /**
  * Given an offset @p caret into the original text, compute the @p line that it
  * appears in in the wrapped text, and also the @p pos within that line (as an offset).
