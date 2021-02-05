@@ -102,6 +102,8 @@ DefaultAI::DefaultAI(Widelands::Game& ggame, Widelands::PlayerNumber const pid, 
      player_(nullptr),
      tribe_(nullptr),
      attackers_count_(0),
+     // Delay initialization to allow scenario scripts
+     // to load custom units/buildings at gametime 0
      next_ai_think_(1),
      scheduler_delay_counter_(0),
      wood_policy_(WoodPolicy::kAllowRangers),
