@@ -426,10 +426,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveBase& ib, Widelands::Buil
 			button = button->next_button();
 		}
 
-		soldier_preference_.set_state(0);
-		if (ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes) {
-			soldier_preference_.set_state(1);
-		}
+		soldier_preference_.set_state(ms->get_soldier_preference() == Widelands::SoldierPreference::kHeroes ? 1 : 0, false);
 		if (can_act) {
 			soldier_preference_.changedto.connect([this](int32_t a) { set_soldier_preference(a); });
 		} else {
@@ -446,17 +443,13 @@ const SoldierControl* SoldierList::soldiers() const {
 }
 
 void SoldierList::think() {
-	// Only update the soldiers pref radio if player is spectator
-	if (ibase_.can_act(building_.owner().player_number())) {
-		return;
-	}
 	if (upcast(Widelands::MilitarySite, ms, &building_)) {
 		switch (ms->get_soldier_preference()) {
 		case Widelands::SoldierPreference::kRookies:
-			soldier_preference_.set_state(0);
+			soldier_preference_.set_state(0, false);
 			break;
 		case Widelands::SoldierPreference::kHeroes:
-			soldier_preference_.set_state(1);
+			soldier_preference_.set_state(1, false);
 			break;
 		}
 	}
