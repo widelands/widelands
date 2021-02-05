@@ -380,7 +380,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	// kNoOfStatisticsStringCases - 1].
 	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
 		assert(idx < kNoOfStatisticsStringCases);
-		std::tuple<int,int,int> cache_key(pres, stat, capacity_);
+		std::tuple<int, int, int> cache_key(pres, stat, capacity_);
 		auto it = statistics_string_cache_[idx].find(cache_key);
 		if (it != statistics_string_cache_[idx].end()) {
 			return it->second;
