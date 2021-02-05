@@ -38,16 +38,18 @@ local r = {
             for j, building in ipairs(p.tribe.buildings) do
                if building.type_name == "warehouse" then
                   if building.conquers == 0 or building.is_port then
-                     warehouses_and_ports = array_combine(warehouses_and_ports, p:get_buildings(building.name))
+                     for i,site in pairs(p:get_buildings(building.name)) do
+                        table.insert(warehouses_and_ports, site.fields[1])
+                     end
                   else
                      headquarters = array_combine(headquarters, p:get_buildings(building.name))
                   end
                end
             end
             if #headquarters == 0 then
-               for idx,b in ipairs(warehouses_and_ports) do
-                  if b then -- this should be a safeguard for existence but doesn't work
-                     b:destroy()
+               for idx,f in pairs(warehouses_and_ports) do
+                  if f.immovable then
+                     f.immovable:destroy()
                   end
                end
             end

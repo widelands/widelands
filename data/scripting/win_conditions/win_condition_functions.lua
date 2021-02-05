@@ -66,36 +66,31 @@ function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
          win_conditions__initially_without_warehouse[idx] = p.defeated
       elseif p.defeated and not win_conditions__initially_without_warehouse[idx] then
          p:send_to_inbox(heading, msg)
-         buildings = {}
-         -- wait for updated building statistics
-         sleep(1000)
+         fields = {}
          -- first sink all ships a player still has
          for idx,s in ipairs(array_combine(p:get_ships())) do
             s:destroy()
          end
-         -- now collect the constructionsites of warehouses/ports/milsites a player has
+         -- now collect the warehouses/ports/milsites including constructionsites a player has
          for idx,building in ipairs(p.tribe.buildings) do
-            if building.type_name == "warehouse" or building.type_name == "militarysite" then
-               buildings = array_combine(buildings, p:get_constructionsites(building.name))
+            if building.type_name == "warehouse" then
+               for i,site in pairs(p:get_constructionsites(building.name)) do
+                  table.insert(fields, site.fields[1])
+               end
             end
-         end
-         -- destroy all identified  constructionsites a player still has
-         for idx,b in ipairs(buildings) do
-            b:destroy()
-            sleep(100)
-         end
-         buildings = {}
-         -- last collect all buildings a player has
-         sleep(1000)
-         for id,building in ipairs(p.tribe.buildings) do
             if building.type_name == "militarysite" then
-               buildings = array_combine(buildings, p:get_buildings(building.name))
+               for i,site in pairs(p:get_constructionsites(building.name)) do
+                  table.insert(fields, site.fields[1])
+               end
+               for i,site in pairs(p:get_buildings(building.name)) do
+                  table.insert(fields, site.fields[1])
+               end
             end
          end
-         -- destroy all militarysites a player still has
-         for idx,b in ipairs(buildings) do
-            if b then
-               b:destroy()
+         -- destroy the collected sites
+         for idx,f in pairs(fields) do
+            if f.immovable then
+               f.immovable:destroy()
                -- add some delay to the destruction for dramaturgical reason
                sleep(400)
             end
