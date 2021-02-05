@@ -380,7 +380,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	// kNoOfStatisticsStringCases - 1].
 	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
 		assert(idx < kNoOfStatisticsStringCases);
-		auto it = statistics_string_cache_[idx].find(pres);
+		auto it = statistics_string_cache_[idx].find((pres<<8)+(stat<<4)+capacity_);
 		if (it != statistics_string_cache_[idx].end()) {
 			return it->second;
 		} else {
@@ -396,7 +396,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 					cr->push_arg(capacity_);
 					cr->resume();
 					std::string new_string = cr->pop_string();
-					statistics_string_cache_[idx].insert(std::make_pair(stat, new_string));
+					statistics_string_cache_[idx].insert(std::make_pair((pres<<8)+(stat<<4)+capacity_, new_string));
 					return new_string;
 				} catch (LuaError& err) {
 					log_err("Failed to read soldier capacity for building '%s': %s",
