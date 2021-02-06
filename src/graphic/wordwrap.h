@@ -67,6 +67,9 @@ struct WordWrap {
 		return lines_.size();
 	}
 	uint32_t line_offset(uint32_t line) const;
+	uint32_t offset_of_line_at(int32_t y) const;
+	std::string text_of_line_at(int32_t y) const;
+	int text_width_of(std::string& text) const;
 
 private:
 	struct LineData {
@@ -108,6 +111,7 @@ private:
 	                         const int fontheight,
 	                         uint32_t line,
 	                         const Vector2i& point) const;
+	uint32_t line_index(int32_t y) const;
 };
 
 }  // namespace UI
