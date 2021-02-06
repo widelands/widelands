@@ -272,7 +272,7 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 	return false;
 }
 bool MultilineEditbox::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t, int32_t) {
-	//	state != 0 -> mouse button is pressed
+	// state != 0 -> mouse button is pressed
 	if (state && get_can_focus()) {
 		select_until(d_->cursor_pos);
 		set_caret_to_cursor_pos(x, y);
