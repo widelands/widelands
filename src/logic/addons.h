@@ -78,9 +78,12 @@ constexpr uint8_t kMaxRating = 10;
 struct AddOnInfo {
 	std::string internal_name;  // "cool_feature.wad"
 
-	std::function<std::string()> descname;     // "Cool Feature"
-	std::function<std::string()> description;  // "This add-on is a really cool feature."
-	std::function<std::string()> author;       // "The Widelands Bunnybot"
+	std::string unlocalized_descname;
+	std::string unlocalized_description;
+	std::string unlocalized_author;
+	std::function<std::string()> descname;
+	std::function<std::string()> description;
+	std::function<std::string()> author;
 
 	AddOnVersion version;   // Add-on version (e.g. 1.2.3)
 	uint32_t i18n_version;  // (see doc/sphinx/source/add-ons.rst)

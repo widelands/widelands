@@ -42,6 +42,8 @@ struct MultilineEditbox : public Panel {
 
 	void focus(bool topcaller = true) override;
 
+	void layout() override;
+
 protected:
 	void draw(RenderTarget&) override;
 

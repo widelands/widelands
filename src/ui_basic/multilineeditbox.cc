@@ -158,6 +158,11 @@ void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
 	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
+void MultilineEditbox::layout() {
+	Panel::layout();
+	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+}
+
 /**
  * Return the text currently stored by the editbox.
  */
@@ -178,7 +183,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
 	}
 
-	d_->set_cursor_pos(0);
+	d_->set_cursor_pos(d_->text.size());
 	d_->update();
 	d_->scroll_cursor_into_view();
 

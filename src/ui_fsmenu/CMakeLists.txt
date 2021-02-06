@@ -4,6 +4,8 @@ wl_library(ui_fsmenu
     about.h
     addons.cc
     addons.h
+    addons_packager.cc
+    addons_packager.h
     campaigndetails.cc
     campaigndetails.h
     campaigns.cc
@@ -32,7 +34,6 @@ wl_library(ui_fsmenu
     mapselect.h
     main.cc
     main.h
-    menu_target.h
     menu.h
     menu.cc
     multiplayersetupgroup.cc
@@ -69,6 +70,7 @@ wl_library(ui_fsmenu
     graphic_surface
     graphic_text
     graphic_text_layout
+    io_fileread
     io_filesystem
     io_profile
     logic
@@ -80,6 +82,7 @@ wl_library(ui_fsmenu
     logic_single_player_game_settings
     logic_training_wheels
     logic_tribe_basic_info
+    map_io
     map_io_map_loader
     network
     scripting_coroutine
