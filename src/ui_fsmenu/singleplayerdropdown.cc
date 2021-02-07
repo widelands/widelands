@@ -301,7 +301,7 @@ void SinglePlayerStartTypeDropdown::fill() {
 			tags = map.get_tags();
 		}
 	}
-	
+
 	for (size_t i = 0; i < tribeinfo.initializations.size(); ++i) {
 		const Widelands::TribeBasicInfo::Initialization& addme = tribeinfo.initializations[i];
 		bool matches_tags = true;

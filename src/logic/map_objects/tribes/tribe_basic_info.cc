@@ -60,7 +60,8 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 				}
 			}
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
-			                                         script_table->get_string("tooltip"), tags, incompatible_wc));
+			                                         script_table->get_string("tooltip"), tags,
+			                                         incompatible_wc));
 		}
 		for (const auto& pair : AddOns::g_addons) {
 			if (pair.first.category == AddOns::AddOnCategory::kStartingCondition) {
@@ -86,9 +87,9 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 						incompatible_wc.insert(w->get_string(key));
 					}
 				}
-				initializations.push_back(Initialization(script_path, script_table->get_string("descname"),
-				                                         script_table->get_string("tooltip"), tags,
-				                                         incompatible_wc));
+				initializations.push_back(
+				   Initialization(script_path, script_table->get_string("descname"),
+				                  script_table->get_string("tooltip"), tags, incompatible_wc));
 			}
 		}
 	} catch (const WException& e) {
