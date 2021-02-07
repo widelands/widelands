@@ -46,10 +46,17 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
 			std::set<std::string> tags;
+			std::set<std::string> incompatible_wc;
 			if (script_table->has_key("map_tags")) {
 				std::unique_ptr<LuaTable> t = script_table->get_table("map_tags");
 				for (int key : t->keys<int>()) {
 					tags.insert(t->get_string(key));
+				}
+			}
+			if (script_table->has_key("incompatible_wc")) {
+				std::unique_ptr<LuaTable> w = script_table->get_table("incompatible_wc");
+				for (int key : w->keys<int>()) {
+					incompatible_wc.insert(w->get_string(key));
 				}
 			}
 			initializations.push_back(Initialization(script_path, script_table->get_string("descname"),

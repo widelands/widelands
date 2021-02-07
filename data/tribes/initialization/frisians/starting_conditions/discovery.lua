@@ -12,6 +12,7 @@ init = {
    -- TRANSLATORS: This is the tooltip for the "Discovery" starting condition
    tooltip = _"Start the game with three ships on the ocean and only a handful of supplies",
    map_tags = {"seafaring"},
+   incompatible_wc = {"HQ Hunter"},
 
    func = function(player, shared_in_start)
 
