@@ -35,13 +35,13 @@ struct TribeBasicInfo {
 		Initialization(const std::string& init_script,
 		               const std::string& init_descname,
 		               const std::string& init_tooltip,
-		               const std::set<std::string>& tags),
-		               const std::set<std::string>& incompatible_wc),
+		               const std::set<std::string>& tags,
+		               const std::set<std::string>& incompatible_wc)
 		   : script(init_script),
 		     descname(init_descname),
 		     tooltip(init_tooltip),
 		     required_map_tags(tags),
-		     incompatible_win_conditions(incompatible_wc){
+		     incompatible_win_conditions(incompatible_wc) {
 		}
 		std::string script;
 		std::string descname;

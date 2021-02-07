@@ -311,10 +311,10 @@ void SinglePlayerStartTypeDropdown::fill() {
 				break;
 			}
 		}
-		bool commpatible_wc = true;
+		bool compatible_wc = true;
 		for (const std::string& wc : addme.incompatible_win_conditions) {
-			if (wc == settings_->get_win_condition_script()) {
-				commpatible_wc = false;
+			if (wc == win_condition_dropdown_.get_selected()) { // NOCOM: How to correctly access this?
+				compatible_wc = false;
 				break;
 			}
 		}
