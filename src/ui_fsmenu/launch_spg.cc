@@ -106,6 +106,7 @@ void LaunchSPG::enforce_player_names_and_tribes(const Widelands::Map& map) {
 
 void LaunchSPG::win_condition_selected() {
 	if (win_condition_dropdown_.has_selection()) {
+		settings_.set_win_condition_script(win_condition_dropdown_.get_selected());
 		last_win_condition_ = win_condition_dropdown_.get_selected();
 
 		std::unique_ptr<LuaTable> t = lua_->run_script(last_win_condition_);
