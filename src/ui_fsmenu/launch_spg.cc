@@ -112,6 +112,7 @@ void LaunchSPG::win_condition_selected() {
 		t->do_not_warn_about_unaccessed_keys();
 		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
+		player_setup_.update();
 	}
 }
 

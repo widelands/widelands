@@ -470,7 +470,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				}
 				bool compatible_wc = true;
 				for (const std::string& wc : addme.incompatible_win_conditions) {
-					if (wc == settings_->settings().win_condition_script) {
+					if (wc == settings_->get_win_condition_script()) {
 						compatible_wc = false;
 						break;
 					}
