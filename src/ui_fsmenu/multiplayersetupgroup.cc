@@ -468,7 +468,14 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 						break;
 					}
 				}
-				if (matches_tags) {
+				bool compatible_wc = true;
+				for (const std::string& wc : addme.incompatible_win_conditions) {
+					if (wc == settings_->settings().win_condition_script) {
+						compatible_wc = false;
+						break;
+					}
+				}
+				if (matches_tags && compatible_wc) {
 					init_dropdown_.add(_(addme.descname), i, nullptr,
 					                   i == player_setting.initialization_index, _(addme.tooltip));
 				}
