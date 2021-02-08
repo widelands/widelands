@@ -256,6 +256,9 @@ AddOnInfo preload_addon(const std::string& name) {
 	const std::string unlocalized_author = s.get_safe_untranslated_string("author");
 
 	AddOnInfo i = {name,
+	               unlocalized_descname,
+	               unlocalized_description,
+	               unlocalized_author,
 	               [name, unlocalized_descname]() {
 		               i18n::AddOnTextdomain td(name);
 		               return i18n::translate(unlocalized_descname);
