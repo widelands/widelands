@@ -59,12 +59,14 @@ local r = {
       _calc_points()
       local msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body
 
+      push_textdomain("win_conditions")
       for idx,plr in ipairs(plrs) do
          local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number]))
                :format(playerpoints[plr.number])
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
          msg = msg .. p(_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
       end
+      pop_textdomain()
 
       broadcast(plrs, game_status.title, msg, {popup = show_popup})
    end
@@ -77,6 +79,7 @@ local r = {
       end
       table.sort(points, function(a,b) return a[2] < b[2] end)
 
+      push_textdomain("win_conditions")
       local msg = vspace(8) .. game_status.body
       for idx,plr in ipairs(plrs) do
          msg = msg .. vspace(8)
@@ -89,6 +92,7 @@ local r = {
             :format(playerpoints[points[#points][1].number])
       -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
       msg = msg ..  h3(_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
+      pop_textdomain()
 
       local privmsg = ""
       for i=1,#points-1 do

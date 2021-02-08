@@ -83,9 +83,10 @@ Quantity MilitarySite::SoldierControl::soldier_capacity() const {
 void MilitarySite::SoldierControl::set_soldier_capacity(uint32_t const capacity) {
 	assert(min_soldier_capacity() <= capacity);
 	assert(capacity <= max_soldier_capacity());
-	assert(military_site_->capacity_ != capacity);
-	military_site_->capacity_ = capacity;
-	military_site_->update_soldier_request();
+	if (military_site_->capacity_ != capacity) {
+		military_site_->capacity_ = capacity;
+		military_site_->update_soldier_request();
+	}
 }
 
 void MilitarySite::SoldierControl::drop_soldier(Soldier& soldier) {
@@ -379,7 +380,8 @@ void MilitarySite::update_statistics_string(std::string* s) {
 	// kNoOfStatisticsStringCases - 1].
 	auto read_capacity_string = [this](Quantity pres, Quantity stat, size_t idx) {
 		assert(idx < kNoOfStatisticsStringCases);
-		auto it = statistics_string_cache_[idx].find(pres);
+		std::tuple<int, int, int> cache_key(pres, stat, capacity_);
+		auto it = statistics_string_cache_[idx].find(cache_key);
 		if (it != statistics_string_cache_[idx].end()) {
 			return it->second;
 		} else {
@@ -395,7 +397,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 					cr->push_arg(capacity_);
 					cr->resume();
 					std::string new_string = cr->pop_string();
-					statistics_string_cache_[idx].insert(std::make_pair(stat, new_string));
+					statistics_string_cache_[idx].insert(std::make_pair(cache_key, new_string));
 					return new_string;
 				} catch (LuaError& err) {
 					log_err("Failed to read soldier capacity for building '%s': %s",

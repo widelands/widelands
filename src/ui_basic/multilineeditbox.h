@@ -42,6 +42,8 @@ struct MultilineEditbox : public Panel {
 
 	void focus(bool topcaller = true) override;
 
+	void layout() override;
+
 protected:
 	void draw(RenderTarget&) override;
 
@@ -56,6 +58,9 @@ private:
 	void select_until(uint32_t end) const;
 	struct Data;
 	std::unique_ptr<Data> d_;
+	void set_caret_to_cursor_pos(int32_t x, int32_t y);
+	int calculate_text_width(std::string& text, int pos) const;
+	int approximate_cursor(std::string& line, int32_t cursor_pos_x, int approx_caret_pos) const;
 };
 }  // namespace UI
 

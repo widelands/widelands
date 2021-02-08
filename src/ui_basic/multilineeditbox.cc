@@ -90,6 +90,8 @@ struct MultilineEditbox::Data {
 
 	void calculate_selection_boundaries(uint32_t& start, uint32_t& end);
 
+	uint32_t snap_to_char(std::string& txt, uint32_t cursor);
+
 private:
 	MultilineEditbox& owner;
 };
@@ -156,6 +158,11 @@ void MultilineEditbox::Data::draw(RenderTarget& dst, bool with_caret) {
 	        mode == Data::Mode::kSelection, start, end, scrollbar.get_scrollpos(), caret_image_path);
 }
 
+void MultilineEditbox::layout() {
+	Panel::layout();
+	d_->scrollbar.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
+}
+
 /**
  * Return the text currently stored by the editbox.
  */
@@ -176,7 +183,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
 	}
 
-	d_->set_cursor_pos(0);
+	d_->set_cursor_pos(d_->text.size());
 	d_->update();
 	d_->scroll_cursor_into_view();
 
@@ -223,7 +230,6 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
  * Find the starting byte of the next character
  */
 uint32_t MultilineEditbox::Data::next_char(uint32_t cursor) {
-	assert(cursor <= text.size());
 
 	if (cursor >= text.size()) {
 		return cursor;
@@ -246,15 +252,64 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 	return cursor;
 }
 
+uint32_t MultilineEditbox::Data::snap_to_char(std::string& txt, uint32_t cursor) {
+	while (cursor > 0 && Utf8::is_utf8_extended(txt[cursor])) {
+		--cursor;
+	}
+	return cursor;
+}
+
 /**
  * The mouse was clicked on this editbox
  */
-bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		set_caret_to_cursor_pos(x, y);
 		focus();
 		return true;
 	}
 	return false;
+}
+void MultilineEditbox::set_caret_to_cursor_pos(int32_t x, int32_t y) {
+	y += d_->scrollbar.get_scrollpos();
+
+	unsigned previous_line_index = d_->ww.offset_of_line_at(y);
+
+	std::string line = d_->ww.text_of_line_at(y);
+	int total_line_width = d_->ww.text_width_of(line);
+
+	if (x > total_line_width) {
+		// clicked end of line
+		d_->set_cursor_pos(previous_line_index + line.size());
+		return;
+	}
+	int current_line_index = approximate_cursor(line, x, 0);
+
+	d_->set_cursor_pos(previous_line_index + current_line_index);
+}
+
+int MultilineEditbox::approximate_cursor(std::string& line,
+                                         int32_t cursor_pos_x,
+                                         int approx_caret_pos) const {
+	static constexpr int error = 4;
+
+	// approximate using the first guess as start and increasing/decreasing text until error is small
+	int text_w = calculate_text_width(line, approx_caret_pos);
+	if (cursor_pos_x > text_w) {
+		while (cursor_pos_x - text_w > error) {
+			text_w = calculate_text_width(line, ++approx_caret_pos);
+		}
+	} else if (cursor_pos_x < text_w) {
+		while (text_w - cursor_pos_x > error) {
+			text_w = calculate_text_width(line, --approx_caret_pos);
+		}
+	}
+	return d_->snap_to_char(line, approx_caret_pos);
+}
+
+int MultilineEditbox::calculate_text_width(std::string& text, int pos) const {
+	std::string prefix = text.substr(0, d_->snap_to_char(text, pos));
+	return d_->ww.text_width_of(prefix);
 }
 
 /**
