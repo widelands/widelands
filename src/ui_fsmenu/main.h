@@ -22,14 +22,49 @@
 
 #include <memory>
 
+#include "logic/map_revision.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_fsmenu/menu.h"
-#include "ui_fsmenu/menu_target.h"
+#include "wui/mapdata.h"
 
 namespace FsMenu {
+
+enum class MenuTarget {
+	kBack = static_cast<int>(UI::Panel::Returncodes::kBack),
+	kOk = static_cast<int>(UI::Panel::Returncodes::kOk),
+
+	// Options
+	kApplyOptions,
+
+	// Main menu
+	kTutorial,
+	kContinueLastsave,
+	kReplay,
+	kOptions,
+	kAddOns,
+	kAbout,
+	kExit,
+
+	// Single player
+	kNewGame,
+	kRandomGame,
+	kCampaign,
+	kLoadGame,
+
+	// Multiplayer
+	kMetaserver,
+	kOnlineGameSettings,
+	kLan,
+
+	// Editor
+	kEditorNew,
+	kEditorRandom,
+	kEditorContinue,
+	kEditorLoad,
+};
 
 /**
  * This runs the main menu. There, you can select
@@ -58,6 +93,9 @@ public:
 	int16_t calc_desired_window_y(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_width(UI::Window::WindowLayoutID);
 	int16_t calc_desired_window_height(UI::Window::WindowLayoutID);
+
+	using MapEntry = std::pair<MapData, Widelands::MapVersion>;
+	static void find_maps(const std::string& directory, std::vector<MapEntry>& results);
 
 protected:
 	void update_template() override;

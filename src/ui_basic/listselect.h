@@ -67,7 +67,8 @@ struct BaseListselect : public Panel {
 	         const Image* pic,
 	         const bool select_this,
 	         const std::string& tooltip_text,
-	         const std::string& hotkey);
+	         const std::string& hotkey,
+	         const unsigned indent);
 
 	void remove(uint32_t);
 	void remove(const char* name);
@@ -133,6 +134,7 @@ private:
 		                     const Image* init_pic,
 		                     const std::string& tooltip_text,
 		                     const std::string& hotkey_text,
+		                     const unsigned indent,
 		                     const UI::TableStyleInfo& style);
 
 		const std::string name;
@@ -141,6 +143,7 @@ private:
 		const std::string tooltip;
 		const Align name_alignment;
 		const Align hotkey_alignment;
+		const unsigned indent;
 		std::shared_ptr<const UI::RenderedText> rendered_name;
 		std::shared_ptr<const UI::RenderedText> rendered_hotkey;
 	};
@@ -183,9 +186,11 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string()) {
+	         const std::string& hotkey = std::string(),
+	         const unsigned indent = 0) {
 		entry_cache_.push_back(value);
-		BaseListselect::add(name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey);
+		BaseListselect::add(
+		   name, entry_cache_.size() - 1, pic, select_this, tooltip_text, hotkey, indent);
 	}
 
 	const Entry& operator[](uint32_t const i) const {
@@ -225,8 +230,9 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string(),
-	         const std::string& hotkey = std::string()) {
-		Base::add(name, &value, pic, select_this, tooltip_text, hotkey);
+	         const std::string& hotkey = std::string(),
+	         const unsigned indent = 0) {
+		Base::add(name, &value, pic, select_this, tooltip_text, hotkey, indent);
 	}
 
 	Entry& operator[](uint32_t const i) const {
