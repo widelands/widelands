@@ -23,6 +23,8 @@
 #include <iomanip>
 #include <memory>
 
+#include <SDL.h>
+
 #include "base/i18n.h"
 #include "base/log.h"
 #include "graphic/image_cache.h"
@@ -33,6 +35,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_basic/progressbar.h"
+#include "ui_fsmenu/addons_packager.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 
@@ -40,6 +43,9 @@ namespace FsMenu {
 
 constexpr int16_t kRowButtonSize = 32;
 constexpr int16_t kRowButtonSpacing = 4;
+
+constexpr const char* const kSubmitAddOnsURL = "https://www.widelands.org/forum/topic/5073/";
+constexpr const char* const kDocumentationURL = "https://www.widelands.org/documentation/add-ons/";
 
 // UI::Box by defaults limits its size to the window resolution. We use scrollbars,
 // so we can and need to allow somewhat larger dimensions.
@@ -166,6 +172,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                         UI::Box::Vertical,
                         kHugeSize,
                         kHugeSize),
+     dev_box_(&tabs_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      filter_name_(&browse_addons_buttons_inner_box_1_, 0, 0, 100, UI::PanelStyle::kFsMenu),
      filter_verified_(&browse_addons_buttons_inner_box_2_,
                       UI::PanelStyle::kFsMenu,
@@ -261,7 +268,91 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
                   kRowButtonSize,
                   UI::ButtonStyle::kFsMenuSecondary,
                   g_image_cache->get("images/ui_basic/scrollbar_down_fast.png"),
-                  _("Move selected add-on to bottom")) {
+                  _("Move selected add-on to bottom")),
+     launch_packager_(&dev_box_,
+                      "packager",
+                      0,
+                      0,
+                      0,
+                      0,
+                      UI::ButtonStyle::kFsMenuSecondary,
+                      _("Launch the add-ons packager…")) {
+
+	dev_box_.add(
+	   new UI::Textarea(&dev_box_, UI::PanelStyle::kFsMenu, UI::FontStyle::kFsMenuInfoPanelHeading,
+	                    _("Tools for Add-Ons Developers"), UI::Align::kCenter),
+	   UI::Box::Resizing::kFullSize);
+	dev_box_.add_space(kRowButtonSize);
+	{
+		UI::MultilineTextarea* m = new UI::MultilineTextarea(
+		   &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu, "", UI::Align::kLeft,
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		m->set_style(UI::FontStyle::kFsMenuInfoPanelParagraph);
+		m->set_text(_("The interactive add-ons packager allows you to create, edit, and delete "
+		              "add-ons. You can bundle maps designed with the Widelands Map Editor as an "
+		              "add-on using the graphical interface and share them with other players, "
+		              "without having to write a single line of code."));
+		dev_box_.add(m, UI::Box::Resizing::kFullSize);
+	}
+	dev_box_.add_space(kRowButtonSpacing);
+	dev_box_.add(&launch_packager_);
+	dev_box_.add_space(kRowButtonSize);
+	auto underline_tag = [](const std::string& text) {
+		std::string str = "<font underline=true>";
+		str += text;
+		str += "</font>";
+		return str;
+	};
+	dev_box_.add(
+	   new UI::MultilineTextarea(
+	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      (boost::format("<rt><p>%1$s</p></rt>") %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             (boost::format(_("Uploading add-ons to the server from within Widelands is not "
+	                              "implemented yet. To upload your add-ons, please zip the add-on "
+	                              "directory in your file browser, then open our add-on submission "
+	                              "website %s in your browser and attach the zip file.")) %
+	              underline_tag(kSubmitAddOnsURL))
+	                .str()))
+	         .str(),
+	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
+	auto add_button = [this](const std::string& url) {
+		UI::Button* b =
+		   new UI::Button(&dev_box_, "url", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+#if SDL_VERSION_ATLEAST(2, 0, 14)
+		                  _("Open Link")
+#else
+		                  _("Copy Link")
+#endif
+		   );
+		b->sigclicked.connect([url]() {
+#if SDL_VERSION_ATLEAST(2, 0, 14)
+			SDL_OpenURL(url.c_str());
+#else
+			SDL_SetClipboardText(url.c_str());
+#endif
+		});
+		dev_box_.add(b);
+	};
+	add_button(kSubmitAddOnsURL);
+	dev_box_.add_space(kRowButtonSize);
+	dev_box_.add(
+	   new UI::MultilineTextarea(
+	      &dev_box_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu,
+	      (boost::format("<rt><p>%1$s</p></rt>") %
+	       g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+	          .as_font_tag(
+	             (boost::format(_("For more information regarding how to develop and package your "
+	                              "own add-ons, please visit %s.")) %
+	              underline_tag(kDocumentationURL))
+	                .str()))
+	         .str(),
+	      UI::Align::kLeft, UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	   UI::Box::Resizing::kFullSize);
+	add_button(kDocumentationURL);
+
 	installed_addons_buttons_box_.add(&move_top_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	installed_addons_buttons_box_.add_space(kRowButtonSpacing);
 	installed_addons_buttons_box_.add(&move_up_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
@@ -283,6 +374,7 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 	browse_addons_inner_wrapper_.add(&browse_addons_box_, UI::Box::Resizing::kExpandBoth);
 	tabs_.add("my", "", &installed_addons_outer_wrapper_);
 	tabs_.add("all", "", &browse_addons_outer_wrapper_);
+	tabs_.add("all", _("Development"), &dev_box_);
 
 	/** TRANSLATORS: Sort add-ons alphabetically by name */
 	sort_order_.add(_("Name"), AddOnSortingCriteria::kNameABC);
@@ -454,6 +546,14 @@ AddOnsCtrl::AddOnsCtrl(MainMenu& fsmm, UI::UniqueWindow::Registry& reg)
 		focus_installed_addon_row(info);
 	});
 
+	launch_packager_.sigclicked.connect([this, &fsmm]() {
+		AddOnsPackager a(fsmm, *this);
+		a.run<int>();
+
+		// Perhaps add-ons were created or deleted
+		rebuild();
+	});
+
 	buttons_box_.add_space(kRowButtonSpacing);
 	buttons_box_.add(&upgrade_all_, UI::Box::Resizing::kExpandBoth);
 	buttons_box_.add_space(kRowButtonSpacing);
@@ -573,32 +673,33 @@ void AddOnsCtrl::refresh_remotes() {
 	try {
 		remotes_ = network_handler_.refresh_remotes();
 	} catch (const std::exception& e) {
-		std::string error = e.what();
+		const std::string title = _("Server Connection Error");
 		/** TRANSLATORS: This will be inserted into the string "Server Connection Error <br> by %s" */
 		const std::string bug = _("a networking bug");
-		remotes_ = {AddOns::AddOnInfo{
-		   "",
-		   []() { return _("Server Connection Error"); },
-		   [error]() {
-			   return (boost::format(_("Unable to fetch the list of available add-ons from "
-			                           "the server!<br>Error Message: %s")) %
-			           error)
-			      .str();
-		   },
-		   [bug]() { return bug; },
-		   {},
-		   0,
-		   AddOns::AddOnCategory::kNone,
-		   {},
-		   false,
-		   {{}, {}, {}, {}},
-		   {},
-		   0,
-		   bug,
-		   std::time(nullptr),
-		   0,
-		   {},
-		   {}}};
+		const std::string err = (boost::format(_("Unable to fetch the list of available add-ons from "
+		                                         "the server!<br>Error Message: %s")) %
+		                         e.what())
+		                           .str();
+		remotes_ = {AddOns::AddOnInfo{"",
+		                              title,
+		                              err,
+		                              bug,
+		                              [title]() { return title; },
+		                              [err]() { return err; },
+		                              [bug]() { return bug; },
+		                              {},
+		                              0,
+		                              AddOns::AddOnCategory::kNone,
+		                              {},
+		                              false,
+		                              {{}, {}, {}, {}},
+		                              {},
+		                              0,
+		                              bug,
+		                              std::time(nullptr),
+		                              0,
+		                              {},
+		                              {}}};
 	}
 	rebuild();
 }
@@ -884,6 +985,15 @@ void AddOnsCtrl::layout() {
 	UI::Window::layout();
 }
 
+bool AddOnsCtrl::is_remote(const std::string& name) const {
+	for (const AddOns::AddOnInfo& r : remotes_) {
+		if (r.internal_name == name) {
+			return true;
+		}
+	}
+	return false;
+}
+
 inline void AddOnsCtrl::inform_about_restart(const std::string& name) {
 	UI::WLMessageBox w(this, UI::WindowStyle::kFsMenu, _("Note"),
 	                   (boost::format(_("Please restart Widelands before you use the add-on ‘%s’, "
@@ -1148,16 +1258,24 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 	return result;
 }
 
-static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info) {
+static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const bool local) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {
 		UI::WLMessageBox w(
 		   ctrl, UI::WindowStyle::kFsMenu, _("Uninstall"),
-		   (boost::format(_("Are you certain that you want to uninstall this add-on?\n\n"
-		                    "%1$s\n"
-		                    "by %2$s\n"
-		                    "Version %3$s\n"
-		                    "Category: %4$s\n"
-		                    "%5$s\n")) %
+		   (boost::format(local ?
+		                     _("Are you certain that you want to uninstall this add-on?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "Version %3$s\n"
+		                       "Category: %4$s\n"
+		                       "%5$s\n\n"
+		                       "Note that this add-on can not be downloaded again from the server.") :
+		                     _("Are you certain that you want to uninstall this add-on?\n\n"
+		                       "%1$s\n"
+		                       "by %2$s\n"
+		                       "Version %3$s\n"
+		                       "Category: %4$s\n"
+		                       "%5$s")) %
 		    info.descname() % info.author() % AddOns::version_to_string(info.version) %
 		    AddOns::kAddOnCategories.at(info.category).descname() % info.description())
 		      .str(),
@@ -1343,7 +1461,8 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               .as_font_tag(info.description()))
              .str()) {
 
-	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info); });
+	uninstall_.sigclicked.connect(
+	   [ctrl, info]() { uninstall(ctrl, info, !ctrl->is_remote(info.internal_name)); });
 	if (toggle_enabled_) {
 		toggle_enabled_->sigclicked.connect([this, ctrl, info]() {
 			enabled_ = !enabled_;
@@ -1835,7 +1954,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
 		RemoteInteractionWindow m(*ctrl, info);
 		m.run<UI::Panel::Returncodes>();
 	});
-	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info); });
+	uninstall_.sigclicked.connect([ctrl, info]() { uninstall(ctrl, info, false); });
 	install_.sigclicked.connect([ctrl, info]() {
 		// Ctrl-click skips the confirmation. Never skip for non-verified stuff though.
 		if (!info.verified || !(SDL_GetModState() & KMOD_CTRL)) {

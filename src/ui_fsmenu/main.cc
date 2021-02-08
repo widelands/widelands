@@ -53,7 +53,6 @@
 #include "ui_fsmenu/scenario_select.h"
 #include "wlapplication.h"
 #include "wlapplication_options.h"
-#include "wui/mapdata.h"
 #include "wui/savegameloader.h"
 
 namespace FsMenu {
@@ -257,8 +256,7 @@ void MainMenu::become_modal_again(UI::Panel& prevmodal) {
 	}
 }
 
-using MapEntry = std::pair<MapData, Widelands::MapVersion>;
-static void find_maps(const std::string& directory, std::vector<MapEntry>& results) {
+void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& results) {
 	Widelands::Map map;
 	for (const std::string& file : g_fs->list_directory(directory)) {
 		std::unique_ptr<Widelands::MapLoader> ml = map.get_correct_loader(file);
