@@ -540,6 +540,9 @@ bool MainMenu::handle_key(const bool down, const SDL_Keysym code) {
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuLobby, MenuTarget::kMetaserver)) {
 			return true;
 		}
+		if (check_match_shortcut(KeyboardShortcut::kMainMenuLAN, MenuTarget::kLan)) {
+			return true;
+		}
 		if (check_match_shortcut(KeyboardShortcut::kMainMenuAddons, MenuTarget::kAddOns)) {
 			return true;
 		}
