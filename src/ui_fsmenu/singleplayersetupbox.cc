@@ -140,8 +140,8 @@ void SinglePlayerActivePlayerGroup::update() {
 		tribe_.rebuild();
 		start_type.rebuild();
 		teams_.rebuild();
+		tribe_.set_enabled(!settings.scenario);
 	}
-	tribe_.set_enabled(!settings.scenario);
 }
 
 SinglePlayerSetupBox::SinglePlayerSetupBox(UI::Panel* const parent,
