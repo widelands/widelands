@@ -56,6 +56,8 @@ wl_library(ui_basic
     tabpanel.h
     textarea.cc
     textarea.h
+    text_prompt.cc
+    text_prompt.h
     unique_window.cc
     unique_window.h
     window.cc
