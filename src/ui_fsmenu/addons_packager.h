@@ -20,7 +20,10 @@
 #ifndef WL_UI_FSMENU_ADDONS_PACKAGER_H
 #define WL_UI_FSMENU_ADDONS_PACKAGER_H
 
+#include <memory>
+
 #include "logic/addons.h"
+#include "logic/addon.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_fsmenu/main.h"
@@ -29,23 +32,10 @@ namespace FsMenu {
 
 class AddOnsCtrl;
 
-// Holds abstract information about add-ons, designed to be changed quickly and later written to
-// disk
-struct MutableAddOn {
-	std::string internal_name, descname, description, author, version;
-	AddOns::AddOnCategory category;
-
-	// For Map Set add-ons only:
-	struct DirectoryTree {
-		std::map<std::string /* file name in add-on */, std::string /* path of source map */> maps;
-		std::map<std::string, DirectoryTree> subdirectories;
-	};
-	DirectoryTree tree;
-};
-
 class AddOnsPackager : public UI::Window {
 public:
 	explicit AddOnsPackager(MainMenu&, AddOnsCtrl&);
+	~AddOnsPackager();
 
 	WindowLayoutID window_layout_id() const override {
 		return UI::Window::WindowLayoutID::kFsMenuDefault;
@@ -69,20 +59,20 @@ private:
 	   map_add_dir_, map_delete_;
 	UI::Listselect<std::string> addons_, dirstruct_, my_maps_;
 
-	std::map<std::string /* internal name */, MutableAddOn> mutable_addons_;
+	std::map<std::string /* internal name */, AddOns::Addon*> mutable_addons_;
 	void initialize_mutable_addons();
-	void recursively_initialize_tree_from_disk(const std::string& dir, MutableAddOn::DirectoryTree&);
+	void recursively_initialize_tree_from_disk(const std::string& dir, AddOns::MapsAddon::DirectoryTree&);
 
-	MutableAddOn* get_selected();
+	AddOns::Addon* get_selected();
 
 	void rebuild_addon_list(const std::string& select);
 	void addon_selected();
-	void rebuild_dirstruct(MutableAddOn&, const std::vector<std::string>& select = {});
+	void rebuild_dirstruct(AddOns::Addon*, const std::vector<std::string>& select = {});
 	// To keep track of which selection index in `dirstruct_`
 	// refers to which point of the file system hierarchy:
 	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
 
-	void do_recursively_rebuild_dirstruct(const MutableAddOn::DirectoryTree&,
+	void do_recursively_rebuild_dirstruct(const AddOns::MapsAddon::DirectoryTree *,
 	                                      unsigned level,
 	                                      const std::string& path,
 	                                      const std::vector<std::string>& map_path,

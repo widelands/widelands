@@ -28,6 +28,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "io/profile.h"
+#include "logic/addon.h"
 #include "logic/filesystem_constants.h"
 #include "map_io/map_elemental_packet.h"
 #include "ui_basic/messagebox.h"
@@ -299,6 +300,13 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	center_to_parent();
 }
 
+AddOnsPackager::~AddOnsPackager()
+{
+	for (auto pair : mutable_addons_) {
+		delete pair.second;
+	}
+}
+
 bool AddOnsPackager::handle_key(const bool down, const SDL_Keysym code) {
 	if (down && (code.sym == SDLK_KP_ENTER || code.sym == SDLK_RETURN)) {
 		die();
@@ -315,57 +323,38 @@ void AddOnsPackager::layout() {
 }
 
 void AddOnsPackager::initialize_mutable_addons() {
+	for (auto pair : mutable_addons_) {
+		delete pair.second;
+	}
 	mutable_addons_.clear();
 	addons_with_changes_.clear();
 
 	for (const AddOns::AddOnState& a : AddOns::g_addons) {
-		MutableAddOn m{a.first.internal_name,
-		               a.first.unlocalized_descname,
-		               a.first.unlocalized_description,
-		               a.first.unlocalized_author,
-		               AddOns::version_to_string(a.first.version, false),
-		               a.first.category,
-		               {{}, {}}};
-		if (a.first.category == AddOns::AddOnCategory::kMaps) {
-			recursively_initialize_tree_from_disk(
-			   kAddOnDir + FileSystem::file_separator() + a.first.internal_name, m.tree);
-		}
-		mutable_addons_[a.first.internal_name] = m;
+		mutable_addons_[a.first.internal_name] = AddOns::create_mutable_addon(a.first);
 	}
 
 	rebuild_addon_list("");
 	check_for_unsaved_changes();
 }
 
-void AddOnsPackager::recursively_initialize_tree_from_disk(const std::string& dir,
-                                                           MutableAddOn::DirectoryTree& tree) {
-	for (const std::string& file : g_fs->list_directory(dir)) {
-		if (FileSystem::filename_ext(file) == kWidelandsMapExtension) {
-			tree.maps[FileSystem::fs_filename(file.c_str())] = file;
-		} else if (g_fs->is_directory(file)) {
-			MutableAddOn::DirectoryTree child;
-			recursively_initialize_tree_from_disk(file, child);
-			tree.subdirectories[FileSystem::fs_filename(file.c_str())] = child;
-		}
-	}
-}
+
 
 void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 	addons_.clear();
 	for (const auto& pair : mutable_addons_) {
 		addons_.add(pair.first, pair.first,
-		            g_image_cache->get(AddOns::kAddOnCategories.at(pair.second.category).icon),
+		            g_image_cache->get(AddOns::kAddOnCategories.at(pair.second->get_category()).icon),
 		            pair.first == select);
 	}
 	addon_selected();
 }
 
-inline MutableAddOn* AddOnsPackager::get_selected() {
-	return addons_.has_selection() ? &mutable_addons_.at(addons_.get_selected()) : nullptr;
+inline AddOns::Addon* AddOnsPackager::get_selected() {
+	return addons_.has_selection() ? mutable_addons_.at(addons_.get_selected()) : nullptr;
 }
 
 void AddOnsPackager::addon_selected() {
-	MutableAddOn* selected = get_selected();
+	AddOns::Addon* selected = get_selected();
 
 	addon_delete_.set_enabled(selected);
 	box_right_subbox_header_hbox_.set_visible(false);
@@ -378,22 +367,22 @@ void AddOnsPackager::addon_selected() {
 	box_right_subbox_header_hbox_.set_visible(true);
 
 	update_in_progress_ = true;
-	name_.set_text(selected->descname);
-	descr_.set_text(selected->description);
-	author_.set_text(selected->author);
-	version_.set_text(selected->version);
+	name_.set_text(selected->get_descname());
+	descr_.set_text(selected->get_description());
+	author_.set_text(selected->get_author());
+	version_.set_text(selected->get_version());
 	update_in_progress_ = false;
 
-	if (selected->category != AddOns::AddOnCategory::kMaps) {
+	if (selected->get_category() != AddOns::AddOnCategory::kMaps) {
 		return;
 	}
 
 	box_right_subbox_maps_dirstruct_hbox_.set_visible(true);
-	rebuild_dirstruct(*selected);
+	rebuild_dirstruct(selected);
 }
 
-void AddOnsPackager::rebuild_dirstruct(MutableAddOn& a, const std::vector<std::string>& select) {
-	const std::string path = kAddOnDir + FileSystem::file_separator() + a.internal_name;
+void AddOnsPackager::rebuild_dirstruct(AddOns::Addon* a, const std::vector<std::string>& select) {
+	const std::string path = kAddOnDir + FileSystem::file_separator() + a->get_internal_name();
 
 	dirstruct_.clear();
 	dirstruct_to_tree_map_.clear();
@@ -401,17 +390,18 @@ void AddOnsPackager::rebuild_dirstruct(MutableAddOn& a, const std::vector<std::s
 	std::vector<std::string> toplevel_entry;
 	dirstruct_to_tree_map_.push_back(toplevel_entry);
 
-	dirstruct_.add(a.internal_name, path, g_image_cache->get("images/ui_basic/ls_wlscenario.png"),
+	dirstruct_.add(a->get_internal_name(), path, g_image_cache->get("images/ui_basic/ls_wlscenario.png"),
 	               toplevel_entry == select, _("Top-level directory"));
-	do_recursively_rebuild_dirstruct(a.tree, 1, path, toplevel_entry, select);
+	assert(a->get_category() == AddOns::AddOnCategory::kMaps);
+	do_recursively_rebuild_dirstruct(dynamic_cast<AddOns::MapsAddon*>(a)->get_tree(), 1, path, toplevel_entry, select);
 }
 
-void AddOnsPackager::do_recursively_rebuild_dirstruct(const MutableAddOn::DirectoryTree& tree,
+void AddOnsPackager::do_recursively_rebuild_dirstruct(const AddOns::MapsAddon::DirectoryTree* tree,
                                                       const unsigned level,
                                                       const std::string& path,
                                                       const std::vector<std::string>& map_path,
                                                       const std::vector<std::string>& select) {
-	for (const auto& pair : tree.subdirectories) {
+	for (const auto& pair : tree->subdirectories) {
 		std::vector<std::string> entry = map_path;
 		entry.push_back(pair.first);
 		dirstruct_to_tree_map_.push_back(entry);
@@ -420,10 +410,10 @@ void AddOnsPackager::do_recursively_rebuild_dirstruct(const MutableAddOn::Direct
 		dirstruct_.add(pair.first, subdir, g_image_cache->get("images/ui_basic/ls_dir.png"),
 		               entry == select, pair.first, "", level);
 
-		do_recursively_rebuild_dirstruct(pair.second, level + 1, subdir, entry, select);
+		do_recursively_rebuild_dirstruct(&pair.second, level + 1, subdir, entry, select);
 	}
 
-	for (const auto& pair : tree.maps) {
+	for (const auto& pair : tree->maps) {
 		std::vector<std::string> entry = map_path;
 		entry.push_back(pair.first);
 		dirstruct_to_tree_map_.push_back(entry);
@@ -440,12 +430,9 @@ void AddOnsPackager::current_addon_edited() {
 	}
 
 	const std::string& sel = addons_.get_selected();
-	MutableAddOn& m = mutable_addons_.at(sel);
+	AddOns::Addon* m = mutable_addons_.at(sel);
 
-	m.descname = name_.text();
-	m.author = author_.text();
-	m.version = version_.text();
-	m.description = descr_.get_text();
+	m->update_info(name_.text(), author_.text(), descr_.get_text(), version_.text());
 
 	addons_with_changes_[sel] = false;
 	check_for_unsaved_changes();
@@ -499,10 +486,20 @@ void AddOnsPackager::clicked_new_addon() {
 			continue;
 		}
 
-		mutable_addons_[name] = MutableAddOn{
-		   // These default strings are not localized because these editboxes are meant to be
-		   // filled out in English. We will add localization markup to the resulting config file.
-		   name, n.text(), "No description", "Nobody", "1.0.0", category.get_selected(), {{}, {}}};
+		AddOns::AddOnInfo a {
+			// These default strings are not localized because these editboxes are meant to be
+			// filled out in English. We will add localization markup to the resulting config file.
+			name, n.text(), "No description", "Nobody", {}, {}, {}, {1, 0, 0}, 0, category.get_selected(), {}, false,
+			{{}, {}, {}, {}},
+			{},
+			0,
+			"",
+			0,
+			0,
+			{},
+			{}
+		};
+		mutable_addons_[name] = AddOns::create_mutable_addon(a);
 		addons_with_changes_[name] = false;
 		check_for_unsaved_changes();
 		rebuild_addon_list(name);
@@ -534,12 +531,12 @@ void AddOnsPackager::clicked_delete_addon() {
 }
 
 void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action) {
-	MutableAddOn* m = get_selected();
+	AddOns::Addon* m = get_selected();
 	assert(m);
-	assert(m->category == AddOns::AddOnCategory::kMaps);
+	assert(m->get_category() == AddOns::AddOnCategory::kMaps);
 
-	MutableAddOn::DirectoryTree* tree = &m->tree;
-	MutableAddOn::DirectoryTree* tree_parent = nullptr;
+	AddOns::MapsAddon::DirectoryTree* tree = dynamic_cast<AddOns::MapsAddon*>(m)->get_tree();
+	AddOns::MapsAddon::DirectoryTree* tree_parent = nullptr;
 	std::vector<std::string> select = dirstruct_to_tree_map_[dirstruct_.selection_index()];
 
 	std::string selected_map;
@@ -588,7 +585,7 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 				continue;
 			}
 
-			tree->subdirectories[name] = MutableAddOn::DirectoryTree();
+			tree->subdirectories[name] = AddOns::MapsAddon::DirectoryTree();
 			select.push_back(name);
 			break;
 		}
@@ -624,9 +621,9 @@ void AddOnsPackager::clicked_add_or_delete_map_or_dir(const ModifyAction action)
 	}
 	}
 
-	addons_with_changes_[m->internal_name] = false;
+	addons_with_changes_[m->get_internal_name()] = false;
 	check_for_unsaved_changes();
-	rebuild_dirstruct(*m, select);
+	rebuild_dirstruct(m, select);
 }
 
 void AddOnsPackager::die() {
@@ -721,184 +718,36 @@ void AddOnsPackager::clicked_write_changes() {
 	}
 }
 
-static void parse_map_requirements(const MutableAddOn::DirectoryTree& tree,
-                                   std::vector<std::string>& req) {
-	for (const auto& pair : tree.subdirectories) {
-		parse_map_requirements(pair.second, req);
-	}
-
-	// Place to save temp data
-	Widelands::Map map;
-	Widelands::MapElementalPacket packet;
-
-	for (const auto& pair : tree.maps) {
-		std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(pair.second));
-		assert(fs);
-
-		packet.pre_read(*fs, &map);
-
-		for (const auto& r : map.required_addons()) {
-			if (std::find(req.begin(), req.end(), r.first) == req.end()) {
-				req.push_back(r.first);
-			}
-		}
-	}
-}
-
-static void do_recursively_copy_file_or_directory(const std::string& source,
-                                                  const std::string& dest) {
-	if (g_fs->is_directory(source)) {
-		g_fs->ensure_directory_exists(dest);
-		for (const std::string& file : g_fs->list_directory(source)) {
-			do_recursively_copy_file_or_directory(
-			   file, dest + FileSystem::file_separator() + FileSystem::fs_filename(file.c_str()));
-		}
-	} else {
-		FileRead fr;
-		fr.open(*g_fs, source);
-		const size_t bytes = fr.get_size();
-		std::unique_ptr<char[]> data(new char[bytes]);
-		fr.data_complete(data.get(), bytes);
-
-		FileWrite fw;
-		fw.data(data.get(), bytes);
-		fw.write(*g_fs, dest);
-	}
-}
-
-static void do_recursively_create_filesystem_structure(const std::string& dir,
-                                                       const MutableAddOn::DirectoryTree& tree,
-                                                       const std::string& addon_basedir,
-                                                       const std::string& backup_basedir) {
-	// Dirs
-	for (const auto& pair : tree.subdirectories) {
-		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
-		g_fs->ensure_directory_exists(subdir);
-		do_recursively_create_filesystem_structure(
-		   subdir, pair.second, addon_basedir, backup_basedir);
-	}
-
-	// Maps
-	for (const auto& pair : tree.maps) {
-		// If the filepath starts with the add-on's path, we need to use the backup instead
-		std::string source_path = pair.second;
-		if (source_path.size() >= addon_basedir.size() &&
-		    source_path.compare(0, addon_basedir.size(), addon_basedir) == 0) {
-			assert(!backup_basedir.empty());
-			std::string temp = source_path.substr(addon_basedir.size());
-			source_path = backup_basedir;
-			source_path += temp;
-		}
-		assert(source_path.size() > kWidelandsMapExtension.size());
-		assert(source_path.compare(source_path.size() - kWidelandsMapExtension.size(),
-		                           kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0);
-
-		do_recursively_copy_file_or_directory(
-		   source_path, dir + FileSystem::file_separator() + pair.first);
-	}
-}
-
 bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
-	MutableAddOn& m = mutable_addons_.at(addon);
+	AddOns::Addon* m = mutable_addons_.at(addon);
 
 	// Check that the version string is valid and beautify it
 	try {
-		AddOns::AddOnVersion v = AddOns::string_to_version(m.version);
-		m.version = AddOns::version_to_string(v, false);
+		AddOns::AddOnVersion v = AddOns::string_to_version(m->get_version());
+		m->set_version(AddOns::version_to_string(v, false));
 		if (addons_.has_selection() && addons_.get_selected() == addon) {
-			version_.set_text(m.version);
+			version_.set_text(m->get_version());
 		}
 	} catch (...) {
 		main_menu_.show_messagebox(
 		   _("Invalid Version"),
 		   (boost::format(
 		       _("‘%1$s’ is not a valid version string. The add-on ‘%2$s’ will not be saved.")) %
-		    m.version % addon)
+		    m->get_version() % addon)
 		      .str());
 		return false;
 	}
 
-	const bool is_map = m.category == AddOns::AddOnCategory::kMaps;
-	const std::string directory = kAddOnDir + FileSystem::file_separator() + m.internal_name;
-	bool dir_exists = g_fs->file_exists(directory);
-	const std::string profile_path = directory + FileSystem::file_separator() + kAddOnMainFile;
-
-	// Step 1: Gather the requirements of all contained maps
-	std::string requires;
-	if (is_map) {
-		std::vector<std::string> req;
-		try {
-			parse_map_requirements(m.tree, req);
-		} catch (const WException& e) {
-			main_menu_.show_messagebox(
-			   _("Invalid Map File"),
-			   (boost::format(_("The add-on ‘%1$s’ can not be saved because a map file is "
-			                    "invalid.\n\nError message:\n%2$s")) %
-			    addon % e.what())
-			      .str());
-			return false;
-		}
-		if (const size_t nr = req.size()) {
-			requires = req[0];
-			for (size_t i = 1; i < nr; ++i) {
-				requires += ',';
-				requires += req[i];
-			}
-		}
+	try {
+		return m->write_to_disk();
+	} catch (const WException& e) {
+		main_menu_.show_messagebox(
+		   _("Error Writing Addon"),
+		   (boost::format(_("The add-on ‘%1$s’ can not be saved to disk:\n%2$s")) % addon % e.what())
+			  .str());
+		return false;
 	}
 
-	// Step 2: If the add-on exists on disk already and our add-on is of type Map Set,
-	// make a backup copy of the whole original add-on in ~/.widelands/temp, then
-	// delete the original add-on directory and create it anew.
-	std::string backup_path;
-	if (is_map && dir_exists) {
-		backup_path =
-		   kTempFileDir + FileSystem::file_separator() + m.internal_name + kTempFileExtension;
-		if (g_fs->file_exists(backup_path)) {
-			g_fs->fs_unlink(backup_path);
-		}
-		g_fs->fs_rename(directory, backup_path);
-		dir_exists = false;
-	}
-
-	// Step 3: Create the `addon` file.
-	// · If our add-on is not a map set, we need to read the original `addon` file (if it
-	//   exists) to determine the requirements. Then write the file, and we are done.
-	// · For maps, we need to gather the information regarding the maps' required add-ons
-	//   before writing the profile so we can generate the correct `requires` string.
-	g_fs->ensure_directory_exists(directory);
-	// Write profile
-	{
-		Profile p;
-		if (dir_exists && !is_map) {
-			p.read(profile_path.c_str());
-			requires = p.get_safe_section("global").get_safe_string("requires");
-		}
-		Section& s = p.create_section("global");
-
-		s.set_translated_string("name", m.descname);
-		s.set_translated_string("description", m.description);
-		s.set_translated_string("author", m.author);
-		s.set_string("version", m.version);
-		s.set_string("category", AddOns::kAddOnCategories.at(m.category).internal_name);
-		s.set_string("requires", requires);
-
-		p.write(profile_path.c_str(), false);
-	}
-
-	if (!is_map) {
-		return true;
-	}
-
-	// Step 4: Create the directory structure and copy the maps
-	do_recursively_create_filesystem_structure(directory, m.tree, directory, backup_path);
-
-	// Step 5: Delete the backup (if it existed)
-	if (!backup_path.empty()) {
-		g_fs->fs_unlink(backup_path);
-	}
-
-	return true;
 }
 
 }  // namespace FsMenu

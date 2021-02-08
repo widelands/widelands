@@ -91,6 +91,8 @@ wl_library(logic_addons
   SRCS
     addons.cc
     addons.h
+    addon.cc
+    addon.h
   DEPENDS
     base_i18n
     base_exceptions
