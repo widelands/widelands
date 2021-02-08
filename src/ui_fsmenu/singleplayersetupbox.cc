@@ -124,7 +124,8 @@ void SinglePlayerActivePlayerGroup::update() {
 	const PlayerSettings& player_setting = settings.players[id_];
 	player_.set_pic(playercolor_image());
 	player_.set_tooltip(player_setting.name);
-	player_.set_enabled(player_setting.state != PlayerSettings::State::kClosed && !settings.scenario);
+	player_.set_enabled(player_setting.state != PlayerSettings::State::kClosed &&
+	                    !settings.scenario);
 	if (player_setting.state == PlayerSettings::State::kClosed ||
 	    player_setting.state == PlayerSettings::State::kOpen) {
 
