@@ -20,13 +20,14 @@
 #ifndef WL_UI_FSMENU_ADDONS_PACKAGER_H
 #define WL_UI_FSMENU_ADDONS_PACKAGER_H
 
+#include <boost/format.hpp>
 #include <memory>
 
-#include "logic/addons.h"
 #include "logic/addon.h"
-#include "ui_fsmenu/addons_packager_box.h"
+#include "logic/addons.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
+#include "ui_fsmenu/addons_packager_box.h"
 #include "ui_fsmenu/main.h"
 
 namespace FsMenu {
@@ -50,7 +51,8 @@ private:
 	AddOnsCtrl& ctrl_;
 
 	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox_header_hbox_,
-	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_, box_right_addon_specific_, box_right_bottombox_;
+	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_,
+	   box_right_addon_specific_, box_right_bottombox_;
 	UI::EditBox name_, author_, version_;
 	UI::MultilineEditbox& descr_;
 	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_;

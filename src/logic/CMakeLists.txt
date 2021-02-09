@@ -97,9 +97,12 @@ wl_library(logic_addons
     base_i18n
     base_exceptions
     base_log
+    io_fileread
     io_filesystem
     io_profile
     logic_filesystem_constants
+    logic_map
+    map_io
 )
 
 wl_library(logic_objectives

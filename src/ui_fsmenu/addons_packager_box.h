@@ -30,22 +30,21 @@ namespace FsMenu {
 
 class AddOnsPackagerBox : public UI::Box {
 public:
-	AddOnsPackagerBox(
-			MainMenu& mainmenu,
-			Panel* parent,
-			UI::PanelStyle style,
-			int32_t x,
-			int32_t y,
-			uint32_t orientation,
-			int32_t max_x = 0,
-			int32_t max_y = 0,
-			uint32_t inner_spacing = 0);
+	AddOnsPackagerBox(MainMenu& mainmenu,
+	                  Panel* parent,
+	                  UI::PanelStyle style,
+	                  int32_t x,
+	                  int32_t y,
+	                  uint32_t orientation,
+	                  int32_t max_x = 0,
+	                  int32_t max_y = 0,
+	                  uint32_t inner_spacing = 0);
 
 	void set_modified_callback(std::function<void()> modified_callback) {
 		modified_ = std::move(modified_callback);
 	}
 
-	virtual void load_addon(AddOns::Addon*) { };
+	virtual void load_addon(AddOns::Addon*){};
 
 protected:
 	std::function<void()> modified_;
@@ -54,27 +53,28 @@ protected:
 
 class MapsAddOnsPackagerBox : public AddOnsPackagerBox {
 public:
-	MapsAddOnsPackagerBox(
-			MainMenu& mainmenu,
-			Panel* parent,
-			UI::PanelStyle style,
-			int32_t x,
-			int32_t y,
-			uint32_t orientation,
-			int32_t max_x = 0,
-			int32_t max_y = 0,
-			uint32_t inner_spacing = 0);
+	MapsAddOnsPackagerBox(MainMenu& mainmenu,
+	                      Panel* parent,
+	                      UI::PanelStyle style,
+	                      int32_t x,
+	                      int32_t y,
+	                      uint32_t orientation,
+	                      int32_t max_x = 0,
+	                      int32_t max_y = 0,
+	                      uint32_t inner_spacing = 0);
 	void load_addon(AddOns::Addon*) override;
+
 private:
 	enum class ModifyAction { kAddMap, kAddDir, kDeleteMapOrDir };
 
 	void rebuild_dirstruct(AddOns::MapsAddon*, const std::vector<std::string>& select = {});
 	void do_recursively_rebuild_dirstruct(const AddOns::MapsAddon::DirectoryTree* tree,
-										  const unsigned level,
-										  const std::string& path,
-										  const std::vector<std::string>& map_path,
-										  const std::vector<std::string>& select) ;
-	void recursively_initialize_tree_from_disk(const std::string& dir, AddOns::MapsAddon::DirectoryTree&);
+	                                      const unsigned level,
+	                                      const std::string& path,
+	                                      const std::vector<std::string>& map_path,
+	                                      const std::vector<std::string>& select);
+	void recursively_initialize_tree_from_disk(const std::string& dir,
+	                                           AddOns::MapsAddon::DirectoryTree&);
 	void clicked_add_or_delete_map_or_dir(ModifyAction);
 
 	// To keep track of which selection index in `dirstruct_`
@@ -84,7 +84,7 @@ private:
 	UI::Box box_dirstruct_, box_maps_list_, box_buttonsbox_;
 	UI::Button map_add_, map_add_dir_, map_delete_;
 	UI::Listselect<std::string> dirstruct_, my_maps_;
-	AddOns::MapsAddon* selected_; // Not owned
+	AddOns::MapsAddon* selected_;  // Not owned
 };
 
 }  // namespace FsMenu

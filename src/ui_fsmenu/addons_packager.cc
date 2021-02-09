@@ -24,11 +24,7 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "graphic/image_cache.h"
-#include "graphic/style_manager.h"
-#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "io/filewrite.h"
-#include "io/profile.h"
 #include "logic/addon.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
@@ -61,7 +57,7 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
         &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_right_subbox_header_box_right_(
         &box_right_subbox_header_hbox_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	 box_right_addon_specific_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     box_right_addon_specific_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      box_right_bottombox_(&box_right_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      name_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
      author_(&box_right_subbox_header_box_right_, 0, 0, 100, UI::PanelStyle::kFsMenu),
@@ -175,8 +171,9 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	main_box_.add_space(kSpacing);
 	main_box_.add(&box_right_, UI::Box::Resizing::kExpandBoth);
 
-	addon_boxes_[AddOns::AddOnCategory::kMaps] = std::unique_ptr<MapsAddOnsPackagerBox>(
-				new MapsAddOnsPackagerBox(parent, &box_right_addon_specific_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal));
+	addon_boxes_[AddOns::AddOnCategory::kMaps] =
+	   std::unique_ptr<MapsAddOnsPackagerBox>(new MapsAddOnsPackagerBox(
+	      parent, &box_right_addon_specific_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal));
 
 	for (auto&& pair : addon_boxes_) {
 		pair.second->set_modified_callback([this] { current_addon_edited(); });
@@ -227,8 +224,6 @@ void AddOnsPackager::initialize_mutable_addons() {
 	check_for_unsaved_changes();
 }
 
-
-
 void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 	addons_.clear();
 	for (const auto& pair : mutable_addons_) {
@@ -276,8 +271,6 @@ void AddOnsPackager::addon_selected() {
 	box->load_addon(selected);
 	layout();
 }
-
-
 
 void AddOnsPackager::current_addon_edited() {
 	if (update_in_progress_) {
@@ -341,19 +334,29 @@ void AddOnsPackager::clicked_new_addon() {
 			continue;
 		}
 
-		AddOns::AddOnInfo a {
-			// These default strings are not localized because these editboxes are meant to be
-			// filled out in English. We will add localization markup to the resulting config file.
-			name, n.text(), "No description", "Nobody", {}, {}, {}, {1, 0, 0}, 0, category.get_selected(), {}, false,
-			{{}, {}, {}, {}},
-			{},
-			0,
-			"",
-			0,
-			0,
-			{},
-			{}
-		};
+		AddOns::AddOnInfo a{
+		   // These default strings are not localized because these editboxes are meant to be
+		   // filled out in English. We will add localization markup to the resulting config file.
+		   name,
+		   n.text(),
+		   "No description",
+		   "Nobody",
+		   {},
+		   {},
+		   {},
+		   {1, 0, 0},
+		   0,
+		   category.get_selected(),
+		   {},
+		   false,
+		   {{}, {}, {}, {}},
+		   {},
+		   0,
+		   "",
+		   0,
+		   0,
+		   {},
+		   {}};
 		mutable_addons_[name] = AddOns::Addon::create_mutable_addon(a);
 		addons_with_changes_[name] = false;
 		check_for_unsaved_changes();
@@ -503,10 +506,9 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 		main_menu_.show_messagebox(
 		   _("Error Writing Addon"),
 		   (boost::format(_("The add-on ‘%1$s’ can not be saved to disk:\n%2$s")) % addon % e.what())
-			  .str());
+		      .str());
 		return false;
 	}
-
 }
 
 }  // namespace FsMenu

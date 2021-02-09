@@ -26,54 +26,65 @@
 
 namespace AddOns {
 
-class Addon
-{
+class Addon {
 public:
 	explicit Addon(const AddOnInfo& a);
-	virtual ~Addon() { };
+	virtual ~Addon(){};
 	// Creates an addon with its type matching its category
 	static std::unique_ptr<Addon> create_mutable_addon(const AddOnInfo& a);
-	void update_info(const std::string& descname, const std::string& author, const std::string& description, const std::string& version);
+	void update_info(const std::string& descname,
+	                 const std::string& author,
+	                 const std::string& description,
+	                 const std::string& version);
 	// May throw a WLWarning, if it fails
 	virtual bool write_to_disk();
 	virtual std::string parse_requirements();
 
-	const std::string& get_internal_name() { return internal_name_; }
-	const std::string& get_descname() { return descname_; }
-	const std::string& get_description() { return description_; }
-	const std::string& get_author() { return author_; }
-	const std::string& get_version() { return version_; }
-	void set_version(const std::string& version) { version_ = version; }
-	AddOnCategory get_category() { return category_; }
+	const std::string& get_internal_name() {
+		return internal_name_;
+	}
+	const std::string& get_descname() {
+		return descname_;
+	}
+	const std::string& get_description() {
+		return description_;
+	}
+	const std::string& get_author() {
+		return author_;
+	}
+	const std::string& get_version() {
+		return version_;
+	}
+	void set_version(const std::string& version) {
+		version_ = version;
+	}
+	AddOnCategory get_category() {
+		return category_;
+	}
 
 protected:
 	std::string internal_name_, descname_, description_, author_, version_;
 	AddOnCategory category_;
 
 	std::string directory_, profile_path_;
-
 };
 
-class WorldAddon : public Addon
-{
+class WorldAddon : public Addon {
 public:
 	using Addon::Addon;
 };
 
-class TribesAddon : public Addon
-{
+class TribesAddon : public Addon {
 public:
 	using Addon::Addon;
 };
 
-class ScriptAddon : public Addon
-{
+class ScriptAddon : public Addon {
 public:
 	using Addon::Addon;
 };
 
-class MapsAddon : public Addon
-{
+class MapsAddon : public Addon {
 public:
 	explicit MapsAddon(const AddOnInfo& a);
 	bool write_to_disk() override;
@@ -83,41 +94,42 @@ public:
 		std::map<std::string /* file name in add-on */, std::string /* path of source map */> maps;
 		std::map<std::string, DirectoryTree> subdirectories;
 	};
-	DirectoryTree* get_tree() { return &tree_; };
+	DirectoryTree* get_tree() {
+		return &tree_;
+	};
 
 private:
 	void recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree);
-	void do_recursively_create_filesystem_structure(const std::string& dir, const DirectoryTree& tree, const std::string& addon_basedir, const std::string& backup_basedir);
+	void do_recursively_create_filesystem_structure(const std::string& dir,
+	                                                const DirectoryTree& tree,
+	                                                const std::string& addon_basedir,
+	                                                const std::string& backup_basedir);
 	void parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req);
 
 	DirectoryTree tree_;
 };
 
-class CampaignAddon : public Addon
-{
+class CampaignAddon : public Addon {
 public:
 	using Addon::Addon;
 };
 
-class WinCondAddon : public Addon
-{
+class WinCondAddon : public Addon {
 public:
 	using Addon::Addon;
 };
 
-class StartingCondAddon : public Addon
-{
+class StartingCondAddon : public Addon {
 public:
 	using Addon::Addon;
 };
 
-class ThemeAddon : public Addon
-{
+class ThemeAddon : public Addon {
 public:
 	using Addon::Addon;
 	bool write_to_disk() override;
 };
 
-} // namespace AddOns
+}  // namespace AddOns
 
 #endif  // end of include guard: WL_LOGIC_ADDON_H

@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
-#include "graphic/text_layout.h"
 #include "logic/filesystem_constants.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/text_prompt.h"
@@ -34,66 +33,60 @@ namespace FsMenu {
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
 
-AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent,
-		UI::PanelStyle style,
-		int32_t x,
-		int32_t y,
-		uint32_t orientation,
-		int32_t max_x,
-		int32_t max_y,
-		uint32_t inner_spacing)
-	: UI::Box(parent, style, x, y, orientation, max_x, max_y, inner_spacing),
-	main_menu_(mainmenu)
-{
-
+AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu,
+                                     Panel* parent,
+                                     UI::PanelStyle style,
+                                     int32_t x,
+                                     int32_t y,
+                                     uint32_t orientation,
+                                     int32_t max_x,
+                                     int32_t max_y,
+                                     uint32_t inner_spacing)
+   : UI::Box(parent, style, x, y, orientation, max_x, max_y, inner_spacing), main_menu_(mainmenu) {
 }
 
 MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
-											 Panel* parent,
-											 UI::PanelStyle style,
-											 int32_t x,
-											 int32_t y,
-											 uint32_t orientation,
-											 int32_t max_x,
-											 int32_t max_y,
-											 uint32_t inner_spacing)
-	: AddOnsPackagerBox(mainmenu, parent, style, x, y, orientation, max_x, max_y, inner_spacing),
-	box_dirstruct_(
-	   this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	box_maps_list_(
-	   this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	box_buttonsbox_(
-	   this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-	map_add_(&box_buttonsbox_,
-			 "map_add",
-			 0,
-			 0,
-			 kButtonSize,
-			 kButtonSize,
-			 UI::ButtonStyle::kFsMenuSecondary,
-			 _("+"),
-			 _("Add selected map")),
-	map_add_dir_(&box_buttonsbox_,
-				 "map_add_dir",
-				 0,
-				 0,
-				 kButtonSize,
-				 kButtonSize,
-				 UI::ButtonStyle::kFsMenuSecondary,
-				 _("*"),
-				 _("Create subdirectory")),
-	map_delete_(&box_buttonsbox_,
-				"map_delete",
-				0,
-				0,
-				kButtonSize,
-				kButtonSize,
-				UI::ButtonStyle::kFsMenuSecondary,
-				_("–"),
-				_("Remove selected map or directory")),
-	dirstruct_(&box_dirstruct_, 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
-	my_maps_(&box_maps_list_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu)
-{
+                                             Panel* parent,
+                                             UI::PanelStyle style,
+                                             int32_t x,
+                                             int32_t y,
+                                             uint32_t orientation,
+                                             int32_t max_x,
+                                             int32_t max_y,
+                                             uint32_t inner_spacing)
+   : AddOnsPackagerBox(mainmenu, parent, style, x, y, orientation, max_x, max_y, inner_spacing),
+     box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     map_add_(&box_buttonsbox_,
+              "map_add",
+              0,
+              0,
+              kButtonSize,
+              kButtonSize,
+              UI::ButtonStyle::kFsMenuSecondary,
+              _("+"),
+              _("Add selected map")),
+     map_add_dir_(&box_buttonsbox_,
+                  "map_add_dir",
+                  0,
+                  0,
+                  kButtonSize,
+                  kButtonSize,
+                  UI::ButtonStyle::kFsMenuSecondary,
+                  _("*"),
+                  _("Create subdirectory")),
+     map_delete_(&box_buttonsbox_,
+                 "map_delete",
+                 0,
+                 0,
+                 kButtonSize,
+                 kButtonSize,
+                 UI::ButtonStyle::kFsMenuSecondary,
+                 _("–"),
+                 _("Remove selected map or directory")),
+     dirstruct_(&box_dirstruct_, 0, 0, 200, 0, UI::PanelStyle::kFsMenu),
+     my_maps_(&box_maps_list_, 0, 0, 100, 0, UI::PanelStyle::kFsMenu) {
 	box_buttonsbox_.add_inf_space();
 	box_buttonsbox_.add(&map_add_);
 	box_buttonsbox_.add_space(kSpacing);
@@ -102,11 +95,10 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
 	box_buttonsbox_.add(&map_add_dir_);
 	box_buttonsbox_.add_inf_space();
 
-	box_dirstruct_.add(
-	   new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
-	                    UI::Align::kCenter),
-	   UI::Box::Resizing::kFullSize);
+	box_dirstruct_.add(new UI::Textarea(&box_dirstruct_, UI::PanelStyle::kFsMenu,
+	                                    UI::FontStyle::kFsGameSetupHeadings, _("Directory Tree"),
+	                                    UI::Align::kCenter),
+	                   UI::Box::Resizing::kFullSize);
 	box_dirstruct_.add_space(kSpacing);
 	box_dirstruct_.add(&dirstruct_, UI::Box::Resizing::kExpandBoth);
 
@@ -166,13 +158,13 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
 	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kDeleteMapOrDir); });
 }
 
-
 void MapsAddOnsPackagerBox::load_addon(AddOns::Addon* a) {
 	assert(a->get_category() == AddOns::AddOnCategory::kMaps);
 	rebuild_dirstruct(dynamic_cast<AddOns::MapsAddon*>(a));
 }
 
-void MapsAddOnsPackagerBox::rebuild_dirstruct(AddOns::MapsAddon* a, const std::vector<std::string>& select) {
+void MapsAddOnsPackagerBox::rebuild_dirstruct(AddOns::MapsAddon* a,
+                                              const std::vector<std::string>& select) {
 	const std::string path = kAddOnDir + FileSystem::file_separator() + a->get_internal_name();
 
 	selected_ = a;
@@ -183,16 +175,18 @@ void MapsAddOnsPackagerBox::rebuild_dirstruct(AddOns::MapsAddon* a, const std::v
 	std::vector<std::string> toplevel_entry;
 	dirstruct_to_tree_map_.push_back(toplevel_entry);
 
-	dirstruct_.add(a->get_internal_name(), path, g_image_cache->get("images/ui_basic/ls_wlscenario.png"),
-	               toplevel_entry == select, _("Top-level directory"));
+	dirstruct_.add(a->get_internal_name(), path,
+	               g_image_cache->get("images/ui_basic/ls_wlscenario.png"), toplevel_entry == select,
+	               _("Top-level directory"));
 	do_recursively_rebuild_dirstruct(a->get_tree(), 1, path, toplevel_entry, select);
 }
 
-void MapsAddOnsPackagerBox::do_recursively_rebuild_dirstruct(const AddOns::MapsAddon::DirectoryTree* tree,
-                                                      const unsigned level,
-                                                      const std::string& path,
-                                                      const std::vector<std::string>& map_path,
-                                                      const std::vector<std::string>& select) {
+void MapsAddOnsPackagerBox::do_recursively_rebuild_dirstruct(
+   const AddOns::MapsAddon::DirectoryTree* tree,
+   const unsigned level,
+   const std::string& path,
+   const std::vector<std::string>& map_path,
+   const std::vector<std::string>& select) {
 	for (const auto& pair : tree->subdirectories) {
 		std::vector<std::string> entry = map_path;
 		entry.push_back(pair.first);

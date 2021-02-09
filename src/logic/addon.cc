@@ -56,8 +56,7 @@ static void do_recursively_copy_file_or_directory(const std::string& source,
 	}
 }
 
-std::unique_ptr<Addon> Addon::create_mutable_addon(const AddOnInfo &a)
-{
+std::unique_ptr<Addon> Addon::create_mutable_addon(const AddOnInfo& a) {
 	switch (a.category) {
 	case AddOnCategory::kWorld:
 		return std::unique_ptr<WorldAddon>(new WorldAddon(a));
@@ -77,33 +76,31 @@ std::unique_ptr<Addon> Addon::create_mutable_addon(const AddOnInfo &a)
 		return std::unique_ptr<ThemeAddon>(new ThemeAddon(a));
 	default:
 		return std::unique_ptr<Addon>(new Addon(a));
-
 	}
 }
 
-Addon::Addon(const AddOnInfo& a) :
-	internal_name_(a.internal_name),
-	descname_(a.unlocalized_descname),
-	description_(a.unlocalized_description),
-	author_(a.unlocalized_author),
-	version_(AddOns::version_to_string(a.version, false)),
-	category_(a.category),
-	directory_(kAddOnDir + FileSystem::file_separator() + internal_name_),
-	profile_path_(directory_ + FileSystem::file_separator() + kAddOnMainFile)
-{
-
+Addon::Addon(const AddOnInfo& a)
+   : internal_name_(a.internal_name),
+     descname_(a.unlocalized_descname),
+     description_(a.unlocalized_description),
+     author_(a.unlocalized_author),
+     version_(AddOns::version_to_string(a.version, false)),
+     category_(a.category),
+     directory_(kAddOnDir + FileSystem::file_separator() + internal_name_),
+     profile_path_(directory_ + FileSystem::file_separator() + kAddOnMainFile) {
 }
 
-void Addon::update_info(const std::string &descname, const std::string &author, const std::string &description, const std::string &version)
-{
+void Addon::update_info(const std::string& descname,
+                        const std::string& author,
+                        const std::string& description,
+                        const std::string& version) {
 	descname_ = descname;
 	author_ = author;
 	description_ = description;
 	version_ = version;
 }
 
-std::string Addon::parse_requirements()
-{
+std::string Addon::parse_requirements() {
 	// · We need to read the original `addon` file (if it exists) to
 	//   determine the requirements. Then write the file, and we are done.
 	const std::string directory = kAddOnDir + FileSystem::file_separator() + internal_name_;
@@ -111,8 +108,7 @@ std::string Addon::parse_requirements()
 	const std::string profile_path = directory + FileSystem::file_separator() + kAddOnMainFile;
 
 	std::string requires;
-	if (dir_exists)
-	{
+	if (dir_exists) {
 		Profile p;
 		p.read(profile_path.c_str());
 		requires = p.get_safe_section("global").get_safe_string("requires");
@@ -120,8 +116,7 @@ std::string Addon::parse_requirements()
 	return requires;
 }
 
-bool Addon::write_to_disk()
-{
+bool Addon::write_to_disk() {
 
 	// Step 1: Gather the requirements of all contained maps
 	std::string requires = parse_requirements();
@@ -146,13 +141,11 @@ bool Addon::write_to_disk()
 	return true;
 }
 
-MapsAddon::MapsAddon(const AddOnInfo& a) : Addon(a)
-{
+MapsAddon::MapsAddon(const AddOnInfo& a) : Addon(a) {
 	recursively_initialize_tree_from_disk(directory_, tree_);
 }
 
-std::string MapsAddon::parse_requirements()
-{
+std::string MapsAddon::parse_requirements() {
 	// · For maps, we need to gather the information regarding the maps' required add-ons
 	//   before writing the profile so we can generate the correct `requires` string.
 	std::string requires;
@@ -172,8 +165,7 @@ std::string MapsAddon::parse_requirements()
 	return requires;
 }
 
-void MapsAddon::parse_map_requirements(const DirectoryTree& tree,
-                                   std::vector<std::string>& req) {
+void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req) {
 
 	for (const auto& pair : tree.subdirectories) {
 		parse_map_requirements(pair.second, req);
@@ -198,9 +190,9 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree,
 }
 
 void MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
-                                                       const DirectoryTree& tree,
-                                                       const std::string& addon_basedir,
-                                                       const std::string& backup_basedir) {
+                                                           const DirectoryTree& tree,
+                                                           const std::string& addon_basedir,
+                                                           const std::string& backup_basedir) {
 	// Dirs
 	for (const auto& pair : tree.subdirectories) {
 		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
@@ -229,8 +221,7 @@ void MapsAddon::do_recursively_create_filesystem_structure(const std::string& di
 	}
 }
 
-void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir,
-                                                           DirectoryTree& tree) {
+void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree) {
 	for (const std::string& file : g_fs->list_directory(dir)) {
 		if (FileSystem::filename_ext(file) == kWidelandsMapExtension) {
 			tree.maps[FileSystem::fs_filename(file.c_str())] = file;
@@ -242,8 +233,7 @@ void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir,
 	}
 }
 
-bool MapsAddon::write_to_disk()
-{
+bool MapsAddon::write_to_disk() {
 	// If the add-on exists on disk already and our add-on is of type Map Set,
 	// make a backup copy of the whole original add-on in ~/.widelands/temp, then
 	// delete the original add-on directory and create it anew.
@@ -270,8 +260,7 @@ bool MapsAddon::write_to_disk()
 	return true;
 }
 
-bool ThemeAddon::write_to_disk()
-{
+bool ThemeAddon::write_to_disk() {
 	if (!Addon::write_to_disk()) {
 		return false;
 	}
