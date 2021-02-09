@@ -191,13 +191,12 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<st
 }
 
 void MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
-                                                           const DirectoryTree& tree,
-                                                           const std::string& addon_basedir) {
+                                                           const DirectoryTree& tree) {
 	// Dirs
 	for (const auto& pair : tree.subdirectories) {
 		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
 		g_fs->ensure_directory_exists(subdir);
-		do_recursively_create_filesystem_structure(subdir, pair.second, addon_basedir);
+		do_recursively_create_filesystem_structure(subdir, pair.second);
 	}
 
 	// Maps
@@ -227,7 +226,7 @@ void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir, Di
 bool MapsAddon::write_to_disk() {
 	// If the add-on exists on disk already and our add-on is of type Map Set,
 	// create it in ~/.widelands/temp, then delete the original add-on directory
-	// and create move it over.
+	// and move it over.
 	std::string backup_path;
 	if (g_fs->file_exists(directory_)) {
 		backup_path = directory_;
@@ -242,7 +241,7 @@ bool MapsAddon::write_to_disk() {
 	}
 
 	// Create the directory structure and copy the maps
-	do_recursively_create_filesystem_structure(directory_, tree_, directory_);
+	do_recursively_create_filesystem_structure(directory_, tree_);
 
 	// Move addon from temp to addons
 	if (!backup_path.empty()) {

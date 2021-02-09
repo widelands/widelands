@@ -106,8 +106,7 @@ protected:
 private:
 	void recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree);
 	void do_recursively_create_filesystem_structure(const std::string& dir,
-	                                                const DirectoryTree& tree,
-	                                                const std::string& addon_basedir);
+	                                                const DirectoryTree& tree);
 	void parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req);
 
 	DirectoryTree tree_;
