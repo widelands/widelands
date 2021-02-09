@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "base/warning.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -33,31 +34,6 @@
 #include "map_io/map_elemental_packet.h"
 
 namespace AddOns {
-
-Addon* create_mutable_addon(const AddOnInfo &a)
-{
-	switch (a.category) {
-	case AddOnCategory::kWorld:
-		return new WorldAddon(a);
-	case AddOnCategory::kTribes:
-		return new TribesAddon(a);
-	case AddOnCategory::kScript:
-		return new ScriptAddon(a);
-	case AddOnCategory::kMaps:
-		return new MapsAddon(a);
-	case AddOnCategory::kCampaign:
-		return new CampaignAddon(a);
-	case AddOnCategory::kWinCondition:
-		return new WinCondAddon(a);
-	case AddOnCategory::kStartingCondition:
-		return new StartingCondAddon(a);
-	case AddOnCategory::kTheme:
-		return new ThemeAddon(a);
-	default:
-		return new Addon(a);
-
-	}
-}
 
 static void do_recursively_copy_file_or_directory(const std::string& source,
                                                   const std::string& dest) {
@@ -77,6 +53,31 @@ static void do_recursively_copy_file_or_directory(const std::string& source,
 		FileWrite fw;
 		fw.data(data.get(), bytes);
 		fw.write(*g_fs, dest);
+	}
+}
+
+std::unique_ptr<Addon> Addon::create_mutable_addon(const AddOnInfo &a)
+{
+	switch (a.category) {
+	case AddOnCategory::kWorld:
+		return std::unique_ptr<WorldAddon>(new WorldAddon(a));
+	case AddOnCategory::kTribes:
+		return std::unique_ptr<TribesAddon>(new TribesAddon(a));
+	case AddOnCategory::kScript:
+		return std::unique_ptr<ScriptAddon>(new ScriptAddon(a));
+	case AddOnCategory::kMaps:
+		return std::unique_ptr<MapsAddon>(new MapsAddon(a));
+	case AddOnCategory::kCampaign:
+		return std::unique_ptr<CampaignAddon>(new CampaignAddon(a));
+	case AddOnCategory::kWinCondition:
+		return std::unique_ptr<WinCondAddon>(new WinCondAddon(a));
+	case AddOnCategory::kStartingCondition:
+		return std::unique_ptr<StartingCondAddon>(new StartingCondAddon(a));
+	case AddOnCategory::kTheme:
+		return std::unique_ptr<ThemeAddon>(new ThemeAddon(a));
+	default:
+		return std::unique_ptr<Addon>(new Addon(a));
+
 	}
 }
 
@@ -103,6 +104,8 @@ void Addon::update_info(const std::string &descname, const std::string &author, 
 
 std::string Addon::parse_requirements()
 {
+	// · We need to read the original `addon` file (if it exists) to
+	//   determine the requirements. Then write the file, and we are done.
 	const std::string directory = kAddOnDir + FileSystem::file_separator() + internal_name_;
 	bool dir_exists = g_fs->file_exists(directory);
 	const std::string profile_path = directory + FileSystem::file_separator() + kAddOnMainFile;
@@ -123,11 +126,7 @@ bool Addon::write_to_disk()
 	// Step 1: Gather the requirements of all contained maps
 	std::string requires = parse_requirements();
 
-	// Step 3: Create the `addon` file.
-	// · If our add-on is not a map set, we need to read the original `addon` file (if it
-	//   exists) to determine the requirements. Then write the file, and we are done.
-	// · For maps, we need to gather the information regarding the maps' required add-ons
-	//   before writing the profile so we can generate the correct `requires` string.
+	// Step 2: Create the `addon` file.
 	g_fs->ensure_directory_exists(directory_);
 	// Write profile
 	{
@@ -145,6 +144,57 @@ bool Addon::write_to_disk()
 	}
 
 	return true;
+}
+
+MapsAddon::MapsAddon(const AddOnInfo& a) : Addon(a)
+{
+	recursively_initialize_tree_from_disk(directory_, tree_);
+}
+
+std::string MapsAddon::parse_requirements()
+{
+	// · For maps, we need to gather the information regarding the maps' required add-ons
+	//   before writing the profile so we can generate the correct `requires` string.
+	std::string requires;
+	std::vector<std::string> req;
+	try {
+		parse_map_requirements(tree_, req);
+	} catch (const WException& e) {
+		throw WLWarning("", _("A map file is invalid:\n%s"), e.what());
+	}
+	if (const size_t nr = req.size()) {
+		requires = req[0];
+		for (size_t i = 1; i < nr; ++i) {
+			requires += ',';
+			requires += req[i];
+		}
+	}
+	return requires;
+}
+
+void MapsAddon::parse_map_requirements(const DirectoryTree& tree,
+                                   std::vector<std::string>& req) {
+
+	for (const auto& pair : tree.subdirectories) {
+		parse_map_requirements(pair.second, req);
+	}
+
+	// Place to save temp data
+	Widelands::Map map;
+	Widelands::MapElementalPacket packet;
+
+	for (const auto& pair : tree.maps) {
+		std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(pair.second));
+		assert(fs);
+
+		packet.pre_read(*fs, &map);
+
+		for (const auto& r : map.required_addons()) {
+			if (std::find(req.begin(), req.end(), r.first) == req.end()) {
+				req.push_back(r.first);
+			}
+		}
+	}
 }
 
 void MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
@@ -192,59 +242,9 @@ void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir,
 	}
 }
 
-MapsAddon::MapsAddon(const AddOnInfo& a) : Addon(a)
-{
-	recursively_initialize_tree_from_disk(directory_, tree_);
-}
-
-std::string MapsAddon::parse_requirements()
-{
-	std::string requires;
-	std::vector<std::string> req;
-	try {
-		parse_map_requirements(tree_, req);
-	} catch (const WException& e) {
-		// TODO boost::format
-		throw wexception("A map file is invalid:\n%s", e.what());
-	}
-	if (const size_t nr = req.size()) {
-		requires = req[0];
-		for (size_t i = 1; i < nr; ++i) {
-			requires += ',';
-			requires += req[i];
-		}
-	}
-	return requires;
-}
-
-void MapsAddon::parse_map_requirements(const DirectoryTree& tree,
-                                   std::vector<std::string>& req) {
-
-	for (const auto& pair : tree.subdirectories) {
-		parse_map_requirements(pair.second, req);
-	}
-
-	// Place to save temp data
-	Widelands::Map map;
-	Widelands::MapElementalPacket packet;
-
-	for (const auto& pair : tree.maps) {
-		std::unique_ptr<FileSystem> fs(g_fs->make_sub_file_system(pair.second));
-		assert(fs);
-
-		packet.pre_read(*fs, &map);
-
-		for (const auto& r : map.required_addons()) {
-			if (std::find(req.begin(), req.end(), r.first) == req.end()) {
-				req.push_back(r.first);
-			}
-		}
-	}
-}
-
 bool MapsAddon::write_to_disk()
 {
-	// Step 2: If the add-on exists on disk already and our add-on is of type Map Set,
+	// If the add-on exists on disk already and our add-on is of type Map Set,
 	// make a backup copy of the whole original add-on in ~/.widelands/temp, then
 	// delete the original add-on directory and create it anew.
 	std::string backup_path;
@@ -260,10 +260,10 @@ bool MapsAddon::write_to_disk()
 		return false;
 	}
 
-	// Step 4: Create the directory structure and copy the maps
+	// Create the directory structure and copy the maps
 	do_recursively_create_filesystem_structure(directory_, tree_, directory_, backup_path);
 
-	// Step 5: Delete the backup (if it existed)
+	// Delete the backup (if it existed)
 	if (!backup_path.empty()) {
 		g_fs->fs_unlink(backup_path);
 	}

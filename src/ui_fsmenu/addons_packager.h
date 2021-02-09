@@ -24,6 +24,7 @@
 
 #include "logic/addons.h"
 #include "logic/addon.h"
+#include "ui_fsmenu/addons_packager_box.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_fsmenu/main.h"
@@ -35,7 +36,6 @@ class AddOnsCtrl;
 class AddOnsPackager : public UI::Window {
 public:
 	explicit AddOnsPackager(MainMenu&, AddOnsCtrl&);
-	~AddOnsPackager();
 
 	WindowLayoutID window_layout_id() const override {
 		return UI::Window::WindowLayoutID::kFsMenuDefault;
@@ -50,33 +50,20 @@ private:
 	AddOnsCtrl& ctrl_;
 
 	UI::Box main_box_, box_left_, box_right_, box_left_buttons_, box_right_subbox_header_hbox_,
-	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_,
-	   box_right_subbox_maps_dirstruct_hbox_, box_right_subbox_dirstruct_,
-	   box_right_subbox_maps_list_, box_right_buttonsbox_, box_right_bottombox_;
+	   box_right_subbox_header_box_left_, box_right_subbox_header_box_right_, box_right_addon_specific_, box_right_bottombox_;
 	UI::EditBox name_, author_, version_;
 	UI::MultilineEditbox& descr_;
-	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_, map_add_,
-	   map_add_dir_, map_delete_;
-	UI::Listselect<std::string> addons_, dirstruct_, my_maps_;
+	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_;
+	UI::Listselect<std::string> addons_;
 
-	std::map<std::string /* internal name */, AddOns::Addon*> mutable_addons_;
+	std::map<std::string /* internal name */, std::unique_ptr<AddOns::Addon>> mutable_addons_;
+	std::map<AddOns::AddOnCategory, std::unique_ptr<AddOnsPackagerBox>> addon_boxes_;
 	void initialize_mutable_addons();
-	void recursively_initialize_tree_from_disk(const std::string& dir, AddOns::MapsAddon::DirectoryTree&);
 
 	AddOns::Addon* get_selected();
 
 	void rebuild_addon_list(const std::string& select);
 	void addon_selected();
-	void rebuild_dirstruct(AddOns::Addon*, const std::vector<std::string>& select = {});
-	// To keep track of which selection index in `dirstruct_`
-	// refers to which point of the file system hierarchy:
-	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
-
-	void do_recursively_rebuild_dirstruct(const AddOns::MapsAddon::DirectoryTree *,
-	                                      unsigned level,
-	                                      const std::string& path,
-	                                      const std::vector<std::string>& map_path,
-	                                      const std::vector<std::string>& select);
 
 	std::map<std::string, bool /* delete this add-on */> addons_with_changes_;
 
@@ -87,8 +74,6 @@ private:
 		write_changes_.set_enabled(!addons_with_changes_.empty());
 	}
 
-	enum class ModifyAction { kAddMap, kAddDir, kDeleteMapOrDir };
-	void clicked_add_or_delete_map_or_dir(ModifyAction);
 	void clicked_new_addon();
 	void clicked_delete_addon();
 	void clicked_discard_changes();

@@ -6,6 +6,8 @@ wl_library(ui_fsmenu
     addons.h
     addons_packager.cc
     addons_packager.h
+    addons_packager_box.cc
+    addons_packager_box.h
     campaigndetails.cc
     campaigndetails.h
     campaigns.cc

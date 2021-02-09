@@ -31,7 +31,10 @@ class Addon
 public:
 	explicit Addon(const AddOnInfo& a);
 	virtual ~Addon() { };
+	// Creates an addon with its type matching its category
+	static std::unique_ptr<Addon> create_mutable_addon(const AddOnInfo& a);
 	void update_info(const std::string& descname, const std::string& author, const std::string& description, const std::string& version);
+	// May throw a WLWarning, if it fails
 	virtual bool write_to_disk();
 	virtual std::string parse_requirements();
 
@@ -48,6 +51,7 @@ protected:
 	AddOnCategory category_;
 
 	std::string directory_, profile_path_;
+
 };
 
 class WorldAddon : public Addon
@@ -113,8 +117,6 @@ public:
 	using Addon::Addon;
 	bool write_to_disk() override;
 };
-
-Addon* create_mutable_addon(const AddOnInfo& a);
 
 } // namespace AddOns
 
