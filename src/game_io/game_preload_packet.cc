@@ -63,7 +63,7 @@ void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
 			background_ = s.get_safe_string("background");
 			// TODO(Nordfriese): Savegame compatibility
 			background_theme_ = (packet_version < 7 ? "" : s.get_safe_string("theme"));
-#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0. `kCurrentPacketVersion` will then need to be increased, and the minimum version for the following two values updated accordingly.
 			training_wheels_wanted_ =
 			   (packet_version < 8 ? false : s.get_safe_bool("training_wheels"));
 			active_training_wheel_ =
