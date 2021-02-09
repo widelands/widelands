@@ -55,6 +55,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
                                              int32_t max_y,
                                              uint32_t inner_spacing)
    : AddOnsPackagerBox(mainmenu, parent, style, x, y, orientation, max_x, max_y, inner_spacing),
+     last_category_(AddOns::AddOnCategory::kNone),
      box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
@@ -115,10 +116,33 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
 	add_space(kSpacing);
 	add(&box_maps_list_, UI::Box::Resizing::kExpandBoth);
 
-	{
-		std::vector<MainMenu::MapEntry> v;
-		MainMenu::find_maps("maps/My_Maps", v);
-		for (const MainMenu::MapEntry& entry : v) {
+	MainMenu::find_maps("maps/My_Maps", maps_list_);
+
+	map_add_.set_enabled(false);
+	my_maps_.selected.connect([this](uint32_t) { map_add_.set_enabled(true); });
+	map_delete_.set_enabled(false);
+	dirstruct_.selected.connect([this](uint32_t i) { map_delete_.set_enabled(i > 0); });
+
+	map_add_.sigclicked.connect(
+	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddMap); });
+	map_add_dir_.sigclicked.connect(
+	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddDir); });
+	map_delete_.sigclicked.connect(
+	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kDeleteMapOrDir); });
+}
+
+void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
+	assert(a->get_category() == AddOns::AddOnCategory::kMaps ||
+	       a->get_category() == AddOns::AddOnCategory::kCampaign);
+	if (a->get_category() != last_category_) {
+		last_category_ = a->get_category();
+		my_maps_.clear();
+		for (const MainMenu::MapEntry& entry : maps_list_) {
+			if (entry.first.maptype == MapData::MapType::kNormal &&
+			    last_category_ == AddOns::AddOnCategory::kCampaign) {
+				// Only include scenarios for campaigns
+				continue;
+			}
 			my_maps_.add(
 			   entry.first.localized_name, entry.first.filename, nullptr, false,
 			   (boost::format("%s<br>%s<br>%s<br>%s<br>%s") %
@@ -144,22 +168,6 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
 			      .str());
 		}
 	}
-
-	map_add_.set_enabled(false);
-	my_maps_.selected.connect([this](uint32_t) { map_add_.set_enabled(true); });
-	map_delete_.set_enabled(false);
-	dirstruct_.selected.connect([this](uint32_t i) { map_delete_.set_enabled(i > 0); });
-
-	map_add_.sigclicked.connect(
-	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddMap); });
-	map_add_dir_.sigclicked.connect(
-	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kAddDir); });
-	map_delete_.sigclicked.connect(
-	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kDeleteMapOrDir); });
-}
-
-void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
-	assert(a->get_category() == AddOns::AddOnCategory::kMaps);
 	rebuild_dirstruct(dynamic_cast<AddOns::MapsAddon*>(a));
 }
 
@@ -212,7 +220,6 @@ void MapsAddOnsPackagerBox::do_recursively_rebuild_dirstruct(
 
 void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction action) {
 	assert(selected_);
-	assert(selected_->get_category() == AddOns::AddOnCategory::kMaps);
 
 	AddOns::MapsAddon::DirectoryTree* tree = selected_->get_tree();
 	AddOns::MapsAddon::DirectoryTree* tree_parent = nullptr;

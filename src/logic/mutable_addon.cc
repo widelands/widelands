@@ -247,6 +247,20 @@ bool MapsAddon::write_to_disk() {
 	if (!backup_path.empty()) {
 		g_fs->fs_unlink(backup_path);
 		g_fs->fs_rename(directory_, backup_path);
+		directory_ = backup_path;
+	}
+	return true;
+}
+
+bool CampaignAddon::write_to_disk() {
+	if (!MapsAddon::write_to_disk()) {
+		return false;
+	}
+
+	std::string luafile = directory_ + FileSystem::file_separator() + "campaigns.lua";
+	if (!g_fs->file_exists(luafile)) {
+		// Copy default theme into addon folder as starting point
+		do_recursively_copy_file_or_directory("templates/campaigns.lua", luafile);
 	}
 	return true;
 }

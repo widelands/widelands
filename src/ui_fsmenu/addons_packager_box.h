@@ -81,6 +81,8 @@ private:
 	// To keep track of which selection index in `dirstruct_`
 	// refers to which point of the file system hierarchy:
 	std::vector<std::vector<std::string>> dirstruct_to_tree_map_;
+	std::vector<MainMenu::MapEntry> maps_list_;
+	AddOns::AddOnCategory last_category_;
 
 	UI::Box box_dirstruct_, box_maps_list_, box_buttonsbox_;
 	UI::Button map_add_, map_add_dir_, map_delete_;

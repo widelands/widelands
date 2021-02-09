@@ -263,9 +263,11 @@ void MainMenu::find_maps(const std::string& directory, std::vector<MapEntry>& re
 				map.set_filename(file);
 				ml->preload_map(true, nullptr);
 				if (map.version().map_version_timestamp > 0) {
+					MapData::MapType type = map.scenario_types() == Map::SP_SCENARIO ?
+					                           MapData::MapType::kScenario :
+					                           MapData::MapType::kNormal;
 					results.push_back(MapEntry(
-					   MapData(map, file, MapData::MapType::kNormal, MapData::DisplayType::kFilenames),
-					   map.version()));
+					   MapData(map, file, type, MapData::DisplayType::kFilenames), map.version()));
 				}
 			} catch (...) {
 				// invalid file – silently ignore

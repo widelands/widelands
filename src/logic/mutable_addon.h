@@ -112,9 +112,10 @@ private:
 	DirectoryTree tree_;
 };
 
-class CampaignAddon : public MutableAddOn {
+class CampaignAddon : public MapsAddon {
 public:
-	using MutableAddOn::MutableAddOn;
+	using MapsAddon::MapsAddon;
+	bool write_to_disk() override;
 };
 
 class WinCondAddon : public MutableAddOn {

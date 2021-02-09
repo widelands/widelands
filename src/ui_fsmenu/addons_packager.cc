@@ -171,9 +171,9 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	main_box_.add_space(kSpacing);
 	main_box_.add(&box_right_, UI::Box::Resizing::kExpandBoth);
 
-	addon_boxes_[AddOns::AddOnCategory::kMaps] =
-	   std::unique_ptr<MapsAddOnsPackagerBox>(new MapsAddOnsPackagerBox(
-	      parent, &box_right_addon_specific_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal));
+	addon_boxes_[AddOns::AddOnCategory::kMaps] = std::make_shared<MapsAddOnsPackagerBox>(
+	   parent, &box_right_addon_specific_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
+	addon_boxes_[AddOns::AddOnCategory::kCampaign] = addon_boxes_.at(AddOns::AddOnCategory::kMaps);
 
 	for (auto&& pair : addon_boxes_) {
 		pair.second->set_modified_callback([this] { current_addon_edited(); });

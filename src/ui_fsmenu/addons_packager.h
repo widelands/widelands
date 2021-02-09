@@ -59,7 +59,7 @@ private:
 	UI::Listselect<std::string> addons_;
 
 	std::map<std::string /* internal name */, std::unique_ptr<AddOns::MutableAddOn>> mutable_addons_;
-	std::map<AddOns::AddOnCategory, std::unique_ptr<AddOnsPackagerBox>> addon_boxes_;
+	std::map<AddOns::AddOnCategory, std::shared_ptr<AddOnsPackagerBox>> addon_boxes_;
 	void initialize_mutable_addons();
 
 	AddOns::MutableAddOn* get_selected();
