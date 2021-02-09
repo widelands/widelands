@@ -23,16 +23,8 @@ descriptions:new_productionsite_type {
       marble = 1
    },
 
-   animations = {
-      idle = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 56, 68 },
-      },
-      working = { -- TODO(GunChleoc): make animations
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 56, 68 },
-      }
-   },
+   animation_directory = dirname,
+   animations = {idle = {hotspot = {51, 71}}},
 
    aihints = {
       very_weak_ai_limit = 1,
@@ -57,8 +49,7 @@ descriptions:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs empire_soldier",
             "consume=armor_helmet spear_wooden empire_recruit",
-            "sleep=duration:15s",
-            "animate=working duration:15s",
+            "sleep=duration:30s",
             "recruit=empire_soldier"
          }
       },
