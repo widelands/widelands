@@ -20,7 +20,7 @@
 #ifndef WL_UI_FSMENU_ADDONS_PACKAGER_BOX_H
 #define WL_UI_FSMENU_ADDONS_PACKAGER_BOX_H
 
-#include "logic/addon.h"
+#include "logic/mutable_addon.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
@@ -44,7 +44,9 @@ public:
 		modified_ = std::move(modified_callback);
 	}
 
-	virtual void load_addon(AddOns::Addon*){};
+	virtual void load_addon(AddOns::MutableAddOn*){
+	   // codecheck
+	};
 
 protected:
 	std::function<void()> modified_;
@@ -62,7 +64,7 @@ public:
 	                      int32_t max_x = 0,
 	                      int32_t max_y = 0,
 	                      uint32_t inner_spacing = 0);
-	void load_addon(AddOns::Addon*) override;
+	void load_addon(AddOns::MutableAddOn*) override;
 
 private:
 	enum class ModifyAction { kAddMap, kAddDir, kDeleteMapOrDir };

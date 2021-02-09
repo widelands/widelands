@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_ADDON_H
-#define WL_LOGIC_ADDON_H
+#ifndef WL_LOGIC_MUTABLE_ADDON_H
+#define WL_LOGIC_MUTABLE_ADDON_H
 
 #include <memory>
 
@@ -26,12 +26,14 @@
 
 namespace AddOns {
 
-class Addon {
+class MutableAddOn {
 public:
-	explicit Addon(const AddOnInfo& a);
-	virtual ~Addon(){};
+	explicit MutableAddOn(const AddOnInfo& a);
+	virtual ~MutableAddOn(){
+	   // codecheck
+	};
 	// Creates an addon with its type matching its category
-	static std::unique_ptr<Addon> create_mutable_addon(const AddOnInfo& a);
+	static std::unique_ptr<MutableAddOn> create_mutable_addon(const AddOnInfo& a);
 	void update_info(const std::string& descname,
 	                 const std::string& author,
 	                 const std::string& description,
@@ -69,22 +71,22 @@ protected:
 	std::string directory_, profile_path_;
 };
 
-class WorldAddon : public Addon {
+class WorldAddon : public MutableAddOn {
 public:
-	using Addon::Addon;
+	using MutableAddOn::MutableAddOn;
 };
 
-class TribesAddon : public Addon {
+class TribesAddon : public MutableAddOn {
 public:
-	using Addon::Addon;
+	using MutableAddOn::MutableAddOn;
 };
 
-class ScriptAddon : public Addon {
+class ScriptAddon : public MutableAddOn {
 public:
-	using Addon::Addon;
+	using MutableAddOn::MutableAddOn;
 };
 
-class MapsAddon : public Addon {
+class MapsAddon : public MutableAddOn {
 public:
 	explicit MapsAddon(const AddOnInfo& a);
 	bool write_to_disk() override;
@@ -109,27 +111,27 @@ private:
 	DirectoryTree tree_;
 };
 
-class CampaignAddon : public Addon {
+class CampaignAddon : public MutableAddOn {
 public:
-	using Addon::Addon;
+	using MutableAddOn::MutableAddOn;
 };
 
-class WinCondAddon : public Addon {
+class WinCondAddon : public MutableAddOn {
 public:
-	using Addon::Addon;
+	using MutableAddOn::MutableAddOn;
 };
 
-class StartingCondAddon : public Addon {
+class StartingCondAddon : public MutableAddOn {
 public:
-	using Addon::Addon;
+	using MutableAddOn::MutableAddOn;
 };
 
-class ThemeAddon : public Addon {
+class ThemeAddon : public MutableAddOn {
 public:
-	using Addon::Addon;
+	using MutableAddOn::MutableAddOn;
 	bool write_to_disk() override;
 };
 
 }  // namespace AddOns
 
-#endif  // end of include guard: WL_LOGIC_ADDON_H
+#endif  // end of include guard: WL_LOGIC_MUTABLE_ADDON_H

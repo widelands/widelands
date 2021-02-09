@@ -25,8 +25,8 @@
 #include "base/warning.h"
 #include "graphic/image_cache.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/addon.h"
 #include "logic/filesystem_constants.h"
+#include "logic/mutable_addon.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/text_prompt.h"
 #include "ui_fsmenu/addons.h"
@@ -217,7 +217,7 @@ void AddOnsPackager::initialize_mutable_addons() {
 	addons_with_changes_.clear();
 
 	for (const AddOns::AddOnState& a : AddOns::g_addons) {
-		mutable_addons_[a.first.internal_name] = AddOns::Addon::create_mutable_addon(a.first);
+		mutable_addons_[a.first.internal_name] = AddOns::MutableAddOn::create_mutable_addon(a.first);
 	}
 
 	rebuild_addon_list("");
@@ -234,12 +234,12 @@ void AddOnsPackager::rebuild_addon_list(const std::string& select) {
 	addon_selected();
 }
 
-inline AddOns::Addon* AddOnsPackager::get_selected() {
+inline AddOns::MutableAddOn* AddOnsPackager::get_selected() {
 	return addons_.has_selection() ? mutable_addons_.at(addons_.get_selected()).get() : nullptr;
 }
 
 void AddOnsPackager::addon_selected() {
-	AddOns::Addon* selected = get_selected();
+	AddOns::MutableAddOn* selected = get_selected();
 
 	addon_delete_.set_enabled(selected);
 	box_right_subbox_header_hbox_.set_visible(false);
@@ -278,7 +278,7 @@ void AddOnsPackager::current_addon_edited() {
 	}
 
 	const std::string& sel = addons_.get_selected();
-	AddOns::Addon* m = mutable_addons_.at(sel).get();
+	AddOns::MutableAddOn* m = mutable_addons_.at(sel).get();
 
 	m->update_info(name_.text(), author_.text(), descr_.get_text(), version_.text());
 
@@ -357,7 +357,7 @@ void AddOnsPackager::clicked_new_addon() {
 		   0,
 		   {},
 		   {}};
-		mutable_addons_[name] = AddOns::Addon::create_mutable_addon(a);
+		mutable_addons_[name] = AddOns::MutableAddOn::create_mutable_addon(a);
 		addons_with_changes_[name] = false;
 		check_for_unsaved_changes();
 		rebuild_addon_list(name);
@@ -481,7 +481,7 @@ void AddOnsPackager::clicked_write_changes() {
 }
 
 bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
-	AddOns::Addon* m = mutable_addons_.at(addon).get();
+	AddOns::MutableAddOn* m = mutable_addons_.at(addon).get();
 
 	// Check that the version string is valid and beautify it
 	try {

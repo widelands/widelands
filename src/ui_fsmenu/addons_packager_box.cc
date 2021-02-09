@@ -158,7 +158,7 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
 	   [this]() { clicked_add_or_delete_map_or_dir(ModifyAction::kDeleteMapOrDir); });
 }
 
-void MapsAddOnsPackagerBox::load_addon(AddOns::Addon* a) {
+void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	assert(a->get_category() == AddOns::AddOnCategory::kMaps);
 	rebuild_dirstruct(dynamic_cast<AddOns::MapsAddon*>(a));
 }

@@ -23,8 +23,8 @@
 #include <boost/format.hpp>
 #include <memory>
 
-#include "logic/addon.h"
 #include "logic/addons.h"
+#include "logic/mutable_addon.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
 #include "ui_fsmenu/addons_packager_box.h"
@@ -58,11 +58,11 @@ private:
 	UI::Button addon_new_, addon_delete_, discard_changes_, write_changes_, ok_;
 	UI::Listselect<std::string> addons_;
 
-	std::map<std::string /* internal name */, std::unique_ptr<AddOns::Addon>> mutable_addons_;
+	std::map<std::string /* internal name */, std::unique_ptr<AddOns::MutableAddOn>> mutable_addons_;
 	std::map<AddOns::AddOnCategory, std::unique_ptr<AddOnsPackagerBox>> addon_boxes_;
 	void initialize_mutable_addons();
 
-	AddOns::Addon* get_selected();
+	AddOns::MutableAddOn* get_selected();
 
 	void rebuild_addon_list(const std::string& select);
 	void addon_selected();

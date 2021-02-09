@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/addon.h"
+#include "logic/mutable_addon.h"
 
 #include <memory>
 
@@ -56,7 +56,7 @@ static void do_recursively_copy_file_or_directory(const std::string& source,
 	}
 }
 
-std::unique_ptr<Addon> Addon::create_mutable_addon(const AddOnInfo& a) {
+std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo& a) {
 	switch (a.category) {
 	case AddOnCategory::kWorld:
 		return std::unique_ptr<WorldAddon>(new WorldAddon(a));
@@ -75,11 +75,11 @@ std::unique_ptr<Addon> Addon::create_mutable_addon(const AddOnInfo& a) {
 	case AddOnCategory::kTheme:
 		return std::unique_ptr<ThemeAddon>(new ThemeAddon(a));
 	default:
-		return std::unique_ptr<Addon>(new Addon(a));
+		return std::unique_ptr<MutableAddOn>(new MutableAddOn(a));
 	}
 }
 
-Addon::Addon(const AddOnInfo& a)
+MutableAddOn::MutableAddOn(const AddOnInfo& a)
    : internal_name_(a.internal_name),
      descname_(a.unlocalized_descname),
      description_(a.unlocalized_description),
@@ -90,17 +90,17 @@ Addon::Addon(const AddOnInfo& a)
      profile_path_(directory_ + FileSystem::file_separator() + kAddOnMainFile) {
 }
 
-void Addon::update_info(const std::string& descname,
-                        const std::string& author,
-                        const std::string& description,
-                        const std::string& version) {
+void MutableAddOn::update_info(const std::string& descname,
+                               const std::string& author,
+                               const std::string& description,
+                               const std::string& version) {
 	descname_ = descname;
 	author_ = author;
 	description_ = description;
 	version_ = version;
 }
 
-std::string Addon::parse_requirements() {
+std::string MutableAddOn::parse_requirements() {
 	// · We need to read the original `addon` file (if it exists) to
 	//   determine the requirements. Then write the file, and we are done.
 	const std::string directory = kAddOnDir + FileSystem::file_separator() + internal_name_;
@@ -116,7 +116,7 @@ std::string Addon::parse_requirements() {
 	return requires;
 }
 
-bool Addon::write_to_disk() {
+bool MutableAddOn::write_to_disk() {
 
 	// Step 1: Gather the requirements of all contained maps
 	std::string requires = parse_requirements();
@@ -141,7 +141,7 @@ bool Addon::write_to_disk() {
 	return true;
 }
 
-MapsAddon::MapsAddon(const AddOnInfo& a) : Addon(a) {
+MapsAddon::MapsAddon(const AddOnInfo& a) : MutableAddOn(a) {
 	recursively_initialize_tree_from_disk(directory_, tree_);
 }
 
@@ -246,7 +246,7 @@ bool MapsAddon::write_to_disk() {
 		g_fs->fs_rename(directory_, backup_path);
 	}
 
-	if (!Addon::write_to_disk()) {
+	if (!MutableAddOn::write_to_disk()) {
 		return false;
 	}
 
@@ -261,7 +261,7 @@ bool MapsAddon::write_to_disk() {
 }
 
 bool ThemeAddon::write_to_disk() {
-	if (!Addon::write_to_disk()) {
+	if (!MutableAddOn::write_to_disk()) {
 		return false;
 	}
 
