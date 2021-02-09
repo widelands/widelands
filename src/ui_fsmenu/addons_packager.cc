@@ -501,6 +501,10 @@ bool AddOnsPackager::do_write_addon_to_disk(const std::string& addon) {
 	}
 
 	try {
+		UI::WLMessageBox msg(&main_menu_, UI::WindowStyle::kFsMenu, _("Write Addons"),
+		                     _("Please be patient while your changes are written."),
+		                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+		do_redraw_now();
 		return m->write_to_disk();
 	} catch (const WLWarning& e) {
 		main_menu_.show_messagebox(
