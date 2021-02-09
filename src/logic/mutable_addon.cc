@@ -86,8 +86,11 @@ MutableAddOn::MutableAddOn(const AddOnInfo& a)
      author_(a.unlocalized_author),
      version_(AddOns::version_to_string(a.version, false)),
      category_(a.category),
-     directory_(kAddOnDir + FileSystem::file_separator() + internal_name_),
-     profile_path_(directory_ + FileSystem::file_separator() + kAddOnMainFile) {
+     directory_(kAddOnDir + FileSystem::file_separator() + internal_name_) {
+}
+
+std::string MutableAddOn::profile_path() {
+	return directory_ + FileSystem::file_separator() + kAddOnMainFile;
 }
 
 void MutableAddOn::update_info(const std::string& descname,
@@ -117,7 +120,6 @@ std::string MutableAddOn::parse_requirements() {
 }
 
 bool MutableAddOn::write_to_disk() {
-
 	// Step 1: Gather the requirements of all contained maps
 	std::string requires = parse_requirements();
 
@@ -135,7 +137,7 @@ bool MutableAddOn::write_to_disk() {
 		s.set_string("category", AddOns::kAddOnCategories.at(category_).internal_name);
 		s.set_string("requires", requires);
 
-		p.write(profile_path_.c_str(), false);
+		p.write(profile_path().c_str(), false);
 	}
 
 	return true;
@@ -166,7 +168,6 @@ std::string MapsAddon::parse_requirements() {
 }
 
 void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req) {
-
 	for (const auto& pair : tree.subdirectories) {
 		parse_map_requirements(pair.second, req);
 	}
@@ -191,27 +192,17 @@ void MapsAddon::parse_map_requirements(const DirectoryTree& tree, std::vector<st
 
 void MapsAddon::do_recursively_create_filesystem_structure(const std::string& dir,
                                                            const DirectoryTree& tree,
-                                                           const std::string& addon_basedir,
-                                                           const std::string& backup_basedir) {
+                                                           const std::string& addon_basedir) {
 	// Dirs
 	for (const auto& pair : tree.subdirectories) {
 		const std::string subdir = dir + FileSystem::file_separator() + pair.first;
 		g_fs->ensure_directory_exists(subdir);
-		do_recursively_create_filesystem_structure(
-		   subdir, pair.second, addon_basedir, backup_basedir);
+		do_recursively_create_filesystem_structure(subdir, pair.second, addon_basedir);
 	}
 
 	// Maps
 	for (const auto& pair : tree.maps) {
-		// If the filepath starts with the add-on's path, we need to use the backup instead
 		std::string source_path = pair.second;
-		if (source_path.size() >= addon_basedir.size() &&
-		    source_path.compare(0, addon_basedir.size(), addon_basedir) == 0) {
-			assert(!backup_basedir.empty());
-			std::string temp = source_path.substr(addon_basedir.size());
-			source_path = backup_basedir;
-			source_path += temp;
-		}
 		assert(source_path.size() > kWidelandsMapExtension.size());
 		assert(source_path.compare(source_path.size() - kWidelandsMapExtension.size(),
 		                           kWidelandsMapExtension.size(), kWidelandsMapExtension) == 0);
@@ -235,15 +226,15 @@ void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir, Di
 
 bool MapsAddon::write_to_disk() {
 	// If the add-on exists on disk already and our add-on is of type Map Set,
-	// make a backup copy of the whole original add-on in ~/.widelands/temp, then
-	// delete the original add-on directory and create it anew.
+	// create it in ~/.widelands/temp, then delete the original add-on directory
+	// and create move it over.
 	std::string backup_path;
 	if (g_fs->file_exists(directory_)) {
-		backup_path = kTempFileDir + FileSystem::file_separator() + descname_ + kTempFileExtension;
-		if (g_fs->file_exists(backup_path)) {
-			g_fs->fs_unlink(backup_path);
+		backup_path = directory_;
+		directory_ = kTempFileDir + FileSystem::file_separator() + descname_ + kTempFileExtension;
+		if (g_fs->file_exists(directory_)) {
+			g_fs->fs_unlink(directory_);
 		}
-		g_fs->fs_rename(directory_, backup_path);
 	}
 
 	if (!MutableAddOn::write_to_disk()) {
@@ -251,11 +242,12 @@ bool MapsAddon::write_to_disk() {
 	}
 
 	// Create the directory structure and copy the maps
-	do_recursively_create_filesystem_structure(directory_, tree_, directory_, backup_path);
+	do_recursively_create_filesystem_structure(directory_, tree_, directory_);
 
-	// Delete the backup (if it existed)
+	// Move addon from temp to addons
 	if (!backup_path.empty()) {
 		g_fs->fs_unlink(backup_path);
+		g_fs->fs_rename(directory_, backup_path);
 	}
 	return true;
 }

@@ -44,9 +44,8 @@ public:
 		modified_ = std::move(modified_callback);
 	}
 
-	virtual void load_addon(AddOns::MutableAddOn*){
-	   // codecheck
-	};
+	virtual void load_addon(AddOns::MutableAddOn*) {
+	}
 
 protected:
 	std::function<void()> modified_;

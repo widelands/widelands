@@ -29,9 +29,8 @@ namespace AddOns {
 class MutableAddOn {
 public:
 	explicit MutableAddOn(const AddOnInfo& a);
-	virtual ~MutableAddOn(){
-	   // codecheck
-	};
+	virtual ~MutableAddOn() {
+	}
 	// Creates an addon with its type matching its category
 	static std::unique_ptr<MutableAddOn> create_mutable_addon(const AddOnInfo& a);
 	void update_info(const std::string& descname,
@@ -40,7 +39,6 @@ public:
 	                 const std::string& version);
 	// May throw a WLWarning, if it fails
 	virtual bool write_to_disk();
-	virtual std::string parse_requirements();
 
 	const std::string& get_internal_name() {
 		return internal_name_;
@@ -65,10 +63,13 @@ public:
 	}
 
 protected:
+	virtual std::string parse_requirements();
+	std::string profile_path();
+
 	std::string internal_name_, descname_, description_, author_, version_;
 	AddOnCategory category_;
 
-	std::string directory_, profile_path_;
+	std::string directory_;
 };
 
 class WorldAddon : public MutableAddOn {
@@ -90,7 +91,6 @@ class MapsAddon : public MutableAddOn {
 public:
 	explicit MapsAddon(const AddOnInfo& a);
 	bool write_to_disk() override;
-	std::string parse_requirements() override;
 
 	struct DirectoryTree {
 		std::map<std::string /* file name in add-on */, std::string /* path of source map */> maps;
@@ -100,12 +100,14 @@ public:
 		return &tree_;
 	};
 
+protected:
+	std::string parse_requirements() override;
+
 private:
 	void recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree);
 	void do_recursively_create_filesystem_structure(const std::string& dir,
 	                                                const DirectoryTree& tree,
-	                                                const std::string& addon_basedir,
-	                                                const std::string& backup_basedir);
+	                                                const std::string& addon_basedir);
 	void parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req);
 
 	DirectoryTree tree_;
