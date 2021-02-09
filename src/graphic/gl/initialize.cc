@@ -192,48 +192,57 @@ SDL_GLContext initialize(
 		      "driver."))
 		      .str());
 	};
-	auto check_version = [show_opengl_error_and_exit](const std::string& version_string, const std::string& name, const std::string& descname, const int required_major_version, const int required_minor_version, const std::function<void()>& error) {
+	auto check_version = [show_opengl_error_and_exit](
+	                        const std::string& version_string, const std::string& name,
+	                        const std::string& descname, const int required_major_version,
+	                        const int required_minor_version, const std::function<void()>& error) {
 		std::vector<std::string> version_vector;
-		boost::split(
-		   version_vector, version_string, boost::is_any_of(". "));
+		boost::split(version_vector, version_string, boost::is_any_of(". "));
 		if (version_vector.size() >= 2) {
 			// The shading language version has been detected properly. Exit if the shading language
 			// version is too old.
 			const int major_version = boost::lexical_cast<int>(version_vector.front());
 			const int minor_version = boost::lexical_cast<int>(version_vector.at(1));
 			if (major_version < required_major_version ||
-				(major_version == required_major_version && minor_version < required_minor_version)) {
+			    (major_version == required_major_version && minor_version < required_minor_version)) {
 				show_opengl_error_and_exit(
 				   (boost::format("Widelands won’t work because your graphics driver is too old.\n"
-				   "The %u version needs to be version %u.%u or newer.")
-				   % name % required_major_version % required_minor_version
-				   ).str(),
+				                  "The %u version needs to be version %u.%u or newer.") %
+				    name % required_major_version % required_minor_version)
+				      .str(),
 				   (boost::format("%s\n%s") %
-					/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-					   support is limited here, so do not use advanced typography **/
-					_("Widelands won’t work because your graphics driver is too old.") %
-					/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-					   support is limited here, so do not use advanced typography **/
-					(boost::format(_("The %1$u version needs to be version %2$u.%3$u or newer.")) % descname % required_major_version % required_minor_version).str()
-					  ).str());
+				    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+				       support is limited here, so do not use advanced typography **/
+				    _("Widelands won’t work because your graphics driver is too old.") %
+				    /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
+				       support is limited here, so do not use advanced typography **/
+				    (boost::format(_("The %1$u version needs to be version %2$u.%3$u or newer.")) %
+				     descname % required_major_version % required_minor_version)
+				       .str())
+				      .str());
 			}
 		} else {
-			// We don't have a minor version. Ensure that the string to compare is a valid integer before conversion
+			// We don't have a minor version. Ensure that the string to compare is a valid integer
+			// before conversion
 			std::regex re("\\d+");
 			if (std::regex_match(version_string, re)) {
 				const int major_version = boost::lexical_cast<int>(version_string);
 				if (major_version < required_major_version + 1) {
 					show_opengl_error_and_exit(
 					   (boost::format("Widelands won’t work because your graphics driver is too old.\n"
-					   "The %s needs to be version %u.%u or newer.") % name % required_major_version % required_minor_version).str(),
+					                  "The %s needs to be version %u.%u or newer.") %
+					    name % required_major_version % required_minor_version)
+					      .str(),
 					   (boost::format("%s\n%s") %
-						/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-						   support is limited here, so do not use advanced typography **/
-						_("Widelands won’t work because your graphics driver is too old.") %
-						/** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font
-						   support is limited here, so do not use advanced typography **/
-						(boost::format(_("The %1$s needs to be version %2$u.%3$u or newer.")) % descname % required_major_version % required_minor_version).str())
-						  .str());
+					    /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
+					       Font support is limited here, so do not use advanced typography **/
+					    _("Widelands won’t work because your graphics driver is too old.") %
+					    /** TRANSLATORS: Basic error message when we can't handle the graphics driver.
+					       Font support is limited here, so do not use advanced typography **/
+					    (boost::format(_("The %1$s needs to be version %2$u.%3$u or newer.")) %
+					     descname % required_major_version % required_minor_version)
+					       .str())
+					      .str());
 				}
 			} else {
 				// We don't know how to interpret the version info
@@ -247,7 +256,8 @@ SDL_GLContext initialize(
 		handle_unreadable_opengl_version();
 	}
 	log_dbg("Graphics: OpenGL: Version \"%s\"\n", opengl_version_string);
-	check_version(opengl_version_string, "OpenGL", _("OpenGL"), 2, 1, handle_unreadable_opengl_version);
+	check_version(
+	   opengl_version_string, "OpenGL", _("OpenGL"), 2, 1, handle_unreadable_opengl_version);
 
 #define LOG_SDL_GL_ATTRIBUTE(x)                                                                    \
 	{                                                                                               \
@@ -293,7 +303,8 @@ SDL_GLContext initialize(
 		handle_unreadable_opengl_shading_language();
 	}
 	log_dbg("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
-	check_version(shading_language_version_string, "Shading Language", _("Shading Language"), 1, 20, handle_unreadable_opengl_shading_language);
+	check_version(shading_language_version_string, "Shading Language", _("Shading Language"), 1, 20,
+	              handle_unreadable_opengl_shading_language);
 
 	glDrawBuffer(GL_BACK);
 
