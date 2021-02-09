@@ -481,9 +481,11 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	}
 
 	for (const std::string& theme : g_fs->list_directory("templates")) {
-		const std::string descname =
-		   (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
-		theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
+		if (g_fs->is_directory(theme)) {
+			const std::string descname =
+			   (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
+			theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
+		}
 	}
 	for (auto& addon : AddOns::g_addons) {
 		if (addon.first.category == AddOns::AddOnCategory::kTheme) {

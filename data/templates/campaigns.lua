@@ -5,7 +5,7 @@
 --#      Campaign configuration - file     #
 --##########################################
 
-push_textdomain("dummy-campaign.wad", true)
+push_textdomain("_addon_", true)
 
 local r = {
    --##########################################
@@ -26,12 +26,12 @@ local r = {
    --##########################################
    campaigns = {
       {
-         descname = _"Dummy",
-         tribe = "barbarians",
-         difficulty = { level=1, description=_"Dummy campaign." },
-         description = _"This campaign is not playable. It only demonstrates the campaign-type add-on feature.",
+         descname = _"_descname_",
+         tribe = "_tribe_",
+         difficulty = { level=1, description=_"_descname_" },
+         description = _"_description_",
          scenarios = {
-            "dummy-campaign.wad:example-dummy.wmf",
+            _scenarios_
             "dummy.wmf"
          }
       }

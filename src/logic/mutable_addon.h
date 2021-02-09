@@ -102,20 +102,26 @@ public:
 
 protected:
 	std::string parse_requirements() override;
+	DirectoryTree tree_;
 
 private:
 	void recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree);
 	void do_recursively_create_filesystem_structure(const std::string& dir,
 	                                                const DirectoryTree& tree);
 	void parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req);
-
-	DirectoryTree tree_;
 };
 
 class CampaignAddon : public MapsAddon {
 public:
 	using MapsAddon::MapsAddon;
 	bool write_to_disk() override;
+	bool luafile_exists();
+	void set_tribe(const std::string& tribe) {
+		tribe_ = tribe;
+	}
+
+private:
+	std::string tribe_;
 };
 
 class WinCondAddon : public MutableAddOn {

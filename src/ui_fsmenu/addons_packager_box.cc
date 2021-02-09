@@ -23,6 +23,7 @@
 #include "graphic/image_cache.h"
 #include "graphic/style_manager.h"
 #include "logic/filesystem_constants.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/text_prompt.h"
 #include "ui_basic/textarea.h"
@@ -55,10 +56,10 @@ MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
                                              int32_t max_y,
                                              uint32_t inner_spacing)
    : AddOnsPackagerBox(mainmenu, parent, style, x, y, orientation, max_x, max_y, inner_spacing),
+     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      last_category_(AddOns::AddOnCategory::kNone),
      box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      map_add_(&box_buttonsbox_,
               "map_add",
               0,
@@ -136,6 +137,8 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	       a->get_category() == AddOns::AddOnCategory::kCampaign);
 	if (a->get_category() != last_category_) {
 		last_category_ = a->get_category();
+		// Campaigns should not have subdirs
+		map_add_dir_.set_visible(last_category_ == AddOns::AddOnCategory::kMaps);
 		my_maps_.clear();
 		for (const MainMenu::MapEntry& entry : maps_list_) {
 			if (entry.first.maptype == MapData::MapType::kNormal &&
@@ -309,6 +312,48 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 
 	modified_();
 	rebuild_dirstruct(selected_, select);
+}
+
+CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu,
+                                                     Panel* parent,
+                                                     UI::PanelStyle style,
+                                                     int32_t x,
+                                                     int32_t y,
+                                                     uint32_t orientation,
+                                                     int32_t max_x,
+                                                     int32_t max_y,
+                                                     uint32_t inner_spacing)
+   : MapsAddOnsPackagerBox(mainmenu, parent, style, x, y, orientation, max_x, max_y, inner_spacing),
+     tribe_select_(&box_buttonsbox_,
+                   "dropdown_tribe",
+                   0,
+                   0,
+                   50,
+                   8,
+                   kButtonSize,
+                   _("Tribe"),
+                   UI::DropdownType::kPictorial,
+                   UI::PanelStyle::kWui,
+                   UI::ButtonStyle::kWuiSecondary) {
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
+		tribe_select_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
+		                  false, tribeinfo.tooltip);
+	}
+	tribe_select_.select(tribeinfos.front().name);
+	tribe_select_.selected.connect([this]() { selected_->set_tribe(tribe_select_.get_selected()); });
+
+	box_buttonsbox_.add(&tribe_select_);
+	box_buttonsbox_.add_inf_space();
+}
+
+void CampaignAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
+	assert(a->get_category() == AddOns::AddOnCategory::kCampaign);
+	selected_ = dynamic_cast<AddOns::CampaignAddon*>(a);
+	// Only allow tribe configuration during first setup
+	tribe_select_.set_visible(!selected_->luafile_exists());
+
+	MapsAddOnsPackagerBox::load_addon(a);
 }
 
 }  // namespace FsMenu

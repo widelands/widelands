@@ -20,6 +20,8 @@
 #include "logic/mutable_addon.h"
 
 #include <memory>
+#include <regex>
+#include <string>
 
 #include "base/i18n.h"
 #include "base/warning.h"
@@ -252,6 +254,10 @@ bool MapsAddon::write_to_disk() {
 	return true;
 }
 
+bool CampaignAddon::luafile_exists() {
+	return g_fs->file_exists(directory_ + FileSystem::file_separator() + "campaigns.lua");
+}
+
 bool CampaignAddon::write_to_disk() {
 	if (!MapsAddon::write_to_disk()) {
 		return false;
@@ -259,8 +265,28 @@ bool CampaignAddon::write_to_disk() {
 
 	std::string luafile = directory_ + FileSystem::file_separator() + "campaigns.lua";
 	if (!g_fs->file_exists(luafile)) {
-		// Copy default theme into addon folder as starting point
-		do_recursively_copy_file_or_directory("templates/campaigns.lua", luafile);
+		// Initialize campaigns.lua
+		FileRead fr;
+		fr.open(*g_fs, "templates/campaigns.lua");
+		const size_t bytes = fr.get_size();
+		std::unique_ptr<char[]> data(new char[bytes + 1]);
+		fr.data_complete(data.get(), bytes);
+		data[bytes] = 0;
+		std::string contents =
+		   std::regex_replace(std::string(data.get()), std::regex("_addon_"), internal_name_);
+		contents = std::regex_replace(contents, std::regex("_descname_"), descname_);
+		contents = std::regex_replace(contents, std::regex("_description_"), description_);
+		contents = std::regex_replace(contents, std::regex("_tribe_"), tribe_);
+
+		std::string scenario_list;
+		for (const auto& pair : tree_.maps) {
+			scenario_list.append("\"" + internal_name_ + ":" + pair.first + "\",\n");
+		}
+		contents = std::regex_replace(contents, std::regex("_scenarios_"), scenario_list);
+
+		FileWrite fw;
+		fw.data(contents.c_str(), contents.size());
+		fw.write(*g_fs, luafile);
 	}
 	return true;
 }
