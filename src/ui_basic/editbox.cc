@@ -189,9 +189,22 @@ void EditBox::set_font_scale(float scale) {
  */
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t x, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		reset_selection();
 		set_caret_to_cursor_pos(x);
 		focus();
 		clicked();
+		return true;
+	}
+
+	return false;
+}
+
+bool EditBox::handle_mousemove(uint8_t state, int32_t x, int32_t, int32_t, int32_t) {
+	// state != 0 -> mouse button is pressed
+	if (state && get_can_focus()) {
+		select_until(m_->caret);
+		set_caret_to_cursor_pos(x);
+		select_until(m_->caret);
 		return true;
 	}
 
