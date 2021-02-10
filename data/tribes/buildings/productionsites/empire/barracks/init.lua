@@ -24,6 +24,7 @@ descriptions:new_productionsite_type {
    },
 
    animation_directory = dirname,
+   -- TODO(Nordfriese): Make animations.
    animations = {idle = {hotspot = {51, 71}}},
 
    aihints = {
