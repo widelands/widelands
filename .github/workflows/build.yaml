@@ -103,6 +103,8 @@ jobs:
         config:
           - Release
           - Debug
+        os:
+          - ubuntu-20.04
         compiler:
           # We test the two newest and the two oldest versions of each of the two compilers
           - clang-10
@@ -111,9 +113,13 @@ jobs:
           - clang-6.0
           - g++-10
           - g++-9
-          - g++-6
-          - g++-5
-    runs-on: ubuntu-latest
+        include:
+          # These jobs need an older ubuntu version to run correctly
+          - compiler: g++-5
+            os: ubuntu-18.04
+          - compiler: g++-6
+            os: ubuntu-18.04
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Installing dependencies
       run: |
