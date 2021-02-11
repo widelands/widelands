@@ -20,7 +20,7 @@ SUPPRESSED_CHECKS = {
     '[bugprone-narrowing-conversions]',
     '[bugprone-not-null-terminated-result]',
     '[bugprone-parent-virtual-call]',
-    '[bugprone-signed-char-misuse]',,
+    '[bugprone-signed-char-misuse]',
     '[bugprone-string-constructor]',
     '[bugprone-too-small-loop-variable]',
     '[cert-dcl50-cpp]',  # We need this for our logger
@@ -96,7 +96,7 @@ SUPPRESSED_CHECKS = {
     '[readability-else-after-return]',
     '[readability-function-size]',
     '[readability-implicit-bool-conversion]',
-    '[readability-inconsistent-declaration-parameter-name]',,
+    '[readability-inconsistent-declaration-parameter-name]',
     '[readability-isolate-declaration]',
     '[readability-magic-numbers]',
     '[readability-make-member-function-const]',
