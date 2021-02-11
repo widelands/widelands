@@ -114,11 +114,19 @@ jobs:
           - g++-10
           - g++-9
         include:
-          # These jobs need an older ubuntu version to run correctly
+          # Some compilers need an older ubuntu version to run correctly
           - compiler: g++-5
             os: ubuntu-18.04
+            config: Debug
+          - compiler: g++-5
+            os: ubuntu-18.04
+            config: Release
           - compiler: g++-6
             os: ubuntu-18.04
+            config: Debug
+          - compiler: g++-6
+            os: ubuntu-18.04
+            config: Release
     runs-on: ${{ matrix.os }}
     steps:
     - name: Installing dependencies
