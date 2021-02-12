@@ -193,7 +193,7 @@ GeneralStatisticsMenu::GeneralStatisticsMenu(InteractiveGameBase& parent,
 		hbox2->add(btn, UI::Box::Resizing::kFillSpace);
 	}
 
-	radiogroup_.set_state(selected_information_);
+	radiogroup_.set_state(selected_information_, false);
 	radiogroup_.changedto.connect([this](int32_t i) { radiogroup_changed(i); });
 
 	box_.add(hbox2, UI::Box::Resizing::kFullSize);
