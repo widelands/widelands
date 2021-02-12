@@ -74,7 +74,7 @@ struct Radiogroup {
 	int32_t get_state() const {
 		return state_;
 	}
-	void set_state(int32_t state);
+	void set_state(int32_t state, bool send_signal);
 	void set_enabled(bool);
 	Radiobutton* get_first_button() {
 		return buttons_;
