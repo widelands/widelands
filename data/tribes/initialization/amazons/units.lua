@@ -1239,7 +1239,9 @@ descriptions:new_tribe {
          name = "amazons_port",
          helptexts = {
             -- TRANSLATORS: Purpose helptext for an amazon warehouse: Port
-            purpose = pgettext("amazons_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools.")
+            purpose = pgettext("amazons_building", "Serves as a base for overseas colonization and trade. Also stores your soldiers, wares and tools."),
+            -- TRANSLATORS: Note helptext for an amazon warehouse: Port
+            note = pgettext("amazons_building", "Similar to the Headquarters a Port can be attacked and destroyed by an enemy. It is recommendable to send soldiers to defend it.")
          }
       },
 
