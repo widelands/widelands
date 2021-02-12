@@ -311,7 +311,8 @@ void SinglePlayerStartTypeDropdown::fill() {
 				break;
 			}
 		}
-		if (matches_tags && !addme.incompatible_win_conditions.count(settings_->settings().win_condition_script)) {
+		if (matches_tags &&
+		    !addme.incompatible_win_conditions.count(settings_->settings().win_condition_script)) {
 			dropdown_.add(_(addme.descname), i, nullptr, i == player_setting.initialization_index,
 			              _(addme.tooltip));
 		}
