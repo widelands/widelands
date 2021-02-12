@@ -83,7 +83,7 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPanel, indicate),
 #endif
    {nullptr, nullptr},
@@ -288,7 +288,7 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	return 2;
 }
 
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 /* R#S#T
    .. method:: indicate(on)
 
@@ -409,7 +409,7 @@ const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, open),
    METHOD(LuaDropdown, highlight_item),
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
 #endif
    METHOD(LuaDropdown, select),
@@ -504,7 +504,7 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	return 0;
 }
 
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 /* R#S#T
    .. method:: indicate_item(index)
 

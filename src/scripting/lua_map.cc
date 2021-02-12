@@ -7979,7 +7979,7 @@ int LuaField::has_max_caps(lua_State* L) {
 	return 1;
 }
 
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 /* R#S#T
    .. method:: indicate(on)
 

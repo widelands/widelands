@@ -1537,7 +1537,7 @@ public:
 	int region(lua_State* L);
 	int has_caps(lua_State*);
 	int has_max_caps(lua_State*);
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	int indicate(lua_State* L);
 #endif
 

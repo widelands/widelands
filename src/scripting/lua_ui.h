@@ -85,7 +85,7 @@ public:
 	 * Lua Methods
 	 */
 	int get_descendant_position(lua_State* L);
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	int indicate(lua_State* L);
 #endif
 

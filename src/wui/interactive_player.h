@@ -124,7 +124,7 @@ private:
 
 	const Image* grid_marker_pic_;
 
- #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	// Arrow image for indicating a position for training wheels
 	const Image* training_wheel_indicator_pic_;
 	// Field position to indicate for training wheels
