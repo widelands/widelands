@@ -7399,7 +7399,10 @@ Field
 const char LuaField::className[] = "Field";
 const MethodType<LuaField> LuaField::Methods[] = {
    METHOD(LuaField, __eq),     METHOD(LuaField, __tostring),   METHOD(LuaField, region),
-   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), METHOD(LuaField, indicate),
+   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+   METHOD(LuaField, indicate),
+#endif
    {nullptr, nullptr},
 };
 const PropertyType<LuaField> LuaField::Properties[] = {
@@ -7976,7 +7979,8 @@ int LuaField::has_max_caps(lua_State* L) {
 	return 1;
 }
 
-/* RST
+ #if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: indicate(on)
 
       Show/Hide an arrow that points to this field. You can only point to 1 field at the same time.
@@ -8004,6 +8008,7 @@ int LuaField::indicate(lua_State* L) {
 	}
 	return 2;
 }
+#endif
 
 /*
  ==========================================================
