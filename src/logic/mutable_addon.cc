@@ -258,6 +258,22 @@ bool CampaignAddon::luafile_exists() {
 	return g_fs->file_exists(directory_ + FileSystem::file_separator() + "campaigns.lua");
 }
 
+void CampaignAddon::do_recursively_add_scenarios(std::string& scenarios,
+                                                 const std::string& dir,
+                                                 const DirectoryTree& tree) {
+	// Dirs
+	for (const auto& pair : tree.subdirectories) {
+		const std::string subdir = dir + pair.first + FileSystem::file_separator();
+		do_recursively_add_scenarios(scenarios, subdir, pair.second);
+	}
+
+	// Maps
+	for (const auto& pair : tree.maps) {
+		// Indent line to match template
+		scenarios.append("\n            \"" + internal_name_ + ":" + dir + pair.first + "\",");
+	}
+}
+
 bool CampaignAddon::write_to_disk() {
 	if (!MapsAddon::write_to_disk()) {
 		return false;
@@ -279,9 +295,7 @@ bool CampaignAddon::write_to_disk() {
 		contents = std::regex_replace(contents, std::regex("_tribe_"), tribe_);
 
 		std::string scenario_list;
-		for (const auto& pair : tree_.maps) {
-			scenario_list.append("\"" + internal_name_ + ":" + pair.first + "\",\n");
-		}
+		do_recursively_add_scenarios(scenario_list, "", tree_);
 		contents = std::regex_replace(contents, std::regex("_scenarios_"), scenario_list);
 
 		FileWrite fw;

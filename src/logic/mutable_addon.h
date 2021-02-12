@@ -121,6 +121,10 @@ public:
 	}
 
 private:
+	void do_recursively_add_scenarios(std::string& scenarios,
+	                                  const std::string& dir,
+	                                  const DirectoryTree& tree);
+
 	std::string tribe_;
 };
 

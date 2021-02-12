@@ -307,8 +307,8 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* 
                    kButtonSize,
                    _("Tribe"),
                    UI::DropdownType::kTextual,
-                   UI::PanelStyle::kWui,
-                   UI::ButtonStyle::kWuiSecondary) {
+                   UI::PanelStyle::kFsMenu,
+                   UI::ButtonStyle::kFsMenuSecondary) {
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
 		tribe_select_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
@@ -328,6 +328,7 @@ void CampaignAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	selected_ = dynamic_cast<AddOns::CampaignAddon*>(a);
 	// Only allow tribe configuration during first setup
 	tribe_select_.set_visible(!selected_->luafile_exists());
+	selected_->set_tribe(tribe_select_.get_selected());
 
 	MapsAddOnsPackagerBox::load_addon(a);
 }

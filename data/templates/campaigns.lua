@@ -29,9 +29,20 @@ local r = {
          descname = _"_descname_",
          tribe = "_tribe_",
          difficulty = { level=1, description=_"_descname_" },
+         -- The difficulty stages of this campaign. The user gets to choose them in the
+         -- campaign select screen and the choice is available to the scenario scripts.
+         difficulties = {
+            -- TRANSLATORS: A campaign difficulty (easiest of three options)
+            _("Easy"),
+            -- TRANSLATORS: A campaign difficulty (medium of three options)
+            _("Medium"),
+            -- TRANSLATORS: A campaign difficulty (hardest of three options)
+            _("Hard"),
+         },
+         -- Index of the entry in `difficulties` that is selected by default
+         default_difficulty = 2,
          description = _"_description_",
-         scenarios = {
-            _scenarios_
+         scenarios = {_scenarios_
             "dummy.wmf"
          }
       }
