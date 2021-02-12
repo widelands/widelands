@@ -77,7 +77,8 @@ std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo
 	case AddOnCategory::kTheme:
 		return std::unique_ptr<ThemeAddon>(new ThemeAddon(a));
 	default:
-		return std::unique_ptr<MutableAddOn>(new MutableAddOn(a));
+		throw wexception("Invalid category %u for addon %s", static_cast<uint32_t>(a.category),
+		                 a.internal_name.c_str());
 	}
 }
 
@@ -125,22 +126,21 @@ bool MutableAddOn::write_to_disk() {
 	// Step 1: Gather the requirements of all contained maps
 	std::string requires = parse_requirements();
 
-	// Step 2: Create the `addon` file.
+	// Step 2: Create the addons directory
 	g_fs->ensure_directory_exists(directory_);
-	// Write profile
-	{
-		Profile p;
-		Section& s = p.create_section("global");
 
-		s.set_translated_string("name", descname_);
-		s.set_translated_string("description", description_);
-		s.set_translated_string("author", author_);
-		s.set_string("version", version_);
-		s.set_string("category", AddOns::kAddOnCategories.at(category_).internal_name);
-		s.set_string("requires", requires);
+	// Step 3: Write profile (`addon` file)
+	Profile p;
+	Section& s = p.create_section("global");
 
-		p.write(profile_path().c_str(), false);
-	}
+	s.set_translated_string("name", descname_);
+	s.set_translated_string("description", description_);
+	s.set_translated_string("author", author_);
+	s.set_string("version", version_);
+	s.set_string("category", AddOns::kAddOnCategories.at(category_).internal_name);
+	s.set_string("requires", requires);
+
+	p.write(profile_path().c_str(), false);
 
 	return true;
 }

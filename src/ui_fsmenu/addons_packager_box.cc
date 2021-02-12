@@ -34,32 +34,16 @@ namespace FsMenu {
 constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
 
-AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu,
-                                     Panel* parent,
-                                     UI::PanelStyle style,
-                                     int32_t x,
-                                     int32_t y,
-                                     uint32_t orientation,
-                                     int32_t max_x,
-                                     int32_t max_y,
-                                     uint32_t inner_spacing)
-   : UI::Box(parent, style, x, y, orientation, max_x, max_y, inner_spacing), main_menu_(mainmenu) {
+AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation)
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation), main_menu_(mainmenu) {
 }
 
-MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu,
-                                             Panel* parent,
-                                             UI::PanelStyle style,
-                                             int32_t x,
-                                             int32_t y,
-                                             uint32_t orientation,
-                                             int32_t max_x,
-                                             int32_t max_y,
-                                             uint32_t inner_spacing)
-   : AddOnsPackagerBox(mainmenu, parent, style, x, y, orientation, max_x, max_y, inner_spacing),
-     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
-     last_category_(AddOns::AddOnCategory::kNone),
+MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
+   : AddOnsPackagerBox(mainmenu, parent, UI::Box::Horizontal),
      box_dirstruct_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     last_category_(AddOns::AddOnCategory::kNone),
      box_maps_list_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
+     box_buttonsbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical),
      map_add_(&box_buttonsbox_,
               "map_add",
               0,
@@ -137,8 +121,6 @@ void MapsAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	       a->get_category() == AddOns::AddOnCategory::kCampaign);
 	if (a->get_category() != last_category_) {
 		last_category_ = a->get_category();
-		// Campaigns should not have subdirs
-		map_add_dir_.set_visible(last_category_ == AddOns::AddOnCategory::kMaps);
 		my_maps_.clear();
 		for (const MainMenu::MapEntry& entry : maps_list_) {
 			if (entry.first.maptype == MapData::MapType::kNormal &&
@@ -314,17 +296,9 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 	rebuild_dirstruct(selected_, select);
 }
 
-CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu,
-                                                     Panel* parent,
-                                                     UI::PanelStyle style,
-                                                     int32_t x,
-                                                     int32_t y,
-                                                     uint32_t orientation,
-                                                     int32_t max_x,
-                                                     int32_t max_y,
-                                                     uint32_t inner_spacing)
-   : MapsAddOnsPackagerBox(mainmenu, parent, style, x, y, orientation, max_x, max_y, inner_spacing),
-     tribe_select_(&box_buttonsbox_,
+CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
+   : MapsAddOnsPackagerBox(mainmenu, parent),
+     tribe_select_(&box_dirstruct_,
                    "dropdown_tribe",
                    0,
                    0,
@@ -332,7 +306,7 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu,
                    8,
                    kButtonSize,
                    _("Tribe"),
-                   UI::DropdownType::kPictorial,
+                   UI::DropdownType::kTextual,
                    UI::PanelStyle::kWui,
                    UI::ButtonStyle::kWuiSecondary) {
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
@@ -341,10 +315,12 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu,
 		                  false, tribeinfo.tooltip);
 	}
 	tribe_select_.select(tribeinfos.front().name);
-	tribe_select_.selected.connect([this]() { selected_->set_tribe(tribe_select_.get_selected()); });
+	tribe_select_.selected.connect([this]() {
+		selected_->set_tribe(tribe_select_.get_selected());
+		modified_();
+	});
 
-	box_buttonsbox_.add(&tribe_select_);
-	box_buttonsbox_.add_inf_space();
+	box_dirstruct_.add(&tribe_select_, UI::Box::Resizing::kFullSize);
 }
 
 void CampaignAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {

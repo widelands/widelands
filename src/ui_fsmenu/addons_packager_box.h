@@ -30,15 +30,7 @@ namespace FsMenu {
 
 class AddOnsPackagerBox : public UI::Box {
 public:
-	AddOnsPackagerBox(MainMenu& mainmenu,
-	                  Panel* parent,
-	                  UI::PanelStyle style,
-	                  int32_t x,
-	                  int32_t y,
-	                  uint32_t orientation,
-	                  int32_t max_x = 0,
-	                  int32_t max_y = 0,
-	                  uint32_t inner_spacing = 0);
+	AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation);
 
 	void set_modified_callback(std::function<void()> modified_callback) {
 		modified_ = std::move(modified_callback);
@@ -54,19 +46,11 @@ protected:
 
 class MapsAddOnsPackagerBox : public AddOnsPackagerBox {
 public:
-	MapsAddOnsPackagerBox(MainMenu& mainmenu,
-	                      Panel* parent,
-	                      UI::PanelStyle style,
-	                      int32_t x,
-	                      int32_t y,
-	                      uint32_t orientation,
-	                      int32_t max_x = 0,
-	                      int32_t max_y = 0,
-	                      uint32_t inner_spacing = 0);
+	MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent);
 	void load_addon(AddOns::MutableAddOn*) override;
 
 protected:
-	UI::Box box_buttonsbox_;
+	UI::Box box_dirstruct_;
 
 private:
 	enum class ModifyAction { kAddMap, kAddDir, kDeleteMapOrDir };
@@ -87,7 +71,7 @@ private:
 	std::vector<MainMenu::MapEntry> maps_list_;
 	AddOns::AddOnCategory last_category_;
 
-	UI::Box box_dirstruct_, box_maps_list_;
+	UI::Box box_maps_list_, box_buttonsbox_;
 	UI::Button map_add_, map_add_dir_, map_delete_;
 	UI::Listselect<std::string> dirstruct_, my_maps_;
 	AddOns::MapsAddon* selected_;  // Not owned
@@ -95,15 +79,7 @@ private:
 
 class CampaignAddOnsPackagerBox : public MapsAddOnsPackagerBox {
 public:
-	CampaignAddOnsPackagerBox(MainMenu& mainmenu,
-	                          Panel* parent,
-	                          UI::PanelStyle style,
-	                          int32_t x,
-	                          int32_t y,
-	                          uint32_t orientation,
-	                          int32_t max_x = 0,
-	                          int32_t max_y = 0,
-	                          uint32_t inner_spacing = 0);
+	CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent);
 	void load_addon(AddOns::MutableAddOn*) override;
 
 private:

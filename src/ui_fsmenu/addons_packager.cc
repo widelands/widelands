@@ -171,10 +171,10 @@ AddOnsPackager::AddOnsPackager(MainMenu& parent, AddOnsCtrl& ctrl)
 	main_box_.add_space(kSpacing);
 	main_box_.add(&box_right_, UI::Box::Resizing::kExpandBoth);
 
-	addon_boxes_[AddOns::AddOnCategory::kMaps] = std::make_shared<MapsAddOnsPackagerBox>(
-	   parent, &box_right_addon_specific_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
-	addon_boxes_[AddOns::AddOnCategory::kCampaign] = std::make_shared<CampaignAddOnsPackagerBox>(
-	   parent, &box_right_addon_specific_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal);
+	addon_boxes_[AddOns::AddOnCategory::kMaps] =
+	   std::make_shared<MapsAddOnsPackagerBox>(parent, &box_right_addon_specific_);
+	addon_boxes_[AddOns::AddOnCategory::kCampaign] =
+	   std::make_shared<CampaignAddOnsPackagerBox>(parent, &box_right_addon_specific_);
 
 	for (auto&& pair : addon_boxes_) {
 		pair.second->set_modified_callback([this] { current_addon_edited(); });
@@ -475,6 +475,9 @@ void AddOnsPackager::clicked_write_changes() {
 			addons_with_changes_[e] = false;
 		}
 		check_for_unsaved_changes();
+
+		// Refresh packager box (some options are not always available)
+		addon_selected();
 
 		// Update the global catalogue
 		WLApplication::initialize_g_addons();
