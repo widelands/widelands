@@ -209,7 +209,8 @@ function mission_thread()
       "frisians_foresters_house",
       "frisians_reed_farm"}
    local o = add_campaign_objective(obj_build_wood_economy)
-   p1:run_training_wheel("objectives", false)
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- p1:run_training_wheel("objectives", false)
 
    while not check_for_buildings(p1, {
       frisians_woodcutters_house = 1,

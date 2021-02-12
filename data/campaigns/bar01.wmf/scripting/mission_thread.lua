@@ -33,7 +33,8 @@ function introduction_thread()
 
    campaign_message_box(order_msg_ranger)
    local obj = add_campaign_objective(obj_build_rangers)
-   plr:run_training_wheel("objectives", true)
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:run_training_wheel("objectives", true)
 
    -- Try not to interrupt the player actions with a message, so we wait generously
    sleep(50000)
