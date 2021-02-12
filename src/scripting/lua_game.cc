@@ -89,11 +89,13 @@ const MethodType<LuaPlayer> LuaPlayer::Methods[] = {
    METHOD(LuaPlayer, reveal_fields),
    METHOD(LuaPlayer, hide_fields),
    METHOD(LuaPlayer, mark_scenario_as_solved),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPlayer, acquire_training_wheel_lock),
    METHOD(LuaPlayer, release_training_wheel_lock),
    METHOD(LuaPlayer, mark_training_wheel_as_solved),
    METHOD(LuaPlayer, run_training_wheel),
    METHOD(LuaPlayer, skip_training_wheel),
+#endif
    METHOD(LuaPlayer, get_ships),
    METHOD(LuaPlayer, get_buildings),
    METHOD(LuaPlayer, get_suitability),
@@ -723,7 +725,8 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	return 0;
 }
 
-/* RST
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: acquire_training_wheel_lock(name)
 
       Try to mark the given training wheel as the active one.
@@ -744,7 +747,7 @@ int LuaPlayer::acquire_training_wheel_lock(lua_State* L) {
 	return 1;
 }
 
-/* RST
+/* R#S#T
    .. method:: release_training_wheel_lock()
 
       Mark the current training wheel as no longer active without solving it.
@@ -755,7 +758,7 @@ int LuaPlayer::release_training_wheel_lock(lua_State* L) {
 	return 0;
 }
 
-/* RST
+/* R#S#T
    .. method:: mark_training_wheel_as_solved(name)
 
       Marks a global training wheel objective as solved. Also releases the lock.
@@ -773,7 +776,7 @@ int LuaPlayer::mark_training_wheel_as_solved(lua_State* L) {
 	return 0;
 }
 
-/* RST
+/* R#S#T
    .. method:: run_training_wheel(name[, force])
 
       Trigger running a training wheel. This function will skip the dependency check, so the given
@@ -799,7 +802,7 @@ int LuaPlayer::run_training_wheel(lua_State* L) {
 	return 0;
 }
 
-/* RST
+/* R#S#T
    .. method:: skip_training_wheel(name)
 
       Skips the execution of a training wheel and activates the training wheels that depend on it.
@@ -817,6 +820,7 @@ int LuaPlayer::skip_training_wheel(lua_State* L) {
 	get_game(L).skip_training_wheel(luaL_checkstring(L, 2));
 	return 0;
 }
+#endif
 
 /* RST
    .. method:: get_ships()

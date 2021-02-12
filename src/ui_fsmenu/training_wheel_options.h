@@ -17,6 +17,7 @@
  *
  */
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #ifndef WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 #define WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
 
@@ -69,3 +70,4 @@ private:
 }  // namespace FsMenu
 
 #endif  // end of include guard: WL_UI_FSMENU_TRAINING_WHEEL_OPTIONS_H
+#endif
