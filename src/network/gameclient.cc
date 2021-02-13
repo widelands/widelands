@@ -48,6 +48,7 @@
 #include "network/participantlist.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "ui_fsmenu/main.h"
@@ -1150,10 +1151,21 @@ void GameClient::disconnect(const std::string& reason,
 		d->net->close();
 	}
 
-	if (showmsg && d->game) {
-		// WLApplication::emergency_save(d->modal, *d->game, msg);
-		throw wexception("%s", arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
-		                                     NetworkGamingMessages::get_message(reason, arg).c_str());
+	if (d->modal) {
+		if (reason == "SERVER_LEFT" || reason == "KICKED") {
+			// TODO(Notabilis): Probably some (but not all?) reasons from network_gaming_messages.cc
+			// should be handled here as well without throwing an exception
+			UI::WLMessageBox m(d->modal, UI::WindowStyle::kFsMenu, _("The game ended"),
+			                   arg.empty() ? NetworkGamingMessages::get_message(reason).c_str() :
+			                                 NetworkGamingMessages::get_message(reason, arg).c_str(),
+			                   UI::WLMessageBox::MBoxType::kOk);
+			m.run<UI::Panel::Returncodes>();
+		} else if (showmsg && d->game) {
+			// WLApplication::emergency_save(d->modal, *d->game, msg);
+			throw wexception("%s", arg.empty() ?
+			                          NetworkGamingMessages::get_message(reason).c_str() :
+			                          NetworkGamingMessages::get_message(reason, arg).c_str());
+		}
 	}
 
 	// TODO(Klaus Halfmann): Some of the modal windows are now handled by unique_ptr resulting in a
