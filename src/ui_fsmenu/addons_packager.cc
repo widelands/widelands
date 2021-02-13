@@ -449,6 +449,7 @@ void AddOnsPackager::clicked_write_changes() {
 	for (const auto& str : addons_with_changes_) {
 		msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 	}
+	msg += _("\n\nBe careful with this, if you have modified addon files yourself!");
 
 	UI::WLMessageBox m(&main_menu_, UI::WindowStyle::kFsMenu, _("Confirm Saving"), msg,
 	                   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);

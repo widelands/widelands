@@ -21,6 +21,7 @@
 #define WL_LOGIC_MUTABLE_ADDON_H
 
 #include <memory>
+#include <regex>
 
 #include "logic/addons.h"
 
@@ -65,11 +66,13 @@ public:
 protected:
 	virtual std::string parse_requirements();
 	std::string profile_path();
+	void setup_temp_dir();
+	void cleanup_temp_dir();
 
 	std::string internal_name_, descname_, description_, author_, version_;
 	AddOnCategory category_;
 
-	std::string directory_;
+	std::string directory_, backup_path_;
 };
 
 class WorldAddon : public MutableAddOn {
@@ -102,22 +105,39 @@ public:
 
 protected:
 	std::string parse_requirements() override;
+	void do_recursively_create_filesystem_structure(const std::string& dir,
+	                                                const DirectoryTree& tree);
 	DirectoryTree tree_;
 
 private:
 	void recursively_initialize_tree_from_disk(const std::string& dir, DirectoryTree& tree);
-	void do_recursively_create_filesystem_structure(const std::string& dir,
-	                                                const DirectoryTree& tree);
 	void parse_map_requirements(const DirectoryTree& tree, std::vector<std::string>& req);
 };
 
 class CampaignAddon : public MapsAddon {
 public:
-	using MapsAddon::MapsAddon;
+	explicit CampaignAddon(const AddOnInfo& a);
 	bool write_to_disk() override;
 	bool luafile_exists();
+	std::string get_tribe() {
+		return tribe_;
+	}
 	void set_tribe(const std::string& tribe) {
 		tribe_ = tribe;
+	}
+
+	std::string get_short_desc() {
+		return short_desc_;
+	}
+	void set_short_desc(const std::string& desc) {
+		short_desc_ = desc;
+	}
+
+	std::string get_difficulty() {
+		return difficulty_;
+	}
+	void set_difficulty(const std::string& difficulty) {
+		difficulty_ = difficulty;
 	}
 
 private:
@@ -125,7 +145,9 @@ private:
 	                                  const std::string& dir,
 	                                  const DirectoryTree& tree);
 
-	std::string tribe_;
+	std::string tribe_, short_desc_, difficulty_, lua_contents_;
+	std::regex rex_difficulty_, rex_descname_, rex_description_, rex_short_desc_, rex_tribe_,
+	   rex_scenario_;
 };
 
 class WinCondAddon : public MutableAddOn {

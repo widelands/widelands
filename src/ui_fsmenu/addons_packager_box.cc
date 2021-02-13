@@ -292,13 +292,17 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 	}
 	}
 
-	modified_();
+	if (modified_) {
+		modified_();
+	}
 	rebuild_dirstruct(selected_, select);
 }
 
 CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
-   : MapsAddOnsPackagerBox(mainmenu, parent),
-     tribe_select_(&box_dirstruct_,
+   : AddOnsPackagerBox(mainmenu, parent, UI::Box::Vertical),
+     maps_box_(mainmenu, this),
+     desc_tribe_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     tribe_select_(&desc_tribe_box_,
                    "dropdown_tribe",
                    0,
                    0,
@@ -308,29 +312,73 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* 
                    _("Tribe"),
                    UI::DropdownType::kTextual,
                    UI::PanelStyle::kFsMenu,
-                   UI::ButtonStyle::kFsMenuSecondary) {
+                   UI::ButtonStyle::kFsMenuSecondary),
+     difficulty_(&desc_tribe_box_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     short_desc_(&desc_tribe_box_, 0, 0, 50, UI::PanelStyle::kFsMenu) {
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
 		tribe_select_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
 		                  false, tribeinfo.tooltip);
 	}
 	tribe_select_.select(tribeinfos.front().name);
-	tribe_select_.selected.connect([this]() {
-		selected_->set_tribe(tribe_select_.get_selected());
-		modified_();
-	});
+	tribe_select_.selected.connect([this]() { edited(); });
+	difficulty_.changed.connect([this]() { edited(); });
+	short_desc_.changed.connect([this]() { edited(); });
+	maps_box_.set_modified_callback([this]() { edited(); });
 
-	box_dirstruct_.add(&tribe_select_, UI::Box::Resizing::kFullSize);
+	difficulty_.set_tooltip(_("The campaigns difficulty. One word."));
+	short_desc_.set_tooltip(_("Short description, which will be appeded to the difficulty."));
+
+	desc_tribe_box_.add(
+	   new UI::Textarea(&desc_tribe_box_, UI::PanelStyle::kFsMenu,
+	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Difficulty:"), UI::Align::kRight),
+	   UI::Box::Resizing::kFullSize);
+	desc_tribe_box_.add(&difficulty_);
+	desc_tribe_box_.add_space(kSpacing);
+	desc_tribe_box_.add(&short_desc_, UI::Box::Resizing::kFillSpace);
+	desc_tribe_box_.add_space(5 * kSpacing);
+	desc_tribe_box_.add(&tribe_select_, UI::Box::Resizing::kFillSpace);
+
+	add(&desc_tribe_box_, UI::Box::Resizing::kFullSize);
+	add_space(kSpacing);
+	add(&maps_box_, UI::Box::Resizing::kExpandBoth);
+}
+
+void CampaignAddOnsPackagerBox::edited() {
+	selected_->set_difficulty(difficulty_.text());
+	selected_->set_short_desc(short_desc_.text());
+	selected_->set_tribe(tribe_select_.get_selected());
+	if (modified_) {
+		modified_();
+	}
 }
 
 void CampaignAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	assert(a->get_category() == AddOns::AddOnCategory::kCampaign);
 	selected_ = dynamic_cast<AddOns::CampaignAddon*>(a);
-	// Only allow tribe configuration during first setup
-	tribe_select_.set_visible(!selected_->luafile_exists());
-	selected_->set_tribe(tribe_select_.get_selected());
+	std::string tribe = selected_->get_tribe();
+	if (tribe.empty()) {
+		selected_->set_tribe(tribe_select_.get_selected());
+	} else {
+		tribe_select_.select(tribe);
+	}
 
-	MapsAddOnsPackagerBox::load_addon(a);
+	std::string short_desc = selected_->get_short_desc();
+	if (short_desc.empty()) {
+		short_desc = selected_->get_descname();
+		selected_->set_short_desc(short_desc);
+	}
+	short_desc_.set_text(short_desc);
+
+	std::string difficulty = selected_->get_difficulty();
+	if (difficulty.empty()) {
+		// The default difficulty. No markup intentionally
+		difficulty = "Easy.";
+		selected_->set_short_desc(difficulty);
+	}
+	difficulty_.set_text(difficulty);
+
+	maps_box_.load_addon(a);
 }
 
 }  // namespace FsMenu

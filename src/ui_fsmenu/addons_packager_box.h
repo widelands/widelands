@@ -23,6 +23,7 @@
 #include "logic/mutable_addon.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_fsmenu/main.h"
 
@@ -77,13 +78,17 @@ private:
 	AddOns::MapsAddon* selected_;  // Not owned
 };
 
-class CampaignAddOnsPackagerBox : public MapsAddOnsPackagerBox {
+class CampaignAddOnsPackagerBox : public AddOnsPackagerBox {
 public:
 	CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent);
 	void load_addon(AddOns::MutableAddOn*) override;
 
 private:
+	void edited();
+	MapsAddOnsPackagerBox maps_box_;
+	UI::Box desc_tribe_box_;
 	UI::Dropdown<std::string> tribe_select_;
+	UI::EditBox difficulty_, short_desc_;
 	AddOns::CampaignAddon* selected_;  // Not owned
 };
 
