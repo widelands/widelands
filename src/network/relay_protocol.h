@@ -72,8 +72,9 @@
  * Protocol versions must match on all systems.
  * Used versions:
  * 1: Initial version introduced between build 19 and build 20
+ * 2: Same as version 1 but without the doubled password (bug) on kHello, starting build 21
  */
-constexpr uint8_t kRelayProtocolVersion = 1;
+constexpr uint8_t kRelayProtocolVersion = 2;
 
 /**
  * The commands used by the relay.
@@ -142,24 +143,22 @@ enum class RelayCommand : uint8_t {
 	 *                 The client might want to check this.
 	 *
 	 * This command and its parameters are not really necessary. But it might be nice to have at
-	 * least some
-	 * confirmation that we have a connection to a (and the right) relay and not to some other
-	 * server.
+	 * least some confirmation that we have a connection to a (and the right) relay and not
+	 * to some other server.
 	 */
 	kWelcome = 2,
 
 	/**
 	 * Can be sent by any participant.
 	 * Might be the result of a protocol violation, an invalid password on connect of the
-	 * NetHostProxy
-	 * or a regular disconnect (e.g. the game is over).
+	 * NetHostProxy or a regular disconnect (e.g. the game is over).
 	 * After sending or receiving this command, the TCP connection should be closed.
-	 * \note When the game host sends its kDisconnect message, the relay will shut down.
+	 * \note When the game host sends its kDisconnect message, the relay will shut down the game.
 	 * Payload:
 	 * \li string: An error code describing the reason of the disconnect. Valid values:
 	 *             NORMAL: Regular disconnect (game has ended, host leaves, client leaves, ...);
-	 *             PROTOCOL_VIOLATION: Some protocol error (unknown command, invalid parameters,
-	 * ...);
+	 *             PROTOCOL_VIOLATION: Some protocol error (unknown command,
+	 *                                 invalid parameters, ...);
 	 *             WRONG_VERSION: The version in the kHello packet is not supported;
 	 *             GAME_UNKNOWN: Game name provided in kHello packet is unknown;
 	 *             NO_HOST: No host is connected to the relay yet;
@@ -194,10 +193,9 @@ enum class RelayCommand : uint8_t {
 	 * A list of
 	 * \li unsigned_8: Id of the client.
 	 * \li unsigned_8: The RTT in milliseconds. Capped to max. 255ms.
-	 * \li unsigned_8: Seconds since the last kPong has been received by the relay. Capped to max.
-	 * 255ms.
+	 * \li unsigned_8: Seconds since the last kPong has been received by the relay.
+	 *                 Capped to max. 255s.
 	 */
-	// TODO(Notabilis): Above documentation is broken. Seconds or Milliseconds? Or something else?
 	kRoundTripTimeResponse = 7,
 	/// \}
 
@@ -207,8 +205,8 @@ enum class RelayCommand : uint8_t {
 	/// \{
 
 	/**
-	 * Send by the relay to the NetHostProxy to inform that a client established a connection to the
-	 * relay.
+	 * Send by the relay to the NetHostProxy to inform that a client established
+	 * a connection to the relay.
 	 * Payload:
 	 * \li unsigned_8: An id to represent the new client.
 	 */
