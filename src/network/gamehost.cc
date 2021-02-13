@@ -853,6 +853,20 @@ void GameHost::think() {
 
 		if (curtime - d->last_rtt_update >= RTT_UPDATE_INTERVAL) {
 			d->last_rtt_update = SDL_GetTicks();
+			if (internet_) {
+				// If we are in an online game, get the RTT updates from the relay
+				NetHostProxy* proxy = dynamic_cast<NetHostProxy*>(d->net.get());
+				assert(proxy != nullptr);
+				// Handle the current state
+				// user 0 and ConnectionId=1 (see relay code) is the host
+				d->settings.users[0].rtt = proxy->get_client_rtt(1u);
+				for (const Client& c : d->clients) {
+					d->settings.users[c.usernum].rtt = proxy->get_client_rtt(c.sock_id);
+				}
+				// Request new RTTs
+				proxy->request_rtt_update();
+			} else {
+				// A local game. Update the clients
 				// Request new pongs from all clients
 				SendPacket send_packet;
 				send_packet.unsigned_8(NETCMD_PING);
@@ -866,6 +880,7 @@ void GameHost::think() {
 						nethost->register_ping(client.sock_id, d->last_ping_seq);
 					}
 				}
+			}
 			// Send signal to UI that the RTTs have been updated
 			assert(d->participants);
 			d->participants->participants_updated_rtt();
