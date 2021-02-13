@@ -348,16 +348,17 @@ void AddOnsPackager::clicked_new_addon() {
 		   {1, 0, 0},
 		   0,
 		   category.get_selected(),
-		   {},
+		   {},  // Requirements
+		   /* Everything below is used only for remote add-ons. */
+		   {},  // Screenies
 		   false,
-		   {{}, {}, {}, {}},
-		   {},
-		   0,
-		   "",
-		   0,
-		   0,
-		   {},
-		   {}};
+		   0,   // Size
+		   "",  // Uploader
+		   0,   // Timestamp
+		   0,   // Downloads
+		   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Votes
+		   {}  // Comments
+		   };
 		mutable_addons_[name] = AddOns::MutableAddOn::create_mutable_addon(a);
 		addons_with_changes_[name] = false;
 		check_for_unsaved_changes();

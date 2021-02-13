@@ -899,7 +899,9 @@ bool WLApplication::init_settings() {
 	get_config_string("language", "");
 	get_config_string("metaserver", "");
 	get_config_natural("metaserverport", 0);
-	get_config_string("addon_server", "");
+	get_config_string("addon_repo", "");
+	get_config_string("addon_server_ip", "");
+	get_config_string("addon_server_port", "");
 	// Undocumented on command line, appears in game options
 	get_config_bool("single_watchwin", false);
 	get_config_bool("ctrl_zoom", false);

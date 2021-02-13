@@ -61,7 +61,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 	                parent->get_inner_w() - 2 * kRowButtonSize,
 	                2 * kRowButtonSize,
 	                title),
-	     die_after_last_action(false),
+	     // die_after_last_action(false),
 	     box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Vertical, get_inner_w()),
 	     txt1_(&box_,
 	           UI::PanelStyle::kFsMenu,
@@ -102,7 +102,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 		return progress_;
 	}
 
-	// Bit complex design for the two download_xxx functions to ensure the
+	/* // Bit complex design for the two download_xxx functions to ensure the
 	// progress indicator window stays responsive during downloading
 	std::function<void(const std::string&)> action_when_thinking;
 	std::vector<std::string> action_params;
@@ -120,7 +120,7 @@ struct ProgressIndicatorWindow : public UI::Window {
 				end_modal(UI::Panel::Returncodes::kOk);
 			}
 		}
-	}
+	} */
 
 private:
 	UI::Box box_;
@@ -689,15 +689,15 @@ void AddOnsCtrl::refresh_remotes() {
 		                              0,
 		                              AddOns::AddOnCategory::kNone,
 		                              {},
-		                              false,
-		                              {{}, {}, {}, {}},
-		                              {},
-		                              0,
-		                              bug,
-		                              std::time(nullptr),
-		                              0,
-		                              {},
-		                              {}}};
+	                                  {},
+	                                  false,
+	                                  0,
+	                                  bug,
+	                                  std::time(nullptr),
+	                                  0,
+	                                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	                                  {}
+	                                  }};
 	}
 	rebuild();
 }
@@ -1039,46 +1039,45 @@ static void install_translation(const std::string& temp_locale_path,
 // TODO(Nordfriese): install() and upgrade() should also (recursively) install the add-on's
 // requirements
 void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
-	{
-		ProgressIndicatorWindow piw(this, remote.descname());
+	ProgressIndicatorWindow w(this, remote.descname());
+	w.set_message_1((boost::format(_("Downloading ‘%s’…")) % remote.descname()).str());
 
-		g_fs->ensure_directory_exists(kAddOnDir);
-
-		piw.progressbar().set_total(remote.file_list.files.size() + remote.file_list.locales.size());
-
-		const std::string path = download_addon(piw, remote);
-
-		if (path.empty()) {
-			// downloading failed
-			return;
-		}
-
-		// Install the add-on
-		{
-			const std::string new_path =
-			   kAddOnDir + FileSystem::file_separator() + remote.internal_name;
-
-			assert(g_fs->is_directory(path));
-			if (g_fs->file_exists(new_path)) {
-				// erase leftovers from manual uninstallations
-				g_fs->fs_unlink(new_path);
-			}
-			assert(!g_fs->file_exists(new_path));
-
-			g_fs->fs_rename(path, new_path);
-
-			assert(!g_fs->file_exists(path));
-			assert(g_fs->is_directory(new_path));
-		}
-
-		// Now download the translations
-		for (const std::string& temp_locale_path : download_i18n(piw, remote)) {
-			install_translation(temp_locale_path, remote.internal_name);
-		}
-
-		AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name),
-		                                          remote.category != AddOns::AddOnCategory::kWorld));
+	std::string temp_dir = kTempFileDir + FileSystem::file_separator() + remote.internal_name + kTempFileExtension;
+	if (g_fs->file_exists(temp_dir)) {
+		g_fs->fs_unlink(temp_dir);  // Clean up leftovers of previous installations.
 	}
+	g_fs->ensure_directory_exists(temp_dir);
+	g_fs->ensure_directory_exists(kAddOnDir);
+
+	try {
+		w.progressbar().set_total(remote.total_file_size);
+		net().download_addon(remote.internal_name, temp_dir, [this, &w](const std::string& f, const long l) {
+			w.set_message_2(f);
+			w.progressbar().set_state(l);
+			do_redraw_now();
+		});
+	} catch (const std::exception& e) {
+		log_err("install addon %s: %s", remote.internal_name.c_str(), e.what());
+		w.set_visible(false);
+		UI::WLMessageBox m(
+		   get_parent(), UI::WindowStyle::kFsMenu, _("Error"),
+		   (boost::format(
+		       _("The add-on ‘%1$s’ could not be downloaded from the server. Installing/upgrading "
+		         "this add-on will be skipped.\n\nError Message:\n%2$s")) % remote.internal_name % e.what()).str(),
+		   UI::WLMessageBox::MBoxType::kOk);
+		m.run<UI::Panel::Returncodes>();
+		g_fs->fs_unlink(temp_dir);
+		return;
+	}
+
+	g_fs->fs_rename(temp_dir, kAddOnDir + FileSystem::file_separator() + remote.internal_name);
+
+
+	// NOCOM translations
+
+
+	AddOns::g_addons.push_back(std::make_pair(AddOns::preload_addon(remote.internal_name),
+	                                          remote.category != AddOns::AddOnCategory::kWorld));
 	if (remote.category == AddOns::AddOnCategory::kWorld) {
 		inform_about_restart(remote.descname());
 	}
@@ -1086,7 +1085,8 @@ void AddOnsCtrl::install(const AddOns::AddOnInfo& remote) {
 
 // Upgrades the specified add-on. If `full_upgrade` is `false`, only translations will be updated.
 void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrade) {
-	{
+	NEVER_HERE();  // NOCOM
+	/* {
 		ProgressIndicatorWindow piw(this, remote.descname());
 
 		piw.progressbar().set_total(remote.file_list.locales.size() +
@@ -1133,11 +1133,12 @@ void AddOnsCtrl::upgrade(const AddOns::AddOnInfo& remote, const bool full_upgrad
 			return;
 		}
 	}
-	NEVER_HERE();
+	NEVER_HERE(); */
 }
 
-std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw,
+/* std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw,
                                        const AddOns::AddOnInfo& info) {
+	NEVER_HERE();  // NOCOM
 	piw.set_message_1((boost::format(_("Downloading ‘%s’…")) % info.descname()).str());
 
 	const std::string temp_dir = kTempFileDir + "/" + info.internal_name + kTempFileExtension;
@@ -1187,21 +1188,13 @@ std::string AddOnsCtrl::download_addon(ProgressIndicatorWindow& piw,
 		}
 	};
 	return (piw.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) ? temp_dir : "";
-}
+} */
 
-std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
+/* std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
                                                 const AddOns::AddOnInfo& info) {
+	NEVER_HERE();  // NOCOM
 	piw.set_message_1(
 	   (boost::format(_("Downloading translations for ‘%s’…")) % info.descname()).str());
-
-	// Download all known locales one by one.
-	// TODO(Nordfriese): When we have a real server, we should let the server provide us
-	// with info which locales are actually present on the server rather than trying to
-	// fetch all we know about.
-	// My dummy "server" currently has only 'nds' translations, and the attempts to download
-	// the others take about one minute extra, which could be avoided.
-	// In net_addons.cc, we can then also fail with a wexception if downloading one of them
-	// fails, instead of only logging the error as we do now.
 
 	std::set<std::string> result;
 	piw.die_after_last_action = true;
@@ -1252,7 +1245,7 @@ std::set<std::string> AddOnsCtrl::download_i18n(ProgressIndicatorWindow& piw,
 	prof.write(kAddOnLocaleVersions.c_str(), false);
 
 	return result;
-}
+} */
 
 static void uninstall(AddOnsCtrl* ctrl, const AddOns::AddOnInfo& info, const bool local) {
 	if (!(SDL_GetModState() & KMOD_CTRL)) {

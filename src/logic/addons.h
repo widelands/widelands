@@ -53,11 +53,6 @@ struct AddOnCategoryInfo {
 	bool can_disable_addons;
 };
 
-// TODO(Nordfriese): Ugly hack required for the dummy server. Can go when we have a real server.
-struct AddOnFileList {
-	std::vector<std::string> directories, files, locales, checksums;
-};
-
 using AddOnVersion = std::vector<uint32_t>;
 std::string version_to_string(const AddOnVersion&, bool localize = true);
 AddOnVersion string_to_version(std::string);
@@ -76,7 +71,7 @@ struct AddOnComment {
 constexpr uint8_t kMaxRating = 10;
 
 struct AddOnInfo {
-	std::string internal_name;  // "cool_feature.wad"
+	std::string internal_name;  ///< "cool_feature.wad"
 
 	std::string unlocalized_descname;
 	std::string unlocalized_description;
@@ -85,26 +80,21 @@ struct AddOnInfo {
 	std::function<std::string()> description;
 	std::function<std::string()> author;
 
-	AddOnVersion version;   // Add-on version (e.g. 1.2.3)
-	uint32_t i18n_version;  // (see doc/sphinx/source/add-ons.rst)
-
+	AddOnVersion version;   ///< Add-on version (e.g. 1.2.3)
+	uint32_t i18n_version;  ///< (see doc/sphinx/source/add-ons.rst)
 	AddOnCategory category;
 
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 
-	bool verified;  // Only valid for Remote add-ons
-
-	AddOnFileList file_list;  // Get rid of this ASAP
 	std::map<std::string /* name */, std::string /* description */> screenshots;
 
-	uint32_t total_file_size;     // total size of all files, in bytes
-	std::string upload_username;  // who uploaded (may be different from author)
-
-	// TODO(Nordfriese): These are not yet implemented on the server-side
-	std::time_t upload_timestamp;  // date and time when this version was uploaded
-	uint32_t download_count;       // total times downloaded
-	uint32_t votes[kMaxRating];    // total number of votes for each of the ratings 1-10
+	bool verified;                 ///< Only valid for Remote add-ons.
+	uint32_t total_file_size;      ///< Total size of all files, in bytes.
+	std::string upload_username;   ///< Who uploaded (may be different from author).
+	std::time_t upload_timestamp;  ///< Date and time when this version was uploaded.
+	uint32_t download_count;       ///< Total times downloaded.
+	uint32_t votes[kMaxRating];    ///< Total number of votes for each of the ratings 1-10.
 	std::vector<AddOnComment> user_comments;
 
 	uint32_t number_of_votes() const;

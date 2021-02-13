@@ -274,16 +274,17 @@ AddOnInfo preload_addon(const std::string& name) {
 	               string_to_version(s.get_safe_string("version")),
 	               i18n_section ? i18n_section->get_natural(name.c_str(), 0) : 0,
 	               get_category(s.get_safe_string("category")),
-	               {},
-	               false,
-	               {{}, {}, {}, {}},
-	               {},
-	               0,
-	               "",
-	               0,
-	               0,
-	               {},
-	               {}};
+	               {},     // Requirements (will be initialized later)
+	               /* Everything below is used only for remote add-ons. */
+	               {},     // Screenies
+	               false,  // Verified
+	               0,      // Size
+	               "",     // Uploader
+	               0,      // Timestamp
+	               0,      // Downloads
+	               0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // Votes
+	               {}      // Comments
+	               };
 
 	if (i.category == AddOnCategory::kNone) {
 		throw wexception("preload_addon (%s): category is None", name.c_str());

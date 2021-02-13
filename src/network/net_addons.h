@@ -22,9 +22,8 @@
 
 #define CURL_STATICLIB
 
-#include <set>
-
 #include <curl/curl.h>
+#include <set>
 
 #include "logic/addons.h"
 
@@ -35,38 +34,43 @@ namespace AddOns {
 // Con: Additional dependency – this is the only place in our code where libcurl is used
 
 struct NetAddons {
-	NetAddons() : curl_(nullptr) {
+	NetAddons() : initialized_(false), curl_(nullptr), client_socket_(0) {
 	}
 	~NetAddons();
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<AddOnInfo> refresh_remotes();
 
-	// Requests the file with the given name (e.g. "cool_feature.wad/init.lua")
-	// from the server and downloads it to the given canonical location.
-	// Verifies file integrity by calculating the file's checksum.
-	void download_addon_file(const std::string& name,
-	                         const std::string& checksum,
-	                         const std::string& save_as);
+	using CallbackFn = std::function<void(const std::string&, long)>;
 
-	// Requests the MO file for the given add-on (cool_feature.wad) and locale ("nds.mo") from the
-	// server, downloads it into a temporary location (e.g. ~/.widelands/temp/nds.mo.tmp), and
-	// returns the canonical path to the downloaded file. The temp file's filename is guaranteed to
-	// be in the format "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-	std::string
-	download_i18n(const std::string& addon, const std::string& checksum, const std::string& locale);
+	// Downloads the add-on with the given name (e.g. "cool_feature.wad")
+	// from the server and downloads it to the given canonical location.
+	void download_addon(const std::string& name, const std::string& save_as, const CallbackFn& progress);
+
+	// Requests the MO files for the given add-on (cool_feature.wad) from the server and
+	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
+	// The filename of the created MO files is guaranteed to be in the format
+	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
+	void download_i18n(const std::string& addon, const std::string& directory);
 
 	// Download the given screenshot for the given add-on
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
 
 private:
+	friend struct CrashGuard;
+
 	// Open the connection if it was not open yet; throws an error if this fails
 	void init();
 
 	// Set the URL (whitespace-safe) and adjust the timeout values.
 	void set_url_and_timeout(std::string);
 
+	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
+	std::string read_line();
+
+	bool initialized_;
 	CURL* curl_;
+	int client_socket_;
 };
 
 }  // namespace AddOns
