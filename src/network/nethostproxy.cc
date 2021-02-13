@@ -118,6 +118,16 @@ void NetHostProxy::send(const std::vector<ConnectionId>& ids,
 	conn_->send(priority, RelayCommand::kToClients, active_ids, packet);
 }
 
+void NetHostProxy::request_rtt_update() {
+	std::lock_guard<std::mutex> lock(mutex_);
+	conn_->send(NetPriority::kNormal, RelayCommand::kRoundTripTimeRequest);
+}
+
+uint8_t NetHostProxy::get_client_rtt(ConnectionId id) {
+	std::lock_guard<std::mutex> lock(mutex_);
+	return pings_.get_rtt(id);
+}
+
 NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
                            const std::string& name,
                            const std::string& password)
@@ -310,7 +320,38 @@ void NetHostProxy::receive_commands() {
 			} else {
 				return;
 			}
+		case RelayCommand::kRoundTripTimeResponse:
+			uint8_t length_list;
+			// Check if enough data is available
+			if (peek.uint8_t(&length_list)) {
+				for (uint8_t i = 0; i < length_list * 3; i++) {
+					if (!peek.uint8_t()) {
+						return;
+					}
+				}
+			} else {
+				return;
+			}
+			// Enough data is there, get it
+			uint8_t id;
+			uint8_t rtt;
+			uint8_t last;
 			conn_->receive(&cmd);
+			conn_->receive(&length_list);
+			for (uint8_t i = 0; i < length_list; i++) {
+				conn_->receive(&id);
+				conn_->receive(&rtt);
+				conn_->receive(&last);
+				// We are fetching the data once per second. So if the time of the last
+				// received ping is greater than one second, ignore the old rtt result and
+				// add a "missed ping" rtt of 255
+				if (last >= 1) {
+					pings_.register_rtt(id, 255);
+				} else {
+					pings_.register_rtt(id, rtt);
+				}
+			}
+			break;
 		default:
 			// Other commands should not be possible.
 			// Then is either something wrong with the protocol or there is an implementation mistake
