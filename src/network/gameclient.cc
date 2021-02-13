@@ -1108,16 +1108,16 @@ void GameClient::handle_network() {
 	}
 	try {
 		assert(d->net != nullptr);
-		// Check if the connection is still open
-		if (!d->net->is_connected()) {
-			disconnect("CONNECTION_LOST", "", false);
-			return;
-		}
 		// Process all available packets
 		std::unique_ptr<RecvPacket> packet = d->net->try_receive();
 		while (packet) {
 			handle_packet(*packet);
 			packet = d->net->try_receive();
+		}
+		// Check if the connection is still open
+		if (!d->net->is_connected()) {
+			disconnect("CONNECTION_LOST", "", false);
+			return;
 		}
 	} catch (const DisconnectException& e) {
 		disconnect(e.what());
