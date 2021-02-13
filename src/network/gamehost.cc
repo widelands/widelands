@@ -482,6 +482,14 @@ struct GameHostImpl {
 	Time pseudo_networktime;
 	int32_t last_heartbeat;
 
+	/// Timestamp in milliseconds of last RTT update.
+	/// For internet games, this is the time we received the update from the relay the last time.
+	/// For local games we update the RTT times continuous but inform others / the UI regularly.
+	int32_t last_rtt_update;
+
+	/// The sequence number used for pings
+	uint8_t last_ping_seq;
+
 	/// The networktime we committed to by sending it across the network.
 	Time committed_networktime;
 
@@ -520,6 +528,8 @@ struct GameHostImpl {
 	     game(nullptr),
 	     pseudo_networktime(0),
 	     last_heartbeat(0),
+	     last_rtt_update(0),
+	     last_ping_seq(0),
 	     committed_networktime(0),
 	     waiting(false),
 	     lastframe(0),
@@ -589,6 +599,10 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
 	hostuser.name = playername;
 	hostuser.position = UserSettings::none();
 	hostuser.ready = true;
+	if (!internet) {
+		// It is a LAN game, so the RTT between the host and, well, the host is 0 milliseconds
+		hostuser.rtt = 0;
+	}
 	d->settings.users.push_back(hostuser);
 	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
 
@@ -757,6 +771,7 @@ void GameHost::run_callback() {
 		}
 		d->pseudo_networktime = game_->get_gametime();
 		d->time.reset(d->pseudo_networktime);
+		// SDL_GetTicks() returns milliseconds since initialization of the SDL library
 		d->lastframe = SDL_GetTicks();
 		d->last_heartbeat = d->lastframe;
 
@@ -834,6 +849,26 @@ void GameHost::think() {
 
 		for (AI::ComputerPlayer* cp : d->computerplayers) {
 			cp->think();
+		}
+
+		if (curtime - d->last_rtt_update >= RTT_UPDATE_INTERVAL) {
+			d->last_rtt_update = SDL_GetTicks();
+				// Request new pongs from all clients
+				SendPacket send_packet;
+				send_packet.unsigned_8(NETCMD_PING);
+				d->last_ping_seq = (d->last_ping_seq == 255) ? 0 : d->last_ping_seq + 1;
+				send_packet.unsigned_8(d->last_ping_seq);
+				broadcast(send_packet, NetPriority::kPing);
+				NetHost* nethost = dynamic_cast<NetHost*>(d->net.get());
+				assert(nethost != nullptr);
+				for (const Client& client : d->clients) {
+					if (client.usernum != UserSettings::not_connected()) {
+						nethost->register_ping(client.sock_id, d->last_ping_seq);
+					}
+				}
+			// Send signal to UI that the RTTs have been updated
+			assert(d->participants);
+			d->participants->participants_updated_rtt();
 		}
 	}
 }
@@ -2241,10 +2276,21 @@ void GameHost::handle_network() {
 	// to keep the sockets up and running
 	if ((forced_pause_ || real_speed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
 		d->lastpauseping = time(nullptr);
+		d->last_rtt_update = SDL_GetTicks();
 
 		SendPacket send_packet;
 		send_packet.unsigned_8(NETCMD_PING);
-		broadcast(send_packet);
+		d->last_ping_seq = (d->last_ping_seq == 255) ? 0 : d->last_ping_seq + 1;
+		send_packet.unsigned_8(d->last_ping_seq);
+		broadcast(send_packet, NetPriority::kPing);
+		if (!internet_) {
+			for (const Client& client : d->clients) {
+				if (client.usernum != UserSettings::not_connected()) {
+					dynamic_cast<NetHost*>(d->net.get())
+					   ->register_ping(client.sock_id, d->last_ping_seq);
+				}
+			}
+		}
 	}
 
 	reaper();
@@ -2465,7 +2511,14 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 
 	switch (cmd) {
 	case NETCMD_PONG:
-		log_info("[Host]: Client %u: got pong\n", client_num);
+		// The ping was send either on last rtt update or due to a pause
+		if (!internet_) {
+			d->settings.users[client.usernum].rtt =
+			   dynamic_cast<NetHost*>(d->net.get())->get_rtt(client.sock_id);
+		}
+		if (forced_pause_) {
+			log_info("[Host]: Client %u: got pong\n", client_num);
+		}
 		break;
 
 	case NETCMD_SETTING_CHANGETRIBE:
