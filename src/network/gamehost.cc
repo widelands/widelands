@@ -305,12 +305,15 @@ struct HostChatProvider : public ChatProvider {
 				         /** TRANSLATORS: Available host command */
 				         _("/endForcedPause        -  Return game to normal speed."))
 				           .str();
+				// Send output only to host, the other players shouldn't receive it
+				c.recipient = h->get_local_playername();
 			}
 
 			// Announce
 			else if (cmd == "announce") {
 				if (arg1.empty()) {
 					c.msg = _("Wrong use, should be: /announce <message>");
+					c.recipient = h->get_local_playername();
 				} else {
 					if (!arg2.empty()) {
 						arg1 += " " + arg2;
@@ -332,6 +335,7 @@ struct HostChatProvider : public ChatProvider {
 						c.msg += arg2;
 					}
 				}
+				c.recipient = h->get_local_playername();
 			}
 
 			// Kick
@@ -360,6 +364,7 @@ struct HostChatProvider : public ChatProvider {
 						c.msg += (boost::format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
+				c.recipient = h->get_local_playername();
 			}
 
 			// Acknowledge kick
@@ -376,6 +381,7 @@ struct HostChatProvider : public ChatProvider {
 						c.msg = _("Kick acknowledgement cancelled: Wrong name given!");
 					}
 				}
+				c.recipient = h->get_local_playername();
 				kickUser = "";
 				kickReason = "";
 			}
@@ -384,6 +390,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "forcePause") {
 				if (h->forced_pause()) {
 					c.msg = _("Pause was already forced - game should be paused.");
+					c.recipient = h->get_local_playername();
 				} else {
 					c.msg = "HOST FORCED THE GAME TO PAUSE!";
 					h->force_pause();
@@ -394,6 +401,7 @@ struct HostChatProvider : public ChatProvider {
 			else if (cmd == "endForcedPause") {
 				if (!h->forced_pause()) {
 					c.msg = _("There is no forced pause - nothing to end.");
+					c.recipient = h->get_local_playername();
 				} else {
 					c.msg = "HOST ENDED THE FORCED GAME PAUSE!";
 					h->end_forced_pause();
@@ -403,6 +411,7 @@ struct HostChatProvider : public ChatProvider {
 			// Default
 			else {
 				c.msg = _("Invalid command! Type /help for a list of commands.");
+				c.recipient = h->get_local_playername();
 			}
 		}
 		h->send(c);
