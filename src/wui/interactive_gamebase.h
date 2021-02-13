@@ -95,6 +95,7 @@ protected:
 
 	// All unique menu windows
 	struct GameMenuWindows {
+		UI::UniqueWindow::Registry playerlist;
 		UI::UniqueWindow::Registry sound_options;
 		UI::UniqueWindow::Registry savegame;
 
@@ -121,6 +122,7 @@ protected:
 private:
 	// For referencing the items in mainmenu_
 	enum class MainMenuEntry {
+		kPlayerList,
 #ifndef NDEBUG  //  only in debug builds
 		kScriptConsole,
 #endif

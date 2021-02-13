@@ -38,6 +38,7 @@
 #include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
+#include "wui/game_player_list_menu.h"
 #include "wui/game_summary.h"
 #include "wui/info_panel.h"
 #include "wui/interactive_player.h"
@@ -114,6 +115,17 @@ void InteractiveGameBase::add_main_menu() {
 	mainmenu_.set_image(g_image_cache->get("images/wui/menus/main_menu.png"));
 	toolbar()->add(&mainmenu_);
 
+	if (chat_provider_) {
+		menu_windows_.playerlist.open_window = [this] {
+			new GamePlayerListMenu(*this, menu_windows_.playerlist, chat_provider_->participants_);
+		};
+		/** TRANSLATORS: An entry in the game's main menu */
+		mainmenu_.add(_("Player List"), MainMenuEntry::kPlayerList,
+		              g_image_cache->get("images/wui/buildings/menu_list_workers.png"), false,
+		              /** TRANSLATORS: Tooltip for the player list in the game's main menu */
+		              _("Display a list of players"));
+	}
+
 #ifndef NDEBUG  //  only in debug builds
 	/** TRANSLATORS: An entry in the game's main menu */
 	mainmenu_.add(_("Script Console"), MainMenuEntry::kScriptConsole,
@@ -148,6 +160,9 @@ void InteractiveGameBase::add_main_menu() {
 
 void InteractiveGameBase::main_menu_selected(MainMenuEntry entry) {
 	switch (entry) {
+	case MainMenuEntry::kPlayerList: {
+		menu_windows_.playerlist.toggle();
+	} break;
 #ifndef NDEBUG  //  only in debug builds
 	case MainMenuEntry::kScriptConsole: {
 		GameChatMenu::create_script_console(this, debugconsole_, *DebugConsole::get_chat_provider());
