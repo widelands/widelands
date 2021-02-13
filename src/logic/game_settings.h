@@ -39,6 +39,11 @@
 // TODO(GunChleoc): Rename all uint8_t to PlayerSlot or Widelands::PlayerNumber
 using PlayerSlot = Widelands::PlayerNumber;
 
+// The rtt is not known. Either we haven't figured it out yet, or it is too high
+constexpr static uint8_t rtt_unknown() {
+	return 255;
+}
+
 struct PlayerSettings {
 	enum class State { kOpen, kHuman, kComputer, kClosed, kShared };
 
@@ -75,12 +80,15 @@ struct UserSettings {
 	}
 
 	UserSettings(Widelands::PlayerEndResult init_result, bool init_ready)
-	   : result(init_result), ready(init_ready) {
+	   : rtt(rtt_unknown()), result(init_result), ready(init_ready) {
 	}
 	UserSettings() : UserSettings(Widelands::PlayerEndResult::kUndefined, false) {
 	}
 
 	uint8_t position = 0;
+
+	// The time needed to send a message between host and client and back
+	uint8_t rtt;
 	std::string name;
 	Widelands::PlayerEndResult result;
 	std::string win_condition_string;
@@ -188,7 +196,7 @@ struct GameSettings {
 	/// Is all fighting forbidden?
 	bool peaceful;
 
-	// Whether players may pick their own starting positions
+	/// Whether players may pick their own starting positions
 	bool custom_starting_positions;
 
 	std::string map_theme;
