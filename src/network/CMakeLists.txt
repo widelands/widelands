@@ -35,6 +35,8 @@ wl_library(network
     network_player_settings_backend.cc
     network_player_settings_backend.h
     network_protocol.h
+    pingtracker.cc
+    pingtracker.h
     relay_protocol.h
     participantlist.cc
     participantlist.h
