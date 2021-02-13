@@ -61,9 +61,12 @@ GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
 }
 #endif
 
-bool GameChatMenu::enter_chat_message(bool close_on_send) {
+bool GameChatMenu::enter_chat_message(bool close_on_send, const std::string& initial_text) {
 	if (is_minimal()) {
 		return false;
+	}
+	if (!initial_text.empty()) {
+		chat_.set_edit_text(initial_text);
 	}
 	chat_.focus_edit();
 	close_on_send_ = close_on_send;

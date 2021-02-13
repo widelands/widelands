@@ -320,6 +320,16 @@ void InteractiveGameBase::gamespeed_menu_selected(GameSpeedEntry entry) {
 	}
 }
 
+bool InteractiveGameBase::open_chat_window(const std::string& initial_text) {
+	if (!chat_provider_) {
+		return false;
+	}
+	if (!chat_.window) {
+		GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
+	}
+	return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message(true, initial_text);
+}
+
 void InteractiveGameBase::add_chat_ui() {
 	add_toolbar_button(
 	   "wui/menus/chat", "chat",
