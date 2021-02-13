@@ -135,71 +135,75 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->send(NetPriority::kNormal, RelayCommand::kHello, kRelayProtocolVersion, name, password);
 
 	// Wait 10 seconds for an answer
-	time_t endtime = time(nullptr) + 10;
-	while (!BufferedConnection::Peeker(conn_.get()).cmd()) {
-		if (time(nullptr) > endtime) {
-			log_err("[NetHostProxy] Handshaking error (1): No message from relay server in time\n");
-			conn_->close();
-			conn_.reset();
-			return;
-		}
-	}
-
+	const time_t endtime = time(nullptr) + 10;
 	RelayCommand cmd;
-	conn_->receive(&cmd);
-
-	if (cmd != RelayCommand::kWelcome) {
-		log_err("[NetHostProxy] Handshaking error (2): Received command code %i from relay server "
-		        "instead of Welcome (%i)\n",
-		        static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
-		conn_->close();
-		conn_.reset();
-		return;
-	}
-
-	// Check version
-	endtime = time(nullptr) + 10;
-	while (!BufferedConnection::Peeker(conn_.get()).uint8_t()) {
+	for (;;) {
 		if (time(nullptr) > endtime) {
-			log_err("[NetHostProxy] Handshaking error (3): No message from relay server in time\n");
+			log_err("[NetHostProxy] Handshaking error (1): No welcome from relay server in time\n");
 			conn_->close();
 			conn_.reset();
 			return;
 		}
-	}
-	uint8_t relay_proto_version;
-	conn_->receive(&relay_proto_version);
-	if (relay_proto_version != kRelayProtocolVersion) {
-		log_err(
-		   "[NetHostProxy] Handshaking error (4): Relay server uses protocol version %i instead of "
-		   "our version %i\n",
-		   static_cast<uint8_t>(relay_proto_version), static_cast<uint8_t>(kRelayProtocolVersion));
-		conn_->close();
-		conn_.reset();
-		return;
-	}
-
-	// Check game name
-	endtime = time(nullptr) + 10;
-	while (!BufferedConnection::Peeker(conn_.get()).string()) {
-		if (time(nullptr) > endtime) {
-			log_err("[NetHostProxy] Handshaking error (5): No message from relay server in time\n");
+		// Peeker has to be created inside the loop to reset it to the beginning of the input buffer
+		BufferedConnection::Peeker peek(conn_.get());
+		if (!(peek.cmd(&cmd) && peek.uint8_t())) {
+			// Not enough received yet. Do a "mini sleep" and try again
+			std::this_thread::yield();
+			continue;
+		}
+		if (cmd == RelayCommand::kPing) {
+			// Got a ping before the welcome. Handle it
+			conn_->receive(&cmd);
+			uint8_t seq;
+			conn_->receive(&seq);
+			// Reply with a pong
+			conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
+		} else if (cmd == RelayCommand::kWelcome) {
+			// It is the expected welcome message. Check whether it is complete
+			if (!peek.string()) {
+				// Command not complete yet
+				std::this_thread::yield();
+				continue;
+			}
+			// It is complete! Handle it
+			// Receive the command code for real (that is, remove it from the buffer)
+			conn_->receive(&cmd);
+			// Check version
+			uint8_t relay_proto_version;
+			conn_->receive(&relay_proto_version);
+			if (relay_proto_version != kRelayProtocolVersion) {
+				log_err("[NetHostProxy] Handshaking error (2): Relay server uses protocol "
+				        "version %i instead of our version %i\n",
+				        static_cast<uint8_t>(relay_proto_version),
+				        static_cast<uint8_t>(kRelayProtocolVersion));
+				conn_->close();
+				conn_.reset();
+				return;
+			}
+			// Check game name
+			std::string game_name;
+			conn_->receive(&game_name);
+			if (game_name != name) {
+				log_err("[NetHostProxy] Handshaking error (3): Relay wants to connect us to "
+				        "game '%s' instead of our game '%s'\n",
+				        game_name.c_str(), name.c_str());
+				conn_->close();
+				conn_.reset();
+				return;
+			}
+			// Everything is fine, leave the loop
+			break;
+		} else {
+			// Unexpected command. Maybe it is no relay server?
+			log_err("[NetHostProxy] Handshaking error (4): Received command code %i from "
+			        "relay server instead of welcome (%i)\n",
+			        static_cast<uint8_t>(cmd), static_cast<uint8_t>(RelayCommand::kWelcome));
 			conn_->close();
 			conn_.reset();
 			return;
 		}
-	}
-	std::string game_name;
-	conn_->receive(&game_name);
-	if (game_name != name) {
-		log_err(
-		   "[NetHostProxy] Handshaking error (6): Relay wants to connect us to game '%s' instead of "
-		   "our game '%s'\n",
-		   game_name.c_str(), name.c_str());
-		conn_->close();
-		conn_.reset();
-		return;
-	}
+	}  // End for (;;) waiting for kWelcome
+
 	log_info("[NetHostProxy] Handshaking with relay server done\n");
 }
 
