@@ -73,6 +73,24 @@ void NetClient::handle_data() {
 	// Try to get one packet from the connection
 	while (BufferedConnection::Peeker(conn_.get()).recvpacket()) {
 		// Enough data for a packet
+		// Check whether it is a ping or pong
+		BufferedConnection::Peeker peek(conn_.get());
+		// Ignore first two bytes, they are the packet length
+		peek.uint8_t();
+		peek.uint8_t();
+		uint8_t cmd;
+		peek.uint8_t(&cmd);
+		if (cmd == NETCMD_PING) {
+			uint8_t seq;
+			peek.uint8_t(&seq);
+			// Send pong immediately
+			SendPacket s;
+			s.unsigned_8(NETCMD_PONG);
+			s.unsigned_8(seq);
+			mutex_.unlock();
+			send(s, NetPriority::kPing);
+			mutex_.lock();
+		}
 		// Get the packet and add it to the queue
 		std::unique_ptr<RecvPacket> packet(new RecvPacket);
 		conn_->receive(packet.get());
