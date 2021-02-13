@@ -44,8 +44,8 @@ bool NetHost::is_listening() const {
 }
 
 bool NetHost::is_connected(const ConnectionId id) const {
-	assert(!clients_.count(id) || clients_.at(id));
-	return clients_.count(id) > 0 && clients_.at(id)->is_connected();
+	assert(!clients_.count(id) || clients_.at(id).conn);
+	return clients_.count(id) > 0 && clients_.at(id).conn->is_connected();
 }
 
 void NetHost::stop_listening() {
@@ -85,7 +85,8 @@ void NetHost::close(const ConnectionId id) {
 		// Not connected anyway
 		return;
 	}
-	iter_client->second->close();
+	std::lock_guard<std::mutex> lock(clients_.at(id).mutex);
+	iter_client->second.conn->close();
 	clients_.erase(iter_client);
 }
 
@@ -99,26 +100,26 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 	ConnectionId id = next_id_++;
 	assert(id > 0);
 	assert(clients_.count(id) == 0);
-	clients_.insert(std::make_pair(id, std::move(accept_queue_.front())));
+	clients_[id].conn.reset(accept_queue_.front().release());
 	accept_queue_.pop();
+	clients_[id].conn->data_received.connect([this, id]() { handle_data(id); });
+	handle_data(id);
 	assert(clients_.count(id) == 1);
 	*new_id = id;
 	return true;
 }
 
 std::unique_ptr<RecvPacket> NetHost::try_receive(const ConnectionId id) {
-
 	// Check whether there is data for the requested client
 	if (!is_connected(id)) {
 		return std::unique_ptr<RecvPacket>();
 	}
-
-	// Try to get one packet from the connection
-	if (!BufferedConnection::Peeker(clients_.at(id).get()).recvpacket()) {
+	std::lock_guard<std::mutex> lock(clients_.at(id).mutex);
+	if (clients_.at(id).packets.empty()) {
 		return std::unique_ptr<RecvPacket>();
 	}
-	std::unique_ptr<RecvPacket> packet(new RecvPacket);
-	clients_.at(id)->receive(packet.get());
+	std::unique_ptr<RecvPacket> packet = std::move(clients_.at(id).packets.front());
+	clients_.at(id).packets.pop();
 	return packet;
 }
 
@@ -126,12 +127,15 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet, NetPriority 
 	if (!is_connected(id)) {
 		return;
 	}
-	clients_.at(id)->send(priority, packet);
+	std::lock_guard<std::mutex> lock(clients_.at(id).mutex);
+	clients_.at(id).conn->send(priority, packet);
 }
 
-void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packet, NetPriority) {
+void NetHost::send(const std::vector<ConnectionId>& ids,
+                   const SendPacket& packet,
+                   NetPriority priority) {
 	for (ConnectionId id : ids) {
-		send(id, packet);
+		send(id, packet, priority);
 	}
 }
 
@@ -164,6 +168,26 @@ void NetHost::start_accepting(
 		   // Wait for the next client
 		   start_accepting(acceptor, pair);
 	   });
+}
+
+void NetHost::handle_data(ConnectionId id) {
+	assert(is_connected(id));
+	Client& client = clients_.at(id);
+
+	std::lock_guard<std::mutex> lock(client.mutex);
+
+	uint8_t length;
+	uint8_t cmd;
+	uint8_t seq;
+
+	// Try to get one packet from the connection
+	while (BufferedConnection::Peeker(client.conn.get()).recvpacket()) {
+		// Enough data for a packet
+		// Get the packet and add it to the queue
+		std::unique_ptr<RecvPacket> packet(new RecvPacket);
+		client.conn->receive(packet.get());
+		client.packets.push(std::move(packet));
+	}
 }
 
 NetHost::NetHost(const uint16_t port)

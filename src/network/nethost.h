@@ -21,6 +21,7 @@
 #define WL_NETWORK_NETHOST_H
 
 #include <memory>
+#include <queue>
 #include <thread>
 
 #include "network/bufferedconnection.h"
@@ -82,6 +83,12 @@ private:
 	   std::pair<std::unique_ptr<BufferedConnection>, boost::asio::ip::tcp::socket*>& pair);
 
 	/**
+	 * Called asynchronous by a BufferedConnection if new data arrives.
+	 * Checks whether a RecvPacket can be created out of the data and adds it to the buffer.
+	 */
+	void handle_data(ConnectionId id);
+
+	/**
 	 * Tries to listen on the given port.
 	 * If it fails, is_listening() will return \c false.
 	 * \param port The port to listen on.
@@ -98,9 +105,21 @@ private:
 	bool open_acceptor(boost::asio::ip::tcp::acceptor* acceptor,
 	                   const boost::asio::ip::tcp::endpoint& endpoint);
 
+	struct Client {
+		Client() = default;
+		Client(BufferedConnection* c) : conn(c), packets() {
+		}
+		/// The network connection to the client
+		std::unique_ptr<BufferedConnection> conn;
+		/// A buffer of received packets, parsed from the bytestring and ready to be delivered
+		std::queue<std::unique_ptr<RecvPacket>> packets;
+		/// A mutex avoiding concurrent access to the connection or packets list
+		std::mutex mutex;
+	};
+
 	/// A map linking client ids to the respective network connections.
 	/// Client ids not in this map should be considered invalid.
-	std::map<NetHostInterface::ConnectionId, std::unique_ptr<BufferedConnection>> clients_;
+	std::map<NetHostInterface::ConnectionId, NetHost::Client> clients_;
 	/// The next client id that will be used
 	NetHostInterface::ConnectionId next_id_;
 	/// An io_service needed by boost.asio. Primary needed for async operations.
@@ -120,7 +139,7 @@ private:
 	/// The new connections the acceptor accepted. Will be moved to clients_
 	/// when try_accept() is called by the using class.
 	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
-	/// A mutex avoiding concurrent access to accept_queue_.
+	/// A mutex avoiding concurrent access to accept_queue_
 	std::mutex mutex_accept_;
 };
 
