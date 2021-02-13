@@ -1645,7 +1645,7 @@ void GameHost::set_paused(bool /* paused */) {
 }
 
 // Send the packet to all properly connected clients
-void GameHost::broadcast(const SendPacket& packet) {
+void GameHost::broadcast(const SendPacket& packet, NetPriority priority) {
 	std::vector<NetHostInterface::ConnectionId> receivers;
 	for (const Client& client : d->clients) {
 		if (client.playernum != UserSettings::not_connected()) {
@@ -1653,7 +1653,7 @@ void GameHost::broadcast(const SendPacket& packet) {
 			receivers.push_back(client.sock_id);
 		}
 	}
-	d->net->send(receivers, packet);
+	d->net->send(receivers, packet, priority);
 }
 
 void GameHost::write_setting_map(SendPacket& packet) {
@@ -2494,6 +2494,8 @@ void GameHost::handle_packet(uint32_t const client_num, RecvPacket& r) {
 		return handle_new_file(client);
 	case NETCMD_FILE_PART:
 		return handle_file_part(client, r);
+	case NETCMD_RTT_REQUEST:
+		return handle_rtt_request(client);
 
 	case NETCMD_SETTING_MAP:
 	case NETCMD_SETTING_PLAYER:
@@ -2538,6 +2540,17 @@ void GameHost::handle_file_part(Client& client, RecvPacket& r) {
 		d->settings.users[client.usernum].ready = true;
 		broadcast_setting_user(client.usernum);
 	}
+}
+
+void GameHost::handle_rtt_request(Client& client) {
+	SendPacket packet;
+	if (packet.get_size() == 0) {
+		packet.unsigned_8(NETCMD_RTT_RESPONSE);
+		for (const UserSettings& user : d->settings.users) {
+			packet.unsigned_8(user.rtt);
+		}
+	}
+	d->net->send(client.sock_id, packet);
 }
 
 void GameHost::send_file_part(NetHostInterface::ConnectionId csock_id, uint32_t part) {

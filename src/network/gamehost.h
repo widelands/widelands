@@ -163,6 +163,7 @@ private:
 	void handle_speed(Client& client, RecvPacket& r);
 	void handle_new_file(Client& client);
 	void handle_file_part(Client& client, RecvPacket& r);
+	void handle_rtt_request(Client& client);
 
 	void handle_packet(uint32_t i, RecvPacket&);
 	void handle_network();
@@ -178,7 +179,8 @@ private:
 	void committed_network_time(const Time& time);
 	void receive_client_time(uint32_t number, const Time& time);
 
-	void broadcast(const SendPacket&);
+	void broadcast(const SendPacket&, NetPriority = NetPriority::kNormal);
+
 	void write_setting_map(SendPacket&);
 	void write_setting_player(SendPacket&, uint8_t number);
 	void broadcast_setting_player(uint8_t number);
