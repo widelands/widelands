@@ -1152,7 +1152,7 @@ void GameClient::disconnect(const std::string& reason,
 	}
 
 	if (d->modal) {
-		if (reason == "SERVER_LEFT" || reason == "KICKED") {
+		if (reason == "SERVER_LEFT" || reason == "KICKED" || reason == "CONNECTION_LOST") {
 			// TODO(Notabilis): Probably some (but not all?) reasons from network_gaming_messages.cc
 			// should be handled here as well without throwing an exception
 			UI::WLMessageBox m(d->modal, UI::WindowStyle::kFsMenu, _("The game ended"),
