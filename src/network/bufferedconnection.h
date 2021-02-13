@@ -183,10 +183,6 @@ public:
 	 */
 	void receive(RecvPacket* out);
 
-	// Temporary method, will be removed when display of RTT measurements are implemented.
-	// Removes a message from type kRoundTripTimeResponse from the buffer.
-	void ignore_rtt_response();
-
 	/**
 	 * Sends data over the connection.
 	 * @note All data that belongs together has to be send with one function call. If added with

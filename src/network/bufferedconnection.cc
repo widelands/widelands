@@ -371,35 +371,3 @@ void BufferedConnection::notify_connected() {
 		log_info("[BufferedConnection] Stopping networking thread\n");
 	});
 }
-
-void BufferedConnection::ignore_rtt_response() {
-
-	// TODO(Notabilis): Implement GUI with display of RTTs and possibility to kick lagging players
-	//                  See https://github.com/widelands/widelands/issues/3236
-	// TODO(Notabilis): Move this method somewhere where it makes sense.
-
-	uint8_t length_list = 0;
-	RelayCommand cmd;
-	uint8_t tmp;
-
-	Peeker peek(this);
-	peek.cmd(&cmd);
-	assert(cmd == RelayCommand::kRoundTripTimeResponse);
-
-	bool data_complete = peek.uint8_t(&length_list);
-	// Each list element consists of three uint8_t
-	for (uint8_t i = 0; i < length_list * 3; i++) {
-		data_complete = data_complete && peek.uint8_t();
-	}
-	if (!data_complete) {
-		// Some part of this packet is still missing. Try again later
-		return;
-	}
-
-	// Packet completely in buffer, fetch it and ignore it
-	receive(&cmd);  // Cmd
-	receive(&tmp);  // Length
-	for (uint8_t i = 0; i < length_list * 3; i++) {
-		receive(&tmp);  // Parts of the list. See relay_protocol.h
-	}
-}
