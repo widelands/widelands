@@ -31,15 +31,18 @@ void NetClient::close() {
 }
 
 std::unique_ptr<RecvPacket> NetClient::try_receive() {
-	if (!BufferedConnection::Peeker(conn_.get()).recvpacket()) {
+
+	std::lock_guard<std::mutex> lock(mutex_);
+	if (packets_.empty()) {
 		return std::unique_ptr<RecvPacket>();
 	}
-	std::unique_ptr<RecvPacket> packet(new RecvPacket);
-	conn_->receive(packet.get());
+	std::unique_ptr<RecvPacket> packet = std::move(packets_.front());
+	packets_.pop();
 	return packet;
 }
 
 void NetClient::send(const SendPacket& packet, NetPriority priority) {
+	std::lock_guard<std::mutex> lock(mutex_);
 	if (!is_connected()) {
 		return;
 	}
@@ -55,8 +58,24 @@ NetClient::NetClient(const NetAddress& host) {
 	if (conn_) {
 		log_info("success.\n");
 		assert(is_connected());
+		conn_->data_received.connect([this]() { handle_data(); });
+		handle_data();
 	} else {
 		log_err("failed.\n");
 		assert(!is_connected());
+	}
+}
+
+void NetClient::handle_data() {
+	assert(is_connected());
+	std::lock_guard<std::mutex> lock(mutex_);
+
+	// Try to get one packet from the connection
+	while (BufferedConnection::Peeker(conn_.get()).recvpacket()) {
+		// Enough data for a packet
+		// Get the packet and add it to the queue
+		std::unique_ptr<RecvPacket> packet(new RecvPacket);
+		conn_->receive(packet.get());
+		packets_.push(std::move(packet));
 	}
 }
