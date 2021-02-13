@@ -19,17 +19,19 @@ NetClientProxy::~NetClientProxy() {
 }
 
 bool NetClientProxy::is_connected() const {
+	std::lock_guard<std::mutex> lock(mutex_);
 	return conn_ && conn_->is_connected();
 }
 
 void NetClientProxy::close() {
+	std::lock_guard<std::mutex> lock(mutex_);
 	if (conn_ && conn_->is_connected()) {
 		conn_->close();
 	}
 }
 
 std::unique_ptr<RecvPacket> NetClientProxy::try_receive() {
-	receive_commands();
+	std::lock_guard<std::mutex> lock(mutex_);
 
 	// Now check whether there is data
 	if (received_.empty()) {
@@ -42,6 +44,7 @@ std::unique_ptr<RecvPacket> NetClientProxy::try_receive() {
 }
 
 void NetClientProxy::send(const SendPacket& packet, NetPriority priority) {
+	std::lock_guard<std::mutex> lock(mutex_);
 
 	conn_->send(priority, RelayCommand::kToHost, packet);
 }
@@ -124,60 +127,68 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
 		}
 	}  // End for (;;) waiting for kWelcome
 
+	conn_->data_received.connect([this]() { receive_commands(); });
+	receive_commands();
+
 	log_info("[NetClientProxy] Handshaking with relay server done\n");
 }
 
 void NetClientProxy::receive_commands() {
+	std::lock_guard<std::mutex> lock(mutex_);
+
 	if (!conn_->is_connected()) {
 		return;
 	}
 
-	// Receive all available commands
 	RelayCommand cmd;
-	BufferedConnection::Peeker peek(conn_.get());
-	if (!peek.cmd(&cmd)) {
-		// No command to receive
-		return;
-	}
-	switch (cmd) {
-	case RelayCommand::kDisconnect:
-		if (peek.string()) {
-			// Command is completely in the buffer, handle it
-			conn_->receive(&cmd);
-			std::string reason;
-			conn_->receive(&reason);
-			// TODO(Notabilis): Handle the reason for the disconnect
-			conn_->close();
+	for (;;) {
+		// Receive all available commands
+		BufferedConnection::Peeker peek(conn_.get());
+		if (!peek.cmd(&cmd)) {
+			// No command to receive
+			return;
 		}
-		break;
-	case RelayCommand::kFromHost:
-		if (peek.recvpacket()) {
-			conn_->receive(&cmd);
-			std::unique_ptr<RecvPacket> packet(new RecvPacket);
-			conn_->receive(packet.get());
-			received_.push(std::move(packet));
+		switch (cmd) {
+		case RelayCommand::kDisconnect:
+			if (peek.string()) {
+				// Command is completely in the buffer, handle it
+				conn_->receive(&cmd);
+				std::string reason;
+				conn_->receive(&reason);
+				// TODO(Notabilis): Handle the reason for the disconnect
+				conn_->close();
+				break;
+			} else {
+				// It will be a kDisconnect, but it isn't complete yet. Abort for now.
+				return;
+			}
+		case RelayCommand::kFromHost:
+			if (peek.recvpacket()) {
+				conn_->receive(&cmd);
+				std::unique_ptr<RecvPacket> packet(new RecvPacket);
+				conn_->receive(packet.get());
+				received_.push(std::move(packet));
+				break;
+			} else {
+				return;
+			}
+		case RelayCommand::kPing:
+			if (peek.uint8_t()) {
+				conn_->receive(&cmd);
+				uint8_t seq;
+				conn_->receive(&seq);
+				// Reply with a pong
+				conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
+				break;
+			} else {
+				return;
+			}
+		default:
+			// Other commands should not be possible.
+			// Then is either something wrong with the protocol or there is an implementation mistake
+			log_err("Received command code %i from relay server, do not know what to do with it\n",
+			        static_cast<uint8_t>(cmd));
+			NEVER_HERE();
 		}
-		break;
-	case RelayCommand::kPing:
-		// TODO(Notabilis): Move the ping logic inside the receive-thread of BufferedConnection?
-		// Should speed up the measured RTT and could prevent disconnects while, e.g., loading a map.
-		// Would break the separation of the network layers, though.
-		if (peek.uint8_t()) {
-			conn_->receive(&cmd);
-			uint8_t seq;
-			conn_->receive(&seq);
-			// Reply with a pong
-			conn_->send(NetPriority::kPing, RelayCommand::kPong, seq);
-		}
-		break;
-	case RelayCommand::kRoundTripTimeResponse:
-		conn_->ignore_rtt_response();
-		break;
-	default:
-		// Other commands should not be possible.
-		// Then is either something wrong with the protocol or there is an implementation mistake
-		log_err("Received command code %i from relay server, do not know what to do with it\n",
-		        static_cast<uint8_t>(cmd));
-		NEVER_HERE();
 	}
 }

@@ -21,6 +21,7 @@
 #define WL_NETWORK_NETCLIENTPROXY_H
 
 #include <memory>
+#include <thread>
 
 #include "network/bufferedconnection.h"
 #include "network/netclient_interface.h"
@@ -65,6 +66,9 @@ private:
 
 	/// For each connected client, the packages that have been received from him.
 	std::queue<std::unique_ptr<RecvPacket>> received_;
+
+	/// A big mutex avoiding concurrent receive from network and fetching from game
+	mutable std::mutex mutex_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETCLIENTPROXY_H

@@ -21,6 +21,7 @@
 #define WL_NETWORK_NETHOSTPROXY_H
 
 #include <memory>
+#include <thread>
 
 #include "network/bufferedconnection.h"
 #include "network/nethost_interface.h"
@@ -70,8 +71,13 @@ private:
 	             const std::string& name,
 	             const std::string& password);
 
+	/**
+	 * Callback called by the BufferedConnection when some data is received.
+	 * Transforms the received relay packets into "LAN" actions.
+	 */
 	void receive_commands();
 
+	/// The connection used by this class to talk to the relay
 	std::unique_ptr<BufferedConnection> conn_;
 
 	/// A list of clients which want to connect.
@@ -103,6 +109,8 @@ private:
 	};
 	/// The connected clients
 	std::map<ConnectionId, Client> clients_;
+	/// A big mutex avoiding concurrent receive from network and fetching from game
+	mutable std::mutex mutex_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOSTPROXY_H
