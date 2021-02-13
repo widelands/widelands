@@ -26,6 +26,7 @@
 
 #include "network/bufferedconnection.h"
 #include "network/nethost_interface.h"
+#include "network/pingtracker.h"
 
 /**
  * NetHost manages the client connections of a network game in which this computer
@@ -62,6 +63,21 @@ public:
 	 * Stops listening for connections.
 	 */
 	void stop_listening();
+
+	/**
+	 * Register that a PING has been send to a client.
+	 * The matching PONG will be handled by the NetHost class itself.
+	 * @param id The id of the connection the ping was send through
+	 * @param seq The sequence number of the ping
+	 */
+	void register_ping(ConnectionId id, uint8_t seq);
+
+	/**
+	 * Retrieve the calculated RTT (round-trip-time) after a few PING/PONG messages were exchanged.
+	 * @param id The id of the connection to get the RTT for
+	 * @return The RTT up to 254ms. 255 means no value is known or it is too large
+	 */
+	uint8_t get_rtt(ConnectionId id);
 
 private:
 	/**
@@ -141,6 +157,10 @@ private:
 	std::queue<std::unique_ptr<BufferedConnection>> accept_queue_;
 	/// A mutex avoiding concurrent access to accept_queue_
 	std::mutex mutex_accept_;
+	/// The PingTracker that manages the times of the PINGs and PONGs transmitted
+	PingTracker pings_;
+	/// A mutex protecting the PingTracker pings_
+	std::mutex mutex_pings_;
 };
 
 #endif  // end of include guard: WL_NETWORK_NETHOST_H

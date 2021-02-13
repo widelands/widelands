@@ -79,6 +79,16 @@ void NetHost::stop_listening() {
 	do_stop(acceptor_v6_);
 }
 
+void NetHost::register_ping(ConnectionId id, uint8_t seq) {
+	std::lock_guard<std::mutex> lock(mutex_pings_);
+	pings_.register_request(id, seq);
+}
+
+uint8_t NetHost::get_rtt(ConnectionId id) {
+	std::lock_guard<std::mutex> lock(mutex_pings_);
+	return pings_.get_rtt(id);
+}
+
 void NetHost::close(const ConnectionId id) {
 	auto iter_client = clients_.find(id);
 	if (iter_client == clients_.end()) {
@@ -183,6 +193,18 @@ void NetHost::handle_data(ConnectionId id) {
 	// Try to get one packet from the connection
 	while (BufferedConnection::Peeker(client.conn.get()).recvpacket()) {
 		// Enough data for a packet
+		// Check whether it is a ping or pong
+		BufferedConnection::Peeker peek(client.conn.get());
+		// Make sure we can read enough bytes for the length, check if the lower byte of
+		// the length decode to 2 (we should check the higher byte as well. But if it is a pong,
+		// it should be 0 anyway), check if it is a PONG, try to get the sequence number
+
+		if (peek.uint8_t() && peek.uint8_t(&length) && length == 4 && peek.uint8_t(&cmd) &&
+		    cmd == NETCMD_PONG && peek.uint8_t(&seq)) {
+			// All checks passed, register the pong
+			std::lock_guard<std::mutex> lock_pings(mutex_pings_);
+			pings_.register_response(id, seq);
+		}
 		// Get the packet and add it to the queue
 		std::unique_ptr<RecvPacket> packet(new RecvPacket);
 		client.conn->receive(packet.get());
