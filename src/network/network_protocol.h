@@ -28,7 +28,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 26,
+	NETWORK_PROTOCOL_VERSION = 27,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -54,6 +54,14 @@ enum {
 	 * may advance.
 	 */
 	SERVER_TIMESTAMP_INTERVAL = 100,
+
+	/**
+	 * When playing online this is the interval (in milliseconds) in which we
+	 * will request the RTT updates from the internet gaming relay.
+	 * In all multiplayer games, this is the time between requests of the clients
+	 * about the collected RTTs.
+	 */
+	RTT_UPDATE_INTERVAL = 1000,
 };
 
 /**
@@ -113,7 +121,7 @@ enum : uint8_t {
 	 *
 	 * If sent by the host, the client must enqueue the given \ref PlayerCommand
 	 * with the sent game time as duetime. The host can send PlayerCommands for
-	 * very player in the game.
+	 * every player in the game.
 	 *
 	 * This command is sent by the client to request the execution of a
 	 * \ref PlayerCommand. The client is only allowed to send PlayerCommands
@@ -205,8 +213,8 @@ enum : uint8_t {
 	NETCMD_SETTING_USER = 10,
 
 	/**
-	 * Sent by the host with no payload. The client must reply with a
-	 * \ref NETCMD_PONG command.
+	 * Sent by the host. The client must reply with a \ref NETCMD_PONG command.
+	 * \li unsigned_8 An arbitrary sequence number that must be returned in \ref NETCMD_PONG
 	 */
 	NETCMD_PING = 11,
 
@@ -259,7 +267,8 @@ enum : uint8_t {
 	NETCMD_SYNCREQUEST = 15,
 
 	/**
-	 * Reply to a \ref NETCMD_PING command, with no payload.
+	 * Reply to a \ref NETCMD_PING command.
+	 * \li unsigned_8 The sequence number received in \ref NETCMD_PING
 	 */
 	NETCMD_PONG = 16,
 
@@ -457,8 +466,27 @@ enum : uint8_t {
 	NETCMD_SETTING_CHANGECOLOR = 35,
 
 	/**
+	 * Send to the game host to request the newest ping results.
+	 * No payload.
+	 */
+	NETCMD_RTT_REQUEST = 36,
+
+	/**
+	 * Send by the gamehost as an answer to the NETCMD_RTT_REQUEST with the following payload:
+	 * A list of
+	 * \li unsigned_8: The RTT in milliseconds.
+	 * The list has one entry per connected user, in the same order as in the user list.
+	 * First entry is the host. RTTs are capped to max. 255ms.
+	 * For a LAN game, the RTT of the game host is 0. The other RTTs describe the time needed to
+	 * send a packet from the gamehost to the gameclient and back.
+	 * For an internet game, the RTT is the time between the gamehost/gameclient and the relay.
+	 */
+	NETCMD_RTT_RESPONSE = 37,
+
+	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability
 	 */
+	// TODO(Notabilis): Is this still used / does it still make sense with the relay?
 	NETCMD_METASERVER_PING = 64
 };
 
