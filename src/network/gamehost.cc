@@ -593,6 +593,20 @@ GameHost::GameHost(FsMenu::MenuCapsule& c,
 	file_.reset(nullptr);  //  Initialize as 0 pointer - unfortunately needed in struct.
 
 	d->set_participant_list(new ParticipantList(&(d->settings), d->game, d->localplayername));
+	d->participants->participants_kick.connect([this](uint8_t participant) {
+		int32_t client = check_client(d->participants->get_participant_name(participant));
+		assert(client >= 0);
+		// Something must be passed as reason since otherwise
+		// the message formatting at the receiver doesn't work.
+		// Reason is the same as when the /kick command is used without providing a reason
+		kick_user(client, "No reason given!");
+	});
+	d->participants->participants_whisper.connect([this](uint8_t participant) {
+		if (d->game && d->game->get_igbase()) {
+			d->game->get_igbase()->open_chat_window(
+			   "@" + d->participants->get_participant_name(participant) + " ");
+		}
+	});
 
 	run(ptr);
 }

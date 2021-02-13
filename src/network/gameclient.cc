@@ -220,6 +220,12 @@ GameClient::GameClient(FsMenu::MenuCapsule& c,
 
 	d->participants.reset(new ParticipantList(&(d->settings), d->game, d->localplayername));
 	participants_ = d->participants.get();
+	d->participants->participants_whisper.connect([this](uint8_t participant) {
+		if (d->game && d->game->get_igbase()) {
+			d->game->get_igbase()->open_chat_window(
+			   "@" + d->participants->get_participant_name(participant) + " ");
+		}
+	});
 
 	run(ptr);
 }
