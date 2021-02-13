@@ -106,6 +106,16 @@ BufferedConnection::create_unconnected() {
 
 BufferedConnection::~BufferedConnection() {
 	close();
+	// If we call join() inside our thread it crash
+	assert(std::this_thread::get_id() != asio_thread_.get_id());
+	if (asio_thread_.joinable()) {
+		try {
+			asio_thread_.join();
+		} catch (const std::invalid_argument&) {
+			// Thread probably stopped between joinable() and join()
+		}
+	}
+	// The thread should be stopped now
 	assert(!asio_thread_.joinable());
 }
 
@@ -129,15 +139,6 @@ void BufferedConnection::close() {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 	assert(io_service_.stopped());
-	if (asio_thread_.joinable()) {
-		try {
-			asio_thread_.join();
-		} catch (const std::invalid_argument&) {
-			// Thread probably stopped between joinable() and join()
-		}
-	}
-	// The thread should be stopped now
-	assert(!asio_thread_.joinable());
 	// Close the socket
 	if (socket_.is_open()) {
 		socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
@@ -209,15 +210,15 @@ void BufferedConnection::start_sending() {
 	}
 
 	// Find something to send
-	std::queue<std::vector<uint8_t>>* nonempty_queue = nullptr;
+	uint8_t nonempty_queue = std::numeric_limits<uint8_t>::max();
 	for (auto& entry : buffers_to_send_) {
 		if (!entry.second.empty()) {
-			nonempty_queue = &entry.second;
+			nonempty_queue = entry.first;
 			break;
 		}
 	}
 
-	if (nonempty_queue == nullptr) {
+	if (nonempty_queue == std::numeric_limits<uint8_t>::max()) {
 		// Nothing (further) to send (right now)
 		return;
 	}
@@ -225,24 +226,36 @@ void BufferedConnection::start_sending() {
 	currently_sending_ = true;
 	lock.unlock();
 
+	if (nonempty_queue == NetPriority::kPing) {
+		// Normally, TCP collects data for some (short) time before sending a larger data burst.
+		// This is done to reduce the overhead by the 40 byte header as much as possible.
+		// Normally, this isn't a problem for most transactions, but waiting for more data
+		// to arrive is a quite bad idea when trying to send or answer a timed ping packet.
+		// So: Disable the artifical delay when sending packets with the kPing priority
+		socket_.set_option(boost::asio::ip::tcp::no_delay(true));
+	}
+
 	// Start writing to the socket. This might block if the network buffer within
 	// the operating system is currently full.
 	// When done with sending, call the lambda method defined below
 	boost::asio::async_write(
-	   socket_, boost::asio::buffer(nonempty_queue->front()),
+	   socket_, boost::asio::buffer(buffers_to_send_[nonempty_queue].front()),
 #ifndef NDEBUG
 	   [this, nonempty_queue](boost::system::error_code ec, std::size_t length) {
 #else
 	   [this, nonempty_queue](boost::system::error_code ec, std::size_t /*length*/) {
 #endif
+		   if (nonempty_queue == NetPriority::kPing) {
+			   socket_.set_option(boost::asio::ip::tcp::no_delay(false));
+		   }
 		   std::unique_lock<std::mutex> lock2(mutex_send_);
 		   currently_sending_ = false;
 		   if (!ec) {
 			   // No error: Remove the buffer from the queue
-			   assert(nonempty_queue != nullptr);
-			   assert(!nonempty_queue->empty());
-			   assert(nonempty_queue->front().size() == length);
-			   nonempty_queue->pop();
+			   assert(nonempty_queue != std::numeric_limits<uint8_t>::max());
+			   assert(!buffers_to_send_[nonempty_queue].empty());
+			   assert(buffers_to_send_[nonempty_queue].front().size() == length);
+			   buffers_to_send_[nonempty_queue].pop();
 			   lock2.unlock();
 			   // Try to send some more data
 			   start_sending();
@@ -264,7 +277,6 @@ void BufferedConnection::start_receiving() {
 	if (!is_connected()) {
 		return;
 	}
-
 	socket_.async_read_some(
 	   boost::asio::buffer(asio_receive_buffer_, kNetworkBufferSize),
 	   [this](boost::system::error_code ec, std::size_t length) {
