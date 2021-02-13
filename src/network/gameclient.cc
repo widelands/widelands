@@ -83,6 +83,9 @@ struct GameClientImpl {
 	Time lasttimestamp;
 	uint32_t lasttimestamp_realtime;
 
+	/// The time in ms the last RTT update was requested
+	uint32_t next_rtt_update;
+
 	/// The real target speed, in milliseconds per second.
 	/// This is always set by the server
 	uint32_t realspeed;
@@ -158,6 +161,7 @@ void GameClientImpl::run_game(InteractiveGameBase* igb) {
 	time.reset(game->get_gametime());
 	lasttimestamp = game->get_gametime();
 	lasttimestamp_realtime = SDL_GetTicks();
+	next_rtt_update = SDL_GetTicks() + RTT_UPDATE_INTERVAL;
 
 	modal = igb;
 
@@ -293,14 +297,21 @@ void GameClient::think() {
 			d->time.think(d->realspeed);
 		}
 
+		const uint32_t curtime = SDL_GetTicks();
 		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
 			send_time();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
-			uint32_t curtime = SDL_GetTicks();
 			if (curtime - d->lasttimestamp_realtime > CLIENT_TIMESTAMP_INTERVAL) {
 				send_time();
 			}
+		}
+
+		if (d->participants->participant_rtt_updates_enabled() && d->next_rtt_update < curtime) {
+			d->next_rtt_update = curtime + RTT_UPDATE_INTERVAL;
+			SendPacket s;
+			s.unsigned_8(NETCMD_RTT_REQUEST);
+			d->net->send(s);
 		}
 	}
 }
@@ -663,10 +674,7 @@ void GameClient::handle_hello(RecvPacket& packet) {
  * Give a pong for a ping
  */
 void GameClient::handle_ping(RecvPacket&) {
-	SendPacket s;
-	s.unsigned_8(NETCMD_PONG);
-	d->net->send(s);
-
+	// Don't need to send PONG here, already done in NetClient
 	log_info("[Client] Pong!\n");
 }
 
@@ -983,6 +991,14 @@ void GameClient::handle_desync(RecvPacket&) {
 	}
 }
 
+void GameClient::handle_rtt_response(RecvPacket& packet) {
+	for (UserSettings& user : d->settings.users) {
+		user.rtt = packet.unsigned_8();
+	}
+	// Update the UI
+	d->participants->participants_updated_rtt();
+}
+
 /**
  * Handle one packet received from the host.
  *
@@ -1075,6 +1091,8 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		return handle_system_message(packet);
 	case NETCMD_INFO_DESYNC:
 		return handle_desync(packet);
+	case NETCMD_RTT_RESPONSE:
+		return handle_rtt_response(packet);
 	default:
 		throw ProtocolException(cmd);
 	}
