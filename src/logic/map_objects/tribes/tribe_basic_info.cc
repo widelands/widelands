@@ -45,6 +45,8 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 		for (const std::string& script_path : starting_conditions->array_entries<std::string>()) {
 			std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 			script_table->do_not_warn_about_unaccessed_keys();
+			// TODO(hessenfarmer): This initialization code is duplicated in Addons below and in gameclient
+			//                      Should be puled out to a common class
 			std::set<std::string> tags;
 			std::set<std::string> incompatible_wc;
 			if (script_table->has_key("map_tags")) {
@@ -73,6 +75,7 @@ TribeBasicInfo::TribeBasicInfo(std::unique_ptr<LuaTable> table)
 				}
 				std::unique_ptr<LuaTable> script_table = lua.run_script(script_path);
 				script_table->do_not_warn_about_unaccessed_keys();
+				// TODO(hessenfarmer): Needs to be pulled out as it is duplicated
 				std::set<std::string> tags;
 				std::set<std::string> incompatible_wc;
 				if (script_table->has_key("map_tags")) {

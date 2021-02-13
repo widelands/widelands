@@ -877,6 +877,7 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 			std::string const initialization_script = packet.string();
 			std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 			t->do_not_warn_about_unaccessed_keys();
+			// TODO(hessenfarmer): Needs to be pulled out as it is duplicated to tribe_basic_info.cc
 			std::set<std::string> tags;
 			std::set<std::string> incompatible_wc;
 			if (t->has_key("map_tags")) {
