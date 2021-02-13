@@ -24,6 +24,8 @@
 #include <mutex>
 #include <thread>
 
+#include <boost/signals2/signal.hpp>
+
 #include "network/network.h"
 #include "network/relay_protocol.h"
 
@@ -212,12 +214,19 @@ public:
 		send_T_(v, Fargs...);
 
 		std::unique_lock<std::mutex> lock(mutex_send_);
+
 		// The map will automatically create the vector for the requested priority if it does not
 		// exist
 		buffers_to_send_[priority].push(v);
 		lock.unlock();
 		start_sending();
 	}
+
+	/// Called whenever any data is received over the network.
+	/// This does not mean that the received data can be transformed to anything.
+	/// Note that the signal is called from another thread, memory corruption might
+	/// occur due to the called function.
+	boost::signals2::signal<void()> data_received;
 
 private:
 	// I love this language... Sorry for the next functions,

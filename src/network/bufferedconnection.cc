@@ -289,7 +289,9 @@ void BufferedConnection::start_receiving() {
 				   receive_buffer_.push_back(asio_receive_buffer_[i]);
 			   }
 			   lock.unlock();
-			   // Try to send some more data
+			   // Notify about received data
+			   data_received();
+			   // Try to receive some more data
 			   start_receiving();
 		   } else {
 			   if (socket_.is_open()) {
@@ -316,7 +318,7 @@ void BufferedConnection::reduce_send_buffer(boost::asio::ip::tcp::socket& socket
 		// Ignore error. When it fails, chat messages will lag while transmitting files,
 		// but nothing really bad happens
 		if (ec) {
-			log_warn("[BufferedConnection] Warning: Failed to reduce send buffer size\n");
+			log_warn("[BufferedConnection] Failed to reduce send buffer size\n");
 		}
 	}
 }
