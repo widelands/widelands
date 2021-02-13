@@ -2669,7 +2669,8 @@ void GameHost::disconnect_client(uint32_t const client_number,
 
 	// If the client is linked to a player and it is the client that closes the connection
 	// and the game has already started ...
-	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" &&
+	if (client.playernum != UserSettings::not_connected() &&
+	    client.playernum != UserSettings::none() && reason != "SERVER_LEFT" &&
 	    reason != "SERVER_CRASHED" && d->game != nullptr) {
 		// And the client hasn't lost/won yet ...
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
