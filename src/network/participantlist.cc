@@ -12,7 +12,8 @@ ParticipantList::ParticipantList(const GameSettings* settings,
    : settings_(settings),
      game_(game),
      localplayername_(localplayername),
-     participant_counts_{-1, -1, -1} {
+     participant_counts_{-1, -1, -1},
+     rtt_updates_enabled_(false) {
 	assert(settings_ != nullptr);
 	// The pointer referenced by game_ might be undefined here
 	// localplayername_ might be empty here
@@ -177,18 +178,17 @@ bool ParticipantList::is_ingame() const {
 	return (game_ != nullptr);
 }
 
-#ifdef NDEBUG
-uint8_t ParticipantList::get_participant_rtt(int16_t) const {
-#else
+void ParticipantList::enable_participant_rtt_updates(bool enabled) {
+	rtt_updates_enabled_ = enabled;
+}
+
+bool ParticipantList::participant_rtt_updates_enabled() const {
+	return rtt_updates_enabled_;
+}
+
 uint8_t ParticipantList::get_participant_rtt(int16_t participant) const {
-#endif
 	assert(participant < participant_counts_.humans);
-	// TODO(Notabilis): Implement this function ... and all the Ping-stuff that belongs to it
-	// - Maybe show two RTTs per player: To the host and to the netrelay
-	// - Offer "autoUpdatePings(bool)" method to have the ping results be periodically refreshed
-	// - Add support for the ping signal (participant_updated_rtt)
-	// TODO(Notabilis): Add support for LAN games
-	return 0;
+	return participant_to_user(participant).rtt;
 }
 
 const UserSettings& ParticipantList::participant_to_user(int16_t participant) const {
