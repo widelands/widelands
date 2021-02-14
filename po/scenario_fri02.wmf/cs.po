@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
-"Last-Translator: Ondřej Itřech, 2020\n"
+"Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -152,7 +152,7 @@ msgstr "150 kýblů vody"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "40 × Ration"
-msgstr "40 malých porcí"
+msgstr "40 malých svačin"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "10 × Meal"
@@ -187,8 +187,8 @@ msgid ""
 "He forbade you to expand your territory until the wares have been handed "
 "over."
 msgstr ""
-"V opačném případě znič sklad. Tím ale riskuješ, že budeš sám Muriliův "
-"nepřítel. Zakázal ti rozšiřovat své území, dokud mu zboží nebude předáno."
+"V opačném případě znič sklad. Tím ale riskuješ, že se Murilius stane tvým "
+"nepřítelem. Zakázal ti rozšiřovat tvé území, dokud mu zboží nebude předáno."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:80
 msgid "Spy on Murilius"
@@ -567,10 +567,10 @@ msgid ""
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
 "Kmenový vůdce Rýbaude, mám další špatné zprávy. V okolních vodách nejsou "
-"skoro žádné ryby. Malé porce sice můžeme připravovat používajíce jen ovoce a"
-" chleba, ale na výcvik vojáků potřebujeme hodně uzeného masa a uzených ryb. "
-"Ta trocha masa, co dodávají sobí farmy jako vedlejší produkt při produkci "
-"kožešin, rozhodně nestačí."
+"skoro žádné ryby. Malé svačiny sice můžeme připravovat používajíce jen ovoce"
+" a chleba, ale na výcvik vojáků potřebujeme hodně uzeného masa a uzených "
+"ryb. Ta trocha masa, co dodávají sobí farmy jako vedlejší produkt při "
+"produkci kožešin, rozhodně nestačí."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:229
@@ -637,9 +637,9 @@ msgid ""
 "now."
 msgstr ""
 "Ale nesmíme zapomínat, že naše pozornost se musí začít více soustředit na "
-"rekrut a výcvik vojáků. Můžeme si již dovolit vyrábět zbraně, přilby a oděvy"
-" za pomoci kovů. Navrhuji nyní postavit nějaká zbrojířství, kasárna, "
-"výcvikový tábor a krejčovství."
+"rekrut a výcvik vojáků. Můžeme si již dovolit použít kovy na zbraně, přilby "
+"a zbroj. Navrhuji nyní postavit nějaká zbrojířství, kasárna, výcvikovou "
+"arénu a krejčovství."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:252
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:259
@@ -756,7 +756,7 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
-"30 kmenů, 40 kvádrů žuly, 30 ryb, 30 piv, 150 kýblů vody, 40 malých porcí, "
+"30 kmenů, 40 kvádrů žuly, 30 ryb, 30 piv, 150 kýblů vody, 40 malých svačin, "
 "10 jídel, 30 hrud uhlí, 40 valounů železné rudy, 20 prutů železa, 20 valounů"
 " zlaté rudy a 10 prutů zlata."
 
