@@ -89,7 +89,7 @@ const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RW(LuaGame, desired_speed),      PROP_RW(LuaGame, allow_saving),
    PROP_RO(LuaGame, last_save_time),     PROP_RO(LuaGame, type),
    PROP_RO(LuaGame, interactive_player), PROP_RO(LuaGame, scenario_difficulty),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, win_condition),      {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -212,6 +212,17 @@ int LuaGame::get_type(lua_State* L) {
 		lua_pushstring(L, "undefined");
 		break;
 	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: win_condition
+
+      (RO) The (unlocalized) name of the game's win condition, e.g. :const:`"Endless Game"`.
+      For scenarios this is :const:`"Scenario"`.
+*/
+int LuaGame::get_win_condition(lua_State* L) {
+	lua_pushstring(L, get_game(L).get_win_condition_displayname().c_str());
 	return 1;
 }
 
