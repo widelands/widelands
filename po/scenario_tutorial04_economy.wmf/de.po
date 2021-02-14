@@ -1,11 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Wuzzy <almikes@aol.com>, 2016,2018
 # Elisabeth Jäger, 2017-2018
 # GunChleoc, 2016
 # Jonas Jonas <jonas.burger@googlemail.com>, 2019
+# Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-12-18 20:03+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-06 17:25+0000\n"
+"Last-Translator: Lennard Hofmann <lennard.hofmann@web.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -391,7 +392,7 @@ msgstr "Baue mindestens zwei Tavernen."
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr "So lange wir keine Rationen herstellen, graben unsere Bergleute nicht nach Erzen. Und ohne Eisen können wir keinen einzigen Helm schmieden."
+msgstr "Solange wir keine Rationen herstellen, graben unsere Bergleute nicht nach Erzen. Und ohne Eisen können wir keinen einzigen Helm schmieden."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
@@ -621,7 +622,7 @@ msgstr "Öffne das Warenstatistik-Fenster"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:337
 msgid "Select the ‘Wares’ entry from the ‘Statistics’ menu."
-msgstr "Wähle den ‘Waren’ Eintrag aus dem Statistikmenü."
+msgstr "Wähle den ‚Waren‘-Eintrag aus dem Statistikmenü."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:341
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:359

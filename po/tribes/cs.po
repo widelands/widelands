@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-05 17:17+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-02 08:08+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -246,7 +246,7 @@ msgstr "Bojové ležení"
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:42
 msgctxt "amazons_building"
-msgid "Your soldiers have occupied your warriors’ delling."
+msgid "Your soldiers have occupied your warriors’ dwelling."
 msgstr "Bojové ležení obydleno tvou posádkou."
 
 #. TRANSLATORS: Message sent by an Amazon military site
@@ -1168,7 +1168,6 @@ msgstr "Manioková kuchyně"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:36
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:54
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:39
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
@@ -1238,7 +1237,6 @@ msgstr "Manioková kuchyně"
 msgid "working"
 msgstr "vaření"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1418,7 +1416,7 @@ msgstr "Konzervárna potravin"
 #: ../../data/tribes/buildings/productionsites/empire/tavern/init.lua:65
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:67
 msgid "preparing a ration"
-msgstr "chystání malé porce"
+msgstr "chystání malé svačiny"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/amazons/furnace/init.lua:8
@@ -1483,7 +1481,7 @@ msgstr "dolování zlata"
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:94
 msgid "No Gold"
-msgstr "Není zlato"
+msgstr "Došlo zlato"
 
 #: ../../data/tribes/buildings/productionsites/amazons/gold_digger_dwelling/init.lua:66
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:84
@@ -1658,10 +1656,15 @@ msgstr "Chata průzkumnice"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
+#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:49
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:63
 msgid "scouting"
 msgstr "prozkoumávání"
 
@@ -1687,6 +1690,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "Kamenická dílna"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1698,6 +1702,8 @@ msgstr "Kamenická dílna"
 msgid "making a shovel"
 msgstr "vyrábění lopaty"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1707,6 +1713,7 @@ msgstr "vyrábění lopaty"
 msgid "making a felling ax"
 msgstr "vyrábění těžební sekery"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1721,6 +1728,8 @@ msgstr "vyrábění krumpáče"
 msgid "making a machete"
 msgstr "vyrábění mačety"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1731,6 +1740,7 @@ msgstr "vyrábění mačety"
 msgid "making kitchen tools"
 msgstr "vyrábění kuchyňského náčiní"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1748,9 +1758,9 @@ msgstr "vyrábění kladiva"
 msgid "making a chisel"
 msgstr "vyrábění dláta"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1786,12 +1796,12 @@ msgctxt "amazons_building"
 msgid "Stonecutter’s Hut"
 msgstr "Chata kamenice"
 
-#. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:36
 msgid "cutting granite"
 msgstr "lámání žuly"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
@@ -1799,7 +1809,7 @@ msgstr "lámání žuly"
 msgid "No Rocks"
 msgstr "Žádné skály"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
@@ -1807,7 +1817,7 @@ msgstr "Žádné skály"
 msgid "Out of Rocks"
 msgstr "Došlo kamení"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:58
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
 msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
@@ -1904,8 +1914,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "Stan ochránkyně fauny"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -2075,7 +2085,7 @@ msgstr "dolování uhlí"
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:117
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:96
 msgid "No Coal"
-msgstr "Není uhlí"
+msgstr "Došlo uhlí"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:96
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:96
@@ -2325,7 +2335,7 @@ msgstr "dolování železa"
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:104
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:96
 msgid "No Iron"
-msgstr "Žádné železo"
+msgstr "Došlo železo"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:81
@@ -3417,7 +3427,7 @@ msgstr "Domek průzkumníka"
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:8
 msgctxt "empire_building"
 msgid "Sheep Farm"
-msgstr "Ovčín"
+msgstr "Ovčinec"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:51
@@ -4127,12 +4137,12 @@ msgstr "Taverna"
 #. because ... (can produce more efficient when supply is good)
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:95
 msgid "preparing only one ration"
-msgstr "chystání jedné malé porce"
+msgstr "chystání jedné malé svačiny"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:109
 msgid "preparing rations"
-msgstr "chystání malých porcí"
+msgstr "chystání malých svačin"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/init.lua:8
@@ -4231,13 +4241,13 @@ msgstr "vylepšení zdraví bojovnice z úrovně 2 na úroveň 3"
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:201
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "vylepšení obrany bojovnice z úrovně 0 na úroveň 1"
+msgstr "cvičení obrany bojovnice z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:215
 msgctxt "amazons_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "vylepšení obrany bojovnice z úrovně 1 na úroveň 2"
+msgstr "cvičení obrany bojovnice z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Amazon training site tooltip when it has no soldiers assigned
 #: ../../data/tribes/buildings/trainingsites/amazons/training_glade/init.lua:236
@@ -4264,13 +4274,13 @@ msgstr "Bojový sněm"
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:88
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšení útoku bojovnice z úrovně 0 na úroveň 1"
+msgstr "cvičení útoku bojovnice z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/amazons/warriors_gathering/init.lua:102
 msgctxt "amazons_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšení útoku bojovnice z úrovně 1 na úroveň 2"
+msgstr "cvičení útoku bojovnice z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:205
@@ -4282,25 +4292,25 @@ msgstr "Kobky"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:279
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšení útoku vojáka z úrovně 0 na úroveň 1"
+msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:293
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšení útoku vojáka z úrovně 1 na úroveň 2"
+msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:307
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "vylepšení útoku vojáka z úrovně 2 na úroveň 3"
+msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:321
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "vylepšení útoku vojáka z úrovně 3 na úroveň 4"
+msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Atlantean training site tooltip when it has no soldiers
 #. assigned
@@ -4328,13 +4338,13 @@ msgstr "Labyrint"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:91
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "vylepšení obrany vojáka z úrovně 0 na úroveň 1"
+msgstr "cvičení obrany vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:105
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "vylepšení obrany vojáka z úrovně 1 na úroveň 2"
+msgstr "cvičení obrany vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:119
@@ -4548,25 +4558,25 @@ msgstr "Výcviková aréna"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr "vylepšení útoku vojáka z úrovně 3 na úroveň 4"
+msgstr "cvičení útoku vojáka z úrovně 3 na úroveň 4"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:135
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr "vylepšení útoku vojáka z úrovně 4 na úroveň 5"
+msgstr "cvičení útoku vojáka z úrovně 4 na úroveň 5"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:151
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
-msgstr "vylepšení útoku vojáka z úrovně 5 na úroveň 6"
+msgstr "cvičení útoku vojáka z úrovně 5 na úroveň 6"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr "vylepšení obrany vojáka z úrovně 1 na úroveň 2"
+msgstr "cvičení obrany vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:184
@@ -4599,19 +4609,19 @@ msgstr "Výcvikový tábor"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:119
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr "vylepšení útoku vojáka z úrovně 0 na úroveň 1"
+msgstr "cvičení útoku vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr "vylepšení útoku vojáka z úrovně 1 na úroveň 2"
+msgstr "cvičení útoku vojáka z úrovně 1 na úroveň 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:150
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr "vylepšení útoku vojáka z úrovně 2 na úroveň 3"
+msgstr "cvičení útoku vojáka z úrovně 2 na úroveň 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:166
@@ -4623,7 +4633,7 @@ msgstr "vylepšení zdraví vojáka z úrovně 0 na úroveň 1"
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:181
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr "vylepšení obrany vojáka z úrovně 0 na úroveň 1"
+msgstr "cvičení obrany vojáka z úrovně 0 na úroveň 1"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/amazons/headquarters/init.lua:8
@@ -4772,7 +4782,7 @@ msgstr "Ječné pole (malé)"
 #: ../../data/tribes/immovables/barleyfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr "Ječné pole (drobné)"
+msgstr "Ječné pole (oseté)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:14
 msgid "Blueberry Bush (tiny)"
@@ -4928,7 +4938,7 @@ msgstr "Pole rozrazilu (sklizené)"
 #: ../../data/tribes/immovables/blackrootfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (medium)"
-msgstr "Pole rozrazilu (střední)"
+msgstr "Pole rozrazilu (vzrostlé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield/ripe/init.lua:8
@@ -4946,7 +4956,7 @@ msgstr "Pole rozrazilu (malé)"
 #: ../../data/tribes/immovables/blackrootfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
-msgstr "Pole rozrazilu (maličké)"
+msgstr "Pole rozrazilu (oseté)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cassavafield/harvested/init.lua:8
@@ -4976,7 +4986,7 @@ msgstr "Maniokové pole (malé)"
 #: ../../data/tribes/immovables/cassavafield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cassava Root Field (tiny)"
-msgstr "Maniokové pole (drobné)"
+msgstr "Maniokové pole (osázené)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/harvested/init.lua:8
@@ -4988,7 +4998,7 @@ msgstr "Kukuřičné pole (sklizené)"
 #: ../../data/tribes/immovables/cornfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (medium)"
-msgstr "Kukuřičné pole (střední)"
+msgstr "Kukuřičné pole (vzrostlé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield/ripe/init.lua:8
@@ -5006,7 +5016,7 @@ msgstr "Kukuřičné pole (malé)"
 #: ../../data/tribes/immovables/cornfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Cornfield (tiny)"
-msgstr "Kukuřičné pole (maličké)"
+msgstr "Kukuřičné pole (oseté)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/destroyed_building/init.lua:8
@@ -5018,7 +5028,7 @@ msgstr "Zničená budova"
 #: ../../data/tribes/immovables/grapevine/medium/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr "Vinná réva (střední)"
+msgstr "Vinná réva (vzrostlá)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine/ripe/init.lua:8
@@ -5036,7 +5046,7 @@ msgstr "Vinná réva (malá)"
 #: ../../data/tribes/immovables/grapevine/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr "Vinná réva (maličká)"
+msgstr "Vinná réva (drobná)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond/burning/init.lua:8
@@ -5193,7 +5203,7 @@ msgstr "Hodně železa"
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:215
 msgctxt "resource_indicator"
 msgid "A Lot of Crystals"
-msgstr "Hodně křemene"
+msgstr "Hodně krystalů"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/empire/init.lua:108
@@ -5277,10 +5287,6 @@ msgstr "Kakaovník (vzrostlý)"
 #: ../../data/tribes/immovables/trees/cocoa/init.lua:80
 msgid "Cocoa Tree (old)"
 msgstr "Kakaovník (starý)"
-
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:81
-msgid "Cocoa Tree"
-msgstr "Kakaovník"
 
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
@@ -5371,31 +5377,31 @@ msgstr "Kaučukovník brazilský"
 #: ../../data/tribes/immovables/wheatfield/harvested/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (harvested)"
-msgstr "Obilné pole (sklizené)"
+msgstr "Pšeničné pole (sklizené)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/medium/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (medium)"
-msgstr "Obilné pole (vzrostlé)"
+msgstr "Pšeničné pole (vzrostlé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/ripe/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (ripe)"
-msgstr "Obilné pole (zralé)"
+msgstr "Pšeničné pole (zralé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/small/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (small)"
-msgstr "Obilné pole (malé)"
+msgstr "Pšeničné pole (malé)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/wheatfield/tiny/init.lua:8
 msgctxt "immovable"
 msgid "Wheat Field (tiny)"
-msgstr "Obilné pole (drobné)"
+msgstr "Pšeničné pole (oseté)"
 
 #: ../../data/tribes/initialization/amazons/init.lua:11
 #: ../../data/tribes/initialization/atlanteans/init.lua:11
@@ -7561,7 +7567,7 @@ msgstr "Křemen"
 #: ../../data/tribes/wares/ration/init.lua:8
 msgctxt "ware"
 msgid "Ration"
-msgstr "Malá porce"
+msgstr "Malá svačina"
 
 #. TRANSLATORS: This is a ware name used in lists of wares. Used for thatching
 #. roofs and as a fiber for weaving cloth, fishing nets etc.
