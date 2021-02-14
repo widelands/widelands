@@ -65,7 +65,7 @@ private:
 struct RemoteAddOnRow : public UI::Panel {
 	RemoteAddOnRow(Panel*,
 	               AddOnsCtrl*,
-	               const AddOns::AddOnInfo&,
+	               AddOns::AddOnInfo&,
 	               const AddOns::AddOnVersion& installed_version,
 	               uint32_t installed_i18n_version);
 	~RemoteAddOnRow() override {
@@ -98,8 +98,7 @@ public:
 	void rebuild();
 	void update_dependency_errors();
 
-	void install(const AddOns::AddOnInfo&);
-	void upgrade(const AddOns::AddOnInfo&, bool full_upgrade);
+	void install_or_upgrade(const AddOns::AddOnInfo&, bool only_translations);
 
 	bool handle_key(bool, SDL_Keysym) override;
 

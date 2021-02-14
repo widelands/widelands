@@ -89,6 +89,11 @@ NetAddons::~NetAddons() {
 	}
 }
 
+static inline std::string get_addons_repo_name() {
+	return std::string("https://raw.githubusercontent.com/") +
+	       get_config_string("addon_repo", "widelands/wl_addons_server/master") + "/";
+}
+
 void NetAddons::set_url_and_timeout(std::string url) {
 	size_t pos = 0;
 	while ((pos = url.find(' ')) != std::string::npos) {
@@ -115,9 +120,11 @@ std::string NetAddons::read_line() {
 	return line;
 }
 
-static inline std::string get_addons_repo_name() {
-	return std::string("https://raw.githubusercontent.com/") +
-	       get_config_string("addon_repo", "widelands/wl_addons_server/master") + "/";
+void NetAddons::check_endofstream() {
+	const std::string text = read_line();
+	if (text != "ENDOFSTREAM") {
+		throw wexception("Expected end of stream, received '%s'", text.c_str());
+	}
 }
 
 // A crash guard is there to ensure that the socket connection will be reset
@@ -153,6 +160,7 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	for (long i = 0; i < nr_addons; ++i) {
 		result_vector[i].internal_name = read_line();
 	}
+	check_endofstream();
 
 	for (long i = 0; i < nr_addons; ++i) {
 		AddOnInfo& a = result_vector[i];
@@ -219,6 +227,8 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 			}
 		}
 		a.verified = read_line() == "verified";
+
+		check_endofstream();
 	}
 
 	guard.ok();
@@ -247,7 +257,6 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 		for (long j = std::stol(read_line()); j > 0; --j) {
 			const std::string filename = read_line();
 			const long length = std::stol(read_line());
-
 			std::string relative_path;
 			if (i >= 0) {
 				relative_path += dirnames[i];
@@ -257,7 +266,6 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 			std::string out = save_as;
 			out += FileSystem::file_separator();
 			out += relative_path;
-
 			FileWrite fw;
 			std::unique_ptr<char[]> buffer(new char[length]);
 			long nr_bytes_read = 0;
@@ -274,83 +282,123 @@ void NetAddons::download_addon(const std::string& name, const std::string& save_
 			fw.write(*g_fs, out);
 		}
 	}
+
+	check_endofstream();
 	guard.ok();
 }
 
-/* static void check_downloaded_file(const std::string& path, const std::string& checksum) {
+void NetAddons::download_i18n(const std::string& name, const std::string& directory, const CallbackFn& progress, const CallbackFn& init_fn) {
+	init();
+	CrashGuard guard(*this);
+	{
+		std::string send = "CMD_I18N ";
+		send += name;
+		send += '\n';
+		write(client_socket_, send.c_str(), send.size());
+	}
+	g_fs->ensure_directory_exists(directory);
+
+	const long nr_translations = std::stol(read_line());
+	init_fn("", nr_translations);
+	for (long i = 0; i < nr_translations; ++i) {
+		const std::string filename = read_line();
+		progress(filename.substr(0, filename.find('.')), i);
+		const long length = std::stol(read_line());
+		FileWrite fw;
+		std::unique_ptr<char[]> buffer(new char[length]);
+		long nr_bytes_read = 0;
+		do {
+			long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
+			if (l < 1) {
+				throw wexception("Connection interrupted or server crashed");
+			}
+			nr_bytes_read += l;
+			fw.data(buffer.get(), l);
+		} while (nr_bytes_read < length);
+		fw.write(*g_fs, directory + FileSystem::file_separator() + filename);
+	}
+
+	check_endofstream();
+	guard.ok();
+}
+
+int NetAddons::get_vote(const std::string& addon, const std::string& username, const std::string& password) {
+	int v;
 	try {
-		// Our md5 implementation is not well documented, so I am doing this
-		// as it is done in GameClient::handle_new_file and hope it works…
-		FileRead fr;
-		fr.open(*g_fs, path);
-		const size_t bytes = fr.get_size();
-		std::unique_ptr<char[]> complete(new char[bytes]);
-		fr.data_complete(complete.get(), bytes);
-		SimpleMD5Checksum md5sum;
-		md5sum.data(complete.get(), bytes);
-		md5sum.finish_checksum();
-		const std::string md5 = md5sum.get_checksum().str();
-		if (checksum != md5) {
-			throw wexception("Downloaded file '%s': Checksum mismatch, found %s, expected %s",
-			                 path.c_str(), md5.c_str(), checksum.c_str());
+		init();
+
+		std::string send = "CMD_GET_VOTE ";
+		send += addon;
+		send += ' ';
+		send += username;
+		send += ' ';
+		send += password;
+		send += '\n';
+		write(client_socket_, send.c_str(), send.size());
+
+		v = stoi(read_line());
+		assert(v >= 0);
+		assert(v <= kMaxRating);
+
+		check_endofstream();
+	} catch (...) {
+		v = -1;
+	}
+	return v;
+}
+void NetAddons::vote(const std::string& addon, const std::string& username, const std::string& password, const unsigned vote) {
+	try {
+		assert(vote <= kMaxRating);
+		init();
+		std::string send = "CMD_VOTE ";
+		send += addon;
+		send += ' ';
+		send += username;
+		send += ' ';
+		send += password;
+		send += ' ';
+		send += std::to_string(vote);
+		send += '\n';
+		write(client_socket_, send.c_str(), send.size());
+		// no reply from the server
+	} catch (...) {
+		// ignore
+	}
+}
+void NetAddons::comment(const AddOnInfo& addon, const std::string& username, const std::string& password, const std::string& message) {
+	try {
+		init();
+		std::string send = "CMD_COMMENT ";
+		send += addon.internal_name;
+		send += ' ';
+		send += username;
+		send += ' ';
+		send += password;
+		send += ' ';
+		send += version_to_string(addon.version, false);
+		send += ' ';
+		{
+			unsigned whitespace = 0;
+			size_t pos = 0;
+			for (;;) {
+				pos = message.find(' ', pos);
+				if (pos == std::string::npos) {
+					break;
+				}
+				++whitespace;
+				++pos;
+			}
+			send += std::to_string(whitespace);
 		}
-	} catch (const std::exception& e) {
-		throw wexception(
-		   "Downloaded file '%s': Unable to check output file: %s", path.c_str(), e.what());
+		send += ' ';
+		send += message;
+		send += '\n';
+		write(client_socket_, send.c_str(), send.size());
+		// no reply from the server
+	} catch (...) {
+		// ignore
 	}
 }
-
-void NetAddons::download_addon_file(const std::string& name,
-                                    const std::string& checksum,
-                                    const std::string& output) {
-	init();
-
-	set_url_and_timeout(get_addons_repo_name() + "addons/" + name);
-
-	FileWrite fw;
-	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &download_addon_file_callback);
-	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &fw);
-
-	const CURLcode res = curl_easy_perform(curl_);
-
-	fw.write(*g_fs, output);
-
-	if (res != CURLE_OK) {
-		throw wexception("%s: CURL terminated with error code %d", name.c_str(), res);
-	}
-	check_downloaded_file(output, checksum);
-}
-
-std::string NetAddons::download_i18n(const std::string& name,
-                                     const std::string& checksum,
-                                     const std::string& locale) {
-	init();
-
-	const std::string temp_dirname =
-	   kTempFileDir + FileSystem::file_separator() + name + ".mo" + kTempFileExtension;
-	g_fs->ensure_directory_exists(temp_dirname);
-
-	const std::string output =
-	   temp_dirname + FileSystem::file_separator() + locale + kTempFileExtension;
-
-	set_url_and_timeout(get_addons_repo_name() + "i18n/" + name + "/" + locale);
-
-	FileWrite fw;
-	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &download_addon_file_callback);
-	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &fw);
-
-	const CURLcode res = curl_easy_perform(curl_);
-
-	fw.write(*g_fs, output);
-
-	if (res != CURLE_OK) {
-		throw wexception(
-		   "[%s / %s] CURL terminated with error code %d\n", name.c_str(), locale.c_str(), res);
-	}
-
-	check_downloaded_file(output, checksum);
-	return output;
-} */
 
 static size_t curl_download_callback(char* data, size_t, const size_t char_count, FileWrite* fw) {
 	fw->data(data, char_count);

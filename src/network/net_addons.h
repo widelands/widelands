@@ -45,16 +45,21 @@ struct NetAddons {
 
 	// Downloads the add-on with the given name (e.g. "cool_feature.wad")
 	// from the server and downloads it to the given canonical location.
-	void download_addon(const std::string& name, const std::string& save_as, const CallbackFn& progress);
+	void download_addon(const std::string& name, const std::string& save_as, const CallbackFn&);
 
 	// Requests the MO files for the given add-on (cool_feature.wad) from the server and
 	// downloads them into the given temporary location (e.g. ~/.widelands/temp/some_dir).
 	// The filename of the created MO files is guaranteed to be in the format
 	// "nds.mo.tmp" (where 'nds' is the language's abbreviation).
-	void download_i18n(const std::string& addon, const std::string& directory);
+	void download_i18n(const std::string& addon, const std::string& directory, const CallbackFn&, const CallbackFn&);
 
 	// Download the given screenshot for the given add-on
 	std::string download_screenshot(const std::string& addon, const std::string& screenie);
+
+	// How the user voted the add-on (1-10). Returns 0 for not votes, <0 for access denied.
+	int get_vote(const std::string& addon, const std::string& username, const std::string& password);
+	void vote(const std::string& addon, const std::string& username, const std::string& password, unsigned vote);
+	void comment(const AddOnInfo& addon, const std::string& username, const std::string& password, const std::string& message);
 
 private:
 	friend struct CrashGuard;
@@ -67,6 +72,7 @@ private:
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
 	std::string read_line();
+	void check_endofstream();
 
 	bool initialized_;
 	CURL* curl_;
