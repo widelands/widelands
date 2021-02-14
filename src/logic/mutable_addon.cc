@@ -65,7 +65,7 @@ static std::string read_text_file(const std::string& filename) {
 	std::unique_ptr<char[]> data(new char[bytes + 1]);
 	fr.data_complete(data.get(), bytes);
 	data[bytes] = 0;
-	return std::move(data.get());
+	return data.get();
 }
 
 std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo& a) {
