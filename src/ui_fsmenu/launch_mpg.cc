@@ -258,7 +258,7 @@ void LaunchMPG::map_changed() {
 		// interface can only notice the change after the host broadcasted it.
 		if (settings.savegame) {
 			load_previous_playerdata();
-		} else {
+		} else if (!settings.mapfilename.empty()) {
 			load_map_info();
 			if (settings.scenario) {
 				set_scenario_values();
