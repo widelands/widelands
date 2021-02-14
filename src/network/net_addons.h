@@ -20,9 +20,9 @@
 #ifndef WL_NETWORK_NET_ADDONS_H
 #define WL_NETWORK_NET_ADDONS_H
 
-#define CURL_STATICLIB
+// #define CURL_STATICLIB
 
-#include <curl/curl.h>
+// #include <curl/curl.h>
 #include <set>
 
 #include "logic/addons.h"
@@ -34,7 +34,7 @@ namespace AddOns {
 // Con: Additional dependency – this is the only place in our code where libcurl is used
 
 struct NetAddons {
-	NetAddons() : initialized_(false), curl_(nullptr), client_socket_(0) {
+	NetAddons() : initialized_(false), /* curl_(nullptr), */ client_socket_(0) {
 	}
 	~NetAddons();
 
@@ -68,14 +68,15 @@ private:
 	void init();
 
 	// Set the URL (whitespace-safe) and adjust the timeout values.
-	void set_url_and_timeout(std::string);
+	// void set_url_and_timeout(std::string);
 
 	// Read a '\n'-terminated string from the socket. The terminator is not part of the result.
 	std::string read_line();
+	void read_file(long length, const std::string& out);
 	void check_endofstream();
 
 	bool initialized_;
-	CURL* curl_;
+	// CURL* curl_;
 	int client_socket_;
 };
 

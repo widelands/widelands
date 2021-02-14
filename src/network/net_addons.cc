@@ -43,7 +43,7 @@
 namespace AddOns {
 
 // silence warnings triggered by curl.h
-CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
+// CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
 
 // all CURL-related code is inspired by
 // https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
@@ -57,7 +57,7 @@ void NetAddons::init() {
 		return;
 	}
 
-	if (!curl_) {
+	/* if (!curl_) {
 		curl_ = curl_easy_init();
 	}
 	if (!curl_) {
@@ -66,7 +66,7 @@ void NetAddons::init() {
 #ifdef __MINGW32__
 		// mingw with static curl causes some trouble
 		curl_easy_setopt(curl_, CURLOPT_SSL_VERIFYPEER, 0);
-#endif
+#endif */
 
 	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 		throw wexception("Unable to create socket");
@@ -83,10 +83,10 @@ void NetAddons::init() {
 }
 
 NetAddons::~NetAddons() {
-	if (curl_) {
+	/* if (curl_) {
 		curl_easy_cleanup(curl_);
 		curl_ = nullptr;
-	}
+	} */
 }
 
 static inline std::string get_addons_repo_name() {
@@ -94,7 +94,7 @@ static inline std::string get_addons_repo_name() {
 	       get_config_string("addon_repo", "widelands/wl_addons_server/master") + "/";
 }
 
-void NetAddons::set_url_and_timeout(std::string url) {
+/* void NetAddons::set_url_and_timeout(std::string url) {
 	size_t pos = 0;
 	while ((pos = url.find(' ')) != std::string::npos) {
 		url.replace(pos, 1, "%20");
@@ -104,7 +104,7 @@ void NetAddons::set_url_and_timeout(std::string url) {
 	// Times are in seconds
 	curl_easy_setopt(curl_, CURLOPT_CONNECTTIMEOUT, 10);
 	curl_easy_setopt(curl_, CURLOPT_TIMEOUT, 30);
-}
+} */
 
 std::string NetAddons::read_line() {
 	std::string line;
@@ -118,6 +118,21 @@ std::string NetAddons::read_line() {
 		line += c;
 	}
 	return line;
+}
+
+void NetAddons::read_file(const long length, const std::string& out) {
+	FileWrite fw;
+	std::unique_ptr<char[]> buffer(new char[length]);
+	long nr_bytes_read = 0;
+	do {
+		long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
+		if (l < 1) {
+			throw wexception("Connection interrupted or server crashed");
+		}
+		nr_bytes_read += l;
+		fw.data(buffer.get(), l);
+	} while (nr_bytes_read < length);
+	fw.write(*g_fs, out);
 }
 
 void NetAddons::check_endofstream() {
@@ -304,18 +319,7 @@ void NetAddons::download_i18n(const std::string& name, const std::string& direct
 		const std::string filename = read_line();
 		progress(filename.substr(0, filename.find('.')), i);
 		const long length = std::stol(read_line());
-		FileWrite fw;
-		std::unique_ptr<char[]> buffer(new char[length]);
-		long nr_bytes_read = 0;
-		do {
-			long l = read(client_socket_, buffer.get(), length - nr_bytes_read);
-			if (l < 1) {
-				throw wexception("Connection interrupted or server crashed");
-			}
-			nr_bytes_read += l;
-			fw.data(buffer.get(), l);
-		} while (nr_bytes_read < length);
-		fw.write(*g_fs, directory + FileSystem::file_separator() + filename);
+		read_file(length, directory + FileSystem::file_separator() + filename);
 	}
 
 	check_endofstream();
@@ -326,6 +330,7 @@ int NetAddons::get_vote(const std::string& addon, const std::string& username, c
 	int v;
 	try {
 		init();
+		CrashGuard guard(*this);
 
 		std::string send = "CMD_GET_VOTE ";
 		send += addon;
@@ -341,6 +346,7 @@ int NetAddons::get_vote(const std::string& addon, const std::string& username, c
 		assert(v <= kMaxRating);
 
 		check_endofstream();
+		guard.ok();
 	} catch (...) {
 		v = -1;
 	}
@@ -400,7 +406,35 @@ void NetAddons::comment(const AddOnInfo& addon, const std::string& username, con
 	}
 }
 
-static size_t curl_download_callback(char* data, size_t, const size_t char_count, FileWrite* fw) {
+std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
+	try {
+		init();
+		CrashGuard guard(*this);
+		std::string send = "CMD_SCREENSHOT ";
+		send += name;
+		send += ' ';
+		send += screenie;
+		send += '\n';
+		write(client_socket_, send.c_str(), send.size());
+
+		std::string temp_dirname =
+		   kTempFileDir + FileSystem::file_separator() + name + ".screenshots" + kTempFileExtension;
+		g_fs->ensure_directory_exists(temp_dirname);
+		const std::string output = temp_dirname + FileSystem::file_separator() + screenie;
+
+		const long filesize = stoi(read_line());
+		read_file(filesize, output);
+
+		check_endofstream();
+		guard.ok();
+
+		return output;
+	} catch (...) {
+		return "";
+	}
+}
+
+/* static size_t curl_download_callback(char* data, size_t, const size_t char_count, FileWrite* fw) {
 	fw->data(data, char_count);
 	return char_count;
 }
@@ -427,6 +461,6 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 	return res == CURLE_OK ? output : "";
 }
 
-CLANG_DIAG_ON("-Wdisabled-macro-expansion")
+CLANG_DIAG_ON("-Wdisabled-macro-expansion") */
 
 }  // namespace AddOns
