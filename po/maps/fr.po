@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
 # Arnaud Arnaud <arnaudgay@hotmail.com>, 2020
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
 # Drisse Atek <dageneration@live.fr>, 2020
-# E V <edwvig@outlook.fr>, 2020
+# 84bb7667093fb8a75cffdd2a3185ec91_c4f49af <a6591cfca7413cbee27fc104f3e8266a_892629>, 2020
 # GunChleoc, 2016-2018
 # Samuël Weber/GwendalD <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
 "PO-Revision-Date: 2020-12-06 10:36+0000\n"
 "Last-Translator: Arnaud Arnaud <arnaudgay@hotmail.com>\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"

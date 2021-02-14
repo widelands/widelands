@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Matej Svrcek <mmatej@yahoo.com>, 2016
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-12-31 19:43+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-01 14:07+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -266,14 +266,14 @@ msgstr "Zásoby"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:134
 msgid "Check for rations"
-msgstr "Zkontroluj malé porce"
+msgstr "Zkontroluj malé svačiny"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:136
 msgid ""
 "OK. In the list, you’ve seen that you have no more taverns or inns. That "
 "means that you’re not producing any rations. But let’s see what we still "
 "have in stock."
-msgstr "Dobře. V seznamu jsme viděli, že už nemáš ani hospody ani hostince. To znamená, že nepřipravuješ žádné malé porce. Tak se pojďme podívat, jestli máme ještě nějaké v zásobě."
+msgstr "Dobře. V seznamu jsme viděli, že už nemáš ani hospody ani hostince. To znamená, že nepřipravuješ žádné malé svačiny. Tak se pojďme podívat, jestli máme ještě nějaké v zásobě."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:142
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:144
@@ -303,7 +303,7 @@ msgstr "Okno zásob má čtyři záložky. První zobrazuje všechny tvé surovi
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "Podíváme-li se na malé porce, je jich tam pouze pět celkem, pravděpodobně někde na cestě. Pět malých porcí, to není moc na tak velké hospodářství."
+msgstr "Podíváme-li se na malé svačiny, je jich tam pouze pět celkem, pravděpodobně jsou někde na cestě. Pět malých svačin, to není moc na tak velké hospodářství."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:158
 msgid ""
@@ -326,7 +326,7 @@ msgstr "Čtvrtá záložka zobrazuje to samé pro dělníky."
 msgid ""
 "The third tab tells you that there are no rations left in your headquarters "
 "– that’s not good!"
-msgstr "Třetí záložka ti říká, že v hlavní budově už nejsou žádné malé porce. To není dobré."
+msgstr "Třetí záložka ti říká, že v hlavní budově už nejsou žádné malé svačiny. To není dobré."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:177
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:200
@@ -385,7 +385,7 @@ msgstr "Postav alespoň dvě hospody."
 msgid ""
 "As long as we don’t produce rations, our miners won’t dig for ore. And "
 "without iron, we cannot forge a single helm."
-msgstr "Dokud nevyrábíme malé porce, naši horníci nebudou kutat rudu. A bez rudy nemůžeme ukovat ani jedinou helmu."
+msgstr "Dokud nevyrábíme malé svačiny, naši horníci nebudou kutat rudu. A bez rudy nemůžeme ukovat ani jedinou helmu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid "New taverns"
@@ -433,7 +433,7 @@ msgstr "Jak získat pomoc"
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr "Občas může být těžké zorietovat se v mých radách nebo poznámkách. Například se můžeš ptát: \"Proč potřebujeme na získání vojáků malé porce?\""
+msgstr "Občas může být těžké zorietovat se v mých radách nebo poznámkách. Například se můžeš ptát: \"Proč potřebujeme na získání vojáků malé svačiny?\""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid ""
@@ -468,7 +468,7 @@ msgstr "Vyber záložku \"Suroviny\" v okně encyklopedie."
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr "Podívej se, co je potřeba na výrobu helmy a na výrobu dřevěného oštěpu."
+msgstr "Podívej se, co je potřeba na výrobu přilby a na výrobu dřevěného oštěpu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid ""
@@ -563,14 +563,14 @@ msgstr "Pošli suroviny tam, kde jsou potřeba"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:319
 msgid ""
 "Great. Our taverns have now been built up and are supplying us with rations."
-msgstr "Skvělé. Naše hospody už se dostavěly a začínají nám dodávat malé porce."
+msgstr "Skvělé. Naše hospody už se dostavěly a začínají nám dodávat malé svačiny."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:320
 msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
-msgstr "V tuto chvíli jsou všechny doly zásobeny malými porcemi. Pokud chceš upřednostnit nějaký důl, jednoduše to uděláš v jeho okně. Na záložce surovin, za každou surovinou je umístěno nastavení."
+msgstr "V tuto chvíli jsou všechny doly zásobeny malými svačinami. Pokud chceš upřednostnit nějaký důl, jednoduše to uděláš v jeho okně. Na záložce surovin je za každou surovinou umístěno nastavení."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:321
 msgid ""
@@ -805,7 +805,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš obilné pole, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Nástrojař tedy začne vyrábět novou."
+msgstr "Například nastavená hodnota pro kosy je 1. Pokud postavíš obilné pole, nosič vezme kosu a stane se sedlákem. Tím pádem už nemáš žádnou kosu, ale cílové množství je 1. Nástrojář tedy začne vyrábět novou."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:489
 msgid ""
