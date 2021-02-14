@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -67,7 +67,8 @@ msgstr "Udělej si skladovou rezervu stavebního materiálu"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:44
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
-msgstr "Nahromaď stavební materiál ve své hlavní budově. Získej alespoň:"
+msgstr ""
+"Uskladni dostatek stavebního materiálu ve své hlavní budově. Získej alespoň:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "30 × Log"
@@ -130,7 +131,7 @@ msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
-"Postav nejméně dva statky, včelařský domek (vedle sadu ovocných bobují, "
+"Postav nejméně dva statky, včelařský domek (vedle sadu ovocných bobulí, "
 "případně statku), pekárnu, pivovar a další tavernu."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:72
@@ -562,10 +563,10 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
-"Je potřeba postavit tavernu, která bude připravovat malé porce. Pro získání "
-"surovin musíme postavit domek rybáře, a protože syrové ryby nikdo jíst "
-"nebude, také udírnu na jejich uzení. Dále postavme sad ovocných bobulí, "
-"který bude sázet ovocné keře, a domek sběrače ovoce, který bude úrodu "
+"Je potřeba postavit tavernu, která bude připravovat malé svačiny. Pro "
+"získání surovin musíme postavit domek rybáře, a protože syrové ryby nikdo "
+"jíst nebude, také udírnu na jejich uzení. Dále postavme sad ovocných bobulí,"
+" který bude sázet ovocné keře, a domek sběrače ovoce, který bude úrodu "
 "sklízet."
 
 #. TRANSLATORS: Hauke – no rations left
@@ -597,7 +598,7 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
-"Ale pokud budeme potřebovat doly vylepšit, malé porce už nebudou horníkům "
+"Ale pokud budeme potřebovat doly vylepšit, malé svačiny už nebudou horníkům "
 "stačit. Raději se na to připravme předem – postav druhou tavernu a zvaž "
 "vylepšení jedné z nich na velkou výčepnu."
 
@@ -1063,7 +1064,7 @@ msgid ""
 "need to build a new settlement, we may be able to escape."
 msgstr ""
 "Neztrácej rozum, vidím jiskřičku naděje! Nejvýchodnější cíp ostrova a také "
-"misto, kde stála hlavní budova té chátry, vypadají příhodně pro zbudování "
+"misto, kde stála hlavní budova neprátel, vypadají příhodně pro zbudování "
 "přístavu. Pokud se nám podaří postavit loď a naplnit ji vším, co můžeme "
 "potřebovat na stavbu nového osídlení, může se nám podařit se odtud dostat."
 
@@ -1077,10 +1078,10 @@ msgid ""
 "make haste!"
 msgstr ""
 "Záplavová vlna bouřlivého přílivu zdá se postupuje od západu. Pokud si "
-"pospíšíme, tak to dáme! Stačí jen postavit přístav a loděnici – á, a ještě "
-"tkalcovnu kvůli odolné látce na plachty, která se tká ze zpracovaných "
-"kožešin a rákosí. Pak lze zahájit z přístavu výpravu. Modli se k bohům a "
-"hejbni si!"
+"pospíšíme, tak to musíme zvládnout! Stačí jen postavit přístav a loděnici. A"
+" ještě tkalcovnu, kvůli odolné látce na plachty, která se tká ze "
+"zpracovaných kožešin a rákosí. Pak lze zahájit z přístavu výpravu. Modleme "
+"se k bohům a dejme se rychle do práce!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
 msgid "Don’t Forget the Soldiers"

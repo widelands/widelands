@@ -11,6 +11,8 @@ init = {
    descname = _ "Poor Hamlet",
    -- TRANSLATORS: This is the tooltip for the "Poor Hamlet" (minimum) starting condition
    tooltip = _"Start the game with just a warehouse and the bare minimum for bootstrapping an economy. Warning: the AI can’t successfully start from this.",
+   incompatible_wc = {"scripting/win_conditions/hq_hunter.lua"},
+
    func =  function(player, shared_in_start)
       local sf = wl.Game().map.player_slots[player.number].starting_field
       if shared_in_start then

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Roy Luo <1598359376@qq.com>, 2021
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-08 15:25+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-11 08:16+0000\n"
 "Last-Translator: Roy Luo <1598359376@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -242,7 +242,7 @@ msgstr "勇士聚义厅"
 #. TRANSLATORS: Message sent by an Amazon military site
 #: ../../data/tribes/buildings/militarysites/amazons/warriors_dwelling/init.lua:42
 msgctxt "amazons_building"
-msgid "Your soldiers have occupied your warriors’ delling."
+msgid "Your soldiers have occupied your warriors’ dwelling."
 msgstr "你的士兵们已经入驻你的勇士聚义厅。"
 
 #. TRANSLATORS: Message sent by an Amazon military site
@@ -1164,7 +1164,6 @@ msgstr "木薯块根厨房"
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:52
 #: ../../data/tribes/buildings/productionsites/amazons/shipyard/init.lua:67
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:59
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:36
 #: ../../data/tribes/buildings/productionsites/amazons/tapir_farm/init.lua:54
 #: ../../data/tribes/buildings/productionsites/amazons/water_gatherers_hut/init.lua:39
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:43
@@ -1234,7 +1233,6 @@ msgstr "木薯块根厨房"
 msgid "working"
 msgstr "工作"
 
-#. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/amazons/cassava_root_cooker/init.lua:61
@@ -1591,7 +1589,7 @@ msgstr "藤蔓采集者在她的工作区域内已找不到任何可以采集的
 #: ../../data/tribes/buildings/productionsites/amazons/rare_tree_cutters_hut/init.lua:8
 msgctxt "amazons_building"
 msgid "Rare Tree Cutter’s Hut"
-msgstr "珍稀树种樵夫小屋"
+msgstr "珍稀树种加工车间"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing only one ration
 #. because ... (can produce more efficient when supply is good)
@@ -1654,10 +1652,15 @@ msgstr "侦察兵小屋"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:41
+#: ../../data/tribes/buildings/productionsites/amazons/scouts_hut/init.lua:49
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:56
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:57
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:45
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:63
 msgid "scouting"
 msgstr "侦察"
 
@@ -1683,6 +1686,7 @@ msgctxt "amazons_building"
 msgid "Stone Workshop"
 msgstr "石材车间"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
@@ -1694,6 +1698,8 @@ msgstr "石材车间"
 msgid "making a shovel"
 msgstr "打造铁铲"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a felling ax because
 #. ...
@@ -1703,6 +1709,7 @@ msgstr "打造铁铲"
 msgid "making a felling ax"
 msgstr "打造伐木斧"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:105
@@ -1717,6 +1724,8 @@ msgstr "打造鹤嘴镐"
 msgid "making a machete"
 msgstr "打造弯刀"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
+#. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making kitchen tools because
 #. ...
@@ -1727,6 +1736,7 @@ msgstr "打造弯刀"
 msgid "making kitchen tools"
 msgstr "打造厨房用具"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because
 #. ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
@@ -1744,9 +1754,9 @@ msgstr "打造锤子"
 msgid "making a chisel"
 msgstr "打造凿刀"
 
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
-#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/amazons/stone_workshop/init.lua:160
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:211
 msgid "making needles"
@@ -1782,12 +1792,12 @@ msgctxt "amazons_building"
 msgid "Stonecutter’s Hut"
 msgstr "采石匠小屋"
 
-#. TRANSLATORS: Completed/Skipped/Did not start quarrying granite because ...
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:45
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:36
 msgid "cutting granite"
 msgstr "采集花岗石"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:56
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:46
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:47
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:68
@@ -1795,7 +1805,7 @@ msgstr "采集花岗石"
 msgid "No Rocks"
 msgstr "没有岩石"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:57
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:47
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:69
@@ -1803,7 +1813,7 @@ msgstr "没有岩石"
 msgid "Out of Rocks"
 msgstr "没有岩石资源了"
 
-#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:58
+#: ../../data/tribes/buildings/productionsites/amazons/stonecutters_hut/init.lua:48
 msgctxt "amazons_building"
 msgid ""
 "The stonecutter working at this stonecutter’s hut can’t find any rocks in "
@@ -1900,8 +1910,8 @@ msgctxt "amazons_building"
 msgid "Wilderness Keeper’s Tent"
 msgstr "荒野守护者帐篷"
 
-#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
+#. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/amazons/wilderness_keepers_tent/init.lua:51
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:67
@@ -3413,7 +3423,7 @@ msgstr "侦察兵之家"
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:8
 msgctxt "empire_building"
 msgid "Sheep Farm"
-msgstr "绵羊牧场"
+msgstr "牧羊场"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:51
@@ -3466,7 +3476,7 @@ msgstr "制作篮子"
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:8
 msgctxt "empire_building"
 msgid "Vineyard"
-msgstr "葡萄酒庄"
+msgstr "葡萄园"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
@@ -3543,7 +3553,7 @@ msgstr "搬运工在他的水井工作区域内已找不到任何水资源。"
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:8
 msgctxt "empire_building"
 msgid "Winery"
-msgstr "葡萄酒庄"
+msgstr "葡萄酒酿造厂"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making wine because ...
 #: ../../data/tribes/buildings/productionsites/empire/winery/init.lua:53
@@ -5274,10 +5284,6 @@ msgstr "可可树(成材的)"
 msgid "Cocoa Tree (old)"
 msgstr "可可树(老的)"
 
-#: ../../data/tribes/immovables/trees/cocoa/init.lua:81
-msgid "Cocoa Tree"
-msgstr "可可树"
-
 #. TRANSLATORS:  This is an amazon rare tree.
 #: ../../data/tribes/immovables/trees/deadtree7/init.lua:9
 msgid "Dead Tree"
@@ -5417,14 +5423,14 @@ msgstr "亚马逊丛林的人民。这个部族仍在开发中。"
 msgctxt "amazons_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1%士兵们(+%2%)"
+msgstr[0] "%1%士兵(+%2%)"
 
 #. TRANSLATORS: Number of Amazon soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/amazons/military_capacity.lua:11
 msgctxt "amazons_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] "%1%士兵们"
+msgstr[0] "%1%士兵"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5433,7 +5439,7 @@ msgstr[0] "%1%士兵们"
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%)士兵们(+%3%)"
+msgstr[0] "%1%(+%2%)士兵(+%3%)"
 
 #. TRANSLATORS: %1% is the number of Amazon soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5441,7 +5447,7 @@ msgstr[0] "%1%(+%2%)士兵们(+%3%)"
 msgctxt "amazons_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%)士兵们"
+msgstr[0] "%1%(+%2%)士兵"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/amazons/starting_conditions/fortified_village.lua:11
@@ -5596,14 +5602,14 @@ msgstr "从最古老的传说中获知了这个部族，亚特兰蒂斯的儿女
 msgctxt "atlanteans_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1%士兵们(+%2%)"
+msgstr[0] "%1%士兵(+%2%)"
 
 #. TRANSLATORS: Number of Atlantean soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/atlanteans/military_capacity.lua:21
 msgctxt "atlanteans_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] "%1%士兵们"
+msgstr[0] "%1%士兵"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5612,7 +5618,7 @@ msgstr[0] "%1%士兵们"
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%)士兵们(+%3%)"
+msgstr[0] "%1%(+%2%)士兵(+%3%)"
 
 #. TRANSLATORS: %1% is the number of Atlantean soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5620,7 +5626,7 @@ msgstr[0] "%1%(+%2%)士兵们(+%3%)"
 msgctxt "atlanteans_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%)士兵们"
+msgstr[0] "%1%(+%2%)士兵"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/initialization/atlanteans/starting_conditions/discovery.lua:11
@@ -5670,14 +5676,14 @@ msgstr "东方的强大部族。 "
 msgctxt "barbarians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1%士兵们(+%2%)"
+msgstr[0] "%1%士兵(+%2%)"
 
 #. TRANSLATORS: Number of Barbarian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/barbarians/military_capacity.lua:11
 msgctxt "barbarians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] "%1%士兵们"
+msgstr[0] "%1%士兵"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5686,7 +5692,7 @@ msgstr[0] "%1%士兵们"
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%)士兵们(+%3%)"
+msgstr[0] "%1%(+%2%)士兵(+%3%)"
 
 #. TRANSLATORS: %1% is the number of Barbarian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5694,7 +5700,7 @@ msgstr[0] "%1%(+%2%)士兵们(+%3%)"
 msgctxt "barbarians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%)士兵们"
+msgstr[0] "%1%(+%2%)士兵"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/empire/init.lua:12
@@ -5711,14 +5717,14 @@ msgstr "这就是罗马帝国的文化。"
 msgctxt "empire_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1%士兵们(+%2%)"
+msgstr[0] "%1%士兵(+%2%)"
 
 #. TRANSLATORS: Number of Empire soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/empire/military_capacity.lua:11
 msgctxt "empire_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] "%1%士兵们"
+msgstr[0] "%1%士兵"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building. %3% is the maximum number
@@ -5727,7 +5733,7 @@ msgstr[0] "%1%士兵们"
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%)士兵们(+%3%)"
+msgstr[0] "%1%(+%2%)士兵(+%3%)"
 
 #. TRANSLATORS: %1% is the number of Empire soldiers the plural refers to. %2%
 #. are currently open soldier slots in the building.
@@ -5735,7 +5741,7 @@ msgstr[0] "%1%(+%2%)士兵们(+%3%)"
 msgctxt "empire_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%)士兵们"
+msgstr[0] "%1%(+%2%)士兵"
 
 #. TRANSLATORS: This is a tribe name
 #: ../../data/tribes/initialization/frisians/init.lua:12
@@ -5752,14 +5758,14 @@ msgstr "粗枝大叶的北海海岸居民。"
 msgctxt "frisians_building"
 msgid "%1% soldier (+%2%)"
 msgid_plural "%1% soldiers (+%2%)"
-msgstr[0] "%1%士兵们(+%2%)"
+msgstr[0] "%1%士兵(+%2%)"
 
 #. TRANSLATORS: Number of Frisian soldiers stationed at a militarysite.
 #: ../../data/tribes/initialization/frisians/military_capacity.lua:11
 msgctxt "frisians_building"
 msgid "%1% soldier"
 msgid_plural "%1% soldiers"
-msgstr[0] "%1%士兵们"
+msgstr[0] "%1%士兵"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building. %3% is the maximum
@@ -5768,7 +5774,7 @@ msgstr[0] "%1%士兵们"
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier (+%3%)"
 msgid_plural "%1%(+%2%) soldiers (+%3%)"
-msgstr[0] "%1%(+%2%)士兵们(+%3%)"
+msgstr[0] "%1%(+%2%)士兵(+%3%)"
 
 #. TRANSLATORS: %1% is the number of Frisian soldiers the plural refers to.
 #. %2% are currently open soldier slots in the building.
@@ -5776,7 +5782,7 @@ msgstr[0] "%1%(+%2%)士兵们(+%3%)"
 msgctxt "frisians_building"
 msgid "%1%(+%2%) soldier"
 msgid_plural "%1%(+%2%) soldiers"
-msgstr[0] "%1%(+%2%)士兵们"
+msgstr[0] "%1%(+%2%)士兵"
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
@@ -8410,7 +8416,7 @@ msgstr "采矿大师"
 #: ../../data/tribes/workers/empire/pigbreeder/init.lua:8
 msgctxt "empire_worker"
 msgid "Pig Breeder"
-msgstr "养猪者"
+msgstr "猪倌"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/recruit/init.lua:8

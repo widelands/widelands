@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-02 18:21+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-01 19:55+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr "Bylo by vhodné postavit rákosové pole a vápennou pec. Zvaž jejich s
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:32
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:34
 msgid "Build up a small food economy"
-msgstr "Vybuduj základní potravinné hospodářství"
+msgstr "Zabezpeč výrobu základních potravin"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:35
 msgid "Build up a basic food economy to provide your people with food."
@@ -64,7 +64,7 @@ msgstr "Postav budovy nutné pro zásobení tvých lidí jídlem."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:36
 msgid "Build a fisher’s hut"
-msgstr "Postav chatu rybáře"
+msgstr "Postav rybářovu chatu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:37
 msgid "Build a hunter’s hut"
@@ -117,7 +117,7 @@ msgstr "Pokračuj v průzkumu"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr "Postav kolem své hlavní budovy více vojenských budov, abys prozkoumal okolí a poskytl svým lidem bezpečí a ochranu."
+msgstr "Postav kolem své hlavní budovy více vojenských budov, prozkoumáš tak okolí a poskytneš svým lidem bezpečí a ochranu."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:71
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
@@ -628,7 +628,7 @@ msgstr "Až zítra ráno slunce vystoupá nad vrcholky stromů, dám povel k út
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
 msgid "So be it!"
-msgstr "Budiž tedy!"
+msgstr "Staniž se!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
 msgid "Faster Transportation"

@@ -54,7 +54,9 @@ enum class ScoutingDirection;
 enum class SoldierPreference : uint8_t;
 struct Ship;
 class TrainingSite;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 class TrainingWheels;
+#endif
 enum class StockPolicy;
 
 enum {
@@ -198,6 +200,7 @@ public:
 	// Returns the result of run().
 	bool run_load_game(const std::string& filename, const std::string& script_to_run);
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	bool acquire_training_wheel_lock(const std::string& objective);
 	void release_training_wheel_lock();
 	void mark_training_wheel_as_solved(const std::string& objective);
@@ -206,6 +209,7 @@ public:
 
 	bool training_wheels_wanted() const;
 	std::string active_training_wheel() const;
+#endif
 
 	void postload() override;
 
@@ -430,8 +434,10 @@ private:
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::unique_ptr<TrainingWheels> training_wheels_;
 	bool training_wheels_wanted_;
+#endif
 
 	bool replay_;
 };

@@ -17,6 +17,7 @@
  *
  */
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "ui_fsmenu/training_wheel_options.h"
 
 #include <memory>
@@ -212,3 +213,4 @@ bool TrainingWheelOptions::handle_key(bool down, SDL_Keysym code) {
 }
 
 }  // namespace FsMenu
+#endif

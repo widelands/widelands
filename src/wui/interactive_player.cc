@@ -181,9 +181,12 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
                      UI::DropdownType::kPictorialMenu,
                      UI::PanelStyle::kWui,
                      UI::ButtonStyle::kWuiPrimary),
-     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png")),
-     training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
-     training_wheel_indicator_field_(Widelands::FCoords::null(), nullptr) {
+     grid_marker_pic_(g_image_cache->get("images/wui/overlays/grid_marker.png"))
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+     , training_wheel_indicator_pic_(g_image_cache->get("images/wui/training_wheels_arrow.png")),
+     training_wheel_indicator_field_(Widelands::FCoords::null(), nullptr)
+#endif
+{
 	add_main_menu();
 
 	toolbar()->add_space(15);
@@ -624,6 +627,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		// Blit arrow for training wheel instructions
 		if (training_wheel_indicator_field_ == f->fcoords) {
 			constexpr int kTrainingWheelArrowOffset = 5;
@@ -633,6 +637,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			            training_wheel_indicator_pic_->height() + kTrainingWheelArrowOffset),
 			   scale);
 		}
+#endif
 	}
 }
 
@@ -645,6 +650,7 @@ void InteractivePlayer::popup_message(Widelands::MessageId const id,
 	dynamic_cast<GameMessageMenu&>(*message_menu_.window).show_new_message(id, message);
 }
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 void InteractivePlayer::set_training_wheel_indicator_pos(const Vector2i& pos) {
 	constexpr int kTrainingWheelArrowOffset = 5;
 	if (pos == Vector2i::invalid()) {
@@ -662,6 +668,7 @@ void InteractivePlayer::set_training_wheel_indicator_pos(const Vector2i& pos) {
 void InteractivePlayer::set_training_wheel_indicator_field(const Widelands::FCoords& field) {
 	training_wheel_indicator_field_ = field;
 }
+#endif
 
 bool InteractivePlayer::can_see(Widelands::PlayerNumber const p) const {
 	return p == player_number() || player().see_all();

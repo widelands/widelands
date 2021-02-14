@@ -50,6 +50,7 @@ struct MultiPlayerSetupGroup : public UI::Box {
 
 	void
 	force_new_dimensions(uint32_t max_width, uint32_t max_height, uint32_t standard_element_height);
+	void update_players();
 
 private:
 	void reset();
@@ -68,7 +69,6 @@ private:
 	std::map<std::string, const Image*> tribepics_;
 	std::map<std::string, std::string> tribenames_;
 	void update_clients();
-	void update_players();
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_MULTIPLAYERSETUPGROUP_H

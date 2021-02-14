@@ -41,7 +41,9 @@
 #include "scripting/lua_table.h"
 #include "sound/sound_handler.h"
 #include "ui_fsmenu/keyboard_options.h"
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "ui_fsmenu/training_wheel_options.h"
+#endif
 #include "wlapplication.h"
 #include "wlapplication_options.h"
 #include "wui/interactive_base.h"
@@ -299,6 +301,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
                      UI::PanelStyle::kFsMenu,
                      Vector2i::zero(),
                      _("Scroll when the mouse cursor is near the screen edge")),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
      training_wheels_box_(&box_ingame_, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
      training_wheels_(&training_wheels_box_,
                       UI::PanelStyle::kFsMenu,
@@ -314,6 +317,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
         UI::ButtonStyle::kFsMenuSecondary,
         /** TRANSLATORS: Button to bring up a window to edit teaching progress in the Options */
         _("Progress…")),
+#endif
      os_(opt) {
 
 	do_not_layout_on_resolution_change();
@@ -385,11 +389,13 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	box_ingame_.add(&numpad_diagonalscrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add(&edge_scrolling_, UI::Box::Resizing::kFullSize);
 	box_ingame_.add_space(kPadding);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	box_ingame_.add(&training_wheels_box_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add(&training_wheels_, UI::Box::Resizing::kFullSize);
 	training_wheels_box_.add_inf_space();
 	training_wheels_box_.add(&training_wheels_button_, UI::Box::Resizing::kAlign, UI::Align::kRight);
 	training_wheels_box_.add_space(kPadding);
+#endif
 
 	// Bind actions
 	language_dropdown_.selected.connect([this]() { update_language_stats(); });
@@ -407,6 +413,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 		ok_.set_enabled(true);
 	});
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_.changed.connect(
 	   [this]() { training_wheels_button_.set_enabled(training_wheels_.get_state()); });
 	training_wheels_button_.set_enabled(training_wheels_.get_state());
@@ -422,6 +429,7 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 		apply_.set_enabled(true);
 		ok_.set_enabled(true);
 	});
+#endif
 	cancel_.sigclicked.connect([this]() { clicked_cancel(); });
 	apply_.sigclicked.connect([this]() { clicked_apply(); });
 	ok_.sigclicked.connect([this]() { end_modal<MenuTarget>(MenuTarget::kOk); });
@@ -481,9 +489,11 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	}
 
 	for (const std::string& theme : g_fs->list_directory("templates")) {
-		const std::string descname =
-		   (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
-		theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
+		if (g_fs->is_directory(theme)) {
+			const std::string descname =
+			   (theme == "templates/default") ? _("Default") : FileSystem::fs_filename(theme.c_str());
+			theme_dropdown_.add(descname, theme, nullptr, (theme + '/') == template_dir());
+		}
 	}
 	for (auto& addon : AddOns::g_addons) {
 		if (addon.first.category == AddOns::AddOnCategory::kTheme) {
@@ -513,7 +523,9 @@ Options::Options(MainMenu& fsmm, OptionsCtrl::OptionsStruct opt)
 	game_clock_.set_state(opt.game_clock);
 	numpad_diagonalscrolling_.set_state(opt.numpad_diagonalscrolling);
 	edge_scrolling_.set_state(opt.edge_scrolling);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	training_wheels_.set_state(opt.training_wheels);
+#endif
 
 	// New Game options
 	show_buildhelp_.set_state(opt.display_flags & InteractiveBase::dfShowBuildhelp);
@@ -775,7 +787,9 @@ OptionsCtrl::OptionsStruct Options::get_values() {
 	os_.game_clock = game_clock_.get_state();
 	os_.numpad_diagonalscrolling = numpad_diagonalscrolling_.get_state();
 	os_.edge_scrolling = edge_scrolling_.get_state();
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	os_.training_wheels = training_wheels_.get_state();
+#endif
 
 	// New Game options
 	int32_t flags = show_buildhelp_.get_state() ? InteractiveBase::dfShowBuildhelp : 0;
@@ -854,7 +868,9 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.game_clock = opt_section_.get_bool("game_clock", true);
 	opt.numpad_diagonalscrolling = opt_section_.get_bool("numpad_diagonalscrolling", false);
 	opt.edge_scrolling = opt_section_.get_bool("edge_scrolling", false);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt.training_wheels = opt_section_.get_bool("training_wheels", true);
+#endif
 
 	// New Game options
 	opt.display_flags = opt_section_.get_int("display_flags", InteractiveBase::kDefaultDisplayFlags);
@@ -903,7 +919,9 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_bool("game_clock", opt.game_clock);
 	opt_section_.set_bool("numpad_diagonalscrolling", opt.numpad_diagonalscrolling);
 	opt_section_.set_bool("edge_scrolling", opt.edge_scrolling);
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	opt_section_.set_bool("training_wheels", opt.training_wheels);
+#endif
 
 	// New Game options
 	opt_section_.set_int("display_flags", opt.display_flags);

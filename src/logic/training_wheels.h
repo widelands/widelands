@@ -17,6 +17,7 @@
  *
  */
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #ifndef WL_LOGIC_TRAINING_WHEELS_H
 #define WL_LOGIC_TRAINING_WHEELS_H
 
@@ -151,3 +152,4 @@ private:
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_TRAINING_WHEELS_H
+#endif

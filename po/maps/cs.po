@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-08 13:41+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-01 14:45+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -813,7 +813,7 @@ msgid ""
 " grew and grew. Until one day, when the whole fire mountain exploded. "
 "Nowadays only this ring is left from that mighty fire mountain. Do you think"
 " that it is big enough for more than one tribe?"
-msgstr "Tento ostrov byl kdysi vyzdvižen z nejhlubšího mořského dna. V těch dnech se ze slané vody zvedla ohnivá hora, která chrlila popel, zemi a kameny. Oheň neustával a zvedal horu se stále výš, jako by měla vyrůst až ke Slunci. Až jednoho do dne, kdy celá hora najednou explodovala. Dnes je tento kruh země jediné, co zbylo z kdysi mohutné ohnivé hory. Myslíš, že je dost veliký na to, aby zde našel domov více než jeden kmen?"
+msgstr "Tento ostrov byl kdysi vyzdvižen z nejhlubšího mořského dna. V těch dnech se ze slané vody zvedla ohnivá hora, která chrlila popel, zemi a kameny. Oheň neustával a zvedal horu stále výš, jako by měla vyrůst až ke Slunci. Až jednoho dne celá hora najednou explodovala. Dnes je tento kruh země to jediné, co z kdysi mohutné ohnivé hory zbylo. Myslíš, že je dost veliký na to, aby zde našel domov více než jeden kmen?"
 
 #: ../../data/maps/The_Far_North.wmf/elemental:8
 msgid "The Far North"

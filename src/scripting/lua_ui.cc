@@ -83,7 +83,9 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
    METHOD(LuaPanel, get_descendant_position),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaPanel, indicate),
+#endif
    {nullptr, nullptr},
 };
 
@@ -286,7 +288,8 @@ int LuaPanel::get_descendant_position(lua_State* L) {
 	return 2;
 }
 
-/* RST
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: indicate(on)
 
       Show/Hide an arrow that points to this panel. You can only point to 1 panel at the same time.
@@ -322,6 +325,7 @@ int LuaPanel::indicate(lua_State* L) {
 	}
 	return 2;
 }
+#endif
 
 /*
  * C Functions
@@ -405,7 +409,9 @@ const char LuaDropdown::className[] = "Dropdown";
 const MethodType<LuaDropdown> LuaDropdown::Methods[] = {
    METHOD(LuaDropdown, open),
    METHOD(LuaDropdown, highlight_item),
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
    METHOD(LuaDropdown, indicate_item),
+#endif
    METHOD(LuaDropdown, select),
    {nullptr, nullptr},
 };
@@ -498,7 +504,8 @@ int LuaDropdown::highlight_item(lua_State* L) {
 	return 0;
 }
 
-/* RST
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
+/* R#S#T
    .. method:: indicate_item(index)
 
       :arg index: the index of the item to indicate, starting from ``1``
@@ -549,6 +556,7 @@ int LuaDropdown::indicate_item(lua_State* L) {
 
 	return 0;
 }
+#endif
 
 /* RST
    .. method:: select()

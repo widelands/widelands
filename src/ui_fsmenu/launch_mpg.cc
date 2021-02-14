@@ -132,6 +132,7 @@ void LaunchMPG::win_condition_selected() {
 		t->do_not_warn_about_unaccessed_keys();
 		peaceful_mode_forbidden_ = !t->get_bool("peaceful_mode_allowed");
 		update_peaceful_mode();
+		mpsg_.update_players();
 	}
 }
 
@@ -259,7 +260,7 @@ void LaunchMPG::map_changed() {
 		// interface can only notice the change after the host broadcasted it.
 		if (settings.savegame) {
 			load_previous_playerdata();
-		} else {
+		} else if (!settings.mapfilename.empty()) {
 			load_map_info();
 			if (settings.scenario) {
 				set_scenario_values();

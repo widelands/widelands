@@ -470,7 +470,8 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 						break;
 					}
 				}
-				if (matches_tags) {
+				if (matches_tags &&
+				    !addme.incompatible_win_conditions.count(settings_->get_win_condition_script())) {
 					init_dropdown_.add(_(addme.descname), i, nullptr,
 					                   i == player_setting.initialization_index, _(addme.tooltip));
 				}
