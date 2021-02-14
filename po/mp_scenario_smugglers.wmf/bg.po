@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>, 2021
 # Любомир Василев, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2017-09-21 23:34+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-13 20:43+0000\n"
+"Last-Translator: Georgi Georgiev (Жоро) <g.georgiev.shumen@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +53,7 @@ msgid ""
 "Smugglers is a fun map for 4 players. You and your partner start diagonally "
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end."
-msgstr "Контрабандисти е забавна карта за 4 играчи. Вие и партньорът Ви започвате на диагонал един от друг на остров с централна симетрия. Има предостатъчно тунели за контрабанда, като всеки има изпращащ и получаващ край."
+msgstr "Контрабандисти е забавна карта за 4 играчи. Вие и партньорът Ви започвате диагонално един от друг на остров с централна симетрия. Има предостатъчно тунели за контрабанда, като всеки има изпращащ и получател."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:10
 msgid ""

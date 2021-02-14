@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2018
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-05 17:17+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-01 20:26+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr "Widelands je rozvážná, budovatelská strategická hra s důrazem spíše na budování než na ničení. Tento tutoriál tě provede základy hry."
+msgstr "Widelands je klidnou, budovatelskou strategickou hrou s důrazem spíše na budování než na ničení. Tento tutoriál tě provede základy hry."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid "You will be guided through this tutorial by objectives"
@@ -139,11 +139,11 @@ msgstr "Ponořme se do toho!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
-"There are four different tribes in Widelands: the Barbarians, the Empire, "
-"the Atlanteans and the Frisians. All tribes have a different economy, "
-"strength and weaknesses, but the general gameplay is the same for all. We "
-"will play the Barbarians for now."
-msgstr "Ve hře Widelands jsou čtyři různé kmeny: Barbaři, Císařství, Atlanťané a Frísové. Všechny se liší ve fungování hospodářství a svých silných a slabých stránkách, ale princip hry je u všech stejný. Teď budeme hrát za Barbary."
+"There are five different tribes in Widelands: the Barbarians, the Empire, "
+"the Atlanteans, the Frisians and the Amazons. All tribes have a different "
+"economy, strength and weaknesses, but the general gameplay is the same for "
+"all. We will play the Barbarians for now."
+msgstr "Ve hře Widelands je pět různých kmenů: Barbaři, Císařství, Atlanťané, Frísové a Amazonky. Všechny se liší ve fungování hospodářství a svých silných a slabých stránkách, ale princip hry je u všech stejný. Teď budeme hrát za Barbary."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
@@ -687,7 +687,7 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr "Dělníci neradi chodí volnou krajinou. Musíš jim potavit cestu od hlavní budovy až ke staveništi, aby nosiči mohli donést suroviny. Nejjednodušší způsob je kliknout na vlajku staveniště, vybrat \"Postavit cestu\" a pak kliknout na cílovou vlajku (v našem případě tu před hlavní budovou) tak, jak bylo v ukázce."
+msgstr "Dělníci neradi chodí volnou krajinou. Aby nosiči mohli donést suroviny, musíš jim postavit cestu od hlavní budovy až ke staveništi. Nejjednodušším způsobem, jak to udělat, je kliknout na vlajku staveniště, vybrat \"Postavit cestu\" a pak kliknout na cílovou vlajku (v našem případě tu před hlavní budovou) tak, jak jsem to předvedl."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid "You Destroyed the Construction Site!"
