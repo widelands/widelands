@@ -28,7 +28,7 @@
 --                         e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the start conditions is incompatible
 --                         with the win condition "HQ Hunter"
 --
---    **func**: A standardized function allowing to share this start conditions between players (Shared Kingdom) 
+--    **func**: A standardized function allowing to share this start conditions between players (Shared Kingdom)
 --
 -- After these declarations the lua commands to define the initial mapobjects for the player follow.
 --
