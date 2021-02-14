@@ -40,7 +40,7 @@
   <summary xml:lang="sv">Ett uppbyggnadsstrategispel i realtid</summary>
   <summary xml:lang="tr">Gerçek zamanlı inşa strateji oyunu</summary>
   <summary xml:lang="uk">Стратегічна гра у режимі реального часу</summary>
-  <summary xml:lang="zh_CN">即时策略游戏</summary>
+  <summary xml:lang="zh_CN">即时战略游戏</summary>
   <summary xml:lang="zh_TW">一款即時演變的策略遊戲</summary>
   <description>
     <p>
@@ -56,10 +56,10 @@
       "أراضي واسعة" تقدم تجربة لاعب واحد مع طور الحملات التي تحكي قصة قبيلة وصراعهم فى الكون الخاص بـ"أراضي واسعة".ومع ذلك, الاستيطان يبدأ حقا عندما تتحد مع أصدقائك من خلال الإنترنت و اللان لكى تبنى مملكه جديده معا-- او محاربة بعضهم البعض وتدمير بعضهم البعض. "أراضي واسعة" ايضا تقدم ذكاء اصطناعي يتحداك.
     </p>
     <p xml:lang="bg">
-      Вие сте водачът на малък клан. Задачата Ви е да изградите развиващо се селище. Всеки член на клана Ви ще върши своята работа, за да произвеждате все повече ресурси и да продължавате да разраствате селището си.
+      Вие сте водач на малък клан. Задачата Ви е да изградите развиващо се селище. Всеки член на клана Ви ще върши своята работа, за да произвеждате все повече ресурси и да продължавате развитието на селището си.
     </p>
     <p xml:lang="bg">
-      Widelands предлага режим на самостоятелна игра, с кампании, разказващи историите на племената и тяхната борба в света на Widelands. Истинското заселване започва когато се обедините с приятелите по Интернет или локална мрежа, за да създавате нови империи заедно, или да се побеждавате взаимно. Widelands предлага и изкуствен интелект, срещу който може да играете.
+      Widelands предлага режим на самостоятелна игра, с кампании, разказващи историите на племената и тяхната борба в света на Widelands. Истинското заселване започва когато се обедините с приятелите си по Интернет или локалната мрежа, за да създавате нови империи заедно, или да се побеждавате взаимно. Widelands предлага и изкуствен интелект, срещу който може да играете.
     </p>
     <p xml:lang="ca">
       Sou el cap d'una petita tribu. La vostra tasca és construir un assentament i expandir-lo. Cada membre de la vostra tribu farà la seva feina per produir més i més recursos per ajudar-vos.
@@ -107,7 +107,7 @@
       Eres el regente de un pequeño clan. Tu tarea es construir un asentamiento cada vez mayor. Todos los miembros de tu clan van a hacer su parte para producir más recursos para promover este crecimiento.
     </p>
     <p xml:lang="es">
-      Widelands ofrece un modo de un solo jugador con campañas que cuentan historias de las tribus y su lucha en el universo Widelands. Sin embargo, el asentamiento comienza realmente cuando te unes con amigos a través de Internet o LAN para construir nuevos imperios juntos - o para aplastarse entre sí en los polvos de guerra. Widelands también ofrece una inteligencia artificial para desafiarte.
+      Widelands ofrece un modo de un solo jugador con campañas que cuentan historias de las tribus y su lucha en el universo Widelands. Sin embargo, el asentamiento comienza realmente cuando te unes con amigos a través de Internet o red local para construir nuevos imperios juntos - o para aplastarse entre sí en los campos de batalla. Widelands también ofrece una inteligencia artificial para desafiarte.
     </p>
     <p xml:lang="eu">
       Herri txiki baten buruzagia zara. Zure betebeharra bizileku gero eta handiagoa eraikitzea da. Zure herritar guztiek bere lana beteko dute baliabide gehiago ekoizteko herriaren hazkuntza bultzatzeko.
@@ -267,10 +267,10 @@ Widelands ayrıca size yapay zeka ile meydan okur.
       Widelands пропонує режим одиночної гри в кампанію, яка розповідає історії племен і їх боротьбу у всесвіті Widelands. Однак, реальне розселення починається тоді, коли ви об’єднуєтеся з друзями через інтернет або локальну мережу, будувати нові імперії разом, або розбити один одного в пилу війни. Widelands також пропонує штучний інтелект, щоб кинути виклик вам.
     </p>
     <p xml:lang="zh_CN">
-      作为小部落的摄政王， 你的任务是让部落发展壮大。 每个成员会尽力生产资源，促进增长。
+      你是一个小型的宗族摄政王，你的任务是建立一个不断增长的定居点。你们宗族的每一个成员都会尽自己的一份力量来生产更多的资源来促进这种增长。 
     </p>
     <p xml:lang="zh_CN">
-      Widelands offers a single-player mode with campaigns that tell stories of the tribes and their struggle in the Widelands universe. However, settling really starts when you unite with friends over the Internet or LAN to build up new empires together – or to crush each other in the dusts of war. Widelands also offers an artificial intelligence to challenge you.
+      Widelands提供了单人游戏模式，讲述了部族的战役和他们在Widelands世界中挣扎求存的故事。然而，当你通过互联网或局域网与朋友联合起来一起建立新的帝国时 – 或者是在战争的沙场中互相残杀时，定居就从真正意义上开始了。Widelands也提供了人工智能前来向你发起挑战。
     </p>
     <p xml:lang="zh_TW">
       你是一個小部落的攝政者。你的任務是建立一個不斷壯大的殖民地。部落的每一個人都會各施其職，生產更多資源來幫忙你完成任務。
