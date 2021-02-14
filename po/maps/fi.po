@@ -1,7 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
+# Arttu Kivinen <a.v.i.kivinen@gmail.com>, 2021
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2018,2020
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-11-29 22:45+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-13 16:27+0000\n"
+"Last-Translator: Arttu Kivinen <a.v.i.kivinen@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -276,7 +277,7 @@ msgstr "Perusteiden hallinta"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr "Tässä opetuspelissä sinulle opetaan kuinka navikoida Widelandsissa, rakentaa rakennuksia ja teitä."
+msgstr "Tässä opetuspelissä sinulle opetaan kuinka navigoida Widelandsissa ja myös kuinka teitä ja rakennuksia rakennetaan."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 msgid "Warfare"

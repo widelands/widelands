@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Wuzzy <almikes@aol.com>, 2016
@@ -11,15 +11,15 @@
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Hybrid Dog, 2016
 # Raymond Vetter, 2018
-# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2020
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018-2021
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-10-23 20:20+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-01-15 12:15+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -145,11 +145,11 @@ msgstr "Lass uns gleich loslegen!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:77
 msgid ""
-"There are four different tribes in Widelands: the Barbarians, the Empire, "
-"the Atlanteans and the Frisians. All tribes have a different economy, "
-"strength and weaknesses, but the general gameplay is the same for all. We "
-"will play the Barbarians for now."
-msgstr "Es gibt vier unterschiedliche Stämme in Widelands: Die Barbaren, das Imperium, die Atlanter und die Friesen. Sie unterscheiden sich zwar in ihren Stärken und Schwächen und in ihrer Wirtschaft, dennoch ist die grundsätzliche Spielmechanik für alle gleich. Wir spielen erst einmal die Barbaren."
+"There are five different tribes in Widelands: the Barbarians, the Empire, "
+"the Atlanteans, the Frisians and the Amazons. All tribes have a different "
+"economy, strength and weaknesses, but the general gameplay is the same for "
+"all. We will play the Barbarians for now."
+msgstr "Es gibt fünf unterschiedliche Stämme in Widelands: Die Barbaren, das Imperium, die Atlanter, die Friesen und die Amazonen. Sie unterscheiden sich zwar in ihren Stärken und Schwächen und in ihrer Wirtschaft, dennoch ist die grundsätzliche Spielmechanik für alle gleich. Wir spielen erst einmal die Barbaren."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:78
 msgid ""
