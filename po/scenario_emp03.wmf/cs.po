@@ -1,19 +1,19 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # GunChleoc, 2018
 # Milan Fašina <matrix17@seznam.cz>, 2018
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
 "PO-Revision-Date: 2017-05-15 11:49+0000\n"
-"Last-Translator: Ondřej Itřech, 2020\n"
+"Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -50,8 +50,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
-"Postav lom v místě, kde je hodně skal, abys udělal prostor pro budovy a "
-"získal cenné suroviny."
+"Postav lom v místě, kde je hodně skal, aby se uvolnil prostor pro stavbu "
+"budov a aby byl dostatek surovin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:63
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -474,8 +474,8 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
-"Navíc tím získáme žulu a mramor na stavbu našeho nového světa. Můžeme je "
-"využít jakmile bude dostatek místa na stavění."
+"Navíc tím na stavbu našeho nového zázemí získáme žulu a mramor. Můžeme je "
+"využít, jakmile budeme mít dost místa na nové budovy."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:286
 msgid "Amalea’s New Instructions"
@@ -693,7 +693,7 @@ msgid ""
 " we will have to adjust the target quantity for wheat to achieve this."
 msgstr ""
 "Odhaduji, že zásoba asi 50 snopů pšenice bude pro začátek stačit. Možná by "
-"bylo dobré nastavit cílovou hodnotu pro obilí, abychom toto množství "
+"bylo dobré nastavit cílovou hodnotu pro pšenici, abychom toto množství "
 "získali."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:386
