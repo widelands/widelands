@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Milan Fašina <matrix17@seznam.cz>, 2018
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2021
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
-"Last-Translator: Ondřej Itřech, 2020\n"
+"Last-Translator: Ondřej Itřech, 2021\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,7 +105,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:89
 msgid "Produce fish and rations"
-msgstr "Chytej ryby a připravuj malé porce"
+msgstr "Chytej ryby a připravuj malé svačiny"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Food Production"
@@ -113,7 +113,7 @@ msgstr "Výroba jídla"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:92
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
-msgstr "Najdi a ulov pár ryb. Pak pro své horníky připrav malé porce."
+msgstr "Najdi a ulov pár ryb. Pak pro své horníky připrav malé svačiny."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:98
 msgid "Replace the old and ineffective forester’s houses"
@@ -277,7 +277,7 @@ msgstr "Domov, sladký domov"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:217
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:225
 msgid "Diary of Lutius"
-msgstr "Lutiův denník"
+msgstr "Lutiův deník"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:200
@@ -287,7 +287,7 @@ msgid ""
 "hunting in our deep forests."
 msgstr ""
 "Konečně se nám podařilo dorazit domů. Je pro mě potěšením opět vidět naši "
-"překrásnou zemi. Už se opravdu velmi těším až se projdu po našem nádherném "
+"překrásnou zemi. Už se opravdu velmi těším, až se projdu po našem nádherném "
 "pobřeží a nebo se vydám na lov do hlubokých lesů."
 
 #. TRANSLATORS: Lutius - Diary
@@ -468,7 +468,7 @@ msgid ""
 msgstr ""
 "Ale rozhodnutí toto bylo jedním z jeho nejhorších. Zástupce se nechal "
 "zaslepit svou nově nabytou mocí. Projevy jeho sebestředného chování byly "
-"stejně odpornými, jako jeho naprostá tupost a neschopnost zhostit se úlohy "
+"stejně odpornými jako jeho naprostá tupost a neschopnost zhostit se úlohy "
 "řízení města."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:284
@@ -758,7 +758,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:387
 msgid "After we have managed this, we can start making rations in our tavern."
 msgstr ""
-"Až to úspěšně dokončíme, můžeme začít s přípravou malých porcí v naší "
+"Až to úspěšně dokončíme, můžeme začít s přípravou malých svačin v naší "
 "hospodě."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
@@ -820,8 +820,8 @@ msgid ""
 "for planting trees."
 msgstr ""
 "A na co myslíte, že jsem asi přišla? Jsou staří, jejich příbytky a nástroje "
-"mají svá nejlepší léta taky už zasebou a z jejich semene těžko něco vzejde. "
-"S takovou moc stromů nezasadí."
+"mají svá nejlepší léta taky už za sebou a z jejich osiva stěží něco vzejde. "
+"S takovou moc stromů nevypěstují."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:418
@@ -927,7 +927,7 @@ msgid ""
 "the wares. In particular, we will need to shorten the supply to our mines "
 "drastically. This will give us a real drawback in metal production."
 msgstr ""
-"Jen mě trápí, že to zabere opravdu hodně času nashromáždit tolika zboží. "
+"Jen mě trápí, že to zabere opravdu hodně času nashromáždit tolik surovin. "
 "Obzvlášť hodně, když uvážíme,  že budeme muset po celý ten čas výrazně "
 "omezovat dodávky do našich dolů. To opravdu citelně zbrzdí naši kovodělnou "
 "výrobu."
@@ -1417,10 +1417,10 @@ msgid ""
 "improve this. Alas! But we need to use what we have to get prepared for "
 "battle."
 msgstr ""
-"Bohužel máme pouze arénu, což je velmi zastaralé a malé cvičiště s malou "
-"úložnou kapacitou. A nikdo z našich stavitelů neví, jakým způsobem by bylo "
-"možné ji vylepšit. Pro pána Jána! No co, musíme si pro přípravu na bitvu "
-"vystačit s tím, co máme."
+"Bohužel máme pouze arénu a velmi starý a malý výcvikový tábor s malou "
+"úložnou kapacitou. A nikdo z našich stavitelů neví, jakým způsobem by to "
+"bylo možné vylepšit. To je nadělení! Tak si musíme pro přípravu na bitvu "
+"jednoduše vystačit s tím, co máme."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Praise The Army of The Empire"
@@ -1581,8 +1581,8 @@ msgid ""
 " to prepare a worthy sacrifice for her."
 msgstr ""
 "Ave, Lutie! Pokud chceš, abychom ti pomohly, musíš nejprve uctít naši bohyni"
-" Vestu. Za tímto účelem doruč 35 otepí obilí a 15 džbánů vína, to bude pro "
-"ni postačující obětí."
+" Vestu. Za tímto účelem dodej 35 otepí pšenice a 15 džbánů vína, to bude pro"
+" ni postačující obětí."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:749
 msgid "May The Gods Bless You"

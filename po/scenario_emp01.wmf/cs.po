@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Milan Fašina <matrix17@seznam.cz>, 2016-2017
-# Ondřej Itřech, 2020
+# Ondřej Itřech, 2020-2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-12-28 20:51+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-01-28 08:33+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Ale o páté noci v oblasti na nás bez varování zaútočili. Ztratil jsem desítky dobrých mužů, byl uvězněn a nakonec předveden před jejich náčelníka. Plivl na mě, vysmál se mi a vyhnal se slovy, ať se v těchto zemích už nikdy neukazuji. Řekl, že nechce novou zemi, nechce naši zemi, že TENTO les patří odedávna jim a jejich zůstane, dokud si duchové nevezmou duši posledního z jeho národa!"
+msgstr "Ale o páté noci v oblasti na nás bez varování zaútočili. Ztratil jsem desítky dobrých mužů, byl uvězněn a nakonec předveden před jejich náčelníka. Plivl na mě, vysmál se mi a vyhnal se slovy, ať se v těchto zemích už nikdy neukazuji. Řekl, že nechce nové pořádky, nechce naše pořádky, že TENTO les patří odedávna jim a jejich zůstane, dokud si duchové nevezmou duši posledního z jeho národa!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:87
@@ -330,7 +330,7 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr "Tyto stromy poskytují stín v horkých dnech, chrání nás před písečnými bouřemi, které vanou z pouště, a jsou domovem pro spoustu drobných živočichů. Neměli bychom tu za sebou zanechat holou poušť."
+msgstr "Tyto stromy poskytují stín v horkých dnech, chrání nás před písečnými bouřemi, které vanou z pouště, a jsou domovem mnoha drobných živočichů. Neměli bychom tu za sebou zanechat holou poušť."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:192

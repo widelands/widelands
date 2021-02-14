@@ -92,6 +92,7 @@ struct GamePreloadPacket : public GameDataPacket {
 		return required_addons_;
 	}
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	const std::string& get_active_training_wheel() const {
 		return active_training_wheel_;
 	}
@@ -99,6 +100,7 @@ struct GamePreloadPacket : public GameDataPacket {
 	bool get_training_wheels_wanted() const {
 		return training_wheels_wanted_ || !active_training_wheel_.empty();
 	}
+#endif
 
 private:
 	std::string minimap_path_;
@@ -106,9 +108,11 @@ private:
 	std::string background_;
 	std::string background_theme_;
 	std::string win_condition_;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	std::string active_training_wheel_;
 	// Initializing everything to make cppcheck happy.
 	bool training_wheels_wanted_ = false;
+#endif
 	Time gametime_ = Time(0);
 	uint8_t player_nr_ = 0U;  // The local player idx
 	uint8_t number_of_players_ = 0U;
