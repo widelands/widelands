@@ -40,7 +40,7 @@ void PingTracker::register_response(size_t clientnum, uint8_t seq) {
 			continue;
 		}
 		// Found the entry, record the time
-		const long int rtt =
+		const int64_t rtt =
 		   std::chrono::duration_cast<std::chrono::milliseconds>(now - iter->timestamp).count();
 		if (rtt <= 255) {
 			client.rtts.push_back(rtt);
@@ -89,7 +89,13 @@ uint8_t PingTracker::get_rtt(size_t clientnum) {
 		sum += rtt * weight;
 		++i;
 	}
-	sum /= sum_weights;
+	// Check >0 is probably not needed but is reported as potential division by zero.
+	// We are checking that client->second.rtts isn't empty above so the loop runs at least once
+	if (sum_weights > 0) {
+		sum /= sum_weights;
+	} else {
+		sum = 255;
+	}
 	assert(sum <= 255);
 	return sum;
 }

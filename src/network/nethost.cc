@@ -110,7 +110,7 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 	ConnectionId id = next_id_++;
 	assert(id > 0);
 	assert(clients_.count(id) == 0);
-	clients_[id].conn.reset(accept_queue_.front().release());
+	clients_[id].conn = std::move(accept_queue_.front());
 	accept_queue_.pop();
 	clients_[id].conn->data_received.connect([this, id]() { handle_data(id); });
 	handle_data(id);

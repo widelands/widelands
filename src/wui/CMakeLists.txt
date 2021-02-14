@@ -4,7 +4,10 @@ wl_library(wui_player_list
     game_player_list_menu.h
   DEPENDS
     base_i18n
-    graphic_styles
+    graphic_image_cache
+    graphic_playercolor
+    logic_constants
+    network
     ui_basic
 )
 

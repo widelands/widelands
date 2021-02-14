@@ -98,7 +98,7 @@ public:
 	};
 	DirectoryTree* get_tree() {
 		return &tree_;
-	};
+	}
 
 protected:
 	std::string parse_requirements() override;
