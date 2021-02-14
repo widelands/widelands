@@ -89,9 +89,6 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << _(" --metaserverport=[...]\n"
 	               "                      Port number of the metaserver for internet gaming.")
 	          << endl
-	          << _(" --addon_repo=[...]\n"
-	               "                      Connect to a different github repository"
-	               "                      and branch from the add-ons manager.") << endl
 	          << _(" --addon_server_ip=[...]\n"
 	               " --addon_server_port=[...]\n"
 	               "                      Connect to a different server or port"

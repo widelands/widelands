@@ -42,13 +42,7 @@
 
 namespace AddOns {
 
-// silence warnings triggered by curl.h
-// CLANG_DIAG_OFF("-Wdisabled-macro-expansion")
-
-// all CURL-related code is inspired by
-// https://stackoverflow.com/questions/1636333/download-file-using-libcurl-in-c-c
-//
-// all other networking-related code in this file is inspired by
+// All networking-related code in this file is inspired by
 // https://www.thecrazyprogrammer.com/2017/06/socket-programming.html
 
 void NetAddons::init() {
@@ -56,17 +50,6 @@ void NetAddons::init() {
 		// already initialized
 		return;
 	}
-
-	/* if (!curl_) {
-		curl_ = curl_easy_init();
-	}
-	if (!curl_) {
-		throw wexception("Unable to initialize CURL");
-	}
-#ifdef __MINGW32__
-		// mingw with static curl causes some trouble
-		curl_easy_setopt(curl_, CURLOPT_SSL_VERIFYPEER, 0);
-#endif */
 
 	if ((client_socket_ = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 		throw wexception("Unable to create socket");
@@ -81,30 +64,6 @@ void NetAddons::init() {
 
 	initialized_ = true;
 }
-
-NetAddons::~NetAddons() {
-	/* if (curl_) {
-		curl_easy_cleanup(curl_);
-		curl_ = nullptr;
-	} */
-}
-
-static inline std::string get_addons_repo_name() {
-	return std::string("https://raw.githubusercontent.com/") +
-	       get_config_string("addon_repo", "widelands/wl_addons_server/master") + "/";
-}
-
-/* void NetAddons::set_url_and_timeout(std::string url) {
-	size_t pos = 0;
-	while ((pos = url.find(' ')) != std::string::npos) {
-		url.replace(pos, 1, "%20");
-	}
-	curl_easy_setopt(curl_, CURLOPT_URL, url.c_str());
-
-	// Times are in seconds
-	curl_easy_setopt(curl_, CURLOPT_CONNECTTIMEOUT, 10);
-	curl_easy_setopt(curl_, CURLOPT_TIMEOUT, 30);
-} */
 
 std::string NetAddons::read_line() {
 	std::string line;
@@ -433,34 +392,5 @@ std::string NetAddons::download_screenshot(const std::string& name, const std::s
 		return "";
 	}
 }
-
-/* static size_t curl_download_callback(char* data, size_t, const size_t char_count, FileWrite* fw) {
-	fw->data(data, char_count);
-	return char_count;
-}
-
-std::string NetAddons::download_screenshot(const std::string& name, const std::string& screenie) {
-	init();
-
-	std::string temp_dirname =
-	   kTempFileDir + FileSystem::file_separator() + name + ".screenshots" + kTempFileExtension;
-	g_fs->ensure_directory_exists(temp_dirname);
-
-	const std::string output = temp_dirname + FileSystem::file_separator() + screenie;
-
-	set_url_and_timeout(get_addons_repo_name() + "screenshots/" + name + "/" + screenie);
-
-	FileWrite fw;
-	curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, &curl_download_callback);
-	curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &fw);
-
-	const CURLcode res = curl_easy_perform(curl_);
-
-	fw.write(*g_fs, output);
-
-	return res == CURLE_OK ? output : "";
-}
-
-CLANG_DIAG_ON("-Wdisabled-macro-expansion") */
 
 }  // namespace AddOns

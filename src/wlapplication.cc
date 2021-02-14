@@ -899,7 +899,6 @@ bool WLApplication::init_settings() {
 	get_config_string("language", "");
 	get_config_string("metaserver", "");
 	get_config_natural("metaserverport", 0);
-	get_config_string("addon_repo", "");
 	get_config_string("addon_server_ip", "");
 	get_config_string("addon_server_port", "");
 	// Undocumented on command line, appears in game options

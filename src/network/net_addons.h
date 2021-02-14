@@ -20,23 +20,15 @@
 #ifndef WL_NETWORK_NET_ADDONS_H
 #define WL_NETWORK_NET_ADDONS_H
 
-// #define CURL_STATICLIB
-
-// #include <curl/curl.h>
 #include <set>
 
 #include "logic/addons.h"
 
 namespace AddOns {
 
-// The add-on related networking functions defined here use the CURL lib.
-// Pro: I created a functional dummy server with no knowledge of the metaserver backend ;)
-// Con: Additional dependency – this is the only place in our code where libcurl is used
-
 struct NetAddons {
-	NetAddons() : initialized_(false), /* curl_(nullptr), */ client_socket_(0) {
+	NetAddons() : initialized_(false), client_socket_(0) {
 	}
-	~NetAddons();
 
 	// Fetch the list of all available add-ons from the server
 	std::vector<AddOnInfo> refresh_remotes();
@@ -76,7 +68,6 @@ private:
 	void check_endofstream();
 
 	bool initialized_;
-	// CURL* curl_;
 	int client_socket_;
 };
 

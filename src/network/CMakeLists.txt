@@ -39,7 +39,6 @@ wl_library(network
     participantlist.cc
     participantlist.h
   USES_BOOST_LIBRARIES
-  USES_CURL
   USES_SDL2
   DEPENDS
     ai
