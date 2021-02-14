@@ -50,7 +50,8 @@ function starting_infos()
    wl.ui.MapView().buttons.objectives:click()
    while not wl.ui.MapView().windows.objectives do sleep(100) end
    while wl.ui.MapView().windows.objectives do sleep(100) end
-   plr:mark_training_wheel_as_solved("objectives")
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("objectives")
    sleep(500)
 
    -- Teach building spaces
@@ -64,7 +65,8 @@ function starting_infos()
    end
    set_objective_done(o, 500)
    wl.ui.MapView():abort_road_building()
-   plr:mark_training_wheel_as_solved("building_spaces")
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("building_spaces")
 
    build_lumberjack()
 end
@@ -136,7 +138,8 @@ function build_lumberjack()
       campaign_message_box(lumberjack_message_06, 3 * 1000)
    end
 
-   plr:mark_training_wheel_as_solved("flags")
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("flags")
 
    local o = campaign_message_with_objective(lumberjack_message_07a, obj_lumberjack_progress)
    scroll_to_field(first_lumberjack_field)
@@ -289,8 +292,9 @@ function build_a_quarry()
    wait_for_quarry_road_connection(first_quarry_field, cs, o)
 
    second_quarry()
-   plr:mark_training_wheel_as_solved("logs")
-   plr:mark_training_wheel_as_solved("rocks")
+   -- TODO(Nordfriese): Re-add training wheels code after v1.0
+   -- plr:mark_training_wheel_as_solved("logs")
+   -- plr:mark_training_wheel_as_solved("rocks")
 
    -- Interludium: talk about census and statistics
    census_and_statistics()

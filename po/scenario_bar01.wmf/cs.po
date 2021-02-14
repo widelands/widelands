@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2021-01-01 22:04+0000\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-01 14:11+0000\n"
 "Last-Translator: Ondřej Itřech\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Takové budovy mají obyčejně vyšší požadavky než základní budovy téhož druhu. Například hlubinné doly potřebují svačiny namísto malých porcí. Budeš tedy muset současně vylepšit svou hospodu na hostinec, kde umí připravovat svačiny z chlebových placek v kombinaci s druhou poživatelnou surovinou (masem nebo rybou) a pivem."
+msgstr "Takové budovy mají obyčejně vyšší požadavky než základní budovy téhož druhu. Například hlubinné doly potřebují svačiny namísto malých svačin. Budeš tedy muset současně vylepšit svou hospodu na hostinec, kde umí připravovat svačiny z chlebových placek v kombinaci s druhou poživatelnou surovinou (masem nebo rybou) a pivem."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
@@ -271,7 +271,7 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Geologa pošleš na průzkum vodních zdrojů tak, že klineš na vlajku v oblasti, kterou chceš, aby prohledal. Potom klikneš na tlačítko \"Poslat geologa na průzkum\"."
+msgstr "Geologa pošleš na průzkum vodních zdrojů tak, že klineš na vlajku v oblasti, kterou chceš, aby prohledal. Potom klikneš na tlačítko \"Provést průzkum nerostných a podzemních zdrojů\"."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
@@ -575,7 +575,7 @@ msgid ""
 "sky. I know – it is too early yet, and what he hopes for will not happen any"
 " time soon. He might still be right, but I fear the bloodshed that returning"
 " too fast would cause on both sides…"
-msgstr "Ale když se podívám nad les, stále vidím černý kouř stoupající k obloze. Vím, že je stále příliš brzy. To, v co doufá, se jen tak hned nestane. Možná má pravdu, domyslím-li ale to krve prolití, které by náš brzký návrat způsobil, jímá mě hrůza..."
+msgstr "Ale když se podívám nad les, stále vidím černý kouř stoupající k obloze. Vím, že je stále příliš brzy. To, v co doufá, se jen tak hned nestane. Možná má pravdu, domyslím-li ale to krveprolití, které by náš brzký návrat způsobil, jímá mě hrůza..."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:288
 msgid "The Oath"
@@ -712,7 +712,7 @@ msgid ""
 " at hand. The miners will definitely demand greater rations for working high"
 " up on the mountain in this bitter cold, and providing these supplies may "
 "not be easy."
-msgstr "Přestože to všechno je pravda, budeme se tím muset zabývat později, nyní máme před sebou jiné výzvy. Horníci budou jistě za práci ve štiplavé zimě vysokých hor požadovat více malých porcí. A zabezpečit jejich zásobování nemusí být zcela snadné."
+msgstr "Přestože to všechno je pravda, budeme se tím muset zabývat později, nyní máme před sebou jiné výzvy. Horníci budou jistě za práci ve štiplavé zimě vysokých hor požadovat více malých svačin. A zabezpečit jejich zásobování nemusí být zcela snadné."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:368
 msgid "Boldreth nods…"
@@ -830,7 +830,7 @@ msgid ""
 "Of course, it is dark and cold in such depths and only a few venture "
 "voluntarily into these places. We should reward this bravery with greater "
 "rations for them. And a pint of beer or two will keep their spirits high."
-msgstr "Samozřejmě, že v tak hlubokých tunelech je tma a zima, a těch, kteří se na takové místo odváží vydat dobrovolně, není mnoho. Proto bychom měli odměnit tuto statečnost většími příděly malých porcí. A jedna nebo dvě pinty piva také umí povznést na duchu."
+msgstr "Samozřejmě, že v tak hlubokých tunelech je tma a zima, a těch, kteří se na takové místo odváží vydat dobrovolně, není mnoho. Proto bychom měli odměnit tuto statečnost většími příděly malých svačin. A jedna nebo dvě pinty piva také umí povznést na duchu."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:436
 msgid "Boldreth seems concerned…"

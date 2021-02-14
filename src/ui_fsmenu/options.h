@@ -77,7 +77,9 @@ public:
 		bool edge_scrolling;
 		bool tooltip_accessibility_mode;
 		int32_t display_flags;
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 		bool training_wheels;
+#endif
 
 		// Language options
 		std::string language;
@@ -179,9 +181,11 @@ private:
 	UI::Checkbox numpad_diagonalscrolling_;
 	UI::Checkbox edge_scrolling_;
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 	UI::Box training_wheels_box_;
 	UI::Checkbox training_wheels_;
 	UI::Button training_wheels_button_;
+#endif
 
 	OptionsCtrl::OptionsStruct os_;
 
