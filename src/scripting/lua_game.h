@@ -103,6 +103,7 @@ public:
 #endif
 	int get_ships(lua_State* L);
 	int get_buildings(lua_State* L);
+	int get_constructionsites(lua_State* L);
 	int get_suitability(lua_State* L);
 	int allow_workers(lua_State* L);
 	int switchplayer(lua_State* L);
@@ -118,6 +119,7 @@ private:
 	                         const Widelands::TribeDescr&,
 	                         std::vector<Widelands::DescriptionIndex>&);
 	int allow_forbid_buildings(lua_State* L, bool);
+	int do_get_buildings(lua_State* L, bool);
 };
 
 class LuaObjective : public LuaGameModuleClass {

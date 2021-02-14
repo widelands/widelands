@@ -892,15 +892,24 @@ void GameClient::handle_setting_tribes(RecvPacket& packet) {
 			std::string const initialization_script = packet.string();
 			std::unique_ptr<LuaTable> t = lua.run_script(initialization_script);
 			t->do_not_warn_about_unaccessed_keys();
+			// TODO(hessenfarmer): Needs to be pulled out as it is duplicated to tribe_basic_info.cc
 			std::set<std::string> tags;
+			std::set<std::string> incompatible_wc;
 			if (t->has_key("map_tags")) {
 				std::unique_ptr<LuaTable> tt = t->get_table("map_tags");
 				for (int key : tt->keys<int>()) {
 					tags.insert(tt->get_string(key));
 				}
 			}
+			if (t->has_key("incompatible_wc")) {
+				std::unique_ptr<LuaTable> w = t->get_table("incompatible_wc");
+				for (int key : w->keys<int>()) {
+					incompatible_wc.insert(w->get_string(key));
+				}
+			}
 			info.initializations.push_back(Widelands::TribeBasicInfo::Initialization(
-			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags));
+			   initialization_script, t->get_string("descname"), t->get_string("tooltip"), tags,
+			   incompatible_wc));
 		}
 		d->settings.tribes.push_back(info);
 	}
