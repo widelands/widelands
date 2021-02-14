@@ -35,7 +35,9 @@ constexpr int16_t kButtonSize = 32;
 constexpr int16_t kSpacing = 4;
 
 AddOnsPackagerBox::AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation)
-   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation), main_menu_(mainmenu) {
+   : UI::Box(parent, UI::PanelStyle::kFsMenu, 0, 0, orientation),
+     header_align_(0),
+     main_menu_(mainmenu) {
 }
 
 MapsAddOnsPackagerBox::MapsAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
@@ -301,8 +303,8 @@ void MapsAddOnsPackagerBox::clicked_add_or_delete_map_or_dir(const ModifyAction 
 CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent)
    : AddOnsPackagerBox(mainmenu, parent, UI::Box::Vertical),
      maps_box_(mainmenu, this),
-     desc_tribe_box_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
-     tribe_select_(&desc_tribe_box_,
+     difficulty_hbox_(this, UI::PanelStyle::kFsMenu, 0, 0, UI::Box::Horizontal),
+     tribe_select_(this,
                    "dropdown_tribe",
                    0,
                    0,
@@ -313,14 +315,42 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* 
                    UI::DropdownType::kTextual,
                    UI::PanelStyle::kFsMenu,
                    UI::ButtonStyle::kFsMenuSecondary),
-     difficulty_(&desc_tribe_box_, 0, 0, 100, UI::PanelStyle::kFsMenu),
-     short_desc_(&desc_tribe_box_, 0, 0, 50, UI::PanelStyle::kFsMenu) {
+     icon_difficulty_(&difficulty_hbox_,
+                      "dropdown_difficulty",
+                      0,
+                      0,
+                      50,
+                      8,
+                      kButtonSize,
+                      _("Difficulty"),
+                      UI::DropdownType::kPictorial,
+                      UI::PanelStyle::kFsMenu,
+                      UI::ButtonStyle::kFsMenuSecondary),
+     difficulty_(&difficulty_hbox_, 0, 0, 100, UI::PanelStyle::kFsMenu),
+     short_desc_(&difficulty_hbox_, 0, 0, 50, UI::PanelStyle::kFsMenu),
+     difficulty_label_(&difficulty_hbox_,
+                       UI::PanelStyle::kFsMenu,
+                       UI::FontStyle::kFsMenuInfoPanelHeading,
+                       _("Difficulty:"),
+                       UI::Align::kRight) {
 	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (const Widelands::TribeBasicInfo& tribeinfo : tribeinfos) {
 		tribe_select_.add(tribeinfo.descname, tribeinfo.name, g_image_cache->get(tribeinfo.icon),
 		                  false, tribeinfo.tooltip);
 	}
 	tribe_select_.select(tribeinfos.front().name);
+
+	{
+		// Translation provided in data/campaigns/campaigns.lua
+		i18n::Textdomain td("maps");
+		for (const auto& icon : AddOns::kDifficultyIcons) {
+			std::string text(_(icon.first));
+			text += " (\"" + icon.first + "\")";
+			icon_difficulty_.add(text, icon.second, g_image_cache->get(icon.second), false);
+		}
+	}
+
+	icon_difficulty_.selected.connect([this]() { edited(); });
 	tribe_select_.selected.connect([this]() { edited(); });
 	difficulty_.changed.connect([this]() { edited(); });
 	short_desc_.changed.connect([this]() { edited(); });
@@ -329,17 +359,17 @@ CampaignAddOnsPackagerBox::CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* 
 	difficulty_.set_tooltip(_("The campaigns difficulty. One word."));
 	short_desc_.set_tooltip(_("Short description, which will be appeded to the difficulty."));
 
-	desc_tribe_box_.add(
-	   new UI::Textarea(&desc_tribe_box_, UI::PanelStyle::kFsMenu,
-	                    UI::FontStyle::kFsMenuInfoPanelHeading, _("Difficulty:"), UI::Align::kRight),
-	   UI::Box::Resizing::kFullSize);
-	desc_tribe_box_.add(&difficulty_);
-	desc_tribe_box_.add_space(kSpacing);
-	desc_tribe_box_.add(&short_desc_, UI::Box::Resizing::kFillSpace);
-	desc_tribe_box_.add_space(5 * kSpacing);
-	desc_tribe_box_.add(&tribe_select_, UI::Box::Resizing::kFillSpace);
+	difficulty_hbox_.add(&difficulty_label_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	difficulty_hbox_.add_space(kSpacing);
+	difficulty_hbox_.add(&icon_difficulty_);
+	difficulty_hbox_.add_space(kSpacing);
+	difficulty_hbox_.add(&difficulty_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+	difficulty_hbox_.add_space(kSpacing);
+	difficulty_hbox_.add(&short_desc_, UI::Box::Resizing::kFillSpace, UI::Align::kCenter);
 
-	add(&desc_tribe_box_, UI::Box::Resizing::kFullSize);
+	add(&difficulty_hbox_, UI::Box::Resizing::kFullSize);
+	add_space(kSpacing);
+	add(&tribe_select_, UI::Box::Resizing::kFullSize);
 	add_space(kSpacing);
 	add(&maps_box_, UI::Box::Resizing::kExpandBoth);
 }
@@ -348,6 +378,7 @@ void CampaignAddOnsPackagerBox::edited() {
 	selected_->set_difficulty(difficulty_.text());
 	selected_->set_short_desc(short_desc_.text());
 	selected_->set_tribe(tribe_select_.get_selected());
+	selected_->set_difficulty_icon(icon_difficulty_.get_selected());
 	if (modified_) {
 		modified_();
 	}
@@ -356,29 +387,36 @@ void CampaignAddOnsPackagerBox::edited() {
 void CampaignAddOnsPackagerBox::load_addon(AddOns::MutableAddOn* a) {
 	assert(a->get_category() == AddOns::AddOnCategory::kCampaign);
 	selected_ = dynamic_cast<AddOns::CampaignAddon*>(a);
-	std::string tribe = selected_->get_tribe();
-	if (tribe.empty()) {
+	const AddOns::CampaignAddon::CampaignInfo& metadata = selected_->get_metadata();
+	if (metadata.tribe.empty()) {
 		selected_->set_tribe(tribe_select_.get_selected());
-	} else {
-		tribe_select_.select(tribe);
 	}
+	tribe_select_.select(metadata.tribe);
 
-	std::string short_desc = selected_->get_short_desc();
-	if (short_desc.empty()) {
-		short_desc = selected_->get_descname();
-		selected_->set_short_desc(short_desc);
-	}
-	short_desc_.set_text(short_desc);
-
-	std::string difficulty = selected_->get_difficulty();
-	if (difficulty.empty()) {
+	if (metadata.difficulty.empty()) {
 		// The default difficulty. No markup intentionally
-		difficulty = "Easy.";
-		selected_->set_short_desc(difficulty);
+		selected_->set_difficulty("Easy.");
 	}
-	difficulty_.set_text(difficulty);
+	difficulty_.set_text(metadata.difficulty);
+
+	if (metadata.short_desc.empty()) {
+		selected_->set_short_desc(selected_->get_descname());
+	}
+	short_desc_.set_text(metadata.short_desc);
+
+	if (metadata.difficulty_icon.empty()) {
+		selected_->set_difficulty_icon(AddOns::kDifficultyIcons.at("Easy."));
+	}
+	icon_difficulty_.select(metadata.difficulty_icon);
 
 	maps_box_.load_addon(a);
+}
+
+void CampaignAddOnsPackagerBox::layout() {
+	if (header_align_) {
+		difficulty_label_.set_fixed_width(header_align_);
+	}
+	AddOnsPackagerBox::layout();
 }
 
 }  // namespace FsMenu

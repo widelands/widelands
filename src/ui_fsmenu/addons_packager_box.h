@@ -33,6 +33,11 @@ class AddOnsPackagerBox : public UI::Box {
 public:
 	AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation);
 
+	void set_header_align(int32_t x) {
+		header_align_ = x;
+		layout();
+	}
+
 	void set_modified_callback(std::function<void()> modified_callback) {
 		modified_ = std::move(modified_callback);
 	}
@@ -41,6 +46,8 @@ public:
 	}
 
 protected:
+	// Used to align addon specific with general UI elements
+	int32_t header_align_;
 	std::function<void()> modified_;
 	MainMenu& main_menu_;
 };
@@ -82,13 +89,15 @@ class CampaignAddOnsPackagerBox : public AddOnsPackagerBox {
 public:
 	CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent);
 	void load_addon(AddOns::MutableAddOn*) override;
+	void layout() override;
 
 private:
 	void edited();
 	MapsAddOnsPackagerBox maps_box_;
-	UI::Box desc_tribe_box_;
-	UI::Dropdown<std::string> tribe_select_;
+	UI::Box difficulty_hbox_;
+	UI::Dropdown<std::string> tribe_select_, icon_difficulty_;
 	UI::EditBox difficulty_, short_desc_;
+	UI::Textarea difficulty_label_;
 	AddOns::CampaignAddon* selected_;  // Not owned
 };
 

@@ -279,6 +279,8 @@ CampaignAddon::CampaignAddon(const AddOnInfo& a)
      // Find difficulties.descname
      rex_difficulty_("(difficulties(?:^|$|\\r\\n|\\n|.)*descname\\s*=\\s*_\")(.*)(?=\"(?:^|$|"
                      "\\r\\n|\\n|.)*image)"),
+     // Find difficulties.image
+     rex_difficulty_icon_("(image\\s*=\\s*\")(.*)(?=\")"),
      // Find campaigns.descname
      rex_descname_("(campaigns(?:^|$|\\r\\n|\\n|.)*descname\\s*=\\s*_\")(.*)(?=\")"),
      // Find campaigns.description
@@ -300,9 +302,10 @@ CampaignAddon::CampaignAddon(const AddOnInfo& a)
 		};
 
 		lua_contents_ = read_text_file(directory_ + FileSystem::file_separator() + "campaigns.lua");
-		tribe_ = extract_string(rex_tribe_);
-		difficulty_ = extract_string(rex_difficulty_);
-		short_desc_ = extract_string(rex_short_desc_);
+		metadata_.tribe = extract_string(rex_tribe_);
+		metadata_.difficulty = extract_string(rex_difficulty_);
+		metadata_.difficulty_icon = extract_string(rex_difficulty_icon_);
+		metadata_.short_desc = extract_string(rex_short_desc_);
 	}
 }
 
@@ -359,10 +362,12 @@ bool CampaignAddon::write_to_disk() {
 
 	// Insert data using regex magic
 	lua_contents_ = std::regex_replace(lua_contents_, rex_description_, "$1" + description_);
-	lua_contents_ = std::regex_replace(lua_contents_, rex_difficulty_, "$1" + difficulty_);
+	lua_contents_ =
+	   std::regex_replace(lua_contents_, rex_difficulty_icon_, "$1" + metadata_.difficulty_icon);
+	lua_contents_ = std::regex_replace(lua_contents_, rex_difficulty_, "$1" + metadata_.difficulty);
 	lua_contents_ = std::regex_replace(lua_contents_, rex_descname_, "$1" + descname_);
-	lua_contents_ = std::regex_replace(lua_contents_, rex_short_desc_, "$1" + short_desc_);
-	lua_contents_ = std::regex_replace(lua_contents_, rex_tribe_, "$1" + tribe_);
+	lua_contents_ = std::regex_replace(lua_contents_, rex_short_desc_, "$1" + metadata_.short_desc);
+	lua_contents_ = std::regex_replace(lua_contents_, rex_tribe_, "$1" + metadata_.tribe);
 	lua_contents_ =
 	   std::regex_replace(lua_contents_, rex_scenario_, "$1" + scenario_list + "\n            ");
 

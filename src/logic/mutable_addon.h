@@ -119,25 +119,29 @@ public:
 	explicit CampaignAddon(const AddOnInfo& a);
 	bool write_to_disk() override;
 	bool luafile_exists();
-	std::string get_tribe() {
-		return tribe_;
+
+	struct CampaignInfo {
+		std::string tribe, short_desc, difficulty, difficulty_icon;
+	};
+
+	const CampaignInfo& get_metadata() {
+		return metadata_;
 	}
+
 	void set_tribe(const std::string& tribe) {
-		tribe_ = tribe;
+		metadata_.tribe = tribe;
 	}
 
-	std::string get_short_desc() {
-		return short_desc_;
-	}
 	void set_short_desc(const std::string& desc) {
-		short_desc_ = desc;
+		metadata_.short_desc = desc;
 	}
 
-	std::string get_difficulty() {
-		return difficulty_;
-	}
 	void set_difficulty(const std::string& difficulty) {
-		difficulty_ = difficulty;
+		metadata_.difficulty = difficulty;
+	}
+
+	void set_difficulty_icon(const std::string& difficulty_icon) {
+		metadata_.difficulty_icon = difficulty_icon;
 	}
 
 private:
@@ -145,9 +149,10 @@ private:
 	                                  const std::string& dir,
 	                                  const DirectoryTree& tree);
 
-	std::string tribe_, short_desc_, difficulty_, lua_contents_;
-	std::regex rex_difficulty_, rex_descname_, rex_description_, rex_short_desc_, rex_tribe_,
-	   rex_scenario_;
+	std::string lua_contents_;
+	std::regex rex_difficulty_, rex_difficulty_icon_, rex_descname_, rex_description_,
+	   rex_short_desc_, rex_tribe_, rex_scenario_;
+	CampaignInfo metadata_;
 };
 
 class WinCondAddon : public MutableAddOn {

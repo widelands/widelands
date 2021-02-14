@@ -115,6 +115,7 @@ struct AddOnInfo {
 using AddOnState = std::pair<AddOnInfo, bool>;
 extern std::vector<AddOnState> g_addons;
 
+extern const std::map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
 AddOnCategory get_category(const std::string&);
 
