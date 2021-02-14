@@ -72,7 +72,7 @@
  * Protocol versions must match on all systems.
  * Used versions:
  * 1: Initial version introduced between build 19 and build 20
- * 2: Same as version 1 but without the doubled password (bug) on kHello, starting build 21
+ * 2: Same as version 1 but without the doubled password (bug) on kHello, starting after build 21
  */
 constexpr uint8_t kRelayProtocolVersion = 2;
 
