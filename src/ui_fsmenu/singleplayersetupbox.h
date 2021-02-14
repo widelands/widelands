@@ -63,6 +63,7 @@ public:
 	                     uint32_t standard_element_height);
 
 	void force_new_dimensions(uint32_t standard_element_height, int32_t max_size);
+	void update();
 
 private:
 	GameSettingsProvider* const settings_;
@@ -71,7 +72,6 @@ private:
 	UI::Textarea title_;
 	std::vector<SinglePlayerActivePlayerGroup*> active_player_groups_;  // not owned
 	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
-	void update();
 	void reset();
 };
 #endif  // WL_UI_FSMENU_SINGLEPLAYERSETUPBOX_H

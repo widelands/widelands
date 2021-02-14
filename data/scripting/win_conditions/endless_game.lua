@@ -2,7 +2,6 @@
 --                         An endless game without rules
 -- =======================================================================
 
-include "scripting/coroutine.lua" -- for sleep
 include "scripting/win_conditions/win_condition_functions.lua"
 
 push_textdomain("win_conditions")
@@ -24,13 +23,6 @@ local r = {
 
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
-
-      -- Iterate all players, if one is defeated, remove him
-      -- from the list, send him a defeated message and give him full vision
-      repeat
-         sleep(5000)
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
-      until count_factions(plrs) < 1
 
    end
 }

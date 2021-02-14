@@ -1,15 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Frank Tang <roadtang@gmail.com>, 2015
+# Roy Luo <1598359376@qq.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-07-23 07:47+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-13 10:23+0000\n"
+"Last-Translator: Roy Luo <1598359376@qq.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/widelands/widelands/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,32 +20,32 @@ msgstr ""
 
 #: ../../data/txts/ABOUT.lua:7
 msgid "Readme"
-msgstr ""
+msgstr "自述"
 
 #: ../../data/txts/ABOUT.lua:11
 msgid "License"
-msgstr "许可证"
+msgstr "许可"
 
 #: ../../data/txts/ABOUT.lua:15
 msgid "Developers"
-msgstr ""
+msgstr "开发者"
 
 #: ../../data/txts/ABOUT.lua:19
 msgid "Translators"
-msgstr ""
+msgstr "翻译人员"
 
 #: ../../data/txts/AUTHORS.lua:28
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Widelands开发团队"
 
 #: ../../data/txts/LICENSE.lua:7
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Widelands的许可信息"
 
 #. TRANSLATORS: Placeholder is copyright end year
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - %1% by the Widelands Development Team."
-msgstr ""
+msgstr "版权 2002 - %1% 由 Widelands开发团队所有"
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
@@ -57,7 +58,7 @@ msgstr ""
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "你可以通过访问以下网页找到更多关于FOSS和GPL的信息：%s"
 
 #: ../../data/txts/LICENSE.lua:15
 msgid ""
@@ -100,11 +101,11 @@ msgstr ""
 
 #: ../../data/txts/README.lua:8
 msgid "an open source strategy game"
-msgstr ""
+msgstr "一款开源战略游戏"
 
 #: ../../data/txts/README.lua:10
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "查看Widelands项目主页："
 
 #: ../../data/txts/README.lua:11
 msgid ""
@@ -114,7 +115,7 @@ msgstr ""
 
 #: ../../data/txts/README.lua:12
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: ../../data/txts/README.lua:13
 msgid ""
@@ -127,41 +128,41 @@ msgstr ""
 
 #: ../../data/txts/README.lua:15
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelands 帮助"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:17
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "你可以通过使用底部菜单上的帮助按钮或使用%1%键，找到有关游戏或游戏编辑器的帮助说明 。"
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:19
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:22
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "报告软件错误"
 
 #: ../../data/txts/README.lua:23
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "如果你遇到软件错误，请向我们的错误跟踪器报告："
 
 #: ../../data/txts/README.lua:25
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "请提供足够的背景资料。告诉我们："
 
 #: ../../data/txts/README.lua:27
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "如果可能的话，请提供关于如何触发错误的详细步骤。"
 
 #: ../../data/txts/README.lua:28
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "当你执行这些步骤时你预期会发生什么以及实际发生了什么？"
 
 #: ../../data/txts/README.lua:29
 msgid ""
@@ -195,127 +196,127 @@ msgstr ""
 
 #: ../../data/txts/TRANSLATORS.lua:25
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands 翻译人员"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr ""
+msgstr "亚特兰蒂斯人"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
-msgstr ""
+msgstr "蛮族"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
-msgstr ""
+msgstr "战役故事"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
-msgstr ""
+msgstr "核心创始人员"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
-msgstr ""
+msgstr "程序员"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "文档，帮助和维基"
 
 #: ../../data/txts/developers.lua:3
 msgid "Elders"
-msgstr ""
+msgstr "先行者"
 
 #: ../../data/txts/developers.lua:3
 msgid "Empire"
-msgstr ""
+msgstr "帝国"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "Flatpak"
-msgstr ""
+msgstr "Flatpak 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "前辈"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr ""
+msgstr "弗里西亚部族"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
-msgstr ""
+msgstr "图形艺术家"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphics"
-msgstr ""
+msgstr "绘图"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage"
-msgstr ""
+msgstr "网站主页"
 
 #: ../../data/txts/developers.lua:3
 msgid "Homepage Coders"
-msgstr ""
+msgstr "网站主页程序员"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
-msgstr ""
+msgstr "地图和任务"
 
 #: ../../data/txts/developers.lua:3
 msgid "Musicians"
-msgstr ""
+msgstr "音乐家"
 
 #: ../../data/txts/developers.lua:3
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: ../../data/txts/developers.lua:3
 msgid "Packagers"
-msgstr ""
+msgstr "游戏程序集成打包"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound"
-msgstr ""
+msgstr "声音"
 
 #: ../../data/txts/developers.lua:3
 msgid "Sound Effects"
-msgstr ""
+msgstr "音效"
 
 #: ../../data/txts/developers.lua:3
 msgid "Tongues"
-msgstr ""
+msgstr "语言"
 
 #: ../../data/txts/developers.lua:3
 msgid "Translation"
-msgstr ""
+msgstr "翻译"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "Zeta 操作系统"
 
 #: ../../data/txts/developers.lua:3
 msgid "and many, many more (thank you for everything you've done)"
@@ -323,11 +324,11 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "vacant"
-msgstr ""
+msgstr "空闲的"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
-msgstr ""
+msgstr "在线帮助"
 
 #: ../../data/txts/help/common_helptexts.lua:11
 #, lua-format
@@ -339,7 +340,7 @@ msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid "Introduction"
-msgstr ""
+msgstr "介绍"
 
 #: ../../data/txts/help/common_helptexts.lua:20
 msgid ""
@@ -360,7 +361,7 @@ msgstr ""
 
 #: ../../data/txts/help/common_helptexts.lua:29
 msgid "Replays"
-msgstr ""
+msgstr "回放"
 
 #: ../../data/txts/help/common_helptexts.lua:30
 msgid ""
@@ -395,45 +396,45 @@ msgstr ""
 #, lua-format
 msgctxt "hotkey"
 msgid "%s:"
-msgstr ""
+msgstr "%s:"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/txts/help/common_helptexts.lua:48
 msgctxt "hotkey"
 msgid "Space"
-msgstr ""
+msgstr "空间"
 
 #: ../../data/txts/help/common_helptexts.lua:48
 msgid "Toggle building spaces"
-msgstr ""
+msgstr "切换建筑空间"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'Ctrl + f'
 #: ../../data/txts/help/common_helptexts.lua:57
 msgctxt "hotkey"
 msgid "Ctrl + F"
-msgstr ""
+msgstr "Ctrl + F"
 
 #: ../../data/txts/help/common_helptexts.lua:57
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "切换全屏（如果操作系统支持）"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:66
 msgid "Toggle minimap"
-msgstr ""
+msgstr "切换迷你地图"
 
 #: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "多人游戏设置"
 
 #: ../../data/txts/help/multiplayer_help.lua:8
 msgid "You are in the multiplayer launch game menu."
-msgstr ""
+msgstr "你在多人游戏启动选单"
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Client settings"
-msgstr ""
+msgstr "客户端设置"
 
 #: ../../data/txts/help/multiplayer_help.lua:11
 msgid ""
@@ -455,7 +456,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
-msgstr ""
+msgstr "游戏玩家设置"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
@@ -498,7 +499,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
-msgstr ""
+msgstr "地图详情"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
@@ -508,43 +509,66 @@ msgid ""
 "condition, and finally can start the game as soon as all players are set up."
 msgstr ""
 
+#: ../../data/txts/tips/amazons.lua:4
+msgid ""
+"Amazons love trees. Build enough jungle preserver's huts to have enough of "
+"them."
+msgstr "亚马逊人喜爱树。建造足够的丛林守护者小屋来容纳满足他们。 "
+
+#: ../../data/txts/tips/amazons.lua:8
+msgid ""
+"Rare woods are the backbone of an amazon economy. Build rare tree "
+"plantations to plant these special trees."
+msgstr "稀有木材是亚马逊经济的支柱。建造珍稀树种种植园来种植这些特殊的树木。"
+
+#: ../../data/txts/tips/amazons.lua:12
+msgid ""
+"Rare trees are cut by experienced woodcutters in woodcutter's huts enhanced "
+"to rare tree cutter's huts. But they stop cutting normal trees. Plan their "
+"locations in advance."
+msgstr "樵夫小屋可增强升级至稀有树种加工车间，由经验丰富的樵夫砍伐稀有树种时加工使用。升级为稀有树种加工车间之后，樵夫将停止砍伐普通树木。请提前计划他们的位置。"
+
+#: ../../data/txts/tips/amazons.lua:16
+msgid "Food is dried with charcoal fires. Ensure a steady supply."
+msgstr "用炭火把食物烘干。确保供应稳定。"
+
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "留意你的渔夫，修建一间鱼类饲养员之屋。在他们工作区域的鱼类资源枯竭后，鱼类资源就不能再生了。"
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "为了确保原木不被用光，至少要修建一间护林员之屋和一间樵夫之屋。 "
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""
 "Atlanteans need spidercloth for many buildings. Build the needed "
 "infrastructure early before you run out."
-msgstr ""
+msgstr "亚特兰蒂斯人的许多建筑都需要使用蛛丝布。在用完之前应尽早修建必要的的基础设施。"
 
 #: ../../data/txts/tips/barbarians.lua:4 ../../data/txts/tips/empire.lua:4
 msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "work area, they will stop fishing."
-msgstr ""
+msgstr "留意你的渔夫，在他们工作区域的鱼类资源枯竭后，渔夫将停止捕捞工作。"
 
 #: ../../data/txts/tips/barbarians.lua:8
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "为了确保原木不被用光，至少要修建一间护林员小屋。为了确保猎物不被捕光，至少要修建一间猎场看守小屋。"
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 #: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr ""
+msgstr "大多数升级后的建筑物需要有经验的劳动者。除非储备有经验丰富的劳动者，否则不要升级建筑物。"
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:7
@@ -552,44 +576,44 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "你可以找到关于地图编辑器的常规的帮助和一份简短的教程，我们的wiki位于%s。"
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "如果在选择过程中按住Ctrl键，可以选择多种动物类型组合成一个实例。如果你点击地图，一个选定动物类型的实例组合将被放置到地图上。 "
 
 #: ../../data/txts/tips/editor.lua:15
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr ""
+msgstr "就像选择多个动物组合而成一个实例一样，你也可以使用Ctrl+鼠标单击选择多个固定物或是地表纹理。"
 
 #: ../../data/txts/tips/editor.lua:19
 msgid ""
 "Holding down Shift switches the first alternative tool on. This tool is in "
 "most cases the complete opposite of the normal tool (for example deletion of"
 " an object instead of placing one)."
-msgstr ""
+msgstr "按住Shift键可以打开可切换工具的第一候选项。在大多数情况下，此工具的功用与普通工具正好相反（ 例如，删除对象而不是放置对象）。"
 
 #: ../../data/txts/tips/editor.lua:23
 msgid ""
 "Holding down Alt switches the second alternative tool on (if it exists)."
-msgstr ""
+msgstr "按住Alt键可以打开可切换工具的第二候选项（如果存在的话）。"
 
 #: ../../data/txts/tips/editor.lua:27
 msgid ""
 "The number keys (0 - 9) allow you to directly set the size of the selected "
 "area around your mouse cursor."
-msgstr ""
+msgstr "数字键（0-9）允许你直接设置鼠标光标周围选定区域的大小。"
 
 #: ../../data/txts/tips/editor.lua:31
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr ""
+msgstr "空格键在地图编辑器中的功用与普通游的戏中一样，都是用来切换建筑空间的显示或关闭。"
 
 #: ../../data/txts/tips/editor.lua:35
 msgid ""

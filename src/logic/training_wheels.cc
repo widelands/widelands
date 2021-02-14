@@ -17,6 +17,7 @@
  *
  */
 
+#if 0  // TODO(Nordfriese): Re-add training wheels code after v1.0
 #include "logic/training_wheels.h"
 
 #include <memory>
@@ -192,3 +193,4 @@ void TrainingWheels::solve(const std::string& objective, bool run_some_more, boo
 }
 
 }  // namespace Widelands
+#endif

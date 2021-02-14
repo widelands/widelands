@@ -1,10 +1,11 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2020 Widelands Development Team
+# Copyright (C) 2005-2021 Widelands Development Team
 # 
 # Translators:
 # Elisabeth Jäger, 2016
 # wl-zocker, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Lennard Hofmann <lennard.hofmann@web.de>, 2021
 # Stephan Lutz <stephan-lutz@gmx.de>, 2019-2020
 # Elisabeth Jäger, 2015
 # wl-zocker, 2015
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://www.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2020-12-24 07:25+0000\n"
-"PO-Revision-Date: 2020-08-01 01:21+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2021-01-15 09:10+0000\n"
+"PO-Revision-Date: 2021-02-06 17:02+0000\n"
+"Last-Translator: Lennard Hofmann <lennard.hofmann@web.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -245,7 +246,7 @@ msgstr "Wir haben genug Schiffe"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid "Your second ship, \"%1%\", is ready now."
-msgstr "Dein zweites Schiff, \"%1%\", ist jetzt fertig."
+msgstr "Dein zweites Schiff, „%1%“, ist jetzt fertig."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:121
 msgid ""
@@ -563,7 +564,7 @@ msgid ""
 "fixed transport routes called waterways. A waterway is built just like a "
 "road: You click on a flag near the shore, choose ‘Build a waterway’, and "
 "select the path for the waterway just as you would do for a road."
-msgstr "Anders als Schiffe, die zu jedem Hafen fahren können, wo sie gebraucht werden, haben Fähren feste Transport routen die man Wasserweg nennt. Ein Wasserweg wird genau wie eine Straße gebaut : man klickt auf eine Flagge am Strand, wählt \"Baue Wasserweg\", und wählt den Pfad des Wasserwegs genau wie man es bei einer Straße macht. "
+msgstr "Anders als Schiffe, die zu jedem Hafen fahren können, wo sie gebraucht werden, haben Fähren feste Transportrouten, die man Wasserweg nennt. Ein Wasserweg wird genau wie eine Straße gebaut: man klickt auf eine Flagge am Strand, wählt „Baue Wasserweg“, und wählt den Pfad des Wasserwegs genau wie man es bei einer Straße macht. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:268
 msgid ""
@@ -584,7 +585,7 @@ msgstr "Bitte beachte, dass Wasserwege nicht so lang gebaut werden können, wie 
 msgid ""
 "Always keep in mind that ferries do not transport workers. You can use them "
 "to speed up ware transport, but they can never entirely replace roads."
-msgstr "Bedenke immer, dass Fähren keine Arbeiter transportieren. Du kannst sie benutzen um den Warentransport zu beschleunigen, sie können aber niemals die Straßen komplett ersetzen."
+msgstr "Bedenke immer, dass Fähren keine Arbeiter transportieren. Du kannst sie benutzen, um den Warentransport zu beschleunigen, sie können aber niemals die Straßen komplett ersetzen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:280
 msgid "Allow me to show you how to build a waterway…"
@@ -598,7 +599,7 @@ msgstr "Goldene Wellen"
 msgid ""
 "As you can see, it is not that hard. When you build a waterway, the closest "
 "idle ferry will assign itself to it."
-msgstr "Wie du sehen kannst ist es nicht so schwierig. Wenn du einen Wasserweg baust, wird die nächstgelegene untätige Fähre sich selber für diesen Weg in Dienst stellen."
+msgstr "Wie du sehen kannst, ist es nicht so schwierig. Wenn du einen Wasserweg baust, wird die nächstgelegene untätige Fähre sich selber für diesen Weg in Dienst stellen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:292
 msgid ""
@@ -621,7 +622,7 @@ msgid ""
 "A waterway is built just like a road: You click on a flag near the shore, "
 "choose ‘Build a waterway’, and select the path for the waterway just as you "
 "would do for a road."
-msgstr "Ein Wasserweg wird genau wie eine Straße gebaut : man klickt auf eine Flagge am Strand, wählt \"Baue Wasserweg\", und wählt den Pfad des Wasserwegs genau wie man es bei einer Straße macht. "
+msgstr "Ein Wasserweg wird genau wie eine Straße gebaut: man klickt auf eine Flagge am Strand, wählt „Baue Wasserweg“, und wählt den Pfad des Wasserwegs genau wie man es bei einer Straße macht. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:303
 msgid ""
@@ -640,7 +641,7 @@ msgstr "Über Fähren"
 msgid ""
 "Now there are only a few more things I would like you to keep in mind "
 "whenever using ferries."
-msgstr "Nun, es gibt da noch ein paar Dinge die du besser im Kopfbehalten solltest, wenn du Fähren benutzt."
+msgstr "Nun, es gibt da noch ein paar Dinge, die du besser im Kopf behalten solltest, wenn du Fähren benutzt."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:313
 msgid ""
@@ -649,7 +650,7 @@ msgid ""
 "not to claim regions you can reach neither by road nor by ship. Never cut "
 "all your roads between two places connected by waterways unless you are "
 "certain no worker will ever have to walk there."
-msgstr "Vergiss nie, dass diese Ruderboote zu klein sind um Arbeiter zu transportieren. Du kannst sie als Abkürzung für den Warentransport in deinem Gebiet benutzen, aber nicht um Gebiete zu erobern, die du mit Straßen oder Schiffen nicht erreichen kannst. Kappe niemals alle Straßenverbindungen zwischen zwei Orten, die mit Wasserwegen verbunden sind, wenn du nicht sicher bist, dass nie mehr ein Arbeiter dorthin gelangen muss."
+msgstr "Vergiss nie, dass diese Ruderboote zu klein sind, um Arbeiter zu transportieren. Du kannst sie als Abkürzung für den Warentransport in deinem Gebiet benutzen, aber nicht um Gebiete zu erobern, die du mit Straßen oder Schiffen nicht erreichen kannst. Kappe niemals alle Straßenverbindungen zwischen zwei Orten, die mit Wasserwegen verbunden sind, wenn du nicht sicher bist, dass nie mehr ein Arbeiter dorthin gelangen muss."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:314
 msgid ""
@@ -676,7 +677,7 @@ msgid ""
 "Do remember to stop your ferry yard when you don’t need any new ferries to "
 "be produced. As long as a ferry services a waterway, its lifetime is "
 "unlimited, but unemployed ferries will rot away and eventually sink."
-msgstr "Denke daran deine Fährenwerft anzuhalten, wenn du keine neuen Fähren brauchst. Solange Fähren auf einem Wasserweg eingesetzt sind ist ihre Lebensdauer unendlich, arbeitslose Fähren verroten jedoch langsam und sinken irgendwann. "
+msgstr "Denke daran, deine Fährenwerft anzuhalten, wenn du keine neuen Fähren brauchst. Solange Fähren auf einem Wasserweg eingesetzt sind, ist ihre Lebensdauer unendlich, arbeitslose Fähren verrotten jedoch langsam und sinken irgendwann. "
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:332
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:334
@@ -698,4 +699,4 @@ msgid ""
 "As always, you can continue playing and practice a bit more on this map if "
 "you like, or get your captain’s license ready and try out your new skills in"
 " a real game…"
-msgstr "Wie immer kannst weiterspielen und noch ein wenig auf dieser Karte üben, wenn du möchtest. Oder du nimmst dein neues Kapitänspatent und probierst deine Fähigkeiten in einem echten Spiel aus…"
+msgstr "Wie immer kannst du weiterspielen und noch ein wenig auf dieser Karte üben, wenn du möchtest. Oder du nimmst dein neues Kapitänspatent und probierst deine Fähigkeiten in einem echten Spiel aus…"
