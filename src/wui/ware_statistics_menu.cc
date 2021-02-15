@@ -89,9 +89,7 @@ protected:
 	}
 
 	RGBColor info_color_for_ware(Widelands::DescriptionIndex const ware) override {
-		size_t index = static_cast<size_t>(ware);
-
-		return colors[color_map_.at(index)];
+		return colors[color_map_.at(ware)];
 	}
 };
 
