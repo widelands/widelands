@@ -56,8 +56,7 @@ struct InstalledAddOnRow : public UI::Panel {
 private:
 	AddOns::AddOnInfo info_;
 	bool enabled_;
-	UI::Button uninstall_;
-	std::unique_ptr<UI::Button> toggle_enabled_;
+	UI::Button uninstall_, toggle_enabled_;
 	UI::Icon category_;
 	UI::Textarea version_;
 	UI::MultilineTextarea txt_;

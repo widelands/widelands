@@ -789,6 +789,18 @@ void MainMenu::layout() {
 	}
 }
 
+bool MainMenu::check_desyncing_addon() {
+	for (const auto& pair : AddOns::g_addons) {
+		if (!pair.first.sync_safe && pair.second) {
+			UI::WLMessageBox mmb(this, UI::WindowStyle::kFsMenu, _("Desyncing Add-On Found"),
+					_("An enabled add-on is known to cause desyncs. Proceed at your own risk."),
+		             UI::WLMessageBox::MBoxType::kOkCancel);
+			return mmb.run<UI::Panel::Returncodes>() != UI::Panel::Returncodes::kOk;
+		}
+	}
+	return false;
+}
+
 void MainMenu::action(const MenuTarget t) {
 	singleplayer_.set_list_visibility(false);
 	multiplayer_.set_list_visibility(false);
@@ -861,11 +873,17 @@ void MainMenu::action(const MenuTarget t) {
 		break;
 
 	case MenuTarget::kLan:
+		if (check_desyncing_addon()) {
+			break;
+		}
 		menu_capsule_.clear_content();
 		g_sh->change_music("ingame", 1000);
 		new NetSetupLAN(menu_capsule_);
 		break;
 	case MenuTarget::kMetaserver: {
+		if (check_desyncing_addon()) {
+			break;
+		}
 		menu_capsule_.clear_content();
 
 		std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
