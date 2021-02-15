@@ -13,7 +13,7 @@
 --
 --    This function initializes the start condition.
 --
---    :arg table: This table contains all the data needed to initilize the start condition.
+--    :arg table: This table contains all the data needed to initialize the start condition.
 --                It contains the following entries:
 --
 --    **descname**: The localized name of the start condition.
