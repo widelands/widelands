@@ -32,7 +32,7 @@
 --
 -- After these declarations the lua commands to define the initial mapobjects for the player follow.
 --
--- For making the UI texts translateable, we also need to push/pop the correct textdomain.
+-- To make the UI texts translatable, we also need to push/pop the correct textdomain.
 --
 -- Example:
 --
