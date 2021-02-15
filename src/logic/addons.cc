@@ -37,25 +37,24 @@ namespace AddOns {
 const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories = {
    {AddOnCategory::kNone,
     AddOnCategoryInfo{"", []() { return _("Error"); }, "images/ui_basic/stop.png"}},
-   {AddOnCategory::kTribes,
-    AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
-                      "images/wui/stats/menu_tab_wares_warehouse.png"}},
+   {AddOnCategory::kTribes, AddOnCategoryInfo{"tribes", []() { return _("Tribes"); },
+                                              "images/wui/stats/menu_tab_wares_warehouse.png"}},
    {AddOnCategory::kWorld, AddOnCategoryInfo{"world", []() { return _("World"); },
                                              "images/wui/menus/toggle_immovables.png"}},
-   {AddOnCategory::kScript, AddOnCategoryInfo{"script", []() { return _("Script"); },
-                                              "images/logos/WL-Editor-32.png"}},
+   {AddOnCategory::kScript,
+    AddOnCategoryInfo{"script", []() { return _("Script"); }, "images/logos/WL-Editor-32.png"}},
    {AddOnCategory::kMaps, AddOnCategoryInfo{"maps", []() { return _("Map Set"); },
                                             "images/wui/menus/toggle_minimap.png"}},
    {AddOnCategory::kCampaign, AddOnCategoryInfo{"campaign", []() { return _("Campaign"); },
                                                 "images/wui/messages/messages_warfare.png"}},
    {AddOnCategory::kWinCondition,
-    AddOnCategoryInfo{"win_condition", []() { return _("Win Condition"); },
-                      "images/wui/menus/objectives.png"}},
+    AddOnCategoryInfo{
+       "win_condition", []() { return _("Win Condition"); }, "images/wui/menus/objectives.png"}},
    {AddOnCategory::kStartingCondition,
     AddOnCategoryInfo{"starting_condition", []() { return _("Starting Condition"); },
                       "tribes/buildings/warehouses/atlanteans/headquarters/menu.png"}},
-   {AddOnCategory::kTheme, AddOnCategoryInfo{"theme", []() { return _("Theme"); },
-                                             "images/wui/menus/main_menu.png"}}};
+   {AddOnCategory::kTheme,
+    AddOnCategoryInfo{"theme", []() { return _("Theme"); }, "images/wui/menus/main_menu.png"}}};
 
 std::vector<std::pair<AddOnInfo, bool>> g_addons;
 

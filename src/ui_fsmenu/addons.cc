@@ -1396,20 +1396,31 @@ static std::string required_wl_version_and_sync_safety_string(const AddOns::AddO
 	std::string result;
 	if (!info.sync_safe) {
 		result += "<br>";
-		result += g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(_("This add-on is known to cause desyncs in multiplayer games and replays."));
+		result += g_style_manager->font_style(UI::FontStyle::kWarning)
+		             .as_font_tag(
+		                _("This add-on is known to cause desyncs in multiplayer games and replays."));
 	}
 	if (!info.min_wl_version.empty() || !info.max_wl_version.empty()) {
 		result += "<br>";
 		std::string str;
 		if (info.max_wl_version.empty()) {
-			str += (boost::format(_("Requires a Widelands version of at least %s.")) % info.min_wl_version).str();
+			str +=
+			   (boost::format(_("Requires a Widelands version of at least %s.")) % info.min_wl_version)
+			      .str();
 		} else if (info.min_wl_version.empty()) {
-			str += (boost::format(_("Requires a Widelands version of at most %s.")) % info.max_wl_version).str();
+			str +=
+			   (boost::format(_("Requires a Widelands version of at most %s.")) % info.max_wl_version)
+			      .str();
 		} else {
-			str += (boost::format(_("Requires a Widelands version of at least %1$s and at most %2$s."))
-					% info.min_wl_version % info.max_wl_version).str();
+			str +=
+			   (boost::format(_("Requires a Widelands version of at least %1$s and at most %2$s.")) %
+			    info.min_wl_version % info.max_wl_version)
+			      .str();
 		}
-		result += g_style_manager->font_style(info.matches_widelands_version() ? UI::FontStyle::kItalic : UI::FontStyle::kWarning).as_font_tag(str);
+		result += g_style_manager
+		             ->font_style(info.matches_widelands_version() ? UI::FontStyle::kItalic :
+		                                                             UI::FontStyle::kWarning)
+		             .as_font_tag(str);
 	}
 	return result;
 }
@@ -1436,16 +1447,16 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                 g_image_cache->get("images/wui/menus/exit.png"),
                 _("Uninstall")),
      toggle_enabled_(this,
-                          "on-off",
-                          0,
-                          0,
-                          24,
-                          24,
-                          UI::ButtonStyle::kFsMenuSecondary,
-                          g_image_cache->get(enabled ? "images/ui_basic/checkbox_checked.png" :
-                                                       "images/ui_basic/checkbox_empty.png"),
-                          enabled ? _("Disable") : _("Enable"),
-                          UI::Button::VisualState::kFlat),
+                     "on-off",
+                     0,
+                     0,
+                     24,
+                     24,
+                     UI::ButtonStyle::kFsMenuSecondary,
+                     g_image_cache->get(enabled ? "images/ui_basic/checkbox_checked.png" :
+                                                  "images/ui_basic/checkbox_empty.png"),
+                     enabled ? _("Disable") : _("Enable"),
+                     UI::Button::VisualState::kFlat),
      category_(this,
                UI::PanelStyle::kFsMenu,
                g_image_cache->get(AddOns::kAddOnCategories.at(info.category).icon)),
@@ -1490,9 +1501,9 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
 		for (auto& pair : AddOns::g_addons) {
 			if (pair.first.internal_name == info.internal_name) {
 				pair.second = !pair.second;
-				toggle_enabled_.set_pic(
-				   g_image_cache->get(pair.second ? "images/ui_basic/checkbox_checked.png" :
-				                                    "images/ui_basic/checkbox_empty.png"));
+				toggle_enabled_.set_pic(g_image_cache->get(pair.second ?
+				                                              "images/ui_basic/checkbox_checked.png" :
+				                                              "images/ui_basic/checkbox_empty.png"));
 				toggle_enabled_.set_tooltip(pair.second ? _("Disable") : _("Enable"));
 				return ctrl->update_dependency_errors();
 			}
@@ -1955,13 +1966,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               g_style_manager->font_style(UI::FontStyle::kItalic)
                  .as_font_tag((boost::format(_("(%s)")) % info.internal_name).str()))
                 .str() %
-           g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag(
-              info.author() == info.upload_username ?
+           g_style_manager->font_style(UI::FontStyle::kItalic)
+              .as_font_tag(info.author() == info.upload_username ?
                               (boost::format(_("by %s")) % info.author()).str() :
                               (boost::format(_("by %1$s (uploaded by %2$s)")) % info.author() %
                                info.upload_username)
                                  .str()) %
-			required_wl_version_and_sync_safety_string(info) %
+           required_wl_version_and_sync_safety_string(info) %
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
               .as_font_tag(info.description()))
              .str()),
