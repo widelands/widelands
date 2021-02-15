@@ -689,6 +689,9 @@ void AddOnsCtrl::refresh_remotes() {
 		                              0,
 		                              AddOns::AddOnCategory::kNone,
 		                              {},
+		                              true,
+		                              "",
+		                              "",
 		                              false,
 		                              {{}, {}, {}, {}},
 		                              {},
@@ -713,8 +716,8 @@ bool AddOnsCtrl::matches_filter(const AddOns::AddOnInfo& info) {
 		return false;
 	}
 
-	if (filter_verified_.get_state() && !info.verified) {
-		// not verified
+	if (filter_verified_.get_state() && (!info.verified || !info.matches_widelands_version())) {
+		// not verified or wrong version
 		return false;
 	}
 
@@ -1386,6 +1389,28 @@ step1:
 	rebuild();
 }
 
+static std::string required_wl_version_and_sync_safety_string(const AddOns::AddOnInfo& info) {
+	std::string result;
+	if (!info.sync_safe) {
+		result += "<br>";
+		result += g_style_manager->font_style(UI::FontStyle::kWarning).as_font_tag(_("This add-on is known to cause desyncs in multiplayer games and replays."));
+	}
+	if (!info.min_wl_version.empty() || !info.max_wl_version.empty()) {
+		result += "<br>";
+		std::string str;
+		if (info.max_wl_version.empty()) {
+			str += (boost::format(_("Requires a Widelands version of at least %s.")) % info.min_wl_version).str();
+		} else if (info.min_wl_version.empty()) {
+			str += (boost::format(_("Requires a Widelands version of at most %s.")) % info.max_wl_version).str();
+		} else {
+			str += (boost::format(_("Requires a Widelands version of at least %1$s and at most %2$s."))
+					% info.min_wl_version % info.max_wl_version).str();
+		}
+		result += g_style_manager->font_style(info.matches_widelands_version() ? UI::FontStyle::kItalic : UI::FontStyle::kWarning).as_font_tag(str);
+	}
+	return result;
+}
+
 InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
                                      AddOnsCtrl* ctrl,
                                      const AddOns::AddOnInfo& info,
@@ -1442,7 +1467,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
           24,
           24,
           UI::PanelStyle::kFsMenu,
-          (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>") %
+          (boost::format("<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>") %
            (boost::format(
                /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
                _("%1$s %2$s")) %
@@ -1453,6 +1478,7 @@ InstalledAddOnRow::InstalledAddOnRow(Panel* parent,
               .str() %
            g_style_manager->font_style(UI::FontStyle::kItalic)
               .as_font_tag((boost::format(_("by %s")) % info.author()).str()) %
+           required_wl_version_and_sync_safety_string(info) %
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
               .as_font_tag(info.description()))
              .str()) {
@@ -1925,7 +1951,7 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
           24,
           24,
           UI::PanelStyle::kFsMenu,
-          (boost::format("<rt><p>%s</p><p>%s</p><p>%s</p></rt>")
+          (boost::format("<rt><p>%s</p><p>%s%s</p><p>%s</p></rt>")
            /** TRANSLATORS: Add-On localized name as header (Add-On internal name in italics) */
            % (boost::format(_("%1$s %2$s")) %
               g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
@@ -1933,12 +1959,13 @@ RemoteAddOnRow::RemoteAddOnRow(Panel* parent,
               g_style_manager->font_style(UI::FontStyle::kItalic)
                  .as_font_tag((boost::format(_("(%s)")) % info.internal_name).str()))
                 .str() %
-           g_style_manager->font_style(UI::FontStyle::kItalic)
-              .as_font_tag(info.author() == info.upload_username ?
+           g_style_manager->font_style(UI::FontStyle::kItalic).as_font_tag(
+              info.author() == info.upload_username ?
                               (boost::format(_("by %s")) % info.author()).str() :
                               (boost::format(_("by %1$s (uploaded by %2$s)")) % info.author() %
                                info.upload_username)
                                  .str()) %
+			required_wl_version_and_sync_safety_string(info) %
            g_style_manager->font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
               .as_font_tag(info.description()))
              .str()),

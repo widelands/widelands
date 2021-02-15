@@ -92,7 +92,7 @@ static inline std::string get_addons_server_name() {
 	       get_config_string("addon_server", "widelands/wl_addons_server/master") + "/";
 }
 
-constexpr unsigned kCurrentListVersion = 2;
+constexpr unsigned kCurrentListVersion = 3;
 std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 	// TODO(Nordfriese): This connects to my personal dummy add-ons repo for demonstration.
 	// A GitHub repo is NOT SUITED as an add-ons server because the list of add-ons needs
@@ -163,6 +163,9 @@ std::vector<AddOnInfo> NetAddons::refresh_remotes() {
 		info.description = [descr]() { return descr; };
 		info.author = [author]() { return author; };
 		info.upload_username = next_word(output);
+		info.min_wl_version = next_word(output);
+		info.max_wl_version = next_word(output);
+		info.sync_safe = next_word(output) == "sync_safe";
 
 		info.upload_timestamp = next_number(output);
 		info.download_count = next_number(output);

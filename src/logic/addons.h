@@ -93,7 +93,11 @@ struct AddOnInfo {
 	std::vector<std::string> requirements;  // This add-on will only work correctly if these
 	                                        // add-ons are present in this order and active
 
-	bool verified;  // Only valid for Remote add-ons
+	bool sync_safe;               // Whether this add-on will not desync in MP and replays.
+	std::string min_wl_version;   // Minimum required Widelands version, or "" if invalid.
+	std::string max_wl_version;   // Maximum supported Widelands version, or "" if invalid.
+
+	bool verified;                // Only valid for Remote add-ons.
 
 	AddOnFileList file_list;  // Get rid of this ASAP
 	std::map<std::string /* name */, std::string /* description */> screenshots;
@@ -107,6 +111,7 @@ struct AddOnInfo {
 	uint32_t votes[kMaxRating];    // total number of votes for each of the ratings 1-10
 	std::vector<AddOnComment> user_comments;
 
+	bool matches_widelands_version() const;
 	uint32_t number_of_votes() const;
 	double average_rating() const;
 };
