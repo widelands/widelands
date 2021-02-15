@@ -271,7 +271,8 @@ bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t x, int32_t y
 	}
 	return false;
 }
-bool MultilineEditbox::handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t, int32_t) {
+bool MultilineEditbox::handle_mousemove(
+   uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) {
 	// state != 0 -> mouse button is pressed
 	if (state && get_can_focus()) {
 		select_until(d_->cursor_pos);
@@ -280,7 +281,7 @@ bool MultilineEditbox::handle_mousemove(uint8_t state, int32_t x, int32_t y, int
 		return true;
 	}
 
-	return false;
+	return Panel::handle_mousemove(state, x, y, xdiff, ydiff);
 }
 void MultilineEditbox::set_caret_to_cursor_pos(int32_t x, int32_t y) {
 	y += d_->scrollbar.get_scrollpos();

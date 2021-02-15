@@ -208,6 +208,11 @@ bool AddOnsPackager::handle_key(const bool down, const SDL_Keysym code) {
 
 void AddOnsPackager::layout() {
 	UI::Window::layout();
+	AddOns::MutableAddOn* selected = get_selected();
+	if (selected) {
+		addon_boxes_[selected->get_category()]->set_header_align(
+		   box_right_subbox_header_box_left_.get_w());
+	}
 	if (!is_minimal()) {
 		main_box_.set_size(get_inner_w(), get_inner_h());
 	}
@@ -449,6 +454,8 @@ void AddOnsPackager::clicked_write_changes() {
 	for (const auto& str : addons_with_changes_) {
 		msg = (boost::format(_("%1$s\n· %2$s")) % msg % str.first).str();
 	}
+	msg += _("\n\nWarning: If you manually edited any files in this add-on, your changes may be "
+	         "overwritten!");
 
 	UI::WLMessageBox m(&main_menu_, UI::WindowStyle::kFsMenu, _("Confirm Saving"), msg,
 	                   UI::WLMessageBox::MBoxType::kOkCancel, UI::Align::kLeft);
