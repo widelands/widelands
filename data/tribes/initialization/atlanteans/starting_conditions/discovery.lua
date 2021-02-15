@@ -20,8 +20,9 @@
 --
 --    **tooltip**: A short description of the start condition. Should contain essential hints if necessary.
 --
---    **map_tags**: *Optional* A table with map tags that are needed for this startcondition.
---                  e.g. ``{ "seafaring" }`` if the start conditions needs a seafaring map
+--    **map_tags**: *Optional* A table with map tags that are required for this startcondition.
+--                  e.g. ``{ "seafaring" }`` if the start conditions needs a seafaring map.
+--                  If present, the start condition can only be selected by the user if the map contains *all* listed tags.
 --
 --    **incompatible_wc**: *Optional* A table with strings containing the path of win conditions taht are incompatible with this
 --                         startcondition.
