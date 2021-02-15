@@ -58,6 +58,16 @@ static void do_recursively_copy_file_or_directory(const std::string& source,
 	}
 }
 
+static std::string read_text_file(const std::string& filename) {
+	FileRead fr;
+	fr.open(*g_fs, filename);
+	const size_t bytes = fr.get_size();
+	std::unique_ptr<char[]> data(new char[bytes + 1]);
+	fr.data_complete(data.get(), bytes);
+	data[bytes] = 0;
+	return data.get();
+}
+
 std::unique_ptr<MutableAddOn> MutableAddOn::create_mutable_addon(const AddOnInfo& a) {
 	switch (a.category) {
 	case AddOnCategory::kWorld:
@@ -104,6 +114,29 @@ void MutableAddOn::update_info(const std::string& descname,
 	author_ = author;
 	description_ = description;
 	version_ = version;
+}
+
+void MutableAddOn::setup_temp_dir() {
+	// If the add-on exists on disk already create it in ~/.widelands/temp,
+	// then delete the original add-on directory and move it over.
+	if (g_fs->file_exists(directory_)) {
+		backup_path_ = directory_;
+		directory_ =
+		   kTempFileDir + FileSystem::file_separator() + internal_name_ + kTempFileExtension;
+		if (g_fs->file_exists(directory_)) {
+			g_fs->fs_unlink(directory_);
+		}
+	}
+}
+
+void MutableAddOn::cleanup_temp_dir() {
+	// Move addon from temp to addons
+	if (!backup_path_.empty()) {
+		g_fs->fs_unlink(backup_path_);
+		g_fs->fs_rename(directory_, backup_path_);
+		directory_ = backup_path_;
+		backup_path_.clear();
+	}
 }
 
 std::string MutableAddOn::parse_requirements() {
@@ -226,17 +259,7 @@ void MapsAddon::recursively_initialize_tree_from_disk(const std::string& dir, Di
 }
 
 bool MapsAddon::write_to_disk() {
-	// If the add-on exists on disk already and our add-on is of type Map Set,
-	// create it in ~/.widelands/temp, then delete the original add-on directory
-	// and move it over.
-	std::string backup_path;
-	if (g_fs->file_exists(directory_)) {
-		backup_path = directory_;
-		directory_ = kTempFileDir + FileSystem::file_separator() + descname_ + kTempFileExtension;
-		if (g_fs->file_exists(directory_)) {
-			g_fs->fs_unlink(directory_);
-		}
-	}
+	setup_temp_dir();
 
 	if (!MutableAddOn::write_to_disk()) {
 		return false;
@@ -245,13 +268,45 @@ bool MapsAddon::write_to_disk() {
 	// Create the directory structure and copy the maps
 	do_recursively_create_filesystem_structure(directory_, tree_);
 
-	// Move addon from temp to addons
-	if (!backup_path.empty()) {
-		g_fs->fs_unlink(backup_path);
-		g_fs->fs_rename(directory_, backup_path);
-		directory_ = backup_path;
-	}
+	cleanup_temp_dir();
+
 	return true;
+}
+
+CampaignAddon::CampaignAddon(const AddOnInfo& a)
+   : MapsAddon(a),
+     // (?:^|$|\\r\\n|\\n|.) is the c++ equivalent for multiline regex matching of .
+     // Find difficulties.descname
+     rex_difficulty_("(difficulties(?:^|$|\\r\\n|\\n|.)*descname\\s*=\\s*_\")(.*)(?=\"(?:^|$|"
+                     "\\r\\n|\\n|.)*image)"),
+     // Find difficulties.image
+     rex_difficulty_icon_("(image\\s*=\\s*\")(.*)(?=\")"),
+     // Find campaigns.descname
+     rex_descname_("(campaigns(?:^|$|\\r\\n|\\n|.)*descname\\s*=\\s*_\")(.*)(?=\")"),
+     // Find campaigns.description
+     rex_description_("(description\\s*=\\s*_\")(.*)(?=\")"),
+     // Find campaigns.difficulty.description
+     rex_short_desc_("(difficulty.*description\\s*=\\s*_\")(.*)(?=\")"),
+     // Find campaigns.tribe
+     rex_tribe_("(tribe\\s*=\\s*\")(.*)(?=\")"),
+     // Find campaigns.scenarios
+     rex_scenario_("(scenarios\\s*=\\s*\\{)(?:^|$|\\r\\n|\\n|.)*(?=\"dummy)") {
+	if (luafile_exists()) {
+		auto extract_string = [this](std::regex& rex) {
+			std::smatch match;
+			if (std::regex_search(lua_contents_, match, rex) && match.size() >= 2) {
+				// 0: full match, 1: (tribe = "), 2: what we want
+				return match[2].str();
+			}
+			return std::string("");
+		};
+
+		lua_contents_ = read_text_file(directory_ + FileSystem::file_separator() + "campaigns.lua");
+		metadata_.tribe = extract_string(rex_tribe_);
+		metadata_.difficulty = extract_string(rex_difficulty_);
+		metadata_.difficulty_icon = extract_string(rex_difficulty_icon_);
+		metadata_.short_desc = extract_string(rex_short_desc_);
+	}
 }
 
 bool CampaignAddon::luafile_exists() {
@@ -275,33 +330,54 @@ void CampaignAddon::do_recursively_add_scenarios(std::string& scenarios,
 }
 
 bool CampaignAddon::write_to_disk() {
-	if (!MapsAddon::write_to_disk()) {
+	setup_temp_dir();
+
+	if (!MutableAddOn::write_to_disk()) {
 		return false;
 	}
 
-	std::string luafile = directory_ + FileSystem::file_separator() + "campaigns.lua";
-	if (!g_fs->file_exists(luafile)) {
-		// Initialize campaigns.lua
-		FileRead fr;
-		fr.open(*g_fs, "templates/campaigns.lua");
-		const size_t bytes = fr.get_size();
-		std::unique_ptr<char[]> data(new char[bytes + 1]);
-		fr.data_complete(data.get(), bytes);
-		data[bytes] = 0;
-		std::string contents =
-		   std::regex_replace(std::string(data.get()), std::regex("_addon_"), internal_name_);
-		contents = std::regex_replace(contents, std::regex("_descname_"), descname_);
-		contents = std::regex_replace(contents, std::regex("_description_"), description_);
-		contents = std::regex_replace(contents, std::regex("_tribe_"), tribe_);
+	// Create the directory structure and copy the maps
+	do_recursively_create_filesystem_structure(directory_, tree_);
 
-		std::string scenario_list;
-		do_recursively_add_scenarios(scenario_list, "", tree_);
-		contents = std::regex_replace(contents, std::regex("_scenarios_"), scenario_list);
+	// Modify campaigns.lua
+	std::string scenario_list;
+	do_recursively_add_scenarios(scenario_list, "", tree_);
 
-		FileWrite fw;
-		fw.data(contents.c_str(), contents.size());
-		fw.write(*g_fs, luafile);
+	bool init = false;
+	std::string luafile_out = directory_ + FileSystem::file_separator() + "campaigns.lua";
+	std::string luafile_in = backup_path_ + FileSystem::file_separator() + "campaigns.lua";
+	if (g_fs->file_exists(luafile_in)) {
+		// Make a backup in case the user unintentionally overwrites his modifications
+		do_recursively_copy_file_or_directory(luafile_in, luafile_out + ".backup");
+	} else {
+		luafile_in = "templates/campaigns.lua";
+		init = true;
 	}
+
+	lua_contents_ = read_text_file(luafile_in);
+	if (init) {
+		// Addon name is only set during initialization
+		lua_contents_ = std::regex_replace(lua_contents_, std::regex("_addon_"), internal_name_);
+	}
+
+	// Insert data using regex magic
+	lua_contents_ = std::regex_replace(lua_contents_, rex_description_, "$1" + description_);
+	lua_contents_ =
+	   std::regex_replace(lua_contents_, rex_difficulty_icon_, "$1" + metadata_.difficulty_icon);
+	lua_contents_ = std::regex_replace(lua_contents_, rex_difficulty_, "$1" + metadata_.difficulty);
+	lua_contents_ = std::regex_replace(lua_contents_, rex_descname_, "$1" + descname_);
+	lua_contents_ = std::regex_replace(lua_contents_, rex_short_desc_, "$1" + metadata_.short_desc);
+	lua_contents_ = std::regex_replace(lua_contents_, rex_tribe_, "$1" + metadata_.tribe);
+	lua_contents_ =
+	   std::regex_replace(lua_contents_, rex_scenario_, "$1" + scenario_list + "\n            ");
+
+	// Flush
+	FileWrite fw;
+	fw.data(lua_contents_.c_str(), lua_contents_.size());
+	fw.write(*g_fs, luafile_out);
+
+	cleanup_temp_dir();
+
 	return true;
 }
 
