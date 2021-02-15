@@ -24,6 +24,7 @@
 #include <functional>
 #include <map>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace AddOns {
@@ -119,6 +120,7 @@ struct AddOnInfo {
 using AddOnState = std::pair<AddOnInfo, bool>;
 extern std::vector<AddOnState> g_addons;
 
+extern const std::unordered_map<std::string, std::string> kDifficultyIcons;
 extern const std::map<AddOnCategory, AddOnCategoryInfo> kAddOnCategories;
 AddOnCategory get_category(const std::string&);
 

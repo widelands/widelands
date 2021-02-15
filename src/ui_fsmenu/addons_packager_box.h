@@ -23,6 +23,7 @@
 #include "logic/mutable_addon.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_fsmenu/main.h"
 
@@ -32,6 +33,11 @@ class AddOnsPackagerBox : public UI::Box {
 public:
 	AddOnsPackagerBox(MainMenu& mainmenu, Panel* parent, uint32_t orientation);
 
+	void set_header_align(int32_t x) {
+		header_align_ = x;
+		layout();
+	}
+
 	void set_modified_callback(std::function<void()> modified_callback) {
 		modified_ = std::move(modified_callback);
 	}
@@ -40,6 +46,8 @@ public:
 	}
 
 protected:
+	// Used to align addon specific with general UI elements
+	int32_t header_align_;
 	std::function<void()> modified_;
 	MainMenu& main_menu_;
 };
@@ -77,13 +85,23 @@ private:
 	AddOns::MapsAddon* selected_;  // Not owned
 };
 
-class CampaignAddOnsPackagerBox : public MapsAddOnsPackagerBox {
+class CampaignAddOnsPackagerBox : public AddOnsPackagerBox {
 public:
 	CampaignAddOnsPackagerBox(MainMenu& mainmenu, Panel* parent);
 	void load_addon(AddOns::MutableAddOn*) override;
+	void layout() override;
 
 private:
-	UI::Dropdown<std::string> tribe_select_;
+	void edited();
+	void edited_difficulty_icon();
+	void edited_difficulty();
+	std::string reverse_icon_lookup(const std::string& value);
+	MapsAddOnsPackagerBox maps_box_;
+	UI::Box difficulty_hbox_;
+	UI::Dropdown<std::string> tribe_select_, icon_difficulty_;
+	UI::EditBox difficulty_, short_desc_;
+	UI::Textarea difficulty_label_;
+	std::string last_difficulty_;
 	AddOns::CampaignAddon* selected_;  // Not owned
 };
 
