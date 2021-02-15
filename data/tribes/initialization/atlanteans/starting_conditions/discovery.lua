@@ -6,8 +6,8 @@
 --
 -- The start conditions a tribe can use are listed in the tribes :ref:`init.lua <lua_tribes_tribes_init>` file.
 --
--- They are defined in their defintion files named as follows and located in
--- ``data/tribes/initialization/<tribe_name>/starting_conditions/<start_condition_name.lua``.
+-- They are defined in their definition files named as follows and located in
+-- ``data/tribes/initialization/<tribe_name>/starting_conditions/<start_condition_name>.lua``.
 --
 -- .. function:: init
 --
