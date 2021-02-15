@@ -24,10 +24,9 @@
 --                  e.g. ``{ "seafaring" }`` if the start conditions needs a seafaring map.
 --                  If present, the start condition can only be selected by the user if the map contains *all* listed tags.
 --
---    **incompatible_wc**: *Optional* A table with strings containing the path of win conditions taht are incompatible with this
---                         startcondition.
---                         e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the start conditions is incompatible
---                         with the win condition "HQ Hunter"
+--    **incompatible_wc**: *Optional* A table with strings containing the paths of win conditions that are incompatible with this
+--                         start condition, e.g. ``{ "scripting/win_conditions/hq_hunter.lua" }`` if the start condition
+--                         is incompatible with the win condition "HQ Hunter".
 --
 --    **func**: A standardized function allowing to share this start conditions between players (Shared Kingdom)
 --
